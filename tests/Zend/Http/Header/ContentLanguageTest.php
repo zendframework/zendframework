@@ -10,7 +10,7 @@ class ContentLanguageTest extends \PHPUnit_Framework_TestCase
     public function testContentLanguageFromStringCreatesValidContentLanguageHeader()
     {
         $contentLanguageHeader = ContentLanguage::fromString('Content-Language: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $contentLanguageHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $contentLanguageHeader);
         $this->assertInstanceOf('Zend\Http\Header\ContentLanguage', $contentLanguageHeader);
     }
 

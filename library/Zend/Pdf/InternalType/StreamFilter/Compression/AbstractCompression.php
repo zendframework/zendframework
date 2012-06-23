@@ -19,24 +19,20 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\InternalType\StreamFilter\Compression;
-use Zend\Pdf\Exception;
-use Zend\Pdf;
+
+use Zend\Pdf\Exception,
+    Zend\Pdf;
 
 /**
  * Abstract compression stream filter
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\InternalType\StreamFilter
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
+abstract class AbstractCompression implements Pdf\InternalType\StreamFilter\StreamFilterInterface
 {
     /**
      * Paeth prediction function
@@ -71,7 +67,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
      *
      * @param array $params
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     private static function _getPredictorValue(&$params)
     {
@@ -94,7 +90,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
      *
      * @param array $params
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     private static function _getColorsValue(&$params)
     {
@@ -115,7 +111,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
      *
      * @param array $params
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     private static function _getBitsPerComponentValue(&$params)
     {
@@ -155,7 +151,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     protected static function _applyEncodeParams($data, $params) {
         $predictor        = self::_getPredictorValue($params);

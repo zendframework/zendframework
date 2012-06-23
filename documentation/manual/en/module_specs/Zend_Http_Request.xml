@@ -3,12 +3,12 @@
 <section xmlns="http://docbook.org/ns/docbook"
     xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0"
     xml:id="zend.http.request">
-    <info><title>Zend\Http\Request</title></info>
+    <title>Zend\Http\Request</title>
 
     <section xml:id="zend.http.request.intro">
-        <info>
+        
             <title>Overview</title>
-        </info>
+        
 
         <para>
             The <classname>Zend\Http\Request</classname> object is responsible for providing a
@@ -44,9 +44,9 @@
     </section>
 
     <section xml:id="zend.http.request.quick-start">
-        <info>
+        
             <title>Quick Start</title>
-        </info>
+        
 
         <para>
             Request objects can either be created from the provided
@@ -80,9 +80,9 @@ $request->post()->set('foo', 'bar');
     </section>
 
     <section xml:id="zend.http.request.options">
-        <info>
+        
             <title>Configuration Options</title>
-        </info>
+        
 
         <para>
             None currently
@@ -96,9 +96,9 @@ $request->post()->set('foo', 'bar');
     </section>
 
     <section xml:id="zend.http.request.methods">
-        <info>
+        
             <title>Available Methods</title>
-        </info>
+        
 
         <variablelist>
             <varlistentry xml:id="zend.http.request.methods.from-string">
@@ -147,7 +147,7 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setUri</methodname>
                         <methodparam>
-                            <funcparams>string|Zend\Stdlib\RequestDescription\Zend\Stdlib\Message\Zend\Stdlib\ParametersDescription\Zend\Stdlib\Parameters\Zend\Uri\Http $uri</funcparams>
+                            <funcparams>string|\Zend\Stdlib\RequestInterface|\Zend\Stdlib\Message|\Zend\Stdlib\ParametersInterface|\Zend\Stdlib\Parameters|\Zend\Uri\Http $uri</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
@@ -223,7 +223,7 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setQuery</methodname>
                         <methodparam>
-                            <funcparams>Zend\Stdlib\ParametersDescription $query</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersInterface $query</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
@@ -243,7 +243,7 @@ $request->post()->set('foo', 'bar');
                         <void/>
                     </methodsynopsis>
                     <para>Return the parameter container responsible for query parameters.</para>
-                    <para>Returns <classname>Zend\Stdlib\ParametersDescription</classname></para>
+                    <para>Returns <classname>Zend\Stdlib\ParametersInterface</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -253,7 +253,7 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setPost</methodname>
                         <methodparam>
-                            <funcparams>Zend\Stdlib\ParametersDescription $post</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersInterface $post</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
@@ -274,7 +274,7 @@ $request->post()->set('foo', 'bar');
                         <void/>
                     </methodsynopsis>
                     <para>Return the parameter container responsible for post parameters.</para>
-                    <para>Returns <classname>Zend\Stdlib\ParametersDescription</classname></para>
+                    <para>Returns <classname>Zend\Stdlib\ParametersInterface</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -299,7 +299,7 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setFile</methodname>
                         <methodparam>
-                            <funcparams>Zend\Stdlib\ParametersDescription $files</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersInterface $files</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
@@ -320,7 +320,7 @@ $request->post()->set('foo', 'bar');
                         <void/>
                     </methodsynopsis>
                     <para>Return the parameter container responsible for file parameters</para>
-                    <para>Returns <classname>Zend\Stdlib\ParametersDescription</classname></para>
+                    <para>Returns <classname>Zend\Stdlib\ParametersInterface</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -330,7 +330,7 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setServer</methodname>
                         <methodparam>
-                            <funcparams>Zend\Stdlib\ParametersDescription $server</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersInterface $server</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
@@ -351,7 +351,7 @@ $request->post()->set('foo', 'bar');
                         <void/>
                     </methodsynopsis>
                     <para>Return the parameter container responsible for server parameters</para>
-                    <para>Returns <classname>Zend\Stdlib\ParametersDescription</classname></para>
+                    <para>Returns <classname>Zend\Stdlib\ParametersInterface</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -361,7 +361,7 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setEnv</methodname>
                         <methodparam>
-                            <funcparams>Zend\Stdlib\ParametersDescription $env</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersInterface $env</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
@@ -381,7 +381,7 @@ $request->post()->set('foo', 'bar');
                         <void/>
                     </methodsynopsis>
                     <para>Return the parameter container responsible for env parameters</para>
-                    <para>Returns <classname>Zend\Stdlib\ParametersDescription</classname></para>
+                    <para>Returns <classname>Zend\Stdlib\ParametersInterface</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -631,12 +631,12 @@ the entire metadata container.</para>
     </section>
 
     <section xml:id="zend.http.request.examples">
-        <info>
+        
             <title>Examples</title>
-        </info>
+        
 
         <example xml:id="zend.http.request.examples.from-string">
-            <info><title>Generating a Request object from a string</title></info>
+            <title>Generating a Request object from a string</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Http\Request;
@@ -651,7 +651,7 @@ $request->getRawBody(); // returns 'Some Content'
         </example>
 
         <example xml:id="zend.http.request.examples.from-array">
-            <info><title>Generating a Request object from an array</title></info>
+            <title>Generating a Request object from an array</title>
 
             <programlisting language="php"><![CDATA[
 N/A
@@ -659,7 +659,7 @@ N/A
         </example>
 
         <example xml:id="zend.http.request.examples.headers">
-            <info><title>Retrieving and setting headers</title></info>
+            <title>Retrieving and setting headers</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Http\Request;
@@ -673,7 +673,7 @@ foreach ($request->headers() as $header) {
         </example>
 
         <example xml:id="zend.http.request.examples.parameters">
-            <info><title>Retrieving and setting GET and POST values</title></info>
+            <title>Retrieving and setting GET and POST values</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Http\Request;
@@ -687,7 +687,7 @@ echo $request->get()->offsetGet('myVar');
         </example>
 
         <example xml:id="zend.http.request.examples.to-string">
-            <info><title>Generating an formatted HTTP Request from an Request object</title></info>
+            <title>Generating an formatted HTTP Request from an Request object</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Http\Request;

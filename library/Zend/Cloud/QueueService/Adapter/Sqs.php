@@ -11,17 +11,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\QueueService
+ * @package    Zend_Cloud_QueueService
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\QueueService\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Service\Amazon\Sqs\Sqs as AmazonSqs,
     Zend\Cloud\QueueService\Message,
     Zend\Cloud\QueueService\Exception;
@@ -30,7 +29,7 @@ use Zend\Service\Amazon\Sqs\Sqs as AmazonSqs,
  * SQS adapter for simple queue service.
  *
  * @category   Zend
- * @package    Zend\Cloud\QueueService
+ * @package    Zend_Cloud_QueueService
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -50,21 +49,20 @@ class Sqs extends AbstractAdapter
 
     /**
      * SQS service instance.
-     * @var Zend\Service\Amazon\Sqs
+     * @var \Zend\Service\Amazon\Sqs\Sqs
      */
     protected $_sqs;
 
     /**
      * Constructor
      *
-     * @param  array|Zend\Config\Config $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = array())
     {
 
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {
@@ -83,7 +81,7 @@ class Sqs extends AbstractAdapter
             $this->_sqs = new AmazonSqs(
                 $options[self::AWS_ACCESS_KEY], $options[self::AWS_SECRET_KEY]
             );
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RunTimeException('Error on create: '.$e->getMessage(), $e->getCode(), $e);
         }
 
@@ -105,7 +103,7 @@ class Sqs extends AbstractAdapter
     {
         try {
             return $this->_sqs->create($name, $options[self::CREATE_TIMEOUT]);
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RuntimeException('Error on queue creation: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -121,7 +119,7 @@ class Sqs extends AbstractAdapter
 {
         try {
             return $this->_sqs->delete($queueId);
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RuntimeException('Error on queue deletion: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -136,7 +134,7 @@ class Sqs extends AbstractAdapter
     {
         try {
             return $this->_sqs->getQueues();
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RuntimeException('Error on listing queues: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -158,7 +156,7 @@ class Sqs extends AbstractAdapter
             } else {
                 return array('All' => $this->_sqs->getAttribute($queueId, 'All'));
             }
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RuntimeException('Error on fetching queue metadata: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -191,14 +189,14 @@ class Sqs extends AbstractAdapter
     {
         try {
             return $this->_sqs->send($queueId, $message);
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RuntimeException('Error on sending message: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
-     * Recieve at most $max messages from the specified queue and return the
-     * message IDs for messages recieved.
+     * Receive at most $max messages from the specified queue and return the
+     * message IDs for messages received.
      *
      * @param  string $queueId
      * @param  int    $max
@@ -209,17 +207,17 @@ class Sqs extends AbstractAdapter
     {
         try {
             return $this->_makeMessages($this->_sqs->receive($queueId, $max, $options[self::VISIBILITY_TIMEOUT]));
-        } catch(Zend\Service\Amazon\Exception $e) {
-            throw new Exception\RuntimeException('Error on recieving messages: '.$e->getMessage(), $e->getCode(), $e);
+        } catch(\Zend\Service\Amazon\Exception $e) {
+            throw new Exception\RuntimeException('Error on receiving messages: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
-     * Create Zend\Cloud\QueueService\Message array for
+     * Create \Zend\Cloud\QueueService\Message array for
      * Sqs messages.
      *
      * @param array $messages
-     * @return Zend\Cloud\QueueService\Message[]
+     * @return \Zend\Cloud\QueueService\Message[]
      */
     protected function _makeMessages($messages)
     {
@@ -236,7 +234,7 @@ class Sqs extends AbstractAdapter
      * Delete the specified message from the specified queue.
      *
      * @param  string $queueId
-     * @param  Zend\Cloud\QueueService\Message $message
+     * @param  \Zend\Cloud\QueueService\Message $message
      * @param  array  $options
      * @return void
      */
@@ -248,7 +246,7 @@ class Sqs extends AbstractAdapter
             }
             $messageId = $message['handle'];
             return $this->_sqs->deleteMessage($queueId, $messageId);
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RuntimeException('Error on deleting a message: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -259,20 +257,20 @@ class Sqs extends AbstractAdapter
      * @param  string $queueId
      * @param  int $num How many messages
      * @param  array  $options
-     * @return Zend\Cloud\QueueService\Message[]
+     * @return \Zend\Cloud\QueueService\Message[]
      */
     public function peekMessages($queueId, $num = 1, $options = null)
     {
         try {
             return $this->_makeMessages($this->_sqs->receive($queueId, $num, 0));
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RuntimeException('Error on peeking messages: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
      * Get SQS implementation
-     * @return Zend\Service\Amazon\Sqs
+     * @return \Zend\Service\Amazon\Sqs\Sqs
      */
     public function getClient()
     {

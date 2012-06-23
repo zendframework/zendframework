@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\InfoCard;
 use Zend\InfoCard;
 use Zend\InfoCard\Cipher;
@@ -133,7 +130,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
         $infoCard->setAdapter($adapter);
 
-        $result = ($infoCard->getAdapter() instanceof Adapter);
+        $result = ($infoCard->getAdapter() instanceof Adapter\AdapterInterface);
 
         $this->assertTrue($result);
         $this->assertTrue($infoCard->getAdapter() instanceof TestAsset\MockAdapter);

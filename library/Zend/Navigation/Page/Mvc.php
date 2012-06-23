@@ -60,7 +60,7 @@ class Mvc extends AbstractPage
     protected $params = array();
 
     /**
-     * Route name to use when assembling URL
+     * RouteInterface name to use when assembling URL
      *
      * @see getHref()
      * @var string
@@ -79,7 +79,7 @@ class Mvc extends AbstractPage
     protected $hrefCache;
 
     /**
-     * Route matches; used for routing parameters and testing validity
+     * RouteInterface matches; used for routing parameters and testing validity
      *
      * @var RouteMatch
      */
@@ -350,6 +350,16 @@ class Mvc extends AbstractPage
     }
 
     /**
+     * Get the route match.
+     *
+     * @return \Zend\Mvc\Router\RouteMatch
+     */
+    public function getRouteMatch()
+    {
+        return $this->routeMatch;
+    }
+
+    /**
      * Set route match object from which parameters will be retrieved
      *
      * @param  RouteMatch $matches
@@ -359,6 +369,16 @@ class Mvc extends AbstractPage
     {
         $this->routeMatch = $matches;
         return $this;
+    }
+
+    /**
+     * Get the url helper.
+     *
+     * @return null|\Zend\View\Helper\Url
+     */
+    public function getUrlHelper()
+    {
+        return $this->urlHelper;
     }
 
     /**

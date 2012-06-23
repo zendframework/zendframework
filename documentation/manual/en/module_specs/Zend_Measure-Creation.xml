@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.creation"><info><title>Creation of Measurements</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.creation"><title>Creation of Measurements</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         parameters are mandatory. The language may optionally be specified as the third parameter.
     </para>
 
-    <section xml:id="zend.measure.creation.number"><info><title>Creating measurements from integers and floats</title></info>
+    <section xml:id="zend.measure.creation.number"><title>Creating measurements from integers and floats</title>
         
 
         <para>
@@ -23,7 +23,7 @@
             "float" type numbers for equality.
         </para>
 
-        <example xml:id="zend.measure.creation.number.example-1"><info><title>Creation using integer and floating values</title></info>
+        <example xml:id="zend.measure.creation.number.example-1"><title>Creation using integer and floating values</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -40,7 +40,7 @@ echo $unit;
         </example>
     </section>
 
-    <section xml:id="zend.measure.creation.string"><info><title>Creating measurements from strings</title></info>
+    <section xml:id="zend.measure.creation.string"><title>Creating measurements from strings</title>
         
 
         <para>
@@ -56,7 +56,7 @@ echo $unit;
             <acronym>PHP</acronym> functions, such as <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/bin2dec"><methodname>bin2dec()</methodname></link>.
         </para>
 
-        <example xml:id="zend.measure.creation.string.example-1"><info><title>Creation using strings</title></info>
+        <example xml:id="zend.measure.creation.string.example-1"><title>Creation using strings</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -68,7 +68,7 @@ echo $unit;
         </example>
     </section>
 
-    <section xml:id="zend.measure.creation.localized"><info><title>Measurements from localized strings</title></info>
+    <section xml:id="zend.measure.creation.localized"><title>Measurements from localized strings</title>
         
 
         <para>
@@ -82,7 +82,7 @@ echo $unit;
             semantic value.
         </para>
 
-        <example xml:id="zend.measure.creation.localized.example-1"><info><title>Localized string</title></info>
+        <example xml:id="zend.measure.creation.localized.example-1"><title>Localized string</title>
             
 
             <programlisting language="php"><![CDATA[

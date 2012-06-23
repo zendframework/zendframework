@@ -30,7 +30,7 @@ use Zend\Stdlib\PriorityQueue;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
  */
-abstract class AbstractAccept implements HeaderDescription
+abstract class AbstractAccept implements HeaderInterface
 {
 
     protected $values = array();
@@ -50,7 +50,7 @@ abstract class AbstractAccept implements HeaderDescription
     {
         $acceptHeader = new static();
 
-        list($name, $values) = preg_split('#: #', $headerLine, 2);
+        list($name, $values) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== strtolower($acceptHeader->getFieldName())) {
@@ -160,7 +160,7 @@ abstract class AbstractAccept implements HeaderDescription
                 'priority'   => $priority,
                 'level'      => (integer) $level
             );
-        } else  {
+        } else {
             $this->prioritizedValues[] = array(
                 'type' => $type,
                 'priority'   => $priority

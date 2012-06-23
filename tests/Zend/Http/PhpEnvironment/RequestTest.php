@@ -1,7 +1,4 @@
 <?php
-/**
- * @namespace
- */
 namespace ZendTest\Http\PhpEnvironment;
 
 use PHPUnit_Framework_TestCase as TestCase,
@@ -51,7 +48,7 @@ class RequestTest extends TestCase
     /**
      * Data provider for testing base URL and path detection.
      */
-    public static function baseUrlandPathProvider()
+    public static function baseUrlAndPathProvider()
     {
         return array(
             array(
@@ -152,11 +149,52 @@ class RequestTest extends TestCase
                 '/dir',
                 '/dir'
             ),
+            array(
+                array(
+                    'SCRIPT_NAME'     => '/~username/public/index.php',
+                    'REQUEST_URI'     => '/~username/public/',
+                    'PHP_SELF'        => '/~username/public/index.php',
+                    'SCRIPT_FILENAME' => '/Users/username/Sites/public/index.php',
+                    'ORIG_SCRIPT_NAME'=> null
+                ),
+                '/~username/public',
+                '/~username/public'
+            ),
+            // ZF2-206
+            array(
+                array(
+                    'SCRIPT_NAME'     => '/zf2tut/index.php',
+                    'REQUEST_URI'     => '/zf2tut/',
+                    'PHP_SELF'        => '/zf2tut/index.php',
+                    'SCRIPT_FILENAME' => 'c:/ZF2Tutorial/public/index.php',
+                    'ORIG_SCRIPT_NAME'=> null
+                ),
+                '/zf2tut',
+                '/zf2tut'
+            ),
+            array(
+                array(
+                    'REQUEST_URI'     => '/html/index.php/news/3?var1=val1&var2=/index.php',
+                    'PHP_SELF'        => '/html/index.php/news/3',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
+                ),
+                '/html/index.php',
+                '/html'
+            ),
+            array(
+                array(
+                    'REQUEST_URI'     => '/html/index.php/news/index.php',
+                    'PHP_SELF'        => '/html/index.php/news/index.php',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
+                ),
+                '/html/index.php',
+                '/html'
+            ),
         );
     }
 
     /**
-     * @dataProvider baseUrlandPathProvider
+     * @dataProvider baseUrlAndPathProvider
      * @param array  $server
      * @param string $baseUrl
      * @param string $basePath
@@ -224,4 +262,78 @@ class RequestTest extends TestCase
         $this->assertEquals($value, $header->getFieldValue($value));
     }
 
+    /**
+     * @dataProvider serverHeaderProvider
+     * @param array  $server
+     * @param string $name
+     */
+    public function testRequestStringHasCorrectHeaderName(array $server, $name)
+    {
+        $_SERVER = $server;
+        $request = new Request();
+
+        $this->assertContains($name, $request->toString());
+    }
+
+    /**
+     * Data provider for testing server hostname.
+     */
+    public static function serverHostnameProvider()
+    {
+        return array(
+            array(
+                array(
+                    'SERVER_NAME' => 'test.example.com',
+                    'REQUEST_URI' => 'http://test.example.com/news',
+                ),
+                'test.example.com',
+                '/news',
+            ),
+            array(
+                array(
+                    'HTTP_HOST' => 'test.example.com',
+                    'REQUEST_URI' => 'http://test.example.com/news',
+                ),
+                'test.example.com',
+                '/news',
+            ),
+            array(
+                array(
+                    'SERVER_NAME' => 'test.example.com',
+                    'SERVER_PORT' => '8080',
+                    'REQUEST_URI' => 'http://test.example.com/news',
+                ),
+                'test.example.com',
+                '/news',
+            ),
+            array(
+                array(
+                    'SERVER_NAME' => 'test.example.com',
+                    'SERVER_PORT' => '443',
+                    'HTTPS'       => 'on',
+                    'REQUEST_URI' => 'https://test.example.com/news',
+                ),
+                'test.example.com',
+                '/news',
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider serverHostnameProvider
+     * @param array  $server
+     * @param string $name
+     * @param string $value
+     */
+    public function testServerHostnameProvider(array $server, $expectedHost, $expectedRequestUri)
+    {
+        $_SERVER = $server;
+        $request = new Request();
+
+        $host = $request->uri()->getHost();
+        $this->assertEquals($expectedHost, $host);
+
+        $requestUri = $request->getRequestUri();
+        $this->assertEquals($expectedRequestUri, $requestUri);
+    }
 }

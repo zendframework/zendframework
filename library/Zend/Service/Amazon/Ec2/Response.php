@@ -19,22 +19,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Amazon\Ec2;
 
 /**
- * @uses       DOMDocument
- * @uses       DOMXPath
- * @uses       Zend_Http_Response
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Response 
+class Response
 {
     /**
      * XML namespace used for EC2 responses.
@@ -63,20 +57,6 @@ class Response
      * @var DOMXPath
      */
     private $_xpath = null;
-
-    /**
-     * Last error code
-     *
-     * @var integer
-     */
-    private $_errorCode = 0;
-
-    /**
-     * Last error message
-     *
-     * @var string
-     */
-    private $_errorMessage = '';
 
     /**
      * Creates a new high-level EC2 response object
@@ -118,7 +98,7 @@ class Response
     {
         try {
             $body = $this->_httpResponse->getBody();
-        } catch (\Zend\Http\Exception $e) {
+        } catch (\Zend\Http\Exception\ExceptionInterface $e) {
             $body = false;
         }
 

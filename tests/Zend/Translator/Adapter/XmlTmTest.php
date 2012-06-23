@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Translator\Adapter;
 use Zend\Translator\Adapter;
 use Zend\Translator;
@@ -46,6 +43,16 @@ use Zend\Translator\Exception\InvalidFileTypeException;
  */
 class XmlTmTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        Adapter\XmlTm::removeCache();
+    }
+
+    public function tearDown()
+    {
+        Adapter\XmlTm::removeCache();
+    }
+
     public function testCreate()
     {
         $adapter = new Adapter\XmlTm(__DIR__ . '/_files/translation_en.xmltm');
@@ -69,7 +76,7 @@ class XmlTmTest extends \PHPUnit_Framework_TestCase
         $adapter = new Adapter\XmlTm(__DIR__ . '/_files/translation_en.xmltm');
         $this->assertEquals('XmlTm', $adapter->toString());
     }
-    
+
     /**
      * @group ZF-12012
      */

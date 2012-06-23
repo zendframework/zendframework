@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Spreadsheets;
 
 use Zend\GData\Spreadsheets;
@@ -29,10 +26,6 @@ use Zend\GData\Spreadsheets;
 /**
  * Concrete class for working with Worksheet entries.
  *
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Spreadsheets
- * @uses       \Zend\GData\Spreadsheets\Extension\ColCount
- * @uses       \Zend\GData\Spreadsheets\Extension\RowCount
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets

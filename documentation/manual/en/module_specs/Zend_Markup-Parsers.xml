@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.parsers"><info><title>Zend_Markup Parsers</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.parsers"><title>Zend_Markup Parsers</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         and a Textile parser.
     </para>
 
-    <section xml:id="zend.markup.parsers.theory"><info><title>Theory of Parsing</title></info>
+    <section xml:id="zend.markup.parsers.theory"><title>Theory of Parsing</title>
         
 
         <para>
@@ -62,7 +62,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.markup.parsers.bbcode"><info><title>The BBCode parser</title></info>
+    <section xml:id="zend.markup.parsers.bbcode"><title>The BBCode parser</title>
         
 
         <para>
@@ -90,7 +90,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.markup.parsers.textile"><info><title>The Textile parser</title></info>
+    <section xml:id="zend.markup.parsers.textile"><title>The Textile parser</title>
         
 
         <para>
@@ -99,7 +99,7 @@
             of example tags:
         </para>
 
-        <table xml:id="zend.markup.parsers.textile.tags"><info><title>List of basic Textile tags</title></info>
+        <table xml:id="zend.markup.parsers.textile.tags"><title>List of basic Textile tags</title>
             
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">
@@ -193,7 +193,7 @@
             newlines, and if there are more tags, a new paragraph will be added.
         </para>
 
-        <section xml:id="zend.markup.parsers.textile.lists"><info><title>Lists</title></info>
+        <section xml:id="zend.markup.parsers.textile.lists"><title>Lists</title>
             
 
             <para>

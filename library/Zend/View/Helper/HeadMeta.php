@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 
 use Zend\View,
@@ -31,10 +28,6 @@ use Zend\View,
  * Zend_Layout_View_Helper_HeadMeta
  *
  * @see        http://www.w3.org/TR/xhtml1/dtds.html
- * @uses       stdClass
- * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\Placeholder\Container\AbstractContainer
- * @uses       \Zend\View\Helper\Placeholder\Container\Standalone
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -46,7 +39,7 @@ class HeadMeta extends Placeholder\Container\Standalone
      * Types of attributes
      * @var array
      */
-    protected $_typeKeys     = array('name', 'http-equiv', 'charset');
+    protected $_typeKeys     = array('name', 'http-equiv', 'charset', 'property');
     protected $_requiredKeys = array('content');
     protected $_modifierKeys = array('lang', 'scheme');
 
@@ -112,6 +105,8 @@ class HeadMeta extends Placeholder\Container\Standalone
                 return 'name';
             case 'HttpEquiv':
                 return 'http-equiv';
+            case 'Property':
+                return 'property';
             default:
                 throw new Exception\DomainException(sprintf(
                     'Invalid type "%s" passed to _normalizeType',
@@ -132,6 +127,10 @@ class HeadMeta extends Placeholder\Container\Standalone
      * - offsetGetHttpEquiv($index, $keyValue, $content, $modifers = array())
      * - prependHttpEquiv($keyValue, $content, $modifiers = array())
      * - setHttpEquiv($keyValue, $content, $modifiers = array())
+     * - appendProperty($keyValue, $content, $modifiers = array())
+     * - offsetGetProperty($index, $keyValue, $content, $modifiers = array())
+     * - prependProperty($keyValue, $content, $modifiers = array())
+     * - setProperty($keyValue, $content, $modifiers = array())
      *
      * @param  string $method
      * @param  array $args
@@ -140,7 +139,7 @@ class HeadMeta extends Placeholder\Container\Standalone
      */
     public function __call($method, $args)
     {
-        if (preg_match('/^(?P<action>set|(pre|ap)pend|offsetSet)(?P<type>Name|HttpEquiv)$/', $method, $matches)) {
+        if (preg_match('/^(?P<action>set|(pre|ap)pend|offsetSet)(?P<type>Name|HttpEquiv|Property)$/', $method, $matches)) {
             $action = $matches['action'];
             $type   = $this->_normalizeType($matches['type']);
             $argc   = count($args);
@@ -213,6 +212,12 @@ class HeadMeta extends Placeholder\Container\Standalone
         if (!isset($item->content)
         && (! $this->view->plugin('doctype')->isHtml5()
         || (! $this->view->plugin('doctype')->isHtml5() && $item->type !== 'charset'))) {
+            return false;
+        }
+
+        // <meta property= ... /> is only supported with doctype RDFa
+        if (!$this->view->plugin('doctype')->isRdfa()
+            && $item->type === 'property') {
             return false;
         }
 

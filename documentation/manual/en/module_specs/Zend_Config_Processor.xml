@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xml:id="zend.config.processor">
-    <info><title>Zend\Config\Processor</title></info>
+    <title>Zend\Config\Processor</title>
     
     <para>
         <classname>Zend\Config\Processor</classname> gives you the ability to perform some operations
@@ -51,10 +51,10 @@
     </para>
     
     <section xml:id="zend.config.processor.constant">
-        <info><title>Zend\Config\Processor\Constant</title></info>
+        <title>Zend\Config\Processor\Constant</title>
         
         <example xml:id="zend.config.processor.constant.example">
-            <info><title>Using Zend\Config\Processor\Constant</title></info>
+            <title>Using Zend\Config\Processor\Constant</title>
             
             <para>
                 This example illustrates the basic use of <classname>Zend\Config\Processor\Constant</classname>:
@@ -78,10 +78,10 @@ echo $config->foo;
     </section>
     
     <section xml:id="zend.config.processor.filter">
-        <info><title>Zend\Config\Processor\Filter</title></info>
+        <title>Zend\Config\Processor\Filter</title>
         
         <example xml:id="zend.config.processor.filter.example">
-            <info><title>Using Zend\Config\Processor\Filter</title></info>
+            <title>Using Zend\Config\Processor\Filter</title>
             
             <para>
                 This example illustrates the basic use of <classname>Zend\Config\Processor\Filter</classname>:
@@ -109,10 +109,10 @@ echo $config->foo;
     </section>
     
     <section xml:id="zend.config.processor.queue">
-        <info><title>Zend\Config\Processor\Queue</title></info>
+        <title>Zend\Config\Processor\Queue</title>
         
         <example xml:id="zend.config.processor.queue.example">
-            <info><title>Using Zend\Config\Processor\Queue</title></info>
+            <title>Using Zend\Config\Processor\Queue</title>
             
             <para>
                 This example illustrates the basic use of <classname>Zend\Config\Processor\Queue</classname>:
@@ -149,10 +149,10 @@ echo $config->foo;
     </section>
     
     <section xml:id="zend.config.processor.token">
-        <info><title>Zend\Config\Processor\Token</title></info>
+        <title>Zend\Config\Processor\Token</title>
         
         <example xml:id="zend.config.processor.token.example">
-            <info><title>Using Zend\Config\Processor\Token</title></info>
+            <title>Using Zend\Config\Processor\Token</title>
             
             <para>
                 This example illustrates the basic use of <classname>Zend\Config\Processor\Token</classname>:
@@ -176,10 +176,10 @@ echo $config->foo;
     </section>
     
     <section xml:id="zend.config.processor.translator">
-        <info><title>Zend\Config\Processor\Translator</title></info>
+        <title>Zend\Config\Processor\Translator</title>
         
         <example xml:id="zend.config.processor.translator.example">
-            <info><title>Using Zend\Config\Processor\Translator</title></info>
+            <title>Using Zend\Config\Processor\Translator</title>
             
             <para>
                 This example illustrates the basic use of <classname>Zend\Config\Processor\Translator</classname>:

@@ -19,18 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Spreadsheets;
 
 use Zend\GData\Spreadsheets;
 
 /**
- * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\Spreadsheets
- * @uses       \Zend\GData\Spreadsheets\Extension\ColCount
- * @uses       \Zend\GData\Spreadsheets\Extension\RowCount
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets

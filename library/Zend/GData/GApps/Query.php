@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\GApps;
 
 use Zend\GData\GApps;
@@ -33,9 +30,6 @@ use Zend\GData\GApps;
  * This class should never be instantiated directly. Instead, instantiate a
  * class which inherits from this class.
  *
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\GApps
- * @uses       \Zend\GData\Query
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\App\Extension;
 
 use Zend\GData\App\Extension;
@@ -29,8 +26,6 @@ use Zend\GData\App\Extension;
 /**
  * Represents the app:control element
  *
- * @uses       \Zend\GData\App\Extension
- * @uses       \Zend\GData\App\Extension\Draft
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

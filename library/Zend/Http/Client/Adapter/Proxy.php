@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Http\Client\Adapter;
 use Zend\Http\Client,
     Zend\Http\Client\Adapter\Exception as AdapterException;
@@ -87,7 +84,7 @@ class Proxy extends Socket
         
         /* Url might require stream context even if proxy connection doesn't */
         if ($secure) {
-        	$this->config['sslusecontext'] = true;
+            $this->config['sslusecontext'] = true;
         }
 
         // Connect (a non-secure connection) to the proxy server
@@ -158,7 +155,7 @@ class Proxy extends Socket
             $request .= "$v\r\n";
         }
 
-        if(is_resource($body)) {
+        if (is_resource($body)) {
             $request .= "\r\n";
         } else {
             // Add the request body
@@ -171,7 +168,7 @@ class Proxy extends Socket
         }
 
         if (is_resource($body)) {
-            if(stream_copy_to_stream($body, $this->socket) == 0) {
+            if (stream_copy_to_stream($body, $this->socket) == 0) {
                 throw new AdapterException\RuntimeException('Error writing request to server');
             }
         }
@@ -237,7 +234,7 @@ class Proxy extends Socket
         );
 
         $success = false;
-        foreach($modes as $mode) {
+        foreach ($modes as $mode) {
             $success = stream_socket_enable_crypto($this->socket, true, $mode);
             if ($success) break;
         }

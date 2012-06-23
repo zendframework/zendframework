@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Markup\Renderer\Markup\Html;
 use Zend\Markup\Renderer\Markup;
 use Zend\Markup\Token;
@@ -29,9 +26,6 @@ use Zend\Markup\Token;
 /**
  * Image markup for HTML
  *
- * @uses       \Zend\Markup\Renderer\Html
- * @uses       \Zend\Markup\Renderer\Markup\Html\AbstractHtml
- * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Html

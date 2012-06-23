@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Spreadsheets;
 
 use Zend\GData\Spreadsheets;
@@ -30,10 +27,6 @@ use Zend\GData\App;
 /**
  * Concrete class for working with List entries.
  *
- * @uses       \Zend\GData\App\InvalidArgumentException;
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Spreadsheets
- * @uses       \Zend\GData\Spreadsheets\Extension\Custom
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets

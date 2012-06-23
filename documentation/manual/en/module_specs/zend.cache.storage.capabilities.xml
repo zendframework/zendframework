@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.storage.capabilities">
-    <info>
+    
         <title>Zend\Cache\Storage\Capabilities</title>
-    </info>
+    
 
     <section xml:id="zend.cache.storage.capabilities.intro">
-        <info>
+        
             <title>Overview</title>
-        </info>
+        
 
         <para>
             Storage capabilities describes how a storage adapter works and
@@ -36,17 +36,17 @@
 
 <!--
     <section xml:id="zend.cache.storage.capabilities.quick-start">
-        <info>
+        
             <title>Quick Start</title>
-        </info>
+        
 
     </section>
 -->
 
     <section xml:id="zend.cache.storage.capabilities.methods">
-        <info>
+        
             <title>Available Methods</title>
-        </info>
+        
 
         <variablelist>
 
@@ -524,12 +524,12 @@
     </section>
 
     <section xml:id="zend.cache.storage.capabilities.examples">
-        <info>
+        
             <title>Examples</title>
-        </info>
+        
 
         <example xml:id="zend.cache.storage.capabilities.examples.specific">
-            <info><title>Get storage capabilities and do specific stuff in base of it</title></info>
+            <title>Get storage capabilities and do specific stuff in base of it</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Cache\StorageFactory;
@@ -551,7 +551,7 @@ if ($capabilities->getIterable()) {
         </example>
 
         <example xml:id="zend.cache.storage.capabilities.examples.event.change">
-            <info><title>Listen to change event</title></info>
+            <title>Listen to change event</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Cache\StorageFactory;

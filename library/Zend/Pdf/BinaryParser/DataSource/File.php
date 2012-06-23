@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\BinaryParser\DataSource;
 use Zend\Pdf\Exception;
 use Zend\Pdf;
@@ -34,8 +31,6 @@ use Zend\Pdf;
  * by {@link fopen()} (through URL wrappers). It may be used for local
  * filesystem objects only.
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -74,7 +69,7 @@ class File extends AbstractDataSource
      * Throws an exception if the file is missing or cannot be opened.
      *
      * @param string $filePath Fully-qualified path to the file.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($filePath)
     {
@@ -116,7 +111,7 @@ class File extends AbstractDataSource
      *
      * @param integer $byteCount Number of bytes to read.
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function readBytes($byteCount)
     {
@@ -166,7 +161,7 @@ class File extends AbstractDataSource
      * moved beyond EOF (end of file).
      *
      * @param integer $offset Destination byte offset.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function moveToOffset($offset)
     {

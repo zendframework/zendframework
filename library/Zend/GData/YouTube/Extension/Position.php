@@ -19,16 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\YouTube\Extension;
 
 /**
  * Data model class to represent a playlist item's position in the list (yt:position)
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\YouTube
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

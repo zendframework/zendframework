@@ -15,18 +15,15 @@
  * @category   Zend
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mvc\Router\Http;
 
 use Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Mvc\Router\Exception;
 
 /**
@@ -34,15 +31,15 @@ use Traversable,
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Regex implements Route
+class Regex implements RouteInterface
 {
     /**
      * Regex to match.
-     * 
+     *
      * @var string
      */
     protected $regex;
@@ -58,25 +55,24 @@ class Regex implements Route
      * Specification for URL assembly.
      *
      * Parameters accepting subsitutions should be denoted as "%key%"
-     * 
+     *
      * @var string
      */
     protected $spec;
-    
+
     /**
      * List of assembled parameters.
-     * 
+     *
      * @var array
      */
     protected $assembledParams = array();
-    
+
     /**
      * Create a new regex route.
-     * 
+     *
      * @param  string $regex
      * @param  string $spec
-     * @param  array  $defaults 
-     * @return void
+     * @param  array  $defaults
      */
     public function __construct($regex, $spec, array $defaults = array())
     {
@@ -84,13 +80,14 @@ class Regex implements Route
         $this->spec     = $spec;
         $this->defaults = $defaults;
     }
-    
+
     /**
-     * factory(): defined by Route interface.
+     * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
-     * @param  array|Traversable $options
-     * @return void
+     * @param  array|\Traversable $options
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @return Regex
      */
     public static function factory($options = array())
     {
@@ -103,7 +100,7 @@ class Regex implements Route
         if (!isset($options['regex'])) {
             throw new Exception\InvalidArgumentException('Missing "regex" in options array');
         }
-        
+
         if (!isset($options['spec'])) {
             throw new Exception\InvalidArgumentException('Missing "spec" in options array');
         }
@@ -116,7 +113,7 @@ class Regex implements Route
     }
 
     /**
-     * match(): defined by Route interface.
+     * match(): defined by RouteInterface interface.
      *
      * @see    Route::match()
      * @param  Request $request
@@ -140,7 +137,7 @@ class Regex implements Route
         if (!$result) {
             return null;
         }
-        
+
         $matchedLength = strlen($matches[0]);
 
         foreach ($matches as $key => $value) {
@@ -155,7 +152,7 @@ class Regex implements Route
     }
 
     /**
-     * assemble(): Defined by Route interface.
+     * assemble(): Defined by RouteInterface interface.
      *
      * @see    Route::assemble()
      * @param  array $params
@@ -167,23 +164,23 @@ class Regex implements Route
         $url                   = $this->spec;
         $mergedParams          = array_merge($this->defaults, $params);
         $this->assembledParams = array();
-        
+
         foreach ($mergedParams as $key => $value) {
             $spec = '%' . $key . '%';
-            
+
             if (strpos($url, $spec) !== false) {
                 $url = str_replace($spec, urlencode($value), $url);
-                
+
                 $this->assembledParams[] = $key;
             }
         }
-        
+
         return $url;
     }
-    
+
     /**
-     * getAssembledParams(): defined by Route interface.
-     * 
+     * getAssembledParams(): defined by RouteInterface interface.
+     *
      * @see    Route::getAssembledParams
      * @return array
      */

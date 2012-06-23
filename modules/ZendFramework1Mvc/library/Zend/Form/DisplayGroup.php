@@ -18,16 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Form;
 use Zend\Loader\PluginLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Config\Config,
     Zend\Controller\Front as FrontController,
     Zend\Translator,
-    Zend\View\Renderer as View;
+    Zend\View\Renderer\RendererInterface as View;
 
 /**
  * Zend_Form_DisplayGroup
@@ -111,7 +108,7 @@ class DisplayGroup implements \Iterator,\Countable
     protected $_translatorDisabled = false;
 
     /**
-     * @var \Zend\View\Renderer
+     * @var \Zend\View\Renderer\RendererInterface
      */
     protected $_view;
 
@@ -842,7 +839,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Set view
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  View $view
      * @return \Zend\Form\DisplayGroup
      */
     public function setView(View $view = null)
@@ -854,7 +851,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Retrieve view
      *
-     * @return \Zend\View\Renderer
+     * @return View
      */
     public function getView()
     {

@@ -18,14 +18,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader\Extension;
-use Zend\Feed\Reader;
+
+use Zend\Feed\Reader,
+    DOMXPath,
+    DOMDocument,
+    DOMElement;
 
 /**
-* @uses \Zend\Feed\Reader\Reader
 * @category Zend
 * @package Reader\Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -83,7 +83,7 @@ abstract class AbstractEntry
      * @param  string $type
      * @return void
      */
-    public function __construct(\DOMElement $entry, $entryKey, $type = null)
+    public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
         $this->_entry       = $entry;
         $this->_entryKey    = $entryKey;
@@ -111,7 +111,7 @@ abstract class AbstractEntry
     /**
      * Get the DOM
      *
-     * @return \DOMDocument
+     * @return DOMDocument
      */
     public function getDomDocument()
     {
@@ -145,7 +145,7 @@ abstract class AbstractEntry
      * @param  DOMXPath $xpath
      * @return Reader\Reader_Extension_EntryAbstract
      */
-    public function setXpath(\DOMXPath $xpath)
+    public function setXpath(DOMXPath $xpath)
     {
         $this->_xpath = $xpath;
         $this->_registerNamespaces();
@@ -160,7 +160,7 @@ abstract class AbstractEntry
     public function getXpath()
     {
         if (!$this->_xpath) {
-            $this->setXpath(new \DOMXPath($this->getDomDocument()));
+            $this->setXpath(new DOMXPath($this->getDomDocument()));
         }
         return $this->_xpath;
     }

@@ -194,9 +194,9 @@ repository, we suggest doing some cleanup of these branches.
 
 RSS feeds may be found at:
 
-https://github.com/zendframework/zf2/commits/<branch>.atom
+`https://github.com/zendframework/zf2/commits/<branch>.atom`
 
-where <branch> is a branch in the repository.
+where &lt;branch&gt; is a branch in the repository.
 
 To subscribe to git email notifications, send an email to:
 

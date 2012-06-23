@@ -27,21 +27,19 @@ use PHPUnit_Framework_TestCase as TestCase,
 
 class PredicateSetTest extends TestCase
 {
-    public function setUp()
-    {
-        $this->set = new PredicateSet();
-    }
 
     public function testEmptyConstructorYieldsCountOfZero()
     {
-        $this->assertEquals(0, count($this->set));
+        $predicateSet = new PredicateSet();
+        $this->assertEquals(0, count($predicateSet));
     }
 
     public function testCombinationIsAndByDefault()
     {
-        $this->set->addPredicate(new IsNull('foo'))
+        $predicateSet = new PredicateSet();
+        $predicateSet->addPredicate(new IsNull('foo'))
                   ->addPredicate(new IsNull('bar'));
-        $parts = $this->set->getWhereParts();
+        $parts = $predicateSet->getExpressionData();
         $this->assertEquals(3, count($parts));
         $this->assertContains('AND', $parts[1]);
         $this->assertNotContains('OR', $parts[1]);
@@ -49,11 +47,12 @@ class PredicateSetTest extends TestCase
 
     public function testCanPassPredicatesAndDefaultCombinationViaConstructor()
     {
+        $predicateSet = new PredicateSet();
         $set = new PredicateSet(array(
             new IsNull('foo'),
             new IsNull('bar'),
         ), 'OR');
-        $parts = $set->getWhereParts();
+        $parts = $set->getExpressionData();
         $this->assertEquals(3, count($parts));
         $this->assertContains('OR', $parts[1]);
         $this->assertNotContains('AND', $parts[1]);
@@ -61,11 +60,12 @@ class PredicateSetTest extends TestCase
 
     public function testCanPassBothPredicateAndCombinationToAddPredicate()
     {
-        $this->set->addPredicate(new IsNull('foo'), 'OR')
+        $predicateSet = new PredicateSet();
+        $predicateSet->addPredicate(new IsNull('foo'), 'OR')
                   ->addPredicate(new IsNull('bar'), 'AND')
                   ->addPredicate(new IsNull('baz'), 'OR')
                   ->addPredicate(new IsNull('bat'), 'AND');
-        $parts = $this->set->getWhereParts();
+        $parts = $predicateSet->getExpressionData();
         $this->assertEquals(7, count($parts));
 
         $this->assertNotContains('OR', $parts[1], var_export($parts, 1));
@@ -80,11 +80,12 @@ class PredicateSetTest extends TestCase
 
     public function testCanUseOrPredicateAndAndPredicateMethods()
     {
-        $this->set->orPredicate(new IsNull('foo'))
+        $predicateSet = new PredicateSet();
+        $predicateSet->orPredicate(new IsNull('foo'))
                   ->andPredicate(new IsNull('bar'))
                   ->orPredicate(new IsNull('baz'))
                   ->andPredicate(new IsNull('bat'));
-        $parts = $this->set->getWhereParts();
+        $parts = $predicateSet->getExpressionData();
         $this->assertEquals(7, count($parts));
 
         $this->assertNotContains('OR', $parts[1], var_export($parts, 1));

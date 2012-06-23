@@ -15,18 +15,15 @@
  * @category   Zend
  * @package    Zend_Mvc_Router
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Mvc\Router\TestAsset;
 
-use Zend\Mvc\Router\Route,
+use Zend\Mvc\Router\RouteInterface,
     Zend\Mvc\Router\RouteMatch,
-    Zend\Stdlib\RequestDescription as Request;
+    Zend\Stdlib\RequestInterface;
 
 /**
  * Dummy route.
@@ -34,25 +31,25 @@ use Zend\Mvc\Router\Route,
  * @category   Zend
  * @package    Zend_Mvc_Router
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DummyRoute implements Route
+class DummyRoute implements RouteInterface
 {
     /**
-     * match(): defined by Route interface.
+     * match(): defined by RouteInterface interface.
      *
      * @see    Route::match()
-     * @param  Request $request
+     * @param  RequestInterface $request
      * @return RouteMatch
      */
-    public function match(Request $request)
+    public function match(RequestInterface $request)
     {
         return new RouteMatch(array());
     }
 
     /**
-     * assemble(): defined by Route interface.
+     * assemble(): defined by RouteInterface interface.
      *
      * @see    Route::assemble()
      * @param  array $params
@@ -65,9 +62,9 @@ class DummyRoute implements Route
     }
 
     /**
-     * factory(): defined by Route interface
+     * factory(): defined by RouteInterface interface
      * 
-     * @param  array|Traversable $options 
+     * @param  array|\Traversable $options
      * @return DummyRoute
      */
     public static function factory($options = array())

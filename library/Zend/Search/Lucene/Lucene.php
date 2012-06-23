@@ -18,16 +18,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene;
 
 use Zend\Search\Lucene\Exception\UnsupportedMethodCallException;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
- * @uses       \Zend\Search\Lucene\Storage\Directory
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -66,7 +61,7 @@ class Lucene
      * Create index
      *
      * @param mixed $directory
-     * @return \Zend\Search\Lucene\IndexInterface
+     * @return \Zend\Search\Lucene\SearchIndexInterface
      */
     public static function create($directory)
     {
@@ -77,7 +72,7 @@ class Lucene
      * Open index
      *
      * @param mixed $directory
-     * @return \Zend\Search\Lucene\IndexInterface
+     * @return \Zend\Search\Lucene\SearchIndexInterface
      */
     public static function open($directory)
     {

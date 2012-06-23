@@ -19,18 +19,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Dojo\Form;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Loader\PrefixPathMapper as PluginLoader,
-    Zend\View\Renderer as View;
+    Zend\View\Renderer\RendererInterface as View;
 
 /**
  * Dijit-enabled DisplayGroup
  *
- * @uses       \Zend\Form\DisplayGroup
  * @package    Zend_Dojo
  * @subpackage Form
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -43,8 +41,7 @@ class DisplayGroup extends \Zend\Form\DisplayGroup
      *
      * @param  string $name
      * @param  \Zend\Loader\PrefixPathMapper $loader
-     * @param  array|\Zend\Config\Config|null $options
-     * @return void
+     * @param  array|\Traversable $options
      */
     public function __construct($name, PluginLoader $loader, $options = null)
     {
@@ -57,7 +54,7 @@ class DisplayGroup extends \Zend\Form\DisplayGroup
      *
      * Ensures that the view object has the dojo view helper path set.
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  View $view
      * @return \Zend\Dojo\Form\Element\Dijit
      */
     public function setView(View $view = null)

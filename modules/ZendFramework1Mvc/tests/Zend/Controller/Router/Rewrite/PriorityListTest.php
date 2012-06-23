@@ -15,14 +15,11 @@
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Controller\Router\Rewrite;
 use Zend\Controller\Router\Rewrite\PriorityList;
 use ZendTest\Controller\Router\Rewrite\TestAsset\DummyRoute;
@@ -31,7 +28,7 @@ use ZendTest\Controller\Router\Rewrite\TestAsset\DummyRoute;
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Controller
  * @group      Zend_Controller_Router

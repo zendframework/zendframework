@@ -21,11 +21,7 @@
 
 namespace ZendTest\Log\Writer;
 
-/** PHPUnit_Framework_TestCase */
-require_once 'PHPUnit/Framework/TestCase.php';
-
-/** Zend_Log_Writer_ZendMonitor */
-require_once 'Zend/Log/Writer/ZendMonitor.php';
+use Zend\Log\Writer\ZendMonitor;
 
 /**
  * @category   Zend
@@ -42,21 +38,16 @@ class ZendMonitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrite()
     {
-        $writer = new \Zend\Log\Writer\ZendMonitor();
-        $writer->write(array('message' => 'my mess', 'priority' => 1));
-    }
-
-    public function testFactory()
-    {
-        $cfg = array();
-
-        $writer = \Zend\Log\Writer\ZendMonitor::factory($cfg);
-        $this->assertTrue($writer instanceof \Zend\Log\Writer\ZendMonitor);
+        $writer = new ZendMonitor();
+        $writer->write(array(
+            'message' => 'my mess',
+            'priority' => 1
+        ));
     }
 
     public function testIsEnabled()
     {
-        $writer = new \Zend\Log\Writer\ZendMonitor();
+        $writer = new ZendMonitor();
         $this->assertInternalType('boolean', $writer->isEnabled());
     }
 }

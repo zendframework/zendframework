@@ -19,10 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Http\Client;
+
+use Zend\Config\Config;
 use Zend\Http\Client\Adapter;
 
 /**
@@ -54,17 +53,31 @@ class CurlTest extends CommonHttpTests
      * @var array
      */
     protected $config = array(
-        'adapter'     => 'Zend\Http\Client\Adapter\Curl'
+        'adapter'     => 'Zend\Http\Client\Adapter\Curl',
+        'curloptions' => array(
+            CURLOPT_INFILESIZE => 102400000,
+        ),
     );
 
     protected function setUp()
     {
-        $this->markTestIncomplete('cURL implementation incomplete at the moment');
-
         if (!extension_loaded('curl')) {
             $this->markTestSkipped('cURL is not installed, marking all Http Client Curl Adapter tests skipped.');
         }
         parent::setUp();
+    }
+
+    public function testSimpleRequests()
+    {
+        $this->markTestSkipped('Method PATCH not implemented.');
+    }
+
+    /**
+     * @dataProvider parameterArrayProvider
+     */
+    public function testPatchData($params)
+    {
+        $this->markTestSkipped('Method PATCH not implemented.');
     }
 
     /**
@@ -82,7 +95,7 @@ class CurlTest extends CommonHttpTests
             'someoption' => 'hasvalue'
         );
 
-        $this->_adapter->setConfig($config);
+        $this->_adapter->setOptions($config);
 
         $hasConfig = $this->_adapter->getConfig();
         foreach($config as $k => $v) {
@@ -98,14 +111,14 @@ class CurlTest extends CommonHttpTests
     public function testConfigSetAsZendConfig()
     {
 
-        $config = new \Zend\Config\Config(array(
+        $config = new Config(array(
             'timeout'  => 400,
             'nested'   => array(
                 'item' => 'value',
             )
         ));
 
-        $this->_adapter->setConfig($config);
+        $this->_adapter->setOptions($config);
 
         $hasConfig = $this->_adapter->getConfig();
         $this->assertEquals($config->timeout, $hasConfig['timeout']);
@@ -121,9 +134,9 @@ class CurlTest extends CommonHttpTests
     {
         $this->setExpectedException(
             'Zend\Http\Client\Adapter\Exception\InvalidArgumentException',
-            'Array or Zend\Config\Config object expected');
+            'Array or Traversable object expected');
 
-        $this->_adapter->setConfig($config);
+        $this->_adapter->setOptions($config);
     }
 
     /**
@@ -175,13 +188,9 @@ class CurlTest extends CommonHttpTests
      */
     public function testRedirectPostToGetWithCurlFollowLocationOptionLeadsToTimeout()
     {
-        $this->setExpectedException(
-            'Zend\Http\Client\Adapter\Exception\RuntimeException',
-            'Error in cURL request: Operation timed out after 1000 milliseconds with 0 bytes received');
-
         $adapter = new Adapter\Curl();
         $this->client->setAdapter($adapter);
-        $adapter->setConfig(array(
+        $adapter->setOptions(array(
             'curloptions' => array(
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_TIMEOUT => 1,
@@ -194,6 +203,9 @@ class CurlTest extends CommonHttpTests
         $this->client->setParameterGet(array ('swallow' => 'african'));
         $this->client->setParameterPost(array ('Camelot' => 'A silly place'));
         $this->client->setMethod('POST');
+        $this->setExpectedException(
+            'Zend\Http\Client\Adapter\Exception\RuntimeException',
+            'Error in cURL request: Operation timed out after 1000 milliseconds with 0 bytes received');
         $this->client->send();
     }
 
@@ -232,7 +244,7 @@ class CurlTest extends CommonHttpTests
 
         $adapter = new Adapter\Curl();
         $this->client->setAdapter($adapter);
-        $adapter->setConfig(array(
+        $adapter->setOptions(array(
             'curloptions' => array(CURLOPT_INFILE => $putFileHandle, CURLOPT_INFILESIZE => $putFileSize)
         ));
         $this->client->setMethod('PUT');
@@ -242,18 +254,17 @@ class CurlTest extends CommonHttpTests
 
     public function testWritingAndNotConnectedWithCurlHandleThrowsException()
     {
-        $this->setExpectedException('Zend\Http\Client\Adapter\Exception', "Trying to write but we are not connected");
-
         $adapter = new Adapter\Curl();
+        $this->setExpectedException('Zend\Http\Client\Adapter\Exception\RuntimeException',
+                                    'Trying to write but we are not connected');
         $adapter->write("GET", "someUri");
     }
 
     public function testSetConfigIsNotArray()
     {
-        $this->setExpectedException('Zend\Http\Client\Adapter\Exception');
-
         $adapter = new Adapter\Curl();
-        $adapter->setConfig("foo");
+        $this->setExpectedException('Zend\Http\Client\Adapter\Exception\InvalidArgumentException');
+        $adapter->setOptions("foo");
     }
 
     public function testSetCurlOptions()
@@ -272,7 +283,7 @@ class CurlTest extends CommonHttpTests
     public function testWorkWithProxyConfiguration()
     {
         $adapter = new Adapter\Curl();
-        $adapter->setConfig(array(
+        $adapter->setOptions(array(
             'proxy_host' => 'localhost',
             'proxy_port' => 80,
             'proxy_user' => 'foo',
@@ -298,12 +309,12 @@ class CurlTest extends CommonHttpTests
     public function testGetCurlHandle()
     {
         $adapter = new Adapter\Curl();
-        $adapter->setConfig(array('timeout' => 2, 'maxredirects' => 1));
+        $adapter->setOptions(array('timeout' => 2, 'maxredirects' => 1));
         $adapter->connect("http://framework.zend.com");
 
         $this->assertTrue(is_resource($adapter->getHandle()));
     }
-    
+
     /**
      * @group ZF-9857
      */
@@ -315,5 +326,27 @@ class CurlTest extends CommonHttpTests
         $this->client->setMethod('HEAD');
         $this->client->send();
         $this->assertEquals('', $this->client->getResponse()->getBody());
+    }
+
+    public function testAuthorizeHeader()
+    {
+        // We just need someone to talk to
+        $this->client->setUri($this->baseuri. 'testHttpAuth.php');
+        $adapter = new Adapter\Curl();
+        $this->client->setAdapter($adapter);
+
+        $uid = 'alice';
+        $pwd = 'secret';
+
+        $hash   = base64_encode($uid . ':' . $pwd);
+        $header = 'Authorization: Basic ' . $hash;
+
+        $this->client->setAuth($uid, $pwd);
+        $res = $this->client->send();
+
+        $curlInfo = curl_getinfo($adapter->getHandle());
+        $this->assertArrayHasKey('request_header', $curlInfo, 'Expecting request_header in curl_getinfo() return value');
+
+        $this->assertContains($header, $curlInfo['request_header'], 'Expecting valid basic authorization header');
     }
 }

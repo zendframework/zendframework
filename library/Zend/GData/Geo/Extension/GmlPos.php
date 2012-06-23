@@ -19,16 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Geo\Extension;
 
 /**
  * Represents the gml:pos element used by the Gdata Geo extensions.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Geo
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Geo

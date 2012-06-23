@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Rest\Client;
 
 use Zend\Http\Client as HttpClient,
@@ -157,7 +154,6 @@ class RestClient extends \Zend\Service\AbstractService
      *
      * @param string $path
      * @param array  $query Array of GET parameters
-     * @throws Zend\Http\Client\Exception
      * @return Zend\Http\Response
      */
     public function restGet($path, array $query = null)
@@ -200,7 +196,6 @@ class RestClient extends \Zend\Service\AbstractService
      *
      * @param string $path
      * @param mixed $data Raw data to send
-     * @throws \Zend\Http\Client\Exception
      * @return \Zend\Http\Response
      */
     public function restPost($path, $data = null)
@@ -214,7 +209,6 @@ class RestClient extends \Zend\Service\AbstractService
      *
      * @param string $path
      * @param mixed $data Raw data to send in request
-     * @throws \Zend\Http\Client\Exception
      * @return \Zend\Http\Response
      */
     public function restPut($path, $data = null)
@@ -227,7 +221,6 @@ class RestClient extends \Zend\Service\AbstractService
      * Performs an HTTP DELETE request to $path.
      *
      * @param string $path
-     * @throws \Zend\Http\Client\Exception
      * @return \Zend\Http\Response
      */
     public function restDelete($path)

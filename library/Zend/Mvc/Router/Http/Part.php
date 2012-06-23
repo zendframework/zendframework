@@ -15,37 +15,34 @@
  * @category   Zend
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mvc\Router\Http;
 
 use Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Mvc\Router\RouteBroker,
     Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\PriorityList;
 
 /**
- * Route part.
+ * RouteInterface part.
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Part extends TreeRouteStack implements Route
+class Part extends TreeRouteStack implements RouteInterface
 {
     /**
-     * Route to match.
+     * RouteInterface to match.
      *
-     * @var Route
+     * @var RouteInterface
      */
     protected $route;
 
@@ -69,14 +66,14 @@ class Part extends TreeRouteStack implements Route
      * @param  mixed       $route
      * @param  boolean     $mayTerminate
      * @param  RouteBroker $routeBroker
-     * @param  array       $childRoutes
-     * @return void
+     * @param  array|null  $childRoutes
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($route, $mayTerminate, RouteBroker $routeBroker, array $childRoutes = null)
     {
         $this->routeBroker = $routeBroker;
 
-        if (!$route instanceof Route) {
+        if (!$route instanceof RouteInterface) {
             $route = $this->routeFromArray($route);
         }
 
@@ -91,11 +88,12 @@ class Part extends TreeRouteStack implements Route
     }
 
     /**
-     * factory(): defined by Route interface.
+     * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
      * @param  mixed $options
-     * @return void
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @return Part
      */
     public static function factory($options = array())
     {
@@ -128,10 +126,11 @@ class Part extends TreeRouteStack implements Route
     }
 
     /**
-     * match(): defined by Route interface.
+     * match(): defined by RouteInterface interface.
      *
      * @see    Route::match()
-     * @param  Request $request
+     * @param  Request  $request
+     * @param  int|null $pathOffset
      * @return RouteMatch|null
      */
     public function match(Request $request, $pathOffset = null)
@@ -170,12 +169,13 @@ class Part extends TreeRouteStack implements Route
     }
 
     /**
-     * assemble(): Defined by Route interface.
+     * assemble(): Defined by RouteInterface interface.
      *
      * @see    Route::assemble()
      * @param  array $params
      * @param  array $options
      * @return mixed
+     * @throws Exception\RuntimeException
      */
     public function assemble(array $params = array(), array $options = array())
     {
@@ -205,7 +205,7 @@ class Part extends TreeRouteStack implements Route
     }
 
     /**
-     * getAssembledParams(): defined by Route interface.
+     * getAssembledParams(): defined by RouteInterface interface.
      *
      * @see    Route::getAssembledParams
      * @return array

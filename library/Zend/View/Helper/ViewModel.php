@@ -19,12 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 
-use Zend\View\Model;
+use Zend\View\Model\ModelInterface as Model;
 
 /**
  * Helper for storing and retrieving the root and current view model

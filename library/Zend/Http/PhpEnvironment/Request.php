@@ -1,13 +1,29 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace Zend\Http\PhpEnvironment;
 
-use Zend\Http\Request as HttpRequest,
-    Zend\Uri\Http as HttpUri,
-    Zend\Http\Header\Cookie,
-    Zend\Stdlib\Parameters,
-    Zend\Stdlib\ParametersDescription;
+use Zend\Http\Request as HttpRequest;
+use Zend\Uri\Http as HttpUri;
+use Zend\Http\Header\Cookie;
+use Zend\Stdlib\Parameters;
+use Zend\Stdlib\ParametersInterface;
 
+/**
+ * HTTP Request for current PHP environment
+ *
+ * @category   Zend
+ * @package    Zend_Http
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Request extends HttpRequest
 {
     /**
@@ -31,22 +47,36 @@ class Request extends HttpRequest
      */
     protected $requestUri;
 
+    /**
+     * Construct
+     * Instantiates request.
+     */
     public function __construct()
     {
         $this->setEnv(new Parameters($_ENV));
         $this->setPost(new Parameters($_POST));
         $this->setQuery(new Parameters($_GET));
         $this->setServer(new Parameters($_SERVER));
-
-        if ($_COOKIE) {
-            $this->setCookies($_COOKIE);
-        }
+        $this->setCookies(new Parameters($_COOKIE));
 
         if ($_FILES) {
             $this->setFile(new Parameters($_FILES));
         }
+
+        $requestBody = file_get_contents('php://input');
+        if(strlen($requestBody) > 0){
+            $this->setContent($requestBody);
+        }
     }
 
+    /**
+     * Set cookies
+     *
+     * Instantiate and set cookies.
+     *
+     * @param $cookie
+     * @return Request
+     */
     public function setCookies($cookie)
     {
         $this->headers()->addHeader(new Cookie((array) $cookie));
@@ -133,12 +163,22 @@ class Request extends HttpRequest
      * Provide an alternate Parameter Container implementation for server parameters in this object, (this is NOT the
      * primary API for value setting, for that see server())
      *
-     * @param \Zend\Stdlib\ParametersDescription $server
+     * @param ParametersInterface $server
      * @return Request
      */
-    public function setServer(ParametersDescription $server)
+    public function setServer(ParametersInterface $server)
     {
         $this->serverParams = $server;
+
+        // This seems to be the only way to get the Authorization header on Apache
+        if (function_exists('apache_request_headers')) {
+            $apacheRequestHeaders = apache_request_headers();
+            if (isset($apacheRequestHeaders['Authorization'])) {
+                if (!$this->serverParams->get('HTTP_AUTHORIZATION')) {
+                    $this->serverParams->set('HTTP_AUTHORIZATION', $apacheRequestHeaders['Authorization']);
+                }
+            }
+        }
 
         $this->headers()->addHeaders($this->serverToHeaders($this->serverParams));
 
@@ -163,16 +203,12 @@ class Request extends HttpRequest
             $uri->setQuery($this->serverParams['QUERY_STRING']);
         }
 
-        $requestUri = $this->getRequestUri();
-        $uri->setPath(substr($requestUri, 0, strpos($requestUri, '?') ?: strlen($requestUri)));
-
         if ($this->headers()->get('host')) {
             //TODO handle IPv6 with port
             if (preg_match('|^([^:]+):([^:]+)$|', $this->headers()->get('host')->getFieldValue(), $match)) {
                 $uri->setHost($match[1]);
                 $uri->setPort($match[2]);
-            }
-            else {
+            } else {
                 $uri->setHost($this->headers()->get('host')->getFieldValue());
             }
         } elseif (isset($this->serverParams['SERVER_NAME'])) {
@@ -182,23 +218,34 @@ class Request extends HttpRequest
             }
         }
 
+        $requestUri = $this->getRequestUri();
+        $uri->setPath(substr($requestUri, 0, strpos($requestUri, '?') ?: strlen($requestUri)));
+
         return $this;
     }
 
+    /**
+     * Grab headers from array or Traversable
+     *
+     * @param array|\Traversable $server
+     * @return array
+     */
     protected function serverToHeaders($server)
     {
         $headers = array();
 
         foreach ($server as $key => $value) {
-            if (strpos($key, 'HTTP_') === 0 && $value) {
-                $header = substr($key, 5);
-            } elseif (in_array($key, array('CONTENT_LENGTH', 'CONTENT_MD5', 'CONTENT_TYPE')) && $value) {
-                $header = $key;
+            if ($value && strpos($key, 'HTTP_') === 0) {
+                $name = strtr(substr($key, 5), '_', ' ');
+                $name = strtr(ucwords(strtolower($name)), ' ', '-');
+            } elseif ($value && strpos($key, 'CONTENT_') === 0) {
+                $name = substr($key, 8);
+                $name = 'Content-' . (($name == 'MD5') ? $name : ucfirst(strtolower($name)));
             } else {
                 continue;
             }
 
-            $headers[strtr($header, '_', '-')] = $value;
+            $headers[$name] = $value;
         }
 
         return $headers;
@@ -220,6 +267,12 @@ class Request extends HttpRequest
         $httpXRewriteUrl = $this->server()->get('HTTP_X_REWRITE_URL');
         if ($httpXRewriteUrl !== null) {
             $requestUri = $httpXRewriteUrl;
+        }
+        
+        // Check for IIS 7.0 or later with ISAPI_Rewrite
+        $httpXOriginalUrl = $this->server()->get('HTTP_X_ORIGINAL_URL');
+        if ($httpXOriginalUrl !== null) {
+            $requestUri = $httpXOriginalUrl;
         }
        
         // IIS7 with URL Rewrite: make sure we get the unencoded url
@@ -285,17 +338,10 @@ class Request extends HttpRequest
         } else {
             // Backtrack up the SCRIPT_FILENAME to find the portion
             // matching PHP_SELF.
-            $path     = $phpSelf ?: '';
-            $segments = array_reverse(explode('/', trim($filename, '/')));
-            $index    = 0;
-            $last     = count($segments);
-            $baseUrl  = '';
 
-            do {
-                $segment  = $segments[$index];
-                $baseUrl = '/' . $segment . $baseUrl;
-                $index++;
-            } while ($last > $index && false !== ($pos = strpos($path, $baseUrl)) && 0 !== $pos);
+            $basename = basename($filename);
+            $path = ($phpSelf ? trim($phpSelf, '/') : '');
+            $baseUrl = '/'. substr($path, 0, strpos($path, $basename)) . $basename;
         }
 
         // Does the base URL have anything in common with the request URI?
@@ -307,7 +353,7 @@ class Request extends HttpRequest
         }
 
         // Directory portion of base path matches.
-        $baseDir = str_replace('\\','/', dirname($baseUrl));
+        $baseDir = str_replace('\\', '/', dirname($baseUrl));
         if (0 === strpos($requestUri, $baseDir)) {
             return $baseDir;
         }
@@ -340,7 +386,7 @@ class Request extends HttpRequest
     /**
      * Autodetect the base path of the request
      *
-     * Uses several crtieria to determine the base path of the request.
+     * Uses several criteria to determine the base path of the request.
      * 
      * @return string
      */
@@ -356,7 +402,7 @@ class Request extends HttpRequest
         
         // basename() matches the script filename; return the directory
         if (basename($baseUrl) === $filename) {
-            return dirname($baseUrl);
+            return str_replace('\\', '/', dirname($baseUrl));
         }
 
         // Base path is identical to base URL

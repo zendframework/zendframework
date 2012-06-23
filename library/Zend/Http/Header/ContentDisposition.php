@@ -6,14 +6,14 @@ namespace Zend\Http\Header;
  * @throws Exception\InvalidArgumentException
  * @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1
  */
-class ContentDisposition implements HeaderDescription
+class ContentDisposition implements HeaderInterface
 {
 
     public static function fromString($headerLine)
     {
         $header = new static();
 
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-disposition') {

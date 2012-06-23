@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Navigation;
 
 use Zend\Navigation,
@@ -125,7 +122,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             $this->fail('An invalid argument was given to the constructor, ' .
                         'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
                         'not thrown');
-        } catch (Navigation\Exception $e) {
+        } catch (Navigation\Exception\ExceptionInterface $e) {
             $this->assertContains('Invalid argument: $pages', $e->getMessage());
         }
     }
@@ -1011,7 +1008,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testCurrentShouldThrowExceptionIfIndexIsInvalid()
     {
-        $container = new \ZendTest\Navigation\TestAsset\Container(array(
+        $container = new \ZendTest\Navigation\TestAsset\AbstractContainer(array(
             array(
                 'label' => 'Page 2',
                 'type'  => 'uri'
@@ -1025,7 +1022,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
         try {
             $page = $container->current();
-            $this->fail('Container index is invalid, ' .
+            $this->fail('AbstractContainer index is invalid, ' .
                         'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
                         'not thrown');
         } catch (Navigation\Exception\OutOfBoundsException $e) {

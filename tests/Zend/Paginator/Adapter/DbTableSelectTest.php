@@ -19,10 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Paginator\Adapter;
+
 use Zend\Paginator\Adapter;
 
 /**

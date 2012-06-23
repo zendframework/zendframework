@@ -1,7 +1,7 @@
 <?php
 /**
  * @category   Zend
- * @package    Zend\Cloud\Infrastructure
+ * @package    Zend_Cloud_Infrastructure
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -9,6 +9,8 @@
 
 namespace Zend\Cloud\Infrastructure\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Service\Amazon\Ec2\Instance as Ec2Instance,
     Zend\Service\Amazon\Ec2\Image as Ec2Image,
     Zend\Service\Amazon\Ec2\AvailabilityZones as Ec2Zone,
@@ -22,7 +24,7 @@ use Zend\Service\Amazon\Ec2\Instance as Ec2Instance,
 /**
  * Amazon EC2 adapter for infrastructure service
  *
- * @package    Zend\Cloud\Infrastructure
+ * @package    Zend_Cloud_Infrastructure
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -117,17 +119,12 @@ class Ec2 extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|Zend\Config\Config $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = array())
     {
-        if (is_object($options)) {
-            if (method_exists($options, 'toArray')) {
-                $options= $options->toArray();
-            } elseif ($options instanceof \Traversable) {
-                $options = iterator_to_array($options);
-            }
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
         
         if (empty($options) || !is_array($options)) {
@@ -547,7 +544,7 @@ class Ec2 extends AbstractAdapter
     /**
      * Get the last HTTP response
      * 
-     * @return Zend\Http\Response 
+     * @return \Zend\Http\Response
      */
     public function getLastHttpResponse()
     {

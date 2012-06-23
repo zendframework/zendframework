@@ -10,7 +10,7 @@ class UpgradeTest extends \PHPUnit_Framework_TestCase
     public function testUpgradeFromStringCreatesValidUpgradeHeader()
     {
         $upgradeHeader = Upgrade::fromString('Upgrade: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $upgradeHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $upgradeHeader);
         $this->assertInstanceOf('Zend\Http\Header\Upgrade', $upgradeHeader);
     }
 

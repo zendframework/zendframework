@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.authsub"><info><title>Authenticating with AuthSub</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.authsub"><title>Authenticating with AuthSub</title>
     
 
     <para>
@@ -29,7 +29,7 @@
         account credentials that are known to that user.
     </para>
 
-    <note><info><title>Registered applications</title></info>
+    <note><title>Registered applications</title>
         
 
         <para>
@@ -39,7 +39,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.gdata.authsub.login"><info><title>Creating an AuthSub authenticated Http Client</title></info>
+    <section xml:id="zend.gdata.authsub.login"><title>Creating an AuthSub authenticated Http Client</title>
         
 
         <para>
@@ -104,7 +104,7 @@ $cal = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.gdata.authsub.logout"><info><title>Revoking AuthSub authentication</title></info>
+    <section xml:id="zend.gdata.authsub.logout"><title>Revoking AuthSub authentication</title>
         
 
         <para>
@@ -129,7 +129,7 @@ if (isset($_GET['logout'])) {
 }
 ]]></programlisting>
 
-        <note><info><title>Security notes</title></info>
+        <note><title>Security notes</title>
             
 
             <para>

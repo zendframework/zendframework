@@ -73,6 +73,10 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsConnectingViaClassShortName()
     {
+        if (!function_exists('mb_strtolower')) {
+            $this->markTestSkipped('mbstring required');
+        }
+
         $chain = new FilterChain();
         $chain->attachByName('string_trim', array('encoding' => 'utf-8'), 100)
               ->attachByName('strip_tags')
@@ -109,6 +113,17 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $value = '<a name="foo"> abc </a>';
         $valueExpected = 'ABC';
         $this->assertEquals($valueExpected, $chain->filter($value));
+    }
+
+    public function testCanRetrieveFilterWithUndefinedConstructor()
+    {
+        $chain = new FilterChain(array(
+            'filters' => array(
+                array('name' => 'int'),
+            ),
+        ));
+        $filtered = $chain->filter('127.1');
+        $this->assertEquals(127, $filtered);
     }
 
     protected function getChainConfig()

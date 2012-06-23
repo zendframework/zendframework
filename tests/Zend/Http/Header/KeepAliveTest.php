@@ -10,7 +10,7 @@ class KeepAliveTest extends \PHPUnit_Framework_TestCase
     public function testKeepAliveFromStringCreatesValidKeepAliveHeader()
     {
         $keepAliveHeader = KeepAlive::fromString('Keep-Alive: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $keepAliveHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $keepAliveHeader);
         $this->assertInstanceOf('Zend\Http\Header\KeepAlive', $keepAliveHeader);
     }
 

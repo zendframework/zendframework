@@ -19,12 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Amazon\SimpleDb;
 
-use Zend\Crypt,
+use Zend\Crypt\Hmac,
     Zend\Http,
     Zend\Uri;
 
@@ -158,7 +155,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
      *
      * @param  string $domainName
      * @param  string $itemName
-     * @param  array|Traverable $attributes
+     * @param  array|\Traverable $attributes
      * @param  array $replace
      * @return void
      */
@@ -435,7 +432,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
             $request = self::getHttpClient();
             $request->resetParameters();
 
-            $request->setConfig(array(
+            $request->setOptions(array(
                 'timeout' => $this->_httpTimeout
             ));
 
@@ -450,7 +447,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
             $request->setRawData(implode('&', $params_out), Http\Client::ENC_URLENCODED);
              */
             $httpResponse = $request->send();
-        } catch (Http\Client\Exception $zhce) {
+        } catch (Http\Client\Exception\ExceptionInterface $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();
             throw new Exception\RuntimeException($message, $zhce->getCode(), $zhce);
         } 
@@ -530,7 +527,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
 
         $data .= implode('&', $arrData);
 
-        $hmac = Crypt\Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Crypt\Hmac::BINARY);
+        $hmac = Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Hmac::BINARY);
 
         return base64_encode($hmac);
     }

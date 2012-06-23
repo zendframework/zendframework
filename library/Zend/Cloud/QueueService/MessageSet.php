@@ -11,22 +11,19 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage QueueService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\QueueService;
 
 /**
  * Collection of message objects
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage QueueService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -36,7 +33,7 @@ class MessageSet implements \Countable, \IteratorAggregate
     /** @var int */
     protected $_messageCount;
 
-    /** @var ArrayAccess Messages */
+    /** @var \ArrayAccess Messages */
     protected $_messages;
 
     /**
@@ -64,7 +61,7 @@ class MessageSet implements \Countable, \IteratorAggregate
     /**
      * IteratorAggregate: return iterable object
      *
-     * @return Traversable
+     * @return \Traversable
      */
     public function getIterator()
     {

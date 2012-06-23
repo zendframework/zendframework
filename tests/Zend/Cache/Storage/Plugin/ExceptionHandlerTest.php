@@ -41,12 +41,6 @@ class ExceptionHandlerTest extends CommonPluginTest
             'getMetadata.exception'  => 'onException',
             'getMetadatas.exception' => 'onException',
 
-            'getDelayed.exception' => 'onException',
-            'find.exception'       => 'onException',
-
-            'fetch.exception'    => 'onException',
-            'fetchAll.exception' => 'onException',
-
             'setItem.exception'  => 'onException',
             'setItems.exception' => 'onException',
 
@@ -69,12 +63,6 @@ class ExceptionHandlerTest extends CommonPluginTest
 
             'decrementItem.exception'  => 'onException',
             'decrementItems.exception' => 'onException',
-
-            'clear.exception'            => 'onException',
-            'clearByNamespace.exception' => 'onException',
-
-            'optimize.exception'    => 'onException',
-            'getCapacity.exception' => 'onException',
         );
         foreach ($expectedListeners as $eventName => $expectedCallbackMethod) {
             $listeners = $this->_adapter->events()->getListeners($eventName);
@@ -110,10 +98,11 @@ class ExceptionHandlerTest extends CommonPluginTest
         });
 
         // run onException
+        $result = null;
         $event = new ExceptionEvent('getItem.exception', $this->_adapter, new ArrayObject(array(
             'key'     => 'key',
             'options' => array()
-        )), $expectedException);
+        )), $result, $expectedException);
         $this->_plugin->onException($event);
 
         $this->assertTrue(
@@ -127,14 +116,14 @@ class ExceptionHandlerTest extends CommonPluginTest
         $this->_options->setThrowExceptions(false);
 
         // run onException
+        $result = 'test';
         $event = new ExceptionEvent('getItem.exception', $this->_adapter, new ArrayObject(array(
             'key'     => 'key',
             'options' => array()
-        )), new \Exception());
+        )), $result, new \Exception());
         $this->_plugin->onException($event);
 
         $this->assertFalse($event->getThrowException());
-        $this->assertFalse($event->getResult());
+        $this->assertSame('test', $event->getResult());
     }
-
 }

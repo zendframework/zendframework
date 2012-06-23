@@ -17,9 +17,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\StorageService\Adapter;
 
 use Traversable,
@@ -38,7 +35,7 @@ use Traversable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Rackspace implements Adapter
+class Rackspace implements AdapterInterface
 {
     const USER                = 'user';
     const API_KEY             = 'key';
@@ -285,7 +282,7 @@ class Rackspace implements Adapter
                 'prefix'    => $path
             );
         }    
-        $files = $this->rackspace->getObjects($this->container,$options);
+        $files = $this->rackspace->getObjects($this->container, $options);
         if (!$this->rackspace->isSuccessful()) {
             throw new Exception\RuntimeException('Error on get all folders: '.$this->rackspace->getErrorMsg());
         }

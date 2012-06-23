@@ -16,17 +16,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\ProgressBar;
-use Zend\ProgressBar\Exception;
+
+use Zend\ProgressBar\Exception,
+    Zend\Session;
 
 /**
  * Zend_ProgressBar offers an interface for multiple enviroments.
  *
- * @uses      \Zend\ProgressBar\Exception
- * @uses      \Zend\Session\Namespace
  * @category  Zend
  * @package   Zend_ProgressBar
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -86,11 +83,11 @@ class ProgressBar
     /**
      * Create a new progressbar backend.
      *
-     * @param  \Zend\ProgressBar\Adapter\Adapter $adapter
+     * @param  Adapter\AbstractAdapter $adapter
      * @param  float                    $min
      * @param  float                    $max
      * @param  string                   $persistenceNamespace
-     * @throws \Zend\ProgressBar\Exception When $min is greater than $max
+     * @throws Exception\OutOfRangeException When $min is greater than $max
      */
     public function __construct(Adapter\AbstractAdapter $adapter, $min = 0, $max = 100, $persistenceNamespace = null)
     {
@@ -105,7 +102,7 @@ class ProgressBar
 
         // See if we have to open a session namespace
         if ($persistenceNamespace !== null) {
-            $this->_persistenceNamespace = new \Zend\Session\SessionNamespace($persistenceNamespace);
+            $this->_persistenceNamespace = new Session\Container($persistenceNamespace);
         }
 
         // Set adapter
@@ -134,7 +131,7 @@ class ProgressBar
     /**
      * Get the current adapter
      *
-     * @return \Zend\ProgressBar\Adapter\Adapter
+     * @return Adapter\AbstractAdapter
      */
     public function getAdapter()
     {

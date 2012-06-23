@@ -19,27 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Search\Lucene\Index;
-
-/**
- * Zend_Search_Lucene_Storage_Directory_Filesystem
- */
-
-/**
- * Zend_Search_Lucene_Index_SegmentInfo
- */
-
-/**
- * Zend_Search_Lucene_Index_DictionaryLoader
- */
-
-
-/**
- * PHPUnit test case
- */
 
 /**
  * @category   Zend

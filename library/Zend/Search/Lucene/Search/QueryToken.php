@@ -19,14 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Search;
 use Zend\Search\Lucene;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search

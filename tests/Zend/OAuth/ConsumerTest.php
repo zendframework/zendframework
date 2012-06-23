@@ -132,7 +132,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         try {
             $consumer->setSignatureMethod('buckyball');
             $this->fail('Invalid signature method accepted by setSignatureMethod');
-        } catch (OAuth\Exception $e) {
+        } catch (OAuth\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -143,7 +143,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         try {
             $consumer->setRequestMethod('buckyball');
             $this->fail('Invalid request method accepted by setRequestMethod');
-        } catch (OAuth\Exception $e) {
+        } catch (OAuth\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -154,7 +154,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         try {
             $consumer->setRequestScheme('buckyball');
             $this->fail('Invalid request scheme accepted by setRequestScheme');
-        } catch (OAuth\Exception $e) {
+        } catch (OAuth\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -165,7 +165,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         try {
             $consumer->setLocalUrl('buckyball');
             $this->fail('Invalid url accepted by setLocalUrl');
-        } catch (OAuth\Exception $e) {
+        } catch (OAuth\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -176,7 +176,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         try {
             $consumer->setRequestTokenUrl('buckyball');
             $this->fail('Invalid url accepted by setRequestUrl');
-        } catch (OAuth\Exception $e) {
+        } catch (OAuth\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -187,7 +187,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         try {
             $consumer->setUserAuthorizationUrl('buckyball');
             $this->fail('Invalid url accepted by setUserAuthorizationUrl');
-        } catch (OAuth\Exception $e) {
+        } catch (OAuth\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -198,7 +198,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         try {
             $consumer->setAccessTokenUrl('buckyball');
             $this->fail('Invalid url accepted by setAccessTokenUrl');
-        } catch (OAuth\Exception $e) {
+        } catch (OAuth\Exception\ExceptionInterface $e) {
         }
     }
 

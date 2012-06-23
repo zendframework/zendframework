@@ -18,13 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Stdlib;
 
-use ArrayIterator,
-    ArrayObject;
+use ArrayIterator;
+use ArrayObject;
 
 /**
  * ArrayObject that acts as a stack with regards to iteration

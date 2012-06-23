@@ -10,7 +10,7 @@ class TrailerTest extends \PHPUnit_Framework_TestCase
     public function testTrailerFromStringCreatesValidTrailerHeader()
     {
         $trailerHeader = Trailer::fromString('Trailer: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $trailerHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $trailerHeader);
         $this->assertInstanceOf('Zend\Http\Header\Trailer', $trailerHeader);
     }
 

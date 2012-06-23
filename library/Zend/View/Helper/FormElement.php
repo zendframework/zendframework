@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 
 use Zend\View\Exception;
@@ -29,8 +26,6 @@ use Zend\View\Exception;
 /**
  * Base helper for form elements.  Extend this, don't use it on its own.
  *
- * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\HtmlElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

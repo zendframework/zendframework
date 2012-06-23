@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Translator\Adapter;
 use Zend\Translator\Adapter;
 use Zend\Translator;
@@ -46,6 +43,16 @@ use Zend\Translator\Exception\InvalidFileTypeException;
  */
 class XliffTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        Adapter\Xliff::removeCache();
+    }
+
+    public function tearDown()
+    {
+        Adapter\Xliff::removeCache();
+    }
+
     public function testCreate()
     {
         $adapter = new Adapter\Xliff(__DIR__ . '/_files/translation_en.xliff', 'en');
@@ -69,7 +76,7 @@ class XliffTest extends \PHPUnit_Framework_TestCase
         $adapter = new Adapter\Xliff(__DIR__ . '/_files/translation_en.xliff', 'en');
         $this->assertEquals('Xliff', $adapter->toString());
     }
-    
+
     /**
      * @group ZF-12012
      */

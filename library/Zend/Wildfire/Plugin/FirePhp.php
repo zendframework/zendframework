@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Wildfire\Plugin;
 use Zend\Wildfire,
     Zend\Wildfire\Plugin\Exception;
@@ -29,14 +26,6 @@ use Zend\Wildfire,
 /**
  * Primary class for communicating with the FirePHP Firefox Extension.
  *
- * @uses       ReflectionClass
- * @uses       \Zend\Controller\Request\AbstractRequest
- * @uses       \Zend\Controller\Response\AbstractResponse
- * @uses       \Zend\Loader
- * @uses       \Zend\Wildfire\Channel\HttpHeaders
- * @uses       \Zend\Wildfire\Exception
- * @uses       \Zend\Wildfire\Plugin
- * @uses       \Zend\Wildfire\Protocol\JsonStream
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Plugin

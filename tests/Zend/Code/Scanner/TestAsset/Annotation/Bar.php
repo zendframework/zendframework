@@ -2,9 +2,9 @@
 
 namespace ZendTest\Code\Scanner\TestAsset\Annotation;
 
-use Zend\Code\Annotation\Annotation;
+use Zend\Code\Annotation\AnnotationInterface;
 
-class Bar implements Annotation
+class Bar implements AnnotationInterface
 {
     protected $content = null;
 

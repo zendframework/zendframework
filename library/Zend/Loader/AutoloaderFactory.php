@@ -88,7 +88,7 @@ abstract class AutoloaderFactory
         if (!is_array($options) && !($options instanceof \Traversable)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException(
-                             'Options provided must be an array or Traversable'
+                'Options provided must be an array or Traversable'
             );
         }
 
@@ -98,17 +98,17 @@ abstract class AutoloaderFactory
                 if (!class_exists($class) && !$autoloader->autoload($class)) {
                     require_once 'Exception/InvalidArgumentException.php';
                     throw new Exception\InvalidArgumentException(
-                                sprintf('Autoloader class "%s" not loaded', $class)
+                        sprintf('Autoloader class "%s" not loaded', $class)
                     );
                 }
 
                 // unfortunately is_subclass_of is broken on some 5.3 versions
                 // additionally instanceof is also broken for this use case
                 if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
-                        if (!is_subclass_of($class, 'Zend\Loader\SplAutoloader')) {
+                    if (!is_subclass_of($class, 'Zend\Loader\SplAutoloader')) {
                         require_once 'Exception/InvalidArgumentException.php';
                         throw new Exception\InvalidArgumentException(
-                                    sprintf('Autoloader class %s must implement Zend\\Loader\\SplAutoloader', $class)
+                            sprintf('Autoloader class %s must implement Zend\\Loader\\SplAutoloader', $class)
                         );
                     }
                 }

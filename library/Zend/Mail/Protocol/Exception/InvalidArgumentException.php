@@ -19,23 +19,19 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mail\Protocol\Exception;
-use Zend\Mail\Protocol\Exception;
+
+use Zend\Mail\Exception;
 
 /**
  * Exception for Zend_Mail component.
  *
- * @uses       Zend\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements Exception
-{
-}
+    extends Exception\InvalidArgumentException
+    implements ExceptionInterface
+{}

@@ -278,13 +278,14 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
 
     public function testWillPullFromLocatorIfAttached()
     {
-        $locator = new TestAsset\ServiceLocator();
         $plugin  = new stdClass;
+
+        $locator = new TestAsset\ServiceLocator();
         $locator->set('ZendTest\Loader\TestAsset\Foo', $plugin);
+        $this->broker->setServiceLocator($locator);
 
         $loader = $this->broker->getClassLoader();
         $loader->registerPlugin('foo', 'ZendTest\Loader\TestAsset\Foo');
-        $this->broker->setLocator($locator);
 
         $test = $this->broker->load('foo');
         $this->assertSame($plugin, $test);

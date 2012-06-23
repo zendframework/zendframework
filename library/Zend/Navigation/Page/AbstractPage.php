@@ -22,8 +22,8 @@
 namespace Zend\Navigation\Page;
 
 use Traversable,
-    Zend\Acl\Resource as AclResource,
-    Zend\Navigation\Container,
+    Zend\Acl\Resource\ResourceInterface as AclResource,
+    Zend\Navigation\AbstractContainer,
     Zend\Navigation\Exception,
     Zend\Stdlib\ArrayUtils;
 
@@ -36,7 +36,7 @@ use Traversable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractPage extends Container
+abstract class AbstractPage extends AbstractContainer
 {
     /**
      * Page label
@@ -143,7 +143,7 @@ abstract class AbstractPage extends Container
     /**
      * Parent container
      *
-     * @var \Zend\Navigation\Container|null
+     * @var \Zend\Navigation\AbstractContainer|null
      */
     protected $parent;
 
@@ -168,7 +168,7 @@ abstract class AbstractPage extends Container
      * If 'type' is not given, the type of page to construct will be determined
      * by the following rules:
      * - If $options contains either of the keys 'action', 'controller',
-     *   'module', or 'route', a Zend_Navigation_Page_Mvc page will be created.
+     *   or 'route', a Zend_Navigation_Page_Mvc page will be created.
      * - If $options contains the key 'uri', a Zend_Navigation_Page_Uri page
      *   will be created.
      *
@@ -233,7 +233,6 @@ abstract class AbstractPage extends Container
 
         $hasUri = isset($options['uri']);
         $hasMvc = isset($options['action']) || isset($options['controller'])
-                || isset($options['module'])
                 || isset($options['route']);
 
         if ($hasMvc) {
@@ -823,11 +822,11 @@ abstract class AbstractPage extends Container
     /**
      * Sets parent container
      *
-     * @param  Container $parent [optional] new parent to set.
+     * @param  AbstractContainer $parent [optional] new parent to set.
      *                           Default is null which will set no parent.
      * @return AbstractPage fluent interface, returns self
      */
-    public function setParent(Container $parent = null)
+    public function setParent(AbstractContainer $parent = null)
     {
         if ($parent === $this) {
             throw new Exception\InvalidArgumentException(
@@ -859,7 +858,7 @@ abstract class AbstractPage extends Container
     /**
      * Returns parent container
      *
-     * @return Container|null  parent container or null
+     * @return AbstractContainer|null  parent container or null
      */
     public function getParent()
     {
@@ -887,8 +886,7 @@ abstract class AbstractPage extends Container
 
         $method = 'set' . self::normalizePropertyName($property);
 
-        if ($method != 'setOptions' && $method != 'setConfig'
-            && method_exists($this, $method)
+        if ($method != 'setOptions' && method_exists($this, $method)
         ) {
             $this->$method($value);
         } else {
@@ -1144,7 +1142,7 @@ abstract class AbstractPage extends Container
             'privilege' => $this->getPrivilege(),
             'active'    => $this->isActive(),
             'visible'   => $this->isVisible(),
-            'type'      => get_class($this),
+            'type'      => get_called_class(),
             'pages'     => parent::toArray(),
         ));
     }

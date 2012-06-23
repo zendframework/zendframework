@@ -19,27 +19,22 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Authentication\Adapter;
-use Zend\Authentication\Adapter as AuthenticationAdapter,
-    Zend\Authentication\Result as AuthenticationResult;
+
+use Zend\Authentication\Result as AuthenticationResult;
+use Zend\InfoCard as ZendInfoCard;
 
 /**
  * A Zend_Auth Authentication Adapter allowing the use of Information Cards as an
  * authentication mechanism
  *
- * @uses       Zend\Authentication\Adapter
- * @uses       Zend\Authentication\Result
- * @uses       Zend\InfoCard\InfoCard
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InfoCard implements AuthenticationAdapter
+class InfoCard implements AdapterInterface
 {
     /**
      * The XML Token being authenticated
@@ -49,9 +44,9 @@ class InfoCard implements AuthenticationAdapter
     protected $_xmlToken;
 
     /**
-     * The instance of Zend_InfoCard
+     * The instance of Zend\InfoCard
      *
-     * @var \Zend\InfoCard
+     * @var \Zend\InfoCard\InfoCard
      */
     protected $_infoCard;
 
@@ -59,21 +54,20 @@ class InfoCard implements AuthenticationAdapter
      * Constructor
      *
      * @param  string $strXmlDocument The XML Token provided by the client
-     * @return void
      */
     public function __construct($strXmlDocument)
     {
         $this->_xmlToken = $strXmlDocument;
-        $this->_infoCard = new \Zend_InfoCard();
+        $this->_infoCard = new ZendInfoCard\InfoCard();
     }
 
     /**
      * Sets the InfoCard component Adapter to use
      *
-     * @param  Zend_InfoCard_Adapter_Interface $a
-     * @return Zend\Authentication\Adapter\InfoCard Provides a fluent interface
+     * @param  ZendInfoCard\Adapter\AdapterInterface $a
+     * @return InfoCard Provides a fluent interface
      */
-    public function setAdapter(\Zend_InfoCard_Adapter_Interface $a)
+    public function setAdapter(ZendInfoCard\Adapter\AdapterInterface $a)
     {
         $this->_infoCard->setAdapter($a);
         return $this;
@@ -82,7 +76,7 @@ class InfoCard implements AuthenticationAdapter
     /**
      * Retrieves the InfoCard component adapter being used
      *
-     * @return Zend_InfoCard_Adapter_Interface
+     * @return AdapterInterface
      */
     public function getAdapter()
     {
@@ -92,7 +86,7 @@ class InfoCard implements AuthenticationAdapter
     /**
      * Retrieves the InfoCard public key cipher object being used
      *
-     * @return Zend_InfoCard_Cipher_Pki_Interface
+     * @return ZendInfoCard\Cipher\PKI\PKIInterface
      */
     public function getPKCipherObject()
     {
@@ -102,10 +96,10 @@ class InfoCard implements AuthenticationAdapter
     /**
      * Sets the InfoCard public key cipher object to use
      *
-     * @param  Zend_InfoCard_Cipher_Pki_Interface $cipherObj
-     * @return \Zend\Authentication\Adapter\InfoCard Provides a fluent interface
+     * @param  ZendInfoCard\Cipher\PKI\PKIInterface $cipherObj
+     * @return InfoCard Provides a fluent interface
      */
-    public function setPKICipherObject(\Zend_InfoCard_Cipher_Pki_Interface $cipherObj)
+    public function setPKICipherObject(ZendInfoCard\Cipher\PKI\PKIInterface $cipherObj)
     {
         $this->_infoCard->setPKICipherObject($cipherObj);
         return $this;
@@ -114,7 +108,7 @@ class InfoCard implements AuthenticationAdapter
     /**
      * Retrieves the Symmetric cipher object being used
      *
-     * @return Zend_InfoCard_Cipher_Symmetric_Interface
+     * @return ZendInfoCard\Cipher\Symmetric\AES128CBCInterface
      */
     public function getSymCipherObject()
     {
@@ -124,10 +118,10 @@ class InfoCard implements AuthenticationAdapter
     /**
      * Sets the InfoCard symmetric cipher object to use
      *
-     * @param  Zend_InfoCard_Cipher_Symmetric_Interface $cipherObj
-     * @return Zend\Authentication\Adapter\InfoCard Provides a fluent interface
+     * @param  ZendInfoCard\Cipher\Symmetric\AES128CBCInterface $cipherObj
+     * @return InfoCard Provides a fluent interface
      */
-    public function setSymCipherObject(\Zend_InfoCard_Cipher_Symmetric_Interface $cipherObj)
+    public function setSymCipherObject(ZendInfoCard\Cipher\Symmetric\AES128CBCInterface $cipherObj)
     {
         $this->_infoCard->setSymCipherObject($cipherObj);
         return $this;
@@ -136,42 +130,42 @@ class InfoCard implements AuthenticationAdapter
     /**
      * Remove a Certificate Pair by Key ID from the search list
      *
-     * @param  string $key_id The Certificate Key ID returned from adding the certificate pair
-     * @throws Zend\InfoCard\Exception
-     * @return Zend\Authentication\Adapter\InfoCard Provides a fluent interface
+     * @param  string $keyId The Certificate Key ID returned from adding the certificate pair
+     * @throws ZendInfoCard\Exception\ExceptionInterface
+     * @return InfoCard Provides a fluent interface
      */
-    public function removeCertificatePair($key_id)
+    public function removeCertificatePair($keyId)
     {
-        $this->_infoCard->removeCertificatePair($key_id);
+        $this->_infoCard->removeCertificatePair($keyId);
         return $this;
     }
 
     /**
      * Add a Certificate Pair to the list of certificates searched by the component
      *
-     * @param  string $private_key_file    The path to the private key file for the pair
-     * @param  string $public_key_file     The path to the certificate / public key for the pair
+     * @param  string $privateKeyFile    The path to the private key file for the pair
+     * @param  string $publicKeyFile     The path to the certificate / public key for the pair
      * @param  string $type                (optional) The URI for the type of key pair this is (default RSA with OAEP padding)
      * @param  string $password            (optional) The password for the private key file if necessary
-     * @throws Zend_InfoCard_Exception
+     * @throws ZendInfoCard\Exception\ExceptionInterface
      * @return string A key ID representing this key pair in the component
      */
-    public function addCertificatePair($private_key_file, $public_key_file, $type = \Zend_InfoCard_Cipher::ENC_RSA_OAEP_MGF1P, $password = null)
+    public function addCertificatePair($privateKeyFile, $publicKeyFile, $type = ZendInfoCard\Cipher::ENC_RSA_OAEP_MGF1P, $password = null)
     {
-        return $this->_infoCard->addCertificatePair($private_key_file, $public_key_file, $type, $password);
+        return $this->_infoCard->addCertificatePair($privateKeyFile, $publicKeyFile, $type, $password);
     }
 
     /**
      * Return a Certificate Pair from a key ID
      *
-     * @param  string $key_id The Key ID of the certificate pair in the component
-     * @throws Zend_InfoCard_Exception
+     * @param  string $keyId The Key ID of the certificate pair in the component
+     * @throws ZendInfoCard\Exception\ExceptionInterface
      * @return array An array containing the path to the private/public key files,
      *               the type URI and the password if provided
      */
-    public function getCertificatePair($key_id)
+    public function getCertificatePair($keyId)
     {
-        return $this->_infoCard->getCertificatePair($key_id);
+        return $this->_infoCard->getCertificatePair($keyId);
     }
 
     /**
@@ -199,22 +193,25 @@ class InfoCard implements AuthenticationAdapter
     /**
      * Authenticates the XML token
      *
-     * @return Zend\Authentication\Result The result of the authentication
+     * @return AuthenticationResult The result of the authentication
      */
     public function authenticate()
     {
         try {
             $claims = $this->_infoCard->process($this->getXmlToken());
         } catch(\Exception $e) {
-            return new AuthenticationResult(AuthenticationResult::FAILURE , null, array('Exception Thrown',
-                                                                                $e->getMessage(),
-                                                                                $e->getTraceAsString(),
-                                                                                serialize($e)));
+            return new AuthenticationResult(
+                AuthenticationResult::FAILURE,
+                null,
+                array('Exception Thrown',
+                      $e->getMessage(),
+                      $e->getTraceAsString(),
+                      serialize($e)));
         }
 
-        if(!$claims->isValid()) {
+        if (!$claims->isValid()) {
             switch($claims->getCode()) {
-                case \Zend_InfoCard_Claims::RESULT_PROCESSING_FAILURE:
+                case ZendInfoCard\Claims::RESULT_PROCESSING_FAILURE:
                     return new AuthenticationResult(
                         AuthenticationResult::FAILURE,
                         $claims,
@@ -224,7 +221,7 @@ class InfoCard implements AuthenticationAdapter
                         )
                     );
                     break;
-                case \Zend_InfoCard_Claims::RESULT_VALIDATION_FAILURE:
+                case ZendInfoCard\Claims::RESULT_VALIDATION_FAILURE:
                     return new AuthenticationResult(
                         AuthenticationResult::FAILURE_CREDENTIAL_INVALID,
                         $claims,

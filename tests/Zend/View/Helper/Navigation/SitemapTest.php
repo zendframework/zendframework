@@ -19,11 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper\Navigation;
-use Zend\Controller\Request;
+
 use Zend\View;
 
 /**
@@ -116,24 +113,6 @@ class SitemapTest extends AbstractTest
         $this->assertEquals(0, count($this->_helper->getContainer()));
     }
 
-    public function testAutoloadContainerFromRegistry()
-    {
-        $oldReg = null;
-        if (\Zend\Registry::isRegistered(self::REGISTRY_KEY)) {
-            $oldReg = \Zend\Registry::get(self::REGISTRY_KEY);
-        }
-        \Zend\Registry::set(self::REGISTRY_KEY, $this->_nav1);
-
-        $this->_helper->setContainer(null);
-
-        $expected = $this->_getExpected('sitemap/default1.xml');
-        $actual = $this->_helper->render();
-
-        \Zend\Registry::set(self::REGISTRY_KEY, $oldReg);
-
-        $this->assertEquals($expected, $expected);
-    }
-
     public function testRenderSuppliedContainerWithoutInterfering()
     {
         $rendered1 = $this->_getExpected('sitemap/default1.xml');
@@ -207,13 +186,13 @@ class SitemapTest extends AbstractTest
 
     public function testThrowExceptionOnInvalidLoc()
     {
-	$this->markTestIncomplete('Zend\URI changes affect this test');
+	    $this->markTestIncomplete('Zend\URI changes affect this test');
         $nav = clone $this->_nav2;
         $nav->addPage(array('label' => 'Invalid', 'uri' => 'http://w.'));
 
         try {
             $this->_helper->render($nav);
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $expected = sprintf(
                     'Encountered an invalid URL for Sitemap XML: "%s"',
                     'http://w.');
@@ -241,8 +220,8 @@ class SitemapTest extends AbstractTest
         try {
             $this->_helper->setServerUrl('site.example.org');
             $this->fail('An invalid server URL was given, but a ' .
-                        'Zend\URI\Exception was not thrown');
-        } catch (\Zend\URI\Exception $e) {
+                        'Zend\URI\Exception\ExceptionInterface was not thrown');
+        } catch (\Zend\URI\Exception\ExceptionInterface $e) {
             $this->assertContains('Illegal scheme', $e->getMessage());
         }
     }
@@ -282,7 +261,7 @@ class SitemapTest extends AbstractTest
 
         try {
             $this->_helper->render($nav);
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $expected = sprintf(
                     'Sitemap is invalid according to XML Schema at "%s"',
                     \Zend\View\Helper\Navigation\Sitemap::SITEMAP_XSD);

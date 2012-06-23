@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Memory;
 use Zend\Memory;
 use Zend\Memory\Container;
@@ -46,7 +43,6 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($valueObject->getRef(), 'data data data ...');
     }
 
-
     /**
      * tests the value reference retrieval
      */
@@ -58,7 +54,6 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($valueObject->getRef(), '012_456789');
     }
-
 
     /**
      * tests the __toString() functionality

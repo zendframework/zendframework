@@ -19,18 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\App;
 
 /**
  * Abstract class for all XML elements
  *
- * @uses       DOMDocument
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\App\Util
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
@@ -203,7 +196,7 @@ abstract class Base
      * for application storage/persistence.
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
+     * @return \DOMElement The DOMElement representing this element and all
      * child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
@@ -517,7 +510,7 @@ abstract class Base
      */
     public function __isset($name)
     {
-        $rc = new \ReflectionClass(get_class($this));
+        $rc = new \ReflectionClass(get_called_class());
         $privName = '_' . $name;
         if (!($rc->hasProperty($privName))) {
             throw new InvalidArgumentException(

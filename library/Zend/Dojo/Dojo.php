@@ -18,12 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Dojo;
 
-use Zend\View\Renderer,
+use Zend\View\Renderer\RendererInterface as Renderer,
     Zend\View\Renderer\PhpRenderer;
 
 /**
@@ -81,7 +78,7 @@ class Dojo
     /**
      * Dojo-enable a view instance
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  Renderer $view
      * @return void
      */
     public static function enableView(Renderer $view)
@@ -98,7 +95,7 @@ class Dojo
     /**
      * Dojo-disable a dojo enabled view
      * 
-     * @param  \Zend\View\Renderer $view
+     * @param  Renderer $view
      * @return void
      */
     public static function disableView(Renderer $view)

@@ -18,20 +18,13 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator\File;
 
-use Zend\Loader,
-    Zend\Validator\Exception;
+use Zend\Validator\Exception;
 
 /**
  * Validator for the sha1 hash of given files
  *
- * @uses      \Zend\Loader
- * @uses      \Zend\Validator\Exception
- * @uses      \Zend\Validator\File\Hash
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -113,7 +106,7 @@ class Sha1 extends Hash
         }
 
         // Is file readable ?
-        if (!Loader::isReadable($value)) {
+        if (false === stream_resolve_include_path($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }
 

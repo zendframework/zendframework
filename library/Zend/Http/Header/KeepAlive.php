@@ -6,14 +6,14 @@ namespace Zend\Http\Header;
  * @throws Exception\InvalidArgumentException
  * @todo Search for RFC for this header
  */
-class KeepAlive implements HeaderDescription
+class KeepAlive implements HeaderInterface
 {
 
     public static function fromString($headerLine)
     {
         $header = new static();
 
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'keep-alive') {

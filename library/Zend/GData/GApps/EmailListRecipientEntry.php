@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\GApps;
 
 use Zend\GData\GApps;
@@ -41,9 +38,6 @@ use Zend\GData\GApps;
  *
  * This class represents <atom:entry> in the Google Data protocol.
  *
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Extension\Who
- * @uses       \Zend\GData\GApps
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps
@@ -133,7 +127,7 @@ class EmailListRecipientEntry extends \Zend\GData\Entry
      *
      * @param \Zend\GData\Extension\Who $value The desired value for this
      *          instance's who property.
-     * @return Zend_Gdata_GApps_EventEntry Provides a fluent interface.
+     * @return EmailListRecipientEntry Provides a fluent interface.
      */
     public function setWho($value)
     {

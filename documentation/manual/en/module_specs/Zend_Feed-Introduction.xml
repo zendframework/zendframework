@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><title>Introduction</title>
     
 
     <para>
@@ -26,7 +26,7 @@
         database, etc.
     </para>
 
-    <note><info><title>Be aware</title></info>
+    <note><title>Be aware</title>
         
 
         <para>
@@ -36,7 +36,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.feed.introduction.example.rss"><info><title>Putting Zend_Feed to Work on RSS Feed Data</title></info>
+    <example xml:id="zend.feed.introduction.example.rss"><title>Putting Zend_Feed to Work on RSS Feed Data</title>
         
 
         <programlisting language="php"><![CDATA[

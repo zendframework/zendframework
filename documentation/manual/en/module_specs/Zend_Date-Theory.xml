@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.definition.theory"><info><title>Theory of Operation</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.definition.theory"><title>Theory of Operation</title>
     
 
     <para>
@@ -23,7 +23,7 @@
         inheritance hierarchy.
     </para>
 
-    <section xml:id="zend.date.theory.internals"><info><title>Internals</title></info>
+    <section xml:id="zend.date.theory.internals"><title>Internals</title>
         
 
         <itemizedlist mark="opencircle">

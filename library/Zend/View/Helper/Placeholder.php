@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 
 use Zend\View\Exception\InvalidArgumentException;
@@ -32,8 +29,6 @@ use Zend\View\Exception\InvalidArgumentException;
  * for non-Placeholder things. That said, the support for this is only
  * guaranteed to effect subsequently rendered templates, and of course Layouts.
  *
- * @uses       \Zend\View\Helper\AbstractHelper.php
- * @uses       \Zend\View\Helper\Placeholder\Registry
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

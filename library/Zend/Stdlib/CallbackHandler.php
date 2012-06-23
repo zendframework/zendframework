@@ -18,14 +18,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Stdlib;
 
-use Closure,
-    ReflectionClass,
-    WeakRef;
+use Closure;
+use ReflectionClass;
+use WeakRef;
 
 /**
  * CallbackHandler
@@ -165,6 +162,11 @@ class CallbackHandler
     public function call(array $args = array())
     {
         $callback = $this->getCallback();
+
+        // WeakRef object will return null if the real object was disposed
+        if (null === $callback) {
+            return null;
+        }
 
         $isPhp54 = version_compare(PHP_VERSION, '5.4.0rc1', '>=');
 

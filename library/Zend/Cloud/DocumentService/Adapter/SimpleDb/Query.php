@@ -11,15 +11,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\DocumentService\Adapter
+ * @package    Zend_Cloud_DocumentService_Adapter
  * @subpackage SimpleDb
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\DocumentService\Adapter\SimpleDb;
 
 use Zend\Cloud\DocumentService\Query as QueryInterface,
@@ -31,7 +28,7 @@ use Zend\Cloud\DocumentService\Query as QueryInterface,
  * structured way
  *
  * @category   Zend
- * @package    Zend\Cloud\DocumentService\Adapter
+ * @package    Zend_Cloud_DocumentService_Adapter
  * @subpackage SimpleDb
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -39,7 +36,7 @@ use Zend\Cloud\DocumentService\Query as QueryInterface,
 class Query extends QueryInterface
 {
     /**
-     * @var Zend\Cloud\DocumentService\Adapter\SimpleDb
+     * @var \Zend\Cloud\DocumentService\Adapter\SimpleDb
      */
     protected $_adapter;
 

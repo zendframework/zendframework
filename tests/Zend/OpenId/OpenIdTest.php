@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\OpenId;
 
 use Zend\OpenId\OpenId;
@@ -405,6 +402,7 @@ class OpenIdTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirect()
     {
+        $this->expectOutputRegex('/.*/'); // Hide stdout from the component when the test run
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/", null, $response, 'GET');
         $this->assertSame( 302, $response->getStatusCode() );
@@ -604,7 +602,7 @@ class OpenIdTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue( strlen($dh_details['priv_key']) > 0 );
             $this->assertTrue( is_string($dh_details['pub_key']) );
             $this->assertTrue( strlen($dh_details['pub_key']) > 0 );
-        } catch (Zend\OpenId\Exception $e) {
+        } catch (\Zend\OpenId\Exception\ExceptionInterface $e) {
             $this->markTestSkipped($e->getMessage());
         }
     }
@@ -634,7 +632,7 @@ class OpenIdTest extends \PHPUnit_Framework_TestCase
                 bin2hex(OpenId::computeDhSecret($alice_details['pub_key'], $bob)) );
             $this->assertSame( '75',
                 bin2hex(OpenId::computeDhSecret($bob_details['pub_key'], $alice)) );
-        } catch (Zend\OpenId\Exception $e) {
+        } catch (\Zend\OpenId\Exception\ExceptionInterface $e) {
             $this->markTestSkipped($e->getMessage());
         }
     }

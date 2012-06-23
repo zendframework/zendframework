@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Controller\Request;
 
 /** Zend_Controller_Request_HTTPTestCase */

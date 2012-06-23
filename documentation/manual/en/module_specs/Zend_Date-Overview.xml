@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.overview"><info><title>Zend_Date API Overview</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.overview"><title>Zend_Date API Overview</title>
     
 
     <para>
@@ -8,10 +8,10 @@
         operations and operands.
     </para>
 
-    <section xml:id="zend.date.options"><info><title>Zend_Date Options</title></info>
+    <section xml:id="zend.date.options"><title>Zend_Date Options</title>
         
 
-        <section xml:id="zend.date.options.formattype"><info><title>Selecting the Date Format Type</title></info>
+        <section xml:id="zend.date.options.formattype"><title>Selecting the Date Format Type</title>
             
 
             <para>
@@ -30,7 +30,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.date.options.fixdst"><info><title>DST and Date Math</title></info>
+        <section xml:id="zend.date.options.fixdst"><title>DST and Date Math</title>
             
 
             <para>
@@ -69,7 +69,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.date.options.extendmonth"><info><title>Month Calculations</title></info>
+        <section xml:id="zend.date.options.extendmonth"><title>Month Calculations</title>
             
 
             <para>
@@ -94,7 +94,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.date.options.cache"><info><title>Speed up Date Localization and Normalization with Zend_Cache</title></info>
+        <section xml:id="zend.date.options.cache"><title>Speed up Date Localization and Normalization with Zend_Cache</title>
             
 
             <para>
@@ -108,7 +108,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.date.options.timesync"><info><title>Receiving Syncronised Timestamps with Zend_TimeSync</title></info>
+        <section xml:id="zend.date.options.timesync"><title>Receiving Syncronised Timestamps with Zend_TimeSync</title>
             
 
             <para>
@@ -124,7 +124,7 @@
         </section>
     </section>
 
-    <section xml:id="zend.date.values"><info><title>Working with Date Values</title></info>
+    <section xml:id="zend.date.values"><title>Working with Date Values</title>
         
 
         <para>
@@ -162,7 +162,7 @@
             <constant>NULL</constant> or <constant>Zend_Date::DATES</constant> (a "loose" format).
         </para>
 
-        <example xml:id="zend.date.values.example-1"><info><title>User-Specified Input Date Format</title></info>
+        <example xml:id="zend.date.values.example-1"><title>User-Specified Input Date Format</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -217,7 +217,7 @@ $date = new Zend_Date('31.Feb.2007');
 ]]></programlisting>
     </section>
 
-    <section xml:id="id.date.basic"><info><title>Basic Zend_Date Operations Common to Many Date Parts</title></info>
+    <section xml:id="id.date.basic"><title>Basic Zend_Date Operations Common to Many Date Parts</title>
         
 
         <para>
@@ -236,7 +236,7 @@ $date = new Zend_Date('31.Feb.2007');
             <methodname>compare()</methodname>, and <methodname>get()</methodname>.
         </para>
 
-        <example xml:id="zend.date.basic.example-1"><info><title>Operating on Parts of Dates</title></info>
+        <example xml:id="zend.date.basic.example-1"><title>Operating on Parts of Dates</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -268,10 +268,10 @@ print $date;
             <varname>$date</varname> operand, when <varname>$date</varname> is a string or integer.
         </para>
 
-        <section xml:id="id.date.basic.parts"><info><title>List of Date Parts</title></info>
+        <section xml:id="id.date.basic.parts"><title>List of Date Parts</title>
             
 
-            <table xml:id="id.date.basic.parts.table"><info><title>Date Parts</title></info>
+            <table xml:id="id.date.basic.parts.table"><title>Date Parts</title>
                 
 
                 <tgroup cols="2">
@@ -473,7 +473,7 @@ print $date;
             </table>
         </section>
 
-        <section xml:id="id.date.basic.operations"><info><title>List of Date Operations</title></info>
+        <section xml:id="id.date.basic.operations"><title>List of Date Operations</title>
             
 
             <para>
@@ -483,7 +483,7 @@ print $date;
                 is used for the <varname>$part</varname> parameter.
             </para>
 
-            <table xml:id="id.date.basic.operations.table"><info><title>Basic Operations</title></info>
+            <table xml:id="id.date.basic.operations.table"><title>Basic Operations</title>
                 
 
                 <tgroup cols="2">
@@ -512,7 +512,7 @@ print $date;
                                     returned instead of integers for large values.
                                 </para>
 
-                                <note><info><title>Behaviour of get()</title></info>
+                                <note><title>Behaviour of get()</title>
                                     
 
                                     <para>
@@ -618,7 +618,7 @@ print $date;
         </section>
     </section>
 
-    <section xml:id="zend.date.others.comparison"><info><title>Comparing Dates</title></info>
+    <section xml:id="zend.date.others.comparison"><title>Comparing Dates</title>
         
 
         <para>
@@ -626,7 +626,7 @@ print $date;
             date parts listed in <link linkend="zend.date.overview">Zend_Date API Overview</link>.
         </para>
 
-        <table xml:id="zend.date.others.comparison.table"><info><title>Date Comparison Methods</title></info>
+        <table xml:id="zend.date.others.comparison.table"><title>Date Comparison Methods</title>
             
 
             <tgroup cols="2">
@@ -777,7 +777,7 @@ print $date;
         </table>
     </section>
 
-    <section xml:id="zend.date.others.gettingparts"><info><title>Getting Dates and Date Parts</title></info>
+    <section xml:id="zend.date.others.gettingparts"><title>Getting Dates and Date Parts</title>
         
 
         <para>
@@ -785,7 +785,7 @@ print $date;
             instance.
         </para>
 
-        <table xml:id="zend.date.others.gettingparts.table"><info><title>Date Output Methods</title></info>
+        <table xml:id="zend.date.others.gettingparts.table"><title>Date Output Methods</title>
             
 
             <tgroup cols="2">
@@ -939,7 +939,7 @@ print $date;
                                 <constant>Zend_Date::MONTH_NAME_SHORT</constant>.
                             </para>
 
-                            <note><info><title>Limitation of toValue()</title></info>
+                            <note><title>Limitation of toValue()</title>
                                 
 
                                 <para>
@@ -996,7 +996,7 @@ print $date;
         </table>
     </section>
 
-    <section xml:id="zend.date.others.fractions"><info><title>Working with Fractions of Seconds</title></info>
+    <section xml:id="zend.date.others.fractions"><title>Working with Fractions of Seconds</title>
         
 
         <para>
@@ -1004,7 +1004,7 @@ print $date;
             instance.
         </para>
 
-        <table xml:id="zend.date.others.fractions.table"><info><title>Date Output Methods</title></info>
+        <table xml:id="zend.date.others.fractions.table"><title>Date Output Methods</title>
             
 
             <tgroup cols="2">
@@ -1040,7 +1040,7 @@ print $date;
         </table>
     </section>
 
-    <section xml:id="zend.date.other.sun"><info><title>Sunrise / Sunset</title></info>
+    <section xml:id="zend.date.other.sun"><title>Sunrise / Sunset</title>
         
 
         <para>
@@ -1048,7 +1048,7 @@ print $date;
             including the time of sunrise and sunset.
         </para>
 
-        <table xml:id="zend.date.other.sun.table"><info><title>Miscellaneous Methods</title></info>
+        <table xml:id="zend.date.other.sun.table"><title>Miscellaneous Methods</title>
             
 
             <tgroup cols="2">

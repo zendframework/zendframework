@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\Trailer;
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
@@ -29,9 +26,6 @@ use Zend\Pdf\InternalType;
 /**
  * PDF file trailer generator (used for just created PDF)
  *
- * @uses       \Zend\Pdf\PdfDocument
- * @uses       \Zend\Pdf\Trailer\AbstractTrailer
- * @uses       \Zend\Pdf\InternalType\DirctionaryObject
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

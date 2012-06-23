@@ -18,13 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\EventManager\Filter;
 
-use Zend\Stdlib\CallbackHandler,
-    Zend\Stdlib\SplPriorityQueue;
+use Zend\Stdlib\CallbackHandler;
+use Zend\Stdlib\SplPriorityQueue;
 
 /**
  * Specialized priority queue implementation for use with an intercepting 
@@ -99,7 +96,7 @@ class FilterIterator extends SplPriorityQueue
      * @param  mixed $context 
      * @param  array $params 
      * @param  FilterIterator $chain 
-     * @return void
+     * @return mixed
      */
     public function next($context = null, array $params = array(), $chain = null)
     {

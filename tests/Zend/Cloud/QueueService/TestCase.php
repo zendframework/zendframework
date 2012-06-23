@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\QueueService
+ * @package    Zend_Cloud_QueueService
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -31,7 +31,7 @@ use Zend\Cloud\QueueService\Adapter,
  * Zend\Cloud_QueueService.
  *
  * @category   Zend
- * @package    Zend\Cloud\QueueService
+ * @package    Zend_Cloud_QueueService
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -41,7 +41,7 @@ abstract class TestCase extends PHPUnitTestCase
     /**
      * Reference to queue adapter to test
      *
-     * @var Zend\Cloud\QueueService
+     * @var \Zend\Cloud\QueueService
      */
     protected $_commonQueue;
     protected $_dummyNamePrefix = '/TestItem';
@@ -51,7 +51,7 @@ abstract class TestCase extends PHPUnitTestCase
     /**
      * Config object
      *
-     * @var Zend\Config\Config
+     * @var \Zend\Config\Config
      */
     protected $_config;
 
@@ -104,7 +104,7 @@ abstract class TestCase extends PHPUnitTestCase
             try {
                 $messages = $this->_commonQueue->receiveMessages($queueURL);
                 $this->fail('An exception should have been thrown if the queue has been deleted; received ' . var_export($messages, 1));
-            } catch (\Zend\Cloud\QueueService\Exception $e) {
+            } catch (\Zend\Cloud\QueueService\Exception\ExceptionInterface $e) {
                 $this->assertTrue(true);
                 $this->_commonQueue->deleteQueue($queueURL);
                 return;
@@ -337,7 +337,7 @@ abstract class TestCase extends PHPUnitTestCase
     /**
      * Get adapter configuration for concrete test
      *
-     * @returns Zend\Config\Config
+     * @returns \Zend\Config\Config
      */
     abstract protected function _getConfig();
 }

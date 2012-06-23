@@ -3,6 +3,7 @@
 namespace Zend\Di;
 
 use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 class Configuration
 {
@@ -12,21 +13,22 @@ class Configuration
      * @var Zend\Di\DependencyInjector
      */
     protected $di = null;
-    
-    public function __construct($data)
+
+    /**
+     * @param  array|Traversable $options
+     */
+    public function __construct($options)
     {
-        if ($data instanceof Traversable) {
-            if (method_exists($data, 'toArray')) {
-                $data = $data->toArray();
-            } else {
-                $data = iterator_to_array($data, true);
-            }
-        } elseif (!is_array($data)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+
+        if (!is_array($options)) {
             throw new Exception\InvalidArgumentException(
-                'Configuration data must be of type Zend\Config\Config or an array'
+                'Configuration data must be of type Traversable or an array'
             );
         }
-        $this->data = $data;
+        $this->data = $options;
     }
     
     public function configure(Di $di)
@@ -46,10 +48,28 @@ class Configuration
         foreach ($definition as $definitionType => $definitionData) {
             switch ($definitionType) {
                 case 'compiler':
-                    // @todo
+                    foreach ($definitionData as $filename) {
+                        if (is_readable($filename)) {
+                            $di->definitions()->addDefinition(new \Zend\Di\Definition\ArrayDefinition(include $filename), false);
+                        }
+                    }
                     break;
                 case 'runtime':
-                    // @todo
+                    if (isset($definitionData['enabled']) && !$definitionData['enabled']) {
+                        // Remove runtime from definition list if not enabled
+                        $definitions = array();
+                        foreach ($di->definitions() as $definition) {
+                            if (!$definition instanceof \Zend\Di\Definition\RuntimeDefinition) {
+                                $definitions[] = $definition;
+                            }
+                        }
+                        $definitions = new DefinitionList($definitions);
+                        $di->setDefinitionList($definitions);
+                    } elseif (isset($definitionData['use_annotations']) && $definitionData['use_annotations']) {
+                        $di->definitions()->getDefinitionByType('\Zend\Di\Definition\RuntimeDefinition')
+                            ->getIntrospectionStrategy()
+                            ->setUseAnnotations(true);
+                    }
                     break;
                 case 'class':
                     foreach ($definitionData as $className => $classData) {
@@ -136,6 +156,10 @@ class Configuration
                             case 'injections':
                             case 'injection':
                                 $im->setInjections($target, $v);
+                                break;
+                            case 'shared':
+                            case 'share':
+                                $im->setShared($target, $v);
                                 break;
                         }
                     }

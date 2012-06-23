@@ -18,34 +18,30 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
-    Zend\Config\Processor,
     Zend\Config\Exception\InvalidArgumentException,
     Zend\Translator\Translator as ZendTranslator,
     Zend\Locale\Locale,
-    \Traversable,
-    \ArrayObject;
+    Traversable,
+    ArrayObject;
 
 /**
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Translator implements Processor
+class Translator implements ProcessorInterface
 {
     /**
-     * @var \Zend\Translator\Translator
+     * @var ZendTranslator
      */
     protected $translator;
 
     /**
-     * @var \Zend\Locale\Locale|string|null
+     * @var Locale|string|null
      */
     protected $locale = null;
 
@@ -64,7 +60,7 @@ class Translator implements Processor
     }
 
     /**
-     * @return \Zend\Translator\Translator
+     * @return ZendTranslator
      */
     public function getTranslator()
     {
@@ -72,7 +68,7 @@ class Translator implements Processor
     }
 
     /**
-     * @param \Zend\Translator\Translator $translator
+     * @param ZendTranslator $translator
      */
     public function setTranslator(ZendTranslator $translator)
     {
@@ -80,7 +76,7 @@ class Translator implements Processor
     }
 
     /**
-     * @return \Zend\Locale\Locale|string|null
+     * @return Locale|string|null
      */
     public function getLocale()
     {
@@ -88,13 +84,20 @@ class Translator implements Processor
     }
 
     /**
-     * @param \Zend\Locale\Locale|string|null $locale
+     * @param Locale|string|null $locale
      */
     public function setLocale($locale)
     {
         $this->locale = $locale;
     }
 
+    /**
+     * Process
+     *
+     * @param Config $config
+     * @return Config
+     * @throws InvalidArgumentException
+     */
     public function process(Config $config)
     {
         if ($config->isReadOnly()) {
@@ -108,22 +111,22 @@ class Translator implements Processor
             if ($val instanceof Config) {
                 $this->process($val);
             } else {
-                $config->$key = $this->translator->translate($val,$this->locale);
+                $config->$key = $this->translator->translate($val, $this->locale);
             }
         }
 
         return $config;
     }
 
-	/**
-	 * Process a single value
-	 *
-	 * @param $value
-	 * @return mixed
-	 */
-	public function processValue($value)
-	{
-		return $this->translator->translate($value,$this->locale);
-	}
+    /**
+     * Process a single value
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function processValue($value)
+    {
+        return $this->translator->translate($value, $this->locale);
+    }
 
 }

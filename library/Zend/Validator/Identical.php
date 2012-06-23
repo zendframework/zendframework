@@ -18,16 +18,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator;
 
 use Traversable,
     Zend\Stdlib\ArrayUtils;
 
 /**
- * @uses       \Zend\Validator\AbstractValidator
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -109,7 +105,7 @@ class Identical extends AbstractValidator
      */
     public function setToken($token)
     {
-        $this->tokenString = (string) $token;
+        $this->tokenString = (is_array($token) ? implode($token) : (string) $token);
         $this->token       = $token;
         return $this;
     }
@@ -145,7 +141,7 @@ class Identical extends AbstractValidator
      */
     public function isValid($value, $context = null)
     {
-        $this->setValue((string) $value);
+        $this->setValue($value);
 
         if (($context !== null) && isset($context) && array_key_exists($this->getToken(), $context)) {
             $token = $context[$this->getToken()];

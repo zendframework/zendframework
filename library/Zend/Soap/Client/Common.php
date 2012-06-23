@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Soap\Client;
 
 if (extension_loaded('soap')) {
 
 /**
- * @uses       SoapClient
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client

@@ -18,22 +18,19 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Text\Figlet\Exception;
 
+use Zend\Text\Exception;
+
 /**
- * Exception class for Zend_Figlet
+ * Exception class for Zend_Text
  *
- * @uses      \Zend\Text\Exception
  * @category  Zend
  * @package   Zend_Text_Figlet
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class UnexpectedValueException 
-    extends \UnexpectedValueException
-    implements \Zend\Text\Figlet\Exception
-{
-}
+    extends Exception\UnexpectedValueException
+    implements ExceptionInterface
+{}

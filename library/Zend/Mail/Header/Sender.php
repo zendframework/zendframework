@@ -21,9 +21,7 @@
 
 namespace Zend\Mail\Header;
 
-use Zend\Mail\Address,
-    Zend\Mail\AddressDescription,
-    Zend\Mail\Header;
+use Zend\Mail;
 
 /**
  * @category   Zend
@@ -32,31 +30,31 @@ use Zend\Mail\Address,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Sender implements Header
+class Sender implements HeaderInterface
 {
     /**
-     * @var AddressDescription|null
+     * @var \Zend\Mail\Address\AddressInterface
      */
     protected $address;
 
     /**
      * Header encoding
-     * 
+     *
      * @var string
      */
     protected $encoding = 'ASCII';
 
     /**
      * Factory: create Sender header object from string
-     * 
-     * @param  string $headerLine 
+     *
+     * @param  string $headerLine
      * @return Sender
      * @throws Exception\InvalidArgumentException on invalid header line
      */
     public static function fromString($headerLine)
     {
         $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'sender') {
@@ -66,7 +64,7 @@ class Sender implements Header
         $header = new static();
 
         // Check for address, and set if found
-        if (preg_match('^(?<name>.*?)<(?<email>[^>]+)>$', $value, $matches)) {
+        if (preg_match('^(?P<name>.*?)<(?P<email>[^>]+)>$', $value, $matches)) {
             $name = $matches['name'];
             if (empty($name)) {
                 $name = null;
@@ -75,13 +73,13 @@ class Sender implements Header
             }
             $header->setAddress($matches['email'], $name);
         }
-        
+
         return $header;
     }
 
     /**
      * Get header name
-     * 
+     *
      * @return string
      */
     public function getFieldName()
@@ -91,12 +89,12 @@ class Sender implements Header
 
     /**
      * Get header value
-     * 
+     *
      * @return string
      */
     public function getFieldValue()
     {
-        if (!$this->address instanceof AddressDescription) {
+        if (!$this->address instanceof Mail\Address\AddressInterface) {
             return '';
         }
 
@@ -105,7 +103,7 @@ class Sender implements Header
         if (!empty($name)) {
             $encoding = $this->getEncoding();
             if ('ASCII' !== $encoding) {
-                $name  = HeaderWrap::mimeEncodeValue($name, $encoding, false);
+                $name  = HeaderWrap::mimeEncodeValue($name, $encoding);
             }
             $email = sprintf('%s %s', $name, $email);
         }
@@ -114,11 +112,11 @@ class Sender implements Header
 
     /**
      * Set header encoding
-     * 
-     * @param  string $encoding 
+     *
+     * @param  string $encoding
      * @return Sender
      */
-    public function setEncoding($encoding) 
+    public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
         return $this;
@@ -126,7 +124,7 @@ class Sender implements Header
 
     /**
      * Get header encoding
-     * 
+     *
      * @return string
      */
     public function getEncoding()
@@ -136,30 +134,30 @@ class Sender implements Header
 
     /**
      * Serialize to string
-     * 
+     *
      * @return string
      */
     public function toString()
     {
         return 'Sender: ' . $this->getFieldValue();
     }
-    
+
     /**
      * Set the address used in this header
-     * 
-     * @param  string|AddressDescription $emailOrAddress 
-     * @param  null|string $name 
+     *
+     * @param  string|\Zend\Mail\Address\AddressInterface $emailOrAddress
+     * @param  null|string $name
+     * @throws Exception\InvalidArgumentException
      * @return Sender
      */
     public function setAddress($emailOrAddress, $name = null)
     {
         if (is_string($emailOrAddress)) {
-            $emailOrAddress = new Address($emailOrAddress, $name);
-        }
-        if (!$emailOrAddress instanceof AddressDescription) {
+            $emailOrAddress = new Mail\Address($emailOrAddress, $name);
+        } elseif (!$emailOrAddress instanceof Mail\Address\AddressInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects a string or AddressDescription object; received "%s"',
-                __METHOD__, 
+                '%s expects a string or AddressInterface object; received "%s"',
+                __METHOD__,
                 (is_object($emailOrAddress) ? get_class($emailOrAddress) : gettype($emailOrAddress))
             ));
         }
@@ -169,8 +167,8 @@ class Sender implements Header
 
     /**
      * Retrieve the internal address from this header
-     * 
-     * @return AddressDescription|null
+     *
+     * @return \Zend\Mail\Address\AddressInterface|null
      */
     public function getAddress()
     {

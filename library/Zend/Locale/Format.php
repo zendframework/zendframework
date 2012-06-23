@@ -19,12 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Locale;
 
-use Zend\Cache\Storage\Adapter,
+use Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Locale\Data\Cldr;
 
 /**
@@ -101,7 +98,7 @@ class Format
                     } else if ((gettype($value) !== 'string') and ($value !== NULL)) {
                         throw new Exception\InvalidArgumentException(
                           "Unknown number format type '" . gettype($value) . "'. "
-                            . "Format '$value' must be a valid number format string."
+                            . "Format must be a valid number format string."
                         );
                     }
                     break;
@@ -116,7 +113,7 @@ class Format
                     } else if ((gettype($value) !== 'string') and ($value !== NULL)) {
                         throw new Exception\InvalidArgumentException(
                           "Unknown dateformat type '" . gettype($value) . "'. "
-                            . "Format '$value' must be a valid ISO or PHP date format string."
+                            . "Format must be a valid ISO or PHP date format string."
                         );
                     } else {
                         if (((isset($options['format_type']) === true) and ($options['format_type'] == 'php')) or
@@ -129,7 +126,7 @@ class Format
                 case 'format_type' :
                     if (($value != 'php') && ($value != 'iso')) {
                         throw new Exception\InvalidArgumentException(
-                          "Unknown date format type '$value'. Only 'iso' and 'php'"
+                          "Unknown date format type. Only 'iso' and 'php'"
                            . " are supported."
                         );
                     }
@@ -139,7 +136,6 @@ class Format
                     if (($value !== true) && ($value !== false)) {
                         throw new Exception\InvalidArgumentException(
                           "Enabling correction of dates must be either true or false"
-                            . "(fix_date='$value')."
                         );
                     }
                     break;
@@ -149,7 +145,7 @@ class Format
                     break;
 
                 case 'cache' :
-                    if ($value instanceof CacheAdapter) {
+                    if ($value instanceof CacheStorage) {
                         Cldr::setCache($value);
                     }
                     break;
@@ -165,14 +161,14 @@ class Format
 
                     if (($value < -1) || ($value > 30)) {
                         throw new Exception\InvalidArgumentException(
-                          "'$value' precision is not a whole number less than 30."
+                          'Precision is not a whole number less than 30.'
                          );
                     }
                     break;
 
                 default:
                     throw new Exception\InvalidArgumentException(
-                      "Unknown option: '$name' = '$value'"
+                      "Unknown option: '$name'"
                     );
                     break;
 
@@ -184,13 +180,13 @@ class Format
 
     /**
      * Changes the numbers/digits within a given string from one script to another
-     * 'Decimal' representated the stardard numbers 0-9, if a script does not exist
+     * 'Decimal' represented the standard numbers 0-9, if a script does not exist
      * an exception will be thrown.
      *
      * Examples for conversion from Arabic to Latin numerals:
      *   convertNumerals('١١٠ Tests', 'Arab'); -> returns '100 Tests'
      * Example for conversion from Latin to Arabic numerals:
-     *   convertNumerals('100 Tests', 'Latn', 'Arab'); -> returns '١١٠ Tests'
+     *   convertNumerals('100 Tests', 'Latin', 'Arab'); -> returns '١١٠ Tests'
      *
      * @param  string  $input  String to convert
      * @param  string  $from   Script to parse, see {@link Zend_Locale::getScriptList()} for details.

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Application\Resource;
 
 use Zend\Controller\Action\Helper\ViewRenderer;
@@ -38,7 +35,7 @@ use Zend\Controller\Action\Helper\ViewRenderer;
 class View extends AbstractResource
 {
     /**
-     * @var \Zend\View\Renderer
+     * @var \Zend\View\Renderer\RendererInterface
      */
     protected $_view;
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.livedocx"><info><title>Zend_Service_LiveDocx</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.livedocx"><title>Zend_Service_LiveDocx</title>
     
 
-    <section xml:id="zend.service.livedocx.introduction"><info><title>Introduction to LiveDocx</title></info>
+    <section xml:id="zend.service.livedocx.introduction"><title>Introduction to LiveDocx</title>
         
 
         <para>
@@ -66,7 +66,7 @@
             </listitem>
         </itemizedlist>
 
-        <section xml:id="zend.service.livedocx.account"><info><title>Sign Up for an Account</title></info>
+        <section xml:id="zend.service.livedocx.account"><title>Sign Up for an Account</title>
             
 
             <para>
@@ -78,7 +78,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.service.livedocx.templates-documents"><info><title>Templates and Documents</title></info>
+        <section xml:id="zend.service.livedocx.templates-documents"><title>Templates and Documents</title>
             
 
             <para>
@@ -100,14 +100,14 @@
             </para>
         </section>
 
-        <section xml:id="zend.service.livedocx.formats"><info><title>Supported File Formats</title></info>
+        <section xml:id="zend.service.livedocx.formats"><title>Supported File Formats</title>
             
 
             <para>
                 LiveDocx supports the following file formats:
             </para>
 
-            <section xml:id="zend.service.livedocx.formats.template"><info><title>Template File Formats (input)</title></info>
+            <section xml:id="zend.service.livedocx.formats.template"><title>Template File Formats (input)</title>
                 
 
                 <para>
@@ -145,7 +145,7 @@
                 </itemizedlist>
             </section>
 
-            <section xml:id="zend.service.livedocx.formats.document"><info><title>Document File Formats (output):</title></info>
+            <section xml:id="zend.service.livedocx.formats.document"><title>Document File Formats (output):</title>
                 
 
                 <para>
@@ -204,7 +204,7 @@
                 </itemizedlist>
             </section>
 
-            <section xml:id="zend.service.livedocx.formats.image"><info><title>Image File Formats (output):</title></info>
+            <section xml:id="zend.service.livedocx.formats.image"><title>Image File Formats (output):</title>
                 
 
                 <para>
@@ -259,7 +259,7 @@
         </section>
     </section>
 
-    <section xml:id="zend.service.livedocx.mailmerge"><info><title>Zend_Service_LiveDocx_MailMerge</title></info>
+    <section xml:id="zend.service.livedocx.mailmerge"><title>Zend_Service_LiveDocx_MailMerge</title>
         
 
         <para>
@@ -267,7 +267,7 @@
              <classname>Zend_Service_LiveDocx</classname> family.
         </para>
 
-        <section xml:id="zend.service.livedocx.mailmerge.generation"><info><title>Document Generation Process</title></info>
+        <section xml:id="zend.service.livedocx.mailmerge.generation"><title>Document Generation Process</title>
             
 
             <para>
@@ -297,7 +297,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.service.livedocx.mailmerge.templates"><info><title>Creating Templates in Microsoft Word 2007</title></info>
+        <section xml:id="zend.service.livedocx.mailmerge.templates"><title>Creating Templates in Microsoft Word 2007</title>
             
 
             <para>
@@ -384,7 +384,7 @@ file_put_contents('document.pdf', $document);
             </para>
         </section>
 
-        <section xml:id="zend.service.livedocx.mailmerge.advanced"><info><title>Advanced Mail-Merge</title></info>
+        <section xml:id="zend.service.livedocx.mailmerge.advanced"><title>Advanced Mail-Merge</title>
             
 
             <para>
@@ -532,7 +532,7 @@ file_put_contents('document.pdf', $document);
             </para>
         </section>
 
-        <section xml:id="zend.service.livedocx.mailmerge.bitmaps"><info><title>Generating bitmaps image files</title></info>
+        <section xml:id="zend.service.livedocx.mailmerge.bitmaps"><title>Generating bitmaps image files</title>
             
 
             <para>
@@ -617,7 +617,7 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
             </para>
         </section>
 
-        <section xml:id="zend.service.livedocx.mailmerge.templates-types"><info><title>Local vs. Remote Templates</title></info>
+        <section xml:id="zend.service.livedocx.mailmerge.templates-types"><title>Local vs. Remote Templates</title>
             
 
             <para>
@@ -687,7 +687,7 @@ $phpLiveDocx->setRemoteTemplate('template.docx');
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.service.livedocx.mailmerge.information"><info><title>Getting Information</title></info>
+        <section xml:id="zend.service.livedocx.mailmerge.information"><title>Getting Information</title>
             
 
             <para>
@@ -695,7 +695,7 @@ $phpLiveDocx->setRemoteTemplate('template.docx');
                 to get information on field names, available fonts and supported formats.
             </para>
 
-            <example xml:id="zend.service.livedocx.mailmerge.information.getfieldname"><info><title>Get Array of Field Names in Template</title></info>
+            <example xml:id="zend.service.livedocx.mailmerge.information.getfieldname"><title>Get Array of Field Names in Template</title>
                 
 
                 <para>
@@ -720,7 +720,7 @@ foreach ($fieldNames as $fieldName) {
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.service.livedocx.mailmerge.information.getblockfieldname"><info><title>Get Array of Block Field Names in Template</title></info>
+            <example xml:id="zend.service.livedocx.mailmerge.information.getblockfieldname"><title>Get Array of Block Field Names in Template</title>
                 
 
                 <para>
@@ -750,7 +750,7 @@ foreach ($blockNames as $blockName) {
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.service.livedocx.mailmerge.information.getfontnames"><info><title>Get Array of Fonts Installed on Server</title></info>
+            <example xml:id="zend.service.livedocx.mailmerge.information.getfontnames"><title>Get Array of Fonts Installed on Server</title>
                 
 
                 <para>
@@ -779,7 +779,7 @@ Zend_Debug::dump($phpLiveDocx->getFontNames());
                 </para>
             </example>
 
-            <example xml:id="zend.service.livedocx.mailmerge.information.gettemplateformats"><info><title>Get Array of Supported Template File Formats</title></info>
+            <example xml:id="zend.service.livedocx.mailmerge.information.gettemplateformats"><title>Get Array of Supported Template File Formats</title>
                 
 
                 <para>
@@ -806,7 +806,7 @@ Zend_Debug::dump($phpLiveDocx->getTemplateFormats());
                 </para>
             </example>
 
-            <example xml:id="zend.service.livedocx.mailmerge.information.getdocumentformats"><info><title>Get Array of Supported Document File Formats</title></info>
+            <example xml:id="zend.service.livedocx.mailmerge.information.getdocumentformats"><title>Get Array of Supported Document File Formats</title>
                 
 
                 <para>
@@ -826,7 +826,7 @@ Zend_Debug::dump($phpLiveDocx->getDocumentFormats());
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.service.livedocx.mailmerge.information.getimageformats"><info><title>Get Array of Supported Image File Formats</title></info>
+            <example xml:id="zend.service.livedocx.mailmerge.information.getimageformats"><title>Get Array of Supported Image File Formats</title>
                 
 
                 <para>

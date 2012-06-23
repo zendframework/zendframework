@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\InfoCard\XML\Assertion;
 
 use Zend\InfoCard\XML;
@@ -29,9 +26,6 @@ use Zend\InfoCard\XML;
 /**
  * Factory object to retrieve an Assertion object based on the type of XML document provided
  *
- * @uses       \Zend\InfoCard\XML\Assertion
- * @uses       \Zend\InfoCard\XML\Assertion\SAML
- * @uses       \Zend\InfoCard\XML\Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml
@@ -48,7 +42,6 @@ final class Factory
     /**
      * Constructor (disabled)
      *
-     * @return void
      */
     private function __construct()
     {
@@ -57,10 +50,9 @@ final class Factory
     /**
      * Returns an instance of a InfoCard Assertion object based on the XML data provided
      *
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws XML\Exception\InvalidArgumentException
      * @param string $xmlData The XML-Formatted Assertion
-     * @return \Zend\InfoCard\XML\Assertion
-     * @throws \Zend\InfoCard\XML\Exception
+     * @return object
      */
     static public function getInstance($xmlData)
     {

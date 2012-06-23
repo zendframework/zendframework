@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 
 use Zend\View\Exception,
-    Zend\View\Model;
+    Zend\View\Model\ModelInterface as Model;
 
 /**
  * Helper for rendering child view models

@@ -18,27 +18,20 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Amf\Response;
 
-use Zend\Amf\Response as AMFResponse,
-    Zend\Amf\Parser,
+use Zend\Amf\Parser,
     Zend\Amf\Parser\Amf0,
     Zend\Amf;
 
 /**
  * Handles converting the PHP object ready for response back into AMF
  *
- * @uses       \Zend\Amf\Constants
- * @uses       \Zend\Amf\Parser\Amf0\Serializer
- * @uses       \Zend\Amf\Parser\OutputStream
  * @package    Zend_Amf
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StreamResponse implements AMFResponse
+class StreamResponse implements ResponseInterface
 {
     /**
      * @var int Object encoding for response

@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Amf\Parser\Amf3;
 use Zend\Amf\Parser\AbstractDeserializer,
     Zend\Amf,
-    Zend\Amf\Parse;
+    Zend\Amf\Parser;
 
 /**
  * Read an AMF3 input stream and convert it into PHP data types.
@@ -33,11 +30,6 @@ use Zend\Amf\Parser\AbstractDeserializer,
  * @todo       readObject to handle Typed Objects
  * @todo       readXMLStrimg to be implemented.
  * @todo       Class could be implemented as Factory Class with each data type it's own class.
- * @uses       Zend\Amf\Constants
- * @uses       Zend\Amf\Exception
- * @uses       Zend\Amf\Parser\Deserializer
- * @uses       Zend\Amf\Parser\TypeLoader
- * @uses       Zend\Date\Date
  * @package    Zend_Amf
  * @subpackage Parse_Amf3
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -78,7 +70,7 @@ class Deserializer extends AbstractDeserializer
      *
      * @param  integer $typeMarker
      * @return mixed Whatever the corresponding PHP data type is
-     * @throws Zend\Amf\Exception for unidentified marker type
+     * @throws Parser\Exception\InvalidArgumentException for unidentified marker type
      */
     public function readTypeMarker($typeMarker = null)
     {
@@ -177,6 +169,7 @@ class Deserializer extends AbstractDeserializer
      * - modified-utf-8 = *OCTET
      *
      * @return String
+     * @throws Parser\Exception\OutOfBoundsException
      */
     public function readString()
     {
@@ -213,6 +206,7 @@ class Deserializer extends AbstractDeserializer
      * - date = 0x08 integer-data [ number-data ]
      *
      * @return \Zend\Date\Date
+     * @throws Parser\Exception\OutOfBoundsException
      */
     public function readDate()
     {
@@ -238,6 +232,7 @@ class Deserializer extends AbstractDeserializer
      * - array = 0x09 integer-data ( [ 1OCTET *amf3-data ] | [OCTET *amf3-data 1] | [ OCTET *amf-data ] )
      *
      * @return array
+     * @throws Parser\Exception\OutOfBoundsException
      */
     public function readArray()
     {
@@ -276,6 +271,7 @@ class Deserializer extends AbstractDeserializer
      *
      * @todo   Rather than using an array of traitsInfo create Zend_Amf_Value_TraitsInfo
      * @return object|array
+     * @throws Parser\Exception\OutOfBoundsException
      */
     public function readObject()
     {

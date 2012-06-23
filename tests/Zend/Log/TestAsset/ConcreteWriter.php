@@ -5,11 +5,7 @@ use Zend\Log\Writer\AbstractWriter;
 
 class ConcreteWriter extends AbstractWriter
 {
-    protected function _write($event)
-    {
-    }
-
-    static public function factory($config = array())
+    protected function doWrite(array $event)
     {
     }
 }

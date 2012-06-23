@@ -19,16 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 
 /**
  * Helper for setting and retrieving script elements for inclusion in HTML body
  * section
  *
- * @uses       Zend_View_Helper_Head_Script
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

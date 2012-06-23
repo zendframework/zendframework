@@ -21,6 +21,8 @@
 
 namespace Zend\Mail\Header;
 
+use Zend\Mail\Headers;
+
 /**
  * @todo       Allow setting date from DateTime, Zend\Date, or string
  * @category   Zend
@@ -29,7 +31,7 @@ namespace Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Received implements MultipleHeaderDescription
+class Received implements HeaderInterface, MultipleHeadersInterface
 {
     /**
      * @var string
@@ -52,8 +54,7 @@ class Received implements MultipleHeaderDescription
      */
     public static function fromString($headerLine)
     {
-
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'received') {
@@ -117,11 +118,12 @@ class Received implements MultipleHeaderDescription
     {
         return 'Received: ' . $this->getFieldValue();
     }
-    
+
     /**
      * Serialize collection of Received headers to string
-     * 
-     * @param  array $headers 
+     *
+     * @param  array $headers
+     * @throws Exception\RuntimeException
      * @return string
      */
     public function toStringMultipleHeaders(array $headers)
@@ -135,6 +137,6 @@ class Received implements MultipleHeaderDescription
             }
             $strings[] = $header->toString();
         }
-        return implode("\r\n", $strings);
+        return implode(Headers::EOL, $strings);
     }
 }

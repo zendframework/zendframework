@@ -7,6 +7,6 @@ class CustomSyslogWriter extends SyslogWriter
 {
     public function getFacility()
     {
-        return $this->_facility;
+        return $this->facility;
     }
 }

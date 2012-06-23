@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Layout;
 use Zend\Controller,
     Zend\Layout,
@@ -227,7 +224,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     {
         $layout = new Layout\Layout();
         $view = $layout->getView();
-        $this->assertTrue($view instanceof View\Renderer);
+        $this->assertTrue($view instanceof View\Renderer\RendererInterface);
     }
 
     /**
@@ -247,7 +244,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     public function testViewAccessorsAllowSettingView()
     {
         $layout = new Layout\Layout();
-        $view   = new View\PhpRenderer();
+        $view   = new View\Renderer\PhpRenderer();
         $layout->setView($view);
         $received = $layout->getView();
         $this->assertSame($view, $received);

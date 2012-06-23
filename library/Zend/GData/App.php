@@ -20,9 +20,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData;
 
 use Zend\Http,
@@ -230,26 +227,22 @@ class App
     }
 
     /**
-     * Set the \Zend\Http\Client object used for communication
+     * Set the Zend\Http\Client object used for communication
      *
      * @param \Zend\Http\Client $client The client to use for communication
      * @throws \Zend\GData\App\HttpException
      * @return \Zend\GData\App Provides a fluent interface
      */
-    public function setHttpClient($client,
-        $applicationId = 'MyCompany-MyApp-1.0')
+    public function setHttpClient(Http\Client $client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
         if ($client === null) {
             $client = new Http\Client();
         }
-        if (!$client instanceof Http\Client) {
-            throw new App\HttpException(
-                'Argument is not an instance of Zend\Http\Client.');
-        }
+
         $userAgent = $applicationId . ' Zend_Framework_Gdata/' .
             \Zend\Version::VERSION;
         $client->getRequest()->headers()->addHeaderLine('User-Agent', $userAgent);
-        $client->setConfig(array(
+        $client->setOptions(array(
             'strictredirects' => true
             )
         );
@@ -283,7 +276,7 @@ class App
             $client = new Http\Client();
             $userAgent = 'Zend_Framework_Gdata/' . \Zend\Version::VERSION;
             $client->setHeaders('User-Agent', $userAgent);
-            $client->setConfig(array(
+            $client->setOptions(array(
                 'strictredirects' => true
                 )
             );
@@ -396,7 +389,7 @@ class App
 
     /**
      * Set the major protocol version that should be used. Values < 1 will
-     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
+     * cause a \Zend\GData\App\InvalidArgumentException to be thrown.
      *
      * @see _majorProtocolVersion
      * @param int $value The major protocol version to use.
@@ -425,7 +418,7 @@ class App
     /**
      * Set the minor protocol version that should be used. If set to NULL, no
      * minor protocol version will be sent to the server. Values < 0 will
-     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
+     * cause a \Zend\GData\App\InvalidArgumentException to be thrown.
      *
      * @see _minorProtocolVersion
      * @param (int|NULL) $value The minor protocol version to use.
@@ -464,7 +457,7 @@ class App
      *
      * @param string $method The HTTP method for the request - 'GET', 'POST',
      *                       'PUT', 'DELETE'
-     * @param string $url The URL to which this request is being performed,
+     * @param string $uri The URL to which this request is being performed,
      *                    or null if found in $data
      * @param array $headers An associative array of HTTP headers for this
      *                       request
@@ -476,7 +469,7 @@ class App
      *               'method', 'url', 'data', 'headers', 'contentType'
      */
     public function prepareRequest($method,
-                                   $url = null,
+                                   $uri = null,
                                    $headers = array(),
                                    $data = null,
                                    $contentTypeOverride = null)
@@ -489,8 +482,8 @@ class App
 
         $rawData = null;
         $finalContentType = null;
-        if ($url == null) {
-            $url = $this->_defaultPostUri;
+        if ($uri == null) {
+            $uri = $this->_defaultPostUri;
         }
 
         if (is_string($data)) {
@@ -509,8 +502,8 @@ class App
             }
             if ($method == 'PUT' || $method == 'DELETE') {
                 $editLink = $data->getEditLink();
-                if ($editLink != null && $url == null) {
-                    $url = $editLink->getHref();
+                if ($editLink != null && $uri == null) {
+                    $uri = $editLink->getHref();
                 }
             }
         } elseif ($data instanceof App\Entry) {
@@ -519,7 +512,7 @@ class App
             if ($method == 'PUT' || $method == 'DELETE') {
                 $editLink = $data->getEditLink();
                 if ($editLink != null) {
-                    $url = $editLink->getHref();
+                    $uri = $editLink->getHref();
                 }
             }
         } elseif ($data instanceof App\MediaSource) {
@@ -559,7 +552,7 @@ class App
             $finalContentType = $contentTypeOverride;
         }
 
-        return array('method' => $method, 'url' => $url,
+        return array('method' => $method, 'url' => $uri,
             'data' => $rawData, 'headers' => $headers,
             'contentType' => $finalContentType);
     }
@@ -569,7 +562,7 @@ class App
      *
      * @param string $method The HTTP method for the request - 'GET', 'POST',
      *                       'PUT', 'DELETE'
-     * @param string $url The URL to which this request is being performed
+     * @param string $uri The URL to which this request is being performed
      * @param array $headers An associative array of HTTP headers
      *                       for this request
      * @param string $body The body of the HTTP request
@@ -579,7 +572,7 @@ class App
      *                              s results in one
      * @return \Zend\Http\Response The response object
      */
-    public function performHttpRequest($method, $url, $headers = null,
+    public function performHttpRequest($method, $uri, $headers = null,
         $body = null, $contentType = null, $remainingRedirects = null)
     {
         if ($remainingRedirects === null) {
@@ -605,11 +598,13 @@ class App
                         'You must specify the data to post as either a ' .
                         'string or a child of Zend\GData\App\Entry');
         }
-        if ($url === null) {
+        if ($uri === null) {
             throw new App\InvalidArgumentException(
                 'You must specify an URI to which to post.');
         }
-        //$headers['Content-Type'] = $contentType;
+        if ($contentType != null){
+            $headers['Content-Type'] = $contentType; 
+        }
         if (self::getGzipEnabled()) {
             // some services require the word 'gzip' to be in the user-agent
             // header in addition to the accept-encoding header
@@ -631,16 +626,14 @@ class App
 
         // Set the params for the new request to be performed
         $this->_httpClient->setHeaders($headers);
-        $urlObj = Uri\UriFactory::factory($url);
-        preg_match("/^(.*?)(\?.*)?$/", $url, $matches);
+        $uriObj = Uri\UriFactory::factory($uri);
+        preg_match("/^(.*?)(\?.*)?$/", $uri, $matches);
         $this->_httpClient->setUri($matches[1]);
-        $queryArray = $urlObj->getQueryAsArray();
-        foreach ($queryArray as $name => $value) {
-          $this->_httpClient->setParameterGet($name, $value);
-        }
+        $queryArray = $uriObj->getQueryAsArray();
+        $this->_httpClient->setParameterGet($queryArray);
 
 
-        $this->_httpClient->setConfig(array('maxredirects' => 0));
+        $this->_httpClient->setOptions(array('maxredirects' => 0));
 
         // Set the proper adapter if we are handling a streaming upload
         $usingMimeStream = false;
@@ -668,7 +661,7 @@ class App
             if ($usingMimeStream) {
                 $this->_httpClient->setAdapter($oldHttpAdapter);
             }
-        } catch (\Zend\Http\Client\Exception $e) {
+        } catch (\Zend\Http\Client\Exception\ExceptionInterface $e) {
             // reset adapter
             if ($usingMimeStream) {
                 $this->_httpClient->setAdapter($oldHttpAdapter);
@@ -760,7 +753,7 @@ class App
         $header = $response->headers()->get('GData-Version');
         $majorProtocolVersion = null;
         $minorProtocolVersion = null;
-        if ($header instanceof Http\Header\HeaderDescription) {
+        if ($header instanceof Http\Header\HeaderInterface) {
             $protocolVersionStr = $header->getFieldValue();
             // Extract protocol major and minor version from header
             $delimiterPos = strpos($protocolVersionStr, '.');
@@ -1068,9 +1061,9 @@ class App
      * significant amount of time to complete. In some cases this may cause
      * execution to timeout without proper precautions in place.
      *
-     * @param $feed The feed to iterate through.
+     * @param object $feed The feed to iterate through.
      * @return mixed A new feed of the same type as the one originally
-     *          passed in, containing all relevent entries.
+     *          passed in, containing all relevant entries.
      */
     public function retrieveAllEntriesForFeed($feed) {
         $feedClass = get_class($feed);
@@ -1098,11 +1091,11 @@ class App
      * NOTE: This will not work if you have customized the adapter
      * already to use a proxy server or other interface.
      *
-     * @param $logfile The logfile to use when logging the requests
+     * @param string $logfile The logfile to use when logging the requests
      */
     public function enableRequestDebugLogging($logfile)
     {
-        $this->_httpClient->setConfig(array(
+        $this->_httpClient->setOptions(array(
             'adapter' => 'Zend\GData\App\LoggingHttpClientAdapterSocket',
             'logfile' => $logfile
             ));

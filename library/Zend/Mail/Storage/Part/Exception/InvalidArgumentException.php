@@ -20,25 +20,19 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mail\Storage\Part\Exception;
 
-use Zend\Mail\Storage\Part\Exception;
+use Zend\Mail\Storage\Exception;
 
 /**
  * Exception for Zend_Mail component.
  *
- * @uses       Zend\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements Exception
-{
-}
+class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+    ExceptionInterface
+{}

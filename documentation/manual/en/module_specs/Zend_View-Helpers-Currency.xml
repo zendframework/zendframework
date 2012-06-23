@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.currency"><info><title>Currency Helper</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.currency"><title>Currency Helper</title>
     
 
     <para>
@@ -59,7 +59,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.currency.registered"><info><title>Registered instance</title></info>
+    <example xml:id="zend.view.helpers.initial.currency.registered"><title>Registered instance</title>
         
 
         <para>
@@ -85,7 +85,7 @@ echo $this->currency(1234.56);
         within your view and configure the helper afterwards.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.currency.afterwards"><info><title>Within the view</title></info>
+    <example xml:id="zend.view.helpers.initial.currency.afterwards"><title>Within the view</title>
         
 
         <para>
@@ -107,7 +107,7 @@ $this->currency()->setCurrency($currency)->currency(1234.56);
         also use it directly.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.currency.directly.example-1"><info><title>Direct usage</title></info>
+    <example xml:id="zend.view.helpers.initial.currency.directly.example-1"><title>Direct usage</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -126,7 +126,7 @@ echo $helper->currency(1234.56); // this returns '€ 1.234,56'
         accepts some options which may be used to change the behaviour and output of the helper.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.currency.directly.example-2"><info><title>Direct usage</title></info>
+    <example xml:id="zend.view.helpers.initial.currency.directly.example-2"><title>Direct usage</title>
         
 
         <programlisting language="php"><![CDATA[

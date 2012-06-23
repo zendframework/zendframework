@@ -18,13 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Translator;
 
 use Traversable,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Stdlib\ArrayUtils;
 
 /**
@@ -157,7 +154,7 @@ class Translator
     /**
      * Returns the set cache
      *
-     * @return CacheAdapter The set cache
+     * @return CacheStorage The set cache
      */
     public static function getCache()
     {
@@ -167,10 +164,10 @@ class Translator
     /**
      * Sets a cache for all instances of Zend_Translator
      *
-     * @param  CacheAdapter $cache Cache to store to
+     * @param  CacheStorage $cache Cache to store to
      * @return void
      */
-    public static function setCache(CacheAdapter $cache)
+    public static function setCache(CacheStorage $cache)
     {
         Adapter\AbstractAdapter::setCache($cache);
     }
@@ -193,17 +190,6 @@ class Translator
     public static function removeCache()
     {
         Adapter\AbstractAdapter::removeCache();
-    }
-
-    /**
-     * Clears all set cache data
-     *
-     * @param string $tag Tag to clear when the default tag name is not used
-     * @return void
-     */
-    public static function clearCache($tag = null)
-    {
-        Adapter\AbstractAdapter::clearCache($tag);
     }
 
     /**

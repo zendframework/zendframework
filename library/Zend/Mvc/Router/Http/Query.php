@@ -15,20 +15,17 @@
  * @category   Zend
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mvc\Router\Http;
 
 use Zend\Mvc\Router\Http\RouteMatch;
 
 use Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Mvc\Router\Exception;
 
 /**
@@ -36,44 +33,44 @@ use Traversable,
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Query implements Route
+class Query implements RouteInterface
 {
-    
+
     /**
      * Default values.
-     * 
+     *
      * @var array
      */
     protected $defaults;
-    
+
     /**
      * List of assembled parameters.
-     * 
+     *
      * @var array
      */
     protected $assembledParams = array();
 
     /**
      * Create a new wildcard route.
-     * 
-     * @param  array  $defaults
-     * @return void
+     *
+     * @param array $defaults
      */
     public function __construct(array $defaults = array())
     {
         $this->defaults = $defaults;
     }
-    
+
     /**
-     * factory(): defined by Route interface.
+     * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
-     * @param  array|Traversable $options
-     * @return void
+     * @param  array|\Traversable $options
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @return Query
      */
     public static function factory($options = array())
     {
@@ -83,7 +80,7 @@ class Query implements Route
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
 
-        
+
         if (!isset($options['defaults'])) {
             $options['defaults'] = array();
         }
@@ -92,26 +89,45 @@ class Query implements Route
     }
 
     /**
-     * match(): defined by Route interface.
+     * match(): defined by RouteInterface interface.
      *
      * @see    Route::match()
      * @param  Request $request
+     * @param  int|null $pathOffset
      * @return RouteMatch
      */
     public function match(Request $request, $pathOffset = null)
     {
-        $matches = array();
-        
-        foreach($_GET as $key=>$value) {
-            $matches[urldecode($key)] = urldecode($value);
-            
+        if (!method_exists($request, 'query')) {
+            return null;
         }
+
+        $matches = $this->recursiveUrldecode($request->query()->toArray());
 
         return new RouteMatch(array_merge($this->defaults, $matches));
     }
 
     /**
-     * assemble(): Defined by Route interface.
+     * Recursively urldecodes keys and values from an array
+     *
+     * @param array $array
+     * @return array
+     */
+    protected function recursiveUrldecode(array $array)
+    {
+        $matches = array();
+        foreach($array as $key => $value) {
+            if (is_array($value)) {
+                $matches[urldecode($key)] = $this->recursiveUrldecode($value);
+            } else {
+                $matches[urldecode($key)] = urldecode($value);
+            }
+        }
+        return $matches;
+    }
+
+    /**
+     * assemble(): Defined by RouteInterface interface.
      * @see    Route::assemble()
      *
      * @param  array $params
@@ -120,22 +136,24 @@ class Query implements Route
      */
     public function assemble(array $params = array(), array $options = array())
     {
-        $mergedParams = array_merge($this->defaults, $params);
+        $mergedParams          = array_merge($this->defaults, $params);
+        $this->assembledParams = array();
 
-        if (count($mergedParams)) {
+        if (isset($options['uri']) && count($mergedParams)) {
             foreach ($mergedParams as $key => $value) {
                 $this->assembledParams[] = $key;
             }
-            
-            return '?' . str_replace('+', '%20', http_build_query($mergedParams));
+
+            $options['uri']->setQuery($mergedParams);
         }
-        
-        return null;
+
+        // A query does not contribute to the path, thus nothing is returned.
+        return '';
     }
-    
+
     /**
-     * getAssembledParams(): defined by Route interface.
-     * 
+     * getAssembledParams(): defined by RouteInterface interface.
+     *
      * @see    Route::getAssembledParams
      * @return array
      */

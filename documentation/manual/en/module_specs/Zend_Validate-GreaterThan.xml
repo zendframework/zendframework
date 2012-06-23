@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.greaterthan"><info><title>GreaterThan</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.greaterthan"><title>GreaterThan</title>
 
 
     <para>
@@ -7,7 +7,7 @@
         greater than a minimum border value.
     </para>
 
-    <note><info><title>Zend_Validate_GreaterThan supports only number validation</title></info>
+    <note><title>Zend_Validate_GreaterThan supports only number validation</title>
 
 
         <para>
@@ -16,7 +16,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.validate.set.greaterthan.options"><info><title>Supported options for Zend_Validate_GreaterThan</title></info>
+    <section xml:id="zend.validate.set.greaterthan.options"><title>Supported options for Zend_Validate_GreaterThan</title>
 
 
         <para>
@@ -41,7 +41,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.greaterthan.basic"><info><title>Basic usage</title></info>
+    <section xml:id="zend.validate.set.greaterthan.basic"><title>Basic usage</title>
 
 
         <para>
@@ -61,7 +61,7 @@ $return = $valid->isValid($value);
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.greaterthan.inclusively"><info><title>Validation inclusive the border value</title></info>
+    <section xml:id="zend.validate.set.greaterthan.inclusively"><title>Validation inclusive the border value</title>
 
 
         <para>

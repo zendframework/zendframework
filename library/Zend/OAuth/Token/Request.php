@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\OAuth\Token;
 
 use Zend\Http\Response as HTTPResponse,
@@ -28,10 +25,6 @@ use Zend\Http\Response as HTTPResponse,
     Zend\OAuth\Client;
 
 /**
- * @uses       \Zend\Http\Response
- * @uses       \Zend\OAuth\Client
- * @uses       \Zend\OAuth\Http\Utility
- * @uses       \Zend\OAuth\Token\Token
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

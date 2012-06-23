@@ -18,12 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\OAuth\Token;
 
-use Zend\OAuth\Config,
+use Zend\OAuth\Config\ConfigInterface as Config,
     Zend\OAuth,
     Zend\Uri;
 
@@ -39,10 +36,11 @@ class Access extends AbstractToken
      * Cast to HTTP header
      * 
      * @param  string $url 
-     * @param  \Zend\OAuth\Config $config 
+     * @param  Config $config
      * @param  null|array $customParams 
      * @param  null|string $realm 
      * @return string
+     * @throws OAuth\Exception\InvalidArgumentException
      */
     public function toHeader(
         $url, Config $config, array $customParams = null, $realm = null
@@ -51,7 +49,7 @@ class Access extends AbstractToken
         if (!$uri->isValid()
             || !in_array($uri->getScheme(), array('http', 'https'))
         ) {
-            throw new OAuth\Exception(
+            throw new OAuth\Exception\InvalidArgumentException(
                 '\'' . $url . '\' is not a valid URI'
             );
         }
@@ -66,6 +64,7 @@ class Access extends AbstractToken
      * @param  Zend\OAuth\Config $config 
      * @param  null|array $params 
      * @return string
+     * @throws OAuth\Exception\InvalidArgumentException
      */
     public function toQueryString($url, Config $config, array $params = null)
     {
@@ -73,7 +72,7 @@ class Access extends AbstractToken
         if (!$uri->isValid()
             || !in_array($uri->getScheme(), array('http', 'https'))
         ) {
-            throw new OAuth\Exception(
+            throw new OAuth\Exception\InvalidArgumentException(
                 '\'' . $url . '\' is not a valid URI'
             );
         }
@@ -86,9 +85,9 @@ class Access extends AbstractToken
      * 
      * @param  array $oauthOptions 
      * @param  null|string $uri 
-     * @param  null|array|Zend\Config\Config $config 
+     * @param  null|array|\Traversable $config
      * @param  bool $excludeCustomParamsFromHeader 
-     * @return Zend\OAuth\Client
+     * @return OAuth\Client
      */
     public function getHttpClient(array $oauthOptions, $uri = null, $config = null, $excludeCustomParamsFromHeader = true)
     {

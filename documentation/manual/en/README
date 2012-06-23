@@ -14,7 +14,7 @@ To generate using PhD, you need the following tools:
 - The ZF build tools:
   You can check these out locally within this directory by running the
   following command:
-  "svn co http://framework.zend.com/svn/framework/build-tools/trunk/build/tools/docs phd"
+  "svn co http://framework.zend.com/svn/framework/build-tools/trunk/build-tools/docs phd"
 
 From here, you need to collate the docbook sources to a single file, and
 then run PhD:
@@ -34,6 +34,12 @@ Using the xsltproc toolchain requires the following tools:
 - make
 - xsltproc
 - xmllint
+
+You can setup this environment variables to set a different DTD or stylesheet:
+
+- DOCBOOK_DTD=http://www.docbook.org/xml/5.0/dtd/docbook.dtd
+- DOCBOOK_XSL=http://docbook.sourceforge.net/release/xsl/1.76.1/html/chunk.xsl
+- DOCBOOK_FO_XSL=http://docbook.sourceforge.net/release/xsl/1.76.1/fo/docbook.xsl
 
 On Windows, you should use Cygwin software or another port of GNU 
 development tools.
@@ -66,7 +72,7 @@ http://www.sagehill.net/docbookxsl/index.html
 http://docbook.org/tdg/en/html/part2.html DocBook tag reference
 
 
-To generat a CHM project file, you must install MsHtmlHelpWorkshop.
+To generate a CHM project file, you must install MsHtmlHelpWorkshop.
 
 To build the CHM file on the command line navigate to the directory
 in which the manual html files are built as described above
@@ -79,4 +85,4 @@ where "C:/path/to/workshop/" is the path to MsHtmlHelpWorkshop.
 
 This will build a "Zend_Framework_LANGUAGE.chm" file.
 
- You should now have an index in the file..
+ You should now have an index in the file.

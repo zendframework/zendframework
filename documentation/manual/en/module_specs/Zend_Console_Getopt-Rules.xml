@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.rules"><info><title>Declaring Getopt Rules</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.rules"><title>Declaring Getopt Rules</title>
     
 
     <para>
@@ -24,7 +24,7 @@
         for reference on the options available.
     </para>
 
-    <section xml:id="zend.console.getopt.rules.short"><info><title>Declaring Options with the Short Syntax</title></info>
+    <section xml:id="zend.console.getopt.rules.short"><title>Declaring Options with the Short Syntax</title>
         
 
         <para>
@@ -37,7 +37,7 @@
             parameter.
         </para>
 
-        <example xml:id="zend.console.getopt.rules.short.example"><info><title>Using the Short Syntax</title></info>
+        <example xml:id="zend.console.getopt.rules.short.example"><title>Using the Short Syntax</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -59,7 +59,7 @@ $opts = new Zend_Console_Getopt('abp:');
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.rules.long"><info><title>Declaring Options with the Long Syntax</title></info>
+    <section xml:id="zend.console.getopt.rules.long"><title>Declaring Options with the Long Syntax</title>
         
 
         <para>
@@ -111,7 +111,7 @@ $opts = new Zend_Console_Getopt('abp:');
             to describe to a user how to use your program.
         </para>
 
-        <example xml:id="zend.console.getopt.rules.long.example"><info><title>Using the Long Syntax</title></info>
+        <example xml:id="zend.console.getopt.rules.long.example"><title>Using the Long Syntax</title>
             
 
             <programlisting language="php"><![CDATA[

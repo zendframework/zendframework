@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Tag;
 
 use Zend\Tag,
@@ -91,7 +88,7 @@ class ItemListTest extends \PHPUnit_Framework_TestCase
     {
         $list = new Tag\ItemList();
 
-        $this->setExpectedException('\Zend\Tag\Exception\OutOfBoundsException', 'Item must implement Zend\Tag\Taggable');
+        $this->setExpectedException('\Zend\Tag\Exception\OutOfBoundsException', 'Item must implement Zend\Tag\TaggableInterface');
         $list[] = 'test';
     }
 

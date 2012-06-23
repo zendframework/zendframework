@@ -18,14 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
  
-/**
-* @namespace
-*/
 namespace Zend\Feed\Writer\Extension\ITunes\Renderer;
-use Zend\Feed\Writer\Extension;
+
+use Zend\Feed\Writer\Extension,
+    DOMDocument,
+    DOMElement;
 
 /**
-* @uses \Zend\Feed\Writer\Extension\AbstractRenderer
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -79,7 +78,7 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setAuthors(\DOMDocument $dom, \DOMElement $root)
+    protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
         $authors = $this->getDataContainer()->getItunesAuthors();
         if (!$authors || empty($authors)) {
@@ -101,7 +100,7 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setBlock(\DOMDocument $dom, \DOMElement $root)
+    protected function _setBlock(DOMDocument $dom, DOMElement $root)
     {
         $block = $this->getDataContainer()->getItunesBlock();
         if ($block === null) {
@@ -121,7 +120,7 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setDuration(\DOMDocument $dom, \DOMElement $root)
+    protected function _setDuration(DOMDocument $dom, DOMElement $root)
     {
         $duration = $this->getDataContainer()->getItunesDuration();
         if (!$duration) {
@@ -141,7 +140,7 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setExplicit(\DOMDocument $dom, \DOMElement $root)
+    protected function _setExplicit(DOMDocument $dom, DOMElement $root)
     {
         $explicit = $this->getDataContainer()->getItunesExplicit();
         if ($explicit === null) {
@@ -161,7 +160,7 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setKeywords(\DOMDocument $dom, \DOMElement $root)
+    protected function _setKeywords(DOMDocument $dom, DOMElement $root)
     {
         $keywords = $this->getDataContainer()->getItunesKeywords();
         if (!$keywords || empty($keywords)) {
@@ -181,7 +180,7 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setSubtitle(\DOMDocument $dom, \DOMElement $root)
+    protected function _setSubtitle(DOMDocument $dom, DOMElement $root)
     {
         $subtitle = $this->getDataContainer()->getItunesSubtitle();
         if (!$subtitle) {
@@ -201,7 +200,7 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setSummary(\DOMDocument $dom, \DOMElement $root)
+    protected function _setSummary(DOMDocument $dom, DOMElement $root)
     {
         $summary = $this->getDataContainer()->getItunesSummary();
         if (!$summary) {

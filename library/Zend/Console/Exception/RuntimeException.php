@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Console\Exception;
 
 /**
@@ -31,7 +28,7 @@ namespace Zend\Console\Exception;
  */
 class RuntimeException
     extends \RuntimeException
-    implements \Zend\Console\Exception
+    implements ExceptionInterface
 {
     /**
      * Usage

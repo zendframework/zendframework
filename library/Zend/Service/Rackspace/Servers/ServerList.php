@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Rackspace\Servers;
 
 use Zend\Service\Rackspace\Servers as RackspaceServers;
@@ -29,11 +26,6 @@ use Zend\Service\Rackspace\Servers as RackspaceServers;
 /**
  * List of servers of Rackspace
  *
- * @uses       ArrayAccess
- * @uses       Countable
- * @uses       Iterator
- * @uses       OutOfBoundsException
- * @uses       Zend\Service\Rackspace\Servers
  * @category   Zend
  * @package    Zend\Service\Rackspace
  * @subpackage Servers

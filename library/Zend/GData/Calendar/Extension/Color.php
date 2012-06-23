@@ -19,17 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Calendar\Extension;
 
 /**
  * Represents the gCal:color element used by the Calendar data API
  * to define the color of a calendar in the UI.
  *
- * @uses       \Zend\GData\Calendar
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Calendar

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Markup\TestAsset\Renderer;
 
 use Zend\Markup\Renderer\AbstractRenderer,

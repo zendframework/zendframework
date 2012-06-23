@@ -20,9 +20,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\OpenId\Provider;
 
 use Zend\Http\Response,
@@ -32,10 +29,6 @@ use Zend\Http\Response,
 /**
  * OpenID provider (server) implementation
  *
- * @uses       Zend\OpenId\OpenId
- * @uses       Zend\OpenId\Extension
- * @uses       Zend\OpenId\Provider\Storage\File
- * @uses       Zend\OpenId\Provider\User\Session
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage Zend_OpenId_Provider

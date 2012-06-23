@@ -21,7 +21,9 @@
 
 namespace Zend\Tag\Cloud;
 
-use Zend\Loader\PluginBroker;
+use Zend\Loader\PluginBroker,
+    Zend\Tag\Exception\InvalidArgumentException,
+    Zend\Tag\Cloud\Decorator\DecoratorInterface as Decorator;
 
 /**
  * Broker for decorator instances
@@ -44,12 +46,12 @@ class DecoratorBroker extends PluginBroker
      * 
      * @param  mixed $plugin 
      * @return true
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof Decorator) {
-            throw new Exception('Tag cloud decorators must implement Zend\Tag\Cloud\Decorator');
+            throw new InvalidArgumentException('Tag cloud decorators must implement Zend\Tag\Cloud\Decorator\DecoratorInterface');
         }
         return true;
     }

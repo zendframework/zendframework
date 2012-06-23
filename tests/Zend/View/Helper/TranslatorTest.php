@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 use Zend\View\Helper;
 use Zend\Translator;
@@ -119,7 +116,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $helper = new Helper\Translator('something');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('must set an instance of Zend\Translator', $e->getMessage());
         }
     }
@@ -128,7 +125,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $this->helper->setTranslator('something');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('must set an instance of Zend\Translator', $e->getMessage());
         }
     }
@@ -137,7 +134,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $this->helper->getLocale();
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('must set an instance of Zend\Translator', $e->getMessage());
         }
     }
@@ -146,7 +143,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $this->helper->setLocale('de');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('must set an instance of Zend\Translator', $e->getMessage());
         }
     }

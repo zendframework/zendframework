@@ -21,9 +21,10 @@
 
 namespace Zend\Cache\Storage;
 
-use stdClass,
+use ArrayObject,
+    stdClass,
     Zend\Cache\Exception,
-    Zend\EventManager\EventManager;
+    Zend\EventManager\EventsCapableInterface;
 
 /**
  * @category   Zend
@@ -35,11 +36,11 @@ use stdClass,
 class Capabilities
 {
     /**
-     * The event manager
+     * The storage instance
      *
-     * @var null|EventManager
+     * @var StorageInterface
      */
-    protected $eventManager;
+    protected $storage;
 
     /**
      * A marker to set/change capabilities
@@ -56,24 +57,9 @@ class Capabilities
     protected $baseCapabilities;
 
     /**
-     * Clear all namespaces
-     */
-    protected $_clearAllNamespaces;
-
-    /**
-     * Clear by namespace
-     */
-    protected $_clearByNamespace;
-
-    /**
      * Expire read
      */
     protected $_expiredRead;
-
-    /**
-     * Iterable
-     */
-    protected $_iterable;
 
     /**
      * Max key length
@@ -116,13 +102,6 @@ class Capabilities
     protected $_supportedMetadata;
 
     /**
-     * Supports tagging? 
-     * 
-     * @var bool
-     */
-    protected $_tagging;
-
-    /**
      * Ttl precision
      */
     protected $_ttlPrecision;
@@ -135,63 +114,34 @@ class Capabilities
     /**
      * Constructor
      *
-     * @param stdClass $marker
-     * @param array $capabilities
-     * @param null|Zend\Cache\Storage\Capabilities $baseCapabilities
+     * @param Adapter           $adapter
+     * @param stdClass          $marker
+     * @param array             $capabilities
+     * @param null|Capabilities $baseCapabilities
      */
     public function __construct(
+        StorageInterface $storage,
         stdClass $marker,
         array $capabilities = array(),
         Capabilities $baseCapabilities = null
     ) {
-        $this->marker = $marker;
+        $this->storage = $storage;
+        $this->marker  = $marker;
         $this->baseCapabilities = $baseCapabilities;
+
         foreach ($capabilities as $name => $value) {
             $this->setCapability($marker, $name, $value);
         }
     }
 
     /**
-     * Returns if the dependency of Zend\EventManager is available
+     * Get the storage adapter
      *
-     * @return boolean
+     * @return Adapter
      */
-    public function hasEventManager()
+    public function getAdapter()
     {
-        return ($this->eventManager !== null || class_exists('Zend\EventManager\EventManager'));
-    }
-
-    /**
-     * Get the event manager
-     *
-     * @return EventManager
-     * @throws Exception\MissingDependencyException
-     */
-    public function getEventManager()
-    {
-        if ($this->eventManager instanceof EventManager) {
-            return $this->eventManager;
-        }
-
-        if (!class_exists('Zend\EventManager\EventManager')) {
-            throw new Exception\MissingDependencyException('Zend\EventManager\EventManager not found');
-        }
-
-        // create a new event manager object
-        $eventManager = new EventManager();
-
-        // trigger change event on change of a base capability
-        if ($this->baseCapabilities && $this->baseCapabilities->hasEventManager()) {
-            $onChange = function ($event) use ($eventManager)  {
-                $eventManager->trigger('change', $event->getTarget(), $event->getParams());
-            };
-            $this->baseCapabilities->getEventManager()->attach('change', $onChange);
-        }
-
-        // register event manager
-        $this->eventManager = $eventManager;
-
-        return $this->eventManager;
+        return $this->storage;
     }
 
     /**
@@ -475,93 +425,6 @@ class Capabilities
     }
 
     /**
-     * Get if items are iterable
-     *
-     * @return boolean
-     */
-    public function getIterable()
-    {
-        return $this->getCapability('iterable', false);
-    }
-
-    /**
-     * Set if items are iterable
-     *
-     * @param  stdClass $marker
-     * @param  boolean $flag
-     * @return Capabilities Fluent interface
-     */
-    public function setIterable(stdClass $marker, $flag)
-    {
-        return $this->setCapability($marker, 'iterable', (bool)$flag);
-    }
-
-    /**
-     * Get support to clear items of all namespaces
-     *
-     * @return boolean
-     */
-    public function getClearAllNamespaces()
-    {
-        return $this->getCapability('clearAllNamespaces', false);
-    }
-
-    /**
-     * Set support to clear items of all namespaces
-     *
-     * @param  stdClass $marker
-     * @param  boolean $flag
-     * @return Capabilities Fluent interface
-     */
-    public function setClearAllNamespaces(stdClass $marker, $flag)
-    {
-        return $this->setCapability($marker, 'clearAllNamespaces', (bool)$flag);
-    }
-
-    /**
-     * Get support to clear items by namespace
-     *
-     * @return boolean
-     */
-    public function getClearByNamespace()
-    {
-        return $this->getCapability('clearByNamespace', false);
-    }
-
-    /**
-     * Set support to clear items by namespace
-     *
-     * @param  stdClass $marker
-     * @param  boolean $flag
-     * @return Capabilities Fluent interface
-     */
-    public function setClearByNamespace(stdClass $marker, $flag)
-    {
-        return $this->setCapability($marker, 'clearByNamespace', (bool)$flag);
-    }
-
-    /**
-     * Set value for tagging
-     *
-     * @param  mixed tagging
-     * @return $this
-     */
-    public function setTagging(stdClass $marker, $tagging)
-    {
-        return $this->setCapability($marker, 'tagging', (bool) $tagging);
-    }
-    
-    /**
-     * Get value for tagging
-     *
-     * @return mixed
-     */
-    public function getTagging()
-    {
-        return $this->getCapability('tagging', false);
-    }
-
-    /**
      * Get a capability
      *
      * @param  string $name
@@ -598,9 +461,13 @@ class Capabilities
         $property = '_' . $name;
         if ($this->$property !== $value) {
             $this->$property = $value;
-            $this->getEventManager()->trigger('change', $this, array(
-                $name => $value
-            ));
+
+            // trigger event
+            if ($this->storage instanceof EventsCapableInterface) {
+                $this->storage->events()->trigger('capability', $this->storage, new ArrayObject(array(
+                    $name => $value
+                )));
+            }
         }
 
         return $this;

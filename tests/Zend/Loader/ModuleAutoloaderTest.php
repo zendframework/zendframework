@@ -188,4 +188,5 @@ class ManagerTest extends TestCase
         $this->assertTrue(class_exists('My\NonmatchingModule\Module'));
         $this->assertTrue(class_exists('PharModuleExplicit\Module'));
     }
+
 }

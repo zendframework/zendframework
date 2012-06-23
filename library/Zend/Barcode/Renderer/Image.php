@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Barcode\Renderer;
 
 use Zend\Barcode\Exception\RendererCreationException;
@@ -82,8 +79,7 @@ class Image extends AbstractRenderer
 
     /**
      * Constructor
-     * @param array|\Zend\Config\Config $options
-     * @return void
+     * @param array|\Traversable $options
      */
     public function __construct($options = null)
     {

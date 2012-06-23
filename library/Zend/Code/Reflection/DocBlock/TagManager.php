@@ -25,23 +25,23 @@ class TagManager
 
     public function useDefaultPrototypes()
     {
-        $this->addTagPrototype(new ParamTag());
-        $this->addTagPrototype(new ReturnTag());
-        $this->addTagPrototype(new GenericTag());
+        $this->addTagPrototype(new Tag\ParamTag());
+        $this->addTagPrototype(new Tag\ReturnTag());
+        $this->addTagPrototype(new Tag\GenericTag());
     }
 
-    public function addTagPrototype(Tag $tag)
+    public function addTagPrototype(Tag\TagInterface $tag)
     {
-        $tagName = strtolower(str_replace(array('-', '_'), '', $tag->getName()));
+        $tagName = str_replace(array('-', '_'), '', $tag->getName());
 
         if (in_array($tagName, $this->tagNames)) {
             throw new Exception\InvalidArgumentException('A tag with this name already exists in this manager');
         }
 
         $this->tagNames[] = $tagName;
-        $this->tags[] = $tag;
+        $this->tags[]     = $tag;
 
-        if ($tag instanceof GenericTag) {
+        if ($tag instanceof Tag\GenericTag) {
             $this->genericTag = $tag;
         }
     }
@@ -49,12 +49,12 @@ class TagManager
     public function hasTag($tagName)
     {
         // otherwise, only if its name exists as a key
-        return in_array(strtolower(str_replace(array('-', '_'), '', $tagName)), $this->tagNames);
+        return in_array(str_replace(array('-', '_'), '', $tagName), $this->tagNames);
     }
 
     public function createTag($tagName, $content = null)
     {
-        $tagName = strtolower(str_replace(array('-', '_'), '', $tagName));
+        $tagName = str_replace(array('-', '_'), '', $tagName);
 
         if (!$this->hasTag($tagName) && !isset($this->genericTag)) {
             throw new Exception\RuntimeException('This tag name is not supported by this tag manager');
@@ -62,7 +62,7 @@ class TagManager
 
         $index = array_search($tagName, $this->tagNames);
 
-        /* @var $tag Tag */
+        /* @var Tag\TagInterface $tag */
         $tag = ($index !== false) ? $this->tags[$index] : $this->genericTag;
 
         $newTag = clone $tag;
@@ -70,7 +70,7 @@ class TagManager
             $newTag->initialize($content);
         }
 
-        if ($newTag instanceof GenericTag) {
+        if ($newTag instanceof Tag\GenericTag) {
             $newTag->setName($tagName);
         }
 

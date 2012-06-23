@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\YouTube;
 
 use Zend\GData\YouTube,
@@ -30,13 +27,6 @@ use Zend\GData\YouTube,
 /**
  * Represents the YouTube message flavor of an Atom entry
  *
- * @uses       \Zend\GData\App\VersionException
- * @uses       \Zend\GData\Extension\Comments
- * @uses       \Zend\GData\Extension\Rating
- * @uses       \Zend\GData\Media\Entry
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\Extension\Description
- * @uses       \Zend\GData\YouTube\Extension\Statistics
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

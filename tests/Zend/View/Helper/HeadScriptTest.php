@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 use Zend\View\Helper\Placeholder\Registry;
 use Zend\View\Helper;
@@ -101,19 +98,19 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->append('foo');
             $this->fail('Append should throw exception with invalid item');
-        } catch (View\Exception $e) { }
+        } catch (View\Exception\ExceptionInterface $e) { }
         try {
             $this->helper->offsetSet(1, 'foo');
             $this->fail('OffsetSet should throw exception with invalid item');
-        } catch (View\Exception $e) { }
+        } catch (View\Exception\ExceptionInterface $e) { }
         try {
             $this->helper->prepend('foo');
             $this->fail('Prepend should throw exception with invalid item');
-        } catch (View\Exception $e) { }
+        } catch (View\Exception\ExceptionInterface $e) { }
         try {
             $this->helper->set('foo');
             $this->fail('Set should throw exception with invalid item');
-        } catch (View\Exception $e) { }
+        } catch (View\Exception\ExceptionInterface $e) { }
     }
 
     protected function _inflectAction($type)
@@ -237,7 +234,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->fooBar('foo');
             $this->fail('Invalid method should raise exception');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -246,13 +243,13 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->setScript();
             $this->fail('Too few arguments should raise exception');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
         }
 
         try {
             $this->helper->offsetSetScript(5);
             $this->fail('Too few arguments should raise exception');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -366,7 +363,7 @@ document.write(bar.strlen());');
         $this->helper->__invoke()->captureEnd();
         try {
             $this->helper->__invoke()->captureStart();
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->fail('Serial captures should be allowed');
         }
         echo "this is something else captured";
@@ -381,7 +378,7 @@ document.write(bar.strlen());');
             $this->helper->__invoke()->captureStart();
             $this->helper->__invoke()->captureEnd();
             $this->fail('Should not be able to nest captures');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->helper->__invoke()->captureEnd();
             $this->assertContains('Cannot nest', $e->getMessage());
         }
@@ -433,5 +430,41 @@ document.write(bar.strlen());');
 
         $this->assertEquals($expected, $test);
     }
-}
 
+    public function testConditionalWithAllowArbitraryAttributesDoesNotIncludeConditionalScript()
+    {
+        $this->helper->__invoke()->setAllowArbitraryAttributes(true);
+        $this->helper->__invoke()->appendFile('/js/foo.js', 'text/javascript', array('conditional' => 'lt IE 7'));
+        $test = $this->helper->__invoke()->toString();
+
+        $this->assertNotContains('conditional', $test);
+    }
+
+    public function testNoEscapeWithAllowArbitraryAttributesDoesNotIncludeNoEscapeScript()
+    {
+        $this->helper->__invoke()->setAllowArbitraryAttributes(true);
+        $this->helper->__invoke()->appendScript('// some script', 'text/javascript', array('noescape' => true));
+        $test = $this->helper->__invoke()->toString();
+
+        $this->assertNotContains('noescape', $test);
+    }
+
+    public function testNoEscapeDefaultsToFalse()
+    {
+        $this->helper->__invoke()->appendScript('// some script' . PHP_EOL, 'text/javascript', array());
+        $test = $this->helper->__invoke()->toString();
+
+        $this->assertContains('//<!--', $test);
+        $this->assertContains('//-->', $test);
+    }
+
+    public function testNoEscapeTrue()
+    {
+        $this->helper->__invoke()->appendScript('// some script' . PHP_EOL, 'text/javascript', array('noescape' => true));
+        $test = $this->helper->__invoke()->toString();
+
+        $this->assertNotContains('//<!--', $test);
+        $this->assertNotContains('//-->', $test);
+    }
+
+}

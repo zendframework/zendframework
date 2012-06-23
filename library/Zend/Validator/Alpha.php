@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator;
 
 use Zend\Filter\Alpha as AlphaFilter;
@@ -65,7 +62,7 @@ class Alpha extends AbstractValidator
     /**
      * Sets default option values for this instance
      *
-     * @param  boolean|\Zend\Config\Config $allowWhiteSpace
+     * @param  boolean|\Traversable $allowWhiteSpace
      * @return void
      */
     public function __construct($allowWhiteSpace = false)

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Rackspace\Files;
 use Zend\Service\Rackspace\Files as RackspaceFiles,
         Zend\Service\Rackspace\Files\ContainerList,

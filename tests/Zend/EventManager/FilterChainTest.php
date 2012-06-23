@@ -34,6 +34,11 @@ use Zend\EventManager\FilterChain,
  */
 class FilterChainTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var FilterChain
+     */
+    protected $filterchain;
+
     public function setUp()
     {
         if (isset($this->message)) {

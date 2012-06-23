@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 use Zend;
 use Zend\Locale;
@@ -29,10 +26,6 @@ use Zend\Locale;
 /**
  * Currency view helper
  *
- * @uses      \Zend\Currency\Currency
- * @uses      \Zend\Locale\Locale
- * @uses      \Zend\Registry
- * @uses      \Zend\View\Helper\AbstractHelper
  * @category  Zend
  * @package   Zend_View
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -68,7 +61,7 @@ class Currency extends AbstractHelper
      * Output a formatted currency
      *
      * @param  integer|float                    $value    Currency value to output
-     * @param  string|Zend_Locale|\Zend\Currency\Currency $currency OPTIONAL Currency to use for this call
+     * @param  string|\Zend\Locale\Locale|array $currency OPTIONAL Currency to use for this call
      * @return string Formatted currency
      */
     public function __invoke($value = null, $currency = null)

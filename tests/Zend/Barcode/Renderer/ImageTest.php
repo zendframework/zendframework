@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Barcode\Renderer;
 use Zend\Barcode;
 use Zend\Barcode\Object;
@@ -63,7 +60,7 @@ class ImageTest extends TestCommon
 
     public function testObjectImageResource()
     {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
         $imageResource = new \StdClass();
         $this->renderer->setResource($imageResource);
     }
@@ -79,7 +76,7 @@ class ImageTest extends TestCommon
 
     public function testBadHeight()
     {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
         $this->renderer->setHeight(- 1);
     }
 
@@ -94,7 +91,7 @@ class ImageTest extends TestCommon
 
     public function testBadWidth()
     {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
         $this->renderer->setWidth(- 1);
     }
 
@@ -111,7 +108,7 @@ class ImageTest extends TestCommon
 
     public function testNonAllowedImageType()
     {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
         $this->renderer->setImageType('other');
     }
 
@@ -149,7 +146,7 @@ class ImageTest extends TestCommon
 
     public function testBadUserHeightLessThanBarcodeHeight()
     {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());
         $this->renderer->setBarcode($barcode);
@@ -168,7 +165,7 @@ class ImageTest extends TestCommon
 
     public function testBadUserWidthLessThanBarcodeWidth()
     {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
         $this->renderer->setBarcode($barcode);
@@ -188,7 +185,7 @@ class ImageTest extends TestCommon
 
     public function testBadHeightOfUserResource()
     {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());
         $this->renderer->setBarcode($barcode);
@@ -209,7 +206,7 @@ class ImageTest extends TestCommon
 
     public function testBadWidthOfUserResource()
     {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
         $this->renderer->setBarcode($barcode);
@@ -220,7 +217,7 @@ class ImageTest extends TestCommon
 
     public function testNoFontWithOrientation()
     {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
         Barcode\Barcode::setBarcodeFont(null);
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $barcode->setOrientation(1);
@@ -235,7 +232,7 @@ class ImageTest extends TestCommon
 
     public function testRendererWithUnkownInstructionProvideByObject()
     {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
         parent::testRendererWithUnkownInstructionProvideByObject();
     }
 

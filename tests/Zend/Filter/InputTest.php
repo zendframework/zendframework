@@ -1150,7 +1150,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Filter\FilterBroker', $broker,
             'Expected object of type Zend\Filter\FilterBroker, got ' , get_class($broker));
 
-        $this->setExpectedException('Zend\Filter\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Filter\Exception\ExceptionInterface', 'Invalid type');
         $loader = $input->getPluginBroker('foo');
     }
 
@@ -1169,7 +1169,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
 
         $loader = new PluginBroker();
 
-        $this->setExpectedException('Zend\Filter\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Filter\Exception\ExceptionInterface', 'Invalid type');
         $input->setPluginBroker($loader, 'foo');
     }
 
@@ -1184,7 +1184,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         // Do not add namespace on purpose, so MyDigits will not be found
         $input = new InputFilter(null, $validators, $data);
 
-        $this->setExpectedException('Zend\Loader\Exception', 'locate class');
+        $this->setExpectedException('Zend\Loader\Exception\ExceptionInterface', 'locate class');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
     }
 
@@ -1195,7 +1195,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         );
         // Zend\Validator\Exception exists, but does not implement the needed interface
         $broker = new Validator\ValidatorBroker();
-        $broker->getClassLoader()->registerPlugin('exception', 'Zend\Validator\Exception');
+        $broker->getClassLoader()->registerPlugin('exception', 'Zend\Validator\Exception\InvalidArgumentException');
         $validators = array(
             'field1' => 'Exception'
         );
@@ -1203,7 +1203,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $input = new InputFilter(null, $validators, $data);
         $input->setPluginBroker($broker, InputFilter::VALIDATOR);
 
-        $this->setExpectedException('Zend\Validator\Exception', 'must implement');
+        $this->setExpectedException('Zend\Validator\Exception\ExceptionInterface', 'must implement');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
     }
 
@@ -1620,7 +1620,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         );
         $filter = new InputFilter($filters, $validators, $data, $options);
 
-        $this->setExpectedException('Zend\Loader\Exception', 'locate class');
+        $this->setExpectedException('Zend\Loader\Exception\ExceptionInterface', 'locate class');
         $filter->process();
     }
 
@@ -2031,9 +2031,9 @@ namespace ZendTest\Filter\TestClasses\Filter
 
 namespace ZendTest\Filter\TestClasses\Validator
 {
-    use Zend\Validator\Validator;
+    use Zend\Validator\ValidatorInterface;
 
-    class Date implements Validator
+    class Date implements ValidatorInterface
     {
         public function isValid($value)
         {

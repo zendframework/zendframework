@@ -18,16 +18,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mime;
 
 /**
  * Class representing a MIME part.
  *
- * @uses       \Zend\Mime\Mime
- * @uses       \Zend\Mime\Exception
  * @category   Zend
  * @package    Zend_Mime
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -88,7 +83,7 @@ class Part {
      * reading the content. very useful for large file attachments.
      *
      * @return stream
-     * @throws \Zend\Mime\Exception if not a stream or unable to append filter
+     * @throws Exception\RuntimeException if not a stream or unable to append filter
      */
     public function getEncodedStream()
     {

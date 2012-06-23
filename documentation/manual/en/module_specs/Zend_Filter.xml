@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><title>Introduction</title>
 
 
     <para>
@@ -9,7 +9,7 @@
         order.
     </para>
 
-    <section xml:id="zend.filter.introduction.definition"><info><title>What is a filter?</title></info>
+    <section xml:id="zend.filter.introduction.definition"><title>What is a filter?</title>
 
 
         <para>
@@ -43,7 +43,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.introduction.using"><info><title>Basic usage of filters</title></info>
+    <section xml:id="zend.filter.introduction.using"><title>Basic usage of filters</title>
 
 
         <para>
@@ -69,7 +69,7 @@ echo $htmlEntities->filter('"'); // "
 
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StaticFilter.xml"/>
 
-    <section xml:id="zend.filter.introduction.caveats"><info><title>Double filtering</title></info>
+    <section xml:id="zend.filter.introduction.caveats"><title>Double filtering</title>
 
 
         <para>

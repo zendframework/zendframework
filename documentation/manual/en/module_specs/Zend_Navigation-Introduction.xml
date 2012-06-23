@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><title>Introduction</title>
     
 
     <para>
@@ -11,14 +11,14 @@
         sitemaps, or serve as a model for other navigation related purposes.
     </para>
 
-    <section xml:id="zend.navigation.introduction.concepts"><info><title>Pages and Containers</title></info>
+    <section xml:id="zend.navigation.introduction.concepts"><title>Pages and Containers</title>
         
 
         <para>
             There are two main concepts in <classname>Zend_Navigation</classname>:
         </para>
 
-        <section xml:id="zend.navigation.introduction.pages"><info><title>Pages</title></info>
+        <section xml:id="zend.navigation.introduction.pages"><title>Pages</title>
             
 
             <para>
@@ -38,7 +38,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.navigation.introduction.containers"><info><title>Containers</title></info>
+        <section xml:id="zend.navigation.introduction.containers"><title>Containers</title>
             
 
             <para>
@@ -69,7 +69,7 @@
         </section>
     </section>
 
-    <section xml:id="zend.navigation.introduction.separation"><info><title>Separation of data (model) and rendering (view)</title></info>
+    <section xml:id="zend.navigation.introduction.separation"><title>Separation of data (model) and rendering (view)</title>
         
 
         <para>

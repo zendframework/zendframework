@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
 use Zend\Db\Adapter\Driver\ConnectionInterface,
     Zend\Db\Adapter\Driver\DriverInterface,
-    Zend\Db\Adapter\Exception\InvalidQueryException;
+    Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Connection implements ConnectionInterface
 {
@@ -38,6 +25,11 @@ class Connection implements ConnectionInterface
      * @var Pdo
      */
     protected $driver = null;
+
+    /**
+     * @var string
+     */
+    protected $driverName = null;
 
     /**
      * @var array
@@ -55,14 +47,17 @@ class Connection implements ConnectionInterface
     protected $inTransaction = false;
 
     /**
-     * @param array|\PDO $connectionInfo
+     * @param array|\PDO|null $connectionParameters
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      */
-    public function __construct($connectionInfo = null)
+    public function __construct($connectionParameters = null)
     {
-        if (is_array($connectionInfo)) {
-            $this->setConnectionParameters($connectionInfo);
-        } elseif ($connectionInfo instanceof \PDO) {
-            $this->setResource($connectionInfo);
+        if (is_array($connectionParameters)) {
+            $this->setConnectionParameters($connectionParameters);
+        } elseif ($connectionParameters instanceof \PDO) {
+            $this->setResource($connectionParameters);
+        } elseif (null !== $connectionParameters) {
+            throw new Exception\InvalidArgumentException('$connection must be an array of parameters, a PDO object or null');
         }
     }
 
@@ -77,11 +72,31 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * @return null|string
+     */
+    public function getDriverName()
+    {
+        return $this->driverName;
+    }
+
+    /**
      * @param array $connectionParameters
      */
     public function setConnectionParameters(array $connectionParameters)
     {
         $this->connectionParameters = $connectionParameters;
+        if (isset($connectionParameters['dsn'])) {
+            $this->driverName = substr($connectionParameters['dsn'], 0,
+                strpos($connectionParameters['dsn'], ':')
+            );
+        } elseif (isset($connectionParameters['pdodriver'])) {
+            $this->driverName = strtolower($connectionParameters['pdodriver']);
+        } elseif (isset($connectionParameters['driver'])) {
+            $this->driverName = strtolower(substr(
+                str_replace(array('-', '_', ' '), '', $connectionParameters['driver']),
+                3
+            ));
+        }
     }
 
     /**
@@ -111,9 +126,13 @@ class Connection implements ConnectionInterface
 
         /** @var $result \PDOStatement */
         $result = $this->resource->query('SELECT DATABASE()');
-        $r = $result->fetch_row();
-        return $r[0];
+        if ($result instanceof \PDOStatement) {
+            $r = $result->fetch_row();
+            return $r[0];
+        }
+        return false;
     }
+
     /**
      * Set resource
      * 
@@ -123,6 +142,7 @@ class Connection implements ConnectionInterface
     public function setResource(\PDO $resource)
     {
         $this->resource = $resource;
+        $this->driverName = strtolower($this->resource->getAttribute(\PDO::ATTR_DRIVER_NAME));
         return $this;
     }
 
@@ -146,8 +166,6 @@ class Connection implements ConnectionInterface
         if ($this->resource) {
             return $this;
         }
-
-        // @todo method createKnownDsn
 
         $dsn = $username = $password = $hostname = $database = null;
         $options = array();
@@ -193,21 +211,34 @@ class Connection implements ConnectionInterface
         }
 
         if (!isset($dsn) && isset($pdoDriver)) {
-            $dsn = $pdoDriver . ':';
-            if (isset($hostname)) {
-                $dsn .= "hostname=$hostname;";
+            $dsn = array();
+            switch ($pdoDriver) {
+                case 'sqlite':
+                    $dsn[] = $database;
+                    break;
+                default:
+                    if (isset($database)) {
+                        $dsn[] = "dbname={$database}";
+                    }
+                    if (isset($hostname)) {
+                        $dsn[] = "host={$hostname}";
+                    }
+                    break;
             }
-            if (isset($database)) {
-                $dsn .= "dbname=$database;";
-            }
+            $dsn = $pdoDriver . ':' . implode(';', $dsn);
         } elseif (!isset($dsn)) {
-            throw new \Exception('A dsn was not provided or could not be constructed from your parameters');
+            throw new Exception\InvalidConnectionParametersException(
+                'A dsn was not provided or could not be constructed from your parameters',
+                $this->connectionParameters
+            );
         }
 
         try {
             $this->resource = new \PDO($dsn, $username, $password, $options);
+            $this->resource->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->driverName = strtolower($this->resource->getAttribute(\PDO::ATTR_DRIVER_NAME));
         } catch (\PDOException $e) {
-            throw new \Exception('Connect Error: ' . $e->getMessage(), $e->getCode(), $e);
+            throw new Exception\RuntimeException('Connect Error: ' . $e->getMessage(), $e->getCode(), $e);
         }
 
         return $this;
@@ -266,11 +297,11 @@ class Connection implements ConnectionInterface
     public function rollback()
     {
         if (!$this->isConnected()) {
-            throw new \Exception('Must be connected before you can rollback');
+            throw new Exception\RuntimeException('Must be connected before you can rollback');
         }
 
         if (!$this->inTransaction) {
-            throw new \Exception('Must call commit() before you can rollback');
+            throw new Exception\RuntimeException('Must call beginTransaction() before you can rollback');
         }
 
         $this->resource->rollBack();
@@ -292,16 +323,15 @@ class Connection implements ConnectionInterface
 
         if ($resultResource === false) {
             $errorInfo = $this->resource->errorInfo();
-            throw new InvalidQueryException($errorInfo[2]);
+            throw new Exception\InvalidQueryException($errorInfo[2]);
         }
 
-        $result = $this->driver->createResult($resultResource);
+        $result = $this->driver->createResult($resultResource, $sql);
         return $result;
 
     }
 
     /**
-     * @todo PDO_SQLite does not support scrollable cursors; make this configurable based on dsn?
      * @param string $sql
      * @return Statement
      */
@@ -314,14 +344,20 @@ class Connection implements ConnectionInterface
         $statement = $this->driver->createStatement($sql);
         return $statement;
     }
+
     /**
      * Get last generated id
      * 
      * @return integer 
      */
-    public function getLastGeneratedId()
+    public function getLastGeneratedValue()
     {
-        return $this->resource->lastInsertId();
+        try {
+            return $this->resource->lastInsertId();
+        } catch (\Exception $e) {
+            // do nothing
+        }
+        return false;
     }
 
 }

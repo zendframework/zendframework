@@ -18,19 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter\Word;
 
 use Zend\Filter\PregReplace as PregReplaceFilter;
 
 /**
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\PregReplace
  * @category   Zend
  * @package    Zend_Filter
- * @uses       \Zend\Filter\PregReplace
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

@@ -42,9 +42,9 @@ class PatternFactory
     /**
      * Instantiate a cache pattern
      *
-     * @param  string|Pattern $patternName
+     * @param  string|Pattern\PatternInterface $patternName
      * @param  array|Traversable|Pattern\PatternOptions $options
-     * @return Pattern
+     * @return Pattern\PatternInterface
      * @throws Exception\RuntimeException
      */
     public static function factory($patternName, $options = array())
@@ -54,8 +54,7 @@ class PatternFactory
         }
         if (is_array($options)) {
             $options = new Pattern\PatternOptions($options);
-        }
-        if (!$options instanceof Pattern\PatternOptions) {
+        } elseif (!$options instanceof Pattern\PatternOptions) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array, Traversable object, or %s\Pattern\PatternOptions object; received "%s"',
                 __METHOD__,
@@ -64,7 +63,7 @@ class PatternFactory
             ));
         }
 
-        if ($patternName instanceof Pattern) {
+        if ($patternName instanceof Pattern\PatternInterface) {
             $patternName->setOptions($options);
             return $patternName;
         }
@@ -82,7 +81,8 @@ class PatternFactory
     public static function getBroker()
     {
         if (static::$broker === null) {
-            static::$broker = static::getDefaultBroker();
+            static::$broker = new PatternBroker();
+            static::$broker->setRegisterPluginsOnLoad(false);
         }
 
         return static::$broker;
@@ -107,15 +107,5 @@ class PatternFactory
     public static function resetBroker()
     {
         static::$broker = null;
-    }
-
-    /**
-     * Get internal pattern broker
-     *
-     * @return PatternBroker
-     */
-    protected static function getDefaultBroker()
-    {
-        return new PatternBroker();
     }
 }

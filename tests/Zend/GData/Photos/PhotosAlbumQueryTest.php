@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData\Photos;
 use Zend\GData\Photos;
 use Zend\GData\App;
@@ -43,7 +40,7 @@ class PhotosAlbumQueryTest extends \PHPUnit_Framework_TestCase
       */
     public function testSimpleAlbumQuery()
     {
-        $queryString = "http://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1";
+        $queryString = "https://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1";
 
         $query = new Photos\AlbumQuery();
         $query->setUser("sample.user");
@@ -54,7 +51,7 @@ class PhotosAlbumQueryTest extends \PHPUnit_Framework_TestCase
         // Assert that the generated query matches the correct one
         $this->assertEquals($queryString, $generatedString);
 
-        $queryString = "http://picasaweb.google.com/data/feed/api/user/sample.user/album/test";
+        $queryString = "https://picasaweb.google.com/data/feed/api/user/sample.user/album/test";
 
         $query->setAlbumId(null);
         $query->setAlbumName("test");
@@ -95,7 +92,7 @@ class PhotosAlbumQueryTest extends \PHPUnit_Framework_TestCase
       */
     public function testBaseAlbumQuery()
     {
-        $queryString = "http://picasaweb.google.com/data/feed/base/user/sample.user/albumid/1";
+        $queryString = "https://picasaweb.google.com/data/feed/base/user/sample.user/albumid/1";
 
         $query = new Photos\AlbumQuery();
         $query->setUser("sample.user");
@@ -114,7 +111,7 @@ class PhotosAlbumQueryTest extends \PHPUnit_Framework_TestCase
       */
     public function testTagFilterAlbumQuery()
     {
-        $queryString = "http://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1?tag=test";
+        $queryString = "https://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1?tag=test";
 
         $query = new Photos\AlbumQuery();
         $query->setUser("sample.user");
@@ -132,7 +129,7 @@ class PhotosAlbumQueryTest extends \PHPUnit_Framework_TestCase
       */
     public function testPrivateAlbumQuery()
     {
-        $queryString = "http://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1?access=private";
+        $queryString = "https://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1?access=private";
 
         $query = new Photos\AlbumQuery();
         $query->setUser("sample.user");
@@ -150,7 +147,7 @@ class PhotosAlbumQueryTest extends \PHPUnit_Framework_TestCase
       */
     public function testThumbnailAlbumQuery()
     {
-        $queryString = "http://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1?thumbsize=72";
+        $queryString = "https://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1?thumbsize=72";
 
         $query = new Photos\AlbumQuery();
         $query->setUser("sample.user");
@@ -171,7 +168,7 @@ class PhotosAlbumQueryTest extends \PHPUnit_Framework_TestCase
       */
     public function testImgAlbumQuery()
     {
-        $queryString = "http://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1?imgmax=800";
+        $queryString = "https://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1?imgmax=800";
 
         $query = new Photos\AlbumQuery();
         $query->setUser("sample.user");
@@ -187,7 +184,7 @@ class PhotosAlbumQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($queryString, $generatedString);
 
         // Check that ImgMax is set back to null
-        $queryString = "http://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1";
+        $queryString = "https://picasaweb.google.com/data/feed/api/user/sample.user/albumid/1";
         $query->setImgMax(null);
 
         $generatedString = $query->getQueryUrl();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.usage.cli"><info><title>Using Zend_Tool On The Command Line</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.usage.cli"><title>Using Zend_Tool On The Command Line</title>
     
 
     <para>
@@ -17,10 +17,10 @@
     </sect2>
     -->
 
-    <section xml:id="zend.tool.usage.cli.installation"><info><title>Installation</title></info>
+    <section xml:id="zend.tool.usage.cli.installation"><title>Installation</title>
         
 
-        <section xml:id="zend.tool.usage.cli.installation.download-and-go"><info><title>Download And Go</title></info>
+        <section xml:id="zend.tool.usage.cli.installation.download-and-go"><title>Download And Go</title>
             
 
             <para>
@@ -34,7 +34,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.installation.pear"><info><title>Installing Via Pear</title></info>
+        <section xml:id="zend.tool.usage.cli.installation.pear"><title>Installing Via Pear</title>
             
 
             <para>
@@ -58,7 +58,7 @@ pear install zfcampus/zf
             </para>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.installation.install-by-hand"><info><title>Installing by Hand</title></info>
+        <section xml:id="zend.tool.usage.cli.installation.install-by-hand"><title>Installing by Hand</title>
             
 
             <para>
@@ -86,10 +86,10 @@ pear install zfcampus/zf
         </section>
     </section>
 
-    <section xml:id="zend.tool.usage.cli.general-purpose-commands"><info><title>General Purpose Commands</title></info>
+    <section xml:id="zend.tool.usage.cli.general-purpose-commands"><title>General Purpose Commands</title>
         
 
-        <section xml:id="zend.tool.usage.cli.general-purpose-commands.version"><info><title>Version</title></info>
+        <section xml:id="zend.tool.usage.cli.general-purpose-commands.version"><title>Version</title>
             
 
             <para>
@@ -102,7 +102,7 @@ zf show version
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.general-purpose-commands.built-in-help"><info><title>Built-in Help</title></info>
+        <section xml:id="zend.tool.usage.cli.general-purpose-commands.built-in-help"><title>Built-in Help</title>
             
 
             <para>
@@ -150,7 +150,7 @@ zf show version ? (show any options)
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.general-purpose-commands.manifest"><info><title>Manifest</title></info>
+        <section xml:id="zend.tool.usage.cli.general-purpose-commands.manifest"><title>Manifest</title>
             
 
             <para>
@@ -173,10 +173,10 @@ zf show manifest
         -->
     </section>
 
-    <section xml:id="zend.tool.usage.cli.project-specific-commands"><info><title>Project Specific Commands</title></info>
+    <section xml:id="zend.tool.usage.cli.project-specific-commands"><title>Project Specific Commands</title>
         
 
-        <section xml:id="zend.tool.usage.cli.project-specific-commands.project"><info><title>Project</title></info>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.project"><title>Project</title>
             
 
             <para>
@@ -197,7 +197,7 @@ zf create project MyProjectName
             </para>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.project-specific-commands.module"><info><title>Project</title></info>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.module"><title>Project</title>
             
 
             <para>
@@ -218,7 +218,7 @@ zf create module Blog
             </para>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.project-specific-commands.controller"><info><title>Controller</title></info>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.controller"><title>Controller</title>
             
 
             <para>
@@ -248,7 +248,7 @@ zf create controller Post --module=Blog
             </para>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.project-specific-commands.action"><info><title>Action</title></info>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.action"><title>Action</title>
             
 
             <para>
@@ -262,7 +262,7 @@ zf create action login --controller-name=Auth
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.project-specific-commands.view"><info><title>View</title></info>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.view"><title>View</title>
             
 
             <para>
@@ -280,7 +280,7 @@ zf create view -c Auth -a my-script-name
             </para>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.project-specific-commands.model"><info><title>Model</title></info>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.model"><title>Model</title>
             
 
             <para>
@@ -305,7 +305,7 @@ zf create model Post -m Blog
             </para>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.project-specific-commands.form"><info><title>Form</title></info>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.form"><title>Form</title>
             
 
             <para>
@@ -330,7 +330,7 @@ zf create form Comment -m Blog
             </para>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.project-specific-commands.database-adapter"><info><title>DbAdapter</title></info>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.database-adapter"><title>DbAdapter</title>
             
 
             <para>
@@ -379,7 +379,7 @@ zf configure dbadapter "adapter=Pdo_Sqlite&dbname=../data/test.db" -s developmen
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.project-specific-commands.db-table"><info><title>DbTable</title></info>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.db-table"><title>DbTable</title>
             
 
             <para>
@@ -419,7 +419,7 @@ zf -p create dbtable.from-database
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.project-specific-commands.layout"><info><title>Layout</title></info>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.layout"><title>Layout</title>
             
 
             <para>
@@ -434,10 +434,10 @@ zf enable layout
         </section>
     </section>
 
-    <section xml:id="zend.tool.usage.cli.environment-customization"><info><title>Environment Customization</title></info>
+    <section xml:id="zend.tool.usage.cli.environment-customization"><title>Environment Customization</title>
         
 
-        <section xml:id="zend.tool.usage.cli.environment-customization.storage-directory"><info><title>The Storage Directory</title></info>
+        <section xml:id="zend.tool.usage.cli.environment-customization.storage-directory"><title>The Storage Directory</title>
             
 
             <para>
@@ -451,7 +451,7 @@ zf --setup storage-directory
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.environment-customization.configuration-file"><info><title>The Configuration File</title></info>
+        <section xml:id="zend.tool.usage.cli.environment-customization.configuration-file"><title>The Configuration File</title>
             
 
             <para>
@@ -466,7 +466,7 @@ zf --setup config-file
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.tool.usage.cli.environment-customization.environment-locations"><info><title>Environment Locations</title></info>
+        <section xml:id="zend.tool.usage.cli.environment-customization.environment-locations"><title>Environment Locations</title>
             
 
             <para>

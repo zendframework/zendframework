@@ -10,7 +10,7 @@ class ContentDispositionTest extends \PHPUnit_Framework_TestCase
     public function testContentDispositionFromStringCreatesValidContentDispositionHeader()
     {
         $contentDispositionHeader = ContentDisposition::fromString('Content-Disposition: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $contentDispositionHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $contentDispositionHeader);
         $this->assertInstanceOf('Zend\Http\Header\ContentDisposition', $contentDispositionHeader);
     }
 

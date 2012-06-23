@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\YouTube\Extension;
 
 /**
@@ -30,8 +27,6 @@ namespace Zend\GData\YouTube\Extension;
  * the same content can be represented using a
  * media:group (Zend_Gdata_Media_Extension_MediaGroup) element.
  *
- * @uses       \Zend\GData\Media\Extension\MediaContent
- * @uses       \Zend\GData\YouTube
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

@@ -7,7 +7,7 @@ namespace Zend\Http\Header;
  * @see http://www.ietf.org/rfc/rfc2109.txt
  * @see http://www.w3.org/Protocols/rfc2109/rfc2109
  */
-class SetCookie implements MultipleHeaderDescription
+class SetCookie implements MultipleHeaderInterface
 {
 
     /**
@@ -96,6 +96,14 @@ class SetCookie implements MultipleHeaderDescription
                         $headerValue = null;
                     }
 
+                    // First K=V pair is always the cookie name and value
+                    if ($header->getName() === NULL) {
+                        $header->setName($headerKey);
+                        $header->setValue($headerValue);
+                        continue;
+                    }
+
+                    // Process the remanining elements
                     switch (str_replace(array('-', '_'), '', strtolower($headerKey))) {
                         case 'expires' : $header->setExpires($headerValue); break;
                         case 'domain'  : $header->setDomain($headerValue); break;
@@ -105,8 +113,7 @@ class SetCookie implements MultipleHeaderDescription
                         case 'version' : $header->setVersion((int) $headerValue); break;
                         case 'maxage'  : $header->setMaxAge((int) $headerValue); break;
                         default:
-                            $header->setName($headerKey);
-                            $header->setValue($headerValue);
+                            // Intentionally omitted 
                     }
                 }
 
@@ -114,7 +121,7 @@ class SetCookie implements MultipleHeaderDescription
             };
         }
 
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'set-cookie') {
@@ -141,14 +148,16 @@ class SetCookie implements MultipleHeaderDescription
      *
      * @param string $name
      * @param string $value
-     * @param string $domain
      * @param int $expires
      * @param string $path
+     * @param string $domain
      * @param bool $secure
      * @param bool $httponly
+     * @param string $maxAge
+     * @param int $version
      * @return SetCookie
      */
-    public function __construct($name = null, $value = null, $version = null, $maxAge = null, $domain = null, $expires = null, $path = null, $secure = false, $httponly = true)
+    public function __construct($name = null, $value = null, $expires = null, $path = null, $domain = null, $secure = false, $httponly = false, $maxAge = null, $version = null)
     {
         $this->type = 'Cookie';
 
@@ -176,8 +185,16 @@ class SetCookie implements MultipleHeaderDescription
             $this->setExpires($expires);
         }
 
+        if ($path) {
+            $this->setPath($path);
+        }
+
         if ($secure) {
             $this->setSecure($secure);
+        }
+
+        if ($httponly) {
+            $this->setHttpOnly($httponly);
         }
     }
 
@@ -200,7 +217,7 @@ class SetCookie implements MultipleHeaderDescription
         }
         
         $value = $this->getValue();
-        if (strpos($value,'"')!==false) {
+        if (strpos($value, '"')!==false) {
             $value = '"'.urlencode(str_replace('"', '', $value)).'"';
         } else {
             $value = urlencode($value);

@@ -13,15 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage DocumentService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\DocumentService;
 
 use Zend\Cloud\AbstractFactory;
@@ -32,7 +29,7 @@ use Zend\Cloud\AbstractFactory;
  * TODO Look into preventing a query injection attack.
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage DocumentService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -44,7 +41,7 @@ class Factory extends AbstractFactory
     /**
      * @var string Interface which adapter must implement to be considered valid
      */
-    protected static $_adapterInterface = 'Zend\Cloud\DocumentService\Adapter';
+    protected static $_adapterInterface = 'Zend\Cloud\DocumentService\Adapter\AdapterInterface';
 
     /**
      * Constructor
@@ -53,7 +50,7 @@ class Factory extends AbstractFactory
      */
     private function __construct()
     {
-        // private ctor - should not be used
+        // private constructor - should not be used
     }
 
     /**
@@ -66,7 +63,7 @@ class Factory extends AbstractFactory
     {
         $adapter = parent::_getAdapter(self::DOCUMENT_ADAPTER_KEY, $options);
         if (!$adapter) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Class must be specified using the \''
                 . self::DOCUMENT_ADAPTER_KEY . '\' key'
             );

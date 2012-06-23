@@ -13,25 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\DocumentService\Adapter
+ * @package    Zend_Cloud
+ * @subpackage DocumentService_Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\DocumentService\Adapter\Exception;
+
+use Zend\Cloud\DocumentService\Exception;
 
 /**
  * @category   Zend
- * @package    Zend\Cloud\DocumentService\Adapter
- * @subpackage Exception
+ * @package    Zend_Cloud
+ * @subpackage DocumentService_Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OperationNotAvailableException
-    extends \Exception
-    implements \Zend\Cloud\DocumentService\Adapter\Exception
+class OperationNotAvailableException extends Exception\OperationNotAvailableException implements 
+    ExceptionInterface
 {}
-

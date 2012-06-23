@@ -19,22 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Paginator\ScrollingStyle;
-
-/**
- * @see Zend_Paginator
- */
-
-/**
- * @see Zend_Paginator_ScrollingStyle_Jumping
- */
-
-/**
- * @see PHPUnit_Framework_TestCase
- */
 
 /**
  * @category   Zend
@@ -47,11 +32,11 @@ namespace ZendTest\Paginator\ScrollingStyle;
 class JumpingTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_Paginator_ScrollingStyle_Jumping
+     * @var \Zend\Paginator\ScrollingStyle\Jumping
      */
     private $_scrollingStyle;
     /**
-     * @var Zend_Paginator
+     * @var \Zend\Paginator\Paginator
      */
     private $_paginator;
 

@@ -19,17 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Analysis\Analyzer;
 
-use Zend\Search\Lucene\Analysis\Analyzer as LuceneAnalyzer;
+use Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface as LuceneAnalyzer;
 
 /**
  * General analyzer implementation.
  *
- * @uses       \Zend\Search\Lucene\Analysis\Analyzer
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis

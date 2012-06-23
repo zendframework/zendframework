@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData;
 
 /**
@@ -72,7 +69,7 @@ class ClientLogin
      * @return \Zend\GData\HttpClient
      */
     public static function getHttpClient($email, $password, $service = 'xapi',
-        $client = null,
+        HttpClient $client = null,
         $source = self::DEFAULT_SOURCE,
         $loginToken = null,
         $loginCaptcha = null,
@@ -88,17 +85,12 @@ class ClientLogin
         if ($client == null) {
             $client = new HttpClient();
         }
-        
-        if (!$client instanceof \Zend\Http\Client) {
-            throw new App\HttpException(
-                    'Client is not an instance of Zend\Http\Client.');
-        }
 
         // Build the HTTP client for authentication
         $client->setUri($loginUri);
         $client->setMethod('POST');
         $useragent = $source . ' Zend_Framework_Gdata/' . \Zend\Version::VERSION;
-        $client->setConfig(array(
+        $client->setOptions(array(
                 'maxredirects'    => 0,
                 'strictredirects' => true,
                 'useragent' => $useragent
@@ -132,7 +124,7 @@ class ClientLogin
         ob_start();
         try {
             $response = $client->send();
-        } catch (\Zend\Http\Client\Exception $e) {
+        } catch (\Zend\Http\Client\Exception\ExceptionInterface $e) {
             throw new App\HttpException($e->getMessage(), $e);
         }
         ob_end_clean();
@@ -150,7 +142,7 @@ class ClientLogin
         if ($response->getStatusCode() == 200) {
             $client->setClientLoginToken($goog_resp['Auth']);
             $useragent = $source . ' Zend_Framework_Gdata/' . \Zend\Version::VERSION;
-            $client->setConfig(array(
+            $client->setOptions(array(
                     'strictredirects' => true,
                     'useragent' => $useragent
                 )

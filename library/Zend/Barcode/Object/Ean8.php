@@ -19,13 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Barcode\Object;
 
-use Zend\Barcode\Object\Exception,
-    Zend\Validator\Barcode as BarcodeValidator;
+use Zend\Validator\Barcode as BarcodeValidator;
 
 /**
  * Class for generate Ean8 barcode

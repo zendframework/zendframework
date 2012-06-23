@@ -18,18 +18,13 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\TimeSync;
+
 use Zend\TimeSync\Exception;
 
 /**
  * Abstract class definition for all timeserver protocols
  *
- * @uses      \Zend\Date\Date
- * @uses      \Zend\TimeSync\TimeSync
- * @uses      \Zend\TimeSync\Exception
  * @category  Zend
  * @package   Zend_TimeSync
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -99,7 +94,7 @@ abstract class Protocol
      * Connect to the specified timeserver.
      *
      * @return void
-     * @throws \Zend\TimeSync\Exception When the connection failed
+     * @throws Exception\ExceptionInterface When the connection failed
      */
     protected function _connect()
     {

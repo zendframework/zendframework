@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Soap;
 
 require_once __DIR__ . '/TestAsset/commontypes.php';
@@ -35,7 +32,6 @@ use Zend\Soap\Server,
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @uses       Zend_Server_Interface
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Soap

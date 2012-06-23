@@ -10,7 +10,7 @@ class ParametersTest extends \PHPUnit_Framework_TestCase
     public function testParametersConstructionAndClassStructure()
     {
         $parameters = new Parameters();
-        $this->assertInstanceOf('Zend\Stdlib\ParametersDescription', $parameters);
+        $this->assertInstanceOf('Zend\Stdlib\ParametersInterface', $parameters);
         $this->assertInstanceOf('ArrayObject', $parameters);
         $this->assertInstanceOf('ArrayAccess', $parameters);
         $this->assertInstanceOf('Countable', $parameters);

@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Memory;
 
 use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Memory,
     Zend\Memory\Container;
 
@@ -48,28 +45,7 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'filesystem',
-                'options' => array(
-                    'ttl' => 1,
-                ),
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
-    }
-
-    public function tearDown()
-    {
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
-        $this->_cache = null;
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
     }
 
     /**
@@ -82,7 +58,6 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($memObject instanceof \Zend\Memory\Container\AccessController);
     }
-
 
     /**
      * tests the value access methods
@@ -109,7 +84,6 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($memObject->value instanceof \Zend\Memory\Value);
         $this->assertEquals((string)$memObject->value, 'another value');
     }
-
 
     /**
      * tests lock()/unlock()/isLocked() functions

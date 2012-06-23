@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
 use Zend\Soap\Wsdl;
@@ -28,7 +25,6 @@ use Zend\Soap\Wsdl;
 /**
  * Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence
  *
- * @uses       \Zend\Soap\Wsdl\Strategy\DefaultComplexType
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL

@@ -19,24 +19,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Search\Lucene;
-use Zend\Search\Lucene\Analysis\Analyzer;
+
+use Zend\Search\Lucene\Analysis\Analyzer\Analyzer;
+use Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface;
 use Zend\Search\Lucene\Analysis\Analyzer\Common;
 use Zend\Search\Lucene\Analysis\Analyzer\Common\Text;
 use Zend\Search\Lucene\Analysis\Analyzer\Common\TextNum;
 use Zend\Search\Lucene\Analysis\Analyzer\Common\Utf8;
 use Zend\Search\Lucene\Analysis\Analyzer\Common\Utf8Num;
-
-/**
- * Zend_Search_Lucene
- */
-
-/**
- * PHPUnit test case
- */
 
 /**
  * @category   Zend
@@ -50,17 +41,17 @@ class AnalysisTest extends \PHPUnit_Framework_TestCase
 {
     public function testAnalyzer()
     {
-        $currentAnalyzer = Analyzer\Analyzer::getDefault();
-        $this->assertTrue($currentAnalyzer instanceof Analyzer);
+        $currentAnalyzer = Analyzer::getDefault();
+        $this->assertTrue($currentAnalyzer instanceof AnalyzerInterface);
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num */
 
         $newAnalyzer = new Common\Utf8Num();
-        Analyzer\Analyzer::setDefault($newAnalyzer);
-        $this->assertTrue(Analyzer\Analyzer::getDefault() === $newAnalyzer);
+        Analyzer::setDefault($newAnalyzer);
+        $this->assertTrue(Analyzer::getDefault() === $newAnalyzer);
 
         // Set analyzer to the default value (used in other tests)
-        Analyzer\Analyzer::setDefault($currentAnalyzer);
+        Analyzer::setDefault($currentAnalyzer);
     }
 
     public function testText()

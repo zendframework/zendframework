@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.cloud"><info><title>Zend_Tag_Cloud</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.cloud"><title>Zend_Tag_Cloud</title>
     
 
     <para>
@@ -75,7 +75,7 @@
         </listitem>
     </itemizedlist>
 
-    <example xml:id="zend.tag.cloud.example.using"><info><title>Using Zend_Tag_Cloud</title></info>
+    <example xml:id="zend.tag.cloud.example.using"><title>Using Zend_Tag_Cloud</title>
         
 
         <para>
@@ -106,7 +106,7 @@ echo $cloud;
         </para>
     </example>
 
-    <section xml:id="zend.tag.cloud.decorators"><info><title>Decorators</title></info>
+    <section xml:id="zend.tag.cloud.decorators"><title>Decorators</title>
         
 
         <para>
@@ -119,7 +119,7 @@ echo $cloud;
             to the weight values of the tags assigned to them.
         </para>
 
-        <section xml:id="zend.tag.cloud.decorators.htmltag"><info><title>HTML Tag decorator</title></info>
+        <section xml:id="zend.tag.cloud.decorators.htmltag"><title>HTML Tag decorator</title>
             
 
             <para>
@@ -128,7 +128,7 @@ echo $cloud;
                 fixed and cannot be changed, but the surounding element(s) can.
             </para>
 
-            <note><info><title>URL parameter</title></info>
+            <note><title>URL parameter</title>
                 
 
                 <para>
@@ -189,7 +189,7 @@ echo $cloud;
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.tag.cloud.decorators.htmlcloud"><info><title>HTML Cloud decorator</title></info>
+        <section xml:id="zend.tag.cloud.decorators.htmlcloud"><title>HTML Cloud decorator</title>
             
 
             <para>

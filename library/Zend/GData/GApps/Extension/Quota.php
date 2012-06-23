@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\GApps\Extension;
 
 /**
@@ -30,8 +27,6 @@ namespace Zend\GData\GApps\Extension;
  * may not be able to be set, depending on the domain used. This class
  * is usually contained within an instance of Zend_Gdata_GApps_UserEntry.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\GApps
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps

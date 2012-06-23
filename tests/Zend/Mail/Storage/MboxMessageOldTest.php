@@ -19,13 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Mail\Storage;
 
 use Zend\Mail\Storage;
-
 
 /**
  * Maildir class, which uses old message class

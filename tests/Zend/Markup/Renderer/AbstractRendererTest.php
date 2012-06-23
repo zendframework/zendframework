@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Markup\Renderer;
 
 use ZendTest\Markup\Renderer\TestAsset\SimpleRenderer,

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Extension;
 
 use Zend\GData\Extension;
@@ -29,7 +26,6 @@ use Zend\GData\Extension;
 /**
  * Implements the gd:reminder element used to set/retrieve notifications
  *
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

@@ -19,15 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\XmlRpc\Value;
 use Zend\XmlRpc\Exception;
 
 /**
- * @uses       \Zend\XmlRpc\Value\Exception
- * @uses       \Zend\XmlRpc\Value\Scalar
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value

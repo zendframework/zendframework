@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @namespace
- */
 namespace ZendTest\Http;
 
 use Zend\Http\Request;
@@ -85,14 +82,26 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('GET', $request->getMethod());
     }
 
-    public function testRequestCanSetAndRetrieveUri()
+    /**
+     * @dataProvider uriDataProvider
+     */
+    public function testRequestCanSetAndRetrieveUri($uri)
     {
         $request = new Request();
-        $request->setUri('/foo');
-        $this->assertEquals('/foo', $request->getUri());
+        $request->setUri($uri);
+        $this->assertEquals($uri, $request->getUri());
         $this->assertInstanceOf('Zend\Uri\Uri', $request->uri());
-        $this->assertEquals('/foo', $request->uri()->toString());
-        $this->assertEquals('/foo', $request->getUri());
+        $this->assertEquals($uri, $request->uri()->toString());
+        $this->assertEquals($uri, $request->getUri());
+    }
+
+    public function uriDataProvider()
+    {
+        return array(
+            array('/foo'),
+            array('/foo#test'),
+            array('/hello?what=true#noway')
+        );
     }
 
     public function testRequestSetUriWillThrowExceptionOnInvalidArgument()
@@ -141,8 +150,33 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("GET / HTTP/1.1\r\n\r\nfoo=bar&bar=baz", $request->toString());
     }
 
+    public function testRequestIsXmlHttpRequest()
+    {
+        $request = new Request();
+        $this->assertFalse($request->isXmlHttpRequest());
 
+        $request = new Request();
+        $request->headers()->addHeaderLine('X_REQUESTED_WITH', 'FooBazBar');
+        $this->assertFalse($request->isXmlHttpRequest());
 
+        $request = new Request();
+        $request->headers()->addHeaderLine('X_REQUESTED_WITH', 'XMLHttpRequest');
+        $this->assertTrue($request->isXmlHttpRequest());
+    }
+
+    public function testRequestIsFlashRequest()
+    {
+        $request = new Request();
+        $this->assertFalse($request->isFlashRequest());
+
+        $request = new Request();
+        $request->headers()->addHeaderLine('USER_AGENT', 'FooBazBar');
+        $this->assertFalse($request->isFlashRequest());
+
+        $request = new Request();
+        $request->headers()->addHeaderLine('USER_AGENT', 'Shockwave Flash');
+        $this->assertTrue($request->isFlashRequest());
+    }
 
     /**
      * PHPUNIT DATA PROVIDER

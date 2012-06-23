@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\XmlRpc;
 
 use Zend\Http,
@@ -87,7 +84,7 @@ class Client implements ServerClient
      *
      * @param  string $server      Full address of the XML-RPC service
      *                             (e.g. http://time.xmlrpc.com/RPC2)
-     * @param  Zend\Http\Client $httpClient HTTP Client to use for requests
+     * @param  \Zend\Http\Client $httpClient HTTP Client to use for requests
      * @return void
      */
     public function __construct($server, Http\Client $httpClient = null)
@@ -259,7 +256,7 @@ class Client implements ServerClient
         }
 
         $this->_lastResponse = $response;
-        $this->_lastResponse->loadXml($httpResponse->getBody());
+        $this->_lastResponse->loadXml(trim($httpResponse->getBody()));
     }
 
     /**
@@ -278,7 +275,7 @@ class Client implements ServerClient
             $success = true;
             try {
                 $signatures = $this->getIntrospector()->getMethodSignature($method);
-            } catch (\Zend\XmlRpc\Exception $e) {
+            } catch (\Zend\XmlRpc\Exception\ExceptionInterface $e) {
                 $success = false;
             }
             if ($success) {
@@ -299,21 +296,30 @@ class Client implements ServerClient
                     $params = array($params);
                 }
                 foreach ($params as $key => $param) {
-
                     if ($param instanceof Value) {
                         continue;
                     }
 
-                    $type = Value::AUTO_DETECT_TYPE;
-                    foreach ($signatures as $signature) {
-                        if (!is_array($signature)) {
-                            continue;
+                    if (count($signatures) > 1) {
+                        $type = Value::getXmlRpcTypeByValue($param);
+                        foreach ($signatures as $signature) {
+                            if (!is_array($signature)) {
+                                continue;
+                            }
+                            if (isset($signature['parameters'][$key])) {
+                                if ($signature['parameters'][$key] == $type) {
+                                    break;
+                                }
+                            }
                         }
+                    } elseif (isset($signatures[0]['parameters'][$key])) {
+                        $type = $signatures[0]['parameters'][$key];
+                    } else {
+                        $type = null;
+                    }
 
-                        if (isset($signature['parameters'][$key])) {
-                            $type = $signature['parameters'][$key];
-                            $type = in_array($type, $validTypes) ? $type : Value::AUTO_DETECT_TYPE;
-                        }
+                    if (empty($type) || !in_array($type, $validTypes)) {
+                        $type = Value::AUTO_DETECT_TYPE;
                     }
 
                     $params[$key] = Value::getXmlRpcValue($param, $type);

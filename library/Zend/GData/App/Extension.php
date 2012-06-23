@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\App;
 
 /**
  * Gdata App extensions
  *
- * @uses       \Zend\GData\App\Base
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

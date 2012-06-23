@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View;
 
 use ArrayObject;
@@ -57,7 +54,7 @@ class Variables extends ArrayObject
     {
         parent::__construct(
             $variables, 
-            ArrayObject::STD_PROP_LIST|ArrayObject::ARRAY_AS_PROPS, 
+            ArrayObject::ARRAY_AS_PROPS, 
             'ArrayIterator'
         );
 

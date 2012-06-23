@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.usage"><info><title>Using Zend_Currency</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.usage"><title>Using Zend_Currency</title>
     
 
-    <section xml:id="zend.currency.usage.generic"><info><title>Generic usage</title></info>
+    <section xml:id="zend.currency.usage.generic"><title>Generic usage</title>
         
 
         <para>
@@ -11,7 +11,7 @@
             clients locale will be used to set the proper currency.
         </para>
 
-        <example xml:id="zend.currency.usage.generic.example-1"><info><title>Creating a currency with client settings</title></info>
+        <example xml:id="zend.currency.usage.generic.example-1"><title>Creating a currency with client settings</title>
             
 
             <para>
@@ -34,7 +34,7 @@ $currency = new Zend_Currency();
             </para>
         </example>
 
-        <note><info><title>Automatic locale detection does not always work</title></info>
+        <note><title>Automatic locale detection does not always work</title>
             
 
             <para>
@@ -53,7 +53,7 @@ $currency = new Zend_Currency();
         </note>
     </section>
 
-    <section xml:id="zend.currency.usage.locale"><info><title>Currency creation based on a locale</title></info>
+    <section xml:id="zend.currency.usage.locale"><title>Currency creation based on a locale</title>
         
 
         <para>
@@ -93,7 +93,7 @@ $currency = new Zend_Currency();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.currency.usage.territory"><info><title>Currency creation based on a country</title></info>
+    <section xml:id="zend.currency.usage.territory"><title>Currency creation based on a country</title>
         
 
         <para>
@@ -108,7 +108,7 @@ $currency = new Zend_Currency('US');
 // var_dump($currency);
 ]]></programlisting>
 
-        <note><info><title>Uppercase territories</title></info>
+        <note><title>Uppercase territories</title>
             
 
             <para>

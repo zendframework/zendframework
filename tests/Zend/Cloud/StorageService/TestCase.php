@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\StorageService
+ * @package    Zend_Cloud_StorageService
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -31,7 +31,7 @@ use Zend\Cloud\StorageService\Adapter,
  * Zend\Cloud\StorageService
  *
  * @category   Zend
- * @package    Zend\Cloud\StorageService
+ * @package    Zend_Cloud_StorageService
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -41,7 +41,7 @@ abstract class TestCase extends PHPUnitTestCase
     /**
      * Reference to storage adapter to test
      *
-     * @var Zend\Cloud\StorageService
+     * @var \Zend\Cloud\StorageService
      */
     protected $_commonStorage;
 
@@ -54,7 +54,7 @@ abstract class TestCase extends PHPUnitTestCase
     /**
      * Config object
      *
-     * @var Zend\Config\Config
+     * @var \Zend\Config\Config
      */
 
     protected $_config;
@@ -81,7 +81,7 @@ abstract class TestCase extends PHPUnitTestCase
 //    public function testNoParams()
 //    {
 //        $config = array(Factory::STORAGE_ADAPTER_KEY => $this->_config->get(Factory::STORAGE_ADAPTER_KEY));
-//        $this->setExpectedException('Zend\Cloud\StorageService\Exception');
+//        $this->setExpectedException('Zend\Cloud\StorageService\Exception\ExceptionInterface');
 //        $s = Factory::getAdapter($config);
 //    }
 //
@@ -109,7 +109,7 @@ abstract class TestCase extends PHPUnitTestCase
 //        } catch (Exception $e) {
 //            try {
 //                $this->_commonStorage->deleteItem($dummyNameText);
-//            } catch (Zend\Cloud\StorageService\Exception $ignoreMe) {
+//            } catch (\Zend\Cloud\StorageService\Exception $ignoreMe) {
 //            }
 //            throw $e;
 //        }
@@ -139,7 +139,7 @@ abstract class TestCase extends PHPUnitTestCase
 //        } catch (Exception $e) {
 //            try {
 //                $this->_commonStorage->deleteItem($dummyNameStream);
-//            } catch (Zend\Cloud\StorageService\Exception $ignoreMe) {
+//            } catch (\Zend\Cloud\StorageService\Exception $ignoreMe) {
 //            }
 //            throw $e;
 //        }
@@ -166,7 +166,7 @@ abstract class TestCase extends PHPUnitTestCase
 //        } catch (Exception $e) {
 //            try {
 //                $this->_commonStorage->deleteItem($dummyNameText);
-//            } catch (Zend\Cloud\StorageService\Exception $ignoreMe) {
+//            } catch (\Zend\Cloud\StorageService\Exception $ignoreMe) {
 //            }
 //            throw $e;
 //        }
@@ -193,7 +193,7 @@ abstract class TestCase extends PHPUnitTestCase
 //        } catch (Exception $e) {
 //            try {
 //                $this->_commonStorage->deleteItem($dummyNameStream);
-//            } catch (Zend\Cloud\StorageService\Exception $ignoreMe) {
+//            } catch (\Zend\Cloud\StorageService\Exception $ignoreMe) {
 //            }
 //            throw $e;
 //        }
@@ -224,7 +224,7 @@ abstract class TestCase extends PHPUnitTestCase
 //        } catch (Exception $e) {
 //            try {
 //                $this->_commonStorage->deleteItem($dummyName);
-//            } catch (Zend\Cloud\StorageService\Exception $ignorme) {
+//            } catch (\Zend\Cloud\StorageService\Exception $ignorme) {
 //            }
 //            throw $e;
 //        }
@@ -261,7 +261,7 @@ abstract class TestCase extends PHPUnitTestCase
 //            try {
 //                $this->_commonStorage->deleteItem($dummyName1);
 //                $this->_commonStorage->deleteItem($dummyName2);
-//            } catch (Zend\Cloud\StorageService\Exception $ignoreme) {
+//            } catch (\Zend\Cloud\StorageService\Exception\ExceptionInterface $ignoreme) {
 //            }
 //            throw $e;
 //        }
@@ -296,7 +296,7 @@ abstract class TestCase extends PHPUnitTestCase
 //            try {
 //                $this->_commonStorage->deleteItem($dummyName1);
 //                $this->_commonStorage->deleteItem($dummyName2);
-//            } catch (Zend\Cloud\StorageService\Exception $ignoreme) {
+//            } catch (\Zend\Cloud\StorageService\Exception\ExceptionInterface $ignoreme) {
 //            }
 //            throw $e;
 //        }
@@ -325,7 +325,7 @@ abstract class TestCase extends PHPUnitTestCase
 //        } catch (Exception $e) {
 //            try {
 //                $this->_commonStorage->deleteItem($dummyName);
-//            } catch (Zend\Cloud\StorageService\Exception $ignoreme) {
+//            } catch (\Zend\Cloud\StorageService\Exception\ExceptionInterface $ignoreme) {
 //            }
 //            throw $e;
 //        }
@@ -366,7 +366,7 @@ abstract class TestCase extends PHPUnitTestCase
             try {
                 $this->_commonStorage->deleteItem($dummyName1);
                 $this->_commonStorage->deleteItem($dummyName2);
-            } catch (Zend\Cloud\StorageService\Exception $ignoreme) {
+            } catch (\Zend\Cloud\StorageService\Exception $ignoreme) {
             }
             throw $e;
         }
@@ -396,7 +396,7 @@ abstract class TestCase extends PHPUnitTestCase
 
     /**
      * Get adapter configuration for concrete test
-     * @returns Zend\Config\Config
+     * @returns \Zend\Config\Config
      */
     abstract protected function _getConfig();
 }

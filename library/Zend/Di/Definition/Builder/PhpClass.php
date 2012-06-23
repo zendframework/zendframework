@@ -8,6 +8,7 @@ class PhpClass
     protected $name                 = null;
     protected $instantiator         = '__construct';
     protected $injectionMethods     = array();
+    protected $superTypes           = array();
     
     public function setName($name)
     {

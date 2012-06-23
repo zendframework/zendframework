@@ -18,17 +18,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter;
 
 use Traversable,
     Zend\Stdlib\ArrayUtils;
 
 /**
- * @uses       Zend\Filter\Exception
- * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -119,7 +114,7 @@ class PregReplace extends AbstractFilter
      * Set the match pattern for the regex being called within filter()
      *
      * @param mixed $match - same as the first argument of preg_replace
-     * @return \Zend\Filter\PregReplace
+     * @return PregReplace
      */
     public function setMatchPattern($match)
     {
@@ -141,7 +136,7 @@ class PregReplace extends AbstractFilter
      * Set the Replacement pattern/string for the preg_replace called in filter
      *
      * @param mixed $replacement - same as the second argument of preg_replace
-     * @return \Zend\Filter\PregReplace
+     * @return PregReplace
      */
     public function setReplacement($replacement)
     {
@@ -168,7 +163,7 @@ class PregReplace extends AbstractFilter
     public function filter($value)
     {
         if ($this->_matchPattern == null) {
-            throw new Exception\RuntimeException(get_class($this) . ' does not have a valid MatchPattern set.');
+            throw new Exception\RuntimeException(get_called_class() . ' does not have a valid MatchPattern set.');
         }
 
         return preg_replace($this->_matchPattern, $this->_replacement, $value);

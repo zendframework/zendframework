@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\QueueService\Adapter
+ * @package    ZendTest_Cloud_QueueService_Adapter
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -21,18 +21,13 @@
 
 namespace ZendTest\Cloud\QueueService\Adapter;
 
-// Call Zend\Cloud\QueueService\Adapter\SqsTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend\Cloud\QueueService\Adapter\SqsTest::main");
-}
-
 use ZendTest\Cloud\QueueService\TestCase,
     Zend\Cloud\QueueService\Adapter\Sqs,
     Zend\Config\Config;
 
 /**
  * @category   Zend
- * @package    Zend\Cloud\QueueService\Adapter
+ * @package    ZendTest_Cloud_QueueService_Adapter
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -48,18 +43,6 @@ class SqsTest extends TestCase
     protected $_waitPeriod = 10;
     
     protected $_clientType = 'Zend\Service\Amazon\Sqs';
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up this test case
@@ -143,8 +126,4 @@ class SqsTest extends TestCase
 
         return $config;
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend\Cloud\QueueService\Adapter\SqsTest::main') {
-    SqsTest::main();
 }

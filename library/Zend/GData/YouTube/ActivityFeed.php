@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\YouTube;
 
 use Zend\GData\YouTube;
@@ -29,9 +26,6 @@ use Zend\GData\YouTube;
 /**
  * A feed of user activity entries for YouTube
  *
- * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\ActivityEntry
  * @link http://code.google.com/apis/youtube/
  * @category   Zend
  * @package    Zend_Gdata

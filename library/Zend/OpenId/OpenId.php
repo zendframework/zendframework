@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\OpenId;
 
 use Zend\Http\Response;
@@ -457,7 +454,7 @@ class OpenId
         $response->headers()->addHeaderLine('Location', $url);
 
         if (!headers_sent()) {
-            header($response->renderResponseLine());
+            header($response->renderStatusLine());
             foreach ($response->headers() as $header) {
                 header($header->toString());
             }
@@ -496,7 +493,7 @@ class OpenId
      * @param string $func digest algorithm
      * @param string $data data to sign
      * @return string RAW digital signature
-     * @throws Zend\OpenId\Exception
+     * @throws Exception\InvalidArgumentException
      */
     static public function digest($func, $data)
     {
@@ -511,9 +508,9 @@ class OpenId
                 return mhash(MHASH_SHA256 , $data);
             }
         }
-        throw new Exception(
+        throw new Exception\InvalidArgumentException(
             'Unsupported digest algorithm "' . $func . '".',
-            Exception::UNSUPPORTED_DIGEST);
+            Exception\InvalidArgumentException::UNSUPPORTED_DIGEST);
     }
 
     /**
@@ -549,7 +546,7 @@ class OpenId
      *
      * @param string $bin binary representation of big number
      * @return mixed
-     * @throws Zend\OpenId\Exception
+     * @throws Exception\RuntimeException
      */
     static protected function binToBigNum($bin)
     {
@@ -557,16 +554,16 @@ class OpenId
             return gmp_init(bin2hex($bin), 16);
         } else if (extension_loaded('bcmath')) {
             $bn = 0;
-            $len = self::strlen($bin);
+            $len = strlen($bin);
             for ($i = 0; $i < $len; $i++) {
                 $bn = bcmul($bn, 256);
                 $bn = bcadd($bn, ord($bin[$i]));
             }
             return $bn;
         }
-        throw new Exception(
+        throw new Exception\RuntimeException(
             'The system doesn\'t have proper big integer extension',
-            Exception::UNSUPPORTED_LONG_MATH);
+            Exception\ExceptionInterface::UNSUPPORTED_LONG_MATH);
     }
 
     /**
@@ -575,7 +572,7 @@ class OpenId
      *
      * @param mixed $bn big number
      * @return string
-     * @throws Zend\OpenId\Exception
+     * @throws Exception\RuntimeException
      */
     static protected function bigNumToBin($bn)
     {
@@ -592,9 +589,9 @@ class OpenId
             if ($cmp == 0) {
                 return "\0";
             } else if ($cmp < 0) {
-                throw new Exception(
+                throw new Exception\RuntimeException(
                     'Big integer arithmetic error',
-                    Exception::ERROR_LONG_MATH);
+                    Exception\ExceptionInterface::ERROR_LONG_MATH);
             }
             $bin = "";
             while (bccomp($bn, 0) > 0) {
@@ -606,9 +603,9 @@ class OpenId
             }
             return $bin;
         }
-        throw new Exception(
+        throw new Exception\RuntimeException(
             'The system doesn\'t have proper big integer extension',
-            Exception::UNSUPPORTED_LONG_MATH);
+            Exception\RuntimeException::UNSUPPORTED_LONG_MATH);
     }
 
     /**
@@ -638,7 +635,7 @@ class OpenId
             $bn_p        = self::binToBigNum($p);
             $bn_g        = self::binToBigNum($g);
             if ($priv_key === null) {
-                $priv_key    = self::randomBytes(self::strlen($p));
+                $priv_key    = self::randomBytes(strlen($p));
             }
             $bn_priv_key = self::binToBigNum($priv_key);
             if (extension_loaded('gmp')) {
@@ -689,7 +686,7 @@ class OpenId
      * @param string $pub_key other party's public value
      * @param mixed $dh Diffie-Hellman key
      * @return string
-     * @throws Zend\OpenId\Exception
+     * @throws Exception\RuntimeException
      */
     static public function computeDhSecret($pub_key, $dh)
     {
@@ -708,9 +705,9 @@ class OpenId
             $bn_secret  = bcpowmod($bn_pub_key, $dh['priv_key'], $dh['p']);
             return self::bigNumToBin($bn_secret);
         }
-        throw new Exception(
+        throw new Exception\RuntimeException(
             'The system doesn\'t have proper big integer extension',
-            Exception::UNSUPPORTED_LONG_MATH);
+            Exception\RuntimeException::UNSUPPORTED_LONG_MATH);
     }
 
     /**
@@ -734,22 +731,6 @@ class OpenId
             return "\0" . $str;
         }
         return $str;
-    }
-
-    /**
-     * Returns lenght of binary string in bytes
-     *
-     * @param string $str
-     * @return int the string lenght
-     */
-    static public function strlen($str)
-    {
-        if (extension_loaded('mbstring') &&
-            (((int)ini_get('mbstring.func_overload')) & 2)) {
-            return mb_strlen($str, 'latin1');
-        } else {
-            return strlen($str);
-        }
     }
 
 }

@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @namespace
- */
 namespace Zend\Application\Exception;
 
 /**

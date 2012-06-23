@@ -19,17 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\App;
 
 /**
  * Concrete class to use a file handle as an attachment within a MediaEntry.
  *
- * @uses       ReflectionClass
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\App\MediaSource
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
@@ -153,7 +147,7 @@ abstract class BaseMediaSource implements MediaSource
      */
     public function __isset($name)
     {
-        $rc = new \ReflectionClass(get_class($this));
+        $rc = new \ReflectionClass(get_called_class());
         $privName = '_' . $name;
         if (!($rc->hasProperty($privName))) {
             throw new InvalidArgumentException(

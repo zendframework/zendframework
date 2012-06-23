@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Server\Reflection;
 
 /**
@@ -30,9 +27,6 @@ namespace Zend\Server\Reflection;
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
  * creating its own list of {@link Zend_Server_Reflection_Method}s.
  *
- * @uses       ReflectionClass
- * @uses       \Zend\Server\Reflection\Exception
- * @uses       \Zend\Server\Reflection\Method
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Reflection

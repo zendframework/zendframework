@@ -19,20 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Tag;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
- * @uses       \Zend\Tag\Exception\InvalidArgumentException
- * @uses       \Zend\Tag\Taggable
  * @category   Zend
  * @package    Zend_Tag
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Item implements Taggable
+class Item implements TaggableInterface
 {
     /**
      * Title of the tag
@@ -68,7 +66,7 @@ class Item implements Taggable
     /**
      * Create a new tag according to the options
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|Traversable $options
      * @throws \Zend\Tag\Exception\InvalidArgumentException When invalid options are provided
      * @throws \Zend\Tag\Exception\InvalidArgumentException When title was not set
      * @throws \Zend\Tag\Exception\InvalidArgumentException When weight was not set
@@ -76,8 +74,8 @@ class Item implements Taggable
      */
     public function __construct($options)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {
@@ -118,7 +116,7 @@ class Item implements Taggable
     }
 
     /**
-     * Defined by Zend\Tag\Taggable
+     * Defined by Zend\Tag\TaggableInterface
      *
      * @return string
      */
@@ -145,7 +143,7 @@ class Item implements Taggable
     }
 
     /**
-     * Defined by Zend\Tag\Taggable
+     * Defined by Zend\Tag\TaggableInterface
      *
      * @return float
      */
@@ -187,7 +185,7 @@ class Item implements Taggable
     }
 
     /**
-     * Defined by Zend\Tag\Taggable
+     * Defined by Zend\Tag\TaggableInterface
      *
      * @param  string $name
      * @param  mixed  $value
@@ -200,7 +198,7 @@ class Item implements Taggable
     }
 
     /**
-     * Defined by Zend\Tag\Taggable
+     * Defined by Zend\Tag\TaggableInterface
      *
      * @param  string $name
      * @return mixed

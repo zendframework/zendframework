@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Memory\Container;
 
 /**
@@ -28,7 +25,6 @@ namespace Zend\Memory\Container;
  *
  * Locked (always stored in memory).
  *
- * @uses       \Zend\Memory\Container\AbstractContainer
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

@@ -22,6 +22,7 @@
 namespace Zend\Cache\Storage;
 
 use Zend\Cache\Exception,
+    Zend\Cache\Storage\Plugin\PluginInterface,
     Zend\Loader\PluginBroker as BasePluginBroker;
 
 /**
@@ -44,16 +45,16 @@ class PluginBroker extends BasePluginBroker
 
     /**
      * Determine if we have a valid adapter
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return true
      * @throws Exception
      */
     protected function validatePlugin($plugin)
     {
-        if (!$plugin instanceof Plugin) {
+        if (!$plugin instanceof PluginInterface) {
             throw new Exception\RuntimeException(
-                'Cache storage plugins must implement Zend\Cache\Storage\Plugin'
+                'Cache storage plugins must implement Zend\Cache\Storage\Plugin\PluginInterface'
             );
         }
         return true;

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.digits"><info><title>Digits</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.digits"><title>Digits</title>
     
 
     <para>
         Returns the string <varname>$value</varname>, removing all but digits.
     </para>
 
-     <section xml:id="zend.filter.set.digits.options"><info><title>Supported options for Zend_Filter_Digits</title></info>
+     <section xml:id="zend.filter.set.digits.options"><title>Supported options for Zend_Filter_Digits</title>
         
 
         <para>
@@ -14,7 +14,7 @@
         </para>
     </section>
 
-     <section xml:id="zend.filter.set.digits.basic"><info><title>Basic usage</title></info>
+     <section xml:id="zend.filter.set.digits.basic"><title>Basic usage</title>
         
 
         <para>

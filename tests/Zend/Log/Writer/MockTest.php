@@ -21,8 +21,8 @@
 
 namespace ZendTest\Log\Writer;
 
-use \Zend\Log\Writer\Mock as MockWriter,
-    \Zend\Log\Logger;
+use Zend\Log\Writer\Mock as MockWriter,
+    Zend\Log\Logger;
 
 /**
  * @category   Zend
@@ -42,15 +42,5 @@ class MockTest extends \PHPUnit_Framework_TestCase
         $fields = array('foo' => 'bar');
         $writer->write($fields);
         $this->assertSame(array($fields), $writer->events);
-    }
-
-    public function testFactory()
-    {
-        $cfg = array('log' => array('memory' => array(
-            'writerName' => "Mock"
-        )));
-
-        $logger = Logger::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Logger);
     }
 }

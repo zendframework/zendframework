@@ -4,7 +4,7 @@ namespace Zend\Stdlib;
 
 use Traversable;
 
-class Message implements MessageDescription
+class Message implements MessageInterface
 {
     /**
      * @var array

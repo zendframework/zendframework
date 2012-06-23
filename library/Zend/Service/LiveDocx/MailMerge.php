@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\LiveDocx;
 
 use Zend\Date\Date;
@@ -65,7 +62,7 @@ class MailMerge extends AbstractLiveDocx
      * This component implements the LiveDocx.MailMerge SOAP Service
      * by Text Control GmbH).
      *
-     * Optionally, pass an array of options (or \Zend\Config\Config object).
+     * Optionally, pass an array of options or Traversable object).
      *
      * If an option with the key 'soapClient' is provided, that value will be
      * used to set the internal SOAP client used to connect to the LiveDocx
@@ -118,7 +115,7 @@ class MailMerge extends AbstractLiveDocx
      * );
      * {/code}
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|\Traversable $options
      * @return void
      * @since  LiveDocx 1.0
      */

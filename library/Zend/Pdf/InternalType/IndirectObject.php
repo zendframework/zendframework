@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\InternalType;
 use Zend\Pdf\Exception;
 use Zend\Pdf\ObjectFactory;
@@ -30,9 +27,6 @@ use Zend\Pdf;
 /**
  * PDF file 'indirect object' element implementation
  *
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\ObjectFactory
- * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -76,7 +70,7 @@ class IndirectObject extends AbstractTypeObject
      * @param integer $objNum
      * @param integer $genNum
      * @param \Zend\Pdf\ObjectFactory $factory
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct(AbstractTypeObject $val,
                                 $objNum,

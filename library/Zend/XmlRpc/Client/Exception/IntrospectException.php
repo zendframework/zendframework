@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\XmlRpc\Client\Exception;
 
 /**
  * Thrown by Zend_XmlRpc_Client_Introspection when any error occurs.
  *
- * @uses       Zend\XmlRpc\Client\Exception
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Client
@@ -35,6 +31,5 @@ namespace Zend\XmlRpc\Client\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class IntrospectException
-    extends \InvalidArgumentException
-    implements \Zend\XmlRpc\Client\Exception
+    extends InvalidArgumentException
 {}

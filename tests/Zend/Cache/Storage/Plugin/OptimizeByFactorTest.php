@@ -3,7 +3,7 @@
 namespace ZendTest\Cache\Storage\Plugin;
 use Zend\Cache,
     Zend\Cache\Storage\PostEvent,
-    ZendTest\Cache\Storage\TestAsset\MockAdapter,
+    ZendTest\Cache\Storage\TestAsset\OptimizableMockAdapter,
     ArrayObject;
 
 class OptimizeByFactorTest extends CommonPluginTest
@@ -18,7 +18,7 @@ class OptimizeByFactorTest extends CommonPluginTest
 
     public function setUp()
     {
-        $this->_adapter = new MockAdapter();
+        $this->_adapter = new OptimizableMockAdapter();
         $this->_options = new Cache\Storage\Plugin\PluginOptions(array(
             'optimizing_factor' => 1,
         ));
@@ -32,10 +32,8 @@ class OptimizeByFactorTest extends CommonPluginTest
 
         // check attached callbacks
         $expectedListeners = array(
-            'removeItem.post'        => 'optimizeByFactor',
-            'removeItems.post'       => 'optimizeByFactor',
-            'clear.post'             => 'optimizeByFactor',
-            'clearByNamespace.post'  => 'optimizeByFactor',
+            'removeItem.post'  => 'optimizeByFactor',
+            'removeItems.post' => 'optimizeByFactor',
         );
         foreach ($expectedListeners as $eventName => $expectedCallbackMethod) {
             $listeners = $this->_adapter->events()->getListeners($eventName);
@@ -80,5 +78,4 @@ class OptimizeByFactorTest extends CommonPluginTest
 
         $this->assertTrue($event->getResult());
     }
-
 }

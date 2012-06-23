@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Validator\Sitemap;
 
 /**
@@ -98,7 +95,7 @@ class LocTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidLocs($url)
     {
-        $this->markTestSkipped('Test must be reworked');
+        $this->markTestIncomplete('Test must be reworked');
         $this->assertFalse($this->_validator->isValid($url), $url);
         $messages = $this->_validator->getMessages();
         $this->assertContains('is not a valid', current($messages));

@@ -11,15 +11,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage DocumentService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\DocumentService;
 
 /**
@@ -29,7 +26,7 @@ namespace Zend\Cloud\DocumentService;
  * TODO Can fields be large enough to warrant support for streams?
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage DocumentService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -81,7 +78,7 @@ class Document
      * Set document identifier
      *
      * @param  mixed $id
-     * @return Zend\Cloud\DocumentService\Document
+     * @return \Zend\Cloud\DocumentService\Document
      */
     public function setId($id)
     {
@@ -128,7 +125,7 @@ class Document
      *
      * @param  string $name
      * @param  mixed $value
-     * @return Zend\Cloud\DocumentService\Document
+     * @return \Zend\Cloud\DocumentService\Document
      */
     public function setField($name, $value)
     {
@@ -242,7 +239,7 @@ class Document
     /**
      * IteratorAggregate: return iterator for iterating over fields
      *
-     * @return Iterator
+     * @return \Iterator
      */
     public function getIterator()
     {

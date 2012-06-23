@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql;
@@ -31,34 +20,57 @@ use Zend\Db\Adapter\Adapter,
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @property Where $where
  */
-class Update implements SqlInterface, PreparableSqlInterface
+class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
 {
+    /**@#++
+     * @const
+     */
+    const SPECIFICATION_UPDATE = 'update';
+    const SPECIFICATION_WHERE = 'where';
+
     const VALUES_MERGE = 'merge';
     const VALUES_SET   = 'set';
+    /**@#-**/
 
-    protected $specification        = 'UPDATE %1$s SET %2$s';
-    protected $databaseOrSchema     = null;
-    protected $table                = null;
+    protected $specifications = array(
+        self::SPECIFICATION_UPDATE => 'UPDATE %1$s SET %2$s',
+        self::SPECIFICATION_WHERE => 'WHERE %1$s'
+    );
+
+    /**
+     * @var string
+     */
+    protected $table = '';
+
+    /**
+     * @var bool
+     */
     protected $emptyWhereProtection = true;
-    protected $set                  = array();
-    protected $where                = null;
+
+    /**
+     * @var array
+     */
+    protected $set = array();
+
+    /**
+     * @var string|Where
+     */
+    protected $where = null;
 
     /**
      * Constructor
      * 
      * @param  null|string $table 
-     * @param  null|string $databaseOrSchema 
+     * @param  null|string $schema
      * @return void
      */
-    public function __construct($table = null, $databaseOrSchema = null)
+    public function __construct($table = null)
     {
         if ($table) {
-            $this->table($table, $databaseOrSchema);
+            $this->table($table);
         }
         $this->where = new Where();
     }
@@ -67,15 +79,12 @@ class Update implements SqlInterface, PreparableSqlInterface
      * Specify table for statement
      * 
      * @param  string $table 
-     * @param  null|string $databaseOrSchema 
+     * @param  null|string $schema
      * @return Update
      */
-    public function table($table, $databaseOrSchema = null)
+    public function table($table)
     {
         $this->table = $table;
-        if ($databaseOrSchema) {
-            $this->databaseOrSchema = $databaseOrSchema;
-        }
         return $this;
     }
 
@@ -121,15 +130,15 @@ class Update implements SqlInterface, PreparableSqlInterface
             $predicate($this->where);
         } else {
             if (is_string($predicate)) {
-                $predicate = new Predicate\Literal($predicate);
+                $predicate = new Predicate\Expression($predicate);
             } elseif (is_array($predicate)) {
                 foreach ($predicate as $pkey => $pvalue) {
                     if (is_string($pkey) && strpos($pkey, '?') !== false) {
-                        $predicate = new Predicate\Literal($pkey, $pvalue);
+                        $predicate = new Predicate\Expression($pkey, $pvalue);
                     } elseif (is_string($pkey)) {
                         $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
                     } else {
-                        $predicate = new Predicate\Literal($pvalue);
+                        $predicate = new Predicate\Expression($pvalue);
                     }
                 }
             }
@@ -138,27 +147,16 @@ class Update implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
-    /*
-    public function isValid($throwException = self::VALID_RETURN_BOOLEAN)
+    public function getRawState($key = null)
     {
-        if ($this->table == null || !is_string($this->table)) {
-            if ($throwException) throw new \Exception('A valid table name is required');
-            return false;
-        }
-
-        if (count($this->values) == 0) {
-            if ($throwException) throw new \Exception('Values are required for this insert object to be valid');
-            return false;
-        }
-
-        if (count($this->columns) > 0 && count($this->columns) != count($this->values)) {
-            if ($throwException) throw new \Exception('When columns are present, there needs to be an equal number of columns and values');
-            return false;
-        }
-
-        return true;
+        $rawState = array(
+            'emptyWhereProtection' => $this->emptyWhereProtection,
+            'table' => $this->table,
+            'set' => $this->set,
+            'where' => $this->where
+        );
+        return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
-    */
 
     /**
      * Prepare statement
@@ -172,65 +170,61 @@ class Update implements SqlInterface, PreparableSqlInterface
         $driver   = $adapter->getDriver();
         $platform = $adapter->getPlatform();
         $parameterContainer = $statement->getParameterContainer();
-        $prepareType = $driver->getPrepareType();
+
+        if (!$parameterContainer instanceof ParameterContainer) {
+            $parameterContainer = new ParameterContainer();
+            $statement->setParameterContainer($parameterContainer);
+        }
 
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->databaseOrSchema != '') {
-            $table = $platform->quoteIdentifier($this->databaseOrSchema)
-                . $platform->getIdentifierSeparator()
-                . $table;
-        }
 
         $set = $this->set;
         if (is_array($set)) {
             $setSql = array();
-            $values = array();
             foreach ($set as $column => $value) {
-                if ($prepareType == 'positional') {
-                    $parameterContainer->offsetSet(null, $value);
-                    $name = $driver->formatParameterName(null);
-                } elseif ($prepareType == 'named') {
-                    $parameterContainer->offsetSet($column, $value);
-                    $name = $driver->formatParameterName($column);
-                }
-                $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $name;
+                $parameterContainer->offsetSet($column, $value);
+                $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName($column);
             }
             $set = implode(', ', $setSql);
         }
 
-        $sql = sprintf($this->specification, $table, $set);
-        $statement->setSql($sql);
+        $sql = sprintf($this->specifications[self::SPECIFICATION_UPDATE], $table, $set);
 
-        $this->where->prepareStatement($adapter, $statement);
+        // process where
+        if ($this->where->count() > 0) {
+            $whereParts = $this->processExpression($this->where, $platform, $adapter->getDriver(), 'where');
+            if (count($whereParts['parameters']) > 0) {
+                $parameterContainer->merge($whereParts['parameters']);
+            }
+            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
+        }
+        $statement->setSql($sql);
     }
 
     /**
      * Get SQL string for statement
      * 
-     * @param  null|PlatformInterface $platform If null, defaults to Sql92
+     * @param  null|PlatformInterface $adapterPlatform If null, defaults to Sql92
      * @return string
      */
-    public function getSqlString(PlatformInterface $platform = null)
+    public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
-        $platform = ($platform) ?: new Sql92;
-        $table = $platform->quoteIdentifier($this->table);
-
-        if ($this->databaseOrSchema != '') {
-            $table = $platform->quoteIdentifier($this->databaseOrSchema) . $platform->getIdentifierSeparator() . $table;
-        }
+        $adapterPlatform = ($adapterPlatform) ?: new Sql92;
+        $table = $adapterPlatform->quoteIdentifier($this->table);
 
         $set = $this->set;
         if (is_array($set)) {
             $setSql = array();
             foreach ($set as $setName => $setValue) {
-                $setSql[] = $platform->quoteIdentifier($setName) . ' = ' . $platform->quoteValue($setValue);
+                $setSql[] = $adapterPlatform->quoteIdentifier($setName) . ' = ' . $adapterPlatform->quoteValue($setValue);
             }
             $set = implode(', ', $setSql);
         }
 
-        $sql = sprintf($this->specification, $table, $set);
+        $sql = sprintf($this->specifications[self::SPECIFICATION_UPDATE], $table, $set);
         if ($this->where->count() > 0) {
-            $sql .= $this->where->getSqlString($platform);
+            $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');
+            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
         }
         return $sql;
     }
@@ -249,5 +243,17 @@ class Update implements SqlInterface, PreparableSqlInterface
             case 'where':
                 return $this->where;
         }
+    }
+	
+	/**
+     * __clone
+     *
+     * Resets the where object each time the Update is cloned.
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        $this->where = clone $this->where;
     }
 }

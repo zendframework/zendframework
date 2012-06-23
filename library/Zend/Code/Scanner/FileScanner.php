@@ -2,11 +2,10 @@
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\Scanner,
-    Zend\Code\Exception,
-    Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Exception;
+use Zend\Code\Annotation\AnnotationManager;
 
-class FileScanner extends TokenArrayScanner implements Scanner
+class FileScanner extends TokenArrayScanner implements ScannerInterface
 {
     /**
      * @var string
@@ -18,8 +17,8 @@ class FileScanner extends TokenArrayScanner implements Scanner
         $this->file = $file;
         if (!file_exists($file)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'File "%s" not found', $file
-            ));
+                                                             'File "%s" not found', $file
+                                                         ));
         }
         parent::__construct(token_get_all(file_get_contents($file)), $annotationManager);
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.introduction"><title>Introduction</title>
 
 
     <para>
@@ -109,7 +109,7 @@
         </listitem>
     </itemizedlist>
 
-    <section xml:id="zend.translator.introduction.adapters"><info><title>Starting multi-lingual</title></info>
+    <section xml:id="zend.translator.introduction.adapters"><title>Starting multi-lingual</title>
 
 
         <para>

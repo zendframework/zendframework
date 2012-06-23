@@ -19,17 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Test;
 use Zend\Db\Statement;
 
 /**
  * Testing Database Statement that acts as a stack to SQL resultsets.
  *
- * @uses       \Zend\Db\Statement\Exception
- * @uses       \Zend\Db\Statement
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

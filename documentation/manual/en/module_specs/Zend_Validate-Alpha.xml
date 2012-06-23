@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.alpha"><info><title>Alpha</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.alpha"><title>Alpha</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         validator with the exception that it does not accept digits.
     </para>
 
-    <section xml:id="zend.validate.set.alpha.options"><info><title>Supported options for Zend_Validate_Alpha</title></info>
+    <section xml:id="zend.validate.set.alpha.options"><title>Supported options for Zend_Validate_Alpha</title>
         
 
         <para>
@@ -26,7 +26,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.alpha.basic"><info><title>Basic usage</title></info>
+    <section xml:id="zend.validate.set.alpha.basic"><title>Basic usage</title>
         
 
         <para>
@@ -43,7 +43,7 @@ if ($validator->isValid('Abcd')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.alpha.whitespace"><info><title>Using whitespaces</title></info>
+    <section xml:id="zend.validate.set.alpha.whitespace"><title>Using whitespaces</title>
         
 
         <para>
@@ -69,7 +69,7 @@ if ($validator->isValid('Abcd and efg')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.alpha.languages"><info><title>Using different languages</title></info>
+    <section xml:id="zend.validate.set.alpha.languages"><title>Using different languages</title>
         
 
         <para>

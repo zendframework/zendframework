@@ -13,14 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
+ * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\XmlRpc\Response;
 
 use Zend\XmlRpc\Response as XmlRpcResponse;
@@ -28,7 +25,6 @@ use Zend\XmlRpc\Response as XmlRpcResponse;
 /**
  * HTTP response
  *
- * @uses       \Zend\XmlRpc\Response\Response
  * @category   Zend
  * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

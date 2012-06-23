@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.introduction">
-    <info><title>Introduction</title></info>
+    <title>Introduction</title>
 
     <para>
         <classname>Zend_Service</classname> is an abstract class which serves as a

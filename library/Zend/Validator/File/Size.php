@@ -18,21 +18,14 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator\File;
 
-use Zend\Loader,
-    Zend\Validator,
+use Zend\Validator,
     Zend\Validator\Exception;
 
 /**
  * Validator for the maximum size of a file up to a max of 2GB
  *
- * @uses      \Zend\Loader
- * @uses      \Zend\Validator\AbstractValidator
- * @uses      \Zend\Validator\Exception
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -92,7 +85,7 @@ class Size extends Validator\AbstractValidator
      * 'max': Maximum filesize
      * 'useByteString': Use bytestring or real size for messages
      *
-     * @param  integer|array $options Options for the adapter
+     * @param  integer|array|\Traversable $options Options for the adapter
      */
     public function __construct($options = null)
     {
@@ -259,7 +252,7 @@ class Size extends Validator\AbstractValidator
         }
 
         // Is file readable ?
-        if (!Loader::isReadable($value)) {
+        if (false === stream_resolve_include_path($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }
 

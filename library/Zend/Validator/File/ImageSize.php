@@ -18,21 +18,14 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator\File;
 
-use Zend\Loader,
-    Zend\Validator,
+use Zend\Validator,
     Zend\Validator\Exception;
 
 /**
  * Validator for the image size of a image file
  *
- * @uses      \Zend\Loader
- * @uses      \Zend\Validator\AbstractValidator
- * @uses      \Zend\Validator\Exception
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -109,8 +102,7 @@ class ImageSize extends Validator\AbstractValidator
      * - maxheight
      * - maxwidth
      *
-     * @param  \Zend\Config\Config|array $options
-     * @return void
+     * @param  array|\Traversable $options
      */
     public function __construct($options = null)
     {
@@ -400,7 +392,7 @@ class ImageSize extends Validator\AbstractValidator
         }
 
         // Is file readable ?
-        if (!Loader::isReadable($value)) {
+        if (false === stream_resolve_include_path($value)) {
             return $this->_throw($file, self::NOT_READABLE);
         }
 

@@ -97,6 +97,67 @@ class OAuthTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('GET', $client->getRequestMethod());
         $this->assertEquals('http://www.example.com', $client->getSiteUrl());
     }
+
+    public function testOauthClientUsingGetRequestParametersForSignature()
+    {
+        $mock = $this->getMock('Zend\\OAuth\\Http\\Utility', array('generateTimestamp', 'generateNonce'));
+        $mock->expects($this->once())->method('generateTimestamp')->will($this->returnValue('123456789'));
+        $mock->expects($this->once())->method('generateNonce')->will($this->returnValue('67648c83ba9a7de429bd1b773fb96091'));
+        
+        $token   = new OAuth\Token\Access(null, $mock);
+        $token->setToken('123')
+              ->setTokenSecret('456');
+        
+        $client = new OAuth\Client(array(
+            'token' => $token
+        ), 'http://www.example.com');
+        $client->getRequest()->query()->set('foo', 'bar');
+        $client->prepareOAuth();
+        
+        $header = 'OAuth realm="",oauth_consumer_key="",oauth_nonce="67648c83ba9a7de429bd1b773fb96091",oauth_signature_method="HMAC-SHA1",oauth_timestamp="123456789",oauth_version="1.0",oauth_token="123",oauth_signature="fzWiYe4gZ2wkEMp9bEzWnlD88KE%3D"';
+        $this->assertEquals($header, $client->getHeader('Authorization'));
+    }
+    
+    public function testOauthClientUsingPostRequestParametersForSignature()
+    {
+        $mock = $this->getMock('Zend\\OAuth\\Http\\Utility', array('generateTimestamp', 'generateNonce'));
+        $mock->expects($this->once())->method('generateTimestamp')->will($this->returnValue('123456789'));
+        $mock->expects($this->once())->method('generateNonce')->will($this->returnValue('67648c83ba9a7de429bd1b773fb96091'));
+        
+        $token   = new OAuth\Token\Access(null, $mock);
+        $token->setToken('123')
+              ->setTokenSecret('456');
+        
+        $client = new OAuth\Client(array(
+            'token' => $token
+        ), 'http://www.example.com');
+        $client->getRequest()->post()->set('foo', 'bar');
+        $client->prepareOAuth();
+        
+        $header = 'OAuth realm="",oauth_consumer_key="",oauth_nonce="67648c83ba9a7de429bd1b773fb96091",oauth_signature_method="HMAC-SHA1",oauth_timestamp="123456789",oauth_version="1.0",oauth_token="123",oauth_signature="fzWiYe4gZ2wkEMp9bEzWnlD88KE%3D"';
+        $this->assertEquals($header, $client->getHeader('Authorization'));
+    }
+    
+    public function testOauthClientUsingPostAndGetRequestParametersForSignature()
+    {
+        $mock = $this->getMock('Zend\\OAuth\\Http\\Utility', array('generateTimestamp', 'generateNonce'));
+        $mock->expects($this->once())->method('generateTimestamp')->will($this->returnValue('123456789'));
+        $mock->expects($this->once())->method('generateNonce')->will($this->returnValue('67648c83ba9a7de429bd1b773fb96091'));
+        
+        $token   = new OAuth\Token\Access(null, $mock);
+        $token->setToken('123')
+              ->setTokenSecret('456');
+        
+        $client = new OAuth\Client(array(
+            'token' => $token
+        ), 'http://www.example.com');
+        $client->getRequest()->post()->set('foo', 'bar');
+        $client->getRequest()->query()->set('baz', 'bat');
+        $client->prepareOAuth();
+        
+        $header = 'OAuth realm="",oauth_consumer_key="",oauth_nonce="67648c83ba9a7de429bd1b773fb96091",oauth_signature_method="HMAC-SHA1",oauth_timestamp="123456789",oauth_version="1.0",oauth_token="123",oauth_signature="qj3FYtStzP083hT9QkqCdxsMauw%3D"';
+        $this->assertEquals($header, $client->getHeader('Authorization'));
+    }
 }
 
 class HTTPClient19485876 extends \Zend\Http\Client {}

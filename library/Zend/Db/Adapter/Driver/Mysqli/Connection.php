@@ -1,64 +1,55 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Driver\ConnectionInterface,
+    Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Connection implements ConnectionInterface
 {
+
     /**
      * @var Mysqli
      */
     protected $driver = null;
+
     /**
-     * Connection paramters
+     * Connection parameters
      * 
      * @var array 
      */
     protected $connectionParameters = array();
-    
+
     /**
      * @var \mysqli
      */
     protected $resource = null;
 
     /**
-     * In transcaction
+     * In transaction
      * 
      * @var boolean
      */
-    protected $inTransaction = false;    
+    protected $inTransaction = false;
 
     /**
      * Constructor
-     * 
-     * @param mysqli $connectionInfo 
+     *
+     * @param array|mysqli|null $connectionInfo
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      */
     public function __construct($connectionInfo = null)
     {
@@ -66,6 +57,8 @@ class Connection implements ConnectionInterface
             $this->setConnectionParameters($connectionInfo);
         } elseif ($connectionInfo instanceof \mysqli) {
             $this->setResource($connectionInfo);
+        } elseif (null !== $connectionInfo) {
+            throw new Exception\InvalidArgumentException('$connection must be an array of parameters, a mysqli object or null');
         }
     }
 
@@ -78,7 +71,7 @@ class Connection implements ConnectionInterface
         $this->driver = $driver;
         return $this;
     }
-    
+
     /**
      * Set connection parameters
      * 
@@ -100,6 +93,7 @@ class Connection implements ConnectionInterface
     {
         return $this->connectionParameters;
     }
+
     /**
      * Get default catalog
      * 
@@ -109,7 +103,7 @@ class Connection implements ConnectionInterface
     {
         return null;
     }
-    
+
     /**
      * Get default schema
      * 
@@ -149,6 +143,7 @@ class Connection implements ConnectionInterface
         $this->connect();
         return $this->resource;
     }
+
     /**
      * Connect
      * 
@@ -183,7 +178,11 @@ class Connection implements ConnectionInterface
         $this->resource = new \Mysqli($hostname, $username, $password, $database, $port, $socket);
 
         if ($this->resource->connect_error) {
-            throw new \Exception('Connect Error (' . $this->resource->connect_errno . ') ' . $this->resource->connect_error);
+            throw new Exception\RuntimeException(
+                'Connection error',
+                null,
+                new Exception\ErrorException($this->resource->connect_error, $this->resource->connect_errno)
+            );
         }
 
         if (!empty($p['charset'])) {
@@ -191,7 +190,7 @@ class Connection implements ConnectionInterface
         }
 
     }
-    
+
     /**
      * Is connected
      * 
@@ -201,7 +200,7 @@ class Connection implements ConnectionInterface
     {
         return ($this->resource instanceof \Mysqli);
     }
-    
+
     /**
      * Disconnect
      */
@@ -212,7 +211,7 @@ class Connection implements ConnectionInterface
         }
         unset($this->resource);
     }
-    
+
     /**
      * Begin transaction
      */
@@ -221,7 +220,7 @@ class Connection implements ConnectionInterface
         $this->resource->autocommit(false);
         $this->inTransaction = true;
     }
-    
+
     /**
      * Commit
      */
@@ -230,12 +229,12 @@ class Connection implements ConnectionInterface
         if (!$this->resource) {
             $this->connect();
         }
-        
+
         $this->resource->commit();
-        
+
         $this->inTransaction = false;
     }
-    
+
     /**
      * Rollback
      * 
@@ -244,17 +243,17 @@ class Connection implements ConnectionInterface
     public function rollback()
     {
         if (!$this->resource) {
-            throw new \Exception('Must be connected before you can rollback.');
+            throw new Exception\RuntimeException('Must be connected before you can rollback.');
         }
-        
+
         if (!$this->inTransaction) {
-            throw new \Exception('Must call commit() before you can rollback.');
+            throw new Exception\RuntimeException('Must call commit() before you can rollback.');
         }
-        
+
         $this->resource->rollback();
         return $this;
     }
-    
+
     /**
      * Execute
      * 
@@ -271,20 +270,21 @@ class Connection implements ConnectionInterface
 
         // if the returnValue is something other than a mysqli_result, bypass wrapping it
         if ($resultResource === false) {
-            throw new \Zend\Db\Adapter\Exception\InvalidQueryException($this->resource->error);
+            throw new Exception\InvalidQueryException($this->resource->error);
         }
 
         $resultPrototype = $this->driver->createResult(($resultResource === true) ? $this->resource : $resultResource);
         return $resultPrototype;
     }
+
     /**
      * Get last generated id
      * 
      * @return integer 
      */
-    public function getLastGeneratedId()
+    public function getLastGeneratedValue()
     {
         return $this->resource->insert_id;
     }
+
 }
-    

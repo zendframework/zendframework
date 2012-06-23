@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Translator\Exception;
 
 /**
@@ -31,5 +28,5 @@ namespace Zend\Translator\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements \Zend\Translator\Exception
+    implements ExceptionInterface
 {}

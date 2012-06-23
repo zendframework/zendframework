@@ -11,17 +11,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\DocumentService
+ * @package    Zend_Cloud_DocumentService
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\DocumentService\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Cloud\DocumentService\Adapter\SimpleDb\Query,
     Zend\Service\Amazon\Exception as AmazonException,
     Zend\Service\Amazon\SimpleDb\SimpleDb as SimpleDbService,
@@ -32,7 +31,7 @@ use Zend\Cloud\DocumentService\Adapter\SimpleDb\Query,
  * SimpleDB adapter for document service.
  *
  * @category   Zend
- * @package    Zend\Cloud\DocumentService
+ * @package    Zend_Cloud_DocumentService
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -55,7 +54,7 @@ class SimpleDb extends AbstractAdapter
 
     /**
      * SQS service instance.
-     * @var Zend\Service\Amazon\SimpleDb
+     * @var \Zend\Service\Amazon\SimpleDb\SimpleDb
      */
     protected $_simpleDb;
 
@@ -68,13 +67,12 @@ class SimpleDb extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|Zend\Config $options
-     * @return void
+     * @param array|Traversable $options
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Zend\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {
@@ -113,7 +111,7 @@ class SimpleDb extends AbstractAdapter
     {
         try {
             $this->_simpleDb->createDomain($name);
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RunTimeException('Error on domain creation: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -129,7 +127,7 @@ class SimpleDb extends AbstractAdapter
     {
         try {
             $this->_simpleDb->deleteDomain($name);
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RunTimeException('Error on collection deletion: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -145,7 +143,7 @@ class SimpleDb extends AbstractAdapter
         try {
             // TODO package this in Pages
             $domains = $this->_simpleDb->listDomains()->getData();
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RuntimeException('Error on collection deletion: '.$e->getMessage(), $e->getCode(), $e);
         }
 
@@ -159,7 +157,7 @@ class SimpleDb extends AbstractAdapter
      *
      * @param  string $collectionName Name of collection for which to list documents
      * @param  array|null $options
-     * @return Zend\Cloud\DocumentService\DocumentSet
+     * @return \Zend\Cloud\DocumentService\DocumentSet
      */
     public function listDocuments($collectionName, array $options = null)
     {
@@ -172,7 +170,7 @@ class SimpleDb extends AbstractAdapter
      * Insert document
      *
      * @param  string $collectionName Collection into which to insert document
-     * @param  array|Zend\Cloud\DocumentService\Document $document
+     * @param  array|\Zend\Cloud\DocumentService\Document $document
      * @param  array $options
      * @return void
      */
@@ -201,7 +199,7 @@ class SimpleDb extends AbstractAdapter
      * Replace an existing document with a new version
      *
      * @param  string $collectionName
-     * @param  array|Zend\Cloud\DocumentService\Document $document
+     * @param  array|\Zend\Cloud\DocumentService\Document $document
      * @param  array $options
      * @return void
      */
@@ -211,7 +209,7 @@ class SimpleDb extends AbstractAdapter
             $document =  $this->_getDocumentFromArray($document);
         }
 
-        if (!$document instanceof Zend\Cloud\DocumentService\Document) {
+        if (!$document instanceof \Zend\Cloud\DocumentService\Document) {
             throw new Exception\InvalidArgumentException('Invalid document supplied');
         }
 
@@ -234,19 +232,19 @@ class SimpleDb extends AbstractAdapter
      * By default, attributes are replaced.
      *
      * @param  string $collectionName
-     * @param  mixed|Zend\Cloud\DocumentService\Document $documentId Document ID, adapter-dependent
-     * @param  array|Zend\Cloud\DocumentService\Document $fieldset Set of fields to update
+     * @param  mixed|\Zend\Cloud\DocumentService\Document $documentId Document ID, adapter-dependent
+     * @param  array|\Zend\Cloud\DocumentService\Document $fieldset Set of fields to update
      * @param  array $options
      * @return boolean
      */
     public function updateDocument($collectionName, $documentId, $fieldset = null, $options = null)
     {
-        if (null === $fieldset && $documentId instanceof Zend\Cloud\DocumentService\Document) {
+        if (null === $fieldset && $documentId instanceof \Zend\Cloud\DocumentService\Document) {
             $fieldset   = $documentId->getFields();
             if (empty($documentId)) {
                 $documentId = $documentId->getId();
             }
-        } elseif ($fieldset instanceof Zend\Cloud\DocumentService\Document) {
+        } elseif ($fieldset instanceof \Zend\Cloud\DocumentService\Document) {
             if (empty($documentId)) {
                 $documentId = $fieldset->getId();
             }
@@ -275,7 +273,7 @@ class SimpleDb extends AbstractAdapter
                 $this->_makeAttributes($documentId, $fieldset),
                 $replace
             );
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RunTimeException('Error on document update: '.$e->getMessage(), $e->getCode(), $e);
         }
         return true;
@@ -291,12 +289,12 @@ class SimpleDb extends AbstractAdapter
      */
     public function deleteDocument($collectionName, $document, $options = null)
     {
-        if ($document instanceof Zend\Cloud\DocumentService\Document) {
+        if ($document instanceof \Zend\Cloud\DocumentService\Document) {
             $document = $document->getId();
         }
         try {
             $this->_simpleDb->deleteAttributes($collectionName, $document);
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RuntimeException('Error on document deletion: '.$e->getMessage(), $e->getCode(), $e);
         }
         return true;
@@ -308,7 +306,7 @@ class SimpleDb extends AbstractAdapter
      * @param  string $collectionName Collection name
      * @param  mixed $documentId Document ID, adapter-dependent
      * @param  array $options
-     * @return Zend\Cloud\DocumentService\Document
+     * @return \Zend\Cloud\DocumentService\Document
      */
     public function fetchDocument($collectionName, $documentId, $options = null)
     {
@@ -318,7 +316,7 @@ class SimpleDb extends AbstractAdapter
                 return false;
             }
             return $this->_resolveAttributes($attributes, true);
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RunTimeException('Error on fetching document: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -330,7 +328,7 @@ class SimpleDb extends AbstractAdapter
      * @param  string $collectionName Collection name
      * @param  string $query
      * @param  array $options
-     * @return array Zend\Cloud\DocumentService\DocumentSet
+     * @return array|\Zend\Cloud\DocumentService\DocumentSet
      */
     public function query($collectionName, $query, $options = null)
     {
@@ -339,11 +337,11 @@ class SimpleDb extends AbstractAdapter
                     : true;
 
         try {
-            if ($query instanceof Zend\Cloud\DocumentService\Adapter\SimpleDb\Query) {
+            if ($query instanceof \Zend\Cloud\DocumentService\Adapter\SimpleDb\Query) {
                 $query = $query->assemble($collectionName);
             }
             $result = $this->_simpleDb->select($query);
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(\Zend\Service\Amazon\Exception $e) {
             throw new Exception\RuntimeException('Error on document query: '.$e->getMessage(), $e->getCode(), $e);
         }
 
@@ -354,7 +352,7 @@ class SimpleDb extends AbstractAdapter
      * Create query statement
      *
      * @param  string $fields
-     * @return Zend\Cloud\DocumentService\Adapter\SimpleDb\Query
+     * @return \Zend\Cloud\DocumentService\Adapter\SimpleDb\Query
      */
     public function select($fields = null)
     {
@@ -373,7 +371,7 @@ class SimpleDb extends AbstractAdapter
     /**
      * Get the concrete service client
      *
-     * @return Zend\Service\Amazon\SimpleDb
+     * @return \Zend\Service\Amazon\SimpleDb\SimpleDb
      */
     public function getClient()
     {
@@ -428,7 +426,7 @@ class SimpleDb extends AbstractAdapter
      * Create suitable document from array of fields
      *
      * @param array $document
-     * @return Zend\Cloud\DocumentService\Document
+     * @return \Zend\Cloud\DocumentService\Document
      */
     protected function _getDocumentFromArray($document)
     {
@@ -449,13 +447,13 @@ class SimpleDb extends AbstractAdapter
     }
 
     /**
-     * Create a DocumentSet from a SimpleDb resultset
+     * Create a DocumentSet from a SimpleDb resultSet
      *
-     * @param  Zend\Service\Amazon\SimpleDb\Page $resultSet
+     * @param  \Zend\Service\Amazon\SimpleDb\Page $resultSet
      * @param  bool $returnDocs
-     * @return Zend\Cloud\DocumentService\DocumentSet
+     * @return \Zend\Cloud\DocumentService\DocumentSet
      */
-    protected function _getDocumentSetFromResultSet(Zend\Service\Amazon\SimpleDb\Page $resultSet, $returnDocs = true)
+    protected function _getDocumentSetFromResultSet(\Zend\Service\Amazon\SimpleDb\Page $resultSet, $returnDocs = true)
     {
         $docs = array();
         foreach ($resultSet->getData() as $item) {

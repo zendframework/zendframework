@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Tag\Cloud;
 
 use Zend\Tag,
@@ -79,7 +76,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
             $cloud->setCloudDecorator(new \stdClass());
             $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
         } catch (InvalidArgumentException $e) {
-            $this->assertEquals('Decorator is no instance of Zend\Tag\Cloud\Decorator\Cloud', $e->getMessage());
+            $this->assertEquals('DecoratorInterface is no instance of Zend\Tag\Cloud\Decorator\Cloud', $e->getMessage());
         }
     }
 
@@ -109,7 +106,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
             $cloud->setTagDecorator(new \stdClass());
             $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
         } catch (InvalidArgumentException $e) {
-            $this->assertEquals('Decorator is no instance of Zend\Tag\Cloud\Decorator\Tag', $e->getMessage());
+            $this->assertEquals('DecoratorInterface is no instance of Zend\Tag\Cloud\Decorator\Tag', $e->getMessage());
         }
     }
 
@@ -156,7 +153,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
             $cloud->appendTag('foo');
             $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
         } catch (InvalidArgumentException $e) {
-            $this->assertEquals('Tag must be an instance of Zend\Tag\Taggable or an array', $e->getMessage());
+            $this->assertEquals('Tag must be an instance of Zend\Tag\TaggableInterface or an array', $e->getMessage());
         }
     }
 
@@ -204,7 +201,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
             $cloud->setTags(array('foo'));
             $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
         } catch (InvalidArgumentException $e) {
-            $this->assertEquals('Tag must be an instance of Zend\Tag\Taggable or an array', $e->getMessage());
+            $this->assertEquals('Tag must be an instance of Zend\Tag\TaggableInterface or an array', $e->getMessage());
         }
     }
 

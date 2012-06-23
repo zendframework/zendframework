@@ -53,7 +53,7 @@ class StorageFactory
      * This can instantiate storage adapters and plugins.
      *
      * @param array|Traversable $cfg
-     * @return Storage\Adapter
+     * @return Storage\StorageInterface
      * @throws Exception\InvalidArgumentException
      */
     public static function factory($cfg)
@@ -71,23 +71,23 @@ class StorageFactory
 
         // instantiate the adapter
         if (!isset($cfg['adapter'])) {
-            throw new Exception\InvalidArgumentException(
-                'Missing "adapter"'
-            );
-        } elseif (is_array($cfg['adapter'])) {
+            throw new Exception\InvalidArgumentException('Missing "adapter"');
+        }
+        $adapterName    = $cfg['adapter'];
+        $adapterOptions = null;
+        if (is_array($cfg['adapter'])) {
             if (!isset($cfg['adapter']['name'])) {
-                throw new Exception\InvalidArgumentException(
-                    'Missing "adapter.name"'
-                );
+                throw new Exception\InvalidArgumentException('Missing "adapter.name"');
             }
 
-            $name    = $cfg['adapter']['name'];
-            $options = isset($cfg['adapter']['options'])
-                     ? $cfg['adapter']['options'] : array();
-            $adapter = static::adapterFactory($name, $options);
-        } else {
-            $adapter = static::adapterFactory($cfg['adapter']);
+            $adapterName    = $cfg['adapter']['name'];
+            $adapterOptions = isset($cfg['adapter']['options']) ? $cfg['adapter']['options'] : null;
         }
+        if ($adapterOptions && isset($cfg['options'])) {
+            $adapterOptions = array_merge($adapterOptions, $cfg['options']);
+        }
+
+        $adapter = static::adapterFactory((string)$adapterName, $adapterOptions);
 
         // add plugins
         if (isset($cfg['plugins'])) {
@@ -98,48 +98,38 @@ class StorageFactory
             }
 
             foreach ($cfg['plugins'] as $k => $v) {
+                $pluginPrio = 1; // default priority
+
                 if (is_string($k)) {
-                    $name = $k;
                     if (!is_array($v)) {
                         throw new Exception\InvalidArgumentException(
                             "'plugins.{$k}' needs to be an array"
                         );
                     }
-                    $options = $v;
+                    $pluginName    = $k;
+                    $pluginOptions = $v;
                 } elseif (is_array($v)) {
                     if (!isset($v['name'])) {
                         throw new Exception\InvalidArgumentException("Invalid plugins[{$k}] or missing plugins[{$k}].name");
                     }
-                    $name = (string) $v['name'];
+                    $pluginName = (string) $v['name'];
+
                     if (isset($v['options'])) {
-                        $options = $v['options'];
+                        $pluginOptions = $v['options'];
                     } else {
-                        $options = array();
+                        $pluginOptions = array();
+                    }
+
+                    if (isset($v['priority'])) {
+                        $pluginPrio = $v['priority'];
                     }
                 } else {
-                    $name    = $v;
-                    $options = array();
+                    $pluginName    = $v;
+                    $pluginOptions = array();
                 }
 
-                $plugin = static::pluginFactory($name, $options);
-                $adapter->addPlugin($plugin);
-            }
-        }
-
-        // set adapter or plugin options
-        if (isset($cfg['options'])) {
-            if (!is_array($cfg['options'])
-                && !$cfg['options'] instanceof Traversable
-            ) {
-                throw new Exception\InvalidArgumentException(
-                    'Options needs to be an array or Traversable object'
-                );
-            }
-
-            // Options at the top-level should be *merged* with existing options
-            $options = $adapter->getOptions();
-            foreach ($cfg['options'] as $key => $value) {
-                $options->$key = $value;
+                $plugin = static::pluginFactory($pluginName, $pluginOptions);
+                $adapter->addPlugin($plugin, $pluginPrio);
             }
         }
 
@@ -149,21 +139,21 @@ class StorageFactory
     /**
      * Instantiate a storage adapter
      *
-     * @param  string|Storage\Adapter $adapterName
-     * @param  null|array|Traversable|Storage\Adapter\AdapterOptions $options
-     * @return Storage\Adapter
+     * @param  string|Storage\StorageInterface                  $adapterName
+     * @param  array|Traversable|Storage\Adapter\AdapterOptions $options
+     * @return Storage\StorageInterface
      * @throws Exception\RuntimeException
      */
-    public static function adapterFactory($adapterName, $options = null)
+    public static function adapterFactory($adapterName, $options = array())
     {
-        if ($adapterName instanceof Storage\Adapter) {
+        if ($adapterName instanceof Storage\StorageInterface) {
             // $adapterName is already an adapter object
             $adapter = $adapterName;
         } else {
             $adapter = static::getAdapterBroker()->load($adapterName);
         }
 
-        if ($options !== null) {
+        if ($options) {
             $adapter->setOptions($options);
         }
 
@@ -202,20 +192,20 @@ class StorageFactory
      */
     public static function resetAdapterBroker()
     {
-        static::$adapterBroker = new Storage\AdapterBroker();
+        static::$adapterBroker = null;
     }
 
     /**
      * Instantiate a storage plugin
      *
-     * @param string|Storage\Plugin $pluginName
+     * @param string|Storage\Plugin                          $pluginName
      * @param array|Traversable|Storage\Plugin\PluginOptions $options
      * @return Storage\Plugin
      * @throws Exception\RuntimeException
      */
     public static function pluginFactory($pluginName, $options = array())
     {
-        if ($pluginName instanceof Storage\Plugin) {
+        if ($pluginName instanceof Storage\Plugin\PluginInterface) {
             // $pluginName is already an plugin object
             $plugin = $pluginName;
         } else {
@@ -226,7 +216,10 @@ class StorageFactory
             $options = new Storage\Plugin\PluginOptions($options);
         }
 
-        $plugin->setOptions($options);
+        if ($options) {
+            $plugin->setOptions($options);
+        }
+
         return $plugin;
     }
 
@@ -262,6 +255,6 @@ class StorageFactory
      */
     public static function resetPluginBroker()
     {
-        static::$pluginBroker = new Storage\PluginBroker();
+        static::$pluginBroker = null;
     }
 }

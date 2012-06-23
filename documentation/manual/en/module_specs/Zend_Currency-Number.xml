@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.number"><info><title>How does the currency look like?</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.number"><title>How does the currency look like?</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         the following example:
     </para>
 
-    <example xml:id="zend.currency.number.example-1"><info><title>Using a custom script</title></info>
+    <example xml:id="zend.currency.number.example-1"><title>Using a custom script</title>
         
 
         <para>

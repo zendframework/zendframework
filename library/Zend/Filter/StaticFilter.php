@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter;
 
 use Zend\Loader\Broker;
@@ -76,7 +73,7 @@ class StaticFilter
      * @param  string       $classBaseName
      * @param  array        $args          OPTIONAL
      * @return mixed
-     * @throws \Zend\Filter\Exception
+     * @throws Exception\ExceptionInterface
      */
     public static function execute($value, $classBaseName, array $args = array())
     {

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace ZendTest\Feed\Writer;
 use Zend\Feed\Writer;
 use Zend\Date;
@@ -51,7 +48,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setReference('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -113,7 +110,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setWhen('abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
     
@@ -150,7 +147,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('name'=>''));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -160,7 +157,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('name'=>'Joe','email'=>''));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -171,7 +168,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('name'=>'Joe','uri'=>'notauri'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -181,7 +178,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('uri'=>'notauri'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 

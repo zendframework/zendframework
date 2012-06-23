@@ -19,13 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Barcode\Renderer;
 
-use Zend\Barcode\Renderer\Exception,
-    Zend\Pdf\Color,
+use Zend\Pdf\Color,
     Zend\Pdf\Font,
     Zend\Pdf\Page,
     Zend\Pdf\PdfDocument;
@@ -59,19 +55,14 @@ class Pdf extends AbstractRenderer
     protected $moduleSize = 0.5;
 
     /**
-     * Set an image resource to draw the barcode inside
-     * @param resource $value
-     * @return \Zend\Barcode\Renderer
-     * @throw  Exception
+     * Set a PDF resource to draw the barcode inside
+     *
+     * @param PdfDocument $pdf
+     * @param integer     $page
+     * @return Pdf
      */
-    public function setResource($pdf, $page = 0)
+    public function setResource(PdfDocument $pdf, $page = 0)
     {
-        if (!$pdf instanceof PdfDocument) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid Zend\Pdf\PdfDocument resource provided to setResource()'
-            );
-        }
-
         $this->resource = $pdf;
         $this->page     = intval($page);
 

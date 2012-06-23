@@ -2,7 +2,7 @@
 
 namespace ZendTest\Authentication\TestAsset;
 
-use Zend\Authentication\Adapter as AuthenticationAdapter,
+use Zend\Authentication\Adapter\AdapterInterface as AuthenticationAdapter,
     Zend\Authentication\Result as AuthenticationResult;
 
 class SuccessAdapter implements AuthenticationAdapter

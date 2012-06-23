@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\XmlRpc\Server;
 
 /**
  * Zend_XmlRpc_Server_Cache: cache Zend_XmlRpc_Server server definition
  *
- * @uses       Zend\Server\Cache
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Server

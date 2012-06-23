@@ -18,14 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mime;
 
 /**
- * @uses       \Zend\Mime\Exception\RuntimeException
- * @uses       \Zend\Mime\Mime
  * @category   Zend
  * @package    Zend_Mime
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -184,13 +179,13 @@ class Decode
     /**
      * split a header field like content type in its different parts
      *
-     * @param  string $type       header field
+     * @param  string $field      header field
      * @param  string $wantedPart the wanted part, else an array with all parts is returned
      * @param  string $firstName  key name for the first part
      * @return string|array wanted part or all parts as array($firstName => firstPart, partname => value)
      * @throws Exception\RuntimeException
      */
-    public static function splitHeaderField($field, $wantedPart = null, $firstName = 0)
+    public static function splitHeaderField($field, $wantedPart = null, $firstName = '0')
     {
         $wantedPart = strtolower($wantedPart);
         $firstName = strtolower($firstName);
@@ -237,11 +232,11 @@ class Decode
      *
      * The charset of the returned string depends on your iconv settings.
      *
-     * @param  string encoded string
+     * @param  string $string encoded string
      * @return string decoded string
      */
     public static function decodeQuotedPrintable($string)
     {
-        return quoted_printable_decode($string);
+        return iconv_mime_decode($string, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
     }
 }

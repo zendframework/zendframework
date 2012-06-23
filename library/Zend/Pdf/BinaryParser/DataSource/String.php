@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\BinaryParser\DataSource;
 use Zend\Pdf\Exception;
 use Zend\Pdf;
@@ -30,8 +27,6 @@ use Zend\Pdf;
  * Concrete subclass of {@link \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource}
  * that provides an interface to binary strings.
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -90,7 +85,7 @@ class String extends AbstractDataSource
      *
      * @param integer $byteCount Number of bytes to read.
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function readBytes($byteCount)
     {

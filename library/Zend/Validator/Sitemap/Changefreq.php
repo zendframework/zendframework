@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator\Sitemap;
 
 /**
@@ -29,7 +26,6 @@ namespace Zend\Validator\Sitemap;
  *
  * @link       http://www.sitemaps.org/protocol.php Sitemaps XML format
  *
- * @uses       \Zend\Validator\AbstractValidator
  * @category   Zend
  * @package    Zend_Validate
  * @subpackage Sitemap

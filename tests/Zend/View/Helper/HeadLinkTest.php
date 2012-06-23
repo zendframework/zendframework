@@ -19,15 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 use Zend\Registry,
     Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
     Zend\View\Helper,
     Zend\View\Renderer\PhpRenderer as View,
-    Zend\View\Exception as ViewException;
+    Zend\View\Exception\ExceptionInterface as ViewException;
 
 /**
  * Test class for Zend_View_Helper_HeadLink.
@@ -102,25 +99,25 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testPrependThrowsExceptionWithoutArrayArgument()
     {
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $this->helper->prepend('foo');
     }
 
     public function testAppendThrowsExceptionWithoutArrayArgument()
     {
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $this->helper->append('foo');
     }
 
     public function testSetThrowsExceptionWithoutArrayArgument()
     {
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $this->helper->set('foo');
     }
 
     public function testOffsetSetThrowsExceptionWithoutArrayArgument()
     {
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $this->helper->offsetSet(1, 'foo');
     }
 
@@ -239,7 +236,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testOverloadingThrowsExceptionWithNoArguments()
     {
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $this->helper->appendStylesheet();
     }
 
@@ -252,7 +249,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testOverloadingUsingSingleArrayArgumentWithInvalidValuesThrowsException()
     {
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $this->helper->setStylesheet(array('bogus' => 'unused'));
     }
 
@@ -267,7 +264,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testOverloadingThrowsExceptionWithInvalidMethod()
     {
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $this->helper->bogusMethod();
     }
 
@@ -419,6 +416,15 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
                   . '<link href="/test3.css" media="screen" rel="stylesheet" type="text/css" >';
 
         $this->assertEquals($expected, $test);
+    }
+
+    /**
+     * @issue ZF-10345
+     */
+    public function testIdAttributeIsSupported()
+    {
+        $this->helper->appendStylesheet(array('href' => '/bar/baz', 'id' => 'foo'));
+        $this->assertContains('id="foo"', $this->helper->toString());
     }
 }
 

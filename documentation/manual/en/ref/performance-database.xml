@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.database"><info><title>Zend_Db Performance</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.database"><title>Zend_Db Performance</title>
     
 
     <para>
@@ -12,8 +12,8 @@
         performance overhead.
     </para>
 
-    <section xml:id="performance.database.tableMetadata"><info><title>How can I reduce overhead introduced by Zend_Db_Table for
-            retrieving table metadata?</title></info>
+    <section xml:id="performance.database.tableMetadata"><title>How can I reduce overhead introduced by Zend_Db_Table for
+            retrieving table metadata?</title>
         
 
         <para>
@@ -29,7 +29,7 @@
             Fortunately, there are techniques for improving the situation.
         </para>
 
-        <section xml:id="performance.database.tableMetadata.cache"><info><title>Use the metadata cache</title></info>
+        <section xml:id="performance.database.tableMetadata.cache"><title>Use the metadata cache</title>
             
 
             <para>
@@ -45,7 +45,7 @@
             </para>
         </section>
 
-        <section xml:id="performance.database.tableMetadata.hardcoding"><info><title>Hardcode your metadata in the table definition</title></info>
+        <section xml:id="performance.database.tableMetadata.hardcoding"><title>Hardcode your metadata in the table definition</title>
             
 
             <para>
@@ -58,9 +58,9 @@
         </section>
     </section>
 
-    <section xml:id="performance.database.select"><info><title>
+    <section xml:id="performance.database.select"><title>
             SQL generated with Zend_Db_Select s not hitting my indexes; how can I make it better?
-        </title></info>
+        </title>
         
 
         <para>
@@ -69,7 +69,7 @@
             sub-selects, it can often be fairly naive.
         </para>
 
-        <section xml:id="performance.database.select.writeyourown"><info><title>Write your own tuned SQL</title></info>
+        <section xml:id="performance.database.select.writeyourown"><title>Write your own tuned SQL</title>
             
 
             <para>

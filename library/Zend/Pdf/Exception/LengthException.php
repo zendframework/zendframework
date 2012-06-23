@@ -20,14 +20,10 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\Exception;
-use Zend\Pdf\Exception;
 
 /**
- * Exception class for Zend_Application
+ * Exception class for Zend\Pdf.
  *
  * @category  Zend
  * @package    Zend_PDF
@@ -37,6 +33,6 @@ use Zend\Pdf\Exception;
  */
 class LengthException
     extends \LengthException
-    implements Exception
+    implements ExceptionInterface
 {
 }

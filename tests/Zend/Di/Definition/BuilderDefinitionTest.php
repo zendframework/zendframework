@@ -13,7 +13,7 @@ class BuilderDefinitionTest extends TestCase
     public function testBuilderImplementsDefinition()
     {
         $builder = new BuilderDefinition();
-        $this->assertInstanceOf('Zend\Di\Definition\Definition', $builder);
+        $this->assertInstanceOf('Zend\Di\Definition\DefinitionInterface', $builder);
     }
     
     public function testBuilderCanBuildClassWithMethods()

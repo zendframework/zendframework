@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-api"><info><title>Query Construction API</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-api"><title>Query Construction API</title>
     
 
     <para>
@@ -16,7 +16,7 @@
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
 ]]></programlisting>
 
-    <section xml:id="zend.search.lucene.queries.exceptions"><info><title>Query Parser Exceptions</title></info>
+    <section xml:id="zend.search.lucene.queries.exceptions"><title>Query Parser Exceptions</title>
         
 
         <para>
@@ -69,7 +69,7 @@ try {
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.term-query"><info><title>Term Query</title></info>
+    <section xml:id="zend.search.lucene.queries.term-query"><title>Term Query</title>
         
 
         <para>
@@ -109,7 +109,7 @@ $hits  = $index->find($query);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.multiterm-query"><info><title>Multi-Term Query</title></info>
+    <section xml:id="zend.search.lucene.queries.multiterm-query"><title>Multi-Term Query</title>
         
 
         <para>
@@ -232,7 +232,7 @@ $hits  = $index->find($query);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.boolean-query"><info><title>Boolean Query</title></info>
+    <section xml:id="zend.search.lucene.queries.boolean-query"><title>Boolean Query</title>
         
 
         <para>
@@ -392,7 +392,7 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.wildcard"><info><title>Wildcard Query</title></info>
+    <section xml:id="zend.search.lucene.queries.wildcard"><title>Wildcard Query</title>
         
 
         <para>
@@ -440,7 +440,7 @@ $hits  = $index->find($query);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.fuzzy"><info><title>Fuzzy Query</title></info>
+    <section xml:id="zend.search.lucene.queries.fuzzy"><title>Fuzzy Query</title>
         
 
         <para>
@@ -508,7 +508,7 @@ $hits  = $index->find($query);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.phrase-query"><info><title>Phrase Query</title></info>
+    <section xml:id="zend.search.lucene.queries.phrase-query"><title>Phrase Query</title>
         
 
         <para>
@@ -718,7 +718,7 @@ $hits2 = $index->find($query);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.range"><info><title>Range Query</title></info>
+    <section xml:id="zend.search.lucene.queries.range"><title>Range Query</title>
         
 
         <para>

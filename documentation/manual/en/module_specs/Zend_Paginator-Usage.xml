@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.usage"><info><title>Usage</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.usage"><title>Usage</title>
     
 
-    <section xml:id="zend.paginator.usage.paginating"><info><title>Paginating data collections</title></info>
+    <section xml:id="zend.paginator.usage.paginating"><title>Paginating data collections</title>
         
 
         <para>
@@ -12,7 +12,7 @@
             adapters ship with Zend Framework by default:
         </para>
 
-        <table xml:id="zend.paginator.usage.paginating.adapters"><info><title>Adapters for Zend_Paginator</title></info>
+        <table xml:id="zend.paginator.usage.paginating.adapters"><title>Adapters for Zend_Paginator</title>
             
 
             <tgroup cols="2">
@@ -172,7 +172,7 @@ $this->view->paginator = $paginator;
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.paginator.usage.dbselect"><info><title>The DbSelect and DbTableSelect adapter</title></info>
+    <section xml:id="zend.paginator.usage.dbselect"><title>The DbSelect and DbTableSelect adapter</title>
         
 
         <para>
@@ -230,7 +230,7 @@ $paginator = new Zend_Paginator($adapter);
         </para>
     </section>
 
-    <section xml:id="zend.paginator.rendering"><info><title>Rendering pages with view scripts</title></info>
+    <section xml:id="zend.paginator.rendering"><title>Rendering pages with view scripts</title>
         
 
         <para>
@@ -296,7 +296,7 @@ $paginator = new Zend_Paginator($adapter);
             There are four scrolling styles packaged with Zend Framework:
         </para>
 
-        <table xml:id="zend.paginator.usage.rendering.scrolling-styles"><info><title>Scrolling styles for Zend_Paginator</title></info>
+        <table xml:id="zend.paginator.usage.rendering.scrolling-styles"><title>Scrolling styles for Zend_Paginator</title>
             
 
             <tgroup cols="2">
@@ -403,7 +403,7 @@ $smarty->assign('pages', $paginator->getPages());
 ]]></programlisting>
         </note>
 
-        <section xml:id="zend.paginator.usage.rendering.example-controls"><info><title>Example pagination controls</title></info>
+        <section xml:id="zend.paginator.usage.rendering.example-controls"><title>Example pagination controls</title>
             
 
             <para>
@@ -536,7 +536,7 @@ $('paginationControl').observe('change', function() {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.paginator.usage.rendering.properties"><info><title>Listing of properties</title></info>
+        <section xml:id="zend.paginator.usage.rendering.properties"><title>Listing of properties</title>
             
 
             <para>
@@ -544,7 +544,7 @@ $('paginationControl').observe('change', function() {
                 view partials:
             </para>
 
-            <table xml:id="zend.paginator.usage.rendering.properties.table"><info><title>Properties available to view partials</title></info>
+            <table xml:id="zend.paginator.usage.rendering.properties.table"><title>Properties available to view partials</title>
                 
 
                 <tgroup cols="3">

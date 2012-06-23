@@ -19,17 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Spreadsheets\Extension;
 
 /**
  * Concrete class for working with RowCount elements.
  *
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Spreadsheets
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets

@@ -106,9 +106,9 @@ class Audioscrobbler extends AbstractService
         $response     = $this->getHttpClient()->send();
         $responseBody = $response->getBody();
 
-        if (preg_match('/No such path/', $responseBody)) {
+        if (strpos($responseBody, '/No such path/')) {
             throw new Exception\RuntimeException('Could not find: ' . $this->getHttpClient()->getUri());
-        } elseif (preg_match('/No user exists with this name/', $responseBody)) {
+        } elseif (strpos($responseBody, 'No user exists with this name')) {
             throw new Exception\RuntimeException('No user exists with this name');
         } elseif (!$response->isSuccess()) {
             throw new Exception\RuntimeException('The web service ' . $this->getHttpClient()->getUri() . ' returned the following status code: ' . $response->getStatusCode());

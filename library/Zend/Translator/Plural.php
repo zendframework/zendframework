@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Translator;
 
 use Zend\Translator\Exception;
@@ -28,7 +25,6 @@ use Zend\Translator\Exception;
 /**
  * Utility class for returning the plural rules according to the given locale
  *
- * @uses       \Zend\Translator\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Translator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

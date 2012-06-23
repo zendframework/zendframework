@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf;
 use Zend\Pdf\Exception;
 
@@ -33,12 +30,6 @@ use Zend\Pdf\ObjectFactory\UpdateInfoContainer,
  * PDF element factory.
  * Responsibility is to log PDF changes
  *
- * @uses       SplObjectStorage
- * @uses       \Zend\Pdf\ObjectFactory
- * @uses       \Zend\Pdf\ObjectFactory\UpdateInfoContainer
- * @uses       \Zend\Pdf\InternalType\IndirectObject
- * @uses       \Zend\Pdf\InternalType\StreamObject
- * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -267,7 +258,7 @@ class ObjectFactory
      *
      * @param \Zend\Pdf\ObjectFactory $factory
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function getEnumerationShift(ObjectFactory $factory)
     {
@@ -282,7 +273,7 @@ class ObjectFactory
      * Mark object as modified in context of current factory.
      *
      * @param \Zend\Pdf\InternalType\IndirectObject $obj
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function markAsModified(InternalType\IndirectObject $obj)
     {
@@ -298,7 +289,7 @@ class ObjectFactory
      * Remove object in context of current factory.
      *
      * @param \Zend\Pdf\InternalType\IndirectObject $obj
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function remove(InternalType\IndirectObject $obj)
     {

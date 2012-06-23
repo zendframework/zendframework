@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @namespace
- */
 namespace Zend\Application\Resource\Exception;
 
 class RuntimeException

@@ -19,18 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Server\Method;
 use Zend\Server;
 
 /**
  * Method definition metadata
  *
- * @uses       \Zend\Server\Exception
- * @uses       \Zend\Server\Method\Callback
- * @uses       \Zend\Server\Method\Prototype
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Method

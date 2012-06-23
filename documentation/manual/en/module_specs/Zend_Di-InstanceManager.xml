@@ -4,7 +4,7 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.di.instancemanager">
-    <info><title>Zend\Di InstanceManager</title></info>
+    <title>Zend\Di InstanceManager</title>
 
     <para>
         The InstanceManage is responsible for any runtime information associated
@@ -15,7 +15,7 @@
     </para>
 
     <section xml:id="zend.di.instancemanager.parameters">
-        <info><title>Parameters</title></info>
+        <title>Parameters</title>
 
         <para>
             Parameters are simply entry points for either dependencies or instance
@@ -118,7 +118,7 @@ $movieLister = $di->get('MyMovieApp\MovieLister', array(
 
 
     <section xml:id="zend.di.instancemanager.preferences">
-        <info><title>Preferences</title></info>
+        <title>Preferences</title>
 
         <para>
             In some cases, you might be using interfaces as type hints as
@@ -179,7 +179,7 @@ $di->get('MyMovieApp\MovieLister');
     </section>
 
     <section xml:id="zend.di.instancemanager.aliases">
-        <info><title>Aliases</title></info>
+        <title>Aliases</title>
 
         <para>
             In some situations, you'll find that you need to alias an instance.

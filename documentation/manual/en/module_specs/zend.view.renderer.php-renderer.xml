@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xml:id="zend.view.renderer.php-renderer">
-    <info><title>The PhpRenderer</title></info>
+    <title>The PhpRenderer</title>
 
     <para>
         <classname>Zend\View\Renderer\PhpRenderer</classname> "renders" view scripts written in PHP,
@@ -19,7 +19,7 @@
 
 
     <section xml:id="zend.view.renderer.php-renderer.usage">
-        <info><title>Usage</title></info>
+        <title>Usage</title>
 
         <para>
             Basic usage consists of instantiating or otherwise obtaining an instance of the
@@ -307,7 +307,7 @@ $renderer->render($model);
 ]]></programlisting>
 
         <note xml:id="zend.view.renderer.php-renderer.usage.escape">
-            <info><title>Escape Output</title></info>
+            <title>Escape Output</title>
 
             <para>
                 The security mantra is "Filter input, escape output." If you are unsure of the
@@ -331,7 +331,7 @@ $renderer->render($model);
     </section>
 
     <section xml:id="zend.view.renderer.php-renderer.options">
-        <info><title>Options and Configuration</title></info>
+        <title>Options and Configuration</title>
 
         <para>
             <classname>Zend\View\Renderer\PhpRenderer</classname> utilizes several collaborators in
@@ -434,7 +434,7 @@ $renderer->render($model);
     </section>
 
     <section xml:id="zend.view.renderer.php-renderer.methods">
-        <info><title>Additional Methods</title></info>
+        <title>Additional Methods</title>
         
         <para>
             Typically, you'll only ever access variables and <link
@@ -549,7 +549,7 @@ $renderer->render($model);
 
                     <para>
                         Add a template to the stack. When used, the next call to
-                        <method>render()</method> will loop through all template added using this
+                        <methodname>render()</methodname> will loop through all template added using this
                         method, rendering them one by one; the output of the last will be returned.
                     </para>
                 </listitem>

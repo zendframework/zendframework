@@ -19,19 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Test\PHPUnit\Db;
 
 /**
  * Generic Abstraction of Zend_Db Connections in the PHPUnit Database Extension context.
  *
- * @uses       PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection
- * @uses       \Zend\Db\Adapter\AbstractAdapter
- * @uses       \Zend\Test\PHPUnit\Db\DataSet\QueryTable
- * @uses       \Zend\Test\PHPUnit\Db\Metadata\Generic
- * @uses       PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

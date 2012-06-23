@@ -16,9 +16,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\ProgressBar\Adapter;
 
 use Zend\Json\Json;
@@ -27,11 +24,8 @@ use Zend\Json\Json;
  * Zend_ProgressBar_Adapter_JsPull offers a simple method for updating a
  * progressbar in a browser.
  *
- * @uses      \Zend\Json\Json
- * @uses      \Zend\ProgressBar\Adapter\Adapter
  * @category  Zend
  * @package   Zend_ProgressBar
- * @uses      Zend_ProgressBar_Adapter_Interface
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -56,7 +50,7 @@ class JsPull extends AbstractAdapter
     }
 
     /**
-     * Defined by Zend_ProgressBar_Adapter_Interface
+     * Defined by Zend\ProgressBar\Adapter\AbstractAdapter
      *
      * @param  float   $current       Current progress value
      * @param  float   $max           Max progress value
@@ -85,7 +79,7 @@ class JsPull extends AbstractAdapter
     }
 
     /**
-     * Defined by Zend_ProgressBar_Adapter_Interface
+     * Defined by Zend\ProgressBar\Adapter\AbstractAdapter
      *
      * @return void
      */

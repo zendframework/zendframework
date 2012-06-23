@@ -19,10 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Paginator\Adapter;
+
 use Zend\Paginator\Adapter;
 
 /**
@@ -36,7 +34,7 @@ use Zend\Paginator\Adapter;
 class ArrayTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_Paginator_Adapter_Array
+     * @var Zend\Paginator\Adapter\Array
      */
     private $_adapter;
 

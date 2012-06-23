@@ -19,26 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Paginator\ScrollingStyle;
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Paginator_ScrollingStyle_Elastic
- */
-
-/**
- * @see PHPUnit_Framework_TestCase
- */
-
-/**
- * @see Zend_Paginator
- */
 
 /**
  * @category   Zend
@@ -51,11 +32,11 @@ namespace ZendTest\Paginator\ScrollingStyle;
 class ElasticTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_Paginator_ScrollingStyle_Elastic
+     * @var \Zend\Paginator\ScrollingStyle\Elastic
      */
     private $_scrollingStyle;
     /**
-     * @var Zend_Paginator
+     * @var \Zend\Paginator\Paginator
      */
     private $_paginator;
 

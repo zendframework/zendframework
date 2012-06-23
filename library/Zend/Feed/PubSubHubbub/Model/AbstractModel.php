@@ -18,16 +18,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Feed\PubSubHubbub\Model;
 
-use \Zend\Db\TableGateway;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\TableGateway\TableGatewayInterface;
 
 /**
- * @uses       \Zend\Db\Table\Table
- * @uses       \Zend\Registry
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -36,28 +32,25 @@ use \Zend\Db\TableGateway;
 class AbstractModel
 {
     /**
-     * Zend_Db_Table instance to host database methods
+     * Zend\Db\TableGateway\TableGatewayInterface instance to host database methods
      *
-     * @var \Zend\Db\Table\Table
+     * @var TableGatewayInterface
      */
     protected $_db = null;
- 
+
     /**
      * Constructor
-     * 
-     * @param  array $data 
-     * @param  \Zend\Db\Table\AbstractTable $tableGateway 
-     * @return void
+     *
+     * @param null|TableGatewayInterface $tableGateway
      */
-    public function __construct(TableGateway\TableGatewayInterface $tableGateway = null)
+    public function __construct(TableGatewayInterface $tableGateway = null)
     {
         if ($tableGateway === null) {
-            $parts = explode('\\', get_class($this));
+            $parts = explode('\\', get_called_class());
             $table = strtolower(array_pop($parts));
-            $this->_db = new TableGateway\TableGateway($table);
+            $this->_db = new TableGateway($table, null);
         } else {
             $this->_db = $tableGateway;
         }
     }
-
 }

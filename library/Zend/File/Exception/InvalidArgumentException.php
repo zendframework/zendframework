@@ -19,10 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** @namespace */
 namespace Zend\File\Exception;
-
-use Zend\File\Exception;
 
 /**
  * Exception class raised when invalid arguments are discovered
@@ -32,6 +29,6 @@ use Zend\File\Exception;
  */
 class InvalidArgumentException 
     extends \InvalidArgumentException 
-    implements Exception
+    implements ExceptionInterface
 {
 }

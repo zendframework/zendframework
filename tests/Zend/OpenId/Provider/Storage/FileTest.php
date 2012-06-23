@@ -24,9 +24,6 @@
  * @see Zend\OpenId\Provider\Storage\File
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\OpenId\Provider\Storage;
 
 use Zend\OpenId,
@@ -74,8 +71,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
         } catch (\Exception $e) {
             $ex = $e;
         }
-        $this->assertTrue( $ex instanceof \Zend\OpenId\Exception );
-        $this->assertSame( \Zend\OpenId\Exception::ERROR_STORAGE, $ex->getCode() );
+        $this->assertTrue( $ex instanceof \Zend\OpenId\Exception\ExceptionInterface );
+        $this->assertSame( \Zend\OpenId\Exception\ExceptionInterface::ERROR_STORAGE, $ex->getCode() );
         $this->assertContains( 'Cannot access storage directory', $ex->getMessage() );
         chmod($dir, 0777);
         $this->assertFalse( is_dir($dir2) );

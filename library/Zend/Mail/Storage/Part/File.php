@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mail\Storage\Part;
 
 use Zend\Mail\Storage\Part,
@@ -49,7 +46,8 @@ class File extends Part
      * - endPos   end position of message or part in file (default: end of file)
      *
      * @param   array $params  full message with or without headers
-     * @throws  Exception
+     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct(array $params)
     {
@@ -132,8 +130,8 @@ class File extends Part
      *
      * If part is multipart the raw content of this part with all sub parts is returned
      *
+     * @param resource $stream Optional
      * @return string body
-     * @throws Exception
      */
     public function getContent($stream = null)
     {
@@ -161,8 +159,8 @@ class File extends Part
      * Get part of multipart message
      *
      * @param  int $num number of part starting with 1 for first part
+     * @throws Exception\RuntimeException
      * @return Part wanted part
-     * @throws Exception
      */
     public function getPart($num)
     {

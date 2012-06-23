@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.additional"><info><title>Additional features for translation</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.additional"><title>Additional features for translation</title>
 
 
     <para>
@@ -7,7 +7,7 @@
         <classname>Zend_Translator</classname>. Read here for these additional informations.
     </para>
 
-    <section xml:id="zend.translator.additional.options"><info><title>Options for adapters</title></info>
+    <section xml:id="zend.translator.additional.options"><title>Options for adapters</title>
 
 
         <para>
@@ -25,7 +25,7 @@
             <methodname>setOptions()</methodname> to set options permanent.
         </para>
 
-        <example xml:id="zend.translator.additional.options.example"><info><title>Using translation options</title></info>
+        <example xml:id="zend.translator.additional.options.example"><title>Using translation options</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -57,7 +57,7 @@ $translate->addTranslation(
             of their usage:
         </para>
 
-        <table xml:id="zend.translator.additional.options.alloptions"><info><title>Options for translation adapters</title></info>
+        <table xml:id="zend.translator.additional.options.alloptions"><title>Options for translation adapters</title>
 
 
             <tgroup cols="4">
@@ -341,7 +341,7 @@ $translate->addTranslation(
         </para>
     </section>
 
-    <section xml:id="zend.translator.additional.languages"><info><title>Handling languages</title></info>
+    <section xml:id="zend.translator.additional.languages"><title>Handling languages</title>
 
 
         <para>
@@ -375,7 +375,7 @@ $translate->addTranslation(
             currently set languages for an adapter returned as array.
         </para>
 
-        <example xml:id="zend.translator.additional.languages.example"><info><title>Handling languages with adapters</title></info>
+        <example xml:id="zend.translator.additional.languages.example"><title>Handling languages with adapters</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -399,7 +399,7 @@ if ($translate->isAvailable("fr")) {
 ]]></programlisting>
         </example>
 
-        <section xml:id="zend.translator.additional.languages.automatic"><info><title>Automatical handling of languages</title></info>
+        <section xml:id="zend.translator.additional.languages.automatic"><title>Automatical handling of languages</title>
 
 
             <para>
@@ -417,7 +417,7 @@ if ($translate->isAvailable("fr")) {
                 browser and your environment. See the following example for details:
             </para>
 
-            <example xml:id="zend.translator.additional.languages.automatic.example"><info><title>Automatically language detection</title></info>
+            <example xml:id="zend.translator.additional.languages.automatic.example"><title>Automatically language detection</title>
 
 
                 <programlisting language="php"><![CDATA[
@@ -514,7 +514,7 @@ $translate->getLocale();
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.translator.additional.languages.territory"><info><title>Using a country as language</title></info>
+        <section xml:id="zend.translator.additional.languages.territory"><title>Using a country as language</title>
 
 
             <para>
@@ -541,7 +541,7 @@ $translate = new Zend_Translator(
 );
 ]]></programlisting>
 
-            <note><info><title>Always uppercase countries</title></info>
+            <note><title>Always uppercase countries</title>
 
 
                 <para>
@@ -561,7 +561,7 @@ $translate = new Zend_Translator(
         </section>
     </section>
 
-    <section xml:id="zend.translator.additional.detection"><info><title>Automatic source detection</title></info>
+    <section xml:id="zend.translator.additional.detection"><title>Automatic source detection</title>
 
 
         <para>
@@ -582,7 +582,7 @@ $translate = new Zend_Translator(
             difference. You must give a directory which has to be scanned instead a file.
         </para>
 
-        <example xml:id="zend.translator.additional.languages.directory.example"><info><title>Scanning a directory structure for sources</title></info>
+        <example xml:id="zend.translator.additional.languages.directory.example"><title>Scanning a directory structure for sources</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -623,7 +623,7 @@ $translate = new Zend_Translator(
             automatic scanning if you do some pre-requisits as described below:
         </para>
 
-        <section xml:id="zend.translator.additional.detection.directory"><info><title>Language through naming directories</title></info>
+        <section xml:id="zend.translator.additional.detection.directory"><title>Language through naming directories</title>
 
 
             <para>
@@ -638,7 +638,7 @@ $translate = new Zend_Translator(
                 following example for details:
             </para>
 
-            <example xml:id="zend.translator.additional.detection.directory.example"><info><title>Directory scanning for languages</title></info>
+            <example xml:id="zend.translator.additional.detection.directory.example"><title>Directory scanning for languages</title>
 
 
                 <programlisting language="php"><![CDATA[
@@ -680,7 +680,7 @@ $translate = new Zend_Translator(
             </note>
         </section>
 
-        <section xml:id="zend.translator.additional.detection.filename"><info><title>Language through filenames</title></info>
+        <section xml:id="zend.translator.additional.detection.filename"><title>Language through filenames</title>
 
 
             <para>
@@ -691,7 +691,7 @@ $translate = new Zend_Translator(
                 described below:
             </para>
 
-            <example xml:id="zend.translator.additional.detection.filename.example"><info><title>Filename scanning for languages</title></info>
+            <example xml:id="zend.translator.additional.detection.filename.example"><title>Filename scanning for languages</title>
 
 
                 <programlisting language="php"><![CDATA[
@@ -712,7 +712,7 @@ $translate = new Zend_Translator(
 ]]></programlisting>
             </example>
 
-            <section xml:id="zend.translator.additional.detection.filename.complete"><info><title>Complete filename</title></info>
+            <section xml:id="zend.translator.additional.detection.filename.complete"><title>Complete filename</title>
 
 
                 <para>
@@ -728,7 +728,7 @@ $translate = new Zend_Translator(
 ]]></programlisting>
             </section>
 
-            <section xml:id="zend.translator.additional.detection.filename.extension"><info><title>Extension of the file</title></info>
+            <section xml:id="zend.translator.additional.detection.filename.extension"><title>Extension of the file</title>
 
 
                 <para>
@@ -745,7 +745,7 @@ $translate = new Zend_Translator(
 ]]></programlisting>
             </section>
 
-            <section xml:id="zend.translator.additional.detection.filename.token"><info><title>Filename tokens</title></info>
+            <section xml:id="zend.translator.additional.detection.filename.token"><title>Filename tokens</title>
 
 
                 <para>
@@ -789,7 +789,7 @@ $translate = new Zend_Translator(
             </section>
         </section>
 
-        <section xml:id="zend.translator.additional.detection.ignore"><info><title>Ignoring special files and directories</title></info>
+        <section xml:id="zend.translator.additional.detection.ignore"><title>Ignoring special files and directories</title>
 
 
             <para>
@@ -798,7 +798,7 @@ $translate = new Zend_Translator(
                 accepts 3 possible usages.
             </para>
 
-            <section xml:id="zend.translator.additional.detection.ignore.string"><info><title>Ignore a special directory or file</title></info>
+            <section xml:id="zend.translator.additional.detection.ignore.string"><title>Ignore a special directory or file</title>
 
 
                 <para>
@@ -834,7 +834,7 @@ $translate = new Zend_Translator(
                     <filename>/mytest/en.mo</filename> or <filename>/dir/atest.mo</filename>.
                 </para>
 
-                <note><info><title>Prevent SVN files from being searched</title></info>
+                <note><title>Prevent SVN files from being searched</title>
 
 
                     <para>
@@ -848,7 +848,7 @@ $translate = new Zend_Translator(
                 </note>
             </section>
 
-            <section xml:id="zend.translator.additional.detection.ignore.array.files"><info><title>Ignore several directories or files</title></info>
+            <section xml:id="zend.translator.additional.detection.ignore.array.files"><title>Ignore several directories or files</title>
 
 
                 <para>
@@ -874,7 +874,7 @@ $translate = new Zend_Translator(
                 </para>
             </section>
 
-            <section xml:id="zend.translator.additional.detection.ignore.array.names"><info><title>Ignore specific names</title></info>
+            <section xml:id="zend.translator.additional.detection.ignore.array.names"><title>Ignore specific names</title>
 
 
                 <para>
@@ -916,7 +916,7 @@ $translate = new Zend_Translator(
         </section>
     </section>
 
-    <section xml:id="zend.translator.additional.rerouting"><info><title>Routing for translations</title></info>
+    <section xml:id="zend.translator.additional.rerouting"><title>Routing for translations</title>
 
 
         <para>
@@ -967,7 +967,7 @@ $translate = new Zend_Translator(
         </para>
     </section>
 
-    <section xml:id="zend.translator.additional.combination"><info><title>Combining multiple translation sources</title></info>
+    <section xml:id="zend.translator.additional.combination"><title>Combining multiple translation sources</title>
 
 
         <para>
@@ -1007,7 +1007,7 @@ $translate->addTranslation(array('content' => $translate_second));
             it within the application even if you used different source types.
         </para>
 
-        <note><info><title>Memory savings</title></info>
+        <note><title>Memory savings</title>
 
 
             <para>
@@ -1038,7 +1038,7 @@ $translate->addTranslation(
         </para>
     </section>
 
-    <section xml:id="zend.translator.additional.istranslated"><info><title>Checking for translations</title></info>
+    <section xml:id="zend.translator.additional.istranslated"><title>Checking for translations</title>
 
 
         <para>
@@ -1058,7 +1058,7 @@ $translate->addTranslation(
             <constant>FALSE</constant>.
         </para>
 
-        <example xml:id="zend.translator.additional.istranslated.example"><info><title>Checking if a text is translatable</title></info>
+        <example xml:id="zend.translator.additional.istranslated.example"><title>Checking if a text is translatable</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1091,7 +1091,7 @@ if ($translate->isTranslated('message1', false, 'de')) {
         </example>
     </section>
 
-    <section xml:id="zend.translator.additional.logging"><info><title>How to log not found translations</title></info>
+    <section xml:id="zend.translator.additional.logging"><title>How to log not found translations</title>
 
 
         <para>
@@ -1106,7 +1106,7 @@ if ($translate->isTranslated('message1', false, 'de')) {
             <classname>Zend_Translator</classname>. See the following example:
         </para>
 
-        <example xml:id="zend.translator.additional.logging.example"><info><title>Log translations</title></info>
+        <example xml:id="zend.translator.additional.logging.example"><title>Log translations</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1162,7 +1162,7 @@ $translate->translate('unknown string');
             requested locale. See the following example for a self defined log message:
         </para>
 
-        <example xml:id="zend.translator.additional.logging.example2"><info><title>Self defined log messages</title></info>
+        <example xml:id="zend.translator.additional.logging.example2"><title>Self defined log messages</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1198,7 +1198,7 @@ $translate->translate('unknown string');
             any of <classname>Zend_Log</classname>'s priorities. See the following example:
         </para>
 
-        <example xml:id="zend.translator.additional.logging.example3"><info><title>Self defined log priority</title></info>
+        <example xml:id="zend.translator.additional.logging.example3"><title>Self defined log priority</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1223,7 +1223,7 @@ $translate->translate('unknown string');
         </example>
     </section>
 
-    <section xml:id="zend.translator.additional.sourcedata"><info><title>Accessing source data</title></info>
+    <section xml:id="zend.translator.additional.sourcedata"><title>Accessing source data</title>
 
 
         <para>
@@ -1268,7 +1268,7 @@ $translate->translate('unknown string');
             </para>
         </note>
 
-        <example xml:id="zend.translator.additional.sourcedata.example"><info><title>Handling languages with adapters</title></info>
+        <example xml:id="zend.translator.additional.sourcedata.example"><title>Handling languages with adapters</title>
 
 
             <programlisting language="php"><![CDATA[

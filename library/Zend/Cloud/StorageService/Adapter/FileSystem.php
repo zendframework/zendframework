@@ -11,17 +11,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\StorageService
+ * @package    Zend_Cloud_StorageService
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\StorageService\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Cloud\StorageService\Adapter,
     Zend\Cloud\StorageService\Exception;
 
@@ -29,12 +28,12 @@ use Zend\Cloud\StorageService\Adapter,
  * FileSystem adapter for unstructured cloud storage.
  *
  * @category   Zend
- * @package    Zend\Cloud\StorageService
+ * @package    Zend_Cloud_StorageService
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FileSystem implements Adapter
+class FileSystem implements AdapterInterface
 {
 
     /**
@@ -51,13 +50,12 @@ class FileSystem implements Adapter
     /**
      * Constructor
      *
-     * @param  array|Zend\Config\Config $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = array())
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {
@@ -261,7 +259,7 @@ class FileSystem implements Adapter
 
     /**
      * Get the concrete client.
-     * @return strings
+     * @return string
      */
     public function getClient()
     {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.basic"><info><title>Basic Methods</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.basic"><title>Basic Methods</title>
     
 
     <para>
@@ -20,7 +20,7 @@
         timestamp offset counting the number of seconds elapsed from this starting point.
     </para>
 
-    <section xml:id="zend.date.basic.creation"><info><title>Current Date</title></info>
+    <section xml:id="zend.date.basic.creation"><title>Current Date</title>
         
 
         <para>
@@ -31,7 +31,7 @@
             <link linkend="zend.date.setdefaulttimezone">default timezone</link>.
         </para>
 
-        <example xml:id="zend.date.basic.creation.example-1"><info><title>Creating the Current Date</title></info>
+        <example xml:id="zend.date.basic.creation.example-1"><title>Creating the Current Date</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -43,7 +43,7 @@ print $date;
         </example>
     </section>
 
-    <section xml:id="zend.date.basic.functions"><info><title>Zend_Date by Example</title></info>
+    <section xml:id="zend.date.basic.functions"><title>Zend_Date by Example</title>
         
 
         <para>
@@ -52,7 +52,7 @@ print $date;
             will be provided for each method below.
         </para>
 
-        <section xml:id="zend.date.simple.functions.get"><info><title>Output a Date</title></info>
+        <section xml:id="zend.date.simple.functions.get"><title>Output a Date</title>
             
 
             <para>
@@ -61,7 +61,7 @@ print $date;
                 available options, which will be explained in later sections.
             </para>
 
-            <example xml:id="zend.date.simple.functions.get.example-1"><info><title>get() - Output a Date</title></info>
+            <example xml:id="zend.date.simple.functions.get.example-1"><title>get() - Output a Date</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -73,7 +73,7 @@ print $date->get();
             </example>
         </section>
 
-        <section xml:id="zend.date.simple.functions.set"><info><title>Setting a Date</title></info>
+        <section xml:id="zend.date.simple.functions.set"><title>Setting a Date</title>
             
 
             <para>
@@ -82,7 +82,7 @@ print $date->get();
                 options which will be explored in later sections.
             </para>
 
-            <example xml:id="zend.date.simple.functions.set.example-1"><info><title>set() - Set a Date</title></info>
+            <example xml:id="zend.date.simple.functions.set.example-1"><title>set() - Set a Date</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -95,7 +95,7 @@ print $date->get(Zend_Date::W3C);
             </example>
         </section>
 
-        <section xml:id="zend.date.simple.functions.add"><info><title>Adding and Subtracting Dates</title></info>
+        <section xml:id="zend.date.simple.functions.add"><title>Adding and Subtracting Dates</title>
             
 
             <para>
@@ -106,7 +106,7 @@ print $date->get(Zend_Date::W3C);
                 <methodname>set()</methodname>, which will be explained later.
             </para>
 
-            <example xml:id="zend.date.simple.functions.add.example-1"><info><title>add() - Adding Dates</title></info>
+            <example xml:id="zend.date.simple.functions.add.example-1"><title>add() - Adding Dates</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -123,7 +123,7 @@ echo "Date via toString() = ", $date, "\n";
             </example>
         </section>
 
-        <section xml:id="zend.date.simple.functions.compare"><info><title>Comparison of Dates</title></info>
+        <section xml:id="zend.date.simple.functions.compare"><title>Comparison of Dates</title>
             
 
             <para>
@@ -134,7 +134,7 @@ echo "Date via toString() = ", $date, "\n";
                 <methodname>compare()</methodname>, as in the example below.
             </para>
 
-            <example xml:id="zend.date.simple.functions.compare.example-1"><info><title>compare() - Compare Dates</title></info>
+            <example xml:id="zend.date.simple.functions.compare.example-1"><title>compare() - Compare Dates</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -154,7 +154,7 @@ if ($date->compare(10, Zend_Date::MINUTE) == -1) {
                 returns a boolean.
             </para>
 
-            <example xml:id="zend.date.simple.functions.compare.example-2"><info><title>equals() - Identify a Date or Date Part</title></info>
+            <example xml:id="zend.date.simple.functions.compare.example-2"><title>equals() - Identify a Date or Date Part</title>
                 
 
                 <programlisting language="php"><![CDATA[

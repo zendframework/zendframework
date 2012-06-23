@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\GApps\Extension;
 use Zend\GData\App;
 
@@ -31,9 +28,6 @@ use Zend\GData\App;
  * within instances of Zene_Gdata_GApps_UserEntry or any other class
  * which is linked to a particular username.
  *
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\GApps
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps

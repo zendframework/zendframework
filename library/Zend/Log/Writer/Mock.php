@@ -19,13 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Log\Writer;
 
 /**
- * @uses       \Zend\Log\Writer\AbstractWriter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
@@ -51,10 +47,10 @@ class Mock extends AbstractWriter
     /**
      * Write a message to the log.
      *
-     * @param  array  $event  event data
+     * @param array $event event data
      * @return void
      */
-    public function _write($event)
+    public function doWrite(array $event)
     {
         $this->events[] = $event;
     }
@@ -67,16 +63,5 @@ class Mock extends AbstractWriter
     public function shutdown()
     {
         $this->shutdown = true;
-    }
-
-    /**
-     * Create a new instance of Zend_Log_Writer_Mock
-     *
-     * @param  array|\Zend\Config\Config $config
-     * @return \Zend\Log\Writer\Mock
-     */
-    static public function factory($config = array())
-    {
-        return new self();
     }
 }

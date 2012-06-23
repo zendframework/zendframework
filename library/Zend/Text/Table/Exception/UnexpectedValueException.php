@@ -1,11 +1,10 @@
 <?php
-/**
- * @namespace
- */
+
 namespace Zend\Text\Table\Exception;
 
+use Zend\Text\Exception;
+
 class UnexpectedValueException
-    extends \UnexpectedValueException
-    implements \Zend\Text\Exception
-{
-}
+    extends Exception\UnexpectedValueException
+    implements ExceptionInterface
+{}

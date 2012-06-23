@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.introduction"><title>Introduction</title>
 
 
     <para>
@@ -27,7 +27,7 @@
         <classname>Zend_Currency</classname>, and <classname>Zend_TimeSync</classname>.
     </para>
 
-    <tip><info><title>Zend_Locale and setLocale()</title></info>
+    <tip><title>Zend_Locale and setLocale()</title>
 
 
         <para>
@@ -46,7 +46,7 @@
         </para>
     </tip>
 
-    <section xml:id="zend.locale.whatislocalization"><info><title>What is Localization</title></info>
+    <section xml:id="zend.locale.whatislocalization"><title>What is Localization</title>
 
 
         <para>
@@ -105,7 +105,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.locale.whatis"><info><title>What is a Locale?</title></info>
+    <section xml:id="zend.locale.whatis"><title>What is a Locale?</title>
 
 
         <para>
@@ -124,7 +124,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.locale.representation"><info><title>How are Locales Represented?</title></info>
+    <section xml:id="zend.locale.representation"><title>How are Locales Represented?</title>
 
 
         <para>
@@ -156,7 +156,7 @@
             specific locale within Zend Framework.
         </para>
 
-        <example xml:id="zend.locale.representation.example-1"><info><title>Choosing a specific locale</title></info>
+        <example xml:id="zend.locale.representation.example-1"><title>Choosing a specific locale</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -191,7 +191,7 @@ $locale = new Zend_Locale('de_DE'); // German language _ Germany
         </para>
     </section>
 
-    <section xml:id="zend.locale.selection"><info><title>Selecting the Right Locale</title></info>
+    <section xml:id="zend.locale.selection"><title>Selecting the Right Locale</title>
 
 
         <para>
@@ -202,7 +202,7 @@ $locale = new Zend_Locale('de_DE'); // German language _ Germany
             described below.
         </para>
 
-        <example xml:id="zend.locale.selection.example-1"><info><title>Automatically selecting a locale</title></info>
+        <example xml:id="zend.locale.selection.example-1"><title>Automatically selecting a locale</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -259,7 +259,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
         </para>
     </section>
 
-    <section xml:id="zend.locale.selection.automatic"><info><title>Usage of automatic Locales</title></info>
+    <section xml:id="zend.locale.selection.automatic"><title>Usage of automatic Locales</title>
 
 
         <para>
@@ -325,7 +325,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
             </orderedlist>
         </para>
 
-        <example xml:id="zend.locale.selection.automatic.example-1"><info><title>Using automatic locales</title></info>
+        <example xml:id="zend.locale.selection.automatic.example-1"><title>Using automatic locales</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -339,7 +339,7 @@ $date = new Zend_Date('auto');
         </example>
     </section>
 
-    <section xml:id="zend.locale.defaultlocale"><info><title>Using a default Locale</title></info>
+    <section xml:id="zend.locale.defaultlocale"><title>Using a default Locale</title>
 
 
         <para>
@@ -356,7 +356,7 @@ $date = new Zend_Date('auto');
             defining a default locale.
         </para>
 
-        <example xml:id="zend.locale.defaultlocale.example-1"><info><title>Handling locale exceptions</title></info>
+        <example xml:id="zend.locale.defaultlocale.example-1"><title>Handling locale exceptions</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -386,7 +386,7 @@ $date = new Zend_Date($locale);
             class using <classname>Zend_Locale</classname>. See the following example for details:
         </para>
 
-        <example xml:id="zend.locale.defaultlocale.example-2"><info><title>Setting a default locale</title></info>
+        <example xml:id="zend.locale.defaultlocale.example-2"><title>Setting a default locale</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -404,7 +404,7 @@ $date = new Zend_Date();
         </para>
     </section>
 
-    <section xml:id="zend.locale.interoperate"><info><title>ZF Locale-Aware Classes</title></info>
+    <section xml:id="zend.locale.interoperate"><title>ZF Locale-Aware Classes</title>
 
 
         <para>
@@ -415,7 +415,7 @@ $date = new Zend_Date();
             the current user's web browser.
         </para>
 
-        <example xml:id="zend.locale.interoperate.example-1"><info><title>Dates default to correct locale of web users</title></info>
+        <example xml:id="zend.locale.interoperate.example-1"><title>Dates default to correct locale of web users</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -429,7 +429,7 @@ $date = new Zend_Date('2006',Zend_Date::YEAR);
             specify a locale as the third argument to the constructor.
         </para>
 
-        <example xml:id="zend.locale.interoperate.example-2"><info><title>Overriding default locale selection</title></info>
+        <example xml:id="zend.locale.interoperate.example-2"><title>Overriding default locale selection</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -446,7 +446,7 @@ $temp = new Zend_Measure_Temperature('100,10',
             default locale to avoid the overhead of each object determining the default locale.
         </para>
 
-        <example xml:id="zend.locale.interoperate.example-3"><info><title>Performance optimization when using a default locale</title></info>
+        <example xml:id="zend.locale.interoperate.example-3"><title>Performance optimization when using a default locale</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -459,7 +459,7 @@ $temp = new Zend_Measure_Temperature('100,10',
         </example>
     </section>
 
-    <section xml:id="zend.locale.frameworkwidelocale"><info><title>Application wide locale</title></info>
+    <section xml:id="zend.locale.frameworkwidelocale"><title>Application wide locale</title>
 
 
         <para>
@@ -471,7 +471,7 @@ $temp = new Zend_Measure_Temperature('100,10',
             below example for the right usage:
         </para>
 
-        <example xml:id="zend.locale.frameworkwidelocale.example"><info><title>Usage of an application wide locale</title></info>
+        <example xml:id="zend.locale.frameworkwidelocale.example"><title>Usage of an application wide locale</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -487,7 +487,7 @@ echo $date->getDate();
         </example>
     </section>
 
-    <section xml:id="zend.locale.formatoptions"><info><title>Zend_Locale_Format::setOptions(array $options)</title></info>
+    <section xml:id="zend.locale.formatoptions"><title>Zend_Locale_Format::setOptions(array $options)</title>
 
 
         <para>
@@ -508,7 +508,7 @@ echo $date->getDate();
             array('date_format' =&gt; null, 'locale' =&gt; $locale) for their options.
         </para>
 
-        <example xml:id="zend.locale.formatoptions.example-1"><info><title>Dates default to correct locale of web users</title></info>
+        <example xml:id="zend.locale.formatoptions.example-1"><title>Dates default to correct locale of web users</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -527,7 +527,7 @@ Zend_Locale_Format::setOptions(array('locale' => 'en_US',
             And setting it for locale uses the standard locale for this environment or browser.
         </para>
 
-        <example xml:id="zend.locale.formatoptions.example-2"><info><title>Using STANDARD definitions for setOptions()</title></info>
+        <example xml:id="zend.locale.formatoptions.example-2"><title>Using STANDARD definitions for setOptions()</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -545,7 +545,7 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
         </example>
     </section>
 
-    <section xml:id="zend.locale.cache"><info><title>Speed up Zend_Locale and its subclasses</title></info>
+    <section xml:id="zend.locale.cache"><title>Speed up Zend_Locale and its subclasses</title>
 
 
         <para>

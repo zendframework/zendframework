@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\App;
 
 use Zend\Http\Header\Etag;
@@ -29,13 +26,6 @@ use Zend\Http\Header\Etag;
 /**
  * Concrete class for working with Atom entries.
  *
- * @uses       \Zend\GData\App\Extension\Content
- * @uses       \Zend\GData\App\Extension\Control
- * @uses       \Zend\GData\App\Extension\Edited
- * @uses       \Zend\GData\App\Extension\Published
- * @uses       \Zend\GData\App\Extension\Source
- * @uses       \Zend\GData\App\Extension\Summary
- * @uses       \Zend\GData\App\FeedEntryParent
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
@@ -166,13 +156,13 @@ class Entry extends FeedEntryParent
     }
 
     /**
-     * Uploads changes in this entry to the server using \Zend\Gdata\App
+     * Uploads changes in this entry to the server using \Zend\GData\App
      *
      * @param string|null $uri The URI to send requests to, or null if $data
      *        contains the URI.
      * @param string|null $className The name of the class that should we
      *        deserializing the server response. If null, then
-     *        '\Zend\Gdata\App\Entry' will be used.
+     *        '\Zend\GData\App\Entry' will be used.
      * @param array $extraHeaders Extra headers to add to the request, as an
      *        array of string-based key/value pairs.
      * @return \Zend\GData\App\Entry The updated entry.
@@ -207,7 +197,7 @@ class Entry extends FeedEntryParent
      * @param string|null The URI to send requests to, or null if $data
      *        contains the URI.
      * @param string|null The name of the class that should we deserializing
-     *        the server response. If null, then '\Zend\Gdata\App\Entry' will
+     *        the server response. If null, then '\Zend\GData\App\Entry' will
      *        be used.
      * @param array $extraHeaders Extra headers to add to the request, as an
      *        array of string-based key/value pairs.
@@ -225,7 +215,7 @@ class Entry extends FeedEntryParent
 
         // Set classname to current class, if not otherwise set
         if ($className === null) {
-            $className = get_class($this);
+            $className = get_called_class();
         }
 
         // Append ETag, if present (Gdata v2 and above, only) and doesn't

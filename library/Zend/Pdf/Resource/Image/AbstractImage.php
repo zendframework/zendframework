@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\Resource\Image;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\Resource;
@@ -33,8 +30,6 @@ use Zend\Pdf\Resource;
  * It's "end-user" class, but its ancestor is not.
  * Thus part of the common class name is removed.
  *
- * @uses       \Zend\Pdf\InternalType\NameObject
- * @uses       \Zend\Pdf\Resource\AbstractResource
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Image
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Search\Similarity;
 
 use Zend\Search\Lucene\Search\Similarity;
 
 /**
- * @uses       \Zend\Search\Lucene\Search\Similarity
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search

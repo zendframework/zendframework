@@ -1,6 +1,6 @@
 <?php
 namespace Zend\Di\Exception;
 
-class InvalidCallbackException extends InvalidArgumentException 
+class InvalidCallbackException extends InvalidArgumentException
 {
 }

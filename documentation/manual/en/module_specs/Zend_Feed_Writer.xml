@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.writer"><info><title>Zend_Feed_Writer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.writer"><title>Zend_Feed_Writer</title>
     
 
-    <section xml:id="zend.feed.writer.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.feed.writer.introduction"><title>Introduction</title>
         
 
         <para>
@@ -43,7 +43,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.feed.writer.architecture"><info><title>Architecture</title></info>
+    <section xml:id="zend.feed.writer.architecture"><title>Architecture</title>
         
 
         <para>
@@ -103,7 +103,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.feed.writer.getting.started"><info><title>Getting Started</title></info>
+    <section xml:id="zend.feed.writer.getting.started"><title>Getting Started</title>
         
 
         <para>
@@ -216,7 +216,7 @@ $out = $feed->export('atom');
         </para>
     </section>
 
-    <section xml:id="zend.feed.writer.setting.feed.data.points"><info><title>Setting Feed Data Points</title></info>
+    <section xml:id="zend.feed.writer.setting.feed.data.points"><title>Setting Feed Data Points</title>
         
 
         <para>
@@ -262,7 +262,7 @@ $out = $feed->export('atom');
             <classname>Iterator</classname> interfaces.
         </para>
 
-        <table><info><title>Feed Level API Methods</title></info>
+        <table><title>Feed Level API Methods</title>
             
 
             <tgroup cols="2">
@@ -525,7 +525,7 @@ $out = $feed->export('atom');
 
     </section>
 
-    <section xml:id="zend.feed.writer.setting.entry.data.points"><info><title>Setting Entry Data Points</title></info>
+    <section xml:id="zend.feed.writer.setting.entry.data.points"><title>Setting Entry Data Points</title>
         
 
         <para>
@@ -543,7 +543,7 @@ $out = $feed->export('atom');
             <classname>Zend_Feed_Writer_Entry</classname>.
         </para>
 
-        <table><info><title>Entry Level API Methods</title></info>
+        <table><title>Entry Level API Methods</title>
             
 
             <tgroup cols="2">

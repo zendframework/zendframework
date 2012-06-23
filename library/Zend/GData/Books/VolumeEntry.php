@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Books;
 
 use Zend\GData\Books;
@@ -29,22 +26,6 @@ use Zend\GData\Books;
 /**
  * Describes an entry in a feed of Book Search volumes
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\Books
- * @uses       \Zend\GData\Books\Extension\Embeddability
- * @uses       \Zend\GData\DublinCore\Extension\Creator
- * @uses       \Zend\GData\DublinCore\Extension\Format
- * @uses       \Zend\GData\DublinCore\Extension\Date
- * @uses       \Zend\GData\DublinCore\Extension\Description
- * @uses       \Zend\GData\DublinCore\Extension\Identifier
- * @uses       \Zend\GData\DublinCore\Extension\Language
- * @uses       \Zend\GData\DublinCore\Extension\Publisher
- * @uses       \Zend\GData\DublinCore\Extension\Subject
- * @uses       \Zend\GData\DublinCore\Extension\Title
- * @uses       \Zend\GData\Books\Extension\Viewability
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Extension\Comments
- * @uses       \Zend\GData\Extension\Rating
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books
@@ -592,7 +573,7 @@ class VolumeEntry extends \Zend\GData\Entry
     /**
      * Gets the thumbnail link
      *
-     * @return Zend_Gdata_App_Extension_link|null The thumbnail link
+     * @return \Zend\Gdata\App\Extension\link|null The thumbnail link
      */
     public function getThumbnailLink()
     {

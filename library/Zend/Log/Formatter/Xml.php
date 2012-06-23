@@ -19,27 +19,21 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Log\Formatter;
 
-use Zend\Log\Formatter,
-    Zend\Config\Config,
+use Traversable,
+    Zend\Stdlib\ArrayUtils,
     DOMDocument,
     DOMElement;
 
 /**
- * @uses       DOMDocument
- * @uses       DOMElement
- * @uses       \Zend\Log\Formatter\AbstractFormatter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Xml extends AbstractFormatter
+class Xml implements FormatterInterface
 {
     /**
      * @var string Name of root element
@@ -60,18 +54,19 @@ class Xml extends AbstractFormatter
      * Class constructor
      * (the default encoding is UTF-8)
      *
-     * @param array|Config $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+
+        if (!is_array($options)) {
             $args = func_get_args();
 
             $options = array(
-            	'rootElement' => array_shift($args)
+                'rootElement' => array_shift($args)
             );
 
             if (count($args)) {
@@ -97,17 +92,6 @@ class Xml extends AbstractFormatter
         if (array_key_exists('elementMap', $options)) {
             $this->_elementMap  = $options['elementMap'];
         }
-    }
-
-    /**
-	 * Factory for Zend_Log_Formatter_Xml classe
-	 *
-	 * @param array|Config $options
-	 * @return \Zend\Log\Formatter\Xml
-     */
-    public static function factory($options = array())
-    {
-        return new self($options);
     }
 
     /**

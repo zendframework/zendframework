@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><info><title>Action View Helper</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><title>Action View Helper</title>
     
 
     <para>
@@ -22,7 +22,7 @@
         module is specified, the default module is assumed.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.action.usage"><info><title>Basic Usage of Action View Helper</title></info>
+    <example xml:id="zend.view.helpers.initial.action.usage"><title>Basic Usage of Action View Helper</title>
         
 
         <para>

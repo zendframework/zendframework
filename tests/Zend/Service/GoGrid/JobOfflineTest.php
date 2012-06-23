@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\GoGrid;
 use Zend\Service\GoGrid\Job,
         Zend\Service\GoGrid\ObjectList,

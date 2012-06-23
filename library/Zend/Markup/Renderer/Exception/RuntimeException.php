@@ -2,7 +2,9 @@
 
 namespace Zend\Markup\Renderer\Exception;
 
+use Zend\Markup\Exception;
+
 class RuntimeException
-    extends \RuntimeException
-    implements \Zend\Markup\Renderer\Exception
+    extends Exception\RuntimeException
+    implements ExceptionInterface
 {}

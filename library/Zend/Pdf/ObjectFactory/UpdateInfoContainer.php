@@ -19,16 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\ObjectFactory;
 use Zend\Pdf;
 
 /**
  * Container which collects updated object info.
  *
- * @uses       \Zend\Pdf\PdfDocument
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

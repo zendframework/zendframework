@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,7 +26,7 @@ use Zend\Cache;
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
@@ -43,12 +43,11 @@ class MemoryTest extends CommonAdapterTest
         parent::setUp();
     }
 
-    public function testThrowOutOfCapacityException()
+    public function testThrowOutOfSpaceException()
     {
         $this->_options->setMemoryLimit(memory_get_usage(true) - 8);
 
-        $this->setExpectedException('Zend\Cache\Exception\OutOfCapacityException');
+        $this->setExpectedException('Zend\Cache\Exception\OutOfSpaceException');
         $this->_storage->addItem('test', 'test');
     }
-
 }

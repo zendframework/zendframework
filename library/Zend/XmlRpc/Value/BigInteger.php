@@ -19,14 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\XmlRpc\Value;
 
+use Zend\Math\BigInteger\BigInteger as BigIntegerMath;
+
 /**
- * @uses       \Zend\Crypt\Math\BigInteger
- * @uses       \Zend\XmlRpc\Value\Integer
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value
@@ -36,27 +33,21 @@ namespace Zend\XmlRpc\Value;
 class BigInteger extends Integer
 {
     /**
-     * @var \Zend\Crypt\Math\BigInteger
-     */
-    protected $_integer;
-
-    /**
      * @param mixed $value
      */
     public function __construct($value)
     {
-        $this->_integer = new \Zend\Crypt\Math\BigInteger();
-        $this->_value   = $this->_integer->init($this->_value);
-        $this->_type    = self::XMLRPC_TYPE_I8;
+        $this->_value = BigIntegerMath::factory()->init($value, 10);
+        $this->_type  = self::XMLRPC_TYPE_I8;
     }
 
     /**
      * Return bigint value object
      *
-     * @return \Zend\Crypt\Math\BigInteger
+     * @return string
      */
     public function getValue()
     {
-        return $this->_integer;
+        return $this->_value;
     }
 }

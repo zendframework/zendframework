@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\InfoCard\Cipher\Symmetric\Adapter;
 
 /**
  * Implements AES128 with CBC encryption implemented using the mCrypt extension
  *
- * @uses       \Zend\InfoCard\Cipher\Symmetric\Adapter\AES256CBC
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher

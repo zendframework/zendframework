@@ -13,14 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
+ * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\XmlRpc;
 
 /**
@@ -28,10 +25,6 @@ namespace Zend\XmlRpc;
  *
  * Container for accessing an XMLRPC return value and creating the XML response.
  *
- * @uses       SimpleXMLElement
- * @uses       \Zend\XmlRpc\Fault
- * @uses       \Zend\XmlRpc\Value
- * @uses       \Zend\XmlRpc\Value\Exception
  * @category   Zend
  * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -174,11 +167,15 @@ class Response
             return false;
         }
 
+        // @see ZF-12293 - disable external entities for security purposes
+        $loadEntities         = libxml_disable_entity_loader(true);
+        $useInternalXmlErrors = libxml_use_internal_errors(true);
         try {
-            $useInternalXmlErrors = libxml_use_internal_errors(true);
             $xml = new \SimpleXMLElement($response);
+            libxml_disable_entity_loader($loadEntities);
             libxml_use_internal_errors($useInternalXmlErrors);
         } catch (\Exception $e) {
+            libxml_disable_entity_loader($loadEntities);
             libxml_use_internal_errors($useInternalXmlErrors);
             // Not valid XML
             $this->_fault = new Fault(651);

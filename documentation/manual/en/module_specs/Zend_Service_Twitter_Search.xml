@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.twitter.search"><info><title>Zend_Service_Twitter_Search</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.twitter.search"><title>Zend_Service_Twitter_Search</title>
     
 
-    <section xml:id="zend.service.twitter.search.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.service.twitter.search.introduction"><title>Introduction</title>
         
 
         <para>
@@ -15,7 +15,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.twitter.search.trends"><info><title>Twitter Trends</title></info>
+    <section xml:id="zend.service.twitter.search.trends"><title>Twitter Trends</title>
         
 
         <para>
@@ -55,7 +55,7 @@ foreach ($twitterTrends as $trend) {
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.twitter.search.search"><info><title>Searching Twitter</title></info>
+    <section xml:id="zend.service.twitter.search.search"><title>Searching Twitter</title>
         
 
         <para>
@@ -117,7 +117,7 @@ foreach ($twitterTrends as $trend) {
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.service.twitter.search.search.json"><info><title>JSON Search Example</title></info>
+        <example xml:id="zend.service.twitter.search.search.json"><title>JSON Search Example</title>
             
 
             <para>
@@ -130,7 +130,7 @@ $searchResults  = $twitterSearch->search('zend', array('lang' => 'en'));
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.twitter.search.search.atom"><info><title>ATOM Search Example</title></info>
+        <example xml:id="zend.service.twitter.search.search.atom"><title>ATOM Search Example</title>
             
 
             <para>
@@ -145,7 +145,7 @@ $searchResults  = $twitterSearch->search('zend', array('lang' => 'en'));
         </example>
     </section>
 
-    <section xml:id="zend.service.twitter.search.accessors"><info><title>Zend-specific Accessor Methods</title></info>
+    <section xml:id="zend.service.twitter.search.accessors"><title>Zend-specific Accessor Methods</title>
         
 
         <para>

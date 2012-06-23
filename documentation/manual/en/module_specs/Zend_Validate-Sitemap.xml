@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.sitemap"><info><title>Sitemap Validators</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.sitemap"><title>Sitemap Validators</title>
     
 
     <para>
@@ -7,7 +7,7 @@
             protocol</link>.
     </para>
 
-    <section xml:id="zend.validate.sitemap.changefreq"><info><title>Sitemap_Changefreq</title></info>
+    <section xml:id="zend.validate.sitemap.changefreq"><title>Sitemap_Changefreq</title>
         
 
         <para>
@@ -22,7 +22,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.sitemap.lastmod"><info><title>Sitemap_Lastmod</title></info>
+    <section xml:id="zend.validate.sitemap.lastmod"><title>Sitemap_Lastmod</title>
         
 
         <para>
@@ -37,7 +37,7 @@
             a string and is valid according to the protocol.
         </para>
 
-        <example xml:id="zend.validate.sitemap.lastmod.example"><info><title>Sitemap Lastmod Validator</title></info>
+        <example xml:id="zend.validate.sitemap.lastmod.example"><title>Sitemap Lastmod Validator</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -57,7 +57,7 @@ $validator->isValid('yesterday'); // false
         </example>
     </section>
 
-    <section xml:id="zend.validate.sitemap.loc"><info><title>Sitemap_Loc</title></info>
+    <section xml:id="zend.validate.sitemap.loc"><title>Sitemap_Loc</title>
         
 
         <para>
@@ -68,7 +68,7 @@ $validator->isValid('yesterday'); // false
         </para>
     </section>
 
-    <section xml:id="zend.validate.sitemap.priority"><info><title>Sitemap_Priority</title></info>
+    <section xml:id="zend.validate.sitemap.priority"><title>Sitemap_Priority</title>
         
 
         <para>
@@ -78,7 +78,7 @@ $validator->isValid('yesterday'); // false
             values and string values.
         </para>
 
-        <example xml:id="zend.validate.sitemap.priority.example"><info><title>Sitemap Priority Validator</title></info>
+        <example xml:id="zend.validate.sitemap.priority.example"><title>Sitemap Priority Validator</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -98,7 +98,7 @@ $validator->isValid('foo'); // false
         </example>
     </section>
 
-    <section xml:id="zend.validate.set.sitemap.options"><info><title>Supported options for Zend_Validate_Sitemap_*</title></info>
+    <section xml:id="zend.validate.set.sitemap.options"><title>Supported options for Zend_Validate_Sitemap_*</title>
         
 
         <para>

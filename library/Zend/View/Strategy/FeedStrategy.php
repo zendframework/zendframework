@@ -21,8 +21,8 @@
 
 namespace Zend\View\Strategy;
 
-use Zend\EventManager\EventCollection,
-    Zend\EventManager\ListenerAggregate,
+use Zend\EventManager\EventManagerInterface,
+    Zend\EventManager\ListenerAggregateInterface,
     Zend\Feed\Writer\Feed,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
@@ -37,7 +37,7 @@ use Zend\EventManager\EventCollection,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FeedStrategy implements ListenerAggregate
+class FeedStrategy implements ListenerAggregateInterface
 {
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
@@ -51,8 +51,8 @@ class FeedStrategy implements ListenerAggregate
 
     /**
      * Constructor
-     * 
-     * @param  FeedRenderer $renderer 
+     *
+     * @param  FeedRenderer $renderer
      * @return void
      */
     public function __construct(FeedRenderer $renderer)
@@ -62,24 +62,24 @@ class FeedStrategy implements ListenerAggregate
 
     /**
      * Attach the aggregate to the specified event manager
-     * 
-     * @param  EventCollection $events 
-     * @param  int $priority 
+     *
+     * @param  EventManagerInterface $events
+     * @param  int $priority
      * @return void
      */
-    public function attach(EventCollection $events, $priority = 1)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $this->listeners[] = $events->attach('renderer', array($this, 'selectRenderer'), $priority);
-        $this->listeners[] = $events->attach('response', array($this, 'injectResponse'), $priority);
+        $this->listeners[] = $events->attach(ViewEvent::EVENT_RENDERER, array($this, 'selectRenderer'), $priority);
+        $this->listeners[] = $events->attach(ViewEvent::EVENT_RESPONSE, array($this, 'injectResponse'), $priority);
     }
 
     /**
      * Detach aggregate listeners from the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $listener) {
             if ($events->detach($listener)) {
@@ -89,10 +89,10 @@ class FeedStrategy implements ListenerAggregate
     }
 
     /**
-     * Detect if we should use the FeedRenderer based on model type and/or 
+     * Detect if we should use the FeedRenderer based on model type and/or
      * Accept header
-     * 
-     * @param  ViewEvent $e 
+     *
+     * @param  ViewEvent $e
      * @return null|FeedRenderer
      */
     public function selectRenderer(ViewEvent $e)
@@ -133,8 +133,8 @@ class FeedStrategy implements ListenerAggregate
 
     /**
      * Inject the response with the feed payload and appropriate Content-Type header
-     * 
-     * @param  ViewEvent $e 
+     *
+     * @param  ViewEvent $e
      * @return void
      */
     public function injectResponse(ViewEvent $e)
@@ -155,10 +155,10 @@ class FeedStrategy implements ListenerAggregate
         if ($result instanceof Feed) {
             $result = $result->export($renderer->getFeedType());
         }
-        
+
         // Get the content-type header based on feed type
         $feedType = $renderer->getFeedType();
-        $feedType = ('rss' == $feedType) 
+        $feedType = ('rss' == $feedType)
                   ? 'application/rss+xml'
                   : 'application/atom+xml';
 

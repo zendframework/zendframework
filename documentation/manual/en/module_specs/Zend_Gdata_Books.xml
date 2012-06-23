@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.books"><info><title>Using the Book Search Data API</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.books"><title>Using the Book Search Data API</title>
     
 
     <para>
@@ -23,7 +23,7 @@
             Developer's Guide</link> on code.google.com.
     </para>
 
-    <section xml:id="zend.gdata.books.authentication"><info><title>Authenticating to the Book Search service</title></info>
+    <section xml:id="zend.gdata.books.authentication"><title>Authenticating to the Book Search service</title>
         
 
         <para>
@@ -38,7 +38,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.gdata.books.searching_for_books"><info><title>Searching for books</title></info>
+    <section xml:id="zend.gdata.books.searching_for_books"><title>Searching for books</title>
         
 
         <para>
@@ -153,7 +153,7 @@ http://www.google.com/books/feeds/volumes?q=keyword&min-viewability=partial
             view in their entirety).
         </para>
 
-        <section xml:id="zend.gdata.books.partner_restrict"><info><title>Partner Co-Branded Search</title></info>
+        <section xml:id="zend.gdata.books.partner_restrict"><title>Partner Co-Branded Search</title>
             
 
             <para>
@@ -200,10 +200,10 @@ $query =
         </section>
     </section>
 
-    <section xml:id="zend.gdata.books.community_features"><info><title>Using community features</title></info>
+    <section xml:id="zend.gdata.books.community_features"><title>Using community features</title>
         
 
-        <section xml:id="zend.gdata.books.adding_ratings"><info><title>Adding a rating</title></info>
+        <section xml:id="zend.gdata.books.adding_ratings"><title>Adding a rating</title>
             
 
             <para>
@@ -226,7 +226,7 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.books.reviews"><info><title>Reviews</title></info>
+        <section xml:id="zend.gdata.books.reviews"><title>Reviews</title>
             
 
             <para>
@@ -235,7 +235,7 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
                 submitted reviews, see <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#zend.gdata.books.retrieving_annotations">Retrieving annotations</link>.
             </para>
 
-            <section xml:id="zend.gdata.books.adding_review"><info><title>Adding a review</title></info>
+            <section xml:id="zend.gdata.books.adding_review"><title>Adding a review</title>
                 
 
                 <para>
@@ -255,7 +255,7 @@ $books->insertVolume($entry, $annotationUrl);
 ]]></programlisting>
             </section>
 
-            <section xml:id="zend.gdata.books.editing_review"><info><title>Editing a review</title></info>
+            <section xml:id="zend.gdata.books.editing_review"><title>Editing a review</title>
                 
 
                 <para>
@@ -275,7 +275,7 @@ $books->updateVolume($entry, $entryUrl);
             </section>
         </section>
 
-        <section xml:id="zend.gdata.books.labels"><info><title>Labels</title></info>
+        <section xml:id="zend.gdata.books.labels"><title>Labels</title>
             
 
             <para>
@@ -285,7 +285,7 @@ $books->updateVolume($entry, $entryUrl);
                     annotations</link> for how to read previously submitted labels.
             </para>
 
-            <section xml:id="zend.gdata.books.submitting_labels"><info><title>Submitting a set of labels</title></info>
+            <section xml:id="zend.gdata.books.submitting_labels"><title>Submitting a set of labels</title>
                 
 
                 <para>
@@ -305,7 +305,7 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
             </section>
         </section>
 
-        <section xml:id="zend.gdata.books.retrieving_annotations"><info><title>Retrieving annotations: reviews, ratings, and labels</title></info>
+        <section xml:id="zend.gdata.books.retrieving_annotations"><title>Retrieving annotations: reviews, ratings, and labels</title>
             
 
             <para>
@@ -341,7 +341,7 @@ foreach ($feed as $entry) {
             </para>
         </section>
 
-        <section xml:id="zend.gdata.books.deleting_annotations"><info><title>Deleting Annotations</title></info>
+        <section xml:id="zend.gdata.books.deleting_annotations"><title>Deleting Annotations</title>
             
 
             <para>
@@ -356,7 +356,7 @@ $books->deleteVolume($entry);
         </section>
     </section>
 
-    <section xml:id="zend.gdata.books.sharing_with_my_library"><info><title>Book collections and My Library</title></info>
+    <section xml:id="zend.gdata.books.sharing_with_my_library"><title>Book collections and My Library</title>
         
 
         <para>
@@ -372,7 +372,7 @@ $books->deleteVolume($entry);
                 page</link>.
         </para>
 
-        <section xml:id="zend.gdata.books.retrieving_books_in_library"><info><title>Retrieving books in a user's library</title></info>
+        <section xml:id="zend.gdata.books.retrieving_books_in_library"><title>Retrieving books in a user's library</title>
             
 
             <para>
@@ -385,7 +385,7 @@ $books->deleteVolume($entry);
                 You can query a Book Search public feed without authentication.
             </para>
 
-            <section xml:id="zend.gdata.books.retrieving_all_books_in_library"><info><title>Retrieving all books in a user's library</title></info>
+            <section xml:id="zend.gdata.books.retrieving_all_books_in_library"><title>Retrieving all books in a user's library</title>
                 
 
                 <para>
@@ -406,7 +406,7 @@ $feed = $books->getUserLibraryFeed();
                 </para>
             </section>
 
-            <section xml:id="zend.gdata.books.retrieving_books_in_library_with_query"><info><title>Searching for books in a user's library</title></info>
+            <section xml:id="zend.gdata.books.retrieving_books_in_library_with_query"><title>Searching for books in a user's library</title>
                 
 
                 <para>
@@ -447,7 +447,7 @@ $feed = $books->getVolumeFeed($query);
             </section>
         </section>
 
-        <section xml:id="zend.gdata.books.updating_library"><info><title>Updating books in a user's library</title></info>
+        <section xml:id="zend.gdata.books.updating_library"><title>Updating books in a user's library</title>
             
 
             <para>
@@ -457,7 +457,7 @@ $feed = $books->getVolumeFeed($query);
                 annotation feed (see <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#zend.gdata.books.community_features">Using community features</link>).
             </para>
 
-            <section xml:id="zend.gdata.books.library_book_add"><info><title>Adding a book to a library</title></info>
+            <section xml:id="zend.gdata.books.library_book_add"><title>Adding a book to a library</title>
                 
 
                 <para>
@@ -495,7 +495,7 @@ $books->insertVolume(
 ]]></programlisting>
             </section>
 
-            <section xml:id="zend.gdata.books.library_book_remove"><info><title>Removing a book from a library</title></info>
+            <section xml:id="zend.gdata.books.library_book_remove"><title>Removing a book from a library</title>
                 
 
                 <para>

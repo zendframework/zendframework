@@ -1,7 +1,7 @@
 <?php
 namespace ZendTest\Session\TestAsset;
 
-use Zend\Session\SaveHandler;
+use Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler;
 
 class TestSaveHandler implements SaveHandler
 {

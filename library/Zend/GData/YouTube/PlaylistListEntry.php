@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\YouTube;
 
 use Zend\GData\YouTube,
@@ -30,13 +27,6 @@ use Zend\GData\YouTube,
 /**
  * Represents the YouTube video playlist flavor of an Atom entry
  *
- * @uses       \Zend\GData\App\VersionException
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Extension\FeedLink
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\Extension\CountHint
- * @uses       \Zend\GData\YouTube\Extension\Description
- * @uses       \Zend\GData\YouTube\Extension\PlaylistId
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.keypairs"><info><title>Zend_Service_Amazon_Ec2: Keypairs</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.keypairs"><title>Zend_Service_Amazon_Ec2: Keypairs</title>
     
 
     <para>
         Keypairs are used to access instances.
     </para>
 
-    <example xml:id="zend.service.amazon.ec2.keypairs.create"><info><title>Creating a new Amazon Keypair</title></info>
+    <example xml:id="zend.service.amazon.ec2.keypairs.create"><title>Creating a new Amazon Keypair</title>
         
 
         <para>
@@ -26,7 +26,7 @@ $return = $ec2_kp->create('my-new-key');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.service.amazon.ec2.keypairs.delete"><info><title>Deleting an Amazon Keypair</title></info>
+    <example xml:id="zend.service.amazon.ec2.keypairs.delete"><title>Deleting an Amazon Keypair</title>
         
 
         <para>
@@ -46,7 +46,7 @@ $return = $ec2_kp->delete('my-new-key');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.service.amazon.ec2.describe"><info><title>Describe an Amazon Keypair</title></info>
+    <example xml:id="zend.service.amazon.ec2.describe"><title>Describe an Amazon Keypair</title>
         
 
         <para>

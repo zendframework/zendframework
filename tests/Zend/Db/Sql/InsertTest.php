@@ -35,7 +35,6 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     {
         $this->insert->into('table', 'schema');
         $this->assertEquals('table', $this->readAttribute($this->insert, 'table'));
-        $this->assertEquals('schema', $this->readAttribute($this->insert, 'databaseOrSchema'));
     }
 
     /**
@@ -92,7 +91,6 @@ class InsertTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('INSERT INTO "foo" ("bar") VALUES (\'baz\')', $this->insert->getSqlString());
     }
-
 
     /**
      * @covers Zend\Db\Sql\Insert::__set

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><title>Introduction</title>
     
 
-    <section xml:id="zend.mail.introduction.getting-started"><info><title>Getting started</title></info>
+    <section xml:id="zend.mail.introduction.getting-started"><title>Getting started</title>
         
 
         <para>
@@ -13,7 +13,7 @@
             <classname>Zend_Mail_Transport_Smtp</classname>.
         </para>
 
-        <example xml:id="zend.mail.introduction.example-1"><info><title>Simple E-Mail with Zend_Mail</title></info>
+        <example xml:id="zend.mail.introduction.example-1"><title>Simple E-Mail with Zend_Mail</title>
             
 
             <para>
@@ -32,7 +32,7 @@ $mail->send();
 ]]></programlisting>
         </example>
 
-        <note><info><title>Minimum definitions</title></info>
+        <note><title>Minimum definitions</title>
             
 
             <para>
@@ -72,7 +72,7 @@ $mail->setBodyText('This is the text of the mail.')
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mail.introduction.sendmail"><info><title>Configuring the default sendmail transport</title></info>
+    <section xml:id="zend.mail.introduction.sendmail"><title>Configuring the default sendmail transport</title>
         
 
         <para>
@@ -86,9 +86,9 @@ $mail->setBodyText('This is the text of the mail.')
             <classname>Zend_Mail</classname>.
         </para>
 
-        <example xml:id="zend.mail.introduction.sendmail.example-1"><info><title>
+        <example xml:id="zend.mail.introduction.sendmail.example-1"><title>
                 Passing additional parameters to the Zend_Mail_Transport_Sendmail transport
-            </title></info>
+            </title>
             
 
             <para>
@@ -108,7 +108,7 @@ $mail->send();
 ]]></programlisting>
         </example>
 
-        <note><info><title>Safe mode restrictions</title></info>
+        <note><title>Safe mode restrictions</title>
             
 
             <para>
@@ -117,7 +117,7 @@ $mail->send();
             </para>
         </note>
 
-        <warning><info><title>Sendmail Transport and Windows</title></info>
+        <warning><title>Sendmail Transport and Windows</title>
             
 
             <para>

@@ -27,7 +27,7 @@ use stdClass,
     Zend\Cache\Storage\Capabilities,
     Zend\Cache\Storage\Event,
     Zend\Cache\Storage\PostEvent,
-    Zend\EventManager\EventCollection;
+    Zend\EventManager\EventManagerInterface;
 
 /**
  * @category   Zend
@@ -53,11 +53,12 @@ class Serializer extends AbstractPlugin
     /**
      * Attach
      *
-     * @param  EventCollection $eventCollection
+     * @param  EventManagerInterface $events
+     * @param  int                   $priority
      * @return Serializer
      * @throws Exception\LogicException
      */
-    public function attach(EventCollection $events)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
         $index = spl_object_hash($events);
         if (isset($this->handles[$index])) {
@@ -67,35 +68,36 @@ class Serializer extends AbstractPlugin
         $handles = array();
         $this->handles[$index] = & $handles;
 
-        // read
-        $handles[] = $events->attach('getItem.post',  array($this, 'onReadItemPost'));
-        $handles[] = $events->attach('getItems.post', array($this, 'onReadItemsPost'));
+        // The higher the priority the sooner the plugin will be called on pre events
+        // but the later it will be called on post events.
+        $prePriority  = $priority;
+        $postPriority = -$priority;
 
-        // fetch / fetchAll
-        $handles[] = $events->attach('fetch.post', array($this, 'onFetchPost'));
-        $handles[] = $events->attach('fetchAll.post', array($this, 'onFetchAllPost'));
+        // read
+        $handles[] = $events->attach('getItem.post',  array($this, 'onReadItemPost'), $postPriority);
+        $handles[] = $events->attach('getItems.post', array($this, 'onReadItemsPost'), $postPriority);
 
         // write
-        $handles[] = $events->attach('setItem.pre',  array($this, 'onWriteItemPre'));
-        $handles[] = $events->attach('setItems.pre', array($this, 'onWriteItemsPre'));
+        $handles[] = $events->attach('setItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
+        $handles[] = $events->attach('setItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
 
-        $handles[] = $events->attach('addItem.pre',  array($this, 'onWriteItemPre'));
-        $handles[] = $events->attach('addItems.pre', array($this, 'onWriteItemsPre'));
+        $handles[] = $events->attach('addItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
+        $handles[] = $events->attach('addItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
 
-        $handles[] = $events->attach('replaceItem.pre',  array($this, 'onWriteItemPre'));
-        $handles[] = $events->attach('replaceItems.pre', array($this, 'onWriteItemsPre'));
+        $handles[] = $events->attach('replaceItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
+        $handles[] = $events->attach('replaceItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
 
-        $handles[] = $events->attach('checkAndSetItem.pre', array($this, 'onWriteItemPre'));
+        $handles[] = $events->attach('checkAndSetItem.pre', array($this, 'onWriteItemPre'), $prePriority);
 
         // increment / decrement item(s)
-        $handles[] = $events->attach('incrementItem.pre', array($this, 'onIncrementItemPre'));
-        $handles[] = $events->attach('incrementItems.pre', array($this, 'onIncrementItemsPre'));
+        $handles[] = $events->attach('incrementItem.pre', array($this, 'onIncrementItemPre'), $prePriority);
+        $handles[] = $events->attach('incrementItems.pre', array($this, 'onIncrementItemsPre'), $prePriority);
 
-        $handles[] = $events->attach('decrementItem.pre', array($this, 'onDecrementItemPre'));
-        $handles[] = $events->attach('decrementItems.pre', array($this, 'onDecrementItemsPre'));
+        $handles[] = $events->attach('decrementItem.pre', array($this, 'onDecrementItemPre'), $prePriority);
+        $handles[] = $events->attach('decrementItems.pre', array($this, 'onDecrementItemsPre'), $prePriority);
 
         // overwrite capabilities
-        $handles[] = $events->attach('getCapabilities.post',  array($this, 'onGetCapabilitiesPost'));
+        $handles[] = $events->attach('getCapabilities.post',  array($this, 'onGetCapabilitiesPost'), $postPriority);
 
         return $this;
     }
@@ -103,11 +105,11 @@ class Serializer extends AbstractPlugin
     /**
      * Detach
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return Serializer
      * @throws Exception\LogicException
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         $index = spl_object_hash($events);
         if (!isset($this->handles[$index])) {
@@ -133,8 +135,7 @@ class Serializer extends AbstractPlugin
      */
     public function onReadItemPost(PostEvent $event)
     {
-        $options    = $this->getOptions();
-        $serializer = $options->getSerializer();
+        $serializer = $this->getOptions()->getSerializer();
         $result     = $event->getResult();
         $result     = $serializer->unserialize($result);
         $event->setResult($result);
@@ -148,47 +149,10 @@ class Serializer extends AbstractPlugin
      */
     public function onReadItemsPost(PostEvent $event)
     {
-        $options    = $this->getOptions();
-        $serializer = $options->getSerializer();
+        $serializer = $this->getOptions()->getSerializer();
         $result     = $event->getResult();
         foreach ($result as &$value) {
             $value = $serializer->unserialize($value);
-        }
-        $event->setResult($result);
-    }
-
-    /**
-     * On fetch post
-     *
-     * @param  PostEvent $event
-     * @return void
-     */
-    public function onFetchPost(PostEvent $event)
-    {
-        $options    = $this->getOptions();
-        $serializer = $options->getSerializer();
-        $item       = $event->getResult();
-        if (isset($item['value'])) {
-            $item['value'] = $serializer->unserialize($item['value']);
-        }
-        $event->setResult($item);
-    }
-
-    /**
-     * On fetch all post
-     *
-     * @param  PostEvent $event
-     * @return void
-     */
-    public function onFetchAllPost(PostEvent $event)
-    {
-        $options    = $this->getOptions();
-        $serializer = $options->getSerializer();
-        $result     = $event->getResult();
-        foreach ($result as &$item) {
-            if (isset($item['value'])) {
-                $item['value'] = $serializer->unserialize($item['value']);
-            }
         }
         $event->setResult($result);
     }
@@ -201,8 +165,7 @@ class Serializer extends AbstractPlugin
      */
     public function onWriteItemPre(Event $event)
     {
-        $options    = $this->getOptions();
-        $serializer = $options->getSerializer();
+        $serializer = $this->getOptions()->getSerializer();
         $params     = $event->getParams();
         $params['value'] = $serializer->serialize($params['value']);
     }
@@ -215,8 +178,7 @@ class Serializer extends AbstractPlugin
      */
     public function onWriteItemsPre(Event $event)
     {
-        $options    = $this->getOptions();
-        $serializer = $options->getSerializer();
+        $serializer = $this->getOptions()->getSerializer();
         $params     = $event->getParams();
         foreach ($params['keyValuePairs'] as &$value) {
             $value = $serializer->serialize($value);
@@ -231,21 +193,22 @@ class Serializer extends AbstractPlugin
      */
     public function onIncrementItemPre(Event $event)
     {
-        $event->stopPropagation(true);
-
-        $cache    = $event->getTarget();
+        $storage  = $event->getTarget();
         $params   = $event->getParams();
-        $token    = null;
-        $oldValue = $cache->getItem(
-            $params['key'],
-            array('token' => &$token) + $params['options']
-        );
-        return $cache->checkAndSetItem(
-            $token,
-            $oldValue + $params['value'],
-            $params['key'],
-            $params['options']
-        );
+        $casToken = null;
+        $success  = null;
+        $oldValue = $storage->getItem($params['key'], $success, $casToken);
+        $newValue = $oldValue + $params['value'];
+
+        if ($success) {
+            $storage->checkAndSetItem($casToken, $params['key'], $oldValue + $params['value']);
+            $result = $newValue;
+        } else {
+            $result = false;
+        }
+
+        $event->stopPropagation(true);
+        return $result;
     }
 
     /**
@@ -256,19 +219,25 @@ class Serializer extends AbstractPlugin
      */
     public function onIncrementItemsPre(Event $event)
     {
-        $event->stopPropagation(true);
-
-        $cache  = $event->getTarget();
-        $params = $event->getParams();
-        $keyValuePairs = $cache->getItems(array_keys($params['keyValuePairs']), $params['options']);
-        foreach ($params['keyValuePairs'] as $key => &$value) {
+        $storage       = $event->getTarget();
+        $params        = $event->getParams();
+        $keyValuePairs = $storage->getItems(array_keys($params['keyValuePairs']));
+        foreach ($params['keyValuePairs'] as $key => & $value) {
             if (isset($keyValuePairs[$key])) {
                 $keyValuePairs[$key]+= $value;
             } else {
                 $keyValuePairs[$key] = $value;
             }
         }
-        return $cache->setItems($keyValuePairs, $params['options']);
+
+        $failedKeys = $storage->setItems($keyValuePairs);
+        $result     = array();
+        foreach ($failedKeys as $failedKey) {
+            unset($keyValuePairs[$failedKey]);
+        }
+
+        $event->stopPropagation(true);
+        return $keyValuePairs;
     }
 
     /**
@@ -279,21 +248,22 @@ class Serializer extends AbstractPlugin
      */
     public function onDecrementItemPre(Event $event)
     {
-        $event->stopPropagation(true);
-
-        $cache    = $event->getTarget();
+        $storage  = $event->getTarget();
         $params   = $event->getParams();
-        $token    = null;
-        $oldValue = $cache->getItem(
-            $params['key'],
-            array('token' => &$token) + $params['options']
-        );
-        return $cache->checkAndSetItem(
-            $token,
-            $oldValue - $params['value'],
-            $params['key'],
-            $params['options']
-        );
+        $success  = null;
+        $casToken = null;
+        $oldValue = $storage->getItem($params['key'], $success, $casToken);
+        $newValue = $oldValue - $params['value'];
+
+        if ($success) {
+            $storage->checkAndSetItem($casToken, $params['key'], $oldValue + $params['value']);
+            $result = $newValue;
+        } else {
+            $result = false;
+        }
+
+        $event->stopPropagation(true);
+        return $result;
     }
 
     /**
@@ -304,11 +274,9 @@ class Serializer extends AbstractPlugin
      */
     public function onDecrementItemsPre(Event $event)
     {
-        $event->stopPropagation(true);
-
-        $cache         = $event->getTarget();
+        $storage       = $event->getTarget();
         $params        = $event->getParams();
-        $keyValuePairs = $cache->getItems(array_keys($params['keyValuePairs']), $params['options']);
+        $keyValuePairs = $storage->getItems(array_keys($params['keyValuePairs']));
         foreach ($params['keyValuePairs'] as $key => &$value) {
             if (isset($keyValuePairs[$key])) {
                 $keyValuePairs[$key]-= $value;
@@ -316,7 +284,14 @@ class Serializer extends AbstractPlugin
                 $keyValuePairs[$key] = -$value;
             }
         }
-        return $cache->setItems($keyValuePairs, $params['options']);
+
+        $failedKeys = $storage->setItems($keyValuePairs);
+        foreach ($failedKeys as $failedKey) {
+            unset($keyValuePairs[$failedKey]);
+        }
+
+        $event->stopPropagation(true);
+        return $keyValuePairs;
     }
 
     /**
@@ -332,6 +307,7 @@ class Serializer extends AbstractPlugin
 
         if (!isset($this->capabilities[$index])) {
             $this->capabilities[$index] = new Capabilities(
+                $baseCapabilities->getAdapter(),
                 new stdClass(), // marker
                 array('supportedDatatypes' => array(
                     'NULL'     => true,

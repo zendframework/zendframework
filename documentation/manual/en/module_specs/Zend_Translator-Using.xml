@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.using"><info><title>Using Translation Adapters</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.using"><title>Using Translation Adapters</title>
 
 
     <para>
         The next step is to use the adapter within your code.
     </para>
 
-    <example xml:id="zend.translator.using.example1"><info><title>Example of single-language PHP code</title></info>
+    <example xml:id="zend.translator.using.example1"><title>Example of single-language PHP code</title>
 
 
         <programlisting language="php"><![CDATA[
@@ -32,7 +32,7 @@ print "Here is line two\n";
         translation in mind, than changing your code afterwards.
     </para>
 
-    <example xml:id="zend.translator.using.example2"><info><title>Example of multi-lingual PHP code</title></info>
+    <example xml:id="zend.translator.using.example2"><title>Example of multi-lingual PHP code</title>
 
 
         <programlisting language="php"><![CDATA[
@@ -163,7 +163,7 @@ print $translate->_(2) . "\n";
         strings.
     </para>
 
-    <section xml:id="zend.translator.using.structure"><info><title>Translation Source Structures</title></info>
+    <section xml:id="zend.translator.using.structure"><title>Translation Source Structures</title>
 
 
         <para>

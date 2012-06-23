@@ -10,7 +10,7 @@ class TETest extends \PHPUnit_Framework_TestCase
     public function testTEFromStringCreatesValidTEHeader()
     {
         $tEHeader = TE::fromString('TE: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $tEHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $tEHeader);
         $this->assertInstanceOf('Zend\Http\Header\TE', $tEHeader);
     }
 

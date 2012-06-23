@@ -21,9 +21,6 @@
  * @version    $Id:$
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\GApps;
 
 use Zend\GData\GApps;
@@ -34,7 +31,7 @@ use Zend\GData\GApps;
  * required.
  *
  * For information on submitting queries to a server, see the Google Apps
- * service class, Zend_Gdata_Gapps.
+ * service class, Zend\GData\GApps.
  *
  * @category   Zend
  * @package    Zend_Gdata
@@ -42,7 +39,7 @@ use Zend\GData\GApps;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MemberQuery extends \Zend\Gdata\Gapps\Query
+class MemberQuery extends Query
 {
 
     /**
@@ -173,13 +170,13 @@ class MemberQuery extends \Zend\Gdata\Gapps\Query
     public function getQueryUrl()
     {
 
-        $uri = \Zend\Gdata\Gapps::APPS_BASE_FEED_URI;
-        $uri .= \Zend\Gdata\Gapps::APPS_GROUP_PATH;
+        $uri = \Zend\GData\GApps::APPS_BASE_FEED_URI;
+        $uri .= \Zend\GData\GApps::APPS_GROUP_PATH;
         $uri .= '/' . $this->_domain;
         if ($this->_groupId !== null) {
             $uri .= '/' . $this->_groupId;
         } else {
-            throw new \Zend\Gdata\App\InvalidArgumentException(
+            throw new \Zend\GData\App\InvalidArgumentException(
                     'groupId must not be null');
         }
 

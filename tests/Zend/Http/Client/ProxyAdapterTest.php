@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Http\Client;
 use Zend\Http\Client;
 
@@ -50,15 +47,13 @@ class ProxyAdapterTest extends SocketTest
      */
     protected function setUp()
     {
-        $this->markTestIncomplete('Proxy adapter incomplete at the moment');
-
         if (defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY') &&
               TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY) {
 
             list($host, $port) = explode(':', TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY, 2);
 
             if (! $host)
-                $this->markTestSkipped("No valid proxy host name or address specified.");
+                $this->markTestSkipped('No valid proxy host name or address specified.');
 
             $port = (int) $port;
             if ($port == 0) {
@@ -90,24 +85,23 @@ class ProxyAdapterTest extends SocketTest
             parent::setUp();
 
         } else {
-            $this->markTestSkipped("Zend\\Http\\Client proxy server tests are not enabled in TestConfiguration.php");
+            $this->markTestSkipped('Zend\Http\Client proxy server tests are not enabled in TestConfiguration.php');
         }
     }
 
     /**
      * Test that when no proxy is set the adapter falls back to direct connection
-     *
      */
     public function testFallbackToSocket()
     {
-        $this->_adapter->setConfig(array(
+        $this->_adapter->setOptions(array(
             'proxy_host' => null,
         ));
 
         $this->client->setUri($this->baseuri . 'testGetLastRequest.php');
         $res = $this->client->request(Client::TRACE);
         if ($res->getStatus() == 405 || $res->getStatus() == 501) {
-            $this->markTestSkipped("Server does not allow the TRACE method");
+            $this->markTestSkipped('Server does not allow the TRACE method');
         }
 
         $this->assertEquals($this->client->getLastRawRequest(), $res->getBody(), 'Response body should be exactly like the last request');

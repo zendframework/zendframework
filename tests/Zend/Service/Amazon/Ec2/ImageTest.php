@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2, 
     Zend\Service\Amazon\Ec2\Exception;
@@ -51,8 +48,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-
         $this->ec2ImageInstance = new Ec2\Image('access_key', 'secret_access_key');
 
         $adapter = new \Zend\Http\Client\Adapter\Test();
@@ -66,8 +61,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $this->ec2ImageInstance = null;
-
-        parent::tearDown();
     }
 
     public function testDeregister()

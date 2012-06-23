@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Translator\Adapter;
 use Zend\Translator\Adapter;
 use Zend\Translator;
@@ -47,9 +44,12 @@ class CsvTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        if (Adapter\Csv::hasCache()) {
-            Adapter\Csv::removeCache();
-        }
+        Adapter\Csv::removeCache();
+    }
+
+    public function tearDown()
+    {
+        Adapter\Csv::removeCache();
     }
 
     public function testCreate()

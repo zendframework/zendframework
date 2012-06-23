@@ -20,7 +20,7 @@
     <listitem>
       <para>
         <classname>Zend\Di</classname>, nello specifico la sua
-        interfaccia <classname>Locator</classname>, comunque  
+        interfaccia <classname>LocatorInterface</classname>, comunque
         il Dependency Injection Container (DiC).
       </para>
     </listitem>
@@ -40,7 +40,7 @@
 
     <listitem>
       <para>
-        <classname>Zend\Stdlib\Dispatchable</classname>; tutti i "controller"
+        <classname>Zend\Stdlib\DispatchableInterface</classname>; tutti i "controller"
         sono semplicemente deglio oggetti eseguibili (dispatchable objects)
       </para>
     </listitem>

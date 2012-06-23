@@ -21,8 +21,7 @@
 
 namespace Zend\Mail\Transport;
 
-use Zend\Mail\Message,
-    Zend\Mail\Transport;
+use Zend\Mail\Message;
 
 /**
  * File transport
@@ -35,7 +34,7 @@ use Zend\Mail\Message,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class File implements Transport
+class File implements TransportInterface
 {
     /**
      * @var FileOptions
@@ -53,7 +52,6 @@ class File implements Transport
      * Constructor
      *
      * @param  null|FileOptions $options OPTIONAL (Default: null)
-     * @return void
      */
     public function __construct(FileOptions $options = null)
     {
@@ -67,7 +65,6 @@ class File implements Transport
      * Sets options
      *
      * @param  FileOptions $options
-     * @return void
      */
     public function setOptions(FileOptions $options)
     {
@@ -77,9 +74,9 @@ class File implements Transport
     /**
      * Saves e-mail message to a file
      *
-     * @return void
-     * @throws \Zend\Mail\Transport\Exception on not writable target directory
-     * @throws \Zend\Mail\Transport\Exception on file_put_contents() failure
+     * @param Message $message
+     * @throws Exception\RuntimeException on not writable target directory or
+     * on file_put_contents() failure
      */
     public function send(Message $message)
     {
@@ -101,7 +98,7 @@ class File implements Transport
     /**
      * Get the name of the last file written to
      * 
-     * @return null|string
+     * @return string
      */
     public function getLastFile()
     {

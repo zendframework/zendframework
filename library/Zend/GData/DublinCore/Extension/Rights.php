@@ -19,16 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\DublinCore\Extension;
 
 /**
  * Information about rights held in and over the resource
  *
- * @uses       \Zend\GData\DublinCore
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage DublinCore

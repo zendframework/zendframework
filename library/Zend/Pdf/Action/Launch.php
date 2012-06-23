@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\Action;
 
 /**
  * PDF 'Launch an application, usually to open a file' action
  *
- * @uses       \Zend\Pdf\Action\AbstractAction
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Action
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

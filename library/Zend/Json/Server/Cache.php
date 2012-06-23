@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Json\Server;
 
 /**
  * Zend_Json_Server_Cache: cache Zend_Json_Server server definition and SMD
  *
- * @uses       \Zend\Server\Cache
  * @category   Zend
  * @package    Zend_Json
  * @subpackage Server

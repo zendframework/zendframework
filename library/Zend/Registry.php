@@ -18,13 +18,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend;
 
-use ArrayObject,
-    RuntimeException;
+use ArrayObject;
+use DomainException;
+use RuntimeException;
 
 /**
  * Generic storage class helps to manage global data.
@@ -110,11 +108,12 @@ class Registry extends ArrayObject
             throw new RuntimeException("Argument is not a class name");
         }
 
-        /**
-         * @see Zend\\Loader
-         */
         if (!class_exists($registryClassName)) {
-            Loader::loadClass($registryClassName);
+            throw new DomainException(sprintf(
+                '%s expects a valid registry class name; received "%s", which did not resolve',
+                __METHOD__,
+                $registryClassName
+            ));
         }
 
         self::$registryClassName = $registryClassName;

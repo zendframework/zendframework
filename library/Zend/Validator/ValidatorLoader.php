@@ -33,7 +33,7 @@ use Zend\Loader\PluginClassLoader;
 class ValidatorLoader extends PluginClassLoader
 {
     /**
-     * @var array Pre-aliased filter 
+     * @var array Pre-aliased filter
      */
     protected $plugins = array(
         'alnum'                        => 'Zend\Validator\Alnum',
@@ -141,6 +141,7 @@ class ValidatorLoader extends PluginClassLoader
         'callback'                     => 'Zend\Validator\Callback',
         'credit_card'                  => 'Zend\Validator\CreditCard',
         'creditcard'                   => 'Zend\Validator\CreditCard',
+        'csrf'                         => 'Zend\Validator\Csrf',
         'date'                         => 'Zend\Validator\Date',
         'db_\\no_record_exists'        => 'Zend\Validator\Db\NoRecordExists',
         'db_\\norecordexists'          => 'Zend\Validator\Db\NoRecordExists',
@@ -153,6 +154,7 @@ class ValidatorLoader extends PluginClassLoader
         'digits'                       => 'Zend\Validator\Digits',
         'email_address'                => 'Zend\Validator\EmailAddress',
         'emailaddress'                 => 'Zend\Validator\EmailAddress',
+        'explode'                      => 'Zend\Validator\Explode',
         'file_count'                   => 'Zend\Validator\File\Count',
         'file\\count'                  => 'Zend\Validator\File\Count',
         'file_crc_32'                  => 'Zend\Validator\File\Crc32',

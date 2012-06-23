@@ -9,7 +9,7 @@
     %language-snippets.default;
 ]>
 <table xmlns="http://docbook.org/ns/docbook" version="5.0" frame="all" xml:id="requirements.extensions.table-1">
-    <info><title>&requirements.extensions.table.title;</title></info>
+    <title>&requirements.extensions.table.title;</title>
     <tgroup cols="3">
         <thead>
             <row>

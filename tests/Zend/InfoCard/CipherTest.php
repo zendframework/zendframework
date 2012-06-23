@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\InfoCard;
 use Zend\InfoCard\Cipher\PKI\Adapter;
 use Zend\InfoCard\Cipher;
@@ -103,8 +100,8 @@ class CipherTest extends \PHPUnit_Framework_TestCase
 
     public function testCipherFactory()
     {
-        if (!defined('MCRYPT_RIJNDAEL_128')) {
-            $this->markTestSkipped('Use of the Zend_InfoCard component requires the mcrypt extension to be enabled in PHP');
+        if(!extension_loaded('mcrypt') || !extension_loaded('openssl')) {
+            $this->markTestSkipped('Use of the Zend_InfoCard component requires the mcrypt and openssl extension to be enabled in PHP');
         }
 
         $this->assertTrue(Cipher::getInstanceByURI(Cipher::ENC_AES128CBC)

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.developergarden"><info><title>Zend_Service_DeveloperGarden</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.developergarden"><title>Zend_Service_DeveloperGarden</title>
     
 
-    <section xml:id="zend.service.developergarden.introduction"><info><title>Introduction to DeveloperGarden</title></info>
+    <section xml:id="zend.service.developergarden.introduction"><title>Introduction to DeveloperGarden</title>
         
 
         <para>
@@ -78,7 +78,7 @@
             <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.developergarden.com/openapi/dokumentation/">here</link>.
         </para>
 
-        <section xml:id="zend.service.developergarden.account"><info><title>Sign Up for an Account</title></info>
+        <section xml:id="zend.service.developergarden.account"><title>Sign Up for an Account</title>
             
 
             <para>
@@ -88,7 +88,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.service.developergarden.environment"><info><title>The Environment</title></info>
+        <section xml:id="zend.service.developergarden.environment"><title>The Environment</title>
             
 
             <para>
@@ -130,7 +130,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.service.developergarden.config"><info><title>Your configuration</title></info>
+        <section xml:id="zend.service.developergarden.config"><title>Your configuration</title>
             
 
             <para>
@@ -159,7 +159,7 @@
                 </listitem>
             </itemizedlist>
 
-            <example xml:id="zend.service.developergarden.config.example"><info><title>Configuration Example</title></info>
+            <example xml:id="zend.service.developergarden.config.example"><title>Configuration Example</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -175,7 +175,7 @@ $service = new Zend_Service_DeveloperGarden_SendSms($config);
         </section>
     </section>
 
-    <section xml:id="zend.service.developergarden.baseuserservice"><info><title>BaseUserService</title></info>
+    <section xml:id="zend.service.developergarden.baseuserservice"><title>BaseUserService</title>
         
 
         <para>
@@ -188,7 +188,7 @@ $service = new Zend_Service_DeveloperGarden_SendSms($config);
             of account id's with the current balance status (credits).
         </para>
 
-        <example xml:id="zend.service.developergarden.baseuserservice.getaccountbalance.example"><info><title>Get account balance example</title></info>
+        <example xml:id="zend.service.developergarden.baseuserservice.getaccountbalance.example"><title>Get account balance example</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -197,7 +197,7 @@ print_r($service->getAccountBalance());
 ]]></programlisting>
         </example>
 
-        <section xml:id="zend.service.developergarden.baseuserservice.getquotainformation"><info><title>Get quota information</title></info>
+        <section xml:id="zend.service.developergarden.baseuserservice.getquotainformation"><title>Get quota information</title>
             
 
             <para>
@@ -205,7 +205,7 @@ print_r($service->getAccountBalance());
                 provided methods.
             </para>
 
-            <example xml:id="zend.service.developergarden.baseuserservice.getquotainformation.example"><info><title>Get quota information example</title></info>
+            <example xml:id="zend.service.developergarden.baseuserservice.getquotainformation.example"><title>Get quota information example</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -263,7 +263,7 @@ echo 'Quota Level: ', $result->getQuotaLevel(), '<br />';
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.service.developergarden.baseuserservice.changequotainformation"><info><title>Change quota information</title></info>
+        <section xml:id="zend.service.developergarden.baseuserservice.changequotainformation"><title>Change quota information</title>
             
 
             <para>
@@ -272,7 +272,7 @@ echo 'Quota Level: ', $result->getQuotaLevel(), '<br />';
                 environment.
             </para>
 
-            <example xml:id="zend.service.developergarden.baseuserservice.changequotainformation.example"><info><title>Change quota information example</title></info>
+            <example xml:id="zend.service.developergarden.baseuserservice.changequotainformation.example"><title>Change quota information example</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -325,7 +325,7 @@ if (!$result->hasError()) {
         </section>
     </section>
 
-    <section xml:id="zend.service.developergarden.iplocation"><info><title>IP Location</title></info>
+    <section xml:id="zend.service.developergarden.iplocation"><title>IP Location</title>
         
 
         <para>
@@ -350,7 +350,7 @@ if (!$result->hasError()) {
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.service.developergarden.iplocation.locateip.example"><info><title>Locate a given IP</title></info>
+        <example xml:id="zend.service.developergarden.iplocation.locateip.example"><title>Locate a given IP</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -364,7 +364,7 @@ print_r($service->locateIp($ip));
         </example>
     </section>
 
-    <section xml:id="zend.service.developergarden.localsearch"><info><title>Local Search</title></info>
+    <section xml:id="zend.service.developergarden.localsearch"><title>Local Search</title>
         
 
         <para>
@@ -373,7 +373,7 @@ print_r($service->locateIp($ip));
                 documentation</link>.
         </para>
 
-        <example xml:id="zend.service.developergarden.localsearch.example"><info><title>Locate a Restaurant</title></info>
+        <example xml:id="zend.service.developergarden.localsearch.example"><title>Locate a Restaurant</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -389,7 +389,7 @@ print_r($service->localSearch($search));
         </example>
     </section>
 
-    <section xml:id="zend.service.developergarden.sendsms"><info><title>Send SMS</title></info>
+    <section xml:id="zend.service.developergarden.sendsms"><title>Send SMS</title>
         
 
         <para>
@@ -457,7 +457,7 @@ print_r($service->localSearch($search));
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.service.developergarden.sendsms.example"><info><title>Sending an SMS</title></info>
+        <example xml:id="zend.service.developergarden.sendsms.example"><title>Sending an SMS</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -471,7 +471,7 @@ print_r($service->send($sms));]]></programlisting>
         </example>
     </section>
 
-    <section xml:id="zend.service.developergarden.smsvalidation"><info><title>SMS Validation</title></info>
+    <section xml:id="zend.service.developergarden.smsvalidation"><title>SMS Validation</title>
         
 
         <para>
@@ -494,7 +494,7 @@ print_r($service->send($sms));]]></programlisting>
             of all already validated numbers and the status of each.
         </para>
 
-        <example xml:id="zend.service.developergarden.smsvalidation.request.example"><info><title>Request validation keyword</title></info>
+        <example xml:id="zend.service.developergarden.smsvalidation.request.example"><title>Request validation keyword</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -503,7 +503,7 @@ print_r($service->sendValidationKeyword('+49-172-123456'));
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.developergarden.smsvalidation.validate.example"><info><title>Validate a number with a keyword</title></info>
+        <example xml:id="zend.service.developergarden.smsvalidation.validate.example"><title>Validate a number with a keyword</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -517,7 +517,7 @@ print_r($service->validate('TheKeyWord', '+49-172-123456'));
         </para>
     </section>
 
-    <section xml:id="zend.service.developergarden.voicecall"><info><title>Voice Call</title></info>
+    <section xml:id="zend.service.developergarden.voicecall"><title>Voice Call</title>
         
 
         <para>
@@ -557,7 +557,7 @@ print_r($service->validate('TheKeyWord', '+49-172-123456'));
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.service.developergarden.voicecall.call.example"><info><title>Call two numbers</title></info>
+        <example xml:id="zend.service.developergarden.voicecall.call.example"><title>Call two numbers</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -578,7 +578,7 @@ echo $newCall->getSessionId();
             <methodname>callStatus()</methodname> method call extends the expiration for this call.
         </para>
 
-        <example xml:id="zend.service.developergarden.voicecall.teardown.example"><info><title>Call two numbers, ask for status, and cancel</title></info>
+        <example xml:id="zend.service.developergarden.voicecall.teardown.example"><title>Call two numbers, ask for status, and cancel</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -601,7 +601,7 @@ $service->tearDownCall($sessionId);
         </example>
     </section>
 
-    <section xml:id="zend.service.developergarden.conferencecall"><info><title>ConferenceCall</title></info>
+    <section xml:id="zend.service.developergarden.conferencecall"><title>ConferenceCall</title>
         
 
         <para>
@@ -792,7 +792,7 @@ $service->tearDownCall($sessionId);
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.service.developergarden.conferencecall.example"><info><title>Ad-Hoc conference</title></info>
+        <example xml:id="zend.service.developergarden.conferencecall.example"><title>Ad-Hoc conference</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -823,7 +823,7 @@ $client->commitConference($conference->getConferenceId());
         </example>
     </section>
 
-    <section xml:id="zend.service.developergarden.performance"><info><title>Performance and Caching</title></info>
+    <section xml:id="zend.service.developergarden.performance"><title>Performance and Caching</title>
         
 
         <para>
@@ -835,7 +835,7 @@ $client->commitConference($conference->getConferenceId());
             First of all, you can setup the internal SoapClient (PHP) caching values.
         </para>
 
-        <example xml:id="zend.service.developergarden.performance.wsdlcache.example"><info><title>WSDL cache options</title></info>
+        <example xml:id="zend.service.developergarden.performance.wsdlcache.example"><title>WSDL cache options</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -881,7 +881,7 @@ Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setWsdlCache(
             <methodname>setCache()</methodname>.
         </para>
 
-        <example xml:id="zend.service.developergarden.performance.cache.example"><info><title>SecurityTokenServer cache option</title></info>
+        <example xml:id="zend.service.developergarden.performance.cache.example"><title>SecurityTokenServer cache option</title>
             
 
             <programlisting language="php"><![CDATA[

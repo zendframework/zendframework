@@ -8,20 +8,20 @@ read/subscribe to the following resources:
  -  ZF2 Requirements:
     http://framework.zend.com/wiki/display/ZFDEV2/Zend+Framework+2.0+Requirements
  -  Coding Standards:
-    http://framework.zend.com/manual/en/coding-standard.html
+    http://framework.zend.com/wiki/display/ZFDEV2/Coding+Standards
  -  ZF Git Guide:
-    README-GIT.md
+    [README-GIT.md](README-GIT.md)
  -  Contributor's Guide:
     http://framework.zend.com/wiki/display/ZFDEV/Contributing+to+Zend+Framework
  -  ZF Contributor's mailing list:
     Archives: http://zend-framework-community.634137.n4.nabble.com/ZF-Contributor-f680267.html
     Subscribe: zf-contributors-subscribe@lists.zend.com
  -  ZF Contributor's IRC channel:
-    #zftalk.dev on Freenode.net
+    #zftalk.2 on Freenode.net
 
 If you are working on new features, or refactoring an existing
-component, please create a proposal. You can do this in on the proposals
-page, http://framework.zend.com/wiki/display/ZFPROP/Home. 
+component, please create a proposal. You can do this in on the RFC's
+page, http://framework.zend.com/wiki/display/ZFDEV2/RFC%27s. 
 
 ## RUNNING TESTS
 

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\InternalType;
 use Zend\Pdf\Exception;
 use Zend\Pdf;
@@ -29,9 +26,6 @@ use Zend\Pdf;
 /**
  * PDF file 'reference' element implementation
  *
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\InternalType\NullObject
- * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -89,7 +83,7 @@ class IndirectObjectReference extends AbstractTypeObject
      * @param integer $genNum
      * @param \Zend\Pdf\InternalType\IndirectObjectReference\Context $context
      * @param \Zend\Pdf\ObjectFactory $factory
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($objNum,
                                 $genNum = 0,
@@ -161,7 +155,7 @@ class IndirectObjectReference extends AbstractTypeObject
      * $value member of current PDF Reference object
      * $obj can be null
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     private function _dereference()
     {

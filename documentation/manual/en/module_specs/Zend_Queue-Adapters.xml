@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.adapters"><info><title>Adapters</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.adapters"><title>Adapters</title>
     
 
     <para>
@@ -42,7 +42,7 @@
         </listitem>
     </itemizedlist>
 
-    <note xml:id="zend.queue.adapters.limitations"><info><title>Limitations</title></info>
+    <note xml:id="zend.queue.adapters.limitations"><title>Limitations</title>
         
 
         <para>
@@ -50,7 +50,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.queue.adapters.configuration"><info><title>Specific Adapters - Configuration settings</title></info>
+    <section xml:id="zend.queue.adapters.configuration"><title>Specific Adapters - Configuration settings</title>
         
 
         <para>
@@ -59,7 +59,7 @@
             required.
         </para>
 
-        <section xml:id="zend.queue.adapters.configuration.activemq"><info><title>Apache ActiveMQ - Zend_Queue_Adapter_Activemq</title></info>
+        <section xml:id="zend.queue.adapters.configuration.activemq"><title>Apache ActiveMQ - Zend_Queue_Adapter_Activemq</title>
             
 
             <para>
@@ -145,7 +145,7 @@
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.configuration.Db"><info><title>Db - Zend_Queue_Adapter_Db</title></info>
+        <section xml:id="zend.queue.adapters.configuration.Db"><title>Db - Zend_Queue_Adapter_Db</title>
             
 
             <para>
@@ -243,7 +243,7 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.configuration.memcacheq"><info><title>MemcacheQ - Zend_Queue_Adapter_Memcacheq</title></info>
+        <section xml:id="zend.queue.adapters.configuration.memcacheq"><title>MemcacheQ - Zend_Queue_Adapter_Memcacheq</title>
             
 
             <itemizedlist>
@@ -281,7 +281,7 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.configuration.platformjq"><info><title>Zend Platform Job Queue - Zend_Queue_Adapter_PlatformJobQueue</title></info>
+        <section xml:id="zend.queue.adapters.configuration.platformjq"><title>Zend Platform Job Queue - Zend_Queue_Adapter_PlatformJobQueue</title>
             
 
             <itemizedlist>
@@ -309,7 +309,7 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.configuration.array"><info><title>Array - Zend_Queue_Adapter_Array</title></info>
+        <section xml:id="zend.queue.adapters.configuration.array"><title>Array - Zend_Queue_Adapter_Array</title>
             
 
             <itemizedlist>
@@ -326,12 +326,12 @@ $queue = new Zend_Queue('Db', $options);
         </section>
     </section>
 
-    <section xml:id="zend.queue.adapters.notes"><info><title>Notes for Specific Adapters</title></info>
+    <section xml:id="zend.queue.adapters.notes"><title>Notes for Specific Adapters</title>
         
 
         <para>The following adapters have notes:</para>
 
-        <section xml:id="zend.queue.adapters.notes.activemq"><info><title>Apache ActiveMQ</title></info>
+        <section xml:id="zend.queue.adapters.notes.activemq"><title>Apache ActiveMQ</title>
             
 
             <para>
@@ -409,7 +409,7 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.notes.zend_db"><info><title>Zend_Db</title></info>
+        <section xml:id="zend.queue.adapters.notes.zend_db"><title>Zend_Db</title>
             
 
             <para>
@@ -418,7 +418,7 @@ $queue = new Zend_Queue('Db', $options);
             </para>
         </section>
 
-        <section xml:id="zend.queue.adapters.notes.memcacheQ"><info><title>MemcacheQ</title></info>
+        <section xml:id="zend.queue.adapters.notes.memcacheQ"><title>MemcacheQ</title>
             
 
             <para>
@@ -449,7 +449,7 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.notes.platformjq"><info><title>Zend Platform Job Queue</title></info>
+        <section xml:id="zend.queue.adapters.notes.platformjq"><title>Zend Platform Job Queue</title>
             
 
             <para>
@@ -657,7 +657,7 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.notes.array"><info><title>Array (local)</title></info>
+        <section xml:id="zend.queue.adapters.notes.array"><title>Array (local)</title>
             
 
             <para>

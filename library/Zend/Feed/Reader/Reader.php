@@ -18,15 +18,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader;
 
-use Zend\Cache\Storage\Adapter as CacheAdapter,
+use Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Http,
     Zend\Loader,
-    Zend\Stdlib\ErrorHandler;
+    Zend\Stdlib\ErrorHandler,
+    DOMDocument,
+    DOMXPath;
 
 /**
 * @category Zend
@@ -67,7 +66,7 @@ class Reader
     /**
      * Cache instance
      *
-     * @var CacheAdapter
+     * @var CacheStorage
      */
     protected static $_cache = null;
 
@@ -113,7 +112,7 @@ class Reader
     /**
      * Get the Feed cache
      *
-     * @return CacheAdapter
+     * @return CacheStorage
      */
     public static function getCache()
     {
@@ -123,10 +122,10 @@ class Reader
     /**
      * Set the feed cache
      *
-     * @param  CacheAdapter $cache
+     * @param  CacheStorage $cache
      * @return void
      */
-    public static function setCache(CacheAdapter $cache)
+    public static function setCache(CacheStorage $cache)
     {
         self::$_cache = $cache;
     }
@@ -204,7 +203,8 @@ class Reader
      * @param  string $url The URL to the feed
      * @param  string $etag OPTIONAL Last received ETag for this resource
      * @param  string $lastModified OPTIONAL Last-Modified value for this resource
-     * @return Zend_Feed_Reader_FeedInterface
+     * @return Reader
+     * @throws Exception\ExceptionInterface
      */
     public static function import($uri, $etag = null, $lastModified = null)
     {
@@ -236,7 +236,7 @@ class Reader
             }
             $response = $client->send();
             if ($response->getStatusCode() !== 200 && $response->getStatusCode() !== 304) {
-                throw new Exception('Feed failed to load, got response code ' . $response->getStatusCode());
+                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
             }
             if ($response->getStatusCode() == 304) {
                 $responseXml = $data;
@@ -253,12 +253,12 @@ class Reader
             return self::importString($responseXml);
         } elseif ($cache) {
             $data = $cache->getItem($cacheId);
-            if ($data !== false) {
+            if ($data) {
                 return self::importString($data);
             }
             $response = $client->send();
             if ((int)$response->getStatusCode() !== 200) {
-                throw new Exception('Feed failed to load, got response code ' . $response->getStatusCode());
+                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
             }
             $responseXml = $response->getBody();
             $cache->setItem($cacheId, $responseXml);
@@ -266,7 +266,7 @@ class Reader
         } else {
             $response = $client->send();
             if ((int)$response->getStatusCode() !== 200) {
-                throw new Exception('Feed failed to load, got response code ' . $response->getStatusCode());
+                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
             }
             $reader = self::importString($response->getBody());
             $reader->setOriginalSourceUri($uri);
@@ -278,12 +278,13 @@ class Reader
      * Import a feed from a string
      *
      * @param  string $string
-     * @return \Zend\Feed\Reader\Feed
+     * @return Feed\FeedInterface
+     * @throws Exception\RuntimeException
      */
     public static function importString($string)
     {
         $libxml_errflag = libxml_use_internal_errors(true);
-        $dom = new \DOMDocument;
+        $dom = new DOMDocument;
         $status = $dom->loadXML($string);
         libxml_use_internal_errors($libxml_errflag);
 
@@ -295,7 +296,7 @@ class Reader
             } else {
                 $errormsg = "DOMDocument cannot parse XML: Please check the XML document's validity";
             }
-            throw new Exception($errormsg);
+            throw new Exception\RuntimeException($errormsg);
         }
 
         $type = self::detectType($dom);
@@ -309,7 +310,7 @@ class Reader
         } elseif (substr($type, 0, 4) == 'atom') {
             $reader = new Feed\Atom($dom, $type);
         } else {
-            throw new Exception('The URI used does not point to a '
+            throw new Exception\RuntimeException('The URI used does not point to a '
             . 'valid Atom, RSS or RDF feed that Zend_Feed_Reader can parse.');
         }
         return $reader;
@@ -319,8 +320,8 @@ class Reader
      * Imports a feed from a file located at $filename.
      *
      * @param  string $filename
-     * @throws Zend_Feed_Exception
-     * @return Zend_Feed_Reader_FeedInterface
+     * @throws Exception\RuntimeException
+     * @return Feed\FeedInterface
      */
     public static function importFile($filename)
     {
@@ -328,22 +329,29 @@ class Reader
         $feed = file_get_contents($filename);
         $err  = ErrorHandler::stop();
         if ($feed === false) {
-            throw new Exception("File '{$filename}' could not be loaded", 0, $err);
+            throw new Exception\RuntimeException("File '{$filename}' could not be loaded", 0, $err);
         }
         return self::importString($feed);
     }
 
+    /**
+     * Find feed links
+     *
+     * @param $uri
+     * @return FeedSet
+     * @throws Exception\RuntimeException
+     */
     public static function findFeedLinks($uri)
     {
         $client = self::getHttpClient();
         $client->setUri($uri);
         $response = $client->send();
         if ($response->getStatusCode() !== 200) {
-            throw new Exception("Failed to access $uri, got response code " . $response->getStatusCode());
+            throw new Exception\RuntimeException("Failed to access $uri, got response code " . $response->getStatusCode());
         }
         $responseHtml = $response->getBody();
         $libxml_errflag = libxml_use_internal_errors(true);
-        $dom = new \DOMDocument;
+        $dom = new DOMDocument;
         $status = $dom->loadHTML($responseHtml);
         libxml_use_internal_errors($libxml_errflag);
         if (!$status) {
@@ -354,7 +362,7 @@ class Reader
             } else {
                 $errormsg = "DOMDocument cannot parse HTML: Please check the XML document's validity";
             }
-            throw new Exception($errormsg);
+            throw new Exception\RuntimeException($errormsg);
         }
         $feedSet = new FeedSet;
         $links = $dom->getElementsByTagName('link');
@@ -365,18 +373,19 @@ class Reader
     /**
      * Detect the feed type of the provided feed
      *
-     * @param  Zend_Feed_Abstract|DOMDocument|string $feed
+     * @param  Feed\AbstractFeed|DOMDocument|string $feed
      * @return string
+     * @throws Exception\ExceptionInterface
      */
     public static function detectType($feed, $specOnly = false)
     {
-        if ($feed instanceof Feed) {
+        if ($feed instanceof Feed\AbstractFeed) {
             $dom = $feed->getDomDocument();
-        } elseif($feed instanceof \DOMDocument) {
+        } elseif($feed instanceof DOMDocument) {
             $dom = $feed;
         } elseif(is_string($feed) && !empty($feed)) {
             @ini_set('track_errors', 1);
-            $dom = new \DOMDocument;
+            $dom = new DOMDocument;
             $status = @$dom->loadXML($feed);
             @ini_restore('track_errors');
             if (!$status) {
@@ -387,13 +396,13 @@ class Reader
                         $php_errormsg = '(error message not available)';
                     }
                 }
-                throw new Exception("DOMDocument cannot parse XML: $php_errormsg");
+                throw new Exception\RuntimeException("DOMDocument cannot parse XML: $php_errormsg");
             }
         } else {
-            throw new Exception('Invalid object/scalar provided: must'
+            throw new Exception\InvalidArgumentException('Invalid object/scalar provided: must'
             . ' be of type Zend\Feed\Reader\Feed, DomDocument or string');
         }
-        $xpath = new \DOMXPath($dom);
+        $xpath = new DOMXPath($dom);
 
         if ($xpath->query('/rss')->length) {
             $type = self::TYPE_RSS_ANY;
@@ -543,7 +552,7 @@ class Reader
      *
      * @param  string $name
      * @return void
-     * @throws \Zend\Feed\Exception if unable to resolve Extension class
+     * @throws Exception\RuntimeException if unable to resolve Extension class
      */
     public static function registerExtension($name)
     {
@@ -558,7 +567,7 @@ class Reader
         $loader->load($feedName);
         $loader->load($entryName);
         if (!$loader->isLoaded($feedName) && !$loader->isLoaded($entryName)) {
-            throw new \Zend\Feed\Exception('Could not load extension: ' . $name
+            throw new Exception\RuntimeException('Could not load extension: ' . $name
                 . ' using Plugin Loader. Check prefix paths are configured and extension exists.');
         }
         if ($loader->isLoaded($feedName)) {

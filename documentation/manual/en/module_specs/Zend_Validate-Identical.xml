@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.identical"><info><title>Identical</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.identical"><title>Identical</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         identical with an set haystack.
     </para>
 
-    <section xml:id="zend.validate.set.identical.options"><info><title>Supported options for Zend_Validate_Identical</title></info>
+    <section xml:id="zend.validate.set.identical.options"><title>Supported options for Zend_Validate_Identical</title>
         
 
         <para>
@@ -31,7 +31,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.identical.basic"><info><title>Basic usage</title></info>
+    <section xml:id="zend.validate.set.identical.basic"><title>Basic usage</title>
         
 
         <para>
@@ -58,7 +58,7 @@ if ($valid->isValid($value) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.identical.types"><info><title>Identical objects</title></info>
+    <section xml:id="zend.validate.set.identical.types"><title>Identical objects</title>
         
 
         <para>
@@ -76,7 +76,7 @@ if ($valid->isValid($input)) {
 }
 ]]></programlisting>
 
-        <note><info><title>Type comparison</title></info>
+        <note><title>Type comparison</title>
             
 
             <para>
@@ -88,7 +88,7 @@ if ($valid->isValid($input)) {
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.identical.formelements"><info><title>Form elements</title></info>
+    <section xml:id="zend.validate.set.identical.formelements"><title>Form elements</title>
         
 
         <para>
@@ -114,7 +114,7 @@ $form->addElement('password', 'elementTwo', array(
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.identical.strict"><info><title>Strict validation</title></info>
+    <section xml:id="zend.validate.set.identical.strict"><title>Strict validation</title>
         
 
         <para>
@@ -145,7 +145,7 @@ if ($valid->isValid($input)) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.identical.configuration"><info><title>Configuration</title></info>
+    <section xml:id="zend.validate.set.identical.configuration"><title>Configuration</title>
         
 
         <para>

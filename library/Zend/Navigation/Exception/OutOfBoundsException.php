@@ -21,8 +21,6 @@
 
 namespace Zend\Navigation\Exception;
 
-use Zend\Navigation\Exception;
-
 /**
  * Navigation out of bounds exception
  *
@@ -32,5 +30,7 @@ use Zend\Navigation\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OutOfBoundsException extends \OutOfBoundsException implements Exception
+class OutOfBoundsException
+    extends \OutOfBoundsException
+    implements ExceptionInterface
 {}

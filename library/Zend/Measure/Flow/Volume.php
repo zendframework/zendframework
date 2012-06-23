@@ -18,16 +18,12 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Measure\Flow;
 use Zend\Measure;
 
 /**
  * Class for handling flow volume conversions
  *
- * @uses       Zend\Measure\AbstractMeasure
  * @category   Zend
  * @package    Zend_Measure
  * @subpackage Zend_Measure_Flow

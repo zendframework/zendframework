@@ -19,11 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Paginator\Adapter\DbTableSelect;
-
 
 /**
  * @category   Zend
@@ -37,9 +33,9 @@ class OracleTest extends \ZendTest\Paginator\Adapter\DbSelect\OracleTest
 {
     public function setup()
     {
-        $this->markTestSkipped('Skipping until Zend\Db is refactored.');
+        $this->markTestIncomplete('Will skip until Zend\Db is refactored.');
     }
-    
+
     /**
      * @group ZF-3775
      */

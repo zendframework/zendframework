@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.zendmonitor"><info><title>Writing to the Zend Server Monitor</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.zendmonitor"><title>Writing to the Zend Server Monitor</title>
     
 
     <para>
-        <classname>Zend_Log_Writer_ZendMonitor</classname> allows you to log events via Zend
+        <classname>Zend\Log\Writer\ZendMonitor</classname> allows you to log events via Zend
         Server's Monitor <acronym>API</acronym>. This allows you to aggregate log messages for your
         entire application environment in a single location. Internally, it simply uses the
         <methodname>monitor_custom_event()</methodname> function from the Zend Monitor
@@ -18,7 +18,7 @@
         monitor.
     </para>
 
-    <note><info><title>Zend Monitor must be installed and enabled</title></info>
+    <note><title>Zend Monitor must be installed and enabled</title>
         
 
         <para>
@@ -29,12 +29,12 @@
     </note>
 
     <para>
-        Instantiating the <classname>ZendMonitor</classname> log writer is trivial:
+        Instantiating the <classname>Zend\Log\Writer\ZendMonitor</classname> log writer is trivial:
     </para>
 
     <programlisting language="php"><![CDATA[
-$writer = new Zend_Log_Writer_ZendMonitor();
-$log    = new Zend_Log($writer);
+$writer = new Zend\Log\Writer\ZendMonitor();
+$logger = new Zend\Log\Logger($writer);
 ]]></programlisting>
 
     <para>
@@ -42,7 +42,7 @@ $log    = new Zend_Log($writer);
     </para>
 
     <programlisting language="php"><![CDATA[
-$log->info('This is a message');
+$logger->info('This is a message');
 ]]></programlisting>
 
     <para>
@@ -51,7 +51,7 @@ $log->info('This is a message');
     </para>
 
     <programlisting language="php"><![CDATA[
-$log->info('Exception occurred', $e);
+$logger->info('Exception occurred', $e);
 ]]></programlisting>
 
     <para>
@@ -60,7 +60,7 @@ $log->info('Exception occurred', $e);
     </para>
 
     <programlisting language="php"><![CDATA[
-$log->info('Exception occurred', array(
+$logger->info('Exception occurred', array(
     'request'   => $request,
     'exception' => $e,
 ));
@@ -81,7 +81,7 @@ $log->info('Exception occurred', array(
 
     <para>
         In this screenshot, the first two events listed are custom events logged via the
-        <classname>ZendMonitor</classname> log writer. You may then click on an event to view all
+        <classname>Zend\Log\Writer\ZendMonitor</classname> log writer. You may then click on an event to view all
         information related to it.
     </para>
 
@@ -100,22 +100,4 @@ $log->info('Exception occurred', array(
         example.
     </para>
 
-    <note><info><title>Integration with Zend_Application</title></info>
-        
-
-        <para>
-            By default, the <command>zf.sh</command> and <command>zf.bat</command> commands add
-            configuration for the <link linkend="zend.application.available-resources.log"><classname>Zend_Application</classname>
-                log resource</link>, which includes configuration for the
-            <classname>ZendMonitor</classname> log writer. Additionally, the
-            <classname>ErrorController</classname> uses the configured logger to log application
-            exceptions -- providing you with Zend Monitor event integration by default.
-        </para>
-
-        <para>
-            As noted previously, if the Monitor <acronym>API</acronym> is not detected in your
-            <acronym>PHP</acronym> installation, the logger will simply act as a
-            <constant>NULL</constant> logger.
-        </para>
-    </note>
 </section>

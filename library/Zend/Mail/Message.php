@@ -18,13 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mail;
 
-use Traversable,
-    Zend\Mime\Message as MimeMessage;
+use Traversable;
+use Zend\Mime;
 
 /**
  * @category   Zend
@@ -37,7 +34,7 @@ class Message
     /**
      * Content of the message
      * 
-     * @var null|string|object
+     * @var string|object
      */
     protected $body;
 
@@ -126,7 +123,7 @@ class Message
     /**
      * Set (overwrite) From addresses
      * 
-     * @param  string|AddressDescription|array|AddressList|Traversable $emailOrAddressList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList 
      * @param  string|null $name 
      * @return Message
      */
@@ -163,7 +160,7 @@ class Message
     /**
      * Overwrite the address list in the To recipients
      * 
-     * @param  string|AddressDescription|array|AddressList|Traversable $emailOrAddressList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList 
      * @param  null|string $name 
      * @return Message
      */
@@ -178,7 +175,7 @@ class Message
      *
      * Appends to the list.
      * 
-     * @param  string|AddressDescription|array|AddressList|Traversable $emailOrAddressOrList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressOrList 
      * @param  null|string $name 
      * @return Message
      */
@@ -202,7 +199,7 @@ class Message
     /**
      * Set (overwrite) CC addresses
      * 
-     * @param  string|AddressDescription|array|AddressList|Traversable $emailOrAddressList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList 
      * @param  string|null $name 
      * @return Message
      */
@@ -239,7 +236,7 @@ class Message
     /**
      * Set (overwrite) BCC addresses
      * 
-     * @param  string|AddressDescription|array|AddressList|Traversable $emailOrAddressList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList 
      * @param  string|null $name 
      * @return Message
      */
@@ -276,7 +273,7 @@ class Message
     /**
      * Overwrite the address list in the Reply-To recipients
      * 
-     * @param  string|AddressDescription|array|AddressList|Traversable $emailOrAddressList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList 
      * @param  null|string $name 
      * @return Message
      */
@@ -291,7 +288,7 @@ class Message
      *
      * Appends to the list.
      * 
-     * @param  string|AddressDescription|array|AddressList|Traversable $emailOrAddressOrList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressOrList 
      * @param  null|string $name 
      * @return Message
      */
@@ -317,7 +314,7 @@ class Message
      * 
      * @param mixed $emailOrAddress 
      * @param mixed $name 
-     * @return void
+     * @return Message
      */
     public function setSender($emailOrAddress, $name = null)
     {
@@ -329,7 +326,7 @@ class Message
     /**
      * Retrieve the sender address, if any
      * 
-     * @return null|AddressDescription
+     * @return null|Address\AddressInterface
      */
     public function getSender()
     {
@@ -373,8 +370,9 @@ class Message
 
     /**
      * Set the message body
-     * 
-     * @param  null|string|MimeMessage|object $body 
+     *
+     * @param  null|string|\Zend\Mime\Message|object $body
+     * @throws Exception\InvalidArgumentException
      * @return Message
      */
     public function setBody($body)
@@ -387,7 +385,7 @@ class Message
                     gettype($body)
                 ));
             }
-            if (!$body instanceof MimeMessage) {
+            if (!$body instanceof Mime\Message) {
                 if (!method_exists($body, '__toString')) {
                     throw new Exception\InvalidArgumentException(sprintf(
                         '%s expects object arguments of type Zend\Mime\Message or implementing __toString(); object of type "%s" received',
@@ -399,7 +397,7 @@ class Message
         }
         $this->body = $body;
 
-        if (!$this->body instanceof MimeMessage) {
+        if (!$this->body instanceof Mime\Message) {
             return $this;
         }
 
@@ -428,7 +426,7 @@ class Message
     /**
      * Return the currently set message body
      * 
-     * @return null|object
+     * @return object
      */
     public function getBody()
     {
@@ -442,8 +440,8 @@ class Message
      */
     public function getBodyText()
     {
-        if ($this->body instanceof MimeMessage) {
-            return $this->body->generateMessage();
+        if ($this->body instanceof Mime\Message) {
+            return $this->body->generateMessage(Headers::EOL);
         }
 
         return (string) $this->body;
@@ -456,7 +454,7 @@ class Message
      * 
      * @param  string $headerName 
      * @param  string $headerClass 
-     * @return Header
+     * @return \Zend\Mail\Header\HeaderInterface
      */
     protected function getHeader($headerName, $headerClass)
     {
@@ -474,15 +472,10 @@ class Message
      * Clear a header by name
      * 
      * @param  string $headerName 
-     * @return void
      */
     protected function clearHeaderByName($headerName)
     {
-        $headers = $this->headers();
-        if ($headers->has($headerName)) {
-            $header = $headers->get($headerName);
-            $headers->removeHeader($header);
-        }
+        $this->headers()->removeHeader($headerName);
     }
 
     /**
@@ -490,9 +483,10 @@ class Message
      *
      * Used with To, From, Cc, Bcc, and ReplyTo headers. If the header does not
      * exist, instantiates it.
-     * 
-     * @param  string $headerName 
-     * @param  string $headerClass 
+     *
+     * @param  string $headerName
+     * @param  string $headerClass
+     * @throws Exception\DomainException
      * @return AddressList
      */
     protected function getAddressListFromHeader($headerName, $headerClass)
@@ -511,12 +505,12 @@ class Message
      * Update an address list
      *
      * Proxied to this from addFrom, addTo, addCc, addBcc, and addReplyTo.
-     * 
-     * @param  AddressList $addressList 
-     * @param  string|AddressDescription|array|AddressList|Traversable $emailOrAddressOrList 
-     * @param  null|string $name 
-     * @param  string $callingMethod 
-     * @return void
+     *
+     * @param  AddressList $addressList
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressOrList
+     * @param  null|string $name
+     * @param  string $callingMethod
+     * @throws Exception\InvalidArgumentException
      */
     protected function updateAddressList(AddressList $addressList, $emailOrAddressOrList, $name, $callingMethod)
     {
@@ -530,9 +524,9 @@ class Message
             $addressList->addMany($emailOrAddressOrList);
             return;
         }
-        if (!is_string($emailOrAddressOrList) && !$emailOrAddressOrList instanceof AddressDescription) {
+        if (!is_string($emailOrAddressOrList) && !$emailOrAddressOrList instanceof Address\AddressInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects a string, AddressDescription, array, AddressList, or Traversable as its first argument; received "%s"',
+                '%s expects a string, AddressInterface, array, AddressList, or Traversable as its first argument; received "%s"',
                 $callingMethod,
                 (is_object($emailOrAddressOrList) ? get_class($emailOrAddressOrList) : gettype($emailOrAddressOrList))
             ));
@@ -548,6 +542,8 @@ class Message
     public function toString()
     {
         $headers = $this->headers();
-        return $headers->toString() . "\r\n" . $this->getBodyText();
+        return $headers->toString()
+               . Headers::EOL
+               . $this->getBodyText();
     }
 }

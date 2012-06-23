@@ -19,12 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Barcode\Exception;
-
-use Zend\Barcode\Exception;
 
 /**
  * Exception for Zend_Barcode component.
@@ -36,6 +31,6 @@ use Zend\Barcode\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements Exception
+    implements ExceptionInterface
 {
 }

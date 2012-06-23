@@ -19,14 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper\Navigation;
 
-use Zend\Registry,
-    Zend\Navigation\Navigation,
-    Zend\View\Exception;
+use Zend\Navigation\Navigation;
+use Zend\View\Exception\ExceptionInterface;
 
 /**
  * Tests Zend_View_Helper_Navigation_Breadcrumbs
@@ -51,9 +47,26 @@ class BreadcrumbsTest extends AbstractTest
     /**
      * View helper
      *
-     * @var Zend\View\Helper\Navigation\Breadcrumbs
+     * @var \Zend\View\Helper\Navigation\Breadcrumbs
      */
     protected $_helper;
+
+    public function testCanRenderStraightFromServiceAlias()
+    {
+        $this->_helper->setServiceLocator($this->serviceManager);
+
+        $returned = $this->_helper->renderStraight('Navigation');
+        $this->assertEquals($returned, $this->_getExpected('bc/default.html'));
+    }
+
+    public function testCanRenderPartialFromServiceAlias()
+    {
+        $this->_helper->setPartial('bc.phtml');
+        $this->_helper->setServiceLocator($this->serviceManager);
+
+        $returned = $this->_helper->renderPartial('Navigation');
+        $this->assertEquals($returned, $this->_getExpected('bc/partial.html'));
+    }
 
     public function testHelperEntryPointWithoutAnyParams()
     {
@@ -76,23 +89,6 @@ class BreadcrumbsTest extends AbstractTest
         $new = $this->_helper->getContainer();
 
         $this->assertNotEquals($old, $new);
-    }
-
-    public function testAutoloadContainerFromRegistry()
-    {
-        $oldReg = null;
-        if (Registry::isRegistered(self::REGISTRY_KEY)) {
-            $oldReg = Registry::get(self::REGISTRY_KEY);
-        }
-        Registry::set(self::REGISTRY_KEY, $this->_nav1);
-
-        $this->_helper->setContainer();
-        $expected = $this->_getExpected('bc/default.html');
-        $actual = $this->_helper->render();
-
-        Registry::set(self::REGISTRY_KEY, $oldReg);
-
-        $this->assertEquals($expected, $actual);
     }
 
     public function testSetSeparator()
@@ -186,23 +182,6 @@ class BreadcrumbsTest extends AbstractTest
         $this->assertEquals($expected, $this->_helper->render());
     }
 
-    public function testTranslationFromTranslatorInRegistry()
-    {
-        $oldReg = Registry::isRegistered('Zend_Translator')
-                ? Registry::get('Zend_Translator')
-                : null;
-
-        $translator = $this->_getTranslator();
-        Registry::set('Zend_Translator', $translator);
-
-        $expected = $this->_getExpected('bc/translated.html');
-        $actual = $this->_helper->render();
-
-        Registry::set('Zend_Translator', $oldReg);
-
-        $this->assertEquals($expected, $actual);
-    }
-
     public function testDisablingTranslation()
     {
         $translator = $this->_getTranslator();
@@ -236,8 +215,8 @@ class BreadcrumbsTest extends AbstractTest
         try {
             $this->_helper->render();
             $this->fail(
-                '$partial was invalid, but no Zend\View\Exception was thrown');
-        } catch (Exception $e) {
+                '$partial was invalid, but no Zend\View\Exception\ExceptionInterface was thrown');
+        } catch (ExceptionInterface $e) {
         }
     }
 

@@ -23,7 +23,6 @@ namespace Zend\Service;
 use Zend\Http\Client as HTTPClient;
 
 /**
- * @uses       Zend\Http\Client
  * @category   Zend
  * @package    Zend_Service
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

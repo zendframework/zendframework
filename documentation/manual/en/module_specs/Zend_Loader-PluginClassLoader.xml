@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-class-loader"><info><title>The PluginClassLoader</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-class-loader"><title>The PluginClassLoader</title>
     
 
-    <section xml:id="zend.loader.plugin-class-loader.intro"><info><title>Overview</title></info>
+    <section xml:id="zend.loader.plugin-class-loader.intro"><title>Overview</title>
         
 
         <para>
             Resolving plugin names to class names is a common requirement within Zend Framework
             applications. The <classname>PluginClassLoader</classname> implements the interfaces
-            <link linkend="zend.loader.plugin-class-locater">PluginClassLocater</link>, <link linkend="zend.loader.short-name-locater">ShortNameLocater</link>, and
-            <interface>IteratorAggregate</interface>, providing a simple mechanism for aliasing
+            <link linkend="zend.loader.plugin-class-locator">PluginClassLocator</link>, <link linkend="zend.loader.short-name-locator">ShortNameLocator</link>, and
+            <interfacename>IteratorAggregate</interfacename>, providing a simple mechanism for aliasing
             plugin names to classnames for later retrieval.
         </para>
 
@@ -29,7 +29,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-loader.quick-start"><info><title>Quick Start</title></info>
+    <section xml:id="zend.loader.plugin-class-loader.quick-start"><title>Quick Start</title>
         
 
         <para>
@@ -57,7 +57,7 @@ $loader->registerPlugin('bugUrl', 'My\Custom\BugUrlHelper');
 $class = $loader->load('url'); // 'My\Custom\UrlHelper'
 ]]></programlisting>
 
-        <note><info><title>Case Sensitivity</title></info>
+        <note><title>Case Sensitivity</title>
             
 
             <para>
@@ -69,10 +69,10 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
         </note>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-loader.options"><info><title>Configuration Options</title></info>
+    <section xml:id="zend.loader.plugin-class-loader.options"><title>Configuration Options</title>
         
 
-        <variablelist><info><title>PluginClassLoader Options</title></info>
+        <variablelist><title>PluginClassLoader Options</title>
             
 
             <varlistentry>
@@ -89,7 +89,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
         </variablelist>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-loader.methods"><info><title>Available Methods</title></info>
+    <section xml:id="zend.loader.plugin-class-loader.methods"><title>Available Methods</title>
         
 
         <refentry xml:id="zend.loader.plugin-class-loader.methods.constructor">
@@ -107,13 +107,13 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>__construct()</title></info>
+            <refsection><title>__construct()</title>
                 
 
                 <para>
                     The constructor is used to instantiate and intialize the plugin class loader. If
                     passed a string, an array, or a <interfacename>Traversable</interfacename>
-                    object, it will pass this to the <link linkend="zend.loader.plugin-class-loader.methods.registerPlugins">registerPlugins()</link>
+                    object, it will pass this to the <link linkend="zend.loader.plugin-class-loader.methods.register-plugins">registerPlugins()</link>
                     method in order to seed (or overwrite) the plugin class map.
                 </para>
             </refsection>
@@ -134,7 +134,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>addStaticMap()</title></info>
+            <refsection><title>addStaticMap()</title>
                 
 
                 <para>
@@ -197,11 +197,11 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>registerPlugin()</title></info>
+            <refsection><title>registerPlugin()</title>
                 
 
                 <para>
-                    Defined by the <link linkend="zend.loader.plugin-class-locater">PluginClassLocater</link>
+                    Defined by the <link linkend="zend.loader.plugin-class-locator">PluginClassLocator</link>
                     interface. Expects two string arguments, the plugin
                     <varname>$shortName</varname>, and the class <varname>$className</varname> which
                     it represents.
@@ -224,7 +224,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>registerPlugins()</title></info>
+            <refsection><title>registerPlugins()</title>
                 
 
                 <para>
@@ -256,11 +256,11 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>unregisterPlugin()</title></info>
+            <refsection><title>unregisterPlugin()</title>
                 
 
                 <para>
-                    Defined by the <interfacename>PluginClassLocater</interfacename> interface;
+                    Defined by the <interfacename>PluginClassLocator</interfacename> interface;
                     remove a plugin/class association from the plugin class map.
                 </para>
             </refsection>
@@ -275,14 +275,15 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getRegisteredPlugins</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getRegisteredPlugins()</title></info>
+            <refsection><title>getRegisteredPlugins()</title>
                 
 
                 <para>
-                    Defined by the <interfacename>PluginClassLocater</interfacename> interface;
+                    Defined by the <interfacename>PluginClassLocator</interfacename> interface;
                     return the entire plugin class map as an array.
                 </para>
             </refsection>
@@ -303,11 +304,11 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>isLoaded()</title></info>
+            <refsection><title>isLoaded()</title>
                 
 
                 <para>
-                    Defined by the <interfacename>ShortNameLocater</interfacename> interface;
+                    Defined by the <interfacename>ShortNameLocator</interfacename> interface;
                     determine if the given plugin has been resolved to a class name.
                 </para>
             </refsection>
@@ -328,11 +329,11 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getClassName()</title></info>
+            <refsection><title>getClassName()</title>
                 
 
                 <para>
-                    Defined by the <interfacename>ShortNameLocater</interfacename> interface;
+                    Defined by the <interfacename>ShortNameLocator</interfacename> interface;
                     return the class name to which a plugin name resolves.
                 </para>
             </refsection>
@@ -353,11 +354,11 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>load()</title></info>
+            <refsection><title>load()</title>
                 
 
                 <para>
-                    Defined by the <interfacename>ShortNameLocater</interfacename> interface;
+                    Defined by the <interfacename>ShortNameLocator</interfacename> interface;
                     attempt to resolve a plugin name to a class name. If successful, returns the
                     class name; otherwise, returns a boolean <constant>false</constant>.
                 </para>
@@ -373,10 +374,11 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getIterator</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getIterator()</title></info>
+            <refsection><title>getIterator()</title>
                 
 
                 <para>
@@ -389,10 +391,10 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
         </refentry>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-loader.examples"><info><title>Examples</title></info>
+    <section xml:id="zend.loader.plugin-class-loader.examples"><title>Examples</title>
         
 
-        <example xml:id="zend.loader.plugin-class-loader.examples.static-maps"><info><title>Using Static Maps</title></info>
+        <example xml:id="zend.loader.plugin-class-loader.examples.static-maps"><title>Using Static Maps</title>
             
 
             <para>
@@ -422,7 +424,7 @@ $helper = $loader->load('url'); // Zend\View\Helper\Url
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.loader.plugin-class-loader.examples.extended-loader"><info><title>Creating a pre-loaded map</title></info>
+        <example xml:id="zend.loader.plugin-class-loader.examples.extended-loader"><title>Creating a pre-loaded map</title>
             
 
             <para>
@@ -491,7 +493,7 @@ PluginLoader::addStaticMap(array(
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.loader.plugin-class-loader.examples.using-as-plugin-map"><info><title>Extending a plugin map using another plugin map</title></info>
+        <example xml:id="zend.loader.plugin-class-loader.examples.using-as-plugin-map"><title>Extending a plugin map using another plugin map</title>
             
 
             <para>

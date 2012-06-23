@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\XmlRpc\Value;
 
 use Zend\XmlRpc\Value as XmlRpcValue;
 
 /**
- * @uses       \Zend\XmlRpc\Value\Value
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value
@@ -59,7 +55,7 @@ abstract class Collection extends XmlRpcValue
     /**
      * Return the value of this object, convert the XML-RPC native collection values into a PHP array
      *
-     * @return arary
+     * @return array
      */
     public function getValue()
     {

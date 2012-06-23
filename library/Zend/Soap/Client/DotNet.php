@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Soap\Client;
 
 use Zend\Soap\Client as SOAPClient,
@@ -36,8 +33,6 @@ use Zend\Soap\Client as SOAPClient,
  * Please leave your notes, compatiblity issues reports or
  * suggestions in fw-webservices@lists.zend.com or fw-general@lists.com
  *
- * @uses       \Zend\Soap\Client
- * @uses       \Zend\Soap\ClientException
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client

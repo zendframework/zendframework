@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.common"><info><title>Common page features</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.common"><title>Common page features</title>
     
 
     <para>
@@ -22,7 +22,7 @@
         <link linkend="zend.navigation.pages.custom">Creating custom page types</link>.
     </para>
 
-    <table xml:id="zend.navigation.pages.common.options"><info><title>Common page options</title></info>
+    <table xml:id="zend.navigation.pages.common.options"><title>Common page options</title>
         
 
         <tgroup cols="4">
@@ -216,7 +216,7 @@
         </tgroup>
     </table>
 
-    <note><info><title>Custom properties</title></info>
+    <note><title>Custom properties</title>
         
 
         <para>
@@ -237,7 +237,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.navigation.pages.common.example.customprops"><info><title>Custom page properties</title></info>
+    <example xml:id="zend.navigation.pages.common.example.customprops"><title>Custom page properties</title>
         
 
         <para>

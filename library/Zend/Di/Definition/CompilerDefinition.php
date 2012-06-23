@@ -5,13 +5,14 @@ namespace Zend\Di\Definition;
 use Zend\Code\Scanner\DerivedClassScanner,
     Zend\Code\Scanner\AggregateDirectoryScanner,
     Zend\Code\Scanner\DirectoryScanner,
+    Zend\Code\Scanner\FileScanner,
     
     Zend\Di\Definition\Annotation,
     Zend\Code\Annotation\AnnotationManager,
     Zend\Code\Reflection,
     Zend\Code\Annotation\AnnotationCollection;
 
-class CompilerDefinition implements Definition
+class CompilerDefinition implements DefinitionInterface
 {
     protected $isCompiled = false;
 
@@ -106,6 +107,19 @@ class CompilerDefinition implements Definition
                 // @todo Instnatiator support in annotations
             }
         }
+
+        $rTarget = $rClass;
+        $supertypes = array();
+        do {
+            $supertypes = array_merge($supertypes, $rTarget->getInterfaceNames());
+            if (!($rTargetParent = $rTarget->getParentClass())) {
+                break;
+            }
+            $supertypes[] = $rTargetParent->getName();
+            $rTarget = $rTargetParent;
+        } while (true);
+
+        $def['supertypes'] = $supertypes;
 
         if ($def['instantiator'] == null) {
             if ($rClass->isInstantiable()) {
@@ -395,7 +409,7 @@ class CompilerDefinition implements Definition
      */
     public function getClassSupertypes($class)
     {
-        if (!array_key_exists($class, $this->classes[$class])) {
+        if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
         return $this->classes[$class]['supertypes'];

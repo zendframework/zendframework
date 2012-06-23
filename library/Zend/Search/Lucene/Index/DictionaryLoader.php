@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Index;
 
 use Zend\Search\Lucene,
@@ -34,7 +31,6 @@ use Zend\Search\Lucene,
  * Manual "method inlining" is performed to increase dictionary index loading operation
  * which is major bottelneck for search performance.
  *
- * @uses       \Zend\Search\Lucene\Exception\InvalidFileFormatException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index

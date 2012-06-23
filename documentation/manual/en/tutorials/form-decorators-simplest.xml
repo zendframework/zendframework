@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.simplest"><info><title>Decorator Basics</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.simplest"><title>Decorator Basics</title>
     
 
-    <section xml:id="learning.form.decorators.simplest.decorator-overview"><info><title>Overview of the Decorator Pattern</title></info>
+    <section xml:id="learning.form.decorators.simplest.decorator-overview"><title>Overview of the Decorator Pattern</title>
         
 
         <para>
@@ -150,7 +150,7 @@ class TextPerson
         </para>
     </section>
 
-    <section xml:id="learning.form.decorators.simplest.first-decorator"><info><title>Creating Your First Decorator</title></info>
+    <section xml:id="learning.form.decorators.simplest.first-decorator"><title>Creating Your First Decorator</title>
         
 
         <para>

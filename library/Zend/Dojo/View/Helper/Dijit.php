@@ -19,21 +19,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Dojo\View\Helper;
 
 use Zend\Json\Json,
-    Zend\View\Renderer as View,
+    Zend\View\Renderer\RendererInterface as View,
     Zend\View\Helper\HtmlElement;
 
 /**
  * Dojo dijit base class
  *
- * @uses       \Zend\Dojo\View\Helper\Dojo
- * @uses       \Zend\Json\Json
- * @uses       \Zend\View\Helper\HtmlElement
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -81,7 +75,7 @@ abstract class Dijit extends HtmlElement
      *
      * Set view and enable dojo
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  View $view
      * @return \Zend\Dojo\View\Helper\Dijit
      */
     public function setView(View $view)

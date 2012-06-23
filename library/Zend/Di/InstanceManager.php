@@ -2,7 +2,7 @@
 
 namespace Zend\Di;
 
-class InstanceManager /* implements InstanceCollection */
+class InstanceManager /* implements InstanceManagerInterface */
 {
     /**
      * Array of shared instances
@@ -37,6 +37,10 @@ class InstanceManager /* implements InstanceCollection */
          * injection type => array of ordered method params
          */
         'injections' => array(),
+        /**
+         * alias|class => bool
+         */
+        'shared' => true
         );
 
     /**
@@ -74,7 +78,7 @@ class InstanceManager /* implements InstanceCollection */
     public function addSharedInstance($instance, $classOrAlias)
     {
         if (!is_object($instance)) {
-            throw new Exception\InvalidArgumentException('This method requires an object to be shared');
+            throw new Exception\InvalidArgumentException('This method requires an object to be shared. Class or Alias given: '.$classOrAlias);
         }
 
         $this->sharedInstances[$classOrAlias] = $instance;
@@ -240,6 +244,7 @@ class InstanceManager /* implements InstanceCollection */
         $configuration = array(
             'parameters' => isset($configuration['parameters']) ? $configuration['parameters'] : array(),
             'injections' => isset($configuration['injections']) ? $configuration['injections'] : array(),
+            'shared'     => isset($configuration['shared'])     ? $configuration['shared']     : true
         );
         $this->configurations[$key] = array_replace_recursive($this->configurations[$key], $configuration);
     }
@@ -273,7 +278,7 @@ class InstanceManager /* implements InstanceCollection */
      */
     public function setParameters($aliasOrClass, array $parameters)
     {
-        return $this->setConfiguration($aliasOrClass, array('parameters' => $parameters), true);
+        $this->setConfiguration($aliasOrClass, array('parameters' => $parameters), true);
     }
     
     /**
@@ -285,9 +290,13 @@ class InstanceManager /* implements InstanceCollection */
      */
     public function setInjections($aliasOrClass, array $injections)
     {
-        return $this->setConfiguration($aliasOrClass, array('injections' => $injections), true);
+        $this->setConfiguration($aliasOrClass, array('injections' => $injections), true);
     }
-    
+
+    public function setShared($aliasOrClass, $isShared)
+    {
+        $this->setConfiguration($aliasOrClass, array('shared' => $isShared), true);
+    }
 
     public function hasTypePreferences($interfaceOrAbstract)
     {

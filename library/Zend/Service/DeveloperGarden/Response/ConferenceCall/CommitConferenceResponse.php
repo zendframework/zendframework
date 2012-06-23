@@ -20,7 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_AbstractConferenceCall
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

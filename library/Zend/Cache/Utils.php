@@ -29,33 +29,6 @@ namespace Zend\Cache;
 abstract class Utils
 {
     /**
-     * Get disk capacity
-     *
-     * @param  string $path A directory of the filesystem or disk partition
-     * @return array
-     * @throws Exception\RuntimeException
-     */
-    public static function getDiskCapacity($path)
-    {
-        $total = @disk_total_space($path);
-        if ($total === false) {
-            $err = error_get_last();
-            throw new Exception\RuntimeException($err['message']);
-        }
-
-        $free = @disk_free_space($path);
-        if ($free === false) {
-            $err = error_get_last();
-            throw new Exception\RuntimeException($err['message']);
-        }
-
-        return array(
-            'total' => $total,
-            'free'  => $free,
-        );
-    }
-
-    /**
      * Get php memory capacity
      *
      * @return array
@@ -90,10 +63,15 @@ abstract class Utils
             return self::getSystemMemoryCapacityWin();
         }
 
+        // Darwin
+        if (substr(\PHP_OS, 0, 6) == 'Darwin') {
+            return self::getSystemMemoryCapacityOSX();
+        }
+
         // *nix
         if (false === ($meminfo = @file_get_contents('/proc/meminfo'))) {
             $lastErr = error_get_last();
-            throw new Exception\RuntimeException("Can't read '/proc/meminfo': {$lastErr['messagae']}");
+            throw new Exception\RuntimeException("Can't read '/proc/meminfo': {$lastErr['message']}");
         } elseif (!preg_match_all('/(\w+):\s*(\d+\s*\w*)[\r|\n]/i', $meminfo, $matches, PREG_PATTERN_ORDER)) {
             throw new Exception\RuntimeException("Can't parse '/proc/meminfo'");
         }
@@ -175,11 +153,67 @@ abstract class Utils
     }
 
     /**
+     * Get system memory capacity on windows systems
+     *
+     * @return array
+     * @throws Exception\RuntimeException
+     */
+    static protected function getSystemMemoryCapacityOSX()
+    {
+        $total = 0;
+        $free = 0;
+
+        if (!function_exists('exec')) {
+            throw new Exception\RuntimeException(
+                "Built-in function 'exec' is disabled"
+            );
+        } else {
+            // sysctl will tell us the total amount of memory
+            $cmd  = 'sysctl -n hw.memsize';
+            $out  = $ret = null;
+            $line = exec($cmd, $out, $ret);
+
+            if ($ret) {
+                $out = implode("\n", $out);
+                throw new Exception\RuntimeException(
+                    "Command '{$cmd}' failed"
+                    . ", return: '{$ret}'"
+                    . ", output: '{$out}'"
+                );
+            }
+            $total = $line;
+
+            // now work out amount used using vm_stat
+            $cmd  = 'vm_stat | grep free';
+            $out  = $ret = null;
+            $line = exec($cmd, $out, $ret);
+
+            if ($ret) {
+                $out = implode("\n", $out);
+                throw new Exception\RuntimeException(
+                    "Command '{$cmd}' failed"
+                    . ", return: '{$ret}'"
+                    . ", output: '{$out}'"
+                );
+            }
+            preg_match('/([\d]+)/', $line, $matches);
+            if (isset($matches[1])) {
+                $free = $matches[1] * 4096;
+            }
+        }
+
+        return array(
+            'total' => $total,
+            'free'  => $free,
+        );
+    }
+
+    /**
      * Generate a hash value.
      *
      * This helper adds the virtual hash algo "strlen".
      *
-     * @param  string $data  Name of selected hashing algorithm
+     * @param  string $algo  Name of selected hashing algorithm
      * @param  string $data  Message to be hashed.
      * @param  bool   $raw   When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits.
      * @return string        Hash value

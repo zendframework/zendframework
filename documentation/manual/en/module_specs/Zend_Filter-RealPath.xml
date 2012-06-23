@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.realpath"><info><title>RealPath</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.realpath"><title>RealPath</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         pathnames.
     </para>
 
-    <section xml:id="zend.filter.set.realpath.options"><info><title>Supported options for Zend_Filter_RealPath</title></info>
+    <section xml:id="zend.filter.set.realpath.options"><title>Supported options for Zend_Filter_RealPath</title>
         
 
         <para>
@@ -24,7 +24,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.filter.set.realpath.basic"><info><title>Basic usage</title></info>
+    <section xml:id="zend.filter.set.realpath.basic"><title>Basic usage</title>
         
 
         <para>
@@ -51,7 +51,7 @@ $filtered = $filter->filter($path);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.filter.set.realpath.exists"><info><title>Non existing paths</title></info>
+    <section xml:id="zend.filter.set.realpath.exists"><title>Non existing paths</title>
         
 
        <para>

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\GApps;
 
 use Zend\GData\GApps;
@@ -40,10 +37,6 @@ use Zend\GData\GApps;
  *
  * This class represents <atom:entry> in the Google Data protocol.
  *
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Extension\FeedLink
- * @uses       \Zend\GData\GApps
- * @uses       \Zend\GData\GApps\Extension\EmailList
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps
@@ -152,7 +145,7 @@ class EmailListEntry extends \Zend\GData\Entry
      *
      * @param \Zend\GData\GApps\Extension\EmailList $value The desired value
      *              this element, or null to unset.
-     * @return Zend_Gdata_GApps_EventEntry Provides a fluent interface
+     * @return EmailListEntry Provides a fluent interface
      */
     public function setEmailList($value)
     {
@@ -197,7 +190,7 @@ class EmailListEntry extends \Zend\GData\Entry
      * @param array $value A collection of Zend_Gdata_GApps_Extension_FeedLink
      *          instances representing all feed links for this entry, or
      *          null to unset.
-     * @return Zend_Gdata_GApps_EventEntry Provides a fluent interface
+     * @return EmailListEntry Provides a fluent interface
      */
     public function setFeedLink($value)
     {

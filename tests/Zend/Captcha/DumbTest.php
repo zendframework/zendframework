@@ -19,10 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Captcha;
+
+use Zend\Captcha\Dumb as DumbCaptcha;
 
 /**
  * @category   Zend
@@ -34,7 +33,7 @@ namespace ZendTest\Captcha;
  */
 class DumbTest extends CommonWordTest
 {
-    protected $wordClass = '\Zend\Captcha\Dumb';
+    protected $wordClass = 'Zend\Captcha\Dumb';
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -48,24 +47,61 @@ class DumbTest extends CommonWordTest
             unset($this->word);
         }
 
-        $this->element = new \Zend\Form\Element\Captcha(
-            'captchaD',
-            array(
-                'captcha' => array(
-                    'Dumb',
-                    'sessionClass' => 'ZendTest\\Captcha\\TestAsset\\SessionContainer'
-                )
-            )
-        );
-        $this->captcha =  $this->element->getCaptcha();
+        $this->captcha = new DumbCaptcha(array(
+            'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
+        ));
     }
 
-    public function testRendersWordInReverse()
+    public function testUsesCaptchaDumbAsHelper()
     {
-        $id   = $this->captcha->generate('test');
+        $this->assertEquals('captcha/dumb', $this->captcha->getHelperName());
+    }
+
+    public function testGeneratePopulatesId()
+    {
+        $id   = $this->captcha->generate();
+        $test = $this->captcha->getId();
+        $this->assertEquals($id, $test);
+    }
+
+    public function testGeneratePopulatesSessionWithWord()
+    {
+        $this->captcha->generate();
+        $word    = $this->captcha->getWord();
+        $session = $this->captcha->getSession();
+        $this->assertEquals($word, $session->word);
+    }
+
+    public function testGenerateWillNotUseNumbersIfUseNumbersIsDisabled()
+    {
+        $this->captcha->setUseNumbers(false);
+        $this->captcha->generate();
         $word = $this->captcha->getWord();
-        $html = $this->captcha->render(new \Zend\View\Renderer\PhpRenderer);
-        $this->assertContains(strrev($word), $html);
-        $this->assertNotContains($word, $html);
+        $this->assertNotRegexp('/\d/', $word);
+    }
+
+    public function testWordIsExactlyAsLongAsWordLen()
+    {
+        $this->captcha->setWordLen(10);
+        $this->captcha->generate();
+        $word = $this->captcha->getWord();
+        $this->assertEquals(10, strlen($word));
+    }
+
+    /**
+     * @group ZF-11522
+     */
+    public function testDefaultLabelIsUsedWhenNoAlternateLabelSet()
+    {
+        $this->assertEquals('Please type this word backwards', $this->captcha->getLabel());
+    }
+
+    /**
+     * @group ZF-11522
+     */
+    public function testChangeLabelViaSetterMethod()
+    {
+        $this->captcha->setLabel('Testing');
+        $this->assertEquals('Testing', $this->captcha->getLabel());
     }
 }

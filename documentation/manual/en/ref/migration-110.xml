@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.110"><info><title>Zend Framework 1.10</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.110"><title>Zend Framework 1.10</title>
 
 
     <para>
@@ -7,7 +7,7 @@
         should note the following migration notes.
     </para>
 
-    <section xml:id="migration.110.zend.controller.front"><info><title>Zend_Controller_Front</title></info>
+    <section xml:id="migration.110.zend.controller.front"><title>Zend_Controller_Front</title>
 
 
         <para>
@@ -49,7 +49,7 @@
 ]]></programlisting>
     </section>
 
-    <section xml:id="migration.110.zend.feed.reader"><info><title>Zend_Feed_Reader</title></info>
+    <section xml:id="migration.110.zend.feed.reader"><title>Zend_Feed_Reader</title>
 
 
         <para>
@@ -108,10 +108,10 @@ $authors = $feed->getAuthors()->getValues();
 ]]></programlisting>
     </section>
 
-    <section xml:id="migration.110.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
+    <section xml:id="migration.110.zend.file.transfer"><title>Zend_File_Transfer</title>
 
 
-        <section xml:id="migration.110.zend.file.transfer.files"><info><title>Security change</title></info>
+        <section xml:id="migration.110.zend.file.transfer.files"><title>Security change</title>
 
 
             <para>
@@ -134,7 +134,7 @@ $authors = $feed->getAuthors()->getValues();
             </para>
         </section>
 
-        <section xml:id="migration.110.zend.file.transfer.count"><info><title>Count validation</title></info>
+        <section xml:id="migration.110.zend.file.transfer.count"><title>Count validation</title>
 
 
             <para>
@@ -142,7 +142,7 @@ $authors = $feed->getAuthors()->getValues();
                 naming. For consistency the following constants have been changed:
             </para>
 
-            <table xml:id="migration.110.zend.file.transfer.count.table"><info><title>Changed Validation Messages</title></info>
+            <table xml:id="migration.110.zend.file.transfer.count.table"><title>Changed Validation Messages</title>
 
 
                 <tgroup cols="4">
@@ -184,7 +184,7 @@ $authors = $feed->getAuthors()->getValues();
         </section>
     </section>
 
-    <section xml:id="migration.110.zend.filter.html-entities"><info><title>Zend_Filter_HtmlEntities</title></info>
+    <section xml:id="migration.110.zend.filter.html-entities"><title>Zend_Filter_HtmlEntities</title>
 
 
         <para>
@@ -205,7 +205,7 @@ $authors = $feed->getAuthors()->getValues();
         </para>
     </section>
 
-    <section xml:id="migration.110.zend.filter.strip-tags"><info><title>Zend_Filter_StripTags</title></info>
+    <section xml:id="migration.110.zend.filter.strip-tags"><title>Zend_Filter_StripTags</title>
 
 
         <para>
@@ -223,10 +223,10 @@ $authors = $feed->getAuthors()->getValues();
         </para>
     </section>
 
-    <section xml:id="migration.110.zend.translator"><info><title>Zend_Translator</title></info>
+    <section xml:id="migration.110.zend.translator"><title>Zend_Translator</title>
 
 
-        <section xml:id="migration.110.zend.translator.xliff"><info><title>Xliff adapter</title></info>
+        <section xml:id="migration.110.zend.translator.xliff"><title>Xliff adapter</title>
 
 
             <para>
@@ -248,10 +248,10 @@ $trans = new Zend_Translator(
         </section>
     </section>
 
-    <section xml:id="migration.110.zend.validate"><info><title>Zend_Validate</title></info>
+    <section xml:id="migration.110.zend.validate"><title>Zend_Validate</title>
 
 
-        <section xml:id="migration.110.zend.validate.selfwritten"><info><title>Self written validators</title></info>
+        <section xml:id="migration.110.zend.validate.selfwritten"><title>Self written validators</title>
 
 
             <para>
@@ -298,7 +298,7 @@ My_Validator extends Zend_Validate_Abstract
 ]]></programlisting>
         </section>
 
-        <section xml:id="migration.110.zend.validate.datevalidator"><info><title>Simplification in date validator</title></info>
+        <section xml:id="migration.110.zend.validate.datevalidator"><title>Simplification in date validator</title>
 
 
             <para>
@@ -310,7 +310,7 @@ My_Validator extends Zend_Validate_Abstract
             </para>
         </section>
 
-        <section xml:id="migration.110.zend.validate.barcodevalidator"><info><title>Fixes in Alpha, Alnum and Barcode validator</title></info>
+        <section xml:id="migration.110.zend.validate.barcodevalidator"><title>Fixes in Alpha, Alnum and Barcode validator</title>
 
 
             <para>
@@ -326,7 +326,7 @@ My_Validator extends Zend_Validate_Abstract
                 then you will have to change them. The following table shows you the changed values:
             </para>
 
-            <table xml:id="migration.110.zend.validate.barcodevalidator.table"><info><title>Available Validation Messages</title></info>
+            <table xml:id="migration.110.zend.validate.barcodevalidator.table"><title>Available Validation Messages</title>
 
 
                 <tgroup cols="3">

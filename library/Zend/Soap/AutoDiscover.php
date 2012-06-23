@@ -19,19 +19,17 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Soap;
 
 use Zend\Uri,
     Zend\Soap\Wsdl,
-    Zend\Soap\Wsdl\ComplexTypeStrategy,
+    Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy,
     Zend\Server\Reflection\AbstractFunction,
     Zend\Server\Reflection,
     Zend\Server\Reflection\Prototype,
     Zend\Server\Reflection\ReflectionParameter,
-    Zend\Soap\AutoDiscover\DiscoveryStrategy\ReflectionDiscovery;
+    Zend\Soap\AutoDiscover\DiscoveryStrategy\ReflectionDiscovery,
+    Zend\Soap\AutoDiscover\DiscoveryStrategy\DiscoveryStrategyInterface as DiscoveryStrategy;
 
 /**
  * \Zend\Soap\AutoDiscover
@@ -109,14 +107,14 @@ class AutoDiscover
     /**
      * Discovery strategy for types and other method details.
      *
-     * @var Zend\Soap\AutoDiscover\DiscoveryStrategy
+     * @var DiscoveryStrategy
      */
     protected $_discoveryStrategy;
 
     /**
      * Constructor
      *
-     * @param \Zend\Soap\Wsdl\ComplexTypeStrategy $strategy
+     * @param ComplexTypeStrategy $strategy
      * @param string|Uri\Uri $endpointUri
      * @param string $wsdlClass
      */
@@ -141,8 +139,8 @@ class AutoDiscover
     /**
      * Set the discovery strategy for method type and other information.
      *
-     * @param  AutoDiscover\DiscoveryStrategy $discoveryStrategy
-     * @return Zend\Soap\AutoDiscover
+     * @param  DiscoveryStrategy $discoveryStrategy
+     * @return AutoDiscover
      */
     public function setDiscoveryStrategy(DiscoveryStrategy $discoveryStrategy)
     {
@@ -151,7 +149,7 @@ class AutoDiscover
     }
 
     /**
-     * @return AutoDiscover\DiscoveryStrategy
+     * @return DiscoveryStrategy
      */
     public function getDiscoveryStrategy()
     {
@@ -193,6 +191,7 @@ class AutoDiscover
      * Get service name
      *
      * @return string
+     * @throws Exception\RuntimeException
      */
     public function getServiceName()
     {
@@ -215,8 +214,8 @@ class AutoDiscover
      * Set the location at which the WSDL file will be availabe.
      *
      * @param  Uri\Uri|string $uri
-     * @return \Zend\Soap\AutoDiscover
-     * @throws \Zend\Soap\Exception\InvalidArgumentException
+     * @return AutoDiscover
+     * @throws Exception\InvalidArgumentException
      */
     public function setUri($uri)
     {
@@ -234,6 +233,7 @@ class AutoDiscover
      * Return the current Uri that the SOAP WSDL Service will be located at.
      *
      * @return Uri\Uri
+     * @throws Exception\RuntimeException
      */
     public function getUri()
     {
@@ -251,8 +251,8 @@ class AutoDiscover
      * Set the name of the WSDL handling class.
      *
      * @param  string $wsdlClass
-     * @return \Zend\Soap\AutoDiscover
-     * @throws \Zend\Soap\Exception\InvalidArgumentException
+     * @return AutoDiscover
+     * @throws Exception\InvalidArgumentException
      */
     public function setWsdlClass($wsdlClass)
     {
@@ -283,8 +283,8 @@ class AutoDiscover
      * 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/".
      *
      * @param  array $operationStyle
-     * @return \Zend\Soap\AutoDiscover
-     * @throws \Zend\Soap\Exception\InvalidArgumentException
+     * @return AutoDiscover
+     * @throws Exception\InvalidArgumentException
      */
     public function setOperationBodyStyle(array $operationStyle=array())
     {
@@ -301,7 +301,7 @@ class AutoDiscover
      * By default 'style' is 'rpc' and 'transport' is 'http://schemas.xmlsoap.org/soap/http'.
      *
      * @param  array $bindingStyle
-     * @return \Zend\Soap\AutoDiscover
+     * @return AutoDiscover
      */
     public function setBindingStyle(array $bindingStyle=array())
     {
@@ -317,8 +317,8 @@ class AutoDiscover
     /**
      * Set the strategy that handles functions and classes that are added AFTER this call.
      *
-     * @param  \Zend\Soap\Wsdl\ComplexTypeStrategy $strategy
-     * @return \Zend\Soap\AutoDiscover
+     * @param  ComplexTypeStrategy $strategy
+     * @return AutoDiscover
      */
     public function setComplexTypeStrategy(ComplexTypeStrategy $strategy)
     {
@@ -331,7 +331,7 @@ class AutoDiscover
      * Set the Class the SOAP server will use
      *
      * @param string $class Class Name
-     * @return \Zend\Soap\AutoDiscover
+     * @return AutoDiscover
      */
     public function setClass($class)
     {
@@ -343,7 +343,7 @@ class AutoDiscover
      * Add a Single or Multiple Functions to the WSDL
      *
      * @param string $function Function Name
-     * @return \Zend\Soap\AutoDiscover
+     * @return AutoDiscover
      */
     public function addFunction($function)
     {

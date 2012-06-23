@@ -19,17 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Amazon;
 use Zend\Service\Amazon\Exception;
 
 /**
- * @uses       DOMXPath
- * @uses       \Zend\Service\Amazon\OutOfBoundsException
- * @uses       SeekableIterator
- * @uses       Zend_Service_Amazon_Item
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon
@@ -76,7 +69,7 @@ class ResultSet implements \SeekableIterator
     {
         $this->_dom = $dom;
         $this->_xpath = new \DOMXPath($dom);
-        $this->_xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
+        $this->_xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2011-08-01');
         $this->_results = $this->_xpath->query('//az:Item');
     }
 

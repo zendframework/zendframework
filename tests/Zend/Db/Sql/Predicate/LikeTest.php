@@ -32,14 +32,14 @@ class LikeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('target = target', $like->getSpecification());
     }
     
-    public function testGetWhereParts()
+    public function testGetExpressionData()
     {
         $like = new Like('bar', 'Foo%');
         $this->assertEquals(
             array(
                 array('%1$s LIKE %2$s', array('bar', 'Foo%'), array($like::TYPE_IDENTIFIER, $like::TYPE_VALUE))
             ),
-            $like->getWhereParts()
+            $like->getExpressionData()
         );
     }
     

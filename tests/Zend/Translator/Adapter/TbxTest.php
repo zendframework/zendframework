@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Translator\Adapter;
 use Zend\Translator\Adapter;
 use Zend\Translator;
@@ -46,6 +43,16 @@ use Zend\Translator\Exception\InvalidFileTypeException;
  */
 class TbxTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        Adapter\Tbx::removeCache();
+    }
+
+    public function tearDown()
+    {
+        Adapter\Tbx::removeCache();
+    }
+
     public function testCreate()
     {
         $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'en');
@@ -76,7 +83,7 @@ class TbxTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('failed.tbx', $e->getMessage());
         }
     }
-    
+
     public function testToString()
     {
         $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'fr');

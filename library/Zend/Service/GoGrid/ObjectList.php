@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\GoGrid;
 
 use Zend\Service\GoGrid\Object;
@@ -29,11 +26,6 @@ use Zend\Service\GoGrid\Object;
 /**
  * List of servers retrived from the GoGrid web service
  *
- * @uses       ArrayAccess
- * @uses       Countable
- * @uses       Iterator
- * @uses       OutOfBoundsException
- * @uses       Zend_Service_GoGrid_Object
  * @category   Zend
  * @package    Zend_Service
  * @subpackage GoGrid

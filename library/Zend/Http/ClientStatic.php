@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Http;
 
 use Zend\Http\Client;
@@ -116,7 +113,7 @@ class ClientStatic
         }
         
         if (!empty($body)) {
-            $request->setBody($body);
+            $request->setContent($body);
         }
         
         return self::getStaticClient()->send($request);

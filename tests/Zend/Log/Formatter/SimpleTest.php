@@ -97,16 +97,25 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $line = $f->format($fields);
         $this->assertContains('object', $line);
     }
-
+    
     /**
-     * @group ZF-9176
+     * @group ZF-10427
      */
-    public function testFactory()
+    public function testDefaultFormatShouldDisplayExtraInformations()
     {
-        $options = array(
-            'format' => '%timestamp% [%priority%]: %message% -- %info%'
-        );
-        $formatter = Simple::factory($options);
-        $this->assertInstanceOf('Zend\Log\Formatter\Simple', $formatter);
+    	$message = 'custom message';
+    	$exception = new \RuntimeException($message);
+    	$event = array(
+    	    'timestamp'    => date('c'),
+    	    'message'      => 'Application error',
+    	    'priority'     => 2,
+    	    'priorityName' => 'CRIT',
+    	    'info'         => $exception,
+    	);
+
+        $formatter = new Simple();
+        $output = $formatter->format($event);
+
+        $this->assertContains($message, $output);
     }
 }

@@ -20,9 +20,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData\App;
 
 use Zend\GData\App,
@@ -39,6 +36,9 @@ use Zend\GData\App,
  */
 class FeedTest extends \PHPUnit_Framework_TestCase
 {
+
+    /** @var App\Feed */
+    public $feed;
 
     public function setUp() {
         $this->feedText = file_get_contents(
@@ -267,5 +267,17 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($testString22, $result);
         $result = $feed->lookupNamespace($prefix, null, 1);
         $this->assertEquals($testString21, $result);
+    }
+
+    /**
+     * @group ZF-10242
+     */
+    public function testCount()
+    {
+        $feed = new App\Feed();
+        $feed->addEntry('foo')
+             ->addEntry('bar');
+        $this->assertEquals(2, $feed->count());
+        $this->assertEquals(2, count($feed));
     }
 }

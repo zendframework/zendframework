@@ -10,7 +10,7 @@ class HostTest extends \PHPUnit_Framework_TestCase
     public function testHostFromStringCreatesValidHostHeader()
     {
         $hostHeader = Host::fromString('Host: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $hostHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $hostHeader);
         $this->assertInstanceOf('Zend\Http\Header\Host', $hostHeader);
     }
 

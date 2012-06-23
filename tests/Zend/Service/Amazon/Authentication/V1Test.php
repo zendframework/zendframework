@@ -20,10 +20,6 @@
  * @version    $Id: AllTests.php 11973 2008-10-15 16:00:56Z matthew $
  */
 
-
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon\Authentication;
 
 use Zend\Service\Amazon\Authentication,
@@ -51,8 +47,6 @@ class V1Test extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-
         $this->_amazon = new Authentication\V1('0PN5J17HBGZHT7JJ3X82', 'uV3F3YluFJax1cknvbcGwgjvx4QpvB+leU8dUj2o', '2007-12-01');
     }
 
@@ -62,8 +56,6 @@ class V1Test extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $this->_amazon = null;
-
-        parent::tearDown();
     }
 
     /**

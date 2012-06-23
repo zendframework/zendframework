@@ -20,14 +20,6 @@
  */
 
 /**
- * @uses       DOMDocument
- * @uses       DOMXPath
- * @uses       Zend_Rest_Client
- * @uses       Zend\Service\Exception
- * @uses       Zend_Service_Flickr_Image
- * @uses       Zend_Service_Flickr_ResultSet
- * @uses       Zend\Validator\Between
- * @uses       Zend\Validator\Int
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Flickr

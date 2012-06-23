@@ -18,25 +18,24 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Code\Reflection;
 
-use ReflectionProperty as PhpReflectionProperty,
-    Zend\Code\Reflection;
+use ReflectionProperty as PhpReflectionProperty;
+use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Scanner\AnnotationScanner;
+use Zend\Code\Scanner\CachingFileScanner;
 
 /**
  * @todo       implement line numbers
- * @uses       ReflectionProperty
- * @uses       \Zend\Code\Reflection\ReflectionClass
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PropertyReflection extends PhpReflectionProperty implements Reflection
+class PropertyReflection extends PhpReflectionProperty implements ReflectionInterface
 {
+    protected $annotations;
+
     /**
      * Get declaring class reflection object
      *
@@ -51,9 +50,9 @@ class PropertyReflection extends PhpReflectionProperty implements Reflection
     }
 
     /**
-     * Get docblock comment
+     * Get DocBlock comment
      *
-     * @return string|false False if no docblock defined
+     * @return string|false False if no DocBlock defined
      */
     public function getDocComment()
     {
@@ -70,6 +69,28 @@ class PropertyReflection extends PhpReflectionProperty implements Reflection
         }
         $r = new DocBlockReflection($docComment);
         return $r;
+    }
+
+    /**
+     * @param AnnotationManager $annotationManager
+     * @return AnnotationCollection
+     */
+    public function getAnnotations(AnnotationManager $annotationManager)
+    {
+        if (null !== $this->annotations) {
+            return $this->annotations;
+        }
+
+        if (($docComment = $this->getDocComment()) == '') {
+            return false;
+        }
+
+        $class              = $this->getDeclaringClass();
+        $cachingFileScanner = new CachingFileScanner($class->getFileName());
+        $nameInformation    = $cachingFileScanner->getClassNameInformation($class->getName());
+        $this->annotations  = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
+
+        return $this->annotations;
     }
 
     public function toString()

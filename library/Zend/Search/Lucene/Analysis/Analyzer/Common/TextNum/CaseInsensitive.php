@@ -19,16 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Analysis\Analyzer\Common\TextNum;
 use Zend\Search\Lucene\Analysis\Analyzer\Common;
 use Zend\Search\Lucene\Analysis\TokenFilter;
 
 /**
- * @uses       \Zend\Search\Lucene\Analysis\Analyzer\Common\TextNum\TextNum
- * @uses       \Zend\Search\Lucene\Analysis\TokenFilter\LowerCase
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis

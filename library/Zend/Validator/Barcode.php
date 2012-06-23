@@ -18,15 +18,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator;
 
+use Traversable;
+
 /**
- * @uses       \Zend\Loader
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -69,7 +65,7 @@ class Barcode extends AbstractValidator
      */
     public function __construct($options = null)
     {
-        if (!is_array($options) && !($options instanceof \Zend\Config\Config)) {
+        if (!is_array($options) && !($options instanceof Traversable)) {
             $options = array('adapter' => $options);
         }
 
@@ -87,7 +83,7 @@ class Barcode extends AbstractValidator
      */
     public function getAdapter()
     {
-        if (!($this->options['adapter'] instanceof Barcode\Adapter)) {
+        if (!($this->options['adapter'] instanceof Barcode\AdapterInterface)) {
             $this->setAdapter('Ean13');
         }
 
@@ -107,9 +103,6 @@ class Barcode extends AbstractValidator
         if (is_string($adapter)) {
             $adapter = ucfirst(strtolower($adapter));
             $adapter = 'Zend\Validator\Barcode\\' . $adapter;
-            if (\Zend\Loader::isReadable('Zend/Validator/Barcode/' . $adapter . '.php')) {
-                $adapter = 'Zend\Validator\Barcode\\' . $adapter;
-            }
 
             if (!class_exists($adapter)) {
                 throw new Exception\InvalidArgumentException('Barcode adapter matching "' . $adapter . '" not found');
@@ -118,9 +111,9 @@ class Barcode extends AbstractValidator
             $this->options['adapter'] = new $adapter($options);
         }
 
-        if (!$this->options['adapter'] instanceof Barcode\Adapter) {
+        if (!$this->options['adapter'] instanceof Barcode\AdapterInterface) {
             throw new Exception\InvalidArgumentException(
-                "Adapter " . $adapter . " does not implement Zend\Validate\Barcode\Adapter"
+                "Adapter " . $adapter . " does not implement Zend\Validate\Barcode\AdapterInterface"
             );
         }
 
@@ -149,7 +142,7 @@ class Barcode extends AbstractValidator
     }
 
     /**
-     * Defined by Zend\Validator\Validator
+     * Defined by Zend\Validator\ValidatorInterface
      *
      * Returns true if and only if $value contains a valid barcode
      *

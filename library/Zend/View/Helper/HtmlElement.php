@@ -19,14 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 
 /**
- * @uses       \Zend\Json\Json
- * @uses       \Zend\View\Helper\AbstractHelper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

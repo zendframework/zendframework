@@ -10,7 +10,7 @@ class ContentRangeTest extends \PHPUnit_Framework_TestCase
     public function testContentRangeFromStringCreatesValidContentRangeHeader()
     {
         $contentRangeHeader = ContentRange::fromString('Content-Range: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $contentRangeHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $contentRangeHeader);
         $this->assertInstanceOf('Zend\Http\Header\ContentRange', $contentRangeHeader);
     }
 

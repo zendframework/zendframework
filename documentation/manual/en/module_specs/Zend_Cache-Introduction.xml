@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><title>Introduction</title>
     
 
     <para>
@@ -21,7 +21,7 @@
         <emphasis>File</emphasis>, <emphasis>Function</emphasis> and <emphasis>Class</emphasis>.
     </para>
 
-    <example xml:id="zend.cache.introduction.example-1"><info><title>Getting a Frontend with Zend_Cache::factory()</title></info>
+    <example xml:id="zend.cache.introduction.example-1"><title>Getting a Frontend with Zend_Cache::factory()</title>
         
 
         <para>
@@ -48,7 +48,7 @@ $cache = Zend_Cache::factory('Core',
 ]]></programlisting>
     </example>
 
-    <note><info><title>Frontends and Backends Consisting of Multiple Words</title></info>
+    <note><title>Frontends and Backends Consisting of Multiple Words</title>
         
 
         <para>
@@ -59,7 +59,7 @@ $cache = Zend_Cache::factory('Core',
         </para>
     </note>
 
-    <example xml:id="zend.cache.introduction.example-2"><info><title>Caching a Database Query Result</title></info>
+    <example xml:id="zend.cache.introduction.example-2"><title>Caching a Database Query Result</title>
         
 
         <para>
@@ -94,7 +94,7 @@ print_r($result);
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.cache.introduction.example-3"><info><title>Caching Output with Zend_Cache Output Frontend</title></info>
+    <example xml:id="zend.cache.introduction.example-3"><title>Caching Output with Zend_Cache Output Frontend</title>
         
 
         <para>

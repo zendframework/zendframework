@@ -18,25 +18,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Stdlib\Exception;
-
-use Zend\Stdlib\Exception;
 
 /**
  * Invalid callback exception
  *
- * @uses       Exception
- * @uses       Zend\Stdlib\Exception
  * @category   Zend
  * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidCallbackException
-    extends DomainException
-    implements Exception
+class InvalidCallbackException extends DomainException implements ExceptionInterface
 {
 }

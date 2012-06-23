@@ -20,15 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_BaseUserService_AccountBalance
- * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
- * @uses       Zend_Service_DeveloperGarden_Client_Exception
- * @uses       Zend_Service_DeveloperGarden_Request_BaseUserService_ChangeQuotaPool
- * @uses       Zend_Service_DeveloperGarden_Request_BaseUserService_GetAccountBalance
- * @uses       Zend_Service_DeveloperGarden_Request_BaseUserService_GetQuotaInformation
- * @uses       Zend_Service_DeveloperGarden_Response_BaseUserService_ChangeQuotaPoolResponse
- * @uses       Zend_Service_DeveloperGarden_Response_BaseUserService_GetAccountBalanceResponse
- * @uses       Zend_Service_DeveloperGarden_Response_BaseUserService_GetQuotaInformationResponse
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

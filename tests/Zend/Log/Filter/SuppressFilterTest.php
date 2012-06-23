@@ -41,41 +41,30 @@ class SuppressFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testSuppressIsInitiallyOff()
     {
-        $this->assertTrue($this->filter->accept(array()));
+        $this->assertTrue($this->filter->filter(array()));
     }
 
     public function testSuppressOn()
     {
         $this->filter->suppress(true);
-        $this->assertFalse($this->filter->accept(array()));
-        $this->assertFalse($this->filter->accept(array()));
+        $this->assertFalse($this->filter->filter(array()));
+        $this->assertFalse($this->filter->filter(array()));
     }
 
     public function testSuppressOff()
     {
         $this->filter->suppress(false);
-        $this->assertTrue($this->filter->accept(array()));
-        $this->assertTrue($this->filter->accept(array()));
+        $this->assertTrue($this->filter->filter(array()));
+        $this->assertTrue($this->filter->filter(array()));
     }
 
     public function testSuppressCanBeReset()
     {
         $this->filter->suppress(true);
-        $this->assertFalse($this->filter->accept(array()));
+        $this->assertFalse($this->filter->filter(array()));
         $this->filter->suppress(false);
-        $this->assertTrue($this->filter->accept(array()));
+        $this->assertTrue($this->filter->filter(array()));
         $this->filter->suppress(true);
-        $this->assertFalse($this->filter->accept(array()));
-    }
-
-    public function testFactory()
-    {
-        $cfg = array('log' => array('memory' => array(
-            'writerName' => "Mock",
-            'filterName' => "SuppressFilter"
-        )));
-
-        $logger = Logger::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Logger);
+        $this->assertFalse($this->filter->filter(array()));
     }
 }

@@ -18,14 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
  
-/**
-* @namespace
-*/
 namespace Zend\Feed\Writer\Extension\Slash\Renderer;
-use Zend\Feed\Writer\Extension;
+
+use Zend\Feed\Writer\Extension,
+    DOMDocument,
+    DOMElement;
 
 /**
-* @uses \Zend\Feed\Writer\Extension\AbstractRenderer
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -77,7 +76,7 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCommentCount(\DOMDocument $dom, \DOMElement $root)
+    protected function _setCommentCount(DOMDocument $dom, DOMElement $root)
     {
         $count = $this->getDataContainer()->getCommentCount();
         if (!$count) {

@@ -20,8 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_Yahoo_ResultSet
- * @uses       Zend_Service_Yahoo_PageDataResult
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Yahoo

@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Translator;
 
 use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Locale,
     Zend\Log,
     Zend\Log\Writer,
@@ -44,76 +41,15 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->_cacheDir = sys_get_temp_dir() . '/zend_translator';
-        $this->_removeRecursive($this->_cacheDir);
-        mkdir($this->_cacheDir);
-
         putenv("HTTP_ACCEPT_LANGUAGE=,ja,de-AT-DE;q=1,en_US;q=0.5");
-        if (Translator\Translator::hasCache()) {
-            Translator\Translator::clearCache();
-            Translator\Translator::removeCache();
-        }
 
-        if (Adapter\ArrayAdapter::hasCache()) {
-            Adapter\ArrayAdapter::clearCache();
-            Adapter\ArrayAdapter::removeCache();
-        }
-
-        $cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'Filesystem',
-                'options' => array(
-                    'ttl'       => 120,
-                    'cache_dir' => $this->_cacheDir,
-                )
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
-
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Translator\Translator::setCache($cache);
     }
 
     public function tearDown()
     {
-        if (Translator\Translator::hasCache()) {
-            Translator\Translator::clearCache();
-            Translator\Translator::removeCache();
-        }
-
-        if (Adapter\ArrayAdapter::hasCache()) {
-            Adapter\ArrayAdapter::clearCache();
-            Adapter\ArrayAdapter::removeCache();
-        }
-
-        $this->_removeRecursive($this->_cacheDir);
-    }
-
-    protected function _removeRecursive($dir)
-    {
-        if (file_exists($dir)) {
-            $dirIt = new \DirectoryIterator($dir);
-            foreach ($dirIt as $entry) {
-                $fname = $entry->getFilename();
-                if ($fname == '.' || $fname == '..') {
-                    continue;
-                }
-
-                if ($entry->isFile()) {
-                    unlink($entry->getPathname());
-                } else {
-                    $this->_removeRecursive($entry->getPathname());
-                }
-            }
-
-            rmdir($dir);
-        }
+        Translator\Translator::removeCache();
     }
 
     public function testCreate()
@@ -289,37 +225,19 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
     public function testTestingCacheHandling()
     {
-        $cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'Filesystem',
-                'options' => array(
-                    'ttl'       => 120,
-                    'cache_dir' => $this->_cacheDir,
-                )
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
-
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Translator\Translator::setCache($cache);
 
         $cache = Translator\Translator::getCache();
-        $this->assertTrue($cache instanceof CacheAdapter);
+        $this->assertTrue($cache instanceof CacheStorage);
         $this->assertTrue(Translator\Translator::hasCache());
 
         $lang = new Translator\Translator(Translator\Translator::AN_ARRAY, array('msg1' => 'Message 1 (en)'), 'en');
         $adapter = $lang->getAdapter();
         $this->assertTrue($adapter instanceof Adapter\ArrayAdapter);
         $adaptercache = $adapter->getCache();
-        $this->assertTrue($adaptercache instanceof CacheAdapter);
+        $this->assertTrue($adaptercache instanceof CacheStorage);
 
-        Translator\Translator::clearCache();
         $this->assertTrue(Translator\Translator::hasCache());
         Translator\Translator::removeCache();
         $this->assertFalse(Translator\Translator::hasCache());
@@ -380,7 +298,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
         $stream = fopen('php://memory', 'w+');
         $writer = new Writer\Stream($stream);
-        $log    = new Log\Logger($writer);
+        $log    = new Log\Logger();
+        $log->addWriter($writer);
 
         $lang->setOptions(array('logUntranslated' => true, 'log' => $log));
         $this->assertEquals('ignored', $lang->translate('ignored'));
@@ -406,7 +325,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
         $stream = fopen('php://memory', 'w+');
         $writer = new Writer\Stream($stream);
-        $log    = new Log\Logger($writer);
+        $log    = new Log\Logger();
+        $log->addWriter($writer);
 
         $lang->setOptions(array('log' => $log));
         $lang->setLocale('ru');
@@ -429,7 +349,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
         $stream = fopen('php://memory', 'w+');
         $writer = new Writer\Stream($stream);
-        $log    = new Log\Logger($writer);
+        $log    = new Log\Logger();
+        $log->addWriter($writer);
 
         $lang->setOptions(array('logUntranslated' => true, 'log' => $log, 'logMessage' => 'Self defined log message'));
         $this->assertEquals('ignored', $lang->translate('ignored'));
@@ -443,24 +364,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetOptionsFromCache()
     {
-        $cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'Filesystem',
-                'options' => array(
-                    'ttl'       => 120,
-                    'cache_dir' => $this->_cacheDir,
-                )
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
-
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Translator\Translator::setCache($cache);
 
         $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files', 'en', array('delimiter' => ','));
@@ -939,24 +843,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetCacheThroughOptions()
     {
-        $cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'Filesystem',
-                'options' => array(
-                    'ttl'       => 120,
-                    'cache_dir' => $this->_cacheDir,
-                )
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
-
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
 
         $translate = new Translator\Translator(array(
             'adapter' => Translator\Translator::AN_ARRAY,
@@ -966,7 +853,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         ));
 
         $return = Translator\Translator::getCache();
-        $this->assertTrue($return instanceof CacheAdapter);
+        $this->assertTrue($return instanceof CacheStorage);
         $this->assertTrue(Translator\Translator::hasCache());
     }
 
@@ -977,7 +864,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     {
         $stream = fopen('php://memory', 'w+');
         $writer = new Writer\Stream($stream);
-        $log    = new Log\Logger($writer);
+        $log    = new Log\Logger();
+        $log->addWriter($writer);
 
         $lang = new Translator\Translator(array(
             'adapter'     => Translator\Translator::AN_CSV,

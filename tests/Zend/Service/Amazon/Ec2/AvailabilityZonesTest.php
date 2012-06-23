@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2,
     Zend\Service\Amazon\Ec2\Exception;
@@ -51,8 +48,6 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-
         $this->availabilityZones = new Ec2\AvailabilityZones('access_key', 'secret_access_key');
 
         $adapter = new \Zend\Http\Client\Adapter\Test();
@@ -72,8 +67,6 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
         unset($this->adapter);
 
         $this->availabilityZones = null;
-
-        parent::tearDown();
     }
 
     public function testDescribeSingleAvailabilityZone()

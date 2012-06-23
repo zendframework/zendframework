@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.float"><info><title>Float</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.float"><title>Float</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         a floating-point value. This validator validates also localized input.
     </para>
 
-    <section xml:id="zend.validate.set.float.options"><info><title>Supported options for Zend_Validate_Float</title></info>
+    <section xml:id="zend.validate.set.float.options"><title>Supported options for Zend_Validate_Float</title>
         
 
         <para>
@@ -24,7 +24,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.float.basic"><info><title>Simple float validation</title></info>
+    <section xml:id="zend.validate.set.float.basic"><title>Simple float validation</title>
         
 
         <para>
@@ -45,7 +45,7 @@ $validator->isValid('1,234.5'); // returns true
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.float.localized"><info><title>Localized float validation</title></info>
+    <section xml:id="zend.validate.set.float.localized"><title>Localized float validation</title>
         
 
         <para>

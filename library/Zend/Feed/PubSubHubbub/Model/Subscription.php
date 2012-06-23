@@ -19,44 +19,45 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Feed\PubSubHubbub\Model;
-use Zend\Feed\PubSubHubbub;
+
 use Zend\Date;
+use Zend\Feed\PubSubHubbub;
 
 /**
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\PubSubHubbub\Exception
- * @uses       \Zend\Feed\PubSubHubbub\Model\AbstractModel
- * @uses       \Zend\Feed\PubSubHubbub\Model\SubscriptionPersistence
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @subpackage Entity
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Subscription extends AbstractModel implements SubscriptionPersistence
+class Subscription extends AbstractModel implements SubscriptionPersistenceInterface
 {
+    /**
+     * Common Date\Date object to assist with unit testing
+     * 
+     * @var Date\Date
+     */
+    protected $now;
     
     /**
      * Save subscription to RDMBS
      *
      * @param array $data
      * @return bool
+     * @throws PubSubHubbub\Exception\InvalidArgumentException
      */
     public function setSubscription(array $data)
     {
         if (!isset($data['id'])) {
-            throw new PubSubHubbub\Exception(
+            throw new PubSubHubbub\Exception\InvalidArgumentException(
                 'ID must be set before attempting a save'
             );
         }
         $result = $this->_db->select(array('id' => $data['id']));
         if ($result && (0 < count($result))) {
             $data['created_time'] = $result->current()->created_time;
-            $now = new Date\Date;
+            $now = $this->getNow();
             if (array_key_exists('lease_seconds', $data) 
                 && $data['lease_seconds']
             ) {
@@ -79,11 +80,12 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
      * 
      * @param  string $key 
      * @return array
+     * @throws PubSubHubbub\Exception\InvalidArgumentException
      */
     public function getSubscription($key)
     {
         if (empty($key) || !is_string($key)) {
-            throw new PubSubHubbub\Exception('Invalid parameter "key"'
+            throw new PubSubHubbub\Exception\InvalidArgumentException('Invalid parameter "key"'
                 .' of "' . $key . '" must be a non-empty string');
         }
         $result = $this->_db->select(array('id' => $key));
@@ -98,11 +100,12 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
      * 
      * @param  string $key 
      * @return bool
+     * @throws PubSubHubbub\Exception\InvalidArgumentException
      */
     public function hasSubscription($key)
     {
         if (empty($key) || !is_string($key)) {
-            throw new PubSubHubbub\Exception('Invalid parameter "key"'
+            throw new PubSubHubbub\Exception\InvalidArgumentException('Invalid parameter "key"'
                 .' of "' . $key . '" must be a non-empty string');
         }
         $result = $this->_db->select(array('id' => $key));
@@ -130,4 +133,28 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
         return false;
     }
 
+    /**
+     * Get a new Date\Date or the one injected for testing
+     * 
+     * @return Date\Date
+     */
+    public function getNow()
+    {
+        if (null === $this->now) {
+            return new Date\Date;
+        }
+        return $this->now;
+    }
+
+    /**
+     * Set a Date\Date instance for assisting with unit testing
+     * 
+     * @param Date\Date $now
+     * @return Subscription
+     */
+    public function setNow(Date\Date $now)
+    {
+        $this->now = $now;
+        return $this;
+    }
 }

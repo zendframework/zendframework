@@ -21,8 +21,6 @@
 
 namespace Zend\Mail\Header;
 
-use Zend\Mail\Header;
-
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -30,7 +28,7 @@ use Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GenericHeader implements Header
+class GenericHeader implements HeaderInterface
 {
     /**
      * @var string
@@ -52,23 +50,25 @@ class GenericHeader implements Header
     /**
      * Factory to generate a header object from a string
      *
-     * @static
      * @param string $headerLine
      * @return GenericHeader
      */
     public static function fromString($headerLine)
     {
         $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
-        list($fieldName, $fieldValue) = explode(': ', $headerLine, 2);
-        $header = new static($fieldName, $fieldValue);
+        $parts = explode(': ', $headerLine, 2);
+        if (count($parts) != 2) {
+            throw new Exception\InvalidArgumentException('Header must match with the format "name: value"');
+        }
+        $header = new static($parts[0], $parts[1]);
         return $header;
     }
 
     /**
      * Constructor
      * 
-     * @param null|string $fieldName
-     * @param null|string $fieldValue
+     * @param string $fieldName  Optional
+     * @param string $fieldValue Optional
      */
     public function __construct($fieldName = null, $fieldValue = null)
     {
@@ -82,9 +82,10 @@ class GenericHeader implements Header
     }
 
     /**
-     * Set header field name
-     * 
+     * Set header name
+     *
      * @param  string $fieldName
+     * @throws Exception\InvalidArgumentException
      * @return GenericHeader
      */
     public function setFieldName($fieldName)
@@ -98,7 +99,9 @@ class GenericHeader implements Header
 
         // Validate what we have
         if (!preg_match('/^[a-z][a-z0-9-]*$/i', $fieldName)) {
-            throw new Exception\InvalidArgumentException('Header name must start with a letter, and consist of only letters, numbers, and dashes');
+            throw new Exception\InvalidArgumentException(
+                'Header name must start with a letter, and consist of only letters, numbers and dashes'
+            );
         }
 
         $this->fieldName = $fieldName;
@@ -106,7 +109,7 @@ class GenericHeader implements Header
     }
 
     /**
-     * Retrieve header field name
+     * Retrieve header name
      *
      * @return string
      */
@@ -116,7 +119,7 @@ class GenericHeader implements Header
     }
 
     /**
-     * Set header field value
+     * Set header value
      * 
      * @param  string $fieldValue
      * @return GenericHeader
@@ -134,7 +137,7 @@ class GenericHeader implements Header
     }
 
     /**
-     * Retrieve header field value
+     * Retrieve header value
      * 
      * @return string
      */
@@ -166,9 +169,9 @@ class GenericHeader implements Header
     }
 
     /**
-     * Cast to string as a well formed HTTP header line
+     * Cast to string
      *
-     * Returns in form of "NAME: VALUE\r\n"
+     * Returns in form of "NAME: VALUE"
      *
      * @return string
      */
@@ -177,6 +180,6 @@ class GenericHeader implements Header
         $name  = $this->getFieldName();
         $value = $this->getFieldValue();
 
-        return $name. ': ' . $value . "\r\n";
+        return $name. ': ' . $value;
     }
 }

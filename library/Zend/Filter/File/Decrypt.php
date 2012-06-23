@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter\File;
 use Zend\Filter,
     Zend\Filter\Exception;
@@ -28,8 +25,6 @@ use Zend\Filter,
 /**
  * Decrypts a given file and stores the decrypted file content
  *
- * @uses       \Zend\Filter\Decrypt
- * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -58,7 +53,7 @@ class Decrypt extends Filter\Decrypt
      * Sets the new filename where the content will be stored
      *
      * @param  string $filename (Optional) New filename to set
-     * @return Zend_Filter_File_Encryt
+     * @return Decrypt
      */
     public function setFilename($filename = null)
     {
@@ -67,7 +62,7 @@ class Decrypt extends Filter\Decrypt
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Decrypts the file $value with the defined settings
      *

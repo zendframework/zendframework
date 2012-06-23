@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\LiveDocx;
 
 use Zend\Service\LiveDocx\MailMerge,

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData\TestAsset;
 
 /**
@@ -33,7 +30,7 @@ namespace ZendTest\GData\TestAsset;
  */
 class Request
 {
-    public $methd;
+    public $method;
     public $uri;
     public $http_ver;
     public $headers;

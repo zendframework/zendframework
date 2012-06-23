@@ -18,18 +18,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader\Feed\Atom;
-use Zend\Feed\Reader;
-use Zend\Feed\Reader\Feed;
-use Zend\Date;
+
+use Zend\Feed\Reader,
+    Zend\Feed\Reader\Feed,
+    Zend\Date,
+    DOMElement,
+    DOMXPath;
 
 /**
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Extension\Atom\Feed
-* @uses \Zend\Feed\Reader\Feed\AbstractFeed
 * @category Zend
 * @package Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -47,10 +44,10 @@ class Source extends Feed\Atom
      * @param string $xpathPrefix Passed from parent Entry object
      * @param string $type Nearly always Atom 1.0
      */
-    public function __construct(\DOMElement $source, $xpathPrefix, $type = Reader\Reader::TYPE_ATOM_10)
+    public function __construct(DOMElement $source, $xpathPrefix, $type = Reader\Reader::TYPE_ATOM_10)
     {
         $this->_domDocument = $source->ownerDocument;
-        $this->_xpath = new \DOMXPath($this->_domDocument);
+        $this->_xpath = new DOMXPath($this->_domDocument);
         $this->_data['type'] = $type;
         $this->_registerNamespaces();
         $this->_loadExtensions();

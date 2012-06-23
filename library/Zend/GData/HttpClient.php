@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData;
 
 use Zend\Http;
@@ -264,7 +261,7 @@ class HttpClient extends Http\Client
    /**
      * Load the connection adapter
      *
-     * @param \Zend\Http\Client\Adapter $adapter
+     * @param \Zend\Http\Client\Adapter\AdapterInterface $adapter
      * @return void
      */
     public function setAdapter($adapter)
@@ -306,7 +303,7 @@ class HttpClient extends Http\Client
      * Prepare the request body (for POST and PUT requests)
      *
      * @return string
-     * @throws \Zend\Http\Client\Exception
+     * @throws \Zend\Http\Client\Exception\ExceptionInterface
      */
     protected function _prepareBody()
     {
@@ -316,7 +313,7 @@ class HttpClient extends Http\Client
             return $this->raw_post_data;
         }
         else {
-            return parent::_prepareBody();
+            return parent::prepareBody();
         }
     }
 

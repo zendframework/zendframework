@@ -21,44 +21,44 @@
 
 namespace Zend\Mvc\View;
 
-use Zend\EventManager\EventCollection as Events,
-    Zend\EventManager\ListenerAggregate,
+use Zend\EventManager\EventManagerInterface as Events,
+    Zend\EventManager\ListenerAggregateInterface,
     Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteMatch,
-    Zend\View\Model as ViewModel;
+    Zend\View\Model\ModelInterface as ViewModel;
 
-class InjectTemplateListener implements ListenerAggregate
+class InjectTemplateListener implements ListenerAggregateInterface
 {
     /**
-     * Filter/inflector used to normalize names for use as template identifiers
-     * 
+     * FilterInterface/inflector used to normalize names for use as template identifiers
+     *
      * @var mixed
      */
     protected $inflector;
 
     /**
      * Listeners we've registered
-     * 
+     *
      * @var array
      */
     protected $listeners = array();
 
     /**
      * Attach listeners
-     * 
-     * @param  Events $events 
+     *
+     * @param  Events $events
      * @return void
      */
     public function attach(Events $events)
     {
-        $this->listeners[] = $events->attach('dispatch', array($this, 'injectTemplate'), -90);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectTemplate'), -90);
     }
 
     /**
      * Detach listeners
-     * 
-     * @param  Events $events 
+     *
+     * @param  Events $events
      * @return void
      */
     public function detach(Events $events)
@@ -73,10 +73,10 @@ class InjectTemplateListener implements ListenerAggregate
     /**
      * Inject a template into the view model, if none present
      *
-     * Template is derived from the controller found in the route match, and, 
+     * Template is derived from the controller found in the route match, and,
      * optionally, the action, if present.
      *
-     * @param  MvcEvent $e 
+     * @param  MvcEvent $e
      * @return void
      */
     public function injectTemplate(MvcEvent $e)
@@ -85,16 +85,29 @@ class InjectTemplateListener implements ListenerAggregate
         if (!$model instanceof ViewModel) {
             return;
         }
-        
+
         $template = $model->getTemplate();
         if (!empty($template)) {
             return;
         }
 
         $routeMatch = $e->getRouteMatch();
-        $controller = $routeMatch->getParam('controller', 'index');
+        $controller = $e->getTarget();
+        if (is_object($controller)) {
+            $controller = get_class($controller);
+        }
+        if (!$controller) {
+            $controller = $routeMatch->getParam('controller', '');
+        }
+
+        $module     = $this->deriveModuleNamespace($controller);
         $controller = $this->deriveControllerClass($controller);
-        $template   = $this->inflectName($controller);
+
+        $template   = $this->inflectName($module);
+        if (!empty($template)) {
+            $template .= '/';
+        }
+        $template  .= $this->inflectName($controller);
 
         $action     = $routeMatch->getParam('action');
         if (null !== $action) {
@@ -105,8 +118,8 @@ class InjectTemplateListener implements ListenerAggregate
 
     /**
      * Inflect a name to a normalized value
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return string
      */
     protected function inflectName($name)
@@ -119,11 +132,26 @@ class InjectTemplateListener implements ListenerAggregate
     }
 
     /**
+     * Determine the top-level namespace of the controller
+     * 
+     * @param  string $controller 
+     * @return string
+     */
+    protected function deriveModuleNamespace($controller)
+    {
+        if (!strstr($controller, '\\')) {
+            return '';
+        }
+        $module = substr($controller, 0, strpos($controller, '\\'));
+        return $module;
+    }
+
+    /**
      * Determine the name of the controller
      *
      * Strip the namespace, and the suffix "Controller" if present.
-     * 
-     * @param  string $controller 
+     *
+     * @param  string $controller
      * @return string
      */
     protected function deriveControllerClass($controller)
@@ -132,7 +160,7 @@ class InjectTemplateListener implements ListenerAggregate
             $controller = substr($controller, strrpos($controller, '\\') + 1);
         }
 
-        if ((10 < strlen($controller)) 
+        if ((10 < strlen($controller))
             && ('Controller' == substr($controller, -10))
         ) {
             $controller = substr($controller, 0, -10);

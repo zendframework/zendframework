@@ -45,571 +45,197 @@ abstract class AbstractZendServer extends AbstractAdapter
     /* reading */
 
     /**
-     * Get an item.
+     * Internal method to get an item.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
-     *
-     * @param  string $key
-     * @param  array $options
-     * @return mixed Value on success and false on failure
-     * @throws Exception
-     *
-     * @triggers getItem.pre(PreEvent)
-     * @triggers getItem.post(PostEvent)
-     * @triggers getItem.exception(ExceptionEvent)
+     * @param  string  $normalizedKey
+     * @param  boolean $success
+     * @param  mixed   $casToken
+     * @return mixed Data on success, null on failure
+     * @throws Exception\ExceptionInterface
      */
-    public function getItem($key, array $options = array())
+    protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
-        if (!$this->getOptions()->getReadable()) {
-            return false;
+        $prefix      = $this->getOptions()->getNamespace() . self::NAMESPACE_SEPARATOR;
+        $internalKey = $prefix . $normalizedKey;
+
+        $result = $this->zdcFetch($internalKey);
+        if ($result === false) {
+            $success = false;
+            $result  = null;
+        } else {
+            $success  = true;
+            $casToken = $result;
         }
 
-        $this->normalizeKey($key);
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKey = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
-            $result      = $this->zdcFetch($internalKey);
-            if ($result === false) {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-                }
-
-                $result = false;
-            } elseif (array_key_exists('token', $options)) {
-                $options['token'] = $result;
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return $result;
     }
 
     /**
-     * Get multiple items.
+     * Internal method to get multiple items.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     * @param  array $normalizedKeys
+     * @return array Associative array of keys and values
+     * @throws Exception\ExceptionInterface
+     */
+    protected function internalGetItems(array & $normalizedKeys)
+    {
+        $prefix  = $this->getOptions()->getNamespace() . self::NAMESPACE_SEPARATOR;
+        $prefixL = strlen($prefix);
+
+        $internalKeys = array();
+        foreach ($normalizedKeys as $normalizedKey) {
+            $internalKeys[] = $prefix . $normalizedKey;
+        }
+
+        $fetch  = $this->zdcFetchMulti($internalKeys);
+        $result = array();
+        foreach ($fetch as $k => & $v) {
+            $result[ substr($k, $prefixL) ] = $v;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Internal method to test if an item exists.
+     *
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
+     * @return boolean
+     * @throws Exception\ExceptionInterface
+     */
+    protected function internalHasItem(& $normalizedKey)
+    {
+
+        $prefix = $this->getOptions()->getNamespace() . self::NAMESPACE_SEPARATOR;
+        return  ($this->zdcFetch($prefix . $normalizedKey) !== false);
+    }
+
+    /**
+     * Internal method to test multiple items.
      *
      * @param  array $keys
-     * @param  array $options
-     * @return array Assoziative array of existing keys and values or false on failure
-     * @throws Exception
-     *
-     * @triggers getItems.pre(PreEvent)
-     * @triggers getItems.post(PostEvent)
-     * @triggers getItems.exception(ExceptionEvent)
+     * @return array Array of found keys
+     * @throws Exception\ExceptionInterface
      */
-    public function getItems(array $keys, array $options = array())
+    protected function internalHasItems(array & $normalizedKeys)
     {
-        if (!$this->getOptions()->getReadable()) {
-            return array();
+        $prefix  = $this->getOptions()->getNamespace() . self::NAMESPACE_SEPARATOR;
+        $prefixL = strlen($prefix);
+
+        $internalKeys = array();
+        foreach ($normalizedKeys as $normalizedKey) {
+            $internalKeys[] = $prefix . $normalizedKey;
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keys'    => & $keys,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKeys = array();
-            foreach ($keys as &$key) {
-                $this->normalizeKey($key);
-                $internalKeys[] = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
-            }
-
-            $fetch   = $this->zdcFetchMulti($internalKeys);
-            $prefixL = strlen($options['namespace'] . self::NAMESPACE_SEPARATOR);
-            $result  = array();
-            foreach ($fetch as $k => &$v) {
-                $result[ substr($k, $prefixL) ] = $v;
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Test if an item exists.
-     *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
-     * @param  string $key
-     * @param  array $options
-     * @return boolean
-     * @throws Exception
-     *
-     * @triggers hasItem.pre(PreEvent)
-     * @triggers hasItem.post(PostEvent)
-     * @triggers hasItem.exception(ExceptionEvent)
-     */
-    public function hasItem($key, array $options = array())
-    {
-        if (!$this->getOptions()->getReadable()) {
-            return false;
+        $fetch  = $this->zdcFetchMulti($internalKeys);
+        $result = array();
+        foreach ($fetch as $internalKey => & $value) {
+            $result[] = substr($internalKey, $prefixL);
         }
 
-        $this->normalizeKey($key);
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKey = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
-            $result      = ($this->zdcFetch($internalKey) !== false);
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Test if multiple items exists.
-     *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
-     * @param  string $key
-     * @param  array $options
-     * @return boolean
-     * @throws Exception
-     *
-     * @triggers hasItems.pre(PreEvent)
-     * @triggers hasItems.post(PostEvent)
-     * @triggers hasItems.exception(ExceptionEvent)
-     */
-    public function hasItems(array $keys, array $options = array())
-    {
-        if (!$this->getOptions()->getReadable()) {
-            return array();
-        }
-
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keys'    => & $keys,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKeys = array();
-            foreach ($keys as &$key) {
-                $this->normalizeKey($key);
-                $internalKeys[] = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
-            }
-
-            $fetch   = $this->zdcFetchMulti($internalKeys);
-            $prefixL = strlen($options['namespace'] . self::NAMESPACE_SEPARATOR);
-            $result  = array();
-            foreach ($fetch as $k => &$v) {
-                $result[] = substr($k, $prefixL);
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Get metadata of an item.
-     *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
-     *
-     * @param  string $key
-     * @param  array $options
-     * @return array|boolean Metadata or false on failure
-     * @throws Exception
-     *
-     * @triggers getMetadata.pre(PreEvent)
-     * @triggers getMetadata.post(PostEvent)
-     * @triggers getMetadata.exception(ExceptionEvent)
-     */
-    public function getMetadata($key, array $options = array())
-    {
-        if (!$this->getOptions()->getReadable()) {
-            return false;
-        }
-
-        $this->normalizeKey($key);
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKey = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
-            if ($this->zdcFetch($internalKey) === false) {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-                }
-                $result = false;
-            } else {
-                $result = array();
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return $result;
     }
 
     /**
      * Get metadata for multiple items
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
-     * @param  array $keys
-     * @param  array $options
-     * @return array
-     * @throws Exception\ItemNotFoundException
+     * @param  array $normalizedKeys
+     * @return array Associative array of keys and metadata
      *
      * @triggers getMetadatas.pre(PreEvent)
      * @triggers getMetadatas.post(PostEvent)
      * @triggers getMetadatas.exception(ExceptionEvent)
      */
-    public function getMetadatas(array $keys, array $options = array())
+    protected function internalGetMetadatas(array & $normalizedKeys)
     {
-        if (!$this->getOptions()->getReadable()) {
-            return array();
+        $prefix  = $this->getOptions()->getNamespace() . self::NAMESPACE_SEPARATOR;
+        $prefixL = strlen($prefix);
+
+        $internalKeys = array();
+        foreach ($normalizedKeys as $normalizedKey) {
+            $internalKeys[] = $prefix . $normalizedKey;
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keys'    => & $keys,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKeys = array();
-            foreach ($keys as &$key) {
-                $this->normalizeKey($key);
-                $internalKeys[] = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
-            }
-
-            $fetch   = $this->zdcFetchMulti($internalKeys);
-            $prefixL = strlen($options['namespace'] . self::NAMESPACE_SEPARATOR);
-            $result  = array();
-            foreach ($fetch as $k => &$v) {
-                $result[ substr($k, $prefixL) ] = array();
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        $fetch  = $this->zdcFetchMulti($internalKeys);
+        $result = array();
+        foreach ($fetch as $internalKey => $value) {
+            $result[ substr($internalKey, $prefixL) ] = array();
         }
+
+        return $result;
     }
 
     /* writing */
 
     /**
-     * Store an item.
+     * Internal method to store an item.
      *
-     * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
-     * @param  string $key
-     * @param  mixed $value
-     * @param  array $options
+     * @param  string $normalizedKey
+     * @param  mixed  $value
      * @return boolean
-     * @throws Exception
-     *
-     * @triggers setItem.pre(PreEvent)
-     * @triggers setItem.post(PostEvent)
-     * @triggers setItem.exception(ExceptionEvent)
+     * @throws Exception\ExceptionInterface
      */
-    public function setItem($key, $value, array $options = array())
+    protected function internalSetItem(& $normalizedKey, & $value)
     {
-        if (!$this->getOptions()->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeKey($key);
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKey = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
-            $this->zdcStore($internalKey, $value, $options['ttl']);
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        $options = $this->getOptions();
+        $internalKey = $options->getNamespace() . self::NAMESPACE_SEPARATOR . $normalizedKey;
+        $this->zdcStore($internalKey, $value, $options->getTtl());
+        return true;
     }
 
     /**
-     * Remove an item.
+     * Internal method to remove an item.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
-     *
-     * @param  string $key
-     * @param  array $options
+     * @param  string $normalizedKey
      * @return boolean
-     * @throws Exception
-     *
-     * @triggers removeItem.pre(PreEvent)
-     * @triggers removeItem.post(PostEvent)
-     * @triggers removeItem.exception(ExceptionEvent)
+     * @throws Exception\ExceptionInterface
      */
-    public function removeItem($key, array $options = array())
+    protected function internalRemoveItem(& $normalizedKey)
     {
-        if (!$this->getOptions()->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeKey($key);
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKey = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
-            if (!$this->zdcDelete($internalKey) && !$options['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /* cleaning */
-
-    /**
-     * Clear items off all namespaces.
-     *
-     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
-     * @param  array $options
-     * @return boolean
-     * @throws Exception
-     * @see clearByNamespace()
-     *
-     * @triggers clear.pre(PreEvent)
-     * @triggers clear.post(PostEvent)
-     * @triggers clear.exception(ExceptionEvent)
-     */
-    public function clear($mode = self::MATCH_EXPIRED, array $options = array())
-    {
-        if (!$this->getOptions()->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
-        $args = new ArrayObject(array(
-            'mode'    => & $mode,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            // clear all
-            if (($mode & self::MATCH_ACTIVE) == self::MATCH_ACTIVE) {
-                $this->zdcClear();
-            }
-
-            // expired items will be deleted automatic
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Clear items by namespace.
-     *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
-     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
-     * @param  array $options
-     * @return boolean
-     * @throws Zend\Cache\Exception
-     * @see clear()
-     *
-     * @triggers clearByNamespace.pre(PreEvent)
-     * @triggers clearByNamespace.post(PostEvent)
-     * @triggers clearByNamespace.exception(ExceptionEvent)
-     */
-    public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
-    {
-        if (!$this->getOptions()->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
-        $args = new ArrayObject(array(
-            'mode'    => & $mode,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            // clear all
-            if (($mode & self::MATCH_ACTIVE) == self::MATCH_ACTIVE) {
-                $this->zdcClearByNamespace($options['namespace']);
-            }
-
-            // expired items will be deleted automatic
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        $internalKey = $this->getOptions()->getNamespace() . self::NAMESPACE_SEPARATOR . $normalizedKey;
+        return $this->zdcDelete($internalKey);
     }
 
     /* status */
 
     /**
-     * Get capabilities
+     * Internal method to get capabilities of this adapter
      *
      * @return Capabilities
-     *
-     * @triggers getCapabilities.pre(PreEvent)
-     * @triggers getCapabilities.post(PostEvent)
-     * @triggers getCapabilities.exception(ExceptionEvent)
      */
-    public function getCapabilities()
+    protected function internalGetCapabilities()
     {
-        $args = new ArrayObject();
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if ($this->capabilities === null) {
-                $this->capabilityMarker = new stdClass();
-                $this->capabilities     = new Capabilities(
-                    $this->capabilityMarker,
-                    array(
-                        'supportedDatatypes' => array(
-                            'NULL'     => true,
-                            'boolean'  => true,
-                            'integer'  => true,
-                            'double'   => true,
-                            'string'   => true,
-                            'array'    => true,
-                            'object'   => 'object',
-                            'resource' => false,
-                        ),
-                        'supportedMetadata'  => array(),
-                        'maxTtl'             => 0,
-                        'staticTtl'          => true,
-                        'tagging'            => false,
-                        'ttlPrecision'       => 1,
-                        'useRequestTime'     => false,
-                        'expiredRead'        => false,
-                        'maxKeyLength'       => 0,
-                        'namespaceIsPrefix'  => true,
-                        'namespaceSeparator' => self::NAMESPACE_SEPARATOR,
-                        'iterable'           => false,
-                        'clearAllNamespaces' => true,
-                        'clearByNamespace'   => true,
-                    )
-                );
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $this->capabilities);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        if ($this->capabilities === null) {
+            $this->capabilityMarker = new stdClass();
+            $this->capabilities     = new Capabilities(
+                $this,
+                $this->capabilityMarker,
+                array(
+                    'supportedDatatypes' => array(
+                        'NULL'     => true,
+                        'boolean'  => true,
+                        'integer'  => true,
+                        'double'   => true,
+                        'string'   => true,
+                        'array'    => true,
+                        'object'   => 'object',
+                        'resource' => false,
+                    ),
+                    'supportedMetadata'  => array(),
+                    'maxTtl'             => 0,
+                    'staticTtl'          => true,
+                    'ttlPrecision'       => 1,
+                    'useRequestTime'     => false,
+                    'expiredRead'        => false,
+                    'maxKeyLength'       => 0,
+                    'namespaceIsPrefix'  => true,
+                    'namespaceSeparator' => self::NAMESPACE_SEPARATOR,
+                )
+            );
         }
+
+        return $this->capabilities;
     }
 
     /* internal wrapper of zend_[disk|shm]_cache_* functions */
@@ -651,21 +277,4 @@ abstract class AbstractZendServer extends AbstractAdapter
      * @throws Exception\RuntimeException
      */
     abstract protected function zdcDelete($internalKey);
-
-    /**
-     * Clear items of all namespaces from Zend Data Cache (zdc)
-     *
-     * @return void
-     * @throws Exception\RuntimeException
-     */
-    abstract protected function zdcClear();
-
-    /**
-     * Clear items of the given namespace from Zend Data Cache (zdc)
-     *
-     * @param  string $namespace
-     * @return void
-     * @throws Exception\RuntimeException
-     */
-    abstract protected function zdcClearByNamespace($namespace);
 }

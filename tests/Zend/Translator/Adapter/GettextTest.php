@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Translator\Adapter;
 use Zend\Translator\Adapter;
 use Zend\Translator;
@@ -39,9 +36,12 @@ class GettextTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        if (Adapter\Gettext::hasCache()) {
-            Adapter\Gettext::removeCache();
-        }
+        Adapter\Gettext::removeCache();
+    }
+
+    public function tearDown()
+    {
+        Adapter\Gettext::removeCache();
     }
 
     public function testCreate()

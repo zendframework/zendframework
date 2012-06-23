@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Search;
 
 /**
@@ -29,7 +26,6 @@ namespace Zend\Search\Lucene\Search;
  */
 
 /**
- * @uses       \Zend\Search\Lucene\Search\Similarity\DefaultSimilarity
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -500,10 +496,10 @@ abstract class Similarity
      * Returns a score factor for the term
      *
      * @param mixed $input
-     * @param \Zend\Search\Lucene\SearchIndex $reader
-     * @return a score factor for the term
+     * @param \Zend\Search\Lucene\SearchIndexInterface $reader
+     * @return float a score factor for the term
      */
-    public function idf($input, \Zend\Search\Lucene\SearchIndex $reader)
+    public function idf($input, \Zend\Search\Lucene\SearchIndexInterface $reader)
     {
         if (!is_array($input)) {
             return $this->idfFreq($reader->docFreq($input), $reader->count());

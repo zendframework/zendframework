@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><info><title>Extensibility</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><title>Extensibility</title>
     
 
-    <section xml:id="zend.search.lucene.extending.analysis"><info><title>Text Analysis</title></info>
+    <section xml:id="zend.search.lucene.extending.analysis"><title>Text Analysis</title>
         
 
         <para>
@@ -53,7 +53,7 @@ $index->addDocument($doc);
         <para>
             Here is an example of a custom analyzer, which accepts words with digits as terms:
 
-            <example xml:id="zend.search.lucene.extending.analysis.example-1"><info><title>Custom text Analyzer</title></info>
+            <example xml:id="zend.search.lucene.extending.analysis.example-1"><title>Custom text Analyzer</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -132,7 +132,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.filters"><info><title>Tokens Filtering</title></info>
+    <section xml:id="zend.search.lucene.extending.filters"><title>Tokens Filtering</title>
         
 
         <para>
@@ -236,7 +236,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.scoring"><info><title>Scoring Algorithms</title></info>
+    <section xml:id="zend.search.lucene.extending.scoring"><title>Scoring Algorithms</title>
         
 
         <para>
@@ -344,7 +344,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.storage"><info><title>Storage Containers</title></info>
+    <section xml:id="zend.search.lucene.extending.storage"><title>Storage Containers</title>
         
 
         <para>

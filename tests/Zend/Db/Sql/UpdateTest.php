@@ -35,7 +35,6 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     {
         $this->update->table('foo', 'bar');
         $this->assertEquals('foo', $this->readAttribute($this->update, 'table'));
-        $this->assertEquals('bar', $this->readAttribute($this->update, 'databaseOrSchema'));
     }
 
     /**
@@ -60,16 +59,16 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
 
         $predicates = $this->readAttribute($where, 'predicates');
         $this->assertEquals('AND', $predicates[0][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
 
         $this->assertEquals('AND', $predicates[1][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[1][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[1][1]);
 
         $this->assertEquals('AND', $predicates[2][0]);
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Operator', $predicates[2][1]);
 
         $this->assertEquals('OR', $predicates[3][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[3][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[3][1]);
 
         $where = new Where;
         $this->update->where($where);
@@ -94,12 +93,10 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $pContainer = new \Zend\Db\Adapter\ParameterContainer(array());
         $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+
         $mockStatement->expects($this->at(1))
             ->method('setSql')
-            ->with($this->equalTo('UPDATE "foo" SET "bar" = ?'));
-        $mockStatement->expects($this->at(4))
-            ->method('setSql')
-            ->with($this->equalTo(' WHERE x = y'));
+            ->with($this->equalTo('UPDATE "foo" SET "bar" = ? WHERE x = y'));
 
         $this->update->table('foo')
             ->set(array('bar' => 'baz'))
@@ -119,5 +116,24 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
             ->where('x = y');
 
         $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\' WHERE x = y', $this->update->getSqlString());
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Update::__clone
+     */
+    public function testCloneUpdate()
+    {
+        $update1 = clone $this->update;
+        $update1->table('foo')
+                ->set(array('bar' => 'baz'))
+                ->where('x = y');
+
+        $update2 = clone $this->update;
+        $update2->table('foo')
+            ->set(array('bar' => 'baz'))
+            ->where(array(
+                'id = ?'=>1
+            ));
+        $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\' WHERE id = \'1\'', $update2->getSqlString());
     }
 }

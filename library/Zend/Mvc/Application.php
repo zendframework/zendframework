@@ -1,31 +1,69 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Mvc;
 
-use ArrayObject,
-    Zend\Di\Exception\ClassNotFoundException,
-    Zend\Di\Locator,
-    Zend\EventManager\EventCollection,
-    Zend\EventManager\EventManager,
-    Zend\Http\Header\Cookie,
-    Zend\Http\PhpEnvironment\Request as PhpHttpRequest,
-    Zend\Http\PhpEnvironment\Response as PhpHttpResponse,
-    Zend\Uri\Http as HttpUri,
-    Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\Parameters,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\ServiceManager;
+use Zend\Stdlib\RequestInterface;
+use Zend\Stdlib\ResponseInterface;
 
 /**
  * Main application class for invoking applications
  *
- * Expects the user will provide a Service Locator or Dependency Injector, as
- * well as a configured router. Once done, calling run() will invoke the
- * application, first routing, then dispatching the discovered controller. A
- * response will then be returned, which may then be sent to the caller.
+ * Expects the user will provide a configured ServiceManager, configured with
+ * the following services:
+ *
+ * - EventManager
+ * - ModuleManager
+ * - Request
+ * - Response
+ * - RouteListener
+ * - Router
+ * - DispatchListener
+ * - ViewManager
+ *
+ * The most common workflow is:
+ * <code>
+ * $services = new Zend\ServiceManager\ServiceManager($servicesConfig);
+ * $app      = new Application($appConfig, $services);
+ * $app->bootstrap();
+ * $response = $app->run();
+ * $response->send();
+ * </code>
+ *
+ * bootstrap() opts in to the default route, dispatch, and view listeners, 
+ * sets up the MvcEvent, and triggers the bootstrap event. This can be omitted
+ * if you wish to setup your own listeners and/or workflow; alternately, you
+ * can simply extend the class to override such behavior.
+ *
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Application implements AppContext
+class Application implements
+    ApplicationInterface,
+    EventManagerAwareInterface
 {
     const ERROR_CONTROLLER_CANNOT_DISPATCH = 'error-controller-cannot-dispatch';
     const ERROR_CONTROLLER_NOT_FOUND       = 'error-controller-not-found';
@@ -33,95 +71,109 @@ class Application implements AppContext
     const ERROR_EXCEPTION                  = 'error-exception';
     const ERROR_ROUTER_NO_MATCH            = 'error-router-no-match';
 
+    /**
+     * @var array
+     */
+    protected $configuration = null;
+
+    /**
+     * MVC event token
+     * @var MvcEvent
+     */
     protected $event;
+
+    /**
+     * @var EventManager
+     */
     protected $events;
-    protected $locator;
+
+    /**
+     * @var RequestInterface
+     */
     protected $request;
+
+    /**
+     * @var ResponseInterface
+     */
     protected $response;
-    protected $router;
 
     /**
-     * Set the event manager instance used by this context
-     *
-     * @param  EventCollection $events
-     * @return Application
+     * @var ServiceManager
      */
-    public function setEventManager(EventCollection $events)
+    protected $serviceManager = null;
+
+    /**
+     * @var \Zend\ModuleManager\ModuleManager
+     */
+    protected $moduleManager;
+
+    /**
+     * Constructor
+     *
+     * @param mixed $configuration
+     * @param ServiceManager $serviceManager 
+     */
+    public function __construct($configuration, ServiceManager $serviceManager)
     {
-        $this->events = $events;
-        return $this;
+        $this->configuration  = $configuration;
+        $this->serviceManager = $serviceManager;
+
+        $this->setEventManager($serviceManager->get('EventManager'));
+
+        $this->moduleManager  = $serviceManager->get('ModuleManager');
+        $this->request        = $serviceManager->get('Request');
+        $this->response       = $serviceManager->get('Response');
     }
 
     /**
-     * Set a service locator/DI object
-     *
-     * @param  Locator $locator
-     * @return Application
-     */
-    public function setLocator(Locator $locator)
-    {
-        $this->locator = $locator;
-        return $this;
-    }
-
-    /**
-     * Set the request object
-     *
-     * @param  Request $request
-     * @return Application
-     */
-    public function setRequest(Request $request)
-    {
-        $this->request = $request;
-        return $this;
-    }
-
-    /**
-     * Set the response object
-     *
-     * @param  Response $response
-     * @return Application
-     */
-    public function setResponse(Response $response)
-    {
-        $this->response = $response;
-        return $this;
-    }
-
-    /**
-     * Set the router used to decompose the request
-     *
-     * A router should return a metadata object containing a controller key.
-     *
-     * @param  Router\RouteStack $router
-     * @return Application
-     */
-    public function setRouter(Router\RouteStack $router)
-    {
-        $this->router = $router;
-        return $this;
-    }
-
-    /**
-     * Set the MVC event instance
+     * Retrieve the application configuration
      * 
-     * @param  MvcEvent $event 
+     * @return array|object
+     */
+    public function getConfiguration()
+    {
+        return $this->serviceManager->get('Configuration');
+    }
+
+    /**
+     * Bootstrap the application
+     *
+     * Defines and binds the MvcEvent, and passes it the request, response, and 
+     * router. Attaches the ViewManager as a listener. Triggers the bootstrap 
+     * event.
+     * 
      * @return Application
      */
-    public function setMvcEvent(MvcEvent $event)
+    public function bootstrap()
     {
-        $this->event = $event;
+        $serviceManager = $this->serviceManager;
+        $events         = $this->events();
+
+        $events->attach($serviceManager->get('RouteListener'));
+        $events->attach($serviceManager->get('DispatchListener'));
+        $events->attach($serviceManager->get('ViewManager'));
+
+        // Setup MVC Event
+        $this->event = $event  = new MvcEvent();
+        $event->setTarget($this);
+        $event->setApplication($this)
+              ->setRequest($this->getRequest())
+              ->setResponse($this->getResponse())
+              ->setRouter($serviceManager->get('Router'));
+
+        // Trigger bootstrap events
+        $events->trigger('bootstrap', $event);
         return $this;
     }
 
     /**
-     * Get the locator object
-     *
-     * @return null|Locator
+     * Retrieve the service manager
+     * 
+     * @return ServiceManager
      */
-    public function getLocator()
+    public function getServiceManager()
     {
-        return $this->locator;
+        return $this->serviceManager;
     }
 
     /**
@@ -131,9 +183,6 @@ class Application implements AppContext
      */
     public function getRequest()
     {
-        if (!$this->request instanceof Request) {
-            $this->setRequest(new PhpHttpRequest);
-        }
         return $this->request;
     }
 
@@ -144,42 +193,34 @@ class Application implements AppContext
      */
     public function getResponse()
     {
-        if (!$this->response instanceof Response) {
-            $this->setResponse(new PhpHttpResponse());
-        }
         return $this->response;
     }
 
     /**
-     * Get the router object
-     *
-     * @return Router
-     */
-    public function getRouter()
-    {
-        if (!$this->router instanceof Router\RouteStack) {
-            $this->setRouter(new Router\SimpleRouteStack());
-        }
-        return $this->router;
-    }
-
-    /**
      * Get the MVC event instance
-     * 
+     *
      * @return MvcEvent
      */
     public function getMvcEvent()
     {
-        if ($this->event) {
-            return $this->event;
-        }
+        return $this->event;
+    }
 
-        $this->event = $event  = new MvcEvent();
-        $event->setTarget($this);
-        $event->setRequest($this->getRequest())
-              ->setResponse($this->getResponse())
-              ->setRouter($this->getRouter());
-        return $event;
+    /**
+     * Set the event manager instance
+     *
+     * @param  EventManagerInterface $eventManager
+     * @return Application
+     */
+    public function setEventManager(EventManagerInterface $eventManager)
+    {
+        $eventManager->setIdentifiers(array(
+            __CLASS__,
+            get_called_class(),
+            'application',
+        ));
+        $this->events = $eventManager;
+        return $this;
     }
 
     /**
@@ -187,14 +228,10 @@ class Application implements AppContext
      *
      * Lazy-loads an EventManager instance if none registered.
      *
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function events()
     {
-        if (!$this->events instanceof EventCollection) {
-            $this->setEventManager(new EventManager(array(__CLASS__, get_class($this))));
-            $this->attachDefaultListeners();
-        }
         return $this->events;
     }
 
@@ -221,7 +258,7 @@ class Application implements AppContext
 
         // Define callback used to determine whether or not to short-circuit
         $shortCircuit = function ($r) use ($event) {
-            if ($r instanceof Response) {
+            if ($r instanceof ResponseInterface) {
                 return true;
             }
             if ($event->getError()) {
@@ -229,12 +266,13 @@ class Application implements AppContext
             }
             return false;
         };
-        
+
         // Trigger route event
         $result = $events->trigger('route', $event, $shortCircuit);
         if ($result->stopped()) {
             $response = $result->last();
-            if ($response instanceof Response) {
+            if ($response instanceof ResponseInterface) {
+                $event->setTarget($this);
                 $events->trigger('finish', $event);
                 return $response;
             }
@@ -252,7 +290,8 @@ class Application implements AppContext
 
         // Complete response
         $response = $result->last();
-        if ($response instanceof Response) {
+        if ($response instanceof ResponseInterface) {
+            $event->setTarget($this);
             $events->trigger('finish', $event);
             return $response;
         }
@@ -268,146 +307,16 @@ class Application implements AppContext
      *
      * Triggers "render" and "finish" events, and returns response from
      * event object.
-     * 
-     * @param  MvcEvent $event 
+     *
+     * @param  MvcEvent $event
      * @return Response
      */
     protected function completeRequest(MvcEvent $event)
     {
         $events = $this->events();
+        $event->setTarget($this);
         $events->trigger('render', $event);
         $events->trigger('finish', $event);
         return $event->getResponse();
-    }
-
-    /**
-     * Route the request
-     *
-     * @param  MvcEvent $e
-     * @return Router\RouteMatch
-     */
-    public function route(MvcEvent $e)
-    {
-        $request = $e->getRequest();
-        $router  = $e->getRouter();
-
-        $routeMatch = $router->match($request);
-
-        if (!$routeMatch instanceof Router\RouteMatch) {
-            $e->setError(static::ERROR_CONTROLLER_NOT_FOUND);
-
-            $results = $this->events()->trigger('dispatch.error', $e);
-            if (count($results)) {
-                $return  = $results->last();
-            } else {
-                $return = $error->getParams();
-            }
-            return $return;
-        }
-
-        $e->setRouteMatch($routeMatch);
-        return $routeMatch;
-    }
-
-    /**
-     * Dispatch the matched route
-     *
-     * @param  MvcEvent $e
-     * @return mixed
-     */
-    public function dispatch(MvcEvent $e)
-    {
-        $locator = $this->getLocator();
-        if (!$locator) {
-            throw new Exception\MissingLocatorException(
-                'Cannot dispatch without a locator'
-            );
-        }
-
-        $routeMatch     = $e->getRouteMatch();
-        $controllerName = $routeMatch->getParam('controller', 'not-found');
-        $events         = $this->events();
-
-        try {
-            $controller = $locator->get($controllerName);
-        } catch (ClassNotFoundException $exception) {
-            $error = clone $e;
-            $error->setError(static::ERROR_CONTROLLER_NOT_FOUND)
-                  ->setController($controllerName)
-                  ->setParam('exception', $exception);
-
-            $results = $events->trigger('dispatch.error', $error);
-            if (count($results)) {
-                $return  = $results->last();
-            } else {
-                $return = $error->getParams();
-            }
-            goto complete;
-        }
-
-        if ($controller instanceof LocatorAware) {
-            $controller->setLocator($locator);
-        }
-
-        if (!$controller instanceof Dispatchable) {
-            $error = clone $e;
-            $error->setError(static::ERROR_CONTROLLER_INVALID)
-                  ->setController($controllerName)
-                  ->setControllerClass(get_class($controller));
-
-            $results = $events->trigger('dispatch.error', $error);
-            if (count($results)) {
-                $return  = $results->last();
-            } else {
-                $return = $error->getParams();
-            }
-            goto complete;
-        }
-
-        $request  = $e->getRequest();
-        $response = $this->getResponse();
-
-        if ($controller instanceof InjectApplicationEvent) {
-            $controller->setEvent($e);
-        }
-
-        try {
-            $return   = $controller->dispatch($request, $response);
-        } catch (\Exception $ex) {
-            $error = clone $e;
-            $error->setError(static::ERROR_EXCEPTION)
-                  ->setController($controllerName)
-                  ->setControllerClass(get_class($controller))
-                  ->setParam('exception', $ex);
-            $results = $events->trigger('dispatch.error', $error);
-            if (count($results)) {
-                $return  = $results->last();
-            } else {
-                $return = $error->getParams();
-            }
-        }
-
-        complete:
-
-        if (!is_object($return)) {
-            if (ArrayUtils::hasStringKeys($return)) {
-                $return = new ArrayObject($return, ArrayObject::ARRAY_AS_PROPS);
-            }
-        }
-        $e->setResult($return);
-        return $return;
-    }
-
-    /**
-     * Attach default listeners for route and dispatch events
-     *
-     * @param  EventCollection $events
-     * @return void
-     */
-    protected function attachDefaultListeners()
-    {
-        $events = $this->events();
-        $events->attach('route', array($this, 'route'));
-        $events->attach('dispatch', array($this, 'dispatch'));
     }
 }

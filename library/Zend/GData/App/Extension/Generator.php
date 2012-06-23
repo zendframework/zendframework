@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\App\Extension;
 
 use Zend\GData\App\Extension;
@@ -29,7 +26,6 @@ use Zend\GData\App\Extension;
 /**
  * Represents the atom:generator element
  *
- * @uses       \Zend\GData\App\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
@@ -78,7 +74,7 @@ class Generator extends Extension
     }
 
     /**
-     * @return \Zend\GData\App\Extension\Uri
+     * @return Uri
      */
     public function getUri()
     {
@@ -86,7 +82,7 @@ class Generator extends Extension
     }
 
     /**
-     * @param \Zend\GData\App\Extension\Uri $value
+     * @param Uri $value
      * @return \Zend\GData\App\Entry Provides a fluent interface
      */
     public function setUri($value)
@@ -96,7 +92,7 @@ class Generator extends Extension
     }
 
     /**
-     * @return Zend\GData\App\Extension\Version
+     * @return Version
      */
     public function getVersion()
     {
@@ -104,7 +100,7 @@ class Generator extends Extension
     }
 
     /**
-     * @param Zend\GData\App\Extension\Version $value
+     * @param Version $value
      * @return \Zend\GData\App\Entry Provides a fluent interface
      */
     public function setVersion($value)

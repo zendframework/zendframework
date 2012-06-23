@@ -18,36 +18,31 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
-    Zend\Config\Processor,
     Zend\Config\Exception,
-    Zend\Filter\Filter as ZendFilter,
-    \Traversable,
-    \ArrayObject;
+    Zend\Filter\FilterInterface as ZendFilter,
+    Traversable,
+    ArrayObject;
 
 /**
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Filter implements Processor
+class Filter implements ProcessorInterface
 {
     /**
-     * @var \Zend\Filter\Filter
+     * @var ZendFilter
      */
     protected $filter;
 
     /**
      * Filter all config values using the supplied Zend\Filter
      *
-     * @param \Zend\Filter\Filter $filter
-     * @return \Zend\Config\Processor\Filter
+     * @param ZendFilter $filter
      */
     public function __construct(ZendFilter $filter)
     {
@@ -55,7 +50,7 @@ class Filter implements Processor
     }
 
     /**
-     * @return \Zend\Filter\Filter
+     * @return ZendFilter
      */
     public function getFilter()
     {
@@ -63,7 +58,7 @@ class Filter implements Processor
     }
 
     /**
-     * @param \Zend\Filter\Filter $filter
+     * @param ZendFilter $filter
      */
     public function setFilter(ZendFilter $filter)
     {

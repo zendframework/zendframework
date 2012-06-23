@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Json\Server;
 
 use ReflectionFunction,
@@ -52,9 +49,11 @@ class Server extends AbstractServer
     protected $returnResponse = false;
 
     /**
+     * Inherited from Zend\Server\AbstractServer
+     *
      * @var bool Flag; allow overwriting existing methods when creating server definition
      */
-    protected $_overwriteExistingMethods = true;
+    protected $overwriteExistingMethods = true;
 
     /**
      * Request object
@@ -79,11 +78,6 @@ class Server extends AbstractServer
      * @var array
      */
     protected $_smdMethods;
-
-    /**
-     * @var \Zend\Server\Description
-     */
-    protected $_table;
 
     /**
      * Attach a function or callback to the server
@@ -215,7 +209,7 @@ class Server extends AbstractServer
         }
 
         foreach ($definition as $key => $method) {
-            $this->_table->addMethod($method, $key);
+            $this->table->addMethod($method, $key);
             $this->_addMethodServiceMap($method);
         }
     }
@@ -534,12 +528,12 @@ class Server extends AbstractServer
         }
 
         $method = $request->getMethod();
-        if (!$this->_table->hasMethod($method)) {
+        if (!$this->table->hasMethod($method)) {
             return $this->fault('Method not found', Error::ERROR_INVALID_METHOD);
         }
 
         $params        = $request->getParams();
-        $invocable     = $this->_table->getMethod($method);
+        $invocable     = $this->table->getMethod($method);
         $serviceMap    = $this->getServiceMap();
         $service       = $serviceMap->getService($method);
         $serviceParams = $service->getParams();

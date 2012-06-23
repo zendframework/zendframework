@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2;
 
@@ -44,22 +41,6 @@ class Ec2Test extends \PHPUnit_Framework_TestCase
      * @var Zend\Service\Amazon\Ec2
      */
     private $ec2Instance;
-
-    /**
-     * Prepares the environment before running a test.
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        parent::tearDown();
-    }
 
     public function testFactoryReturnsKeyPairObject()
     {

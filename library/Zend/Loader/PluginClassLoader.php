@@ -21,9 +21,9 @@
 
 namespace Zend\Loader;
 
-use ArrayIterator,
-    IteratorAggregate,
-    Traversable;
+use ArrayIterator;
+use IteratorAggregate;
+use Traversable;
 
 /**
  * Plugin class locator interface

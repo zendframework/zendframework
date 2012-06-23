@@ -10,8 +10,8 @@
 
 namespace Zend\Paginator;
 
-use Zend\Loader\PluginBroker,
-    Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
+use Zend\Loader\PluginBroker;
+use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
 
 /**
  * Broker for scrolling-style adapter instances

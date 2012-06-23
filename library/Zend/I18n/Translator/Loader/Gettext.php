@@ -146,7 +146,7 @@ class Gettext implements LoaderInterface
                 list($header, $content) = explode(':', $rawHeader, 1);
 
                 if (trim(strtolower($header)) === 'plural-forms') {
-                    $textDomain->setPluralRule(
+                    $textDomain->pluralRule(
                         PluralRule::fromString($content)
                     );
                 }

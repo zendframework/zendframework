@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<section 
+<section
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.i18n.translating">
     <title>Translating</title>
@@ -128,6 +128,14 @@ $translator->addTranslationPattern($type, $pattern, $textDomain);
             to set an alternative locale explicitly, you can do so by passing
             it to the <methodname>setLocale()</methodname> method.
         </para>
+
+        <para>
+            When there is not translation for a specific message ID in a locale,
+            the message ID itself will be returned by default. Alternatively you
+            can set a fallback locale which is used to retrieve a fallback
+            translation. To do so, pass it to the
+            <methodname>setFallbackLocale()</methodname> method.
+        </para>
     </section>
 
     <section xml:id="zend.i18n.translating.translating-messages">
@@ -166,7 +174,8 @@ $translator->translatePlural($singular, $plural, $number, $textDomain, $locale);
 
         <para>
             Plural translations are only available if the underlying format
-            supports the transport of plural messages.
+            supports the transport of plural messages and plural rule
+            definitions.
         </para>
     </section>
 

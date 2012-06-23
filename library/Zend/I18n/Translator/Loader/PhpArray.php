@@ -64,7 +64,7 @@ class PhpArray implements LoaderInterface
 
         if (array_key_exists('', $textDomain)) {
             if (isset($textDomain['']['plural_forms'])) {
-                $textDomain->setPluralRule(
+                $textDomain->pluralRule(
                     PluralRule::fromString($textDomain['']['plural_forms'])
                 );
             }

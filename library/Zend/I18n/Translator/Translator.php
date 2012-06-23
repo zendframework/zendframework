@@ -232,7 +232,7 @@ class Translator
             return ($number != 1 ? $singular : $plural);
         }
 
-        $index = $this->messages[$textDomain][$locale]['']->evaluate($number);
+        $index = $this->messages[$textDomain][$locale]->pluralRule()->evaluate($number);
 
         if (!isset($translation[$index])) {
             throw new Exception\OutOfBoundsException(sprintf(

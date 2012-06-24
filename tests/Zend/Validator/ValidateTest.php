@@ -68,9 +68,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function testEmpty()
     {
         $this->assertEquals(array(), $this->validator->getMessages());
-        $this->assertEquals(array(), $this->validator->getErrors());
         $this->assertTrue($this->validator->isValid('something'));
-        $this->assertEquals(array(), $this->validator->getErrors());
     }
 
     /**
@@ -83,7 +81,6 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->validator->addValidator(new ValidatorTrue());
         $this->assertTrue($this->validator->isValid(null));
         $this->assertEquals(array(), $this->validator->getMessages());
-        $this->assertEquals(array(), $this->validator->getErrors());
     }
 
     /**

@@ -52,14 +52,6 @@ class ValidatorChain implements
     protected $messages = array();
 
     /**
-     * Array of validation failure message codes
-     *
-     * @var array
-     * @deprecated Since 1.5.0
-     */
-    protected $errors = array();
-
-    /**
      * Return the count of attached validators
      *
      * @return int
@@ -189,7 +181,6 @@ class ValidatorChain implements
     public function isValid($value, $context = null)
     {
         $this->messages = array();
-        $this->errors   = array();
         $result         = true;
         foreach ($this->validators as $element) {
             $validator = $element['instance'];
@@ -199,7 +190,6 @@ class ValidatorChain implements
             $result         = false;
             $messages       = $validator->getMessages();
             $this->messages = array_merge($this->messages, $messages);
-            $this->errors   = array_merge($this->errors, array_keys($messages));
             if ($element['breakChainOnFailure']) {
                 break;
             }
@@ -215,17 +205,6 @@ class ValidatorChain implements
     public function getMessages()
     {
         return $this->messages;
-    }
-
-    /**
-     * Returns array of validation failure message codes
-     *
-     * @return array
-     * @deprecated Since 1.5.0
-     */
-    public function getErrors()
-    {
-        return $this->errors;
     }
 
     /**

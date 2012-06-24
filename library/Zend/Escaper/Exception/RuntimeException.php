@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Escaper\Exception;
 
 use Zend\Escaper\Exception;
@@ -35,6 +32,6 @@ use Zend\Escaper\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException extends \RuntimeException
-    implements Exception
+    implements Exception\ExceptionInterface
 {
 }

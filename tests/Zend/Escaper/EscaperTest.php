@@ -316,7 +316,7 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
                 } else {
                     $this->assertNotEquals(
                         $literal,
-                        $escaped = $this->escaper->escapeJs($literal),
+                        $this->escaper->escapeJs($literal),
                         "$literal should be escaped!");
                 }
             }
@@ -339,7 +339,7 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
                 } else {
                     $this->assertNotEquals(
                         $literal,
-                        $escaped = $this->escaper->escapeHtmlAttr($literal),
+                        $this->escaper->escapeHtmlAttr($literal),
                         "$literal should be escaped!");
                 }
             }
@@ -359,7 +359,7 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
                 $literal = $this->codepointToUtf8($chr);
                 $this->assertNotEquals(
                     $literal,
-                    $escaped = $this->escaper->escapeCss($literal),
+                    $this->escaper->escapeCss($literal),
                     "$literal should be escaped!");
             }
         }

@@ -56,7 +56,7 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
         "\t"    => '&#x09;',
         "\0"    => '&#xFFFD;', // should use Unicode replacement char
         /* Encode spaces for quoteless attribute protection */
-        '~'     => '&tilde;',
+        '˜'     => '&tilde;',
         'ÿ'     => '&yuml;',
         '¾'     => '&frac34;',
         '♦'     => '&diams;',

@@ -143,6 +143,7 @@ class ValidatorLoader extends PluginClassLoader
         'creditcard'                   => 'Zend\Validator\CreditCard',
         'csrf'                         => 'Zend\Validator\Csrf',
         'date'                         => 'Zend\Validator\Date',
+        'datestep'                     => 'Zend\Validator\DateStep',
         'db_\\no_record_exists'        => 'Zend\Validator\Db\NoRecordExists',
         'db_\\norecordexists'          => 'Zend\Validator\Db\NoRecordExists',
         'db\\no_record_exists'         => 'Zend\Validator\Db\NoRecordExists',

@@ -31,7 +31,6 @@ class CamelCaseToUnderscore extends CamelCaseToSeparator
     /**
      * Constructor
      *
-     * @return void
      */
     public function __construct()
     {

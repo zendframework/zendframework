@@ -19,8 +19,8 @@
  */
 
 namespace Zend\Filter\File;
-use Zend\Filter,
-    Zend\Filter\Exception;
+use Zend\Filter;
+use Zend\Filter\Exception;
 
 /**
  * Decrypts a given file and stores the decrypted file content
@@ -68,6 +68,8 @@ class Decrypt extends Filter\Decrypt
      *
      * @param  string $value Full path of file to change
      * @return string The filename which has been set, or false when there were errors
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public function filter($value)
     {

@@ -21,8 +21,8 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\Inflector as InflectorFilter,
-    Zend\Filter\FilterPluginManager;
+use Zend\Filter\Inflector as InflectorFilter;
+use Zend\Filter\FilterPluginManager;
 
 /**
  * Test class for Zend_Filter_Inflector.
@@ -36,6 +36,16 @@ use Zend\Filter\Inflector as InflectorFilter,
  */
 class InflectorTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var InflectorFilter
+     */
+    protected $inflector;
+
+    /**
+     * @var FilterPluginManager
+     */
+    protected $broker;
+
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.

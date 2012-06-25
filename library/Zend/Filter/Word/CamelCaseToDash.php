@@ -31,7 +31,6 @@ class CamelCaseToDash extends CamelCaseToSeparator
     /**
      * Constructor
      *
-     * @return void
      */
     public function __construct()
     {

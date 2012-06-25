@@ -40,7 +40,6 @@ class Digits extends AbstractFilter
      *
      * Checks if PCRE is compiled with UTF-8 and Unicode support
      *
-     * @return void
      */
     public function __construct()
     {

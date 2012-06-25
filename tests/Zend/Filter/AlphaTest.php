@@ -21,8 +21,8 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\Alpha as AlphaFilter,
-    Zend\Locale\Locale;
+use Zend\Filter\Alpha as AlphaFilter;
+use Zend\Locale\Locale;
 
 /**
  * @category   Zend

@@ -20,9 +20,9 @@
 
 namespace Zend\Filter;
 
-use Traversable,
-    Zend\Locale\Locale as ZendLocale,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Locale\Locale as ZendLocale;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend

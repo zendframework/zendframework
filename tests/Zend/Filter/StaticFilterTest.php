@@ -21,8 +21,8 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\StaticFilter,
-    Zend\Filter\FilterPluginManager;
+use Zend\Filter\StaticFilter;
+use Zend\Filter\FilterPluginManager;
 
 /**
  * @category   Zend

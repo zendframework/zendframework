@@ -22,9 +22,9 @@ namespace Zend\Filter\Encrypt;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Filter\Exception,
-    Zend\Filter\Compress,
-    Zend\Filter\Decompress;
+use Zend\Filter\Exception;
+use Zend\Filter\Compress;
+use Zend\Filter\Decompress;
 
 /**
  * Encryption adapter for mcrypt
@@ -67,6 +67,8 @@ class Mcrypt implements EncryptionAlgorithmInterface
      * Class constructor
      *
      * @param string|array|\Traversable $options Encryption Options
+     * @throws Exception\ExtensionNotLoadedException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options)
     {
@@ -109,7 +111,8 @@ class Mcrypt implements EncryptionAlgorithmInterface
      * Sets new encryption options
      *
      * @param  string|array $options Encryption options
-     * @return Zend_Filter_File_Encryption
+     * @return Mcrypt
+     * @throws Exception\InvalidArgumentException
      */
     public function setEncryption($options)
     {
@@ -160,7 +163,8 @@ class Mcrypt implements EncryptionAlgorithmInterface
      * Sets the initialization vector
      *
      * @param string $vector (Optional) Vector to set
-     * @return \Zend\Filter\Encrypt\Mcrypt
+     * @return Mcrypt
+     * @throws Exception\InvalidArgumentException
      */
     public function setVector($vector = null)
     {
@@ -309,8 +313,8 @@ class Mcrypt implements EncryptionAlgorithmInterface
      * Initialises the cipher with the set key
      *
      * @param  resource $cipher
-     * @throws
      * @return resource
+     * @throws Exception\RuntimeException
      */
     protected function _initCipher($cipher)
     {

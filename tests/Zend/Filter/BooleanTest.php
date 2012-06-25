@@ -21,8 +21,8 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\Boolean as BooleanFilter,
-    Zend\Locale\Locale;
+use Zend\Filter\Boolean as BooleanFilter;
+use Zend\Locale\Locale;
 
 /**
  * @category   Zend

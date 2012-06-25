@@ -32,7 +32,6 @@ class UnderscoreToSeparator extends SeparatorToSeparator
      * Constructor
      *
      * @param  string $separator Space by default
-     * @return void
      */
     public function __construct($replacementSeparator = ' ')
     {

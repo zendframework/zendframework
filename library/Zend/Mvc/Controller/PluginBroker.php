@@ -21,8 +21,8 @@
 
 namespace Zend\Mvc\Controller;
 
-use Zend\Loader\PluginBroker as PluginBrokerBase,
-    Zend\Stdlib\DispatchableInterface as Dispatchable;
+use Zend\Loader\PluginBroker as PluginBrokerBase;
+use Zend\Stdlib\DispatchableInterface as Dispatchable;
 
 /**
  * @category   Zend

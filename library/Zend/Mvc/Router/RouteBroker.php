@@ -20,10 +20,10 @@
 
 namespace Zend\Mvc\Router;
 
-use Zend\Loader\Broker,
-    Zend\Loader\PluginClassLocator,
-    Zend\Loader\ShortNameLocator,
-    Zend\Mvc\Router\Exception;
+use Zend\Loader\Broker;
+use Zend\Loader\PluginClassLocator;
+use Zend\Loader\ShortNameLocator;
+use Zend\Mvc\Router\Exception;
 
 /**
  * RouteInterface broker.
@@ -68,6 +68,8 @@ class RouteBroker implements Broker
      *
      * @param  mixed $options
      * @return RouteBroker
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public function setOptions($options)
     {

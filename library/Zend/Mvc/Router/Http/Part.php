@@ -21,12 +21,12 @@
 
 namespace Zend\Mvc\Router\Http;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Mvc\Router\RouteBroker,
-    Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\PriorityList;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Mvc\Router\RouteBroker;
+use Zend\Mvc\Router\Exception;
+use Zend\Mvc\Router\PriorityList;
 
 /**
  * RouteInterface part.
@@ -92,7 +92,7 @@ class Part extends TreeRouteStack implements RouteInterface
      *
      * @see    Route::factory()
      * @param  mixed $options
-     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return Part
      */
     public static function factory($options = array())

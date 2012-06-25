@@ -21,8 +21,8 @@
 
 namespace Zend\Mvc\Router;
 
-use Countable,
-    Iterator;
+use Countable;
+use Iterator;
 
 /**
  * Priority list

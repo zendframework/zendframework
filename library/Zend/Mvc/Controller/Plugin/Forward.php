@@ -38,9 +38,24 @@ use Zend\Stdlib\DispatchableInterface as Dispatchable;
  */
 class Forward extends AbstractPlugin
 {
+    /**
+     * @var MvcEvent
+     */
     protected $event;
+
+    /**
+     * @var ServiceLocatorInterface
+     */
     protected $locator;
+
+    /**
+     * @var int
+     */
     protected $maxNestedForwards = 10;
+
+    /**
+     * @var int
+     */
     protected $numNestedForwards = 0;
 
     /**

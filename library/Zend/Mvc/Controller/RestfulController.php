@@ -80,7 +80,7 @@ abstract class RestfulController implements
     protected $events;
 
     /**
-     * @var Locator
+     * @var ServiceLocatorInterface
      */
     protected $locator;
 
@@ -257,7 +257,7 @@ abstract class RestfulController implements
     public function getRequest()
     {
         if (!$this->request) {
-            $this->setRequest(new HttpRequest());
+            $this->request = new HttpRequest();
         }
         return $this->request;
     }
@@ -270,7 +270,7 @@ abstract class RestfulController implements
     public function getResponse()
     {
         if (!$this->response) {
-            $this->setResponse(new HttpResponse());
+            $this->response = new HttpResponse();
         }
         return $this->response;
     }
@@ -332,7 +332,7 @@ abstract class RestfulController implements
      *
      * Will create a new MvcEvent if none provided.
      *
-     * @return Event
+     * @return MvcEvent
      */
     public function getEvent()
     {

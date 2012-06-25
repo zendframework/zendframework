@@ -21,10 +21,10 @@
 
 namespace Zend\Mvc\Router\Http;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Mvc\Router\Exception;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Mvc\Router\Exception;
 
 /**
  * Scheme route.
@@ -67,9 +67,9 @@ class Scheme implements RouteInterface
      * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
-     * @param  array|\Traversable $options
-     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @param  array|Traversable $options
      * @return Scheme
+     * @throws Exception\InvalidArgumentException
      */
     public static function factory($options = array())
     {

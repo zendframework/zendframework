@@ -21,9 +21,9 @@
 
 namespace ZendTest\Mvc\Router\TestAsset;
 
-use Zend\Mvc\Router\RouteInterface,
-    Zend\Mvc\Router\RouteMatch,
-    Zend\Stdlib\RequestInterface;
+use Zend\Mvc\Router\RouteInterface;
+use Zend\Mvc\Router\RouteMatch;
+use Zend\Stdlib\RequestInterface;
 
 /**
  * Dummy route.

@@ -21,10 +21,10 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Mvc\InjectApplicationEventInterface,
-    Zend\Mvc\Exception,
-    Zend\Mvc\MvcEvent,
-    Zend\View\Model\ModelInterface as Model;
+use Zend\Mvc\InjectApplicationEventInterface;
+use Zend\Mvc\Exception;
+use Zend\Mvc\MvcEvent;
+use Zend\View\Model\ModelInterface as Model;
 
 /**
  * @category   Zend

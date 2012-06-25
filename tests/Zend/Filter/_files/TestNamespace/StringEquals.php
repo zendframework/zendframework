@@ -42,7 +42,7 @@ class StringEquals extends AbstractValidator
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::NOT_EQUALS => 'Not all strings in the argument are equal'
     );
 

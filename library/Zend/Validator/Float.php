@@ -19,8 +19,10 @@
  */
 
 namespace Zend\Validator;
-use Zend;
+
+use Traversable;
 use Zend\Locale;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -36,7 +38,7 @@ class Float extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID   => "Invalid type given. String, integer or float expected",
         self::NOT_FLOAT => "'%value%' does not appear to be a float",
     );
@@ -53,11 +55,14 @@ class Float extends AbstractValidator
     /**
      * Constructor
      *
-     * @param array $options
-     * @return \Zend\Validator\Float
+     * @param array|Traversable $options
      */
     public function __construct($options = null)
     {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+
         if (!is_array($options)) {
             $options = array('locale' => $options);
         }
@@ -79,6 +84,7 @@ class Float extends AbstractValidator
      * Sets the locale to use
      *
      * @param string|\Zend\Locale\Locale $locale
+     * @return Float
      */
     public function setLocale($locale = null)
     {

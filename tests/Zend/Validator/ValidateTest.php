@@ -20,8 +20,11 @@
  */
 
 namespace ZendTest\Validator;
-use Zend\Validator;
 
+use Zend\Validator\AbstractValidator;
+use Zend\Validator\Between;
+use Zend\Validator\StaticValidator;
+use Zend\Validator\ValidatorChain;
 
 /**
  * @category   Zend
@@ -36,9 +39,16 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Zend_Validator object
      *
-     * @var Zend_Validator
+     * @var ValidatorChain
      */
-    protected $_validator;
+    protected $validator;
+
+    /**
+     * Whether an error occurred
+     *
+     * @var boolean
+     */
+    protected $errorOccurred = false;
 
     /**
      * Creates a new Zend_Validator object for each test method
@@ -47,7 +57,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_validator = new Validator\ValidatorChain();
+        $this->validator = new ValidatorChain();
     }
 
     /**
@@ -57,10 +67,10 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testEmpty()
     {
-        $this->assertEquals(array(), $this->_validator->getMessages());
-        $this->assertEquals(array(), $this->_validator->getErrors());
-        $this->assertTrue($this->_validator->isValid('something'));
-        $this->assertEquals(array(), $this->_validator->getErrors());
+        $this->assertEquals(array(), $this->validator->getMessages());
+        $this->assertEquals(array(), $this->validator->getErrors());
+        $this->assertTrue($this->validator->isValid('something'));
+        $this->assertEquals(array(), $this->validator->getErrors());
     }
 
     /**
@@ -70,10 +80,10 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testTrue()
     {
-        $this->_validator->addValidator(new ValidatorTrue());
-        $this->assertTrue($this->_validator->isValid(null));
-        $this->assertEquals(array(), $this->_validator->getMessages());
-        $this->assertEquals(array(), $this->_validator->getErrors());
+        $this->validator->addValidator(new ValidatorTrue());
+        $this->assertTrue($this->validator->isValid(null));
+        $this->assertEquals(array(), $this->validator->getMessages());
+        $this->assertEquals(array(), $this->validator->getErrors());
     }
 
     /**
@@ -83,9 +93,9 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testFalse()
     {
-        $this->_validator->addValidator(new ValidatorFalse());
-        $this->assertFalse($this->_validator->isValid(null));
-        $this->assertEquals(array('error' => 'validation failed'), $this->_validator->getMessages());
+        $this->validator->addValidator(new ValidatorFalse());
+        $this->assertFalse($this->validator->isValid(null));
+        $this->assertEquals(array('error' => 'validation failed'), $this->validator->getMessages());
     }
 
     /**
@@ -95,10 +105,10 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testBreakChainOnFailure()
     {
-        $this->_validator->addValidator(new ValidatorFalse(), true)
-                         ->addValidator(new ValidatorFalse());
-        $this->assertFalse($this->_validator->isValid(null));
-        $this->assertEquals(array('error' => 'validation failed'), $this->_validator->getMessages());
+        $this->validator->addValidator(new ValidatorFalse(), true)
+            ->addValidator(new ValidatorFalse());
+        $this->assertFalse($this->validator->isValid(null));
+        $this->assertEquals(array('error' => 'validation failed'), $this->validator->getMessages());
     }
 
     /**
@@ -113,21 +123,21 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function testStaticFactoryClassNotFound()
     {
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
-        Validator\StaticValidator::execute('1234', 'UnknownValidator');
+        StaticValidator::execute('1234', 'UnknownValidator');
     }
 
     public function testIsValidWithParameters()
     {
-        $this->assertTrue(Validator\StaticValidator::execute(5, 'Between', array(1, 10)));
-        $this->assertTrue(Validator\StaticValidator::execute(5, 'Between', array('min' => 1, 'max' => 10)));
+        $this->assertTrue(StaticValidator::execute(5, 'Between', array(1, 10)));
+        $this->assertTrue(StaticValidator::execute(5, 'Between', array('min' => 1, 'max' => 10)));
     }
 
     public function testSetGetMessageLengthLimitation()
     {
-        Validator\AbstractValidator::setMessageLength(5);
-        $this->assertEquals(5, Validator\AbstractValidator::getMessageLength());
+        AbstractValidator::setMessageLength(5);
+        $this->assertEquals(5, AbstractValidator::getMessageLength());
 
-        $valid = new Validator\Between(1, 10);
+        $valid = new Between(1, 10);
         $this->assertFalse($valid->isValid(24));
         $message = current($valid->getMessages());
         $this->assertTrue(strlen($message) <= 5);
@@ -138,25 +148,25 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $translator = new \Zend\Translator\Translator('ArrayAdapter', array(), 'en');
         restore_error_handler();
-        Validator\AbstractValidator::setDefaultTranslator($translator);
-        $this->assertSame($translator->getAdapter(), Validator\AbstractValidator::getDefaultTranslator());
+        AbstractValidator::setDefaultTranslator($translator);
+        $this->assertSame($translator->getAdapter(), AbstractValidator::getDefaultTranslator());
     }
 
     public function testAllowsPrependingValidators()
     {
-        $this->_validator->addValidator(new ValidatorTrue())
-                         ->prependValidator(new ValidatorFalse(), true);
-        $this->assertFalse($this->_validator->isValid(true));
-        $messages = $this->_validator->getMessages();
+        $this->validator->addValidator(new ValidatorTrue())
+            ->prependValidator(new ValidatorFalse(), true);
+        $this->assertFalse($this->validator->isValid(true));
+        $messages = $this->validator->getMessages();
         $this->assertArrayHasKey('error', $messages);
     }
 
     public function testAllowsPrependingValidatorsByName()
     {
-        $this->_validator->addValidator(new ValidatorTrue())
-                         ->prependByName('NotEmpty', array(), true);
-        $this->assertFalse($this->_validator->isValid(''));
-        $messages = $this->_validator->getMessages();
+        $this->validator->addValidator(new ValidatorTrue())
+            ->prependByName('NotEmpty', array(), true);
+        $this->assertFalse($this->validator->isValid(''));
+        $messages = $this->validator->getMessages();
         $this->assertArrayHasKey('isEmpty', $messages);
     }
 
@@ -164,7 +174,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      * Handle file not found errors
      *
      * @group  ZF-2724
-     * @param  int $errnum
+     * @param  int    $errnum
      * @param  string $errstr
      * @return void
      */
@@ -187,7 +197,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)
     {
-        $this->_errorOccurred = true;
+        $this->errorOccurred = true;
     }
 }
 
@@ -195,7 +205,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 /**
  * Validator to return true to any input.
  */
-class ValidatorTrue extends Validator\AbstractValidator
+class ValidatorTrue extends AbstractValidator
 {
     public function isValid($value)
     {
@@ -207,9 +217,9 @@ class ValidatorTrue extends Validator\AbstractValidator
 /**
  * Validator to return false to any input.
  */
-class ValidatorFalse extends Validator\AbstractValidator
+class ValidatorFalse extends AbstractValidator
 {
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         'error' => 'validation failed',
     );
 

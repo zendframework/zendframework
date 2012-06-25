@@ -21,6 +21,8 @@
 namespace Zend\Validator;
 
 use Traversable;
+use Zend\Locale;
+use Zend\Registry;
 use Zend\Stdlib\ArrayUtils;
 
 /**
@@ -37,12 +39,12 @@ class Int extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID => "Invalid type given. String or integer expected",
         self::NOT_INT => "'%value%' does not appear to be an integer",
     );
 
-    protected $_locale;
+    protected $locale;
 
     /**
      * Constructor for the integer validator
@@ -64,15 +66,15 @@ class Int extends AbstractValidator
         }
 
         if (empty($options)) {
-            if (\Zend\Registry::isRegistered('Zend_Locale')) {
-                $options = \Zend\Registry::get('Zend_Locale');
+            if (Registry::isRegistered('Zend_Locale')) {
+                $options = Registry::get('Zend_Locale');
             }
         }
 
         if ($options !== null) {
             $this->setLocale($options);
         }
-        
+
         parent::__construct();
     }
 
@@ -81,17 +83,18 @@ class Int extends AbstractValidator
      */
     public function getLocale()
     {
-        return $this->_locale;
+        return $this->locale;
     }
 
     /**
      * Sets the locale to use
      *
      * @param string|\Zend\Locale\Locale $locale
+     * @return Int
      */
     public function setLocale($locale = null)
     {
-        $this->_locale = \Zend\Locale\Locale::findLocale($locale);
+        $this->locale = Locale\Locale::findLocale($locale);
         return $this;
     }
 
@@ -113,7 +116,7 @@ class Int extends AbstractValidator
         }
 
         $this->setValue($value);
-        if ($this->_locale === null) {
+        if ($this->locale === null) {
             $locale        = localeconv();
             $valueFiltered = str_replace($locale['decimal_point'], '.', $value);
             $valueFiltered = str_replace($locale['thousands_sep'], '', $valueFiltered);
@@ -125,11 +128,11 @@ class Int extends AbstractValidator
 
         } else {
             try {
-                if (!\Zend\Locale\Format::isInteger($value, array('locale' => $this->_locale))) {
+                if (!Locale\Format::isInteger($value, array('locale' => $this->locale))) {
                     $this->error(self::NOT_INT);
                     return false;
                 }
-            } catch (\Zend\Locale\Exception\ExceptionInterface $e) {
+            } catch (Locale\Exception\ExceptionInterface $e) {
                 $this->error(self::NOT_INT);
                 return false;
             }

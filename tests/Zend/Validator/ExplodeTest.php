@@ -20,17 +20,8 @@
  */
 
 namespace ZendTest\Validator;
-use Zend\Validator,
-    ReflectionClass;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validator_Explode
- */
-
+use Zend\Validator\Explode;
 
 /**
  * @category   Zend
@@ -44,7 +35,7 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
 {
     public function testRaisesExceptionWhenValidatorIsMissing()
     {
-        $validator = new Validator\Explode();
+        $validator = new Explode();
         $this->setExpectedException('Zend\Validator\Exception\RuntimeException', 'validator');
         $validator->isValid('foo,bar');
     }
@@ -63,7 +54,7 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
             array('foo',              ',', false, 1, true,  array(),                   true),
             array('foo',              ',', false, 1, false, array('X'),                false),
             array('foo',              ',', true,  1, false, array('X'),                false),
-            array(array(),            ',', false, 0, true,  array(Validator\Explode::INVALID => 'Invalid'), false),
+            array(array(),            ',', false, 0, true,  array(Explode::INVALID => 'Invalid'), false),
         );
     }
 
@@ -76,12 +67,12 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
         $mockValidator->expects($this->exactly($numIsValidCalls))->method('isValid')->will($this->returnValue($isValidReturn));
         $mockValidator->expects($this->any())->method('getMessages')->will($this->returnValue('X'));
 
-        $validator = new Validator\Explode(array(
+        $validator = new Explode(array(
             'validator'           => $mockValidator,
             'valueDelimiter'      => $delimiter,
             'breakOnFirstFailure' => $breakOnFirst,
         ));
-        $validator->setMessage('Invalid', Validator\Explode::INVALID);
+        $validator->setMessage('Invalid', Explode::INVALID);
 
         $this->assertEquals($expects,  $validator->isValid($value));
         $this->assertEquals($messages, $validator->getMessages());
@@ -89,43 +80,21 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetMessagesReturnsDefaultValue()
     {
-        $validator = new Validator\Explode();
+        $validator = new Explode();
         $this->assertEquals(array(), $validator->getMessages());
     }
 
     public function testEqualsMessageTemplates()
     {
-        $validator = new Validator\Explode(array());
-        $reflection = new ReflectionClass($validator);
-
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
+        $validator = new Explode(array());
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
 
     public function testEqualsMessageVariables()
     {
-        $validator = new Validator\Explode(array());
-        $reflection = new ReflectionClass($validator);
-
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $validator = new Explode(array());
+        $this->assertAttributeEquals($validator->getOption('messageVariables'),
+                                     'messageVariables', $validator);
     }
 }

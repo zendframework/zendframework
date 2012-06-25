@@ -20,8 +20,8 @@
 
 namespace Zend\Validator\File;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Validator which checks if the file already exists in the directory
@@ -43,7 +43,7 @@ class IsImage extends MimeType
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::FALSE_TYPE   => "File '%value%' is no image, '%type%' detected",
         self::NOT_DETECTED => "The mimetype of file '%value%' could not be detected",
         self::NOT_READABLE => "File '%value%' is not readable or does not exist",
@@ -52,8 +52,7 @@ class IsImage extends MimeType
     /**
      * Sets validator options
      *
-     * @param  string|array|Traversable $mimetype
-     * @return void
+     * @param array|Traversable|string $options
      */
     public function __construct($options = array())
     {
@@ -143,7 +142,7 @@ class IsImage extends MimeType
                 if(array_key_exists('name', $file)) {
                     $file = $file['name'];
                 }
-            } 
+            }
 
             if (is_string($file)) {
                 $this->value = basename($file);

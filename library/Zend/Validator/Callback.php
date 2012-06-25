@@ -43,7 +43,7 @@ class Callback extends AbstractValidator
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID_VALUE    => "'%value%' is not valid",
         self::INVALID_CALLBACK => "An exception has been raised within the callback",
     );
@@ -61,7 +61,7 @@ class Callback extends AbstractValidator
     /**
      * Constructor
      *
-     * @param array $options
+     * @param array|callable $options
      */
     public function __construct($options = null)
     {
@@ -86,7 +86,8 @@ class Callback extends AbstractValidator
      * Sets the callback
      *
      * @param  string|array $callback
-     * @return \Zend\Validator\Callback Provides a fluent interface
+     * @return Callback Provides a fluent interface
+     * @throws Exception\InvalidArgumentException
      */
     public function setCallback($callback)
     {
@@ -111,8 +112,8 @@ class Callback extends AbstractValidator
     /**
      * Sets options for the callback
      *
-     * @param  mixed $max
-     * @return \Zend\Validator\Callback Provides a fluent interface
+     * @param  mixed $options
+     * @return Callback Provides a fluent interface
      */
     public function setCallbackOptions($options)
     {
@@ -127,6 +128,7 @@ class Callback extends AbstractValidator
      * @param  mixed $value
      * @param  mixed $context Additional context to provide to the callback
      * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function isValid($value, $context = null)
     {

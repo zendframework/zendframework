@@ -20,8 +20,8 @@
 
 namespace Zend\Validator;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -62,7 +62,7 @@ class CreditCard extends AbstractValidator
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::CHECKSUM       => "'%value%' seems to contain an invalid checksum",
         self::CONTENT        => "'%value%' must contain only digits",
         self::INVALID        => "Invalid type given. String expected",
@@ -150,13 +150,13 @@ class CreditCard extends AbstractValidator
     /**
      * Constructor
      *
-     * @param string|array|Traversable $type OPTIONAL Type of CCI to allow
+     * @param string|array|Traversable $options OPTIONAL Type of CCI to allow
      */
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp['type'] = array_shift($options);
             if (!empty($options)) {

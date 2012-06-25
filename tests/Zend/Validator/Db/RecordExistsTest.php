@@ -21,7 +21,6 @@
 
 namespace ZendTest\Validator\Db;
 
-use ReflectionClass;
 use Zend\Validator\Db\RecordExists;
 use ArrayObject;
 
@@ -186,7 +185,7 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return ZF-8863
+     * @group ZF-8863
      */
     public function testExcludeConstructor()
     {
@@ -257,36 +256,7 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     public function testEqualsMessageTemplates()
     {
         $validator  = new RecordExists('users', 'field1');
-        $reflection = new ReflectionClass($validator);
-
-        if (!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
-    }
-
-    public function testEqualsMessageVariables()
-    {
-        $validator  = new RecordExists('users', 'field1');
-        $reflection = new ReflectionClass($validator);
-
-        if (!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
 }

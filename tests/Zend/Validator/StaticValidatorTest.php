@@ -21,9 +21,12 @@
 
 namespace ZendTest\Validator;
 
-use Zend\Validator,
-    Zend\Validator\ValidatorPluginManager,
-    Zend\Translator;
+use Zend\Validator\AbstractValidator;
+use Zend\Validator\Alpha;
+use Zend\Validator\Between;
+use Zend\Validator\StaticValidator;
+use Zend\Validator\ValidatorPluginManager;
+use Zend\Translator;
 
 /**
  * @category   Zend
@@ -35,6 +38,16 @@ use Zend\Validator,
  */
 class StaticValidatorTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Alpha */
+    public $validator;
+
+    /**
+     * Whether an error occurred
+     *
+     * @var boolean
+     */
+    protected $errorOccurred = false;
+
     public function clearRegistry()
     {
         if (\Zend\Registry::isRegistered('Zend_Translator')) {
@@ -43,24 +56,19 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * Creates a new validation object for each test method
-     *
-     * @return void
-     */
     public function setUp()
     {
         $this->clearRegistry();
-        Validator\AbstractValidator::setDefaultTranslator(null);
-        Validator\StaticValidator::setPluginManager(null);
-        $this->validator = new Validator\Alpha();
+        AbstractValidator::setDefaultTranslator(null);
+        StaticValidator::setPluginManager(null);
+        $this->validator = new Alpha();
     }
-    
+
     public function tearDown()
     {
         $this->clearRegistry();
-        Validator\AbstractValidator::setDefaultTranslator(null);
-        Validator\AbstractValidator::setMessageLength(-1);
+        AbstractValidator::setDefaultTranslator(null);
+        AbstractValidator::setMessageLength(-1);
     }
 
     /**
@@ -75,22 +83,22 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)
     {
-        $this->_errorOccurred = true;
+        $this->errorOccurred = true;
     }
-    
+
     public function testCanSetGlobalDefaultTranslator()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $translator = new Translator\Translator('ArrayAdapter', array(), 'en');
         restore_error_handler();
-        Validator\AbstractValidator::setDefaultTranslator($translator);
-        $this->assertSame($translator->getAdapter(), Validator\AbstractValidator::getDefaultTranslator());
+        AbstractValidator::setDefaultTranslator($translator);
+        $this->assertSame($translator->getAdapter(), AbstractValidator::getDefaultTranslator());
     }
 
     public function testGlobalDefaultTranslatorUsedWhenNoLocalTranslatorSet()
     {
         $this->testCanSetGlobalDefaultTranslator();
-        $this->assertSame(Validator\AbstractValidator::getDefaultTranslator(), $this->validator->getTranslator());
+        $this->assertSame(AbstractValidator::getDefaultTranslator(), $this->validator->getTranslator());
     }
 
     public function testGlobalTranslatorFromRegistryUsedWhenNoLocalTranslatorSet()
@@ -109,33 +117,33 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
         $translator = new Translator\Translator('ArrayAdapter', array(), 'en');
         restore_error_handler();
         $this->validator->setTranslator($translator);
-        $this->assertNotSame(Validator\AbstractValidator::getDefaultTranslator(), $this->validator->getTranslator());
+        $this->assertNotSame(AbstractValidator::getDefaultTranslator(), $this->validator->getTranslator());
     }
-    
+
     public function testMaximumErrorMessageLength()
     {
-        $this->assertEquals(-1, Validator\AbstractValidator::getMessageLength());
-        Validator\AbstractValidator::setMessageLength(10);
-        $this->assertEquals(10, Validator\AbstractValidator::getMessageLength());
+        $this->assertEquals(-1, AbstractValidator::getMessageLength());
+        AbstractValidator::setMessageLength(10);
+        $this->assertEquals(10, AbstractValidator::getMessageLength());
 
         $translator = new Translator\Translator(
             'ArrayAdapter',
-            array(Validator\Alpha::INVALID => 'This is the translated message for %value%'),
+            array(Alpha::INVALID => 'This is the translated message for %value%'),
             'en'
         );
         $this->validator->setTranslator($translator);
         $this->assertFalse($this->validator->isValid(123));
         $messages = $this->validator->getMessages();
-        $this->assertTrue(array_key_exists(Validator\Alpha::INVALID, $messages));
-        $this->assertEquals('This is...', $messages[Validator\Alpha::INVALID]);
+        $this->assertTrue(array_key_exists(Alpha::INVALID, $messages));
+        $this->assertEquals('This is...', $messages[Alpha::INVALID]);
     }
 
     public function testSetGetMessageLengthLimitation()
     {
-        Validator\AbstractValidator::setMessageLength(5);
-        $this->assertEquals(5, Validator\AbstractValidator::getMessageLength());
+        AbstractValidator::setMessageLength(5);
+        $this->assertEquals(5, AbstractValidator::getMessageLength());
 
-        $valid = new Validator\Between(1, 10);
+        $valid = new Between(1, 10);
         $this->assertFalse($valid->isValid(24));
         $message = current($valid->getMessages());
         $this->assertTrue(strlen($message) <= 5);
@@ -144,39 +152,39 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
     public function testSetGetDefaultTranslator()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new \Zend\Translator\Translator('ArrayAdapter', array(), 'en');
+        $translator = new Translator\Translator('ArrayAdapter', array(), 'en');
         restore_error_handler();
-        Validator\AbstractValidator::setDefaultTranslator($translator);
-        $this->assertSame($translator->getAdapter(), Validator\AbstractValidator::getDefaultTranslator());
+        AbstractValidator::setDefaultTranslator($translator);
+        $this->assertSame($translator->getAdapter(), AbstractValidator::getDefaultTranslator());
     }
-    
+
     /* plugin loading */
 
     public function testLazyLoadsValidatorPluginManagerByDefault()
     {
-        $plugins = Validator\StaticValidator::getPluginManager();
+        $plugins = StaticValidator::getPluginManager();
         $this->assertInstanceOf('Zend\Validator\ValidatorPluginManager', $plugins);
     }
 
     public function testCanSetCustomPluginManager()
     {
         $plugins = new ValidatorPluginManager();
-        Validator\StaticValidator::setPluginManager($plugins);
-        $this->assertSame($plugins, Validator\StaticValidator::getPluginManager());
+        StaticValidator::setPluginManager($plugins);
+        $this->assertSame($plugins, StaticValidator::getPluginManager());
     }
 
     public function testPassingNullWhenSettingPluginManagerResetsPluginManager()
     {
         $plugins = new ValidatorPluginManager();
-        Validator\StaticValidator::setPluginManager($plugins);
-        $this->assertSame($plugins, Validator\StaticValidator::getPluginManager());
-        Validator\StaticValidator::setPluginManager(null);
-        $this->assertNotSame($plugins, Validator\StaticValidator::getPluginManager());
+        StaticValidator::setPluginManager($plugins);
+        $this->assertSame($plugins, StaticValidator::getPluginManager());
+        StaticValidator::setPluginManager(null);
+        $this->assertNotSame($plugins, StaticValidator::getPluginManager());
     }
-    
+
     public function testExecuteValidWithParameters()
     {
-        $this->assertTrue(Validator\StaticValidator::execute(5, 'Between', array(1, 10)));
-        $this->assertTrue(Validator\StaticValidator::execute(5, 'Between', array('min' => 1, 'max' => 10)));
+        $this->assertTrue(StaticValidator::execute(5, 'Between', array(1, 10)));
+        $this->assertTrue(StaticValidator::execute(5, 'Between', array('min' => 1, 'max' => 10)));
     }
 }

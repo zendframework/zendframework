@@ -30,13 +30,11 @@ class Planet extends AbstractAdapter
 {
     /**
      * Constructor for this barcode adapter
-     *
-     * @return void
      */
     public function __construct()
     {
         $this->setLength(array(12, 14));
         $this->setCharacters('0123456789');
-        $this->setChecksum('_postnet');
+        $this->setChecksum('postnet');
     }
 }

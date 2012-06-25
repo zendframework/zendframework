@@ -20,11 +20,8 @@
  */
 
 namespace ZendTest\Validator\File;
-use Zend\Validator\File;
 
-/**
- * @see Zend_Validator_File_IsCompressed
- */
+use Zend\Validator\File;
 
 /**
  * IsCompressed testbed

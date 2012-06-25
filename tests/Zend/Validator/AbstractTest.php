@@ -20,8 +20,9 @@
  */
 
 namespace ZendTest\Validator;
-use Zend\Validator;
+
 use Zend\Translator;
+use Zend\Validator\AbstractValidator;
 
 /**
  * @category   Zend
@@ -33,18 +34,19 @@ use Zend\Translator;
  */
 class AbstractTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var AbstractValidator */
+    public $validator;
+
     /**
-     * Creates a new validation object for each test method
+     * Whether an error occurred
      *
-     * @return void
+     * @var boolean
      */
+    protected $errorOccurred = false;
+
     public function setUp()
     {
         $this->validator = new Concrete();
-    }
-
-    public function tearDown()
-    {
     }
 
     public function testTranslatorNullByDefault()
@@ -73,7 +75,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testGlobalDefaultTranslatorNullByDefault()
     {
-        $this->assertNull(Validator\AbstractValidator::getDefaultTranslator());
+        $this->assertNull(AbstractValidator::getDefaultTranslator());
     }
 
 
@@ -210,15 +212,15 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)
     {
-        $this->_errorOccurred = true;
+        $this->errorOccurred = true;
     }
 }
 
-class Concrete extends Validator\AbstractValidator
+class Concrete extends AbstractValidator
 {
     const FOO_MESSAGE = 'fooMessage';
 
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         'fooMessage' => '%value% was passed',
     );
 

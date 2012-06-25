@@ -19,8 +19,9 @@
  */
 
 namespace Zend\Validator\File;
-use Zend\Validator,
-    Zend\Validator\Exception;
+
+use Zend\Validator\AbstractValidator;
+use Zend\Validator\Exception;
 
 /**
  * Validator for counting all given files
@@ -30,7 +31,7 @@ use Zend\Validator,
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Count extends Validator\AbstractValidator
+class Count extends AbstractValidator
 {
     /**#@+
      * @const string Error constants
@@ -42,7 +43,7 @@ class Count extends Validator\AbstractValidator
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::TOO_MANY => "Too many files, maximum '%max%' are allowed but '%count%' are given",
         self::TOO_FEW  => "Too few files, minimum '%min%' are expected but '%count%' are given",
     );
@@ -50,10 +51,10 @@ class Count extends Validator\AbstractValidator
     /**
      * @var array Error message template variables
      */
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'min'   => array('options' => 'min'),
         'max'   => array('options' => 'max'),
-        'count' => '_count'
+        'count' => 'count'
     );
 
     /**
@@ -61,13 +62,13 @@ class Count extends Validator\AbstractValidator
      *
      * @var integer
      */
-    protected $_count;
+    protected $count;
 
     /**
      * Internal file array
      * @var array
      */
-    protected $_files;
+    protected $files;
 
     /**
      * Options for this validator
@@ -91,7 +92,6 @@ class Count extends Validator\AbstractValidator
      * 'max': Maximum filecount
      *
      * @param  integer|array|\Traversable $options Options for the adapter
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -121,8 +121,8 @@ class Count extends Validator\AbstractValidator
      * Sets the minimum file count
      *
      * @param  integer|array $min The minimum file count
-     * @return \Zend\Validator\File\Count Provides a fluent interface
-     * @throws \Zend\Validator\Exception When min is greater than max
+     * @return Count Provides a fluent interface
+     * @throws Exception\InvalidArgumentException When min is greater than max
      */
     public function setMin($min)
     {
@@ -158,8 +158,8 @@ class Count extends Validator\AbstractValidator
      * Sets the maximum file count
      *
      * @param  integer|array $max The maximum file count
-     * @return \Zend\Validator\StringLength Provides a fluent interface
-     * @throws \Zend\Validator\Exception When max is smaller than min
+     * @return Count Provides a fluent interface
+     * @throws Exception\InvalidArgumentException When max is smaller than min
      */
     public function setMax($max)
     {
@@ -185,6 +185,7 @@ class Count extends Validator\AbstractValidator
      * Adds a file for validation
      *
      * @param string|array $file
+     * @return Count
      */
     public function addFile($file)
     {
@@ -194,8 +195,8 @@ class Count extends Validator\AbstractValidator
 
         if (is_array($file)) {
             foreach ($file as $name) {
-                if (!isset($this->_files[$name]) && !empty($name)) {
-                    $this->_files[$name] = $name;
+                if (!isset($this->files[$name]) && !empty($name)) {
+                    $this->files[$name] = $name;
                 }
             }
         }
@@ -226,13 +227,13 @@ class Count extends Validator\AbstractValidator
             $this->addFile($value);
         }
 
-        $this->_count = count($this->_files);
-        if (($this->getMax() !== null) && ($this->_count > $this->getMax())) {
-            return $this->_throw($file, self::TOO_MANY);
+        $this->count = count($this->files);
+        if (($this->getMax() !== null) && ($this->count > $this->getMax())) {
+            return $this->throwError($file, self::TOO_MANY);
         }
 
-        if (($this->getMin() !== null) && ($this->_count < $this->getMin())) {
-            return $this->_throw($file, self::TOO_FEW);
+        if (($this->getMin() !== null) && ($this->count < $this->getMin())) {
+            return $this->throwError($file, self::TOO_FEW);
         }
 
         return true;
@@ -245,14 +246,14 @@ class Count extends Validator\AbstractValidator
      * @param  string $errorType
      * @return false
      */
-    protected function _throw($file, $errorType)
+    protected function throwError($file, $errorType)
     {
         if ($file !== null) {
             if (is_array($file)) {
                 if(array_key_exists('name', $file)) {
                     $this->value = $file['name'];
                 }
-            } else if (is_string($file)) {
+            } elseif (is_string($file)) {
                 $this->value = $file;
             }
         }

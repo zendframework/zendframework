@@ -28,8 +28,8 @@ use Countable;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ValidatorChain implements 
-    Countable, 
+class ValidatorChain implements
+    Countable,
     ValidatorInterface
 {
     /**
@@ -60,8 +60,8 @@ class ValidatorChain implements
     protected $errors = array();
 
     /**
-     * Return the count of attached valicators
-     * 
+     * Return the count of attached validators
+     *
      * @return int
      */
     public function count()
@@ -71,7 +71,7 @@ class ValidatorChain implements
 
     /**
      * Get plugin manager instance
-     * 
+     *
      * @return ValidatorPluginManager
      */
     public function getPluginManager()
@@ -84,7 +84,7 @@ class ValidatorChain implements
 
     /**
      * Set plugin manager instance
-     * 
+     *
      * @param  ValidatorPluginManager $plugins Plugin manager
      * @return ValidatorChain
      */
@@ -96,8 +96,8 @@ class ValidatorChain implements
 
     /**
      * Retrieve a validator by name
-     * 
-     * @param  string     $plugin  Name of validator to return
+     *
+     * @param  string     $name    Name of validator to return
      * @param  null|array $options Options to pass to validator constructor (if not already instantiated)
      * @return ValidatorInterface
      */
@@ -113,7 +113,7 @@ class ValidatorChain implements
      * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
      * if one exists, will not be executed.
      *
-     * @param  ValidatorInterface $validator
+     * @param  ValidatorInterface      $validator
      * @param  boolean                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
@@ -121,7 +121,7 @@ class ValidatorChain implements
     {
         $this->validators[] = array(
             'instance'            => $validator,
-            'breakChainOnFailure' => (boolean) $breakChainOnFailure
+            'breakChainOnFailure' => (boolean)$breakChainOnFailure
         );
         return $this;
     }
@@ -132,25 +132,27 @@ class ValidatorChain implements
      * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
      * if one exists, will not be executed.
      *
-     * @param  ValidatorInterface $validator
+     * @param  ValidatorInterface      $validator
      * @param  boolean                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
     public function prependValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
     {
-        array_unshift($this->validators, array(
-            'instance'            => $validator,
-            'breakChainOnFailure' => (boolean) $breakChainOnFailure
-        ));
+        array_unshift($this->validators,
+                      array(
+                           'instance'            => $validator,
+                           'breakChainOnFailure' => (boolean)$breakChainOnFailure
+                      )
+        );
         return $this;
     }
 
     /**
      * Use the plugin manager to add a validator by name
-     * 
-     * @param  string $name 
-     * @param  array $options 
-     * @param  bool $breakChainOnFailure 
+     *
+     * @param  string $name
+     * @param  array  $options
+     * @param  bool   $breakChainOnFailure
      * @return ValidatorChain
      */
     public function addByName($name, $options = array(), $breakChainOnFailure = false)
@@ -162,10 +164,10 @@ class ValidatorChain implements
 
     /**
      * Use the plugin manager to prepend a validator by name
-     * 
-     * @param  string $name 
-     * @param  array $options 
-     * @param  bool $breakChainOnFailure 
+     *
+     * @param  string $name
+     * @param  array  $options
+     * @param  bool   $breakChainOnFailure
      * @return ValidatorChain
      */
     public function prependByName($name, $options = array(), $breakChainOnFailure = false)
@@ -188,16 +190,16 @@ class ValidatorChain implements
     {
         $this->messages = array();
         $this->errors   = array();
-        $result = true;
+        $result         = true;
         foreach ($this->validators as $element) {
             $validator = $element['instance'];
             if ($validator->isValid($value, $context)) {
                 continue;
             }
-            $result = false;
-            $messages = $validator->getMessages();
+            $result         = false;
+            $messages       = $validator->getMessages();
             $this->messages = array_merge($this->messages, $messages);
-            $this->errors   = array_merge($this->errors,   array_keys($messages));
+            $this->errors   = array_merge($this->errors, array_keys($messages));
             if ($element['breakChainOnFailure']) {
                 break;
             }
@@ -228,8 +230,8 @@ class ValidatorChain implements
 
     /**
      * Invoke chain as command
-     * 
-     * @param  mixed $value 
+     *
+     * @param  mixed $value
      * @return boolean
      */
     public function __invoke($value)

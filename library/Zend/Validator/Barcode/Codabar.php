@@ -30,8 +30,6 @@ class Codabar extends AbstractAdapter
 {
     /**
      * Constructor for this barcode adapter
-     *
-     * @return void
      */
     public function __construct()
     {

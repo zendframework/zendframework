@@ -21,7 +21,6 @@
 
 namespace ZendTest\Validator\Db;
 
-use ReflectionClass;
 use Zend\Validator\Db\NoRecordExists;
 use ArrayObject;
 
@@ -213,36 +212,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     public function testEqualsMessageTemplates()
     {
         $validator  = new NoRecordExists('users', 'field1');
-        $reflection = new ReflectionClass($validator);
-
-        if (!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
-    }
-
-    public function testEqualsMessageVariables()
-    {
-        $validator  = new NoRecordExists('users', 'field1');
-        $reflection = new ReflectionClass($validator);
-
-        if (!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 namespace Zend\Validator\Barcode;
+
 class MyBarcode5
 {
     public function __construct()

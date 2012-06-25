@@ -20,18 +20,9 @@
  */
 
 namespace ZendTest\Validator;
-use Zend\Validator,
-    Zend\Locale,
-    ReflectionClass;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validator_Int
- */
-
+use Zend\Validator\Int;
+use Zend\Locale;
 
 /**
  * @category   Zend
@@ -44,20 +35,13 @@ use Zend\Validator,
 class IntTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validator_Int object
-     *
-     * @var \Zend\Validator\Int
+     * @var Int
      */
-    protected $_validator;
+    protected $validator;
 
-    /**
-     * Creates a new Zend_Validator_Int object for each test method
-     *
-     * @return void
-     */
     public function setUp()
     {
-        $this->_validator = new Validator\Int();
+        $this->validator = new Int();
     }
 
     /**
@@ -67,7 +51,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
-        $this->_validator->setLocale('en');
+        $this->validator->setLocale('en');
         $valuesExpected = array(
             array(1.00, true),
             array(0.00, true),
@@ -82,7 +66,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
             );
 
         foreach ($valuesExpected as $element) {
-            $this->assertEquals($element[1], $this->_validator->isValid($element[0]),
+            $this->assertEquals($element[1], $this->validator->isValid($element[0]),
                 'Test failed with ' . var_export($element, 1));
         }
     }
@@ -94,7 +78,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessages()
     {
-        $this->assertEquals(array(), $this->_validator->getMessages());
+        $this->assertEquals(array(), $this->validator->getMessages());
     }
 
     /**
@@ -102,10 +86,10 @@ class IntTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingLocales()
     {
-        $this->_validator->setLocale('de');
-        $this->assertEquals('de', $this->_validator->getLocale());
-        $this->assertEquals(false, $this->_validator->isValid('10 000'));
-        $this->assertEquals(true, $this->_validator->isValid('10.000'));
+        $this->validator->setLocale('de');
+        $this->assertEquals('de', $this->validator->getLocale());
+        $this->assertEquals(false, $this->validator->isValid('10 000'));
+        $this->assertEquals(true, $this->validator->isValid('10.000'));
     }
 
     /**
@@ -113,7 +97,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
      */
     public function testNonStringValidation()
     {
-        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+        $this->assertFalse($this->validator->isValid(array(1 => 1)));
     }
 
     /**
@@ -122,7 +106,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function testUsingApplicationLocale()
     {
         \Zend\Registry::set('Zend_Locale', new Locale\Locale('de'));
-        $valid = new Validator\Int();
+        $valid = new Int();
         $this->assertTrue($valid->isValid('10.000'));
     }
 
@@ -132,44 +116,15 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function testLocaleDetectsNoEnglishLocaleOnOtherSetLocale()
     {
         \Zend\Registry::set('Zend_Locale', new Locale\Locale('de'));
-        $valid = new Validator\Int();
+        $valid = new Int();
         $this->assertTrue($valid->isValid(1200));
         $this->assertFalse($valid->isValid('1,200'));
     }
-    
+
     public function testEqualsMessageTemplates()
     {
-        $validator = $this->_validator;
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
-    }
-    
-    public function testEqualsMessageVariables()
-    {
-        $validator = $this->_validator;
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $validator = $this->validator;
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
 }

@@ -22,9 +22,9 @@
 
 namespace ZendTest\Service\Amazon\SimpleDb;
 
-use Zend\Service\Amazon\SimpleDb,
-    Zend\Service\Amazon\SimpleDb\Exception,
-    Zend\Http\Client\Adapter\Socket;
+use Zend\Service\Amazon\SimpleDb;
+use Zend\Service\Amazon\SimpleDb\Exception;
+use Zend\Http\Client\Adapter\Socket;
 
 
 /**

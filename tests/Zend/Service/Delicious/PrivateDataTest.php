@@ -20,10 +20,10 @@
  */
 
 namespace ZendTest\Service\Delicious\PrivateData;
-use \Zend\Service\Delicious,
-    \Zend\Http,
-    \Zend\Rest\Client as RestClient,
-    \Zend\Date\Date;
+use \Zend\Service\Delicious;
+use \Zend\Http;
+use \Zend\Rest\Client as RestClient;
+use \Zend\Date\Date;
 
 /**
  * @category   Zend_Service

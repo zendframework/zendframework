@@ -21,10 +21,10 @@
 
 namespace ZendTest\Twitter;
 
-use Zend\Service\Twitter,
-    Zend\Service,
-    Zend\Http,
-    Zend\Rest;
+use Zend\Service\Twitter;
+use Zend\Service;
+use Zend\Http;
+use Zend\Rest;
 
 /**
  * @category   Zend

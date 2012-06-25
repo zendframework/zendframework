@@ -82,7 +82,15 @@ class Bcrypt implements PasswordInterface
             $salt = $this->salt;
         }
         $salt64 = substr(str_replace('+', '.', base64_encode($salt)), 0, 22);
-        $hash   = crypt($password, '$2a$' . $this->cost . '$' . $salt64);
+        $code   = '$2a$';
+        /**
+         * @see http://php.net/security/crypt_blowfish.php
+         * @see http://en.wikipedia.org/wiki/Crypt_%28Unix%29#Blowfish-based_scheme
+         */
+        if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
+            $code = '$2y$';
+        }
+        $hash   = crypt($password, $code . $this->cost . '$' . $salt64);
         if (strlen($hash) <= 13) {
             throw new Exception\RuntimeException('Error during the bcrypt generation');
         }

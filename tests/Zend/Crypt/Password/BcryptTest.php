@@ -54,7 +54,11 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         }
         $this->salt           = '1234567890123456';
         $this->password       = 'test';
-        $this->bcryptPassword = '$2a$14$MTIzNDU2Nzg5MDEyMzQ1NeWUUefVlefsTbFhsbqKFv/vPSZBrSFVm';
+        if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
+            $this->bcryptPassword = '$2y$14$MTIzNDU2Nzg5MDEyMzQ1NeWUUefVlefsTbFhsbqKFv/vPSZBrSFVm';
+        } else {
+            $this->bcryptPassword = '$2a$14$MTIzNDU2Nzg5MDEyMzQ1NeWUUefVlefsTbFhsbqKFv/vPSZBrSFVm';
+        }    
     }
 
     public function testConstructByOptions()

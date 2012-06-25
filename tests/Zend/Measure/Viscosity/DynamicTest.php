@@ -20,9 +20,9 @@
  */
 
 namespace ZendTest\Measure\Viscosity;
-use Zend\Measure,
-    Zend\Measure\Viscosity,
-    ZendTest\Measure\CommonTestCase;
+use Zend\Measure;
+use Zend\Measure\Viscosity;
+use ZendTest\Measure\CommonTestCase;
 
 /**
  * @category   Zend

@@ -23,6 +23,7 @@ namespace Zend\Form\Element;
 
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
+use Zend\Validator\Regex as RegexValidator;
 use Zend\Validator\DateStep as DateStepValidator;
 use Zend\Validator\ValidatorInterface;
 
@@ -33,7 +34,7 @@ use Zend\Validator\ValidatorInterface;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Time extends DateTime
+class Month extends DateTime
 {
     /**
      * Seed attributes
@@ -41,26 +42,36 @@ class Time extends DateTime
      * @var array
      */
     protected $attributes = array(
-        'type' => 'time',
+        'type' => 'month',
     );
 
     /**
-     * Retrieves a DateStepValidator configured for a Date Input type
+     * Retrieves a Date Validator configured for a Month Input type
+     *
+     * @return ValidatorInterface
+     */
+    protected function getDateValidator()
+    {
+        return new RegexValidator('/^#[0-9]{4}\-(0?[1-9]|1[012])$/');
+    }
+
+    /**
+     * Retrieves a DateStep Validator configured for a Month Input type
      *
      * @return ValidatorInterface
      */
     protected function getStepValidator()
     {
         $stepValue = (isset($this->attributes['step']))
-                     ? $this->attributes['step'] : 1; // Minutes
+                     ? $this->attributes['step'] : 1; // Months
 
         $baseValue = (isset($this->attributes['min']))
-                     ? $this->attributes['min'] : '00:00:00';
+                     ? $this->attributes['min'] : '1970-01-01T00:00:00Z';
 
         return new DateStepValidator(array(
-            'format'       => 'H:i:s',
+            'format'       => "Y-m",
             'baseValue'    => $baseValue,
-            'stepInterval' => new \DateInterval("PT{$stepValue}M"),
+            'stepInterval' => new \DateInterval("P{$stepValue}M"),
         ));
     }
 }

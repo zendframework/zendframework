@@ -21,12 +21,8 @@
 
 namespace Zend\Form\Element;
 
-use Zend\Date\Date as ZendDate;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
-use Zend\Validator\Date as DateValidator;
-use Zend\Validator\GreaterThan as GreaterThanValidator;
-use Zend\Validator\LessThan as LessThanValidator;
 use Zend\Validator\DateStep as DateStepValidator;
 use Zend\Validator\ValidatorInterface;
 
@@ -51,7 +47,7 @@ class Date extends DateTime
     /**
      * Retrieves a DateStep Validator configured for a Date Input type
      *
-     * @return DateStepValidator
+     * @return ValidatorInterface
      */
     protected function getStepValidator()
     {
@@ -62,11 +58,9 @@ class Date extends DateTime
                      ? $this->attributes['min'] : '1970-01-01T00:00:00Z';
 
         return new DateStepValidator(array(
-            'format'       => ZendDate::ISO_8601,
+            'format'       => \DateTime::ISO8601,
             'baseValue'    => $baseValue,
-            'stepValue'    => $stepValue,
-            'stepDatePart' => ZendDate::DAY,
+            'stepInterval' => new \DateInterval("P{$stepValue}D"),
         ));
     }
-
 }

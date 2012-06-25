@@ -72,12 +72,10 @@ class DateTime extends Element implements InputProviderInterface
      */
     public function getValidators()
     {
-        if (null === $this->validator) {
+        if (null === $this->validators) {
             $validators = array();
 
-            $validators[] = new DateValidator(array(
-                'format' => ZendDate::ISO_8601
-            ));
+            $validators[] = $this->getDateValidator();
             if (isset($this->attributes['min'])) {
                 $validators[] = new GreaterThanValidator(array(
                     'min'       => $this->attributes['min'],
@@ -90,19 +88,31 @@ class DateTime extends Element implements InputProviderInterface
                     'inclusive' => true,
                 ));
             }
-            if (isset($this->attributes['step']) && 'any' !== $this->attributes['step']) {
+            if (!isset($this->attributes['step'])
+                || 'any' !== $this->attributes['step']
+            ) {
                 $validators[] = $this->getStepValidator();
             }
 
             $this->setValidators($validators);
         }
-        return $this->validator;
+        return $this->validators;
+    }
+
+    /**
+     * Retrieves a Date Validator configured for a DateTime Input type
+     *
+     * @return ValidatorInterface
+     */
+    protected function getDateValidator()
+    {
+        return new DateValidator(array('format' => ZendDate::ISO_8601));
     }
 
     /**
      * Retrieves a DateStep Validator configured for a DateTime Input type
      *
-     * @return DateStepValidator
+     * @return ValidatorInterface
      */
     protected function getStepValidator()
     {
@@ -110,13 +120,12 @@ class DateTime extends Element implements InputProviderInterface
                      ? $this->attributes['step'] : 1; // Minutes
 
         $baseValue = (isset($this->attributes['min']))
-                     ? $this->attributes['min'] : '1970-01-01T00:00:00';
+                     ? $this->attributes['min'] : '1970-01-01T00:00:00Z';
 
         return new DateStepValidator(array(
-            'format'       => ZendDate::ISO_8601,
+            'format'       => \DateTime::ISO8601,
             'baseValue'    => $baseValue,
-            'stepValue'    => $stepValue,
-            'stepDatePart' => ZendDate::MINUTE,
+            'stepInterval' => new \DateInterval("PT{$stepValue}M"),
         ));
     }
 

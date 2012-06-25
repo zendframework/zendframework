@@ -21,10 +21,10 @@
 namespace Zend\Validator;
 
 use Traversable;
-use Zend\Date as ZendDate;
-use Zend\Locale\Format;
-use Zend\Locale\Locale;
-use Zend\Registry;
+use DateTime;
+use DateTimeZone;
+use DateInterval;
+use DatePeriod;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\Exception;
 
@@ -52,41 +52,32 @@ class DateStep extends AbstractValidator
     /**
      * Optional base date value
      *
-     * @var string|integer|array|\Zend\Date\Date
+     * @var string|integer|\DateTime
      */
-    protected $baseValue = 0;
+    protected $baseValue = '1970-01-01T00:00:00Z';
 
     /**
-     * Optional date step value (defaults to 1)
+     * Date step interval (defaults to 1 day).
+     * Uses the DateInterval specification.
      *
-     * @var string|integer|array|\Zend\Date\Date
+     * @var DateInterval
      */
-    protected $stepValue = 1;
+    protected $stepInterval;
 
     /**
-     * Optional date step value (defaults to \Zend\Date\Date::DAY)
+     * Format to use for parsing date strings
      *
      * @var string
      */
-    protected $stepDatePart = ZendDate\Date::DAY;
+    protected $format = DateTime::ISO8601;
 
     /**
-     * Optional format to be used when the baseValue
-     * and validation value are strings to be converted
-     * to \Zend\Date\Date objects.
+     * Optional timezone to be used when the baseValue
+     * and validation values do not contain timezone info
      *
-     * @var string|null
+     * @var DateTimeZone
      */
-    protected $format;
-
-    /**
-     * Optional locale to be used when the baseValue
-     * and validation value are strings to be converted
-     * to \Zend\Date\Date objects.
-     *
-     * @var string|\Zend\Locale\Locale|null
-     */
-    protected $locale;
+    protected $timezone;
 
     /**
      * Set default options for this instance
@@ -101,7 +92,13 @@ class DateStep extends AbstractValidator
             $options = func_get_args();
             $temp['baseValue'] = array_shift($options);
             if (!empty($options)) {
-                $temp['step'] = array_shift($options);
+                $temp['stepInterval'] = array_shift($options);
+            }
+            if (!empty($options)) {
+                $temp['format'] = array_shift($options);
+            }
+            if (!empty($options)) {
+                $temp['timezone'] = array_shift($options);
             }
 
             $options = $temp;
@@ -110,22 +107,18 @@ class DateStep extends AbstractValidator
         if (isset($options['baseValue'])) {
             $this->setBaseValue($options['baseValue']);
         }
-        if (isset($options['stepValue'])) {
-            $this->setStepValue($options['stepValue']);
-        }
-        if (isset($options['stepDatePart'])) {
-            $this->setStepDatePart($options['stepDatePart']);
+        if (isset($options['stepInterval'])) {
+            $this->setStepInterval($options['stepInterval']);
+        } else {
+            $this->setStepInterval(new DateInterval('P1D'));
         }
         if (array_key_exists('format', $options)) {
             $this->setFormat($options['format']);
         }
-        if (!isset($options['locale'])) {
-            if (Registry::isRegistered('Zend_Locale')) {
-                $options['locale'] = Registry::get('Zend_Locale');
-            }
-        }
-        if (isset($options['locale'])) {
-            $this->setLocale($options['locale']);
+        if (isset($options['timezone'])) {
+            $this->setTimezone($options['timezone']);
+        } else {
+            $this->setTimezone(new DateTimeZone(date_default_timezone_get()));
         }
 
         parent::__construct($options);
@@ -134,7 +127,7 @@ class DateStep extends AbstractValidator
     /**
      * Sets the base value from which the step should be computed
      *
-     * @param  string|integer|array|\Zend\Date\Date $baseValue
+     * @param  string|integer|\DateTime $baseValue
      * @return DateStep
      */
     public function setBaseValue($baseValue)
@@ -146,7 +139,7 @@ class DateStep extends AbstractValidator
     /**
      * Returns the base value from which the step should be computed
      *
-     * @return string|integer|array|\Zend\Date\Date
+     * @return string|integer|\DateTime
      */
     public function getBaseValue()
     {
@@ -154,53 +147,31 @@ class DateStep extends AbstractValidator
     }
 
     /**
-     * Sets the step value
+     * Sets the step date interval
      *
-     * @param  string|integer|array|\Zend\Date\Date $step
+     * @param  DateInterval $stepValue
      * @return DateStep
      */
-    public function setStepValue($stepValue)
+    public function setStepInterval(DateInterval $stepInterval)
     {
-        $this->stepValue = $stepValue;
+        $this->stepInterval = $stepInterval;
         return $this;
     }
 
     /**
-     * Returns the step value
+     * Returns the step date interval
      *
-     * @return string|integer|array|\Zend\Date\Date
+     * @return DateInterval
      */
-    public function getStepValue()
+    public function getStepInterval()
     {
-        return $this->stepValue;
-    }
-
-    /**
-     * Sets the step date part
-     *
-     * @param  string $stepDatePart
-     * @return DateStep
-     */
-    public function setStepDatePart($stepDatePart)
-    {
-        $this->stepDatePart = $stepDatePart;
-        return $this;
-    }
-
-    /**
-     * Returns the step date part
-     *
-     * @return string
-     */
-    public function getStepDatePart()
-    {
-        return $this->stepValue;
+        return $this->stepInterval;
     }
 
     /**
      * Returns the format option
      *
-     * @return string|null
+     * @return string
      */
     public function getFormat()
     {
@@ -213,48 +184,79 @@ class DateStep extends AbstractValidator
      * @param  string $format
      * @return DateStep
      */
-    public function setFormat($format = null)
+    public function setFormat($format)
     {
         $this->format = $format;
         return $this;
     }
 
     /**
-     * Returns the locale option
+     * Returns the timezone option
      *
-     * @return string|Locale|null
+     * @return DateTimeZone
      */
-    public function getLocale()
+    public function getTimezone()
     {
-        return $this->locale;
+        return $this->timezone;
     }
 
     /**
-     * Sets the locale option
+     * Sets the timezone option
      *
-     * @param  string|Locale $locale
+     * @param  DateTimeZone $timezone
      * @return DateStep
      */
-    public function setLocale($locale = null)
+    public function setTimezone(DateTimeZone $timezone)
     {
-        $this->locale = Locale::findLocale($locale);
+        $this->timezone = $timezone;
         return $this;
     }
 
     /**
-     * Returns true if $value is a scalar and a valid step value
+     * Converts an int or string to a DateTime object
      *
-     * @param mixed $value
+     * @param  string|integer|\DateTime $param
+     * @return \DateTime
+     * @throws Exception\InvalidArgumentException
+     */
+    protected function convertToDateTime($param)
+    {
+        $dateObj = $param;
+        if (is_int($param)) {
+            // Convert from timestamp
+            $dateObj = date_create("@$param");
+        } else if (is_string($param)) {
+            // Custom week format support
+            if (strpos($this->getFormat(), 'Y-\WW') === 0
+                && preg_match('/^([0-9]{4})\-W([0-9]{2})/', $param, $matches)
+            ) {
+                $dateObj = new DateTime();
+                $dateObj->setISODate($matches[1], $matches[2]);
+            } else {
+                $dateObj = DateTime::createFromFormat(
+                    $this->getFormat(), $param, $this->getTimezone()
+                );
+            }
+        }
+        if (!($dateObj instanceof DateTime)) {
+            throw new Exception\InvalidArgumentException('Invalid date param given');
+        }
+
+        return $dateObj;
+    }
+
+    /**
+     * Returns true if a date is within a valid step
+     *
+     * @param  string|integer|\DateTime $value
      * @return bool
-     * @throws Exception\InvalidArgumentException|\Zend\Date\Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function isValid($value)
     {
         if (!is_string($value)
             && !is_int($value)
-            && !is_float($value)
-            && !is_array($value)
-            && !($value instanceof ZendDate\Date)
+            && !($value instanceof DateTime)
         ) {
             $this->error(self::INVALID);
             return false;
@@ -262,39 +264,155 @@ class DateStep extends AbstractValidator
 
         $this->setValue($value);
 
-        $format       = $this->getFormat();
-        $locale       = $this->getLocale();
-        $baseValue    = $this->getBaseValue();
-        $stepValue    = $this->getStepValue();
-        $stepDatePart = $this->getStepDatePart();
+        $baseDate     = $this->convertToDateTime($this->getBaseValue());
+        $stepInterval = $this->getStepInterval();
 
-        // Confirm that baseValue and value are dates
-        if (!ZendDate\Date::isDate($baseValue, $format, $locale)) {
-            throw new Exception\InvalidArgumentException('Invalid baseValue given');
-        }
-
-        if (!ZendDate\Date::isDate($value, $format, $locale)) {
+        // Parse the date
+        try {
+            $valueDate = $this->convertToDateTime($value);
+        } catch (Exception\InvalidArgumentException $ex) {
             $this->error(self::INVALID_DATE);
             return false;
         }
 
-        // Convert baseValue and value to Date objects
-        $baseDate  = new ZendDate\Date($baseValue, $format, $locale);
-        $valueDate = new ZendDate\Date($value, $format, $locale);
-
-        if ($valueDate->equals($baseDate)) {
+        // Same date?
+        if ($valueDate == $baseDate) {
             return true;
         }
 
-        // Keep adding steps to the base date until a match is found
-        // or until the value is exceeded
-        while ($baseDate->isEarlier($valueDate)) {
-            $baseDate->add($stepValue, $stepDatePart, $locale);
-            if ($baseDate->equals($valueDate)) {
-                return true;
+        // Optimization for simple intervals.
+        // Handle intervals of just one date or time unit.
+        $intervalParts = explode('|', $stepInterval->format('%y|%m|%d|%h|%i|%s'));
+        $partCounts    = array_count_values($intervalParts);
+        if (5 === $partCounts["0"]) {
+            // Find the unit with the non-zero interval
+            $unitKeys = array('years', 'months', 'days', 'hours', 'minutes', 'seconds');
+            $intervalParts = array_combine($unitKeys, $intervalParts);
+
+            $intervalUnit = null;
+            $stepValue    = null;
+            foreach ($intervalParts as $key => $value) {
+                if (0 != $value) {
+                    $intervalUnit = $key;
+                    $stepValue    = (int)$value;
+                    break;
+                }
+            }
+
+            // Get absolute time difference
+            $timeDiff  = $valueDate->diff($baseDate, true);
+            $diffParts = explode('|', $timeDiff->format('%y|%m|%d|%h|%i|%s'));
+            $diffParts = array_combine($unitKeys, $diffParts);
+
+            // Check date units
+            if (in_array($intervalUnit, array('years', 'months', 'days'))) {
+                switch ($intervalUnit) {
+                    case 'years':
+                        if (   0 == $diffParts['months']  && 0 == $diffParts['days']
+                            && 0 == $diffParts['hours']   && 0 == $diffParts['minutes']
+                            && 0 == $diffParts['seconds']
+                        ) {
+                            if (($diffParts['years'] % $stepValue) === 0) {
+                                return true;
+                            }
+                        }
+                        break;
+                    case 'months':
+                        if (   0 == $diffParts['days']    && 0 == $diffParts['hours']
+                            && 0 == $diffParts['minutes'] && 0 == $diffParts['seconds']
+                        ) {
+                            $months = ($diffParts['years'] * 12) + $diffParts['months'];
+                            if (($months % $stepValue) === 0) {
+                                return true;
+                            }
+                        }
+                        break;
+                    case 'days':
+                        if (   0 == $diffParts['hours'] && 0 == $diffParts['minutes']
+                            && 0 == $diffParts['seconds']
+                        ) {
+                            $days = $timeDiff->format('%a'); // Total days
+                            if (($days % $stepValue) === 0) {
+                                return true;
+                            }
+                        }
+                        break;
+                }
+                $this->error(self::NOT_STEP);
+                return false;
+            }
+
+            // Check time units
+            if (in_array($intervalUnit, array('hours', 'minutes', 'seconds'))) {
+
+                // Simple test if $stepValue is 1.
+                if (1 == $stepValue) {
+                    if ('hours' === $intervalUnit
+                        && 0 == $diffParts['minutes'] && 0 == $diffParts['seconds']
+                    ) {
+                        return true;
+                    } else if ('minutes' === $intervalUnit && 0 == $diffParts['seconds']) {
+                        return true;
+                    } else if ('seconds' === $intervalUnit) {
+                        return true;
+                    }
+                }
+
+                // Simple test for same day, when using default baseDate
+                if ($baseDate->format('Y-m-d') == $valueDate->format('Y-m-d')
+                    && $baseDate->format('Y-m-d') == '1970-01-01'
+                ) {
+                    switch ($intervalUnit) {
+                        case 'hours':
+                            if (0 == $diffParts['minutes'] && 0 == $diffParts['seconds']) {
+                                if (($diffParts['hours'] % $stepValue) === 0) {
+                                    return true;
+                                }
+                            }
+                            break;
+                        case 'minutes':
+                            if (0 == $diffParts['seconds']) {
+                                $minutes = ($diffParts['hours'] * 60) + $diffParts['minutes'];
+                                if (($minutes % $stepValue) === 0) {
+                                    return true;
+                                }
+                            }
+                            break;
+                        case 'seconds':
+                            $seconds = ($diffParts['hours'] * 60)
+                                       + ($diffParts['minutes'] * 60)
+                                       + $diffParts['seconds'];
+                            if (($seconds % $stepValue) === 0) {
+                                return true;
+                            }
+                            break;
+                    }
+                    $this->error(self::NOT_STEP);
+                    return false;
+                }
             }
         }
 
+        // Fall back to slower (but accurate) method for complex intervals.
+        // Keep adding steps to the base date until a match is found
+        // or until the value is exceeded.
+        if ($baseDate < $valueDate) {
+            while ($baseDate < $valueDate) {
+                $baseDate->add($stepInterval);
+                if ($baseDate == $valueDate) {
+                    return true;
+                }
+            }
+        } else {
+            while ($baseDate > $valueDate) {
+                $baseDate->sub($stepInterval);
+                if ($baseDate == $valueDate) {
+                    return true;
+                }
+            }
+        }
+
+        $this->error(self::NOT_STEP);
         return false;
     }
 }

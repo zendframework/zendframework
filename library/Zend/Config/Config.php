@@ -20,9 +20,9 @@
 
 namespace Zend\Config;
 
-use Countable,
-    Iterator,
-    ArrayAccess,
+use Countable;
+use Iterator;
+use ArrayAccess,
     Zend\Stdlib\ArrayUtils
 ;
 

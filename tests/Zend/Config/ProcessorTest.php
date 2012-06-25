@@ -21,17 +21,17 @@
 
 namespace ZendTest\Config;
 
-use Zend\Config\Config,
-Zend\Config\Processor\Token as TokenProcessor,
-Zend\Config\Processor\Translator as TranslatorProcessor,
-Zend\Config\Processor\Filter as FilterProcessor,
-Zend\Config\Processor\Constant as ConstantProcessor,
-Zend\Config\Processor\Queue as Queue,
-Zend\Translator\Translator,
-Zend\Translator\Adapter\ArrayAdapter,
-Zend\Filter\StringToLower,
-Zend\Filter\StringToUpper,
-Zend\Filter\PregReplace;
+use Zend\Config\Config;
+use Zend\Config\Processor\Token as TokenProcessor;
+use Zend\Config\Processor\Translator as TranslatorProcessor;
+use Zend\Config\Processor\Filter as FilterProcessor;
+use Zend\Config\Processor\Constant as ConstantProcessor;
+use Zend\Config\Processor\Queue as Queue;
+use Zend\Translator\Translator;
+use Zend\Translator\Adapter\ArrayAdapter;
+use Zend\Filter\StringToLower;
+use Zend\Filter\StringToUpper;
+use Zend\Filter\PregReplace;
 
 /**
  * @category   Zend

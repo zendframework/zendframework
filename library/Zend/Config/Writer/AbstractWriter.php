@@ -20,10 +20,10 @@
 
 namespace Zend\Config\Writer;
 
-use Zend\Config\Exception,
-    Zend\Config\Config,
-    Zend\Stdlib\ArrayUtils,
-    Traversable;
+use Traversable;
+use Zend\Config\Exception;
+use Zend\Config\Config;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -41,6 +41,8 @@ abstract class AbstractWriter implements WriterInterface
      * @param  mixed   $config
      * @param  boolean $exclusiveLock
      * @return void
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public function toFile($filename, $config, $exclusiveLock = true)
     {
@@ -72,6 +74,7 @@ abstract class AbstractWriter implements WriterInterface
      * @see    WriterInterface::toString()
      * @param  mixed   $config
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function toString($config)
     {

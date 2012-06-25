@@ -21,9 +21,9 @@
 
 namespace ZendTest\Config\Writer;
 
-use \Zend\Config\Writer\Json as JsonWriter,
-    \Zend\Config\Config,
-    \Zend\Config\Reader\Json as JsonReader;
+use \Zend\Config\Writer\Json as JsonWriter;
+use \Zend\Config\Config;
+use \Zend\Config\Reader\Json as JsonReader;
 
 /**
  * @category   Zend

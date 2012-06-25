@@ -22,9 +22,8 @@ namespace Zend\View\Renderer;
 
 use ArrayAccess,
     Zend\Filter\FilterChain,
-    Zend\Loader\Pluggable,
     Zend\View\Exception,
-    Zend\View\HelperBroker,
+    Zend\View\HelperPluginManager,
     Zend\View\Model\ModelInterface as Model,
     Zend\View\Resolver\TemplatePathStack,
     Zend\View\Renderer\RendererInterface as Renderer,
@@ -43,7 +42,7 @@ use ArrayAccess,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
+class PhpRenderer implements Renderer, TreeRendererInterface
 {
     /**
      * @var string Rendered content
@@ -83,11 +82,11 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
     private $__file = null;
 
     /**
-     * Helper broker
+     * Helper plugin manager
      *
-     * @var HelperBroker
+     * @var HelperPluginManager
      */
-    private $__helperBroker;
+    private $__helpers;
 
     /**
      * @var Zend\Filter\FilterChain
@@ -108,7 +107,7 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      * Constructor.
      *
      *
-     * @todo handle passing helper broker, options
+     * @todo handle passing helper plugin manager, options
      * @todo handle passing filter chain, options
      * @todo handle passing variables object, options
      * @todo handle passing resolver object, options
@@ -292,44 +291,44 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
     }
 
     /**
-     * Set plugin broker instance
+     * Set helper plugin manager instance
      * 
-     * @param  string|HelperBroker $broker 
+     * @param  string|HelperPluginManager $helpers 
      * @return void
      * @throws Exception\InvalidArgumentException
      */
-    public function setBroker($broker)
+    public function setHelperPluginManager($helpers)
     {
-        if (is_string($broker)) {
-            if (!class_exists($broker)) {
+        if (is_string($helpers)) {
+            if (!class_exists($helpers)) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                    'Invalid helper broker class provided (%s)',
-                    $broker
+                    'Invalid helper helpers class provided (%s)',
+                    $helpers
                 ));
             }
-            $broker = new $broker();
+            $helpers = new $helpers();
         }
-        if (!$broker instanceof HelperBroker) {
+        if (!$helpers instanceof HelperPluginManager) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Helper broker must extend Zend\View\HelperBroker; got type "%s" instead',
-                (is_object($broker) ? get_class($broker) : gettype($broker))
+                'Helper helpers must extend Zend\View\HelperPluginManager; got type "%s" instead',
+                (is_object($helpers) ? get_class($helpers) : gettype($helpers))
             ));
         }
-        $broker->setView($this);
-        $this->__helperBroker = $broker;
+        $helpers->setRenderer($this);
+        $this->__helpers = $helpers;
     }
 
     /**
-     * Get plugin broker instance
+     * Get helper plugin manager instance
      * 
-     * @return HelperBroker
+     * @return HelperPluginManager
      */
-    public function getBroker()
+    public function getHelperPluginManager()
     {
-        if (null === $this->__helperBroker) {
-            $this->setBroker(new HelperBroker());
+        if (null === $this->__helpers) {
+            $this->setHelperPluginManager(new HelperPluginManager());
         }
-        return $this->__helperBroker;
+        return $this->__helpers;
     }
     
     /**
@@ -341,13 +340,13 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      */
     public function plugin($name, array $options = null)
     {
-        return $this->getBroker()->load($name, $options);
+        return $this->getHelperPluginManager()->get($name, $options);
     }
 
     /**
      * Overloading: proxy to helpers
      *
-     * Proxies to the attached plugin broker to retrieve, return, and potentially
+     * Proxies to the attached plugin manager to retrieve, return, and potentially
      * execute helpers.
      *
      * * If the helper does not define __invoke, it will be returned

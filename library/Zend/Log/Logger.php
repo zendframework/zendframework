@@ -23,8 +23,6 @@ namespace Zend\Log;
 use DateTime,
     Zend\Stdlib\SplPriorityQueue,
     Traversable,
-    Zend\Loader\Broker,
-    Zend\Loader\Pluggable,
     Zend\Stdlib\ArrayUtils;
 
 /**
@@ -35,7 +33,7 @@ use DateTime,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Logger implements LoggerInterface, Pluggable
+class Logger implements LoggerInterface
 {
     /**
      * @const int defined from the BSD Syslog message severities
@@ -82,11 +80,11 @@ class Logger implements LoggerInterface, Pluggable
     protected $writers;
 
     /**
-     * Writer broker
+     * Writer plugins
      *
-     * @var WriterBroker
+     * @var WriterPluginManager
      */
-    protected $writerBroker;
+    protected $writerPlugins;
 
     /**
      * Registered error handler
@@ -105,7 +103,7 @@ class Logger implements LoggerInterface, Pluggable
     /**
      * Constructor
      *
-     * @todo support configuration (writers, dateTimeFormat, and broker)
+     * @todo support configuration (writers, dateTimeFormat, and writer plugin manager)
      * @return Logger
      */
     public function __construct()
@@ -151,39 +149,39 @@ class Logger implements LoggerInterface, Pluggable
     }
 
     /**
-     * Get writer broker
+     * Get writer plugin manager
      *
-     * @see Pluggable::getBroker()
-     * @return Broker
+     * @return WriterPluginManager
      */
-    public function getBroker()
+    public function getPluginManager()
     {
-        if (null === $this->writerBroker) {
-            $this->setBroker(new WriterBroker());
+        if (null === $this->writerPlugins) {
+            $this->setPluginManager(new WriterPluginManager());
         }
-        return $this->writerBroker;
+        return $this->writerPlugins;
     }
 
     /**
-     * Set writer broker
+     * Set writer plugin manager
      *
-     * @param string|Broker $broker
+     * @param string|WriterPluginManager $plugins
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */
-    public function setBroker($broker)
+    public function setPluginManager($plugins)
     {
-        if (is_string($broker)) {
-            $broker = new $broker;
+        if (is_string($plugins)) {
+            $plugins = new $plugins;
         }
-        if (!$broker instanceof Broker) {
+        if (!$plugins instanceof WriterPluginManager) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Writer broker must implement Zend\Loader\Broker; received %s',
-                is_object($broker) ? get_class($broker) : gettype($broker)
+                'Writer plugin manager must extend %s\WriterPluginManager; received %s',
+                __NAMESPACE__,
+                is_object($plugins) ? get_class($plugins) : gettype($plugins)
             ));
         }
 
-        $this->writerBroker = $broker;
+        $this->writerPlugins = $plugins;
         return $this;
     }
 
@@ -196,7 +194,7 @@ class Logger implements LoggerInterface, Pluggable
      */
     public function plugin($name, array $options = null)
     {
-        return $this->getBroker()->load($name, $options);
+        return $this->getPluginManager()->get($name, $options);
     }
 
     /**

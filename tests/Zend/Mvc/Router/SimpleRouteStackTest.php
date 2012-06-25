@@ -5,19 +5,19 @@ use PHPUnit_Framework_TestCase as TestCase,
     ArrayIterator,
     Zend\Stdlib\Request,
     Zend\Uri\Http as HttpUri,
-    Zend\Mvc\Router\RouteBroker,
+    Zend\Mvc\Router\RoutePluginManager,
     Zend\Mvc\Router\SimpleRouteStack,
     ZendTest\Mvc\Router\FactoryTester;
 
 class SimpleRouteStackTest extends TestCase
 {
-    public function testSetRouteBroker()
+    public function testSetRoutePluginManager()
     {
-        $broker = new RouteBroker();
+        $routes = new RoutePluginManager();
         $stack  = new SimpleRouteStack();
-        $stack->setRouteBroker($broker);
+        $stack->setRoutePluginManager($routes);
         
-        $this->assertEquals($broker, $stack->routeBroker());
+        $this->assertEquals($routes, $stack->routePluginManager());
     }
     
     public function testAddRoutesWithInvalidArgument()
@@ -234,7 +234,7 @@ class SimpleRouteStackTest extends TestCase
             'Zend\Mvc\Router\SimpleRouteStack',
             array(),
             array(
-                'route_broker'   => new RouteBroker(),
+                'route_plugins'  => new RoutePluginManager(),
                 'routes'         => array(),
                 'default_params' => array()
             )

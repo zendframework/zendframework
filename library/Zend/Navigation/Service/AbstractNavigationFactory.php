@@ -42,7 +42,7 @@ abstract class AbstractNavigationFactory implements FactoryInterface
             }
 
             $application = $serviceLocator->get('Application');
-            $urlHelper   = $serviceLocator->get('ViewHelperBroker')->load('url');
+            $urlHelper   = $serviceLocator->get('ViewHelperManager')->get('url');
             $routeMatch  = $application->getMvcEvent()->getRouteMatch();
             $pages       = $this->getPagesFromConfig($configuration['navigation'][$this->getName()]);
 

@@ -186,7 +186,7 @@ class BaseInputFilterTest extends TestCase
         $this->assertArrayNotHasKey('foo', $invalidInputs);
         $this->assertArrayHasKey('bar', $invalidInputs);
         $this->assertInstanceOf('Zend\InputFilter\Input', $invalidInputs['bar']);
-        $this->assertArrayHasKey('nest', $invalidInputs, var_export($invalidInputs, 1));
+        $this->assertArrayHasKey('nest', $invalidInputs/*, var_export($invalidInputs, 1)*/);
         $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $invalidInputs['nest']);
         $nestInvalids = $invalidInputs['nest']->getInvalidInput();
         $this->assertArrayHasKey('foo', $nestInvalids);

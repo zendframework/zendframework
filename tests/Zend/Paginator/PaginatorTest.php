@@ -135,7 +135,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
         Paginator\Paginator::setOptions($this->_config->default);
 
-        Paginator\Paginator::setScrollingStyleBroker(new Paginator\ScrollingStyleBroker());
+        Paginator\Paginator::setScrollingStylePluginManager(new Paginator\ScrollingStylePluginManager());
 
         $this->_paginator->setCacheEnabled(true);
     }
@@ -216,11 +216,11 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         Paginator\Paginator::setOptions($this->_config->testing);
         $this->assertEquals('Scrolling', Paginator\Paginator::getDefaultScrollingStyle());
 
-        $broker = Paginator\Paginator::getScrollingStyleBroker();
-        $this->assertInstanceOf('ZendTest\Paginator\TestAsset\ScrollingStyleBroker', $broker);
+        $plugins = Paginator\Paginator::getScrollingStylePluginManager();
+        $this->assertInstanceOf('ZendTest\Paginator\TestAsset\ScrollingStylePluginManager', $plugins);
 
-        $broker = Paginator\Paginator::getAdapterBroker();
-        $this->assertInstanceOf('ZendTest\Paginator\TestAsset\AdapterBroker', $broker);
+        $plugins = Paginator\Paginator::getAdapterPluginManager();
+        $this->assertInstanceOf('ZendTest\Paginator\TestAsset\AdapterPluginManager', $plugins);
 
         $paginator = Paginator\Paginator::factory(range(1, 101));
         $this->assertEquals(3, $paginator->getItemCountPerPage());

@@ -20,8 +20,6 @@
 
 namespace Zend\Markup;
 
-use Zend\Loader\Broker;
-
 /**
  * @category   Zend
  * @package    Zend_Markup
@@ -35,51 +33,51 @@ class Markup
 
 
     /**
-     * The parser broker
+     * The parser plugin manager
      *
-     * @var \Zend\Loader\Broker
+     * @var ParserPluginManager
      */
-    protected static $parserBroker;
+    protected static $parsers;
 
     /**
-     * The renderer broker
+     * The renderer plugin manager
      *
-     * @var \Zend\Loader\Broker
+     * @var RendererPluginManager
      */
-    protected static $rendererBroker;
+    protected static $renderers;
 
 
     /**
-     * Disable instantiation of \Zend\Markup\Markup
+     * Disable instantiation
      */
     private function __construct() { }
 
     /**
-     * Get the parser broker
+     * Get the parser plugin manager
      *
-     * @return \Zend\Loader\Broker
+     * @return ParserPluginManager
      */
-    public static function getParserBroker()
+    public static function getParserPluginManager()
     {
-        if (!self::$parserBroker instanceof Broker) {
-            self::$parserBroker = new ParserBroker();
+        if (!self::$parsers instanceof ParserPluginManager) {
+            self::$parsers = new ParserPluginManager();
         }
 
-        return self::$parserBroker;
+        return self::$parsers;
     }
 
     /**
-     * Get the renderer broker
+     * Get the renderer plugin manager
      *
-     * @return \Zend\Loader\Broker
+     * @return RendererPluginManager
      */
-    public static function getRendererBroker()
+    public static function getRendererPluginManager()
     {
-        if (!self::$rendererBroker instanceof Broker) {
-            self::$rendererBroker = new RendererBroker();
+        if (!self::$renderers instanceof RendererPluginManager) {
+            self::$renderers = new RendererPluginManager();
         }
 
-        return self::$rendererBroker;
+        return self::$renderers;
     }
 
     /**
@@ -89,14 +87,14 @@ class Markup
      * @param  string $renderer
      * @param  array $parserOptions
      * @param  array $rendererOptions
-     * @return \Zend\Markup\Renderer\AbstractRenderer
+     * @return Renderer\AbstractRenderer
      */
     public static function factory($parser, $renderer = 'Html', array $parserOptions = array(), array $rendererOptions = array())
     {
-        $parser         = self::getParserBroker()->load($parser, $parserOptions);
-        $rendererBroker = self::getRendererBroker();
-        $rendererBroker->setParser($parser);
-        $renderer       = $rendererBroker->load($renderer, $rendererOptions);
+        $parser    = self::getParserPluginManager()->get($parser, $parserOptions);
+        $renderers = self::getRendererPluginManager();
+        $renderers->setParser($parser);
+        $renderer  = $renderers->get($renderer, $rendererOptions);
 
         return $renderer;
     }

@@ -20,8 +20,7 @@
 
 namespace Zend\Serializer;
 
-use Zend\Loader\Broker,
-    Zend\Serializer\Adapter\AdapterInterface as Adapter;
+use Zend\Serializer\Adapter\AdapterInterface as Adapter;
 
 /**
  * @category   Zend
@@ -32,11 +31,11 @@ use Zend\Loader\Broker,
 class Serializer
 {
     /**
-     * Broker for loading adapters
+     * Plugin manager for loading adapters
      *
-     * @var null|Zend\Loader\Broker
+     * @var null|AdapterPluginManager
      */
-    private static $_adapterBroker = null;
+    private static $_adapters = null;
 
     /**
      * The default adapter.
@@ -58,53 +57,53 @@ class Serializer
             return $adapterName; // $adapterName is already an adapter object
         }
 
-        return self::getAdapterBroker()->load($adapterName, $opts);
+        return self::getAdapterPluginManager()->get($adapterName, $opts);
     }
 
     /**
-     * Get the adapter broker
+     * Get the adapter plugin manager
      *
-     * @return Broker
+     * @return AdapterPluginManager
      */
-    public static function getAdapterBroker() 
+    public static function getAdapterPluginManager() 
     {
-        if (self::$_adapterBroker === null) {
-            self::$_adapterBroker = self::_getDefaultAdapterBroker();
+        if (self::$_adapters === null) {
+            self::$_adapters = self::_getDefaultAdapterPluginManager();
         }
-        return self::$_adapterBroker;
+        return self::$_adapters;
     }
 
     /**
-     * Change the adapter broker
+     * Change the adapter plugin manager
      *
-     * @param  Broker $broker
+     * @param  AdapterPluginManager $adapters
      * @return void
      */
-    public static function setAdapterBroker(Broker $broker) 
+    public static function setAdapterPluginManager(AdapterPluginManager $adapters) 
     {
-        self::$_adapterBroker = $broker;
+        self::$_adapters = $adapters;
     }
     
     /**
-     * Resets the internal adapter broker
+     * Resets the internal adapter plugin manager
      *
-     * @return Broker
+     * @return AdapterPluginManager
      */
-    public static function resetAdapterBroker()
+    public static function resetAdapterPluginManager()
     {
-        self::$_adapterBroker = self::_getDefaultAdapterBroker();
-        return self::$_adapterBroker;
+        self::$_adapters = self::_getDefaultAdapterPluginManager();
+        return self::$_adapters;
     }
     
     /**
-     * Returns a default adapter broker
+     * Returns a default adapter plugin manager
      *
-     * @return Broker
+     * @return AdapterPluginManager
      */
-    protected static function _getDefaultAdapterBroker()
+    protected static function _getDefaultAdapterPluginManager()
     {
-        $broker = new AdapterBroker();
-        return $broker;
+        $adapters = new AdapterPluginManager();
+        return $adapters;
     }
 
     /**

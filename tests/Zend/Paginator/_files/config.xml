@@ -6,8 +6,8 @@
     </default>
     <testing>
 	    <scrolling_style>Scrolling</scrolling_style>
-        <scrolling_style_broker>ZendTest\Paginator\TestAsset\ScrollingStyleBroker</scrolling_style_broker>
-        <adapter_broker>ZendTest\Paginator\TestAsset\AdapterBroker</adapter_broker>
+        <scrolling_style_plugins>ZendTest\Paginator\TestAsset\ScrollingStylePluginManager</scrolling_style_plugins>
+        <adapter_plugins>ZendTest\Paginator\TestAsset\AdapterPluginManager</adapter_plugins>
 	    <itemcountperpage>3</itemcountperpage>
 	    <pagerange>7</pagerange>
     </testing>

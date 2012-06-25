@@ -21,7 +21,6 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Loader\Pluggable;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\Di\DiServiceInitializer;
 use Zend\ServiceManager\FactoryInterface;
@@ -97,8 +96,8 @@ class ControllerLoaderFactory implements FactoryInterface
                 $instance->setEventManager($serviceLocator->get('EventManager'));
             }
 
-            if ($instance instanceof Pluggable) {
-                $instance->setBroker(clone $serviceLocator->get('ControllerPluginBroker'));
+            if (method_exists($instance, 'setPluginManager')) {
+                $instance->setPluginManager($serviceLocator->get('ControllerPluginBroker'));
             }
         });
 

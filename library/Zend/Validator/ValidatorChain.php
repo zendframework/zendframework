@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,24 +21,21 @@
 namespace Zend\Validator;
 
 use Countable;
-use Zend\Loader\Broker;
-use Zend\Loader\Pluggable;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ValidatorChain implements 
     Countable, 
-    Pluggable,
     ValidatorInterface
 {
     /**
-     * @var Broker
+     * @var ValidatorPluginManager
      */
-    protected $broker;
+    protected $plugins;
 
     /**
      * Validator chain
@@ -73,34 +70,27 @@ class ValidatorChain implements
     }
 
     /**
-     * Get plugin broker instance
+     * Get plugin manager instance
      * 
-     * @return Zend\Loader\Broker
+     * @return ValidatorPluginManager
      */
-    public function getBroker()
+    public function getPluginManager()
     {
-        if (!$this->broker) {
-            $this->setBroker(new ValidatorBroker());
+        if (!$this->plugins) {
+            $this->setPluginManager(new ValidatorPluginManager());
         }
-        return $this->broker;
+        return $this->plugins;
     }
 
     /**
-     * Set plugin broker instance
+     * Set plugin manager instance
      * 
-     * @param  string|Broker $broker Plugin broker to load plugins
+     * @param  ValidatorPluginManager $plugins Plugin manager
      * @return ValidatorChain
      */
-    public function setBroker($broker)
+    public function setPluginManager(ValidatorPluginManager $plugins)
     {
-        if (!$broker instanceof Broker) {
-            throw new Exception\RuntimeException(sprintf(
-                '%s expects an argument of type Zend\Loader\Broker; received "%s"',
-                __METHOD__,
-                (is_object($broker) ? get_class($broker) : gettype($broker))
-            ));
-        }
-        $this->broker = $broker;
+        $this->plugins = $plugins;
         return $this;
     }
 
@@ -113,8 +103,8 @@ class ValidatorChain implements
      */
     public function plugin($name, array $options = null)
     {
-        $broker = $this->getBroker();
-        return $broker->load($name, $options);
+        $plugins = $this->getPluginManager();
+        return $plugins->get($name, $options);
     }
 
     /**
@@ -156,7 +146,7 @@ class ValidatorChain implements
     }
 
     /**
-     * Use the plugin broker to add a validator by name
+     * Use the plugin manager to add a validator by name
      * 
      * @param  string $name 
      * @param  array $options 
@@ -171,7 +161,7 @@ class ValidatorChain implements
     }
 
     /**
-     * Use the plugin broker to prepend a validator by name
+     * Use the plugin manager to prepend a validator by name
      * 
      * @param  string $name 
      * @param  array $options 

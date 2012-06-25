@@ -22,9 +22,7 @@
 namespace ZendTest\Validator;
 
 use Zend\Validator,
-    Zend\Validator\ValidatorBroker,
-    Zend\Loader\Broker,
-    Zend\Loader\PluginBroker,
+    Zend\Validator\ValidatorPluginManager,
     Zend\Translator;
 
 /**
@@ -54,7 +52,7 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->clearRegistry();
         Validator\AbstractValidator::setDefaultTranslator(null);
-        Validator\StaticValidator::setBroker(null);
+        Validator\StaticValidator::setPluginManager(null);
         $this->validator = new Validator\Alpha();
     }
     
@@ -154,26 +152,26 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
     
     /* plugin loading */
 
-    public function testLazyLoadsValidatorBrokerByDefault()
+    public function testLazyLoadsValidatorPluginManagerByDefault()
     {
-        $broker = Validator\StaticValidator::getBroker();
-        $this->assertInstanceOf('Zend\Validator\ValidatorBroker', $broker);
+        $plugins = Validator\StaticValidator::getPluginManager();
+        $this->assertInstanceOf('Zend\Validator\ValidatorPluginManager', $plugins);
     }
 
-    public function testCanSetCustomPluginBroker()
+    public function testCanSetCustomPluginManager()
     {
-        $broker = new PluginBroker();
-        Validator\StaticValidator::setBroker($broker);
-        $this->assertSame($broker, Validator\StaticValidator::getBroker());
+        $plugins = new ValidatorPluginManager();
+        Validator\StaticValidator::setPluginManager($plugins);
+        $this->assertSame($plugins, Validator\StaticValidator::getPluginManager());
     }
 
-    public function testPassingNullWhenSettingBrokerResetsBroker()
+    public function testPassingNullWhenSettingPluginManagerResetsPluginManager()
     {
-        $broker = new PluginBroker();
-        Validator\StaticValidator::setBroker($broker);
-        $this->assertSame($broker, Validator\StaticValidator::getBroker());
-        Validator\StaticValidator::setBroker(null);
-        $this->assertNotSame($broker, Validator\StaticValidator::getBroker());
+        $plugins = new ValidatorPluginManager();
+        Validator\StaticValidator::setPluginManager($plugins);
+        $this->assertSame($plugins, Validator\StaticValidator::getPluginManager());
+        Validator\StaticValidator::setPluginManager(null);
+        $this->assertNotSame($plugins, Validator\StaticValidator::getPluginManager());
     }
     
     public function testExecuteValidWithParameters()

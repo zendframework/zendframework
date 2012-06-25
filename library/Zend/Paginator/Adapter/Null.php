@@ -31,7 +31,7 @@ class Null implements AdapterInterface
      * @param integer $count Total item count (Optional)
      */
     public function __construct($count = 0)
-    {;
+    {
         $this->_count = $count;
     }
 

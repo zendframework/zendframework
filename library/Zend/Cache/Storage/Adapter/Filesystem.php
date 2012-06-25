@@ -36,7 +36,7 @@ use ArrayObject,
     Zend\Cache\Storage\IterableInterface,
     Zend\Cache\Storage\AvailableSpaceCapableInterface,
     Zend\Cache\Storage\OptimizableInterface,
-    Zend\Cache\Storage\TagableInterface,
+    Zend\Cache\Storage\TaggableInterface,
     Zend\Cache\Storage\TotalSpaceCapableInterface,
     Zend\Cache\Utils,
     Zend\Stdlib\ErrorHandler;
@@ -48,11 +48,16 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Filesystem
-    extends AbstractAdapter
-    implements FlushableInterface, ClearExpiredInterface, ClearByNamespaceInterface, ClearByPrefixInterface,
-               TagableInterface, IterableInterface, OptimizableInterface,
-               AvailableSpaceCapableInterface, TotalSpaceCapableInterface
+class Filesystem extends AbstractAdapter implements 
+    AvailableSpaceCapableInterface,
+    ClearByNamespaceInterface,
+    ClearByPrefixInterface,
+    ClearExpiredInterface,
+    FlushableInterface,
+    IterableInterface,
+    OptimizableInterface,
+    TaggableInterface,
+    TotalSpaceCapableInterface
 {
 
     /**
@@ -253,7 +258,7 @@ class Filesystem
         return true;
     }
 
-    /* TagableInterface  */
+    /* TaggableInterface  */
 
     /**
      * Set tags to an item by given key.

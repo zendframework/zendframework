@@ -63,11 +63,11 @@ class Mcrypt implements SymmetricInterface
     protected $padding;
 
     /**
-     * Padding broker
+     * Padding plugins
      *
-     * @var PaddingBroker
+     * @var PaddingPluginManager
      */
-    protected static $paddingBroker = null;
+    protected static $paddingPlugins = null;
 
     /**
      * Supported cipher algorithms
@@ -143,8 +143,8 @@ class Mcrypt implements SymmetricInterface
                         $this->setSalt($value);
                         break;
                     case 'padding':
-                        $broker        = self::getPaddingBroker();
-                        $padding       = $broker->load($value, array());
+                        $plugins       = self::getPaddingPluginManager();
+                        $padding       = $plugins->get($value);
                         $this->padding = $padding;
                         break;
                 }
@@ -165,51 +165,52 @@ class Mcrypt implements SymmetricInterface
             return;
         }
         if (!isset($options['padding'])) {
-            $broker        = self::getPaddingBroker();
-            $padding       = $broker->load(self::DEFAULT_PADDING, array());
+            $plugins       = self::getPaddingPluginManager();
+            $padding       = $plugins->get(self::DEFAULT_PADDING);
             $this->padding = $padding;
         }
     }
 
     /**
-     * Returns the padding broker.  If it doesn't exist it's created.
+     * Returns the padding plugin manager.  If it doesn't exist it's created.
      *
-     * @return PaddingBroker
+     * @return PaddingPluginManager
      */
-    public static function getPaddingBroker()
+    public static function getPaddingPluginManager()
     {
-        if (self::$paddingBroker === null) {
-            self::setPaddingBroker(new PaddingBroker());
+        if (self::$paddingPlugins === null) {
+            self::setPaddingPluginManager(new PaddingPluginManager());
         }
 
-        return self::$paddingBroker;
+        return self::$paddingPlugins;
     }
 
     /**
-     * Set the symmetric cipher broker
+     * Set the padding plugin manager
      *
-     * @param  string|PaddingBroker $broker
+     * @param  string|PaddingPluginManager $plugins
      * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public static function setPaddingBroker($broker)
+    public static function setPaddingPluginManager($plugins)
     {
-        if (is_string($broker)) {
-            if (!class_exists($broker)) {
+        if (is_string($plugins)) {
+            if (!class_exists($plugins)) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                    'Unable to locate padding broker of class "%s"',
-                    $broker
+                    'Unable to locate padding plugin manager via class "%s"; class does not exist',
+                    $plugins
                 ));
             }
-            $broker = new $broker();
+            $plugins = new $plugins();
         }
-        if (!$broker instanceof PaddingBroker) {
+        if (!$plugins instanceof PaddingPluginManager) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Padding broker must extend PaddingBroker; received "%s"',
-                (is_object($broker) ? get_class($broker) : gettype($broker))
+                'Padding plugins must extend %s\PaddingPluginManager; received "%s"',
+                __NAMESPACE__,
+                (is_object($plugins) ? get_class($plugins) : gettype($plugins))
             ));
         }
-        self::$paddingBroker = $broker;
+        self::$paddingPlugins = $plugins;
     }
 
     /**

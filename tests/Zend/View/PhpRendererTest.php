@@ -92,30 +92,30 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $this->renderer->vars('foo'));
     }
 
-    public function testUsesHelperBrokerByDefault()
+    public function testUsesHelperPluginManagerByDefault()
     {
-        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->getBroker());
+        $this->assertInstanceOf('Zend\View\HelperPluginManager', $this->renderer->getHelperPluginManager());
     }
 
-    public function testPassingArgumentToBrokerReturnsHelperByThatName()
+    public function testPassingArgumentToPluginReturnsHelperByThatName()
     {
         $helper = $this->renderer->plugin('doctype');
         $this->assertInstanceOf('Zend\View\Helper\Doctype', $helper);
     }
 
-    public function testPassingStringOfUndefinedClassToSetBrokerRaisesException()
+    public function testPassingStringOfUndefinedClassToSetHelperPluginManagerRaisesException()
     {
         $this->setExpectedException('Zend\View\Exception\ExceptionInterface', 'Invalid');
-        $this->renderer->setBroker('__foo__');
+        $this->renderer->setHelperPluginManager('__foo__');
     }
 
-    public function testPassingValidStringClassToSetBrokerCreatesBroker()
+    public function testPassingValidStringClassToSetHelperPluginManagerCreatesIt()
     {
-        $this->renderer->setBroker('Zend\View\HelperBroker');
-        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->getBroker());
+        $this->renderer->setHelperPluginManager('Zend\View\HelperPluginManager');
+        $this->assertInstanceOf('Zend\View\HelperPluginManager', $this->renderer->getHelperPluginManager());
     }
 
-    public function invalidBrokers()
+    public function invalidPluginManagers()
     {
         return array(
             array(true),
@@ -127,18 +127,18 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider invalidBrokers
+     * @dataProvider invalidPluginManagers
      */
-    public function testPassingInvalidArgumentToSetBrokerRaisesException($broker)
+    public function testPassingInvalidArgumentToSetHelperPluginManagerRaisesException($plugins)
     {
         $this->setExpectedException('Zend\View\Exception\ExceptionInterface', 'must extend');
-        $this->renderer->setBroker($broker);
+        $this->renderer->setHelperPluginManager($plugins);
     }
 
-    public function testInjectsSelfIntoHelperBroker()
+    public function testInjectsSelfIntoHelperPluginManager()
     {
-        $broker = $this->renderer->getBroker();
-        $this->assertSame($this->renderer, $broker->getView());
+        $plugins = $this->renderer->getHelperPluginManager();
+        $this->assertSame($this->renderer, $plugins->getRenderer());
     }
 
     public function testUsesFilterChainByDefault()
@@ -228,8 +228,8 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethodOverloadingShouldReturnHelperInstanceIfNotInvokable()
     {
-        $broker = $this->renderer->getBroker();
-        $broker->getClassLoader()->registerPlugin('uninvokable', 'ZendTest\View\TestAsset\Uninvokable');
+        $helpers = $this->renderer->getHelperPluginManager();
+        $helpers->setInvokableClass('uninvokable', 'ZendTest\View\TestAsset\Uninvokable');
         $helper = $this->renderer->uninvokable();
         $this->assertInstanceOf('ZendTest\View\TestAsset\Uninvokable', $helper);
     }
@@ -239,8 +239,8 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethodOverloadingShouldInvokeHelperIfInvokable()
     {
-        $broker = $this->renderer->getBroker();
-        $broker->getClassLoader()->registerPlugin('invokable', 'ZendTest\View\TestAsset\Invokable');
+        $helpers = $this->renderer->getHelperPluginManager();
+        $helpers->setInvokableClass('invokable', 'ZendTest\View\TestAsset\Invokable');
         $return = $this->renderer->invokable('it works!');
         $this->assertEquals('ZendTest\View\TestAsset\Invokable::__invoke: it works!', $return);
     }

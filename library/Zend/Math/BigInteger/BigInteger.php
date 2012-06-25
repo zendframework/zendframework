@@ -10,9 +10,6 @@
 
 namespace Zend\Math\BigInteger;
 
-use Zend\Math\BigInteger\Adapter\AdapterInterface;
-use Zend\Loader\Broker;
-
 /**
  * @category   Zend
  * @package    Zend_Math
@@ -21,63 +18,63 @@ use Zend\Loader\Broker;
 class BigInteger
 {
     /**
-     * Broker for loading adapters
+     * Plugin manager for loading adapters
      *
-     * @var null|Broker
+     * @var null|AdapterPluginManager
      */
-    protected static $adapterBroker = null;
+    protected static $adapters = null;
 
     /**
      * The default adapter.
      *
-     * @var AdapterInterface
+     * @var Adapter\AdapterInterface
      */
     protected static $defaultAdapter = null;
 
     /**
      * Create a BigInteger adapter instance
      *
-     * @param  string|AdapterInterface|null $adapterName
-     * @return AdapterInterface
+     * @param  string|Adapter\AdapterInterface|null $adapterName
+     * @return Adapter\AdapterInterface
      */
     public static function factory($adapterName = null)
     {
         if (null === $adapterName) {
             return static::getAvailableAdapter();
-        } else if ($adapterName instanceof AdapterInterface) {
+        } elseif ($adapterName instanceof Adapter\AdapterInterface) {
             return $adapterName;
         } else {
-            return self::getAdapterBroker()->load($adapterName);
+            return self::getAdapterPluginManager()->get($adapterName);
         }
     }
 
     /**
-     * Set adapter broker
+     * Set adapter plugin manager
      *
-     * @param Broker $broker
+     * @param AdapterPluginManager $adapters
      */
-    public static function setAdapterBroker(Broker $broker)
+    public static function setAdapterPluginManager(AdapterPluginManager $adapters)
     {
-        self::$adapterBroker = $broker;
+        self::$adapters = $adapters;
     }
 
     /**
-     * Get the adapter broker
+     * Get the adapter plugin manager
      *
-     * @return Broker
+     * @return AdapterPluginManager
      */
-    public static function getAdapterBroker()
+    public static function getAdapterPluginManager()
     {
-        if (static::$adapterBroker === null) {
-            static::$adapterBroker = new AdapterBroker();
+        if (static::$adapters === null) {
+            static::$adapters = new AdapterPluginManager();
         }
-        return static::$adapterBroker;
+        return static::$adapters;
     }
 
     /**
      * Set default BigInteger adapter
      *
-     * @param string|AdapterInterface $adapter
+     * @param string|Adapter\AdapterInterface $adapter
      */
     public static function setDefaultAdapter($adapter)
     {
@@ -87,7 +84,7 @@ class BigInteger
     /**
      * Get default BigInteger adapter
      *
-     * @return null|AdapterInterface
+     * @return null|Adapter\AdapterInterface
      */
     public static function getDefaultAdapter()
     {
@@ -100,7 +97,7 @@ class BigInteger
     /**
      * Determine and return available adapter
      *
-     * @return AdapterInterface
+     * @return Adapter\AdapterInterface
      * @throws Exception\RuntimeException
      */
     public static function getAvailableAdapter()

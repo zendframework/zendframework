@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.lessthan"><title>LessThan</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.lessthan"><title>LessThan</title>
 
 
     <para>
-        <classname>Zend_Validate_LessThan</classname> allows you to validate if a given value is
+        <classname>Zend\Validator\LessThan</classname> allows you to validate if a given value is
         less than a maximum border value.
     </para>
 
-    <note><title>Zend_Validate_LessThan supports only number validation</title>
+    <note><title>Zend\Validator\LessThan supports only number validation</title>
 
 
         <para>
-            It should be noted that <classname>Zend_Validate_LessThan</classname> supports only the
+            It should be noted that <classname>Zend\Validator\LessThan</classname> supports only the
             validation of numbers. Strings or dates can not be validated with this validator.
         </para>
     </note>
 
-    <section xml:id="zend.validate.set.lessthan.options"><title>Supported options for Zend_Validate_LessThan</title>
+    <section xml:id="zend.validator.set.lessthan.options"><title>Supported options for Zend\Validator\LessThan</title>
 
 
         <para>
-            The following options are supported for <classname>Zend_Validate_LessThan</classname>:
+            The following options are supported for <classname>Zend\Validator\LessThan</classname>:
         </para>
 
         <itemizedlist>
@@ -40,7 +40,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.lessthan.basic"><title>Basic usage</title>
+    <section xml:id="zend.validator.set.lessthan.basic"><title>Basic usage</title>
 
 
         <para>
@@ -49,7 +49,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid  = new Zend_Validate_LessThan(array('max' => 10));
+$valid  = new Zend\Validator\LessThan(array('max' => 10));
 $value  = 12;
 $return = $valid->isValid($value);
 // returns false
@@ -60,7 +60,7 @@ $return = $valid->isValid($value);
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.lessthan.inclusively"><title>Validation inclusive the border value</title>
+    <section xml:id="zend.validator.set.lessthan.inclusively"><title>Validation inclusive the border value</title>
 
 
         <para>
@@ -69,7 +69,7 @@ $return = $valid->isValid($value);
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid  = new Zend_Validate_LessThan(
+$valid  = new Zend\Validator\LessThan(
     array(
         'max' => 10,
         'inclusive' => true

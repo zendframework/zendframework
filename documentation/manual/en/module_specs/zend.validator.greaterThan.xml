@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.greaterthan"><title>GreaterThan</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.greaterthan"><title>GreaterThan</title>
 
 
     <para>
-        <classname>Zend_Validate_GreaterThan</classname> allows you to validate if a given value is
+        <classname>Zend\Validator\GreaterThan</classname> allows you to validate if a given value is
         greater than a minimum border value.
     </para>
 
-    <note><title>Zend_Validate_GreaterThan supports only number validation</title>
+    <note><title>Zend\Validator\GreaterThan supports only number validation</title>
 
 
         <para>
-            It should be noted that <classname>Zend_Validate_GreaterThan</classname> supports only
+            It should be noted that <classname>Zend\Validator\GreaterThan</classname> supports only
             the validation of numbers. Strings or dates can not be validated with this validator.
         </para>
     </note>
 
-    <section xml:id="zend.validate.set.greaterthan.options"><title>Supported options for Zend_Validate_GreaterThan</title>
+    <section xml:id="zend.validator.set.greaterthan.options"><title>Supported options for Zend\Validator\GreaterThan</title>
 
 
         <para>
             The following options are supported for
-            <classname>Zend_Validate_GreaterThan</classname>:
+            <classname>Zend\Validator\GreaterThan</classname>:
         </para>
 
         <itemizedlist>
@@ -41,7 +41,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.greaterthan.basic"><title>Basic usage</title>
+    <section xml:id="zend.validator.set.greaterthan.basic"><title>Basic usage</title>
 
 
         <para>
@@ -50,7 +50,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid  = new Zend_Validate_GreaterThan(array('min' => 10));
+$valid  = new Zend\Validator\GreaterThan(array('min' => 10));
 $value  = 8;
 $return = $valid->isValid($value);
 // returns false
@@ -61,7 +61,7 @@ $return = $valid->isValid($value);
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.greaterthan.inclusively"><title>Validation inclusive the border value</title>
+    <section xml:id="zend.validator.set.greaterthan.inclusively"><title>Validation inclusive the border value</title>
 
 
         <para>
@@ -70,7 +70,7 @@ $return = $valid->isValid($value);
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid  = new Zend_Validate_GreaterThan(
+$valid  = new Zend\Validator\GreaterThan(
     array(
         'min' => 10,
         'inclusive' => true

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.notempty"><title>NotEmpty</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.notempty"><title>NotEmpty</title>
     
 
     <para>
@@ -8,24 +8,24 @@
         elements have values associated with them.
     </para>
 
-    <section xml:id="zend.validate.set.notempty.options"><title>Supported options for Zend_Validate_NotEmpty</title>
+    <section xml:id="zend.validator.set.notempty.options"><title>Supported options for Zend\Validator\NotEmpty</title>
         
 
         <para>
-            The following options are supported for <classname>Zend_Validate_NotEmpty</classname>:
+            The following options are supported for <classname>Zend\Validator\NotEmpty</classname>:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
                     <emphasis><property>type</property></emphasis>: Sets the type of validation
-                    which will be processed. For details take a look into <link linkend="zend.validate.set.notempty.types">this section</link>.
+                    which will be processed. For details take a look into <link linkend="zend.validator.set.notempty.types">this section</link>.
                 </para>
             </listitem>
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.notempty.default"><title>Default behaviour for Zend_Validate_NotEmpty</title>
+    <section xml:id="zend.validator.set.notempty.default"><title>Default behaviour for Zend\Validator\NotEmpty</title>
         
 
         <para>
@@ -36,7 +36,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid = new Zend_Validate_NotEmpty();
+$valid = new Zend\Validator\NotEmpty();
 $value  = '';
 $result = $valid->isValid($value);
 // returns false
@@ -46,20 +46,20 @@ $result = $valid->isValid($value);
             
 
             <para>
-                Without providing configuration, <classname>Zend_Validate_NotEmpty</classname>'s
+                Without providing configuration, <classname>Zend\Validator\NotEmpty</classname>'s
                 behaviour differs from <acronym>PHP</acronym>.
             </para>
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.notempty.types"><title>Changing behaviour for Zend_Validate_NotEmpty</title>
+    <section xml:id="zend.validator.set.notempty.types"><title>Changing behaviour for Zend\Validator\NotEmpty</title>
         
 
         <para>
             Some projects have differing opinions of what is considered an "empty" value: a string
             with only whitespace might be considered empty, or <emphasis>0</emphasis> may be
-            considered non-empty (particularly for boolean sequences). To accomodate differing
-            needs, <classname>Zend_Validate_NotEmpty</classname> allows you to configure which types
+            considered non-empty (particularly for boolean sequences). To accommodate differing
+            needs, <classname>Zend\Validator\NotEmpty</classname> allows you to configure which types
             should be validated as empty and which not.
         </para>
 
@@ -177,28 +177,28 @@ $result = $valid->isValid($value);
 
         <programlisting language="php"><![CDATA[
 // Returns false on 0
-$validator = new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::INTEGER);
+$validator = new Zend\Validator\NotEmpty(Zend\Validator\NotEmpty::INTEGER);
 
 // Returns false on 0 or '0'
-$validator = new Zend_Validate_NotEmpty(
-    Zend_Validate_NotEmpty::INTEGER + Zend_NotEmpty::ZERO
+$validator = new Zend\Validator\NotEmpty(
+    Zend\Validator\NotEmpty::INTEGER + Zend\Validator\NotEmpty::ZERO
 );
 
 // Returns false on 0 or '0'
-$validator = new Zend_Validate_NotEmpty(array(
-    Zend_Validate_NotEmpty::INTEGER,
-    Zend_Validate_NotEmpty::ZERO
+$validator = new Zend\Validator\NotEmpty(array(
+    Zend\Validator\NotEmpty::INTEGER,
+    Zend\Validator\NotEmpty::ZERO
 ));
 
 // Returns false on 0 or '0'
-$validator = new Zend_Validate_NotEmpty(array(
+$validator = new Zend\Validator\NotEmpty(array(
     'integer',
     'zero',
 ));
 ]]></programlisting>
 
         <para>
-            You can also provide an instance of <classname>Zend_Config</classname> to set the
+            You can also provide an instance of <classname>Traversable</classname> to set the
             desired types. To set types after instantiation, use the
             <methodname>setType()</methodname> method.
         </para>

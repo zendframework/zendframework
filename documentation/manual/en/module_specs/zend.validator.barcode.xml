@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.barcode"><title>Barcode</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.barcode"><title>Barcode</title>
 
 
     <para>
-        <classname>Zend_Validate_Barcode</classname> allows you to check if a given value can be
+        <classname>Zend\Validator\Barcode</classname> allows you to check if a given value can be
         represented as barcode.
     </para>
 
     <para>
-        <classname>Zend_Validate_Barcode</classname> supports multiple barcode standards and can be
+        <classname>Zend\Validator\Barcode</classname> supports multiple barcode standards and can be
         extended with proprietary barcode implementations very easily. The following barcode
         standards are supported:
     </para>
@@ -21,7 +21,7 @@
 
             <para>
                 This barcode has no length limitation. It supports only digits, and 6 special chars.
-                Codabar is a self-checking barcode. This standard is very old. Common usecases are within airbills
+                Codabar is a self-checking barcode. This standard is very old. Common use cases are within airbills
                 or photo labs where multi-part forms are used with dot-matrix printers.
             </para>
         </listitem>
@@ -46,7 +46,7 @@
             <para>
                 This barcode has no length limitation. It supports only digits, and the last digit
                 can be an optional checksum which is calculated with modulo 10. This standard is
-                very old and nowadays not often used. Common usecases are within the industry.
+                very old and nowadays not often used. Common use cases are within the industry.
             </para>
         </listitem>
 
@@ -158,7 +158,7 @@
             <para>
                 This barcode must have a length of 12 characters. It supports only digits, and the
                 last digit is always a checksum which is calculated with modulo 10. This standard is
-                used within the USA and common on the market. It has been superceded by EAN13.
+                used within the USA and common on the market. It has been superseded by EAN13.
             </para>
         </listitem>
 
@@ -328,7 +328,7 @@
             </para>
 
             <para>
-                This barcode has no defined length. It supports digits, uppercased letters, and the
+                This barcode has no defined length. It supports digits, uppercase letters, and the
                 last digit is always a checksum. This standard is mainly used by Royal Mail for
                 their Cleanmail Service. It is also called <acronym>RM4SCC</acronym>.
             </para>
@@ -349,11 +349,11 @@
 
         <listitem>
             <para>
-                <emphasis>UPCA</emphasis>: UPC is the shortcut for "Univeral Product Code".
+                <emphasis>UPCA</emphasis>: UPC is the shortcut for "Universal Product Code".
             </para>
 
             <para>
-                This barcode preceeded EAN13. It must have a length of 12 characters and supports
+                This barcode preceded EAN13. It must have a length of 12 characters and supports
                 only digits. The last digit must be a checksum digit which is calculated with
                 modulo 10. It is commonly used within the USA.
             </para>
@@ -373,11 +373,11 @@
         </listitem>
     </itemizedlist>
 
-    <section xml:id="zend.validate.set.barcode.options"><title>Supported options for Zend_Validate_Barcode</title>
+    <section xml:id="zend.validator.set.barcode.options"><title>Supported options for Zend\Validator\Barcode</title>
 
 
         <para>
-            The following options are supported for <classname>Zend_Validate_Barcode</classname>:
+            The following options are supported for <classname>Zend\Validator\Barcode</classname>:
         </para>
 
         <itemizedlist>
@@ -385,7 +385,7 @@
                 <para>
                     <emphasis><property>adapter</property></emphasis>: Sets the barcode adapter
                     which will be used. Supported are all above noted adapters. When using a self
-                    defined adapter, then you have to set the complete classname.
+                    defined adapter, then you have to set the complete class name.
                 </para>
             </listitem>
 
@@ -406,7 +406,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.barcode.basic"><title>Basic usage</title>
+    <section xml:id="zend.validator.set.barcode.basic"><title>Basic usage</title>
 
 
         <para>
@@ -415,7 +415,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid = new Zend_Validate_Barcode('EAN13');
+$valid = new Zend\Validator\Barcode('EAN13');
 if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
@@ -424,7 +424,7 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.barcode.checksum"><title>Optional checksum</title>
+    <section xml:id="zend.validator.set.barcode.checksum"><title>Optional checksum</title>
 
 
         <para>
@@ -436,7 +436,7 @@ if ($valid->isValid($input)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid = new Zend_Validate_Barcode(array(
+$valid = new Zend\Validator\Barcode(array(
     'adapter'  => 'EAN13',
     'checksum' => false,
 ));
@@ -459,12 +459,12 @@ if ($valid->isValid($input)) {
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.barcode.custom"><title>Writing custom adapters</title>
+    <section xml:id="zend.validator.set.barcode.custom"><title>Writing custom adapters</title>
 
 
         <para>
             You may write custom barcode validators for usage with
-            <classname>Zend_Validate_Barcode</classname>; this is often necessary when dealing with
+            <classname>Zend\Validator\Barcode</classname>; this is often necessary when dealing with
             proprietary barcode types. To write your own barcode validator, you need the following
             information.
         </para>
@@ -532,8 +532,8 @@ if ($valid->isValid($input)) {
 
         <para>
             Your custom barcode validator must extend
-            <classname>Zend_Validate_Barcode_AdapterAbstract</classname> or implement
-            <interface>Zend_Validate_Barcode_AdapterInterface</interface>.
+            <classname>Zend\Validator\Barcode\AbstractAdapter</classname> or implement
+            <interfacename>Zend\Validator\Barcode\AdapterInterface</interfacename>.
         </para>
 
         <para>
@@ -542,7 +542,7 @@ if ($valid->isValid($input)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-class My_Barcode_MyBar extends Zend_Validate_Barcode_AdapterAbstract
+class My\Barcode\MyBar extends Zend\Validator\Barcode\AbstractAdapter
 {
     protected $_length     = 'even';
     protected $_characters = '0123456789ABCDE';
@@ -554,7 +554,7 @@ class My_Barcode_MyBar extends Zend_Validate_Barcode_AdapterAbstract
     }
 }
 
-$valid = new Zend_Validate_Barcode('My_Barcode_MyBar');
+$valid = new Zend\Validator\Barcode('My\Barcode\MyBar');
 if ($valid->isValid($input)) {
     // input appears to be valid
 } else {

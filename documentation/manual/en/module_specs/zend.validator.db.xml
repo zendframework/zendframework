@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.Db"><title>Db_RecordExists and Db_NoRecordExists</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.Db"><title>Db\RecordExists and Db\NoRecordExists</title>
 
 
     <para>
-        <classname>Zend_Validate_Db_RecordExists</classname> and
-        <classname>Zend_Validate_Db_NoRecordExists</classname> provide a means to test
+        <classname>Zend\Validator\Db\RecordExists</classname> and
+        <classname>Zend\Validator\Db\NoRecordExists</classname> provide a means to test
         whether a record exists in a given table of a database, with a given
         value.
     </para>
 
-    <section xml:id="zend.validate.set.db.options"><title>Supported options for Zend_Validate_Db_*</title>
+    <section xml:id="zend.validator.set.db.options"><title>Supported options for Zend\Validator\Db_*</title>
 
 
         <para>
             The following options are supported for
-            <classname>Zend_Validate_Db_NoRecordExists</classname> and
-            <classname>Zend_Validate_Db_RecordExists</classname>:
+            <classname>Zend\Validator\Db\NoRecordExists</classname> and
+            <classname>Zend\Validator\Db\RecordExists</classname>:
         </para>
 
         <itemizedlist>
@@ -56,7 +56,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.db.basic-usage"><title>Basic usage</title>
+    <section xml:id="zend.validator.db.basic-usage"><title>Basic usage</title>
 
 
         <para>
@@ -65,7 +65,7 @@
 
         <programlisting language="php"><![CDATA[
 //Check that the email address exists in the database
-$validator = new Zend_Validate_Db_RecordExists(
+$validator = new Zend\Validator\Db\RecordExists(
     array(
         'table' => 'users',
         'field' => 'emailaddress'
@@ -91,7 +91,7 @@ if ($validator->isValid($emailaddress)) {
 
         <programlisting language="php"><![CDATA[
 //Check that the username is not present in the database
-$validator = new Zend_Validate_Db_NoRecordExists(
+$validator = new Zend\Validator\Db\NoRecordExists(
     array(
         'table' => 'users',
         'field' => 'username'
@@ -116,12 +116,12 @@ if ($validator->isValid($username)) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.db.excluding-records"><title>Excluding records</title>
+    <section xml:id="zend.validator.db.excluding-records"><title>Excluding records</title>
 
 
         <para>
-            <classname>Zend_Validate_Db_RecordExists</classname> and
-            <classname>Zend_Validate_Db_NoRecordExists</classname> also provide a means
+            <classname>Zend\Validator\Db\RecordExists</classname> and
+            <classname>Zend\Validator\Db\NoRecordExists</classname> also provide a means
             to test the database, excluding a part of the table, either by
             providing a where clause as a string, or an array with the keys
             "field" and "value".
@@ -136,7 +136,7 @@ if ($validator->isValid($username)) {
         <programlisting language="php"><![CDATA[
 //Check no other users have the username
 $user_id   = $user->getId();
-$validator = new Zend_Validate_Db_NoRecordExists(
+$validator = new Zend\Validator\Db\NoRecordExists(
     array(
         'table' => 'users',
         'field' => 'username',
@@ -173,7 +173,7 @@ if ($validator->isValid($username)) {
         <programlisting language="php"><![CDATA[
 $email     = 'user@example.com';
 $clause    = $db->quoteInto('email = ?', $email);
-$validator = new Zend_Validate_Db_RecordExists(
+$validator = new Zend\Validator\Db\RecordExists(
     array(
         'table'   => 'users',
         'field'   => 'username',
@@ -200,7 +200,7 @@ if ($validator->isValid($username)) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.db.database-adapters"><title>Database Adapters</title>
+    <section xml:id="zend.validator.db.database-adapters"><title>Database Adapters</title>
 
 
         <para>
@@ -210,7 +210,7 @@ if ($validator->isValid($username)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Db_RecordExists(
+$validator = new Zend\Validator\Db\RecordExists(
     array(
         'table' => 'users',
         'field' => 'id',
@@ -220,7 +220,7 @@ $validator = new Zend_Validate_Db_RecordExists(
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.db.database-schemas"><title>Database Schemas</title>
+    <section xml:id="zend.validator.db.database-schemas"><title>Database Schemas</title>
 
 
         <para>
@@ -231,7 +231,7 @@ $validator = new Zend_Validate_Db_RecordExists(
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Db_RecordExists(
+$validator = new Zend\Validator\Db\RecordExists(
     array(
         'table'  => 'users',
         'schema' => 'my',

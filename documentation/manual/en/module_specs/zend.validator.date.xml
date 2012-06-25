@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.date"><title>Date</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.date"><title>Date</title>
     
 
     <para>
-        <classname>Zend_Validate_Date</classname> allows you to validate if a given value contains
+        <classname>Zend\Validator\Date</classname> allows you to validate if a given value contains
         a date. This validator validates also localized input.
     </para>
 
-    <section xml:id="zend.validate.set.date.options"><title>Supported options for Zend_Validate_Date</title>
+    <section xml:id="zend.validator.set.date.options"><title>Supported options for Zend\Validator\Date</title>
         
 
         <para>
-            The following options are supported for <classname>Zend_Validate_Date</classname>:
+            The following options are supported for <classname>Zend\Validator\Date</classname>:
         </para>
 
         <itemizedlist>
@@ -31,7 +31,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.date.basic"><title>Default date validation</title>
+    <section xml:id="zend.validator.set.date.basic"><title>Default date validation</title>
         
 
         <para>
@@ -40,28 +40,28 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Date();
+$validator = new Zend\Validator\Date();
 
 $validator->isValid('2000-10-10');   // returns true
 $validator->isValid('10.10.2000'); // returns false
 ]]></programlisting>
 
         <para>
-            The default date format for <classname>Zend_Validate_Date</classname> is 'yyyy-MM-dd'.
+            The default date format for <classname>Zend\Validator\Date</classname> is 'yyyy-MM-dd'.
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.date.localized"><title>Localized date validation</title>
+    <section xml:id="zend.validator.set.date.localized"><title>Localized date validation</title>
         
 
         <para>
-            <classname>Zend_Validate_Date</classname> validates also dates which are given in a
+            <classname>Zend\Validator\Date</classname> validates also dates which are given in a
             localized format. By using the <property>locale</property> option you can define the
             locale which the date format should use for validation.
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Date(array('locale' => 'de'));
+$validator = new Zend\Validator\Date(array('locale' => 'de'));
 
 $validator->isValid('10.Feb.2010'); // returns true
 $validator->isValid('10.May.2010'); // returns false
@@ -73,17 +73,17 @@ $validator->isValid('10.May.2010'); // returns false
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.date.formats"><title>Self defined date validation</title>
+    <section xml:id="zend.validator.set.date.formats"><title>Self defined date validation</title>
         
 
         <para>
-            <classname>Zend_Validate_Date</classname> supports also self defined date formats.
+            <classname>Zend\Validator\Date</classname> supports also self defined date formats.
             When you want to validate such a date you can use the <property>format</property>
             option.
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Date(array('format' => 'yyyy'));
+$validator = new Zend\Validator\Date(array('format' => 'yyyy'));
 
 $validator->isValid('2010'); // returns true
 $validator->isValid('May');  // returns false
@@ -91,11 +91,11 @@ $validator->isValid('May');  // returns false
 
         <para>
             Of course you can combine <property>format</property> and <property>locale</property>.
-            In this case you can also use localized month or daynames.
+            In this case you can also use localized month or day names.
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Date(array('format' => 'yyyy MMMM', 'locale' => 'de));
+$validator = new Zend\Validator\Date(array('format' => 'yyyy MMMM', 'locale' => 'de));
 
 $validator->isValid('2010 Dezember'); // returns true
 $validator->isValid('2010 June');     // returns false

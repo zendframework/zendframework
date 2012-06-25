@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.iban"><title>Iban</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.iban"><title>Iban</title>
     
 
     <para>
-        <classname>Zend_Validate_Iban</classname> validates if a given value could be a
+        <classname>Zend\Validator\Iban</classname> validates if a given value could be a
         <acronym>IBAN</acronym> number. <acronym>IBAN</acronym> is the abbreviation for
         "International Bank Account Number".
     </para>
 
-    <section xml:id="zend.validate.set.iban.options"><title>Supported options for Zend_Validate_Iban</title>
+    <section xml:id="zend.validator.set.iban.options"><title>Supported options for Zend\Validator\Iban</title>
         
 
         <para>
-            The following options are supported for <classname>Zend_Validate_Iban</classname>:
+            The following options are supported for <classname>Zend\Validator\Iban</classname>:
         </para>
 
         <itemizedlist>
@@ -25,31 +25,31 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.iban.basic"><title>IBAN validation</title>
+    <section xml:id="zend.validator.set.iban.basic"><title>IBAN validation</title>
         
 
         <para>
             <acronym>IBAN</acronym> numbers are always related to a country. This means that
             different countries use different formats for their <acronym>IBAN</acronym> numbers.
             This is the reason why <acronym>IBAN</acronym> numbers always need a locale. By knowing
-            this we already know how to use <classname>Zend_Validate_Iban</classname>.
+            this we already know how to use <classname>Zend\Validator\Iban</classname>.
         </para>
 
-        <section xml:id="zend.validate.set.iban.basic.application"><title>Application wide locale</title>
+        <section xml:id="zend.validator.set.iban.basic.application"><title>Application wide locale</title>
             
 
             <para>
                 We could use the application wide locale. This means that when no option is given at
-                initiation, <classname>Zend_Validate_Iban</classname> searches for the application
+                initiation, <classname>Zend\Validator\Iban</classname> searches for the application
                 wide locale. See the following code snippet:
             </para>
 
             <programlisting language="php"><![CDATA[
 // within bootstrap
-Zend_Registry::set('Zend_Locale', new Zend_Locale('de_AT'));
+Zend\Registry::set('Zend\Locale\Locale', new Zend\Locale\Locale('de_AT'));
 
 // within the module
-$validator = new Zend_Validate_Iban();
+$validator = new Zend\Validator\Iban();
 
 if ($validator->isValid('AT611904300234573201')) {
     // IBAN appears to be valid
@@ -63,7 +63,7 @@ if ($validator->isValid('AT611904300234573201')) {
 
                 <para>
                     Of course this works only when an application wide locale was set within the
-                    registry previously. Otherwise <classname>Zend_Locale</classname> will try to
+                    registry previously. Otherwise <classname>Zend\Locale\Locale</classname> will try to
                     use the locale which the client sends or, when non has been send, it uses the
                     environment locale. Be aware that this can lead to unwanted behaviour within
                     the validation.
@@ -71,18 +71,18 @@ if ($validator->isValid('AT611904300234573201')) {
             </note>
         </section>
 
-        <section xml:id="zend.validate.set.iban.basic.false"><title>Ungreedy IBAN validation</title>
+        <section xml:id="zend.validator.set.iban.basic.false"><title>Ungreedy IBAN validation</title>
             
 
             <para>
-                Sometime it is usefull, just to validate if the given value <emphasis>is</emphasis>
+                Sometime it is useful, just to validate if the given value <emphasis>is</emphasis>
                 a <acronym>IBAN</acronym> number or not. This means that you don't want to validate
                 it against a defined country. This can be done by using a
                 <constant>FALSE</constant> as locale.
             </para>
 
             <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Iban(array('locale' => false));
+$validator = new Zend\Validator\Iban(array('locale' => false));
 // Note: you can also set a FALSE as single parameter
 
 if ($validator->isValid('AT611904300234573201')) {
@@ -98,7 +98,7 @@ if ($validator->isValid('AT611904300234573201')) {
             </para>
         </section>
 
-        <section xml:id="zend.validate.set.iban.basic.aware"><title>Region aware IBAN validation</title>
+        <section xml:id="zend.validator.set.iban.basic.aware"><title>Region aware IBAN validation</title>
             
 
             <para>
@@ -108,7 +108,7 @@ if ($validator->isValid('AT611904300234573201')) {
             </para>
 
             <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Iban(array('locale' => 'de_AT'));
+$validator = new Zend\Validator\Iban(array('locale' => 'de_AT'));
 
 if ($validator->isValid('AT611904300234573201')) {
     // IBAN appears to be valid

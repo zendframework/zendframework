@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.stringlength"><title>StringLength</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.stringlength"><title>StringLength</title>
     
 
     <para>
         This validator allows you to validate if a given string is between a defined length.
     </para>
 
-    <note><title>Zend_Validate_StringLength supports only string validation</title>
+    <note><title>Zend\Validator\StringLength supports only string validation</title>
         
 
         <para>
-            It should be noted that <classname>Zend_Validate_StringLength</classname> supports only
+            It should be noted that <classname>Zend\Validator\StringLength</classname> supports only
             the validation of strings. Integers, floats, dates or objects can not be validated with
             this validator.
         </para>
     </note>
 
-    <section xml:id="zend.validate.set.stringlength.options"><title>Supported options for Zend_Validate_StringLength</title>
+    <section xml:id="zend.validator.set.stringlength.options"><title>Supported options for Zend\Validator\StringLength</title>
         
 
         <para>
             The following options are supported for
-            <classname>Zend_Validate_StringLength</classname>:
+            <classname>Zend\Validator\StringLength</classname>:
         </para>
 
         <itemizedlist>
@@ -48,7 +48,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.basic"><title>Default behaviour for Zend_Validate_StringLength</title>
+    <section xml:id="zend.validator.set.stringlength.basic"><title>Default behaviour for Zend\Validator\StringLength</title>
         
 
         <para>
@@ -64,7 +64,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.maximum"><title>Limiting the maximum allowed length of a string</title>
+    <section xml:id="zend.validator.set.stringlength.maximum"><title>Limiting the maximum allowed length of a string</title>
         
 
         <para>
@@ -73,7 +73,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(array('max' => 6));
+$validator = new Zend\Validator\StringLength(array('max' => 6));
 
 $validator->isValid("Test"); // returns true
 $validator->isValid("Testing"); // returns false
@@ -86,7 +86,7 @@ $validator->isValid("Testing"); // returns false
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength();
+$validator = new Zend\Validator\StringLength();
 $validator->setMax(6);
 
 $validator->isValid("Test"); // returns true
@@ -94,7 +94,7 @@ $validator->isValid("Testing"); // returns false
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.minimum"><title>Limiting the minimal required length of a string</title>
+    <section xml:id="zend.validator.set.stringlength.minimum"><title>Limiting the minimal required length of a string</title>
         
 
         <para>
@@ -103,7 +103,7 @@ $validator->isValid("Testing"); // returns false
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(array('min' => 5));
+$validator = new Zend\Validator\StringLength(array('min' => 5));
 
 $validator->isValid("Test"); // returns false
 $validator->isValid("Testing"); // returns true
@@ -116,7 +116,7 @@ $validator->isValid("Testing"); // returns true
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength();
+$validator = new Zend\Validator\StringLength();
 $validator->setMin(5);
 
 $validator->isValid("Test"); // returns false
@@ -124,19 +124,19 @@ $validator->isValid("Testing"); // returns true
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.both"><title>Limiting a string on both sides</title>
+    <section xml:id="zend.validator.set.stringlength.both"><title>Limiting a string on both sides</title>
         
 
         <para>
             Sometimes it is required to get a string which has a maximal defined length but which
             is also minimal chars long. For example when you have a textbox where a user can enter
             his name, then you may want to limit the name to maximum 30 chars but want to get sure
-            that he entered his name. So you limit the mimimum required length to 3 chars. See the
+            that he entered his name. So you limit the minimum required length to 3 chars. See the
             following example:
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(array('min' => 3, 'max' => 30));
+$validator = new Zend\Validator\StringLength(array('min' => 3, 'max' => 30));
 
 $validator->isValid("."); // returns false
 $validator->isValid("Test"); // returns true
@@ -154,7 +154,7 @@ $validator->isValid("Testing"); // returns true
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.encoding"><title>Encoding of values</title>
+    <section xml:id="zend.validator.set.stringlength.encoding"><title>Encoding of values</title>
         
 
         <para>
@@ -171,7 +171,7 @@ $validator->isValid("Testing"); // returns true
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(
+$validator = new Zend\Validator\StringLength(
     array('min' => 6)
 );
 $validator->isValid("Ärger"); // returns false
@@ -179,7 +179,7 @@ $validator->isValid("Ärger"); // returns false
 $validator->setEncoding("UTF-8");
 $validator->isValid("Ärger"); // returns true
 
-$validator2 = new Zend_Validate_StringLength(
+$validator2 = new Zend\Validator\StringLength(
     array('min' => 6, 'encoding' => 'UTF-8')
 );
 $validator2->isValid("Ärger"); // returns true

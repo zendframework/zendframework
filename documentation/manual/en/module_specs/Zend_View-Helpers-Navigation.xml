@@ -1836,7 +1836,7 @@ foreach ($this->container as $page) {
 
         <para>
             By default, the sitemap helper uses
-            <link linkend="zend.validate.sitemap">sitemap validators</link>
+            <link linkend="zend.validator.sitemap">sitemap validators</link>
             to validate each element that is rendered. This can be disabled by
             calling <code>$helper-&gt;setUseSitemapValidators(false)</code>.
         </para>

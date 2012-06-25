@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.digits"><title>Digits</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.digits"><title>Digits</title>
     
 
     <para>
-        <classname>Zend_Validate_Digits</classname> validates if a given value contains only digits.
+        <classname>Zend\Validator\Digits</classname> validates if a given value contains only digits.
     </para>
 
-    <section xml:id="zend.validate.set.digits.options"><title>Supported options for Zend_Validate_Digits</title>
+    <section xml:id="zend.validator.set.digits.options"><title>Supported options for Zend\Validator\Digits</title>
         
 
         <para>
-            There are no additional options for <classname>Zend_Validate_Digits</classname>:
+            There are no additional options for <classname>Zend\Validator\Digits</classname>:
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.digits.basic"><title>Validating digits</title>
+    <section xml:id="zend.validator.set.digits.basic"><title>Validating digits</title>
         
 
         <para>
@@ -23,7 +23,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Digits();
+$validator = new Zend\Validator\Digits();
 
 $validator->isValid("1234567890"); // returns true
 $validator->isValid(1234);         // returns true
@@ -37,8 +37,8 @@ $validator->isValid('1a234');      // returns false
                 When you want to validate numbers or numeric values, be aware that this validator
                 only validates digits. This means that any other sign like a thousand separator or
                 a comma will not pass this validator. In this case you should use
-                <classname>Zend_Validate_Int</classname> or
-                <classname>Zend_Validate_Float</classname>.
+                <classname>Zend\Validator\Int</classname> or
+                <classname>Zend\Validator\Float</classname>.
             </para>
         </note>
     </section>

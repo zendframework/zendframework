@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.between"><title>Between</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.between"><title>Between</title>
     
 
     <para>
-        <classname>Zend_Validate_Between</classname> allows you to validate if a given value is
+        <classname>Zend\Validator\Between</classname> allows you to validate if a given value is
         between two other values.
     </para>
 
-    <note><title>Zend_Validate_Between supports only number validation</title>
+    <note><title>Zend\Validator\Between supports only number validation</title>
         
 
         <para>
-            It should be noted that <classname>Zend_Validate_Between</classname> supports only the
+            It should be noted that <classname>Zend\Validator\Between</classname> supports only the
             validation of numbers. Strings or dates can not be validated with this validator.
         </para>
     </note>
 
-    <section xml:id="zend.validate.set.between.options"><title>Supported options for Zend_Validate_Between</title>
+    <section xml:id="zend.validator.set.between.options"><title>Supported options for Zend\Validator\Between</title>
         
 
         <para>
-            The following options are supported for <classname>Zend_Validate_Between</classname>:
+            The following options are supported for <classname>Zend\Validator\Between</classname>:
         </para>
 
         <itemizedlist>
@@ -48,7 +48,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.between.basic"><title>Default behaviour for Zend_Validate_Between</title>
+    <section xml:id="zend.validator.set.between.basic"><title>Default behaviour for Zend\Validator\Between</title>
         
 
         <para>
@@ -57,7 +57,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid  = new Zend_Validate_Between(array('min' => 0, 'max' => 10));
+$valid  = new Zend\Validator\Between(array('min' => 0, 'max' => 10));
 $value  = 10;
 $result = $valid->isValid($value);
 // returns true
@@ -71,7 +71,7 @@ $result = $valid->isValid($value);
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.between.inclusively"><title>Validation exclusive the border values</title>
+    <section xml:id="zend.validator.set.between.inclusively"><title>Validation exclusive the border values</title>
         
 
         <para>
@@ -80,7 +80,7 @@ $result = $valid->isValid($value);
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid  = new Zend_Validate_Between(
+$valid  = new Zend\Validator\Between(
     array(
         'min' => 0,
         'max' => 10,

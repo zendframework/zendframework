@@ -21,8 +21,8 @@
 
 namespace ZendTest\Log\Formatter;
 
-use ZendTest\Log\TestAsset\StringObject,
-    \Zend\Log\Formatter\Simple;
+use ZendTest\Log\TestAsset\StringObject;
+use \Zend\Log\Formatter\Simple;
 
 /**
  * @category   Zend

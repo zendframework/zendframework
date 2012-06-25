@@ -20,12 +20,12 @@
 
 namespace Zend\Log;
 
-use DateTime,
-    Zend\Stdlib\SplPriorityQueue,
-    Traversable,
-    Zend\Loader\Broker,
-    Zend\Loader\Pluggable,
-    Zend\Stdlib\ArrayUtils;
+use DateTime;
+use Zend\Stdlib\SplPriorityQueue;
+use Traversable;
+use Zend\Loader\Broker;
+use Zend\Loader\Pluggable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Logging messages with a stack of backends

@@ -21,11 +21,11 @@
 
 namespace ZendTest\Log\Writer;
 
-use ZendTest\Log\TestAsset\MockDbAdapter,
-    ZendTest\Log\TestAsset\MockDbDriver,
-    Zend\Log\Writer\Db as DbWriter,
-    Zend\Log\Logger,
-    Zend\Log\Formatter\Simple as SimpleFormatter;
+use ZendTest\Log\TestAsset\MockDbAdapter;
+use ZendTest\Log\TestAsset\MockDbDriver;
+use Zend\Log\Writer\Db as DbWriter;
+use Zend\Log\Logger;
+use Zend\Log\Formatter\Simple as SimpleFormatter;
 
 /**
  * @category   Zend

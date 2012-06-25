@@ -21,8 +21,8 @@
 
 namespace ZendTest\Log\Formatter;
 
-use ZendTest\Log\TestAsset\SerializableObject,
-    Zend\Log\Formatter\Xml as XmlFormatter;
+use ZendTest\Log\TestAsset\SerializableObject;
+use Zend\Log\Formatter\Xml as XmlFormatter;
 
 /**
  * @category   Zend

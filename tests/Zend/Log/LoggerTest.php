@@ -21,9 +21,9 @@
 
 namespace ZendTest\Log;
 
-use Zend\Log\Logger,
-    Zend\Log\Writer\Mock as MockWriter,
-    Zend\Stdlib\SplPriorityQueue;
+use Zend\Log\Logger;
+use Zend\Log\Writer\Mock as MockWriter;
+use Zend\Stdlib\SplPriorityQueue;
 
 /**
  * @category   Zend

@@ -108,14 +108,6 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @return null
-     */
-    public function getDefaultCatalog()
-    {
-        return null;
-    }
-
-    /**
      * Get current schema
      * 
      * @return string 

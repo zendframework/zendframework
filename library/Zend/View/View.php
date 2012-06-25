@@ -20,15 +20,15 @@
 
 namespace Zend\View;
 
-use Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\EventManager,
-    Zend\EventManager\EventManagerAwareInterface,
-    Zend\Mvc\MvcEvent,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Stdlib\ResponseInterface as Response,
-    Zend\View\Renderer\RendererInterface as Renderer,
-    Zend\View\Model\ModelInterface as Model,
-    Zend\View\Renderer\TreeRendererInterface;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\Mvc\MvcEvent;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Renderer\TreeRendererInterface;
 
 /**
  * @category   Zend

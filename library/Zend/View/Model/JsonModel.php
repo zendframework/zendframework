@@ -21,9 +21,9 @@
 
 namespace Zend\View\Model;
 
-use Traversable,
-    Zend\Json\Json,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Json\Json;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend

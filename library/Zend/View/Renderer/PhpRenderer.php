@@ -20,16 +20,16 @@
 
 namespace Zend\View\Renderer;
 
-use ArrayAccess,
-    Zend\Filter\FilterChain,
-    Zend\Loader\Pluggable,
-    Zend\View\Exception,
-    Zend\View\HelperBroker,
-    Zend\View\Model\ModelInterface as Model,
-    Zend\View\Resolver\TemplatePathStack,
-    Zend\View\Renderer\RendererInterface as Renderer,
-    Zend\View\Resolver\ResolverInterface as Resolver,
-    Zend\View\Variables;
+use ArrayAccess;
+use Zend\Filter\FilterChain;
+use Zend\Loader\Pluggable;
+use Zend\View\Exception;
+use Zend\View\HelperBroker;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Resolver\TemplatePathStack;
+use Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\View\Resolver\ResolverInterface as Resolver;
+use Zend\View\Variables;
 
 /**
  * Abstract class for Zend_View to help enforce private constructs.

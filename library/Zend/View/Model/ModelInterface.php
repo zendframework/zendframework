@@ -21,8 +21,8 @@
 
 namespace Zend\View\Model;
 
-use Countable,
-    IteratorAggregate;
+use Countable;
+use IteratorAggregate;
 
 /**
  * Interface describing a view model.

@@ -21,8 +21,8 @@
 
 namespace Zend\View\Renderer;
 
-use Zend\View\Resolver\ResolverInterface as Resolver,
-    Zend\View\Model\ModelInterface as Model;
+use Zend\View\Resolver\ResolverInterface as Resolver;
+use Zend\View\Model\ModelInterface as Model;
 
 /**
  * Interface class for Zend_View compatible template engine implementations

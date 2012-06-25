@@ -21,9 +21,9 @@
 
 namespace Zend\View\Helper;
 
-use Zend\View\Exception,
-    Zend\Registry,
-    ArrayObject;
+use Zend\View\Exception;
+use Zend\Registry;
+use ArrayObject;
 
 /**
  * Helper for setting and retrieving the doctype

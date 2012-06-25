@@ -21,8 +21,8 @@
 
 namespace Zend\View\Helper\Placeholder\Container;
 
-use Zend\View\Helper\Placeholder\Registry,
-    Zend\View\Exception;
+use Zend\View\Helper\Placeholder\Registry;
+use Zend\View\Exception;
 
 /**
  * Base class for targetted placeholder helpers

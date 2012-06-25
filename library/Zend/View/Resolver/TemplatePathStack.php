@@ -21,10 +21,10 @@
 
 namespace Zend\View\Resolver;
 
-use SplFileInfo,
-    Zend\Stdlib\SplStack,
-    Zend\View\Exception,
-    Zend\View\Renderer\RendererInterface as Renderer;
+use SplFileInfo;
+use Zend\Stdlib\SplStack;
+use Zend\View\Exception;
+use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * Resolves view scripts based on a stack of paths

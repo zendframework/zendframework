@@ -20,9 +20,9 @@
 
 namespace Zend\View;
 
-use Zend\Loader\PluginBroker,
-    Zend\View\Renderer\RendererInterface as Renderer,
-    Zend\View\Helper\HelperInterface as Helper;
+use Zend\Loader\PluginBroker;
+use Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\View\Helper\HelperInterface as Helper;
 
 /**
  * Helper Broker for view instances

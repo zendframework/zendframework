@@ -21,8 +21,8 @@
 
 namespace ZendTest\View;
 
-use Zend\View\HelperBroker,
-    Zend\View\Renderer\PhpRenderer;
+use Zend\View\HelperBroker;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * @category   Zend

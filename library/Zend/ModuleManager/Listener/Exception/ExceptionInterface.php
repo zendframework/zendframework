@@ -20,4 +20,5 @@ use Zend\ModuleManager\Exception\ExceptionInterface as Exception;
  * @subpackage Listener
  */
 interface ExceptionInterface extends Exception
-{}
+{
+}

@@ -70,7 +70,6 @@ class ServiceListener implements ListenerAggregateInterface
 
     /**
      * @param  ServiceLocatorInterface $services 
-     * @return void
      */
     public function __construct(ServiceLocatorInterface $services)
     {
@@ -79,7 +78,7 @@ class ServiceListener implements ListenerAggregateInterface
 
     /**
      * @param  EventManagerInterface $events 
-     * @return void
+     * @return ServiceListener
      */
     public function attach(EventManagerInterface $events)
     {

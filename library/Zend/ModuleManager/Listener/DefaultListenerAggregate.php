@@ -39,7 +39,7 @@ class DefaultListenerAggregate extends AbstractListener implements
      * Attach one or more listeners
      *
      * @param  EventManagerInterface $events
-     * @return void
+     * @return DefaultListenerAggregate
      */
     public function attach(EventManagerInterface $events)
     {

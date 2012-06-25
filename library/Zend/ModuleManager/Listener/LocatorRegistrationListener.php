@@ -112,7 +112,7 @@ class LocatorRegistrationListener extends AbstractListener implements
      * Attach one or more listeners
      *
      * @param  EventManagerInterface $events
-     * @return void
+     * @return LocatorRegistrationListener
      */
     public function attach(EventManagerInterface $events)
     {

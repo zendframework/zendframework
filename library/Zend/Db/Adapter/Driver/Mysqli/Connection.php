@@ -95,11 +95,11 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * Get current catalog
+     * Get default catalog
      * 
-     * @return string 
+     * @return null 
      */
-    public function getCurrentCatalog()
+    public function getDefaultCatalog()
     {
         return null;
     }

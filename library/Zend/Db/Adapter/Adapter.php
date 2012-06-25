@@ -135,11 +135,6 @@ class Adapter
         return $this->platform;
     }
 
-    public function getCurrentCatalog()
-    {
-        return $this->driver->getConnection()->getCurrentCatalog();
-    }
-
     public function getCurrentSchema()
     {
         return $this->driver->getConnection()->getCurrentSchema();

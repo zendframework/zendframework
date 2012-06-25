@@ -52,6 +52,13 @@ abstract class AbstractPluginManager extends ServiceManager
     protected $creationOptions = null;
 
     /**
+     * Enable this by default to allow overriding the default plugins
+     *
+     * @var bool
+     */
+    protected $retrieveFromPeeringManagerFirst = true;
+
+    /**
      * Constructor
      *
      * Add a default initializer to ensure the plugin is valid after instance

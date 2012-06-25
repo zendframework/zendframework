@@ -97,7 +97,7 @@ class ControllerLoaderFactory implements FactoryInterface
             }
 
             if (method_exists($instance, 'setPluginManager')) {
-                $instance->setPluginManager(clone $serviceLocator->get('ControllerPluginBroker'));
+                $instance->setPluginManager($serviceLocator->get('ControllerPluginBroker'));
             }
         });
 

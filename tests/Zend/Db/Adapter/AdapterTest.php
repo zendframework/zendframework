@@ -143,13 +143,13 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox unit test: Test getDefaultSchema() returns default schema from connection object
-     * @covers Zend\Db\Adapter\Adapter::getDefaultSchema
+     * @testdox unit test: Test getCurrentSchema() returns current schema from connection object
+     * @covers Zend\Db\Adapter\Adapter::getCurrentSchema
      */
-    public function testGetDefaultSchema()
+    public function testGetCurrentSchema()
     {
-        $this->mockConnection->expects($this->any())->method('getDefaultSchema')->will($this->returnValue('FooSchema'));
-        $this->assertEquals('FooSchema', $this->adapter->getDefaultSchema());
+        $this->mockConnection->expects($this->any())->method('getCurrentSchema')->will($this->returnValue('FooSchema'));
+        $this->assertEquals('FooSchema', $this->adapter->getCurrentSchema());
     }
 
     /**

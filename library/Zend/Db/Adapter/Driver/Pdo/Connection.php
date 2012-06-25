@@ -116,9 +116,11 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @return mixed
+     * Get current schema
+     * 
+     * @return string 
      */
-    public function getDefaultSchema()
+    public function getCurrentSchema()
     {
         if (!$this->isConnected()) {
             $this->connect();

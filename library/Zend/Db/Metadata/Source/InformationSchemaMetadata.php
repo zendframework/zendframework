@@ -48,7 +48,7 @@ class InformationSchemaMetadata implements MetadataInterface
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
-        $this->defaultSchema = ($adapter->getDefaultSchema()) ?: '__DEFAULT_SCHEMA__';
+        $this->defaultSchema = ($adapter->getCurrentSchema()) ?: '__DEFAULT_SCHEMA__';
     }
 
     /**

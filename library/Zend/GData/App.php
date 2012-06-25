@@ -146,7 +146,7 @@ class App
      *
      * @var boolean
      */
-    protected $_useObjectMapping = true;
+    protected static $_useObjectMapping = true;
 
     /**
      * Create Gdata object
@@ -603,7 +603,7 @@ class App
                 'You must specify an URI to which to post.');
         }
         if ($contentType != null){
-            $headers['Content-Type'] = $contentType; 
+            $headers['Content-Type'] = $contentType;
         }
         if (self::getGzipEnabled()) {
             // some services require the word 'gzip' to be in the user-agent
@@ -717,7 +717,7 @@ class App
             $requestData['method'], $requestData['url']);
 
         $feedContent = $response->getBody();
-        if (!!$this->_useObjectMapping) {
+        if (!self::$_useObjectMapping) {
             return $feedContent;
         }
         $feed = self::importString($feedContent, $className);
@@ -746,7 +746,7 @@ class App
         $response = $this->get($url, $extraHeaders);
 
         $feedContent = $response->getBody();
-        if (!$this->_useObjectMapping) {
+        if (!self::$_useObjectMapping) {
             return $feedContent;
         }
 
@@ -1172,7 +1172,7 @@ class App
             $etag = $data->getEtag();
             if ($etag instanceof Etag) {
                 $etag = $etag->getFieldValue();
-                if (!empty($etag) 
+                if (!empty($etag)
                     && ($allowWeek || (substr($etag, 0, 2) != 'W/'))
                 ) {
                     $result = $etag;
@@ -1191,7 +1191,7 @@ class App
      */
     public function usingObjectMapping()
     {
-        return $this->_useObjectMapping;
+        return self::$_useObjectMapping;
     }
 
     /**
@@ -1203,11 +1203,7 @@ class App
      */
     public function useObjectMapping($value)
     {
-        if ($value === True) {
-            $this->_useObjectMapping = true;
-        } else {
-            $this->_useObjectMapping = false;
-        }
+        self::$_useObjectMapping = (bool) $value;
     }
 
 }

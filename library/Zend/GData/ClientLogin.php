@@ -96,18 +96,18 @@ class ClientLogin
                 'useragent' => $useragent
             )
         );
-        
+
         $client->setEncType('multipart/form-data');
-        
+
         $postParams = array('accountType' => $accountType,
                             'Email'       => (string)$email,
                             'Passwd'      => (string) $password,
                             'service'     => (string) $service,
                             'source'      => (string) $source);
-        
+
         if ($loginToken || $loginCaptcha) {
             if($loginToken && $loginCaptcha) {
-                $postParams += array('logintoken' => (string)$loginToken, 
+                $postParams += array('logintoken' => (string)$loginToken,
                                      'logincaptcha' => (string)$loginCaptcha);
             } else {
                 throw new App\AuthException(
@@ -115,9 +115,9 @@ class ClientLogin
                     'to the CAPTCHA challenge.');
             }
         }
-        
+
         $client->setParameterPost($postParams);
-        
+
         // Send the authentication request
         // For some reason Google's server causes an SSL error. We use the
         // output buffer to supress an error from being shown. Ugly - but works!
@@ -128,7 +128,7 @@ class ClientLogin
             throw new App\HttpException($e->getMessage(), $e);
         }
         ob_end_clean();
-        
+
         // Parse Google's response
         $goog_resp = array();
         foreach (explode("\n", $response->getBody()) as $l) {

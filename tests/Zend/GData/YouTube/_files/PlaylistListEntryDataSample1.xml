@@ -2,7 +2,7 @@
 <entry xmlns='http://www.w3.org/2005/Atom'
 xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
 xmlns:media='http://search.yahoo.com/mrss/'
-xmlns:gd='http://schemas.google.com/g/2005' 
+xmlns:gd='http://schemas.google.com/g/2005'
 xmlns:yt='http://gdata.youtube.com/schemas/2007'>
   <id>
   http://gdata.youtube.com/feeds/users/testuser/playlists/46A2F8C9B36B6FE7</id>

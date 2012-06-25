@@ -66,7 +66,7 @@ class Analytics extends GData
 
     /**
      * Retrieve data feed object
-     * 
+     *
      * @param mixed $location
      * @return Analytics\DataFeed
      */
@@ -82,7 +82,7 @@ class Analytics extends GData
 
     /**
      * Returns a new DataQuery object.
-     * 
+     *
      * @return Analytics\DataQuery
      */
     public function newDataQuery()

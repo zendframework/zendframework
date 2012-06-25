@@ -45,12 +45,12 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         if (!constant('TESTS_ZEND_GDATA_ONLINE_ENABLED')) {
             $this->markTestSkipped('Zend_GData online tests are not enabled');
         }
-        
+
         if (!constant('TESTS_ZEND_GDATA_GAPPS_ONLINE_ENABLED')) {
             $this->markTestSkipped('GAppsOnlineTest is skipped');
         }
-        
-        
+
+
         $this->id = uniqid('ZF-');
         $username = constant('TESTS_ZEND_GDATA_GAPPS_EMAIL');
         $pass = constant('TESTS_ZEND_GDATA_GAPPS_PASSWORD');
@@ -411,7 +411,7 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test the convenience delete method for groups
-    public function testCanDeleteGroup() {  
+    public function testCanDeleteGroup() {
         // Create a group
         $generatedGroupName = strtolower(uniqid('zf-group-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
@@ -648,7 +648,7 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('new description here', $description);
 
     }
-    
+
     public function testEmailListCRUDOperations() {
         // Create email list
         $generatedListName = strtolower(uniqid('zf-list-'));

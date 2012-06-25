@@ -151,7 +151,7 @@ class App
     /**
      * Create Gdata object
      *
-     * @param \Zend\Http\Client $client
+     * @param Http\Client $client
      * @param string $applicationId
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
@@ -229,9 +229,9 @@ class App
     /**
      * Set the Zend\Http\Client object used for communication
      *
-     * @param \Zend\Http\Client $client The client to use for communication
+     * @param Http\Client $client The client to use for communication
      * @throws \Zend\GData\App\HttpException
-     * @return \Zend\GData\App Provides a fluent interface
+     * @return App Provides a fluent interface
      */
     public function setHttpClient(Http\Client $client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
@@ -1189,7 +1189,7 @@ class App
      * @return boolean True if service object is using XML to object mapping,
      *                 false otherwise.
      */
-    public function usingObjectMapping()
+    public static function usingObjectMapping()
     {
         return self::$_useObjectMapping;
     }
@@ -1201,7 +1201,7 @@ class App
      *                       Pass in false or null to disable it.
      * @return void
      */
-    public function useObjectMapping($value)
+    public static function useObjectMapping($value)
     {
         self::$_useObjectMapping = (bool) $value;
     }

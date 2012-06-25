@@ -7,9 +7,8 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
-namespace Zend\Crypt\PublicKey\Rsa;
 
-use Countable;
+namespace Zend\Crypt\PublicKey\Rsa;
 
 /**
  * @category   Zend
@@ -17,21 +16,16 @@ use Countable;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractKey implements Countable
+abstract class AbstractKey
 {
     const DEFAULT_KEY_SIZE = 2048;
 
     /**
+     * PEM formatted key
+     *
      * @var string
      */
     protected $pemString = null;
-
-    /**
-     * Bits, key string and type of key
-     *
-     * @var array
-     */
-    protected $details = array();
 
     /**
      * Key Resource
@@ -39,6 +33,23 @@ abstract class AbstractKey implements Countable
      * @var resource
      */
     protected $opensslKeyResource = null;
+
+    /**
+     * Openssl details array
+     *
+     * @var array
+     */
+    protected $details = array();
+
+    /**
+     * Get key size in bits
+     *
+     * @return int
+     */
+    public function getSize()
+    {
+        return $this->details['bits'];
+    }
 
     /**
      * Retrieve openssl key resource
@@ -82,25 +93,5 @@ abstract class AbstractKey implements Countable
     public function __toString()
     {
         return $this->toString();
-    }
-
-    /**
-     * Count
-     *
-     * @return integer
-     */
-    public function count()
-    {
-        return $this->details['bits'];
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->details['type'];
     }
 }

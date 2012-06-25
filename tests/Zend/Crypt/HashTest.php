@@ -84,7 +84,7 @@ class HashTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($output, $hash);
     }
 
-    // MD5 test suite talen from RFC 1321
+    // MD5 test suite taken from RFC 1321
 
     public static function provideTestMD5Data()
     {
@@ -118,7 +118,7 @@ class HashTest extends \PHPUnit_Framework_TestCase
 
     public function testBinaryOutput()
     {
-        $hash = Hash::compute('sha1', 'test', Hash::BINARY);
+        $hash = Hash::compute('sha1', 'test', Hash::OUTPUT_BINARY);
         $this->assertEquals('qUqP5cyxm6YcTAhz05Hph5gvu9M=', base64_encode($hash));
     }
 

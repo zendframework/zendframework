@@ -609,6 +609,36 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processOffset' => array('?')
         );
 
+        // joins with a few keywords in the on clause
+        $select28 = new Select;
+        $select28->from('foo')->join('zac', 'm = n AND c.x BETWEEN x AND y.z');
+        $sqlPrep28 = // same
+        $sqlStr28 = 'SELECT "foo".*, "zac".* FROM "foo" INNER JOIN "zac" ON "m" = "n" AND "c"."x" BETWEEN "x" AND "y"."z"';
+        $internalTests28 = array(
+            'processSelect' => array(array(array('"foo".*'), array('"zac".*')), '"foo"'),
+            'processJoin'   => array(array(array('INNER', '"zac"', '"m" = "n" AND "c"."x" BETWEEN "x" AND "y"."z"')))
+        );
+
+        // order with compound name
+        $select29 = new Select;
+        $select29->from('foo')->order('c1.d2');
+        $sqlPrep29 = //
+        $sqlStr29 = 'SELECT "foo".* FROM "foo" ORDER BY "c1"."d2" ASC';
+        $internalTests29 = array(
+            'processSelect' => array(array(array('"foo".*')), '"foo"'),
+            'processOrder'  => array(array(array('"c1"."d2"', Select::ORDER_ASCENDING)))
+        );
+
+        // group with compound name
+        $select30 = new Select;
+        $select30->from('foo')->group('c1.d2');
+        $sqlPrep30 = // same
+        $sqlStr30 = 'SELECT "foo".* FROM "foo" GROUP BY "c1"."d2"';
+        $internalTests30 = array(
+            'processSelect' => array(array(array('"foo".*')), '"foo"'),
+            'processGroup'  => array(array('"c1"."d2"'))
+        );
+
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -646,6 +676,9 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select25, $sqlPrep25, array(),    $sqlStr25, $internalTests25),
             array($select26, $sqlPrep26, $params26,  $sqlStr26, $internalTests26),
             array($select27, $sqlPrep27, $params27,  $sqlStr27, $internalTests27),
+            array($select28, $sqlPrep28, array(),    $sqlStr28, $internalTests28),
+            array($select29, $sqlPrep29, array(),    $sqlStr29, $internalTests29),
+            array($select30, $sqlPrep30, array(),    $sqlStr30, $internalTests30),
         );
     }
 

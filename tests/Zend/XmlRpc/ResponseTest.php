@@ -21,8 +21,8 @@
 
 namespace ZendTest\XmlRpc;
 
-use Zend\XmlRpc\Response,
-    Zend\XmlRpc\AbstractValue;
+use Zend\XmlRpc\Response;
+use Zend\XmlRpc\AbstractValue;
 
 /**
  * Test case for Zend_XmlRpc_Response

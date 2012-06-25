@@ -21,10 +21,10 @@
 
 namespace Zend\XmlRpc;
 
-use ReflectionClass,
-    Zend\Server\AbstractServer,
-    Zend\Server\Definition,
-    Zend\Server\Reflection;
+use ReflectionClass;
+use Zend\Server\AbstractServer;
+use Zend\Server\Definition;
+use Zend\Server\Reflection;
 
 /**
  * An XML-RPC server implementation

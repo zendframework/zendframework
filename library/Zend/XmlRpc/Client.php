@@ -21,9 +21,9 @@
 
 namespace Zend\XmlRpc;
 
-use Zend\Http,
-    Zend\Server\Client as ServerClient,
-    Zend\XmlRpc\AbstractValue;
+use Zend\Http;
+use Zend\Server\Client as ServerClient;
+use Zend\XmlRpc\AbstractValue;
 
 /**
  * An XML-RPC client implementation

@@ -21,14 +21,14 @@
 
 namespace ZendTest\XmlRpc;
 
-use Zend\Http\Client\Adapter,
-    Zend\Http,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\XmlRpc\Client,
-    Zend\XmlRpc\AbstractValue,
-    Zend\XmlRpc\Value,
-    Zend\XmlRpc;
+use Zend\Http\Client\Adapter;
+use Zend\Http;
+use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
+use Zend\XmlRpc\Client;
+use Zend\XmlRpc\AbstractValue;
+use Zend\XmlRpc\Value;
+use Zend\XmlRpc;
 
 /**
  * Test case for Zend\XmlRpc\Client

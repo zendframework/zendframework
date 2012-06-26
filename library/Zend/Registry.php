@@ -35,156 +35,6 @@ use RuntimeException;
 class Registry extends ArrayObject
 {
     /**
-     * Class name of the singleton registry object.
-     * @var string
-     */
-    private static $registryClassName = 'Zend\\Registry';
-
-    /**
-     * Registry object provides storage for shared objects.
-     * @var Registry
-     */
-    private static $registry = null;
-
-    /**
-     * Retrieves the default registry instance.
-     *
-     * @return Registry
-     */
-    public static function getInstance()
-    {
-        if (self::$registry === null) {
-            self::init();
-        }
-
-        return self::$registry;
-    }
-
-    /**
-     * Set the default registry instance to a specified instance.
-     *
-     * @param Registry $registry An object instance of type Registry,
-     *   or a subclass.
-     * @return void
-     * @throws RuntimeException if registry is already initialized.
-     */
-    public static function setInstance(Registry $registry)
-    {
-        if (self::$registry !== null) {
-            throw new RuntimeException('Registry is already initialized');
-        }
-
-        self::setClassName(get_class($registry));
-        self::$registry = $registry;
-    }
-
-    /**
-     * Initialize the default registry instance.
-     *
-     * @return void
-     */
-    protected static function init()
-    {
-        self::setInstance(new self::$registryClassName());
-    }
-
-    /**
-     * Set the class name to use for the default registry instance.
-     * Does not affect the currently initialized instance, it only applies
-     * for the next time you instantiate.
-     *
-     * @param string $registryClassName
-     * @return void
-     * @throws RuntimeException if the registry is initialized or if the
-     *   class name is not valid.
-     */
-    public static function setClassName($registryClassName = 'Zend\\Registry')
-    {
-        if (self::$registry !== null) {
-            throw new RuntimeException('Registry is already initialized');
-        }
-
-        if (!is_string($registryClassName)) {
-            throw new RuntimeException("Argument is not a class name");
-        }
-
-        if (!class_exists($registryClassName)) {
-            throw new DomainException(sprintf(
-                '%s expects a valid registry class name; received "%s", which did not resolve',
-                __METHOD__,
-                $registryClassName
-            ));
-        }
-
-        self::$registryClassName = $registryClassName;
-    }
-
-    /**
-     * Unset the default registry instance.
-     * Primarily used in tearDown() in unit tests.
-     * @returns void
-     */
-    public static function _unsetInstance()
-    {
-        self::$registry = null;
-    }
-
-    /**
-     * getter method, basically same as offsetGet().
-     *
-     * This method can be called from an object of type Zend_Registry, or it
-     * can be called statically.  In the latter case, it uses the default
-     * static instance stored in the class.
-     *
-     * @param string $index - get the value associated with $index
-     * @return mixed
-     * @throws RuntimeException if no entry is registerd for $index.
-     */
-    public static function get($index)
-    {
-        $instance = self::getInstance();
-
-        if (!$instance->offsetExists($index)) {
-            throw new RuntimeException("No entry is registered for key '$index'");
-        }
-
-        return $instance->offsetGet($index);
-    }
-
-    /**
-     * setter method, basically same as offsetSet().
-     *
-     * This method can be called from an object of type Zend_Registry, or it
-     * can be called statically.  In the latter case, it uses the default
-     * static instance stored in the class.
-     *
-     * @param string $index The location in the ArrayObject in which to store
-     *   the value.
-     * @param mixed $value The object to store in the ArrayObject.
-     * @return void
-     */
-    public static function set($index, $value)
-    {
-        $instance = self::getInstance();
-        $instance->offsetSet($index, $value);
-    }
-
-    /**
-     * Returns TRUE if the $index is a named value in the registry,
-     * or FALSE if $index was not found in the registry.
-     *
-     * @param  string $index
-     * @return boolean
-     */
-    public static function isRegistered($index)
-    {
-        if (self::$registry === null) {
-            return false;
-        }
-        return self::$registry->offsetExists($index);
-    }
-
-    /**
      * Constructs a parent ArrayObject with default
      * ARRAY_AS_PROPS to allow acces as an object
      *
@@ -197,13 +47,42 @@ class Registry extends ArrayObject
     }
 
     /**
-     * @param string $index
-     * @returns mixed
+     * getter method, basically same as offsetGet().
      *
-     * Workaround for http://bugs.php.net/bug.php?id=40442 (ZF-960).
+     * @param  string $index - get the value associated with $index
+     * @param  mixed $default Default value to return if $index does not exist
+     * @return mixed
      */
-    public function offsetExists($index)
+    public function get($index, $default = null)
     {
-        return array_key_exists($index, $this);
+        if (!$this->offsetExists($index)) {
+            return $default;
+        }
+
+        return $this->offsetGet($index);
+    }
+
+    /**
+     * setter method, basically same as offsetSet().
+     *
+     * @param  string $index The location in the ArrayObject in which to store *   the value.
+     * @param  mixed $value The object to store in the ArrayObject.
+     * @return void
+     */
+    public function set($index, $value)
+    {
+        $this->offsetSet($index, $value);
+    }
+
+    /**
+     * Returns TRUE if the $index is a named value in the registry,
+     * or FALSE if $index was not found in the registry.
+     *
+     * @param  string $index
+     * @return boolean
+     */
+    public function isRegistered($index)
+    {
+        return $this->offsetExists($index);
     }
 }

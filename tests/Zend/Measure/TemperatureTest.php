@@ -21,7 +21,6 @@
 
 namespace ZendTest\Measure;
 use Zend\Measure;
-use Zend\Registry;
 use Zend\Locale\Data\Cldr;
 
 /**
@@ -36,11 +35,6 @@ class TemperatureTest extends CommonTestCase
 {
     public function setUp()
     {
-        if (Registry::isRegistered('Zend_Locale')) {
-            $registry = Registry::getInstance();
-            unset($registry['Zend_Locale']);
-        }
-
         $this->_locale = setlocale(LC_ALL, 0);
         setlocale(LC_ALL, 'de');
 

@@ -152,11 +152,6 @@ class HeadTitle extends Placeholder\Container\Standalone
      */
     public function getTranslator()
     {
-        if (null === $this->_translator) {
-            if (\Zend\Registry::isRegistered('Zend_Translator')) {
-                $this->setTranslator(\Zend\Registry::get('Zend_Translator'));
-            }
-        }
         return $this->_translator;
     }
 

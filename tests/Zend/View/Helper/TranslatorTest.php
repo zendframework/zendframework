@@ -48,15 +48,6 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     public $basePath;
 
 
-    public function clearRegistry()
-    {
-        $regKey = 'Zend_Translator';
-        if (\Zend\Registry::isRegistered($regKey)) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry[$regKey]);
-        }
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -65,7 +56,6 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->clearRegistry();
         $this->helper = new Helper\Translator();
     }
 
@@ -78,7 +68,6 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->helper);
-        $this->clearRegistry();
     }
 
     public function testTranslationObjectPassedToConstructorUsedForTranslation()
@@ -97,13 +86,6 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $this->helper->setTranslator($trans);
         $this->assertEquals('eins', $this->helper->__invoke('one'));
         $this->assertEquals('three', $this->helper->__invoke('three'));
-    }
-
-    public function testTranslationObjectInRegistryUsedForTranslationsInAbsenceOfLocalTranslationObject()
-    {
-        $trans = new Translator\Translator('arrayAdapter', array('one' => 'eins', 'two %1\$s' => 'zwei %1\$s'), 'de');
-        \Zend\Registry::set('Zend_Translator', $trans);
-        $this->assertEquals('eins', $this->helper->__invoke('one'));
     }
 
     public function testOriginalMessagesAreReturnedWhenNoTranslationObjectPresent()
@@ -192,19 +174,6 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     public function testTranslationObjectNullByDefault()
     {
         $this->assertNull($this->helper->getTranslator());
-    }
-
-    public function testLocalTranslationObjectIsPreferredOverRegistry()
-    {
-        $transReg = new Translator\Translator('arrayAdapter', array('one' => 'eins'));
-        \Zend\Registry::set('Zend_Translator', $transReg);
-
-        $this->assertSame($transReg->getAdapter(), $this->helper->getTranslator());
-
-        $transLoc = new Translator\Translator('arrayAdapter', array('one' => 'uno'));
-        $this->helper->setTranslator($transLoc);
-        $this->assertSame($transLoc->getAdapter(), $this->helper->getTranslator());
-        $this->assertNotSame($transLoc->getAdapter(), $transReg->getAdapter());
     }
 
     public function testHelperObjectReturnedWhenNoArgumentsPassed()

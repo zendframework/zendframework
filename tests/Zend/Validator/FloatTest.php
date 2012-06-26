@@ -42,12 +42,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     protected $locale;
     public function setUp()
     {
-        $this->locale = setlocale(LC_ALL, 0); //backup locale
-
-        if (\Zend\Registry::isRegistered('Zend_Locale')) {
-            \Zend\Registry::getInstance()->offsetUnset('Zend_Locale');
-        }
-
+        $this->locale    = setlocale(LC_ALL, 0); //backup locale
         $this->validator = new FloatValidator();
     }
 
@@ -110,21 +105,11 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-4352
+     * @group ZF-4352
      */
     public function testNonStringValidation()
     {
         $this->assertFalse($this->validator->isValid(array(1 => 1)));
-    }
-
-    /**
-     * @ZF-7489
-     */
-    public function testUsingApplicationLocale()
-    {
-        \Zend\Registry::set('Zend_Locale', new \Zend\Locale\Locale('de'));
-        $valid = new FloatValidator();
-        $this->assertTrue($valid->isValid('123,456'));
     }
 
     /**

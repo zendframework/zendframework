@@ -22,7 +22,6 @@ namespace Zend\Validator;
 
 use Traversable;
 use Zend\Locale\Locale;
-use Zend\Registry;
 use Zend\Stdlib\ArrayUtils;
 
 /**
@@ -121,12 +120,6 @@ class Iban extends AbstractValidator
                 unset($options['locale']);
             } else {
                 $options = null;
-            }
-        }
-
-        if (empty($options) && ($options !== false)) {
-            if (Registry::isRegistered('Zend_Locale')) {
-                $options = Registry::get('Zend_Locale');
             }
         }
 

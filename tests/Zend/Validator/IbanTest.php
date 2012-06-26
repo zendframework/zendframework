@@ -21,7 +21,6 @@
 
 namespace ZendTest\Validator;
 
-use Zend\Registry;
 use Zend\Validator\Iban;
 
 /**
@@ -34,11 +33,6 @@ use Zend\Validator\Iban;
  */
 class IbanTest extends \PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-        Registry::_unsetInstance();
-    }
-
     /**
      * Ensures that the validator follows expected behavior
      *

@@ -48,17 +48,13 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
      */
     protected $errorOccurred = false;
 
-    public function clearRegistry()
-    {
-        if (\Zend\Registry::isRegistered('Zend_Translator')) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry['Zend_Translator']);
-        }
-    }
-
+    /**
+     * Creates a new validation object for each test method
+     *
+     * @return void
+     */
     public function setUp()
     {
-        $this->clearRegistry();
         AbstractValidator::setDefaultTranslator(null);
         StaticValidator::setPluginManager(null);
         $this->validator = new Alpha();
@@ -66,7 +62,6 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        $this->clearRegistry();
         AbstractValidator::setDefaultTranslator(null);
         AbstractValidator::setMessageLength(-1);
     }
@@ -99,15 +94,6 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->testCanSetGlobalDefaultTranslator();
         $this->assertSame(AbstractValidator::getDefaultTranslator(), $this->validator->getTranslator());
-    }
-
-    public function testGlobalTranslatorFromRegistryUsedWhenNoLocalTranslatorSet()
-    {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translate = new Translator\Translator('ArrayAdapter', array());
-        restore_error_handler();
-        \Zend\Registry::set('Zend_Translator', $translate);
-        $this->assertSame($translate->getAdapter(), $this->validator->getTranslator());
     }
 
     public function testLocalTranslatorPreferredOverGlobalTranslator()

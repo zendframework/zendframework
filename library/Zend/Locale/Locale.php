@@ -20,8 +20,7 @@
 
 namespace Zend\Locale;
 
-use Zend\Cache\Storage\StorageInterface as CacheStorage,
-    Zend\Registry;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
 
 /**
  * Base class for localization
@@ -898,12 +897,6 @@ class Locale
      */
     public static function findLocale($locale = null)
     {
-        if ($locale === null) {
-            if (Registry::isRegistered('Zend_Locale')) {
-                $locale = Registry::get('Zend_Locale');
-            }
-        }
-
         if ($locale === null) {
             $locale = new Locale();
         }

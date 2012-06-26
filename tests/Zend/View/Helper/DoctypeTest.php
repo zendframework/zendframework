@@ -53,11 +53,7 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = 'Zend_View_Helper_Doctype';
-        if (\Zend\Registry::isRegistered($regKey)) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry[$regKey]);
-        }
+        Helper\Doctype::unsetDoctypeRegistry();
         $this->helper = new Helper\Doctype();
     }
 
@@ -70,16 +66,6 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->helper);
-    }
-
-    public function testRegistryEntryCreatedAfterInstantiation()
-    {
-        $this->assertTrue(\Zend\Registry::isRegistered('Zend_View_Helper_Doctype'));
-        $doctype = \Zend\Registry::get('Zend_View_Helper_Doctype');
-        $this->assertTrue($doctype instanceof \ArrayObject);
-        $this->assertTrue(isset($doctype['doctype']));
-        $this->assertTrue(isset($doctype['doctypes']));
-        $this->assertTrue(is_array($doctype['doctypes']));
     }
 
     public function testDoctypeMethodReturnsObjectInstance()
@@ -222,8 +208,7 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
     {
         $doctype = $this->helper->__invoke(Helper\Doctype::XHTML1_STRICT);
         $string   = $doctype->__toString();
-        $registry = \Zend\Registry::get('Zend_View_Helper_Doctype');
-        $this->assertEquals($registry['doctypes'][Helper\Doctype::XHTML1_STRICT], $string);
+        $this->assertEquals('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">', $string);
     }
 }
 

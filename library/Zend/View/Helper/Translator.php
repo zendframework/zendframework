@@ -22,7 +22,6 @@
 namespace Zend\View\Helper;
 
 use Zend\Locale\Locale,
-    Zend\Registry,
     Zend\Translator\Adapter\AbstractAdapter as TranslationAdapter,
     Zend\Translator\Translator as Translation,
     Zend\View,
@@ -145,12 +144,6 @@ class Translator extends AbstractHelper
      */
     public function getTranslator()
     {
-        if ($this->translator === null) {
-            if (Registry::isRegistered('Zend_Translator')) {
-                $this->setTranslator(Registry::get('Zend_Translator'));
-            }
-        }
-
         return $this->translator;
     }
 

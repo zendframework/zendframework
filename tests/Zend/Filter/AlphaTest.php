@@ -190,36 +190,4 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
                 );
         }
     }
-
-    /**
-     * @group ZF-11631
-     */
-    public function testRegistryLocale()
-    {
-        $locale = new Locale('ja');
-        \Zend\Registry::set('Zend_Locale', $locale);
-
-        if (!self::$_unicodeEnabled) {
-            $this->markTestSkipped('Unicode not enabled');
-        }
-
-        $valuesExpected = array(
-                'aＡBｂc'  => 'aBc',
-                'z Ｙ　x'  => 'zx',
-                'Ｗ1v３Ｕ4t' => 'vt',
-                '，sй.rλ:qν＿p' => 'srqp',
-                'onml' => 'onml'
-        );
-
-        $filter = new AlphaFilter();
-        $this->assertEquals('ja', (string) $filter->getLocale());
-
-        foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals(
-                $output,
-                $result = $filter($input),
-                "Expected '$input' to filter to '$output', but received '$result' instead"
-                );
-        }
-    }
 }

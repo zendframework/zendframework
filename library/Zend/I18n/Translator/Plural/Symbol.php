@@ -21,7 +21,7 @@
 
 namespace Zend\I18n\Translator\Plural;
 
-use \Closure;
+use Closure;
 
 /**
  * Parser symbol.
@@ -164,7 +164,7 @@ class Symbol
      * @param  Symbol $left
      * @return Symbol
      */
-    public function getLeftDenoation($left)
+    public function getLeftDenotation($left)
     {
         if ($this->leftDenotationGetter === null) {
             throw new Exception\ParseException(sprintf(

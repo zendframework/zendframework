@@ -24,7 +24,7 @@ namespace Zend\I18n\Translator;
 use Locale;
 use Zend\Loader\Broker;
 use Zend\Loader\PluginBroker;
-use Zend\Cache\Storage\Adapter as CacheAdapter;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
 
 /**
  * Translator.
@@ -75,7 +75,7 @@ class Translator
     /**
      * Translation cache.
      *
-     * @var CacheAdapter
+     * @var CacheStorage
      */
     protected $cache;
 
@@ -141,10 +141,10 @@ class Translator
     /**
      * Sets a cache
      *
-     * @param  CacheAdapter $cache
+     * @param  CacheStorage $cache
      * @return Translator
      */
-    public function setCache(CacheAdapter $cache = null)
+    public function setCache(CacheStorage $cache = null)
     {
         $this->cache = $cache;
         return $this;
@@ -153,7 +153,7 @@ class Translator
     /**
      * Returns the set cache
      *
-     * @return CacheAdapter The set cache
+     * @return CacheStorage The set cache
      */
     public function getCache()
     {
@@ -161,22 +161,35 @@ class Translator
     }
 
     /**
-     * Retreive or set the plugin broker.
+     * Set the plugin broker
+     * 
+     * @param  Broker $pluginBroker 
+     * @return Translator
+     */
+    public function setPluginBroker(Broker $pluginBroker)
+    {
+        $this->pluginBroker = $pluginBroker;
+        return $this;
+    }
+
+    /**
+     * Retreive the plugin broker.
+     *
+     * Lazy loads an instance if none currently set.
      *
      * @param  Broker $broker
      * @return Broker
      */
-    public function pluginBroker(Broker $broker = null)
+    public function getPluginBroker()
     {
-        if ($broker !== null) {
-            $this->pluginBroker = $broker;
-        } elseif ($this->pluginBroker === null) {
-            $this->pluginBroker = new PluginBroker();
-            $this->pluginBroker->getClassLoader()->registerPlugins(array(
+        if (!$this->pluginBroker instanceof Broker) {
+            $broker = new PluginBroker();
+            $broker->getClassLoader()->registerPlugins(array(
                 'phpArray' => __NAMESPACE__ . '\Loader\PhpArray',
                 'gettext'  => __NAMESPACE__ . '\Loader\Gettext',
-                // And so on …
+                // And so on...
             ));
+            $this->setPluginBroker($broker);
         }
 
         return $this->pluginBroker;
@@ -197,7 +210,11 @@ class Translator
 
         if ($translation !== null && $translation !== '') {
             return $translation;
-        } elseif (null !== ($fallbackLocale = $this->getFallbackLocale()) && $locale !== $fallbackLocale) {
+        } 
+        
+        if (null !== ($fallbackLocale = $this->getFallbackLocale()) 
+            && $locale !== $fallbackLocale
+        ) {
             return $this->translate($message, $textDomain, $fallbackLocale);
         }
 
@@ -221,18 +238,28 @@ class Translator
         $textDomain = 'default',
         $locale = null
     ) {
-        $locale      = ($locale ?: $this->getLocale());
+        $locale      = $locale ?: $this->getLocale();
         $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
 
         if ($translation === null || $translation === '') {
-            if (null !== ($fallbackLocale = $this->getFallbackLocale()) && $locale !== $fallbackLocale) {
-                return $this->translatePlural($singular, $plural, $number, $textDomain, $fallbackLocale);
+            if (null !== ($fallbackLocale = $this->getFallbackLocale()) 
+                && $locale !== $fallbackLocale
+            ) {
+                return $this->translatePlural(
+                    $singular, 
+                    $plural, 
+                    $number, 
+                    $textDomain, 
+                    $fallbackLocale
+                );
             }
 
             return ($number != 1 ? $singular : $plural);
         }
 
-        $index = $this->messages[$textDomain][$locale]->pluralRule()->evaluate($number);
+        $index = $this->messages[$textDomain][$locale]
+                      ->pluralRule()
+                      ->evaluate($number);
 
         if (!isset($translation[$index])) {
             throw new Exception\OutOfBoundsException(sprintf(
@@ -286,7 +313,7 @@ class Translator
         $textDomain = 'default',
         $locale = null
     ) {
-        $locale = ($locale ?: '*');
+        $locale = $locale ?: '*';
 
         if (!isset($this->files[$textDomain])) {
             $this->files[$textDomain] = array();
@@ -294,7 +321,7 @@ class Translator
 
         $this->files[$textDomain][$locale] = array(
             'type'     => $type,
-            'filename' => $filename
+            'filename' => $filename,
         );
 
         return $this;
@@ -309,7 +336,8 @@ class Translator
      * @param  string $textDomain
      * @return Translator
      */
-    public function addTranslationPattern($type,
+    public function addTranslationPattern(
+        $type,
         $baseDir,
         $pattern,
         $textDomain = 'default'
@@ -321,7 +349,7 @@ class Translator
         $this->patterns[$textDomain][] = array(
             'type'    => $type,
             'baseDir' => rtrim($baseDir . '/'),
-            'pattern' => $pattern
+            'pattern' => $pattern,
         );
 
         return $this;
@@ -356,8 +384,9 @@ class Translator
                           . sprintf($pattern['pattern'], $locale);
 
                 if (is_file($filename)) {
-                    $this->messages[$textDomain][$locale] = $this->pluginBroker()
-                        ->load($pattern['type'])->load($filename, $locale);
+                    $this->messages[$textDomain][$locale] = $this->getPluginBroker()
+                         ->load($pattern['type'])
+                         ->load($filename, $locale);
                 }
             }
         }
@@ -369,8 +398,9 @@ class Translator
             }
 
             $file = $this->files[$textDomain][$currentLocale];
-            $this->messages[$textDomain][$locale] = $this->pluginBroker()
-                ->load($file['type'])->load($file['filename'], $locale);
+            $this->messages[$textDomain][$locale] = $this->getPluginBroker()
+                 ->load($file['type'])
+                 ->load($file['filename'], $locale);
 
             unset($this->files[$textDomain][$currentLocale]);
         }

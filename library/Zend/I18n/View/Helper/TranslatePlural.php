@@ -65,8 +65,12 @@ class TranslatePlural extends AbstractHelper
      * @param  string  $locale
      * @return string
      */
-    public function __invoke($singular, $plural, $number,
-        $textDomain = 'default', $locale = null
+    public function __invoke(
+        $singular, 
+        $plural, 
+        $number,
+        $textDomain = 'default', 
+        $locale = null
     ) {
         if ($this->translator === null) {
             throw new Exception\RuntimeException('Translator has not been set');

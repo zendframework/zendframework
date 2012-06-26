@@ -177,7 +177,10 @@ class Rule
                        : $this->evaluateAstPart($ast['arguments'][2], $number);
 
             default:
-                exit('Unknown token: ' . $ast['id']);
+                throw new Exception\ParseException(sprintf(
+                    'Unknown token: %s',
+                    $ast['id']
+                ));
         }
     }
 
@@ -194,13 +197,19 @@ class Rule
         }
 
         if (!preg_match('(nplurals=(?P<nplurals>\d+))', $string, $match)) {
-            exit ('parse error');
+            throw new Exception\ParseException(sprintf(
+                'Unknown or invalid parser rule: %s',
+                $string
+            ));
         }
 
         $numPlurals = (int) $match['nplurals'];
 
         if (!preg_match('(plural=(?P<plural>[^;\n]+))', $string, $match)) {
-            exit ('parse error');
+            throw new Exception\ParseException(sprintf(
+                'Unknown or invalid parser rule: %s',
+                $string
+            ));
         }
 
         $tree = self::$parser->parse($match['plural']);

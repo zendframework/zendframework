@@ -41,14 +41,14 @@ class Gettext implements LoaderInterface
      *
      * @var resource
      */
-    protected $_file;
+    protected $file;
 
     /**
      * Whether the current file is little endian.
      *
      * @var boolean
      */
-    protected $_littleEndian;
+    protected $littleEndian;
 
     /**
      * load(): defined by LoaderInterface.
@@ -108,16 +108,17 @@ class Gettext implements LoaderInterface
 
         // Read in all translations
         for ($current = 0; $current < $numStrings; $current++) {
-            $originalStringSize      = $originalStringTable[$current * 2 + 1];
-            $originalStringOffset    = $originalStringTable[$current * 2 + 2];
-            $translationStringSize   = $translationStringTable[$current * 2 + 1];
-            $translationStringOffset = $translationStringTable[$current * 2 + 2];
+            $sizeKey                 = $current * 2 + 1;
+            $offsetKey               = $current * 2 + 2;
+            $originalStringSize      = $originalStringTable[$sizeKey];
+            $originalStringOffset    = $originalStringTable[$offsetKey];
+            $translationStringSize   = $translationStringTable[$sizeKey];
+            $translationStringOffset = $translationStringTable[$offsetKey];
 
+            $originalString = array('');
             if ($originalStringSize > 0) {
                 fseek($originalStringOffset);
                 $originalString = explode("\0", fread($this->file, $originalStringSize));
-            } else {
-                $originalString = array('');
             }
 
             if ($translationStringSize > 0) {
@@ -139,7 +140,7 @@ class Gettext implements LoaderInterface
         }
 
         // Read header entries
-        if (array_key_eixsts('', $textDomain)) {
+        if (array_key_exists('', $textDomain)) {
             $rawHeaders = explode("\n", $textDomain['']);
 
             foreach ($rawHeaders as $rawHeader) {

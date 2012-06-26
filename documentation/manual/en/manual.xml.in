@@ -1120,6 +1120,14 @@
 
         </chapter>
 
+        <chapter xml:id="zend.i18n"><title>Zend_I18n</title>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_I18n-Translating.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_I18n-Translating.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
         <!--<chapter xml:id="zend.infocard"><title>Zend_InfoCard</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_InfoCard-Basics.xml" parse="xml">-->

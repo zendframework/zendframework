@@ -30,7 +30,7 @@ namespace Zend\Test\PHPUnit;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class DatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
+abstract class AbstractDatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
 {
     /**
      * Creates a new Zend Database Connection using the given Adapter and database schema name.

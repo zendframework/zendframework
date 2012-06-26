@@ -29,7 +29,7 @@ namespace ZendTest\Test\PHPUnit\Db;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
-class TestCaseTest extends \Zend\Test\PHPUnit\DatabaseTestCase
+class TestCaseTest extends \Zend\Test\PHPUnit\AbstractDatabaseTestCase
 {
     /**
      * Contains a Database Connection

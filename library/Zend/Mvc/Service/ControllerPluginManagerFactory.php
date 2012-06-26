@@ -49,9 +49,10 @@ class ControllerPluginManagerFactory implements FactoryInterface
 
         // Configure additional plugins
         $config = $serviceLocator->get('Configuration');
-        $map    = (isset($config['controller']) && isset($config['controller']['map'])) 
-                ? $config['controller']['map']
+        $map    = (isset($config['controller']) && isset($config['controller']['plugin_map']))
+                ? $config['controller']['plugin_map']
                 : array();
+
         foreach ($map as $key => $service) {
             if ((!is_string($key) || is_numeric($key))
                 && class_exists($service)

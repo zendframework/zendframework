@@ -13,20 +13,22 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
- * @subpackage Audioscrobbler
+ * @package    Zend\Service\Rackspace
+ * @subpackage Servers
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
-namespace Zend\Service\Audioscrobbler;
+namespace Zend\Service\Rackspace\Servers\Exception;
+
+use Zend\Service\Rackspace\Exception\ExceptionInterface as RackspaceException;
 
 /**
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service\Rackspace
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
-{}
+interface ExceptionInterface extends RackspaceException
+{
+}

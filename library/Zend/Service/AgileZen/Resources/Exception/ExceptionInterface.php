@@ -13,21 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage S3
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\Amazon\S3;
+namespace Zend\Service\AgileZen\Resources;
+
+use Zend\Service\AgileZen\Exception\ExceptionInterface as AgileZenException;
 
 /**
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage S3
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception 
-    extends \Zend\Service\Amazon\Exception
-{}
+interface ExceptionInterface extends AgileZenException
+{
+}

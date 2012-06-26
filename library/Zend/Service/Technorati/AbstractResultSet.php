@@ -41,7 +41,7 @@ use SeekableIterator;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @abstract
  */
-abstract class ResultSet implements SeekableIterator
+abstract class AbstractResultSet implements SeekableIterator
 {
     /**
      * The total number of results available

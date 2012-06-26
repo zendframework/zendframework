@@ -21,10 +21,7 @@
 
 namespace Zend\Service\Rackspace;
 
-use Zend\Service\Rackspace\Rackspace as RackspaceAbstract;
-use Zend\Http\Client as HttpClient;
-
-class Files extends RackspaceAbstract
+class Files extends AbstractRackspace
 {
     const ERROR_CONTAINER_NOT_EMPTY            = 'The container is not empty, I cannot delete it.';
     const ERROR_CONTAINER_NOT_FOUND            = 'The container was not found.';

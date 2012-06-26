@@ -27,7 +27,7 @@ use Zend\Service\Technorati;
  */
 
 /**
- * @see Technorati\ResultSet
+ * @see Technorati\AbstractResultSet
  */
 
 /**
@@ -51,12 +51,12 @@ class ResultSetTest extends TestCase
      * it's useful to check whether it correctly implements
      * SeekableIterator interface as requested.
      *
-     * Any *ResultSet class should be a child of ResultSet
+     * Any *AbstractResultSet class should be a child of AbstractResultSet
      * thus it's safe to test basic methods on such child class.
      */
     public function setUp()
     {
-        $this->ref = new \ReflectionClass('Zend\Service\Technorati\ResultSet');
+        $this->ref = new \ReflectionClass('Zend\Service\Technorati\AbstractResultSet');
         $this->dom = self::getTestFileContentAsDom('TestSearchResultSet.xml');
         $this->object = new Technorati\SearchResultSet($this->dom);
         $this->objectRef = new \ReflectionObject($this->object);

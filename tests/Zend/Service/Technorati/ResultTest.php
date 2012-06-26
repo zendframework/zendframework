@@ -52,7 +52,7 @@ class ResultTest extends TestCase
      */
     public function setUp()
     {
-        $this->ref = new \ReflectionClass('Zend\Service\Technorati\Result');
+        $this->ref = new \ReflectionClass('Zend\Service\Technorati\AbstractResult');
         $this->domElements = self::getTestFileElementsAsDom('TestSearchResultSet.xml');
         $this->object = new Technorati\SearchResult($this->domElements->item(0));
         $this->objectRef = new \ReflectionObject($this->object);

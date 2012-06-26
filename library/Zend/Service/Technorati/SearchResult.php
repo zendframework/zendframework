@@ -35,7 +35,7 @@ use Zend\Uri;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SearchResult extends Result
+class SearchResult extends AbstractResult
 {
     /**
      * Technorati weblog object corresponding to queried keyword.

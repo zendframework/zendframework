@@ -21,15 +21,12 @@
 
 namespace Zend\Service\AgileZen\Exception;
 
-use Zend\Service\AgileZen\Exception;
-
 /**
  * @package    Zend_Service
  * @subpackage AgileZen
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException 
-    extends \RuntimeException 
-    implements Exception
-{}
+class RuntimeException extends \RuntimeException implements ExceptionInterface
+{
+}

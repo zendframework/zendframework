@@ -13,21 +13,20 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage Ec2
+ * @package    Zend_Service
+ * @subpackage GoGrid
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\Amazon\Ec2;
+namespace Zend\Service\GoGrid\Exception;
 
 /**
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage Ec2
+ * @package    Zend_Service
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
-    extends \Zend\Service\Amazon\Exception
-{}
+interface ExceptionInterface
+{
+}

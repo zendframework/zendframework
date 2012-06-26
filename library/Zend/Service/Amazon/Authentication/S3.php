@@ -29,7 +29,7 @@ use Zend\Crypt\Hmac;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class S3 extends Authentication
+class S3 extends AbstractAuthentication
 {
     /**
      * Add the S3 Authorization signature to the request headers

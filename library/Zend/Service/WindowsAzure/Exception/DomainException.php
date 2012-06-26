@@ -14,6 +14,6 @@ namespace Zend\Service\WindowsAzure\Exception;
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  */
-class DomainException extends RuntimeException
+class DomainException extends \DomainException implements ExceptionInterface
 {
 }

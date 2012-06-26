@@ -14,20 +14,22 @@
  *
  * @category   Zend
  * @package    Zend_Service_Amazon
- * @subpackage SimpleDb
+ * @subpackage Sqs
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\Amazon\SimpleDb;
+namespace Zend\Service\Amazon\Sqs\Exception;
+
+use Zend\Service\Amazon\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Service_Amazon
- * @subpackage SimpleDb
+ * @subpackage Sqs
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception 
-    extends \Zend\Service\Amazon\Exception
-{}
+interface ExceptionInterface extends Exception\ExceptionInterface
+{
+}

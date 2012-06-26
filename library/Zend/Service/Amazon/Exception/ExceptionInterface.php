@@ -14,19 +14,19 @@
  *
  * @category   Zend
  * @package    Zend_Service
- * @subpackage StrikeIron
+ * @subpackage Amazon
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\StrikeIron;
+namespace Zend\Service\Amazon\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Service
- * @subpackage StrikeIron
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
-{}
+interface ExceptionInterface
+{
+}

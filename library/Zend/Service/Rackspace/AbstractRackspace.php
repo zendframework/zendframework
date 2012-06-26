@@ -24,7 +24,7 @@ namespace Zend\Service\Rackspace;
 use Zend\Service\Rackspace\Exception;
 use Zend\Http\Client as HttpClient;
 
-abstract class Rackspace
+abstract class AbstractRackspace
 {
     const VERSION                = 'v1.0';
     const US_AUTH_URL            = 'https://auth.api.rackspacecloud.com';
@@ -65,7 +65,7 @@ abstract class Rackspace
      */
     protected $authUrl;
     /**
-     * @var Zend\Http\Client
+     * @var HttpClient
      */
     protected $httpClient;
     /**
@@ -107,6 +107,7 @@ abstract class Rackspace
      * @param string $user
      * @param string $key
      * @param string $authUrl
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($user, $key, $authUrl=self::US_AUTH_URL)
     {
@@ -182,7 +183,8 @@ abstract class Rackspace
      * Get the management server URL
      *
      * @return string|boolean
-     */
+     * @throws Exception\RuntimeException
+     */     
     public function getManagementUrl()
     {
         if (empty($this->managementUrl)) {
@@ -221,6 +223,7 @@ abstract class Rackspace
      *
      * @param string $url
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function setAuthUrl($url)
     {
@@ -234,6 +237,7 @@ abstract class Rackspace
      * Get the authentication token
      *
      * @return string
+     * @throws Exception\RuntimeException
      */
     public function getToken()
     {
@@ -265,7 +269,7 @@ abstract class Rackspace
     /**
      * get the HttpClient instance
      *
-     * @return Zend\Http\Client
+     * @return HttpClient
      */
     public function getHttpClient()
     {

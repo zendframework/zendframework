@@ -36,7 +36,7 @@ use DOMXPath;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @abstract
  */
-abstract class Result
+abstract class AbstractResult
 {
     /**
      * An associative array of 'fieldName' => 'xmlfieldtag'

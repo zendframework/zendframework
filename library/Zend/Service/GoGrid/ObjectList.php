@@ -21,6 +21,9 @@
 
 namespace Zend\Service\GoGrid;
 
+use ArrayAccess;
+use Countable;
+use Iterator;
 use Zend\Service\GoGrid\Object;
 
 /**
@@ -32,7 +35,10 @@ use Zend\Service\GoGrid\Object;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ObjectList implements \Countable, \Iterator, \ArrayAccess
+class ObjectList implements
+    Countable,
+    Iterator,
+    ArrayAccess
 {
     const SUCCESS_STATUS= 'success';
     /**
@@ -63,11 +69,11 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      * @var string
      */
     protected $_errorMsg= '';
+
     /**
-     * __construct()
+     * Constructor
      * 
      * @param  array $list
-     * @return boolean
      */
     public function __construct($list = array())
     {
@@ -107,8 +113,8 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
     /**
      * Add an object
      *
-     * @param  Zend\Service\GoGrid\Object $obj
-     * @return Zend\Service\GoGrid\ObjectList
+     * @param  Object $obj
+     * @return ObjectList
      */
     protected function _addObject (Object $obj)
     {
@@ -204,7 +210,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      * Implement ArrayAccess::offsetGet()
      *
      * @param   int     $offset
-     * @throws  OutOfBoundsException
+     * @throws  Exception\OutOfBoundsException
      * @return  Zend\Service\GoGrid\Object
      */
     public function offsetGet($offset)
@@ -223,11 +229,11 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      *
      * @param   int     $offset
      * @param   string  $value
-     * @throws  Zend\Service\GoGrid\Exception
+     * @throws  Exception\RuntimeException
      */
     public function offsetSet($offset, $value)
     {
-        throw new Exception('You are trying to set read-only property');
+        throw new Exception\RuntimeException('You are trying to set read-only property');
     }
 
     /**
@@ -236,11 +242,11 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      * Implement ArrayAccess::offsetUnset()
      *
      * @param   int     $offset
-     * @throws  Zend\Service\GoGrid\Exception
+     * @throws  Exception\RuntimeException
      */
     public function offsetUnset($offset)
     {
-        throw new Exception('You are trying to unset read-only property');
+        throw new Exception\RuntimeException('You are trying to unset read-only property');
     }
     /**
      * Check if the service call was successful

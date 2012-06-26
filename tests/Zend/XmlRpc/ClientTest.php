@@ -26,6 +26,7 @@ use Zend\Http\Client\Adapter,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
     Zend\XmlRpc\Client,
+    Zend\XmlRpc\AbstractValue,
     Zend\XmlRpc\Value,
     Zend\XmlRpc;
 
@@ -278,7 +279,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $expects = 'date.method response';
         $this->setServerResponseTo($expects);
-        $this->assertSame($expects, $this->xmlrpcClient->call('date.method', array(Value::getXmlRpcValue(time(), Value::XMLRPC_TYPE_DATETIME), 'foo')));
+        $this->assertSame($expects, $this->xmlrpcClient->call('date.method', array(AbstractValue::getXmlRpcValue(time(), AbstractValue::XMLRPC_TYPE_DATETIME), 'foo')));
     }
 
     public function testAllowsSkippingSystemCallForArrayStructLookup()

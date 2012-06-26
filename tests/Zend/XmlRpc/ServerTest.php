@@ -23,7 +23,7 @@ namespace ZendTest\XmlRpc;
 use Zend\XmlRpc\Server,
     Zend\XmlRpc\Request,
     Zend\XmlRpc\Response,
-    Zend\XmlRpc\Value,
+    Zend\XmlRpc\AbstractValue,
     Zend\XmlRpc\Fault,
     Zend\XmlRpc;
 
@@ -426,10 +426,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testGetSetEncoding()
     {
         $this->assertEquals('UTF-8', $this->_server->getEncoding());
-        $this->assertEquals('UTF-8', Value::getGenerator()->getEncoding());
+        $this->assertEquals('UTF-8', AbstractValue::getGenerator()->getEncoding());
         $this->assertSame($this->_server, $this->_server->setEncoding('ISO-8859-1'));
         $this->assertEquals('ISO-8859-1', $this->_server->getEncoding());
-        $this->assertEquals('ISO-8859-1', Value::getGenerator()->getEncoding());
+        $this->assertEquals('ISO-8859-1', AbstractValue::getGenerator()->getEncoding());
     }
 
     /**

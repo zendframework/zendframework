@@ -379,7 +379,7 @@ class Server extends AbstractServer
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
-        Value::setEncoding($encoding);
+        AbstractValue::setEncoding($encoding);
         return $this;
     }
 
@@ -571,7 +571,7 @@ class Server extends AbstractServer
         $paramsLen  = count($params);
         if ($sigLength < $paramsLen) {
             for ($i = $sigLength; $i < $paramsLen; ++$i) {
-                $xmlRpcValue = Value::getXmlRpcValue($params[$i]);
+                $xmlRpcValue = AbstractValue::getXmlRpcValue($params[$i]);
                 $sigCalled[] = $xmlRpcValue->getType();
             }
         }

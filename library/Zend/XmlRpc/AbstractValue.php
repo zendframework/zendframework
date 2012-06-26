@@ -39,7 +39,7 @@ use Zend\Math\BigInteger;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Value
+abstract class AbstractValue
 {
     /**
      * The native XML-RPC representation of this object's value
@@ -188,7 +188,7 @@ abstract class Value
      *
      * @param  mixed $value
      * @param  Zend\XmlRpc\Value::constant $type
-     * @return Value
+     * @return AbstractValue
      */
     public static function getXmlRpcValue($value, $type = self::AUTO_DETECT_TYPE)
     {
@@ -252,7 +252,7 @@ abstract class Value
     public static function getXmlRpcTypeByValue($value)
     {
         if (is_object($value)) {
-            if ($value instanceof Value) {
+            if ($value instanceof AbstractValue) {
                 return $value->getType();
             } elseif (($value instanceof Date\Date) || ($value instanceof DateTime)) {
                 return self::XMLRPC_TYPE_DATETIME;
@@ -285,14 +285,14 @@ abstract class Value
      *
      * @param mixed $value The PHP variable for convertion
      *
-     * @return Value
+     * @return AbstractValue
      * @static
      */
     protected static function _phpVarToNativeXmlRpc($value)
     {
         // @see http://framework.zend.com/issues/browse/ZF-8623
         if (is_object($value)) {
-            if ($value instanceof Value) {
+            if ($value instanceof AbstractValue) {
                 return $value;
             }
             if ($value instanceof BigInteger) {
@@ -341,7 +341,7 @@ abstract class Value
      * @param string|SimpleXMLElement $xml A SimpleXMLElement object represent the XML string
      * It can be also a valid XML string for convertion
      *
-     * @return Zend\XmlRpc\Value\Value
+     * @return Zend\XmlRpc\Value\AbstractValue
      * @static
      */
     protected static function _xmlStringToNativeXmlRpc($xml)

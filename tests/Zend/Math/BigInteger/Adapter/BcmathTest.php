@@ -146,6 +146,12 @@ class BcmathTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2', $this->adapter->sqrt('4'));
     }
 
+    public function testAbs()
+    {
+        $this->assertSame('1152921504606847103.14159', $this->adapter->abs('1152921504606847103.14159'));
+        $this->assertSame('1152921504606847103.14159', $this->adapter->abs('-1152921504606847103.14159'));
+    }
+
     public function testIntegerToBinaryConversion()
     {
         // zero

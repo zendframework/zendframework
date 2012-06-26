@@ -71,6 +71,21 @@ class Mysql implements PlatformInterface
     }
 
     /**
+     * Quote value list
+     *
+     * @param string|string[] $valueList
+     * @return string
+     */
+    public function quoteValueList($valueList)
+    {
+        $valueList = str_replace('\'', '\\' . '\'', $valueList);
+        if (is_array($valueList)) {
+            $valueList = implode('\',\'', $valueList);
+        }
+        return '\'' . $valueList . '\'';
+    }
+
+    /**
      * Get identifier separator
      * 
      * @return string 

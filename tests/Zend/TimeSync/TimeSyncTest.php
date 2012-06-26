@@ -67,7 +67,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync($this->timeservers);
         $result = $server->getServer('server_f');
 
-        $this->assertInstanceOf('Zend\TimeSync\Protocol', $result);
+        $this->assertInstanceOf('Zend\TimeSync\AbstractProtocol', $result);
     }
 
     /**
@@ -295,7 +295,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $servers = new TimeSync\TimeSync($this->timeservers);
 
         foreach ($servers as $key => $server) {
-            $this->assertInstanceOf('Zend\TimeSync\Protocol', $server);
+            $this->assertInstanceOf('Zend\TimeSync\AbstractProtocol', $server);
         }
     }
 

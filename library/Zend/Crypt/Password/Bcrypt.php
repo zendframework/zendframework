@@ -73,24 +73,28 @@ class Bcrypt implements PasswordInterface
     public function create($password)
     {
         if (empty($this->salt)) {
-            try {
-                $salt = Math::randBytes(self::MIN_SALT_SIZE, true);
-            } catch (MathException\RuntimeException $e) {
-                throw new Exception\RuntimeException($e->getMessage());
-            }    
+            $salt = Math::randBytes(self::MIN_SALT_SIZE);   
         } else {
             $salt = $this->salt;
         }
         $salt64 = substr(str_replace('+', '.', base64_encode($salt)), 0, 22);
-        $code   = '$2a$';
         /**
+         * Check for security flaw in the bcrypt implementation used by crypt()
          * @see http://php.net/security/crypt_blowfish.php
-         * @see http://en.wikipedia.org/wiki/Crypt_%28Unix%29#Blowfish-based_scheme
          */
         if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
-            $code = '$2y$';
+            $prefix = '$2y$';
+        } else {
+            $prefix = '$2a$';
+            // check if the password contains 8-bit character 
+            if (preg_match('/[\x80-\xFF]/', $password)) {
+                throw new Exception\RuntimeException(
+                        'The bcrypt implementation used by PHP can contains a security flaw using password with 8-bit character. ' .
+                        'We suggest to upgrade to PHP 5.3.7+ or use passwords with only 7-bit characters'
+                );
+            }
         }
-        $hash   = crypt($password, $code . $this->cost . '$' . $salt64);
+        $hash   = crypt($password, $prefix . $this->cost . '$' . $salt64);
         if (strlen($hash) <= 13) {
             throw new Exception\RuntimeException('Error during the bcrypt generation');
         }

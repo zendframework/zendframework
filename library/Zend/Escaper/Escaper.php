@@ -115,7 +115,6 @@ class Escaper
         if (version_compare(PHP_VERSION, '5.4') >= 0) {
             $this->htmlSpecialCharsFlags = ENT_QUOTES | ENT_SUBSTITUTE;
         }
-        $this->initMatchers();
     }
 
     /**
@@ -157,7 +156,7 @@ class Escaper
         }
         $result = preg_replace_callback(
             '/[^a-zA-Z0-9,\.\-_]/Su',
-            $this->htmlAttrMatcher,
+            array($this, 'htmlAttrMatcher'),
             $string
         );
         return $this->fromUtf8($result);
@@ -183,7 +182,7 @@ class Escaper
         }
         $result = preg_replace_callback(
             '/[^a-zA-Z0-9,\._]/Su',
-            $this->jsMatcher,
+            array($this, 'jsMatcher'),
             $string
         );
         return $this->fromUtf8($result);
@@ -217,65 +216,88 @@ class Escaper
         }
         $result = preg_replace_callback(
             '/[^a-zA-Z0-9]/Su',
-            $this->cssMatcher,
+            array($this, 'cssMatcher'),
             $string
         );
         return $this->fromUtf8($result);
     }
 
-    protected function initMatchers()
+    /**
+     * Callback function for preg_replace_callback that applies HTML Attribute
+     * escaping to all matches.
+     * 
+     * @param array $matches
+     * @return string
+     */
+    public function htmlAttrMatcher($matches)
     {
-        $this->htmlAttrMatcher = function ($matches) {
-            $chr = $matches[0];
-            $ord = ord($chr);
-            /**
-             * The following replaces characters undefined in HTML with the
-             * hex entity for the Unicode replacement character.
-             */
-            if (($ord <= 0x1f && $chr != "\t" && $chr != "\n" && $chr != "\r")
-            || ($ord >= 0x7f && $ord <= 0x9f)) {
-                return '&#xFFFD;';
-            }
-            /**
-             * Check if the current character to escape has a name entity we should
-             * replace it with while grabbing the hex value of the character.
-             */
-            if (strlen($chr) == 1) {
-                $hex = strtoupper(substr('00' . bin2hex($chr), -2));
-            } else {
-                $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
-                $hex = strtoupper(substr('0000' . bin2hex($chr), -4));
-            }
-            $int = hexdec($hex);
-            if (array_key_exists($int, $this->htmlNamedEntityMap)) {
-                return sprintf('&%s;', $this->htmlNamedEntityMap[$int]);
-            }
-            /**
-             * Per OWASP recommendations, we'll use hex entities for any other
-             * characters where a named entity does not exist.
-             */
-            return sprintf('&#x%s;', $hex);
-        };
-        $this->jsMatcher = function ($matches) {
-            $chr = $matches[0];
-            if (strlen($chr) == 1) {
-                return sprintf('\\x%s', strtoupper(substr('00' . bin2hex($chr), -2)));
-            } else {
-                $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
-                return sprintf('\\u%s', strtoupper(substr('0000' . bin2hex($chr), -4)));
-            }
-        };
-        $this->cssMatcher = function ($matches) {
-            $chr = $matches[0];
-            if (strlen($chr) == 1) {
-                $hex = ltrim(strtoupper(bin2hex($chr)), '0');
-                if (strlen($hex) == 0) $hex = '0';
-                return sprintf('\\%s ', $hex);
-            } else {
-                $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
-                return sprintf('\\%s ', ltrim(strtoupper(bin2hex($chr)), '0'));
-            }
-        };
+        $chr = $matches[0];
+        $ord = ord($chr);
+        /**
+         * The following replaces characters undefined in HTML with the
+         * hex entity for the Unicode replacement character.
+         */
+        if (($ord <= 0x1f && $chr != "\t" && $chr != "\n" && $chr != "\r")
+        || ($ord >= 0x7f && $ord <= 0x9f)) {
+            return '&#xFFFD;';
+        }
+        /**
+         * Check if the current character to escape has a name entity we should
+         * replace it with while grabbing the hex value of the character.
+         */
+        if (strlen($chr) == 1) {
+            $hex = strtoupper(substr('00' . bin2hex($chr), -2));
+        } else {
+            $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
+            $hex = strtoupper(substr('0000' . bin2hex($chr), -4));
+        }
+        $int = hexdec($hex);
+        if (array_key_exists($int, $this->htmlNamedEntityMap)) {
+            return sprintf('&%s;', $this->htmlNamedEntityMap[$int]);
+        }
+        /**
+         * Per OWASP recommendations, we'll use hex entities for any other
+         * characters where a named entity does not exist.
+         */
+        return sprintf('&#x%s;', $hex);
+    }
+
+    /**
+     * Callback function for preg_replace_callback that applies Javascript
+     * escaping to all matches.
+     * 
+     * @param array $matches
+     * @return string
+     */
+    public function jsMatcher($matches)
+    {
+        $chr = $matches[0];
+        if (strlen($chr) == 1) {
+            return sprintf('\\x%s', strtoupper(substr('00' . bin2hex($chr), -2)));
+        } else {
+            $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
+            return sprintf('\\u%s', strtoupper(substr('0000' . bin2hex($chr), -4)));
+        }
+    }
+
+    /**
+     * Callback function for preg_replace_callback that applies CSS
+     * escaping to all matches.
+     * 
+     * @param array $matches
+     * @return string
+     */
+    public function cssMatcher($matches)
+    {
+        $chr = $matches[0];
+        if (strlen($chr) == 1) {
+            $hex = ltrim(strtoupper(bin2hex($chr)), '0');
+            if (strlen($hex) == 0) $hex = '0';
+            return sprintf('\\%s ', $hex);
+        } else {
+            $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
+            return sprintf('\\%s ', ltrim(strtoupper(bin2hex($chr)), '0'));
+        }
     }
 
     /**
@@ -339,10 +361,16 @@ class Escaper
      */
     protected function convertEncoding($string, $to, $from)
     {
+        $result = '';
         if (function_exists('iconv')) {
-            return iconv($from, $to, $string);
+            $result = iconv($from, $to, $string);
         } elseif (function_exists('mb_convert_encoding')) {
-            return mb_convert_encoding($string, $to, $from);
+            $result = mb_convert_encoding($string, $to, $from);
+        }
+        if ($result === false) {
+            return ''; // return non-fatal blank string on encoding errors from users
+        } else {
+            return $result;
         }
         throw new Exception\RuntimeException(
             get_called_class()

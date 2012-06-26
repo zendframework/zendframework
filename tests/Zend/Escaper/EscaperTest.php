@@ -42,7 +42,7 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
         ','     => ',',
         '.'     => '.',
         '-'     => '-',
-        ' '     => ' ',
+        '_'     => '_',
         /* Basic alnums exluded */
         'a'     => 'a',
         'A'     => 'A',
@@ -55,12 +55,12 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
         "\n"    => '&#x0A;',
         "\t"    => '&#x09;',
         "\0"    => '&#xFFFD;', // should use Unicode replacement char
-        /* Encode spaces for quoteless attribute protection */
+        /* Encode chars as named entities where possible */
         '˜'     => '&tilde;',
         'ÿ'     => '&yuml;',
         '¾'     => '&frac34;',
         '♦'     => '&diams;',
-        /* Encode chars as named entities where possible */
+        /* Encode spaces for quoteless attribute protection */
         ' '     => '&#x20;',
     );
 
@@ -77,7 +77,6 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
         ','     => ',',
         '.'     => '.',
         '_'     => '_',
-        ' '     => ' ',
         /* Basic alnums exluded */
         'a'     => 'a',
         'A'     => 'A',
@@ -111,7 +110,7 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
         ':'     => '%3A',
         ';'     => '%3B',
         '!'     => '%21',
-        /* Basic alnums exluded */
+        /* Basic alnums excluded */
         'a'     => 'a',
         'A'     => 'A',
         'z'     => 'z',

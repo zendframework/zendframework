@@ -393,29 +393,28 @@
             <!--</xi:include>-->
         </chapter>
 
-        <!--<chapter xml:id="zend.barcode"><title>Zend_Barcode</title>-->
-            <!---->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Barcode-Introduction.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_Barcode-Introduction.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Barcode-Creation.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_Barcode-Creation.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Barcode-Objects.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_Barcode-Objects.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Barcode-Renderers.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_Barcode-Renderers.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
-        <!--</chapter>-->
+        <chapter xml:id="zend.barcode"><title>Zend\Barcode</title>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.barcode.intro.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.barcode.intro.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.barcode.creation.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.barcode.creation.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.barcode.objects.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.barcode.objects.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.barcode.renderers.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.barcode.renderers.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+        </chapter>
 
         <chapter xml:id="zend.cache"><title>Zend\Cache</title>
 

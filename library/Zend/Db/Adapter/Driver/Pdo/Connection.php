@@ -118,11 +118,20 @@ class Connection implements ConnectionInterface
             $this->connect();
         }
 
+        switch ($this->driverName) {
+            case 'mysql':
+                $sql = 'SELECT DATABASE()';
+                break;
+            case 'pgsql':
+            default:
+                $sql = 'SELECT CURRENT_SCHEMA';
+                break;
+        }
+
         /** @var $result \PDOStatement */
-        $result = $this->resource->query('SELECT DATABASE()');
+        $result = $this->resource->query($sql);
         if ($result instanceof \PDOStatement) {
-            $r = $result->fetch_row();
-            return $r[0];
+            return $result->fetchColumn();
         }
         return false;
     }

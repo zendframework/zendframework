@@ -21,6 +21,7 @@
 
 namespace ZendTest\Validator;
 
+use stdClass;
 use Zend\Validator\NotEmpty;
 
 /**
@@ -546,7 +547,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     public function testObjects()
     {
         $valid = new NotEmpty(NotEmpty::STRING);
-        $object = new ClassTest1();
+        $object = new stdClass();
 
         $this->assertFalse($valid->isValid($object));
 
@@ -602,8 +603,6 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
                                      'messageTemplates', $validator);
     }
 }
-
-class ClassTest1 {}
 
 class ClassTest2
 {

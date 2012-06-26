@@ -34,11 +34,9 @@ use Zend\Validator\ValidatorChain;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
-class ValidatorTest extends \PHPUnit_Framework_TestCase
+class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validator object
-     *
      * @var ValidatorChain
      */
     protected $validator;
@@ -50,11 +48,6 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     protected $errorOccurred = false;
 
-    /**
-     * Creates a new Zend_Validator object for each test method
-     *
-     * @return void
-     */
     public function setUp()
     {
         $this->validator = new ValidatorChain();
@@ -78,7 +71,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testTrue()
     {
-        $this->validator->addValidator(new ValidatorTrue());
+        $this->validator->addValidator($this->getValidatorTrue());
         $this->assertTrue($this->validator->isValid(null));
         $this->assertEquals(array(), $this->validator->getMessages());
     }
@@ -90,7 +83,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testFalse()
     {
-        $this->validator->addValidator(new ValidatorFalse());
+        $this->validator->addValidator($this->getValidatorFalse());
         $this->assertFalse($this->validator->isValid(null));
         $this->assertEquals(array('error' => 'validation failed'), $this->validator->getMessages());
     }
@@ -102,8 +95,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testBreakChainOnFailure()
     {
-        $this->validator->addValidator(new ValidatorFalse(), true)
-            ->addValidator(new ValidatorFalse());
+        $this->validator->addValidator($this->getValidatorFalse(), true)
+            ->addValidator($this->getValidatorFalse());
         $this->assertFalse($this->validator->isValid(null));
         $this->assertEquals(array('error' => 'validation failed'), $this->validator->getMessages());
     }
@@ -151,8 +144,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsPrependingValidators()
     {
-        $this->validator->addValidator(new ValidatorTrue())
-            ->prependValidator(new ValidatorFalse(), true);
+        $this->validator->addValidator($this->getValidatorTrue())
+            ->prependValidator($this->getValidatorFalse(), true);
         $this->assertFalse($this->validator->isValid(true));
         $messages = $this->validator->getMessages();
         $this->assertArrayHasKey('error', $messages);
@@ -160,7 +153,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsPrependingValidatorsByName()
     {
-        $this->validator->addValidator(new ValidatorTrue())
+        $this->validator->addValidator($this->getValidatorTrue())
             ->prependByName('NotEmpty', array(), true);
         $this->assertFalse($this->validator->isValid(''));
         $messages = $this->validator->getMessages();
@@ -196,33 +189,31 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->errorOccurred = true;
     }
-}
 
-
-/**
- * Validator to return true to any input.
- */
-class ValidatorTrue extends AbstractValidator
-{
-    public function isValid($value)
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Zend\Validator\ValidatorInterface
+     */
+    public function getValidatorTrue()
     {
-        return true;
+        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
+        $validator->expects($this->any())
+            ->method('isValid')
+            ->will($this->returnValue(true));
+        return $validator;
     }
-}
 
-
-/**
- * Validator to return false to any input.
- */
-class ValidatorFalse extends AbstractValidator
-{
-    protected $messageTemplates = array(
-        'error' => 'validation failed',
-    );
-
-    public function isValid($value)
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Zend\Validator\ValidatorInterface
+     */
+    public function getValidatorFalse()
     {
-        $this->error('error');
-        return false;
+        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
+        $validator->expects($this->any())
+            ->method('isValid')
+            ->will($this->returnValue(false));
+        $validator->expects($this->any())
+            ->method('getMessages')
+            ->will($this->returnValue(array('error' => 'validation failed')));
+        return $validator;
     }
 }

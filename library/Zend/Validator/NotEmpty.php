@@ -84,7 +84,7 @@ class NotEmpty extends AbstractValidator
     /**
      * Constructor
      *
-     * @param  array|Traversable $options OPTIONAL
+     * @param  array|Traversable|int $options OPTIONAL
      */
     public function __construct($options = null)
     {

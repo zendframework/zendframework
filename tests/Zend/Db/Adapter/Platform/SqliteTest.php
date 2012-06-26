@@ -55,6 +55,16 @@ class SqliteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Zend\Db\Adapter\Platform\Sqlite::quoteIdentifierChain
+     */
+    public function testQuoteIdentifierChain()
+    {
+        $this->assertEquals('"identifier"', $this->platform->quoteIdentifierChain('identifier'));
+        $this->assertEquals('"identifier"', $this->platform->quoteIdentifierChain(array('identifier')));
+        $this->assertEquals('"schema"."identifier"', $this->platform->quoteIdentifierChain(array('schema','identifier')));
+    }
+
+    /**
      * @covers Zend\Db\Adapter\Platform\Sqlite::getQuoteValueSymbol
      */
     public function testGetQuoteValueSymbol()

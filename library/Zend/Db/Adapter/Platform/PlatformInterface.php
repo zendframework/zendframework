@@ -20,6 +20,7 @@ interface PlatformInterface
     public function getName();
     public function getQuoteIdentifierSymbol();
     public function quoteIdentifier($identifier);
+    public function quoteIdentifierChain($identifierChain);
     public function getQuoteValueSymbol();
     public function quoteValue($value);
     public function getIdentifierSeparator();

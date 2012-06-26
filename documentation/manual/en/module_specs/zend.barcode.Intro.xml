@@ -5,8 +5,8 @@
     
 
     <para>
-        <classname>Zend_Barcode</classname> provides a generic way to generate barcodes. The
-        <classname>Zend_Barcode</classname> component is divided into two subcomponents: barcode
+        <classname>Zend\Barcode\Barcode</classname> provides a generic way to generate barcodes. The
+        <classname>Zend\Barcode</classname> component is divided into two subcomponents: barcode
         objects and renderers. Objects allow you to create barcodes independently of the
         renderer. Renderer allow you to draw barcodes based on the support required.
     </para>

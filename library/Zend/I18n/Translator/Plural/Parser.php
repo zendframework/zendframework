@@ -267,7 +267,7 @@ class Parser
         while ($rightBindingPower < $this->currentToken->leftBindingPower) {
             $token              = $this->currentToken;
             $this->currentToken = $this->getNextToken();
-            $left               = $token->getLeftDenoation($left);
+            $left               = $token->getLeftDenotation($left);
         }
 
         return $left;

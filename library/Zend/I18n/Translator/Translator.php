@@ -22,8 +22,6 @@
 namespace Zend\I18n\Translator;
 
 use Locale;
-use Zend\Loader\Broker;
-use Zend\Loader\PluginBroker;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
 
 /**
@@ -80,11 +78,11 @@ class Translator
     protected $cache;
 
     /**
-     * Plugin broker.
+     * Plugin manager for translation loaders.
      *
-     * @var Broker
+     * @var LoaderPluginManager
      */
-    protected $pluginBroker;
+    protected $pluginManager;
 
     /**
      * Set the default locale.
@@ -161,38 +159,31 @@ class Translator
     }
 
     /**
-     * Set the plugin broker
+     * Set the plugin manager for translation loaders
      * 
-     * @param  Broker $pluginBroker 
+     * @param  LoaderPluginManager $pluginManager 
      * @return Translator
      */
-    public function setPluginBroker(Broker $pluginBroker)
+    public function setPluginManager(LoaderPluginManager $pluginManager)
     {
-        $this->pluginBroker = $pluginBroker;
+        $this->pluginManager = $pluginManager;
         return $this;
     }
 
     /**
-     * Retreive the plugin broker.
+     * Retreive the plugin manager for tranlation loaders.
      *
      * Lazy loads an instance if none currently set.
      *
-     * @param  Broker $broker
-     * @return Broker
+     * @return LoaderPluginManager
      */
-    public function getPluginBroker()
+    public function getPluginManager()
     {
-        if (!$this->pluginBroker instanceof Broker) {
-            $broker = new PluginBroker();
-            $broker->getClassLoader()->registerPlugins(array(
-                'phpArray' => __NAMESPACE__ . '\Loader\PhpArray',
-                'gettext'  => __NAMESPACE__ . '\Loader\Gettext',
-                // And so on...
-            ));
-            $this->setPluginBroker($broker);
+        if (!$this->pluginManager instanceof LoaderPluginManager) {
+            $this->setPluginManager(new LoaderPluginManager());
         }
 
-        return $this->pluginBroker;
+        return $this->pluginManager;
     }
 
     /**
@@ -384,8 +375,8 @@ class Translator
                           . sprintf($pattern['pattern'], $locale);
 
                 if (is_file($filename)) {
-                    $this->messages[$textDomain][$locale] = $this->getPluginBroker()
-                         ->load($pattern['type'])
+                    $this->messages[$textDomain][$locale] = $this->getPluginManager()
+                         ->get($pattern['type'])
                          ->load($filename, $locale);
                 }
             }
@@ -398,8 +389,8 @@ class Translator
             }
 
             $file = $this->files[$textDomain][$currentLocale];
-            $this->messages[$textDomain][$locale] = $this->getPluginBroker()
-                 ->load($file['type'])
+            $this->messages[$textDomain][$locale] = $this->getPluginManager()
+                 ->get($file['type'])
                  ->load($file['filename'], $locale);
 
             unset($this->files[$textDomain][$currentLocale]);

@@ -21,10 +21,11 @@
 
 namespace Zend\I18n\View;
 
-use Zend\Loader\PluginClassLoader;
+use Zend\ServiceManager\ConfigurationInterface;
+use Zend\ServiceManager\ServiceManager;
 
 /**
- * Plugin Class Loader implementation for i18n view helpers.
+ * Service manager configuration for i18n view helpers.
  *
  * @category   Zend
  * @package    Zend_I18n
@@ -32,16 +33,27 @@ use Zend\Loader\PluginClassLoader;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HelperLoader extends PluginClassLoader
+class HelperLoader implements ConfigurationInterface
 {
     /**
-     * $plugins: defined by PluginClassLoader.
-     *
-     * @see PluginClassLoader::$plugins
-     * @var array
+     * @var array Pre-aliased view helpers
      */
-    protected $plugins = array(
+    protected $invokables = array(
         'translate'       => 'Zend\I18n\View\Helper\Translate',
-        'translatePlural' => 'Zend\I18n\View\Helper\TranslatePlural',
+        'translateplural' => 'Zend\I18n\View\Helper\TranslatePlural',
     );
+
+    /**
+     * Configure the provided service manager instance with the configuration
+     * in this class.
+     *
+     * @param  ServiceManager $serviceManager 
+     * @return void
+     */
+    public function configureServiceManager(ServiceManager $serviceManager)
+    {
+        foreach ($this->invokables as $name => $service) {
+            $serviceManager->setInvokableClass($name, $service);
+        }
+    }
 }

@@ -24,7 +24,7 @@ namespace Zend\Cache\Pattern;
 use Zend\Cache\Exception,
     Zend\Cache\StorageFactory,
     Zend\Cache\Storage\StorageInterface as Storage,
-    Zend\Stdlib\Options;
+    Zend\Stdlib\AbstractOptions;
 
 /**
  * @category   Zend
@@ -33,7 +33,7 @@ use Zend\Cache\Exception,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PatternOptions extends Options
+class PatternOptions extends AbstractOptions
 {
     /**
      * Used by:

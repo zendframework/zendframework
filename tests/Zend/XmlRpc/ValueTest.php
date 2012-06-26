@@ -813,7 +813,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryThrowsWhenInvalidTypeSpecified()
     {
-        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 'Given type is not a Zend\XmlRpc\Value constant');
+        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 'Given type is not a Zend\XmlRpc\AbstractValue constant');
         AbstractValue::getXmlRpcValue('', 'bad type here');
     }
 

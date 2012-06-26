@@ -214,8 +214,8 @@ class Cloud
             $decorator = $this->getDecoratorPluginManager()->get($decorator, $options);
         }
 
-        if (!($decorator instanceof Cloud\Decorator\Cloud)) {
-            throw new Exception\InvalidArgumentException('DecoratorInterface is no instance of Cloud\Decorator\Cloud');
+        if (!($decorator instanceof Cloud\Decorator\AbstractCloud)) {
+            throw new Exception\InvalidArgumentException('DecoratorInterface is no instance of Cloud\Decorator\AbstractCloud');
         }
 
         $this->_cloudDecorator = $decorator;
@@ -261,7 +261,7 @@ class Cloud
             $decorator = $this->getDecoratorPluginManager()->get($decorator, $options);
         }
 
-        if (!($decorator instanceof Cloud\Decorator\Tag)) {
+        if (!($decorator instanceof Cloud\Decorator\AbstractTag)) {
             throw new Exception\InvalidArgumentException('DecoratorInterface is no instance of Cloud\Decorator\Tag');
         }
 

@@ -26,14 +26,14 @@ use Zend\Stdlib\ArrayUtils;
 use Zend\Tag\Cloud\Decorator\DecoratorInterface as Decorator;
 
 /**
- * Abstract class for cloud decorators
+ * Abstract class for tag decorators
  *
  * @category  Zend
  * @package   Zend_Tag
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Cloud implements Decorator
+abstract class AbstractTag implements Decorator
 {
     /**
      * Option keys to skip when calling setOptions()
@@ -64,7 +64,7 @@ abstract class Cloud implements Decorator
      * Set options from array
      *
      * @param  array $options Configuration for the decorator
-     * @return \Zend\Tag\Cloud
+     * @return AbstractTag
      */
     public function setOptions(array $options)
     {

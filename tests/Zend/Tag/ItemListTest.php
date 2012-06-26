@@ -21,9 +21,9 @@
 
 namespace ZendTest\Tag;
 
-use Zend\Tag,
-	Zend\Tag\Exception\InvalidArgumentException,
-	Zend\Tag\Exception\OutOfBoundsException;
+use Zend\Tag;
+use Zend\Tag\Exception\InvalidArgumentException;
+use Zend\Tag\Exception\OutOfBoundsException;
 
 /**
  * @category   Zend

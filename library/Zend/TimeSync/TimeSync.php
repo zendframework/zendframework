@@ -228,16 +228,15 @@ class TimeSync implements IteratorAggregate
      * facade and will try to return the date from the first server that
      * returns a valid result.
      *
-     * @param  Zend_Locale $locale OPTIONAL locale
-     * @return TimeSync
+     * @return \DateTime
      * @throws Exception\RuntimeException
      */
-    public function getDate($locale = null)
+    public function getDate()
     {
         foreach ($this->_timeservers as $alias => $server) {
             $this->_current = $server;
             try {
-                return $server->getDate($locale);
+                return $server->getDate();
             } catch (Exception\ExceptionInterface $e) {
                 if (!isset($masterException)) {
                     $masterException = new Exception\RuntimeException($e->getMessage(), $e->getCode());

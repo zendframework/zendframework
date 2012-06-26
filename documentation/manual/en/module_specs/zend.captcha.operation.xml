@@ -65,7 +65,7 @@ if ($captcha->isValid($_POST['foo'], $_POST)) {
     <note>
         <para>
             Under most circumstances, you probably prefer the use of <classname>Zend\Captcha</classname> functionality
-            combined with the power of the Zend\Form component. For an example on how to use
+            combined with the power of the <classname>Zend\Form</classname> component. For an example on how to use
             <classname>Zend\Form\Element\Captcha</classname>, have a look at the
             <link linkend="zend.form.quick-start">Zend\Form Quick Start</link>.
         </para>

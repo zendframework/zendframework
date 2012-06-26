@@ -4,36 +4,30 @@
 
     <para>
         All <acronym>CAPTCHA</acronym> adapter implement
-        <classname>Zend_Captcha_Adapter</classname>, which looks like the following:
+        <classname>Zend\Captcha\AdapterInterface</classname>, which looks like the following:
     </para>
 
     <programlisting language="php"><![CDATA[
-interface Zend_Captcha_Adapter extends Zend_Validate_Interface
+namespace Zend\Captcha;
+
+use Zend\Validator\ValidatorInterface;
+
+interface AdapterInterface extends ValidatorInterface
 {
     public function generate();
-
-    public function render(Zend_View $view, $element = null);
 
     public function setName($name);
 
     public function getName();
 
-    public function getDecorator();
-
-    // Additionally, to satisfy Zend_Validate_Interface:
-    public function isValid($value);
-
-    public function getMessages();
-
-    public function getErrors();
+    // Get helper name used for rendering this captcha type
+    public function getHelperName();
 }
 ]]></programlisting>
 
     <para>
         The name setter and getter are used to specify and retrieve the
-        <acronym>CAPTCHA</acronym> identifier. <methodname>getDecorator()</methodname> can be used
-        to specify a <classname>Zend_Form</classname> decorator either by name or returning an
-        actual decorator object. The most interesting methods are
+        <acronym>CAPTCHA</acronym> identifier. The most interesting methods are
         <methodname>generate()</methodname> and <methodname>render()</methodname>.
         <methodname>generate()</methodname> is used to create the <acronym>CAPTCHA</acronym>
         token. This process typically will store the token in the session so that you may compare
@@ -43,30 +37,38 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
     </para>
 
     <para>
-        A typical use case might look like the following:
+        A simple use case might look like the following:
     </para>
 
     <programlisting language="php"><![CDATA[
-// Creating a Zend_View instance
-$view = new Zend_View();
-
 // Originating request:
-$captcha = new Zend_Captcha_Figlet(array(
+$captcha = new Zend\Captcha\Figlet(array(
     'name' => 'foo',
     'wordLen' => 6,
     'timeout' => 300,
 ));
 
 $id = $captcha->generate();
-echo "<form method=\"post\" action=\"\">";
-echo $captcha->render($view);
-echo "</form>";
 
-// On subsequent request:
-// Assume captcha setup as before, the value of $_POST['foo']
+//this will output a Figlet string
+echo $captcha->getFiglet()->render($captcha->getWord());
+
+
+// On a subsequent request:
+// Assume a captcha setup as before, with corresponding form fields, the value of $_POST['foo']
 // would be key/value array: id => captcha ID, input => captcha value
 if ($captcha->isValid($_POST['foo'], $_POST)) {
     // Validated!
 }
 ]]></programlisting>
+
+    <note>
+        <para>
+            Under most circumstances, you probably prefer the use of <classname>Zend\Captcha</classname> functionality
+            combined with the power of the Zend\Form component. For an example on how to use
+            <classname>Zend\Form\Element\Captcha</classname>, have a look at the
+            <link linkend="zend.form.quick-start">Zend\Form Quick Start</link>.
+        </para>
+    </note>
+
 </section>

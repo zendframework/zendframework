@@ -43,17 +43,28 @@ class TextDomain extends ArrayObject
     protected $pluralRule;
 
     /**
-     * Get or set the plural rule.
+     * Set the plural rule
+     * 
+     * @param  PluralRule $rule 
+     * @return TextDomain
+     */
+    public function setPluralRule(PluralRule $rule)
+    {
+        $this->pluralRule = $rule;
+        return $this;
+    }
+
+    /**
+     * Get the plural rule.
      *
-     * @param  PluralRule $rule
+     * Lazy loads a default rule if none already registered
+     *
      * @return PluralRule
      */
-    public function pluralRule(PluralRule $rule = null)
+    public function getPluralRule()
     {
-        if ($rule !== null) {
-            $this->pluralRule = $rule;
-        } elseif ($this->pluralRule === null) {
-            $this->pluralRule = PluralRule::fromString('nplurals=2; plural=n==1');
+        if ($this->pluralRule === null) {
+            $this->setPluralRule(PluralRule::fromString('nplurals=2; plural=n==1'));
         }
 
         return $this->pluralRule;

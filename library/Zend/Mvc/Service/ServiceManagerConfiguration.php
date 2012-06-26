@@ -55,18 +55,18 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * @var array
      */
     protected $factories = array(
-        'Application'            => 'Zend\Mvc\Service\ApplicationFactory',
-        'Configuration'          => 'Zend\Mvc\Service\ConfigurationFactory',
-        'ControllerLoader'       => 'Zend\Mvc\Service\ControllerLoaderFactory',
+        'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
+        'Configuration'           => 'Zend\Mvc\Service\ConfigurationFactory',
+        'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
         'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
-        'DependencyInjector'     => 'Zend\Mvc\Service\DiFactory',
-        'EventManager'           => 'Zend\Mvc\Service\EventManagerFactory',
-        'ModuleManager'          => 'Zend\Mvc\Service\ModuleManagerFactory',
-        'Router'                 => 'Zend\Mvc\Service\RouterFactory',
-        'ViewFeedRenderer'       => 'Zend\Mvc\Service\ViewFeedRendererFactory',
-        'ViewFeedStrategy'       => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
-        'ViewJsonRenderer'       => 'Zend\Mvc\Service\ViewJsonRendererFactory',
-        'ViewJsonStrategy'       => 'Zend\Mvc\Service\ViewJsonStrategyFactory',
+        'DependencyInjector'      => 'Zend\Mvc\Service\DiFactory',
+        'EventManager'            => 'Zend\Mvc\Service\EventManagerFactory',
+        'ModuleManager'           => 'Zend\Mvc\Service\ModuleManagerFactory',
+        'Router'                  => 'Zend\Mvc\Service\RouterFactory',
+        'ViewFeedRenderer'        => 'Zend\Mvc\Service\ViewFeedRendererFactory',
+        'ViewFeedStrategy'        => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
+        'ViewJsonRenderer'        => 'Zend\Mvc\Service\ViewJsonRendererFactory',
+        'ViewJsonStrategy'        => 'Zend\Mvc\Service\ViewJsonStrategyFactory',
     );
 
     /**

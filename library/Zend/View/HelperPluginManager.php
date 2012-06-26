@@ -63,7 +63,6 @@ class HelperPluginManager extends AbstractPluginManager
         'inlinescript'        => 'Zend\View\Helper\InlineScript',
         'json'                => 'Zend\View\Helper\Json',
         'layout'              => 'Zend\View\Helper\Layout',
-        'navigation'          => 'Zend\View\Helper\Navigation',
         'paginationcontrol'   => 'Zend\View\Helper\PaginationControl',
         'partialloop'         => 'Zend\View\Helper\PartialLoop',
         'partial'             => 'Zend\View\Helper\Partial',

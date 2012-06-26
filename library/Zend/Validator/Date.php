@@ -85,7 +85,7 @@ class Date extends AbstractValidator
     }
 
     /**
-     * Returns the locale option
+     * Returns the format option
      *
      * @return string|null
      */

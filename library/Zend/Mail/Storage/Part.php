@@ -325,7 +325,7 @@ class Part implements RecursiveIterator, Part\PartInterface
                     $return = $header->getFieldValue();
                 } else {
                     $return = '';
-                    foreach($header as $h) {
+                    foreach ($header as $h) {
                         $return .= $h->getFieldValue() . Mime\Mime::LINEEND;
                     }
                     $return = trim($return, Mime\Mime::LINEEND);
@@ -336,7 +336,7 @@ class Part implements RecursiveIterator, Part\PartInterface
                     $return = array($header->getFieldValue());
                 } else {
                     $return = array();
-                    foreach($header as $h) {
+                    foreach ($header as $h) {
                         $return[] = $h->getFieldValue();
                     }
                 }

@@ -223,7 +223,10 @@ class Csrf extends AbstractValidator
     public function getHash()
     {
         if (null === $this->hash) {
-            $this->generateHash();
+            $this->hash = $this->getValidationToken();
+            if (null === $this->hash) {
+                $this->generateHash();
+            }
         }
         return $this->hash;
     }
@@ -270,7 +273,7 @@ class Csrf extends AbstractValidator
     public function initCsrfToken()
     {
         $session = $this->getSession();
-        $session->setExpirationHops(1, null, true);
+        //$session->setExpirationHops(1, null, true);
         $session->setExpirationSeconds($this->getTimeout());
         $session->hash = $this->getHash();
     }

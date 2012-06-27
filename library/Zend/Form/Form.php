@@ -130,6 +130,23 @@ class Form extends BaseForm implements FormFactoryAwareInterface
     public function prepare()
     {
         $this->getInputFilter();
+        $this->prepareElements($this->getIterator());
+    }
+
+    /**
+     * Prepare form elements
+     *
+     * Currently, only initialize the CSRF form element. 
+     */
+    protected function prepareElements($iterator)
+    {
+        foreach ($iterator as $elementOrFieldset) {
+            if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
+                $elementOrFieldset->prepare($this);
+            } else if ($elementOrFieldset instanceof Form) {
+                $this->prepareElements($elementOrFieldset->getIterator());
+            }
+        }
     }
 
     /**

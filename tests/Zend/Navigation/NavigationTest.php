@@ -40,13 +40,13 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
      * @var     Zend_Navigation
      */
     private $_navigation;
-    
+
     protected function setUp()
     {
         parent::setUp();
         $this->_navigation = new \Zend\Navigation\Navigation();
     }
-    
+
     protected function tearDown()
     {
         $this->_navigation = null;
@@ -55,7 +55,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Testing that navigation order is done correctly
-     * 
+     *
      * @group   ZF-8337
      * @group   ZF-8313
      */
@@ -78,5 +78,5 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('page1', $pages[1]['uri']);
         $this->assertEquals('page2', $pages[2]['uri']);
     }
-    
+
 }

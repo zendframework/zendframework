@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.objects"><title>Zend_Barcode Objects</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.objects"><title>Zend\Barcode\Barcode Objects</title>
     
 
     <para>
@@ -10,13 +10,13 @@
 
     <para>
         Objects have a large number of options. Most of them are common to all objects. These
-        options can be set in four ways:
+        options can be set in three ways:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                As an array or a <classname>Zend_Config</classname> object passed to the
+                As an array or a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="php.net/traversable"><classname>Traversable</classname></link> object) object passed to the
                 constructor.
             </para>
         </listitem>
@@ -24,13 +24,6 @@
         <listitem>
             <para>
                 As an array passed to the <methodname>setOptions()</methodname> method.
-            </para>
-        </listitem>
-
-        <listitem>
-            <para>
-                As a <classname>Zend_Config</classname> object passed to the
-                <methodname>setConfig()</methodname> method.
             </para>
         </listitem>
 
@@ -43,22 +36,19 @@
         
 
         <programlisting language="php"><![CDATA[
+use Zend\Barcode;
+
 $options = array('text' => 'ZEND-FRAMEWORK', 'barHeight' => 40);
 
 // Case 1: constructor
-$barcode = new Zend_Barcode_Object_Code39($options);
+$barcode = new Object\Code39($options);
 
 // Case 2: setOptions()
-$barcode = new Zend_Barcode_Object_Code39();
+$barcode = new Object\Code39();
 $barcode->setOptions($options);
 
-// Case 3: setConfig()
-$config  = new Zend_Config($options);
-$barcode = new Zend_Barcode_Object_Code39();
-$barcode->setConfig($config);
-
-// Case 4: individual setters
-$barcode = new Zend_Barcode_Object_Code39();
+// Case 3: individual setters
+$barcode = new Object\Code39();
 $barcode->setText('ZEND-FRAMEWORK')
         ->setBarHeight(40);
 ]]></programlisting>
@@ -94,7 +84,7 @@ $barcode->setText('ZEND-FRAMEWORK')
                     <row>
                         <entry><emphasis>barcodeNamespace</emphasis></entry>
                         <entry><type>String</type></entry>
-                        <entry><classname>Zend_Barcode_Object</classname></entry>
+                        <entry><classname>Zend\Barcode\Object</classname></entry>
 
                         <entry>
                             Namespace of the barcode; for example, if you need to extend the
@@ -119,20 +109,20 @@ $barcode->setText('ZEND-FRAMEWORK')
                         <entry><emphasis>barThinWidth</emphasis></entry>
                         <entry><type>Integer</type></entry>
                         <entry>1</entry>
-                        <entry>Width of the thin</entry>
+                        <entry>Width of the thin bar</entry>
                     </row>
 
                     <row>
                         <entry><emphasis>factor</emphasis></entry>
                         <entry><type>Integer</type></entry>
                         <entry>1</entry>
-                        <entry>Factor by which to multiply bar widths and font sizes</entry>
+                        <entry>Factor by which to multiply bar widths and font sizes (barHeight, barThinWidth, barThickWidth and fontSize)</entry>
                     </row>
 
                     <row>
                         <entry><emphasis>foreColor</emphasis></entry>
                         <entry><type>Integer</type></entry>
-                        <entry>0 (black)</entry>
+                        <entry>0x000000 (black)</entry>
 
                         <entry>
                             Color of the bar and the text. Could be provided as an integer
@@ -143,7 +133,7 @@ $barcode->setText('ZEND-FRAMEWORK')
                     <row>
                         <entry><emphasis>backgroundColor</emphasis></entry>
                         <entry><type>Integer</type> or <type>String</type></entry>
-                        <entry>16777125 (white)</entry>
+                        <entry>0xFFFFFF (white)</entry>
 
                         <entry>
                             Color of the background. Could be provided as an integer
@@ -152,15 +142,8 @@ $barcode->setText('ZEND-FRAMEWORK')
                     </row>
 
                     <row>
-                        <entry><emphasis>reverseColor</emphasis></entry>
-                        <entry><type>Boolean</type></entry>
-                        <entry><constant>FALSE</constant></entry>
-                        <entry>Allow switching the color of the bar and the background</entry>
-                    </row>
-
-                    <row>
                         <entry><emphasis>orientation</emphasis></entry>
-                        <entry><type>Integer</type></entry>
+                        <entry><type>Float</type></entry>
                         <entry>0</entry>
                         <entry>Orientation of the barcode</entry>
                     </row>
@@ -178,7 +161,7 @@ $barcode->setText('ZEND-FRAMEWORK')
 
                     <row>
                         <entry><emphasis>fontSize</emphasis></entry>
-                        <entry><type>Integer</type></entry>
+                        <entry><type>Float</type></entry>
                         <entry>10</entry>
                         <entry>Size of the font (not applicable with numeric fonts)</entry>
                     </row>
@@ -243,29 +226,31 @@ $barcode->setText('ZEND-FRAMEWORK')
             </tgroup>
         </table>
 
-        <section xml:id="zend.barcode.objects.common.options.barcodefont"><title>Particular case of static setBarcodeFont()</title>
+        <section xml:id="zend.barcode.barcode.common.options.barcodefont"><title>Particular case of static setBarcodeFont()</title>
             
 
             <para>
                 You can set a commont font for all your objects by using the static method
-                <methodname>Zend_Barcode_Object::setBarcodeFont()</methodname>. This value
+                <methodname>Zend\Barcode\Barcode::setBarcodeFont()</methodname>. This value
                 can be always be overridden for individual objects by using the
                 <methodname>setFont()</methodname> method.
             </para>
 
             <programlisting language="php"><![CDATA[
+use Zend\Barcode;
+
 // In your bootstrap:
-Zend_Barcode_Object::setBarcodeFont('my_font.ttf');
+Barcode::setBarcodeFont('my_font.ttf');
 
 // Later in your code:
-Zend_Barcode::render(
+Barcode::render(
     'code39',
     'pdf',
     array('text' => 'ZEND-FRAMEWORK')
 ); // will use 'my_font.ttf'
 
 // or:
-Zend_Barcode::render(
+Barcode::render(
     'code39',
     'image',
     array(
@@ -301,7 +286,7 @@ Zend_Barcode::render(
 
                         <entry>
                             Return the name of the barcode class without the namespace (e.g.
-                            <classname>Zend_Barcode_Object_Code39</classname> returns simply
+                            <classname>Zend\Barcode\Object\Code39</classname> returns simply
                             "code39")
                         </entry>
                     </row>
@@ -379,5 +364,5 @@ Zend_Barcode::render(
         </table>
     </section>
 
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Barcode-Objects_Details.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.barcode.objects.details.xml"/>
 </section>

@@ -9,7 +9,7 @@
         Zend Framework.
     </para>
 
-    <section xml:id="zend.barcode.objects.details.error"><title>Zend_Barcode_Object_Error</title>
+    <section xml:id="zend.barcode.objects.details.error"><title>Zend\Barcode\Object\Error</title>
         
 
         <para>
@@ -18,11 +18,11 @@
 
         <para>
             This barcode is a special case. It is internally used to automatically render
-            an exception caught by the <classname>Zend_Barcode</classname> component.
+            an exception caught by the <classname>Zend\Barcode</classname> component.
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.code128"><title>Zend_Barcode_Object_Code128</title>
+    <section xml:id="zend.barcode.objects.details.code128"><title>Zend\Barcode\Object\Code128</title>
         <para>
             <inlinemediaobject><imageobject><imagedata width="152" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.code128.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
@@ -58,7 +58,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.codabar"><title>Zend_Barcode_Object_Code25</title>
+    <section xml:id="zend.barcode.objects.details.codabar"><title>Zend\Barcode\Object\Codabar</title>
         <para>
             <inlinemediaobject><imageobject><imagedata width="152" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.codabar.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
@@ -94,7 +94,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.code25"><title>Zend_Barcode_Object_Code25</title>
+    <section xml:id="zend.barcode.objects.details.code25"><title>Zend\Barcode\Object\Code25</title>
         
 
         <para>
@@ -132,7 +132,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.code25interleaved"><title>Zend_Barcode_Object_Code25interleaved</title>
+    <section xml:id="zend.barcode.objects.details.code25interleaved"><title>Zend\Barcode\Object\Code25interleaved</title>
         
 
         <para>
@@ -140,7 +140,7 @@
         </para>
 
         <para>
-            This barcode extends <classname>Zend_Barcode_Object_Code25</classname>
+            This barcode extends <classname>Zend\Barcode\Object\Code25</classname>
             (Code 2 of 5), and has the same particulars and options, and adds the following:
         </para>
 
@@ -174,7 +174,7 @@
             Available options include:
         </para>
 
-        <table xml:id="zend.barcode.objects.details.code25interleaved.table"><title>Zend_Barcode_Object_Code25interleaved Options</title>
+        <table xml:id="zend.barcode.objects.details.code25interleaved.table"><title>Zend\Barcode\Object\Code25interleaved Options</title>
             
 
             <tgroup cols="4">
@@ -201,13 +201,13 @@
         <note>
             <para>
                 If the number of characters is not even,
-                <classname>Zend_Barcode_Object_Code25interleaved</classname> will automatically
+                <classname>Zend\Barcode\Object\Code25interleaved</classname> will automatically
                 prepend the missing zero to the barcode text.
             </para>
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.ean2"><title>Zend_Barcode_Object_Ean2</title>
+    <section xml:id="zend.barcode.objects.details.ean2"><title>Zend\Barcode\Object\Ean2</title>
         
 
         <para>
@@ -215,7 +215,7 @@
         </para>
 
         <para>
-            This barcode extends <classname>Zend_Barcode_Object_Ean5</classname>
+            This barcode extends <classname>Zend\Barcode\Object\Ean5</classname>
             (<acronym>EAN</acronym> 5), and has the same particulars and options, and adds the
             following:
         </para>
@@ -253,13 +253,13 @@
         <note>
             <para>
                 If the number of characters is lower than 2,
-                <classname>Zend_Barcode_Object_Ean2</classname> will automatically
+                <classname>Zend\Barcode\Object\Ean2</classname> will automatically
                 prepend the missing zero to the barcode text.
             </para>
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.ean5"><title>Zend_Barcode_Object_Ean5</title>
+    <section xml:id="zend.barcode.objects.details.ean5"><title>Zend\Barcode\Object\Ean5</title>
         
 
         <para>
@@ -267,7 +267,7 @@
         </para>
 
         <para>
-            This barcode extends <classname>Zend_Barcode_Object_Ean13</classname>
+            This barcode extends <classname>Zend\Barcode\Object\Ean13</classname>
             (<acronym>EAN</acronym> 13), and has the same particulars and options, and adds the
             following:
         </para>
@@ -305,13 +305,13 @@
         <note>
             <para>
                 If the number of characters is lower than 5,
-                <classname>Zend_Barcode_Object_Ean5</classname> will automatically
+                <classname>Zend\Barcode\Object\Ean5</classname> will automatically
                 prepend the missing zero to the barcode text.
             </para>
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.ean8"><title>Zend_Barcode_Object_Ean8</title>
+    <section xml:id="zend.barcode.objects.details.ean8"><title>Zend\Barcode\Object\Ean8</title>
         
 
         <para>
@@ -319,7 +319,7 @@
         </para>
 
         <para>
-            This barcode extends <classname>Zend_Barcode_Object_Ean13</classname>
+            This barcode extends <classname>Zend\Barcode\Object\Ean13</classname>
             (<acronym>EAN</acronym> 13), and has the same particulars and options, and adds the
             following:
         </para>
@@ -357,13 +357,13 @@
         <note>
             <para>
                 If the number of characters is lower than 8,
-                <classname>Zend_Barcode_Object_Ean8</classname> will automatically
+                <classname>Zend\Barcode\Object\Ean8</classname> will automatically
                 prepend the missing zero to the barcode text.
             </para>
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.ean13"><title>Zend_Barcode_Object_Ean13</title>
+    <section xml:id="zend.barcode.objects.details.ean13"><title>Zend\Barcode\Object\Ean13</title>
         
 
         <para>
@@ -403,7 +403,7 @@
         <note>
             <para>
                 If the number of characters is lower than 13,
-                <classname>Zend_Barcode_Object_Ean13</classname> will automatically
+                <classname>Zend\Barcode\Object\Ean13</classname> will automatically
                 prepend the missing zero to the barcode text.
             </para>
 
@@ -413,7 +413,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.code39"><title>Zend_Barcode_Object_Code39</title>
+    <section xml:id="zend.barcode.objects.details.code39"><title>Zend\Barcode\Object\Code39</title>
         
 
         <para>
@@ -449,7 +449,7 @@
 
         <note>
             <para>
-                <classname>Zend_Barcode_Object_Code39</classname> will automatically add
+                <classname>Zend\Barcode\Object\Code39</classname> will automatically add
                 the start and stop characters ('*') for you.
             </para>
         </note>
@@ -459,7 +459,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.identcode"><title>Zend_Barcode_Object_Identcode</title>
+    <section xml:id="zend.barcode.objects.details.identcode"><title>Zend\Barcode\Object\Identcode</title>
         
 
         <para>
@@ -467,7 +467,7 @@
         </para>
 
         <para>
-            This barcode extends <classname>Zend_Barcode_Object_Code25interleaved</classname>
+            This barcode extends <classname>Zend\Barcode\Object\Code25interleaved</classname>
             (Code 2 of 5 Interleaved), and inherits some of its capabilities; it also has a few
             particulars of its own.
         </para>
@@ -505,13 +505,13 @@
         <note>
             <para>
                 If the number of characters is lower than 12,
-                <classname>Zend_Barcode_Object_Identcode</classname> will automatically prepend
+                <classname>Zend\Barcode\Object\Identcode</classname> will automatically prepend
                 missing zeros to the barcode text.
             </para>
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.itf14"><title>Zend_Barcode_Object_Itf14</title>
+    <section xml:id="zend.barcode.objects.details.itf14"><title>Zend\Barcode\Object\Itf14</title>
         
 
         <para>
@@ -519,7 +519,7 @@
         </para>
 
         <para>
-            This barcode extends <classname>Zend_Barcode_Object_Code25interleaved</classname>
+            This barcode extends <classname>Zend\Barcode\Object\Code25interleaved</classname>
             (Code 2 of 5 Interleaved), and inherits some of its capabilities; it also has a few
             particulars of its own.
         </para>
@@ -557,13 +557,13 @@
         <note>
             <para>
                 If the number of characters is lower than 14,
-                <classname>Zend_Barcode_Object_Itf14</classname> will automatically prepend
+                <classname>Zend\Barcode\Object\Itf14</classname> will automatically prepend
                 missing zeros to the barcode text.
             </para>
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.leitcode"><title>Zend_Barcode_Object_Leitcode</title>
+    <section xml:id="zend.barcode.objects.details.leitcode"><title>Zend\Barcode\Object\Leitcode</title>
         
 
         <para>
@@ -571,7 +571,7 @@
         </para>
 
         <para>
-            This barcode extends <classname>Zend_Barcode_Object_Identcode</classname>
+            This barcode extends <classname>Zend\Barcode\Object\Identcode</classname>
             (Deutsche Post Identcode), and inherits some of its capabilities; it also has a few
             particulars of its own.
         </para>
@@ -609,13 +609,13 @@
         <note>
             <para>
                 If the number of characters is lower than 14,
-                <classname>Zend_Barcode_Object_Leitcode</classname> will automatically
+                <classname>Zend\Barcode\Object\Leitcode</classname> will automatically
                 prepend missing zeros to the barcode text.
             </para>
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.planet"><title>Zend_Barcode_Object_Planet</title>
+    <section xml:id="zend.barcode.objects.details.planet"><title>Zend\Barcode\Object\Planet</title>
         
 
         <para>
@@ -653,7 +653,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.postnet"><title>Zend_Barcode_Object_Postnet</title>
+    <section xml:id="zend.barcode.objects.details.postnet"><title>Zend\Barcode\Object\Postnet</title>
         
 
         <para>
@@ -691,7 +691,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.royalmail"><title>Zend_Barcode_Object_Royalmail</title>
+    <section xml:id="zend.barcode.objects.details.royalmail"><title>Zend\Barcode\Object\Royalmail</title>
         
 
         <para>
@@ -730,7 +730,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.upca"><title>Zend_Barcode_Object_Upca</title>
+    <section xml:id="zend.barcode.objects.details.upca"><title>Zend\Barcode\Object\Upca</title>
         
 
         <para>
@@ -738,7 +738,7 @@
         </para>
 
         <para>
-            This barcode extends <classname>Zend_Barcode_Object_Ean13</classname>
+            This barcode extends <classname>Zend\Barcode\Object\Ean13</classname>
             (<acronym>EAN</acronym>-13), and inherits some of its capabilities; it also has a few
             particulars of its own.
         </para>
@@ -776,7 +776,7 @@
         <note>
             <para>
                 If the number of characters is lower than 12,
-                <classname>Zend_Barcode_Object_Upca</classname> will automatically
+                <classname>Zend\Barcode\Object\Upca</classname> will automatically
                 prepend missing zeros to the barcode text.
             </para>
 
@@ -786,7 +786,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.upce"><title>Zend_Barcode_Object_Upce</title>
+    <section xml:id="zend.barcode.objects.details.upce"><title>Zend\Barcode\Object\Upce</title>
         
 
         <para>
@@ -794,7 +794,7 @@
         </para>
 
         <para>
-            This barcode extends <classname>Zend_Barcode_Object_Upca</classname>
+            This barcode extends <classname>Zend\Barcode\Object\Upca</classname>
             (<acronym>UPC</acronym>-A), and inherits some of its capabilities; it also has a few
             particulars of its own. The first character of the text to encode
             is the system (0 or 1).
@@ -833,7 +833,7 @@
         <note>
             <para>
                 If the number of characters is lower than 8,
-                <classname>Zend_Barcode_Object_Upce</classname> will automatically
+                <classname>Zend\Barcode\Object\Upce</classname> will automatically
                 prepend missing zeros to the barcode text.
             </para>
         </note>
@@ -841,7 +841,7 @@
         <note>
             <para>
                 If the first character of the text to encode is not 0 or 1,
-                <classname>Zend_Barcode_Object_Upce</classname> will automatically
+                <classname>Zend\Barcode\Object\Upce</classname> will automatically
                 replace it by 0.
             </para>
 

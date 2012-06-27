@@ -264,16 +264,14 @@ class Serializer extends AbstractSerializer
     /**
      * Convert the DateTime into an AMF Date
      *
-     * @param  DateTime $data
+     * @param  DateTime $date
      * @return Serializer
      * @throws Amf\Exception\InvalidArgumentException
      */
-    public function writeDate(DateTime $data)
+    public function writeDate(DateTime $date)
     {
-        $dateString = $data->format('U') * 1000;
-
         // Make the conversion and remove milliseconds.
-        $this->_stream->writeDouble($dateString);
+        $this->_stream->writeDouble($date->getTimestamp());
 
         // Flash does not respect timezone but requires it.
         $this->_stream->writeInt(0);

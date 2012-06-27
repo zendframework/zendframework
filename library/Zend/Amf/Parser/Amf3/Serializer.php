@@ -308,11 +308,9 @@ class Serializer extends AbstractSerializer
             return $this;
         }
 
-        $dateString = $date->format('U') * 1000;
-
         $this->writeInteger(0x01);
         // write time to stream minus milliseconds
-        $this->_stream->writeDouble($dateString);
+        $this->_stream->writeDouble($date->getTimestamp());
         return $this;
     }
 

@@ -524,12 +524,11 @@ class Module
         come fornire l'abilità di realizzare workflow personali della
         nostra applicazione tramite il sistema EventManager.
         Il Bootstrap, largamente lasciato allo sviluppatore, è 
-      Bootstrapping, while largely left to the developer, is lineare e 
-      permette una semplice metodologia per configurare l'applicazione
-      e realizzare diverse strade e servizi in gioco. Il module manager
-      è leggero e con un approccio semplice forzando una architettura
-      modulare che incoraggia una pulita separazioni dei concetti ed 
-      il riutilizzo del codice.
+        lineare e permette una semplice metodologia per configurare l'applicazione
+        e realizzare diverse "route" e servizi. Il module manager
+        è di poco rilevante impatto e con un approccio semplice forza una architettura
+        modulare che incoraggia una pulita separazione delle responsabilità ed 
+        il riutilizzo del codice.
     </para>
   </section>
 </section>

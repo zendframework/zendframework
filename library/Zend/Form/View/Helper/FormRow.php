@@ -206,7 +206,7 @@ class FormRow extends AbstractHelper
             return $this->labelHelper;
         }
 
-        if ($this->view instanceof Pluggable) {
+        if (method_exists($this->view, 'plugin')) {
             $this->labelHelper = $this->view->plugin('form_label');
         }
 
@@ -228,7 +228,7 @@ class FormRow extends AbstractHelper
             return $this->elementHelper;
         }
 
-        if ($this->view instanceof Pluggable) {
+        if (method_exists($this->view, 'plugin')) {
             $this->elementHelper = $this->view->plugin('form_element');
         }
 
@@ -250,7 +250,7 @@ class FormRow extends AbstractHelper
             return $this->elementErrorsHelper;
         }
 
-        if ($this->view instanceof Pluggable) {
+        if (method_exists($this->view, 'plugin')) {
             $this->elementErrorsHelper = $this->view->plugin('form_element_errors');
         }
 

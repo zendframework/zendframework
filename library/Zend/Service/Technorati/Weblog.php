@@ -85,7 +85,7 @@ class Weblog
     /**
      * Last blog update UNIX timestamp.
      *
-     * @var     null|ZendDate
+     * @var     null|\DateTime
      * @access  protected
      */
     protected $lastUpdate;

@@ -21,8 +21,8 @@
 
 namespace ZendTest\Service\Amazon\S3;
 
+use DateTime;
 use Zend\Service\Amazon\S3\S3;
-use Zend\Date\Date;
 
 /**
  * @category   Zend
@@ -151,9 +151,7 @@ BODY;
         //Valid bucket name
         $bucket   = 'iamavalidbucket';
         $location = '';
-        $requestDate = new Date();
-        $requestDate->set('Tue, 15 May 2012 15:18:31 +0000', Date::RFC_1123);
-
+        $requestDate = DateTime::createFromFormat(DateTime::RFC1123, 'Tue, 15 May 2012 15:18:31 +0000');
         $this->amazon->setRequestDate($requestDate);
         $this->amazon->setKeys('AKIAIDCZ2WXN6NNB7YZA', 'sagA0Lge8R+ifORcyb6Z/qVbmtimFCUczvh51Jq8'); //Fake keys
 

@@ -20,6 +20,8 @@
  */
 
 namespace ZendTest\Service\Technorati;
+
+use DateTime;
 use Zend\Service\Technorati;
 
 /**
@@ -71,8 +73,8 @@ class CosmosResultTest extends TestCase
         $this->assertInternalType('string', $object->getExcerpt());
         $this->assertContains('Ho intenzione di prendere il modello bianco', $object->getExcerpt());
 
-        $this->assertInstanceOf('Zend\Date\Date', $object->getLinkCreated());
-        $this->assertEquals(new \Zend\Date\Date('2007-11-11 20:07:11 GMT'), $object->getLinkCreated());
+        $this->assertInstanceOf('DateTime', $object->getLinkCreated());
+        $this->assertEquals(new DateTime('2007-11-11 20:07:11 GMT'), $object->getLinkCreated());
 
         $this->assertInstanceOf('Zend\Uri\Http', $object->getLinkUrl());
         $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/blog/2007/04/parallels-desktop-overview.php'), $object->getLinkUrl());
@@ -82,7 +84,7 @@ class CosmosResultTest extends TestCase
         $this->assertContains('Progetto-Seo', $object->getWeblog()->getName());
         $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.progetto-seo.com/motori-di-ricerca/links-interni'), $object->getNearestPermalink());
         $this->assertContains('soprattutto Google', $object->getExcerpt());
-        $this->assertEquals(new \Zend\Date\Date('2007-11-10 08:57:22 GMT'), $object->getLinkCreated());
+        $this->assertEquals(new DateTime('2007-11-10 08:57:22 GMT'), $object->getLinkCreated());
         $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/blog/2007/04/google-yahoo-ask-nofollow.php'), $object->getLinkUrl());
     }
 

@@ -302,7 +302,7 @@ class Connection implements ConnectionInterface
      *
      * @return mixed
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
         $sql = 'SELECT @@IDENTITY as Current_Identity';
         $result = sqlsrv_query($this->resource, $sql);

@@ -344,10 +344,10 @@ class Connection implements ConnectionInterface
      * 
      * @return integer 
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
         try {
-            return $this->resource->lastInsertId();
+            return $this->resource->lastInsertId($name);
         } catch (\Exception $e) {
             // do nothing
         }

@@ -366,17 +366,18 @@ class Escaper
             $result = iconv($from, $to, $string);
         } elseif (function_exists('mb_convert_encoding')) {
             $result = mb_convert_encoding($string, $to, $from);
+        } else {
+            throw new Exception\RuntimeException(
+                get_called_class()
+                . ' requires either the iconv or mbstring extension to be installed'
+                . ' when escaping for non UTF-8 strings.'
+            );
         }
         if ($result === false) {
             return ''; // return non-fatal blank string on encoding errors from users
         } else {
             return $result;
         }
-        throw new Exception\RuntimeException(
-            get_called_class()
-            . ' requires either the iconv or mbstring extension to be installed'
-            . ' when escaping for non UTF-8 strings.'
-        );
     }
 
     /**

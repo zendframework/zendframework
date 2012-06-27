@@ -21,7 +21,7 @@
 
 namespace Zend\Form\Element;
 
-use DateTime as DateTime;
+use DateTime;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Date as DateValidator;

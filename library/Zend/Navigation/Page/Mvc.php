@@ -200,7 +200,18 @@ class Mvc extends AbstractPage
             $params['action'] = $param;
         }
 
-        $options = array('name' => $this->getRoute());
+        switch (true) {
+            case ($this->getRoute() !== null):
+                $name = $this->getRoute();
+                break;
+            case ($this->getRouteMatch() !== null):
+                $name = $this->getRouteMatch()->getMatchedRouteName();
+                break;
+            default:
+                throw new Exception\DomainException('No route name could be found');
+        }
+
+        $options = array('name' => $name);
         $url = $router->assemble($params, $options);
 
         // Add the fragment identifier if it is set

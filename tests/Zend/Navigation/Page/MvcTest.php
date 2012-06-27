@@ -63,7 +63,7 @@ class MvcTest extends TestCase
     {
     }
 
-    public function testHrefGeneratedByUrlHelperRequiresNoRoute()
+    public function testHrefGeneratedByRouterRequiresNoRoute()
     {
         $page = new Page\Mvc(array(
             'label'      => 'foo',
@@ -465,7 +465,8 @@ class MvcTest extends TestCase
             'label'            => 'foo',
             'action'           => 'index',
             'controller'       => 'index',
-            'defaultRouter' => $this->router
+            'route'            => 'default',
+            'defaultRouter'    => $this->router
         ));
 
         // If the default router is not used an exception will be thrown.

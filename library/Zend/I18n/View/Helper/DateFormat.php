@@ -61,9 +61,7 @@ class DateFormat extends AbstractHelper
      * Format a date.
      *
      * @param  DateTime|integer|array $date
-     * @param  string
-     * @param  string $textDomain
-     * @param  string $locale
+     * @param  string                 $formatterName
      * @return string
      */
     public function __invoke($date, $formatterName)

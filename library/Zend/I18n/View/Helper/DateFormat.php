@@ -61,18 +61,23 @@ class DateFormat extends AbstractHelper
      * Format a date.
      *
      * @param  DateTime|integer|array $date
-     * @param  string
-     * @param  string $textDomain
-     * @param  string $locale
+     * @param  string                 $formatterName
      * @return string
      */
     public function __invoke($date, $formatterName)
     {
-        if (!isset($this->formatters[$formatterName]) {
+        if (!isset($this->formatters[$formatterName])) {
             throw new Exception\RuntimeException(sprintf(
                 'No formatter with name %s found',
                 $formatterName
-            )));
+            ));
+        }
+
+        // DateTime support for IntlDateFormatter::format() was only added in 5.3.4
+        if ($date instanceof DateTime
+            && version_compare(PHP_VERSION, '5.3.4', '<')
+        ) {
+            $date = $date->getTimestamp();
         }
 
         return $this->formatters[$formatterName]

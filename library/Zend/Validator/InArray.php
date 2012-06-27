@@ -37,7 +37,7 @@ class InArray extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::NOT_IN_ARRAY => "'%value%' was not found in the haystack",
+        self::NOT_IN_ARRAY => "The input was not found in the haystack",
     );
 
     /**

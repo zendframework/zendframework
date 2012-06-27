@@ -91,7 +91,6 @@ class Ip extends AbstractValidator
             return true;
         } else {
             if ((bool) $this->options['allowliteral']) {
-                var_dump($value,$this->options['allowliteral']);
                 static $regex = '/^\[(.*)\]$/';
                 if ((bool) preg_match($regex, $value, $matches)) {
                     $value = $matches[1];

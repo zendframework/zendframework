@@ -21,10 +21,10 @@
 
 namespace Zend\Amf\Parser\Amf0;
 
+use DateTime;
 use Zend\Amf\Parser\AbstractSerializer,
     Zend\Amf\Parser,
-    Zend\Amf,
-    Zend\Date;
+    Zend\Amf;
 
 /**
  * Serializer PHP misc types back to there corresponding AMF0 Type Marker.
@@ -132,7 +132,7 @@ class Serializer extends AbstractSerializer
                     $markerType = Amf\Constants::AMF0_STRING;
                     break;
                 case (is_object($data)):
-                    if (($data instanceof \DateTime) || ($data instanceof Date\Date)) {
+                    if ($data instanceof DateTime) {
                         $markerType = Amf\Constants::AMF0_DATE;
                     } else {
 
@@ -264,20 +264,13 @@ class Serializer extends AbstractSerializer
     /**
      * Convert the DateTime into an AMF Date
      *
-     * @param  \DateTime|\Zend\Date\Date $data
+     * @param  DateTime $data
      * @return Serializer
      * @throws Amf\Exception\InvalidArgumentException
      */
-    public function writeDate($data)
+    public function writeDate(DateTime $data)
     {
-        if ($data instanceof \DateTime) {
-            $dateString = $data->format('U');
-        } elseif ($data instanceof Date\Date) {
-            $dateString = $data->toString('U');
-        } else {
-            throw new Amf\Exception\InvalidArgumentException('Invalid date specified; must be a DateTime or Zend_Date object');
-        }
-        $dateString *= 1000;
+        $dateString = $data->format('U') * 1000;
 
         // Make the conversion and remove milliseconds.
         $this->_stream->writeDouble($dateString);

@@ -20,6 +20,8 @@
  */
 
 namespace Zend\Amf\Parser\Amf3;
+
+use DateTime;
 use Zend\Amf\Parser\AbstractDeserializer,
     Zend\Amf,
     Zend\Amf\Parser;
@@ -205,7 +207,7 @@ class Deserializer extends AbstractDeserializer
      *
      * - date = 0x08 integer-data [ number-data ]
      *
-     * @return \Zend\Date\Date
+     * @return DateTime
      * @throws Parser\Exception\OutOfBoundsException
      */
     public function readDate()
@@ -221,7 +223,7 @@ class Deserializer extends AbstractDeserializer
 
         $timestamp = floor($this->_stream->readDouble() / 1000);
 
-        $dateTime  = new \Zend\Date\Date((int) $timestamp);
+        $dateTime  = new DateTime('@' . $timestamp);
         $this->_referenceObjects[] = $dateTime;
         return $dateTime;
     }

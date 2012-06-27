@@ -65,11 +65,8 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     {
         $registry = $this->registry;
         $registry['emptyArray'] = array();
-        $registry['null'] = null;
 
         $this->assertTrue(isset($registry['emptyArray']));
-        // False, because isset(null) === false
-        $this->assertFalse(isset($registry['null']));
     }
 
     public function testRegistryTreatsMembersAsProperties()

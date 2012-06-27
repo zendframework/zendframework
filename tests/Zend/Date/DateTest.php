@@ -27,8 +27,7 @@ use Zend\Cache\StorageFactory as CacheFactory,
     Zend\Date\Cities,
     Zend\Locale\Locale,
     Zend\Locale\Exception\ExceptionInterface as LocaleException,
-    Zend\TimeSync\TimeSync,
-    Zend\Registry;
+    Zend\TimeSync\TimeSync;
 
 /**
  * These const values control some testing behavior.
@@ -5326,8 +5325,6 @@ class DateTest extends \PHPUnit_Framework_TestCase
     public function testZF3677()
     {
         $locale = new Locale('de_AT');
-        Registry::set('Zend_Locale', $locale);
-
         $date   = new Date('13',null,$locale);
         $this->assertSame($date->getLocale(), $locale->toString());
     }

@@ -44,10 +44,6 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        if (\Zend\Registry::isRegistered('Zend_Locale')) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry['Zend_Locale']);
-        }
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/Atom';
         $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {

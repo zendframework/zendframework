@@ -43,50 +43,16 @@ class Ip extends AbstractValidator
     );
 
     /**
-     * internal options
+     * Internal options
      *
      * @var array
      */
-    protected $localOptions = array(
-        'allowipv4'      => true,
-        'allowipv6'      => true,
+    protected $options = array(
+        'allowipv4'      => true, // Enable IPv4 Validation
+        'allowipv6'      => true, // Enable IPv6 Validation
+        'allowipvfuture' => false, // Enable IPvFuture Validation
+        'allowliteral'   => true, // Enable IPs in literal format (only IPv6 and IPvFuture)
     );
-
-    /**
-     * Sets validator options
-     *
-     * @param  array|Traversable $options OPTIONAL Options to set, see the manual for all available options
-     */
-    public function __construct($options = array())
-    {
-        if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
-        }
-        if (!is_array($options)) {
-            $options = func_get_args();
-            $temp['allowipv6'] = array_shift($options);
-            if (!empty($options)) {
-                $temp['allowipv4'] = array_shift($options);
-            }
-
-            $options = $temp;
-        }
-
-        $options += $this->localOptions;
-        $this->setOptions($options);
-
-        parent::__construct();
-    }
-
-    /**
-     * Returns all set options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->localOptions;
-    }
 
     /**
      * Sets the options for this validator
@@ -97,23 +63,13 @@ class Ip extends AbstractValidator
      */
     public function setOptions($options = array())
     {
-        if (!is_array($options) && !$options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable');
-        }
+        parent::setOptions($options);
 
-        if (array_key_exists('allowipv6', $options)) {
-            $this->localOptions['allowipv6'] = (boolean) $options['allowipv6'];
-        }
-
-        if (array_key_exists('allowipv4', $options)) {
-            $this->localOptions['allowipv4'] = (boolean) $options['allowipv4'];
-        }
-
-        if (!$this->localOptions['allowipv4'] && !$this->localOptions['allowipv6']) {
+        if (!$this->options['allowipv4'] && !$this->options['allowipv6'] && !$this->options['allowipvfuture']) {
             throw new Exception\InvalidArgumentException('Nothing to validate. Check your options');
         }
 
-        return parent::setOptions($options);
+        return $this;
     }
 
     /**
@@ -130,14 +86,26 @@ class Ip extends AbstractValidator
         }
 
         $this->setValue($value);
-        if (($this->localOptions['allowipv4'] && !$this->localOptions['allowipv6'] && !$this->validateIPv4($value)) ||
-            (!$this->localOptions['allowipv4'] && $this->localOptions['allowipv6'] && !$this->validateIPv6($value)) ||
-            ($this->localOptions['allowipv4'] && $this->localOptions['allowipv6'] && !$this->validateIPv4($value) && !$this->validateIPv6($value))) {
-            $this->error(self::NOT_IP_ADDRESS);
-            return false;
-        }
 
-        return true;
+        if ($this->options['allowipv4'] && $this->validateIPv4($value)) {
+            return true;
+        } else {
+            if ((bool) $this->options['allowliteral']) {
+                var_dump($value,$this->options['allowliteral']);
+                static $regex = '/^\[(.*)\]$/';
+                if ((bool) preg_match($regex, $value, $matches)) {
+                    $value = $matches[1];
+                }
+            }
+
+            if (($this->options['allowipv6'] && $this->validateIPv6($value)) ||
+                ($this->options['allowipvfuture'] && $this->validateIPvFuture($value))
+            ) {
+                return true;
+            }
+        }
+        $this->error(self::NOT_IP_ADDRESS);
+        return false;
     }
 
     /**
@@ -163,7 +131,7 @@ class Ip extends AbstractValidator
         }
 
         $ip2long = ip2long($value);
-        if($ip2long === false) {
+        if ($ip2long === false) {
             return false;
         }
 
@@ -207,5 +175,34 @@ class Ip extends AbstractValidator
         }
 
         return false;
+    }
+
+    /**
+     * Validates an IPvFuture address.
+     *
+     * IPvFuture is loosely defined in the Section 3.2.2 of RFC 3986
+     *
+     * @param  string $value Value to check against
+     * @return boolean True when $value is a valid IPvFuture address
+     *                 False otherwise
+     */
+    protected function validateIPvFuture($value)
+    {
+        /*
+         * ABNF:
+         * IPvFuture  = "v" 1*HEXDIG "." 1*( unreserved / sub-delims / ":" )
+         * unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+         * sub-delims    = "!" / "$" / "&" / "'" / "(" / ")" / "*" / "+" / ","
+         *               / ";" / "="
+         */
+        static $regex = '/^v([[:xdigit:]]+)\.[[:alnum:]\-\._~!\$&\'\(\)\*\+,;=:]+$/';
+
+        $result = (bool)preg_match($regex, $value, $matches);
+
+        /*
+         * "As such, implementations must not provide the version flag for the
+         *  existing IPv4 and IPv6 literal address forms described below."
+         */
+        return ($result && $matches[1] != 4 && $matches[1] != 6);
     }
 }

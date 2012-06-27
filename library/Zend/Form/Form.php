@@ -143,7 +143,7 @@ class Form extends BaseForm implements FormFactoryAwareInterface
         foreach ($iterator as $elementOrFieldset) {
             if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
                 $elementOrFieldset->prepare($this);
-            } else if ($elementOrFieldset instanceof Form) {
+            } else if ($elementOrFieldset instanceof Fieldset) {
                 $this->prepareElements($elementOrFieldset->getIterator());
             }
         }

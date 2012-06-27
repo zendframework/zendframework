@@ -23,7 +23,7 @@ namespace Zend\Form\View\Helper\Captcha;
 
 use Zend\Captcha\Image as CaptchaAdapter;
 use Zend\Form\ElementInterface;
-use Zend\FOrm\Exception;
+use Zend\Form\Exception;
 
 /**
  * @category   Zend

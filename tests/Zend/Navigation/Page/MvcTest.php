@@ -181,7 +181,6 @@ class MvcTest extends TestCase
 
     public function testIsActiveReturnsTrueOnIdenticalControllerAction()
     {
-        $this->markTestSkipped();
         $page = new Page\Mvc(array(
             'action'     => 'index',
             'controller' => 'index'
@@ -192,8 +191,6 @@ class MvcTest extends TestCase
             'action'     => 'index',
         ));
 
-        $this->urlHelper->setRouteMatch($routeMatch);
-
         $page->setRouteMatch($routeMatch);
 
         $this->assertTrue($page->isActive());
@@ -201,7 +198,6 @@ class MvcTest extends TestCase
 
     public function testIsActiveReturnsFalseOnDifferentControllerAction()
     {
-        $this->markTestSkipped();
         $page = new Page\Mvc(array(
             'action'     => 'bar',
             'controller' => 'index'
@@ -212,8 +208,6 @@ class MvcTest extends TestCase
             'action'     => 'index',
         ));
 
-        $this->urlHelper->setRouteMatch($routeMatch);
-
         $page->setRouteMatch($routeMatch);
 
         $this->assertFalse($page->isActive());
@@ -221,7 +215,6 @@ class MvcTest extends TestCase
 
     public function testIsActiveReturnsTrueOnIdenticalIncludingPageParams()
     {
-        $this->markTestSkipped();
         $page = new Page\Mvc(array(
             'label'      => 'foo',
             'action'     => 'view',
@@ -237,8 +230,6 @@ class MvcTest extends TestCase
             'id'         => '1337'
         ));
 
-        $this->urlHelper->setRouteMatch($routeMatch);
-
         $page->setRouteMatch($routeMatch);
 
         $this->assertTrue($page->isActive());
@@ -246,7 +237,6 @@ class MvcTest extends TestCase
 
     public function testIsActiveReturnsTrueWhenRequestHasMoreParams()
     {
-        $this->markTestSkipped();
         $page = new Page\Mvc(array(
             'label'      => 'foo',
             'action'     => 'view',
@@ -259,8 +249,6 @@ class MvcTest extends TestCase
             'id'         => '1337',
         ));
 
-        $this->urlHelper->setRouteMatch($routeMatch);
-
         $page->setRouteMatch($routeMatch);
 
         $this->assertTrue($page->isActive());
@@ -268,7 +256,6 @@ class MvcTest extends TestCase
 
     public function testIsActiveReturnsFalseWhenRequestHasLessParams()
     {
-        $this->markTestSkipped();
         $page = new Page\Mvc(array(
             'label'      => 'foo',
             'action'     => 'view',
@@ -283,8 +270,6 @@ class MvcTest extends TestCase
             'action'     => 'view',
             'id'         => null
         ));
-
-        $this->urlHelper->setRouteMatch($routeMatch);
 
         $page->setRouteMatch($routeMatch);
 
@@ -421,13 +406,14 @@ class MvcTest extends TestCase
 
     public function testSpecifyingAnotherUrlHelperToGenerateHrefs()
     {
-        $this->markTestSkipped();
-        $newHelper = new TestAsset\UrlHelper();
+        $newRouter = new TestAsset\Router();
 
-        $page = new Page\Mvc();
-        $page->setUrlHelper($newHelper);
+        $page = new Page\Mvc(array(
+            'route' => 'default'
+        ));
+        $page->setRouter($newRouter);
 
-        $expected = TestAsset\UrlHelper::RETURN_URL;
+        $expected = TestAsset\Router::RETURN_URL;
         $actual   = $page->getHref();
 
         $this->assertEquals($expected, $actual);

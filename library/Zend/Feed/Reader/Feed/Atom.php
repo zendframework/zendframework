@@ -21,7 +21,6 @@
 namespace Zend\Feed\Reader\Feed;
 
 use Zend\Feed\Reader,
-    Zend\Date,
     DOMDocument;
 
 /**

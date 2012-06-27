@@ -20,6 +20,7 @@
 
 namespace Zend\Feed\Writer\Renderer\Feed\Atom;
 
+use Datetime;
 use Zend\Feed,
     DOMDocument,
     DOMElement;
@@ -130,7 +131,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
         $updated = $dom->createElement('updated');
         $root->appendChild($updated);
         $text = $dom->createTextNode(
-            $this->getDataContainer()->getDateModified()->get(\Zend\Date\Date::ISO_8601)
+            $this->getDataContainer()->getDateModified()->format(DateTime::ISO8601)
         );
         $updated->appendChild($text);
     }

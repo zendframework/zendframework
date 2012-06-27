@@ -20,7 +20,8 @@
 
 namespace ZendTest\Feed\PubSubHubbub\Subscriber;
 
-use Zend\Date\Date;
+use DateInterval;
+use DateTime;
 use Zend\Feed\PubSubHubbub\HttpResponse;
 use Zend\Feed\PubSubHubbub\Model;
 use Zend\Feed\PubSubHubbub\Subscriber\Callback as CallbackSubscriber;
@@ -47,7 +48,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public $_rowset;
     /** @var array */
     public $_get;
-    /** @var Date */
+    /** @var DateTime */
     public $now;
 
     public function setUp()
@@ -69,7 +70,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($this->_adapter));
         $storage = new Model\Subscription($this->_tableGateway);
 
-        $this->now = new Date;
+        $this->now = new DateTime();
         $storage->setNow(clone $this->now);
 
         $this->_callback->setStorage($storage);
@@ -276,7 +277,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $rowdata = array(
             'id'            => 'verifytokenkey',
             'verify_token'  => hash('sha256', 'cba'),
-            'created_time'  => $t->get(Date::TIMESTAMP),
+            'created_time'  => $t->getTimestamp(),
             'lease_seconds' => 10000
         );
 
@@ -295,11 +296,11 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->with(
             $this->equalTo(array('id'                => 'verifytokenkey',
                                  'verify_token'      => hash('sha256', 'cba'),
-                                 'created_time'      => $t->get(Date::TIMESTAMP),
+                                 'created_time'      => $t->getTimestamp(),
                                  'lease_seconds'     => 1234567,
                                  'subscription_state'=> 'verified',
-                                 'expiration_time'   => $t->add(1234567, Date::SECOND)
-                                     ->get('yyyy-MM-dd HH:mm:ss'))),
+                                 'expiration_time'   => $t->add(new DateInterval('PT1234567S'))
+                                     ->format('Y-m-d H:i:s'))),
             $this->equalTo(array('id' => 'verifytokenkey'))
         );
 
@@ -318,7 +319,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $rowdata = array(
             'id'            => 'verifytokenkey',
             'verify_token'  => hash('sha256', 'cba'),
-            'created_time'  => $t->get(Date::TIMESTAMP),
+            'created_time'  => $t->getTimestamp(),
             'lease_seconds' => 10000
         );
 
@@ -337,11 +338,11 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->with(
             $this->equalTo(array('id'                => 'verifytokenkey',
                                  'verify_token'      => hash('sha256', 'cba'),
-                                 'created_time'      => $t->get(Date::TIMESTAMP),
+                                 'created_time'      => $t->getTimestamp(),
                                  'lease_seconds'     => 1234567,
                                  'subscription_state'=> 'verified',
-                                 'expiration_time'   => $t->add(1234567, Date::SECOND)
-                                     ->get('yyyy-MM-dd HH:mm:ss'))),
+                                 'expiration_time'   => $t->add(new DateInterval('PT1234567S'))
+                                     ->format('Y-m-d H:i:s'))),
             $this->equalTo(array('id' => 'verifytokenkey'))
         );
 

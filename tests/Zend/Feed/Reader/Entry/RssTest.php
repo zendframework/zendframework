@@ -20,8 +20,9 @@
  */
 
 namespace ZendTest\Feed\Reader\Entry;
+
+use DateTime;
 use Zend\Feed\Reader;
-use Zend\Date;
 
 /**
  * @category Zend
@@ -47,13 +48,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     {
         Reader\Reader::reset();
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/Rss';
-        $this->_options = Date\Date::setOptions();
-        foreach($this->_options as $k=>$v) {
-            if (is_null($v)) {
-                unset($this->_options[$k]);
-            }
-        }
-        Date\Date::setOptions(array('format_type'=>'iso'));
+
         $this->_expectedCats = array(
             array(
                 'term' => 'topic1',
@@ -100,11 +95,6 @@ class RssTest extends \PHPUnit_Framework_TestCase
                 'label' => 'Cat & Dog'
             )
         );
-    }
-    
-    public function teardown()
-    {
-        Date\Date::setOptions($this->_options);
     }
 
     /**
@@ -1880,270 +1870,50 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Get DateModified (Unencoded Text)
+     * @dataProvider dateModifiedProvider
      */
-    public function testGetsDateModifiedFromRss20()
+    public function testGetsDateModified($path, $edate)
     {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20.xml')
+        $feed  = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath . $path)
         );
         $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
+
+        $this->assertTrue($edate == $entry->getDateModified());
     }
 
-    /**
-     * @group ZF-8702
-     */
-    public function testParsesCorrectDateIfMissingOffsetWhenSystemUsesUSLocale()
-    {
-        $locale = new \Zend\Locale\Locale('en_US');
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20_en_US.xml')
+    public function dateModifiedProvider() {
+        $iso = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $us  = DateTime::createFromFormat(DateTime::ISO8601, '2010-01-04T02:14:00-0600');
+        $rss = DateTime::createFromFormat(DateTime::RSS, 'Sun, 11 Jan 2009 09:55:59 GMT');
+        return array(
+            array('/datemodified/plain/rss20.xml', $iso),
+            array('/datemodified/plain/rss20_en_US.xml', $us),
+            array('/datemodified/plain/dc10/rss20.xml', $iso),
+            array('/datemodified/plain/dc10/rss094.xml', $iso),
+            array('/datemodified/plain/dc10/rss093.xml', $iso),
+            array('/datemodified/plain/dc10/rss092.xml', $iso),
+            array('/datemodified/plain/dc10/rss091.xml', $iso),
+            array('/datemodified/plain/dc10/rss10.xml', $iso),
+            array('/datemodified/plain/dc10/rss090.xml', $iso),
+            array('/datemodified/plain/dc11/rss20.xml', $iso),
+            array('/datemodified/plain/dc11/rss094.xml', $iso),
+            array('/datemodified/plain/dc11/rss093.xml', $iso),
+            array('/datemodified/plain/dc11/rss092.xml', $iso),
+            array('/datemodified/plain/dc11/rss091.xml', $iso),
+            array('/datemodified/plain/dc11/rss10.xml', $iso),
+            array('/datemodified/plain/dc11/rss090.xml', $iso),
+
+            array('/datemodified/plain/none/rss20.xml', null),
+            array('/datemodified/plain/none/rss094.xml', null),
+            array('/datemodified/plain/none/rss093.xml', null),
+            array('/datemodified/plain/none/rss092.xml', null),
+            array('/datemodified/plain/none/rss091.xml', null),
+            array('/datemodified/plain/none/rss10.xml', null),
+            array('/datemodified/plain/none/rss090.xml', null),
+
+            array('/datemodified/plain/rss20-zf-7908.xml', $rss),
         );
-        $entry = $feed->current();
-        $fdate = $entry->getDateModified();
-        $edate = new Date\Date;
-        $edate->set('2010-01-04T02:14:00-0600', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($fdate));
-    }
-
-    // DC 1.0
-
-    public function testGetsDateModifiedFromRss20_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss20.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss094_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss094.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss093_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss093.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss092_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss092.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss091_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss091.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss10_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss10.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss090_Dc10()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss090.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    // DC 1.1
-
-    public function testGetsDateModifiedFromRss20_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss20.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss094_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss094.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss093_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss093.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss092_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss092.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss091_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss091.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss10_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss10.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    public function testGetsDateModifiedFromRss090_Dc11()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss090.xml')
-        );
-        $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
-    }
-
-    // Missing DateModified
-
-    public function testGetsDateModifiedFromRss20_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss20.xml')
-        );
-        $entry = $feed->current();
-        $this->assertEquals(null, $entry->getDateModified());
-    }
-
-    public function testGetsDateModifiedFromRss094_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss094.xml')
-        );
-        $entry = $feed->current();
-        $this->assertEquals(null, $entry->getDateModified());
-    }
-
-    public function testGetsDateModifiedFromRss093_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss093.xml')
-        );
-        $entry = $feed->current();
-        $this->assertEquals(null, $entry->getDateModified());
-    }
-
-    public function testGetsDateModifiedFromRss092_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss092.xml')
-        );
-        $entry = $feed->current();
-        $this->assertEquals(null, $entry->getDateModified());
-    }
-
-    public function testGetsDateModifiedFromRss091_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss091.xml')
-        );
-        $entry = $feed->current();
-        $this->assertEquals(null, $entry->getDateModified());
-    }
-
-    public function testGetsDateModifiedFromRss10_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss10.xml')
-        );
-        $entry = $feed->current();
-        $this->assertEquals(null, $entry->getDateModified());
-    }
-
-    public function testGetsDateModifiedFromRss090_None()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/none/rss090.xml')
-        );
-        $entry = $feed->current();
-        $this->assertEquals(null, $entry->getDateModified());
-    }
-
-    /**
-     * @issue ZF-7908
-     */
-    public function testGetsDateModifiedFromRss20_UnrecognisedGmtFormat()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20-zf-7908.xml')
-        );
-        $entry = $feed->current();
-        //$this->assertEquals('Sunday 11 January 2009 09 55 59 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
-        $edate = new Date\Date;
-        $edate->set('Sun, 11 Jan 2009 09:55:59 GMT', Date\Date::RSS);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     /**

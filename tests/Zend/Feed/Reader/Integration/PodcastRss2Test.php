@@ -20,8 +20,8 @@
  */
 
 namespace ZendTest\Feed\Reader\Integration;
+
 use Zend\Feed\Reader;
-use Zend\Date;
 
 /**
 * @category Zend
@@ -41,18 +41,6 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     {
         Reader\Reader::reset();
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/podcast.xml';
-        $this->_options = Date\Date::setOptions();
-        foreach($this->_options as $k=>$v) {
-            if (is_null($v)) {
-                unset($this->_options[$k]);
-            }
-        }
-        Date\Date::setOptions(array('format_type'=>'iso'));
-    }
-    
-    public function teardown()
-    {
-        Date\Date::setOptions($this->_options);
     }
 
     /**

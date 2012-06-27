@@ -20,8 +20,8 @@
 
 namespace ZendTest\Feed\PubSubHubbub\Model;
 
+use DateTime;
 use PDO;
-use Zend\Date\Date;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Feed\PubSubHubbub\Model\Subscription;
@@ -75,7 +75,7 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
 
     public function testCurrentTimeSetterAndGetter()
     {
-        $now = new Date;
+        $now = new DateTime();
         $subscription = new Subscription(new TableGateway('subscription', $this->initDb()));
         $subscription->setNow($now);
         $this->assertSame($subscription->getNow(), $now);

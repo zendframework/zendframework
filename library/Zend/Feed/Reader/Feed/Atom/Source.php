@@ -22,7 +22,6 @@ namespace Zend\Feed\Reader\Feed\Atom;
 
 use Zend\Feed\Reader,
     Zend\Feed\Reader\Feed,
-    Zend\Date,
     DOMElement,
     DOMXPath;
 

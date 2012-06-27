@@ -20,8 +20,8 @@
 
 namespace Zend\Feed\Reader\Entry;
 
+use DateTime;
 use Zend\Feed\Reader,
-    Zend\Date,
     Zend\Feed\Reader\Exception,
     DOMElement,
     DOMXPath;
@@ -219,17 +219,16 @@ class Rss extends AbstractEntry implements EntryInterface
             if ($dateModified) {
                 $dateModifiedParsed = strtotime($dateModified);
                 if ($dateModifiedParsed) {
-                    $date = new Date\Date($dateModifiedParsed);
+                    $date = new DateTime('@' . $dateModifiedParsed);
                 } else {
-                    $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
-                    Date\Date::RFC_2822, Date\Date::DATES);
-                    $date = new Date\Date;
+                    $dateStandards = array(DateTime::RSS, DateTime::RFC822,
+                                           DateTime::RFC2822, null);
                     foreach ($dateStandards as $standard) {
                         try {
-                            $date->set($dateModified, $standard);
+                            $date = date_create_from_format($standard, $dateModified);
                             break;
-                        } catch (Date\Exception $e) {
-                            if ($standard == Date\Date::DATES) {
+                        } catch (\Exception $e) {
+                            if ($standard == null) {
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'

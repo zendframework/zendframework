@@ -38,7 +38,6 @@ use ArrayObject,
     Zend\Cache\Storage\OptimizableInterface,
     Zend\Cache\Storage\TaggableInterface,
     Zend\Cache\Storage\TotalSpaceCapableInterface,
-    Zend\Cache\Utils,
     Zend\Stdlib\ErrorHandler;
 
 /**
@@ -48,7 +47,7 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Filesystem extends AbstractAdapter implements 
+class Filesystem extends AbstractAdapter implements
     AvailableSpaceCapableInterface,
     ClearByNamespaceInterface,
     ClearByPrefixInterface,
@@ -176,11 +175,6 @@ class Filesystem extends AbstractAdapter implements
                 $tagPathname = substr($pathname, 0, -4) . '.tag';
                 if (file_exists($tagPathname)) {
                     unlink($tagPathname);
-                }
-
-                $ifoPathname = substr($pathname, 0, -4) . '.ifo';
-                if (file_exists($ifoPathname)) {
-                    unlink($ifoPathname);
                 }
             }
         }
@@ -352,11 +346,6 @@ class Filesystem extends AbstractAdapter implements
                 $datPathname = substr($pathname, 0, -4) . '.dat';
                 if (file_exists($datPathname)) {
                     unlink($datPathname);
-                }
-
-                $ifoPathname = substr($pathname, 0, -4) . '.ifo';
-                if (file_exists($ifoPathname)) {
-                    unlink($ifoPathname);
                 }
             }
         }
@@ -531,17 +520,6 @@ class Filesystem extends AbstractAdapter implements
             $filespec = $this->getFileSpec($normalizedKey);
             $data     = $this->getFileContent($filespec . '.dat');
 
-            if ($this->getOptions()->getReadControl()) {
-                if ( ($info = $this->readInfoFile($filespec . '.ifo'))
-                    && isset($info['hash'], $info['algo'])
-                    && Utils::generateHash($info['algo'], $data, true) != $info['hash']
-                ) {
-                    throw new Exception\UnexpectedValueException(
-                        "ReadControl: Stored hash and computed hash don't match"
-                    );
-                }
-            }
-
             // use filemtime + filesize as CAS token
             if (func_num_args() > 2) {
                 $casToken = filemtime($filespec . '.dat') . filesize($filespec . '.dat');
@@ -586,17 +564,6 @@ class Filesystem extends AbstractAdapter implements
                     continue;
                 } else {
                     unset($keys[$i]);
-                }
-
-                if ($options->getReadControl()) {
-                    $info = $this->readInfoFile($filespec . '.ifo');
-                    if (isset($info['hash'], $info['algo'])
-                        && Utils::generateHash($info['algo'], $data, true) != $info['hash']
-                    ) {
-                        throw new Exception\UnexpectedValueException(
-                            "ReadControl: Stored hash and computed hash doesn't match"
-                        );
-                    }
                 }
 
                 $result[$key] = $data;
@@ -928,36 +895,13 @@ class Filesystem extends AbstractAdapter implements
         $filespec = $this->getFileSpec($normalizedKey);
         $this->prepareDirectoryStructure($filespec);
 
-        $info = null;
-        if ($options->getReadControl()) {
-            $info['hash'] = Utils::generateHash($options->getReadControlAlgo(), $value, true);
-            $info['algo'] = $options->getReadControlAlgo();
-        }
-
         // write files
         try {
             // set umask for files
             $oldUmask = umask($options->getFileUmask());
 
-            $contents = array($filespec . '.dat' => & $value);
-            if ($info) {
-                $contents[$filespec . '.ifo'] = serialize($info);
-            } else {
-                $this->unlink($filespec . '.ifo');
-                $this->unlink($filespec . '.tag');
-            }
-
-            while ($contents) {
-                $nonBlocking = count($contents) > 1;
-                $wouldblock  = null;
-
-                foreach ($contents as $file => $content) {
-                    $this->putFileContent($file, $content, $nonBlocking, $wouldblock);
-                    if (!$nonBlocking || !$wouldblock) {
-                        unset($contents[$file]);
-                    }
-                }
-            }
+            $this->putFileContent($filespec . '.dat', $value);
+            $this->unlink($filespec . '.tag');
 
             // reset file_umask
             umask($oldUmask);
@@ -992,18 +936,8 @@ class Filesystem extends AbstractAdapter implements
             // *.dat file
             $contents[$filespec . '.dat'] = & $value;
 
-            // *.ifo file
-            $info = null;
-            if ($baseOptions->getReadControl()) {
-                $info['hash'] = Utils::generateHash($baseOptions->getReadControlAlgo(), $value, true);
-                $info['algo'] = $baseOptions->getReadControlAlgo();
-            }
-            if ($info) {
-                $contents[$filespec . '.ifo'] = serialize($info);
-            } else {
-                $this->unlink($filespec . '.ifo');
-                $this->unlink($filespec . '.tag');
-            }
+            // *.tag file
+            $this->unlink($filespec . '.tag');
         }
 
         // write to disk
@@ -1213,7 +1147,6 @@ class Filesystem extends AbstractAdapter implements
         } else {
             $this->unlink($filespec . '.dat');
             $this->unlink($filespec . '.tag');
-            $this->unlink($filespec . '.ifo');
         }
         return true;
     }
@@ -1259,7 +1192,7 @@ class Filesystem extends AbstractAdapter implements
                     'staticTtl'          => false,
                     'ttlPrecision'       => 1,
                     'expiredRead'        => true,
-                    'maxKeyLength'       => 251, // 255 - strlen(.dat | .ifo)
+                    'maxKeyLength'       => 251, // 255 - strlen(.dat | .tag)
                     'namespaceIsPrefix'  => true,
                     'namespaceSeparator' => $options->getNamespaceSeparator(),
                 )

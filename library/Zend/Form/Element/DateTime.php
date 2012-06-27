@@ -21,7 +21,7 @@
 
 namespace Zend\Form\Element;
 
-use Zend\Date\Date as ZendDate;
+use DateTime as DateTime;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Date as DateValidator;
@@ -106,7 +106,7 @@ class DateTime extends Element implements InputProviderInterface
      */
     protected function getDateValidator()
     {
-        return new DateValidator(array('format' => ZendDate::ISO_8601));
+        return new DateValidator(array('format' => DateTime::ISO8601));
     }
 
     /**

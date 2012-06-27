@@ -23,6 +23,7 @@ namespace Zend\Form\Element;
 
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
+use Zend\Validator\Date as DateValidator;
 use Zend\Validator\DateStep as DateStepValidator;
 use Zend\Validator\ValidatorInterface;
 
@@ -43,6 +44,16 @@ class Time extends DateTime
     protected $attributes = array(
         'type' => 'time',
     );
+
+    /**
+     * Retrieves a Date Validator configured for a DateTime Input type
+     *
+     * @return ValidatorInterface
+     */
+    protected function getDateValidator()
+    {
+        return new DateValidator(array('format' => 'H:i:s'));
+    }
 
     /**
      * Retrieves a DateStepValidator configured for a Date Input type

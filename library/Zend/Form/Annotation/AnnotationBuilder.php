@@ -34,7 +34,7 @@ use Zend\Form\Factory;
 use Zend\Stdlib\ArrayUtils;
 
 /**
- * Parses a class' properties for annotations in order to create a form and 
+ * Parses a class' properties for annotations in order to create a form and
  * input filter definition.
  *
  * @category   Zend
@@ -46,19 +46,24 @@ use Zend\Stdlib\ArrayUtils;
 class AnnotationBuilder implements EventManagerAwareInterface
 {
     /**
-     * @var AnnotationManager 
+     * @var AnnotationManager
      */
     protected $annotationManager;
 
-    /** 
-     * @var EventManagerInterface 
+    /**
+     * @var EventManagerInterface
      */
     protected $events;
 
-    /** 
-     * @var Factory 
+    /**
+     * @var Factory
      */
     protected $formFactory;
+
+    /**
+     * @var object
+     */
+    protected $entity;
 
     /**
      * @var array Default annotations to register
@@ -82,8 +87,8 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
     /**
      * Set form factory to use when building form from annotations
-     * 
-     * @param  Factory $formFactory 
+     *
+     * @param  Factory $formFactory
      * @return AnnotationBuilder
      */
     public function setFormFactory(Factory $formFactory)
@@ -94,8 +99,8 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
     /**
      * Set annotation manager to use when building form from annotations
-     * 
-     * @param  AnnotationManager $annotationManager 
+     *
+     * @param  AnnotationManager $annotationManager
      * @return AnnotationBuilder
      */
     public function setAnnotationManager(AnnotationManager $annotationManager)
@@ -110,8 +115,8 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
     /**
      * Set event manager instance
-     * 
-     * @param  EventManagerInterface $events 
+     *
+     * @param  EventManagerInterface $events
      * @return AnnotationBuilder
      */
     public function setEventManager(EventManagerInterface $events)
@@ -130,7 +135,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
      * Retrieve form factory
      *
      * Lazy-loads the default form factory if none is currently set.
-     * 
+     *
      * @return Factory
      */
     public function getFormFactory()
@@ -147,7 +152,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
      * Retrieve annotation manager
      *
      * If none is currently set, creates one with default annotations.
-     * 
+     *
      * @return AnnotationManager
      */
     public function getAnnotationManager()
@@ -162,7 +167,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
     /**
      * Get event manager
-     * 
+     *
      * @return EventManagerInterface
      */
     public function events()
@@ -176,10 +181,10 @@ class AnnotationBuilder implements EventManagerAwareInterface
     /**
      * Creates and returns a form specification for use with a factory
      *
-     * Parses the object provided, and processes annotations for the class and 
-     * all properties. Information from annotations is then used to create 
+     * Parses the object provided, and processes annotations for the class and
+     * all properties. Information from annotations is then used to create
      * specifications for a form, its elements, and its input filter.
-     * 
+     *
      * @param  string|object $entity Either an instance or a valid class name for an entity
      * @return ArrayObject
      */
@@ -197,6 +202,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
             }
         }
 
+        $this->entity      = $entity;
         $annotationManager = $this->getAnnotationManager();
         $formSpec          = new ArrayObject();
         $filterSpec        = new ArrayObject();
@@ -226,7 +232,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
     /**
      * Create a form from an object.
      *
-     * @param  string|object $entity 
+     * @param  string|object $entity
      * @return \Zend\Form\Form
      */
     public function createForm($entity)
@@ -237,12 +243,22 @@ class AnnotationBuilder implements EventManagerAwareInterface
     }
 
     /**
+     * Get the entity used to construct the form.
+     *
+     * @return object
+     */
+    public function getEntity()
+    {
+        return $this->entity;
+    }
+
+    /**
      * Configure the form specification from annotations
-     * 
-     * @param  AnnotationCollection $annotations 
-     * @param  ClassReflection $reflection 
-     * @param  ArrayObject $formSpec 
-     * @param  ArrayObject $filterSpec 
+     *
+     * @param  AnnotationCollection $annotations
+     * @param  ClassReflection $reflection
+     * @param  ArrayObject $formSpec
+     * @param  ArrayObject $filterSpec
      * @return void
      * @triggers discoverName
      * @triggers configureForm
@@ -258,9 +274,9 @@ class AnnotationBuilder implements EventManagerAwareInterface
         $events = $this->events();
         foreach ($annotations as $annotation) {
             $events->trigger(__FUNCTION__, $this, array(
-                'annotation' => $annotation, 
+                'annotation' => $annotation,
                 'name'        => $name,
-                'formSpec'   => $formSpec, 
+                'formSpec'   => $formSpec,
                 'filterSpec' => $filterSpec,
             ));
         }
@@ -268,11 +284,11 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
     /**
      * Configure an element from annotations
-     * 
-     * @param  AnnotationCollection $annotations 
-     * @param  \Zend\Code\Reflection\PropertyReflection $reflection 
-     * @param  ArrayObject $formSpec 
-     * @param  ArrayObject $filterSpec 
+     *
+     * @param  AnnotationCollection $annotations
+     * @param  \Zend\Code\Reflection\PropertyReflection $reflection
+     * @param  ArrayObject $formSpec
+     * @param  ArrayObject $filterSpec
      * @return void
      * @triggers checkForExclude
      * @triggers discoverName
@@ -303,7 +319,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
             'name'        => $name,
             'elementSpec' => $elementSpec,
             'inputSpec'   => $inputSpec,
-            'formSpec'    => $formSpec, 
+            'formSpec'    => $formSpec,
             'filterSpec'  => $filterSpec,
         ));
         foreach ($annotations as $annotation) {
@@ -315,8 +331,8 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
         $elementSpec = $event->getParam('elementSpec');
         $type        = (isset($elementSpec['spec']['type']))
-                     ? $elementSpec['spec']['type']
-                     : 'Zend\Form\Element';
+            ? $elementSpec['spec']['type']
+            : 'Zend\Form\Element';
 
         // Compose as a fieldset or an element, based on specification type
         if ($this->isFieldset($type)) {
@@ -334,9 +350,9 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
     /**
      * Discover the name of the given form or element
-     * 
-     * @param  AnnotationCollection $annotations 
-     * @param  \Reflector $reflection 
+     *
+     * @param  AnnotationCollection $annotations
+     * @param  \Reflector $reflection
      * @return string
      */
     protected function discoverName($annotations, $reflection)
@@ -352,8 +368,8 @@ class AnnotationBuilder implements EventManagerAwareInterface
 
     /**
      * Determine if an element is marked to exclude from the definitions
-     * 
-     * @param  AnnotationCollection $annotations 
+     *
+     * @param  AnnotationCollection $annotations
      * @return true|false
      */
     protected function checkForExclude($annotations)
@@ -369,10 +385,10 @@ class AnnotationBuilder implements EventManagerAwareInterface
     /**
      * Determine if the type represents a fieldset
      *
-     * For PHP versions >= 5.3.7, uses is_subclass_of; otherwise, uses 
+     * For PHP versions >= 5.3.7, uses is_subclass_of; otherwise, uses
      * reflection to determine the interfaces implemented.
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return bool
      */
     protected function isFieldset($type)

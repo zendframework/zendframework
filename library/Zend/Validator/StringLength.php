@@ -35,7 +35,7 @@ class StringLength extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID   => "Invalid type given. String expected",
         self::TOO_SHORT => "'%value%' is less than %min% characters long",
         self::TOO_LONG  => "'%value%' is more than %max% characters long",
@@ -44,7 +44,7 @@ class StringLength extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'min' => array('options' => 'min'),
         'max' => array('options' => 'max'),
     );
@@ -93,8 +93,8 @@ class StringLength extends AbstractValidator
      * Sets the min option
      *
      * @param  integer $min
-     * @throws \Zend\Validator\Exception
-     * @return \Zend\Validator\StringLength Provides a fluent interface
+     * @throws Exception\InvalidArgumentException
+     * @return StringLength Provides a fluent interface
      */
     public function setMin($min)
     {
@@ -121,14 +121,14 @@ class StringLength extends AbstractValidator
      * Sets the max option
      *
      * @param  integer|null $max
-     * @throws \Zend\Validator\Exception
-     * @return \Zend\Validator\StringLength Provides a fluent interface
+     * @throws Exception\InvalidArgumentException
+     * @return StringLength Provides a fluent interface
      */
     public function setMax($max)
     {
         if (null === $max) {
             $this->options['max'] = null;
-        } else if ($max < $this->getMin()) {
+        } elseif ($max < $this->getMin()) {
             throw new Exception\InvalidArgumentException("The maximum must be greater than or equal to the minimum length, but "
                                             . "$max < " . $this->getMin());
         } else {
@@ -152,7 +152,8 @@ class StringLength extends AbstractValidator
      * Sets a new encoding to use
      *
      * @param string $encoding
-     * @return \Zend\Validator\StringLength
+     * @return StringLength
+     * @throws Exception\InvalidArgumentException
      */
     public function setEncoding($encoding = null)
     {

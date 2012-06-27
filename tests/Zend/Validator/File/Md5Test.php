@@ -20,11 +20,8 @@
  */
 
 namespace ZendTest\Validator\File;
-use Zend\Validator\File;
 
-/**
- * @see Zend_Validator_File_Md5
- */
+use Zend\Validator\File;
 
 /**
  * Md5 testbed

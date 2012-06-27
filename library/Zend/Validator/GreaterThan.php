@@ -39,7 +39,7 @@ class GreaterThan extends AbstractValidator
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::NOT_GREATER => "'%value%' is not greater than '%min%'",
         self::NOT_GREATER_INCLUSIVE => "'%value' is not greater or equal than '%min%'"
     );
@@ -47,8 +47,8 @@ class GreaterThan extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageVariables = array(
-        'min' => '_min'
+    protected $messageVariables = array(
+        'min' => 'min'
     );
 
     /**
@@ -56,7 +56,7 @@ class GreaterThan extends AbstractValidator
      *
      * @var mixed
      */
-    protected $_min;
+    protected $min;
 
     /**
      * Whether to do inclusive comparisons, allowing equivalence to max
@@ -66,12 +66,13 @@ class GreaterThan extends AbstractValidator
      *
      * @var boolean
      */
-    protected $_inclusive;
+    protected $inclusive;
 
     /**
      * Sets validator options
      *
      * @param  array|Traversable $options
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)
     {
@@ -99,7 +100,7 @@ class GreaterThan extends AbstractValidator
 
         $this->setMin($options['min'])
              ->setInclusive($options['inclusive']);
-             
+
         parent::__construct();
     }
 
@@ -110,18 +111,18 @@ class GreaterThan extends AbstractValidator
      */
     public function getMin()
     {
-        return $this->_min;
+        return $this->min;
     }
 
     /**
      * Sets the min option
      *
      * @param  mixed $min
-     * @return \Zend\Validator\GreaterThan Provides a fluent interface
+     * @return GreaterThan Provides a fluent interface
      */
     public function setMin($min)
     {
-        $this->_min = $min;
+        $this->min = $min;
         return $this;
     }
 
@@ -132,18 +133,18 @@ class GreaterThan extends AbstractValidator
      */
     public function getInclusive()
     {
-        return $this->_inclusive;
+        return $this->inclusive;
     }
 
     /**
      * Sets the inclusive option
      *
      * @param  boolean $inclusive
-     * @return \Zend\Validator\GreaterThan Provides a fluent interface
+     * @return GreaterThan Provides a fluent interface
      */
     public function setInclusive($inclusive)
     {
-        $this->_inclusive = $inclusive;
+        $this->inclusive = $inclusive;
         return $this;
     }
 
@@ -157,13 +158,13 @@ class GreaterThan extends AbstractValidator
     {
         $this->setValue($value);
 
-        if ($this->_inclusive) {
-            if ($this->_min > $value) {
+        if ($this->inclusive) {
+            if ($this->min > $value) {
                 $this->error(self::NOT_GREATER_INCLUSIVE);
                 return false;
             }
         } else {
-            if ($this->_min >= $value) {
+            if ($this->min >= $value) {
                 $this->error(self::NOT_GREATER);
                 return false;
             }

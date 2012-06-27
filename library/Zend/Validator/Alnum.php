@@ -20,6 +20,8 @@
 
 namespace Zend\Validator;
 
+use Zend\Filter\Alnum as AlnumFilter;
+
 /**
  * @category   Zend
  * @package    Zend_Validate
@@ -37,14 +39,14 @@ class Alnum extends AbstractValidator
      *
      * @var \Zend\Filter\Alnum
      */
-    protected static $_filter = null;
+    protected static $filter = null;
 
     /**
      * Validation failure message template definitions
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID      => "Invalid type given. String, integer or float expected",
         self::NOT_ALNUM    => "'%value%' contains characters which are non alphabetic and no digits",
         self::STRING_EMPTY => "'%value%' is an empty string",
@@ -110,12 +112,12 @@ class Alnum extends AbstractValidator
             return false;
         }
 
-        if (null === self::$_filter) {
-            self::$_filter = new \Zend\Filter\Alnum();
+        if (null === self::$filter) {
+            self::$filter = new AlnumFilter();
         }
 
-        self::$_filter->setAllowWhiteSpace($this->getAllowWhiteSpace());
-        if ($value != self::$_filter->filter($value)) {
+        self::$filter->setAllowWhiteSpace($this->getAllowWhiteSpace());
+        if ($value != self::$filter->filter($value)) {
             $this->error(self::NOT_ALNUM);
             return false;
         }

@@ -20,8 +20,8 @@
 
 namespace Zend\Validator;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -42,7 +42,7 @@ class Identical extends AbstractValidator
      * Error messages
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::NOT_SAME      => "The two given tokens do not match",
         self::MISSING_TOKEN => 'No token was provided to match against',
     );
@@ -50,7 +50,7 @@ class Identical extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'token' => 'tokenString'
     );
 
@@ -66,7 +66,6 @@ class Identical extends AbstractValidator
      * Sets validator options
      *
      * @param  mixed $token
-     * @return void
      */
     public function __construct($token = null)
     {
@@ -83,7 +82,7 @@ class Identical extends AbstractValidator
         } elseif (null !== $token) {
             $this->setToken($token);
         }
-        
+
         parent::__construct(is_array($token) ? $token : null);
     }
 
@@ -101,7 +100,7 @@ class Identical extends AbstractValidator
      * Set token against which to compare
      *
      * @param  mixed $token
-     * @return \Zend\Validator\Identical
+     * @return Identical
      */
     public function setToken($token)
     {
@@ -124,6 +123,7 @@ class Identical extends AbstractValidator
      * Sets the strict parameter
      *
      * @param Zend\Validator\Identical
+     * @return Identical
      */
     public function setStrict($strict)
     {

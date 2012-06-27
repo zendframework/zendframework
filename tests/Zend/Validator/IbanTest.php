@@ -21,9 +21,8 @@
 
 namespace ZendTest\Validator;
 
-use ReflectionClass,
-    Zend\Registry,
-    Zend\Validator;
+use Zend\Registry;
+use Zend\Validator\Iban;
 
 /**
  * @category   Zend
@@ -47,7 +46,7 @@ class IbanTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
-        $validator = new Validator\Iban();
+        $validator = new Iban();
         $valuesExpected = array(
             'AD1200012030200359100100' => true,
             'AT611904300234573201'     => true,
@@ -62,7 +61,7 @@ class IbanTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingAndGettingLocale()
     {
-        $validator = new Validator\Iban();
+        $validator = new Iban();
 
         $validator->setLocale('de_DE');
         $this->assertEquals('de_DE', $validator->getLocale());
@@ -74,13 +73,13 @@ class IbanTest extends \PHPUnit_Framework_TestCase
 
     public function testInstanceWithLocale()
     {
-        $validator = new Validator\Iban('de_AT');
+        $validator = new Iban('de_AT');
         $this->assertTrue($validator->isValid('AT611904300234573201'));
     }
 
     public function testIbanNotSupported()
     {
-        $validator = new Validator\Iban('en_US');
+        $validator = new Iban('en_US');
         $this->assertFalse($validator->isValid('AT611904300234573201'));
     }
 
@@ -89,43 +88,14 @@ class IbanTest extends \PHPUnit_Framework_TestCase
      */
     public function testIbanDetectionWithoutLocale()
     {
-        $validator = new Validator\Iban(false);
+        $validator = new Iban(false);
         $this->assertTrue($validator->isValid('AT611904300234573201'));
     }
-    
+
     public function testEqualsMessageTemplates()
     {
-        $validator = new Validator\Iban();
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
-    }
-    
-    public function testEqualsMessageVariables()
-    {
-        $validator = new Validator\Iban();
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $validator = new Iban();
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
 }

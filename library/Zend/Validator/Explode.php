@@ -33,14 +33,14 @@ class Explode extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID => "Invalid type given. String expected",
     );
 
     /**
      * @var array
      */
-    protected $_messageVariables = array();
+    protected $messageVariables = array();
 
     /**
      * @var string
@@ -133,6 +133,7 @@ class Explode extends AbstractValidator
      * @link   http://www.columbia.edu/kermit/ascii.html US-ASCII characters
      * @param  string $value
      * @return boolean
+     * @throws Exception\RuntimeException
      */
     public function isValid($value)
     {

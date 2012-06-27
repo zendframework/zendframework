@@ -28,7 +28,7 @@ namespace Zend\Validator\Barcode;
  */
 class Royalmail extends AbstractAdapter
 {
-    protected $_rows = array(
+    protected $rows = array(
         '0' => 1, '1' => 1, '2' => 1, '3' => 1, '4' => 1, '5' => 1,
         '6' => 2, '7' => 2, '8' => 2, '9' => 2, 'A' => 2, 'B' => 2,
         'C' => 3, 'D' => 3, 'E' => 3, 'F' => 3, 'G' => 3, 'H' => 3,
@@ -37,7 +37,7 @@ class Royalmail extends AbstractAdapter
         'U' => 0, 'V' => 0, 'W' => 0, 'X' => 0, 'Y' => 0, 'Z' => 0,
      );
 
-    protected $_columns = array(
+    protected $columns = array(
         '0' => 1, '1' => 2, '2' => 3, '3' => 4, '4' => 5, '5' => 0,
         '6' => 1, '7' => 2, '8' => 3, '9' => 4, 'A' => 5, 'B' => 0,
         'C' => 1, 'D' => 2, 'E' => 3, 'F' => 4, 'G' => 5, 'H' => 0,
@@ -48,14 +48,12 @@ class Royalmail extends AbstractAdapter
 
     /**
      * Constructor for this barcode adapter
-     *
-     * @return void
      */
     public function __construct()
     {
         $this->setLength(-1);
         $this->setCharacters('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-        $this->setChecksum('_royalmail');
+        $this->setChecksum('royalmail');
     }
 
     /**
@@ -64,22 +62,22 @@ class Royalmail extends AbstractAdapter
      * @param  string $value The barcode to validate
      * @return boolean
      */
-    protected function _royalmail($value)
+    protected function royalmail($value)
     {
         $checksum = substr($value, -1, 1);
         $values   = str_split(substr($value, 0, -1));
         $rowvalue = 0;
         $colvalue = 0;
         foreach($values as $row) {
-            $rowvalue += $this->_rows[$row];
-            $colvalue += $this->_columns[$row];
+            $rowvalue += $this->rows[$row];
+            $colvalue += $this->columns[$row];
         }
 
         $rowvalue %= 6;
         $colvalue %= 6;
 
-        $rowchkvalue = array_keys($this->_rows, $rowvalue);
-        $colchkvalue = array_keys($this->_columns, $colvalue);
+        $rowchkvalue = array_keys($this->rows, $rowvalue);
+        $colchkvalue = array_keys($this->columns, $colvalue);
         $intersect = array_intersect($rowchkvalue, $colchkvalue);
         $chkvalue    = current($intersect);
         if ($chkvalue == $checksum) {

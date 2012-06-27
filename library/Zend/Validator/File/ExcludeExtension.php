@@ -39,13 +39,13 @@ class ExcludeExtension extends Extension
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::FALSE_EXTENSION => "File '%value%' has a false extension",
         self::NOT_FOUND       => "File '%value%' is not readable or does not exist",
     );
 
     /**
-     * Returns true if and only if the fileextension of $value is not included in the
+     * Returns true if and only if the file extension of $value is not included in the
      * set extension list
      *
      * @param  string  $value Real file to check for extension
@@ -60,7 +60,7 @@ class ExcludeExtension extends Extension
 
         // Is file readable ?
         if (false === stream_resolve_include_path($value)) {
-            return $this->_throw($file, self::NOT_FOUND);
+            return $this->throwError($file, self::NOT_FOUND);
         }
 
         if ($file !== null) {
@@ -73,7 +73,7 @@ class ExcludeExtension extends Extension
 
         if ($this->getCase() and (!in_array($info['extension'], $extensions))) {
             return true;
-        } else if (!$this->getCase()) {
+        } elseif (!$this->getCase()) {
             $found = false;
             foreach ($extensions as $extension) {
                 if (strtolower($extension) == strtolower($info['extension'])) {
@@ -86,6 +86,6 @@ class ExcludeExtension extends Extension
             }
         }
 
-        return $this->_throw($file, self::FALSE_EXTENSION);
+        return $this->throwError($file, self::FALSE_EXTENSION);
     }
 }

@@ -66,7 +66,6 @@ class StaticValidator
      * @param  string   $classBaseName
      * @param  array    $args          OPTIONAL
      * @return boolean
-     * @throws \Zend\Validator\Exception
      */
     public static function execute($value, $classBaseName, array $args = array())
     {

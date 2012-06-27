@@ -20,6 +20,8 @@
 
 namespace Zend\Validator;
 
+use Zend\Filter\Digits as DigitsFilter;
+
 /**
  * @category   Zend
  * @package    Zend_Validate
@@ -37,14 +39,14 @@ class Digits extends AbstractValidator
      *
      * @var \Zend\Filter\Digits
      */
-    protected static $_filter = null;
+    protected static $filter = null;
 
     /**
      * Validation failure message template definitions
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::NOT_DIGITS   => "'%value%' must contain only digits",
         self::STRING_EMPTY => "'%value%' is an empty string",
         self::INVALID      => "Invalid type given. String, integer or float expected",
@@ -70,11 +72,11 @@ class Digits extends AbstractValidator
             return false;
         }
 
-        if (null === self::$_filter) {
-            self::$_filter = new \Zend\Filter\Digits();
+        if (null === self::$filter) {
+            self::$filter = new DigitsFilter();
         }
 
-        if ($this->getValue() !== self::$_filter->filter($this->getValue())) {
+        if ($this->getValue() !== self::$filter->filter($this->getValue())) {
             $this->error(self::NOT_DIGITS);
             return false;
         }

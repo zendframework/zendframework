@@ -188,10 +188,6 @@ class FilterChain extends AbstractFilter implements Countable
             $options = (array) $options;
         } elseif (empty($options)) {
             $options = null;
-        } else {
-            if (range(0, count($options) - 1) != array_keys($options)) {
-                $options = array($options);
-            }
         }
         $filter = $this->getPluginManager()->get($name, $options);
         return $this->attach($filter, $priority);

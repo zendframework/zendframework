@@ -209,39 +209,6 @@ class FormTest extends TestCase
 
         $nestedFieldset = $basicFieldset->get('nested_fieldset');
         $this->assertEquals('basic_fieldset[nested_fieldset][anotherField]', $nestedFieldset->get('anotherField')
-                                                                                             ->getName());
+                                                                                            ->getName());
     }
 }
-/*
-class SimpleFieldset extends Fieldset
-{
-    public function __construct()
-    {
-        parent::__construct('simple_fieldset');
-
-        $field = new \Zend\Form\Element('field');
-        $field->setAttributes(array(
-            'type' => 'text',
-            'label' => 'Name'
-        ));
-        $this->add($field);
-
-        $nestedFieldset = new NestedFieldset();
-        $this->add($nestedFieldset);
-    }
-}
-
-class NestedFieldset extends Fieldset
-{
-    public function __construct()
-    {
-        parent::__construct('nested_fieldset');
-
-        $field = new \Zend\Form\Element('anotherField');
-        $field->setAttributes(array(
-            'type' => 'text',
-            'label' => 'Name'
-        ));
-        $this->add($field);
-    }
-}*/

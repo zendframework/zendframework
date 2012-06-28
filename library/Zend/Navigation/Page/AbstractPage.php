@@ -10,11 +10,11 @@
 
 namespace Zend\Navigation\Page;
 
-use Traversable,
-    Zend\Acl\Resource\ResourceInterface as AclResource,
-    Zend\Navigation\AbstractContainer,
-    Zend\Navigation\Exception,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Acl\Resource\ResourceInterface as AclResource;
+use Zend\Navigation\AbstractContainer;
+use Zend\Navigation\Exception;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Base class for Zend\Navigation\Page pages

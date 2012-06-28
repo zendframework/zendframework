@@ -10,11 +10,11 @@
 
 namespace Zend\Navigation;
 
-use Countable,
-    RecursiveIterator,
-    RecursiveIteratorIterator,
-    Traversable,
-    Zend\Stdlib\ArrayUtils;
+use Countable;
+use RecursiveIterator;
+use RecursiveIteratorIterator;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Zend_Navigation_Container

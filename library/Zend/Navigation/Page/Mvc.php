@@ -13,6 +13,7 @@ namespace Zend\Navigation\Page;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface;
 use Zend\Navigation\Exception;
+use Zend\View\Helper\Url as UrlHelper;
 
 /**
  * Represents a page that is defined using controller, action, route

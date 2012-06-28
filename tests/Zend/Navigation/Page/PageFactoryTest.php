@@ -10,8 +10,8 @@
 
 namespace ZendTest\Navigation;
 
-use Zend\Navigation\Page\AbstractPage,
-    Zend\Navigation;
+use Zend\Navigation\Page\AbstractPage;
+use Zend\Navigation;
 
 /**
  * Tests Zend_Navigation_Page::factory()

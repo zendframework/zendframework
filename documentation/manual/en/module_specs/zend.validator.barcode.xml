@@ -544,11 +544,11 @@ if ($valid->isValid($input)) {
         <programlisting language="php"><![CDATA[
 class My\Barcode\MyBar extends Zend\Validator\Barcode\AbstractAdapter
 {
-    protected $_length     = 'even';
-    protected $_characters = '0123456789ABCDE';
-    protected $_checksum   = '_mod66';
+    protected $length     = 'even';
+    protected $characters = '0123456789ABCDE';
+    protected $checksum   = 'mod66';
 
-    protected function _mod66($barcode)
+    protected function mod66($barcode)
     {
         // do some validations and return a boolean
     }

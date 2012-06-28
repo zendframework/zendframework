@@ -15,7 +15,7 @@
     </para>
 
     <programlisting language="php"><![CDATA[
-protected $_messageTemplates = array(
+protected $messageTemplates = array(
     self::NOT_GREATER => "'%value%' is not greater than '%min%'",
 );
 ]]></programlisting>

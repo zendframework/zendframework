@@ -61,16 +61,16 @@ class MyValid\Float extends Zend\Validator\AbstractValidator
 {
     const FLOAT = 'float';
 
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::FLOAT => "'%value%' is not a floating point value"
     );
 
     public function isValid($value)
     {
-        $this->_setValue($value);
+        $this->setValue($value);
 
         if (!is_float($value)) {
-            $this->_error(self::FLOAT);
+            $this->error(self::FLOAT);
             return false;
         }
 
@@ -82,11 +82,11 @@ class MyValid\Float extends Zend\Validator\AbstractValidator
         <para>
             The class defines a template for its single validation failure message, which includes
             the built-in magic parameter, <emphasis>%value%</emphasis>. The call to
-            <methodname>_setValue()</methodname> prepares the object to insert the tested value into
+            <methodname>setValue()</methodname> prepares the object to insert the tested value into
             the failure message automatically, should the value fail validation. The call to
-            <methodname>_error()</methodname> tracks a reason for validation failure. Since this
+            <methodname>error()</methodname> tracks a reason for validation failure. Since this
             class only defines one failure message, it is not necessary to provide
-            <methodname>_error()</methodname> with the name of the failure message template.
+            <methodname>error()</methodname> with the name of the failure message template.
         </para>
     </example>
 
@@ -128,12 +128,12 @@ class MyValid\NumericBetween extends Zend\Validator\AbstractValidator
     public $minimum = 0;
     public $maximum = 100;
 
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'min' => 'minimum',
         'max' => 'maximum'
     );
 
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::MSG_NUMERIC => "'%value%' is not numeric",
         self::MSG_MINIMUM => "'%value%' must be at least '%min%'",
         self::MSG_MAXIMUM => "'%value%' must be no more than '%max%'"
@@ -144,17 +144,17 @@ class MyValid\NumericBetween extends Zend\Validator\AbstractValidator
         $this->_setValue($value);
 
         if (!is_numeric($value)) {
-            $this->_error(self::MSG_NUMERIC);
+            $this->error(self::MSG_NUMERIC);
             return false;
         }
 
         if ($value < $this->minimum) {
-            $this->_error(self::MSG_MINIMUM);
+            $this->error(self::MSG_MINIMUM);
             return false;
         }
 
         if ($value > $this->maximum) {
-            $this->_error(self::MSG_MAXIMUM);
+            $this->error(self::MSG_MAXIMUM);
             return false;
         }
 
@@ -211,7 +211,7 @@ class MyValid\PasswordStrength extends Zend\Validator\AbstractValidator
     const LOWER  = 'lower';
     const DIGIT  = 'digit';
 
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::LENGTH => "'%value%' must be at least 8 characters in length",
         self::UPPER  => "'%value%' must contain at least one uppercase letter",
         self::LOWER  => "'%value%' must contain at least one lowercase letter",
@@ -220,27 +220,27 @@ class MyValid\PasswordStrength extends Zend\Validator\AbstractValidator
 
     public function isValid($value)
     {
-        $this->_setValue($value);
+        $this->setValue($value);
 
         $isValid = true;
 
         if (strlen($value) < 8) {
-            $this->_error(self::LENGTH);
+            $this->error(self::LENGTH);
             $isValid = false;
         }
 
         if (!preg_match('/[A-Z]/', $value)) {
-            $this->_error(self::UPPER);
+            $this->error(self::UPPER);
             $isValid = false;
         }
 
         if (!preg_match('/[a-z]/', $value)) {
-            $this->_error(self::LOWER);
+            $this->error(self::LOWER);
             $isValid = false;
         }
 
         if (!preg_match('/\d/', $value)) {
-            $this->_error(self::DIGIT);
+            $this->error(self::DIGIT);
             $isValid = false;
         }
 

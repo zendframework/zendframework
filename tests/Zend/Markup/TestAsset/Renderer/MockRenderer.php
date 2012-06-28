@@ -10,8 +10,8 @@
 
 namespace ZendTest\Markup\TestAsset\Renderer;
 
-use Zend\Markup\Renderer\AbstractRenderer,
-    Zend\Filter\FilterChain;
+use Zend\Markup\Renderer\AbstractRenderer;
+use Zend\Filter\FilterChain;
 
 /**
  * HTML renderer

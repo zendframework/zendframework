@@ -10,10 +10,10 @@
 
 namespace ZendTest\Markup\Parser;
 
-use Zend\Markup\Token,
-    Zend\Markup\TokenList,
-    Zend\Markup\Parser,
-    Zend\Markup\Parser\Bbcode;
+use Zend\Markup\Token;
+use Zend\Markup\TokenList;
+use Zend\Markup\Parser;
+use Zend\Markup\Parser\Bbcode;
 
 /**
  * @category   Zend

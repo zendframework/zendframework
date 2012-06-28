@@ -10,11 +10,11 @@
 
 namespace ZendTest\Markup\Renderer;
 
-use ZendTest\Markup\Renderer\TestAsset\SimpleRenderer,
-    Zend\Markup\Token,
-    Zend\Markup\TokenList,
-    Zend\Markup\Renderer\Markup\Replace as ReplaceMarkup,
-    Zend\Filter\StringToUpper as StringToUpperFilter;
+use ZendTest\Markup\Renderer\TestAsset\SimpleRenderer;
+use Zend\Markup\Token;
+use Zend\Markup\TokenList;
+use Zend\Markup\Renderer\Markup\Replace as ReplaceMarkup;
+use Zend\Filter\StringToUpper as StringToUpperFilter;
 
 /**
  * @category   Zend

@@ -10,10 +10,10 @@
 
 namespace Zend\Markup\Renderer\Markup;
 
-use Zend\Markup\Renderer\Markup,
-    Zend\Markup\Renderer\AbstractRenderer,
-    Zend\Filter\FilterInterface,
-    Zend\Filter\FilterChain;
+use Zend\Markup\Renderer\Markup;
+use Zend\Markup\Renderer\AbstractRenderer;
+use Zend\Filter\FilterInterface;
+use Zend\Filter\FilterChain;
 
 /**
  * Abstract markup

@@ -10,9 +10,9 @@
 
 namespace Zend\Markup\Renderer\Markup;
 
-use Zend\Markup\Token,
-    Zend\Filter\FilterInterface,
-    Zend\Markup\Renderer\AbstractRenderer;
+use Zend\Markup\Token;
+use Zend\Filter\FilterInterface;
+use Zend\Markup\Renderer\AbstractRenderer;
 
 /**
  * Interface for a markup

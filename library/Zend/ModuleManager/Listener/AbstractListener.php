@@ -28,7 +28,6 @@ abstract class AbstractListener
      * __construct
      *
      * @param  ListenerOptions $options
-     * @return void
      */
     public function __construct(ListenerOptions $options = null)
     {

@@ -23,8 +23,8 @@ namespace ZendTest\Form\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element;
+use Zend\Form\View\HelperConfiguration;
 use Zend\Form\View\Helper\FormRow as FormRowHelper;
-use Zend\Form\View\HelperLoader;
 use Zend\View\Renderer\PhpRenderer;
 
 /**
@@ -44,9 +44,10 @@ class FormRowTest extends TestCase
         $this->helper = new FormRowHelper();
 
         $this->renderer = new PhpRenderer;
-        $broker = $this->renderer->getBroker();
-        $loader = $broker->getClassLoader();
-        $loader->registerPlugins(new HelperLoader());
+        $helpers = $this->renderer->getHelperPluginManager();
+        $config  = new HelperConfiguration();
+        $config->configureServiceManager($helpers);
+
         $this->helper->setView($this->renderer);
     }
 

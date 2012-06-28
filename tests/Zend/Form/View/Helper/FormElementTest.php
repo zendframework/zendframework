@@ -44,7 +44,7 @@ class FormElementTest extends TestCase
     public function setUp()
     {
         $this->helper = new FormElementHelper();
-        
+
         Doctype::unsetDoctypeRegistry();
 
         $this->renderer = new PhpRenderer;

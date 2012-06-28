@@ -49,6 +49,21 @@ class Postgresql implements PlatformInterface
     }
 
     /**
+     * Quote identifier chain
+     *
+     * @param string|string[] $identifierChain
+     * @return string
+     */
+    public function quoteIdentifierChain($identifierChain)
+    {
+        $identifierChain = str_replace('"', '\\"', $identifierChain);
+        if (is_array($identifierChain)) {
+            $identifierChain = implode('"."', $identifierChain);
+        }
+        return '"' . $identifierChain . '"';
+    }
+
+    /**
      * Get quote value symbol
      * 
      * @return string 

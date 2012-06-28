@@ -24,20 +24,17 @@ namespace ZendTest\Form\TestAsset;
 use Zend\Form\Element;
 use Zend\Form\Fieldset;
 
-class BasicFieldset extends Fieldset
+class NestedFieldset extends Fieldset
 {
     public function __construct()
     {
-        parent::__construct('basic_fieldset');
+        parent::__construct('nested_fieldset');
 
-        $field = new Element('field');
+        $field = new Element('anotherField');
         $field->setAttributes(array(
             'type' => 'text',
             'label' => 'Name'
         ));
         $this->add($field);
-
-        $nestedFieldset = new NestedFieldset();
-        $this->add($nestedFieldset);
     }
 }

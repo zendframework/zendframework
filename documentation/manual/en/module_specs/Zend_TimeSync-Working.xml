@@ -27,7 +27,7 @@
         <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync('0.pool.ntp.org');
 
-print $server->getDate()->getIso();
+print $server->getDate()->format(DateTime::ISO8601);
 ]]></programlisting>
 
         <para>
@@ -37,13 +37,14 @@ print $server->getDate()->getIso();
             for a time server. Then when calling <methodname>getDate()</methodname> the actual set
             time server is requested and it will return its own time.
             <classname>Zend_TimeSync</classname> then calculates the difference to the actual time
-            of the server running the script and returns a <classname>Zend_Date</classname> object
+            of the server running the script and returns a <classname>DateTime</classname> object
             with the correct time.
         </para>
 
         <para>
-            For details about <classname>Zend_Date</classname> and its methods see the <link linkend="zend.date.introduction"><classname>Zend_Date</classname>
-                documentation</link>.
+            For details about <classname>DateTime</classname> and its methods see the
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/class.datetime.php">
+                <classname>DateTime</classname>documentation</link>.
         </para>
     </section>
 
@@ -70,7 +71,7 @@ $server = new Zend_TimeSync(array('0.pool.ntp.org',
                                   '2.pool.ntp.org'));
 $server->addServer('3.pool.ntp.org');
 
-print $server->getDate()->getIso();
+print $server->getDate()->format(DateTime::ISO8601);
 ]]></programlisting>
 
         <para>
@@ -92,7 +93,7 @@ $server = new Zend_TimeSync(array('generic'  => '0.pool.ntp.org',
                                   'reserve'  => '2.pool.ntp.org'));
 $server->addServer('3.pool.ntp.org', 'additional');
 
-print $server->getDate()->getIso();
+print $server->getDate()->format(DateTime::ISO8601);
 ]]></programlisting>
 
         <para>
@@ -124,7 +125,7 @@ $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
                                   'reserve'  => 'ntp:\\2.pool.ntp.org'));
 $server->addServer('sntp:\\internal.myserver.com', 'additional');
 
-print $server->getDate()->getIso();
+print $server->getDate()->format(DateTime::ISO8601);
 ]]></programlisting>
 
         <para>
@@ -154,7 +155,7 @@ $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org:200',
                                   'fallback' => 'ntp:\\1.pool.ntp.org'));
 $server->addServer('sntp:\\internal.myserver.com:399', 'additional');
 
-print $server->getDate()->getIso();
+print $server->getDate()->format(DateTime::ISO8601);
 ]]></programlisting>
     </section>
 
@@ -190,7 +191,7 @@ $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
                                   'fallback' => 'ntp:\\1.pool.ntp.org'));
 $server->addServer('sntp:\\internal.myserver.com', 'additional');
 
-print $server->getDate()->getIso();
+print $server->getDate()->format(DateTime::ISO8601);
 print_r(Zend_TimeSync::getOptions();
 print "Timeout = " . Zend_TimeSync::getOptions('timeout');
 ]]></programlisting>
@@ -265,7 +266,7 @@ $server = new Zend_TimeSync($serverlist);
 
 try {
     $result = $server->getDate();
-    echo $result->getIso();
+    echo $result->format(DateTime::ISO8601);
 } catch (Zend_TimeSync_Exception $e) {
 
     $exceptions = $e->get();

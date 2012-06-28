@@ -22,7 +22,7 @@
 
         <para>
             <classname>Zend_TimeSync</classname> is not able to change the server's time, but it
-            will return a <link linkend="zend.date.introduction">Zend_Date</link> instance from
+            will return a <classname>DateTime</classname> instance from
             which the difference from the server's time can be worked with.
         </para>
     </note>

@@ -20,7 +20,7 @@
 
 namespace Zend\TimeSync;
 
-use Zend\TimeSync\Exception;
+use DateTime;
 
 /**
  * Abstract class definition for all timeserver protocols
@@ -30,7 +30,7 @@ use Zend\TimeSync\Exception;
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Protocol
+abstract class AbstractProtocol
 {
     /**
      * Holds the current socket connection
@@ -94,7 +94,7 @@ abstract class Protocol
      * Connect to the specified timeserver.
      *
      * @return void
-     * @throws Exception\ExceptionInterface When the connection failed
+     * @throws Exception\RuntimeException When the connection failed
      */
     protected function _connect()
     {
@@ -137,15 +137,16 @@ abstract class Protocol
     /**
      * Query this timeserver without using the fallback mechanism
      *
-     * @param  string|\Zend\Locale\Locale $locale (Optional) Locale
-     * @return \Zend\Date\Date
+     * @return DateTime
      */
-    public function getDate($locale = null)
+    public function getDate()
     {
         $this->_write($this->_prepare());
-        $timestamp = $this->_extract($this->_read());
+        $this->_extract($this->_read());
 
-        $date = new \Zend\Date\Date($this, null, $locale);
-        return $date;
+        // Apply to the local time the offset obtained from the server
+        $info = $this->getInfo();
+        $time = (time() + round($info['offset']));
+        return date_timestamp_set(new DateTime(), $time);
     }
 }

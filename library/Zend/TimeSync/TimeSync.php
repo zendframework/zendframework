@@ -20,9 +20,10 @@
 
 namespace Zend\TimeSync;
 
-use Zend\TimeSync\Exception,
-    ArrayObject,
-    IteratorAggregate;
+use ArrayObject;
+use DateTime;
+use IteratorAggregate;
+use Zend\TimeSync\Exception;
 
 /**
  * @category   Zend
@@ -77,7 +78,6 @@ class TimeSync implements IteratorAggregate
      *
      * @param  string|array $target - OPTIONAL single timeserver, or an array of timeservers.
      * @param  string       $alias  - OPTIONAL an alias for this timeserver
-     * @return  object
      */
     public function __construct($target = null, $alias = null)
     {
@@ -228,16 +228,15 @@ class TimeSync implements IteratorAggregate
      * facade and will try to return the date from the first server that
      * returns a valid result.
      *
-     * @param  Zend_Locale $locale OPTIONAL locale
-     * @return TimeSync
+     * @return DateTime
      * @throws Exception\RuntimeException
      */
-    public function getDate($locale = null)
+    public function getDate()
     {
         foreach ($this->_timeservers as $alias => $server) {
             $this->_current = $server;
             try {
-                return $server->getDate($locale);
+                return $server->getDate();
             } catch (Exception\ExceptionInterface $e) {
                 if (!isset($masterException)) {
                     $masterException = new Exception\RuntimeException($e->getMessage(), $e->getCode());
@@ -255,6 +254,7 @@ class TimeSync implements IteratorAggregate
      *
      * @param  string|array $target   - Single timeserver, or an array of timeservers.
      * @param  string       $alias    - An alias for this timeserver
+     * @throws Exception\RuntimeException
      */
     protected function _addServer($target, $alias)
     {

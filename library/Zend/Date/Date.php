@@ -136,7 +136,7 @@ class Date extends DateObject
      */
     public function __construct($date = null, $part = null, $locale = null)
     {
-        if (is_object($date) and !($date instanceof TimeSync\Protocol) and
+        if (is_object($date) and !($date instanceof TimeSync\AbstractProtocol) and
             !($date instanceof Date)) {
             if ($locale instanceof Locale) {
                 $locale = $date;
@@ -147,7 +147,7 @@ class Date extends DateObject
             }
         }
 
-        if (($date !== null) and !is_array($date) and !($date instanceof TimeSync\Protocol) and
+        if (($date !== null) and !is_array($date) and !($date instanceof TimeSync\AbstractProtocol) and
             !($date instanceof Date) and !defined($date) and Locale::isLocale($date, true)) {
             $locale = $date;
             $date   = null;
@@ -172,7 +172,7 @@ class Date extends DateObject
             }
         }
 
-        if ($date instanceof TimeSync\Protocol) {
+        if ($date instanceof TimeSync\AbstractProtocol) {
             $date = $date->getInfo();
             $date = $this->_getTime($date['offset']);
             $part = null;
@@ -277,7 +277,7 @@ class Date extends DateObject
                         if ($value === null) {
                             parent::$_defaultOffset = 0;
                         } else {
-                            if (!$value instanceof TimeSync\Protocol) {
+                            if (!$value instanceof TimeSync\AbstractProtocol) {
                                 throw new Exception\InvalidArgumentException("Instance of Zend_TimeSync expected for option timesync");
                             }
 

@@ -17,7 +17,7 @@ class SimpleRouteStackTest extends TestCase
         $stack  = new SimpleRouteStack();
         $stack->setRoutePluginManager($routes);
         
-        $this->assertEquals($routes, $stack->routePluginManager());
+        $this->assertEquals($routes, $stack->getRoutePluginManager());
     }
     
     public function testAddRoutesWithInvalidArgument()

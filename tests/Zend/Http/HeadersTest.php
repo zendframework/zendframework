@@ -10,8 +10,8 @@
 
 namespace ZendTest\Http;
 
-use Zend\Http\Headers,
-    Zend\Http\Header;
+use Zend\Http\Headers;
+use Zend\Http\Header;
 
 class HeadersTest extends \PHPUnit_Framework_TestCase
 {

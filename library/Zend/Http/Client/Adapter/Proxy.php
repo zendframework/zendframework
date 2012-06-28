@@ -9,8 +9,8 @@
  */
 
 namespace Zend\Http\Client\Adapter;
-use Zend\Http\Client,
-    Zend\Http\Client\Adapter\Exception as AdapterException;
+use Zend\Http\Client;
+use Zend\Http\Client\Adapter\Exception as AdapterException;
 
 /**
  * HTTP Proxy-supporting Zend_Http_Client adapter class, based on the default

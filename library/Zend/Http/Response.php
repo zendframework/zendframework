@@ -10,8 +10,8 @@
 
 namespace Zend\Http;
 
-use Zend\Stdlib\Message,
-    Zend\Stdlib\ResponseInterface;
+use Zend\Stdlib\Message;
+use Zend\Stdlib\ResponseInterface;
 
 class Response extends Message implements ResponseInterface
 {

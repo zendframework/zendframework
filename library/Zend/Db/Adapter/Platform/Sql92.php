@@ -79,7 +79,7 @@ class Sql92 implements PlatformInterface
     {
         $valueList = str_replace('\'', '\\' . '\'', $valueList);
         if (is_array($valueList)) {
-            $valueList = implode('\',\'', $valueList);
+            $valueList = implode('\', \'', $valueList);
         }
         return '\'' . $valueList . '\'';
     }

@@ -197,22 +197,22 @@ class FormTest extends TestCase
         ));
 
         $this->form->add(array(
-            'type' => 'ZendTest\Form\SimpleFieldset'
+            'type' => 'ZendTest\Form\TestAsset\BasicFieldset'
         ));
 
         $this->form->prepare();
 
         $this->assertEquals('foo', $this->form->get('foo')->getName());
 
-        $simpleFieldset = $this->form->get('simple_fieldset');
-        $this->assertEquals('simple_fieldset[field]', $simpleFieldset->get('field')->getName());
+        $basicFieldset = $this->form->get('basic_fieldset');
+        $this->assertEquals('basic_fieldset[field]', $basicFieldset->get('field')->getName());
 
-        $nestedFieldset = $simpleFieldset->get('nested_fieldset');
-        $this->assertEquals('simple_fieldset[nested_fieldset][anotherField]', $nestedFieldset->get('anotherField')
+        $nestedFieldset = $basicFieldset->get('nested_fieldset');
+        $this->assertEquals('basic_fieldset[nested_fieldset][anotherField]', $nestedFieldset->get('anotherField')
                                                                                              ->getName());
     }
 }
-
+/*
 class SimpleFieldset extends Fieldset
 {
     public function __construct()
@@ -244,4 +244,4 @@ class NestedFieldset extends Fieldset
         ));
         $this->add($field);
     }
-}
+}*/

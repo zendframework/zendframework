@@ -21,6 +21,7 @@
 namespace Zend\Form;
 
 use Traversable;
+use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\InputFilter\InputProviderInterface;
@@ -186,12 +187,13 @@ class Form extends BaseForm implements FormFactoryAwareInterface
             $name = $fieldset->getName();
             if (!$fieldset instanceof InputFilterProviderInterface) {
                 if (!$inputFilter->has($name)) {
-                    // Not an input filter provider, and no matching input for this fieldset.
-                    // Nothing more to do for this one.
-                    continue;
+                    // Add a new empty input filter if it does not exist, so that elements of nested fieldsets can be
+                    // recursively added
+                    $inputFilter->add(new InputFilter(), $name);
                 }
 
                 $fieldsetFilter = $inputFilter->get($name);
+
                 if (!$fieldsetFilter instanceof InputFilterInterface) {
                     // Input attached for fieldset, not input filter; nothing more to do.
                     continue;

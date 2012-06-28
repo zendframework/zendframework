@@ -21,8 +21,8 @@
 
 namespace Zend\View\Helper;
 
-use Traversable,
-    Zend\View\Exception;
+use Traversable;
+use Zend\View\Exception;
 
 /**
  * Helper for rendering a template fragment in its own variable scope; iterates

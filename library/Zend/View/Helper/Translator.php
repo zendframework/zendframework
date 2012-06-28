@@ -21,11 +21,11 @@
 
 namespace Zend\View\Helper;
 
-use Zend\Locale\Locale,
-    Zend\Translator\Adapter\AbstractAdapter as TranslationAdapter,
-    Zend\Translator\Translator as Translation,
-    Zend\View,
-    Zend\View\Exception;
+use Zend\Locale\Locale;
+use Zend\Translator\Adapter\AbstractAdapter as TranslationAdapter;
+use Zend\Translator\Translator as Translation;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Translation view helper

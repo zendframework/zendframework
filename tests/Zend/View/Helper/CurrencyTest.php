@@ -21,10 +21,10 @@
 
 namespace ZendTest\View\Helper;
 
-use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
-    Zend\Currency,
-    Zend\View\Helper;
+use Zend\Cache\StorageFactory as CacheFactory;
+use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
+use Zend\Currency;
+use Zend\View\Helper;
 
 /**
  * Test class for Zend_View_Helper_Currency

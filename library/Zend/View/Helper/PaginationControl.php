@@ -20,9 +20,9 @@
 
 namespace Zend\View\Helper;
 
-use Zend\Paginator,
-    Zend\View,
-    Zend\View\Exception;
+use Zend\Paginator;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * @category   Zend

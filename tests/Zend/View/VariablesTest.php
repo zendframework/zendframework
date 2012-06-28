@@ -21,8 +21,8 @@
 
 namespace ZendTest\View;
 
-use Zend\View\Variables,
-    Zend\Config\Config;
+use Zend\View\Variables;
+use Zend\Config\Config;
 
 /**
  * @category   Zend

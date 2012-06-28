@@ -21,9 +21,9 @@
 
 namespace Zend\View\Helper;
 
-use Zend\Mvc\Router\RouteStackInterface,
-    Zend\Mvc\Router\RouteMatch,
-    Zend\View\Exception;
+use Zend\Mvc\Router\RouteStackInterface;
+use Zend\Mvc\Router\RouteMatch;
+use Zend\View\Exception;
 
 /**
  * Helper for making easy links and getting urls that depend on the routes and router.

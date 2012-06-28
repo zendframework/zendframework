@@ -21,8 +21,8 @@
 
 namespace Zend\View\Helper;
 
-use Zend\View,
-    Zend\View\Exception;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Zend_Layout_View_Helper_HeadMeta

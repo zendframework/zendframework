@@ -21,8 +21,8 @@
 
 namespace Zend\View\Helper;
 
-use Zend\View\Exception,
-    ArrayObject;
+use Zend\View\Exception;
+use ArrayObject;
 
 /**
  * Helper for setting and retrieving the doctype
@@ -71,7 +71,7 @@ class Doctype extends AbstractHelper
 
     /**
      * Register the default doctypes we understand
-     * 
+     *
      * @return void
      */
     protected static function registerDefaultDoctypes()
@@ -96,9 +96,9 @@ class Doctype extends AbstractHelper
     /**
      * Unset the static doctype registry
      *
-     * Mainly useful for testing purposes. Sets {@link $registeredDoctypes} to 
+     * Mainly useful for testing purposes. Sets {@link $registeredDoctypes} to
      * a null value.
-     * 
+     *
      * @return void
      */
     public static function unsetDoctypeRegistry()

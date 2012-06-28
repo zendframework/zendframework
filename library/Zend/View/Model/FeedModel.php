@@ -21,8 +21,8 @@
 
 namespace Zend\View\Model;
 
-use Zend\Feed\Writer\Feed,
-    Zend\Feed\Writer\FeedFactory;
+use Zend\Feed\Writer\Feed;
+use Zend\Feed\Writer\FeedFactory;
 
 /**
  * Marker view model for indicating feed data.

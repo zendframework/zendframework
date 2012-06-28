@@ -21,12 +21,12 @@
 
 namespace ZendTest\View;
 
-use Zend\View\Renderer\PhpRenderer,
-    Zend\View\Model\ViewModel,
-    Zend\View\Resolver\TemplateMapResolver,
-    Zend\View\Resolver\TemplatePathStack,
-    Zend\View\Variables,
-    Zend\Filter\FilterChain;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Model\ViewModel;
+use Zend\View\Resolver\TemplateMapResolver;
+use Zend\View\Resolver\TemplatePathStack;
+use Zend\View\Variables;
+use Zend\Filter\FilterChain;
 
 /**
  * @category   Zend

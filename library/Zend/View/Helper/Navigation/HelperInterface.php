@@ -21,8 +21,8 @@
 
 namespace Zend\View\Helper\Navigation;
 
-use Zend\Acl,
-    Zend\Navigation;
+use Zend\Acl;
+use Zend\Navigation;
 
 /**
  * Interface for navigational helpers

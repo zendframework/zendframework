@@ -21,8 +21,8 @@
 
 namespace Zend\View\Helper;
 
-use Zend\Http\Response,
-    Zend\Json\Json as JsonFormatter;
+use Zend\Http\Response;
+use Zend\Json\Json as JsonFormatter;
 
 /**
  * Helper for simplifying JSON responses

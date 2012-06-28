@@ -21,15 +21,15 @@
 
 namespace Zend\View\Renderer;
 
-use JsonSerializable,
-    Traversable,
-    Zend\Json\Json,
-    Zend\Stdlib\ArrayUtils,
-    Zend\View\Exception,
-    Zend\View\Model\ModelInterface as Model,
-    Zend\View\Model\JsonModel,
-    Zend\View\Renderer\RendererInterface as Renderer,
-    Zend\View\Resolver\ResolverInterface as Resolver;
+use JsonSerializable;
+use Traversable;
+use Zend\Json\Json;
+use Zend\Stdlib\ArrayUtils;
+use Zend\View\Exception;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Model\JsonModel;
+use Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\View\Resolver\ResolverInterface as Resolver;
 
 /**
  * JSON renderer

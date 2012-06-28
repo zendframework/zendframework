@@ -10,9 +10,9 @@
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\InvalidArgumentException,
-    Zend\Serializer\Exception\RuntimeException,
-    Zend\Json\Json as ZendJson;
+use Zend\Serializer\Exception\InvalidArgumentException;
+use Zend\Serializer\Exception\RuntimeException;
+use Zend\Json\Json as ZendJson;
 
 /**
  * @category   Zend

@@ -2,12 +2,12 @@
 
 namespace ZendTest\Stdlib\TestAsset;
 
-use Zend\Stdlib\Options;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * Dummy TestOptions used to test Stdlib\Options
  */
-class TestOptions extends Options
+class TestOptions extends AbstractOptions
 {
     protected $testField;
     

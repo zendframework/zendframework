@@ -2,10 +2,10 @@
 
 namespace ZendTest\Stdlib;
 
-use ArrayObject,
-    ZendTest\Stdlib\TestAsset\TestOptions,
-    ZendTest\Stdlib\TestAsset\TestTraversable,
-    Zend\Stdlib\Exception\InvalidArgumentException;
+use ArrayObject;
+use ZendTest\Stdlib\TestAsset\TestOptions;
+use ZendTest\Stdlib\TestAsset\TestTraversable;
+use Zend\Stdlib\Exception\InvalidArgumentException;
 
 class OptionsTest extends \PHPUnit_Framework_TestCase
 {

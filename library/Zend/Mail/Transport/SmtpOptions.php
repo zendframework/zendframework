@@ -22,7 +22,7 @@
 namespace Zend\Mail\Transport;
 
 use Zend\Mail\Exception,
-    Zend\Stdlib\Options;
+    Zend\Stdlib\AbstractOptions;
 
 /**
  * @category   Zend
@@ -31,7 +31,7 @@ use Zend\Mail\Exception,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SmtpOptions extends Options
+class SmtpOptions extends AbstractOptions
 {
     /**
      * @var string Local client hostname

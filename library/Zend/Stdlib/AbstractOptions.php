@@ -28,11 +28,11 @@ use Traversable;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Options implements ParameterObjectInterface
+abstract class AbstractOptions implements ParameterObjectInterface
 {
     /**
      * @param  array|Traversable|null $options
-     * @return Options
+     * @return AbstractOptions
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)

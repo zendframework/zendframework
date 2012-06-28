@@ -21,7 +21,7 @@
 
 namespace Zend\Service\Twitter;
 
-use Zend\Stdlib\Options;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * @category   Zend
@@ -30,7 +30,7 @@ use Zend\Stdlib\Options;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SearchOptions extends Options
+class SearchOptions extends AbstractOptions
 {
     /**
      * Search query. Should be URL encoded. Queries will be limited by complexity.

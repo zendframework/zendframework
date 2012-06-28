@@ -21,7 +21,7 @@
 namespace Zend\Session\SaveHandler;
 
 use Zend\Session\Exception;
-use Zend\Stdlib\Options;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * DbTableGateway Save Handler Options
@@ -32,7 +32,7 @@ use Zend\Stdlib\Options;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DbTableGatewayOptions extends Options
+class DbTableGatewayOptions extends AbstractOptions
 {
     /**
      * Data Column

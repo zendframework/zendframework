@@ -23,7 +23,7 @@ namespace Zend\Dojo\View\Helper;
 
 use Zend\Json\Json;
 use Zend\View\Renderer\RendererInterface as View;
-use Zend\View\Helper\HtmlElement;
+use Zend\View\Helper\AbstractHtmlElement;
 
 /**
  * Dojo dijit base class
@@ -33,7 +33,7 @@ use Zend\View\Helper\HtmlElement;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Dijit extends HtmlElement
+abstract class Dijit extends AbstractHtmlElement
 {
     /**
      * @var \Zend\Dojo\View\Helper\Dojo\Container

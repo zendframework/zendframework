@@ -32,7 +32,7 @@ use Zend\View\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class FormElement extends HtmlElement
+abstract class FormElement extends AbstractHtmlElement
 {
     /**
      * @var \Zend\Translator\Translator

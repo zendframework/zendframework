@@ -41,7 +41,7 @@ use Zend\View\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractHelper
-    extends View\Helper\HtmlElement
+    extends View\Helper\AbstractHtmlElement
     implements HelperInterface,
                ServiceLocatorAwareInterface
 {
@@ -782,7 +782,7 @@ abstract class AbstractHelper
     /**
      * Converts an associative array to a string of tag attributes.
      *
-     * Overloads {@link View\Helper\HtmlElement::_htmlAttribs()}.
+     * Overloads {@link View\Helper\AbstractHtmlElement::_htmlAttribs()}.
      *
      * @param  array $attribs  an array where each key-value pair is converted
      *                         to an attribute name and value
@@ -803,7 +803,7 @@ abstract class AbstractHelper
     /**
      * Normalize an ID
      *
-     * Overrides {@link View\Helper\HtmlElement::_normalizeId()}.
+     * Overrides {@link View\Helper\AbstractHtmlElement::_normalizeId()}.
      *
      * @param  string $value
      * @return string

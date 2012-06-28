@@ -30,7 +30,7 @@ namespace Zend\GData\App;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class FeedSourceParent extends FeedEntryParent
+abstract class AbstractFeedSourceParent extends AbstractFeedEntryParent
 {
 
     /**
@@ -60,7 +60,7 @@ abstract class FeedSourceParent extends FeedEntryParent
      * @deprecated Deprecated as of Zend Framework 1.7. Use
      *             setService() instead.
      * @param  \Zend\Http\Client $httpClient
-     * @return FeedSourceParent Provides a fluent interface
+     * @return AbstractFeedSourceParent Provides a fluent interface
      */
     public function setHttpClient(\Zend\Http\Client $httpClient)
     {
@@ -77,7 +77,7 @@ abstract class FeedSourceParent extends FeedEntryParent
      * save() and delete().
      *
      * @param \Zend\GData\App $instance The new service instance.
-     * @return FeedEntryParent Provides a fluent interface.
+     * @return AbstractFeedEntryParent Provides a fluent interface.
      */
     public function setService($instance)
     {
@@ -172,7 +172,7 @@ abstract class FeedSourceParent extends FeedEntryParent
 
     /**
      * @param Extension\Generator $value
-     * @return FeedSourceParent Provides a fluent interface
+     * @return AbstractFeedSourceParent Provides a fluent interface
      */
     public function setGenerator($value)
     {
@@ -190,7 +190,7 @@ abstract class FeedSourceParent extends FeedEntryParent
 
     /**
      * @param Extension\Icon $value
-     * @return FeedSourceParent Provides a fluent interface
+     * @return AbstractFeedSourceParent Provides a fluent interface
      */
     public function setIcon($value)
     {
@@ -208,7 +208,7 @@ abstract class FeedSourceParent extends FeedEntryParent
 
     /**
      * @param Extension\logo $value
-     * @return FeedSourceParent Provides a fluent interface
+     * @return AbstractFeedSourceParent Provides a fluent interface
      */
     public function setlogo($value)
     {
@@ -226,7 +226,7 @@ abstract class FeedSourceParent extends FeedEntryParent
 
     /**
      * @param Extension\Subtitle $value
-     * @return FeedSourceParent Provides a fluent interface
+     * @return AbstractFeedSourceParent Provides a fluent interface
      */
     public function setSubtitle($value)
     {

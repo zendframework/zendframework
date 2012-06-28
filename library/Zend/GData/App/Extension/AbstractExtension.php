@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\GData\App;
+namespace Zend\GData\App\Extension;
+
+use Zend\GData\App\AbstractBase;
 
 /**
  * Gdata App extensions
@@ -30,6 +32,6 @@ namespace Zend\GData\App;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Extension extends Base
+abstract class AbstractExtension extends AbstractBase
 {
 }

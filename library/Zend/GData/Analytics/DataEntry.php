@@ -73,7 +73,7 @@ class DataEntry extends GData\Entry
     }
 
 	/**
-	 * @param string $name 
+	 * @param string $name
 	 * @return mixed
 	 */
 	public function getDimension($name)
@@ -85,9 +85,9 @@ class DataEntry extends GData\Entry
 		}
 		return null;
 	}
-	
-	/** 
-	 * @param string $name 
+
+	/**
+	 * @param string $name
 	 * @return mixed
 	 */
 	public function getMetric($name)
@@ -99,9 +99,9 @@ class DataEntry extends GData\Entry
 		}
 		return null;
 	}
-	
+
 	/**
-	 * @param string $name 
+	 * @param string $name
 	 * @return mixed
 	 */
 	public function getValue($name)

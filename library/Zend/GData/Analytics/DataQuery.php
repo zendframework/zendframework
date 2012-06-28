@@ -179,7 +179,7 @@ class DataQuery extends GData\Query
     const METRIC_TOTAL_EVENTS = 'ga:totalEvents';
     const METRIC_UNIQUE_EVENTS = 'ga:uniqueEvents';
     const METRIC_EVENT_VALUE = 'ga:eventValue';
-    
+
     // supported filter operators
     const EQUALS = "==";
     const EQUALS_NOT = "!=";
@@ -191,7 +191,7 @@ class DataQuery extends GData\Query
     const CONTAINS_NOT ="!@";
     const REGULAR ="=~";
     const REGULAR_NOT ="!~";
-    
+
     /**
      * @var string
      */
@@ -212,7 +212,7 @@ class DataQuery extends GData\Query
      * @var array
      */
     protected $_filters = array();
-    
+
     /**
      * @param string $id
      * @return DataQuery
@@ -237,7 +237,7 @@ class DataQuery extends GData\Query
      */
     public function addDimension($dimension)
     {
-        $this->_dimensions[$dimension] = true;        
+        $this->_dimensions[$dimension] = true;
         return $this;
     }
 
@@ -303,7 +303,7 @@ class DataQuery extends GData\Query
         $this->setParam("end-date", $date);
         return $this;
     }
-    
+
     /**
      * @param string $filter
      * @return DataQuery
@@ -313,7 +313,7 @@ class DataQuery extends GData\Query
         $this->_filters[] = array($filter, true);
         return $this;
     }
-    
+
     /**
      * @param string $filter
      * @return DataQuery
@@ -323,7 +323,7 @@ class DataQuery extends GData\Query
         $this->_filters[] = array($filter, false);
         return $this;
     }
-    
+
     /**
      * @deprecated
      * @param string $value
@@ -344,7 +344,7 @@ class DataQuery extends GData\Query
         $this->_sort[] = ($descending?'-':'').$sort;
         return $this;
     }
-    
+
     /**
      * @deprecated
      * @param string $sort
@@ -355,7 +355,7 @@ class DataQuery extends GData\Query
     {
         return $this->addSort($sort, $descending);
     }
-    
+
     /**
      * @return DataQuery
      */
@@ -364,7 +364,7 @@ class DataQuery extends GData\Query
         $this->_sort = array();
         return $this;
     }
-    
+
     /**
      * @param string $segment
      * @return DataQuery
@@ -384,37 +384,37 @@ class DataQuery extends GData\Query
         if (isset($this->_url)) {
             $uri = $this->_url;
         }
-        
+
         $dimensions = $this->getDimensions();
         if (!empty($dimensions)) {
             $this->setParam('dimensions', implode(",", array_keys($dimensions)));
         }
-        
+
         $metrics = $this->getMetrics();
         if (!empty($metrics)) {
             $this->setParam('metrics', implode(",", array_keys($metrics)));
         }
-        
+
         // profile id (ga:tableId)
         if ($this->getProfileId() != null) {
             $this->setParam('ids', 'ga:'.ltrim($this->getProfileId(), "ga:"));
         }
-                
+
         // sorting
         if ($this->_sort) {
             $this->setParam('sort', implode(",", $this->_sort));
         }
-        
+
         // filtering
         $filters = "";
         foreach ($this->_filters as $filter) {
             $filters.=($filter[1]===true?';':',').$filter[0];
         }
-        
+
         if ($filters!="") {
             $this->setParam('filters', ltrim($filters, ",;"));
         }
-        
+
         $uri .= $this->getQueryString();
         return $uri;
     }

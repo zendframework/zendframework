@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<entry xmlns='http://www.w3.org/2005/Atom' 
-xmlns:gml='http://www.opengis.net/gml' 
-xmlns:georss='http://www.georss.org/georss' 
-xmlns:media='http://search.yahoo.com/mrss/' 
-xmlns:batch='http://schemas.google.com/gdata/batch' 
-xmlns:yt='http://gdata.youtube.com/schemas/2007' 
-xmlns:gd='http://schemas.google.com/g/2005' 
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:gml='http://www.opengis.net/gml'
+xmlns:georss='http://www.georss.org/georss'
+xmlns:media='http://search.yahoo.com/mrss/'
+xmlns:batch='http://schemas.google.com/gdata/batch'
+xmlns:yt='http://gdata.youtube.com/schemas/2007'
+xmlns:gd='http://schemas.google.com/g/2005'
 gd:etag='W/&quot;A0cDQn47eCp7ImA9WxRbF00.&quot;'>
 <id>tag:youtube.com,2008:video:UMFI1hdm96E</id>
 <published>2007-01-07T01:50:15.000Z</published>
@@ -31,7 +31,7 @@ gd:etag='W/&quot;A0cDQn47eCp7ImA9WxRbF00.&quot;'>
  <media:title type='plain'>"Crazy (Gnarles Barkley)" - Acoustic Cover</media:title>
  <media:description type='plain'>Gnarles Barkley acoustic cover http://www.myspace.com/davidchoimusic</media:description>
  <media:rating scheme="http://gdata.youtube.com/schemas/2007#mediarating" country="HK,TW">1</media:rating>
- <media:category 
+ <media:category
     scheme='http://gdata.youtube.com/schemas/2007/developertags.cat'>
     DeveloperTag1</media:category>
  <media:keywords>acoustic, barkley, cover, gnarls, music, singing</media:keywords>

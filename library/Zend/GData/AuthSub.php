@@ -21,8 +21,8 @@
 
 namespace Zend\GData;
 
-use Zend\Http,
-    Zend\Http\Client;
+use Zend\Http;
+use Zend\Http\Client;
 
 /**
  * Wrapper around Zend\Http\Client to facilitate Google's "Account Authentication

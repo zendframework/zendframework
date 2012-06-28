@@ -63,7 +63,7 @@ class Docs extends GData
       'XLSX'=>'application/vnd.ms-excel',
       'PPT'=>'application/vnd.ms-powerpoint',
       'PPS'=>'application/vnd.ms-powerpoint');
-    
+
     /**
     * Namespaces used for \Zend\GData\Docs
     *
@@ -253,7 +253,7 @@ class Docs extends GData
      *       the appropriate type doesn't exist yet.
      */
     public function createFolder($folderName, $folderResourceId=null) {
-        $category = new App\Extension\Category(self::DOCUMENTS_CATEGORY_TERM, 
+        $category = new App\Extension\Category(self::DOCUMENTS_CATEGORY_TERM,
                                                           self::DOCUMENTS_CATEGORY_SCHEMA);
         $title = new App\Extension\Title($folderName);
         $entry = new Entry();
@@ -268,10 +268,10 @@ class Docs extends GData
 
         return $this->insertEntry($entry, $uri);
     }
-    
+
     /**
      * Share a document or folder with a given user, group, domain or make it public.
-     * 
+     *
      * @param string $documentId
      * @param string|null $email
      * @param string $scopeType
@@ -281,20 +281,20 @@ class Docs extends GData
     public function setDocumentACL($documentId, $email = NULL, $scopeType = 'default', $role = 'reader')
     {
         $category = new \Zend\GData\App\Extension\Category(self::DOCUMENT_ACL_TERM, self::DOCUMENTS_ACL_SCHEMEA);
-        
+
         $entry = new \Zend\GData\Docs\ACLEntry();
-        
+
         $entry->setCategory(array($category));
-        
+
         $entry->setScope(new \Zend\GData\Docs\Extension\ACLScope($scopeType, $email));
-        
+
         $entry->setRole(new \Zend\GData\Docs\Extension\ACLRole($role));
-        
+
         $uri = self::DOCUMENT_ACL_URI . $documentId . '/acl';
-        
+
         //This requires version 3
         $this->setMajorProtocolVersion(3);
-        
+
         return $this->insertEntry($entry, $uri);
     }
 

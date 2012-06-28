@@ -71,12 +71,12 @@
           </author>
           <gd:originalEvent id='5v9l3sqdqt0b7mg1nhnmgdfup8'
           href='http://www.google.com/calendar/feeds/default/private/composite/5v9l3sqdqt0b7mg1nhnmgdfup8'>
-  
+
             <gd:when startTime='2007-09-14T08:00:00.000-07:00' />
           </gd:originalEvent>
           <gd:comments>
             <gd:feedLink href='http://www.google.com/calendar/feeds/default/private/full/5v9l3sqdqt0b7mg1nhnmgdfup8_20070914T150000Z/comments'>
-    
+
               <feed>
                 <id>
                 http://www.google.com/calendar/feeds/default/private/full/5v9l3sqdqt0b7mg1nhnmgdfup8_20070914T150000Z/comments</id>
@@ -181,7 +181,7 @@
 							<name>User 2</name>
 							<email>user2@nowhere.invalid</email>
 						</author>
-					</entry>                                        
+					</entry>
 				</feed>
 			</gd:feedLink>
 		</gd:comments>

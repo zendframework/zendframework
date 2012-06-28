@@ -21,6 +21,8 @@
 
 namespace Zend\GData;
 
+use Zend\GData\App\Extension\AbstractExtension;
+
 /**
  * Represents a Gdata extension
  *
@@ -30,7 +32,7 @@ namespace Zend\GData;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Extension extends App\Extension
+class Extension extends AbstractExtension
 {
 
     protected $_rootNamespace = 'gd';

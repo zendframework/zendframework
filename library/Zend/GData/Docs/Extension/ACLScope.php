@@ -86,7 +86,7 @@ class ACLScope extends \Zend\GData\Extension
         if ($this->_value !== null) {
             $element->setAttribute('value', $this->_value);
         }
-        
+
         return $element;
     }
 

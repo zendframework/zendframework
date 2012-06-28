@@ -30,7 +30,7 @@ namespace Zend\GData\YouTube\Extension;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Token extends \Zend\GData\App\Extension
+class Token extends \Zend\GData\App\Extension\AbstractExtension
 {
 
     protected $_rootNamespace = 'yt';

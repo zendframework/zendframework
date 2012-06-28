@@ -30,7 +30,7 @@ namespace Zend\GData\App\Extension;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Summary extends Text
+class Summary extends AbstractText
 {
 
     protected $_rootElement = 'summary';

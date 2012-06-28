@@ -22,9 +22,9 @@
 
 namespace Zend\GData;
 
-use Zend\Http,
-    Zend\Http\Header\Etag,
-    Zend\Uri;
+use Zend\Http;
+use Zend\Http\Header\Etag;
+use Zend\Uri;
 
 /**
  * Provides Atom Publishing Protocol (APP) functionality.  This class and all
@@ -146,12 +146,12 @@ class App
      *
      * @var boolean
      */
-    protected $_useObjectMapping = true;
+    protected static $_useObjectMapping = true;
 
     /**
      * Create Gdata object
      *
-     * @param \Zend\Http\Client $client
+     * @param Http\Client $client
      * @param string $applicationId
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
@@ -229,9 +229,9 @@ class App
     /**
      * Set the Zend\Http\Client object used for communication
      *
-     * @param \Zend\Http\Client $client The client to use for communication
+     * @param Http\Client $client The client to use for communication
      * @throws \Zend\GData\App\HttpException
-     * @return \Zend\GData\App Provides a fluent interface
+     * @return App Provides a fluent interface
      */
     public function setHttpClient(Http\Client $client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
@@ -603,7 +603,7 @@ class App
                 'You must specify an URI to which to post.');
         }
         if ($contentType != null){
-            $headers['Content-Type'] = $contentType; 
+            $headers['Content-Type'] = $contentType;
         }
         if (self::getGzipEnabled()) {
             // some services require the word 'gzip' to be in the user-agent
@@ -717,7 +717,7 @@ class App
             $requestData['method'], $requestData['url']);
 
         $feedContent = $response->getBody();
-        if (!$this->_useObjectMapping) {
+        if (!self::$_useObjectMapping) {
             return $feedContent;
         }
         $feed = self::importString($feedContent, $className);
@@ -746,7 +746,7 @@ class App
         $response = $this->get($url, $extraHeaders);
 
         $feedContent = $response->getBody();
-        if (!$this->_useObjectMapping) {
+        if (!self::$_useObjectMapping) {
             return $feedContent;
         }
 
@@ -1036,7 +1036,7 @@ class App
             if ($foundClassName != null) {
                 $reflectionObj = new \ReflectionClass($foundClassName);
                 $instance = $reflectionObj->newInstanceArgs($args);
-                if ($instance instanceof App\FeedEntryParent) {
+                if ($instance instanceof App\AbstractFeedEntryParent) {
                     $instance->setHttpClient($this->_httpClient);
 
                     // Propogate version data
@@ -1172,7 +1172,7 @@ class App
             $etag = $data->getEtag();
             if ($etag instanceof Etag) {
                 $etag = $etag->getFieldValue();
-                if (!empty($etag) 
+                if (!empty($etag)
                     && ($allowWeek || (substr($etag, 0, 2) != 'W/'))
                 ) {
                     $result = $etag;
@@ -1189,9 +1189,9 @@ class App
      * @return boolean True if service object is using XML to object mapping,
      *                 false otherwise.
      */
-    public function usingObjectMapping()
+    public static function usingObjectMapping()
     {
-        return $this->_useObjectMapping;
+        return self::$_useObjectMapping;
     }
 
     /**
@@ -1201,13 +1201,9 @@ class App
      *                       Pass in false or null to disable it.
      * @return void
      */
-    public function useObjectMapping($value)
+    public static function useObjectMapping($value)
     {
-        if ($value === True) {
-            $this->_useObjectMapping = true;
-        } else {
-            $this->_useObjectMapping = false;
-        }
+        self::$_useObjectMapping = (bool) $value;
     }
 
 }

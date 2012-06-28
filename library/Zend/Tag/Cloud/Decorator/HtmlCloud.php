@@ -29,7 +29,7 @@ namespace Zend\Tag\Cloud\Decorator;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HtmlCloud extends Cloud
+class HtmlCloud extends AbstractCloud
 {
     /**
      * @var string Encoding to use

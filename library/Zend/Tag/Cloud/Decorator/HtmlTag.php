@@ -21,8 +21,8 @@
 
 namespace Zend\Tag\Cloud\Decorator;
 
-use Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException,
-    Zend\Tag\ItemList;
+use Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException;
+use Zend\Tag\ItemList;
 
 /**
  * Simple HTML decorator for tags
@@ -32,7 +32,7 @@ use Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException,
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HtmlTag extends Tag
+class HtmlTag extends AbstractTag
 {
     /**
      * List of tags which get assigned to the inner element instead of

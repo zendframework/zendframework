@@ -36,6 +36,8 @@ use Zend\View\Renderer\PhpRenderer as ViewPhpRenderer;
 use Zend\View\Resolver as ViewResolver;
 use Zend\View\Strategy\PhpRendererStrategy;
 use Zend\View\View;
+use Zend\View\Helper as ViewHelper;
+use Zend\Mvc\Router\RouteMatch;
 
 /**
  * Prepares the view layer
@@ -211,9 +213,19 @@ class ViewManager implements ListenerAggregateInterface
 
         // Configure URL view helper with router
         $this->helperManager->setFactory('Zend\View\Helper\Url', function($sm) {
-            $urlHelper = new \Zend\View\Helper\Url;
-            $urlHelper->setRouter($sm->get('Router'));
-            return $urlHelper;
+            $helper = new ViewHelper\Url;
+            $helper->setRouter($sm->get('Router'));
+
+            $match = $sm->get('application')
+                        ->getMvcEvent()
+                        ->getRouteMatch();
+
+            if ($match instanceof RouteMatch) {
+
+                $helper->setRouteMatch($match);
+            }
+
+            return $helper;
         });
         $this->helperManager->setAlias('url', 'Zend\View\Helper\Url');
 
@@ -221,7 +233,7 @@ class ViewManager implements ListenerAggregateInterface
 
         // Configure basePath view helper with base path from configuration, if available
         $this->helperManager->setFactory('Zend\View\Helper\BasePath', function($sm) use($config) {
-            $basePathHelper = new \Zend\View\Helper\BasePath;
+            $basePathHelper = new ViewHelper\BasePath;
             if (isset($config['base_path'])) {
                 $basePath = $config['base_path'];
             } else {
@@ -234,7 +246,7 @@ class ViewManager implements ListenerAggregateInterface
 
         // Configure doctype view helper with doctype from configuration, if available
         $this->helperManager->setFactory('Zend\View\Helper\Doctype', function($sm) use($config) {
-            $doctypeHelper = new \Zend\View\Helper\Doctype;
+            $doctypeHelper = new ViewHelper\Doctype;
             if (isset($config['doctype'])) {
                 $doctypeHelper->setDoctype($config['doctype']);
             }

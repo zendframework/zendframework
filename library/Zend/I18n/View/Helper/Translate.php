@@ -62,6 +62,7 @@ class Translate extends AbstractHelper
      * @param  string $textDomain
      * @param  string $locale
      * @return string
+     * @throws Exception\RuntimeException
      */
     public function __invoke($message, $textDomain = 'default', $locale = null)
     {

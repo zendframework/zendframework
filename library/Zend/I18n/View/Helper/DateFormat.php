@@ -63,6 +63,7 @@ class DateFormat extends AbstractHelper
      * @param  DateTime|integer|array $date
      * @param  string                 $formatterName
      * @return string
+     * @throws Exception\RuntimeException
      */
     public function __invoke($date, $formatterName)
     {
@@ -74,9 +75,7 @@ class DateFormat extends AbstractHelper
         }
 
         // DateTime support for IntlDateFormatter::format() was only added in 5.3.4
-        if ($date instanceof DateTime
-            && version_compare(PHP_VERSION, '5.3.4', '<')
-        ) {
+        if ($date instanceof DateTime && version_compare(PHP_VERSION, '5.3.4', '<')) {
             $date = $date->getTimestamp();
         }
 

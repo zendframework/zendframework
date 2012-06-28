@@ -57,7 +57,9 @@ class Request extends HttpRequest
         $this->setPost(new Parameters($_POST));
         $this->setQuery(new Parameters($_GET));
         $this->setServer(new Parameters($_SERVER));
-        $this->setCookies(new Parameters($_COOKIE));
+        if ($_COOKIE) {
+            $this->setCookies(new Parameters($_COOKIE));
+        }
 
         if ($_FILES) {
             $this->setFile(new Parameters($_FILES));
@@ -236,6 +238,10 @@ class Request extends HttpRequest
 
         foreach ($server as $key => $value) {
             if ($value && strpos($key, 'HTTP_') === 0) {
+                if (strpos($key, 'HTTP_COOKIE') === 0) {
+                    // Cookies are handled using the $_COOKIE superglobal
+                    continue;
+                }
                 $name = strtr(substr($key, 5), '_', ' ');
                 $name = strtr(ucwords(strtolower($name)), ' ', '-');
             } elseif ($value && strpos($key, 'CONTENT_') === 0) {

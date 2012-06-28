@@ -21,170 +21,86 @@
 
 namespace Zend\Code\Annotation;
 
-use Zend\Code\Exception;
+use Zend\EventManager\Event;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerInterface;
 
 /**
+ * Pluggable annotation manager
+ *
+ * Simply composes an EventManager. When createAnnotation() is called, it fires
+ * off an event of the same name, passing it the resolved annotation class, the
+ * annotation content, and the raw annotation string; the first listener to 
+ * return an object will halt execution of the event, and that object will be
+ * returned as the annotation.
+ *
  * @category   Zend
  * @package    Zend_Code
  * @subpackage Annotation
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AnnotationManager
+class AnnotationManager implements EventManagerAwareInterface
 {
     /**
-     * @var array
+     * @var EventManagerInterface
      */
-    protected $aliases = array();
+    protected $events;
 
     /**
-     * @var string[]
-     */
-    protected $annotationNames = array();
-
-    /**
-     * @var AnnotationInterface[]
-     */
-    protected $annotations = array();
-
-    /**
-     * Constructor
-     *
-     * @param array $annotations
-     */
-    public function __construct(array $annotations = array())
-    {
-        if ($annotations) {
-            foreach ($annotations as $annotation) {
-                $this->registerAnnotation($annotation);
-            }
-        }
-    }
-
-    /**
-     * Register annotations
-     *
-     * @param  AnnotationInterface $annotation
-     * @throws Exception\InvalidArgumentException
-     */
-    public function registerAnnotation(AnnotationInterface $annotation)
-    {
-        $class = get_class($annotation);
-
-        if (in_array($class, $this->annotationNames)) {
-            throw new Exception\InvalidArgumentException('An annotation for this class ' . $class . ' already exists');
-        }
-
-        $this->annotations[]     = $annotation;
-        $this->annotationNames[] = $class;
-    }
-
-    /**
-     * Alias an annotation name
+     * Set the event manager instance
      * 
-     * @param  string $alias 
-     * @param  string $class May be either a registered annotation name or another alias
-     * @return AnnotationManager
+     * @param  EventManagerInterface $events 
+     * @return void
      */
-    public function setAlias($alias, $class)
+    public function setEventManager(EventManagerInterface $events)
     {
-        if (!in_array($class, $this->annotationNames) && !$this->hasAlias($class)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s: Cannot alias "%s" to "%s", as class "%s" is not currently a registered annotation or alias',
-                __METHOD__,
-                $alias,
-                $class,
-                $class
-            ));
-        }
-
-        $alias = $this->normalizeAlias($alias);
-        $this->aliases[$alias] = $class;
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_class($this),
+        ));
+        $this->events = $events;
         return $this;
     }
 
     /**
-     * Checks if the manager has annotations for a class
+     * Retrieve event manager
      *
-     * @param $class
-     * @return bool
+     * Lazy loads an instance if none registered.
+     * 
+     * @return EventManagerInterface
      */
-    public function hasAnnotation($class)
+    public function events()
     {
-        if (in_array($class, $this->annotationNames)) {
-            return true;
+        if (null === $this->events) {
+            $this->setEventManager(new EventManager());
         }
-
-        if ($this->hasAlias($class)) {
-            return true;
-        }
-
-        return false;
+        return $this->events;
     }
 
     /**
      * Create Annotation
      *
-     * @param  string $class
-     * @param  null|string $content
-     * @throws Exception\RuntimeException
-     * @return AnnotationInterface
+     * @param  array $annotationData
+     * @return false|\stdClass
      */
-    public function createAnnotation($class, $content = null)
+    public function createAnnotation(array $annotationData)
     {
-        if (!$this->hasAnnotation($class)) {
-            throw new Exception\RuntimeException('This annotation class is not supported by this annotation manager');
-        }
+        $event = new Event();
+        $event->setName(__FUNCTION__);
+        $event->setTarget($this);
+        $event->setParams(array(
+            'class'   => $annotationData[0],
+            'content' => $annotationData[1],
+            'raw'     => $annotationData[2],
+        ));
 
-        if ($this->hasAlias($class)) {
-            $class = $this->resolveAlias($class);
-        }
-
-        $index      = array_search($class, $this->annotationNames);
-        $annotation = $this->annotations[$index];
-
-        $newAnnotation = clone $annotation;
-        if ($content) {
-            $newAnnotation->initialize($content);
-        }
-        return $newAnnotation;
-    }
-
-    /**
-     * Normalize an alias name
-     * 
-     * @param  string $alias 
-     * @return string
-     */
-    protected function normalizeAlias($alias)
-    {
-        return strtolower(str_replace(array('-', '_', ' ', '\\', '/'), '', $alias));
-    }
-
-    /**
-     * Do we have an alias by the provided name?
-     * 
-     * @param  string $alias 
-     * @return bool
-     */
-    protected function hasAlias($alias)
-    {
-        $alias = $this->normalizeAlias($alias);
-        return (isset($this->aliases[$alias]));
-    }
-
-    /**
-     * Resolve an alias to a class name
-     * 
-     * @param  string $alias 
-     * @return string
-     */
-    protected function resolveAlias($alias)
-    {
-        do {
-            $normalized = $this->normalizeAlias($alias);
-            $class      = $this->aliases[$normalized];
-        } while ($this->hasAlias($class));
-        return $class;
+        $events  = $this->events();
+        $results = $events->trigger($event, function ($r) {
+            return (is_object($r));
+        });
+        $annotation = $results->last();
+        return (is_object($annotation) ? $annotation : false);
     }
 }

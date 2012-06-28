@@ -7,15 +7,16 @@ use Zend\Stdlib\ArrayUtils;
 
 class Configuration
 {
+    /**
+     * @var array
+     */
     protected $data = array();
     
     /**
-     * @var Zend\Di\DependencyInjector
-     */
-    protected $di = null;
-
-    /**
+     * Constructor
+     *
      * @param  array|Traversable $options
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options)
     {
@@ -30,7 +31,13 @@ class Configuration
         }
         $this->data = $options;
     }
-    
+
+    /**
+     * Configure
+     *
+     * @param Di $di
+     * @return void
+     */
     public function configure(Di $di)
     {
         if (isset($this->data['definition'])) {

@@ -26,16 +26,31 @@ class IntrospectionStrategy
      */
     protected $annotationManager = null;
 
+    /**
+     * Constructor
+     *
+     * @param null|AnnotationManager $annotationManager
+     */
     public function __construct(AnnotationManager $annotationManager = null)
     {
         $this->annotationManager = ($annotationManager) ?: $this->createDefaultAnnotationManager();
     }
 
+    /**
+     * Get annotation manager
+     *
+     * @return null|AnnotationManager
+     */
     public function getAnnotationManager()
     {
         return $this->annotationManager;
     }
 
+    /**
+     * Create default annotation manager
+     *
+     * @return AnnotationManager
+     */
     public function createDefaultAnnotationManager()
     {
         $annotationManager = new AnnotationManager;
@@ -43,35 +58,61 @@ class IntrospectionStrategy
         return $annotationManager;
     }
 
-
-    
+    /**
+     * set use annotations
+     *
+     * @param bool $useAnnotations
+     */
     public function setUseAnnotations($useAnnotations)
     {
-        $this->useAnnotations = $useAnnotations;
+        $this->useAnnotations = (bool) $useAnnotations;
     }
 
+    /**
+     * Get use annotations
+     *
+     * @return bool
+     */
     public function getUseAnnotations()
     {
         return $this->useAnnotations;
     }
 
-
-    public function setMethodNameInclusionPatterns($methodNameInclusionPatterns)
+    /**
+     * Set method name inclusion pattern
+     *
+     * @param array $methodNameInclusionPatterns
+     */
+    public function setMethodNameInclusionPatterns(array $methodNameInclusionPatterns)
     {
         $this->methodNameInclusionPatterns = $methodNameInclusionPatterns;
     }
 
+    /**
+     * Get method name inclusion pattern
+     *
+     * @return array
+     */
     public function getMethodNameInclusionPatterns()
     {
         return $this->methodNameInclusionPatterns;
     }
 
-
-    public function setInterfaceInjectionInclusionPatterns($interfaceInjectionInclusionPatterns)
+    /**
+     * Set interface injection inclusion patterns
+     *
+     * @param array $interfaceInjectionInclusionPatterns
+     */
+    public function setInterfaceInjectionInclusionPatterns(array $interfaceInjectionInclusionPatterns)
     {
         $this->interfaceInjectionInclusionPatterns = $interfaceInjectionInclusionPatterns;
     }
 
+    /**
+     * Get interface injection inclusion patterns
+     *
+     * @return array
+     */
     public function getInterfaceInjectionInclusionPatterns()
     {
         return $this->interfaceInjectionInclusionPatterns;

@@ -2,11 +2,11 @@
 
 namespace ZendTest\Di;
 
-use Zend\Di\Di,
-    Zend\Di\DefinitionList,
-    Zend\Di\InstanceManager,
-    Zend\Di\Configuration,
-    Zend\Di\Definition;
+use Zend\Di\Di;
+use Zend\Di\DefinitionList;
+use Zend\Di\InstanceManager;
+use Zend\Di\Configuration;
+use Zend\Di\Definition;
 
 
 class DiTest extends \PHPUnit_Framework_TestCase

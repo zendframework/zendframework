@@ -2,6 +2,8 @@
 
 namespace Zend\Di;
 
+use Closure;
+
 class Di implements DependencyInjectionInterface
 {
     /**
@@ -34,10 +36,11 @@ class Di implements DependencyInjectionInterface
     protected $references = array();
 
     /**
+     * Constructor
+     *
      * @param null|DefinitionList $definitions
      * @param null|InstanceManager $instanceManager
      * @param null|Configuration $config
-     * @return Di
      */
     public function __construct(DefinitionList $definitions = null, InstanceManager $instanceManager = null, Configuration $config = null)
     {
@@ -144,6 +147,8 @@ class Di implements DependencyInjectionInterface
      * @param array $params Parameters to pass to the constructor
      * @param bool $isShared
      * @return object|null
+     * @throws Exception\ClassNotFoundException
+     * @throws Exception\RuntimeException
      */
     public function newInstance($name, array $params = array(), $isShared = true)
     {
@@ -215,6 +220,8 @@ class Di implements DependencyInjectionInterface
     }
 
     /**
+     * Inject dependencies
+     *
      * @param object $instance
      * @param array $params
      * @return void
@@ -239,7 +246,6 @@ class Di implements DependencyInjectionInterface
         }
         $this->handleInjectDependencies($instance, $injectionMethods, $params, $class, null, null);
     }
-
 
     protected function handleInjectDependencies($instance, $injectionMethods, $params, $instanceClass, $instanceAlias, $requestedName)
     {
@@ -360,6 +366,7 @@ class Di implements DependencyInjectionInterface
      * @param string $alias
      * @return object
      * @throws Exception\InvalidCallbackException
+     * @throws Exception\RuntimeException
      */
     protected function createInstanceViaCallback($callback, $params, $alias)
     {
@@ -391,6 +398,7 @@ class Di implements DependencyInjectionInterface
      * @param string $method
      * @param array $params
      * @param string $alias
+     * @return bool
      */
     protected function resolveAndCallInjectionMethodForInstance($instance, $method, $params, $alias, $methodIsRequired, $methodClass = null)
     {
@@ -415,6 +423,7 @@ class Di implements DependencyInjectionInterface
      * @param bool $isInstantiator
      * @param string $alias
      * @return array
+     * @throws Exception\CircularDependencyException
      */
     protected function resolveMethodParameters($class, $method, array $callTimeUserParams, $alias, $methodIsRequired, $isInstantiator = false)
     {
@@ -540,7 +549,7 @@ class Di implements DependencyInjectionInterface
                             $iConfigCurValue
                         );
                     } elseif (is_object($iConfigCurValue)
-                        && $iConfigCurValue instanceof \Closure
+                        && $iConfigCurValue instanceof Closure
                         && $type !== 'Closure') {
                         $computedParams['value'][$fqParamPos] = $iConfigCurValue();
                     } else {

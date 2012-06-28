@@ -2,9 +2,9 @@
 
 namespace Zend\Di\ServiceLocator;
 
-use Zend\Di\Di,
-    Zend\Code\Generator as CodeGen,
-    Zend\Di\Exception;
+use Zend\Code\Generator as CodeGen;
+use Zend\Di\Di;
+use Zend\Di\Exception;
 
 /**
  * @todo refactor to use new Definition interface
@@ -62,6 +62,7 @@ class Generator
      * 
      * @param  null|string $filename 
      * @return CodeGen\FileGenerator
+     * @throws Exception\RuntimeException
      */
     public function getCodeGenerator($filename = null)
     {

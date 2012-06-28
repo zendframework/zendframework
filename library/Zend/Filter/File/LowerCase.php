@@ -19,8 +19,8 @@
  */
 
 namespace Zend\Filter\File;
-use Zend\Filter,
-    Zend\Filter\Exception;
+use Zend\Filter;
+use Zend\Filter\Exception;
 
 /**
  * @category   Zend
@@ -49,7 +49,8 @@ class LowerCase extends Filter\StringToLower
      *
      * @param  string $value Full path of file to change
      * @return string The given $value
-     * @throws Exception\ExceptionInterface
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public function __invoke($value)
     {

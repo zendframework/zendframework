@@ -22,8 +22,8 @@ namespace Zend\Filter\File;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Filter,
-    Zend\Filter\Exception;
+use Zend\Filter;
+use Zend\Filter\Exception;
 
 /**
  * @category   Zend
@@ -50,6 +50,7 @@ class Rename extends Filter\AbstractFilter
      * @param  string|array|Traversable $options Target file or directory to be renamed
      * @param  string $target Source filename or directory (deprecated)
      * @param  bool $overwrite Should existing files be overwritten (deprecated)
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options)
     {
@@ -114,7 +115,8 @@ class Rename extends Filter\AbstractFilter
      * 'overwrite' => Shall existing files be overwritten ?
      *
      * @param  string|array $options Old file or directory to be rewritten
-     * @return \Zend\Filter\File\Rename
+     * @return Rename
+     * @throws Exception\InvalidArgumentException
      */
     public function addFile($options)
     {

@@ -86,6 +86,7 @@ class Compress extends AbstractFilter
      * Returns the current adapter, instantiating it if necessary
      *
      * @return string
+     * @throws Exception\InvalidArgumentException
      */
     public function getAdapter()
     {
@@ -128,6 +129,7 @@ class Compress extends AbstractFilter
      *
      * @param  string|Compress\CompressionAlgorithmInterface $adapter Adapter to use
      * @return Compress
+     * @throws Exception\InvalidArgumentException
      */
     public function setAdapter($adapter)
     {
@@ -170,6 +172,7 @@ class Compress extends AbstractFilter
      *
      * @param string       $method  Method to call
      * @param string|array $options Options for this method
+     * @throws Exception\BadMethodCallException
      */
     public function __call($method, $options)
     {

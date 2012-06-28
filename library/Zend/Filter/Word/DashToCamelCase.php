@@ -31,7 +31,6 @@ class DashToCamelCase extends SeparatorToCamelCase
     /**
      * Constructor
      *
-     * @return void
      */
     public function __construct()
     {

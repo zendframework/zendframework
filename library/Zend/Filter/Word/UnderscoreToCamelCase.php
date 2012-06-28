@@ -31,7 +31,6 @@ class UnderscoreToCamelCase extends SeparatorToCamelCase
     /**
      * Constructor
      *
-     * @return void
      */
     public function __construct()
     {

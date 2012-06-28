@@ -22,8 +22,8 @@ namespace Zend\Filter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Locale\Format,
-    Zend\Date\Date;
+use Zend\Locale\Format;
+use Zend\Date\Date;
 
 /**
  * Localizes given normalized input

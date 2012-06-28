@@ -67,6 +67,7 @@ class Encrypt extends AbstractFilter
      *
      * @param  string|array $options (Optional) Encryption options
      * @return Encrypt
+     * @throws Exception\InvalidArgumentException
      */
     public function setAdapter($options = null)
     {
@@ -110,6 +111,7 @@ class Encrypt extends AbstractFilter
      *
      * @param string       $method  Method to call
      * @param string|array $options Options for this method
+     * @throws Exception\BadMethodCallException
      */
     public function __call($method, $options)
     {

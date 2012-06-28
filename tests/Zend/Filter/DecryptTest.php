@@ -21,8 +21,8 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\Decrypt as DecryptFilter,
-    Zend\Filter\Encrypt as EncryptFilter;
+use Zend\Filter\Decrypt as DecryptFilter;
+use Zend\Filter\Encrypt as EncryptFilter;
 
 /**
  * @category   Zend

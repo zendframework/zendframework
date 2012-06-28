@@ -51,7 +51,6 @@ class FilterChain extends AbstractFilter implements Countable
     /**
      * Initialize filter chain
      * 
-     * @return void
      */
     public function __construct($options = null)
     {

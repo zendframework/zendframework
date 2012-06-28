@@ -10,9 +10,9 @@
 
 namespace Zend\OpenId\Provider;
 
-use Zend\Http\Response,
-    Zend\OpenId,
-    Zend\OpenId\Extension;
+use Zend\Http\Response;
+use Zend\OpenId;
+use Zend\OpenId\Extension;
 
 /**
  * OpenID provider (server) implementation

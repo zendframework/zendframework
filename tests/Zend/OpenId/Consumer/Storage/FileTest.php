@@ -10,8 +10,8 @@
 
 namespace ZendTest\OpenId\Consumer\Storage;
 
-use Zend\OpenId\OpenId,
-    Zend\OpenId\Consumer\Storage;
+use Zend\OpenId\OpenId;
+use Zend\OpenId\Consumer\Storage;
 
 /**
  * @see Storage\File

@@ -10,12 +10,12 @@
 
 namespace Zend\OpenId\Consumer;
 
-use Zend\Http\Client as HttpClient,
-    Zend\Http\Request,
-    Zend\Http\Response,
-    Zend\OpenId,
-    Zend\OpenId\Extension,
-    Zend\Session\Container as SessionContainer;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\OpenId;
+use Zend\OpenId\Extension;
+use Zend\Session\Container as SessionContainer;
 
 /**
  * OpenID consumer implementation

@@ -10,9 +10,9 @@
 
 namespace ZendTest\OpenId;
 
-use Zend\OpenId\OpenId, 
-    Zend\OpenId\Provider,
-    Zend\OpenId\Extension;
+use Zend\OpenId\OpenId;
+use Zend\OpenId\Provider;
+use Zend\OpenId\Extension;
 
 /**
  * @outputBuffering enabled

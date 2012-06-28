@@ -10,8 +10,8 @@
 
 namespace ZendTest\OpenId\Provider\Storage;
 
-use Zend\OpenId,
-    Zend\OpenId\Provider\Storage;
+use Zend\OpenId;
+use Zend\OpenId\Provider\Storage;
 
 /**
  * @category   Zend

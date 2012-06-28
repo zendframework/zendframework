@@ -10,10 +10,10 @@
 
 namespace ZendTest\OpenId\TestAsset;
 
-use Zend\OpenId\Consumer\GenericConsumer as Consumer,
-    Zend\OpenId\Consumer\Storage,
-    Zend\Session\Container as SessionContainer,
-    ZendTest\Session\TestAsset\TestManager as SessionManager;
+use Zend\OpenId\Consumer\GenericConsumer as Consumer;
+use Zend\OpenId\Consumer\Storage;
+use Zend\Session\Container as SessionContainer;
+use ZendTest\Session\TestAsset\TestManager as SessionManager;
 
 class ConsumerHelper extends Consumer 
 {

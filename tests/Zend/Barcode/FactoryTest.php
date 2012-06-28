@@ -9,11 +9,11 @@
  */
 
 namespace ZendTest\Barcode;
-use Zend\Barcode,
-    Zend\Barcode\Renderer,
-    Zend\Barcode\Object,
-    Zend\Config\Config,
-    Zend\Pdf;
+use Zend\Barcode;
+use Zend\Barcode\Renderer;
+use Zend\Barcode\Object;
+use Zend\Config\Config;
+use Zend\Pdf;
 
 /**
  * @category   Zend

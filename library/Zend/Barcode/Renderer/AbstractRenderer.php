@@ -10,11 +10,11 @@
 
 namespace Zend\Barcode\Renderer;
 
-use Traversable,
-    Zend\Barcode\Barcode,
-    Zend\Barcode\Exception as BarcodeException,
-    Zend\Barcode\Object,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Barcode\Barcode;
+use Zend\Barcode\Exception as BarcodeException;
+use Zend\Barcode\Object;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Class for rendering the barcode

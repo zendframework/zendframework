@@ -10,8 +10,8 @@
 
 namespace Zend\Barcode\Renderer;
 
-use DOMDocument,
-    DOMText;
+use DOMDocument;
+use DOMText;
 
 /**
  * Class for rendering the barcode as svg

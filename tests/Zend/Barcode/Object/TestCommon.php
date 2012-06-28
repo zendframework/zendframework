@@ -9,9 +9,9 @@
  */
 
 namespace ZendTest\Barcode\Object;
-use ZendTest\Barcode\Object\TestAsset,
-    Zend\Barcode,
-    Zend\Config;
+use ZendTest\Barcode\Object\TestAsset;
+use Zend\Barcode;
+use Zend\Config;
 
 /**
  * @category   Zend

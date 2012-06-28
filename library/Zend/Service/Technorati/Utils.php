@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Technorati;
 
-use Zend\Uri,
-    Zend\Date\Date as ZendDate;
+use Zend\Uri;
+use Zend\Date\Date as ZendDate;
 
 /**
  * Collection of utilities for various Zend\Service\Technorati classes.

@@ -21,8 +21,8 @@
 
 namespace Zend\Service\AgileZen;
 
-use DOMDocument,
-    Zend\Http\Client as HttpClient;
+use DOMDocument;
+use Zend\Http\Client as HttpClient;
 
 /**
  * @category   Zend

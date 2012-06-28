@@ -21,10 +21,10 @@
 
 namespace Zend\Service\AgileZen;
 
-use ArrayAccess,
-    Countable,
-    Iterator,
-    Traversable;
+use ArrayAccess;
+use Countable;
+use Iterator;
+use Traversable;
 
 /**
  * @category   Zend

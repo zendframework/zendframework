@@ -21,8 +21,8 @@
 
 namespace ZendTest\Service\Audioscrobbler;
 
-use Zend\Http,
-    Zend\Service\Audioscrobbler;
+use Zend\Http;
+use Zend\Service\Audioscrobbler;
 
 /**
  * @category   Zend

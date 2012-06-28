@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Technorati;
 
-use DomElement,
-    Zend\Date\Date as ZendDate;
+use DomElement;
+use Zend\Date\Date as ZendDate;
 
 /**
  * Represents a single Technorati DailyCounts query result object.

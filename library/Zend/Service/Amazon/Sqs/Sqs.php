@@ -20,9 +20,9 @@
  */
 
 namespace Zend\Service\Amazon\Sqs;
-use Zend\Service\Amazon,
-    Zend\Service\Amazon\Sqs\Exception,
-    Zend\Crypt\Hmac;
+use Zend\Service\Amazon;
+use Zend\Service\Amazon\Sqs\Exception;
+use Zend\Crypt\Hmac;
 
 /**
  * Class for connecting to the Amazon Simple Queue Service (SQS)

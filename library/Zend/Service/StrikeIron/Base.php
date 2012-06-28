@@ -21,8 +21,8 @@
 
 namespace Zend\Service\StrikeIron;
 
-use SoapHeader,
-    SoapClient;
+use SoapHeader;
+use SoapClient;
 
 /**
  * @category   Zend

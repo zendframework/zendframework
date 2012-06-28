@@ -21,8 +21,8 @@
 
 namespace ZendTest\Service\ReCaptcha;
 
-use Zend\Service\ReCaptcha,
-    Zend\Http\Response;
+use Zend\Service\ReCaptcha;
+use Zend\Http\Response;
 
 /**
  * @category   Zend

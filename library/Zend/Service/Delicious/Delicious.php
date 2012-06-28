@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Delicious;
 
-use \Zend\Rest\Client as RestClient,
-    \Zend\Date\Date;
+use \Zend\Rest\Client as RestClient;
+use \Zend\Date\Date;
 
 /**
  * Zend_Service_Delicious is a concrete implementation of the del.icio.us web service

@@ -21,9 +21,9 @@
 
 namespace ZendTest\Service\Amazon\S3;
 
-use Zend\Service\Amazon\S3,
-    Zend\Service\Amazon\S3\Exception,
-    Zend\Http\Response;
+use Zend\Service\Amazon\S3;
+use Zend\Service\Amazon\S3\Exception;
+use Zend\Http\Response;
 
 /**
  * @category   Zend

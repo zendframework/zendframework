@@ -20,9 +20,9 @@
  */
 
 namespace ZendTest\Service\Rackspace\Files;
-use Zend\Service\Rackspace\Files as RackspaceFiles,
-        Zend\Service\Rackspace\Files\ContainerList,
-        Zend\Http\Client\Adapter\Test as HttpTest;
+use Zend\Service\Rackspace\Files as RackspaceFiles;
+use Zend\Service\Rackspace\Files\ContainerList;
+use Zend\Http\Client\Adapter\Test as HttpTest;
 
 /**
  * Test helper

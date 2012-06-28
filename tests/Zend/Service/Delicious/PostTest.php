@@ -20,10 +20,10 @@
  */
 
 namespace ZendTest\Service\Delicious;
-use \Zend\Service\Delicious\Delicious as DeliciousClient,
-    \Zend\Service\Delicious,
-    \Zend\Service\Delicious\Post,
-    \Zend\Date\Date;
+use \Zend\Service\Delicious\Delicious as DeliciousClient;
+use \Zend\Service\Delicious;
+use \Zend\Service\Delicious\Post;
+use \Zend\Date\Date;
 
 /**
  * Test helper

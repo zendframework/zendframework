@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Nirvanix\Context;
 
-use Zend\Http\Request as HttpRequest,
-    Zend\Service\Nirvanix\Response;
+use Zend\Http\Request as HttpRequest;
+use Zend\Service\Nirvanix\Response;
 
 /**
  * Namespace proxy with additional convenience methods for the IMFS namespace.

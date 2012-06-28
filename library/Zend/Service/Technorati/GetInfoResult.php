@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Technorati;
 
-use DomDocument,
-    DOMXPath;
+use DomDocument;
+use DOMXPath;
 
 /**
  * Represents a single Technorati GetInfo query result object.

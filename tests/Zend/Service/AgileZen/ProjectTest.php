@@ -2,8 +2,8 @@
 
 namespace ZendTest\Service\AgileZen;
 
-use Zend\Service\AgileZen\AgileZen as AgileZenService,
-    Zend\Service\AgileZen\Resources\Project;
+use Zend\Service\AgileZen\AgileZen as AgileZenService;
+use Zend\Service\AgileZen\Resources\Project;
 
 class ProjectTest extends \PHPUnit_Framework_TestCase
 {

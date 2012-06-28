@@ -20,8 +20,8 @@
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
-use Zend\Service\Amazon\Ec2\Instance,
-    Zend\Service\Amazon\Ec2\Exception;
+use Zend\Service\Amazon\Ec2\Instance;
+use Zend\Service\Amazon\Ec2\Exception;
 
 /**
  * Zend_Service_Amazon_Ec2_Instance test case.

@@ -21,8 +21,8 @@
 
 namespace ZendTest\XmlRpc;
 
-use Zend\XmlRpc\Response,
-    Zend\XmlRpc\Value;
+use Zend\XmlRpc\Response;
+use Zend\XmlRpc\AbstractValue;
 
 /**
  * Test case for Zend_XmlRpc_Response
@@ -218,10 +218,10 @@ EOD;
     public function testSetGetEncoding()
     {
         $this->assertEquals('UTF-8', $this->_response->getEncoding());
-        $this->assertEquals('UTF-8', Value::getGenerator()->getEncoding());
+        $this->assertEquals('UTF-8', AbstractValue::getGenerator()->getEncoding());
         $this->assertSame($this->_response, $this->_response->setEncoding('ISO-8859-1'));
         $this->assertEquals('ISO-8859-1', $this->_response->getEncoding());
-        $this->assertEquals('ISO-8859-1', Value::getGenerator()->getEncoding());
+        $this->assertEquals('ISO-8859-1', AbstractValue::getGenerator()->getEncoding());
     }
 
     public function testLoadXmlCreatesFaultWithMissingNodes()

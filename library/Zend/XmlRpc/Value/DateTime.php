@@ -29,7 +29,7 @@ use Zend\XmlRpc\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DateTime extends Scalar
+class DateTime extends AbstractScalar
 {
     /**
      * PHP compatible format string for XML/RPC datetime values

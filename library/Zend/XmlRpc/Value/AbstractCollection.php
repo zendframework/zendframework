@@ -21,7 +21,7 @@
 
 namespace Zend\XmlRpc\Value;
 
-use Zend\XmlRpc\Value as XmlRpcValue;
+use Zend\XmlRpc\AbstractValue;
 
 /**
  * @category   Zend
@@ -30,7 +30,7 @@ use Zend\XmlRpc\Value as XmlRpcValue;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Collection extends XmlRpcValue
+abstract class AbstractCollection extends AbstractValue
 {
 
     /**

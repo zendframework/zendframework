@@ -21,8 +21,9 @@
 
 namespace ZendTest\XmlRpc;
 
-use Zend\XmlRpc\Request,
-    Zend\XmlRpc\Value;
+use Zend\XmlRpc\Request;
+use Zend\XmlRpc\AbstractValue;
+use Zend\XmlRpc\Value;
 
 /**
  * Test case for Zend_XmlRpc_Request
@@ -119,7 +120,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testAddDateParamGeneratesCorrectXml()
     {
         $time = time();
-        $this->_request->addParam($time, Value::XMLRPC_TYPE_DATETIME);
+        $this->_request->addParam($time, AbstractValue::XMLRPC_TYPE_DATETIME);
         $this->_request->setMethod('foo.bar');
         $xml = $this->_request->saveXml();
         $sxl = new \SimpleXMLElement($xml);
@@ -328,10 +329,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testSetGetEncoding()
     {
         $this->assertEquals('UTF-8', $this->_request->getEncoding());
-        $this->assertEquals('UTF-8', Value::getGenerator()->getEncoding());
+        $this->assertEquals('UTF-8', AbstractValue::getGenerator()->getEncoding());
         $this->assertSame($this->_request, $this->_request->setEncoding('ISO-8859-1'));
         $this->assertEquals('ISO-8859-1', $this->_request->getEncoding());
-        $this->assertEquals('ISO-8859-1', Value::getGenerator()->getEncoding());
+        $this->assertEquals('ISO-8859-1', AbstractValue::getGenerator()->getEncoding());
     }
 
     /**

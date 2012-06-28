@@ -10,22 +10,22 @@
 
 namespace Zend\Paginator;
 
-use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface,
-    Zend\Paginator\Adapter\AdapterInterface,
-    ArrayIterator,
-    Countable,
-    Iterator,
-    IteratorAggregate,
-    Traversable,
-    Zend\Cache\Storage\StorageInterface as CacheStorage,
-    Zend\Cache\Storage\IteratorInterface as CacheIterator,
-    Zend\Db\Table\AbstractRowset as DbAbstractRowset,
-    Zend\Db\Table\Select as DbTableSelect,
-    Zend\Db\Sql,
-    Zend\Filter\FilterInterface,
-    Zend\Json\Json,
-    Zend\Stdlib\ArrayUtils,
-    Zend\View;
+use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
+use Zend\Paginator\Adapter\AdapterInterface;
+use ArrayIterator;
+use Countable;
+use Iterator;
+use IteratorAggregate;
+use Traversable;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\Cache\Storage\IteratorInterface as CacheIterator;
+use Zend\Db\Table\AbstractRowset as DbAbstractRowset;
+use Zend\Db\Table\Select as DbTableSelect;
+use Zend\Db\Sql;
+use Zend\Filter\FilterInterface;
+use Zend\Json\Json;
+use Zend\Stdlib\ArrayUtils;
+use Zend\View;
 
 /**
  * @category   Zend

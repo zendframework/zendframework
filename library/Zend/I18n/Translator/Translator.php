@@ -373,7 +373,8 @@ class Translator
         // Try to load from pattern
         if (isset($this->patterns[$textDomain])) {
             foreach ($this->patterns[$textDomain] as $pattern) {
-                $filename = $pattern['baseDir'] . '/' . sprintf($pattern['pattern'], $locale);
+                $filename = $pattern['baseDir']
+                          . '/' . sprintf($pattern['pattern'], $locale);
                 if (is_file($filename)) {
                     $this->messages[$textDomain][$locale] = $this->getPluginManager()
                          ->get($pattern['type'])

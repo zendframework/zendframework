@@ -20,11 +20,11 @@
 
 namespace Zend\Feed\Writer\Renderer\Feed;
 
-use Zend\Feed\Writer\Renderer,
-    Zend\Date,
-    Zend\Feed\Writer,
-    DOMDocument,
-    DOMElement;
+use Zend\Feed\Writer\Renderer;
+use Zend\Date;
+use Zend\Feed\Writer;
+use DOMDocument;
+use DOMElement;
 
 /**
 * @category Zend
@@ -66,6 +66,7 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
@@ -113,6 +114,7 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
@@ -188,6 +190,7 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
     {
@@ -262,6 +265,7 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {

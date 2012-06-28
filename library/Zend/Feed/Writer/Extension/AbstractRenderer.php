@@ -20,8 +20,8 @@
 
 namespace Zend\Feed\Writer\Extension;
 
-use DOMDocument,
-    DOMElement;
+use DOMDocument;
+use DOMElement;
 
 /**
 * @category Zend

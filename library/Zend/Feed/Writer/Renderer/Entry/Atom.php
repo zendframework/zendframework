@@ -20,13 +20,13 @@
 
 namespace Zend\Feed\Writer\Renderer\Entry;
 
-use DOMDocument,
-    DOMElement,
-    Zend\Date,
-    Zend\Feed\Writer,
-    Zend\Feed\Writer\Renderer,
-    Zend\Uri,
-    Zend\Validator;
+use DOMDocument;
+use DOMElement;
+use Zend\Date;
+use Zend\Feed\Writer;
+use Zend\Feed\Writer\Renderer;
+use Zend\Uri;
+use Zend\Validator;
 
 /**
  * @category Zend
@@ -86,6 +86,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      * @param  DOMDocument $dom
      * @param  DOMElement $root
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
@@ -134,6 +135,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      * @param  DOMDocument $dom
      * @param  DOMElement $root
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
@@ -259,6 +261,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      * @param  DOMDocument $dom
      * @param  DOMElement $root
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {
@@ -287,7 +290,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
                 $this->getDataContainer()->getId())
             && !$this->_validateTagUri($this->getDataContainer()->getId())
         ) {
-            throw new Exception('Atom 1.0 IDs must be a valid URI/IRI');
+            throw new Writer\Exception\InvalidArgumentException('Atom 1.0 IDs must be a valid URI/IRI');
         }
         $id = $dom->createElement('id');
         $root->appendChild($id);
@@ -333,6 +336,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      * @param  DOMDocument $dom
      * @param  DOMElement $root
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setContent(DOMDocument $dom, DOMElement $root)
     {

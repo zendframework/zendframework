@@ -20,11 +20,11 @@
 
 namespace Zend\Feed\Reader\Extension\DublinCore;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Extension,
-    Zend\Date,
-    DOMElement;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Extension;
+use Zend\Date;
+use DOMElement;
 
 /**
 * @category Zend

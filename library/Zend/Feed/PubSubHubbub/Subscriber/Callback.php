@@ -20,8 +20,8 @@
 
 namespace Zend\Feed\PubSubHubbub\Subscriber;
 
-use Zend\Feed\PubSubHubbub,
-    Zend\Uri;
+use Zend\Feed\PubSubHubbub;
+use Zend\Uri;
 
 /**
  * @category   Zend

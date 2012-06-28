@@ -20,11 +20,11 @@
 
 namespace Zend\Feed\Reader\Feed;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Exception,
-    Zend\Date,
-    DOMDocument;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Exception;
+use Zend\Date;
+use DOMDocument;
 
 /**
 * @category Zend
@@ -220,7 +220,7 @@ class Rss extends AbstractFeed
                         try {
                             $date->set($dateModified, $standard);
                             break;
-                        } catch (Date\Exception $e) {
+                        } catch (Date\Exception\ExceptionInterface $e) {
                             if ($standard == Date\Date::DATES) {
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
@@ -281,7 +281,7 @@ class Rss extends AbstractFeed
                         try {
                             $date->set($lastBuildDate, $standard);
                             break;
-                        } catch (Date\Exception $e) {
+                        } catch (Date\Exception\ExceptionInterface $e) {
                             if ($standard == Date\Date::DATES) {
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'

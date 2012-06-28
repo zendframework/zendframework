@@ -20,12 +20,12 @@
 
 namespace Zend\Feed\Writer\Renderer\Entry;
 
-use Zend\Date,
-    Zend\Feed\Writer,
-    Zend\Feed\Writer\Renderer,
-    Zend\Uri,
-    DOMDocument,
-    DOMElement;
+use Zend\Date;
+use Zend\Feed\Writer;
+use Zend\Feed\Writer\Renderer;
+use Zend\Uri;
+use DOMDocument;
+use DOMElement;
 
 /**
 * @category Zend
@@ -85,6 +85,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
@@ -113,6 +114,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMDocument $dom
      * @param  DOMElement $root
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
@@ -210,6 +212,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setEnclosure(DOMDocument $dom, DOMElement $root)
     {

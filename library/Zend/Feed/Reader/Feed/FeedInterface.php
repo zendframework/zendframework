@@ -20,8 +20,8 @@
 
 namespace Zend\Feed\Reader\Feed;
 
-use Iterator,
-    Countable;
+use Iterator;
+use Countable;
 
 /**
 * @category Zend

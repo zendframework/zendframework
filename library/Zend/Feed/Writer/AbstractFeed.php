@@ -20,9 +20,9 @@
 
 namespace Zend\Feed\Writer;
 
-use Zend\Uri,
-    Zend\Date,
-    Zend\Validator;
+use Zend\Uri;
+use Zend\Date;
+use Zend\Validator;
 
 /**
  * @category Zend

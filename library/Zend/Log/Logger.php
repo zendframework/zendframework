@@ -20,10 +20,10 @@
 
 namespace Zend\Log;
 
-use DateTime,
-    Zend\Stdlib\SplPriorityQueue,
-    Traversable,
-    Zend\Stdlib\ArrayUtils;
+use DateTime;
+use Zend\Stdlib\SplPriorityQueue;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Logging messages with a stack of backends
@@ -50,7 +50,7 @@ class Logger implements LoggerInterface
 
     /**
      * The format of the date used for a log entry (ISO 8601 date)
-     * 
+     *
      * @see http://nl3.php.net/manual/en/function.date.php
      * @var string
      */
@@ -88,18 +88,18 @@ class Logger implements LoggerInterface
 
     /**
      * Registered error handler
-     * 
+     *
      * @var boolean
      */
     protected static $registeredErrorHandler = false;
-       
+
     /**
      * Registered exception handler
-     * 
+     *
      * @var boolean
      */
     protected static $registeredExceptionHandler = false;
-    
+
     /**
      * Constructor
      *
@@ -215,7 +215,7 @@ class Logger implements LoggerInterface
                 is_object($writer) ? get_class($writer) : gettype($writer)
             ));
         }
-        
+
         $this->writers->insert($writer, $priority);
 
         return $this;
@@ -223,8 +223,8 @@ class Logger implements LoggerInterface
 
     /**
      * Get writers
-     * 
-     * @return SplPriorityQueue 
+     *
+     * @return SplPriorityQueue
      */
     public function getWriters()
     {
@@ -232,8 +232,8 @@ class Logger implements LoggerInterface
     }
     /**
      * Set the writers
-     * 
-     * @param  SplPriorityQueue $writers 
+     *
+     * @param  SplPriorityQueue $writers
      * @throws Exception\InvalidArgumentException
      * @return Logger
      */
@@ -283,14 +283,14 @@ class Logger implements LoggerInterface
         if ($this->writers->count() === 0) {
             throw new Exception\RuntimeException('No log writer specified');
         }
-        
+
         $date = new DateTime();
         $timestamp = $date->format($this->getDateTimeFormat());
 
         if (is_array($message)) {
             $message = var_export($message, true);
         }
-               
+
         foreach ($this->writers->toArray() as $writer) {
             $writer->write(array(
                 'timestamp'    => $timestamp,
@@ -383,11 +383,11 @@ class Logger implements LoggerInterface
     {
         return $this->log(self::DEBUG, $message, $extra);
     }
-    
+
     /**
      * Register logging system as an error handler to log PHP errors
      *
-     * @link http://www.php.net/manual/en/function.set-error-handler.php 
+     * @link http://www.php.net/manual/en/function.set-error-handler.php
      *
      * @param  Logger $logger
      * @return boolean
@@ -402,7 +402,7 @@ class Logger implements LoggerInterface
         if ($logger === null) {
             throw new Exception\InvalidArgumentException('Invalid Logger specified');
         }
-        
+
         $errorHandlerMap = array(
             E_NOTICE            => self::NOTICE,
             E_USER_NOTICE       => self::NOTICE,
@@ -417,7 +417,7 @@ class Logger implements LoggerInterface
             E_DEPRECATED        => self::DEBUG,
             E_USER_DEPRECATED   => self::DEBUG
         );
-        
+
         set_error_handler(function($errno, $errstr, $errfile, $errline, $errcontext) use ($errorHandlerMap, $logger) {
             $errorLevel = error_reporting();
 
@@ -435,7 +435,7 @@ class Logger implements LoggerInterface
     }
     /**
      * Unregister error handler
-     * 
+     *
      */
     public static function unregisterErrorHandler()
     {
@@ -444,11 +444,11 @@ class Logger implements LoggerInterface
     }
     /**
      * Register logging system as an exception handler to log PHP exceptions
-     * 
+     *
      * @link http://www.php.net/manual/en/function.set-exception-handler.php
-     * 
+     *
      * @param Logger $logger
-     * @return type 
+     * @return type
      */
     public static function registerExceptionHandler(Logger $logger)
     {
@@ -456,15 +456,15 @@ class Logger implements LoggerInterface
         if (self::$registeredExceptionHandler) {
             return false;
         }
-        
+
         if ($logger === null) {
             throw new Exception\InvalidArgumentException('Invalid Logger specified');
         }
-        
+
         set_exception_handler(function ($exception) use ($logger){
-            $extra = array ('file'  => $exception->getFile(), 
+            $extra = array ('file'  => $exception->getFile(),
                             'line'  => $exception->getLine(),
-                            'trace' => $exception->getTrace());  
+                            'trace' => $exception->getTrace());
             if (isset($exception->xdebug_message)) {
                 $extra['xdebug'] = $exception->xdebug_message;
             }
@@ -473,7 +473,7 @@ class Logger implements LoggerInterface
         self::$registeredExceptionHandler = true;
         return true;
     }
-    
+
     /**
      * Unregister exception handler
      */

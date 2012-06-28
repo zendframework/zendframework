@@ -21,8 +21,8 @@
 
 namespace Zend\Log\Filter;
 
-use Zend\Log\Exception,
-    Zend\Validator\ValidatorInterface as ZendValidator;
+use Zend\Log\Exception;
+use Zend\Validator\ValidatorInterface as ZendValidator;
 
 /**
  * @category   Zend

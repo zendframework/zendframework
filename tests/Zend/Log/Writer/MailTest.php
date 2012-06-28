@@ -21,11 +21,11 @@
 
 namespace ZendTest\Log\Writer;
 
-use Zend\Log\Logger,
-    Zend\Log\Writer\Mail as MailWriter,
-    Zend\Log\Formatter\Simple as SimpleFormatter,
-    Zend\Mail\Message as MailMessage,
-    Zend\Mail\Transport;
+use Zend\Log\Logger;
+use Zend\Log\Writer\Mail as MailWriter;
+use Zend\Log\Formatter\Simple as SimpleFormatter;
+use Zend\Mail\Message as MailMessage;
+use Zend\Mail\Transport;
 
 /**
  * @category   Zend

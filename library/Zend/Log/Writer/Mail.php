@@ -21,11 +21,11 @@
 
 namespace Zend\Log\Writer;
 
-use Zend\Log\Formatter\Simple as SimpleFormatter,
-    Zend\Log\Exception,
-    Zend\Mail\Message as MailMessage,
-    Zend\Mail\Transport,
-    Zend\Mail\Transport\Exception as TransportException;
+use Zend\Log\Formatter\Simple as SimpleFormatter;
+use Zend\Log\Exception;
+use Zend\Mail\Message as MailMessage;
+use Zend\Mail\Transport;
+use Zend\Mail\Transport\Exception as TransportException;
 
 /**
  * Class used for writing log messages to email via Zend\Mail.

@@ -10,9 +10,9 @@
 
 namespace ZendTest\Cloud\QueueService\Adapter;
 
-use ZendTest\Cloud\QueueService\TestCase,
-    Zend\Cloud\QueueService\Adapter\Sqs,
-    Zend\Config\Config;
+use ZendTest\Cloud\QueueService\TestCase;
+use Zend\Cloud\QueueService\Adapter\Sqs;
+use Zend\Config\Config;
 
 /**
  * @category   Zend

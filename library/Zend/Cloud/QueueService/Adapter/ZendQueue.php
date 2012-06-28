@@ -12,8 +12,8 @@ namespace Zend\Cloud\QueueService\Adapter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Cloud\QueueService\Exception,
-    Zend\Queue\Queue;
+use Zend\Cloud\QueueService\Exception;
+use Zend\Queue\Queue;
 
 /**
  * WindowsAzure adapter for simple queue service.

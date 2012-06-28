@@ -12,8 +12,8 @@ namespace Zend\Cloud\StorageService\Adapter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Cloud\StorageService\Adapter,
-    Zend\Cloud\StorageService\Exception;
+use Zend\Cloud\StorageService\Adapter;
+use Zend\Cloud\StorageService\Exception;
 
 /**
  * FileSystem adapter for unstructured cloud storage.

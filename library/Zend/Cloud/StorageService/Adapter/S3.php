@@ -12,9 +12,9 @@ namespace Zend\Cloud\StorageService\Adapter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Cloud\StorageService\Adapter,
-    Zend\Cloud\StorageService\Exception,
-    Zend\Service\Amazon\S3\S3 as AmazonS3;
+use Zend\Cloud\StorageService\Adapter;
+use Zend\Cloud\StorageService\Exception;
+use Zend\Service\Amazon\S3\S3 as AmazonS3;
 
 /**
  * S3 adapter for unstructured cloud storage.

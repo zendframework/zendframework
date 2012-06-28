@@ -10,10 +10,10 @@
 
 namespace ZendTest\Cloud\Infrastructure;
 
-use Zend\Config\Config,
-    Zend\Cloud\Infrastructure\Factory as CloudFactory,
-    ZendTest\Cloud\Infrastructure\Adapter\Ec2OfflineTest,
-    ZendTest\Cloud\Infrastructure\Adapter\RackspaceOfflineTest;
+use Zend\Config\Config;
+use Zend\Cloud\Infrastructure\Factory as CloudFactory;
+use ZendTest\Cloud\Infrastructure\Adapter\Ec2OfflineTest;
+use ZendTest\Cloud\Infrastructure\Adapter\RackspaceOfflineTest;
 
 /**
  * Test class for Zend_Cloud_Infrastructure_Factory

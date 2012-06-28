@@ -10,9 +10,9 @@
 
 namespace Zend\Cloud\DocumentService\Adapter\WindowsAzure;
 
-use Zend\Cloud\DocumentService\QueryAdapter\QueryAdapterInterface,
-    Zend\Service\WindowsAzure\Storage\TableEntityQuery,
-    Zend\Cloud\DocumentService\Adapter\Exception;
+use Zend\Cloud\DocumentService\QueryAdapter\QueryAdapterInterface;
+use Zend\Service\WindowsAzure\Storage\TableEntityQuery;
+use Zend\Cloud\DocumentService\Adapter\Exception;
 
 /**
  * Class implementing Query adapter for working with Azure queries in a

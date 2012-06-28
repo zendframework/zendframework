@@ -12,10 +12,10 @@ namespace Zend\Cloud\StorageService\Adapter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Cloud\StorageService\Adapter,
-    Zend\Cloud\StorageService\Exception,
-    Zend\Service\Nirvanix\Nirvanix as NirvanixService,
-    Zend\Http\Client as HttpClient;
+use Zend\Cloud\StorageService\Adapter;
+use Zend\Cloud\StorageService\Exception;
+use Zend\Service\Nirvanix\Nirvanix as NirvanixService;
+use Zend\Http\Client as HttpClient;
 
 /**
  * Adapter for Nirvanix cloud storage

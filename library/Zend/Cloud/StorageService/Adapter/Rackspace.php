@@ -10,12 +10,12 @@
 
 namespace Zend\Cloud\StorageService\Adapter;
 
-use Traversable,
-    Zend\Cloud\StorageService\Adapter,
-    Zend\Cloud\StorageService\Exception,
-    Zend\Service\Rackspace\Exception as RackspaceException,
-    Zend\Service\Rackspace\Files as RackspaceFile,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Cloud\StorageService\Adapter;
+use Zend\Cloud\StorageService\Exception;
+use Zend\Service\Rackspace\Exception as RackspaceException;
+use Zend\Service\Rackspace\Files as RackspaceFile;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Adapter for Rackspace cloud storage

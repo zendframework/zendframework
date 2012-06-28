@@ -10,9 +10,9 @@
 
 namespace ZendTest\Cloud\StorageService\Adapter;
 
-use ZendTest\Cloud\StorageService\TestCase,
-    Zend\Cloud\StorageService\Adapter\Nirvanix,
-    Zend\Config\Config;
+use ZendTest\Cloud\StorageService\TestCase;
+use Zend\Cloud\StorageService\Adapter\Nirvanix;
+use Zend\Config\Config;
 
 /**
  * @category   Zend

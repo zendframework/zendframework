@@ -10,10 +10,10 @@
 
 namespace ZendTest\Cloud\DocumentService;
 
-use Zend\Cloud\DocumentService\Adapter,
-    Zend\Cloud\DocumentService\Document,
-    Zend\Cloud\DocumentService\Factory,
-    Zend\Cloud\DocumentService\QueryAdapter,
+use Zend\Cloud\DocumentService\Adapter;
+use Zend\Cloud\DocumentService\Document;
+use Zend\Cloud\DocumentService\Factory;
+use Zend\Cloud\DocumentService\QueryAdapter,
     PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**

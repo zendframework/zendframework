@@ -10,9 +10,9 @@
 
 namespace ZendTest\Cloud\QueueService;
 
-use Zend\Cloud\QueueService\Adapter,
-    Zend\Config\Config,
-    Zend\Cloud\QueueService\Factory,
+use Zend\Cloud\QueueService\Adapter;
+use Zend\Config\Config;
+use Zend\Cloud\QueueService\Factory,
     PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**

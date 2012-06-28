@@ -10,10 +10,10 @@
 
 namespace ZendTest\Cloud\DocumentService;
 
-use Zend\Cloud\DocumentService\Factory as DocumentFactory,
-    Zend\Config\Config,
-    ZendTest\Cloud\DocumentService\Adapter\SimpleDbTest,
-    ZendTest\Cloud\DocumentService\Adapter\WindowsAzureTest,
+use Zend\Cloud\DocumentService\Factory as DocumentFactory;
+use Zend\Config\Config;
+use ZendTest\Cloud\DocumentService\Adapter\SimpleDbTest;
+use ZendTest\Cloud\DocumentService\Adapter\WindowsAzureTest,
     PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**

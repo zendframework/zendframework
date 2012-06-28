@@ -10,11 +10,11 @@
 
 namespace ZendTest\Cloud\StorageService;
 
-use Zend\Config\Factory as ConfigFactory,
-    Zend\Cloud\StorageService\Factory,
-    Zend\Cloud\StorageService\Adapter\FileSystem,
-    Zend\Cloud\StorageService\Adapter\Nirvanix,
-    Zend\Cloud\StorageService\Adapter\S3,
+use Zend\Config\Factory as ConfigFactory;
+use Zend\Cloud\StorageService\Factory;
+use Zend\Cloud\StorageService\Adapter\FileSystem;
+use Zend\Cloud\StorageService\Adapter\Nirvanix;
+use Zend\Cloud\StorageService\Adapter\S3,
     //Zend\Cloud\StorageService\Adapter\WindowsAzure,
     Zend\Http\Client\Adapter\Test as HttpClientTest,
     Zend\Http\Response as HttpResponse,

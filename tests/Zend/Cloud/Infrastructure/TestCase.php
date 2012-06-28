@@ -10,8 +10,8 @@
 
 namespace ZendTest\Cloud\Infrastructure;
 
-use Zend\Cloud\Infrastructure\Adapter\AdapterInterface,
-    Zend\Cloud\Infrastructure\Instance;
+use Zend\Cloud\Infrastructure\Adapter\AdapterInterface;
+use Zend\Cloud\Infrastructure\Instance;
 
 /**
  * This class forces the adapter tests to implement tests for all methods on

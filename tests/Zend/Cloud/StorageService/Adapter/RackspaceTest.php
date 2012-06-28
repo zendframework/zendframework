@@ -10,9 +10,9 @@
 
 namespace ZendTest\Cloud\StorageService\Adapter;
 
-use ZendTest\Cloud\StorageService\TestCase,
-    Zend\Service\Rackspace\Files as RackspaceService,
-    Zend\Config\Config;
+use ZendTest\Cloud\StorageService\TestCase;
+use Zend\Service\Rackspace\Files as RackspaceService;
+use Zend\Config\Config;
 
 /**
  * @category   Zend

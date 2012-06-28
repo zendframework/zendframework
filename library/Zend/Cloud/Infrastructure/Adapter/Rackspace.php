@@ -12,11 +12,11 @@ namespace Zend\Cloud\Infrastructure\Adapter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Service\Rackspace\Servers as RackspaceServers,
-    Zend\Cloud\Infrastructure\Instance,
-    Zend\Cloud\Infrastructure\InstanceList,
-    Zend\Cloud\Infrastructure\Image,
-    Zend\Cloud\Infrastructure\ImageList;
+use Zend\Service\Rackspace\Servers as RackspaceServers;
+use Zend\Cloud\Infrastructure\Instance;
+use Zend\Cloud\Infrastructure\InstanceList;
+use Zend\Cloud\Infrastructure\Image;
+use Zend\Cloud\Infrastructure\ImageList;
 
 /**
  * Rackspace servers adapter for infrastructure service

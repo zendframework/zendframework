@@ -12,11 +12,11 @@ namespace Zend\Cloud\DocumentService\Adapter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Cloud\DocumentService\Document,
-    Zend\Service\WindowsAzure\Exception as WindowsAzureException,
-    Zend\Service\WindowsAzure\Storage\Storage,
-    Zend\Service\WindowsAzure\Storage\Table,
-    Zend\Service\WindowsAzure\Storage\DynamicTableEntity;
+use Zend\Cloud\DocumentService\Document;
+use Zend\Service\WindowsAzure\Exception as WindowsAzureException;
+use Zend\Service\WindowsAzure\Storage\Storage;
+use Zend\Service\WindowsAzure\Storage\Table;
+use Zend\Service\WindowsAzure\Storage\DynamicTableEntity;
 
 
 /**

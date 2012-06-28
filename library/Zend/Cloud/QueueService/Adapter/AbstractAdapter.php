@@ -10,9 +10,9 @@
 
 namespace Zend\Cloud\QueueService\Adapter;
 
-use Zend\Cloud\QueueService\Adapter,
-    Zend\Cloud\QueueService\Message,
-    Zend\Cloud\QueueService\MessageSet;
+use Zend\Cloud\QueueService\Adapter;
+use Zend\Cloud\QueueService\Message;
+use Zend\Cloud\QueueService\MessageSet;
 
 /**
  * Abstract queue adapter

@@ -10,9 +10,9 @@
 
 namespace ZendTest\Cloud\StorageService;
 
-use Zend\Cloud\StorageService\Adapter,
-    Zend\Cloud\StorageService\Factory,
-    Zend\Config\Config,
+use Zend\Cloud\StorageService\Adapter;
+use Zend\Cloud\StorageService\Factory;
+use Zend\Config\Config,
     PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**

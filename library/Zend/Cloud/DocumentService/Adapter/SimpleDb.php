@@ -12,11 +12,11 @@ namespace Zend\Cloud\DocumentService\Adapter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Cloud\DocumentService\Adapter\SimpleDb\Query,
-    Zend\Service\Amazon\Exception as AmazonException,
-    Zend\Service\Amazon\SimpleDb\SimpleDb as SimpleDbService,
-    Zend\Service\Amazon\SimpleDb\Attribute,
-    Zend\Cloud\DocumentService\Document;
+use Zend\Cloud\DocumentService\Adapter\SimpleDb\Query;
+use Zend\Service\Amazon\Exception as AmazonException;
+use Zend\Service\Amazon\SimpleDb\SimpleDb as SimpleDbService;
+use Zend\Service\Amazon\SimpleDb\Attribute;
+use Zend\Cloud\DocumentService\Document;
 
 /**
  * SimpleDB adapter for document service.

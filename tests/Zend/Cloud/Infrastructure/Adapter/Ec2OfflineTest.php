@@ -10,11 +10,11 @@
 
 namespace ZendTest\Cloud\Infrastructure\Adapter;
 
-use Zend\Http\Client as HttpClient,
-    Zend\Http\Client\Adapter\Test as HttpTest,
-    Zend\Cloud\Infrastructure\Adapter\Ec2,
-    Zend\Cloud\Infrastructure\Instance,
-    Zend\Cloud\Infrastructure\Factory as CloudFactory;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpTest;
+use Zend\Cloud\Infrastructure\Adapter\Ec2;
+use Zend\Cloud\Infrastructure\Instance;
+use Zend\Cloud\Infrastructure\Factory as CloudFactory;
 
 class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
 {

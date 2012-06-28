@@ -52,6 +52,7 @@ class Params extends AbstractPlugin
      * @param string $param
      * @param mixed $default
      * @return mixed
+     * @throws RuntimeException
      */
     public function fromRoute($param, $default = null)
     {

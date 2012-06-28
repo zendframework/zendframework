@@ -22,6 +22,7 @@ namespace Zend\Mvc;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManagerAwareInterface;
+use Zend\ModuleManager\ModuleManagerInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\RequestInterface;
@@ -83,7 +84,7 @@ class Application implements
     protected $event;
 
     /**
-     * @var EventManager
+     * @var EventManagerInterface
      */
     protected $events;
 
@@ -103,7 +104,7 @@ class Application implements
     protected $serviceManager = null;
 
     /**
-     * @var \Zend\ModuleManager\ModuleManager
+     * @var ModuleManagerInterface
      */
     protected $moduleManager;
 
@@ -179,7 +180,7 @@ class Application implements
     /**
      * Get the request object
      *
-     * @return Request
+     * @return RequestInterface
      */
     public function getRequest()
     {
@@ -189,7 +190,7 @@ class Application implements
     /**
      * Get the response object
      *
-     * @return Response
+     * @return ResponseInterface
      */
     public function getResponse()
     {
@@ -249,7 +250,7 @@ class Application implements
      *           discovered controller, and controller class (if known).
      *           Typically, a handler should return a populated Response object
      *           that can be returned immediately.
-     * @return SendableResponse
+     * @return ResponseInterface
      */
     public function run()
     {
@@ -309,7 +310,7 @@ class Application implements
      * event object.
      *
      * @param  MvcEvent $event
-     * @return Response
+     * @return ResponseInterface
      */
     protected function completeRequest(MvcEvent $event)
     {

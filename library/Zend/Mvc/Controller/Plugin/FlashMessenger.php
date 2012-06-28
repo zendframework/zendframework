@@ -21,13 +21,13 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use ArrayIterator,
-    Countable,
-    IteratorAggregate,
-    Zend\Session\Container,
-    Zend\Session\ManagerInterface as Manager,
-    Zend\Session\SessionManager,
-    Zend\Stdlib\SplQueue;
+use ArrayIterator;
+use Countable;
+use IteratorAggregate;
+use Zend\Session\Container;
+use Zend\Session\ManagerInterface as Manager;
+use Zend\Session\SessionManager;
+use Zend\Stdlib\SplQueue;
 
 /**
  * Flash Messenger - implement session-based messages

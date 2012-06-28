@@ -21,11 +21,11 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Mvc\InjectApplicationEventInterface,
-    Zend\Mvc\Exception,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\Router\RouteStackInterface,
-    Zend\EventManager\EventInterface;
+use Zend\Mvc\InjectApplicationEventInterface;
+use Zend\Mvc\Exception;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteStackInterface;
+use Zend\EventManager\EventInterface;
 
 /**
  * @category   Zend

@@ -9,13 +9,13 @@
  */
 
 namespace ZendTest\Amf;
-use Zend\Acl,
-    Zend\Amf\Value,
-    Zend\Amf\Value\Messaging,
-    Zend\Amf\Request,
-    Zend\Acl\Role,
-    Zend\Amf,
-    Zend\Authentication;
+use Zend\Acl;
+use Zend\Amf\Value;
+use Zend\Amf\Value\Messaging;
+use Zend\Amf\Request;
+use Zend\Acl\Role;
+use Zend\Amf;
+use Zend\Authentication;
 
 /**
  * @category   Zend

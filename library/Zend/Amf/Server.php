@@ -10,12 +10,12 @@
 
 namespace Zend\Amf;
 
-use Zend\Amf\Exception,
-    Zend\Authentication\AuthenticationService,
-    Zend\Loader\Broker,
-    Zend\Loader\PluginBroker,
-    Zend\Server\Reflection,
-    Zend\Server\Server as ServerDefinition;
+use Zend\Amf\Exception;
+use Zend\Authentication\AuthenticationService;
+use Zend\Loader\Broker;
+use Zend\Loader\PluginBroker;
+use Zend\Server\Reflection;
+use Zend\Server\Server as ServerDefinition;
 
 /**
  * An AMF gateway server implementation to allow the connection of the Adobe Flash Player to

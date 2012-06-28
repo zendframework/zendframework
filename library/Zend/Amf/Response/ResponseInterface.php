@@ -10,8 +10,8 @@
 
 namespace Zend\Amf\Response;
 
-use Zend\Amf\Parser,
-    Zend\Amf\Value;
+use Zend\Amf\Parser;
+use Zend\Amf\Value;
 
 /**
  * Handles converting the PHP object ready for response back into AMF

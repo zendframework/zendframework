@@ -10,9 +10,9 @@
 
 namespace ZendTest\Amf;
 
-use Zend\Amf\Parser,
-    Zend\Amf\Value,
-    Zend\Amf\Value\Messaging;
+use Zend\Amf\Parser;
+use Zend\Amf\Value;
+use Zend\Amf\Value\Messaging;
 
 
 /**

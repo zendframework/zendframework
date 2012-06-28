@@ -10,10 +10,9 @@
 
 namespace ZendTest\Amf;
 
-use Zend\Amf\Parser,
-    Zend\Amf\Value\Messaging,
-    Zend\Amf\Value,
-    Zend\Locale\Locale;
+use Zend\Amf\Parser;
+use Zend\Amf\Value\Messaging;
+use Zend\Amf\Value;
 
 /**
  * Test case for Zend_Amf_Response

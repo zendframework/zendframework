@@ -9,13 +9,13 @@
  */
 
 namespace ZendTest\Amf;
-use Zend\Amf,
-    Zend\Amf\Parser,
-    Zend\Amf\Value,
-    Zend\Amf\Request,
-    Zend\Amf\Value\Messaging,
-    Zend\Amf\Response,
-    Zend\Session;
+use Zend\Amf;
+use Zend\Amf\Parser;
+use Zend\Amf\Value;
+use Zend\Amf\Request;
+use Zend\Amf\Value\Messaging;
+use Zend\Amf\Response;
+use Zend\Session;
 
 require_once __DIR__ . '/TestAsset/Server/serverFunctions.php';
 require_once __DIR__ . '/TestAsset/Server/ServiceA.php';

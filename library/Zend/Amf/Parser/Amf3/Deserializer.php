@@ -11,9 +11,9 @@
 namespace Zend\Amf\Parser\Amf3;
 
 use DateTime;
-use Zend\Amf\Parser\AbstractDeserializer,
-    Zend\Amf,
-    Zend\Amf\Parser;
+use Zend\Amf\Parser\AbstractDeserializer;
+use Zend\Amf;
+use Zend\Amf\Parser;
 
 /**
  * Read an AMF3 input stream and convert it into PHP data types.

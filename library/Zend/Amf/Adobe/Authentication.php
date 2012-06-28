@@ -10,12 +10,12 @@
 
 namespace Zend\Amf\Adobe;
 
-use stdClass,
-    Zend\Acl\Acl,
-    Zend\Acl\Role,
-    Zend\Amf\AbstractAuthentication,
-    Zend\Authentication\Adapter as AuthenticationAdapter,
-    Zend\Authentication\Result as AuthenticationResult;
+use stdClass;
+use Zend\Acl\Acl;
+use Zend\Acl\Role;
+use Zend\Amf\AbstractAuthentication;
+use Zend\Authentication\Adapter as AuthenticationAdapter;
+use Zend\Authentication\Result as AuthenticationResult;
 
 /**
  * This class implements authentication against XML file with roles for Flex Builder.

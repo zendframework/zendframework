@@ -10,8 +10,8 @@
 
 namespace ZendTest\Amf;
 
-use Zend\Amf\Parser,
-    Zend\Amf\Server;
+use Zend\Amf\Parser;
+use Zend\Amf\Server;
 
 /**
  * @category   Zend

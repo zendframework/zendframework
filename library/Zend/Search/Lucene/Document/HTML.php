@@ -21,11 +21,11 @@
 
 namespace Zend\Search\Lucene\Document;
 
-use Zend\Search\Lucene\Document,
-    Zend\Search\Lucene,
-    Zend\Search\Lucene\Analysis\Analyzer,
-    Zend\Search\Lucene\Exception\RuntimeException,
-    Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene\Document;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Analysis\Analyzer;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
 
 /**
  * HTML document.

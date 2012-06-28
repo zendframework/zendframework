@@ -21,10 +21,10 @@
 
 namespace Zend\Search\Lucene\Search\Query;
 
-use Zend\Search\Lucene,
-    Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter,
-    Zend\Search\Lucene\Search\Highlighter\DefaultHighlighter,
-    Zend\Search\Lucene\Document;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter;
+use Zend\Search\Lucene\Search\Highlighter\DefaultHighlighter;
+use Zend\Search\Lucene\Document;
 
 /**
  * @category   Zend

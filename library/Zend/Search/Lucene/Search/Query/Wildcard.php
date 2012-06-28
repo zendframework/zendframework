@@ -21,14 +21,14 @@
 
 namespace Zend\Search\Lucene\Search\Query;
 
-use Zend\Search\Lucene\Index,
-	Zend\Search\Lucene,
-	Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface,
-    Zend\Search\Lucene\Analysis\Analyzer\Analyzer,
-	Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter,
-	Zend\Search\Lucene\Exception\UnsupportedMethodCallException,
-	Zend\Search\Lucene\Exception\RuntimeException,
-	Zend\Search\Lucene\Exception\OutOfBoundsException;
+use Zend\Search\Lucene\Index;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface;
+use Zend\Search\Lucene\Analysis\Analyzer\Analyzer;
+use Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter;
+use Zend\Search\Lucene\Exception\UnsupportedMethodCallException;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Exception\OutOfBoundsException;
 
 /**
  * @category   Zend

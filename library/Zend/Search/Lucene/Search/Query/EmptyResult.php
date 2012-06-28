@@ -21,9 +21,9 @@
 
 namespace Zend\Search\Lucene\Search\Query;
 
-use Zend\Search\Lucene,
-    Zend\Search\Lucene\Search\Weight,
-    Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Search\Weight;
+use Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter;
 
 /**
  * @category   Zend

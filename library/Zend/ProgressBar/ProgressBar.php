@@ -10,8 +10,8 @@
 
 namespace Zend\ProgressBar;
 
-use Zend\ProgressBar\Exception,
-    Zend\Session;
+use Zend\ProgressBar\Exception;
+use Zend\Session;
 
 /**
  * Zend_ProgressBar offers an interface for multiple enviroments.

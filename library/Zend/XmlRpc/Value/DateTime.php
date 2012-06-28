@@ -57,9 +57,7 @@ class DateTime extends AbstractScalar
     {
         $this->_type = self::XMLRPC_TYPE_DATETIME;
 
-        if ($value instanceof \Zend\Date\Date) {
-            $this->_value = $value->toString($this->_isoFormatString);
-        } elseif ($value instanceof \DateTime) {
+        if ($value instanceof \DateTime) {
             $this->_value = $value->format($this->_phpFormatString);
         } elseif (is_numeric($value)) { // The value is numeric, we make sure it is an integer
             $this->_value = date($this->_phpFormatString, (int)$value);

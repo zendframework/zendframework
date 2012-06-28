@@ -26,7 +26,6 @@ use Zend\XmlRpc\AbstractValue;
 use Zend\XmlRpc\Value;
 use Zend\XmlRpc\Generator\GeneratorInterface as Generator;
 use Zend\Math\BigInteger;
-use Zend\Date;
 
 /**
  * Test case for Value
@@ -645,50 +644,11 @@ class ValueTest extends \PHPUnit_Framework_TestCase
      * @dataProvider ZendTest\XmlRpc\TestProvider::provideGenerators
      * @group ZF-4249
      */
-    public function testMarshalDateTimeFromFromZendDate(Generator $generator)
-    {
-        AbstractValue::setGenerator($generator);
-        $date = new Date\Date(array('year' => 2039, 'month' => 4, 'day' => 18,
-                                    'hour' => 13, 'minute' => 14, 'second' => 15));
-        $dateString = '20390418T13:14:15';
-        $xml = "<value><dateTime.iso8601>$dateString</dateTime.iso8601></value>";
-
-        $val = AbstractValue::getXmlRpcValue($date, AbstractValue::XMLRPC_TYPE_DATETIME);
-        $this->assertXmlRpcType('dateTime', $val);
-        $this->assertEquals('dateTime.iso8601', $val->getType());
-        $this->assertSame($dateString, $val->getValue());
-        $this->assertEquals(trim($xml), trim($val->saveXml()));
-
-    }
-
-    /**
-     * @dataProvider ZendTest\XmlRpc\TestProvider::provideGenerators
-     * @group ZF-4249
-     */
-    public function testMarshalDateTimeFromZendDateAndAutodetectingType(Generator $generator)
-    {
-        AbstractValue::setGenerator($generator);
-        $date = new Date\Date(array('year' => 2039, 'month' => 4, 'day' => 18,
-                                    'hour' => 13, 'minute' => 14, 'second' => 15));
-        $dateString = '20390418T13:14:15';
-        $xml = "<value><dateTime.iso8601>$dateString</dateTime.iso8601></value>";
-
-        $val = AbstractValue::getXmlRpcValue($date, AbstractValue::AUTO_DETECT_TYPE);
-        $this->assertXmlRpcType('dateTime', $val);
-        $this->assertEquals('dateTime.iso8601', $val->getType());
-        $this->assertSame($dateString, $val->getValue());
-        $this->assertEquals(trim($xml), trim($val->saveXml()));
-    }
-
-    /**
-     * @dataProvider ZendTest\XmlRpc\TestProvider::provideGenerators
-     * @group ZF-4249
-     */
     public function testMarshalDateTimeFromFromDateTime(Generator $generator)
     {
         AbstractValue::setGenerator($generator);
         $dateString = '20390418T13:14:15';
-        $date = new \DateTime($dateString);
+        $date = new DateTime($dateString);
         $dateString = '20390418T13:14:15';
         $xml = "<value><dateTime.iso8601>$dateString</dateTime.iso8601></value>";
 
@@ -724,12 +684,8 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     public function testGetValueDatetime()
     {
         $expectedValue = '20100101T00:00:00';
-        $zfDate         = new Date\Date('2010-01-01 00:00:00', 'yyyy-MM-dd HH:mm:ss');
         $phpDatetime     = new DateTime('20100101T00:00:00');
         $phpDateNative   = '20100101T00:00:00';
-
-        $xmlRpcValueDateTime = new Value\DateTime($zfDate);
-        $this->assertEquals($expectedValue, $xmlRpcValueDateTime->getValue());
 
         $xmlRpcValueDateTime = new Value\DateTime($phpDatetime);
         $this->assertEquals($expectedValue, $xmlRpcValueDateTime->getValue());
@@ -834,11 +790,6 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             AbstractValue::XMLRPC_TYPE_DATETIME,
             AbstractValue::getXmlRpcTypeByValue(new DateTime)
-        );
-
-        $this->assertEquals(
-            AbstractValue::XMLRPC_TYPE_DATETIME,
-            AbstractValue::getXmlRpcTypeByValue(new \Zend\Date\Date)
         );
 
         $this->assertEquals(

@@ -25,7 +25,6 @@ use Zend\XmlRpc\Value\BigInteger;
 use Zend\XmlRpc\Exception;
 use Zend\XmlRpc\Generator\GeneratorInterface as Generator;
 use Zend\Math\BigInteger as MathBigInteger;
-use Zend\Date;
 
 /**
  * Test case for Zend_XmlRpc_Value

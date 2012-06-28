@@ -10,8 +10,8 @@
 
 namespace Zend\Json;
 
-use Zend\Json\Exception\RuntimeException,
-    Zend\Json\Exception\InvalidArgumentException;
+use Zend\Json\Exception\RuntimeException;
+use Zend\Json\Exception\InvalidArgumentException;
 
 /**
  * Decode JSON encoded string to PHP variable constructs

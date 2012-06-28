@@ -10,12 +10,12 @@
 
 namespace ZendTest\Json\Server;
 
-use Zend\Http\Client as HttpClient,
-    Zend\Http\Client\Adapter\Test as TestAdapter,
-    Zend\Json\Server\Client,
-    Zend\Json\Server\Error,
-    Zend\Json\Server\Request,
-    Zend\Json\Server\Response;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as TestAdapter;
+use Zend\Json\Server\Client;
+use Zend\Json\Server\Error;
+use Zend\Json\Server\Request;
+use Zend\Json\Server\Response;
 
 /**
  * Test case for Zend\Json\Server\Client

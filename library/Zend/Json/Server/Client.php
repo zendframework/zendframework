@@ -10,8 +10,8 @@
 
 namespace Zend\Json\Server;
 
-use Zend\Http\Client as HttpClient,
-    Zend\Server\Client as ServerClient;
+use Zend\Http\Client as HttpClient;
+use Zend\Server\Client as ServerClient;
 
 /**
  * @category   Zend

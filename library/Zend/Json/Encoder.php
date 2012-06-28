@@ -10,8 +10,8 @@
 
 namespace Zend\Json;
 
-use Zend\Json\Exception\RecursionException,
-    Zend\Json\Exception\InvalidArgumentException;
+use Zend\Json\Exception\RecursionException;
+use Zend\Json\Exception\InvalidArgumentException;
 
 /**
  * Encode PHP constructs to JSON

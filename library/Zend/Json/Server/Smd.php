@@ -9,8 +9,8 @@
  */
 
 namespace Zend\Json\Server;
-use Zend\Json\Server\Exception\InvalidArgumentException,
-    Zend\Json\Server\Exception\RuntimeException;
+use Zend\Json\Server\Exception\InvalidArgumentException;
+use Zend\Json\Server\Exception\RuntimeException;
 
 /**
  * @category   Zend

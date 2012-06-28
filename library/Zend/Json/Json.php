@@ -10,8 +10,8 @@
 
 namespace Zend\Json;
 
-use Zend\Json\Exception\RuntimeException,
-    Zend\Json\Exception\RecursionException;
+use Zend\Json\Exception\RuntimeException;
+use Zend\Json\Exception\RecursionException;
 
 /**
  * Class for encoding to and decoding from JSON.

@@ -12,6 +12,8 @@ namespace ZendTest\Code\Reflection\TestAsset;
  * now.
  *
  * @author Ralph Schindler <ralph.schindler@zend.com>
+ * @method test()
+ * @property $test
  */
 class TestSampleClass5
 {

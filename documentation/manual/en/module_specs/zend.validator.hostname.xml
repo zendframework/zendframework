@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.hostname"><title>Hostname</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.hostname"><title>Hostname</title>
     
 
     <para>
-        <classname>Zend_Validate_Hostname</classname> allows you to validate a hostname against a
+        <classname>Zend\Validator\Hostname</classname> allows you to validate a hostname against a
         set of known specifications. It is possible to check for three different types of hostnames:
         a <acronym>DNS</acronym> Hostname (i.e. <filename>domain.com</filename>), IP address (i.e.
         1.2.3.4), and Local hostnames (i.e. localhost). By default only <acronym>DNS</acronym>
         hostnames are matched.
     </para>
 
-    <section xml:id="zend.validate.set.hostname.options"><title>Supported options for Zend_Validate_Hostname</title>
+    <section xml:id="zend.validator.set.hostname.options"><title>Supported options for Zend\Validator\Hostname</title>
         
 
         <para>
-            The following options are supported for <classname>Zend_Validate_Hostname</classname>:
+            The following options are supported for <classname>Zend\Validator\Hostname</classname>:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
                     <emphasis><property>allow</property></emphasis>: Defines the sort of hostname
-                    which is allowed to be used. See <link linkend="zend.validate.set.hostname.types">Hostname types</link> for
+                    which is allowed to be used. See <link linkend="zend.validator.set.hostname.types">Hostname types</link> for
                     details.
                 </para>
             </listitem>
@@ -37,7 +37,7 @@
                 <para>
                     <emphasis><property>ip</property></emphasis>: Allows to define a own IP
                     validator. This option defaults to a new instance of
-                    <classname>Zend_Validate_Ip</classname>.
+                    <classname>Zend\Validator\Ip</classname>.
                 </para>
             </listitem>
 
@@ -51,7 +51,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.hostname.basic"><title>Basic usage</title>
+    <section xml:id="zend.validator.set.hostname.basic"><title>Basic usage</title>
         
 
         <para>
@@ -59,7 +59,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Hostname();
+$validator = new Zend\Validator\Hostname();
 if ($validator->isValid($hostname)) {
     // hostname appears to be valid
 } else {
@@ -76,20 +76,20 @@ if ($validator->isValid($hostname)) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.hostname.types"><title>Validating different types of hostnames</title>
+    <section xml:id="zend.validator.set.hostname.types"><title>Validating different types of hostnames</title>
         
 
         <para>
             You may find you also want to match IP addresses, Local hostnames, or a combination of
             all allowed types. This can be done by passing a parameter to
-            <classname>Zend_Validate_Hostname</classname> when you instantiate it. The parameter
+            <classname>Zend\Validator\Hostname</classname> when you instantiate it. The parameter
             should be an integer which determines what types of hostnames are allowed. You are
-            encouraged to use the <classname>Zend_Validate_Hostname</classname> constants to do
+            encouraged to use the <classname>Zend\Validator\Hostname</classname> constants to do
             this.
         </para>
 
         <para>
-            The <classname>Zend_Validate_Hostname</classname> constants are:
+            The <classname>Zend\Validator\Hostname</classname> constants are:
             <constant>ALLOW_DNS</constant> to allow only
             <acronym>DNS</acronym> hostnames, <constant>ALLOW_IP</constant> to allow IP addresses,
             <constant>ALLOW_LOCAL</constant> to allow local network names,
@@ -113,7 +113,7 @@ if ($validator->isValid($hostname)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
+$validator = new Zend\Validator\Hostname(Zend\Validator\Hostname::ALLOW_IP);
 if ($validator->isValid($hostname)) {
     // hostname appears to be valid
 } else {
@@ -128,23 +128,23 @@ if ($validator->isValid($hostname)) {
             As well as using <constant>ALLOW_ALL</constant> to accept all common hostnames types
             you can combine these types to allow for combinations. For example, to accept
             <acronym>DNS</acronym> and Local hostnames instantiate your
-            <classname>Zend_Validate_Hostname</classname> object as so:
+            <classname>Zend\Validator\Hostname</classname> object as so:
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
-                                        Zend_Validate_Hostname::ALLOW_IP);
+$validator = new Zend\Validator\Hostname(Zend\Validator\Hostname::ALLOW_DNS |
+                                        Zend\Validator\Hostname::ALLOW_IP);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.hostname.idn"><title>Validating International Domains Names</title>
+    <section xml:id="zend.validator.set.hostname.idn"><title>Validating International Domains Names</title>
         
 
         <para>
             Some Country Code Top Level Domains (ccTLDs), such as 'de' (Germany), support
             international characters in domain names. These are known as International Domain Names
             (<acronym>IDN</acronym>). These domains can be matched by
-            <classname>Zend_Validate_Hostname</classname> via extended characters that are used in
+            <classname>Zend\Validator\Hostname</classname> via extended characters that are used in
             the validation process.
         </para>
 
@@ -160,20 +160,20 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
             To match an <acronym>IDN</acronym> domain it's as simple as just using the standard
             Hostname validator since <acronym>IDN</acronym> matching is enabled by default. If you
             wish to disable <acronym>IDN</acronym> validation this can be done by either passing a
-            parameter to the <classname>Zend_Validate_Hostname</classname> constructor or via the
+            parameter to the <classname>Zend\Validator\Hostname</classname> constructor or via the
             <methodname>setValidateIdn()</methodname> method.
         </para>
 
         <para>
             You can disable <acronym>IDN</acronym> validation by passing a second parameter to the
-            <classname>Zend_Validate_Hostname</classname> constructor in the following way.
+            <classname>Zend\Validator\Hostname</classname> constructor in the following way.
         </para>
 
         <programlisting language="php"><![CDATA[
 $validator =
-    new Zend_Validate_Hostname(
+    new Zend\Validator\Hostname(
         array(
-            'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+            'allow' => Zend\Validator\Hostname::ALLOW_DNS,
             'idn'   => false
         )
     );
@@ -185,7 +185,7 @@ $validator =
             disable <acronym>IDN</acronym> validation. If you are trying to match an
             <acronym>IDN</acronym> hostname which isn't currently supported it is likely it will
             fail validation if it has any international characters in it. Where a ccTLD file doesn't
-            exist in <filename>Zend/Validate/Hostname</filename> specifying the additional
+            exist in <filename>Zend/Validator/Hostname</filename> specifying the additional
             characters a normal hostname validation is performed.
         </para>
 
@@ -199,7 +199,7 @@ $validator =
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.hostname.tld"><title>Validating Top Level Domains</title>
+    <section xml:id="zend.validator.set.hostname.tld"><title>Validating Top Level Domains</title>
         
 
         <para>
@@ -207,15 +207,15 @@ $validator =
             If this functionality is not required it can be disabled in much the same way as
             disabling <acronym>IDN</acronym> support. You can disable <acronym>TLD</acronym>
             validation by passing a third parameter to the
-            <classname>Zend_Validate_Hostname</classname> constructor. In the example below we are
+            <classname>Zend\Validator\Hostname</classname> constructor. In the example below we are
             supporting <acronym>IDN</acronym> validation via the second parameter.
         </para>
 
         <programlisting language="php"><![CDATA[
 $validator =
-    new Zend_Validate_Hostname(
+    new Zend\Validator\Hostname(
         array(
-            'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+            'allow' => Zend\Validator\Hostname::ALLOW_DNS,
             'idn'   => true,
             'tld'   => false
         )

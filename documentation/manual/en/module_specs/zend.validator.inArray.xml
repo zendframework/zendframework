@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.in_array"><title>InArray</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.in_array"><title>InArray</title>
     
 
     <para>
-        <classname>Zend_Validate_InArray</classname> allows you to validate if a given value is
+        <classname>Zend\Validator\InArray</classname> allows you to validate if a given value is
         contained within an array. It is also able to validate multidimensional arrays.
     </para>
 
-    <section xml:id="zend.validate.set.in_array.options"><title>Supported options for Zend_Validate_InArray</title>
+    <section xml:id="zend.validator.set.in_array.options"><title>Supported options for Zend\Validator\InArray</title>
         
 
         <para>
-            The following options are supported for <classname>Zend_Validate_InArray</classname>:
+            The following options are supported for <classname>Zend\Validator\InArray</classname>:
         </para>
 
         <itemizedlist>
@@ -38,7 +38,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.in_array.basic"><title>Simple array validation</title>
+    <section xml:id="zend.validator.set.in_array.basic"><title>Simple array validation</title>
         
 
         <para>
@@ -47,7 +47,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_InArray(array('key' => 'value',
+$validator = new Zend\Validator\InArray(array('key' => 'value',
                                              'otherkey' => 'othervalue'));
 if ($validator->isValid('value')) {
     // value found
@@ -75,7 +75,7 @@ if ($validator->isValid('value')) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_InArray();
+$validator = new Zend\Validator\InArray();
 $validator->setHaystack(array('key' => 'value', 'otherkey' => 'othervalue'));
 
 if ($validator->isValid('value')) {
@@ -86,7 +86,7 @@ if ($validator->isValid('value')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.in_array.strict"><title>Strict array validation</title>
+    <section xml:id="zend.validator.set.in_array.strict"><title>Strict array validation</title>
         
 
         <para>
@@ -102,7 +102,7 @@ if ($validator->isValid('value')) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_InArray(
+$validator = new Zend\Validator\InArray(
     array(
         'haystack' => array('key' => 'value', 'otherkey' => 'othervalue'),
         'strict'   => true
@@ -136,7 +136,7 @@ if ($validator->isValid('value')) {
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.in_array.recursive"><title>Recursive array validation</title>
+    <section xml:id="zend.validator.set.in_array.recursive"><title>Recursive array validation</title>
         
 
         <para>
@@ -150,7 +150,7 @@ if ($validator->isValid('value')) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_InArray(
+$validator = new Zend\Validator\InArray(
     array(
         'haystack' => array(
             'firstDimension' => array('key' => 'value',
@@ -175,7 +175,7 @@ if ($validator->isValid('value')) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_InArray(
+$validator = new Zend\Validator\InArray(
     array(
         'firstDimension' => array('key' => 'value',
                                   'otherkey' => 'othervalue'),

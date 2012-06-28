@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.alnum"><title>Alnum</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.alpha"><title>Alpha</title>
     
 
     <para>
-        <classname>Zend_Validate_Alnum</classname> allows you to validate if a given value contains
-        only alphabetical characters and digits. There is no length limitation for the input
-        you want to validate.
+        <classname>Zend\Validator\Alpha</classname> allows you to validate if a given value contains
+        only alphabetical characters. There is no length limitation for the input you want to
+        validate. This validator is related to the <classname>Zend\Validator\Alnum</classname>
+        validator with the exception that it does not accept digits.
     </para>
 
-    <section xml:id="zend.validate.set.alnum.options"><title>Supported options for Zend_Validate_Alnum</title>
+    <section xml:id="zend.validator.set.alpha.options"><title>Supported options for Zend\Validator\Alpha</title>
         
 
         <para>
-            The following options are supported for <classname>Zend_Validate_Alnum</classname>:
+            The following options are supported for <classname>Zend\Validator\Alpha</classname>:
         </para>
 
         <itemizedlist>
@@ -25,7 +26,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.alnum.basic"><title>Basic usage</title>
+    <section xml:id="zend.validator.set.alpha.basic"><title>Basic usage</title>
         
 
         <para>
@@ -33,8 +34,8 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Alnum();
-if ($validator->isValid('Abcd12')) {
+$validator = new Zend\Validator\Alpha();
+if ($validator->isValid('Abcd')) {
     // value contains only allowed chars
 } else {
     // false
@@ -42,7 +43,7 @@ if ($validator->isValid('Abcd12')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.alnum.whitespace"><title>Using whitespaces</title>
+    <section xml:id="zend.validator.set.alpha.whitespace"><title>Using whitespaces</title>
         
 
         <para>
@@ -59,8 +60,8 @@ if ($validator->isValid('Abcd12')) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Alnum(array('allowWhiteSpace' => true));
-if ($validator->isValid('Abcd and 12')) {
+$validator = new Zend\Validator\Alpha(array('allowWhiteSpace' => true));
+if ($validator->isValid('Abcd and efg')) {
     // value contains only allowed chars
 } else {
     // false
@@ -68,11 +69,11 @@ if ($validator->isValid('Abcd and 12')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.alnum.languages"><title>Using different languages</title>
+    <section xml:id="zend.validator.set.alpha.languages"><title>Using different languages</title>
         
 
         <para>
-            When using <classname>Zend_Validate_Alnum</classname> then the language which the user
+            When using <classname>Zend\Validator\Alpha</classname> then the language which the user
             sets within his browser will be used to set the allowed characters. This means when your
             user sets <emphasis>de</emphasis> for german then he can also enter characters like
             <emphasis>ä</emphasis>, <emphasis>ö</emphasis> and <emphasis>ü</emphasis> additionally
@@ -80,7 +81,7 @@ if ($validator->isValid('Abcd and 12')) {
         </para>
 
         <para>
-            Which characters are allowed depends completly on the used language as every language
+            Which characters are allowed depends completely on the used language as every language
             defines it's own set of characters.
         </para>
 

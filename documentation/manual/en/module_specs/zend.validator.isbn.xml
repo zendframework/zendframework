@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.isbn"><title>Isbn</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.isbn"><title>Isbn</title>
     
 
     <para>
-        <classname>Zend_Validate_Isbn</classname> allows you to validate an
+        <classname>Zend\Validator\Isbn</classname> allows you to validate an
         <acronym>ISBN-10</acronym> or <acronym>ISBN-13</acronym> value.
     </para>
 
-    <section xml:id="zend.validate.set.isbn.options"><title>Supported options for Zend_Validate_Isbn</title>
+    <section xml:id="zend.validator.set.isbn.options"><title>Supported options for Zend\Validator\Isbn</title>
         
 
         <para>
-            The following options are supported for <classname>Zend_Validate_Isbn</classname>:
+            The following options are supported for <classname>Zend\Validator\Isbn</classname>:
         </para>
 
         <itemizedlist>
@@ -27,14 +27,14 @@
                 <para>
                     <emphasis><property>type</property></emphasis>: Defines the allowed type of
                     <acronym>ISBN</acronym> numbers. It defaults to
-                    <constant>Zend_Validate_Isbn::AUTO</constant>. For details take a look at
-                    <link linkend="zend.validate.set.isbn.type-explicit">this section</link>.
+                    <constant>Zend\Validator\Isbn::AUTO</constant>. For details take a look at
+                    <link linkend="zend.validator.set.isbn.type-explicit">this section</link>.
                 </para>
             </listitem>
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.isbn.basic"><title>Basic usage</title>
+    <section xml:id="zend.validator.set.isbn.basic"><title>Basic usage</title>
         
 
         <para>
@@ -42,7 +42,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Isbn();
+$validator = new Zend\Validator\Isbn();
 if ($validator->isValid($isbn)) {
     // isbn is valid
 } else {
@@ -56,7 +56,7 @@ if ($validator->isValid($isbn)) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.isbn.type-explicit"><title>Setting an explicit ISBN validation type</title>
+    <section xml:id="zend.validator.set.isbn.type-explicit"><title>Setting an explicit ISBN validation type</title>
         
 
         <para>
@@ -64,11 +64,11 @@ if ($validator->isValid($isbn)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Isbn();
-$validator->setType(Zend_Validate_Isbn::ISBN13);
+$validator = new Zend\Validator\Isbn();
+$validator->setType(Zend\Validator\Isbn::ISBN13);
 // OR
-$validator = new Zend_Validate_Isbn(array(
-    'type' => Zend_Validate_Isbn::ISBN13,
+$validator = new Zend\Validator\Isbn(array(
+    'type' => Zend\Validator\Isbn::ISBN13,
 ));
 
 if ($validator->isValid($isbn)) {
@@ -88,20 +88,20 @@ if ($validator->isValid($isbn)) {
 
         <itemizedlist>
             <listitem>
-                <para><constant>Zend_Validate_Isbn::AUTO</constant> (default)</para>
+                <para><constant>Zend\Validator\Isbn::AUTO</constant> (default)</para>
             </listitem>
 
             <listitem>
-                <para><constant>Zend_Validate_Isbn::ISBN10</constant></para>
+                <para><constant>Zend\Validator\Isbn::ISBN10</constant></para>
             </listitem>
 
             <listitem>
-                <para><constant>Zend_Validate_Isbn::ISBN13</constant></para>
+                <para><constant>Zend\Validator\Isbn::ISBN13</constant></para>
             </listitem>
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.isbn.separator"><title>Specifying a separator restriction</title>
+    <section xml:id="zend.validator.set.isbn.separator"><title>Specifying a separator restriction</title>
         
 
         <para>
@@ -109,10 +109,10 @@ if ($validator->isValid($isbn)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Isbn();
+$validator = new Zend\Validator\Isbn();
 $validator->setSeparator('-');
 // OR
-$validator = new Zend_Validate_Isbn(array(
+$validator = new Zend\Validator\Isbn(array(
     'separator' => '-',
 ));
 

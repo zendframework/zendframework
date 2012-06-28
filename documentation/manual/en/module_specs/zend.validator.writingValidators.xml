@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><title>Writing Validators</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.writing_validators"><title>Writing Validators</title>
     
 
     <para>
-        <classname>Zend_Validate</classname> supplies a set of commonly needed validators, but
+        <classname>Zend\Validator\AbstractValidator</classname> supplies a set of commonly needed validators, but
         inevitably, developers will wish to write custom validators for their particular needs. The
         task of writing a custom validator is described in this section.
     </para>
 
     <para>
-        <classname>Zend_Validate_Interface</classname> defines two methods,
+        <interfacename>Zend\Validator\ValidatorInterface</interfacename> defines two methods,
         <methodname>isValid()</methodname> and <methodname>getMessages()</methodname>, that may
         be implemented by user classes in order to create custom validation objects. An object that
-        implements <classname>Zend_Validate_Interface</classname> interface may be added to a
-        validator chain with <methodname>Zend_Validate::addValidator()</methodname>. Such objects
-        may also be used with <link linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link>.
+        implements <interfacename>Zend\Validator\AbstractValidator</interfacename> interface may be added to a
+        validator chain with <methodname>Zend\Validator\ValidatorChain::addValidator()</methodname>. Such objects
+        may also be used with <link linkend="zend.filter.input"><classname>Zend\Filter\Input</classname></link>.
     </para>
 
     <para>
         As you may already have inferred from the above description of
-        <classname>Zend_Validate_Interface</classname>, validation classes provided with Zend
+        <interfacename>Zend\Validator\ValidatorInterface</interfacename>, validation classes provided with Zend
         Framework return a boolean value for whether or not a value validates successfully. They
         also provide information about <emphasis>why</emphasis> a value failed validation. The
         availability of the reasons for validation failures may be valuable to an application for
@@ -28,8 +28,8 @@
 
     <para>
         Basic validation failure message functionality is implemented in
-        <classname>Zend_Validate_Abstract</classname>. To include this functionality when creating a
-        validation class, simply extend <classname>Zend_Validate_Abstract</classname>. In the
+        <classname>Zend\Validator\AbstractValidator</classname>. To include this functionality when creating a
+        validation class, simply extend <classname>Zend\Validator\AbstractValidator</classname>. In the
         extending class you would implement the <methodname>isValid()</methodname> method logic and
         define the message variables and message templates that correspond to the types of
         validation failures that can occur. If a value fails your validation tests, then
@@ -47,7 +47,7 @@
         determined.
     </para>
 
-    <example xml:id="zend.validate.writing_validators.example.simple"><title>Creating a Simple Validation Class</title>
+    <example xml:id="zend.validator.writing_validators.example.simple"><title>Creating a Simple Validation Class</title>
         
 
         <para>
@@ -57,20 +57,20 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-class MyValid_Float extends Zend_Validate_Abstract
+class MyValid\Float extends Zend\Validator\AbstractValidator
 {
     const FLOAT = 'float';
 
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::FLOAT => "'%value%' is not a floating point value"
     );
 
     public function isValid($value)
     {
-        $this->_setValue($value);
+        $this->setValue($value);
 
         if (!is_float($value)) {
-            $this->_error(self::FLOAT);
+            $this->error(self::FLOAT);
             return false;
         }
 
@@ -82,15 +82,15 @@ class MyValid_Float extends Zend_Validate_Abstract
         <para>
             The class defines a template for its single validation failure message, which includes
             the built-in magic parameter, <emphasis>%value%</emphasis>. The call to
-            <methodname>_setValue()</methodname> prepares the object to insert the tested value into
+            <methodname>setValue()</methodname> prepares the object to insert the tested value into
             the failure message automatically, should the value fail validation. The call to
-            <methodname>_error()</methodname> tracks a reason for validation failure. Since this
+            <methodname>error()</methodname> tracks a reason for validation failure. Since this
             class only defines one failure message, it is not necessary to provide
-            <methodname>_error()</methodname> with the name of the failure message template.
+            <methodname>error()</methodname> with the name of the failure message template.
         </para>
     </example>
 
-    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><title>Writing a Validation Class having Dependent Conditions</title>
+    <example xml:id="zend.validator.writing_validators.example.conditions.dependent"><title>Writing a Validation Class having Dependent Conditions</title>
         
 
         <para>
@@ -119,7 +119,7 @@ class MyValid_Float extends Zend_Validate_Abstract
         </para>
 
         <programlisting language="php"><![CDATA[
-class MyValid_NumericBetween extends Zend_Validate_Abstract
+class MyValid\NumericBetween extends Zend\Validator\AbstractValidator
 {
     const MSG_NUMERIC = 'msgNumeric';
     const MSG_MINIMUM = 'msgMinimum';
@@ -128,12 +128,12 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
     public $minimum = 0;
     public $maximum = 100;
 
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'min' => 'minimum',
         'max' => 'maximum'
     );
 
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::MSG_NUMERIC => "'%value%' is not numeric",
         self::MSG_MINIMUM => "'%value%' must be at least '%min%'",
         self::MSG_MAXIMUM => "'%value%' must be no more than '%max%'"
@@ -144,17 +144,17 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         $this->_setValue($value);
 
         if (!is_numeric($value)) {
-            $this->_error(self::MSG_NUMERIC);
+            $this->error(self::MSG_NUMERIC);
             return false;
         }
 
         if ($value < $this->minimum) {
-            $this->_error(self::MSG_MINIMUM);
+            $this->error(self::MSG_MINIMUM);
             return false;
         }
 
         if ($value > $this->maximum) {
-            $this->_error(self::MSG_MAXIMUM);
+            $this->error(self::MSG_MAXIMUM);
             return false;
         }
 
@@ -183,7 +183,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         </para>
     </example>
 
-    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><title>Validation with Independent Conditions, Multiple Reasons for Failure</title>
+    <example xml:id="zend.validator.writing_validators.example.conditions.independent"><title>Validation with Independent Conditions, Multiple Reasons for Failure</title>
         
 
         <para>
@@ -204,14 +204,14 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         </para>
 
         <programlisting language="php"><![CDATA[
-class MyValid_PasswordStrength extends Zend_Validate_Abstract
+class MyValid\PasswordStrength extends Zend\Validator\AbstractValidator
 {
     const LENGTH = 'length';
     const UPPER  = 'upper';
     const LOWER  = 'lower';
     const DIGIT  = 'digit';
 
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::LENGTH => "'%value%' must be at least 8 characters in length",
         self::UPPER  => "'%value%' must contain at least one uppercase letter",
         self::LOWER  => "'%value%' must contain at least one lowercase letter",
@@ -220,27 +220,27 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 
     public function isValid($value)
     {
-        $this->_setValue($value);
+        $this->setValue($value);
 
         $isValid = true;
 
         if (strlen($value) < 8) {
-            $this->_error(self::LENGTH);
+            $this->error(self::LENGTH);
             $isValid = false;
         }
 
         if (!preg_match('/[A-Z]/', $value)) {
-            $this->_error(self::UPPER);
+            $this->error(self::UPPER);
             $isValid = false;
         }
 
         if (!preg_match('/[a-z]/', $value)) {
-            $this->_error(self::LOWER);
+            $this->error(self::LOWER);
             $isValid = false;
         }
 
         if (!preg_match('/\d/', $value)) {
-            $this->_error(self::DIGIT);
+            $this->error(self::DIGIT);
             $isValid = false;
         }
 

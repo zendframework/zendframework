@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.int"><title>Int</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.int"><title>Int</title>
     
 
     <para>
-        <classname>Zend_Validate_Int</classname> validates if a given value is an integer. Also
+        <classname>Zend\Validator\Int</classname> validates if a given value is an integer. Also
         localized integer values are recognised and can be validated.
     </para>
 
-    <section xml:id="zend.validate.set.int.options"><title>Supported options for Zend_Validate_Int</title>
+    <section xml:id="zend.validator.set.int.options"><title>Supported options for Zend\Validator\Int</title>
         
 
         <para>
-            The following options are supported for <classname>Zend_Validate_Int</classname>:
+            The following options are supported for <classname>Zend\Validator\Int</classname>:
         </para>
 
         <itemizedlist>
@@ -24,7 +24,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.int.basic"><title>Simple integer validation</title>
+    <section xml:id="zend.validator.set.int.basic"><title>Simple integer validation</title>
         
 
         <para>
@@ -33,7 +33,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Int();
+$validator = new Zend\Validator\Int();
 
 $validator->isValid(1234);   // returns true
 $validator->isValid(1234.5); // returns false
@@ -46,7 +46,7 @@ $validator->isValid('1,234'); // returns true
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.int.localized"><title>Localized integer validation</title>
+    <section xml:id="zend.validator.set.int.localized"><title>Localized integer validation</title>
         
 
         <para>
@@ -57,13 +57,13 @@ $validator->isValid('1,234'); // returns true
         </para>
 
         <para>
-            <classname>Zend_Validate_Int</classname> is able to validate such notations. But it is
+            <classname>Zend\Validator\Int</classname> is able to validate such notations. But it is
             limited to the locale you set. This means that it not simply strips off the separator,
             it validates if the correct separator is used. See the following code:
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Int(array('locale' => 'de'));
+$validator = new Zend\Validator\Int(array('locale' => 'de'));
 
 $validator->isValid(1234); // returns true
 $validator->isValid("1,234"); // returns false

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.messages"><title>Validation Messages</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.messages"><title>Validation Messages</title>
 
 
     <para>
-        Each validator which is based on <classname>Zend_Validate</classname> provides
+        Each validator which is based on <interfacename>Zend\Validator\ValidatorInterface</interfacename> provides
         one or multiple messages in the case of a failed validation. You can use
         this information to set your own messages, or to translate existing messages which a
         validator could return to something different.
@@ -11,11 +11,11 @@
 
     <para>
         These validation messages are constants which can be found at top of each validator class.
-        Let's look into <classname>Zend_Validate_GreaterThan</classname> for an descriptive example:
+        Let's look into <classname>Zend\Validator\GreaterThan</classname> for an descriptive example:
     </para>
 
     <programlisting language="php"><![CDATA[
-protected $_messageTemplates = array(
+protected $messageTemplates = array(
     self::NOT_GREATER => "'%value%' is not greater than '%min%'",
 );
 ]]></programlisting>
@@ -32,7 +32,7 @@ protected $_messageTemplates = array(
     </para>
 
     <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_GreaterThan();
+$validator = new Zend\Validator\GreaterThan();
 $messages  = $validator->getMessageTemplates();
 ]]></programlisting>
 
@@ -42,10 +42,10 @@ $messages  = $validator->getMessageTemplates();
     </para>
 
     <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_GreaterThan();
+$validator = new Zend\Validator\GreaterThan();
 $validator->setMessage(
     'Please enter a lower value',
-    Zend_Validate_GreaterThan::NOT_GREATER
+    Zend\Validator\GreaterThan::NOT_GREATER
 );
 ]]></programlisting>
 
@@ -54,7 +54,7 @@ $validator->setMessage(
         parameter, then the given message will be set for all possible failures of this validator.
     </para>
 
-    <section xml:id="zend.validate.messages.pretranslated"><title>Using pre-translated validation messages</title>
+    <section xml:id="zend.validator.messages.pretranslated"><title>Using pre-translated validation messages</title>
 
 
         <para>
@@ -76,19 +76,19 @@ $validator->setMessage(
 
         <para>
             So to translate all validation messages to German for example, all you have to do is to
-            attach a translator to <classname>Zend_Validate</classname> using these resource files.
+            attach a translator to <classname>Zend\Validator\AbstractValidator</classname> using these resource files.
         </para>
 
         <programlisting language="php"><![CDATA[
-$translator = new Zend_Translator(
+$translator = new Zend\Translator\Tranlator(
     array(
         'adapter' => 'array',
         'content' => '/resources/languages',
         'locale'  => $language,
-        'scan' => Zend_Translator::LOCALE_DIRECTORY
+        'scan' => Zend\Translator\Tranlator::LOCALE_DIRECTORY
     )
 );
-Zend_Validate_Abstract::setDefaultTranslator($translator);
+Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
 ]]></programlisting>
 
         <note><title>Used translation adapter</title>
@@ -116,32 +116,32 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
         </note>
     </section>
 
-    <section xml:id="zend.validate.messages.limitation"><title>Limit the size of a validation message</title>
+    <section xml:id="zend.validator.messages.limitation"><title>Limit the size of a validation message</title>
 
 
         <para>
             Sometimes it is necessary to limit the maximum size a validation message can have.
             For example when your view allows a maximum size of 100 chars to be rendered on one
-            line. To simplify the usage, <classname>Zend_Validate</classname> is able to
+            line. To simplify the usage, <classname>Zend\Validator\AbstractValidator</classname> is able to
             automatically limit the maximum returned size of a validation message.
         </para>
 
         <para>
             To get the actual set size use
-            <methodname>Zend_Validate::getMessageLength()</methodname>. If it is -1, then the
+            <methodname>Zend\Validator\AbstractValidator::getMessageLength()</methodname>. If it is -1, then the
             returned message will not be truncated. This is default behaviour.
         </para>
 
         <para>
             To limit the returned message size use
-            <methodname>Zend_Validate::setMessageLength()</methodname>. Set it to any integer size
+            <methodname>Zend\Validator\AbstractValidator::setMessageLength()</methodname>. Set it to any integer size
             you need. When the returned message exceeds the set size, then the message
             will be truncated and the string '<emphasis>...</emphasis>' will be added instead of
             the rest of the message.
         </para>
 
         <programlisting language="php"><![CDATA[
-Zend_Validate::setMessageLength(100);
+Zend\Validator\AbstractValidator::setMessageLength(100);
 ]]></programlisting>
 
         <note><title>Where is this parameter used?</title>
@@ -149,7 +149,7 @@ Zend_Validate::setMessageLength(100);
 
             <para>
                 The set message length is used for all validators, even for self defined ones,
-                as long as they extend <classname>Zend_Validate_Abstract</classname>.
+                as long as they extend <classname>Zend\Validator\AbstractValidator</classname>.
             </para>
         </note>
     </section>

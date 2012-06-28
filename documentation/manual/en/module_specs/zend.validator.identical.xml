@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.identical"><title>Identical</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.identical"><title>Identical</title>
     
 
     <para>
-        <classname>Zend_Validate_Identical</classname> allows you to validate if a given value is
+        <classname>Zend\Validator\Identical</classname> allows you to validate if a given value is
         identical with an set haystack.
     </para>
 
-    <section xml:id="zend.validate.set.identical.options"><title>Supported options for Zend_Validate_Identical</title>
+    <section xml:id="zend.validator.set.identical.options"><title>Supported options for Zend\Validator\Identical</title>
         
 
         <para>
-            The following options are supported for <classname>Zend_Validate_Identical</classname>:
+            The following options are supported for <classname>Zend\Validator\Identical</classname>:
         </para>
 
         <itemizedlist>
@@ -31,7 +31,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.identical.basic"><title>Basic usage</title>
+    <section xml:id="zend.validator.set.identical.basic"><title>Basic usage</title>
         
 
         <para>
@@ -40,7 +40,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid = new Zend_Validate_Identical('origin');
+$valid = new Zend\Validator\Identical('origin');
 if ($valid->isValid($value) {
     return true;
 }
@@ -58,17 +58,17 @@ if ($valid->isValid($value) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.identical.types"><title>Identical objects</title>
+    <section xml:id="zend.validator.set.identical.types"><title>Identical objects</title>
         
 
         <para>
-            Of course <classname>Zend_Validate_Identical</classname> can not only validate strings,
+            Of course <classname>Zend\Validator\Identical</classname> can not only validate strings,
             but also any other variable type like Boolean, Integer, Float, Array or even Objects.
             As already noted Haystack and Value must be identical.
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid = new Zend_Validate_Identical(123);
+$valid = new Zend\Validator\Identical(123);
 if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
@@ -88,11 +88,11 @@ if ($valid->isValid($input)) {
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.identical.formelements"><title>Form elements</title>
+    <section xml:id="zend.validator.set.identical.formelements"><title>Form elements</title>
         
 
         <para>
-            <classname>Zend_Validate_Identical</classname> supports also the comparison of form
+            <classname>Zend\Validator\Identical</classname> supports also the comparison of form
             elements. This can be done by using the element's name as <property>token</property>.
             See the following example:
         </para>
@@ -114,17 +114,17 @@ $form->addElement('password', 'elementTwo', array(
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.identical.strict"><title>Strict validation</title>
+    <section xml:id="zend.validator.set.identical.strict"><title>Strict validation</title>
         
 
         <para>
-            As mentioned before <classname>Zend_Validate_Identical</classname> validates tokens
+            As mentioned before <classname>Zend\Validator\Identical</classname> validates tokens
             strict. You can change this behaviour by using the <property>strict</property> option.
             The default value for this property is <constant>TRUE</constant>.
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid = new Zend_Validate_Identical(array('token' => 123, 'strict' => FALSE));
+$valid = new Zend\Validator\Identical(array('token' => 123, 'strict' => FALSE));
 $input = '123';
 if ($valid->isValid($input)) {
     // input appears to be valid
@@ -140,18 +140,18 @@ if ($valid->isValid($input)) {
         </para>
 
         <para>
-            For convinience you can also use <methodname>setStrict()</methodname> and
+            For convenience you can also use <methodname>setStrict()</methodname> and
             <methodname>getStrict()</methodname>.
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.identical.configuration"><title>Configuration</title>
+    <section xml:id="zend.validator.set.identical.configuration"><title>Configuration</title>
         
 
         <para>
-            As all other validators also <classname>Zend_Validate_Identical</classname> supports
+            As all other validators also <classname>Zend\Validator\Identical</classname> supports
             the usage of configuration settings as input parameter. This means that you can
-            configure this validator with an <classname>Zend_Config</classname> object.
+            configure this validator with an <classname>Traversable</classname> instance.
         </para>
 
         <para>
@@ -161,7 +161,7 @@ if ($valid->isValid($input)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid = new Zend_Validate_Identical(array('token' => 123));
+$valid = new Zend\Validator\Identical(array('token' => 123));
 if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
@@ -181,7 +181,7 @@ if ($valid->isValid($input)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid = new Zend_Validate_Identical(array('token' => array('token' => 123)));
+$valid = new Zend\Validator\Identical(array('token' => array('token' => 123)));
 if ($valid->isValid($input)) {
     // input appears to be valid
 } else {

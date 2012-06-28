@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.callback"><title>Callback</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.callback"><title>Callback</title>
     
 
     <para>
-        <classname>Zend_Validate_Callback</classname> allows you to provide a callback with which to
+        <classname>Zend\Validator\Callback</classname> allows you to provide a callback with which to
         validate a given value.
     </para>
 
-    <section xml:id="zend.validate.set.callback.options"><title>Supported options for Zend_Validate_Callback</title>
+    <section xml:id="zend.validator.set.callback.options"><title>Supported options for Zend\Validator\Callback</title>
         
 
         <para>
-            The following options are supported for <classname>Zend_Validate_Callback</classname>:
+            The following options are supported for <classname>Zend\Validator\Callback</classname>:
         </para>
 
         <itemizedlist>
@@ -31,7 +31,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.callback.basic"><title>Basic usage</title>
+    <section xml:id="zend.validator.set.callback.basic"><title>Basic usage</title>
         
 
         <para>
@@ -48,12 +48,12 @@ function myMethod($value)
 ]]></programlisting>
 
         <para>
-            To use it within <classname>Zend_Validate_Callback</classname> you just have to call it
+            To use it within <classname>Zend\Validator\Callback</classname> you just have to call it
             this way:
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid = new Zend_Validate_Callback('myMethod');
+$valid = new Zend\Validator\Callback('myMethod');
 if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
@@ -62,18 +62,18 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.callback.closure"><title>Usage with closures</title>
+    <section xml:id="zend.validator.set.callback.closure"><title>Usage with closures</title>
         
 
         <para>
             <acronym>PHP</acronym> 5.3 introduces <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/functions.anonymous">closures</link>, which are basically
             self-contained or <emphasis>anonymous</emphasis> functions. <acronym>PHP</acronym>
             considers closures another form of callback, and, as such, may be used with
-            <classname>Zend_Validate_Callback</classname>. As an example:
+            <classname>Zend\Validator\Callback</classname>. As an example:
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid = new Zend_Validate_Callback(function($value){
+$valid = new Zend\Validator\Callback(function($value){
     // some validation
     return true;
 });
@@ -86,7 +86,7 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.callback.class"><title>Usage with class-based callbacks</title>
+    <section xml:id="zend.validator.set.callback.class"><title>Usage with class-based callbacks</title>
         
 
         <para>
@@ -112,7 +112,7 @@ class MyClass
 
         <programlisting language="php"><![CDATA[
 $object = new MyClass;
-$valid = new Zend_Validate_Callback(array($object, 'myMethod'));
+$valid = new Zend\Validator\Callback(array($object, 'myMethod'));
 if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
@@ -135,7 +135,7 @@ class MyClass
     }
 }
 
-$valid = new Zend_Validate_Callback(array('MyClass', 'test'));
+$valid = new Zend\Validator\Callback(array('MyClass', 'test'));
 if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
@@ -160,7 +160,7 @@ class MyClass
 }
 
 $object = new MyClass();
-$valid = new Zend_Validate_Callback($object);
+$valid = new Zend\Validator\Callback($object);
 if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
@@ -169,11 +169,11 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.callback.options2"><title>Adding options</title>
+    <section xml:id="zend.validator.set.callback.options2"><title>Adding options</title>
         
 
         <para>
-            <classname>Zend_Validate_Callback</classname> also allows the usage of options which
+            <classname>Zend\Validator\Callback</classname> also allows the usage of options which
             are provided as additional arguments to the callback.
         </para>
 
@@ -203,7 +203,7 @@ class MyClass
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid = new Zend_Validate_Callback(array(
+$valid = new Zend\Validator\Callback(array(
     'callback' => array('MyClass', 'myMethod'),
     'options'  => $option,
 ));
@@ -220,7 +220,7 @@ if ($valid->isValid($input)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid = new Zend_Validate_Callback(array('MyClass', 'myMethod'));
+$valid = new Zend\Validator\Callback(array('MyClass', 'myMethod'));
 $valid->setOptions($option);
 
 if ($valid->isValid($input)) {
@@ -236,7 +236,7 @@ if ($valid->isValid($input)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$valid = new Zend_Validate_Callback(array('MyClass', 'myMethod'));
+$valid = new Zend\Validator\Callback(array('MyClass', 'myMethod'));
 $valid->setOptions($option);
 
 if ($valid->isValid($input, $additional)) {

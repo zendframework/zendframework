@@ -20,8 +20,8 @@
  */
 
 namespace Zend\Dojo\Form\Element;
-use Zend\Form,
-    Zend\Form\Element\Exception;;
+use Zend\Form;
+use Zend\Form\Element\Exception;;
 
 /**
  * DateTextBox dijit

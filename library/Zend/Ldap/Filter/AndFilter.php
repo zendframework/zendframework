@@ -30,7 +30,7 @@ namespace Zend\Ldap\Filter;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AndFilter extends LogicalFilter
+class AndFilter extends AbstractLogicalFilter
 {
     /**
      * Creates an 'and' grouping filter.

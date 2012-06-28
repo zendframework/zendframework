@@ -21,8 +21,8 @@
 
 namespace Zend\Config\Reader;
 
-use XMLReader,
-    Zend\Config\Exception;
+use XMLReader;
+use Zend\Config\Exception;
 
 /**
  * XML config reader.

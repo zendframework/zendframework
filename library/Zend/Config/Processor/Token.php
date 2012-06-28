@@ -20,10 +20,10 @@
 
 namespace Zend\Config\Processor;
 
-use Zend\Config\Config,
-    Zend\Config\Exception,
-    Traversable,
-    ArrayObject;
+use Zend\Config\Config;
+use Zend\Config\Exception;
+use Traversable;
+use ArrayObject;
 
 /**
  * @category   Zend

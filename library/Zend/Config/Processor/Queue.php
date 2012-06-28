@@ -20,9 +20,9 @@
 
 namespace Zend\Config\Processor;
 
-use Zend\Config\Config,
-    Zend\Config\Exception\InvalidArgumentException,
-    Zend\Stdlib\PriorityQueue;
+use Zend\Config\Config;
+use Zend\Config\Exception\InvalidArgumentException;
+use Zend\Stdlib\PriorityQueue;
 
 /**
  * @category   Zend

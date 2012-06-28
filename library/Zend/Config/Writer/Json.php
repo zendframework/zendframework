@@ -20,8 +20,8 @@
 
 namespace Zend\Config\Writer;
 
-use Zend\Config\Exception,
-    Zend\Json\Json as JsonFormat;
+use Zend\Config\Exception;
+use Zend\Json\Json as JsonFormat;
 /**
  * @category   Zend
  * @package    Zend_Config

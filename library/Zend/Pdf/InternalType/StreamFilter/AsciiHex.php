@@ -10,8 +10,8 @@
 
 namespace Zend\Pdf\InternalType\StreamFilter;
 
-use Zend\Pdf\Exception,
-    Zend\Pdf;
+use Zend\Pdf\Exception;
+use Zend\Pdf;
 
 /**
  * AsciiHex stream filter

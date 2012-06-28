@@ -11,9 +11,9 @@
 namespace Zend\Pdf;
 use Zend\Pdf\Exception;
 
-use Zend\Pdf\ObjectFactory\UpdateInfoContainer,
-    Zend\Pdf,
-    Zend\Pdf\InternalType;
+use Zend\Pdf\ObjectFactory\UpdateInfoContainer;
+use Zend\Pdf;
+use Zend\Pdf\InternalType;
 
 /**
  * PDF element factory.

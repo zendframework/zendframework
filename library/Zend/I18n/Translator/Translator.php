@@ -23,6 +23,7 @@ namespace Zend\I18n\Translator;
 
 use Locale;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\I18n\Exception;
 
 /**
  * Translator.
@@ -215,12 +216,13 @@ class Translator
     /**
      * Translate a plural message.
      *
-     * @param  type $singular
-     * @param  type $plural
-     * @param  type $number
-     * @param  type $textDomain
-     * @param  type $locale
+     * @param  string $singular
+     * @param  string $plural
+     * @param  int    $number
+     * @param  string $textDomain
+     * @param  string $locale
      * @return string
+     * @throws Exception\OutOfBoundsException
      */
     public function translatePlural(
         $singular,
@@ -230,7 +232,7 @@ class Translator
         $locale = null
     ) {
         $locale      = $locale ?: $this->getLocale();
-        $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
+        $translation = $this->getTranslatedMessage($singular, $locale, $textDomain);
 
         if ($translation === null || $translation === '') {
             if (null !== ($fallbackLocale = $this->getFallbackLocale()) 
@@ -371,9 +373,7 @@ class Translator
         // Try to load from pattern
         if (isset($this->patterns[$textDomain])) {
             foreach ($this->patterns[$textDomain] as $pattern) {
-                $filename = $pattern['baseDir'] . '/'
-                          . sprintf($pattern['pattern'], $locale);
-
+                $filename = $pattern['baseDir'] . '/' . sprintf($pattern['pattern'], $locale);
                 if (is_file($filename)) {
                     $this->messages[$textDomain][$locale] = $this->getPluginManager()
                          ->get($pattern['type'])

@@ -73,6 +73,7 @@ class Rule
      *
      * @param  integer $number
      * @return integer
+     * @throws Exception\RangeException
      */
     public function evaluate($number)
     {
@@ -94,6 +95,7 @@ class Rule
      * @param  array   $ast
      * @param  integer $number
      * @return integer
+     * @throws Exception\ParseException
      */
     protected function evaluateAstPart(array $ast, $number)
     {

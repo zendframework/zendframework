@@ -278,6 +278,7 @@ class Parser
      *
      * @param  string $id
      * @return void
+     * @throws Exception\ParseException
      */
     public function advance($id = null)
     {
@@ -295,6 +296,7 @@ class Parser
      * Get the next token.
      *
      * @return array
+     * @throws Exception\ParseException
      */
     protected function getNextToken()
     {

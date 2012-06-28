@@ -22,6 +22,7 @@
 namespace Zend\I18n\Translator\Plural;
 
 use Closure;
+use Zend\I18n\Exception;
 
 /**
  * Parser symbol.
@@ -154,6 +155,7 @@ class Symbol
             ));
         }
 
+        /** @var callable $function  */
         $function = $this->nullDenotationGetter;
         return $function($this);
     }
@@ -172,6 +174,7 @@ class Symbol
             ));
         }
 
+        /** @var callable $function  */
         $function = $this->leftDenotationGetter;
         return $function($this, $left);
     }

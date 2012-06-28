@@ -20,9 +20,9 @@
  */
 
 namespace ZendTest\Measure\Flow;
-use Zend\Measure,
-    Zend\Measure\Flow,
-    ZendTest\Measure\CommonTestCase;
+use Zend\Measure;
+use Zend\Measure\Flow;
+use ZendTest\Measure\CommonTestCase;
 
 
 /**

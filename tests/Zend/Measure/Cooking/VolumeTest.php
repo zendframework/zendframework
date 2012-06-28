@@ -20,9 +20,9 @@
  */
 
 namespace ZendTest\Measure\Cooking;
-use Zend\Measure,
-    Zend\Measure\Cooking,
-    ZendTest\Measure\CommonTestCase;
+use Zend\Measure;
+use Zend\Measure\Cooking;
+use ZendTest\Measure\CommonTestCase;
 
 /**
  * @category   Zend

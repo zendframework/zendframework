@@ -79,13 +79,13 @@ class ModuleManager implements ModuleManagerInterface
             return $this;
         }
 
-        $this->events()->trigger(__FUNCTION__ . '.pre', $this, $this->getEvent());
+        $this->getEventManager()->trigger(__FUNCTION__ . '.pre', $this, $this->getEvent());
 
         foreach ($this->getModules() as $moduleName) {
             $this->loadModule($moduleName);
         }
 
-        $this->events()->trigger(__FUNCTION__ . '.post', $this, $this->getEvent());
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, $this->getEvent());
 
         $this->modulesAreLoaded = true;
         return $this;
@@ -108,7 +108,7 @@ class ModuleManager implements ModuleManagerInterface
         $event = $this->getEvent();
         $event->setModuleName($moduleName);
 
-        $result = $this->events()->trigger(__FUNCTION__ . '.resolve', $this, $event, function ($r) {
+        $result = $this->getEventManager()->trigger(__FUNCTION__ . '.resolve', $this, $event, function ($r) {
             return (is_object($r));
         });
 
@@ -122,7 +122,7 @@ class ModuleManager implements ModuleManagerInterface
         }
         $event->setModule($module);
 
-        $this->events()->trigger(__FUNCTION__, $this, $event);
+        $this->getEventManager()->trigger(__FUNCTION__, $this, $event);
         $this->loadedModules[$moduleName] = $module;
         return $module;
     }
@@ -233,7 +233,7 @@ class ModuleManager implements ModuleManagerInterface
      *
      * @return EventManagerInterface
      */
-    public function events()
+    public function getEventManager()
     {
         if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());

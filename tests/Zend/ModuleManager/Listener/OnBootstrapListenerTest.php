@@ -57,9 +57,9 @@ class OnBootstrapListenerTest extends TestCase
 
         $sharedEvents = new SharedEventManager();
         $this->moduleManager = new ModuleManager(array());
-        $this->moduleManager->events()->setSharedManager($sharedEvents);
-        $this->moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
-        $this->moduleManager->events()->attach('loadModule', new OnBootstrapListener, 1000);
+        $this->moduleManager->getEventManager()->setSharedManager($sharedEvents);
+        $this->moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $this->moduleManager->getEventManager()->attach('loadModule', new OnBootstrapListener, 1000);
 
         $this->application = new MockApplication;
         $events            = new EventManager(array('Zend\Mvc\Application', 'ZendTest\Module\TestAsset\MockApplication', 'application'));

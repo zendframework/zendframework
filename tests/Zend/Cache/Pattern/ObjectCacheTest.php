@@ -118,7 +118,7 @@ class ObjectCacheTest extends CommonPatternTest
 
         $generatedKey = $this->_pattern->generateKey('emptyMethod', $args);
         $usedKey      = null;
-        $this->_options->getStorage()->events()->attach('setItem.pre', function ($event) use (&$usedKey) {
+        $this->_options->getStorage()->getEventManager()->attach('setItem.pre', function ($event) use (&$usedKey) {
             $params = $event->getParams();
             $usedKey = $params['key'];
         });

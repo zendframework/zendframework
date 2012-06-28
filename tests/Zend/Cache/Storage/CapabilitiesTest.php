@@ -92,7 +92,7 @@ class CapabilitiesTest extends \PHPUnit_Framework_TestCase
 
     public function testTriggerCapabilityEvent()
     {
-        $em    = $this->_capabilities->getAdapter()->events();
+        $em    = $this->_capabilities->getAdapter()->getEventManager();
         $event = null;
         $em->attach('capability', function ($eventArg) use (&$event) {
             $event = $eventArg;

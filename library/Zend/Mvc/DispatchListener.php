@@ -95,7 +95,7 @@ class DispatchListener implements ListenerAggregateInterface
         $routeMatch       = $e->getRouteMatch();
         $controllerName   = $routeMatch->getParam('controller', 'not-found');
         $application      = $e->getApplication();
-        $events           = $application->events();
+        $events           = $application->getEventManager();
         $controllerLoader = $application->getServiceManager()->get('ControllerLoader');
 
         $exception = false;

@@ -165,7 +165,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
      * 
      * @return EventManagerInterface
      */
-    public function events()
+    public function getEventManager()
     {
         if (null === $this->events) {
             $this->setEventManager(new EventManager());
@@ -255,7 +255,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
         $formSpec['elements']   = array();
         $formSpec['fieldsets']  = array();
 
-        $events = $this->events();
+        $events = $this->getEventManager();
         foreach ($annotations as $annotation) {
             $events->trigger(__FUNCTION__, $this, array(
                 'annotation' => $annotation, 
@@ -285,7 +285,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
             return;
         }
 
-        $events = $this->events();
+        $events = $this->getEventManager();
         $name   = $this->discoverName($annotations, $reflection);
 
         $elementSpec = new ArrayObject(array(
@@ -341,7 +341,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
      */
     protected function discoverName($annotations, $reflection)
     {
-        $results = $this->events()->trigger('discoverName', $this, array(
+        $results = $this->getEventManager()->trigger('discoverName', $this, array(
             'annotations' => $annotations,
             'reflection'  => $reflection,
         ), function ($r) {
@@ -358,7 +358,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
      */
     protected function checkForExclude($annotations)
     {
-        $results = $this->events()->trigger('checkForExclude', $this, array(
+        $results = $this->getEventManager()->trigger('checkForExclude', $this, array(
             'annotations' => $annotations,
         ), function ($r) {
             return (true === $r);

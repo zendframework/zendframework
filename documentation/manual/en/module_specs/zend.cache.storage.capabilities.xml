@@ -562,7 +562,7 @@ $cache = StorageFactory::adapterFactory('filesystem', array(
 $capabilities = $cache->getCapabilities();
 
 // Catching the change event
-$capabilities->events()->attach('change', function() {
+$capabilities->getEventManager()->attach('change', function() {
     echo 'Capabilities changed';
 });
 

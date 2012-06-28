@@ -83,7 +83,7 @@ class RouteListener implements ListenerAggregateInterface
         if (!$routeMatch instanceof Router\RouteMatch) {
             $e->setError($target::ERROR_ROUTER_NO_MATCH);
 
-            $results = $target->events()->trigger('dispatch.error', $e);
+            $results = $target->getEventManager()->trigger('dispatch.error', $e);
             if (count($results)) {
                 $return  = $results->last();
             } else {

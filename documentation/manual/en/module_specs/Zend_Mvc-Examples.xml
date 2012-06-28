@@ -148,7 +148,7 @@ class Module
 
         $listeners   = new Listeners\ViewListener();
         $listeners->setView($view);
-        $application->events()->attachAggregate($listeners);
+        $application->getEventManager()->attachAggregate($listeners);
     }
 }
 ]]></programlisting>

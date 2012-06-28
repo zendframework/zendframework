@@ -82,7 +82,7 @@ class ModuleManagerTest extends TestCase
     public function testEventManagerIdentifiers()
     {
         $moduleManager = new ModuleManager(array());
-        $identifiers = $moduleManager->events()->getIdentifiers();
+        $identifiers = $moduleManager->getEventManager()->getIdentifiers();
         $expected    = array('Zend\ModuleManager\ModuleManager', 'module_manager');
         $this->assertEquals($expected, array_values($identifiers));
     }
@@ -91,7 +91,7 @@ class ModuleManagerTest extends TestCase
     {
         $configListener = $this->defaultListeners->getConfigListener();
         $moduleManager  = new ModuleManager(array('SomeModule'), new EventManager);
-        $moduleManager->events()->attachAggregate($this->defaultListeners);
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
@@ -103,7 +103,7 @@ class ModuleManagerTest extends TestCase
     {
         $configListener = $this->defaultListeners->getConfigListener();
         $moduleManager  = new ModuleManager(array('BarModule', 'BazModule'));
-        $moduleManager->events()->attachAggregate($this->defaultListeners);
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('BarModule\Module', $loadedModules['BarModule']);
@@ -119,7 +119,7 @@ class ModuleManagerTest extends TestCase
     public function testModuleLoadingBehavior()
     {
         $moduleManager = new ModuleManager(array('BarModule'));
-        $moduleManager->events()->attachAggregate($this->defaultListeners);
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $modules = $moduleManager->getLoadedModules();
         $this->assertSame(0, count($modules));
         $modules = $moduleManager->getLoadedModules(true);

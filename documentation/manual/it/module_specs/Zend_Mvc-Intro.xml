@@ -489,7 +489,7 @@ use Zend\Module\Manager as ModuleManager;
 $moduleManager = new ModuleManager(
     $moduleConfig['modules']
 );
-$moduleManager->events()->attachAggregate($defaultListeners);
+$moduleManager->getEventManager()->attachAggregate($defaultListeners);
 ]]></programlisting>
 
       <para>

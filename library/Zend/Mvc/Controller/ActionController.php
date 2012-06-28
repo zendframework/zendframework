@@ -112,7 +112,7 @@ abstract class ActionController implements
           ->setResponse($response)
           ->setTarget($this);
 
-        $result = $this->events()->trigger(MvcEvent::EVENT_DISPATCH, $e, function($test) {
+        $result = $this->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH, $e, function($test) {
             return ($test instanceof Response);
         });
 
@@ -202,7 +202,7 @@ abstract class ActionController implements
      *
      * @return EventManagerInterface
      */
-    public function events()
+    public function getEventManager()
     {
         if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
@@ -332,7 +332,7 @@ abstract class ActionController implements
      */
     protected function attachDefaultListeners()
     {
-        $events = $this->events();
+        $events = $this->getEventManager();
         $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'execute'));
     }
 

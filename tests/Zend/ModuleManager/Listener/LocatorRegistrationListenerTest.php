@@ -60,8 +60,8 @@ class LocatorRegistrationTest extends TestCase
         $this->sharedEvents = new SharedEventManager();
 
         $this->moduleManager = new ModuleManager(array('ListenerTestModule'));
-        $this->moduleManager->events()->setSharedManager($this->sharedEvents);
-        $this->moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $this->moduleManager->getEventManager()->setSharedManager($this->sharedEvents);
+        $this->moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
 
         $this->application = new MockApplication;
         $events            = new EventManager(array('Zend\Mvc\Application', 'ZendTest\Module\TestAsset\MockApplication', 'application'));
@@ -103,9 +103,9 @@ class LocatorRegistrationTest extends TestCase
         });
 
         $locatorRegistrationListener = new LocatorRegistrationListener;
-        $this->moduleManager->events()->attachAggregate($locatorRegistrationListener);
+        $this->moduleManager->getEventManager()->attachAggregate($locatorRegistrationListener);
         $test = $this;
-        $this->moduleManager->events()->attach('loadModule', function ($e) use ($test) {
+        $this->moduleManager->getEventManager()->attach('loadModule', function ($e) use ($test) {
             $test->module = $e->getModule();
         }, -1000);
         $this->moduleManager->loadModules();

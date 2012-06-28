@@ -10,10 +10,10 @@
 
 namespace ZendTest\Memory;
 
-use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
-    Zend\Memory,
-    Zend\Memory\Container;
+use Zend\Cache\StorageFactory as CacheFactory;
+use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
+use Zend\Memory;
+use Zend\Memory\Container;
 
 /**
  * @category   Zend

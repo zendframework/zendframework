@@ -10,8 +10,8 @@
 
 namespace Zend\Memory;
 
-use ArrayAccess,
-    Countable;
+use ArrayAccess;
+use Countable;
 
 /**
  * String value object

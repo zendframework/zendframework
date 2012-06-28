@@ -12,9 +12,9 @@ namespace Zend\Memory;
 
 use Zend\Cache\Storage\ClearByNamespaceInterface;
 
-use Zend\Cache\Storage\StorageInterface as CacheStorage,
-    Zend\Cache\Storage\ClearByNamespaceInterface as ClearByNamespaceCacheStorage,
-    Zend\Cache\Storage\FlushableInterface as FlushableCacheStorage;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\Cache\Storage\ClearByNamespaceInterface as ClearByNamespaceCacheStorage;
+use Zend\Cache\Storage\FlushableInterface as FlushableCacheStorage;
 
 /**
  * Memory manager

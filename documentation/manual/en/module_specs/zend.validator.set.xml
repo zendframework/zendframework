@@ -2,7 +2,7 @@
 
 
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set"><title>Standard Validation Classes</title>
-    
+
 
     <para>
         Zend Framework comes with a standard set of validation classes, which are ready for you to
@@ -17,7 +17,7 @@
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.creditCard.xml"/>
 
     <section xml:id="zend.validator.set.ccnum"><title>Ccnum</title>
-        
+
 
         <note>
             <para>
@@ -47,5 +47,6 @@
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.postCode.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.regex.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.sitemap.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.step.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.stringLength.xml"/>
 </section>

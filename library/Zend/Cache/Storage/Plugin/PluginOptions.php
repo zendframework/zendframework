@@ -10,10 +10,10 @@
 
 namespace Zend\Cache\Storage\Plugin;
 
-use Zend\Cache\Exception,
-    Zend\Serializer\Adapter\AdapterInterface as SerializerAdapter,
-    Zend\Serializer\Serializer as SerializerFactory,
-    Zend\Stdlib\AbstractOptions;
+use Zend\Cache\Exception;
+use Zend\Serializer\Adapter\AdapterInterface as SerializerAdapter;
+use Zend\Serializer\Serializer as SerializerFactory;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * @category   Zend

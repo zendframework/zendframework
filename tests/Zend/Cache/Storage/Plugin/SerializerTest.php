@@ -9,11 +9,11 @@
  */
 
 namespace ZendTest\Cache\Storage\Plugin;
-use Zend\Cache,
-    Zend\Cache\Storage\Event,
-    Zend\Cache\Storage\PostEvent,
-    Zend\Serializer,
-    ArrayObject;
+use Zend\Cache;
+use Zend\Cache\Storage\Event;
+use Zend\Cache\Storage\PostEvent;
+use Zend\Serializer;
+use ArrayObject;
 
 /**
  * @category   Zend

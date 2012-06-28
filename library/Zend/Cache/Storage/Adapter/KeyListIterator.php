@@ -10,10 +10,10 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use Countable,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\IteratorInterface,
-    Zend\Cache\Storage\StorageInterface;
+use Countable;
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\IteratorInterface;
+use Zend\Cache\Storage\StorageInterface;
 
 /**
  * @category   Zend

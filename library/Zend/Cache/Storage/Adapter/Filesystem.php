@@ -10,24 +10,24 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject,
-    GlobIterator,
-    stdClass,
-    Exception as BaseException,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage,
-    Zend\Cache\Storage\StorageInterface,
-    Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\ClearExpiredInterface,
-    Zend\Cache\Storage\ClearByNamespaceInterface,
-    Zend\Cache\Storage\ClearByPrefixInterface,
-    Zend\Cache\Storage\FlushableInterface,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\AvailableSpaceCapableInterface,
-    Zend\Cache\Storage\OptimizableInterface,
-    Zend\Cache\Storage\TaggableInterface,
-    Zend\Cache\Storage\TotalSpaceCapableInterface,
-    Zend\Stdlib\ErrorHandler;
+use ArrayObject;
+use GlobIterator;
+use stdClass;
+use Exception as BaseException;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage;
+use Zend\Cache\Storage\StorageInterface;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\ClearExpiredInterface;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
+use Zend\Cache\Storage\ClearByPrefixInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
+use Zend\Cache\Storage\OptimizableInterface;
+use Zend\Cache\Storage\TaggableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend

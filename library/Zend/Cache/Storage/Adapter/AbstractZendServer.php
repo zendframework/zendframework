@@ -10,10 +10,10 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject,
-    stdClass,
-    Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Exception;
+use ArrayObject;
+use stdClass;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Exception;
 
 /**
  * @category   Zend

@@ -10,13 +10,13 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage\ClearByNamespaceInterface,
-    Zend\Cache\Storage\FlushableInterface,
-    Zend\Cache\Storage\AvailableSpaceCapableInterface,
-    Zend\Cache\Storage\TotalSpaceCapableInterface,
-    Zend\Stdlib\ErrorHandler;
+use ArrayObject;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend

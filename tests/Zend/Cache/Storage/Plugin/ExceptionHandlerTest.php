@@ -9,10 +9,10 @@
  */
 
 namespace ZendTest\Cache\Storage\Plugin;
-use Zend\Cache,
-    Zend\Cache\Storage\ExceptionEvent,
-    ZendTest\Cache\Storage\TestAsset\MockAdapter,
-    ArrayObject;
+use Zend\Cache;
+use Zend\Cache\Storage\ExceptionEvent;
+use ZendTest\Cache\Storage\TestAsset\MockAdapter;
+use ArrayObject;
 
 class ExceptionHandlerTest extends CommonPluginTest
 {

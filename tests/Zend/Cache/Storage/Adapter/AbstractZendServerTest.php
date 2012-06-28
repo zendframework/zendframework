@@ -10,9 +10,9 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
-use Zend\Cache\Storage\StorageInterface,
-    Zend\Cache\Storage\Adapter\AdapterOptions,
-    Zend\Cache\Storage\Adapter\AbstractZendServer;
+use Zend\Cache\Storage\StorageInterface;
+use Zend\Cache\Storage\Adapter\AdapterOptions;
+use Zend\Cache\Storage\Adapter\AbstractZendServer;
 
 /**
  * @category   Zend

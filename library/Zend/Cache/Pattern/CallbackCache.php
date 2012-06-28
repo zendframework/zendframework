@@ -10,8 +10,8 @@
 
 namespace Zend\Cache\Pattern;
 
-use Zend\Cache\Exception,
-    Zend\Cache\StorageFactory;
+use Zend\Cache\Exception;
+use Zend\Cache\StorageFactory;
 
 /**
  * @category   Zend

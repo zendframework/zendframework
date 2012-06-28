@@ -10,19 +10,19 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject,
-    SplObjectStorage,
-    stdClass,
-    Traversable,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\Event,
-    Zend\Cache\Storage\ExceptionEvent,
-    Zend\Cache\Storage\PostEvent,
-    Zend\Cache\Storage\Plugin,
-    Zend\Cache\Storage\StorageInterface,
-    Zend\EventManager\EventManager,
-    Zend\EventManager\EventsCapableInterface;
+use ArrayObject;
+use SplObjectStorage;
+use stdClass;
+use Traversable;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\Event;
+use Zend\Cache\Storage\ExceptionEvent;
+use Zend\Cache\Storage\PostEvent;
+use Zend\Cache\Storage\Plugin;
+use Zend\Cache\Storage\StorageInterface;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\EventsCapableInterface;
 
 /**
  * @category   Zend

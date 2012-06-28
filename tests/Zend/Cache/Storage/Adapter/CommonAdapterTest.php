@@ -10,6 +10,7 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
+<<<<<<< HEAD
 use Zend\Http\Header\Expires;
 
 use Zend\Cache\Storage\IterableInterface,
@@ -23,6 +24,19 @@ use Zend\Cache\Storage\IterableInterface,
     Zend\Cache\Storage\TagableInterface,
     Zend\Cache,
     Zend\Stdlib\ErrorHandler;
+=======
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\IteratorInterface;
+use Zend\Cache\Storage\StorageInterface;
+use Zend\Cache\Storage\ClearExpiredInterface;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
+use Zend\Cache\Storage\ClearByPrefixInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\OptimizableInterface;
+use Zend\Cache\Storage\TagableInterface;
+use Zend\Cache;
+use Zend\Stdlib\ErrorHandler;
+>>>>>>> aeee67a... Fix use statements in Zend\Cache
 
 /**
  * PHPUnit test case

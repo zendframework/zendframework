@@ -9,10 +9,10 @@
  */
 
 namespace ZendTest\Cache\Storage\Plugin;
-use Zend\Cache,
-    Zend\Cache\Storage\PostEvent,
-    ZendTest\Cache\Storage\TestAsset\ClearExpiredMockAdapter,
-    ArrayObject;
+use Zend\Cache;
+use Zend\Cache\Storage\PostEvent;
+use ZendTest\Cache\Storage\TestAsset\ClearExpiredMockAdapter;
+use ArrayObject;
 
 class ClearExpiredByFactorTest extends CommonPluginTest
 {

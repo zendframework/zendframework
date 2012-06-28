@@ -10,17 +10,17 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject,
-    stdClass,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\ClearExpiredInterface,
-    Zend\Cache\Storage\ClearByPrefixInterface,
-    Zend\Cache\Storage\FlushableInterface,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\TaggableInterface,
-    Zend\Cache\Storage\AvailableSpaceCapableInterface,
-    Zend\Cache\Storage\TotalSpaceCapableInterface;
+use ArrayObject;
+use stdClass;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\ClearExpiredInterface;
+use Zend\Cache\Storage\ClearByPrefixInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\TaggableInterface;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
 
 /**
  * @category   Zend

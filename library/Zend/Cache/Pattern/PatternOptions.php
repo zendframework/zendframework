@@ -10,10 +10,10 @@
 
 namespace Zend\Cache\Pattern;
 
-use Zend\Cache\Exception,
-    Zend\Cache\StorageFactory,
-    Zend\Cache\Storage\StorageInterface as Storage,
-    Zend\Stdlib\AbstractOptions;
+use Zend\Cache\Exception;
+use Zend\Cache\StorageFactory;
+use Zend\Cache\Storage\StorageInterface as Storage;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * @category   Zend

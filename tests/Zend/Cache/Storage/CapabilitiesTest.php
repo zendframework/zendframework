@@ -10,8 +10,8 @@
 
 namespace ZendTest\Cache\Storage;
 
-use Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\Adapter\Memory as MemoryAdapter;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\Adapter\Memory as MemoryAdapter;
 
 /**
  * @category   Zend

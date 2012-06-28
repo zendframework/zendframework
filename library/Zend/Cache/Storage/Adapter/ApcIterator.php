@@ -10,9 +10,9 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use APCIterator as BaseApcIterator,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\IteratorInterface;
+use APCIterator as BaseApcIterator;
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\IteratorInterface;
 
 /**
  * @category   Zend

@@ -10,13 +10,13 @@
 
 namespace Zend\Cache\Storage\Plugin;
 
-use stdClass,
-    Traversable,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\Event,
-    Zend\Cache\Storage\PostEvent,
-    Zend\EventManager\EventManagerInterface;
+use stdClass;
+use Traversable;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\Event;
+use Zend\Cache\Storage\PostEvent;
+use Zend\EventManager\EventManagerInterface;
 
 /**
  * @category   Zend

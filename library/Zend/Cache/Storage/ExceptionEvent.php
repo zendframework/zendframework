@@ -10,8 +10,8 @@
 
 namespace Zend\Cache\Storage;
 
-use ArrayObject,
-    Exception;
+use ArrayObject;
+use Exception;
 
 /**
  * @category   Zend

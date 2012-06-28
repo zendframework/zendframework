@@ -10,8 +10,8 @@
 
 namespace Zend\Cache\Storage;
 
-use ArrayObject,
-    Zend\EventManager\Event as BaseEvent;
+use ArrayObject;
+use Zend\EventManager\Event as BaseEvent;
 
 /**
  * @category   Zend

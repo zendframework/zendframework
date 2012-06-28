@@ -9,9 +9,9 @@
  */
 
 namespace Zend\Queue\Adapter;
-use Zend\Queue\Queue,
-    Zend\Queue\Message,
-    Zend\Queue\Exception;
+use Zend\Queue\Queue;
+use Zend\Queue\Message;
+use Zend\Queue\Exception;
 
 /**
  * Class for using a standard PHP array as a queue

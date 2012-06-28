@@ -9,10 +9,10 @@
  */
 
 namespace ZendTest\Queue\Adapter;
-use Zend\Queue,
-    Zend\Config,
-    Zend\Queue\Adapter,
-    Zend\Queue\Message;
+use Zend\Queue;
+use Zend\Config;
+use Zend\Queue\Adapter;
+use Zend\Queue\Message;
 
 /*
  * The adapter test class provides a universal test class for all of the

@@ -10,10 +10,10 @@
 
 namespace Zend\Queue\Adapter;
 
-use Memcache,
-    Zend\Queue\Queue,
-    Zend\Queue\Message,
-    Zend\Queue\Exception;
+use Memcache;
+use Zend\Queue\Queue;
+use Zend\Queue\Message;
+use Zend\Queue\Exception;
 
 /**
  * Class for using connecting to a Memcache-based queuing system

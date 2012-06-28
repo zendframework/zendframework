@@ -10,10 +10,10 @@
 
 namespace Zend\Queue\Message;
 
-use Iterator,
-    Countable,
-    Zend\Queue\Queue,
-    Zend\Queue\Exception;
+use Iterator;
+use Countable;
+use Zend\Queue\Queue;
+use Zend\Queue\Exception;
 
 /**
  * @category   Zend

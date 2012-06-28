@@ -10,9 +10,9 @@
 
 namespace ZendTest\Queue\Stomp;
 
-use Zend\Queue\Stomp\Client,
-    Zend\Queue\Stomp\Connection,
-    Zend\Queue\Stomp\Frame,
+use Zend\Queue\Stomp\Client;
+use Zend\Queue\Stomp\Connection;
+use Zend\Queue\Stomp\Frame,
     PHPUnit_Framework_TestCase as Testcase;
 
 /*

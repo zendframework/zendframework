@@ -61,6 +61,11 @@ class Statement implements StatementInterface
      */
     protected $bufferResults = false;
 
+    public function __construct($bufferResults = false)
+    {
+        $this->bufferResults = (bool) $bufferResults;
+    }
+
     /**
      * Set driver
      *
@@ -216,6 +221,7 @@ class Statement implements StatementInterface
 
         if ($this->bufferResults === true) {
             $this->resource->store_result();
+            $this->isPrepared = false;
             $buffered = true;
         } else {
             $buffered = false;

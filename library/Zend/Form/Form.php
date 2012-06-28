@@ -212,6 +212,9 @@ class Form extends BaseForm implements FormFactoryAwareInterface
             $spec   = $fieldset->getInputFilterSpecification();
             $filter = $inputFactory->createInputFilter($spec);
             $inputFilter->add($filter, $name);
+
+            // Recursively attach sub filters
+            $this->attachInputFilterDefaults($filter, $fieldset);
         }
     }
 }

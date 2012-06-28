@@ -717,9 +717,6 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         } catch (InvalidArgumentException $e) {
             $this->assertContains('is no known locale', $e->getMessage());
         }
-
-        \Zend\Registry::set('Zend_Locale', 'de');
-        $this->assertEquals('de', LocaleTestHelper::findLocale());
     }
 
     /**

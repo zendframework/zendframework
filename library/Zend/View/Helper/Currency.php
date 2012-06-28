@@ -48,12 +48,6 @@ class Currency extends AbstractHelper
      */
     public function __construct($currency = null)
     {
-        if ($currency === null) {
-            if (\Zend\Registry::isRegistered('Zend_Currency')) {
-                $currency = \Zend\Registry::get('Zend_Currency');
-            }
-        }
-
         $this->setCurrency($currency);
     }
 

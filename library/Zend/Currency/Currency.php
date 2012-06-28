@@ -803,13 +803,17 @@ class Currency
 
         foreach ($options as $name => $value) {
             $name = strtolower($name);
-            if ($name !== 'format') {
+            if ($name !== 'format' && $name !== 'locale') {
                 if (gettype($value) === 'string') {
                     $value = strtolower($value);
                 }
             }
 
             switch($name) {
+                case 'locale':
+                    $this->setLocale($value);
+                    break;
+
                 case 'position':
                     if (($value !== self::STANDARD) and ($value !== self::RIGHT) and ($value !== self::LEFT)) {
                         throw new Exception\InvalidArgumentException("Unknown position '" . $value . "'");

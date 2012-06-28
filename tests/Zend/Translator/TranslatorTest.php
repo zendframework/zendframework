@@ -249,16 +249,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         $lang = new Translator\Translator('Zend\Locale', __DIR__ . '/../_files/test2', null, array('scan' => Translator\Translator::LOCALE_FILENAME));
     }
 
-    public function testZF3679()
-    {
-        $locale = new Locale\Locale('de_AT');
-        \Zend\Registry::set('Zend_Locale', $locale);
-
-        $lang = new Translator\Translator(Translator\Translator::AN_ARRAY, array('msg1' => 'message1'), 'de_AT');
-        $this->assertEquals('de_AT', $lang->getLocale());
-        \Zend\Registry::_unsetInstance();
-    }
-
     /**
      * ZF-4994
      */

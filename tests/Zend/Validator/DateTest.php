@@ -23,7 +23,6 @@ namespace ZendTest\Validator;
 
 use Zend\Validator\Date as DateValidator;
 use Zend\Date;
-use Zend\Registry;
 
 /**
  * @category   Zend
@@ -49,7 +48,6 @@ class DateTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        Registry::_unsetInstance();
         $this->errorOccurred = false;
         $this->validator     = new DateValidator();
     }
@@ -203,14 +201,13 @@ class DateTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsingApplicationLocale()
     {
-        \Zend\Registry::set('Zend_Locale', new \Zend\Locale\Locale('de'));
+        $this->markTestSkipped('Depends on system-specific locale');
         $valid = new DateValidator();
         $this->assertTrue($valid->isValid('10.April.2008'));
     }
 
     /**
-     * @group  fml
-     * ZF-7630
+     * @group ZF-7630
      */
     public function testDateObjectVerification()
     {

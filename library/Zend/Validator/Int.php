@@ -65,12 +65,6 @@ class Int extends AbstractValidator
             }
         }
 
-        if (empty($options)) {
-            if (Registry::isRegistered('Zend_Locale')) {
-                $options = Registry::get('Zend_Locale');
-            }
-        }
-
         if ($options !== null) {
             $this->setLocale($options);
         }

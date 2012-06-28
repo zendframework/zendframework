@@ -54,11 +54,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = Registry::REGISTRY_KEY;
-        if (\Zend\Registry::isRegistered($regKey)) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry[$regKey]);
-        }
+        Registry::unsetRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new Helper\HeadTitle();
     }
@@ -190,8 +186,8 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
     public function testCanTranslateTitle()
     {
         $adapter = new \Zend\Translator\Adapter\Ini(__DIR__ . '/../../Translator/Adapter/_files/translation_en.ini', 'en');
-        \Zend\Registry::set('Zend_Translator', $adapter);
         $this->helper->enableTranslation();
+        $this->helper->setTranslator($adapter);
         $this->helper->__invoke('Message_1');
         $this->assertEquals('<title>Message 1 (en)</title>', $this->helper->toString());
     }

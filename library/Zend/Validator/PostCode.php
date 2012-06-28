@@ -24,9 +24,6 @@ use Zend\Locale;
 use Zend\Registry;
 
 /**
- * @see        Zend_Locale
- * @see        Zend_Locale_Format
- * @see        Zend_Registry
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -71,11 +68,9 @@ class PostCode extends AbstractValidator
      */
     public function __construct($options = null)
     {
-        if (empty($options)) {
-            if (Registry::isRegistered('Zend_Locale')) {
-                $this->setLocale(Registry::get('Zend_Locale'));
-            }
-        } elseif ($options instanceof Locale\Locale || is_string($options)) {
+        if (!empty($options)
+            && ($options instanceof Locale\Locale || is_string($options))
+        ) {
             // Received Locale object or string locale
             $this->setLocale($options);
         }

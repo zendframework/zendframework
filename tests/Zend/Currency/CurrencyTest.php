@@ -526,19 +526,6 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testing registry Locale
-     * ZF-3676
-     */
-    public function testRegistryLocale()
-    {
-        $locale = new Locale\Locale('de_AT');
-        \Zend\Registry::set('Zend_Locale', $locale);
-
-        $currency = new Currency\Currency('EUR');
-        $this->assertSame('de_AT', $currency->getLocale());
-    }
-
-    /**
      * Caching method tests
      */
     public function testCaching()
@@ -765,7 +752,8 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     public function testConstructingPrecisionValues()
     {
         $currency  = new Currency\Currency(array('value' => 100.5));
-        $this->assertEquals('€ 100,50', $currency->toString('de_AT'));
+        $currency->setLocale('de_AT');
+        $this->assertEquals('€ 100,50', $currency->toString());
     }
 
     /**

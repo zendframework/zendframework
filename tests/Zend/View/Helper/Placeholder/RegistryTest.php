@@ -51,10 +51,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $registry = \Zend\Registry::getInstance();
-        if (isset($registry[Registry::REGISTRY_KEY])) {
-            unset($registry[Registry::REGISTRY_KEY]);
-        }
+        Registry::unsetRegistry();
         $this->registry = new Registry();
     }
 
@@ -169,16 +166,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         $registry1 = Registry::getRegistry();
         $registry2 = Registry::getRegistry();
         $this->assertSame($registry1, $registry2);
-    }
-
-    public function testGetRegistryRegistersWithGlobalRegistry()
-    {
-        $this->assertFalse(\Zend\Registry::isRegistered(Registry::REGISTRY_KEY));
-        $registry = Registry::getRegistry();
-        $this->assertTrue(\Zend\Registry::isRegistered(Registry::REGISTRY_KEY));
-
-        $registered = \Zend\Registry::get(Registry::REGISTRY_KEY);
-        $this->assertSame($registry, $registered);
     }
 
     /**

@@ -478,17 +478,6 @@ abstract class AbstractValidator implements ValidatorInterface
      */
     public static function getDefaultTranslator()
     {
-        if (null === self::$defaultTranslator) {
-            if (Registry::isRegistered('Zend_Translator')) {
-                $translator = Registry::get('Zend_Translator');
-                if ($translator instanceof Translator\Adapter\AbstractAdapter) {
-                    return $translator;
-                } elseif ($translator instanceof Translator\Translator) {
-                    return $translator->getAdapter();
-                }
-            }
-        }
-
         return self::$defaultTranslator;
     }
 

@@ -22,8 +22,7 @@ namespace Zend\Filter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Locale\Locale as ZendLocale,
-    Zend\Registry;
+use Zend\Locale\Locale as ZendLocale;
 
 /**
  * @category   Zend

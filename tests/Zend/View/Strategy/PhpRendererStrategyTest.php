@@ -25,7 +25,6 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\EventManager\EventManager,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
-    Zend\Registry,
     Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
     Zend\View\Model\ModelInterface as Model,
     Zend\View\Renderer\PhpRenderer,
@@ -44,9 +43,7 @@ class PhpRendererStrategyTest extends TestCase
     public function setUp()
     {
         // Necessary to ensure placeholders do not persist between individual tests
-        if (Registry::isRegistered(PlaceholderRegistry::REGISTRY_KEY)) {
-            Registry::getInstance()->offsetUnset(PlaceholderRegistry::REGISTRY_KEY);
-        }
+        PlaceholderRegistry::unsetRegistry();
 
         $this->renderer = new PhpRenderer;
         $this->strategy = new PhpRendererStrategy($this->renderer);

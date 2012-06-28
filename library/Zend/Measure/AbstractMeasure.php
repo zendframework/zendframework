@@ -19,7 +19,6 @@
  */
 
 namespace Zend\Measure;
-use Zend\Registry;
 use Zend\Locale;
 use Zend\Locale\Math;
 
@@ -105,12 +104,6 @@ abstract class AbstractMeasure
      */
     public function setLocale($locale = null, $check = false)
     {
-        if (empty($locale)) {
-            if (Registry::isRegistered('Zend_Locale') === true) {
-                $locale = Registry::get('Zend_Locale');
-            }
-        }
-
         if ($locale === null) {
             $locale = new Locale\Locale();
         }

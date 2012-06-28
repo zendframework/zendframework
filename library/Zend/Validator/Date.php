@@ -24,7 +24,6 @@ use Traversable;
 use Zend\Date as ZendDate;
 use Zend\Locale\Format;
 use Zend\Locale\Locale;
-use Zend\Registry;
 use Zend\Stdlib\ArrayUtils;
 
 /**
@@ -92,12 +91,6 @@ class Date extends AbstractValidator
 
         if (array_key_exists('format', $options)) {
             $this->setFormat($options['format']);
-        }
-
-        if (!array_key_exists('locale', $options)) {
-            if (Registry::isRegistered('Zend_Locale')) {
-                $options['locale'] = Registry::get('Zend_Locale');
-            }
         }
 
         if (array_key_exists('locale', $options)) {

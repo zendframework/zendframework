@@ -96,8 +96,8 @@ class S3 extends Authentication
                     $sig_str .= '?torrent';
                 }
         
-        $signature = base64_encode(Hmac::compute($this->_secretKey, 'sha1', utf8_encode($sig_str), Hmac::BINARY));
-        $headers['Authorization'] = 'AWS ' . $this->_accessKey . ':' . $signature;
+        $signature = Hmac::compute($this->_secretKey, 'sha1', utf8_encode($sig_str), Hmac::OUTPUT_BINARY);
+        $headers['Authorization'] = 'AWS ' . $this->_accessKey . ':' . base64_encode($signature);
 
         return $sig_str;
     }

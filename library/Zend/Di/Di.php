@@ -481,7 +481,7 @@ class Di implements DependencyInjectionInterface
                     $callTimeCurValue =& $callTimeUserParams[$name];
                 }
 
-                if (is_string($callTimeCurValue)) {
+                if ($type !== false && is_string($callTimeCurValue)) {
                     if ($this->instanceManager->hasAlias($callTimeCurValue)) {
                         // was an alias provided?
                         $computedParams['required'][$fqParamPos] = array(
@@ -525,8 +525,7 @@ class Di implements DependencyInjectionInterface
                         $iConfigCurValue =& $iConfig[$thisIndex]['parameters'][$name];
                     }
 
-                    if (is_string($iConfigCurValue)
-                        && $type === false) {
+                    if ($type === false && is_string($iConfigCurValue)) {
                         $computedParams['value'][$fqParamPos] = $iConfigCurValue;
                     } elseif (is_string($iConfigCurValue)
                         && isset($aliases[$iConfigCurValue])) {

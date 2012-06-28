@@ -30,14 +30,12 @@ class Issn extends AbstractAdapter
 {
     /**
      * Constructor for this barcode adapter
-     *
-     * @return void
      */
     public function __construct()
     {
         $this->setLength(array(8, 13));
         $this->setCharacters('0123456789X');
-        $this->setChecksum('_gtin');
+        $this->setChecksum('gtin');
     }
 
     /**
@@ -66,9 +64,9 @@ class Issn extends AbstractAdapter
     public function hasValidChecksum($value)
     {
         if (strlen($value) == 8) {
-            $this->setChecksum('_issn');
+            $this->setChecksum('issn');
         } else {
-            $this->setChecksum('_gtin');
+            $this->setChecksum('gtin');
         }
 
         return parent::hasValidChecksum($value);
@@ -81,7 +79,7 @@ class Issn extends AbstractAdapter
      * @param  string $value The barcode to validate
      * @return boolean
      */
-    protected function _issn($value)
+    protected function issn($value)
     {
         $checksum = substr($value, -1, 1);
         $values   = str_split(substr($value, 0, -1));
@@ -100,7 +98,7 @@ class Issn extends AbstractAdapter
         $check  = ($check === 0 ? 0 : (11 - $check));
         if ($check == $checksum) {
             return true;
-        } else if (($check == 10) && ($checksum == 'X')) {
+        } elseif (($check == 10) && ($checksum == 'X')) {
             return true;
         }
 

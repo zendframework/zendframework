@@ -20,11 +20,8 @@
  */
 
 namespace ZendTest\Validator\File;
-use Zend\Validator\File;
 
-/**
- * @see Zend_Validator_File_Sha1
- */
+use Zend\Validator\File;
 
 /**
  * Sha1 testbed

@@ -7,6 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt\PublicKey\Rsa\Exception;
 
 use Zend\Crypt\Exception;
@@ -16,10 +17,9 @@ use Zend\Crypt\Exception;
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @subpackage Exception
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage PublicKey
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements 
-    ExceptionInterface
+class InvalidArgumentException
+    extends Exception\InvalidArgumentException
+    implements ExceptionInterface
 {}

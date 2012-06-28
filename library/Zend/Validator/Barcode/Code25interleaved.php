@@ -32,14 +32,12 @@ class Code25interleaved extends AbstractAdapter
      * Constructor
      *
      * Sets check flag to false.
-     *
-     * @return void
      */
     public function __construct()
     {
         $this->setLength('even');
         $this->setCharacters('0123456789');
-        $this->setChecksum('_code25');
+        $this->setChecksum('code25');
         $this->useChecksum(false);
     }
 }

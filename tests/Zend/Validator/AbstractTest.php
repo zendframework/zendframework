@@ -20,8 +20,9 @@
  */
 
 namespace ZendTest\Validator;
-use Zend\Validator;
+
 use Zend\Translator;
+use Zend\Validator\AbstractValidator;
 
 /**
  * @category   Zend
@@ -33,18 +34,19 @@ use Zend\Translator;
  */
 class AbstractTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var AbstractValidator */
+    public $validator;
+
     /**
-     * Creates a new validation object for each test method
+     * Whether an error occurred
      *
-     * @return void
+     * @var boolean
      */
+    protected $errorOccurred = false;
+
     public function setUp()
     {
-        $this->validator = new Concrete();
-    }
-
-    public function tearDown()
-    {
+        $this->validator = new TestAsset\ConcreteValidator();
     }
 
     public function testTranslatorNullByDefault()
@@ -73,7 +75,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testGlobalDefaultTranslatorNullByDefault()
     {
-        $this->assertNull(Validator\AbstractValidator::getDefaultTranslator());
+        $this->assertNull(AbstractValidator::getDefaultTranslator());
     }
 
 
@@ -186,14 +188,14 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             array('fooMessage' => '%value% was passed'), $messages);
 
         $this->assertEquals(
-            array(Concrete::FOO_MESSAGE => '%value% was passed'),
+            array(TestAsset\ConcreteValidator::FOO_MESSAGE => '%value% was passed'),
             $messages
             );
     }
 
     public function testInvokeProxiesToIsValid()
     {
-        $validator = new Concrete;
+        $validator = new TestAsset\ConcreteValidator;
         $this->assertFalse($validator('foo'));
         $this->assertContains("foo was passed", $validator->getMessages());
     }
@@ -210,23 +212,6 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)
     {
-        $this->_errorOccurred = true;
+        $this->errorOccurred = true;
     }
 }
-
-class Concrete extends Validator\AbstractValidator
-{
-    const FOO_MESSAGE = 'fooMessage';
-
-    protected $_messageTemplates = array(
-        'fooMessage' => '%value% was passed',
-    );
-
-    public function isValid($value)
-    {
-        $this->setValue($value);
-        $this->error(self::FOO_MESSAGE);
-        return false;
-    }
-}
-

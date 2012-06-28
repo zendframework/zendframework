@@ -20,12 +20,12 @@
 
 namespace Zend\Validator;
 
-use Traversable,
-    Zend\Date as ZendDate,
-    Zend\Locale\Format,
-    Zend\Locale\Locale,
-    Zend\Registry,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Date as ZendDate;
+use Zend\Locale\Format;
+use Zend\Locale\Locale;
+use Zend\Registry;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -44,7 +44,7 @@ class Date extends AbstractValidator
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID        => "Invalid type given. String, integer, array or Zend_Date expected",
         self::INVALID_DATE   => "'%value%' does not appear to be a valid date",
         self::FALSEFORMAT    => "'%value%' does not fit the date format '%format%'",
@@ -53,7 +53,7 @@ class Date extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'format'  => 'format'
     );
 
@@ -75,7 +75,6 @@ class Date extends AbstractValidator
      * Sets validator options
      *
      * @param  string|array|Traversable $options OPTIONAL
-     * @return void
      */
     public function __construct($options = array())
     {
@@ -104,7 +103,7 @@ class Date extends AbstractValidator
         if (array_key_exists('locale', $options)) {
             $this->setLocale($options['locale']);
         }
-        
+
         parent::__construct($options);
     }
 
@@ -144,7 +143,7 @@ class Date extends AbstractValidator
      * Sets the format option
      *
      * @param  string $format
-     * @return \Zend\Validator\Date provides a fluent interface
+     * @return Date provides a fluent interface
      */
     public function setFormat($format = null)
     {
@@ -157,15 +156,15 @@ class Date extends AbstractValidator
      * If optional $format or $locale is set the date format is checked
      * according to Zend_Date, see Zend_Date::isDate()
      *
-     * @param  string|array|ZendDate $value
+     * @param  string|array|ZendDate\Date $value
      * @return boolean
      */
     public function isValid($value)
     {
-        if (!is_string($value) 
-            && !is_int($value) 
-            && !is_float($value) 
-            && !is_array($value) 
+        if (!is_string($value)
+            && !is_int($value)
+            && !is_float($value)
+            && !is_array($value)
             && !($value instanceof ZendDate\Date)
         ) {
             $this->error(self::INVALID);
@@ -174,9 +173,9 @@ class Date extends AbstractValidator
 
         $this->setValue($value);
 
-        if (($this->format !== null) 
+        if (($this->format !== null)
             || ($this->locale !== null)
-            || is_array($value) 
+            || is_array($value)
             || $value instanceof ZendDate\Date
         ) {
             if (!ZendDate\Date::isDate($value, $this->format, $this->locale)) {
@@ -220,8 +219,8 @@ class Date extends AbstractValidator
                 'format_type' => 'iso',
                 'fix_date'    => false,
             ));
-            if (isset($parsed['year']) 
-                && ((strpos(strtoupper($this->format), 'YY') !== false) 
+            if (isset($parsed['year'])
+                && ((strpos(strtoupper($this->format), 'YY') !== false)
                     && (strpos(strtoupper($this->format), 'YYYY') === false))
             ) {
                 $parsed['year'] = ZendDate\Date::getFullYear($parsed['year']);
@@ -231,7 +230,7 @@ class Date extends AbstractValidator
             return false;
         }
 
-        if (((strpos($this->format, 'Y') !== false) || (strpos($this->format, 'y') !== false)) 
+        if (((strpos($this->format, 'Y') !== false) || (strpos($this->format, 'y') !== false))
             && (!isset($parsed['year']))
         ) {
             // Year expected but not found
@@ -248,7 +247,7 @@ class Date extends AbstractValidator
             return false;
         }
 
-        if (((strpos($this->format, 'H') !== false) || (strpos($this->format, 'h') !== false)) 
+        if (((strpos($this->format, 'H') !== false) || (strpos($this->format, 'h') !== false))
             && (!isset($parsed['hour']))
         ) {
             // Hour expected but not found

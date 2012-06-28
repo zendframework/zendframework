@@ -61,17 +61,21 @@ class TreeRouteStack extends SimpleRouteStack
      */
     protected function init()
     {
-        $this->routeBroker->getClassLoader()->registerPlugins(array(
-            'hostname' => __NAMESPACE__ . '\Hostname',
-            'literal'  => __NAMESPACE__ . '\Literal',
-            'part'     => __NAMESPACE__ . '\Part',
-            'regex'    => __NAMESPACE__ . '\Regex',
-            'scheme'   => __NAMESPACE__ . '\Scheme',
-            'segment'  => __NAMESPACE__ . '\Segment',
-            'wildcard' => __NAMESPACE__ . '\Wildcard',
-            'query'    => __NAMESPACE__ . '\Query',
-            'method'   => __NAMESPACE__ . '\Method',
-        ));
+        $routes = $this->routePluginManager;
+        foreach(array(
+                'hostname' => __NAMESPACE__ . '\Hostname',
+                'literal'  => __NAMESPACE__ . '\Literal',
+                'part'     => __NAMESPACE__ . '\Part',
+                'regex'    => __NAMESPACE__ . '\Regex',
+                'scheme'   => __NAMESPACE__ . '\Scheme',
+                'segment'  => __NAMESPACE__ . '\Segment',
+                'wildcard' => __NAMESPACE__ . '\Wildcard',
+                'query'    => __NAMESPACE__ . '\Query',
+                'method'   => __NAMESPACE__ . '\Method',
+            ) as $name => $class
+        ) {
+            $routes->setInvokableClass($name, $class);
+        };
     }
 
     /**
@@ -118,12 +122,12 @@ class TreeRouteStack extends SimpleRouteStack
                 'route'         => $route,
                 'may_terminate' => (isset($specs['may_terminate']) && $specs['may_terminate']),
                 'child_routes'  => $specs['child_routes'],
-                'route_broker'  => $this->routeBroker,
+                'route_plugins' => $this->routePluginManager,
             );
 
             $priority = (isset($route->priority) ? $route->priority : null);
 
-            $route = $this->routeBroker->load('part', $options);
+            $route = $this->routePluginManager->get('part', $options);
             $route->priority = $priority;
         }
 

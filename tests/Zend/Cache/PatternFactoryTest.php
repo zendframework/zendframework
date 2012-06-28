@@ -20,8 +20,8 @@
  */
 
 namespace ZendTest\Cache;
-use Zend\Cache,
-    Zend\Loader\Broker;
+
+use Zend\Cache;
 
 /**
  * @category   Zend
@@ -36,25 +36,25 @@ class PatternFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        Cache\PatternFactory::resetBroker();
+        Cache\PatternFactory::resetPluginManager();
     }
 
     public function tearDown()
     {
-        Cache\PatternFactory::resetBroker();
+        Cache\PatternFactory::resetPluginManager();
     }
 
-    public function testDefaultBroker()
+    public function testDefaultPluginManager()
     {
-        $broker = Cache\PatternFactory::getBroker();
-        $this->assertInstanceOf('Zend\Cache\PatternBroker', $broker);
+        $plugins = Cache\PatternFactory::getPluginManager();
+        $this->assertInstanceOf('Zend\Cache\PatternPluginManager', $plugins);
     }
 
-    public function testChangeBroker()
+    public function testChangePluginManager()
     {
-        $broker = new Cache\PatternBroker();
-        Cache\PatternFactory::setBroker($broker);
-        $this->assertSame($broker, Cache\PatternFactory::getBroker());
+        $plugins = new Cache\PatternPluginManager();
+        Cache\PatternFactory::setPluginManager($plugins);
+        $this->assertSame($plugins, Cache\PatternFactory::getPluginManager());
     }
 
     public function testFactory()

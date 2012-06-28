@@ -91,8 +91,8 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $config = $this->getChainConfig();
         $chain  = new FilterChain();
         $chain->setOptions($config);
-        $value = '<a name="foo"> abc </a>';
-        $valueExpected = 'ABC';
+        $value = '<a name="foo"> abc </a><img id="bar" />';
+        $valueExpected = 'ABC <IMG ID="BAR" />';
         $this->assertEquals($valueExpected, $chain->filter($value));
     }
 
@@ -136,7 +136,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
                 }),
             ),
             'filters' => array(
-                array('name' => 'strip_tags', 'options' => array('encoding' => 'utf-8'), 'priority' => 10100),
+                array('name' => 'strip_tags', 'options' => array('allowTags' => 'img', 'allowAttribs' => 'id'), 'priority' => 10100),
             ),
         );
     }

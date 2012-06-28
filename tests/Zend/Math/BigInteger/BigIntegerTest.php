@@ -73,7 +73,7 @@ class BigIntegerTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryUnknownAdapter()
     {
-        $this->setExpectedException('Zend\Loader\Exception\RuntimeException', 'locate class');
+        $this->setExpectedException('Zend\ServiceManager\Exception\ExceptionInterface');
         BigInt::factory('unknown');
     }
 }

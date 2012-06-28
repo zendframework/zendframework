@@ -22,7 +22,7 @@
 namespace ZendTest\Form\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Form\View\HelperLoader;
+use Zend\Form\View\HelperConfiguration;
 use Zend\Registry;
 use Zend\View\Helper\Doctype;
 use Zend\View\Renderer\PhpRenderer;
@@ -50,9 +50,10 @@ abstract class CommonTestCase extends TestCase
         }
 
         $this->renderer = new PhpRenderer;
-        $broker = $this->renderer->getBroker();
-        $loader = $broker->getClassLoader();
-        $loader->registerPlugins(new HelperLoader());
+        $helpers = $this->renderer->getHelperPluginManager();
+        $config  = new HelperConfiguration();
+        $config->configureServiceManager($helpers);
+
         $this->helper->setView($this->renderer);
     }
 

@@ -41,6 +41,13 @@ abstract class AbstractSeparator extends PregReplaceFilter
      */
     public function __construct($separator = ' ')
     {
+        if (is_array($separator)) {
+            $temp = ' ';
+            if (isset($separator['separator']) && is_string($separator['separator'])) {
+                $temp = $separator['separator'];
+            }
+            $separator = $temp;
+        }
         $this->setSeparator($separator);
     }
 
@@ -52,7 +59,7 @@ abstract class AbstractSeparator extends PregReplaceFilter
      */
     public function setSeparator($separator)
     {
-        if ($separator == null) {
+        if (!is_string($separator)) {
             throw new \Zend\Filter\Exception\InvalidArgumentException('"' . $separator . '" is not a valid separator.');
         }
         $this->_separator = $separator;

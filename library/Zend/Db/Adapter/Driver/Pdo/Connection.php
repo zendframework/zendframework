@@ -108,17 +108,11 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @return null
+     * Get current schema
+     * 
+     * @return string 
      */
-    public function getDefaultCatalog()
-    {
-        return null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDefaultSchema()
+    public function getCurrentSchema()
     {
         if (!$this->isConnected()) {
             $this->connect();

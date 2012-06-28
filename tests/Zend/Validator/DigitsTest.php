@@ -20,17 +20,8 @@
  */
 
 namespace ZendTest\Validator;
-use Zend\Validator,
-    ReflectionClass;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validator_Digits
- */
-
+use Zend\Validator\Digits;
 
 /**
  * @category   Zend
@@ -43,20 +34,13 @@ use Zend\Validator,
 class DigitsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validator_Digits object
-     *
-     * @var Zend_Validator_Digits
+     * @var Digits
      */
-    protected $_validator;
+    protected $validator;
 
-    /**
-     * Creates a new Zend_Validator_Digits object for each test method
-     *
-     * @return void
-     */
     public function setUp()
     {
-        $this->_validator = new Validator\Digits();
+        $this->validator = new Digits();
     }
 
     /**
@@ -78,7 +62,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
             ''        => false
             );
         foreach ($valuesExpected as $input => $result) {
-            $this->assertEquals($result, $this->_validator->isValid($input));
+            $this->assertEquals($result, $this->validator->isValid($input));
         }
     }
 
@@ -89,7 +73,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
      */
     public function testMessagesEmptyInitially()
     {
-        $this->assertEquals(array(), $this->_validator->getMessages());
+        $this->assertEquals(array(), $this->validator->getMessages());
     }
 
     /**
@@ -97,10 +81,10 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
      */
     public function testEmptyStringValueResultsInProperValidationFailureMessages()
     {
-        $this->assertFalse($this->_validator->isValid(''));
-        $messages = $this->_validator->getMessages();
+        $this->assertFalse($this->validator->isValid(''));
+        $messages = $this->validator->getMessages();
         $arrayExpected = array(
-            Validator\Digits::STRING_EMPTY => '\'\' is an empty string'
+            Digits::STRING_EMPTY => '\'\' is an empty string'
             );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }
@@ -110,10 +94,10 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidValueResultsInProperValidationFailureMessages()
     {
-        $this->assertFalse($this->_validator->isValid('#'));
-        $messages = $this->_validator->getMessages();
+        $this->assertFalse($this->validator->isValid('#'));
+        $messages = $this->validator->getMessages();
         $arrayExpected = array(
-            Validator\Digits::NOT_DIGITS => '\'#\' must contain only digits'
+            Digits::NOT_DIGITS => '\'#\' must contain only digits'
             );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }
@@ -123,42 +107,13 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
      */
     public function testNonStringValidation()
     {
-        $this->assertFalse($this->_validator->isValid(array(1 => 1)));
+        $this->assertFalse($this->validator->isValid(array(1 => 1)));
     }
-    
+
     public function testEqualsMessageTemplates()
     {
-        $validator = $this->_validator;
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
-    }
-    
-    public function testEqualsMessageVariables()
-    {
-        $validator = $this->_validator;
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $validator = $this->validator;
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
 }

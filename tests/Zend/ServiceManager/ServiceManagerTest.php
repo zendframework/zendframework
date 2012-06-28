@@ -199,6 +199,39 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $scopedServiceManager->get('foo'));
     }
 
+    public function testCanRetrieveFromParentPeeringManager()
+    {
+        $parent = new ServiceManager();
+        $parent->setService('foo', 'bar');
+        $child  = new ServiceManager();
+        $child->addPeeringServiceManager($parent, ServiceManager::SCOPE_PARENT);
+        $this->assertEquals('bar', $child->get('foo'));
+    }
+
+    public function testCanRetrieveFromChildPeeringManager()
+    {
+        $parent = new ServiceManager();
+        $child  = new ServiceManager();
+        $child->addPeeringServiceManager($parent, ServiceManager::SCOPE_CHILD);
+        $child->setService('foo', 'bar');
+        $this->assertEquals('bar', $parent->get('foo'));
+    }
+
+    public function testAllowsRetrievingFromPeeringContainerFirst()
+    {
+        $parent = new ServiceManager();
+        $parent->setFactory('foo', function($sm) {
+            return 'bar';
+        });
+        $child  = new ServiceManager();
+        $child->setFactory('foo', function($sm) {
+            return 'baz';
+        });
+        $child->addPeeringServiceManager($parent, ServiceManager::SCOPE_PARENT);
+        $child->setRetrieveFromPeeringManagerFirst(true);
+        $this->assertEquals('bar', $child->get('foo'));
+    }
+
     /**
      * @covers Zend\ServiceManager\ServiceManager::create
      */

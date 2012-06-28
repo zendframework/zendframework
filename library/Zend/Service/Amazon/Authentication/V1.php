@@ -92,7 +92,7 @@ class V1 extends Authentication
             $data .= $key . $value;
         }
 
-        $hmac = Hmac::compute($this->_secretKey, 'SHA1', $data, Hmac::BINARY);
+        $hmac = Hmac::compute($this->_secretKey, 'SHA1', $data, Hmac::OUTPUT_BINARY);
 
         $paramaters['Signature'] = base64_encode($hmac);
         

@@ -17,8 +17,7 @@ namespace Zend\Db\Adapter\Driver;
  */
 interface ConnectionInterface
 {
-    public function getDefaultCatalog();
-    public function getDefaultSchema();
+    public function getCurrentSchema();
     public function getResource();
     public function connect();
     public function isConnected();

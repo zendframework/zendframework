@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,24 +21,21 @@
 namespace Zend\Validator;
 
 use Countable;
-use Zend\Loader\Broker;
-use Zend\Loader\Pluggable;
 
 /**
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ValidatorChain implements 
-    Countable, 
-    Pluggable,
+class ValidatorChain implements
+    Countable,
     ValidatorInterface
 {
     /**
-     * @var Broker
+     * @var ValidatorPluginManager
      */
-    protected $broker;
+    protected $plugins;
 
     /**
      * Validator chain
@@ -55,16 +52,8 @@ class ValidatorChain implements
     protected $messages = array();
 
     /**
-     * Array of validation failure message codes
+     * Return the count of attached validators
      *
-     * @var array
-     * @deprecated Since 1.5.0
-     */
-    protected $errors = array();
-
-    /**
-     * Return the count of attached valicators
-     * 
      * @return int
      */
     public function count()
@@ -73,48 +62,41 @@ class ValidatorChain implements
     }
 
     /**
-     * Get plugin broker instance
-     * 
-     * @return Zend\Loader\Broker
+     * Get plugin manager instance
+     *
+     * @return ValidatorPluginManager
      */
-    public function getBroker()
+    public function getPluginManager()
     {
-        if (!$this->broker) {
-            $this->setBroker(new ValidatorBroker());
+        if (!$this->plugins) {
+            $this->setPluginManager(new ValidatorPluginManager());
         }
-        return $this->broker;
+        return $this->plugins;
     }
 
     /**
-     * Set plugin broker instance
-     * 
-     * @param  string|Broker $broker Plugin broker to load plugins
+     * Set plugin manager instance
+     *
+     * @param  ValidatorPluginManager $plugins Plugin manager
      * @return ValidatorChain
      */
-    public function setBroker($broker)
+    public function setPluginManager(ValidatorPluginManager $plugins)
     {
-        if (!$broker instanceof Broker) {
-            throw new Exception\RuntimeException(sprintf(
-                '%s expects an argument of type Zend\Loader\Broker; received "%s"',
-                __METHOD__,
-                (is_object($broker) ? get_class($broker) : gettype($broker))
-            ));
-        }
-        $this->broker = $broker;
+        $this->plugins = $plugins;
         return $this;
     }
 
     /**
      * Retrieve a validator by name
-     * 
-     * @param  string     $plugin  Name of validator to return
+     *
+     * @param  string     $name    Name of validator to return
      * @param  null|array $options Options to pass to validator constructor (if not already instantiated)
      * @return ValidatorInterface
      */
     public function plugin($name, array $options = null)
     {
-        $broker = $this->getBroker();
-        return $broker->load($name, $options);
+        $plugins = $this->getPluginManager();
+        return $plugins->get($name, $options);
     }
 
     /**
@@ -123,7 +105,7 @@ class ValidatorChain implements
      * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
      * if one exists, will not be executed.
      *
-     * @param  ValidatorInterface $validator
+     * @param  ValidatorInterface      $validator
      * @param  boolean                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
@@ -131,7 +113,7 @@ class ValidatorChain implements
     {
         $this->validators[] = array(
             'instance'            => $validator,
-            'breakChainOnFailure' => (boolean) $breakChainOnFailure
+            'breakChainOnFailure' => (boolean)$breakChainOnFailure
         );
         return $this;
     }
@@ -142,25 +124,27 @@ class ValidatorChain implements
      * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
      * if one exists, will not be executed.
      *
-     * @param  ValidatorInterface $validator
+     * @param  ValidatorInterface      $validator
      * @param  boolean                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
     public function prependValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
     {
-        array_unshift($this->validators, array(
-            'instance'            => $validator,
-            'breakChainOnFailure' => (boolean) $breakChainOnFailure
-        ));
+        array_unshift($this->validators,
+                      array(
+                           'instance'            => $validator,
+                           'breakChainOnFailure' => (boolean)$breakChainOnFailure
+                      )
+        );
         return $this;
     }
 
     /**
-     * Use the plugin broker to add a validator by name
-     * 
-     * @param  string $name 
-     * @param  array $options 
-     * @param  bool $breakChainOnFailure 
+     * Use the plugin manager to add a validator by name
+     *
+     * @param  string $name
+     * @param  array  $options
+     * @param  bool   $breakChainOnFailure
      * @return ValidatorChain
      */
     public function addByName($name, $options = array(), $breakChainOnFailure = false)
@@ -171,11 +155,11 @@ class ValidatorChain implements
     }
 
     /**
-     * Use the plugin broker to prepend a validator by name
-     * 
-     * @param  string $name 
-     * @param  array $options 
-     * @param  bool $breakChainOnFailure 
+     * Use the plugin manager to prepend a validator by name
+     *
+     * @param  string $name
+     * @param  array  $options
+     * @param  bool   $breakChainOnFailure
      * @return ValidatorChain
      */
     public function prependByName($name, $options = array(), $breakChainOnFailure = false)
@@ -197,17 +181,15 @@ class ValidatorChain implements
     public function isValid($value, $context = null)
     {
         $this->messages = array();
-        $this->errors   = array();
-        $result = true;
+        $result         = true;
         foreach ($this->validators as $element) {
             $validator = $element['instance'];
             if ($validator->isValid($value, $context)) {
                 continue;
             }
-            $result = false;
-            $messages = $validator->getMessages();
+            $result         = false;
+            $messages       = $validator->getMessages();
             $this->messages = array_merge($this->messages, $messages);
-            $this->errors   = array_merge($this->errors,   array_keys($messages));
             if ($element['breakChainOnFailure']) {
                 break;
             }
@@ -226,20 +208,9 @@ class ValidatorChain implements
     }
 
     /**
-     * Returns array of validation failure message codes
-     *
-     * @return array
-     * @deprecated Since 1.5.0
-     */
-    public function getErrors()
-    {
-        return $this->errors;
-    }
-
-    /**
      * Invoke chain as command
-     * 
-     * @param  mixed $value 
+     *
+     * @param  mixed $value
      * @return boolean
      */
     public function __invoke($value)

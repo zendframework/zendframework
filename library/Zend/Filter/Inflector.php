@@ -22,7 +22,6 @@ namespace Zend\Filter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Loader\Broker;
 
 /**
  * Filter chain for string inflection
@@ -35,9 +34,9 @@ use Zend\Loader\Broker;
 class Inflector extends AbstractFilter
 {
     /**
-     * @var \Zend\Loader\Broker
+     * @var FilterPluginManager
      */
-    protected $_pluginBroker = null;
+    protected $_pluginManager = null;
 
     /**
      * @var string
@@ -98,26 +97,26 @@ class Inflector extends AbstractFilter
     /**
      * Retreive plugin broker
      *
-     * @return \Zend\Loader\Broker
+     * @return FilterPluginManager
      */
-    public function getPluginBroker()
+    public function getPluginManager()
     {
-        if (!$this->_pluginBroker instanceof Broker) {
-            $this->setPluginBroker(new FilterBroker());
+        if (!$this->_pluginManager instanceof FilterPluginManager) {
+            $this->setPluginManager(new FilterPluginManager());
         }
 
-        return $this->_pluginBroker;
+        return $this->_pluginManager;
     }
 
     /**
-     * Set plugin broker
+     * Set plugin manager
      *
-     * @param \Zend\Loader\Broker $broker
+     * @param  FilterPluginManager $manager
      * @return Inflector
      */
-    public function setPluginBroker(Broker $broker)
+    public function setPluginManager(FilterPluginManager $manager)
     {
-        $this->_pluginBroker = $broker;
+        $this->_pluginManager = $manager;
         return $this;
     }
 
@@ -133,12 +132,12 @@ class Inflector extends AbstractFilter
             $options = ArrayUtils::iteratorToArray($options);
         }
 
-        // Set broker
-        if (array_key_exists('pluginBroker', $options)) {
-            if (is_scalar($options['pluginBroker']) && class_exists($options['pluginBroker'])) {
-                $options['pluginBroker'] = new $options['pluginBroker'];
+        // Set plugin manager
+        if (array_key_exists('pluginManager', $options)) {
+            if (is_scalar($options['pluginManager']) && class_exists($options['pluginManager'])) {
+                $options['pluginManager'] = new $options['pluginManager'];
             }
-            $this->setPluginBroker($options['pluginBroker']);
+            $this->setPluginManager($options['pluginManager']);
         }
 
         if (array_key_exists('throwTargetExceptionsOn', $options)) {
@@ -483,6 +482,6 @@ class Inflector extends AbstractFilter
         }
 
         $rule = (string) $rule;
-        return $this->getPluginBroker()->load($rule);
+        return $this->getPluginManager()->get($rule);
     }
 }

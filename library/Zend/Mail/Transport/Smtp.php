@@ -21,12 +21,11 @@
 
 namespace Zend\Mail\Transport;
 
-use Zend\Loader\Pluggable,
-    Zend\Mail\Address,
-    Zend\Mail\Headers,
-    Zend\Mail\Message,
-    Zend\Mail\Protocol,
-    Zend\Mail\Protocol\Exception as ProtocolException;
+use Zend\Mail\Address;
+use Zend\Mail\Headers;
+use Zend\Mail\Message;
+use Zend\Mail\Protocol;
+use Zend\Mail\Protocol\Exception as ProtocolException;
 
 /**
  * SMTP connection object
@@ -39,7 +38,7 @@ use Zend\Loader\Pluggable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Smtp implements TransportInterface, Pluggable
+class Smtp implements TransportInterface
 {
     /**
      * @var SmtpOptions
@@ -57,9 +56,9 @@ class Smtp implements TransportInterface, Pluggable
     protected $autoDisconnect = true;
 
     /**
-     * @var Protocol\SmtpBroker
+     * @var Protocol\SmtpPluginManager
      */
-    protected $broker;
+    protected $plugins;
 
     /**
      * Constructor.
@@ -97,37 +96,31 @@ class Smtp implements TransportInterface, Pluggable
     }
 
     /**
-     * Set broker for obtaining SMTP protocol connection
+     * Set plugin manager for obtaining SMTP protocol connection
      *
-     * @param  Protocol\SmtpBroker $broker
+     * @param  Protocol\SmtpPluginManager $plugins
      * @throws Exception\InvalidArgumentException
      * @return Smtp
      */
-    public function setBroker($broker)
+    public function setPluginManager(Protocol\SmtpPluginManager $plugins)
     {
-        if (!$broker instanceof Protocol\SmtpBroker) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an SmtpBroker argument; received "%s"',
-                __METHOD__,
-                (is_object($broker) ? get_class($broker) : gettype($broker))
-            ));
-        }
-        $this->broker = $broker;
+        $this->plugins = $plugins;
         return $this;
     }
     
     /**
-     * Get broker for loading SMTP protocol connection
+     * Get plugin manager for loading SMTP protocol connection
      *
-     * @return Protocol\SmtpBroker
+     * @return Protocol\SmtpPluginManager
      */
-    public function getBroker()
+    public function getPluginManager()
     {
-        if (null === $this->broker) {
-            $this->setBroker(new Protocol\SmtpBroker());
+        if (null === $this->plugins) {
+            $this->setPluginManager(new Protocol\SmtpPluginManager());
         }
-        return $this->broker;
+        return $this->plugins;
     }
+
     /**
      * Set the automatic disconnection when destruct
      * 
@@ -139,6 +132,7 @@ class Smtp implements TransportInterface, Pluggable
         $this->autoDisconnect = (bool) $flag;
         return $this;
     }
+
     /**
      * Get the automatic disconnection value
      * 
@@ -148,6 +142,7 @@ class Smtp implements TransportInterface, Pluggable
     {
         return $this->autoDisconnect;
     }
+
     /**
      * Return an SMTP connection
      * 
@@ -157,7 +152,7 @@ class Smtp implements TransportInterface, Pluggable
      */
     public function plugin($name, array $options = null)
     {
-        return $this->getBroker()->load($name, $options);
+        return $this->getPluginManager()->get($name, $options);
     }
 
     /**
@@ -197,6 +192,7 @@ class Smtp implements TransportInterface, Pluggable
     {
         return $this->connection;
     }
+
     /**
      * Disconnect the connection protocol instance
      * 
@@ -208,6 +204,7 @@ class Smtp implements TransportInterface, Pluggable
             $this->connection->disconnect();
         }
     }
+
     /**
      * Send an email via the SMTP connection protocol
      *

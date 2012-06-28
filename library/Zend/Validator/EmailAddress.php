@@ -41,7 +41,7 @@ class EmailAddress extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID            => "Invalid type given. String expected",
         self::INVALID_FORMAT     => "'%value%' is not a valid email address. Use the basic format local-part@hostname",
         self::INVALID_HOSTNAME   => "'%hostname%' is not a valid hostname for email address '%value%'",
@@ -56,27 +56,27 @@ class EmailAddress extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageVariables = array(
-        'hostname'  => '_hostname',
-        'localPart' => '_localPart'
+    protected $messageVariables = array(
+        'hostname'  => 'hostname',
+        'localPart' => 'localPart'
     );
 
     /**
      * @var string
      */
-    protected $_hostname;
+    protected $hostname;
 
     /**
      * @var string
      */
-    protected $_localPart;
+    protected $localPart;
 
     /**
      * Returns the found mx record informations
      *
      * @var array
      */
-    protected $_mxRecord;
+    protected $mxRecord;
 
     /**
      * Internal options array
@@ -99,7 +99,6 @@ class EmailAddress extends AbstractValidator
      * 'useDeepMxCheck'    => If a deep MX check should be done, boolean
      *
      * @param array|\Traversable $options OPTIONAL
-     * @return void
      */
     public function __construct($options = array())
     {
@@ -130,8 +129,7 @@ class EmailAddress extends AbstractValidator
      *
      * @param  string $messageString
      * @param  string $messageKey     OPTIONAL
-     * @return \Zend\Validator\AbstractValidator Provides a fluent interface
-     * @throws \Zend\Validator\Exception
+     * @return AbstractValidator Provides a fluent interface
      */
     public function setMessage($messageString, $messageKey = null)
     {
@@ -141,7 +139,7 @@ class EmailAddress extends AbstractValidator
             return $this;
         }
 
-        if (!isset($this->_messageTemplates[$messageKey])) {
+        if (!isset($this->messageTemplates[$messageKey])) {
             $this->options['hostnameValidator']->setMessage($messageString, $messageKey);
         } else {
             parent::setMessage($messageString, $messageKey);
@@ -153,7 +151,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Returns the set hostname validator
      *
-     * @return \Zend\Validator\Hostname
+     * @return Hostname
      */
     public function getHostnameValidator()
     {
@@ -161,8 +159,8 @@ class EmailAddress extends AbstractValidator
     }
 
     /**
-     * @param \Zend\Validator\Hostname $hostnameValidator OPTIONAL
-     * @return \Zend\Validator\EmailAddress Provides a fluent interface
+     * @param Hostname $hostnameValidator OPTIONAL
+     * @return EmailAddress Provides a fluent interface
      */
     public function setHostnameValidator(Hostname $hostnameValidator = null)
     {
@@ -188,7 +186,7 @@ class EmailAddress extends AbstractValidator
      * Sets the allow option of the hostname validator to use
      *
      * @param integer $allow
-     * @return \Zend\Validator\EmailAddress Provides a fluent interface
+     * @return EmailAddress Provides a fluent interface
      */
     public function setAllow($allow)
     {
@@ -226,7 +224,7 @@ class EmailAddress extends AbstractValidator
      * This only applies when DNS hostnames are validated
      *
      * @param boolean $mx Set allowed to true to validate for MX records, and false to not validate them
-     * @return \Zend\Validator\EmailAddress Fluid Interface
+     * @return EmailAddress Fluid Interface
      */
     public function useMxCheck($mx)
     {
@@ -248,7 +246,7 @@ class EmailAddress extends AbstractValidator
      * Use deep validation for MX records
      *
      * @param boolean $deep Set deep to true to perform a deep validation process for MX records
-     * @return \Zend\Validator\EmailAddress Fluid Interface
+     * @return EmailAddress Fluid Interface
      */
     public function useDeepMxCheck($deep)
     {
@@ -259,7 +257,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Returns the set domainCheck option
      *
-     * @return unknown
+     * @return boolean
      */
     public function getDomainCheck()
     {
@@ -271,7 +269,7 @@ class EmailAddress extends AbstractValidator
      * or only the local part of the email address
      *
      * @param boolean $domain
-     * @return \Zend\Validator\EmailAddress Fluid Interface
+     * @return EmailAddress Fluid Interface
      */
     public function useDomainCheck($domain = true)
     {
@@ -293,7 +291,8 @@ class EmailAddress extends AbstractValidator
      * @param string $host
      * @return boolean Returns false when minimal one of the given addresses is not reserved
      */
-    protected function isReserved($host){
+    protected function isReserved($host)
+    {
         if (!preg_match('/^([0-9]{1,3}\.){3}[0-9]{1,3}$/', $host)) {
             $host = gethostbynamel($host);
         } else {
@@ -336,7 +335,7 @@ class EmailAddress extends AbstractValidator
         // atext: ALPHA / DIGIT / and "!", "#", "$", "%", "&", "'", "*",
         //        "+", "-", "/", "=", "?", "^", "_", "`", "{", "|", "}", "~"
         $atext = 'a-zA-Z0-9\x21\x23\x24\x25\x26\x27\x2a\x2b\x2d\x2f\x3d\x3f\x5e\x5f\x60\x7b\x7c\x7d\x7e';
-        if (preg_match('/^[' . $atext . ']+(\x2e+[' . $atext . ']+)*$/', $this->_localPart)) {
+        if (preg_match('/^[' . $atext . ']+(\x2e+[' . $atext . ']+)*$/', $this->localPart)) {
             $result = true;
         } else {
             // Try quoted string format
@@ -347,7 +346,7 @@ class EmailAddress extends AbstractValidator
             $noWsCtl = '\x01-\x08\x0b\x0c\x0e-\x1f\x7f';
             $qtext   = $noWsCtl . '\x21\x23-\x5b\x5d-\x7e';
             $ws      = '\x20\x09';
-            if (preg_match('/^\x22([' . $ws . $qtext . '])*[$ws]?\x22$/', $this->_localPart)) {
+            if (preg_match('/^\x22([' . $ws . $qtext . '])*[$ws]?\x22$/', $this->localPart)) {
                 $result = true;
             } else {
                 $this->error(self::DOT_ATOM);
@@ -366,7 +365,7 @@ class EmailAddress extends AbstractValidator
      */
     public function getMXRecord()
     {
-        return $this->_mxRecord;
+        return $this->mxRecord;
     }
 
     /**
@@ -378,21 +377,21 @@ class EmailAddress extends AbstractValidator
     {
         $mxHosts = array();
         $weight  = array();
-        $result = getmxrr($this->_hostname, $mxHosts, $weight);
+        $result = getmxrr($this->hostname, $mxHosts, $weight);
         if (!empty($mxHosts) && !empty($weight)) {
-            $this->_mxRecord = array_combine($mxHosts, $weight);
+            $this->mxRecord = array_combine($mxHosts, $weight);
         } else {
-            $this->_mxRecord = $mxHosts;
+            $this->mxRecord = $mxHosts;
         }
 
-        arsort($this->_mxRecord);
+        arsort($this->mxRecord);
 
         if (!$result) {
             $this->error(self::INVALID_MX_RECORD);
-        } else if ($this->options['useDeepMxCheck']) {
+        } elseif ($this->options['useDeepMxCheck']) {
             $validAddress = false;
             $reserved     = true;
-            foreach ($this->_mxRecord as $hostname => $weight) {
+            foreach ($this->mxRecord as $hostname => $weight) {
                 $res = $this->isReserved($hostname);
                 if (!$res) {
                     $reserved = false;
@@ -428,14 +427,14 @@ class EmailAddress extends AbstractValidator
     protected function validateHostnamePart()
     {
         $hostname = $this->getHostnameValidator()->setTranslator($this->getTranslator())
-                         ->isValid($this->_hostname);
+                         ->isValid($this->hostname);
         if (!$hostname) {
             $this->error(self::INVALID_HOSTNAME);
             // Get messages and errors from hostnameValidator
             foreach ($this->getHostnameValidator()->getMessages() as $code => $message) {
                 $this->abstractOptions['messages'][$code] = $message;
             }
-        } else if ($this->options['useMxCheck']) {
+        } elseif ($this->options['useMxCheck']) {
             // MX check on hostname
             $hostname = $this->validateMXRecords();
         }
@@ -444,9 +443,9 @@ class EmailAddress extends AbstractValidator
     }
 
     /**
-     * Splits the given value in hostname and local part of the email adress
+     * Splits the given value in hostname and local part of the email address
      *
-     * @param string $value Email adress to be split
+     * @param string $value Email address to be split
      * @return bool Returns false when the email can not be split
      */
     protected function splitEmailParts($value)
@@ -457,8 +456,8 @@ class EmailAddress extends AbstractValidator
             return false;
         }
 
-        $this->_localPart = $matches[1];
-        $this->_hostname  = $matches[2];
+        $this->localPart = $matches[1];
+        $this->hostname  = $matches[2];
         return true;
     }
 
@@ -480,7 +479,6 @@ class EmailAddress extends AbstractValidator
             return false;
         }
 
-        $matches = array();
         $length  = true;
         $this->setValue($value);
 
@@ -490,7 +488,7 @@ class EmailAddress extends AbstractValidator
             return false;
         }
 
-        if ((strlen($this->_localPart) > 64) || (strlen($this->_hostname) > 255)) {
+        if ((strlen($this->localPart) > 64) || (strlen($this->hostname) > 255)) {
             $length = false;
             $this->error(self::LENGTH_EXCEEDED);
         }

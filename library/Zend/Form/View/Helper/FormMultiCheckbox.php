@@ -346,7 +346,7 @@ class FormMultiCheckbox extends FormInput
             return $this->inputHelper;
         }
 
-        if ($this->view instanceof Pluggable) {
+        if (method_exists($this->view, 'plugin')) {
             $this->inputHelper = $this->view->plugin('form_input');
         }
 
@@ -368,7 +368,7 @@ class FormMultiCheckbox extends FormInput
             return $this->labelHelper;
         }
 
-        if ($this->view instanceof Pluggable) {
+        if (method_exists($this->view, 'plugin')) {
             $this->labelHelper = $this->view->plugin('form_label');
         }
 

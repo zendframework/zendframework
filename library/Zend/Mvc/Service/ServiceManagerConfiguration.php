@@ -58,8 +58,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
         'Application'            => 'Zend\Mvc\Service\ApplicationFactory',
         'Configuration'          => 'Zend\Mvc\Service\ConfigurationFactory',
         'ControllerLoader'       => 'Zend\Mvc\Service\ControllerLoaderFactory',
-        'ControllerPluginBroker' => 'Zend\Mvc\Service\ControllerPluginBrokerFactory',
-        'ControllerPluginLoader' => 'Zend\Mvc\Service\ControllerPluginLoaderFactory',
+        'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
         'DependencyInjector'     => 'Zend\Mvc\Service\DiFactory',
         'EventManager'           => 'Zend\Mvc\Service\EventManagerFactory',
         'ModuleManager'          => 'Zend\Mvc\Service\ModuleManagerFactory',
@@ -84,11 +83,12 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      */
     protected $aliases = array(
         'Config'                                  => 'Configuration',
+        'ControllerPluginBroker'                  => 'ControllerPluginManager',
         'Di'                                      => 'DependencyInjector',
         'Zend\Di\LocatorInterface'                => 'DependencyInjector',
         'Zend\EventManager\EventManagerInterface' => 'EventManager',
-        'Zend\Mvc\Controller\PluginLoader'        => 'ControllerPluginLoader',
         'Zend\Mvc\Controller\PluginBroker'        => 'ControllerPluginBroker',
+        'Zend\Mvc\Controller\PluginManager'       => 'ControllerPluginManager',
     );
 
     /**

@@ -20,11 +20,11 @@
 
 namespace Zend\OAuth\Config;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\OAuth\Config as OAuthConfig,
-    Zend\OAuth,
-    Zend\Uri;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\OAuth\Config as OAuthConfig;
+use Zend\OAuth;
+use Zend\Uri;
 
 /**
  * @category   Zend

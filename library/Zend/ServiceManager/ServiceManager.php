@@ -60,6 +60,18 @@ class ServiceManager implements ServiceLocatorInterface
     protected $peeringServiceManagers = array();
 
     /**
+     * Whether or not to share by default
+     * 
+     * @var bool
+     */
+    protected $shareByDefault = true;
+
+    /**
+     * @var bool
+     */
+    protected $retrieveFromPeeringManagerFirst = false;
+
+    /**
      * @var bool Track whether not ot throw exceptions during create()
      */
     protected $throwExceptionInCreate = true;
@@ -92,6 +104,35 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * Set flag indicating whether services are shared by default
+     * 
+     * @param  bool $shareByDefault 
+     * @return ServiceManager
+     * @throws Exception\RuntimeException if allowOverride is false
+     */
+    public function setShareByDefault($shareByDefault)
+    {
+        if ($this->allowOverride === false) {
+            throw new Exception\RuntimeException(sprintf(
+                '%s: cannot alter default shared service setting; container is marked immutable (allow_override is false)',
+                __METHOD__
+            ));
+        }
+        $this->shareByDefault = (bool) $shareByDefault;
+        return $this;
+    }
+
+    /**
+     * Are services shared by default?
+     * 
+     * @return bool
+     */
+    public function shareByDefault()
+    {
+        return $this->shareByDefault;
+    }
+
+    /**
      * @param bool $throwExceptionInCreate
      * @return ServiceManager
      */
@@ -107,6 +148,28 @@ class ServiceManager implements ServiceLocatorInterface
     public function getThrowExceptionInCreate()
     {
         return $this->throwExceptionInCreate;
+    }
+
+    /**
+     * Set flag indicating whether to pull from peering manager before attempting creation
+     * 
+     * @param  bool $retrieveFromPeeringManagerFirst 
+     * @return ServiceManager
+     */
+    public function setRetrieveFromPeeringManagerFirst($retrieveFromPeeringManagerFirst = true)
+    {
+        $this->retrieveFromPeeringManagerFirst = (bool) $retrieveFromPeeringManagerFirst;
+        return $this;
+    }
+
+    /**
+     * Should we retrieve from the peering manager prior to attempting to create a service?
+     * 
+     * @return bool
+     */
+    public function retrieveFromPeeringManagerFirst()
+    {
+        return $this->retrieveFromPeeringManagerFirst;
     }
 
     /**
@@ -282,25 +345,20 @@ class ServiceManager implements ServiceLocatorInterface
         $selfException = null;
 
         if (!$instance && !is_array($instance)) {
-            try {
-                $instance = $this->create(array($cName, $rName));
-            } catch (\Exception $selfException) {
-                if (!$selfException instanceof Exception\ServiceNotFoundException &&
-                    !$selfException instanceof Exception\ServiceNotCreatedException) {
-                    throw $selfException;
-                }
-                if ($usePeeringServiceManagers) {
-                    foreach ($this->peeringServiceManagers as $peeringServiceManager) {
-                        try {
-                            $instance = $peeringServiceManager->get($name);
-                        } catch (Exception\ServiceNotFoundException $e) {
-                            continue;
-                        } catch (Exception\ServiceNotCreatedException $e) {
-                            continue;
-                        } catch (\Exception $e) {
-                            throw $e;
-                        }
-                        break;
+            $retrieveFromPeeringManagerFirst = $this->retrieveFromPeeringManagerFirst();
+            if ($usePeeringServiceManagers && $retrieveFromPeeringManagerFirst) {
+                $instance = $this->retrieveFromPeeringManager($name);
+            }
+            if (!$instance) {
+                try {
+                    $instance = $this->create(array($cName, $rName));
+                } catch (\Exception $selfException) {
+                    if (!$selfException instanceof Exception\ServiceNotFoundException &&
+                        !$selfException instanceof Exception\ServiceNotCreatedException) {
+                        throw $selfException;
+                    }
+                    if ($usePeeringServiceManagers && !$retrieveFromPeeringManagerFirst) {
+                        $instance = $this->retrieveFromPeeringManager($name);
                     }
                 }
             }
@@ -318,7 +376,10 @@ class ServiceManager implements ServiceLocatorInterface
             );
         }
 
-        if (isset($this->shared[$cName]) && $this->shared[$cName] === true) {
+        if ($this->shareByDefault()
+            && !isset($this->instances[$cName])
+            && (!isset($this->shared[$cName]) || $this->shared[$cName] === true)
+        ) {
             $this->instances[$cName] = $instance;
         }
 
@@ -334,7 +395,7 @@ class ServiceManager implements ServiceLocatorInterface
     public function create($name)
     {
         $instance = false;
-        $rName = null;
+        $rName    = null;
 
         if (is_array($name)) {
             list($cName, $rName) = $name;
@@ -345,59 +406,15 @@ class ServiceManager implements ServiceLocatorInterface
         $cName = $this->canonicalizeName($cName);
 
         if (isset($this->invokableClasses[$cName])) {
-            $invokable = $this->invokableClasses[$cName];
-            if (!class_exists($invokable)) {
-                throw new Exception\ServiceNotCreatedException(sprintf(
-                    '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
-                    __METHOD__,
-                    $cName,
-                    ($rName ? '(alias: ' . $rName . ')' : ''),
-                    $cName
-                ));
-            }
-            $instance = new $invokable;
+            $instance = $this->createFromInvokable($cName, $rName);
         }
 
         if (!$instance && isset($this->factories[$cName])) {
-            $factory = $this->factories[$cName];
-            if (is_string($factory) && class_exists($factory, true)) {
-                $factory = new $factory;
-                $this->factories[$cName] = $factory;
-            }
-            if ($factory instanceof FactoryInterface) {
-                $instance = $this->createServiceViaCallback(array($factory, 'createService'), $cName, $rName);
-            } elseif (is_callable($factory)) {
-                $instance = $this->createServiceViaCallback($factory, $cName, $rName);
-            } else {
-                throw new Exception\ServiceNotCreatedException(sprintf(
-                    'While attempting to create %s%s an invalid factory was registered for this instance type.',
-                    $cName,
-                    ($rName ? '(alias: ' . $rName . ')' : '')
-                ));
-            }
+            $instance = $this->createFromFactory($cName, $rName);
         }
 
         if (!$instance && !empty($this->abstractFactories)) {
-            foreach ($this->abstractFactories as $index => $abstractFactory) {
-                // support factories as strings
-                if (is_string($abstractFactory) && class_exists($abstractFactory, true)) {
-                    $this->abstractFactories[$index] = $abstractFactory = new $abstractFactory;
-                }
-                if ($abstractFactory instanceof AbstractFactoryInterface) {
-                    $instance = $this->createServiceViaCallback(array($abstractFactory, 'createServiceWithName'), $cName, $rName);
-                } elseif (is_callable($abstractFactory)) {
-                    $instance = $this->createServiceViaCallback($abstractFactory, $cName, $rName);
-                } else {
-                    throw new Exception\ServiceNotCreatedException(sprintf(
-                        'While attempting to create %s%s an abstract factory could not produce a valid instance.',
-                        $cName,
-                        ($rName ? '(alias: ' . $rName . ')' : '')
-                    ));
-                }
-                if (is_object($instance)) {
-                    break;
-                }
-            }
+            $instance = $this->createFromAbstractFactory($cName, $rName);
         }
 
         if ($this->throwExceptionInCreate == true && $instance === false) {
@@ -411,8 +428,10 @@ class ServiceManager implements ServiceLocatorInterface
         foreach ($this->initializers as $initializer) {
             if ($initializer instanceof InitializerInterface) {
                 $initializer->initialize($instance);
-            } else {
+            } elseif (is_object($initializer) && is_callable($initializer)) {
                 $initializer($instance);
+            } else {
+                call_user_func($initializer, $instance);
             }
         }
 
@@ -526,6 +545,24 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * Add a peering relationship
+     * 
+     * @param  ServiceManager $manager 
+     * @param  string $peering 
+     * @return ServiceManager Current instance
+     */
+    public function addPeeringServiceManager(ServiceManager $manager, $peering = self::SCOPE_PARENT)
+    {
+        if ($peering == self::SCOPE_PARENT) {
+            $this->peeringServiceManagers[] = $manager;
+        }
+        if ($peering == self::SCOPE_CHILD) {
+            $manager->peeringServiceManagers[] = $this;
+        }
+        return $this;
+    }
+
+    /**
      * @param $name
      * @return string
      */
@@ -586,4 +623,118 @@ class ServiceManager implements ServiceLocatorInterface
         );
     }
 
+    /**
+     * Attempt to retrieve an instance via a peering manager
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
+    protected function retrieveFromPeeringManager($name)
+    {
+        $instance = null;
+        foreach ($this->peeringServiceManagers as $peeringServiceManager) {
+            try {
+                $instance = $peeringServiceManager->get($name);
+            } catch (Exception\ServiceNotFoundException $e) {
+                continue;
+            } catch (Exception\ServiceNotCreatedException $e) {
+                continue;
+            } catch (\Exception $e) {
+                throw $e;
+            }
+            break;
+        }
+        return $instance;
+    }
+
+    /**
+     * Attempt to create an instance via an invokable class
+     * 
+     * @param  string $canonicalName 
+     * @param  string $requestedName 
+     * @return null|\stdClass
+     * @throws Exception\ServiceNotCreatedException If resolved class does not exist
+     */
+    protected function createFromInvokable($canonicalName, $requestedName)
+    {
+        $invokable = $this->invokableClasses[$canonicalName];
+        if (!class_exists($invokable)) {
+            throw new Exception\ServiceNotCreatedException(sprintf(
+                '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
+                __METHOD__,
+                $canonicalName,
+                ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
+                $canonicalName
+            ));
+        }
+        $instance = new $invokable;
+        return $instance;
+    }
+
+    /**
+     * Attempt to create an instance via a factory
+     * 
+     * @param  string $canonicalName 
+     * @param  string $requestedName 
+     * @return mixed
+     * @throws Exception\ServiceNotCreatedException If factory is not callable
+     */
+    protected function createFromFactory($canonicalName, $requestedName)
+    {
+        $factory = $this->factories[$canonicalName];
+        if (is_string($factory) && class_exists($factory, true)) {
+            $factory = new $factory;
+            $this->factories[$canonicalName] = $factory;
+        }
+        if ($factory instanceof FactoryInterface) {
+            $instance = $this->createServiceViaCallback(array($factory, 'createService'), $canonicalName, $requestedName);
+        } elseif (is_callable($factory)) {
+            $instance = $this->createServiceViaCallback($factory, $canonicalName, $requestedName);
+        } else {
+            throw new Exception\ServiceNotCreatedException(sprintf(
+                'While attempting to create %s%s an invalid factory was registered for this instance type.',
+                $canonicalName,
+                ($requestedName ? '(alias: ' . $requestedName . ')' : '')
+            ));
+        }
+        return $instance;
+    }
+
+    /**
+     * Attempt to create an instance via an abstract factory
+     * 
+     * @param  string $canonicalName 
+     * @param  string $requestedName 
+     * @return \stdClass|null
+     * @throws Exception\ServiceNotCreatedException If abstract factory is not callable
+     */
+    protected function createFromAbstractFactory($canonicalName, $requestedName)
+    {
+        foreach ($this->abstractFactories as $index => $abstractFactory) {
+            // support factories as strings
+            if (is_string($abstractFactory) && class_exists($abstractFactory, true)) {
+                $this->abstractFactories[$index] = $abstractFactory = new $abstractFactory;
+            }
+            if ($abstractFactory instanceof AbstractFactoryInterface) {
+                $instance = $this->createServiceViaCallback(
+                    array($abstractFactory, 'createServiceWithName'), 
+                    $canonicalName, 
+                    $requestedName
+                );
+            } elseif (is_callable($abstractFactory)) {
+                $instance = $this->createServiceViaCallback($abstractFactory, $canonicalName, $requestedName);
+            } else {
+                throw new Exception\ServiceNotCreatedException(sprintf(
+                    'While attempting to create %s%s an abstract factory could not produce a valid instance.',
+                    $canonicalName,
+                    ($requestedName ? '(alias: ' . $requestedName . ')' : '')
+                ));
+            }
+            if (is_object($instance)) {
+                break;
+            }
+        }
+
+        return $instance;
+    }
 }

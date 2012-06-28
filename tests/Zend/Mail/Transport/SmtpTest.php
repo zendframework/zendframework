@@ -136,17 +136,17 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $this->assertContains("\r\n\r\nThis is only a test.", $data, $data);
     }
 
-    public function testCanUseAuthenticationExtensionsViaPluginBroker()
+    public function testCanUseAuthenticationExtensionsViaPluginManager()
     {
         $options    = new SmtpOptions(array(
             'connection_class' => 'login',
         ));
         $transport  = new Smtp($options);
-        $connection = $transport->plugin($options->getConnectionClass(), array(array(
+        $connection = $transport->plugin($options->getConnectionClass(), array(
             'username' => 'matthew',
             'password' => 'password',
             'host'     => 'localhost',
-        )));
+        ));
         $this->assertInstanceOf('Zend\Mail\Protocol\Smtp\Auth\Login', $connection);
         $this->assertEquals('matthew', $connection->getUsername());
         $this->assertEquals('password', $connection->getPassword());

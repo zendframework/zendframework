@@ -22,9 +22,7 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\StaticFilter,
-    Zend\Filter\FilterBroker,
-    Zend\Loader\Broker,
-    Zend\Loader\PluginBroker;
+    Zend\Filter\FilterPluginManager;
 
 /**
  * @category   Zend
@@ -43,31 +41,31 @@ class StaticFilterTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        StaticFilter::setBroker(null);
+        StaticFilter::setPluginManager(null);
     }
 
-    public function testUsesFilterBrokerByDefault()
+    public function testUsesFilterPluginManagerByDefault()
     {
-        $broker = StaticFilter::getBroker();
-        $this->assertInstanceOf('Zend\Filter\FilterBroker', $broker);
+        $plugins = StaticFilter::getPluginManager();
+        $this->assertInstanceOf('Zend\Filter\FilterPluginManager', $plugins);
     }
 
-    public function testCanSpecifyCustomBroker()
+    public function testCanSpecifyCustomPluginManager()
     {
-        $broker = new PluginBroker();
-        StaticFilter::setBroker($broker);
-        $this->assertSame($broker, StaticFilter::getBroker());
+        $plugins = new FilterPluginManager();
+        StaticFilter::setPluginManager($plugins);
+        $this->assertSame($plugins, StaticFilter::getPluginManager());
     }
 
-    public function testCanResetBrokerByPassingNull()
+    public function testCanResetPluginManagerByPassingNull()
     {
-        $broker = new PluginBroker();
-        StaticFilter::setBroker($broker);
-        $this->assertSame($broker, StaticFilter::getBroker());
-        StaticFilter::setBroker(null);
-        $registered = StaticFilter::getBroker();
-        $this->assertNotSame($broker, $registered);
-        $this->assertInstanceOf('Zend\Filter\FilterBroker', $registered);
+        $plugins = new FilterPluginManager();
+        StaticFilter::setPluginManager($plugins);
+        $this->assertSame($plugins, StaticFilter::getPluginManager());
+        StaticFilter::setPluginManager(null);
+        $registered = StaticFilter::getPluginManager();
+        $this->assertNotSame($plugins, $registered);
+        $this->assertInstanceOf('Zend\Filter\FilterPluginManager', $registered);
     }
 
     /**
@@ -108,7 +106,24 @@ class StaticFilterTest extends \PHPUnit_Framework_TestCase
      */
     public function testStaticFactoryClassNotFound()
     {
-        $this->setExpectedException('Zend\Loader\Exception\ExceptionInterface', 'locate class');
+        $this->setExpectedException('Zend\ServiceManager\Exception\ExceptionInterface');
         StaticFilter::execute('1234', 'UnknownFilter');
+    }
+
+    public function testUsesDifferentConfigurationOnEachRequest()
+    {
+        $first = StaticFilter::execute('foo', 'callback', array(
+            'callback' => function ($value) {
+                return 'FOO';
+            },
+        ));
+        $second = StaticFilter::execute('foo', 'callback', array(
+            'callback' => function ($value) {
+                return 'BAR';
+            },
+        ));
+        $this->assertNotSame($first, $second);
+        $this->assertEquals('FOO', $first);
+        $this->assertEquals('BAR', $second);
     }
 }

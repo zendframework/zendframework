@@ -21,9 +21,9 @@
 
 namespace Zend\Validator;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Session\Container as SessionContainer;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Session\Container as SessionContainer;
 
 class Csrf extends AbstractValidator
 {
@@ -37,7 +37,7 @@ class Csrf extends AbstractValidator
      * Error messages
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::NOT_SAME => "The form submitted did not originate from the expected site",
     );
 
@@ -82,8 +82,7 @@ class Csrf extends AbstractValidator
     /**
      * Constructor
      *
-     * @param  array $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = array())
     {
@@ -112,7 +111,7 @@ class Csrf extends AbstractValidator
                     $this->setTimeout($value);
                     break;
                 default:
-                    // ignore uknown options
+                    // ignore unknown options
                     break;
             }
         }

@@ -48,7 +48,7 @@ class MimeVersion implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'mime-version') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Mime-Version string');
+            throw new Exception\InvalidArgumentException('Invalid header line for MIME-Version string');
         }
 
         // Check for version, and set if found
@@ -67,7 +67,7 @@ class MimeVersion implements HeaderInterface
      */
     public function getFieldName()
     {
-        return 'Mime-Version';
+        return 'MIME-Version';
     }
 
     /**
@@ -106,7 +106,7 @@ class MimeVersion implements HeaderInterface
      */
     public function toString()
     {
-        return 'Mime-Version: ' . $this->getFieldValue();
+        return 'MIME-Version: ' . $this->getFieldValue();
     }
 
     /**

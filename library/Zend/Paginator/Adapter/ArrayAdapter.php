@@ -37,7 +37,7 @@ class ArrayAdapter implements AdapterInterface
      *
      * @param array $array ArrayAdapter to paginate
      */
-    public function __construct(array $array)
+    public function __construct(array $array = array())
     {
         $this->_array = $array;
         $this->_count = count($array);

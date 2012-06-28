@@ -126,27 +126,17 @@ class SessionConfiguration extends StandardConfiguration
                 // No remote storage option; just return the current value
                 return $this->rememberMeSeconds;
             case 'url_rewriter_tags':
-                $key = 'url_rewriter.tags';
-                break;
+                return ini_get('url_rewriter.tags');
             // The following all need a transformation on the retrieved value;
             // however they use the same key naming scheme
             case 'use_cookies':
             case 'use_only_cookies':
             case 'use_trans_sid':
             case 'cookie_httponly':
-                $transform = function ($value) {
-                    return (bool) $value;
-                };
+                return (bool) ini_get('session.' . $storageOption);
             default:
-                $key = 'session.' . $storageOption;
-                break;
+                return ini_get('session.' . $storageOption);
         }
-
-        $value = ini_get($key);
-        if (false !== $transform) {
-            $value = $transform($value);
-        }
-        return $value;
     }
 
     /**

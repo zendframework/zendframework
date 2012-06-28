@@ -20,15 +20,10 @@
  */
 
 namespace ZendTest\Validator\File;
+
 use Zend\Validator\File;
 
 /**
- * @see Zend_Validator_File_ExcludeExtension
- */
-
-/**
- * ExcludeExtension testbed
- *
  * @category   Zend
  * @package    Zend_Validator_File
  * @subpackage UnitTests

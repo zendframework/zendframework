@@ -47,7 +47,7 @@ abstract class AbstractDb extends AbstractValidator
     /**
      * @var array Message templates
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::ERROR_NO_RECORD_FOUND => "No record matching '%value%' was found",
         self::ERROR_RECORD_FOUND    => "A record matching '%value%' was found",
     );
@@ -57,34 +57,34 @@ abstract class AbstractDb extends AbstractValidator
      *
      * @var DbSelect
      */
-    protected $_select;
+    protected $select;
 
     /**
      * @var string
      */
-    protected $_schema = null;
+    protected $schema = null;
 
     /**
      * @var string
      */
-    protected $_table = '';
+    protected $table = '';
 
     /**
      * @var string
      */
-    protected $_field = '';
+    protected $field = '';
 
     /**
      * @var mixed
      */
-    protected $_exclude = null;
+    protected $exclude = null;
 
     /**
      * Database adapter to use. If null isValid() will throw an exception
      *
      * @var \Zend\Db\Adapter\Adapter
      */
-    protected $_adapter = null;
+    protected $adapter = null;
 
     /**
      * Provides basic configuration for use with Zend\Validator\Db Validators
@@ -114,7 +114,7 @@ abstract class AbstractDb extends AbstractValidator
 
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
-        } else if (func_num_args() > 1) {
+        } elseif (func_num_args() > 1) {
             $options       = func_get_args();
             $firstArgument = array_shift($options);
             if (is_array($firstArgument)) {
@@ -170,7 +170,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function getAdapter()
     {
-        return $this->_adapter;
+        return $this->adapter;
     }
 
     /**
@@ -181,7 +181,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function setAdapter(DbAdapter $adapter)
     {
-        $this->_adapter = $adapter;
+        $this->adapter = $adapter;
         return $this;
     }
 
@@ -192,7 +192,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function getExclude()
     {
-        return $this->_exclude;
+        return $this->exclude;
     }
 
     /**
@@ -203,7 +203,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function setExclude($exclude)
     {
-        $this->_exclude = $exclude;
+        $this->exclude = $exclude;
         return $this;
     }
 
@@ -214,7 +214,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function getField()
     {
-        return $this->_field;
+        return $this->field;
     }
 
     /**
@@ -225,7 +225,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function setField($field)
     {
-        $this->_field = (string)$field;
+        $this->field = (string)$field;
         return $this;
     }
 
@@ -236,7 +236,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function getTable()
     {
-        return $this->_table;
+        return $this->table;
     }
 
     /**
@@ -247,7 +247,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function setTable($table)
     {
-        $this->_table = (string)$table;
+        $this->table = (string)$table;
         return $this;
     }
 
@@ -258,7 +258,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function getSchema()
     {
-        return $this->_schema;
+        return $this->schema;
     }
 
     /**
@@ -269,7 +269,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function setSchema($schema)
     {
-        $this->_schema = $schema;
+        $this->schema = $schema;
         return $this;
     }
 
@@ -281,7 +281,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function setSelect(DbSelect $select)
     {
-        $this->_select = $select;
+        $this->select = $select;
         return $this;
     }
 
@@ -295,7 +295,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function getSelect()
     {
-        if (null === $this->_select) {
+        if (null === $this->select) {
             $adapter  = $this->getAdapter();
             $driver   = $adapter->getDriver();
             $platform = $adapter->getPlatform();
@@ -304,36 +304,36 @@ abstract class AbstractDb extends AbstractValidator
              * Build select object
              */
             $select = new DbSelect();
-            $select->from($this->_table, $this->_schema)->columns(
-                array($this->_field)
+            $select->from($this->table, $this->schema)->columns(
+                array($this->field)
             );
 
             // Support both named and positional parameters
             if (DbDriverInterface::PARAMETERIZATION_NAMED == $driver->getPrepareType()) {
                 $select->where(
-                    $platform->quoteIdentifier($this->_field, true) . ' = :value'
+                    $platform->quoteIdentifier($this->field, true) . ' = :value'
                 );
             } else {
                 $select->where(
-                    $platform->quoteIdentifier($this->_field, true) . ' = ?'
+                    $platform->quoteIdentifier($this->field, true) . ' = ?'
                 );
             }
 
-            if ($this->_exclude !== null) {
-                if (is_array($this->_exclude)) {
+            if ($this->exclude !== null) {
+                if (is_array($this->exclude)) {
                     $select->where(
-                        $platform->quoteIdentifier($this->_exclude['field'], true) .
-                        ' != ?', $this->_exclude['value']
+                        $platform->quoteIdentifier($this->exclude['field'], true) .
+                        ' != ?', $this->exclude['value']
                     );
                 } else {
-                    $select->where($this->_exclude);
+                    $select->where($this->exclude);
                 }
             }
 
-            $this->_select = $select;
+            $this->select = $select;
         }
 
-        return $this->_select;
+        return $this->select;
     }
 
     /**
@@ -342,7 +342,7 @@ abstract class AbstractDb extends AbstractValidator
      * @param  string $value
      * @return array when matches are found.
      */
-    protected function _query($value)
+    protected function query($value)
     {
         $adapter  = $this->getAdapter();
         $statement = $adapter->createStatement();

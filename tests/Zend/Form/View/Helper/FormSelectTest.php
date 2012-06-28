@@ -181,6 +181,35 @@ class FormSelectTest extends CommonTestCase
         $this->assertRegexp('#<select[^>]*?(name="foo\[\]")#', $markup);
     }
 
+    public function getScalarOptionsDataProvider()
+    {
+        return array(
+            array(array('string'  => 'value')),
+            array(array('int'     => 1)),
+            array(array('int-neg' => -1)),
+            array(array('hex'     => 0x1A)),
+            array(array('oct'     => 0123)),
+            array(array('float'   => 2.1)),
+            array(array('float-e' => 1.2e3)),
+            array(array('float-E' => 7E-10)),
+            array(array('bool-t'  => true)),
+            array(array('bool-f'  => false)),
+        );
+    }
+
+    /**
+     * @group ZF2-338
+     * @dataProvider getScalarOptionsDataProvider
+     */
+    public function testScalarOptionValues($options)
+    {
+        $element = new Element('foo');
+        $element->setAttribute('options', $options);
+        $markup = $this->helper->render($element);
+        list($label, $value) = each($options);
+        $this->assertRegexp(sprintf('#option .*?value="%s"#', (string)$value), $markup);
+    }
+
     public function testInvokeWithNoElementChainsHelper()
     {
         $element = $this->getElement();

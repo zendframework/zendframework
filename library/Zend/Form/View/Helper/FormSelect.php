@@ -140,7 +140,7 @@ class FormSelect extends AbstractHelper
             $selected = false;
             $disabled = false;
 
-            if (is_string($optionSpec)) {
+            if (is_scalar($optionSpec)) {
                 $optionSpec = array(
                     'label' => $key,
                     'value' => $optionSpec,
@@ -165,7 +165,7 @@ class FormSelect extends AbstractHelper
                 $disabled = $optionSpec['disabled'];
             }
 
-            if (in_array($value, $selectedOptions, true)) {
+            if (in_array($value, $selectedOptions)) {
                 $selected = true;
             }
 

@@ -35,7 +35,7 @@ class Barcode extends AbstractValidator
     const INVALID_CHARS  = 'barcodeInvalidChars';
     const INVALID_LENGTH = 'barcodeInvalidLength';
 
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::FAILED         => "'%value%' failed checksum validation",
         self::INVALID_CHARS  => "'%value%' contains invalid characters",
         self::INVALID_LENGTH => "'%value%' should have a length of %length% characters",
@@ -47,7 +47,7 @@ class Barcode extends AbstractValidator
      *
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'length' => array('options' => 'length'),
     );
 
@@ -79,7 +79,7 @@ class Barcode extends AbstractValidator
     /**
      * Returns the set adapter
      *
-     * @return Zend\Validate\Barcode\Adapter
+     * @return Barcode\AbstractAdapter
      */
     public function getAdapter()
     {
@@ -93,16 +93,16 @@ class Barcode extends AbstractValidator
     /**
      * Sets a new barcode adapter
      *
-     * @param  string|\Zend\Validator\Barcode\Adapter $adapter Barcode adapter to use
+     * @param  string|Barcode\AbstractAdapter $adapter Barcode adapter to use
      * @param  array  $options Options for this adapter
-     * @return Zend\Validator\Barcode
-     * @throws \Zend\Validator\Exception
+     * @return Barcode
+     * @throws Exception\InvalidArgumentException
      */
     public function setAdapter($adapter, $options = null)
     {
         if (is_string($adapter)) {
             $adapter = ucfirst(strtolower($adapter));
-            $adapter = 'Zend\Validator\Barcode\\' . $adapter;
+            $adapter = 'Zend\\Validator\\Barcode\\' . $adapter;
 
             if (!class_exists($adapter)) {
                 throw new Exception\InvalidArgumentException('Barcode adapter matching "' . $adapter . '" not found');
@@ -113,7 +113,7 @@ class Barcode extends AbstractValidator
 
         if (!$this->options['adapter'] instanceof Barcode\AdapterInterface) {
             throw new Exception\InvalidArgumentException(
-                "Adapter " . $adapter . " does not implement Zend\Validate\Barcode\AdapterInterface"
+                "Adapter $adapter does not implement Zend\\Validate\\Barcode\\AdapterInterface"
             );
         }
 

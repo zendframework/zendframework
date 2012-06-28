@@ -81,6 +81,16 @@ class SqliteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Zend\Db\Adapter\Platform\Sqlite::quoteValueList
+     */
+    public function testQuoteValueList()
+    {
+        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList("Foo O'Bar"));
+        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList(array("Foo O'Bar")));
+        $this->assertEquals("'value', 'Foo O\\'Bar'", $this->platform->quoteValueList(array('value',"Foo O'Bar")));
+    }
+
+    /**
      * @covers Zend\Db\Adapter\Platform\Sqlite::getIdentifierSeparator
      */
     public function testGetIdentifierSeparator()

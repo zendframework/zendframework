@@ -23,6 +23,7 @@ interface PlatformInterface
     public function quoteIdentifierChain($identifierChain);
     public function getQuoteValueSymbol();
     public function quoteValue($value);
+    public function quoteValueList($valueList);
     public function getIdentifierSeparator();
     public function quoteIdentifierInFragment($identifier, array $additionalSafeWords = array());
 }

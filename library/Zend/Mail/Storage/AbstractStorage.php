@@ -10,9 +10,9 @@
 
 namespace Zend\Mail\Storage;
 
-use ArrayAccess,
-    Countable,
-    SeekableIterator;
+use ArrayAccess;
+use Countable;
+use SeekableIterator;
 
 /**
  * @category   Zend

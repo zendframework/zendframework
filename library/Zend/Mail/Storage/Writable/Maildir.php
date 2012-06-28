@@ -10,10 +10,10 @@
 
 namespace Zend\Mail\Storage\Writable;
 
-use Zend\Mail\Exception as MailException,
-    Zend\Mail\Storage,
-    Zend\Mail\Storage\Exception as StorageException,
-    Zend\Mail\Storage\Folder;
+use Zend\Mail\Exception as MailException;
+use Zend\Mail\Storage;
+use Zend\Mail\Storage\Exception as StorageException;
+use Zend\Mail\Storage\Folder;
 
 /**
  * @category   Zend

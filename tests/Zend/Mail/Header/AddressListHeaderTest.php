@@ -10,14 +10,14 @@
 
 namespace ZendTest\Mail\Header;
 
-use Zend\Mail\Address,
-    Zend\Mail\AddressList,
-    Zend\Mail\Header\AbstractAddressList,
-    Zend\Mail\Header\Bcc,
-    Zend\Mail\Header\Cc,
-    Zend\Mail\Header\From,
-    Zend\Mail\Header\ReplyTo,
-    Zend\Mail\Header\To;
+use Zend\Mail\Address;
+use Zend\Mail\AddressList;
+use Zend\Mail\Header\AbstractAddressList;
+use Zend\Mail\Header\Bcc;
+use Zend\Mail\Header\Cc;
+use Zend\Mail\Header\From;
+use Zend\Mail\Header\ReplyTo;
+use Zend\Mail\Header\To;
 
 /**
  * @category   Zend

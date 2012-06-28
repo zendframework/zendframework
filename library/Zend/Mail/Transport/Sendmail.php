@@ -12,11 +12,11 @@ namespace Zend\Mail\Transport;
 
 use Zend\Mail\Address\AddressInterface;
 
-use Traversable,
-    Zend\Mail,
-    Zend\Mail\Exception,
-    Zend\Mail\Headers,
-    Zend\Mail\Header\HeaderInterface;
+use Traversable;
+use Zend\Mail;
+use Zend\Mail\Exception;
+use Zend\Mail\Headers;
+use Zend\Mail\Header\HeaderInterface;
 
 /**
  * Class for sending email via the PHP internal mail() function

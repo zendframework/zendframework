@@ -10,8 +10,8 @@
 
 namespace ZendTest\Mail;
 
-use Zend\Mail\Address,
-    Zend\Mail\AddressList;
+use Zend\Mail\Address;
+use Zend\Mail\AddressList;
 
 /**
  * @category   Zend

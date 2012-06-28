@@ -10,11 +10,11 @@
 
 namespace ZendTest\Mail\Protocol;
 
-use Zend\Mail\Headers,
-    Zend\Mail\Message,
-    Zend\Mail\Transport\Smtp,
-    Zend\Mail\Transport\SmtpOptions,
-    ZendTest\Mail\TestAsset\SmtpProtocolSpy;
+use Zend\Mail\Headers;
+use Zend\Mail\Message;
+use Zend\Mail\Transport\Smtp;
+use Zend\Mail\Transport\SmtpOptions;
+use ZendTest\Mail\TestAsset\SmtpProtocolSpy;
 
 /**
  * @category   Zend

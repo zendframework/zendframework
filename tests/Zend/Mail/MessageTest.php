@@ -10,15 +10,15 @@
 
 namespace ZendTest\Mail;
 
-use stdClass,
-    Zend\Mail\Address,
-    Zend\Mail\AddressList,
-    Zend\Mail\Header,
-    Zend\Mail\Headers,
-    Zend\Mail\Message,
-    Zend\Mime\Message as MimeMessage,
-    Zend\Mime\Mime,
-    Zend\Mime\Part as MimePart;
+use stdClass;
+use Zend\Mail\Address;
+use Zend\Mail\AddressList;
+use Zend\Mail\Header;
+use Zend\Mail\Headers;
+use Zend\Mail\Message;
+use Zend\Mime\Message as MimeMessage;
+use Zend\Mime\Mime;
+use Zend\Mime\Part as MimePart;
 
 /**
  * @category   Zend

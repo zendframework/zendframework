@@ -10,11 +10,11 @@
 
 namespace Zend\Mail;
 
-use ArrayIterator,
-    Iterator,
-    Countable,
-    Traversable,
-    Zend\Loader\PluginClassLocator;
+use ArrayIterator;
+use Iterator;
+use Countable;
+use Traversable;
+use Zend\Loader\PluginClassLocator;
 
 /**
  * Basic mail headers collection functionality

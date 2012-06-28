@@ -10,8 +10,8 @@
 
 namespace ZendTest\Mail\Transport;
 
-use Zend\Mail\Message,
-    Zend\Mail\Transport\Sendmail;
+use Zend\Mail\Message;
+use Zend\Mail\Transport\Sendmail;
 
 /**
  * @category   Zend

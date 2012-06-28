@@ -10,8 +10,8 @@
 
 namespace Zend\Mail\Transport;
 
-use Zend\Mail\Exception,
-    Zend\Stdlib\AbstractOptions;
+use Zend\Mail\Exception;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * @category   Zend

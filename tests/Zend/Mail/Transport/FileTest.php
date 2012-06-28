@@ -10,9 +10,9 @@
 
 namespace ZendTest\Mail\Transport;
 
-use Zend\Mail\Message,
-    Zend\Mail\Transport\File,
-    Zend\Mail\Transport\FileOptions;
+use Zend\Mail\Message;
+use Zend\Mail\Transport\File;
+use Zend\Mail\Transport\FileOptions;
 
 /**
  * @category   Zend

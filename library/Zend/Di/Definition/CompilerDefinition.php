@@ -16,7 +16,9 @@ class CompilerDefinition implements DefinitionInterface
     protected $isCompiled = false;
 
     protected $introspectionStrategy = null;
-    
+
+    protected $allowReflectionExceptions = false;
+
     /**
      * @var AggregateDirectoryScanner
      */
@@ -44,7 +46,12 @@ class CompilerDefinition implements DefinitionInterface
     {
         $this->introspectionStrategy = $introspectionStrategy;
     }
-    
+
+    public function setAllowReflectionExceptions($allowReflectionExceptions = true)
+    {
+        $this->allowReflectionExceptions = (bool) $allowReflectionExceptions;
+    }
+
     /**
      * Get introspection strategy
      *
@@ -114,7 +121,14 @@ class CompilerDefinition implements DefinitionInterface
         $strategy = $this->introspectionStrategy; // localize for readability
 
         /** @var $rClass \Zend\Code\Reflection\ClassReflection */
-        $rClass = new Reflection\ClassReflection($class);
+        try {
+            $rClass = new Reflection\ClassReflection($class);
+        } catch (\ReflectionException $e) {
+            if (!$this->allowReflectionExceptions) {
+                throw $e;
+            }
+            return;
+        }
         $className = $rClass->getName();
         $matches = null; // used for regex below
 
@@ -159,7 +173,14 @@ class CompilerDefinition implements DefinitionInterface
 
         if ($rClass->hasMethod('__construct')) {
             $def['methods']['__construct'] = true; // required
-            $this->processParams($def, $rClass, $rClass->getMethod('__construct'));
+            try {
+                $this->processParams($def, $rClass, $rClass->getMethod('__construct'));
+            } catch (\ReflectionException $e) {
+                if (!$this->allowReflectionExceptions) {
+                    throw $e;
+                }
+                return;
+            }
         }
 
 

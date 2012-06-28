@@ -79,4 +79,24 @@ class CompilerDefinitionTest extends TestCase
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\D', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
     }
+
+    public function testCompilerReflectionException()
+    {
+        $this->setExpectedException('ReflectionException', 'Class ZendTest\Di\TestAsset\InvalidCompilerClasses\Foo does not exist');
+        $definition = new CompilerDefinition;
+        $definition->addDirectory(__DIR__ . '/../TestAsset/InvalidCompilerClasses');
+        $definition->compile();
+    }
+
+    public function testCompilerAllowReflectionException()
+    {
+        $definition = new CompilerDefinition;
+        $definition->setAllowReflectionExceptions();
+        $definition->addDirectory(__DIR__ . '/../TestAsset/InvalidCompilerClasses');
+        $definition->compile();
+        $parameters = $definition->getMethodParameters('ZendTest\Di\TestAsset\InvalidCompilerClasses\InvalidClass', '__construct');
+
+        // The exception gets caught before the parameter's class is set
+        $this->assertCount(1, current($parameters));
+    }
 }

@@ -19,117 +19,8 @@ use Zend\Db\Metadata\MetadataInterface,
  * @package    Zend_Db
  * @subpackage Metadata
  */
-class SqliteMetadata implements MetadataInterface
+class SqliteMetadata extends AbstractSource
 {
-
-    /**
-     *
-     * @var Adapter
-     */
-    protected $adapter = null;
-
-    /**
-     *
-     * @var string
-     */
-    protected $defaultSchema = null;
-
-    /**
-     *
-     * @var array
-     */
-    protected $tableData = array();
-
-    /**
-     *
-     * @var array
-     */
-    protected $constraintData = array();
-
-    /**
-     * Constructor
-     * 
-     * @param Adapter $adapter 
-     */
-    public function __construct(Adapter $adapter)
-    {
-        $this->adapter = $adapter;
-    }
-
-    /**
-     * Get schemas
-     * 
-     * @return null 
-     */
-    public function getSchemas()
-    {
-        return null;
-    }
-
-    /**
-     * Get table names
-     * 
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
-     */
-    public function getTableNames($schema = null)
-    {
-        if ($this->tableData == null) {
-            $this->loadTableColumnData();
-        }
-
-        $tables = array();
-        foreach ($this->tableData as $tableName => $columns) {
-            $tables[] = $tableName;
-        }
-        return $tables;
-    }
-
-    /**
-     * Get tables
-     * 
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
-     */
-    public function getTables($schema = null)
-    {
-        $tables = array();
-        foreach ($this->getTableNames() as $table) {
-            $tables[] = $this->getTable($table);
-        }
-        return $tables;
-    }
-
-    /**
-     * Get table
-     * 
-     * @param  string $table
-     * @param  string $schema
-     * @param  string $database
-     * @return Object\TableObject 
-     */
-    public function getTable($table, $schema = null)
-    {
-        $tableObj = new Object\TableObject($table);
-        $tableObj->setColumns($this->getColumns($table));
-        $tableObj->setConstraints($this->getConstraints($table, $schema));
-
-        return $tableObj;
-    }
-
-    /**
-     * Get views
-     * 
-     * @param string $schema
-     * @param string $database 
-     */
-    public function getViews($schema = null)
-    {
-
-    }
-
     /**
      * Get column names
      * 
@@ -308,68 +199,6 @@ class SqliteMetadata implements MetadataInterface
     }
 
     /**
-     * Get view names
-     * 
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
-     */
-    public function getViewNames($schema = null)
-    {
-        return array();
-    }
-
-    /**
-     * Get view
-     * 
-     * @param  string $viewName
-     * @param  string $schema
-     * @param  string $database
-     * @return array
-     */
-    public function getView($viewName, $schema = null)
-    {
-        return array();
-    }
-
-    /**
-     * Get triggers
-     * 
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
-     */
-    public function getTriggers($schema = null)
-    {
-        return array();
-    }
-
-    /**
-     * Get trigger names
-     * 
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
-     */
-    public function getTriggerNames($schema = null)
-    {
-        return array();
-    }
-
-    /**
-     * Get trigger
-     * 
-     * @param  string $triggerName
-     * @param  string $schema
-     * @param  string $database
-     * @return array
-     */
-    public function getTrigger($triggerName, $schema = null)
-    {
-        return array();
-    }
-
-    /**
      * Load table column data
      */
     protected function loadTableColumnData()
@@ -388,7 +217,7 @@ class SqliteMetadata implements MetadataInterface
     /**
      * Load constraint data
      */
-    protected function loadConstraintData()
+    protected function loadConstraintDataOLD()
     {
         if ($this->tableData == null) {
             $this->loadTableColumnData();
@@ -450,4 +279,70 @@ class SqliteMetadata implements MetadataInterface
         }
     }
 
+    protected function loadSchemaData()
+    {
+        if (isset($this->data['schemas'])) {
+            return;
+        }
+        $this->prepareDataHierarchy('schemas');
+        $sql = 'PRAGMA database_list';
+        $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
+        
+        $schemas = array();
+        foreach ($results->toArray() as $row) {
+            $schemas[] = $row['name'];
+        }
+        $this->data['schemas'] = $schemas;
+    }
+
+    protected function loadTableNameData($schema)
+    {
+        if (isset($this->data['table_names'][$schema])) {
+            return;
+        }
+        $this->prepareDataHierarchy('table_names', $schema);
+
+        // FEATURE: Filename?
+
+        $sql = 'SELECT "name", "type" FROM "sqlite_master" WHERE "type" IN (\'table\',\'view\')';
+        $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
+        $tables = array();
+        foreach ($results->toArray() as $row) {
+            if ('table' == $row['type']) {
+                $tables[$row['name']] = array(
+                    'table_type' => 'BASE TABLE',
+                    'view_definition' => null,
+                    'check_option' => null,
+                    'is_updatable' => null,
+                );
+            } else {
+                // TODO: View stuff
+            }
+        }
+        $this->data['table_names'][$schema] = $tables;
+    }
+
+    protected function loadColumnData($table, $schema)
+    {
+        if (isset($this->data['columns'][$schema][$table])) {
+            return;
+        }
+        $this->prepareDataHierarchy('columns', $schema, $table);
+        
+        $columns = array();
+        
+        $this->data['columns'][$schema][$table] = $columns;
+        
+        $sql = 'PRAGMA table_info("' . $table['name'] . '")';
+        $columns = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
+        $this->tableData[$table['name']] = $columns->toArray();
+    }
+    
+    protected function loadConstraintData($table, $schema)
+    {
+    }
+
+    protected function loadTriggerData($schema)
+    {
+    }
 }

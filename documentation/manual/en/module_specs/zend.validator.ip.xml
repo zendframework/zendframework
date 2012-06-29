@@ -4,7 +4,7 @@
 
     <para>
         <classname>Zend\Validator\Ip</classname> allows you to validate if a given value is an IP
-        address. It supports the IPv4 and also the IPv6 standard.
+        address. It supports the IPv4, IPv6 and IPvFeature definitions.
     </para>
 
     <section xml:id="zend.validator.set.ip.options"><title>Supported options for Zend\Validator\Ip</title>
@@ -26,6 +26,21 @@
                 <para>
                     <emphasis><property>allowipv6</property></emphasis>: Defines if the validator
                     allows IPv6 addresses. This option defaults to <constant>TRUE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>allowipvfuture</property></emphasis>: Defines if the validator
+                    allows IPvFuture addresses. This option defaults to <constant>false</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>allowliteral</property></emphasis>: Defines if the validator
+                    allows IPv6 or IPvFuture with URI literal style (the IP surrounded by brackets).
+                    This option defaults to <constant>true</constant>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -59,11 +74,11 @@ if ($validator->isValid($ip)) {
             </para>
         </note>
 
-        <note><title>IPv6 validation</title>
+        <note><title>IPv6/IPvFuture validation</title>
             
 
             <para>
-                <classname>Zend\Validator\Ip</classname> validates IPv6 addresses with regex. The
+                <classname>Zend\Validator\Ip</classname> validates IPv6/IPvFuture addresses with regex. The
                 reason is that the filters and methods from <acronym>PHP</acronym> itself don't
                 follow the <acronym>RFC</acronym>. Many other available classes also don't follow
                 it.

@@ -135,48 +135,7 @@ class Form extends BaseForm implements FormFactoryAwareInterface
 
         foreach ($this->getIterator() as $elementOrFieldset) {
             if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
-                $this->prepareElement($elementOrFieldset);
-                continue;
-            }
-            if ($elementOrFieldset instanceof FieldsetInterface) {
-                $this->prepareFieldset($elementOrFieldset);
-                continue;
-            }
-        }
-    }
-
-    /**
-     * Prepare a form element
-     *
-     * @param  ElementPrepareAwareInterface $element
-     * @return void
-     */
-    protected function prepareElement(ElementPrepareAwareInterface $element)
-    {
-        $element->prepare($this);
-    }
-
-    /**
-     * Recursively prepare a fieldset
-     * 
-     * @param  FieldsetInterface $fieldset 
-     * @return void
-     */
-    protected function prepareFieldset(FieldsetInterface $fieldset)
-    {
-        if (method_exists($fieldset, 'prepare')) {
-            $fieldset->prepare();
-            return;
-        }
-
-        foreach ($fieldset->getIterator() as $elementOrFieldset) {
-            if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
-                $this->prepareElement($elementOrFieldset);
-                continue;
-            }
-            if ($elementOrFieldset instanceof FieldsetInterface) {
-                $this->prepareFieldset($elementOrFieldset);
-                continue;
+                $elementOrFieldset->prepareElement($this);
             }
         }
     }

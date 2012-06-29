@@ -153,7 +153,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
     /**
      * Prepare the form element
      */
-    public function prepare(Form $form)
+    public function prepareElement(Form $form)
     {
         $this->getValidator()->getHash(true);
     }

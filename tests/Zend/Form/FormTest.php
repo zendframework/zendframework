@@ -186,4 +186,29 @@ class FormTest extends TestCase
         $this->assertTrue($input->isRequired());
         $this->assertEquals('foo', $input->getName());
     }
+
+    public function testCanProperlyPrepareNestedFieldsets()
+    {
+        $this->form->add(array(
+            'name'       => 'foo',
+            'attributes' => array(
+                'type'         => 'text'
+            )
+        ));
+
+        $this->form->add(array(
+            'type' => 'ZendTest\Form\TestAsset\BasicFieldset'
+        ));
+
+        $this->form->prepare();
+
+        $this->assertEquals('foo', $this->form->get('foo')->getName());
+
+        $basicFieldset = $this->form->get('basic_fieldset');
+        $this->assertEquals('basic_fieldset[field]', $basicFieldset->get('field')->getName());
+
+        $nestedFieldset = $basicFieldset->get('nested_fieldset');
+        $this->assertEquals('basic_fieldset[nested_fieldset][anotherField]', $nestedFieldset->get('anotherField')
+                                                                                            ->getName());
+    }
 }

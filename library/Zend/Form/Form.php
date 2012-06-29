@@ -21,6 +21,7 @@
 namespace Zend\Form;
 
 use Traversable;
+use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\InputFilter\InputProviderInterface;
@@ -39,17 +40,17 @@ class Form extends BaseForm implements FormFactoryAwareInterface
     protected $factory;
 
     /**
-     * Whether or not to automatically scan for input filter defaults on 
+     * Whether or not to automatically scan for input filter defaults on
      * attached fieldsets and elements
-     * 
+     *
      * @var bool
      */
     protected $useInputFilterDefaults = true;
 
     /**
      * Compose a form factory to use when calling add() with a non-element/fieldset
-     * 
-     * @param  Factory $factory 
+     *
+     * @param  Factory $factory
      * @return Form
      */
     public function setFormFactory(Factory $factory)
@@ -62,7 +63,7 @@ class Form extends BaseForm implements FormFactoryAwareInterface
      * Retrieve composed form factory
      *
      * Lazy-loads one if none present.
-     * 
+     *
      * @return Factory
      */
     public function getFormFactory()
@@ -84,7 +85,7 @@ class Form extends BaseForm implements FormFactoryAwareInterface
         $this->useInputFilterDefaults = (bool) $useInputFilterDefaults;
         return $this;
     }
-    
+
     /**
      * Should we use input filter defaults from elements and fieldsets?
      *
@@ -101,16 +102,16 @@ class Form extends BaseForm implements FormFactoryAwareInterface
      * If $elementOrFieldset is an array or Traversable, passes the argument on
      * to the composed factory to create the object before attaching it.
      *
-     * $flags could contain metadata such as the alias under which to register 
+     * $flags could contain metadata such as the alias under which to register
      * the element or fieldset, order in which to prioritize it, etc.
-     * 
-     * @param  array|Traversable|ElementInterface $elementOrFieldset 
-     * @param  array $flags 
+     *
+     * @param  array|Traversable|ElementInterface $elementOrFieldset
+     * @param  array $flags
      * @return Form
      */
     public function add($elementOrFieldset, array $flags = array())
     {
-        if (is_array($elementOrFieldset) 
+        if (is_array($elementOrFieldset)
             || ($elementOrFieldset instanceof Traversable && !$elementOrFieldset instanceof ElementInterface)
         ) {
             $factory = $this->getFormFactory();
@@ -122,29 +123,60 @@ class Form extends BaseForm implements FormFactoryAwareInterface
     /**
      * Ensures state is ready for use
      *
-     * Currently, simply ensures that if using input filter defaults, all input 
-     * is marshalled.
-     * 
+     * Marshalls the input filter, to ensure validation error messages are
+     * available, and prepares any elements and/or fieldsets that require
+     * preparation.
+     *
      * @return void
      */
     public function prepare()
     {
         $this->getInputFilter();
-        $this->prepareElements($this->getIterator());
+
+        foreach ($this->getIterator() as $elementOrFieldset) {
+            if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
+                $this->prepareElement($elementOrFieldset);
+                continue;
+            }
+            if ($elementOrFieldset instanceof FieldsetInterface) {
+                $this->prepareFieldset($elementOrFieldset);
+                continue;
+            }
+        }
     }
 
     /**
-     * Prepare form elements
+     * Prepare a form element
      *
-     * Currently, only initialize the CSRF form element. 
+     * @param  ElementPrepareAwareInterface $element
+     * @return void
      */
-    protected function prepareElements($iterator)
+    protected function prepareElement(ElementPrepareAwareInterface $element)
     {
-        foreach ($iterator as $elementOrFieldset) {
+        $element->prepare($this);
+    }
+
+    /**
+     * Recursively prepare a fieldset
+     * 
+     * @param  FieldsetInterface $fieldset 
+     * @return void
+     */
+    protected function prepareFieldset(FieldsetInterface $fieldset)
+    {
+        if (method_exists($fieldset, 'prepare')) {
+            $fieldset->prepare();
+            return;
+        }
+
+        foreach ($fieldset->getIterator() as $elementOrFieldset) {
             if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
-                $elementOrFieldset->prepare($this);
-            } else if ($elementOrFieldset instanceof Fieldset) {
-                $this->prepareElements($elementOrFieldset->getIterator());
+                $this->prepareElement($elementOrFieldset);
+                continue;
+            }
+            if ($elementOrFieldset instanceof FieldsetInterface) {
+                $this->prepareFieldset($elementOrFieldset);
+                continue;
             }
         }
     }
@@ -154,7 +186,7 @@ class Form extends BaseForm implements FormFactoryAwareInterface
      *
      * Attaches defaults from attached elements, if no corresponding input
      * exists for the given element in the input filter.
-     * 
+     *
      * @return InputFilterInterface
      */
     public function getInputFilter()
@@ -168,9 +200,9 @@ class Form extends BaseForm implements FormFactoryAwareInterface
 
     /**
      * Attach defaults provided by the elements to the input filter
-     * 
-     * @param  InputFilterInterface $inputFilter 
-     * @param  FieldsetInterface $fieldset Fieldset to traverse when looking for default inputs 
+     *
+     * @param  InputFilterInterface $inputFilter
+     * @param  FieldsetInterface $fieldset Fieldset to traverse when looking for default inputs
      * @return void
      */
     public function attachInputFilterDefaults(InputFilterInterface $inputFilter, FieldsetInterface $fieldset)
@@ -199,18 +231,19 @@ class Form extends BaseForm implements FormFactoryAwareInterface
             $name = $fieldset->getName();
             if (!$fieldset instanceof InputFilterProviderInterface) {
                 if (!$inputFilter->has($name)) {
-                    // Not an input filter provider, and no matching input for this fieldset.
-                    // Nothing more to do for this one.
-                    continue;
+                    // Add a new empty input filter if it does not exist, so that elements of nested fieldsets can be
+                    // recursively added
+                    $inputFilter->add(new InputFilter(), $name);
                 }
 
                 $fieldsetFilter = $inputFilter->get($name);
+
                 if (!$fieldsetFilter instanceof InputFilterInterface) {
                     // Input attached for fieldset, not input filter; nothing more to do.
                     continue;
                 }
 
-                // Traverse the elements of the fieldset, and attach any 
+                // Traverse the elements of the fieldset, and attach any
                 // defaults to the fieldset's input filter
                 $this->attachInputFilterDefaults($fieldsetFilter, $fieldset);
                 continue;
@@ -225,6 +258,9 @@ class Form extends BaseForm implements FormFactoryAwareInterface
             $spec   = $fieldset->getInputFilterSpecification();
             $filter = $inputFactory->createInputFilter($spec);
             $inputFilter->add($filter, $name);
+
+            // Recursively attach sub filters
+            $this->attachInputFilterDefaults($filter, $fieldset);
         }
     }
 }

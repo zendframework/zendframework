@@ -60,7 +60,7 @@ class DateTimeLocal extends DateTime
         return new DateStepValidator(array(
             'format'       => \DateTime::ISO8601,
             'baseValue'    => $baseValue,
-            'stepInterval' => new \DateInterval("PT{$stepValue}M"),
+            'step' => new \DateInterval("PT{$stepValue}M"),
         ));
     }
 }

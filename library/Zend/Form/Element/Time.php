@@ -71,7 +71,7 @@ class Time extends DateTime
         return new DateStepValidator(array(
             'format'       => 'H:i:s',
             'baseValue'    => $baseValue,
-            'stepInterval' => new \DateInterval("PT{$stepValue}M"),
+            'step' => new \DateInterval("PT{$stepValue}M"),
         ));
     }
 }

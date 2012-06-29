@@ -55,48 +55,38 @@ class DateTime extends Element implements InputProviderInterface
     protected $validators;
 
     /**
-     * Set validator
-     *
-     * @param  array $validator
-     * @return DateTime
-     */
-    public function setValidators($validators)
-    {
-        $this->validators = $validators;
-        return $this;
-    }
-
-    /**
      * Get validators
      *
      * @return array
      */
-    public function getValidators()
+    protected function getValidators()
     {
-        if (null === $this->validators) {
-            $validators = array();
-
-            $validators[] = $this->getDateValidator();
-            if (isset($this->attributes['min'])) {
-                $validators[] = new GreaterThanValidator(array(
-                    'min'       => $this->attributes['min'],
-                    'inclusive' => true,
-                ));
-            }
-            if (isset($this->attributes['max'])) {
-                $validators[] = new LessThanValidator(array(
-                    'max'       => $this->attributes['max'],
-                    'inclusive' => true,
-                ));
-            }
-            if (!isset($this->attributes['step'])
-                || 'any' !== $this->attributes['step']
-            ) {
-                $validators[] = $this->getStepValidator();
-            }
-
-            $this->setValidators($validators);
+        if ($this->validators) {
+            return $this->validators;
         }
+
+        $validators = array();
+        $validators[] = $this->getDateValidator();
+
+        if (isset($this->attributes['min'])) {
+            $validators[] = new GreaterThanValidator(array(
+                'min'       => $this->attributes['min'],
+                'inclusive' => true,
+            ));
+        }
+        if (isset($this->attributes['max'])) {
+            $validators[] = new LessThanValidator(array(
+                'max'       => $this->attributes['max'],
+                'inclusive' => true,
+            ));
+        }
+        if (!isset($this->attributes['step'])
+            || 'any' !== $this->attributes['step']
+        ) {
+            $validators[] = $this->getStepValidator();
+        }
+
+        $this->validators = $validators;
         return $this->validators;
     }
 
@@ -126,7 +116,7 @@ class DateTime extends Element implements InputProviderInterface
         return new DateStepValidator(array(
             'format'       => PhpDateTime::ISO8601,
             'baseValue'    => $baseValue,
-            'stepInterval' => new DateInterval("PT{$stepValue}M"),
+            'step' => new DateInterval("PT{$stepValue}M"),
         ));
     }
 

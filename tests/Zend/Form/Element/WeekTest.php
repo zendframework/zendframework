@@ -27,87 +27,48 @@ use Zend\Form\Factory;
 
 class WeekTest extends TestCase
 {
-    public function setUp()
+    public function testProvidesInputSpecificationThatIncludesValidatorsBasedOnAttributes()
     {
-        $this->element = new WeekElement('foo');
-        parent::setUp();
-    }
+        $element = new WeekElement('foo');
+        $element->setAttributes(array(
+            'inclusive' => true,
+            'min'       => '1970-W01',
+            'max'       => '1970-W03',
+            'step'      => '1',
+        ));
 
-    public function getAttributesAndValidatorsDataProvider()
-    {
-        return array(
-            array(
-                array('min' => true, 'max' => true, 'step' => true),
-                array(
-                    'Zend\Validator\Regex',
-                    'Zend\Validator\GreaterThan',
-                    'Zend\Validator\LessThan',
-                    'Zend\Validator\DateStep'
-                ),
-            ),
-            array(
-                array('max' => true, 'step' => true),
-                array(
-                    'Zend\Validator\Regex',
-                    'Zend\Validator\LessThan',
-                    'Zend\Validator\DateStep'
-                ),
-            ),
-            array(
-                array('min' => true, 'step' => true),
-                array(
-                    'Zend\Validator\Regex',
-                    'Zend\Validator\GreaterThan',
-                    'Zend\Validator\DateStep'
-                ),
-            ),
-            array(
-                array('min' => true, 'max' => true, 'step' => 'any'),
-                array(
-                    'Zend\Validator\Regex',
-                    'Zend\Validator\GreaterThan',
-                    'Zend\Validator\LessThan',
-                ),
-            ),
-            array(
-                array(),
-                array(
-                    'Zend\Validator\Regex',
-                    'Zend\Validator\DateStep'
-                ),
-            ),
-        );
-    }
-
-    /**
-     * @dataProvider getAttributesAndValidatorsDataProvider
-     */
-    public function testLazyLoadsValidatorsByDefault($attributes, $validatorClasses)
-    {
-        $this->element->setAttributes($attributes);
-        $validators = $this->element->getValidators();
-        foreach ($validators as $i => $validator) {
-            $this->assertInstanceOf($validatorClasses[$i], $validator);
-        }
-    }
-
-    public function testCanInjectValidator()
-    {
-        $validator  = $this->getMock('Zend\Validator\ValidatorInterface');
-        $this->element->setValidators(array($validator));
-        $validators = $this->element->getValidators();
-        $this->assertSame($validator, array_shift($validators));
-    }
-
-    public function testProvidesInputSpecificationThatIncludesValidator()
-    {
-        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
-        $this->element->setValidators(array($validator));
-
-        $inputSpec = $this->element->getInputSpecification();
+        $inputSpec = $element->getInputSpecification();
         $this->assertArrayHasKey('validators', $inputSpec);
         $this->assertInternalType('array', $inputSpec['validators']);
-        $test = array_shift($inputSpec['validators']);
-        $this->assertSame($validator, $test);
+
+        $expectedClasses = array(
+            'Zend\Validator\Regex',
+            'Zend\Validator\GreaterThan',
+            'Zend\Validator\LessThan',
+            'Zend\Validator\DateStep',
+        );
+        foreach ($inputSpec['validators'] as $validator) {
+            $class = get_class($validator);
+            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            switch ($class) {
+                case 'Zend\Validator\Regex':
+                    $this->assertEquals('/^#[0-9]{4}\-W[0-9]{2}$/', $validator->getPattern());
+                    break;
+                case 'Zend\Validator\GreaterThan':
+                    $this->assertTrue($validator->getInclusive());
+                    $this->assertEquals('1970-W01', $validator->getMin());
+                    break;
+                case 'Zend\Validator\LessThan':
+                    $this->assertTrue($validator->getInclusive());
+                    $this->assertEquals('1970-W03', $validator->getMax());
+                    break;
+                case 'Zend\Validator\DateStep':
+                    $dateInterval = new \DateInterval('P1W');
+                    $this->assertEquals($dateInterval, $validator->getStep());
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

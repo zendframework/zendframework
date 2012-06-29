@@ -51,28 +51,14 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
     protected $validator;
 
     /**
-     * Set validator
-     *
-     * @param  CsrfValidator $validator
-     * @return Csrf
-     */
-    public function setValidator(CsrfValidator $validator)
-    {
-        $this->validator = $validator;
-        return $this;
-    }
-    
-    /**
      * Get CSRF validator
      *
      * @return CsrfValidator
      */
-    public function getValidator()
+    protected function getValidator()
     {
         if (null === $this->validator) {
-            $this->setValidator(new CsrfValidator(array(
-                'name' => $this->getName(),
-            )));
+            $this->validator = new CsrfValidator(array('name' => $this->getName()));
         }
         return $this->validator;
     }

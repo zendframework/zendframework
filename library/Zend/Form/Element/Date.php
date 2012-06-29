@@ -71,7 +71,7 @@ class Date extends DateTime
         return new DateStepValidator(array(
             'format'       => \DateTime::ISO8601,
             'baseValue'    => $baseValue,
-            'stepInterval' => new \DateInterval("P{$stepValue}D"),
+            'step' => new \DateInterval("P{$stepValue}D"),
         ));
     }
 }

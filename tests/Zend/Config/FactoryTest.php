@@ -122,13 +122,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $config = Factory::fromFile('foo.bar');
     }
 
-    public function testInvalidFileExtensionThrowsInvalidArgumentException()
+    public function testUnsupportedFileExtensionThrowsRuntimeException()
     {
         $this->setExpectedException('RuntimeException');
         $config = Factory::fromFile(__DIR__ . '/TestAssets/bad.ext');
     }
 
-    public function testFactoryCanRegisterCustomReaders()
+    public function testFactoryCanRegisterCustomReaderInstance()
     {
         Factory::registerReader('dum', new Reader\TestAssets\DummyReader());
 
@@ -136,9 +136,21 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Config\Config', $configObject);
 
         $this->assertEquals($configObject['one'], 1);
-        $this->assertEquals($configObject['two'], 2);
-        $this->assertEquals($configObject['three'], 3);
     }
+
+    public function testFactoryCanRegisterCustomReaderPlugn()
+    {
+        $dummyReader = new Reader\TestAssets\DummyReader();
+        Factory::getReaderPluginManager()->setService('DummyReader',$dummyReader);
+
+        Factory::registerReader('dum', 'DummyReader');
+
+        $configObject = Factory::fromFile(__DIR__ . '/TestAssets/dummy.dum', true);
+        $this->assertInstanceOf('Zend\Config\Config', $configObject);
+
+        $this->assertEquals($configObject['one'], 1);
+    }
+
 
 }
 

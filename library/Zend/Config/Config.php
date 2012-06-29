@@ -16,6 +16,13 @@ use ArrayAccess;
 use Zend\Stdlib\ArrayUtils;
 
 /**
+ * Provides a property based interface to an array.
+ * The data are read-only unless $allowModifications is set to true
+ * on construction.
+ *
+ * Implements Countable, Iterator and ArrayAccess
+ * to facilitate easy access to the data.
+ *
  * @category   Zend
  * @package    Zend_Config
  */
@@ -51,12 +58,10 @@ class Config implements Countable, Iterator, ArrayAccess
     protected $skipNextIteration;
 
     /**
-     * Zend\Config provides a property based interface to
-     * an array. The data are read-only unless $allowModifications
-     * is set to true on construction.
+     * Constructor.
      *
-     * Zend\Config also implements Countable, Iterator and ArrayAccess to
-     * facilitate easy access to the data.
+     * Data is read-only unless $allowModifications is set to true
+     * on construction.
      *
      * @param  array   $array
      * @param  boolean $allowModifications

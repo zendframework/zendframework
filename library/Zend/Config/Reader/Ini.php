@@ -68,7 +68,7 @@ class Ini implements ReaderInterface
     public function fromFile($filename)
     {
         if (!is_file($filename) || !is_readable($filename)) {
-            throw new Exception\InvalidArgumentException(sprintf(
+            throw new Exception\RuntimeException(sprintf(
                 "File '%s' doesn't exist or not readable",
                 $filename
             ));

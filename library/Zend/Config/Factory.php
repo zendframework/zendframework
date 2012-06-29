@@ -53,7 +53,7 @@ class Factory
         $pathinfo = pathinfo($filename);
         
         if (!isset($pathinfo['extension'])) {
-            throw new Exception\InvalidArgumentException(sprintf(
+            throw new Exception\RuntimeException(sprintf(
                 'Filename "%s" is missing an extension and cannot be auto-detected',
                 $filename
             ));

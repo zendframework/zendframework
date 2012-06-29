@@ -382,7 +382,7 @@ class Translator
             $this->loadMessages($textDomain, $locale);
         }
 
-        if (!array_key_exists($message, $this->messages[$textDomain][$locale])) {
+        if (!isset($this->messages[$textDomain][$locale][$message])) {
             return null;
         }
 

@@ -73,6 +73,10 @@ class Gettext implements LoaderInterface
 
         // Verify magic number
         $magic = fread($this->file, 4);
+        // 32-bit machine is little-endian
+        if (PHP_INT_SIZE < 8) {
+            $magic = strrev($magic);
+        }
 
         if ($magic === "\x95\x04\x12\xde") {
             $this->littleEndian = true;
@@ -145,10 +149,10 @@ class Gettext implements LoaderInterface
 
         // Read header entries
         if (array_key_exists('', $textDomain)) {
-            $rawHeaders = explode("\n", $textDomain['']);
+            $rawHeaders = explode("\n", trim($textDomain['']));
 
             foreach ($rawHeaders as $rawHeader) {
-                list($header, $content) = explode(':', $rawHeader, 1);
+                list($header, $content) = explode(':', $rawHeader, 2);
 
                 if (trim(strtolower($header)) === 'plural-forms') {
                     $textDomain->setPluralRule(PluralRule::fromString($content));

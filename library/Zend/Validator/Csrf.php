@@ -215,14 +215,23 @@ class Csrf extends AbstractValidator
     /**
      * Retrieve CSRF token
      *
-     * If no CSRF token currently exists, generates one.
+     * If no CSRF token currently exists, or should be regenrated, 
+     * generates one.
      *
+     * @param  bool $regenerate    default false
      * @return string
      */
-    public function getHash()
+    public function getHash($regenerate = false)
     {
-        if (null === $this->hash) {
-            $this->generateHash();
+        if ((null === $this->hash) || $regenerate) {
+            if ($regenerate) {
+                $this->hash = null;
+            } else {
+                $this->hash = $this->getValidationToken();
+            }
+            if (null === $this->hash) {
+                $this->generateHash();
+            }
         }
         return $this->hash;
     }
@@ -266,10 +275,10 @@ class Csrf extends AbstractValidator
      *
      * @return void
      */
-    public function initCsrfToken()
+    protected function initCsrfToken()
     {
         $session = $this->getSession();
-        $session->setExpirationHops(1, null, true);
+        //$session->setExpirationHops(1, null, true);
         $session->setExpirationSeconds($this->getTimeout());
         $session->hash = $this->getHash();
     }

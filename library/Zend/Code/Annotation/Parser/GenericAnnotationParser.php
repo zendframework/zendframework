@@ -101,7 +101,9 @@ class GenericAnnotationParser implements ParserInterface
      */
     public function registerAnnotation($annotation)
     {
+        $class = false;
         if (is_string($annotation) && class_exists($annotation)) {
+            $class      = $annotation;
             $annotation = new $annotation();
         }
 
@@ -114,7 +116,7 @@ class GenericAnnotationParser implements ParserInterface
             ));
         }
 
-        $class = get_class($annotation);
+        $class = $class ?: get_class($annotation);
 
         if (in_array($class, $this->annotationNames)) {
             throw new Exception\InvalidArgumentException('An annotation for this class ' . $class . ' already exists');
@@ -149,7 +151,7 @@ class GenericAnnotationParser implements ParserInterface
     /**
      * Checks if the manager has annotations for a class
      *
-     * @param $class
+     * @param  string $class
      * @return bool
      */
     public function hasAnnotation($class)
@@ -170,7 +172,7 @@ class GenericAnnotationParser implements ParserInterface
      * 
      * @param  string $alias 
      * @param  string $class May be either a registered annotation name or another alias
-     * @return AnnotationManager
+     * @return GenericAnnotationParser
      */
     public function setAlias($alias, $class)
     {

@@ -54,7 +54,7 @@ class AnnotationManager implements EventManagerAwareInterface
      * Set the event manager instance
      * 
      * @param  EventManagerInterface $events 
-     * @return void
+     * @return AnnotationManager
      */
     public function setEventManager(EventManagerInterface $events)
     {

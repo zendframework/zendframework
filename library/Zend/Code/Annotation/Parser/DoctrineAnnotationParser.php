@@ -133,7 +133,7 @@ class DoctrineAnnotationParser implements ParserInterface
     /**
      * Specify an allowed annotation class
      * 
-     * @param  string $class 
+     * @param  string $annotation 
      * @return DoctrineAnnotationParser
      */
     public function registerAnnotation($annotation)
@@ -145,7 +145,8 @@ class DoctrineAnnotationParser implements ParserInterface
     /**
      * Set many allowed annotations at once
      * 
-     * @param  array $classes Array of annotation class names
+     * @param  array|Traversable $annotations Array or traversable object of 
+     *         annotation class names
      * @return DoctrineAnnotationParser
      */
     public function registerAnnotations($annotations)
@@ -158,8 +159,8 @@ class DoctrineAnnotationParser implements ParserInterface
             ));
         }
 
-        foreach ($classes as $class) {
-            $this->allowedAnnotations[$class] = true;
+        foreach ($annotations as $annotation) {
+            $this->allowedAnnotations[$annotation] = true;
         }
         return $this;
     }

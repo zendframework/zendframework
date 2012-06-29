@@ -22,7 +22,7 @@
 
         <programlisting language="php"><![CDATA[
 $server = new Zend\XmlRpc\Server();
-$server->setClass('My_Service_Class');
+$server->setClass('My\Service\Class');
 echo $server->handle();
 ]]></programlisting>
     </section>
@@ -231,7 +231,7 @@ function myFunc($val1, $val2, $val3)
         <programlisting language="php"><![CDATA[
 // All public methods in My_Service_Class will be accessible as
 // myservice.METHODNAME
-$server->setClass('My_Service_Class', 'myservice');
+$server->setClass('My\Service\Class', 'myservice');
 
 // Function 'somefunc' will be accessible as funcs.somefunc
 $server->addFunction('somefunc', 'funcs');
@@ -296,7 +296,7 @@ $server->addFunction('somefunc', 'funcs');
         </para>
 
         <programlisting language="php"><![CDATA[
-Zend\XmlRpc\Server\Fault::attachFaultException('My_Project_Exception');
+Zend\XmlRpc\Server\Fault::attachFaultException('My\Project\Exception');
 ]]></programlisting>
 
         <para>
@@ -445,7 +445,7 @@ class Services_PricingService
 }
 
 $server = new Zend\XmlRpc\Server();
-$server->setClass('Services_PricingService',
+$server->setClass('Services\PricingService',
                   'pricing',
                   new ProductRepository(),
                   new PurchaseRepository());
@@ -475,7 +475,7 @@ $server->setClass('Services_PricingService',
             </para>
 
             <programlisting language="php"><![CDATA[
-class Services_PricingService2
+class Services\PricingService2
 {
     /**
      * @param ProductRepository $productRepository
@@ -501,7 +501,7 @@ class Services_PricingService2
 
 $server = new Zend\XmlRpc\Server();
 $server->sendArgumentsToAllMethods(false);
-$server->setClass('Services_PricingService2',
+$server->setClass('Services\PricingService2',
                   'pricing',
                   new ProductRepository(),
                   new PurchaseRepository());

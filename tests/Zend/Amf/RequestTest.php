@@ -210,7 +210,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('RoundTrip', $message->source);
         $data = $message->body;
         // Make sure that the array was deserialized properly and check its value
-        $this->assertEquals(1978, $data[0]->toString('Y'));
+        $this->assertEquals(1978, $data[0]->format('Y'));
 
     }
 
@@ -468,8 +468,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($bodies[0] instanceof Value\MessageBody);
         $data = $bodies[0]->getData();
         // Make sure that the string was deserialized properly and check its value
-        $this->assertEquals(10, $data[0]->toString('M'));
-        $this->assertEquals(1978, $data[0]->toString('Y'));
+        $this->assertEquals(10, $data[0]->format('m'));
+        $this->assertEquals(1978, $data[0]->format('Y'));
     }
 
     /**

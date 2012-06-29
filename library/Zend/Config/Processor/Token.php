@@ -206,7 +206,7 @@ class Token implements ProcessorInterface
     public function process(Config $config)
     {
         if ($config->isReadOnly()) {
-            throw new Exception\InvalidArgumentException('Cannot parse config because it is read-only');
+            throw new Exception\InvalidArgumentException('Cannot process config because it is read-only');
         }
 
         if ($this->map === null) {

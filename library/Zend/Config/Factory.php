@@ -19,24 +19,25 @@ use Zend\Stdlib\ArrayUtils;
 class Factory
 {
     /**
-     * Readers used for config files.
-     * array key is extension, array value is reader instance or class name
-     *
-     * @var array
-     */
-    protected static $readers = array(
-        'ini'  => 'Zend\Config\Reader\Ini',
-        'json' => 'Zend\Config\Reader\Json',
-        'xml'  => 'Zend\Config\Reader\Xml',
-        'yaml' => 'Zend\Config\Reader\Yaml',
-    );
-
-    /**
-     * The reader manager
+     * Plugin manager for loading readers
      *
      * @var null|ReaderPluginManager
      */
-    protected static $plugins = null;
+    public static $readers = null;
+
+    /**
+     * Registered config file extensions.
+     * key is extension, value is reader instance or plugin name
+     *
+     * @var array
+     */
+    protected static $extensions = array(
+        'ini'  => 'ini',
+        'json' => 'json',
+        'xml'  => 'xml',
+        'yaml' => 'yaml',
+    );
+
 
     /**
      * Read a config from a file.
@@ -44,6 +45,7 @@ class Factory
      * @param  string  $filename
      * @param  boolean $returnConfigObject 
      * @return array|Config
+     * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
     public static function fromFile($filename, $returnConfigObject = false)
@@ -68,25 +70,11 @@ class Factory
             }
             
             $config = include $filename;
-        } elseif (isset(self::$readers[$extension])) {
-            $reader = self::$readers[$extension];
-            if (is_string($reader)) {
-                if (!class_exists($reader)) {
-                    throw new Exception\RuntimeException(sprintf(
-                        'Unable to locate reader class "%s"; class does not exist',
-                        $reader
-                    ));
-                }
-
-                $reader = new $reader();
-            }
-
+        } elseif (isset(self::$extensions[$extension])) {
+            $reader = self::$extensions[$extension];
             if (!$reader instanceof Reader\ReaderInterface) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Reader should be an instance of %s\Reader\ReaderInterface; received "%s"',
-                    __NAMESPACE__,
-                    (is_object($reader) ? get_class($reader) : gettype($reader))
-                ));
+                $reader = self::getReaderPluginManager()->get($reader);
+                self::$extensions[$extension] = $reader;
             }
 
             /** @var Reader\ReaderInterface $reader  */
@@ -120,10 +108,33 @@ class Factory
     }
 
     /**
+     * Set reader plugin manager
+     *
+     * @param ReaderPluginManager $readers
+     */
+    public static function setReaderPluginManager(ReaderPluginManager $readers)
+    {
+        self::$readers = $readers;
+    }
+
+    /**
+     * Get the reader plugin manager
+     *
+     * @return ReaderPluginManager
+     */
+    public static function getReaderPluginManager()
+    {
+        if (static::$readers === null) {
+            static::$readers = new ReaderPluginManager();
+        }
+        return static::$readers;
+    }
+
+    /**
      * Set config reader for file extension
      *
-     * @param string $extension
-     * @param string|Reader\ReaderInterface $reader
+     * @param  string $extension
+     * @param  string|Reader\ReaderInterface $reader
      * @throws Exception\InvalidArgumentException
      */
     public static function registerReader($extension, $reader)
@@ -131,11 +142,14 @@ class Factory
         $extension = strtolower($extension);
 
         if (!is_string($reader) && !$reader instanceof Reader\ReaderInterface) {
-            throw new Exception\InvalidArgumentException(
-                'Reader should be class name or instance of Zend\Config\Reader\ReaderInterface'
-            );
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Reader should be plugin name, class name or ' .
+                'instance of %s\Reader\ReaderInterface; recieved "%s"',
+                __NAMESPACE__,
+                (is_object($reader) ? get_class($reader) : gettype($reader))
+            ));
         }
 
-        self::$readers[$extension] = $reader;
+        self::$extensions[$extension] = $reader;
     }
 }

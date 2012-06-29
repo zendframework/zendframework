@@ -45,7 +45,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 {
     protected $nested;
     protected $tokenBare, $tokenPrefix, $tokenSuffix, $tokenSurround, $tokenSurroundMixed;
-    protected $translatorData, $translatorStrings;
+    protected $translatorData, $translatorFile;
     protected $userConstants, $phpConstants;
     protected $filter;
 
@@ -131,10 +131,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->translatorStrings = array(
-            'one dog' => 'ein Hund',
-            'two dogs' => 'zwei Hunde'
-        );
+        $this->translatorFile = realpath(__DIR__ . '/_files/translations-de_DE.php');
 
         $this->filter = array(
             'simple' => 'some MixedCase VALue',
@@ -214,7 +211,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $processor->addToken('BARETOKEN', 'some replaced value');
         
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
-                                    'Cannot parse config because it is read-only');
+                                    'Cannot process config because it is read-only');
         $processor->process($config);
     }
     
@@ -351,37 +348,37 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
     {
         $config     = new Config($this->translatorData, true);
         $translator = new Translator();
-        $translator->addTranslationFile('phpArray', realpath(__DIR__ . '/_files/messages.php'));
-        $processor  = new TranslatorProcessor($translator, 'default', 'de_DE');
+        $translator->addTranslationFile('phparray', $this->translatorFile);
+        $processor  = new TranslatorProcessor($translator);
 
         $processor->process($config);
 
         $this->assertEquals('oneDog', $config->pages[0]->id);
         $this->assertEquals('ein Hund', $config->pages[0]->label);
-
         $this->assertEquals('twoDogs', $config->pages[1]->id);
         $this->assertEquals('zwei Hunde', $config->pages[1]->label);
     }
 
-    /*
     public function testTranslatorReadOnly()
     {
-        $config     = new Config($this->translator, false);
+        $config     = new Config($this->translatorData, false);
         $translator = new Translator();
-        $processor  = new TranslatorProcessor($translator, 'default', 'de_DE');
+        $processor  = new TranslatorProcessor($translator);
+
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
-                                    'Cannot parse config because it is read-only');
+                                    'Cannot process config because it is read-only');
         $processor->process($config);
     }
 
     public function testTranslatorSingleValue()
     {        
-        $translator = new Translator(Translator::AN_ARRAY, $this->translatorStrings, 'de_DE');
-        $processor = new TranslatorProcessor($translator);
-        $word = 'one dog'; 
-        $this->assertEquals('ein Hund', $processor->processValue($word));
+        $translator = new Translator();
+        $translator->addTranslationFile('phparray', $this->translatorFile);
+        $processor  = new TranslatorProcessor($translator);
+
+        $this->assertEquals('ein Hund', $processor->processValue('one dog'));
     }
-    */
+
     public function testFilter()
     {
         $config = new Config($this->filter, true);
@@ -402,7 +399,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $processor = new FilterProcessor($filter);
         
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
-                                    'Cannot parse config because it is read-only');
+                                    'Cannot process config because it is read-only');
         $processor->process($config);
     }
     
@@ -451,7 +448,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $queue->insert($lowerProcessor);
         
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
-                                    'Cannot parse config because it is read-only');
+                                    'Cannot process config because it is read-only');
         $queue->process($config);
     }
 

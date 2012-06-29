@@ -118,7 +118,7 @@ class Translator implements ProcessorInterface
     public function process(Config $config)
     {
         if ($config->isReadOnly()) {
-            throw new Exception\InvalidArgumentException('Cannot parse config because it is read-only');
+            throw new Exception\InvalidArgumentException('Cannot process config because it is read-only');
         }
 
         /**
@@ -128,7 +128,7 @@ class Translator implements ProcessorInterface
             if ($val instanceof Config) {
                 $this->process($val);
             } else {
-                $config->$key = $this->translator->translate($val, $this->textDomain, $this->locale);
+                $config->{$key} = $this->translator->translate($val, $this->textDomain, $this->locale);
             }
         }
 

@@ -102,46 +102,40 @@ class DispatchListener implements ListenerAggregateInterface
         try {
             $controller = $controllerLoader->get($controllerName);
         } catch (ServiceNotFoundException $exception) {
-            $error = clone $e;
-            $error->setError($application::ERROR_CONTROLLER_NOT_FOUND)
+            $e->setError($application::ERROR_CONTROLLER_NOT_FOUND)
                   ->setController($controllerName)
                   ->setControllerClass('invalid controller class or alias: '.$controllerName)
                   ->setParam('exception', $exception);
 
-            $results = $events->trigger('dispatch.error', $error);
-            if (count($results)) {
-                $return = $results->last();
-            } else {
-                $return = $error->getParams();
+            $results = $events->trigger('dispatch.error', $e);
+            $return = $results->last();
+            if (! $return) {
+                $return = $e->getResult();
             }
             
             return $this->complete($return, $e);
         } catch (\Exception $exception) {
-            $error = clone $e;
-            $error->setError($application::ERROR_EXCEPTION)
+            $e->setError($application::ERROR_EXCEPTION)
                   ->setController($controllerName)
                   ->setParam('exception', $exception);
-            $results = $events->trigger('dispatch.error', $error);
-            if (count($results)) {
-                $return = $results->last();
-            } else {
-                $return = $error->getParams();
+            $results = $events->trigger('dispatch.error', $e);
+            $return = $results->last();
+            if (! $return) {
+                $return = $e->getResult();
             }
 
             return $this->complete($return, $e);
         }
 
         if (!$controller instanceof DispatchableInterface) {
-            $error = clone $e;
-            $error->setError($application::ERROR_CONTROLLER_INVALID)
+            $e->setError($application::ERROR_CONTROLLER_INVALID)
                 ->setController($controllerName)
                 ->setControllerClass(get_class($controller));
 
-            $results = $events->trigger('dispatch.error', $error);
-            if (count($results)) {
-                $return = $results->last();
-            } else {
-                $return = $error->getParams();
+            $results = $events->trigger('dispatch.error', $e);
+            $return = $results->last();
+            if (! $return) {
+                $return = $e->getResult();
             }
             return $this->complete($return, $e);
         }
@@ -156,16 +150,14 @@ class DispatchListener implements ListenerAggregateInterface
         try {
             $return = $controller->dispatch($request, $response);
         } catch (\Exception $ex) {
-            $error = clone $e;
-            $error->setError($application::ERROR_EXCEPTION)
+            $e->setError($application::ERROR_EXCEPTION)
                   ->setController($controllerName)
                   ->setControllerClass(get_class($controller))
                   ->setParam('exception', $ex);
-            $results = $events->trigger('dispatch.error', $error);
-            if (count($results)) {
-                $return = $results->last();
-            } else {
-                $return = $error->getParams();
+            $results = $events->trigger('dispatch.error', $e);
+            $return = $results->last();
+            if (! $return) {
+                $return = $e->getResult();
             }
         }
 

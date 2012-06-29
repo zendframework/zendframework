@@ -28,11 +28,11 @@ namespace ZendTest\Navigation\TestAsset;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class UrlHelper extends \Zend\View\Helper\Url
+class Router extends \Zend\Mvc\Router\Http\TreeRouteStack
 {
     const RETURN_URL = 'spotify:track:2nd6CTjR9zjHGT0QtpfLHe';
 
-    public function __invoke($name = null, array $params = array(), array $options = array(), $reuseMatchedParams = false)
+    public function assemble(array $params = array(), array $options = array())
     {
         return self::RETURN_URL;
     }

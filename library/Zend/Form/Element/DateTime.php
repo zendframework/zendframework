@@ -21,7 +21,8 @@
 
 namespace Zend\Form\Element;
 
-use DateTime;
+use DateInterval;
+use DateTime as PhpDateTime;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Date as DateValidator;
@@ -102,17 +103,17 @@ class DateTime extends Element implements InputProviderInterface
     /**
      * Retrieves a Date Validator configured for a DateTime Input type
      *
-     * @return ValidatorInterface
+     * @return DateTime
      */
     protected function getDateValidator()
     {
-        return new DateValidator(array('format' => DateTime::ISO8601));
+        return new DateValidator(array('format' => PhpDateTime::ISO8601));
     }
 
     /**
      * Retrieves a DateStep Validator configured for a DateTime Input type
      *
-     * @return ValidatorInterface
+     * @return DateTime
      */
     protected function getStepValidator()
     {
@@ -123,9 +124,9 @@ class DateTime extends Element implements InputProviderInterface
                      ? $this->attributes['min'] : '1970-01-01T00:00:00Z';
 
         return new DateStepValidator(array(
-            'format'       => \DateTime::ISO8601,
+            'format'       => PhpDateTime::ISO8601,
             'baseValue'    => $baseValue,
-            'stepInterval' => new \DateInterval("PT{$stepValue}M"),
+            'stepInterval' => new DateInterval("PT{$stepValue}M"),
         ));
     }
 

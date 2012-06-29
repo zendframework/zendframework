@@ -52,6 +52,12 @@ class MockApplication implements ApplicationInterface
         return $this->serviceManager;
     }
 
+    public function setServiceManager($serviceManager)
+    {
+        $this->serviceManager = $serviceManager;
+        return $this;
+    }
+
     /**
      * Get the request object
      *

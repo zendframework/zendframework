@@ -27,24 +27,16 @@ class MysqlMetadata extends AbstractSource
             return;
         }
         $this->prepareDataHierarchy('schemas');
-        
-        $platform = $this->adapter->getPlatform();
-        
-        $isColumns = array(
-            'SCHEMA_NAME',
-        );
 
-        array_walk($isColumns, function (&$c) use ($platform) {
-            $c = $platform->quoteIdentifier($c);
-        });
-        
-        $sql = 'SELECT ' . implode(', ', $isColumns)
-        . ' FROM ' . $platform->quoteIdentifierChain(array('INFORMATION_SCHEMA', 'SCHEMATA'))
-        . ' WHERE ' . $platform->quoteIdentifier('SCHEMA_NAME')
-        . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
-        
+        $p = $this->adapter->getPlatform();
+
+        $sql = 'SELECT ' . $p->quoteIdentifier('SCHEMA_NAME')
+             . ' FROM ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA', 'SCHEMATA'))
+             . ' WHERE ' . $p->quoteIdentifier('SCHEMA_NAME')
+             . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
+
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-        
+
         $schemas = array();
         foreach ($results->toArray() as $row) {
             $schemas[] = $row['SCHEMA_NAME'];
@@ -60,36 +52,36 @@ class MysqlMetadata extends AbstractSource
         }
         $this->prepareDataHierarchy('table_names', $schema);
 
-        $platform = $this->adapter->getPlatform();
+        $p = $this->adapter->getPlatform();
 
         $isColumns = array(
-            'T.TABLE_NAME',
-            'T.TABLE_TYPE',
-            'V.VIEW_DEFINITION',
-            'V.CHECK_OPTION',
-            'V.IS_UPDATABLE',
+            array('T','TABLE_NAME'),
+            array('T','TABLE_TYPE'),
+            array('V','VIEW_DEFINITION'),
+            array('V','CHECK_OPTION'),
+            array('V','IS_UPDATABLE'),
         );
 
-        array_walk($isColumns, function (&$c) use ($platform) { $c = $platform->quoteIdentifierInFragment($c); });
+        array_walk($isColumns, function (&$c) use ($p) { $c = $p->quoteIdentifierChain($c); });
 
         $sql = 'SELECT ' . implode(', ', $isColumns)
-             . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLES T')
+             . ' FROM ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','TABLES')) . 'T'
 
-             . ' LEFT JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.VIEWS V')
-             . ' ON ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-             . '  = ' . $platform->quoteIdentifierInFragment('V.TABLE_SCHEMA')
-             . ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_NAME')
-             . '  = ' . $platform->quoteIdentifierInFragment('V.TABLE_NAME')
+             . ' LEFT JOIN ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','VIEWS')) . ' V'
+             . ' ON ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+             . '  = ' . $p->quoteIdentifierChain(array('V','TABLE_SCHEMA'))
+             . ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
+             . '  = ' . $p->quoteIdentifierChain(array('V','TABLE_NAME'))
 
-             . ' WHERE ' . $platform->quoteIdentifier('TABLE_TYPE')
-             . ' IN (' . $platform->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+             . ' WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_TYPE'))
+             . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
-            $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-                  . ' = ' . $platform->quoteValue($schema);
+            $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+                  . ' = ' . $p->quoteValue($schema);
         } else {
-            $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-                  . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
+            $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+                  . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -113,41 +105,41 @@ class MysqlMetadata extends AbstractSource
             return;
         }
         $this->prepareDataHierarchy('columns', $schema, $table);
-        $platform = $this->adapter->getPlatform();
+        $p = $this->adapter->getPlatform();
 
         $isColumns = array(
-            'C.ORDINAL_POSITION',
-            'C.COLUMN_DEFAULT',
-            'C.IS_NULLABLE',
-            'C.DATA_TYPE',
-            'C.CHARACTER_MAXIMUM_LENGTH',
-            'C.CHARACTER_OCTET_LENGTH',
-            'C.NUMERIC_PRECISION',
-            'C.NUMERIC_SCALE',
-            'C.COLUMN_NAME',
-            'C.COLUMN_TYPE',
+            array('C','ORDINAL_POSITION'),
+            array('C','COLUMN_DEFAULT'),
+            array('C','IS_NULLABLE'),
+            array('C','DATA_TYPE'),
+            array('C','CHARACTER_MAXIMUM_LENGTH'),
+            array('C','CHARACTER_OCTET_LENGTH'),
+            array('C','NUMERIC_PRECISION'),
+            array('C','NUMERIC_SCALE'),
+            array('C','COLUMN_NAME'),
+            array('C','COLUMN_TYPE'),
         );
 
-        array_walk($isColumns, function (&$c) use ($platform) { $c = $platform->quoteIdentifierInFragment($c); });
+        array_walk($isColumns, function (&$c) use ($p) { $c = $p->quoteIdentifierChain($c); });
 
         $sql = 'SELECT ' . implode(', ', $isColumns)
-             . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLES T')
-             . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.COLUMNS C')
-             . ' ON ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-             . '  = ' . $platform->quoteIdentifierInFragment('C.TABLE_SCHEMA')
-             . ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_NAME')
-             . '  = ' . $platform->quoteIdentifierInFragment('C.TABLE_NAME')
-             . ' WHERE ' . $platform->quoteIdentifierInFragment('T.TABLE_TYPE')
-             . ' IN (' . $platform->quoteValueList(array('BASE TABLE', 'VIEW')) . ')'
-             . ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_NAME')
-             . '  = ' . $platform->quoteValue($table);
+             . ' FROM ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','TABLES')) . 'T'
+             . ' INNER JOIN ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','COLUMNS')) . 'C'
+             . ' ON ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+             . '  = ' . $p->quoteIdentifierChain(array('C','TABLE_SCHEMA'))
+             . ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
+             . '  = ' . $p->quoteIdentifierChain(array('C','TABLE_NAME'))
+             . ' WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_TYPE'))
+             . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')'
+             . ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
+             . '  = ' . $p->quoteValue($table);
 
         if ($schema != self::DEFAULT_SCHEMA) {
-            $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-                  . ' = ' . $platform->quoteValue($schema);
+            $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+                  . ' = ' . $p->quoteValue($schema);
         } else {
-            $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-                  . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
+            $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+                  . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -185,34 +177,34 @@ class MysqlMetadata extends AbstractSource
 
         $this->prepareDataHierarchy('constraint_names', $schema);
 
-        $platform = $this->adapter->getPlatform();
+        $p = $this->adapter->getPlatform();
 
         $isColumns = array(
-            'TC.TABLE_NAME',
-            'TC.CONSTRAINT_NAME',
-            'TC.CONSTRAINT_TYPE',
+            array('TC','TABLE_NAME'),
+            array('TC','CONSTRAINT_NAME'),
+            array('TC','CONSTRAINT_TYPE'),
         );
 
-        array_walk($isColumns, function (&$c) use ($platform) {
-            $c = $platform->quoteIdentifierInFragment($c);
+        array_walk($isColumns, function (&$c) use ($p) {
+            $c = $p->quoteIdentifierChain($c);
         });
 
         $sql = 'SELECT ' . implode(', ', $isColumns)
-        . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLES T')
-        . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLE_CONSTRAINTS TC')
-        . ' ON ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-        . '  = ' . $platform->quoteIdentifierInFragment('TC.TABLE_SCHEMA')
-        . ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_NAME')
-        . '  = ' . $platform->quoteIdentifierInFragment('TC.TABLE_NAME')
-        . ' WHERE ' . $platform->quoteIdentifierInFragment('T.TABLE_TYPE')
-        . ' IN (' . $platform->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+        . ' FROM ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','TABLES')) . 'T'
+        . ' INNER JOIN ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','TABLE_CONSTRAINTS')) . 'TC'
+        . ' ON ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+        . '  = ' . $p->quoteIdentifierChain(array('TC','TABLE_SCHEMA'))
+        . ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
+        . '  = ' . $p->quoteIdentifierChain(array('TC','TABLE_NAME'))
+        . ' WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_TYPE'))
+        . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
-            $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-            . ' = ' . $platform->quoteValue($schema);
+            $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+            . ' = ' . $p->quoteValue($schema);
         } else {
-            $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-            . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
+            $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+            . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -233,37 +225,37 @@ class MysqlMetadata extends AbstractSource
 
         $this->prepareDataHierarchy('constraint_keys', $schema);
 
-        $platform = $this->adapter->getPlatform();
+        $p = $this->adapter->getPlatform();
 
         $isColumns = array(
-            'T.TABLE_NAME',
-            'KCU.CONSTRAINT_NAME',
-            'KCU.COLUMN_NAME',
-            'KCU.ORDINAL_POSITION',
+            array('T','TABLE_NAME'),
+            array('KCU','CONSTRAINT_NAME'),
+            array('KCU','COLUMN_NAME'),
+            array('KCU','ORDINAL_POSITION'),
         );
 
-        array_walk($isColumns, function (&$c) use ($platform) {
-            $c = $platform->quoteIdentifierInFragment($c);
+        array_walk($isColumns, function (&$c) use ($p) {
+            $c = $p->quoteIdentifierChain($c);
         });
 
         $sql = 'SELECT ' . implode(', ', $isColumns)
-        . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLES T')
+        . ' FROM ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','TABLES')) . 'T'
         
-        . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.KEY_COLUMN_USAGE KCU')
-        . ' ON ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-        . '  = ' . $platform->quoteIdentifierInFragment('KCU.TABLE_SCHEMA')
-        . ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_NAME')
-        . '  = ' . $platform->quoteIdentifierInFragment('KCU.TABLE_NAME')
+        . ' INNER JOIN ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','KEY_COLUMN_USAGE')) . 'KCU'
+        . ' ON ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+        . '  = ' . $p->quoteIdentifierChain(array('KCU','TABLE_SCHEMA'))
+        . ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
+        . '  = ' . $p->quoteIdentifierChain(array('KCU','TABLE_NAME'))
         
-        . ' WHERE ' . $platform->quoteIdentifierInFragment('T.TABLE_TYPE')
-        . ' IN (' . $platform->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+        . ' WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_TYPE'))
+        . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
-            $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-            . ' = ' . $platform->quoteValue($schema);
+            $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+            . ' = ' . $p->quoteValue($schema);
         } else {
-            $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-            . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
+            $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+            . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -284,48 +276,48 @@ class MysqlMetadata extends AbstractSource
 
         $this->prepareDataHierarchy('constraint_references', $schema);
 
-        $platform = $this->adapter->getPlatform();
+        $p = $this->adapter->getPlatform();
 
         $isColumns = array(
-            'RC.TABLE_NAME',
-            'RC.CONSTRAINT_NAME',
-            'RC.UPDATE_RULE',
-            'RC.DELETE_RULE',
-            'KCU.REFERENCED_TABLE_SCHEMA',
-            'KCU.REFERENCED_TABLE_NAME',
-            'KCU.REFERENCED_COLUMN_NAME'
+            array('RC','TABLE_NAME'),
+            array('RC','CONSTRAINT_NAME'),
+            array('RC','UPDATE_RULE'),
+            array('RC','DELETE_RULE'),
+            array('KCU','REFERENCED_TABLE_SCHEMA'),
+            array('KCU','REFERENCED_TABLE_NAME'),
+            array('KCU','REFERENCED_COLUMN_NAME'),
         );
 
-        array_walk($isColumns, function (&$c) use ($platform) {
-            $c = $platform->quoteIdentifierInFragment($c);
+        array_walk($isColumns, function (&$c) use ($p) {
+            $c = $p->quoteIdentifierChain($c);
         });
 
         $sql = 'SELECT ' . implode(', ', $isColumns)
-        . 'FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLES T')
+        . 'FROM ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','TABLES')) . 'T'
 
-        . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS RC')
-        . ' ON ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-        . '  = ' . $platform->quoteIdentifierInFragment('RC.CONSTRAINT_SCHEMA')
-        . ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_NAME')
-        . '  = ' . $platform->quoteIdentifierInFragment('RC.TABLE_NAME')
+        . ' INNER JOIN ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','REFERENTIAL_CONSTRAINTS')) . 'RC'
+        . ' ON ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+        . '  = ' . $p->quoteIdentifierChain(array('RC','CONSTRAINT_SCHEMA'))
+        . ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
+        . '  = ' . $p->quoteIdentifierChain(array('RC','TABLE_NAME'))
 
-        . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.KEY_COLUMN_USAGE KCU')
-        . ' ON ' . $platform->quoteIdentifierInFragment('RC.CONSTRAINT_SCHEMA')
-        . '  = ' . $platform->quoteIdentifierInFragment('KCU.TABLE_SCHEMA')
-        . ' AND ' . $platform->quoteIdentifierInFragment('RC.TABLE_NAME')
-        . '  = ' . $platform->quoteIdentifierInFragment('KCU.TABLE_NAME')
-        . ' AND ' . $platform->quoteIdentifierInFragment('RC.CONSTRAINT_NAME')
-        . '  = ' . $platform->quoteIdentifierInFragment('KCU.CONSTRAINT_NAME')
+        . ' INNER JOIN ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','KEY_COLUMN_USAGE')) . 'KCU'
+        . ' ON ' . $p->quoteIdentifierChain(array('RC','CONSTRAINT_SCHEMA'))
+        . '  = ' . $p->quoteIdentifierChain(array('KCU','TABLE_SCHEMA'))
+        . ' AND ' . $p->quoteIdentifierChain(array('RC','TABLE_NAME'))
+        . '  = ' . $p->quoteIdentifierChain(array('KCU','TABLE_NAME'))
+        . ' AND ' . $p->quoteIdentifierChain(array('RC','CONSTRAINT_NAME'))
+        . '  = ' . $p->quoteIdentifierChain(array('KCU','CONSTRAINT_NAME'))
 
-        . 'WHERE ' . $platform->quoteIdentifierInFragment('T.TABLE_TYPE')
-        . ' IN (' . $platform->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+        . 'WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_TYPE'))
+        . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
-            $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-            . ' = ' . $platform->quoteValue($schema);
+            $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+            . ' = ' . $p->quoteValue($schema);
         } else {
-            $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-            . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
+            $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+            . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -346,7 +338,7 @@ class MysqlMetadata extends AbstractSource
 
         $this->prepareDataHierarchy('triggers', $schema);
 
-        $platform = $this->adapter->getPlatform();
+        $p = $this->adapter->getPlatform();
 
         $isColumns = array(
 //            'TRIGGER_CATALOG',
@@ -368,20 +360,20 @@ class MysqlMetadata extends AbstractSource
             'CREATED',
         );
 
-        array_walk($isColumns, function (&$c) use ($platform) {
-            $c = $platform->quoteIdentifier($c);
+        array_walk($isColumns, function (&$c) use ($p) {
+            $c = $p->quoteIdentifier($c);
         });
-        
+
         $sql = 'SELECT ' . implode(', ', $isColumns)
-        . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TRIGGERS')
+        . ' FROM ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','TRIGGERS'))
         . ' WHERE ';
         
         if ($schema != self::DEFAULT_SCHEMA) {
-            $sql .= $platform->quoteIdentifier('TRIGGER_SCHEMA')
-            . ' = ' . $platform->quoteValue($schema);
+            $sql .= $p->quoteIdentifier('TRIGGER_SCHEMA')
+            . ' = ' . $p->quoteValue($schema);
         } else {
-            $sql .= $platform->quoteIdentifier('TRIGGER_SCHEMA')
-            . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
+            $sql .= $p->quoteIdentifier('TRIGGER_SCHEMA')
+            . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
         }
         
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);

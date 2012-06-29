@@ -29,6 +29,12 @@ class AnnotationManagerTest extends TestCase
 {
     public function setUp()
     {
+        if (!defined('TESTS_ZEND_CODE_ANNOTATION_DOCTRINE_SUPPORT')
+            || !constant('TESTS_ZEND_CODE_ANNOTATION_DOCTRINE_SUPPORT')
+        ) {
+            $this->markTestSkipped('Enable TESTS_ZEND_CODE_ANNOTATION_DOCTRINE_SUPPORT to test doctrine annotation parsing');
+        }
+
         $this->manager = new Annotation\AnnotationManager();
     }
 

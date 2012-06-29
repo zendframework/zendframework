@@ -66,6 +66,14 @@ defined('TESTS_ZEND_CACHE_MEMCACHED_HOST') || define('TESTS_ZEND_CACHE_MEMCACHED
 defined('TESTS_ZEND_CACHE_MEMCACHED_PORT') || define('TESTS_ZEND_CACHE_MEMCACHED_PORT', 11211);
 
 /**
+ * Zend\Code\Annotation
+ *
+ * Enable this if you have installed Doctrine\Common on the include_path or via
+ * composer.
+ */
+defined('TESTS_ZEND_CODE_ANNOTATION_DOCTRINE_SUPPORT') || define('TESTS_ZEND_CODE_ANNOTATION_DOCTRINE_SUPPORT', false);
+
+/**
  * Zend\Config
  */
 defined('TESTS_ZEND_CONFIG_YAML_ENABLED') || define('TESTS_ZEND_CONFIG_YAML_ENABLED', false);
@@ -180,6 +188,14 @@ defined('TESTS_ZEND_FEED_PUBSUBHUBBUB_BASEURI') || define('TESTS_ZEND_FEED_PUBSU
  * without network connectivity are run; when enabled, all tests will run.
  */
 defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED') || define('TESTS_ZEND_FEED_READER_ONLINE_ENABLED', false);
+
+/**
+ * Zend\Form\Annotation
+ *
+ * Enable this if you have installed Doctrine\Common on the include_path or via
+ * composer.
+ */
+defined('TESTS_ZEND_FORM_ANNOTATION_SUPPORT') || define('TESTS_ZEND_FORM_ANNOTATION_SUPPORT', false);
 
 /**
  * Zend\GData tests

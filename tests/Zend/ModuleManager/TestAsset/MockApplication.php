@@ -37,14 +37,9 @@ class MockApplication implements ApplicationInterface
         $this->events = $events;
     }
 
-    public function events()
+    public function getEventManager()
     {
         return $this->events;
-    }
-
-    public function setServiceManager($serviceManager)
-    {
-        $this->serviceManager = $serviceManager;
     }
 
     /**
@@ -92,6 +87,6 @@ class MockApplication implements ApplicationInterface
         $event = new MvcEvent();
         $event->setApplication($this);
         $event->setTarget($this);
-        $this->events()->trigger('bootstrap', $event);
+        $this->getEventManager()->trigger('bootstrap', $event);
     }
 }

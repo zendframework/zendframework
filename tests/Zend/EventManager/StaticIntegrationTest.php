@@ -52,7 +52,7 @@ class StaticIntegrationTest extends TestCase
             }
         );
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->setSharedManager($events);
+        $class->getEventManager()->setSharedManager($events);
         $class->foo();
         $this->assertEquals(1, $counter->count);
     }
@@ -69,10 +69,10 @@ class StaticIntegrationTest extends TestCase
             }
         );
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->attach('foo', function ($e) use ($test) {
+        $class->getEventManager()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local';
         });
-        $class->events()->setSharedManager($events);
+        $class->getEventManager()->setSharedManager($events);
         $class->foo();
         $this->assertEquals(array('local', 'static'), $test->results);
     }
@@ -90,16 +90,16 @@ class StaticIntegrationTest extends TestCase
             10000 // high priority
         );
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->attach('foo', function ($e) use ($test) {
+        $class->getEventManager()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local';
         }, 1); // low priority
-        $class->events()->attach('foo', function ($e) use ($test) {
+        $class->getEventManager()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local2';
         }, 1000); // medium priority
-        $class->events()->attach('foo', function ($e) use ($test) {
+        $class->getEventManager()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local3';
         }, 15000); // highest priority
-        $class->events()->setSharedManager($events);
+        $class->getEventManager()->setSharedManager($events);
         $class->foo();
         $this->assertEquals(array('local3', 'static', 'local2', 'local'), $test->results);
     }
@@ -115,7 +115,7 @@ class StaticIntegrationTest extends TestCase
             }
         );
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->unsetSharedManager();
+        $class->getEventManager()->unsetSharedManager();
         $class->foo();
         $this->assertEquals(0, $counter->count);
     }
@@ -132,8 +132,8 @@ class StaticIntegrationTest extends TestCase
         );
         $mockStaticEvents = new TestAsset\StaticEventsMock();
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->setSharedManager($mockStaticEvents);
-        $this->assertSame($mockStaticEvents, $class->events()->getSharedManager());
+        $class->getEventManager()->setSharedManager($mockStaticEvents);
+        $this->assertSame($mockStaticEvents, $class->getEventManager()->getSharedManager());
         $class->foo();
         $this->assertEquals(0, $counter->count);
     }
@@ -151,10 +151,10 @@ class StaticIntegrationTest extends TestCase
             100
         );
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->attach('foo', function ($e) use ($test) {
+        $class->getEventManager()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local';
         }, -100);
-        $class->events()->setSharedManager($events);
+        $class->getEventManager()->setSharedManager($events);
         $class->foo();
         $this->assertEquals(array('static', 'local'), $test->results);
     }

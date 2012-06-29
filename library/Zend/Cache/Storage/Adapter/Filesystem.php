@@ -411,7 +411,7 @@ class Filesystem extends AbstractAdapter implements
             }
 
             // clean total space buffer on change cache_dir
-            $events     = $this->events();
+            $events     = $this->getEventManager();
             $handle     = null;
             $totalSpace = & $this->totalSpace;
             $callback   = function ($event) use (& $events, & $handle, & $totalSpace) {
@@ -421,7 +421,7 @@ class Filesystem extends AbstractAdapter implements
                     $events->detach($handle);
                 }
             };
-            $handle = $this->events()->attach($callback);
+            $handle = $this->getEventManager()->attach($callback);
         }
         return $this->totalSpace;
     }
@@ -1199,7 +1199,7 @@ class Filesystem extends AbstractAdapter implements
             );
 
             // update capabilities on change options
-            $this->events()->attach('option', function ($event) use ($capabilities, $marker) {
+            $this->getEventManager()->attach('option', function ($event) use ($capabilities, $marker) {
                 $params = $event->getParams();
 
                 if (isset($params['namespace_separator'])) {

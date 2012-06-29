@@ -169,7 +169,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
             if ($instance instanceof EventManagerAwareInterface
-                && !$instance->events() instanceof EventManagerInterface
+                && !$instance->getEventManager() instanceof EventManagerInterface
             ) {
                 $instance->setEventManager($serviceManager->get('EventManager'));
             }

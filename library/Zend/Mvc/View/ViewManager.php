@@ -146,7 +146,7 @@ class ViewManager implements ListenerAggregateInterface
         $application  = $event->getApplication();
         $services     = $application->getServiceManager();
         $config       = $services->get('Configuration');
-        $events       = $application->events();
+        $events       = $application->getEventManager();
         $sharedEvents = $events->getSharedManager();
 
         $this->config   = isset($config['view_manager']) && (is_array($config['view_manager']) || $config['view_manager'] instanceof ArrayAccess)
@@ -373,7 +373,7 @@ class ViewManager implements ListenerAggregateInterface
 
         $this->view = new View();
         $this->view->setEventManager($this->services->get('EventManager'));
-        $this->view->events()->attach($this->getRendererStrategy());
+        $this->view->getEventManager()->attach($this->getRendererStrategy());
 
         $this->services->setService('View', $this->view);
         $this->services->setAlias('Zend\View\View', 'View');
@@ -564,7 +564,7 @@ class ViewManager implements ListenerAggregateInterface
 
             $listener = $this->services->get($strategy);
             if ($listener instanceof ListenerAggregateInterface) {
-                $view->events()->attach($listener, 100);
+                $view->getEventManager()->attach($listener, 100);
             }
         }
     }

@@ -148,7 +148,7 @@ class Module
     public function init(ModuleManager $moduleManger)
     {
         // Remember to keep the init() method as lightweight as possible
-        $events = $moduleManager->events();
+        $events = $moduleManager->getEventManager();
         $events->attach('loadModules.post', array($this, 'modulesLoaded'));
     }
 

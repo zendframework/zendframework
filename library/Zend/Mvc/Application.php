@@ -148,7 +148,7 @@ class Application implements
     public function bootstrap()
     {
         $serviceManager = $this->serviceManager;
-        $events         = $this->events();
+        $events         = $this->getEventManager();
 
         $events->attach($serviceManager->get('RouteListener'));
         $events->attach($serviceManager->get('DispatchListener'));
@@ -231,7 +231,7 @@ class Application implements
      *
      * @return EventManagerInterface
      */
-    public function events()
+    public function getEventManager()
     {
         return $this->events;
     }
@@ -254,7 +254,7 @@ class Application implements
      */
     public function run()
     {
-        $events = $this->events();
+        $events = $this->getEventManager();
         $event  = $this->getMvcEvent();
 
         // Define callback used to determine whether or not to short-circuit
@@ -314,7 +314,7 @@ class Application implements
      */
     protected function completeRequest(MvcEvent $event)
     {
-        $events = $this->events();
+        $events = $this->getEventManager();
         $event->setTarget($this);
         $events->trigger('render', $event);
         $events->trigger('finish', $event);

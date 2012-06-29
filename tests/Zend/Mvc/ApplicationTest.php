@@ -88,7 +88,7 @@ class ApplicationTest extends TestCase
     public function getConfigListener()
     {
         $manager   = $this->serviceManager->get('ModuleManager');
-        $listeners = $manager->events()->getListeners('loadModule');
+        $listeners = $manager->getEventManager()->getListeners('loadModule');
         foreach ($listeners as $listener) {
             $callback = $listener->getCallback();
             if (!is_array($callback)) {
@@ -125,7 +125,7 @@ class ApplicationTest extends TestCase
     {
         $events       = $this->serviceManager->get('EventManager');
         $sharedEvents = $events->getSharedManager();
-        $appEvents    = $this->application->events();
+        $appEvents    = $this->application->getEventManager();
         $this->assertInstanceOf('Zend\EventManager\EventManager', $appEvents);
         $this->assertNotSame($events, $appEvents);
         $this->assertSame($sharedEvents, $appEvents->getSharedManager());
@@ -133,7 +133,7 @@ class ApplicationTest extends TestCase
 
     public function testEventManagerListensOnApplicationContext()
     {
-        $events      = $this->application->events();
+        $events      = $this->application->getEventManager();
         $identifiers = $events->getIdentifiers();
         $expected    = array('Zend\Mvc\Application', 'application');
         $this->assertEquals($expected, array_values($identifiers));
@@ -153,7 +153,7 @@ class ApplicationTest extends TestCase
 
     public function testEventsAreEmptyAtFirst()
     {
-        $events = $this->application->events();
+        $events = $this->application->getEventManager();
         $registeredEvents = $events->getEvents();
         $this->assertEquals(array(), $registeredEvents);
 
@@ -165,7 +165,7 @@ class ApplicationTest extends TestCase
     {
         $routeListener = $this->serviceManager->get('RouteListener');
         $this->application->bootstrap();
-        $events = $this->application->events();
+        $events = $this->application->getEventManager();
         $listeners = $events->getListeners('route');
         $this->assertEquals(1, count($listeners));
         $listener = $listeners->top();
@@ -177,7 +177,7 @@ class ApplicationTest extends TestCase
     {
         $dispatchListener = $this->serviceManager->get('DispatchListener');
         $this->application->bootstrap();
-        $events = $this->application->events();
+        $events = $this->application->getEventManager();
         $listeners = $events->getListeners('dispatch');
         $this->assertEquals(1, count($listeners));
         $listener = $listeners->top();
@@ -189,7 +189,7 @@ class ApplicationTest extends TestCase
     {
         $viewManager = $this->serviceManager->get('ViewManager');
         $this->application->bootstrap();
-        $events = $this->application->events();
+        $events = $this->application->getEventManager();
         $listeners = $events->getListeners('bootstrap');
         $this->assertEquals(1, count($listeners));
         $listener = $listeners->top();
@@ -292,7 +292,7 @@ class ApplicationTest extends TestCase
         $this->setupPathController();
 
         $log = array();
-        $this->application->events()->attach('route', function($e) use (&$log) {
+        $this->application->getEventManager()->attach('route', function($e) use (&$log) {
             $match = $e->getRouteMatch();
             if (!$match) {
                 return;
@@ -310,7 +310,7 @@ class ApplicationTest extends TestCase
         $this->setupPathController();
         $response = new Response();
 
-        $this->application->events()->attach('route', function($e) use ($response) {
+        $this->application->getEventManager()->attach('route', function($e) use ($response) {
             return $response;
         });
 
@@ -331,7 +331,7 @@ class ApplicationTest extends TestCase
     {
         $this->setupActionController();
 
-        $events  = $this->application->events()->getSharedManager();
+        $events  = $this->application->getEventManager()->getSharedManager();
         $storage = new ArrayObject();
         $events->attach('ZendTest\Mvc\Controller\TestAsset\SampleController', 'dispatch', function ($e) use ($storage) {
             $controller = $e->getTarget();
@@ -348,7 +348,7 @@ class ApplicationTest extends TestCase
     public function testFinishEventIsTriggeredAfterDispatching()
     {
         $this->setupActionController();
-        $this->application->events()->attach('finish', function($e) {
+        $this->application->getEventManager()->attach('finish', function($e) {
             return $e->getResponse()->setContent($e->getResponse()->getBody() . 'foobar');
         });
         $this->assertContains('foobar', $this->application->run()->getBody(), 'The "finish" event was not triggered ("foobar" not in response)');
@@ -361,7 +361,7 @@ class ApplicationTest extends TestCase
     {
         $this->setupBadController();
         $response = $this->application->getResponse();
-        $events   = $this->application->events();
+        $events   = $this->application->getEventManager();
         $events->attach('dispatch.error', function ($e) use ($response) {
             $exception = $e->getParam('exception');
             $response->setContent($exception->getMessage());
@@ -381,7 +381,7 @@ class ApplicationTest extends TestCase
         $controllerLoader = $this->serviceManager->get('ControllerLoader');
         $controllerLoader->setInvokableClass('bad', 'DoesNotExist');
         $response = $this->application->getResponse();
-        $events   = $this->application->events();
+        $events   = $this->application->getEventManager();
         $events->attach('dispatch.error', function ($e) use ($response) {
             $error      = $e->getError();
             $controller = $e->getController();
@@ -401,7 +401,7 @@ class ApplicationTest extends TestCase
     {
         $this->setupBadController(false);
         $response = $this->application->getResponse();
-        $events   = $this->application->events();
+        $events   = $this->application->getEventManager();
         $events->attach('dispatch.error', function ($e) use ($response) {
             $error      = $e->getError();
             $controller = $e->getController();
@@ -426,7 +426,7 @@ class ApplicationTest extends TestCase
             return new stdClass;
         });
         $response = $this->application->getResponse();
-        $events   = $this->application->events();
+        $events   = $this->application->getEventManager();
         $events->attach('dispatch.error', function ($e) use ($response) {
             $error      = $e->getError();
             $controller = $e->getController();
@@ -451,7 +451,7 @@ class ApplicationTest extends TestCase
         $this->application->getMvcEvent()->setRouter($router);
 
         $response = $this->application->getResponse();
-        $events   = $this->application->events();
+        $events   = $this->application->getEventManager();
         $events->attach('dispatch.error', function ($e) use ($response) {
             $error      = $e->getError();
             $response->setContent("Code: " . $error);
@@ -471,7 +471,7 @@ class ApplicationTest extends TestCase
         $controllerLoader = $this->serviceManager->get('ControllerLoader');
         $controllerLoader->setInvokableClass('path', 'InvalidClassName');
         $response = new Response();
-        $this->application->events()->attach('dispatch.error', function($e) use ($response) {
+        $this->application->getEventManager()->attach('dispatch.error', function($e) use ($response) {
             return $response;
         });
 
@@ -489,7 +489,7 @@ class ApplicationTest extends TestCase
         $this->application->getMvcEvent()->setRouter($router);
 
         $response = $this->application->getResponse();
-        $events   = $this->application->events();
+        $events   = $this->application->getEventManager();
         $events->attach('dispatch.error', function ($e) use ($response) {
             $error      = $e->getError();
             $response->setContent("Code: " . $error);
@@ -508,7 +508,7 @@ class ApplicationTest extends TestCase
     {
         $this->application->bootstrap();
         $response = $this->application->getResponse();
-        $events   = $this->application->events();
+        $events   = $this->application->getEventManager();
         $events->attach('route', function($e) use ($response) {
             return $response;
         }, 100);
@@ -530,7 +530,7 @@ class ApplicationTest extends TestCase
     {
         $this->application->bootstrap();
         $response = $this->application->getResponse();
-        $events   = $this->application->events();
+        $events   = $this->application->getEventManager();
         $events->clearListeners('route');
         $events->attach('dispatch', function($e) use ($response) {
             return $response;
@@ -550,7 +550,7 @@ class ApplicationTest extends TestCase
     {
         $this->setupActionController();
 
-        $events   = $this->application->events();
+        $events   = $this->application->getEventManager();
         $response = $this->application->getResponse();
         $events->attach('finish', function ($e) use ($response) {
             $response->setContent("EventClass: " . get_class($e->getTarget()));

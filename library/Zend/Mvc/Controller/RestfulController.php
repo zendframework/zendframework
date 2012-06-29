@@ -161,7 +161,7 @@ abstract class RestfulController implements
           ->setResponse($response)
           ->setTarget($this);
 
-        $result = $this->events()->trigger(MvcEvent::EVENT_DISPATCH, $e, function($test) {
+        $result = $this->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH, $e, function($test) {
             return ($test instanceof Response);
         });
         if ($result->stopped()) {
@@ -297,7 +297,7 @@ abstract class RestfulController implements
      *
      * @return EventManagerInterface
      */
-    public function events()
+    public function getEventManager()
     {
         if (!$this->events) {
             $this->setEventManager(new EventManager());
@@ -427,7 +427,7 @@ abstract class RestfulController implements
      */
     protected function attachDefaultListeners()
     {
-        $events = $this->events();
+        $events = $this->getEventManager();
         $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'execute'));
     }
 

@@ -152,7 +152,7 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventsCapableInterface;
 
 public function setEventManager(EventManagerInterface $events);
-public function events();
+public function getEventManager();
 ]]></programlisting>
     </section>
 

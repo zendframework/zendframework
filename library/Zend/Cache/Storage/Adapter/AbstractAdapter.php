@@ -115,7 +115,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
         }
 
         if ($this->eventHandles) {
-            $events = $this->events();
+            $events = $this->getEventManager();
             foreach ($this->eventHandles as $handle) {
                 $events->detach($handle);
             }
@@ -145,7 +145,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
             $this->options = $options;
 
             $event = new Event('option', $this, new ArrayObject($options->toArray()));
-            $this->events()->trigger($event);
+            $this->getEventManager()->trigger($event);
         }
         return $this;
     }
@@ -205,7 +205,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
      *
      * @return EventManagerInterface
      */
-    public function events()
+    public function getEventManager()
     {
         if ($this->events === null) {
             $this->events = new EventManager(array(__CLASS__, get_called_class()));
@@ -222,7 +222,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
      */
     protected function triggerPre($eventName, ArrayObject $args)
     {
-        return $this->events()->trigger(new Event($eventName . '.pre', $this, $args));
+        return $this->getEventManager()->trigger(new Event($eventName . '.pre', $this, $args));
     }
 
     /**
@@ -236,7 +236,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
     protected function triggerPost($eventName, ArrayObject $args, & $result)
     {
         $postEvent = new PostEvent($eventName . '.post', $this, $args, $result);
-        $eventRs   = $this->events()->trigger($postEvent);
+        $eventRs   = $this->getEventManager()->trigger($postEvent);
         if ($eventRs->stopped()) {
             return $eventRs->last();
         }
@@ -260,7 +260,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
     protected function triggerException($eventName, ArrayObject $args, & $result, \Exception $exception)
     {
         $exceptionEvent = new ExceptionEvent($eventName . '.exception', $this, $args, $result, $exception);
-        $eventRs        = $this->events()->trigger($exceptionEvent);
+        $eventRs        = $this->getEventManager()->trigger($exceptionEvent);
 
         if ($exceptionEvent->getThrowException()) {
             throw $exceptionEvent->getException();
@@ -303,7 +303,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
             ));
         }
 
-        $plugin->attach($this->events(), $priority);
+        $plugin->attach($this->getEventManager(), $priority);
         $registry->attach($plugin);
 
         return $this;
@@ -320,7 +320,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
     {
         $registry = $this->getPluginRegistry();
         if ($registry->contains($plugin)) {
-            $plugin->detach($this->events());
+            $plugin->detach($this->getEventManager());
             $registry->detach($plugin);
         }
         return $this;

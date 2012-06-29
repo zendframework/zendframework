@@ -120,7 +120,7 @@ class View implements EventManagerAwareInterface
      *
      * @return EventManagerInterface
      */
-    public function events()
+    public function getEventManager()
     {
         if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
@@ -143,7 +143,7 @@ class View implements EventManagerAwareInterface
      */
     public function addRenderingStrategy($callable, $priority = 1)
     {
-        $this->events()->attach(ViewEvent::EVENT_RENDERER, $callable, $priority);
+        $this->getEventManager()->attach(ViewEvent::EVENT_RENDERER, $callable, $priority);
         return $this;
     }
 
@@ -164,7 +164,7 @@ class View implements EventManagerAwareInterface
      */
     public function addResponseStrategy($callable, $priority = 1)
     {
-        $this->events()->attach(ViewEvent::EVENT_RESPONSE, $callable, $priority);
+        $this->getEventManager()->attach(ViewEvent::EVENT_RESPONSE, $callable, $priority);
         return $this;
     }
 
@@ -186,7 +186,7 @@ class View implements EventManagerAwareInterface
     {
         $event   = $this->getEvent();
         $event->setModel($model);
-        $events  = $this->events();
+        $events  = $this->getEventManager();
         $results = $events->trigger(ViewEvent::EVENT_RENDERER, $event, function($result) {
             return ($result instanceof Renderer);
         });

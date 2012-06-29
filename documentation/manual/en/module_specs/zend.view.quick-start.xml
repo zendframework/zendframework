@@ -747,7 +747,7 @@ class Module
     {
         // Register a dispatch event
         $app = $e->getParam('application');
-        $app->events()->attach('dispatch', array($this, 'setLayout'), -100);
+        $app->getEventManager()->attach('dispatch', array($this, 'setLayout'), -100);
     }
 
     public function setLayout($e)
@@ -854,7 +854,7 @@ class Module
         // Register a "render" event, at high priority (so it executes prior
         // to the view attempting to render)
         $app = $e->getParam('application');
-        $app->events()->attach('render', array($this, 'registerJsonStrategy'), 100);
+        $app->getEventManager()->attach('render', array($this, 'registerJsonStrategy'), 100);
     }
 
     public function registerJsonStrategy($e)
@@ -865,7 +865,7 @@ class Module
         $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
 
         // Attach strategy, which is a listener aggregate, at high priority
-        $view->events()->attach($jsonStrategy, 100);
+        $view->getEventManager()->attach($jsonStrategy, 100);
     }
 }
 
@@ -895,7 +895,7 @@ class Module
     {
         // Register a render event
         $app = $e->getParam('application');
-        $app->events()->attach('render', array($this, 'registerJsonStrategy'), 100);
+        $app->getEventManager()->attach('render', array($this, 'registerJsonStrategy'), 100);
     }
 
     public function registerJsonStrategy($e)
@@ -918,7 +918,7 @@ class Module
         $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
 
         // Attach strategy, which is a listener aggregate, at high priority
-        $view->events()->attach($jsonStrategy, 100);
+        $view->getEventManager()->attach($jsonStrategy, 100);
     }
 }
 ]]></programlisting>

@@ -106,7 +106,7 @@ class Memcached
         // get notified on change options
         $memc   = $this->memcached;
         $memcMV = static::$extMemcachedMajorVersion;
-        $this->events()->attach('option', function ($event) use ($memc, $memcMV) {
+        $this->getEventManager()->attach('option', function ($event) use ($memc, $memcMV) {
             $params = $event->getParams();
 
             if (isset($params['lib_options'])) {

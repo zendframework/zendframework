@@ -464,7 +464,7 @@ class Capabilities
 
             // trigger event
             if ($this->storage instanceof EventsCapableInterface) {
-                $this->storage->events()->trigger('capability', $this->storage, new ArrayObject(array(
+                $this->storage->getEventManager()->trigger('capability', $this->storage, new ArrayObject(array(
                     $name => $value
                 )));
             }

@@ -96,7 +96,7 @@ class FormRowTest extends TestCase
         $element = new Element('foo');
         $element->setAttribute('type', 'text');
         $markup = $this->helper->render($element);
-        $this->assertEquals('<input name="foo" type="text">', $markup);
+        $this->assertRegexp('/<input name="foo" type="text"(\s*\/)?>/', $markup);
     }
 
     public function testCanHandleMultiCheckboxesCorrectly()

@@ -124,7 +124,6 @@ abstract class AbstractNavigationFactory implements FactoryInterface
      * @param UrlHelper $urlHelper
      * @return mixed
      */
-    protected function injectComponents(array $pages, RouteMatch $routeMatch = null, UrlHelper $urlHelper = null)
     protected function injectComponents(array $pages, RouteMatch $routeMatch = null, Router $router = null)
     {
         foreach($pages as &$page) {

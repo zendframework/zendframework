@@ -15,6 +15,6 @@ namespace Zend\Db\Metadata\Object;
  * @package    Zend_Db
  * @subpackage Metadata
  */
-class BaseTableObject extends AbstractTableObject
+class TableObject extends AbstractTableObject
 {
 }

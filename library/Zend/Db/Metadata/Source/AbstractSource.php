@@ -69,7 +69,7 @@ abstract class AbstractSource implements MetadataInterface
      * @param  string $schema
      * @return string[]
      */
-    public function getTableNames($schema = null)
+    public function getTableNames($schema = null, $includeViews = false)
     {
         if ($schema === null) {
             $schema = $this->defaultSchema;
@@ -77,7 +77,18 @@ abstract class AbstractSource implements MetadataInterface
 
         $this->loadTableNameData($schema);
 
-        return array_keys($this->data['table_names'][$schema]);
+        if ($includeViews) {
+            return array_keys($this->data['table_names'][$schema]);
+        }
+        
+        $tableNames = array();
+        foreach ($this->data['table_names'][$schema] as $tableName => $data) {
+            if ('BASE TABLE' == $data['table_type']) {
+                $tableNames[] = $tableName;
+            }
+        }
+        return $tableNames;
+
     }
 
     /**
@@ -86,14 +97,14 @@ abstract class AbstractSource implements MetadataInterface
      * @param  string $schema
      * @return Object\TableObject[]
      */
-    public function getTables($schema = null)
+    public function getTables($schema = null, $includeViews = false)
     {
         if ($schema === null) {
             $schema = $this->defaultSchema;
         }
 
         $tables = array();
-        foreach ($this->getTableNames($schema) as $tableName) {
+        foreach ($this->getTableNames($schema, $includeViews) as $tableName) {
             $tables[] = $this->getTable($tableName, $schema);
         }
         return $tables;
@@ -121,7 +132,7 @@ abstract class AbstractSource implements MetadataInterface
         $data = $this->data['table_names'][$schema][$tableName];
         switch ($data['table_type']) {
             case 'BASE TABLE':
-                $table = new Object\BaseTableObject($tableName);
+                $table = new Object\TableObject($tableName);
                 break;
             case 'VIEW':
                 $table = new Object\ViewObject($tableName);
@@ -134,70 +145,6 @@ abstract class AbstractSource implements MetadataInterface
         }
         $table->setColumns($this->getColumns($tableName, $schema));
         return $table;
-    }
-
-    /**
-     * Get table names
-     *
-     * @param  string $schema
-     * @return string[]
-     */
-    public function getBaseTableNames($schema = null)
-    {
-        if ($schema === null) {
-            $schema = $this->defaultSchema;
-        }
-
-        $this->loadTableNameData($schema);
-
-        $baseTableNames = array();
-        foreach ($this->data['table_names'][$schema] as $tableName => $data) {
-            if ('BASE TABLE' == $data['table_type']) {
-                $baseTableNames[] = $tableName;
-            }
-        }
-        return $baseTableNames;
-    }
-
-    /**
-     * Get tables
-     *
-     * @param  string $schema
-     * @return Object\TableObject[]
-     */
-    public function getBaseTables($schema = null)
-    {
-        if ($schema === null) {
-            $schema = $this->defaultSchema;
-        }
-
-        $baseTables = array();
-        foreach ($this->getBaseTableNames($schema) as $tableName) {
-            $baseTables[] = $this->getTable($tableName, $schema);
-        }
-        return $baseTables;
-    }
-
-    /**
-     * Get table
-     *
-     * @param  string $baseTableName
-     * @param  string $schema
-     * @return Object\TableObject
-     */
-    public function getBaseTable($baseTableName, $schema = null)
-    {
-        if ($schema === null) {
-            $schema = $this->defaultSchema;
-        }
-
-        $this->loadTableNameData($schema);
-
-        $tableNames = $this->data['table_names'][$schema];
-        if (isset($tableNames[$baseTableName]) && 'BASE TABLE' == $tableNames[$baseTableName]['table_type']) {
-            return $this->getTable($baseTableName, $schema);
-        }
-        throw new \Exception('Base Table "' . $baseTableName . '" does not exist');
     }
 
     /**

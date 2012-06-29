@@ -22,7 +22,6 @@
 namespace Zend\XmlRpc;
 
 use DateTime;
-use Zend\Date;
 use Zend\Math\BigInteger;
 
 /**
@@ -254,7 +253,7 @@ abstract class AbstractValue
         if (is_object($value)) {
             if ($value instanceof AbstractValue) {
                 return $value->getType();
-            } elseif (($value instanceof Date\Date) || ($value instanceof DateTime)) {
+            } elseif ($value instanceof DateTime) {
                 return self::XMLRPC_TYPE_DATETIME;
             }
             return self::getXmlRpcTypeByValue(get_object_vars($value));

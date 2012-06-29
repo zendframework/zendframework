@@ -28,9 +28,11 @@ namespace Zend\Form;
  */
 interface ElementPrepareAwareInterface
 {
-
     /**
      * Prepare the form element
+     *
+     * @param Form $form
+     * @return mixed
      */
-    public function prepare(Form $form);
+    public function prepareElement(Form $form);
 }

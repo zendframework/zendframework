@@ -32,7 +32,8 @@ use IteratorAggregate;
 interface FieldsetInterface extends
     Countable,
     IteratorAggregate,
-    ElementInterface
+    ElementInterface,
+    ElementPrepareAwareInterface
 {
     /**
      * Add an element or fieldset
@@ -89,13 +90,6 @@ interface FieldsetInterface extends
      * @return array|\Traversable
      */
     public function getFieldsets();
-
-    /**
-     * Ensures state is ready for use
-     *
-     * @return void
-     */
-    public function prepare();
 
     /**
      * Recursively populate value attributes of elements

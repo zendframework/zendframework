@@ -48,8 +48,8 @@ class FormLabel extends AbstractHelper
 
     /**
      * Generate an opening label tag
-     * 
-     * @param  null|array|ElementInterface $attributesOrElement 
+     *
+     * @param  null|array|ElementInterface $attributesOrElement
      * @return string
      */
     public function openTag($attributesOrElement = null)
@@ -86,7 +86,7 @@ class FormLabel extends AbstractHelper
 
     /**
      * Return a closing label tag
-     * 
+     *
      * @return string
      */
     public function closeTag()
@@ -99,10 +99,10 @@ class FormLabel extends AbstractHelper
      *
      * Always generates a "for" statement, as we cannot assume the form input
      * will be provided in the $labelContent.
-     * 
-     * @param  ElementInterface $element 
-     * @param  null|string $labelContent 
-     * @param  string $position 
+     *
+     * @param  ElementInterface $element
+     * @param  null|string $labelContent
+     * @param  string $position
      * @return string
      */
     public function __invoke(ElementInterface $element = null, $labelContent = null, $position = null)

@@ -52,6 +52,9 @@ class HelperConfiguration implements ConfigurationInterface
         'formcaptcharecaptcha'   => 'Zend\Form\View\Helper\Captcha\ReCaptcha',
         'formcheckbox'           => 'Zend\Form\View\Helper\FormCheckbox',
         'formcolor'              => 'Zend\Form\View\Helper\FormColor',
+        'formdate'               => 'Zend\Form\View\Helper\FormDate',
+        'formdatetime'           => 'Zend\Form\View\Helper\FormDateTime',
+        'formdatetimelocal'      => 'Zend\Form\View\Helper\FormDateTimeLocal',
         'formelement'            => 'Zend\Form\View\Helper\FormElement',
         'formelementerrors'      => 'Zend\Form\View\Helper\FormElementErrors',
         'formemail'              => 'Zend\Form\View\Helper\FormEmail',
@@ -60,6 +63,7 @@ class HelperConfiguration implements ConfigurationInterface
         'formimage'              => 'Zend\Form\View\Helper\FormImage',
         'forminput'              => 'Zend\Form\View\Helper\FormInput',
         'formlabel'              => 'Zend\Form\View\Helper\FormLabel',
+        'formmonth'              => 'Zend\Form\View\Helper\FormMonth',
         'formmulticheckbox'      => 'Zend\Form\View\Helper\FormMultiCheckbox',
         'formnumber'             => 'Zend\Form\View\Helper\FormNumber',
         'formpassword'           => 'Zend\Form\View\Helper\FormPassword',
@@ -75,6 +79,8 @@ class HelperConfiguration implements ConfigurationInterface
         'formtel'                => 'Zend\Form\View\Helper\FormTel',
         'formtext'               => 'Zend\Form\View\Helper\FormText',
         'formtextarea'           => 'Zend\Form\View\Helper\FormTextarea',
+        'formtime'               => 'Zend\Form\View\Helper\FormTime',
+        'formweek'               => 'Zend\Form\View\Helper\FormWeek',
     );
 
     /**

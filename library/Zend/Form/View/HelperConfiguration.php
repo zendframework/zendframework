@@ -64,6 +64,9 @@ class HelperConfiguration implements ConfigurationInterface
         'formpassword'           => 'Zend\Form\View\Helper\FormPassword',
         'formradio'              => 'Zend\Form\View\Helper\FormRadio',
         'formreset'              => 'Zend\Form\View\Helper\FormReset',
+        'form_reset'             => 'Zend\Form\View\Helper\FormReset',
+        'formrow'                => 'Zend\Form\View\Helper\FormRow',
+        'form_row'               => 'Zend\Form\View\Helper\FormRow',
         'formsearch'             => 'Zend\Form\View\Helper\FormSearch',
         'formselect'             => 'Zend\Form\View\Helper\FormSelect',
         'formsubmit'             => 'Zend\Form\View\Helper\FormSubmit',
@@ -80,7 +83,7 @@ class HelperConfiguration implements ConfigurationInterface
      * service manager, also adds an initializer to inject ServiceManagerAware
      * classes with the service manager.
      *
-     * @param  ServiceManager $serviceManager 
+     * @param  ServiceManager $serviceManager
      * @return void
      */
     public function configureServiceManager(ServiceManager $serviceManager)

@@ -40,27 +40,6 @@ class TranslatorTest extends TestCase
         Locale::setDefault($this->originalLocale);
     }
 
-    public function testDefaultLocale()
-    {
-        $this->assertEquals('en_EN', $this->translator->getLocale());
-    }
-
-    public function testForcedLocale()
-    {
-        $this->translator->setLocale('de_DE');
-        $this->assertEquals('de_DE', $this->translator->getLocale());
-    }
-
-    public function testTranslate()
-    {
-        $loader = new TestLoader();
-        $loader->textDomain = new TextDomain(array('foo' => 'bar'));
-        $this->translator->getPluginManager()->setService('test', $loader);
-        $this->translator->addTranslationFile('test', null);
-        
-        $this->assertEquals('bar', $this->translator->translate('foo'));
-    }
-
     public function testFactoryCreatesTranslator()
     {
         $translator = Translator::factory(array(
@@ -95,12 +74,6 @@ class TranslatorTest extends TestCase
                     'pattern' => 'translation-%s.php'
                 )
             ),
-            'files' => array(
-                array(
-                    'type' => 'phparray',
-                    'filename' => $this->testFilesDir . '/translation_en.php',
-                )
-            ),
             'cache' => array(
                 'adapter' => 'memory'
             )
@@ -108,5 +81,26 @@ class TranslatorTest extends TestCase
 
         $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator);
         $this->assertInstanceOf('Zend\Cache\Storage\StorageInterface', $translator->getCache());
+    }
+
+    public function testDefaultLocale()
+    {
+        $this->assertEquals('en_EN', $this->translator->getLocale());
+    }
+
+    public function testForcedLocale()
+    {
+        $this->translator->setLocale('de_DE');
+        $this->assertEquals('de_DE', $this->translator->getLocale());
+    }
+
+    public function testTranslate()
+    {
+        $loader = new TestLoader();
+        $loader->textDomain = new TextDomain(array('foo' => 'bar'));
+        $this->translator->getPluginManager()->setService('test', $loader);
+        $this->translator->addTranslationFile('test', null);
+        
+        $this->assertEquals('bar', $this->translator->translate('foo'));
     }
 }

@@ -56,7 +56,8 @@ class Gettext implements LoaderInterface
      * @see    LoaderInterface::load()
      * @param  string $filename
      * @param  string $locale
-     * @return TextDomain|null
+     * @return TextDomain
+     * @throws Exception\InvalidArgumentException
      */
     public function load($filename, $locale)
     {

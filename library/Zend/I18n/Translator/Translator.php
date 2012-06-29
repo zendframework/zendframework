@@ -314,11 +314,11 @@ class Translator
     /**
      * Translate a plural message.
      *
-     * @param  string $singular
-     * @param  string $plural
-     * @param  int    $number
-     * @param  string $textDomain
-     * @param  string $locale
+     * @param  string      $singular
+     * @param  string      $plural
+     * @param  int         $number
+     * @param  string      $textDomain
+     * @param  string|null $locale
      * @return string
      * @throws Exception\OutOfBoundsException
      */
@@ -349,7 +349,7 @@ class Translator
         }
 
         $index = $this->messages[$textDomain][$locale]
-                      ->pluralRule()
+                      ->getPluralRule()
                       ->evaluate($number);
 
         if (!isset($translation[$index])) {

@@ -258,18 +258,6 @@ class FilesystemTest extends CommonAdapterTest
         $this->_options->setDirLevel(17); // must between 0-16
     }
 
-    public function testSetReadControlAlgoAllowStrlen()
-    {
-        $this->_options->setReadControlAlgo('strlen');
-        $this->assertEquals('strlen', $this->_options->getReadControlAlgo());
-    }
-
-    public function testSetReadControlAlgoInvalidException()
-    {
-        $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_options->setReadControlAlgo('unknown');
-    }
-
     public function testGetMetadataWithCtime()
     {
         $this->_options->setNoCtime(false);

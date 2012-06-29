@@ -20,6 +20,7 @@
 
 namespace Zend\Feed\Writer\Renderer\Entry\Atom;
 
+use DateTime;
 use DOMDocument;
 use DOMElement;
 
@@ -57,7 +58,7 @@ class Deleted
         $this->_dom->appendChild($entry);
         
         $entry->setAttribute('ref', $this->_container->getReference());
-        $entry->setAttribute('when', $this->_container->getWhen()->get(\Zend\Date\Date::ISO_8601));
+        $entry->setAttribute('when', $this->_container->getWhen()->format(DateTime::ISO8601));
         
         $this->_setBy($this->_dom, $entry);
         $this->_setComment($this->_dom, $entry);

@@ -20,12 +20,12 @@
 
 namespace Zend\Feed\Writer\Renderer\Entry;
 
-use Zend\Date;
+use DateTime;
+use DOMDocument;
+use DOMElement;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
 use Zend\Uri;
-use DOMDocument;
-use DOMElement;
 
 /**
 * @category Zend
@@ -157,7 +157,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $updated = $dom->createElement('pubDate');
         $root->appendChild($updated);
         $text = $dom->createTextNode(
-            $this->getDataContainer()->getDateModified()->get(Date\Date::RSS)
+            $this->getDataContainer()->getDateModified()->format(DateTime::RSS)
         );
         $updated->appendChild($text);
     }

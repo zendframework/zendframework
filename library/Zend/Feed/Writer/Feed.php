@@ -21,8 +21,8 @@
 namespace Zend\Feed\Writer;
 
 use Countable;
+use DateTime;
 use Iterator;
-use Zend\Date;
 use Zend\Feed\Writer\Renderer;
 
 /**
@@ -152,9 +152,9 @@ class Feed extends AbstractFeed implements Iterator, Countable
         $entries = array();
         foreach ($this->_entries as $entry) {
             if ($entry->getDateModified()) {
-                $timestamp = (int) $entry->getDateModified()->get(Date\Date::TIMESTAMP);
+                $timestamp = (int) $entry->getDateModified()->getTimestamp();
             } elseif ($entry->getDateCreated()) {
-                $timestamp = (int) $entry->getDateCreated()->get(Date\Date::TIMESTAMP);
+                $timestamp = (int) $entry->getDateCreated()->getTimestamp();
             }
             $entries[$timestamp] = $entry;
         }

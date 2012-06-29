@@ -20,9 +20,10 @@
 
 namespace Zend\Feed\PubSubHubbub;
 
+use DateInterval;
+use DateTime;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Date;
 use Zend\Http\Request as HttpRequest;
 use Zend\Uri;
 use Zend\Version;
@@ -740,17 +741,17 @@ class Subscriber
         }
         
         // store subscription to storage
-        $now = new Date\Date;
+        $now = new DateTime();
         $expires = null;
         if (isset($params['hub.lease_seconds'])) {
-            $expires = $now->add($params['hub.lease_seconds'], Date\Date::SECOND)
-                ->get('yyyy-MM-dd HH:mm:ss');
+            $expires = $now->add(new DateInterval('PT' . $params['hub.lease_seconds'] . 'S'))
+                ->format('Y-m-d H:i:s');
         }
         $data = array(
             'id'                 => $key,
             'topic_url'          => $params['hub.topic'],
             'hub_url'            => $hubUrl,
-            'created_time'       => $now->get('yyyy-MM-dd HH:mm:ss'),
+            'created_time'       => $now->format('Y-m-d H:i:s'),
             'lease_seconds'      => $expires,
             'verify_token'       => hash('sha256', $params['hub.verify_token']),
             'secret'             => null,

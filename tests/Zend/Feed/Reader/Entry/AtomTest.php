@@ -20,8 +20,9 @@
  */
 
 namespace ZendTest\Feed\Reader\Entry;
+
+use DateTime;
 use Zend\Feed\Reader;
-use Zend\Date;
 
 /**
 * @category Zend
@@ -45,13 +46,6 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         Reader\Reader::reset();
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/Atom';
-        $this->_options = Date\Date::setOptions();
-        foreach($this->_options as $k=>$v) {
-            if (is_null($v)) {
-                unset($this->_options[$k]);
-            }
-        }
-        Date\Date::setOptions(array('format_type'=>'iso'));
         $this->_expectedCats = array(
             array(
                 'term' => 'topic1',
@@ -81,11 +75,6 @@ class AtomTest extends \PHPUnit_Framework_TestCase
                 'label' => 'topic2'
             )
         );
-    }
-    
-    public function teardown()
-    {
-        Date\Date::setOptions($this->_options);
     }
 
     /**
@@ -119,9 +108,8 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath . '/datecreated/plain/atom03.xml')
         );
         $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateCreated()));
+        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $this->assertEquals($edate, $entry->getDateCreated());
     }
 
     public function testGetsDateCreatedFromAtom10()
@@ -130,9 +118,8 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath . '/datecreated/plain/atom10.xml')
         );
         $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateCreated()));
+        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $this->assertEquals($edate, $entry->getDateCreated());
     }
 
     /**
@@ -144,9 +131,8 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath . '/datemodified/plain/atom03.xml')
         );
         $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
+        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $this->assertEquals($edate, $entry->getDateModified());
     }
 
     public function testGetsDateModifiedFromAtom10()
@@ -155,9 +141,8 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath . '/datemodified/plain/atom10.xml')
         );
         $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
+        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $this->assertEquals($edate, $entry->getDateModified());
     }
 
     /**

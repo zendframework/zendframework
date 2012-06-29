@@ -20,9 +20,8 @@
 
 namespace Zend\Feed\Reader\Feed;
 
-use Zend\Feed\Reader;
-use Zend\Date;
 use DOMDocument;
+use Zend\Feed\Reader;
 
 /**
 * @category Zend

@@ -74,15 +74,11 @@ class Gettext implements LoaderInterface
 
         // Verify magic number
         $magic = fread($this->file, 4);
-        // 32-bit machine is little-endian
-        if (PHP_INT_SIZE < 8) {
-            $magic = strrev($magic);
-        }
 
-        if ($magic === "\x95\x04\x12\xde") {
-            $this->littleEndian = true;
-        } elseif ($magic === "\xde\x12\x04\x95") {
+        if ($magic == "\x95\x04\x12\xde") {
             $this->littleEndian = false;
+        } elseif ($magic == "\xde\x12\x04\x95") {
+            $this->littleEndian = true;
         } else {
             fclose($this->file);
             throw new Exception\InvalidArgumentException(sprintf(

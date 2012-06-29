@@ -111,10 +111,11 @@ class Translator
 
         // locales
         if (isset($options['locale'])) {
-            $translator->setLocale($options['locale']);
-        }
-        if (isset($options['fallback_locale'])) {
-            $translator->setFallbackLocale($options['fallback_locale']);
+            $locales = (array) $options['locale'];
+            $translator->setLocale(array_shift($locales));
+            if (count($locales) > 0) {
+                $translator->setFallbackLocale(array_shift($locales));
+            }
         }
 
         // patterns

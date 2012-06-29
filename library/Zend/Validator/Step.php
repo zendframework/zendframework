@@ -21,7 +21,6 @@
 namespace Zend\Validator;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -60,7 +59,7 @@ class Step extends AbstractValidator
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
+            $options = iterator_to_array($options);
         } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp['baseValue'] = array_shift($options);

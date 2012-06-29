@@ -53,56 +53,45 @@ class Number extends Element implements InputProviderInterface
     protected $validators;
 
     /**
-     * Set an array of validators
-     *
-     * @param array $validators
-     * @return Number
-     */
-    public function setValidators(array $validators)
-    {
-        $this->validators = $validators;
-        return $this;
-    }
-
-    /**
      * Get validator
      *
-     * @return ValidatorInterface
+     * @return ValidatorInterface[]
      */
-    public function getValidators()
+    protected function getValidators()
     {
-        if (null === $this->validators) {
-            $validators = array();
-            $validators[] = new NumberValidator();
-
-            $inclusive = true;
-            if (!empty($this->attributes['inclusive'])) {
-                $inclusive = $this->attributes['inclusive'];
-            }
-
-            if (isset($this->attributes['min'])) {
-                $validators[] = new GreaterThanValidator(array(
-                    'min' => $this->attributes['min'],
-                    'inclusive' => $inclusive
-                ));
-            }
-            if (isset($this->attributes['max'])) {
-                $validators[] = new LessThanValidator(array(
-                    'max' => $this->attributes['max'],
-                    'inclusive' => $inclusive
-                ));
-            }
-
-            if (isset($this->attributes['step']) && $this->attributes['step'] !== 'any') {
-                $validators[] = new StepValidator(array(
-                    'baseValue' => (isset($this->attributes['min'])) ? $this->attributes['min'] : 0,
-                    'step' => $this->attributes['step']
-                ));
-            }
-
-            $this->setValidators($validators);
+        if ($this->validators) {
+            return $this->validators;
         }
 
+        $validators = array();
+        $validators[] = new NumberValidator();
+
+        $inclusive = true;
+        if (!empty($this->attributes['inclusive'])) {
+            $inclusive = $this->attributes['inclusive'];
+        }
+
+        if (isset($this->attributes['min'])) {
+            $validators[] = new GreaterThanValidator(array(
+                'min' => $this->attributes['min'],
+                'inclusive' => $inclusive
+            ));
+        }
+        if (isset($this->attributes['max'])) {
+            $validators[] = new LessThanValidator(array(
+                'max' => $this->attributes['max'],
+                'inclusive' => $inclusive
+            ));
+        }
+
+        if (isset($this->attributes['step']) && $this->attributes['step'] !== 'any') {
+            $validators[] = new StepValidator(array(
+                'baseValue' => (isset($this->attributes['min'])) ? $this->attributes['min'] : 0,
+                'step' => $this->attributes['step']
+            ));
+        }
+
+        $this->validators = $validators;
         return $this->validators;
     }
 

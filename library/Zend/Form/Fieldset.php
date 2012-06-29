@@ -70,11 +70,11 @@ class Fieldset extends Element implements FieldsetInterface
     /**
      * Add an element or fieldset
      *
-     * $flags could contain metadata such as the alias under which to register 
+     * $flags could contain metadata such as the alias under which to register
      * the element or fieldset, order in which to prioritize it, etc.
-     * 
+     *
      * @todo   Should we detect if the element/fieldset name conflicts?
-     * @param  ElementInterface $elementOrFieldset 
+     * @param  ElementInterface $elementOrFieldset
      * @param  array $flags
      * @return FieldsetInterface
      */
@@ -122,8 +122,8 @@ class Fieldset extends Element implements FieldsetInterface
 
     /**
      * Does the fieldset have an element/fieldset by the given name?
-     * 
-     * @param  string $elementOrFieldset 
+     *
+     * @param  string $elementOrFieldset
      * @return bool
      */
     public function has($elementOrFieldset)
@@ -133,9 +133,9 @@ class Fieldset extends Element implements FieldsetInterface
 
     /**
      * Retrieve a named element or fieldset
-     * 
+     *
      * @todo   Should this raise an exception if no entry is found?
-     * @param  string $elementOrFieldset 
+     * @param  string $elementOrFieldset
      * @return ElementInterface
      */
     public function get($elementOrFieldset)
@@ -148,8 +148,8 @@ class Fieldset extends Element implements FieldsetInterface
 
     /**
      * Remove a named element or fieldset
-     * 
-     * @param  string $elementOrFieldset 
+     *
+     * @param  string $elementOrFieldset
      * @return void
      */
     public function remove($elementOrFieldset)
@@ -166,7 +166,7 @@ class Fieldset extends Element implements FieldsetInterface
         if ($entry instanceof FieldsetInterface) {
             unset($this->fieldsets[$elementOrFieldset]);
             return;
-        } 
+        }
 
         unset($this->elements[$elementOrFieldset]);
         return;
@@ -176,7 +176,7 @@ class Fieldset extends Element implements FieldsetInterface
      * Retrieve all attached elements
      *
      * Storage is an implementation detail of the concrete class.
-     * 
+     *
      * @return array|Traversable
      */
     public function getElements()
@@ -186,9 +186,9 @@ class Fieldset extends Element implements FieldsetInterface
 
     /**
      * Retrieve all attached fieldsets
-     * 
+     *
      * Storage is an implementation detail of the concrete class.
-     * 
+     *
      * @return array|Traversable
      */
     public function getFieldsets()
@@ -226,11 +226,11 @@ class Fieldset extends Element implements FieldsetInterface
     /**
      * Get validation error messages, if any
      *
-     * Returns a hash of element names/messages for all elements failing 
-     * validation, or, if $elementName is provided, messages for that element 
+     * Returns a hash of element names/messages for all elements failing
+     * validation, or, if $elementName is provided, messages for that element
      * only.
-     * 
-     * @param  null|string $elementName 
+     *
+     * @param  null|string $elementName
      * @return array|Traversable
      */
     public function getMessages($elementName = null)
@@ -260,9 +260,29 @@ class Fieldset extends Element implements FieldsetInterface
     }
 
     /**
+     * Ensures state is ready for use. Here, we append the name of the fieldsets to every elements in order to avoid
+     * name clashes if the same fieldset is used multiple times
+     *
+     * @return void
+     */
+    public function prepare()
+    {
+        $name = $this->getName();
+
+        foreach($this->byName as $elementOrFieldset) {
+            $elementOrFieldset->setName($name . '[' . $elementOrFieldset->getName() . ']');
+
+            // Recursively prepare fieldsets
+            if ($elementOrFieldset instanceof FieldsetInterface) {
+                $elementOrFieldset->prepare();
+            }
+        }
+    }
+
+    /**
      * Recursively populate values of attached elements and fieldsets
-     * 
-     * @param  array|Traversable $data 
+     *
+     * @param  array|Traversable $data
      * @return void
      */
     public function populateValues($data)
@@ -292,7 +312,7 @@ class Fieldset extends Element implements FieldsetInterface
 
     /**
      * Countable: return count of attached elements/fieldsets
-     * 
+     *
      * @return int
      */
     public function count()
@@ -302,7 +322,7 @@ class Fieldset extends Element implements FieldsetInterface
 
     /**
      * IteratorAggregate: return internal iterator
-     * 
+     *
      * @return PriorityQueue
      */
     public function getIterator()

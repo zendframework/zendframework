@@ -20,6 +20,8 @@
  */
 
 namespace ZendTest\Service\Technorati;
+
+use DateTime;
 use Zend\Service\Technorati;
 
 /**
@@ -69,7 +71,7 @@ class WeblogTest extends TestCase
         // check inbound links
         $this->assertEquals(103, $weblog->getInboundLinks());
         // check last update
-        $this->assertEquals(new \Zend\Date\Date('2007-11-11 08:47:26 GMT'), $weblog->getLastUpdate());
+        $this->assertEquals(new DateTime('2007-11-11 08:47:26 GMT'), $weblog->getLastUpdate());
         // check rank
         $this->assertEquals(93473, $weblog->getRank());
         // check authors
@@ -179,8 +181,8 @@ class WeblogTest extends TestCase
 
         $set = '2007-11-11 08:47:26 GMT';
         $get = $weblog->setLastUpdate($set)->getLastUpdate();
-        $this->assertInstanceOf('Zend\Date\Date', $get);
-        $this->assertEquals(new \Zend\Date\Date($set), $get);
+        $this->assertInstanceOf('DateTime', $get);
+        $this->assertEquals(new DateTime($set), $get);
 
         /* not supported
         $set = time();
@@ -192,8 +194,8 @@ class WeblogTest extends TestCase
         try {
             $weblog->setLastUpdate($set);
             $this->fail('Expected Zend\Service\Technorati\Exception not thrown');
-        } catch(Technorati\Exception\RuntimeException $e) {
-            $this->assertContains("valid Date/Time", $e->getMessage());
+        } catch(\Exception $e) {
+            $this->assertContains('DateTime', $e->getMessage());
         }
 
         // check rank

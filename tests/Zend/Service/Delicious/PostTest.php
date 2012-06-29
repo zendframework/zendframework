@@ -20,10 +20,10 @@
  */
 
 namespace ZendTest\Service\Delicious;
-use \Zend\Service\Delicious\Delicious as DeliciousClient;
-use \Zend\Service\Delicious;
-use \Zend\Service\Delicious\Post;
-use \Zend\Date\Date;
+
+use Zend\Service\Delicious\Delicious as DeliciousClient;
+use Zend\Service\Delicious;
+use Zend\Service\Delicious\Post;
 
 /**
  * Test helper
@@ -128,7 +128,7 @@ class PostTest extends \PHPUnit_Framework_TestCase
             $post = new Post($this->_delicious, $values);
             $this->fail('Expected \Zend\Service\Delicious\Exception not thrown');
         } catch (Delicious\Exception $e) {
-            $this->assertContains('instance of \Zend\Date\Date', $e->getMessage());
+            $this->assertContains('instance of DateTime', $e->getMessage());
         }
     }
 

@@ -20,6 +20,8 @@
  */
 
 namespace ZendTest\Service\Technorati;
+
+use DateTime;
 use Zend\Service\Technorati;
 
 /**
@@ -63,10 +65,10 @@ class TagResultTest extends TestCase
         $this->assertContains('VerveEarth: Locate Your Blog!', $object->getExcerpt());
         $this->assertInstanceOf('Zend\Uri\Http', $object->getPermalink());
         $this->assertEquals(\Zend\Uri\UriFactory::factory('http://scienceroll.com/2007/11/14/verveearth-locate-your-blog/'), $object->getPermalink());
-        $this->assertInstanceOf('Zend\Date\Date', $object->getCreated());
-        $this->assertEquals(new \Zend\Date\Date('2007-11-14 21:52:11'), $object->getCreated());
-        $this->assertInstanceOf('Zend\Date\Date', $object->getUpdated());
-        $this->assertEquals(new \Zend\Date\Date('2007-11-14 21:57:59'), $object->getUpdated());
+        $this->assertInstanceOf('DateTime', $object->getCreated());
+        $this->assertEquals(new DateTime('2007-11-14 21:52:11'), $object->getCreated());
+        $this->assertInstanceOf('DateTime', $object->getUpdated());
+        $this->assertEquals(new DateTime('2007-11-14 21:57:59'), $object->getUpdated());
 
         // check weblog
         $this->assertInstanceOf('Zend\Service\Technorati\Weblog', $object->getWeblog());

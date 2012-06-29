@@ -21,8 +21,6 @@
 
 namespace Zend\Form\Annotation;
 
-use Zend\Form\Exception;
-
 /**
  * Flags annotation
  *
@@ -30,40 +28,16 @@ use Zend\Form\Exception;
  * metadata, and typically the priority (order) in which an element will be 
  * included.
  *
- * The value should be a JSON-encoded object/associative array.
+ * The value should be an associative array.
  *
- * @category   Zend
+ * @Annotation
  * @package    Zend_Form
  * @subpackage Annotation
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Flags extends AbstractAnnotation
+class Flags extends AbstractArrayAnnotation
 {
-    /**
-     * @var array
-     */
-    protected $flags;
-
-    /**
-     * Receive and process the contents of an annotation
-     * 
-     * @param  string $content 
-     * @return void
-     */
-    public function initialize($content)
-    {
-        $flags = $this->parseJsonContent($content, __METHOD__);
-        if (!is_array($flags)) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects the annotation to define a JSON object or array; received "%s"',
-                __METHOD__,
-                gettype($flags)
-            ));
-        }
-        $this->flags = $flags;
-    }
-
     /**
      * Retrieve the flags
      * 
@@ -71,6 +45,6 @@ class Flags extends AbstractAnnotation
      */
     public function getFlags()
     {
-        return $this->flags;
+        return $this->value;
     }
 }

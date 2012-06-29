@@ -24,6 +24,7 @@ namespace Zend\Form\Annotation;
 use ArrayObject;
 use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Annotation\Parser;
 use Zend\Code\Reflection\ClassReflection;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManager;
@@ -100,10 +101,12 @@ class AnnotationBuilder implements EventManagerAwareInterface
      */
     public function setAnnotationManager(AnnotationManager $annotationManager)
     {
+        $parser = new Parser\DoctrineAnnotationParser();
         foreach ($this->defaultAnnotations as $annotationName) {
             $class = __NAMESPACE__ . '\\' . $annotationName;
-            $annotationManager->registerAnnotation(new $class);
+            $parser->registerAnnotation($class);
         }
+        $annotationManager->attach($parser);
         $this->annotationManager = $annotationManager;
         return $this;
     }

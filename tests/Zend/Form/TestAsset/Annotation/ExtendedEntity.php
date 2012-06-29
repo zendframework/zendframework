@@ -4,7 +4,7 @@ namespace ZendTest\Form\TestAsset\Annotation;
 use Zend\Form\Annotation;
 
 /**
- * @Annotation\Name(extended)
+ * @Annotation\Name("extended")
  */
 class ExtendedEntity extends Entity
 {

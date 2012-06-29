@@ -19,6 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+use Zend\Console;
+use Zend\Loader\StandardAutoloader;
+
 /**
  * Generate class maps for use with autoloading.
  *
@@ -49,7 +52,7 @@ if (!is_dir($libPath)) {
 }
 
 // Setup autoloading
-$loader = new Zend\Loader\StandardAutoloader();
+$loader = new StandardAutoloader();
 $loader->register();
 
 $rules = array(
@@ -61,9 +64,9 @@ $rules = array(
 );
 
 try {
-    $opts = new Zend\Console\Getopt($rules);
+    $opts = new Console\Getopt($rules);
     $opts->parse();
-} catch (Zend\Console\Getopt\Exception $e) {
+} catch (Console\Exception\RuntimeException $e) {
     echo $e->getUsageMessage();
     exit(2);
 }

@@ -21,6 +21,7 @@
 
 namespace Zend\Code\Annotation\Parser;
 
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\DocParser;
 use Traversable;
 use Zend\Code\Exception;
@@ -51,6 +52,14 @@ class DoctrineAnnotationParser implements ParserInterface
      * @var DocParser
      */
     protected $docParser;
+
+    public function __construct()
+    {
+        // Hack to ensure an attempt to autoload an annotation class is made
+        AnnotationRegistry::registerLoader(function ($class) {
+            return (bool) class_exists($class);
+        });
+    }
 
     /**
      * Set the DocParser instance
@@ -100,6 +109,12 @@ class DoctrineAnnotationParser implements ParserInterface
         if (!$annotationString) {
             return false;
         }
+
+        // Annotation classes provided by the AnnotationScanner are already
+        // resolved to fully-qualified class names. Adding the global namespace
+        // prefix allows the Doctrine annotation parser to locate the annotation
+        // class correctly.
+        $annotationString = preg_replace('/^(@)/', '$1\\', $annotationString);
 
         $parser      = $this->getDocParser();
         $annotations = $parser->parse($annotationString);

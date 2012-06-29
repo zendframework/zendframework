@@ -2448,19 +2448,19 @@
         <!--</chapter>-->
 
         <chapter xml:id="zend.xmlrpc"><title>Zend_XmlRpc</title>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_XmlRpc.xml" parse="xml">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.xmlrpc.xml" parse="xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_XmlRpc.xml" parse="xml"/>
+                    <xi:include href="../en/module_specs/zend.xmlrpc.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_XmlRpc_Client.xml" parse="xml">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.xmlrpc.client.xml" parse="xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_XmlRpc_Client.xml" parse="xml"/>
+                    <xi:include href="../en/module_specs/zend.xmlrpc.client.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_XmlRpc_Server.xml" parse="xml">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.xmlrpc.server.xml" parse="xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_XmlRpc_Server.xml" parse="xml"/>
+                    <xi:include href="../en/module_specs/zend.xmlrpc.server.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
         </chapter>

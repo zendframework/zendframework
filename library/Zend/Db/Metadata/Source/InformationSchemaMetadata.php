@@ -594,31 +594,20 @@ class InformationSchemaMetadata implements MetadataInterface
 
         // target: CONSTRAINT_SCHEMA, CONSTRAINT_NAME, UPDATE_RULE, DELETE_RULE, REFERENCE_CONSTRAINT_NAME
 
-        if ($platform->getName() == 'MySQL') {
-            $sql = 'SELECT ' . $quoteSelectList(array(
-                    'RC.CONSTRAINT_NAME', 'RC.UPDATE_RULE', 'RC.DELETE_RULE',
-                    'RC.TABLE_NAME', 'CK.REFERENCED_TABLE_NAME', 'CK.REFERENCED_COLUMN_NAME'
-                    ))
-                . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS RC')
-                . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.KEY_COLUMN_USAGE CK')
-                . ' ON ' . $platform->quoteIdentifierInFragment('RC.CONSTRAINT_NAME')
-                . ' = ' . $platform->quoteIdentifierInFragment('CK.CONSTRAINT_NAME');
-        } else {
-            $sql = 'SELECT ' . $quoteSelectList(array(
-                    'RC.CONSTRAINT_NAME', 'RC.UPDATE_RULE', 'RC.DELETE_RULE',
-                    'TC1.TABLE_NAME', 'CK.TABLE_NAME AS REFERENCED_TABLE_NAME', 'CK.COLUMN_NAME AS REFERENCED_COLUMN_NAME'
-                    ))
-                . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS RC')
-                . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLE_CONSTRAINTS TC1')
-                . ' ON ' . $platform->quoteIdentifierInFragment('RC.CONSTRAINT_NAME')
-                . ' = ' . $platform->quoteIdentifierInFragment('TC1.CONSTRAINT_NAME')
-                . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLE_CONSTRAINTS TC2')
-                . ' ON ' . $platform->quoteIdentifierInFragment('RC.UNIQUE_CONSTRAINT_NAME')
-                . ' = ' . $platform->quoteIdentifierInFragment('TC2.CONSTRAINT_NAME')
-                . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.KEY_COLUMN_USAGE CK')
-                . ' ON ' . $platform->quoteIdentifierInFragment('TC2.CONSTRAINT_NAME')
-                . ' = ' . $platform->quoteIdentifierInFragment('CK.CONSTRAINT_NAME');
-        }
+        $sql = 'SELECT ' . $quoteSelectList(array(
+                'RC.CONSTRAINT_NAME', 'RC.UPDATE_RULE', 'RC.DELETE_RULE',
+                'TC1.TABLE_NAME', 'CK.TABLE_NAME AS REFERENCED_TABLE_NAME', 'CK.COLUMN_NAME AS REFERENCED_COLUMN_NAME'
+                ))
+            . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS RC')
+            . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLE_CONSTRAINTS TC1')
+            . ' ON ' . $platform->quoteIdentifierInFragment('RC.CONSTRAINT_NAME')
+            . ' = ' . $platform->quoteIdentifierInFragment('TC1.CONSTRAINT_NAME')
+            . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLE_CONSTRAINTS TC2')
+            . ' ON ' . $platform->quoteIdentifierInFragment('RC.UNIQUE_CONSTRAINT_NAME')
+            . ' = ' . $platform->quoteIdentifierInFragment('TC2.CONSTRAINT_NAME')
+            . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.KEY_COLUMN_USAGE CK')
+            . ' ON ' . $platform->quoteIdentifierInFragment('TC2.CONSTRAINT_NAME')
+            . ' = ' . $platform->quoteIdentifierInFragment('CK.CONSTRAINT_NAME');
 
         if ($schema != '__DEFAULT_SCHEMA__') {
             $sql .= ' AND ' . $platform->quoteIdentifierInFragment('RC.CONSTRAINT_SCHEMA')

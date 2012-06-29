@@ -71,6 +71,7 @@ class ValidatorPluginManager extends AbstractPluginManager
         'creditcard'               => 'Zend\Validator\CreditCard',
         'csrf'                     => 'Zend\Validator\Csrf',
         'date'                     => 'Zend\Validator\Date',
+        'datestep'                 => 'Zend\Validator\DateStep',
         'dbnorecordexists'         => 'Zend\Validator\Db\NoRecordExists',
         'dbrecordexists'           => 'Zend\Validator\Db\RecordExists',
         'digits'                   => 'Zend\Validator\Digits',
@@ -113,6 +114,7 @@ class ValidatorPluginManager extends AbstractPluginManager
         'sitemaploc'               => 'Zend\Validator\Sitemap\Loc',
         'sitemappriority'          => 'Zend\Validator\Sitemap\Priority',
         'stringlength'             => 'Zend\Validator\StringLength',
+        'step'                     => 'Zend\Validator\Step',
     );
 
     /**

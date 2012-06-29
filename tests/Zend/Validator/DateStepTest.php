@@ -25,18 +25,9 @@ use Zend\Validator;
 use DateTime;
 use DateTimeZone;
 use DateInterval;
-use ReflectionClass;
 
 /**
- * Test helper
- */
-
-/**
- * @see \Zend\Validator\DateStep
- */
-
-
-/**
+ * @see        \Zend\Validator\DateStep
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
@@ -127,36 +118,7 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
     public function testEqualsMessageTemplates()
     {
         $validator  = new Validator\DateStep(array());
-        $reflection = new ReflectionClass($validator);
-
-        if (!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
-    }
-
-    public function testEqualsMessageVariables()
-    {
-        $validator  = new Validator\DateStep(array());
-        $reflection = new ReflectionClass($validator);
-
-        if (!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $this->assertObjectHasAttribute('messageTemplates', $validator);
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'), 'messageTemplates', $validator);
     }
 }

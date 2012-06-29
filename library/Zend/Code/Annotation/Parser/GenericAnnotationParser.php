@@ -19,8 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Code\Annotation;
+namespace Zend\Code\Annotation\Parser;
 
+use Traversable;
+use Zend\Code\Annotation\AnnotationInterface;
 use Zend\Code\Exception;
 use Zend\EventManager\EventInterface;
 
@@ -36,7 +38,7 @@ use Zend\EventManager\EventInterface;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GenericAnnotationParser
+class GenericAnnotationParser implements ParserInterface
 {
     /**
      * @var array
@@ -52,20 +54,6 @@ class GenericAnnotationParser
      * @var AnnotationInterface[]
      */
     protected $annotations = array();
-
-    /**
-     * Constructor
-     *
-     * @param array $annotations
-     */
-    public function __construct(array $annotations = array())
-    {
-        if ($annotations) {
-            foreach ($annotations as $annotation) {
-                $this->registerAnnotation($annotation);
-            }
-        }
-    }
 
     /**
      * Listen to onCreateAnnotation, and attempt to return an annotation object 
@@ -86,7 +74,8 @@ class GenericAnnotationParser
             return false;
         }
 
-        $content = $e->getParam('content', false);
+        $content = $e->getParam('content', '');
+        $content = trim($content, '()');
 
         if ($this->hasAlias($class)) {
             $class = $this->resolveAlias($class);
@@ -105,11 +94,26 @@ class GenericAnnotationParser
     /**
      * Register annotations
      *
-     * @param  AnnotationInterface $annotation
+     * @param  string|AnnotationInterface $annotation String class name of an 
+     *         AnnotationInterface implementation, or actual instance
+     * @return GenericAnnotationParser
      * @throws Exception\InvalidArgumentException
      */
-    public function registerAnnotation(AnnotationInterface $annotation)
+    public function registerAnnotation($annotation)
     {
+        if (is_string($annotation) && class_exists($annotation)) {
+            $annotation = new $annotation();
+        }
+
+        if (!$annotation instanceof AnnotationInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s: expects an instance of %s\AnnotationInterface; received "%s"',
+                __METHOD__,
+                __NAMESPACE__,
+                (is_object($annotation) ? get_class($annotation) : gettype($annotation))
+            ));
+        }
+
         $class = get_class($annotation);
 
         if (in_array($class, $this->annotationNames)) {
@@ -118,6 +122,28 @@ class GenericAnnotationParser
 
         $this->annotations[]     = $annotation;
         $this->annotationNames[] = $class;
+    }
+
+    /**
+     * Register many annotations at once
+     * 
+     * @param  array|Traversable $annotations 
+     * @return GenericAnnotationParser
+     */
+    public function registerAnnotations($annotations)
+    {
+        if (!is_array($annotations) && !$annotations instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s: expects an array or Traversable; received "%s"',
+                __METHOD__,
+                (is_object($annotations) ? get_class($annotations) : gettype($annotations))
+            ));
+        }
+
+        foreach ($annotations as $annotation) {
+            $this->registerAnnotation($annotation);
+        }
+        return $this;
     }
 
     /**

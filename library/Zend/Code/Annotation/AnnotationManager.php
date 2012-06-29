@@ -43,6 +43,8 @@ use Zend\EventManager\EventManagerInterface;
  */
 class AnnotationManager implements EventManagerAwareInterface
 {
+    const EVENT_CREATE_ANNOTATION = 'createAnnotation';
+
     /**
      * @var EventManagerInterface
      */
@@ -80,6 +82,19 @@ class AnnotationManager implements EventManagerAwareInterface
     }
 
     /**
+     * Attach a parser to listen to the createAnnotation event
+     * 
+     * @param  Parser\ParserInterface $parser 
+     * @return AnnotationManager
+     */
+    public function attach(Parser\ParserInterface $parser)
+    {
+        $events = $this->events();
+        $events->attach(self::EVENT_CREATE_ANNOTATION, array($parser, 'onCreateAnnotation'));
+        return $this;
+    }
+
+    /**
      * Create Annotation
      *
      * @param  array $annotationData
@@ -88,7 +103,7 @@ class AnnotationManager implements EventManagerAwareInterface
     public function createAnnotation(array $annotationData)
     {
         $event = new Event();
-        $event->setName(__FUNCTION__);
+        $event->setName(self::EVENT_CREATE_ANNOTATION);
         $event->setTarget($this);
         $event->setParams(array(
             'class'   => $annotationData[0],

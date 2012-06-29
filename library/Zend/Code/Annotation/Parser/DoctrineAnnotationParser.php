@@ -19,9 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Code\Annotation;
+namespace Zend\Code\Annotation\Parser;
 
 use Doctrine\Common\Annotations\DocParser;
+use Traversable;
+use Zend\Code\Exception;
 use Zend\EventManager\EventInterface;
 
 /**
@@ -38,7 +40,7 @@ use Zend\EventManager\EventInterface;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DoctrineAnnotationParser
+class DoctrineAnnotationParser implements ParserInterface
 {
     /**
      * @var array Annotation classes we support on this iteration
@@ -54,7 +56,7 @@ class DoctrineAnnotationParser
      * Set the DocParser instance
      *
      * @param  DocParser $docParser
-     * @return AnnotationParser
+     * @return DoctrineAnnotationParser
      */
     public function setDocParser(DocParser $docParser)
     {
@@ -117,11 +119,11 @@ class DoctrineAnnotationParser
      * Specify an allowed annotation class
      * 
      * @param  string $class 
-     * @return AnnotationParser
+     * @return DoctrineAnnotationParser
      */
-    public function allowAnnotation($class)
+    public function registerAnnotation($annotation)
     {
-        $this->allowedAnnotations[$class] = true;
+        $this->allowedAnnotations[$annotation] = true;
         return $this;
     }
 
@@ -129,10 +131,18 @@ class DoctrineAnnotationParser
      * Set many allowed annotations at once
      * 
      * @param  array $classes Array of annotation class names
-     * @return AnnotationParser
+     * @return DoctrineAnnotationParser
      */
-    public function allowAnnotations(array $classes)
+    public function registerAnnotations($annotations)
     {
+        if (!is_array($annotations) && !$annotations instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s: expects an array or Traversable; received "%s"',
+                __METHOD__,
+                (is_object($annotations) ? get_class($annotations) : gettype($annotations))
+            ));
+        }
+
         foreach ($classes as $class) {
             $this->allowedAnnotations[$class] = true;
         }

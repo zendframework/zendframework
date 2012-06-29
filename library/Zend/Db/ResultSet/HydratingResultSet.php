@@ -94,4 +94,19 @@ class HydratingResultSet extends AbstractResultSet
         return is_array($data) ? $this->hydrator->hydrate($data, $object) : false;
     }
 
+    /**
+     * Cast result set to array of arrays
+     *
+     * @return array
+     * @throws Exception\RuntimeException if any row is not castable to an array
+     */
+    public function toArray()
+    {
+        $return = array();
+        foreach ($this as $row) {
+            $return[] = $this->getHydrator()->extract($row);
+        }
+        return $return;
+    }
+
 }

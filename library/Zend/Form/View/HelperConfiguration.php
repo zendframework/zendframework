@@ -80,6 +80,7 @@ class HelperConfiguration implements ConfigurationInterface
         'formtext'               => 'Zend\Form\View\Helper\FormText',
         'formtextarea'           => 'Zend\Form\View\Helper\FormTextarea',
         'formtime'               => 'Zend\Form\View\Helper\FormTime',
+        'formurl'                => 'Zend\Form\View\Helper\FormUrl',
         'formweek'               => 'Zend\Form\View\Helper\FormWeek',
     );
 

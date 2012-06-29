@@ -43,7 +43,7 @@ class DateStep extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID      => "Invalid type given. String, integer, array or Zend_Date expected",
         self::INVALID_DATE => "'%value%' does not appear to be a valid date",
         self::NOT_STEP     => "'%value%' is not a valid step."

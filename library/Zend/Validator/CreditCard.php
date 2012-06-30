@@ -69,7 +69,7 @@ class CreditCard extends AbstractValidator
         self::LENGTH         => "The input contains an invalid amount of digits",
         self::PREFIX         => "The input is not from an allowed institute",
         self::SERVICE        => "The input seems to be an invalid creditcard number",
-        self::SERVICEFAILURE => "An exception has been raised while validating '%value%'",
+        self::SERVICEFAILURE => "An exception has been raised while validating the input.",
     );
 
     /**

@@ -239,9 +239,9 @@ echo $renderer->render('booklist');
         <programlisting language="php"><![CDATA[
 namespace Bookstore\Controller;
 
-use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\Controller\AbstractActionController;
 
-class BookController extends ActionController
+class BookController extends AbstractActionController
 {
     public function listAction()
     {

@@ -25,6 +25,7 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventInterface as Event;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
+use Zend\Http\Request as HttpRequest;
 use Zend\Http\PhpEnvironment\Response as HttpResponse;
 use Zend\Mvc\Exception;
 use Zend\Mvc\InjectApplicationEventInterface;
@@ -34,10 +35,9 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\DispatchableInterface as Dispatchable;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Stdlib\ResponseInterface as Response;
-use Zend\View\Model\ViewModel;
 
 /**
- * Basic action controller
+ * Abstract RESTful controller
  *
  * @category   Zend
  * @package    Zend_Mvc
@@ -45,62 +45,111 @@ use Zend\View\Model\ViewModel;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class ActionController implements 
-    Dispatchable, 
-    EventManagerAwareInterface, 
-    InjectApplicationEventInterface, 
+abstract class AbstractRestfulController implements
+    Dispatchable,
+    EventManagerAwareInterface,
+    InjectApplicationEventInterface,
     ServiceLocatorAwareInterface
 {
-    //use \Zend\EventManager\ProvidesEvents;
-
-    protected $event;
-    protected $events;
-    protected $locator;
+    /**
+     * @var PluginManager
+     */
     protected $plugins;
+
+    /**
+     * @var Request
+     */
     protected $request;
+
+    /**
+     * @var Response
+     */
     protected $response;
 
     /**
-     * Default action if none provided
-     *
-     * @return array
+     * @var Event
      */
-    public function indexAction()
-    {
-        return new ViewModel(array(
-            'content' => 'Placeholder page'
-        ));
-    }
+    protected $event;
 
     /**
-     * Action called if matched action does not exist
+     * @var EventManagerInterface
+     */
+    protected $events;
+
+    /**
+     * @var ServiceLocatorInterface
+     */
+    protected $locator;
+
+    /**
+     * Return list of resources
+     *
+     * @return mixed
+     */
+    abstract public function getList();
+
+    /**
+     * Return single resource
+     *
+     * @param  mixed $id
+     * @return mixed
+     */
+    abstract public function get($id);
+
+    /**
+     * Create a new resource
+     *
+     * @param  mixed $data
+     * @return mixed
+     */
+    abstract public function create($data);
+
+    /**
+     * Update an existing resource
+     *
+     * @param  mixed $id
+     * @param  mixed $data
+     * @return mixed
+     */
+    abstract public function update($id, $data);
+
+    /**
+     * Delete an existing resource
+     *
+     * @param  mixed $id
+     * @return mixed
+     */
+    abstract public function delete($id);
+
+    /**
+     * Basic functionality for when a page is not available
      *
      * @return array
      */
     public function notFoundAction()
     {
-        $response   = $this->response;
-        $event      = $this->getEvent();
-        $routeMatch = $event->getRouteMatch();
-
-        $response->setStatusCode(404);
-        $routeMatch->setParam('action', 'not-found');
-
-        return new ViewModel(array(
-            'content' => 'Page not found'
-        ));
+        $this->response->setStatusCode(404);
+        return array('content' => 'Page not found');
     }
 
     /**
      * Dispatch a request
      *
+     * If the route match includes an "action" key, then this acts basically like
+     * a standard action controller. Otherwise, it introspects the HTTP method
+     * to determine how to handle the request, and which method to delegate to.
+     *
      * @events dispatch.pre, dispatch.post
      * @param  Request $request
      * @param  null|Response $response
-     * @return Response|mixed
+     * @return mixed|Response
+     * @throws Exception\InvalidArgumentException
      */
     public function dispatch(Request $request, Response $response = null)
     {
+        if (!$request instanceof HttpRequest) {
+            throw new Exception\InvalidArgumentException('Expected an HTTP request');
+        }
         $this->request = $request;
         if (!$response) {
             $response = new HttpResponse();
@@ -115,20 +164,13 @@ abstract class ActionController implements
         $result = $this->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH, $e, function($test) {
             return ($test instanceof Response);
         });
-
         if ($result->stopped()) {
             return $result->last();
         }
+
         return $e->getResult();
     }
 
-    /**
-     * Execute the request
-     *
-     * @param  MvcEvent $e
-     * @return mixed
-     * @throws Exception\DomainException
-     */
     public function execute(MvcEvent $e)
     {
         $routeMatch = $e->getRouteMatch();
@@ -137,40 +179,94 @@ abstract class ActionController implements
              * @todo Determine requirements for when route match is missing.
              *       Potentially allow pulling directly from request metadata?
              */
-            throw new Exception\DomainException('Missing route matches; unsure how to retrieve action');
+            throw new \DomainException('Missing route matches; unsure how to retrieve action');
         }
 
-        $action = $routeMatch->getParam('action', 'not-found');
-        $method = static::getMethodFromAction($action);
+        $request = $e->getRequest();
+        $action  = $routeMatch->getParam('action', false);
+        if ($action) {
+            // Handle arbitrary methods, ending in Action
+            $method = static::getMethodFromAction($action);
+            if (!method_exists($this, $method)) {
+                $method = 'notFoundAction';
+            }
+            $return = $this->$method();
+        } else {
+            // RESTful methods
+            switch (strtolower($request->getMethod())) {
+                case 'get':
+                    if (null !== $id = $routeMatch->getParam('id')) {
+                        $action = 'get';
+                        $return = $this->get($id);
+                        break;
+                    }
+                    if (null !== $id = $request->query()->get('id')) {
+                        $action = 'get';
+                        $return = $this->get($id);
+                        break;
+                    }
+                    $action = 'getList';
+                    $return = $this->getList();
+                    break;
+                case 'post':
+                    $action = 'create';
+                    $return = $this->create($request->post()->toArray());
+                    break;
+                case 'put':
+                    if (null === $id = $routeMatch->getParam('id')) {
+                        if (!($id = $request->query()->get('id', false))) {
+                            throw new \DomainException('Missing identifier');
+                        }
+                    }
+                    $content = $request->getContent();
+                    parse_str($content, $parsedParams);
+                    $action = 'update';
+                    $return = $this->update($id, $parsedParams);
+                    break;
+                case 'delete':
+                    if (null === $id = $routeMatch->getParam('id')) {
+                        if (!($id = $request->query()->get('id', false))) {
+                            throw new \DomainException('Missing identifier');
+                        }
+                    }
+                    $action = 'delete';
+                    $return = $this->delete($id);
+                    break;
+                default:
+                    throw new \DomainException('Invalid HTTP method!');
+            }
 
-        if (!method_exists($this, $method)) {
-            $method = 'notFoundAction';
+            $routeMatch->setParam('action', $action);
         }
 
-        $actionResponse = $this->$method();
-
-        $e->setResult($actionResponse);
-        return $actionResponse;
+        // Emit post-dispatch signal, passing:
+        // - return from method, request, response
+        // If a listener returns a response object, return it immediately
+        $e->setResult($return);
+        return $return;
     }
 
     /**
-     * Get the request object
+     * Get request object
      *
      * @return Request
      */
     public function getRequest()
     {
+        if (!$this->request) {
+            $this->request = new HttpRequest();
+        }
         return $this->request;
     }
 
     /**
-     * Get the response object
+     * Get response object
      *
      * @return Response
      */
     public function getResponse()
     {
-        if (null === $this->response) {
+        if (!$this->response) {
             $this->response = new HttpResponse();
         }
         return $this->response;
@@ -180,15 +276,14 @@ abstract class ActionController implements
      * Set the event manager instance used by this context
      *
      * @param  EventManagerInterface $events
-     * @return ActionController
+     * @return AbstractRestfulController
      */
     public function setEventManager(EventManagerInterface $events)
     {
         $events->setIdentifiers(array(
             'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
-            get_called_class(),
-            substr(get_called_class(), 0, strpos(get_called_class(), '\\'))
+            get_called_class()
         ));
         $this->events = $events;
         $this->attachDefaultListeners();
@@ -204,7 +299,7 @@ abstract class ActionController implements
      */
     public function getEventManager()
     {
-        if (!$this->events instanceof EventManagerInterface) {
+        if (!$this->events) {
             $this->setEventManager(new EventManager());
         }
         return $this->events;
@@ -234,7 +329,7 @@ abstract class ActionController implements
      *
      * Will create a new MvcEvent if none provided.
      *
-     * @return Event
+     * @return MvcEvent
      */
     public function getEvent()
     {
@@ -282,7 +377,7 @@ abstract class ActionController implements
      * Set plugin manager
      *
      * @param  string|PluginManager $plugins 
-     * @return ActionController
+     * @return RestfulController
      * @throws Exception\InvalidArgumentException
      */
     public function setPluginManager(PluginManager $plugins)
@@ -316,7 +411,7 @@ abstract class ActionController implements
      * @param  array $params
      * @return mixed
      */
-    public function __call($method, array $params)
+    public function __call($method, $params)
     {
         $plugin = $this->plugin($method);
         if (is_callable($plugin)) {
@@ -337,7 +432,7 @@ abstract class ActionController implements
     }
 
     /**
-     * Transform an action name into a method name
+     * Transform an "action" token into a method name
      *
      * @param  string $action
      * @return string

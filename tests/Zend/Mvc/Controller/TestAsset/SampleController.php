@@ -2,9 +2,9 @@
 
 namespace ZendTest\Mvc\Controller\TestAsset;
 
-use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\Controller\AbstractActionController;
 
-class SampleController extends ActionController
+class SampleController extends AbstractActionController
 {
     public function testAction()
     {

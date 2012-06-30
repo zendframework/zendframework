@@ -3,10 +3,10 @@
 namespace ZendTest\Mvc\TestAsset;
 
 use Zend\Di\LocatorInterface as DiLocator;
-use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\LocatorAwareInterface;
 
-class LocatorAwareController extends ActionController implements LocatorAwareInterface
+class LocatorAwareController extends AbstractActionController implements LocatorAwareInterface
 {
     protected $locator;
 

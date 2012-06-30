@@ -348,7 +348,7 @@ class Http implements AdapterInterface
             $getHeader = 'Authorization';
         }
 
-        $headers = $this->_request->headers();
+        $headers = $this->_request->getHeaders();
         if (!$headers->has($getHeader)) {
             return $this->_challengeClient();
         }
@@ -412,7 +412,7 @@ class Http implements AdapterInterface
         $this->_response->setStatusCode($statusCode);
 
         // Send a challenge in each acceptable authentication scheme
-        $headers = $this->_response->headers();
+        $headers = $this->_response->getHeaders();
         if (in_array('basic', $this->_acceptSchemes)) {
             $headers->addHeaderLine($headerName, $this->_basicHeader());
         }
@@ -614,7 +614,7 @@ class Http implements AdapterInterface
         // would be surprising if the user just logged in.
         $timeout = ceil(time() / $this->_nonceTimeout) * $this->_nonceTimeout;
 
-        $nonce = hash('md5', $timeout . ':' . $this->_request->server()->get('HTTP_USER_AGENT') . ':' . __CLASS__);
+        $nonce = hash('md5', $timeout . ':' . $this->_request->getServer()->get('HTTP_USER_AGENT') . ':' . __CLASS__);
         return $nonce;
     }
 
@@ -688,7 +688,7 @@ class Http implements AdapterInterface
         // Section 3.2.2.5 in RFC 2617 says the authenticating server must
         // verify that the URI field in the Authorization header is for the
         // same resource requested in the Request Line.
-        $rUri = $this->_request->uri();
+        $rUri = $this->_request->getUri();
         $cUri = UriFactory::factory($temp[1]);
 
         // Make sure the path portion of both URIs is the same
@@ -744,7 +744,7 @@ class Http implements AdapterInterface
             if (!$ret || empty($temp[1])) {
 
                 // Big surprise: IE isn't RFC 2617-compliant.
-                $headers = $this->_request->headers();
+                $headers = $this->_request->getHeaders();
                 if (!$headers->has('User-Agent')) {
                     return false;
                 }

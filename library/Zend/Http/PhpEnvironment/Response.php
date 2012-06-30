@@ -36,7 +36,7 @@ class Response extends HttpResponse
         $status  = $this->renderStatusLine();
         header($status);
 
-        foreach ($this->headers() as $header) {
+        foreach ($this->getHeaders() as $header) {
             if ($header instanceof MultipleHeaderInterface) {
                 header($header->toString(), false);
                 continue;

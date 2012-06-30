@@ -195,7 +195,7 @@ class Stream extends Response
             $response->content = implode("\n", $responseArray);
         }
 
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         foreach($headers as $header) {
             if ($header instanceof \Zend\Http\Header\ContentLength) {
                 $response->contentLength = (int) $header->getFieldValue();

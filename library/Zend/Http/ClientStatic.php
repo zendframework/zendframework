@@ -67,11 +67,11 @@ class ClientStatic
         $request->setMethod(Request::METHOD_GET);
 
         if (!empty($query) && is_array($query)) {
-            $request->query()->fromArray($query);
+            $request->getQuery()->fromArray($query);
         }
 
         if (!empty($headers) && is_array($headers)) {
-            $request->headers()->addHeaders($headers);
+            $request->getHeaders()->addHeaders($headers);
         }
 
         if (!empty($body)) {
@@ -99,7 +99,7 @@ class ClientStatic
         $request->setMethod(Request::METHOD_POST);
 
         if (!empty($params) && is_array($params)) {
-            $request->post()->fromArray($params);
+            $request->getPost()->fromArray($params);
         } else {
             throw new Exception\InvalidArgumentException('The array of post parameters is empty');
         }
@@ -109,7 +109,7 @@ class ClientStatic
         }
 
         if (!empty($headers) && is_array($headers)) {
-            $request->headers()->addHeaders($headers);
+            $request->getHeaders()->addHeaders($headers);
         }
 
         if (!empty($body)) {

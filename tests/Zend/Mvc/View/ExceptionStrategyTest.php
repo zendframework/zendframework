@@ -156,7 +156,7 @@ class ExceptionStrategyTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->strategy);
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
 
         $expectedCallback = array($this->strategy, 'prepareExceptionViewModel');
         $expectedPriority = 1;
@@ -177,10 +177,10 @@ class ExceptionStrategyTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->strategy);
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $this->assertEquals(1, count($listeners));
         $events->detachAggregate($this->strategy);
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $this->assertEquals(0, count($listeners));
     }
 }

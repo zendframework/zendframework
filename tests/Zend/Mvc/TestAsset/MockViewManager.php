@@ -23,6 +23,7 @@ namespace ZendTest\Mvc\TestAsset;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Mvc\MvcEvent;
 
 class MockViewManager implements ListenerAggregateInterface
 {
@@ -30,7 +31,7 @@ class MockViewManager implements ListenerAggregateInterface
 
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach('bootstrap', array($this, 'onBootstrap'), 10000);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_BOOTSTRAP, array($this, 'onBootstrap'), 10000);
     }
 
     public function detach(EventManagerInterface $events)

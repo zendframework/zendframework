@@ -112,10 +112,11 @@ class AnnotationManager implements EventManagerAwareInterface
             'raw'     => $annotationData[2],
         ));
 
-        $events  = $this->events();
-        $results = $events->trigger($event, function ($r) {
-            return (is_object($r));
-        });
+        $results = $this->getEventManager()
+                        ->trigger($event, function ($r) {
+                            return (is_object($r));
+                        });
+
         $annotation = $results->last();
         return (is_object($annotation) ? $annotation : false);
     }

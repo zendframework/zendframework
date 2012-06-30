@@ -491,18 +491,38 @@ abstract class AbstractSource implements MetadataInterface
 
     protected function loadTableNameData($schema)
     {
+        if (isset($this->data['table_names'][$schema])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('table_names', $schema);
     }
 
     protected function loadColumnData($table, $schema)
     {
+        if (isset($this->data['columns'][$schema][$table])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('columns', $schema, $table);
     }
 
     protected function loadConstraintData($table, $schema)
     {
+        if (isset($this->data['constraint_names'][$schema])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('constraint_names', $schema);
     }
 
     protected function loadTriggerData($schema)
     {
+        if (isset($this->data['triggers'][$schema])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('triggers', $schema);
     }
 
 }

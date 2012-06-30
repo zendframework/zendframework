@@ -10,9 +10,10 @@
 
 namespace Zend\Db\Metadata\Source;
 
-use Zend\Db\Metadata\MetadataInterface,
-    Zend\Db\Adapter\Adapter,
-    Zend\Db\Metadata\Object;
+use Zend\Db\Metadata\MetadataInterface;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Metadata\Object;
+use Zend\Db\ResultSet\ResultSetInterface;
 
 /**
  * @category   Zend
@@ -22,83 +23,6 @@ use Zend\Db\Metadata\MetadataInterface,
 class SqliteMetadata extends AbstractSource
 {
     /**
-     * Get column names
-     * 
-     * @param string $table
-     * @param string $schema
-     * @param string $database 
-     */
-    public function getColumnNames($table, $schema = null)
-    {
-        if ($this->tableData == null) {
-            $this->loadTableColumnData();
-        }
-
-        if (!isset($this->tableData[$table])) {
-            throw new Exception\InvalidArgumentException('Invalid table name provided');
-        }
-
-        $names = array();
-        foreach ($this->tableData[$table] as $columnData) {
-            $names[] = $columnData['name'];
-        }
-        return $names;
-    }
-
-    /**
-     * Get column
-     * 
-     * @param  string $columnName
-     * @param  string $table
-     * @param  string $schema
-     * @param  string $database
-     * @return Object\ColumnObject 
-     */
-    public function getColumn($columnName, $table, $schema = null)
-    {
-        $sql = 'PRAGMA table_info("' . $table . '")';
-        $rows = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-
-        $found = false;
-        foreach ($rows->toArray() as $row) {
-            if ($row['name'] == $columnName) {
-                $found = $row;
-                break;
-            }
-        }
-
-        if ($found == false) {
-            throw new \Exception('Column not found');
-        }
-
-        $column = new Object\ColumnObject($found['name'], $table);
-        $column->setOrdinalPosition($found['cid']);
-        $column->setDataType($found['type']);
-        $column->setIsNullable(!((bool) $found['notnull']));
-        $column->setColumnDefault($found['dflt_value']);
-        return $column;
-    }
-
-    /**
-     * Get columns
-     * 
-     * @param  string $table
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
-     */
-    public function getColumns($table, $schema = null)
-    {
-        $sql = 'PRAGMA table_info("' . $table . '")';
-        $rows = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-        $columns = array();
-        foreach ($rows as $row) {
-            $columns[] = $this->getColumn($row['name'], $table, $schema);
-        }
-        return $columns;
-    }
-
-    /**
      * Get constraints
      * 
      * @param  string $table
@@ -106,7 +30,7 @@ class SqliteMetadata extends AbstractSource
      * @param  string $database
      * @return array 
      */
-    public function getConstraints($table, $schema = null)
+    public function getConstraintsOld($table, $schema = null)
     {
         if ($this->constraintData == null) {
             $this->loadConstraintData();
@@ -129,7 +53,7 @@ class SqliteMetadata extends AbstractSource
      * @param  string $database
      * @return Object\ConstraintObject 
      */
-    public function getConstraint($constraintName, $table, $schema = null)
+    public function getConstraintOld($constraintName, $table, $schema = null)
     {
         if ($this->constraintData == null) {
             $this->loadConstraintData();
@@ -164,7 +88,7 @@ class SqliteMetadata extends AbstractSource
      * @param  string $database
      * @return Object\ConstraintKeyObject 
      */
-    public function getConstraintKeys($constraint, $table, $schema = null)
+    public function getConstraintKeysOld($constraint, $table, $schema = null)
     {
         if ($this->constraintData == null) {
             $this->loadConstraintData();
@@ -196,22 +120,6 @@ class SqliteMetadata extends AbstractSource
         }
 
         return $keys;
-    }
-
-    /**
-     * Load table column data
-     */
-    protected function loadTableColumnData()
-    {
-        $sql = 'SELECT "name" FROM "sqlite_master" WHERE "type" = \'table\'';
-        $tables = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-        $tables = $tables->toArray();
-
-        foreach ($tables as $table) {
-            $sql = 'PRAGMA table_info("' . $table['name'] . '")';
-            $columns = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-            $this->tableData[$table['name']] = $columns->toArray();
-        }
     }
 
     /**
@@ -285,11 +193,9 @@ class SqliteMetadata extends AbstractSource
             return;
         }
         $this->prepareDataHierarchy('schemas');
-        $sql = 'PRAGMA database_list';
-        $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-        
-        $schemas = array();
-        foreach ($results->toArray() as $row) {
+
+        $results = $this->fetchPragma('database_list');
+        foreach ($results as $row) {
             $schemas[] = $row['name'];
         }
         $this->data['schemas'] = $schemas;
@@ -304,19 +210,29 @@ class SqliteMetadata extends AbstractSource
 
         // FEATURE: Filename?
 
-        $sql = 'SELECT "name", "type" FROM "sqlite_master" WHERE "type" IN (\'table\',\'view\')';
+        $p = $this->adapter->getPlatform();
+
+        $sql = 'SELECT "name", "type", "sql" FROM ' . $p->quoteIdentifierChain(array($schema, 'sqlite_master'))
+             . ' WHERE "type" IN (\'table\',\'view\') AND "name" NOT LIKE \'sqlite_%\'';
+
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
         $tables = array();
         foreach ($results->toArray() as $row) {
             if ('table' == $row['type']) {
                 $tables[$row['name']] = array(
                     'table_type' => 'BASE TABLE',
-                    'view_definition' => null,
-                    'check_option' => null,
-                    'is_updatable' => null,
+                    'view_definition' => null, // VIEW only
+                    'check_option' => null,    // VIEW only
+                    'is_updatable' => null,    // VIEW only
                 );
             } else {
-                // TODO: View stuff
+                $tables[$row['name']] = array(
+                    'table_type' => 'VIEW',
+                    // TODO: $row['sql'] is the CREATE VIEW statement, we might parse view_definition out
+                    'view_definition' => null,
+                    'check_option' => 'NONE',
+                    'is_updatable' => false,
+                );
             }
         }
         $this->data['table_names'][$schema] = $tables;
@@ -329,20 +245,110 @@ class SqliteMetadata extends AbstractSource
         }
         $this->prepareDataHierarchy('columns', $schema, $table);
         
+        $p = $this->adapter->getPlatform();
+        
+        
+        $results = $this->fetchPragma('table_info', $schema, $table);
+
         $columns = array();
-        
+
+        foreach ($results as $row) {
+            $columns[$row['name']] = array(
+                // cid appears to be zero-based, ordinal position needs to be one-based
+                'ordinal_position'          => $row['cid'] + 1,
+                'column_default'            => $row['dflt_value'],
+                'is_nullable'               => !((bool) $row['notnull']),
+                'data_type'                 => $row['type'],
+                'character_maximum_length'  => null,
+                'character_octet_length'    => null,
+                'numeric_precision'         => null,
+                'numeric_scale'             => null,
+                'numeric_unsigned'          => null,
+                'erratas'                   => array(),
+            );
+            // TODO: populate character_ and numeric_values with correct info
+        }
+
         $this->data['columns'][$schema][$table] = $columns;
-        
-        $sql = 'PRAGMA table_info("' . $table['name'] . '")';
-        $columns = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-        $this->tableData[$table['name']] = $columns->toArray();
     }
     
-    protected function loadConstraintData($table, $schema)
-    {
-    }
+//     protected function loadConstraintData($table, $schema)
+//     {
+//     }
 
     protected function loadTriggerData($schema)
     {
+        if (isset($this->data['triggers'][$schema])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('triggers', $schema);
+
+        $p = $this->adapter->getPlatform();
+        
+        $sql = 'SELECT "name", "tbl_name", "sql" FROM ' . $p->quoteIdentifierChain(array($schema, 'sqlite_master'))
+             . ' WHERE "type" = \'trigger\'';
+
+        $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
+        $triggers = array();
+        foreach ($results->toArray() as $row) {
+            $triggers[$row['name']] = array(
+                'trigger_name'               => $row['name'],
+                'event_manipulation'         => null,
+                'event_object_catalog'       => null,
+                'event_object_schema'        => $schema,
+                'event_object_table'         => $row['tbl_name'],
+                'action_order'               => null,
+                'action_condition'           => null,
+                'action_statement'           => null,
+                'action_orientation'         => 'ROW',
+                'action_timing'              => null,
+                'action_reference_old_table' => null,
+                'action_reference_new_table' => null,
+                'action_reference_old_row'   => 'OLD',
+                'action_reference_new_row'   => 'NEW',
+                'created'                    => null,
+            );
+/*
+<trigger name>        ::= <identifier>
+<trigger action time> ::= BEFORE|AFTER|INSTEAD OF
+<trigger event>       ::= INSERT|DELETE|UPDATE [ OF <trigger column list>]
+
+CREATE TRIGGER <trigger name> <trigger action time> <trigger event> ON <table name>
+[ REFERENCING <transition table or variable list> ]
+<triggered action>
+
+CREATE TRIGGER [name] [action_timing] [event_manipulation] ON [event_object_table] FOR EACH [action_orientation] [action_statement]
+
+ */
+//             echo "CREATE TRIGGER {$trigger->getName()} {$trigger->getActionTiming()} {$trigger->getEventManipulation()} ON {$trigger->getEventObjectTable()}\n";
+//             echo "  FOR EACH {$trigger->getActionOrientation()} {$trigger->getActionStatement()}\n";
+        }
+
+        $this->data['triggers'][$schema] = $triggers;
+    }
+
+    // Accessing TRIGGER data via SQL queries is not supported
+
+    protected function fetchPragma($name, $schema = null, $value = null)
+    {
+        $p = $this->adapter->getPlatform();
+        
+        $sql = 'PRAGMA ';
+        
+        if (null !== $schema) {
+            $sql .= $p->quoteIdentifier($schema) . '.';
+        }
+        $sql .= $name;
+
+        if (null !== $value) {
+            $sql .= '(' . $p->quoteValue($value) . ')';
+        }
+
+        $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
+        if ($results instanceof ResultSetInterface) {
+            return $results->toArray();
+        }
+        return array();
     }
 }

@@ -560,4 +560,19 @@ class ApplicationTest extends TestCase
         $this->application->run();
         $this->assertContains('Zend\Mvc\Application', $response->getContent());
     }
+
+    public function testOnDispatchErrorEventPassedToTriggersShouldBeTheOriginalOne()
+    {
+        $this->setupPathController(false);
+        $controllerLoader = $this->serviceManager->get('ControllerLoader');
+        $controllerLoader->setInvokableClass('path', 'InvalidClassName');
+        $model = $this->getMock('Zend\View\Model\ViewModel');
+        $this->application->events()->attach('dispatch.error', function($e) use ($model) {
+            $e->setResult($model);
+        });
+
+        $this->application->run();
+        $event = $this->application->getMvcEvent();
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $event->getResult());
+    }
 }

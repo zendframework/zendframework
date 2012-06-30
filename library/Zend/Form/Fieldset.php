@@ -90,14 +90,14 @@ class Fieldset extends Element implements FieldsetInterface
         }
 
         $name = $elementOrFieldset->getName();
-        if (empty($name) && (!array_key_exists('name', $flags) || empty($flags['name']))) {
+        if ((strlen($name) === 0) && (!array_key_exists('name', $flags) || (strlen($flags['name']) === 0))) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s: element or fieldset provided is not named, and no name provided in flags',
                 __METHOD__
             ));
         }
 
-        if (array_key_exists('name', $flags) && !empty($flags['name'])) {
+        if (array_key_exists('name', $flags) && strlen($flags['name']) > 0) {
             $name = $flags['name'];
 
             // Rename the element or fieldset to the specified alias

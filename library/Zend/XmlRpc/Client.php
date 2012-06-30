@@ -227,7 +227,7 @@ class Client implements ServerClient
             $http->setUri($this->_serverAddress);
         }
 
-        $headers = $httpRequest->headers();
+        $headers = $httpRequest->getHeaders();
         $headers->addHeaders(array(
             'Content-Type: text/xml; charset=utf-8',
             'Accept: text/xml',

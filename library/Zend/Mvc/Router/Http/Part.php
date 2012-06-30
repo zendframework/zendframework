@@ -141,7 +141,7 @@ class Part extends TreeRouteStack implements RouteInterface
 
         $match = $this->route->match($request, $pathOffset);
 
-        if ($match !== null && method_exists($request, 'uri')) {
+        if ($match !== null && method_exists($request, 'getUri')) {
             if ($this->childRoutes !== null) {
                 $this->addRoutes($this->childRoutes);
                 $this->childRoutes = null;
@@ -149,7 +149,7 @@ class Part extends TreeRouteStack implements RouteInterface
 
             $nextOffset = $pathOffset + $match->getLength();
 
-            $uri        = $request->uri();
+            $uri        = $request->getUri();
             $pathLength = strlen($uri->getPath());
 
             if ($this->mayTerminate && $nextOffset === $pathLength) {

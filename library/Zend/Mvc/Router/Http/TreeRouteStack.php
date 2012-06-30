@@ -145,7 +145,7 @@ class TreeRouteStack extends SimpleRouteStack
      */
     public function match(Request $request)
     {
-        if (!method_exists($request, 'uri')) {
+        if (!method_exists($request, 'getUri')) {
             return null;
         }
 
@@ -153,7 +153,7 @@ class TreeRouteStack extends SimpleRouteStack
             $this->setBaseUrl($request->getBaseUrl());
         }
 
-        $uri           = $request->uri();
+        $uri           = $request->getUri();
         $baseUrlLength = strlen($this->baseUrl) ?: null;
 
         if ($this->requestUri === null) {

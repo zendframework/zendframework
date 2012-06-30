@@ -57,7 +57,7 @@ class RestfulControllerTest extends TestCase
     {
         $entity = array('id' => 1, 'name' => __FUNCTION__);
         $this->request->setMethod('POST');
-        $post = $this->request->post();
+        $post = $this->request->getPost();
         $post->fromArray($entity);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertArrayHasKey('entity', $result);

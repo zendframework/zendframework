@@ -200,7 +200,7 @@ abstract class AbstractRestfulController implements
                         $return = $this->get($id);
                         break;
                     }
-                    if (null !== $id = $request->query()->get('id')) {
+                    if (null !== $id = $request->getQuery()->get('id')) {
                         $action = 'get';
                         $return = $this->get($id);
                         break;
@@ -210,11 +210,11 @@ abstract class AbstractRestfulController implements
                     break;
                 case 'post':
                     $action = 'create';
-                    $return = $this->create($request->post()->toArray());
+                    $return = $this->create($request->getPost()->toArray());
                     break;
                 case 'put':
                     if (null === $id = $routeMatch->getParam('id')) {
-                        if (!($id = $request->query()->get('id', false))) {
+                        if (!($id = $request->getQuery()->get('id', false))) {
                             throw new \DomainException('Missing identifier');
                         }
                     }
@@ -225,7 +225,7 @@ abstract class AbstractRestfulController implements
                     break;
                 case 'delete':
                     if (null === $id = $routeMatch->getParam('id')) {
-                        if (!($id = $request->query()->get('id', false))) {
+                        if (!($id = $request->getQuery()->get('id', false))) {
                             throw new \DomainException('Missing identifier');
                         }
                     }

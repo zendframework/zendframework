@@ -76,7 +76,7 @@ class Params extends AbstractPlugin
      */
     public function fromPost($param, $default = null)
     {
-        return $this->getController()->getRequest()->post()->get($param, $default);
+        return $this->getController()->getRequest()->getPost()->get($param, $default);
     }
 
     /**
@@ -88,6 +88,6 @@ class Params extends AbstractPlugin
      */
     public function fromQuery($param, $default = null)
     {
-        return $this->getController()->getRequest()->query()->get($param, $default);
+        return $this->getController()->getRequest()->getQuery()->get($param, $default);
     }
 }

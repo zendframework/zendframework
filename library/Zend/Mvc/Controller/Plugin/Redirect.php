@@ -58,7 +58,7 @@ class Redirect extends AbstractPlugin
 
         $options['name'] = $route;
         $url = $router->assemble($params, $options);
-        $response->headers()->addHeaderLine('Location', $url);
+        $response->getHeaders()->addHeaderLine('Location', $url);
         $response->setStatusCode(302);
         return $response;
     }
@@ -72,7 +72,7 @@ class Redirect extends AbstractPlugin
     public function toUrl($url)
     {
         $response = $this->getResponse();
-        $response->headers()->addHeaderLine('Location', $url);
+        $response->getHeaders()->addHeaderLine('Location', $url);
         $response->setStatusCode(302);
         return $response;
     }

@@ -38,7 +38,7 @@ class RedirectTest extends TestCase
     {
         $response = $this->plugin->toRoute('home');
         $this->assertTrue($response->isRedirect());
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $location = $headers->get('Location');
         $this->assertEquals('/', $location->getFieldValue());
     }
@@ -47,7 +47,7 @@ class RedirectTest extends TestCase
     {
         $response = $this->plugin->toUrl('/foo');
         $this->assertTrue($response->isRedirect());
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $location = $headers->get('Location');
         $this->assertEquals('/foo', $location->getFieldValue());
     }

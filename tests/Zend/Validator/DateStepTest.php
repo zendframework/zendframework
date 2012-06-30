@@ -107,7 +107,7 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
         $validator = new Validator\DateStep(array(
             'format'       => $format,
             'baseValue'    => $baseValue,
-            'stepInterval' => new DateInterval($interval),
+            'step' => new DateInterval($interval),
         ));
 
         $this->assertEquals($isValid, $validator->isValid($value));

@@ -145,8 +145,20 @@ class FormElementTest extends TestCase
     public function testRendersCsrfAsExpected()
     {
         $element   = new Element\Csrf('foo');
-        $validator = $element->getValidator();
-        $hash      = $validator->getHash();
+        $inputSpec = $element->getInputSpecification();
+        $hash = '';
+
+        foreach ($inputSpec['validators'] as $validator) {
+            $class = get_class($validator);
+            switch ($class) {
+                case 'Zend\Validator\Csrf':
+                    $hash = $validator->getHash();
+                    break;
+                default:
+                    break;
+            }
+        }
+
         $markup    = $this->helper->render($element);
 
         $this->assertRegexp('#<input[^>]*(type="hidden")#', $markup);

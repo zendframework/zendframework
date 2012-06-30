@@ -28,36 +28,27 @@ use Zend\Validator\Csrf as CsrfValidator;
 
 class CsrfTest extends TestCase
 {
-    public function testLazyLoadsCsrfValidatorByDefault()
+    public function testProvidesInputSpecificationThatIncludesValidatorsBasedOnAttributes()
     {
-        $element   = new CsrfElement();
-        $validator = $element->getValidator();
-        $this->assertInstanceOf('Zend\Validator\Csrf', $validator);
-    }
+        $element = new CsrfElement('foo');
 
-    public function testCanInjectCsrfValidator()
-    {
-        $element   = new CsrfElement();
-        $validator = new CsrfValidator();
-        $element->setValidator($validator);
-        $this->assertSame($validator, $element->getValidator());
-    }
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('validators', $inputSpec);
+        $this->assertInternalType('array', $inputSpec['validators']);
 
-    public function testValueAttributeIsSetToValidatorHash()
-    {
-        $element   = new CsrfElement('foo');
-        $validator = $element->getValidator();
-        $value     = $element->getAttribute('value');
-        $this->assertSame($validator->getHash(), $value);
-
-        $validator = new CsrfValidator(array(
-            'salt' => 'foobar',
-            'name' => $element->getName(),
-        ));
-        $validator->setSalt('foobarbaz');
-        $element->setValidator($validator);
-        $value2    = $element->getAttribute('value');
-        $this->assertSame($validator->getHash(), $value2);
-        $this->assertNotSame($value, $value2, "$value == $value2");
+        $expectedClasses = array(
+            'Zend\Validator\Csrf'
+        );
+        foreach ($inputSpec['validators'] as $validator) {
+            $class = get_class($validator);
+            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            switch ($class) {
+                case 'Zend\Validator\Csrf':
+                    $this->assertEquals('foo', $validator->getName());
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

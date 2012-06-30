@@ -50,18 +50,6 @@ class Url extends Element implements InputProviderInterface
     protected $validator;
 
     /**
-     * Set validator
-     *
-     * @param  ValidatorInterface $validator
-     * @return Color
-     */
-    public function setValidator(ValidatorInterface $validator)
-    {
-        $this->validator = $validator;
-        return $this;
-    }
-
-    /**
      * Get validator
      *
      * @return ValidatorInterface
@@ -69,10 +57,10 @@ class Url extends Element implements InputProviderInterface
     public function getValidator()
     {
         if (null === $this->validator) {
-            $this->setValidator(new UriValidator(array(
+            $this->validator = new UriValidator(array(
                 'allowAbsolute' => true,
                 'allowRelative' => false,
-            )));
+            ));
         }
         return $this->validator;
     }

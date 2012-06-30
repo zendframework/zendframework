@@ -51,18 +51,6 @@ class Email extends Element implements InputProviderInterface
     protected $validator;
 
     /**
-     * Set validator
-     *
-     * @param  ValidatorInterface $validator
-     * @return Email
-     */
-    public function setValidator(ValidatorInterface $validator)
-    {
-        $this->validator = $validator;
-        return $this;
-    }
-
-    /**
      * Get validator
      *
      * @return ValidatorInterface
@@ -71,13 +59,14 @@ class Email extends Element implements InputProviderInterface
     {
         if (null === $this->validator) {
             if (!empty($this->attributes['multiple'])) {
-                $this->setValidator(new ExplodeValidator(array(
+                $this->validator = new ExplodeValidator(array(
                     'validator' => new EmailValidator(),
-                )));
+                ));
             } else {
-                $this->setValidator(new EmailValidator());
+                $this->validator = new EmailValidator();
             }
         }
+
         return $this->validator;
     }
 

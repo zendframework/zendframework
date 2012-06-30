@@ -27,87 +27,48 @@ use Zend\Form\Factory;
 
 class TimeTest extends TestCase
 {
-    public function setUp()
+    public function testProvidesInputSpecificationThatIncludesValidatorsBasedOnAttributes()
     {
-        $this->element = new TimeElement('foo');
-        parent::setUp();
-    }
+        $element = new TimeElement('foo');
+        $element->setAttributes(array(
+            'inclusive' => true,
+            'min'       => '00:00:00',
+            'max'       => '00:01:00',
+            'step'      => '1',
+        ));
 
-    public function getAttributesAndValidatorsDataProvider()
-    {
-        return array(
-            array(
-                array('min' => true, 'max' => true, 'step' => true),
-                array(
-                    'Zend\Validator\Date',
-                    'Zend\Validator\GreaterThan',
-                    'Zend\Validator\LessThan',
-                    'Zend\Validator\DateStep'
-                ),
-            ),
-            array(
-                array('max' => true, 'step' => true),
-                array(
-                    'Zend\Validator\Date',
-                    'Zend\Validator\LessThan',
-                    'Zend\Validator\DateStep'
-                ),
-            ),
-            array(
-                array('min' => true, 'step' => true),
-                array(
-                    'Zend\Validator\Date',
-                    'Zend\Validator\GreaterThan',
-                    'Zend\Validator\DateStep'
-                ),
-            ),
-            array(
-                array('min' => true, 'max' => true, 'step' => 'any'),
-                array(
-                    'Zend\Validator\Date',
-                    'Zend\Validator\GreaterThan',
-                    'Zend\Validator\LessThan',
-                ),
-            ),
-            array(
-                array(),
-                array(
-                    'Zend\Validator\Date',
-                    'Zend\Validator\DateStep'
-                ),
-            ),
-        );
-    }
-
-    /**
-     * @dataProvider getAttributesAndValidatorsDataProvider
-     */
-    public function testLazyLoadsValidatorsByDefault($attributes, $validatorClasses)
-    {
-        $this->element->setAttributes($attributes);
-        $validators = $this->element->getValidators();
-        foreach ($validators as $i => $validator) {
-            $this->assertInstanceOf($validatorClasses[$i], $validator);
-        }
-    }
-
-    public function testCanInjectValidator()
-    {
-        $validator  = $this->getMock('Zend\Validator\ValidatorInterface');
-        $this->element->setValidators(array($validator));
-        $validators = $this->element->getValidators();
-        $this->assertSame($validator, array_shift($validators));
-    }
-
-    public function testProvidesInputSpecificationThatIncludesValidator()
-    {
-        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
-        $this->element->setValidators(array($validator));
-
-        $inputSpec = $this->element->getInputSpecification();
+        $inputSpec = $element->getInputSpecification();
         $this->assertArrayHasKey('validators', $inputSpec);
         $this->assertInternalType('array', $inputSpec['validators']);
-        $test = array_shift($inputSpec['validators']);
-        $this->assertSame($validator, $test);
+
+        $expectedClasses = array(
+            'Zend\Validator\Date',
+            'Zend\Validator\GreaterThan',
+            'Zend\Validator\LessThan',
+            'Zend\Validator\DateStep',
+        );
+        foreach ($inputSpec['validators'] as $validator) {
+            $class = get_class($validator);
+            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            switch ($class) {
+                case 'Zend\Validator\Date':
+                    $this->assertEquals('H:i:s', $validator->getFormat());
+                    break;
+                case 'Zend\Validator\GreaterThan':
+                    $this->assertTrue($validator->getInclusive());
+                    $this->assertEquals('00:00:00', $validator->getMin());
+                    break;
+                case 'Zend\Validator\LessThan':
+                    $this->assertTrue($validator->getInclusive());
+                    $this->assertEquals('00:01:00', $validator->getMax());
+                    break;
+                case 'Zend\Validator\DateStep':
+                    $dateInterval = new \DateInterval('PT1M');
+                    $this->assertEquals($dateInterval, $validator->getStep());
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

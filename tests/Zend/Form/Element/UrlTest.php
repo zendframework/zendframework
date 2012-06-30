@@ -27,33 +27,32 @@ use Zend\Form\Factory;
 
 class UrlTest extends TestCase
 {
-    public function testLazyLoadsUriValidatorWithCorrectSettingsByDefault()
-    {
-        $element   = new UrlElement();
-        $validator = $element->getValidator();
-        $this->assertInstanceOf('Zend\Validator\Uri', $validator);
-        $this->assertTrue($validator->getAllowAbsolute());
-        $this->assertFalse($validator->getAllowRelative());
-    }
-
-    public function testCanInjectValidator()
-    {
-        $element   = new UrlElement();
-        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
-        $element->setValidator($validator);
-        $this->assertSame($validator, $element->getValidator());
-    }
-
-    public function testProvidesInputSpecificationThatIncludesValidator()
+    public function testProvidesInputSpecificationThatIncludesValidatorsBasedOnAttributes()
     {
         $element = new UrlElement();
-        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
-        $element->setValidator($validator);
+        $element->setAttributes(array(
+            'allowAbsolute' => true,
+            'allowRelative' => false
+        ));
 
         $inputSpec = $element->getInputSpecification();
         $this->assertArrayHasKey('validators', $inputSpec);
         $this->assertInternalType('array', $inputSpec['validators']);
-        $test = array_shift($inputSpec['validators']);
-        $this->assertSame($validator, $test);
+
+        $expectedClasses = array(
+            'Zend\Validator\Uri'
+        );
+        foreach ($inputSpec['validators'] as $validator) {
+            $class = get_class($validator);
+            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            switch ($class) {
+                case 'Zend\Validator\Uri':
+                    $this->assertEquals(true, $validator->getAllowAbsolute());
+                    $this->assertEquals(false, $validator->getAllowRelative());
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

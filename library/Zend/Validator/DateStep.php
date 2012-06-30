@@ -62,7 +62,7 @@ class DateStep extends AbstractValidator
      *
      * @var DateInterval
      */
-    protected $stepInterval;
+    protected $step;
 
     /**
      * Format to use for parsing date strings
@@ -92,7 +92,7 @@ class DateStep extends AbstractValidator
             $options = func_get_args();
             $temp['baseValue'] = array_shift($options);
             if (!empty($options)) {
-                $temp['stepInterval'] = array_shift($options);
+                $temp['step'] = array_shift($options);
             }
             if (!empty($options)) {
                 $temp['format'] = array_shift($options);
@@ -107,10 +107,10 @@ class DateStep extends AbstractValidator
         if (isset($options['baseValue'])) {
             $this->setBaseValue($options['baseValue']);
         }
-        if (isset($options['stepInterval'])) {
-            $this->setStepInterval($options['stepInterval']);
+        if (isset($options['step'])) {
+            $this->setStep($options['step']);
         } else {
-            $this->setStepInterval(new DateInterval('P1D'));
+            $this->setStep(new DateInterval('P1D'));
         }
         if (array_key_exists('format', $options)) {
             $this->setFormat($options['format']);
@@ -149,12 +149,12 @@ class DateStep extends AbstractValidator
     /**
      * Sets the step date interval
      *
-     * @param  DateInterval $stepValue
+     * @param  DateInterval $step
      * @return DateStep
      */
-    public function setStepInterval(DateInterval $stepInterval)
+    public function setStep(DateInterval $step)
     {
-        $this->stepInterval = $stepInterval;
+        $this->step = $step;
         return $this;
     }
 
@@ -163,9 +163,9 @@ class DateStep extends AbstractValidator
      *
      * @return DateInterval
      */
-    public function getStepInterval()
+    public function getStep()
     {
-        return $this->stepInterval;
+        return $this->step;
     }
 
     /**
@@ -265,7 +265,7 @@ class DateStep extends AbstractValidator
         $this->setValue($value);
 
         $baseDate     = $this->convertToDateTime($this->getBaseValue());
-        $stepInterval = $this->getStepInterval();
+        $step = $this->getStep();
 
         // Parse the date
         try {
@@ -282,7 +282,7 @@ class DateStep extends AbstractValidator
 
         // Optimization for simple intervals.
         // Handle intervals of just one date or time unit.
-        $intervalParts = explode('|', $stepInterval->format('%y|%m|%d|%h|%i|%s'));
+        $intervalParts = explode('|', $step->format('%y|%m|%d|%h|%i|%s'));
         $partCounts    = array_count_values($intervalParts);
         if (5 === $partCounts["0"]) {
             // Find the unit with the non-zero interval
@@ -398,14 +398,14 @@ class DateStep extends AbstractValidator
         // or until the value is exceeded.
         if ($baseDate < $valueDate) {
             while ($baseDate < $valueDate) {
-                $baseDate->add($stepInterval);
+                $baseDate->add($step);
                 if ($baseDate == $valueDate) {
                     return true;
                 }
             }
         } else {
             while ($baseDate > $valueDate) {
-                $baseDate->sub($stepInterval);
+                $baseDate->sub($step);
                 if ($baseDate == $valueDate) {
                     return true;
                 }

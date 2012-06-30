@@ -71,7 +71,7 @@ class Week extends DateTime
         return new DateStepValidator(array(
             'format'       => 'Y-\WW',
             'baseValue'    => $baseValue,
-            'stepInterval' => new \DateInterval("P{$stepValue}W"),
+            'step' => new \DateInterval("P{$stepValue}W"),
         ));
     }
 }

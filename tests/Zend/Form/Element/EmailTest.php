@@ -28,39 +28,30 @@ use Zend\Validator\EmailAddress as EmailValidator;
 
 class EmailTest extends TestCase
 {
-    public function testLazyLoadsEmailValidatorByDefault()
+    public function testProvidesInputSpecificationThatIncludesValidatorsBasedOnAttributes()
     {
-        $element   = new EmailElement();
-        $validator = $element->getValidator();
-        $this->assertInstanceOf('Zend\Validator\EmailAddress', $validator);
-    }
-
-    public function testLazyLoadsExplodeValidatorWhenMultipleAttributeSet()
-    {
-        $element   = new EmailElement();
-        $element->setAttribute('multiple', true);
-        $validator = $element->getValidator();
-        $this->assertInstanceOf('Zend\Validator\Explode', $validator);
-    }
-
-    public function testCanInjectCustomValidator()
-    {
-        $element   = new EmailElement();
-        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
-        $element->setValidator($validator);
-        $this->assertSame($validator, $element->getValidator());
-    }
-
-    public function testProvidesInputSpecificationThatIncludesCustomValidator()
-    {
-        $element   = new EmailElement();
-        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
-        $element->setValidator($validator);
+        $element = new EmailElement();
+        $element->setAttributes(array(
+            'multiple' => true
+        ));
 
         $inputSpec = $element->getInputSpecification();
         $this->assertArrayHasKey('validators', $inputSpec);
         $this->assertInternalType('array', $inputSpec['validators']);
-        $test = array_shift($inputSpec['validators']);
-        $this->assertSame($validator, $test);
+
+        $expectedClasses = array(
+            'Zend\Validator\Explode'
+        );
+        foreach ($inputSpec['validators'] as $validator) {
+            $class = get_class($validator);
+            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            switch ($class) {
+                case 'Zend\Validator\Explode':
+                    $this->assertInstanceOf('Zend\Validator\EmailAddress', $validator->getValidator());
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

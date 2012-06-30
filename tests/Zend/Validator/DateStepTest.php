@@ -39,7 +39,7 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
 {
     public function stepTestsDataProvider()
     {
-        return array(
+        $data = array(
             //    interval format            baseValue               value                  isValid
             array('PT1S', DateTime::ISO8601, '1970-01-01T00:00:00Z', '1970-01-01T00:00:00Z', true ),
             array('PT1S', DateTime::ISO8601, '1970-01-01T00:00:00Z', '1970-01-03T00:00:00Z', true ),
@@ -73,9 +73,6 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
             array('P2D',  DateTime::ISO8601, '2000-01-01T00:00:00Z', '2001-01-01T00:00:00Z', true ), // leap year
             // weeks
             array('P1W',  DateTime::ISO8601, '1970-01-01T00:00:00Z', '1970-01-29T00:00:00Z', true ),
-            array('P1W',  'Y-\WW',           '1970-W01',             '1973-W16',             true ),
-            array('P2W',  'Y-\WW',           '1970-W01',             '1973-W16',             true ),
-            array('P2W',  'Y-\WW',           '1970-W01',             '1973-W17',             false),
             // months
             array('P1M',  DateTime::ISO8601, '1970-01-01T00:00:00Z', '1973-01-01T00:00:00Z', true ),
             array('P1M',  DateTime::ISO8601, '1970-01-01T00:00:00Z', '1973-01-01T00:00:30Z', false),
@@ -93,6 +90,13 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
             array('P2M2DT12H', DateTime::ISO8601, '1970-01-01T00:00:00Z', '1970-03-03T12:00:00Z', true ),
             array('P2M2DT12M', DateTime::ISO8601, '1970-01-01T00:00:00Z', '1970-03-03T12:00:00Z', false),
         );
+
+        // bug in DateTime fixed in 5.3.7
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            $data[] = array('P2W',  'Y-\WW',           '1970-W01',             '1973-W16',             true );
+            $data[] = array('P2W',  'Y-\WW',           '1970-W01',             '1973-W17',             false);
+        }
+        return $data;
     }
 
     /**

@@ -567,7 +567,7 @@ class ApplicationTest extends TestCase
         $controllerLoader = $this->serviceManager->get('ControllerLoader');
         $controllerLoader->setInvokableClass('path', 'InvalidClassName');
         $model = $this->getMock('Zend\View\Model\ViewModel');
-        $this->application->events()->attach('dispatch.error', function($e) use ($model) {
+        $this->application->getEventManager()->attach('dispatch.error', function($e) use ($model) {
             $e->setResult($model);
         });
 

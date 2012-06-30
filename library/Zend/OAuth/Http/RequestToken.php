@@ -106,7 +106,7 @@ class RequestToken extends HTTPClient
         $client->setUri($this->_consumer->getRequestTokenUrl());
 
         $request = $client->getRequest();
-        $request->headers()
+        $request->getHeaders()
                 ->addHeaderLine('Authorization', $headerValue);
         $rawdata = $this->_httpUtility->toEncodedQueryString($params, true);
         if (!empty($rawdata)) {
@@ -132,7 +132,7 @@ class RequestToken extends HTTPClient
         $request->setContent(
             $this->_httpUtility->toEncodedQueryString($params)
         );
-        $request->headers()
+        $request->getHeaders()
                 ->addHeaderLine('Content-Type', Http\Client::ENC_URLENCODED);
         return $client;
     }

@@ -232,7 +232,7 @@ class Client extends HttpClient
         switch ($requestScheme) {
             case OAuth::REQUEST_SCHEME_HEADER:
                 $oauthHeaderValue = $this->getToken()->toHeader(
-                    $this->getRequest()->getUri(),
+                    $this->getRequest()->getUriString(),
                     $this->_config,
                     $this->_getSignableParameters()
                 );
@@ -247,7 +247,7 @@ class Client extends HttpClient
                     );
                 }
                 $query  = $this->getToken()->toQueryString(
-                    $this->getRequest()->getUri(),
+                    $this->getRequest()->getUriString(),
                     $this->_config,
                     $this->_getSignableParameters()
                 );
@@ -256,7 +256,7 @@ class Client extends HttpClient
                 break;
             case OAuth::REQUEST_SCHEME_QUERYSTRING:
                 $query  = $this->getToken()->toQueryString(
-                    $this->getRequest()->getUri(),
+                    $this->getRequest()->getUriString(),
                     $this->_config,
                     $this->_getSignableParameters()
                 );
@@ -277,12 +277,12 @@ class Client extends HttpClient
     protected function _getSignableParameters()
     {
         $params = array();
-        if ($this->getRequest()->query()->count() > 0) {
-            $params = array_merge($params, $this->getRequest()->query()->toArray());
+        if ($this->getRequest()->getQuery()->count() > 0) {
+            $params = array_merge($params, $this->getRequest()->getQuery()->toArray());
         }
 
-        if ($this->getRequest()->post()->count() > 0) {
-            $params = array_merge($params, $this->getRequest()->post()->toArray());
+        if ($this->getRequest()->getPost()->count() > 0) {
+            $params = array_merge($params, $this->getRequest()->getPost()->toArray());
         }
 
         return $params;

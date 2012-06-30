@@ -256,7 +256,7 @@ class RequestTest extends TestCase
         $_SERVER = $server;
         $request = new Request();
 
-        $header = $request->headers()->get($name);
+        $header = $request->getHeaders()->get($name);
         $this->assertNotEquals($header, false);
         $this->assertEquals($name,  $header->getFieldName($value));
         $this->assertEquals($value, $header->getFieldValue($value));
@@ -330,7 +330,7 @@ class RequestTest extends TestCase
         $_SERVER = $server;
         $request = new Request();
 
-        $host = $request->uri()->getHost();
+        $host = $request->getUri()->getHost();
         $this->assertEquals($expectedHost, $host);
 
         $requestUri = $request->getRequestUri();

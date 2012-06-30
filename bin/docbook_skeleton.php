@@ -58,7 +58,7 @@ if (!is_dir($libPath)) {
 }
 
 // Setup autoloading
-$loader = new StandardAutoloader();
+$loader = new StandardAutoloader(array('autoregister_zf' => true));
 $loader->register();
 
 $rules = array(

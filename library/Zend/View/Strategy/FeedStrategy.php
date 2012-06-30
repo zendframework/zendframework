@@ -110,7 +110,7 @@ class FeedStrategy implements ListenerAggregateInterface
             return;
         }
 
-        $headers = $request->headers();
+        $headers = $request->getHeaders();
         if ($headers->has('accept')) {
             $accept  = $headers->get('accept');
             foreach ($accept->getPrioritized() as $mediaType) {
@@ -165,7 +165,7 @@ class FeedStrategy implements ListenerAggregateInterface
         // Populate response
         $response = $e->getResponse();
         $response->setContent($result);
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $headers->addHeaderLine('content-type', $feedType);
     }
 }

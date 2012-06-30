@@ -60,7 +60,7 @@ class PhpRendererStrategyTest extends TestCase
     protected function assertResponseNotInjected()
     {
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertTrue(empty($content));
         $this->assertFalse($headers->has('content-type'));
     }
@@ -79,7 +79,7 @@ class PhpRendererStrategyTest extends TestCase
         $this->strategy->injectResponse($this->event);
         $this->assertResponseNotInjected();
     }
-    
+
     public function testResponseContentSetToContentPlaceholderWhenResultAndArticlePlaceholderAreEmpty()
     {
         $this->renderer->placeholder('content')->set('Content');
@@ -152,7 +152,7 @@ class PhpRendererStrategyTest extends TestCase
             $this->assertTrue($found, 'Listener not found');
         }
     }
-    
+
     public function testCanAttachListenersAtSpecifiedPriority()
     {
         $events = new EventManager();

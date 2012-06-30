@@ -60,7 +60,7 @@ class FeedStrategyTest extends TestCase
     public function testRssAcceptHeaderSelectsFeedStrategy()
     {
         $request = new HttpRequest();
-        $request->headers()->addHeaderLine('Accept', 'application/rss+xml');
+        $request->getHeaders()->addHeaderLine('Accept', 'application/rss+xml');
         $this->event->setRequest($request);
         $result = $this->strategy->selectRenderer($this->event);
         $this->assertSame($this->renderer, $result);
@@ -69,7 +69,7 @@ class FeedStrategyTest extends TestCase
     public function testAtomAcceptHeaderSelectsFeedStrategy()
     {
         $request = new HttpRequest();
-        $request->headers()->addHeaderLine('Accept', 'application/atom+xml');
+        $request->getHeaders()->addHeaderLine('Accept', 'application/atom+xml');
         $this->event->setRequest($request);
         $result = $this->strategy->selectRenderer($this->event);
         $this->assertSame($this->renderer, $result);
@@ -85,7 +85,7 @@ class FeedStrategyTest extends TestCase
     protected function assertResponseNotInjected()
     {
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertTrue(empty($content));
         $this->assertFalse($headers->has('content-type'));
     }
@@ -125,7 +125,7 @@ class FeedStrategyTest extends TestCase
 
         $this->strategy->injectResponse($this->event);
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertEquals($expected, $content);
         $this->assertTrue($headers->has('content-type'));
         $this->assertEquals('application/atom+xml', $headers->get('content-type')->getFieldValue());
@@ -182,7 +182,7 @@ class FeedStrategyTest extends TestCase
 
         $this->strategy->injectResponse($this->event);
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertEquals($expected->export('atom'), $content);
         $this->assertTrue($headers->has('content-type'));
         $this->assertEquals('application/atom+xml', $headers->get('content-type')->getFieldValue());
@@ -198,7 +198,7 @@ class FeedStrategyTest extends TestCase
 
         $this->strategy->injectResponse($this->event);
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertEquals($expected->export('rss'), $content);
         $this->assertTrue($headers->has('content-type'));
         $this->assertEquals('application/rss+xml', $headers->get('content-type')->getFieldValue());

@@ -109,7 +109,7 @@ class JsonStrategy implements ListenerAggregateInterface
             return;
         }
 
-        $headers = $request->headers();
+        $headers = $request->getHeaders();
         if ($headers->has('accept')) {
             $accept  = $headers->get('Accept');
             foreach ($accept->getPrioritized() as $mediaType) {
@@ -119,7 +119,7 @@ class JsonStrategy implements ListenerAggregateInterface
                 }
                 if (0 === strpos($mediaType, 'application/javascript')) {
                     // application/javascript Accept header found
-                    if (false != ($callback = $request->query()->get('callback'))) {
+                    if (false != ($callback = $request->getQuery()->get('callback'))) {
                         $this->renderer->setJsonpCallback($callback);
                     }
                     return $this->renderer;
@@ -154,7 +154,7 @@ class JsonStrategy implements ListenerAggregateInterface
         // Populate response
         $response = $e->getResponse();
         $response->setContent($result);
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         if ($this->renderer->hasJsonpCallback()) {
             $headers->addHeaderLine('content-type', 'application/javascript');
         } else {

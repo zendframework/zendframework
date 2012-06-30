@@ -60,7 +60,7 @@ class JsonStrategyTest extends TestCase
     public function testJsonAcceptHeaderSelectsJsonStrategy()
     {
         $request = new HttpRequest();
-        $request->headers()->addHeaderLine('Accept', 'application/json');
+        $request->getHeaders()->addHeaderLine('Accept', 'application/json');
         $this->event->setRequest($request);
         $result = $this->strategy->selectRenderer($this->event);
         $this->assertSame($this->renderer, $result);
@@ -69,7 +69,7 @@ class JsonStrategyTest extends TestCase
     public function testJavascriptAcceptHeaderSelectsJsonStrategy()
     {
         $request = new HttpRequest();
-        $request->headers()->addHeaderLine('Accept', 'application/javascript');
+        $request->getHeaders()->addHeaderLine('Accept', 'application/javascript');
         $this->event->setRequest($request);
         $result = $this->strategy->selectRenderer($this->event);
         $this->assertSame($this->renderer, $result);
@@ -79,7 +79,7 @@ class JsonStrategyTest extends TestCase
     public function testJavascriptAcceptHeaderSelectsJsonStrategyAndSetsJsonpCallback()
     {
         $request = new HttpRequest();
-        $request->headers()->addHeaderLine('Accept', 'application/javascript');
+        $request->getHeaders()->addHeaderLine('Accept', 'application/javascript');
         $request->setQuery(new Parameters(array('callback' => 'foo')));
         $this->event->setRequest($request);
         $result = $this->strategy->selectRenderer($this->event);
@@ -97,7 +97,7 @@ class JsonStrategyTest extends TestCase
     protected function assertResponseNotInjected()
     {
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertTrue(empty($content));
         $this->assertFalse($headers->has('content-type'));
     }
@@ -136,7 +136,7 @@ class JsonStrategyTest extends TestCase
 
         $this->strategy->injectResponse($this->event);
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertEquals($expected, $content);
         $this->assertTrue($headers->has('content-type'));
         $this->assertEquals('application/json', $headers->get('content-type')->getFieldValue());
@@ -152,7 +152,7 @@ class JsonStrategyTest extends TestCase
 
         $this->strategy->injectResponse($this->event);
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertEquals($expected, $content);
         $this->assertTrue($headers->has('content-type'));
         $this->assertEquals('application/javascript', $headers->get('content-type')->getFieldValue());

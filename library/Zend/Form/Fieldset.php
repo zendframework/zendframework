@@ -32,6 +32,11 @@ use Zend\Stdlib\PriorityQueue;
 class Fieldset extends Element implements FieldsetInterface
 {
     /**
+     * @var Factory
+     */
+    protected $factory;
+
+    /**
      * @var array
      */
     protected $byName    = array();
@@ -68,18 +73,52 @@ class Fieldset extends Element implements FieldsetInterface
     }
 
     /**
+     * Compose a form factory to use when calling add() with a non-element/fieldset
+     *
+     * @param  Factory $factory
+     * @return Form
+     */
+    public function setFormFactory(Factory $factory)
+    {
+        $this->factory = $factory;
+        return $this;
+    }
+
+    /**
+     * Retrieve composed form factory
+     *
+     * Lazy-loads one if none present.
+     *
+     * @return Factory
+     */
+    public function getFormFactory()
+    {
+        if (null === $this->factory) {
+            $this->setFormFactory(new Factory());
+        }
+        return $this->factory;
+    }
+
+    /**
      * Add an element or fieldset
      *
      * $flags could contain metadata such as the alias under which to register
      * the element or fieldset, order in which to prioritize it, etc.
      *
      * @todo   Should we detect if the element/fieldset name conflicts?
-     * @param  ElementInterface $elementOrFieldset
+     * @param  array|Traversable|ElementInterface $elementOrFieldset
      * @param  array $flags
      * @return FieldsetInterface
      */
     public function add($elementOrFieldset, array $flags = array())
     {
+        if (is_array($elementOrFieldset)
+            || ($elementOrFieldset instanceof Traversable && !$elementOrFieldset instanceof ElementInterface)
+        ) {
+            $factory = $this->getFormFactory();
+            $elementOrFieldset = $factory->create($elementOrFieldset);
+        }
+
         if (!$elementOrFieldset instanceof ElementInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s requires that $elementOrFieldset be an object implementing %s; received "%s"',
@@ -112,6 +151,10 @@ class Fieldset extends Element implements FieldsetInterface
         $this->byName[$name] = $elementOrFieldset;
 
         if ($elementOrFieldset instanceof FieldsetInterface) {
+            if ($elementOrFieldset instanceof Element\Collection) {
+                $elementOrFieldset->prepareCollection();
+            }
+
             $this->fieldsets[$name] = $elementOrFieldset;
             return $this;
         }
@@ -329,5 +372,27 @@ class Fieldset extends Element implements FieldsetInterface
     public function getIterator()
     {
         return $this->iterator;
+    }
+
+    /**
+     * Make a deep clone of the object
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        $this->iterator = new PriorityQueue();
+
+        foreach ($this->byName as $key => $value) {
+            $value = clone $value;
+            $this->byName[$key] = $value;
+            $this->iterator->insert($value);
+
+            if ($value instanceof FieldsetInterface) {
+                $this->fieldsets[$key] = $value;
+            } elseif ($value instanceof ElementInterface) {
+                $this->elements[$key] = $value;
+            }
+        }
     }
 }

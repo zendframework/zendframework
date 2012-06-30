@@ -65,7 +65,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
      *
      * @var boolean
      */
-    protected $createTemplate = false;
+    protected $shouldCreateTemplate = false;
 
     /**
      * Set a single element attribute
@@ -86,8 +86,8 @@ class Collection extends Fieldset implements InputFilterProviderInterface
             case 'allowadd':
                 $this->setAllowAdd($value);
                 break;
-            case 'createtemplate':
-                $this->setCreateTemplate($value);
+            case 'shouldcreatetemplate':
+                $this->setShouldCreateTemplate($value);
                 break;
             default:
         }
@@ -121,7 +121,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
         // If there are still data, this means that elements or fieldsets were dynamically added. If allowed by the user, add them
         if (!empty($data) && $this->allowAdd) {
             foreach ($data as $key => $value) {
-                $elementOrFieldset = $this->createNewTargetElement();
+                $elementOrFieldset = clone $this->getTargetElement();//$this->createNewTargetElement();
                 $elementOrFieldset->setName($key);
 
                 if ($elementOrFieldset instanceof FieldsetInterface) {
@@ -221,22 +221,25 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     }
 
     /**
-     * @param $createTemplate
+     * If set to true, a template prototype is automatically added to the form to ease the creation of dynamic elements through JavaScript
+     *
+     * @param $shouldCreateTemplate
      * @return Collection
      */
-    public function setCreateTemplate($createTemplate)
+    public function setShouldCreateTemplate($shouldCreateTemplate)
     {
-        $this->createTemplate = $createTemplate;
+        $this->shouldCreateTemplate = $shouldCreateTemplate;
         return $this;
     }
 
     /**
-     * @param $createTemplate
+     * Get if the collection should create a template
+     *
      * @return bool
      */
-    public function getCreateTemplate()
+    public function shouldCreateTemplate()
     {
-        return $this->createTemplate;
+        return $this->shouldCreateTemplate;
     }
 
     /**
@@ -248,15 +251,15 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     {
         if ($this->count !== null && $this->targetElement !== null) {
             for ($i = 0 ; $i != $this->count ; ++$i) {
-                $elementOrFieldset = clone $this->targetElement; //$this->createNewTargetElement();
+                $elementOrFieldset = clone $this->targetElement;
                 $elementOrFieldset->setName($i);
 
                 $this->add($elementOrFieldset);
             }
 
             // If a template is wanted, we add a "dummy" element
-            if ($this->createTemplate) {
-                $elementOrFieldset = clone $this->targetElement; //$this->createNewTargetElement();
+            if ($this->shouldCreateTemplate) {
+                $elementOrFieldset = clone $this->targetElement;
                 $elementOrFieldset->setName('__index__');
                 $elementOrFieldset->setAttribute('template', true);
 
@@ -274,7 +277,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         // Ignore any template
-        if ($this->createTemplate) {
+        if ($this->shouldCreateTemplate) {
             return array(
                 '__index__' => array(
                     'required' => false

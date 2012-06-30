@@ -67,19 +67,24 @@ class FormCollection extends AbstractHelper
         $escapeHelper = $this->getEscapeHelper();
         $rowHelper = $this->getRowHelper();
 
+        if (isset($attributes['shouldCreateTemplate']) && $attributes['shouldCreateTemplate'] === true) {
+            $elementOrFieldset = $element->get('__index__');
+
+            if ($elementOrFieldset instanceof FieldsetInterface) {
+                $templateMarkup .= $this->render($elementOrFieldset);
+            } elseif ($elementOrFieldset instanceof ElementInterface) {
+                $templateMarkup .= $rowHelper($elementOrFieldset);
+            }
+
+            // Remove it as we don't want to draw it multiple times
+            $element->remove('__index__');
+        }
+
         foreach($element->getIterator() as $elementOrFieldset) {
             if ($elementOrFieldset instanceof FieldsetInterface) {
-                if ($elementOrFieldset->getAttribute('template') === true) {
-                    $templateMarkup .= $this->render($elementOrFieldset);
-                } else {
                     $markup .= $this->render($elementOrFieldset);
-                }
             } elseif ($elementOrFieldset instanceof ElementInterface) {
-                if ($elementOrFieldset->getAttribute('template') === true) {
-                    $templateMarkup .= $rowHelper($elementOrFieldset);
-                } else {
                     $markup .= $rowHelper($elementOrFieldset);
-                }
             }
         }
 

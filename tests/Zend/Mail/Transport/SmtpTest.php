@@ -62,7 +62,7 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
                 ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
                 ->setSubject('Testing Zend\Mail\Transport\Sendmail')
                 ->setBody('This is only a test.');
-        $message->headers()->addHeaders(array(
+        $message->getHeaders()->addHeaders(array(
             'X-Foo-Bar' => 'Matthew',
         ));
         return $message;
@@ -151,25 +151,25 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('matthew', $connection->getUsername());
         $this->assertEquals('password', $connection->getPassword());
     }
-    
+
     public function testSetAutoDisconnect()
     {
         $this->transport->setAutoDisconnect(false);
         $this->assertFalse($this->transport->getAutoDisconnect());
     }
-    
+
     public function testGetDefaultAutoDisconnectValue()
     {
         $this->assertTrue($this->transport->getAutoDisconnect());
     }
-    
+
     public function testAutoDisconnectTrue()
     {
         $this->connection->connect();
         unset($this->transport);
         $this->assertFalse($this->connection->isConnected());
     }
-    
+
     public function testAutoDisconnectFalse()
     {
         $this->connection->connect();
@@ -177,7 +177,7 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         unset($this->transport);
         $this->assertTrue($this->connection->isConnected());
     }
-    
+
     public function testDisconnect()
     {
         $this->connection->connect();

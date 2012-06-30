@@ -54,7 +54,7 @@ class Address implements Address\AddressInterface
 
     /**
      * Retrieve email
-     * 
+     *
      * @return string
      */
     public function getEmail()
@@ -64,7 +64,7 @@ class Address implements Address\AddressInterface
 
     /**
      * Retrieve name
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -74,7 +74,7 @@ class Address implements Address\AddressInterface
 
     /**
      * String representation of address
-     * 
+     *
      * @return string
      */
     public function toString()

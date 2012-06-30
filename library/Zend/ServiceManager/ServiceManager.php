@@ -588,12 +588,15 @@ class ServiceManager implements ServiceLocatorInterface
             throw new Exception\CircularDependencyFoundException('Circular dependency for LazyServiceLoader was found for instance ' . $rName);
         }
 
-        $circularDependencyResolver[spl_object_hash($this) . '-' . $cName] = true;
         try {
+            $circularDependencyResolver[spl_object_hash($this) . '-' . $cName] = true;
             $instance = call_user_func($callable, $this, $cName, $rName);
+            unset($circularDependencyResolver[spl_object_hash($this) . '-' . $cName]);
         } catch (Exception\ServiceNotFoundException $e) {
+            unset($circularDependencyResolver[spl_object_hash($this) . '-' . $cName]);
             throw $e;
         } catch (\Exception $e) {
+            unset($circularDependencyResolver[spl_object_hash($this) . '-' . $cName]);
             throw new Exception\ServiceNotCreatedException(
                 sprintf('Abstract factory raised an exception when creating "%s"; no instance returned', $rName),
                 $e->getCode(),
@@ -603,7 +606,6 @@ class ServiceManager implements ServiceLocatorInterface
         if ($instance === null) {
             throw new Exception\ServiceNotCreatedException('The factory was called but did not return an instance.');
         }
-        unset($circularDependencyResolver[spl_object_hash($this) . '-' . $cName]);
 
         return $instance;
     }

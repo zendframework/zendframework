@@ -28,21 +28,21 @@ class Request extends HttpRequest
 {
     /**
      * Base URL of the application.
-     * 
+     *
      * @var string
      */
     protected $baseUrl;
-    
+
     /**
      * Base Path of the application.
      *
      * @var string
      */
     protected $basePath;
-    
+
     /**
      * Actual request URI, independent of the platform.
-     * 
+     *
      * @var string
      */
     protected $requestUri;
@@ -109,7 +109,7 @@ class Request extends HttpRequest
         }
         return $this->requestUri;
     }
-    
+
     /**
      * Set the base URL.
      *
@@ -134,10 +134,10 @@ class Request extends HttpRequest
         }
         return $this->baseUrl;
     }
-    
+
     /**
      * Set the base path.
-     * 
+     *
      * @param  string $basePath
      * @return self
      */
@@ -157,7 +157,7 @@ class Request extends HttpRequest
         if ($this->basePath === null) {
             $this->setBasePath($this->detectBasePath());
         }
-        
+
         return $this->basePath;
     }
 
@@ -188,14 +188,14 @@ class Request extends HttpRequest
             $this->setMethod($this->serverParams['REQUEST_METHOD']);
         }
 
-        if (isset($this->serverParams['SERVER_PROTOCOL']) 
+        if (isset($this->serverParams['SERVER_PROTOCOL'])
             && strpos($this->serverParams['SERVER_PROTOCOL'], '1.0') !== false) {
             $this->setVersion('1.0');
         }
 
         $this->setUri($uri = new HttpUri());
 
-        if (isset($this->serverParams['HTTPS']) && $this->serverParams['HTTPS'] === 'on') { 
+        if (isset($this->serverParams['HTTPS']) && $this->serverParams['HTTPS'] === 'on') {
             $uri->setScheme('https');
         } else {
             $uri->setScheme('http');
@@ -262,7 +262,7 @@ class Request extends HttpRequest
      *
      * Looks at a variety of criteria in order to attempt to autodetect a base
      * URI, including rewrite URIs, proxy URIs, etc.
-     * 
+     *
      * @return string
      */
     protected function detectRequestUri()
@@ -274,21 +274,21 @@ class Request extends HttpRequest
         if ($httpXRewriteUrl !== null) {
             $requestUri = $httpXRewriteUrl;
         }
-        
+
         // Check for IIS 7.0 or later with ISAPI_Rewrite
         $httpXOriginalUrl = $this->server()->get('HTTP_X_ORIGINAL_URL');
         if ($httpXOriginalUrl !== null) {
             $requestUri = $httpXOriginalUrl;
         }
-       
+
         // IIS7 with URL Rewrite: make sure we get the unencoded url
         // (double slash problem).
         $iisUrlRewritten = $this->server()->get('IIS_WasUrlRewritten');
         $unencodedUrl    = $this->server()->get('UNENCODED_URL', '');
         if ('1' == $iisUrlRewritten && '' !== $unencodedUrl) {
             return $unencodedUrl;
-        } 
-        
+        }
+
         // HTTP proxy requests setup request URI with scheme and host
         // [and port] + the URL path, only use URL path.
         if (!$httpXRewriteUrl) {
@@ -296,13 +296,13 @@ class Request extends HttpRequest
         }
         if ($requestUri !== null) {
             $schemeAndHttpHost = $this->uri()->getScheme() . '://' . $this->uri()->getHost();
-            
+
             if (strpos($requestUri, $schemeAndHttpHost) === 0) {
                 $requestUri = substr($requestUri, strlen($schemeAndHttpHost));
             }
             return $requestUri;
-        } 
-        
+        }
+
         // IIS 5.0, PHP as CGI.
         $origPathInfo = $this->server()->get('ORIG_PATH_INFO');
         if ($origPathInfo !== null) {
@@ -323,7 +323,7 @@ class Request extends HttpRequest
      * (i.e., anything additional to the document root).
      *
      * The base URL includes the schema, host, and port, in addition to the path.
-     * 
+     *
      * @return string
      */
     protected function detectBaseUrl()
@@ -393,7 +393,7 @@ class Request extends HttpRequest
      * Autodetect the base path of the request
      *
      * Uses several criteria to determine the base path of the request.
-     * 
+     *
      * @return string
      */
     protected function detectBasePath()
@@ -404,8 +404,8 @@ class Request extends HttpRequest
         // Empty base url detected
         if ($baseUrl === '') {
             return '';
-        } 
-        
+        }
+
         // basename() matches the script filename; return the directory
         if (basename($baseUrl) === $filename) {
             return str_replace('\\', '/', dirname($baseUrl));

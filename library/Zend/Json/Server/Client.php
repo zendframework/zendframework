@@ -138,7 +138,7 @@ class Client implements ServerClient
             $this->httpClient->setUri($this->serverAddress);
         }
 
-        $headers = $httpRequest->headers();
+        $headers = $httpRequest->getHeaders();
         $headers->addHeaders(array(
             'Content-Type' => 'application/json',
             'Accept'       => 'application/json',

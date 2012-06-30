@@ -451,11 +451,12 @@ class OpenId
         }
 
         $response->setStatusCode(302);
-        $response->headers()->addHeaderLine('Location', $url);
+
+        $response->getHeaders()->addHeaderLine('Location', $url);
 
         if (!headers_sent()) {
             header($response->renderStatusLine());
-            foreach ($response->headers() as $header) {
+            foreach ($response->getHeaders() as $header) {
                 header($header->toString());
             }
         }

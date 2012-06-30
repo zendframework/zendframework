@@ -27,12 +27,13 @@ namespace Zend\Form\Annotation;
  * Presence of this annotation hints to the AnnotationBuilder to skip the
  * element when creating the form specification.
  *
+ * @Annotation
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exclude extends AbstractAnnotation
+class Exclude
 {
 }

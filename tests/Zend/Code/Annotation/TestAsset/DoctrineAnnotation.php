@@ -13,26 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
- * @subpackage Annotation
+ * @package    Zend_Code
+ * @subpackage UnitTest
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Form\Annotation;
+namespace ZendTest\Code\Annotation\TestAsset;
 
 /**
- * AllowEmpty annotation
- *
- * Presence of this annotation is a hint that the associated 
- * \Zend\InputFilter\Input should enable the allow_empty flag.
- *
  * @Annotation
- * @package    Zend_Form
- * @subpackage Annotation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AllowEmpty
+class DoctrineAnnotation
 {
+    public $value;
+
+    public function __construct(array $value)
+    {
+        $this->value = $value;
+    }
 }

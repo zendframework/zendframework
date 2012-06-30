@@ -10,8 +10,7 @@ class EntityComposingAnEntity
 {
     /**
      * @Annotation\Name("composed")
-     * @Annotation\ComposedObject(ZendTest\Form\TestAsset\Annotation\Entity)
+     * @Annotation\ComposedObject("ZendTest\Form\TestAsset\Annotation\Entity")
      */
     public $child;
 }
-

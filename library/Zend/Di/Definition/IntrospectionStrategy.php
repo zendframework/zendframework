@@ -3,6 +3,7 @@
 namespace Zend\Di\Definition;
 
 use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Annotation\Parser\GenericAnnotationParser;
 
 class IntrospectionStrategy
 {
@@ -54,7 +55,9 @@ class IntrospectionStrategy
     public function createDefaultAnnotationManager()
     {
         $annotationManager = new AnnotationManager;
-        $annotationManager->registerAnnotation(new Annotation\Inject());
+        $parser            = new GenericAnnotationParser();
+        $parser->registerAnnotation(new Annotation\Inject());
+        $annotationManager->attach($parser);
         return $annotationManager;
     }
 

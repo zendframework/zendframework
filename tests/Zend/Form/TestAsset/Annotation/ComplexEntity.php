@@ -6,12 +6,12 @@ use Zend\Form\Annotation;
 /**
  * @Annotation\Name("user")
  * @Annotation\Attributes({"legend":"Register"})
- * @Annotation\Hydrator(Zend\Stdlib\Hydrator\ObjectProperty)
+ * @Annotation\Hydrator("Zend\Stdlib\Hydrator\ObjectProperty")
  */
 class ComplexEntity
 {
     /**
-     * @Annotation\ErrorMessage('Invalid or missing username')
+     * @Annotation\ErrorMessage("Invalid or missing username")
      * @Annotation\Filter({"name":"StringTrim"})
      * @Annotation\Validator({"name":"NotEmpty"})
      * @Annotation\Validator({"name":"StringLength","options":{"min":3,"max":25}})
@@ -38,7 +38,7 @@ class ComplexEntity
      * @Annotation\AllowEmpty()
      * @Annotation\Required(false)
      * @Annotation\Attributes({"type":"text","label":"Provide a URL for your avatar (optional):"})
-     * @Annotation\Validator({"name":"ZendTest\\Form\\TestAsset\\Annotation\\UrlValidator"})
+     * @Annotation\Validator({"name":"ZendTest\Form\TestAsset\Annotation\UrlValidator"})
      */
     public $avatar;
 

@@ -21,50 +21,20 @@
 
 namespace Zend\Form\Annotation;
 
-use Zend\Form\Exception;
-
 /**
  * Name annotation
  *
  * Use this annotation to specify a name other than the property or class name
- * when building the form, element, or input. The value should be a bare string
- * or JSON-encoded string.
+ * when building the form, element, or input. The value should be a string.
  *
- * @category   Zend
+ * @Annotation
  * @package    Zend_Form
  * @subpackage Annotation
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Name extends AbstractAnnotation
+class Name extends AbstractStringAnnotation
 {
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * Receive and process the contents of an annotation
-     * 
-     * @param  string $content 
-     * @return void
-     */
-    public function initialize($content)
-    {
-        $name = $content;
-        if ('"' === substr($content, 0, 1)) {
-            $name = $this->parseJsonContent($content, __METHOD__);
-        }
-        if (!is_string($name)) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects the annotation to define a string or a JSON string; received "%s"',
-                __METHOD__,
-                gettype($name)
-            ));
-        }
-        $this->name = $name;
-    }
-
     /**
      * Retrieve the name
      * 
@@ -72,7 +42,6 @@ class Name extends AbstractAnnotation
      */
     public function getName()
     {
-        return $this->name;
+        return $this->value;
     }
 }
-

@@ -7,6 +7,8 @@ php:
 
 before_install:
  - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
+ - curl -s http://getcomposer.org/installer | php
+ - php composer.phar install --dev
 
 script:
  - php ./tests/run-tests.php

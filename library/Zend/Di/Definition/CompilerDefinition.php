@@ -103,7 +103,9 @@ class CompilerDefinition implements DefinitionInterface
      */
     public function compile()
     {
-        /* @var $classScanner \Zend\Code\Scanner\DerivedClassScanner */
+        /* 
+         * @var $classScanner \Zend\Code\Scanner\DerivedClassScanner 
+         */
         foreach ($this->directoryScanner->getClassNames() as $class) {
             $this->processClass($class);
         }
@@ -120,7 +122,6 @@ class CompilerDefinition implements DefinitionInterface
     {
         $strategy = $this->introspectionStrategy; // localize for readability
 
-        /** @var $rClass \Zend\Code\Reflection\ClassReflection */
         try {
             $rClass = new Reflection\ClassReflection($class);
         } catch (\ReflectionException $e) {
@@ -147,7 +148,8 @@ class CompilerDefinition implements DefinitionInterface
             $annotations = $rClass->getAnnotations($strategy->getAnnotationManager());
 
             if (($annotations instanceof AnnotationCollection)
-                && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Instantiator')) {
+                && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Instantiator')
+            ) {
                 // @todo Instnatiator support in annotations
             }
         }
@@ -196,7 +198,8 @@ class CompilerDefinition implements DefinitionInterface
                 $annotations = $rMethod->getAnnotations($strategy->getAnnotationManager());
 
                 if (($annotations instanceof AnnotationCollection)
-                    && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Inject')) {
+                    && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Inject')
+                ) {
 
                     $def['methods'][$methodName] = true;
                     $this->processParams($def, $rClass, $rMethod);

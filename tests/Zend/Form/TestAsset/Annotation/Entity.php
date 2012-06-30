@@ -6,7 +6,7 @@ use Zend\Form\Annotation;
 class Entity
 {
     /**
-      * @Annotation\ErrorMessage('Invalid or missing username')
+      * @Annotation\ErrorMessage("Invalid or missing username")
       * @Annotation\Required(true)
       * @Annotation\Filter({"name":"StringTrim"})
       * @Annotation\Validator({"name":"NotEmpty"})

@@ -18,9 +18,19 @@
  */
 
 /**
+ * Zend\Code\Annotation
+ */
+defined('TESTS_ZEND_CODE_ANNOTATION_DOCTRINE_SUPPORT') || define('TESTS_ZEND_CODE_ANNOTATION_DOCTRINE_SUPPORT', true);
+
+/**
  * Zend\Auth\Adapter\DbTable tests
  */
 defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED') || define('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED', true);
+
+/**
+ * Zend\Form\Annotation
+ */
+defined('TESTS_ZEND_FORM_ANNOTATION_SUPPORT') || define('TESTS_ZEND_FORM_ANNOTATION_SUPPORT', true);
 
 /**
  * Zend\Cache\Storage\Adapter

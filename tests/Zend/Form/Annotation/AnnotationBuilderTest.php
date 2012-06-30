@@ -27,6 +27,16 @@ use ZendTest\Form\TestAsset;
 
 class AnnotationBuilderTest extends TestCase
 {
+    public function setUp()
+    {
+        if (!defined('TESTS_ZEND_FORM_ANNOTATION_SUPPORT')
+            || !constant('TESTS_ZEND_FORM_ANNOTATION_SUPPORT')
+        ) {
+            $this->markTestSkipped('Enable TESTS_ZEND_FORM_ANNOTATION_SUPPORT to test annotation parsing');
+        }
+
+    }
+
     public function testCanCreateFormFromStandardEntity()
     {
         $entity  = new TestAsset\Annotation\Entity();

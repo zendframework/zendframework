@@ -73,7 +73,7 @@ class AnnotationManager implements EventManagerAwareInterface
      * 
      * @return EventManagerInterface
      */
-    public function events()
+    public function getEventManager()
     {
         if (null === $this->events) {
             $this->setEventManager(new EventManager());
@@ -89,8 +89,9 @@ class AnnotationManager implements EventManagerAwareInterface
      */
     public function attach(Parser\ParserInterface $parser)
     {
-        $events = $this->events();
-        $events->attach(self::EVENT_CREATE_ANNOTATION, array($parser, 'onCreateAnnotation'));
+        $this->getEventManager()
+             ->attach(self::EVENT_CREATE_ANNOTATION, array($parser, 'onCreateAnnotation'));
+
         return $this;
     }
 

@@ -94,8 +94,8 @@ abstract class Rackspace
     protected $cdnUrl;
     /**
      * Server management URL
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $managementUrl;
     /**
@@ -155,7 +155,7 @@ abstract class Rackspace
      *
      * @return string|boolean
      */
-    public function getStorageUrl() 
+    public function getStorageUrl()
     {
         if (empty($this->storageUrl)) {
             if (!$this->authenticate()) {
@@ -169,7 +169,7 @@ abstract class Rackspace
      *
      * @return string|boolean
      */
-    public function getCdnUrl() 
+    public function getCdnUrl()
     {
         if (empty($this->cdnUrl)) {
             if (!$this->authenticate()) {
@@ -180,9 +180,9 @@ abstract class Rackspace
     }
     /**
      * Get the management server URL
-     * 
+     *
      * @return string|boolean
-     */     
+     */
     public function getManagementUrl()
     {
         if (empty($this->managementUrl)) {
@@ -249,16 +249,16 @@ abstract class Rackspace
      *
      * @return string
      */
-    public function getErrorMsg() 
+    public function getErrorMsg()
     {
         return $this->errorMsg;
     }
     /**
      * Get the error code of the last HTTP call
-     * 
-     * @return string 
+     *
+     * @return string
      */
-    public function getErrorCode() 
+    public function getErrorCode()
     {
         return $this->errorCode;
     }
@@ -276,8 +276,8 @@ abstract class Rackspace
     }
     /**
      * Return true is the last call was successful
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function isSuccessful()
     {
@@ -299,12 +299,12 @@ abstract class Rackspace
         $client->resetParameters();
         if (empty($headers[self::AUTHUSER_HEADER])) {
             $headers[self::AUTHTOKEN]= $this->getToken();
-        } 
+        }
         $client->setMethod($method);
         if (empty($data['format'])) {
             $data['format']= self::API_FORMAT;
         }
-        $client->setParameterGet($data);    
+        $client->setParameterGet($data);
         if (!empty($body)) {
             $client->setRawBody($body);
             if (!isset($headers['Content-Type'])) {
@@ -330,14 +330,14 @@ abstract class Rackspace
         );
         $result = $this->httpCall($this->authUrl.'/'.self::VERSION,'GET', $headers);
         if ($result->getStatusCode()===204) {
-            $this->token = $result->headers()->get(self::AUTHTOKEN)->getFieldValue();
-            $this->storageUrl = $result->headers()->get(self::STORAGE_URL)->getFieldValue();
-            $this->cdnUrl = $result->headers()->get(self::CDNM_URL)->getFieldValue();
-            $this->managementUrl = $result->headers()->get(self::MANAGEMENT_URL)->getFieldValue();
+            $this->token = $result->getHeaders()->get(self::AUTHTOKEN)->getFieldValue();
+            $this->storageUrl = $result->getHeaders()->get(self::STORAGE_URL)->getFieldValue();
+            $this->cdnUrl = $result->getHeaders()->get(self::CDNM_URL)->getFieldValue();
+            $this->managementUrl = $result->getHeaders()->get(self::MANAGEMENT_URL)->getFieldValue();
             return true;
         }
         $this->errorMsg = $result->getBody();
         $this->errorCode = $result->getStatusCode();
         return false;
-    } 
+    }
 }

@@ -241,7 +241,7 @@ class App
 
         $userAgent = $applicationId . ' Zend_Framework_Gdata/' .
             \Zend\Version::VERSION;
-        $client->getRequest()->headers()->addHeaderLine('User-Agent', $userAgent);
+        $client->getRequest()->getHeaders()->addHeaderLine('User-Agent', $userAgent);
         $client->setOptions(array(
             'strictredirects' => true
             )
@@ -750,7 +750,7 @@ class App
             return $feedContent;
         }
 
-        $header = $response->headers()->get('GData-Version');
+        $header = $response->getHeaders()->get('GData-Version');
         $majorProtocolVersion = null;
         $minorProtocolVersion = null;
         if ($header instanceof Http\Header\HeaderInterface) {
@@ -769,7 +769,7 @@ class App
         if ($this->getHttpClient() != null) {
             $feed->setHttpClient($this->getHttpClient());
         }
-        $etag = $response->headers()->get('ETag');
+        $etag = $response->getHeaders()->get('ETag');
         if ($etag instanceof Etag) {
             $feed->setEtag($etag);
         }
@@ -956,7 +956,7 @@ class App
         $returnEntry = new $className($response->getBody());
         $returnEntry->setHttpClient(self::getstaticHttpClient());
 
-        $etag = $response->headers()->get('ETag');
+        $etag = $response->getHeaders()->get('ETag');
         if ($etag instanceof Etag) {
             $returnEntry->setEtag($etag);
         }
@@ -995,7 +995,7 @@ class App
         $returnEntry = new $className($response->getBody());
         $returnEntry->setHttpClient(self::getstaticHttpClient());
 
-        $etag = $response->headers()->get('ETag');
+        $etag = $response->getHeaders()->get('ETag');
         if ($etag instanceof Etag) {
             $returnEntry->setEtag($etag);
         }

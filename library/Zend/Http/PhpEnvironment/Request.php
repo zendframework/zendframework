@@ -295,7 +295,7 @@ class Request extends HttpRequest
             $requestUri = $this->getServer()->get('REQUEST_URI');
         }
         if ($requestUri !== null) {
-            $schemeAndHttpHost = $this->getUri()->getScheme() . '://' . $this->uri()->getHost();
+            $schemeAndHttpHost = $this->getUri()->getScheme() . '://' . $this->getUri()->getHost();
 
             if (strpos($requestUri, $schemeAndHttpHost) === 0) {
                 $requestUri = substr($requestUri, strlen($schemeAndHttpHost));

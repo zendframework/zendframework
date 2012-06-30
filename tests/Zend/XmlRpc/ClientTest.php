@@ -577,7 +577,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->xmlrpcClient->setHttpClient($this->httpClient);
 
         $this->setServerResponseTo(array());
-        $this->assertNull($this->xmlrpcClient->getHttpClient()->getRequest()->getUri());
+        $this->assertNull($this->xmlrpcClient->getHttpClient()->getRequest()->getUriString());
         $this->xmlrpcClient->call('foo');
         $uri = $this->xmlrpcClient->getHttpClient()->getUri();
 

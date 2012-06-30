@@ -223,7 +223,7 @@ class Client implements ServerClient
 
         $http        = $this->getHttpClient();
         $httpRequest = $http->getRequest();
-        if ($httpRequest->getUri() === null) {
+        if ($httpRequest->getUriString() === null) {
             $http->setUri($this->_serverAddress);
         }
 

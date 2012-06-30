@@ -222,7 +222,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync($this->timeservers);
 
         $result = $server->getDate();
-        $this->assertInstanceOf('Zend\Date\Date', $result);
+        $this->assertInstanceOf('DateTime', $result);
     }
 
     /**
@@ -239,7 +239,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync('ntp://time.windows.com', 'time_windows');
 
         $result = $server->getDate();
-        $this->assertInstanceOf('Zend\Date\Date', $result);
+        $this->assertInstanceOf('DateTime', $result);
     }
 
     /**
@@ -256,7 +256,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync('sntp://time-C.timefreq.bldrdoc.gov');
 
         $result = $server->getDate();
-        $this->assertInstanceOf('Zend\Date\Date', $result);
+        $this->assertInstanceOf('DateTime', $result);
     }
 
     /**

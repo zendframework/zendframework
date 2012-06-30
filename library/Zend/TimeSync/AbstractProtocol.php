@@ -147,6 +147,6 @@ abstract class AbstractProtocol
         // Apply to the local time the offset obtained from the server
         $info = $this->getInfo();
         $time = (time() + round($info['offset']));
-        return date_timestamp_set(new DateTime(), $time);
+        return new DateTime('@' . $time);
     }
 }

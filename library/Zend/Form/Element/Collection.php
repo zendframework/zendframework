@@ -45,6 +45,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     public function __construct()
     {
         $this->setCount(1);
+        $this->setAllowAdd(true);
         $this->setTemplatePlaceholder('__index__');
 
         parent::__construct();

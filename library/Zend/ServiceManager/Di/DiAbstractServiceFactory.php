@@ -8,6 +8,10 @@ use Zend\ServiceManager\AbstractFactoryInterface,
 
 class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFactoryInterface
 {
+    /**
+     * @var array instances that can be created by
+     */
+    protected $definedServiceNames;
 
     /**
      * @param \Zend\Di\Di $di
@@ -26,10 +30,7 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @param $serviceName
-     * @param null $requestedName
-     * @return object
+     * {@inheritDoc}
      */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $serviceName, $requestedName = null)
     {
@@ -43,11 +44,19 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
     }
 
     /**
-     * @param $name
-     * @return null
+     * {@inheritDoc}
      */
     public function canCreateServiceWithName($name)
     {
-        return null; // not sure
+        if (null === $this->definedServiceNames) {
+            $allNames = array_unique(array_merge(
+                $this->instanceManager->getClasses(),
+                array_keys($this->instanceManager->getAliases()),
+                $this->definitions->getClasses()
+            ));
+            $this->definedServiceNames = array_flip(array_values($allNames));
+        }
+
+        return isset($this->definedServiceNames[$name]);
     }
 }

@@ -247,13 +247,29 @@ class FormTest extends TestCase
     public function testCanCorrectlyPopulateDataToComposedEntities()
     {
         $address = $this->getComposedEntity();
+        $emptyAddress = new TestAsset\Entity\Address();
 
         $form = new TestAsset\CreateAddressForm();
-        $form->bind($address);
-        $form->setBindOnValidate(false);
+        $form->bind($emptyAddress);
+
+        $data = array(
+            'address' => array(
+                'street' => '1 Rue des Champs Elysées',
+                'city' => array(
+                    'name' => 'Paris',
+                    'zipCode' => '75008',
+                    'country' => array(
+                        'name' => 'France',
+                        'continent' => 'Europe'
+                    )
+                )
+            )
+        );
+
+        $form->setData($data);
 
         if ($form->isValid()) {
-            $this->assertEquals($address, $form->getData());
+            $this->assertEquals($address, $emptyAddress);
         }
     }
 }

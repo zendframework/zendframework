@@ -45,7 +45,7 @@ class SmtpOptions extends AbstractOptions
 
     /**
      * Connection configuration (passed to the underlying Protocol class)
-     * 
+     *
      * @var array
      */
     protected $connectionConfig = array();
@@ -93,13 +93,13 @@ class SmtpOptions extends AbstractOptions
     /**
      * Get connection class
      *
-     * This should be either the class Zend\Mail\Protocol\Smtp or a class 
+     * This should be either the class Zend\Mail\Protocol\Smtp or a class
      * extending it -- typically a class in the Zend\Mail\Protocol\Smtp\Auth
      * namespace.
      *
      * @return string
      */
-    public function getConnectionClass() 
+    public function getConnectionClass()
     {
         return $this->connectionClass;
     }
@@ -111,7 +111,7 @@ class SmtpOptions extends AbstractOptions
      * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return SmtpOptions
      */
-    public function setConnectionClass($connectionClass) 
+    public function setConnectionClass($connectionClass)
     {
         if (!is_string($connectionClass) && $connectionClass !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -125,7 +125,7 @@ class SmtpOptions extends AbstractOptions
 
     /**
      * Get connection configuration array
-     * 
+     *
      * @return array
      */
     public function getConnectionConfig()
@@ -135,8 +135,8 @@ class SmtpOptions extends AbstractOptions
 
     /**
      * Set connection configuration array
-     * 
-     * @param  array $connectionConfig 
+     *
+     * @param  array $connectionConfig
      * @return SmtpOptions
      */
     public function setConnectionConfig(array $connectionConfig)
@@ -147,7 +147,7 @@ class SmtpOptions extends AbstractOptions
 
     /**
      * Get the host name
-     * 
+     *
      * @return string
      */
     public function getHost()
@@ -157,9 +157,9 @@ class SmtpOptions extends AbstractOptions
 
     /**
      * Set the SMTP host
-     * 
+     *
      * @todo   hostname/IP validation
-     * @param  string $host 
+     * @param  string $host
      * @return SmtpOptions
      */
     public function setHost($host)

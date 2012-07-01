@@ -43,7 +43,7 @@ class File implements TransportInterface
 
     /**
      * Last file written to
-     * 
+     *
      * @var string
      */
     protected $lastFile;
@@ -97,7 +97,7 @@ class File implements TransportInterface
 
     /**
      * Get the name of the last file written to
-     * 
+     *
      * @return string
      */
     public function getLastFile()

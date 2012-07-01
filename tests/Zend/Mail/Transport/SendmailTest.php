@@ -77,7 +77,7 @@ class SendmailTest extends \PHPUnit_Framework_TestCase
                 ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
                 ->setSubject('Testing Zend\Mail\Transport\Sendmail')
                 ->setBody('This is only a test.');
-        $message->headers()->addHeaders(array(
+        $message->getHeaders()->addHeaders(array(
             'X-Foo-Bar' => 'Matthew',
         ));
         return $message;

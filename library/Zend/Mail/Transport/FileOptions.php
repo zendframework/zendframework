@@ -67,7 +67,7 @@ class FileOptions extends AbstractOptions
      * Get path
      *
      * If none is set, uses value from sys_get_temp_dir()
-     * 
+     *
      * @return string
      */
     public function getPath()
@@ -100,7 +100,7 @@ class FileOptions extends AbstractOptions
 
     /**
      * Get callback used to generate a file name
-     * 
+     *
      * @return callback
      */
     public function getCallback()

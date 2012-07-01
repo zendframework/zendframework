@@ -50,7 +50,7 @@ class Server extends AbstractGoGrid
      * This call will retrieve one or many server objects from your list of servers
      *
      * @param string|array $server
-     * @return GoGridObjeObjectListctList
+     * @return ObjectList
      * @throws Exception\InvalidArgumentException
      */
     public function get($server)

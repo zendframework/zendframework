@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\Amazon\Ec2;
+namespace Zend\Service\Amazon\Ec2\Exception;
 
 use Zend\Service\Amazon\Exception;
 

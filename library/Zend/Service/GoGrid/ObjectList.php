@@ -41,30 +41,37 @@ class ObjectList implements
     ArrayAccess
 {
     const SUCCESS_STATUS= 'success';
+
     /**
      * @var array Array of Zend\Service\GoGrid\Object
      */
     protected $_objects = array();
+
     /**
      * @var int Iterator key
      */
     protected $_iteratorKey = 0;
+
     /**
      * @var array
      */
     protected $_summary;
+
     /**
      * @var string
      */
     protected $_status;
+
     /**
      * @var string
      */
     protected $_method;
+
     /**
      * @var boolean
      */
     protected $_error= true;
+
     /**
      * @var string
      */
@@ -73,12 +80,12 @@ class ObjectList implements
     /**
      * Constructor
      * 
-     * @param  array $list
+     * @param array $list
      */
-    public function __construct($list = array())
+    public function __construct(array $list = array())
     {
-        if (empty($list) || !is_array($list)) {
-            return false;
+        if (empty($list)) {
+            return;
         }
         if (array_key_exists('status', $list)) {
             $this->_status= $list['status'];
@@ -98,6 +105,7 @@ class ObjectList implements
             $this->_constructFromArray($list['list']);
         }    
     }
+
     /**
      * Transforms the Array to array of posts
      *
@@ -110,6 +118,7 @@ class ObjectList implements
             $this->_addObject(new Object($obj));
         }
     }
+
     /**
      * Add an object
      *
@@ -121,6 +130,7 @@ class ObjectList implements
         $this->_objects[] = $obj;
         return $this;
     }
+
     /**
      * Return number of servers
      *
@@ -132,6 +142,7 @@ class ObjectList implements
     {
         return count($this->_objects);
     }
+
     /**
      * Return the current element
      *
@@ -154,6 +165,7 @@ class ObjectList implements
     {
         return $this->_iteratorKey;
     }
+
     /**
      * Move forward to next element
      *
@@ -165,6 +177,7 @@ class ObjectList implements
     {
         $this->_iteratorKey += 1;
     }
+
     /**
      * Rewind the Iterator to the first element
      *
@@ -176,6 +189,7 @@ class ObjectList implements
     {
         $this->_iteratorKey = 0;
     }
+
     /**
      * Check if there is a current element after calls to rewind() or next()
      *
@@ -192,6 +206,7 @@ class ObjectList implements
             return false;
         }
     }
+
     /**
      * Whether the offset exists
      *
@@ -204,6 +219,7 @@ class ObjectList implements
     {
         return ($offset < $this->count());
     }
+
     /**
      * Return value at given offset
      *
@@ -248,6 +264,7 @@ class ObjectList implements
     {
         throw new Exception\RuntimeException('You are trying to unset read-only property');
     }
+
     /**
      * Check if the service call was successful
      * 
@@ -256,6 +273,7 @@ class ObjectList implements
     public function isSuccess() {
         return ($this->_error===false);
     }
+
     /**
      * Get the error masg
      * 
@@ -264,6 +282,7 @@ class ObjectList implements
     public function getError() {
         return $this->_errorMsg;
     }
+
     /**
      * getSummary
      *
@@ -280,6 +299,7 @@ class ObjectList implements
         }
         return $this->_summary;
     }
+
     /**
      * getMethod
      *
@@ -288,6 +308,7 @@ class ObjectList implements
     public function getMethod() {
         return $this->_method;
     }
+
     /**
      * getStatus
      *

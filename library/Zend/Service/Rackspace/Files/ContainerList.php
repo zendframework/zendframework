@@ -58,14 +58,12 @@ class ContainerList implements
     /**
      * Constructor
      *
+     * @param RackspaceFiles $service
      * @param  array $list
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct(RackspaceFiles $service,$list = array())
+    public function __construct(RackspaceFiles $service, array $list = array())
     {
-        if (!($service instanceof RackspaceFiles) || !is_array($list)) {
-            throw new Exception\InvalidArgumentException('You must pass a RackspaceFiles object and an array');
-        }
         $this->service= $service;
         $this->_constructFromArray($list);
     }

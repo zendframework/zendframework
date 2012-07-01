@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\AgileZen\Resources;
+namespace Zend\Service\AgileZen\Resources\Exception;
 
 use Zend\Service\AgileZen\Exception\ExceptionInterface as AgileZenException;
 

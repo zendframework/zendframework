@@ -48,8 +48,8 @@ abstract class AbstractDb extends AbstractValidator
      * @var array Message templates
      */
     protected $messageTemplates = array(
-        self::ERROR_NO_RECORD_FOUND => "No record matching '%value%' was found",
-        self::ERROR_RECORD_FOUND    => "A record matching '%value%' was found",
+        self::ERROR_NO_RECORD_FOUND => "No record matching the input was found",
+        self::ERROR_RECORD_FOUND    => "A record matching the input was found",
     );
 
     /**

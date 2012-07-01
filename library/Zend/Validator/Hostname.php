@@ -53,17 +53,17 @@ class Hostname extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::CANNOT_DECODE_PUNYCODE  => "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded",
+        self::CANNOT_DECODE_PUNYCODE  => "The input appears to be a DNS hostname but the given punycode notation cannot be decoded",
         self::INVALID                 => "Invalid type given. String expected",
-        self::INVALID_DASH            => "'%value%' appears to be a DNS hostname but contains a dash in an invalid position",
-        self::INVALID_HOSTNAME        => "'%value%' does not match the expected structure for a DNS hostname",
-        self::INVALID_HOSTNAME_SCHEMA => "'%value%' appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'",
-        self::INVALID_LOCAL_NAME      => "'%value%' does not appear to be a valid local network name",
-        self::INVALID_URI             => "'%value%' does not appear to be a valid URI hostname",
-        self::IP_ADDRESS_NOT_ALLOWED  => "'%value%' appears to be an IP address, but IP addresses are not allowed",
-        self::LOCAL_NAME_NOT_ALLOWED  => "'%value%' appears to be a local network name but local network names are not allowed",
-        self::UNDECIPHERABLE_TLD      => "'%value%' appears to be a DNS hostname but cannot extract TLD part",
-        self::UNKNOWN_TLD             => "'%value%' appears to be a DNS hostname but cannot match TLD against known list",
+        self::INVALID_DASH            => "The input appears to be a DNS hostname but contains a dash in an invalid position",
+        self::INVALID_HOSTNAME        => "The input does not match the expected structure for a DNS hostname",
+        self::INVALID_HOSTNAME_SCHEMA => "The input appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'",
+        self::INVALID_LOCAL_NAME      => "The input does not appear to be a valid local network name",
+        self::INVALID_URI             => "The input does not appear to be a valid URI hostname",
+        self::IP_ADDRESS_NOT_ALLOWED  => "The input appears to be an IP address, but IP addresses are not allowed",
+        self::LOCAL_NAME_NOT_ALLOWED  => "The input appears to be a local network name but local network names are not allowed",
+        self::UNDECIPHERABLE_TLD      => "The input appears to be a DNS hostname but cannot extract TLD part",
+        self::UNKNOWN_TLD             => "The input appears to be a DNS hostname but cannot match TLD against known list",
     );
 
     /**

@@ -63,13 +63,13 @@ class CreditCard extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::CHECKSUM       => "'%value%' seems to contain an invalid checksum",
-        self::CONTENT        => "'%value%' must contain only digits",
+        self::CHECKSUM       => "The input seems to contain an invalid checksum",
+        self::CONTENT        => "The input must contain only digits",
         self::INVALID        => "Invalid type given. String expected",
-        self::LENGTH         => "'%value%' contains an invalid amount of digits",
-        self::PREFIX         => "'%value%' is not from an allowed institute",
-        self::SERVICE        => "'%value%' seems to be an invalid creditcard number",
-        self::SERVICEFAILURE => "An exception has been raised while validating '%value%'",
+        self::LENGTH         => "The input contains an invalid amount of digits",
+        self::PREFIX         => "The input is not from an allowed institute",
+        self::SERVICE        => "The input seems to be an invalid creditcard number",
+        self::SERVICEFAILURE => "An exception has been raised while validating the input.",
     );
 
     /**

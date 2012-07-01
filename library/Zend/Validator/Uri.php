@@ -40,7 +40,7 @@ class Uri extends AbstractValidator
      */
     protected $messageTemplates = array(
         self::INVALID => "Invalid type given. String expected",
-        self::NOT_URI => "'%value%' does not appear to be a valid Uri",
+        self::NOT_URI => "The input does not appear to be a valid Uri",
     );
 
     /**

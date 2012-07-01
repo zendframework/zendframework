@@ -41,7 +41,7 @@ class Isbn extends AbstractValidator
      */
     protected $messageTemplates = array(
         self::INVALID => "Invalid type given. String or integer expected",
-        self::NO_ISBN => "'%value%' is not a valid ISBN number",
+        self::NO_ISBN => "The input is not a valid ISBN number",
     );
 
     protected $options = array(

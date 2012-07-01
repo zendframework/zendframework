@@ -39,7 +39,7 @@ class Ip extends AbstractValidator
      */
     protected $messageTemplates = array(
         self::INVALID        => 'Invalid type given. String expected',
-        self::NOT_IP_ADDRESS => "'%value%' does not appear to be a valid IP address",
+        self::NOT_IP_ADDRESS => "The input does not appear to be a valid IP address",
     );
 
     /**

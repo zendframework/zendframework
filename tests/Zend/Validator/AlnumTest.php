@@ -119,7 +119,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->isValid(''));
         $messages = $this->validator->getMessages();
         $arrayExpected = array(
-            Alnum::STRING_EMPTY => '\'\' is an empty string'
+            Alnum::STRING_EMPTY => 'The input is an empty string'
             );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }
@@ -132,7 +132,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->isValid('#'));
         $messages = $this->validator->getMessages();
         $arrayExpected = array(
-            Alnum::NOT_ALNUM => '\'#\' contains characters which are non alphabetic and no digits'
+            Alnum::NOT_ALNUM => 'The input contains characters which are non alphabetic and no digits'
             );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }

@@ -380,7 +380,7 @@ class Fieldset extends Element implements FieldsetInterface
      * Set the hydrator to use when binding an object to the element
      *
      * @param HydratorInterface $hydrator
-     * @return mixed
+     * @return FieldsetInterface
      */
     public function setHydrator(HydratorInterface $hydrator)
     {
@@ -393,7 +393,7 @@ class Fieldset extends Element implements FieldsetInterface
      *
      * Will lazy-load Hydrator\ArraySerializable if none is present.
      *
-     * @return null|Hydrator\HydratorInterface
+     * @return HydratorInterface
      */
     public function getHydrator()
     {

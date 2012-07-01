@@ -8,7 +8,6 @@ use Zend\ServiceManager\AbstractFactoryInterface,
 
 class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFactoryInterface
 {
-
     /**
      * @param \Zend\Di\Di $di
      * @param null|string|\Zend\Di\InstanceManager $useServiceLocator
@@ -26,10 +25,7 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @param $serviceName
-     * @param null $requestedName
-     * @return object
+     * {@inheritDoc}
      */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $serviceName, $requestedName = null)
     {
@@ -43,11 +39,14 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
     }
 
     /**
-     * @param $name
-     * @return null
+     * {@inheritDoc}
      */
     public function canCreateServiceWithName($name)
     {
-        return null; // not sure
+        return $this->instanceManager->hasSharedInstance($name)
+            || $this->instanceManager->hasAlias($name)
+            || $this->instanceManager->hasConfiguration($name)
+            || $this->instanceManager->hasTypePreferences($name)
+            || $this->definitions->hasClass($name);
     }
 }

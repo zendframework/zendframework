@@ -68,7 +68,8 @@ class FormCollection extends AbstractHelper
         $rowHelper = $this->getRowHelper();
 
         if (isset($attributes['shouldCreateTemplate']) && $attributes['shouldCreateTemplate'] === true) {
-            $elementOrFieldset = $element->get('__index__');
+            $templatePlaceholder = $attributes['templatePlaceholder'];
+            $elementOrFieldset = $element->get($templatePlaceholder);
 
             if ($elementOrFieldset instanceof FieldsetInterface) {
                 $templateMarkup .= $this->render($elementOrFieldset);
@@ -77,20 +78,21 @@ class FormCollection extends AbstractHelper
             }
 
             // Remove it as we don't want to draw it multiple times
-            $element->remove('__index__');
+            $element->remove($templatePlaceholder);
         }
 
         foreach($element->getIterator() as $elementOrFieldset) {
             if ($elementOrFieldset instanceof FieldsetInterface) {
-                    $markup .= $this->render($elementOrFieldset);
+                $markup .= $this->render($elementOrFieldset);
             } elseif ($elementOrFieldset instanceof ElementInterface) {
-                    $markup .= $rowHelper($elementOrFieldset);
+                $markup .= $rowHelper($elementOrFieldset);
             }
         }
 
+        // If $templateMarkup is not empty, use it for simplify adding new element in JavaScript
         if (!empty($templateMarkup)) {
             $markup .= sprintf(
-                '<div data-template="%s"></div>',
+                '<span data-template="%s"></span>',
                 $escapeHelper($templateMarkup)
             );
         }
@@ -125,6 +127,7 @@ class FormCollection extends AbstractHelper
         if (!$element) {
             return $this;
         }
+
         $this->setShouldWrap($wrap);
 
         return $this->render($element);
@@ -133,12 +136,12 @@ class FormCollection extends AbstractHelper
     /**
      * If set to true, collections are automatically wrapped around a fieldset
      *
-     * @param $wrap
+     * @param bool $wrap
      * @return FormCollection
      */
     public function setShouldWrap($wrap)
     {
-        $this->shouldWrap = $wrap;
+        $this->shouldWrap = (bool)$wrap;
         return $this;
     }
 

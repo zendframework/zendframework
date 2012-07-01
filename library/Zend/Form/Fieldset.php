@@ -96,6 +96,7 @@ class Fieldset extends Element implements FieldsetInterface
         if (null === $this->factory) {
             $this->setFormFactory(new Factory());
         }
+
         return $this->factory;
     }
 

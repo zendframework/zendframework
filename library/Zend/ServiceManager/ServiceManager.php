@@ -28,7 +28,7 @@ class ServiceManager implements ServiceLocatorInterface
     protected $factories = array();
 
     /**
-     * @var Closure|AbstractFactoryInterface[]
+     * @var AbstractFactoryInterface[]
      */
     protected $abstractFactories = array();
 
@@ -61,7 +61,7 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * Whether or not to share by default
-     * 
+     *
      * @var bool
      */
     protected $shareByDefault = true;
@@ -105,8 +105,8 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * Set flag indicating whether services are shared by default
-     * 
-     * @param  bool $shareByDefault 
+     *
+     * @param  bool $shareByDefault
      * @return ServiceManager
      * @throws Exception\RuntimeException if allowOverride is false
      */
@@ -124,7 +124,7 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * Are services shared by default?
-     * 
+     *
      * @return bool
      */
     public function shareByDefault()
@@ -152,8 +152,8 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * Set flag indicating whether to pull from peering manager before attempting creation
-     * 
-     * @param  bool $retrieveFromPeeringManagerFirst 
+     *
+     * @param  bool $retrieveFromPeeringManagerFirst
      * @return ServiceManager
      */
     public function setRetrieveFromPeeringManagerFirst($retrieveFromPeeringManagerFirst = true)
@@ -164,7 +164,7 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * Should we retrieve from the peering manager prior to attempting to create a service?
-     * 
+     *
      * @return bool
      */
     public function retrieveFromPeeringManagerFirst()
@@ -221,15 +221,29 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
-     * @param $factory
+     * @param AbstractFactoryInterface|string $factory
      * @param bool $topOfStack
+     * @throws Exception\InvalidArgumentException if the abstract factory is invalid
      */
     public function addAbstractFactory($factory, $topOfStack = true)
     {
-        if (!is_string($factory) && !$factory instanceof AbstractFactoryInterface && !is_callable($factory)) {
+        if (!is_string($factory) && !$factory instanceof AbstractFactoryInterface) {
             throw new Exception\InvalidArgumentException(
                 'Provided abstract factory must be the class name of an abstract factory or an instance of an AbstractFactoryInterface.'
             );
+        }
+        if (is_string($factory)) {
+            if (!class_exists($factory, true)) {
+                throw new Exception\InvalidArgumentException(
+                    'Provided abstract factory must be the class name of an abstract factory or an instance of an AbstractFactoryInterface.'
+                );
+            }
+            $refl = new \ReflectionClass($factory);
+            if (!$refl->implementsInterface(__NAMESPACE__ . '\\AbstractFactoryInterface')) {
+                throw new Exception\InvalidArgumentException(
+                    'Provided abstract factory must be the class name of an abstract factory or an instance of an AbstractFactoryInterface.'
+                );
+            }
         }
 
         if ($topOfStack) {
@@ -352,11 +366,11 @@ class ServiceManager implements ServiceLocatorInterface
             if (!$instance) {
                 try {
                     $instance = $this->create(array($cName, $rName));
-                } catch (\Exception $selfException) {
-                    if (!$selfException instanceof Exception\ServiceNotFoundException &&
-                        !$selfException instanceof Exception\ServiceNotCreatedException) {
-                        throw $selfException;
+                } catch (Exception\ServiceNotFoundException $e) {
+                    if ($usePeeringServiceManagers && !$retrieveFromPeeringManagerFirst) {
+                        $instance = $this->retrieveFromPeeringManager($name);
                     }
+                } catch (Exception\ServiceNotCreatedException $e) {
                     if ($usePeeringServiceManagers && !$retrieveFromPeeringManagerFirst) {
                         $instance = $this->retrieveFromPeeringManager($name);
                     }
@@ -469,11 +483,6 @@ class ServiceManager implements ServiceLocatorInterface
                 $this->abstractFactory[$index] = $abstractFactory = new $abstractFactory();
             }
 
-            // Bad abstract factory; skip
-            if (!$abstractFactory instanceof AbstractFactoryInterface) {
-                continue;
-            }
-
             if ($abstractFactory->canCreateServiceWithName($cName, $rName)) {
                 return true;
             }
@@ -546,9 +555,9 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * Add a peering relationship
-     * 
-     * @param  ServiceManager $manager 
-     * @param  string $peering 
+     *
+     * @param  ServiceManager $manager
+     * @param  string $peering
      * @return ServiceManager Current instance
      */
     public function addPeeringServiceManager(ServiceManager $manager, $peering = self::SCOPE_PARENT)
@@ -627,33 +636,25 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * Attempt to retrieve an instance via a peering manager
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return mixed
      */
     protected function retrieveFromPeeringManager($name)
     {
-        $instance = null;
         foreach ($this->peeringServiceManagers as $peeringServiceManager) {
-            try {
-                $instance = $peeringServiceManager->get($name);
-            } catch (Exception\ServiceNotFoundException $e) {
-                continue;
-            } catch (Exception\ServiceNotCreatedException $e) {
-                continue;
-            } catch (\Exception $e) {
-                throw $e;
+            if ($peeringServiceManager->has($name)) {
+                return $peeringServiceManager->get($name);
             }
-            break;
         }
-        return $instance;
+        return null;
     }
 
     /**
      * Attempt to create an instance via an invokable class
-     * 
-     * @param  string $canonicalName 
-     * @param  string $requestedName 
+     *
+     * @param  string $canonicalName
+     * @param  string $requestedName
      * @return null|\stdClass
      * @throws Exception\ServiceNotCreatedException If resolved class does not exist
      */
@@ -675,9 +676,9 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * Attempt to create an instance via a factory
-     * 
-     * @param  string $canonicalName 
-     * @param  string $requestedName 
+     *
+     * @param  string $canonicalName
+     * @param  string $requestedName
      * @return mixed
      * @throws Exception\ServiceNotCreatedException If factory is not callable
      */
@@ -704,9 +705,9 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * Attempt to create an instance via an abstract factory
-     * 
-     * @param  string $canonicalName 
-     * @param  string $requestedName 
+     *
+     * @param  string $canonicalName
+     * @param  string $requestedName
      * @return \stdClass|null
      * @throws Exception\ServiceNotCreatedException If abstract factory is not callable
      */
@@ -716,15 +717,6 @@ class ServiceManager implements ServiceLocatorInterface
             // support factories as strings
             if (is_string($abstractFactory) && class_exists($abstractFactory, true)) {
                 $this->abstractFactories[$index] = $abstractFactory = new $abstractFactory;
-            }
-            if ($abstractFactory instanceof AbstractFactoryInterface) {
-                $instance = $this->createServiceViaCallback(
-                    array($abstractFactory, 'createServiceWithName'), 
-                    $canonicalName, 
-                    $requestedName
-                );
-            } elseif (is_callable($abstractFactory)) {
-                $instance = $this->createServiceViaCallback($abstractFactory, $canonicalName, $requestedName);
             } else {
                 throw new Exception\ServiceNotCreatedException(sprintf(
                     'While attempting to create %s%s an abstract factory could not produce a valid instance.',
@@ -732,6 +724,11 @@ class ServiceManager implements ServiceLocatorInterface
                     ($requestedName ? '(alias: ' . $requestedName . ')' : '')
                 ));
             }
+            $instance = $this->createServiceViaCallback(
+                array($abstractFactory, 'createServiceWithName'),
+                $canonicalName,
+                $requestedName
+            );
             if (is_object($instance)) {
                 break;
             }

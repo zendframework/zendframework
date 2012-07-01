@@ -268,15 +268,6 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
     }
 
-    /**
-     * @covers Zend\ServiceManager\ServiceManager::create
-     */
-    public function testCreateWithCallableAbstractFactory()
-    {
-        $this->serviceManager->addAbstractFactory(function () { return new TestAsset\Foo; });
-        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
-    }
-
     public function testCreateWithInitializerObject()
     {
         $this->serviceManager->addInitializer(new TestAsset\FooInitializer(array('foo' => 'bar')));
@@ -443,6 +434,16 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $di->instanceManager()->setParameters('ZendTest\ServiceManager\TestAsset\Bar', array('foo' => array('a')));
         $sm->addAbstractFactory(new DiAbstractServiceFactory($di));
         $bar = $serviceManager->get('ZendTest\ServiceManager\TestAsset\Bar');
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $bar);
+    }
+
+    public function testDiAbstractServiceFactory()
+    {
+        $di = new Di();
+        $di->instanceManager()->setParameters('ZendTest\ServiceManager\TestAsset\Bar', array('foo' => array('a')));
+        $this->serviceManager->addAbstractFactory(new DiAbstractServiceFactory($di));
+        $this->assertTrue($this->serviceManager->has('ZendTest\ServiceManager\TestAsset\Bar', true));
+        $bar = $this->serviceManager->get('ZendTest\ServiceManager\TestAsset\Bar', true);
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $bar);
     }
 }

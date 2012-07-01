@@ -71,7 +71,7 @@ class BaseInputFilter implements InputFilterInterface
             ));
         }
 
-        if (is_null($name)) {
+        if (is_null($name) || $name === '') {
             $name = $input->getName();
         }
         $this->inputs[$name] = $input;

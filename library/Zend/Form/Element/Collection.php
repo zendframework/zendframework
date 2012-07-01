@@ -40,13 +40,18 @@ use Zend\InputFilter\InputFilterProviderInterface;
 class Collection extends Fieldset implements InputFilterProviderInterface
 {
     /**
+     * Default template placeholder
+     */
+    const DEFAULT_TEMPLATE_PLACEHOLDER = '__index__';
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->setCount(1);
         $this->setAllowAdd(true);
-        $this->setTemplatePlaceholder('__index__');
+        $this->setTemplatePlaceholder(self::DEFAULT_TEMPLATE_PLACEHOLDER);
 
         parent::__construct();
     }

@@ -371,7 +371,7 @@ class FormMultiCheckbox extends FormInput
      * Proxies to {@link render()}.
      *
      * @param  ElementInterface|null $element
-     * @return string
+     * @return string|FormMultiCheckbox
      */
     public function __invoke(ElementInterface $element = null)
     {

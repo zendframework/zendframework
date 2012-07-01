@@ -120,7 +120,7 @@ class FormCollection extends AbstractHelper
      *
      * @param  ElementInterface|null $element
      * @param  boolean $wrap
-     * @return string
+     * @return string|FormCollection
      */
     public function __invoke(ElementInterface $element = null, $wrap = true)
     {

@@ -103,13 +103,14 @@ class FormLabel extends AbstractHelper
      * @param  ElementInterface $element
      * @param  null|string $labelContent
      * @param  string $position
-     * @return string
+     * @return string|FormLabel
      */
     public function __invoke(ElementInterface $element = null, $labelContent = null, $position = null)
     {
         if (!$element) {
             return $this;
         }
+
         $openTag = $this->openTag($element);
         $label   = false;
         if (null === $labelContent || null !== $position) {

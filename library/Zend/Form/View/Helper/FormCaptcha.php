@@ -75,10 +75,14 @@ class FormCaptcha extends AbstractHelper
      * Proxies to {@link render()}.
      * 
      * @param  ElementInterface $element 
-     * @return string
+     * @return string|FormCaptcha
      */
     public function __invoke(ElementInterface $element)
     {
+        if (!$element) {
+            return $this;
+        }
+
         return $this->render($element);
     }
 }

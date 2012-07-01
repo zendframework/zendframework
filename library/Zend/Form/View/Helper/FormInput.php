@@ -136,7 +136,7 @@ class FormInput extends AbstractHelper
      * Proxies to {@link render()}.
      * 
      * @param  ElementInterface|null $element 
-     * @return string
+     * @return string|FormInput
      */
     public function __invoke(ElementInterface $element = null)
     {

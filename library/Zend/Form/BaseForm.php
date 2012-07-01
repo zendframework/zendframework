@@ -38,7 +38,7 @@ class BaseForm extends Fieldset implements FormInterface
 {
     /**
      * Seed attributes
-     * 
+     *
      * @var array
      */
     protected $attributes = array(
@@ -47,14 +47,14 @@ class BaseForm extends Fieldset implements FormInterface
 
     /**
      * How to bind values to the attached object
-     * 
+     *
      * @var int
      */
     protected $bindAs = FormInterface::VALUES_NORMALIZED;
 
     /**
      * Whether or not to bind values to the bound object on successful validation
-     * 
+     *
      * @var int
      */
     protected $bindOnValidate = self::BIND_ON_VALIDATE;
@@ -68,11 +68,11 @@ class BaseForm extends Fieldset implements FormInterface
 
     /**
      * Data being validated
-     * 
+     *
      * @var null|array|Traversable
      */
     protected $data;
- 
+
     /**
      * @var null|InputFilterInterface
      */
@@ -80,14 +80,14 @@ class BaseForm extends Fieldset implements FormInterface
 
     /**
      * Whether or not validation has occurred
-     * 
+     *
      * @var bool
      */
     protected $hasValidated = false;
 
     /**
      * Result of last validation operation
-     * 
+     *
      * @var bool
      */
     protected $isValid = false;
@@ -103,8 +103,8 @@ class BaseForm extends Fieldset implements FormInterface
      * Set data to validate and/or populate elements
      *
      * Typically, also passes data on to the composed input filter.
-     * 
-     * @param  array|\ArrayAccess $data 
+     *
+     * @param  array|\ArrayAccess $data
      * @return BaseForm
      */
     public function setData($data)
@@ -221,7 +221,7 @@ class BaseForm extends Fieldset implements FormInterface
 
     /**
      * Will we bind values to the bound object on successful validation?
-     * 
+     *
      * @return bool
      */
     public function bindOnValidate()
@@ -434,6 +434,10 @@ class BaseForm extends Fieldset implements FormInterface
             return;
         }
 
-        $this->populateValues($values);
+        if ($this->baseFieldset) {
+            $this->baseFieldset->populateValues($values);
+        } else {
+            $this->populateValues($values);
+        }
     }
 }

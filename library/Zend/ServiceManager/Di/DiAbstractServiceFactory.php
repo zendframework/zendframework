@@ -9,11 +9,6 @@ use Zend\ServiceManager\AbstractFactoryInterface,
 class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFactoryInterface
 {
     /**
-     * @var array instances that can be created by
-     */
-    protected $definedServiceNames;
-
-    /**
      * @param \Zend\Di\Di $di
      * @param null|string|\Zend\Di\InstanceManager $useServiceLocator
      */

@@ -68,6 +68,7 @@ class FormCollectionTest extends TestCase
 
         $markup = $this->helper->render($collection);
         $this->assertContains('<span data-template', $markup);
+        $this->assertContains($collection->getTemplatePlaceholder(), $markup);
     }
 
     public function testDoesNotGenerateTemplateByDefault()

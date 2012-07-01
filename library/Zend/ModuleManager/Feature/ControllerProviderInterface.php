@@ -28,7 +28,7 @@ namespace Zend\ModuleManager\Feature;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ServiceProviderInterface
+interface ControllerProviderInterface
 {
     /**
      * Expected to return \Zend\ServiceManager\Configuration object or array to
@@ -36,5 +36,5 @@ interface ServiceProviderInterface
      *
      * @return array|\Zend\ServiceManager\Configuration
      */
-    public function getServiceConfiguration();
+    public function getControllerConfiguration();
 }

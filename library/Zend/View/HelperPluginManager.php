@@ -27,7 +27,7 @@ use Zend\ServiceManager\ConfigurationInterface;
  * Plugin manager implementation for view helpers
  *
  * Enforces that heleprs retrieved are instances of
- * Helper\HelperInterface. Additionally, it registers a number of default 
+ * Helper\HelperInterface. Additionally, it registers a number of default
  * helpers.
  *
  * @category   Zend
@@ -39,15 +39,14 @@ class HelperPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of helpers
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
-        'basepath'            => 'Zend\View\Helper\BasePath',
+        // basepath, doctype, and url are set up as factories in the ViewHelperManagerFactory
         'currency'            => 'Zend\View\Helper\Currency',
         'cycle'               => 'Zend\View\Helper\Cycle',
         'declarevars'         => 'Zend\View\Helper\DeclareVars',
-        'doctype'             => 'Zend\View\Helper\Doctype',
         'escape'              => 'Zend\View\Helper\Escape',
         'gravatar'            => 'Zend\View\Helper\Gravatar',
         'headlink'            => 'Zend\View\Helper\HeadLink',
@@ -71,7 +70,6 @@ class HelperPluginManager extends AbstractPluginManager
         'rendertoplaceholder' => 'Zend\View\Helper\RenderToPlaceholder',
         'serverurl'           => 'Zend\View\Helper\ServerUrl',
         'translator'          => 'Zend\View\Helper\Translator',
-        'url'                 => 'Zend\View\Helper\Url',
         'viewmodel'           => 'Zend\View\Helper\ViewModel',
     );
 
@@ -85,8 +83,8 @@ class HelperPluginManager extends AbstractPluginManager
      *
      * After invoking parent constructor, add an initializer to inject the
      * attached renderer, if any, to the currently requested helper.
-     * 
-     * @param  null|ConfigurationInterface $configuration 
+     *
+     * @param  null|ConfigurationInterface $configuration
      * @return void
      */
     public function __construct(ConfigurationInterface $configuration = null)
@@ -97,8 +95,8 @@ class HelperPluginManager extends AbstractPluginManager
 
     /**
      * Set renderer
-     * 
-     * @param  Renderer\RendererInterface $renderer 
+     *
+     * @param  Renderer\RendererInterface $renderer
      * @return HelperPluginManager
      */
     public function setRenderer(Renderer\RendererInterface $renderer)
@@ -109,7 +107,7 @@ class HelperPluginManager extends AbstractPluginManager
 
     /**
      * Retrieve renderer instance
-     * 
+     *
      * @return null|Renderer\RendererInterface
      */
     public function getRenderer()
@@ -120,13 +118,13 @@ class HelperPluginManager extends AbstractPluginManager
     /**
      * Inject a helper instance with the registered renderer
      *
-     * @param  Helper\HelperInterface $helper 
+     * @param  Helper\HelperInterface $helper
      * @return void
      */
     public function injectRenderer($helper)
     {
         $renderer = $this->getRenderer();
-        if (null === $renderer) { 
+        if (null === $renderer) {
             return;
         }
         $helper->setView($renderer);
@@ -136,8 +134,8 @@ class HelperPluginManager extends AbstractPluginManager
      * Validate the plugin
      *
      * Checks that the helper loaded is an instance of Helper\HelperInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\InvalidHelperException if invalid
      */

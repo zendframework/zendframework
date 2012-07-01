@@ -80,16 +80,6 @@ class ViewManager implements ListenerAggregateInterface
     protected $config;
 
     /**
-     * An array of helper configuration classes to ensure are on the helper_map stack.
-     *
-     * @var array
-     */
-    protected $defaultHelperMapClasses = array(
-        'Zend\Form\View\HelperConfiguration',
-        'Zend\Navigation\View\HelperConfiguration'
-    );
-
-    /**
      * @var \Zend\ServiceManager\ServiceManager
      */
     protected $services;
@@ -188,7 +178,7 @@ class ViewManager implements ListenerAggregateInterface
             return $this->helperManager;
         }
 
-        $this->helperManager = new ViewHelperManager();
+        return $this->helperManager = $this->services->get('ViewHelperManager');
 
         // Setup additional helpers
         $map = array();

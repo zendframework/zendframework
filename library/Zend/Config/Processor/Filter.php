@@ -13,8 +13,6 @@ namespace Zend\Config\Processor;
 use Zend\Config\Config;
 use Zend\Config\Exception;
 use Zend\Filter\FilterInterface as ZendFilter;
-use Traversable;
-use ArrayObject;
 
 /**
  * @category   Zend

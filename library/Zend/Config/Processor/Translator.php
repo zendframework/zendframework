@@ -30,7 +30,7 @@ class Translator implements ProcessorInterface
     protected $translator;
 
     /**
-     * @var Locale|string|null
+     * @var string|null
      */
     protected $locale = null;
 
@@ -45,7 +45,7 @@ class Translator implements ProcessorInterface
      *
      * @param  ZendTranslator $translator
      * @param  string $textDomain
-     * @param  Locale|string|null $locale
+     * @param  string|null $locale
      */
     public function __construct(ZendTranslator $translator, $textDomain = 'default', $locale = null)
     {

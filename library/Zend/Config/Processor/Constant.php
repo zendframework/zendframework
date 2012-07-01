@@ -10,11 +10,6 @@
 
 namespace Zend\Config\Processor;
 
-use Zend\Config\Config;
-use Zend\Config\Exception\InvalidArgumentException;
-use Traversable;
-use ArrayObject;
-
 /**
  * @category   Zend
  * @package    Zend_Config

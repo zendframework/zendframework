@@ -13,7 +13,6 @@ namespace Zend\Config\Processor;
 use Zend\Config\Config;
 use Zend\Config\Exception;
 use Traversable;
-use ArrayObject;
 
 /**
  * @category   Zend

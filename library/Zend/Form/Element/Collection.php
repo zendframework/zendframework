@@ -41,8 +41,6 @@ class Collection extends Fieldset implements InputFilterProviderInterface
 {
     /**
      * Constructor
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -223,6 +221,12 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     public function setShouldCreateTemplate($shouldCreateTemplate)
     {
         $this->attributes['shouldCreateTemplate'] = (bool)$shouldCreateTemplate;
+
+        // If it doesn't exist yet, create it
+        if ($shouldCreateTemplate && !$this->has($this->getTemplatePlaceholder())) {
+            $this->addTemplateElement();
+        }
+
         return $this;
     }
 
@@ -278,12 +282,25 @@ class Collection extends Fieldset implements InputFilterProviderInterface
 
             // If a template is wanted, we add a "dummy" element
             if ($this->shouldCreateTemplate()) {
-                $elementOrFieldset = clone $this->getTargetElement();
-                $elementOrFieldset->setName($this->getTemplatePlaceholder());
-
-                $this->add($elementOrFieldset);
+                $this->addTemplateElement();
             }
         }
+    }
+
+    /**
+     * Add a "dummy" template element to be used with JavaScript
+     *
+     * @return Collection
+     */
+    protected function addTemplateElement()
+    {
+        if ($this->getTargetElement() !== null) {
+            $elementOrFieldset = clone $this->getTargetElement();
+            $elementOrFieldset->setName($this->getTemplatePlaceholder());
+            $this->add($elementOrFieldset);
+        }
+
+        return $this;
     }
 
     /**

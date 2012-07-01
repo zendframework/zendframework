@@ -64,9 +64,29 @@ class FormCollectionTest extends TestCase
     {
         $form = new FormCollection();
         $collection = $form->get('colors');
-        $collection->shouldCreateTemplate(true);
+        $collection->setShouldCreateTemplate(true);
 
         $markup = $this->helper->render($collection);
-        //$this->assertContains('<span data-template', $markup);
+        $this->assertContains('<span data-template', $markup);
+    }
+
+    public function testDoesNotGenerateTemplateByDefault()
+    {
+        $form = new FormCollection();
+        $collection = $form->get('colors');
+        $collection->setShouldCreateTemplate(false);
+
+        $markup = $this->helper->render($collection);
+        $this->assertNotContains('<span data-template', $markup);
+    }
+
+    public function testCorrectlyIndexElementsInCollection()
+    {
+        $form = new FormCollection();
+        $collection = $form->get('colors');
+
+        $markup = $this->helper->render($collection);
+        $this->assertContains('name="0"', $markup);
+        $this->assertContains('name="1"', $markup);
     }
 }

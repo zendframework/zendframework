@@ -64,28 +64,28 @@ class DiAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $im = $instance->instanceManager();
 
         // will check shared instances
-        $this->assertFalse($instance->canCreateServiceWithName('a-shared-instance-alias'));
+        $this->assertFalse($instance->canCreateServiceWithName('a-shared-instance-alias', 'a-shared-instance-alias'));
         $im->addSharedInstance(new \stdClass(), 'a-shared-instance-alias');
-        $this->assertTrue($instance->canCreateServiceWithName('a-shared-instance-alias'));
+        $this->assertTrue($instance->canCreateServiceWithName('a-shared-instance-alias', 'a-shared-instance-alias'));
 
         // will check aliases
-        $this->assertFalse($instance->canCreateServiceWithName('an-alias'));
+        $this->assertFalse($instance->canCreateServiceWithName('an-alias', 'an-alias'));
         $im->addAlias('an-alias', 'stdClass');
-        $this->assertTrue($instance->canCreateServiceWithName('an-alias'));
+        $this->assertTrue($instance->canCreateServiceWithName('an-alias', 'an-alias'));
 
         // will check instance configurations
-        $this->assertFalse($instance->canCreateServiceWithName(__NAMESPACE__ . '\Non\Existing'));
+        $this->assertFalse($instance->canCreateServiceWithName(__NAMESPACE__ . '\Non\Existing', __NAMESPACE__ . '\Non\Existing'));
         $im->setConfiguration(__NAMESPACE__ . '\Non\Existing', array('parameters' => array('a' => 'b')));
-        $this->assertTrue($instance->canCreateServiceWithName(__NAMESPACE__ . '\Non\Existing'));
+        $this->assertTrue($instance->canCreateServiceWithName(__NAMESPACE__ . '\Non\Existing', __NAMESPACE__ . '\Non\Existing'));
 
         // will check preferences for abstract types
-        $this->assertFalse($instance->canCreateServiceWithName(__NAMESPACE__ . '\AbstractClass'));
+        $this->assertFalse($instance->canCreateServiceWithName(__NAMESPACE__ . '\AbstractClass', __NAMESPACE__ . '\AbstractClass'));
         $im->setTypePreference(__NAMESPACE__ . '\AbstractClass', array(__NAMESPACE__ . '\Non\Existing'));
-        $this->assertTrue($instance->canCreateServiceWithName(__NAMESPACE__ . '\AbstractClass'));
+        $this->assertTrue($instance->canCreateServiceWithName(__NAMESPACE__ . '\AbstractClass', __NAMESPACE__ . '\AbstractClass'));
 
         // will check definitions
         $def = $instance->definitions();
-        $this->assertFalse($instance->canCreateServiceWithName(__NAMESPACE__ . '\Other\Non\Existing'));
+        $this->assertFalse($instance->canCreateServiceWithName(__NAMESPACE__ . '\Other\Non\Existing', __NAMESPACE__ . '\Other\Non\Existing'));
         $classDefinition = $this->getMock('Zend\Di\Definition\DefinitionInterface');
         $classDefinition
             ->expects($this->any())
@@ -93,6 +93,6 @@ class DiAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
             ->with($this->equalTo(__NAMESPACE__ . '\Other\Non\Existing'))
             ->will($this->returnValue(true));
         $def->addDefinition($classDefinition);
-        $this->assertTrue($instance->canCreateServiceWithName(__NAMESPACE__ . '\Other\Non\Existing'));
+        $this->assertTrue($instance->canCreateServiceWithName(__NAMESPACE__ . '\Other\Non\Existing', __NAMESPACE__ . '\Other\Non\Existing'));
     }
 }

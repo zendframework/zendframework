@@ -88,4 +88,31 @@ class ModuleRouteListenerTest extends TestCase
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $matches);
         $this->assertEquals('Index', $matches->getParam('controller'));
     }
+
+    public function testMultipleRegistrationShouldNotResultInMultiplePrefixingOfControllerName()
+    {
+        $moduleListener = new ModuleRouteListener();
+        $this->events->attach($moduleListener);
+
+        $this->router->addRoute('foo', array(
+            'type' => 'Literal',
+            'options' => array(
+                'route'    => '/foo',
+                'defaults' => array(
+                    ModuleRouteListener::MODULE_NAMESPACE => 'Foo',
+                    'controller' => 'Index',
+                ),
+            ),
+        ));
+        $this->request->setUri('/foo');
+        $event = new MvcEvent();
+        $event->setRouter($this->router);
+        $event->setRequest($this->request);
+        $this->events->trigger('route', $event);
+
+        $matches = $event->getRouteMatch();
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $matches);
+        $this->assertEquals('Foo\Index', $matches->getParam('controller'));
+        $this->assertEquals('Index', $matches->getParam(ModuleRouteListener::ORIGINAL_CONTROLLER));
+    }
 }

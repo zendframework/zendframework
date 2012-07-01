@@ -96,6 +96,11 @@ class ModuleRouteListener implements ListenerAggregateInterface
             return;
         }
 
+        // Ensure the module namespace has not already been applied
+        if (0 === strpos($controller, $module)) {
+            return;
+        }
+
         // Keep the originally matched controller name around
         $matches->setParam(self::ORIGINAL_CONTROLLER, $controller);
 

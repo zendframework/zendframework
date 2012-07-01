@@ -13,31 +13,25 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_I18n
- * @subpackage Translator
+ * @package    Zend_Translator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\I18n\Translator\Loader;
-
-/**
- * Loader interface.
- *
- * @category   Zend
- * @package    Zend_I18n
- * @subpackage Translator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-interface LoaderInterface
-{
-    /**
-     * Load translations from a file.
-     *
-     * @param  string $filename
-     * @param  string $locale
-     * @return \Zend\I18n\Translator\TextDomain|null
-     */
-    public function load($filename, $locale);
-}
+return array(
+    '' => array(
+        'plural_forms' => 'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);'
+    ),
+    'Message 1' => 'Message 1 (en)',
+    'Message 2' => 'Message 2 (en)',
+    'Message 3' => 'Message 3 (en)',
+    'Message 4' => 'Message 4 (en)',
+    'Message 5' => array(
+        0 => 'Message 5 (en) Plural 0',
+        1 => 'Message 5 (en) Plural 1',
+        2 => 'Message 5 (en) Plural 2'
+    ),
+    'Cooking furniture' => 'Küchen Möbel (en)',
+    'Küchen Möbel' => 'Cooking furniture (en)',
+);

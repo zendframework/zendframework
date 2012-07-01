@@ -2,7 +2,6 @@
 
 namespace ZendTest\Form\TestAsset;
 
-use Zend\InputFilter\InputFilter;
 use Zend\Form\Form;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 

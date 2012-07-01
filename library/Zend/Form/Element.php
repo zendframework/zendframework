@@ -21,7 +21,6 @@
 namespace Zend\Form;
 
 use Traversable;
-use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
  * @category   Zend

@@ -22,7 +22,6 @@ namespace Zend\Form;
 
 use IteratorAggregate;
 use Zend\InputFilter\InputFilterInterface;
-use Zend\InputFilter\InputFilterAwareInterface;
 
 /**
  * @category   Zend
@@ -54,8 +53,7 @@ interface FormInterface extends FieldsetInterface
      *
      * Allows populating the object with validated values.
      *
-     * @param $object
-     * @param string $baseFieldset
+     * @param object $object
      * @param int $flags
      * @return mixed
      */

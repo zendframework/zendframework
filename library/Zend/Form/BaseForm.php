@@ -132,8 +132,7 @@ class BaseForm extends Fieldset implements FormInterface
      *
      * Ensures the object is populated with validated values.
      *
-     * @param $object
-     * @param string $baseFieldset
+     * @param object $object
      * @param int $flags
      * @return mixed|void
      * @throws Exception\InvalidArgumentException

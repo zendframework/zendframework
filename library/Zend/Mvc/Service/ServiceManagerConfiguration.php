@@ -42,11 +42,12 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * @var array
      */
     protected $services = array(
-        'DispatchListener' => 'Zend\Mvc\DispatchListener',
-        'Request'          => 'Zend\Http\PhpEnvironment\Request',
-        'Response'         => 'Zend\Http\PhpEnvironment\Response',
-        'RouteListener'    => 'Zend\Mvc\RouteListener',
-        'ViewManager'      => 'Zend\Mvc\View\ViewManager',
+        'DispatchListener'   => 'Zend\Mvc\DispatchListener',
+        'Request'            => 'Zend\Http\PhpEnvironment\Request',
+        'Response'           => 'Zend\Http\PhpEnvironment\Response',
+        'RouteListener'      => 'Zend\Mvc\RouteListener',
+        'SharedEventManager' => 'Zend\EventManager\SharedEventManager',
+        'ViewManager'        => 'Zend\Mvc\View\ViewManager',
     );
 
     /**
@@ -100,7 +101,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * @var array
      */
     protected $shared = array(
-        'EventManager' => false
+        'EventManager' => false,
     );
 
     /**

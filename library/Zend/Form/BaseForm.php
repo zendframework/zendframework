@@ -349,21 +349,6 @@ class BaseForm extends Fieldset implements FormInterface
     }
 
     /**
-     * Recursively populate values of attached elements and fieldsets
-     *
-     * @param  array|Traversable $data
-     * @return void
-     */
-    public function populateValues($data)
-    {
-        if ($this->baseFieldset !== null) {
-            $this->baseFieldset->populateValues($data);
-        } else {
-            parent::populateValues($data);
-        }
-    }
-
-    /**
      * Set the validation group (set of values to validate)
      *
      * Typically, proxies to the composed input filter

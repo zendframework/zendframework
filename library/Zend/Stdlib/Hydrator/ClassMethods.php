@@ -123,6 +123,7 @@ class ClassMethods implements HydratorInterface
             $letter = substr(array_shift($letters), 1, 1);
             return ucfirst($letter);
         };
+
         foreach ($data as $property => $value) {
             if (!$this->useCamelCase) {
                 $property = preg_replace_callback('/(_[a-z])/', $transform, $property);

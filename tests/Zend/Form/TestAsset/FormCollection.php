@@ -30,7 +30,7 @@ class FormCollection extends Form
     {
         parent::__construct('collection');
 
-        $element = new ColorElement();
+        $element = new ColorElement('color');
         $this->add(array(
             'type' => 'Zend\Form\Element\Collection',
             'name' => 'colors',

@@ -13,9 +13,6 @@ namespace Zend\Config\Processor;
 use Zend\Config\Config;
 use Zend\Config\Exception;
 use Zend\I18n\Translator\Translator as ZendTranslator;
-use Locale;
-use Traversable;
-use ArrayObject;
 
 /**
  * @category   Zend
@@ -83,7 +80,7 @@ class Translator implements ProcessorInterface
     }
 
     /**
-     * @return Locale|string|null
+     * @return string|null
      */
     public function getLocale()
     {

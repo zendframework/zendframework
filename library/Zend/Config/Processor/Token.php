@@ -53,8 +53,8 @@ class Token implements ProcessorInterface
      * Token Processor walks through a Config structure and replaces all
      * occurences of tokens with supplied values.
      *
-     * @param  array|Config|ArrayObject|Traversable   $tokens  Associative array of TOKEN => value
-     *                                                         to replace it with
+     * @param  array|Config|Traversable   $tokens  Associative array of TOKEN => value
+     *                                             to replace it with
      * @param    string $prefix
      * @param    string $suffix
      * @internal param array $options
@@ -111,8 +111,8 @@ class Token implements ProcessorInterface
     /**
      * Set token registry.
      *
-     * @param  array|Config|Traversable   $tokens  Associative array of TOKEN => value
-     *                                             to replace it with
+     * @param  array|Config|Traversable  $tokens  Associative array of TOKEN => value
+     *                                            to replace it with
      * @return Token
      * @throws Exception\InvalidArgumentException
      */

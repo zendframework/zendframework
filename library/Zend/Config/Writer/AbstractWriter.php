@@ -30,13 +30,8 @@ abstract class AbstractWriter implements WriterInterface
      * @param  mixed   $config
      * @param  boolean $exclusiveLock
      * @return void
-<<<<<<< HEAD
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
-=======
-     * @throws Exception\RuntimeException
-     * @throws Exception\InvalidArgumentException
->>>>>>> initial commit, remove Broker
      */
     public function toFile($filename, $config, $exclusiveLock = true)
     {
@@ -66,11 +61,7 @@ abstract class AbstractWriter implements WriterInterface
      *
      * @see    WriterInterface::toString()
      * @param  mixed   $config
-<<<<<<< HEAD
-     * @return void
-=======
      * @return string
->>>>>>> initial commit, remove Broker
      * @throws Exception\InvalidArgumentException
      */
     public function toString($config)

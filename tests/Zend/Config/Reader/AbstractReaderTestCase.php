@@ -21,9 +21,9 @@
 
 namespace ZendTest\Config\Reader;
 
-use \PHPUnit_Framework_TestCase as TestCase,
-    \Zend\Config\Reader\ReaderInterface,
-    \ReflectionClass;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Config\Reader\ReaderInterface;
+use ReflectionClass;
 
 /**
  * @category   Zend

@@ -103,6 +103,17 @@ class Element implements ElementInterface
     }
 
     /**
+     * Return true if a specific attribute is set
+     *
+     * @param string $key
+     * @return bool
+     */
+    public function hasAttribute($key)
+    {
+        return isset($this->attributes[$key]);
+    }
+
+    /**
      * Set many attributes at once
      *
      * Implementation will decide if this will overwrite or merge.

@@ -64,6 +64,14 @@ interface ElementInterface
     public function getAttribute($key);
 
     /**
+     * Return true if a specific attribute is set
+     *
+     * @param string $key
+     * @return bool
+     */
+    public function hasAttribute($key);
+
+    /**
      * Set many attributes at once
      *
      * Implementation will decide if this will overwrite or merge.

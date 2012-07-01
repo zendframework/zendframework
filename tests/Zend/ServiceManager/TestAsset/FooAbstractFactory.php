@@ -7,7 +7,7 @@ use Zend\ServiceManager\AbstractFactoryInterface,
 
 class FooAbstractFactory implements AbstractFactoryInterface
 {
-    public function canCreateServiceWithName($name)
+    public function canCreateServiceWithName($name, $requestedName)
     {
     }
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name)

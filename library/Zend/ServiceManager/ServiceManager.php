@@ -366,11 +366,11 @@ class ServiceManager implements ServiceLocatorInterface
             if (!$instance) {
                 try {
                     $instance = $this->create(array($cName, $rName));
-                } catch (Exception\ServiceNotFoundException $e) {
+                } catch (Exception\ServiceNotFoundException $selfException) {
                     if ($usePeeringServiceManagers && !$retrieveFromPeeringManagerFirst) {
                         $instance = $this->retrieveFromPeeringManager($name);
                     }
-                } catch (Exception\ServiceNotCreatedException $e) {
+                } catch (Exception\ServiceNotCreatedException $selfException) {
                     if ($usePeeringServiceManagers && !$retrieveFromPeeringManagerFirst) {
                         $instance = $this->retrieveFromPeeringManager($name);
                     }
@@ -462,7 +462,7 @@ class ServiceManager implements ServiceLocatorInterface
             list($cName, $rName) = $nameOrAlias;
         } else {
             $cName = $this->canonicalizeName($nameOrAlias);
-            $rName = $cName;
+            $rName = $nameOrAlias;
         }
 
         $has = (
@@ -717,7 +717,7 @@ class ServiceManager implements ServiceLocatorInterface
             // support factories as strings
             if (is_string($abstractFactory) && class_exists($abstractFactory, true)) {
                 $this->abstractFactories[$index] = $abstractFactory = new $abstractFactory;
-            } else {
+            } else if (!$abstractFactory instanceof AbstractFactoryInterface) {
                 throw new Exception\ServiceNotCreatedException(sprintf(
                     'While attempting to create %s%s an abstract factory could not produce a valid instance.',
                     $canonicalName,

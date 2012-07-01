@@ -60,6 +60,7 @@ class ModuleManagerFactory implements FactoryInterface
         $serviceListener = new ServiceListener();
 
         $serviceListener->addServiceManager($serviceLocator, 'service_manager', 'Zend\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfiguration');
+        $serviceListener->addServiceManager($serviceLocator->get('ControllerLoader'), 'controllers', 'Zend\ModuleManager\Feature\ControllerProviderInterface', 'getControllerConfiguration');
 
         $events        = $serviceLocator->get('EventManager');
         $events->attach($defaultListeners);

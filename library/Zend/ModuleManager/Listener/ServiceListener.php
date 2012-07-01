@@ -168,13 +168,13 @@ class ServiceListener implements ListenerAggregateInterface
 
             // Merge all of the things!
             $smConfig = array();
-            foreach ($this->serviceManagers[$key]['configuration'] as $config) {
-                if (isset($config['configuration_classes'])) {
-                    foreach ($config['configuration_classes'] as $class) {
-                        $config = ArrayUtils::merge($config, $this->serviceConfigurationToArray($class));
+            foreach ($this->serviceManagers[$key]['configuration'] as $configs) {
+                if (isset($configs['configuration_classes'])) {
+                    foreach ($configs['configuration_classes'] as $class) {
+                        $config = ArrayUtils::merge($configs, $this->serviceConfigurationToArray($class));
                     }
                 }
-                $smConfig = ArrayUtils::merge($smConfig, $config);
+                $smConfig = ArrayUtils::merge($smConfig, $configs);
             }
 
             $serviceConfig = new ServiceConfiguration($smConfig);

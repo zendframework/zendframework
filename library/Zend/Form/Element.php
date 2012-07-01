@@ -21,6 +21,7 @@
 namespace Zend\Form;
 
 use Traversable;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
  * @category   Zend
@@ -39,6 +40,7 @@ class Element implements ElementInterface
      * @var array Validation error messages
      */
     protected $messages = array();
+
 
     /**
      * Constructor

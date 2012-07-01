@@ -22,6 +22,7 @@ namespace Zend\Form;
 
 use Countable;
 use IteratorAggregate;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
  * @category   Zend
@@ -98,4 +99,42 @@ interface FieldsetInterface extends
      * @return void
      */
     public function populateValues($data);
+
+    /**
+     * Set the object used by the hydrator
+     *
+     * @param $object
+     * @return FieldsetInterface
+     */
+    public function setObject($object);
+
+    /**
+     * Get the object used by the hydrator
+     *
+     * @return mixed
+     */
+    public function getObject();
+
+    /**
+     * Set the hydrator to use when binding an object to the element
+     *
+     * @param HydratorInterface $hydrator
+     * @return mixed
+     */
+    public function setHydrator(HydratorInterface $hydrator);
+
+    /**
+     * Get the hydrator used when binding an object to the element
+     *
+     * @return null|Hydrator\HydratorInterface
+     */
+    public function getHydrator();
+
+    /**
+     * Bind values to the bound object
+     *
+     * @param array $values
+     * @return mixed
+     */
+    public function bindValues(array $values = array());
 }

@@ -22,6 +22,7 @@ namespace Zend\Form;
 
 use IteratorAggregate;
 use Traversable;
+use Zend\Form\Exception;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Stdlib\ArrayUtils;
@@ -59,6 +60,13 @@ class BaseForm extends Fieldset implements FormInterface
     protected $bindOnValidate = self::BIND_ON_VALIDATE;
 
     /**
+     * Base fieldset to use for hydrating (if none specified, directly hydrate elements)
+     *
+     * @var FieldsetInterface
+     */
+    protected $baseFieldset;
+
+    /**
      * Data being validated
      * 
      * @var null|array|Traversable
@@ -85,22 +93,8 @@ class BaseForm extends Fieldset implements FormInterface
     protected $isValid = false;
 
     /**
-     * Hydrator to use with bound object
-     * 
-     * @var Hydrator\HydratorInterface
-     */
-    protected $hydrator;
-
-    /**
-     * The object bound to this form, if any
-     * 
-     * @var null|object
-     */
-    protected $object;
-
-    /**
      * Validation group, if any
-     * 
+     *
      * @var null|array
      */
     protected $validationGroup;
@@ -137,9 +131,12 @@ class BaseForm extends Fieldset implements FormInterface
      * Bind an object to the form
      *
      * Ensures the object is populated with validated values.
-     * 
-     * @param  object $object 
-     * @return void
+     *
+     * @param $object
+     * @param string $baseFieldset
+     * @param int $flags
+     * @return mixed|void
+     * @throws Exception\InvalidArgumentException
      */
     public function bind($object, $flags = FormInterface::VALUES_NORMALIZED)
     {
@@ -161,6 +158,10 @@ class BaseForm extends Fieldset implements FormInterface
             ));
         }
 
+        if ($this->baseFieldset !== null) {
+            $this->baseFieldset->setObject($object);
+        }
+
         $this->bindAs = $flags;
         $this->object = $object;
         $this->extract();
@@ -168,10 +169,11 @@ class BaseForm extends Fieldset implements FormInterface
 
     /**
      * Bind values to the bound object
-     * 
-     * @return void
+     *
+     * @param array $values
+     * @return mixed
      */
-    public function bindValues()
+    public function bindValues(array $values = array())
     {
         if (!is_object($this->object)) {
             return;
@@ -180,8 +182,7 @@ class BaseForm extends Fieldset implements FormInterface
             return;
         }
 
-        $hydrator = $this->getHydrator();
-        $filter   = $this->getInputFilter();
+        $filter = $this->getInputFilter();
 
         switch ($this->bindAs) {
             case FormInterface::VALUES_RAW:
@@ -192,14 +193,16 @@ class BaseForm extends Fieldset implements FormInterface
                 $data = $filter->getValues();
                 break;
         }
-        $this->object = $hydrator->hydrate($data, $this->object);
+
+        $this->object = parent::bindValues($data);
     }
 
     /**
      * Set flag indicating whether or not to bind values on successful validation
-     * 
-     * @param  int $bindOnValidateFlag 
-     * @return BaseForm
+     *
+     * @param int $bindOnValidateFlag
+     * @return void|BaseForm
+     * @throws Exception\InvalidArgumentException
      */
     public function setBindOnValidate($bindOnValidateFlag)
     {
@@ -228,38 +231,35 @@ class BaseForm extends Fieldset implements FormInterface
     }
 
     /**
-     * Set the hydrator to use when binding an object to the form
-     * 
-     * @param  Hydrator\HydratorInterface $hydrator 
+     * Set the base fieldset to use when hydrating
+     *
+     * @param FieldsetInterface $baseFieldset
      * @return BaseForm
+     * @throws Exception\InvalidArgumentException
      */
-    public function setHydrator(Hydrator\HydratorInterface $hydrator)
+    public function setBaseFieldset(FieldsetInterface $baseFieldset)
     {
-        $this->hydrator = $hydrator;
+        $this->baseFieldset = $baseFieldset;
         return $this;
     }
 
     /**
-     * Get the hydrator used when binding an object to the form
+     * Get the base fieldset to use when hydrating
      *
-     * Will lazy-load Hydrator\ArraySerializable if none is present.
-     * 
-     * @return null|Hydrator\HydratorInterface
+     * @return FieldsetInterface
      */
-    public function getHydrator()
+    public function getBaseFieldset()
     {
-        if (!$this->hydrator instanceof Hydrator\HydratorInterface) {
-            $this->setHydrator(new Hydrator\ArraySerializable());
-        }
-        return $this->hydrator;
+        return $this->baseFieldset;
     }
 
     /**
      * Validate the form
      *
      * Typically, will proxy to the composed input filter.
-     * 
+     *
      * @return bool
+     * @throws Exception\DomainException
      */
     public function isValid()
     {
@@ -347,6 +347,21 @@ class BaseForm extends Fieldset implements FormInterface
         }
 
         return $filter->getValues();
+    }
+
+    /**
+     * Recursively populate values of attached elements and fieldsets
+     *
+     * @param  array|Traversable $data
+     * @return void
+     */
+    public function populateValues($data)
+    {
+        if ($this->baseFieldset !== null) {
+            $this->baseFieldset->populateValues($data);
+        } else {
+            parent::populateValues($data);
+        }
     }
 
     /**

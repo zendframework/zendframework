@@ -117,6 +117,11 @@ class Form extends BaseForm implements FormFactoryAwareInterface
             $factory = $this->getFormFactory();
             $elementOrFieldset = $factory->create($elementOrFieldset);
         }
+
+        if ($elementOrFieldset instanceof Fieldset && $elementOrFieldset->useAsBaseFieldset()) {
+            $this->baseFieldset = $elementOrFieldset;
+        }
+
         return parent::add($elementOrFieldset, $flags);
     }
 

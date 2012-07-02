@@ -779,13 +779,18 @@ class ServiceManager implements ServiceLocatorInterface
                     ($requestedName ? '(alias: ' . $requestedName . ')' : '')
                 ));
             }
-            $this->pendingAbstractFactoryRequests[get_class($abstractFactory)] = $requestedName;
-            $instance = $this->createServiceViaCallback(
-                array($abstractFactory, 'createServiceWithName'),
-                $canonicalName,
-                $requestedName
-            );
-            unset($this->pendingAbstractFactoryRequests[get_class($abstractFactory)]);
+            try {
+                $this->pendingAbstractFactoryRequests[get_class($abstractFactory)] = $requestedName;
+                $instance = $this->createServiceViaCallback(
+                    array($abstractFactory, 'createServiceWithName'),
+                    $canonicalName,
+                    $requestedName
+                );
+                unset($this->pendingAbstractFactoryRequests[get_class($abstractFactory)]);
+            } catch (\Exception $e) {
+                unset($this->pendingAbstractFactoryRequests[get_class($abstractFactory)]);
+                throw $e;
+            }
             if (is_object($instance)) {
                 break;
             }

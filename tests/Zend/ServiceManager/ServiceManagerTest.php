@@ -398,19 +398,6 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $foo);
     }
 
-    public function testCanUseStringAbstractFactoryClassName()
-    {
-        $config = new Configuration(array(
-            'abstract_factories' => array(
-                'ZendTest\ServiceManager\TestAsset\FooAbstractFactory',
-            ),
-        ));
-        $serviceManager = new ServiceManager($config);
-        $serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\FooFactory');
-        $foo = $serviceManager->get('unknownObject');
-        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $foo);
-    }
-
     public function testPeeringService()
     {
         $di = new Di();
@@ -419,21 +406,6 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $sm = $this->serviceManager->createScopedServiceManager(ServiceManager::SCOPE_PARENT);
         $sm->setFactory('di', new DiFactory());
         $bar = $sm->get('ZendTest\ServiceManager\TestAsset\Bar', true);
-        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $bar);
-    }
-
-    public function testPeeringServiceFallbackOnCreateFailure()
-    {
-        $factory = function ($sm) {
-            return new TestAsset\Bar();
-        };
-        $serviceManager = new ServiceManager();
-        $serviceManager->setFactory('ZendTest\ServiceManager\TestAsset\Bar', $factory);
-        $sm = $serviceManager->createScopedServiceManager(ServiceManager::SCOPE_CHILD);
-        $di = new Di();
-        $di->instanceManager()->setParameters('ZendTest\ServiceManager\TestAsset\Bar', array('foo' => array('a')));
-        $sm->addAbstractFactory(new DiAbstractServiceFactory($di));
-        $bar = $serviceManager->get('ZendTest\ServiceManager\TestAsset\Bar');
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $bar);
     }
 
@@ -450,12 +422,14 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $bar);
     }
 
-    /**
-     * @expectedException TestAsset\FooException
-     */
     public function testExceptionThrowingFactory()
     {
         $this->serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\ExceptionThrowingFactory');
-        $this->serviceManager->get('foo');
+        try {
+            $this->serviceManager->get('foo');
+            $this->fail("No exception thrown");
+        } catch (Exception\ServiceNotCreatedException $e) {
+            $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\FooException', $e->getPrevious());
+        }
     }
 }

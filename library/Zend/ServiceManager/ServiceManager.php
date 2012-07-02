@@ -364,16 +364,10 @@ class ServiceManager implements ServiceLocatorInterface
                 $instance = $this->retrieveFromPeeringManager($name);
             }
             if (!$instance) {
-                try {
+                if ($this->canCreate(array($cName, $rName))) {
                     $instance = $this->create(array($cName, $rName));
-                } catch (Exception\ServiceNotFoundException $selfException) {
-                    if ($usePeeringServiceManagers && !$retrieveFromPeeringManagerFirst) {
-                        $instance = $this->retrieveFromPeeringManager($name);
-                    }
-                } catch (Exception\ServiceNotCreatedException $selfException) {
-                    if ($usePeeringServiceManagers && !$retrieveFromPeeringManagerFirst) {
-                        $instance = $this->retrieveFromPeeringManager($name);
-                    }
+                } else if ($usePeeringServiceManagers && !$retrieveFromPeeringManagerFirst) {
+                    $instance = $this->retrieveFromPeeringManager($name);
                 }
             }
         }
@@ -427,7 +421,7 @@ class ServiceManager implements ServiceLocatorInterface
             $instance = $this->createFromInvokable($cName, $rName);
         }
 
-        if (!$instance && !empty($this->abstractFactories)) {
+        if (!$instance && $this->canCreateFromAbstractFactory($cName, $rName)) {
             $instance = $this->createFromAbstractFactory($cName, $rName);
         }
 
@@ -453,17 +447,22 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
-     * @param $nameOrAlias
+     * Determine if we can create an instance.
+     * @param $name
      * @return bool
      */
-    public function has($nameOrAlias, $usePeeringServiceManagers = true)
+    public function canCreate($name)
     {
-        if (is_array($nameOrAlias)) {
-            list($cName, $rName) = $nameOrAlias;
+        $instance = false;
+        $rName    = null;
+
+        if (is_array($name)) {
+            list($cName, $rName) = $name;
         } else {
-            $cName = $this->canonicalizeName($nameOrAlias);
-            $rName = $nameOrAlias;
+            $cName = $name;
         }
+
+        $cName = $this->canonicalizeName($cName);
 
         $has = (
             isset($this->invokableClasses[$cName])
@@ -476,6 +475,58 @@ class ServiceManager implements ServiceLocatorInterface
             return true;
         }
 
+        if (isset($this->factories[$cName])) {
+            return true;
+        }
+
+        if (isset($this->invokableClasses[$cName])) {
+            return true;
+        }
+
+        if ($this->canCreateFromAbstractFactory($cName, $rName)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $nameOrAlias
+     * @return bool
+     */
+    public function has($nameOrAlias, $usePeeringServiceManagers = true)
+    {
+        if (is_array($nameOrAlias)) {
+            list($cName, $rName) = $nameOrAlias;
+        } else {
+            $cName = $this->canonicalizeName($nameOrAlias);
+            $rName = $nameOrAlias;
+        }
+
+        if ($this->canCreate(array($cName, $rName))) {
+            return true;
+        }
+
+        if ($usePeeringServiceManagers) {
+            foreach ($this->peeringServiceManagers as $peeringServiceManager) {
+                if ($peeringServiceManager->has($rName)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine if we can create an instance from an abstract factory.
+     *
+     * @param  string $cName
+     * @param  string $rName
+     * @return bool
+     */
+    public function canCreateFromAbstractFactory($cName, $rName)
+    {
         // check abstract factories
         foreach ($this->abstractFactories as $index => $abstractFactory) {
             // Support string abstract factory class names
@@ -487,15 +538,6 @@ class ServiceManager implements ServiceLocatorInterface
                 return true;
             }
         }
-
-        if ($usePeeringServiceManagers) {
-            foreach ($this->peeringServiceManagers as $peeringServiceManager) {
-                if ($peeringServiceManager->has($rName)) {
-                    return true;
-                }
-            }
-        }
-
         return false;
     }
 

@@ -40,11 +40,11 @@ class Element implements ElementInterface
      */
     protected $messages = array();
 
+
     /**
      * Constructor
-     * 
-     * @param  null|string|int $name Optional name for the element
-     * @return void
+     *
+     * @param null|string|int $name Optional name for the element
      */
     public function __construct($name = null)
     {
@@ -56,8 +56,8 @@ class Element implements ElementInterface
     /**
      * Set value for name
      *
-     * @param  string|int name
-     * @return Element
+     * @param  string $name
+     * @return Element|ElementInterface
      */
     public function setName($name)
     {
@@ -77,10 +77,10 @@ class Element implements ElementInterface
 
     /**
      * Set a single element attribute
-     * 
-     * @param  string $key 
-     * @param  mixed $value 
-     * @return Element
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     * @return Element|ElementInterface
      */
     public function setAttribute($key, $value)
     {
@@ -90,9 +90,9 @@ class Element implements ElementInterface
 
     /**
      * Retrieve a single element attribute
-     * 
-     * @param  string $optionalKey 
-     * @return mixed
+     *
+     * @param  $key
+     * @return mixed|null
      */
     public function getAttribute($key)
     {
@@ -103,12 +103,24 @@ class Element implements ElementInterface
     }
 
     /**
+     * Does the element has a specific attribute ?
+     *
+     * @param  string $key
+     * @return bool
+     */
+    public function hasAttribute($key)
+    {
+        return array_key_exists($key, $this->attributes);
+    }
+
+    /**
      * Set many attributes at once
      *
      * Implementation will decide if this will overwrite or merge.
-     * 
-     * @param  array|Traversable $arrayOrTraversable 
-     * @return Element
+     *
+     * @param  array|Traversable $arrayOrTraversable
+     * @return Element|ElementInterface
+     * @throws Exception\InvalidArgumentException
      */
     public function setAttributes($arrayOrTraversable)
     {
@@ -127,8 +139,8 @@ class Element implements ElementInterface
 
     /**
      * Retrieve all attributes at once
-     * 
-     * @return array
+     *
+     * @return array|Traversable
      */
     public function getAttributes()
     {
@@ -149,7 +161,8 @@ class Element implements ElementInterface
      * Set a list of messages to report when validation fails
      *
      * @param  array|Traversable $messages
-     * @return ElementInterface
+     * @return Element|ElementInterface
+     * @throws Exception\InvalidArgumentException
      */
     public function setMessages($messages)
     {
@@ -166,7 +179,7 @@ class Element implements ElementInterface
     }
 
     /**
-     * Get validation error messages, if any
+     * Get validation error messages, if any.
      *
      * Returns a list of validation failure messages, if any.
      * 

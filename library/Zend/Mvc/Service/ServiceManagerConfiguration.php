@@ -38,7 +38,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
 {
     /**
      * Services that can be instantiated without factories
-     * 
+     *
      * @var array
      */
     protected $services = array(
@@ -52,7 +52,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
 
     /**
      * Service factories
-     * 
+     *
      * @var array
      */
     protected $factories = array(
@@ -64,6 +64,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
         'EventManager'            => 'Zend\Mvc\Service\EventManagerFactory',
         'ModuleManager'           => 'Zend\Mvc\Service\ModuleManagerFactory',
         'Router'                  => 'Zend\Mvc\Service\RouterFactory',
+        'ViewHelperManager'       => 'Zend\Mvc\Service\ViewHelperManagerFactory',
         'ViewFeedRenderer'        => 'Zend\Mvc\Service\ViewFeedRendererFactory',
         'ViewFeedStrategy'        => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
         'ViewJsonRenderer'        => 'Zend\Mvc\Service\ViewJsonRendererFactory',
@@ -72,14 +73,14 @@ class ServiceManagerConfiguration implements ConfigurationInterface
 
     /**
      * Abstract factories
-     * 
+     *
      * @var array
      */
     protected $abstractFactories = array();
 
     /**
      * Aliases
-     * 
+     *
      * @var array
      */
     protected $aliases = array(
@@ -97,7 +98,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      *
      * Services are shared by default; this is primarily to indicate services
      * that should NOT be shared
-     * 
+     *
      * @var array
      */
     protected $shared = array(
@@ -108,8 +109,8 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * Constructor
      *
      * Merges internal arrays with those passed via configuration
-     * 
-     * @param  array $configuration 
+     *
+     * @param  array $configuration
      */
     public function __construct(array $configuration = array())
     {
@@ -143,7 +144,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * service manager, also adds an initializer to inject ServiceManagerAware
      * classes with the service manager.
      *
-     * @param  ServiceManager $serviceManager 
+     * @param  ServiceManager $serviceManager
      * @return void
      */
     public function configureServiceManager(ServiceManager $serviceManager)

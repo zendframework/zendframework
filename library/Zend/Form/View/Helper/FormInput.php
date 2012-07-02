@@ -112,7 +112,7 @@ class FormInput extends AbstractHelper
     public function render(ElementInterface $element)
     {
         $name   = $element->getName();
-        if (empty($name)) {
+        if (strlen($name) === 0) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has an assigned name; none discovered',
                 __METHOD__
@@ -136,7 +136,7 @@ class FormInput extends AbstractHelper
      * Proxies to {@link render()}.
      * 
      * @param  ElementInterface|null $element 
-     * @return string
+     * @return string|FormInput
      */
     public function __invoke(ElementInterface $element = null)
     {

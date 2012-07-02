@@ -41,7 +41,7 @@ abstract class AbstractPluginManager extends ServiceManager
 {
     /**
      * Allow overriding by default
-     * 
+     *
      * @var bool
      */
     protected $allowOverride   = true;
@@ -63,14 +63,20 @@ abstract class AbstractPluginManager extends ServiceManager
      *
      * Add a default initializer to ensure the plugin is valid after instance
      * creation.
-     * 
-     * @param  null|ConfigurationInterface $configuration 
+     *
+     * @param  null|ConfigurationInterface $configuration
      * @return void
      */
     public function __construct(ConfigurationInterface $configuration = null)
     {
         parent::__construct($configuration);
         $this->addInitializer(array($this, 'validatePlugin'), true);
+        $self = $this;
+        $this->addInitializer(function ($instance) use ($self) {
+            if ($instance instanceof ServiceManagerAwareInterface) {
+                $instance->setServiceManager($self);
+            }
+        });
     }
 
     /**
@@ -78,8 +84,8 @@ abstract class AbstractPluginManager extends ServiceManager
      *
      * Checks that the filter loaded is either a valid callback or an instance
      * of FilterInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */
@@ -91,10 +97,10 @@ abstract class AbstractPluginManager extends ServiceManager
      * Allows passing an array of options to use when creating the instance.
      * createFromInvokable() will use these and pass them to the instance
      * constructor if not null and a non-empty array.
-     * 
-     * @param  string $name 
-     * @param  array $options 
-     * @param  bool $usePeeringServiceManagers 
+     *
+     * @param  string $name
+     * @param  array $options
+     * @param  bool $usePeeringServiceManagers
      * @return object
      */
     public function get($name, $options = array(), $usePeeringServiceManagers = true)
@@ -115,7 +121,7 @@ abstract class AbstractPluginManager extends ServiceManager
      *
      * Validates that the service object via validatePlugin() prior to
      * attempting to register it.
-     * 
+     *
      * @param  string $name
      * @param  mixed $service
      * @param  bool $shared
@@ -134,11 +140,11 @@ abstract class AbstractPluginManager extends ServiceManager
     /**
      * Attempt to create an instance via an invokable class
      *
-     * Overrides parent implementation by passing $creationOptions to the 
+     * Overrides parent implementation by passing $creationOptions to the
      * constructor, if non-null.
-     * 
-     * @param  string $canonicalName 
-     * @param  string $requestedName 
+     *
+     * @param  string $canonicalName
+     * @param  string $requestedName
      * @return null|\stdClass
      * @throws Exception\ServiceNotCreatedException If resolved class does not exist
      */
@@ -155,7 +161,7 @@ abstract class AbstractPluginManager extends ServiceManager
             ));
         }
 
-        if (null === $this->creationOptions 
+        if (null === $this->creationOptions
             || (is_array($this->creationOptions) && empty($this->creationOptions))
         ) {
             $instance = new $invokable();
@@ -169,11 +175,11 @@ abstract class AbstractPluginManager extends ServiceManager
     /**
      * Determine if a class implements a given interface
      *
-     * For PHP versions >= 5.3.7, uses is_subclass_of; otherwise, uses 
+     * For PHP versions >= 5.3.7, uses is_subclass_of; otherwise, uses
      * reflection to determine the interfaces implemented.
-     * 
-     * @param  string $class 
-     * @param  string $type 
+     *
+     * @param  string $class
+     * @param  string $type
      * @return bool
      */
     protected function isSubclassOf($class, $type)

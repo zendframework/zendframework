@@ -333,11 +333,11 @@ class Smtp implements TransportInterface
     protected function lazyLoadConnection()
     {
         // Check if authentication is required and determine required class
-        $options    = $this->getOptions();
-        $host       = $options->getHost();
-        $port       = $options->getPort();
-        $config     = $options->getConnectionConfig();
-        $connection = $this->plugin($options->getConnectionClass(), array($host, $port, $config));
+        $options        = $this->getOptions();
+        $config         = $options->getConnectionConfig();
+        $config['host'] = $options->getHost();
+        $config['port'] = $options->getPort();
+        $connection = $this->plugin($options->getConnectionClass(), $config);
         $this->connection = $connection;
         $this->connection->connect();
         $this->connection->helo($options->getName());

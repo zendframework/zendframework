@@ -44,6 +44,9 @@ class HelperPluginManager extends AbstractPluginManager
      */
     protected $invokableClasses = array(
         // basepath, doctype, and url are set up as factories in the ViewHelperManagerFactory
+        'doctype'             => 'Zend\View\Helper\Doctype',
+        'basepath'            => 'Zend\View\Helper\BasePath',
+        'url'                 => 'Zend\View\Helper\Url',
         'currency'            => 'Zend\View\Helper\Currency',
         'cycle'               => 'Zend\View\Helper\Cycle',
         'declarevars'         => 'Zend\View\Helper\DeclareVars',

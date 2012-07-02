@@ -405,12 +405,12 @@ class ServiceManager implements ServiceLocatorInterface
 
         $cName = $this->canonicalizeName($cName);
 
-        if (isset($this->invokableClasses[$cName])) {
-            $instance = $this->createFromInvokable($cName, $rName);
+        if (isset($this->factories[$cName])) {
+            $instance = $this->createFromFactory($cName, $rName);
         }
 
-        if (!$instance && isset($this->factories[$cName])) {
-            $instance = $this->createFromFactory($cName, $rName);
+        if (!$instance && isset($this->invokableClasses[$cName])) {
+            $instance = $this->createFromInvokable($cName, $rName);
         }
 
         if (!$instance && !empty($this->abstractFactories)) {

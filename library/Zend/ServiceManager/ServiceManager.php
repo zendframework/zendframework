@@ -483,7 +483,7 @@ class ServiceManager implements ServiceLocatorInterface
                 $this->abstractFactory[$index] = $abstractFactory = new $abstractFactory();
             }
 
-            if ($abstractFactory->canCreateServiceWithName($cName, $rName)) {
+            if ($abstractFactory->canCreateServiceWithName($this, $cName, $rName)) {
                 return true;
             }
         }

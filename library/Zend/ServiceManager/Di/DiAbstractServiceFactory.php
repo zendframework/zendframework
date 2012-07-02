@@ -27,7 +27,7 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
     /**
      * {@inheritDoc}
      */
-    public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $serviceName, $requestedName = null)
+    public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $serviceName, $requestedName)
     {
         $this->serviceLocator = $serviceLocator;
         if ($requestedName) {
@@ -41,7 +41,7 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
     /**
      * {@inheritDoc}
      */
-    public function canCreateServiceWithName($name, $requestedName)
+    public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         return $this->instanceManager->hasSharedInstance($requestedName)
             || $this->instanceManager->hasAlias($requestedName)

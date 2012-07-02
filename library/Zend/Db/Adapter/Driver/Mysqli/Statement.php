@@ -10,9 +10,9 @@
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\Exception,
-    Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend
@@ -61,6 +61,9 @@ class Statement implements StatementInterface
      */
     protected $bufferResults = false;
 
+    /**
+     * @param  bool $bufferResults 
+     */
     public function __construct($bufferResults = false)
     {
         $this->bufferResults = (bool) $bufferResults;

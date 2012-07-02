@@ -117,7 +117,7 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
             throw new Exception\RuntimeException('You must provide a search separator for this filter to work.');
         }
 
-        $this->setMatchPattern('#' . preg_quote($this->_searchSeparator, '#') . '#');
+        $this->setPattern('#' . preg_quote($this->_searchSeparator, '#') . '#');
         $this->setReplacement($this->_replacementSeparator);
         return parent::filter($value);
     }

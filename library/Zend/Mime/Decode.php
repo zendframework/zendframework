@@ -138,7 +138,7 @@ class Decode
             @list($headers, $body) = @preg_split("%([\r\n]+)\\1%U", $message, 2);
         }
 
-        $headers = iconv_mime_decode_headers($headers, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
+        $headers = iconv_mime_decode_headers($headers, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
 
         if ($headers === false) {
             // an error occurs during the decoding
@@ -237,6 +237,6 @@ class Decode
      */
     public static function decodeQuotedPrintable($string)
     {
-        return iconv_mime_decode($string, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
+        return iconv_mime_decode($string, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
     }
 }

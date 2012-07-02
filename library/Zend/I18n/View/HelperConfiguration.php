@@ -33,7 +33,7 @@ use Zend\ServiceManager\ServiceManager;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HelperLoader implements ConfigurationInterface
+class HelperConfiguration implements ConfigurationInterface
 {
     /**
      * @var array Pre-aliased view helpers

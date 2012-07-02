@@ -56,31 +56,35 @@ class Gettext implements LoaderInterface
      * @see    LoaderInterface::load()
      * @param  string $filename
      * @param  string $locale
-     * @return TextDomain|null
+     * @return TextDomain
+     * @throws Exception\InvalidArgumentException
      */
     public function load($filename, $locale)
     {
-        $textDomain = new TextDomain();
-        $this->file = @fopen($filename, 'rb');
-
-        if (!$this->file) {
-            throw new Exception\InvalidArgumentException(
-                sprintf('Could not open file %s for reading', $filename)
-            );
+        if (!is_file($filename) || !is_readable($filename)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Could not open file %s for reading',
+                $filename
+            ));
         }
+
+        $textDomain = new TextDomain();
+
+        $this->file = @fopen($filename, 'rb');
 
         // Verify magic number
         $magic = fread($this->file, 4);
 
-        if ($magic === "\x95\x04\x12\xde") {
-            $this->littleEndian = true;
-        } elseif ($magic === "\xde\x12\x04\x95") {
+        if ($magic == "\x95\x04\x12\xde") {
             $this->littleEndian = false;
+        } elseif ($magic == "\xde\x12\x04\x95") {
+            $this->littleEndian = true;
         } else {
             fclose($this->file);
-            throw new Exception\InvalidArgumentException(
-                sprintf('%s is not a valid gettext file', $filename)
-            );
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s is not a valid gettext file',
+                $filename
+            ));
         }
 
         // Verify major revision (only 0 and 1 supported)
@@ -88,9 +92,10 @@ class Gettext implements LoaderInterface
 
         if ($majorRevision !== 0 && $majorRevision !== 1) {
             fclose($this->file);
-            throw new Exception\InvalidArgumentException(
-                sprintf('%s has an unknown major revision', $filename)
-            );
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s has an unknown major revision',
+                $filename
+            ));
         }
 
         // Gather main information
@@ -100,10 +105,10 @@ class Gettext implements LoaderInterface
 
         // Usually there follow size and offset of the hash table, but we have
         // no need for it, so we skip them.
-        fseek($originalStringTableOffset);
+        fseek($this->file, $originalStringTableOffset);
         $originalStringTable = $this->readIntegerList(2 * $numStrings);
 
-        fseek($translationStringTableOffset);
+        fseek($this->file, $translationStringTableOffset);
         $translationStringTable = $this->readIntegerList(2 * $numStrings);
 
         // Read in all translations
@@ -117,16 +122,16 @@ class Gettext implements LoaderInterface
 
             $originalString = array('');
             if ($originalStringSize > 0) {
-                fseek($originalStringOffset);
+                fseek($this->file, $originalStringOffset);
                 $originalString = explode("\0", fread($this->file, $originalStringSize));
             }
 
             if ($translationStringSize > 0) {
-                fseek($translationStringOffset);
+                fseek($this->file, $translationStringOffset);
                 $translationString = explode("\0", fread($this->file, $translationStringSize));
 
                 if (count($originalString) > 1 && count($translationString) > 1) {
-                    $textDomain[$original[0]] = $translationString;
+                    $textDomain[$originalString[0]] = $translationString;
 
                     array_shift($originalString);
 
@@ -134,22 +139,20 @@ class Gettext implements LoaderInterface
                         $textDomain[$string] = '';
                     }
                 } else {
-                    $textDomain[$original[0]] = $translationString[0];
+                    $textDomain[$originalString[0]] = $translationString[0];
                 }
             }
         }
 
         // Read header entries
         if (array_key_exists('', $textDomain)) {
-            $rawHeaders = explode("\n", $textDomain['']);
+            $rawHeaders = explode("\n", trim($textDomain['']));
 
             foreach ($rawHeaders as $rawHeader) {
-                list($header, $content) = explode(':', $rawHeader, 1);
+                list($header, $content) = explode(':', $rawHeader, 2);
 
                 if (trim(strtolower($header)) === 'plural-forms') {
-                    $textDomain->pluralRule(
-                        PluralRule::fromString($content)
-                    );
+                    $textDomain->setPluralRule(PluralRule::fromString($content));
                 }
             }
 

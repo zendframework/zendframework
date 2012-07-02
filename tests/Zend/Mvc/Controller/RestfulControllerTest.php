@@ -116,7 +116,7 @@ class RestfulControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $this->controller->getEventManager()->attach('dispatch', function($e) use ($response) {
+        $this->controller->getEventManager()->attach(MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, 10);
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -127,7 +127,7 @@ class RestfulControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $this->controller->getEventManager()->attach('dispatch', function($e) use ($response) {
+        $this->controller->getEventManager()->attach(MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, -10);
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -139,7 +139,7 @@ class RestfulControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = new SharedEventManager();
-        $events->attach('Zend\Stdlib\DispatchableInterface', 'dispatch', function($e) use ($response) {
+        $events->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, 10);
         $this->controller->getEventManager()->setSharedManager($events);
@@ -152,7 +152,7 @@ class RestfulControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = new SharedEventManager();
-        $events->attach('Zend\Mvc\Controller\AbstractRestfulController', 'dispatch', function($e) use ($response) {
+        $events->attach('Zend\Mvc\Controller\AbstractRestfulController', MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, 10);
         $this->controller->getEventManager()->setSharedManager($events);
@@ -165,7 +165,7 @@ class RestfulControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = new SharedEventManager();
-        $events->attach(get_class($this->controller), 'dispatch', function($e) use ($response) {
+        $events->attach(get_class($this->controller), MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, 10);
         $this->controller->getEventManager()->setSharedManager($events);

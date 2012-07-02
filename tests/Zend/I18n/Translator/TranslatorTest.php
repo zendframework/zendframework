@@ -6,13 +6,24 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Locale;
 use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TextDomain;
-use Zend\I18n\Translator\Translator\Loader\LoaderInterface;
 use ZendTest\I18n\Translator\TestAsset\Loader as TestLoader;
 
 class TranslatorTest extends TestCase
 {
-    protected $originalLocale;
+    /**
+     * @var Translator
+     */
     protected $translator;
+
+    /**
+     * @var string
+     */
+    protected $originalLocale;
+
+    /**
+     * @var string
+     */
+    protected $testFilesDir;
 
     public function setUp()
     {
@@ -20,11 +31,56 @@ class TranslatorTest extends TestCase
         $this->translator     = new Translator();
 
         Locale::setDefault('en_EN');
+
+        $this->testFilesDir = __DIR__ . '/_files';
     }
 
     public function tearDown()
     {
         Locale::setDefault($this->originalLocale);
+    }
+
+    public function testFactoryCreatesTranslator()
+    {
+        $translator = Translator::factory(array(
+            'locale' => 'de_DE',
+            'patterns' => array(
+                array(
+                    'type' => 'phparray',
+                    'base_dir' => $this->testFilesDir . '/testarray',
+                    'pattern' => 'translation-%s.php'
+                )
+            ),
+            'files' => array(
+                array(
+                    'type' => 'phparray',
+                    'filename' => $this->testFilesDir . '/translation_en.php',
+                )
+            )
+        ));
+
+        $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator);
+        $this->assertEquals('de_DE', $translator->getLocale());
+    }
+
+    public function testFactoryCreatesTranslatorWithCache()
+    {
+        $translator = Translator::factory(array(
+            'locale' => 'de_DE',
+            'patterns' => array(
+                array(
+                    'type' => 'phparray',
+                    'base_dir' => $this->testFilesDir . '/testarray',
+                    'pattern' => 'translation-%s.php'
+                )
+            ),
+            'cache' => array(
+                'adapter' => 'memory'
+            )
+        ));
+
+        $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator);
+        $this->assertInstanceOf('Zend\Cache\Storage\StorageInterface', $translator->getCache());
     }
 
     public function testDefaultLocale()

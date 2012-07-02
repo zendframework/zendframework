@@ -49,7 +49,7 @@ class Smtp implements TransportInterface
      * @var Protocol\Smtp
      */
     protected $connection;
-    
+
     /**
      * @var boolean
      */
@@ -87,7 +87,7 @@ class Smtp implements TransportInterface
 
     /**
      * Get options
-     * 
+     *
      * @return SmtpOptions
      */
     public function getOptions()
@@ -107,7 +107,7 @@ class Smtp implements TransportInterface
         $this->plugins = $plugins;
         return $this;
     }
-    
+
     /**
      * Get plugin manager for loading SMTP protocol connection
      *
@@ -123,11 +123,11 @@ class Smtp implements TransportInterface
 
     /**
      * Set the automatic disconnection when destruct
-     * 
+     *
      * @param  boolean $flag
      * @return Smtp
      */
-    public function setAutoDisconnect($flag) 
+    public function setAutoDisconnect($flag)
     {
         $this->autoDisconnect = (bool) $flag;
         return $this;
@@ -135,7 +135,7 @@ class Smtp implements TransportInterface
 
     /**
      * Get the automatic disconnection value
-     * 
+     *
      * @return boolean
      */
     public function getAutoDisconnect()
@@ -145,9 +145,9 @@ class Smtp implements TransportInterface
 
     /**
      * Return an SMTP connection
-     * 
-     * @param  string $name 
-     * @param  array|null $options 
+     *
+     * @param  string $name
+     * @param  array|null $options
      * @return Protocol\Smtp
      */
     public function plugin($name, array $options = null)
@@ -168,7 +168,7 @@ class Smtp implements TransportInterface
             }
             if ($this->autoDisconnect) {
                 $this->connection->disconnect();
-            }    
+            }
         }
     }
 
@@ -195,7 +195,7 @@ class Smtp implements TransportInterface
 
     /**
      * Disconnect the connection protocol instance
-     * 
+     *
      * @return void
      */
     public function disconnect()
@@ -266,7 +266,7 @@ class Smtp implements TransportInterface
             return $sender->getEmail();
         }
 
-        $from = $message->from();
+        $from = $message->getFrom();
         if (!count($from)) { // Per RFC 2822 3.6
             throw new Exception\RuntimeException(sprintf(
                 '%s transport expects either a Sender or at least one From address in the Message; none provided',
@@ -288,13 +288,13 @@ class Smtp implements TransportInterface
     protected function prepareRecipients(Message $message)
     {
         $recipients = array();
-        foreach ($message->to() as $address) {
+        foreach ($message->getTo() as $address) {
             $recipients[] = $address->getEmail();
         }
-        foreach ($message->cc() as $address) {
+        foreach ($message->getCc() as $address) {
             $recipients[] = $address->getEmail();
         }
-        foreach ($message->bcc() as $address) {
+        foreach ($message->getBcc() as $address) {
             $recipients[] = $address->getEmail();
         }
         $recipients = array_unique($recipients);
@@ -309,7 +309,7 @@ class Smtp implements TransportInterface
      */
     protected function prepareHeaders(Message $message)
     {
-        $headers = clone $message->headers();
+        $headers = clone $message->getHeaders();
         $headers->removeHeader('Bcc');
         return $headers->toString();
     }
@@ -327,17 +327,17 @@ class Smtp implements TransportInterface
 
     /**
      * Lazy load the connection, and pass it helo
-     * 
+     *
      * @return Protocol\Smtp
      */
     protected function lazyLoadConnection()
     {
         // Check if authentication is required and determine required class
-        $options    = $this->getOptions();
-        $host       = $options->getHost();
-        $port       = $options->getPort();
-        $config     = $options->getConnectionConfig();
-        $connection = $this->plugin($options->getConnectionClass(), array($host, $port, $config));
+        $options        = $this->getOptions();
+        $config         = $options->getConnectionConfig();
+        $config['host'] = $options->getHost();
+        $config['port'] = $options->getPort();
+        $connection = $this->plugin($options->getConnectionClass(), $config);
         $this->connection = $connection;
         $this->connection->connect();
         $this->connection->helo($options->getName());

@@ -150,7 +150,7 @@ class FormCheckbox extends FormInput
      * Proxies to {@link render()}.
      *
      * @param  ElementInterface $element
-     * @return string
+     * @return string|FormCheckbox
      */
     public function __invoke(ElementInterface $element = null)
     {

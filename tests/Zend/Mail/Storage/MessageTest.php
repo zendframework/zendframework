@@ -74,8 +74,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $message = new Message(array('file' => $this->_file));
 
-        $this->assertEquals($message->from, iconv('UTF-8', iconv_get_encoding('internal_encoding'),
-                                                                   '"Peter Müller" <peter-mueller@example.com>'));
+        $this->assertEquals('"Peter Müller" <peter-mueller@example.com>', $message->from);
     }
 
     public function testGetHeaderAsArray()
@@ -213,9 +212,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testDecodeString()
     {
         $is = Mime\Decode::decodeQuotedPrintable('=?UTF-8?Q?"Peter M=C3=BCller"?= <peter-mueller@example.com>');
-        $should = iconv('UTF-8', iconv_get_encoding('internal_encoding'),
-                        '"Peter Müller" <peter-mueller@example.com>');
-        $this->assertEquals($is, $should);
+        $this->assertEquals('"Peter Müller" <peter-mueller@example.com>', $is);
     }
 
     public function testSplitHeader()

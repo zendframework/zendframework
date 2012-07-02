@@ -178,7 +178,7 @@ class Part implements RecursiveIterator, Part\PartInterface
      *
      * @return int size
      */
-    public function getSize() 
+    public function getSize()
     {
         return strlen($this->getContent());
     }

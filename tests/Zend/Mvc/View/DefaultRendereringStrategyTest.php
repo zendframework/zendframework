@@ -75,7 +75,7 @@ class DefaultRenderingStrategyTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->strategy);
-        $listeners = $events->getListeners('render');
+        $listeners = $events->getListeners(MvcEvent::EVENT_RENDER);
 
         $expectedCallback = array($this->strategy, 'render');
         $expectedPriority = -10000;
@@ -96,10 +96,10 @@ class DefaultRenderingStrategyTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->strategy);
-        $this->assertEquals(1, count($events->getListeners('render')));
+        $this->assertEquals(1, count($events->getListeners(MvcEvent::EVENT_RENDER)));
 
         $events->detachAggregate($this->strategy);
-        $this->assertEquals(0, count($events->getListeners('render')));
+        $this->assertEquals(0, count($events->getListeners(MvcEvent::EVENT_RENDER)));
     }
 
     public function testWillRenderAlternateStrategyWhenSelected()

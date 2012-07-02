@@ -38,7 +38,7 @@ class Step extends AbstractValidator
      */
     protected $messageTemplates = array(
         self::INVALID => "Invalid value given. Scalar expected.",
-        self::NOT_STEP => "'%value%' is not a valid step."
+        self::NOT_STEP => "The input is not a valid step."
     );
 
     /**

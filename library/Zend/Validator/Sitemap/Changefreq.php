@@ -49,7 +49,7 @@ class Changefreq extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::NOT_VALID => "'%value%' is not a valid sitemap changefreq",
+        self::NOT_VALID => "The input is not a valid sitemap changefreq",
         self::INVALID   => "Invalid type given. String expected",
     );
 

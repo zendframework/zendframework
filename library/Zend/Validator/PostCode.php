@@ -41,9 +41,9 @@ class PostCode extends AbstractValidator
      */
     protected $messageTemplates = array(
         self::INVALID        => "Invalid type given. String or integer expected",
-        self::NO_MATCH       => "'%value%' does not appear to be a postal code",
-        self::SERVICE        => "'%value%' does not appear to be a postal code",
-        self::SERVICEFAILURE => "An exception has been raised while validating '%value%'",
+        self::NO_MATCH       => "The input does not appear to be a postal code",
+        self::SERVICE        => "The input does not appear to be a postal code",
+        self::SERVICEFAILURE => "An exception has been raised while validating the input.",
     );
 
     /**

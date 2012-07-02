@@ -83,7 +83,7 @@ class InjectViewModelListenerTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->listener);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
 
         $expectedCallback = array($this->listener, 'injectViewModel');
         $expectedPriority = -100;
@@ -99,7 +99,7 @@ class InjectViewModelListenerTest extends TestCase
         }
         $this->assertTrue($found, 'Listener not found');
 
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $found     = false;
         foreach ($listeners as $listener) {
             $callback = $listener->getCallback();
@@ -117,14 +117,14 @@ class InjectViewModelListenerTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->listener);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(1, count($listeners));
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $this->assertEquals(1, count($listeners));
         $events->detachAggregate($this->listener);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(0, count($listeners));
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $this->assertEquals(0, count($listeners));
     }
 }

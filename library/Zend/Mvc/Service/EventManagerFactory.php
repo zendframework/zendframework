@@ -22,7 +22,6 @@
 namespace Zend\Mvc\Service;
 
 use Zend\EventManager\EventManager;
-use Zend\EventManager\SharedEventManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -46,13 +45,8 @@ class EventManagerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        static $sharedEventManager = null;
-        if (!$sharedEventManager) {
-            $sharedEventManager = new SharedEventManager();
-        }
-
         $em = new EventManager();
-        $em->setSharedManager($sharedEventManager);
+        $em->setSharedManager($serviceLocator->get('SharedEventManager'));
         return $em;
     }
 }

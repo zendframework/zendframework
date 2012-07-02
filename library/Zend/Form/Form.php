@@ -35,44 +35,12 @@ use Zend\InputFilter\InputProviderInterface;
 class Form extends BaseForm implements FormFactoryAwareInterface
 {
     /**
-     * @var Factory
-     */
-    protected $factory;
-
-    /**
      * Whether or not to automatically scan for input filter defaults on
      * attached fieldsets and elements
      *
      * @var bool
      */
     protected $useInputFilterDefaults = true;
-
-    /**
-     * Compose a form factory to use when calling add() with a non-element/fieldset
-     *
-     * @param  Factory $factory
-     * @return Form
-     */
-    public function setFormFactory(Factory $factory)
-    {
-        $this->factory = $factory;
-        return $this;
-    }
-
-    /**
-     * Retrieve composed form factory
-     *
-     * Lazy-loads one if none present.
-     *
-     * @return Factory
-     */
-    public function getFormFactory()
-    {
-        if (null === $this->factory) {
-            $this->setFormFactory(new Factory());
-        }
-        return $this->factory;
-    }
 
     /**
      * Set flag indicating whether or not to scan elements and fieldsets for defaults
@@ -97,6 +65,7 @@ class Form extends BaseForm implements FormFactoryAwareInterface
     }
 
     /**
+<<<<<<< HEAD
      * Add an element or fieldset
      *
      * If $elementOrFieldset is an array or Traversable, passes the argument on
@@ -126,6 +95,8 @@ class Form extends BaseForm implements FormFactoryAwareInterface
     }
 
     /**
+=======
+>>>>>>> 67dcfe2d45df68074f68d00cb2b7a4263fa8bf9f
      * Ensures state is ready for use
      *
      * Marshalls the input filter, to ensure validation error messages are
@@ -174,7 +145,7 @@ class Form extends BaseForm implements FormFactoryAwareInterface
         $formFactory  = $this->getFormFactory();
         $inputFactory = $formFactory->getInputFilterFactory();
         foreach ($fieldset->getElements() as $element) {
-            if (!$element instanceof InputProviderInterface) {
+            if (!$element instanceof InputProviderInterface ) {
                 // only interested in the element if it provides input information
                 continue;
             }
@@ -193,6 +164,7 @@ class Form extends BaseForm implements FormFactoryAwareInterface
 
         foreach ($fieldset->getFieldsets() as $fieldset) {
             $name = $fieldset->getName();
+
             if (!$fieldset instanceof InputFilterProviderInterface) {
                 if (!$inputFilter->has($name)) {
                     // Add a new empty input filter if it does not exist, so that elements of nested fieldsets can be

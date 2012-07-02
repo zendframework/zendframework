@@ -66,7 +66,7 @@ class DispatchListener implements ListenerAggregateInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach('dispatch', array($this, 'onDispatch'));
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'onDispatch'));
     }
 
     /**
@@ -107,7 +107,7 @@ class DispatchListener implements ListenerAggregateInterface
                   ->setControllerClass('invalid controller class or alias: '.$controllerName)
                   ->setParam('exception', $exception);
 
-            $results = $events->trigger('dispatch.error', $e);
+            $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $e);
             $return = $results->last();
             if (! $return) {
                 $return = $e->getResult();
@@ -118,7 +118,7 @@ class DispatchListener implements ListenerAggregateInterface
             $e->setError($application::ERROR_EXCEPTION)
                   ->setController($controllerName)
                   ->setParam('exception', $exception);
-            $results = $events->trigger('dispatch.error', $e);
+            $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $e);
             $return = $results->last();
             if (! $return) {
                 $return = $e->getResult();
@@ -132,7 +132,7 @@ class DispatchListener implements ListenerAggregateInterface
                 ->setController($controllerName)
                 ->setControllerClass(get_class($controller));
 
-            $results = $events->trigger('dispatch.error', $e);
+            $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $e);
             $return = $results->last();
             if (! $return) {
                 $return = $e->getResult();
@@ -154,7 +154,7 @@ class DispatchListener implements ListenerAggregateInterface
                   ->setController($controllerName)
                   ->setControllerClass(get_class($controller))
                   ->setParam('exception', $ex);
-            $results = $events->trigger('dispatch.error', $e);
+            $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $e);
             $return = $results->last();
             if (! $return) {
                 $return = $e->getResult();

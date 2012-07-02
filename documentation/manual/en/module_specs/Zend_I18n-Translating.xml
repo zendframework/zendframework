@@ -188,7 +188,7 @@ $translator->translatePlural($singular, $plural, $number, $textDomain, $locale);
             time, but also guarantees an optimized loading procedure. To enable
             caching, simply pass a
             <classname>Zend\Cache\Storage\Adapter</classname> to the
-            <methodname>setCache()</method> method. To disable the cache, you
+            <methodname>setCache()</methodname> method. To disable the cache, you
             can just pass a null value to it.
         </para>
     </section>

@@ -270,11 +270,11 @@ class Connection implements ConnectionInterface
     /**
      * Get last generated id
      * 
+     * @param  null $name Ignored
      * @return integer 
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
         return $this->resource->insert_id;
     }
-
 }

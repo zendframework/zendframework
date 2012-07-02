@@ -51,6 +51,7 @@ class HelperConfiguration implements ConfigurationInterface
         'captcharecaptcha'       => 'Zend\Form\View\Helper\Captcha\ReCaptcha',
         'formcaptcharecaptcha'   => 'Zend\Form\View\Helper\Captcha\ReCaptcha',
         'formcheckbox'           => 'Zend\Form\View\Helper\FormCheckbox',
+        'formcollection'         => 'Zend\Form\View\Helper\FormCollection',
         'formcolor'              => 'Zend\Form\View\Helper\FormColor',
         'formdate'               => 'Zend\Form\View\Helper\FormDate',
         'formdatetime'           => 'Zend\Form\View\Helper\FormDateTime',

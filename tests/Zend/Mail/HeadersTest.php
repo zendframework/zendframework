@@ -114,7 +114,7 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($headers->has('foobar'));
         $this->assertTrue($headers->has('foo'));
         $this->assertTrue($headers->has('Foo'));
-        $this->assertSame($f, $headers->get('foo'));
+        $this->assertEquals('bar', $headers->get('foo')->getFieldValue());
     }
 
     public function testHeadersAggregatesHeaderObjects()
@@ -123,7 +123,7 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $headers = new Mail\Headers();
         $headers->addHeader($fakeHeader);
         $this->assertEquals(1, $headers->count());
-        $this->assertSame($fakeHeader, $headers->get('Fake'));
+        $this->assertEquals('bar', $headers->get('Fake')->getFieldValue());
     }
 
     public function testHeadersAggregatesHeaderThroughAddHeader()

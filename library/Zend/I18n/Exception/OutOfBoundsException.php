@@ -28,6 +28,6 @@ namespace Zend\I18n\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OutOfBoundsException extends \OutOfBoundsException implements 
+class OutOfBoundsException extends \OutOfBoundsException implements
     ExceptionInterface
 {}

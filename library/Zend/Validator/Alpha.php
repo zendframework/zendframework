@@ -55,8 +55,8 @@ class Alpha extends AbstractValidator
      */
     protected $messageTemplates = array(
         self::INVALID      => "Invalid type given. String expected",
-        self::NOT_ALPHA    => "'%value%' contains non alphabetic characters",
-        self::STRING_EMPTY => "'%value%' is an empty string"
+        self::NOT_ALPHA    => "The input contains non alphabetic characters",
+        self::STRING_EMPTY => "The input is an empty string"
     );
 
     /**

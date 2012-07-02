@@ -31,9 +31,9 @@ namespace Zend\ModuleManager\Feature;
 interface ServiceProviderInterface
 {
     /**
-     * Expected to return \Zend\ServiceManager\Configuration object or array to 
+     * Expected to return \Zend\ServiceManager\Configuration object or array to
      * seed such an object.
-     * 
+     *
      * @return array|\Zend\ServiceManager\Configuration
      */
     public function getServiceConfiguration();

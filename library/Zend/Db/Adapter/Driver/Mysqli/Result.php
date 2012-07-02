@@ -176,7 +176,7 @@ class Result implements \Iterator, ResultInterface
     protected function loadDataFromMysqliStatement()
     {
         $data = null;
-        // build the default reference based bind strutcure, if it does not already exist
+        // build the default reference based bind structure, if it does not already exist
         if ($this->statementBindValues['keys'] === null) {
             $this->statementBindValues['keys'] = array();
             $resultResource = $this->resource->result_metadata();
@@ -291,7 +291,7 @@ class Result implements \Iterator, ResultInterface
     public function count()
     {
         if ($this->isBuffered === false) {
-            throw new Exception\RuntimeException('Row count is not availabe in unbuffered result sets.');
+            throw new Exception\RuntimeException('Row count is not available in unbuffered result sets.');
         }
         return $this->resource->num_rows;
     }

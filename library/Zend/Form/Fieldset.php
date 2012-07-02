@@ -34,6 +34,11 @@ use Zend\Stdlib\Hydrator\HydratorInterface;
 class Fieldset extends Element implements FieldsetInterface
 {
     /**
+     * @var Factory
+     */
+    protected $factory;
+
+    /**
      * @var array
      */
     protected $byName    = array();
@@ -91,18 +96,54 @@ class Fieldset extends Element implements FieldsetInterface
     }
 
     /**
+     * Compose a form factory to use when calling add() with a non-element/fieldset
+     *
+     * @param  Factory $factory
+     * @return Form
+     */
+    public function setFormFactory(Factory $factory)
+    {
+        $this->factory = $factory;
+        return $this;
+    }
+
+    /**
+     * Retrieve composed form factory
+     *
+     * Lazy-loads one if none present.
+     *
+     * @return Factory
+     */
+    public function getFormFactory()
+    {
+        if (null === $this->factory) {
+            $this->setFormFactory(new Factory());
+        }
+
+        return $this->factory;
+    }
+
+    /**
      * Add an element or fieldset
      *
      * $flags could contain metadata such as the alias under which to register
      * the element or fieldset, order in which to prioritize it, etc.
      *
      * @todo   Should we detect if the element/fieldset name conflicts?
-     * @param  ElementInterface $elementOrFieldset
-     * @param  array $flags
-     * @return FieldsetInterface
+     * @param  array|ElementInterface $elementOrFieldset
+     * @param  array                  $flags
+     * @return Fieldset|FieldsetInterface
+     * @throws Exception\InvalidArgumentException
      */
     public function add($elementOrFieldset, array $flags = array())
     {
+        if (is_array($elementOrFieldset)
+            || ($elementOrFieldset instanceof Traversable && !$elementOrFieldset instanceof ElementInterface)
+        ) {
+            $factory = $this->getFormFactory();
+            $elementOrFieldset = $factory->create($elementOrFieldset);
+        }
+
         if (!$elementOrFieldset instanceof ElementInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s requires that $elementOrFieldset be an object implementing %s; received "%s"',
@@ -113,14 +154,16 @@ class Fieldset extends Element implements FieldsetInterface
         }
 
         $name = $elementOrFieldset->getName();
-        if (empty($name) && (!array_key_exists('name', $flags) || empty($flags['name']))) {
+        if ((null === $name || '' === $name) 
+            && (!array_key_exists('name', $flags) || $flags['name'] === '')
+        ) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s: element or fieldset provided is not named, and no name provided in flags',
                 __METHOD__
             ));
         }
 
-        if (array_key_exists('name', $flags) && !empty($flags['name'])) {
+        if (array_key_exists('name', $flags) && $flags['name'] !== '') {
             $name = $flags['name'];
 
             // Rename the element or fieldset to the specified alias
@@ -135,6 +178,10 @@ class Fieldset extends Element implements FieldsetInterface
         $this->byName[$name] = $elementOrFieldset;
 
         if ($elementOrFieldset instanceof FieldsetInterface) {
+            if ($elementOrFieldset instanceof Element\Collection) {
+                $elementOrFieldset->prepareCollection();
+            }
+
             $this->fieldsets[$name] = $elementOrFieldset;
             return $this;
         }
@@ -224,6 +271,7 @@ class Fieldset extends Element implements FieldsetInterface
      *
      * @param  array|Traversable $messages
      * @return FieldsetInterface
+     * @throws Exception\InvalidArgumentException
      */
     public function setMessages($messages)
     {
@@ -255,6 +303,7 @@ class Fieldset extends Element implements FieldsetInterface
      *
      * @param  null|string $elementName
      * @return array|Traversable
+     * @throws Exception\InvalidArgumentException
      */
     public function getMessages($elementName = null)
     {
@@ -308,6 +357,7 @@ class Fieldset extends Element implements FieldsetInterface
      *
      * @param  array|Traversable $data
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function populateValues($data)
     {
@@ -355,6 +405,7 @@ class Fieldset extends Element implements FieldsetInterface
     }
 
     /**
+<<<<<<< HEAD
      * Set the object used by the hydrator
      *
      * @param $object
@@ -447,5 +498,26 @@ class Fieldset extends Element implements FieldsetInterface
     public function useAsBaseFieldset()
     {
         return $this->useAsBaseFieldset;
+=======
+     * Make a deep clone of the object
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        $this->iterator = new PriorityQueue();
+
+        foreach ($this->byName as $key => $value) {
+            $value = clone $value;
+            $this->byName[$key] = $value;
+            $this->iterator->insert($value);
+
+            if ($value instanceof FieldsetInterface) {
+                $this->fieldsets[$key] = $value;
+            } elseif ($value instanceof ElementInterface) {
+                $this->elements[$key] = $value;
+            }
+        }
+>>>>>>> 67dcfe2d45df68074f68d00cb2b7a4263fa8bf9f
     }
 }

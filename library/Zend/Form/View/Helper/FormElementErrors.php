@@ -189,9 +189,10 @@ class FormElementErrors extends AbstractHelper
      */
     public function __invoke(ElementInterface $element = null, array $attributes = array())
     {
-        if ($element) {
-            return $this->render($element, $attributes);
+        if (!$element) {
+            return $this;
         }
-        return $this;
+
+        return $this->render($element, $attributes);
     }
 }

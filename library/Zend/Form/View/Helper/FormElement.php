@@ -61,6 +61,11 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
+        if ($element instanceof Element\Collection) {
+            $helper = $renderer->plugin('form_collection');
+            return $helper($element);
+        }
+
         $type    = $element->getAttribute('type');
         $options = $element->getAttribute('options');
         $captcha = $element->getAttribute('captcha');
@@ -106,7 +111,7 @@ class FormElement extends BaseAbstractHelper
      * Proxies to {@link render()}.
      * 
      * @param  ElementInterface|null $element 
-     * @return string
+     * @return string|FormElement
      */
     public function __invoke(ElementInterface $element = null)
     {

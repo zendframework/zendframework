@@ -63,7 +63,7 @@ class Iban extends AbstractValidator
      *
      * @var array
      */
-    protected $ibanregex = array(
+    protected static $ibanRegex = array(
         'AD' => '/^AD[0-9]{2}[0-9]{8}[A-Z0-9]{12}$/',
         'AT' => '/^AT[0-9]{2}[0-9]{5}[0-9]{11}$/',
         'BA' => '/^BA[0-9]{2}[0-9]{6}[0-9]{10}$/',
@@ -108,16 +108,12 @@ class Iban extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  null|string|Locale|array|Traversable $options OPTIONAL
+     * @param  array|Traversable $options OPTIONAL
      */
-    public function __construct($options = null)
+    public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
-        } elseif (!is_array($options)) {
-            $options = func_get_args();
-            $temp['locale'] = array_shift($options);
-            $options = $temp;
         }
 
         if (array_key_exists('locale', $options)) {
@@ -171,17 +167,17 @@ class Iban extends AbstractValidator
         } else {
             $region = Locale::getRegion($this->locale);
             if ('' === $region) {
-                throw new Exception\InvalidArgumentException("Invalid locale string given");
+                throw new Exception\InvalidArgumentException("Locale must contain a region");
             }
         }
 
-        if (!array_key_exists($region, $this->ibanregex)) {
+        if (!array_key_exists($region, self::$ibanRegex)) {
             $this->setValue($region);
             $this->error(self::NOTSUPPORTED);
             return false;
         }
 
-        if (!preg_match($this->ibanregex[$region], $value)) {
+        if (!preg_match(self::$ibanRegex[$region], $value)) {
             $this->error(self::FALSEFORMAT);
             return false;
         }

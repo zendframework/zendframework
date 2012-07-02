@@ -61,19 +61,19 @@ class IbanTest extends \PHPUnit_Framework_TestCase
         $validator->setLocale('de_DE');
         $this->assertEquals('de_DE', $validator->getLocale());
 
-        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Invalid locale string given');
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Locale must contain a region');
         $validator->setLocale('foobar')->isValid('AD1200012030200354100100');
     }
 
     public function testInstanceWithLocale()
     {
-        $validator = new IbanValidator('de_AT');
+        $validator = new IbanValidator(array('locale' => 'de_AT'));
         $this->assertTrue($validator->isValid('AT611904300234573201'));
     }
 
     public function testIbanNotSupported()
     {
-        $validator = new IbanValidator('en_US');
+        $validator = new IbanValidator(array('locale' => 'en_US'));
         $this->assertFalse($validator->isValid('AT611904300234573201'));
     }
 
@@ -82,7 +82,7 @@ class IbanTest extends \PHPUnit_Framework_TestCase
      */
     public function testIbanDetectionWithoutLocale()
     {
-        $validator = new IbanValidator(false);
+        $validator = new IbanValidator();
         $this->assertTrue($validator->isValid('AT611904300234573201'));
     }
 

@@ -45,7 +45,7 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->validator = new PostCodeValidator('de_AT');
+        $this->validator = new PostCodeValidator(array('locale' => 'de_AT'));
     }
 
     public function postCodesDataProvider()
@@ -91,7 +91,7 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingLocalesWithoutRegion()
     {
-        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Invalid locale string given');
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Locale must contain a region');
         $this->validator->setLocale('de')->isValid('1000');
     }
 

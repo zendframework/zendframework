@@ -252,6 +252,9 @@ class Adapter
             case 'sqlsrv':
                 $driver = new Driver\Sqlsrv\Sqlsrv($parameters);
                 break;
+            case 'pgsql':
+                $driver = new Driver\Pgsql\Pgsql($parameters);
+                break;
             case 'pdo':
             default:
                 if ($driverName == 'pdo' || strpos($driverName, 'pdo') === 0) {

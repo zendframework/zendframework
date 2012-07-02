@@ -353,10 +353,20 @@ class Connection implements ConnectionInterface
      * 
      * @return integer 
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
+        if ($name === null && $this->driverName == 'pgsql') {
+            // @todo create a feature that opts-into this behavior, using sql to find serial name
+            try {
+                $stmt = $this->resource->query('SELECT LASTVAL() as "lastvalue"');
+                return $stmt->fetchColumn(0);
+            } catch (\PDOException $e) {
+                return false;
+            }
+        }
+
         try {
-            return $this->resource->lastInsertId();
+            return $this->resource->lastInsertId($name);
         } catch (\Exception $e) {
             // do nothing
         }

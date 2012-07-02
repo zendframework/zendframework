@@ -112,18 +112,14 @@ class Part implements RecursiveIterator, Part\PartInterface
         }
 
         if (isset($params['raw'])) {
-            Mime\Decode::splitMessage($params['raw'], $headers, $this->_content);
-            $this->_headers = new Headers();
-            $this->_headers->addHeaders($headers);
+            Mime\Decode::splitMessage($params['raw'], $this->_headers, $this->_content);
         } elseif (isset($params['headers'])) {
             if (is_array($params['headers'])) {
                 $this->_headers = new Headers();
                 $this->_headers->addHeaders($params['headers']);
             } else {
                 if (empty($params['noToplines'])) {
-                    $this->_headers = new Headers();
-                    Mime\Decode::splitMessage($params['headers'], $headers, $this->_topLines);
-                    $this->_headers->addHeaders($headers);
+                    Mime\Decode::splitMessage($params['headers'], $this->_headers, $this->_topLines);
                 } else {
                     $this->_headers = Headers::fromString($params['headers']);
                 }

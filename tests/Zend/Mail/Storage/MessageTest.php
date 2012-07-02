@@ -243,14 +243,14 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $body   = 'body';
         $newlines = array("\r\n", "\n\r", "\n", "\r");
 
-        $decoded_body   = null; // "Declare" variable before first "read" usage to avoid IDEs warning
-        $decoded_header = null; // "Declare" variable before first "read" usage to avoid IDEs warning
+        $decoded_body    = null; // "Declare" variable before first "read" usage to avoid IDEs warning
+        $decoded_headers = null; // "Declare" variable before first "read" usage to avoid IDEs warning
 
         foreach ($newlines as $contentEOL) {
             foreach ($newlines as $decodeEOL) {
                 $content = $header . $contentEOL . $contentEOL . $body;
-                $decoded = Mime\Decode::splitMessage($content, $decoded_header, $decoded_body, $decodeEOL);
-                $this->assertEquals(array('test' => 'test'), $decoded_header);
+                Mime\Decode::splitMessage($content, $decoded_headers, $decoded_body, $decodeEOL);
+                $this->assertEquals(array('Test' => 'test'), $decoded_headers->toArray());
                 $this->assertEquals($body, $decoded_body);
             }
         }

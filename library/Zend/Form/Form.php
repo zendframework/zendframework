@@ -79,18 +79,13 @@ class Form extends BaseForm implements FormFactoryAwareInterface
      */
     public function add($elementOrFieldset, array $flags = array())
     {
-        if (is_array($elementOrFieldset)
-            || ($elementOrFieldset instanceof Traversable && !$elementOrFieldset instanceof ElementInterface)
-        ) {
-            $factory = $this->getFormFactory();
-            $elementOrFieldset = $factory->create($elementOrFieldset);
-        }
+        parent::add($elementOrFieldset, $flags);
 
         if ($elementOrFieldset instanceof Fieldset && $elementOrFieldset->useAsBaseFieldset()) {
             $this->baseFieldset = $elementOrFieldset;
         }
 
-        return parent::add($elementOrFieldset, $flags);
+        return $this;
     }
 
     /**

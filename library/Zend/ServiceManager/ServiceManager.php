@@ -419,12 +419,12 @@ class ServiceManager implements ServiceLocatorInterface
 
         $cName = $this->canonicalizeName($cName);
 
-        if (isset($this->invokableClasses[$cName])) {
-            $instance = $this->createFromInvokable($cName, $rName);
+        if (isset($this->factories[$cName])) {
+            $instance = $this->createFromFactory($cName, $rName);
         }
 
-        if (!$instance && isset($this->factories[$cName])) {
-            $instance = $this->createFromFactory($cName, $rName);
+        if (!$instance && isset($this->invokableClasses[$cName])) {
+            $instance = $this->createFromInvokable($cName, $rName);
         }
 
         if (!$instance && !empty($this->abstractFactories)) {
@@ -591,21 +591,22 @@ class ServiceManager implements ServiceLocatorInterface
     protected function createServiceViaCallback($callable, $cName, $rName)
     {
         static $circularDependencyResolver = array();
+        $depKey = spl_object_hash($this) . '-' . $cName;
 
-        if (isset($circularDependencyResolver[spl_object_hash($this) . '-' . $cName])) {
+        if (isset($circularDependencyResolver[$depKey])) {
             $circularDependencyResolver = array();
             throw new Exception\CircularDependencyFoundException('Circular dependency for LazyServiceLoader was found for instance ' . $rName);
         }
 
         try {
-            $circularDependencyResolver[spl_object_hash($this) . '-' . $cName] = true;
+            $circularDependencyResolver[$depKey] = true;
             $instance = call_user_func($callable, $this, $cName, $rName);
-            unset($circularDependencyResolver[spl_object_hash($this) . '-' . $cName]);
+            unset($circularDependencyResolver[$depKey]);
         } catch (Exception\ServiceNotFoundException $e) {
-            unset($circularDependencyResolver[spl_object_hash($this) . '-' . $cName]);
+            unset($circularDependencyResolver[$depKey]);
             throw $e;
         } catch (\Exception $e) {
-            unset($circularDependencyResolver[spl_object_hash($this) . '-' . $cName]);
+            unset($circularDependencyResolver[$depKey]);
             throw new Exception\ServiceNotCreatedException(
                 sprintf('Abstract factory raised an exception when creating "%s"; no instance returned', $rName),
                 $e->getCode(),

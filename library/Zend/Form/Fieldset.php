@@ -131,7 +131,9 @@ class Fieldset extends Element implements FieldsetInterface
         }
 
         $name = $elementOrFieldset->getName();
-        if ($name === '' && (!array_key_exists('name', $flags) || $flags['name'] === '')) {
+        if ((null === $name || '' === $name) 
+            && (!array_key_exists('name', $flags) || $flags['name'] === '')
+        ) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s: element or fieldset provided is not named, and no name provided in flags',
                 __METHOD__

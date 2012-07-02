@@ -39,6 +39,13 @@ use Zend\I18n\Exception;
 class DateFormat extends AbstractHelper
 {
     /**
+     * Locale to use instead of the default.
+     *
+     * @var string
+     */
+    protected $locale;
+
+    /**
      * Timezone to use.
      *
      * @var string
@@ -67,13 +74,37 @@ class DateFormat extends AbstractHelper
     }
 
     /**
-     * Get a new timezone.
+     * Get the timezone to use.
      *
      * @return string|null
      */
     public function getTimezone()
     {
         return $this->timezone;
+    }
+
+    /**
+     * Set locale to use instead of the default.
+     *
+     * @param string $locale
+     */
+    public function setlocale($locale)
+    {
+        $this->locale = (string) $locale;
+    }
+
+    /**
+     * Get the locale to use.
+     *
+     * @return string|null
+     */
+    public function getlocale()
+    {
+        if ($this->locale === null) {
+            $this->locale = Locale::getDefault();
+        }
+
+        return $this->locale;
     }
 
     /**
@@ -93,7 +124,7 @@ class DateFormat extends AbstractHelper
         $locale   = null
     ) {
         if ($locale === null) {
-            $locale = Locale::getDefault();
+            $locale = $this->getlocale();
         }
 
         $timezone    = $this->getTimezone();

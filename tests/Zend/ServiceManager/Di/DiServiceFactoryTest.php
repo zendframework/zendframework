@@ -64,19 +64,4 @@ class DiServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $foo = $this->diServiceFactory->createService($this->mockServiceLocator);
         $this->assertEquals($this->fooInstance, $foo);
     }
-
-    /**
-     * @covers Zend\ServiceManager\Di\DiServiceFactory::get
-     */
-    public function testWillNotCreateCircularReferences()
-    {
-        $sm = new ServiceManager;
-        $di = new Di;
-        $di->instanceManager()->addAlias('foo', 'stdClass');
-        $diFactory = new DiServiceFactory($di, 'Di', array(), DiServiceFactory::USE_SL_BEFORE_DI);
-        $abstractFactory = new DiAbstractServiceFactory($diFactory, DiAbstractServiceFactory::USE_SL_BEFORE_DI);
-        $sm->addAbstractFactory($abstractFactory);
-        $foo = $sm->get('foo');
-        $this->assertInstanceOf('stdClass', $foo);
-    }
 }

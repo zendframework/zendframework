@@ -275,6 +275,18 @@ abstract class AbstractSource implements MetadataInterface
         $info = $this->data['columns'][$schema][$table][$columnName];
 
         $column = new Object\ColumnObject($columnName, $table, $schema);
+        $props = array(
+            'ordinal_position', 'column_default', 'is_nullable',
+            'data_type', 'character_maximum_length', 'character_octet_length',
+            'numeric_precision', 'numeric_scale', 'numeric_unsigned',
+            'erratas'
+        );
+        foreach ($props as $prop) {
+            if (isset($info[$prop])) {
+                $column->{'set' . str_replace('_', '', $prop)}($info[$prop]);
+            }
+        }
+
         $column->setOrdinalPosition($info['ordinal_position']);
         $column->setColumnDefault($info['column_default']);
         $column->setIsNullable($info['is_nullable']);

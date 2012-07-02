@@ -269,7 +269,7 @@ class FormTest extends TestCase
         $form->setData($data);
 
         if ($form->isValid()) {
-            $this->assertEquals($address, $emptyAddress);
+            $this->assertEquals($address, $emptyAddress, var_export($address, 1) . "\n\n" . var_export($emptyAddress, 1));
         }
     }
 }

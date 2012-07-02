@@ -436,6 +436,37 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Zend\ServiceManager\Exception\InvalidServiceNameException
      */
+    public function testCannotUseUnknownServiceNameForAbstractFactory()
+    {
+        $config = new Configuration(array(
+            'abstract_factories' => array(
+                'ZendTest\ServiceManager\TestAsset\FooAbstractFactory',
+            ),
+        ));
+        $serviceManager = new ServiceManager($config);
+        $serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\FooFactory');
+        $foo = $serviceManager->get('unknownObject');
+    }
+
+    /**
+     * @expectedException Zend\ServiceManager\Exception\ServiceNotCreatedException
+     */
+    public function testDoNotFallbackToAbstractFactory()
+    {
+        $factory = function ($sm) {
+            return new TestAsset\Bar();
+        };
+        $serviceManager = new ServiceManager();
+        $serviceManager->setFactory('ZendTest\ServiceManager\TestAsset\Bar', $factory);
+        $di = new Di();
+        $di->instanceManager()->setParameters('ZendTest\ServiceManager\TestAsset\Bar', array('foo' => array('a')));
+        $serviceManager->addAbstractFactory(new DiAbstractServiceFactory($di));
+        $bar = $serviceManager->get('ZendTest\ServiceManager\TestAsset\Bar');
+    }
+
+    /**
+     * @expectedException Zend\ServiceManager\Exception\InvalidServiceNameException
+     */
     public function testAssignAliasWithExistingServiceName()
     {
         $this->serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\FooFactory');

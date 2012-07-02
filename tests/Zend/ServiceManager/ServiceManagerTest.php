@@ -434,7 +434,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception\InvalidServiceNameException
+     * @expectedException Zend\ServiceManager\Exception\InvalidServiceNameException
      */
     public function testAssignAliasWithExistingServiceName()
     {

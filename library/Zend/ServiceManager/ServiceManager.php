@@ -705,7 +705,7 @@ class ServiceManager implements ServiceLocatorInterface
     {
         $invokable = $this->invokableClasses[$canonicalName];
         if (!class_exists($invokable)) {
-            throw new Exception\ServiceNotCreatedException(sprintf(
+            throw new Exception\ServiceNotFoundException(sprintf(
                 '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
                 __METHOD__,
                 $canonicalName,

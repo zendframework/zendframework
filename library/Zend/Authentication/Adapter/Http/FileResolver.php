@@ -99,7 +99,7 @@ class FileResolver implements ResolverInterface
      *         realm, false otherwise.
      * @throws Exception\ExceptionInterface
      */
-    public function resolve($username, $realm)
+    public function resolve($username, $realm, $password = null)
     {
         if (empty($username)) {
             throw new Exception\InvalidArgumentException('Username is required');

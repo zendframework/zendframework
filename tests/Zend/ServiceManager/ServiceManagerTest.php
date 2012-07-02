@@ -449,4 +449,13 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $bar = $this->serviceManager->get('ZendTest\ServiceManager\TestAsset\Bar', true);
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $bar);
     }
+
+    /**
+     * @expectedException TestAsset\FooException
+     */
+    public function testExceptionThrowingFactory()
+    {
+        $this->serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\ExceptionThrowingFactory');
+        $this->serviceManager->get('foo');
+    }
 }

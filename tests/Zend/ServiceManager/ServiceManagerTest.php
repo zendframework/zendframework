@@ -432,4 +432,19 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
             $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\FooException', $e->getPrevious());
         }
     }
+
+    /**
+     * @expectedException Exception\InvalidServiceNameException
+     */
+    public function testAssignAliasWithExistingServiceName()
+    {
+        $this->serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\FooFactory');
+        $this->serviceManager->setFactory('bar', function ($sm)
+            {
+                return new Bar(array('a'));
+            });
+        $this->serviceManager->setAllowOverride(false);
+        // should throw an exception because 'foo' already exists in the service manager
+        $this->serviceManager->setAlias('foo', 'bar');
+    }
 }

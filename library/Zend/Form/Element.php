@@ -21,6 +21,7 @@
 namespace Zend\Form;
 
 use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -36,20 +37,29 @@ class Element implements ElementInterface
     protected $attributes = array();
 
     /**
+     * @var string
+     */
+    protected $label;
+
+    /**
      * @var array Validation error messages
      */
     protected $messages = array();
 
 
     /**
-     * Constructor
-     *
-     * @param null|string|int $name Optional name for the element
+     * @param  null|int|string  $name    Optional name for the element
+     * @param  array            $options Optional options for the element
+     * @throws Exception\InvalidArgumentException
      */
-    public function __construct($name = null)
+    public function __construct($name = null, $options = array())
     {
         if (null !== $name) {
             $this->setName($name);
+        }
+
+        if (!empty($options)) {
+            $this->setOptions($options);
         }
     }
 
@@ -73,6 +83,30 @@ class Element implements ElementInterface
     public function getName()
     {
         return $this->getAttribute('name');
+    }
+
+    /**
+     * Set options for an element
+     *
+     * @param array|\Traversable $options
+     * @return Element|ElementInterface
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setOptions($options)
+    {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        } elseif (!is_array($options)) {
+            throw new Exception\InvalidArgumentException(
+                'The options parameter must be an array or a Traversable'
+            );
+        }
+
+        if (isset($options['label'])) {
+            $this->setLabel($options['label']);
+        }
+
+        return $this;
     }
 
     /**
@@ -155,6 +189,31 @@ class Element implements ElementInterface
     public function clearAttributes()
     {
         $this->attributes = array();
+    }
+
+    /**
+     * Set the label used for this element
+     *
+     * @param $label
+     * @return Element
+     */
+    public function setLabel($label)
+    {
+        if (is_string($label)) {
+            $this->label = $label;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Retrieve the label used for this element
+     *
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
     }
 
     /**

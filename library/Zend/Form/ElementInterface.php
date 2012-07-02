@@ -47,6 +47,14 @@ interface ElementInterface
     public function getName();
 
     /**
+     * Set options for an element
+     *
+     * @param array|\Traversable $options
+     * @return ElementInterface
+     */
+    public function setOptions($options);
+
+    /**
      * Set a single element attribute
      * 
      * @param  string $key 

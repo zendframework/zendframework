@@ -77,7 +77,7 @@ class FormRow extends AbstractHelper
         $labelHelper         = $this->getLabelHelper();
         $elementHelper       = $this->getElementHelper();
         $elementErrorsHelper = $this->getElementErrorsHelper();
-        $label               = $element->getAttribute('label');
+        $label               = $element->getLabel();
         $elementString       = $elementHelper->render($element);
         $elementErrors       = $elementErrorsHelper->render($element);
 

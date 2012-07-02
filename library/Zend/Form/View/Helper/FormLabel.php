@@ -114,7 +114,7 @@ class FormLabel extends AbstractHelper
         $openTag = $this->openTag($element);
         $label   = false;
         if (null === $labelContent || null !== $position) {
-            $label = $element->getAttribute('label');
+            $label = $element->getLabel();
             if (null === $label) {
                 throw new Exception\DomainException(sprintf(
                     '%s expects either label content as the second argument, or that the element provided has a label attribute; neither found',

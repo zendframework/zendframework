@@ -92,6 +92,7 @@ class FormMultiCheckbox extends FormInput
             ));
         }
         $this->labelPosition = $labelPosition;
+
         return $this;
     }
 
@@ -378,12 +379,17 @@ class FormMultiCheckbox extends FormInput
      * Proxies to {@link render()}.
      *
      * @param  ElementInterface|null $element
+     * @param  null|string           $labelPosition
      * @return string|FormMultiCheckbox
      */
-    public function __invoke(ElementInterface $element = null)
+    public function __invoke(ElementInterface $element = null, $labelPosition = null)
     {
         if (!$element) {
             return $this;
+        }
+
+        if ($labelPosition !== null) {
+            $this->setLabelPosition($labelPosition);
         }
 
         return $this->render($element);

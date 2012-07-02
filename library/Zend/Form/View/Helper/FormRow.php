@@ -159,7 +159,6 @@ class FormRow extends AbstractHelper
                 (string) $labelPosition
             ));
         }
-
         $this->labelPosition = $labelPosition;
 
         return $this;

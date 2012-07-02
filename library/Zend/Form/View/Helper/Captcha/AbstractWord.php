@@ -123,7 +123,7 @@ abstract class AbstractWord extends FormInput
     protected function renderCaptchaInputs(ElementInterface $element)
     {
         $name = $element->getName();
-        if ($name === '') {
+        if ($name === null || $name === '') {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has an assigned name; none discovered',
                 __METHOD__

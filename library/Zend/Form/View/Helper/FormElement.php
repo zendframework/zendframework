@@ -69,11 +69,6 @@ class FormElement extends BaseAbstractHelper
         $type    = $element->getAttribute('type');
         $options = $element->getAttribute('options');
 
-        if (is_array($options) && $type == 'radio') {
-            $helper = $renderer->plugin('form_radio');
-            return $helper($element);
-        }
-
         if ($type == 'checkbox') {
             $helper = $renderer->plugin('form_checkbox');
             return $helper($element);
@@ -81,6 +76,11 @@ class FormElement extends BaseAbstractHelper
 
         if (is_array($options) && $type == 'multi_checkbox') {
             $helper = $renderer->plugin('form_multi_checkbox');
+            return $helper($element);
+        }
+
+        if (is_array($options) && $type == 'radio') {
+            $helper = $renderer->plugin('form_radio');
             return $helper($element);
         }
 

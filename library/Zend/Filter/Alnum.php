@@ -20,9 +20,9 @@
 
 namespace Zend\Filter;
 
+use Locale;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Locale\Locale as ZendLocale;
 
 /**
  * @category   Zend
@@ -30,135 +30,85 @@ use Zend\Locale\Locale as ZendLocale;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Alnum extends AbstractFilter
+class Alnum extends AbstractLocale
 {
     /**
-     * Whether to allow white space characters; off by default
-     *
-     * @var boolean
+     * @var array
      */
-    protected $allowWhiteSpace;
-
-    /**
-     * Is PCRE is compiled with UTF-8 and Unicode support
-     *
-     * @var mixed
-     **/
-    protected static $unicodeEnabled;
-
-    /**
-     * Locale to use
-     *
-     * @var ZendLocale object
-     */
-    protected $locale;
+    protected $options = array(
+        'locale'            => null,
+        'allow_white_space' => false,
+    );
 
     /**
      * Sets default option values for this instance
      *
-     * @param  boolean|Traversable|array $allowWhiteSpace
+     * @param  array|Traversable|boolean|null $options
      */
-    public function __construct($options = false)
+    public function __construct($options = null)
     {
-        if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
-        }
-        if (!is_array($options)) {
-            $options = func_get_args();
-            $temp    = array();
-            if (!empty($options)) {
-                $temp['allowWhiteSpace'] = array_shift($options);
+        if ($options !== null) {
+            if ($options instanceof Traversable) {
+                $options = iterator_to_array($options);
             }
 
-            if (!empty($options)) {
-                $temp['locale'] = array_shift($options);
+            if (!is_array($options)) {
+                $args = func_get_args();
+                if (isset($args[0])) {
+                    $this->setAllowWhiteSpace($args[0]);
+                }
+                if (isset($args[1])) {
+                    $this->setLocale($args[1]);
+                }
+            } else {
+                $this->setOptions($options);
             }
-
-            $options = $temp;
         }
-
-        if (null === self::$unicodeEnabled) {
-            self::$unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
-        }
-
-        if (array_key_exists('allowWhiteSpace', $options)) {
-            $this->setAllowWhiteSpace($options['allowWhiteSpace']);
-        }
-
-        if (!array_key_exists('locale', $options)) {
-            $options['locale'] = null;
-        }
-
-        $this->setLocale($options['locale']);
-    }
-
-    /**
-     * Returns the allowWhiteSpace option
-     *
-     * @return boolean
-     */
-    public function getAllowWhiteSpace()
-    {
-        return $this->allowWhiteSpace;
     }
 
     /**
      * Sets the allowWhiteSpace option
      *
-     * @param boolean $allowWhiteSpace
+     * @param  boolean $flag
      * @return Alnum Provides a fluent interface
      */
-    public function setAllowWhiteSpace($allowWhiteSpace)
+    public function setAllowWhiteSpace($flag = true)
     {
-        $this->allowWhiteSpace = (boolean) $allowWhiteSpace;
+        $this->options['allow_white_space'] = (boolean) $flag;
         return $this;
     }
 
     /**
-     * Returns the locale option
+     * Whether white space is allowed
      *
-     * @return string
+     * @return boolean
      */
-    public function getLocale()
+    public function getAllowWhiteSpace()
     {
-        return $this->locale;
-    }
-
-    /**
-     * Sets the locale option
-     *
-     * @param boolean $locale
-     * @return Alnum Provides a fluent interface
-     */
-    public function setLocale($locale = null)
-    {
-        $this->locale = ZendLocale::findLocale($locale);
-        return $this;
+        return $this->options['allow_white_space'];
     }
 
     /**
      * Defined by Zend\Filter\FilterInterface
      *
-     * Returns the string $value, removing all but alphabetic and digit characters
+     * Returns $value as string with all non-alphanumeric characters removed
      *
-     * @param  string $value
+     * @param  mixed $value
      * @return string
      */
     public function filter($value)
     {
-        $whiteSpace = $this->allowWhiteSpace ? '\s' : '';
+        $whiteSpace = $this->options['allow_white_space'] ? '\s' : '';
+        $language   = Locale::getPrimaryLanguage($this->getLocale());
 
-        if (!self::$unicodeEnabled) {
+        if (!static::hasPcreUnicodeSupport()) {
             // POSIX named classes are not supported, use alternative a-zA-Z0-9 match
             $pattern = '/[^a-zA-Z0-9' . $whiteSpace . ']/';
-        } elseif (((string) $this->locale == 'ja')
-                  || ((string) $this->locale == 'ko')
-                  || ((string) $this->locale == 'zh')
-        ) {
-            // Use english alphabeth
+        } elseif ($language == 'ja'|| $language == 'ko' || $language == 'zh') {
+            // Use english alphabet
             $pattern = '/[^a-zA-Z0-9'  . $whiteSpace . ']/u';
         } else {
-            // Use native language alphabeth
+            // Use native language alphabet
             $pattern = '/[^\p{L}\p{N}' . $whiteSpace . ']/u';
         }
 

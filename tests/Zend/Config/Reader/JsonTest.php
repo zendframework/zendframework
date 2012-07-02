@@ -21,7 +21,7 @@
 
 namespace ZendTest\Config\Reader;
 
-use \Zend\Config\Reader\Json;
+use Zend\Config\Reader\Json;
 
 /**
  * @category   Zend

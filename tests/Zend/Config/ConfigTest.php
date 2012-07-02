@@ -21,7 +21,7 @@
 
 namespace ZendTest\Config;
 
-use \Zend\Config\Config;
+use Zend\Config\Config;
 
 /**
  * @category   Zend

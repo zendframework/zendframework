@@ -1,17 +1,17 @@
 <?php
-    /**
-     * Zend Framework (http://framework.zend.com/)
-     *
-     * @link      http://github.com/zendframework/zf2 for the canonical source repository
-     * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-     * @license   http://framework.zend.com/license/new-bsd New BSD License
-     * @package   Zend_Db
-     */
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
+ */
 
 namespace Zend\Db\Adapter\Driver\Pgsql;
 
-use Zend\Db\Adapter\Driver\DriverInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -20,7 +20,6 @@ use Zend\Db\Adapter\Driver\DriverInterface,
  */
 class Pgsql implements DriverInterface
 {
-
     /**
      * @var Connection
      */

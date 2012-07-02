@@ -1,13 +1,25 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
+ */
 
 namespace Zend\Db\Adapter\Driver\Pgsql;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Exception;
 
+/**
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage Adapter
+ */
 class Connection implements ConnectionInterface
 {
-
     /**
      * @var Pgsql
      */
@@ -46,39 +58,66 @@ class Connection implements ConnectionInterface
         }
     }
 
+    /**
+     * @param  array $connectionParameters 
+     * @return Connection
+     */
     public function setConnectionParameters(array $connectionParameters)
     {
         $this->connectionParameters = $connectionParameters;
         return $this;
     }
 
+    /**
+     * @param  Pgsql $driver 
+     * @return Connection
+     */
     public function setDriver(Pgsql $driver)
     {
         $this->driver = $driver;
         return $this;
     }
 
+    /**
+     * @param  resource $resource 
+     * @return Connection
+     */
     public function setResource($resource)
     {
         $this->resource = $resource;
         return;
     }
 
+    /**
+     * @return null
+     */
     public function getDefaultCatalog()
     {
         return null;
     }
 
+    /**
+     * @return null
+     */
     public function getDefaultSchema()
     {
         // TODO: Implement getDefaultSchema() method.
     }
 
+    /**
+     * @return resource
+     */
     public function getResource()
     {
         return $this->resource;
     }
 
+    /**
+     * Connect to the database
+     * 
+     * @return void
+     * @throws Exception\RuntimeException on failure
+     */
     public function connect()
     {
         if (is_resource($this->resource)) {
@@ -98,57 +137,71 @@ class Connection implements ConnectionInterface
             return null;
         };
 
-        $connection = array();
-        $connection['host'] = $findParameterValue(array('hostname', 'host'));
-        $connection['user'] = $findParameterValue(array('username', 'user'));
+        $connection             = array();
+        $connection['host']     = $findParameterValue(array('hostname', 'host'));
+        $connection['user']     = $findParameterValue(array('username', 'user'));
         $connection['password'] = $findParameterValue(array('password', 'passwd', 'pw'));
-        $connection['dbname'] = $findParameterValue(array('database', 'dbname', 'db', 'schema'));
-        $connection['port'] = (isset($p['port'])) ? (int) $p['port'] : null;
-        $connection['socket'] = (isset($p['socket'])) ? $p['socket'] : null;
+        $connection['dbname']   = $findParameterValue(array('database', 'dbname', 'db', 'schema'));
+        $connection['port']     = (isset($p['port'])) ? (int) $p['port'] : null;
+        $connection['socket']   = (isset($p['socket'])) ? $p['socket'] : null;
+
         $connection = array_filter($connection); // remove nulls
         $connection = http_build_query($connection, null, ' '); // @link http://php.net/pg_connect
 
         $this->resource = pg_connect($connection);
 
         if ($this->resource === false) {
-            die('dead');
+            throw new Exception\RuntimeException(sprintf(
+                '%s: Unable to connect to database',
+                __METHOD__
+            ));
         }
-
-//        if ($this->resource === false) {
-//            throw new Exception\RuntimeException(
-//                'Connection error',
-//                null,
-//                new Exception\ErrorException($this->resource->connect_error, $this->resource->connect_errno)
-//            );
-//        }
-
     }
 
+    /**
+     * @return bool
+     */
     public function isConnected()
     {
         return (is_resource($this->resource));
     }
 
+    /**
+     * @return void
+     */
     public function disconnect()
     {
         pg_close($this->resource);
     }
 
+    /**
+     * @return void
+     */
     public function beginTransaction()
     {
         // TODO: Implement beginTransaction() method.
     }
 
+    /**
+     * @return void
+     */
     public function commit()
     {
         // TODO: Implement commit() method.
     }
 
+    /**
+     * @return void
+     */
     public function rollback()
     {
         // TODO: Implement rollback() method.
     }
 
+    /**
+     * @param  string $sql 
+     * @return resource|\Zend\Db\ResultSet\ResultSetInterface
+     */
     public function execute($sql)
     {
         if (!$this->isConnected()) {
@@ -168,6 +221,10 @@ class Connection implements ConnectionInterface
         return $resultPrototype;
     }
 
+    /**
+     * @param  null $name Ignored
+     * @return string
+     */
     public function getLastGeneratedValue($name = null)
     {
         // @todo create a feature that opts-into this behavior, using sql to find serial name
@@ -178,6 +235,9 @@ class Connection implements ConnectionInterface
         return pg_fetch_result($result, 0, 'lastvalue');
     }
 
+    /**
+     * @return null
+     */
     public function getCurrentSchema()
     {
         return null;

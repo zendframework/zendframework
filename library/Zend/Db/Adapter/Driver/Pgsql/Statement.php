@@ -1,16 +1,34 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
+ */
 
 namespace Zend\Db\Adapter\Driver\Pgsql;
 
-use Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\ParameterContainer,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Exception;
 
+/**
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage Adapter
+ */
 class Statement implements StatementInterface
 {
-
+    /**
+     * @var int
+     */
     protected static $statementIndex = 0;
 
+    /**
+     * @var string
+     */
     protected $statementName = '';
 
     /**
@@ -18,10 +36,19 @@ class Statement implements StatementInterface
      */
     protected $driver = null;
 
+    /**
+     * @var resource
+     */
     protected $pgsql = null;
 
+    /**
+     * @var resource
+     */
     protected $resource = null;
 
+    /**
+     * @var string
+     */
     protected $sql;
 
     /**
@@ -29,16 +56,29 @@ class Statement implements StatementInterface
      */
     protected $parameterContainer;
 
+    /**
+     * @param  Pgsql $driver 
+     * @return Statement
+     */
     public function setDriver(Pgsql $driver)
     {
         $this->driver = $driver;
         return $this;
     }
 
+    /**
+     * @param  resource $pgsql 
+     * @return void
+     * @throws Exception\RuntimeException for invalid or missing postgresql connection
+     */
     public function initialize($pgsql)
     {
         if (!is_resource($pgsql) || get_resource_type($pgsql) !== 'pgsql link') {
-            die('what is this?' . get_resource_type($pgsql));
+            throw new Exception\RuntimeException(sprintf(
+                '%s: Invalid or missing postgresql connection; received "%s"',
+                __METHOD__,
+                get_resource_type($pgsql)
+            ));
         }
         $this->pgsql = $pgsql;
     }
@@ -112,7 +152,7 @@ class Statement implements StatementInterface
     }
 
     /**
-     * @param null $parameters
+     * @param  null $parameters
      * @return ResultInterface
      */
     public function execute($parameters = null)
@@ -149,5 +189,4 @@ class Statement implements StatementInterface
         $result = $this->driver->createResult($resultResource);
         return $result;
     }
-
 }

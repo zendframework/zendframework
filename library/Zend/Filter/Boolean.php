@@ -22,7 +22,7 @@ namespace Zend\Filter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Locale\Locale;
+
 
 /**
  * @category   Zend
@@ -30,54 +30,46 @@ use Zend\Locale\Locale;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Boolean extends AbstractFilter
+class Boolean extends AbstractLocale
 {
-    const BOOLEAN      = 1;
-    const INTEGER      = 2;
-    const FLOAT        = 4;
-    const STRING       = 8;
-    const ZERO         = 16;
-    const EMPTY_ARRAY  = 32;
-    const NULL         = 64;
-    const PHP          = 127;
-    const FALSE_STRING = 128;
-    const YES          = 256;
-    const ALL          = 511;
+    const TYPE_BOOLEAN        = 1;
+    const TYPE_INTEGER        = 2;
+    const TYPE_FLOAT          = 4;
+    const TYPE_STRING         = 8;
+    const TYPE_ZERO_STRING    = 16;
+    const TYPE_EMPTY_ARRAY    = 32;
+    const TYPE_NULL           = 64;
+    const TYPE_PHP            = 127;
+    const TYPE_FALSE_STRING   = 128;
+    const TYPE_LOCALIZED      = 256;
+    const TYPE_ALL            = 511;
 
-    protected $_constants = array(
-        self::BOOLEAN      => 'boolean',
-        self::INTEGER      => 'integer',
-        self::FLOAT        => 'float',
-        self::STRING       => 'string',
-        self::ZERO         => 'zero',
-        self::EMPTY_ARRAY  => 'array',
-        self::NULL         => 'null',
-        self::PHP          => 'php',
-        self::FALSE_STRING => 'false',
-        self::YES          => 'yes',
-        self::ALL          => 'all',
+    /**
+     * @var array
+     */
+    protected $constants = array(
+        self::TYPE_BOOLEAN       => 'boolean',
+        self::TYPE_INTEGER       => 'integer',
+        self::TYPE_FLOAT         => 'float',
+        self::TYPE_STRING        => 'string',
+        self::TYPE_ZERO_STRING   => 'zero',
+        self::TYPE_EMPTY_ARRAY   => 'array',
+        self::TYPE_NULL          => 'null',
+        self::TYPE_PHP           => 'php',
+        self::TYPE_FALSE_STRING  => 'false',
+        self::TYPE_LOCALIZED     => 'localized',
+        self::TYPE_ALL           => 'all',
     );
 
     /**
-     * Internal type to detect
-     *
-     * @var integer
-     */
-    protected $_type = self::PHP;
-
-    /**
-     * Internal locale
-     *
      * @var array
      */
-    protected $_locale = array('auto');
-
-    /**
-     * Internal mode
-     *
-     * @var boolean
-     */
-    protected $_casting = true;
+    protected $options = array(
+        'type'         => self::TYPE_PHP,
+        'casting'      => true,
+        'locale'       => null,
+        'translations' => array(),
+    );
 
     /**
      * Constructor
@@ -86,52 +78,30 @@ class Boolean extends AbstractFilter
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
-        }
-        if (!is_array($options)) {
-            $options = func_get_args();
-            $temp    = array();
-            if (!empty($options)) {
-                $temp['type'] = array_shift($options);
+        if ($options !== null) {
+            if ($options instanceof Traversable) {
+                $options = ArrayUtils::iteratorToArray($options);
             }
 
-            if (!empty($options)) {
-                $temp['casting'] = array_shift($options);
+            if (!is_array($options)) {
+                $args = func_get_args();
+                if (isset($args[0])) {
+                    $this->setType($args[0]);
+                }
+                if (isset($args[1])) {
+                    $this->setCasting($args[1]);
+                }
+                if (isset($args[2])) {
+                    $this->setLocale($args[2]);
+                }
+            } else {
+                $this->setOptions($options);
             }
-
-            if (!empty($options)) {
-                $temp['locale'] = array_shift($options);
-            }
-
-            $options = $temp;
-        }
-
-        if (array_key_exists('type', $options)) {
-            $this->setType($options['type']);
-        }
-
-        if (array_key_exists('casting', $options)) {
-            $this->setCasting($options['casting']);
-        }
-
-        if (array_key_exists('locale', $options)) {
-            $this->setLocale($options['locale']);
         }
     }
 
     /**
-     * Returns the set null types
-     *
-     * @return int
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
-
-    /**
-     * Set the null types
+     * Set boolean types
      *
      * @param  integer|array $type
      * @throws Exception\InvalidArgumentException
@@ -141,61 +111,52 @@ class Boolean extends AbstractFilter
     {
         if (is_array($type)) {
             $detected = 0;
-            foreach($type as $value) {
+            foreach ($type as $value) {
                 if (is_int($value)) {
                     $detected += $value;
-                } elseif (in_array($value, $this->_constants)) {
-                    $detected += array_search($value, $this->_constants);
+                } elseif (in_array($value, $this->constants)) {
+                    $detected += array_search($value, $this->constants);
                 }
             }
 
             $type = $detected;
-        } elseif (is_string($type) && in_array($type, $this->_constants)) {
-            $type = array_search($type, $this->_constants);
+        } elseif (is_string($type) && in_array($type, $this->constants)) {
+            $type = array_search($type, $this->constants);
         }
 
-        if (!is_int($type) || ($type < 0) || ($type > self::ALL)) {
-            throw new Exception\InvalidArgumentException('Unknown type');
+        if (!is_int($type) || ($type < 0) || ($type > self::TYPE_ALL)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Unknown type value "%s" (%s)',
+                $type,
+                gettype($type)
+            ));
         }
 
-        $this->_type = $type;
+        $this->options['type'] = $type;
         return $this;
     }
 
     /**
-     * Returns the set locale
+     * Returns defined boolean types
      *
-     * @return array
+     * @return int
      */
-    public function getLocale()
+    public function getType()
     {
-        return $this->_locale;
+        return $this->options['type'];
     }
 
     /**
-     * Set the locales which are accepted
+     * Set the working mode
      *
-     * @param  string|array|\Zend\Locale\Locale $locale
-     * @throws Exception\ExceptionInterface
+     * @param  boolean $flag When true this filter works like cast
+     *                       When false it recognises only true and false
+     *                       and all other values are returned as is
      * @return Boolean
      */
-    public function setLocale($locale = null)
+    public function setCasting($flag = true)
     {
-        if (is_string($locale)) {
-            $locale = array($locale);
-        } elseif ($locale instanceof Locale) {
-            $locale = array($locale->toString());
-        } elseif (!is_array($locale)) {
-            throw new Exception\InvalidArgumentException('Locale has to be string, array or an instance of Zend_Locale');
-        }
-
-        foreach ($locale as $single) {
-            if (!Locale::isLocale($single)) {
-                throw new Exception\InvalidArgumentException("Unknown locale '$single'");
-            }
-        }
-
-        $this->_locale = $locale;
+        $this->options['casting'] = (boolean) $flag;
         return $this;
     }
 
@@ -206,20 +167,41 @@ class Boolean extends AbstractFilter
      */
     public function getCasting()
     {
-        return $this->_casting;
+        return $this->options['casting'];
     }
 
     /**
-     * Set the working mode
-     *
-     * @param  boolean $locale When true this filter works like cast
-     *                         When false it recognises only true and false
-     *                         and all other values are returned as is
+     * @param  array $translations
      * @return Boolean
      */
-    public function setCasting($casting = true)
+    public function setTranslations(array $translations)
     {
-        $this->_casting = (boolean) $casting;
+        foreach ($translations as $locale => $translation) {
+            $this->addTranslation($locale, $translation);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTranslations()
+    {
+        return $this->options['translations'];
+    }
+
+    /**
+     * @param  string $locale
+     * @param  array $translation
+     * @return Boolean
+     * @throws Exception\InvalidArgumentException
+     */
+    public function addTranslation($locale, array $translation)
+    {
+        foreach ($translation as $message => $flag) {
+            $this->options['translations'][$locale][$message] = (bool) $flag;
+        }
+
         return $this;
     }
 
@@ -236,98 +218,92 @@ class Boolean extends AbstractFilter
         $type    = $this->getType();
         $casting = $this->getCasting();
 
-        // STRING YES (Localized)
-        if ($type >= self::YES) {
-            $type -= self::YES;
+        // LOCALIZED
+        if ($type >= self::TYPE_LOCALIZED) {
+            $type -= self::TYPE_LOCALIZED;
             if (is_string($value)) {
-                $locales = $this->getLocale();
-                foreach ($locales as $locale) {
-                    if ($this->_getLocalizedQuestion($value, false, $locale) === false) {
-                        return false;
-                    }
-
-                    if (!$casting && ($this->_getLocalizedQuestion($value, true, $locale) === true)) {
-                        return true;
-                    }
+                $locale = $this->getLocale();
+                if (isset($this->options['translations'][$locale][$value])) {
+                    return (bool) $this->options['translations'][$locale][$value];
                 }
             }
         }
 
-        // STRING FALSE ('false')
-        if ($type >= self::FALSE_STRING) {
-            $type -= self::FALSE_STRING;
+        // FALSE_STRING ('false')
+        if ($type >= self::TYPE_FALSE_STRING) {
+            $type -= self::TYPE_FALSE_STRING;
             if (is_string($value) && (strtolower($value) == 'false')) {
                 return false;
             }
 
-            if ((!$casting) && is_string($value) && (strtolower($value) == 'true')) {
+            if (!$casting && is_string($value) && (strtolower($value) == 'true')) {
                 return true;
             }
         }
 
         // NULL (null)
-        if ($type >= self::NULL) {
-            $type -= self::NULL;
+        if ($type >= self::TYPE_NULL) {
+            $type -= self::TYPE_NULL;
             if ($value === null) {
                 return false;
             }
         }
 
         // EMPTY_ARRAY (array())
-        if ($type >= self::EMPTY_ARRAY) {
-            $type -= self::EMPTY_ARRAY;
+        if ($type >= self::TYPE_EMPTY_ARRAY) {
+            $type -= self::TYPE_EMPTY_ARRAY;
             if (is_array($value) && ($value == array())) {
                 return false;
             }
         }
 
-        // ZERO ('0')
-        if ($type >= self::ZERO) {
-            $type -= self::ZERO;
+        // ZERO_STRING ('0')
+        if ($type >= self::TYPE_ZERO_STRING) {
+            $type -= self::TYPE_ZERO_STRING;
             if (is_string($value) && ($value == '0')) {
                 return false;
             }
 
-            if ((!$casting) && (is_string($value)) && ($value == '1')) {
+            if (!$casting && (is_string($value)) && ($value == '1')) {
                 return true;
             }
         }
 
         // STRING ('')
-        if ($type >= self::STRING) {
-            $type -= self::STRING;
+        if ($type >= self::TYPE_STRING) {
+            $type -= self::TYPE_STRING;
             if (is_string($value) && ($value == '')) {
                 return false;
             }
         }
 
         // FLOAT (0.0)
-        if ($type >= self::FLOAT) {
-            $type -= self::FLOAT;
+        if ($type >= self::TYPE_FLOAT) {
+            $type -= self::TYPE_FLOAT;
             if (is_float($value) && ($value == 0.0)) {
                 return false;
             }
 
-            if ((!$casting) && is_float($value) && ($value == 1.0)) {
+            if (!$casting && is_float($value) && ($value == 1.0)) {
                 return true;
             }
         }
 
         // INTEGER (0)
-        if ($type >= self::INTEGER) {
-            $type -= self::INTEGER;
+        if ($type >= self::TYPE_INTEGER) {
+            $type -= self::TYPE_INTEGER;
             if (is_int($value) && ($value == 0)) {
                 return false;
             }
 
-            if ((!$casting) && is_int($value) && ($value == 1)) {
+            if (!$casting && is_int($value) && ($value == 1)) {
                 return true;
             }
         }
 
         // BOOLEAN (false)
-        if ($type >= self::BOOLEAN) {
-            $type -= self::BOOLEAN;
+        if ($type >= self::TYPE_BOOLEAN) {
+            $type -= self::TYPE_BOOLEAN;
             if (is_bool($value)) {
                 return $value;
             }
@@ -338,33 +314,5 @@ class Boolean extends AbstractFilter
         }
 
         return $value;
-    }
-
-    /**
-     * Determine the value of a localized string, and compare it to a given value
-     *
-     * @param  string $value
-     * @param  boolean $yes
-     * @param  array $locale
-     * @return boolean
-     */
-    protected function _getLocalizedQuestion($value, $yes, $locale)
-    {
-        if ($yes == true) {
-            $question = 'yes';
-            $return   = true;
-        } else {
-            $question = 'no';
-            $return   = false;
-        }
-        $str = Locale::getTranslation($question, 'question', $locale);
-        $str = explode(':', $str);
-        if (!empty($str)) {
-            foreach($str as $no) {
-                if (($no == $value) || (strtolower($no) == strtolower($value))) {
-                    return $return;
-                }
-            }
-        }
     }
 }

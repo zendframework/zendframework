@@ -789,7 +789,15 @@ class ServiceManager implements ServiceLocatorInterface
                 unset($this->pendingAbstractFactoryRequests[get_class($abstractFactory)]);
             } catch (\Exception $e) {
                 unset($this->pendingAbstractFactoryRequests[get_class($abstractFactory)]);
-                throw $e;
+                throw new Exception\ServiceNotCreatedException(
+                    sprintf(
+                        'An abstract factory could not create an instance of %s%s.',
+                        $canonicalName,
+                        ($requestedName ? '(alias: ' . $requestedName . ')' : '')
+                    ),
+                    $e->getCode(),
+                    $e
+                );
             }
             if (is_object($instance)) {
                 break;

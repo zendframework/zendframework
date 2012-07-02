@@ -65,7 +65,6 @@ class Form extends BaseForm implements FormFactoryAwareInterface
     }
 
     /**
-<<<<<<< HEAD
      * Add an element or fieldset
      *
      * If $elementOrFieldset is an array or Traversable, passes the argument on
@@ -80,23 +79,16 @@ class Form extends BaseForm implements FormFactoryAwareInterface
      */
     public function add($elementOrFieldset, array $flags = array())
     {
-        if (is_array($elementOrFieldset)
-            || ($elementOrFieldset instanceof Traversable && !$elementOrFieldset instanceof ElementInterface)
-        ) {
-            $factory = $this->getFormFactory();
-            $elementOrFieldset = $factory->create($elementOrFieldset);
-        }
+        parent::add($elementOrFieldset, $flags);
 
         if ($elementOrFieldset instanceof Fieldset && $elementOrFieldset->useAsBaseFieldset()) {
             $this->baseFieldset = $elementOrFieldset;
         }
 
-        return parent::add($elementOrFieldset, $flags);
+        return $this;
     }
 
     /**
-=======
->>>>>>> 67dcfe2d45df68074f68d00cb2b7a4263fa8bf9f
      * Ensures state is ready for use
      *
      * Marshalls the input filter, to ensure validation error messages are

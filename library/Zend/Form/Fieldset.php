@@ -498,7 +498,9 @@ class Fieldset extends Element implements FieldsetInterface
     public function useAsBaseFieldset()
     {
         return $this->useAsBaseFieldset;
-=======
+    }
+
+    /**
      * Make a deep clone of the object
      *
      * @return void
@@ -518,6 +520,5 @@ class Fieldset extends Element implements FieldsetInterface
                 $this->elements[$key] = $value;
             }
         }
->>>>>>> 67dcfe2d45df68074f68d00cb2b7a4263fa8bf9f
     }
 }

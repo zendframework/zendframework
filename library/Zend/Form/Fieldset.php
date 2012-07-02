@@ -22,6 +22,8 @@ namespace Zend\Form;
 
 use Traversable;
 use Zend\Stdlib\PriorityQueue;
+use Zend\Stdlib\Hydrator;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
  * @category   Zend
@@ -60,6 +62,27 @@ class Fieldset extends Element implements FieldsetInterface
      * @var PriorityQueue
      */
     protected $iterator;
+
+    /**
+     * Hydrator to use with bound object
+     *
+     * @var Hydrator\HydratorInterface
+     */
+    protected $hydrator;
+
+    /**
+     * The object bound to this fieldset, if any
+     *
+     * @var null|object
+     */
+    protected $object;
+
+    /**
+     * Should this fieldset be used as a base fieldset for a given form ?
+     *
+     * @var bool
+     */
+    protected $useAsBaseFieldset = false;
 
     /**
      * Constructor
@@ -401,5 +424,100 @@ class Fieldset extends Element implements FieldsetInterface
                 $this->elements[$key] = $value;
             }
         }
+    }
+
+    /**
+     * Set the object used by the hydrator
+     *
+     * @param $object
+     * @return FieldsetInterface
+     */
+    public function setObject($object)
+    {
+        $this->object = $object;
+        return $this;
+    }
+
+    /**
+     * Get the object used by the hydrator
+     *
+     * @return mixed
+     */
+    public function getObject()
+    {
+        return $this->object;
+    }
+
+    /**
+     * Set the hydrator to use when binding an object to the element
+     *
+     * @param HydratorInterface $hydrator
+     * @return FieldsetInterface
+     */
+    public function setHydrator(HydratorInterface $hydrator)
+    {
+        $this->hydrator = $hydrator;
+        return $this;
+    }
+
+    /**
+     * Get the hydrator used when binding an object to the fieldset
+     *
+     * Will lazy-load Hydrator\ArraySerializable if none is present.
+     *
+     * @return HydratorInterface
+     */
+    public function getHydrator()
+    {
+        if (!$this->hydrator instanceof Hydrator\HydratorInterface) {
+            $this->setHydrator(new Hydrator\ArraySerializable());
+        }
+        return $this->hydrator;
+    }
+
+    /**
+     * Bind values to the bound object
+     *
+     * @param array $values
+     * @return mixed|void
+     */
+    public function bindValues(array $values = array())
+    {
+        $hydrator = $this->getHydrator();
+        $hydratableData = array();
+
+        foreach ($values as $key => $value) {
+            $element = $this->byName[$key];
+            if ($element instanceof FieldsetInterface && is_object($element->object)) {
+                $value = $element->bindValues($value);
+            }
+
+            $hydratableData[$key] = $value;
+        }
+
+        $this->object = $hydrator->hydrate($hydratableData, $this->object);
+        return $this->object;
+    }
+
+    /**
+     * Set if this fieldset is used as a base fieldset
+     *
+     * @param bool $useAsBaseFieldset
+     * @return Fieldset
+     */
+    public function setUseAsBaseFieldset($useAsBaseFieldset)
+    {
+        $this->useAsBaseFieldset = (bool)$useAsBaseFieldset;
+        return $this;
+    }
+
+    /**
+     * Is this fieldset use as a base fieldset for a form ?
+     *
+     * @return bool
+     */
+    public function useAsBaseFieldset()
+    {
+        return $this->useAsBaseFieldset;
     }
 }

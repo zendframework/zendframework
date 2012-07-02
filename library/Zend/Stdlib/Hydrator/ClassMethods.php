@@ -84,7 +84,15 @@ class ClassMethods implements HydratorInterface
                 if (!$this->useCamelCase) {
                     $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
                 }
-                 $attributes[$attribute] = $object->$method();
+
+                $result = $object->$method();
+
+                // Recursively extract if object contains itself other objects
+                if (is_object($result)) {
+                    $result = $this->extract($result);
+                }
+
+                $attributes[$attribute] = $result;
             }
         }
         
@@ -115,6 +123,7 @@ class ClassMethods implements HydratorInterface
             $letter = substr(array_shift($letters), 1, 1);
             return ucfirst($letter);
         };
+
         foreach ($data as $property => $value) {
             if (!$this->useCamelCase) {
                 $property = preg_replace_callback('/(_[a-z])/', $transform, $property);

@@ -19,9 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\Validator;
+namespace ZendTest\I18n\Validator;
 
-use Zend\Validator\PostCode;
+use Zend\I18n\Validator\PostCode as PostCodeValidator;
 
 /**
  * @category   Zend
@@ -45,34 +45,35 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->validator = new PostCode('de_AT');
+        $this->validator = new PostCodeValidator('de_AT');
+    }
+
+    public function postCodesDataProvider()
+    {
+        return array(
+            array('2292',    true),
+            array('1000',    true),
+            array('0000',    true),
+            array('12345',   false),
+            array(1234,      true),
+            array(9821,      true),
+            array('21A4',    false),
+            array('ABCD',    false),
+            array(true,      false),
+            array('AT-2292', false),
+            array(1.56,      false),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @dataProvider postCodesDataProvider
      * @return void
      */
-    public function testBasic()
+    public function testBasic($postCode, $expected)
     {
-        $valuesExpected = array(
-            array('2292', true),
-            array('1000', true),
-            array('0000', true),
-            array('12345', false),
-            array(1234, true),
-            array(9821, true),
-            array('21A4', false),
-            array('ABCD', false),
-            array(true, false),
-            array('AT-2292', false),
-            array(1.56, false)
-        );
-
-        foreach ($valuesExpected as $element) {
-            $this->assertEquals($element[1], $this->validator->isValid($element[0]),
-                'Test failed with ' . var_export($element, 1));
-        }
+        $this->assertEquals($expected, $this->validator->isValid($postCode));
     }
 
     /**
@@ -90,8 +91,8 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingLocalesWithoutRegion()
     {
-        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Unable to detect a region');
-        $this->validator->setLocale('de');
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Invalid locale string given');
+        $this->validator->setLocale('de')->isValid('1000');
     }
 
     /**
@@ -99,8 +100,8 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingLocalesWithoutPostalCodes()
     {
-        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Unable to detect a postcode format');
-        $this->validator->setLocale('gez_ER');
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'A postcode-format string has to be given for validation');
+        $this->validator->setLocale('gez_ER')->isValid('1000');
     }
 
     /**
@@ -117,28 +118,19 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
     public function testSetGetFormat()
     {
         $this->validator->setFormat('\d{1}');
-        $this->assertEquals('/^\d{1}$/', $this->validator->getFormat());
-
-        $this->validator->setFormat('/^\d{1}');
-        $this->assertEquals('/^\d{1}$/', $this->validator->getFormat());
-
-        $this->validator->setFormat('/^\d{1}$/');
-        $this->assertEquals('/^\d{1}$/', $this->validator->getFormat());
-
-        $this->validator->setFormat('\d{1}$/');
-        $this->assertEquals('/^\d{1}$/', $this->validator->getFormat());
+        $this->assertEquals('\d{1}', $this->validator->getFormat());
     }
 
     public function testSetGetFormatThrowsExceptionOnNullFormat()
     {
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'A postcode-format string has to be given');
-        $this->validator->setFormat(null);
+        $this->validator->setLocale(null)->setFormat(null)->isValid('1000');
     }
 
     public function testSetGetFormatThrowsExceptionOnEmptyFormat()
     {
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'A postcode-format string has to be given');
-        $this->validator->setFormat('');
+        $this->validator->setLocale(null)->setFormat('')->isValid('1000');
     }
 
     /**
@@ -150,7 +142,6 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
         $message = $this->validator->getMessages();
         $this->assertContains('not appear to be a postal code', $message['postcodeNoMatch']);
     }
-
 
      /**
      * Test service class with invalid validation

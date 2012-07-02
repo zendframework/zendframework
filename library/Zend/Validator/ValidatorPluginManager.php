@@ -32,7 +32,7 @@ class ValidatorPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of validators
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -99,7 +99,6 @@ class ValidatorPluginManager extends AbstractPluginManager
         'greaterthan'              => 'Zend\Validator\GreaterThan',
         'hex'                      => 'Zend\Validator\Hex',
         'hostname'                 => 'Zend\Validator\Hostname',
-        'iban'                     => 'Zend\Validator\Iban',
         'identical'                => 'Zend\Validator\Identical',
         'inarray'                  => 'Zend\Validator\InArray',
         'int'                      => 'Zend\Validator\Int',
@@ -107,7 +106,6 @@ class ValidatorPluginManager extends AbstractPluginManager
         'isbn'                     => 'Zend\Validator\Isbn',
         'lessthan'                 => 'Zend\Validator\LessThan',
         'notempty'                 => 'Zend\Validator\NotEmpty',
-        'postcode'                 => 'Zend\Validator\PostCode',
         'regex'                    => 'Zend\Validator\Regex',
         'sitemapchangefreq'        => 'Zend\Validator\Sitemap\Changefreq',
         'sitemaplastmod'           => 'Zend\Validator\Sitemap\Lastmod',
@@ -121,8 +119,8 @@ class ValidatorPluginManager extends AbstractPluginManager
      * Validate the plugin
      *
      * Checks that the validator loaded is an instance of ValidatorInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */

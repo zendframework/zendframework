@@ -18,11 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Validator;
+namespace Zend\I18n\Validator;
 
 use Traversable;
-use Zend\Locale\Locale;
+use Locale;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Validator\AbstractValidator;
+use Zend\Validator\Exception;
 
 /**
  * Validates IBAN Numbers (International Bank Account Numbers)
@@ -52,7 +54,7 @@ class Iban extends AbstractValidator
     /**
      * Optional locale
      *
-     * @var string|Locale|null
+     * @var string|null
      */
     protected $locale;
 
@@ -112,19 +114,14 @@ class Iban extends AbstractValidator
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
+        } elseif (!is_array($options)) {
+            $options = func_get_args();
+            $temp['locale'] = array_shift($options);
+            $options = $temp;
         }
 
-        if (is_array($options)) {
-            if (array_key_exists('locale', $options)) {
-                $options  = $options['locale'];
-                unset($options['locale']);
-            } else {
-                $options = null;
-            }
-        }
-
-        if ($options !== null) {
-            $this->setLocale($options);
+        if (array_key_exists('locale', $options)) {
+            $this->setLocale($options['locale']);
         }
 
         parent::__construct($options);
@@ -133,7 +130,7 @@ class Iban extends AbstractValidator
     /**
      * Returns the locale option
      *
-     * @return string|Locale|null
+     * @return string|null
      */
     public function getLocale()
     {
@@ -143,19 +140,12 @@ class Iban extends AbstractValidator
     /**
      * Sets the locale option
      *
-     * @param  string|Locale $locale
+     * @param  string|null $locale
      * @return Iban provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
     public function setLocale($locale = null)
     {
-        if ($locale !== false) {
-            $locale = Locale::findLocale($locale);
-            if (strlen($locale) < 4) {
-                throw new Exception\InvalidArgumentException('Region must be given for IBAN validation');
-            }
-        }
-
         $this->locale = $locale;
         return $this;
     }
@@ -168,14 +158,21 @@ class Iban extends AbstractValidator
      */
     public function isValid($value)
     {
+        if (!is_string($value)) {
+            $this->error(self::INVALID);
+            return false;
+        }
+
         $value = strtoupper($value);
         $this->setValue($value);
 
         if (empty($this->locale)) {
             $region = substr($value, 0, 2);
         } else {
-            $region = new Locale($this->locale);
-            $region = $region->getRegion();
+            $region = Locale::getRegion($this->locale);
+            if ('' === $region) {
+                throw new Exception\InvalidArgumentException("Invalid locale string given");
+            }
         }
 
         if (!array_key_exists($region, $this->ibanregex)) {

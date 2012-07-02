@@ -19,9 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\Validator;
+namespace ZendTest\I18n\Validator;
 
-use Zend\Validator\Iban;
+use Zend\I18n\Validator\Iban as IbanValidator;
 
 /**
  * @category   Zend
@@ -33,47 +33,47 @@ use Zend\Validator\Iban;
  */
 class IbanTest extends \PHPUnit_Framework_TestCase
 {
+    public function ibanDataProvider()
+    {
+        return array(
+            array('AD1200012030200359100100', true),
+            array('AT611904300234573201',     true),
+            array('AT61 1904 3002 3457 3201', false),
+            array('AD1200012030200354100100', false),
+        );
+    }
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @dataProvider ibanDataProvider
      * @return void
      */
-    public function testBasic()
+    public function testBasic($iban, $expected)
     {
-        $validator = new Iban();
-        $valuesExpected = array(
-            'AD1200012030200359100100' => true,
-            'AT611904300234573201'     => true,
-            'AT61 1904 3002 3457 3201' => false,
-            'AD1200012030200354100100' => false,
-        );
-        foreach ($valuesExpected as $input => $result) {
-            $this->assertEquals($result, $validator->isValid($input),
-                                "'$input' expected to be " . ($result ? '' : 'in') . 'valid');
-        }
+        $validator = new IbanValidator();
+        $this->assertEquals($expected, $validator->isValid($iban));
     }
 
     public function testSettingAndGettingLocale()
     {
-        $validator = new Iban();
+        $validator = new IbanValidator();
 
         $validator->setLocale('de_DE');
         $this->assertEquals('de_DE', $validator->getLocale());
 
-        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'IBAN validation');
-        $validator->setLocale('de_QA');
-
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Invalid locale string given');
+        $validator->setLocale('foobar')->isValid('AD1200012030200354100100');
     }
 
     public function testInstanceWithLocale()
     {
-        $validator = new Iban('de_AT');
+        $validator = new IbanValidator('de_AT');
         $this->assertTrue($validator->isValid('AT611904300234573201'));
     }
 
     public function testIbanNotSupported()
     {
-        $validator = new Iban('en_US');
+        $validator = new IbanValidator('en_US');
         $this->assertFalse($validator->isValid('AT611904300234573201'));
     }
 
@@ -82,13 +82,13 @@ class IbanTest extends \PHPUnit_Framework_TestCase
      */
     public function testIbanDetectionWithoutLocale()
     {
-        $validator = new Iban(false);
+        $validator = new IbanValidator(false);
         $this->assertTrue($validator->isValid('AT611904300234573201'));
     }
 
     public function testEqualsMessageTemplates()
     {
-        $validator = new Iban();
+        $validator = new IbanValidator();
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
                                      'messageTemplates', $validator);
     }

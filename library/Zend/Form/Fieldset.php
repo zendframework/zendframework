@@ -107,9 +107,10 @@ class Fieldset extends Element implements FieldsetInterface
      * the element or fieldset, order in which to prioritize it, etc.
      *
      * @todo   Should we detect if the element/fieldset name conflicts?
-     * @param  array|Traversable|ElementInterface $elementOrFieldset
-     * @param  array $flags
-     * @return FieldsetInterface
+     * @param  array|ElementInterface $elementOrFieldset
+     * @param  array                  $flags
+     * @return Fieldset|FieldsetInterface
+     * @throws Exception\InvalidArgumentException
      */
     public function add($elementOrFieldset, array $flags = array())
     {
@@ -245,6 +246,7 @@ class Fieldset extends Element implements FieldsetInterface
      *
      * @param  array|Traversable $messages
      * @return FieldsetInterface
+     * @throws Exception\InvalidArgumentException
      */
     public function setMessages($messages)
     {
@@ -276,6 +278,7 @@ class Fieldset extends Element implements FieldsetInterface
      *
      * @param  null|string $elementName
      * @return array|Traversable
+     * @throws Exception\InvalidArgumentException
      */
     public function getMessages($elementName = null)
     {
@@ -329,6 +332,7 @@ class Fieldset extends Element implements FieldsetInterface
      *
      * @param  array|Traversable $data
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function populateValues($data)
     {

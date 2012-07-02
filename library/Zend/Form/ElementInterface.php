@@ -57,8 +57,8 @@ interface ElementInterface
 
     /**
      * Retrieve a single element attribute
-     * 
-     * @param  string $optionalKey 
+     *
+     * @param  string $key
      * @return mixed
      */
     public function getAttribute($key);
@@ -76,7 +76,7 @@ interface ElementInterface
      *
      * Implementation will decide if this will overwrite or merge.
      * 
-     * @param  array|\Traversable $arrayOrTraversable 
+     * @param  array|\Traversable $arrayOrTraversable
      * @return ElementInterface
      */
     public function setAttributes($arrayOrTraversable);

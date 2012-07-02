@@ -43,13 +43,6 @@ class Date implements HeaderInterface
      */
     protected $encoding = 'ASCII';
 
-    /**
-     * Factory: create header object from string
-     * 
-     * @param  string $headerLine 
-     * @return Date
-     * @throws Exception\InvalidArgumentException
-     */
     public static function fromString($headerLine)
     {
         list($name, $value) = explode(': ', $headerLine, 2);
@@ -65,55 +58,29 @@ class Date implements HeaderInterface
         return $header;
     }
 
-    /**
-     * Get the header name 
-     * 
-     * @return string
-     */
     public function getFieldName()
     {
         return 'Date';
     }
 
-    /**
-     * Get the header value
-     * 
-     * @return string
-     */
-    public function getFieldValue()
+    public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
         return $this->value;
     }
 
-    /**
-     * Set header encoding
-     * 
-     * @param  string $encoding 
-     * @return AbstractAddressList
-     */
     public function setEncoding($encoding) 
     {
         $this->encoding = $encoding;
         return $this;
     }
 
-    /**
-     * Get header encoding
-     * 
-     * @return string
-     */
     public function getEncoding()
     {
         return $this->encoding;
     }
 
-    /**
-     * Serialize header to string
-     * 
-     * @return string
-     */
     public function toString()
     {
-        return 'Date: ' . $this->getFieldValue();
+        return 'Date: ' . $this->getFieldValue(HeaderInterface::FORMAT_RAW);
     }
 }

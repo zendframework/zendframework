@@ -318,11 +318,12 @@ class Part implements RecursiveIterator, Part\PartInterface
         switch ($format) {
             case 'string':
                 if ($header instanceof HeaderInterface) {
-                    $return = $header->getFieldValue();
+                    $return = $header->getFieldValue(HeaderInterface::FORMAT_RAW);
                 } else {
                     $return = '';
                     foreach ($header as $h) {
-                        $return .= $h->getFieldValue() . Mime\Mime::LINEEND;
+                        $return .= $h->getFieldValue(HeaderInterface::FORMAT_RAW)
+                                 . Mime\Mime::LINEEND;
                     }
                     $return = trim($return, Mime\Mime::LINEEND);
                 }
@@ -333,7 +334,7 @@ class Part implements RecursiveIterator, Part\PartInterface
                 } else {
                     $return = array();
                     foreach ($header as $h) {
-                        $return[] = $h->getFieldValue();
+                        $return[] = $h->getFieldValue(HeaderInterface::FORMAT_RAW);
                     }
                 }
                 break;

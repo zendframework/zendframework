@@ -77,19 +77,6 @@ class DateFormat extends AbstractHelper
     }
 
     /**
-     * Add a formatter.
-     *
-     * @param  string            $name
-     * @param  IntlDateFormatter $formatter
-     * @return DateFormat
-     */
-    public function addFormatter($name, IntlDateFormatter $formatter)
-    {
-        $this->formatters[$name] = $formatter;
-        return $this;
-    }
-
-    /**
      * Format a date.
      *
      * @param  DateTime|integer|array $date

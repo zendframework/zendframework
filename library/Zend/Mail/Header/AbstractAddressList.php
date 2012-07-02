@@ -66,7 +66,7 @@ abstract class AbstractAddressList implements HeaderInterface
      */
     public static function fromString($headerLine)
     {
-        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
+        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
 
         // split into name/value
         list($fieldName, $fieldValue) = explode(': ', $headerLine, 2);
@@ -98,7 +98,7 @@ abstract class AbstractAddressList implements HeaderInterface
             if (empty($name)) {
                 $name = null;
             } else {
-                $name = iconv_mime_decode($name, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
+                $name = iconv_mime_decode($name, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
             }
 
             if (isset($matches['namedEmail'])) {

@@ -53,7 +53,7 @@ class Sender implements HeaderInterface
      */
     public static function fromString($headerLine)
     {
-        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
+        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
         list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
@@ -69,7 +69,7 @@ class Sender implements HeaderInterface
             if (empty($name)) {
                 $name = null;
             } else {
-                $name = iconv_mime_decode($name, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
+                $name = iconv_mime_decode($name, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
             }
             $header->setAddress($matches['email'], $name);
         }

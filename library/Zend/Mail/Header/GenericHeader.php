@@ -55,7 +55,7 @@ class GenericHeader implements HeaderInterface
      */
     public static function fromString($headerLine)
     {
-        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
+        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
         $parts = explode(': ', $headerLine, 2);
         if (count($parts) != 2) {
             throw new Exception\InvalidArgumentException('Header must match with the format "name: value"');

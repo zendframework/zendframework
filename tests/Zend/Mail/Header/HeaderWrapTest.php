@@ -61,7 +61,7 @@ class HeaderWrapTest extends \PHPUnit_Framework_TestCase
 
         $test = HeaderWrap::wrap($string, $header);
         $this->assertEquals($expected, $test);
-        $this->assertEquals($string, iconv_mime_decode($test));
+        $this->assertEquals($string, iconv_mime_decode($test, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8'));
     }
 
     /**

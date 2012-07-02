@@ -650,7 +650,7 @@ class ServiceManager implements ServiceLocatorInterface
         } catch (\Exception $e) {
             unset($circularDependencyResolver[$depKey]);
             throw new Exception\ServiceNotCreatedException(
-                sprintf('Abstract factory raised an exception when creating "%s"; no instance returned', $rName),
+                sprintf('An exception was raised while creating "%s"; no instance returned', $rName),
                 $e->getCode(),
                 $e
             );

@@ -114,7 +114,7 @@ class Element implements ElementInterface
         }
 
         if (isset($options['label_attributes'])) {
-            $this->setRowLabelAttributes($options['label_attributes']);
+            $this->setLabelAttributes($options['label_attributes']);
         }
 
         return $this;

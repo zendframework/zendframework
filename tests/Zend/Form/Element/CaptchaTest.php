@@ -74,7 +74,7 @@ class CaptchaTest extends TestCase
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));
         $element->setCaptcha($captcha);
-        $this->assertSame($captcha, $element->getAttribute('captcha'));
+        $this->assertSame($captcha, $element->getCaptcha());
     }
 
     public function testCreatingCaptchaElementViaFormFactoryWillCreateCaptcha()
@@ -83,14 +83,14 @@ class CaptchaTest extends TestCase
         $element = $factory->createElement(array(
             'type'       => 'Zend\Form\Element\Captcha',
             'name'       => 'foo',
-            'attributes' => array(
+            'options'    => array(
                 'captcha' => array(
                     'class'   => 'dumb',
                     'options' => array(
                         'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
-                    ),
-                ),
-            ),
+                    )
+                )
+            )
         ));
         $this->assertInstanceOf('Zend\Form\Element\Captcha', $element);
         $captcha = $element->getCaptcha();

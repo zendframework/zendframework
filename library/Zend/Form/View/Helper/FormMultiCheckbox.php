@@ -204,7 +204,7 @@ class FormMultiCheckbox extends FormInput
     public function render(ElementInterface $element)
     {
         $name = static::getName($element);
-        if (empty($name)) {
+        if ($name === '') {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has an assigned name; none discovered',
                 __METHOD__
@@ -234,11 +234,11 @@ class FormMultiCheckbox extends FormInput
             unset($attributes['value']);
         }
 
-        $rendered = $this->renderOptions($options, $selectedOptions, $attributes);
+        $rendered = $this->renderOptions($element, $options, $selectedOptions, $attributes);
 
         // Render hidden element
-        $useHiddenElement = isset($attributes['useHiddenElement'])
-            ? (bool) $attributes['useHiddenElement']
+        $useHiddenElement = $element->useHiddenElement()
+            ? $element->useHiddenElement()
             : $this->useHiddenElement;
 
         if ($useHiddenElement) {
@@ -248,21 +248,28 @@ class FormMultiCheckbox extends FormInput
         return $rendered;
     }
 
-    protected function renderOptions(array $options, array $selectedOptions, array $attributes)
+    /**
+     * Render options
+     *
+     * @param ElementInterface $element
+     * @param array            $options
+     * @param array            $selectedOptions
+     * @param array            $attributes
+     * @return string
+     */
+    protected function renderOptions(ElementInterface $element, array $options, array $selectedOptions,
+                                     array $attributes)
     {
-        if (isset($attributes['labelAttributes'])) {
-            $globalLabelAttributes = $attributes['labelAttributes'];
-            unset($attributes['labelAttributes']);
-        } else {
+        $escapeHelper    = $this->getEscapeHelper();
+        $labelHelper     = $this->getLabelHelper();
+        $labelClose      = $labelHelper->closeTag();
+        $labelPosition   = $this->getLabelPosition();
+        $globalLabelAttributes = $element->getLabelAttributes();
+        $closingBracket  = $this->getInlineClosingBracket();
+
+        if (empty($globalLabelAttributes)) {
             $globalLabelAttributes = $this->labelAttributes;
         }
-
-        $inputHelper    = $this->getInputHelper();
-        $escapeHelper   = $this->getEscapeHelper();
-        $labelHelper    = $this->getLabelHelper();
-        $labelClose     = $labelHelper->closeTag();
-        $labelPosition  = $this->getLabelPosition();
-        $closingBracket = $this->getInlineClosingBracket();
 
         $combinedMarkup = array();
         $count          = 0;
@@ -296,10 +303,10 @@ class FormMultiCheckbox extends FormInput
             if (isset($optionSpec['disabled'])) {
                 $disabled = $optionSpec['disabled'];
             }
-            if (isset($optionSpec['labelAttributes'])) {
+            if (isset($optionSpec['label_attributes'])) {
                 $labelAttributes = (isset($labelAttributes))
-                    ? array_merge($labelAttributes, $optionSpec['labelAttributes'])
-                    : $optionSpec['labelAttributes'];
+                    ? array_merge($labelAttributes, $optionSpec['label_attributes'])
+                    : $optionSpec['label_attributes'];
             }
             if (isset($optionSpec['attributes'])) {
                 $inputAttributes = array_merge($inputAttributes, $optionSpec['attributes']);
@@ -349,8 +356,8 @@ class FormMultiCheckbox extends FormInput
     {
         $closingBracket = $this->getInlineClosingBracket();
 
-        $uncheckedValue = isset($attributes['uncheckedValue'])
-                ? $attributes['uncheckedValue']
+        $uncheckedValue = $element->getUncheckedValue()
+                ? $element->getUncheckedValue()
                 : $this->uncheckedValue;
 
         $hiddenAttributes = array(

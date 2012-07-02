@@ -21,7 +21,7 @@
 
 namespace ZendTest\Form\View\Helper;
 
-use Zend\Form\Element;
+use Zend\Form\Element\MultiCheckbox as MultiCheckboxElement;
 use Zend\Form\View\Helper\FormMultiCheckbox as FormMultiCheckboxHelper;
 
 /**
@@ -41,7 +41,7 @@ class FormMultiCheckboxTest extends CommonTestCase
 
     public function getElement()
     {
-        $element = new Element('foo');
+        $element = new MultiCheckboxElement('foo');
         $options = array(
             'This is the first label' => 'value1',
             'This is the second label' => 'value2',
@@ -53,14 +53,14 @@ class FormMultiCheckboxTest extends CommonTestCase
 
     public function getElementWithOptionSpec()
     {
-        $element = new Element('foo');
+        $element = new MultiCheckboxElement('foo');
         $options = array(
             'This is the first label' => 'value1',
             'This is the second label' => array(
                 'value'           => 'value2',
                 'label'           => 'This is the second label (overridden)',
                 'disabled'        => false,
-                'labelAttributes' => array('class' => 'label-class'),
+                'label_attributes' => array('class' => 'label-class'),
                 'attributes'      => array('class' => 'input-class'),
             ),
             'This is the third label' => 'value3',
@@ -119,8 +119,8 @@ class FormMultiCheckboxTest extends CommonTestCase
     public function testGenerateCheckBoxesAndHiddenElement()
     {
         $element = $this->getElement();
-        $element->setAttribute('useHiddenElement', true);
-        $element->setAttribute('uncheckedValue', 'none');
+        $element->setUseHiddenElement(true);
+        $element->setUncheckedValue('none');
         $options = $element->getAttribute('options');
         $markup  = $this->helper->render($element);
 
@@ -187,8 +187,7 @@ class FormMultiCheckboxTest extends CommonTestCase
     public function testAllowsSpecifyingLabelAttributesInElementAttributes()
     {
         $element = $this->getElement();
-        $element->setAttribute('labelAttributes', array('class' => 'checkbox'));
-
+        $element->setLabelAttributes(array('class' => 'checkbox'));
         $markup  = $this->helper->render($element);
 
         $this->assertEquals(3, substr_count($markup, '<label class="checkbox"'));

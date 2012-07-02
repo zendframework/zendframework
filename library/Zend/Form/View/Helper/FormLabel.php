@@ -79,7 +79,13 @@ class FormLabel extends AbstractHelper
             ));
         }
 
+        $labelAttributes = $attributesOrElement->getLabelAttributes();
         $attributes = array('for' => $id);
+
+        if (!empty($labelAttributes)) {
+            $attributes = array_merge($labelAttributes, $attributes);
+        }
+
         $attributes = $this->createAttributesString($attributes);
         return sprintf('<label %s>', $attributes);
     }
@@ -112,10 +118,10 @@ class FormLabel extends AbstractHelper
         }
 
         $openTag = $this->openTag($element);
-        $label   = false;
-        if (null === $labelContent || null !== $position) {
+        $label   = '';
+        if ($labelContent === null || $position !== null) {
             $label = $element->getLabel();
-            if (null === $label) {
+            if (empty($label)) {
                 throw new Exception\DomainException(sprintf(
                     '%s expects either label content as the second argument, or that the element provided has a label attribute; neither found',
                     __METHOD__

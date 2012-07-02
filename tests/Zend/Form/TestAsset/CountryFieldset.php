@@ -14,17 +14,11 @@ class CountryFieldset extends Fieldset implements InputFilterProviderInterface
         $this->setHydrator(new ClassMethodsHydrator())
              ->setObject(new Entity\Country());
 
-        $name = new \Zend\Form\Element('name');
-        $name->setAttributes(array(
-            'type' => 'text',
-            'label' => 'Name of the country'
-        ));
+        $name = new \Zend\Form\Element('name', array('label' => 'Name of the country'));
+        $name->setAttribute('type', 'text');
 
-        $continent = new \Zend\Form\Element('continent');
-        $continent->setAttributes(array(
-            'type' => 'text',
-            'label' => 'Continent of the city'
-        ));
+        $continent = new \Zend\Form\Element('continent', array('label' => 'Continent of the city'));
+        $continent->setAttribute('type', 'text');
 
         $this->add($name);
         $this->add($continent);

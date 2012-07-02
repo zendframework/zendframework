@@ -42,6 +42,11 @@ class Element implements ElementInterface
     protected $label;
 
     /**
+     * @var array
+     */
+    protected $labelAttributes;
+
+    /**
      * @var array Validation error messages
      */
     protected $messages = array();
@@ -74,7 +79,7 @@ class Element implements ElementInterface
         $this->setAttribute('name', $name);
         return $this;
     }
-    
+
     /**
      * Get value for name
      *
@@ -86,7 +91,9 @@ class Element implements ElementInterface
     }
 
     /**
-     * Set options for an element
+     * Set options for an element. Accepted options are:
+     * - label: label to associate with the element
+     * - label_attributes: attributes to use when the label is rendered
      *
      * @param array|\Traversable $options
      * @return Element|ElementInterface
@@ -104,6 +111,10 @@ class Element implements ElementInterface
 
         if (isset($options['label'])) {
             $this->setLabel($options['label']);
+        }
+
+        if (isset($options['label_attributes'])) {
+            $this->setRowLabelAttributes($options['label_attributes']);
         }
 
         return $this;
@@ -183,7 +194,7 @@ class Element implements ElementInterface
 
     /**
      * Clear all attributes
-     * 
+     *
      * @return void
      */
     public function clearAttributes()
@@ -217,6 +228,28 @@ class Element implements ElementInterface
     }
 
     /**
+     * Set the attributes to use with the label
+     *
+     * @param array $labelAttributes
+     * @return Element
+     */
+    public function setLabelAttributes(array $labelAttributes)
+    {
+        $this->labelAttributes = $labelAttributes;
+        return $this;
+    }
+
+    /**
+     * Get the attributes to use with the label
+     *
+     * @return array
+     */
+    public function getLabelAttributes()
+    {
+        return $this->labelAttributes;
+    }
+
+    /**
      * Set a list of messages to report when validation fails
      *
      * @param  array|Traversable $messages
@@ -241,7 +274,7 @@ class Element implements ElementInterface
      * Get validation error messages, if any.
      *
      * Returns a list of validation failure messages, if any.
-     * 
+     *
      * @return array|Traversable
      */
     public function getMessages()

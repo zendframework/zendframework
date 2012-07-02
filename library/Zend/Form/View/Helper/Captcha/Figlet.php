@@ -42,17 +42,15 @@ class Figlet extends AbstractWord
      */
     public function render(ElementInterface $element)
     {
-        $attributes = $element->getAttributes();
+        $captcha = $element->getCaptcha();
 
-        if (!isset($attributes['captcha'])
-            || !$attributes['captcha'] instanceof CaptchaAdapter
-        ) {
+        if ($captcha === null || !$captcha instanceof CaptchaAdapter) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has a "captcha" attribute of type Zend\Captcha\Figlet; none found',
                 __METHOD__
             ));
         }
-        $captcha = $attributes['captcha'];
+
         $captcha->generate();
 
         $figlet = sprintf(

@@ -14,16 +14,11 @@ class AddressFieldset extends Fieldset implements InputFilterProviderInterface
         $this->setHydrator(new ClassMethodsHydrator())
              ->setObject(new Entity\Address());
 
-        $street = new \Zend\Form\Element('street');
-        $street->setAttributes(array(
-            'type' => 'text',
-            'label' => 'Street'
-        ));
+        $street = new \Zend\Form\Element('street', array('label' => 'Street'));
+        $street->setAttribute('type', 'text');
 
         $city = new CityFieldset;
-        $city->setAttributes(array(
-            'label' => 'City'
-        ));
+        $city->setLabel('City');
 
         $this->add($street);
         $this->add($city);

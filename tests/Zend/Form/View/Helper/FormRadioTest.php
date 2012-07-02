@@ -21,7 +21,7 @@
 
 namespace ZendTest\Form\View\Helper;
 
-use Zend\Form\Element;
+use Zend\Form\Element\Radio as RadioElement;
 use Zend\Form\View\Helper\FormRadio as FormRadioHelper;
 
 /**
@@ -41,7 +41,7 @@ class FormRadioTest extends CommonTestCase
 
     public function getElement()
     {
-        $element = new Element('foo');
+        $element = new RadioElement('foo');
         $options = array(
             'This is the first label' => 'value1',
             'This is the second label' => 'value2',
@@ -53,14 +53,14 @@ class FormRadioTest extends CommonTestCase
 
     public function getElementWithOptionSpec()
     {
-        $element = new Element('foo');
+        $element = new RadioElement('foo');
         $options = array(
             'This is the first label' => 'value1',
             'This is the second label' => array(
                 'value'           => 'value2',
                 'label'           => 'This is the second label (overridden)',
                 'disabled'        => false,
-                'labelAttributes' => array('class' => 'label-class'),
+                'label_attributes' => array('class' => 'label-class'),
                 'attributes'      => array('class' => 'input-class'),
             ),
             'This is the third label' => 'value3',
@@ -119,8 +119,8 @@ class FormRadioTest extends CommonTestCase
     public function testGenerateRadioOptionsAndHiddenElement()
     {
         $element = $this->getElement();
-        $element->setAttribute('useHiddenElement', true);
-        $element->setAttribute('uncheckedValue', 'none');
+        $element->setUseHiddenElement(true);
+        $element->setUncheckedValue('none');
         $options = $element->getAttribute('options');
         $markup  = $this->helper->render($element);
 
@@ -196,7 +196,7 @@ class FormRadioTest extends CommonTestCase
     public function testAllowsSpecifyingLabelAttributesInElementAttributes()
     {
         $element = $this->getElement();
-        $element->setAttribute('labelAttributes', array('class' => 'radio'));
+        $element->setLabelAttributes(array('class' => 'radio'));
 
         $markup  = $this->helper->render($element);
 

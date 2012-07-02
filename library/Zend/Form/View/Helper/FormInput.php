@@ -73,7 +73,7 @@ class FormInput extends AbstractHelper
 
     /**
      * Valid values for the input type
-     * 
+     *
      * @var array
      */
     protected $validTypes = array(
@@ -105,14 +105,14 @@ class FormInput extends AbstractHelper
 
     /**
      * Render a form <input> element from the provided $element
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @return string
      */
     public function render(ElementInterface $element)
     {
-        $name   = $element->getName();
-        if (strlen($name) === 0) {
+        $name = $element->getName();
+        if ($name === null || $name === '') {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has an assigned name; none discovered',
                 __METHOD__
@@ -124,8 +124,8 @@ class FormInput extends AbstractHelper
         $attributes['type'] = $this->getType($element);
 
         return sprintf(
-            '<input %s%s', 
-            $this->createAttributesString($attributes), 
+            '<input %s%s',
+            $this->createAttributesString($attributes),
             $this->getInlineClosingBracket()
         );
     }
@@ -134,8 +134,8 @@ class FormInput extends AbstractHelper
      * Invoke helper as functor
      *
      * Proxies to {@link render()}.
-     * 
-     * @param  ElementInterface|null $element 
+     *
+     * @param  ElementInterface|null $element
      * @return string|FormInput
      */
     public function __invoke(ElementInterface $element = null)
@@ -149,8 +149,8 @@ class FormInput extends AbstractHelper
 
     /**
      * Determine input type to use
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @return string
      */
     protected function getType(ElementInterface $element)

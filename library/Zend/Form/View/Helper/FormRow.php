@@ -46,7 +46,7 @@ class FormRow extends AbstractHelper
     /**
      * @var array
      */
-    protected $rowLabelAttributes;
+    protected $labelAttributes;
 
     /**
      * @var FormLabel
@@ -81,12 +81,12 @@ class FormRow extends AbstractHelper
         $elementString       = $elementHelper->render($element);
         $elementErrors       = $elementErrorsHelper->render($element);
 
-        if (!empty($label)) {
+        if ($label !== '') {
             $label = $escapeHelper($label);
-            $rowLabelAttributes = $element->getAttribute('rowLabelAttributes');
+            $labelAttributes = $element->getLabelAttributes();
 
-            if (empty($rowLabelAttributes)) {
-                $rowLabelAttributes = $this->rowLabelAttributes;
+            if (empty($labelAttributes)) {
+                $labelAttributes = $this->labelAttributes;
             }
 
             // Multicheckbox elements have to be handled differently as the HTML standard does not allow nested
@@ -98,7 +98,7 @@ class FormRow extends AbstractHelper
                     $label,
                     $elementString);
             } else {
-                $labelOpen  = $labelHelper->openTag($rowLabelAttributes);
+                $labelOpen  = $labelHelper->openTag($labelAttributes);
                 $labelClose = $labelHelper->closeTag();
 
                 switch ($this->labelPosition) {
@@ -159,7 +159,9 @@ class FormRow extends AbstractHelper
                 (string) $labelPosition
             ));
         }
+
         $this->labelPosition = $labelPosition;
+
         return $this;
     }
 
@@ -176,12 +178,12 @@ class FormRow extends AbstractHelper
     /**
      * Set the attributes for the row label
      *
-     * @param array $rowLabelAttributes
+     * @param  array $labelAttributes
      * @return FormRow
      */
-    public function setRowLabelAttributes($rowLabelAttributes)
+    public function setLabelAttributes($labelAttributes)
     {
-        $this->rowLabelAttributes = $rowLabelAttributes;
+        $this->labelAttributes = $labelAttributes;
         return $this;
     }
 
@@ -190,9 +192,9 @@ class FormRow extends AbstractHelper
      *
      * @return array
      */
-    public function getRowLabelAttributes()
+    public function getLabelAttributes()
     {
-        return $this->rowLabelAttributes;
+        return $this->labelAttributes;
     }
 
     /**

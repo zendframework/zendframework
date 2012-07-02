@@ -29,6 +29,7 @@ use Zend\Form\Fieldset;
 use Zend\Form\FieldsetInterface;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Stdlib\PriorityQueue;
 
 /**
  * @category   Zend
@@ -152,7 +153,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
         // If there are still data, this means that elements or fieldsets were dynamically added. If allowed by the user, add them
         if (!empty($data) && $this->allowAdd) {
             foreach ($data as $key => $value) {
-                $elementOrFieldset = clone $this->targetElement;
+                $elementOrFieldset = $this->createNewTargetElementInstance();
                 $elementOrFieldset->setName($key);
 
                 if ($elementOrFieldset instanceof FieldsetInterface) {
@@ -312,7 +313,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     {
         if ($this->targetElement !== null) {
             for ($i = 0 ; $i != $this->count ; ++$i) {
-                $elementOrFieldset = clone $this->targetElement;
+                $elementOrFieldset = $this->createNewTargetElementInstance();
                 $elementOrFieldset->setName($i);
 
                 $this->add($elementOrFieldset);
@@ -333,12 +334,41 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     protected function addTemplateElement()
     {
         if ($this->targetElement !== null) {
-            $elementOrFieldset = clone $this->targetElement;
+            $elementOrFieldset = $this->createNewTargetElementInstance();
             $elementOrFieldset->setName($this->templatePlaceholder);
             $this->add($elementOrFieldset);
         }
 
         return $this;
+    }
+
+    /**
+     * Create a deep clone of a new target element
+     */
+    protected function createNewTargetElementInstance()
+    {
+        // If targetElement is a fieldset, make a deep clone of it
+        if ($this->targetElement instanceof FieldsetInterface) {
+            /** @var Fieldset $targetElement */
+            $targetElement = $this->targetElement;
+            $targetElement->iterator = new PriorityQueue();
+
+            foreach ($targetElement->byName as $key => $value) {
+                $value = clone $value;
+                $targetElement->byName[$key] = $value;
+                $targetElement->iterator->insert($value);
+
+                if ($value instanceof FieldsetInterface) {
+                    $targetElement->fieldsets[$key] = $value;
+                } elseif ($value instanceof ElementInterface) {
+                    $targetElement->elements[$key] = $value;
+                }
+            }
+
+            return $targetElement;
+        }
+
+        return clone $this->targetElement;
     }
 
     /**

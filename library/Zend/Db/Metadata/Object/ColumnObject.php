@@ -95,30 +95,6 @@ class ColumnObject
      */
     protected $errata = array();
 
-    /*
-    public function getCatalogName()
-    {
-        return $this->catalogName;
-    }
-
-    public function setCatalogName($catalogName)
-    {
-        $this->catalogName = $catalogName;
-        return $this;
-    }
-
-    public function getSchemaName()
-    {
-        return $this->schemaName;
-    }
-
-    public function setSchemaName($schemaName)
-    {
-        $this->schemaName = $schemaName;
-        return $this;
-    }
-    */
-
     /**
      * Constructor
      * 
@@ -363,40 +339,6 @@ class ColumnObject
     {
         return $this->numericUnsigned;
     }
-
-//    /**
-//     * @return the $characterSetName
-//     */
-//    public function getCharacterSetName()
-//    {
-//        return $this->characterSetName;
-//    }
-//
-//    /**
-//     * @param $characterSetName the $characterSetName to set
-//     */
-//    public function setCharacterSetName($characterSetName)
-//    {
-//        $this->characterSetName = $characterSetName;
-//        return $this;
-//    }
-//
-//    /**
-//     * @return the $collationName
-//     */
-//    public function getCollationName()
-//    {
-//        return $this->collationName;
-//    }
-//
-//    /**
-//     * @param $collationName the $collationName to set
-//     */
-//    public function setCollationName($collationName)
-//    {
-//        $this->collationName = $collationName;
-//        return $this;
-//    }
 
     /**
      * @return the $errata

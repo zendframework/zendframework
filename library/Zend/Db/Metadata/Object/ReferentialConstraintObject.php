@@ -17,10 +17,6 @@ namespace Zend\Db\Metadata\Object;
  */
 class ReferentialConstraint
 {
-    /*
-    protected $catalogName = null;
-    protected $schemaName = null;
-    */
 
     /**
      *
@@ -57,30 +53,6 @@ class ReferentialConstraint
      * @var type 
      */
     protected $deleteRule = null;
-
-    /*
-    public function getCatalogName()
-    {
-        return $this->catalogName;
-    }
-
-    public function setCatalogName($catalogName)
-    {
-        $this->catalogName = $catalogName;
-        return $this;
-    }
-
-    public function getSchemaName()
-    {
-        return $this->schemaName;
-    }
-
-    public function setSchemaName($schemaName)
-    {
-        $this->schemaName = $schemaName;
-        return $this;
-    }
-    */
 
     /**
      * Get unique constraint catalog name

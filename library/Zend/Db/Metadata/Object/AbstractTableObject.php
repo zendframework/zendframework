@@ -47,30 +47,6 @@ abstract class AbstractTableObject
      */
     protected $constraints = null;
 
-    /*
-    public function getCatalogName()
-    {
-        return $this->catalogName;
-    }
-
-    public function setCatalogName($catalogName)
-    {
-        $this->catalogName = $catalogName;
-        return $this;
-    }
-
-    public function getSchemaName()
-    {
-        return $this->schemaName;
-    }
-
-    public function setSchemaName($schemaName)
-    {
-        $this->schemaName = $schemaName;
-        return $this;
-    }
-    */
-
     /**
      * Constructor
      * 

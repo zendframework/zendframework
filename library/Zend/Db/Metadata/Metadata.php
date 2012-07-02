@@ -55,9 +55,11 @@ class Metadata implements MetadataInterface
             case 'MySQL':
                 return new Source\MysqlMetadata($adapter);
             case 'SQLServer':
-                return new Source\InformationSchemaMetadata($adapter);
+                return new Source\SqlServerMetadata($adapter);
             case 'SQLite':
                 return new Source\SqliteMetadata($adapter);
+            case 'PostgreSQL':
+                return new Source\PostgresqlMetadata($adapter);
         }
 
         throw new \Exception('cannot create source from adapter');

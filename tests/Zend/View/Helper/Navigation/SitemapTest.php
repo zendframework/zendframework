@@ -211,7 +211,9 @@ class SitemapTest extends AbstractTest
         $this->_helper->setUseSitemapValidators(false);
 
         $expected = $this->_getExpected('sitemap/invalid.xml');
-        $this->assertEquals($expected, $this->_helper->render($nav));
+        $got = str_replace("\n", PHP_EOL, $this->_helper->render($nav));
+        
+        $this->assertEquals($expected, $got);
     }
 
     public function testSetServerUrlRequiresValidUri()

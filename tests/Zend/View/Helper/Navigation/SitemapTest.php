@@ -173,7 +173,9 @@ class SitemapTest extends AbstractTest
         $this->_helper->setMinDepth(1)->setMaxDepth(2);
 
         $expected = $this->_getExpected('sitemap/depth3.xml');
-        $this->assertEquals($expected, $this->_helper->render());
+        $got = str_replace("\n", PHP_EOL, $this->_helper->render());
+        
+        $this->assertEquals($expected, $got);
     }
 
     public function testDropXmlDeclaration()

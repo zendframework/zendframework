@@ -72,6 +72,7 @@ class FilterPluginManager extends AbstractPluginManager
         'localizedtonormalized'     => 'Zend\Filter\LocalizedToNormalized',
         'normalizedtolocalized'     => 'Zend\Filter\NormalizedToLocalized',
         'null'                      => 'Zend\Filter\Null',
+        'numberformat'              => 'Zend\I18n\Filter\NumberFormat',
         'pregreplace'               => 'Zend\Filter\PregReplace',
         'realpath'                  => 'Zend\Filter\RealPath',
         'stringtolower'             => 'Zend\Filter\StringToLower',

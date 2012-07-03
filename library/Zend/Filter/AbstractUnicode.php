@@ -40,17 +40,19 @@ abstract class AbstractUnicode extends AbstractFilter
     {
         if ($encoding !== null) {
             if (!function_exists('mb_strtolower')) {
-                throw new Exception\ExtensionNotLoadedException(
-                    get_called_class() . ' requires mbstring extension to be loaded'
-                );
+                throw new Exception\ExtensionNotLoadedException(sprintf(
+                    '%s requires mbstring extension to be loaded',
+                    get_class($this)
+                ));
             }
 
             $encoding    = strtolower($encoding);
             $mbEncodings = array_map('strtolower', mb_list_encodings());
             if (!in_array($encoding, $mbEncodings)) {
-                throw new Exception\InvalidArgumentException(
-                    "Encoding '{$encoding}' is not supported by mbstring extension"
-                );
+                throw new Exception\InvalidArgumentException(sprintf(
+                    "Encoding '%s' is not supported by mbstring extension",
+                    $encoding
+                ));
             }
         }
 

@@ -74,7 +74,9 @@ class FormRowTest extends TestCase
     public function testCanCreateLabelValueAfterInput()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
+        $element->setOptions(array(
+            'label' => 'The value for foo:',
+        ));
         $this->helper->setLabelPosition('append');
         $markup = $this->helper->render($element);
         $this->assertContains('<label><input', $markup);

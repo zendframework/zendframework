@@ -22,7 +22,7 @@
 namespace ZendTest\Validator;
 
 use Zend\Validator\AbstractValidator;
-use Zend\Validator\Alpha;
+use Zend\I18n\Validator\Alpha;
 use Zend\Validator\Between;
 use Zend\Validator\StaticValidator;
 use Zend\Validator\ValidatorPluginManager;

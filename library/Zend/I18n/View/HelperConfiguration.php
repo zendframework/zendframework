@@ -39,6 +39,9 @@ class HelperConfiguration implements ConfigurationInterface
      * @var array Pre-aliased view helpers
      */
     protected $invokables = array(
+        'currency'        => 'Zend\I18n\View\Helper\Currency',
+        'dateformat'      => 'Zend\I18n\View\Helper\DateFormat',
+        'numberformat'    => 'Zend\I18n\View\Helper\NumberFormat',
         'translate'       => 'Zend\I18n\View\Helper\Translate',
         'translateplural' => 'Zend\I18n\View\Helper\TranslatePlural',
     );
@@ -47,7 +50,7 @@ class HelperConfiguration implements ConfigurationInterface
      * Configure the provided service manager instance with the configuration
      * in this class.
      *
-     * @param  ServiceManager $serviceManager 
+     * @param  ServiceManager $serviceManager
      * @return void
      */
     public function configureServiceManager(ServiceManager $serviceManager)

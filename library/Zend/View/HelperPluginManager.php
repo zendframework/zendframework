@@ -50,7 +50,6 @@ class HelperPluginManager extends AbstractPluginManager
         'doctype'             => 'Zend\View\Helper\Doctype', // overridden by a factory in ViewHelperManagerFactory
         'basepath'            => 'Zend\View\Helper\BasePath',
         'url'                 => 'Zend\View\Helper\Url',
-        'currency'            => 'Zend\View\Helper\Currency',
         'cycle'               => 'Zend\View\Helper\Cycle',
         'declarevars'         => 'Zend\View\Helper\DeclareVars',
         'escape'              => 'Zend\View\Helper\Escape',

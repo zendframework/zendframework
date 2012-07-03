@@ -236,7 +236,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $predicate($this->where);
         } else {
             if (is_string($predicate)) {
-                $predicate = new Predicate\Expression($predicate);
+                $predicate = new Predicate\Expression(str_replace('%', '%%',$predicate));
                 $this->where->addPredicate($predicate, $combination);
             } elseif (is_array($predicate)) {
                 foreach ($predicate as $pkey => $pvalue) {

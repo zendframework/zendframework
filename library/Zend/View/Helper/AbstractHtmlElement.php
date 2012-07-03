@@ -33,7 +33,7 @@ abstract class AbstractHtmlElement extends AbstractHelper
     /**
      * EOL character
      */
-    const EOL = "\n";
+    const EOL = PHP_EOL;
 
     /**
      * The tag closing bracket

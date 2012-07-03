@@ -97,6 +97,21 @@ interface ElementInterface
     public function getAttributes();
 
     /**
+     * Set the label used for this element
+     *
+     * @param $label
+     * @return ElementInterface
+     */
+    public function setLabel($label);
+
+    /**
+     * Retrieve the label used for this element
+     *
+     * @return string
+     */
+    public function getLabel();
+
+    /**
      * Set a list of messages to report when validation fails
      *
      * @param  array|\Traversable $messages

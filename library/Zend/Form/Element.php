@@ -206,7 +206,7 @@ class Element implements ElementInterface
      * Set the label used for this element
      *
      * @param $label
-     * @return Element
+     * @return ElementInterface
      */
     public function setLabel($label)
     {

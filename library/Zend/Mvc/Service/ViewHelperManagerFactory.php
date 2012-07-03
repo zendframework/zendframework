@@ -46,6 +46,7 @@ class ViewHelperManagerFactory implements FactoryInterface
      */
     protected $defaultHelperMapClasses = array(
         'Zend\Form\View\HelperConfiguration',
+        'Zend\I18n\View\HelperConfiguration',
         'Zend\Navigation\View\HelperConfiguration'
     );
 

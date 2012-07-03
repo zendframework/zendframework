@@ -139,9 +139,7 @@ class SitemapTest extends AbstractTest
         $this->_helper->setRole($acl['role']);
 
         $expected = $this->_getExpected('sitemap/acl.xml');
-        $got = str_replace("\n", PHP_EOL, $this->_helper->render());
-        
-        $this->assertEquals($expected, $got);
+        $this->assertEquals($expected, $this->_helper->render());
     }
 
     public function testUseAclButNoRole()
@@ -151,9 +149,7 @@ class SitemapTest extends AbstractTest
         $this->_helper->setRole(null);
 
         $expected = $this->_getExpected('sitemap/acl2.xml');
-        $got = str_replace("\n", PHP_EOL, $this->_helper->render());
-        
-        $this->assertEquals($expected, $got);
+        $this->assertEquals($expected, $this->_helper->render());
     }
 
     public function testSettingMaxDepth()
@@ -161,9 +157,7 @@ class SitemapTest extends AbstractTest
         $this->_helper->setMaxDepth(0);
 
         $expected = $this->_getExpected('sitemap/depth1.xml');
-        $got = str_replace("\n", PHP_EOL, $this->_helper->render());
-        
-        $this->assertEquals($expected, $got);
+        $this->assertEquals($expected, $this->_helper->render());
     }
 
     public function testSettingMinDepth()
@@ -171,9 +165,7 @@ class SitemapTest extends AbstractTest
         $this->_helper->setMinDepth(1);
 
         $expected = $this->_getExpected('sitemap/depth2.xml');
-        $got = str_replace("\n", PHP_EOL, $this->_helper->render());
-        
-        $this->assertEquals($expected, $got);
+        $this->assertEquals($expected, $this->_helper->render());
     }
 
     public function testSettingBothDepths()
@@ -181,9 +173,7 @@ class SitemapTest extends AbstractTest
         $this->_helper->setMinDepth(1)->setMaxDepth(2);
 
         $expected = $this->_getExpected('sitemap/depth3.xml');
-        $got = str_replace("\n", PHP_EOL, $this->_helper->render());
-        
-        $this->assertEquals($expected, $got);
+        $this->assertEquals($expected, $this->_helper->render());
     }
 
     public function testDropXmlDeclaration()
@@ -191,9 +181,7 @@ class SitemapTest extends AbstractTest
         $this->_helper->setUseXmlDeclaration(false);
 
         $expected = $this->_getExpected('sitemap/nodecl.xml');
-        $got = str_replace("\n", PHP_EOL, $this->_helper->render($this->_nav2));
-        
-        $this->assertEquals($expected, $got);
+        $this->assertEquals($expected, $this->_helper->render($this->_nav2));
     }
 
     public function testThrowExceptionOnInvalidLoc()
@@ -223,9 +211,7 @@ class SitemapTest extends AbstractTest
         $this->_helper->setUseSitemapValidators(false);
 
         $expected = $this->_getExpected('sitemap/invalid.xml');
-        $got = str_replace("\n", PHP_EOL, $this->_helper->render($nav));
-        
-        $this->assertEquals($expected, $got);
+        $this->assertEquals($expected, $this->_helper->render($nav));
     }
 
     public function testSetServerUrlRequiresValidUri()
@@ -245,9 +231,7 @@ class SitemapTest extends AbstractTest
         $this->_helper->setServerUrl('http://sub.example.org');
 
         $expected = $this->_getExpected('sitemap/serverurl1.xml');
-        $got = str_replace("\n", PHP_EOL, $this->_helper->render());
-        
-        $this->assertEquals($expected, $got);
+        $this->assertEquals($expected, $this->_helper->render());
     }
 
     public function testSetServerUrlWithSchemeAndPortAndHostAndPath()
@@ -255,9 +239,7 @@ class SitemapTest extends AbstractTest
         $this->_helper->setServerUrl('http://sub.example.org:8080/foo/');
 
         $expected = $this->_getExpected('sitemap/serverurl2.xml');
-        $got = str_replace("\n", PHP_EOL, $this->_helper->render());
-        
-        $this->assertEquals($expected, $got);
+        $this->assertEquals($expected, $this->_helper->render());
     }
 
     public function testGetUserSchemaValidation()

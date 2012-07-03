@@ -448,6 +448,8 @@ class Sitemap extends AbstractHelper
                $dom->saveXML() :
                $dom->saveXML($dom->documentElement);
 
-        return rtrim($xml, PHP_EOL);
+        // Replace all new line characters with the correct system EOL character. This is needed
+        // in order to keep unit tests working.
+        return str_replace("\n", PHP_EOL, rtrim($xml, PHP_EOL) );
     }
 }

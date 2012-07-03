@@ -20,6 +20,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+use Zend\Console;
+use Zend\DocBook\ClassParser;
+use Zend\DocBook\SkeletonGenerator;
+use Zend\Code\Reflection\ClassReflection as ReflectionClass;
+use Zend\Loader\StandardAutoloader;
+
 /**
  * Generate Docbook XML skeleton for a given class as a documentation stub.
  *
@@ -35,11 +41,6 @@
  *                          file named after the provided class (in the form of
  *                          "zend.component.class-name.xml")
  */
-
-use Zend\Console\Getopt,
-    Zend\DocBook\ClassParser,
-    Zend\DocBook\SkeletonGenerator,
-    Zend\Code\Reflection\ClassReflection as ReflectionClass;
 
 $libPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
 if (!is_dir($libPath)) {
@@ -57,7 +58,7 @@ if (!is_dir($libPath)) {
 }
 
 // Setup autoloading
-$loader = new Zend\Loader\StandardAutoloader();
+$loader = new StandardAutoloader(array('autoregister_zf' => true));
 $loader->register();
 
 $rules = array(
@@ -73,7 +74,7 @@ $docbookFile = false;
 try {
     $opts = new Zend\Console\Getopt($rules);
     $opts->parse();
-} catch (Zend\Console\Getopt\Exception $e) {
+} catch (Console\Exception\RuntimeException $e) {
     // Error creating or parsing options; show usage message
     echo $e->getUsageMessage();
     exit(2);

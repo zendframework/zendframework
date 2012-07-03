@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /**
  * Zend Framework
@@ -55,7 +56,7 @@ if (is_dir($zfLibraryPath)) {
 $libraryPath = getcwd();
 
 // Setup autoloading
-$loader = new StandardAutoloader();
+$loader = new StandardAutoloader(array('autoregister_zf' => true));
 $loader->register();
 
 $rules = array(
@@ -160,7 +161,7 @@ $l = new ClassFileLocator($libraryPath);
 
 // Iterate over each element in the path, and create a map of 
 // classname => filename, where the filename is relative to the library path
-$map = new \stdClass;
+$map = new stdClass;
 foreach ($l as $file) {
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
     $filename  = str_replace($libraryPath . '/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()) . '/' . $file->getFilename());

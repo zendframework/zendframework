@@ -42,16 +42,13 @@ class StringToLower extends AbstractUnicode
      *
      * @param string|array|Traversable $options OPTIONAL
      */
-    public function __construct($options = null)
+    public function __construct($encodingOrOptions = null)
     {
-        if ($options !== null) {
-            if ($options instanceof Traversable) {
-                $options = iterator_to_array($options);
-            }
-            if (!is_array($options)) {
-                $this->setEncoding($options);
+        if ($encodingOrOptions !== null) {
+            if (!static::isOptions($encodingOrOptions)){
+                $this->setEncoding($encodingOrOptions);
             } else {
-                $this->setOptions($options);
+                $this->setOptions($encodingOrOptions);
             }
         }
     }

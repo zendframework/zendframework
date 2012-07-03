@@ -78,7 +78,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         }
 
         $chain = new FilterChain();
-        $chain->attachByName('string_trim', array('encoding' => 'utf-8'), 100)
+        $chain->attachByName('string_trim', null, 100)
               ->attachByName('strip_tags')
               ->attachByName('string_to_lower', array('encoding' => 'utf-8'), 900);
         $value = '<a name="foo"> ABC </a>';

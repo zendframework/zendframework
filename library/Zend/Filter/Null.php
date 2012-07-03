@@ -56,7 +56,7 @@ class Null extends AbstractFilter
      * @var array
      */
     protected $options = array(
-        'type'         => self::TYPE_ALL,
+        'type' => self::TYPE_ALL,
     );
 
     /**

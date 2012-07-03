@@ -46,6 +46,21 @@ abstract class AbstractFilter implements FilterInterface
     protected static $hasPcreUnicodeSupport = null;
 
     /**
+     * @return bool
+     */
+    public static function hasPcreUnicodeSupport()
+    {
+        if (static::$hasPcreUnicodeSupport === null) {
+            if (defined('PREG_BAD_UTF8_OFFSET_ERROR') || @preg_match('/\pL/u', 'a') == 1){
+                static::$hasPcreUnicodeSupport = true;
+            } else {
+                static::$hasPcreUnicodeSupport = false;
+            }
+        }
+        return static::$hasPcreUnicodeSupport;
+    }
+
+    /**
      * @param  array|Traversable $options
      * @return AbstractFilter
      * @throws Exception\InvalidArgumentException
@@ -100,15 +115,13 @@ abstract class AbstractFilter implements FilterInterface
         return $this->filter($value);
     }
 
-    public static function hasPcreUnicodeSupport()
+    /**
+     *
+     * @param  mixed $options
+     * @return bool
+     */
+    protected static function isOptions($options)
     {
-        if (static::$hasPcreUnicodeSupport === null) {
-            if (defined('PREG_BAD_UTF8_OFFSET_ERROR') || @preg_match('/\pL/u', 'a') == 1){
-                static::$hasPcreUnicodeSupport = true;
-            } else {
-                static::$hasPcreUnicodeSupport = false;
-            }
-        }
-        return static::$hasPcreUnicodeSupport;
+        return (is_array($options) || $options instanceof Traversable);
     }
 }

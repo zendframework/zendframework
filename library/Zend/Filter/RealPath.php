@@ -40,12 +40,14 @@ class RealPath extends AbstractFilter
      *
      * @param boolean|\Traversable $options Options to set
      */
-    public function __construct($options = true)
+    public function __construct($existsOrOptions = true)
     {
-        if (is_bool($options)) {
-            $this->setExists($options);
-        } else {
-            $this->setOptions($options);
+        if ($existsOrOptions !== null) {
+            if (!static::isOptions($existsOrOptions)){
+                $this->setExists($existsOrOptions);
+            } else {
+                $this->setOptions($existsOrOptions);
+            }
         }
     }
 

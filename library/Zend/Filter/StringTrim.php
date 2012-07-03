@@ -43,16 +43,15 @@ class StringTrim extends AbstractFilter
      *
      * @param  string|array|Traversable $options
      */
-    public function __construct($options = null)
+    public function __construct($charlistOrOptions = null)
     {
-        if ($options !== null) {
-            if ($options instanceof Traversable) {
-                $options = iterator_to_array($options);
-            }
-            if (!is_array($options)) {
-                $this->setCharList($options);
+        if ($charlistOrOptions !== null) {
+            if (!is_array($charlistOrOptions)
+                && !$charlistOrOptions  instanceof Traversable)
+            {
+                $this->setCharList($charlistOrOptions);
             } else {
-                $this->setOptions($options);
+                $this->setOptions($charlistOrOptions);
             }
         }
     }

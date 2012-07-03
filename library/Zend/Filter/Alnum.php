@@ -43,25 +43,17 @@ class Alnum extends AbstractLocale
     /**
      * Sets default option values for this instance
      *
-     * @param  array|Traversable|boolean|null $options
+     * @param array|Traversable|boolean|null $allowWhiteSpaceOrOptions
+     * @param string|null $locale
      */
-    public function __construct($options = null)
+    public function __construct($allowWhiteSpaceOrOptions = null, $locale = null)
     {
-        if ($options !== null) {
-            if ($options instanceof Traversable) {
-                $options = iterator_to_array($options);
-            }
-
-            if (!is_array($options)) {
-                $args = func_get_args();
-                if (isset($args[0])) {
-                    $this->setAllowWhiteSpace($args[0]);
-                }
-                if (isset($args[1])) {
-                    $this->setLocale($args[1]);
-                }
+        if ($allowWhiteSpaceOrOptions !== null) {
+            if (!static::isOptions($allowWhiteSpaceOrOptions)){
+                $this->setAllowWhiteSpace($allowWhiteSpaceOrOptions);
+                $this->setLocale($locale);
             } else {
-                $this->setOptions($options);
+                $this->setOptions($allowWhiteSpaceOrOptions);
             }
         }
     }

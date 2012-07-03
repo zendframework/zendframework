@@ -34,31 +34,20 @@ class Callback extends AbstractFilter
      * @var array
      */
     protected $options = array(
-        'callback' => null,
-        'params'   => null
+        'callback'        => null,
+        'callback_params' => array()
     );
 
     /**
      * @param array|Traversable $options
      */
-    public function __construct($options)
+    public function __construct($callbackOrOptions, $callbackParams = array())
     {
-        if ($options instanceof Traversable) {
-            $options = iterator_to_array($options);
-        }
-
-        if (!is_array($options)) {
-            $args     = func_get_args();
-            if (isset($args[0])) {
-                $callback = $args[0];
-                $params   = null;
-                if (isset($args[1])) {
-                    $params = $args[1];
-                }
-                $this->setCallback($callback, $params);
-            }
+        if (is_callable($callbackOrOptions)) {
+            $this->setCallback($callbackOrOptions);
+            $this->setCallbackParams($callbackParams);
         } else {
-            $this->setOptions($options);
+            $this->setOptions($callbackOrOptions);
         }
     }
 
@@ -68,7 +57,7 @@ class Callback extends AbstractFilter
      * @param  callable $callback
      * @return Callback
      */
-    public function setCallback($callback, $params = null)
+    public function setCallback($callback)
     {
         if (!is_callable($callback)) {
             throw new Exception\InvalidArgumentException(
@@ -77,7 +66,6 @@ class Callback extends AbstractFilter
         }
 
         $this->options['callback'] = $callback;
-        $this->options['params']   = $params;
         return $this;
     }
 
@@ -92,6 +80,28 @@ class Callback extends AbstractFilter
     }
 
     /**
+     * Sets parameters for the callback
+     *
+     * @param  mixed $params
+     * @return Callback
+     */
+    public function setCallbackParams($params)
+    {
+        $this->options['callback_params'] = (array) $params;
+        return $this;
+    }
+
+    /**
+     * Get parameters for the callback
+     *
+     * @return mixed
+     */
+    public function getCallbackParams()
+    {
+        return $this->options['callback_params'];
+    }
+
+    /**
      * Calls the filter per callback
      *
      * @param  mixed $value Options for the set callback
@@ -99,14 +109,8 @@ class Callback extends AbstractFilter
      */
     public function filter($value)
     {
-        $params = array($value);
-        if (isset($this->options['params'])) {
-            if (!is_array($this->options['params'])) {
-                array_push($params, $this->options['params']);
-            } else {
-                $params = $params + $this->options['params'];
-            }
-        }
+        $params = (array) $this->options['callback_params'];
+        array_unshift($params, $value);
 
         return call_user_func_array($this->options['callback'], $params);
     }

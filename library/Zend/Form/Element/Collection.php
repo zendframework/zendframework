@@ -333,7 +333,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
      */
     protected function addTemplateElement()
     {
-        if ($this->targetElement !== null) {
+        if ($this->targetElement !== null && !$this->has($this->templatePlaceholder)) {
             $elementOrFieldset = $this->createNewTargetElementInstance();
             $elementOrFieldset->setName($this->templatePlaceholder);
             $this->add($elementOrFieldset);
@@ -350,7 +350,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
         // If targetElement is a fieldset, make a deep clone of it
         if ($this->targetElement instanceof FieldsetInterface) {
             /** @var Fieldset $targetElement */
-            $targetElement = $this->targetElement;
+            $targetElement = clone $this->targetElement;
             $targetElement->iterator = new PriorityQueue();
 
             foreach ($targetElement->byName as $key => $value) {

@@ -139,6 +139,18 @@ class Gmp implements AdapterInterface
     }
 
     /**
+     * Get absolute value of a big integer
+     *
+     * @param  string $operand
+     * @return string
+     */
+    public function abs($operand)
+    {
+        $result = gmp_abs($operand);
+        return gmp_strval($result);
+    }
+
+    /**
      * Get modulus of a big integer
      *
      * @param  string $leftOperand

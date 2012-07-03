@@ -158,6 +158,20 @@ class Bcmath implements AdapterInterface
     }
 
     /**
+     * Get absolute value of a big integer
+     *
+     * @param  string $operand
+     * @return string
+     */
+    public function abs($operand)
+    {
+        if ('-' == $operand[0]) {
+            return substr($operand, 1);
+        }
+        return $operand;
+    }
+
+    /**
      * Get modulus of a big integer
      *
      * @param  string $leftOperand

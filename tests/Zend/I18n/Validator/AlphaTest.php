@@ -21,7 +21,7 @@
 
 namespace ZendTest\Validator;
 
-use Zend\Validator\Alpha;
+use Zend\I18n\Validator\Alpha as AlphaValidator;
 
 /**
  * @category   Zend
@@ -34,13 +34,13 @@ use Zend\Validator\Alpha;
 class AlphaTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Alpha
+     * @var AlphaValidator
      */
     protected $validator;
 
     public function setUp()
     {
-        $this->validator = new Alpha();
+        $this->validator = new AlphaValidator();
     }
 
     /**
@@ -97,13 +97,13 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
             "\n"      => true,
             " \t "    => true,
             "a\tb c"  => true
-            );
+        );
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals(
                 $result,
                 $this->validator->isValid($input),
                 "Expected '$input' to be considered " . ($result ? '' : 'in') . "valid"
-                );
+            );
         }
     }
 

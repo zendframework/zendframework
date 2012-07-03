@@ -18,9 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Validator;
+namespace Zend\I18n\Validator;
 
-use Zend\Filter\Alpha as AlphaFilter;
+use Zend\Validator\AbstractValidator;
+use Zend\I18n\Filter\Alpha as AlphaFilter;
 
 /**
  * @category   Zend
@@ -28,18 +29,11 @@ use Zend\Filter\Alpha as AlphaFilter;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Alpha extends AbstractValidator
+class Alpha extends Alnum
 {
     const INVALID      = 'alphaInvalid';
     const NOT_ALPHA    = 'notAlpha';
     const STRING_EMPTY = 'alphaStringEmpty';
-
-    /**
-     * Whether to allow white space characters; off by default
-     *
-     * @var boolean
-     */
-    protected $allowWhiteSpace;
 
     /**
      * Alphabetic filter used for validation
@@ -60,40 +54,13 @@ class Alpha extends AbstractValidator
     );
 
     /**
-     * Sets default option values for this instance
+     * Options for this validator
      *
-     * @param  boolean|array $allowWhiteSpace
+     * @var array
      */
-    public function __construct($allowWhiteSpace = false)
-    {
-        parent::__construct(is_array($allowWhiteSpace) ? $allowWhiteSpace : null);
-
-        if (is_scalar($allowWhiteSpace)) {
-            $this->allowWhiteSpace = (boolean) $allowWhiteSpace;
-        }
-    }
-
-    /**
-     * Returns the allowWhiteSpace option
-     *
-     * @return boolean
-     */
-    public function getAllowWhiteSpace()
-    {
-        return $this->allowWhiteSpace;
-    }
-
-    /**
-     * Sets the allowWhiteSpace option
-     *
-     * @param boolean $allowWhiteSpace
-     * @return \Zend\Filter\Alpha Provides a fluent interface
-     */
-    public function setAllowWhiteSpace($allowWhiteSpace)
-    {
-        $this->allowWhiteSpace = (boolean) $allowWhiteSpace;
-        return $this;
-    }
+    protected $options = array(
+        'allowWhiteSpace' => false,  // Whether to allow white space characters; off by default
+    );
 
     /**
      * Returns true if and only if $value contains only alphabetic characters
@@ -119,7 +86,8 @@ class Alpha extends AbstractValidator
             self::$filter = new AlphaFilter();
         }
 
-        self::$filter->setAllowWhiteSpace($this->allowWhiteSpace);
+        //self::$filter->setAllowWhiteSpace($this->allowWhiteSpace);
+        self::$filter->setAllowWhiteSpace($this->options['allowWhiteSpace']);
 
         if ($value !== self::$filter->filter($value)) {
             $this->error(self::NOT_ALPHA);

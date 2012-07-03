@@ -18,8 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Validator;
+namespace Zend\I18n\Validator;
 
+use Zend\Validator\AbstractValidator;
 use Zend\I18n\Filter\Alnum as AlnumFilter;
 
 /**
@@ -66,9 +67,14 @@ class Alnum extends AbstractValidator
      *
      * @param array|\Traversable $options
      */
-    public function __construct($options = array())
+    public function __construct($allowWhiteSpace = false)
     {
+        $options = is_array($allowWhiteSpace) ? $allowWhiteSpace : null;
         parent::__construct($options);
+
+        if (is_scalar($allowWhiteSpace)) {
+            $this->options['allowWhiteSpace'] = (boolean) $allowWhiteSpace;
+        }
     }
 
     /**
@@ -84,8 +90,8 @@ class Alnum extends AbstractValidator
     /**
      * Sets the allowWhiteSpace option
      *
-     * @param  boolean $allowWhiteSpace
-     * @return Alnum Provides a fluent interface
+     * @param boolean $allowWhiteSpace
+     * @return AlnumFilter Provides a fluent interface
      */
     public function setAllowWhiteSpace($allowWhiteSpace)
     {
@@ -116,7 +122,8 @@ class Alnum extends AbstractValidator
             self::$filter = new AlnumFilter();
         }
 
-        self::$filter->setAllowWhiteSpace($this->getAllowWhiteSpace());
+        self::$filter->setAllowWhiteSpace($this->options['allowWhiteSpace']);
+
         if ($value != self::$filter->filter($value)) {
             $this->error(self::NOT_ALNUM);
             return false;

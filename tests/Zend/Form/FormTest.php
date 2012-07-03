@@ -57,6 +57,23 @@ class FormTest extends TestCase
         return $address;
     }
 
+    public function getOneToManyEntity()
+    {
+        $product = new TestAsset\Entity\Product();
+        $product->setName('Chair');
+        $product->setPrice(10);
+
+        $firstCategory = new TestAsset\Entity\Category();
+        $firstCategory->setName('Office');
+
+        $secondCategory = new TestAsset\Entity\Category();
+        $secondCategory->setName('Armchair');
+
+        $product->setCategories(array($firstCategory, $secondCategory));
+
+        return $product;
+    }
+
     public function populateForm()
     {
         $this->form->add(new Element('foo'));
@@ -769,6 +786,49 @@ class FormTest extends TestCase
 
         if ($form->isValid()) {
             $this->assertEquals($address, $emptyAddress, var_export($address, 1) . "\n\n" . var_export($emptyAddress, 1));
+        }
+    }
+
+    public function testCanCorrectlyExtractDataFromOneToManyRelationship()
+    {
+        $product = $this->getOneToManyEntity();
+
+        $form = new TestAsset\NewProductForm();
+        $form->bind($product);
+        $form->setBindOnValidate(false);
+
+        if ($form->isValid()) {
+            $this->assertEquals($product, $form->getData());
+        }
+    }
+
+    public function testCanCorrectlyPopulateDataToOneToManyEntites()
+    {
+        $product = $this->getOneToManyEntity();
+        $emptyProduct = new TestAsset\Entity\Product();
+
+        $form = new TestAsset\NewProductForm();
+        $form->bind($emptyProduct);
+
+        $data = array(
+            'product' => array(
+                'name' => 'Chair',
+                'price' => 10,
+                'categories' => array(
+                    array(
+                        'name' => 'Office'
+                    ),
+                    array(
+                        'name' => 'Armchair'
+                    )
+                )
+            )
+        );
+
+        $form->setData($data);
+
+        if ($form->isValid()) {
+            $this->assertEquals($product, $emptyProduct, var_export($product, 1) . "\n\n" . var_export($emptyProduct, 1));
         }
     }
 }

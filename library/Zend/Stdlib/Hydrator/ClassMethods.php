@@ -87,9 +87,15 @@ class ClassMethods implements HydratorInterface
 
                 $result = $object->$method();
 
-                // Recursively extract if object contains itself other objects
+                // Recursively extract if object contains itself other objects or arrays of objects
                 if (is_object($result)) {
                     $result = $this->extract($result);
+                } elseif (is_array($result)) {
+                    foreach ($result as $key => $value) {
+                        if (is_object($value)) {
+                            $result[$key] = $this->extract($value);
+                        }
+                    }
                 }
 
                 $attributes[$attribute] = $result;

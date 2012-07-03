@@ -375,6 +375,7 @@ class Fieldset extends Element implements FieldsetInterface
             }
 
             $element = $this->get($name);
+
             if ($element instanceof FieldsetInterface && is_array($value)) {
                 $element->populateValues($value);
                 continue;
@@ -466,6 +467,16 @@ class Fieldset extends Element implements FieldsetInterface
 
         foreach ($values as $key => $value) {
             $element = $this->byName[$key];
+
+            if ($element instanceof Element\Collection) {
+                $collection = array();
+                foreach ($value as $subKey => $subValue) {
+                    $collection[] = $element->get($subKey)->bindValues($subValue);
+                }
+
+                $value = $collection;
+            }
+
             if ($element instanceof FieldsetInterface && is_object($element->object)) {
                 $value = $element->bindValues($value);
             }

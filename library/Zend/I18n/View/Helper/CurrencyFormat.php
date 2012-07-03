@@ -34,7 +34,7 @@ use Zend\View\Helper\AbstractHelper;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Currency extends AbstractHelper
+class CurrencyFormat extends AbstractHelper
 {
     /**
      * Locale to use instead of the default.
@@ -61,7 +61,7 @@ class Currency extends AbstractHelper
      * The 3-letter ISO 4217 currency code indicating the currency to use.
      *
      * @param  string $currencyCode
-     * @return Currency
+     * @return CurrencyFormat
      */
     public function setCurrencyCode($currencyCode)
     {
@@ -83,7 +83,7 @@ class Currency extends AbstractHelper
      * Set locale to use instead of the default.
      *
      * @param  string $locale
-     * @return Currency
+     * @return CurrencyFormat
      */
     public function setLocale($locale)
     {

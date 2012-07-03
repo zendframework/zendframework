@@ -39,7 +39,7 @@ class HelperConfiguration implements ConfigurationInterface
      * @var array Pre-aliased view helpers
      */
     protected $invokables = array(
-        'currency'        => 'Zend\I18n\View\Helper\Currency',
+        'currencyformat'  => 'Zend\I18n\View\Helper\CurrencyFormat',
         'dateformat'      => 'Zend\I18n\View\Helper\DateFormat',
         'numberformat'    => 'Zend\I18n\View\Helper\NumberFormat',
         'translate'       => 'Zend\I18n\View\Helper\Translate',

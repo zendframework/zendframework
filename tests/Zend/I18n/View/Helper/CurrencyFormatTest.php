@@ -22,11 +22,9 @@
 namespace ZendTest\I18n\View\Helper;
 
 use Locale;
-use Zend\I18n\View\Helper\Currency as CurrencyHelper;
+use Zend\I18n\View\Helper\CurrencyFormat as CurrencyHelper;
 
 /**
- * Test class for Zend_View_Helper_Currency
- *
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
@@ -35,7 +33,7 @@ use Zend\I18n\View\Helper\Currency as CurrencyHelper;
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class CurrencyTest extends \PHPUnit_Framework_TestCase
+class CurrencyFormatTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var CurrencyHelper

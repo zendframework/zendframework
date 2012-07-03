@@ -20,7 +20,7 @@
 
 namespace Zend\Validator;
 
-use Zend\Filter\Alnum as AlnumFilter;
+use Zend\I18n\Filter\Alnum as AlnumFilter;
 
 /**
  * @category   Zend
@@ -37,7 +37,7 @@ class Alnum extends AbstractValidator
     /**
      * Alphanumeric filter used for validation
      *
-     * @var \Zend\Filter\Alnum
+     * @var AlnumFilter
      */
     protected static $filter = null;
 
@@ -84,8 +84,8 @@ class Alnum extends AbstractValidator
     /**
      * Sets the allowWhiteSpace option
      *
-     * @param boolean $allowWhiteSpace
-     * @return \Zend\Filter\Alnum Provides a fluent interface
+     * @param  boolean $allowWhiteSpace
+     * @return Alnum Provides a fluent interface
      */
     public function setAllowWhiteSpace($allowWhiteSpace)
     {

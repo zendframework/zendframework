@@ -207,7 +207,7 @@ class CompressTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Gz', $filter->getAdapterName());
 
         
-        $filter->setAdapter('\Zend\Filter\Alnum');
+        $filter->setAdapter('\Zend\Filter\Boolean');
         
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'does not implement');
         $adapter = $filter->getAdapter();

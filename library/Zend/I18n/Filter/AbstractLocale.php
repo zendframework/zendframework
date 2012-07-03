@@ -34,8 +34,8 @@ abstract class AbstractLocale extends AbstractFilter
     /**
      * Sets the locale option
      *
-     * @param boolean $locale
-     * @return Alnum Provides a fluent interface
+     * @param  string|null $locale
+     * @return AbstractLocale
      */
     public function setLocale($locale = null)
     {

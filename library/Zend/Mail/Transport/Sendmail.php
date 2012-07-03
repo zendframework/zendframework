@@ -26,7 +26,8 @@ use Zend\Mail\Address\AddressInterface;
 use Traversable,
     Zend\Mail,
     Zend\Mail\Exception,
-    Zend\Mail\Headers;
+    Zend\Mail\Headers,
+    Zend\Mail\Header\HeaderInterface;
 
 /**
  * Class for sending email via the PHP internal mail() function
@@ -172,7 +173,7 @@ class Sendmail implements TransportInterface
 
         // If not on Windows, return normal string
         if (!$this->isWindowsOs()) {
-            return $to->getFieldValue();
+            return $to->getFieldValue(HeaderInterface::FORMAT_ENCODED);
         }
 
         // Otherwise, return list of emails

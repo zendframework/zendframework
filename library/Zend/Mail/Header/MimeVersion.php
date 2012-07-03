@@ -35,13 +35,6 @@ class MimeVersion implements HeaderInterface
      */
     protected $version = '1.0';
 
-    /**
-     * Unserialize from string
-     *
-     * @param  string $headerLine
-     * @throws Exception\InvalidArgumentException
-     * @return MimeVersion
-     */
     public static function fromString($headerLine)
     {
         list($name, $value) = explode(': ', $headerLine, 2);
@@ -60,53 +53,29 @@ class MimeVersion implements HeaderInterface
         return $header;
     }
 
-    /**
-     * Get the field name
-     *
-     * @return string
-     */
     public function getFieldName()
     {
         return 'MIME-Version';
     }
 
-    /**
-     * Get the field value (version string)
-     *
-     * @return string
-     */
-    public function getFieldValue()
+    public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
         return $this->version;
     }
 
-    /**
-     * Set character encoding
-     *
-     * @param  string $encoding
-     */
     public function setEncoding($encoding)
     {
         // irrelevant to this implementation
     }
 
-    /**
-     * Get character encoding
-     *
-     */
     public function getEncoding()
     {
         // irrelevant to this implementation
     }
 
-    /**
-     * Serialize to string
-     *
-     * @return string
-     */
     public function toString()
     {
-        return 'MIME-Version: ' . $this->getFieldValue();
+        return 'MIME-Version: ' . $this->getFieldValue(HeaderInterface::FORMAT_RAW);
     }
 
     /**

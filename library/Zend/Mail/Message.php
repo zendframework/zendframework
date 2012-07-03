@@ -365,7 +365,7 @@ class Message
             return null;
         }
         $header = $headers->get('subject');
-        return $header->getFieldValue();
+        return $header->getFieldValue(Header\HeaderInterface::FORMAT_ENCODED);
     }
 
     /**

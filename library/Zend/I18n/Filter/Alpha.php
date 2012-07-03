@@ -18,7 +18,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Filter;
+namespace Zend\I18n\Filter;
 
 use Locale;
 
@@ -28,30 +28,32 @@ use Locale;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractLocale extends AbstractFilter
+class Alpha extends Alnum
 {
     /**
-     * Sets the locale option
+     * Defined by Zend\Filter\FilterInterface
      *
-     * @param boolean $locale
-     * @return Alnum Provides a fluent interface
-     */
-    public function setLocale($locale = null)
-    {
-        $this->options['locale'] = $locale;
-        return $this;
-    }
-
-    /**
-     * Returns the locale option
+     * Returns the string $value, removing all but alphabetic characters
      *
+     * @param  string $value
      * @return string
      */
-    public function getLocale()
+    public function filter($value)
     {
-        if (!isset($this->options['locale'])) {
-            $this->options['locale'] = Locale::getDefault();
+        $whiteSpace = $this->options['allow_white_space'] ? '\s' : '';
+        $language   = Locale::getPrimaryLanguage($this->getLocale());
+
+        if (!static::hasPcreUnicodeSupport()) {
+            // POSIX named classes are not supported, use alternative [a-zA-Z] match
+            $pattern = '/[^a-zA-Z' . $whiteSpace . ']/';
+        } elseif ($language == 'ja' || $language == 'ko' || $language == 'zh') {
+            // Use english alphabet
+            $pattern = '/[^a-zA-Z'  . $whiteSpace . ']/u';
+        } else {
+            // Use native language alphabet
+            $pattern = '/[^\p{L}' . $whiteSpace . ']/u';
         }
-        return $this->options['locale'];
+
+        return preg_replace($pattern, '', (string) $value);
     }
 }

@@ -21,7 +21,6 @@
 
 namespace Zend\I18n\Filter;
 
-use Zend\Filter\AbstractLocale;
 use Zend\I18n\Exception;
 use NumberFormatter;
 use Traversable;
@@ -39,32 +38,33 @@ class NumberFormat extends AbstractLocale
      */
     protected $formatter = null;
 
-    public function __construct($options = null)
+    /**
+     * @param array|Traversable|string|null $localeOrOptions
+     * @param int  $style
+     * @param int  $type
+     */
+    public function __construct(
+        $localeOrOptions = null,
+        $style = NumberFormatter::DEFAULT_STYLE,
+        $type = NumberFormatter::TYPE_DOUBLE)
     {
-        if ($options !== null) {
-            if ($options instanceof Traversable) {
-                $options = iterator_to_array($options);
+        if ($localeOrOptions !== null) {
+            if ($localeOrOptions instanceof Traversable) {
+                $localeOrOptions = iterator_to_array($localeOrOptions);
             }
 
-            if (!is_array($options)) {
-                $args = func_get_args();
-                if (isset($args[0])) {
-                    $this->setLocale($args[0]);
-                }
-                if (isset($args[1])) {
-                    $this->setStyle($args[1]);
-                }
-                if (isset($args[2])) {
-                    $this->setType($args[2]);
-                }
+            if (!is_array($localeOrOptions)) {
+                $this->setLocale($localeOrOptions);
+                $this->setStyle($style);
+                $this->setType($type);
             } else {
-                $this->setOptions($options);
+                $this->setOptions($localeOrOptions);
             }
         }
     }
 
     /**
-     * @param  null $locale
+     * @param  string|null $locale
      * @return NumberFormat
      */
     public function setLocale($locale = null)

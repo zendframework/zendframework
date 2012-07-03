@@ -37,7 +37,7 @@ use Zend\Code\Reflection\ClassReflection;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractPluginManager extends ServiceManager
+abstract class AbstractPluginManager extends ServiceManager implements ServiceLocatorAwareInterface
 {
     /**
      * Allow overriding by default
@@ -52,11 +52,11 @@ abstract class AbstractPluginManager extends ServiceManager
     protected $creationOptions = null;
 
     /**
-     * Enable this by default to allow overriding the default plugins
+     * The main service locator
      *
-     * @var bool
+     * @var ServiceLocatorInterface
      */
-    protected $retrieveFromPeeringManagerFirst = true;
+    protected $serviceLocator;
 
     /**
      * Constructor
@@ -135,6 +135,28 @@ abstract class AbstractPluginManager extends ServiceManager
         }
         parent::setService($name, $service, $shared);
         return $this;
+    }
+
+    /**
+     * Set the main service locator so factories can have access to it to pull deps
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return AbstractPluginManager
+     */
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+        return $this;
+    }
+
+    /**
+     * Get the main plugin manager. Useful for fetching dependencies from within factories.
+     *
+     * @return mixed
+     */
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
     }
 
     /**

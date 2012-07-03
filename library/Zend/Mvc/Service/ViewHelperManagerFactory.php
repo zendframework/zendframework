@@ -57,7 +57,8 @@ class ViewHelperManagerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $plugins = new ViewHelperManager(null, $serviceLocator);
+        $plugins = new ViewHelperManager();
+        $plugins->setServiceLocator($serviceLocator);
 
         foreach ($this->defaultHelperMapClasses as $configClass) {
             if (is_string($configClass) && class_exists($configClass)) {
@@ -115,10 +116,6 @@ class ViewHelperManagerFactory implements FactoryInterface
             }
             return $doctypeHelper;
         });
-
-        if ($serviceLocator instanceof ServiceManager) {
-            $plugins->addPeeringServiceManager($serviceLocator);
-        }
 
         return $plugins;
     }

@@ -140,7 +140,7 @@ class RenderChildModelTest extends TestCase
         $renderer = new PhpRenderer();
         $renderer->setResolver($this->resolver);
         $this->setExpectedException('Zend\View\Exception\RuntimeException', 'no view model');
-        $this->expectOutputString("Layout start\n\n");
+        $this->expectOutputString("Layout start" . PHP_EOL . PHP_EOL);
         $renderer->render('layout');
     }
 }

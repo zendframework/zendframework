@@ -35,6 +35,11 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * @var array
      */
+    protected $pendingAbstractFactoryRequests = array();
+
+    /**
+     * @var array
+     */
     protected $shared = array();
 
     /**
@@ -534,6 +539,13 @@ class ServiceManager implements ServiceLocatorInterface
                 $this->abstractFactory[$index] = $abstractFactory = new $abstractFactory();
             }
 
+            if (
+                isset($this->pendingAbstractFactoryRequests[get_class($abstractFactory)])
+                && $this->pendingAbstractFactoryRequests[get_class($abstractFactory)] == $rName
+            ) {
+                return false;
+            }
+
             if ($abstractFactory->canCreateServiceWithName($this, $cName, $rName)) {
                 return true;
             }
@@ -767,11 +779,26 @@ class ServiceManager implements ServiceLocatorInterface
                     ($requestedName ? '(alias: ' . $requestedName . ')' : '')
                 ));
             }
-            $instance = $this->createServiceViaCallback(
-                array($abstractFactory, 'createServiceWithName'),
-                $canonicalName,
-                $requestedName
-            );
+            try {
+                $this->pendingAbstractFactoryRequests[get_class($abstractFactory)] = $requestedName;
+                $instance = $this->createServiceViaCallback(
+                    array($abstractFactory, 'createServiceWithName'),
+                    $canonicalName,
+                    $requestedName
+                );
+                unset($this->pendingAbstractFactoryRequests[get_class($abstractFactory)]);
+            } catch (\Exception $e) {
+                unset($this->pendingAbstractFactoryRequests[get_class($abstractFactory)]);
+                throw new Exception\ServiceNotCreatedException(
+                    sprintf(
+                        'An abstract factory could not create an instance of %s%s.',
+                        $canonicalName,
+                        ($requestedName ? '(alias: ' . $requestedName . ')' : '')
+                    ),
+                    $e->getCode(),
+                    $e
+                );
+            }
             if (is_object($instance)) {
                 break;
             }

@@ -478,4 +478,17 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         // should throw an exception because 'foo' already exists in the service manager
         $this->serviceManager->setAlias('foo', 'bar');
     }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::createFromAbstractFactory
+     * @covers Zend\ServiceManager\ServiceManager::has
+     */
+    public function testWillNotCreateCircularReferences()
+    {
+        $abstractFactory = new TestAsset\CircularDependencyAbstractFactory();
+        $sm = new ServiceManager();
+        $sm->addAbstractFactory($abstractFactory);
+        $foo = $sm->get('foo');
+        $this->assertSame($abstractFactory->expectedInstance, $foo);
+    }
 }

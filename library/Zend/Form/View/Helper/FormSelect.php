@@ -44,8 +44,13 @@ class FormSelect extends AbstractHelper
     protected $validTagAttributes;
 
     protected $validSelectAttributes = array(
-        'name'     => true,
-        'multiple' => true,
+        'name'      => true,
+        'autofocus' => true,
+        'disabled'  => true,
+        'form'      => true,
+        'multiple'  => true,
+        'required'  => true,
+        'size'      => true
     );
 
     protected $validOptionAttributes = array(

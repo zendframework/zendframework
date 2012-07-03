@@ -42,9 +42,9 @@ interface FieldsetInterface extends
      * $flags could contain metadata such as the alias under which to register
      * the element or fieldset, order in which to prioritize it, etc.
      *
-     * @param  array|ElementInterface $elementOrFieldset Typically, only allow objects implementing ElementInterface;
-     *                                                   however, keeping it flexible to allow a factory-based form
-     *                                                   implementation as well
+     * @param  array|\Traversable|ElementInterface $elementOrFieldset Typically, only allow objects implementing ElementInterface;
+     *                                                                however, keeping it flexible to allow a factory-based form
+     *                                                                implementation as well
      * @param  array $flags
      * @return FieldsetInterface
      */
@@ -103,7 +103,7 @@ interface FieldsetInterface extends
     /**
      * Set the object used by the hydrator
      *
-     * @param $object
+     * @param  $object
      * @return FieldsetInterface
      */
     public function setObject($object);
@@ -118,7 +118,7 @@ interface FieldsetInterface extends
     /**
      * Set the hydrator to use when binding an object to the element
      *
-     * @param HydratorInterface $hydrator
+     * @param  HydratorInterface $hydrator
      * @return FieldsetInterface
      */
     public function setHydrator(HydratorInterface $hydrator);
@@ -126,14 +126,14 @@ interface FieldsetInterface extends
     /**
      * Get the hydrator used when binding an object to the element
      *
-     * @return null|Hydrator\HydratorInterface
+     * @return null|HydratorInterface
      */
     public function getHydrator();
 
     /**
      * Bind values to the bound object
      *
-     * @param array $values
+     * @param  array $values
      * @return mixed
      */
     public function bindValues(array $values = array());

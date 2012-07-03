@@ -21,6 +21,7 @@
 namespace Zend\Form;
 
 use Traversable;
+use Zend\Form\Element\Collection;
 use Zend\Stdlib\PriorityQueue;
 use Zend\Stdlib\Hydrator;
 use Zend\Stdlib\Hydrator\HydratorInterface;
@@ -78,7 +79,7 @@ class Fieldset extends Element implements FieldsetInterface
     protected $object;
 
     /**
-     * Should this fieldset be used as a base fieldset for a given form ?
+     * Should this fieldset be used as a base fieldset in the parent form ?
      *
      * @var bool
      */
@@ -99,7 +100,7 @@ class Fieldset extends Element implements FieldsetInterface
      * Set options for a fieldset. Accepted options are:
      * - use_as_base_fieldset: is this fieldset use as the base fieldset?
      *
-     * @param array|\Traversable $options
+     * @param  array|\Traversable $options
      * @return Element|ElementInterface
      * @throws Exception\InvalidArgumentException
      */
@@ -149,8 +150,8 @@ class Fieldset extends Element implements FieldsetInterface
      * the element or fieldset, order in which to prioritize it, etc.
      *
      * @todo   Should we detect if the element/fieldset name conflicts?
-     * @param  array|ElementInterface $elementOrFieldset
-     * @param  array                  $flags
+     * @param  array|Traversable|ElementInterface $elementOrFieldset
+     * @param  array                              $flags
      * @return Fieldset|FieldsetInterface
      * @throws Exception\InvalidArgumentException
      */
@@ -197,7 +198,7 @@ class Fieldset extends Element implements FieldsetInterface
         $this->byName[$name] = $elementOrFieldset;
 
         if ($elementOrFieldset instanceof FieldsetInterface) {
-            if ($elementOrFieldset instanceof Element\Collection) {
+            if ($elementOrFieldset instanceof Collection) {
                 $elementOrFieldset->prepareCollection();
             }
 
@@ -289,7 +290,7 @@ class Fieldset extends Element implements FieldsetInterface
      * Set a hash of element names/messages to use when validation fails
      *
      * @param  array|Traversable $messages
-     * @return FieldsetInterface
+     * @return Element|ElementInterface|FieldsetInterface
      * @throws Exception\InvalidArgumentException
      */
     public function setMessages($messages)
@@ -354,7 +355,7 @@ class Fieldset extends Element implements FieldsetInterface
      * Ensures state is ready for use. Here, we append the name of the fieldsets to every elements in order to avoid
      * name clashes if the same fieldset is used multiple times
      *
-     * @param Form $form
+     * @param  Form $form
      * @return mixed|void
      */
     public function prepareElement(Form $form)
@@ -364,7 +365,7 @@ class Fieldset extends Element implements FieldsetInterface
         foreach($this->byName as $elementOrFieldset) {
             $elementOrFieldset->setName($name . '[' . $elementOrFieldset->getName() . ']');
 
-            // Recursively prepare fieldsets
+            // Recursively prepare elements
             if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
                 $elementOrFieldset->prepareElement($form);
             }
@@ -427,11 +428,20 @@ class Fieldset extends Element implements FieldsetInterface
     /**
      * Set the object used by the hydrator
      *
-     * @param $object
-     * @return FieldsetInterface
+     * @param  object $object
+     * @return Fieldset|FieldsetInterface
+     * @throws Exception\InvalidArgumentException
      */
     public function setObject($object)
     {
+        if (!is_object($object)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an object argument; received "%s"',
+                __METHOD__,
+                $object
+            ));
+        }
+
         $this->object = $object;
         return $this;
     }
@@ -449,7 +459,7 @@ class Fieldset extends Element implements FieldsetInterface
     /**
      * Set the hydrator to use when binding an object to the element
      *
-     * @param HydratorInterface $hydrator
+     * @param  HydratorInterface $hydrator
      * @return FieldsetInterface
      */
     public function setHydrator(HydratorInterface $hydrator)
@@ -467,7 +477,7 @@ class Fieldset extends Element implements FieldsetInterface
      */
     public function getHydrator()
     {
-        if (!$this->hydrator instanceof Hydrator\HydratorInterface) {
+        if (!$this->hydrator instanceof HydratorInterface) {
             $this->setHydrator(new Hydrator\ArraySerializable());
         }
         return $this->hydrator;
@@ -484,13 +494,13 @@ class Fieldset extends Element implements FieldsetInterface
         $hydrator = $this->getHydrator();
         $hydratableData = array();
 
-        foreach ($values as $key => $value) {
-            $element = $this->byName[$key];
+        foreach ($values as $name => $value) {
+            $element = $this->byName[$name];
 
-            if ($element instanceof Element\Collection) {
+            if ($element instanceof Collection) {
                 $collection = array();
-                foreach ($value as $subKey => $subValue) {
-                    $collection[] = $element->get($subKey)->bindValues($subValue);
+                foreach ($value as $subName => $subValue) {
+                    $collection[] = $element->get($subName)->bindValues($subValue);
                 }
 
                 $value = $collection;
@@ -500,7 +510,7 @@ class Fieldset extends Element implements FieldsetInterface
                 $value = $element->bindValues($value);
             }
 
-            $hydratableData[$key] = $value;
+            $hydratableData[$name] = $value;
         }
 
         $this->object = $hydrator->hydrate($hydratableData, $this->object);
@@ -510,7 +520,7 @@ class Fieldset extends Element implements FieldsetInterface
     /**
      * Set if this fieldset is used as a base fieldset
      *
-     * @param bool $useAsBaseFieldset
+     * @param  bool $useAsBaseFieldset
      * @return Fieldset
      */
     public function setUseAsBaseFieldset($useAsBaseFieldset)

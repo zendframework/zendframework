@@ -34,6 +34,25 @@ class FormTest extends TestCase
         $this->form = new Form();
     }
 
+    public function getComposedEntity()
+    {
+        $address = new TestAsset\Entity\Address();
+        $address->setStreet('1 Rue des Champs Elysées');
+
+        $city = new TestAsset\Entity\City();
+        $city->setName('Paris');
+        $city->setZipCode('75008');
+
+        $country = new TestAsset\Entity\Country();
+        $country->setName('France');
+        $country->setContinent('Europe');
+
+        $city->setCountry($country);
+        $address->setCity($city);
+
+        return $address;
+    }
+
     public function testHasFactoryComposedByDefault()
     {
         $factory = $this->form->getFormFactory();
@@ -210,5 +229,47 @@ class FormTest extends TestCase
         $nestedFieldset = $basicFieldset->get('nested_fieldset');
         $this->assertEquals('basic_fieldset[nested_fieldset][anotherField]', $nestedFieldset->get('anotherField')
                                                                                             ->getName());
+    }
+
+    public function testCanCorrectlyExtractDataFromComposedEntities()
+    {
+        $address = $this->getComposedEntity();
+
+        $form = new TestAsset\CreateAddressForm();
+        $form->bind($address);
+        $form->setBindOnValidate(false);
+
+        if ($form->isValid()) {
+            $this->assertEquals($address, $form->getData());
+        }
+    }
+
+    public function testCanCorrectlyPopulateDataToComposedEntities()
+    {
+        $address = $this->getComposedEntity();
+        $emptyAddress = new TestAsset\Entity\Address();
+
+        $form = new TestAsset\CreateAddressForm();
+        $form->bind($emptyAddress);
+
+        $data = array(
+            'address' => array(
+                'street' => '1 Rue des Champs Elysées',
+                'city' => array(
+                    'name' => 'Paris',
+                    'zipCode' => '75008',
+                    'country' => array(
+                        'name' => 'France',
+                        'continent' => 'Europe'
+                    )
+                )
+            )
+        );
+
+        $form->setData($data);
+
+        if ($form->isValid()) {
+            $this->assertEquals($address, $emptyAddress, var_export($address, 1) . "\n\n" . var_export($emptyAddress, 1));
+        }
     }
 }

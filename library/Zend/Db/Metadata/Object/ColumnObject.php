@@ -85,33 +85,15 @@ class ColumnObject
 
     /**
      *
+     * @var boolean 
+     */
+    protected $numericUnsigned = null;
+
+    /**
+     *
      * @var array
      */
     protected $errata = array();
-
-    /*
-    public function getCatalogName()
-    {
-        return $this->catalogName;
-    }
-
-    public function setCatalogName($catalogName)
-    {
-        $this->catalogName = $catalogName;
-        return $this;
-    }
-
-    public function getSchemaName()
-    {
-        return $this->schemaName;
-    }
-
-    public function setSchemaName($schemaName)
-    {
-        $this->schemaName = $schemaName;
-        return $this;
-    }
-    */
 
     /**
      * Constructor
@@ -241,6 +223,14 @@ class ColumnObject
     }
 
     /**
+     * @return bool $isNullable
+     */
+    public function isNullable()
+    {
+        return $this->isNullable;
+    }
+
+    /**
      * @return the $dataType
      */
     public function getDataType()
@@ -325,39 +315,30 @@ class ColumnObject
         return $this;
     }
 
-//    /**
-//     * @return the $characterSetName
-//     */
-//    public function getCharacterSetName()
-//    {
-//        return $this->characterSetName;
-//    }
-//
-//    /**
-//     * @param $characterSetName the $characterSetName to set
-//     */
-//    public function setCharacterSetName($characterSetName)
-//    {
-//        $this->characterSetName = $characterSetName;
-//        return $this;
-//    }
-//
-//    /**
-//     * @return the $collationName
-//     */
-//    public function getCollationName()
-//    {
-//        return $this->collationName;
-//    }
-//
-//    /**
-//     * @param $collationName the $collationName to set
-//     */
-//    public function setCollationName($collationName)
-//    {
-//        $this->collationName = $collationName;
-//        return $this;
-//    }
+    /**
+     * @return boolean
+     */
+    public function getNumericUnsigned()
+    {
+        return $this->numericUnsigned;
+    }
+
+    /**
+     * @param $numericUnsigned boolean
+     */
+    public function setNumericUnsigned($numericUnsigned)
+    {
+        $this->numericUnsigned = $numericUnsigned;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isNumericUnsigned()
+    {
+        return $this->numericUnsigned;
+    }
 
     /**
      * @return the $errata
@@ -365,6 +346,29 @@ class ColumnObject
     public function getErratas()
     {
         return $this->errata;
+    }
+
+    /**
+     * @return the $errata
+     */
+    public function setErratas(array $erratas)
+    {
+        foreach ($erratas as $name => $value) {
+            $this->setErrata($name, $value);
+        }
+        return $this;
+    }
+
+    /**
+     * @param string $errataName
+     * @return ColumnMetadata
+     */
+    public function getErrata($errataName)
+    {
+        if (array_key_exists($errataName, $this->errata)) {
+            return $this->errata[$errataName];
+        }
+        return null;
     }
 
     /**

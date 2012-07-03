@@ -9,6 +9,9 @@ class FooAbstractFactory implements AbstractFactoryInterface
 {
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
+        if ($name == 'foo') {
+            return true;
+        }
     }
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {

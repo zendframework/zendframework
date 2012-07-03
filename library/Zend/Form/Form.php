@@ -65,6 +65,30 @@ class Form extends BaseForm implements FormFactoryAwareInterface
     }
 
     /**
+     * Add an element or fieldset
+     *
+     * If $elementOrFieldset is an array or Traversable, passes the argument on
+     * to the composed factory to create the object before attaching it.
+     *
+     * $flags could contain metadata such as the alias under which to register
+     * the element or fieldset, order in which to prioritize it, etc.
+     *
+     * @param  array|Traversable|ElementInterface $elementOrFieldset
+     * @param  array $flags
+     * @return Form
+     */
+    public function add($elementOrFieldset, array $flags = array())
+    {
+        parent::add($elementOrFieldset, $flags);
+
+        if ($elementOrFieldset instanceof Fieldset && $elementOrFieldset->useAsBaseFieldset()) {
+            $this->baseFieldset = $elementOrFieldset;
+        }
+
+        return $this;
+    }
+
+    /**
      * Ensures state is ready for use
      *
      * Marshalls the input filter, to ensure validation error messages are

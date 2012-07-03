@@ -122,6 +122,8 @@ class Connection implements ConnectionInterface
             case 'mysql':
                 $sql = 'SELECT DATABASE()';
                 break;
+            case 'sqlite':
+                return 'main';
             case 'pgsql':
             default:
                 $sql = 'SELECT CURRENT_SCHEMA';

@@ -50,18 +50,43 @@ class ServiceListener implements ListenerAggregateInterface
     protected $listeners = array();
 
     /**
+     * Default service manager used to fulfill other SMs that need to be lazy loaded
+     *
+     * @var ServiceManager
+     */
+    protected $defaultServiceManager;
+
+    /**
      * @var array
      */
     protected $serviceManagers = array();
+
+    /**
+     * @param ServiceManager $serviceManager
+     */
+    public function __construct(ServiceManager $serviceManager)
+    {
+        $this->defaultServiceManager = $serviceManager;
+    }
 
     /**
      * @param string $key
      * @param ServiceManager $serviceManager
      * @return ServiceListener
      */
-    public function addServiceManager(ServiceManager $serviceManager, $key, $moduleInterface, $method)
+    public function addServiceManager($serviceManager, $key, $moduleInterface, $method)
     {
-        $this->serviceManagers[spl_object_hash($serviceManager)] = array(
+        if (is_string($serviceManager)) {
+            $smKey = md5($serviceManager);
+        } elseif ($serviceManager instanceof ServiceManager) {
+            $smKey = spl_object_hash($serviceManager);
+        } else {
+            throw new Exception\RuntimeException(sprintf(
+                'Invalid service manager provided, expected ServiceManager or string, %s provided',
+                (string) $serviceManager
+            ));
+        }
+        $this->serviceManagers[$smKey] = array(
             'service_manager'        => $serviceManager,
             'config_key'             => $key,
             'module_class_interface' => $moduleInterface,
@@ -78,7 +103,7 @@ class ServiceListener implements ListenerAggregateInterface
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach('loadModule', array($this, 'onLoadModule'), 1500);
-        $this->listeners[] = $events->attach('loadModules.post', array($this, 'onLoadModulesPost'), 8500);
+        $this->listeners[] = $events->attach('loadModules.finish', array($this, 'onLoadModulesFinish'), 8500);
         return $this;
     }
 
@@ -151,7 +176,7 @@ class ServiceListener implements ListenerAggregateInterface
      * @param  ModuleEvent $e
      * @return void
      */
-    public function onLoadModulesPost(ModuleEvent $e)
+    public function onLoadModulesFinish(ModuleEvent $e)
     {
         $configListener = $e->getConfigListener();
         $config         = $configListener->getMergedConfig(false);
@@ -177,6 +202,16 @@ class ServiceListener implements ListenerAggregateInterface
                 $smConfig = ArrayUtils::merge($smConfig, $configs);
             }
 
+            if (!$sm['service_manager'] instanceof ServiceManager) {
+                $instance = $this->defaultServiceManager->get($sm['service_manager']);
+                if (!$instance instanceof ServiceManager) {
+                    throw new Exception\RuntimeException(sprintf(
+                        'Could not find a valid ServiceManager for %s',
+                        $sm['service_manager']
+                    ));
+                }
+                $sm['service_manager'] = $instance;
+            }
             $serviceConfig = new ServiceConfiguration($smConfig);
             $serviceConfig->configureServiceManager($sm['service_manager']);
         }

@@ -57,12 +57,12 @@ class ModuleManagerFactory implements FactoryInterface
         $configuration    = $serviceLocator->get('ApplicationConfiguration');
         $listenerOptions  = new ListenerOptions($configuration['module_listener_options']);
         $defaultListeners = new DefaultListenerAggregate($listenerOptions);
-        $serviceListener = new ServiceListener();
+        $serviceListener = new ServiceListener($serviceLocator);
 
         $serviceListener->addServiceManager($serviceLocator, 'service_manager', 'Zend\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfiguration');
-        $serviceListener->addServiceManager($serviceLocator->get('ControllerLoader'), 'controllers', 'Zend\ModuleManager\Feature\ControllerProviderInterface', 'getControllerConfiguration');
-        $serviceListener->addServiceManager($serviceLocator->get('ControllerPluginManager'), 'controller_plugins', 'Zend\ModuleManager\Feature\ControllerPluginProviderInterface', 'getControllerPluginConfiguration');
-        $serviceListener->addServiceManager($serviceLocator->get('ViewHelperManager'), 'view_helpers', 'Zend\ModuleManager\Feature\ViewHelperProviderInterface', 'getViewHelperConfiguration');
+        $serviceListener->addServiceManager('ControllerLoader', 'controllers', 'Zend\ModuleManager\Feature\ControllerProviderInterface', 'getControllerConfiguration');
+        $serviceListener->addServiceManager('ControllerPluginManager', 'controller_plugins', 'Zend\ModuleManager\Feature\ControllerPluginProviderInterface', 'getControllerPluginConfiguration');
+        $serviceListener->addServiceManager('ViewHelperManager', 'view_helpers', 'Zend\ModuleManager\Feature\ViewHelperProviderInterface', 'getViewHelperConfiguration');
 
         $events        = $serviceLocator->get('EventManager');
         $events->attach($defaultListeners);

@@ -88,6 +88,9 @@ class ModuleManager implements ModuleManagerInterface
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, $this->getEvent());
 
         $this->modulesAreLoaded = true;
+
+        $this->getEventManager()->trigger(__FUNCTION__ . '.finish', $this, $this->getEvent());
+
         return $this;
     }
 

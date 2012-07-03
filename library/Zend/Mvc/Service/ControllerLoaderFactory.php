@@ -60,17 +60,16 @@ class ControllerLoaderFactory implements FactoryInterface
 
         $controllerLoader = $serviceLocator->createScopedServiceManager();
 
-        // @TODO: Add support for DI. We cannot pull the Configuration service here, as it causes a circular dependency.
-        //$configuration    = $serviceLocator->get('Configuration');
-        //if (isset($configuration['di']) && $serviceLocator->has('Di')) {
-        //    $di = $serviceLocator->get('Di');
-        //    $controllerLoader->addAbstractFactory(
-        //        new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI)
-        //    );
-        //    $controllerLoader->addInitializer(
-        //        new DiServiceInitializer($di, $serviceLocator)
-        //    );
-        //}
+        $configuration    = $serviceLocator->get('Configuration');
+        if (isset($configuration['di']) && $serviceLocator->has('Di')) {
+            $di = $serviceLocator->get('Di');
+            $controllerLoader->addAbstractFactory(
+                new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI)
+            );
+            $controllerLoader->addInitializer(
+                new DiServiceInitializer($di, $serviceLocator)
+            );
+        }
 
         $controllerLoader->addInitializer(function ($instance) use ($serviceLocator) {
             if ($instance instanceof ServiceLocatorAwareInterface) {

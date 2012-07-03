@@ -23,14 +23,13 @@ namespace Zend\Filter;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 
-
 /**
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Boolean extends AbstractLocale
+class Boolean extends AbstractFilter
 {
     const TYPE_BOOLEAN        = 1;
     const TYPE_INTEGER        = 2;
@@ -67,35 +66,38 @@ class Boolean extends AbstractLocale
     protected $options = array(
         'type'         => self::TYPE_PHP,
         'casting'      => true,
-        'locale'       => null,
         'translations' => array(),
     );
 
     /**
      * Constructor
      *
-     * @param string|array|Traversable $options OPTIONAL
+     * @param array|Traversable|int|null  $typeOrOptions
+     * @param bool  $casting
+     * @param array $translations
      */
-    public function __construct($options = null)
+    public function __construct($typeOrOptions = null, $casting = true, $translations = array())
     {
-        if ($options !== null) {
-            if ($options instanceof Traversable) {
-                $options = ArrayUtils::iteratorToArray($options);
+        if ($typeOrOptions !== null) {
+            if ($typeOrOptions instanceof Traversable) {
+                $typeOrOptions = ArrayUtils::iteratorToArray($typeOrOptions);
             }
 
-            if (!is_array($options)) {
-                $args = func_get_args();
-                if (isset($args[0])) {
-                    $this->setType($args[0]);
-                }
-                if (isset($args[1])) {
-                    $this->setCasting($args[1]);
-                }
-                if (isset($args[2])) {
-                    $this->setLocale($args[2]);
+            if (is_array($typeOrOptions)) {
+                if (isset($typeOrOptions['type'])
+                    || isset($typeOrOptions['casting'])
+                    || isset($typeOrOptions['translations']))
+                {
+                    $this->setOptions($typeOrOptions);
+                } else {
+                    $this->setType($typeOrOptions);
+                    $this->setCasting($casting);
+                    $this->setTranslations($translations);
                 }
             } else {
-                $this->setOptions($options);
+                $this->setType($typeOrOptions);
+                $this->setCasting($casting);
+                $this->setTranslations($translations);
             }
         }
     }
@@ -171,14 +173,23 @@ class Boolean extends AbstractLocale
     }
 
     /**
-     * @param  array $translations
+     * @param  array|Traversable $translations
      * @return Boolean
      */
-    public function setTranslations(array $translations)
+    public function setTranslations($translations)
     {
-        foreach ($translations as $locale => $translation) {
-            $this->addTranslation($locale, $translation);
+        if (!is_array($translations) && !$translations instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '"%s" expects an array or Traversable; received "%s"',
+                __METHOD__,
+                (is_object($translations) ? get_class($translations) : gettype($translations))
+            ));
         }
+
+        foreach ($translations as $message => $flag) {
+            $this->options['translations'][$message] = (bool) $flag;
+        }
+
         return $this;
     }
 
@@ -188,21 +199,6 @@ class Boolean extends AbstractLocale
     public function getTranslations()
     {
         return $this->options['translations'];
-    }
-
-    /**
-     * @param  string $locale
-     * @param  array $translation
-     * @return Boolean
-     * @throws Exception\InvalidArgumentException
-     */
-    public function addTranslation($locale, array $translation)
-    {
-        foreach ($translation as $message => $flag) {
-            $this->options['translations'][$locale][$message] = (bool) $flag;
-        }
-
-        return $this;
     }
 
     /**
@@ -222,9 +218,8 @@ class Boolean extends AbstractLocale
         if ($type >= self::TYPE_LOCALIZED) {
             $type -= self::TYPE_LOCALIZED;
             if (is_string($value)) {
-                $locale = $this->getLocale();
-                if (isset($this->options['translations'][$locale][$value])) {
-                    return (bool) $this->options['translations'][$locale][$value];
+                if (isset($this->options['translations'][$value])) {
+                    return (bool) $this->options['translations'][$value];
                 }
             }
         }

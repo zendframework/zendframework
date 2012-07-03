@@ -18,9 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Filter;
+namespace Zend\I18n\Filter;
 
 use Locale;
+use Zend\Filter\AbstractFilter;
 
 /**
  * @category   Zend
@@ -33,8 +34,8 @@ abstract class AbstractLocale extends AbstractFilter
     /**
      * Sets the locale option
      *
-     * @param boolean $locale
-     * @return Alnum Provides a fluent interface
+     * @param  string|null $locale
+     * @return AbstractLocale
      */
     public function setLocale($locale = null)
     {

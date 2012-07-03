@@ -24,7 +24,7 @@ namespace ZendTest\Log\Filter;
 use Zend\Log\Logger;
 use Zend\Log\Filter\Validator;
 use Zend\Validator\ValidatorChain;
-use Zend\Validator\Alnum;
+use Zend\Validator\Digits as DigitsFilter;
 use Zend\Validator\Int;
 
 /**
@@ -39,17 +39,17 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
     public function testValidatorFilter()
     {
-        $filter = new Validator(new Alnum());
+        $filter = new Validator(new DigitsFilter());
         $this->assertTrue($filter->filter(array('message' => '123')));
-        $this->assertTrue($filter->filter(array('message' => 'test')));
-        $this->assertTrue($filter->filter(array('message' => 'test123')));
+        $this->assertFalse($filter->filter(array('message' => 'test')));
+        $this->assertFalse($filter->filter(array('message' => 'test123')));
         $this->assertFalse($filter->filter(array('message' => '(%$')));
     }
     
     public function testValidatorChain()
     {
         $validatorChain = new ValidatorChain();
-        $validatorChain->addValidator(new Alnum());
+        $validatorChain->addValidator(new DigitsFilter());
         $validatorChain->addValidator(new Int());
         $filter = new Validator($validatorChain);
         $this->assertTrue($filter->filter(array('message' => '123')));

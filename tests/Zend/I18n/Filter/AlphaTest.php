@@ -21,7 +21,7 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\Alnum as AlnumFilter;
+use Zend\I18n\Filter\Alpha as AlphaFilter;
 use Locale;
 
 /**
@@ -32,12 +32,12 @@ use Locale;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
-class AlnumTest extends \PHPUnit_Framework_TestCase
+class AlphaTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * AlnumFilter object
+     * AlphaFilter object
      *
-     * @var AlnumFilter
+     * @var AlphaFilter
      */
     protected $filter;
 
@@ -51,7 +51,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
     /**
      * Locale in browser.
      *
-     * @var string object
+     * @var string
      */
     protected $locale;
 
@@ -69,7 +69,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->filter = new AlnumFilter();
+        $this->filter = new AlphaFilter();
 
         $this->locale               = Locale::getDefault();
         $language                   = Locale::getPrimaryLanguage($this->locale);
@@ -87,36 +87,38 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
         if (!self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = array(
-                'abc123'  => 'abc123',
-                'abc 123' => 'abc123',
-                'abcxyz'  => 'abcxyz',
-                'AZ@#4.3' => 'AZ43',
-                ''        => ''
+                'abc123'        => 'abc',
+                'abc 123'       => 'abc',
+                'abcxyz'        => 'abcxyz',
+                ''              => ''
             );
         } elseif (self::$meansEnglishAlphabet) {
-            // The Alphabet means english alphabet.
-
+            //The Alphabet means english alphabet.
             /**
-             * The first element contains multibyte alphabets and digits.
-             *  But , AlnumFilter is expected to return only singlebyte alphabets and digits.
-             *
-             * The second contains multibyte or singebyte space.
-             * The third  contains various multibyte or singebyte characters.
+             * The first element contains multibyte alphabets.
+             *  But , AlphaFilter is expected to return only singlebyte alphabets.
+             * The second contains multibyte or singlebyte space.
+             * The third  contains multibyte or singlebyte digits.
+             * The forth  contains various multibyte or singlebyte characters.
+             * The last contains only singlebyte alphabets.
              */
             $valuesExpected = array(
-                'aＡBｂ3４5６'  => 'aB35',
-                'z７ Ｙ8　x９'  => 'z8x',
-                '，s1.2r３#:q,' => 's12rq',
+                'aＡBｂc'       => 'aBc',
+                'z Ｙ　x'       => 'zx',
+                'Ｗ1v３Ｕ4t'    => 'vt',
+                '，sй.rλ:qν＿p' => 'srqp',
+                'onml'          => 'onml'
             );
         } else {
             //The Alphabet means each language's alphabet.
             $valuesExpected = array(
-                'abc123'        => 'abc123',
-                'abc 123'       => 'abc123',
+                'abc123'        => 'abc',
+                'abc 123'       => 'abc',
                 'abcxyz'        => 'abcxyz',
-                'če2t3ně'       => 'če2t3ně',
-                'grz5e4gżółka'  => 'grz5e4gżółka',
-                'Be3l5gië'      => 'Be3l5gië',
+                'četně'         => 'četně',
+                'لعربية'        => 'لعربية',
+                'grzegżółka'    => 'grzegżółka',
+                'België'        => 'België',
                 ''              => ''
             );
         }
@@ -128,7 +130,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the allowWhiteSpace option works as expected
+     * Ensures that the filter follows expected behavior
      *
      * @return void
      */
@@ -139,31 +141,33 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
         if (!self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = array(
-                'abc123'  => 'abc123',
-                'abc 123' => 'abc 123',
-                'abcxyz'  => 'abcxyz',
-                'AZ@#4.3' => 'AZ43',
-                ''        => '',
-                "\n"      => "\n",
-                " \t "    => " \t "
+                'abc123'   => 'abc',
+                'abc 123'  => 'abc ',
+                'abcxyz'   => 'abcxyz',
+                ''         => '',
+                "\n"       => "\n",
+                " \t "     => " \t "
             );
-        } elseif (self::$meansEnglishAlphabet) {
+        } if (self::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
             $valuesExpected = array(
-                'a B ４5' => 'a B 5',
-                'z3　x'   => 'z3x'
+                'a B'    => 'a B',
+                'zＹ　x' => 'zx'
             );
         } else {
             //The Alphabet means each language's alphabet.
             $valuesExpected = array(
-                'abc123'        => 'abc123',
-                'abc 123'       => 'abc 123',
+                'abc123'        => 'abc',
+                'abc 123'       => 'abc ',
                 'abcxyz'        => 'abcxyz',
-                'če2 t3ně'      => 'če2 t3ně',
-                'gr z5e4gżółka' => 'gr z5e4gżółka',
-                'Be3l5 gië'     => 'Be3l5 gië',
+                'četně'         => 'četně',
+                'لعربية'        => 'لعربية',
+                'grzegżółka'    => 'grzegżółka',
+                'België'        => 'België',
                 ''              => '',
-            );
+                "\n"            => "\n",
+                " \t "          => " \t "
+                );
         }
 
         foreach ($valuesExpected as $input => $expected) {

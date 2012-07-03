@@ -18,9 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Validator;
+namespace Zend\I18n\Validator;
 
-use Zend\Filter\Alnum as AlnumFilter;
+use Zend\Validator\AbstractValidator;
+use Zend\I18n\Filter\Alpha as AlphaFilter;
 
 /**
  * @category   Zend
@@ -28,16 +29,16 @@ use Zend\Filter\Alnum as AlnumFilter;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Alnum extends AbstractValidator
+class Alpha extends Alnum
 {
-    const INVALID      = 'alnumInvalid';
-    const NOT_ALNUM    = 'notAlnum';
-    const STRING_EMPTY = 'alnumStringEmpty';
+    const INVALID      = 'alphaInvalid';
+    const NOT_ALPHA    = 'notAlpha';
+    const STRING_EMPTY = 'alphaStringEmpty';
 
     /**
-     * Alphanumeric filter used for validation
+     * Alphabetic filter used for validation
      *
-     * @var \Zend\Filter\Alnum
+     * @var AlphaFilter
      */
     protected static $filter = null;
 
@@ -47,9 +48,9 @@ class Alnum extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID      => "Invalid type given. String, integer or float expected",
-        self::NOT_ALNUM    => "The input contains characters which are non alphabetic and no digits",
-        self::STRING_EMPTY => "The input is an empty string",
+        self::INVALID      => "Invalid type given. String expected",
+        self::NOT_ALPHA    => "The input contains non alphabetic characters",
+        self::STRING_EMPTY => "The input is an empty string"
     );
 
     /**
@@ -62,66 +63,38 @@ class Alnum extends AbstractValidator
     );
 
     /**
-     * Sets default option values for this instance
-     *
-     * @param array|\Traversable $options
-     */
-    public function __construct($options = array())
-    {
-        parent::__construct($options);
-    }
-
-    /**
-     * Returns the allowWhiteSpace option
-     *
-     * @return boolean
-     */
-    public function getAllowWhiteSpace()
-    {
-        return $this->options['allowWhiteSpace'];
-    }
-
-    /**
-     * Sets the allowWhiteSpace option
-     *
-     * @param boolean $allowWhiteSpace
-     * @return \Zend\Filter\Alnum Provides a fluent interface
-     */
-    public function setAllowWhiteSpace($allowWhiteSpace)
-    {
-        $this->options['allowWhiteSpace'] = (boolean) $allowWhiteSpace;
-        return $this;
-    }
-
-    /**
-     * Returns true if and only if $value contains only alphabetic and digit characters
+     * Returns true if and only if $value contains only alphabetic characters
      *
      * @param  string $value
      * @return boolean
      */
     public function isValid($value)
     {
-        if (!is_string($value) && !is_int($value) && !is_float($value)) {
+        if (!is_string($value)) {
             $this->error(self::INVALID);
             return false;
         }
 
         $this->setValue($value);
+
         if ('' === $value) {
             $this->error(self::STRING_EMPTY);
             return false;
         }
 
         if (null === self::$filter) {
-            self::$filter = new AlnumFilter();
+            self::$filter = new AlphaFilter();
         }
 
-        self::$filter->setAllowWhiteSpace($this->getAllowWhiteSpace());
-        if ($value != self::$filter->filter($value)) {
-            $this->error(self::NOT_ALNUM);
+        //self::$filter->setAllowWhiteSpace($this->allowWhiteSpace);
+        self::$filter->setAllowWhiteSpace($this->options['allowWhiteSpace']);
+
+        if ($value !== self::$filter->filter($value)) {
+            $this->error(self::NOT_ALPHA);
             return false;
         }
 
         return true;
     }
+
 }

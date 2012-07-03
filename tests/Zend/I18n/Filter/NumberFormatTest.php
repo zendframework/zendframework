@@ -8,6 +8,26 @@ use NumberFormatter;
 
 class NumberFormatTest extends TestCase
 {
+    public function testConstructWithOptions()
+    {
+        $filter = new NumberFormatFilter(array(
+            'locale' => 'en_US',
+            'style'  => NumberFormatter::DECIMAL
+        ));
+
+        $this->assertEquals('en_US', $filter->getLocale());
+        $this->assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
+    }
+
+    public function testConstructWithParameters()
+    {
+        $filter = new NumberFormatFilter('en_US', NumberFormatter::DECIMAL);
+
+        $this->assertEquals('en_US', $filter->getLocale());
+        $this->assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
+    }
+
+
     /**
      * @param $locale
      * @param $style
@@ -41,22 +61,22 @@ class NumberFormatTest extends TestCase
         return array(
             array(
                 'en_US',
-                null,
-                null,
+                NumberFormatter::DEFAULT_STYLE,
+                NumberFormatter::TYPE_DOUBLE,
                 1234567.8912346,
                 '1,234,567.891'
             ),
             array(
                 'de_DE',
-                null,
-                null,
+                NumberFormatter::DEFAULT_STYLE,
+                NumberFormatter::TYPE_DOUBLE,
                 1234567.8912346,
                 '1.234.567,891'
             ),
             array(
                 'ru_RU',
-                null,
-                null,
+                NumberFormatter::DEFAULT_STYLE,
+                NumberFormatter::TYPE_DOUBLE,
                 1234567.8912346,
                 '1 234 567,891'
             ),
@@ -68,22 +88,22 @@ class NumberFormatTest extends TestCase
         return array(
             array(
                 'en_US',
-                null,
-                null,
+                NumberFormatter::DEFAULT_STYLE,
+                NumberFormatter::TYPE_DOUBLE,
                 '1,234,567.891',
                 1234567.891,
             ),
             array(
                 'de_DE',
-                null,
-                null,
+                NumberFormatter::DEFAULT_STYLE,
+                NumberFormatter::TYPE_DOUBLE,
                 '1.234.567,891',
                 1234567.891,
             ),
             array(
                 'ru_RU',
-                null,
-                null,
+                NumberFormatter::DEFAULT_STYLE,
+                NumberFormatter::TYPE_DOUBLE,
                 '1 234 567,891',
                 1234567.891,
             ),

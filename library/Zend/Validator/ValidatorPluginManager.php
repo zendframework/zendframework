@@ -36,8 +36,8 @@ class ValidatorPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = array(
-        'alnum'                    => 'Zend\Validator\Alnum',
-        'alpha'                    => 'Zend\Validator\Alpha',
+        'alnum'                    => 'Zend\I18n\Validator\Alnum',
+        'alpha'                    => 'Zend\I18n\Validator\Alpha',
         'barcodecode25interleaved' => 'Zend\Validator\Barcode\Code25interleaved',
         'barcodecode25'            => 'Zend\Validator\Barcode\Code25',
         'barcodecode39ext'         => 'Zend\Validator\Barcode\Code39ext',

@@ -22,7 +22,6 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\Boolean as BooleanFilter;
-use Zend\Locale\Locale;
 
 /**
  * @category   Zend
@@ -37,22 +36,20 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
     public function testConstructorOptions()
     {
         $filter = new BooleanFilter(array(
-            'type' => BooleanFilter::TYPE_INTEGER,
+            'type'    => BooleanFilter::TYPE_INTEGER,
             'casting' => false,
-            'locale' => 'en_EN',
         ));
+
         $this->assertEquals(BooleanFilter::TYPE_INTEGER, $filter->getType());
-        $this->assertEquals(false, $filter->getCasting());
-        $this->assertEquals('en_EN', $filter->getLocale());
+        $this->assertFalse($filter->getCasting());
     }
 
     public function testConstructorParams()
     {
-        $filter = new BooleanFilter(BooleanFilter::TYPE_INTEGER, false, 'en_EN');
+        $filter = new BooleanFilter(BooleanFilter::TYPE_INTEGER, false);
 
         $this->assertEquals(BooleanFilter::TYPE_INTEGER, $filter->getType());
-        $this->assertEquals(false, $filter->getCasting());
-        $this->assertEquals('en_EN', $filter->getLocale());
+        $this->assertFalse($filter->getCasting());
     }
 
     /**
@@ -125,28 +122,19 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new BooleanFilter(array(
             'type' => BooleanFilter::TYPE_LOCALIZED,
-            'locale' => 'en_EN',
             'translations' => array(
-                'en_EN' => array(
-                    'yes' => true,
-                    'y'   => true,
-                    'no'  => false,
-                    'n'   => false,
-                ),
-                'en_US' => array(
-                    'yay' => true,
-                    'yes' => true,
-                    'nay' => false,
-                    'no'  => false,
-                ),
-            ),
+                'yes' => true,
+                'y'   => true,
+                'no'  => false,
+                'n'   => false,
+                'yay' => true,
+                'nay' => false,
+            )
         ));
 
         $this->assertTrue($filter->filter('yes'));
-        $this->assertFalse($filter->filter('n'));
-
-        $filter->setLocale('en_US');
         $this->assertTrue($filter->filter('yay'));
+        $this->assertFalse($filter->filter('n'));
         $this->assertFalse($filter->filter('nay'));
     }
 

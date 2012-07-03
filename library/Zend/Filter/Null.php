@@ -64,17 +64,21 @@ class Null extends AbstractFilter
      *
      * @param string|array|Traversable $options OPTIONAL
      */
-    public function __construct($options = null)
+    public function __construct($typeOrOptions = null)
     {
-        if ($options !== null) {
-            if ($options instanceof Traversable) {
-                $options = iterator_to_array($options);
+        if ($typeOrOptions !== null) {
+            if ($typeOrOptions instanceof Traversable) {
+                $typeOrOptions = iterator_to_array($typeOrOptions);
             }
 
-            if (!is_array($options)) {
-                $this->setType($options);
+            if (is_array($typeOrOptions)) {
+                if (isset($typeOrOptions['type'])) {
+                    $this->setOptions($typeOrOptions);
+                } else {
+                    $this->setType($typeOrOptions);
+                }
             } else {
-                $this->setOptions($options);
+                $this->setType($typeOrOptions);
             }
         }
     }

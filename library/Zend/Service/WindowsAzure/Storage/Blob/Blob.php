@@ -172,8 +172,8 @@ class Blob extends Storage\Storage
         if ($response->isSuccess()) {
             return new Storage\BlobContainer(
                 $containerName,
-                $response->headers()->get('Etag'),
-                $response->headers()->get('Last-modified'),
+                $response->getHeaders()->get('Etag'),
+                $response->getHeaders()->get('Last-modified'),
                 $metadata
             );
         } else {
@@ -205,7 +205,7 @@ class Blob extends Storage\Storage
         if ($response->isSuccess()) {
             if ($signedIdentifiers == false) {
                 // Only public/private
-                return $response->headers()->get('x-ms-prop-publicaccess') == 'True';
+                return $response->getHeaders()->get('x-ms-prop-publicaccess') == 'True';
             } else {
                 // Parse result
                 $result = $this->_parseResponse($response);
@@ -316,13 +316,13 @@ class Blob extends Storage\Storage
                                            Credentials\AbstractCredentials::PERMISSION_READ);
         if ($response->isSuccess()) {
             // Parse metadata
-            $metadata = $this->_parseMetadataHeaders($response->headers()->toArray());
+            $metadata = $this->_parseMetadataHeaders($response->getHeaders()->toArray());
 
             // Return container
             return new Storage\BlobContainer(
                 $containerName,
-                $response->headers()->get('Etag'),
-                $response->headers()->get('Last-modified'),
+                $response->getHeaders()->get('Etag'),
+                $response->getHeaders()->get('Last-modified'),
                 $metadata
             );
         } else {
@@ -540,8 +540,8 @@ class Blob extends Storage\Storage
             return new Storage\BlobInstance(
                 $containerName,
                 $blobName,
-                $response->headers()->get('Etag'),
-                $response->headers()->get('Last-modified'),
+                $response->getHeaders()->get('Etag'),
+                $response->getHeaders()->get('Last-modified'),
                 $this->getBaseUrl() . '/' . $containerName . '/' . $blobName,
                 strlen($fileContents),
                 '',
@@ -879,8 +879,8 @@ class Blob extends Storage\Storage
             return new Storage\BlobInstance(
                 $destinationContainerName,
                 $destinationBlobName,
-                $response->headers()->get('Etag'),
-                $response->headers()->get('Last-modified'),
+                $response->getHeaders()->get('Etag'),
+                $response->getHeaders()->get('Last-modified'),
                 $this->getBaseUrl() . '/' . $destinationContainerName . '/' . $destinationBlobName,
                 0,
                 '',
@@ -981,19 +981,19 @@ class Blob extends Storage\Storage
                                            Credentials\AbstractCredentials::PERMISSION_READ);
         if ($response->isSuccess()) {
             // Parse metadata
-            $metadata = $this->_parseMetadataHeaders($response->headers()->toArray());
+            $metadata = $this->_parseMetadataHeaders($response->getHeaders()->toArray());
 
             // Return blob
             return new Storage\BlobInstance(
                 $containerName,
                 $blobName,
-                $response->headers()->get('Etag'),
-                $response->headers()->get('Last-modified'),
+                $response->getHeaders()->get('Etag'),
+                $response->getHeaders()->get('Last-modified'),
                 $this->getBaseUrl() . '/' . $containerName . '/' . $blobName,
-                $response->headers()->get('Content-Length'),
-                $response->headers()->get('Content-Type'),
-                $response->headers()->get('Content-Encoding'),
-                $response->headers()->get('Content-Language'),
+                $response->getHeaders()->get('Content-Length'),
+                $response->getHeaders()->get('Content-Type'),
+                $response->getHeaders()->get('Content-Encoding'),
+                $response->getHeaders()->get('Content-Language'),
                 false,
                 $metadata
             );

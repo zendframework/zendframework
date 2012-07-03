@@ -300,9 +300,9 @@ class Request extends Message implements RequestInterface
     }
 
     /**
-     * Return the Cookie header, this is the same as calling $request->headers()->get('Cookie');
+     * Return the Cookie header, this is the same as calling $request->getHeaders()->get('Cookie');
      *
-     * @convenience $request->headers()->get('Cookie');
+     * @convenience $request->getHeaders()->get('Cookie');
      * @return Header\Cookie
      */
     public function getCookie()
@@ -394,7 +394,7 @@ class Request extends Message implements RequestInterface
 
     /**
      * Provide an alternate Parameter Container implementation for headers in this object, (this is NOT the
-     * primary API for value setting, for that see headers())
+     * primary API for value setting, for that see getHeaders())
      *
      * @param \Zend\Http\Headers $headers
      * @return \Zend\Http\Request

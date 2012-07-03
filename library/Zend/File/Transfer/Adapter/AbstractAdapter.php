@@ -25,7 +25,7 @@ use Zend\File\Transfer,
     Zend\Filter,
     Zend\Filter\Exception as FilterException,
     Zend\Loader,
-    Zend\I18n\Translator,
+    Zend\I18n\Translator\Translator,
     Zend\Validator;
 
 /**

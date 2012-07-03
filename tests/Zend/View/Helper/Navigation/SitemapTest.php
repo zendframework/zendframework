@@ -239,7 +239,9 @@ class SitemapTest extends AbstractTest
         $this->_helper->setServerUrl('http://sub.example.org:8080/foo/');
 
         $expected = $this->_getExpected('sitemap/serverurl2.xml');
-        $this->assertEquals($expected, $this->_helper->render());
+        $got = str_replace("\n", PHP_EOL, $this->_helper->render());
+        
+        $this->assertEquals($expected, $got);
     }
 
     public function testGetUserSchemaValidation()

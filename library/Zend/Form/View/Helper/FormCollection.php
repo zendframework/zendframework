@@ -69,8 +69,7 @@ class FormCollection extends AbstractHelper
 
         if ($element instanceof CollectionElement) {
             if ($element->shouldCreateTemplate()) {
-                $templatePlaceholder = $element->getTemplatePlaceholder();
-                $elementOrFieldset = $element->get($templatePlaceholder);
+                $elementOrFieldset = $element->getTemplateElement();
 
                 if ($elementOrFieldset instanceof FieldsetInterface) {
                     $templateMarkup .= $this->render($elementOrFieldset);
@@ -78,8 +77,8 @@ class FormCollection extends AbstractHelper
                     $templateMarkup .= $rowHelper($elementOrFieldset);
                 }
 
-                // Remove it as we don't want to draw it multiple times
-                $element->remove($templatePlaceholder);
+                // Remove the template element as we don't want to render it
+                $element->remove($element->getTemplatePlaceholder());
             }
         }
 

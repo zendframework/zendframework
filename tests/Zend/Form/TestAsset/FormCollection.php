@@ -29,6 +29,7 @@ class FormCollection extends Form
     public function __construct()
     {
         parent::__construct('collection');
+        $this->setInputFilter(new InputFilter());
 
         $element = new ColorElement('color');
         $this->add(array(

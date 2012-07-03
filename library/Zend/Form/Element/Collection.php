@@ -38,7 +38,7 @@ use Zend\Stdlib\PriorityQueue;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Collection extends Fieldset implements InputFilterProviderInterface
+class Collection extends Fieldset
 {
     /**
      * Default template placeholder
@@ -261,11 +261,6 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     {
         $this->shouldCreateTemplate = (bool)$shouldCreateTemplate;
 
-        // If it doesn't exist yet, create it
-        if ($shouldCreateTemplate) {
-            $this->addTemplateElement();
-        }
-
         return $this;
     }
 
@@ -305,6 +300,40 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     }
 
     /**
+     * Get a template element used for rendering purposes only
+     *
+     * @return ElementInterface|FieldsetInterface
+     */
+    public function getTemplateElement()
+    {
+        if ($this->has($this->templatePlaceholder)) {
+            return $this->get($this->templatePlaceholder);
+        }
+
+        $elementOrFieldset = $this->createNewTargetElementInstance();
+        $elementOrFieldset->setName($this->templatePlaceholder);
+
+        return $elementOrFieldset;
+    }
+
+    /**
+     * Prepare the collection by adding a dummy template element if needed by the user
+     *
+     * @param Form $form
+     * @return mixed|void
+     */
+    public function prepareElement(Form $form)
+    {
+        // Create a template if we want one
+        if ($this->shouldCreateTemplate) {
+            $templateElement = $this->getTemplateElement();
+            $this->add($templateElement);
+        }
+
+        parent::prepareElement($form);
+    }
+
+    /**
      * If both count and targetElement are set, add them to the fieldset
      *
      * @return void
@@ -318,28 +347,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
 
                 $this->add($elementOrFieldset);
             }
-
-            // If a template is wanted, we add a "dummy" element
-            if ($this->shouldCreateTemplate) {
-                $this->addTemplateElement();
-            }
         }
-    }
-
-    /**
-     * Add a "dummy" template element to be used with JavaScript
-     *
-     * @return Collection
-     */
-    protected function addTemplateElement()
-    {
-        if ($this->targetElement !== null && !$this->has($this->templatePlaceholder)) {
-            $elementOrFieldset = $this->createNewTargetElementInstance();
-            $elementOrFieldset->setName($this->templatePlaceholder);
-            $this->add($elementOrFieldset);
-        }
-
-        return $this;
     }
 
     /**
@@ -350,25 +358,5 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     protected function createNewTargetElementInstance()
     {
         return clone $this->targetElement;
-    }
-
-    /**
-     * Should return an array specification compatible with
-     * {@link Zend\InputFilter\Factory::createInputFilter()}.
-     *
-     * @return array
-     */
-    public function getInputFilterSpecification()
-    {
-        // Ignore any template
-        if ($this->shouldCreateTemplate) {
-            return array(
-                $this->templatePlaceholder => array(
-                    'required' => false
-                )
-            );
-        }
-
-        return array();
     }
 }

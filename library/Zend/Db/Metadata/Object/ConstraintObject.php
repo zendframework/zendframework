@@ -17,64 +17,86 @@ namespace Zend\Db\Metadata\Object;
  */
 class ConstraintObject
 {
-    /*
-    protected $catalogName = null;
-    protected $schemaName = null;
-    */
-
     /**
      *
      * @var string
      */
     protected $name = null;
+
     /**
      *
      * @var string
      */
     protected $tableName = null;
+
     /**
      *
      * @var string
      */
     protected $schemaName = null;
 
-//    protected $tableCatalogName = null;
-//    protected $tableSchemaName = null;
-
     /**
+     * One of "PRIMARY KEY", "UNIQUE", "FOREIGN KEY", or "CHECK"
      *
      * @var string
      */
     protected $type = null;
+
     /**
      *
-     * @var array
+     *
+     * @var string[]
      */
-    protected $keys = null;
+    protected $columns;
 
-    /*
-    public function getCatalogName()
-    {
-        return $this->catalogName;
-    }
+    /**
+     *
+     *
+     * @var string
+     */
+    protected $referencedTableSchema;
 
-    public function setCatalogName($catalogName)
-    {
-        $this->catalogName = $catalogName;
-        return $this;
-    }
+    /**
+     *
+     *
+     * @var string
+     */
+    protected $referencedTableName;
 
-    public function getSchemaName()
-    {
-        return $this->schemaName;
-    }
+    /**
+     *
+     *
+     * @var string[]
+     */
+    protected $referencedColumns;
 
-    public function setSchemaName($schemaName)
-    {
-        $this->schemaName = $schemaName;
-        return $this;
-    }
-    */
+    /**
+     *
+     *
+     * @var string
+     */
+    protected $matchOption;
+
+    /**
+     *
+     *
+     * @var string
+     */
+    protected $updateRule;
+
+    /**
+     *
+     *
+     * @var string
+     */
+    protected $deleteRule;
+
+    /**
+     *
+     *
+     * @var string
+     */
+    protected $checkClause;
 
     /**
      * Constructor
@@ -83,13 +105,11 @@ class ConstraintObject
      * @param string $table
      * @param string $schemaName 
      */
-    public function __construct($name, $table, $schemaName = null)
+    public function __construct($name, $tableName, $schemaName = null)
     {
         $this->setName($name);
-        $this->setTableName($table);
-        if ($schemaName) {
-            $this->setSchemaName($schemaName);
-        }
+        $this->setTableName($tableName);
+        $this->setSchemaName($schemaName);
     }
 
     /**
@@ -159,9 +179,9 @@ class ConstraintObject
      * 
      * @param type $constraintType 
      */
-    public function setType($constraintType)
+    public function setType($type)
     {
-        $this->type = $constraintType;
+        $this->type = $type;
     }
 
     /**
@@ -175,23 +195,179 @@ class ConstraintObject
     }
 
     /**
-     * Set keys
-     * 
-     * @param array $keys 
+     * Get Columns.
+     *
+     * @return string[]
      */
-    public function setKeys(array $keys)
+    public function getColumns()
     {
-        $this->keys = $keys;
+        return $this->columns;
     }
 
     /**
-     * Get keys
-     * 
-     * @return string 
+     * Set Columns.
+     *
+     * @param string[] $columns
+     * @return ConstraintObject
      */
-    public function getKeys()
+    public function setColumns(array $columns)
     {
-        return $this->keys;
+        $this->columns = $columns;
+        return $this;
+    }
+
+    /**
+     * Get Referenced Table Schema.
+     *
+     * @return string
+     */
+    public function getReferencedTableSchema()
+    {
+        return $this->referencedTableSchema;
+    }
+
+    /**
+     * Set Referenced Table Schema.
+     *
+     * @param string $referencedTableSchema
+     * @return ConstraintObject
+     */
+    public function setReferencedTableSchema($referencedTableSchema)
+    {
+        $this->referencedTableSchema = $referencedTableSchema;
+        return $this;
+    }
+
+    /**
+     * Get Referenced Table Name.
+     *
+     * @return string
+     */
+    public function getReferencedTableName()
+    {
+        return $this->referencedTableName;
+    }
+
+    /**
+     * Set Referenced Table Name.
+     *
+     * @param string $referencedTableName
+     * @return ConstraintObject
+     */
+    public function setReferencedTableName($referencedTableName)
+    {
+        $this->referencedTableName = $referencedTableName;
+        return $this;
+    }
+
+    /**
+     * Get Referenced Columns.
+     *
+     * @return string[]
+     */
+    public function getReferencedColumns()
+    {
+        return $this->referencedColumns;
+    }
+
+    /**
+     * Set Referenced Columns.
+     *
+     * @param string[] $referencedColumns
+     * @return ConstraintObject
+     */
+    public function setReferencedColumns(array $referencedColumns)
+    {
+        $this->referencedColumns = $referencedColumns;
+        return $this;
+    }
+
+    /**
+     * Get Match Option.
+     *
+     * @return string
+     */
+    public function getMatchOption()
+    {
+        return $this->matchOption;
+    }
+
+    /**
+     * Set Match Option.
+     *
+     * @param string $matchOption
+     * @return ConstraintObject
+     */
+    public function setMatchOption($matchOption)
+    {
+        $this->matchOption = $matchOption;
+        return $this;
+    }
+
+    /**
+     * Get Update Rule.
+     *
+     * @return string
+     */
+    public function getUpdateRule()
+    {
+        return $this->updateRule;
+    }
+
+    /**
+     * Set Update Rule.
+     *
+     * @param string $updateRule
+     * @return ConstraintObject
+     */
+    public function setUpdateRule($updateRule)
+    {
+        $this->updateRule = $updateRule;
+        return $this;
+    }
+
+    /**
+     * Get Delete Rule.
+     *
+     * @return string
+     */
+    public function getDeleteRule()
+    {
+        return $this->deleteRule;
+    }
+
+    /**
+     * Set Delete Rule.
+     *
+     * @param string $deleteRule
+     * @return ConstraintObject
+     */
+    public function setDeleteRule($deleteRule)
+    {
+        $this->deleteRule = $deleteRule;
+        return $this;
+    }
+
+    /**
+     * Get Check Clause.
+     *
+     * @return string
+     */
+    public function getCheckClause()
+    {
+        return $this->checkClause;
+    }
+
+    /**
+     * Set Check Clause.
+     *
+     * @param string $checkClause
+     * @return ConstraintObject
+     */
+    public function setCheckClause($checkClause)
+    {
+        $this->checkClause = $checkClause;
+        return $this;
     }
 
     /**
@@ -201,7 +377,7 @@ class ConstraintObject
      */
     public function isPrimaryKey()
     {
-        return (strtoupper($this->type) == 'PRIMARY KEY');
+        return ('PRIMARY KEY' == $this->type);
     }
 
     /**
@@ -209,9 +385,9 @@ class ConstraintObject
      * 
      * @return boolean 
      */
-    public function isUniqueKey()
+    public function isUnique()
     {
-        return (strtoupper($this->type) == 'UNIQUE');
+        return ('UNIQUE' == $this->type);
     }
 
     /**
@@ -221,7 +397,17 @@ class ConstraintObject
      */
     public function isForeignKey()
     {
-        return (strtoupper($this->type) == 'FOREIGN KEY');
+        return ('FOREIGN KEY' == $this->type);
+    }
+
+    /**
+     * Is foreign key
+     * 
+     * @return boolean 
+     */
+    public function isCheck()
+    {
+        return ('CHECK' == $this->type);
     }
 
 }

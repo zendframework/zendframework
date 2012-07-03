@@ -30,31 +30,20 @@ use Zend\Stdlib\DispatchableInterface as Dispatchable;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractPlugin implements PluginInterface
+interface PluginInterface
 {
-    /**
-     * @var null|Dispatchable
-     */
-    protected $controller;
-
     /**
      * Set the current controller instance
      *
      * @param  Dispatchable $controller
      * @return void
      */
-    public function setController(Dispatchable $controller)
-    {
-        $this->controller = $controller;
-    }
+    public function setController(Dispatchable $controller);
 
     /**
      * Get the current controller instance
      *
      * @return null|Dispatchable
      */
-    public function getController()
-    {
-        return $this->controller;
-    }
+    public function getController();
 }

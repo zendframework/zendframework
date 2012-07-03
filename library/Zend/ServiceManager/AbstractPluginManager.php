@@ -70,7 +70,6 @@ abstract class AbstractPluginManager extends ServiceManager
     public function __construct(ConfigurationInterface $configuration = null)
     {
         parent::__construct($configuration);
-        $this->addInitializer(array($this, 'validatePlugin'), true);
         $self = $this;
         $this->addInitializer(function ($instance) use ($self) {
             if ($instance instanceof ServiceManagerAwareInterface) {
@@ -113,6 +112,7 @@ abstract class AbstractPluginManager extends ServiceManager
         $this->creationOptions = $options;
         $instance = parent::get($name, $usePeeringServiceManagers);
         $this->creationOptions = null;
+        $this->validatePlugin($instance);
         return $instance;
     }
 

@@ -111,14 +111,15 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
             //     new DateTime('2012-07-02T22:44:03Z'),
             //     '3 июля 2012 г. 2:44:03 Россия (Москва)',
             // ),
-            array(
-                'ru_RU',
-                'Europe/Moscow',
-                IntlDateFormatter::LONG,
-                IntlDateFormatter::LONG,
-                new DateTime('2012-07-02T22:44:03Z'),
-                '3 июля 2012 г. 2:44:03 GMT+04:00',
-            ),
+            // LONG format varies based on OS for ru_RU locale
+            // array(
+            //     'ru_RU',
+            //     'Europe/Moscow',
+            //     IntlDateFormatter::LONG,
+            //     IntlDateFormatter::LONG,
+            //     new DateTime('2012-07-02T22:44:03Z'),
+            //     '3 июля 2012 г. 2:44:03 GMT+04:00',
+            // ),
             array(
                 'ru_RU',
                 'Europe/Moscow',

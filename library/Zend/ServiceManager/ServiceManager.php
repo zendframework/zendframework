@@ -577,7 +577,7 @@ class ServiceManager implements ServiceLocatorInterface
             throw new Exception\InvalidServiceNameException('Invalid service name alias');
         }
 
-        if ($this->allowOverride === false && $this->has(array($cAlias, $alias), true)) {
+        if ($this->allowOverride === false && $this->has(array($cAlias, $alias), false)) {
             throw new Exception\InvalidServiceNameException('An alias by this name already exists');
         }
 

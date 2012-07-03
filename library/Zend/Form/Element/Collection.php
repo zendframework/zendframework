@@ -343,31 +343,12 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     }
 
     /**
-     * Create a deep clone of a new target element
+     * Create a new instance of the target element
+     *
+     * @return ElementInterface
      */
     protected function createNewTargetElementInstance()
     {
-        // If targetElement is a fieldset, make a deep clone of it
-        if ($this->targetElement instanceof FieldsetInterface) {
-            /** @var Fieldset $targetElement */
-            $targetElement = clone $this->targetElement;
-            $targetElement->iterator = new PriorityQueue();
-
-            foreach ($targetElement->byName as $key => $value) {
-                $value = clone $value;
-                $targetElement->byName[$key] = $value;
-                $targetElement->iterator->insert($value);
-
-                if ($value instanceof FieldsetInterface) {
-                    $targetElement->fieldsets[$key] = $value;
-                } elseif ($value instanceof ElementInterface) {
-                    $targetElement->elements[$key] = $value;
-                }
-            }
-
-            return $targetElement;
-        }
-
         return clone $this->targetElement;
     }
 

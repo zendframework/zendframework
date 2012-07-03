@@ -39,5 +39,15 @@ class FormCollection extends Form
                 'target_element' => $element
             )
         ));
+
+        $fieldset = new BasicFieldset();
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Collection',
+            'name' => 'fieldsets',
+            'options' => array(
+                'count' => 2,
+                'target_element' => $fieldset
+            )
+        ));
     }
 }

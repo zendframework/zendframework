@@ -18,7 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Filter\Word;
+namespace Zend\Filter;
+
+use Locale;
 
 /**
  * @category   Zend
@@ -26,24 +28,30 @@ namespace Zend\Filter\Word;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class CamelCaseToSeparator extends AbstractSeparator
+abstract class AbstractLocale extends AbstractFilter
 {
     /**
-     * Defined by Zend\Filter\Filter
-     * 
-     * @param  string $value 
+     * Sets the locale option
+     *
+     * @param boolean $locale
+     * @return Alnum Provides a fluent interface
+     */
+    public function setLocale($locale = null)
+    {
+        $this->options['locale'] = $locale;
+        return $this;
+    }
+
+    /**
+     * Returns the locale option
+     *
      * @return string
      */
-    public function filter($value)
+    public function getLocale()
     {
-        if (self::hasPcreUnicodeSupport()) {
-            parent::setPattern(array('#(?<=(?:\p{Lu}))(\p{Lu}\p{Ll})#','#(?<=(?:\p{Ll}|\p{Nd}))(\p{Lu})#'));
-            parent::setReplacement(array($this->_separator . '\1', $this->_separator . '\1'));
-        } else {
-            parent::setPattern(array('#(?<=(?:[A-Z]))([A-Z]+)([A-Z][A-z])#', '#(?<=(?:[a-z0-9]))([A-Z])#'));
-            parent::setReplacement(array('\1' . $this->_separator . '\2', $this->_separator . '\1'));
+        if (!isset($this->options['locale'])) {
+            $this->options['locale'] = Locale::getDefault();
         }
-
-        return parent::filter($value);
+        return $this->options['locale'];
     }
 }

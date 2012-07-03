@@ -32,34 +32,43 @@ use Zend\Stdlib\ArrayUtils;
 class StringTrim extends AbstractFilter
 {
     /**
-     * List of characters provided to the trim() function
-     *
-     * If this is null, then trim() is called with no specific character list,
-     * and its default behavior will be invoked, trimming whitespace.
-     *
-     * @var string|null
+     * @var array
      */
-    protected $_charList;
+    protected $options = array(
+        'charlist' => null,
+    );
 
     /**
      * Sets filter options
      *
      * @param  string|array|Traversable $options
      */
-    public function __construct($options = null)
+    public function __construct($charlistOrOptions = null)
     {
-        if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
+        if ($charlistOrOptions !== null) {
+            if (!is_array($charlistOrOptions)
+                && !$charlistOrOptions  instanceof Traversable)
+            {
+                $this->setCharList($charlistOrOptions);
+            } else {
+                $this->setOptions($charlistOrOptions);
+            }
         }
-        if (!is_array($options)) {
-            $options          = func_get_args();
-            $temp['charlist'] = array_shift($options);
-            $options          = $temp;
-        }
+    }
 
-        if (array_key_exists('charlist', $options)) {
-            $this->setCharList($options['charlist']);
+    /**
+     * Sets the charList option
+     *
+     * @param  string $charList
+     * @return StringTrim Provides a fluent interface
+     */
+    public function setCharList($charList)
+    {
+        if (empty($charList)) {
+            $charList = null;
         }
+        $this->options['charlist'] = $charList;
+        return $this;
     }
 
     /**
@@ -69,19 +78,7 @@ class StringTrim extends AbstractFilter
      */
     public function getCharList()
     {
-        return $this->_charList;
-    }
-
-    /**
-     * Sets the charList option
-     *
-     * @param  string|null $charList
-     * @return StringTrim Provides a fluent interface
-     */
-    public function setCharList($charList)
-    {
-        $this->_charList = $charList;
-        return $this;
+        return $this->options['charlist'];
     }
 
     /**
@@ -99,11 +96,11 @@ class StringTrim extends AbstractFilter
             return $value;
         }
 
-        if (null === $this->_charList) {
-            return $this->_unicodeTrim((string) $value);
+        if (null === $this->options['charlist']) {
+            return $this->unicodeTrim((string) $value);
         }
 
-        return $this->_unicodeTrim((string) $value, $this->_charList);
+        return $this->unicodeTrim((string) $value, $this->options['charlist']);
     }
 
     /**
@@ -114,15 +111,16 @@ class StringTrim extends AbstractFilter
      * @param string $charlist
      * @return string
      */
-    protected function _unicodeTrim($value, $charlist = '\\\\s')
+    protected function unicodeTrim($value, $charlist = '\\\\s')
     {
         $chars = preg_replace(
-            array( '/[\^\-\]\\\]/S', '/\\\{4}/S', '/\//'),
-            array( '\\\\\\0', '\\', '\/' ),
+            array('/[\^\-\]\\\]/S', '/\\\{4}/S', '/\//'),
+            array('\\\\\\0', '\\', '\/'),
             $charlist
         );
 
-        $pattern = '^[' . $chars . ']*|[' . $chars . ']*$';
-        return preg_replace("/$pattern/sSD", '', $value);
+        $pattern = '/^[' . $chars . ']*|[' . $chars . ']*$/sSD';
+
+        return preg_replace($pattern, '', $value);
     }
 }

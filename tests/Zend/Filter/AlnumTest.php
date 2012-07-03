@@ -22,7 +22,7 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\Alnum as AlnumFilter;
-use Zend\Locale\Locale as ZendLocale;
+use Locale;
 
 /**
  * @category   Zend
@@ -39,28 +39,28 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
      *
      * @var AlnumFilter
      */
-    protected $_filter;
+    protected $filter;
 
     /**
      * Is PCRE is compiled with UTF-8 and Unicode support
      *
      * @var mixed
      **/
-    protected static $_unicodeEnabled;
+    protected static $unicodeEnabled;
 
     /**
      * Locale in browser.
      *
-     * @var ZendLocale object
+     * @var string object
      */
-    protected $_locale;
+    protected $locale;
 
     /**
      * The Alphabet means english alphabet.
      *
      * @var boolean
      */
-    protected static $_meansEnglishAlphabet;
+    protected static $meansEnglishAlphabet;
 
     /**
      * Creates a new AlnumFilter object for each test method
@@ -69,16 +69,12 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filter = new AlnumFilter();
-        if (null === self::$_unicodeEnabled) {
-            self::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
-        }
-        if (null === self::$_meansEnglishAlphabet) {
-            $this->_locale = new ZendLocale('auto');
-            self::$_meansEnglishAlphabet = in_array($this->_locale->getLanguage(),
-                                                    array('ja')
-                                                    );
-        }
+        $this->filter = new AlnumFilter();
+
+        $this->locale               = Locale::getDefault();
+        $language                   = Locale::getPrimaryLanguage($this->locale);
+        self::$meansEnglishAlphabet = in_array($language, array('ja'));
+        self::$unicodeEnabled       = (@preg_match('/\pL/u', 'a')) ? true : false;
     }
 
     /**
@@ -88,7 +84,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
-        if (!self::$_unicodeEnabled) {
+        if (!self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = array(
                 'abc123'  => 'abc123',
@@ -96,9 +92,10 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
                 'abcxyz'  => 'abcxyz',
                 'AZ@#4.3' => 'AZ43',
                 ''        => ''
-                );
-        } if (self::$_meansEnglishAlphabet) {
-            //The Alphabet means english alphabet.
+            );
+        } elseif (self::$meansEnglishAlphabet) {
+            // The Alphabet means english alphabet.
+
             /**
              * The first element contains multibyte alphabets and digits.
              *  But , AlnumFilter is expected to return only singlebyte alphabets and digits.
@@ -114,22 +111,19 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
         } else {
             //The Alphabet means each language's alphabet.
             $valuesExpected = array(
-                'abc123'  => 'abc123',
-                'abc 123' => 'abc123',
-                'abcxyz'  => 'abcxyz',
-                'če2t3ně'         => 'če2t3ně',
-                'grz5e4gżółka'    => 'grz5e4gżółka',
-                'Be3l5gië'        => 'Be3l5gië',
-                ''        => ''
-                );
+                'abc123'        => 'abc123',
+                'abc 123'       => 'abc123',
+                'abcxyz'        => 'abcxyz',
+                'če2t3ně'       => 'če2t3ně',
+                'grz5e4gżółka'  => 'grz5e4gżółka',
+                'Be3l5gië'      => 'Be3l5gië',
+                ''              => ''
+            );
         }
-        $filter = $this->_filter;
-        foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals(
-                $output,
-                $result = $filter($input),
-                "Expected '$input' to filter to '$output', but received '$result' instead"
-                );
+
+        foreach ($valuesExpected as $input => $expected) {
+            $actual = $this->filter->filter($input);
+            $this->assertEquals($expected, $actual);
         }
     }
 
@@ -140,9 +134,9 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
      */
     public function testAllowWhiteSpace()
     {
-        $this->_filter->setAllowWhiteSpace(true);
+        $this->filter->setAllowWhiteSpace(true);
 
-        if (!self::$_unicodeEnabled) {
+        if (!self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = array(
                 'abc123'  => 'abc123',
@@ -152,34 +146,29 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
                 ''        => '',
                 "\n"      => "\n",
                 " \t "    => " \t "
-                );
-        }
-
-        if (self::$_meansEnglishAlphabet) {
+            );
+        } elseif (self::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
             $valuesExpected = array(
-                'a B ４5'  => 'a B 5',
-                'z3　x'  => 'z3x'
-                );
+                'a B ４5' => 'a B 5',
+                'z3　x'   => 'z3x'
+            );
         } else {
             //The Alphabet means each language's alphabet.
             $valuesExpected = array(
-                'abc123'  => 'abc123',
-                'abc 123' => 'abc 123',
-                'abcxyz'  => 'abcxyz',
-                'če2 t3ně'         => 'če2 t3ně',
-                'gr z5e4gżółka'    => 'gr z5e4gżółka',
-                'Be3l5 gië'        => 'Be3l5 gië',
-                ''        => '',
+                'abc123'        => 'abc123',
+                'abc 123'       => 'abc 123',
+                'abcxyz'        => 'abcxyz',
+                'če2 t3ně'      => 'če2 t3ně',
+                'gr z5e4gżółka' => 'gr z5e4gżółka',
+                'Be3l5 gië'     => 'Be3l5 gië',
+                ''              => '',
             );
         }
-        $filter = $this->_filter;
-        foreach ($valuesExpected as $input => $output) {
-            $this->assertEquals(
-                $output,
-                $result = $filter($input),
-                "Expected '$input' to filter to '$output', but received '$result' instead"
-                );
+
+        foreach ($valuesExpected as $input => $expected) {
+            $actual = $this->filter->filter($input);
+            $this->assertEquals($expected, $actual);
         }
     }
 }

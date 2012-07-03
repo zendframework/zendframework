@@ -35,16 +35,27 @@ use Zend\Filter\PregReplace as PregReplaceFilter;
  */
 class PregReplaceTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var PregReplaceFilter
+     */
+    protected $filter;
+    
     public function setUp()
     {
         $this->filter = new PregReplaceFilter();
     }
 
-    public function testPassingMatchPatternToConstructorSetsMatchPattern()
+    public function testDetectsPcreUnicodeSupport()
+    {
+        $enabled = (@preg_match('/\pL/u', 'a')) ? true : false;
+        $this->assertEquals($enabled, PregReplaceFilter::hasPcreUnicodeSupport());
+    }
+
+    public function testPassingPatternToConstructorSetsPattern()
     {
         $pattern = '#^controller/(?P<action>[a-z_-]+)#';
         $filter  = new PregReplaceFilter($pattern);
-        $this->assertEquals($pattern, $filter->getMatchPattern());
+        $this->assertEquals($pattern, $filter->getPattern());
     }
 
     public function testPassingReplacementToConstructorSetsReplacement()
@@ -54,25 +65,19 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($replace, $filter->getReplacement());
     }
 
-    public function testIsUnicodeSupportEnabledReturnsSaneValue()
+    public function testPatternIsNullByDefault()
     {
-        $enabled = (@preg_match('/\pL/u', 'a')) ? true : false;
-        $this->assertEquals($enabled, $this->filter->isUnicodeSupportEnabled());
+        $this->assertNull($this->filter->getPattern());
     }
 
-    public function testMatchPatternInitiallyNull()
-    {
-        $this->assertNull($this->filter->getMatchPattern());
-    }
-
-    public function testMatchPatternAccessorsWork()
+    public function testPatternAccessorsWork()
     {
         $pattern = '#^controller/(?P<action>[a-z_-]+)#';
-        $this->filter->setMatchPattern($pattern);
-        $this->assertEquals($pattern, $this->filter->getMatchPattern());
+        $this->filter->setPattern($pattern);
+        $this->assertEquals($pattern, $this->filter->getPattern());
     }
 
-    public function testReplacementInitiallyEmpty()
+    public function testReplacementIsEmptyByDefault()
     {
         $replacement = $this->filter->getReplacement();
         $this->assertTrue(empty($replacement));
@@ -89,7 +94,7 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->filter;
         $string = 'controller/action';
-        $filter->setMatchPattern('#^controller/(?P<action>[a-z_-]+)#')
+        $filter->setPattern('#^controller/(?P<action>[a-z_-]+)#')
                ->setReplacement('foo/bar');
         $filtered = $filter($string);
         $this->assertNotEquals($string, $filtered);
@@ -101,25 +106,8 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
         $filter = $this->filter;
         $string = 'controller/action';
         $filter->setReplacement('foo/bar');
-        $this->setExpectedException('\Zend\Filter\Exception\RuntimeException', 'does not have a valid MatchPattern set');
+        $this->setExpectedException('Zend\Filter\Exception\RuntimeException',
+                                    'does not have a valid pattern set');
         $filtered = $filter($string);
     }
-
-    /**
-      * @group ZF-9202
-      */
-    public function testExtendsPregReplace()
-    {
-        $startMatchPattern = '~(&gt;){3,}~i';
-        $filter = new XPregReplace();
-        $this->assertEquals($startMatchPattern, $filter->getMatchPattern());
-    }
-}
-
-/**
- * @group ZF-9202
- */
-class XPregReplace extends PregReplaceFilter
-{
-    protected $_matchPattern = '~(&gt;){3,}~i';
 }

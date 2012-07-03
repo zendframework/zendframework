@@ -496,14 +496,19 @@ class Http implements AdapterInterface
             return $this->_challengeClient();
         }
 
-        $password = $this->_basicResolver->resolve($creds[0], $this->_realm);
-        if ($password && 
-            $this->_secureStringCompare($password, $creds[1])) {
+        $result = $this->_basicResolver->resolve($creds[0], $this->_realm, $creds[1]);
+        
+        if ($result
+            && !is_array($result)
+            && $this->_secureStringCompare($result, $creds[1])
+        ) {
             $identity = array('username'=>$creds[0], 'realm'=>$this->_realm);
             return new Authentication\Result(Authentication\Result::SUCCESS, $identity);
-        } else {
-            return $this->_challengeClient();
+        } elseif (is_array($result)) {
+            return new Authentication\Result(Authentication\Result::SUCCESS, $result);
         }
+
+        return $this->_challengeClient();
     }
 
     /**

@@ -90,11 +90,11 @@ class Collection extends Fieldset
 
     /**
      * Accepted options for Collection:
-     * - targetElement: an array or element used in the collection
+     * - target_element: an array or element used in the collection
      * - count: number of times the element is added initially
-     * - allowAdd: if set to true, elements can be added to the form dynamically (using JavaScript)
-     * - shouldCreateTemplate: if set to true, a template is generated (inside a <span>)
-     * - templatePlaceholder: placeholder used in the data template
+     * - allow_add: if set to true, elements can be added to the form dynamically (using JavaScript)
+     * - should_create_template: if set to true, a template is generated (inside a <span>)
+     * - template_placeholder: placeholder used in the data template
      *
      * @param array|\Traversable $options
      * @return Collection
@@ -321,20 +321,25 @@ class Collection extends Fieldset
     }
 
     /**
-     * Prepare the collection by adding a dummy template element if needed by the user
+     * Prepare the collection by adding a dummy template element if the user want one
      *
      * @param Form $form
      * @return mixed|void
      */
     public function prepareElement(Form $form)
     {
-        // Create a template if we want one
+        // Create a template that will also be prepared
         if ($this->shouldCreateTemplate) {
             $templateElement = $this->getTemplateElement();
             $this->add($templateElement);
         }
 
         parent::prepareElement($form);
+
+        // The template element has been prepared, but we don't want it to be rendered nor validated, so remove it from the list
+        if ($this->shouldCreateTemplate) {
+            $this->remove($this->templatePlaceholder);
+        }
     }
 
     /**
@@ -375,7 +380,6 @@ class Collection extends Fieldset
             return null;
         }
 
-        // Don't create the template element twice
         if ($this->templateElement) {
             return $this->templateElement;
         }

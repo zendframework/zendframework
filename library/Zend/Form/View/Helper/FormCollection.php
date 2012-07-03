@@ -75,9 +75,6 @@ class FormCollection extends AbstractHelper
             } elseif ($elementOrFieldset instanceof ElementInterface) {
                 $templateMarkup .= $rowHelper($elementOrFieldset);
             }
-
-            // Remove the template element as we don't want to render it
-            $element->remove($element->getTemplatePlaceholder());
         }
 
         foreach($element->getIterator() as $elementOrFieldset) {

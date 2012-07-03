@@ -237,9 +237,8 @@ class ServiceListener implements ListenerAggregateInterface
 
         if (!$config instanceof ServiceConfiguration) {
             throw new Exception\RuntimeException(sprintf(
-                'Invalid service manager configuration class provided; received "%s", expected class implementing %s',
-                $class,
-                'Zend\ServiceManager\ConfigurationInterface'
+                'Invalid service manager configuration class provided; received "%s", expected an instance of Zend\ServiceManager\Configuration',
+                $class
             ));
         }
 

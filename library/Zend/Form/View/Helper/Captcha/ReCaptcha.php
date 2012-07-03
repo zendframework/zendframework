@@ -39,23 +39,20 @@ class ReCaptcha extends FormInput
     /**
      * Render ReCaptcha form elements
      *
-     * @param  ElementInterface $element 
+     * @param  ElementInterface $element
      * @return string
      */
     public function render(ElementInterface $element)
     {
         $attributes = $element->getAttributes();
-        if (!isset($attributes['captcha']) 
-            || !$attributes['captcha'] instanceof CaptchaAdapter
-        ) {
+        $captcha = $element->getCaptcha();
+
+        if ($captcha === null || !$captcha instanceof CaptchaAdapter) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has a "captcha" attribute implementing Zend\Captcha\AdapterInterface; none found',
                 __METHOD__
             ));
         }
-
-        $captcha = $attributes['captcha'];
-        unset($attributes['captcha']);
 
         $name          = $element->getName();
         $id            = isset($attributes['id']) ? $attributes['id'] : $name;
@@ -75,8 +72,8 @@ class ReCaptcha extends FormInput
      * Invoke helper as functor
      *
      * Proxies to {@link render()}.
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @return string
      */
     public function __invoke(ElementInterface $element = null)
@@ -90,11 +87,11 @@ class ReCaptcha extends FormInput
 
     /**
      * Render hidden input elements for the challenge and response
-     * 
-     * @param  string $challengeName 
-     * @param  string $challengeId 
-     * @param  string $responseName 
-     * @param  string $responseId 
+     *
+     * @param  string $challengeName
+     * @param  string $challengeId
+     * @param  string $responseName
+     * @param  string $responseId
      * @return string
      */
     protected function renderHiddenInput($challengeName, $challengeId, $responseName, $responseId)
@@ -119,9 +116,9 @@ class ReCaptcha extends FormInput
 
     /**
      * Create the JS events used to bind the challenge and response values to the submitted form.
-     * 
-     * @param  string $challengeId 
-     * @param  string $responseId 
+     *
+     * @param  string $challengeId
+     * @param  string $responseId
      * @return string
      */
     protected function renderJsEvents($challengeId, $responseId)

@@ -30,11 +30,9 @@ class NestedFieldset extends Fieldset
     {
         parent::__construct('nested_fieldset');
 
-        $field = new Element('anotherField');
-        $field->setAttributes(array(
-            'type' => 'text',
-            'label' => 'Name'
-        ));
+        $field = new Element('anotherField', array('label' => 'Name'));
+        $field->setAttribute('type', 'text');
+
         $this->add($field);
     }
 }

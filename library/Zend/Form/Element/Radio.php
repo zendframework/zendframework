@@ -14,27 +14,21 @@
  *
  * @category   Zend
  * @package    Zend_Form
- * @subpackage UnitTest
+ * @subpackage Element
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\Form\TestAsset;
+namespace Zend\Form\Element;
 
-use Zend\Form\Element;
-use Zend\Form\Fieldset;
 
-class BasicFieldset extends Fieldset
+/**
+ * @category   Zend
+ * @package    Zend_Form
+ * @subpackage Element
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class Radio extends MultiCheckbox
 {
-    public function __construct()
-    {
-        parent::__construct('basic_fieldset');
-
-        $field = new Element('field', array('label' => 'Name'));
-        $field->setAttribute('type', 'text');
-        $this->add($field);
-
-        $nestedFieldset = new NestedFieldset();
-        $this->add($nestedFieldset);
-    }
 }

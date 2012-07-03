@@ -23,6 +23,7 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\Element;
 use Zend\Form\ElementInterface;
+use Zend\Form\Element\Collection as CollectionElement;
 use Zend\Form\FieldsetInterface;
 
 /**
@@ -63,22 +64,23 @@ class FormCollection extends AbstractHelper
 
         $markup = '';
         $templateMarkup = '';
-        $attributes = $element->getAttributes();
         $escapeHelper = $this->getEscapeHelper();
         $rowHelper = $this->getRowHelper();
 
-        if (isset($attributes['shouldCreateTemplate']) && $attributes['shouldCreateTemplate'] === true) {
-            $templatePlaceholder = $attributes['templatePlaceholder'];
-            $elementOrFieldset = $element->get($templatePlaceholder);
+        if ($element instanceof CollectionElement) {
+            if ($element->shouldCreateTemplate()) {
+                $templatePlaceholder = $element->getTemplatePlaceholder();
+                $elementOrFieldset = $element->get($templatePlaceholder);
 
-            if ($elementOrFieldset instanceof FieldsetInterface) {
-                $templateMarkup .= $this->render($elementOrFieldset);
-            } elseif ($elementOrFieldset instanceof ElementInterface) {
-                $templateMarkup .= $rowHelper($elementOrFieldset);
+                if ($elementOrFieldset instanceof FieldsetInterface) {
+                    $templateMarkup .= $this->render($elementOrFieldset);
+                } elseif ($elementOrFieldset instanceof ElementInterface) {
+                    $templateMarkup .= $rowHelper($elementOrFieldset);
+                }
+
+                // Remove it as we don't want to draw it multiple times
+                $element->remove($templatePlaceholder);
             }
-
-            // Remove it as we don't want to draw it multiple times
-            $element->remove($templatePlaceholder);
         }
 
         foreach($element->getIterator() as $elementOrFieldset) {
@@ -99,8 +101,10 @@ class FormCollection extends AbstractHelper
 
         // Every collection is wrapped by a fieldset if needed
         if ($this->shouldWrap) {
-            if (isset($attributes['label'])) {
-                $label = $escapeHelper($attributes['label']);
+            $label = $element->getLabel();
+
+            if (!empty($label)) {
+                $label = $escapeHelper($label);
 
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',

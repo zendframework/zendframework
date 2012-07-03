@@ -37,19 +37,26 @@ use Zend\InputFilter\InputProviderInterface;
 class Captcha extends Element implements InputProviderInterface
 {
     /**
-     * Set a single element attribute
-     *
-     * @param  string $key
-     * @param  mixed $value
-     * @return Element
+     * @var \Zend\Captcha\AdapterInterface
      */
-    public function setAttribute($key, $value)
+    protected $captcha;
+
+    /**
+     * Accepted options for Captcha:
+     * - captcha: a valid Zend\Captcha\AdapterInterface
+     *
+     * @param array|\Traversable $options
+     * @return Captcha
+     */
+    public function setOptions($options)
     {
-        if ('captcha' == strtolower($key)) {
-            $this->setCaptcha($value);
-            return $this;
+        parent::setOptions($options);
+
+        if (isset($options['captcha'])) {
+            $this->setCaptcha($options['captcha']);
         }
-        return parent::setAttribute($key, $value);
+
+        return $this;
     }
 
     /**
@@ -69,7 +76,8 @@ class Captcha extends Element implements InputProviderInterface
                 (is_object($captcha) ? get_class($captcha) : gettype($captcha))
             ));
         }
-        $this->attributes['captcha'] = $captcha;
+        $this->captcha = $captcha;
+
         return $this;
     }
 
@@ -80,7 +88,7 @@ class Captcha extends Element implements InputProviderInterface
      */
     public function getCaptcha()
     {
-        return $this->getAttribute('captcha');
+        return $this->captcha;
     }
 
     /**

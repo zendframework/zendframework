@@ -89,7 +89,12 @@ class FormElementTest extends TestCase
      */
     public function testRendersExpectedInputElement($type)
     {
-        $element = new Element('foo');
+        if ($type === 'radio') {
+            $element = new Element\Radio('foo');
+        } else {
+            $element = new Element('foo');
+        }
+
         $element->setAttribute('type', $type);
         $element->setAttribute('options', array('option' => 'value'));
         $markup  = $this->helper->render($element);
@@ -113,7 +118,7 @@ class FormElementTest extends TestCase
      */
     public function testRendersMultiElementsAsExpected($type, $inputType, $additionalMarkup)
     {
-        $element = new Element('foo');
+        $element = new Element\MultiCheckbox('foo');
         $element->setAttribute('type', $type);
         $element->setAttribute('options', array(
             'option' => 'value1',

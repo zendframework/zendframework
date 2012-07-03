@@ -2,26 +2,28 @@
 
 namespace ZendTest\Form\TestAsset;
 
+use ZendTest\Form\TestAsset\Entity\Category;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 
-class AddressFieldset extends Fieldset implements InputFilterProviderInterface
+class CategoryFieldset extends Fieldset implements InputFilterProviderInterface
 {
     public function __construct()
     {
-        parent::__construct('address');
+        parent::__construct('category');
         $this->setHydrator(new ClassMethodsHydrator())
-             ->setObject(new Entity\Address());
+             ->setObject(new Category());
 
-        $street = new \Zend\Form\Element('street', array('label' => 'Street'));
-        $street->setAttribute('type', 'text');
-
-        $city = new CityFieldset;
-        $city->setLabel('City');
-
-        $this->add($street);
-        $this->add($city);
+        $this->add(array(
+            'name' => 'name',
+            'options' => array(
+                'label' => 'Name of the category'
+            ),
+            'attributes' => array(
+                'required' => 'required'
+            )
+        ));
     }
 
     /**
@@ -33,7 +35,7 @@ class AddressFieldset extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return array(
-            'street' => array(
+            'name' => array(
                 'required' => true,
             )
         );

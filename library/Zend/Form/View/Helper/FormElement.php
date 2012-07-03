@@ -39,8 +39,8 @@ class FormElement extends BaseAbstractHelper
      *
      * Introspects the element type and attributes to determine which
      * helper to utilize when rendering.
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @return string
      */
     public function render(ElementInterface $element)
@@ -68,17 +68,6 @@ class FormElement extends BaseAbstractHelper
 
         $type    = $element->getAttribute('type');
         $options = $element->getAttribute('options');
-        $captcha = $element->getAttribute('captcha');
-
-        if (!empty($captcha)) {
-            $helper = $renderer->plugin('form_captcha');
-            return $helper($element);
-        }
-
-        if (is_array($options) && $type == 'radio') {
-            $helper = $renderer->plugin('form_radio');
-            return $helper($element);
-        }
 
         if ($type == 'checkbox') {
             $helper = $renderer->plugin('form_checkbox');
@@ -87,6 +76,11 @@ class FormElement extends BaseAbstractHelper
 
         if (is_array($options) && $type == 'multi_checkbox') {
             $helper = $renderer->plugin('form_multi_checkbox');
+            return $helper($element);
+        }
+
+        if (is_array($options) && $type == 'radio') {
+            $helper = $renderer->plugin('form_radio');
             return $helper($element);
         }
 
@@ -100,7 +94,6 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
-
         $helper = $renderer->plugin('form_input');
         return $helper($element);
     }
@@ -109,8 +102,8 @@ class FormElement extends BaseAbstractHelper
      * Invoke helper as function
      *
      * Proxies to {@link render()}.
-     * 
-     * @param  ElementInterface|null $element 
+     *
+     * @param  ElementInterface|null $element
      * @return string|FormElement
      */
     public function __invoke(ElementInterface $element = null)

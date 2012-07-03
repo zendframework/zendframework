@@ -54,7 +54,7 @@ class FormRowTest extends TestCase
     public function testCanGenerateLabel()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
+        $element->setLabel('The value for foo:');
         $markup = $this->helper->render($element);
         $this->assertContains('>The value for foo:<', $markup);
         $this->assertContains('<label', $markup);
@@ -64,7 +64,7 @@ class FormRowTest extends TestCase
     public function testCanCreateLabelValueBeforeInput()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
+        $element->setLabel('The value for foo:');
         $this->helper->setLabelPosition('prepend');
         $markup = $this->helper->render($element);
         $this->assertContains('<label>The value for foo:<', $markup);
@@ -84,8 +84,8 @@ class FormRowTest extends TestCase
     function testCanRenderRowLabelAttributes()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
-        $element->setAttribute('rowLabelAttributes', array('class' => 'bar'));
+        $element->setLabel('The value for foo:');
+        $element->setLabelAttributes(array('class' => 'bar'));
         $this->helper->setLabelPosition('append');
         $markup = $this->helper->render($element);
         $this->assertContains("<label class=\"bar\">", $markup);
@@ -107,10 +107,10 @@ class FormRowTest extends TestCase
             'This is the third label' => 'value3',
         );
 
-        $element = new Element('foo');
+        $element = new Element\MultiCheckbox('foo');
         $element->setAttribute('type', 'multi_checkbox');
-        $element->setAttribute('label', 'This is a multi-checkbox');
         $element->setAttribute('options', $options);
+        $element->setLabel('This is a multi-checkbox');
         $markup = $this->helper->render($element);
         $this->assertContains("<fieldset>", $markup);
         $this->assertContains("<legend>", $markup);

@@ -14,22 +14,14 @@ class CityFieldset extends Fieldset implements InputFilterProviderInterface
         $this->setHydrator(new ClassMethodsHydrator())
              ->setObject(new Entity\City());
 
-        $name = new \Zend\Form\Element('name');
-        $name->setAttributes(array(
-            'type' => 'text',
-            'label' => 'Name of the city'
-        ));
+        $name = new \Zend\Form\Element('name', array('label' => 'Name of the city'));
+        $name->setAttribute('type', 'text');
 
-        $zipCode = new \Zend\Form\Element('zipCode');
-        $zipCode->setAttributes(array(
-            'type' => 'text',
-            'label' => 'ZipCode of the city'
-        ));
+        $zipCode = new \Zend\Form\Element('zipCode', array('label' => 'ZipCode of the city'));
+        $zipCode->setAttribute('type', 'text');
 
         $country = new CountryFieldset;
-        $country->setAttributes(array(
-            'label' => 'Pays'
-        ));
+        $country->setLabel('Country');
 
         $this->add($name);
         $this->add($zipCode);

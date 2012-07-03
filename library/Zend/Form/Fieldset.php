@@ -96,6 +96,25 @@ class Fieldset extends Element implements FieldsetInterface
     }
 
     /**
+     * Set options for a fieldset. Accepted options are:
+     * - use_as_base_fieldset: is this fieldset use as the base fieldset?
+     *
+     * @param array|\Traversable $options
+     * @return Element|ElementInterface
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setOptions($options)
+    {
+        parent::setOptions($options);
+
+        if (isset($options['use_as_base_fieldset'])) {
+            $this->setUseAsBaseFieldset($options['use_as_base_fieldset']);
+        }
+
+        return $this;
+    }
+
+    /**
      * Compose a form factory to use when calling add() with a non-element/fieldset
      *
      * @param  Factory $factory
@@ -154,7 +173,7 @@ class Fieldset extends Element implements FieldsetInterface
         }
 
         $name = $elementOrFieldset->getName();
-        if ((null === $name || '' === $name) 
+        if ((null === $name || '' === $name)
             && (!array_key_exists('name', $flags) || $flags['name'] === '')
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -375,6 +394,7 @@ class Fieldset extends Element implements FieldsetInterface
             }
 
             $element = $this->get($name);
+
             if ($element instanceof FieldsetInterface && is_array($value)) {
                 $element->populateValues($value);
                 continue;
@@ -402,28 +422,6 @@ class Fieldset extends Element implements FieldsetInterface
     public function getIterator()
     {
         return $this->iterator;
-    }
-
-    /**
-     * Make a deep clone of the object
-     *
-     * @return void
-     */
-    public function __clone()
-    {
-        $this->iterator = new PriorityQueue();
-
-        foreach ($this->byName as $key => $value) {
-            $value = clone $value;
-            $this->byName[$key] = $value;
-            $this->iterator->insert($value);
-
-            if ($value instanceof FieldsetInterface) {
-                $this->fieldsets[$key] = $value;
-            } elseif ($value instanceof ElementInterface) {
-                $this->elements[$key] = $value;
-            }
-        }
     }
 
     /**
@@ -488,6 +486,16 @@ class Fieldset extends Element implements FieldsetInterface
 
         foreach ($values as $key => $value) {
             $element = $this->byName[$key];
+
+            if ($element instanceof Element\Collection) {
+                $collection = array();
+                foreach ($value as $subKey => $subValue) {
+                    $collection[] = $element->get($subKey)->bindValues($subValue);
+                }
+
+                $value = $collection;
+            }
+
             if ($element instanceof FieldsetInterface && is_object($element->object)) {
                 $value = $element->bindValues($value);
             }
@@ -519,5 +527,32 @@ class Fieldset extends Element implements FieldsetInterface
     public function useAsBaseFieldset()
     {
         return $this->useAsBaseFieldset;
+    }
+
+    /**
+     * Make a deep clone of a fieldset
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        $this->iterator = new PriorityQueue();
+
+        foreach ($this->byName as $key => $value) {
+            $value = clone $value;
+            $this->byName[$key] = $value;
+            $this->iterator->insert($value);
+
+            if ($value instanceof FieldsetInterface) {
+                $this->fieldsets[$key] = $value;
+            } elseif ($value instanceof ElementInterface) {
+                $this->elements[$key] = $value;
+            }
+        }
+
+        // Also make a deep copy of the object in case it's used within a collection
+        if (is_object($this->object)) {
+            $this->object = clone $this->object;
+        }
     }
 }

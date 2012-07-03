@@ -34,9 +34,19 @@ class FormCollection extends Form
         $this->add(array(
             'type' => 'Zend\Form\Element\Collection',
             'name' => 'colors',
-            'attributes' => array(
+            'options' => array(
                 'count' => 2,
-                'targetElement' => $element
+                'target_element' => $element
+            )
+        ));
+
+        $fieldset = new BasicFieldset();
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Collection',
+            'name' => 'fieldsets',
+            'options' => array(
+                'count' => 2,
+                'target_element' => $fieldset
             )
         ));
     }

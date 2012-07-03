@@ -38,7 +38,7 @@ use Zend\Stdlib\PriorityQueue;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Collection extends Fieldset implements InputFilterProviderInterface
+class Collection extends Fieldset
 {
     /**
      * Default template placeholder
@@ -80,14 +80,21 @@ class Collection extends Fieldset implements InputFilterProviderInterface
      */
     protected $templatePlaceholder = self::DEFAULT_TEMPLATE_PLACEHOLDER;
 
+    /**
+     * Element used as a template
+     *
+     * @var ElementInterface|FieldsetInterface
+     */
+    protected $templateElement;
+
 
     /**
      * Accepted options for Collection:
-     * - targetElement: an array or element used in the collection
+     * - target_element: an array or element used in the collection
      * - count: number of times the element is added initially
-     * - allowAdd: if set to true, elements can be added to the form dynamically (using JavaScript)
-     * - shouldCreateTemplate: if set to true, a template is generated (inside a <span>)
-     * - templatePlaceholder: placeholder used in the data template
+     * - allow_add: if set to true, elements can be added to the form dynamically (using JavaScript)
+     * - should_create_template: if set to true, a template is generated (inside a <span>)
+     * - template_placeholder: placeholder used in the data template
      *
      * @param array|\Traversable $options
      * @return Collection
@@ -261,11 +268,6 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     {
         $this->shouldCreateTemplate = (bool)$shouldCreateTemplate;
 
-        // If it doesn't exist yet, create it
-        if ($shouldCreateTemplate) {
-            $this->addTemplateElement();
-        }
-
         return $this;
     }
 
@@ -305,6 +307,42 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     }
 
     /**
+     * Get a template element used for rendering purposes only
+     *
+     * @return null|ElementInterface|FieldsetInterface
+     */
+    public function getTemplateElement()
+    {
+        if ($this->templateElement === null) {
+            $this->templateElement = $this->createTemplateElement();
+        }
+
+        return $this->templateElement;
+    }
+
+    /**
+     * Prepare the collection by adding a dummy template element if the user want one
+     *
+     * @param Form $form
+     * @return mixed|void
+     */
+    public function prepareElement(Form $form)
+    {
+        // Create a template that will also be prepared
+        if ($this->shouldCreateTemplate) {
+            $templateElement = $this->getTemplateElement();
+            $this->add($templateElement);
+        }
+
+        parent::prepareElement($form);
+
+        // The template element has been prepared, but we don't want it to be rendered nor validated, so remove it from the list
+        if ($this->shouldCreateTemplate) {
+            $this->remove($this->templatePlaceholder);
+        }
+    }
+
+    /**
      * If both count and targetElement are set, add them to the fieldset
      *
      * @return void
@@ -318,28 +356,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
 
                 $this->add($elementOrFieldset);
             }
-
-            // If a template is wanted, we add a "dummy" element
-            if ($this->shouldCreateTemplate) {
-                $this->addTemplateElement();
-            }
         }
-    }
-
-    /**
-     * Add a "dummy" template element to be used with JavaScript
-     *
-     * @return Collection
-     */
-    protected function addTemplateElement()
-    {
-        if ($this->targetElement !== null && !$this->has($this->templatePlaceholder)) {
-            $elementOrFieldset = $this->createNewTargetElementInstance();
-            $elementOrFieldset->setName($this->templatePlaceholder);
-            $this->add($elementOrFieldset);
-        }
-
-        return $this;
     }
 
     /**
@@ -353,22 +370,23 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     }
 
     /**
-     * Should return an array specification compatible with
-     * {@link Zend\InputFilter\Factory::createInputFilter()}.
+     * Create a dummy template element
      *
-     * @return array
+     * @return null|ElementInterface|FieldsetInterface
      */
-    public function getInputFilterSpecification()
+    protected function createTemplateElement()
     {
-        // Ignore any template
-        if ($this->shouldCreateTemplate) {
-            return array(
-                $this->templatePlaceholder => array(
-                    'required' => false
-                )
-            );
+        if (!$this->shouldCreateTemplate) {
+            return null;
         }
 
-        return array();
+        if ($this->templateElement) {
+            return $this->templateElement;
+        }
+
+        $elementOrFieldset = $this->createNewTargetElementInstance();
+        $elementOrFieldset->setName($this->templatePlaceholder);
+
+        return $elementOrFieldset;
     }
 }

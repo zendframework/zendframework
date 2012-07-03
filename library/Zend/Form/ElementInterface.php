@@ -49,7 +49,7 @@ interface ElementInterface
     /**
      * Set options for an element
      *
-     * @param array|\Traversable $options
+     * @param  array|\Traversable $options
      * @return ElementInterface
      */
     public function setOptions($options);
@@ -74,7 +74,7 @@ interface ElementInterface
     /**
      * Return true if a specific attribute is set
      *
-     * @param string $key
+     * @param  string $key
      * @return bool
      */
     public function hasAttribute($key);
@@ -97,15 +97,15 @@ interface ElementInterface
     public function getAttributes();
 
     /**
-     * Set the label used for this element
+     * Set the label (if any) used for this element
      *
-     * @param $label
+     * @param  $label
      * @return ElementInterface
      */
     public function setLabel($label);
 
     /**
-     * Retrieve the label used for this element
+     * Retrieve the label (if any) used for this element
      *
      * @return string
      */

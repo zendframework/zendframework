@@ -77,6 +77,7 @@ class Factory
      *
      * @param  array|Traversable $spec
      * @return ElementInterface
+     * @throws Exception\DomainException
      */
     public function create($spec)
     {
@@ -151,7 +152,7 @@ class Factory
             ));
         }
 
-        if (!empty($name)) {
+        if ($name !== null && $name !== '') {
             $element->setName($name);
         }
 

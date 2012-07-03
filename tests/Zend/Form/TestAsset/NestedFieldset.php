@@ -24,7 +24,7 @@ namespace ZendTest\Form\TestAsset;
 use Zend\Form\Element;
 use Zend\Form\Fieldset;
 
-class NestedFieldset extends Fieldset
+class NestedFieldset extends Fieldset implements \Zend\InputFilter\InputFilterProviderInterface
 {
     public function __construct()
     {
@@ -34,5 +34,20 @@ class NestedFieldset extends Fieldset
         $field->setAttribute('type', 'text');
 
         $this->add($field);
+    }
+
+    /**
+     * Should return an array specification compatible with
+     * {@link Zend\InputFilter\Factory::createInputFilter()}.
+     *
+     * @return array
+     */
+    public function getInputFilterSpecification()
+    {
+        return array(
+            'anotherField' => array(
+                'required' => true
+            )
+        );
     }
 }

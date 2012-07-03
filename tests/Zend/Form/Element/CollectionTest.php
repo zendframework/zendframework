@@ -42,38 +42,6 @@ class CollectionTest extends TestCase
         $this->assertEquals('__index__', $placeholder);
     }
 
-    public function testGenerateEmptySpecificationWhenTemplateIsNotWanted()
-    {
-        $spec = $this->form->get('colors')->getInputFilterSpecification();
-        $this->assertEquals(array(), $spec);
-    }
-
-    public function testGenerateSpecificationWhenTemplateIsWanted()
-    {
-        $collection = $this->form->get('colors');
-        $collection->setShouldCreateTemplate(true);
-        $spec = $collection->getInputFilterSpecification();
-
-        $expectedSpec = array(
-            '__index__' => array(
-                'required' => false
-            )
-        );
-
-        $this->assertEquals($expectedSpec, $spec);
-
-        $collection->setTemplatePlaceholder('__template__');
-        $spec = $collection->getInputFilterSpecification();
-
-        $expectedSpec = array(
-            '__template__' => array(
-                'required' => false
-            )
-        );
-
-        $this->assertEquals($expectedSpec, $spec);
-    }
-
     public function testCannotAllowNewElementsIfAllowAddIsFalse()
     {
         $collection = $this->form->get('colors');
@@ -108,5 +76,61 @@ class CollectionTest extends TestCase
         $data[] = 'orange';
         $collection->populateValues($data);
         $this->assertEquals(3, count($collection->getElements()));
+    }
+
+    public function testCanValidateFormWithCollectionWithoutTemplate()
+    {
+        $this->form->setData(array(
+            'colors' => array(
+                '#ffffff',
+                '#ffffff'
+            ),
+            'fieldsets' => array(
+                array(
+                    'field' => 'oneValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                ),
+                array(
+                    'field' => 'twoValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                )
+            )
+        ));
+
+        $this->assertEquals(true, $this->form->isValid());
+    }
+
+    public function testCanValidateFormWithCollectionWithTemplate()
+    {
+        $collection = $this->form->get('colors');
+        $collection->setShouldCreateTemplate(true);
+        $collection->setTemplatePlaceholder('__template__');
+
+        $this->form->setData(array(
+            'colors' => array(
+                '#ffffff',
+                '#ffffff'
+            ),
+            'fieldsets' => array(
+                array(
+                    'field' => 'oneValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                ),
+                array(
+                    'field' => 'twoValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                )
+            )
+        ));
+
+        $this->assertEquals(true, $this->form->isValid());
     }
 }

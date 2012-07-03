@@ -53,8 +53,8 @@ interface FormInterface extends FieldsetInterface
      *
      * Allows populating the object with validated values.
      *
-     * @param object $object
-     * @param int $flags
+     * @param  object $object
+     * @param  int $flags
      * @return mixed
      */
     public function bind($object, $flags = FormInterface::VALUES_NORMALIZED);
@@ -71,7 +71,7 @@ interface FormInterface extends FieldsetInterface
      * Set input filter
      * 
      * @param  InputFilterInterface $inputFilter 
-     * @return InputFilterAwareInterface
+     * @return FormInterface
      */
     public function setInputFilter(InputFilterInterface $inputFilter);
 

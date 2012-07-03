@@ -1,12 +1,12 @@
 <?php
 namespace ZendTest\Db\Adapter\Platform;
 
-use Zend\Db\Adapter\Platform\Sql92;
+use Zend\Db\Adapter\Platform\Postgresql;
 
-class Sql92Test extends \PHPUnit_Framework_TestCase
+class PostgresqlTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Sql92
+     * @var Postgresql
      */
     protected $platform;
 
@@ -16,19 +16,19 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->platform = new Sql92;
+        $this->platform = new Postgresql;
     }
 
     /**
-     * @covers Zend\Db\Adapter\Platform\Sql92::getName
+     * @covers Zend\Db\Adapter\Platform\Postgresql::getName
      */
     public function testGetName()
     {
-        $this->assertEquals('SQL92', $this->platform->getName());
+        $this->assertEquals('PostgreSQL', $this->platform->getName());
     }
 
     /**
-     * @covers Zend\Db\Adapter\Platform\Sql92::getQuoteIdentifierSymbol
+     * @covers Zend\Db\Adapter\Platform\Postgresql::getQuoteIdentifierSymbol
      */
     public function testGetQuoteIdentifierSymbol()
     {
@@ -36,7 +36,7 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\Adapter\Platform\Sql92::quoteIdentifier
+     * @covers Zend\Db\Adapter\Platform\Postgresql::quoteIdentifier
      */
     public function testQuoteIdentifier()
     {
@@ -44,7 +44,7 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\Adapter\Platform\Sql92::quoteIdentifierChain
+     * @covers Zend\Db\Adapter\Platform\Postgresql::quoteIdentifierChain
      */
     public function testQuoteIdentifierChain()
     {
@@ -54,7 +54,7 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\Adapter\Platform\Sql92::getQuoteValueSymbol
+     * @covers Zend\Db\Adapter\Platform\Postgresql::getQuoteValueSymbol
      */
     public function testGetQuoteValueSymbol()
     {
@@ -62,7 +62,7 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\Adapter\Platform\Sql92::quoteValue
+     * @covers Zend\Db\Adapter\Platform\Postgresql::quoteValue
      */
     public function testQuoteValue()
     {
@@ -70,7 +70,7 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\Adapter\Platform\Sql92::quoteValueList
+     * @covers Zend\Db\Adapter\Platform\Postgresql::quoteValueList
      */
     public function testQuoteValueList()
     {
@@ -80,7 +80,7 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\Adapter\Platform\Sql92::getIdentifierSeparator
+     * @covers Zend\Db\Adapter\Platform\Postgresql::getIdentifierSeparator
      */
     public function testGetIdentifierSeparator()
     {
@@ -88,7 +88,7 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\Adapter\Platform\Sql92::quoteIdentifierInFragment
+     * @covers Zend\Db\Adapter\Platform\Postgresql::quoteIdentifierInFragment
      */
     public function testQuoteIdentifierInFragment()
     {

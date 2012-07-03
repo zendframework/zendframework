@@ -19,10 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\Validator;
+namespace ZendTest\I18n\Validator;
 
-use Zend\Validator\Int;
-use Zend\Locale;
+use Zend\I18n\Validator\Int as IntValidator;
+use Locale;
 
 /**
  * @category   Zend
@@ -41,34 +41,41 @@ class IntTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->validator = new Int();
+        $this->locale    = Locale::getDefault();
+        $this->validator = new IntValidator();
+    }
+
+    public function tearDown()
+    {
+        Locale::setDefault($this->locale);
+    }
+
+    public function intDataProvider()
+    {
+        return array(
+            array(1.00,         true),
+            array(0.00,         true),
+            array(0.01,         false),
+            array(-0.1,         false),
+            array(-1,           true),
+            array('10',         true),
+            array(1,            true),
+            array('not an int', false),
+            array(true,         false),
+            array(false,        false),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @dataProvider intDataProvider()
      * @return void
      */
-    public function testBasic()
+    public function testBasic($intVal, $expected)
     {
         $this->validator->setLocale('en');
-        $valuesExpected = array(
-            array(1.00, true),
-            array(0.00, true),
-            array(0.01, false),
-            array(-0.1, false),
-            array(-1, true),
-            array('10', true),
-            array(1, true),
-            array('not an int', false),
-            array(true, false),
-            array(false, false),
-            );
-
-        foreach ($valuesExpected as $element) {
-            $this->assertEquals($element[1], $this->validator->isValid($element[0]),
-                'Test failed with ' . var_export($element, 1));
-        }
+        $this->assertEquals($expected, $this->validator->isValid($intVal));
     }
 
     /**
@@ -105,7 +112,8 @@ class IntTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsingApplicationLocale()
     {
-        $valid = new Int();
+        Locale::setDefault('de');
+        $valid = new IntValidator();
         $this->assertTrue($valid->isValid('10.000'));
     }
 
@@ -114,8 +122,8 @@ class IntTest extends \PHPUnit_Framework_TestCase
      */
     public function testLocaleDetectsNoEnglishLocaleOnOtherSetLocale()
     {
-        $this->markTestSkipped('Depends on system-specific locale');
-        $valid = new Int();
+        Locale::setDefault('de');
+        $valid = new IntValidator();
         $this->assertTrue($valid->isValid(1200));
         $this->assertFalse($valid->isValid('1,200'));
     }

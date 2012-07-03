@@ -181,7 +181,9 @@ class SitemapTest extends AbstractTest
         $this->_helper->setUseXmlDeclaration(false);
 
         $expected = $this->_getExpected('sitemap/nodecl.xml');
-        $this->assertEquals($expected, $this->_helper->render($this->_nav2));
+        $got = str_replace("\n", PHP_EOL, $this->_helper->render($this->_nav2));
+        
+        $this->assertEquals($expected, $got);
     }
 
     public function testThrowExceptionOnInvalidLoc()

@@ -68,8 +68,16 @@ class Compress extends AbstractFilter
      * @param  array $options
      * @return Compress
      */
-    public function setOptions(array $options)
+    public function setOptions($options)
     {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '"%s" expects an array or Traversable; received "%s"',
+                __METHOD__,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+
         foreach ($options as $key => $value) {
             if ($key == 'options') {
                 $key = 'adapterOptions';

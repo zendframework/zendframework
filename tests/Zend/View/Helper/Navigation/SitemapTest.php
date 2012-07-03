@@ -149,7 +149,9 @@ class SitemapTest extends AbstractTest
         $this->_helper->setRole(null);
 
         $expected = $this->_getExpected('sitemap/acl2.xml');
-        $this->assertEquals($expected, $this->_helper->render());
+        $got = str_replace("\n", PHP_EOL, $this->_helper->render());
+        
+        $this->assertEquals($expected, $got);
     }
 
     public function testSettingMaxDepth()

@@ -85,7 +85,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasic($locale, $currencyCode, $number, $expected)
     {
-        $this->assertEquals($expected, $this->helper->__invoke(
+        $this->assertMbStringEquals($expected, $this->helper->__invoke(
             $number, $currencyCode, $locale
         ));
     }
@@ -99,11 +99,18 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
             ->setLocale($locale)
             ->setCurrencyCode($currencyCode);
 
-        $this->assertEquals($expected, $this->helper->__invoke($number));
+        $this->assertMbStringEquals($expected, $this->helper->__invoke($number));
     }
 
     public function testDefaultLocale()
     {
         $this->assertEquals(Locale::getDefault(), $this->helper->getLocale());
+    }
+
+    public function assertMbStringEquals($expected, $test, $message = '')
+    {
+        $expected = str_replace(array("\xC2\xA0", ' '), '', $expected);
+        $test     = str_replace(array("\xC2\xA0", ' '), '', $test);
+        $this->assertEquals($expected, $test, $message);
     }
 }

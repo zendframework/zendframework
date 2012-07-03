@@ -208,7 +208,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
      */
     public function testNestedRenderingRestoresVariablesCorrectly()
     {
-        $expected = "inner\n<p>content</p>";
+        $expected = "inner" . PHP_EOL . "<p>content</p>";
         $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
         $test = $this->renderer->render('testNestedOuter.phtml', array('content' => '<p>content</p>'));
         $this->assertEquals($expected, $test);

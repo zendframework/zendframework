@@ -375,7 +375,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $filters = array(
             'Word\SeparatorToCamelCase' => array('separator' => ' '),
-            array('filter' => 'Alpha', 'options' => array(true)),
+            array(
+                'filter' => 'Alpha',
+                'allow_white_space' => true
+            ),
             new Filter\BaseName(),
         );
         $this->adapter->addFilters($filters);

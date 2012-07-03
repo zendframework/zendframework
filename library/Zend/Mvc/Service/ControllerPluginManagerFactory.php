@@ -47,11 +47,7 @@ class ControllerPluginManagerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $plugins = new ControllerPluginManager();
-
-        if ($serviceLocator instanceof ServiceManager) {
-            $plugins->addPeeringServiceManager($serviceLocator);
-        }
-
+        $plugins->setServiceLocator($serviceLocator);
         return $plugins;
     }
 }

@@ -96,6 +96,25 @@ class Fieldset extends Element implements FieldsetInterface
     }
 
     /**
+     * Set options for a fieldset. Accepted options are:
+     * - use_as_base_fieldset: is this fieldset use as the base fieldset?
+     *
+     * @param array|\Traversable $options
+     * @return Element|ElementInterface
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setOptions($options)
+    {
+        parent::setOptions($options);
+
+        if (isset($options['use_as_base_fieldset'])) {
+            $this->setUseAsBaseFieldset($options['use_as_base_fieldset']);
+        }
+
+        return $this;
+    }
+
+    /**
      * Compose a form factory to use when calling add() with a non-element/fieldset
      *
      * @param  Factory $factory

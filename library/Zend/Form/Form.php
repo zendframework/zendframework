@@ -125,6 +125,15 @@ class Form extends Fieldset implements FormInterface
      */
     public function add($elementOrFieldset, array $flags = array())
     {
+        // TODO: find a better solution than duplicating the factory code, the problem being that if $elementOrFieldset is an array,
+        // it is passed by value, and we don't get back the concrete ElementInterface
+        if (is_array($elementOrFieldset)
+            || ($elementOrFieldset instanceof Traversable && !$elementOrFieldset instanceof ElementInterface)
+        ) {
+            $factory = $this->getFormFactory();
+            $elementOrFieldset = $factory->create($elementOrFieldset);
+        }
+
         parent::add($elementOrFieldset, $flags);
 
         if ($elementOrFieldset instanceof Fieldset && $elementOrFieldset->useAsBaseFieldset()) {

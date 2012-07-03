@@ -176,7 +176,7 @@ class BreadcrumbsTest extends AbstractTest
     public function testTranslationUsingZendTranslateAdapter()
     {
         $translator = $this->_getTranslator();
-        $this->_helper->setTranslator($translator->getAdapter());
+        $this->_helper->setTranslator($translator);
 
         $expected = $this->_getExpected('bc/translated.html');
         $this->assertEquals($expected, $this->_helper->render());

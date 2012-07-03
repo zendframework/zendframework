@@ -21,6 +21,7 @@
 
 namespace Zend\View\Helper;
 
+use Zend\I18n\Translator\Translator;
 use Zend\View\Exception;
 
 /**
@@ -124,21 +125,13 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
     /**
      * Sets a translation Adapter for translation
      *
-     * @param  Zend_Translator|\Zend\Translator\Adapter\Adapter $translate
+     * @param  Translator $translator
      * @return \Zend\View\Helper\HeadTitle
      * @throws Exception\InvalidArgumentException
      */
-    public function setTranslator($translate)
+    public function setTranslator(Translator $translator)
     {
-        if ($translate instanceof \Zend\Translator\Adapter\AbstractAdapter) {
-            $this->_translator = $translate;
-        } elseif ($translate instanceof \Zend\Translator\Translator) {
-            $this->_translator = $translate->getAdapter();
-        } else {
-            throw new Exception\InvalidArgumentException(
-                "You must set an instance of Zend_Translator or Zend_Translator_Adapter"
-            );
-        }
+        $this->_translator = $translator;
         return $this;
     }
 
@@ -148,7 +141,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
      * If none is currently registered, attempts to pull it from the registry
      * using the key 'Zend_Translator'.
      *
-     * @return Zend_Translator_Adapter|null
+     * @return Translator|null
      */
     public function getTranslator()
     {
@@ -184,7 +177,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
      * @param  string|null $locale
      * @return string
      */
-    public function toString($indent = null, $locale = null)
+    public function toString($indent = null, $locale = 'default')
     {
         $indent = (null !== $indent)
                 ? $this->getWhitespace($indent)

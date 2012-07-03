@@ -52,8 +52,9 @@ class HtmlList extends FormElement
                 }
                 $list .= '<li>' . $item . '</li>' . self::EOL;
             } else {
-                if (6 < strlen($list)) {
-                    $list = substr($list, 0, strlen($list) - 6)
+                $itemLength = 5 + strlen(self::EOL);
+                if ($itemLength < strlen($list)) {
+                    $list = substr($list, 0, strlen($list) - $itemLength)
                      . $this($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
                 } else {
                     $list .= '<li>' . $this($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;

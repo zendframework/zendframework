@@ -51,7 +51,7 @@ use Zend\Stdlib\ResponseInterface;
  * $response->send();
  * </code>
  *
- * bootstrap() opts in to the default route, dispatch, and view listeners, 
+ * bootstrap() opts in to the default route, dispatch, and view listeners,
  * sets up the MvcEvent, and triggers the bootstrap event. This can be omitted
  * if you wish to setup your own listeners and/or workflow; alternately, you
  * can simply extend the class to override such behavior.
@@ -111,7 +111,7 @@ class Application implements
      * Constructor
      *
      * @param mixed $configuration
-     * @param ServiceManager $serviceManager 
+     * @param ServiceManager $serviceManager
      */
     public function __construct($configuration, ServiceManager $serviceManager)
     {
@@ -127,7 +127,7 @@ class Application implements
 
     /**
      * Retrieve the application configuration
-     * 
+     *
      * @return array|object
      */
     public function getConfiguration()
@@ -138,10 +138,10 @@ class Application implements
     /**
      * Bootstrap the application
      *
-     * Defines and binds the MvcEvent, and passes it the request, response, and 
-     * router. Attaches the ViewManager as a listener. Triggers the bootstrap 
+     * Defines and binds the MvcEvent, and passes it the request, response, and
+     * router. Attaches the ViewManager as a listener. Triggers the bootstrap
      * event.
-     * 
+     *
      * @return Application
      */
     public function bootstrap()
@@ -168,7 +168,7 @@ class Application implements
 
     /**
      * Retrieve the service manager
-     * 
+     *
      * @return ServiceManager
      */
     public function getServiceManager()
@@ -233,6 +233,25 @@ class Application implements
     public function getEventManager()
     {
         return $this->events;
+    }
+
+    /**
+     * Static method for quick and easy initialization of the Application.
+     *
+     * This has some service names hard-coded that you should be aware of:
+     * - ApplicationConfiguration
+     * - ModuleManager
+     * - EventManager & Zend\EventManager\EventManagerInterface
+     *
+     * @param array $configuration
+     * @return Application
+     */
+    public static function init($configuration = array())
+    {
+        $serviceManager = new ServiceManager(new Service\ServiceManagerConfiguration);
+        $serviceManager->setService('ApplicationConfiguration', $configuration);
+        $serviceManager->get('ModuleManager')->loadModules();
+        return $serviceManager->get('Application')->bootstrap();
     }
 
     /**

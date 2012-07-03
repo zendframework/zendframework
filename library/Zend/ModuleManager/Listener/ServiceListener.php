@@ -71,13 +71,13 @@ class ServiceListener implements ListenerAggregateInterface
 
     /**
      * @param string $key
-     * @param ServiceManager $serviceManager
+     * @param ServiceManager|string $serviceManager
      * @return ServiceListener
      */
     public function addServiceManager($serviceManager, $key, $moduleInterface, $method)
     {
         if (is_string($serviceManager)) {
-            $smKey = md5($serviceManager);
+            $smKey = $serviceManager;
         } elseif ($serviceManager instanceof ServiceManager) {
             $smKey = spl_object_hash($serviceManager);
         } else {

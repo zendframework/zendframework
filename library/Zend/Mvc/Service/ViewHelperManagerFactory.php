@@ -22,6 +22,7 @@
 namespace Zend\Mvc\Service;
 
 use Zend\Mvc\Exception;
+use Zend\Mvc\Router\RouteMatch;
 use Zend\View\HelperPluginManager as ViewHelperManager;
 use Zend\View\Helper as ViewHelper;
 use Zend\ServiceManager\ConfigurationInterface;

@@ -21,6 +21,7 @@
 
 namespace ZendTest\Validator;
 
+use Zend\I18n\Translator\Translator;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Between;
 use Zend\Validator\StaticValidator;
@@ -135,11 +136,9 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
     public function testSetGetDefaultTranslator()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new \Zend\Translator\Translator('ArrayAdapter', array(), 'en');
-        restore_error_handler();
+        $translator = new Translator();
         AbstractValidator::setDefaultTranslator($translator);
-        $this->assertSame($translator->getAdapter(), AbstractValidator::getDefaultTranslator());
+        $this->assertSame($translator, AbstractValidator::getDefaultTranslator());
     }
 
     public function testAllowsPrependingValidators()

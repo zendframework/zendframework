@@ -21,7 +21,7 @@
 
 namespace ZendTest\Validator;
 
-use Zend\Translator;
+use Zend\I18n\Translator\Translator;
 use Zend\Validator\AbstractValidator;
 
 /**
@@ -58,10 +58,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $this->testTranslatorNullByDefault();
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new Translator\Translator('ArrayAdapter', array(), 'en');
+        $translator = new Translator();
         restore_error_handler();
         $this->validator->setTranslator($translator);
-        $this->assertSame($translator->getAdapter(), $this->validator->getTranslator());
+        $this->assertSame($translator, $this->validator->getTranslator());
     }
 
     public function testCanSetTranslatorToNull()
@@ -78,35 +78,39 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertNull(AbstractValidator::getDefaultTranslator());
     }
 
-
-
     public function testErrorMessagesAreTranslatedWhenTranslatorPresent()
     {
-        $translator = new Translator\Translator(
-            'ArrayAdapter',
-            array('fooMessage' => 'This is the translated message for %value%'),
-            'en'
+        $loader = new TestAsset\ArrayTranslator();
+        $loader->translations = array(
+            'fooMessage' => 'This is the translated message for %value%',
         );
+        $translator = new Translator();
+        $translator->getPluginManager()->setService('default', $loader);
+        $translator->addTranslationFile('default', null);
+
         $this->validator->setTranslator($translator);
         $this->assertFalse($this->validator->isValid('bar'));
         $messages = $this->validator->getMessages();
         $this->assertTrue(array_key_exists('fooMessage', $messages));
-        $this->assertContains('bar', $messages['fooMessage']);
+        $this->assertContains('bar', $messages['fooMessage'], var_export($messages, 1));
         $this->assertContains('This is the translated message for ', $messages['fooMessage']);
     }
 
     public function testCanTranslateMessagesInsteadOfKeys()
     {
-        $translator = new Translator\Translator(
-            'ArrayAdapter',
-            array('%value% was passed' => 'This is the translated message for %value%'),
-            'en'
+        $loader = new TestAsset\ArrayTranslator();
+        $loader->translations = array(
+            '%value% was passed' => 'This is the translated message for %value%',
         );
+        $translator = new Translator();
+        $translator->getPluginManager()->setService('default', $loader);
+        $translator->addTranslationFile('default', null);
+
         $this->validator->setTranslator($translator);
         $this->assertFalse($this->validator->isValid('bar'));
         $messages = $this->validator->getMessages();
         $this->assertTrue(array_key_exists('fooMessage', $messages));
-        $this->assertContains('bar', $messages['fooMessage']);
+        $this->assertContains('bar', $messages['fooMessage'], var_export($messages, 1));
         $this->assertContains('This is the translated message for ', $messages['fooMessage']);
     }
 
@@ -148,21 +152,20 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testTranslatorEnabledPerDefault()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new Translator\Translator('ArrayAdapter', array(), 'en');
-        restore_error_handler();
+        $translator = new Translator();
         $this->validator->setTranslator($translator);
         $this->assertFalse($this->validator->isTranslatorDisabled());
     }
 
     public function testCanDisableTranslator()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new Translator\Translator(
-            'ArrayAdapter',
-            array('fooMessage' => 'This is the translated message for %value%'),
-            'en'
+        $loader = new TestAsset\ArrayTranslator();
+        $loader->translations = array(
+            '%value% was passed' => 'This is the translated message for %value%',
         );
-        restore_error_handler();
+        $translator = new Translator();
+        $translator->getPluginManager()->setService('default', $loader);
+        $translator->addTranslationFile('default', null);
         $this->validator->setTranslator($translator);
 
         $this->assertFalse($this->validator->isValid('bar'));

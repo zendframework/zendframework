@@ -21,6 +21,7 @@
 
 namespace ZendTest\Validator;
 
+use Zend\I18n\Translator\Translator;
 use Zend\Validator\EmailAddress;
 use Zend\Validator\Hostname;
 
@@ -365,16 +366,21 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     {
         $hostnameValidator = new Hostname();
         $translations = array(
-            'hostnameIpAddressNotAllowed' => 'hostnameIpAddressNotAllowed translation',
-            'hostnameUnknownTld' => 'hostnameUnknownTld translation',
-            'hostnameDashCharacter' => 'hostnameDashCharacter translation',
+            'hostnameIpAddressNotAllowed'   => 'hostnameIpAddressNotAllowed translation',
+            'hostnameUnknownTld'            => 'hostnameUnknownTld translation',
+            'hostnameDashCharacter'         => 'hostnameDashCharacter translation',
             'hostnameInvalidHostnameSchema' => 'hostnameInvalidHostnameSchema translation',
-            'hostnameUndecipherableTld' => 'hostnameUndecipherableTld translation',
-            'hostnameInvalidHostname' => 'hostnameInvalidHostname translation',
-            'hostnameInvalidLocalName' => 'hostnameInvalidLocalName translation',
-            'hostnameLocalNameNotAllowed' => 'hostnameLocalNameNotAllowed translation',
+            'hostnameUndecipherableTld'     => 'hostnameUndecipherableTld translation',
+            'hostnameInvalidHostname'       => 'hostnameInvalidHostname translation',
+            'hostnameInvalidLocalName'      => 'hostnameInvalidLocalName translation',
+            'hostnameLocalNameNotAllowed'   => 'hostnameLocalNameNotAllowed translation',
         );
-        $translator = new \Zend\Translator\Translator('ArrayAdapter', $translations);
+        $loader = new TestAsset\ArrayTranslator();
+        $loader->translations = $translations;
+        $translator = new Translator();
+        $translator->getPluginManager()->setService('test', $loader);
+        $translator->addTranslationFile('test', null);
+
         $this->validator->setTranslator($translator)->setHostnameValidator($hostnameValidator);
 
         $this->validator->isValid('_XX.!!3xx@0.239,512.777');

@@ -21,6 +21,7 @@
 
 namespace ZendTest\Validator;
 
+use Zend\I18n\Translator\Translator;
 use Zend\Validator\Hostname;
 
 /**
@@ -276,7 +277,11 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $translations = array(
             'hostnameInvalidLocalName' => 'this is the IP error message',
         );
-        $translator = new \Zend\Translator\Translator('ArrayAdapter', $translations);
+        $loader = new TestAsset\ArrayTranslator();
+        $loader->translations = $translations;
+        $translator = new Translator();
+        $translator->getPluginManager()->setService('default', $loader);
+        $translator->addTranslationFile('default', null);
         $this->validator->setTranslator($translator);
 
         $this->validator->isValid('0.239,512.777');

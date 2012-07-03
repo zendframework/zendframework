@@ -497,9 +497,11 @@ class Http implements AdapterInterface
         }
 
         $result = $this->_basicResolver->resolve($creds[0], $this->_realm, $creds[1]);
-        if ($result &&
-            !is_array($result) &&
-            $this->_secureStringCompare($result, $creds[1])) {
+        
+        if ($result
+            && !is_array($result)
+            && $this->_secureStringCompare($result, $creds[1])
+        ) {
             $identity = array('username'=>$creds[0], 'realm'=>$this->_realm);
             return new Authentication\Result(Authentication\Result::SUCCESS, $identity);
         } elseif (is_array($result)) {
@@ -555,7 +557,7 @@ class Http implements AdapterInterface
         // This makes no assumptions about how the password hash was
         // constructed beyond that it must have been built in such a way as
         // to be recreatable with the current settings of this object.
-        $ha1 = $this->_digestResolver->resolve($data['username'], $data['realm'], null);
+        $ha1 = $this->_digestResolver->resolve($data['username'], $data['realm']);
         if ($ha1 === false) {
             return $this->_challengeClient();
         }

@@ -21,11 +21,9 @@
 
 namespace Zend\I18n\View\Helper;
 
-use DateTime;
-use IntlDateFormatter;
 use Locale;
+use NumberFormatter;
 use Zend\View\Helper\AbstractHelper;
-use Zend\I18n\Exception;
 
 /**
  * View helper for formatting dates.
@@ -36,7 +34,7 @@ use Zend\I18n\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DateFormat extends AbstractHelper
+class Currency extends AbstractHelper
 {
     /**
      * Locale to use instead of the default.
@@ -46,11 +44,11 @@ class DateFormat extends AbstractHelper
     protected $locale;
 
     /**
-     * Timezone to use.
+     * The 3-letter ISO 4217 currency code indicating the currency to use.
      *
      * @var string
      */
-    protected $timezone;
+    protected $currencyCode;
 
     /**
      * Formatter instances.
@@ -60,38 +58,34 @@ class DateFormat extends AbstractHelper
     protected $formatters = array();
 
     /**
-     * Set timezone to use instead of the default.
+     * The 3-letter ISO 4217 currency code indicating the currency to use.
      *
-     * @param string $timezone
-     * @return DateFormat
+     * @param  string $currencyCode
+     * @return Currency
      */
-    public function setTimezone($timezone)
+    public function setCurrencyCode($currencyCode)
     {
-        $this->timezone = (string) $timezone;
-
-        foreach ($this->formatters as $formatter) {
-            $formatter->setTimeZoneId($this->timezone);
-        }
+        $this->currencyCode = $currencyCode;
         return $this;
     }
 
     /**
-     * Get the timezone to use.
+     * Get the 3-letter ISO 4217 currency code indicating the currency to use.
      *
-     * @return string|null
+     * @return string
      */
-    public function getTimezone()
+    public function getCurrencyCode()
     {
-        return $this->timezone;
+        return $this->currencyCode;
     }
 
     /**
      * Set locale to use instead of the default.
      *
      * @param  string $locale
-     * @return DateFormat
+     * @return Currency
      */
-    public function setlocale($locale)
+    public function setLocale($locale)
     {
         $this->locale = (string) $locale;
         return $this;
@@ -102,7 +96,7 @@ class DateFormat extends AbstractHelper
      *
      * @return string|null
      */
-    public function getlocale()
+    public function getLocale()
     {
         if ($this->locale === null) {
             $this->locale = Locale::getDefault();
@@ -112,42 +106,36 @@ class DateFormat extends AbstractHelper
     }
 
     /**
-     * Format a date.
+     * Format a number.
      *
-     * @param  DateTime|integer|array $date
-     * @param  integer                $dateType
-     * @param  integer                $timeType
-     * @param  string                 $locale
+     * @param  float  $number
+     * @param  string $currencyCode
+     * @param  string $locale
      * @return string
-     * @throws Exception\RuntimeException
      */
     public function __invoke(
-        $date,
-        $dateType = IntlDateFormatter::NONE,
-        $timeType = IntlDateFormatter::NONE,
-        $locale   = null
+        $number,
+        $currencyCode = null,
+        $locale       = null
     ) {
-        if ($locale === null) {
-            $locale = $this->getlocale();
+        if (null === $locale) {
+            $locale = $this->getLocale();
+        }
+        if (null === $currencyCode) {
+            $currencyCode = $this->getCurrencyCode();
         }
 
-        $timezone    = $this->getTimezone();
-        $formatterId = md5($dateType . "\0" . $timeType . "\0" . $locale);
+        $formatterId = md5($locale);
 
         if (!isset($this->formatters[$formatterId])) {
-            $this->formatters[$formatterId] = new IntlDateFormatter(
+            $this->formatters[$formatterId] = new NumberFormatter(
                 $locale,
-                $dateType,
-                $timeType,
-                $timezone
+                NumberFormatter::CURRENCY
             );
         }
 
-        // DateTime support for IntlDateFormatter::format() was only added in 5.3.4
-        if ($date instanceof DateTime && version_compare(PHP_VERSION, '5.3.4', '<')) {
-            $date = $date->getTimestamp();
-        }
-
-        return $this->formatters[$formatterId]->format($date);
+        return $this->formatters[$formatterId]->formatCurrency(
+            $number, $currencyCode
+        );
     }
 }

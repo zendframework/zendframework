@@ -137,14 +137,14 @@ class Queue extends Storage
         $response = $this->_performRequest($queueName, '?comp=metadata', Request::METHOD_GET);
         if ($response->isSuccess()) {
             // Parse metadata
-            $metadata = $this->_parseMetadataHeaders($response->headers()->toArray());
+            $metadata = $this->_parseMetadataHeaders($response->getHeaders()->toArray());
 
             // Return queue
             $queue                          = new QueueInstance(
                 $queueName,
                 $metadata
             );
-            $queue->ApproximateMessageCount = intval($response->headers()->get('x-ms-approximate-message-count'));
+            $queue->ApproximateMessageCount = intval($response->getHeaders()->get('x-ms-approximate-message-count'));
             return $queue;
         } else {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));

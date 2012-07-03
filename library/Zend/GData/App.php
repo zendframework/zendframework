@@ -608,10 +608,10 @@ class App
         if (self::getGzipEnabled()) {
             // some services require the word 'gzip' to be in the user-agent
             // header in addition to the accept-encoding header
-            if (strpos($this->_httpClient->headers()->get('User-Agent'),
+            if (strpos($this->_httpClient->getHeaders()->get('User-Agent'),
                 'gzip') === false) {
                 $headers['User-Agent'] =
-                    $this->_httpClient->headers()->get('User-Agent') . ' (gzip)';
+                    $this->_httpClient->getHeaders()->get('User-Agent') . ' (gzip)';
             }
             $headers['Accept-encoding'] = 'gzip, deflate';
         } else {
@@ -670,7 +670,7 @@ class App
         }
         if ($response->isRedirect() && $response->getStatusCode() != '304') {
             if ($remainingRedirects > 0) {
-                $newUrl = $response->headers()->get('Location');
+                $newUrl = $response->getHeaders()->get('Location');
                 $response = $this->performHttpRequest(
                     $method, $newUrl, $headers, $body,
                     $contentType, $remainingRedirects);

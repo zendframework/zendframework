@@ -236,7 +236,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         $response = $this->_makeRequest('HEAD', $object);
 
         if ($response->getStatusCode() == 200) {
-            $headers = $response->headers();
+            $headers = $response->getHeaders();
             
             //False if header not found
             $info['type']  = $headers->get('Content-type');
@@ -487,7 +487,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         // Check the MD5 Etag returned by S3 against and MD5 of the buffer
         if ($response->getStatusCode() == 200) {
             $etag       = '';
-            $etagHeader = $response->headers()->get('Etag');
+            $etagHeader = $response->getHeaders()->get('Etag');
             if ($etagHeader instanceof Header\Etag) {
                 $etag = $etagHeader->getFieldValue();
             }

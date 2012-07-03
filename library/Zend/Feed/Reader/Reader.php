@@ -243,11 +243,11 @@ class Reader
             } else {
                 $responseXml = $response->getBody();
                 $cache->setItem($cacheId, $responseXml);
-                if ($response->headers()->get('ETag')) {
-                    $cache->setItem($cacheId . '_etag', $response->headers()->get('ETag')->getFieldValue());
+                if ($response->getHeaders()->get('ETag')) {
+                    $cache->setItem($cacheId . '_etag', $response->getHeaders()->get('ETag')->getFieldValue());
                 }
-                if ($response->headers()->get('Last-Modified')) {
-                    $cache->setItem($cacheId . '_lastmodified', $response->headers()->get('Last-Modified')->getFieldValue());
+                if ($response->getHeaders()->get('Last-Modified')) {
+                    $cache->setItem($cacheId . '_lastmodified', $response->getHeaders()->get('Last-Modified')->getFieldValue());
                 }
             }
             return self::importString($responseXml);

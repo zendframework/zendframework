@@ -118,9 +118,9 @@ class Table extends AbstractBatchStorage
             }
 
             // More tables?
-            if ($response->headers()->get('x-ms-continuation-NextTableName') !== null) {
+            if ($response->getHeaders()->get('x-ms-continuation-NextTableName') !== null) {
                 $returnValue = array_merge($returnValue,
-                                           $this->listTables($response->headers()
+                                           $this->listTables($response->getHeaders()
                                                                  ->get('x-ms-continuation-NextTableName')));
             }
 
@@ -556,14 +556,14 @@ class Table extends AbstractBatchStorage
             }
 
             // More entities?
-            if ($response->headers()->get('x-ms-continuation-NextPartitionKey') !== null &&
-                $response->headers()->get('x-ms-continuation-NextRowKey') !== null
+            if ($response->getHeaders()->get('x-ms-continuation-NextPartitionKey') !== null &&
+                $response->getHeaders()->get('x-ms-continuation-NextRowKey') !== null
             ) {
                 if (strpos($queryString, '$top') === false) {
                     $returnValue = array_merge($returnValue, $this->retrieveEntities($tableName, $filter, $entityClass,
-                                                                                     $response->headers()
+                                                                                     $response->getHeaders()
                                                                                          ->get('x-ms-continuation-NextPartitionKey'),
-                                                                                     $response->headers()
+                                                                                     $response->getHeaders()
                                                                                          ->get('x-ms-continuation-NextRowKey')));
                 }
             }
@@ -712,8 +712,8 @@ class Table extends AbstractBatchStorage
         }
         if ($response->isSuccess()) {
             // Update properties
-            $entity->setEtag($response->headers()->get('Etag'));
-            $entity->setTimestamp($response->headers()->get('Last-modified'));
+            $entity->setEtag($response->getHeaders()->get('Etag'));
+            $entity->setTimestamp($response->getHeaders()->get('Last-modified'));
 
             return $entity;
         } else {

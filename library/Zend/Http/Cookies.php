@@ -93,7 +93,7 @@ class Cookies extends Headers
      */
     public function addCookiesFromResponse(Response $response, $ref_uri)
     {
-        $cookie_hdrs = $response->headers()->get('Set-Cookie');
+        $cookie_hdrs = $response->getHeaders()->get('Set-Cookie');
 
         if (is_array($cookie_hdrs)) {
             foreach ($cookie_hdrs as $cookie) {

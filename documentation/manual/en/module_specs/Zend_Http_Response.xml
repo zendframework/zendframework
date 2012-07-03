@@ -75,7 +75,7 @@ EOS);
 
 $response = new Response();
 $response->setStatusCode(Response::STATUS_CODE_200);
-$response->headers()->addHeaders(array(
+$response->getHeaders()->addHeaders(array(
     'HeaderField1' => 'header-field-value',
     'HeaderField2' => 'header-field-value2',
 );
@@ -479,7 +479,7 @@ EOS);
 use Zend\Http\Response;
 $response = new Response();
 $response->setStatusCode(Response::STATUS_CODE_200);
-$response->headers()->addHeaders(array(
+$response->getHeaders()->addHeaders(array(
     'HeaderField1' => 'header-field-value',
     'HeaderField2' => 'header-field-value2',
 );

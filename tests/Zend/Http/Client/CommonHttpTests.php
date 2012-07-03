@@ -957,7 +957,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             throw new AdapterException\RuntimeException("Error requesting test URL");
         }
 
-        $clen = $response->headers()->get('Content-Length');
+        $clen = $response->getHeaders()->get('Content-Length');
 
         if (! (is_array($clen))) {
             $this->markTestSkipped("Didn't get multiple Content-length headers");
@@ -986,7 +986,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->client->send();
         $request = Request::fromString($this->client->getLastRawRequest());
         $this->assertEquals($content_type,
-                            $request->headers()->get('Content-Type')->getFieldValue());
+                            $request->getHeaders()->get('Content-Type')->getFieldValue());
     }
 
     /**

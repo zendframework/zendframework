@@ -24,6 +24,7 @@ namespace Zend\Mvc\Controller;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigurationInterface;
 use Zend\Stdlib\DispatchableInterface;
+use Zend\Mvc\Exception;
 
 /**
  * Plugin manager implementation for controllers
@@ -41,7 +42,7 @@ class PluginManager extends AbstractPluginManager
 {
     /**
      * Default set of plugins
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -63,8 +64,8 @@ class PluginManager extends AbstractPluginManager
      *
      * After invoking parent constructor, add an initializer to inject the
      * attached controller, if any, to the currently requested plugin.
-     * 
-     * @param  null|ConfigurationInterface $configuration 
+     *
+     * @param  null|ConfigurationInterface $configuration
      * @return void
      */
     public function __construct(ConfigurationInterface $configuration = null)
@@ -75,8 +76,8 @@ class PluginManager extends AbstractPluginManager
 
     /**
      * Set controller
-     * 
-     * @param  DispatchableInterface $controller 
+     *
+     * @param  DispatchableInterface $controller
      * @return PluginManager
      */
     public function setController(DispatchableInterface $controller)
@@ -87,7 +88,7 @@ class PluginManager extends AbstractPluginManager
 
     /**
      * Retrieve controller instance
-     * 
+     *
      * @return null|DispatchableInterface
      */
     public function getController()
@@ -98,7 +99,7 @@ class PluginManager extends AbstractPluginManager
     /**
      * Inject a helper instance with the registered controller
      *
-     * @param  object $plugin 
+     * @param  object $plugin
      * @return void
      */
     public function injectController($plugin)
@@ -111,7 +112,7 @@ class PluginManager extends AbstractPluginManager
         }
 
         $controller = $this->getController();
-        if (!$controller instanceof DispatchableInterface) { 
+        if (!$controller instanceof DispatchableInterface) {
             return;
         }
 
@@ -122,12 +123,21 @@ class PluginManager extends AbstractPluginManager
      * Validate the plugin
      *
      * Any plugin is considered valid in this context.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return true
      */
     public function validatePlugin($plugin)
     {
-        return true;
+        if ($plugin instanceof Plugin\PluginInterface) {
+            // we're okay
+            return;
+        }
+
+        throw new Exception\InvalidPluginException(sprintf(
+            'Plugin of type %s is invalid; must implement %s\Plugin\PluginInterface',
+            (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
+            __NAMESPACE__
+        ));
     }
 }

@@ -99,7 +99,7 @@ class ViewHelperManagerFactory implements FactoryInterface
             if (isset($config['base_path'])) {
                 $basePath = $config['base_path'];
             } else {
-                $basePath = $sm->get('Request')->getBasePath();
+                $basePath = $serviceLocator->get('Request')->getBasePath();
             }
             $basePathHelper->setBasePath($basePath);
             return $basePathHelper;

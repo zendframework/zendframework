@@ -81,7 +81,7 @@ class FormRow extends AbstractHelper
         $elementString       = $elementHelper->render($element);
         $elementErrors       = $elementErrorsHelper->render($element);
 
-        if ($label !== '') {
+        if (!empty($label)) {
             $label = $escapeHelper($label);
             $labelAttributes = $element->getLabelAttributes();
 

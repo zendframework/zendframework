@@ -103,7 +103,7 @@ class FormCollection extends AbstractHelper
         if ($this->shouldWrap) {
             $label = $element->getLabel();
 
-            if ($label !== '') {
+            if (!empty($label)) {
                 $label = $escapeHelper($label);
 
                 $markup = sprintf(

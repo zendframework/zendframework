@@ -18,12 +18,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Validator;
+namespace Zend\I18n\Validator;
 
+use Locale;
+use NumberFormatter;
 use Traversable;
-use Zend\Locale;
-use Zend\Registry;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Validator\AbstractValidator;
+use Zend\Validator\Exception;
 
 /**
  * @category   Zend
@@ -44,32 +46,29 @@ class Int extends AbstractValidator
         self::NOT_INT => "The input does not appear to be an integer",
     );
 
+    /**
+     * Optional locale
+     *
+     * @var string|null
+     */
     protected $locale;
 
     /**
      * Constructor for the integer validator
      *
-     * @param  array|Traversable|\Zend\Locale\Locale|string $options
+     * @param  array|Traversable $options
      */
-    public function __construct($options = null)
+    public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         }
 
-        if (is_array($options)) {
-            if (array_key_exists('locale', $options)) {
-                $options = $options['locale'];
-            } else {
-                $options = null;
-            }
+        if (array_key_exists('locale', $options)) {
+            $this->setLocale($options['locale']);
         }
 
-        if ($options !== null) {
-            $this->setLocale($options);
-        }
-
-        parent::__construct();
+        parent::__construct($options);
     }
 
     /**
@@ -77,18 +76,21 @@ class Int extends AbstractValidator
      */
     public function getLocale()
     {
+        if (null === $this->locale) {
+            $this->locale = Locale::getDefault();
+        }
         return $this->locale;
     }
 
     /**
      * Sets the locale to use
      *
-     * @param string|\Zend\Locale\Locale $locale
+     * @param  string $locale
      * @return Int
      */
-    public function setLocale($locale = null)
+    public function setLocale($locale)
     {
-        $this->locale = Locale\Locale::findLocale($locale);
+        $this->locale = $locale;
         return $this;
     }
 
@@ -97,6 +99,7 @@ class Int extends AbstractValidator
      *
      * @param  string|integer $value
      * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function isValid($value)
     {
@@ -110,26 +113,28 @@ class Int extends AbstractValidator
         }
 
         $this->setValue($value);
-        if ($this->locale === null) {
-            $locale        = localeconv();
-            $valueFiltered = str_replace($locale['decimal_point'], '.', $value);
-            $valueFiltered = str_replace($locale['thousands_sep'], '', $valueFiltered);
 
-            if (strval(intval($valueFiltered)) != $valueFiltered) {
-                $this->error(self::NOT_INT);
-                return false;
-            }
+        $locale = $this->getLocale();
+        $format = new NumberFormatter($locale, NumberFormatter::DECIMAL);
+        if (intl_is_failure($format->getErrorCode())) {
+            throw new Exception\InvalidArgumentException("Invalid locale string given");
+        }
 
-        } else {
-            try {
-                if (!Locale\Format::isInteger($value, array('locale' => $this->locale))) {
-                    $this->error(self::NOT_INT);
-                    return false;
-                }
-            } catch (Locale\Exception\ExceptionInterface $e) {
-                $this->error(self::NOT_INT);
-                return false;
-            }
+        $parsedInt = $format->parse($value, NumberFormatter::TYPE_INT64);
+        if (intl_is_failure($format->getErrorCode())) {
+            $this->error(self::NOT_INT);
+            return false;
+        }
+
+        $decimalSep  = $format->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
+        $groupingSep = $format->getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
+
+        $valueFiltered = str_replace($groupingSep, '', $value);
+        $valueFiltered = str_replace($decimalSep, '.', $valueFiltered);
+
+        if (strval($parsedInt) !== $valueFiltered) {
+            $this->error(self::NOT_INT);
+            return false;
         }
 
         return true;

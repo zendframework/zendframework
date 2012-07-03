@@ -18,11 +18,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Validator;
+namespace Zend\I18n\Validator;
 
+use Locale;
+use NumberFormatter;
 use Traversable;
-use Zend\Locale;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Validator\AbstractValidator;
+use Zend\Validator\Exception;
 
 /**
  * @category   Zend
@@ -44,27 +47,25 @@ class Float extends AbstractValidator
     );
 
     /**
-     * Options for this validator
+     * Optional locale
      *
-     * @var array
+     * @var string|null
      */
-    protected $options = array(
-        'locale' => null,
-    );
+    protected $locale;
 
     /**
-     * Constructor
+     * Constructor for the integer validator
      *
      * @param array|Traversable $options
      */
-    public function __construct($options = null)
+    public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         }
 
-        if (!is_array($options)) {
-            $options = array('locale' => $options);
+        if (array_key_exists('locale', $options)) {
+            $this->setLocale($options['locale']);
         }
 
         parent::__construct($options);
@@ -73,30 +74,35 @@ class Float extends AbstractValidator
     /**
      * Returns the set locale
      *
-     * @return \Zend\Locale\Locale
+     * @return string
      */
     public function getLocale()
     {
-        return $this->options['locale'];
+        if (null === $this->locale) {
+            $this->locale = Locale::getDefault();
+        }
+        return $this->locale;
     }
 
     /**
      * Sets the locale to use
      *
-     * @param string|\Zend\Locale\Locale $locale
+     * @param string|null $locale
      * @return Float
      */
-    public function setLocale($locale = null)
+    public function setLocale($locale)
     {
-        $this->options['locale'] = Locale\Locale::findLocale($locale);
+        $this->locale = $locale;
         return $this;
     }
+
 
     /**
      * Returns true if and only if $value is a floating-point value
      *
      * @param  string $value
      * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function isValid($value)
     {
@@ -105,17 +111,31 @@ class Float extends AbstractValidator
             return false;
         }
 
+        $this->setValue($value);
+
         if (is_float($value)) {
             return true;
         }
 
-        $this->setValue($value);
-        try {
-            if (!Locale\Format::isFloat($value, array('locale' => $this->options['locale']))) {
-                $this->error(self::NOT_FLOAT);
-                return false;
-            }
-        } catch (Locale\Exception\ExceptionInterface $e) {
+        $locale = $this->getLocale();
+        $format = new NumberFormatter($locale, NumberFormatter::DECIMAL);
+        if (intl_is_failure($format->getErrorCode())) {
+            throw new Exception\InvalidArgumentException("Invalid locale string given");
+        }
+
+        $parsedFloat = $format->parse($value, NumberFormatter::TYPE_DOUBLE);
+        if (intl_is_failure($format->getErrorCode())) {
+            $this->error(self::NOT_FLOAT);
+            return false;
+        }
+
+        $decimalSep  = $format->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
+        $groupingSep = $format->getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
+
+        $valueFiltered = str_replace($groupingSep, '', $value);
+        $valueFiltered = str_replace($decimalSep, '.', $valueFiltered);
+
+        if (strval($parsedFloat) !== $valueFiltered) {
             $this->error(self::NOT_FLOAT);
             return false;
         }

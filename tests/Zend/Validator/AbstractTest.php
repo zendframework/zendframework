@@ -21,7 +21,6 @@
 
 namespace ZendTest\Validator;
 
-use Locale;
 use Zend\I18n\Translator\Translator;
 use Zend\Validator\AbstractValidator;
 
@@ -81,7 +80,6 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testErrorMessagesAreTranslatedWhenTranslatorPresent()
     {
-        Locale::setDefault('en_US');
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
             'fooMessage' => 'This is the translated message for %value%',
@@ -100,7 +98,6 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testCanTranslateMessagesInsteadOfKeys()
     {
-        Locale::setDefault('en_US');
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
             '%value% was passed' => 'This is the translated message for %value%',
@@ -162,7 +159,6 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testCanDisableTranslator()
     {
-        Locale::setDefault('en_US');
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
             '%value% was passed' => 'This is the translated message for %value%',

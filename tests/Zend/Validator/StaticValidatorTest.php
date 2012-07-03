@@ -21,7 +21,6 @@
 
 namespace ZendTest\Validator;
 
-use Locale;
 use Zend\I18n\Translator;
 use Zend\Validator\AbstractValidator;
 use Zend\I18n\Validator\Alpha;
@@ -109,7 +108,6 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
         AbstractValidator::setMessageLength(10);
         $this->assertEquals(10, AbstractValidator::getMessageLength());
 
-        Locale::setDefault('en_US');
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
             Alpha::INVALID => 'This is the translated message for %value%', 

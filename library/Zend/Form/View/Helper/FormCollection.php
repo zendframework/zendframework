@@ -67,19 +67,17 @@ class FormCollection extends AbstractHelper
         $escapeHelper = $this->getEscapeHelper();
         $rowHelper = $this->getRowHelper();
 
-        if ($element instanceof CollectionElement) {
-            if ($element->shouldCreateTemplate()) {
-                $elementOrFieldset = $element->getTemplateElement();
+        if ($element instanceof CollectionElement && $element->shouldCreateTemplate()) {
+            $elementOrFieldset = $element->getTemplateElement();
 
-                if ($elementOrFieldset instanceof FieldsetInterface) {
-                    $templateMarkup .= $this->render($elementOrFieldset);
-                } elseif ($elementOrFieldset instanceof ElementInterface) {
-                    $templateMarkup .= $rowHelper($elementOrFieldset);
-                }
-
-                // Remove the template element as we don't want to render it
-                $element->remove($element->getTemplatePlaceholder());
+            if ($elementOrFieldset instanceof FieldsetInterface) {
+                $templateMarkup .= $this->render($elementOrFieldset);
+            } elseif ($elementOrFieldset instanceof ElementInterface) {
+                $templateMarkup .= $rowHelper($elementOrFieldset);
             }
+
+            // Remove the template element as we don't want to render it
+            $element->remove($element->getTemplatePlaceholder());
         }
 
         foreach($element->getIterator() as $elementOrFieldset) {

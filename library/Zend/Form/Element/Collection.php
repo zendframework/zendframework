@@ -80,6 +80,13 @@ class Collection extends Fieldset
      */
     protected $templatePlaceholder = self::DEFAULT_TEMPLATE_PLACEHOLDER;
 
+    /**
+     * Element used as a template
+     *
+     * @var ElementInterface|FieldsetInterface
+     */
+    protected $templateElement;
+
 
     /**
      * Accepted options for Collection:
@@ -302,18 +309,15 @@ class Collection extends Fieldset
     /**
      * Get a template element used for rendering purposes only
      *
-     * @return ElementInterface|FieldsetInterface
+     * @return null|ElementInterface|FieldsetInterface
      */
     public function getTemplateElement()
     {
-        if ($this->has($this->templatePlaceholder)) {
-            return $this->get($this->templatePlaceholder);
+        if ($this->templateElement === null) {
+            $this->templateElement = $this->createTemplateElement();
         }
 
-        $elementOrFieldset = $this->createNewTargetElementInstance();
-        $elementOrFieldset->setName($this->templatePlaceholder);
-
-        return $elementOrFieldset;
+        return $this->templateElement;
     }
 
     /**
@@ -358,5 +362,27 @@ class Collection extends Fieldset
     protected function createNewTargetElementInstance()
     {
         return clone $this->targetElement;
+    }
+
+    /**
+     * Create a dummy template element
+     *
+     * @return null|ElementInterface|FieldsetInterface
+     */
+    protected function createTemplateElement()
+    {
+        if (!$this->shouldCreateTemplate) {
+            return null;
+        }
+
+        // Don't create the template element twice
+        if ($this->templateElement) {
+            return $this->templateElement;
+        }
+
+        $elementOrFieldset = $this->createNewTargetElementInstance();
+        $elementOrFieldset->setName($this->templatePlaceholder);
+
+        return $elementOrFieldset;
     }
 }

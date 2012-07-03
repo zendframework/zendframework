@@ -123,7 +123,7 @@ class DbTableGateway implements SaveHandlerInterface
                 $row->{$this->options->getLifetimeColumn()} > time()) {
                 return $row->{$this->options->getDataColumn()};
             }
-            $this->destroy();
+            $this->destroy($id);
         }
         return '';
     }

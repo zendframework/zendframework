@@ -13,6 +13,13 @@ class ServiceManager implements ServiceLocatorInterface
     /**@#-*/
 
     /**
+     * Lookup for canonicalized names.
+     *
+     * @var array
+     */
+    protected $canonicalNames = array();
+
+    /**
      * @var bool
      */
     protected $allowOverride = false;
@@ -616,7 +623,10 @@ class ServiceManager implements ServiceLocatorInterface
      */
     protected function canonicalizeName($name)
     {
-        return strtolower(str_replace(array('-', '_', ' ', '\\', '/'), '', $name));
+        if (!isset($this->canonicalNames[$name])) {
+            $this->canonicalNames[$name] = strtolower(str_replace(array('-', '_', ' ', '\\', '/'), '', $name));
+        }
+        return $this->canonicalNames[$name];
     }
 
     /**

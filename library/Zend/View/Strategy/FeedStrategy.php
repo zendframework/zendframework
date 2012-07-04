@@ -162,12 +162,12 @@ class FeedStrategy implements ListenerAggregateInterface
                   ? 'application/rss+xml'
                   : 'application/atom+xml';
 
-        $feed = $e->getModel()
-                  ->getFeed();
-
+        $model   = $e->getModel();
         $charset = '';
 
-        if ($feed instanceof Feed) {
+        if ($model instanceof Model\FeedModel) {
+
+            $feed = $model->getFeed();
 
             $charset = '; charset=' . $feed->getEncoding() . ';';
         }

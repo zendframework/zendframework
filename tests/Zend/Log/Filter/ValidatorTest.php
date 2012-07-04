@@ -25,7 +25,7 @@ use Zend\Log\Logger;
 use Zend\Log\Filter\Validator;
 use Zend\Validator\ValidatorChain;
 use Zend\Validator\Digits as DigitsFilter;
-use Zend\Validator\Int;
+use Zend\I18n\Validator\Int;
 
 /**
  * @category   Zend

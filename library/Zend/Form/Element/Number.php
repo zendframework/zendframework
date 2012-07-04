@@ -23,7 +23,7 @@ namespace Zend\Form\Element;
 
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
-use Zend\Validator\Float as NumberValidator;
+use Zend\I18n\Validator\Float as NumberValidator;
 use Zend\Validator\GreaterThan as GreaterThanValidator;
 use Zend\Validator\LessThan as LessThanValidator;
 use Zend\Validator\Step as StepValidator;

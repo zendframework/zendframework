@@ -27,7 +27,7 @@ use Zend\Navigation;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Translator;
+use Zend\I18n\Translator\Translator;
 use Zend\View;
 use Zend\View\Exception;
 
@@ -81,7 +81,7 @@ abstract class AbstractHelper
     /**
      * Translator
      *
-     * @var \Zend\Translator\Adapter
+     * @var Translator
      */
     protected $translator;
 
@@ -315,15 +315,9 @@ abstract class AbstractHelper
      *                           Default is null, which sets no translator.
      * @return AbstractHelper  fluent interface, returns self
      */
-    public function setTranslator($translator = null)
+    public function setTranslator(Translator $translator = null)
     {
-        if (null == $translator ||
-            $translator instanceof Translator\Adapter\AbstractAdapter) {
-            $this->translator = $translator;
-        } elseif ($translator instanceof Translator\Translator) {
-            $this->translator = $translator->getAdapter();
-        }
-
+        $this->translator = $translator;
         return $this;
     }
 
@@ -332,7 +326,7 @@ abstract class AbstractHelper
      *
      * Implements {@link HelperInterface::getTranslator()}.
      *
-     * @return Translator\Adapter\AbstractAdapter|null  translator or null
+     * @return Translator|null  translator or null
      */
     public function getTranslator()
     {

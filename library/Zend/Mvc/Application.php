@@ -248,7 +248,8 @@ class Application implements
      */
     public static function init($configuration = array())
     {
-        $serviceManager = new ServiceManager(new Service\ServiceManagerConfiguration);
+        $smConfig = isset($configuration['service_manager']) ? $configuration['service_manager'] : array();
+        $serviceManager = new ServiceManager(new Service\ServiceManagerConfiguration($smConfig));
         $serviceManager->setService('ApplicationConfiguration', $configuration);
         $serviceManager->get('ModuleManager')->loadModules();
         return $serviceManager->get('Application')->bootstrap();

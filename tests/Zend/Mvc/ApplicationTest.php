@@ -72,7 +72,7 @@ class ApplicationTest extends TestCase
         };
         $sm = $this->serviceManager = new ServiceManager(
             new ServiceManagerConfiguration(array(
-                'services' => array(
+                'invokables' => array(
                     'DispatchListener' => 'Zend\Mvc\DispatchListener',
                     'Request'          => 'Zend\Http\PhpEnvironment\Request',
                     'Response'         => 'Zend\Http\PhpEnvironment\Response',

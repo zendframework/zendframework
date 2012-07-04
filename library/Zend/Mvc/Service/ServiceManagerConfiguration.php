@@ -41,7 +41,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      *
      * @var array
      */
-    protected $services = array(
+    protected $invokables = array(
         'SharedEventManager' => 'Zend\EventManager\SharedEventManager',
     );
 
@@ -92,8 +92,8 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      */
     public function __construct(array $configuration = array())
     {
-        if (isset($configuration['services'])) {
-            $this->services = array_merge($this->services, $configuration['services']);
+        if (isset($configuration['invokables'])) {
+            $this->invokables = array_merge($this->invokables, $configuration['invokables']);
         }
 
         if (isset($configuration['factories'])) {
@@ -127,8 +127,8 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      */
     public function configureServiceManager(ServiceManager $serviceManager)
     {
-        foreach ($this->services as $name => $service) {
-            $serviceManager->setInvokableClass($name, $service);
+        foreach ($this->invokables as $name => $class) {
+            $serviceManager->setInvokableClass($name, $class);
         }
 
         foreach ($this->factories as $name => $factoryClass) {

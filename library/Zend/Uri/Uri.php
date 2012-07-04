@@ -407,7 +407,7 @@ class Uri
      * (@link http://tools.ietf.org/html/rfc3986#section-5.2)
      *
      * @param  Uri|string $baseUri
-     * @throws Exception\InvalidUriTypeException
+     * @throws Exception\InvalidArgumentException
      * @return Uri
      */
     public function resolve($baseUri)
@@ -419,13 +419,10 @@ class Uri
 
         if (is_string($baseUri)) {
             $baseUri = new static($baseUri);
-        }
-
-        if (!$baseUri instanceof static) {
-            throw new Exception\InvalidUriTypeException(sprintf(
-                'Provided base URL is not an instance of "%s"',
-                get_called_class()
-            ));
+        } elseif (!$baseUri instanceof Uri) {
+            throw new Exception\InvalidArgumentException(
+                'Provided base URI must be a string or a Uri object'
+            );
         }
 
         // Merging starts here...

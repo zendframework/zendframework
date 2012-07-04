@@ -46,7 +46,7 @@
 
             <programlisting language="php"><![CDATA[
 // within bootstrap
-Zend\Registry::set('Zend\Locale\Locale', new Zend\Locale\Locale('de_AT'));
+Locale::setDefault('de_AT');
 
 // within the module
 $validator = new Zend\Validator\Iban();
@@ -63,7 +63,7 @@ if ($validator->isValid('AT611904300234573201')) {
 
                 <para>
                     Of course this works only when an application wide locale was set within the
-                    registry previously. Otherwise <classname>Zend\Locale\Locale</classname> will try to
+                    registry previously. Otherwise <classname>Locale</classname> will try to
                     use the locale which the client sends or, when non has been send, it uses the
                     environment locale. Be aware that this can lead to unwanted behaviour within
                     the validation.

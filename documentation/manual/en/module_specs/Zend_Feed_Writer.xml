@@ -346,7 +346,7 @@ $out = $feed->export('atom');
                             only applicable to Atom where it represents the date the resource
                             described by an Atom 1.0 document was created. The expected parameter
                             may be a <acronym>UNIX</acronym> timestamp or a
-                            <classname>Zend_Date</classname> object.
+                            <classname>DateTime</classname> object.
                         </entry>
                     </row>
 
@@ -356,7 +356,7 @@ $out = $feed->export('atom');
                         <entry>
                             Sets the date on which this feed was last modified. The expected
                             parameter may be a <acronym>UNIX</acronym> timestamp or a
-                            <classname>Zend_Date</classname> object.
+                            <classname>DateTime</classname> object.
                         </entry>
                     </row>
 
@@ -366,7 +366,7 @@ $out = $feed->export('atom');
                         <entry>
                             Sets the date on which this feed was last build. The expected
                             parameter may be a <acronym>UNIX</acronym> timestamp or a
-                            <classname>Zend_Date</classname> object. This will only be
+                            <classname>DateTime</classname> object. This will only be
                             rendered for <acronym>RSS</acronym> 2.0 feeds and is automatically
                             rendered as the current date by default when not explicity set.
                         </entry>
@@ -633,7 +633,7 @@ $out = $feed->export('atom');
                             only applicable to Atom where it represents the date the resource
                             described by an Atom 1.0 document was created. The expected parameter
                             may be a <acronym>UNIX</acronym> timestamp or a
-                            <classname>Zend_Date</classname> object. If omitted, the date
+                            <classname>DateTime</classname> object. If omitted, the date
                             used will be the current date and time.
                         </entry>
                     </row>
@@ -644,7 +644,7 @@ $out = $feed->export('atom');
                         <entry>
                             Sets the date on which this feed was last modified. The expected
                             parameter may be a <acronym>UNIX</acronym> timestamp or a
-                            <classname>Zend_Date</classname> object. If omitted, the date
+                            <classname>DateTime</classname> object. If omitted, the date
                             used will be the current date and time.
                         </entry>
                     </row>

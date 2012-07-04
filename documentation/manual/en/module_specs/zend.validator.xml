@@ -177,44 +177,31 @@ if (!validator->isValid('word')) {
 
         <para>
             Validator classes provide a <methodname>setTranslator()</methodname> method with
-            which you can specify a instance of <classname>Zend\Translator\Translator</classname> which
+            which you can specify a instance of <classname>Zend\I18n\Translator\Translator</classname> which
             will translate the messages in case of a validation failure. The
             <methodname>getTranslator()</methodname> method returns the set translator instance.
         </para>
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend\Validator\StringLength(array('min' => 8, 'max' => 12));
-$translate = new Zend\Translator\Translator(
-    array(
-        'adapter' => 'array',
-        'content' => array(
-            Zend\Validator\StringLength::TOO_SHORT => 'Translated \'%value%\''
-        ),
-        'locale' => 'en'
-    )
-);
+$translate = new Zend\I18n\Translator\Translator();
+// configure the translator...
 
 $validator->setTranslator($translate);
 ]]></programlisting>
 
         <para>
             With the static <methodname>setDefaultTranslator()</methodname> method you can set
-            a instance of <classname>Zend\Translator\Translator</classname> which will be used for all
+            a instance of <classname>Zend\I18n\Translator\Translator</classname> which will be used for all
             validation classes, and can be retrieved with
             <methodname>getDefaultTranslator()</methodname>. This prevents you from setting a
             translator manually for all validator classes, and simplifies your code.
         </para>
 
         <programlisting language="php"><![CDATA[
-$translate = new Zend\Translator\Translator(
-    array(
-        'adapter' => 'array',
-        'content' => array(
-            Zend\Validator\StringLength::TOO_SHORT => 'Translated \'%value%\''
-        ),
-        'locale' => 'en'
-    )
-);
+$translate = new Zend\I18n\Translator\Translator();
+// configure the translator...
+
 Zend\Validator\AbstractValidator::setDefaultTranslator($translate);
 ]]></programlisting>
 

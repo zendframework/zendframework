@@ -49,7 +49,7 @@ print $filter->filter('This is (my) content: 123');
                 <classname>Zend_Filter_Alpha</classname> works on most languages; however, there
                 are three exceptions: Chinese, Japanese and Korean. With these languages the
                 english alphabet is used. The language is detected through the use of
-                <classname>Zend_Locale</classname>.
+                <classname>Locale</classname>.
             </para>
         </note>
     </section>

@@ -133,5 +133,13 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('UTF-8', $entry->getEncoding());
     }
 
-
+	public function testFeedEntryCanDetectFeedType()
+	{
+		$feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/atom.xml')
+        );
+        $entry = $feed->current();
+		$stub = $this->getMockForAbstractClass('Zend\Feed\Reader\Entry\AbstractEntry', array($entry->getElement(), $entry->getId()));
+		$this->assertEquals($entry->getType(), $stub->getType());
+	}
 }

@@ -30,13 +30,12 @@ $validator = new Zend\Validator\PostCode('de_AT');
     <para>
         When you don't set a locale yourself, then <classname>Zend\Validator\PostCode</classname>
         will use the application wide set locale, or, when there is none, the locale returned by
-        <classname>Zend\Locale\Locale</classname>.
+        <classname>Locale</classname>.
     </para>
 
     <programlisting language="php"><![CDATA[
 // application wide locale within your bootstrap
-$locale = new Zend\Locale\Locale('de_AT');
-Zend\Registry::set('Zend\Locale\Locale', $locale);
+Locale::setDefault('de_AT');
 
 $validator = new Zend\Validator\PostCode();
 ]]></programlisting>
@@ -82,8 +81,8 @@ $validator->setFormat('AT-\d{5}');
         
 
         <para>
-            At it's most basic, you may pass either a <classname>Zend\Locale\Locale</classname> object or a
-            string representing a fully qualified locale to the constructor of
+            At it's most basic, you may pass a string representing a fully
+            qualified locale to the constructor of
             <classname>Zend\Validator\PostCode</classname>.
         </para>
 

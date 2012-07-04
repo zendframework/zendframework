@@ -637,7 +637,7 @@ $labels = $categories->getValues();
                             Returns the date on which this feed was created. Generally
                             only applicable to Atom where it represents the date the resource
                             described by an Atom 1.0 document was created. The returned date
-                            will be a <classname>Zend_Date</classname> object.
+                            will be a <classname>DateTime</classname> object.
                         </entry>
                     </row>
 
@@ -646,7 +646,7 @@ $labels = $categories->getValues();
 
                         <entry>
                             Returns the date on which this feed was last modified. The returned date
-                            will be a <classname>Zend_Date</classname> object.
+                            will be a <classname>DateTime</classname> object.
                         </entry>
                     </row>
 
@@ -655,7 +655,7 @@ $labels = $categories->getValues();
 
                         <entry>
                             Returns the date on which this feed was last built. The returned date
-                            will be a <classname>Zend_Date</classname> object. This is only
+                            will be a <classname>DateTime</classname> object. This is only
                             supported by <acronym>RSS</acronym> - Atom feeds will always return
                             <constant>NULL</constant>.
                         </entry>
@@ -1106,7 +1106,7 @@ $labels = $categories->getValues();
                 and <acronym>RSS</acronym> dates should
                 follow <acronym>RFC</acronym> 822 or <acronym>RFC</acronym> 2822
                 which is also common. Date methods
-                will throw an exception if <classname>Zend_Date</classname>
+                will throw an exception if <classname>DateTime</classname>
                 cannot load the date string using one of the above standards, or the
                 <acronym>PHP</acronym> recognised possibilities for <acronym>RSS</acronym> dates.
             </para>

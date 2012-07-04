@@ -111,7 +111,6 @@ $filtered = $view->lowercase('some value');
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-InlineScript.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Json.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Navigation.xml"/>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translator.xml"/>
     </section>
 
     <section xml:id="zend.view.helpers.register">

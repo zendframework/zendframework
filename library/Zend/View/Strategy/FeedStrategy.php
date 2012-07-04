@@ -162,10 +162,20 @@ class FeedStrategy implements ListenerAggregateInterface
                   ? 'application/rss+xml'
                   : 'application/atom+xml';
 
+        $feed = $e->getModel()
+                  ->getFeed();
+
+        $charset = '';
+
+        if ($feed instanceof Feed) {
+
+            $charset = '; charset=' . $feed->getEncoding() . ';';
+        }
+
         // Populate response
         $response = $e->getResponse();
         $response->setContent($result);
         $headers = $response->getHeaders();
-        $headers->addHeaderLine('content-type', $feedType);
+        $headers->addHeaderLine('content-type', $feedType . $charset);
     }
 }

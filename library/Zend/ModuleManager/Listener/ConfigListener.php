@@ -163,7 +163,7 @@ class ConfigListener extends AbstractListener implements
         }
 
         // Merge all of the collected configs
-        $this->mergedConfig = array();
+        $this->mergedConfig = $this->getOptions()->getExtraConfig() ?: array();
         foreach ($this->configs as $key => $config) {
             $this->mergedConfig = ArrayUtils::merge($this->mergedConfig, $config);
         }

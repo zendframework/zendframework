@@ -92,6 +92,13 @@ class Sitemap extends AbstractHelper
     protected $serverUrl;
 
     /**
+     * List of urls in the sitemap
+     *
+     * @var array
+     */
+    protected $urls = array();
+
+    /**
      * Helper entry point
      *
      * @param  string|AbstractContainer $container container to operate on
@@ -284,11 +291,17 @@ class Sitemap extends AbstractHelper
             $curDoc         = $basePathHelper();
             $curDoc         = ('/' == $curDoc) ? '' : trim($curDoc, '/');
             $url            = rtrim($this->getServerUrl(), '/') . '/'
-                            . $curDoc
-                            . (empty($curDoc) ? '' : '/') . $href;
+                . $curDoc
+                . (empty($curDoc) ? '' : '/') . $href;
         }
 
-        return $this->xmlEscape($url);
+        if (! in_array($url, $this->urls)) {
+
+            $this->urls[] = $url;
+            return $this->xmlEscape($url);
+        }
+
+        return null;
     }
 
     /**
@@ -353,6 +366,7 @@ class Sitemap extends AbstractHelper
             // get absolute url from page
             if (!$url = $this->url($page)) {
                 // skip page if it has no url (rare case)
+                // or already is in the sitemap
                 continue;
             }
 
@@ -364,14 +378,14 @@ class Sitemap extends AbstractHelper
                 && !$locValidator->isValid($url)
             ) {
                 throw new Exception\RuntimeException(sprintf(
-                        'Encountered an invalid URL for Sitemap XML: "%s"',
-                        $url
+                    'Encountered an invalid URL for Sitemap XML: "%s"',
+                    $url
                 ));
             }
 
             // put url in 'loc' element
             $urlNode->appendChild($dom->createElementNS(self::SITEMAP_NS,
-                                                        'loc', $url));
+                    'loc', $url));
 
             // add 'lastmod' element if a valid lastmod is set in page
             if (isset($page->lastmod)) {
@@ -386,7 +400,7 @@ class Sitemap extends AbstractHelper
                     $lastmodValidator->isValid($lastmod)) {
                     $urlNode->appendChild(
                         $dom->createElementNS(self::SITEMAP_NS, 'lastmod',
-                                              $lastmod)
+                            $lastmod)
                     );
                 }
             }
@@ -398,7 +412,7 @@ class Sitemap extends AbstractHelper
                     $changefreqValidator->isValid($changefreq)) {
                     $urlNode->appendChild(
                         $dom->createElementNS(self::SITEMAP_NS, 'changefreq',
-                                              $changefreq)
+                            $changefreq)
                     );
                 }
             }
@@ -410,7 +424,7 @@ class Sitemap extends AbstractHelper
                     $priorityValidator->isValid($priority)) {
                     $urlNode->appendChild(
                         $dom->createElementNS(self::SITEMAP_NS, 'priority',
-                                              $priority)
+                            $priority)
                     );
                 }
             }
@@ -420,8 +434,8 @@ class Sitemap extends AbstractHelper
         if ($this->getUseSchemaValidation()) {
             if (!@$dom->schemaValidate(self::SITEMAP_XSD)) {
                 throw new Exception\RuntimeException(sprintf(
-                        'Sitemap is invalid according to XML Schema at "%s"',
-                        self::SITEMAP_XSD
+                    'Sitemap is invalid according to XML Schema at "%s"',
+                    self::SITEMAP_XSD
                 ));
             }
         }
@@ -437,7 +451,7 @@ class Sitemap extends AbstractHelper
      * Implements {@link HelperInterface::render()}.
      *
      * @param  link|AbstractContainer $container [optional] container to render. Default is
-     *                              to render the container registered in the 
+     *                              to render the container registered in the
      *                              helper.
      * @return string               helper output
      */
@@ -445,8 +459,8 @@ class Sitemap extends AbstractHelper
     {
         $dom = $this->getDomSitemap($container);
         $xml = $this->getUseXmlDeclaration() ?
-               $dom->saveXML() :
-               $dom->saveXML($dom->documentElement);
+            $dom->saveXML() :
+            $dom->saveXML($dom->documentElement);
 
         // DOMDocument ends lines with a "\n" character. We want this to be the PHP_EOL character
         // in order to keep unit tests working.

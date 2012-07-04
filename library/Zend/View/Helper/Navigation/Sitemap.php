@@ -291,8 +291,8 @@ class Sitemap extends AbstractHelper
             $curDoc         = $basePathHelper();
             $curDoc         = ('/' == $curDoc) ? '' : trim($curDoc, '/');
             $url            = rtrim($this->getServerUrl(), '/') . '/'
-                . $curDoc
-                . (empty($curDoc) ? '' : '/') . $href;
+                                                                . $curDoc
+                                                                . (empty($curDoc) ? '' : '/') . $href;
         }
 
         if (! in_array($url, $this->urls)) {

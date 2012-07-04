@@ -673,7 +673,7 @@ abstract class AbstractHelper
             'target' => $page->getTarget()
         );
 
-        $escaper = $this->view->plugin('escape');
+        $escaper = $this->view->plugin('escapeHtml');
 
         return '<a' . $this->_htmlAttribs($attribs) . '>'
              . $escaper($label)

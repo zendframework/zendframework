@@ -185,7 +185,7 @@ abstract class FormElement extends AbstractHtmlElement
      */
     protected function _hidden($name, $value = null, $attribs = null)
     {
-        $escaper = $this->view->plugin('escape');
+        $escaper = $this->view->plugin('escapeHtml');
         return '<input type="hidden"'
              . ' name="' . $escaper($name) . '"'
              . ' value="' . $escaper($value) . '"'

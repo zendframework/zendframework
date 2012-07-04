@@ -127,9 +127,18 @@ abstract class AbstractStandalone
             && method_exists($this->view, 'getEncoding')
         ) {
             $enc = $this->view->getEncoding();
+            $escaper = $this->view->plugin('escapeHtml');
+            return $escaper((string) $string);
         }
-
-        return htmlspecialchars((string) $string, ENT_COMPAT, $enc);
+        /**
+         * bump this out to a protected method to kill the instance penalty!
+         */
+        $escaper = new \Zend\Escaper\Escaper($enc);
+        return $escaper->escapeHtml((string) $string);
+        /**
+         * Replaced to ensure consistent escaping
+         */
+        //return htmlspecialchars((string) $string, ENT_COMPAT, $enc);
     }
 
     /**

@@ -84,7 +84,7 @@ abstract class AbstractHtmlElement extends AbstractHelper
     protected function _htmlAttribs($attribs)
     {
         $xhtml   = '';
-        $escaper = $this->view->plugin('escape');
+        $escaper = $this->view->plugin('escapehtml');
         foreach ((array) $attribs as $key => $val) {
             $key = $escaper($key);
 

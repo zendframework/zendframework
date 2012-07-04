@@ -238,10 +238,18 @@ class Application implements
     /**
      * Static method for quick and easy initialization of the Application.
      *
-     * This has some service names hard-coded that you should be aware of:
-     * - ApplicationConfiguration
+     * If you use this init() method, you cannot specify a service with the
+     * name of 'ApplicationConfiguration' in your service manager config. That
+     * name is reserved to hold the array from application.config.php
+     *
+     * The following services can only be overridden from application.config.php:
+     *
      * - ModuleManager
+     * - SharedEventManager
      * - EventManager & Zend\EventManager\EventManagerInterface
+     *
+     * All other services are configured after module loading, thus can be
+     * overridden by modules.
      *
      * @param array $configuration
      * @return Application

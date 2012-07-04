@@ -59,14 +59,20 @@ class ServiceListener implements ListenerAggregateInterface
     /**
      * @var array
      */
+    protected $defaultServiceConfiguration;
+
+    /**
+     * @var array
+     */
     protected $serviceManagers = array();
 
     /**
      * @param ServiceManager $serviceManager
      */
-    public function __construct(ServiceManager $serviceManager)
+    public function __construct(ServiceManager $serviceManager, $configuration = null)
     {
         $this->defaultServiceManager = $serviceManager;
+        $this->defaultServiceConfiguration = $configuration;
     }
 
     /**
@@ -180,6 +186,10 @@ class ServiceListener implements ListenerAggregateInterface
     {
         $configListener = $e->getConfigListener();
         $config         = $configListener->getMergedConfig(false);
+
+        if ($this->defaultServiceConfiguration) {
+            $config = ArrayUtils::merge(array('service_manager' => $this->defaultServiceConfiguration), $config);
+        }
 
         foreach ($this->serviceManagers as $key => $sm) {
 

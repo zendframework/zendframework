@@ -22,6 +22,7 @@ namespace Zend\Form;
 
 use IteratorAggregate;
 use Traversable;
+use Zend\Form\Element\Collection;
 use Zend\Form\Exception;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
@@ -441,8 +442,45 @@ class Form extends Fieldset implements FormInterface
         if (!is_array($arg)) {
             $arg = (array) $arg;
         }
+
+        // Deal with the special case of collections
+        $this->prepareValidationGroupForCollections($arg, $this);
         $this->validationGroup = $arg;
+
         return $this;
+    }
+
+    /**
+     * We have to take special care when validation groups are used with Collection, as the validation group that applies
+     * to a collection have to be duplicated as many times as there are elements in this collection
+     *
+     * @param array             $arg
+     * @param FieldsetInterface $fieldset
+     * @return void
+     */
+    protected function prepareValidationGroupForCollections(array &$arg, FieldsetInterface $fieldset)
+    {
+        foreach ($arg as $key => &$value) {
+
+            if (!$fieldset->has($key)) {
+                continue;
+            }
+
+            $currentFieldset = $fieldset->byName[$key];
+
+            if ($currentFieldset instanceof Collection) {
+                $values = array();
+                for ($i = 0 ; $i != $currentFieldset->getCount() ; ++$i) {
+                    $values[] = $value;
+                }
+
+                $value = $values;
+            }
+
+            if (is_array($value)) {
+                $this->prepareValidationGroupForCollections($value, $currentFieldset);
+            }
+        }
     }
 
     /**

@@ -4,9 +4,9 @@ namespace ZendTest\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase,
     stdClass,
-    Zend\View\Helper\Escape as EscapeHelper;
+    Zend\View\Helper\EscapeHtml as EscapeHelper;
 
-class EscapeTest extends TestCase
+class EscapeHtmlTest extends TestCase
 {
 
     protected $supportedEncodings = array(
@@ -20,7 +20,6 @@ class EscapeTest extends TestCase
         'cp932',        '932',          'euc-jp',       'eucjp',
         'eucjp-win',    'macroman'
     );
-        
 
     public function setUp()
     {
@@ -32,36 +31,39 @@ class EscapeTest extends TestCase
         $this->assertEquals('UTF-8', $this->helper->getEncoding());
     }
 
-    public function testEncodingIsMutable()
+    /**
+     * @expectedException \Zend\View\Exception\InvalidArgumentException
+     */
+    public function testEncodingIsImmutable()
     {
         $this->helper->setEncoding('BIG5-HKSCS');
-        $this->assertEquals('BIG5-HKSCS', $this->helper->getEncoding());
+        $this->helper->getEscaper();
+        $this->helper->setEncoding('UTF-8');
     }
 
-    public function testDefaultCallbackIsDefined()
+    public function testGetEscaperCreatesDefaultInstanceWithCorrectEncoding()
     {
-        $callback = $this->helper->getCallback();
-        $this->assertTrue(is_callable($callback));
+        $this->helper->setEncoding('BIG5-HKSCS');
+        $escaper = $this->helper->getEscaper();
+        $this->assertTrue($escaper instanceof \Zend\Escaper\Escaper);
+        $this->assertEquals('big5-hkscs', $escaper->getEncoding());
     }
 
-    public function testCallbackIsMutable()
+    public function testSettingEscaperObjectAlsoSetsEncoding()
     {
-        $this->helper->setCallback('strip_tags'); // Don't do this at home ;)
-        $this->assertEquals('strip_tags', $this->helper->getCallback());
+        $escaper = new \Zend\Escaper\Escaper('big5-hkscs');
+        $this->helper->setEscaper($escaper);
+        $escaper = $this->helper->getEscaper();
+        $this->assertTrue($escaper instanceof \Zend\Escaper\Escaper);
+        $this->assertEquals('big5-hkscs', $escaper->getEncoding());
     }
 
-    public function testSettingInvalidCallbackRaisesException()
+    public function testEscapehtmlCalledOnEscaperObject()
     {
-        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
-        $this->helper->setCallback(3.1415);
-    }
-
-    public function testInvokingCallbackEscapesText()
-    {
-        $text     = 'Hey! <b>This is some Text!</b> Yo!';
-        $expected = htmlspecialchars($text, ENT_COMPAT, 'UTF-8', false);
-        $test     = $this->helper->__invoke($text);
-        $this->assertEquals($expected, $test);
+        $escaper = $this->getMock('\\Zend\\Escaper\\Escaper');
+        $escaper->expects($this->any())->method('escapeHtml');
+        $this->helper->setEscaper($escaper);
+        $this->helper->__invoke('foo');
     }
 
     public function testAllowsRecursiveEscapingOfArrays()
@@ -152,7 +154,7 @@ class EscapeTest extends TestCase
     }
 
     /**
-     * @expectedException \Zend\View\Exception\InvalidArgumentException
+     * @expectedException \Zend\Escaper\Exception\InvalidArgumentException
      * 
      * PHP 5.3 instates default encoding on empty string instead of the expected
      * warning level error for htmlspecialchars() encoding param. PHP 5.4 attempts
@@ -162,17 +164,20 @@ class EscapeTest extends TestCase
     public function testSettingEncodingToEmptyStringShouldThrowException()
     {
         $this->helper->setEncoding('');
+        $this->helper->getEscaper();
     }
 
     public function testSettingValidEncodingShouldNotThrowExceptions()
     {
         foreach ($this->supportedEncodings as $value) {
-            $this->helper->setEncoding($value);
+            $helper = new EscapeHelper;
+            $helper->setEncoding($value);
+            $helper->getEscaper();
         }
     }
 
     /**
-     * @expectedException \Zend\View\Exception\InvalidArgumentException
+     * @expectedException \Zend\Escaper\Exception\InvalidArgumentException
      * 
      * All versions of PHP - when an invalid encoding is set on htmlspecialchars()
      * a warning level error is issued and escaping continues with the default encoding
@@ -182,5 +187,6 @@ class EscapeTest extends TestCase
     public function testSettingEncodingToInvalidValueShouldThrowException()
     {
         $this->helper->setEncoding('completely-invalid');
+        $this->helper->getEscaper();
     }
 }

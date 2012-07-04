@@ -74,7 +74,6 @@ class HelperPluginManager extends AbstractPluginManager
         'renderchildmodel'    => 'Zend\View\Helper\RenderChildModel',
         'rendertoplaceholder' => 'Zend\View\Helper\RenderToPlaceholder',
         'serverurl'           => 'Zend\View\Helper\ServerUrl',
-        'translator'          => 'Zend\View\Helper\Translator',
         'viewmodel'           => 'Zend\View\Helper\ViewModel',
     );
 

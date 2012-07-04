@@ -838,7 +838,27 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('#fragmentOnly'),
             array('mailto:bob@example.com'),
             array('bob@example.com'),
-            array('http://a_.!~*\'(-)n0123Di%25%26:pass;:&=+$,word@www.zend.com')
+            array('http://a_.!~*\'(-)n0123Di%25%26:pass;:&=+$,word@www.zend.com'),
+            array('http://[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80/index.html'),
+            array('http://[1080::8:800:200C:417A]/foo'),
+            array('http://[::192.9.5.5]/ipng'),
+            array('http://[::FFFF:129.144.52.38]:80/index.html'),
+            array('http://[2620:0:1cfe:face:b00c::3]/'),
+            array('http://[2010:836B:4179::836B:4179]'),
+            array('http'),
+            array('www.example.org:80'),
+            array('www.example.org'),
+            array('http://foo'),
+            array('ftp://user:pass@example.org/'),
+            array('www.fi/'),
+            array('http://1.1.1.1/'),
+            array('1.1.1.1'),
+            array('1.256.1.1'), // Hostnames can be only numbers
+            array('http://[::1]/'),
+            array('file:/'), // schema without host
+            array('http:///'), // host empty
+            array('http:::/foo'), // schema + path
+            array('2620:0:1cfe:face:b00c::3'), // Not IPv6, is Path
         );
     }
 

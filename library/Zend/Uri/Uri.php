@@ -257,13 +257,13 @@ class Uri
                 $this->setUserInfo($userInfo);
             }
 
-            $colonPos = strrpos($authority, ':');
-            if ($colonPos !== false) {
-                $port = substr($authority, $colonPos + 1);
-                if ($port) {
-                    $this->setPort((int) $port);
-                }
-                $authority = substr($authority, 0, $colonPos);
+            $nMatches = preg_match('/:[\d]{1,5}$/', $authority, $matches);
+            if ($nMatches === 1) {
+                $portLength = strlen($matches[0]);
+                $port = substr($matches[0], 1);
+
+                $this->setPort((int) $port);
+                $authority = substr($authority, 0, -$portLength);
             }
 
             $this->setHost($authority);
@@ -1113,30 +1113,29 @@ class Uri
     protected static function isValidIpAddress($host, $allowed)
     {
         $validatorParams = array(
-            'allowipv4' => (bool) ($allowed & self::HOST_IPV4),
-            'allowipv6' => (bool) ($allowed & self::HOST_IPV6),
+            'allowipv4'      => (bool) ($allowed & self::HOST_IPV4),
+            'allowipv6'      => false,
+            'allowipvfuture' => false,
+            'allowliteral'   => false,
         );
 
-        if ($allowed & (self::HOST_IPV6 | self::HOST_IPVFUTURE)) {
-            if (preg_match('/^\[(.+)\]$/', $host, $match)) {
-                $host = $match[1];
-                $validatorParams['allowipv4'] = false;
-            }
+        // Test only IPv4
+        $validator = new Validator\Ip($validatorParams);
+        $return = $validator->isValid($host);
+        if ($return) {
+            return true;
         }
 
-        if ($allowed & (self::HOST_IPV4 | self::HOST_IPV6)) {
-            $validator = new Validator\Ip($validatorParams);
-            if ($validator->isValid($host)) {
-                return true;
-            }
-        }
-
-        if ($allowed & self::HOST_IPVFUTURE) {
-            $regex = '/^v\.[[:xdigit:]]+[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':]+$/';
-            return (bool) preg_match($regex, $host);
-        }
-
-        return false;
+        // IPv6 & IPvLiteral must be in literal format
+        $validatorParams = array(
+            'allowipv4'      => false,
+            'allowipv6'      => (bool) ($allowed & self::HOST_IPV6),
+            'allowipvfuture' => (bool) ($allowed & self::HOST_IPVFUTURE),
+            'allowliteral'   => true,
+        );
+        static $regex = '/^\[.*\]$/';
+        $validator->setOptions($validatorParams);
+        return (preg_match($regex, $host) && $validator->isValid($host));
     }
 
     /**

@@ -359,6 +359,7 @@ class Form extends Fieldset implements FormInterface
         $filter->setValidationGroup(InputFilterInterface::VALIDATE_ALL);
 
         if ($this->validationGroup !== null) {
+            $this->prepareValidationGroup($this, $this->data, $this->validationGroup);
             $filter->setValidationGroup($this->validationGroup);
         }
 
@@ -443,42 +444,38 @@ class Form extends Fieldset implements FormInterface
             $arg = (array) $arg;
         }
 
-        // Deal with the special case of collections
-        $this->prepareValidationGroupForCollections($arg, $this);
         $this->validationGroup = $arg;
-
         return $this;
     }
 
     /**
-     * We have to take special care when validation groups are used with Collection, as the validation group that applies
-     * to a collection have to be duplicated as many times as there are elements in this collection
+     * Prepare the validation group in case Collection elements were used (this function also handle the case where elements
+     * could have been dynamically added or removed from a collection using JavaScript)
      *
-     * @param array             $arg
-     * @param FieldsetInterface $fieldset
-     * @return void
+     * @param FieldsetInterface $formOrFieldset
+     * @param array             $data
+     * @param array             $validationGroup
      */
-    protected function prepareValidationGroupForCollections(array &$arg, FieldsetInterface $fieldset)
+    protected function prepareValidationGroup(FieldsetInterface $formOrFieldset, array $data, array &$validationGroup)
     {
-        foreach ($arg as $key => &$value) {
-
-            if (!$fieldset->has($key)) {
+        foreach ($validationGroup as $key => &$value) {
+            if (!$formOrFieldset->has($key)) {
                 continue;
             }
 
-            $currentFieldset = $fieldset->byName[$key];
+            $fieldset = $formOrFieldset->byName[$key];
 
-            if ($currentFieldset instanceof Collection) {
+            if ($fieldset instanceof Collection) {
                 $values = array();
-                for ($i = 0 ; $i != $currentFieldset->getCount() ; ++$i) {
+                $count = count($data[$key]);
+
+                for ($i = 0 ; $i != $count ; ++$i) {
                     $values[] = $value;
                 }
 
                 $value = $values;
-            }
-
-            if (is_array($value)) {
-                $this->prepareValidationGroupForCollections($value, $currentFieldset);
+            } else {
+                $this->prepareValidationGroup($fieldset, $data[$key], $validationGroup[$key]);
             }
         }
     }

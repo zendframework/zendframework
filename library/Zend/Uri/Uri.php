@@ -835,6 +835,17 @@ class Uri
      */
     public static function validateHost($host, $allowed = self::HOST_ALL)
     {
+        /*
+         * "first-match-wins" algorithm (RFC 3986):
+         * If host matches the rule for IPv4address, then it should be
+         * considered an IPv4 address literal and not a reg-name
+         */
+        if ($allowed & self::HOST_IPVANY) {
+            if (static::isValidIpAddress($host, $allowed)) {
+                return true;
+            }
+        }
+
         if ($allowed & self::HOST_REGNAME) {
             if (static::isValidRegName($host)) {
                 return true;
@@ -843,12 +854,6 @@ class Uri
 
         if ($allowed & self::HOST_DNS) {
             if (static::isValidDnsHostname($host)) {
-                return true;
-            }
-        }
-
-        if ($allowed & self::HOST_IPVANY) {
-            if (static::isValidIpAddress($host, $allowed)) {
                 return true;
             }
         }

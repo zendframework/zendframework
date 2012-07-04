@@ -665,6 +665,8 @@ class Uri
      *
      * @param  string $userInfo
      * @return Uri
+     * @throws Exception\InvalidUriPartException If the schema definition
+     * does not have this part
      */
     public function setUserInfo($userInfo)
     {
@@ -676,7 +678,7 @@ class Uri
      * Set the URI host
      *
      * Note that the generic syntax for URIs allows using host names which
-     * are not neceserily IPv4 addresses or valid DNS host names. For example,
+     * are not necessarily IPv4 addresses or valid DNS host names. For example,
      * IPv6 addresses are allowed as well, and also an abstract "registered name"
      * which may be any name composed of a valid set of characters, including,
      * for example, tilda (~) and underscore (_) which are not allowed in DNS
@@ -758,6 +760,8 @@ class Uri
      *
      * @param  string $fragment
      * @return Uri
+     * @throws Exception\InvalidUriPartException If the schema definition
+     * does not have this part
      */
     public function setFragment($fragment)
     {
@@ -1002,7 +1006,7 @@ class Uri
      * method if one wants to test a URI string for it's scheme before doing
      * anything with it.
      *
-     * Will return the scmeme if found, or NULL if no scheme found (URI may
+     * Will return the scheme if found, or NULL if no scheme found (URI may
      * still be valid, but not full)
      *
      * @param  string $uriString
@@ -1154,7 +1158,7 @@ class Uri
     }
 
     /**
-     * Check if an address is a valid registerd name (as defined by RFC-3986) address
+     * Check if an address is a valid registered name (as defined by RFC-3986) address
      *
      * @param  string $host
      * @return boolean
@@ -1176,7 +1180,7 @@ class Uri
     /**
      * Normalize the scheme
      *
-     * Usually this means simpy converting the scheme to lower case
+     * Usually this means simply converting the scheme to lower case
      *
      * @param  string $scheme
      * @return string
@@ -1266,7 +1270,7 @@ class Uri
     /**
      * Normalize the fragment part
      *
-     * Currently this is exactly the same as _normalizeQuery().
+     * Currently this is exactly the same as normalizeQuery().
      *
      * @param  string $fragment
      * @return string

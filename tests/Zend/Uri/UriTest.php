@@ -458,7 +458,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * @param string $host
      * @dataProvider invalidHostProvider
      */
-    public function testValiteHostInvalid($host)
+    public function testValidateHostInvalid($host)
     {
         $this->assertFalse(Uri::validateHost($host));
     }
@@ -799,7 +799,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * Data Providers
      */
 
-    static public function validUserInfoProvider()
+    public function validUserInfoProvider()
     {
         return array(
             array('user:'),
@@ -813,7 +813,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function invalidUserInfoProvider()
+    public function invalidUserInfoProvider()
     {
         return array(
             array('an`di:password',    'an%60di:password'),
@@ -827,7 +827,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function validUriStringProvider()
+    public function validUriStringProvider()
     {
         return array(
             array('a:b'),
@@ -847,7 +847,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function validRelativeUriStringProvider()
+    public function validRelativeUriStringProvider()
     {
         return array(
             array('foo/bar?query'),
@@ -862,7 +862,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function validSchemeProvider()
+    public function validSchemeProvider()
     {
         return array(
             // Valid schemes
@@ -881,7 +881,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function invalidSchemeProvider()
+    public function invalidSchemeProvider()
     {
         return array(
             array('ht tp'),
@@ -900,7 +900,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function validQueryFragmentProvider()
+    public function validQueryFragmentProvider()
     {
         return array(
             array('a=1&b=2&c=3&d=4'),
@@ -918,7 +918,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function invalidQueryFragmentProvider()
+    public function invalidQueryFragmentProvider()
     {
         return array(
             array('with#pound', 'with%23pound'),
@@ -934,7 +934,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function invalidUriObjectProvider()
+    public function invalidUriObjectProvider()
     {
         // Empty URI is not valid
         $obj1 = new Uri;
@@ -964,7 +964,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function invalidRelativeUriObjectProvider()
+    public function invalidRelativeUriObjectProvider()
     {
         // Empty URI is not valid
         $obj1 = new Uri;
@@ -1005,7 +1005,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function uriWithPartsProvider()
+    public function uriWithPartsProvider()
     {
         return array(
             array('ht-tp://server/path?query', array(
@@ -1048,7 +1048,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function validPortProvider()
+    public function validPortProvider()
     {
         return array(
             array(null),
@@ -1064,7 +1064,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function invalidPortProvider()
+    public function invalidPortProvider()
     {
         return array(
             array(0),
@@ -1078,7 +1078,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function validHostProvider()
+    public function validHostProvider()
     {
         return array(
             // IPv4 addresses
@@ -1116,7 +1116,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function invalidHostProvider()
+    public function invalidHostProvider()
     {
         return array(
             array('with space'),
@@ -1125,7 +1125,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function validPathProvider()
+    public function validPathProvider()
     {
         return array(
             array(''),
@@ -1142,7 +1142,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function invalidPathProvider()
+    public function invalidPathProvider()
     {
         return array(
             array('?', '%3F'),
@@ -1159,7 +1159,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function fluentInterfaceMethodProvider()
+    public function fluentInterfaceMethodProvider()
     {
         return array(
             array('setScheme',    array('file')),
@@ -1183,7 +1183,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function resolvedAbsoluteUriProvider()
+    public function resolvedAbsoluteUriProvider()
     {
         return array(
             // Normal examples
@@ -1236,7 +1236,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function queryParamsArrayProvider()
+    public function queryParamsArrayProvider()
     {
         return array(
             array(array(
@@ -1259,7 +1259,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function pathWithDotSegmentProvider()
+    public function pathWithDotSegmentProvider()
     {
         return array(
             array('/a/b/c/./../../g',   '/a/g'),
@@ -1267,7 +1267,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function normalizedUrlsProvider()
+    public function normalizedUrlsProvider()
     {
         return array(
             array('hTtp://example.com', 'http://example.com/'),
@@ -1286,7 +1286,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function commonBaseUriProvider()
+    public function commonBaseUriProvider()
     {
         return array(
              array('http://example.com/dir/subdir/', 'http://example.com/dir/subdir/more/file1.txt', 'more/file1.txt'),
@@ -1301,7 +1301,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function invalidConstructorInputProvider()
+    public function invalidConstructorInputProvider()
     {
         return array(
             array(new \stdClass()),
@@ -1320,7 +1320,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function notStringInputProvider()
+    public function notStringInputProvider()
     {
         return array(
             array(new Uri('http://foo.bar')),

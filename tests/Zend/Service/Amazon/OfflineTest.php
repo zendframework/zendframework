@@ -339,11 +339,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         
     	$result = new Amazon\ResultSet($dom);
 
-    	try {
-    		$result->current();
-    		$this->fail('Expected exception was not triggered');
-    	} catch (Amazon\Exception $e) {
-			return;
-        }
+        $this->setExpectedException('Zend\Service\Amazon\Exception\ExceptionInterface');
+        $result->current();
     }
 }

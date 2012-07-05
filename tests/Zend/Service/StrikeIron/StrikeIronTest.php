@@ -42,12 +42,8 @@ class StrikeIronTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryThrowsOnBadName()
     {
-        try {
-            $this->strikeIron->getService(array('class' => 'BadServiceNameHere'));
-            $this->fail('Expected \Zend\Service\StrikeIron\Exception instance');
-        } catch (\Zend\Service\StrikeIron\Exception $e) {
-            $this->assertRegExp('/Class file not found/', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Service\StrikeIron\Exception\ExceptionInterface', 'Class file not found');
+        $this->strikeIron->getService(array('class' => 'BadServiceNameHere'));
     }
 
     public function testFactoryReturnsServiceByStrikeIronClass()

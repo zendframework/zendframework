@@ -33,21 +33,12 @@ use Zend\Service\Amazon;
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */
-class AmamzonAbstract extends \PHPUnit_Framework_TestCase
+class AmazonAbstract extends \PHPUnit_Framework_TestCase
 {
-
-    public function testNoKeysThrowException()
-    {
-        try {
-            $class = new TestAmamzonAbstract();
-            $this->fail('Exception should be thrown when no keys are passed in.');
-        } catch(Amazon\Exception $zsae) {}
-    }
-
     public function testConstructorWithKeysDoesNotThrowException()
     {
         try {
-            $class = new TestAmamzonAbstract('TestAccessKey', 'TestSecretKey');
+            $class = new TestAmazonAbstract('TestAccessKey', 'TestSecretKey');
         } catch(Amazon\Exception $zsae) {
             $this->fail('Exception should be thrown when no keys are passed in.');
         }
@@ -55,8 +46,8 @@ class AmamzonAbstract extends \PHPUnit_Framework_TestCase
 
     public function testSetStaticKeys()
     {
-        TestAmamzonAbstract::setKeys('TestAccessKey', 'TestSecretKey');
-        $class = new TestAmamzonAbstract();
+        $class = new TestAmazonAbstract();
+        $class->setKeys('TestAccessKey', 'TestSecretKey');
 
         $this->assertEquals('TestAccessKey', $class->returnAccessKey());
         $this->assertEquals('TestSecretKey', $class->returnSecretKey());
@@ -64,33 +55,23 @@ class AmamzonAbstract extends \PHPUnit_Framework_TestCase
 
     public function testPassKeysIntoConstructor()
     {
-        $class = new TestAmamzonAbstract('TestAccessKey', 'TestSecretKey');
-
-        $this->assertEquals('TestAccessKey', $class->returnAccessKey());
-        $this->assertEquals('TestSecretKey', $class->returnSecretKey());
-    }
-
-    public function testPassedInKeysOverrideStaticSetKeys()
-    {
-        TestAmamzonAbstract::setKeys('TestStaticAccessKey', 'TestStaticSecretKey');
-        $class = new TestAmamzonAbstract('TestAccessKey', 'TestSecretKey');
+        $class = new TestAmazonAbstract('TestAccessKey', 'TestSecretKey');
 
         $this->assertEquals('TestAccessKey', $class->returnAccessKey());
         $this->assertEquals('TestSecretKey', $class->returnSecretKey());
     }
 }
 
-class TestAmamzonAbstract extends Amazon\AbstractAmazon
+class TestAmazonAbstract extends Amazon\AbstractAmazon
 {
     public function returnAccessKey()
     {
-        return $this->_accessKey;
+        return $this->accessKey;
     }
 
     public function returnSecretKey()
     {
-        return $this->_secretKey;
+        return $this->secretKey;
     }
-
 }
 

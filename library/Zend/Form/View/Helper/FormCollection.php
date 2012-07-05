@@ -87,9 +87,11 @@ class FormCollection extends AbstractHelper
 
         // If $templateMarkup is not empty, use it for simplify adding new element in JavaScript
         if (!empty($templateMarkup)) {
+            $escapeHtmlAttribHelper = $this->getEscapeHtmlAttrHelper();
+
             $markup .= sprintf(
                 '<span data-template="%s"></span>',
-                $escapeHtmlHelper($templateMarkup)
+                $escapeHtmlAttribHelper($templateMarkup)
             );
         }
 

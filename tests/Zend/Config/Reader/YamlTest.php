@@ -21,7 +21,7 @@
 
 namespace ZendTest\Config\Reader;
 
-use \Zend\Config\Reader\Yaml as YamlReader;
+use Zend\Config\Reader\Yaml as YamlReader;
 
 /**
  * @category   Zend

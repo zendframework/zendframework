@@ -20,12 +20,11 @@
  */
 
 namespace ZendTest\XmlRpc;
-use Zend\XmlRpc\Value;
+use Zend\XmlRpc\AbstractValue;
 use Zend\XmlRpc\Value\BigInteger;
 use Zend\XmlRpc\Exception;
 use Zend\XmlRpc\Generator\GeneratorInterface as Generator;
 use Zend\Math\BigInteger as MathBigInteger;
-use Zend\Date;
 
 /**
  * Test case for Zend_XmlRpc_Value
@@ -68,7 +67,7 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
     {
         $bigIntegerValue = (string)(PHP_INT_MAX + 42);
         $bigInteger = new BigInteger($bigIntegerValue);
-        $this->assertSame(Value::XMLRPC_TYPE_I8, $bigInteger->getType());
+        $this->assertSame(AbstractValue::XMLRPC_TYPE_I8, $bigInteger->getType());
     }
 
     /**
@@ -91,19 +90,19 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testMarschalBigIntegerFromXmlRpc(Generator $generator)
     {
-        Value::setGenerator($generator);
+        AbstractValue::setGenerator($generator);
 
         $bigIntegerValue = (string)(PHP_INT_MAX + 42);
         $bigInteger = new BigInteger($bigIntegerValue);
         $bigIntegerXml = '<value><i8>' . $bigIntegerValue . '</i8></value>';
 
-        $value = Value::getXmlRpcValue(
+        $value = AbstractValue::getXmlRpcValue(
             $bigIntegerXml,
-            Value::XML_STRING
+            AbstractValue::XML_STRING
         );
 
         $this->assertSame($bigIntegerValue, $value->getValue());
-        $this->assertEquals(Value::XMLRPC_TYPE_I8, $value->getType());
+        $this->assertEquals(AbstractValue::XMLRPC_TYPE_I8, $value->getType());
         $this->assertEquals($this->wrapXml($bigIntegerXml), $value->saveXml());
     }
 
@@ -113,19 +112,19 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testMarschalBigIntegerFromApacheXmlRpc(Generator $generator)
     {
-        Value::setGenerator($generator);
+        AbstractValue::setGenerator($generator);
 
         $bigIntegerValue = (string)(PHP_INT_MAX + 42);
         $bigInteger = new BigInteger($bigIntegerValue);
         $bigIntegerXml = '<value><ex:i8 xmlns:ex="http://ws.apache.org/xmlrpc/namespaces/extensions">' . $bigIntegerValue . '</ex:i8></value>';
 
-        $value = Value::getXmlRpcValue(
+        $value = AbstractValue::getXmlRpcValue(
             $bigIntegerXml,
-            Value::XML_STRING
+            AbstractValue::XML_STRING
         );
 
         $this->assertSame($bigIntegerValue, $value->getValue());
-        $this->assertEquals(Value::XMLRPC_TYPE_I8, $value->getType());
+        $this->assertEquals(AbstractValue::XMLRPC_TYPE_I8, $value->getType());
         $this->assertEquals($this->wrapXml($bigIntegerXml), $value->saveXml());
     }
 
@@ -136,12 +135,12 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
     {
         $bigIntegerValue = (string)(PHP_INT_MAX + 42);
 
-        $value = Value::getXmlRpcValue(
+        $value = AbstractValue::getXmlRpcValue(
             $bigIntegerValue,
-            Value::XMLRPC_TYPE_I8
+            AbstractValue::XMLRPC_TYPE_I8
         );
 
-        $this->assertEquals(Value::XMLRPC_TYPE_I8, $value->getType());
+        $this->assertEquals(AbstractValue::XMLRPC_TYPE_I8, $value->getType());
         $this->assertSame($bigIntegerValue, $value->getValue());
     }
 

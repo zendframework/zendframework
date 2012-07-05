@@ -21,8 +21,8 @@
 
 namespace Zend\View\Model;
 
-use Zend\Feed\Writer\Feed,
-    Zend\Feed\Writer\FeedFactory;
+use Zend\Feed\Writer\Feed;
+use Zend\Feed\Writer\FeedFactory;
 
 /**
  * Marker view model for indicating feed data.
@@ -45,6 +45,16 @@ class FeedModel extends ViewModel
      */
     protected $type = false;
 
+    /**
+     * A feed is always terminal
+     *
+     * @var bool
+     */
+    protected $terminate = true;
+
+    /**
+     * @return \Zend\Feed\Writer\Feed
+     */
     public function getFeed()
     {
         if ($this->feed instanceof Feed) {
@@ -67,8 +77,8 @@ class FeedModel extends ViewModel
 
     /**
      * Set the feed object
-     * 
-     * @param  Feed $feed 
+     *
+     * @param  Feed $feed
      * @return FeedModel
      */
     public function setFeed(Feed $feed)
@@ -79,7 +89,7 @@ class FeedModel extends ViewModel
 
     /**
      * Get the feed type
-     * 
+     *
      * @return false|string
      */
     public function getFeedType()

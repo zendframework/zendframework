@@ -21,8 +21,8 @@
 
 namespace ZendTest\View\Model;
 
-use ArrayObject,
-    stdClass,
+use ArrayObject;
+use stdClass,
     PHPUnit_Framework_TestCase as TestCase,
     Zend\View\Model\ViewModel,
     Zend\View\Variables as ViewVariables;

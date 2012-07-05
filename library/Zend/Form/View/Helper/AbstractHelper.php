@@ -22,7 +22,6 @@
 namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
-use Zend\Loader\Pluggable;
 use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 use Zend\View\Helper\Doctype;
 use Zend\View\Helper\Escape;
@@ -269,7 +268,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
             return $this->doctypeHelper;
         }
 
-        if ($this->view instanceof Pluggable) {
+        if (method_exists($this->view, 'plugin')) {
             $this->doctypeHelper = $this->view->plugin('doctype');
         }
 
@@ -291,7 +290,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
             return $this->escapeHelper;
         }
 
-        if ($this->view instanceof Pluggable) {
+        if (method_exists($this->view, 'plugin')) {
             $this->escapeHelper = $this->view->plugin('escape');
         }
 

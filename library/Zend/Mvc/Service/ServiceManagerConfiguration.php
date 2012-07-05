@@ -38,57 +38,59 @@ class ServiceManagerConfiguration implements ConfigurationInterface
 {
     /**
      * Services that can be instantiated without factories
-     * 
+     *
      * @var array
      */
     protected $services = array(
-        'DispatchListener' => 'Zend\Mvc\DispatchListener',
-        'Request'          => 'Zend\Http\PhpEnvironment\Request',
-        'Response'         => 'Zend\Http\PhpEnvironment\Response',
-        'RouteListener'    => 'Zend\Mvc\RouteListener',
-        'ViewManager'      => 'Zend\Mvc\View\ViewManager',
+        'DispatchListener'   => 'Zend\Mvc\DispatchListener',
+        'Request'            => 'Zend\Http\PhpEnvironment\Request',
+        'Response'           => 'Zend\Http\PhpEnvironment\Response',
+        'RouteListener'      => 'Zend\Mvc\RouteListener',
+        'SharedEventManager' => 'Zend\EventManager\SharedEventManager',
+        'ViewManager'        => 'Zend\Mvc\View\ViewManager',
     );
 
     /**
      * Service factories
-     * 
+     *
      * @var array
      */
     protected $factories = array(
-        'Application'            => 'Zend\Mvc\Service\ApplicationFactory',
-        'Configuration'          => 'Zend\Mvc\Service\ConfigurationFactory',
-        'ControllerLoader'       => 'Zend\Mvc\Service\ControllerLoaderFactory',
-        'ControllerPluginBroker' => 'Zend\Mvc\Service\ControllerPluginBrokerFactory',
-        'ControllerPluginLoader' => 'Zend\Mvc\Service\ControllerPluginLoaderFactory',
-        'DependencyInjector'     => 'Zend\Mvc\Service\DiFactory',
-        'EventManager'           => 'Zend\Mvc\Service\EventManagerFactory',
-        'ModuleManager'          => 'Zend\Mvc\Service\ModuleManagerFactory',
-        'Router'                 => 'Zend\Mvc\Service\RouterFactory',
-        'ViewFeedRenderer'       => 'Zend\Mvc\Service\ViewFeedRendererFactory',
-        'ViewFeedStrategy'       => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
-        'ViewJsonRenderer'       => 'Zend\Mvc\Service\ViewJsonRendererFactory',
-        'ViewJsonStrategy'       => 'Zend\Mvc\Service\ViewJsonStrategyFactory',
+        'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
+        'Configuration'           => 'Zend\Mvc\Service\ConfigurationFactory',
+        'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
+        'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
+        'DependencyInjector'      => 'Zend\Mvc\Service\DiFactory',
+        'EventManager'            => 'Zend\Mvc\Service\EventManagerFactory',
+        'ModuleManager'           => 'Zend\Mvc\Service\ModuleManagerFactory',
+        'Router'                  => 'Zend\Mvc\Service\RouterFactory',
+        'ViewHelperManager'       => 'Zend\Mvc\Service\ViewHelperManagerFactory',
+        'ViewFeedRenderer'        => 'Zend\Mvc\Service\ViewFeedRendererFactory',
+        'ViewFeedStrategy'        => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
+        'ViewJsonRenderer'        => 'Zend\Mvc\Service\ViewJsonRendererFactory',
+        'ViewJsonStrategy'        => 'Zend\Mvc\Service\ViewJsonStrategyFactory',
     );
 
     /**
      * Abstract factories
-     * 
+     *
      * @var array
      */
     protected $abstractFactories = array();
 
     /**
      * Aliases
-     * 
+     *
      * @var array
      */
     protected $aliases = array(
         'Config'                                  => 'Configuration',
+        'ControllerPluginBroker'                  => 'ControllerPluginManager',
         'Di'                                      => 'DependencyInjector',
         'Zend\Di\LocatorInterface'                => 'DependencyInjector',
         'Zend\EventManager\EventManagerInterface' => 'EventManager',
-        'Zend\Mvc\Controller\PluginLoader'        => 'ControllerPluginLoader',
         'Zend\Mvc\Controller\PluginBroker'        => 'ControllerPluginBroker',
+        'Zend\Mvc\Controller\PluginManager'       => 'ControllerPluginManager',
     );
 
     /**
@@ -96,19 +98,19 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      *
      * Services are shared by default; this is primarily to indicate services
      * that should NOT be shared
-     * 
+     *
      * @var array
      */
     protected $shared = array(
-        'EventManager' => false
+        'EventManager' => false,
     );
 
     /**
      * Constructor
      *
      * Merges internal arrays with those passed via configuration
-     * 
-     * @param  array $configuration 
+     *
+     * @param  array $configuration
      */
     public function __construct(array $configuration = array())
     {
@@ -142,7 +144,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * service manager, also adds an initializer to inject ServiceManagerAware
      * classes with the service manager.
      *
-     * @param  ServiceManager $serviceManager 
+     * @param  ServiceManager $serviceManager
      * @return void
      */
     public function configureServiceManager(ServiceManager $serviceManager)
@@ -169,7 +171,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
             if ($instance instanceof EventManagerAwareInterface
-                && !$instance->events() instanceof EventManagerInterface
+                && !$instance->getEventManager() instanceof EventManagerInterface
             ) {
                 $instance->setEventManager($serviceManager->get('EventManager'));
             }

@@ -21,9 +21,9 @@
 
 namespace Zend\Search\Lucene\Search\Query\Preprocessing;
 
-use Zend\Search\Lucene,
-	Zend\Search\Lucene\Search\Query,
-	Zend\Search\Lucene\Exception\UnsupportedMethodCallException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Search\Query;
+use Zend\Search\Lucene\Exception\UnsupportedMethodCallException;
 
 /**
  * It's an internal abstract class intended to finalize ase a query processing after query parsing.

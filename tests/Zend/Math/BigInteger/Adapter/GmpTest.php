@@ -151,6 +151,11 @@ class GmpTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2', $this->adapter->sqrt('4'));
     }
 
+    public function testAbs()
+    {
+        $this->assertSame('1152921504606847103', $this->adapter->abs('1152921504606847103'));
+        $this->assertSame('1152921504606847103', $this->adapter->abs('-1152921504606847103'));
+    }
 
     public function testIntegerToBinaryConversion()
     {

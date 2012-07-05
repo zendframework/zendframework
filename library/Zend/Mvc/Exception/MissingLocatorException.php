@@ -29,4 +29,5 @@ namespace Zend\Mvc\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MissingLocatorException extends RuntimeException
-{}
+{
+}

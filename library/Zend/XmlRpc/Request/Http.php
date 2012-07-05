@@ -20,8 +20,8 @@
 
 namespace Zend\XmlRpc\Request;
 
-use Zend\XmlRpc\Request as XmlRpcRequest,
-    Zend\XmlRpc\Fault;
+use Zend\XmlRpc\Request as XmlRpcRequest;
+use Zend\XmlRpc\Fault;
 
 /**
  * XmlRpc Request object -- Request via HTTP

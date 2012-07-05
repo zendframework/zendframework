@@ -20,6 +20,7 @@
  */
 
 namespace ZendTest\Validator\File;
+
 use Zend\Validator\File;
 use Zend\Validator;
 
@@ -33,6 +34,9 @@ use Zend\Validator;
  */
 class FilesSizeTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var boolean */
+    public $multipleOptionsDetected;
+
     public function setUp()
     {
         $this->multipleOptionsDetected = false;

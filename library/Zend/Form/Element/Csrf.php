@@ -21,8 +21,10 @@
 
 namespace Zend\Form\Element;
 
+use Zend\Form\Form;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
+use Zend\Form\ElementPrepareAwareInterface;
 use Zend\Validator\Csrf as CsrfValidator;
 
 /**
@@ -32,7 +34,7 @@ use Zend\Validator\Csrf as CsrfValidator;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Csrf extends Element implements InputProviderInterface
+class Csrf extends Element implements InputProviderInterface, ElementPrepareAwareInterface
 {
     /**
      * Seed attributes
@@ -49,28 +51,14 @@ class Csrf extends Element implements InputProviderInterface
     protected $validator;
 
     /**
-     * Set validator
-     *
-     * @param  CsrfValidator $validator
-     * @return Csrf
-     */
-    public function setValidator(CsrfValidator $validator)
-    {
-        $this->validator = $validator;
-        return $this;
-    }
-    
-    /**
      * Get CSRF validator
      *
      * @return CsrfValidator
      */
-    public function getValidator()
+    protected function getValidator()
     {
         if (null === $this->validator) {
-            $this->setValidator(new CsrfValidator(array(
-                'name' => $this->getName(),
-            )));
+            $this->validator = new CsrfValidator(array('name' => $this->getName()));
         }
         return $this->validator;
     }
@@ -146,5 +134,13 @@ class Csrf extends Element implements InputProviderInterface
                 $this->getValidator(),
             ),
         );
+    }
+
+    /**
+     * Prepare the form element
+     */
+    public function prepareElement(Form $form)
+    {
+        $this->getValidator()->getHash(true);
     }
 }

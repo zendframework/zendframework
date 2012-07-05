@@ -21,8 +21,8 @@
 
 namespace Zend\GData\YouTube;
 
-use Zend\GData\YouTube,
-    Zend\GData\App;
+use Zend\GData\YouTube;
+use Zend\GData\App;
 
 /**
  * Represents the YouTube message flavor of an Atom entry

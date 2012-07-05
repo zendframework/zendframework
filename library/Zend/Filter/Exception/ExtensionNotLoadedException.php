@@ -2,7 +2,6 @@
 
 namespace Zend\Filter\Exception;
 
-class ExtensionNotLoadedException
-    extends RuntimeException
+class ExtensionNotLoadedException extends RuntimeException
 {
 }

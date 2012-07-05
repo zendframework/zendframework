@@ -20,9 +20,9 @@
 
 namespace Zend\Feed\Reader;
 
-use DOMDocument,
-    DOMElement,
-    DOMXPath;
+use DOMDocument;
+use DOMElement;
+use DOMXPath;
 
 /**
  * @category   Zend

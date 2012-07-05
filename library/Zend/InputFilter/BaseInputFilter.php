@@ -71,7 +71,7 @@ class BaseInputFilter implements InputFilterInterface
             ));
         }
 
-        if (empty($name)) {
+        if (is_null($name) || $name === '') {
             $name = $input->getName();
         }
         $this->inputs[$name] = $input;
@@ -167,8 +167,7 @@ class BaseInputFilter implements InputFilterInterface
                 // make sure we have a value (empty) for validation
                 $this->data[$name] = '';
             }
-            
-            $value = $this->data[$name];
+
             if ($input instanceof InputFilterInterface) {
                 if (!$input->isValid()) {
                     $this->invalidInputs[$name] = $input;

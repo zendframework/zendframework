@@ -21,8 +21,9 @@
 
 namespace Zend\View\Helper\Navigation;
 
-use Zend\Acl,
-    Zend\Navigation;
+use Zend\Acl;
+use Zend\I18n\Translator\Translator;
+use Zend\Navigation;
 
 /**
  * Interface for navigational helpers
@@ -62,7 +63,7 @@ interface HelperInterface
      *                           Default is null.
      * @return HelperInterface  fluent interface, returns self
      */
-    public function setTranslator($translator = null);
+    public function setTranslator(Translator $translator = null);
 
     /**
      * Returns translator used in helper

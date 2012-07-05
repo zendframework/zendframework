@@ -21,8 +21,8 @@
 
 namespace Zend\InfoCard\XML;
 
-use DOMElement,
-    SimpleXMLElement;
+use DOMElement;
+use SimpleXMLElement;
 
 /**
  * An abstract class representing a an XML data block

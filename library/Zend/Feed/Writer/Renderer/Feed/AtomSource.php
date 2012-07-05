@@ -20,10 +20,10 @@
  
 namespace Zend\Feed\Writer\Renderer\Feed;
 
-use Zend\Feed\Writer\Renderer,
-    Zend\Feed\Writer,
-    DOMElement,
-    DOMDocument;
+use Zend\Feed\Writer\Renderer;
+use Zend\Feed\Writer;
+use DOMElement;
+use DOMDocument;
 
 /**
 * @category Zend
@@ -31,7 +31,7 @@ use Zend\Feed\Writer\Renderer,
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-class AtomSource extends AtomAbstract implements Renderer\RendererInterface
+class AtomSource extends AbstractAtom implements Renderer\RendererInterface
 {
 
     /**

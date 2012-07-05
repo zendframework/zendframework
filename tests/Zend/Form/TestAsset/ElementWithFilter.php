@@ -36,7 +36,7 @@ class ElementWithFilter extends Element implements InputProviderInterface
             ),
             'validators' => array(
                 array('name' => 'Zend\Validator\NotEmpty'),
-                array('name' => 'Zend\Validator\Alnum'),
+                array('name' => 'Zend\I18n\Validator\Alnum'),
             ),
         );
     }

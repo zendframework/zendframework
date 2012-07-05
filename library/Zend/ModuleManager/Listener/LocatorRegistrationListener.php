@@ -64,7 +64,7 @@ class LocatorRegistrationListener extends AbstractListener implements
     public function loadModulesPost(Event $e)
     {
         $moduleManager = $e->getTarget();
-        $events        = $moduleManager->events()->getSharedManager();
+        $events        = $moduleManager->getEventManager()->getSharedManager();
 
         // Shared instance for module manager
         $events->attach('application', 'bootstrap', function ($e) use ($moduleManager) {
@@ -112,7 +112,7 @@ class LocatorRegistrationListener extends AbstractListener implements
      * Attach one or more listeners
      *
      * @param  EventManagerInterface $events
-     * @return void
+     * @return LocatorRegistrationListener
      */
     public function attach(EventManagerInterface $events)
     {

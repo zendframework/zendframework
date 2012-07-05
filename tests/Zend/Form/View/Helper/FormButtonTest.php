@@ -124,6 +124,91 @@ class FormButtonTest extends CommonTestCase
         $this->$assertion($expected, $markup);
     }
 
+    public function validAttributes()
+    {
+        return array(
+            array('name', 'assertContains'),
+            array('accept', 'assertNotContains'),
+            array('alt', 'assertNotContains'),
+            array('autocomplete', 'assertNotContains'),
+            array('autofocus', 'assertContains'),
+            array('checked', 'assertNotContains'),
+            array('dirname', 'assertNotContains'),
+            array('disabled', 'assertContains'),
+            array('form', 'assertContains'),
+            array('formaction', 'assertContains'),
+            array('formenctype', 'assertContains'),
+            array('formmethod', 'assertContains'),
+            array('formnovalidate', 'assertContains'),
+            array('formtarget', 'assertContains'),
+            array('height', 'assertNotContains'),
+            array('list', 'assertNotContains'),
+            array('max', 'assertNotContains'),
+            array('maxlength', 'assertNotContains'),
+            array('min', 'assertNotContains'),
+            array('multiple', 'assertNotContains'),
+            array('pattern', 'assertNotContains'),
+            array('placeholder', 'assertNotContains'),
+            array('readonly', 'assertNotContains'),
+            array('required', 'assertNotContains'),
+            array('size', 'assertNotContains'),
+            array('src', 'assertNotContains'),
+            array('step', 'assertNotContains'),
+            array('value', 'assertContains'),
+            array('width', 'assertNotContains'),
+        );
+    }
+
+    public function getCompleteElement()
+    {
+        $element = new Element('foo');
+        $element->setAttributes(array(
+            'accept'             => 'value',
+            'alt'                => 'value',
+            'autocomplete'       => 'on',
+            'autofocus'          => 'autofocus',
+            'checked'            => 'checked',
+            'dirname'            => 'value',
+            'disabled'           => 'disabled',
+            'form'               => 'value',
+            'formaction'         => 'value',
+            'formenctype'        => 'value',
+            'formmethod'         => 'value',
+            'formnovalidate'     => 'value',
+            'formtarget'         => 'value',
+            'height'             => 'value',
+            'id'                 => 'value',
+            'list'               => 'value',
+            'max'                => 'value',
+            'maxlength'          => 'value',
+            'min'                => 'value',
+            'multiple'           => 'multiple',
+            'name'               => 'value',
+            'pattern'            => 'value',
+            'placeholder'        => 'value',
+            'readonly'           => 'readonly',
+            'required'           => 'required',
+            'size'               => 'value',
+            'src'                => 'value',
+            'step'               => 'value',
+            'value'              => 'value',
+            'width'              => 'value',
+        ));
+        return $element;
+    }
+
+    /**
+     * @dataProvider validAttributes
+     */
+    public function testAllValidFormMarkupAttributesPresentInElementAreRendered($attribute, $assertion)
+    {
+        $element = $this->getCompleteElement();
+        $element->setAttribute('label', '{button_content}');
+        $markup  = $this->helper->render($element);
+        $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+        $this->$assertion($expect, $markup);
+    }
+
     public function testRaisesExceptionWhenLabelAttributeIsNotPresentInElement()
     {
         $element = new Element('foo');

@@ -108,27 +108,32 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @return null
+     * Get current schema
+     * 
+     * @return string 
      */
-    public function getDefaultCatalog()
-    {
-        return null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDefaultSchema()
+    public function getCurrentSchema()
     {
         if (!$this->isConnected()) {
             $this->connect();
         }
 
+        switch ($this->driverName) {
+            case 'mysql':
+                $sql = 'SELECT DATABASE()';
+                break;
+            case 'sqlite':
+                return 'main';
+            case 'pgsql':
+            default:
+                $sql = 'SELECT CURRENT_SCHEMA';
+                break;
+        }
+
         /** @var $result \PDOStatement */
-        $result = $this->resource->query('SELECT DATABASE()');
+        $result = $this->resource->query($sql);
         if ($result instanceof \PDOStatement) {
-            $r = $result->fetch_row();
-            return $r[0];
+            return $result->fetchColumn();
         }
         return false;
     }
@@ -350,10 +355,20 @@ class Connection implements ConnectionInterface
      * 
      * @return integer 
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
+        if ($name === null && $this->driverName == 'pgsql') {
+            // @todo create a feature that opts-into this behavior, using sql to find serial name
+            try {
+                $stmt = $this->resource->query('SELECT LASTVAL() as "lastvalue"');
+                return $stmt->fetchColumn(0);
+            } catch (\PDOException $e) {
+                return false;
+            }
+        }
+
         try {
-            return $this->resource->lastInsertId();
+            return $this->resource->lastInsertId($name);
         } catch (\Exception $e) {
             // do nothing
         }

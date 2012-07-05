@@ -67,7 +67,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync($this->timeservers);
         $result = $server->getServer('server_f');
 
-        $this->assertInstanceOf('Zend\TimeSync\Protocol', $result);
+        $this->assertInstanceOf('Zend\TimeSync\AbstractProtocol', $result);
     }
 
     /**
@@ -222,7 +222,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync($this->timeservers);
 
         $result = $server->getDate();
-        $this->assertInstanceOf('Zend\Date\Date', $result);
+        $this->assertInstanceOf('DateTime', $result);
     }
 
     /**
@@ -239,7 +239,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync('ntp://time.windows.com', 'time_windows');
 
         $result = $server->getDate();
-        $this->assertInstanceOf('Zend\Date\Date', $result);
+        $this->assertInstanceOf('DateTime', $result);
     }
 
     /**
@@ -256,7 +256,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync('sntp://time-C.timefreq.bldrdoc.gov');
 
         $result = $server->getDate();
-        $this->assertInstanceOf('Zend\Date\Date', $result);
+        $this->assertInstanceOf('DateTime', $result);
     }
 
     /**
@@ -295,7 +295,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $servers = new TimeSync\TimeSync($this->timeservers);
 
         foreach ($servers as $key => $server) {
-            $this->assertInstanceOf('Zend\TimeSync\Protocol', $server);
+            $this->assertInstanceOf('Zend\TimeSync\AbstractProtocol', $server);
         }
     }
 

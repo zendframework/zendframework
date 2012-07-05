@@ -21,8 +21,7 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use Zend\Cache\Exception,
-    Zend\Cache\Utils;
+use Zend\Cache\Exception;
 
 /**
  * These are options specific to the Filesystem adapter
@@ -108,22 +107,6 @@ class FilesystemOptions extends AdapterOptions
      * @var boolean
      */
     protected $noCtime = true;
-
-    /**
-     * Read control enabled ?
-     *
-     * If enabled a hash (readControlAlgo) will be saved and check on read.
-     *
-     * @var boolean
-     */
-    protected $readControl = false;
-
-    /**
-     * The used hash algorithm if read control is enabled
-     *
-     * @var string
-     */
-    protected $readControlAlgo = 'crc32';
 
     /**
      * Set cache dir
@@ -440,60 +423,6 @@ class FilesystemOptions extends AdapterOptions
     public function getNoCtime()
     {
         return $this->noCtime;
-    }
-
-    /**
-     * Set read control
-     *
-     * @param  bool $flag
-     * @return FilesystemOptions
-     */
-    public function setReadControl($flag)
-    {
-        $flag = (bool) $flag;
-        $this->triggerOptionEvent('read_control', $flag);
-        $this->readControl = $flag;
-        return $this;
-    }
-
-    /**
-     * Get read control
-     *
-     * @return bool
-     */
-    public function getReadControl()
-    {
-        return $this->readControl;
-    }
-
-    /**
-     * Set real control algo
-     *
-     * @param  string $algo
-     * @return FilesystemOptions
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setReadControlAlgo($algo)
-    {
-        $algo = strtolower($algo);
-
-        if (!in_array($algo, Utils::getHashAlgos())) {
-            throw new Exception\InvalidArgumentException("Unsupported hash algorithm '{$algo}");
-        }
-
-        $this->triggerOptionEvent('read_control_algo', $algo);
-        $this->readControlAlgo = $algo;
-        return $this;
-    }
-
-    /**
-     * Get read control algo
-     *
-     * @return string
-     */
-    public function getReadControlAlgo()
-    {
-        return $this->readControlAlgo;
     }
 
     /**

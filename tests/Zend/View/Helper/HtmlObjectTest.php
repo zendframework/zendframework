@@ -21,9 +21,9 @@
 
 namespace ZendTest\View\Helper;
 
-use Zend\View\Renderer\PhpRenderer as View,
-    Zend\View\Helper\Doctype,
-    Zend\View\Helper\HtmlObject;
+use Zend\View\Renderer\PhpRenderer as View;
+use Zend\View\Helper\Doctype;
+use Zend\View\Helper\HtmlObject;
 
 /**
  * @category   Zend

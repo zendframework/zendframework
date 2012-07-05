@@ -21,8 +21,8 @@
 
 namespace Zend\View\Helper;
 
-use Zend\View,
-    Zend\View\Exception;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Helper for setting and retrieving script elements for HTML head section
@@ -32,7 +32,7 @@ use Zend\View,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HeadScript extends Placeholder\Container\Standalone
+class HeadScript extends Placeholder\Container\AbstractStandalone
 {
     /**#@+
      * Script type contants

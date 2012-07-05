@@ -10,10 +10,11 @@
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\Driver\ResultInterface,
-    Iterator,
-    PDO as PDOResource,
-    PDOStatement;
+use Zend\Db\Adapter\Driver\ResultInterface;
+use Iterator;
+use PDO as PDOResource;
+use PDOStatement;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -72,9 +73,9 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Initialize
-     * 
+     *
      * @param  PDOStatement $resource
-     * @return Result 
+     * @return Result
      */
     public function initialize(PDOStatement $resource, $generatedValue, $rowCount = null)
     {
@@ -94,8 +95,8 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Get resource
-     * 
-     * @return mixed 
+     *
+     * @return mixed
      */
     public function getResource()
     {
@@ -118,8 +119,8 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Next
-     * 
-     * @return mixed 
+     *
+     * @return mixed
      */
     public function next()
     {
@@ -129,10 +130,10 @@ class Result implements Iterator, ResultInterface
         return $this->currentData;
     }
 
-    /** 
+    /**
      * Key
-     * 
-     * @return mixed 
+     *
+     * @return mixed
      */
     public function key()
     {
@@ -145,7 +146,9 @@ class Result implements Iterator, ResultInterface
     public function rewind()
     {
         if ($this->statementMode == self::STATEMENT_MODE_FORWARD && $this->position > 0) {
-            throw new Exception\RuntimeException('This result is a forward only result set, calling rewind() after moving forward is not supported');
+            throw new Exception\RuntimeException(
+                'This result is a forward only result set, calling rewind() after moving forward is not supported'
+            );
         }
         $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
         $this->currentComplete = true;
@@ -154,7 +157,7 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Valid
-     * 
+     *
      * @return boolean
      */
     public function valid()
@@ -164,8 +167,8 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Count
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function count()
     {
@@ -181,9 +184,17 @@ class Result implements Iterator, ResultInterface
     }
 
     /**
+     * @return int
+     */
+    public function getFieldCount()
+    {
+        return $this->resource->columnCount();
+    }
+
+    /**
      * Is query result
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function isQueryResult()
     {
@@ -192,8 +203,8 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Get affected rows
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getAffectedRows()
     {

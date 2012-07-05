@@ -21,9 +21,9 @@
 
 namespace Zend\Service\Amazon\SimpleDb;
 
-use Zend\Crypt\Hmac,
-    Zend\Http,
-    Zend\Uri;
+use Zend\Crypt\Hmac;
+use Zend\Http;
+use Zend\Uri;
 
 /**
  * @category   Zend
@@ -527,7 +527,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
 
         $data .= implode('&', $arrData);
 
-        $hmac = Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Hmac::BINARY);
+        $hmac = Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Hmac::OUTPUT_BINARY);
 
         return base64_encode($hmac);
     }

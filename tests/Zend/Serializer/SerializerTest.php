@@ -21,11 +21,9 @@
 
 namespace ZendTest\Serializer;
 
-use Zend\Serializer\Serializer,
-    Zend\Serializer\AdapterBroker,
-    Zend\Serializer\Adapter,
-    Zend\Loader\Broker,
-    Zend\Loader\PluginBroker;
+use Zend\Serializer\Adapter;
+use Zend\Serializer\AdapterPluginManager;
+use Zend\Serializer\Serializer;
 
 /**
  * @category   Zend
@@ -43,19 +41,19 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        Serializer::resetAdapterBroker();
+        Serializer::resetAdapterPluginManager();
     }
 
-    public function testGetDefaultAdapterBroker()
+    public function testGetDefaultAdapterPluginManager()
     {
-        $this->assertTrue(Serializer::getAdapterBroker() instanceof AdapterBroker);
+        $this->assertTrue(Serializer::getAdapterPluginManager() instanceof AdapterPluginManager);
     }
 
-    public function testChangeAdapterBroker()
+    public function testChangeAdapterPluginManager()
     {
-        $newBroker = new PluginBroker();
-        Serializer::setAdapterBroker($newBroker);
-        $this->assertTrue(Serializer::getAdapterBroker() === $newBroker);
+        $newPluginManager = new AdapterPluginManager();
+        Serializer::setAdapterPluginManager($newPluginManager);
+        $this->assertTrue(Serializer::getAdapterPluginManager() === $newPluginManager);
     }
 
     public function testDefaultAdapter()
@@ -72,16 +70,16 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryUnknownAdapter()
     {
-        $this->setExpectedException('Zend\Loader\Exception\RuntimeException', 'locate class');
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         Serializer::factory('unknown');
     }
     
     public function testFactoryOnADummyClassAdapter()
     {
-        $this->setExpectedException('Zend\\Serializer\\Exception\\RuntimeException','must implement Zend\\Serializer\\Adapter\\AdapterInterface');
-        $broker = new AdapterBroker();
-        $broker->getClassLoader()->registerPlugin('dummy', 'ZendTest\Serializer\TestAsset\Dummy');
-        Serializer::setAdapterBroker($broker);
+        $adapters = new AdapterPluginManager();
+        $adapters->setInvokableClass('dummy', 'ZendTest\Serializer\TestAsset\Dummy');
+        Serializer::setAdapterPluginManager($adapters);
+        $this->setExpectedException('Zend\\Serializer\\Exception\\RuntimeException', 'AdapterInterface');
         Serializer::factory('dummy');
     }
 

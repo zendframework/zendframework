@@ -44,7 +44,7 @@ class RouteListener implements ListenerAggregateInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach('route', array($this, 'onRoute'));
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_ROUTE, array($this, 'onRoute'));
     }
 
     /**
@@ -83,7 +83,7 @@ class RouteListener implements ListenerAggregateInterface
         if (!$routeMatch instanceof Router\RouteMatch) {
             $e->setError($target::ERROR_ROUTER_NO_MATCH);
 
-            $results = $target->events()->trigger('dispatch.error', $e);
+            $results = $target->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $e);
             if (count($results)) {
                 $return  = $results->last();
             } else {

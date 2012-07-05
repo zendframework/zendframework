@@ -22,6 +22,7 @@
 namespace Zend\Validator\Sitemap;
 
 use Zend\Uri;
+use Zend\Validator\AbstractValidator;
 
 /**
  * Validates whether a given value is valid as a sitemap <loc> value
@@ -35,7 +36,7 @@ use Zend\Uri;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Loc extends \Zend\Validator\AbstractValidator
+class Loc extends AbstractValidator
 {
     /**
      * Validation key for not valid
@@ -49,8 +50,8 @@ class Loc extends \Zend\Validator\AbstractValidator
      *
      * @var array
      */
-    protected $_messageTemplates = array(
-        self::NOT_VALID => "'%value%' is not a valid sitemap location",
+    protected $messageTemplates = array(
+        self::NOT_VALID => "The input is not a valid sitemap location",
         self::INVALID   => "Invalid type given. String expected",
     );
 

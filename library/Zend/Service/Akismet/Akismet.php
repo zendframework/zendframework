@@ -20,8 +20,8 @@
  */
 
 namespace Zend\Service\Akismet;
-use Zend\Http,
-    Zend\Uri;
+use Zend\Http;
+use Zend\Uri;
 
 /**
  * Akismet REST service implementation

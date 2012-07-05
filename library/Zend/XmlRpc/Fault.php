@@ -164,7 +164,7 @@ class Fault
     public function setEncoding($encoding)
     {
         $this->_encoding = $encoding;
-        Value::setEncoding($encoding);
+        AbstractValue::setEncoding($encoding);
         return $this;
     }
 
@@ -212,7 +212,7 @@ class Fault
         }
 
         $structXml = $xml->fault->value->asXML();
-        $struct    = Value::getXmlRpcValue($structXml, Value::XML_STRING);
+        $struct    = AbstractValue::getXmlRpcValue($structXml, AbstractValue::XML_STRING);
         $struct    = $struct->getValue();
 
         if (isset($struct['faultCode'])) {
@@ -274,9 +274,9 @@ class Fault
             'faultCode'   => $this->getCode(),
             'faultString' => $this->getMessage()
         );
-        $value = Value::getXmlRpcValue($faultStruct);
+        $value = AbstractValue::getXmlRpcValue($faultStruct);
 
-        $generator = Value::getGenerator();
+        $generator = AbstractValue::getGenerator();
         $generator->openElement('methodResponse')
                   ->openElement('fault');
         $value->generateXml();

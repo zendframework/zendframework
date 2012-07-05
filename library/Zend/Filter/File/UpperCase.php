@@ -19,8 +19,9 @@
  */
 
 namespace Zend\Filter\File;
-use Zend\Filter,
-    Zend\Filter\Exception;
+
+use Zend\Filter\StringToUpper;
+use Zend\Filter\Exception;
 
 /**
  * @category   Zend
@@ -28,20 +29,8 @@ use Zend\Filter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class UpperCase extends Filter\StringToUpper
+class UpperCase extends StringToUpper
 {
-    /**
-     * Adds options to the filter at initiation
-     *
-     * @param string $options
-     */
-    public function __construct($options = null)
-    {
-        if (!empty($options)) {
-            $this->setEncoding($options);
-        }
-    }
-
     /**
      * Defined by Zend\Filter\FilterInterface
      *
@@ -49,9 +38,10 @@ class UpperCase extends Filter\StringToUpper
      *
      * @param  string $value Full path of file to change
      * @return string The given $value
-     * @throws \Zend\Filter\Exception\ExceptionInterface
+     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         if (!file_exists($value)) {
             throw new Exception\InvalidArgumentException("File '$value' not found");
@@ -66,7 +56,7 @@ class UpperCase extends Filter\StringToUpper
             throw new Exception\RuntimeException("Problem while reading file '$value'");
         }
 
-        $content = parent::__invoke($content);
+        $content = parent::filter($content);
         $result  = file_put_contents($value, $content);
 
         if (!$result) {

@@ -20,11 +20,11 @@
  
 namespace Zend\Feed\Reader\Entry;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Exception,
-    DOMElement,
-    DOMDocument,
-    DOMXPath;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Exception;
+use DOMElement;
+use DOMDocument;
+use DOMXPath;
 
 /**
 * @category Zend

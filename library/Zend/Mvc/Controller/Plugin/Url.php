@@ -21,10 +21,11 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Mvc\InjectApplicationEventInterface,
-    Zend\Mvc\Exception,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\Router\RouteStackInterface;
+use Zend\Mvc\InjectApplicationEventInterface;
+use Zend\Mvc\Exception;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteStackInterface;
+use Zend\EventManager\EventInterface;
 
 /**
  * @category   Zend
@@ -37,7 +38,7 @@ class Url extends AbstractPlugin
 {
     /**
      * Generates a URL based on a route
-     * 
+     *
      * @param  string $route RouteInterface name
      * @param  array $params Parameters to use in url generation, if any
      * @param  array $options RouteInterface-specific options to use in url generation, if any
@@ -56,7 +57,7 @@ class Url extends AbstractPlugin
         $router = null;
         if ($event instanceof MvcEvent) {
             $router = $event->getRouter();
-        } elseif ($event instanceof Event) {
+        } elseif ($event instanceof EventInterface) {
             $router = $event->getParam('router', false);
         }
         if (!$router instanceof RouteStackInterface) {

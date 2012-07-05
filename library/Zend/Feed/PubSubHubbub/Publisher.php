@@ -22,7 +22,9 @@ namespace Zend\Feed\PubSubHubbub;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Http\Request as HttpRequest;
 use Zend\Uri;
+use Zend\Version;
 
 /**
  * @category   Zend
@@ -92,7 +94,7 @@ class Publisher
         }
 
         if (!is_array($options)) {
-            throw new Exception('Array or Traversable object'
+            throw new Exception\InvalidArgumentException('Array or Traversable object'
                                 . 'expected, got ' . gettype($options));
         }
         if (array_key_exists('hubUrls', $options)) {
@@ -230,7 +232,8 @@ class Publisher
      *
      * @param  string $url The Hub Server's URL
      * @return void
-     * @throws Exception\ExceptionInterface
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public function notifyHub($url)
     {
@@ -241,12 +244,12 @@ class Publisher
         }
         $client = $this->_getHttpClient();
         $client->setUri($url);
-        $response = $client->request();
-        if ($response->getStatus() !== 204) {
+        $response = $client->getResponse();
+        if ($response->getStatusCode() !== 204) {
             throw new Exception\RuntimeException('Notification to Hub Server '
                 . 'at "' . $url . '" appears to have failed with a status code of "'
-                . $response->getStatus() . '" and message "'
-                . $response->getMessage() . '"');
+                . $response->getStatusCode() . '" and message "'
+                . $response->getContent() . '"');
         }
     }
 
@@ -267,13 +270,13 @@ class Publisher
         $hubs   = $this->getHubUrls();
         if (empty($hubs)) {
             throw new Exception\RuntimeException('No Hub Server URLs'
-                . ' have been set so no notifcations can be sent');
+                . ' have been set so no notifications can be sent');
         }
         $this->_errors = array();
         foreach ($hubs as $url) {
             $client->setUri($url);
-            $response = $client->request();
-            if ($response->getStatus() !== 204) {
+            $response = $client->getResponse();
+            if ($response->getStatusCode() !== 204) {
                 $this->_errors[] = array(
                     'response' => $response,
                     'hubUrl' => $url
@@ -363,10 +366,7 @@ class Publisher
      */
     public function isSuccess()
     {
-        if (count($this->_errors) > 0) {
-            return false;
-        }
-        return true;
+        return !(count($this->_errors) != 0);
     }
 
     /**
@@ -390,9 +390,9 @@ class Publisher
     protected function _getHttpClient()
     {
         $client = PubSubHubbub::getHttpClient();
-        $client->setMethod(\Zend\Http\Request::METHOD_POST);
+        $client->setMethod(HttpRequest::METHOD_POST);
         $client->setOptions(array(
-            'useragent' => 'Zend_Feed_Pubsubhubbub_Publisher/' . \Zend\Version::VERSION,
+            'useragent' => 'Zend_Feed_Pubsubhubbub_Publisher/' . Version::VERSION,
         ));
         $params   = array();
         $params[] = 'hub.mode=publish';

@@ -49,8 +49,8 @@ class InitTriggerTest extends TestCase
         $autoloader->register();
 
         $this->moduleManager = new ModuleManager(array());
-        $this->moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
-        $this->moduleManager->events()->attach('loadModule', new InitTrigger, 2000);
+        $this->moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $this->moduleManager->getEventManager()->attach('loadModule', new InitTrigger, 2000);
     }
 
     public function tearDown()

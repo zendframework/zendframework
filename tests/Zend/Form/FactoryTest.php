@@ -488,7 +488,7 @@ class FactoryTest extends TestCase
     public function testCanCreateFormUsingCreate()
     {
         $form = $this->factory->create(array(
-            'type'       => 'Zend\Form\BaseForm',
+            'type'       => 'Zend\Form\Form',
             'name'       => 'foo',
             'attributes' => array(
                 'method' => 'get',

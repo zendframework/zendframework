@@ -48,8 +48,8 @@ class FormLabel extends AbstractHelper
 
     /**
      * Generate an opening label tag
-     * 
-     * @param  null|array|ElementInterface $attributesOrElement 
+     *
+     * @param  null|array|ElementInterface $attributesOrElement
      * @return string
      */
     public function openTag($attributesOrElement = null)
@@ -79,14 +79,20 @@ class FormLabel extends AbstractHelper
             ));
         }
 
+        $labelAttributes = $attributesOrElement->getLabelAttributes();
         $attributes = array('for' => $id);
+
+        if (!empty($labelAttributes)) {
+            $attributes = array_merge($labelAttributes, $attributes);
+        }
+
         $attributes = $this->createAttributesString($attributes);
         return sprintf('<label %s>', $attributes);
     }
 
     /**
      * Return a closing label tag
-     * 
+     *
      * @return string
      */
     public function closeTag()
@@ -99,22 +105,23 @@ class FormLabel extends AbstractHelper
      *
      * Always generates a "for" statement, as we cannot assume the form input
      * will be provided in the $labelContent.
-     * 
-     * @param  ElementInterface $element 
-     * @param  null|string $labelContent 
-     * @param  string $position 
-     * @return string
+     *
+     * @param  ElementInterface $element
+     * @param  null|string $labelContent
+     * @param  string $position
+     * @return string|FormLabel
      */
     public function __invoke(ElementInterface $element = null, $labelContent = null, $position = null)
     {
         if (!$element) {
             return $this;
         }
+
         $openTag = $this->openTag($element);
-        $label   = false;
-        if (null === $labelContent || null !== $position) {
-            $label = $element->getAttribute('label');
-            if (null === $label) {
+        $label   = '';
+        if ($labelContent === null || $position !== null) {
+            $label = $element->getLabel();
+            if (empty($label)) {
                 throw new Exception\DomainException(sprintf(
                     '%s expects either label content as the second argument, or that the element provided has a label attribute; neither found',
                     __METHOD__

@@ -6,8 +6,8 @@
   <info><title>Controller Plugins</title></info>
 
   <para>
-    Quando usi l'<classname>ActionController</classname> o 
-    <classname>RestfulController</classname>, o se tu utilizzi il
+    Quando usi l'<classname>AbstractActionController</classname> o
+    <classname>AbstractRestfulController</classname>, o se tu utilizzi il
     <classname>Zend\Mvc\Controller\PluginBroker</classname> nei tuoi
     controller custom, puoi avere accesso ad un numero di plugin
     precostruiti. In aggiunta, puoi registrare dei tuoi plugin
@@ -58,7 +58,7 @@ $plugin = $this->plugin('url');
 
   <para>
     Per un ulteriore strato di convenienza, entrambi i 
-    <classname>ActionController</classname> e <classname>RestfulController</classname>
+    <classname>AbstractActionController</classname> e <classname>AbstractRestfulController</classname>
     hanno l'implementazione <methodname>__call()</methodname> che 
     ti permette di ottenere i plugin attraverso le chiamate al metodo:
   </para>

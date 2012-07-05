@@ -36,7 +36,7 @@ class FieldsetWithInputFilter extends Fieldset implements InputFilterProviderInt
                 ),
                 'validators' => array(
                     array('name' => 'Zend\Validator\NotEmpty'),
-                    array('name' => 'Zend\Validator\Alnum'),
+                    array('name' => 'Zend\I18n\Validator\Alnum'),
                 ),
             ),
             'bar' => array(

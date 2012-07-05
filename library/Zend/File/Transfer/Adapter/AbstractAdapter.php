@@ -25,8 +25,7 @@ use Zend\File\Transfer,
     Zend\Filter,
     Zend\Filter\Exception as FilterException,
     Zend\Loader,
-    Zend\Translator,
-    Zend\Translator\Adapter as AdapterTranslator,
+    Zend\I18n\Translator\Translator,
     Zend\Validator;
 
 /**
@@ -82,7 +81,7 @@ abstract class AbstractAdapter
     protected $messages = array();
 
     /**
-     * @var AdapterTranslator\AbstractAdapter
+     * @var Translator
      */
     protected $translator;
 
@@ -1093,28 +1092,19 @@ abstract class AbstractAdapter
     /**
      * Set translator object for localization
      *
-     * @param  Translator\Translator|AdapterTranslator\AbstractAdapter|null $translator
+     * @param  Translator|null $translator
      * @return AbstractAdapter
      */
-    public function setTranslator($translator = null)
+    public function setTranslator(Translator $translator = null)
     {
-        if (null === $translator) {
-            $this->translator = null;
-        } elseif ($translator instanceof AdapterTranslator\AbstractAdapter) {
-            $this->translator = $translator;
-        } elseif ($translator instanceof Translator\Translator) {
-            $this->translator = $translator->getAdapter();
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid translator specified');
-        }
-
+        $this->translator = $translator;
         return $this;
     }
 
     /**
      * Retrieve localization translator object
      *
-     * @return AdapterTranslator\AbstractAdapter|null
+     * @return Translator|null
      */
     public function getTranslator()
     {

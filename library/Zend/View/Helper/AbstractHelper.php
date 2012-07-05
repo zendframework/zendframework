@@ -21,8 +21,8 @@
 
 namespace Zend\View\Helper;
 
-use Zend\View\Helper\HelperInterface,
-    Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\View\Helper\HelperInterface;
+use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * @category   Zend

@@ -37,14 +37,14 @@ class NoRecordExists extends AbstractDb
         /*
          * Check for an adapter being defined. If not, throw an exception.
          */
-        if (null === $this->_adapter) {
+        if (null === $this->adapter) {
             throw new Exception\RuntimeException('No database adapter present');
         }
 
         $valid = true;
         $this->setValue($value);
 
-        $result = $this->_query($value);
+        $result = $this->query($value);
         if ($result) {
             $valid = false;
             $this->error(self::ERROR_RECORD_FOUND);

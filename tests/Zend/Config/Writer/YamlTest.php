@@ -21,9 +21,9 @@
 
 namespace ZendTest\Config\Writer;
 
-use \Zend\Config\Writer\Yaml as YamlWriter,
-    \Zend\Config\Config,
-    \Zend\Config\Reader\Yaml as YamlReader;
+use Zend\Config\Writer\Yaml as YamlWriter;
+use Zend\Config\Config;
+use Zend\Config\Reader\Yaml as YamlReader;
 
 /**
  * @category   Zend
@@ -35,7 +35,6 @@ use \Zend\Config\Writer\Yaml as YamlWriter,
  */
 class YamlTest extends AbstractWriterTestCase
 {
-
     public function setUp()
     {
         if (!constant('TESTS_ZEND_CONFIG_YAML_ENABLED')) {
@@ -75,7 +74,7 @@ class YamlTest extends AbstractWriterTestCase
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = $this->reader->fromFile(__DIR__ . '/files/allsections.yaml');
+        $config = $this->reader->fromFile(__DIR__ . '/_files/allsections.yaml');
 
         $this->writer->toFile($this->getTestAssetFileName(), $config);
 

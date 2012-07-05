@@ -21,10 +21,10 @@
 
 namespace Zend\XmlRpc;
 
-use ReflectionClass,
-    Zend\Server\AbstractServer,
-    Zend\Server\Definition,
-    Zend\Server\Reflection;
+use ReflectionClass;
+use Zend\Server\AbstractServer;
+use Zend\Server\Definition;
+use Zend\Server\Reflection;
 
 /**
  * An XML-RPC server implementation
@@ -113,8 +113,6 @@ class Server extends AbstractServer
         'dateTime.iso8601'           => 'dateTime.iso8601',
         'date'                       => 'dateTime.iso8601',
         'time'                       => 'dateTime.iso8601',
-        'time'                       => 'dateTime.iso8601',
-        'Zend_Date'                  => 'dateTime.iso8601',
         'DateTime'                   => 'dateTime.iso8601',
         'array'                      => 'array',
         'struct'                     => 'struct',
@@ -379,7 +377,7 @@ class Server extends AbstractServer
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
-        Value::setEncoding($encoding);
+        AbstractValue::setEncoding($encoding);
         return $this;
     }
 
@@ -571,7 +569,7 @@ class Server extends AbstractServer
         $paramsLen  = count($params);
         if ($sigLength < $paramsLen) {
             for ($i = $sigLength; $i < $paramsLen; ++$i) {
-                $xmlRpcValue = Value::getXmlRpcValue($params[$i]);
+                $xmlRpcValue = AbstractValue::getXmlRpcValue($params[$i]);
                 $sigCalled[] = $xmlRpcValue->getType();
             }
         }

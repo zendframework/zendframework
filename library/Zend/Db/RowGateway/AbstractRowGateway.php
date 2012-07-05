@@ -10,18 +10,18 @@
 
 namespace Zend\Db\RowGateway;
 
-use Zend\Db\Adapter\Adapter,
-    Zend\Db\ResultSet\Row,
-    Zend\Db\ResultSet\RowObjectInterface,
-    Zend\Db\Sql\TableIdentifier,
-    Zend\Db\Sql\Sql;
+use ArrayAccess;
+use Countable;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\TableIdentifier;
+use Zend\Db\Sql\Sql;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage RowGateway
  */
-abstract class AbstractRowGateway implements RowGatewayInterface, RowObjectInterface
+abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayInterface
 {
 
     /**
@@ -47,7 +47,7 @@ abstract class AbstractRowGateway implements RowGatewayInterface, RowObjectInter
     /**
      * @var array
      */
-    protected $data = null;
+    protected $data = array();
 
     /**
      * @var Sql
@@ -122,6 +122,15 @@ abstract class AbstractRowGateway implements RowGatewayInterface, RowObjectInter
     }
 
     /**
+     * @param mixed $array
+     * @return array|void
+     */
+    public function exchangeArray($array)
+    {
+        return $this->populate($array, true);
+    }
+
+    /**
      * Save
      *
      * @return integer
@@ -176,7 +185,7 @@ abstract class AbstractRowGateway implements RowGatewayInterface, RowObjectInter
     /**
      * Delete
      *
-     * @return type
+     * @return void
      */
     public function delete()
     {
@@ -203,7 +212,7 @@ abstract class AbstractRowGateway implements RowGatewayInterface, RowObjectInter
      * Offset get
      *
      * @param  string $offset
-     * @return type
+     * @return mixed
      */
     public function offsetGet($offset)
     {
@@ -214,7 +223,7 @@ abstract class AbstractRowGateway implements RowGatewayInterface, RowObjectInter
      * Offset set
      *
      * @param  string $offset
-     * @param  type $value
+     * @param  mixed $value
      * @return RowGateway
      */
     public function offsetSet($offset, $value)
@@ -236,13 +245,7 @@ abstract class AbstractRowGateway implements RowGatewayInterface, RowObjectInter
     }
 
     /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Count elements of an object
-     * @link http://php.net/manual/en/countable.count.php
-     * @return int The custom count as an integer.
-     * </p>
-     * <p>
-     * The return value is cast to an integer.
+     * @return int
      */
     public function count()
     {

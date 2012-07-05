@@ -72,7 +72,7 @@ $moduleManager = new ModuleManager(array(
 ));
 
 // Attach the default listener aggregate and load the modules
-$moduleManager->events()->attachAggregate($defaultListeners);
+$moduleManager->getEventManager()->attachAggregate($defaultListeners);
 $moduleManager->loadModules();
 ]]></programlisting>
         </example>
@@ -150,7 +150,7 @@ $moduleManager = new ModuleManager(array(
 ));
 
 // Attach the default listener aggregate and load the modules
-$moduleManager->events()->attachAggregate($defaultListeners);
+$moduleManager->getEventManager()->attachAggregate($defaultListeners);
 $moduleManager->loadModules();
 ]]></programlisting>
         </example>

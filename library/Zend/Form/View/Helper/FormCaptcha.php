@@ -24,7 +24,6 @@ namespace Zend\Form\View\Helper;
 use Zend\Captcha\AdapterInterface as CaptchaAdapter;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
-use Zend\Loader\Pluggable;
 use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
 /**
@@ -38,30 +37,28 @@ class FormCaptcha extends AbstractHelper
 {
     /**
      * Render a form captcha for an element
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @return string
-     * @throws Exception\DomainException if the element does not compose a captcha, or the renderer is not Pluggable
+     * @throws Exception\DomainException if the element does not compose a captcha, or the renderer does not implement plugin()
      */
     public function render(ElementInterface $element)
     {
-        $attributes = $element->getAttributes();
-        if (!isset($attributes['captcha']) 
-            || !$attributes['captcha'] instanceof CaptchaAdapter
-        ) {
+        $captcha = $element->getCaptcha();
+
+        if ($captcha === null || !$captcha instanceof CaptchaAdapter) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has a "captcha" attribute implementing Zend\Captcha\AdapterInterface; none found',
                 __METHOD__
             ));
         }
 
-        $captcha = $attributes['captcha'];
         $helper  = $captcha->getHelperName();
 
         $renderer = $this->getView();
-        if (!$renderer instanceof Pluggable) {
+        if (!method_exists($renderer, 'plugin')) {
             throw new Exception\DomainException(sprintf(
-                '%s requires that the renderer implements Zend\Loader\Pluggable; it does not',
+                '%s requires that the renderer implements plugin(); it does not',
                 __METHOD__
             ));
         }
@@ -74,12 +71,16 @@ class FormCaptcha extends AbstractHelper
      * Invoke helper as functor
      *
      * Proxies to {@link render()}.
-     * 
-     * @param  ElementInterface $element 
-     * @return string
+     *
+     * @param  ElementInterface $element
+     * @return string|FormCaptcha
      */
     public function __invoke(ElementInterface $element)
     {
+        if (!$element) {
+            return $this;
+        }
+
         return $this->render($element);
     }
 }

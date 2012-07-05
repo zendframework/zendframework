@@ -227,7 +227,7 @@
                     <entry>
                         <emphasis>
                             <code>string|null
-                                toLdapDateTime(integer|string|DateTime|Zend\Date\Date $date, boolean $asUtc)
+                                toLdapDateTime(integer|string|DateTime $date, boolean $asUtc)
                             </code>
                         </emphasis>
                     </entry>
@@ -235,7 +235,7 @@
                     <entry>
                         Converts a timestamp, a DateTime Object, a string that is parseable by
                         <methodname>strtotime()</methodname>
-                        or a Zend\Date\Date into its
+                        or a DateTime into its
                         <acronym>LDAP</acronym>
                         date/time
                         representation. If

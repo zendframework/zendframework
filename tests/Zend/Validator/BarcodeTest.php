@@ -20,11 +20,11 @@
  */
 
 namespace ZendTest\Validator;
-use Zend\Validator\Barcode,
-    ReflectionClass;
+
+use Zend\Validator\Barcode;
 
 /**
- * \Zend\Validator\Barcode
+ * \Zend\Barcode
  *
  * @category   Zend
  * @package    Zend_Validator
@@ -140,7 +140,7 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($barcode->useChecksum());
     }
 
-    public function testDefaultdArrayConstructWithMissingAdapter()
+    public function testDefaultArrayConstructWithMissingAdapter()
     {
         $barcode = new Barcode(array('options' => 'unknown', 'checksum' => false));
         $this->assertTrue($barcode->isValid('0075678164125'));
@@ -466,40 +466,18 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
         $barcode = new Barcode('ean13');
         $this->assertFalse($barcode->isValid('3RH1131-1BB40'));
     }
-    
+
     public function testEqualsMessageTemplates()
     {
         $validator = new Barcode('code25');
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
-    
+
     public function testEqualsMessageVariables()
     {
         $validator = new Barcode('code25');
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $this->assertAttributeEquals($validator->getOption('messageVariables'),
+                                     'messageVariables', $validator);
     }
 }

@@ -21,9 +21,9 @@
 
 namespace Zend\Service\AgileZen\Resources;
 
-use Zend\Service\AgileZen\AgileZen,
-    Zend\Service\AgileZen\Entity,
-    Zend\Service\AgileZen\Container;
+use Zend\Service\AgileZen\AgileZen;
+use Zend\Service\AgileZen\Entity;
+use Zend\Service\AgileZen\Container;
 
 /**
  * @category   Zend

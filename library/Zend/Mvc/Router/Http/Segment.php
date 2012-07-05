@@ -21,10 +21,10 @@
 
 namespace Zend\Mvc\Router\Http;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Mvc\Router\Exception;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Mvc\Router\Exception;
 
 /**
  * Segment route.
@@ -122,6 +122,7 @@ class Segment implements RouteInterface
      *
      * @param  string $def
      * @return array
+     * @throws Exception\RuntimeException
      */
     protected function parseRouteDefinition($def)
     {
@@ -195,6 +196,7 @@ class Segment implements RouteInterface
      * @param  array   $constraints
      * @param  integer $groupIndex
      * @return string
+     * @throws Exception\RuntimeException
      */
     protected function buildRegex(array $parts, array $constraints, &$groupIndex = 1)
     {
@@ -247,6 +249,8 @@ class Segment implements RouteInterface
      * @param  boolean $isOptional
      * @param  boolean $hasChild
      * @return string
+     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
     protected function buildPath(array $parts, array $mergedParams, $isOptional, $hasChild)
     {
@@ -317,11 +321,11 @@ class Segment implements RouteInterface
      */
     public function match(Request $request, $pathOffset = null)
     {
-        if (!method_exists($request, 'uri')) {
+        if (!method_exists($request, 'getUri')) {
             return null;
         }
 
-        $uri  = $request->uri();
+        $uri  = $request->getUri();
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {

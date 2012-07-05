@@ -20,11 +20,11 @@
 
 namespace Zend\Feed\Reader\Extension\DublinCore;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Extension,
-    Zend\Date,
-    DOMElement;
+use DateTime;
+use DOMElement;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Extension;
 
 /**
 * @category Zend
@@ -219,7 +219,7 @@ class Entry extends Extension\AbstractEntry
     /**
      *
      *
-     * @return Date\Date|null
+     * @return DateTime|null
      */
     public function getDate()
     {
@@ -235,8 +235,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($date) {
-            $d = new Date\Date;
-            $d->set($date, Date\Date::ISO_8601);
+            $d = DateTime::createFromFormat(DateTime::ISO8601, $date);
         }
 
         $this->_data['date'] = $d;

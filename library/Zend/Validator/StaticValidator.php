@@ -20,8 +20,6 @@
 
 namespace Zend\Validator;
 
-use Zend\Loader\Broker;
-
 /**
  * @category   Zend
  * @package    Zend_Validate
@@ -31,32 +29,36 @@ use Zend\Loader\Broker;
 class StaticValidator
 {
     /**
-     * @var Zend\Loader\Broker
+     * @var ValidatorPluginManager
      */
-    protected static $broker;
+    protected static $plugins;
 
     /**
-     * Set plugin broker to use for locating validators
+     * Set plugin manager to use for locating validators
      * 
-     * @param  Broker|null $broke 
+     * @param  ValidatorPluginManager|null $plugins
      * @return void
      */
-    public static function setBroker(Broker $broker = null)
+    public static function setPluginManager(ValidatorPluginManager $plugins = null)
     {
-        self::$broker = $broker;
+        // Don't share by default to allow different arguments on subsequent calls
+        if ($plugins instanceof ValidatorPluginManager) {
+            $plugins->setShareByDefault(false);
+        }
+        self::$plugins = $plugins;
     }
 
     /**
-     * Get plugin broker for locating validators
+     * Get plugin manager for locating validators
      * 
-     * @return Broker
+     * @return ValidatorPluginManager
      */
-    public static function getBroker()
+    public static function getPluginManager()
     {
-        if (null === self::$broker) {
-            static::setBroker(new ValidatorBroker());
+        if (null === self::$plugins) {
+            static::setPluginManager(new ValidatorPluginManager());
         }
-        return self::$broker;
+        return self::$plugins;
     }
 
     /**
@@ -64,18 +66,12 @@ class StaticValidator
      * @param  string   $classBaseName
      * @param  array    $args          OPTIONAL
      * @return boolean
-     * @throws \Zend\Validator\Exception
      */
     public static function execute($value, $classBaseName, array $args = array())
     {
-        $broker = static::getBroker();
+        $plugins = static::getPluginManager();
 
-        $validator = $broker->load($classBaseName, $args);
-        $result    = $validator->isValid($value);
-
-        // Unregister validator in case different args are used on later invocation
-        $broker->unregister($classBaseName);
-
-        return $result;
+        $validator = $plugins->get($classBaseName, $args);
+        return $validator->isValid($value);
     }
 }

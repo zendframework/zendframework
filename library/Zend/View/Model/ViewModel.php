@@ -21,13 +21,13 @@
 
 namespace Zend\View\Model;
 
-use ArrayAccess,
-    ArrayIterator,
-    Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\View\Exception,
-    Zend\View\Model,
-    Zend\View\Variables as ViewVariables;
+use ArrayAccess;
+use ArrayIterator;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\View\Exception;
+use Zend\View\Model;
+use Zend\View\Variables as ViewVariables;
 
 /**
  * @category   Zend

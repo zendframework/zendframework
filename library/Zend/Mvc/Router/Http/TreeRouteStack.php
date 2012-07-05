@@ -21,14 +21,14 @@
 
 namespace Zend\Mvc\Router\Http;
 
-use Zend\Mvc\Router\Exception,
-    Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Mvc\Router\SimpleRouteStack,
-    Zend\Mvc\Router\RouteInterface as BaseRoute,
-    Zend\Mvc\Router\Http\RouteInterface,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Uri\Http as HttpUri;
+use Zend\Mvc\Router\Exception;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Mvc\Router\SimpleRouteStack;
+use Zend\Mvc\Router\RouteInterface as BaseRoute;
+use Zend\Mvc\Router\Http\RouteInterface;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Uri\Http as HttpUri;
 
 /**
  * Tree search implementation.
@@ -61,17 +61,21 @@ class TreeRouteStack extends SimpleRouteStack
      */
     protected function init()
     {
-        $this->routeBroker->getClassLoader()->registerPlugins(array(
-            'hostname' => __NAMESPACE__ . '\Hostname',
-            'literal'  => __NAMESPACE__ . '\Literal',
-            'part'     => __NAMESPACE__ . '\Part',
-            'regex'    => __NAMESPACE__ . '\Regex',
-            'scheme'   => __NAMESPACE__ . '\Scheme',
-            'segment'  => __NAMESPACE__ . '\Segment',
-            'wildcard' => __NAMESPACE__ . '\Wildcard',
-            'query'    => __NAMESPACE__ . '\Query',
-            'method'   => __NAMESPACE__ . '\Method',
-        ));
+        $routes = $this->routePluginManager;
+        foreach(array(
+                'hostname' => __NAMESPACE__ . '\Hostname',
+                'literal'  => __NAMESPACE__ . '\Literal',
+                'part'     => __NAMESPACE__ . '\Part',
+                'regex'    => __NAMESPACE__ . '\Regex',
+                'scheme'   => __NAMESPACE__ . '\Scheme',
+                'segment'  => __NAMESPACE__ . '\Segment',
+                'wildcard' => __NAMESPACE__ . '\Wildcard',
+                'query'    => __NAMESPACE__ . '\Query',
+                'method'   => __NAMESPACE__ . '\Method',
+            ) as $name => $class
+        ) {
+            $routes->setInvokableClass($name, $class);
+        };
     }
 
     /**
@@ -98,6 +102,8 @@ class TreeRouteStack extends SimpleRouteStack
      * @see    SimpleRouteStack::routeFromArray()
      * @param  array|\Traversable $specs
      * @return RouteInterface
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     protected function routeFromArray($specs)
     {
@@ -118,12 +124,12 @@ class TreeRouteStack extends SimpleRouteStack
                 'route'         => $route,
                 'may_terminate' => (isset($specs['may_terminate']) && $specs['may_terminate']),
                 'child_routes'  => $specs['child_routes'],
-                'route_broker'  => $this->routeBroker,
+                'route_plugins' => $this->routePluginManager,
             );
 
             $priority = (isset($route->priority) ? $route->priority : null);
 
-            $route = $this->routeBroker->load('part', $options);
+            $route = $this->routePluginManager->get('part', $options);
             $route->priority = $priority;
         }
 
@@ -139,7 +145,7 @@ class TreeRouteStack extends SimpleRouteStack
      */
     public function match(Request $request)
     {
-        if (!method_exists($request, 'uri')) {
+        if (!method_exists($request, 'getUri')) {
             return null;
         }
 
@@ -147,7 +153,7 @@ class TreeRouteStack extends SimpleRouteStack
             $this->setBaseUrl($request->getBaseUrl());
         }
 
-        $uri           = $request->uri();
+        $uri           = $request->getUri();
         $baseUrlLength = strlen($this->baseUrl) ?: null;
 
         if ($this->requestUri === null) {
@@ -184,7 +190,8 @@ class TreeRouteStack extends SimpleRouteStack
      * @param  array $params
      * @param  array $options
      * @return mixed
-     * @throws Exception\ExceptionInterface
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public function assemble(array $params = array(), array $options = array())
     {

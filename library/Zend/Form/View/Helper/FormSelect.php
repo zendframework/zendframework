@@ -21,6 +21,7 @@
 
 namespace Zend\Form\View\Helper;
 
+use Traversable;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 
@@ -43,8 +44,13 @@ class FormSelect extends AbstractHelper
     protected $validTagAttributes;
 
     protected $validSelectAttributes = array(
-        'name'     => true,
-        'multiple' => true,
+        'name'      => true,
+        'autofocus' => true,
+        'disabled'  => true,
+        'form'      => true,
+        'multiple'  => true,
+        'required'  => true,
+        'size'      => true
     );
 
     protected $validOptionAttributes = array(
@@ -61,8 +67,8 @@ class FormSelect extends AbstractHelper
 
     /**
      * Render a form <select> element from the provided $element
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @return string
      */
     public function render(ElementInterface $element)
@@ -77,7 +83,7 @@ class FormSelect extends AbstractHelper
 
         $attributes = $element->getAttributes();
 
-        if (!isset($attributes['options']) 
+        if (!isset($attributes['options'])
             || (!is_array($attributes['options']) && !$attributes['options'] instanceof Traversable)
         ) {
             throw new Exception\DomainException(sprintf(
@@ -103,8 +109,8 @@ class FormSelect extends AbstractHelper
         $this->validTagAttributes = $this->validSelectAttributes;
 
         return sprintf(
-            '<select %s>%s</select>', 
-            $this->createAttributesString($attributes), 
+            '<select %s>%s</select>',
+            $this->createAttributesString($attributes),
             $this->renderOptions($options, $value)
         );
     }
@@ -122,8 +128,8 @@ class FormSelect extends AbstractHelper
      *     'selected' => $booleanFlag,
      * )
      * </code>
-     * 
-     * @param  array $options 
+     *
+     * @param  array $options
      * @param  array $selectedOptions Option values that should be marked as selected
      * @return string
      */
@@ -139,7 +145,7 @@ class FormSelect extends AbstractHelper
             $selected = false;
             $disabled = false;
 
-            if (is_string($optionSpec)) {
+            if (is_scalar($optionSpec)) {
                 $optionSpec = array(
                     'label' => $key,
                     'value' => $optionSpec,
@@ -164,15 +170,15 @@ class FormSelect extends AbstractHelper
                 $disabled = $optionSpec['disabled'];
             }
 
-            if (in_array($value, $selectedOptions, true)) {
+            if (in_array($value, $selectedOptions)) {
                 $selected = true;
             }
 
             $attributes = compact('value', 'selected', 'disabled');
             $this->validTagAttributes = $this->validOptionAttributes;
             $optionStrings[] = sprintf(
-                $template, 
-                $this->createAttributesString($attributes), 
+                $template,
+                $this->createAttributesString($attributes),
                 $escape($label)
             );
         }
@@ -184,11 +190,11 @@ class FormSelect extends AbstractHelper
      * Render an optgroup
      *
      * See {@link renderOptions()} for the options specification. Basically,
-     * an optgroup is simply an option that has an additional "options" key 
+     * an optgroup is simply an option that has an additional "options" key
      * with an array following the specification for renderOptions().
-     * 
-     * @param  array $optgroup 
-     * @param  array $selectedOptions 
+     *
+     * @param  array $optgroup
+     * @param  array $selectedOptions
      * @return string
      */
     public function renderOptgroup(array $optgroup, array $selectedOptions = array())
@@ -218,9 +224,9 @@ class FormSelect extends AbstractHelper
      * Invoke helper as functor
      *
      * Proxies to {@link render()}.
-     * 
-     * @param  ElementInterface|null $element 
-     * @return string
+     *
+     * @param  ElementInterface|null $element
+     * @return string|FormSelect
      */
     public function __invoke(ElementInterface $element = null)
     {
@@ -234,13 +240,13 @@ class FormSelect extends AbstractHelper
     /**
      * Ensure that the value is set appropriately
      *
-     * If the element's value attribute is an array, but there is no multiple 
+     * If the element's value attribute is an array, but there is no multiple
      * attribute, or that attribute does not evaluate to true, then we have
      * a domain issue -- you cannot have multiple options selected unless the
      * multiple attribute is present and enabled.
-     * 
-     * @param  mixed $value 
-     * @param  array $attributes 
+     *
+     * @param  mixed $value
+     * @param  array $attributes
      * @return array
      * @throws Exception\DomainException
      */

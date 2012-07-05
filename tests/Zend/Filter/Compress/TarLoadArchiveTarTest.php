@@ -21,9 +21,9 @@
 
 namespace ZendTest\Filter\Compress;
 
-use Zend\Filter\Compress\Tar as TarCompression,
-    Zend\Filter\Exception\ExtensionNotLoadedException,
-    Zend\Loader\StandardAutoloader;
+use Zend\Filter\Compress\Tar as TarCompression;
+use Zend\Filter\Exception\ExtensionNotLoadedException;
+use Zend\Loader\StandardAutoloader;
 
 /**
  * @category   Zend

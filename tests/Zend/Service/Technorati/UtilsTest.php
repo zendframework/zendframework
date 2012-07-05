@@ -20,6 +20,8 @@
  */
 
 namespace ZendTest\Service\Technorati;
+
+use DateTime;
 use Zend\Service\Technorati;
 
 /**
@@ -78,10 +80,10 @@ class UtilsTest extends TestCase
      */
     public function testSetDateInputDateInstanceReturnsInstance()
     {
-        $date   = new \Zend\Date\Date('2007-11-11 08:47:26 GMT');
+        $date   = new DateTime('2007-11-11 08:47:26 GMT');
         $result = Technorati\Utils::normalizeDate($date);
 
-        $this->assertInstanceOf('Zend\Date\Date', $result);
+        $this->assertInstanceOf('DateTime', $result);
         $this->assertEquals($date, $result);
     }
 
@@ -94,7 +96,7 @@ class UtilsTest extends TestCase
         try {
             Technorati\Utils::normalizeDate($inputInvalid);
             $this->fail('Expected Zend\Service\Technorati\Exception\RuntimeException not thrown');
-        } catch (Technorati\Exception\RuntimeException $e) {
+        } catch (\Exception $e) {
             $this->assertContains($inputInvalid, $e->getMessage());
         }
     }

@@ -21,7 +21,7 @@
 
 namespace ZendTest\Form\View\Helper;
 
-use Zend\Form\Element;
+use Zend\Form\Element\MultiCheckbox as MultiCheckboxElement;
 use Zend\Form\View\Helper\FormMultiCheckbox as FormMultiCheckboxHelper;
 
 /**
@@ -39,12 +39,30 @@ class FormMultiCheckboxTest extends CommonTestCase
         parent::setUp();
     }
 
-    public function getElement() 
+    public function getElement()
     {
-        $element = new Element('foo');
+        $element = new MultiCheckboxElement('foo');
         $options = array(
             'This is the first label' => 'value1',
             'This is the second label' => 'value2',
+            'This is the third label' => 'value3',
+        );
+        $element->setAttribute('options', $options);
+        return $element;
+    }
+
+    public function getElementWithOptionSpec()
+    {
+        $element = new MultiCheckboxElement('foo');
+        $options = array(
+            'This is the first label' => 'value1',
+            'This is the second label' => array(
+                'value'           => 'value2',
+                'label'           => 'This is the second label (overridden)',
+                'disabled'        => false,
+                'label_attributes' => array('class' => 'label-class'),
+                'attributes'      => array('class' => 'input-class'),
+            ),
             'This is the third label' => 'value3',
         );
         $element->setAttribute('options', $options);
@@ -60,6 +78,57 @@ class FormMultiCheckboxTest extends CommonTestCase
         $this->assertEquals(3, substr_count($markup, 'name="foo'));
         $this->assertEquals(3, substr_count($markup, 'type="checkbox"'));
         $this->assertEquals(3, substr_count($markup, '<input'));
+        $this->assertEquals(3, substr_count($markup, '<label'));
+
+        foreach ($options as $label => $value) {
+            $this->assertContains(sprintf('>%s</label>', $label), $markup);
+            $this->assertContains(sprintf('value="%s"', $value), $markup);
+        }
+    }
+
+    public function testUsesOptionsAttributeWithOptionSpecToGenerateCheckBoxes()
+    {
+        $element = $this->getElementWithOptionSpec();
+        $options = $element->getAttribute('options');
+        $markup  = $this->helper->render($element);
+
+        $this->assertEquals(3, substr_count($markup, 'name="foo'));
+        $this->assertEquals(3, substr_count($markup, 'type="checkbox"'));
+        $this->assertEquals(3, substr_count($markup, '<input'));
+        $this->assertEquals(3, substr_count($markup, '<label'));
+
+        $this->assertContains(
+            sprintf('>%s</label>', 'This is the first label'), $markup
+        );
+        $this->assertContains(sprintf('value="%s"', 'value1'), $markup);
+
+        $this->assertContains(
+            sprintf('>%s</label>', 'This is the second label (overridden)'), $markup
+        );
+        $this->assertContains(sprintf('value="%s"', 'value2'), $markup);
+        $this->assertEquals(1, substr_count($markup, 'class="label-class"'));
+        $this->assertEquals(1, substr_count($markup, 'class="input-class"'));
+
+        $this->assertContains(
+            sprintf('>%s</label>', 'This is the third label'), $markup
+        );
+        $this->assertContains(sprintf('value="%s"', 'value3'), $markup);
+
+    }
+
+    public function testGenerateCheckBoxesAndHiddenElement()
+    {
+        $element = $this->getElement();
+        $element->setUseHiddenElement(true);
+        $element->setUncheckedValue('none');
+        $options = $element->getAttribute('options');
+        $markup  = $this->helper->render($element);
+
+        $this->assertEquals(4, substr_count($markup, 'name="foo'));
+        $this->assertEquals(1, substr_count($markup, 'type="hidden"'));
+        $this->assertEquals(1, substr_count($markup, 'value="none"'));
+        $this->assertEquals(3, substr_count($markup, 'type="checkbox"'));
+        $this->assertEquals(4, substr_count($markup, '<input'));
         $this->assertEquals(3, substr_count($markup, '<label'));
 
         foreach ($options as $label => $value) {
@@ -102,6 +171,26 @@ class FormMultiCheckboxTest extends CommonTestCase
         foreach ($options as $label => $value) {
             $this->assertContains(sprintf('<label>%s<', $label), $markup);
         }
+    }
+
+    public function testAllowsSpecifyingLabelAttributes()
+    {
+        $element = $this->getElement();
+
+        $markup  = $this->helper
+            ->setLabelAttributes(array('class' => 'checkbox'))
+            ->render($element);
+
+        $this->assertEquals(3, substr_count($markup, '<label class="checkbox"'));
+    }
+
+    public function testAllowsSpecifyingLabelAttributesInElementAttributes()
+    {
+        $element = $this->getElement();
+        $element->setLabelAttributes(array('class' => 'checkbox'));
+        $markup  = $this->helper->render($element);
+
+        $this->assertEquals(3, substr_count($markup, '<label class="checkbox"'));
     }
 
     public function testIdShouldNotBeRenderedForEachRadio()

@@ -20,6 +20,8 @@
  */
 
 namespace ZendTest\View\Helper;
+
+use Zend\I18n\Translator\Translator;
 use Zend\View\Helper\Placeholder\Registry;
 use Zend\View\Helper;
 
@@ -54,11 +56,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = Registry::REGISTRY_KEY;
-        if (\Zend\Registry::isRegistered($regKey)) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry[$regKey]);
-        }
+        Registry::unsetRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new Helper\HeadTitle();
     }
@@ -189,9 +187,16 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
 
     public function testCanTranslateTitle()
     {
-        $adapter = new \Zend\Translator\Adapter\Ini(__DIR__ . '/../../Translator/Adapter/_files/translation_en.ini', 'en');
-        \Zend\Registry::set('Zend_Translator', $adapter);
+        $loader = new TestAsset\ArrayTranslator();
+        $loader->translations = array(
+            'Message_1' => 'Message 1 (en)',
+        );
+        $translator = new Translator();
+        $translator->getPluginManager()->setService('default', $loader);
+        $translator->addTranslationFile('default', null);
+
         $this->helper->enableTranslation();
+        $this->helper->setTranslator($translator);
         $this->helper->__invoke('Message_1');
         $this->assertEquals('<title>Message 1 (en)</title>', $this->helper->toString());
     }

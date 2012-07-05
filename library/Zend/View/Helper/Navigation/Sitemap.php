@@ -448,6 +448,8 @@ class Sitemap extends AbstractHelper
                $dom->saveXML() :
                $dom->saveXML($dom->documentElement);
 
-        return rtrim($xml, PHP_EOL);
+        // DOMDocument ends lines with a "\n" character. We want this to be the PHP_EOL character
+        // in order to keep unit tests working.
+        return str_replace("\n", PHP_EOL, rtrim($xml, PHP_EOL) );
     }
 }

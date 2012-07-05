@@ -49,16 +49,9 @@ class ContentType implements HeaderInterface
      */
     protected $parameters = array();
 
-    /**
-     * Factory: create Content-Type header object from string
-     *
-     * @param  string $headerLine
-     * @throws Exception\InvalidArgumentException
-     * @return ContentType
-     */
     public static function fromString($headerLine)
     {
-        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
+        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
         list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
@@ -84,22 +77,12 @@ class ContentType implements HeaderInterface
         return $header;
     }
 
-    /**
-     * Get header name
-     * 
-     * @return string
-     */
     public function getFieldName()
     {
         return 'Content-Type';
     }
 
-    /**
-     * Get header value
-     * 
-     * @return string
-     */
-    public function getFieldValue()
+    public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
         $prepared = $this->type;
         if (empty($this->parameters)) {
@@ -110,40 +93,24 @@ class ContentType implements HeaderInterface
         foreach ($this->parameters as $attribute => $value) {
             $values[] = sprintf('%s="%s"', $attribute, $value);
         }
-        $value = implode(';' . Headers::FOLDING, $values);
-        return $value;
+
+        return implode(';' . Headers::FOLDING, $values);
     }
 
-    /**
-     * Set header encoding
-     * 
-     * @param  string $encoding 
-     * @return ContentType
-     */
     public function setEncoding($encoding) 
     {
         $this->encoding = $encoding;
         return $this;
     }
 
-    /**
-     * Get header encoding
-     * 
-     * @return string
-     */
     public function getEncoding()
     {
         return $this->encoding;
     }
 
-    /**
-     * Serialize header to string
-     * 
-     * @return string
-     */
     public function toString()
     {
-        return 'Content-Type: ' . $this->getFieldValue();
+        return 'Content-Type: ' . $this->getFieldValue(HeaderInterface::FORMAT_RAW);
     }
 
     /**

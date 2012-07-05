@@ -21,7 +21,7 @@
 
 namespace Zend\Dojo\View\Helper;
 
-use Zend\Filter\Alnum as AlnumFilter;
+use Zend\I18n\Filter\Alnum as AlnumFilter;
 
 /**
  * Dojo RadioButton dijit

@@ -70,7 +70,7 @@ class EventFeature extends AbstractFeature
         $this->eventManager->trigger($this->event);
     }
 
-    public function postSelect(StatementInterface $statement, ResultInterface $result, ResultSet $resultSet)
+    public function postSelect(StatementInterface $statement, ResultInterface $result, ResultSetInterface $resultSet)
     {
         $this->event->setTarget($this->tableGateway);
         $this->event->setName(__FUNCTION__);

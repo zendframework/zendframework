@@ -80,7 +80,7 @@ class Response
     public function setEncoding($encoding)
     {
         $this->_encoding = $encoding;
-        Value::setEncoding($encoding);
+        AbstractValue::setEncoding($encoding);
         return $this;
     }
 
@@ -126,7 +126,7 @@ class Response
      */
     protected function _getXmlRpcReturn()
     {
-        return Value::getXmlRpcValue($this->_return);
+        return AbstractValue::getXmlRpcValue($this->_return);
     }
 
     /**
@@ -167,11 +167,15 @@ class Response
             return false;
         }
 
+        // @see ZF-12293 - disable external entities for security purposes
+        $loadEntities         = libxml_disable_entity_loader(true);
+        $useInternalXmlErrors = libxml_use_internal_errors(true);
         try {
-            $useInternalXmlErrors = libxml_use_internal_errors(true);
             $xml = new \SimpleXMLElement($response);
+            libxml_disable_entity_loader($loadEntities);
             libxml_use_internal_errors($useInternalXmlErrors);
         } catch (\Exception $e) {
+            libxml_disable_entity_loader($loadEntities);
             libxml_use_internal_errors($useInternalXmlErrors);
             // Not valid XML
             $this->_fault = new Fault(651);
@@ -199,7 +203,7 @@ class Response
                 throw new Exception\ValueException('Missing XML-RPC value in XML');
             }
             $valueXml = $xml->params->param->value->asXML();
-            $value = Value::getXmlRpcValue($valueXml, Value::XML_STRING);
+            $value = AbstractValue::getXmlRpcValue($valueXml, AbstractValue::XML_STRING);
         } catch (Exception\ValueException $e) {
             $this->_fault = new Fault(653);
             $this->_fault->setEncoding($this->getEncoding());
@@ -218,7 +222,7 @@ class Response
     public function saveXml()
     {
         $value = $this->_getXmlRpcReturn();
-        $generator = Value::getGenerator();
+        $generator = AbstractValue::getGenerator();
         $generator->openElement('methodResponse')
                   ->openElement('params')
                   ->openElement('param');

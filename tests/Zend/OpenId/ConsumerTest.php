@@ -68,7 +68,7 @@ class ConsumerTest extends TestCase
         $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, null, null, null, $response) );
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
 
         $this->assertTrue(1 <= count($headers));
         $this->assertTrue($headers->has('Location'));
@@ -99,7 +99,7 @@ class ConsumerTest extends TestCase
         $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", null, $response) );
-        $headers  = $response->headers();
+        $headers  = $response->getHeaders();
         $location = $headers->get('Location');
         $url      = $location->getFieldValue();
         $url      = parse_url($url);
@@ -127,7 +127,7 @@ class ConsumerTest extends TestCase
         $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", null, $response) );
-        $headers  = $response->headers();
+        $headers  = $response->getHeaders();
         $location = $headers->get('Location');
         $url      = $location->getFieldValue();
         $url      = parse_url($url);
@@ -154,7 +154,7 @@ class ConsumerTest extends TestCase
         $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", $ext, $response) );
-        $headers  = $response->headers();
+        $headers  = $response->getHeaders();
         $location = $headers->get('Location');
         $url      = $location->getFieldValue();
         $url      = parse_url($url);
@@ -183,7 +183,7 @@ class ConsumerTest extends TestCase
         $response = new ResponseHelper(true);
         $consumer = new Consumer($storage, true);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", null, $response) );
-        $headers  = $response->headers();
+        $headers  = $response->getHeaders();
         $location = $headers->get('Location');
         $url      = $location->getFieldValue();
         $url      = parse_url($url);
@@ -225,7 +225,7 @@ class ConsumerTest extends TestCase
         $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->check(self::ID, null, null, null, $response) );
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
 
         $this->assertTrue(1 <= count($headers));
         $this->assertTrue($headers->has('Location'));

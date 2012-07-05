@@ -47,6 +47,14 @@ interface ElementInterface
     public function getName();
 
     /**
+     * Set options for an element
+     *
+     * @param  array|\Traversable $options
+     * @return ElementInterface
+     */
+    public function setOptions($options);
+
+    /**
      * Set a single element attribute
      * 
      * @param  string $key 
@@ -57,18 +65,26 @@ interface ElementInterface
 
     /**
      * Retrieve a single element attribute
-     * 
-     * @param  string $optionalKey 
+     *
+     * @param  string $key
      * @return mixed
      */
     public function getAttribute($key);
+
+    /**
+     * Return true if a specific attribute is set
+     *
+     * @param  string $key
+     * @return bool
+     */
+    public function hasAttribute($key);
 
     /**
      * Set many attributes at once
      *
      * Implementation will decide if this will overwrite or merge.
      * 
-     * @param  array|\Traversable $arrayOrTraversable 
+     * @param  array|\Traversable $arrayOrTraversable
      * @return ElementInterface
      */
     public function setAttributes($arrayOrTraversable);
@@ -79,6 +95,21 @@ interface ElementInterface
      * @return array|\Traversable
      */
     public function getAttributes();
+
+    /**
+     * Set the label (if any) used for this element
+     *
+     * @param  $label
+     * @return ElementInterface
+     */
+    public function setLabel($label);
+
+    /**
+     * Retrieve the label (if any) used for this element
+     *
+     * @return string
+     */
+    public function getLabel();
 
     /**
      * Set a list of messages to report when validation fails

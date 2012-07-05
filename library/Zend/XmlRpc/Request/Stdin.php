@@ -20,8 +20,8 @@
 
 namespace Zend\XmlRpc\Request;
 
-use Zend\XmlRpc\Request as XmlRpcRequest,
-    Zend\XmlRpc\Server\Exception as ServerException;
+use Zend\XmlRpc\Request as XmlRpcRequest;
+use Zend\XmlRpc\Server\Exception as ServerException;
 
 /**
  * XmlRpc Request object -- Request via STDIN

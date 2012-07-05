@@ -20,10 +20,10 @@
  */
 
 namespace ZendTest\Feed\Writer\Renderer\Entry;
+
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer;
 use Zend\Feed\Reader;
-use Zend\Date;
 
 /**
  * @category   Zend
@@ -169,7 +169,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $renderer = new Renderer\Feed\Rss($this->_validWriter);
         $feed     = Reader\Reader::importString($renderer->render()->saveXml());
         $entry    = $feed->current();
-        $this->assertEquals(1234567890, $entry->getDateModified()->get(Date\Date::TIMESTAMP));
+        $this->assertEquals(1234567890, $entry->getDateModified()->getTimestamp());
     }
 
     public function testEntryPublishedDateHasBeenSet()
@@ -178,7 +178,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $renderer = new Renderer\Feed\Rss($this->_validWriter);
         $feed     = Reader\Reader::importString($renderer->render()->saveXml());
         $entry    = $feed->current();
-        $this->assertEquals(1234567000, $entry->getDateCreated()->get(Date\Date::TIMESTAMP));
+        $this->assertEquals(1234567000, $entry->getDateCreated()->getTimestamp());
     }
 
     public function testEntryIncludesLinkToHtmlVersionOfFeed()

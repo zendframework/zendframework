@@ -87,7 +87,7 @@ class FormTextarea extends AbstractHelper
      * Proxies to {@link render()}.
      * 
      * @param  ElementInterface|null $element 
-     * @return string
+     * @return string|FormTextarea
      */
     public function __invoke(ElementInterface $element = null)
     {

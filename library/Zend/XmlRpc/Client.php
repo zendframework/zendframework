@@ -21,9 +21,9 @@
 
 namespace Zend\XmlRpc;
 
-use Zend\Http,
-    Zend\Server\Client as ServerClient,
-    Zend\XmlRpc\Value;
+use Zend\Http;
+use Zend\Server\Client as ServerClient;
+use Zend\XmlRpc\AbstractValue;
 
 /**
  * An XML-RPC client implementation
@@ -223,11 +223,11 @@ class Client implements ServerClient
 
         $http        = $this->getHttpClient();
         $httpRequest = $http->getRequest();
-        if ($httpRequest->getUri() === null) {
+        if ($httpRequest->getUriString() === null) {
             $http->setUri($this->_serverAddress);
         }
 
-        $headers = $httpRequest->headers();
+        $headers = $httpRequest->getHeaders();
         $headers->addHeaders(array(
             'Content-Type: text/xml; charset=utf-8',
             'Accept: text/xml',
@@ -280,28 +280,28 @@ class Client implements ServerClient
             }
             if ($success) {
                 $validTypes = array(
-                    Value::XMLRPC_TYPE_ARRAY,
-                    Value::XMLRPC_TYPE_BASE64,
-                    Value::XMLRPC_TYPE_BOOLEAN,
-                    Value::XMLRPC_TYPE_DATETIME,
-                    Value::XMLRPC_TYPE_DOUBLE,
-                    Value::XMLRPC_TYPE_I4,
-                    Value::XMLRPC_TYPE_INTEGER,
-                    Value::XMLRPC_TYPE_NIL,
-                    Value::XMLRPC_TYPE_STRING,
-                    Value::XMLRPC_TYPE_STRUCT,
+                    AbstractValue::XMLRPC_TYPE_ARRAY,
+                    AbstractValue::XMLRPC_TYPE_BASE64,
+                    AbstractValue::XMLRPC_TYPE_BOOLEAN,
+                    AbstractValue::XMLRPC_TYPE_DATETIME,
+                    AbstractValue::XMLRPC_TYPE_DOUBLE,
+                    AbstractValue::XMLRPC_TYPE_I4,
+                    AbstractValue::XMLRPC_TYPE_INTEGER,
+                    AbstractValue::XMLRPC_TYPE_NIL,
+                    AbstractValue::XMLRPC_TYPE_STRING,
+                    AbstractValue::XMLRPC_TYPE_STRUCT,
                 );
 
                 if (!is_array($params)) {
                     $params = array($params);
                 }
                 foreach ($params as $key => $param) {
-                    if ($param instanceof Value) {
+                    if ($param instanceof AbstractValue) {
                         continue;
                     }
 
                     if (count($signatures) > 1) {
-                        $type = Value::getXmlRpcTypeByValue($param);
+                        $type = AbstractValue::getXmlRpcTypeByValue($param);
                         foreach ($signatures as $signature) {
                             if (!is_array($signature)) {
                                 continue;
@@ -319,10 +319,10 @@ class Client implements ServerClient
                     }
 
                     if (empty($type) || !in_array($type, $validTypes)) {
-                        $type = Value::AUTO_DETECT_TYPE;
+                        $type = AbstractValue::AUTO_DETECT_TYPE;
                     }
 
-                    $params[$key] = Value::getXmlRpcValue($param, $type);
+                    $params[$key] = AbstractValue::getXmlRpcValue($param, $type);
                 }
             }
         }

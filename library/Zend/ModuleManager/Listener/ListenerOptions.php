@@ -11,7 +11,7 @@
 namespace Zend\ModuleManager\Listener;
 
 use Traversable;
-use Zend\Stdlib\Options;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * Listener options
@@ -20,7 +20,7 @@ use Zend\Stdlib\Options;
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-class ListenerOptions extends Options
+class ListenerOptions extends AbstractOptions
 {
     /**
      * @var array

@@ -20,9 +20,6 @@
 
 namespace Zend\Filter;
 
-use Traversable;
-use Zend\Stdlib\ArrayUtils;
-
 /**
  * @category   Zend
  * @package    Zend_Filter
@@ -34,16 +31,38 @@ class RealPath extends AbstractFilter
     /**
      * @var boolean $_pathExists
      */
-    protected $_exists = true;
+    protected $options = array(
+        'exists' => true
+    );
 
     /**
      * Class constructor
      *
      * @param boolean|\Traversable $options Options to set
      */
-    public function __construct($options = true)
+    public function __construct($existsOrOptions = true)
     {
-        $this->setExists($options);
+        if ($existsOrOptions !== null) {
+            if (!static::isOptions($existsOrOptions)){
+                $this->setExists($existsOrOptions);
+            } else {
+                $this->setOptions($existsOrOptions);
+            }
+        }
+    }
+
+    /**
+     * Sets if the path has to exist
+     * TRUE when the path must exist
+     * FALSE when not existing paths can be given
+     *
+     * @param  boolean $flag Path must exist
+     * @return RealPath
+     */
+    public function setExists($flag = true)
+    {
+        $this->options['exists'] = (boolean) $flag;
+        return $this;
     }
 
     /**
@@ -53,31 +72,7 @@ class RealPath extends AbstractFilter
      */
     public function getExists()
     {
-        return $this->_exists;
-    }
-
-    /**
-     * Sets if the path has to exist
-     * TRUE when the path must exist
-     * FALSE when not existing paths can be given
-     *
-     * @param boolean|array|Traversable $options Path must exist
-     * @return RealPath
-     */
-    public function setExists($options)
-    {
-        if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
-        }
-
-        if (is_array($options)) {
-            if (isset($options['exists'])) {
-                $options = (boolean) $options['exists'];
-            }
-        }
-
-        $this->_exists = (boolean) $options;
-        return $this;
+        return $this->options['exists'];
     }
 
     /**
@@ -91,7 +86,7 @@ class RealPath extends AbstractFilter
     public function filter($value)
     {
         $path = (string) $value;
-        if ($this->_exists) {
+        if ($this->options['exists']) {
             return realpath($path);
         }
 
@@ -101,10 +96,10 @@ class RealPath extends AbstractFilter
         }
 
         $drive = '';
-        if (substr(PHP_OS, 0, 3) == 'WIN') {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $path = preg_replace('/[\\\\\/]/', DIRECTORY_SEPARATOR, $path);
             if (preg_match('/([a-zA-Z]\:)(.*)/', $path, $matches)) {
-                list($fullMatch, $drive, $path) = $matches;
+                list(, $drive, $path) = $matches;
             } else {
                 $cwd   = getcwd();
                 $drive = substr($cwd, 0, 2);

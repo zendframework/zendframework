@@ -80,7 +80,7 @@ interface PartInterface extends RecursiveIterator
      * The returned headers are as saved internally. All names are lowercased. The value is a string or an array
      * if a header with the same name occurs more than once.
      *
-     * @return array headers as array(name => value)
+     * @return \Zend\Mail\Headers
      */
     public function getHeaders();
 
@@ -92,7 +92,7 @@ interface PartInterface extends RecursiveIterator
      *
      * @param  string $name   name of header, matches case-insensitive, but camel-case is replaced with dashes
      * @param  string $format change type of return value to 'string' or 'array'
-     * @return string|array value of header in wanted or internal format
+     * @return string|array|\Zend\Mail\Header\HeaderInterface|\ArrayIterator value of header in wanted or internal format
      * @throws Exception\ExceptionInterface
      */
     public function getHeader($name, $format = null);

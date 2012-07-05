@@ -55,11 +55,11 @@ class Socket implements HttpAdapter, StreamInterface
 
     /**
      * Stream for storing output
-     * 
+     *
      * @var resource
      */
     protected $out_stream = null;
-    
+
     /**
      * Parameters array
      *
@@ -237,7 +237,7 @@ class Socket implements HttpAdapter, StreamInterface
         }
     }
 
-    
+
     /**
      * Send request to the remote server
      *
@@ -279,12 +279,12 @@ class Socket implements HttpAdapter, StreamInterface
             // Add the request body
             $request .= "\r\n" . $body;
         }
-        
+
         // Send the request
         if (! @fwrite($this->socket, $request)) {
             throw new AdapterException\RuntimeException('Error writing request to server');
         }
-        
+
         if (is_resource($body)) {
             if (stream_copy_to_stream($body, $this->socket) == 0) {
                 throw new AdapterException\RuntimeException('Error writing request to server');
@@ -312,18 +312,18 @@ class Socket implements HttpAdapter, StreamInterface
                 if (rtrim($line) === '') break;
             }
         }
-        
+
         $this->_checkSocketReadTimeout();
 
         $responseObj= Response::fromString($response);
-        
+
         $statusCode = $responseObj->getStatusCode();
 
         // Handle 100 and 101 responses internally by restarting the read again
         if ($statusCode == 100 || $statusCode == 101) return $this->read();
 
         // Check headers to see what kind of connection / transfer encoding we have
-        $headers = $responseObj->headers();
+        $headers = $responseObj->getHeaders();
 
         /**
          * Responses to HEAD requests and 204 or 304 responses are not expected
@@ -344,7 +344,7 @@ class Socket implements HttpAdapter, StreamInterface
         $transfer_encoding = $headers->get('transfer-encoding');
         $content_length = $headers->get('content-length');
         if ($transfer_encoding !== false) {
-            
+
             if (strtolower($transfer_encoding->getFieldValue()) == 'chunked') {
 
                 do {
@@ -374,7 +374,7 @@ class Socket implements HttpAdapter, StreamInterface
                         if ($this->out_stream) {
                             if (stream_copy_to_stream($this->socket, $this->out_stream, $read_to - $current_pos) == 0) {
                               $this->_checkSocketReadTimeout();
-                              break;   
+                              break;
                              }
                         } else {
                             $line = @fread($this->socket, $read_to - $current_pos);
@@ -398,7 +398,7 @@ class Socket implements HttpAdapter, StreamInterface
                 throw new AdapterException\RuntimeException('Cannot handle "' .
                     $transfer_encoding->getFieldValue() . '" transfer encoding');
             }
-            
+
             // We automatically decode chunked-messages when writing to a stream
             // this means we have to disallow the Zend_Http_Response to do it again
             if ($this->out_stream) {
@@ -413,7 +413,7 @@ class Socket implements HttpAdapter, StreamInterface
                 $content_length = $content_length[count($content_length) - 1];
             }
             $contentLength = $content_length->getFieldValue();
-            
+
             $current_pos = ftell($this->socket);
             $chunk = '';
 
@@ -424,7 +424,7 @@ class Socket implements HttpAdapter, StreamInterface
                  if ($this->out_stream) {
                      if (@stream_copy_to_stream($this->socket, $this->out_stream, $read_to - $current_pos) == 0) {
                           $this->_checkSocketReadTimeout();
-                          break;   
+                          break;
                      }
                  } else {
                     $chunk = @fread($this->socket, $read_to - $current_pos);
@@ -447,7 +447,7 @@ class Socket implements HttpAdapter, StreamInterface
                 if ($this->out_stream) {
                     if (@stream_copy_to_stream($this->socket, $this->out_stream) == 0) {
                           $this->_checkSocketReadTimeout();
-                          break;   
+                          break;
                      }
                 } else {
                     $buff = @fread($this->socket, 8192);
@@ -504,19 +504,19 @@ class Socket implements HttpAdapter, StreamInterface
             }
         }
     }
-    
+
     /**
      * Set output stream for the response
-     * 
+     *
      * @param resource $stream
      * @return \Zend\Http\Client\Adapter\Socket
      */
-    public function setOutputStream($stream) 
+    public function setOutputStream($stream)
     {
         $this->out_stream = $stream;
         return $this;
     }
-    
+
     /**
      * Destructor: make sure the socket is disconnected
      *

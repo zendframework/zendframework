@@ -21,7 +21,6 @@
 
 namespace Zend\View\Helper\Placeholder;
 
-use Zend\Registry as RegistryZend;
 use Zend\View\Exception;
 
 /**
@@ -35,10 +34,9 @@ use Zend\View\Exception;
 class Registry
 {
     /**
-     * Zend_Registry key under which placeholder registry exists
-     * @const string
+     * @var Registry Singleton instance 
      */
-    const REGISTRY_KEY = 'Zend\View\Helper\Placeholder\Registry';
+    protected static $instance;
 
     /**
      * Default container class
@@ -55,18 +53,27 @@ class Registry
     /**
      * Retrieve or create registry instance
      *
-     * @return mixed
+     * @return Registry
      */
     public static function getRegistry()
     {
-        if (RegistryZend::isRegistered(self::REGISTRY_KEY)) {
-            $registry = RegistryZend::get(self::REGISTRY_KEY);
-        } else {
-            $registry = new self();
-            RegistryZend::set(self::REGISTRY_KEY, $registry);
+        if (null === static::$instance) {
+            static::$instance = new self();
         }
 
-        return $registry;
+        return static::$instance;
+    }
+
+    /**
+     * Unset the singleton
+     *
+     * Primarily useful for testing purposes; sets {@link $instance} to null.
+     * 
+     * @return void
+     */
+    public static function unsetRegistry()
+    {
+        static::$instance = null;
     }
 
     /**

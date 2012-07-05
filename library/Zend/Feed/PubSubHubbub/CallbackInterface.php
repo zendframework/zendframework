@@ -55,7 +55,7 @@ interface CallbackInterface
      * Zend_Feed_Pubsubhubbub_HttpResponse which shares an unenforced interface with
      * (i.e. not inherited from) Zend_Controller_Response_Http.
      *
-     * @param Zend\Feed\PubSubHubbub\HttpResponse|\Zend\Controller\Response\Http $httpResponse
+     * @param HttpResponse|\Zend\Http\PhpEnvironment\Response $httpResponse
      */
     public function setHttpResponse($httpResponse);
 
@@ -64,7 +64,7 @@ interface CallbackInterface
      * Zend_Feed_Pubsubhubbub_HttpResponse which shares an unenforced interface with
      * (i.e. not inherited from) Zend_Controller_Response_Http.
      *
-     * @return Zend\Feed\PubSubHubbub\HttpResponse|\Zend\Controller\Response\Http
+     * @return HttpResponse|\Zend\Http\PhpEnvironment\Response
      */
     public function getHttpResponse();
 }

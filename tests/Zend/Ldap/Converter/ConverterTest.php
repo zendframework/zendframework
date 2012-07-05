@@ -23,7 +23,6 @@ namespace ZendTest\Ldap\Converter;
 
 use DateTime;
 use DateTimeZone;
-use Zend\Date\Date;
 use Zend\Ldap\Converter\Converter;
 
 /**
@@ -84,11 +83,11 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
                         'utc' => false), '20100512131445+0300'),
             array(array('date'=> '2010-05-12 13:14:45+0300',
                         'utc' => true), '20100512101445Z'),
-            array(array('date'=> new Date('2010-05-12T13:14:45+0300', Date::ISO_8601),
+            array(array('date'=> DateTime::createFromFormat(DateTime::ISO8601, '2010-05-12T13:14:45+0300'),
                         'utc' => true), '20100512101445Z'),
-            array(array('date'=> new Date('2010-05-12T13:14:45+0300', Date::ISO_8601),
+            array(array('date'=> DateTime::createFromFormat(DateTime::ISO8601, '2010-05-12T13:14:45+0300'),
                         'utc' => false), '20100512131445+0300'),
-            array(array('date'=> new Date('0', Date::TIMESTAMP),
+            array(array('date'=> date_timestamp_set(new DateTime(), 0),
                         'utc' => true), '19700101000000Z'),
         );
     }
@@ -153,7 +152,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
                              'type' => 0)),
             array('FALSE', array('value'=> 0,
                                  'type' => 1)),
-            array('19700101000000Z', array('value'=> new Date('1970-01-01T00:00:00+0000', Date::ISO_8601),
+            array('19700101000000Z', array('value'=> DateTime::createFromFormat(DateTime::ISO8601, '1970-01-01T00:00:00+0000'),
                                            'type' => 0)),
 
         );
@@ -192,6 +191,11 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider fromLdapDateTimeProvider
+     *
+     * @param DateTime $expected
+     * @param string   $convert
+     * @param boolean  $utc
+     * @return void
      */
     public function testFromLdapDateTime($expected, $convert, $utc)
     {

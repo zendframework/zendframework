@@ -28,7 +28,7 @@ namespace Zend\XmlRpc\Value;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Struct extends Collection
+class Struct extends AbstractCollection
 {
     /**
      * Set the value of an struct native type

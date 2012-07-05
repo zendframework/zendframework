@@ -33,6 +33,24 @@ use Zend\Form\Exception;
  */
 class FormButton extends FormInput
 {
+    /**
+     * Attributes valid for the button tag
+     *
+     * @var array
+     */
+    protected $validTagAttributes = array(
+        'name'           => true,
+        'autofocus'      => true,
+        'disabled'       => true,
+        'form'           => true,
+        'formaction'     => true,
+        'formenctype'    => true,
+        'formmethod'     => true,
+        'formnovalidate' => true,
+        'formtarget'     => true,
+        'type'           => true,
+        'value'          => true,
+    );
 
     /**
      * Valid values for the button type
@@ -135,7 +153,7 @@ class FormButton extends FormInput
      *
      * @param  ElementInterface|null $element
      * @param  null|string $buttonContent
-     * @return string
+     * @return string|FormButton
      */
     public function __invoke(ElementInterface $element = null, $buttonContent = null)
     {

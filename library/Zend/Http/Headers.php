@@ -195,7 +195,7 @@ class Headers implements Iterator, Countable
 
     /**
      * Add a Header to this container, for raw values @see addHeaderLine() and addHeaders()
-     * 
+     *
      * @param  Header\HeaderInterface $header
      * @return Headers
      */
@@ -229,7 +229,7 @@ class Headers implements Iterator, Countable
      * Clear all headers
      *
      * Removes all headers from queue
-     * 
+     *
      * @return Headers
      */
     public function clearHeaders()
@@ -240,7 +240,7 @@ class Headers implements Iterator, Countable
 
     /**
      * Get all headers of a certain name/type
-     * 
+     *
      * @param  string $name
      * @return bool|Header\HeaderInterface|ArrayIterator
      */
@@ -279,7 +279,7 @@ class Headers implements Iterator, Countable
 
     /**
      * Test for existence of a type of header
-     * 
+     *
      * @param  string $name
      * @return bool
      */

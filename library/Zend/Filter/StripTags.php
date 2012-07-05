@@ -63,7 +63,6 @@ class StripTags extends AbstractFilter
      *     'allowComments' => Are comments allowed ?
      *
      * @param  string|array|Traversable $options
-     * @return void
      */
     public function __construct($options = null)
     {

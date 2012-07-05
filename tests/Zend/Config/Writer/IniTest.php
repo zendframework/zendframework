@@ -21,9 +21,9 @@
 
 namespace ZendTest\Config\Writer;
 
-use \Zend\Config\Writer\Ini as IniWriter,
-    \Zend\Config\Config,
-    \Zend\Config\Reader\Ini as IniReader;
+use Zend\Config\Writer\Ini as IniWriter;
+use Zend\Config\Config;
+use Zend\Config\Reader\Ini as IniReader;
 
 /**
  * @category   Zend
@@ -35,14 +35,11 @@ use \Zend\Config\Writer\Ini as IniWriter,
  */
 class IniTest extends AbstractWriterTestCase
 {
-
     public function setUp()
     {
         $this->reader = new IniReader();
         $this->writer = new IniWriter();
     }
-
-   
 
     public function testNoSection()
     {
@@ -58,13 +55,12 @@ class IniTest extends AbstractWriterTestCase
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = $this->reader->fromFile(__DIR__ . '/files/allsections.ini');
+        $config = $this->reader->fromFile(__DIR__ . '/_files/allsections.ini');
 
         $this->writer->toFile($this->getTestAssetFileName(), $config);
 
         $config = $this->reader->fromFile($this->getTestAssetFileName());
 
         $this->assertEquals('multi', $config['all']['one']['two']['three']);
-
     }
 }

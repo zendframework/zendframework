@@ -68,8 +68,16 @@ class Compress extends AbstractFilter
      * @param  array $options
      * @return Compress
      */
-    public function setOptions(array $options)
+    public function setOptions($options)
     {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '"%s" expects an array or Traversable; received "%s"',
+                __METHOD__,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+
         foreach ($options as $key => $value) {
             if ($key == 'options') {
                 $key = 'adapterOptions';
@@ -86,6 +94,7 @@ class Compress extends AbstractFilter
      * Returns the current adapter, instantiating it if necessary
      *
      * @return string
+     * @throws Exception\InvalidArgumentException
      */
     public function getAdapter()
     {
@@ -128,6 +137,7 @@ class Compress extends AbstractFilter
      *
      * @param  string|Compress\CompressionAlgorithmInterface $adapter Adapter to use
      * @return Compress
+     * @throws Exception\InvalidArgumentException
      */
     public function setAdapter($adapter)
     {
@@ -166,10 +176,23 @@ class Compress extends AbstractFilter
     }
 
     /**
+     * Get individual or all options from underlying adapter
+     * 
+     * @param  null|string $option 
+     * @return mixed
+     */
+    public function getOptions($option = null)
+    {
+        $adapter = $this->getAdapter();
+        return $adapter->getOptions($option);
+    }
+
+    /**
      * Calls adapter methods
      *
      * @param string       $method  Method to call
      * @param string|array $options Options for this method
+     * @throws Exception\BadMethodCallException
      */
     public function __call($method, $options)
     {

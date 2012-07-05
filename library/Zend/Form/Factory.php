@@ -77,6 +77,7 @@ class Factory
      *
      * @param  array|Traversable $spec
      * @return ElementInterface
+     * @throws Exception\DomainException
      */
     public function create($spec)
     {
@@ -124,6 +125,7 @@ class Factory
      * Specification can contain any of the following:
      * - type: the Element class to use; defaults to \Zend\Form\Element
      * - name: what name to provide the element, if any
+     * - options: an array, Traversable, or ArrayAccess object of element options
      * - attributes: an array, Traversable, or ArrayAccess object of element
      *   attributes to assign
      *
@@ -138,6 +140,7 @@ class Factory
 
         $type       = isset($spec['type'])       ? $spec['type']       : 'Zend\Form\Element';
         $name       = isset($spec['name'])       ? $spec['name']       : null;
+        $options    = isset($spec['options'])    ? $spec['options']    : null;
         $attributes = isset($spec['attributes']) ? $spec['attributes'] : null;
 
         $element = new $type();
@@ -149,8 +152,12 @@ class Factory
             ));
         }
 
-        if ($name) {
+        if ($name !== null && $name !== '') {
             $element->setName($name);
+        }
+
+        if (is_array($options) || $options instanceof Traversable || $options instanceof ArrayAccess) {
+            $element->setOptions($options);
         }
 
         if (is_array($attributes) || $attributes instanceof Traversable || $attributes instanceof ArrayAccess) {
@@ -166,6 +173,7 @@ class Factory
      * Specification can contain any of the following:
      * - type: the Fieldset class to use; defaults to \Zend\Form\Fieldset
      * - name: what name to provide the fieldset, if any
+     * - options: an array, Traversable, or ArrayAccess object of element options
      * - attributes: an array, Traversable, or ArrayAccess object of element
      *   attributes to assign
      * - elements: an array or Traversable object where each entry is an array
@@ -210,6 +218,10 @@ class Factory
      *
      * Specification follows that of {@link createFieldset()}, and adds the
      * following keys:
+     *
+     * - input_filter: input filter instance, named input filter class, or 
+     *   array specification for the input filter factory
+     * - hydrator: hydrator instance or named hydrator class
      *
      * @param  array|Traversable|ArrayAccess $spec
      * @return FormInterface

@@ -98,7 +98,7 @@ class FormLabelTest extends CommonTestCase
     public function testPassingElementToInvokeGeneratesLabelMarkup()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
+        $element->setLabel('The value for foo:');
         $markup = $this->helper->__invoke($element);
         $this->assertContains('>The value for foo:<', $markup);
         $this->assertContains('for="foo"', $markup);
@@ -119,7 +119,7 @@ class FormLabelTest extends CommonTestCase
     public function testPassingElementAndContentAndFlagToInvokeUsesLabelAttribute()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
+        $element->setLabel('The value for foo:');
         $markup = $this->helper->__invoke($element, '<input type="text" id="foo" />', FormLabelHelper::PREPEND);
         $this->assertContains('>The value for foo:<input', $markup);
         $this->assertContains('for="foo"', $markup);
@@ -131,7 +131,7 @@ class FormLabelTest extends CommonTestCase
     public function testCanAppendLabelContentUsingFlagToInvoke()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
+        $element->setLabel('The value for foo:');
         $markup = $this->helper->__invoke($element, '<input type="text" id="foo" />', FormLabelHelper::APPEND);
         $this->assertContains('"foo" />The value for foo:</label>', $markup);
         $this->assertContains('for="foo"', $markup);

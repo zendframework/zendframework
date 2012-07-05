@@ -20,9 +20,9 @@
 
 namespace Zend\Feed\Reader;
 
-use ArrayObject,
-    DOMNodeList,
-    Zend\Uri;
+use ArrayObject;
+use DOMNodeList;
+use Zend\Uri;
 
 /**
 * @category Zend

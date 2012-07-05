@@ -21,10 +21,10 @@
 
 namespace ZendTest\Log\Writer;
 
-use ZendTest\Log\TestAsset\CustomSyslogWriter,
-    Zend\Log\Writer\Syslog as SyslogWriter,
-    Zend\Log\Logger,
-    Zend\Log\Formatter\Simple as SimpleFormatter;
+use ZendTest\Log\TestAsset\CustomSyslogWriter;
+use Zend\Log\Writer\Syslog as SyslogWriter;
+use Zend\Log\Logger;
+use Zend\Log\Formatter\Simple as SimpleFormatter;
 
 /**
  * @category   Zend

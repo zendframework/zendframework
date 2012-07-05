@@ -21,12 +21,12 @@
 
 namespace Zend\Mvc\View;
 
-use Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregateInterface,
-    Zend\Mvc\MvcEvent,
-    Zend\Stdlib\ResponseInterface as Response,
-    Zend\View\Model\ModelInterface as ViewModel,
-    Zend\View\View;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Mvc\MvcEvent;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\View\Model\ModelInterface as ViewModel;
+use Zend\View\View;
 
 /**
  * @category   Zend

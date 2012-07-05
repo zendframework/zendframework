@@ -20,17 +20,8 @@
  */
 
 namespace ZendTest\Validator;
-use Zend\Validator,
-    ReflectionClass;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validator_Between
- */
-
+use Zend\Validator\Between;
 
 /**
  * @category   Zend
@@ -65,7 +56,7 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
             array('a', 'z', false, false, array('!', 'a', 'z'))
             );
         foreach ($valuesExpected as $element) {
-            $validator = new Validator\Between(array('min' => $element[0], 'max' => $element[1], 'inclusive' => $element[2]));
+            $validator = new Between(array('min' => $element[0], 'max' => $element[1], 'inclusive' => $element[2]));
             foreach ($element[4] as $input) {
                 $this->assertEquals($element[3], $validator->isValid($input),
                 'Failed values: ' . $input . ":" . implode("\n", $validator->getMessages()));
@@ -80,7 +71,7 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessages()
     {
-        $validator = new Validator\Between(array('min' => 1, 'max' => 10));
+        $validator = new Between(array('min' => 1, 'max' => 10));
         $this->assertEquals(array(), $validator->getMessages());
     }
 
@@ -91,7 +82,7 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMin()
     {
-        $validator = new Validator\Between(array('min' => 1, 'max' => 10));
+        $validator = new Between(array('min' => 1, 'max' => 10));
         $this->assertEquals(1, $validator->getMin());
     }
 
@@ -102,7 +93,7 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMax()
     {
-        $validator = new Validator\Between(array('min' => 1, 'max' => 10));
+        $validator = new Between(array('min' => 1, 'max' => 10));
         $this->assertEquals(10, $validator->getMax());
     }
 
@@ -113,43 +104,21 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInclusive()
     {
-        $validator = new Validator\Between(array('min' => 1, 'max' => 10));
+        $validator = new Between(array('min' => 1, 'max' => 10));
         $this->assertEquals(true, $validator->getInclusive());
     }
-    
+
     public function testEqualsMessageTemplates()
     {
-        $validator = new Validator\Between(array('min' => 1, 'max' => 10));
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
+        $validator = new Between(array('min' => 1, 'max' => 10));
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
-    
+
     public function testEqualsMessageVariables()
     {
-        $validator = new Validator\Between(array('min' => 1, 'max' => 10));
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $validator = new Between(array('min' => 1, 'max' => 10));
+        $this->assertAttributeEquals($validator->getOption('messageVariables'),
+                                     'messageVariables', $validator);
     }
 }

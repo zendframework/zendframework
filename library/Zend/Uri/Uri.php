@@ -31,16 +31,23 @@ class Uri
     const CHAR_RESERVED   = ':\/\?#\[\]@!\$&\'\(\)\*\+,;=';
 
     /**
-     * Host part types
+     * Host part types represented as binary masks
+     * The binary mask consists of 5 bits in the following order:
+     * <RegName> | <DNS> | <IPvFuture> | <IPv6> | <IPv4>
+     * Place 1 or 0 in the different positions for enable or disable the part.
+     * Finally use a hexadecimal representation.
      */
-    const HOST_IPV4      = 1;
-    const HOST_IPV6      = 2;
-    const HOST_IPVF      = 4;
-    const HOST_IPVANY    = 7;
-    const HOST_DNSNAME   = 8;
-    const HOST_DNSORIPV4 = 9;
-    const HOST_REGNAME   = 16;
-    const HOST_ALL       = 31;
+    const HOST_IPV4                 = 0x01; //00001
+    const HOST_IPV6                 = 0x02; //00010
+    const HOST_IPVFUTURE            = 0x04; //00100
+    const HOST_IPVANY               = 0x07; //00111
+    const HOST_DNS                  = 0x08; //01000
+    const HOST_DNS_OR_IPV4          = 0x09; //01001
+    const HOST_DNS_OR_IPV6          = 0x0A; //01010
+    const HOST_DNS_OR_IPV4_OR_IPV6  = 0x0B; //01011
+    const HOST_DNS_OR_IPVANY        = 0x0F; //01111
+    const HOST_REGNAME              = 0x10; //10000
+    const HOST_ALL                  = 0x1F; //11111
 
     /**
      * URI scheme
@@ -834,7 +841,7 @@ class Uri
             }
         }
 
-        if ($allowed & self::HOST_DNSNAME) {
+        if ($allowed & self::HOST_DNS) {
             if (static::isValidDnsHostname($host)) {
                 return true;
             }
@@ -1104,7 +1111,7 @@ class Uri
             'allowipv6' => (bool) ($allowed & self::HOST_IPV6),
         );
 
-        if ($allowed & (self::HOST_IPV6 | self::HOST_IPVF)) {
+        if ($allowed & (self::HOST_IPV6 | self::HOST_IPVFUTURE)) {
             if (preg_match('/^\[(.+)\]$/', $host, $match)) {
                 $host = $match[1];
                 $validatorParams['allowipv4'] = false;
@@ -1118,7 +1125,7 @@ class Uri
             }
         }
 
-        if ($allowed & self::HOST_IPVF) {
+        if ($allowed & self::HOST_IPVFUTURE) {
             $regex = '/^v\.[[:xdigit:]]+[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':]+$/';
             return (bool) preg_match($regex, $host);
         }

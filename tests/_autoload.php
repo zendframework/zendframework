@@ -2,55 +2,19 @@
 /**
  * Setup autoloading
  */
-function ZendTest_Autoloader($class) 
-{
-    $class = ltrim($class, '\\');
 
-    if (!preg_match('#^(Zend(Test)?|PHPUnit)(\\\\|_)#', $class)) {
-        return false;
-    }
-
-    // $segments = explode('\\', $class); // preg_split('#\\\\|_#', $class);//
-    $segments = preg_split('#[\\\\_]#', $class); // preg_split('#\\\\|_#', $class);//
-    $ns       = array_shift($segments);
-
-    switch ($ns) {
-        case 'Zend':
-            $file = dirname(__DIR__) . '/library/Zend/';
-            break;
-        case 'ZendTest':
-            // temporary fix for ZendTest namespace until we can migrate files 
-            // into ZendTest dir
-            $file = __DIR__ . '/Zend/';
-            break;
-        default:
-            $file = false;
-            break;
-    }
-
-    if ($file) {
-        $file .= implode('/', $segments) . '.php';
-        if (file_exists($file)) {
-            return include_once $file;
-        }
-    }
-
-    $segments = explode('_', $class);
-    $ns       = array_shift($segments);
-
-    switch ($ns) {
-        case 'Zend':
-            $file = dirname(__DIR__) . '/library/Zend/';
-            break;
-        default:
-            return false;
-    }
-    $file .= implode('/', $segments) . '.php';
-    if (file_exists($file)) {
-        return include_once $file;
-    }
-
-    return false;
+if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    include_once __DIR__ . '/../vendor/autoload.php';
+} else {
+    // if composer autoloader is missing, explicitly load the standard
+    // autoloader by relativepath
+    require_once __DIR__ . '/../library/Zend/Loader/StandardAutoloader.php';
 }
-spl_autoload_register('ZendTest_Autoloader', true, true);
 
+$loader = new Zend\Loader\StandardAutoloader(array(
+    Zend\Loader\StandardAutoloader::LOAD_NS => array(
+        'Zend'     => __DIR__ . '/../library/Zend', // present in case composer autoloader missing
+        'ZendTest' => __DIR__ . '/Zend',
+    ),
+));
+$loader->register();

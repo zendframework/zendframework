@@ -21,6 +21,8 @@
 
 namespace Zend\Validator\Sitemap;
 
+use Zend\Validator\AbstractValidator;
+
 /**
  * Validates whether a given value is valid as a sitemap <priority> value
  *
@@ -32,7 +34,7 @@ namespace Zend\Validator\Sitemap;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Priority extends \Zend\Validator\AbstractValidator
+class Priority extends AbstractValidator
 {
     /**
      * Validation key for not valid
@@ -46,8 +48,8 @@ class Priority extends \Zend\Validator\AbstractValidator
      *
      * @var array
      */
-    protected $_messageTemplates = array(
-        self::NOT_VALID => "'%value%' is not a valid sitemap priority",
+    protected $messageTemplates = array(
+        self::NOT_VALID => "The input is not a valid sitemap priority",
         self::INVALID   => "Invalid type given. Numeric string, integer or float expected",
     );
 

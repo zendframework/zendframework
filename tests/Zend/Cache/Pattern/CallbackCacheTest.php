@@ -122,7 +122,7 @@ class CallbackCacheTest extends CommonPatternTest
 
         $generatedKey = $this->_pattern->generateKey($callback, $args);
         $usedKey      = null;
-        $this->_options->getStorage()->events()->attach('setItem.pre', function ($event) use (&$usedKey) {
+        $this->_options->getStorage()->getEventManager()->attach('setItem.pre', function ($event) use (&$usedKey) {
             $params = $event->getParams();
             $usedKey = $params['key'];
         });

@@ -126,7 +126,7 @@ EOS;
     {
         $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
-        $this->assertEquals(16, $reflectionClass->getStartLine());
+        $this->assertEquals(18, $reflectionClass->getStartLine());
         $this->assertEquals(5, $reflectionClass->getStartLine(true));
     }
 

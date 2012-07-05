@@ -20,8 +20,8 @@
  */
 
 namespace Zend\Service\Amazon\S3;
-use Zend\Service\Amazon,
-    Zend\Service\Amazon\S3\Exception;
+use Zend\Service\Amazon;
+use Zend\Service\Amazon\S3\Exception;
 
 /**
  * Amazon S3 PHP stream wrapper

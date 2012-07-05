@@ -45,7 +45,7 @@ class HttpTest extends TestCase
      *
      * @return array
      */
-    static public function validSchemeProvider()
+    public function validSchemeProvider()
     {
         return array(
             array('http'),
@@ -55,12 +55,39 @@ class HttpTest extends TestCase
         );
     }
 
+    public function validHostProvider()
+    {
+        return array(
+            array('',                                   false),
+            array('http',                               true),
+            array('http:',                              false),
+            array('http:/',                             false),
+            array('http://',                            false),
+            array('http:///',                           false),
+            array('http://www.example.org/',            false),
+            array('www.example.org:80',                 false),
+            array('www.example.org',                    true),
+            array('http://foo',                         false),
+            array('foo',                                true),
+            array('ftp://user:pass@example.org/',       false),
+            array('www.fi/',                            false),
+            array('http://1.1.1.1/',                    false),
+            array('1.1.1.1',                            true),
+            array('1.256.1.1',                          true), // Hostnames can be only numbers
+            array('http://[::1]/',                      false),
+            array('[::1]',                              true),
+            array('http://[2620:0:1cfe:face:b00c::3]/', false),
+            array('[2620:0:1cfe:face:b00c::3]:80',      false),
+            array('[2620:0:1cfe:face:b00c::3]',         true),
+        );
+    }
+
     /**
      * Invalid HTTP schemes
      *
      * @return array
      */
-    static public function invalidSchemeProvider()
+    public function invalidSchemeProvider()
     {
         return array(
             array('file'),
@@ -70,7 +97,7 @@ class HttpTest extends TestCase
         );
     }
 
-    static public function portNormalizationTestsProvider()
+    public function portNormalizationTestsProvider()
     {
         return array(
             array('http://www.example.com:80/foo/bar', 'http://www.example.com/foo/bar'),
@@ -121,6 +148,19 @@ class HttpTest extends TestCase
     public function testValidateSchemeInvalid($scheme)
     {
         $this->assertFalse(HttpUri::validateScheme($scheme));
+    }
+
+    /**
+     * Test the validity of the hosts
+     *
+     * @param string  $host
+     * @param boolean $expected
+     * @return void
+     * @dataProvider validHostProvider
+     */
+    public function testValidateHost($host, $expected)
+    {
+        $this->assertEquals($expected, HttpUri::validateHost($host), "Wrong Host validation $host");
     }
 
     /**

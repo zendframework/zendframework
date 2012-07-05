@@ -23,7 +23,6 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\Element;
 use Zend\Form\ElementInterface;
-use Zend\Loader\Pluggable;
 use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
 /**
@@ -40,14 +39,14 @@ class FormElement extends BaseAbstractHelper
      *
      * Introspects the element type and attributes to determine which
      * helper to utilize when rendering.
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @return string
      */
     public function render(ElementInterface $element)
     {
         $renderer = $this->getView();
-        if (!$renderer instanceof Pluggable) {
+        if (!method_exists($renderer, 'plugin')) {
             // Bail early if renderer is not pluggable
             return '';
         }
@@ -62,19 +61,13 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
+        if ($element instanceof Element\Collection) {
+            $helper = $renderer->plugin('form_collection');
+            return $helper($element);
+        }
+
         $type    = $element->getAttribute('type');
         $options = $element->getAttribute('options');
-        $captcha = $element->getAttribute('captcha');
-
-        if (!empty($captcha)) {
-            $helper = $renderer->plugin('form_captcha');
-            return $helper($element);
-        }
-
-        if (is_array($options) && $type == 'radio') {
-            $helper = $renderer->plugin('form_radio');
-            return $helper($element);
-        }
 
         if ($type == 'checkbox') {
             $helper = $renderer->plugin('form_checkbox');
@@ -83,6 +76,11 @@ class FormElement extends BaseAbstractHelper
 
         if (is_array($options) && $type == 'multi_checkbox') {
             $helper = $renderer->plugin('form_multi_checkbox');
+            return $helper($element);
+        }
+
+        if (is_array($options) && $type == 'radio') {
+            $helper = $renderer->plugin('form_radio');
             return $helper($element);
         }
 
@@ -96,7 +94,6 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
-
         $helper = $renderer->plugin('form_input');
         return $helper($element);
     }
@@ -105,9 +102,9 @@ class FormElement extends BaseAbstractHelper
      * Invoke helper as function
      *
      * Proxies to {@link render()}.
-     * 
-     * @param  ElementInterface|null $element 
-     * @return string
+     *
+     * @param  ElementInterface|null $element
+     * @return string|FormElement
      */
     public function __invoke(ElementInterface $element = null)
     {

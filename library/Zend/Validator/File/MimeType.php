@@ -20,10 +20,10 @@
 
 namespace Zend\Validator\File;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Validator\AbstractValidator,
-    Zend\Validator\Exception;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Validator\AbstractValidator;
+use Zend\Validator\Exception;
 
 /**
  * Validator for the mime type of a file
@@ -46,7 +46,7 @@ class MimeType extends AbstractValidator
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::FALSE_TYPE   => "File '%value%' has a false mimetype of '%type%'",
         self::NOT_DETECTED => "The mimetype of file '%value%' could not be detected",
         self::NOT_READABLE => "File '%value%' is not readable or does not exist",
@@ -55,7 +55,7 @@ class MimeType extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'type' => 'type'
     );
 
@@ -107,8 +107,7 @@ class MimeType extends AbstractValidator
      * - FALSE means disabling searching for mimetype, should be used for PHP 5.3
      * - A string is the mimetype file to use
      *
-     * @param  string|array $options
-     * @return void
+     * @param  string|array|Traversable $options
      */
     public function __construct($options = null)
     {
@@ -134,7 +133,7 @@ class MimeType extends AbstractValidator
             unset($options['mimeType']);
         }
 
-        // Handle cases where mimetypes are interspersed with options, or 
+        // Handle cases where mimetypes are interspersed with options, or
         // options are simply an array of mime types
         foreach (array_keys($options) as $key) {
             if (!is_int($key)) {
@@ -160,7 +159,7 @@ class MimeType extends AbstractValidator
                 $this->setMagicFile($magic);
             } elseif (!(@ini_get("safe_mode") == 'On' || @ini_get("safe_mode") === 1)) {
                 foreach ($this->magicFiles as $file) {
-                    // supressing errors which are thrown due to openbase_dir restrictions
+                    // suppressing errors which are thrown due to openbase_dir restrictions
                     try {
                         $this->setMagicFile($file);
                         if ($this->options['magicFile'] !== null) {
@@ -187,19 +186,21 @@ class MimeType extends AbstractValidator
      * if false, the default MAGIC file from PHP will be used
      *
      * @param  string $file
-     * @throws Exception\InvalidArgumentException When finfo can not read the magicfile
      * @return MimeType Provides fluid interface
+     * @throws Exception\RuntimeException When finfo can not read the magicfile
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\InvalidMagicMimeFileException
      */
     public function setMagicFile($file)
     {
         if ($file === false) {
             $this->options['magicFile'] = false;
-        } else if (empty($file)) {
+        } elseif (empty($file)) {
             $this->options['magicFile'] = null;
-        } else if (!(class_exists('finfo', false))) {
+        } elseif (!(class_exists('finfo', false))) {
             $this->options['magicFile'] = null;
             throw new Exception\RuntimeException('Magicfile can not be set; there is no finfo extension installed');
-        } else if (!is_file($file) || !is_readable($file)) {
+        } elseif (!is_file($file) || !is_readable($file)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'The given magicfile ("%s") could not be read',
                 $file
@@ -225,7 +226,7 @@ class MimeType extends AbstractValidator
      * Disables usage of MagicFile
      *
      * @param $disable boolean False disables usage of magic file
-     * @return \Zend\Validator\File\MimeType Provides fluid interface
+     * @return MimeType Provides fluid interface
      */
     public function disableMagicFile($disable)
     {
@@ -255,10 +256,10 @@ class MimeType extends AbstractValidator
 
     /**
      * Defines if the http header should be used
-     * Note that this is unsave and therefor the default value is false
+     * Note that this is unsafe and therefor the default value is false
      *
      * @param  boolean $headerCheck
-     * @return \Zend\Validator\File\MimeType Provides fluid interface
+     * @return MimeType Provides fluid interface
      */
     public function enableHeaderCheck($headerCheck = true)
     {
@@ -301,6 +302,7 @@ class MimeType extends AbstractValidator
      *
      * @param  string|array $mimetype The mimetypes to add for validation
      * @return MimeType Provides a fluent interface
+     * @throws Exception\InvalidArgumentException
      */
     public function addMimeType($mimetype)
     {
@@ -422,7 +424,7 @@ class MimeType extends AbstractValidator
                 if(array_key_exists('name', $file)) {
                     $file = $file['name'];
                 }
-            } 
+            }
 
             if (is_string($file)) {
                 $this->value = basename($file);

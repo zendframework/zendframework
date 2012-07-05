@@ -20,9 +20,9 @@
 
 namespace Zend\Feed\Reader\Entry;
 
-use Zend\Feed\Reader,
-    DOMElement,
-    DOMXPath;
+use Zend\Feed\Reader;
+use DOMElement;
+use DOMXPath;
 
 /**
 * @category Zend
@@ -374,6 +374,7 @@ class Atom extends AbstractEntry implements EntryInterface
      * Set the XPath query (incl. on all Extensions)
      *
      * @param DOMXPath $xpath
+     * @return void
      */
     public function setXpath(DOMXPath $xpath)
     {

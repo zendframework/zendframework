@@ -231,7 +231,7 @@ class Module implements AutoloaderProvider
     <itemizedlist>
       <listitem>
         <para>
-          <classname>Zend\Mvc\Controller\ActionController</classname> allows
+          <classname>Zend\Mvc\Controller\AbstractActionController</classname> allows
           routes to match an "action". When matched, a method named
           after the action will be called by the controller. As an example,
           if you had a route that returned "foo" for the
@@ -242,7 +242,7 @@ class Module implements AutoloaderProvider
 
       <listitem>
         <para>
-          <classname>Zend\Mvc\Controller\RestfulController</classname>
+          <classname>Zend\Mvc\Controller\AbstractRestfulController</classname>
           introspects the Request to determine what HTTP method was used, and
           calls a method based on that accordingly.
         </para>
@@ -297,10 +297,10 @@ class Module implements AutoloaderProvider
 <?php
 namespace <module name>\Controller;
 
-use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class HelloController extends ActionController
+class HelloController extends AbstractActionController
 {
     public function worldAction()
     {

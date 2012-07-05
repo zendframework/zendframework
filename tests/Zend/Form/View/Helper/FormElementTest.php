@@ -24,9 +24,8 @@ namespace ZendTest\Form\View\Helper;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Captcha;
 use Zend\Form\Element;
-use Zend\Form\View\HelperLoader;
+use Zend\Form\View\HelperConfiguration;
 use Zend\Form\View\Helper\FormElement as FormElementHelper;
-use Zend\Registry;
 use Zend\View\Helper\Doctype;
 use Zend\View\Renderer\PhpRenderer;
 
@@ -45,17 +44,14 @@ class FormElementTest extends TestCase
     public function setUp()
     {
         $this->helper = new FormElementHelper();
-        
-        $regKey = 'Zend_View_Helper_Doctype';
-        if (Registry::isRegistered($regKey)) {
-            $registry = Registry::getInstance();
-            unset($registry[$regKey]);
-        }
+
+        Doctype::unsetDoctypeRegistry();
 
         $this->renderer = new PhpRenderer;
-        $broker = $this->renderer->getBroker();
-        $loader = $broker->getClassLoader();
-        $loader->registerPlugins(new HelperLoader());
+        $helpers = $this->renderer->getHelperPluginManager();
+        $config  = new HelperConfiguration();
+        $config->configureServiceManager($helpers);
+
         $this->helper->setView($this->renderer);
     }
 
@@ -93,7 +89,12 @@ class FormElementTest extends TestCase
      */
     public function testRendersExpectedInputElement($type)
     {
-        $element = new Element('foo');
+        if ($type === 'radio') {
+            $element = new Element\Radio('foo');
+        } else {
+            $element = new Element('foo');
+        }
+
         $element->setAttribute('type', $type);
         $element->setAttribute('options', array('option' => 'value'));
         $markup  = $this->helper->render($element);
@@ -117,7 +118,7 @@ class FormElementTest extends TestCase
      */
     public function testRendersMultiElementsAsExpected($type, $inputType, $additionalMarkup)
     {
-        $element = new Element('foo');
+        $element = new Element\MultiCheckbox('foo');
         $element->setAttribute('type', $type);
         $element->setAttribute('options', array(
             'option' => 'value1',
@@ -149,8 +150,20 @@ class FormElementTest extends TestCase
     public function testRendersCsrfAsExpected()
     {
         $element   = new Element\Csrf('foo');
-        $validator = $element->getValidator();
-        $hash      = $validator->getHash();
+        $inputSpec = $element->getInputSpecification();
+        $hash = '';
+
+        foreach ($inputSpec['validators'] as $validator) {
+            $class = get_class($validator);
+            switch ($class) {
+                case 'Zend\Validator\Csrf':
+                    $hash = $validator->getHash();
+                    break;
+                default:
+                    break;
+            }
+        }
+
         $markup    = $this->helper->render($element);
 
         $this->assertRegexp('#<input[^>]*(type="hidden")#', $markup);

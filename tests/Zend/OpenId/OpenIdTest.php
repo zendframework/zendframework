@@ -407,7 +407,7 @@ class OpenIdTest extends \PHPUnit_Framework_TestCase
         OpenId::redirect("http://www.test.com/", null, $response, 'GET');
         $this->assertSame( 302, $response->getStatusCode() );
 
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue(1 <= count($headers));
         $this->assertTrue($headers->has('Location'));
         $location = $headers->get('Location');
@@ -416,27 +416,27 @@ class OpenIdTest extends \PHPUnit_Framework_TestCase
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php?a=b", null, $response, 'GET');
-        $location = $response->headers()->get('Location');
+        $location = $response->getHeaders()->get('Location');
         $this->assertSame( 'http://www.test.com/test.php?a=b', $location->getFieldValue() );
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php", array('a'=>'b'), $response, 'GET');
-        $location = $response->headers()->get('Location');
+        $location = $response->getHeaders()->get('Location');
         $this->assertSame( 'http://www.test.com/test.php?a=b', $location->getFieldValue() );
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php", array('a'=>'b', 'c'=>'d'), $response, 'GET');
-        $location = $response->headers()->get('Location');
+        $location = $response->getHeaders()->get('Location');
         $this->assertSame( 'http://www.test.com/test.php?a=b&c=d', $location->getFieldValue() );
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php?a=b", array('c'=>'d'), $response, 'GET');
-        $location = $response->headers()->get('Location');
+        $location = $response->getHeaders()->get('Location');
         $this->assertSame( 'http://www.test.com/test.php?a=b&c=d', $location->getFieldValue() );
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php", array('a'=>'x y'), $response, 'GET');
-        $location = $response->headers()->get('Location');
+        $location = $response->getHeaders()->get('Location');
         $this->assertSame( 'http://www.test.com/test.php?a=x+y', $location->getFieldValue() );
 
         $response = new ResponseHelper(false);

@@ -29,27 +29,6 @@ namespace Zend\Filter;
 class Digits extends AbstractFilter
 {
     /**
-     * Is PCRE is compiled with UTF-8 and Unicode support
-     *
-     * @var mixed
-     **/
-    protected static $_unicodeEnabled;
-
-    /**
-     * Class constructor
-     *
-     * Checks if PCRE is compiled with UTF-8 and Unicode support
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        if (null === self::$_unicodeEnabled) {
-            self::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
-        }
-    }
-
-    /**
      * Defined by Zend\Filter\FilterInterface
      *
      * Returns the string $value, removing all but digit characters
@@ -59,10 +38,10 @@ class Digits extends AbstractFilter
      */
     public function filter($value)
     {
-        if (!self::$_unicodeEnabled) {
+        if (!static::hasPcreUnicodeSupport()) {
             // POSIX named classes are not supported, use alternative 0-9 match
             $pattern = '/[^0-9]/';
-        } else if (extension_loaded('mbstring')) {
+        } elseif (extension_loaded('mbstring')) {
             // Filter for the value with mbstring
             $pattern = '/[^[:digit:]]/';
         } else {

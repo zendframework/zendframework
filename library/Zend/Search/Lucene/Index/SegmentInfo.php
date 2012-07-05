@@ -21,13 +21,13 @@
 
 namespace Zend\Search\Lucene\Index;
 
-use Zend\Search\Lucene,
-	Zend\Search\Lucene\Search\Similarity,
-	Zend\Search\Lucene\Storage\Directory,
-	Zend\Search\Lucene\Exception\ExceptionInterface,
-	Zend\Search\Lucene\Exception\RuntimeException,
-	Zend\Search\Lucene\Exception\InvalidFileFormatException,
-	Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Search\Similarity\AbstractSimilarity;
+use Zend\Search\Lucene\Storage\Directory;
+use Zend\Search\Lucene\Exception\ExceptionInterface;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Exception\InvalidFileFormatException;
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
 
 /**
  * @category   Zend
@@ -164,7 +164,7 @@ class SegmentInfo implements TermsStreamInterface
      * normVector is a binary string.
      * Each byte corresponds to an indexed document in a segment and
      * encodes normalization factor (float value, encoded by
-     * \Zend\Search\Lucene\Search\Similarity::encodeNorm())
+     * \Zend\Search\Lucene\Search\Similarity\AbstractSimilarity::encodeNorm())
      *
      * @var array
      */
@@ -310,7 +310,7 @@ class SegmentInfo implements TermsStreamInterface
                                                    $fieldBits & 0x20 /* payloads are stored */);
             if ($fieldBits & 0x10) {
                 // norms are omitted for the indexed field
-                $this->_norms[$count] = str_repeat(chr(Similarity::encodeNorm(1.0)), $docCount);
+                $this->_norms[$count] = str_repeat(chr(AbstractSimilarity::encodeNorm(1.0)), $docCount);
             }
 
             $fieldNums[$count]  = $count;
@@ -1380,7 +1380,7 @@ class SegmentInfo implements TermsStreamInterface
             $this->_loadNorm($fieldNum);
         }
 
-        return Similarity::decodeNorm( ord($this->_norms[$fieldNum][$id]) );
+        return AbstractSimilarity::decodeNorm( ord($this->_norms[$fieldNum][$id]) );
     }
 
     /**
@@ -1394,7 +1394,7 @@ class SegmentInfo implements TermsStreamInterface
         $fieldNum = $this->getFieldNum($fieldName);
 
         if ($fieldNum == -1  ||  !($this->_fields[$fieldNum]->isIndexed)) {
-            $similarity = Similarity::getDefault();
+            $similarity = AbstractSimilarity::getDefault();
 
             return str_repeat(chr($similarity->encodeNorm( $similarity->lengthNorm($fieldName, 0) )),
                               $this->_docCount);

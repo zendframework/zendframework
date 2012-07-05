@@ -37,7 +37,7 @@ interface ValidatorInterface
      *
      * @param  mixed $value
      * @return boolean
-     * @throws Exception If validation of $value is impossible
+     * @throws Exception\RuntimeException If validation of $value is impossible
      */
     public function isValid($value);
 

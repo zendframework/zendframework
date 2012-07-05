@@ -21,8 +21,8 @@
 
 namespace ZendTest\XmlRpc;
 
-use Zend\XmlRpc\Value,
-    Zend\XmlRpc;
+use Zend\XmlRpc\AbstractValue;
+use Zend\XmlRpc;
 
 /**
  * Test case for Zend_XmlRpc_Fault
@@ -46,7 +46,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Value::setGenerator(null);
+        AbstractValue::setGenerator(null);
         $this->_fault = new XmlRpc\Fault();
     }
 
@@ -258,10 +258,10 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     public function testSetGetEncoding()
     {
         $this->assertEquals('UTF-8', $this->_fault->getEncoding());
-        $this->assertEquals('UTF-8', Value::getGenerator()->getEncoding());
+        $this->assertEquals('UTF-8', AbstractValue::getGenerator()->getEncoding());
         $this->_fault->setEncoding('ISO-8859-1');
         $this->assertEquals('ISO-8859-1', $this->_fault->getEncoding());
-        $this->assertEquals('ISO-8859-1', Value::getGenerator()->getEncoding());
+        $this->assertEquals('ISO-8859-1', AbstractValue::getGenerator()->getEncoding());
     }
 
     public function testUnknownErrorIsUsedIfUnknownErrorCodeEndEmptyMessageIsPassed()

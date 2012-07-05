@@ -20,11 +20,11 @@
 
 namespace Zend\Mvc\Router;
 
-use ArrayAccess,
-    ArrayIterator,
-    Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface as Request;
+use ArrayAccess;
+use ArrayIterator;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
 
 /**
  * Simple route stack implementation.
@@ -43,11 +43,11 @@ class SimpleRouteStack implements RouteStackInterface
     protected $routes;
 
     /**
-     * Plugin broker to load routes.
+     * Route plugin manager
      *
-     * @var RouteBroker
+     * @var RoutePluginManager
      */
-    protected $routeBroker;
+    protected $routePluginManager;
 
     /**
      * Default parameters.
@@ -61,8 +61,8 @@ class SimpleRouteStack implements RouteStackInterface
      */
     public function __construct()
     {
-        $this->routes      = new PriorityList();
-        $this->routeBroker = new RouteBroker();
+        $this->routes             = new PriorityList();
+        $this->routePluginManager = new RoutePluginManager();
 
         $this->init();
     }
@@ -85,8 +85,8 @@ class SimpleRouteStack implements RouteStackInterface
 
         $instance = new static();
 
-        if (isset($options['route_broker'])) {
-            $instance->setRouteBroker($options['route_broker']);
+        if (isset($options['route_plugins'])) {
+            $instance->setRoutePluginManager($options['route_plugins']);
         }
 
         if (isset($options['routes'])) {
@@ -110,25 +110,25 @@ class SimpleRouteStack implements RouteStackInterface
     }
 
     /**
-     * Set the route broker.
+     * Set the route plugin manager.
      *
-     * @param  RouteBroker $broker
+     * @param  RoutePluginManager $routePlugins
      * @return SimpleRouteStack
      */
-    public function setRouteBroker(RouteBroker $broker)
+    public function setRoutePluginManager(RoutePluginManager $routePlugins)
     {
-        $this->routeBroker = $broker;
+        $this->routePluginManager = $routePlugins;
         return $this;
     }
 
     /**
-     * Get the route broker.
+     * Get the route plugin manager.
      *
-     * @return RouteBroker
+     * @return RoutePluginManager
      */
-    public function routeBroker()
+    public function getRoutePluginManager()
     {
-        return $this->routeBroker;
+        return $this->routePluginManager;
     }
 
     /**
@@ -233,6 +233,7 @@ class SimpleRouteStack implements RouteStackInterface
      *
      * @param  array|\Traversable $specs
      * @return SimpleRouteStack
+     * @throws Exception\InvalidArgumentException
      */
     protected function routeFromArray($specs)
     {
@@ -248,7 +249,7 @@ class SimpleRouteStack implements RouteStackInterface
             $specs['options'] = array();
         }
 
-        $route = $this->routeBroker()->load($specs['type'], $specs['options']);
+        $route = $this->getRoutePluginManager()->get($specs['type'], $specs['options']);
 
         if (isset($specs['priority'])) {
             $route->priority = $specs['priority'];
@@ -290,6 +291,8 @@ class SimpleRouteStack implements RouteStackInterface
      * @param  array $params
      * @param  array $options
      * @return mixed
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public function assemble(array $params = array(), array $options = array())
     {

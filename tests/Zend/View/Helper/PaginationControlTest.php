@@ -21,10 +21,10 @@
 
 namespace ZendTest\View\Helper;
 
-use Zend\Paginator,
-    Zend\View\Helper,
-    Zend\View\Renderer\PhpRenderer as View,
-    Zend\View\Resolver;
+use Zend\Paginator;
+use Zend\View\Helper;
+use Zend\View\Renderer\PhpRenderer as View;
+use Zend\View\Resolver;
 
 /**
  * @category   Zend

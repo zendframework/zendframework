@@ -199,6 +199,39 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $scopedServiceManager->get('foo'));
     }
 
+    public function testCanRetrieveFromParentPeeringManager()
+    {
+        $parent = new ServiceManager();
+        $parent->setService('foo', 'bar');
+        $child  = new ServiceManager();
+        $child->addPeeringServiceManager($parent, ServiceManager::SCOPE_PARENT);
+        $this->assertEquals('bar', $child->get('foo'));
+    }
+
+    public function testCanRetrieveFromChildPeeringManager()
+    {
+        $parent = new ServiceManager();
+        $child  = new ServiceManager();
+        $child->addPeeringServiceManager($parent, ServiceManager::SCOPE_CHILD);
+        $child->setService('foo', 'bar');
+        $this->assertEquals('bar', $parent->get('foo'));
+    }
+
+    public function testAllowsRetrievingFromPeeringContainerFirst()
+    {
+        $parent = new ServiceManager();
+        $parent->setFactory('foo', function($sm) {
+            return 'bar';
+        });
+        $child  = new ServiceManager();
+        $child->setFactory('foo', function($sm) {
+            return 'baz';
+        });
+        $child->addPeeringServiceManager($parent, ServiceManager::SCOPE_PARENT);
+        $child->setRetrieveFromPeeringManagerFirst(true);
+        $this->assertEquals('bar', $child->get('foo'));
+    }
+
     /**
      * @covers Zend\ServiceManager\ServiceManager::create
      */
@@ -232,15 +265,6 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     public function testCreateWithAbstractFactory()
     {
         $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
-        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
-    }
-
-    /**
-     * @covers Zend\ServiceManager\ServiceManager::create
-     */
-    public function testCreateWithCallableAbstractFactory()
-    {
-        $this->serviceManager->addAbstractFactory(function () { return new TestAsset\Foo; });
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
     }
 
@@ -353,7 +377,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager->setService('foo', 'bar');
         $scopedServiceManager = $this->serviceManager->createScopedServiceManager();
         $this->assertNotSame($this->serviceManager, $scopedServiceManager);
-        $this->assertFalse($scopedServiceManager->has('foo', false));
+        $this->assertFalse($scopedServiceManager->has('foo', true, false));
 
         $this->assertContains($this->serviceManager, $this->readAttribute($scopedServiceManager, 'peeringServiceManagers'));
 
@@ -374,19 +398,6 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $foo);
     }
 
-    public function testCanUseStringAbstractFactoryClassName()
-    {
-        $config = new Configuration(array(
-            'abstract_factories' => array(
-                'ZendTest\ServiceManager\TestAsset\FooAbstractFactory',
-            ),
-        ));
-        $serviceManager = new ServiceManager($config);
-        $serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\FooFactory');
-        $foo = $serviceManager->get('unknownObject');
-        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $foo);
-    }
-
     public function testPeeringService()
     {
         $di = new Di();
@@ -398,18 +409,86 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $bar);
     }
 
-    public function testPeeringServiceFallbackOnCreateFailure()
+    public function testDiAbstractServiceFactory()
+    {
+        $di = $this->getMock('Zend\Di\Di');
+        $factory = new DiAbstractServiceFactory($di);
+        $factory->instanceManager()->setConfiguration('ZendTest\ServiceManager\TestAsset\Bar', array('parameters' => array('foo' => array('a'))));
+        $this->serviceManager->addAbstractFactory($factory);
+
+        $this->assertTrue($this->serviceManager->has('ZendTest\ServiceManager\TestAsset\Bar', true));
+
+        $bar = $this->serviceManager->get('ZendTest\ServiceManager\TestAsset\Bar', true);
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $bar);
+    }
+
+    public function testExceptionThrowingFactory()
+    {
+        $this->serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\ExceptionThrowingFactory');
+        try {
+            $this->serviceManager->get('foo');
+            $this->fail("No exception thrown");
+        } catch (Exception\ServiceNotCreatedException $e) {
+            $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\FooException', $e->getPrevious());
+        }
+    }
+
+    /**
+     * @expectedException Zend\ServiceManager\Exception\ServiceNotFoundException
+     */
+    public function testCannotUseUnknownServiceNameForAbstractFactory()
+    {
+        $config = new Configuration(array(
+            'abstract_factories' => array(
+                'ZendTest\ServiceManager\TestAsset\FooAbstractFactory',
+            ),
+        ));
+        $serviceManager = new ServiceManager($config);
+        $serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\FooFactory');
+        $foo = $serviceManager->get('unknownObject');
+    }
+
+    /**
+     * @expectedException Zend\ServiceManager\Exception\ServiceNotCreatedException
+     */
+    public function testDoNotFallbackToAbstractFactory()
     {
         $factory = function ($sm) {
             return new TestAsset\Bar();
         };
         $serviceManager = new ServiceManager();
         $serviceManager->setFactory('ZendTest\ServiceManager\TestAsset\Bar', $factory);
-        $sm = $serviceManager->createScopedServiceManager(ServiceManager::SCOPE_CHILD);
         $di = new Di();
         $di->instanceManager()->setParameters('ZendTest\ServiceManager\TestAsset\Bar', array('foo' => array('a')));
-        $sm->addAbstractFactory(new DiAbstractServiceFactory($di));
+        $serviceManager->addAbstractFactory(new DiAbstractServiceFactory($di));
         $bar = $serviceManager->get('ZendTest\ServiceManager\TestAsset\Bar');
-        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $bar);
+    }
+
+    /**
+     * @expectedException Zend\ServiceManager\Exception\InvalidServiceNameException
+     */
+    public function testAssignAliasWithExistingServiceName()
+    {
+        $this->serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\FooFactory');
+        $this->serviceManager->setFactory('bar', function ($sm)
+            {
+                return new Bar(array('a'));
+            });
+        $this->serviceManager->setAllowOverride(false);
+        // should throw an exception because 'foo' already exists in the service manager
+        $this->serviceManager->setAlias('foo', 'bar');
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::createFromAbstractFactory
+     * @covers Zend\ServiceManager\ServiceManager::has
+     */
+    public function testWillNotCreateCircularReferences()
+    {
+        $abstractFactory = new TestAsset\CircularDependencyAbstractFactory();
+        $sm = new ServiceManager();
+        $sm->addAbstractFactory($abstractFactory);
+        $foo = $sm->get('foo');
+        $this->assertSame($abstractFactory->expectedInstance, $foo);
     }
 }

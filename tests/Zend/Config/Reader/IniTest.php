@@ -21,7 +21,7 @@
 
 namespace ZendTest\Config\Reader;
 
-use \Zend\Config\Reader\Ini;
+use Zend\Config\Reader\Ini;
 
 /**
  * @category   Zend

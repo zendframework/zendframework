@@ -20,8 +20,8 @@
 
 namespace Zend\OAuth\Http;
 
-use Zend\OAuth\Http as HTTPClient,
-    Zend\Uri;
+use Zend\OAuth\Http as HTTPClient;
+use Zend\Uri;
 
 /**
  * @category   Zend

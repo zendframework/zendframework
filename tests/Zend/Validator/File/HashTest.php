@@ -20,11 +20,8 @@
  */
 
 namespace ZendTest\Validator\File;
-use Zend\Validator\File;
 
-/**
- * @see Zend_Validator_File_Hash
- */
+use Zend\Validator\File;
 
 /**
  * Hash testbed

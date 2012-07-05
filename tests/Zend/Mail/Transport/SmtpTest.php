@@ -62,7 +62,7 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
                 ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
                 ->setSubject('Testing Zend\Mail\Transport\Sendmail')
                 ->setBody('This is only a test.');
-        $message->headers()->addHeaders(array(
+        $message->getHeaders()->addHeaders(array(
             'X-Foo-Bar' => 'Matthew',
         ));
         return $message;
@@ -136,40 +136,40 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $this->assertContains("\r\n\r\nThis is only a test.", $data, $data);
     }
 
-    public function testCanUseAuthenticationExtensionsViaPluginBroker()
+    public function testCanUseAuthenticationExtensionsViaPluginManager()
     {
         $options    = new SmtpOptions(array(
             'connection_class' => 'login',
         ));
         $transport  = new Smtp($options);
-        $connection = $transport->plugin($options->getConnectionClass(), array(array(
+        $connection = $transport->plugin($options->getConnectionClass(), array(
             'username' => 'matthew',
             'password' => 'password',
             'host'     => 'localhost',
-        )));
+        ));
         $this->assertInstanceOf('Zend\Mail\Protocol\Smtp\Auth\Login', $connection);
         $this->assertEquals('matthew', $connection->getUsername());
         $this->assertEquals('password', $connection->getPassword());
     }
-    
+
     public function testSetAutoDisconnect()
     {
         $this->transport->setAutoDisconnect(false);
         $this->assertFalse($this->transport->getAutoDisconnect());
     }
-    
+
     public function testGetDefaultAutoDisconnectValue()
     {
         $this->assertTrue($this->transport->getAutoDisconnect());
     }
-    
+
     public function testAutoDisconnectTrue()
     {
         $this->connection->connect();
         unset($this->transport);
         $this->assertFalse($this->connection->isConnected());
     }
-    
+
     public function testAutoDisconnectFalse()
     {
         $this->connection->connect();
@@ -177,7 +177,7 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         unset($this->transport);
         $this->assertTrue($this->connection->isConnected());
     }
-    
+
     public function testDisconnect()
     {
         $this->connection->connect();

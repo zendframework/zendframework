@@ -20,9 +20,8 @@
 
 namespace Zend\Session;
 
-use Zend\EventManager\EventManagerInterface,
-    Zend\Session\SaveHandler\SaveHandlerInterface,
-    Zend\Validator\Alnum as AlnumValidator;
+use Zend\EventManager\EventManagerInterface;
+use Zend\Session\SaveHandler\SaveHandlerInterface;
 
 /**
  * Session ManagerInterface implementation utilizing ext/session
@@ -201,12 +200,15 @@ class SessionManager extends AbstractManager
     public function setName($name)
     {
         if ($this->sessionExists()) {
-            throw new Exception\InvalidArgumentException('Cannot set session name after a session has already started');
+            throw new Exception\InvalidArgumentException(
+                'Cannot set session name after a session has already started'
+            );
         }
 
-        $validator = new AlnumValidator();
-        if (!$validator->isValid($name)) {
-            throw new Exception\InvalidArgumentException('Name provided contains invalid characters; must be alphanumeric only');
+        if (!preg_match('/^[a-zA-Z0-9]+$/', $name)) {
+            throw new Exception\InvalidArgumentException(
+                'Name provided contains invalid characters; must be alphanumeric only'
+            );
         }
 
         $this->name = $name;
@@ -257,11 +259,6 @@ class SessionManager extends AbstractManager
      */
     public function regenerateId($deleteOldSession = true)
     {
-        if (!$this->sessionExists()) {
-            session_regenerate_id((bool) $deleteOldSession);
-            return $this;
-        }
-
         session_regenerate_id((bool) $deleteOldSession);
         return $this;
     }

@@ -59,15 +59,17 @@ class HttpAdapterStreamingSocket extends Adapter\Socket
     {
         // Make sure we're properly connected
         if (! $this->socket) {
-            throw new Adapter\Exception(
-                'Trying to write but we are not connected');
+            throw new Adapter\Exception\RuntimeException(
+                'Trying to write but we are not connected'
+            );
         }
 
         $host = $uri->getHost();
         $host = (strtolower($uri->getScheme()) == 'https' ? $this->config['ssltransport'] : 'tcp') . '://' . $host;
         if ($this->connected_to[0] != $host || $this->connected_to[1] != $uri->getPort()) {
-            throw new Adapter\Exception(
-                'Trying to write but we are connected to the wrong host');
+            throw new Adapter\Exception\RuntimeException(
+                'Trying to write but we are connected to the wrong host'
+            );
         }
 
         // Save request method for later
@@ -85,8 +87,9 @@ class HttpAdapterStreamingSocket extends Adapter\Socket
         // Send the headers over
         $request .= "\r\n";
         if (! @fwrite($this->socket, $request)) {
-            throw new Adapter\Exception(
-                'Error writing request to server');
+            throw new Adapter\Exception\RuntimeException(
+                'Error writing request to server'
+            );
         }
 
 
@@ -94,8 +97,9 @@ class HttpAdapterStreamingSocket extends Adapter\Socket
         $chunk = $body->read(self::CHUNK_SIZE);
         while ($chunk !== FALSE) {
             if (! @fwrite($this->socket, $chunk)) {
-                throw new Adapter\Exception(
-                    'Error writing request to server');
+                throw new Adapter\Exception\RuntimeException(
+                    'Error writing request to server'
+                );
             }
             $chunk = $body->read(self::CHUNK_SIZE);
         }

@@ -22,7 +22,6 @@ namespace Zend\Ldap\Converter;
 
 use DateTime;
 use DateTimeZone;
-use Zend\Date\Date;
 
 /**
  * Zend\Ldap\Converter is a collection of useful LDAP related conversion functions.
@@ -114,8 +113,6 @@ class Converter
                     } else if (is_object($value)) {
                         if ($value instanceof DateTime) {
                             return self::toLdapDatetime($value);
-                        } else if ($value instanceof Date) {
-                            return self::toLdapDatetime($value);
                         } else {
                             return self::toLdapSerialize($value);
                         }
@@ -137,11 +134,10 @@ class Converter
      * Converts a date-entity to an LDAP-compatible date-string
      *
      * The date-entity <var>$date</var> can be either a timestamp, a
-     * DateTime Object, a string that is parseable by strtotime() or a Zend\Date\Date
-     * Object.
+     * DateTime Object, a string that is parseable by strtotime().
      *
-     * @param integer|string|DateTime|Date $date  The date-entity
-     * @param boolean                      $asUtc Whether to return the LDAP-compatible date-string as UTC or as local value
+     * @param integer|string|DateTime $date  The date-entity
+     * @param boolean                 $asUtc Whether to return the LDAP-compatible date-string as UTC or as local value
      * @return string
      * @throws Exception\InvalidArgumentException
      */
@@ -153,8 +149,6 @@ class Converter
                 $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
             } else if (is_string($date)) {
                 $date = new DateTime($date);
-            } else if ($date instanceof Date) {
-                $date = new DateTime($date->get(Date::ISO_8601));
             } else {
                 throw new Exception\InvalidArgumentException('Parameter $date is not of the expected type');
             }

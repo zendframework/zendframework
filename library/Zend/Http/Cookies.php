@@ -11,7 +11,7 @@ use Zend\Uri,
  * be used along with Zend_Http_Client in order to manage cookies across HTTP requests and
  * responses.
  *
- * The class contains an array of Zend\Http\Header\Cookie objects. Cookies can be added 
+ * The class contains an array of Zend\Http\Header\Cookie objects. Cookies can be added
  * automatically from a request or manually. Then, the Cookies class can find and return the
  * cookies needed for a specific HTTP request.
  *
@@ -31,48 +31,6 @@ use Zend\Uri,
  */
 class Cookies extends Headers
 {
-
-
-
-
-//    /**
-//     * Return cookie(s) as a Zend\Http\Header\Cookie object
-//     *
-//     */
-//    const COOKIE_OBJECT = 0;
-//
-//    /**
-//     * Return cookie(s) as a string (suitable for sending in an HTTP request)
-//     *
-//     */
-//    const COOKIE_STRING_ARRAY = 1;
-//
-//    /**
-//     * Return all cookies as one long string (suitable for sending in an HTTP request)
-//     *
-//     */
-//    const COOKIE_STRING_CONCAT = 2;
-//
-//    /**
-//     * Array storing cookies
-//     *
-//     * Cookies are stored according to domain and path:
-//     * $cookies
-//     *  + www.mydomain.com
-//     *    + /
-//     *      - cookie1
-//     *      - cookie2
-//     *    + /somepath
-//     *      - othercookie
-//     *  + www.otherdomain.net
-//     *    + /
-//     *      - alsocookie
-//     *
-//     * @var array
-//     */
-
-
-
     /**
      * @var Headers
      */
@@ -91,13 +49,6 @@ class Cookies extends Headers
             . __NAMESPACE__ . '\Headers::fromtString() instead.'
         );
     }
-
-//    /**
-//     * The Zend\Http\Header\Cookie array
-//     *
-//     * @var array
-//     */
-//    protected $_rawCookies = array();
 
     public function __construct(Headers $headers, $context = self::CONTEXT_REQUEST)
     {
@@ -142,7 +93,7 @@ class Cookies extends Headers
      */
     public function addCookiesFromResponse(Response $response, $ref_uri)
     {
-        $cookie_hdrs = $response->headers()->get('Set-Cookie');
+        $cookie_hdrs = $response->getHeaders()->get('Set-Cookie');
 
         if (is_array($cookie_hdrs)) {
             foreach ($cookie_hdrs as $cookie) {
@@ -358,7 +309,7 @@ class Cookies extends Headers
     }
 
     /**
-     * Tells if the array of cookies is empty 
+     * Tells if the array of cookies is empty
      *
      * @return bool
      */

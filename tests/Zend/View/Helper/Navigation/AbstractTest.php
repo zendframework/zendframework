@@ -29,8 +29,9 @@ use Zend\Config\Factory as ConfigFactory;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Service\ServiceManagerConfiguration;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Translator\Translator;
+use Zend\I18n\Translator\Translator;
 use Zend\View\Renderer\PhpRenderer;
+use ZendTest\View\Helper\TestAsset;
 
 /**
  * Base class for navigation view helper tests
@@ -196,7 +197,8 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     protected function _getTranslator()
     {
-        $data = array(
+        $loader = new TestAsset\ArrayTranslator();
+        $loader->translations = array(
             'Page 1'       => 'Side 1',
             'Page 1.1'     => 'Side 1.1',
             'Page 2'       => 'Side 2',
@@ -205,7 +207,9 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
             'Home'         => 'Hjem',
             'Go home'      => 'Gå hjem'
         );
-
-        return new Translator('ArrayAdapter', $data, 'nb_NO');
+        $translator = new Translator();
+        $translator->getPluginManager()->setService('default', $loader);
+        $translator->addTranslationFile('default', null);
+        return $translator;
     }
 }

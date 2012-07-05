@@ -76,16 +76,17 @@ class Headers implements Iterator, Countable
      * will be lazy loaded)
      *
      * @param  string $string
+     * @param  string $EOL EOL string; defaults to {@link EOL}
      * @throws Exception\RuntimeException
      * @return Headers
      */
-    public static function fromString($string)
+    public static function fromString($string, $EOL = self::EOL)
     {
         $headers     = new static();
         $currentLine = '';
 
         // iterate the header lines, some might be continuations
-        foreach (explode(self::EOL, $string) as $line) {
+        foreach (explode($EOL, $string) as $line) {
             // check if a header name is present
             if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $line, $matches)) {
                 if ($currentLine) {
@@ -222,12 +223,15 @@ class Headers implements Iterator, Countable
         }
 
         if ($fieldValue === null) {
-            $header = Header\GenericHeader::fromString($headerFieldNameOrLine);
+            $this->addHeader(Header\GenericHeader::fromString($headerFieldNameOrLine));
+        } elseif (is_array($fieldValue)) {
+            foreach($fieldValue as $i) {
+                $this->addHeader(new Header\GenericMultiHeader($headerFieldNameOrLine, $i));
+            }
         } else {
-            $header = new Header\GenericHeader($headerFieldNameOrLine, $fieldValue);
+            $this->addHeader(new Header\GenericHeader($headerFieldNameOrLine, $fieldValue));
         }
 
-        $this->addHeader($header);
         return $this;
     }
 
@@ -240,10 +244,11 @@ class Headers implements Iterator, Countable
     public function addHeader(Header\HeaderInterface $header)
     {
         $key = $this->normalizeFieldName($header->getFieldName());
-
         $this->headersKeys[] = $key;
         $this->headers[] = $header;
-        $header->setEncoding($this->getEncoding());
+        if ($this->getEncoding() !== 'ASCII') {
+            $header->setEncoding($this->getEncoding());
+        }
         return $this;
     }
 
@@ -292,7 +297,11 @@ class Headers implements Iterator, Countable
         $results = array();
 
         foreach (array_keys($this->headersKeys, $key) as $index) {
-            $results[] = $this->headers[$index];
+            if ($this->headers[$index] instanceof Header\GenericHeader) {
+                $results[] = $this->lazyLoadHeader($index);
+            } else {
+                $results[] = $this->headers[$index];
+            }
         }
 
         switch(count($results)) {
@@ -453,7 +462,7 @@ class Headers implements Iterator, Countable
         /* @var $class Header\HeaderInterface */
         $class = ($this->getPluginClassLoader()->load($key)) ?: 'Zend\Mail\Header\GenericHeader';
 
-        $encoding = $this->getEncoding();
+        $encoding = $current->getEncoding();
         $headers  = $class::fromString($current->toString());
         if (is_array($headers)) {
             $current = array_shift($headers);

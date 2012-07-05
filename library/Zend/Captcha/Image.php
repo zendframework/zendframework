@@ -24,7 +24,6 @@ namespace Zend\Captcha;
 use DirectoryIterator;
 use Zend\Captcha\Exception;
 use Zend\Loader\Pluggable;
-use Zend\Stdlib\ErrorException;
 use Zend\Stdlib\ErrorHandler;
 
 /**
@@ -38,7 +37,7 @@ use Zend\Stdlib\ErrorHandler;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Image extends Word
+class Image extends AbstractWord
 {
     /**
      * Directory for generated images
@@ -492,7 +491,7 @@ class Image extends Word
         $font = $this->getFont();
 
         if (empty($font)) {
-            throw new Exception\NoFontProvidedException("Image CAPTCHA requires font");
+            throw new Exception\NoFontProvidedException('Image CAPTCHA requires font');
         }
 
         $w     = $this->getWidth();
@@ -508,8 +507,10 @@ class Image extends Word
             ErrorHandler::start();
             $img   = imagecreatefrompng($this->startImage);
             $error = ErrorHandler::stop();
-            if (!$img || $error instanceof ErrorException) {
-                throw new Exception\ImageNotLoadableException("Can not load start image");
+            if (!$img || $error) {
+                throw new Exception\ImageNotLoadableException(
+                    "Can not load start image '{$this->startImage}'", 0, $error
+                );
             }
             $w = imagesx($img);
             $h = imagesy($img);
@@ -629,7 +630,7 @@ class Image extends Word
 
     /**
      * Get helper name used to render captcha
-     * 
+     *
      * @return string
      */
     public function getHelperName()

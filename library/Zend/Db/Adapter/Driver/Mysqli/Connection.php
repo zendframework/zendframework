@@ -95,21 +95,11 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * Get default catalog
-     * 
-     * @return null 
-     */
-    public function getDefaultCatalog()
-    {
-        return null;
-    }
-
-    /**
-     * Get default schema
+     * Get current schema
      * 
      * @return string 
      */
-    public function getDefaultSchema()
+    public function getCurrentSchema()
     {
         if (!$this->isConnected()) {
             $this->connect();
@@ -280,11 +270,11 @@ class Connection implements ConnectionInterface
     /**
      * Get last generated id
      * 
+     * @param  null $name Ignored
      * @return integer 
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
         return $this->resource->insert_id;
     }
-
 }

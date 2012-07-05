@@ -20,7 +20,8 @@
  */
 
 namespace Zend\Service\Delicious;
-use \Zend\Date\Date;
+
+use DateTime;
 
 /**
  * Zend_Service_Delicious_Post represents a post of a user that can be edited
@@ -46,7 +47,7 @@ class Post extends SimplePost
     protected $_others;
 
     /**
-     * @var \Zend\Date\Date Post date
+     * @var DateTime Post date
      */
     protected $_date;
 
@@ -81,8 +82,8 @@ class Post extends SimplePost
                                                      . " 'title')");
         }
 
-        if (isset($values['date']) && ! $values['date'] instanceof Date) {
-            throw new Exception("Date has to be an instance of \Zend\Date\Date");
+        if (isset($values['date']) && !$values['date'] instanceof DateTime) {
+            throw new Exception("Date has to be an instance of DateTime");
         }
 
         foreach (array('url', 'title', 'notes', 'others', 'tags', 'date', 'shared', 'hash') as $key) {
@@ -160,7 +161,7 @@ class Post extends SimplePost
     /**
      * Getter for date
      *
-     * @return \Zend\Date\Date
+     * @return DateTime
      */
     public function getDate()
     {
@@ -239,11 +240,6 @@ class Post extends SimplePost
             'tags'       => implode(' ', (array) $this->_tags),
             'replace'    => 'yes'
         );
-        /*
-        if ($this->_date instanceof \Zend\Date\Date) {
-            $parms['dt'] = $this->_date->get('Y-m-d\TH:i:s\Z');
-        }
-        */
 
         return $this->_service->makeRequest(Delicious::PATH_POSTS_ADD, $parms);
     }
@@ -262,7 +258,7 @@ class Post extends SimplePost
             'notes'  => $node->getAttribute('extended'),
             'others' => (int) $node->getAttribute('others'),
             'tags'   => explode(' ', $node->getAttribute('tag')),
-            'date'   => new Date(strtotime($node->getAttribute('time'))),
+            'date'   => new DateTime($node->getAttribute('time')),
             'shared' => ($node->getAttribute('shared') == 'no' ? false : true),
             'hash'   => $node->getAttribute('hash')
         );

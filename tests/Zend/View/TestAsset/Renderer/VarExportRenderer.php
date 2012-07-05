@@ -21,9 +21,9 @@
 
 namespace ZendTest\View\TestAsset\Renderer;
 
-use Zend\View\Model\ModelInterface as Model,
-    Zend\View\Renderer\RendererInterface as Renderer,
-    Zend\View\Resolver\ResolverInterface as Resolver;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\View\Resolver\ResolverInterface as Resolver;
 
 /**
  * @category   Zend

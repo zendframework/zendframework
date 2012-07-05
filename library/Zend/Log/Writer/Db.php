@@ -21,9 +21,9 @@
 
 namespace Zend\Log\Writer;
 
-use Zend\Log\Formatter,
-    Zend\Log\Exception,
-    Zend\Db\Adapter\Adapter;
+use Zend\Log\Formatter;
+use Zend\Log\Exception;
+use Zend\Db\Adapter\Adapter;
 
 /**
  * @category   Zend

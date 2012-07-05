@@ -40,7 +40,7 @@
         <listitem>
             <para>
                 <classname>Zend\Config\Processor\Translator</classname>: translate configuration values
-                in other languages using <classname>Zend\Translator</classname>;
+                in other languages using <classname>Zend\I18n\Translator</classname>;
             </para>
         </listitem>
     </itemizedlist>
@@ -188,15 +188,20 @@ echo $config->foo;
             <programlisting language="php"><![CDATA[
 use Zend\Config\Config,
     Zend\Config\Processor\Translator as TranslatorProcessor,
-    Zend\Translator\Translator;
+    Zend\I18n\Translator\Translator;
     
 $config = new Config(array('animal' => 'dog'), true);
 
-$italian = array(
-    'dog' => 'cane'
-);
+/* 
+ * The following mapping would exist for the translation
+ * loader you provide to the translator instance
+ * $italian = array(
+ *     'dog' => 'cane'
+ * );
+ */
 
-$translator = new Translator(Translator::AN_ARRAY, $italian, 'it_IT');
+$translator = new Translator();
+// ... configure the translator ...
 $processor = new TranslatorProcessor($translator);
 
 echo "English: {$config->animal}, ";

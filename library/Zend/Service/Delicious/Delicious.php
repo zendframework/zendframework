@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Delicious;
 
-use \Zend\Rest\Client as RestClient,
-    \Zend\Date\Date;
+use DateTime;
+use Zend\Rest\Client as RestClient;
 
 /**
  * Zend_Service_Delicious is a concrete implementation of the del.icio.us web service
@@ -118,7 +118,7 @@ class Delicious
      * Get time of the last update
      *
      * @throws Zend_Service_Delicious_Exception
-     * @return Zend_Date
+     * @return DateTime
      */
     public function getLastUpdate()
     {
@@ -126,7 +126,7 @@ class Delicious
 
         $rootNode = $response->documentElement;
         if ($rootNode && $rootNode->nodeName == 'update') {
-            return new Date(strtotime($rootNode->getAttribute('time')));
+            return new DateTime($rootNode->getAttribute('time'));
         } else {
             throw new Exception('del.icio.us web service has returned something odd!');
         }
@@ -249,12 +249,12 @@ class Delicious
      * If no date or url is given, most recent date will be used
      *
      * @param  string    $tag Optional filtering by tag
-     * @param  Zend_Date $dt  Optional filtering by date
+     * @param  DateTime  $dt  Optional filtering by date
      * @param  string    $url Optional filtering by url
      * @throws Zend_Service_Delicious_Exception
      * @return Zend_Service_Delicious_PostList
      */
-    public function getPosts($tag = null, Date $dt = null, $url = null)
+    public function getPosts($tag = null, DateTime $dt = null, $url = null)
     {
         $parms = array();
         if ($tag) {
@@ -264,7 +264,7 @@ class Delicious
             $parms['url'] = $url;
         }
         if ($dt) {
-            $parms['dt'] = $dt->toString('Y-m-d\TH:i:s\Z', 'php');
+            $parms['dt'] = $dt->format(DateTime::ISO8601);
         }
 
         $response = $this->makeRequest(self::PATH_POSTS_GET, $parms);

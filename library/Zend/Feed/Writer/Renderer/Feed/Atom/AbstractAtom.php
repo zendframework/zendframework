@@ -20,9 +20,10 @@
 
 namespace Zend\Feed\Writer\Renderer\Feed\Atom;
 
-use Zend\Feed,
-    DOMDocument,
-    DOMElement;
+use Datetime;
+use DOMDocument;
+use DOMElement;
+use Zend\Feed;
 
 /**
  * @category   Zend
@@ -112,6 +113,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Feed\Exception\InvalidArgumentException
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
@@ -130,7 +132,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
         $updated = $dom->createElement('updated');
         $root->appendChild($updated);
         $text = $dom->createTextNode(
-            $this->getDataContainer()->getDateModified()->get(\Zend\Date\Date::ISO_8601)
+            $this->getDataContainer()->getDateModified()->format(DateTime::ISO8601)
         );
         $updated->appendChild($text);
     }
@@ -187,6 +189,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Feed\Exception\InvalidArgumentException
      */
     protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
     {
@@ -261,6 +264,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Feed\Exception\InvalidArgumentException
      */
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {

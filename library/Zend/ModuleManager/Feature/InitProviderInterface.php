@@ -35,7 +35,7 @@ interface InitProviderInterface
     /**
      * Initialize workflow
      *
-     * @param  \Zend\ModuleManager\ModuleManagerInterface $manager 
+     * @param  ModuleManagerInterface $manager
      * @return void
      */
     public function init(ModuleManagerInterface $manager);

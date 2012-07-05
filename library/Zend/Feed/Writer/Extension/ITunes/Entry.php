@@ -187,6 +187,7 @@ class Entry
      * 
      * @param  string $value 
      * @return Entry
+     * @throws Writer\Exception\InvalidArgumentException
      */
     public function setItunesSubtitle($value)
     {

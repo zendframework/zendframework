@@ -23,12 +23,9 @@ namespace Zend\Mvc\Service;
 
 use Zend\Mvc\Exception;
 use Zend\Mvc\Router\RouteMatch;
-use Zend\View\HelperPluginManager as ViewHelperManager;
 use Zend\View\Helper as ViewHelper;
 use Zend\ServiceManager\ConfigurationInterface;
-use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceManager;
 
 /**
  * @category   Zend
@@ -37,8 +34,10 @@ use Zend\ServiceManager\ServiceManager;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ViewHelperManagerFactory implements FactoryInterface
+class ViewHelperManagerFactory extends AbstractPluginManagerFactory
 {
+    const PLUGIN_MANAGER_CLASS = 'Zend\View\HelperPluginManager';
+
     /**
      * An array of helper configuration classes to ensure are on the helper_map stack.
      *
@@ -58,8 +57,7 @@ class ViewHelperManagerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $plugins = new ViewHelperManager();
-        $plugins->setServiceLocator($serviceLocator);
+        $plugins = parent::createService($serviceLocator);
 
         foreach ($this->defaultHelperMapClasses as $configClass) {
             if (is_string($configClass) && class_exists($configClass)) {

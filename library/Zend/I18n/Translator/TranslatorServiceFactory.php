@@ -30,6 +30,7 @@
 namespace Zend\I18n\Translator;
 
 use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Translator.

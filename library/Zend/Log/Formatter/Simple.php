@@ -35,16 +35,16 @@ class Simple implements FormatterInterface
     /**
      * @var string
      */
-    protected $_format;
+    protected $format;
 
     const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message% %info%';
 
     /**
      * Class constructor
      *
-     * @param  null|string  $format  Format specifier for log messages
-     * @return void
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @param null|string $format Format specifier for log messages
+     * @return Simple
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($format = null)
     {
@@ -56,18 +56,18 @@ class Simple implements FormatterInterface
             throw new Exception\InvalidArgumentException('Format must be a string');
         }
 
-        $this->_format = $format;
+        $this->format = $format;
     }
 
     /**
      * Formats data into a single line to be written by the writer.
      *
-     * @param  array    $event    event data
-     * @return string             formatted line to write to the log
+     * @param array $event event data
+     * @return string formatted line to write to the log
      */
     public function format($event)
     {
-        $output = $this->_format;
+        $output = $this->format;
 
         if (!isset($event['info'])) {
             $event['info'] = '';

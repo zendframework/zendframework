@@ -41,8 +41,9 @@ class TranslatorServiceFactory implements FactoryInterface
         $config = $serviceLocator->get('Configuration');
         $translator = Translator::factory($config['translator']);
 
-        // Provide translator to the view helper
-        $serviceLocator->get('ViewHelperManager')->get('translator')->setTranslator($translator);
+        // Provide translator to the view helpers
+        $serviceLocator->get('ViewHelperManager')->get('translate')->setTranslator($translator);
+        $serviceLocator->get('ViewHelperManager')->get('translateplural')->setTranslator($translator);
 
         return $translator;
     }

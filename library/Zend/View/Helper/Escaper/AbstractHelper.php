@@ -36,32 +36,32 @@ use Zend\Escaper;
 abstract class AbstractHelper extends Helper\AbstractHelper
 {
 
-	/**
-	 * @var Escaper\Escaper
-	 */
-	protected $escaper = null;
+    /**
+     * @var Escaper\Escaper
+     */
+    protected $escaper = null;
 
-	/**
+    /**
      * @var string Encoding
      */
     protected $encoding = 'UTF-8';
 
-	public function setEscaper(Escaper\Escaper $escaper)
-	{
-		$this->escaper = $escaper;
-		$this->encoding = $escaper->getEncoding();
-		return $this;
-	}
+    public function setEscaper(Escaper\Escaper $escaper)
+    {
+        $this->escaper = $escaper;
+        $this->encoding = $escaper->getEncoding();
+        return $this;
+    }
 
-	public function getEscaper()
-	{
-		if (null === $this->escaper) {
-			$this->setEscaper(new Escaper\Escaper($this->getEncoding()));
-		}
-		return $this->escaper;
-	}
+    public function getEscaper()
+    {
+        if (null === $this->escaper) {
+            $this->setEscaper(new Escaper\Escaper($this->getEncoding()));
+        }
+        return $this->escaper;
+    }
 
-	/**
+    /**
      * Set the encoding to use for escape operations
      * 
      * @param  string $encoding 
@@ -69,12 +69,12 @@ abstract class AbstractHelper extends Helper\AbstractHelper
      */
     public function setEncoding($encoding)
     {
-    	if (!is_null($this->escaper)) {
-    		throw new Exception\InvalidArgumentException(
-    			'Encoding cannot be changed once a Zend\Escaper\Escaper object has been'
-    			. ' instantiated by or injected into this Helper.'
-    		);
-    	}
+        if (!is_null($this->escaper)) {
+            throw new Exception\InvalidArgumentException(
+                'Encoding cannot be changed once a Zend\Escaper\Escaper object has been'
+                . ' instantiated by or injected into this Helper.'
+            );
+        }
         $this->encoding = $encoding;
         return $this;
     }

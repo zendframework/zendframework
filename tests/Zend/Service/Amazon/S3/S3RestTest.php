@@ -185,7 +185,7 @@ BODY;
             ->with(array(
                     "Date"          => "Tue, 15 May 2012 15:18:31 +0000",
                     "Content-Type"  => "application/xml",
-                    "Authorization" => "AWS AKIAIDCZ2WXN6NNB7YZA:Y+T4nZxI1wBi1Yn1BMnOK9CDiOM=",
+                    "Authorization" => "AWS AKIAIDCZ2WXN6NNB7YZA:NjNlNGY4OWQ5YzQ4ZDcwMDYyZDU4OWY1MDRjOWNlMmJkMDgzODhlMw==",
                     ));
 
         /**

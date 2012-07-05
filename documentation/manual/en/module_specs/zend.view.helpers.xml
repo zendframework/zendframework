@@ -97,7 +97,6 @@ $filtered = $view->lowercase('some value');
 
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Action.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-BaseUrl.xml"/>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Currency.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Cycle.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Partial.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Placeholder.xml"/>

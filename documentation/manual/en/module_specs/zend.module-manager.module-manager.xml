@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<section 
+<section
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.module-manager.module-manager">
-    
+
         <title>The Module Manager</title>
-    
+
 
     <para>
         The module manager, <classname>Zend\ModuleManager\ModuleManager</classname>, is a very
@@ -16,23 +16,24 @@
     </para>
 
     <section xml:id="zend.module-manager.module-manager.module-manager-events">
-        
+
             <title>Module Manager Events</title>
-        
+
 
         <variablelist>
             <title>Events triggered by <classname>Zend\ModuleManager\ModuleManager</classname></title>
 
             <varlistentry>
-                <term>loadModules.pre</term>
+                <term>loadModules</term>
 
                 <listitem>
                     <para>
-                        Triggered prior to any modules being loaded. This event is useful for
-                        registering a module autoloader. ZF2 ships with a default module autoloader
-                        which is automatically attached to this event if you are using
-                        <classname>Zend\ModuleManager\Listener\DefaultListenerAggregate</classname>, both
-                        of which are covered in detail later.
+                        This event is primarily used internally to help encapsulate the work of
+                        loading modules in event listeners, and allow the loadModules.post event to
+                        be more user-friendly. Internal listeners will attach to this event with a
+                        negative priority instead of loadModules.post so that users can safely
+                        assume things like config merging have been done once loadModules.post is
+                        triggered, without having to worry about priorities at all.
                     </para>
                 </listitem>
             </varlistentry>
@@ -91,16 +92,16 @@
             </varlistentry>
         </variablelist>
     </section>
-    
+
     <section xml:id="zend.module-manager.module-manager.module-manager-listeners">
-        
+
             <title>Module Manager Listeners</title>
-        
+
 
         <para>
             By default, Zend Framework provides several useful module manager listeners.
         </para>
-        
+
         <variablelist>
             <title>Provided Module Manager Listeners</title>
 
@@ -123,7 +124,7 @@
 
                 <listitem>
                     <para>
-                        This listener checks each module to see if it has implemented 
+                        This listener checks each module to see if it has implemented
                         <classname>Zend\ModuleManager\Feature\AutoloaderProviderInterface</classname>
                         or simply defined the <methodname>getAutoloaderConfig()</methodname> method. If
                         so, it calls the <methodname>getAutoloaderConfig()</methodname> method on
@@ -145,7 +146,7 @@
                     </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry>
                 <term><classname>Zend\ModuleManager\Listener\InitTrigger</classname></term>
 
@@ -164,7 +165,7 @@
                     </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry>
                 <term><classname>Zend\ModuleManager\Listener\LocatorRegistrationListener</classname></term>
 
@@ -179,7 +180,7 @@
                     </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry>
                 <term><classname>Zend\ModuleManager\Listener\ModuleResolverListener</classname></term>
 
@@ -191,7 +192,7 @@
                     </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry>
                 <term><classname>Zend\ModuleManager\Listener\OnBootstrapListener</classname></term>
 
@@ -217,7 +218,7 @@
                     </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry>
                 <term><classname>Zend\ModuleManager\Listener\ServiceListener</classname></term>
 

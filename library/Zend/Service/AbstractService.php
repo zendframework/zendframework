@@ -20,7 +20,8 @@
 
 namespace Zend\Service;
 
-use Zend\Http\Client as HTTPClient;
+use InvalidArgumentException;
+use Zend\Http\Client as HttpClient;
 
 /**
  * @category   Zend
@@ -33,12 +34,12 @@ abstract class AbstractService
     /**
      * HTTP Client used to query all web services
      *
-     * @var Zend\Http\Client
+     * @var string
      */
     protected static $_defaultHttpClient = 'Zend\\Http\\Client';
 
     /**
-     * @var Zend\Http\Client
+     * @var HttpClient
      */
     protected $_httpClient = null;
 
@@ -46,12 +47,13 @@ abstract class AbstractService
      * Sets the HTTP client object or client class to use for interacting with 
      * services. If none is set, the default Zend\Http\Client will be used.
      *
-     * @param string|Zend\Http\Client $client
+     * @param string|HttpClient $client
+     * @throws InvalidArgumentException
      */
     public static function setDefaultHttpClient($client)
     {
-        if (!is_string($client) && !$client instanceof HTTPClient) {
-            throw new Exception('Invalid HTTP client provided');
+        if (!is_string($client) && !$client instanceof HttpClient) {
+            throw new InvalidArgumentException('Invalid HTTP client provided');
         }
         self::$_defaultHttpClient = $client;
     }
@@ -60,19 +62,20 @@ abstract class AbstractService
     /**
      * Gets the default HTTP client object.
      *
-     * @return Zend_Http_Client
+     * @return HttpClient
+     * @throws InvalidArgumentException
      */
     public static function getDefaultHttpClient()
     {
         if (is_string(self::$_defaultHttpClient)) {
             if (!class_exists(self::$_defaultHttpClient)) {
-                throw new Exception('Default HTTP client class provided does not exist');
+                throw new InvalidArgumentException('Default HTTP client class provided does not exist');
             }
             self::$_defaultHttpClient = new self::$_defaultHttpClient();
         }
 
-        if (!self::$_defaultHttpClient instanceof HTTPClient) {
-            throw new Exception('Default HTTP client provided must extend Zend\\Http\\Client');
+        if (!self::$_defaultHttpClient instanceof HttpClient) {
+            throw new InvalidArgumentException('Default HTTP client provided must extend Zend\\Http\\Client');
         }
 
         return self::$_defaultHttpClient;
@@ -81,10 +84,10 @@ abstract class AbstractService
     /**
      * Set HTTP client instance to use with this service instance
      * 
-     * @param  Zend\Http\Client $client 
-     * @return Zend\Service\AbstractService
+     * @param  HttpClient $client
+     * @return AbstractService
      */
-    public function setHttpClient(HTTPClient $client)
+    public function setHttpClient(HttpClient $client)
     {
         $this->_httpClient = $client;
         return $this;
@@ -95,7 +98,7 @@ abstract class AbstractService
      *
      * If none set, will check for a default instance.
      * 
-     * @return Zend\Http\Client
+     * @return HttpClient
      */
     public function getHttpClient()
     {

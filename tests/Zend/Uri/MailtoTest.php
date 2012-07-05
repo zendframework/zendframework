@@ -45,7 +45,7 @@ class MailtoTest extends TestCase
      *
      * @return array
      */
-    static public function validSchemeProvider()
+    public function validSchemeProvider()
     {
         return array(
             array('mailto'),
@@ -59,7 +59,7 @@ class MailtoTest extends TestCase
      *
      * @return array
      */
-    static public function invalidSchemeProvider()
+    public function invalidSchemeProvider()
     {
         return array(
             array('file'),
@@ -69,7 +69,7 @@ class MailtoTest extends TestCase
         );
     }
 
-    static public function invalidUris()
+    public function invalidUris()
     {
         return array(
             array('mailto:/foo@example.com'),

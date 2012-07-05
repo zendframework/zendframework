@@ -94,25 +94,21 @@ class BaseTest extends \PHPUnit_Framework_TestCase
     public function testAddingInvalidSoapHeaderThrows()
     {
         $invalidHeaders = 'foo';
-        try {
-            $base = new StrikeIron\Base(array('client'  => $this->soapClient,
-                                                           'headers' => $invalidHeaders));
-            $this->fail();
-        } catch (StrikeIron\Exception $e) {
-            $this->assertRegExp('/instance of soapheader/i', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Service\StrikeIron\Exception\RuntimeException', 'instance of');
+        $base = new StrikeIron\Base(array(
+            'client'  => $this->soapClient,
+            'headers' => $invalidHeaders,
+        ));
     }
 
     public function testAddingInvalidSoapHeaderArrayThrows()
     {
         $invalidHeaders = array('foo');
-        try {
-            $base = new StrikeIron\Base(array('client'  => $this->soapClient,
-                                                           'headers' => $invalidHeaders));
-            $this->fail();
-        } catch (StrikeIron\Exception $e) {
-            $this->assertRegExp('/instance of soapheader/i', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Service\StrikeIron\Exception\RuntimeException', 'instance of');
+        $base = new StrikeIron\Base(array(
+            'client'  => $this->soapClient,
+            'headers' => $invalidHeaders,
+        ));
     }
 
     public function testAddingScalarSoapHeaderNotLicenseInfo()
@@ -189,14 +185,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodExceptionsAreWrapped()
     {
-        try {
-            $this->base->throwTheException();
-            $this->fail();
-        } catch (\Exception $e) {
-            $this->assertInstanceOf('Zend\Service\StrikeIron\Exception', $e);
-            $this->assertEquals('Exception: foo', $e->getMessage());
-            $this->assertEquals(43, $e->getCode());
-        }
+        $this->setExpectedException('Zend\Service\StrikeIron\Exception\ExceptionInterface', 'Exception: foo', 43);
+        $this->base->throwTheException();
     }
 
     public function testGettingOutputHeaders()
@@ -247,11 +237,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
     public function testGettingSubscriptionInfoThrowsWhenHeaderNotFound()
     {
-        try {
-            $this->base->getSubscriptionInfo(true, 'ReturnNoOutputHeaders');
-            $this->fail();
-        } catch (StrikeIron\Exception $e) {
-            $this->assertRegExp('/no subscriptioninfo header/i', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Service\StrikeIron\Exception\ExceptionInterface', 'ubscription');
+        $this->base->getSubscriptionInfo(true, 'ReturnNoOutputHeaders');
     }
 }

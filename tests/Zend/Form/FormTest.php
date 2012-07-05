@@ -214,6 +214,26 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->isValid());
     }
 
+    public function testSpecifyingValidationGroupForNestedFieldsetsForcesPartialValidation()
+    {
+        $form = new TestAsset\NewProductForm();
+        $form->setData(array(
+            'product' => array(
+                'name' => 'Chair'
+            )
+        ));
+
+        $this->assertFalse($form->isValid());
+
+        $form->setValidationGroup(array(
+            'product' => array(
+                'name'
+            )
+        ));
+
+        $this->assertTrue($form->isValid());
+    }
+
     public function testSettingValidateAllFlagAfterPartialValidationForcesFullValidation()
     {
         $this->populateForm();

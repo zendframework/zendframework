@@ -32,7 +32,7 @@ use DomDocument;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TagsResultSet extends ResultSet
+class TagsResultSet extends AbstractResultSet
 {
     /**
      * Constructs a new object object from DOM Document.
@@ -48,7 +48,7 @@ class TagsResultSet extends ResultSet
     }
 
     /**
-     * Implements ResultSet::current().
+     * Implements AbstractResultSet::current().
      *
      * @return TagsResult current result
      */

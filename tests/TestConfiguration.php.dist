@@ -744,12 +744,6 @@ defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNONPROD') || define('T
 defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX', 'phpazuretestsession');
 
 /**
- * Zend\Service\Yahoo online tests
- */
-defined('TESTS_ZEND_SERVICE_YAHOO_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_YAHOO_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID') || define('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID', 'Enter APPID here');
-
-/**
  * Zend\Soap\AutoDiscover scenario tests for complex objects and wsdl generation
  *
  * Copy all the files of zf/tests/Zend/Soap/_files/fulltests into a directory

@@ -316,11 +316,9 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     	$result = new Amazon\ResultSet($dom);
 
     	$currentItem = null;
-    	try {
-    		$currentItem = $result->current();
-    	} catch (Amazon\Exception $e) {
-    		$this->fail('Unexpected exception was triggered');
-    	}
+
+        $currentItem = $result->current();
+
     	$this->assertInstanceOf('Zend\Service\Amazon\Item', $currentItem);
     	$this->assertEquals('0754512673', $currentItem->ASIN);
     }
@@ -339,11 +337,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         
     	$result = new Amazon\ResultSet($dom);
 
-    	try {
-    		$result->current();
-    		$this->fail('Expected exception was not triggered');
-    	} catch (Amazon\Exception $e) {
-			return;
-        }
+        $this->setExpectedException('Zend\Service\Amazon\Exception\ExceptionInterface');
+        $result->current();
     }
 }

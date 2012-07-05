@@ -107,7 +107,12 @@ class ViewHelperManagerFactory implements FactoryInterface
             return $basePathHelper;
         });
 
-        // Configure doctype view helper with doctype from configuration, if available
+        /**
+         * Configure doctype view helper with doctype from configuration, if available.
+         *
+         * Other view helpers depend on this to decide which spec to generate their tags
+         * based on. This is why it must be set early instead of later in the layout phtml.
+         */
         $plugins->setFactory('doctype', function($sm) use($serviceLocator) {
             $config = $serviceLocator->get('Configuration');
             $config = $config['view_manager'];

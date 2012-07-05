@@ -170,6 +170,10 @@ class FormElementErrors extends AbstractHelper
             $messagesToPrint[] = $escape($item);
         });
 
+        if (empty($messagesToPrint)) {
+            return '';
+        }
+
         // Generate markup
         $markup  = sprintf($this->getMessageOpenFormat(), $attributes);
         $markup .= implode($this->getMessageSeparatorString(), $messagesToPrint);

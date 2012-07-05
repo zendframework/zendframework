@@ -34,7 +34,7 @@ use DomElement;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class CosmosResult extends Result
+class CosmosResult extends AbstractResult
 {
     /**
      * Technorati weblog object that links queried URL.

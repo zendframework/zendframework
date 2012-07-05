@@ -102,7 +102,11 @@ class ResultSet implements \SeekableIterator
      */
     public function current()
     {
-        return new Item($this->_results->item($this->_currentIndex));
+        $dom = $this->_results->item($this->_currentIndex);
+        if ($dom === null) {
+            throw new Exception\RuntimeException('no results found');
+        }
+        return new Item($dom);
     }
 
     /**

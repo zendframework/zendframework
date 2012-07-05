@@ -66,7 +66,12 @@ abstract class AbstractWriterTestCase extends TestCase
        
     public function tearDown()
     {
-        @unlink($this->getTestAssetFileName());
+        if (file_exists($this->getTestAssetFileName())) {
+            if (!is_writable($this->getTestAssetFileName())) {
+                chmod($this->getTestAssetFileName(), 0777);
+            }
+            @unlink($this->getTestAssetFileName());
+        }
     }
     
     public function testNoFilenameSet()

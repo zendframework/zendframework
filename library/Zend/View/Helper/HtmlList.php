@@ -30,7 +30,7 @@ namespace Zend\View\Helper;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HtmlList extends FormElement
+class HtmlList extends AbstractHtmlElement
 {
     /**
      * Generates a 'List' element.
@@ -68,10 +68,7 @@ class HtmlList extends FormElement
             $attribs = '';
         }
 
-        $tag = 'ul';
-        if ($ordered) {
-            $tag = 'ol';
-        }
+        $tag = ($ordered) ? 'ol' : 'ul';
 
         return '<' . $tag . $attribs . '>' . self::EOL . $list . '</' . $tag . '>' . self::EOL;
     }

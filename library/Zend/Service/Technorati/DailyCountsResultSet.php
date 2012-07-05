@@ -32,7 +32,7 @@ use DomDocument;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DailyCountsResultSet extends ResultSet
+class DailyCountsResultSet extends AbstractResultSet
 {
     /**
      * Technorati search URL for given query.
@@ -92,7 +92,7 @@ class DailyCountsResultSet extends ResultSet
     }
 
     /**
-     * Implements ResultSet::current().
+     * Implements AbstractResultSet::current().
      *
      * @return DailyCountsResult current result
      */

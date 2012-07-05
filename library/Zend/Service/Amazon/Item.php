@@ -118,14 +118,8 @@ class Item
      * 
      * @group ZF-9547
      */
-    public function __construct(DOMElement $dom = null)
+    public function __construct(DOMElement $dom)
     {
-        if (null === $dom) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects a populated DOMElement; received null',
-                __CLASS__
-            ));
-        }
         $xpath = new \DOMXPath($dom->ownerDocument);
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2011-08-01');
         $this->ASIN = $xpath->query('./az:ASIN/text()', $dom)->item(0)->data;

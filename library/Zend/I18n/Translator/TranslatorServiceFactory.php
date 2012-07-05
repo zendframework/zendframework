@@ -37,7 +37,13 @@ class TranslatorServiceFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        // Configure the translator
         $config = $serviceLocator->get('Configuration');
-        return Translator::factory($config['translator']);
+        $translator = Translator::factory($config['translator']);
+
+        // Provide translator to the view helper
+        $serviceLocator->get('ViewHelperManager')->get('translator')->setTranslator($translator);
+
+        return $translator;
     }
 }

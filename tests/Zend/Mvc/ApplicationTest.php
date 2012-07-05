@@ -72,11 +72,22 @@ class ApplicationTest extends TestCase
         };
         $sm = $this->serviceManager = new ServiceManager(
             new ServiceManagerConfiguration(array(
-                'services'  => array(
-                    'ViewManager' => 'ZendTest\Mvc\TestAsset\MockViewManager'
+                'invokables' => array(
+                    'DispatchListener' => 'Zend\Mvc\DispatchListener',
+                    'Request'          => 'Zend\Http\PhpEnvironment\Request',
+                    'Response'         => 'Zend\Http\PhpEnvironment\Response',
+                    'RouteListener'    => 'Zend\Mvc\RouteListener',
+                    'ViewManager'      => 'ZendTest\Mvc\TestAsset\MockViewManager'
                 ),
                 'factories' => array(
-                    'Configuration' => $config,
+                    'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
+                    'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
+                    'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
+                    'Router'                  => 'Zend\Mvc\Service\RouterFactory',
+                    'Configuration'           => $config,
+                ),
+                'aliases' => array(
+                    'ControllerPluginBroker' => 'ControllerPluginManager',
                 ),
             ))
         );

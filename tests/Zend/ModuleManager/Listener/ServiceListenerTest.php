@@ -46,7 +46,7 @@ class ServiceListenerTest extends TestCase
     public function setUp()
     {
         $this->services = new ServiceManager();
-        $this->listener = new ServiceListener();
+        $this->listener = new ServiceListener($this->services);
         $this->listener->addServiceManager($this->services, 'service_manager', 'Zend\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfiguration');
         $this->event    = new ModuleEvent();
         $this->configListener = new ConfigListener();

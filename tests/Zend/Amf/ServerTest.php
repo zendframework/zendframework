@@ -147,11 +147,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddFunction()
     {
-        try {
-            $this->_server->addFunction('ZendTest\\Amf\\TestAsset\\Server\\testFunction', 'test');
-        } catch (\Exception $e) {
-            $this->fail('Attachment should have worked');
-        }
+
+        $this->_server->addFunction('ZendTest\\Amf\\TestAsset\\Server\\testFunction', 'test');
 
         $methods = $this->_server->listMethods();
         $this->assertTrue(in_array('test.ZendTest\\Amf\\TestAsset\\Server\\testFunction', $methods), var_export($methods, 1));
@@ -160,21 +157,18 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             $this->_server->addFunction('nosuchfunction');
             $this->fail('nosuchfunction() should not exist and should throw an exception');
         } catch (\Exception $e) {
-            // do nothing
         }
 
         $server = new Amf\Server();
-        try {
-            $server->addFunction(
-                array(
-                    'ZendTest\\Amf\\TestAsset\\Server\\testFunction',
-                    'ZendTest\\Amf\\TestAsset\\Server\\testFunction2',
-                ),
-                'zsr'
-            );
-        } catch (\Exception $e) {
-            $this->fail('Error attaching array of functions: ' . $e->getMessage());
-        }
+
+        $server->addFunction(
+            array(
+                'ZendTest\\Amf\\TestAsset\\Server\\testFunction',
+                'ZendTest\\Amf\\TestAsset\\Server\\testFunction2',
+            ),
+            'zsr'
+        );
+
         $methods = $server->listMethods();
         $this->assertTrue(in_array('zsr.ZendTest\\Amf\\TestAsset\\Server\\testFunction', $methods));
         $this->assertTrue(in_array('zsr.ZendTest\\Amf\\TestAsset\\Server\\testFunction2', $methods));

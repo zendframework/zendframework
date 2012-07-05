@@ -135,14 +135,10 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $mail->createFolder('test3', $mail->getFolders()->subfolder);
         $mail->createFolder('foo.bar');
 
-        try {
-            $mail->selectFolder($mail->getFolders()->subfolder->test1);
-            $mail->selectFolder($mail->getFolders()->subfolder->test2);
-            $mail->selectFolder($mail->getFolders()->subfolder->test3);
-            $mail->selectFolder($mail->getFolders()->foo->bar);
-        } catch (\Exception $e) {
-            $this->fail('could not get new folders');
-        }
+        $mail->selectFolder($mail->getFolders()->subfolder->test1);
+        $mail->selectFolder($mail->getFolders()->subfolder->test2);
+        $mail->selectFolder($mail->getFolders()->subfolder->test3);
+        $mail->selectFolder($mail->getFolders()->foo->bar);
 
         // to tear down
         $this->_subdirs[] = '.subfolder.test1';
@@ -155,37 +151,22 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
     public function testCreateFolderEmtpyPart()
     {
         $mail = new Writable\Maildir($this->_params);
-        try {
-            $mail->createFolder('foo..bar');
-        } catch (\Exception $e) {
-            return; //ok
-        }
-
-        $this->fail('no exception while creating folder with empty part name');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->createFolder('foo..bar');
     }
 
     public function testCreateFolderSlash()
     {
         $mail = new Writable\Maildir($this->_params);
-        try {
-            $mail->createFolder('foo/bar');
-        } catch (\Exception $e) {
-            return; //ok
-        }
-
-        $this->fail('no exception while creating folder with slash');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->createFolder('foo/bar');
     }
 
     public function testCreateFolderDirectorySeparator()
     {
         $mail = new Writable\Maildir($this->_params);
-        try {
-            $mail->createFolder('foo' . DIRECTORY_SEPARATOR . 'bar');
-        } catch (\Exception $e) {
-            return; //ok
-        }
-
-        $this->fail('no exception while creating folder with DIRECTORY_SEPARATOR');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->createFolder('foo' . DIRECTORY_SEPARATOR . 'bar');
     }
 
     public function testCreateFolderExistingDir()
@@ -194,26 +175,16 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $mail = new Writable\Maildir($this->_params);
         unset($mail->getFolders()->subfolder->test);
 
-        try {
-            $mail->createFolder('subfolder.test');
-        } catch (\Exception $e) {
-            return; // ok
-        }
-
-        $this->fail('should not be able to create existing folder');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->createFolder('subfolder.test');
     }
 
     public function testCreateExistingFolder()
     {
         $mail = new Writable\Maildir($this->_params);
 
-        try {
-            $mail->createFolder('subfolder.test');
-        } catch (\Exception $e) {
-            return; // ok
-        }
-
-        $this->fail('should not be able to create existing folder');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->createFolder('subfolder.test');
     }
 
     public function testRemoveFolderName()
@@ -222,12 +193,8 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $mail = new Writable\Maildir($this->_params);
         $mail->removeFolder('INBOX.subfolder.test');
 
-        try {
-            $mail->selectFolder($mail->getFolders()->subfolder->test);
-        } catch (\Exception $e) {
-            return; // ok
-        }
-        $this->fail('folder still exists');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->selectFolder($mail->getFolders()->subfolder->test);
     }
 
     public function testRemoveFolderInstance()
@@ -236,25 +203,16 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $mail = new Writable\Maildir($this->_params);
         $mail->removeFolder($mail->getFolders()->subfolder->test);
 
-        try {
-            $mail->selectFolder($mail->getFolders()->subfolder->test);
-        } catch (\Exception $e) {
-            return; // ok
-        }
-        $this->fail('folder still exists');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->selectFolder($mail->getFolders()->subfolder->test);
     }
 
     public function testRemoveFolderWithChildren()
     {
         $mail = new Writable\Maildir($this->_params);
 
-        try {
-            $mail->removeFolder($mail->getFolders()->subfolder);
-        } catch (\Exception $e) {
-            return; // ok
-        }
-
-        $this->fail('should not be able to remove a folder with children');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->removeFolder($mail->getFolders()->subfolder);
     }
 
     public function testRemoveSelectedFolder()
@@ -263,43 +221,28 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $mail = new Writable\Maildir($this->_params);
         $mail->selectFolder('subfolder.test');
 
-        try {
-            $mail->removeFolder('subfolder.test');
-        } catch (\Exception $e) {
-            return; // ok
-        }
-        $this->fail('no error while removing selected folder');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->removeFolder('subfolder.test');
     }
 
     public function testRemoveInvalidFolder()
     {
         $mail = new Writable\Maildir($this->_params);
 
-        try {
-            $mail->removeFolder('thisFolderDoestNotExist');
-        } catch (\Exception $e) {
-            return; // ok
-        }
-        $this->fail('no error while removing invalid folder');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->removeFolder('thisFolderDoestNotExist');
     }
 
     public function testRenameFolder()
     {
     	$this->markTestIncomplete("Fail");
         $mail = new Writable\Maildir($this->_params);
-        try {
-            $mail->renameFolder('INBOX.subfolder', 'INBOX.foo');
-            $mail->renameFolder($mail->getFolders()->foo, 'subfolder');
-        } catch (\Exception $e) {
-            $this->fail('renaming failed');
-        }
 
-        try {
-            $mail->renameFolder('INBOX', 'foo');
-        } catch (\Exception $e) {
-            return; // ok
-        }
-        $this->fail('no error while renaming INBOX');
+        $mail->renameFolder('INBOX.subfolder', 'INBOX.foo');
+        $mail->renameFolder($mail->getFolders()->foo, 'subfolder');
+
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->renameFolder('INBOX', 'foo');
     }
 
     public function testRenameSelectedFolder()
@@ -308,24 +251,16 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $mail = new Writable\Maildir($this->_params);
         $mail->selectFolder('subfolder.test');
 
-        try {
-            $mail->renameFolder('subfolder.test', 'foo');
-        } catch (\Exception $e) {
-            return; // ok
-        }
-        $this->fail('no error while renaming selected folder');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->renameFolder('subfolder.test', 'foo');
     }
 
     public function testRenameToChild()
     {
         $mail = new Writable\Maildir($this->_params);
 
-        try {
-            $mail->renameFolder('subfolder.test', 'subfolder.test.foo');
-        } catch (\Exception $e) {
-            return; // ok
-        }
-        $this->fail('no error while renaming folder to child of old');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->renameFolder('subfolder.test', 'subfolder.test.foo');
     }
 
     public function testAppend()
@@ -362,12 +297,8 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($mail->getMessage($count + 1)->from, $message->from);
         $this->assertEquals($mail->getMessage($count + 1)->to, $message->to);
 
-        try {
-            $mail->copyMessage(1, 'justARandomFolder');
-        } catch (\Exception $e) {
-            return; // ok
-        }
-        $this->fail('no error while copying to wrong folder');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->copyMessage(1, 'justARandomFolder');
     }
 
     public function testSetFlags()
@@ -389,12 +320,8 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($message->hasFlag(Storage::FLAG_SEEN));
         $this->assertTrue($message->hasFlag(Storage::FLAG_FLAGGED));
 
-        try {
-            $mail->setFlags(1, array(Storage::FLAG_RECENT));
-        } catch (\Exception $e) {
-            return; // ok
-        }
-        $this->fail('should not be able to set recent flag');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->setFlags(1, array(Storage::FLAG_RECENT));
     }
 
     public function testSetFlagsRemovedFile()
@@ -402,13 +329,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $mail = new Writable\Maildir($this->_params);
         unlink($this->_params['dirname'] . 'cur/1000000000.P1.example.org:2,S');
 
-        try {
-            $mail->setFlags(1, array(Storage::FLAG_FLAGGED));
-        } catch (\Exception $e) {
-            return; // ok
-        }
-
-        $this->fail('should not be able to set flags with removed file');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
     }
 
     public function testRemove()
@@ -428,13 +349,8 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $mail = new Writable\Maildir($this->_params);
         unlink($this->_params['dirname'] . 'cur/1000000000.P1.example.org:2,S');
 
-        try {
-            $mail->removeMessage(1);
-        } catch (\Exception $e) {
-            return; // ok
-        }
-
-        $this->fail('should not be able to remove message which is already removed in fs');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->removeMessage(1);
     }
 
     public function testCheckQuota()
@@ -497,13 +413,8 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($mail->getQuota());
 
-        try {
-            $mail->getQuota(true);
-        } catch(MailException\ExceptionInterface $e) {
-            // ok
-            return;
-        }
-        $this->fail('get quota from file should fail if file is missing');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->getQuota(true);
     }
 
     public function testMissingMaildirsizeWithFixedQuota()
@@ -548,21 +459,14 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
         $mail->setQuota(false);
         $this->assertTrue($mail->checkQuota());
-        try {
-            $mail->appendMessage("Subject: test\r\n\r\n");
-        } catch(MailException\ExceptionInterface $e) {
-            $this->fail('appending should not fail if quota check is not active');
-        }
+
+        $mail->appendMessage("Subject: test\r\n\r\n");
 
         $mail->setQuota(true);
         $this->assertTrue($mail->checkQuota());
-        try {
-            $mail->appendMessage("Subject: test\r\n\r\n");
-        } catch(MailException\ExceptionInterface $e) {
-            // ok
-            return;
-        }
-        $this->fail('appending after being over quota should fail');
+
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->appendMessage("Subject: test\r\n\r\n");
     }
 
     public function testRemoveMessage()
@@ -641,11 +545,8 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $e = null;
         try {
             $mail = new Writable\Maildir($this->_params);
-        } catch (\Exception $e) {
-        }
-
-        if ($e === null) {
             $this->fail('empty maildir should not be accepted');
+        } catch (\Exception $e) {
         }
 
         Writable\Maildir::initMaildir($this->_params['dirname']);
@@ -661,11 +562,8 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $e = null;
         try {
             $mail = new Writable\Maildir($this->_params);
-        } catch (\Exception $e) {
-        }
-
-        if ($e === null) {
             $this->fail('empty maildir should not be accepted');
+        } catch (\Exception $e) {
         }
 
         $this->_params['create'] = true;

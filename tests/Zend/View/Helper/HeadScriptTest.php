@@ -357,11 +357,9 @@ document.write(bar.strlen());');
         $this->helper->__invoke()->captureStart();
         echo "this is something captured";
         $this->helper->__invoke()->captureEnd();
-        try {
-            $this->helper->__invoke()->captureStart();
-        } catch (View\Exception\ExceptionInterface $e) {
-            $this->fail('Serial captures should be allowed');
-        }
+
+        $this->helper->__invoke()->captureStart();
+
         echo "this is something else captured";
         $this->helper->__invoke()->captureEnd();
     }

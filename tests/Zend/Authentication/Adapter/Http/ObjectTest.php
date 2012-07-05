@@ -110,32 +110,13 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testValidConfigs()
     {
-        try {
-            $t = new Adapter\Http($this->_basicConfig);
-        } catch (Adapter\Exception\ExceptionInterface $e) {
-            $this->fail('Valid config deemed invalid');
-        }
-        $this->assertFalse(empty($t));
-        $this->assertInstanceOf('Zend\\Authentication\\Adapter\\Http', $t);
-        unset($t);
-
-        try {
-            $t = new Adapter\Http($this->_digestConfig);
-        } catch (Adapter\Exception\ExceptionInterface $e) {
-            $this->fail('Valid config deemed invalid');
-        }
-        $this->assertFalse(empty($t));
-        $this->assertInstanceOf('Zend\\Authentication\\Adapter\\Http', $t);
-        unset($t);
-
-        try {
-            $t = new Adapter\Http($this->_bothConfig);
-        } catch (Adapter\Exception\ExceptionInterface $e) {
-            $this->fail('Valid config deemed invalid');
-        }
-        $this->assertFalse(empty($t));
-        $this->assertInstanceOf('Zend\\Authentication\\Adapter\\Http', $t);
-        unset($t);
+        $configs = array (
+            $this->_basicConfig,
+            $this->_digestConfig,
+            $this->_bothConfig,
+        );
+        foreach($configs as $config)
+        new Adapter\Http($config);
     }
 
     public function testInvalidConfigs()

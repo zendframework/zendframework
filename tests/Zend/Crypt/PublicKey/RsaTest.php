@@ -421,13 +421,9 @@ CERT;
             'private_key_bits' => 512,
         ));
 
-        try {
-            $rsa = Rsa::factory(array(
-                'pass_phrase' => '0987654321',
-                'private_key' => $rsaOptions->getPrivateKey()->toString(),
-            ));
-        } catch (Exception\RuntimeException $e) {
-            $this->fail('Passphrase loading of a private key failed');
-        }
+        Rsa::factory(array(
+            'pass_phrase' => '0987654321',
+            'private_key' => $rsaOptions->getPrivateKey()->toString(),
+        ));
     }
 }

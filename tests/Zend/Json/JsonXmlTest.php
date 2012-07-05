@@ -558,16 +558,12 @@ EOT;
      * @dataProvider providerNestingDepthIsHandledProperly
      */
     public function testNestingDepthIsHandledProperlyWhenNestingDepthDoesNotExceedMaximum($xmlStringContents)
-    {   
-        try {
-            Json\Json::$maxRecursionDepthAllowed = 25;
-            $jsonString = Json\Json::fromXml($xmlStringContents, true);
-            $jsonArray = Json\Json::decode($jsonString, Json\Json::TYPE_ARRAY);
-            $this->assertNotNull($jsonArray, "JSON decode result is NULL");
-            $this->assertSame('A', $jsonArray['response']['message_type']['defaults']['close_rules']['after_responses']);
-        } catch ( Zend\Json\Exception\RecursionException $ex ) {
-            $this->fail('Zend_Json::fromXml does not implement recursion check properly');
-        }
+    {
+        Json\Json::$maxRecursionDepthAllowed = 25;
+        $jsonString = Json\Json::fromXml($xmlStringContents, true);
+        $jsonArray = Json\Json::decode($jsonString, Json\Json::TYPE_ARRAY);
+        $this->assertNotNull($jsonArray, "JSON decode result is NULL");
+        $this->assertSame('A', $jsonArray['response']['message_type']['defaults']['close_rules']['after_responses']);
     }
     
     /**

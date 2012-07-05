@@ -235,12 +235,7 @@ class GDataOnlineTest extends \PHPUnit_Framework_TestCase
         // cleanup and remove the album
         // first we wait 5 seconds
         sleep(5);
-        try {
-            $albumEntry->delete();
-        } catch (App\Exception $e) {
-            $this->fail('Tried to delete the test album, got exception: ' .
-                $e->getMessage());
-        }
+        $albumEntry->delete();
     }
 
     function testIsAuthenticated()

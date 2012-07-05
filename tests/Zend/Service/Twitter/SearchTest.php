@@ -82,11 +82,7 @@ class SearchTest extends \PHPUnit_Framework_TestCase
 
     public function testValidResponseTypeShouldNotThrowException()
     {
-        try {
-            $this->twitter->setResponseType('atom');
-        } catch (\Exception $e) {
-            $this->fail('Setting a valid response type should not throw an exception');
-        }
+        $this->twitter->setResponseType('atom');
     }
 
     public function testSetOptionsWithArray()

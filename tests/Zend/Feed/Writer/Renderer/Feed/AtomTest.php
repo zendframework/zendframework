@@ -69,11 +69,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testBuildMethodRunsMinimalWriterContainerProperlyBeforeICheckAtomCompliance()
     {
         $feed = new Renderer\Feed\Atom($this->_validWriter);
-        try {
-            $feed->render();
-        } catch (Writer\Exception $e) {
-            $this->fail('Valid Writer object caused an exception when building which should never happen');
-        }
+        $feed->render();
     }
 
     public function testFeedEncodingHasBeenSet()

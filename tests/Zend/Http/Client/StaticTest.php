@@ -484,11 +484,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             'outputstream' => realpath(__DIR__ . '/_files/zend_http_client_stream.file'),
         );
         $client = new HTTPClient($url, $config);
-        try {
-            $result = $client->send();
-        } catch (Http\Exception\ExceptionInterface $e) {
-            $this->fail('Unexpected exception was thrown: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
-        }
+
+        $result = $client->send();
+
         // we can safely return until we can verify link is still active
         // @todo verify link is still active
         return;

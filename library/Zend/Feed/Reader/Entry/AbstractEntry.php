@@ -91,8 +91,10 @@ abstract class AbstractEntry
         $this->_domDocument = $entry->ownerDocument;
         if ($type !== null) {
             $this->_data['type'] = $type;
-        } else if($this->_domDocument !== null) {
-			$this->_data['type'] = Reader\Reader::detectType($this->_domDocument);
+        } else if ($this->_domDocument !== null) {
+            $this->_data['type'] = Reader\Reader::detectType($this->_domDocument);
+        } else {
+            $this->_data['type'] = Reader\Reader::TYPE_ANY;		
         }
         $this->_loadExtensions();
     }

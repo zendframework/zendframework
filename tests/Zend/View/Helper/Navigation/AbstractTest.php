@@ -153,7 +153,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns the contens of the exepcted $file
+     * Returns the contens of the expected $file
      * @param  string $file
      * @return string
      */

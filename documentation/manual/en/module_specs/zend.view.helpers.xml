@@ -279,7 +279,7 @@ I have seen 'The Jerk' 3 time(s).
             script as part of your helper. This is why we define the
             <methodname>setView()</methodname> and <methodname>getView()</methodname> methods. As an
             example, we could rewrite the <classname>SpecialPurpose</classname> helper as follows to
-            take advantage of the <classname>Escape</classname> helper:
+            take advantage of the <classname>EscapeHtml</classname> helper:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -295,7 +295,7 @@ class SpecialPurpose extends AbstractHelper
     {
         $this->count++;
         $output  = sprintf("I have seen 'The Jerk' %d time(s).", $this->count);
-        $escaper = $this->getView()->plugin('escape');
+        $escaper = $this->getView()->plugin('escapehtml');
         return $escaper($output);
     }
 }

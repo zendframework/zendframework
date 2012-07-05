@@ -97,7 +97,7 @@ class ServiceListenerTest extends TestCase
 
     public function assertServiceManagerIsConfigured()
     {
-        $this->listener->onLoadModulesFinish($this->event);
+        $this->listener->onLoadModulesPost($this->event);
         foreach ($this->getServiceConfiguration() as $prop => $expected) {
             if ($prop == 'invokables') {
                 $prop = 'invokableClasses';

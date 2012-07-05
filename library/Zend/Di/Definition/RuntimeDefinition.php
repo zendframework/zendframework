@@ -52,7 +52,7 @@ class RuntimeDefinition implements DefinitionInterface
     {
         $this->introspectionStrategy = $introspectionStrategy;
     }
-    
+
     /**
      * @return IntrospectionStrategy
      */
@@ -82,7 +82,7 @@ class RuntimeDefinition implements DefinitionInterface
 
     /**
      * Retrieves registered classes names
-     * 
+     *
      * @return array
      */
     public function getClasses()
@@ -101,7 +101,7 @@ class RuntimeDefinition implements DefinitionInterface
         if ($this->explicitLookups === true) {
             return (array_key_exists($class, $this->classes));
         }
-        
+
         return class_exists($class) || interface_exists($class);
     }
 
@@ -324,9 +324,6 @@ class RuntimeDefinition implements DefinitionInterface
                 }
             }
         }
-
-
-        //var_dump($this->classes);
     }
 
     protected function processParams(&$def, Reflection\ClassReflection $rClass, Reflection\MethodReflection $rMethod)

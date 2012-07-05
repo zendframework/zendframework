@@ -2,12 +2,20 @@
 
 namespace Zend\Di\ServiceLocator;
 
+/**
+ * Container for methods and parameters used by by Di to create a particular instance
+ */
 class GeneratorInstance
 {
     /**
-     * @var string
+     * @var string|null
      */
-    protected $name;
+    protected $class;
+
+    /**
+     * @var string|null
+     */
+    protected $alias;
 
     /**
      * @var mixed
@@ -25,48 +33,85 @@ class GeneratorInstance
     protected $methods = array();
 
     /**
-     * Constructor
-     *
-     * @param string $name
-     * @param mixed $constructor
-     * @param array $params
+     * @var bool
      */
-    public function __construct($name, $constructor, array $params)
+    protected $shared = true;
+
+    /**
+     * @param string|null $class
+     * @param string|null $alias
+     * @param mixed       $constructor
+     * @param array       $params
+     */
+    public function __construct($class, $alias, $constructor, array $params)
     {
-        $this->name        = $name;
+        $this->class       = $class;
+        $this->alias       = $alias;
         $this->constructor = $constructor;
         $this->params      = $params;
     }
 
     /**
-     * Get name
+     * Retrieves the best available name for this instance (instance alias first then class name)
      *
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
-        return $this->name;
+        return $this->alias ? $this->alias : $this->class;
+    }
+
+    /**
+     * Class of the instance. Null if class is unclear (such as when the instance is produced by a callback)
+     *
+     * @return string|null
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
+     * Alias for the instance (if any)
+     *
+     * @return string|null
+     */
+    public function getAlias()
+    {
+        return $this->alias;
     }
 
     /**
      * Set class name
      *
-     * In the case of an instance created via a callback, we need to set the 
+     * In the case of an instance created via a callback, we need to set the
      * class name after creating the generator instance.
-     * 
-     * @param  string $name 
+     *
+     * @param  string $class
      * @return GeneratorInstance
      */
-    public function setName($name)
+    public function setClass($class)
     {
-        $this->name = $name;
+        $this->class = $class;
         return $this;
     }
 
     /**
-     * Get constructor
+     * Set instance alias
      *
-     * @return mixed
+     * @param  string $alias
+     * @return GeneratorInstance
+     */
+    public function setAlias($alias)
+    {
+        $this->alias = $alias;
+        return $this;
+    }
+
+    /**
+     * Get instantiator
+     *
+     * @return mixed constructor method name or callable responsible for generating instance
      */
     public function getConstructor()
     {
@@ -74,7 +119,8 @@ class GeneratorInstance
     }
 
     /**
-     * Get params
+     * Parameters passed to the instantiator as an ordered list of parameters. Each parameter that refers to another
+     * instance fetched recursively is a GeneratorInstance itself
      *
      * @return array
      */
@@ -96,12 +142,44 @@ class GeneratorInstance
     }
 
     /**
-     * Get methods
+     * Add a method called on the instance
+     *
+     * @param $method
+     * @return GeneratorInstance
+     */
+    public function addMethod($method)
+    {
+        $this->methods[] = $method;
+        return $this;
+    }
+
+    /**
+     * Retrieves a list of methods that are called on the instance in their call order. Each returned element has form
+     * array('method' => 'methodName', 'params' => array( ... ordered list of call parameters ... ), where every call
+     * parameter that is a recursively fetched instance is a GeneratorInstance itself
      *
      * @return array
      */
     public function getMethods()
     {
         return $this->methods;
+    }
+
+    /**
+     * @param bool $shared
+     */
+    public function setShared($shared)
+    {
+        $this->shared = (bool) $shared;
+    }
+
+    /**
+     * Retrieves whether the instance is shared or not
+     *
+     * @return bool
+     */
+    public function isShared()
+    {
+        return $this->shared;
     }
 }

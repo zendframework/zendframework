@@ -19,7 +19,6 @@ class GeneratorTest extends TestCase
 
     public function setUp()
     {
-        $this->markTestIncomplete('Generator must be refactored to current di.');
         $this->tmpFile = false;
         $this->di = new Di;
     }
@@ -164,11 +163,11 @@ class GeneratorTest extends TestCase
         }
         $expected = array(
             'composed',
-            'ZendTest\Di\TestAsset\ComposedClass', 
+            'ZendTest\Di\TestAsset\ComposedClass',
             'inspect',
-            'ZendTest\Di\TestAsset\InspectedClass', 
+            'ZendTest\Di\TestAsset\InspectedClass',
             'struct',
-            'ZendTest\Di\TestAsset\Struct', 
+            'ZendTest\Di\TestAsset\Struct',
         );
         $this->assertEquals(count($expected), count($services), var_export($services, 1));
         foreach ($expected as $service) {
@@ -206,7 +205,7 @@ class GeneratorTest extends TestCase
         $expected = array(
             'get',
             'getZendTestDiTestAssetComposedClass',
-            'getComposed', 
+            'getComposed',
             'getZendTestDiTestAssetInspectedClass',
             'getInspect',
             'getZendTestDiTestAssetStruct',
@@ -224,7 +223,7 @@ class GeneratorTest extends TestCase
         $builder = new ContainerGenerator($this->di);
         $builder->setContainerClass('Application');
         $codegen = $builder->getCodeGenerator();
-        $this->assertInstanceOf('Zend\CodeGenerator\Php\PhpFile', $codegen);
+        $this->assertInstanceOf('Zend\Code\Generator\FileGenerator', $codegen);
     }
 
     public function testCanSpecifyNamespaceForGeneratedPhpClassfile()

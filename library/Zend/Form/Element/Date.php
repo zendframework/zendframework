@@ -66,12 +66,12 @@ class Date extends DateTime
                      ? $this->attributes['step'] : 1; // Days
 
         $baseValue = (isset($this->attributes['min']))
-                     ? $this->attributes['min'] : '1970-01-01T00:00:00Z';
+                     ? $this->attributes['min'] : '1970-01-01';
 
         return new DateStepValidator(array(
-            'format'       => \DateTime::ISO8601,
-            'baseValue'    => $baseValue,
-            'step' => new \DateInterval("P{$stepValue}D"),
+            'format'    => 'Y-m-d',
+            'baseValue' => $baseValue,
+            'step'      => new \DateInterval("P{$stepValue}D"),
         ));
     }
 }

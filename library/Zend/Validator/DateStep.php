@@ -264,8 +264,8 @@ class DateStep extends AbstractValidator
 
         $this->setValue($value);
 
-        $baseDate     = $this->convertToDateTime($this->getBaseValue());
-        $step = $this->getStep();
+        $baseDate = $this->convertToDateTime($this->getBaseValue());
+        $step     = $this->getStep();
 
         // Parse the date
         try {

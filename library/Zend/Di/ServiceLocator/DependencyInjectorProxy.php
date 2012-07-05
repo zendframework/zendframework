@@ -5,6 +5,9 @@ namespace Zend\Di\ServiceLocator;
 use Zend\Di\Di;
 use Zend\Di\Exception;
 
+/**
+ * Proxy used to analyze how instances are created by a given Di.
+ */
 class DependencyInjectorProxy extends Di
 {
     /**
@@ -81,8 +84,9 @@ class DependencyInjectorProxy extends Di
     /**
      * Override instance creation via callback
      *
-     * @param  callback $callback
-     * @param  null|array $params
+     * @param  callback    $callback
+     * @param  null|array  $params
+     * @param  null|string $alias
      * @return GeneratorInstance
      * @throws Exception\InvalidCallbackException
      */
@@ -139,12 +143,15 @@ class DependencyInjectorProxy extends Di
         $methodClass = $instance->getClass();
         $callParameters = $this->resolveMethodParameters($methodClass, $method, $params, $alias, $methodIsRequired);
 
-        if ($callParameters !== false) {
+        if ($callParameters === false) {
             $instance->addMethod(array(
                 'method' => $method,
                 'params' => $callParameters,
             ));
+            return true;
         }
+
+        return false;
     }
 
     /**
@@ -152,6 +159,11 @@ class DependencyInjectorProxy extends Di
      */
     protected function getClass($instance)
     {
-        return $instance instanceof GeneratorInstance ? $instance->getClass() : get_class($instance);
+        if ($instance instanceof GeneratorInstance) {
+            /* @var $instance GeneratorInstance */
+            return $instance->getClass();
+        }
+
+        return parent::getClass($instance);
     }
 }

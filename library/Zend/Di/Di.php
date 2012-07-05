@@ -662,6 +662,9 @@ class Di implements DependencyInjectionInterface
      * Utility method used to retrieve the class of a particular instance. This is here to allow extending classes to
      * override how class names are resolved
      *
+     * @internal this method is used by the ServiceLocator\DependencyInjectorProxy class to interact with instances
+     *           and is a hack to be used internally until a major refactor does not split the `resolveMethodParameters`. Do not
+     *           rely on its functionality.
      * @param Object $instance
      * @return string
      */

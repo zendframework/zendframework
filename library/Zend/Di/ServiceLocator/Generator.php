@@ -112,7 +112,6 @@ class Generator
             }
 
             // Create instantiation code
-            $creation    = '';
             $constructor = $meta->getConstructor();
             if ('__construct' != $constructor) {
                 // Constructor callback

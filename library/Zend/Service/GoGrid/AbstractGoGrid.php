@@ -23,7 +23,7 @@ namespace Zend\Service\GoGrid;
 
 use Zend\Http\Client as HttpClient;
 
-abstract class GoGrid
+abstract class AbstractGoGrid
 {
     const URL_API                = 'https://api.gogrid.com/api/';
     const FORMAT_API             = 'json';
@@ -52,7 +52,7 @@ abstract class GoGrid
      */
     protected $_apiVersion = self::VERSION_API;
     /**
-     * @var Zend\Http\Client
+     * @var HttpClient
      */
     protected $_httpClient;
     /**
@@ -81,7 +81,7 @@ abstract class GoGrid
     /**
      * get the HttpClient static instance
      * 
-     * @return Zend\Http\Client
+     * @return HttpClient
      */
     public function getHttpClient()
     {

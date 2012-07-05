@@ -13,21 +13,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage SimpleDb
+ * @package    Zend_Service
+ * @subpackage LiveDocx
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\Amazon\SimpleDb;
+namespace Zend\Service\LiveDocx\Exception;
 
 /**
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage SimpleDb
+ * @package    Zend_Service
+ * @subpackage LiveDocx
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception 
-    extends \Zend\Service\Amazon\Exception
-{}
+interface ExceptionInterface
+{
+}

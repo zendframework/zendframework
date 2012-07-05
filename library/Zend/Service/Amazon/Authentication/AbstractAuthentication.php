@@ -28,10 +28,21 @@ namespace Zend\Service\Amazon\Authentication;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Authentication
+abstract class AbstractAuthentication
 {
+    /**
+     * @var string
+     */
     protected $_accessKey;
+
+    /**
+     * @var string
+     */
     protected $_secretKey;
+
+    /**
+     * @var string
+     */
     protected $_apiVersion;
     
     /**
@@ -40,7 +51,6 @@ abstract class Authentication
      * @param  string $accessKey 
      * @param  string $secretKey 
      * @param  string $apiVersion 
-     * @return void
      */
     public function __construct($accessKey, $secretKey, $apiVersion)
     {

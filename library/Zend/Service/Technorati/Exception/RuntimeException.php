@@ -20,7 +20,6 @@
  */
 
 namespace Zend\Service\Technorati\Exception;
-use Zend\Service\Technorati\Exception as TechnoratiException;
 
 /**
  * @category   Zend
@@ -29,8 +28,6 @@ use Zend\Service\Technorati\Exception as TechnoratiException;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException
-    extends \RuntimeException
-    implements TechnoratiException
-{}
-
+class RuntimeException extends \RuntimeException implements ExceptionInterface
+{
+}

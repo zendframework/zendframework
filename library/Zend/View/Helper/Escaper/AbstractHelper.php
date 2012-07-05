@@ -19,9 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\View\Helper;
+namespace Zend\View\Helper\Escaper;
 
+use Zend\View\Helper;
 use Zend\View\Exception;
+use Zend\Escaper;
 
 /**
  * Helper for escaping values
@@ -31,8 +33,9 @@ use Zend\View\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Escape extends AbstractHelper
+abstract class AbstractHelper extends Helper\AbstractHelper
 {
+
     /**@+
      * @const Recursion constants
      */
@@ -42,48 +45,42 @@ class Escape extends AbstractHelper
     /**@-*/
 
     /**
-     * @var callback
+     * @var Escaper\Escaper
      */
-    protected $callback;
+    protected $escaper = null;
 
     /**
      * @var string Encoding
      */
     protected $encoding = 'UTF-8';
 
-    /**
-     * @var array Supported encodings used to avoid an illegal call
-     */
-    protected $supportedEncodings = array(
-        'iso-8859-1',   'iso8859-1',    'iso-8859-5',   'iso8859-5',
-        'iso-8859-15',  'iso8859-15',   'utf-8',        'cp866',
-        'ibm866',       '866',          'cp1251',       'windows-1251',
-        'win-1251',     '1251',         'cp1252',       'windows-1252',
-        '1252',         'koi8-r',       'koi8-ru',      'koi8r',
-        'big5',         '950',          'gb2312',       '936',
-        'big5-hkscs',   'shift_jis',    'sjis',         'sjis-win',
-        'cp932',        '932',          'euc-jp',       'eucjp',
-        'eucjp-win',    'macroman'
-    );
+    public function setEscaper(Escaper\Escaper $escaper)
+    {
+        $this->escaper = $escaper;
+        $this->encoding = $escaper->getEncoding();
+        return $this;
+    }
+
+    public function getEscaper()
+    {
+        if (null === $this->escaper) {
+            $this->setEscaper(new Escaper\Escaper($this->getEncoding()));
+        }
+        return $this->escaper;
+    }
 
     /**
      * Set the encoding to use for escape operations
      * 
      * @param  string $encoding 
-     * @return Escape
+     * @return AbstractEscaper
      */
     public function setEncoding($encoding)
     {
-        if (empty($encoding)) {
+        if (!is_null($this->escaper)) {
             throw new Exception\InvalidArgumentException(
-                get_called_class() . '::setEncoding() does not allow a NULL or '
-                . 'blank string value'
-            );
-        }
-        if (!in_array(strtolower($encoding), $this->supportedEncodings)) {
-            throw new Exception\InvalidArgumentException(
-                'Value of \'' . $encoding . '\' passed to ' . get_called_class()
-                . '::setEncoding() is invalid. Provide an encoding supported by htmlspecialchars()'
+                'Character encoding settings cannot be changed once the Helper has been used or '
+                . ' if a Zend\Escaper\Escaper object (with preset encoding option) is set.'
             );
         }
         $this->encoding = $encoding;
@@ -101,42 +98,6 @@ class Escape extends AbstractHelper
     }
 
     /**
-     * Set a callback to use for escaping
-     * 
-     * @param  callback $callback 
-     * @return Escape
-     * @throws Exception\InvalidArgumentException if provided callback is not callable
-     */
-    public function setCallback($callback)
-    {
-        if (!is_callable($callback)) {
-            throw new Exception\InvalidArgumentException('Invalid callback provided to ' . get_called_class());
-        }
-        $this->callback = $callback;
-        return $this;
-    }
-
-    /**
-     * Get the attached callback
-     *
-     * If none defined, creates a closure wrapping htmlspecialchars, providing 
-     * the currently set encoding.
-     * 
-     * @return callback
-     */
-    public function getCallback()
-    {
-        if (!is_callable($this->callback)) {
-            $encoding = $this->getEncoding();
-            $callback = function($value) use ($encoding) {
-                return htmlspecialchars($value, ENT_QUOTES, $encoding, false);
-            };
-            $this->setCallback($callback);
-        }
-        return $this->callback;
-    }
-
-    /**
      * Invoke this helper: escape a value
      * 
      * @param  mixed $value 
@@ -147,8 +108,7 @@ class Escape extends AbstractHelper
     public function __invoke($value, $recurse = self::RECURSE_NONE)
     {
         if (is_string($value)) {
-            $callback = $this->getCallback();
-            return call_user_func($callback, $value);
+            return $this->escape($value);
         }
         if (is_array($value)) {
             if (!(self::RECURSE_ARRAY & $recurse)) {
@@ -165,10 +125,8 @@ class Escape extends AbstractHelper
             if (!(self::RECURSE_OBJECT & $recurse)) {
                 // Attempt to cast it to a string
                 if (method_exists($value, '__toString')) {
-                    $callback = $this->getCallback();
-                    return call_user_func($callback, (string) $value);
+                    return $this->escape((string) $value);
                 }
-
                 throw new Exception\InvalidArgumentException(
                     'Object provided to Escape helper, but flags do not allow recursion'
                 );
@@ -178,8 +136,16 @@ class Escape extends AbstractHelper
             }
             return $this->__invoke((array) $value, $recurse | self::RECURSE_ARRAY);
         }
-
         // At this point, we have a scalar; simply return it
         return $value;
     }
+
+    /**
+     * Escape a value for current escaping strategy
+     *
+     * @param string $value
+     * @return string
+     */
+    protected abstract function escape($value);
+
 }

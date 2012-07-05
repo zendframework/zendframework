@@ -110,7 +110,7 @@ class Escaper
                     . ' constructor parameter is invalid. Provide an encoding supported by htmlspecialchars()'
                 );
             }
-            $this->encoding = $encoding;
+            $this->encoding = strtolower($encoding);
         }
         if (version_compare(PHP_VERSION, '5.4') >= 0) {
             $this->htmlSpecialCharsFlags = ENT_QUOTES | ENT_SUBSTITUTE;

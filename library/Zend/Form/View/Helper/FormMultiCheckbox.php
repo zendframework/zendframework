@@ -261,12 +261,12 @@ class FormMultiCheckbox extends FormInput
     protected function renderOptions(ElementInterface $element, array $options, array $selectedOptions,
                                      array $attributes)
     {
-        $escapeHelper    = $this->getEscapeHelper();
-        $labelHelper     = $this->getLabelHelper();
-        $labelClose      = $labelHelper->closeTag();
-        $labelPosition   = $this->getLabelPosition();
+        $escapeHtmlHelper = $this->getEscapeHtmlHelper();
+        $labelHelper      = $this->getLabelHelper();
+        $labelClose       = $labelHelper->closeTag();
+        $labelPosition    = $this->getLabelPosition();
         $globalLabelAttributes = $element->getLabelAttributes();
-        $closingBracket  = $this->getInlineClosingBracket();
+        $closingBracket   = $this->getInlineClosingBracket();
 
         if (empty($globalLabelAttributes)) {
             $globalLabelAttributes = $this->labelAttributes;
@@ -327,7 +327,7 @@ class FormMultiCheckbox extends FormInput
                 $closingBracket
             );
 
-            $label     = $escapeHelper($label);
+            $label     = $escapeHtmlHelper($label);
             $labelOpen = $labelHelper->openTag($labelAttributes);
             $template  = $labelOpen . '%s%s' . $labelClose;
             switch ($labelPosition) {

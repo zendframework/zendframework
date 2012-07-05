@@ -65,7 +65,7 @@ abstract class CommonTestCase extends TestCase
 
     public function testInjectingEncodingProxiesToEscapeHelper()
     {
-        $escape = $this->renderer->plugin('escape');
+        $escape = $this->renderer->plugin('escapehtml');
         $this->helper->setEncoding('iso-8859-1');
         $this->assertEquals('iso-8859-1', $escape->getEncoding());
     }

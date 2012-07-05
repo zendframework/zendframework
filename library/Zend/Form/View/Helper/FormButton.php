@@ -143,7 +143,9 @@ class FormButton extends FormInput
             $buttonContent = $content;
         }
 
-        return $openTag . $buttonContent . $this->closeTag();
+        $escape = $this->getEscapeHtmlHelper();
+
+        return $openTag . $escape($buttonContent) . $this->closeTag();
     }
 
     /**

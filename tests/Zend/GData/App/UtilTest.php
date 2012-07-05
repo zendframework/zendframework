@@ -215,13 +215,7 @@ class UtilTest extends \PHPUnit_Framework_TestCase
                       3 => null,
                       5 => null,
                       -2 => null);
-        try {
-            $result = App\Util::findGreatestBoundedValue(-1, $data);
-            $failed = true;
-        } catch (App\Exception $e) {
-            $failed = false;
-        }
-        $this->assertFalse($failed, 'Exception not raised.');
+       $this->setExpectedException('Zend\GData\app\Exception');
+        App\Util::findGreatestBoundedValue(-1, $data);
     }
-
 }

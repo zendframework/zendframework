@@ -101,11 +101,8 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
     {
         $this->_paginator = \Zend\Paginator\Paginator::factory(new \ArrayIterator(array()));
         $items = $this->_paginator->getCurrentItems();
-        try {
-            foreach ($items as $item);
-        } catch (\OutOfBoundsException $e) {
-            $this->fail('Empty iterator caused in an OutOfBoundsException');
-        }
+
+        foreach ($items as $item);
     }
 
     /**

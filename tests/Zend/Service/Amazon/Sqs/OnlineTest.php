@@ -77,32 +77,28 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      */
     public function testSqs()
     {
-        try {
-            $queue_url = $this->_amazon->create($this->_queue_name, 45);
-            $timeout = $this->_amazon->getAttribute($queue_url, 'VisibilityTimeout');
-            $this->assertEquals(45, $timeout, 'VisibilityTimeout attribute is not 45');
+        $queue_url = $this->_amazon->create($this->_queue_name, 45);
+        $timeout = $this->_amazon->getAttribute($queue_url, 'VisibilityTimeout');
+        $this->assertEquals(45, $timeout, 'VisibilityTimeout attribute is not 45');
 
-            $test_msg = 'this is a test';
-            $this->_amazon->send($queue_url, $test_msg);
+        $test_msg = 'this is a test';
+        $this->_amazon->send($queue_url, $test_msg);
 
-            $messages = $this->_amazon->receive($queue_url);
+        $messages = $this->_amazon->receive($queue_url);
 
-            foreach ($messages as $message) {
-                $this->assertEquals($test_msg, $message['body']);
-            }
-
-            foreach ($messages as $message) {
-                $result = $this->_amazon->deleteMessage($queue_url, $message['handle']);
-                $this->assertTrue($result, 'Message was not deleted');
-            }
-
-            $count = $this->_amazon->count($queue_url);
-            $this->assertEquals(0, $count);
-
-            $this->_amazon->delete($queue_url);
-        } catch (\Exception $e) {
-            $this->fail($e->getMessage());
+        foreach ($messages as $message) {
+            $this->assertEquals($test_msg, $message['body']);
         }
+
+        foreach ($messages as $message) {
+            $result = $this->_amazon->deleteMessage($queue_url, $message['handle']);
+            $this->assertTrue($result, 'Message was not deleted');
+        }
+
+        $count = $this->_amazon->count($queue_url);
+        $this->assertEquals(0, $count);
+
+        $this->_amazon->delete($queue_url);
     }
 
     /**

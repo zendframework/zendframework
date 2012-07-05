@@ -82,12 +82,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
     public function testConstruct()
     {
-        try {
-            $message = new Message($this->options);
-            $this->assertTrue(true);
-        } catch (\Exception $e) {
-            $this->fail('should have gotten a valid object');
-        }
+        new Message($this->options);
 
         // parameter verification
         try {
@@ -132,12 +127,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue(true);
         }
 
-        try {
-            $message = new Message($this->options);
-            $this->assertTrue(true);
-        } catch (\Exception $e) {
-            $this->fail('should have gotten a valid object');
-        }
+        new Message($this->options);
 
         // parameter verification
         try {

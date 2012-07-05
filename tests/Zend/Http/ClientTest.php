@@ -17,15 +17,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testIfZeroValueCookiesCanBeSet()
     {
-        try {
-            $client = new Client();
-            $client->addCookie("test", 0);
-            $client->addCookie("test2", "0");
-            $client->addCookie("test3", false);
-        } catch (Exception\InvalidArgumentException $e) {
-            $this->fail('Zero Values should be valid');
-        }
-        $this->assertTrue(true);
+        $client = new Client();
+        $client->addCookie("test", 0);
+        $client->addCookie("test2", "0");
+        $client->addCookie("test3", false);
     }
 
     /**

@@ -133,5 +133,36 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('UTF-8', $entry->getEncoding());
     }
 
-
+    /**
+    * When not passing the optional argument type
+    */
+    public function testFeedEntryCanDetectFeedType()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/atom.xml')
+        );
+        $entry = $feed->current();
+        $stub = $this->getMockForAbstractClass(
+            'Zend\Feed\Reader\Entry\AbstractEntry', 
+            array($entry->getElement(), $entry->getId())
+        );
+        $this->assertEquals($entry->getType(), $stub->getType());
+    }
+	
+    /**
+    * When passing a newly created DOMElement without any DOMDocument assigned
+    */
+    public  function testFeedEntryCanSetAnyType()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/atom.xml')
+        );
+        $entry = $feed->current();
+        $domElement = new \DOMElement($entry->getElement()->tagName);
+        $stub = $this->getMockForAbstractClass(
+            'Zend\Feed\Reader\Entry\AbstractEntry', 
+            array($domElement, $entry->getId())
+        );
+        $this->assertEquals($stub->getType(), Reader\Reader::TYPE_ANY);
+    }
 }

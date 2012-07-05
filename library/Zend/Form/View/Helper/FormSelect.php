@@ -137,7 +137,7 @@ class FormSelect extends AbstractHelper
     {
         $template      = '<option %s>%s</option>';
         $optionStrings = array();
-        $escape        = $this->getEscapeHelper();
+        $escapeHtml    = $this->getEscapeHtmlHelper();
 
         foreach ($options as $key => $optionSpec) {
             $value    = '';
@@ -179,7 +179,7 @@ class FormSelect extends AbstractHelper
             $optionStrings[] = sprintf(
                 $template,
                 $this->createAttributesString($attributes),
-                $escape($label)
+                $escapeHtml($label)
             );
         }
 

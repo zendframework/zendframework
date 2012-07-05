@@ -64,7 +64,8 @@ class FormCollection extends AbstractHelper
 
         $markup = '';
         $templateMarkup = '';
-        $escapeHelper = $this->getEscapeHelper();
+        $escapeHtmlHelper = $this->getEscapeHtmlHelper();
+        $escapeHtmlAttrHelper = $this->getEscapeHtmlAttrHelper();
         $rowHelper = $this->getRowHelper();
 
         if ($element instanceof CollectionElement && $element->shouldCreateTemplate()) {
@@ -89,7 +90,7 @@ class FormCollection extends AbstractHelper
         if (!empty($templateMarkup)) {
             $markup .= sprintf(
                 '<span data-template="%s"></span>',
-                $escapeHelper($templateMarkup)
+                $escapeHtmlAttrHelper($templateMarkup)
             );
         }
 
@@ -98,7 +99,7 @@ class FormCollection extends AbstractHelper
             $label = $element->getLabel();
 
             if (!empty($label)) {
-                $label = $escapeHelper($label);
+                $label = $escapeHtmlHelper($label);
 
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',

@@ -1,0 +1,16 @@
+{
+    "name": "zendframework/zend-captcha",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "captcha"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Captcha": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

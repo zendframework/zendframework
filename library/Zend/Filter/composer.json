@@ -1,0 +1,20 @@
+{
+    "name": "zendframework/zend-filter",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "filter"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Filter": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "suggest": {
+        "zendframework/zend-i18n": "Zend\\I18n component",
+        "zendframework/zend-validator": "Zend\\Validator component"
+    }
+}

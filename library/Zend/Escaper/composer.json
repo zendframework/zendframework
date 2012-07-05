@@ -1,0 +1,16 @@
+{
+    "name": "zendframework/zend-escaper",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "escaper"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Escaper": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

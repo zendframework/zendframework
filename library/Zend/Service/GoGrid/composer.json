@@ -1,0 +1,17 @@
+{
+    "name": "zendframework/zend-service-gogrid",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "gogrid"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Service\\GoGrid": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-http": "self.version"
+    }
+}

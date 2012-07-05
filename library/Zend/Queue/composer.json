@@ -1,0 +1,16 @@
+{
+    "name": "zendframework/zend-queue",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "queue"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Queue": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "name": "zendframework/zend-cache",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "cache"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Cache": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "suggest": {
+        "zendframework/zend-log": "Zend\\Log component"
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "name": "zendframework/zend-service-windowsazure",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "windowsazure"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Service\\WindowsAzure": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

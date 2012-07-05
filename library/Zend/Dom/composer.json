@@ -1,0 +1,16 @@
+{
+    "name": "zendframework/zend-dom",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "dom"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Dom": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

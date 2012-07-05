@@ -164,9 +164,111 @@ class MysqlMetadata extends AbstractSource
 
     protected function loadConstraintData($table, $schema)
     {
-        $this->loadConstraintDataNames($schema);
-        $this->loadConstraintDataKeys($schema);
-        $this->loadConstraintReferences($schema);
+        if (isset($this->data['constraints'][$schema][$table])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('constraints', $schema, $table);
+
+        $isColumns = array(
+            array('T','TABLE_NAME'),
+            array('TC','CONSTRAINT_NAME'),
+            array('TC','CONSTRAINT_TYPE'),
+            array('KCU','COLUMN_NAME'),
+            array('RC','MATCH_OPTION'),
+            array('RC','UPDATE_RULE'),
+            array('RC','DELETE_RULE'),
+            array('KCU','REFERENCED_TABLE_SCHEMA'),
+            array('KCU','REFERENCED_TABLE_NAME'),
+            array('KCU','REFERENCED_COLUMN_NAME'),
+        );
+
+        $p = $this->adapter->getPlatform();
+
+        array_walk($isColumns, function (&$c) use ($p) {
+            $c = $p->quoteIdentifierChain($c);
+        });
+
+        $sql = 'SELECT ' . implode(', ', $isColumns)
+             . ' FROM ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','TABLES')) . ' T'
+
+             . ' INNER JOIN ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','TABLE_CONSTRAINTS')) . ' TC'
+             . ' ON ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+             . '  = ' . $p->quoteIdentifierChain(array('TC','TABLE_SCHEMA'))
+             . ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
+             . '  = ' . $p->quoteIdentifierChain(array('TC','TABLE_NAME'))
+
+             . ' LEFT JOIN ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','KEY_COLUMN_USAGE')) . ' KCU'
+             . ' ON ' . $p->quoteIdentifierChain(array('TC','TABLE_SCHEMA'))
+             . '  = ' . $p->quoteIdentifierChain(array('KCU','TABLE_SCHEMA'))
+             . ' AND ' . $p->quoteIdentifierChain(array('TC','TABLE_NAME'))
+             . '  = ' . $p->quoteIdentifierChain(array('KCU','TABLE_NAME'))
+             . ' AND ' . $p->quoteIdentifierChain(array('TC','CONSTRAINT_NAME'))
+             . '  = ' . $p->quoteIdentifierChain(array('KCU','CONSTRAINT_NAME'))
+
+             . ' LEFT JOIN ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','REFERENTIAL_CONSTRAINTS')) . ' RC'
+             . ' ON ' . $p->quoteIdentifierChain(array('TC','CONSTRAINT_SCHEMA'))
+             . '  = ' . $p->quoteIdentifierChain(array('RC','CONSTRAINT_SCHEMA'))
+             . ' AND ' . $p->quoteIdentifierChain(array('TC','CONSTRAINT_NAME'))
+             . '  = ' . $p->quoteIdentifierChain(array('RC','CONSTRAINT_NAME'))
+
+             . ' WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
+             . ' = ' . $p->quoteValue($table)
+             . ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_TYPE'))
+             . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+
+        if ($schema != self::DEFAULT_SCHEMA) {
+            $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+            . ' = ' . $p->quoteValue($schema);
+        } else {
+            $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
+            . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
+        }
+
+        $sql .= ' ORDER BY CASE ' . $p->quoteIdentifierChain(array('TC','CONSTRAINT_TYPE'))
+              . " WHEN 'PRIMARY KEY' THEN 1"
+              . " WHEN 'UNIQUE' THEN 2"
+              . " WHEN 'FOREIGN KEY' THEN 3"
+              . " ELSE 4 END"
+
+              . ', ' . $p->quoteIdentifierChain(array('TC','CONSTRAINT_NAME'))
+              . ', ' . $p->quoteIdentifierChain(array('KCU','ORDINAL_POSITION'));
+
+        $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
+
+        $realName = null;
+        $constraints = array();
+        foreach ($results->toArray() as $row) {
+            if ($row['CONSTRAINT_NAME'] !== $realName) {
+                $realName = $row['CONSTRAINT_NAME'];
+                $isFK = ('FOREIGN KEY' == $row['CONSTRAINT_TYPE']);
+                if ($isFK) {
+                    $name = $realName;
+                } else {
+                    $name = '_zf_' . $row['TABLE_NAME'] . '_' . $realName;
+                }
+                $constraints[$name] = array(
+                    'constraint_name' => $name,
+                    'constraint_type' => $row['CONSTRAINT_TYPE'],
+                    'table_name'      => $row['TABLE_NAME'],
+                    'columns'         => array(),
+                );
+                if ($isFK) {
+                    $constraints[$name]['referenced_table_schema'] = $row['REFERENCED_TABLE_SCHEMA'];
+                    $constraints[$name]['referenced_table_name']   = $row['REFERENCED_TABLE_NAME'];
+                    $constraints[$name]['referenced_columns']      = array();
+                    $constraints[$name]['match_option']       = $row['MATCH_OPTION'];
+                    $constraints[$name]['update_rule']        = $row['UPDATE_RULE'];
+                    $constraints[$name]['delete_rule']        = $row['DELETE_RULE'];
+                }
+            }
+            $constraints[$name]['columns'][] = $row['COLUMN_NAME'];
+            if ($isFK) {
+                $constraints[$name]['referenced_columns'][] = $row['REFERENCED_COLUMN_NAME'];
+            }
+        }
+
+        $this->data['constraints'][$schema][$table] = $constraints;
     }
 
     protected function loadConstraintDataNames($schema)

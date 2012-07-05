@@ -317,10 +317,8 @@ abstract class AbstractSource implements MetadataInterface
         $this->loadConstraintData($table, $schema);
 
         $constraints = array();
-        foreach ($this->data['constraint_names'][$schema] as $constraintName => $constraintInfo) {
-            if ($constraintInfo['table_name'] == $table) {
-                $constraints[] = $this->getConstraint($constraintInfo['constraint_name'], $table, $schema);
-            }
+        foreach (array_keys($this->data['constraints'][$schema][$table]) as $constraintName) {
+            $constraints[] = $this->getConstraint($constraintName, $table, $schema);
         }
 
         return $constraints;
@@ -332,7 +330,6 @@ abstract class AbstractSource implements MetadataInterface
      * @param  string $constraintName
      * @param  string $table
      * @param  string $schema
-     * @param  string $database
      * @return Object\ConstraintObject
      */
     public function getConstraint($constraintName, $table, $schema = null)
@@ -343,21 +340,32 @@ abstract class AbstractSource implements MetadataInterface
 
         $this->loadConstraintData($table, $schema);
 
-        $found = false;
-        foreach ($this->data['constraint_names'][$schema] as $constraintInfo) {
-            if ($constraintInfo['constraint_name'] == $constraintName && $constraintInfo['table_name'] == $table) {
-                $found = $constraintInfo;
-                break;
-            }
-        }
-
-        if (!$found) {
+        if (!isset($this->data['constraints'][$schema][$table][$constraintName])) {
             throw new \Exception('Cannot find a constraint by that name in this table');
         }
 
+        $info = $this->data['constraints'][$schema][$table][$constraintName];
         $constraint = new Object\ConstraintObject($constraintName, $table, $schema);
-        $constraint->setType($found['constraint_type']);
-        $constraint->setKeys($this->getConstraintKeys($constraintName, $table, $schema));
+
+        foreach (array(
+            'constraint_type'    => 'setType',
+            'match_option'       => 'setMatchOption',
+            'update_rule'        => 'setUpdateRule',
+            'delete_rule'        => 'setDeleteRule',
+            'columns'            => 'setColumns',
+            'referenced_table_schema' => 'setReferencedTableSchema',
+            'referenced_table_name'   => 'setReferencedTableName',
+            'referenced_columns'      => 'setReferencedColumns',
+            'match_option'       => 'setMatchOption',
+            'update_rule'        => 'setUpdateRule',
+            'delete_rule'        => 'setDeleteRule',
+            'check_clause'       => 'setCheckClause',
+        ) as $key => $setMethod) {
+            if (isset($info[$key])) {
+                $constraint->{$setMethod}($info[$key]);
+            }
+        }
+
         return $constraint;
     }
 
@@ -521,11 +529,11 @@ abstract class AbstractSource implements MetadataInterface
 
     protected function loadConstraintData($table, $schema)
     {
-        if (isset($this->data['constraint_names'][$schema])) {
+        if (isset($this->data['constraints'][$schema])) {
             return;
         }
 
-        $this->prepareDataHierarchy('constraint_names', $schema);
+        $this->prepareDataHierarchy('constraints', $schema);
     }
 
     protected function loadTriggerData($schema)

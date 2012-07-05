@@ -308,8 +308,6 @@ class PostgresqlMetadata extends AbstractSource
             array('action_timing' => 'condition_timing'),
             array('action_reference_old_table' => 'condition_reference_old_table'),
             array('action_reference_new_table' => 'condition_reference_new_table'),
-//             'action_reference_old_row',
-//             'action_reference_new_row',
             'created',
         );
 

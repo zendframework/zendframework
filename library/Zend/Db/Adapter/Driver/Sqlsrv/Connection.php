@@ -177,7 +177,7 @@ class Connection implements ConnectionInterface
             throw new Exception\RuntimeException(
                 'Connect Error',
                 null,
-                new Exception\ErrorException(sqlsrv_errors())
+                new ErrorException(sqlsrv_errors())
             );
         }
 
@@ -272,7 +272,7 @@ class Connection implements ConnectionInterface
                 throw new Exception\RuntimeException(
                     'An exception occured while trying to execute the provided $sql',
                     null,
-                    new Exception\ErrorException($errors)
+                    new ErrorException($errors)
                 );
             }
         }

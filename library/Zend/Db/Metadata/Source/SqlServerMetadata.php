@@ -229,7 +229,7 @@ class SqlServerMetadata extends AbstractSource
              . '  = ' . $p->quoteIdentifierChain(array('KCU2','CONSTRAINT_SCHEMA'))
              . ' AND ' . $p->quoteIdentifierChain(array('RC','UNIQUE_CONSTRAINT_NAME'))
              . '  = ' . $p->quoteIdentifierChain(array('KCU2','CONSTRAINT_NAME'))
-             . ' AND ' . $p->quoteIdentifierChain(array('KCU','POSITION_IN_UNIQUE_CONSTRAINT'))
+             . ' AND ' . $p->quoteIdentifierChain(array('KCU','ORDINAL_POSITION'))
              . '  = ' . $p->quoteIdentifierChain(array('KCU2','ORDINAL_POSITION'))
 
              . ' WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
@@ -258,6 +258,7 @@ class SqlServerMetadata extends AbstractSource
 
         $name = null;
         $constraints = array();
+        $isFK = false;
         foreach ($results->toArray() as $row) {
             if ($row['CONSTRAINT_NAME'] !== $name) {
                 $name = $row['CONSTRAINT_NAME'];
@@ -283,7 +284,7 @@ class SqlServerMetadata extends AbstractSource
             }
             $constraints[$name]['columns'][] = $row['COLUMN_NAME'];
             if ($isFK) {
-                $constraints[$name]['REFERENCED_COLUMNS'][] = $row['REFERENCED_COLUMN_NAME'];
+                $constraints[$name]['referenced_columns'][] = $row['REFERENCED_COLUMN_NAME'];
             }
         }
 

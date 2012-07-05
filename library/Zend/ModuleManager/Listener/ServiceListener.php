@@ -108,8 +108,8 @@ class ServiceListener implements ListenerAggregateInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach('loadModule', array($this, 'onLoadModule'), 1500);
-        $this->listeners[] = $events->attach('loadModules.finish', array($this, 'onLoadModulesFinish'), 8500);
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, array($this, 'onLoadModule'));
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES_POST, array($this, 'onLoadModulesPost'));
         return $this;
     }
 
@@ -182,7 +182,7 @@ class ServiceListener implements ListenerAggregateInterface
      * @param  ModuleEvent $e
      * @return void
      */
-    public function onLoadModulesFinish(ModuleEvent $e)
+    public function onLoadModulesPost(ModuleEvent $e)
     {
         $configListener = $e->getConfigListener();
         $config         = $configListener->getMergedConfig(false);

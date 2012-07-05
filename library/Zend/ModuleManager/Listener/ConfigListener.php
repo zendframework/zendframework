@@ -100,14 +100,15 @@ class ConfigListener extends AbstractListener implements
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach('loadModules.pre', array($this, 'loadModulesPre'), 9000);
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($this, 'onloadModulesPre'), 1000);
 
         if ($this->skipConfig) {
+            // We already have the config from cache, no need to collect or merge.
             return $this;
         }
 
-        $this->listeners[] = $events->attach('loadModule', array($this, 'loadModule'), 1000);
-        $this->listeners[] = $events->attach('loadModules.post', array($this, 'loadModulesPost'), 9000);
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, array($this, 'onLoadModule'));
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($this, 'onLoadModulesPost'), -1000);
 
         return $this;
     }
@@ -118,7 +119,7 @@ class ConfigListener extends AbstractListener implements
      * @param  ModuleEvent $e
      * @return ConfigListener
      */
-    public function loadModulesPre(ModuleEvent $e)
+    public function onloadModulesPre(ModuleEvent $e)
     {
         $e->setConfigListener($this);
 
@@ -131,7 +132,7 @@ class ConfigListener extends AbstractListener implements
      * @param  ModuleEvent $e
      * @return ConfigListener
      */
-    public function loadModule(ModuleEvent $e)
+    public function onLoadModule(ModuleEvent $e)
     {
         $module = $e->getParam('module');
 
@@ -155,7 +156,7 @@ class ConfigListener extends AbstractListener implements
      * @param  ModuleEvent $e
      * @return ConfigListener
      */
-    public function loadModulesPost(ModuleEvent $e)
+    public function onLoadModulesPost(ModuleEvent $e)
     {
         // Load the config files
         foreach ($this->paths as $path) {

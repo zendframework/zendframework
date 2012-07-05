@@ -19,36 +19,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\YouTube;
 
-use Zend\GData\YouTube,
-    Zend\GData\App,
-    Zend\GData\Extension as GDataExtension,
-    Zend\GData\Media\Extension as MediaExtension;
+use Zend\GData\YouTube;
+use Zend\GData\App;
+use Zend\GData\Extension as GDataExtension;
+use Zend\GData\Media\Extension as MediaExtension;
 
 /**
  * Represents the YouTube video flavor of an Atom entry
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\App\VersionException
- * @uses       \Zend\GData\Extension\Comments
- * @uses       \Zend\GData\Extension\FeedLink
- * @uses       \Zend\GData\Extension\Rating
- * @uses       \Zend\GData\Geo\Extension\GeoRssWhere
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\Extension\Control
- * @uses       \Zend\GData\YouTube\Extension\Link
- * @uses       \Zend\GData\YouTube\Extension\Location
- * @uses       \Zend\GData\YouTube\Extension\MediaGroup
- * @uses       \Zend\GData\YouTube\Extension\NoEmbed
- * @uses       \Zend\GData\YouTube\Extension\Racy
- * @uses       \Zend\GData\YouTube\Extension\Recorded
- * @uses       \Zend\GData\YouTube\Extension\Statistics
- * @uses       \Zend\GData\YouTube\MediaEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube
@@ -100,7 +80,7 @@ class VideoEntry extends MediaEntry
     /**
      * Specifies the comments associated with a video.
      *
-     * @var Zend_Gdata_Extensions_Comments
+     * @var \Zend\GData\Extension\Comments
      */
     protected $_comments = null;
 
@@ -388,7 +368,7 @@ class VideoEntry extends MediaEntry
     {
         if ($this->getMajorProtocolVersion() == 2) {
             throw new App\VersionException(
-                'Calling getRacy() on a YouTube VideoEntry is deprecated ' .
+                'Calling setRacy() on a YouTube VideoEntry is deprecated ' .
                 'as of version 2 of the API.');
         }
 
@@ -1013,7 +993,7 @@ class VideoEntry extends MediaEntry
      *
      * @param integer $ratingValue A number representing the rating. Must
      *          be between 1 and 5 inclusive.
-     * @throws Zend_Gdata_Exception
+     * @throws App\InvalidArgumentException
      * @return \Zend\GData\YouTube\VideoEntry Provides a fluent interface.
      */
     public function setVideoRating($ratingValue)

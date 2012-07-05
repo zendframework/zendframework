@@ -20,18 +20,6 @@
  */
 
 /**
- * @uses       DOMDocument
- * @uses       DOMXPath
- * @uses       Zend_Rest_Client
- * @uses       Zend\Service\Exception
- * @uses       Zend_Service_Yahoo_ImageResultSet
- * @uses       Zend_Service_Yahoo_InlinkDataResultSet
- * @uses       Zend_Service_Yahoo_LocalResultSet
- * @uses       Zend_Service_Yahoo_NewsResultSet
- * @uses       Zend_Service_Yahoo_PageDataResultSet
- * @uses       Zend_Service_Yahoo_VideoResultSet
- * @uses       Zend_Service_Yahoo_WebResultSet
- * @uses       Zend\Validator\Between
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Yahoo

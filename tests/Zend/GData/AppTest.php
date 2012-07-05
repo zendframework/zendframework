@@ -19,15 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData;
 
-use Zend\GData\App,
-    Zend\GData\App\Extension,
-    Zend\Http\Header\Etag,
-    ZendTest\GData\TestAsset;
+use Zend\GData;
+use Zend\GData\App;
+use Zend\GData\App\Extension;
+use Zend\Http\Header\Etag;
+use ZendTest\GData\TestAsset;
 
 /**
  * @category   Zend
@@ -40,6 +38,21 @@ use Zend\GData\App,
  */
 class AppTest extends \PHPUnit_Framework_TestCase
 {
+    public $fileName;
+    public $expectedEtagValue;
+    public $expectedMajorProtocolVersion;
+    public $expectedMinorProtocolVersion;
+    public $httpEntrySample;
+    public $httpEntrySampleWithoutVersion;
+    public $httpFeedSample;
+    public $httpFeedSampleWithoutVersion;
+    /** @var \Zend\Http\Client\Adapter\AdapterInterface */
+    public $adapter;
+    /** @var \Zend\GData\HttpClient */
+    public $client;
+    /** @var App */
+    public $service;
+
     public function setUp()
     {
         $this->fileName = 'Zend/GData/App/_files/FeedSample1.xml';
@@ -60,7 +73,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
                 true);
 
         $this->adapter = new TestAsset\MockHttpClient();
-        $this->client = new \Zend\GData\HttpClient();
+        $this->client = new GData\HttpClient();
         $this->client->setAdapter($this->adapter);
         $this->service = new App($this->client);
     }
@@ -94,38 +107,20 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testMajorProtocolVersionCannotBeLessThanOne()
     {
-        $exceptionCaught = false;
-        try {
-            $this->service->setMajorProtocolVersion(0);
-        } catch (App\InvalidArgumentException $e) {
-            $exceptionCaught = true;
-        }
-        $this->assertTrue($exceptionCaught, 'Expected exception not caught: '
-                + 'Zend_GData_App_InvalidArgumentException');
+        $this->setExpectedException('\Zend\GData\App\InvalidArgumentException');
+        $this->service->setMajorProtocolVersion(0);
     }
 
     public function testMajorProtocolVersionCannotBeNull()
     {
-        $exceptionCaught = false;
-        try {
-            $this->service->setMajorProtocolVersion(null);
-        } catch (App\InvalidArgumentException $e) {
-            $exceptionCaught = true;
-        }
-        $this->assertTrue($exceptionCaught, 'Expected exception not caught: '
-                + 'Zend_GData_App_InvalidArgumentException');
+        $this->setExpectedException('\Zend\GData\App\InvalidArgumentException');
+        $this->service->setMajorProtocolVersion(null);
     }
 
     public function testMinorProtocolVersionCannotBeLessThanZero()
     {
-        $exceptionCaught = false;
-        try {
-            $this->service->setMinorProtocolVersion(-1);
-        } catch (App\InvalidArgumentException $e) {
-            $exceptionCaught = true;
-        }
-        $this->assertTrue($exceptionCaught, 'Expected exception not caught: '
-                + 'Zend_GData_App_InvalidArgumentException');
+        $this->setExpectedException('\Zend\GData\App\InvalidArgumentException');
+        $this->service->setMinorProtocolVersion(-1);
     }
 
     public function testNoGDataVersionHeaderSentWhenUsingV1()
@@ -221,7 +216,6 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfMatchHttpHeaderSetOnUpdate()
     {
-        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->adapter->setResponse("HTTP/1.1 201 Created");
         $this->service->setMajorProtocolVersion(2);
@@ -264,7 +258,6 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfMatchHttpHeaderSetOnSave()
     {
-        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->adapter->setResponse("HTTP/1.1 201 Created");
         $this->service->setMajorProtocolVersion(2);
@@ -309,7 +302,6 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfMatchHttpHeaderSetOnManualPost()
     {
-        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->adapter->setResponse("HTTP/1.1 201 Created");
         $this->service->setMajorProtocolVersion(2);
@@ -328,7 +320,6 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfMatchHttpHeaderSetOnManualPut()
     {
-        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->adapter->setResponse("HTTP/1.1 201 Created");
         $this->service->setMajorProtocolVersion(2);
@@ -373,7 +364,6 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfMatchHeaderCanBeSetOnInsert()
     {
-        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etagOverride = 'foo';
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->service->setMajorProtocolVersion(2);
@@ -387,7 +377,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
         foreach ($headers as $header => $value) {
-            if ($header == 'If-Match' && $value == $etag->getFieldValue())
+            if ($header == 'If-Match' && $value == $etagOverride)
                 $found = true;
         }
         $this->assertTrue($found, 'If-Match header not found or incorrect');
@@ -395,7 +385,6 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfNoneMatchHeaderCanBeSetOnInsert()
     {
-        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etagOverride = 'foo';
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->service->setMajorProtocolVersion(2);
@@ -409,7 +398,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
         foreach ($headers as $header => $value) {
-            if ($header == 'If-None-Match' && $value == $etag->getFieldValue())
+            if ($header == 'If-None-Match' && $value == $etagOverride)
                 $found = true;
         }
         $this->assertTrue($found, 'If-None-Match header not found or incorrect ');
@@ -417,7 +406,6 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfMatchHeaderCanBeSetOnUpdate()
     {
-        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etagOverride = 'foo';
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->service->setMajorProtocolVersion(2);
@@ -439,7 +427,6 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfNoneMatchHeaderCanBeSetOnUpdate()
     {
-        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etagOverride = 'foo';
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->service->setMajorProtocolVersion(2);

@@ -1,11 +1,10 @@
 <?php
-/**
- * @namespace
- */
+
 namespace Zend\Text\Table\Exception;
 
+use Zend\Text\Exception;
+
 class OutOfBoundsException 
-    extends \OutOfBoundsException
-    implements \Zend\Text\Exception
-{
-}
+    extends Exception\OutOfBoundsException
+    implements ExceptionInterface
+{}

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\Resource\Font;
 use Zend\Pdf\Exception;
 use Zend\Pdf;
@@ -32,8 +29,6 @@ use Zend\Pdf;
  * Thes class allows to extract fonts already mentioned within PDF document and use them
  * for text drawing.
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\Resource\Font\AbstractFont
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -64,7 +59,7 @@ class Extracted extends AbstractFont
      * \Zend\Pdf\InternalType\IndirectObject object
      *
      * @param mixed $fontDictionary
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($fontDictionary)
     {
@@ -203,7 +198,7 @@ class Extracted extends AbstractFont
      *
      * @param array $glyphNumbers Array of glyph numbers.
      * @return array Array of glyph widths (integers).
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function widthsForGlyphs($glyphNumbers)
     {
@@ -217,7 +212,7 @@ class Extracted extends AbstractFont
      *
      * @param integer $glyphNumber
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function widthForGlyph($glyphNumber)
     {

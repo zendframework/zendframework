@@ -19,14 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Delicious\PrivateData;
-use \Zend\Service\Delicious,
-    \Zend\Http,
-    \Zend\Rest\Client as RestClient,
-    \Zend\Date\Date;
+
+use DateTime;
+use Zend\Service\Delicious;
+use Zend\Http;
+use Zend\Rest\Client as RestClient;
 
 /**
  * @category   Zend_Service
@@ -66,7 +64,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('\Zend\Service\Delicious online tests are not enabled');
         }
         $httpClient = new Http\Client();
-        $httpClient->setConfig(array(
+        $httpClient->setOptions(array(
                 'useragent' => 'Zend\Service\Delicious - Unit tests/0.1',
                 'keepalive' => true
         ));
@@ -81,7 +79,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testLastUpdate()
     {
-        $this->assertInstanceOf('Zend\Date\Date', $this->_delicious->getLastUpdate());
+        $this->assertInstanceOf('DateTime', $this->_delicious->getLastUpdate());
     }
 
     /**
@@ -182,7 +180,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$TEST_POST_NOTES, $savedPost->getNotes());
         $this->assertEquals(self::$TEST_POST_TAGS, $savedPost->getTags());
         $this->assertEquals(self::$TEST_POST_SHARED, $savedPost->getShared());
-        $this->assertInstanceOf('Zend\Date\Date', $savedPost->getDate());
+        $this->assertInstanceOf('DateTime', $savedPost->getDate());
         $this->assertInternalType('string', $savedPost->getHash());
         $this->assertInternalType('integer', $savedPost->getOthers());
 
@@ -234,7 +232,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPosts()
     {
-        $posts = $this->_delicious->getPosts('zfSite', new Date(), 'help');
+        $posts = $this->_delicious->getPosts('zfSite', new DateTime(), 'help');
         $this->assertInstanceOf('Zend\Service\Delicious\PostList', $posts);
         $this->assertTrue(count($posts) <= 10);
 

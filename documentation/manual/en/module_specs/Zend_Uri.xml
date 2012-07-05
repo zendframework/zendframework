@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><info><title>Zend_Uri</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><title>Zend_Uri</title>
     
 
-    <section xml:id="zend.uri.overview"><info><title>Overview</title></info>
+    <section xml:id="zend.uri.overview"><title>Overview</title>
         
 
         <para>
@@ -24,7 +24,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.uri.creation"><info><title>Creating a New URI</title></info>
+    <section xml:id="zend.uri.creation"><title>Creating a New URI</title>
         
 
         <para>
@@ -32,7 +32,7 @@
             if only a scheme is passed to <methodname>Zend_Uri::factory()</methodname>.
         </para>
 
-        <example xml:id="zend.uri.creation.example-1"><info><title>Creating a New URI with Zend_Uri::factory()</title></info>
+        <example xml:id="zend.uri.creation.example-1"><title>Creating a New URI with Zend_Uri::factory()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -58,7 +58,7 @@ $uri = Zend_Uri::factory('http');
             specializes in the scheme to be created.
         </para>
 
-        <section><info><title>Creating a New Custom-Class URI</title></info>
+        <section><title>Creating a New Custom-Class URI</title>
             
 
             <para>
@@ -77,7 +77,7 @@ $uri = Zend_Uri::factory('http');
                 must be in your include_path.
             </para>
 
-            <example xml:id="zend.uri.creation.custom.example-1"><info><title>Creating a URI using a custom class</title></info>
+            <example xml:id="zend.uri.creation.custom.example-1"><title>Creating a URI using a custom class</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -94,7 +94,7 @@ $ftpUri = Zend_Uri::factory(
 
     </section>
 
-    <section xml:id="zend.uri.manipulation"><info><title>Manipulating an Existing URI</title></info>
+    <section xml:id="zend.uri.manipulation"><title>Manipulating an Existing URI</title>
         
 
         <para>
@@ -102,7 +102,7 @@ $ftpUri = Zend_Uri::factory(
             to <methodname>Zend_Uri::factory()</methodname>.
         </para>
 
-        <example xml:id="zend.uri.manipulation.example-1"><info><title>Manipulating an Existing URI with Zend_Uri::factory()</title></info>
+        <example xml:id="zend.uri.manipulation.example-1"><title>Manipulating an Existing URI with Zend_Uri::factory()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -121,7 +121,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
         </para>
     </section>
 
-    <section xml:id="zend.uri.validation"><info><title>URI Validation</title></info>
+    <section xml:id="zend.uri.validation"><title>URI Validation</title>
         
 
         <para>
@@ -129,7 +129,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
             of an existing <acronym>URI</acronym> is needed.
         </para>
 
-        <example xml:id="zend.uri.validation.example-1"><info><title>URI Validation with Zend_Uri::check()</title></info>
+        <example xml:id="zend.uri.validation.example-1"><title>URI Validation with Zend_Uri::check()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -145,7 +145,7 @@ $valid = Zend_Uri::check('http://uri.in.question');
             than using <methodname>Zend_Uri::factory()</methodname> and catching the exception.
         </para>
 
-        <section xml:id="zend.uri.validation.allowunwise"><info><title>Allowing "Unwise" characters in URIs</title></info>
+        <section xml:id="zend.uri.validation.allowunwise"><title>Allowing "Unwise" characters in URIs</title>
             
 
             <para>
@@ -161,7 +161,7 @@ $valid = Zend_Uri::check('http://uri.in.question');
                 <methodname>Zend_Uri::setConfig()</methodname>:
             </para>
 
-            <example xml:id="zend.uri.validation.allowunwise.example-1"><info><title>Allowing special characters in URIs</title></info>
+            <example xml:id="zend.uri.validation.allowunwise.example-1"><title>Allowing special characters in URIs</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -191,7 +191,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
         </section>
     </section>
 
-    <section xml:id="zend.uri.instance-methods"><info><title>Common Instance Methods</title></info>
+    <section xml:id="zend.uri.instance-methods"><title>Common Instance Methods</title>
         
 
         <para>
@@ -200,7 +200,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
             working with any kind of <acronym>URI</acronym>.
         </para>
 
-        <section xml:id="zend.uri.instance-methods.getscheme"><info><title>Getting the Scheme of the URI</title></info>
+        <section xml:id="zend.uri.instance-methods.getscheme"><title>Getting the Scheme of the URI</title>
             
 
             <para>
@@ -209,7 +209,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
                 <filename>http://www.zend.com</filename> is 'http'.
             </para>
 
-            <example xml:id="zend.uri.instance-methods.getscheme.example-1"><info><title>Getting the Scheme from a Zend_Uri_* Object</title></info>
+            <example xml:id="zend.uri.instance-methods.getscheme.example-1"><title>Getting the Scheme from a Zend_Uri_* Object</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -225,10 +225,10 @@ $scheme = $uri->getScheme();  // "http"
             </para>
         </section>
 
-        <section xml:id="zend.uri.instance-methods.geturi"><info><title>Getting the Entire URI</title></info>
+        <section xml:id="zend.uri.instance-methods.geturi"><title>Getting the Entire URI</title>
             
 
-            <example xml:id="zend.uri.instance-methods.geturi.example-1"><info><title>Getting the Entire URI from a Zend_Uri_* Object</title></info>
+            <example xml:id="zend.uri.instance-methods.geturi.example-1"><title>Getting the Entire URI from a Zend_Uri_* Object</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -244,7 +244,7 @@ echo $uri->getUri();  // "http://www.zend.com"
             </para>
         </section>
 
-        <section xml:id="zend.uri.instance-methods.valid"><info><title>Validating the URI</title></info>
+        <section xml:id="zend.uri.instance-methods.valid"><title>Validating the URI</title>
             
 
             <para>
@@ -257,7 +257,7 @@ echo $uri->getUri();  // "http://www.zend.com"
                 is manipulated.
             </para>
 
-            <example xml:id="zend.uri.instance-methods.valid.example-1"><info><title>Validating a Zend_Uri_* Object</title></info>
+            <example xml:id="zend.uri.instance-methods.valid.example-1"><title>Validating a Zend_Uri_* Object</title>
                 
 
                 <programlisting language="php"><![CDATA[

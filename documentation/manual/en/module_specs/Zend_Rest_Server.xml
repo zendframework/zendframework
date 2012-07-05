@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.server"><info><title>Zend_Rest_Server</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.server"><title>Zend_Rest_Server</title>
     
 
-    <section xml:id="zend.rest.server.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.rest.server.introduction"><title>Introduction</title>
         
 
         <para>
@@ -10,10 +10,10 @@
         </para>
     </section>
 
-    <section xml:id="zend.rest.server.usage"><info><title>REST Server Usage</title></info>
+    <section xml:id="zend.rest.server.usage"><title>REST Server Usage</title>
         
 
-        <example xml:id="zend.rest.server.usage.example-1"><info><title>Basic Zend_Rest_Server Usage - Classes</title></info>
+        <example xml:id="zend.rest.server.usage.example-1"><title>Basic Zend_Rest_Server Usage - Classes</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -23,7 +23,7 @@ $server->handle();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.rest.server.usage.example-2"><info><title>Basic Zend_Rest_Server Usage - Functions</title></info>
+        <example xml:id="zend.rest.server.usage.example-2"><title>Basic Zend_Rest_Server Usage - Functions</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -46,7 +46,7 @@ $server->handle();
         </example>
     </section>
 
-    <section xml:id="zend.rest.server.args"><info><title>Calling a Zend_Rest_Server Service</title></info>
+    <section xml:id="zend.rest.server.args"><title>Calling a Zend_Rest_Server Service</title>
         
 
         <para>
@@ -58,7 +58,7 @@ $server->handle();
             argument (i.e. "arg1").
         </para>
 
-        <note><info><title>Numeric index</title></info>
+        <note><title>Numeric index</title>
             
 
             <para>
@@ -83,7 +83,7 @@ $server->handle();
         </para>
     </section>
 
-    <section xml:id="zend.rest.server.customstatus"><info><title>Sending A Custom Status</title></info>
+    <section xml:id="zend.rest.server.customstatus"><title>Sending A Custom Status</title>
         
 
         <para>
@@ -91,7 +91,7 @@ $server->handle();
             array with a <code>status</code> key.
         </para>
 
-        <example xml:id="zend.rest.server.customstatus.example-1"><info><title>Returning Custom Status</title></info>
+        <example xml:id="zend.rest.server.customstatus.example-1"><title>Returning Custom Status</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -114,7 +114,7 @@ $server->handle();
         </example>
     </section>
 
-    <section xml:id="zend.rest.server.customxml"><info><title>Returning Custom XML Responses</title></info>
+    <section xml:id="zend.rest.server.customxml"><title>Returning Custom XML Responses</title>
         
 
         <para>
@@ -123,7 +123,7 @@ $server->handle();
             <code>SimpleXMLElement</code> object.
         </para>
 
-        <example xml:id="zend.rest.server.customxml.example-1"><info><title>Return Custom XML</title></info>
+        <example xml:id="zend.rest.server.customxml.example-1"><title>Return Custom XML</title>
             
 
             <programlisting language="php"><![CDATA[

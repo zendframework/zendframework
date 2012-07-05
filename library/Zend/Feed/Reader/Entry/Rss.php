@@ -18,32 +18,21 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader\Entry;
+
+use DateTime;
+use DOMElement;
+use DOMXPath;
 use Zend\Feed\Reader;
-use Zend\Date;
+use Zend\Feed\Reader\Exception;
 
 /**
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Exception
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Collection\Category
-* @uses \Zend\Feed\Reader\EntryAbstract
-* @uses \Zend\Feed\Reader\EntryInterface
-* @uses \Zend\Feed\Reader\Extension\Atom\Entry
-* @uses \Zend\Feed\Reader\Extension\Content\Entry
-* @uses \Zend\Feed\Reader\Extension\DublinCore\Entry
-* @uses \Zend\Feed\Reader\Extension\Slash\Entry
-* @uses \Zend\Feed\Reader\Extension\Thread\Entry
-* @uses \Zend\Feed\Reader\Extension\WellformedWeb\Entry
 * @category Zend
 * @package Reader\Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-class Rss extends AbstractEntry implements Reader\Entry
+class Rss extends AbstractEntry implements EntryInterface
 {
 
     /**
@@ -63,12 +52,12 @@ class Rss extends AbstractEntry implements Reader\Entry
     /**
      * Constructor
      *
-     * @param  Zend_Feed_Entry_Abstract $entry
+     * @param  DOMElement $entry
      * @param  string $entryKey
      * @param  string $type
      * @return void
      */
-    public function __construct(\DOMElement $entry, $entryKey, $type = null)
+    public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
         parent::__construct($entry, $entryKey, $type);
         $this->_xpathQueryRss = '//item[' . ($this->_entryKey+1) . ']';
@@ -230,19 +219,17 @@ class Rss extends AbstractEntry implements Reader\Entry
             if ($dateModified) {
                 $dateModifiedParsed = strtotime($dateModified);
                 if ($dateModifiedParsed) {
-                    $date = new Date\Date($dateModifiedParsed);
+                    $date = new DateTime('@' . $dateModifiedParsed);
                 } else {
-                    $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
-                    Date\Date::RFC_2822, Date\Date::DATES);
-                    $date = new Date\Date;
+                    $dateStandards = array(DateTime::RSS, DateTime::RFC822,
+                                           DateTime::RFC2822, null);
                     foreach ($dateStandards as $standard) {
                         try {
-                            $date->set($dateModified, $standard);
+                            $date = date_create_from_format($standard, $dateModified);
                             break;
-                        } catch (Date\Exception $e) {
-                            if ($standard == Date\Date::DATES) {
-                                require_once 'Zend/Feed/Exception.php';
-                                throw new Exception(
+                        } catch (\Exception $e) {
+                            if ($standard == null) {
+                                throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
                                     . $e->getMessage(),
@@ -439,7 +426,7 @@ class Rss extends AbstractEntry implements Reader\Entry
     /**
      * Get all categories
      *
-     * @return Reader\Reader_Collection_Category
+     * @return Reader\Collection\Category
      */
     public function getCategories()
     {
@@ -619,9 +606,10 @@ class Rss extends AbstractEntry implements Reader\Entry
     /**
      * Set the XPath query (incl. on all Extensions)
      *
-     * @param \DOMXPath $xpath
+     * @param DOMXPath $xpath
+     * @return void
      */
-    public function setXpath(\DOMXPath $xpath)
+    public function setXpath(DOMXPath $xpath)
     {
         parent::setXpath($xpath);
         foreach ($this->_extensions as $extension) {

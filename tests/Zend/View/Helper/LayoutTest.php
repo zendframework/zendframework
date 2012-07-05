@@ -19,14 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 
-use Zend\View\Helper\Layout,
-    Zend\View\Model\ViewModel,
-    Zend\View\Renderer\PhpRenderer;
+use Zend\View\Helper\Layout;
+use Zend\View\Model\ViewModel;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Test class for Zend_View_Helper_Layout

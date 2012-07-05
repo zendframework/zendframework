@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Cache,
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
@@ -103,7 +103,7 @@ class IgnoreUserAbortTest extends CommonPluginTest
             'decrementItems.exception' => 'onAfter',
         );
         foreach ($expectedListeners as $eventName => $expectedCallbackMethod) {
-            $listeners = $this->_adapter->events()->getListeners($eventName);
+            $listeners = $this->_adapter->getEventManager()->getListeners($eventName);
 
             // event should attached only once
             $this->assertSame(1, $listeners->count());
@@ -123,7 +123,6 @@ class IgnoreUserAbortTest extends CommonPluginTest
         $this->_adapter->removePlugin($this->_plugin);
 
         // no events should be attached
-        $this->assertEquals(0, count($this->_adapter->events()->getEvents()));
+        $this->assertEquals(0, count($this->_adapter->getEventManager()->getEvents()));
     }
-
 }

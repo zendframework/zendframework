@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Dojo\Form\Decorator;
 
 /**
@@ -28,7 +25,6 @@ namespace Zend\Dojo\Form\Decorator;
  *
  * Render a dijit AccordionContainer
  *
- * @uses       \Zend\Dojo\Form\Decorator\DijitContainer
  * @package    Zend_Dojo
  * @subpackage Form_Decorator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

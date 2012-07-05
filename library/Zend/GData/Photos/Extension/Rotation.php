@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Photos\Extension;
 
 /**
@@ -29,8 +26,6 @@ namespace Zend\GData\Photos\Extension;
  * The rotation of a photo in degrees. Will only be shown if the
  * rotation has not already been applied to the image.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

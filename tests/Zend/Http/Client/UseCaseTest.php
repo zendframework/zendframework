@@ -1,7 +1,4 @@
 <?php
-/**
- * @namespace
- */
 namespace ZendTest\Http\Client;
 use Zend\Http\Client as HTTPClient,
     Zend\Http\Client\Adapter,
@@ -29,19 +26,19 @@ class UseCaseTest extends \PHPUnit_Framework_TestCase
      *
      * @var string
      */
-    protected $baseuri = 'http://www.google.com/';
+    protected $baseuri;
 
     /**
      * Common HTTP client
      *
-     * @var Zend_Http_Client
+     * @var \Zend\Http\Client
      */
     protected $client = null;
 
     /**
      * Common HTTP client adapter
      *
-     * @var Zend_Http_Client_Adapter_Interface
+     * @var \Zend\Http\Client\Adapter\AdapterInterface
      */
     protected $adapter = null;
 
@@ -59,7 +56,15 @@ class UseCaseTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->client= new HTTPClient($this->baseuri);
+        if (defined('TESTS_ZEND_HTTP_CLIENT_BASEURI')
+            && (TESTS_ZEND_HTTP_CLIENT_BASEURI != false)
+        ) {
+            $this->baseuri = TESTS_ZEND_HTTP_CLIENT_BASEURI;
+            $this->client  = new HTTPClient($this->baseuri);
+        } else {
+            // Skip tests
+            $this->markTestSkipped("Zend_Http_Client dynamic tests are not enabled in TestConfiguration.php");
+        }
     }
 
     /**
@@ -70,20 +75,20 @@ class UseCaseTest extends \PHPUnit_Framework_TestCase
     {
         $this->client = null;
     }
-    
+
     public function testHttpGet()
     {
         $this->client->setMethod(Request::METHOD_GET);
         $response= $this->client->send();
         $this->assertTrue($response->isSuccess());
     }
-    
+
     public function testStaticHttpGet()
     {
 //        $response= HTTPClient::get($this->baseuri);
 //        $this->assertTrue($response->isSuccess());
     }
-    
+
     public function testRequestHttpGet()
     {
         $client= new HTTPClient();
@@ -93,5 +98,5 @@ class UseCaseTest extends \PHPUnit_Framework_TestCase
         $response= $client->send($request);
         $this->assertTrue($response->isSuccess());
     }
-    
+
 }

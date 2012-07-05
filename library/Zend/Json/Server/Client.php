@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Json\Server;
 
 use Zend\Http\Client as HttpClient,
@@ -137,11 +134,11 @@ class Client implements ServerClient
         $this->lastRequest = $request;
 
         $httpRequest = $this->httpClient->getRequest();
-        if ($httpRequest->getUri() === null) {
+        if ($httpRequest->getUriString() === null) {
             $this->httpClient->setUri($this->serverAddress);
         }
 
-        $headers = $httpRequest->headers();
+        $headers = $httpRequest->getHeaders();
         $headers->addHeaders(array(
             'Content-Type' => 'application/json',
             'Accept'       => 'application/json',

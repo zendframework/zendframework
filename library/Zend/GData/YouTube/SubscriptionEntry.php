@@ -19,28 +19,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\YouTube;
 
-use Zend\GData\YouTube,
-    Zend\GData\App;
+use Zend\GData\YouTube;
+use Zend\GData\App;
 
 /**
  * Represents the YouTube video subscription flavor of an Atom entry
  *
- * @uses       \Zend\GData\App\VersionException
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Extension\FeedLink
- * @uses       \Zend\GData\Media\Extension\MediaThumbnail
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\Extension\CountHint
- * @uses       \Zend\GData\YouTube\Extension\Description
- * @uses       \Zend\GData\YouTube\Extension\PlaylistId
- * @uses       \Zend\GData\YouTube\Extension\PlaylistTitle
- * @uses       \Zend\GData\YouTube\Extension\QueryString
- * @uses       \Zend\GData\YouTube\Extension\Username
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.global_session_management"><info><title>Global Session Management</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.global_session_management"><title>Global Session Management</title>
     
 
     <para>
@@ -13,7 +13,7 @@
         security issues.
     </para>
 
-    <section xml:id="zend.session.global_session_management.configuration_options"><info><title>Configuration Options</title></info>
+    <section xml:id="zend.session.global_session_management.configuration_options"><title>Configuration Options</title>
         
 
         <para>
@@ -35,7 +35,7 @@
             should be sent to <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</link>.
         </para>
 
-        <example xml:id="zend.session.global_session_management.setoptions.example"><info><title>Using Zend_Config to Configure Zend_Session</title></info>
+        <example xml:id="zend.session.global_session_management.setoptions.example"><title>Using Zend_Config to Configure Zend_Session</title>
             
 
             <para>
@@ -128,7 +128,7 @@ Zend_Session::setOptions($config->toArray());
                         (i.e., when <methodname>start()</methodname> is called).
                     </para>
 
-                    <note><info><title>Security Risk</title></info>
+                    <note><title>Security Risk</title>
                         
 
                         <para>
@@ -172,7 +172,7 @@ Zend_Session::setOptions($config->toArray());
                         the application.
                     </para>
 
-                    <note><info><title>Security Risk</title></info>
+                    <note><title>Security Risk</title>
                         
 
                         <para>
@@ -190,7 +190,7 @@ Zend_Session::setOptions($config->toArray());
                         boolean <code>use_only_cookies</code> - In order to avoid introducing
                         additional security risks, do not alter the default value of this option.
 
-                        <note><info><title>Security Risk</title></info>
+                        <note><title>Security Risk</title>
                             
 
                             <para>
@@ -209,7 +209,7 @@ Zend_Session::setOptions($config->toArray());
         </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.headers_sent"><info><title>Error: Headers Already Sent</title></info>
+    <section xml:id="zend.session.global_session_management.headers_sent"><title>Error: Headers Already Sent</title>
         
 
         <para>
@@ -265,7 +265,7 @@ Zend_Session::setOptions($config->toArray());
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.session.global_session_management.session_identifiers"><info><title>Session Identifiers</title></info>
+    <section xml:id="zend.session.global_session_management.session_identifiers"><title>Session Identifiers</title>
         
 
         <para>
@@ -316,7 +316,7 @@ Zend_Session::setOptions($config->toArray());
             instead of <methodname>regenerateId()</methodname>.
         </para>
 
-        <section xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation"><info><title>Session Hijacking and Fixation</title></info>
+        <section xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation"><title>Session Hijacking and Fixation</title>
             
 
             <para>
@@ -393,7 +393,7 @@ Zend_Session::setOptions($config->toArray());
                 above.
             </para>
 
-            <example xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example"><info><title>Session Fixation</title></info>
+            <example xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example"><title>Session Fixation</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -408,7 +408,7 @@ if (!isset($defaultNamespace->initialized)) {
         </section>
     </section>
 
-    <section xml:id="zend.session.global_session_management.rememberme"><info><title>rememberMe(integer $seconds)</title></info>
+    <section xml:id="zend.session.global_session_management.rememberme"><title>rememberMe(integer $seconds)</title>
         
 
         <para>
@@ -425,7 +425,7 @@ if (!isset($defaultNamespace->initialized)) {
         </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.forgetme"><info><title>forgetMe()</title></info>
+    <section xml:id="zend.session.global_session_management.forgetme"><title>forgetMe()</title>
         
 
         <para>
@@ -434,7 +434,7 @@ if (!isset($defaultNamespace->initialized)) {
         </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.sessionexists"><info><title>sessionExists()</title></info>
+    <section xml:id="zend.session.global_session_management.sessionexists"><title>sessionExists()</title>
         
 
         <para>
@@ -445,7 +445,7 @@ if (!isset($defaultNamespace->initialized)) {
         </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.destroy"><info><title>destroy(bool $remove_cookie = true, bool $readonly = true)</title></info>
+    <section xml:id="zend.session.global_session_management.destroy"><title>destroy(bool $remove_cookie = true, bool $readonly = true)</title>
         
 
         <para>
@@ -471,7 +471,7 @@ if (!isset($defaultNamespace->initialized)) {
             <methodname>destroy()</methodname>.
         </para>
 
-        <note><info><title>Throws</title></info>
+        <note><title>Throws</title>
             
 
             <para>
@@ -481,7 +481,7 @@ if (!isset($defaultNamespace->initialized)) {
         </note>
     </section>
 
-    <section xml:id="zend.session.global_session_management.stop"><info><title>stop()</title></info>
+    <section xml:id="zend.session.global_session_management.stop"><title>stop()</title>
         
 
         <para>
@@ -496,7 +496,7 @@ if (!isset($defaultNamespace->initialized)) {
         </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.writeclose"><info><title>writeClose($readonly = true)</title></info>
+    <section xml:id="zend.session.global_session_management.writeclose"><title>writeClose($readonly = true)</title>
         
 
         <para>
@@ -507,7 +507,7 @@ if (!isset($defaultNamespace->initialized)) {
             <classname>Zend_Session</classname> or <classname>Zend_Session_Namespace</classname>.
         </para>
 
-        <note><info><title>Throws</title></info>
+        <note><title>Throws</title>
             
 
             <para>
@@ -521,7 +521,7 @@ if (!isset($defaultNamespace->initialized)) {
         </note>
     </section>
 
-    <section xml:id="zend.session.global_session_management.expiresessioncookie"><info><title>expireSessionCookie()</title></info>
+    <section xml:id="zend.session.global_session_management.expiresessioncookie"><title>expireSessionCookie()</title>
         
 
         <para>
@@ -530,7 +530,7 @@ if (!isset($defaultNamespace->initialized)) {
         </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.savehandler"><info><title>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</title></info>
+    <section xml:id="zend.session.global_session_management.savehandler"><title>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</title>
         
 
         <para>
@@ -539,7 +539,7 @@ if (!isset($defaultNamespace->initialized)) {
         </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.namespaceisset"><info><title>namespaceIsset($namespace)</title></info>
+    <section xml:id="zend.session.global_session_management.namespaceisset"><title>namespaceIsset($namespace)</title>
         
 
         <para>
@@ -547,7 +547,7 @@ if (!isset($defaultNamespace->initialized)) {
             exists in a particular namespace.
         </para>
 
-        <note><info><title>Throws</title></info>
+        <note><title>Throws</title>
             
 
             <para>
@@ -557,7 +557,7 @@ if (!isset($defaultNamespace->initialized)) {
         </note>
     </section>
 
-    <section xml:id="zend.session.global_session_management.namespaceunset"><info><title>namespaceUnset($namespace)</title></info>
+    <section xml:id="zend.session.global_session_management.namespaceunset"><title>namespaceUnset($namespace)</title>
         
 
         <para>
@@ -572,7 +572,7 @@ if (!isset($defaultNamespace->initialized)) {
             <acronym>PHP</acronym> manual.
         </para>
 
-        <note><info><title>Throws</title></info>
+        <note><title>Throws</title>
             
 
             <para>
@@ -582,7 +582,7 @@ if (!isset($defaultNamespace->initialized)) {
         </note>
     </section>
 
-    <section xml:id="zend.session.global_session_management.namespaceget"><info><title>namespaceGet($namespace)</title></info>
+    <section xml:id="zend.session.global_session_management.namespaceget"><title>namespaceGet($namespace)</title>
         
 
         <para>
@@ -593,7 +593,7 @@ if (!isset($defaultNamespace->initialized)) {
             Actually, all participation on any relevant topic is welcome :)
         </para>
 
-        <note><info><title>Throws</title></info>
+        <note><title>Throws</title>
             
 
             <para>
@@ -603,7 +603,7 @@ if (!isset($defaultNamespace->initialized)) {
         </note>
     </section>
 
-    <section xml:id="zend.session.global_session_management.getiterator"><info><title>getIterator()</title></info>
+    <section xml:id="zend.session.global_session_management.getiterator"><title>getIterator()</title>
         
 
         <para>
@@ -611,7 +611,7 @@ if (!isset($defaultNamespace->initialized)) {
             all namespaces.
         </para>
 
-        <note><info><title>Throws</title></info>
+        <note><title>Throws</title>
             
 
             <para>

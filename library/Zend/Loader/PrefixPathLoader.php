@@ -18,15 +18,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Loader;
 
-use Zend\Stdlib\ArrayStack,
-    Zend\Stdlib\SplStack,
-    SplDoublyLinkedList,
-    SplFileInfo;
+use Zend\Stdlib\ArrayStack;
+use Zend\Stdlib\SplStack;
+use SplDoublyLinkedList;
+use SplFileInfo;
 
 /**
  * Prefix/Path plugin loader
@@ -133,7 +130,7 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
      *
      * Proxies to {@link addPrefixPaths()}.
      * 
-     * @param  array|Traversable $options 
+     * @param  array|\Traversable $options
      * @return PrefixPathLoader
      */
     public function setOptions($options)
@@ -458,7 +455,7 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
      */
     protected function formatPrefix($prefix, $namespaced = true)
     {
-        if($prefix == "") {
+        if ($prefix == "") {
             return $prefix;
         }
 

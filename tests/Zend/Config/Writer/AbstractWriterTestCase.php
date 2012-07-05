@@ -21,27 +21,27 @@
 
 namespace ZendTest\Config\Writer;
 
-use \PHPUnit_Framework_TestCase as TestCase,
-    \Zend\Config\Config;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Config\Config;
 
 /**
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
 abstract class AbstractWriterTestCase extends TestCase
 {
     /**
-     * @var Reader
+     * @var \Zend\Config\Reader\ReaderInterface
      */
     protected $reader;
     
     /**
      *
-     * @var Writer
+     * @var \Zend\Config\Writer\WriterInterface
      */
     protected $writer;
     
@@ -66,7 +66,12 @@ abstract class AbstractWriterTestCase extends TestCase
        
     public function tearDown()
     {
-        @unlink($this->getTestAssetFileName());
+        if (file_exists($this->getTestAssetFileName())) {
+            if (!is_writable($this->getTestAssetFileName())) {
+                chmod($this->getTestAssetFileName(), 0777);
+            }
+            @unlink($this->getTestAssetFileName());
+        }
     }
     
     public function testNoFilenameSet()

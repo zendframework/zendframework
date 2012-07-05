@@ -20,8 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Response_BaseType
- * @uses       Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

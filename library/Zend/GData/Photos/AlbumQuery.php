@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Photos;
 use Zend\GData\App;
 
@@ -33,8 +30,6 @@ use Zend\GData\App;
  * For information on submitting queries to a server, see the service
  * class, Zend_Gdata_Photos.
  *
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\Photos\UserQuery
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

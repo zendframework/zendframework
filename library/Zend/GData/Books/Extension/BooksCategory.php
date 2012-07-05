@@ -19,16 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Books\Extension;
 
 /**
  * Describes a books category
  *
- * @uses       \Zend\GData\App\Extension\Category
- * @uses       \Zend\GData\Books
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

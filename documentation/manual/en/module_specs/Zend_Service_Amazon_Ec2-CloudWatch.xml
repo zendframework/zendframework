@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.cloudwatch"><info><title>Zend_Service_Amazon_Ec2: CloudWatch Monitoring</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.cloudwatch"><title>Zend_Service_Amazon_Ec2: CloudWatch Monitoring</title>
     
 
     <para>
@@ -10,10 +10,10 @@
             Amazon CloudWatch Developers Guide</link>
     </para>
 
-    <section xml:id="zend.service.amazon.ec2.cloudwatch.usage"><info><title>CloudWatch Usage</title></info>
+    <section xml:id="zend.service.amazon.ec2.cloudwatch.usage"><title>CloudWatch Usage</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.cloudwatch.usage.list"><info><title>Listing Aviable Metrics</title></info>
+        <example xml:id="zend.service.amazon.ec2.cloudwatch.usage.list"><title>Listing Aviable Metrics</title>
             
 
             <para>
@@ -28,7 +28,7 @@ $return = $ec2_ebs->listMetrics();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.cloudwatch.usage.getmetricstatistics"><info><title>Return Statistics for a given metric</title></info>
+        <example xml:id="zend.service.amazon.ec2.cloudwatch.usage.getmetricstatistics"><title>Return Statistics for a given metric</title>
             
 
             <para>

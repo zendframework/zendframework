@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\XmlRpc;
 
 /**
@@ -33,9 +30,6 @@ namespace Zend\XmlRpc;
  * To allow method chaining, you may only use the {@link getInstance()} factory
  * to instantiate a Zend_XmlRpc_Server_Fault.
  *
- * @uses       SimpleXMLElement
- * @uses       Zend\XmlRpc\Exception
- * @uses       Zend\XmlRpc\Value\Value
  * @category   Zend
  * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -121,7 +115,7 @@ class Fault
      * Set the fault code
      *
      * @param int $code
-     * @return Zend\XmlRpc\Fault
+     * @return Fault
      */
     public function setCode($code)
     {
@@ -143,7 +137,7 @@ class Fault
      * Retrieve fault message
      *
      * @param string
-     * @return Zend\XmlRpc\Fault
+     * @return Fault
      */
     public function setMessage($message)
     {
@@ -165,12 +159,12 @@ class Fault
      * Set encoding to use in fault response
      *
      * @param string $encoding
-     * @return Zend\XmlRpc\Fault
+     * @return Fault
      */
     public function setEncoding($encoding)
     {
         $this->_encoding = $encoding;
-        Value::setEncoding($encoding);
+        AbstractValue::setEncoding($encoding);
         return $this;
     }
 
@@ -190,7 +184,7 @@ class Fault
      * @param string $fault
      * @return boolean Returns true if successfully loaded fault response, false
      * if response was not a fault response
-     * @throws Zend\XmlRpc\Exception if no or faulty XML provided, or if fault
+     * @throws \Zend\XmlRpc\Exception\ExceptionInterface if no or faulty XML provided, or if fault
      * response does not contain either code or message
      */
     public function loadXml($fault)
@@ -218,7 +212,7 @@ class Fault
         }
 
         $structXml = $xml->fault->value->asXML();
-        $struct    = Value::getXmlRpcValue($structXml, Value::XML_STRING);
+        $struct    = AbstractValue::getXmlRpcValue($structXml, AbstractValue::XML_STRING);
         $struct    = $struct->getValue();
 
         if (isset($struct['faultCode'])) {
@@ -261,7 +255,7 @@ class Fault
         $fault = new self();
         try {
             $isFault = $fault->loadXml($xml);
-        } catch (Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             $isFault = false;
         }
 
@@ -280,9 +274,9 @@ class Fault
             'faultCode'   => $this->getCode(),
             'faultString' => $this->getMessage()
         );
-        $value = Value::getXmlRpcValue($faultStruct);
+        $value = AbstractValue::getXmlRpcValue($faultStruct);
 
-        $generator = Value::getGenerator();
+        $generator = AbstractValue::getGenerator();
         $generator->openElement('methodResponse')
                   ->openElement('fault');
         $value->generateXml();

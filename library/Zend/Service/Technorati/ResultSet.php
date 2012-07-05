@@ -19,15 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Technorati;
 
-use DomDocument,
-    DOMXPath,
-    OutOfBoundsException,
-    SeekableIterator;
+use DomDocument;
+use DOMXPath;
+use OutOfBoundsException;
+use SeekableIterator;
 
 /**
  * This is the most essential result set.

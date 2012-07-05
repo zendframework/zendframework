@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper\Placeholder;
 use Zend\View\Helper\Placeholder\Registry;
 use Zend\View\Helper\Placeholder\Container;
@@ -54,10 +51,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $registry = \Zend\Registry::getInstance();
-        if (isset($registry[Registry::REGISTRY_KEY])) {
-            unset($registry[Registry::REGISTRY_KEY]);
-        }
+        Registry::unsetRegistry();
         $this->registry = new Registry();
     }
 
@@ -174,19 +168,28 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($registry1, $registry2);
     }
 
-    public function testGetRegistryRegistersWithGlobalRegistry()
+    /**
+     * @group ZF-10793
+     */
+    public function testSetValueCreateContainer()
     {
-        $this->assertFalse(\Zend\Registry::isRegistered(Registry::REGISTRY_KEY));
-        $registry = Registry::getRegistry();
-        $this->assertTrue(\Zend\Registry::isRegistered(Registry::REGISTRY_KEY));
-
-        $registered = \Zend\Registry::get(Registry::REGISTRY_KEY);
-        $this->assertSame($registry, $registered);
+        $this->registry->setContainerClass('ZendTest\View\Helper\Placeholder\MockContainer');
+        $data = array(
+            'ZF-10793'
+        );
+        $container = $this->registry->createContainer('foo', $data);
+        $this->assertEquals(array('ZF-10793'), $container->data);
     }
 }
 
 class MockContainer extends Container\AbstractContainer
 {
+    public $data = array();
+
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
 }
 
 class BogusContainer

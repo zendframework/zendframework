@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.cycle"><info><title>Cycle Helper</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.cycle"><title>Cycle Helper</title>
     
 
     <para>
         The <classname>Cycle</classname> helper is used to alternate a set of values.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.cycle.basicusage"><info><title>Cycle Helper Basic Usage</title></info>
+    <example xml:id="zend.view.helpers.initial.cycle.basicusage"><title>Cycle Helper Basic Usage</title>
         
 
         <para>
@@ -43,7 +43,7 @@ $this->cycle()->prev();
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.cycle.advanceusage"><info><title>Working with two or more cycles</title></info>
+    <example xml:id="zend.view.helpers.initial.cycle.advanceusage"><title>Working with two or more cycles</title>
         
 
        <para>

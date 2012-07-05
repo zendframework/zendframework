@@ -19,15 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
-use Zend\Registry,
-    Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
-    Zend\View\Renderer\PhpRenderer as View,
-    Zend\View\Helper,
-    Zend\View\Exception as ViewException;
+
+use Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry;
+use Zend\View\Renderer\PhpRenderer as View;
+use Zend\View\Helper;
+use Zend\View\Exception\ExceptionInterface as ViewException;
 
 /**
  * Test class for Zend_View_Helper_HeadMeta.
@@ -61,12 +58,8 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->error = false;
-        foreach (array(PlaceholderRegistry::REGISTRY_KEY, 'Zend_View_Helper_Doctype') as $key) {
-            if (Registry::isRegistered($key)) {
-                $registry = Registry::getInstance();
-                unset($registry[$key]);
-            }
-        }
+        PlaceholderRegistry::unsetRegistry();
+        Helper\Doctype::unsetDoctypeRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
         $this->view     = new View();
         $this->view->plugin('doctype')->__invoke('XHTML1_STRICT');
@@ -233,13 +226,13 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
 
     public function testOverloadingThrowsExceptionWithFewerThanTwoArgs()
     {
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $this->helper->setName('foo');
     }
 
     public function testOverloadingThrowsExceptionWithInvalidMethodType()
     {
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $this->helper->setFoo('foo');
     }
 
@@ -417,14 +410,14 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
 		$view = new View();
 		$view->plugin('doctype')->__invoke('HTML4_STRICT');
 
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $view->plugin('headMeta')->setCharset('utf-8');
 	}
 
 	/**
 	 * @issue ZF-7722
 	 */
-    public function testCharset() 
+    public function testCharset()
     {
 		$view = new View();
 		$view->plugin('doctype')->__invoke('HTML5');
@@ -441,13 +434,68 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
 			$view->plugin('headMeta')->toString());
 	}
 
+     /**
+     * @group ZF-9743
+     */
+    public function testPropertyIsSupportedWithRdfaDoctype()
+    {
+        $this->view->doctype('XHTML1_RDFA');
+        $this->helper->__invoke('foo', 'og:title', 'property');
+        $this->assertEquals('<meta property="og:title" content="foo" />',
+                            $this->helper->toString()
+                           );
+    }
+
+    /**
+     * @group ZF-9743
+     */
+    public function testPropertyIsNotSupportedByDefaultDoctype()
+    {
+        try {
+            $this->helper->__invoke('foo', 'og:title', 'property');
+            $this->fail('meta property attribute should not be supported on default doctype');
+        } catch (ViewException $e) {
+            $this->assertContains('Invalid value passed', $e->getMessage());
+        }
+    }
+
+    /**
+     * @group ZF-9743
+     * @depends testPropertyIsSupportedWithRdfaDoctype
+     */
+    public function testOverloadingAppendPropertyAppendsMetaTagToStack()
+    {
+        $this->view->doctype('XHTML1_RDFA');
+        $this->_testOverloadAppend('property');
+    }
+
+    /**
+     * @group ZF-9743
+     * @depends testPropertyIsSupportedWithRdfaDoctype
+     */
+    public function testOverloadingPrependPropertyPrependsMetaTagToStack()
+    {
+        $this->view->doctype('XHTML1_RDFA');
+        $this->_testOverloadPrepend('property');
+    }
+
+    /**
+     * @group ZF-9743
+     * @depends testPropertyIsSupportedWithRdfaDoctype
+     */
+    public function testOverloadingSetPropertyOverwritesMetaTagStack()
+    {
+        $this->view->doctype('XHTML1_RDFA');
+        $this->_testOverloadSet('property');
+    }
+
     /**
      * @group ZF-11835
      */
-    public function testConditional() 
+    public function testConditional()
     {
         $html = $this->helper->appendHttpEquiv('foo', 'bar', array('conditional' => 'lt IE 7'))->toString();
-        
+
         $this->assertRegExp("|^<!--\[if lt IE 7\]>|", $html);
         $this->assertRegExp("|<!\[endif\]-->$|", $html);
     }

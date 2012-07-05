@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Server\Reflection;
 
 /**
@@ -29,7 +26,6 @@ namespace Zend\Server\Reflection;
  *
  * Stores the return value type and description
  *
- * @uses       \Zend\Server\Reflection\Exception
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Reflection

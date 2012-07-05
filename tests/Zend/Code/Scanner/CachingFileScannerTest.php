@@ -2,13 +2,19 @@
 
 namespace ZendTest\Code\Scanner;
 
-use Zend\Code\Scanner\CachingFileScanner,
-    Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Scanner\CachingFileScanner;
+use Zend\Code\Annotation\AnnotationManager;
 
 class CachingFileScannerTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setUp(){
+        CachingFileScanner::clearCache();
+    }
+
     public function testCachingFileScannerWillUseSameInternalFileScannerWithMatchingFileNameAnAnnotationManagerObject()
     {
+        CachingFileScanner::clearCache();
+
         // single entry, based on file
         $cfs1 = new CachingFileScanner(__DIR__ . '/../TestAsset/BarClass.php');
         $this->assertContains('ZendTest\Code\TestAsset\BarClass', $cfs1->getClassNames());

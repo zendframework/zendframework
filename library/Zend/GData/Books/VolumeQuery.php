@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Books;
 
 use Zend\GData\Books;
@@ -29,8 +26,6 @@ use Zend\GData\Books;
 /**
  * Assists in constructing queries for Books volumes
  *
- * @uses       \Zend\GData\Books\Books
- * @uses       \Zend\GData\Query
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

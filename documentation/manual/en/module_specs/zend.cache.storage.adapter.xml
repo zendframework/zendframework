@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.storage.adapter">
-    <info>
+    
         <title>Zend\Cache\Storage\Adapter</title>
-    </info>
+    
 
     <section xml:id="zend.cache.storage.adapter.intro">
-        <info>
+        
             <title>Overview</title>
-        </info>
+        
 
         <para>
             Storage adapters are wrappers for real storage resources such as memory and the
@@ -52,9 +52,9 @@
     </section>
 
     <section xml:id="zend.cache.storage.adapter.quick-start">
-        <info>
+        
             <title>Quick Start</title>
-        </info>
+        
 
         <para>
             Caching adapters can either be created from the provided
@@ -97,9 +97,9 @@ $cache->addPlugin($plugin);
     </section>
 
     <section xml:id="zend.cache.storage.adapter.options">
-        <info>
+        
             <title>Configuration Options</title>
-        </info>
+        
 
         <variablelist>
             <varlistentry xml:id="zend.cache.storage.adapter.options.ignore-missing-items">
@@ -365,9 +365,9 @@ $cache->addPlugin($plugin);
     </section>
 
     <section xml:id="zend.cache.storage.adapter.methods">
-        <info>
+        
             <title>Available Methods</title>
-        </info>
+        
 
         <variablelist>
             <varlistentry xml:id="zend.cache.storage.adapter.methods.set-options">
@@ -914,9 +914,9 @@ $cache->addPlugin($plugin);
     </section>
 
     <section xml:id="zend.cache.storage.adapter.examples">
-        <info>
+        
             <title>TODO: Examples</title>
-        </info>
+        
 
         <para></para>
     </section>

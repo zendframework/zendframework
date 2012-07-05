@@ -18,15 +18,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator;
 
+use Traversable;
+
 /**
- * @uses       \Zend\Loader
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -39,10 +35,10 @@ class Barcode extends AbstractValidator
     const INVALID_CHARS  = 'barcodeInvalidChars';
     const INVALID_LENGTH = 'barcodeInvalidLength';
 
-    protected $_messageTemplates = array(
-        self::FAILED         => "'%value%' failed checksum validation",
-        self::INVALID_CHARS  => "'%value%' contains invalid characters",
-        self::INVALID_LENGTH => "'%value%' should have a length of %length% characters",
+    protected $messageTemplates = array(
+        self::FAILED         => "The input failed checksum validation",
+        self::INVALID_CHARS  => "The input contains invalid characters",
+        self::INVALID_LENGTH => "The input should have a length of %length% characters",
         self::INVALID        => "Invalid type given. String expected",
     );
 
@@ -51,7 +47,7 @@ class Barcode extends AbstractValidator
      *
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'length' => array('options' => 'length'),
     );
 
@@ -69,7 +65,7 @@ class Barcode extends AbstractValidator
      */
     public function __construct($options = null)
     {
-        if (!is_array($options) && !($options instanceof \Zend\Config\Config)) {
+        if (!is_array($options) && !($options instanceof Traversable)) {
             $options = array('adapter' => $options);
         }
 
@@ -83,11 +79,11 @@ class Barcode extends AbstractValidator
     /**
      * Returns the set adapter
      *
-     * @return Zend\Validate\Barcode\Adapter
+     * @return Barcode\AbstractAdapter
      */
     public function getAdapter()
     {
-        if (!($this->options['adapter'] instanceof Barcode\Adapter)) {
+        if (!($this->options['adapter'] instanceof Barcode\AdapterInterface)) {
             $this->setAdapter('Ean13');
         }
 
@@ -97,19 +93,16 @@ class Barcode extends AbstractValidator
     /**
      * Sets a new barcode adapter
      *
-     * @param  string|\Zend\Validator\Barcode\Adapter $adapter Barcode adapter to use
+     * @param  string|Barcode\AbstractAdapter $adapter Barcode adapter to use
      * @param  array  $options Options for this adapter
-     * @return Zend\Validator\Barcode
-     * @throws \Zend\Validator\Exception
+     * @return Barcode
+     * @throws Exception\InvalidArgumentException
      */
     public function setAdapter($adapter, $options = null)
     {
         if (is_string($adapter)) {
             $adapter = ucfirst(strtolower($adapter));
-            $adapter = 'Zend\Validator\Barcode\\' . $adapter;
-            if (\Zend\Loader::isReadable('Zend/Validator/Barcode/' . $adapter . '.php')) {
-                $adapter = 'Zend\Validator\Barcode\\' . $adapter;
-            }
+            $adapter = 'Zend\\Validator\\Barcode\\' . $adapter;
 
             if (!class_exists($adapter)) {
                 throw new Exception\InvalidArgumentException('Barcode adapter matching "' . $adapter . '" not found');
@@ -118,9 +111,9 @@ class Barcode extends AbstractValidator
             $this->options['adapter'] = new $adapter($options);
         }
 
-        if (!$this->options['adapter'] instanceof Barcode\Adapter) {
+        if (!$this->options['adapter'] instanceof Barcode\AdapterInterface) {
             throw new Exception\InvalidArgumentException(
-                "Adapter " . $adapter . " does not implement Zend\Validate\Barcode\Adapter"
+                "Adapter $adapter does not implement Zend\\Validate\\Barcode\\AdapterInterface"
             );
         }
 
@@ -149,7 +142,7 @@ class Barcode extends AbstractValidator
     }
 
     /**
-     * Defined by Zend\Validator\Validator
+     * Defined by Zend\Validator\ValidatorInterface
      *
      * Returns true if and only if $value contains a valid barcode
      *

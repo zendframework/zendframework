@@ -19,14 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Delicious;
-use \Zend\Service\Delicious\Delicious as DeliciousClient,
-    \Zend\Service\Delicious,
-    \Zend\Service\Delicious\Post,
-    \Zend\Date\Date;
+
+use Zend\Service\Delicious\Delicious as DeliciousClient;
+use Zend\Service\Delicious;
+use Zend\Service\Delicious\Post;
 
 /**
  * Test helper
@@ -116,7 +113,8 @@ class PostTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the constructor throws an exception when the date value is not an instance of Zend_Date
+     * Ensures that the constructor throws an exception when the date value is
+     * not an instance of DateTime
      *
      * @return void
      */
@@ -127,12 +125,9 @@ class PostTest extends \PHPUnit_Framework_TestCase
             'url'   => 'anything',
             'date'  => 'invalid'
             );
-        try {
-            $post = new Post($this->_delicious, $values);
-            $this->fail('Expected \Zend\Service\Delicious\Exception not thrown');
-        } catch (Delicious\Exception $e) {
-            $this->assertContains('instance of \Zend\Date\Date', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Service\Delicious\Exception',
+                                    'instance of DateTime');
+        new Post($this->_delicious, $values);
     }
 
     /**

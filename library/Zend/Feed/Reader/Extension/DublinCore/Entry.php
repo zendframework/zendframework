@@ -18,21 +18,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader\Extension\DublinCore;
+
+use DateTime;
+use DOMElement;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Collection;
 use Zend\Feed\Reader\Extension;
-use Zend\Date;
 
 /**
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Collection\Author
-* @uses \Zend\Feed\Reader\Collection\Category
-* @uses \Zend\Feed\Reader\Extension\EntryAbstract
 * @category Zend
 * @package Reader\Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -103,7 +97,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Get categories (subjects under DC)
      *
-     * @return Reader\Reader_Collection_Category
+     * @return Collection\Category
      */
     public function getCategories()
     {
@@ -225,7 +219,7 @@ class Entry extends Extension\AbstractEntry
     /**
      *
      *
-     * @return Date\Date|null
+     * @return DateTime|null
      */
     public function getDate()
     {
@@ -241,8 +235,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($date) {
-            $d = new Date\Date;
-            $d->set($date, Date\Date::ISO_8601);
+            $d = DateTime::createFromFormat(DateTime::ISO8601, $date);
         }
 
         $this->_data['date'] = $d;

@@ -19,10 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Code\Reflection;
+
+use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Annotation\Parser\GenericAnnotationParser;
 
 /**
  * @category   Zend
@@ -40,5 +40,28 @@ class PropertyReflectionTest extends \PHPUnit_Framework_TestCase
         $property = new \Zend\Code\Reflection\PropertyReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', '_prop1');
         $this->assertInstanceOf('Zend\Code\Reflection\ClassReflection', $property->getDeclaringClass());
         $this->assertEquals('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', $property->getDeclaringClass()->getName());
+    }
+
+    public function testAnnotationScanningIsPossible()
+    {
+        $manager = new AnnotationManager();
+        $parser = new GenericAnnotationParser();
+        $parser->registerAnnotation(new TestAsset\SampleAnnotation());
+        $manager->attach($parser);
+
+        $property = new \Zend\Code\Reflection\PropertyReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', '_prop2');
+        $annotations = $property->getAnnotations($manager);
+        $this->assertInstanceOf('Zend\Code\Annotation\AnnotationCollection', $annotations);
+        $this->assertTrue($annotations->hasAnnotation('ZendTest\Code\Reflection\TestAsset\SampleAnnotation'));
+        $found = false;
+        foreach ($annotations as $key => $annotation) {
+            if (!$annotation instanceof TestAsset\SampleAnnotation) {
+                continue;
+            }
+            $this->assertEquals(get_class($annotation) . ': {"foo":"bar"}', $annotation->content);
+            $found = true;
+            break;
+        }
+        $this->assertTrue($found);
     }
 }

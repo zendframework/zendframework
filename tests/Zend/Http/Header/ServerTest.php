@@ -10,7 +10,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testServerFromStringCreatesValidServerHeader()
     {
         $serverHeader = Server::fromString('Server: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $serverHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $serverHeader);
         $this->assertInstanceOf('Zend\Http\Header\Server', $serverHeader);
     }
 

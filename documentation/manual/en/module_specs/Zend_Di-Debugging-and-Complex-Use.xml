@@ -4,10 +4,10 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.di.debugging-and-complex-use-cases">
-    <info><title>Zend\Di Debugging &amp; Complex Use Cases</title></info>
+    <title>Zend\Di Debugging &amp; Complex Use Cases</title>
 
     <section xml:id="zend.di.zend.di.debugging-and-complex-use-cases.debugging">
-        <info><title>Debugging a DiC</title></info>
+        <title>Debugging a DiC</title>
 
         <para>
             It is possible to dump the information contained within both the
@@ -37,10 +37,10 @@
     </section>
 
     <section xml:id="zend.di.zend.di.debugging-and-complex-use-cases.complex-use-cases">
-        <info><title>Complex Use Cases</title></info>
+        <title>Complex Use Cases</title>
 
         <section xml:id="zend.di.zend.di.debugging-and-complex-use-cases.complex-use-cases.interface-injection">
-            <info><title>Interface Injection</title></info>
+            <title>Interface Injection</title>
 
             <programlisting language="php"><![CDATA[
 namespace Foo\Bar {
@@ -70,7 +70,7 @@ namespace {
 
 
         <section xml:id="zend.di.zend.di.debugging-and-complex-use-cases.complex-use-cases.setter-injection-with-class-definition">
-            <info><title>Setter Injection with Class Definition</title></info>
+            <title>Setter Injection with Class Definition</title>
 
             <programlisting language="php"><![CDATA[
 namespace Foo\Bar {
@@ -103,7 +103,7 @@ namespace {
 
 
         <section xml:id="zend.di.zend.di.debugging-and-complex-use-cases.complex-use-cases.multiple-injections">
-            <info><title>Multiple Injections To A Single Injection Point</title></info>
+            <title>Multiple Injections To A Single Injection Point</title>
 
 
             <programlisting language="php"><![CDATA[

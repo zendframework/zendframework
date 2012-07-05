@@ -18,13 +18,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader;
 
-use ArrayObject,
-    Zend\Uri;
+use ArrayObject;
+use DOMNodeList;
+use Zend\Uri;
 
 /**
 * @category Zend
@@ -57,7 +55,7 @@ class FeedSet extends ArrayObject
      * @param string $uri
      * @return void
      */
-    public function addLinks(\DOMNodeList $links, $uri)
+    public function addLinks(DOMNodeList $links, $uri)
     {
         foreach ($links as $link) {
             if (strtolower($link->getAttribute('rel')) !== 'alternate'
@@ -128,7 +126,6 @@ class FeedSet extends ArrayObject
      *
      * @param string $offset
      * @return mixed
-     * @uses Zend_Feed_Reader
      */
     public function offsetGet($offset)
     {

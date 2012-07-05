@@ -10,7 +10,7 @@ class AgeTest extends \PHPUnit_Framework_TestCase
     public function testAgeFromStringCreatesValidAgeHeader()
     {
         $ageHeader = Age::fromString('Age: 12');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $ageHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $ageHeader);
         $this->assertInstanceOf('Zend\Http\Header\Age', $ageHeader);
         $this->assertEquals('12', $ageHeader->getDeltaSeconds());
     }
@@ -30,11 +30,16 @@ class AgeTest extends \PHPUnit_Framework_TestCase
 
     public function testAgeToStringReturnsHeaderFormattedString()
     {
-        $ageHeader = Age::fromString('Age: 12');
+        $ageHeader = new Age();
+        $ageHeader->setDeltaSeconds('12');
         $this->assertEquals('Age: 12', $ageHeader->toString());
     }
 
-    /** Implmentation specific tests here */
-    
+    public function testAgeCorrectsDeltaSecondsOverflow()
+    {
+        $ageHeader = new Age();
+        $ageHeader->setDeltaSeconds(PHP_INT_MAX);
+        $this->assertEquals('Age: 2147483648', $ageHeader->toString());
+    }
 }
 

@@ -19,16 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\SlideShare;
 
-use SimpleXMLElement,
-    Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
-    Zend\Http,
-    Zend\Http\Client;
+use SimpleXMLElement;
+use Zend\Cache\StorageFactory as CacheFactory;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\Http;
+use Zend\Http\Client;
 
 /**
  * The Zend\Service\SlideShare component is used to interface with the
@@ -116,7 +113,7 @@ class SlideShare
     /**
      * The Cache object to use to perform caching
      *
-     * @var CacheAdapter
+     * @var CacheStorage
      */
     protected $cacheobject;
 
@@ -144,7 +141,7 @@ class SlideShare
 
         if (!($this->httpclient instanceof Http\Client)) {
             $client = new Http\Client();
-            $client->setConfig(array('maxredirects' => 2,
+            $client->setOptions(array('maxredirects' => 2,
                                      'timeout'      => 5));
 
             $this->setHttpClient($client);
@@ -155,28 +152,28 @@ class SlideShare
     }
 
     /**
-     * Sets the CacheAdapter object to use to cache the results of API queries
+     * Sets the CacheStorage object to use to cache the results of API queries
      *
-     * @param  CacheAdapter $cacheobject The CacheAdapter object used
+     * @param  CacheStorage $cacheobject The CacheStorage object used
      * @return Zend\Service\SlideShare\SlideShare
      */
-    public function setCacheObject(CacheAdapter $cacheobject)
+    public function setCacheObject(CacheStorage $cacheobject)
     {
         $this->cacheobject = $cacheobject;
         return $this;
     }
 
     /**
-     * Gets the CacheAdapter object which will be used to cache API queries. If no cache object
+     * Gets the CacheStorage object which will be used to cache API queries. If no cache object
      * was previously set the the default will be used (Filesystem caching in /tmp with a life
      * time of 43200 seconds)
      *
-     * @return CacheAdapter The object used in caching
+     * @return CacheStorage The object used in caching
      */
     public function getCacheObject()
     {
 
-        if (!($this->cacheobject instanceof CacheAdapter)) {
+        if (!($this->cacheobject instanceof CacheStorage)) {
             $cache = CacheFactory::factory(array(
                 'adapter' => array(
                     'name' => 'filesystem',

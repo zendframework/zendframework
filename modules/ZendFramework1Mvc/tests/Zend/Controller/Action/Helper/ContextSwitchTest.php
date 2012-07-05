@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Controller\Action\Helper;
 
 use Zend\Layout,
@@ -940,8 +937,7 @@ class ContextSwitchTestController extends Action
 }
 
 
-class CustomView implements \Zend\View\Renderer
-{
+class CustomView implements \Zend\View\Renderer\RendererInterface{
     public function getEngine()
     {}
 

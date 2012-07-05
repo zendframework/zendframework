@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Akismet;
 
-use Zend\Service\Akismet,
-    Zend\Http;
+use Zend\Service\Akismet;
+use Zend\Http;
 
 /**
  * @category   Zend

@@ -21,9 +21,9 @@
 
 namespace ZendTest\Log\Writer;
 
-use ZendTest\Log\TestAsset\ConcreteWriter,
-    Zend\Log\Formatter\Simple as SimpleFormatter,
-    Zend\Log\Filter\Message as MessageFilter;
+use ZendTest\Log\TestAsset\ConcreteWriter;
+use Zend\Log\Formatter\Simple as SimpleFormatter;
+use Zend\Log\Filter\Regex as RegexFilter;
 
 /**
  * @category   Zend
@@ -55,7 +55,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAddFilter()
     {
         $this->_writer->addFilter(1);
-        $this->_writer->addFilter(new MessageFilter('/mess/'));
+        $this->_writer->addFilter(new RegexFilter('/mess/'));
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException');
         $this->_writer->addFilter(new \StdClass());
     }

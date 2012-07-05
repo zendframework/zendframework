@@ -18,19 +18,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Writer;
 
-use Zend\Loader\ShortNameLocator,
-    Zend\Loader\PrefixPathLoader,
-    Zend\Loader\PrefixPathMapper,
-    Zend\Loader\Exception\PluginLoaderException;
+use Zend\Loader\ShortNameLocator;
+use Zend\Loader\PrefixPathLoader;
+use Zend\Loader\PrefixPathMapper;
+use Zend\Loader\Exception\PluginLoaderException;
 
 /**
-* @uses \Zend\Feed\Exception
-* @uses \Zend\Loader\PluginLoader
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -163,7 +158,7 @@ class Writer
      *
      * @param  string $name
      * @return void
-     * @throws Zend_Feed_Exception if unable to resolve Extension class
+     * @throws Exception\RuntimeException if unable to resolve Extension class
      */
     public static function registerExtension($name)
     {
@@ -190,7 +185,7 @@ class Writer
             && !$loader->isLoaded($feedRendererName)
             && !$loader->isLoaded($entryRendererName)
         ) {
-            throw new Exception('Could not load extension: ' . $name
+            throw new Exception\RuntimeException('Could not load extension: ' . $name
                 . 'using Plugin Loader. Check prefix paths are configured and extension exists.');
         }
         if ($loader->isLoaded($feedName)) {

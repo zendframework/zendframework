@@ -18,16 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Session;
 
-use Zend\Validator\Alnum as AlnumValidator,
-    Zend\EventManager\EventCollection;
+use Zend\EventManager\EventManagerInterface;
+use Zend\Session\SaveHandler\SaveHandlerInterface;
 
 /**
- * Session Manager implementation utilizing ext/session
+ * Session ManagerInterface implementation utilizing ext/session
  *
  * @category   Zend
  * @package    Zend_Session
@@ -53,13 +50,13 @@ class SessionManager extends AbstractManager
     protected $name;
 
     /**
-     * @var EventCollection Validation chain to determine if session is valid
+     * @var EventManagerInterface Validation chain to determine if session is valid
      */
     protected $validatorChain;
 
     /**
      * Does a session exist and is it currently active?
-     * 
+     *
      * @return bool
      */
     public function sessionExists()
@@ -81,10 +78,10 @@ class SessionManager extends AbstractManager
      * {@link isValid()} once session_start() is called, and raises an
      * exception if validation fails.
      *
-     * @param bool $preserveStorage        If set to true, current session storage will not be overwritten by the 
+     * @param bool $preserveStorage        If set to true, current session storage will not be overwritten by the
      *                                     contents of $_SESSION.
      * @return void
-     * @throws Exception
+     * @throws Exception\RuntimeException
      */
     public function start($preserveStorage = false)
     {
@@ -93,7 +90,7 @@ class SessionManager extends AbstractManager
         }
 
         $saveHandler = $this->getSaveHandler();
-        if ($saveHandler instanceof SaveHandler) {
+        if ($saveHandler instanceof SaveHandlerInterface) {
             // register the session handler with ext/session
             $this->registerSaveHandler($saveHandler);
         }
@@ -104,12 +101,12 @@ class SessionManager extends AbstractManager
         }
         $storage = $this->getStorage();
 
-        // Since session is starting, we need to potentially repopulate our 
+        // Since session is starting, we need to potentially repopulate our
         // session storage
         if ($storage instanceof Storage\SessionStorage
             && $_SESSION !== $storage
         ) {
-            if (!$preserveStorage){
+            if (!$preserveStorage) {
                 $storage->fromArray($_SESSION);
             }
             $_SESSION = $storage;
@@ -118,7 +115,7 @@ class SessionManager extends AbstractManager
 
     /**
      * Destroy/end a session
-     * 
+     *
      * @param  array $options See {@link $defaultDestroyOptions}
      * @return void
      */
@@ -148,21 +145,21 @@ class SessionManager extends AbstractManager
      * Write session to save handler and close
      *
      * Once done, the Storage object will be marked as immutable.
-     * 
+     *
      * @return void
      */
     public function writeClose()
     {
         // The assumption is that we're using PHP's ext/session.
-        // session_write_close() will actually overwrite $_SESSION with an 
+        // session_write_close() will actually overwrite $_SESSION with an
         // empty array on completion -- which leads to a mismatch between what
         // is in the storage object and $_SESSION. To get around this, we
-        // temporarily reset $_SESSION to an array, and then re-link it to 
+        // temporarily reset $_SESSION to an array, and then re-link it to
         // the storage object.
         //
-        // Additionally, while you _can_ write to $_SESSION following a 
-        // session_write_close() operation, no changes made to it will be 
-        // flushed to the session handler. As such, we now mark the storage 
+        // Additionally, while you _can_ write to $_SESSION following a
+        // session_write_close() operation, no changes made to it will be
+        // flushed to the session handler. As such, we now mark the storage
         // object immutable.
         $storage  = $this->getStorage();
         $_SESSION = (array) $storage;
@@ -175,13 +172,13 @@ class SessionManager extends AbstractManager
      * Get session name
      *
      * Proxies to {@link session_name()}.
-     * 
+     *
      * @return string
      */
     public function getName()
     {
         if (null === $this->name) {
-            // If we're grabbing via session_name(), we don't need our 
+            // If we're grabbing via session_name(), we don't need our
             // validation routine; additionally, calling setName() after
             // session_start() can lead to issues, and often we just need the name
             // in order to do things such as setting cookies.
@@ -193,22 +190,25 @@ class SessionManager extends AbstractManager
     /**
      * Attempt to set the session name
      *
-     * If the session has already been started, or if the name provided fails 
+     * If the session has already been started, or if the name provided fails
      * validation, an exception will be raised.
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return SessionManager
-     * @throws Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function setName($name)
     {
         if ($this->sessionExists()) {
-            throw new Exception\InvalidArgumentException('Cannot set session name after a session has already started');
+            throw new Exception\InvalidArgumentException(
+                'Cannot set session name after a session has already started'
+            );
         }
 
-        $validator = new AlnumValidator();
-        if (!$validator->isValid($name)) {
-            throw new Exception\InvalidArgumentException('Name provided contains invalid characters; must be alphanumeric only');
+        if (!preg_match('/^[a-zA-Z0-9]+$/', $name)) {
+            throw new Exception\InvalidArgumentException(
+                'Name provided contains invalid characters; must be alphanumeric only'
+            );
         }
 
         $this->name = $name;
@@ -220,7 +220,7 @@ class SessionManager extends AbstractManager
      * Get session ID
      *
      * Proxies to {@link session_id()}
-     * 
+     *
      * @return string
      */
     public function getId()
@@ -232,8 +232,8 @@ class SessionManager extends AbstractManager
      * Set session ID
      *
      * Can safely be called in the middle of a session.
-     * 
-     * @param  string $id 
+     *
+     * @param  string $id
      * @return SessionManager
      */
     public function setId($id)
@@ -251,7 +251,7 @@ class SessionManager extends AbstractManager
     /**
      * Regenerate id
      *
-     * Regenerate the session ID, using session save handler's 
+     * Regenerate the session ID, using session save handler's
      * native ID generation Can safely be called in the middle of a session.
      *
      * @param  bool $deleteOldSession
@@ -259,11 +259,6 @@ class SessionManager extends AbstractManager
      */
     public function regenerateId($deleteOldSession = true)
     {
-        if (!$this->sessionExists()) {
-            session_regenerate_id((bool) $deleteOldSession);
-            return $this;
-        }
-
         session_regenerate_id((bool) $deleteOldSession);
         return $this;
     }
@@ -273,7 +268,7 @@ class SessionManager extends AbstractManager
      *
      * Can safely be called in the middle of a session.
      *
-     * @param  null|int $ttl 
+     * @param  null|int $ttl
      * @return SessionManager
      */
     public function rememberMe($ttl = null)
@@ -289,7 +284,7 @@ class SessionManager extends AbstractManager
      * Set a 0s TTL for the session cookie
      *
      * Can safely be called in the middle of a session.
-     * 
+     *
      * @return SessionManager
      */
     public function forgetMe()
@@ -302,11 +297,11 @@ class SessionManager extends AbstractManager
      * Set the validator chain to use when validating a session
      *
      * In most cases, you should use an instance of {@link ValidatorChain}.
-     * 
-     * @param  EventCollection $chain 
+     *
+     * @param  EventManagerInterface $chain
      * @return SessionManager
      */
-    public function setValidatorChain(EventCollection $chain)
+    public function setValidatorChain(EventManagerInterface $chain)
     {
         $this->validatorChain = $chain;
         return $this;
@@ -316,7 +311,7 @@ class SessionManager extends AbstractManager
      * Get the validator chain to use when validating a session
      *
      * By default, uses an instance of {@link ValidatorChain}.
-     * 
+     *
      * @return void
      */
     public function getValidatorChain()
@@ -330,9 +325,9 @@ class SessionManager extends AbstractManager
     /**
      * Is this session valid?
      *
-     * Notifies the Validator Chain until either all validators have returned 
+     * Notifies the Validator Chain until either all validators have returned
      * true or one has failed.
-     * 
+     *
      * @return bool
      */
     public function isValid()
@@ -353,7 +348,7 @@ class SessionManager extends AbstractManager
      * Expire the session cookie
      *
      * Sends a session cookie with no value, and with an expiry in the past.
-     * 
+     *
      * @return void
      */
     public function expireSessionCookie()
@@ -368,18 +363,18 @@ class SessionManager extends AbstractManager
             $_SERVER['REQUEST_TIME'] - 42000, // TTL for cookie
             $config->getCookiePath(),
             $config->getCookieDomain(),
-            $config->getCookieSecure(), 
-            $config->getCookieHTTPOnly()
+            $config->getCookieSecure(),
+            $config->getCookieHttpOnly()
         );
     }
 
     /**
      * Set the session cookie lifetime
      *
-     * If a session already exists, destroys it (without sending an expiration 
+     * If a session already exists, destroys it (without sending an expiration
      * cookie), regenerates the session ID, and restarts the session.
      *
-     * @param  int $ttl 
+     * @param  int $ttl
      * @return void
      */
     protected function setSessionCookieLifetime($ttl)
@@ -404,10 +399,10 @@ class SessionManager extends AbstractManager
      * Since ext/session is coupled to this particular session manager
      * register the save handler with ext/session.
      *
-     * @param SaveHandler $saveHandler
+     * @param SaveHandler\SaveHandlerInterface $saveHandler
      * @return bool
      */
-    protected function registerSaveHandler(SaveHandler $saveHandler)
+    protected function registerSaveHandler(SaveHandler\SaveHandlerInterface $saveHandler)
     {
         return session_set_save_handler(
             array($saveHandler, 'open'),

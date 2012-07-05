@@ -19,23 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Authentication\Adapter;
-use Zend\Authentication\Adapter as AuthenticationAdapter,
-    Zend\Authentication\Result as AuthenticationResult;
+
+use Zend\Authentication\Result as AuthenticationResult;
 
 /**
- * @uses       Zend\Authentication\Adapter\Exception
- * @uses       Zend\Authentication\Adapter
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Digest implements AuthenticationAdapter
+class Digest implements AdapterInterface
 {
     /**
      * Filename against which authentication queries are performed
@@ -72,7 +67,6 @@ class Digest implements AuthenticationAdapter
      * @param  mixed $realm
      * @param  mixed $username
      * @param  mixed $password
-     * @return void
      */
     public function __construct($filename = null, $realm = null, $username = null, $password = null)
     {
@@ -99,7 +93,7 @@ class Digest implements AuthenticationAdapter
      * Sets the filename option value
      *
      * @param  mixed $filename
-     * @return Zend\Authentication\Adapter\Digest Provides a fluent interface
+     * @return Digest Provides a fluent interface
      */
     public function setFilename($filename)
     {
@@ -121,7 +115,7 @@ class Digest implements AuthenticationAdapter
      * Sets the realm option value
      *
      * @param  mixed $realm
-     * @return Zend\Authentication\Adapter\Digest Provides a fluent interface
+     * @return Digest Provides a fluent interface
      */
     public function setRealm($realm)
     {
@@ -143,7 +137,7 @@ class Digest implements AuthenticationAdapter
      * Sets the username option value
      *
      * @param  mixed $username
-     * @return Zend\Authentication\Adapter\Digest Provides a fluent interface
+     * @return Digest Provides a fluent interface
      */
     public function setUsername($username)
     {
@@ -165,7 +159,7 @@ class Digest implements AuthenticationAdapter
      * Sets the password option value
      *
      * @param  mixed $password
-     * @return Zend\Authentication\Adapter\Digest Provides a fluent interface
+     * @return Digest Provides a fluent interface
      */
     public function setPassword($password)
     {
@@ -174,10 +168,10 @@ class Digest implements AuthenticationAdapter
     }
 
     /**
-     * Defined by Zend_Auth_Adapter_Interface
+     * Defined by Zend\Authentication\Adapter\AdapterInterface
      *
-     * @throws Zend\Authentication\Adapter\Exception\RuntimeException
-     * @return Zend\Authentication\Result
+     * @throws Exception\ExceptionInterface
+     * @return AuthenticationResult
      */
     public function authenticate()
     {

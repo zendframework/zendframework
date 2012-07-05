@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><info><title>Filters</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><title>Filters</title>
     
 
     <para>
         A Filter object blocks a message from being written to the log.
     </para>
 
-    <section xml:id="zend.log.filters.all-writers"><info><title>Filtering for All Writers</title></info>
+    <section xml:id="zend.log.filters.all-writers"><title>Filtering for All Writers</title>
         
 
         <para>
             To filter before all writers, you can add any number of Filters to a
-            Log object using the <methodname>addFilter()</methodname> method:
+            Logger object using the <methodname>addFilter()</methodname> method:
         </para>
 
         <programlisting language="php"><![CDATA[
-$logger = new Zend_Log();
+use Zend\Log\Logger;
+        
+$logger = new Logger();
 
-$writer = new Zend_Log_Writer_Stream('php://output');
+$writer = new Zend\Log\Writer\Stream('php://output');
 $logger->addWriter($writer);
 
-$filter = new Zend_Log_Filter_Priority(Zend_Log::CRIT);
+$filter = new Zend\Log\Filter\Priority(Logger::CRIT);
 $logger->addFilter($filter);
 
 // blocked
@@ -36,7 +38,7 @@ $logger->emerg('Emergency message');
         </para>
     </section>
 
-    <section xml:id="zend.log.filters.single-writer"><info><title>Filtering for a Writer Instance</title></info>
+    <section xml:id="zend.log.filters.single-writer"><title>Filtering for a Writer Instance</title>
         
 
         <para>
@@ -45,16 +47,18 @@ $logger->emerg('Emergency message');
         </para>
 
         <programlisting language="php"><![CDATA[
-$logger = new Zend_Log();
+use Zend\Log\Logger;
 
-$writer1 = new Zend_Log_Writer_Stream('/path/to/first/logfile');
+$logger = new Logger();
+
+$writer1 = new Zend\Log\Writer\Stream('/path/to/first/logfile');
 $logger->addWriter($writer1);
 
-$writer2 = new Zend_Log_Writer_Stream('/path/to/second/logfile');
+$writer2 = new Zend\Log\Writer\Stream('/path/to/second/logfile');
 $logger->addWriter($writer2);
 
 // add a filter only to writer2
-$filter = new Zend_Log_Filter_Priority(Zend_Log::CRIT);
+$filter = new Zend\Log\Filter\Priority(Logger::CRIT);
 $writer2->addFilter($filter);
 
 // logged to writer1, blocked from writer2
@@ -63,5 +67,37 @@ $logger->info('Informational message');
 // logged by both writers
 $logger->emerg('Emergency message');
 ]]></programlisting>
+    </section>
+    
+    <section xml:id="zend.log.filters.type"><title>Available filters</title>
+    
+        <para>The Zend\Log\Filter available are:</para>
+        
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Priority</emphasis>, filter logging by $priority. By default, it will accept any log
+                    event whose priority value is less than or equal to $priority.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Regex</emphasis>, filter out any log messages not matching the regex pattern. 
+                    This filter use the preg_match() function of PHP.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>SuppressFilter</emphasis>, this is a simple boolean filter. Call suppress(true) to suppress all log events.
+                    Call suppress(false) to accept all log events.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Validator</emphasis>, filter out any log messages not matching the
+                    Zend\Validator\Validator object passed to the filter.
+                </para>
+            </listitem>
+        </itemizedlist>
     </section>
 </section>

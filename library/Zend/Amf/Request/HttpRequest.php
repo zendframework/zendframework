@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Amf\Request;
 
 /**
@@ -31,7 +28,6 @@ namespace Zend\Amf\Request;
  * built at construction time using a raw POST; if no data is available, the
  * request is declared a fault.
  *
- * @uses       \Zend\Amf\Request\StreamRequest
  * @package    Zend_Amf
  * @subpackage Request
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -52,7 +48,6 @@ class HttpRequest extends StreamRequest
      * occurs in doing so, or if the AMF body is invalid, the request is declared a
      * fault.
      *
-     * @return void
      */
     public function __construct()
     {

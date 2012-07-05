@@ -19,17 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Test;
 
 /**
  * Testing Database Adapter which acts as a stack for SQL Results
  *
- * @uses       \Zend\Db\Adapter\AbstractAdapter
- * @uses       \Zend\Db\Profiler\Profiler
- * @uses       \Zend\Test\DbStatement
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

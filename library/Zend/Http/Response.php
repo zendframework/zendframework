@@ -3,9 +3,9 @@
 namespace Zend\Http;
 
 use Zend\Stdlib\Message,
-    Zend\Stdlib\ResponseDescription;
+    Zend\Stdlib\ResponseInterface;
 
-class Response extends Message implements ResponseDescription
+class Response extends Message implements ResponseInterface
 {
 
     /**#@+
@@ -175,9 +175,9 @@ class Response extends Message implements ResponseDescription
      */
     public static function fromString($string)
     {
-        $lines = preg_split('/\r\n/', $string);
-        if (!is_array($lines) || count($lines)==1) {
-            $lines = preg_split ('/\n/',$string);
+        $lines = explode("\r\n", $string);
+        if (!is_array($lines) || count($lines) == 1) {
+            $lines = explode("\n", $string);
         }
 
         $firstLine = array_shift($lines);
@@ -202,7 +202,7 @@ class Response extends Message implements ResponseDescription
         while ($lines) {
             $nextLine = array_shift($lines);
 
-            if ($nextLine == '') {
+            if ($isHeader && $nextLine == '') {
                 $isHeader = false;
                 continue;
             }
@@ -257,7 +257,7 @@ class Response extends Message implements ResponseDescription
      *
      * @return Headers
      */
-    public function headers()
+    public function getHeaders()
     {
         if ($this->headers === null || is_string($this->headers)) {
             $this->headers = (is_string($this->headers)) ? Headers::fromString($this->headers) : new Headers();
@@ -268,9 +268,9 @@ class Response extends Message implements ResponseDescription
     /**
      * @return Header\SetCookie[]
      */
-    public function cookie()
+    public function getCookie()
     {
-        return $this->headers()->get('Set-Cookie');
+        return $this->getHeaders()->get('Set-Cookie');
     }
 
     /**
@@ -327,8 +327,9 @@ class Response extends Message implements ResponseDescription
     /**
      * Set HTTP status code and (optionally) message
      *
-     * @param numeric $code
-     * @return Response
+     * @param integer $code
+     * @throws Exception\InvalidArgumentException
+     * @return \Zend\Http\Response
      */
     public function setStatusCode($code)
     {
@@ -353,7 +354,7 @@ class Response extends Message implements ResponseDescription
     {
         $body = (string) $this->getContent();
 
-        $transferEncoding = $this->headers()->get('Transfer-Encoding');
+        $transferEncoding = $this->getHeaders()->get('Transfer-Encoding');
 
         if (!empty($transferEncoding)) {
             if (strtolower($transferEncoding->getFieldValue()) == 'chunked') {
@@ -361,7 +362,7 @@ class Response extends Message implements ResponseDescription
             }
         }
 
-        $contentEncoding = $this->headers()->get('Content-Encoding');
+        $contentEncoding = $this->getHeaders()->get('Content-Encoding');
 
         if (!empty($contentEncoding)) {
             $contentEncoding = $contentEncoding->getFieldValue();
@@ -469,10 +470,20 @@ class Response extends Message implements ResponseDescription
     public function toString()
     {
         $str  = $this->renderStatusLine() . "\r\n";
-        $str .= $this->headers()->toString();
+        $str .= $this->getHeaders()->toString();
         $str .= "\r\n";
-        $str .= $this->getBody();
+        $str .= $this->getContent();
         return $str;
+    }
+
+    /**
+     * Implements magic __toString()
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->toString();
     }
 
     /**
@@ -485,28 +496,17 @@ class Response extends Message implements ResponseDescription
     {
         $decBody = '';
 
-        // If mbstring overloads substr and strlen functions, we have to
-        // override it's internal encoding
-        if (function_exists('mb_internal_encoding') &&
-           ((int) ini_get('mbstring.func_overload')) & 2) {
-
-            $mbIntEnc = mb_internal_encoding();
-            mb_internal_encoding('ASCII');
-        }
-
         while (trim($body)) {
             if (! preg_match("/^([\da-fA-F]+)[^\r\n]*\r\n/sm", $body, $m)) {
-                throw new Exception\RuntimeException("Error parsing body - doesn't seem to be a chunked message");
+                throw new Exception\RuntimeException(
+                    "Error parsing body - doesn't seem to be a chunked message"
+                );
             }
 
-            $length = hexdec(trim($m[1]));
-            $cut = strlen($m[0]);
+            $length   = hexdec(trim($m[1]));
+            $cut      = strlen($m[0]);
             $decBody .= substr($body, $cut, $length);
-            $body = substr($body, $cut + $length + 2);
-        }
-
-        if (isset($mbIntEnc)) {
-            mb_internal_encoding($mbIntEnc);
+            $body     = substr($body, $cut + $length + 2);
         }
 
         return $decBody;
@@ -566,5 +566,4 @@ class Response extends Message implements ResponseDescription
             return gzinflate($body);
         }
     }
-
 }

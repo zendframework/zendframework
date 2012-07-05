@@ -18,13 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator\Barcode;
 
 /**
- * @uses       \Zend\Validator\Barcode\AbstractAdapter
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -36,28 +32,27 @@ class Identcode extends AbstractAdapter
      * Allowed barcode lengths
      * @var integer
      */
-    protected $_length = 12;
+    protected $length = 12;
 
     /**
      * Allowed barcode characters
      * @var string
      */
-    protected $_characters = '0123456789';
+    protected $characters = '0123456789';
 
     /**
      * Checksum function
      * @var string
      */
-    protected $_checksum = '_identcode';
+    protected $checksum = 'identcode';
+
     /**
      * Constructor for this barcode adapter
-     *
-     * @return void
      */
     public function __construct()
     {
         $this->setLength(12);
         $this->setCharacters('0123456789');
-        $this->setChecksum('_identcode');
+        $this->setChecksum('identcode');
     }
 }

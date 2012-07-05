@@ -18,11 +18,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mail\Exception;
-use Zend\Mail\Exception;
 
 /**
  * Exception for Zend_Mail component.
@@ -34,6 +30,6 @@ use Zend\Mail\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements Exception
+    implements ExceptionInterface
 {
 }

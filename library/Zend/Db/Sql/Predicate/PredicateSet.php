@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql\Predicate;
@@ -27,8 +16,6 @@ use Countable;
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PredicateSet implements PredicateInterface, Countable
 {
@@ -37,10 +24,10 @@ class PredicateSet implements PredicateInterface, Countable
 
     const COMBINED_BY_OR  = 'OR';
     const OP_OR           = 'OR';
-    
+
     protected $defaultCombination = self::COMBINED_BY_AND;
     protected $predicates         = array();
-    
+
     /**
      * Constructor
      * 
@@ -75,9 +62,19 @@ class PredicateSet implements PredicateInterface, Countable
             $this->orPredicate($predicate);
             return $this;
         }
-        
+
         $this->andPredicate($predicate);
         return $this;
+    }
+
+    /**
+     * Return the predicates
+     *
+     * @return PredicateInterface[]
+     */
+    public function getPredicates()
+    {
+        return $this->predicates;
     }
 
     /**
@@ -109,7 +106,7 @@ class PredicateSet implements PredicateInterface, Countable
      *
      * @return array
      */
-    public function getWhereParts()
+    public function getExpressionData()
     {
         $parts = array();
         for ($i = 0; $i < count($this->predicates); $i++) {
@@ -121,7 +118,7 @@ class PredicateSet implements PredicateInterface, Countable
                 $parts[] = '(';
             }
 
-            $parts = array_merge($parts, $predicate->getWhereParts());
+            $parts = array_merge($parts, $predicate->getExpressionData());
 
             if ($predicate instanceof PredicateSet) {
                 $parts[] = ')';
@@ -143,4 +140,5 @@ class PredicateSet implements PredicateInterface, Countable
     {
         return count($this->predicates);
     }
+
 }

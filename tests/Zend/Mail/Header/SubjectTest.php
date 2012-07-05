@@ -21,8 +21,7 @@
 
 namespace ZendTest\Mail\Header;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Mail\Header\Subject;
+use Zend\Mail\Header;
 
 /**
  * @category   Zend
@@ -32,12 +31,12 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class SubjectTest extends TestCase
+class SubjectTest extends \PHPUnit_Framework_TestCase
 {
     public function testHeaderFolding()
     {
         $string  = str_repeat('foobarblahblahblah baz bat', 10);
-        $subject = new Subject();
+        $subject = new Header\Subject();
         $subject->setSubject($string);
 
         $expected = wordwrap($string, 78, "\r\n ");

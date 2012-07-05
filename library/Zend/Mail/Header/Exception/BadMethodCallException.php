@@ -21,7 +21,7 @@
 
 namespace Zend\Mail\Header\Exception;
 
-use Zend\Mail\Header\Exception;
+use Zend\Mail\Exception;
 
 /**
  * @category   Zend
@@ -31,7 +31,7 @@ use Zend\Mail\Header\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BadMethodCallException 
-    extends \BadMethodCallException 
-    implements Exception
+    extends Exception\BadMethodCallException
+    implements ExceptionInterface
 {
 }

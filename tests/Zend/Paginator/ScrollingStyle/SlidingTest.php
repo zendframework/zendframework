@@ -19,11 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Paginator\ScrollingStyle;
-
 
 /**
  * @category   Zend
@@ -36,11 +32,11 @@ namespace ZendTest\Paginator\ScrollingStyle;
 class SlidingTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_Paginator_ScrollingStyle_Sliding
+     * @var \Zend\Paginator\ScrollingStyle\Sliding
      */
     private $_scrollingStyle;
     /**
-     * @var Zend_Paginator
+     * @var \Zend\Paginator\Paginator
      */
     private $_paginator;
 

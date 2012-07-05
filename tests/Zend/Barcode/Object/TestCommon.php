@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Barcode\Object;
 use ZendTest\Barcode\Object\TestAsset,
     Zend\Barcode,
@@ -121,7 +118,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testNegativeBarHeight()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setBarHeight(- 1);
     }
 
@@ -137,7 +134,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testNegativeBarThinWidth()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setBarThinWidth(- 1);
     }
 
@@ -153,7 +150,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testNegativeBarThickWidth()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setBarThickWidth(- 1);
     }
 
@@ -171,7 +168,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testNegativeFactor()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setFactor(- 1);
     }
 
@@ -185,13 +182,13 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testNegativeForeColor()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setForeColor(- 1);
     }
 
     public function testTooHighForeColor()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setForeColor(16777126);
     }
 
@@ -205,13 +202,13 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testNegativeBackgroundColor()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setBackgroundColor(- 1);
     }
 
     public function testTooHighBackgroundColor()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setBackgroundColor(16777126);
     }
 
@@ -303,13 +300,13 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testSetLowFontAsNumberForGdImage()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setFont(0);
     }
 
     public function testSetHighFontAsNumberForGdImage()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setFont(6);
     }
 
@@ -321,7 +318,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testSetFontAsBoolean()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setFont(true);
     }
 
@@ -331,7 +328,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped(
                     'GD extension must not be loaded to run this test');
         }
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setFont(1);
     }
 
@@ -354,7 +351,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testStringFontSize()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setFontSize('22a');
     }
 
@@ -445,7 +442,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testCheckParamsFontWithOrientation()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setText('0');
         $this->object->setFont(1);
         $this->object->setOrientation(45);

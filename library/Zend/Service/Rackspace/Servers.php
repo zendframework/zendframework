@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Rackspace;
 
-use Zend\Http\Client as HttpClient,
-    Zend\Validator\Ip as IpValidator;
+use Zend\Http\Client as HttpClient;
+use Zend\Validator\Ip as IpValidator;
 
 class Servers extends Rackspace
 {

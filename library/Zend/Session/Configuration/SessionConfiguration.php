@@ -18,16 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Session\Configuration;
 
-use Zend\Validator\Hostname\Hostname as HostnameValidator,
+use Zend\Validator\Hostname as HostnameValidator,
     Zend\Session\Exception;
 
 /**
- * Session configuration proxying to session INI options 
+ * Session configuration proxying to session INI options
  *
  * @category   Zend
  * @package    Zend_Session
@@ -86,17 +83,17 @@ class SessionConfiguration extends StandardConfiguration
     /**
      * Set storage option in backend configuration store
      *
-     * Does nothing in this implementation; others might use it to set things 
+     * Does nothing in this implementation; others might use it to set things
      * such as INI settings.
-     * 
-     * @param  string $name 
-     * @param  mixed $value 
-     * @return Zend\Session\Configuration\StandardConfiguration
+     *
+     * @param  string $storageName
+     * @param  mixed $storageValue
+     * @return SessionConfiguration
      */
-    public function setStorageOption($name, $value)
+    public function setStorageOption($storageName, $storageValue)
     {
         $key = false;
-        switch ($name) {
+        switch ($storageName) {
             case 'remember_me_seconds':
                 // do nothing; not an INI option
                 return;
@@ -104,57 +101,49 @@ class SessionConfiguration extends StandardConfiguration
                 $key = 'url_rewriter.tags';
                 break;
             default:
-                $key = 'session.' . $name;
+                $key = 'session.' . $storageName;
                 break;
         }
 
-        ini_set($key, $value);
+        ini_set($key, $storageValue);
+        return $this;
     }
 
     /**
      * Retrieve a storage option from a backend configuration store
      *
      * Used to retrieve default values from a backend configuration store.
-     * 
-     * @param  string $name 
+     *
+     * @param  string $storageOption
      * @return mixed
      */
-    public function getStorageOption($name)
+    public function getStorageOption($storageOption)
     {
         $key       = false;
         $transform = false;
-        switch ($name) {
+        switch ($storageOption) {
             case 'remember_me_seconds':
                 // No remote storage option; just return the current value
                 return $this->rememberMeSeconds;
             case 'url_rewriter_tags':
-                $key = 'url_rewriter.tags';
-                break;
+                return ini_get('url_rewriter.tags');
             // The following all need a transformation on the retrieved value;
             // however they use the same key naming scheme
             case 'use_cookies':
             case 'use_only_cookies':
             case 'use_trans_sid':
-                $transform = function ($value) {
-                    return (bool) $value;
-                };
+            case 'cookie_httponly':
+                return (bool) ini_get('session.' . $storageOption);
             default:
-                $key = 'session.' . $name;
-                break;
+                return ini_get('session.' . $storageOption);
         }
-
-        $value = ini_get($key);
-        if (false !== $transform) {
-            $value = $transform($value);
-        }
-        return $value;
     }
 
     /**
      * Handle PHP errors
-     * 
-     * @param  int $code 
-     * @param  string $message 
+     *
+     * @param  int $code
+     * @param  string $message
      * @return void
      */
     protected function handleError($code, $message)
@@ -165,10 +154,10 @@ class SessionConfiguration extends StandardConfiguration
 
     /**
      * Set session.save_handler
-     * 
-     * @param  string $phpSaveHandler 
+     *
+     * @param  string $phpSaveHandler
      * @return SessionConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setPhpSaveHandler($phpSaveHandler)
     {
@@ -186,10 +175,10 @@ class SessionConfiguration extends StandardConfiguration
 
     /**
      * Set session.serialize_handler
-     * 
-     * @param  string $serializeHandler 
+     *
+     * @param  string $serializeHandler
      * @return SessionConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setSerializeHandler($serializeHandler)
     {
@@ -208,6 +197,13 @@ class SessionConfiguration extends StandardConfiguration
 
     // session.cache_limiter
 
+    /**
+     * Set cache limiter
+     *
+     * @param $cacheLimiter
+     * @return SessionConfiguration
+     * @throws Exception\InvalidArgumentException
+     */
     public function setCacheLimiter($cacheLimiter)
     {
         $cacheLimiter = (string) $cacheLimiter;
@@ -218,10 +214,10 @@ class SessionConfiguration extends StandardConfiguration
         ini_set('session.cache_limiter', $cacheLimiter);
         return $this;
     }
-   
+
     /**
      * Retrieve list of valid hash functions
-     * 
+     *
      * @return array
      */
     protected function getHashFunctions()
@@ -229,7 +225,7 @@ class SessionConfiguration extends StandardConfiguration
         if (empty($this->validHashFunctions)) {
             /**
              * @see http://php.net/manual/en/session.configuration.php#ini.session.hash-function
-             * "0" and "1" refer to MD5-128 and SHA1-160, respectively, and are 
+             * "0" and "1" refer to MD5-128 and SHA1-160, respectively, and are
              * valid in addition to whatever is reported by hash_algos()
              */
             $this->validHashFunctions = array('0', '1') + hash_algos();
@@ -239,10 +235,10 @@ class SessionConfiguration extends StandardConfiguration
 
     /**
      * Set session.hash_function
-     * 
-     * @param  string|int $hashFunction 
+     *
+     * @param  string|int $hashFunction
      * @return SessionConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setHashFunction($hashFunction)
     {
@@ -259,10 +255,10 @@ class SessionConfiguration extends StandardConfiguration
 
     /**
      * Set session.hash_bits_per_character
-     * 
-     * @param  int $hashBitsPerCharacter 
+     *
+     * @param  int $hashBitsPerCharacter
      * @return SessionConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setHashBitsPerCharacter($hashBitsPerCharacter)
     {

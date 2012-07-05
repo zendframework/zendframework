@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Memory;
 use Zend\Memory\Container;
 
@@ -44,7 +41,6 @@ class LockedTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($memObject instanceof Container\Locked);
     }
-
 
     /**
      * tests the value access methods
@@ -69,7 +65,6 @@ class LockedTest extends \PHPUnit_Framework_TestCase
         $memObject->value = 'another value';
         $this->assertEquals((string)$memObject->value, 'another value');
     }
-
 
     /**
      * tests lock()/unlock()/isLocked() functions

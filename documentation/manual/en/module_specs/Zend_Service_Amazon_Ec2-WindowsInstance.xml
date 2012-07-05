@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.windows.instance"><info><title>Zend_Service_Amazon_Ec2: Windows Instances</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.windows.instance"><title>Zend_Service_Amazon_Ec2: Windows Instances</title>
     
 
     <para>
@@ -98,10 +98,10 @@
         </listitem>
     </itemizedlist>
 
-    <section xml:id="zend.service.amazon.ec2.windows.instance.operations"><info><title>Windows Instances Usage</title></info>
+    <section xml:id="zend.service.amazon.ec2.windows.instance.operations"><title>Windows Instances Usage</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.windows.instance.operations.bundle"><info><title>Bundles an Amazon EC2 instance running Windows</title></info>
+        <example xml:id="zend.service.amazon.ec2.windows.instance.operations.bundle"><title>Bundles an Amazon EC2 instance running Windows</title>
             
 
             <para>
@@ -147,7 +147,7 @@ $return = $ec2_instance->bundle('instanceId', 's3Bucket', 's3Prefix');
 
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.windows.instance.operations.describe"><info><title>Describes current bundling tasks</title></info>
+        <example xml:id="zend.service.amazon.ec2.windows.instance.operations.describe"><title>Describes current bundling tasks</title>
             
 
             <para>
@@ -167,7 +167,7 @@ $return = $ec2_instance->describeBundle('bundleId');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.windows.instance.operations.cancel"><info><title>Cancels an Amazon EC2 bundling operation</title></info>
+        <example xml:id="zend.service.amazon.ec2.windows.instance.operations.cancel"><title>Cancels an Amazon EC2 bundling operation</title>
             
 
             <para>

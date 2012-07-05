@@ -19,22 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Paginator\ScrollingStyle;
-
-/**
- * @see Zend_Paginator
- */
-
-/**
- * @see Zend_Paginator_ScrollingStyle_All
- */
-
-/**
- * @see PHPUnit_Framework_TestCase
- */
 
 /**
  * @category   Zend
@@ -47,9 +32,13 @@ namespace ZendTest\Paginator\ScrollingStyle;
 class AllTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_Paginator_ScrollingStyle_All
+     * @var \Zend\Paginator\ScrollingStyle\All
      */
     private $_scrollingStyle = null;
+
+    /**
+     * @var \Zend\Paginator\Paginator
+     */
     private $_paginator = null;
 
     /**
@@ -72,9 +61,6 @@ class AllTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-    /**
-     * Tests Zend_Paginator_ScrollingStyle_All->getPages()
-     */
     public function testGetsPages()
     {
         $expected = array_combine(range(1, 11), range(1, 11));

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\App;
 
 /**
@@ -29,7 +26,6 @@ namespace Zend\GData\App;
  *
  * Class to represent exceptions that occur during Gdata operations.
  *
- * @uses       \Zend\GData\App\Exception
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

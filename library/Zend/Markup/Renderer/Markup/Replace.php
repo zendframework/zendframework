@@ -19,17 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Markup\Renderer\Markup;
 use Zend\Markup\Token;
 
 /**
  * Simple replace markup
  *
- * @uses       \Zend\Markup\Renderer\Markup\AbstractMarkup
- * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_Html
@@ -59,8 +54,6 @@ class Replace extends AbstractMarkup
      *
      * @param string $start
      * @param string $end
-     * 
-     * @return void
      */
     public function __construct($start, $end)
     {

@@ -19,31 +19,26 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Validator;
-use Zend\Validator,
-    ReflectionClass;
 
-/** Zend_Validator_Identical */
+use Zend\Validator\Identical;
 
 /**
- * Zend_Validator_Identical
- *
  * @category   Zend
  * @package    Zend
  * @subpackage UnitTests
- * @uses       Zend_Validator_Identical
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
 class IdenticalTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Identical */
+    public $validator;
+
     public function setUp()
     {
-        $this->validator = new Validator\Identical;
+        $this->validator = new Identical;
     }
 
     public function testTokenInitiallyNull()
@@ -60,7 +55,7 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetTokenViaConstructor()
     {
-        $validator = new Validator\Identical('foo');
+        $validator = new Identical('foo');
         $this->assertEquals('foo', $validator->getToken());
     }
 
@@ -120,53 +115,31 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
 
     public function testValidatingTokenArray()
     {
-        $validator = new Validator\Identical(array('token' => 123));
+        $validator = new Identical(array('token' => 123));
         $this->assertTrue($validator->isValid(123));
         $this->assertFalse($validator->isValid(array('token' => 123)));
     }
 
     public function testValidatingNonStrictToken()
     {
-        $validator = new Validator\Identical(array('token' => 123, 'strict' => false));
+        $validator = new Identical(array('token' => 123, 'strict' => false));
         $this->assertTrue($validator->isValid('123'));
 
         $validator->setStrict(true);
         $this->assertFalse($validator->isValid(array('token' => '123')));
     }
-    
+
     public function testEqualsMessageTemplates()
     {
-        $validator = new Validator\Identical();
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
+        $validator = $this->validator;
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
-    
+
     public function testEqualsMessageVariables()
     {
-        $validator = new Validator\Identical();
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $validator = $this->validator;
+        $this->assertAttributeEquals($validator->getOption('messageVariables'),
+                                     'messageVariables', $validator);
     }
 }

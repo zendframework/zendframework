@@ -21,7 +21,7 @@
 
 namespace Zend\Mail\Header;
 
-use Zend\Mail\Header;
+use Zend\Mail\Headers;
 
 /**
  * @category   Zend
@@ -30,7 +30,7 @@ use Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ContentType implements Header
+class ContentType implements HeaderInterface
 {
     /**
      * Header encoding
@@ -49,23 +49,17 @@ class ContentType implements Header
      */
     protected $parameters = array();
 
-    /**
-     * Factory: create Content-Type header object from string
-     * 
-     * @param  string $headerLine 
-     * @return ContentType
-     */
     public static function fromString($headerLine)
     {
-        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-type') {
             throw new Exception\InvalidArgumentException('Invalid header line for Content-Type string');
         }
 
-        $value  = str_replace("\r\n ", " ", $value);
+        $value  = str_replace(Headers::FOLDING, " ", $value);
         $values = preg_split('#\s*;\s*#', $value);
         $type   = array_shift($values);
 
@@ -74,7 +68,7 @@ class ContentType implements Header
 
         if (count($values)) {
             foreach ($values as $keyValuePair) {
-                list($key, $value) = preg_split('/=/', $keyValuePair);
+                list($key, $value) = explode('=', $keyValuePair);
                 $value = trim($value, "\"\' \t\n\r\0\x0B");
                 $header->addParameter($key, $value);
             }
@@ -83,22 +77,12 @@ class ContentType implements Header
         return $header;
     }
 
-    /**
-     * Get header name
-     * 
-     * @return string
-     */
     public function getFieldName()
     {
         return 'Content-Type';
     }
 
-    /**
-     * Get header value
-     * 
-     * @return string
-     */
-    public function getFieldValue()
+    public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
         $prepared = $this->type;
         if (empty($this->parameters)) {
@@ -109,46 +93,31 @@ class ContentType implements Header
         foreach ($this->parameters as $attribute => $value) {
             $values[] = sprintf('%s="%s"', $attribute, $value);
         }
-        $value = implode(";\r\n ", $values);
-        return $value;
+
+        return implode(';' . Headers::FOLDING, $values);
     }
 
-    /**
-     * Set header encoding
-     * 
-     * @param  string $encoding 
-     * @return ContentType
-     */
     public function setEncoding($encoding) 
     {
         $this->encoding = $encoding;
         return $this;
     }
 
-    /**
-     * Get header encoding
-     * 
-     * @return string
-     */
     public function getEncoding()
     {
         return $this->encoding;
     }
 
-    /**
-     * Serialize header to string
-     * 
-     * @return string
-     */
     public function toString()
     {
-        return 'Content-Type: ' . $this->getFieldValue() . "\r\n";
+        return 'Content-Type: ' . $this->getFieldValue(HeaderInterface::FORMAT_RAW);
     }
 
     /**
      * Set the content type
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
+     * @throws Exception\InvalidArgumentException
      * @return ContentType
      */
     public function setType($type)
@@ -167,7 +136,7 @@ class ContentType implements Header
     /**
      * Retrieve the content type
      * 
-     * @return void
+     * @return string
      */
     public function getType()
     {

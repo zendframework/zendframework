@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.elasticip"><info><title>Zend_Service_Amazon_Ec2: Elastic IP Addresses</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.elasticip"><title>Zend_Service_Amazon_Ec2: Elastic IP Addresses</title>
     
 
     <para>
@@ -25,7 +25,7 @@
         your public IP addresses to any instance in your account.
     </para>
 
-    <example xml:id="zend.service.amazon.ec2.elasticip.allocate"><info><title>Allocating a new Elastic IP</title></info>
+    <example xml:id="zend.service.amazon.ec2.elasticip.allocate"><title>Allocating a new Elastic IP</title>
         
 
         <para>
@@ -45,7 +45,7 @@ print $ip;
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.service.amazon.ec2.elasticip.describe"><info><title>Describing Allocated Elastic IP Addresses</title></info>
+    <example xml:id="zend.service.amazon.ec2.elasticip.describe"><title>Describing Allocated Elastic IP Addresses</title>
         
 
         <para>
@@ -72,7 +72,7 @@ $ip = $ec2_eip->describe('ip1');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.service.amazon.ec2.elasticip.release"><info><title>Releasing Elastic IP</title></info>
+    <example xml:id="zend.service.amazon.ec2.elasticip.release"><title>Releasing Elastic IP</title>
         
 
         <para>
@@ -89,7 +89,7 @@ $ec2_eip->release('ipaddress');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.service.amazon.ec2.elasticip.associate"><info><title>Associates an Elastic IP to an Instance</title></info>
+    <example xml:id="zend.service.amazon.ec2.elasticip.associate"><title>Associates an Elastic IP to an Instance</title>
         
 
         <para>
@@ -107,7 +107,7 @@ $ec2_eip->associate('instance_id', 'ipaddress');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.service.amazon.ec2.elasticip.disassociate"><info><title>Disassociate an Elastic IP from an instance</title></info>
+    <example xml:id="zend.service.amazon.ec2.elasticip.disassociate"><title>Disassociate an Elastic IP from an instance</title>
         
 
         <para>

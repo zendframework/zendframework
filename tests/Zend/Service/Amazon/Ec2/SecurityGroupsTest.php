@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2;
 
@@ -50,8 +47,6 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-
         $this->securitygroupsInstance = new Ec2\SecurityGroups('access_key', 'secret_access_key');
 
         $adapter = new \Zend\Http\Client\Adapter\Test();
@@ -60,7 +55,6 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
         ));
         $this->adapter = $adapter;
         Ec2\SecurityGroups::setDefaultHTTPClient($client);
-
     }
 
     /**
@@ -71,8 +65,6 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
         unset($this->adapter);
 
         $this->securitygroupsInstance = null;
-
-        parent::tearDown();
     }
 
     /**

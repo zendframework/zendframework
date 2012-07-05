@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Wildfire\Plugin\FirePhp;
 
 use Zend\Wildfire\Plugin\FirePhp,
@@ -32,9 +29,6 @@ use Zend\Wildfire\Plugin\FirePhp,
  * A message envelope that can be updated for the duration of the requet before
  * it gets flushed at the end of the request.
  *
- * @uses       \Zend\Wildfire\Exception
- * @uses       \Zend\Wildfire\Plugin\FirePhp
- * @uses       \Zend\Wildfire\Plugin\FirePhp\Message
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Plugin

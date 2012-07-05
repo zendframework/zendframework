@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData\Photos;
 use Zend\GData\Photos;
 use Zend\GData\App;
@@ -43,7 +40,7 @@ class PhotosUserQueryTest extends \PHPUnit_Framework_TestCase
       */
     public function testSimpleUserQuery()
     {
-        $queryString = "http://picasaweb.google.com/data/feed/api/user/sample.user";
+        $queryString = "https://picasaweb.google.com/data/feed/api/user/sample.user";
 
         $query = new Photos\UserQuery();
         $query->setUser("sample.user");
@@ -60,7 +57,7 @@ class PhotosUserQueryTest extends \PHPUnit_Framework_TestCase
       */
     public function testBaseUserQuery()
     {
-        $queryString = "http://picasaweb.google.com/data/feed/base/user/sample.user";
+        $queryString = "https://picasaweb.google.com/data/feed/base/user/sample.user";
 
         $query = new Photos\UserQuery();
         $query->setUser("sample.user");
@@ -103,7 +100,7 @@ class PhotosUserQueryTest extends \PHPUnit_Framework_TestCase
       */
     public function testTagFilterUserQuery()
     {
-        $queryString = "http://picasaweb.google.com/data/feed/api/user/sample.user?tag=test";
+        $queryString = "https://picasaweb.google.com/data/feed/api/user/sample.user?tag=test";
 
         $query = new Photos\UserQuery();
         $query->setUser("sample.user");
@@ -120,7 +117,7 @@ class PhotosUserQueryTest extends \PHPUnit_Framework_TestCase
       */
     public function testPrivateUserQuery()
     {
-        $queryString = "http://picasaweb.google.com/data/feed/api/user/sample.user?access=private";
+        $queryString = "https://picasaweb.google.com/data/feed/api/user/sample.user?access=private";
 
         $query = new Photos\UserQuery();
         $query->setUser("sample.user");

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\GApps\Extension;
 
 /**
@@ -29,8 +26,6 @@ namespace Zend\GData\GApps\Extension;
  * is used to describe a nickname's properties, and is usually contained
  * within instances of Zend_Gdata_GApps_NicknameEntry.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\GApps
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\YouTube;
 
 use Zend\GData\YouTube;
@@ -31,9 +28,6 @@ use Zend\GData\YouTube;
  * Represents a list of videos contained in a playlist.  Each entry in this
  * feed represents an individual video.
  *
- * @uses       \Zend\GData\Media\Feed
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\PlaylistVideoEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

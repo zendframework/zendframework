@@ -21,14 +21,14 @@
 
 namespace Zend\View\Strategy;
 
-use Zend\EventManager\EventCollection,
-    Zend\EventManager\ListenerAggregate,
-    Zend\Feed\Writer\Feed,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\View\Model,
-    Zend\View\Renderer\FeedRenderer,
-    Zend\View\ViewEvent;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Feed\Writer\Feed;
+use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
+use Zend\View\Model;
+use Zend\View\Renderer\FeedRenderer;
+use Zend\View\ViewEvent;
 
 /**
  * @category   Zend
@@ -37,7 +37,7 @@ use Zend\EventManager\EventCollection,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FeedStrategy implements ListenerAggregate
+class FeedStrategy implements ListenerAggregateInterface
 {
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
@@ -51,8 +51,8 @@ class FeedStrategy implements ListenerAggregate
 
     /**
      * Constructor
-     * 
-     * @param  FeedRenderer $renderer 
+     *
+     * @param  FeedRenderer $renderer
      * @return void
      */
     public function __construct(FeedRenderer $renderer)
@@ -62,24 +62,24 @@ class FeedStrategy implements ListenerAggregate
 
     /**
      * Attach the aggregate to the specified event manager
-     * 
-     * @param  EventCollection $events 
-     * @param  int $priority 
+     *
+     * @param  EventManagerInterface $events
+     * @param  int $priority
      * @return void
      */
-    public function attach(EventCollection $events, $priority = 1)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $this->listeners[] = $events->attach('renderer', array($this, 'selectRenderer'), $priority);
-        $this->listeners[] = $events->attach('response', array($this, 'injectResponse'), $priority);
+        $this->listeners[] = $events->attach(ViewEvent::EVENT_RENDERER, array($this, 'selectRenderer'), $priority);
+        $this->listeners[] = $events->attach(ViewEvent::EVENT_RESPONSE, array($this, 'injectResponse'), $priority);
     }
 
     /**
      * Detach aggregate listeners from the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $listener) {
             if ($events->detach($listener)) {
@@ -89,10 +89,10 @@ class FeedStrategy implements ListenerAggregate
     }
 
     /**
-     * Detect if we should use the FeedRenderer based on model type and/or 
+     * Detect if we should use the FeedRenderer based on model type and/or
      * Accept header
-     * 
-     * @param  ViewEvent $e 
+     *
+     * @param  ViewEvent $e
      * @return null|FeedRenderer
      */
     public function selectRenderer(ViewEvent $e)
@@ -110,7 +110,7 @@ class FeedStrategy implements ListenerAggregate
             return;
         }
 
-        $headers = $request->headers();
+        $headers = $request->getHeaders();
         if ($headers->has('accept')) {
             $accept  = $headers->get('accept');
             foreach ($accept->getPrioritized() as $mediaType) {
@@ -133,8 +133,8 @@ class FeedStrategy implements ListenerAggregate
 
     /**
      * Inject the response with the feed payload and appropriate Content-Type header
-     * 
-     * @param  ViewEvent $e 
+     *
+     * @param  ViewEvent $e
      * @return void
      */
     public function injectResponse(ViewEvent $e)
@@ -155,17 +155,27 @@ class FeedStrategy implements ListenerAggregate
         if ($result instanceof Feed) {
             $result = $result->export($renderer->getFeedType());
         }
-        
+
         // Get the content-type header based on feed type
         $feedType = $renderer->getFeedType();
-        $feedType = ('rss' == $feedType) 
+        $feedType = ('rss' == $feedType)
                   ? 'application/rss+xml'
                   : 'application/atom+xml';
+
+        $model   = $e->getModel();
+        $charset = '';
+
+        if ($model instanceof Model\FeedModel) {
+
+            $feed = $model->getFeed();
+
+            $charset = '; charset=' . $feed->getEncoding() . ';';
+        }
 
         // Populate response
         $response = $e->getResponse();
         $response->setContent($result);
-        $headers = $response->headers();
-        $headers->addHeaderLine('content-type', $feedType);
+        $headers = $response->getHeaders();
+        $headers->addHeaderLine('content-type', $feedType . $charset);
     }
 }

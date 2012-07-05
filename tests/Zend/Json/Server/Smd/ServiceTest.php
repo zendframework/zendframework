@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Json\Server\Smd;
 use Zend\Json\Server\Smd\Service;
 use Zend\Json\Server;

@@ -120,7 +120,7 @@ $item = $amazon->itemLookup('B0000A432X');
         <para>
             De <code>itemLookup()</code> methode aanvaardt ook een optionele tweede parameter om zoekopties af te handelen.
             Voor alle details, inclusief een lijst van beschikbare opties, zie de
-            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemLookupOperation">relevante Amazon documentatie</link>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2011-08-01&amp;p=ApiReference/ItemLookupOperation">relevante Amazon documentatie</link>.
         <note>
             <para>
                 Om informatie over de beelden te verkrijgen voor je zoekresultaten, moet je de optie <code>ResponseGroup</code> tot <code>Medium</code> of <code>Large</code> zetten.
@@ -148,7 +148,7 @@ foreach($response as $r) {
         <para>
             De <code>itemSearch()</code> methode aanvaardt een enkele array array parameter om zoekopties af te handelen.
             Voor alle details, inclusief een lijst van beschikbare opties, zie de
-            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">relevante Amazon documentatie</link>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2011-08-01&amp;p=ApiReference/ItemSearchOperation">relevante Amazon documentatie</link>
         </para>
         <tip>
           <para>
@@ -192,7 +192,7 @@ foreach ($results as $result) {
             </para>
             <para>
                 Voor meer informatie over de beschikbare opties verwijzen we je graag door naar de
-                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/102-9041115-9057709?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">relevante Amazon documentatie</link>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/102-9041115-9057709?s=AWSEcommerceService&amp;v=2011-08-01&amp;p=ApiReference/ItemSearchOperation">relevante Amazon documentatie</link>.
             </para>
         </example>
     </section>

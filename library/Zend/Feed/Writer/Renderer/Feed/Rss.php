@@ -18,17 +18,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Writer\Renderer\Feed;
 
-use DOMDocument,
-    DOMElement,
-    Zend\Date,
-    Zend\Feed\Writer,
-    Zend\Feed\Writer\Renderer,
-    Zend\Uri;
+use DateTime;
+use DOMDocument;
+use DOMElement;
+use Zend\Feed\Writer;
+use Zend\Feed\Writer\Renderer;
+use Zend\Uri;
 
 /**
 * @category Zend
@@ -36,7 +33,7 @@ use DOMDocument,
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
+class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {
     /**
      * Constructor
@@ -136,13 +133,14 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
             . ' title element but a title has not been set';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -163,13 +161,14 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDescription()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
             . ' description element but one has not been set';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -199,7 +198,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
         $updated = $dom->createElement('pubDate');
         $root->appendChild($updated);
         $text = $dom->createTextNode(
-            $this->getDataContainer()->getDateModified()->get(Date\Date::RSS)
+            $this->getDataContainer()->getDateModified()->format(DateTime::RSS)
         );
         $updated->appendChild($text);
     }
@@ -238,6 +237,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
@@ -245,7 +245,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
         if(!$value) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
             . ' link element but one has not been set';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -312,6 +312,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setImage(DOMDocument $dom, DOMElement $root)
     {
@@ -324,7 +325,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
             || !is_string($image['title'])
         ) {
             $message = 'RSS 2.0 feed images must include a title';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -338,7 +339,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
         ) {
             $message = 'Invalid parameter: parameter \'link\''
             . ' must be a non-empty string and valid URI/IRI';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -370,7 +371,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
             if (!ctype_digit((string) $image['height']) || $image['height'] > 400) {
                 $message = 'Invalid parameter: parameter \'height\''
                          . ' must be an integer not exceeding 400';
-                $exception = new Writer\Exception($message);
+                $exception = new Writer\Exception\InvalidArgumentException($message);
                 if (!$this->_ignoreExceptions) {
                     throw $exception;
                 } else {
@@ -387,7 +388,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
             if (!ctype_digit((string) $image['width']) || $image['width'] > 144) {
                 $message = 'Invalid parameter: parameter \'width\''
                          . ' must be an integer not exceeding 144';
-                $exception = new Writer\Exception($message);
+                $exception = new Writer\Exception\InvalidArgumentException($message);
                 if (!$this->_ignoreExceptions) {
                     throw $exception;
                 } else {
@@ -404,7 +405,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
             if (empty($image['description']) || !is_string($image['description'])) {
                 $message = 'Invalid parameter: parameter \'description\''
                          . ' must be a non-empty string';
-                $exception = new Writer\Exception($message);
+                $exception = new Writer\Exception\InvalidArgumentException($message);
                 if (!$this->_ignoreExceptions) {
                     throw $exception;
                 } else {
@@ -454,7 +455,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
         $lastBuildDate = $dom->createElement('lastBuildDate');
         $root->appendChild($lastBuildDate);
         $text = $dom->createTextNode(
-            $this->getDataContainer()->getLastBuildDate()->get(Date\Date::RSS)
+            $this->getDataContainer()->getLastBuildDate()->format(DateTime::RSS)
         );
         $lastBuildDate->appendChild($text);
     }

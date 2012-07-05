@@ -12,7 +12,7 @@ or `bin/zf.sh` (for anything else) to your system executable path.
 ## SYSTEM REQUIREMENTS
 -------------------
 
-Zend Framework 2 requires PHP 5.3.1 or later.
+Zend Framework 2 requires PHP 5.3.3 or later.
 
 ## DEVELOPMENT VERSIONS
 

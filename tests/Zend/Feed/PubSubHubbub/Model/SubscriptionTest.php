@@ -20,9 +20,11 @@
 
 namespace ZendTest\Feed\PubSubHubbub\Model;
 
+use DateTime;
+use PDO;
+use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\Feed\PubSubHubbub\Model\Subscription;
-use \Zend\Db\Adapter\Adapter as DbAdapter;
-use \Zend\Db\TableGateway\TableGateway;
 
 /**
  * @category   Zend
@@ -40,8 +42,6 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
      */
     public function testAllOperations()
     {
-        $this->markTestIncomplete('PDO_Sqlite does not return row count, and no solution in Zend\Db yet for this');
-
         $adapter = $this->initDb();
         $table = new TableGateway('subscription', $adapter);
         
@@ -69,14 +69,22 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
     public function testImpemetsSubscriptionInterface()
     {
         $reflection = new \ReflectionClass('Zend\Feed\PubSubHubbub\Model\Subscription');
-        $this->assertTrue($reflection->implementsInterface('Zend\Feed\PubSubHubbub\Model\SubscriptionPersistence'));
+        $this->assertTrue($reflection->implementsInterface('Zend\Feed\PubSubHubbub\Model\SubscriptionPersistenceInterface'));
         unset($reflection);
+    }
+
+    public function testCurrentTimeSetterAndGetter()
+    {
+        $now = new DateTime();
+        $subscription = new Subscription(new TableGateway('subscription', $this->initDb()));
+        $subscription->setNow($now);
+        $this->assertSame($subscription->getNow(), $now);
     }
 
     protected function initDb()
     {
         if (!extension_loaded('pdo')
-            || !in_array('sqlite', \PDO::getAvailableDrivers())
+            || !in_array('sqlite', PDO::getAvailableDrivers())
         ) {
             $this->markTestSkipped('Test only with pdo_sqlite');
         }
@@ -86,7 +94,7 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
         return $db;
     }
 
-    protected function createTable($db)
+    protected function createTable(DbAdapter $db)
     {
         $sql = "CREATE TABLE subscription ("
              .      "id varchar(32) PRIMARY KEY NOT NULL DEFAULT '', "

@@ -7,16 +7,16 @@
 
   <para>
     I controller del layer MVC semplicemente devono essere oggetti che
-    implementano l'interfaccia <classname>Zend\Stdlib\Dispatchable</classname>.
+    implementano l'interfaccia <classname>Zend\Stdlib\DispatchableInterface</classname>.
     Questa interfaccia descrive un singolo metodo:
   </para>
 
   <programlisting language="php"><![CDATA[
-use Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response;
+use Zend\Stdlib\DispatchableInterface,
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response;
 
-class Foo implements Dispatchable
+class Foo implements DispatchableInterface
 {
     public function dispatch(Request $request, Response $response = null)
     {
@@ -113,9 +113,9 @@ public function getEvent($event);
       </para>
 
       <programlisting language="php"><![CDATA[
-use Zend\Di\Locator;
+use Zend\Di\LocatorInterface;
 
-public function setLocator(Locator $locator);
+public function setLocator(LocatorInterface $locator);
 public function getLocator($locator);
 ]]></programlisting>
     </section>
@@ -201,7 +201,7 @@ public function plugin($plugin, array $options = null)
   </section>
 
   <section xml:id="zend.mvc.controllers.action-controller">
-    <info><title>L'ActionController</title></info>
+    <info><title>L'AbstractActionController</title></info>
 
     <para>
         Implementare ognuna delle interfacce precedenti è molto
@@ -211,7 +211,7 @@ public function plugin($plugin, array $options = null)
     </para>
 
     <para>
-        Il primo è <classname>Zend\Mvc\Controller\ActionController</classname>.
+        Il primo è <classname>Zend\Mvc\Controller\AbstractActionController</classname>.
         Questo controller implementa ognuna delle interfacce descritte
         precedentemente e usa le seguenti assuzioni:
     </para>
@@ -250,7 +250,7 @@ public function plugin($plugin, array $options = null)
 
     <para>
         Essenzialmente, una mappatura della strada verso
-        un <classname>ActionController</classname> necessita di
+        un <classname>AbstractActionController</classname> necessita di
         ritornare le chiavi "controller" e "action" che combaciano.
     </para>
 
@@ -261,9 +261,9 @@ public function plugin($plugin, array $options = null)
     <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\Controller\AbstractActionController;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function bazAction()
     {
@@ -281,14 +281,14 @@ class BarController extends ActionController
       <info><title>Interfacce e collaboratori</title></info>
 
       <para>
-        <classname>ActionController</classname> implementa ognuna di
+        <classname>AbstractActionController</classname> implementa ognuna di
         queste interfacce:
       </para>
 
       <itemizedlist>
         <listitem>
           <para>
-            <classname>Zend\Stdlib\Dispatchable</classname>
+            <classname>Zend\Stdlib\DispatchableInterface</classname>
           </para>
         </listitem>
 
@@ -340,13 +340,13 @@ class BarController extends ActionController
       <itemizedlist>
         <listitem>
           <para>
-            <classname>Zend\Stdlib\Dispatchable</classname>
+            <classname>Zend\Stdlib\DispatchableInterface</classname>
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <classname>Zend\Mvc\Controller\ActionController</classname>
+            <classname>Zend\Mvc\Controller\AbstractActionController</classname>
           </para>
         </listitem>
       </itemizedlist>
@@ -359,11 +359,11 @@ class BarController extends ActionController
   </section>
 
   <section xml:id="zend.mvc.controllers.restful-controller">
-    <info><title>Il RestfulController</title></info>
+    <info><title>Il AbstractRestfulController</title></info>
 
     <para>
         Il secondo controller astratto che è fornito da ZF2 è
-        <classname>Zend\Mvc\Controller\RestfulController</classname>.
+        <classname>Zend\Mvc\Controller\AbstractRestfulController</classname>.
         Questo controller fornisce una implementazione RESTful che
         semplicemente mappa le richieste HTTP nei metodi del controller
         utilizzando la seguente matrice:
@@ -420,8 +420,8 @@ class BarController extends ActionController
 
     <para>
         In aggiunta, puoi mappare metodi "action" nel
-        <classname>RestfulController</classname>, proprio come si farebbe
-        nell'<classname>ActionController</classname>; questi metodi avranno 
+        <classname>AbstractRestfulController</classname>, proprio come si farebbe
+        nell'<classname>AbstractActionController</classname>; questi metodi avranno
         il suffisso "Action", differenziandosi da metodi RESTful descritti
         precendentemente. Questo ti permette di realizzare azioni come
         per esempio l'invio di form verso diversi metodi RESTful o aggiungere
@@ -432,14 +432,14 @@ class BarController extends ActionController
       <info><title>Interfacce e collaboratori</title></info>
 
       <para>
-        <classname>RestfulController</classname> implementa ognuna delle
+        <classname>AbstractRestfulController</classname> implementa ognuna delle
         seguenti interfacce:
       </para>
 
       <itemizedlist>
         <listitem>
           <para>
-            <classname>Zend\Stdlib\Dispatchable</classname>
+            <classname>Zend\Stdlib\DispatchableInterface</classname>
           </para>
         </listitem>
 
@@ -492,13 +492,13 @@ class BarController extends ActionController
       <itemizedlist>
         <listitem>
           <para>
-            <classname>Zend\Stdlib\Dispatchable</classname>
+            <classname>Zend\Stdlib\DispatchableInterface</classname>
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <classname>Zend\Mvc\Controller\RestfulController</classname>
+            <classname>Zend\Mvc\Controller\AbstractRestfulController</classname>
           </para>
         </listitem>
       </itemizedlist>

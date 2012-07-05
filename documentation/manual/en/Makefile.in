@@ -11,7 +11,7 @@
 # obtain it through the world-wide-web, please send an email
 # to license@zend.com so we can send you a copy immediately.
 #
-# @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+# @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 # @license    http://framework.zend.com/license/new-bsd     New BSD License
 #
 
@@ -25,6 +25,7 @@
 #  check1 - validate one DocBook XML file using xmllint.
 #    Requires that you set the XMLFILE variable.
 #  pdf-print - PDF version of manual, in two volumes; requires Apache FOP
+#  pdf - PDF version of manual, in a single volume; requires Apache FOP
 #
 
 # -- parameters you are likely to want to change --
@@ -100,7 +101,7 @@ pdf-print-volume1: pdf-dir $(PDF_XSL) $(MANUAL_PRINT1_XML)
 
 pdf-print-volume2: pdf-dir $(PDF_XSL) $(MANUAL_PRINT2_XML)
 	@echo "Rendering volume 2 of the PDF manual with $(FOP)..."
-	$(XMLLINT) --xinclude --output _temp_manual_2.xml $(MANUAL_PRINT1_XML)
+	$(XMLLINT) --xinclude --output _temp_manual_2.xml $(MANUAL_PRINT2_XML)
 	$(XSLTPROC) --xinclude --output ZendFramework.fo $(PDF_XSL) _temp_manual_2.xml
 	"$(FOP)" -fo ZendFramework.fo -pdf pdf/ZendFrameworkVolume2.pdf
 
@@ -133,20 +134,24 @@ check1: $(MANUAL_LINT_XML)
 		echo "File $(MODULE)/$(XMLFILE) not found." ; \
 	    fi ; \
 	else \
-	    echo "Please specify a filename, e.g. 'make XMLFILE=filename.xml lint'" ; \
+	    echo "Please specify a filename, e.g. 'make XMLFILE=filename.xml check1'" ; \
 	fi
 
 clean:
 	-rm -f html/*.html html/HTML.manifest
-	@if [ -f html/figures ] ; then \
+	@if [ -d html/figures ] ; then \
 		rm -Rf html/figures ; \
+	fi
+	@if [ -d pdf ] ; then \
+		rm -Rf pdf ; \
 	fi
 	-rm -f _temp_*.xml
 	-rm -f /*.pdf
 	-rm -f ZendFramework.fo
+	-rm -f err.txt
 
 cleanall: clean
 	-rm -f config.* configure
 	-rm -rf autom4te.cache
 	-rm -f Makefile
-	-rm -f $(HTML_XSL) $(MANUAL_XML) $(MANUAL_PRINT1_XML) $(MANUAL_PRINT2_XML)
+	-rm -f $(HTML_XSL) $(MANUAL_XML) $(MANUAL_PRINT1_XML) $(MANUAL_PRINT2_XML) $(PDF_XSL)

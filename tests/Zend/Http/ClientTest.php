@@ -1,11 +1,10 @@
 <?php
 
-/**
- * @namespace
- */
 namespace ZendTest\Http;
 
-use Zend\Http\Client;
+use Zend\Http\Client,
+    Zend\Http\Exception,
+    Zend\Http\Header\SetCookie;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,7 +14,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->setMethod('post');
         $this->assertEquals(Client::ENC_URLENCODED, $client->getEncType());
     }
-    
+
     public function testIfZeroValueCookiesCanBeSet()
     {
         try {
@@ -28,7 +27,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertTrue(true);
     }
-    
+
     /**
     * @expectedException Zend\Http\Exception\InvalidArgumentException
     */
@@ -36,5 +35,45 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $client = new Client();
         $client->addCookie("test", null);
-    } 
+    }
+
+    public function testIfCookieHeaderCanBeSet()
+    {
+        $header = new SetCookie('foo');
+
+        $client = new Client();
+        $client->addCookie($header);
+
+        $cookies = $client->getCookies();
+        $this->assertEquals(1, count($cookies));
+        $this->assertEquals($header, $cookies['foo']);
+    }
+
+    public function testIfArrayOfHeadersCanBeSet()
+    {
+        $headers = array(
+            new SetCookie('foo'),
+            new SetCookie('bar')
+        );
+
+        $client = new Client();
+        $client->addCookie($headers);
+
+        $cookies = $client->getCookies();
+        $this->assertEquals(2, count($cookies));
+    }
+
+    public function testIfArrayIteratorOfHeadersCanBeSet()
+    {
+        $headers = new \ArrayIterator(array(
+            new SetCookie('foo'),
+            new SetCookie('bar')
+        ));
+
+        $client = new Client();
+        $client->addCookie($headers);
+
+        $cookies = $client->getCookies();
+        $this->assertEquals(2, count($cookies));
+    }
 }

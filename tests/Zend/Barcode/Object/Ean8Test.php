@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Barcode\Object;
 use Zend\Barcode\Object\Ean8;
 
@@ -94,7 +91,7 @@ class Ean8Test extends TestCommon
 
     public function testBadTextDetectedIfChecksumWished()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setText('a');
         $this->object->setWithChecksum(true);
         $this->object->getText();

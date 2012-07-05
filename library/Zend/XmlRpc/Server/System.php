@@ -19,16 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\XmlRpc\Server;
 
 /**
  * XML-RPC system.* methods
  *
- * @uses       Zend\XmlRpc\Request
- * @uses       Zend\XmlRpc\Server\Exception
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Server

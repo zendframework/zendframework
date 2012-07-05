@@ -18,17 +18,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -43,16 +38,16 @@ class Regex extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID   => "Invalid type given. String, integer or float expected",
-        self::NOT_MATCH => "'%value%' does not match against pattern '%pattern%'",
+        self::NOT_MATCH => "The input does not match against pattern '%pattern%'",
         self::ERROROUS  => "There was an internal error while using the pattern '%pattern%'",
     );
 
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $messageVariables = array(
         'pattern' => 'pattern'
     );
 
@@ -67,8 +62,7 @@ class Regex extends AbstractValidator
      * Sets validator options
      *
      * @param  string|Traversable $pattern
-     * @throws \Zend\Validator\Exception On missing 'pattern' parameter
-     * @return void
+     * @throws Exception\InvalidArgumentException On missing 'pattern' parameter
      */
     public function __construct($pattern)
     {
@@ -109,8 +103,8 @@ class Regex extends AbstractValidator
      * Sets the pattern option
      *
      * @param  string $pattern
-     * @throws \Zend\Validator\Exception if there is a fatal error in pattern matching
-     * @return \Zend\Validator\Regex Provides a fluent interface
+     * @throws Exception\InvalidArgumentException if there is a fatal error in pattern matching
+     * @return Regex Provides a fluent interface
      */
     public function setPattern($pattern)
     {

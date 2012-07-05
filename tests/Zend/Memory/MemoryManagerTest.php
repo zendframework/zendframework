@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Memory;
 
 use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Memory,
     Zend\Memory\Container;
 
@@ -52,13 +49,8 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
         $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
     }
 
-    public function tearDown()
-    {
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
-    }
-
     /**
-     * tests the Memory Manager creation
+     * tests the Memory ManagerInterface creation
      */
     public function testCreation()
     {
@@ -74,7 +66,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * tests the Memory Manager settings
+     * tests the Memory ManagerInterface settings
      */
     public function testSettings()
     {

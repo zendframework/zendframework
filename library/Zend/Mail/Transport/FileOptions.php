@@ -22,7 +22,7 @@
 namespace Zend\Mail\Transport;
 
 use Zend\Mail\Exception,
-    Zend\Stdlib\Options;
+    Zend\Stdlib\AbstractOptions;
 
 /**
  * @category   Zend
@@ -31,7 +31,7 @@ use Zend\Mail\Exception,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FileOptions extends Options
+class FileOptions extends AbstractOptions
 {
     /**
      * @var string Local client hostname
@@ -39,14 +39,15 @@ class FileOptions extends Options
     protected $path;
 
     /**
-     * @var Callable
+     * @var callback
      */
     protected $callback;
 
     /**
      * Set path to stored mail files
-     * 
-     * @param  string $path 
+     *
+     * @param  string $path
+     * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return FileOptions
      */
     public function setPath($path)
@@ -66,7 +67,7 @@ class FileOptions extends Options
      * Get path
      *
      * If none is set, uses value from sys_get_temp_dir()
-     * 
+     *
      * @return string
      */
     public function getPath()
@@ -79,8 +80,9 @@ class FileOptions extends Options
 
     /**
      * Set callback used to generate a file name
-     * 
-     * @param  Callable $callback 
+     *
+     * @param  callback $callback
+     * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return FileOptions
      */
     public function setCallback($callback)
@@ -98,8 +100,8 @@ class FileOptions extends Options
 
     /**
      * Get callback used to generate a file name
-     * 
-     * @return Callable
+     *
+     * @return callback
      */
     public function getCallback()
     {

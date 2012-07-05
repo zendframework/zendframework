@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 
-use ArrayObject,
-    Iterator,
+use ArrayObject;
+use Iterator,
     PHPUnit_Framework_TestCase as TestCase,
     Zend\View\Helper\PartialLoop,
     Zend\View\Renderer\PhpRenderer as View;

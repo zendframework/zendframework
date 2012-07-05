@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.extending"><info><title>Extending and Configuring Zend_Tool_Framework</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.extending"><title>Extending and Configuring Zend_Tool_Framework</title>
     
 
-    <section xml:id="zend.tool.framework.console-client"><info><title>Customizing Zend_Tool Console Client</title></info>
+    <section xml:id="zend.tool.framework.console-client"><title>Customizing Zend_Tool Console Client</title>
         
 
         <para>
@@ -29,7 +29,7 @@
             place to find this configuration file.
         </para>
 
-        <section xml:id="zend.tool.framework.console-client.home-directory"><info><title>The Home Directory</title></info>
+        <section xml:id="zend.tool.framework.console-client.home-directory"><title>The Home Directory</title>
             
 
             <para>
@@ -61,7 +61,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.tool.framework.console-client.local-storage"><info><title>Local Storage</title></info>
+        <section xml:id="zend.tool.framework.console-client.local-storage"><title>Local Storage</title>
             
 
             <para>
@@ -92,7 +92,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.tool.framework.console-client.configuration-file"><info><title>User Configuration</title></info>
+        <section xml:id="zend.tool.framework.console-client.configuration-file"><title>User Configuration</title>
             
 
             <para>
@@ -136,7 +136,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.tool.framework.console-client.configuration-content"><info><title>User Configuration File Content</title></info>
+        <section xml:id="zend.tool.framework.console-client.configuration-content"><title>User Configuration File Content</title>
             
 
             <para>

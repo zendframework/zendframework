@@ -1,0 +1,27 @@
+<phpunit bootstrap="./Bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="Zend Framework Test Suite">
+            <directory>./Zend</directory>
+            <exclude>./Zend/_files/</exclude>
+            <exclude>./Zend/AllTests/</exclude>
+            <exclude>./Zend/Amf/</exclude>
+            <exclude>./Zend/Dojo/</exclude>
+            <exclude>./Zend/Queue/</exclude>
+            <exclude>./Zend/Service/</exclude>
+            <exclude>./Zend/Test/</exclude>
+            <exclude>./Zend/Wildfire/</exclude>
+        </testsuite>
+    </testsuites>
+
+    <groups>
+        <exclude>
+            <group>disable</group>
+            <group>Zend_Amf</group>
+            <group>Zend_Dojo</group>
+            <group>Zend_Queue</group>
+            <group>Zend_Service</group>
+            <group>Zend_Test</group>
+            <group>Zend_Wildfire</group>
+        </exclude>
+    </groups>
+</phpunit>

@@ -1,126 +1,99 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
-
 namespace Zend\Db\Metadata\Object;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ColumnObject
 {
-    /*
-    protected $catalogName = null;
-    protected $schemaName = null;
-    */
+
     /**
      *
      * @var string
      */
     protected $name = null;
+
     /**
      *
      * @var string
      */
     protected $tableName = null;
+
     /**
      *
      * @var string
      */
     protected $schemaName = null;
+
     /**
      *
      * @var 
      */
     protected $ordinalPosition = null;
+
     /**
      *
      * @var string
      */
     protected $columnDefault = null;
+
     /**
      *
      * @var boolean 
      */
     protected $isNullable = null;
+
     /**
      *
      * @var string
      */
     protected $dataType = null;
+
     /**
      *
      * @var integer
      */
     protected $characterMaximumLength = null;
+
     /**
      *
      * @var integer
      */
     protected $characterOctetLength = null;
+
     /**
      *
      * @var type
      */
     protected $numericPrecision = null;
+
     /**
      *
      * @var type 
      */
     protected $numericScale = null;
-//    protected $characterSetName = null;
-//    protected $collationName = null;
+
+    /**
+     *
+     * @var boolean 
+     */
+    protected $numericUnsigned = null;
+
     /**
      *
      * @var array
      */
     protected $errata = array();
-
-
-    /*
-    public function getCatalogName()
-    {
-        return $this->catalogName;
-    }
-    
-    public function setCatalogName($catalogName)
-    {
-        $this->catalogName = $catalogName;
-        return $this;
-    }
-    
-    public function getSchemaName()
-    {
-        return $this->schemaName;
-    }
-    
-    public function setSchemaName($schemaName)
-    {
-        $this->schemaName = $schemaName;
-        return $this;
-    }
-    */
 
     /**
      * Constructor
@@ -135,6 +108,7 @@ class ColumnObject
         $this->setTableName($tableName);
         $this->setSchemaName($schemaName);
     }
+
     /**
      * Set name
      * 
@@ -144,6 +118,7 @@ class ColumnObject
     {
         $this->name = $name;
     }
+
     /**
      * Get name
      * 
@@ -174,6 +149,7 @@ class ColumnObject
         $this->tableName = $tableName;
         return $this;
     }
+
     /**
      * Set schema name
      * 
@@ -183,6 +159,7 @@ class ColumnObject
     {
         $this->schemaName = $schemaName;
     }
+
     /**
      * Get schema name
      * 
@@ -243,6 +220,14 @@ class ColumnObject
     {
         $this->isNullable = $isNullable;
         return $this;
+    }
+
+    /**
+     * @return bool $isNullable
+     */
+    public function isNullable()
+    {
+        return $this->isNullable;
     }
 
     /**
@@ -330,40 +315,30 @@ class ColumnObject
         return $this;
     }
 
-//    /**
-//     * @return the $characterSetName
-//     */
-//    public function getCharacterSetName()
-//    {
-//        return $this->characterSetName;
-//    }
-//
-//    /**
-//     * @param $characterSetName the $characterSetName to set
-//     */
-//    public function setCharacterSetName($characterSetName)
-//    {
-//        $this->characterSetName = $characterSetName;
-//        return $this;
-//    }
-//
-//    /**
-//     * @return the $collationName
-//     */
-//    public function getCollationName()
-//    {
-//        return $this->collationName;
-//    }
-//
-//    /**
-//     * @param $collationName the $collationName to set
-//     */
-//    public function setCollationName($collationName)
-//    {
-//        $this->collationName = $collationName;
-//        return $this;
-//    }
+    /**
+     * @return boolean
+     */
+    public function getNumericUnsigned()
+    {
+        return $this->numericUnsigned;
+    }
 
+    /**
+     * @param $numericUnsigned boolean
+     */
+    public function setNumericUnsigned($numericUnsigned)
+    {
+        $this->numericUnsigned = $numericUnsigned;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isNumericUnsigned()
+    {
+        return $this->numericUnsigned;
+    }
 
     /**
      * @return the $errata
@@ -371,6 +346,29 @@ class ColumnObject
     public function getErratas()
     {
         return $this->errata;
+    }
+
+    /**
+     * @return the $errata
+     */
+    public function setErratas(array $erratas)
+    {
+        foreach ($erratas as $name => $value) {
+            $this->setErrata($name, $value);
+        }
+        return $this;
+    }
+
+    /**
+     * @param string $errataName
+     * @return ColumnMetadata
+     */
+    public function getErrata($errataName)
+    {
+        if (array_key_exists($errataName, $this->errata)) {
+            return $this->errata[$errataName];
+        }
+        return null;
     }
 
     /**
@@ -383,8 +381,5 @@ class ColumnObject
         $this->errata[$errataName] = $errataValue;
         return $this;
     }
-
-
-
 
 }

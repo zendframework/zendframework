@@ -18,16 +18,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
  
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader\Entry;
+
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Exception;
+use DOMElement;
+use DOMDocument;
+use DOMXPath;
 
 /**
-* @uses \Zend\Feed\Reader\Exception
-* @uses \Zend\Feed\Reader\Reader
 * @category Zend
 * @package Zend_Feed_Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -45,7 +44,7 @@ abstract class AbstractEntry
     /**
      * DOM document object
      *
-     * @var \DOMDocument
+     * @var DOMDocument
      */
     protected $_domDocument = null;
 
@@ -85,7 +84,7 @@ abstract class AbstractEntry
      * @param  string $type
      * @return void
      */
-    public function __construct(\DOMElement $entry, $entryKey, $type = null)
+    public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
         $this->_entry       = $entry;
         $this->_entryKey    = $entryKey;
@@ -139,7 +138,7 @@ abstract class AbstractEntry
      */
     public function saveXml()
     {
-        $dom = new \DOMDocument('1.0', $this->getEncoding());
+        $dom = new DOMDocument('1.0', $this->getEncoding());
         $entry = $dom->importNode($this->getElement(), true);
         $dom->appendChild($entry);
         return $dom->saveXml();
@@ -163,7 +162,7 @@ abstract class AbstractEntry
     public function getXpath()
     {
         if (!$this->_xpath) {
-            $this->setXpath(new \DOMXPath($this->getDomDocument()));
+            $this->setXpath(new DOMXPath($this->getDomDocument()));
         }
         return $this->_xpath;
     }
@@ -174,7 +173,7 @@ abstract class AbstractEntry
      * @param  DOMXPath $xpath
      * @return Zend_Feed_Reader_Entry_EntryAbstract
      */
-    public function setXpath(\DOMXPath $xpath)
+    public function setXpath(DOMXPath $xpath)
     {
         $this->_xpath = $xpath;
         return $this;
@@ -210,7 +209,7 @@ abstract class AbstractEntry
      * @param  string $method
      * @param  array $args
      * @return mixed
-     * @throws Zend_Feed_Exception if no extensions implements the method
+     * @throws Exception\RuntimeException if no extensions implements the method
      */
     public function __call($method, $args)
     {
@@ -219,7 +218,7 @@ abstract class AbstractEntry
                 return call_user_func_array(array($extension, $method), $args);
             }
         }
-        throw new Exception('Method: ' . $method
+        throw new Exception\RuntimeException('Method: ' . $method
             . ' does not exist and could not be located on a registered Extension');
     }
 

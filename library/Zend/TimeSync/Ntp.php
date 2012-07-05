@@ -18,24 +18,19 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\TimeSync;
+
 use Zend\TimeSync\Exception;
 
 /**
  * NTP Protocol handling class
  *
- * @uses      \Zend\TimeSync\TimeSync
- * @uses      \Zend\TimeSync\Exception
- * @uses      \Zend\TimeSync\Protocol
  * @category  Zend
  * @package   Zend_TimeSync
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Ntp extends Protocol
+class Ntp extends AbstractProtocol
 {
     /**
      * NTP port number (123) assigned by the Internet Assigned Numbers Authority
@@ -202,7 +197,7 @@ class Ntp extends Protocol
      * This will return an array with binary data listing:
      *
      * @return array
-     * @throws \Zend\TimeSync\Exception When timeserver can not be connected
+     * @throws Exception\ExceptionInterface When timeserver can not be connected
      */
     protected function _read()
     {

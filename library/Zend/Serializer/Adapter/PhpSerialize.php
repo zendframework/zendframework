@@ -19,16 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Serializer\Adapter;
 
 use Zend\Serializer\Exception\RuntimeException;
 
 /**
- * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -45,12 +40,12 @@ class PhpSerialize extends AbstractAdapter
     /**
      * Constructor
      * 
-     * @param  array|Zend\Config\Config $opts 
+     * @param  array|\Traversable $options
      * @return void
      */
-    public function __construct($opts = array()) 
+    public function __construct($options = array())
     {
-        parent::__construct($opts);
+        parent::__construct($options);
 
         // needed to check if a returned false is based on a serialize false
         // or based on failure (igbinary can overwrite [un]serialize functions)
@@ -65,7 +60,7 @@ class PhpSerialize extends AbstractAdapter
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
-     * @throws Zend\Serializer\Exception On serialize error
+     * @throws RuntimeException On serialize error
      */
     public function serialize($value, array $opts = array())
     {
@@ -90,7 +85,7 @@ class PhpSerialize extends AbstractAdapter
      * @param  string $serialized 
      * @param  array $opts 
      * @return mixed
-     * @throws Zend\Serializer\Exception on unserialize error
+     * @throws RuntimeException on unserialize error
      */
     public function unserialize($serialized, array $opts = array())
     {

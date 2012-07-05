@@ -18,19 +18,15 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator\File;
 
-use Zend\Loader;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Validator\Exception;
 
 /**
  * Validator for the size of all files which will be validated in sum
  *
- * @uses      \Zend\Loader
- * @uses      \Zend\Validator\File\Size
- * @uses      \Zend\Validator\Exception
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -48,7 +44,7 @@ class FilesSize extends Size
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::TOO_BIG      => "All files in sum should have a maximum size of '%max%' but '%size%' were detected",
         self::TOO_SMALL    => "All files in sum should have a minimum size of '%min%' but '%size%' were detected",
         self::NOT_READABLE => "One or more files can not be read",
@@ -59,28 +55,28 @@ class FilesSize extends Size
      *
      * @var array
      */
-    protected $_files;
+    protected $files;
 
     /**
      * Sets validator options
      *
-     * Min limits the used diskspace for all files, when used with max=null it is the maximum filesize
+     * Min limits the used disk space for all files, when used with max=null it is the maximum file size
      * It also accepts an array with the keys 'min' and 'max'
      *
-     * @param  integer|array|\Zend\Config\Config $options Options for this validator
-     * @return void
+     * @param  integer|array|Traversable $options Options for this validator
+     * @throws \Zend\Validator\Exception\InvalidArgumentException
      */
     public function __construct($options = null)
     {
-        $this->_files = array();
-        $this->_setSize(0);
+        $this->files = array();
+        $this->setSize(0);
 
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (is_scalar($options)) {
             $options = array('max' => $options);
         } elseif (!is_array($options)) {
-            throw new \Zend\Validator\Exception\InvalidArgumentException('Invalid options to validator provided');
+            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         if (1 < func_num_args()) {
@@ -111,16 +107,16 @@ class FilesSize extends Size
 
         $min  = $this->getMin(true);
         $max  = $this->getMax(true);
-        $size = $this->_getSize();
+        $size = $this->getSize();
         foreach ($value as $files) {
             // Is file readable ?
-            if (!Loader::isReadable($files)) {
-                $this->_throw($file, self::NOT_READABLE);
+            if (false === stream_resolve_include_path($files)) {
+                $this->throwError($file, self::NOT_READABLE);
                 continue;
             }
 
-            if (!isset($this->_files[$files])) {
-                $this->_files[$files] = $files;
+            if (!isset($this->files[$files])) {
+                $this->files[$files] = $files;
             } else {
                 // file already counted... do not count twice
                 continue;
@@ -128,16 +124,16 @@ class FilesSize extends Size
 
             // limited to 2GB files
             $size += @filesize($files);
-            $this->_size = $size;
+            $this->size = $size;
             if (($max !== null) && ($max < $size)) {
                 if ($this->getByteString()) {
-                    $this->options['max'] = $this->_toByteString($max);
-                    $this->_size          = $this->_toByteString($size);
-                    $this->_throw($file, self::TOO_BIG);
+                    $this->options['max'] = $this->toByteString($max);
+                    $this->size          = $this->toByteString($size);
+                    $this->throwError($file, self::TOO_BIG);
                     $this->options['max'] = $max;
-                    $this->_size          = $size;
+                    $this->size          = $size;
                 } else {
-                    $this->_throw($file, self::TOO_BIG);
+                    $this->throwError($file, self::TOO_BIG);
                 }
             }
         }
@@ -145,13 +141,13 @@ class FilesSize extends Size
         // Check that aggregate files are >= minimum size
         if (($min !== null) && ($size < $min)) {
             if ($this->getByteString()) {
-                $this->options['min'] = $this->_toByteString($min);
-                $this->_size          = $this->_toByteString($size);
-                $this->_throw($file, self::TOO_SMALL);
+                $this->options['min'] = $this->toByteString($min);
+                $this->size          = $this->toByteString($size);
+                $this->throwError($file, self::TOO_SMALL);
                 $this->options['min'] = $min;
-                $this->_size          = $size;
+                $this->size          = $size;
             } else {
-                $this->_throw($file, self::TOO_SMALL);
+                $this->throwError($file, self::TOO_SMALL);
             }
         }
 

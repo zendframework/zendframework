@@ -19,18 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\App;
 
 /**
  * Concrete class for working with Atom entries containing multi-part data.
  *
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\App\Entry
- * @uses       \Zend\GData\App\MediaSource
- * @uses       \Zend\GData\MediaMimeStream
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
@@ -102,7 +95,7 @@ class MediaEntry extends Entry
             $this->_mediaSource = $value;
         } else {
             throw new InvalidArgumentException(
-                    'You must specify the media data as a class that conforms to \Zend\Gdata\App\MediaSource.');
+                    'You must specify the media data as a class that conforms to \Zend\GData\App\MediaSource.');
         }
         return $this;
     }

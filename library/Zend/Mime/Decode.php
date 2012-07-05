@@ -18,14 +18,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mime;
 
+use Zend\Mail\Headers;
+
 /**
- * @uses       \Zend\Mime\Exception\RuntimeException
- * @uses       \Zend\Mime\Mime
  * @category   Zend
  * @package    Zend_Mime
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -111,14 +108,17 @@ class Decode
      *
      * The charset of the returned headers depend on your iconv settings.
      *
-     * @param  string $message raw message with header and optional content
-     * @param  array  $headers output param, array with headers as array(name => value)
-     * @param  string $body    output param, content of message
-     * @param  string $EOL EOL string; defaults to {@link Zend_Mime::LINEEND}
+     * @param  string|Headers  $message raw message with header and optional content
+     * @param  Headers         $headers output param, headers container
+     * @param  string          $body    output param, content of message
+     * @param  string          $EOL EOL string; defaults to {@link Zend_Mime::LINEEND}
      * @return null
      */
     public static function splitMessage($message, &$headers, &$body, $EOL = Mime::LINEEND)
     {
+        if ($message instanceof Headers) {
+            $message = $message->toString();
+        }
         // check for valid header at first line
         $firstline = strtok($message, "\n");
         if (!preg_match('%^[^\s]+[^:]*:%', $firstline)) {
@@ -143,30 +143,7 @@ class Decode
             @list($headers, $body) = @preg_split("%([\r\n]+)\\1%U", $message, 2);
         }
 
-        $headers = iconv_mime_decode_headers($headers, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
-
-        if ($headers === false) {
-            // an error occurs during the decoding
-            return;
-        }
-
-        // normalize header names
-        foreach ($headers as $name => $header) {
-            $lower = strtolower($name);
-            if ($lower == $name) {
-                continue;
-            }
-            unset($headers[$name]);
-            if (!isset($headers[$lower])) {
-                $headers[$lower] = $header;
-                continue;
-            }
-            if (is_array($headers[$lower])) {
-                $headers[$lower][] = $header;
-                continue;
-            }
-            $headers[$lower] = array($headers[$lower], $header);
-        }
+        $headers = Headers::fromString($headers, $EOL);
     }
 
     /**
@@ -184,13 +161,13 @@ class Decode
     /**
      * split a header field like content type in its different parts
      *
-     * @param  string $type       header field
+     * @param  string $field      header field
      * @param  string $wantedPart the wanted part, else an array with all parts is returned
      * @param  string $firstName  key name for the first part
      * @return string|array wanted part or all parts as array($firstName => firstPart, partname => value)
      * @throws Exception\RuntimeException
      */
-    public static function splitHeaderField($field, $wantedPart = null, $firstName = 0)
+    public static function splitHeaderField($field, $wantedPart = null, $firstName = '0')
     {
         $wantedPart = strtolower($wantedPart);
         $firstName = strtolower($firstName);
@@ -237,11 +214,11 @@ class Decode
      *
      * The charset of the returned string depends on your iconv settings.
      *
-     * @param  string encoded string
+     * @param  string $string encoded string
      * @return string decoded string
      */
     public static function decodeQuotedPrintable($string)
     {
-        return quoted_printable_decode($string);
+        return iconv_mime_decode($string, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
     }
 }

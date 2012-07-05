@@ -1,28 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Config
- * @subpackage Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Config
  */
 
 namespace Zend\Config\Reader;
 
-use Zend\Config\Reader,
-    Zend\Config\Exception;
+use Zend\Config\Exception;
 
 /**
  * XML config reader.
@@ -30,10 +18,8 @@ use Zend\Config\Reader,
  * @category   Zend
  * @package    Zend_Config
  * @subpackage Reader
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Ini implements Reader
+class Ini implements ReaderInterface
 {
     /**
      * Separator for nesting levels of configuration data identifiers.
@@ -52,7 +38,7 @@ class Ini implements Reader
     /**
      * Set nest separator.
      *
-     * @param  stirng $separator
+     * @param  string $separator
      * @return self
      */
     public function setNestSeparator($separator)
@@ -74,15 +60,20 @@ class Ini implements Reader
     /**
      * fromFile(): defined by Reader interface.
      *
-     * @see    Reader::fromFile()
+     * @see    ReaderInterface::fromFile()
      * @param  string $filename
      * @return array
+     * @throws Exception\InvalidArgumentException
      */
     public function fromFile($filename)
     {
-        if (!file_exists($filename)) {
-            throw new Exception\RuntimeException("The file $filename doesn't exists.");
+        if (!is_file($filename) || !is_readable($filename)) {
+            throw new Exception\RuntimeException(sprintf(
+                "File '%s' doesn't exist or not readable",
+                $filename
+            ));
         }
+
         $this->directory = dirname($filename);
 
         set_error_handler(
@@ -102,9 +93,9 @@ class Ini implements Reader
     /**
      * fromString(): defined by Reader interface.
      *
-     * @see    Reader::fromString()
      * @param  string $string
-     * @return array
+     * @return array|bool
+     * @throws Exception\RuntimeException
      */
     public function fromString($string)
     {
@@ -141,7 +132,7 @@ class Ini implements Reader
             if (is_array($value)) {
                 $config[$section] = $this->processSection($value);
             } else {
-                $config[$section] = $value;
+                $this->processKey($section, $value, $config);
             }
         }
 
@@ -172,6 +163,7 @@ class Ini implements Reader
      * @param  string $value
      * @param  array  $config
      * @return array
+     * @throws Exception\RuntimeException
      */
     protected function processKey($key, $value, array &$config)
     {
@@ -187,7 +179,9 @@ class Ini implements Reader
                     $config[$pieces[0]] = array();
                 }
             } elseif (!is_array($config[$pieces[0]])) {
-                throw new Exception\RuntimeException(sprintf('Cannot create sub-key for "%s", as key already exists', $pieces[0]));
+                throw new Exception\RuntimeException(sprintf(
+                    'Cannot create sub-key for "%s", as key already exists', $pieces[0]
+                ));
             }
 
             $this->processKey($pieces[1], $value, $config[$pieces[0]]);

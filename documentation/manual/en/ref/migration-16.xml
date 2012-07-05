@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.16"><info><title>Zend Framework 1.6</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.16"><title>Zend Framework 1.6</title>
     
 
     <para>
@@ -7,10 +7,10 @@
         should note the following migration notes.
     </para>
 
-    <section xml:id="migration.16.zend.controller"><info><title>Zend_Controller</title></info>
+    <section xml:id="migration.16.zend.controller"><title>Zend_Controller</title>
         
 
-        <section xml:id="migration.16.zend.controller.dispatcher"><info><title>Dispatcher Interface Changes</title></info>
+        <section xml:id="migration.16.zend.controller.dispatcher"><title>Dispatcher Interface Changes</title>
             
 
             <para>
@@ -48,10 +48,10 @@
         </section>
     </section>
 
-    <section xml:id="migration.16.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
+    <section xml:id="migration.16.zend.file.transfer"><title>Zend_File_Transfer</title>
         
 
-        <section xml:id="migration.16.zend.file.transfer.validators"><info><title>Changes when using validators</title></info>
+        <section xml:id="migration.16.zend.file.transfer.validators"><title>Changes when using validators</title>
             
 
             <para>
@@ -88,7 +88,7 @@
                 <constant>FALSE</constant> after defining the wished validator.
             </para>
 
-            <example xml:id="migration.16.zend.file.transfer.example"><info><title>How to change your file validators from 1.6.1 to 1.6.2</title></info>
+            <example xml:id="migration.16.zend.file.transfer.example"><title>How to change your file validators from 1.6.1 to 1.6.2</title>
                 
 
                 <programlisting language="php"><![CDATA[

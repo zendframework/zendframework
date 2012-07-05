@@ -19,22 +19,20 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace ZendTest\Feed\Writer;
+
+use DateTime;
 use Zend\Feed\Writer;
-use Zend\Date;
 
 /**
-* @category Zend
-* @package Zend_Exception
-* @subpackage UnitTests
-* @group Zend_Feed
-* @group Zend_Feed_Writer
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
+ * @category   Zend
+ * @package    Zend_Exception
+ * @subpackage UnitTests
+ * @group      Zend_Feed
+ * @group      Zend_Feed_Writer
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd New BSD License
+ */
 class EntryTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -45,86 +43,38 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->_feedSamplePath = dirname(__FILE__) . '/_files';
     }
 
-    public function testAddsAuthorName()
-    {
-        $entry = new Writer\Entry;
-        $entry->addAuthor('Joe');
-        $this->assertEquals(array(array('name'=>'Joe')), $entry->getAuthors());
-    }
-
-    public function testAddsAuthorEmail()
-    {
-        $entry = new Writer\Entry;
-        $entry->addAuthor('Joe', 'joe@example.com');
-        $this->assertEquals(array(array('name'=>'Joe', 'email' => 'joe@example.com')), $entry->getAuthors());
-    }
-
-    public function testAddsAuthorUri()
-    {
-        $entry = new Writer\Entry;
-        $entry->addAuthor('Joe', null, 'http://www.example.com');
-        $this->assertEquals(array(array('name'=>'Joe', 'uri' => 'http://www.example.com')), $entry->getAuthors());
-    }
-
-    public function testAddAuthorThrowsExceptionOnInvalidName()
-    {
-        $entry = new Writer\Entry;
-        try {
-            $entry->addAuthor('');
-            $this->fail();
-        } catch (Writer\Exception $e) {
-        }
-    }
-
-    public function testAddAuthorThrowsExceptionOnInvalidEmail()
-    {
-        $entry = new Writer\Entry;
-        try {
-            $entry->addAuthor('Joe', '');
-            $this->fail();
-        } catch (Writer\Exception $e) {
-        }
-    }
-
-    public function testAddAuthorThrowsExceptionOnInvalidUri()
-    {
-        $this->markTestIncomplete('Pending Zend\URI fix for validation');
-        $entry = new Writer\Entry;
-        try {
-            $entry->addAuthor('Joe', null, 'notauri');
-            $this->fail();
-        } catch (Writer\Exception $e) {
-        }
-    }
-
     public function testAddsAuthorNameFromArray()
     {
         $entry = new Writer\Entry;
-        $entry->addAuthor(array('name'=>'Joe'));
-        $this->assertEquals(array(array('name'=>'Joe')), $entry->getAuthors());
+        $entry->addAuthor(array('name'=> 'Joe'));
+        $this->assertEquals(array(array('name'=> 'Joe')), $entry->getAuthors());
     }
 
     public function testAddsAuthorEmailFromArray()
     {
         $entry = new Writer\Entry;
-        $entry->addAuthor(array('name'=>'Joe','email'=>'joe@example.com'));
-        $this->assertEquals(array(array('name'=>'Joe', 'email' => 'joe@example.com')), $entry->getAuthors());
+        $entry->addAuthor(array('name' => 'Joe',
+                                'email'=> 'joe@example.com'));
+        $this->assertEquals(array(array('name'  => 'Joe',
+                                        'email' => 'joe@example.com')), $entry->getAuthors());
     }
 
     public function testAddsAuthorUriFromArray()
     {
         $entry = new Writer\Entry;
-        $entry->addAuthor(array('name'=>'Joe','uri'=>'http://www.example.com'));
-        $this->assertEquals(array(array('name'=>'Joe', 'uri' => 'http://www.example.com')), $entry->getAuthors());
+        $entry->addAuthor(array('name'=> 'Joe',
+                                'uri' => 'http://www.example.com'));
+        $this->assertEquals(array(array('name'=> 'Joe',
+                                        'uri' => 'http://www.example.com')), $entry->getAuthors());
     }
 
     public function testAddAuthorThrowsExceptionOnInvalidNameFromArray()
     {
         $entry = new Writer\Entry;
         try {
-            $entry->addAuthor(array('name'=>''));
+            $entry->addAuthor(array('name'=> ''));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\InvalidArgumentException $e) {
         }
     }
 
@@ -132,9 +82,10 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         try {
-            $entry->addAuthor(array('name'=>'Joe','email'=>''));
+            $entry->addAuthor(array('name' => 'Joe',
+                                    'email'=> ''));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\InvalidArgumentException $e) {
         }
     }
 
@@ -143,9 +94,10 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         try {
-            $entry->addAuthor(array('name'=>'Joe','uri'=>'notauri'));
+            $entry->addAuthor(array('name'=> 'Joe',
+                                    'uri' => 'notauri'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\InvalidArgumentException $e) {
         }
     }
 
@@ -153,9 +105,9 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         try {
-            $entry->addAuthor(array('uri'=>'notauri'));
+            $entry->addAuthor(array('uri'=> 'notauri'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\InvalidArgumentException $e) {
         }
     }
 
@@ -163,57 +115,61 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         $entry->addAuthors(array(
-            array('name'=>'Joe','uri'=>'http://www.example.com'),
-            array('name'=>'Jane','uri'=>'http://www.example.com')
-        ));
+                                array('name'=> 'Joe',
+                                      'uri' => 'http://www.example.com'),
+                                array('name'=> 'Jane',
+                                      'uri' => 'http://www.example.com')
+                           ));
         $expected = array(
-            array('name'=>'Joe','uri'=>'http://www.example.com'),
-            array('name'=>'Jane','uri'=>'http://www.example.com')
+            array('name'=> 'Joe',
+                  'uri' => 'http://www.example.com'),
+            array('name'=> 'Jane',
+                  'uri' => 'http://www.example.com')
         );
         $this->assertEquals($expected, $entry->getAuthors());
     }
-    
+
     public function testAddsEnclosure()
     {
         $entry = new Writer\Entry;
         $entry->setEnclosure(array(
-            'type' => 'audio/mpeg',
-            'uri' => 'http://example.com/audio.mp3',
-            'length' => '1337'
-        ));
+                                  'type'   => 'audio/mpeg',
+                                  'uri'    => 'http://example.com/audio.mp3',
+                                  'length' => '1337'
+                             ));
         $expected = array(
-            'type' => 'audio/mpeg',
-            'uri' => 'http://example.com/audio.mp3',
+            'type'   => 'audio/mpeg',
+            'uri'    => 'http://example.com/audio.mp3',
             'length' => '1337'
         );
         $this->assertEquals($expected, $entry->getEnclosure());
     }
-    
+
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testAddsEnclosureThrowsExceptionOnMissingUri()
     {
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         $entry->setEnclosure(array(
-            'type' => 'audio/mpeg',
-            'length' => '1337'
-        ));
+                                  'type'   => 'audio/mpeg',
+                                  'length' => '1337'
+                             ));
     }
-    
+
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testAddsEnclosureThrowsExceptionWhenUriIsInvalid()
     {
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         $entry->setEnclosure(array(
-            'type' => 'audio/mpeg',
-            'uri' => 'http://',
-            'length' => '1337'
-        ));
+                                  'type'   => 'audio/mpeg',
+                                  'uri'    => 'http://',
+                                  'length' => '1337'
+                             ));
     }
 
     public function testSetsCopyright()
@@ -229,7 +185,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCopyright('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -246,7 +202,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setContent('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -254,16 +210,16 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         $entry->setDateCreated();
-        $dateNow = new Date\Date;
-        $this->assertTrue($dateNow->isLater($entry->getDateCreated()) || $dateNow->equals($entry->getDateCreated()));
+        $dateNow = new DateTime();
+        $this->assertTrue($dateNow >= $entry->getDateCreated());
     }
 
     public function testSetDateCreatedUsesGivenUnixTimestamp()
     {
         $entry = new Writer\Entry;
         $entry->setDateCreated(1234567890);
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateCreated()));
+        $myDate = new DateTime('@' . 1234567890);
+        $this->assertEquals($myDate, $entry->getDateCreated());
     }
 
     /**
@@ -273,8 +229,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         $entry->setDateCreated(123456789);
-        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateCreated()));
+        $myDate = new DateTime('@' . 123456789);
+        $this->assertEquals($myDate, $entry->getDateCreated());
     }
 
     /**
@@ -284,32 +240,32 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         $entry->setDateCreated(123);
-        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateCreated()));
+        $myDate = new DateTime('@' . 123);
+        $this->assertEquals($myDate, $entry->getDateCreated());
     }
 
-    public function testSetDateCreatedUsesZendDateObject()
+    public function testSetDateCreatedUsesDateTimeObject()
     {
+        $myDate = new DateTime('@' . 1234567890);
         $entry = new Writer\Entry;
-        $entry->setDateCreated(new Date\Date('1234567890', Date\Date::TIMESTAMP));
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateCreated()));
+        $entry->setDateCreated($myDate);
+        $this->assertEquals($myDate, $entry->getDateCreated());
     }
 
     public function testSetDateModifiedDefaultsToCurrentTime()
     {
         $entry = new Writer\Entry;
         $entry->setDateModified();
-        $dateNow = new Date\Date;
-        $this->assertTrue($dateNow->isLater($entry->getDateModified()) || $dateNow->equals($entry->getDateModified()));
+        $dateNow = new DateTime();
+        $this->assertTrue($dateNow >= $entry->getDateModified());
     }
 
     public function testSetDateModifiedUsesGivenUnixTimestamp()
     {
         $entry = new Writer\Entry;
         $entry->setDateModified(1234567890);
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateModified()));
+        $myDate = new DateTime('@' . 1234567890);
+        $this->assertEquals($myDate, $entry->getDateModified());
     }
 
     /**
@@ -319,8 +275,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         $entry->setDateModified(123456789);
-        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateModified()));
+        $myDate = new DateTime('@' . 123456789);
+        $this->assertEquals($myDate, $entry->getDateModified());
     }
 
     /**
@@ -330,16 +286,16 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         $entry->setDateModified(123);
-        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateModified()));
+        $myDate = new DateTime('@' . 123);
+        $this->assertEquals($myDate, $entry->getDateModified());
     }
 
-    public function testSetDateModifiedUsesZendDateObject()
+    public function testSetDateModifiedUsesDateTimeObject()
     {
+        $myDate = new DateTime('@' . 1234567890);
         $entry = new Writer\Entry;
-        $entry->setDateModified(new Date\Date('1234567890', Date\Date::TIMESTAMP));
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getDateModified()));
+        $entry->setDateModified($myDate);
+        $this->assertEquals($myDate, $entry->getDateModified());
     }
 
     public function testSetDateCreatedThrowsExceptionOnInvalidParameter()
@@ -348,7 +304,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setDateCreated('abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -358,7 +314,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setDateModified('abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -399,7 +355,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setDescription('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -422,7 +378,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setId('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -445,7 +401,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setLink('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -455,7 +411,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setLink('http://');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -478,7 +434,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentLink('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -488,7 +444,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentLink('http://');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -501,9 +457,11 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testSetsCommentFeedLink()
     {
         $entry = new Writer\Entry;
-        
-        $entry->setCommentFeedLink(array('uri'=>'http://www.example.com/id/comments', 'type'=>'rdf'));
-        $this->assertEquals(array(array('uri'=>'http://www.example.com/id/comments', 'type'=>'rdf')), $entry->getCommentFeedLinks());
+
+        $entry->setCommentFeedLink(array('uri' => 'http://www.example.com/id/comments',
+                                         'type'=> 'rdf'));
+        $this->assertEquals(array(array('uri' => 'http://www.example.com/id/comments',
+                                        'type'=> 'rdf')), $entry->getCommentFeedLinks());
     }
 
     public function testSetCommentFeedLinkThrowsExceptionOnEmptyString()
@@ -511,9 +469,10 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         try {
-            $entry->setCommentFeedLink(array('uri'=>'', 'type'=>'rdf'));
+            $entry->setCommentFeedLink(array('uri' => '',
+                                             'type'=> 'rdf'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -521,19 +480,21 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         try {
-            $entry->setCommentFeedLink(array('uri'=>'http://', 'type'=>'rdf'));
+            $entry->setCommentFeedLink(array('uri' => 'http://',
+                                             'type'=> 'rdf'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
-    
+
     public function testSetCommentFeedLinkThrowsExceptionOnInvalidType()
     {
         $entry = new Writer\Entry;
         try {
-            $entry->setCommentFeedLink(array('uri'=>'http://www.example.com/id/comments', 'type'=>'foo'));
+            $entry->setCommentFeedLink(array('uri' => 'http://www.example.com/id/comments',
+                                             'type'=> 'foo'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -556,7 +517,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setTitle('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -579,7 +540,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentCount('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -589,7 +550,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentCount('a');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 

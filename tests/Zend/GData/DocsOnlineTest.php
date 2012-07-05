@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData;
 use Zend\GData\Docs;
 
@@ -36,6 +33,11 @@ use Zend\GData\Docs;
  */
 class DocsOnlineTest extends \PHPUnit_Framework_TestCase
 {
+
+    /** @var string */
+    public $docTitle;
+    /** @var Docs */
+    public $gdata;
 
     public function setUp()
     {

@@ -19,10 +19,8 @@
  * @license      http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData\YouTube;
+
 use Zend\GData\YouTube;
 use Zend\GData\App\Extension;
 use Zend\GData\App;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.ebs"><info><title>Zend_Service_Amazon_Ec2: Elastic Block Storage (EBS)</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.ebs"><title>Zend_Service_Amazon_Ec2: Elastic Block Storage (EBS)</title>
     
 
     <para>
@@ -24,10 +24,10 @@
         EBS volumes and can protect your data for long term durability.
     </para>
 
-    <section xml:id="zend.service.amazon.ec2.ebs.creating"><info><title>Create EBS Volumes and Snapshots</title></info>
+    <section xml:id="zend.service.amazon.ec2.ebs.creating"><title>Create EBS Volumes and Snapshots</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.ebs.creating.volume"><info><title>Create a new EBS Volume</title></info>
+        <example xml:id="zend.service.amazon.ec2.ebs.creating.volume"><title>Create a new EBS Volume</title>
             
 
             <para>
@@ -47,7 +47,7 @@ $return = $ec2_ebs->createNewVolume(40, 'us-east-1a');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.ebs.creating.volumesnapshot"><info><title>Create an EBS Volume from a Snapshot</title></info>
+        <example xml:id="zend.service.amazon.ec2.ebs.creating.volumesnapshot"><title>Create an EBS Volume from a Snapshot</title>
             
 
             <para>
@@ -67,7 +67,7 @@ $return = $ec2_ebs->createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.ebs.creating.snapshot"><info><title>Create a Snapshot of an EBS Volume</title></info>
+        <example xml:id="zend.service.amazon.ec2.ebs.creating.snapshot"><title>Create a Snapshot of an EBS Volume</title>
             
 
             <para>
@@ -87,10 +87,10 @@ $return = $ec2_ebs->createSnapshot('volumeId');
         </example>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.ebs.describing"><info><title>Describing EBS Volumes and Snapshots</title></info>
+    <section xml:id="zend.service.amazon.ec2.ebs.describing"><title>Describing EBS Volumes and Snapshots</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.ebs.describing.volume"><info><title>Describing an EBS Volume</title></info>
+        <example xml:id="zend.service.amazon.ec2.ebs.describing.volume"><title>Describing an EBS Volume</title>
             
 
             <para>
@@ -114,7 +114,7 @@ $return = $ec2_ebs->describeVolume('volumeId');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.ebs.describing.attachedvolumes"><info><title>Describe Attached Volumes</title></info>
+        <example xml:id="zend.service.amazon.ec2.ebs.describing.attachedvolumes"><title>Describe Attached Volumes</title>
             
 
             <para>
@@ -135,7 +135,7 @@ $return = $ec2_ebs->describeAttachedVolumes('instanceId');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.ebs.describing.snapshot"><info><title>Describe an EBS Volume Snapshot</title></info>
+        <example xml:id="zend.service.amazon.ec2.ebs.describing.snapshot"><title>Describe an EBS Volume Snapshot</title>
             
 
             <para>
@@ -159,10 +159,10 @@ $return = $ec2_ebs->describeSnapshot('volumeId');
         </example>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.ebs.attachdetach"><info><title>Attach and Detaching Volumes from Instances</title></info>
+    <section xml:id="zend.service.amazon.ec2.ebs.attachdetach"><title>Attach and Detaching Volumes from Instances</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.ebs.attachdetach.attach"><info><title>Attaching an EBS Volume</title></info>
+        <example xml:id="zend.service.amazon.ec2.ebs.attachdetach.attach"><title>Attaching an EBS Volume</title>
             
 
             <para>
@@ -183,7 +183,7 @@ $return = $ec2_ebs->attachVolume('volumeId', 'instanceid', '/dev/sdh');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.ebs.attachdetach.detach"><info><title>Detaching an EBS Volume</title></info>
+        <example xml:id="zend.service.amazon.ec2.ebs.attachdetach.detach"><title>Detaching an EBS Volume</title>
             
 
             <para>
@@ -205,7 +205,7 @@ $return = $ec2_ebs->detachVolume('volumeId');
 ]]></programlisting>
         </example>
 
-        <note><info><title>Forced Detach</title></info>
+        <note><title>Forced Detach</title>
             
 
             <para>
@@ -220,10 +220,10 @@ $return = $ec2_ebs->detachVolume('volumeId');
         </note>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.ebs.deleting"><info><title>Deleting EBS Volumes and Snapshots</title></info>
+    <section xml:id="zend.service.amazon.ec2.ebs.deleting"><title>Deleting EBS Volumes and Snapshots</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.ebs.deleting.volume"><info><title>Deleting an EBS Volume</title></info>
+        <example xml:id="zend.service.amazon.ec2.ebs.deleting.volume"><title>Deleting an EBS Volume</title>
             
 
             <para>
@@ -241,7 +241,7 @@ $return = $ec2_ebs->deleteVolume('volumeId');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.ebs.deleting.snapshot"><info><title>Deleting an EBS Volume Snapshot</title></info>
+        <example xml:id="zend.service.amazon.ec2.ebs.deleting.snapshot"><title>Deleting an EBS Volume Snapshot</title>
             
 
             <para>

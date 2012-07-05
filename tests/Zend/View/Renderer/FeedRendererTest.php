@@ -23,7 +23,9 @@ namespace ZendTest\View\Renderer;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Feed\Writer\Factory as FeedFactory,
-    Zend\View\Model,
+    Zend\View\Model\ModelInterface as Model,
+    Zend\View\Model\FeedModel,
+    Zend\View\Model\ViewModel,
     Zend\View\Renderer\FeedRenderer;
 
 /**
@@ -83,7 +85,7 @@ class FeedRendererTest extends TestCase
 
     public function testRendersFeedModelAccordingToTypeProvidedInModel()
     {
-        $model = new Model\FeedModel($this->getFeedData('atom'));
+        $model = new FeedModel($this->getFeedData('atom'));
         $model->setOption('feed_type', 'atom');
         $xml = $this->renderer->render($model);
         $this->assertContains('<' . '?xml', $xml);
@@ -93,7 +95,7 @@ class FeedRendererTest extends TestCase
     public function testRendersFeedModelAccordingToRenderTypeIfNoTypeProvidedInModel()
     {
         $this->renderer->setFeedType('atom');
-        $model = new Model\FeedModel($this->getFeedData('atom'));
+        $model = new FeedModel($this->getFeedData('atom'));
         $xml = $this->renderer->render($model);
         $this->assertContains('<' . '?xml', $xml);
         $this->assertContains('atom', $xml);
@@ -101,7 +103,7 @@ class FeedRendererTest extends TestCase
 
     public function testCastsViewModelToFeedModelUsingFeedTypeOptionProvided()
     {
-        $model = new Model\ViewModel($this->getFeedData('atom'));
+        $model = new ViewModel($this->getFeedData('atom'));
         $model->setOption('feed_type', 'atom');
         $xml = $this->renderer->render($model);
         $this->assertContains('<' . '?xml', $xml);
@@ -111,7 +113,7 @@ class FeedRendererTest extends TestCase
     public function testCastsViewModelToFeedModelUsingRendererFeedTypeIfNoFeedTypeOptionInModel()
     {
         $this->renderer->setFeedType('atom');
-        $model = new Model\ViewModel($this->getFeedData('atom'));
+        $model = new ViewModel($this->getFeedData('atom'));
         $xml = $this->renderer->render($model);
         $this->assertContains('<' . '?xml', $xml);
         $this->assertContains('atom', $xml);

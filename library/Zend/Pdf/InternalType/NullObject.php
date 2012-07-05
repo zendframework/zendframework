@@ -19,16 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\InternalType;
 use Zend\Pdf;
 
 /**
  * PDF file 'null' element implementation
  *
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal

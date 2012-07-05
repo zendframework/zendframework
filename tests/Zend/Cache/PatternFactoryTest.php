@@ -15,19 +15,19 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Cache;
-use Zend\Cache,
-    Zend\Loader\Broker;
+
+use Zend\Cache;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
@@ -36,25 +36,25 @@ class PatternFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        Cache\PatternFactory::resetBroker();
+        Cache\PatternFactory::resetPluginManager();
     }
 
     public function tearDown()
     {
-        Cache\PatternFactory::resetBroker();
+        Cache\PatternFactory::resetPluginManager();
     }
 
-    public function testDefaultBroker()
+    public function testDefaultPluginManager()
     {
-        $broker = Cache\PatternFactory::getBroker();
-        $this->assertInstanceOf('Zend\Cache\PatternBroker', $broker);
+        $plugins = Cache\PatternFactory::getPluginManager();
+        $this->assertInstanceOf('Zend\Cache\PatternPluginManager', $plugins);
     }
 
-    public function testChangeBroker()
+    public function testChangePluginManager()
     {
-        $broker = new Cache\PatternBroker();
-        Cache\PatternFactory::setBroker($broker);
-        $this->assertSame($broker, Cache\PatternFactory::getBroker());
+        $plugins = new Cache\PatternPluginManager();
+        Cache\PatternFactory::setPluginManager($plugins);
+        $this->assertSame($plugins, Cache\PatternFactory::getPluginManager());
     }
 
     public function testFactory()
@@ -67,5 +67,4 @@ class PatternFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNotSame($pattern1, $pattern2);
     }
-
 }

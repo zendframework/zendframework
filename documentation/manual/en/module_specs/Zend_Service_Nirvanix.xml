@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.nirvanix"><info><title>Zend_Service_Nirvanix</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.nirvanix"><title>Zend_Service_Nirvanix</title>
     
 
-    <section xml:id="zend.service.nirvanix.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.service.nirvanix.introduction"><title>Introduction</title>
         
 
         <para>
@@ -20,7 +20,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.registering"><info><title>Registering with Nirvanix</title></info>
+    <section xml:id="zend.service.nirvanix.registering"><title>Registering with Nirvanix</title>
         
 
         <para>
@@ -36,7 +36,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.apiDocumentation"><info><title>API Documentation</title></info>
+    <section xml:id="zend.service.nirvanix.apiDocumentation"><title>API Documentation</title>
         
 
         <para>
@@ -59,7 +59,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.features"><info><title>Features</title></info>
+    <section xml:id="zend.service.nirvanix.features"><title>Features</title>
         
 
         <para>
@@ -107,7 +107,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.storing-your-first"><info><title>Getting Started</title></info>
+    <section xml:id="zend.service.nirvanix.storing-your-first"><title>Getting Started</title>
         
 
         <para>
@@ -158,7 +158,7 @@ $imfs->unlink('/foo.txt');
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.understanding-proxy"><info><title>Understanding the Proxy</title></info>
+    <section xml:id="zend.service.nirvanix.understanding-proxy"><title>Understanding the Proxy</title>
         
 
         <para>
@@ -228,7 +228,7 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.examining-results"><info><title>Examining Results</title></info>
+    <section xml:id="zend.service.nirvanix.examining-results"><title>Examining Results</title>
         
 
         <para>
@@ -283,7 +283,7 @@ Zend_Service_Nirvanix_Response Object
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.handling-errors"><info><title>Handling Errors</title></info>
+    <section xml:id="zend.service.nirvanix.handling-errors"><title>Handling Errors</title>
         
 
         <para>

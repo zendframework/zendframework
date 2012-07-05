@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf;
 use Zend\Pdf\Exception;
 
@@ -36,21 +33,6 @@ use Zend\Memory;
  * Class agregates document level properties and entities (pages, bookmarks,
  * document level actions, attachments, form object, etc)
  *
- * @uses       \Zend\Memory\MemoryManager
- * @uses       \Zend\Pdf\Color
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\Font
- * @uses       \Zend\Pdf\Image
- * @uses       \Zend\Pdf\InternalStructure
- * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\ObjectFactory
- * @uses       \Zend\Pdf\Outline
- * @uses       \Zend\Pdf\Page
- * @uses       \Zend\Pdf\PdfParser\StructureParser
- * @uses       \Zend\Pdf\Resource\Font\Extracted
- * @uses       \Zend\Pdf\Style
- * @uses       \Zend\Pdf\Trailer
- * @uses       \Zend\Pdf\Util
  * @category   Zend
  * @package    Zend_PDF
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -240,7 +222,7 @@ class PdfDocument
      *
      * @param string $filename
      * @param boolean $updateOnly
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function save($filename, $updateOnly = false)
     {
@@ -269,7 +251,7 @@ class PdfDocument
      *
      * @param string  $source - PDF file to load
      * @param integer $revision
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      * @return \Zend\Pdf\PdfDocument
      */
     public function __construct($source = null, $revision = null, $load = false)
@@ -451,7 +433,7 @@ class PdfDocument
      *
      * @param \Zend\Pdf\InternalType\IndirectObjectReference $root Document catalog entry
      * @param string $pdfHeaderVersion
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     protected function _loadNamedDestinations(InternalType\IndirectObjectReference $root, $pdfHeaderVersion)
     {
@@ -558,7 +540,7 @@ class PdfDocument
 
         // Refresh named destinations list
         foreach ($this->_namedTargets as $name => $namedTarget) {
-            if ($namedTarget instanceof Destination\Explicit) {
+            if ($namedTarget instanceof Destination\AbstractExplicitDestination) {
                 // Named target is an explicit destination
                 if ($this->resolveDestination($namedTarget, false) === null) {
                     unset($this->_namedTargets[$name]);
@@ -846,7 +828,7 @@ class PdfDocument
      * Return specified named destination
      *
      * @param string $name
-     * @return \Zend\Pdf\Destination\Explicit|\Zend\Pdf\Action\GoToAction
+     * @return \Zend\Pdf\Destination\AbstractExplicitDestination|\Zend\Pdf\Action\GoToAction
      */
     public function getNamedDestination($name)
     {
@@ -861,13 +843,13 @@ class PdfDocument
      * Set specified named destination
      *
      * @param string $name
-     * @param \Zend\Pdf\Destination\Explicit|\Zend\Pdf\Action\GoToAction $target
+     * @param \Zend\Pdf\Destination\AbstractExplicitDestination|\Zend\Pdf\Action\GoToAction $target
      */
     public function setNamedDestination($name, $destination = null)
     {
         if ($destination !== null  &&
             !$destination instanceof Action\GoToAction  &&
-            !$destination instanceof Destination\Explicit) {
+            !$destination instanceof Destination\AbstractExplicitDestination) {
             throw new Exception\InvalidArgumentException('PDF named destination must refer an explicit destination or a GoTo PDF action.');
         }
 
@@ -921,7 +903,7 @@ class PdfDocument
      * @param \Zend\Pdf\Destination\AbstractDestination $destination  Destination to resolve
      * @param boolean $refreshPagesHash  Refresh page collection hashes before processing
      * @return \Zend\Pdf\Page|null
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function resolveDestination(Destination\AbstractDestination $destination, $refreshPageCollectionHashes = true)
     {
@@ -942,7 +924,7 @@ class PdfDocument
                 $destination = $destination->getDestination();
             }
 
-            if (!$destination instanceof Destination\Explicit) {
+            if (!$destination instanceof Destination\AbstractExplicitDestination) {
                 throw new Exception\CorruptedPdfException('Named destination target has to be an explicit destination.');
             }
         }
@@ -1019,7 +1001,7 @@ class PdfDocument
      * returns array of \Zend\Pdf\Resource\Font\Extracted objects
      *
      * @return array
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function extractFonts()
     {
@@ -1069,7 +1051,7 @@ class PdfDocument
      * $fontName should be specified in UTF-8 encoding
      *
      * @return \Zend\Pdf\Resource\Font\Extracted|null
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function extractFont($fontName)
     {
@@ -1126,7 +1108,7 @@ class PdfDocument
      * @param boolean $newSegmentOnly
      * @param resource $outputStream
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function render($newSegmentOnly = false, $outputStream = null)
     {

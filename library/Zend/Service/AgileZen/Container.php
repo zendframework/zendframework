@@ -21,10 +21,10 @@
 
 namespace Zend\Service\AgileZen;
 
-use ArrayAccess,
-    Countable,
-    Iterator,
-    Traversable;
+use ArrayAccess;
+use Countable;
+use Iterator;
+use Traversable;
 
 /**
  * @category   Zend
@@ -109,7 +109,7 @@ class Container implements Countable, Iterator, ArrayAccess
             if (!empty($this->projectId)) {
                 $obj['projectId'] = $this->projectId;
             }
-            $this->addObject(new $this->resource($this->service,$obj));
+            $this->addObject(new $this->resource($this->service, $obj));
         }
     }
 

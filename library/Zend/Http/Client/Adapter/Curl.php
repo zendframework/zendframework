@@ -20,14 +20,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Http\Client\Adapter;
-use Zend\Http\Client\Adapter as HttpAdapter,
-    Zend\Http\Client\Adapter\Exception as AdapterException,
-    Zend\Http\Client,
-    Zend\Http\Request;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter;
+use Zend\Http\Client\Adapter\Exception as AdapterException;
+use Zend\Http\Client;
+use Zend\Http\Request;
 
 /**
  * An adapter class for Zend\Http\Client based on the curl extension.
@@ -39,7 +39,7 @@ use Zend\Http\Client\Adapter as HttpAdapter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Curl implements HttpAdapter, Stream
+class Curl implements HttpAdapter, StreamInterface
 {
     /**
      * Parameters array
@@ -86,10 +86,10 @@ class Curl implements HttpAdapter, Stream
     /**
      * Adapter constructor
      *
-     * Config is set using setConfig()
+     * Config is set using setOptions()
      *
      * @return void
-     * @throws \Zend\Http\Client\Adapter\Exception
+     * @throws AdapterException\InitializationException
      */
     public function __construct()
     {
@@ -118,32 +118,33 @@ class Curl implements HttpAdapter, Stream
     /**
      * Set the configuration array for the adapter
      *
-     * @throws \Zend\Http\Client\Adapter\Exception
-     * @param  \Zend\Config\Config | array $config
-     * @return \Zend\Http\Client\Adapter\Curl
+     * @param  array|Traversable $options
+     * @return Curl
+     * @throws AdapterException\InvalidArgumentException
      */
-    public function setConfig($config = array())
+    public function setOptions($options = array())
     {
-        if ($config instanceof \Zend\Config\Config) {
-            $config = $config->toArray();
-        } elseif (!is_array($config)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             throw new AdapterException\InvalidArgumentException(
-                'Array or Zend\Config\Config object expected, got ' . gettype($config)
+                'Array or Traversable object expected, got ' . gettype($options)
             );
         }
 
         /** Config Key Normalization */
-        foreach ($config as $k => $v) {
-            unset($config[$k]); // unset original value
-            $config[str_replace(array('-', '_', ' ', '.'), '', strtolower($k))] = $v; // replace w/ normalized
+        foreach ($options as $k => $v) {
+            unset($options[$k]); // unset original value
+            $options[str_replace(array('-', '_', ' ', '.'), '', strtolower($k))] = $v; // replace w/ normalized
         }
 
-        if(isset($config['proxyuser']) && isset($config['proxypass'])) {
-            $this->setCurlOption(CURLOPT_PROXYUSERPWD, $config['proxyuser'].":".$config['proxypass']);
-            unset($config['proxyuser'], $config['proxypass']);
+        if (isset($options['proxyuser']) && isset($options['proxypass'])) {
+            $this->setCurlOption(CURLOPT_PROXYUSERPWD, $options['proxyuser'].":".$options['proxypass']);
+            unset($options['proxyuser'], $options['proxypass']);
         }
 
-        foreach ($config as $k => $v) {
+        foreach ($options as $k => $v) {
             $option = strtolower($k);
             switch($option) {
                 case 'proxyhost':
@@ -176,7 +177,7 @@ class Curl implements HttpAdapter, Stream
      *
      * @param  string|int $option
      * @param  mixed $value
-     * @return Zend\Http\Adapter\Curl
+     * @return Curl
      */
     public function setCurlOption($option, $value)
     {
@@ -194,7 +195,7 @@ class Curl implements HttpAdapter, Stream
      * @param  int     $port
      * @param  boolean $secure
      * @return void
-     * @throws \Zend\Http\Client\Adapter\Exception if unable to connect
+     * @throws AdapterException\RuntimeException if unable to connect
      */
     public function connect($host, $port = 80, $secure = false)
     {
@@ -253,7 +254,7 @@ class Curl implements HttpAdapter, Stream
      * @param  array         $headers
      * @param  string        $body
      * @return string        $request
-     * @throws \Zend\Http\Client\Adapter\Exception If connection fails, connected to wrong host, no PUT file defined, unsupported method, or unsupported cURL option
+     * @throws AdapterException\RuntimeException If connection fails, connected to wrong host, no PUT file defined, unsupported method, or unsupported cURL option
      */
     public function write($method, $uri, $httpVersion = 1.1, $headers = array(), $body = '')
     {
@@ -283,7 +284,7 @@ class Curl implements HttpAdapter, Stream
             case 'PUT' :
                 // There are two different types of PUT request, either a Raw Data string has been set
                 // or CURLOPT_INFILE and CURLOPT_INFILESIZE are used.
-                if(is_resource($body)) {
+                if (is_resource($body)) {
                     $this->config['curloptions'][CURLOPT_INFILE] = $body;
                 }
                 if (isset($this->config['curloptions'][CURLOPT_INFILE])) {
@@ -291,7 +292,7 @@ class Curl implements HttpAdapter, Stream
                     // from $headers at this point:
                     foreach ($headers AS $k => $header) {
                         if (preg_match('/Content-Length:\s*(\d+)/i', $header, $m)) {
-                            if(is_resource($body)) {
+                            if (is_resource($body)) {
                                 $this->config['curloptions'][CURLOPT_INFILESIZE] = (int)$m[1];
                             }
                             unset($headers[$k]);
@@ -302,7 +303,7 @@ class Curl implements HttpAdapter, Stream
                         throw new AdapterException\RuntimeException("Cannot set a file-handle for cURL option CURLOPT_INFILE without also setting its size in CURLOPT_INFILESIZE.");
                     }
 
-                    if(is_resource($body)) {
+                    if (is_resource($body)) {
                         $body = '';
                     }
 
@@ -327,7 +328,7 @@ class Curl implements HttpAdapter, Stream
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "TRACE";
                 break;
-            
+
             case 'HEAD' :
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "HEAD";
@@ -335,10 +336,10 @@ class Curl implements HttpAdapter, Stream
 
             default:
                 // For now, through an exception for unsupported request methods
-                throw new AdapterException\InvalidArgumentException("Method currently not supported");
+                throw new AdapterException\InvalidArgumentException("Method '$method' currently not supported");
         }
 
-        if(is_resource($body) && $curlMethod != CURLOPT_UPLOAD) {
+        if (is_resource($body) && $curlMethod != CURLOPT_UPLOAD) {
             throw new AdapterException\RuntimeException("Streaming requests are allowed only with PUT");
         }
 
@@ -349,7 +350,7 @@ class Curl implements HttpAdapter, Stream
         curl_setopt($this->curl, $curlHttp, true);
         curl_setopt($this->curl, $curlMethod, $curlValue);
 
-        if($this->outputStream) {
+        if ($this->outputStream) {
             // headers will be read into the response
             curl_setopt($this->curl, CURLOPT_HEADER, false);
             curl_setopt($this->curl, CURLOPT_HEADERFUNCTION, array($this, "readHeader"));
@@ -363,9 +364,22 @@ class Curl implements HttpAdapter, Stream
             curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
         }
 
+        // Treating basic auth headers in a special way
+        if (array_key_exists('Authorization', $headers) && 'Basic' == substr($headers['Authorization'], 0, 5)) {
+        	curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        	curl_setopt($this->curl, CURLOPT_USERPWD, base64_decode(substr($headers['Authorization'], 6)));
+        	unset($headers['Authorization']);
+        }
+
         // set additional headers
-        $headers['Accept'] = '';
-        curl_setopt($this->curl, CURLOPT_HTTPHEADER, $headers);
+        if (!isset($headers['Accept'])) {
+            $headers['Accept'] = '';
+        }
+        $curlHeaders = array();
+        foreach ($headers as $key => $value) {
+            $curlHeaders[] = $key . ': ' . $value;
+        }
+        curl_setopt($this->curl, CURLOPT_HTTPHEADER, $curlHeaders);
 
         /**
          * Make sure POSTFIELDS is set after $curlMethod is set:
@@ -401,7 +415,7 @@ class Curl implements HttpAdapter, Stream
         $response = curl_exec($this->curl);
 
         // if we used streaming, headers are already there
-        if(!is_resource($this->outputStream)) {
+        if (!is_resource($this->outputStream)) {
             $this->response = $response;
         }
 
@@ -452,7 +466,7 @@ class Curl implements HttpAdapter, Stream
      */
     public function close()
     {
-        if(is_resource($this->curl)) {
+        if (is_resource($this->curl)) {
             curl_close($this->curl);
         }
         $this->curl         = null;
@@ -473,7 +487,7 @@ class Curl implements HttpAdapter, Stream
      * Set output stream for the response
      *
      * @param resource $stream
-     * @return \Zend\Http\Client\Adapter\Socket
+     * @return Curl
      */
     public function setOutputStream($stream)
     {

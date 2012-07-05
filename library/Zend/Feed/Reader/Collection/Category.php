@@ -18,13 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
  
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader\Collection;
 
 /**
-* @uses \Zend\Feed\Reader\Collection\CollectionAbstract
 * @category Zend
 * @package Zend_Feed_Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

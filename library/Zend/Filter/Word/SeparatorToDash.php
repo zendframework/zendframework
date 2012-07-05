@@ -18,13 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter\Word;
 
 /**
- * @uses       Zend_Filter_SeperatorToSeparator
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -36,7 +32,6 @@ class SeparatorToDash extends SeparatorToSeparator
      * Constructor
      *
      * @param  string  $searchSeparator  Seperator to search for change
-     * @return void
      */
     public function __construct($searchSeparator = ' ')
     {

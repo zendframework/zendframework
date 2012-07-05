@@ -13,14 +13,11 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Controller
+ * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\XmlRpc;
 
 /**
@@ -28,10 +25,6 @@ namespace Zend\XmlRpc;
  *
  * Container for accessing an XMLRPC return value and creating the XML response.
  *
- * @uses       SimpleXMLElement
- * @uses       \Zend\XmlRpc\Fault
- * @uses       \Zend\XmlRpc\Value
- * @uses       \Zend\XmlRpc\Value\Exception
  * @category   Zend
  * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -87,7 +80,7 @@ class Response
     public function setEncoding($encoding)
     {
         $this->_encoding = $encoding;
-        Value::setEncoding($encoding);
+        AbstractValue::setEncoding($encoding);
         return $this;
     }
 
@@ -133,7 +126,7 @@ class Response
      */
     protected function _getXmlRpcReturn()
     {
-        return Value::getXmlRpcValue($this->_return);
+        return AbstractValue::getXmlRpcValue($this->_return);
     }
 
     /**
@@ -174,11 +167,15 @@ class Response
             return false;
         }
 
+        // @see ZF-12293 - disable external entities for security purposes
+        $loadEntities         = libxml_disable_entity_loader(true);
+        $useInternalXmlErrors = libxml_use_internal_errors(true);
         try {
-            $useInternalXmlErrors = libxml_use_internal_errors(true);
             $xml = new \SimpleXMLElement($response);
+            libxml_disable_entity_loader($loadEntities);
             libxml_use_internal_errors($useInternalXmlErrors);
         } catch (\Exception $e) {
+            libxml_disable_entity_loader($loadEntities);
             libxml_use_internal_errors($useInternalXmlErrors);
             // Not valid XML
             $this->_fault = new Fault(651);
@@ -206,7 +203,7 @@ class Response
                 throw new Exception\ValueException('Missing XML-RPC value in XML');
             }
             $valueXml = $xml->params->param->value->asXML();
-            $value = Value::getXmlRpcValue($valueXml, Value::XML_STRING);
+            $value = AbstractValue::getXmlRpcValue($valueXml, AbstractValue::XML_STRING);
         } catch (Exception\ValueException $e) {
             $this->_fault = new Fault(653);
             $this->_fault->setEncoding($this->getEncoding());
@@ -225,7 +222,7 @@ class Response
     public function saveXml()
     {
         $value = $this->_getXmlRpcReturn();
-        $generator = Value::getGenerator();
+        $generator = AbstractValue::getGenerator();
         $generator->openElement('methodResponse')
                   ->openElement('params')
                   ->openElement('param');

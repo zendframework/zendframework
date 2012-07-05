@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Http;
 
 use Zend\Http\Client;
@@ -35,7 +32,7 @@ use Zend\Http\Client;
  */
 class ClientStatic
 {
-    
+
     protected static $client;
 
     /**
@@ -50,7 +47,7 @@ class ClientStatic
         }
         return self::$client;
     }
-    
+
     /**
      * HTTP GET METHOD (static)
      *
@@ -64,23 +61,23 @@ class ClientStatic
         if (empty($url)) {
             return false;
         }
-        
+
         $request= new Request();
         $request->setUri($url);
         $request->setMethod(Request::METHOD_GET);
-        
+
         if (!empty($query) && is_array($query)) {
-            $request->query()->fromArray($query);
+            $request->getQuery()->fromArray($query);
         }
-        
+
         if (!empty($headers) && is_array($headers)) {
-            $request->headers()->addHeaders($headers);
+            $request->getHeaders()->addHeaders($headers);
         }
-        
+
         if (!empty($body)) {
             $request->setBody($body);
         }
-        
+
         return self::getStaticClient()->send($request);
     }
     /**
@@ -96,29 +93,29 @@ class ClientStatic
         if (empty($url)) {
             return false;
         }
-        
+
         $request= new Request();
         $request->setUri($url);
         $request->setMethod(Request::METHOD_POST);
-        
+
         if (!empty($params) && is_array($params)) {
-            $request->post()->fromArray($params);
+            $request->getPost()->fromArray($params);
         } else {
             throw new Exception\InvalidArgumentException('The array of post parameters is empty');
         }
-        
+
         if (!isset($headers['Content-Type'])) {
             $headers['Content-Type']= Client::ENC_URLENCODED;
         }
-        
+
         if (!empty($headers) && is_array($headers)) {
-            $request->headers()->addHeaders($headers);
+            $request->getHeaders()->addHeaders($headers);
         }
-        
+
         if (!empty($body)) {
-            $request->setBody($body);
+            $request->setContent($body);
         }
-        
+
         return self::getStaticClient()->send($request);
     }
 }

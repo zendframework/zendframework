@@ -18,15 +18,11 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator\File;
 
 /**
  * Validator which checks if the destination file does not exist
  *
- * @uses      \Zend\Validator\File\Exists
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -42,7 +38,7 @@ class NotExists extends Exists
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::DOES_EXIST => "File '%value%' exists",
     );
 
@@ -58,7 +54,7 @@ class NotExists extends Exists
         $directories = $this->getDirectory(true);
         if (($file !== null) and (!empty($file['destination']))) {
             $directories[] = $file['destination'];
-        } else if (!isset($file['name'])) {
+        } elseif (!isset($file['name'])) {
             $file['name'] = $value;
         }
 
@@ -69,12 +65,12 @@ class NotExists extends Exists
 
             $check = true;
             if (file_exists($directory . DIRECTORY_SEPARATOR . $file['name'])) {
-                return $this->_throw($file, self::DOES_EXIST);
+                return $this->throwError($file, self::DOES_EXIST);
             }
         }
 
         if (!isset($check)) {
-            return $this->_throw($file, self::DOES_EXIST);
+            return $this->throwError($file, self::DOES_EXIST);
         }
 
         return true;

@@ -19,23 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\App;
 
 /**
  * Concrete class to use a file handle as an attachment within a MediaEntry.
  *
- * @uses       \Zend\GData\App\IOException
- * @uses       \Zend\Gdata\App\MediaData
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MediaFileSource extends BaseMediaSource
+class MediaFileSource extends AbstractBaseMediaSource
 {
     /**
      * The filename which is represented
@@ -52,7 +47,7 @@ class MediaFileSource extends BaseMediaSource
     protected $_contentType = null;
 
     /**
-     * Create a new \Zend\Gdata\App\MediaFileSource object.
+     * Create a new \Zend\GData\App\MediaFileSource object.
      *
      * @param string $filename The name of the file to read from.
      */

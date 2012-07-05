@@ -18,35 +18,19 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter\File;
-use Zend\Filter,
-    Zend\Filter\Exception;
+
+use Zend\Filter\StringToLower;
+use Zend\Filter\Exception;
 
 /**
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\StringToLower
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class LowerCase extends Filter\StringToLower
+class LowerCase extends StringToLower
 {
-    /**
-     * Adds options to the filter at initiation
-     *
-     * @param string $options
-     */
-    public function __construct($options = null)
-    {
-        if (!empty($options)) {
-            $this->setEncoding($options);
-        }
-    }
-
     /**
      * Defined by Zend\Filter\Filter
      *
@@ -54,9 +38,10 @@ class LowerCase extends Filter\StringToLower
      *
      * @param  string $value Full path of file to change
      * @return string The given $value
-     * @throws \Zend\Filter\Exception
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         if (!file_exists($value)) {
             throw new Exception\InvalidArgumentException("File '$value' not found");
@@ -71,7 +56,7 @@ class LowerCase extends Filter\StringToLower
             throw new Exception\RuntimeException("Problem while reading file '$value'");
         }
 
-        $content = parent::__invoke($content);
+        $content = parent::filter($content);
         $result  = file_put_contents($value, $content);
 
         if (!$result) {

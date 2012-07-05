@@ -18,5 +18,4 @@ class DummyPattern extends Cache\Pattern\AbstractPattern
     {
         return $this->_dummyOption;
     }
-
 }

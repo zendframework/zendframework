@@ -19,31 +19,25 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Log\Formatter;
 
-use Zend\Log\Formatter,
-    Zend\Config\Config;
+use Zend\Log\Exception;
 
 /**
- * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Formatter\AbstractFormatter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Simple extends AbstractFormatter
+class Simple implements FormatterInterface
 {
     /**
      * @var string
      */
     protected $_format;
 
-    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message%';
+    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message% %info%';
 
     /**
      * Class constructor
@@ -59,32 +53,10 @@ class Simple extends AbstractFormatter
         }
 
         if (!is_string($format)) {
-            throw new \Zend\Log\Exception\InvalidArgumentException('Format must be a string');
+            throw new Exception\InvalidArgumentException('Format must be a string');
         }
 
         $this->_format = $format;
-    }
-
-    /**
-	 * Factory for Zend_Log_Formatter_Simple classe
-	 *
-	 * @param array|Config $options
-	 * @return \Zend\Log\Formatter\Simple
-     */
-    public static function factory($options = array())
-    {
-        $format = null;
-        if (null !== $options) {
-            if ($options instanceof Config) {
-                $options = $options->toArray();
-            }
-
-            if (array_key_exists('format', $options)) {
-                $format = $options['format'];
-            }
-        }
-
-        return new self($format);
     }
 
     /**
@@ -97,6 +69,9 @@ class Simple extends AbstractFormatter
     {
         $output = $this->_format;
 
+        if (!isset($event['info'])) {
+            $event['info'] = '';
+        }
         foreach ($event as $name => $value) {
             if ((is_object($value) && !method_exists($value,'__toString'))
                 || is_array($value)

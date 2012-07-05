@@ -19,22 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Search\Similarity;
 
-use Zend\Search\Lucene\Search\Similarity;
+use Zend\Search\Lucene\Search\Similarity\AbstractSimilarity;
 
 /**
- * @uses       \Zend\Search\Lucene\Search\Similarity
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DefaultSimilarity extends Similarity
+class DefaultSimilarity extends AbstractSimilarity
 {
 
     /**

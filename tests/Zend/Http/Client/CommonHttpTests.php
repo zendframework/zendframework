@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Http\Client;
 use Zend\Http\Client as HTTPClient,
     Zend\Http,
@@ -72,7 +69,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     /**
      * Common HTTP client adapter
      *
-     * @var \Zend\Http\Client\Adapter
+     * @var \Zend\Http\Client\Adapter\AdapterInterface
      */
     protected $_adapter = null;
 
@@ -135,7 +132,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     public function testSimpleRequests()
     {
         $methods= array(Request::METHOD_GET, Request::METHOD_POST, Request::METHOD_OPTIONS,
-                        Request::METHOD_PUT, Request::METHOD_DELETE);
+                        Request::METHOD_PUT, Request::METHOD_DELETE, Request::METHOD_PATCH);
 
         foreach ($methods as $method) {
             $this->client->setMethod($method);
@@ -194,10 +191,31 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->client->setEncType(HTTPClient::ENC_URLENCODED);
 
         $this->client->setParameterPost($params);
-        
+
         $this->client->setMethod('POST');
+        $this->assertFalse($this->client->getRequest()->isPatch());
         $res = $this->client->send();
         $this->assertEquals(serialize($params), $res->getBody(), "POST data integrity test failed");
+    }
+
+    /**
+     * Test we can properly send PATCH parameters with
+     * application/x-www-form-urlencoded content type
+     *
+     * @dataProvider parameterArrayProvider
+     */
+    public function testPatchData($params)
+    {
+        $client = $this->client;
+        $client->setUri($this->baseuri . 'testPatchData.php');
+
+        $client->setRawBody(serialize($params));
+
+        $client->setMethod('PATCH');
+        $this->assertEquals($client::ENC_URLENCODED, $this->client->getEncType());
+        $this->assertTrue($client->getRequest()->isPatch());
+        $res = $this->client->send();
+        $this->assertEquals(serialize($params), $res->getBody(), "PATCH data integrity test failed");
     }
 
     /**
@@ -250,7 +268,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->client->setParameterGet($params);
         $this->client->setHeaders($headers);
         $this->client->setMethod('POST');
-        
+
         $res = $this->client->send();
 
         $this->assertContains(serialize($params) . "\n" . serialize($params),
@@ -318,7 +336,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         $this->client->setHeaders($headers);
         $this->client->setMethod('TRACE');
-        
+
         $res = $this->client->send();
         if ($res->getStatusCode() == 405 || $res->getStatusCode() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
@@ -328,8 +346,6 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         foreach ($headers as $key => $val)
             $this->assertContains(strtolower("$key: $val"), $body);
-
-        $this->assertContains(strtolower($acceptHeader), $body);
     }
 
     /**
@@ -349,7 +365,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         $this->client->setHeaders($headers);
         $this->client->setMethod('TRACE');
-        
+
         $res = $this->client->send();
         if ($res->getStatusCode() == 405 || $res->getStatusCode() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
@@ -389,7 +405,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         $this->client->setHeaders($headers);
         $this->client->setMethod('TRACE');
-        
+
         $res = $this->client->send();
         if ($res->getStatusCode() == 405 || $res->getStatusCode() == 501) {
             $this->markTestSkipped("Server does not allow the TRACE method");
@@ -478,14 +494,14 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->client->setParameterPost(array('Camelot' => 'A silly place'));
 
         // Set strict redirections
-        $this->client->setConfig(array('strictredirects' => true));
+        $this->client->setOptions(array('strictredirects' => true));
 
         // Request
         $this->client->setMethod('POST');
         $res = $this->client->send();
 
         $this->assertEquals(3, $this->client->getRedirectionsCount(), 'Redirection counter is not as expected');
-        
+
         // Make sure the body *does* contain the set parameters
         $this->assertContains('swallow', $res->getBody());
         $this->assertContains('Camelot', $res->getBody());
@@ -505,7 +521,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         // Set lower max redirections
         // Try with strict redirections first
-        $this->client->setConfig(array('strictredirects' => true, 'maxredirects' => 2));
+        $this->client->setOptions(array('strictredirects' => true, 'maxredirects' => 2));
 
         $this->client->setMethod('POST');
         $res = $this->client->send();
@@ -514,7 +530,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         // Then try with normal redirections
         $this->client->setParameterGet(array('redirection' => '0'));
-        $this->client->setConfig(array('strictredirects' => false));
+        $this->client->setOptions(array('strictredirects' => false));
         $this->client->setMethod('POST');
         $res = $this->client->send();
         $this->assertTrue($res->isRedirect(),
@@ -529,14 +545,14 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     {
         $this->client->setUri($this->baseuri . 'testRelativeRedirections.php');
         $this->client->setParameterGet(array('redirect' => 'abpath'));
-        $this->client->setConfig(array('maxredirects' => 1));
+        $this->client->setOptions(array('maxredirects' => 1));
 
         // Get the host and port part of our baseuri
-        $port = ($this->client->getUri()->getPort() == 80) ? '' : ':' .$this->client->getUri()->getPort(); 
+        $port = ($this->client->getUri()->getPort() == 80) ? '' : ':' .$this->client->getUri()->getPort();
         $uri = $this->client->getUri()->getScheme() . '://' . $this->client->getUri()->getHost() . $port;
-        
+
         $res = $this->client->send();
-        
+
         $this->assertEquals("{$uri}/path/to/fake/file.ext?redirect=abpath", $this->client->getUri()->toString(),
             "The new location is not as expected: {$this->client->getUri()->toString()}");
     }
@@ -549,7 +565,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     {
         $this->client->setUri($this->baseuri . 'testRelativeRedirections.php');
         $this->client->setParameterGet(array('redirect' => 'relpath'));
-        $this->client->setConfig(array('maxredirects' => 1));
+        $this->client->setOptions(array('maxredirects' => 1));
 
         // Set the new expected URI
         $uri = clone $this->client->getUri();
@@ -640,7 +656,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->client->setCookies($cookies);
 
         $res = $this->client->send();
-            
+
         $this->assertEquals($res->getBody(), serialize($cookies), 'Response body does not contain the expected cookies');
     }
 
@@ -817,7 +833,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             $expectedBody .= "uploadfile $filename text/plain " . strlen($rawData) . "\n";
         }
         $this->client->setMethod('POST');
-        
+
         $res = $this->client->send();
 
         $this->assertEquals($expectedBody, $res->getBody(), 'Response body does not include expected upload parameters');
@@ -840,7 +856,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
     public function testStreamResponse()
     {
-        if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
+        if(!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;
         }
@@ -866,8 +882,8 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     public function testStreamResponseBody()
     {
         $this->markTestSkipped('To check with the new ZF2 implementation');
-        
-        if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
+
+        if(!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;
         }
@@ -887,7 +903,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
     public function testStreamResponseNamed()
     {
-        if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
+        if(!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;
         }
@@ -913,7 +929,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
     public function testStreamRequest()
     {
-        if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
+        if(!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;
         }
@@ -941,8 +957,8 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             throw new AdapterException\RuntimeException("Error requesting test URL");
         }
 
-        $clen = $response->headers()->get('Content-Length');
-        
+        $clen = $response->getHeaders()->get('Content-Length');
+
         if (! (is_array($clen))) {
             $this->markTestSkipped("Didn't get multiple Content-length headers");
         }
@@ -966,11 +982,11 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->client->setMethod(\Zend\Http\Request::METHOD_POST);
 
         $this->client->setParameterPost($params);
-        
+
         $this->client->send();
         $request = Request::fromString($this->client->getLastRawRequest());
-        $this->assertEquals($content_type, 
-                            $request->headers()->get('Content-Type')->getFieldValue());
+        $this->assertEquals($content_type,
+                            $request->getHeaders()->get('Content-Type')->getFieldValue());
     }
 
     /**

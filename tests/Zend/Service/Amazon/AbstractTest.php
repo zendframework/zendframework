@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon;
 use Zend\Service\Amazon;
 
@@ -38,21 +35,6 @@ use Zend\Service\Amazon;
  */
 class AmamzonAbstract extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Prepares the environment before running a test.
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        parent::tearDown();
-    }
 
     public function testNoKeysThrowException()
     {

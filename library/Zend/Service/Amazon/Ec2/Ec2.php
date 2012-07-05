@@ -19,18 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Amazon\Ec2;
-use Zend\Service\Amazon,
-    Zend\Service\Amazon\Ec2\Exception;
+use Zend\Service\Amazon;
+use Zend\Service\Amazon\Ec2\Exception;
 
 /**
  * Amazon Ec2 Interface to allow easy creation of the Ec2 Components
  *
- * @uses       Zend_Loader
- * @uses       Zend\Service\Amazon\Ec2\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon

@@ -19,16 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Books\Extension;
 
 /**
  * Describes an annotation link
  *
- * @uses       \Zend\GData\Books
- * @uses       \Zend\GData\Books\Extension\BooksLink
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books
@@ -49,8 +44,6 @@ class AnnotationLink extends
      * @param string|null $hrefLang Resource language
      * @param string|null $title Human-readable resource title
      * @param string|null $length Resource length in octets
-     * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
      */
     public function __construct($href = null, $rel = null, $type = null,
             $hrefLang = null, $title = null, $length = null)

@@ -19,17 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Test\PHPUnit\Db\DataSet;
 
 /**
  * Use a Zend_Db_Table for assertions with other PHPUnit Database Extension table types.
  *
- * @uses       PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData
- * @uses       PHPUnit_Extensions_Database_DataSet_QueryTable
- * @uses       \Zend\Db\Table\AbstractTable
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

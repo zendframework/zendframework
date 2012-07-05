@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.intro"><info><title>Zend Framework &amp; MVC Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.intro"><title>Zend Framework &amp; MVC Introduction</title>
     
 
-    <section xml:id="learning.quickstart.intro.zf"><info><title>Zend Framework</title></info>
+    <section xml:id="learning.quickstart.intro.zf"><title>Zend Framework</title>
         
 
         <para>
@@ -43,7 +43,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="learning.quickstart.intro.mvc"><info><title>Model-View-Controller</title></info>
+    <section xml:id="learning.quickstart.intro.mvc"><title>Model-View-Controller</title>
         
 
         <para>
@@ -60,7 +60,7 @@
             when more than one developer is working on the same application.
         </para>
 
-        <note><info><title>More Information</title></info>
+        <note><title>More Information</title>
             
 
             <para>

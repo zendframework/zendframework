@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData;
 
 /**
@@ -72,7 +69,7 @@ class ClientLogin
      * @return \Zend\GData\HttpClient
      */
     public static function getHttpClient($email, $password, $service = 'xapi',
-        $client = null,
+        HttpClient $client = null,
         $source = self::DEFAULT_SOURCE,
         $loginToken = null,
         $loginCaptcha = null,
@@ -88,34 +85,29 @@ class ClientLogin
         if ($client == null) {
             $client = new HttpClient();
         }
-        
-        if (!$client instanceof \Zend\Http\Client) {
-            throw new App\HttpException(
-                    'Client is not an instance of Zend\Http\Client.');
-        }
 
         // Build the HTTP client for authentication
         $client->setUri($loginUri);
         $client->setMethod('POST');
         $useragent = $source . ' Zend_Framework_Gdata/' . \Zend\Version::VERSION;
-        $client->setConfig(array(
+        $client->setOptions(array(
                 'maxredirects'    => 0,
                 'strictredirects' => true,
                 'useragent' => $useragent
             )
         );
-        
+
         $client->setEncType('multipart/form-data');
-        
+
         $postParams = array('accountType' => $accountType,
                             'Email'       => (string)$email,
                             'Passwd'      => (string) $password,
                             'service'     => (string) $service,
                             'source'      => (string) $source);
-        
+
         if ($loginToken || $loginCaptcha) {
             if($loginToken && $loginCaptcha) {
-                $postParams += array('logintoken' => (string)$loginToken, 
+                $postParams += array('logintoken' => (string)$loginToken,
                                      'logincaptcha' => (string)$loginCaptcha);
             } else {
                 throw new App\AuthException(
@@ -123,20 +115,20 @@ class ClientLogin
                     'to the CAPTCHA challenge.');
             }
         }
-        
+
         $client->setParameterPost($postParams);
-        
+
         // Send the authentication request
         // For some reason Google's server causes an SSL error. We use the
         // output buffer to supress an error from being shown. Ugly - but works!
         ob_start();
         try {
             $response = $client->send();
-        } catch (\Zend\Http\Client\Exception $e) {
+        } catch (\Zend\Http\Client\Exception\ExceptionInterface $e) {
             throw new App\HttpException($e->getMessage(), $e);
         }
         ob_end_clean();
-        
+
         // Parse Google's response
         $goog_resp = array();
         foreach (explode("\n", $response->getBody()) as $l) {
@@ -150,7 +142,7 @@ class ClientLogin
         if ($response->getStatusCode() == 200) {
             $client->setClientLoginToken($goog_resp['Auth']);
             $useragent = $source . ' Zend_Framework_Gdata/' . \Zend\Version::VERSION;
-            $client->setConfig(array(
+            $client->setOptions(array(
                     'strictredirects' => true,
                     'useragent' => $useragent
                 )

@@ -1,6 +1,9 @@
 <?php
 namespace Zend\Validator\Barcode;
-class MyBarcode2 extends \Zend\Validator\Barcode\AbstractAdapter
+
+use Zend\Validator\Barcode\AbstractAdapter;
+
+class MyBarcode2 extends AbstractAdapter
 {
     public function __construct()
     {

@@ -19,10 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Captcha;
+
+use ArrayObject;
+use Zend\Captcha\Figlet as FigletCaptcha;
+use Zend\Session\Container as SessionContainer;
 use Zend\View\Renderer\PhpRenderer as View;
 
 /**
@@ -35,7 +36,7 @@ use Zend\View\Renderer\PhpRenderer as View;
  */
 class FigletTest extends CommonWordTest
 {
-    protected $wordClass = '\Zend\Captcha\Figlet';
+    protected $wordClass = 'Zend\Captcha\Figlet';
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -49,56 +50,9 @@ class FigletTest extends CommonWordTest
             unset($this->word);
         }
 
-        $this->element = new \Zend\Form\Element\Captcha(
-            'captchaF',
-            array(
-                'captcha' => array(
-                    'Figlet',
-                    'sessionClass' => 'ZendTest\\Captcha\\TestAsset\\SessionContainer'
-                )
-            )
-        );
-        $this->captcha =  $this->element->getCaptcha();
-    }
-
-    public function testCaptchaAdapterCreated()
-    {
-        $this->assertTrue($this->element->getCaptcha() instanceof \Zend\Captcha\Adapter);
-    }
-
-    public function getView()
-    {
-        $view = new View();
-        return $view;
-    }
-
-    public function testCaptchaIsRendered()
-    {
-        $html = $this->element->render($this->getView());
-        $this->assertContains($this->element->getName(), $html);
-    }
-
-    public function testCaptchaHasIdAndInput()
-    {
-        $html = $this->element->render($this->getView());
-        $expect = sprintf('type="hidden" name="%s\[id\]" value="%s"', $this->element->getName(), $this->captcha->getId());
-        $this->assertRegexp("/<input[^>]*?$expect/", $html, $html);
-        $expect = sprintf('type="text" name="%s\[input\]"', $this->element->getName());
-        $this->assertRegexp("/<input[^>]*?$expect/", $html, $html);
-    }
-
-    /*
-     * @group ZF-8268
-     */
-    public function testLabelIdIsCorrect()
-    {
-        $form = new \Zend\Form\Form();
-        $form->setElementsBelongTo('comment');
-        $this->element->setLabel("My Captcha");
-        $form->addElement($this->element);
-        $html = $form->render($this->getView());
-        $expect = sprintf('for="comment-%s-input"', $this->element->getName());
-        $this->assertRegexp("/<label [^>]*?$expect/", $html, $html);
+        $this->captcha = new FigletCaptcha(array(
+            'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer'
+        ));
     }
 
     public function testTimeoutPopulatedByDefault()
@@ -144,12 +98,6 @@ class FigletTest extends CommonWordTest
         $this->word = $word;
     }
 
-    public function testAdapterElementName()
-    {
-        $this->assertEquals($this->captcha->getName(),
-                    $this->element->getName());
-    }
-
     public function testGenerateIsRandomised()
     {
         $id1 = $this->captcha->generate();
@@ -163,21 +111,9 @@ class FigletTest extends CommonWordTest
         $this->assertFalse($word1 == $word2);
     }
 
-    public function testRenderSetsValue()
+    public function testGenerateInitializesSessionData()
     {
-        $this->testCaptchaIsRendered();
-        $this->assertEquals($this->captcha->getId(),
-                $this->element->getValue());
-    }
-
-    public function testLabelIsNull()
-    {
-        $this->assertNull($this->element->getLabel());
-    }
-
-    public function testRenderInitializesSessionData()
-    {
-        $this->testCaptchaIsRendered();
+        $this->captcha->generate();
         $session = $this->captcha->getSession();
         $this->assertEquals($this->captcha->getTimeout(), $session->setExpirationSeconds);
         $this->assertEquals(1, $session->setExpirationHops);
@@ -186,41 +122,42 @@ class FigletTest extends CommonWordTest
 
     public function testWordValidates()
     {
-        $this->testCaptchaIsRendered();
-        $input = array($this->element->getName() => array("id" => $this->captcha->getId(), "input" => $this->captcha->getWord()));
-        $this->assertTrue($this->element->isValid("", $input));
+        $this->captcha->generate();
+        $input = array('id' => $this->captcha->getId() , 'input' => $this->captcha->getWord());
+        $this->assertTrue($this->captcha->isValid($input));
     }
 
     public function testMissingNotValid()
     {
-        $this->testCaptchaIsRendered();
-        $this->assertFalse($this->element->isValid("", array()));
-        $input = array($this->element->getName() => array("input" => "blah"));
-        $this->assertFalse($this->element->isValid("", $input));
+        $this->captcha->generate();
+        $this->assertFalse($this->captcha->isValid(''));
+        $this->assertFalse($this->captcha->isValid(array()));
+        $input = array('input' => 'blah');
+        $this->assertFalse($this->captcha->isValid($input));
     }
 
     public function testWrongWordNotValid()
     {
-        $this->testCaptchaIsRendered();
-        $input = array($this->element->getName() => array("id" => $this->captcha->getId(), "input" => "blah"));
-        $this->assertFalse($this->element->isValid("", $input));
+        $this->captcha->generate();
+        $input = array("id" => $this->captcha->getId(), "input" => "blah");
+        $this->assertFalse($this->captcha->isValid($input));
     }
 
-    public function testUsesWordCaptchaDecoratorByDefault()
+    public function testUsesFigletCaptchaHelperByDefault()
     {
-        $this->assertEquals('Captcha\\Word', $this->element->getCaptcha()->getDecorator());
+        $this->assertEquals('captcha/figlet', $this->captcha->getHelperName());
     }
 
-    public function testCaptchaShouldBeConfigurableViaConfigObject()
+    public function testCaptchaShouldBeConfigurableViaTraversableObject()
     {
         $options = array(
             'name'         => 'foo',
-            'sessionClass' => 'ZendTest\\Captcha\\TestAsset\\SessionContainer',
+            'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
             'wordLen'      => 6,
             'timeout'      => 300,
         );
-        $config  = new \Zend\Config\Config($options);
-        $captcha = new \Zend\Captcha\Figlet($config);
+        $config  = new ArrayObject($options);
+        $captcha = new FigletCaptcha($config);
         $test = $captcha->getOptions();
         $this->assertEquals($options, $test);
     }
@@ -239,6 +176,7 @@ class FigletTest extends CommonWordTest
                       ->setWordLen(6)
                       ->setTimeout(300);
         $id = $this->captcha->generate();
+
         // Unset the generated word
         // we have to reset $this->captcha for that
         $this->captcha->getSession()->word = null;
@@ -251,38 +189,18 @@ class FigletTest extends CommonWordTest
     }
 
     /**
-     * @group ZF-3995
-     */
-    public function testIsValidShouldAllowPassingArrayValueAndOmittingContext()
-    {
-        $this->testCaptchaIsRendered();
-        $input = array($this->element->getName() => array("id" => $this->captcha->getId(), "input" => $this->captcha->getWord()));
-        $this->assertTrue($this->element->isValid($input));
-    }
-
-    /**
-     * @group ZF-3995
-     */
-    public function testIsValidShouldNotRequireValueToBeNestedArray()
-    {
-        $this->testCaptchaIsRendered();
-        $input = array("id" => $this->captcha->getId(), "input" => $this->captcha->getWord());
-        $this->assertTrue($this->element->isValid($input));
-    }
-
-    /**
      * @group ZF-5728
      */
     public function testSetSessionWorks()
     {
-        if(headers_sent($file, $line)) {
+        if (headers_sent($file, $line)) {
             $this->markTestSkipped("Cannot use sessions because headers already sent");
         }
-        $session = new \Zend\Session\Container('captcha');
+        $session = new SessionContainer('captcha');
         $this->captcha->setSession($session);
-        $this->testCaptchaIsRendered();
+        $this->captcha->generate();
         $input = array("id" => $this->captcha->getId(), "input" => $this->captcha->getWord());
-        $this->assertTrue($this->element->isValid($input));
+        $this->assertTrue($this->captcha->isValid($input));
         $this->assertEquals($session->word, $this->captcha->getWord());
     }
 }

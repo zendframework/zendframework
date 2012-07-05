@@ -19,15 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Soap\Wsdl;
 
 require_once __DIR__."/../TestAsset/commontypes.php";
 
 use Zend\Soap\Wsdl;
-
+use \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex;
 
 /**
  * @category   Zend
@@ -40,12 +37,15 @@ use Zend\Soap\Wsdl;
  */
 class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var \Zend\Soap\Wsdl */
     private $wsdl;
+
+    /** @var \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex */
     private $strategy;
 
     public function setUp()
     {
-        $this->strategy = new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex();
+        $this->strategy = new ArrayOfTypeComplex();
         $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php', $this->strategy);
     }
 
@@ -210,18 +210,5 @@ class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
             substr_count($wsdl, 'wsdl:arrayType="tns:ComplexTypeB[]"'),
             'No usage of Complex Type B array found.'
         );
-    }
-
-    /**
-     * @group ZF-5754
-     * @group ZF-8948
-     */
-    public function testNestingOfSameTypesDoesNotLeadToInfiniteRecursionButWillThrowException()
-    {
-        $this->markTestSkipped('It seems, it\'s obsolete.');
-        return;
-
-        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Infinite recursion');
-        $return = $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\Recursion');
     }
 }

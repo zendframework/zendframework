@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Filter;
 
 /**
- * Zend_Ldap_Filter_Not provides a negation filter.
+ * Zend\Ldap\Filter\NotFilter provides a negation filter.
  *
- * @uses       \Zend\Ldap\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter
@@ -39,28 +35,28 @@ class NotFilter extends AbstractFilter
     /**
      * The underlying filter.
      *
-     * @var \Zend\Ldap\Filter\AbstractFilter
+     * @var AbstractFilter
      */
-    private $_filter;
+    private $filter;
 
     /**
-     * Creates a Zend_Ldap_Filter_Not.
+     * Creates a Zend\Ldap\Filter\NotFilter.
      *
-     * @param \Zend\Ldap\Filter\AbstractFilter $filter
+     * @param AbstractFilter $filter
      */
     public function __construct(AbstractFilter $filter)
     {
-        $this->_filter = $filter;
+        $this->filter = $filter;
     }
 
     /**
      * Negates the filter.
      *
-     * @return \Zend\Ldap\Filter\AbstractFilter
+     * @return AbstractFilter
      */
     public function negate()
     {
-        return $this->_filter;
+        return $this->filter;
     }
 
     /**
@@ -70,6 +66,6 @@ class NotFilter extends AbstractFilter
      */
     public function toString()
     {
-        return '(!' . $this->_filter->toString() . ')';
+        return '(!' . $this->filter->toString() . ')';
     }
 }

@@ -21,13 +21,13 @@
 
 namespace Zend\Service\Nirvanix\Context;
 
-use Traversable,
-    Zend\Http\Client as HttpClient,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\Service\Nirvanix\Exception,
-    Zend\Service\Nirvanix\Response,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
+use Zend\Service\Nirvanix\Exception;
+use Zend\Service\Nirvanix\Response;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * The Nirvanix web services are split into namespaces.  This is a proxy class

@@ -18,17 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 
-use Zend\Paginator,
-    Zend\View,
-    Zend\View\Exception;
+use Zend\Paginator;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
- * @uses       \Zend\View\Exception
  * @category   Zend
  * @package    Zend_View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

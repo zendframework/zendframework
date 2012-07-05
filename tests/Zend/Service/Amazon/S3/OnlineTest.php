@@ -19,14 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon\S3;
 
-use Zend\Service\Amazon\S3,
-    Zend\Service\Amazon\S3\Exception,
-    Zend\Http\Response;
+use Zend\Service\Amazon\S3;
+use Zend\Service\Amazon\S3\Exception;
+use Zend\Http\Response;
 
 /**
  * @category   Zend
@@ -62,7 +59,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')) {
-            $this->markTestSkipped('Zend_Service_Amazon_S3 online tests are not enabled');
+            $this->markTestSkipped('Zend_Service_Amazon online tests are not enabled');
         }
         $this->_amazon = new S3\S3(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
                                                     constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')

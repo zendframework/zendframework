@@ -18,22 +18,20 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Http\Client;
 
-use Zend\Stdlib\ParametersDescription,
+use Zend\Stdlib\ParametersInterface,
     Zend\Uri,
     Zend\Http\Header\Cookie,
-    Zend\Http\Response;
+    Zend\Http\Response,
+    ArrayIterator;
 
 /**
  * A Cookies object is designed to contain and maintain HTTP cookies, and should
  * be used along with Zend_Http_Client in order to manage cookies across HTTP requests and
  * responses.
  *
- * The class contains an array of Zend\Http\Header\Cookie objects. Cookies can be added 
+ * The class contains an array of Zend\Http\Header\Cookie objects. Cookies can be added
  * automatically from a request or manually. Then, the Cookies class can find and return the
  * cookies needed for a specific HTTP request.
  *
@@ -51,7 +49,7 @@ use Zend\Stdlib\ParametersDescription,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Cookies //implements ParametersDescription
+class Cookies
 {
     /**
      * Return cookie(s) as a Zend\Http\Header\Cookie object
@@ -98,7 +96,7 @@ class Cookies //implements ParametersDescription
     protected $_rawCookies = array();
 
     /**
-     * Construct 
+     * Construct
      *
      */
     public function __construct()
@@ -139,13 +137,9 @@ class Cookies //implements ParametersDescription
      * @param Response $response
      * @param Uri\Uri|string $ref_uri Requested URI
      */
-    public function addCookiesFromResponse($response, $ref_uri)
+    public function addCookiesFromResponse(Response $response, $ref_uri)
     {
-        if (!$response instanceof Response) {
-            throw new Exception\InvalidArgumentException('$response is expected to be a Response object');
-        }
-
-        $cookie_hdrs = $response->headers()->get('Set-Cookie');
+        $cookie_hdrs = $response->getHeaders()->get('Set-Cookie');
 
         if (is_array($cookie_hdrs)) {
             foreach ($cookie_hdrs as $cookie) {
@@ -184,8 +178,7 @@ class Cookies //implements ParametersDescription
     {
         if (is_string($uri)) {
             $uri = Uri\UriFactory::factory($uri, 'http');
-        }
-        if (!$uri instanceof Uri\Uri) {
+        } elseif (!$uri instanceof Uri\Uri) {
             throw new Exception\InvalidArgumentException("Invalid URI string or object passed");
         }
 
@@ -223,9 +216,7 @@ class Cookies //implements ParametersDescription
     {
         if (is_string($uri)) {
             $uri = Uri\UriFactory::factory($uri, 'http');
-        }
-
-        if (!$uri instanceof Uri\Uri) {
+        } elseif (!$uri instanceof Uri\Uri) {
             throw new Exception\InvalidArgumentException('Invalid URI specified');
         }
 
@@ -380,11 +371,11 @@ class Cookies //implements ParametersDescription
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->_rawCookies);
+        return new ArrayIterator($this->_rawCookies);
     }
 
     /**
-     * Tells if the array of cookies is empty 
+     * Tells if the array of cookies is empty
      *
      * @return bool
      */

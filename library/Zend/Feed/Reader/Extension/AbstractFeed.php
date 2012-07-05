@@ -18,17 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader\Extension;
+
 use Zend\Feed\Reader;
+use DOMDocument;
+use DOMXPath;
 
 /**
-* @uses \DOMXPath
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Entry\Atom
-* @uses \Zend\Feed\Reader\Entry\RSS
 * @category Zend
 * @package Zend_Feed_Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -71,7 +67,7 @@ abstract class AbstractFeed
      * @param  string $type Feed type
      * @return void
      */
-    public function __construct(\DomDocument $dom, $type = null, \DOMXPath $xpath = null)
+    public function __construct(DOMDocument $dom, $type = null, DOMXPath $xpath = null)
     {
         $this->_domDocument = $dom;
 
@@ -84,7 +80,7 @@ abstract class AbstractFeed
         if ($xpath !== null) {
             $this->_xpath = $xpath;
         } else {
-            $this->_xpath = new \DOMXPath($this->_domDocument);
+            $this->_xpath = new DOMXPath($this->_domDocument);
         }
 
         $this->_registerNamespaces();
@@ -138,7 +134,7 @@ abstract class AbstractFeed
      * @param  DOMXPath $xpath
      * @return Reader\Reader_Extension_EntryAbstract
      */
-    public function setXpath(\DOMXPath $xpath)
+    public function setXpath(DOMXPath $xpath)
     {
         $this->_xpath = $xpath;
         $this->_registerNamespaces();
@@ -168,7 +164,7 @@ abstract class AbstractFeed
     /**
      * Set the XPath prefix
      *
-     * @return Reader\Reader_Feed_Atom
+     * @return void
      */
     public function setXpathPrefix($prefix)
     {

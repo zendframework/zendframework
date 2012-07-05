@@ -19,18 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Server\Reflection;
 
 /**
  * Method Reflection
  *
- * @uses       ReflectionClass
- * @uses       ReflectionMethod
- * @uses       \Zend\Server\Reflection\ClassReflection
- * @uses       \Zend\Server\Reflection\AbstractFunction
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Reflection

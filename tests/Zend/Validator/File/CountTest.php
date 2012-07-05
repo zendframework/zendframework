@@ -19,16 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Validator\File;
+
 use Zend\Validator\File;
 use Zend\Validator;
-
-/**
- * @see Zend_Validator_File_Count
- */
 
 /**
  * @category   Zend
@@ -90,7 +84,7 @@ class CountTest extends \PHPUnit_Framework_TestCase
         $validator = new File\Count(array('min' => 1, 'max' => 5));
         $this->assertEquals(1, $validator->getMin());
     }
-    
+
     public function testGetMinGreaterThanOrEqualThrowsException()
     {
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'greater than or equal');

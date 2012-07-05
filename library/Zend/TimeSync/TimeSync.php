@@ -18,22 +18,20 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\TimeSync;
+
+use ArrayObject;
+use DateTime;
+use IteratorAggregate;
 use Zend\TimeSync\Exception;
 
 /**
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Loader
- * @uses       \Zend\TimeSync\Exception
  * @category   Zend
  * @package    Zend_TimeSync
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TimeSync implements \IteratorAggregate
+class TimeSync implements IteratorAggregate
 {
     /**
      * Set the default timeserver protocol to "Ntp". This will be called
@@ -80,7 +78,6 @@ class TimeSync implements \IteratorAggregate
      *
      * @param  string|array $target - OPTIONAL single timeserver, or an array of timeservers.
      * @param  string       $alias  - OPTIONAL an alias for this timeserver
-     * @return  object
      */
     public function __construct($target = null, $alias = null)
     {
@@ -97,7 +94,7 @@ class TimeSync implements \IteratorAggregate
      */
     public function getIterator()
     {
-        return new \ArrayObject($this->_timeservers);
+        return new ArrayObject($this->_timeservers);
     }
 
     /**
@@ -128,7 +125,7 @@ class TimeSync implements \IteratorAggregate
      *
      * @param  string|array $target - Single timeserver, or an array of timeservers.
      * @param  string       $alias  - OPTIONAL an alias for this timeserver
-     * @throws \Zend\TimeSync\Exception
+     * @throws Exception\ExceptionInterface
      */
     public function addServer($target, $alias = null)
     {
@@ -159,7 +156,7 @@ class TimeSync implements \IteratorAggregate
      * Marks a nameserver as current
      *
      * @param   string|integer $alias - The alias from the timeserver to set as current
-     * @throws  \Zend\TimeSync\Exception
+     * @throws  Exception\InvalidArgumentException
      */
     public function setServer($alias)
     {
@@ -175,7 +172,7 @@ class TimeSync implements \IteratorAggregate
      *
      * @param   string $key - The option's identifier
      * @return  mixed
-     * @throws  \Zend\TimeSync\Exception
+     * @throws  Exception\OutOfBoundsException
      */
     public static function getOptions($key = null)
     {
@@ -196,7 +193,7 @@ class TimeSync implements \IteratorAggregate
      *
      * @param   string|integer $alias - The alias from the timeserver to return
      * @return  object
-     * @throws  \Zend\TimeSync\Exception
+     * @throws  Exception\InvalidArgumentException
      */
     public function getServer($alias = null)
     {
@@ -231,17 +228,16 @@ class TimeSync implements \IteratorAggregate
      * facade and will try to return the date from the first server that
      * returns a valid result.
      *
-     * @param  Zend_Locale $locale OPTIONAL locale
-     * @return Zend_TimeSync
-     * @throws \Zend\TimeSync\Exception
+     * @return DateTime
+     * @throws Exception\RuntimeException
      */
-    public function getDate($locale = null)
+    public function getDate()
     {
         foreach ($this->_timeservers as $alias => $server) {
             $this->_current = $server;
             try {
-                return $server->getDate($locale);
-            } catch (Exception $e) {
+                return $server->getDate();
+            } catch (Exception\ExceptionInterface $e) {
                 if (!isset($masterException)) {
                     $masterException = new Exception\RuntimeException($e->getMessage(), $e->getCode());
                 } else {
@@ -258,6 +254,7 @@ class TimeSync implements \IteratorAggregate
      *
      * @param  string|array $target   - Single timeserver, or an array of timeservers.
      * @param  string       $alias    - An alias for this timeserver
+     * @throws Exception\RuntimeException
      */
     protected function _addServer($target, $alias)
     {

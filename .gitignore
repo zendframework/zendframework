@@ -4,3 +4,5 @@ nbproject
 .project
 .settings/
 tmp/
+.DS_Store
+composer.lock

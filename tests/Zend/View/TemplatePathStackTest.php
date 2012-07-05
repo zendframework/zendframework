@@ -127,7 +127,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     {
         $this->stack->addPath(__DIR__ . '/_templates');
 
-        $this->setExpectedException('Zend\View\Exception', 'parent directory traversal');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface', 'parent directory traversal');
         $test = $this->stack->resolve('../_stubs/scripts/LfiProtectionCheck.phtml');
     }
 
@@ -190,7 +190,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingOptionsWithInvalidArgumentRaisesException($arg)
     {
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $this->stack->setOptions($arg);
     }
 
@@ -238,10 +238,16 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsRelativePharPath()
     {
-        $path = 'phar://' . __DIR__ . '/_templates/view.phar/start/../views';
+        $path = 'phar://' . __DIR__ 
+            . DIRECTORY_SEPARATOR . '_templates' 
+            . DIRECTORY_SEPARATOR . 'view.phar' 
+            . DIRECTORY_SEPARATOR . 'start' 
+            . DIRECTORY_SEPARATOR . '..' 
+            . DIRECTORY_SEPARATOR . 'views';
+        
         $this->stack->addPath($path);
-        $test = $this->stack->resolve('foo/hello.phtml');
-        $this->assertEquals($path . '/foo/hello.phtml', $test);
+        $test = $this->stack->resolve('foo' . DIRECTORY_SEPARATOR . 'hello.phtml');
+        $this->assertEquals($path . DIRECTORY_SEPARATOR . 'foo' . DIRECTORY_SEPARATOR . 'hello.phtml', $test);
     }
 
     public function testDefaultFileSuffixIsPhtml()

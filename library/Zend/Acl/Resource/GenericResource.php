@@ -18,38 +18,33 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Acl\Resource;
 
-use Zend\Acl\Resource;
+use Zend\Acl\Resource\ResourceInterface;
 
 /**
- * @uses       \Zend\Acl\Resource\ResourceInterface
  * @category   Zend
  * @package    Zend_Acl
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GenericResource implements Resource
+class GenericResource implements ResourceInterface
 {
     /**
      * Unique id of Resource
      *
      * @var string
      */
-    protected $_resourceId;
+    protected $resourceId;
 
     /**
      * Sets the Resource identifier
      *
      * @param  string $resourceId
-     * @return void
      */
     public function __construct($resourceId)
     {
-        $this->_resourceId = (string) $resourceId;
+        $this->resourceId = (string) $resourceId;
     }
 
     /**
@@ -59,7 +54,7 @@ class GenericResource implements Resource
      */
     public function getResourceId()
     {
-        return $this->_resourceId;
+        return $this->resourceId;
     }
 
     /**

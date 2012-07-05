@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.pattern">
-    <info>
+    
         <title>Zend\Cache\Pattern</title>
-    </info>
+    
 
     <section xml:id="zend.cache.pattern.intro">
-        <info>
+        
             <title>Overview</title>
-        </info>
+        
 
         <para>
             Cache patterns are configurable objects to solve known performance bottlenecks. Each
@@ -44,9 +44,9 @@
     </section>
 
     <section xml:id="zend.cache.pattern.quick-start">
-        <info>
+        
             <title>Quick Start</title>
-        </info>
+        
 
         <para>
             Pattern objects can either be created from the provided
@@ -76,9 +76,9 @@ $callbackCache->setOptions(new PatternOptions(array(
     </section>
 
     <section xml:id="zend.cache.pattern.options">
-        <info>
+        
             <title>Configuration Options</title>
-        </info>
+        
 
         <variablelist>
             <varlistentry xml:id="zend.cache.pattern.options.cache-by-default">
@@ -780,9 +780,9 @@ $callbackCache->setOptions(new PatternOptions(array(
     </section>
 
     <section xml:id="zend.cache.pattern.methods">
-        <info>
+        
             <title>Available Methods</title>
-        </info>
+        
 
         <variablelist>
             <varlistentry xml:id="zend.cache.pattern.methods.set-options">
@@ -820,12 +820,12 @@ $callbackCache->setOptions(new PatternOptions(array(
     </section>
 
     <section xml:id="zend.cache.pattern.examples">
-        <info>
+        
             <title>Examples</title>
-        </info>
+        
 
         <example xml:id="zend.cache.pattern.examples.callback">
-            <info><title>Using the callback cache pattern</title></info>
+            <title>Using the callback cache pattern</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Cache\PatternFactory;
@@ -845,7 +845,7 @@ $result = $callbackCache->call('doResourceIntensiveStuff', array(
         </example>
 
         <example xml:id="zend.cache.pattern.examples.object">
-            <info><title>Using the object cache pattern</title></info>
+            <title>Using the object cache pattern</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Cache\PatternFactory;
@@ -863,7 +863,7 @@ $result = $objectProxy->doResourceIntensiveStuff('argument1', 'argument2', 'argu
         </example>
 
         <example xml:id="zend.cache.pattern.examples.class">
-            <info><title>Using the class cache pattern</title></info>
+            <title>Using the class cache pattern</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Cache\PatternFactory;
@@ -880,7 +880,7 @@ $result = $classProxy->doResourceIntensiveStuff('argument1', 'argument2', 'argum
         </example>
 
         <example xml:id="zend.cache.pattern.examples.output">
-            <info><title>Using the output cache pattern</title></info>
+            <title>Using the output cache pattern</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Cache\PatternFactory;
@@ -905,7 +905,7 @@ echo 'This output is never cached.';
         </example>
 
         <example xml:id="zend.cache.pattern.examples.capture">
-            <info><title>Using the capture cache pattern</title></info>
+            <title>Using the capture cache pattern</title>
             
             <para>
                 You need to configure your HTTP server to redirect missing content to run your

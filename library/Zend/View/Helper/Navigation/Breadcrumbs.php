@@ -19,15 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper\Navigation;
 
-use Zend\Navigation\Container,
-    Zend\Navigation\Page\AbstractPage,
-    Zend\View,
-    Zend\View\Exception;
+use Zend\Navigation\AbstractContainer;
+use Zend\Navigation\Page\AbstractPage;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Helper for printing breadcrumbs
@@ -69,22 +66,22 @@ class Breadcrumbs extends AbstractHelper
     protected $partial;
 
     /**
-     * View helper entry point:
-     * Retrieves helper and optionally sets container to operate on
+     * Helper entry point
      *
-     * @param  Container $container [optional] container to operate on
-     * @return Breadcrumbs  fluent interface, returns self
+     * @param  string|AbstractContainer $container container to operate on
+     * @return Navigation
      */
-    public function __invoke(Container $container = null)
+    public function __invoke($container = null)
     {
+        if (is_string($container)) {
+            $container = $this->getServiceLocator()->get($container);
+        }
         if (null !== $container) {
             $this->setContainer($container);
         }
 
         return $this;
     }
-
-    // Accessors:
 
     /**
      * Sets breadcrumb separator
@@ -168,12 +165,13 @@ class Breadcrumbs extends AbstractHelper
      * Renders breadcrumbs by chaining 'a' elements with the separator
      * registered in the helper
      *
-     * @param  Container $container [optional] container to render. Default is
+     * @param  AbstractContainer $container [optional] container to render. Default is
      *                              to render the container registered in the helper.
      * @return string               helper output
      */
-    public function renderStraight(Container $container = null)
+    public function renderStraight($container = null)
     {
+        $this->parseContainer($container);
         if (null === $container) {
             $container = $this->getContainer();
         }
@@ -223,7 +221,7 @@ class Breadcrumbs extends AbstractHelper
      * The container will simply be passed on as a model to the view script,
      * so in the script it will be available in <code>$this->container</code>.
      *
-     * @param  Container $container [optional] container to pass to view script.
+     * @param  AbstractContainer $container [optional] container to pass to view script.
      *                              Default is to use the container registered 
      *                              in the helper.
      * @param  string|array $partial [optional] partial view script to use. 
@@ -236,9 +234,9 @@ class Breadcrumbs extends AbstractHelper
      * @throws Exception\RuntimeException if no partial provided
      * @throws Exception\InvalidArgumentException if partial is invalid array
      */
-    public function renderPartial(Container $container = null,
-                                  $partial = null)
+    public function renderPartial($container = null, $partial = null)
     {
+        $this->parseContainer($container);
         if (null === $container) {
             $container = $this->getContainer();
         }
@@ -298,13 +296,13 @@ class Breadcrumbs extends AbstractHelper
     /**
      * Renders helper
      *
-     * Implements {@link Helper::render()}.
+     * Implements {@link HelperInterface::render()}.
      *
-     * @param  Container $container [optional] container to render. Default is
+     * @param  AbstractContainer $container [optional] container to render. Default is
      *                              to render the container registered in the helper.
      * @return string               helper output
      */
-    public function render(Container $container = null)
+    public function render($container = null)
     {
         $partial = $this->getPartial();
         if ($partial) {

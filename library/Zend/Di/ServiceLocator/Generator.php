@@ -1,16 +1,19 @@
 <?php
-// @todo refactor to use new Definition interface
+
 namespace Zend\Di\ServiceLocator;
 
-use Zend\Di\Di,
-    Zend\CodeGenerator\Php as CodeGen,
-    Zend\Di\DependencyInjection,
-    Zend\Di\Exception;
+use Zend\Code\Generator as CodeGen;
+use Zend\Di\Di;
+use Zend\Di\Exception;
 
+/**
+ * @todo refactor to use new Definition interface
+ */
 class Generator
 {
     protected $containerClass = 'ApplicationContext';
 
+    /** @var DependencyInjectorProxy */
     protected $injector;
 
     protected $namespace;
@@ -20,8 +23,7 @@ class Generator
      *
      * Requires a DependencyInjection manager on which to operate.
      * 
-     * @param  DependencyInjection $injector 
-     * @return void
+     * @param Di $injector
      */
     public function __construct(Di $injector)
     {
@@ -59,7 +61,8 @@ class Generator
      * created the specified class and service locator methods.
      * 
      * @param  null|string $filename 
-     * @return CodeGen\PhpFile
+     * @return CodeGen\FileGenerator
+     * @throws Exception\RuntimeException
      */
     public function getCodeGenerator($filename = null)
     {
@@ -124,7 +127,7 @@ class Generator
 
             // Create method call code
             $methods = '';
-            foreach ($meta->getMethods() as $key => $methodData) {
+            foreach ($meta->getMethods() as $methodData) {
                 if (!isset($methodData['name']) && !isset($methodData['method'])) {
                     continue;
                 }
@@ -171,7 +174,7 @@ class Generator
 
             // Create fetch of stored service
             if ($im->hasSharedInstance($name, $params)) {
-                $getterBody .= sprintf("if (isset(\$this->services['%s'])) {\n",  $name);
+                $getterBody .= sprintf("if (isset(\$this->services['%s'])) {\n", $name);
                 $getterBody .= sprintf("%sreturn \$this->services['%s'];\n}\n\n", $indent, $name);
             }
 
@@ -185,7 +188,7 @@ class Generator
             // End getter body
             $getterBody .= "return \$object;\n";
 
-            $getterDef = new CodeGen\PhpMethod();
+            $getterDef = new CodeGen\MethodGenerator();
             $getterDef->setName($getter)
                       ->setBody($getterBody);
             $getters[] = $getterDef;
@@ -212,16 +215,14 @@ class Generator
         $switch .= "}\n\n";
 
         // Build get() method
-        $nameParam   = new CodeGen\PhpParameter();
+        $nameParam   = new CodeGen\ParameterGenerator();
         $nameParam->setName('name');
-        $defaultParams = new CodeGen\PhpParameterDefaultValue();
-        $defaultParams->setValue(array());
-        $paramsParam = new CodeGen\PhpParameter();
+        $paramsParam = new CodeGen\ParameterGenerator();
         $paramsParam->setName('params')
                     ->setType('array')
-                    ->setDefaultValue($defaultParams);
+                    ->setDefaultValue(array());
 
-        $get = new CodeGen\PhpMethod();
+        $get = new CodeGen\MethodGenerator();
         $get->setName('get');
         $get->setParameters(array(
             $nameParam,
@@ -238,15 +239,15 @@ class Generator
         }
 
         // Create class code generation object
-        $container = new CodeGen\PhpClass();
+        $container = new CodeGen\ClassGenerator();
         $container->setName($this->containerClass)
                   ->setExtendedClass('ServiceLocator')
-                  ->setMethod($get)
-                  ->setMethods($getters)
-                  ->setMethods($aliasMethods);
+                  ->addMethodFromGenerator($get)
+                  ->addMethods($getters)
+                  ->addMethods($aliasMethods);
 
         // Create PHP file code generation object
-        $classFile = new CodeGen\PhpFile();
+        $classFile = new CodeGen\FileGenerator();
         $classFile->setUse('Zend\Di\ServiceLocator')
                   ->setClass($container);
 
@@ -275,8 +276,7 @@ class Generator
     {
         $reduced = array();
         $aliases = array_keys($aliasList);
-        foreach ($aliasList as $alias => $service)
-        {
+        foreach ($aliasList as $alias => $service) {
             if (in_array($service, $aliases)) {
                 do {
                     $service = $aliasList[$service];
@@ -295,12 +295,12 @@ class Generator
      * 
      * @param  string $alias 
      * @param  class $class Class to which alias refers
-     * @return CodeGen\PhpMethod
+     * @return CodeGen\MethodGenerator
      */
     protected function getCodeGenMethodFromAlias($alias, $class)
     {
         $alias = $this->normalizeAlias($alias);
-        $method = new CodeGen\PhpMethod();
+        $method = new CodeGen\MethodGenerator();
         $method->setName($alias)
                ->setBody(sprintf('return $this->get(\'%s\');', $class));
         return $method;

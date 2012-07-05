@@ -33,7 +33,7 @@ use Zend\Form\Form,
     Zend\Loader\PrefixPathMapper,
     Zend\Json\Json,
     Zend\Translator\Translator,
-    Zend\Validator\Validator,
+    Zend\Validator\ValidatorInterface,
     Zend\View,
     Zend\Controller\Front as FrontController;
 
@@ -83,7 +83,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testZendFormImplementsZendValidatorInterface()
     {
-        $this->assertTrue($this->form instanceof Validator);
+        $this->assertTrue($this->form instanceof ValidatorInterface);
     }
 
     // Configuration

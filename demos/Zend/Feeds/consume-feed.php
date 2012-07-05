@@ -19,21 +19,23 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+use Zend\Loader\StandardAutoloader;
+use Zend\Feed\Reader\Reader;
+
 /**
  * Consume an RSS feed and display all of the titles and
  * associated links within.
  */
 
-/**
- * @see Zend_Feed
- */
-require_once 'Zend/Feed.php';
+require_once dirname(dirname(dirname(__DIR__))).'/library/Zend/Loader/StandardAutoloader.php';
+$loader = new StandardAutoloader;
+$loader->register();
 
-$feed = Zend_Feed::import('http://news.google.com/?output=rss');
 
-foreach ($feed->items as $item) {
+$rss = Reader::import('http://news.google.com/?output=rss');
 
-    echo "<p>" . $item->title() . "<br />";
-    echo $item->link()  . "</p>";
+foreach ($rss as $item) {
 
+    echo "<p>" . $item->getTitle() . "<br />", "\n";
+    echo $item->getLink()  . "</p>";
 }

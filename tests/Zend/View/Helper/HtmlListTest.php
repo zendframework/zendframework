@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 
-use Zend\View\Helper,
-    Zend\View\Renderer\PhpRenderer as View;
+use Zend\View\Helper;
+use Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * @category   Zend
@@ -230,8 +227,6 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains('<ul>', $list);
         $this->assertContains('</ul>', $list);
-
-        $this->markTestSkipped('Wrong array_walk_recursive behavior.');
 
         array_walk_recursive($items, array($this, 'validateItems'), $list);
     }

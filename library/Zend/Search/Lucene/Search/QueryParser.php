@@ -19,26 +19,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Search;
 
-use Zend\Search\Lucene,
-	Zend\Search\Lucene\Analysis\Analyzer,
-	Zend\Search\Lucene\Index,
-	Zend\Search\Lucene\Search\Exception\QueryParserException,
-	Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Analysis\Analyzer;
+use Zend\Search\Lucene\Index;
+use Zend\Search\Lucene\Search\Exception\QueryParserException;
+use Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
- * @uses       \Zend\Search\Lucene\Analysis\Analyzer
- * @uses       \Zend\Search\Lucene
- * @uses       \Zend\Search\Lucene\Index\Term
- * @uses       \Zend\Search\Lucene\Search
- * @uses       \Zend\Search\Lucene\Search\QueryEntry
- * @uses       \Zend\Search\Lucene\Search\Query
- * @uses	   \Zend\Search\Lucene\Search\Exception\QueryParserException
- * @uses	   \Zend\Search\Lucene\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search

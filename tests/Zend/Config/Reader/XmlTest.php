@@ -21,13 +21,13 @@
 
 namespace ZendTest\Config\Reader;
 
-use \Zend\Config\Reader\Xml;
+use Zend\Config\Reader\Xml;
 
 /**
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
@@ -85,5 +85,27 @@ ECS;
 ECS;
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
         $arrayXml = $this->reader->fromString($xml);
+    }
+
+    public function testZF300_MultipleKeysOfTheSameName()
+    {
+        $config = $this->reader->fromFile($this->getTestAssetPath('array'));
+
+        $this->assertEquals('2a', $config['one']['two'][0]);
+        $this->assertEquals('2b', $config['one']['two'][1]);
+        $this->assertEquals('4', $config['three']['four'][1]);
+        $this->assertEquals('5', $config['three']['four'][0]['five']);
+    }
+
+    public function testZF300_ArraysWithMultipleChildren()
+    {
+        $config = $this->reader->fromFile($this->getTestAssetPath('array'));
+
+        $this->assertEquals('1', $config['six']['seven'][0]['eight']);
+        $this->assertEquals('2', $config['six']['seven'][1]['eight']);
+        $this->assertEquals('3', $config['six']['seven'][2]['eight']);
+        $this->assertEquals('1', $config['six']['seven'][0]['nine']);
+        $this->assertEquals('2', $config['six']['seven'][1]['nine']);
+        $this->assertEquals('3', $config['six']['seven'][2]['nine']);
     }
 }

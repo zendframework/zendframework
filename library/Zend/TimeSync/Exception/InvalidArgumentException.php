@@ -19,23 +19,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\TimeSync\Exception;
-use Zend\TimeSync\Exception;
 
 /**
  * Exception for Zend_TimeSync component.
  *
- * @uses       Zend\Exception
  * @category   Zend
  * @package    Zend_TimeSync
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements Exception
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
 }

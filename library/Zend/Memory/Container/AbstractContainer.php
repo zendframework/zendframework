@@ -18,22 +18,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Memory\Container;
-
-use Zend\Memory\Container;
 
 /**
  * Memory value container
  *
- * @uses       \Zend\Memory\Container
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractContainer implements Container
+abstract class AbstractContainer implements ContainerInterface
 {
 }

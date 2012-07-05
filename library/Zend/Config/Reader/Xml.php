@@ -1,29 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Config
- * @subpackage Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Config
  */
 
 namespace Zend\Config\Reader;
 
-use XMLReader,
-    Zend\Config\Reader,    
-    Zend\Config\Exception;
+use XMLReader;
+use Zend\Config\Exception;
 
 /**
  * XML config reader.
@@ -31,10 +19,8 @@ use XMLReader,
  * @category   Zend
  * @package    Zend_Config
  * @subpackage Reader
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Xml implements Reader
+class Xml implements ReaderInterface
 {
     /**
      * XML Reader instance.
@@ -56,25 +42,31 @@ class Xml implements Reader
      * @var array
      */
     protected $textNodes = array(
-        XMLReader::TEXT, XMLReader::CDATA, XMLReader::WHITESPACE,
+        XMLReader::TEXT,
+        XMLReader::CDATA,
+        XMLReader::WHITESPACE,
         XMLReader::SIGNIFICANT_WHITESPACE
     );
 
     /**
      * fromFile(): defined by Reader interface.
      *
-     * @see    Reader::fromFile()
+     * @see    ReaderInterface::fromFile()
      * @param  string $filename
      * @return array
+     * @throws Exception\RuntimeException
      */
     public function fromFile($filename)
     {
-        if (!file_exists($filename)) {
-            throw new Exception\RuntimeException("The file $filename doesn't exists.");
+        if (!is_file($filename) || !is_readable($filename)) {
+            throw new Exception\RuntimeException(sprintf(
+                "File '%s' doesn't exist or not readable",
+                $filename
+            ));
         }
-        $this->reader = new XMLReader();
 
-        $this->reader->open($filename, null, LIBXML_XINCLUDE);   
+        $this->reader = new XMLReader();
+        $this->reader->open($filename, null, LIBXML_XINCLUDE);
 
         $this->directory = dirname($filename);
 
@@ -95,9 +87,10 @@ class Xml implements Reader
     /**
      * fromString(): defined by Reader interface.
      *
-     * @see    Reader::fromString()
+     * @see    ReaderInterface::fromString()
      * @param  string $string
-     * @return array
+     * @return array|bool
+     * @throws Exception\RuntimeException
      */
     public function fromString($string)
     {
@@ -168,7 +161,7 @@ class Xml implements Reader
                 }
 
                 if (isset($children[$name])) {
-                    if (!is_array($children[$name]) || !$children[$name]) {
+                    if (!is_array($children[$name]) || !array_key_exists(0, $children[$name])) {
                         $children[$name] = array($children[$name]);
                     }
 

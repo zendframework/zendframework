@@ -19,22 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Filter;
 
 /**
- * Zend_Ldap_Filter_And provides an 'and' filter.
+ * Zend\Ldap\Filter\AndFilter provides an 'and' filter.
  *
- * @uses       \Zend\Ldap\Filter\LogicalFilter
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AndFilter extends LogicalFilter
+class AndFilter extends AbstractLogicalFilter
 {
     /**
      * Creates an 'and' grouping filter.

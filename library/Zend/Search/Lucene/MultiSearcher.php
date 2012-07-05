@@ -18,33 +18,23 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene;
 
-use Zend\Search\Lucene\Storage\Directory,
-	Zend\Search\Lucene\Exception\InvalidArgumentException,
-	Zend\Search\Lucene\Exception\UnsupportedMethodCallException,
-	Zend\Search\Lucene\Exception\OutOfRangeException,
-	Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Storage\Directory;
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene\Exception\UnsupportedMethodCallException;
+use Zend\Search\Lucene\Exception\OutOfRangeException;
+use Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * Multisearcher allows to search through several independent indexes.
  *
- * @uses       \Zend\Search\Lucene\Index
- * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
- * @uses	   \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
- * @uses	   \Zend\Search\Lucene\Exception\OutOfRangeException
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
- * @uses       \Zend\Search\Lucene\SearchIndex
- * @uses       \Zend\Search\Lucene\TermStreamsPriorityQueue
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MultiSearcher implements SearchIndex
+class MultiSearcher implements SearchIndexInterface
 {
     /**
      * List of indices for searching.
@@ -65,7 +55,7 @@ class MultiSearcher implements SearchIndex
         $this->_indices = $indices;
 
         foreach ($this->_indices as $index) {
-            if (!$index instanceof SearchIndex) {
+            if (!$index instanceof SearchIndexInterface) {
                 throw new InvalidArgumentException('sub-index objects have to implement Zend\Search\Lucene\Interface.');
             }
         }
@@ -74,9 +64,9 @@ class MultiSearcher implements SearchIndex
     /**
      * Add index for searching.
      *
-     * @param \Zend\Search\Lucene\SearchIndex $index
+     * @param \Zend\Search\Lucene\SearchIndexInterface $index
      */
-    public function addIndex(SearchIndex $index)
+    public function addIndex(SearchIndexInterface $index)
     {
         $this->_indices[] = $index;
     }
@@ -89,11 +79,11 @@ class MultiSearcher implements SearchIndex
      * 0 means pre-2.1 index format
      * -1 means there are no segments files.
      *
-     * @param \Zend\Search\Lucene\Storage\Directory $directory
+     * @param Storage\Directory\DirectoryInterface $directory
      * @return integer
      * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      */
-    public static function getActualGeneration(Directory $directory)
+    public static function getActualGeneration(Storage\Directory\DirectoryInterface $directory)
     {
         throw new UnsupportedMethodCallException("Generation number can't be retrieved for multi-searcher");
     }
@@ -137,7 +127,7 @@ class MultiSearcher implements SearchIndex
      * Returns the Zend_Search_Lucene_Storage_Directory instance for this index.
      *
      * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
-     * @return \Zend\Search\Lucene\Storage\Directory
+     * @return \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
      */
     public function getDirectory()
     {
@@ -369,7 +359,7 @@ class MultiSearcher implements SearchIndex
      * Input is a string or Zend_Search_Lucene_Search_Query.
      *
      * @param mixed $query
-     * @return array \Zend\Search\Lucene\Search\QueryHit
+     * @return array|\Zend\Search\Lucene\Search\QueryHit
      */
     public function find($query)
     {
@@ -426,7 +416,7 @@ class MultiSearcher implements SearchIndex
     public function getDocument($id)
     {
         if ($id instanceof Search\QueryHit) {
-            /* @var $id Zend\Search\Lucene\Search\QueryHit */
+            /* @var $id \Zend\Search\Lucene\Search\QueryHit */
             $id = $id->id;
         }
 
@@ -606,7 +596,7 @@ class MultiSearcher implements SearchIndex
      * Retrive similarity used by index reader
      *
      * @throws \Zend\Search\Lucene\Exception\RuntimeException
-     * @return \Zend\Search\Lucene\Search\Similarity
+     * @return \Zend\Search\Lucene\Search\Similarity\AbstractSimilarity
      */
     public function getSimilarity()
     {

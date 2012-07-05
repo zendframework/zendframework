@@ -19,18 +19,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\XmlRpc;
 
-use Zend\Http\Client\Adapter,
-    Zend\Http,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\XmlRpc\Client,
-    Zend\XmlRpc\Value,
-    Zend\XmlRpc;
+use Zend\Http\Client\Adapter;
+use Zend\Http;
+use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
+use Zend\XmlRpc\Client;
+use Zend\XmlRpc\AbstractValue;
+use Zend\XmlRpc\Value;
+use Zend\XmlRpc;
 
 /**
  * Test case for Zend\XmlRpc\Client
@@ -281,7 +279,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $expects = 'date.method response';
         $this->setServerResponseTo($expects);
-        $this->assertSame($expects, $this->xmlrpcClient->call('date.method', array(Value::getXmlRpcValue(time(), Value::XMLRPC_TYPE_DATETIME), 'foo')));
+        $this->assertSame($expects, $this->xmlrpcClient->call('date.method', array(AbstractValue::getXmlRpcValue(time(), AbstractValue::XMLRPC_TYPE_DATETIME), 'foo')));
     }
 
     public function testAllowsSkippingSystemCallForArrayStructLookup()
@@ -579,7 +577,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->xmlrpcClient->setHttpClient($this->httpClient);
 
         $this->setServerResponseTo(array());
-        $this->assertNull($this->xmlrpcClient->getHttpClient()->getRequest()->getUri());
+        $this->assertNull($this->xmlrpcClient->getHttpClient()->getRequest()->getUriString());
         $this->xmlrpcClient->call('foo');
         $uri = $this->xmlrpcClient->getHttpClient()->getUri();
 
@@ -622,6 +620,58 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException('Zend\XmlRpc\Client\Exception\IntrospectException', 'Invalid signature for method "add"');
         $signature = $introspector->getMethodSignature('add');
+    }
+
+
+    /**
+     * @group ZF-8580
+     */
+    public function testCallSelectsCorrectSignatureIfMoreThanOneIsAvailable()
+    {
+        $this->mockIntrospector();
+
+        $this->mockedIntrospector
+             ->expects($this->exactly(2))
+             ->method('getMethodSignature')
+             ->with('get')
+             ->will($this->returnValue(array(
+                 array('parameters' => array('int')),
+                 array('parameters' => array('array'))
+             )));
+
+          $expectedResult = 'array';
+          $this->setServerResponseTo($expectedResult);
+
+          $this->assertSame(
+              $expectedResult,
+              $this->xmlrpcClient->call('get', array(array(1)))
+          );
+
+          $expectedResult = 'integer';
+          $this->setServerResponseTo($expectedResult);
+
+          $this->assertSame(
+              $expectedResult,
+              $this->xmlrpcClient->call('get', array(1))
+          );
+    }
+
+    /**
+     * @group ZF-1897
+     */
+    public function testHandlesLeadingOrTrailingWhitespaceInChunkedResponseProperly()
+    {
+        $baseUri = "http://foo:80";
+        $this->httpAdapter = new Adapter\Test();
+        $this->httpClient = new Http\Client(null, array('adapter' => $this->httpAdapter));
+        
+        $respBody = file_get_contents(dirname(__FILE__) . "/_files/ZF1897-response-chunked.txt");
+        $this->httpAdapter->setResponse($respBody);
+
+        $this->xmlrpcClient = new Client($baseUri);
+        $this->xmlrpcClient->setHttpClient($this->httpClient);
+        
+        $this->assertEquals('FOO', $this->xmlrpcClient->call('foo'));
     }
 
     // Helpers

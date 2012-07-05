@@ -2,7 +2,9 @@
 
 namespace Zend\InfoCard\Cipher\Exception;
 
+use Zend\InfoCard\Exception;
+
 class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements \Zend\InfoCard\Cipher\Exception
+    extends Exception\InvalidArgumentException
+    implements ExceptionInterface
 {}

@@ -210,7 +210,7 @@ class Tar extends AbstractCompressionAlgorithm
      * Decompresses the given content
      *
      * @param  string $content
-     * @return boolean
+     * @return string
      * @throws Exception\RuntimeException if unable to find archive
      * @throws Exception\RuntimeException if error occurs decompressing archive
      */
@@ -225,7 +225,7 @@ class Tar extends AbstractCompressionAlgorithm
         $archive = new Archive_Tar($archive, $this->getMode());
         $target  = $this->getTarget();
         if (!is_dir($target)) {
-            $target = dirname($target);
+            $target = dirname($target) . DIRECTORY_SEPARATOR;
         }
 
         $result = $archive->extract($target);
@@ -233,7 +233,7 @@ class Tar extends AbstractCompressionAlgorithm
             throw new Exception\RuntimeException('Error while extracting the Tar archive');
         }
 
-        return true;
+        return $target;
     }
 
     /**

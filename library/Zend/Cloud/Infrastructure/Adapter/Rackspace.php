@@ -1,7 +1,7 @@
 <?php
 /**
  * @category   Zend
- * @package    Zend\Cloud\Infrastructure
+ * @package    Zend_Cloud_Infrastructure
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -9,8 +9,10 @@
 
 namespace Zend\Cloud\Infrastructure\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Service\Rackspace\Servers as RackspaceServers,
-    Zend\Cloud\Infrastructure\Instance,    
+    Zend\Cloud\Infrastructure\Instance,
     Zend\Cloud\Infrastructure\InstanceList,
     Zend\Cloud\Infrastructure\Image,
     Zend\Cloud\Infrastructure\ImageList;
@@ -18,7 +20,7 @@ use Zend\Service\Rackspace\Servers as RackspaceServers,
 /**
  * Rackspace servers adapter for infrastructure service
  *
- * @package    Zend\Cloud\Infrastructure
+ * @package    Zend_Cloud_Infrastructure
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -91,19 +93,15 @@ class Rackspace extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|Zend\Config\Config $options
+     * @param  array|Traversable $options
      * @return void
      */
     public function __construct($options = array())
     {
-        if (is_object($options)) {
-            if (method_exists($options, 'toArray')) {
-                $options= $options->toArray();
-            } elseif ($options instanceof \Traversable) {
-                $options = iterator_to_array($options);
-            }
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
-        
+
         if (empty($options) || !is_array($options)) {
             throw new Exception\InvalidArgumentException('Invalid options provided');
         }
@@ -181,7 +179,7 @@ class Rackspace extends AbstractAdapter
         return $result;
     }
     /**
-     * Return a list of the available instancies
+     * Return a list of the available instances
      *
      * @return InstanceList|boolean
      */ 
@@ -477,7 +475,7 @@ class Rackspace extends AbstractAdapter
     /**
      * Get the adapter 
      * 
-     * @return Zend\Service\Rackspace\Servers
+     * @return \Zend\Service\Rackspace\Servers
      */
     public function getAdapter()
     {
@@ -495,7 +493,7 @@ class Rackspace extends AbstractAdapter
     /**
      * Get the last HTTP response
      * 
-     * @return Zend\Http\Response 
+     * @return \Zend\Http\Response
      */
     public function getLastHttpResponse()
     {

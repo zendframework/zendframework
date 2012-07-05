@@ -21,12 +21,12 @@
 
 namespace Zend\View\Resolver;
 
-use Countable,
-    IteratorAggregate,
-    Zend\Stdlib\PriorityQueue,
-    Zend\View\Exception,
-    Zend\View\Renderer,
-    Zend\View\Resolver;
+use Countable;
+use IteratorAggregate;
+use Zend\Stdlib\PriorityQueue;
+use Zend\View\Exception;
+use Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\View\Resolver\ResolverInterface as Resolver;
 
 /**
  * @category   Zend
@@ -35,7 +35,7 @@ use Countable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AggregateResolver implements Countable, IteratorAggregate, Resolver
+class AggregateResolver implements Countable, IteratorAggregate, ResolverInterface
 {
     const FAILURE_NO_RESOLVERS = 'AggregateResolver_Failure_No_Resolvers';
     const FAILURE_NOT_FOUND    = 'AggregateResolver_Failure_Not_Found';

@@ -23,6 +23,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test offsetExists() returns proper values via method call and isset()
      * @covers Zend\Db\Adapter\ParameterContainer::offsetExists
      */
     public function testOffsetExists()
@@ -34,6 +35,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test offsetGet() returns proper values via method call and array access
      * @covers Zend\Db\Adapter\ParameterContainer::offsetGet
      */
     public function testOffsetGet()
@@ -41,11 +43,12 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $this->parameterContainer->offsetGet('foo'));
         $this->assertEquals('bar', $this->parameterContainer['foo']);
 
-        // $this->assertEquals('bar', $this->parameterContainer->offsetGet('bar'));
+        $this->assertNull($this->parameterContainer->offsetGet('bar'));
         // @todo determine what should come back here
     }
 
     /**
+     * @testdox unit test: Test offsetSet() works via method call and array access
      * @covers Zend\Db\Adapter\ParameterContainer::offsetSet
      */
     public function testOffsetSet()
@@ -53,16 +56,17 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
         $this->parameterContainer->offsetSet('boo', 'baz');
         $this->assertEquals('baz', $this->parameterContainer->offsetGet('boo'));
 
-        $this->parameterContainer->offsetSet(null, 'book', ParameterContainer::TYPE_STRING);
+        $this->parameterContainer->offsetSet('1', 'book', ParameterContainer::TYPE_STRING);
         $this->assertEquals(
-            array('foo' => 'bar', 'boo' => 'baz', 0 => 'book'),
-            $this->parameterContainer->toArray()
+            array('foo' => 'bar', 'boo' => 'baz', '1' => 'book'),
+            $this->parameterContainer->getNamedArray()
         );
 
-        $this->assertEquals('string', $this->parameterContainer->offsetGetErrata(0));
+        $this->assertEquals('string', $this->parameterContainer->offsetGetErrata('1'));
     }
 
     /**
+     * @testdox unit test: Test offsetUnset() works via method call and array access
      * @covers Zend\Db\Adapter\ParameterContainer::offsetUnset
      */
     public function testOffsetUnset()
@@ -76,6 +80,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test setFromArray() will populate the container
      * @covers Zend\Db\Adapter\ParameterContainer::setFromArray
      */
     public function testSetFromArray()
@@ -85,6 +90,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test offsetSetErrata() will persist errata data
      * @covers Zend\Db\Adapter\ParameterContainer::offsetSetErrata
      */
     public function testOffsetSetErrata()
@@ -94,6 +100,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test offsetGetErrata() return persisted errata data, if it exists
      * @covers Zend\Db\Adapter\ParameterContainer::offsetGetErrata
      */
     public function testOffsetGetErrata()
@@ -103,6 +110,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test offsetHasErrata() will check if errata exists for a particular key
      * @covers Zend\Db\Adapter\ParameterContainer::offsetHasErrata
      */
     public function testOffsetHasErrata()
@@ -112,6 +120,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test offsetUnsetErrata() will unset data for a particular key
      * @covers Zend\Db\Adapter\ParameterContainer::offsetUnsetErrata
      */
     public function testOffsetUnsetErrata()
@@ -122,6 +131,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test getErrataIterator() will return an iterator for the errata data
      * @covers Zend\Db\Adapter\ParameterContainer::getErrataIterator
      */
     public function testGetErrataIterator()
@@ -132,15 +142,17 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\Adapter\ParameterContainer::toArray
+     * @testdox unit test: Test getNamedArray()
+     * @covers Zend\Db\Adapter\ParameterContainer::getNamedArray
      */
-    public function testToArray()
+    public function testGetNamedArray()
     {
-        $data = $this->parameterContainer->toArray();
+        $data = $this->parameterContainer->getNamedArray();
         $this->assertEquals(array('foo' => 'bar'), $data);
     }
 
     /**
+     * @testdox unit test: Test count() returns the proper count
      * @covers Zend\Db\Adapter\ParameterContainer::count
      */
     public function testCount()
@@ -149,6 +161,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test current() returns the current element when used as an iterator
      * @covers Zend\Db\Adapter\ParameterContainer::current
      */
     public function testCurrent()
@@ -158,6 +171,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test next() increases the pointer when used as an iterator
      * @covers Zend\Db\Adapter\ParameterContainer::next
      */
     public function testNext()
@@ -168,6 +182,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test key() returns the name of the current item's name
      * @covers Zend\Db\Adapter\ParameterContainer::key
      */
     public function testKey()
@@ -176,6 +191,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test valid() returns whether the iterators current position is valid
      * @covers Zend\Db\Adapter\ParameterContainer::valid
      */
     public function testValid()
@@ -186,6 +202,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test rewind() resets the interators pointer
      * @covers Zend\Db\Adapter\ParameterContainer::rewind
      */
     public function testRewind()

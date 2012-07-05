@@ -1,7 +1,4 @@
 <?php
-/**
- * @namespace
- */
 namespace ZendTest\Http\Client;
 
 use Zend\Http\ClientStatic as HTTPClient,
@@ -98,5 +95,21 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response->isSuccess());
         $this->assertContains('foo',$response->getBody());
         $this->assertContains('bar',$response->getBody());
+    }
+
+    /**
+     * Test POST with body
+     */
+    public function testHttpPostWithBody()
+    {
+        $postBody = 'foo';
+
+        $response= HTTPClient::post($this->baseuri . 'testRawPostData.php',
+                                    array('foo' => 'bar'),
+                                    array('Content-Type' => Client::ENC_URLENCODED),
+                                    $postBody);
+
+        $this->assertTrue($response->isSuccess());
+        $this->assertContains($postBody, $response->getBody());
     }
 }

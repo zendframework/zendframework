@@ -19,14 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Captcha;
 
-use Zend\Captcha\Exception,
-    Zend\Loader\Pluggable,
-    Zend\View\Renderer;
+use DirectoryIterator;
+use Zend\Captcha\Exception;
+use Zend\Loader\Pluggable;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Image-based captcha element
@@ -39,63 +37,63 @@ use Zend\Captcha\Exception,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Image extends Word
+class Image extends AbstractWord
 {
     /**
      * Directory for generated images
      *
      * @var string
      */
-    protected $_imgDir = "./images/captcha/";
+    protected $imgDir = "public/images/captcha/";
 
     /**
      * URL for accessing images
      *
      * @var string
      */
-    protected $_imgUrl = "/images/captcha/";
+    protected $imgUrl = "/images/captcha/";
 
     /**
      * Image's alt tag content
      *
      * @var string
      */
-    protected $_imgAlt = "";
+    protected $imgAlt = "";
 
     /**
      * Image suffix (including dot)
      *
      * @var string
      */
-    protected $_suffix = ".png";
+    protected $suffix = ".png";
 
     /**
      * Image width
      *
      * @var int
      */
-    protected $_width = 200;
+    protected $width = 200;
 
     /**
      * Image height
      *
      * @var int
      */
-    protected $_height = 50;
+    protected $height = 50;
 
     /**
      * Font size
      *
      * @var int
      */
-    protected $_fsize = 24;
+    protected $fsize = 24;
 
     /**
      * Image font file
      *
      * @var string
      */
-    protected $_font;
+    protected $font;
 
     /**
      * Image to use as starting point
@@ -103,21 +101,21 @@ class Image extends Word
      *
      * @var string
      */
-    protected $_startImage;
+    protected $startImage;
 
     /**
      * How frequently to execute garbage collection
      *
      * @var int
      */
-    protected $_gcFreq = 10;
+    protected $gcFreq = 10;
 
     /**
      * How long to keep generated images
      *
      * @var int
      */
-    protected $_expiration = 600;
+    protected $expiration = 600;
 
     /**
      * Number of noise dots on image
@@ -125,7 +123,7 @@ class Image extends Word
      *
      * @var int
      */
-    protected $_dotNoiseLevel = 100;
+    protected $dotNoiseLevel = 100;
 
     /**
      * Number of noise lines on image
@@ -133,12 +131,12 @@ class Image extends Word
      *
      * @var int
      */
-    protected $_lineNoiseLevel = 5;
+    protected $lineNoiseLevel = 5;
 
     /**
      * Constructor
      *
-     * @param  array|Zend\Config\Config $options
+     * @param  array|\Traversable $options
      * @return void
      */
     public function __construct($options = null)
@@ -161,33 +159,33 @@ class Image extends Word
     /**
      * @return string
      */
-    public function getImgAlt ()
+    public function getImgAlt()
     {
-        return $this->_imgAlt;
+        return $this->imgAlt;
     }
 
     /**
      * @return string
      */
-    public function getStartImage ()
+    public function getStartImage()
     {
-        return $this->_startImage;
+        return $this->startImage;
     }
 
     /**
      * @return int
      */
-    public function getDotNoiseLevel ()
+    public function getDotNoiseLevel()
     {
-        return $this->_dotNoiseLevel;
+        return $this->dotNoiseLevel;
     }
 
     /**
      * @return int
      */
-    public function getLineNoiseLevel ()
+    public function getLineNoiseLevel()
     {
-        return $this->_lineNoiseLevel;
+        return $this->lineNoiseLevel;
     }
 
     /**
@@ -197,7 +195,7 @@ class Image extends Word
      */
     public function getExpiration()
     {
-        return $this->_expiration;
+        return $this->expiration;
     }
 
     /**
@@ -207,7 +205,7 @@ class Image extends Word
      */
     public function getGcFreq()
     {
-        return $this->_gcFreq;
+        return $this->gcFreq;
     }
 
     /**
@@ -217,7 +215,7 @@ class Image extends Word
      */
     public function getFont()
     {
-        return $this->_font;
+        return $this->font;
     }
 
     /**
@@ -227,7 +225,7 @@ class Image extends Word
      */
     public function getFontSize()
     {
-        return $this->_fsize;
+        return $this->fsize;
     }
 
     /**
@@ -237,7 +235,7 @@ class Image extends Word
      */
     public function getHeight()
     {
-        return $this->_height;
+        return $this->height;
     }
 
     /**
@@ -247,7 +245,7 @@ class Image extends Word
      */
     public function getImgDir()
     {
-        return $this->_imgDir;
+        return $this->imgDir;
     }
 
     /**
@@ -257,7 +255,7 @@ class Image extends Word
      */
     public function getImgUrl()
     {
-        return $this->_imgUrl;
+        return $this->imgUrl;
     }
 
     /**
@@ -267,7 +265,7 @@ class Image extends Word
      */
     public function getSuffix()
     {
-        return $this->_suffix;
+        return $this->suffix;
     }
 
     /**
@@ -277,57 +275,57 @@ class Image extends Word
      */
     public function getWidth()
     {
-        return $this->_width;
+        return $this->width;
     }
 
     /**
      * @param string $startImage
      */
-    public function setStartImage ($startImage)
+    public function setStartImage($startImage)
     {
-        $this->_startImage = $startImage;
+        $this->startImage = $startImage;
         return $this;
     }
 
     /**
      * @param int $dotNoiseLevel
      */
-    public function setDotNoiseLevel ($dotNoiseLevel)
+    public function setDotNoiseLevel($dotNoiseLevel)
     {
-        $this->_dotNoiseLevel = $dotNoiseLevel;
+        $this->dotNoiseLevel = $dotNoiseLevel;
         return $this;
     }
 
     /**
      * @param int $lineNoiseLevel
      */
-    public function setLineNoiseLevel ($lineNoiseLevel)
+    public function setLineNoiseLevel($lineNoiseLevel)
     {
-        $this->_lineNoiseLevel = $lineNoiseLevel;
+        $this->lineNoiseLevel = $lineNoiseLevel;
         return $this;
     }
 
     /**
      * Set captcha expiration
      *
-     * @param int $expiration
+     * @param  int $expiration
      * @return Image
      */
     public function setExpiration($expiration)
     {
-        $this->_expiration = $expiration;
+        $this->expiration = $expiration;
         return $this;
     }
 
     /**
      * Set garbage collection frequency
      *
-     * @param int $gcFreq
+     * @param  int $gcFreq
      * @return Image
      */
     public function setGcFreq($gcFreq)
     {
-        $this->_gcFreq = $gcFreq;
+        $this->gcFreq = $gcFreq;
         return $this;
     }
 
@@ -339,7 +337,7 @@ class Image extends Word
      */
     public function setFont($font)
     {
-        $this->_font = $font;
+        $this->font = $font;
         return $this;
     }
 
@@ -351,7 +349,7 @@ class Image extends Word
      */
     public function setFontSize($fsize)
     {
-        $this->_fsize = $fsize;
+        $this->fsize = $fsize;
         return $this;
     }
 
@@ -363,7 +361,7 @@ class Image extends Word
      */
     public function setHeight($height)
     {
-        $this->_height = $height;
+        $this->height = $height;
         return $this;
     }
 
@@ -375,7 +373,7 @@ class Image extends Word
      */
     public function setImgDir($imgDir)
     {
-        $this->_imgDir = rtrim($imgDir, "/\\") . '/';
+        $this->imgDir = rtrim($imgDir, "/\\") . '/';
         return $this;
     }
 
@@ -387,15 +385,16 @@ class Image extends Word
      */
     public function setImgUrl($imgUrl)
     {
-        $this->_imgUrl = rtrim($imgUrl, "/\\") . '/';
+        $this->imgUrl = rtrim($imgUrl, "/\\") . '/';
         return $this;
     }
+
     /**
      * @param string $imgAlt
      */
-    public function setImgAlt ($imgAlt)
+    public function setImgAlt($imgAlt)
     {
-        $this->_imgAlt = $imgAlt;
+        $this->imgAlt = $imgAlt;
         return $this;
     }
 
@@ -407,7 +406,7 @@ class Image extends Word
      */
     public function setSuffix($suffix)
     {
-        $this->_suffix = $suffix;
+        $this->suffix = $suffix;
         return $this;
     }
 
@@ -419,7 +418,7 @@ class Image extends Word
      */
     public function setWidth($width)
     {
-        $this->_width = $width;
+        $this->width = $width;
         return $this;
     }
 
@@ -428,7 +427,7 @@ class Image extends Word
      *
      * @return float
      */
-    protected function _randomFreq()
+    protected function randomFreq()
     {
         return mt_rand(700000, 1000000) / 15000000;
     }
@@ -438,7 +437,7 @@ class Image extends Word
      *
      * @return float
      */
-    protected function _randomPhase()
+    protected function randomPhase()
     {
         // random phase from 0 to pi
         return mt_rand(0, 3141592) / 1000000;
@@ -449,7 +448,7 @@ class Image extends Word
      *
      * @return int
      */
-    protected function _randomSize()
+    protected function randomSize()
     {
         return mt_rand(300, 700) / 100;
     }
@@ -461,18 +460,20 @@ class Image extends Word
      */
     public function generate()
     {
-        $id = parent::generate();
+        $id    = parent::generate();
         $tries = 5;
+
         // If there's already such file, try creating a new ID
-        while($tries-- && file_exists($this->getImgDir() . $id . $this->getSuffix())) {
-            $id = $this->_generateRandomId();
-            $this->_setId($id);
+        while ($tries-- && file_exists($this->getImgDir() . $id . $this->getSuffix())) {
+            $id = $this->generateRandomId();
+            $this->setId($id);
         }
-        $this->_generateImage($id, $this->getWord());
+        $this->generateImage($id, $this->getWord());
 
         if (mt_rand(1, $this->getGcFreq()) == 1) {
-            $this->_gc();
+            $this->gc();
         }
+
         return $id;
     }
 
@@ -485,12 +486,12 @@ class Image extends Word
      * @param string $id Captcha ID
      * @param string $word Captcha word
      */
-    protected function _generateImage($id, $word)
+    protected function generateImage($id, $word)
     {
         $font = $this->getFont();
 
         if (empty($font)) {
-            throw new Exception\NoFontProvidedException("Image CAPTCHA requires font");
+            throw new Exception\NoFontProvidedException('Image CAPTCHA requires font');
         }
 
         $w     = $this->getWidth();
@@ -498,17 +499,23 @@ class Image extends Word
         $fsize = $this->getFontSize();
 
         $img_file   = $this->getImgDir() . $id . $this->getSuffix();
-        if(empty($this->_startImage)) {
+
+        if (empty($this->startImage)) {
             $img = imagecreatetruecolor($w, $h);
         } else {
             // Potential error is change to exception
-            $img = @imagecreatefrompng($this->_startImage);
-            if(!$img) {
-                throw new Exception\ImageNotLoadableException("Can not load start image");
+            ErrorHandler::start();
+            $img   = imagecreatefrompng($this->startImage);
+            $error = ErrorHandler::stop();
+            if (!$img || $error) {
+                throw new Exception\ImageNotLoadableException(
+                    "Can not load start image '{$this->startImage}'", 0, $error
+                );
             }
             $w = imagesx($img);
             $h = imagesy($img);
         }
+
         $text_color = imagecolorallocate($img, 0, 0, 0);
         $bg_color   = imagecolorallocate($img, 255, 255, 255);
         imagefilledrectangle($img, 0, 0, $w-1, $h-1, $bg_color);
@@ -517,11 +524,11 @@ class Image extends Word
         $y = ($h - ($textbox[7] - $textbox[1])) / 2;
         imagefttext($img, $fsize, 0, $x, $y, $text_color, $font, $word);
 
-       // generate noise
-        for ($i=0; $i<$this->_dotNoiseLevel; $i++) {
+        // generate noise
+        for ($i=0; $i < $this->dotNoiseLevel; $i++) {
            imagefilledellipse($img, mt_rand(0,$w), mt_rand(0,$h), 2, 2, $text_color);
         }
-        for($i=0; $i<$this->_lineNoiseLevel; $i++) {
+        for ($i=0; $i < $this->lineNoiseLevel; $i++) {
            imageline($img, mt_rand(0,$w), mt_rand(0,$h), mt_rand(0,$w), mt_rand(0,$h), $text_color);
         }
 
@@ -529,19 +536,20 @@ class Image extends Word
         $img2     = imagecreatetruecolor($w, $h);
         $bg_color = imagecolorallocate($img2, 255, 255, 255);
         imagefilledrectangle($img2, 0, 0, $w-1, $h-1, $bg_color);
+
         // apply wave transforms
-        $freq1 = $this->_randomFreq();
-        $freq2 = $this->_randomFreq();
-        $freq3 = $this->_randomFreq();
-        $freq4 = $this->_randomFreq();
+        $freq1 = $this->randomFreq();
+        $freq2 = $this->randomFreq();
+        $freq3 = $this->randomFreq();
+        $freq4 = $this->randomFreq();
 
-        $ph1 = $this->_randomPhase();
-        $ph2 = $this->_randomPhase();
-        $ph3 = $this->_randomPhase();
-        $ph4 = $this->_randomPhase();
+        $ph1 = $this->randomPhase();
+        $ph2 = $this->randomPhase();
+        $ph3 = $this->randomPhase();
+        $ph4 = $this->randomPhase();
 
-        $szx = $this->_randomSize();
-        $szy = $this->_randomSize();
+        $szx = $this->randomSize();
+        $szy = $this->randomSize();
 
         for ($x = 0; $x < $w; $x++) {
             for ($y = 0; $y < $h; $y++) {
@@ -556,6 +564,7 @@ class Image extends Word
                     $color_y  = (imagecolorat($img, $sx, $sy + 1) >> 16)     & 0xFF;
                     $color_xy = (imagecolorat($img, $sx + 1, $sy + 1) >> 16) & 0xFF;
                 }
+
                 if ($color == 255 && $color_x == 255 && $color_y == 255 && $color_xy == 255) {
                     // ignore background
                     continue;
@@ -574,15 +583,17 @@ class Image extends Word
                               + $color_y  * $frac_x1 * $frac_y
                               + $color_xy * $frac_x  * $frac_y;
                 }
+
                 imagesetpixel($img2, $x, $y, imagecolorallocate($img2, $newcolor, $newcolor, $newcolor));
             }
         }
 
         // generate noise
-        for ($i=0; $i<$this->_dotNoiseLevel; $i++) {
+        for ($i=0; $i<$this->dotNoiseLevel; $i++) {
             imagefilledellipse($img2, mt_rand(0,$w), mt_rand(0,$h), 2, 2, $text_color);
         }
-        for ($i=0; $i<$this->_lineNoiseLevel; $i++) {
+
+        for ($i=0; $i<$this->lineNoiseLevel; $i++) {
            imageline($img2, mt_rand(0,$w), mt_rand(0,$h), mt_rand(0,$w), mt_rand(0,$h), $text_color);
         }
 
@@ -595,20 +606,21 @@ class Image extends Word
      * Remove old files from image directory
      *
      */
-    protected function _gc()
+    protected function gc()
     {
         $expire = time() - $this->getExpiration();
         $imgdir = $this->getImgDir();
-        if(!$imgdir || strlen($imgdir) < 2) {
+        if (!$imgdir || strlen($imgdir) < 2) {
             // safety guard
             return;
         }
-        $suffixLength = strlen($this->_suffix);
-        foreach (new \DirectoryIterator($imgdir) as $file) {
+
+        $suffixLength = strlen($this->suffix);
+        foreach (new DirectoryIterator($imgdir) as $file) {
             if (!$file->isDot() && !$file->isDir()) {
                 if ($file->getMTime() < $expire) {
-                    // only deletes files ending with $this->_suffix
-                    if (substr($file->getFilename(), -($suffixLength)) == $this->_suffix) {
+                    // only deletes files ending with $this->suffix
+                    if (substr($file->getFilename(), -($suffixLength)) == $this->suffix) {
                         unlink($file->getPathname());
                     }
                 }
@@ -617,26 +629,12 @@ class Image extends Word
     }
 
     /**
-     * Display the captcha
+     * Get helper name used to render captcha
      *
-     * @param Renderer $view
-     * @param mixed $element
      * @return string
      */
-    public function render(Renderer $view = null, $element = null)
+    public function getHelperName()
     {
-        $endTag = ' />';
-        if ($view instanceof Pluggable) {
-            $doctype = $view->plugin('doctype');
-            if ($doctype && !$doctype->isXhtml()) {
-                $endTag = '>';
-            }
-        }
-
-        return '<img width="' . $this->getWidth() 
-            . '" height="' . $this->getHeight() 
-            . '" alt="' . $this->getImgAlt()
-            . '" src="' . $this->getImgUrl() . $this->getId() . $this->getSuffix() . '"' 
-            . $endTag;
+        return 'captcha/image';
     }
 }

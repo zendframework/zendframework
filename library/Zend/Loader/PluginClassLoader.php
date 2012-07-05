@@ -19,14 +19,11 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace Zend\Loader;
 
-use ArrayIterator,
-    IteratorAggregate,
-    Traversable;
+use ArrayIterator;
+use IteratorAggregate;
+use Traversable;
 
 /**
  * Plugin class locator interface
@@ -143,6 +140,17 @@ class PluginClassLoader implements PluginClassLocator
         }
 
         foreach ($map as $name => $class) {
+            if (is_int($name) || is_numeric($name)) {
+                if (!is_object($class) && class_exists($class)) {
+                    $class = new $class();
+                }
+
+                if ($class instanceof Traversable) {
+                    $this->registerPlugins($class);
+                    continue;
+                }
+            }
+
             $this->registerPlugin($name, $class);
         }
 

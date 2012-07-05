@@ -25,10 +25,13 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\EventManager\EventManager,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
-    Zend\View\Model,
+    Zend\View\Model\ModelInterface as Model,
+    Zend\View\Model\JsonModel,
+    Zend\View\Model\ViewModel,
     Zend\View\Renderer\JsonRenderer,
     Zend\View\Strategy\JsonStrategy,
-    Zend\View\ViewEvent;
+    Zend\View\ViewEvent,
+    Zend\Stdlib\Parameters;
 
 /**
  * @category   Zend
@@ -49,7 +52,7 @@ class JsonStrategyTest extends TestCase
 
     public function testJsonModelSelectsJsonStrategy()
     {
-        $this->event->setModel(new Model\JsonModel());
+        $this->event->setModel(new JsonModel());
         $result = $this->strategy->selectRenderer($this->event);
         $this->assertSame($this->renderer, $result);
     }
@@ -57,10 +60,31 @@ class JsonStrategyTest extends TestCase
     public function testJsonAcceptHeaderSelectsJsonStrategy()
     {
         $request = new HttpRequest();
-        $request->headers()->addHeaderLine('Accept', 'application/json');
+        $request->getHeaders()->addHeaderLine('Accept', 'application/json');
         $this->event->setRequest($request);
         $result = $this->strategy->selectRenderer($this->event);
         $this->assertSame($this->renderer, $result);
+    }
+
+    public function testJavascriptAcceptHeaderSelectsJsonStrategy()
+    {
+        $request = new HttpRequest();
+        $request->getHeaders()->addHeaderLine('Accept', 'application/javascript');
+        $this->event->setRequest($request);
+        $result = $this->strategy->selectRenderer($this->event);
+        $this->assertSame($this->renderer, $result);
+        $this->assertFalse($result->hasJsonpCallback());
+    }
+
+    public function testJavascriptAcceptHeaderSelectsJsonStrategyAndSetsJsonpCallback()
+    {
+        $request = new HttpRequest();
+        $request->getHeaders()->addHeaderLine('Accept', 'application/javascript');
+        $request->setQuery(new Parameters(array('callback' => 'foo')));
+        $this->event->setRequest($request);
+        $result = $this->strategy->selectRenderer($this->event);
+        $this->assertSame($this->renderer, $result);
+        $this->assertTrue($result->hasJsonpCallback());
     }
 
     public function testLackOfJsonModelOrAcceptHeaderDoesNotSelectJsonStrategy()
@@ -73,7 +97,7 @@ class JsonStrategyTest extends TestCase
     protected function assertResponseNotInjected()
     {
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertTrue(empty($content));
         $this->assertFalse($headers->has('content-type'));
     }
@@ -112,15 +136,31 @@ class JsonStrategyTest extends TestCase
 
         $this->strategy->injectResponse($this->event);
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertEquals($expected, $content);
         $this->assertTrue($headers->has('content-type'));
         $this->assertEquals('application/json', $headers->get('content-type')->getFieldValue());
     }
 
+    public function testMatchingRendererAndStringResultInjectsResponseJsonp()
+    {
+        $expected = json_encode(array('foo' => 'bar'));
+        $this->renderer->setJsonpCallback('foo');
+        $this->event->setResponse($this->response);
+        $this->event->setRenderer($this->renderer);
+        $this->event->setResult($expected);
+
+        $this->strategy->injectResponse($this->event);
+        $content = $this->response->getContent();
+        $headers = $this->response->getHeaders();
+        $this->assertEquals($expected, $content);
+        $this->assertTrue($headers->has('content-type'));
+        $this->assertEquals('application/javascript', $headers->get('content-type')->getFieldValue());
+    }
+
     public function testReturnsNullWhenCannotSelectRenderer()
     {
-        $model   = new Model\ViewModel();
+        $model   = new ViewModel();
         $request = new HttpRequest();
         $this->event->setModel($model);
         $this->event->setRequest($request);

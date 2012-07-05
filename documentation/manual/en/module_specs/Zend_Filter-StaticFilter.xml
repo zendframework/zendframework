@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction.staticfilter"><info><title>Using the StaticFilter</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction.staticfilter"><title>Using the StaticFilter</title>
 
     <para>
         If it is inconvenient to load a given filter class and create an

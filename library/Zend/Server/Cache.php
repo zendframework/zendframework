@@ -18,15 +18,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Server;
 
 /**
  * \Zend\Server\Cache: cache server definitions
  *
- * @uses       \Zend\Server\Definition
  * @category   Zend
  * @package    Zend_Server
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

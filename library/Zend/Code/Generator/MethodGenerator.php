@@ -13,44 +13,35 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Code\Generator;
 
 use Zend\Code\Reflection\MethodReflection;
 
 /**
- * @uses       \Zend\Code\GeneratorDocblock
- * @uses       \Zend\Code\Generator\Exception
- * @uses       \Zend\Code\Generator\PhpMember\AbstractMember
- * @uses       \Zend\Code\Generator\PhpParameter
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MethodGenerator extends AbstractMemberGenerator
 {
     /**
-     * @var DocblockGenerator
+     * @var DocBlockGenerator
      */
-    protected $docblock = null;
+    protected $docBlock = null;
 
     /**
      * @var bool
      */
     protected $isFinal = false;
 
-    /**
-     * @var array
-     */
+    /** @var ParameterGenerator[] */
     protected $parameters = array();
 
     /**
@@ -61,8 +52,8 @@ class MethodGenerator extends AbstractMemberGenerator
     /**
      * fromReflection()
      *
-     * @param \Zend\Code\Reflection\MethodReflection $reflectionMethod
-     * @return \MethodGenerator\Code\Generator\PhpMethod
+     * @param  MethodReflection $reflectionMethod
+     * @return MethodGenerator
      */
     public static function fromReflection(MethodReflection $reflectionMethod)
     {
@@ -72,7 +63,7 @@ class MethodGenerator extends AbstractMemberGenerator
         $method->setSourceDirty(false);
 
         if ($reflectionMethod->getDocComment() != '') {
-            $method->setDocblock(DocblockGenerator::fromReflection($reflectionMethod->getDocblock()));
+            $method->setDocBlock(DocBlockGenerator::fromReflection($reflectionMethod->getDocBlock()));
         }
 
         $method->setFinal($reflectionMethod->isFinal());
@@ -98,7 +89,8 @@ class MethodGenerator extends AbstractMemberGenerator
         return $method;
     }
 
-    public function __construct($name = null, array $parameters = array(), $flags = self::FLAG_PUBLIC, $body = null, $docblock = null)
+    public function __construct($name = null, array $parameters = array(), $flags = self::FLAG_PUBLIC, $body = null,
+                                $docBlock = null)
     {
         if ($name !== null) {
             $this->setName($name);
@@ -112,8 +104,8 @@ class MethodGenerator extends AbstractMemberGenerator
         if ($body !== null) {
             $this->setBody($body);
         }
-        if ($docblock !== null) {
-            $this->setDocblock($docblock);
+        if ($docBlock !== null) {
+            $this->setDocBlock($docBlock);
         }
     }
 
@@ -121,7 +113,7 @@ class MethodGenerator extends AbstractMemberGenerator
      * setParameters()
      *
      * @param array $parameters
-     * @return \MethodGenerator\Code\Generator\PhpMethod
+     * @return MethodGenerator
      */
     public function setParameters(array $parameters)
     {
@@ -135,14 +127,17 @@ class MethodGenerator extends AbstractMemberGenerator
      * setParameter()
      *
      * @param ParameterGenerator|string $parameter
-     * @return \MethodGenerator\Code\Generator\PhpMethod
+     * @throws Exception\InvalidArgumentException
+     * @return MethodGenerator
      */
     public function setParameter($parameter)
     {
         if (is_string($parameter)) {
             $parameter = new ParameterGenerator($parameter);
         } elseif (!$parameter instanceof ParameterGenerator) {
-            throw new Exception\InvalidArgumentException('setParameter() expects either an array of method options or an instance of Zend_CodeGenerator_Php_Parameter');
+            throw new Exception\InvalidArgumentException(
+                'setParameter() is expecting either a string, array or an instance of Zend\Code\Generator\ParameterGenerator'
+            );
         }
         $parameterName = $parameter->getName();
 
@@ -153,7 +148,7 @@ class MethodGenerator extends AbstractMemberGenerator
     /**
      * getParameters()
      *
-     * @return array Array of \Zend\Code\Generator\Parameter\Parameter
+     * @return ParameterGenerator[]
      */
     public function getParameters()
     {
@@ -164,7 +159,7 @@ class MethodGenerator extends AbstractMemberGenerator
      * setBody()
      *
      * @param string $body
-     * @return \MethodGenerator\Code\Generator\PhpMethod
+     * @return MethodGenerator
      */
     public function setBody($body)
     {
@@ -193,9 +188,9 @@ class MethodGenerator extends AbstractMemberGenerator
 
         $indent = $this->getIndentation();
 
-        if (($docblock = $this->getDocblock()) !== null) {
-            $docblock->setIndentation($indent);
-            $output .= $docblock->generate();
+        if (($docBlock = $this->getDocBlock()) !== null) {
+            $docBlock->setIndentation($indent);
+            $output .= $docBlock->generate();
         }
 
         $output .= $indent;
@@ -213,17 +208,17 @@ class MethodGenerator extends AbstractMemberGenerator
         $parameters = $this->getParameters();
         if (!empty($parameters)) {
             foreach ($parameters as $parameter) {
-                $parameterOuput[] = $parameter->generate();
+                $parameterOutput[] = $parameter->generate();
             }
 
-            $output .= implode(', ', $parameterOuput);
+            $output .= implode(', ', $parameterOutput);
         }
 
         $output .= ')' . self::LINE_FEED . $indent . '{' . self::LINE_FEED;
 
         if ($this->body) {
             $output .= preg_replace('#^(.+?)$#m', $indent . $indent . '$1', trim($this->body))
-                    .  self::LINE_FEED;
+                . self::LINE_FEED;
         }
 
         $output .= $indent . '}' . self::LINE_FEED;

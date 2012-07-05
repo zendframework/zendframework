@@ -18,15 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\OAuth\Signature;
 use Zend\Crypt\Hmac as HMACEncryption;
 
 /**
- * @uses       Zend\Crypt\Hmac
- * @uses       Zend\OAuth\Signature\AbstractSignature
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -48,7 +43,7 @@ class Hmac extends AbstractSignature
             $this->_key,
             $this->_hashAlgorithm,
             $this->_getBaseSignatureString($params, $method, $url),
-            HMACEncryption::BINARY
+            HMACEncryption::OUTPUT_BINARY
         );
         return base64_encode($binaryHash);
     }

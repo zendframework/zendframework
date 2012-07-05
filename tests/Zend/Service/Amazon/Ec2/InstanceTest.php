@@ -19,12 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon\Ec2;
-use Zend\Service\Amazon\Ec2\Instance,
-    Zend\Service\Amazon\Ec2\Exception;
+use Zend\Service\Amazon\Ec2\Instance;
+use Zend\Service\Amazon\Ec2\Exception;
 
 /**
  * Zend_Service_Amazon_Ec2_Instance test case.
@@ -51,8 +48,6 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-
         $this->instance = new Instance('access_key', 'secret_access_key');
 
         $adapter = new \Zend\Http\Client\Adapter\Test();
@@ -72,8 +67,6 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
         unset($this->adapter);
 
         $this->instance = null;
-
-        parent::tearDown();
     }
 
     public function testConstants()

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.securitygroups"><info><title>Zend_Service_Amazon_Ec2: Security Groups</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.securitygroups"><title>Zend_Service_Amazon_Ec2: Security Groups</title>
     
 
     <para>
@@ -15,16 +15,16 @@
         launched in the future.
     </para>
 
-    <note><info><title>Maximum Security Groups</title></info>
+    <note><title>Maximum Security Groups</title>
         
 
         <para>You can create up to 100 security groups.</para>
     </note>
 
-    <section xml:id="zend.service.amazon.ec2.securitygroups.maintenance"><info><title>Security Group Maintenance</title></info>
+    <section xml:id="zend.service.amazon.ec2.securitygroups.maintenance"><title>Security Group Maintenance</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.create"><info><title>Create a new Security Group</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.create"><title>Create a new Security Group</title>
             
 
             <para>
@@ -48,7 +48,7 @@ $return = $ec2_sg->create('mygroup', 'my group description');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.describe"><info><title>Describe a Security Group</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.describe"><title>Describe a Security Group</title>
             
 
             <para>
@@ -76,7 +76,7 @@ $return = $ec2_sg->describe('mygroup');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.delete"><info><title>Delete a Security Group</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.delete"><title>Delete a Security Group</title>
             
 
             <para>
@@ -101,10 +101,10 @@ $return = $ec2_sg->delete('mygroup');
         </example>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.securitygroups.authorize"><info><title>Authorizing Access</title></info>
+    <section xml:id="zend.service.amazon.ec2.securitygroups.authorize"><title>Authorizing Access</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.authorize.ip"><info><title>Authorizing by IP</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.authorize.ip"><title>Authorizing by IP</title>
             
 
             <para>
@@ -142,7 +142,7 @@ $return = $ec2_sg->authorizeIp('mygroup',
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.authorize.group"><info><title>Authorize By Group</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.authorize.group"><title>Authorize By Group</title>
             
 
             <para>
@@ -168,10 +168,10 @@ $return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
         </example>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.securitygroups.revoke"><info><title>Revoking Access</title></info>
+    <section xml:id="zend.service.amazon.ec2.securitygroups.revoke"><title>Revoking Access</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.revoke.ip"><info><title>Revoke by IP</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.revoke.ip"><title>Revoke by IP</title>
             
 
             <para>
@@ -210,7 +210,7 @@ $return = $ec2_sg->revokeIp('mygroup',
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.revoke.group"><info><title>Revoke By Group</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.revoke.group"><title>Revoke By Group</title>
             
 
             <para>

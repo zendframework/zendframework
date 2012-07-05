@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper\Placeholder;
 
 use Zend\View\Renderer\PhpRenderer as View;
@@ -48,11 +45,7 @@ class StandaloneContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = \Zend\View\Helper\Placeholder\Registry::REGISTRY_KEY;
-        if (\Zend\Registry::isRegistered($regKey)) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry[$regKey]);
-        }
+        \Zend\View\Helper\Placeholder\Registry::unsetRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new Foo();
     }
@@ -91,7 +84,7 @@ class StandaloneContainerTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class Foo extends \Zend\View\Helper\Placeholder\Container\Standalone
+class Foo extends \Zend\View\Helper\Placeholder\Container\AbstractStandalone
 {
     protected $_regKey = 'foo';
     public function direct() {}

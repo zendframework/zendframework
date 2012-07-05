@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Wildfire\Plugin;
 use Zend\Wildfire,
     Zend\Wildfire\Plugin\Exception;

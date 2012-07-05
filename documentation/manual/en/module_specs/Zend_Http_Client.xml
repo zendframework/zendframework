@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client">
-    <info>
+    
         <title>Zend\Http\Client</title>
-    </info>
+    
 
     <section xml:id="zend.http.client.intro">
 
-        <info>
+        
             <title>Overview</title>
-        </info>
+        
 
         <para>
             <classname>Zend\Http\Client</classname> provides an easy interface for preforming Hyper-Text
@@ -23,9 +23,9 @@
     </section>
 
     <section xml:id="zend.http.client.quick-start">
-        <info>
+        
             <title>Quick Start</title>
-        </info>
+        
 
         <para>
             The class constructor optionally accepts a URL as its first parameter
@@ -71,16 +71,16 @@ $client->setConfig($config);
 
     <section xml:id="zend.http.client.options">
 
-        <info>
+        
             <title>Configuration Options</title>
-        </info>
+        
 
         <para>
             The constructor and setConfig() method accept an associative array
             of configuration parameters, or a <classname>Zend\Config\Config</classname> object. Setting
             these parameters is optional, as they all have default values.
 
-            <table xml:id="zend.http.client.configuration.table"><info><title>Zend\Http\Client configuration parameters</title></info>
+            <table xml:id="zend.http.client.configuration.table"><title>Zend\Http\Client configuration parameters</title>
 
 
                 <tgroup cols="4">
@@ -205,9 +205,9 @@ $client->setConfig($config);
     </section>
 
     <section xml:id="zend.http.client.methods">
-        <info>
+        
             <title>Available Methods</title>
-        </info>
+        
 
         <variablelist>
             <varlistentry xml:id="zend.http.client.methods.__construct">
@@ -820,11 +820,11 @@ application/octet-stream.</para>
     </section>
 
     <section xml:id="zend.http.client.examples">
-        <info>
+        
             <title>Examples</title>
-        </info>
+        
 
-        <example xml:id="zend.http.client.basic-requests.example-1"><info><title>Performing a Simple GET Request</title></info>
+        <example xml:id="zend.http.client.basic-requests.example-1"><title>Performing a Simple GET Request</title>
             <para>
                 Performing simple <acronym>HTTP</acronym> requests is very easily done using the
                 request() method, and rarely needs more than three lines of code:
@@ -854,7 +854,7 @@ $response = $client->send();
 
 
         <example xml:id="zend.http.client.basic-requests.example-2">
-            <info><title>Using Request Methods Other Than GET</title></info>
+            <title>Using Request Methods Other Than GET</title>
 
             <para>
                 For convenience, these are all defined as class constants:
@@ -883,9 +883,9 @@ $response = $client->request();
 
         <example xml:id="zend.http.client.parameters.example-1">
 
-            <info>
+            
                 <title>Adding GET and POST parameters </title>
-            </info>
+            
 
             <para>
                 Adding <constant>GET</constant> parameters to an <acronym>HTTP</acronym> request is
@@ -920,9 +920,9 @@ $client->setParameterGet(array(
 
         <example xml:id="zend.http.client.parameters.example-2">
 
-            <info>
+            
                 <title>Setting POST Parameters</title>
-            </info>
+            
 
             <para>
                 While <constant>GET</constant> parameters can be sent with every request method, POST
@@ -957,9 +957,9 @@ $client->setParameterPost(array(
 
         <example xml:id="zend.http.client.request-object-usage">
 
-            <info>
+            
                 <title>Using A Request Object With The Client</title>
-            </info>
+            
 
             <para></para>
 

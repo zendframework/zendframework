@@ -19,17 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Dojo\Form\Element;
 
-use Zend\View\Renderer as View;
+use Zend\View\Renderer\RendererInterface as View;
 
 /**
  * Base element for dijit elements
  *
- * @uses       \Zend\Form\Element
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage Form_Element
@@ -54,9 +50,8 @@ abstract class Dijit extends \Zend\Form\Element
      * Constructor
      *
      * @todo Should we set dojo view helper paths here?
-     * @param  mixed $spec
-     * @param  mixed $options
-     * @return void
+     * @param  array|string|\Traversable $spec
+     * @param  array|string|\Traversable $options
      */
     public function __construct($spec, $options = null)
     {
@@ -178,7 +173,7 @@ abstract class Dijit extends \Zend\Form\Element
      *
      * Ensures that the view object has the dojo view helper path set.
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  View $view
      * @return \Zend\Dojo\Form\Element\Dijit
      */
     public function setView(View $view = null)

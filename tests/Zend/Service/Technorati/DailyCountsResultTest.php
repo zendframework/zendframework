@@ -19,10 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Technorati;
+
+use DateTime;
 use Zend\Service\Technorati;
 
 /**
@@ -60,8 +59,8 @@ class DailyCountsResultTest extends TestCase
         $object = new Technorati\DailyCountsResult($this->domElements->item(1));
 
         // check properties
-        $this->assertInstanceOf('Zend\Date\Date', $object->getDate());
-        $this->assertEquals(new \Zend\Date\Date(strtotime('2007-11-13')), $object->getDate());
+        $this->assertInstanceOf('DateTime', $object->getDate());
+        $this->assertEquals(new DateTime('2007-11-13'), $object->getDate());
         $this->assertInternalType('integer', $object->getCount());
         $this->assertEquals(54414, $object->getCount());
     }

@@ -19,19 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Amazon\Ec2;
-use Zend\Crypt;
+use Zend\Crypt\Hmac;
 
 /**
  * An Amazon EC2 interface that allows yout to run, terminate, reboot and describe Amazon
  * Ec2 Instances.
  *
- * @uses       Zend_Crypt_Hmac
- * @uses       Zend_Json
- * @uses       Zend_Service_Amazon_Ec2_Abstract
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2
@@ -182,7 +176,6 @@ class WindowsInstance extends AbstractEc2
      */
     protected function _signS3UploadPolicy($policy)
     {
-        $hmac = Crypt\Hmac::compute($this->_getSecretKey(), 'SHA1', $policy, Crypt\Hmac::BINARY);
-        return $hmac;
+        return Hmac::compute($this->_getSecretKey(), 'SHA1', $policy, Hmac::OUTPUT_BINARY);
     }
 }

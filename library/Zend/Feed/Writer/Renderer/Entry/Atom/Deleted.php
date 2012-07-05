@@ -18,16 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Feed\Writer\Renderer\Entry\Atom;
 
+use DateTime;
+use DOMDocument;
+use DOMElement;
+
 /**
- * @uses       DOMDocument
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\Writer\Renderer\AbstractRenderer
- * @uses       \Zend\Feed\Writer\Renderer
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -35,7 +32,7 @@ namespace Zend\Feed\Writer\Renderer\Entry\Atom;
  */
 class Deleted
     extends \Zend\Feed\Writer\Renderer\AbstractRenderer
-    implements \Zend\Feed\Writer\Renderer
+    implements \Zend\Feed\Writer\Renderer\RendererInterface
 {
     /**
      * Constructor
@@ -55,13 +52,13 @@ class Deleted
      */
     public function render()
     {
-        $this->_dom = new \DOMDocument('1.0', $this->_container->getEncoding());
+        $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
         $this->_dom->formatOutput = true;
         $entry = $this->_dom->createElement('at:deleted-entry');
         $this->_dom->appendChild($entry);
         
         $entry->setAttribute('ref', $this->_container->getReference());
-        $entry->setAttribute('when', $this->_container->getWhen()->get(\Zend\Date\Date::ISO_8601));
+        $entry->setAttribute('when', $this->_container->getWhen()->format(DateTime::ISO8601));
         
         $this->_setBy($this->_dom, $entry);
         $this->_setComment($this->_dom, $entry);
@@ -76,7 +73,7 @@ class Deleted
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setComment(\DOMDocument $dom, \DOMElement $root)
+    protected function _setComment(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getComment()) {
             return;
@@ -95,7 +92,7 @@ class Deleted
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setBy(\DOMDocument $dom, \DOMElement $root)
+    protected function _setBy(DOMDocument $dom, DOMElement $root)
     {
         $data = $this->_container->getBy();
         if ((!$data || empty($data))) {

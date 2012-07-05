@@ -19,14 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 
-use Zend\View\Renderer\PhpRenderer as View,
-    Zend\View\Helper\Doctype,
-    Zend\View\Helper\HtmlObject;
+use Zend\View\Renderer\PhpRenderer as View;
+use Zend\View\Helper\Doctype;
+use Zend\View\Helper\HtmlObject;
 
 /**
  * @category   Zend
@@ -64,7 +61,7 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testViewObjectIsSet()
     {
-        $this->assertInstanceof('Zend\View\Renderer', $this->helper->getView());
+        $this->assertInstanceof('Zend\View\Renderer\RendererInterface', $this->helper->getView());
     }
 
     public function testMakeHtmlObjectWithoutAttribsWithoutParams()

@@ -18,22 +18,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader\Feed;
+
+use DateTime;
+use DOMDocument;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Collection;
-use Zend\Date;
+use Zend\Feed\Reader\Exception;
 
 /**
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Reader\Exception
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Collection\Author
-* @uses \Zend\Feed\Reader\Extension\Atom\Feed
-* @uses \Zend\Feed\Reader\Extension\DublinCore\Feed
-* @uses \Zend\Feed\Reader\Feed\AbstractFeed
 * @category Zend
 * @package Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -48,7 +41,7 @@ class Rss extends AbstractFeed
      * @param  DOMDocument $dom
      * @param  string $type
      */
-    public function __construct(\DomDocument $dom, $type = null)
+    public function __construct(DOMDocument $dom, $type = null)
     {
         parent::__construct($dom, $type);
 
@@ -197,7 +190,8 @@ class Rss extends AbstractFeed
     /**
      * Get the feed modification date
      *
-     * @return Date\Date
+     * @return DateTime
+     * @throws Exception\RuntimeException
      */
     public function getDateModified()
     {
@@ -217,18 +211,17 @@ class Rss extends AbstractFeed
             if ($dateModified) {
                 $dateModifiedParsed = strtotime($dateModified);
                 if ($dateModifiedParsed) {
-                    $date = new Date\Date($dateModifiedParsed);
+                    $date = new DateTime('@' . $dateModifiedParsed);
                 } else {
-                    $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
-                    Date\Date::RFC_2822, Date\Date::DATES);
-                    $date = new Date\Date;
+                    $dateStandards = array(DateTime::RSS, DateTime::RFC822,
+                                           DateTime::RFC2822, null);
                     foreach ($dateStandards as $standard) {
                         try {
-                            $date->set($dateModified, $standard);
+                            $date = DateTime::createFromFormat($standard, $dateModified);
                             break;
-                        } catch (Date\Exception $e) {
-                            if ($standard == Date\Date::DATES) {
-                                throw new Exception(
+                        } catch (\Exception $e) {
+                            if ($standard == null) {
+                                throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
                                     . $e->getMessage(),
@@ -261,7 +254,7 @@ class Rss extends AbstractFeed
     /**
      * Get the feed lastBuild date
      *
-     * @return Date\Date
+     * @return DateTime
      */
     public function getLastBuildDate()
     {
@@ -278,18 +271,17 @@ class Rss extends AbstractFeed
             if ($lastBuildDate) {
                 $lastBuildDateParsed = strtotime($lastBuildDate);
                 if ($lastBuildDateParsed) {
-                    $date = new Date\Date($lastBuildDateParsed);
+                    $date = new DateTime('@' . $lastBuildDateParsed);
                 } else {
-                    $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
-                    Date\Date::RFC_2822, Date\Date::DATES);
-                    $date = new Date\Date;
+                    $dateStandards = array(DateTime::RSS, DateTime::RFC822,
+                                           DateTime::RFC2822, null);
                     foreach ($dateStandards as $standard) {
                         try {
-                            $date->set($lastBuildDate, $standard);
+                            $date = DateTime::createFromFormat($standard, $lastBuildDateParsed);
                             break;
-                        } catch (Date\Exception $e) {
-                            if ($standard == Date\Date::DATES) {
-                                throw new Exception(
+                        } catch (\Exception $e) {
+                            if ($standard == null) {
+                                throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
                                     . $e->getMessage(),
@@ -643,7 +635,7 @@ class Rss extends AbstractFeed
     /**
      * Get all categories
      *
-     * @return Reader_Collection_Category
+     * @return Reader\Collection\Category
      */
     public function getCategories()
     {

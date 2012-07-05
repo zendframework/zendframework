@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase,
@@ -143,7 +140,7 @@ class RenderChildModelTest extends TestCase
         $renderer = new PhpRenderer();
         $renderer->setResolver($this->resolver);
         $this->setExpectedException('Zend\View\Exception\RuntimeException', 'no view model');
-        $this->expectOutputString("Layout start\n\n");
+        $this->expectOutputString("Layout start" . PHP_EOL . PHP_EOL);
         $renderer->render('layout');
     }
 }

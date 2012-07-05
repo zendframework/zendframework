@@ -19,18 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Queue\Stomp;
 
-use Zend\Queue\Exception as QueueException;
+use Zend\Queue\Exception;
 
 /**
  * This class represents a Stomp Frame
  *
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Stomp\StompFrame
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Stomp
@@ -107,7 +102,7 @@ class Frame implements StompFrame
     public function setAutoContentLength($auto)
     {
         if (!is_bool($auto)) {
-            throw new QueueException('$auto is not a boolean');
+            throw new Exception\InvalidArgumentException('$auto is not a boolean');
         }
 
         $this->_autoContentLength = $auto;
@@ -152,11 +147,11 @@ class Frame implements StompFrame
      */
     public function setHeader($header, $value) {
         if (!is_string($header)) {
-            throw new QueueException('$header is not a string: ' . print_r($header, true));
+            throw new Exception\InvalidArgumentException('$header is not a string: ' . print_r($header, true));
         }
 
         if (!is_scalar($value)) {
-            throw new QueueException('$value is not a string: ' . print_r($value, true));
+            throw new Exception\InvalidArgumentException('$value is not a string: ' . print_r($value, true));
         }
 
         $this->_headers[$header] = $value;
@@ -176,7 +171,7 @@ class Frame implements StompFrame
     public function getHeader($header)
     {
         if (!is_string($header)) {
-            throw new QueueException('$header is not a string');
+            throw new Exception\InvalidArgumentException('$header is not a string');
         }
 
         return isset($this->_headers[$header])
@@ -210,7 +205,7 @@ class Frame implements StompFrame
     public function setBody($body)
     {
         if (!is_string($body) && $body !== null) {
-            throw new QueueException('$body is not a string or null');
+            throw new Exception\InvalidArgumentException('$body is not a string or null');
         }
 
         $this->_body = $body;
@@ -241,7 +236,7 @@ class Frame implements StompFrame
     public function setCommand($command)
     {
         if (!is_string($command) && $command !== null) {
-            throw new QueueException('$command is not a string or null');
+            throw new Exception\InvalidArgumentException('$command is not a string or null');
         }
 
         $this->_command = $command;
@@ -257,7 +252,7 @@ class Frame implements StompFrame
     public function toFrame()
     {
         if ($this->getCommand() === false) {
-            throw new QueueException('You must set the command');
+            throw new Exception\LogicException('You must set the command');
         }
 
         $command = $this->getCommand();
@@ -299,7 +294,7 @@ class Frame implements StompFrame
     {
         try {
             $return = $this->toFrame();
-        } catch (QueueException $e) {
+        } catch (Exception\ExceptionInterface $e) {
             $return = '';
         }
         return $return;
@@ -360,7 +355,7 @@ class Frame implements StompFrame
             return '';
         }
         if (substr($parts[1], -2) != self::END_OF_FRAME) {
-            throw new QueueException('badly formatted body not frame terminated');
+            throw new Exception\DomainException('badly formatted body not frame terminated');
         }
         return substr($parts[1], 0, -2);
     }
@@ -375,7 +370,7 @@ class Frame implements StompFrame
     public function fromFrame($frame)
     {
         if (!is_string($frame)) {
-            throw new QueueException('$frame is not a string');
+            throw new Exception\InvalidArgumentException('$frame is not a string');
         }
 
         $this->setCommand(self::extractCommand($frame));

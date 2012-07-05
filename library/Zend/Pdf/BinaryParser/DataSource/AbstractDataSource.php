@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\BinaryParser\DataSource;
 use Zend\Pdf\Exception;
 use Zend\Pdf;
@@ -90,7 +87,7 @@ abstract class AbstractDataSource
      *
      * @param integer $byteCount Number of bytes to read.
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     abstract public function readBytes($byteCount);
 
@@ -119,7 +116,7 @@ abstract class AbstractDataSource
      */
     public function __toString()
     {
-        return get_class($this);
+        return get_called_class();
     }
 
 
@@ -160,7 +157,7 @@ abstract class AbstractDataSource
      * parent method.
      *
      * @param integer $offset Destination byte offset.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function moveToOffset($offset)
     {
@@ -185,7 +182,7 @@ abstract class AbstractDataSource
      * the end of the data source.
      *
      * @param integer $byteCount Number of bytes to skip.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function skipBytes($byteCount)
     {

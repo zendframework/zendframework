@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client.adapters"><info><title>Zend_Http_Client - Connection Adapters</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client.adapters"><title>Zend_Http_Client - Connection Adapters</title>
     
 
-    <section xml:id="zend.http.client.adapters.overview"><info><title>Overview</title></info>
+    <section xml:id="zend.http.client.adapters.overview"><title>Overview</title>
         
 
         <para>
@@ -58,7 +58,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.http.client.adapters.socket"><info><title>The Socket Adapter</title></info>
+    <section xml:id="zend.http.client.adapters.socket"><title>The Socket Adapter</title>
         
 
         <para>
@@ -74,7 +74,7 @@
             can be set using <classname>Zend_Http_Client-&gt;setConfig()</classname> or
             passed to the client constructor.
 
-            <table xml:id="zend.http.client.adapter.socket.configuration.table"><info><title>Zend_Http_Client_Adapter_Socket configuration parameters</title></info>
+            <table xml:id="zend.http.client.adapter.socket.configuration.table"><title>Zend_Http_Client_Adapter_Socket configuration parameters</title>
                 
 
                 <tgroup cols="4">
@@ -144,7 +144,7 @@
                 </tgroup>
             </table>
 
-            <note><info><title>Persistent TCP Connections</title></info>
+            <note><title>Persistent TCP Connections</title>
                 
 
                 <para>
@@ -171,7 +171,7 @@
                 </para>
             </note>
 
-            <note><info><title>HTTPS SSL Stream Parameters</title></info>
+            <note><title>HTTPS SSL Stream Parameters</title>
                 
 
                 <para>
@@ -190,7 +190,7 @@
             </note>
         </para>
 
-        <example xml:id="zend.http.client.adapters.socket.example-1"><info><title>Changing the HTTPS transport layer</title></info>
+        <example xml:id="zend.http.client.adapters.socket.example-1"><title>Changing the HTTPS transport layer</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -217,7 +217,7 @@ $response = $client->request();
             <methodname>fsockopen('tls://www.example.com', 443)</methodname>
         </para>
 
-        <section xml:id="zend.http.client.adapters.socket.streamcontext"><info><title>Customizing and accessing the Socket adapter stream context</title></info>
+        <section xml:id="zend.http.client.adapters.socket.streamcontext"><title>Customizing and accessing the Socket adapter stream context</title>
             
 
             <para>
@@ -257,7 +257,7 @@ $response = $client->request();
                 </itemizedlist>
             </para>
 
-            <example xml:id="zend.http.client.adapters.socket.streamcontext.example-1"><info><title>Setting stream context options for the Socket adapter</title></info>
+            <example xml:id="zend.http.client.adapters.socket.streamcontext.example-1"><title>Setting stream context options for the Socket adapter</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -316,7 +316,7 @@ echo $opts['ssl']['peer_certificate'];
         </section>
     </section>
 
-    <section xml:id="zend.http.client.adapters.proxy"><info><title>The Proxy Adapter</title></info>
+    <section xml:id="zend.http.client.adapters.proxy"><title>The Proxy Adapter</title>
         
 
         <para>
@@ -331,7 +331,7 @@ echo $opts['ssl']['peer_certificate'];
             Using the Proxy adapter requires several additional configuration
             parameters to be set, in addition to the default 'adapter' option:
 
-            <table xml:id="zend.http.client.adapters.proxy.table"><info><title>Zend_Http_Client configuration parameters</title></info>
+            <table xml:id="zend.http.client.adapters.proxy.table"><title>Zend_Http_Client configuration parameters</title>
                 
 
                 <tgroup cols="4">
@@ -405,7 +405,7 @@ echo $opts['ssl']['peer_certificate'];
             basic authentication (Zend_Http_Client::AUTH_BASIC) is supported.
         </para>
 
-        <example xml:id="zend.http.client.adapters.proxy.example-1"><info><title>Using Zend_Http_Client behind a proxy server</title></info>
+        <example xml:id="zend.http.client.adapters.proxy.example-1"><title>Using Zend_Http_Client behind a proxy server</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -442,7 +442,7 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
         </note>
     </section>
 
-    <section xml:id="zend.http.client.adapters.curl"><info><title>The cURL Adapter</title></info>
+    <section xml:id="zend.http.client.adapters.curl"><title>The cURL Adapter</title>
         
 
         <para>
@@ -455,7 +455,7 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
             between servers.
         </para>
 
-        <example xml:id="zend.http.client.adapters.curl.example-1"><info><title>Setting cURL options</title></info>
+        <example xml:id="zend.http.client.adapters.curl.example-1"><title>Setting cURL options</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -477,7 +477,7 @@ $client = new Zend_Http_Client($uri, $config);
             get access to the Curl handle by calling <command>$adapter-&gt;getHandle();</command>
         </para>
 
-        <example xml:id="zend.http.client.adapters.curl.example-2"><info><title>Transfering Files by Handle</title></info>
+        <example xml:id="zend.http.client.adapters.curl.example-2"><title>Transfering Files by Handle</title>
             
 
             <para>
@@ -503,7 +503,7 @@ $client->request("PUT");
         </example>
     </section>
 
-    <section xml:id="zend.http.client.adapters.test"><info><title>The Test Adapter</title></info>
+    <section xml:id="zend.http.client.adapters.test"><title>The Test Adapter</title>
         
 
         <para>
@@ -531,7 +531,7 @@ $client->request("PUT");
             request.
         </para>
 
-        <example xml:id="zend.http.client.adapters.test.example-1"><info><title>Testing Against a Single HTTP Response Stub</title></info>
+        <example xml:id="zend.http.client.adapters.test.example-1"><title>Testing Against a Single HTTP Response Stub</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -577,7 +577,7 @@ $response = $client->request('GET');
             before returning to the caller.
         </para>
 
-        <example xml:id="zend.http.client.adapters.test.example-2"><info><title>Testing Against Multiple HTTP Response Stubs</title></info>
+        <example xml:id="zend.http.client.adapters.test.example-2"><title>Testing Against Multiple HTTP Response Stubs</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -649,7 +649,7 @@ $adapter->addResponse(
             and you want to test this feature.
         </para>
 
-        <example xml:id="zend.http.client.adapters.test.example-3"><info><title>Forcing the adapter to fail</title></info>
+        <example xml:id="zend.http.client.adapters.test.example-3"><title>Forcing the adapter to fail</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -675,7 +675,7 @@ try {
         </example>
     </section>
 
-    <section xml:id="zend.http.client.adapters.extending"><info><title>Creating your own connection adapters</title></info>
+    <section xml:id="zend.http.client.adapters.extending"><title>Creating your own connection adapters</title>
         
 
         <para>
@@ -692,7 +692,7 @@ try {
             functions defined in this example must be defined in your adapter as well:
         </para>
 
-        <example xml:id="zend.http.client.adapters.extending.example-1"><info><title>Creating your own connection adapter</title></info>
+        <example xml:id="zend.http.client.adapters.extending.example-1"><title>Creating your own connection adapter</title>
             
 
             <programlisting language="php"><![CDATA[

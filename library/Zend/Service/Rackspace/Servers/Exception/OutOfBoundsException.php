@@ -12,7 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @uses       \Zend\Service\Rackspace\Exception
  * @category   Zend
  * @package    Zend\Service
  * @subpackage Rackspace
@@ -20,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Rackspace\Servers\Exception;
 
 /**

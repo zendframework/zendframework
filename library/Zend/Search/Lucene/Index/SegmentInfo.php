@@ -19,36 +19,24 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Index;
 
-use Zend\Search\Lucene,
-	Zend\Search\Lucene\Search\Similarity,
-	Zend\Search\Lucene\Storage\Directory,
-	Zend\Search\Lucene\Exception\RuntimeException,
-	Zend\Search\Lucene\Exception\InvalidFileFormatException,
-	Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Search\Similarity\AbstractSimilarity;
+use Zend\Search\Lucene\Storage\Directory;
+use Zend\Search\Lucene\Exception\ExceptionInterface;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Exception\InvalidFileFormatException;
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
- * @uses	   \Zend\Search\Lucene\Exception\InvalidArgumentException
- * @uses       \Zend\Search\Lucene\Exception\InvalidFileFormatException
- * @uses       \Zend\Search\Lucene\Index\DictionaryLoader
- * @uses       \Zend\Search\Lucene\Index\FieldInfo
- * @uses       \Zend\Search\Lucene\Index\Term
- * @uses       \Zend\Search\Lucene\Index\TermInfo
- * @uses       \Zend\Search\Lucene\Index\TermsStream
- * @uses       \Zend\Search\Lucene\Search\Similarity
- * @uses       \Zend\Search\Lucene\Storage\Directory;
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SegmentInfo implements TermsStream
+class SegmentInfo implements TermsStreamInterface
 {
     /**
      * "Full scan vs fetch" boundary.
@@ -166,7 +154,7 @@ class SegmentInfo implements TermsStream
     /**
      * File system adapter.
      *
-     * @var \Zend\Search\Lucene\Storage\Directory\Filesystem
+     * @var \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
      */
     private $_directory;
 
@@ -176,7 +164,7 @@ class SegmentInfo implements TermsStream
      * normVector is a binary string.
      * Each byte corresponds to an indexed document in a segment and
      * encodes normalization factor (float value, encoded by
-     * \Zend\Search\Lucene\Search\Similarity::encodeNorm())
+     * \Zend\Search\Lucene\Search\Similarity\AbstractSimilarity::encodeNorm())
      *
      * @var array
      */
@@ -217,7 +205,7 @@ class SegmentInfo implements TermsStream
     /**
      * Zend_Search_Lucene_Index_SegmentInfo constructor
      *
-     * @param \Zend\Search\Lucene\Storage\Directory $directory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
      * @param string     $name
      * @param integer    $docCount
      * @param integer    $delGen
@@ -226,7 +214,7 @@ class SegmentInfo implements TermsStream
      * @param boolean    $isCompound
      * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
-    public function __construct(Directory $directory, $name, $docCount, $delGen = 0, $docStoreOptions = null, $hasSingleNormFile = false, $isCompound = null)
+    public function __construct(Directory\DirectoryInterface $directory, $name, $docCount, $delGen = 0, $docStoreOptions = null, $hasSingleNormFile = false, $isCompound = null)
     {
         $this->_directory = $directory;
         $this->_name      = $name;
@@ -277,7 +265,7 @@ class SegmentInfo implements TermsStream
 
                 // Compound file is found
                 $this->_isCompound = true;
-            } catch (Lucene\Exception $e) {
+            } catch (ExceptionInterface $e) {
                 if (strpos($e->getMessage(), 'is not readable') !== false) {
                     // Compound file is not found or is not readable
                     $this->_isCompound = false;
@@ -322,7 +310,7 @@ class SegmentInfo implements TermsStream
                                                    $fieldBits & 0x20 /* payloads are stored */);
             if ($fieldBits & 0x10) {
                 // norms are omitted for the indexed field
-                $this->_norms[$count] = str_repeat(chr(Similarity::encodeNorm(1.0)), $docCount);
+                $this->_norms[$count] = str_repeat(chr(AbstractSimilarity::encodeNorm(1.0)), $docCount);
             }
 
             $fieldNums[$count]  = $count;
@@ -403,7 +391,7 @@ class SegmentInfo implements TermsStream
 
                 return $deletions;
             }
-        } catch(Lucene\Exception $e) {
+        } catch(ExceptionInterface $e) {
             if (strpos($e->getMessage(), 'is not readable') === false) {
                 throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
             }
@@ -499,7 +487,7 @@ class SegmentInfo implements TermsStream
      * @param string $extension
      * @param boolean $shareHandler
      * @throws \Zend\Search\Lucene\Exception\InvalidFileFormatException
-     * @return \Zend\Search\Lucene\Storage\File
+     * @return \Zend\Search\Lucene\Storage\File\FileInterface
      */
     public function openCompoundFile($extension, $shareHandler = true)
     {
@@ -770,7 +758,7 @@ class SegmentInfo implements TermsStream
     /**
      * Load terms dictionary index
      *
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\ExceptionInterface
      */
     private function _loadDictionaryIndex()
     {
@@ -939,7 +927,7 @@ class SegmentInfo implements TermsStream
      * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      * @return array
      */
-    public function termDocs(Term $term, $shift = 0, $docsFilter = null)
+    public function termDocs(Term $term, $shift = 0, DocsFilter $docsFilter = null)
     {
         $termInfo = $this->getTermInfo($term);
 
@@ -956,12 +944,6 @@ class SegmentInfo implements TermsStream
         $result = array();
 
         if ($docsFilter !== null) {
-            if (!$docsFilter instanceof DocsFilter) {
-                throw new InvalidArgumentException(
-                	'Documents filter must be an instance of Zend\Search\Lucene\Index\DocsFilter or null.'
-                );
-            }
-
             if (isset($docsFilter->segmentFilters[$this->_name])) {
                 // Filter already has some data for the current segment
 
@@ -1061,7 +1043,7 @@ class SegmentInfo implements TermsStream
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
      * @return \Zend\Search\Lucene\Index\TermInfo
      */
-    public function termFreqs(Term $term, $shift = 0, $docsFilter = null)
+    public function termFreqs(Term $term, $shift = 0, DocsFilter $docsFilter = null)
     {
         $termInfo = $this->getTermInfo($term);
 
@@ -1080,12 +1062,6 @@ class SegmentInfo implements TermsStream
         $result = array();
 
         if ($docsFilter !== null) {
-            if (!$docsFilter instanceof DocsFilter) {
-                throw new InvalidArgumentException(
-                	'Documents filter must be an instance of Zend\Search\Lucene\Index\DocsFilter or null.'
-                );
-            }
-
             if (isset($docsFilter->segmentFilters[$this->_name])) {
                 // Filter already has some data for the current segment
 
@@ -1187,7 +1163,7 @@ class SegmentInfo implements TermsStream
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
      * @return \Zend\Search\Lucene\Index\TermInfo
      */
-    public function termPositions(Term $term, $shift = 0, $docsFilter = null)
+    public function termPositions(Term $term, $shift = 0, DocsFilter $docsFilter = null)
     {
         $termInfo = $this->getTermInfo($term);
 
@@ -1206,12 +1182,6 @@ class SegmentInfo implements TermsStream
 
 
         if ($docsFilter !== null) {
-            if (!$docsFilter instanceof DocsFilter) {
-                throw new InvalidArgumentException(
-                	'Documents filter must be an instance of Zend_Search_Lucene_Index_DocsFilter or null.'
-                );
-            }
-
             if (isset($docsFilter->segmentFilters[$this->_name])) {
                 // Filter already has some data for the current segment
 
@@ -1410,7 +1380,7 @@ class SegmentInfo implements TermsStream
             $this->_loadNorm($fieldNum);
         }
 
-        return Similarity::decodeNorm( ord($this->_norms[$fieldNum][$id]) );
+        return AbstractSimilarity::decodeNorm( ord($this->_norms[$fieldNum][$id]) );
     }
 
     /**
@@ -1424,7 +1394,7 @@ class SegmentInfo implements TermsStream
         $fieldNum = $this->getFieldNum($fieldName);
 
         if ($fieldNum == -1  ||  !($this->_fields[$fieldNum]->isIndexed)) {
-            $similarity = Similarity::getDefault();
+            $similarity = AbstractSimilarity::getDefault();
 
             return str_repeat(chr($similarity->encodeNorm( $similarity->lengthNorm($fieldName, 0) )),
                               $this->_docCount);
@@ -1630,7 +1600,7 @@ class SegmentInfo implements TermsStream
     /**
      * Term Dictionary File object for stream like terms reading
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_tisFile = null;
 
@@ -1644,7 +1614,7 @@ class SegmentInfo implements TermsStream
     /**
      * Frequencies File object for stream like terms reading
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_frqFile = null;
 
@@ -1658,7 +1628,7 @@ class SegmentInfo implements TermsStream
     /**
      * Positions File object for stream like terms reading
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_prxFile = null;
 

@@ -21,28 +21,29 @@
 
 namespace ZendTest\Config\Reader;
 
-use \PHPUnit_Framework_TestCase as TestCase,
-    \Zend\Config\Reader\Reader,
-    \ReflectionClass;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Config\Reader\ReaderInterface;
+use ReflectionClass;
 
 /**
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
 abstract class AbstractReaderTestCase extends TestCase
 {
     /**
-     * @var Reader
+     * @var ReaderInterface
      */
     protected $reader;
     
     /**
      * Get test asset name for current test case.
      * 
+     * @param  string $name
      * @return string
      */
     abstract protected function getTestAssetPath($name);
@@ -50,14 +51,14 @@ abstract class AbstractReaderTestCase extends TestCase
     public function testMissingFile()
     {
         $filename = $this->getTestAssetPath('no-file');
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', "The file $filename doesn't exists.");
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', "doesn't exist or not readable");
         $config = $this->reader->fromFile($filename); 
     }
     
     public function testFromFile()
     {
         $config = $this->reader->fromFile($this->getTestAssetPath('include-base'));
-        $this->assertEquals('foo', $config['base']['foo']);
+        $this->assertEquals('foo', $config['foo']);
     }
     
     public function testFromEmptyString()

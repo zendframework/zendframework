@@ -21,9 +21,7 @@
 
 namespace ZendTest\Mail\Transport;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Mail\Message,
-    Zend\Mail\Transport,
+use Zend\Mail\Message,
     Zend\Mail\Transport\Sendmail;
 
 /**
@@ -34,7 +32,7 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class SendmailTest extends TestCase
+class SendmailTest extends \PHPUnit_Framework_TestCase
 {
     public $transport;
     public $to;
@@ -79,7 +77,7 @@ class SendmailTest extends TestCase
                 ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
                 ->setSubject('Testing Zend\Mail\Transport\Sendmail')
                 ->setBody('This is only a test.');
-        $message->headers()->addHeaders(array(
+        $message->getHeaders()->addHeaders(array(
             'X-Foo-Bar' => 'Matthew',
         ));
         return $message;

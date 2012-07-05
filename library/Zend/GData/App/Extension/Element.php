@@ -19,25 +19,19 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\App\Extension;
-
-use Zend\GData\App\Extension;
 
 /**
  * Class that represents elements which were not handled by other parsing
  * code in the library.
  *
- * @uses       \Zend\GData\App\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Element extends Extension
+class Element extends AbstractExtension
 {
 
     public function __construct($rootElement=null, $rootNamespace=null, $rootNamespaceURI=null, $text=null){

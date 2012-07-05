@@ -18,20 +18,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Dom\Exception;
 
 /**
  * Zend_Dom Exceptions
  *
- * @uses       \Zend\Dom\Exception
  * @category   Zend
  * @package    Zend_Dom
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException extends \RuntimeException implements \Zend\Dom\Exception
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 }

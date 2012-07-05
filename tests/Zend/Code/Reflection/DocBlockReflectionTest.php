@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Code\Reflection;
-use Zend\Code\Reflection\DocBlockReflection,
-    Zend\Code\Reflection\ClassReflection;
+
+use Zend\Code\Reflection\DocBlockReflection;
+use Zend\Code\Reflection\ClassReflection;
 
 /**
  * @category   Zend
@@ -33,60 +31,70 @@ use Zend\Code\Reflection\DocBlockReflection,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Reflection
- * @group      Zend_Reflection_Docblock
+ * @group      Zend_Reflection_DocBlock
  */
 class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testDocblockShortDescription()
+    public function testDocBlockShortDescription()
     {
         $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
-        $this->assertEquals('TestSampleClass5 DocBlock Short Desc', $classReflection->getDocblock()->getShortDescription());
+        $this->assertEquals('TestSampleClass5 DocBlock Short Desc', $classReflection->getDocBlock()->getShortDescription());
     }
 
-    public function testDocblockLongDescription()
+    public function testDocBlockLongDescription()
     {
         $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
         $expectedOutput = 'This is a long description for the docblock of this class, it should be longer than 3 lines. It indeed is longer than 3 lines now.';
 
 
-        $this->assertEquals($expectedOutput, $classReflection->getDocblock()->getLongDescription());
+        $this->assertEquals($expectedOutput, $classReflection->getDocBlock()->getLongDescription());
 
     }
 
-    public function testDocblockTags()
+    public function testDocBlockTags()
     {
         $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
-        $this->assertEquals(1, count($classReflection->getDocblock()->getTags()));
-        $this->assertEquals(1, count($classReflection->getDocblock()->getTags('author')));
+        $this->assertEquals(3, count($classReflection->getDocBlock()->getTags()));
+        $this->assertEquals(1, count($classReflection->getDocBlock()->getTags('author')));
+        $this->assertEquals(1, count($classReflection->getDocBlock()->getTags('property')));
+        $this->assertEquals(1, count($classReflection->getDocBlock()->getTags('method')));
 
-        $this->assertFalse($classReflection->getDocblock()->getTag('version'));
+        $methodTag = $classReflection->getDocBlock()->getTag('method');
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\MethodTag', $methodTag);
 
-        $this->assertTrue($classReflection->getMethod('doSomething')->getDocblock()->hasTag('return'));
+        $propertyTag = $classReflection->getDocBlock()->getTag('property');
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\PropertyTag', $propertyTag);
 
-        $returnTag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('return');
-        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag', $returnTag);
+        $this->assertFalse($classReflection->getDocBlock()->getTag('version'));
+
+        $this->assertTrue($classReflection->getMethod('doSomething')->getDocBlock()->hasTag('return'));
+
+        $returnTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('return');
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\TagInterface', $returnTag);
         $this->assertEquals('mixed', $returnTag->getType());
+
+
     }
 
-    public function testDocblockLines()
+    public function testDocBlockLines()
     {
         //$this->markTestIncomplete('Line numbers incomplete');
 
         $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
-        $classDocblock = $classReflection->getDocblock();
+        $classDocBlock = $classReflection->getDocBlock();
 
-        $this->assertEquals(5, $classDocblock->getStartLine());
-        $this->assertEquals(15, $classDocblock->getEndLine());
+        $this->assertEquals(5, $classDocBlock->getStartLine());
+        $this->assertEquals(17, $classDocBlock->getEndLine());
 
     }
 
-    public function testDocblockContents()
+    public function testDocBlockContents()
     {
         $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
-        $classDocblock = $classReflection->getDocblock();
+        $classDocBlock = $classReflection->getDocBlock();
 
         $expectedContents = <<<EOS
 TestSampleClass5 DocBlock Short Desc
@@ -98,10 +106,12 @@ It indeed is longer than 3 lines
 now.
 
 @author Ralph Schindler <ralph.schindler@zend.com>
+@method test()
+@property \$test
 
 EOS;
 
-        $this->assertEquals($expectedContents, $classDocblock->getContents());
+        $this->assertEquals($expectedContents, $classDocBlock->getContents());
 
     }
 
@@ -109,15 +119,17 @@ EOS;
     {
         $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
-        $classDocblock = $classReflection->getDocblock();
+        $classDocBlock = $classReflection->getDocBlock();
 
         $expectedString = 'DocBlock [ /* DocBlock */ ] {' . PHP_EOL
                         . PHP_EOL
-                        . '  - Tags [1] {' . PHP_EOL
+                        . '  - Tags [3] {' . PHP_EOL
                         . '    DocBlock Tag [ * @author ]' . PHP_EOL
+                        . '    DocBlock Tag [ * @method ]' . PHP_EOL
+                        . '    DocBlock Tag [ * @property ]' . PHP_EOL
                         . '  }' . PHP_EOL
                         . '}' . PHP_EOL;
 
-        $this->assertEquals($expectedString, (string)$classDocblock);
+        $this->assertEquals($expectedString, (string)$classDocBlock);
     }
 }

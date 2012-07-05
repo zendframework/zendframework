@@ -18,16 +18,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
- * @uses       RecursiveArrayIterator
- * @uses       RecursiveIteratorIterator
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -40,8 +36,8 @@ class InArray extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
-        self::NOT_IN_ARRAY => "'%value%' was not found in the haystack",
+    protected $messageTemplates = array(
+        self::NOT_IN_ARRAY => "The input was not found in the haystack",
     );
 
     /**
@@ -49,33 +45,34 @@ class InArray extends AbstractValidator
      *
      * @var array
      */
-    protected $_haystack;
+    protected $haystack;
 
     /**
      * Whether a strict in_array() invocation is used
      *
      * @var boolean
      */
-    protected $_strict = false;
+    protected $strict = false;
 
     /**
      * Whether a recursive search should be done
      *
      * @var boolean
      */
-    protected $_recursive = false;
+    protected $recursive = false;
 
     /**
      * Sets validator options
      *
-     * @param  array|\Zend\Config\Config $haystack
-     * @return void
+     * @param  array|Traversable $options
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        } else if (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             throw new Exception\InvalidArgumentException('Array expected as parameter');
         } else {
             $count = func_num_args();
@@ -103,7 +100,7 @@ class InArray extends AbstractValidator
         if (array_key_exists('recursive', $options)) {
             $this->setRecursive($options['recursive']);
         }
-        
+
         parent::__construct();
     }
 
@@ -114,18 +111,18 @@ class InArray extends AbstractValidator
      */
     public function getHaystack()
     {
-        return $this->_haystack;
+        return $this->haystack;
     }
 
     /**
      * Sets the haystack option
      *
      * @param  mixed $haystack
-     * @return \Zend\Validator\InArray Provides a fluent interface
+     * @return InArray Provides a fluent interface
      */
     public function setHaystack(array $haystack)
     {
-        $this->_haystack = $haystack;
+        $this->haystack = $haystack;
         return $this;
     }
 
@@ -136,18 +133,18 @@ class InArray extends AbstractValidator
      */
     public function getStrict()
     {
-        return $this->_strict;
+        return $this->strict;
     }
 
     /**
      * Sets the strict option
      *
      * @param  boolean $strict
-     * @return \Zend\Validator\InArray Provides a fluent interface
+     * @return InArray Provides a fluent interface
      */
     public function setStrict($strict)
     {
-        $this->_strict = (boolean) $strict;
+        $this->strict = (boolean) $strict;
         return $this;
     }
 
@@ -158,18 +155,18 @@ class InArray extends AbstractValidator
      */
     public function getRecursive()
     {
-        return $this->_recursive;
+        return $this->recursive;
     }
 
     /**
      * Sets the recursive option
      *
      * @param  boolean $recursive
-     * @return \Zend\Validator\InArray Provides a fluent interface
+     * @return InArray Provides a fluent interface
      */
     public function setRecursive($recursive)
     {
-        $this->_recursive = (boolean) $recursive;
+        $this->recursive = (boolean) $recursive;
         return $this;
     }
 
@@ -184,18 +181,18 @@ class InArray extends AbstractValidator
     {
         $this->setValue($value);
         if ($this->getRecursive()) {
-            $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($this->_haystack));
+            $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($this->haystack));
             foreach($iterator as $element) {
-                if ($this->_strict) {
+                if ($this->strict) {
                     if ($element === $value) {
                         return true;
                     }
-                } else if ($element == $value) {
+                } elseif ($element == $value) {
                     return true;
                 }
             }
         } else {
-            if (in_array($value, $this->_haystack, $this->_strict)) {
+            if (in_array($value, $this->haystack, $this->strict)) {
                 return true;
             }
         }

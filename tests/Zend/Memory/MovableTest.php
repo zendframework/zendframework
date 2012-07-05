@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Memory;
 use Zend\Memory;
 use Zend\Memory\Container;
@@ -72,7 +69,6 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($memObject->value instanceof \Zend\Memory\Value);
         $this->assertEquals((string)$memObject->value, 'another value');
     }
-
 
     /**
      * tests lock()/unlock()/isLocked() functions

@@ -13,28 +13,25 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Code\Generator;
-use Zend\Code\Generator\PropertyGenerator,
-    Zend\Code\Generator\PropertyValueGenerator;
+use Zend\Code\Generator\PropertyGenerator;
+use Zend\Code\Generator\PropertyValueGenerator;
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
- * @group Zend_CodeGenerator
- * @group Zend_CodeGenerator_Php
+ * @group Zend_Code_Generator
+ * @group Zend_Code_Generator_Php
  */
 class PropertyGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -163,9 +160,7 @@ EOS;
      */
     public function testPropertyWillLoadFromReflection()
     {
-        $this->markTestSkipped('Skipped for now');
-
-        $reflectionClass = new \Zend\Code\Reflection\ReflectionClass('\ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties');
+        $reflectionClass = new \Zend\Code\Reflection\ClassReflection('\ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties');
 
         // test property 1
         $reflProp = $reflectionClass->getProperty('_bazProperty');
@@ -204,7 +199,7 @@ EOS;
     /**
      * @group ZF-7205
      */
-    public function testPropertyCanHaveDocblock()
+    public function testPropertyCanHaveDocBlock()
     {
         $codeGenProperty = new PropertyGenerator(
             'someVal',
@@ -212,7 +207,7 @@ EOS;
             PropertyGenerator::FLAG_STATIC | PropertyGenerator::FLAG_PROTECTED
         );
 
-        $codeGenProperty->setDocblock('@var string $someVal This is some val');
+        $codeGenProperty->setDocBlock('@var string $someVal This is some val');
 
         $expected = <<<EOS
     /**

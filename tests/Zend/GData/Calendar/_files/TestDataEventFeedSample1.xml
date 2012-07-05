@@ -121,7 +121,7 @@ xmlns:gCal='http://schemas.google.com/gCal/2005'>
       <gd:reminder minutes='20' method="alert"></gd:reminder>
     </gd:when>
     <gd:where valueString='Dolores Park with Kim'></gd:where>
-    <gCal:quickadd value="true" />    
+    <gCal:quickadd value="true" />
   </entry>
   <entry>
     <id>

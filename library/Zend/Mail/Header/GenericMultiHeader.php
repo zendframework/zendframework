@@ -22,188 +22,62 @@
 namespace Zend\Mail\Header;
 
 /**
+ * Generic class for Headers with multiple occurs in the same message
+ *
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GenericMultiHeader implements MultipleHeaderDescription
+class GenericMultiHeader extends GenericHeader implements MultipleHeadersInterface
 {
-    /**
-     * @var string
-     */
-    protected $fieldName = null;
-
-    /**
-     * @var string
-     */
-    protected $fieldValue = null;
-
-    /**
-     * Header encoding
-     * 
-     * @var string
-     */
-    protected $encoding = 'ASCII';
-
-    /**
-     * Deserialize from a string
-     * 
-     * @param  string $headerLine 
-     * @return GenericMultiHeader
-     */
     public static function fromString($headerLine)
     {
-        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
-        list($fieldName, $fieldValue) = explode(': ', $headerLine, 2);
+        $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
+        $parts = explode(': ', $decodedLine, 2);
+        if (count($parts) != 2) {
+            throw new Exception\InvalidArgumentException('Header must match with the format "name: value"');
+        }
+        list($fieldName, $fieldValue) = $parts;
 
         if (strpos($fieldValue, ',')) {
             $headers = array();
+            $encoding = ($decodedLine != $headerLine) ? 'UTF-8' : 'ASCII';
             foreach (explode(',', $fieldValue) as $multiValue) {
-                $headers[] = new static($fieldName, $multiValue);
+                $header = new static($fieldName, $multiValue);
+                $headers[] = $header->setEncoding($encoding);
+
             }
             return $headers;
         } else {
             $header = new static($fieldName, $fieldValue);
+            if ($decodedLine != $headerLine) {
+                $header->setEncoding('UTF-8');
+            }
             return $header;
         }
-
-
     }
 
     /**
-     * Constructor
-     * 
-     * @param null|string $fieldName
-     * @param null|string $fieldValue
-     */
-    public function __construct($fieldName = null, $fieldValue = null)
-    {
-        if ($fieldName) {
-            $this->setFieldName($fieldName);
-        }
-
-        if ($fieldValue) {
-            $this->setFieldValue($fieldValue);
-        }
-    }
-
-    /**
-     * Set header name
-     * 
-     * @param  string $fieldName
-     * @return GenericHeader
-     */
-    public function setFieldName($fieldName)
-    {
-        if (!is_string($fieldName) || empty($fieldName)) {
-            throw new Exception\InvalidArgumentException('Header name must be a string');
-        }
-
-        // Pre-filter to normalize valid characters, change underscore to dash
-        $fieldName = str_replace(' ', '-', ucwords(str_replace(array('_', '-'), ' ', $fieldName)));
-
-        // Validate what we have
-        if (!preg_match('/^[a-z][a-z0-9-]*$/i', $fieldName)) {
-            throw new Exception\InvalidArgumentException('Header name must start with a letter, and consist of only letters, numbers, and dashes');
-        }
-
-        $this->fieldName = $fieldName;
-        return $this;
-    }
-
-    /**
-     * Retrieve header name
+     * Cast multiple header objects to a single string header
      *
-     * @return string
-     */
-    public function getFieldName()
-    {
-        return $this->fieldName;
-    }
-
-    /**
-     * Set header value
-     * 
-     * @param  string|array $fieldValue
-     * @return GenericHeader
-     */
-    public function setFieldValue($fieldValue)
-    {
-        $fieldValue = (string) $fieldValue;
-
-        if (empty($fieldValue) || preg_match('/^\s+$/', $fieldValue)) {
-            $fieldValue = '';
-        }
-
-        $this->fieldValue = $fieldValue;
-        return $this;
-    }
-
-    /**
-     * Retrieve header value
-     * 
-     * @return string
-     */
-    public function getFieldValue()
-    {
-        return $this->fieldValue;
-    }
-
-    /**
-     * Set header encoding
-     * 
-     * @param  string $encoding 
-     * @return GenericMultiHeader
-     */
-    public function setEncoding($encoding) 
-    {
-        $this->encoding = $encoding;
-        return $this;
-    }
-
-    /**
-     * Get header encoding
-     * 
-     * @return string
-     */
-    public function getEncoding()
-    {
-        return $this->encoding;
-    }
-
-    /**
-     * Cast to string
-     *
-     * Returns in form of "NAME: VALUE\r\n"
-     *
-     * @return string
-     */
-    public function toString()
-    {
-        $name  = $this->getFieldName();
-        $value = $this->getFieldValue();
-
-        return $name. ': ' . $value . "\r\n";
-    }
-
-    /**
-     * Cast multiple header objectss to a single string header
-     * 
-     * @param  array $headers 
+     * @param  array $headers
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public function toStringMultipleHeaders(array $headers)
     {
         $name  = $this->getFieldName();
-        $values = array($this->getFieldValue());
+        $values = array($this->getFieldValue(HeaderInterface::FORMAT_ENCODED));
         foreach ($headers as $header) {
             if (!$header instanceof static) {
-                throw new Exception\InvalidArgumentException('This method toStringMultipleHeaders was expecting an array of headers of the same type');
+                throw new Exception\InvalidArgumentException(
+                    'This method toStringMultipleHeaders was expecting an array of headers of the same type'
+                );
             }
-            $values[] = $header->getFieldValue();
+            $values[] = $header->getFieldValue(HeaderInterface::FORMAT_ENCODED);
         }
-        return $name. ': ' . implode(',', $values) . "\r\n";
+        return $name. ': ' . implode(',', $values);
     }
 }

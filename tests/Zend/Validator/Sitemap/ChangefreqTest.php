@@ -19,14 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Validator\Sitemap;
 
+use Zend\Validator\Sitemap\Changefreq;
+
 /**
- * Tests Zym_Validator_Sitemap_Changefreq
- *
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
@@ -37,26 +34,13 @@ namespace ZendTest\Validator\Sitemap;
 class ChangefreqTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Validator
-     *
-     * @var Zend_Validator_Sitemap_Changefreq
+     * @var Changefreq
      */
-    protected $_validator;
+    protected $validator;
 
-    /**
-     * Prepares the environment before running a test
-     */
     protected function setUp()
     {
-        $this->_validator = new \Zend\Validator\Sitemap\Changefreq();
-    }
-
-    /**
-     * Cleans up the environment after running a test
-     */
-    protected function tearDown()
-    {
-        $this->_validator = null;
+        $this->validator = new Changefreq();
     }
 
     /**
@@ -71,7 +55,7 @@ class ChangefreqTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($values as $value) {
-            $this->assertSame(true, $this->_validator->isValid($value));
+            $this->assertSame(true, $this->validator->isValid($value));
         }
     }
 
@@ -88,8 +72,8 @@ class ChangefreqTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($values as $value) {
-            $this->assertSame(false, $this->_validator->isValid($value));
-            $messages = $this->_validator->getMessages();
+            $this->assertSame(false, $this->validator->isValid($value));
+            $messages = $this->validator->getMessages();
             $this->assertContains('is not a valid', current($messages));
         }
     }
@@ -105,8 +89,8 @@ class ChangefreqTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($values as $value) {
-            $this->assertSame(false, $this->_validator->isValid($value));
-            $messages = $this->_validator->getMessages();
+            $this->assertSame(false, $this->validator->isValid($value));
+            $messages = $this->validator->getMessages();
             $this->assertContains('String expected', current($messages));
         }
     }

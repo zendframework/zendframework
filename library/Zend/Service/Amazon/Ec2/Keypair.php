@@ -19,18 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Amazon\Ec2;
-use Zend\Service\Amazon,
-    Zend\Service\Amazon\Ec2\Exception;
+use Zend\Service\Amazon;
+use Zend\Service\Amazon\Ec2\Exception;
 
 /**
  * An Amazon EC2 interface to create, delete and describe Ec2 KeyPairs.
  *
- * @uses       Zend\Service\Amazon\AbstractEc2
- * @uses       Zend\Service\Amazon\Ec2\Exception
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2
@@ -75,7 +70,7 @@ class Keypair extends AbstractEc2
      * key pairs, information about those key pairs is returned. Otherwise,
      * information for all registered key pairs is returned.
      *
-     * @param string|rarray $keyName    Key pair IDs to describe.
+     * @param string|array $keyName    Key pair IDs to describe.
      * @return array
      */
     public function describe($keyName = null)

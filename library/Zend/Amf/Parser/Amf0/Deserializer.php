@@ -19,10 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Amf\Parser\Amf0;
+
+use DateTime;
 use Zend\Amf\Parser\AbstractDeserializer,
     Zend\Amf,
     Zend\Amf\Parser\Exception as ParserException;
@@ -32,12 +31,6 @@ use Zend\Amf\Parser\AbstractDeserializer,
  *
  * @todo       Implement Typed Object Class Mapping
  * @todo       Class could be implmented as Factory Class with each data type it's own class
- * @uses       Zend\Amf\Constants
- * @uses       Zend\Amf\Exception
- * @uses       Zend\Amf\Parser\Amf3\Deserializer
- * @uses       Zend\Amf\Parser\Deserializer
- * @uses       Zend\Amf\Parser\TypeLoader
- * @uses       Zend\Date\Date
  * @package    Zend_Amf
  * @subpackage Parse_Amf0
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -67,7 +60,7 @@ class Deserializer extends AbstractDeserializer
      *
      * @param  integer $typeMarker
      * @return mixed whatever the data type is of the marker in php
-     * @throws Zend\Amf\Exception for invalid type
+     * @throws ParserException\InvalidArgumentException for invalid type
      */
     public function readTypeMarker($typeMarker = null)
     {
@@ -180,7 +173,7 @@ class Deserializer extends AbstractDeserializer
      * Called when marker type is 7.
      *
      * @return object
-     * @throws Zend\Amf\Exception for invalid reference keys
+     * @throws ParserException\OutOfBoundsException for invalid reference keys
      */
     public function readReference()
     {
@@ -225,9 +218,9 @@ class Deserializer extends AbstractDeserializer
     }
 
     /**
-     * Convert AS Date to Zend_Date
+     * Convert AS Date to DateTime
      *
-     * @return Zend\Date\Date
+     * @return DateTime
      */
     public function readDate()
     {
@@ -239,8 +232,7 @@ class Deserializer extends AbstractDeserializer
         // so read and ignore.
         $offset = $this->_stream->readInt();
 
-        $date   = new \Zend\Date\Date($timestamp);
-        return $date;
+        return new DateTime('@' . $timestamp);
     }
 
     /**

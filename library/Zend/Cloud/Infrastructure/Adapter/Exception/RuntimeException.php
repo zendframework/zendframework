@@ -12,26 +12,24 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @uses       Zend\Cloud\Infrastructure\Adapter\Exception
  * @category   Zend
- * @package    Zend\Cloud\Infrastructure\Adapter
- * @subpackage Exception
+ * @package    Zend_Cloud
+ * @subpackage Infrastructure_Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** @namespace */
 namespace Zend\Cloud\Infrastructure\Adapter\Exception;
 
-use \Zend\Cloud\Infrastructure\Adapter\Exception;
+use Zend\Cloud\Infrastructure\Exception;
 
 /**
  * @category   Zend
- * @package    Zend\Cloud\Infrastructure\Adapter
- * @subpackage Exception
+ * @package    Zend_Cloud
+ * @subpackage Infrastructure_Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException extends \RuntimeException implements Exception
-{
-}
+class RuntimeException extends Exception\RuntimeException implements 
+    ExceptionInterface
+{}

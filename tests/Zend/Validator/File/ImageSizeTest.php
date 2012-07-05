@@ -19,13 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Validator\File;
-use Zend\Validator\File;
-use Zend\Validator;
 
+use Zend\Validator\File;
 
 /**
  * @category   Zend

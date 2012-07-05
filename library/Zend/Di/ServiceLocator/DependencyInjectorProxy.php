@@ -2,19 +2,18 @@
 
 namespace Zend\Di\ServiceLocator;
 
-use Zend\Di\Di,
-    Zend\Di\Exception;
+use Zend\Di\Di;
+use Zend\Di\Exception;
 
 class DependencyInjectorProxy extends Di
 {
     /**
-     * @var DependencyInjector
+     * @var Di
      */
     protected $di;
 
     /**
-     * @param DependencyInjector $di
-     * @return void
+     * @param Di $di
      */
     public function __construct(Di $di)
     {
@@ -80,6 +79,7 @@ class DependencyInjectorProxy extends Di
      * @param  callback $callback
      * @param  null|array $params
      * @return GeneratorInstance
+     * @throws Exception\InvalidCallbackException
      */
     public function createInstanceViaCallback($callback, $params, $alias = null)
     {
@@ -127,6 +127,8 @@ class DependencyInjectorProxy extends Di
      * @param  array $params
      * @param  bool $isShared
      * @return GeneratorInstance
+     * @throws Exception\ClassNotFoundException
+     * @throws Exception\RuntimeException
      */
     public function newInstance($name, array $params = array(), $isShared = true)
     {

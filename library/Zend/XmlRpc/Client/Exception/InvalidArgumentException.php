@@ -2,7 +2,8 @@
 
 namespace Zend\XmlRpc\Client\Exception;
 
-class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements \Zend\XmlRpc\Exception
-{}
+use Zend\XmlRpc\Exception;
+
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
+{
+}

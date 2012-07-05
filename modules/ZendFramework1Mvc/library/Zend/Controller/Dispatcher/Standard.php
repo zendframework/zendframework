@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Controller\Dispatcher;
 use Zend\Controller;
 use Zend\Controller\Request;
@@ -271,7 +268,7 @@ class Standard extends AbstractDispatcher
         if (!($controller instanceof \Zend\Controller\ActionController) &&
             !($controller instanceof \Zend\Controller\Action)) {
             throw new Exception(
-                'Controller "' . $className . '" is not an instance of Zend\Controller\ActionController'
+                'Controller "' . $className . '" is not an instance of Zend\Controller\AbstractActionController'
             );
         }
 

@@ -18,20 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\OAuth\Http;
 
-use Zend\OAuth\Http as HTTPClient,
-    Zend\OAuth,
-    Zend\Http;
+use Zend\OAuth\Http as HTTPClient;
+use Zend\OAuth;
+use Zend\Http;
 
 /**
- * @uses       Zend\Http\Client
- * @uses       Zend\OAuth\OAuth
- * @uses       Zend\OAuth\Http
- * @uses       Zend\OAuth\Token\Request
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -113,7 +106,7 @@ class RequestToken extends HTTPClient
         $client->setUri($this->_consumer->getRequestTokenUrl());
 
         $request = $client->getRequest();
-        $request->headers()
+        $request->getHeaders()
                 ->addHeaderLine('Authorization', $headerValue);
         $rawdata = $this->_httpUtility->toEncodedQueryString($params, true);
         if (!empty($rawdata)) {
@@ -139,7 +132,7 @@ class RequestToken extends HTTPClient
         $request->setContent(
             $this->_httpUtility->toEncodedQueryString($params)
         );
-        $request->headers()
+        $request->getHeaders()
                 ->addHeaderLine('Content-Type', Http\Client::ENC_URLENCODED);
         return $client;
     }

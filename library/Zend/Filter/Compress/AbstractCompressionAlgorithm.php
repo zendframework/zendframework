@@ -20,8 +20,8 @@
 
 namespace Zend\Filter\Compress;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Abstract compression adapter
@@ -31,8 +31,11 @@ use Traversable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractCompressionAlgorithm implements CompressionAlgorithm
+abstract class AbstractCompressionAlgorithm implements CompressionAlgorithmInterface
 {
+    /**
+     * @var array
+     */
     protected $options = array();
 
     /**
@@ -74,7 +77,7 @@ abstract class AbstractCompressionAlgorithm implements CompressionAlgorithm
      * Sets all or one option
      *
      * @param  array $options
-     * @return \Zend\Filter\Compress\Bz2
+     * @return AbstractCompressionAlgorithm
      */
     public function setOptions(array $options)
     {

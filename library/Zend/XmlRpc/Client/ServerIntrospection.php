@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\XmlRpc\Client;
 
 use Zend\XmlRpc\Client as XMLRPCClient;
@@ -29,8 +26,6 @@ use Zend\XmlRpc\Client as XMLRPCClient;
 /**
  * Wraps the XML-RPC system.* introspection methods
  *
- * @uses       Zend\XmlRpc\Client\FaultException
- * @uses       Zend\XmlRpc\Client\IntrospectException
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Client

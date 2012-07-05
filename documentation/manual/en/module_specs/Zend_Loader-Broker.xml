@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.broker"><info><title>The Broker Interface</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.broker"><title>The Broker Interface</title>
     
 
-    <section xml:id="zend.loader.broker.intro"><info><title>Overview</title></info>
+    <section xml:id="zend.loader.broker.intro"><title>Overview</title>
         
 
         <para>
@@ -25,7 +25,7 @@
             The <interfacename>Broker</interfacename> interface provides a simple contract for
             managing these extensions. At its simplest, it allows you to register and unregister
             concrete extension instances, mapping them to a short name. For added flexibility, it
-            allows specifying a <link linkend="zend.loader.short-name-locater">plugin class
+            allows specifying a <link linkend="zend.loader.short-name-locator">plugin class
                 loader</link> that may be used to resolve the short names to class names, and thus
             dynamically resolve the name to a new class instance.
         </para>
@@ -35,7 +35,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.loader.broker.quick-start"><info><title>Quick Start</title></info>
+    <section xml:id="zend.loader.broker.quick-start"><title>Quick Start</title>
         
 
         <para>
@@ -49,13 +49,13 @@ interface Broker
     public function load($plugin, array $options = null);
     public function register($name, $plugin);
     public function unregister($name);
-    public function setClassLoader(ShortNameLocater $loader);
+    public function setClassLoader(ShortNameLocator $loader);
     public function getClassLoader();
 }
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.broker.options"><info><title>Configuration Options</title></info>
+    <section xml:id="zend.loader.broker.options"><title>Configuration Options</title>
         
 
         <para>
@@ -63,7 +63,7 @@ interface Broker
         </para>
     </section>
 
-    <section xml:id="zend.loader.broker.methods"><info><title>Available Methods</title></info>
+    <section xml:id="zend.loader.broker.methods"><title>Available Methods</title>
         
 
         <refentry xml:id="zend.loader.broker.methods.load">
@@ -81,7 +81,7 @@ interface Broker
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>load()</title></info>
+            <refsection><title>load()</title>
                 
 
                 <para>
@@ -110,7 +110,7 @@ interface Broker
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>register()</title></info>
+            <refsection><title>register()</title>
                 
 
                 <para>
@@ -139,7 +139,7 @@ interface Broker
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>unregister()</title></info>
+            <refsection><title>unregister()</title>
                 
 
                 <para>
@@ -160,12 +160,12 @@ interface Broker
                 <methodsynopsis>
                     <methodname>setClassLoader</methodname>
                     <methodparam>
-                        <funcparams>Zend\Loader\ShortNameLocater $loader</funcparams>
+                        <funcparams>Zend\Loader\ShortNameLocator $loader</funcparams>
                     </methodparam>
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>setClassLoader()</title></info>
+            <refsection><title>setClassLoader()</title>
                 
 
                 <para>
@@ -186,10 +186,11 @@ interface Broker
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getClassLoader</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getClassLoader()</title></info>
+            <refsection><title>getClassLoader()</title>
                 
 
                 <para>
@@ -199,7 +200,7 @@ interface Broker
         </refentry>
     </section>
 
-    <section xml:id="zend.loader.broker.examples"><info><title>Examples</title></info>
+    <section xml:id="zend.loader.broker.examples"><title>Examples</title>
         
 
         <para>

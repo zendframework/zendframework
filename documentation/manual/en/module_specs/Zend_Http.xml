@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.overview">
-    <info><title>Zend\Http</title></info>
+    <title>Zend\Http</title>
 
     <section xml:id="zend.http.overview.intro">
-        <info><title>Overview</title></info>
+        <title>Overview</title>
         
         <para>
             <classname>Zend\Http</classname> is a primary foundational component of Zend Framework.
@@ -55,7 +55,7 @@
     </section>
 
     <section xml:id="zend.http.overview.request-response-and-headers">
-        <info><title>Zend\Http Request, Response and Headers</title></info>
+        <title>Zend\Http Request, Response and Headers</title>
     
         <para>
             The Request, Response and Headers portion of the <classname>Zend\Http</classname>

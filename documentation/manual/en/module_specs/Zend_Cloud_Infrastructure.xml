@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cloud.infrastructure">
-    <info><title>Zend\Cloud\Infrastructure</title></info>
+    <title>Zend\Cloud\Infrastructure</title>
 
     <section xml:id="zend.cloud.infrastructure.intro">
-        <info><title>Overview</title></info>
+        <title>Overview</title>
 
         <para>
             The <classname>Zend\Cloud\Infrastructure</classname> is a class to manage different
@@ -80,7 +80,7 @@
         </itemizedlist> 
         
         <note>
-            <info><title>Deployment of an instance</title></info>
+            <title>Deployment of an instance</title>
 
             <para>
                 For the deploy operations we used the <link
@@ -97,7 +97,7 @@
     </section>
 
     <section xml:id="zend.cloud.infrastructure.quick-start">
-        <info><title>Quick Start</title></info>
+        <title>Quick Start</title>
         
         <para>
             To use this class you have to initialize the factory with a specific adapters.  You can
@@ -161,7 +161,7 @@ printf ("ID of the instance  : %s\n", $instance->getId());
     </section>
  
     <section xml:id="zend.cloud.infrastructure.methods">
-        <info><title>Available Methods</title></info>
+        <title>Available Methods</title>
  
         <variablelist>
             <varlistentry xml:id="zend.cloud.infrastructure.methods.create-instance">
@@ -204,7 +204,7 @@ printf ("ID of the instance  : %s\n", $instance->getId());
                     <para>
                         Run arbitrary shell scripts on an instance.
                         Return a string or an array contains all the standard output (errors included) of the scripts executed in the instance.
-                        <note><info><title>Requirement</title></info>
+                        <note><title>Requirement</title>
                             
                             <para>
                                 In order to use the deployInstance method you have to install the SSH2 extension (ext/ssh2) of PHP.
@@ -537,10 +537,10 @@ printf ("ID of the instance  : %s\n", $instance->getId());
     </section>
  
     <section xml:id="zend.cloud.infrastructure.examples">
-        <info><title>Examples</title></info>
+        <title>Examples</title>
         
         <example xml:id="zend.cloud.infrastructure.examples.authenticate">
-            <info><title>Get the datetime system information of an instance</title></info>
+            <title>Get the datetime system information of an instance</title>
             
             <para>Get the result of the <emphasis>date</emphasis> command line.</para>
  
@@ -558,7 +558,7 @@ echo $output;
         </example>
         
         <example xml:id="zend.cloud.infrastructure.examples.get-datetime">
-            <info><title>Get the datetime system information of an instance</title></info>
+            <title>Get the datetime system information of an instance</title>
  
             <para>Get the result of the <emphasis>date</emphasis> command line.</para>
  
@@ -576,7 +576,7 @@ echo $output;
         </example>
         
         <example xml:id="zend.cloud.infrastructure.examples.reboot">
-            <info><title>Reboot an instance and wait for the running status</title></info>
+            <title>Reboot an instance and wait for the running status</title>
  
             <para>Reboot an instance and wait 60 seconds for the running status.</para>
  

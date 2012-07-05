@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Code\Reflection;
 use Zend\Code\Reflection\MethodReflection;
 
@@ -54,8 +51,8 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
     {
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5', 'doSomething');
 
-        $this->assertEquals(35, $reflectionMethod->getStartLine());
-        $this->assertEquals(19, $reflectionMethod->getStartLine(true));
+        $this->assertEquals(37, $reflectionMethod->getStartLine());
+        $this->assertEquals(21, $reflectionMethod->getStartLine(true));
     }
 
     public function testGetBodyReturnsCorrectBody()

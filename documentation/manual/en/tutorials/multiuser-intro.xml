@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.intro"><info><title>Building Multi-User Applications With Zend Framework</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.intro"><title>Building Multi-User Applications With Zend Framework</title>
     
 
-    <section xml:id="learning.multiuser.intro.zf"><info><title>Zend Framework</title></info>
+    <section xml:id="learning.multiuser.intro.zf"><title>Zend Framework</title>
         
 
         <para>
@@ -50,7 +50,7 @@
             </listitem>
         </itemizedlist>
 
-        <note><info><title>Consumer Vs. User</title></info>
+        <note><title>Consumer Vs. User</title>
             
 
             <para>

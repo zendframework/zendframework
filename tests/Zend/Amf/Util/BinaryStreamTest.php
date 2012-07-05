@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Amf\Util;
 use Zend\Amf\Util;
 
@@ -38,7 +35,7 @@ use Zend\Amf\Util;
 class BinaryStreamTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException Zend\Amf\Exception
+     * @expectedException Zend\Amf\Exception\ExceptionInterface
      */
     public function testConstructorShouldThrowExceptionForInvalidStream()
     {
@@ -46,7 +43,7 @@ class BinaryStreamTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Amf\Exception
+     * @expectedException Zend\Amf\Exception\ExceptionInterface
      */
     public function testReadBytesShouldRaiseExceptionForBufferUnderrun()
     {

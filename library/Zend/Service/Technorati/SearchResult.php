@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Technorati;
 
-use DomElement,
-    Zend\Uri;
+use DomElement;
+use Zend\Uri;
 
 /**
  * Represents a single Technorati Search query result object.
@@ -67,7 +64,7 @@ class SearchResult extends Result
     /**
      * The datetime the entry was created.
      *
-     * @var     ZendDate
+     * @var     \DateTime
      * @access  protected
      */
     protected $created;
@@ -135,7 +132,7 @@ class SearchResult extends Result
     /**
      * Returns the datetime the entry was created.
      *
-     * @return  ZendDate
+     * @return  \DateTime
      */
     public function getCreated()
     {

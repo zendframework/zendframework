@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\StrikeIron;
 
-use SoapHeader,
-    SoapClient;
+use SoapHeader;
+use SoapClient;
 
 /**
  * @category   Zend

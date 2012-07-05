@@ -1555,10 +1555,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Action_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Controller/ActionController.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Controller/AbstractActionControllerntroller.php</newRelativeFilePath>
       <newNamespace>Zend\Controller</newNamespace>
-      <newClassName>ActionController</newClassName>
-      <newFullyQualifiedName>Zend\Controller\ActionController</newFullyQualifiedName>
+      <newClassName>AbstractActionController</newClassName>
+      <newFullyQualifiedName>Zend\Controller\AbstractActionController</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action.php</originalRelativeFilePath>
@@ -4657,12 +4657,12 @@
       <newFullyQualifiedName>Zend\GData\App\Base</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Gdata/App/BaseMediaSource.php</originalRelativeFilePath>
+      <originalRelativeFilePath>Zend/Gdata/App/AbstractBaseMediaSourceiaSource.php</originalRelativeFilePath>
       <originalClassName>Zend_Gdata_App_BaseMediaSource</originalClassName>
-      <newRelativeFilePath>Zend/GData/App/BaseMediaSource.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/GData/App/AbstractBaseMediaSource.phpurce.php</newRelativeFilePath>
       <newNamespace>Zend\GData\App</newNamespace>
-      <newClassName>BaseMediaSource</newClassName>
-      <newFullyQualifiedName>Zend\GData\App\BaseMediaSource</newFullyQualifiedName>
+      <newClassName>AbstractBaseMediaSource</newClassName>
+      <newFullyQualifiedName>Zend\GData\App\AbstractBaseMediaSource</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Gdata/App/CaptchaRequiredException.php</originalRelativeFilePath>
@@ -4905,20 +4905,20 @@
       <newFullyQualifiedName>Zend\GData\App\Feed</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Gdata/App/FeedEntryParent.php</originalRelativeFilePath>
+      <originalRelativeFilePath>Zend/Gdata/App/AbstractFeedEntryParentryParent.php</originalRelativeFilePath>
       <originalClassName>Zend_Gdata_App_FeedEntryParent</originalClassName>
-      <newRelativeFilePath>Zend/GData/App/FeedEntryParent.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/GData/App/AbstractFeedEntryParentryParent.php</newRelativeFilePath>
       <newNamespace>Zend\GData\App</newNamespace>
-      <newClassName>FeedEntryParent</newClassName>
-      <newFullyQualifiedName>Zend\GData\App\FeedEntryParent</newFullyQualifiedName>
+      <newClassName>AbstractFeedEntryParent</newClassName>
+      <newFullyQualifiedName>Zend\GData\App\AbstractFeedEntryParent</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Gdata/App/FeedSourceParent.php</originalRelativeFilePath>
+      <originalRelativeFilePath>Zend/Gdata/App/AbstractFeedSourceParent.phprent.php</originalRelativeFilePath>
       <originalClassName>Zend_Gdata_App_FeedSourceParent</originalClassName>
-      <newRelativeFilePath>Zend/GData/App/FeedSourceParent.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/GData/App/AbstractFeedSourceParent.phprent.php</newRelativeFilePath>
       <newNamespace>Zend\GData\App</newNamespace>
-      <newClassName>FeedSourceParent</newClassName>
-      <newFullyQualifiedName>Zend\GData\App\FeedSourceParent</newFullyQualifiedName>
+      <newClassName>AbstractFeedSourceParent</newClassName>
+      <newFullyQualifiedName>Zend\GData\App\AbstractFeedSourceParent</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Gdata/App/HttpException.php</originalRelativeFilePath>
@@ -7827,10 +7827,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Filter/Logical.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Filter_Logical</originalClassName>
-      <newRelativeFilePath>Zend/LDAP/Filter/LogicalFilter.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/LDAP/Filter/AbstractLogicalFilter.phplter.php</newRelativeFilePath>
       <newNamespace>Zend\LDAP\Filter</newNamespace>
-      <newClassName>LogicalFilter</newClassName>
-      <newFullyQualifiedName>Zend\LDAP\Filter\LogicalFilter</newFullyQualifiedName>
+      <newClassName>AbstractLogicalFilter</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Filter\AbstractLogicalFilter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Filter/Mask.php</originalRelativeFilePath>
@@ -9785,12 +9785,12 @@
       <newFullyQualifiedName>Zend\PDF\Color</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Pdf/Destination/Explicit.php</originalRelativeFilePath>
+      <originalRelativeFilePath>Zend/Pdf/Destination/AbstractExplicitDestination.phpicitDestination.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination_Explicit</originalClassName>
-      <newRelativeFilePath>Zend/PDF/Destination/Explicit.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/PDF/Destination/AbstractExplicitDestinationExplicitDestination.php</newRelativeFilePath>
       <newNamespace>Zend\PDF\Destination</newNamespace>
-      <newClassName>Explicit</newClassName>
-      <newFullyQualifiedName>Zend\PDF\Destination\Explicit</newFullyQualifiedName>
+      <newClassName>AbstractExplicitDestination</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Destination\AbstractExplicitDestination</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/Fit.php</originalRelativeFilePath>

@@ -19,20 +19,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\InfoCard\XML\Security\Transform;
 
-use Zend\InfoCard\XML\Security\Transform,
-    Zend\InfoCard\XML\Security;
+use Zend\InfoCard\XML\Security\Transform;
+use Zend\InfoCard\XML\Security;
 
 /**
  * A class to create a transform rule set based on XML URIs and then apply those rules
  * in the correct order to a given XML input
  *
- * @uses       \Zend\InfoCard\XML\Security\Exception
- * @uses       \Zend\Loader
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml_Security
@@ -51,7 +46,7 @@ class TransformChain
     /**
      * Returns the name of the transform class based on a given URI
      *
-     * @throws \Zend\InfoCard\XML\Security\Exception
+     * @throws Security\Exception\InvalidArgumentException
      * @param string $uri The transform URI
      * @return string The transform implementation class name
      */
@@ -71,7 +66,7 @@ class TransformChain
      * Add a Transform URI to the list of transforms to perform
      *
      * @param string $uri The Transform URI
-     * @return \Zend\InfoCard\XML\Security\Transform
+     * @return TransformChain
      */
     public function addTransform($uri)
     {
@@ -97,6 +92,7 @@ class TransformChain
      *
      * @param string $strXmlDocument The input XML
      * @return string The XML after the transformations have been applied
+     * @throws Security\Exception\RuntimeException
      */
     public function applyTransforms($strXmlDocument)
     {
@@ -109,8 +105,8 @@ class TransformChain
 
             // We can't really test this check because it would require logic changes in the component itself
             // @codeCoverageIgnoreStart
-            if(!($transformer instanceof Transform)) {
-                throw new Security\Exception\RuntimeExcpetion("Transforms must implement the Transform Interface");
+            if(!($transformer instanceof TransformInterface)) {
+                throw new Security\Exception\RuntimeException("Transforms must implement the Transform Interface");
             }
             // @codeCoverageIgnoreEnd
 

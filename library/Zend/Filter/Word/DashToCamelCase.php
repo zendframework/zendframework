@@ -18,13 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter\Word;
 
 /**
- * @uses       \Zend\Filter\Word\SeparatorToCamelCase
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -35,7 +31,6 @@ class DashToCamelCase extends SeparatorToCamelCase
     /**
      * Constructor
      *
-     * @return void
      */
     public function __construct()
     {

@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace ZendTest\Feed\Writer;
+
+use DateTime;
 use Zend\Feed\Writer;
-use Zend\Date;
 
 /**
 * @category Zend
@@ -51,7 +49,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setReference('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -65,16 +63,16 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Deleted;
         $entry->setWhen();
-        $dateNow = new Date\Date;
-        $this->assertTrue($dateNow->isLater($entry->getWhen()) || $dateNow->equals($entry->getWhen()));
+        $dateNow = new DateTime();
+        $this->assertTrue($dateNow >= $entry->getWhen());
     }
 
     public function testSetWhenUsesGivenUnixTimestamp()
     {
         $entry = new Writer\Deleted;
         $entry->setWhen(1234567890);
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getWhen()));
+        $myDate = new DateTime('@' . 1234567890);
+        $this->assertEquals($myDate, $entry->getWhen());
     }
  
     /**
@@ -84,8 +82,8 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Deleted;
         $entry->setWhen(123456789);
-        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getWhen()));
+        $myDate = new DateTime('@' . 123456789);
+        $this->assertEquals($myDate, $entry->getWhen());
     }
 
     /**
@@ -95,16 +93,16 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Deleted;
         $entry->setWhen(123);
-        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getWhen()));
+        $myDate = new DateTime('@' . 123);
+        $this->assertEquals($myDate, $entry->getWhen());
     }
     
-    public function testSetWhenUsesZendDateObject()
+    public function testSetWhenUsesDateTimeObject()
     {
+        $myDate = new DateTime('@' . 1234567890);
         $entry = new Writer\Deleted;
-        $entry->setWhen(new Date\Date('1234567890', Date\Date::TIMESTAMP));
-        $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
-        $this->assertTrue($myDate->equals($entry->getWhen()));
+        $entry->setWhen($myDate);
+        $this->assertEquals($myDate, $entry->getWhen());
     }
     
     public function testSetWhenThrowsExceptionOnInvalidParameter()
@@ -113,7 +111,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setWhen('abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
     
@@ -150,7 +148,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('name'=>''));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -160,7 +158,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('name'=>'Joe','email'=>''));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -171,7 +169,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('name'=>'Joe','uri'=>'notauri'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -181,7 +179,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('uri'=>'notauri'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 

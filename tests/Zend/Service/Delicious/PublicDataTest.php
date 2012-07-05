@@ -19,14 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Delicious;
-use \Zend\Service\Delicious\Delicious as DeliciousClient,
-    \Zend\Http,
-    \Zend\Rest\Client as RestClient,
-    \Zend\Date\Date;
+
+use Zend\Service\Delicious\Delicious as DeliciousClient;
+use Zend\Http;
+use Zend\Rest\Client as RestClient;
 
 /**
  * @category   Zend_Service
@@ -57,7 +54,7 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('\Zend\Service\Delicious online tests are not enabled');
         }
         $httpClient = new Http\Client();
-        $httpClient->setConfig(array(
+        $httpClient->setOptions(array(
                 'useragent' => '\Zend\Service\Delicious - Unit tests/0.1',
                 'keepalive' => true
         ));

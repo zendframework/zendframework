@@ -56,12 +56,16 @@ TROUBLESHOOTING
 If you're encountering errors while trying the build instructions above...
   1. Remove all files from the html/ subdir except dbstyle.css
   
-  2. Remove all files from the root dir except manual.xml, configure.in,
-     Makefile.in and README.  The important one here is entities.ent.
+  2. Remove all files from the root dir except README, xinclude.mod and all files
+     ended with ".in"
      
-  3. You can optionally remove the "/autom4te.cache" directory and the
-     "/build/docbook-xsl" directory
+  3. You can optionally remove the "/autom4te.cache" directory.
+  
+  4. Try to use a different DTD or XSL setting the following environment variables:
+     - DOCBOOK_DTD=http://www.docbook.org/xml/5.0/dtd/docbook.dtd
+     - DOCBOOK_XSL=http://docbook.sourceforge.net/release/xsl/1.76.1/html/chunk.xsl
+     - DOCBOOK_FO_XSL=http://docbook.sourceforge.net/release/xsl/1.76.1/fo/docbook.xsl
      
-  4. Try to build again following the instructions given above. If it still
+  5. Try to build again following the instructions given above. If it still
      throws errors, post a message to the fw-docs@lists.zend.com list.
      

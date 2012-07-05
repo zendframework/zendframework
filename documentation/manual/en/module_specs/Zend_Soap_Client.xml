@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.client"><info><title>Zend_Soap_Client</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.client"><title>Zend_Soap_Client</title>
     
 
     <para>
@@ -24,7 +24,7 @@
         <classname>Zend_Soap_Client</classname> class.
     </para>
 
-    <section xml:id="zend.soap.client.constructor"><info><title>Zend_Soap_Client Constructor</title></info>
+    <section xml:id="zend.soap.client.constructor"><title>Zend_Soap_Client Constructor</title>
         
 
         <para>
@@ -49,7 +49,7 @@
             and <methodname>setOptions($options)</methodname> methods respectively.
         </para>
 
-        <note><info><title>Important!</title></info>
+        <note><title>Important!</title>
             
 
             <para>
@@ -178,7 +178,7 @@ $client = new Zend_Soap_Client("some.wsdl",
         </para>
     </section>
 
-    <section xml:id="zend.soap.client.calls"><info><title>Performing SOAP Requests</title></info>
+    <section xml:id="zend.soap.client.calls"><title>Performing SOAP Requests</title>
         
 
         <para>

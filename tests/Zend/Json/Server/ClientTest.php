@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Json\Server;
 
 use Zend\Http\Client as HttpClient,
@@ -210,7 +207,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->jsonClient->setHttpClient($this->httpClient);
 
         $this->setServerResponseTo(null);
-        $this->assertNull($this->jsonClient->getHttpClient()->getRequest()->getUri());
+        $this->assertNull($this->jsonClient->getHttpClient()->getRequest()->getUriString());
         $this->jsonClient->call('foo');
         $uri = $this->jsonClient->getHttpClient()->getUri();
 

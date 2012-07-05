@@ -19,10 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Validator\File;
+
 use Zend\Validator\File;
 use Zend\Validator;
 
@@ -146,6 +144,10 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetMagicFile()
     {
+        if (!extension_loaded('fileinfo')) {
+            $this->markTestSkipped('This PHP Version has no finfo installed');
+        }
+
         $validator = new File\MimeType('image/gif');
         $magic     = getenv('magic');
         if (!empty($magic)) {
@@ -163,7 +165,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This PHP Version has no finfo installed');
         }
 
-        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'could not be used by ext/finfo');
+        $this->setExpectedException('Zend\Validator\Exception\InvalidMagicMimeFileException', 'could not be used by ext/finfo');
         $validator = new File\MimeType(array('image/gif', 'magicFile' => __FILE__));
     }
 

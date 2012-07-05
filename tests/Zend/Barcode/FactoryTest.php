@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Barcode;
 use Zend\Barcode,
     Zend\Barcode\Renderer,
     Zend\Barcode\Object,
     Zend\Config\Config,
-    Zend\Loader\PrefixPathLoader,
     Zend\Pdf;
 
 /**
@@ -58,13 +54,15 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        Barcode\Barcode::getObjectBroker()->setClassLoader(new Barcode\ObjectLoader);
-        Barcode\Barcode::getObjectBroker()->unregister('code25');
-        Barcode\Barcode::getObjectBroker()->unregister('code39');
-        Barcode\Barcode::getObjectBroker()->unregister('error');
-        Barcode\Barcode::getRendererBroker()->setClassLoader(new Barcode\RendererLoader);
-        Barcode\Barcode::getRendererBroker()->unregister('image');
-        Barcode\Barcode::getRendererBroker()->unregister('pdf');
+        $objectPlugins = Barcode\Barcode::getObjectPluginManager();
+        $objectPlugins->setService('code25', null);
+        $objectPlugins->setService('code39', null);
+        $objectPlugins->setService('error', null);
+
+        $rendererPlugins = Barcode\Barcode::getRendererPluginManager();
+        $rendererPlugins->setService('image', null);
+        $rendererPlugins->setService('pdf', null);
+
         date_default_timezone_set($this->originaltimezone);
     }
 
@@ -102,14 +100,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryWithoutAutomaticObjectExceptionRendering()
     {
-        $this->setExpectedException('\Zend\Barcode\Object\Exception');
+        $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $options = array('barHeight' => - 1);
         $renderer = Barcode\Barcode::factory('code39', 'image', $options, array(), false);
     }
 
     public function testFactoryWithoutAutomaticRendererExceptionRendering()
     {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
         $this->checkGDRequirement();
         $options = array('imageType' => 'my');
         $renderer = Barcode\Barcode::factory('code39', 'image', array(), $options, false);
@@ -216,45 +214,45 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testBarcodeObjectFactoryWithBarcodeAsZendConfigButNoBarcodeParameter()
     {
-        $this->setExpectedException('\Zend\Barcode\Exception');
+        $this->setExpectedException('\Zend\Barcode\Exception\ExceptionInterface');
         $config = new Config(array('barcodeParams' => array('barHeight' => 123) ));
         $barcode = Barcode\Barcode::makeBarcode($config);
     }
 
     public function testBarcodeObjectFactoryWithBarcodeAsZendConfigAndBadBarcodeParameters()
     {
-        $this->setExpectedException('\Zend\Barcode\Exception');
+        $this->setExpectedException('\Zend\Barcode\Exception\ExceptionInterface');
         $barcode = Barcode\Barcode::makeBarcode('code25', null);
     }
 
     public function testBarcodeObjectFactoryWithNamespace()
     {
-        $loader = new PrefixPathLoader(array('ZendTest\Barcode\Object\TestAsset' => __DIR__ . '/Object/TestAsset'));
-        Barcode\Barcode::getObjectBroker()->setClassLoader($loader);
+        $plugins = Barcode\Barcode::getObjectPluginManager();
+        $plugins->setInvokableClass('barcodeNamespace', 'ZendTest\Barcode\Object\TestAsset\BarcodeNamespace');
         $barcode = Barcode\Barcode::makeBarcode('barcodeNamespace');
         $this->assertTrue($barcode instanceof \ZendTest\Barcode\Object\TestAsset\BarcodeNamespace);
     }
 
     public function testBarcodeObjectFactoryWithNamespaceExtendStandardLibray()
     {
-        $loader = new PrefixPathLoader(array('Zend\Barcode\Object' => 'Zend/Barcode/Object',
-                                             'ZendTest\Barcode\Object\TestAsset' => __DIR__ . '/Object/TestAsset'));
-        Barcode\Barcode::getObjectBroker()->setClassLoader($loader);
+        $plugins = Barcode\Barcode::getObjectPluginManager();
+        $plugins->setInvokableClass('error', 'ZendTest\Barcode\Object\TestAsset\Error');
         $barcode = Barcode\Barcode::makeBarcode('error');
         $this->assertTrue($barcode instanceof \ZendTest\Barcode\Object\TestAsset\Error);
     }
 
     public function testBarcodeObjectFactoryWithNamespaceButWithoutExtendingObjectAbstract()
     {
-        $this->setExpectedException('\Zend\Barcode\Exception');
-        $loader = new PrefixPathLoader(array('ZendTest\Barcode\Object\TestAsset' => __DIR__ . '/Object/TestAsset'));
-        Barcode\Barcode::getObjectBroker()->setClassLoader($loader);
+        $plugins = Barcode\Barcode::getObjectPluginManager();
+        $plugins->setInvokableClass('barcodeNamespaceWithoutExtendingObjectAbstract', 'ZendTest\Barcode\Object\TestAsset\BarcodeNamespaceWithoutExtendingObjectAbstract');
+
+        $this->setExpectedException('\Zend\Barcode\Exception\ExceptionInterface');
         $barcode = Barcode\Barcode::makeBarcode('barcodeNamespaceWithoutExtendingObjectAbstract');
     }
 
     public function testBarcodeObjectFactoryWithUnexistantBarcode()
     {
-        $this->setExpectedException('\Zend\Loader\Exception\RuntimeException');
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $barcode = Barcode\Barcode::makeBarcode('zf123', array());
     }
 
@@ -303,37 +301,37 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testBarcodeRendererFactoryWithBarcodeAsZendConfigButNoBarcodeParameter()
     {
-        $this->setExpectedException('\Zend\Barcode\Exception');
+        $this->setExpectedException('\Zend\Barcode\Exception\ExceptionInterface');
         $config = new Config(array('rendererParams' => array('imageType' => 'gif') ));
         $renderer = Barcode\Barcode::makeRenderer($config);
     }
 
     public function testBarcodeRendererFactoryWithBarcodeAsZendConfigAndBadBarcodeParameters()
     {
-        $this->setExpectedException('\Zend\Barcode\Exception');
+        $this->setExpectedException('\Zend\Barcode\Exception\ExceptionInterface');
         $renderer = Barcode\Barcode::makeRenderer('image', null);
     }
 
     public function testBarcodeRendererFactoryWithNamespace()
     {
         $this->checkGDRequirement();
-        $loader = new PrefixPathLoader(array('ZendTest\Barcode\Renderer\TestAsset' => __DIR__ . '/Renderer/TestAsset'));
-        Barcode\Barcode::getRendererBroker()->setClassLoader($loader);
+        $plugins = Barcode\Barcode::getRendererPluginManager();
+        $plugins->setInvokableClass('rendererNamespace', 'ZendTest\Barcode\Renderer\TestAsset\RendererNamespace');
         $renderer = Barcode\Barcode::makeRenderer('rendererNamespace');
-        $this->assertTrue($renderer instanceof \Zend\Barcode\Renderer);
+        $this->assertTrue($renderer instanceof \Zend\Barcode\Renderer\RendererInterface);
     }
 
     public function testBarcodeFactoryWithNamespaceButWithoutExtendingRendererAbstract()
     {
-        $this->setExpectedException('\Zend\Barcode\Exception');
-        $loader = new PrefixPathLoader(array('ZendTest\Barcode\Renderer\TestAsset' => __DIR__ . '/Renderer/TestAsset'));
-        Barcode\Barcode::getRendererBroker()->setClassLoader($loader);
+        $plugins = Barcode\Barcode::getRendererPluginManager();
+        $plugins->setInvokableClass('rendererNamespaceWithoutExtendingRendererAbstract', 'ZendTest\Barcode\Renderer\TestAsset\RendererNamespaceWithoutExtendingRendererAbstract');
+        $this->setExpectedException('Zend\Barcode\Exception\ExceptionInterface');
         $renderer = Barcode\Barcode::makeRenderer('rendererNamespaceWithoutExtendingRendererAbstract');
     }
 
     public function testBarcodeRendererFactoryWithUnexistantRenderer()
     {
-        $this->setExpectedException('\Zend\Loader\Exception\RuntimeException');
+        $this->setExpectedException('\Zend\ServiceManager\Exception\ServiceNotFoundException');
         $renderer = Barcode\Barcode::makeRenderer('zend', array());
     }
 

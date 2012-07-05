@@ -19,10 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Technorati;
+
+use DateTime;
 use Zend\Service\Technorati;
 
 /**
@@ -66,8 +65,8 @@ class SearchResultTest extends TestCase
         $this->assertContains('[ Android]', $object->getExcerpt());
         $this->assertInstanceOf('Zend\Uri\Http', $object->getPermalink());
         $this->assertEquals(\Zend\Uri\UriFactory::factory('http://blogs.eurielec.etsit.upm.es/miotroblog/?p=271'), $object->getPermalink());
-        $this->assertInstanceOf('Zend\Date\Date', $object->getCreated());
-        $this->assertEquals(new \Zend\Date\Date('2007-11-14 22:18:04 GMT'), $object->getCreated());
+        $this->assertInstanceOf('DateTime', $object->getCreated());
+        $this->assertEquals(new DateTime('2007-11-14 22:18:04 GMT'), $object->getCreated());
 
         // check weblog
         $this->assertInstanceOf('Zend\Service\Technorati\Weblog', $object->getWeblog());

@@ -19,18 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Dojo\Form\Element;
-use Zend\Form,
-    Zend\Form\Element\Exception;;
+use Zend\Form;
+use Zend\Form\Element\Exception;;
 
 /**
  * DateTextBox dijit
  *
- * @uses       \Zend\Dojo\Form\Element\ValidationTextBox
- * @uses       \Zend\Form\Element\Exception
  * @package    Zend_Dojo
  * @subpackage Form_Element
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

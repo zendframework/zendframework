@@ -21,8 +21,7 @@
 
 namespace ZendTest\Mail;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Mail\Address,
+use Zend\Mail\Address,
     Zend\Mail\AddressList;
 
 /**
@@ -33,7 +32,7 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class AddressListTest extends TestCase
+class AddressListTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

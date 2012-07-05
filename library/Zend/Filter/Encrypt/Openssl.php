@@ -18,26 +18,23 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter\Encrypt;
 
-use Zend\Filter\Exception,
-    Zend\Filter\Compress,
-    Zend\Filter\Decompress;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Filter\Exception;
+use Zend\Filter\Compress;
+use Zend\Filter\Decompress;
 
 /**
  * Encryption adapter for openssl
  *
- * @uses       \Zend\Filter\Encrypt\EncryptionAlgorithm
- * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Openssl implements EncryptionAlgorithm
+class Openssl implements EncryptionAlgorithmInterface
 {
     /**
      * Definitions for encryption
@@ -84,7 +81,8 @@ class Openssl implements EncryptionAlgorithm
      *   'compression' => compress value with this compression adapter
      *   'package'     => pack envelope keys into encrypted string, simplifies decryption
      *
-     * @param string|array $options Options for this adapter
+     * @param string|array|Traversable $options Options for this adapter
+     * @throws Exception\ExtensionNotLoadedException
      */
     public function __construct($options = array())
     {
@@ -92,8 +90,8 @@ class Openssl implements EncryptionAlgorithm
             throw new Exception\ExtensionNotLoadedException('This filter needs the openssl extension');
         }
 
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {
@@ -122,7 +120,8 @@ class Openssl implements EncryptionAlgorithm
      * Sets the encryption keys
      *
      * @param  string|array $keys Key with type association
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
+     * @throws Exception\InvalidArgumentException
      */
     protected function _setKeys($keys)
     {
@@ -219,7 +218,7 @@ class Openssl implements EncryptionAlgorithm
      *
      * @param  string $key Private key
      * @param  string $passphrase
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
      */
     public function setPrivateKey($key, $passphrase = null)
     {
@@ -288,7 +287,7 @@ class Openssl implements EncryptionAlgorithm
      * Sets a new passphrase
      *
      * @param string $passphrase
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
      */
     public function setPassphrase($passphrase)
     {
@@ -310,7 +309,7 @@ class Openssl implements EncryptionAlgorithm
      * Sets a internal compression for values to encrypt
      *
      * @param string|array $compression
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
      */
     public function setCompression($compression)
     {
@@ -336,7 +335,7 @@ class Openssl implements EncryptionAlgorithm
      * Sets if the envelope keys should be included in the encrypted value
      *
      * @param boolean $package
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
      */
     public function setPackage($package)
     {
@@ -350,7 +349,7 @@ class Openssl implements EncryptionAlgorithm
      *
      * @param  string $value Content to encrypt
      * @return string The encrypted content
-     * @throws \Zend\Filter\Exception
+     * @throws Exception\RuntimeException
      */
     public function encrypt($value)
     {
@@ -408,13 +407,13 @@ class Openssl implements EncryptionAlgorithm
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Decrypts $value with the defined settings
      *
      * @param  string $value Content to decrypt
      * @return string The decrypted content
-     * @throws \Zend\Filter\Exception
+     * @throws Exception\RuntimeException
      */
     public function decrypt($value)
     {

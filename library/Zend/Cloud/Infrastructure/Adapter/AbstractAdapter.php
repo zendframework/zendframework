@@ -11,33 +11,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage DocumentService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\Infrastructure\Adapter;
 
-use Zend\Cloud\Infrastructure\Adapter,
-    Zend\Cloud\Infrastructure\Instance;
+use Zend\Cloud\Infrastructure\Instance;
 
 /**
  * Abstract infrastructure service adapter
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter implements Adapter
+abstract class AbstractAdapter implements AdapterInterface
 {
     /**
-     * Store the last response from the adpter
+     * Store the last response from the adapter
      * 
      * @var array
      */
@@ -129,7 +125,7 @@ abstract class AbstractAdapter implements Adapter
         if (empty($params) 
             || empty($params[Instance::SSH_USERNAME]) 
             || (empty($params[Instance::SSH_PASSWORD]) 
-                && empty($params[Instance::SSH_KEY]))
+                && empty($params[Instance::SSH_PRIVATE_KEY]))
         ) {
             throw new Exception\InvalidArgumentException('You must specify the params for the SSH connection');
         }

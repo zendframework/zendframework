@@ -18,19 +18,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\OAuth\Http;
-use Zend\OAuth\Http as HTTPClient,
-    Zend\OAuth,
-    Zend\Http;
+use Zend\OAuth\Http as HTTPClient;
+use Zend\OAuth;
+use Zend\Http;
 
 /**
- * @uses       Zend\Http\Client
- * @uses       Zend\OAuth\OAuth
- * @uses       Zend\OAuth\Http
- * @uses       Zend\OAuth\Token\Access
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

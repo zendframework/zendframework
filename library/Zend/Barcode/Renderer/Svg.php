@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Barcode\Renderer;
 
 use DOMDocument,
@@ -119,17 +116,11 @@ class Svg extends AbstractRenderer
     /**
      * Set an image resource to draw the barcode inside
      *
-     * @param DOMDocument $value
+     * @param  DOMDocument $svg
      * @return Svg
-     * @throw  Exception
      */
-    public function setResource($svg)
+    public function setResource(DOMDocument $svg)
     {
-        if (!$svg instanceof DOMDocument) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid DOMDocument resource provided to setResource()'
-            );
-        }
         $this->resource = $svg;
         return $this;
     }

@@ -1,11 +1,10 @@
 <?php
-/**
- * @namespace
- */
+
 namespace Zend\Text\Table\Exception;
 
+use Zend\Text\Exception;
+
 class OverflowException
-    extends \OverflowException
-    implements \Zend\Text\Exception
-{
-}
+    extends Exception\OverflowException
+    implements ExceptionInterface
+{}

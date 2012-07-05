@@ -20,8 +20,8 @@
 
 namespace Zend\Filter\Compress;
 
-use Zend\Filter\Exception,
-    ZipArchive;
+use Zend\Filter\Exception;
+use ZipArchive;
 
 /**
  * Compression adapter for zip

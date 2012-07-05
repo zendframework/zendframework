@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,7 @@ use Zend\Cache;
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
@@ -35,9 +35,12 @@ class FilesystemTest extends CommonAdapterTest
 {
 
     protected $_tmpCacheDir;
+    protected $_umask;
 
     public function setUp()
     {
+        $this->_umask = umask();
+
         $this->_tmpCacheDir = @tempnam(sys_get_temp_dir(), 'zend_cache_test_');
         if (!$this->_tmpCacheDir) {
             $err = error_get_last();
@@ -47,7 +50,7 @@ class FilesystemTest extends CommonAdapterTest
             $this->fail("Can't remove temporary cache directory-file: {$err['message']}");
         } elseif (!@mkdir($this->_tmpCacheDir, 0777)) {
             $err = error_get_last();
-            $this->fail("Can't create temporaty cache directory: {$err['message']}");
+            $this->fail("Can't create temporary cache directory: {$err['message']}");
         }
 
         $this->_options = new Cache\Storage\Adapter\FilesystemOptions(array(
@@ -62,6 +65,11 @@ class FilesystemTest extends CommonAdapterTest
     public function tearDown()
     {
         $this->_removeRecursive($this->_tmpCacheDir);
+
+        if ($this->_umask != umask()) {
+            umask($this->_umask);
+            $this->fail("Umask wasn't reset");
+        }
 
         parent::tearDown();
     }
@@ -89,7 +97,7 @@ class FilesystemTest extends CommonAdapterTest
 
     public function testNormalizeCacheDir()
     {
-        $cacheDir = $cacheDirExpected = sys_get_temp_dir();
+        $cacheDir = $cacheDirExpected = realpath(sys_get_temp_dir());
 
         if (DIRECTORY_SEPARATOR != '/') {
             $cacheDir = str_replace(DIRECTORY_SEPARATOR, '/', $cacheDir);
@@ -248,87 +256,6 @@ class FilesystemTest extends CommonAdapterTest
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
         $this->_options->setDirLevel(17); // must between 0-16
-    }
-
-    public function testSetReadControlAlgoAllowStrlen()
-    {
-        $this->_options->setReadControlAlgo('strlen');
-        $this->assertEquals('strlen', $this->_options->getReadControlAlgo());
-    }
-
-    public function testSetReadControlAlgoInvalidException()
-    {
-        $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_options->setReadControlAlgo('unknown');
-    }
-
-    public function testDisabledFileBlocking()
-    {
-        if (substr(\PHP_OS, 0, 3) == 'WIN') {
-            $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        }
-
-        $this->_options->setFileLocking(true);
-        $this->_options->setFileBlocking(false);
-
-        // create cache item and get data file
-        $this->assertTrue($this->_storage->setItem('key', 'value'));
-        $meta = $this->_storage->getMetadata('key');
-        $this->assertInternalType('array', $meta);
-        $this->assertArrayHasKey('filespec', $meta);
-        $file = $meta['filespec'] . '.dat';
-
-        /******************
-         * first test with exclusive lock
-         */
-
-        // open file and create a lock
-        $fp = @fopen($file, 'cb');
-        $this->assertInternalType('resource', $fp);
-        flock($fp, LOCK_EX);
-
-        // rewriting file should fail in part of open lock
-        try {
-            $this->_storage->setItem('key', 'lock');
-
-            // close
-            flock($fp, LOCK_UN);
-            fclose($fp);
-
-            $this->fail('Missing expected exception Zend\Cache\Exception\LockedException');
-        } catch (\Zend\Cache\Exception\LockedException $e) {
-            // expected exception was thrown
-
-            // close
-            flock($fp, LOCK_UN);
-            fclose($fp);
-        }
-
-        /******************
-         * second test with shared lock
-         */
-
-        // open file and create a lock
-        $fp = @fopen($file, 'rb');
-        $this->assertInternalType('resource', $fp);
-        flock($fp, LOCK_SH);
-
-        // rewriting file should fail in part of open lock
-        try {
-            $this->_storage->setItem('key', 'lock');
-
-            // close
-            flock($fp, LOCK_UN);
-            fclose($fp);
-
-            $this->fail('Missing expected exception Zend\Cache\Exception\LockedException');
-        } catch (\Zend\Cache\Exception\LockedException $e) {
-            // expected exception was thrown
-
-            // close
-            flock($fp, LOCK_UN);
-            fclose($fp);
-        }
     }
 
     public function testGetMetadataWithCtime()

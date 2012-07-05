@@ -19,12 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon\Ec2;
-use Zend\Service\Amazon\Ec2,
-    Zend\Service\Amazon\Ec2\Exception;
+use Zend\Service\Amazon\Ec2;
+use Zend\Service\Amazon\Ec2\Exception;
 
 /**
  * Zend\Service\Amazon\Ec2\Keypair test case.
@@ -51,8 +48,6 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-
         $this->keypairInstance = new Ec2\Keypair('access_key', 'secret_access_key');
 
         $adapter = new \Zend\Http\Client\Adapter\Test();
@@ -61,8 +56,6 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
         ));
         $this->adapter = $adapter;
         Ec2\Keypair::setDefaultHTTPClient($client);
-
-
     }
 
     /**
@@ -73,8 +66,6 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
         unset($this->adapter);
 
         $this->keypairInstance = null;
-
-        parent::tearDown();
     }
 
     public function testCreateKeyPairNoNameThrowsException()

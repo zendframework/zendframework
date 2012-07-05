@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.boolean"><info><title>Boolean</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.boolean"><title>Boolean</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         useful when working with databases or when processing form values.
     </para>
 
-    <section xml:id="zend.filter.set.boolean.options"><info><title>Supported options for Zend_Filter_Boolean</title></info>
+    <section xml:id="zend.filter.set.boolean.options"><title>Supported options for Zend_Filter_Boolean</title>
         
 
         <para>
@@ -40,7 +40,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.filter.set.boolean.default"><info><title>Default behaviour for Zend_Filter_Boolean</title></info>
+    <section xml:id="zend.filter.set.boolean.default"><title>Default behaviour for Zend_Filter_Boolean</title>
         
 
         <para>
@@ -64,7 +64,7 @@ $result = $filter->filter($value);
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.boolean.types"><info><title>Changing behaviour for Zend_Filter_Boolean</title></info>
+    <section xml:id="zend.filter.set.boolean.types"><title>Changing behaviour for Zend_Filter_Boolean</title>
         
 
         <para>
@@ -198,7 +198,7 @@ $filter = new Zend_Filter_Boolean(array(
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.boolean.localized"><info><title>Localized booleans</title></info>
+    <section xml:id="zend.filter.set.boolean.localized"><title>Localized booleans</title>
         
 
         <para>
@@ -230,7 +230,7 @@ $filter->filter('yes');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.filter.set.boolean.casting"><info><title>Disable casting</title></info>
+    <section xml:id="zend.filter.set.boolean.casting"><title>Disable casting</title>
         
 
         <para>
@@ -247,7 +247,7 @@ $filter->filter('yes');
             <property>casting</property> is set to <constant>FALSE</constant>
         </para>
 
-        <table xml:id="zend.filter.set.boolean.casting.table"><info><title>Usage without casting</title></info>
+        <table xml:id="zend.filter.set.boolean.casting.table"><title>Usage without casting</title>
             
             <tgroup cols="3">
                 <thead>

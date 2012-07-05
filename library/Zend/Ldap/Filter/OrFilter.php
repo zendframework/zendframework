@@ -19,22 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Filter;
 
 /**
- * Zend_Ldap_Filter_Or provides an 'or' filter.
+ * Zend\Ldap\Filter\OrFilter provides an 'or' filter.
  *
- * @uses       \Zend\Ldap\Filter\LogicalFilter
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OrFilter extends LogicalFilter
+class OrFilter extends AbstractLogicalFilter
 {
     /**
      * Creates an 'or' grouping filter.

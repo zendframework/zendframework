@@ -80,7 +80,7 @@ class RouteNotFoundStrategyTest extends TestCase
                 $this->strategy->detectNotFoundError($event);
                 $this->strategy->prepareNotFoundViewModel($event);
                 $viewModel = $event->getResult();
-                $this->assertInstanceOf('Zend\View\Model', $viewModel);
+                $this->assertInstanceOf('Zend\View\Model\ModelInterface', $viewModel);
                 $variables = $viewModel->getVariables();
                 if ($allow) {
                     $this->assertTrue(isset($variables['reason']));
@@ -150,7 +150,7 @@ class RouteNotFoundStrategyTest extends TestCase
 
         $this->strategy->prepareNotFoundViewModel($event);
         $model = $event->getResult();
-        $this->assertInstanceOf('Zend\View\Model', $model);
+        $this->assertInstanceOf('Zend\View\Model\ModelInterface', $model);
         $this->assertEquals($this->strategy->getNotFoundTemplate(), $model->getTemplate());
         $variables = $model->getVariables();
         $this->assertTrue(isset($variables['message']));
@@ -167,7 +167,7 @@ class RouteNotFoundStrategyTest extends TestCase
             $event->setResponse($response);
             $this->strategy->prepareNotFoundViewModel($event);
             $model = $event->getResult();
-            $this->assertInstanceOf('Zend\View\Model', $model);
+            $this->assertInstanceOf('Zend\View\Model\ModelInterface', $model);
             $variables = $model->getVariables();
             if ($allow) {
                 $this->assertTrue(isset($variables['reason']));
@@ -191,7 +191,7 @@ class RouteNotFoundStrategyTest extends TestCase
             $event->setResponse($response);
             $this->strategy->prepareNotFoundViewModel($event);
             $model = $event->getResult();
-            $this->assertInstanceOf('Zend\View\Model', $model);
+            $this->assertInstanceOf('Zend\View\Model\ModelInterface', $model);
             $variables = $model->getVariables();
             if ($allow) {
                 $this->assertTrue(isset($variables['exception']));
@@ -218,7 +218,7 @@ class RouteNotFoundStrategyTest extends TestCase
                 $event->setResponse($response);
                 $this->strategy->prepareNotFoundViewModel($event);
                 $model = $event->getResult();
-                $this->assertInstanceOf('Zend\View\Model', $model);
+                $this->assertInstanceOf('Zend\View\Model\ModelInterface', $model);
                 $variables = $model->getVariables();
                 if ($allow) {
                     $this->assertTrue(isset($variables['controller']));
@@ -265,7 +265,7 @@ class RouteNotFoundStrategyTest extends TestCase
         $events = new EventManager();
         $events->attachAggregate($this->strategy);
 
-        foreach (array('dispatch' => -90, 'dispatch.error' => 1) as $event => $expectedPriority) {
+        foreach (array(MvcEvent::EVENT_DISPATCH => -90, MvcEvent::EVENT_DISPATCH_ERROR => 1) as $event => $expectedPriority) {
             $listeners        = $events->getListeners($event);
             $expectedCallback = array($this->strategy, 'prepareNotFoundViewModel');
             $found            = false;
@@ -281,7 +281,7 @@ class RouteNotFoundStrategyTest extends TestCase
             $this->assertTrue($found, 'Listener not found');
         }
 
-        $listeners        = $events->getListeners('dispatch.error');
+        $listeners        = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $expectedCallback = array($this->strategy, 'detectNotFoundError');
         $expectedPriority = 1;
         $found            = false;
@@ -301,14 +301,14 @@ class RouteNotFoundStrategyTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->strategy);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(1, count($listeners));
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $this->assertEquals(2, count($listeners));
         $events->detachAggregate($this->strategy);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(0, count($listeners));
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $this->assertEquals(0, count($listeners));
     }
 }

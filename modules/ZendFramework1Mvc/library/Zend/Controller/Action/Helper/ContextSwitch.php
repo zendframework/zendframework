@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Controller\Action\Helper;
 
 use Zend\Config,
@@ -328,7 +325,7 @@ class ContextSwitch extends AbstractHelper
 
         $viewRenderer = $this->getBroker()->load('viewRenderer');
         $view = $viewRenderer->view;
-        if ($view instanceof View\Renderer) {
+        if ($view instanceof View\Renderer\RendererInterface) {
             $viewRenderer->setNoRender(true);
         }
     }
@@ -1071,7 +1068,7 @@ class ContextSwitch extends AbstractHelper
 
         $viewRenderer = $this->getBroker()->load('viewRenderer');
         $view = $viewRenderer->view;
-        if ($view instanceof View\Renderer) {
+        if ($view instanceof View\Renderer\RendererInterface) {
             if (method_exists($view, 'vars')) {
                 $vars = $view->vars()->getArrayCopy();
                 $vars = \Zend\Json\Json::encode($vars);

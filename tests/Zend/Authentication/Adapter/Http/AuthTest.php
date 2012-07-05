@@ -19,10 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Auth\Adapter\Http;
+namespace ZendTest\Authentication\Adapter\Http;
 
 use Zend\Authentication\Adapter\Http,
     Zend\Http\Headers,
@@ -344,7 +341,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         $request->setUri('http://localhost/');
         $request->setMethod('GET');
         $request->setServer(new Parameters(array('HTTP_USER_AGENT' => 'PHPUnit')));
-        $headers = $request->headers();
+        $headers = $request->getHeaders();
         $headers->addHeaderLine('Authorization', $clientHeader);
 
         // Select an Authentication scheme
@@ -373,7 +370,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         $return = array(
             'result'  => $result,
             'status'  => $response->getStatusCode(),
-            'headers' => $response->headers(),
+            'headers' => $response->getHeaders(),
         );
         return $return;
     }

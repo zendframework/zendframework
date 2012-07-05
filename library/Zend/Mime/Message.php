@@ -18,16 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mime;
 
 /**
- * @uses       \Zend\Mime\Exception\RuntimeException
- * @uses       \Zend\Mime\Mime
- * @uses       \Zend\Mime\Decode
- * @uses       \Zend\Mime\Part
  * @category   Zend
  * @package    Zend_Mime
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -244,34 +237,38 @@ class Message
         foreach ($parts as $part) {
             // now we build a new MimePart for the current Message Part:
             $newPart = new Part($part['body']);
-            foreach ($part['header'] as $key => $value) {
+            foreach ($part['header'] as $header) {
+                /** @var \Zend\Mail\Header\HeaderInterface $header */
                 /**
                  * @todo check for characterset and filename
                  */
-                switch(strtolower($key)) {
+
+                $fieldName  = $header->getFieldName();
+                $fieldValue = $header->getFieldValue();
+                switch (strtolower($fieldName)) {
                     case 'content-type':
-                        $newPart->type = $value;
+                        $newPart->type = $fieldValue;
                         break;
                     case 'content-transfer-encoding':
-                        $newPart->encoding = $value;
+                        $newPart->encoding = $fieldValue;
                         break;
                     case 'content-id':
-                        $newPart->id = trim($value,'<>');
+                        $newPart->id = trim($fieldValue,'<>');
                         break;
                     case 'content-disposition':
-                        $newPart->disposition = $value;
+                        $newPart->disposition = $fieldValue;
                         break;
                     case 'content-description':
-                        $newPart->description = $value;
+                        $newPart->description = $fieldValue;
                         break;
                     case 'content-location':
-                        $newPart->location = $value;
+                        $newPart->location = $fieldValue;
                         break;
                     case 'content-language':
-                        $newPart->language = $value;
+                        $newPart->language = $fieldValue;
                         break;
                     default:
-                        throw new Exception\RuntimeException('Unknown header ignored for MimePart:' . $key);
+                        throw new Exception\RuntimeException('Unknown header ignored for MimePart:' . $fieldName);
                 }
             }
             $res->addPart($newPart);

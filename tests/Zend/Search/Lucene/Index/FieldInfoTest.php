@@ -19,19 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Search\Lucene\Index;
+
 use Zend\Search\Lucene\Index;
-
-/**
- * Zend_Search_Lucene_Index_FieldInfo
- */
-
-/**
- * PHPUnit test case
- */
 
 /**
  * @category   Zend

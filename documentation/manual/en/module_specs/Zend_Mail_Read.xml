@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.read"><info><title>Reading Mail Messages</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.read"><title>Reading Mail Messages</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         overview of the implemented storages, see the following table.
     </para>
 
-    <table xml:id="zend.mail.read.table-1"><info><title>Mail Read Feature Overview</title></info>
+    <table xml:id="zend.mail.read.table-1"><title>Mail Read Feature Overview</title>
         
 
         <tgroup cols="5">
@@ -83,7 +83,7 @@
         </tgroup>
     </table>
 
-    <section xml:id="zend.mail.read-example"><info><title>Simple example using Pop3</title></info>
+    <section xml:id="zend.mail.read-example"><title>Simple example using Pop3</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -98,7 +98,7 @@ foreach ($mail as $message) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mail.read-open-local"><info><title>Opening a local storage</title></info>
+    <section xml:id="zend.mail.read-open-local"><title>Opening a local storage</title>
         
 
         <para>
@@ -129,7 +129,7 @@ $mail = new Zend_Mail_Storage_Maildir(array('dirname' =>
         </para>
     </section>
 
-    <section xml:id="zend.mail.read-open-remote"><info><title>Opening a remote storage</title></info>
+    <section xml:id="zend.mail.read-open-remote"><title>Opening a remote storage</title>
         
 
         <para>
@@ -184,7 +184,7 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
         </para>
     </section>
 
-    <section xml:id="zend.mail.read-fetching"><info><title>Fetching messages and simple methods</title></info>
+    <section xml:id="zend.mail.read-fetching"><title>Fetching messages and simple methods</title>
         
 
         <para>
@@ -242,7 +242,7 @@ unset($mail[$messageNum]);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mail.read-message"><info><title>Working with messages</title></info>
+    <section xml:id="zend.mail.read-message"><title>Working with messages</title>
         
 
         <para>
@@ -382,7 +382,7 @@ if (!$foundPart) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mail.read-flags"><info><title>Checking for flags</title></info>
+    <section xml:id="zend.mail.read-flags"><title>Checking for flags</title>
         
 
         <para>
@@ -450,7 +450,7 @@ if (!$message->hasFlag('$SpamTested')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mail.read-folders"><info><title>Using folders</title></info>
+    <section xml:id="zend.mail.read-folders"><title>Using folders</title>
         
 
         <para>
@@ -514,7 +514,7 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
             root folder (including delimiters), the local name is the name in the parent folder.
         </para>
 
-        <table xml:id="zend.mail.read-folders.table-1"><info><title>Mail Folder Names</title></info>
+        <table xml:id="zend.mail.read-folders.table-1"><title>Mail Folder Names</title>
             
 
             <tgroup cols="2">
@@ -593,10 +593,10 @@ $mail->selectFolder($folder);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mail.read-advanced"><info><title>Advanced Use</title></info>
+    <section xml:id="zend.mail.read-advanced"><title>Advanced Use</title>
         
 
-        <section xml:id="zend.mail.read-advanced.noop"><info><title>Using NOOP</title></info>
+        <section xml:id="zend.mail.read-advanced.noop"><title>Using NOOP</title>
             
 
             <para>
@@ -618,7 +618,7 @@ foreach ($mail as $message) {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.mail.read-advanced.caching"><info><title>Caching instances</title></info>
+        <section xml:id="zend.mail.read-advanced.caching"><title>Caching instances</title>
             
 
             <para>
@@ -658,7 +658,7 @@ $cache->set($cache_id, $mail);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.mail.read-advanced.extending"><info><title>Extending Protocol Classes</title></info>
+        <section xml:id="zend.mail.read-advanced.extending"><title>Extending Protocol Classes</title>
             
 
             <para>
@@ -752,7 +752,7 @@ $mail = new Example_Mail_Pop3_Knock(array('host'        => 'localhost',
             </para>
         </section>
 
-        <section xml:id="zend.mail.read-advanced.quota"><info><title>Using Quota (since 1.5)</title></info>
+        <section xml:id="zend.mail.read-advanced.quota"><title>Using Quota (since 1.5)</title>
             
 
             <para>

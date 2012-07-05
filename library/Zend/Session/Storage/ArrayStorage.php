@@ -18,13 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Session\Storage;
 
 use ArrayObject,
-    Zend\Session\Storage as Storable,
     Zend\Session\Exception;
 
 /**
@@ -39,7 +35,7 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ArrayStorage extends ArrayObject implements Storable
+class ArrayStorage extends ArrayObject implements StorageInterface
 {
     /**
      * Is storage marked immutable?
@@ -230,14 +226,6 @@ class ArrayStorage extends ArrayObject implements Storable
         if (isset($this['__ZF'][$key]) && is_array($value)) {
             if ($overwriteArray) {
                 $this['__ZF'][$key] = $value;
-            } elseif (null === $value) {
-                // unset($this['__ZF'][$key]) led to "indirect modification...
-                // has no effect" errors, so explicitly pulling array and 
-                // unsetting key.
-                $array = $this['__ZF'];
-                unset($array[$key]);
-                $this['__ZF'] = $array;
-                unset($array);
             } else {
                 $this['__ZF'][$key] = array_replace_recursive($this['__ZF'][$key], $value);
             }
@@ -254,6 +242,7 @@ class ArrayStorage extends ArrayObject implements Storable
                 $this['__ZF'][$key] = $value;
             }
         }
+
         return $this;
     }
 

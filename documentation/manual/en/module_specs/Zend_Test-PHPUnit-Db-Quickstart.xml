@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db.quickstart"><info><title>Quickstart</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db.quickstart"><title>Quickstart</title>
     
 
-    <section xml:id="zend.test.phpunit.db.quickstart.testcase"><info><title>Setup a Database TestCase</title></info>
+    <section xml:id="zend.test.phpunit.db.quickstart.testcase"><title>Setup a Database TestCase</title>
         
 
         <para>
@@ -103,7 +103,7 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.test.phpunit.db.quickstart.dataset"><info><title>Specify a seed dataset</title></info>
+    <section xml:id="zend.test.phpunit.db.quickstart.dataset"><title>Specify a seed dataset</title>
         
 
         <para>
@@ -152,7 +152,7 @@ PRIMARY KEY  (`bug_id`)
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.test.phpunit.db.quickstart.initial-tests"><info><title>A few initial database tests</title></info>
+    <section xml:id="zend.test.phpunit.db.quickstart.initial-tests"><title>A few initial database tests</title>
         
 
         <para>

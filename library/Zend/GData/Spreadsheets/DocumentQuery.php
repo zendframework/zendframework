@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Spreadsheets;
 use Zend\GData\App;
 
@@ -30,9 +27,6 @@ use Zend\GData\App;
  *
  * @link http://code.google.com/apis/gdata/spreadsheets/
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\App\Util
- * @uses       \Zend\GData\Query
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets
@@ -42,7 +36,7 @@ use Zend\GData\App;
 class DocumentQuery extends \Zend\GData\Query
 {
 
-    const SPREADSHEETS_FEED_URI = 'http://spreadsheets.google.com/feeds';
+    const SPREADSHEETS_FEED_URI = 'https://spreadsheets.google.com/feeds';
 
     protected $_defaultFeedUri = self::SPREADSHEETS_FEED_URI;
     protected $_documentType;

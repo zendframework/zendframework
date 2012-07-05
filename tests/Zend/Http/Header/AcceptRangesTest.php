@@ -10,7 +10,7 @@ class AcceptRangesTest extends \PHPUnit_Framework_TestCase
     public function testAcceptRangesFromStringCreatesValidAcceptRangesHeader()
     {
         $acceptRangesHeader = AcceptRanges::fromString('Accept-Ranges: bytes');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $acceptRangesHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $acceptRangesHeader);
         $this->assertInstanceOf('Zend\Http\Header\AcceptRanges', $acceptRangesHeader);
     }
 

@@ -10,7 +10,7 @@ class WarningTest extends \PHPUnit_Framework_TestCase
     public function testWarningFromStringCreatesValidWarningHeader()
     {
         $warningHeader = Warning::fromString('Warning: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $warningHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $warningHeader);
         $this->assertInstanceOf('Zend\Http\Header\Warning', $warningHeader);
     }
 

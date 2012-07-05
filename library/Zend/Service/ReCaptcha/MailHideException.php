@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\ReCaptcha;
 
 /**
  * Zend_Service_ReCaptcha_MailHide_Exception
  *
- * @uses       \Zend\Service\ReCaptcha\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage ReCaptcha

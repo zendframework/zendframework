@@ -15,30 +15,27 @@
  * @category   Zend
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mvc\Router\Http;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Mvc\Router\Exception;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Mvc\Router\Exception;
 
 /**
  * Segment route.
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Segment implements Route
+class Segment implements RouteInterface
 {
     /**
      * Parts of the route.
@@ -53,10 +50,10 @@ class Segment implements Route
      * @var string
      */
     protected $regex;
-    
+
     /**
      * Map from regex groups to parameter names.
-     * 
+     *
      * @var array
      */
     protected $paramMap = array();
@@ -81,7 +78,6 @@ class Segment implements Route
      * @param  string $route
      * @param  array  $constraints
      * @param  array  $defaults
-     * @return void
      */
     public function __construct($route, array $constraints = array(), array $defaults = array())
     {
@@ -91,11 +87,12 @@ class Segment implements Route
     }
 
     /**
-     * factory(): defined by Route interface.
+     * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
      * @param  array|Traversable $options
-     * @return void
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @return Segment
      */
     public static function factory($options = array())
     {
@@ -125,6 +122,7 @@ class Segment implements Route
      *
      * @param  string $def
      * @return array
+     * @throws Exception\RuntimeException
      */
     protected function parseRouteDefinition($def)
     {
@@ -135,7 +133,7 @@ class Segment implements Route
         $level      = 0;
 
         while ($currentPos < $length) {
-            preg_match('(\G(?<literal>[^:{\[\]]*)(?<token>[:{\[\]]|$))', $def, $matches, 0, $currentPos);
+            preg_match('(\G(?P<literal>[^:{\[\]]*)(?P<token>[:{\[\]]|$))', $def, $matches, 0, $currentPos);
 
             $currentPos += strlen($matches[0]);
 
@@ -145,13 +143,13 @@ class Segment implements Route
 
             if ($matches['token'] === ':') {
                 if (isset($def[$currentPos]) && $def[$currentPos] === '{') {
-                    if (!preg_match('(\G\{(?<name>[^}]+)\}:?)', $def, $matches, 0, $currentPos)) {
+                    if (!preg_match('(\G\{(?P<name>[^}]+)\}:?)', $def, $matches, 0, $currentPos)) {
                         throw new Exception\RuntimeException('Translated parameter missing closing bracket');
                     }
 
                     $levelParts[$level][] = array('translated-parameter', $matches['name']);
                 } else {
-                    if (!preg_match('(\G(?<name>[^:/{\[\]]+)(?:{(?<delimiters>[^}]+)})?:?)', $def, $matches, 0, $currentPos)) {
+                    if (!preg_match('(\G(?P<name>[^:/{\[\]]+)(?:{(?P<delimiters>[^}]+)})?:?)', $def, $matches, 0, $currentPos)) {
                         throw new Exception\RuntimeException('Found empty parameter name');
                     }
 
@@ -160,7 +158,7 @@ class Segment implements Route
 
                 $currentPos += strlen($matches[0]);
             } elseif ($matches['token'] === '{') {
-                if (!preg_match('(\G(?<literal>[^}]+)\})', $def, $matches, 0, $currentPos)) {
+                if (!preg_match('(\G(?P<literal>[^}]+)\})', $def, $matches, 0, $currentPos)) {
                     throw new Exception\RuntimeException('Translated literal missing closing bracket');
                 }
 
@@ -198,6 +196,7 @@ class Segment implements Route
      * @param  array   $constraints
      * @param  integer $groupIndex
      * @return string
+     * @throws Exception\RuntimeException
      */
     protected function buildRegex(array $parts, array $constraints, &$groupIndex = 1)
     {
@@ -210,15 +209,17 @@ class Segment implements Route
                     break;
 
                 case 'parameter':
-                    if (isset($constraints[$part[1]])) {
-                        $regex .= '(' . $constraints[$part[1]] . ')';
-                    } elseif ($part[2] === null) {
-                        $regex .= '([^/]+)';
-                    } else {
-                        $regex .= '([^' . $part[2] . ']+)';
-                    }
+                    $groupName = '?P<param' . $groupIndex . '>';
                     
-                    $this->paramMap[$groupIndex++] = $part[1];
+                    if (isset($constraints[$part[1]])) {
+                        $regex .= '(' . $groupName . $constraints[$part[1]] . ')';
+                    } elseif ($part[2] === null) {
+                        $regex .= '(' . $groupName . '[^/]+)';
+                    } else {
+                        $regex .= '(' . $groupName . '[^' . $part[2] . ']+)';
+                    }
+
+                    $this->paramMap['param' . $groupIndex++] = $part[1];
                     break;
 
                 case 'optional':
@@ -248,6 +249,8 @@ class Segment implements Route
      * @param  boolean $isOptional
      * @param  boolean $hasChild
      * @return string
+     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
     protected function buildPath(array $parts, array $mergedParams, $isOptional, $hasChild)
     {
@@ -309,19 +312,20 @@ class Segment implements Route
     }
 
     /**
-     * match(): defined by Route interface.
+     * match(): defined by RouteInterface interface.
      *
      * @see    Route::match()
      * @param  Request $request
+     * @param  string|null $pathOffset
      * @return RouteMatch
      */
     public function match(Request $request, $pathOffset = null)
     {
-        if (!method_exists($request, 'uri')) {
+        if (!method_exists($request, 'getUri')) {
             return null;
         }
 
-        $uri  = $request->uri();
+        $uri  = $request->getUri();
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {
@@ -347,7 +351,7 @@ class Segment implements Route
     }
 
     /**
-     * assemble(): Defined by Route interface.
+     * assemble(): Defined by RouteInterface interface.
      *
      * @see    Route::assemble()
      * @param  array $params
@@ -367,7 +371,7 @@ class Segment implements Route
     }
 
     /**
-     * getAssembledParams(): defined by Route interface.
+     * getAssembledParams(): defined by RouteInterface interface.
      *
      * @see    Route::getAssembledParams
      * @return array

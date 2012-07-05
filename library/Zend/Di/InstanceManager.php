@@ -2,7 +2,7 @@
 
 namespace Zend\Di;
 
-class InstanceManager /* implements InstanceCollection */
+class InstanceManager /* implements InstanceManagerInterface */
 {
     /**
      * Array of shared instances
@@ -37,6 +37,10 @@ class InstanceManager /* implements InstanceCollection */
          * injection type => array of ordered method params
          */
         'injections' => array(),
+        /**
+         * alias|class => bool
+         */
+        'shared' => true
         );
 
     /**
@@ -67,14 +71,18 @@ class InstanceManager /* implements InstanceCollection */
     {
         return $this->sharedInstances[$classOrAlias];
     }
-    
+
     /**
-     * addSharedInstance()
+     * Add shared instance
+     *
+     * @param object $instance
+     * @param string $classOrAlias
+     * @throws Exception\InvalidArgumentException
      */
     public function addSharedInstance($instance, $classOrAlias)
     {
         if (!is_object($instance)) {
-            throw new Exception\InvalidArgumentException('This method requires an object to be shared');
+            throw new Exception\InvalidArgumentException('This method requires an object to be shared. Class or Alias given: '.$classOrAlias);
         }
 
         $this->sharedInstances[$classOrAlias] = $instance;
@@ -140,13 +148,23 @@ class InstanceManager /* implements InstanceCollection */
         }
         return false;
     }
-    
-    
+
+    /**
+     * Check for an alias
+     *
+     * @param string $alias
+     * @return bool
+     */
     public function hasAlias($alias)
     {
         return (isset($this->aliases[$alias]));
     }
-    
+
+    /**
+     * Get aliases
+     *
+     * @return array
+     */
     public function getAliases()
     {
         return $this->aliases;
@@ -156,7 +174,8 @@ class InstanceManager /* implements InstanceCollection */
      * getClassFromAlias()
      *
      * @param string
-     * @return bool
+     * @return string|bool
+     * @throws Exception\RuntimeException
      */
     public function getClassFromAlias($alias)
     {
@@ -197,11 +216,11 @@ class InstanceManager /* implements InstanceCollection */
     }
     
     /**
-     * addAlias()
+     * Add alias
      *
      * @throws Exception\InvalidArgumentException
-     * @param $alias
-     * @param $class
+     * @param string $alias
+     * @param string $class
      * @param array $parameters
      * @return void
      */
@@ -217,7 +236,13 @@ class InstanceManager /* implements InstanceCollection */
             $this->setParameters($alias, $parameters);
         }
     }
-    
+
+    /**
+     * Check for configuration
+     *
+     * @param string $aliasOrClass
+     * @return bool
+     */
     public function hasConfiguration($aliasOrClass)
     {
         $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
@@ -240,10 +265,16 @@ class InstanceManager /* implements InstanceCollection */
         $configuration = array(
             'parameters' => isset($configuration['parameters']) ? $configuration['parameters'] : array(),
             'injections' => isset($configuration['injections']) ? $configuration['injections'] : array(),
+            'shared'     => isset($configuration['shared'])     ? $configuration['shared']     : true
         );
         $this->configurations[$key] = array_replace_recursive($this->configurations[$key], $configuration);
     }
 
+    /**
+     * Get classes
+     *
+     * @return array
+     */
     public function getClasses()
     {
         $classes = array();
@@ -270,10 +301,11 @@ class InstanceManager /* implements InstanceCollection */
      *     
      * @param string $type Alias or Class
      * @param array $parameters Multi-dim array of parameters and their values
+     * @return void
      */
     public function setParameters($aliasOrClass, array $parameters)
     {
-        return $this->setConfiguration($aliasOrClass, array('parameters' => $parameters), true);
+        $this->setConfiguration($aliasOrClass, array('parameters' => $parameters), true);
     }
     
     /**
@@ -282,19 +314,44 @@ class InstanceManager /* implements InstanceCollection */
      *     
      * @param string $type Alias or Class
      * @param array $methods Multi-dim array of methods and their parameters
+     * @return void
      */
     public function setInjections($aliasOrClass, array $injections)
     {
-        return $this->setConfiguration($aliasOrClass, array('injections' => $injections), true);
+        $this->setConfiguration($aliasOrClass, array('injections' => $injections), true);
     }
-    
 
+    /**
+     * Set shared
+     *
+     * @param string $aliasOrClass
+     * @param bool $isShared
+     * @return void
+     */
+    public function setShared($aliasOrClass, $isShared)
+    {
+        $this->setConfiguration($aliasOrClass, array('shared' => (bool) $isShared), true);
+    }
+
+    /**
+     * Check for type preferences
+     *
+     * @param string $interfaceOrAbstract
+     * @return bool
+     */
     public function hasTypePreferences($interfaceOrAbstract)
     {
         $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
         return (isset($this->typePreferences[$key]) && $this->typePreferences[$key]);
     }
 
+    /**
+     * Set type preference
+     *
+     * @param string $interfaceOrAbstract
+     * @param array $preferredImplementations
+     * @return InstanceManager
+     */
     public function setTypePreference($interfaceOrAbstract, array $preferredImplementations)
     {
         $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
@@ -304,6 +361,12 @@ class InstanceManager /* implements InstanceCollection */
         return $this;
     }
 
+    /**
+     * Get type preferences
+     *
+     * @param string $interfaceOrAbstract
+     * @return array
+     */
     public function getTypePreferences($interfaceOrAbstract)
     {
         $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
@@ -312,7 +375,13 @@ class InstanceManager /* implements InstanceCollection */
         }
         return array();
     }
-    
+
+    /**
+     * Unset type preferences
+     *
+     * @param string $interfaceOrAbstract
+     * @return void
+     */
     public function unsetTypePreferences($interfaceOrAbstract)
     {
         $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
@@ -339,7 +408,7 @@ class InstanceManager /* implements InstanceCollection */
         return $this;
     }
 
-    
+
     protected function createHashForKeys($classOrAlias, $paramKeys)
     {
         return $classOrAlias . ':' . implode('|', $paramKeys);

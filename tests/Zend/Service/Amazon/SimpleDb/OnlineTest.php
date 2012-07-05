@@ -20,14 +20,11 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon\SimpleDb;
 
-use Zend\Service\Amazon\SimpleDb,
-    Zend\Service\Amazon\SimpleDb\Exception,
-    Zend\Http\Client\Adapter\Socket;
+use Zend\Service\Amazon\SimpleDb;
+use Zend\Service\Amazon\SimpleDb\Exception;
+use Zend\Http\Client\Adapter\Socket;
 
 
 /**
@@ -77,6 +74,10 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend_Service_Amazon online tests are not enabled');
+        }
+
         $this->_amazon = new SimpleDb\SimpleDb(
             constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
             constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')

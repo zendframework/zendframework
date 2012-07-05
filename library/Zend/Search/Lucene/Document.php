@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene;
 
 use Zend\Search\Lucene\Exception\InvalidArgumentException;
@@ -29,8 +26,6 @@ use Zend\Search\Lucene\Exception\InvalidArgumentException;
 /**
  * A Document is a set of fields. Each field has a name and a textual value.
  *
- * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
- * @uses       \Zend\Search\Lucene\Document\Field
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Document

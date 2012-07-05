@@ -19,16 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Test\PHPUnit\Db\Metadata;
 
 /**
  * Generic Metadata accessor for the Zend_Db adapters
  *
- * @uses       PHPUnit_Extensions_Database_DB_IMetaData
- * @uses       \Zend\Db\Adapter\AbstractAdapter
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

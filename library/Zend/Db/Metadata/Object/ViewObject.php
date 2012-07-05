@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Metadata\Object;
@@ -25,10 +14,66 @@ namespace Zend\Db\Metadata\Object;
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ViewObject extends TableObject
+class ViewObject extends AbstractTableObject
 {
+    protected $viewDefinition;
+    protected $checkOption;
+    protected $isUpdatable;
 
+    /**
+     * @return string $viewDefinition
+     */
+    public function getViewDefinition()
+    {
+        return $this->viewDefinition;
+    }
+
+    /**
+     * @param string $viewDefinition to set
+     */
+    public function setViewDefinition($viewDefinition)
+    {
+        $this->viewDefinition = $viewDefinition;
+        return $this;
+    }
+
+    /**
+     * @return string $checkOption
+     */
+    public function getCheckOption()
+    {
+        return $this->checkOption;
+    }
+
+    /**
+     * @param string $checkOption to set
+     */
+    public function setCheckOption($checkOption)
+    {
+        $this->checkOption = $checkOption;
+        return $this;
+    }
+
+    /**
+     * @return bool $isUpdatable
+     */
+    public function getIsUpdatable()
+    {
+        return $this->isUpdatable;
+    }
+
+    /**
+     * @param bool $isUpdatable to set
+     */
+    public function setIsUpdatable($isUpdatable)
+    {
+        $this->isUpdatable = $isUpdatable;
+        return $this;
+    }
+
+    public function isUpdatable()
+    {
+        return $this->isUpdatable;
+    }
 }

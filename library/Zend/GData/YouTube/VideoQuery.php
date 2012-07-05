@@ -19,24 +19,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\YouTube;
 
-use Zend\GData\YouTube,
-    Zend\GData\App;
+use Zend\GData\YouTube;
+use Zend\GData\App;
 
 /**
  * Assists in constructing queries for YouTube videos
  *
  * @link http://code.google.com/apis/youtube/
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\App\VersionException
- * @uses       \Zend\GData\Query
- * @uses       \Zend\GData\YouTube
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube
@@ -365,7 +357,7 @@ class VideoQuery extends \Zend\GData\Query
      * Set the value of the orderby parameter
      *
      * @param string $value
-     * @return Zend_Gdata_YouTube_Query Provides a fluent interface
+     * @return Query Provides a fluent interface
      */
     public function setOrderBy($value)
     {

@@ -19,19 +19,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper\Navigation;
 
-use Zend\Navigation\Page\AbstractPage,
-    Zend\Navigation\Page\Uri as UriPage,
-    Zend\Config,
-    Zend\Acl,
-    Zend\Acl\Role,
-    Zend\Acl\Resource,
-    Zend\View,
-    Zend\View\Helper\Navigation;
+use Zend\Navigation\Page\AbstractPage;
+use Zend\Navigation\Page\Uri as UriPage;
+use Zend\Config;
+use Zend\Acl;
+use Zend\Acl\Role;
+use Zend\Acl\Resource;
+use Zend\View;
+use Zend\View\Helper\Navigation;
 
 /**
  * Tests Zend_View_Helper_Navigation_Links
@@ -83,6 +80,15 @@ class LinksTest extends AbstractTest
     {
         return;
         $this->_doctypeHelper->setDoctype($this->_oldDoctype);
+    }
+
+    public function testCanRenderFromServiceAlias()
+    {
+        $sm = $this->serviceManager;
+        $this->_helper->setServiceLocator($sm);
+
+        $returned = $this->_helper->render('Navigation');
+        $this->assertEquals($returned, $this->_getExpected('links/default.html'));
     }
 
     public function testHelperEntryPointWithoutAnyParams()
@@ -539,7 +545,7 @@ class LinksTest extends AbstractTest
             $this->_helper->findRelation($active, 'foo', 'bar');
             $this->fail('An invalid value was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('Invalid argument: $rel', $e->getMessage());
         }
     }
@@ -551,7 +557,7 @@ class LinksTest extends AbstractTest
             $this->_helper->renderLink($active, 'foo', 'bar');
             $this->fail('An invalid value was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('Invalid relation attribute', $e->getMessage());
         }
     }

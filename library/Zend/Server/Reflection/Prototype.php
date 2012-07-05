@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Server\Reflection;
 
 /**
@@ -29,9 +26,6 @@ namespace Zend\Server\Reflection;
  *
  * Contains accessors for the return value and all method arguments.
  *
- * @uses       \Zend\Server\Reflection\Exception
- * @uses       \Zend\Server\Reflection\ReflectionParameter
- * @uses       \Zend\Server\Reflection\ReflectionReturnValue
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Reflection

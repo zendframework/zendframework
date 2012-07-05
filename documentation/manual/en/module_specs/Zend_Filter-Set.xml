@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set"><info><title>Standard Filter Classes</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set"><title>Standard Filter Classes</title>
     
 
     <para>
@@ -19,7 +19,6 @@
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Encryption.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-HtmlEntities.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Int.xml"/>
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-LocalizedToNormalized.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Null.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-PregReplace.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-RealPath.xml"/>

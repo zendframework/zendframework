@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\GApps;
 
 /**
@@ -33,14 +30,13 @@ namespace Zend\GData\GApps;
  * the error code returned by the server. For a list of error codes
  * available at the time of this writing, see getErrorCode.
  *
- * @uses       \Zend\GData\App\Base
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Error extends \Zend\GData\App\Base
+class Error extends \Zend\GData\App\AbstractBase
 {
 
     // Error codes as defined at

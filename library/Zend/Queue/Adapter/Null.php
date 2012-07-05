@@ -19,22 +19,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Queue\Adapter;
 use Zend\Queue\Queue,
     Zend\Queue\Message,
-    Zend\Queue\Exception as QueueException;
+    Zend\Queue\Exception;
 
 
 /**
  * Class testing.  No supported functions.  Also used to disable a Zend_Queue.
  *
- * @uses       \Zend\Queue\Adapter\AdapterAbstract
- * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
@@ -43,18 +36,6 @@ use Zend\Queue\Queue,
  */
 class Null extends AbstractAdapter
 {
-    /**
-     * Constructor
-     *
-     * @param  array|\Zend\Config\Config $options
-     * @param  null|\Zend\Queue\Queue $queue
-     * @return void
-     */
-    public function __construct($options, Queue $queue = null)
-    {
-        parent::__construct($options, $queue);
-    }
-
     /********************************************************************
      * Queue management functions
      *********************************************************************/
@@ -66,7 +47,7 @@ class Null extends AbstractAdapter
      */
     public function isExists($name)
     {
-        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
 
@@ -77,7 +58,7 @@ class Null extends AbstractAdapter
      */
     public function create($name, $timeout=null)
     {
-        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /**
@@ -87,7 +68,7 @@ class Null extends AbstractAdapter
      */
     public function delete($name)
     {
-        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /**
@@ -97,7 +78,7 @@ class Null extends AbstractAdapter
      */
     public function getQueues()
     {
-        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /**
@@ -107,7 +88,7 @@ class Null extends AbstractAdapter
      */
     public function count(Queue $queue=null)
     {
-        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /********************************************************************
@@ -121,7 +102,7 @@ class Null extends AbstractAdapter
      */
     public function send($message, Queue $queue=null)
     {
-        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /**
@@ -131,7 +112,7 @@ class Null extends AbstractAdapter
      */
     public function receive($maxMessages=null, $timeout=null, Queue $queue=null)
     {
-        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /**
@@ -141,7 +122,7 @@ class Null extends AbstractAdapter
      */
     public function deleteMessage(Message $message)
     {
-        throw new QueueException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /********************************************************************

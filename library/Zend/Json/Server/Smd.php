@@ -19,18 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Json\Server;
 use Zend\Json\Server\Exception\InvalidArgumentException,
     Zend\Json\Server\Exception\RuntimeException;
 
 /**
- * @uses       Zend\Json\Json
- * @uses       Zend\Json\Server\Exception\InvalidArgumentException
- * @uses       Zend\Json\Server\Exception\RuntimeException
- * @uses       Zend\Json\Server\Smd\Service
  * @category   Zend
  * @package    Zend_Json
  * @subpackage Server

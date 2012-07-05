@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.introduction"><title>Introduction</title>
     
 
     <para>
@@ -58,14 +58,6 @@
 
             <listitem>
                 <para>
-                    <link linkend="zend.gdata.gbase">Google Base</link>
-                    provides the ability to retrieve, post, update, and
-                    delete items in Google Base.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
                     <link linkend="zend.gdata.youtube">YouTube</link>
                     provides the ability to search and retrieve videos,
                     comments, favorites, subscriptions, user profiles
@@ -77,6 +69,13 @@
                 <para>
                     <link linkend="zend.gdata.photos">Picasa Web Albums</link>
                     provides an online photo sharing application.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <link linkend="zend.gdata.analytics">Google Analytics</link>
+                    is a visitor statistics application.
                 </para>
             </listitem>
 
@@ -104,7 +103,7 @@
         </itemizedlist>
     </para>
 
-    <note><info><title>Unsupported services</title></info>
+    <note><title>Unsupported services</title>
         
 
         <para>
@@ -114,7 +113,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.gdata.introduction.structure"><info><title>Structure of Zend_Gdata</title></info>
+    <section xml:id="zend.gdata.introduction.structure"><title>Structure of Zend_Gdata</title>
         
 
         <para>
@@ -214,7 +213,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.services"><info><title>Interacting with Google Services</title></info>
+    <section xml:id="zend.gdata.introduction.services"><title>Interacting with Google Services</title>
         
 
         <para>
@@ -235,7 +234,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.magicfactory"><info><title>Obtaining instances of Zend_Gdata classes</title></info>
+    <section xml:id="zend.gdata.introduction.magicfactory"><title>Obtaining instances of Zend_Gdata classes</title>
         
 
         <para>
@@ -283,7 +282,7 @@ $entry->cell = $cell;
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.authentication"><info><title>Google Data Client Authentication</title></info>
+    <section xml:id="zend.gdata.introduction.authentication"><title>Google Data Client Authentication</title>
         
 
         <para>
@@ -302,7 +301,7 @@ $entry->cell = $cell;
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.dependencies"><info><title>Dependencies</title></info>
+    <section xml:id="zend.gdata.introduction.dependencies"><title>Dependencies</title>
         
 
         <para>
@@ -321,7 +320,7 @@ $entry->cell = $cell;
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.creation"><info><title>Creating a new Gdata client</title></info>
+    <section xml:id="zend.gdata.introduction.creation"><title>Creating a new Gdata client</title>
         
 
         <para>
@@ -373,7 +372,7 @@ $gdata->setMinorProtocolVersion(null);
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.parameters"><info><title>Common Query Parameters</title></info>
+    <section xml:id="zend.gdata.introduction.parameters"><title>Common Query Parameters</title>
         
 
         <para>
@@ -513,7 +512,7 @@ $query->resetParameters();      // clears all parameters
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.gdata.introduction.getfeed"><info><title>Fetching a Feed</title></info>
+    <section xml:id="zend.gdata.introduction.getfeed"><title>Fetching a Feed</title>
         
 
         <para>
@@ -540,7 +539,7 @@ $feed = $gdata->getFeed($query);
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.paging"><info><title>Working with Multi-page Feeds</title></info>
+    <section xml:id="zend.gdata.introduction.paging"><title>Working with Multi-page Feeds</title>
         
 
         <para>
@@ -585,7 +584,7 @@ $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.usefeedentry"><info><title>Working with Data in Feeds and Entries</title></info>
+    <section xml:id="zend.gdata.introduction.usefeedentry"><title>Working with Data in Feeds and Entries</title>
         
 
         <para>
@@ -611,7 +610,7 @@ foreach ($feed as $entry) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.gdata.introduction.updateentry"><info><title>Updating Entries</title></info>
+    <section xml:id="zend.gdata.introduction.updateentry"><title>Updating Entries</title>
         
 
         <para>
@@ -638,7 +637,7 @@ foreach ($feed as $entry) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.gdata.introduction.post"><info><title>Posting Entries to Google Servers</title></info>
+    <section xml:id="zend.gdata.introduction.post"><title>Posting Entries to Google Servers</title>
         
 
         <para>
@@ -687,7 +686,7 @@ echo 'The <id> of the resulting entry is: ' . $entryResult->id->text;
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.delete"><info><title>Deleting Entries on Google Servers</title></info>
+    <section xml:id="zend.gdata.introduction.delete"><title>Deleting Entries on Google Servers</title>
         
 
         <para>

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Technorati;
 
 use DomElement;
@@ -88,7 +85,7 @@ class Weblog
     /**
      * Last blog update UNIX timestamp.
      *
-     * @var     null|ZendDate
+     * @var     null|\DateTime
      * @access  protected
      */
     protected $lastUpdate;

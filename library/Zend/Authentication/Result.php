@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Authentication;
 
 /**
@@ -90,7 +87,6 @@ class Result
      * @param  int     $code
      * @param  mixed   $identity
      * @param  array   $messages
-     * @return void
      */
     public function __construct($code, $identity, array $messages = array())
     {

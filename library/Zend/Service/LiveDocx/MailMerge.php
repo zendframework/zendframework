@@ -19,12 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\LiveDocx;
 
-use Zend\Date\Date;
+use DateTime;
 
 /**
  * @category   Zend
@@ -65,7 +62,7 @@ class MailMerge extends AbstractLiveDocx
      * This component implements the LiveDocx.MailMerge SOAP Service
      * by Text Control GmbH).
      *
-     * Optionally, pass an array of options (or \Zend\Config\Config object).
+     * Optionally, pass an array of options or Traversable object).
      *
      * If an option with the key 'soapClient' is provided, that value will be
      * used to set the internal SOAP client used to connect to the LiveDocx
@@ -118,7 +115,7 @@ class MailMerge extends AbstractLiveDocx
      * );
      * {/code}
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|\Traversable $options
      * @return void
      * @since  LiveDocx 1.0
      */
@@ -1156,13 +1153,13 @@ class MailMerge extends AbstractLiveDocx
                unset($a);
 
                if (isset($o->string)) {
-                   $date1 = new Date($o->string[3], Date::RFC_1123);
-                   $date2 = new Date($o->string[1], Date::RFC_1123);
+                   $date1 = DateTime::createFromFormat(DateTime::RFC1123, $o->string[3]);
+                   $date2 = DateTime::createFromFormat(DateTime::RFC1123, $o->string[1]);
                    $ret[] = array (
                         'filename'   => $o->string[0],
                         'fileSize'   => (integer) $o->string[2],
-                        'createTime' => (integer) $date1->get(Date::TIMESTAMP),
-                        'modifyTime' => (integer) $date2->get(Date::TIMESTAMP),
+                        'createTime' => (integer) $date1->getTimestamp(),
+                        'modifyTime' => (integer) $date2->getTimestamp(),
                    );
                    unset($date1, $date2);
                }

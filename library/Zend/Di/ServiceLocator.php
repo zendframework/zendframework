@@ -2,7 +2,9 @@
 
 namespace Zend\Di;
 
-class ServiceLocator implements ServiceLocation
+use Closure;
+
+class ServiceLocator implements ServiceLocatorInterface
 {
     /**
      * Map of service names to methods
@@ -72,7 +74,7 @@ class ServiceLocator implements ServiceLocation
         }
 
         $service = $this->services[$name];
-        if ($service instanceof \Closure
+        if ($service instanceof Closure
             || (!is_object($service) && is_callable($service))
         ) {
             $this->services[$name] = $service = call_user_func_array($service, $params);

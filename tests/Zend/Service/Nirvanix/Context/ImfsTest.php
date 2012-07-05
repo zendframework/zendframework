@@ -21,8 +21,8 @@
 
 namespace ZendTest\Service\Nirvanix\Context;
 
-use Zend\Service\Nirvanix\Context\Imfs as ImfsContext,
-    ZendTest\Service\Nirvanix\FunctionalTestCase;
+use Zend\Service\Nirvanix\Context\Imfs as ImfsContext;
+use ZendTest\Service\Nirvanix\FunctionalTestCase;
 
 /**
  * @see        Zend\Service\Nirvanix\Context\Imfs

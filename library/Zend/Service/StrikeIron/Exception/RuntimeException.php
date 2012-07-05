@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\StrikeIron\Exception;
 
 use Zend\Service\StrikeIron\Exception;

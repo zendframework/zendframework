@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData;
 
-use Zend\GData\App,
-    Zend\Http\Header\Etag;
+use Zend\GData\App;
+use Zend\Http\Header\Etag;
 
 /**
  * @category   Zend

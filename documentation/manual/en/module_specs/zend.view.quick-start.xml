@@ -4,10 +4,10 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.view.quick-start">
-    <info><title>Zend\View Quick Start</title></info>
+    <title>Zend\View Quick Start</title>
  
     <section xml:id="zend.view.quick-start.intro">
-        <info><title>Overview</title></info>
+        <title>Overview</title>
 
         <para>
             <classname>Zend\View</classname> provides the "View" layer of Zend
@@ -89,7 +89,7 @@
     </section>
 
     <section xml:id="zend.view.quick-start.usage">
-        <info><title>Usage</title></info>
+        <title>Usage</title>
 
         <para>
             This manual section is designed to show you typical usage patterns
@@ -101,7 +101,7 @@
         </para>
 
         <example xml:id="zend.view.quick-start.usage.config">
-            <info><title>Configuration</title></info>
+            <title>Configuration</title>
 
             <para>
                 The default configuration for the framework will typically work
@@ -208,7 +208,7 @@ return array(
             // found" strategy. Basically, this gets triggered if (a) no route
             // matches the current request, (b) the controller specified in the
             // route match cannot be found in the locator, (c) the controller
-            // specified in the route match does not implement the Dispatchable
+            // specified in the route match does not implement the DispatchableInterface
             // interface, or (d) if a response from a controller sets the
             // response status to 404.
             //
@@ -235,7 +235,7 @@ return array(
         </example>
 
         <example xml:id="zend.view.quick-start.usage.controllers">
-            <info><title>Controllers and View Models</title></info>
+            <title>Controllers and View Models</title>
 
             <para>
                 <classname>Zend\View\View</classname> consumes
@@ -251,10 +251,10 @@ return array(
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController,
+use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function doSomethingAction()
     {
@@ -285,6 +285,9 @@ class BarController extends ActionController
                 associative array from your controller; if so, it will create a
                 view model and inject this associative array as the view
                 variables container; this view model then replaces the MVC
+                event's result. It will also look to see if you returned nothing
+                or null; if so, it will create a view model without any
+                variables attached; this view model also replaces the MVC
                 event's result. 
             </para>
                 
@@ -313,11 +316,11 @@ class BarController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\Controller\AbstractActionController;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
-    public function doSomethingAction()
+    public function doSomethingCrazyAction()
     {
         return array(
             'message' => 'Hello world',
@@ -349,10 +352,10 @@ class BarController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Content\Controller;
 
-use Zend\Mvc\Controller\ActionController,
+use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel;
 
-class ArticleController extends ActionController
+class ArticleController extends AbstractActionController
 {
     public function viewAction()
     {
@@ -485,7 +488,7 @@ class ArticleController extends ActionController
         </example>
         
         <example xml:id="zend.view.quick-start.usage.layouts">
-            <info><title>Dealing with Layouts</title></info>
+            <title>Dealing with Layouts</title>
 
             <para>
                 Most sites enforce a cohesive look-and-feel, which we typically
@@ -565,10 +568,10 @@ return array(
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController,
+use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function doSomethingAction()
     {
@@ -598,10 +601,10 @@ class BarController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController,
+use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function doSomethingAction()
     {
@@ -632,10 +635,10 @@ class BarController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Content\Controller;
 
-use Zend\Mvc\Controller\ActionController,
+use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel;
 
-class ArticleController extends ActionController
+class ArticleController extends AbstractActionController
 {
     public function viewAction()
     {
@@ -664,10 +667,10 @@ class ArticleController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Content\Controller;
 
-use Zend\Mvc\Controller\ActionController,
+use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel;
 
-class ArticleController extends ActionController
+class ArticleController extends AbstractActionController
 {
     public function viewAction()
     {
@@ -738,22 +741,13 @@ $this->layout()->footer = $this->render('article/footer');
             <programlisting language="php"><![CDATA[
 namespace Content;
 
-use Zend\EventManager\StaticEventManager;
-
 class Module
 {
-    public function init($manager)
-    {
-        // Register a bootstrap event
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'bootstrap'));
-    }
-
-    public function bootstrap($e)
+    public function onBootstrap($e)
     {
         // Register a dispatch event
         $app = $e->getParam('application');
-        $app->events()->attach('dispatch', array($this, 'setLayout'), -100);
+        $app->getEventManager()->attach('dispatch', array($this, 'setLayout'), -100);
     }
 
     public function setLayout($e)
@@ -767,15 +761,15 @@ class Module
 
         // Set the layout template
         $viewModel = $e->getViewModel();
-        $viewModel->setLayout('content/layout');
+        $viewModel->setTemplate('content/layout');
     }
 }
 ]]></programlisting>
         </example>
 
         <example xml:id="zend.view.quick-start.usage.strategies">
-            <info><title>Creating and Registering Alternate Rendering and
-                    Response Strategies</title></info>
+            <title>Creating and Registering Alternate Rendering and
+                    Response Strategies</title>
 
             <para>
                 <classname>Zend\View\View</classname> does very little. Its
@@ -853,34 +847,25 @@ class Module
             <programlisting language="php"><![CDATA[
 namespace Application;
 
-use Zend\EventManager\StaticEventManager;
-
 class Module
 {
-    public function init($manager)
-    {
-        // Register a bootstrap event
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'bootstrap'));
-    }
-
-    public function bootstrap($e)
+    public function onBootstrap($e)
     {
         // Register a "render" event, at high priority (so it executes prior
         // to the view attempting to render)
         $app = $e->getParam('application');
-        $app->events()->attach('render', array($this, 'registerJsonStrategy'), 100);
+        $app->getEventManager()->attach('render', array($this, 'registerJsonStrategy'), 100);
     }
 
     public function registerJsonStrategy($e)
     {
         $app          = $e->getTarget();
-        $locator      = $app->getLocator();
+        $locator      = $app->getServiceManager();
         $view         = $locator->get('Zend\View\View');
         $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
 
         // Attach strategy, which is a listener aggregate, at high priority
-        $view->events()->attach($jsonStrategy, 100);
+        $view->getEventManager()->attach($jsonStrategy, 100);
     }
 }
 
@@ -904,22 +889,13 @@ class Module
             <programlisting language="php"><![CDATA[
 namespace Content;
 
-use Zend\EventManager\StaticEventManager;
-
 class Module
 {
-    public function init($manager)
-    {
-        // Register a bootstrap event
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'bootstrap'));
-    }
-
-    public function bootstrap($e)
+    public function onBootstrap($e)
     {
         // Register a render event
         $app = $e->getParam('application');
-        $app->events()->attach('render', array($this, 'registerJsonStrategy'), 100);
+        $app->getEventManager()->attach('render', array($this, 'registerJsonStrategy'), 100);
     }
 
     public function registerJsonStrategy($e)
@@ -937,12 +913,12 @@ class Module
 
         // Set the JSON strategy when controllers from this module are selected
         $app          = $e->getTarget();
-        $locator      = $app->getLocator();
+        $locator      = $app->getServiceManager();
         $view         = $locator->get('Zend\View\View');
         $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
 
         // Attach strategy, which is a listener aggregate, at high priority
-        $view->events()->attach($jsonStrategy, 100);
+        $view->getEventManager()->attach($jsonStrategy, 100);
     }
 }
 ]]></programlisting>
@@ -1002,7 +978,7 @@ class AcceptStrategy implements ListenerAggregate
     public function detach(EventCollection $events)
     {
         foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener) {
+            if ($events->detach($listener)) {
                 unset($this->listeners[$index]);
             }
         }
@@ -1011,7 +987,7 @@ class AcceptStrategy implements ListenerAggregate
     public function selectRenderer($e)
     {
         $request = $e->getRequest();
-        $headers = $request->headers();
+        $headers = $request->getHeaders();
 
         // No Accept header? return PhpRenderer
         if (!$headers->has('accept')) {
@@ -1046,13 +1022,13 @@ class AcceptStrategy implements ListenerAggregate
 
         if ($renderer === $this->jsonRenderer) {
             // JSON Renderer; set content-type header
-            $headers = $response->headers();
+            $headers = $response->getHeaders();
             $headers->addHeaderLine('content-type', 'application/json');
         } elseif ($renderer === $this->feedRenderer) {
             // Feed Renderer; set content-type header, and export the feed if
             // necessary
             $feedType  = $this->feedRenderer->getFeedType();
-            $headers   = $response->headers();
+            $headers   = $response->getHeaders();
             $mediatype = 'application/'
                        . (('rss' == $feedType) ? 'rss' : 'atom')
                        . '+xml';

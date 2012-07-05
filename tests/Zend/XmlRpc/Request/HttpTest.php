@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\XmlRpc\Request;
 
-use Zend\XmlRpc\Request,
-    ZendTest\AllTests\StreamWrapper\PHPInput;
+use Zend\XmlRpc\Request;
+use ZendTest\AllTests\StreamWrapper\PHPInput;
 
 /**
  * Test case for Zend\XmlRpc\Request\Http

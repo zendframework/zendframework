@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Tag;
 
-use Zend\Tag,
-	Zend\Tag\Exception\InvalidArgumentException;
+use Zend\Tag;
+use Zend\Tag\Exception\InvalidArgumentException;
 
 /**
  * @category   Zend

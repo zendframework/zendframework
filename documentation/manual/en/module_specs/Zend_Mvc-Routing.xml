@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.routing">
-  <info><title>Routing</title></info>
+  <title>Routing</title>
 
   <para>
     Routing is the act of matching a request to a given controller.
@@ -32,7 +32,7 @@
   <programlisting language="php"><![CDATA[
 namespace Zend\Mvc\Router;
 
-use zend\Stdlib\RequestDescription as Request;
+use zend\Stdlib\RequestInterface as Request;
 
 interface Route
 {
@@ -133,7 +133,7 @@ $router->addRoutes(array(
 ]]></programlisting>
 
   <section xml:id="zend.mvc.routing.router-types">
-    <info><title>Router Types</title></info>
+    <title>Router Types</title>
 
     <para>
       Two routers are provided, the <classname>SimpleRouteStack</classname>
@@ -143,7 +143,7 @@ $router->addRoutes(array(
     </para>
 
     <section xml:id="zend.mvc.routing.router-types.simple-route-stack">
-      <info><title>SimpleRouteStack</title></info>
+      <title>SimpleRouteStack</title>
 
       <para>
         This router simply takes individual routes that provide their full
@@ -161,7 +161,7 @@ $router->addRoutes(array(
     </section>
 
     <section xml:id="zend.mvc.routing.router-types.tree-route-stack">
-      <info><title>TreeRouteStack</title></info>
+      <title>TreeRouteStack</title>
 
       <para>
         <classname>Zend\Mvc\Router\Http\TreeRouteStack</classname> provides the
@@ -229,14 +229,14 @@ $router->addRoutes(array(
   </section>
 
   <section xml:id="zend.mvc.routing.route-types">
-    <info><title>Route Types</title></info>
+    <title>Route Types</title>
 
     <para>
       Zend Framework 2.0 ships with the following route types.
     </para>
 
     <section xml:id="zend.mvc.routing.route-types.hostname">
-      <info><title>Zend\Mvc\Router\Http\Hostname</title></info>
+      <title>Zend\Mvc\Router\Http\Hostname</title>
 
       <para>
         The <classname>Hostname</classname> route attempts to match the
@@ -307,7 +307,7 @@ $route = Hostname::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.literal">
-      <info><title>Zend\Mvc\Router\Http\Literal</title></info>
+      <title>Zend\Mvc\Router\Http\Literal</title>
 
       <para>
         The <classname>Literal</classname> route is for doing exact matching of
@@ -333,7 +333,7 @@ $route = Literal::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.part">
-      <info><title>Zend\Mvc\Router\Http\Part</title></info>
+      <title>Zend\Mvc\Router\Http\Part</title>
 
       <para>
         A <classname>Part</classname> route allows crafting a tree of possible
@@ -450,7 +450,7 @@ $route = Part::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.regex">
-      <info><title>Zend\Mvc\Router\Http\Regex</title></info>
+      <title>Zend\Mvc\Router\Http\Regex</title>
 
       <para>
         A <classname>Regex</classname> route utilizes a regular expression to
@@ -496,7 +496,7 @@ $route = Regex::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.scheme">
-      <info><title>Zend\Mvc\Router\Http\Scheme</title></info>
+      <title>Zend\Mvc\Router\Http\Scheme</title>
 
       <para>
         The <classname>Scheme</classname> route matches the URI scheme only,
@@ -524,7 +524,7 @@ $route = Scheme::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.segment">
-      <info><title>Zend\Mvc\Router\Http\Segment</title></info>
+      <title>Zend\Mvc\Router\Http\Segment</title>
 
       <para>
         A <classname>Segment</classname> route allows matching any segment of a
@@ -532,7 +532,7 @@ $route = Scheme::factory(array(
         alphanumeric characters; if a segment is optional, it should be
         surrounded by brackets. As an example, "/:foo[/:bar]"
         would match a "/" followed by text and assign it to the
-        key "bar"; if any additional "/" characters are
+        key "foo"; if any additional "/" characters are
         found, any text following the last one will be assigned to the key
         "bar".
       </para>
@@ -540,7 +540,7 @@ $route = Scheme::factory(array(
       <para>
         The separation between literal and named segments can be anything.
         For example, the above could be done as "/:foo{-}[-:bar] as well. The
-        {-} after the :foo parameter indicateds a set of one or more delimiters,
+        {-} after the :foo parameter indicates a set of one or more delimiters,
         after which matching of the parameter itself ends.
       </para>
 
@@ -573,5 +573,85 @@ $route = Segment::factory(array(
 ));
 ]]></programlisting>
     </section>
+    
+    <section xml:id="zend.mvc.routing.route-types.query">
+      <title>Zend\Mvc\Router\Http\Query</title>
+      
+      <para>
+        The <classname>Query</classname> route part allows you to specify and 
+        capture query string parameters for a given route.
+      </para>
+      
+      <para>
+        The intention of the <classname>Query</classname> part is that you do 
+        not instantiate it in its own right but to use it as a child of another route 
+        part. 
+      </para>
+      
+      <para>
+        An example of its usage would be
+      </para>
+      
+      <programlisting language="php"><![CDATA[
+$route = Part::factory(array(
+    'home' => array(
+        'page'    => 'segment',
+        'options' => array(
+            'route'    => '/page[/:name]',
+            'constraints' => array(
+                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+            ),
+            'defaults' => array(
+                'controller' => 'page',
+                'action'     => 'index',
+            ),
+        )
+    ),
+    'may_terminate' => true,
+    'route_broker'  => $routeBroker,
+    'child_routes'  => array(
+        'query' => array(
+            'type' => 'Query',
+        ),
+    ),
+));
+]]></programlisting>
+
+      <para>
+        As you can see, it's pretty straight forward to specify the query part. 
+        This then allows you to create query strings using the url view helper. 
+      </para>
+      
+      <programlisting language="php"><![CDATA[
+$this->url(
+    'page/query', 
+    array(
+        'name'=>'my-test-page', 
+        'format' => 'rss',
+        'limit' => 10,
+    )
+);
+]]></programlisting>
+
+      <para>
+        As you can see above, you must add "/query" to your route name in order 
+        to append a query string. If you do not specify "/query" in the route 
+        name then no query string will be appended. 
+      </para>
+      
+      <para>
+        Our example "page" route has only one defined parameter of "name" 
+        ("/page[/:name]"), meaning that the remaining parameters of "format" 
+        and "limit" will then be appended as a query string.
+     </para>
+      
+      <para>
+        The output from our example should then be
+        "/page/mys-test-page?format=rss&amp;limit=10"
+      </para>
+      
+    </section>
+    
   </section>
 </section>

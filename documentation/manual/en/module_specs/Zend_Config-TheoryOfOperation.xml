@@ -2,7 +2,7 @@
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.config.theory_of_operation">
-    <info><title>Theory of Operation</title></info>
+    <title>Theory of Operation</title>
 
     <para>
         Configuration data are made accessible to the <classname>Zend\Config\Config</classname> constructor
@@ -48,7 +48,7 @@
     </para>
 
     <note>
-        <info><title>Modifying Config does not save changes</title></info>
+        <title>Modifying Config does not save changes</title>
 
         <para>
             It is important not to confuse such in-memory modifications with saving

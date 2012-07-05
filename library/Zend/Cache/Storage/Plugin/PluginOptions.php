@@ -22,9 +22,9 @@
 namespace Zend\Cache\Storage\Plugin;
 
 use Zend\Cache\Exception,
-    Zend\Serializer\Adapter as SerializerAdapter,
+    Zend\Serializer\Adapter\AdapterInterface as SerializerAdapter,
     Zend\Serializer\Serializer as SerializerFactory,
-    Zend\Stdlib\Options;
+    Zend\Stdlib\AbstractOptions;
 
 /**
  * @category   Zend
@@ -33,7 +33,7 @@ use Zend\Cache\Exception,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PluginOptions extends Options
+class PluginOptions extends AbstractOptions
 {
     /**
      * Used by:
@@ -41,13 +41,6 @@ class PluginOptions extends Options
      * @var int
      */
     protected $clearingFactor = 0;
-
-    /**
-     * Used by:
-     * - ClearByFactor
-     * @var int
-     */
-    protected $clearByNamespace = true;
 
     /**
      * Used by:
@@ -95,7 +88,7 @@ class PluginOptions extends Options
      * Set automatic clearing factor
      *
      * Used by:
-     * - ClearByFactor
+     * - ClearExpiredByFactor
      *
      * @param  int $clearingFactor
      * @return PluginOptions
@@ -110,41 +103,13 @@ class PluginOptions extends Options
      * Get automatic clearing factor
      *
      * Used by:
-     * - ClearByFactor
+     * - ClearExpiredByFactor
      *
      * @return int
      */
     public function getClearingFactor()
     {
         return $this->clearingFactor;
-    }
-
-    /**
-     * Set flag indicating whether or not to clear by namespace
-     *
-     * Used by:
-     * - ClearByFactor
-     *
-     * @param  bool $clearByNamespace
-     * @return PluginOptions
-     */
-    public function setClearByNamespace($clearByNamespace)
-    {
-        $this->clearByNamespace = $clearByNamespace;
-        return $this;
-    }
-
-    /**
-     * Clear items by namespace?
-     *
-     * Used by:
-     * - ClearByFactor
-     *
-     * @return bool
-     */
-    public function getClearByNamespace()
-    {
-        return $this->clearByNamespace;
     }
 
     /**
@@ -241,7 +206,7 @@ class PluginOptions extends Options
     {
         if (!is_string($serializer) && !$serializer instanceof SerializerAdapter) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects either a string serializer name or Zend\Serializer\Adapter instance; '
+                '%s expects either a string serializer name or Zend\Serializer\Adapter\AdapterInterface instance; '
                 . 'received "%s"',
                 __METHOD__,
                 (is_object($serializer) ? get_class($serializer) : gettype($serializer))
@@ -340,7 +305,7 @@ class PluginOptions extends Options
     {
         $factor = (int) $factor;
         if ($factor < 0) {
-            throw new Exception\InvalidArgumentAxception(
+            throw new Exception\InvalidArgumentException(
                 "Invalid factor '{$factor}': must be greater or equal 0"
             );
         }

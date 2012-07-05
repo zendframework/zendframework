@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Wildfire\Protocol;
 use Zend\Wildfire\Plugin,
     Zend\Wildfire\Protocol\Exception,
@@ -30,10 +27,6 @@ use Zend\Wildfire\Plugin,
 /**
  * Encodes messages into the Wildfire JSON Stream Communication Protocol.
  *
- * @uses       \Zend\Json\Json
- * @uses       \Zend\Wildfire\Channel
- * @uses       \Zend\Wildfire\Exception
- * @uses       \Zend\Wildfire\Plugin
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Protocol
@@ -153,16 +146,12 @@ class JsonStream
     /**
      * Retrieves all formatted data ready to be sent by the channel.
      *
-     * @param \Zend\Wildfire\Channel $channel The instance of the channel that will be transmitting the data
+     * @param Wildfire\Channel\HttpHeaders $channel The instance of the channel that will be transmitting the data
      * @return mixed Returns the data to be sent by the channel.
      * @throws \Zend\Wildfire\Exception
      */
-    public function getPayload(Wildfire\Channel $channel)
+    public function getPayload(Wildfire\Channel\HttpHeaders $channel)
     {
-        if (!$channel instanceof Wildfire\Channel\HttpHeaders) {
-            throw new Exception\InvalidArgumentException('The '.get_class($channel).' channel is not supported by the '.get_class($this).' protocol.');
-        }
-
         if ($this->_plugins) {
             foreach ($this->_plugins as $plugin) {
                 $plugin->flushMessages(self::PROTOCOL_URI);

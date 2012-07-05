@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Paginator\TestAsset;
 
 /**
@@ -31,7 +28,7 @@ namespace ZendTest\Paginator\TestAsset;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TestAdapter extends \ArrayObject implements \Zend\Paginator\Adapter
+class TestAdapter extends \ArrayObject implements \Zend\Paginator\Adapter\AdapterInterface
 {
     public function count()
     {

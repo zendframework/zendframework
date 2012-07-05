@@ -2,12 +2,12 @@
 
 namespace Zend\Di\Definition;
 
-use Zend\Di\Definition\Annotation,
-    Zend\Code\Annotation\AnnotationManager,
-    Zend\Code\Annotation\AnnotationCollection,
-    Zend\Code\Reflection;
+use Zend\Di\Definition\Annotation;
+use Zend\Code\Annotation\AnnotationCollection;
+use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Reflection;
 
-class RuntimeDefinition implements Definition
+class RuntimeDefinition implements DefinitionInterface
 {
 
     /**
@@ -31,7 +31,10 @@ class RuntimeDefinition implements Definition
     protected $injectionMethods = array();
 
     /**
+     * Constructor
      *
+     * @param null|IntrospectionStrategy $introspectionStrategy
+     * @param array|null $explicitClasses
      */
     public function __construct(IntrospectionStrategy $introspectionStrategy = null, array $explicitClasses = null)
     {
@@ -58,6 +61,11 @@ class RuntimeDefinition implements Definition
         return $this->introspectionStrategy;
     }
 
+    /**
+     * Set explicit classes
+     *
+     * @param array $explicitClasses
+     */
     public function setExplicitClasses(array $explicitClasses)
     {
         $this->explicitLookups = true;
@@ -73,7 +81,7 @@ class RuntimeDefinition implements Definition
     }
 
     /**
-     * Return nothing
+     * Retrieves registered classes names
      * 
      * @return array
      */
@@ -105,7 +113,7 @@ class RuntimeDefinition implements Definition
      */
     public function getClassSupertypes($class)
     {
-        if (!array_key_exists($class, $this->classes[$class])) {
+        if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
         return $this->classes[$class]['supertypes'];
@@ -168,6 +176,13 @@ class RuntimeDefinition implements Definition
         return $this->classes[$class]['methods'];
     }
 
+    /**
+     * Check if method has parameters
+     *
+     * @param string $class
+     * @param string $method
+     * @return bool
+     */
     public function hasMethodParameters($class, $method)
     {
         if (!isset($this->classes[$class])) {

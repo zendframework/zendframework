@@ -13,31 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Code\Generator;
 
-use Zend\Code\Generator\ClassGenerator,
-    Zend\Code\Generator\PropertyGenerator,
-    Zend\Code\Generator\MethodGenerator,
-    Zend\Code\Reflection\ClassReflection;
+use Zend\Code\Generator\ClassGenerator;
+use Zend\Code\Generator\PropertyGenerator;
+use Zend\Code\Generator\MethodGenerator;
+use Zend\Code\Reflection\ClassReflection;
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
- * @group Zend_CodeGenerator
- * @group Zend_CodeGenerator_Php
+ * @group Zend_Code_Generator
+ * @group Zend_Code_Generator_Php
  */
 class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -56,9 +53,9 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testClassDocblockAccessors()
+    public function testClassDocBlockAccessors()
     {
-        $this->markTestSkipped();
+        $this->markTestIncomplete();
     }
 
     public function testAbstractAccessors()
@@ -85,36 +82,35 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testPropertyAccessors()
     {
-
         $classGenerator = new ClassGenerator();
-        $classGenerator->setProperties(array(
+        $classGenerator->addProperties(array(
             'propOne',
             new PropertyGenerator('propTwo')
             ));
 
         $properties = $classGenerator->getProperties();
         $this->assertEquals(count($properties), 2);
-        $this->assertInstanceOf('PropertyGenerator', current($properties));
+        $this->assertInstanceOf('Zend\Code\Generator\PropertyGenerator', current($properties));
 
         $property = $classGenerator->getProperty('propTwo');
-        $this->assertInstanceOf('PropertyGenerator', $property);
+        $this->assertInstanceOf('Zend\Code\Generator\PropertyGenerator', $property);
         $this->assertEquals($property->getName(), 'propTwo');
 
         // add a new property
-        $classGenerator->setProperty('prop3');
+        $classGenerator->addProperty('prop3');
         $this->assertEquals(count($classGenerator->getProperties()), 3);
     }
 
     public function testSetPropertyAlreadyExistsThrowsException()
     {
         $classGenerator = new ClassGenerator();
-        $classGenerator->setProperty('prop3');
+        $classGenerator->addProperty('prop3');
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\InvalidArgumentException',
             'A property by name prop3 already exists in this class'
             );
-        $classGenerator->setProperty('prop3');
+        $classGenerator->addProperty('prop3');
     }
 
     public function testSetPropertyNoArrayOrPropertyThrowsException()
@@ -123,15 +119,15 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\InvalidArgumentException',
-            'setProperty() expects either a string or an instance of Zend\Code\Generator\PropertyGenerator'
+            'addProperty() expects string for name'
             );
-        $classGenerator->setProperty(true);
+        $classGenerator->addProperty(true);
     }
 
     public function testMethodAccessors()
     {
         $classGenerator = new ClassGenerator();
-        $classGenerator->setMethods(array(
+        $classGenerator->addMethods(array(
             'methodOne',
             new MethodGenerator('methodTwo')
             ));
@@ -145,7 +141,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($method->getName(), 'methodOne');
 
         // add a new property
-        $classGenerator->setMethod('methodThree');
+        $classGenerator->addMethod('methodThree');
         $this->assertEquals(count($classGenerator->getMethods()), 3);
     }
 
@@ -154,11 +150,11 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $classGenerator = new ClassGenerator();
 
         $this->setExpectedException(
-            'Zend\Code\Generator\Exception',
-            'setMethod() expects either a string method name or an instance of Zend\Code\Generator\MethodGenerator'
+            'Zend\Code\Generator\Exception\ExceptionInterface',
+            'addMethod() expects string for name'
             );
 
-        $classGenerator->setMethod(true);
+        $classGenerator->addMethod(true);
     }
 
     public function testSetMethodNameAlreadyExistsThrowsException()
@@ -169,11 +165,11 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $methodB->setName("foo");
 
         $classGenerator = new ClassGenerator();
-        $classGenerator->setMethod($methodA);
+        $classGenerator->addMethodFromGenerator($methodA);
 
         $this->setExpectedException('Zend\Code\Generator\Exception\InvalidArgumentException', 'A method by name foo already exists in this class.');
 
-        $classGenerator->setMethod($methodB);
+        $classGenerator->addMethodFromGenerator($methodB);
     }
 
     /**
@@ -181,11 +177,8 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasMethod()
     {
-        $method = new MethodGenerator();
-        $method->setName('methodOne');
-
         $classGenerator = new ClassGenerator();
-        $classGenerator->setMethod($method);
+        $classGenerator->addMethod('methodOne');
 
         $this->assertTrue($classGenerator->hasMethod('methodOne'));
     }
@@ -195,11 +188,8 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasProperty()
     {
-        $property = new PropertyGenerator();
-        $property->setName('propertyOne');
-
         $classGenerator = new ClassGenerator();
-        $classGenerator->setProperty($property);
+        $classGenerator->addProperty('propertyOne');
 
         $this->assertTrue($classGenerator->hasProperty('propertyOne'));
     }
@@ -208,10 +198,20 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
     {
         $classGenerator = new ClassGenerator(
             'SampleClass',
+            null,
+            ClassGenerator::FLAG_ABSTRACT,
+            'ExtendedClassName',
+            array('Iterator', 'Traversable'),
+            array('foo', 'bar'),
+            array('baz')
+        );
 
 
+        $classGenerator = ClassGenerator::fromArray(
             array(
-            'abstract' => true,
+            'name' => 'SampleClass',
+            //'abstract' => true,
+            'flags' => ClassGenerator::FLAG_ABSTRACT,
             'name' => 'SampleClass',
             'extendedClass' => 'ExtendedClassName',
             'implementedInterfaces' => array('Iterator', 'Traversable'),
@@ -222,6 +222,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
                 array('name' => 'baz')
                 ),
             ));
+
 
         $expectedOutput = <<<EOS
 abstract class SampleClass extends ExtendedClassName implements Iterator, Traversable
@@ -330,7 +331,6 @@ CODE;
         $this->assertEquals('ZendTest\Code\Generator\TestAsset', $classGenerator->getNamespaceName());
         $this->assertEquals('ClassWithNamespace', $classGenerator->getName());
         $expected = <<<CODE
-/** @namespace */
 namespace ZendTest\Code\Generator\\TestAsset;
 
 class ClassWithNamespace

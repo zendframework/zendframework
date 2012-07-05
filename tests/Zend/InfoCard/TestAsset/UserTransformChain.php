@@ -1,7 +1,9 @@
 <?php
 
 namespace ZendTest\Infocard\TestAsset;
-use Zend\InfoCard\XML\Security\Transform\TransformChain;
+
+use Zend\InfoCard\XML\Security\Transform\TransformChain,
+    Zend\InfoCard\XML\Security;
 
 class UserTransformChain extends TransformChain
 {

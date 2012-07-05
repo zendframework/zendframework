@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.intro"><info><title>Zend_Search_Lucene Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.intro"><title>Zend_Search_Lucene Introduction</title>
     
 
     <para>
@@ -45,7 +45,7 @@
         own analyzer if you need to change this behavior.
     </para>
 
-    <note><info><title>Using analyzers during indexing and searching</title></info>
+    <note><title>Using analyzers during indexing and searching</title>
         
 
         <para>

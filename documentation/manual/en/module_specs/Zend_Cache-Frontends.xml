@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.frontends"><info><title>Zend_Cache Frontends</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.frontends"><title>Zend_Cache Frontends</title>
     
 
-    <section xml:id="zend.cache.frontends.core"><info><title>Zend_Cache_Core</title></info>
+    <section xml:id="zend.cache.frontends.core"><title>Zend_Cache_Core</title>
         
 
-        <section xml:id="zend.cache.frontends.core.introduction"><info><title>Introduction</title></info>
+        <section xml:id="zend.cache.frontends.core.introduction"><title>Introduction</title>
             
 
             <para>
@@ -22,14 +22,14 @@
             </note>
         </section>
 
-        <section xml:id="zend.cache.frontends.core.options"><info><title>Available options</title></info>
+        <section xml:id="zend.cache.frontends.core.options"><title>Available options</title>
             
 
             <para>
                 These options are passed to the factory method as demonstrated in previous examples.
             </para>
 
-            <table xml:id="zend.cache.frontends.core.options.table"><info><title>Core Frontend Options</title></info>
+            <table xml:id="zend.cache.frontends.core.options.table"><title>Core Frontend Options</title>
                 
 
                 <tgroup cols="4">
@@ -146,7 +146,7 @@
             </table>
         </section>
 
-        <section xml:id="zend.cache.core.examples"><info><title>Examples</title></info>
+        <section xml:id="zend.cache.core.examples"><title>Examples</title>
             
 
             <para>
@@ -264,10 +264,10 @@ if (!($cache->test($id))) {
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.output"><info><title>Zend_Cache_Frontend_Output</title></info>
+    <section xml:id="zend.cache.frontends.output"><title>Zend_Cache_Frontend_Output</title>
         
 
-        <section xml:id="zend.cache.frontends.output.introduction"><info><title>Introduction</title></info>
+        <section xml:id="zend.cache.frontends.output.introduction"><title>Introduction</title>
             
 
             <para>
@@ -278,7 +278,7 @@ if (!($cache->test($id))) {
             </para>
         </section>
 
-        <section xml:id="zend.cache.frontends.output.options"><info><title>Available Options</title></info>
+        <section xml:id="zend.cache.frontends.output.options"><title>Available Options</title>
             
 
             <para>
@@ -287,7 +287,7 @@ if (!($cache->test($id))) {
             </para>
         </section>
 
-        <section xml:id="zend.cache.frontends.output.examples"><info><title>Examples</title></info>
+        <section xml:id="zend.cache.frontends.output.examples"><title>Examples</title>
             
 
             <para>
@@ -317,10 +317,10 @@ echo 'This is never cached ('.time().').';
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.function"><info><title>Zend_Cache_Frontend_Function</title></info>
+    <section xml:id="zend.cache.frontends.function"><title>Zend_Cache_Frontend_Function</title>
         
 
-        <section xml:id="zend.cache.frontends.function.introduction"><info><title>Introduction</title></info>
+        <section xml:id="zend.cache.frontends.function.introduction"><title>Introduction</title>
             
 
             <para>
@@ -330,10 +330,10 @@ echo 'This is never cached ('.time().').';
             </para>
         </section>
 
-        <section xml:id="zend.cache.frontends.function.options"><info><title>Available Options</title></info>
+        <section xml:id="zend.cache.frontends.function.options"><title>Available Options</title>
             
 
-            <table xml:id="zend.cache.frontends.function.options.table"><info><title>Function Frontend Options</title></info>
+            <table xml:id="zend.cache.frontends.function.options.table"><title>Function Frontend Options</title>
                 
 
                 <tgroup cols="4">
@@ -376,7 +376,7 @@ echo 'This is never cached ('.time().').';
             </table>
         </section>
 
-        <section xml:id="zend.cache.frontends.function.examples"><info><title>Examples</title></info>
+        <section xml:id="zend.cache.frontends.function.examples"><title>Examples</title>
             
 
             <para>
@@ -411,10 +411,10 @@ $cache->call('veryExpensiveFunc', $params);
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.class"><info><title>Zend_Cache_Frontend_Class</title></info>
+    <section xml:id="zend.cache.frontends.class"><title>Zend_Cache_Frontend_Class</title>
         
 
-        <section xml:id="zend.cache.frontends.class.introduction"><info><title>Introduction</title></info>
+        <section xml:id="zend.cache.frontends.class.introduction"><title>Introduction</title>
             
 
             <para>
@@ -424,10 +424,10 @@ $cache->call('veryExpensiveFunc', $params);
             </para>
         </section>
 
-        <section xml:id="zend.cache.frontends.class.options"><info><title>Available Options</title></info>
+        <section xml:id="zend.cache.frontends.class.options"><title>Available Options</title>
             
 
-            <table xml:id="zend.cache.frontends.class.options.table"><info><title>Class Frontend Options</title></info>
+            <table xml:id="zend.cache.frontends.class.options.table"><title>Class Frontend Options</title>
                 
 
                 <tgroup cols="4">
@@ -478,7 +478,7 @@ $cache->call('veryExpensiveFunc', $params);
             </table>
         </section>
 
-        <section xml:id="zend.cache.frontends.class.examples"><info><title>Examples</title></info>
+        <section xml:id="zend.cache.frontends.class.examples"><title>Examples</title>
             
 
             <para>
@@ -535,10 +535,10 @@ $result = $cache->foobar2('1', '2');
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.file"><info><title>Zend_Cache_Frontend_File</title></info>
+    <section xml:id="zend.cache.frontends.file"><title>Zend_Cache_Frontend_File</title>
         
 
-        <section xml:id="zend.cache.frontends.file.introduction"><info><title>Introduction</title></info>
+        <section xml:id="zend.cache.frontends.file.introduction"><title>Introduction</title>
             
 
             <para>
@@ -560,9 +560,9 @@ $result = $cache->foobar2('1', '2');
             </para>
         </section>
 
-        <section xml:id="zend.cache.frontends.file.options"><info><title>Available Options</title></info>
+        <section xml:id="zend.cache.frontends.file.options"><title>Available Options</title>
             
-            <table xml:id="zend.cache.frontends.file.options.table"><info><title>File Frontend Options</title></info>
+            <table xml:id="zend.cache.frontends.file.options.table"><title>File Frontend Options</title>
                 
                 <tgroup cols="4">
                     <thead>
@@ -615,7 +615,7 @@ $result = $cache->foobar2('1', '2');
             </table>
         </section>
 
-        <section xml:id="zend.cache.frontends.file.examples"><info><title>Examples</title></info>
+        <section xml:id="zend.cache.frontends.file.examples"><title>Examples</title>
             
 
             <para>
@@ -626,10 +626,10 @@ $result = $cache->foobar2('1', '2');
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.page"><info><title>Zend_Cache_Frontend_Page</title></info>
+    <section xml:id="zend.cache.frontends.page"><title>Zend_Cache_Frontend_Page</title>
         
 
-        <section xml:id="zend.cache.frontends.page.introduction"><info><title>Introduction</title></info>
+        <section xml:id="zend.cache.frontends.page.introduction"><title>Introduction</title>
             
 
             <para>
@@ -671,10 +671,10 @@ $result = $cache->foobar2('1', '2');
             </note>
         </section>
 
-        <section xml:id="zend.cache.frontends.page.options"><info><title>Available Options</title></info>
+        <section xml:id="zend.cache.frontends.page.options"><title>Available Options</title>
             
 
-            <table xml:id="zend.cache.frontends.page.options.table"><info><title>Page Frontend Options</title></info>
+            <table xml:id="zend.cache.frontends.page.options.table"><title>Page Frontend Options</title>
                 
 
                 <tgroup cols="4">
@@ -888,7 +888,7 @@ $result = $cache->foobar2('1', '2');
             </table>
         </section>
 
-        <section xml:id="zend.cache.frontends.page.examples"><info><title>Examples</title></info>
+        <section xml:id="zend.cache.frontends.page.examples"><title>Examples</title>
             
 
             <para>
@@ -962,7 +962,7 @@ $cache->start();
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.cache.frontends.page.cancel"><info><title>The Specific Cancel Method</title></info>
+        <section xml:id="zend.cache.frontends.page.cancel"><title>The Specific Cancel Method</title>
             
 
             <para>
@@ -989,10 +989,10 @@ if ($someTest) {
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.capture"><info><title>Zend_Cache_Frontend_Capture</title></info>
+    <section xml:id="zend.cache.frontends.capture"><title>Zend_Cache_Frontend_Capture</title>
         
 
-        <section xml:id="zend.cache.frontends.capture.introduction"><info><title>Introduction</title></info>
+        <section xml:id="zend.cache.frontends.capture.introduction"><title>Introduction</title>
             
 
             <para>

@@ -19,16 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Search\Lucene;
+
 use Zend\Search\Lucene;
 use Zend\Search;
-
-/**
- * PHPUnit test case
- */
 
 /**
  * @category   Zend
@@ -96,7 +90,7 @@ class AbstractFSMTest extends \PHPUnit_Framework_TestCase
         $wrongInputExceptionCatched = false;
         try {
             $doorFSM->process(testFSMClass::LOCK);
-        } catch(\Zend\Search\Lucene\Exception $e) {
+        } catch(\Zend\Search\Lucene\Exception\ExceptionInterface $e) {
             $wrongInputExceptionCatched = true;
         }
         $this->assertTrue($wrongInputExceptionCatched);

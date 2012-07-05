@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 
-use Zend\View\Helper\Url as UrlHelper,
-    Zend\Mvc\Router\SimpleRouteStack as Router;
+use Zend\View\Helper\Url as UrlHelper;
+use Zend\Mvc\Router\SimpleRouteStack as Router;
 
 /**
  * Zend_View_Helper_UrlTest
@@ -68,7 +65,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperHasHardDependencyWithRouter()
     {
-        $this->setExpectedException('Zend\View\Exception\RuntimeException', 'No RouteStack instance provided');
+        $this->setExpectedException('Zend\View\Exception\RuntimeException', 'No RouteStackInterface instance provided');
         $url = new UrlHelper;
         $url('home');
     }

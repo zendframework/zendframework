@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\GApps;
 
 /**
@@ -31,8 +28,6 @@ namespace Zend\GData\GApps;
  * For information on requesting this feed from a server, see the Google
  * Apps service class, Zend_Gdata_GApps.
  *
- * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\GApps\EmailListRecipientEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps

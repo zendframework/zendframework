@@ -19,38 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon;
+
 use Zend\Service\Amazon;
 
 /**
  * Test helper
- */
-
-/**
- * @see Zend_Service_Amazon
- */
-
-/**
- * @see Zend_Service_Amazon_ResultSet
- */
-
-/**
- * @see Zend_Service_Amazon_ResultSet
- */
-
-/**
- * @see Zend_Http_Client_Adapter_Socket
- */
-
-/**
- * @see Zend\Http\Client\Adapter\Test
- */
-
-
-/**
+ *
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests

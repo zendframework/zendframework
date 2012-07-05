@@ -21,13 +21,12 @@
 
 namespace Zend\View\Strategy;
 
-use Zend\EventManager\EventCollection,
-    Zend\EventManager\ListenerAggregate,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\View\Model,
-    Zend\View\Renderer\PhpRenderer,
-    Zend\View\ViewEvent;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\ViewEvent;
 
 /**
  * @category   Zend
@@ -36,7 +35,7 @@ use Zend\EventManager\EventCollection,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PhpRendererStrategy implements ListenerAggregate
+class PhpRendererStrategy implements ListenerAggregateInterface
 {
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
@@ -45,7 +44,7 @@ class PhpRendererStrategy implements ListenerAggregate
 
     /**
      * Placeholders that may hold content
-     * 
+     *
      * @var array
      */
     protected $contentPlaceholders = array('article', 'content');
@@ -57,8 +56,8 @@ class PhpRendererStrategy implements ListenerAggregate
 
     /**
      * Constructor
-     * 
-     * @param  PhpRenderer $renderer 
+     *
+     * @param  PhpRenderer $renderer
      * @return void
      */
     public function __construct(PhpRenderer $renderer)
@@ -68,7 +67,7 @@ class PhpRendererStrategy implements ListenerAggregate
 
     /**
      * Retrieve the composed renderer
-     * 
+     *
      * @return PhpRenderer
      */
     public function getRenderer()
@@ -87,7 +86,7 @@ class PhpRendererStrategy implements ListenerAggregate
         $this->contentPlaceholders = $contentPlaceholders;
         return $this;
     }
-    
+
     /**
      * Get list of possible content placeholders
      *
@@ -100,24 +99,24 @@ class PhpRendererStrategy implements ListenerAggregate
 
     /**
      * Attach the aggregate to the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventManagerInterface $events
      * @param  int $priority
      * @return void
      */
-    public function attach(EventCollection $events, $priority = 1)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $this->listeners[] = $events->attach('renderer', array($this, 'selectRenderer'), $priority);
-        $this->listeners[] = $events->attach('response', array($this, 'injectResponse'), $priority);
+        $this->listeners[] = $events->attach(ViewEvent::EVENT_RENDERER, array($this, 'selectRenderer'), $priority);
+        $this->listeners[] = $events->attach(ViewEvent::EVENT_RESPONSE, array($this, 'injectResponse'), $priority);
     }
 
     /**
      * Detach aggregate listeners from the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $listener) {
             if ($events->detach($listener)) {
@@ -127,10 +126,10 @@ class PhpRendererStrategy implements ListenerAggregate
     }
 
     /**
-     * Select the PhpRenderer; typically, this will be registered last or at 
+     * Select the PhpRenderer; typically, this will be registered last or at
      * low priority.
-     * 
-     * @param  ViewEvent $e 
+     *
+     * @param  ViewEvent $e
      * @return PhpRenderer
      */
     public function selectRenderer(ViewEvent $e)
@@ -142,9 +141,9 @@ class PhpRendererStrategy implements ListenerAggregate
      * Populate the response object from the View
      *
      * Populates the content of the response object from the view rendering
-     * results. 
-     * 
-     * @param  ViewEvent $e 
+     * results.
+     *
+     * @param  ViewEvent $e
      * @return void
      */
     public function injectResponse(ViewEvent $e)

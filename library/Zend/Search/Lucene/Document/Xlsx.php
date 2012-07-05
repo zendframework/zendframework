@@ -19,23 +19,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Document;
 
-use Zend\Search\Lucene,
-	Zend\Search\Lucene\Exception\RuntimeException,
-	Zend\Search\Lucene\Exception\ExtensionNotLoadedExtension;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Exception\ExtensionNotLoadedException;
 
 /**
  * Xlsx document.
  *
- * @uses       \Zend\Search\Lucene\Document\AbstractOpenXML
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
- * @uses 	   \Zend\Search\Lucene\Exception\ExtensionNotLoadedException
- * @uses       \Zend\Search\Lucene\Document\Field
- * @uses       ZipArchive
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Document
@@ -242,7 +234,7 @@ class Xlsx extends AbstractOpenXML
     /**
      * Parse rich text XML
      *
-     * @param SimpleXMLElement $is
+     * @param \SimpleXMLElement $is
      * @return string
      */
     private function _parseRichText($is = null) {

@@ -19,24 +19,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Amazon\Ec2;
-use Zend\Service\Amazon,
-    Zend\Service\Amazon\Ec2\Exception,
-    Zend\Crypt;
+use Zend\Service\Amazon;
+use Zend\Service\Amazon\Ec2\Exception;
+use Zend\Crypt\Hmac;
 
 /**
  * Provides the basic functionality to send a request to the Amazon Ec2 Query API
  *
- * @uses       DOMXPath
- * @uses       Zend_Crypt_Hmac
- * @uses       Zend_Http_Client
- * @uses       Zend_Service_Amazon_Abstract
- * @uses       Zend\Service\Amazon\Exception
- * @uses       Zend\Service\Amazon\Ec2\Exception
- * @uses       Zend_Service_Amazon_Ec2_Response
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2
@@ -154,7 +144,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
             $request = $this->getHttpClient();
             $request->resetParameters();
 
-            $request->setConfig(array(
+            $request->setOptions(array(
                 'timeout' => $this->_httpTimeout
             ));
 
@@ -165,7 +155,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
             $httpResponse = $request->send();
 
 
-        } catch (\Zend\Http\Client\Exception $zhce) {
+        } catch (\Zend\Http\Client\Exception\ExceptionInterface $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();
             throw new Exception\RuntimeException($message, $zhce->getCode(), $zhce);
         }
@@ -242,7 +232,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
 
         $data .= implode('&', $arrData);
 
-        $hmac = Crypt\Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Crypt\Hmac::BINARY);
+        $hmac = Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Hmac::OUTPUT_BINARY);
 
         return base64_encode($hmac);
     }

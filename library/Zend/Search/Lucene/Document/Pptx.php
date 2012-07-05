@@ -19,23 +19,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Document;
 
-use Zend\Search\Lucene,
-	Zend\Search\Lucene\Exception\ExtensionNotLoadedException,
-	Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Exception\ExtensionNotLoadedException;
+use Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * Pptx document.
  *
- * @uses       \Zend\Search\Lucene\Document\AbstractOpenXML
- * @uses       \Zend\Search\Lucene\Exception\ExtensionNotLoadedException
- * @uses	   \Zend\Search\Lucene\Exception\RuntimeException
- * @uses       \Zend\Search\Lucene\Document\Field
- * @uses       ZipArchive
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Document

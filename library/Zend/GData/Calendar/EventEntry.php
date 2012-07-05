@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Calendar;
 
 use Zend\GData\Calendar;
@@ -29,13 +26,6 @@ use Zend\GData\Calendar;
 /**
  * Data model class for a Google Calendar Event Entry
  *
- * @uses       \Zend\GData\Calendar
- * @uses       \Zend\GData\Calendar\Extension\Link
- * @uses       \Zend\GData\Calendar\Extension\SendEventNotifications
- * @uses       \Zend\GData\Calendar\Extension\QuickAdd
- * @uses       \Zend\GData\Calendar\Extension\Timezone
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Kind\EventEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Calendar
@@ -119,8 +109,8 @@ class EventEntry extends \Zend\GData\Kind\EventEntry
     }
 
     /**
-     * @param \Zend\GData\Calendar\Extension\Timezone $value
-     * @return Zend_Gdata_Extension_EventEntry Provides a fluent interface
+     * @param Extension\Timezone $value
+     * @return EventEntry Provides a fluent interface
      */
     public function setTimezone($value)
     {
@@ -134,8 +124,8 @@ class EventEntry extends \Zend\GData\Kind\EventEntry
     }
 
     /**
-     * @param \Zend\GData\Calendar\Extension\QuickAdd $value
-     * @return Zend_Gdata_Extension_ListEntry Provides a fluent interface
+     * @param Extension\QuickAdd $value
+     * @return ListEntry Provides a fluent interface
      */
     public function setQuickAdd($value)
     {

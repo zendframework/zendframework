@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>Attachments</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><title>Attachments</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         <methodname>createAttachment()</methodname>:
     </para>
 
-    <example xml:id="zend.mail.attachments.example-1"><info><title>E-Mail Messages with Attachments</title></info>
+    <example xml:id="zend.mail.attachments.example-1"><title>E-Mail Messages with Attachments</title>
         
 
         <programlisting language="php"><![CDATA[

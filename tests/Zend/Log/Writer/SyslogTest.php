@@ -21,10 +21,10 @@
 
 namespace ZendTest\Log\Writer;
 
-use ZendTest\Log\TestAsset\CustomSyslogWriter,
-    Zend\Log\Writer\Syslog as SyslogWriter,
-    \Zend\Log\Logger,
-    \Zend\Log\Formatter\Simple as SimpleFormatter;
+use ZendTest\Log\TestAsset\CustomSyslogWriter;
+use Zend\Log\Writer\Syslog as SyslogWriter;
+use Zend\Log\Logger;
+use Zend\Log\Formatter\Simple as SimpleFormatter;
 
 /**
  * @category   Zend
@@ -38,20 +38,12 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
 {
     public function testWrite()
     {
-        $fields = array('message' => 'foo', 'priority' => LOG_NOTICE);
+        $fields = array(
+            'message' => 'foo',
+            'priority' => LOG_NOTICE
+        );
         $writer = new SyslogWriter();
         $writer->write($fields);
-    }
-
-    public function testFactory()
-    {
-        $cfg = array(
-            'application' => 'my app',
-            'facility'    => LOG_USER
-        );
-
-        $writer = SyslogWriter::factory($cfg);
-        $this->assertTrue($writer instanceof SyslogWriter);
     }
 
     /**
@@ -108,7 +100,7 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
             'priority' => Logger::ERR
         );
 
-        $writer = SyslogWriter::factory(array());
+        $writer = new SyslogWriter();
         $formatter = new SimpleFormatter('%message% (this is a test)');
         $writer->setFormatter($formatter);
 

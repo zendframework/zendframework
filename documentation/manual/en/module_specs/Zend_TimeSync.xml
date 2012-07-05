@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.introduction"><title>Introduction</title>
     
 
     <para>
@@ -17,17 +17,17 @@
         internal server's time.
     </para>
 
-    <note><info><title>Background</title></info>
+    <note><title>Background</title>
         
 
         <para>
             <classname>Zend_TimeSync</classname> is not able to change the server's time, but it
-            will return a <link linkend="zend.date.introduction">Zend_Date</link> instance from
+            will return a <classname>DateTime</classname> instance from
             which the difference from the server's time can be worked with.
         </para>
     </note>
 
-    <section xml:id="zend.timesync.introduction.why"><info><title>Why Zend_TimeSync ?</title></info>
+    <section xml:id="zend.timesync.introduction.why"><title>Why Zend_TimeSync ?</title>
         
 
         <para>
@@ -103,7 +103,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.timesync.introduction.ntp"><info><title>What is NTP ?</title></info>
+    <section xml:id="zend.timesync.introduction.ntp"><title>What is NTP ?</title>
         
 
         <para>
@@ -114,7 +114,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.timesync.introduction.sntp"><info><title>What is SNTP?</title></info>
+    <section xml:id="zend.timesync.introduction.sntp"><title>What is SNTP?</title>
         
 
         <para>
@@ -125,7 +125,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.timesync.introduction.problematic"><info><title>Problematic usage</title></info>
+    <section xml:id="zend.timesync.introduction.problematic"><title>Problematic usage</title>
         
 
         <para>
@@ -136,7 +136,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.timesync.introduction.decision"><info><title>Decide which server to use</title></info>
+    <section xml:id="zend.timesync.introduction.decision"><title>Decide which server to use</title>
         
 
         <para>

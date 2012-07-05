@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\EventManager;
 
 use SplStack;
@@ -33,7 +30,7 @@ use SplStack;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ResponseCollection extends SplStack 
+class ResponseCollection extends SplStack
 {
     protected $stopped = false;
 
@@ -89,6 +86,7 @@ class ResponseCollection extends SplStack
      * Check if any of the responses match the given value.
      *
      * @param  mixed $value The value to look for among responses
+     * @return bool
      */
     public function contains($value)
     {

@@ -20,9 +20,12 @@
 
 namespace Zend\View;
 
-use Zend\EventManager\Event,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response;
+use ArrayAccess;
+use Zend\EventManager\Event;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * @category   Zend
@@ -32,6 +35,13 @@ use Zend\EventManager\Event,
  */
 class ViewEvent extends Event
 {
+    /**#@+
+     * View events triggered by eventmanager
+     */
+    const EVENT_RENDERER = 'renderer';
+    const EVENT_RESPONSE = 'response';
+    /**#@-*/
+
     /**
      * @var null|Model
      */
@@ -59,8 +69,8 @@ class ViewEvent extends Event
 
     /**
      * Set the view model
-     * 
-     * @param  Model $model 
+     *
+     * @param  Model $model
      * @return ViewEvent
      */
     public function setModel(Model $model)
@@ -71,8 +81,8 @@ class ViewEvent extends Event
 
     /**
      * Set the MVC request object
-     * 
-     * @param  Request $request 
+     *
+     * @param  Request $request
      * @return ViewEvent
      */
     public function setRequest(Request $request)
@@ -83,8 +93,8 @@ class ViewEvent extends Event
 
     /**
      * Set the MVC response object
-     * 
-     * @param  Response $response 
+     *
+     * @param  Response $response
      * @return ViewEvent
      */
     public function setResponse(Response $response)
@@ -95,8 +105,8 @@ class ViewEvent extends Event
 
     /**
      * Set result of rendering
-     * 
-     * @param  mixed $result 
+     *
+     * @param  mixed $result
      * @return ViewEvent
      */
     public function setResult($result)
@@ -107,7 +117,7 @@ class ViewEvent extends Event
 
     /**
      * Retrieve the view model
-     * 
+     *
      * @return null|Model
      */
     public function getModel()
@@ -126,7 +136,7 @@ class ViewEvent extends Event
         $this->renderer = $renderer;
         return $this;
     }
-    
+
     /**
      * Get value for renderer
      *
@@ -139,7 +149,7 @@ class ViewEvent extends Event
 
     /**
      * Retrieve the MVC request object
-     * 
+     *
      * @return null|Request
      */
     public function getRequest()
@@ -149,7 +159,7 @@ class ViewEvent extends Event
 
     /**
      * Retrieve the MVC response object
-     * 
+     *
      * @return null|Response
      */
     public function getResponse()
@@ -159,19 +169,19 @@ class ViewEvent extends Event
 
     /**
      * Retrieve the result of rendering
-     * 
+     *
      * @return mixed
      */
     public function getResult()
     {
         return $this->result;
     }
-    
+
     /**
      * Get event parameter
-     * 
-     * @param  string $name 
-     * @param  mixed $default 
+     *
+     * @param  string $name
+     * @param  mixed $default
      * @return mixed
      */
     public function getParam($name, $default = null)
@@ -194,7 +204,7 @@ class ViewEvent extends Event
 
     /**
      * Get all event parameters
-     * 
+     *
      * @return array|\ArrayAccess
      */
     public function getParams()
@@ -210,8 +220,8 @@ class ViewEvent extends Event
 
     /**
      * Set event parameters
-     * 
-     * @param  array|object|ArrayAccess $params 
+     *
+     * @param  array|object|ArrayAccess $params
      * @return ViewEvent
      */
     public function setParams($params)
@@ -231,10 +241,10 @@ class ViewEvent extends Event
     }
 
     /**
-     * Set an individual event parameter 
-     * 
-     * @param  string $name 
-     * @param  mixed $value 
+     * Set an individual event parameter
+     *
+     * @param  string $name
+     * @param  mixed $value
      * @return ViewEvent
      */
     public function setParam($name, $value)

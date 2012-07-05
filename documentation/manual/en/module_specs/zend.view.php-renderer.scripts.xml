@@ -2,7 +2,7 @@
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.view.php-renderer.scripts">
-    <info><title>PhpRenderer View Scripts</title></info>
+    <title>PhpRenderer View Scripts</title>
 
     <para>
         Once you call <methodname>render()</methodname>,
@@ -84,7 +84,7 @@
 ]]></programlisting>
 
     <section xml:id="zend.view.php-renderer.scripts.escaping">
-        <info><title>Escaping Output</title></info>
+        <title>Escaping Output</title>
 
         <para>
             One of the most important tasks to perform in a view script is to make sure that output

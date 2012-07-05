@@ -3,14 +3,14 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.mail.message">
-    <info>
+    
         <title>Zend\Mail\Message</title>
-    </info>
+    
 
     <section xml:id="zend.mail.message.intro">
-        <info>
+        
             <title>Overview</title>
-        </info>
+        
 
         <para>
             The <classname>Message</classname> class encapsulates a single email message as
@@ -34,9 +34,9 @@
     </section>
 
     <section xml:id="zend.mail.message.quick-start">
-        <info>
+        
             <title>Quick Start</title>
-        </info>
+        
 
         <para>
             Creating a <classname>Message</classname> is simple: simply instantiate it.
@@ -115,7 +115,7 @@ $message->setEncoding("UTF-8");
  * Mail headers created:
  * X-API-Key: FOO-BAR-BAZ-BAT
  */
-$message->headers()->addHeaderLine('X-API-Key', 'FOO-BAR-BAZ-BAT');
+$message->getHeaders()->addHeaderLine('X-API-Key', 'FOO-BAR-BAZ-BAT');
 ]]></programlisting>
 
         <para>
@@ -164,7 +164,7 @@ echo $message->toString();
 // Headers
 // Note: this will also grab all headers for which accessors/mutators exist in 
 // the Message object itself.
-foreach ($message->headers() as $header) {
+foreach ($message->getHeaders() as $header) {
     echo $header->toString();
     // or grab values: $header->getFieldName(), $header->getFieldValue()
 }
@@ -200,9 +200,9 @@ $transport->send($message);
     </section>
 
     <section xml:id="zend.mail.message.options">
-        <info>
+        
             <title>Configuration Options</title>
-        </info>
+        
 
         <para>
             The <classname>Message</classname> class has no configuration options, and is instead a
@@ -211,9 +211,9 @@ $transport->send($message);
     </section>
 
     <section xml:id="zend.mail.message.methods">
-        <info>
+        
             <title>Available Methods</title>
-        </info>
+        
 
         <variablelist>
             <varlistentry xml:id="zend.mail.message.methods.is-valid">
@@ -284,12 +284,12 @@ $transport->send($message);
                 </listitem>
             </varlistentry>
 
-            <varlistentry xml:id="zend.mail.message.methods.headers">
-                <term>setHeaders</term>
+            <varlistentry xml:id="zend.mail.message.methods.get-headers">
+                <term>getHeaders</term>
 
                 <listitem>
                     <methodsynopsis>
-                        <methodname>headers</methodname>
+                        <methodname>getHeaders</methodname>
                         <void/>
                     </methodsynopsis>
 
@@ -700,9 +700,9 @@ $transport->send($message);
     </section>
 
     <section xml:id="zend.mail.message.examples">
-        <info>
+        
             <title>Examples</title>
-        </info>
+        
 
         <para>
             Please <link linkend="zend.mail.message.quick-start">see the Quick Start section</link>.

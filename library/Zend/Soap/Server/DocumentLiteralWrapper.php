@@ -19,14 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Soap\Server;
 
-use ReflectionClass;
-use Zend\Soap\Exception\UnexpectedValueException;
-use Zend\Soap\Exception\BadMethodCallException;
+use ReflectionClass,
+    ReflectionObject,
+    Zend\Soap\Exception\UnexpectedValueException,
+    Zend\Soap\Exception\BadMethodCallException;
 
 /**
  * Wraps WSDL Document/Literal Style service objects to hide SOAP request
@@ -81,7 +79,6 @@ use Zend\Soap\Exception\BadMethodCallException;
  *  $soap->setObject(new \Zend\Soap\Server\DocumentLiteralWrapper($service));
  *  $soap->handle();
  *
- * @uses ReflectionClass
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Server
@@ -108,7 +105,7 @@ class DocumentLiteralWrapper
     public function __construct($object)
     {
         $this->_object = $object;
-        $this->_reflection = new \ReflectionObject($this->_object);
+        $this->_reflection = new ReflectionObject($this->_object);
     }
 
     /**

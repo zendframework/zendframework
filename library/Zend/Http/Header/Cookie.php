@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Http\Header;
 
 use Zend\Uri,
@@ -31,7 +28,7 @@ use Zend\Uri,
  * @see http://www.ietf.org/rfc/rfc2109.txt
  * @see http://www.w3.org/Protocols/rfc2109/rfc2109
  */
-class Cookie extends ArrayObject implements HeaderDescription
+class Cookie extends ArrayObject implements HeaderInterface
 {
 
     protected $encodeValue = true;

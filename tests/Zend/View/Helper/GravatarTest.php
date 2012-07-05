@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase,
@@ -147,7 +144,7 @@ class GravatarTest extends TestCase
     public function testInvalidRatingParametr()
     {
         $ratingsWrong = array( 'a', 'cs', 456);
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         foreach ($ratingsWrong as $value) {
             $this->helper->setRating($value);
         }

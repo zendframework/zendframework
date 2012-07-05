@@ -19,16 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\EXIF\Extension;
 
 /**
  * Represents the exif:model element used by the Gdata Exif extensions.
  *
- * @uses       \Zend\GData\EXIF
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Exif

@@ -19,18 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Amazon\S3;
-use Zend\Service\Amazon,
-    Zend\Service\Amazon\S3\Exception;
+use Zend\Service\Amazon;
+use Zend\Service\Amazon\S3\Exception;
 
 /**
  * Amazon S3 PHP stream wrapper
  *
- * @uses       Zend_Service_Amazon_S3
- * @uses       Zend\Service\Amazon\S3\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon_S3

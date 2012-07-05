@@ -1,36 +1,30 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Config
  */
 
 namespace Zend\Config;
 
-use Countable,
-    Iterator,
-    ArrayAccess,
-    Zend\Stdlib\ArrayUtils
-;
+use Countable;
+use Iterator;
+use ArrayAccess;
+use Zend\Stdlib\ArrayUtils;
 
 /**
+ * Provides a property based interface to an array.
+ * The data are read-only unless $allowModifications is set to true
+ * on construction.
+ *
+ * Implements Countable, Iterator and ArrayAccess
+ * to facilitate easy access to the data.
+ *
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Config implements Countable, Iterator, ArrayAccess
 {
@@ -64,16 +58,13 @@ class Config implements Countable, Iterator, ArrayAccess
     protected $skipNextIteration;
 
     /**
-     * Zend_Config provides a property based interface to
-     * an array. The data are read-only unless $allowModifications
-     * is set to true on construction.
+     * Constructor.
      *
-     * Zend_Config also implements Countable, Iterator and ArrayAccess to
-     * facilitate easy access to the data.
+     * Data is read-only unless $allowModifications is set to true
+     * on construction.
      *
      * @param  array   $array
      * @param  boolean $allowModifications
-     * @return void
      */
     public function __construct(array $array, $allowModifications = false)
     {
@@ -126,6 +117,7 @@ class Config implements Countable, Iterator, ArrayAccess
      * @param  string $name
      * @param  mixed  $value
      * @return void
+     * @throws Exception\RuntimeException
      */
     public function __set($name, $value)
     {
@@ -173,6 +165,7 @@ class Config implements Countable, Iterator, ArrayAccess
         $array = array();
         $data  = $this->data;
 
+        /** @var self $value */
         foreach ($data as $key => $value) {
             if ($value instanceof self) {
                 $array[$key] = $value->toArray();
@@ -200,6 +193,7 @@ class Config implements Countable, Iterator, ArrayAccess
      *
      * @param  string $name
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function __unset($name)
     {
@@ -342,11 +336,12 @@ class Config implements Countable, Iterator, ArrayAccess
      * - Items in $merge with INTEGER keys will be appended.
      * - Items in $merge with STRING keys will overwrite current values.
      *
-     * @param  Config $replace
+     * @param  Config $merge
      * @return Config
      */
     public function merge(self $merge)
     {
+        /** @var Config $value */
         foreach ($merge as $key => $value) {
             if (array_key_exists($key, $this->data)) {
                 if (is_int($key)) {
@@ -384,6 +379,7 @@ class Config implements Countable, Iterator, ArrayAccess
     {
         $this->allowModifications = false;
 
+        /** @var Config $value */
         foreach ($this->data as $value) {
             if ($value instanceof self) {
                 $value->setReadOnly();

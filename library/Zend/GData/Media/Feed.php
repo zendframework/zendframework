@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Media;
 
 use Zend\GData\Media;
@@ -29,9 +26,6 @@ use Zend\GData\Media;
 /**
  * The Gdata flavor of an Atom Feed with media support
  *
- * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\Media
- * @uses       \Zend\GData\Media\Entry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Media

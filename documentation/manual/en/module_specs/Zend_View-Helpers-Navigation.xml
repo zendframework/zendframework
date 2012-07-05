@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.navigation"><info><title>Navigation Helpers</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.navigation"><title>Navigation Helpers</title>
 
 
     <para>
@@ -55,7 +55,7 @@
         All built-in helpers extend
         <classname>Zend_View_Helper_Navigation_HelperAbstract</classname>, which
         adds integration with <link linkend="zend.acl">ACL</link> and
-        <link linkend="zend.translator">translation</link>. The abstract class
+        <link linkend="zend.i18n.translating">translation</link>. The abstract class
         implements the interface
         <classname>Zend_View_Helper_Navigation_Helper</classname>, which
         defines the following methods:
@@ -221,7 +221,7 @@
         container when calling <command>$helper-&gt;getContainer()</command>.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.navigation.proxy.example"><info><title>Proxying calls to the navigation container</title></info>
+    <example xml:id="zend.view.helpers.initial.navigation.proxy.example"><title>Proxying calls to the navigation container</title>
 
 
         <para>
@@ -242,17 +242,14 @@ $this->navigation()->addPage(array(
         </para>
     </example>
 
-    <section xml:id="zend.view.helpers.initial.navigation.i18n"><info><title>Translation of labels and titles</title></info>
+    <section xml:id="zend.view.helpers.initial.navigation.i18n"><title>Translation of labels and titles</title>
 
 
         <para>
             The navigation helpers support translation of page labels and titles.
-            You can set a translator of type <classname>Zend_Translator</classname>
-            or <classname>Zend_Translator_Adapter</classname> in the helper using
-            <command>$helper-&gt;setTranslator($translator)</command>, or like with other
-            I18n-enabled components; by adding the translator to
-            <link linkend="zend.registry">the registry</link> by using the key
-            <classname>Zend_Translator</classname>.
+            You can set a translator of type <classname>Zend\I18n\Translator</classname>
+            in the helper using
+            <command>$helper-&gt;setTranslator($translator)</command>.
         </para>
 
         <para>
@@ -275,7 +272,7 @@ $this->navigation()->addPage(array(
         </note>
     </section>
 
-    <section xml:id="zend.view.helpers.initial.navigation.acl"><info><title>Integration with ACL</title></info>
+    <section xml:id="zend.view.helpers.initial.navigation.acl"><title>Integration with ACL</title>
 
 
         <para>
@@ -308,7 +305,7 @@ $this->navigation()->addPage(array(
         </para>
     </section>
 
-    <section xml:id="zend.view.helpers.initial.navigation.setup"><info><title>Navigation setup used in examples</title></info>
+    <section xml:id="zend.view.helpers.initial.navigation.setup"><title>Navigation setup used in examples</title>
 
 
         <para>
@@ -566,7 +563,7 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.view.helpers.initial.navigation.breadcrumbs"><info><title>Breadcrumbs Helper</title></info>
+    <section xml:id="zend.view.helpers.initial.navigation.breadcrumbs"><title>Breadcrumbs Helper</title>
 
 
         <para>
@@ -650,7 +647,7 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
            </listitem>
        </itemizedlist>
 
-        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example1"><info><title>Rendering breadcrumbs</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example1"><title>Rendering breadcrumbs</title>
 
 
             <para>
@@ -671,7 +668,7 @@ Output:
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example2"><info><title>Specifying indentation</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example2"><title>Specifying indentation</title>
 
 
             <para>
@@ -688,7 +685,7 @@ Output:
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example3"><info><title>Customize breadcrumbs output</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example3"><title>Customize breadcrumbs output</title>
 
 
             <para>
@@ -725,7 +722,7 @@ Nothing, because the deepest active page is not at level 10 or deeper.
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example4"><info><title>Rendering breadcrumbs using a partial view script</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example4"><title>Rendering breadcrumbs using a partial view script</title>
 
 
             <para>
@@ -770,7 +767,7 @@ Products, Foo Server, FAQ
         </example>
     </section>
 
-    <section xml:id="zend.view.helpers.initial.navigation.links"><info><title>Links Helper</title></info>
+    <section xml:id="zend.view.helpers.initial.navigation.links"><title>Links Helper</title>
 
 
         <para>
@@ -1092,7 +1089,7 @@ Products, Foo Server, FAQ
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.view.helpers.initial.navigation.links.example1"><info><title>Specify relations in pages</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.links.example1"><title>Specify relations in pages</title>
 
 
             <para>
@@ -1141,7 +1138,7 @@ $container = new Zend_Navigation(array(
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.links.example2"><info><title>Default rendering of links</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.links.example2"><title>Default rendering of links</title>
 
 
             <para>
@@ -1166,7 +1163,7 @@ Output:
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.links.example3"><info><title>Specify which relations to render</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.links.example3"><title>Specify which relations to render</title>
 
 
             <para>
@@ -1218,7 +1215,7 @@ Output:
         </example>
     </section>
 
-    <section xml:id="zend.view.helpers.initial.navigation.menu"><info><title>Menu Helper</title></info>
+    <section xml:id="zend.view.helpers.initial.navigation.menu"><title>Menu Helper</title>
 
 
         <para>
@@ -1378,7 +1375,7 @@ Output:
             </listitem>
        </itemizedlist>
 
-        <example xml:id="zend.view.helpers.initial.navigation.menu.example1"><info><title>Rendering a menu</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example1"><title>Rendering a menu</title>
 
 
             <para>
@@ -1463,7 +1460,7 @@ Output:
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.menu.example2"><info><title>Calling renderMenu() directly</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example2"><title>Calling renderMenu() directly</title>
 
 
             <para>
@@ -1497,7 +1494,7 @@ Output:
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.menu.example3"><info><title>Rendering the deepest active menu</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example3"><title>Rendering the deepest active menu</title>
 
 
             <para>
@@ -1544,7 +1541,7 @@ The output will be the same if 'FAQ' or 'Foo Server' is active:
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.menu.example4"><info><title>Rendering a menu with maximum depth</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example4"><title>Rendering a menu with maximum depth</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1596,7 +1593,7 @@ Output:
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.menu.example5"><info><title>Rendering a menu with minimum depth</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example5"><title>Rendering a menu with minimum depth</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1657,7 +1654,7 @@ Output:
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.menu.example6"><info><title>Rendering only the active branch of a menu</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example6"><title>Rendering only the active branch of a menu</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1692,9 +1689,9 @@ Output:
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.menu.example7"><info><title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example7"><title>
                 Rendering only the active branch of a menu with minimum depth
-            </title></info>
+            </title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1725,9 +1722,9 @@ Output:
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.menu.example8"><info><title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example8"><title>
                 Rendering only the active branch of a menu with maximum depth
-            </title></info>
+            </title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1755,10 +1752,10 @@ Output:
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.menu.example9"><info><title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example9"><title>
                 Rendering only the active branch of a menu with maximum depth
                 and no parents
-            </title></info>
+            </title>
 
 
             <para>
@@ -1785,7 +1782,7 @@ Output:
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.view.helpers.initial.navigation.menu.example10"><info><title>Rendering a custom menu using a partial view script</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example10"><title>Rendering a custom menu using a partial view script</title>
 
 
             <para>
@@ -1825,7 +1822,7 @@ foreach ($this->container as $page) {
         </example>
     </section>
 
-    <section xml:id="zend.view.helpers.initial.navigation.sitemap"><info><title>Sitemap Helper</title></info>
+    <section xml:id="zend.view.helpers.initial.navigation.sitemap"><title>Sitemap Helper</title>
 
 
         <para>
@@ -1836,7 +1833,7 @@ foreach ($this->container as $page) {
 
         <para>
             By default, the sitemap helper uses
-            <link linkend="zend.validate.sitemap">sitemap validators</link>
+            <link linkend="zend.validator.sitemap">sitemap validators</link>
             to validate each element that is rendered. This can be disabled by
             calling <code>$helper-&gt;setUseSitemapValidators(false)</code>.
         </para>
@@ -1856,7 +1853,7 @@ foreach ($this->container as $page) {
             <code>$helper-&gt;setUseSchemaValidation(true)</code>.
         </para>
 
-        <table xml:id="zend.view.helpers.initial.navigation.sitemap.elements"><info><title>Sitemap XML elements</title></info>
+        <table xml:id="zend.view.helpers.initial.navigation.sitemap.elements"><title>Sitemap XML elements</title>
 
 
             <tgroup cols="2">
@@ -2019,7 +2016,7 @@ foreach ($this->container as $page) {
            </listitem>
        </itemizedlist>
 
-        <example xml:id="zend.view.helpers.initial.navigation.sitemap.example"><info><title>Rendering an XML sitemap</title></info>
+        <example xml:id="zend.view.helpers.initial.navigation.sitemap.example"><title>Rendering an XML sitemap</title>
 
 
             <para>
@@ -2221,7 +2218,7 @@ echo $this->navigation()
 ]]></programlisting>
         </example>
 
-        <note><info><title>UTF-8 encoding used by default</title></info>
+        <note><title>UTF-8 encoding used by default</title>
 
 
             <para>
@@ -2245,7 +2242,7 @@ echo $this->navigation()
         </note>
     </section>
 
-    <section xml:id="zend.view.helpers.initial.navigation.navigation"><info><title>Navigation Helper</title></info>
+    <section xml:id="zend.view.helpers.initial.navigation.navigation"><title>Navigation Helper</title>
 
 
         <para>

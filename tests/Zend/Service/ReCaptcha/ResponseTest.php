@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\ReCaptcha;
 
-use Zend\Service\ReCaptcha,
-    Zend\Http\Response;
+use Zend\Service\ReCaptcha;
+use Zend\Http\Response;
 
 /**
  * @category   Zend
@@ -77,7 +74,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $responseBody = $status . "\n" . $errorCode;
         $httpResponse = new Response();
         $httpResponse->setStatusCode(200);
-        $httpResponse->headers()->addHeaderLine('Content-Type', 'text/html');
+        $httpResponse->getHeaders()->addHeaderLine('Content-Type', 'text/html');
         $httpResponse->setContent($responseBody);
 
         $this->_response->setFromHttpResponse($httpResponse);
@@ -102,7 +99,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $responseBody = $status . "\n" . $errorCode;
         $httpResponse = new Response();
         $httpResponse->setStatusCode(200);
-        $httpResponse->headers()->addHeaderLine('Content-Type', 'text/html');
+        $httpResponse->getHeaders()->addHeaderLine('Content-Type', 'text/html');
         $httpResponse->setContent($responseBody);
 
         $response = new ReCaptcha\Response(null, null, $httpResponse);

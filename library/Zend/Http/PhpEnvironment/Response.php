@@ -3,7 +3,7 @@
 
 namespace Zend\Http\PhpEnvironment;
 
-use Zend\Http\Header\MultipleHeaderDescription,
+use Zend\Http\Header\MultipleHeaderInterface,
     Zend\Http\Response as HttpResponse,
     Zend\Stdlib\Parameters;
 
@@ -16,17 +16,17 @@ class Response extends HttpResponse
     public function __construct()
     {
     }
-    
+
     public function headersSent()
     {
         return $this->headersSent;
     }
-    
+
     public function contentSent()
     {
         return $this->contentSent;
     }
-    
+
     public function sendHeaders()
     {
         if ($this->headersSent()) {
@@ -36,8 +36,8 @@ class Response extends HttpResponse
         $status  = $this->renderStatusLine();
         header($status);
 
-        foreach ($this->headers() as $header) {
-            if ($header instanceof MultipleHeaderDescription) {
+        foreach ($this->getHeaders() as $header) {
+            if ($header instanceof MultipleHeaderInterface) {
                 header($header->toString(), false);
                 continue;
             }
@@ -47,7 +47,7 @@ class Response extends HttpResponse
         $this->headersSent = true;
         return $this;
     }
-    
+
     public function sendContent()
     {
         if ($this->contentSent()) {
@@ -64,6 +64,6 @@ class Response extends HttpResponse
              ->sendContent();
         return $this;
     }
-    
+
 }
-    
+

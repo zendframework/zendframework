@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -49,7 +49,7 @@ class TestClassCache
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
@@ -57,13 +57,15 @@ class ClassCacheTest extends CommonPatternTest
 {
 
     /**
-     * @var Zend\Cache\Storage\Adapter
+     * @var Zend\Cache\Storage\StorageInterface
      */
     protected $_storage;
 
     public function setUp()
     {
-        $this->_storage = new Cache\Storage\Adapter\Memory();
+        $this->_storage = new Cache\Storage\Adapter\Memory(array(
+            'memory_limit' => 0
+        ));
         $this->_options = new Cache\Pattern\PatternOptions(array(
             'class'   => __NAMESPACE__ . '\TestClassCache',
             'storage' => $this->_storage,
@@ -102,19 +104,13 @@ class ClassCacheTest extends CommonPatternTest
 
         $generatedKey = $this->_pattern->generateKey('emptyMethod', $args);
         $usedKey      = null;
-        $this->_options->getStorage()->events()->attach('setItem.pre', function ($event) use (&$usedKey) {
+        $this->_options->getStorage()->getEventManager()->attach('setItem.pre', function ($event) use (&$usedKey) {
             $params = $event->getParams();
             $usedKey = $params['key'];
         });
 
         $this->_pattern->call('emptyMethod', $args);
         $this->assertEquals($generatedKey, $usedKey);
-    }
-
-    public function testCallUnknownMethodException()
-    {
-        $this->setExpectedException('Zend\\Cache\\Exception\\InvalidArgumentException');
-        $this->_pattern->call('notExiststingMethod');
     }
 
     protected function _testCall($method, array $args)
@@ -146,5 +142,4 @@ class ClassCacheTest extends CommonPatternTest
             $this->assertEquals('', $data);
         }
     }
-
 }

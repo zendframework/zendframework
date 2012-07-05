@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Console;
 
 /**
@@ -99,8 +96,6 @@ namespace Zend\Console;
  *
  * @todo  Feature request to implement callbacks.
  *        e.g. if -a is specified, run function 'handleOptionA'().
- * @uses  \Zend\Console\GetoptException
- * @uses  \Zend\Json\Json
  */
 class Getopt
 {
@@ -331,8 +326,8 @@ class Getopt
      * These are appended to those defined when the constructor was called.
      *
      * @param  array $argv
-     * @throws \Zend\Console\Getopt\Exception When not given an array as parameter
-     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
+     * @throws \Zend\Console\Exception\ExceptionInterface When not given an array as parameter
+     * @return \Zend\Console\Getopt Provides a fluent interface
      */
     public function addArguments($argv)
     {
@@ -349,8 +344,8 @@ class Getopt
      * These replace any currently defined.
      *
      * @param  array $argv
-     * @throws \Zend\Console\Getopt\Exception When not given an array as parameter
-     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
+     * @throws \Zend\Console\Exception\ExceptionInterface When not given an array as parameter
+     * @return \Zend\Console\Getopt Provides a fluent interface
      */
     public function setArguments($argv)
     {
@@ -368,7 +363,7 @@ class Getopt
      * the behavior of Zend_Console_Getopt.
      *
      * @param  array $getoptConfig
-     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
+     * @return \Zend\Console\Getopt Provides a fluent interface
      */
     public function setOptions($getoptConfig)
     {
@@ -387,7 +382,7 @@ class Getopt
      *
      * @param  string $configKey
      * @param  string $configValue
-     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
+     * @return \Zend\Console\Getopt Provides a fluent interface
      */
     public function setOption($configKey, $configValue)
     {
@@ -402,7 +397,7 @@ class Getopt
      * These are appended to the rules defined when the constructor was called.
      *
      * @param  array $rules
-     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
+     * @return \Zend\Console\Getopt Provides a fluent interface
      */
     public function addRules($rules)
     {
@@ -624,8 +619,8 @@ class Getopt
      * mapping option name (short or long) to an alias.
      *
      * @param  array $aliasMap
-     * @throws \Zend\Console\Getopt\Exception
-     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
+     * @throws \Zend\Console\Exception\ExceptionInterface
+     * @return \Zend\Console\Getopt Provides a fluent interface
      */
     public function setAliases($aliasMap)
     {
@@ -656,7 +651,7 @@ class Getopt
      * mapping option name (short or long) to the help string.
      *
      * @param  array $helpMap
-     * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
+     * @return \Zend\Console\Getopt Provides a fluent interface
      */
     public function setHelp($helpMap)
     {
@@ -678,7 +673,7 @@ class Getopt
      * Also find option parameters, and remaining arguments after
      * all options have been parsed.
      *
-     * @return \Zend\Console\Getopt\Getopt|null Provides a fluent interface
+     * @return \Zend\Console\Getopt|null Provides a fluent interface
      */
     public function parse()
     {
@@ -756,7 +751,7 @@ class Getopt
      *
      * @param  string $flag
      * @param  mixed  $argv
-     * @throws \Zend\Console\Getopt\Exception
+     * @throws \Zend\Console\Exception\ExceptionInterface
      * @return void
      */
     protected function _parseSingleOption($flag, &$argv)
@@ -893,7 +888,7 @@ class Getopt
      *
      * @param  string $flag
      * @param  string $param
-     * @throws \Zend\Console\Getopt\Exception
+     * @throws \Zend\Console\Exception\ExceptionInterface
      * @return bool
      */
     protected function _checkParameterType($flag, $param)
@@ -962,7 +957,7 @@ class Getopt
      * Define legal options using the Zend-style format.
      *
      * @param  array $rules
-     * @throws \Zend\Console\Getopt\Exception
+     * @throws \Zend\Console\Exception\ExceptionInterface
      * @return void
      */
     protected function _addRulesModeZend($rules)

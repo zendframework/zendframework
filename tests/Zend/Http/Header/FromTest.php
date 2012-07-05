@@ -10,7 +10,7 @@ class FromTest extends \PHPUnit_Framework_TestCase
     public function testFromFromStringCreatesValidFromHeader()
     {
         $fromHeader = From::fromString('From: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $fromHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $fromHeader);
         $this->assertInstanceOf('Zend\Http\Header\From', $fromHeader);
     }
 

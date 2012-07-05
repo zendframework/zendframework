@@ -4,11 +4,24 @@ namespace Zend\Di\Definition;
 
 use Zend\Di\Exception;
 
-class BuilderDefinition implements Definition
+class BuilderDefinition implements DefinitionInterface
 {
+    /**
+     * @var string
+     */
     protected $defaultClassBuilder = 'Zend\Di\Definition\Builder\PhpClass';
+
+    /**
+     * @var array
+     */
     protected $classes = array();
 
+    /**
+     * Create classes from array
+     *
+     * @param array $builderData
+     * @return void
+     */
     public function createClassesFromArray(array $builderData)
     {
         foreach ($builderData as $className => $classInfo) {
@@ -42,7 +55,13 @@ class BuilderDefinition implements Definition
             $this->addClass($class);
         }
     }
-    
+
+    /**
+     * Add class
+     *
+     * @param Builder\PhpClass $phpClass
+     * @return BuilderDefinition
+     */
     public function addClass(Builder\PhpClass $phpClass)
     {
         $this->classes[] = $phpClass;
@@ -93,7 +112,10 @@ class BuilderDefinition implements Definition
     {
         return $this->defaultClassBuilder;
     }
-    
+
+    /**
+     * @return array
+     */
     public function getClasses()
     {
         $classNames = array();
@@ -102,7 +124,11 @@ class BuilderDefinition implements Definition
         }
         return $classNames;
     }
-    
+
+    /**
+     * @param string $class
+     * @return bool
+     */
     public function hasClass($class)
     {
         foreach ($this->classes as $classObj) {
@@ -112,7 +138,11 @@ class BuilderDefinition implements Definition
         }
         return false;
     }
-    
+
+    /**
+     * @param string $name
+     * @return bool
+     */
     protected function getClass($name)
     {
         foreach ($this->classes as $classObj) {
@@ -122,7 +152,12 @@ class BuilderDefinition implements Definition
         }
         return false;
     }
-    
+
+    /**
+     * @param string $class
+     * @return array
+     * @throws Exception\RuntimeException
+     */
     public function getClassSupertypes($class)
     {
         $class = $this->getClass($class);
@@ -131,7 +166,12 @@ class BuilderDefinition implements Definition
         }
         return $class->getSuperTypes();
     }
-    
+
+    /**
+     * @param string $class
+     * @return array|string
+     * @throws Exception\RuntimeException
+     */
     public function getInstantiator($class)
     {
         $class = $this->getClass($class);
@@ -140,17 +180,27 @@ class BuilderDefinition implements Definition
         }
         return $class->getInstantiator();
     }
-    
+
+    /**
+     * @param string $class
+     * @return bool
+     * @throws Exception\RuntimeException
+     */
     public function hasMethods($class)
     {
-        /* @var $class Zend\Di\Definition\Builder\PhpClass */
+        /* @var $class \Zend\Di\Definition\Builder\PhpClass */
         $class = $this->getClass($class);
         if ($class === false) {
             throw new Exception\RuntimeException('Cannot find class object in this builder definition.');
         }
         return (count($class->getInjectionMethods()) > 0);
     }
-    
+
+    /**
+     * @param string $class
+     * @return array
+     * @throws Exception\RuntimeException
+     */
     public function getMethods($class)
     {
         $class = $this->getClass($class);
@@ -164,7 +214,13 @@ class BuilderDefinition implements Definition
         }
         return $methodNames;
     }
-    
+
+    /**
+     * @param string $class
+     * @param string $method
+     * @return bool
+     * @throws Exception\RuntimeException
+     */
     public function hasMethod($class, $method)
     {
         $class = $this->getClass($class);
@@ -181,8 +237,8 @@ class BuilderDefinition implements Definition
     }
 
     /**
-     * @param $class
-     * @param $method
+     * @param string $class
+     * @param string $method
      * @return bool
      */
     public function hasMethodParameters($class, $method)
@@ -202,7 +258,13 @@ class BuilderDefinition implements Definition
         }
         return (count($method->getParameters()) > 0);
     }
-    
+
+    /**
+     * @param string $class
+     * @param string $method
+     * @return array
+     * @throws Exception\RuntimeException
+     */
     public function getMethodParameters($class, $method)
     {
         $class = $this->getClass($class);

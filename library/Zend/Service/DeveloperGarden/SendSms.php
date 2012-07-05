@@ -20,12 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
- * @uses       Zend_Service_DeveloperGarden_Client_Exception
- * @uses       Zend_Service_DeveloperGarden_Request_SendSms_SendFlashSMS
- * @uses       Zend_Service_DeveloperGarden_Request_SendSms_SendSMS
- * @uses       Zend_Service_DeveloperGarden_Response_SendSms_SendFlashSMSResponse
- * @uses       Zend_Service_DeveloperGarden_Response_SendSms_SendSMSResponse
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

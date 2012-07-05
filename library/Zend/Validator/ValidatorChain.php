@@ -13,49 +13,91 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator;
 
+use Countable;
+
 /**
- * @uses       \Zend\Loader
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
- * @uses       \Zend\Validator\Validator
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Validator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ValidatorChain implements Validator
+class ValidatorChain implements
+    Countable,
+    ValidatorInterface
 {
+    /**
+     * @var ValidatorPluginManager
+     */
+    protected $plugins;
+
     /**
      * Validator chain
      *
      * @var array
      */
-    protected $_validators = array();
+    protected $validators = array();
 
     /**
      * Array of validation failure messages
      *
      * @var array
      */
-    protected $_messages = array();
+    protected $messages = array();
 
     /**
-     * Array of validation failure message codes
+     * Return the count of attached validators
      *
-     * @var array
-     * @deprecated Since 1.5.0
+     * @return int
      */
-    protected $_errors = array();
+    public function count()
+    {
+        return count($this->validators);
+    }
+
+    /**
+     * Get plugin manager instance
+     *
+     * @return ValidatorPluginManager
+     */
+    public function getPluginManager()
+    {
+        if (!$this->plugins) {
+            $this->setPluginManager(new ValidatorPluginManager());
+        }
+        return $this->plugins;
+    }
+
+    /**
+     * Set plugin manager instance
+     *
+     * @param  ValidatorPluginManager $plugins Plugin manager
+     * @return ValidatorChain
+     */
+    public function setPluginManager(ValidatorPluginManager $plugins)
+    {
+        $this->plugins = $plugins;
+        return $this;
+    }
+
+    /**
+     * Retrieve a validator by name
+     *
+     * @param  string     $name    Name of validator to return
+     * @param  null|array $options Options to pass to validator constructor (if not already instantiated)
+     * @return ValidatorInterface
+     */
+    public function plugin($name, array $options = null)
+    {
+        $plugins = $this->getPluginManager();
+        return $plugins->get($name, $options);
+    }
 
     /**
      * Adds a validator to the end of the chain
@@ -63,16 +105,67 @@ class ValidatorChain implements Validator
      * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
      * if one exists, will not be executed.
      *
-     * @param  \Zend\Validator\Validator $validator
+     * @param  ValidatorInterface      $validator
      * @param  boolean                 $breakChainOnFailure
-     * @return \Zend\Validator\ValidatorChain Provides a fluent interface
+     * @return ValidatorChain Provides a fluent interface
      */
-    public function addValidator(Validator $validator, $breakChainOnFailure = false)
+    public function addValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
     {
-        $this->_validators[] = array(
-            'instance' => $validator,
-            'breakChainOnFailure' => (boolean) $breakChainOnFailure
-            );
+        $this->validators[] = array(
+            'instance'            => $validator,
+            'breakChainOnFailure' => (boolean)$breakChainOnFailure
+        );
+        return $this;
+    }
+
+    /**
+     * Adds a validator to the beginning of the chain
+     *
+     * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
+     * if one exists, will not be executed.
+     *
+     * @param  ValidatorInterface      $validator
+     * @param  boolean                 $breakChainOnFailure
+     * @return ValidatorChain Provides a fluent interface
+     */
+    public function prependValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
+    {
+        array_unshift($this->validators,
+                      array(
+                           'instance'            => $validator,
+                           'breakChainOnFailure' => (boolean)$breakChainOnFailure
+                      )
+        );
+        return $this;
+    }
+
+    /**
+     * Use the plugin manager to add a validator by name
+     *
+     * @param  string $name
+     * @param  array  $options
+     * @param  bool   $breakChainOnFailure
+     * @return ValidatorChain
+     */
+    public function addByName($name, $options = array(), $breakChainOnFailure = false)
+    {
+        $validator = $this->plugin($name, $options);
+        $this->addValidator($validator, $breakChainOnFailure);
+        return $this;
+    }
+
+    /**
+     * Use the plugin manager to prepend a validator by name
+     *
+     * @param  string $name
+     * @param  array  $options
+     * @param  bool   $breakChainOnFailure
+     * @return ValidatorChain
+     */
+    public function prependByName($name, $options = array(), $breakChainOnFailure = false)
+    {
+        $validator = $this->plugin($name, $options);
+        $this->prependValidator($validator, $breakChainOnFailure);
         return $this;
     }
 
@@ -82,22 +175,21 @@ class ValidatorChain implements Validator
      * Validators are run in the order in which they were added to the chain (FIFO).
      *
      * @param  mixed $value
+     * @param  mixed $context Extra "context" to provide the validator
      * @return boolean
      */
-    public function isValid($value)
+    public function isValid($value, $context = null)
     {
-        $this->_messages = array();
-        $this->_errors   = array();
-        $result = true;
-        foreach ($this->_validators as $element) {
+        $this->messages = array();
+        $result         = true;
+        foreach ($this->validators as $element) {
             $validator = $element['instance'];
-            if ($validator->isValid($value)) {
+            if ($validator->isValid($value, $context)) {
                 continue;
             }
-            $result = false;
-            $messages = $validator->getMessages();
-            $this->_messages = array_merge($this->_messages, $messages);
-            $this->_errors   = array_merge($this->_errors,   array_keys($messages));
+            $result         = false;
+            $messages       = $validator->getMessages();
+            $this->messages = array_merge($this->messages, $messages);
             if ($element['breakChainOnFailure']) {
                 break;
             }
@@ -112,24 +204,13 @@ class ValidatorChain implements Validator
      */
     public function getMessages()
     {
-        return $this->_messages;
-    }
-
-    /**
-     * Returns array of validation failure message codes
-     *
-     * @return array
-     * @deprecated Since 1.5.0
-     */
-    public function getErrors()
-    {
-        return $this->_errors;
+        return $this->messages;
     }
 
     /**
      * Invoke chain as command
-     * 
-     * @param  mixed $value 
+     *
+     * @param  mixed $value
      * @return boolean
      */
     public function __invoke($value)

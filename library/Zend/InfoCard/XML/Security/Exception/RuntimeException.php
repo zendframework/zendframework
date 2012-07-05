@@ -2,7 +2,9 @@
 
 namespace Zend\InfoCard\XML\Security\Exception;
 
+use Zend\InfoCard\XML\Exception;
+
 class RuntimeException
-    extends \RuntimeException
-    implements \Zend\InfoCard\XML\Security\Exception
+    extends Exception\RuntimeException
+    implements ExceptionInterface
 {}

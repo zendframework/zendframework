@@ -1,5 +1,5 @@
 <?php
-$isContainer = $this->vars('container') instanceof \Zend\Navigation\Container
+$isContainer = $this->vars('container') instanceof \Zend\Navigation\AbstractContainer
              ? 'yes'
              : 'no';
 
@@ -9,5 +9,5 @@ foreach ($this->vars('container') as $page) {
 }
 $pages = implode(', ', $pages);
 ?>
-Is a container: <?php echo $isContainer . "\n"; ?>
+Is a container: <?php echo $isContainer . PHP_EOL; ?>
 Pages: <?php echo $pages; ?>

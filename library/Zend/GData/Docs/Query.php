@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Docs;
 use Zend\GData\App;
 
@@ -30,8 +27,6 @@ use Zend\GData\App;
  *
  * @link http://code.google.com/apis/gdata/spreadsheets/
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\Query
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Docs
@@ -46,7 +41,7 @@ class Query extends \Zend\GData\Query
      *
      * @var string
      */
-    const DOCUMENTS_LIST_FEED_URI = 'http://docs.google.com/feeds/documents';
+    const DOCUMENTS_LIST_FEED_URI = 'https://docs.google.com/feeds/documents';
 
     /**
      * The generic base URL used by some inherited methods

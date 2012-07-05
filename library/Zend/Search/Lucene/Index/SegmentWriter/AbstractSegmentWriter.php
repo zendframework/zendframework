@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Index\SegmentWriter;
 use Zend\Search\Lucene\Index;
 use Zend\Search\Lucene\Storage\Directory;
@@ -29,12 +26,6 @@ use Zend\Search\Lucene\Document;
 use Zend\Search\Lucene\Storage\File;
 
 /**
- * @uses       \Zend\Search\Lucene\Index\FieldInfo
- * @uses       \Zend\Search\Lucene\Index\Term
- * @uses       \Zend\Search\Lucene\Index\TermInfo
- * @uses       \Zend\Search\Lucene\Storage\Directory
- * @uses       \Zend\Search\Lucene\Storage\File;
- * @uses       \Zend\Search\Lucene\Document;
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
@@ -98,7 +89,7 @@ abstract class AbstractSegmentWriter
     /**
      * File system adapter.
      *
-     * @var \Zend\Search\Lucene\Storage\Directory
+     * @var \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
      */
     protected $_directory;
 
@@ -106,7 +97,7 @@ abstract class AbstractSegmentWriter
      * List of the index files.
      * Used for automatic compound file generation
      *
-     * @var unknown_type
+     * @var array
      */
     protected $_files = array();
 
@@ -123,7 +114,7 @@ abstract class AbstractSegmentWriter
      * normVector is a binary string.
      * Each byte corresponds to an indexed document in a segment and
      * encodes normalization factor (float value, encoded by
-     * \Zend\Search\Lucene\Search\Similarity::encodeNorm())
+     * \Zend\Search\Lucene\Search\Similarity\AbstractSimilarity::encodeNorm())
      *
      * @var array
      */
@@ -133,14 +124,14 @@ abstract class AbstractSegmentWriter
     /**
      * '.fdx'  file - Stored Fields, the field index.
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     protected $_fdxFile = null;
 
     /**
      * '.fdt'  file - Stored Fields, the field data.
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     protected $_fdtFile = null;
 
@@ -148,10 +139,10 @@ abstract class AbstractSegmentWriter
     /**
      * Object constructor.
      *
-     * @param \Zend\Search\Lucene\Storage\Directory $directory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
      * @param string $name
      */
-    public function __construct(Directory $directory, $name)
+    public function __construct(Directory\DirectoryInterface $directory, $name)
     {
         $this->_directory = $directory;
         $this->_name      = $name;
@@ -316,28 +307,28 @@ abstract class AbstractSegmentWriter
     /**
      * Term Dictionary file
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_tisFile = null;
 
     /**
      * Term Dictionary index file
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_tiiFile = null;
 
     /**
      * Frequencies file
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_frqFile = null;
 
     /**
      * Positions file
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_prxFile = null;
 
@@ -505,13 +496,13 @@ abstract class AbstractSegmentWriter
      * Dump Term Dictionary segment file entry.
      * Used to write entry to .tis or .tii files
      *
-     * @param \Zend\Search\Lucene\Storage\File $dicFile
+     * @param \Zend\Search\Lucene\Storage\File\FileInterface $dicFile
      * @param \Zend\Search\Lucene\Index\Term $prevTerm
      * @param \Zend\Search\Lucene\Index\Term $term
      * @param \Zend\Search\Lucene\Index\TermInfo $prevTermInfo
      * @param \Zend\Search\Lucene\Index\TermInfo $termInfo
      */
-    protected function _dumpTermDictEntry(File $dicFile,
+    protected function _dumpTermDictEntry(File\FileInterface $dicFile,
                                           &$prevTerm,     Index\Term     $term,
                                           &$prevTermInfo, Index\TermInfo $termInfo)
     {

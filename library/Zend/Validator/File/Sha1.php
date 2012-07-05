@@ -18,20 +18,13 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator\File;
 
-use Zend\Loader,
-    Zend\Validator\Exception;
+use Zend\Validator\Exception;
 
 /**
  * Validator for the sha1 hash of given files
  *
- * @uses      \Zend\Loader
- * @uses      \Zend\Validator\Exception
- * @uses      \Zend\Validator\File\Hash
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -49,7 +42,7 @@ class Sha1 extends Hash
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::DOES_NOT_MATCH => "File '%value%' does not match the given sha1 hashes",
         self::NOT_DETECTED   => "A sha1 hash could not be evaluated for the given file",
         self::NOT_FOUND      => "File '%value%' is not readable or does not exist",
@@ -79,7 +72,7 @@ class Sha1 extends Hash
      * Sets the sha1 hash for one or multiple files
      *
      * @param  string|array $options
-     * @return \Zend\Validator\File\Hash Provides a fluent interface
+     * @return Hash Provides a fluent interface
      */
     public function setSha1($options)
     {
@@ -91,7 +84,7 @@ class Sha1 extends Hash
      * Adds the sha1 hash for one or multiple files
      *
      * @param  string|array $options
-     * @return \Zend\Validator\File\Hash Provides a fluent interface
+     * @return Hash Provides a fluent interface
      */
     public function addSha1($options)
     {
@@ -113,14 +106,14 @@ class Sha1 extends Hash
         }
 
         // Is file readable ?
-        if (!Loader::isReadable($value)) {
-            return $this->_throw($file, self::NOT_FOUND);
+        if (false === stream_resolve_include_path($value)) {
+            return $this->throwError($file, self::NOT_FOUND);
         }
 
         $hashes = array_unique(array_keys($this->getHash()));
         $filehash = hash_file('sha1', $value);
         if ($filehash === false) {
-            return $this->_throw($file, self::NOT_DETECTED);
+            return $this->throwError($file, self::NOT_DETECTED);
         }
 
         foreach ($hashes as $hash) {
@@ -129,6 +122,6 @@ class Sha1 extends Hash
             }
         }
 
-        return $this->_throw($file, self::DOES_NOT_MATCH);
+        return $this->throwError($file, self::DOES_NOT_MATCH);
     }
 }

@@ -19,11 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Mail\Storage;
 
+use Zend\Config;
 use Zend\Mail\Storage;
 
 /**
@@ -43,7 +41,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_originalMaildir = __DIR__ . '/../_files/test.maildir/';
-        if (!is_dir($this->_originalMaildir . '/cur/')) {
+        if (!constant('TESTS_ZEND_MAIL_MAILDIR_ENABLED')) {
             $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
                                  . 'directory before enabling the maildir tests');
             return;
@@ -114,7 +112,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
     public function testLoadConfig()
     {
         try {
-            $mail = new Storage\Maildir(new \Zend\Config\Config(array('dirname' => $this->_maildir)));
+            $mail = new Storage\Maildir(new Config\Config(array('dirname' => $this->_maildir)));
         } catch (\Exception $e) {
             $this->fail('exception raised while loading maildir');
         }

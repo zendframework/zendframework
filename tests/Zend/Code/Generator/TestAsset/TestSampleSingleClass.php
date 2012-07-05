@@ -5,9 +5,6 @@
  * @author Ralph Schindler <ralph.schindler@zend.com>
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Code\Generator\TestAsset;
 
 /**

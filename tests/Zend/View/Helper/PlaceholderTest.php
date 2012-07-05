@@ -19,16 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 
-use Zend\Registry,
-    Zend\View\Renderer\PhpRenderer as View,
-    Zend\View\Helper,
-    Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry;
-
+use Zend\View\Renderer\PhpRenderer as View;
+use Zend\View\Helper;
+use Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry;
 
 /**
  * Test class for Zend_View_Helper_Placeholder.
@@ -56,6 +51,7 @@ class PlaceholderTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        PlaceholderRegistry::unsetRegistry();
         $this->placeholder = new Helper\Placeholder();
     }
 
@@ -68,26 +64,12 @@ class PlaceholderTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->placeholder);
-        Registry::getInstance()->offsetUnset(PlaceholderRegistry::REGISTRY_KEY);
-    }
-
-    /**
-     * @return void
-     */
-    public function testConstructorCreatesRegistryOffset()
-    {
-        $this->assertTrue(Registry::isRegistered(PlaceholderRegistry::REGISTRY_KEY));
+        PlaceholderRegistry::unsetRegistry();
     }
 
     public function testMultiplePlaceholdersUseSameRegistry()
     {
-        $this->assertTrue(Registry::isRegistered(PlaceholderRegistry::REGISTRY_KEY));
-        $registry = Registry::get(PlaceholderRegistry::REGISTRY_KEY);
-        $this->assertSame($registry, $this->placeholder->getRegistry());
-
         $placeholder = new Helper\Placeholder();
-
-        $this->assertSame($registry, $placeholder->getRegistry());
         $this->assertSame($this->placeholder->getRegistry(), $placeholder->getRegistry());
     }
 

@@ -21,8 +21,8 @@
 
 namespace ZendTest\Log\Formatter;
 
-use ZendTest\Log\TestAsset\SerializableObject,
-    \Zend\Log\Formatter\Xml as XmlFormatter;
+use ZendTest\Log\TestAsset\SerializableObject;
+use Zend\Log\Formatter\Xml as XmlFormatter;
 
 /**
  * @category   Zend
@@ -114,22 +114,6 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-9176
-     */
-    public function testFactory()
-    {
-        $options = array(
-            'rootElement' => 'log',
-            'elementMap' => array(
-                'timestamp' => 'timestamp',
-                'response' => 'message'
-            )
-        );
-        $formatter = XmlFormatter::factory($options);
-        $this->assertInstanceOf('Zend\Log\Formatter\Xml', $formatter);
-    }
-
-    /**
      * @group ZF-11161
      */
     public function testNonScalarValuesAreExcludedFromFormattedString()
@@ -145,7 +129,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         );
         $expected = '<log><message>tottakai</message><priority>4</priority></log>';
 
-        $formatter = XmlFormatter::factory($options);
+        $formatter = new XmlFormatter($options);
         $output = $formatter->format($event);
         $this->assertContains($expected, $output);
     }
@@ -166,7 +150,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         );
         $expected = '<log><message>tottakai</message><priority>4</priority><reference>ZendTest\Log\TestAsset\SerializableObject</reference></log>';
 
-        $formatter = XmlFormatter::factory($options);
+        $formatter = new XmlFormatter($options);
         $output = $formatter->format($event);
         $this->assertContains($expected, $output);
     }

@@ -55,10 +55,10 @@ class InjectTemplateListenerTest extends TestCase
 
         $this->listener->injectTemplate($this->event);
 
-        $this->assertEquals('somewhat/useful', $model->getTemplate());
+        $this->assertEquals('foo/somewhat/useful', $model->getTemplate());
     }
 
-    public function testUsesControllerOnlyIfNoActionInRouteMatch()
+    public function testUsesModuleAndControllerOnlyIfNoActionInRouteMatch()
     {
         $this->routeMatch->setParam('controller', 'Foo\Controller\SomewhatController');
 
@@ -67,7 +67,7 @@ class InjectTemplateListenerTest extends TestCase
 
         $this->listener->injectTemplate($this->event);
 
-        $this->assertEquals('somewhat', $model->getTemplate());
+        $this->assertEquals('foo/somewhat', $model->getTemplate());
     }
 
     public function testNormalizesLiteralControllerNameIfNoNamespaceSeparatorPresent()
@@ -119,7 +119,7 @@ class InjectTemplateListenerTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->listener);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
 
         $expectedCallback = array($this->listener, 'injectTemplate');
         $expectedPriority = -90;
@@ -140,10 +140,10 @@ class InjectTemplateListenerTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->listener);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(1, count($listeners));
         $events->detachAggregate($this->listener);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(0, count($listeners));
     }
 }

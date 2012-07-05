@@ -31,7 +31,7 @@ class ForwardTest extends TestCase
 
         $this->controller = new SampleController();
         $this->controller->setEvent($event);
-        $this->controller->setLocator($locator);
+        $this->controller->setServiceLocator($locator);
 
         $this->plugin = $this->controller->plugin('forward');
     }
@@ -41,7 +41,7 @@ class ForwardTest extends TestCase
         $controller = new UneventfulController();
         $plugin     = new ForwardPlugin();
         $plugin->setController($controller);
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'InjectApplicationEvent');
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'InjectApplicationEventInterface');
         $plugin->dispatch('forward');
     }
 
@@ -51,7 +51,7 @@ class ForwardTest extends TestCase
         $controller->setEvent($this->controller->getEvent());
         $plugin     = new ForwardPlugin();
         $plugin->setController($controller);
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'implements LocatorAware');
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'implements ServiceLocatorAwareInterface');
         $plugin->dispatch('forward');
     }
 
@@ -65,12 +65,22 @@ class ForwardTest extends TestCase
 
     public function testDispatchRaisesDomainExceptionIfDiscoveredControllerIsNotDispatchable()
     {
-        $locator = $this->controller->getLocator();
+        $locator = $this->controller->getServiceLocator();
         $locator->add('bogus', function() {
             return new stdClass;
         });
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'Dispatchable');
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'DispatchableInterface');
         $this->plugin->dispatch('bogus');
+    }
+
+    public function testDispatchRaisesDomainExceptionIfCircular()
+    {
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'Circular forwarding');
+        $sampleController = $this->controller;
+        $sampleController->getServiceLocator()->add('sample', function() use ($sampleController) {
+            return $sampleController;
+        });
+        $this->plugin->dispatch('sample', array('action' => 'test-circular'));
     }
 
     public function testPluginDispatchsRequestedControllerWhenFound()

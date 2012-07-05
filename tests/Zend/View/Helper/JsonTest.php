@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase,
@@ -58,7 +55,7 @@ class JsonTest extends TestCase
 
     public function verifyJsonHeader()
     {
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertTrue($headers->has('Content-Type'));
         $header = $headers->get('Content-Type');
         $this->assertEquals('application/json', $header->getFieldValue());

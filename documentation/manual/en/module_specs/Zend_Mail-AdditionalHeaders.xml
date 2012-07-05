@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><info><title>Additional Headers</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><title>Additional Headers</title>
     
 
     <para>
@@ -17,7 +17,7 @@
                 <para>
                     <methodname>setDate($date = null)</methodname>: sets the Date: header.
                     This method uses current time stamp by default. Or You can pass time stamp,
-                    date string or <classname>Zend_Date</classname> instance to this method.
+                    date string or <classname>DateTime</classname> instance to this method.
                 </para>
             </listitem>
 
@@ -32,7 +32,7 @@
         </itemizedlist>
     </para>
 
-    <note><info><title>Return-Path</title></info>
+    <note><title>Return-Path</title>
         
 
         <para>
@@ -49,7 +49,7 @@
         should have only one or multiple values:
     </para>
 
-    <example xml:id="zend.mail.additional-headers.example-1"><info><title>Adding E-Mail Message Headers</title></info>
+    <example xml:id="zend.mail.additional-headers.example-1"><title>Adding E-Mail Message Headers</title>
         
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>Consuming a Single Atom Entry</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><title>Consuming a Single Atom Entry</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         object, but it will automatically create an "anonymous" feed to contain the entry.
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><info><title>Reading a Single-Entry Atom Feed</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><title>Reading a Single-Entry Atom Feed</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -31,7 +31,7 @@ $entry = $feed->current();
         an <command>&lt;entry&gt;</command>-only document:
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><info><title>Using the Entry Object Directly for a Single-Entry Atom Feed</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><title>Using the Entry Object Directly for a Single-Entry Atom Feed</title>
         
 
         <programlisting language="php"><![CDATA[

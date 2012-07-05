@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Barcode\Renderer;
 use Zend\Pdf;
 use Zend\Barcode;
@@ -53,16 +50,6 @@ class PdfTest extends TestCommon
         $this->renderer->setResource($pdfResource, 10);
     }
 
-    public function testObjectPdfResource()
-    {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
-        $pdfResource = new \StdClass();
-        $this->renderer->setResource($pdfResource);
-    }
-
-    /**
-     * @group fml
-     */
     public function testDrawReturnResource()
     {
         Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');

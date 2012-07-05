@@ -6,24 +6,15 @@ use Zend\Cache\Storage\Adapter\AbstractAdapter;
 class MockAdapter extends AbstractAdapter
 {
 
-    public function getItem($key = null, array $options = array())
-    {
-    } 
-
-    public function getMetadata($key = null, array $options = array())
+    protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
     }
 
-    public function setItem($value, $key = null, array $options = array())
+    protected function internalSetItem(& $normalizedKey, & $value)
     {
     }
 
-    public function removeItem($key = null, array $options = array())
+    protected function internalRemoveItem(& $normalizedKey)
     {
     }
-
-    public function getCapacity(array $options = array())
-    {
-    }
-
 }

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Technorati;
 
 use DomElement;
@@ -66,8 +63,7 @@ class CosmosResult extends Result
     /**
      * The the datetime the link was created.
      *
-     * @var     \Zend\Date\Date
-     * @access  protected
+     * @var \DateTime
      */
     protected $linkCreated;
 
@@ -135,7 +131,7 @@ class CosmosResult extends Result
     /**
      * Returns the datetime the link was created.
      *
-     * @return  \Zend\Date\Date
+     * @return  \DateTime
      */
     public function getLinkCreated()
     {

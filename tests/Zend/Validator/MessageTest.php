@@ -19,12 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Validator;
-use Zend\Validator,
-    ReflectionClass;
+
+use Zend\Validator\StringLength;
 
 /**
  * @category   Zend
@@ -37,20 +34,13 @@ use Zend\Validator,
 class MessageTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Default instance created for all test methods
-     *
-     * @var Zend_Validator_StringLength
+     * @var StringLength
      */
-    protected $_validator;
+    protected $validator;
 
-    /**
-     * Creates a new Zend_Validator_StringLength object for each test method
-     *
-     * @return void
-     */
     public function setUp()
     {
-        $this->_validator = new Validator\StringLength(4, 8);
+        $this->validator = new StringLength(4, 8);
     }
 
     /**
@@ -62,17 +52,17 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testSetMessage()
     {
         $inputInvalid = 'abcdefghij';
-        $this->assertFalse($this->_validator->isValid($inputInvalid));
-        $messages = $this->_validator->getMessages();
-        $this->assertEquals("'$inputInvalid' is more than 8 characters long", current($messages));
+        $this->assertFalse($this->validator->isValid($inputInvalid));
+        $messages = $this->validator->getMessages();
+        $this->assertEquals("The input is more than 8 characters long", current($messages));
 
-        $this->_validator->setMessage(
+        $this->validator->setMessage(
             'Your value is too long',
-            Validator\StringLength::TOO_LONG
+            StringLength::TOO_LONG
         );
 
-        $this->assertFalse($this->_validator->isValid('abcdefghij'));
-        $messages = $this->_validator->getMessages();
+        $this->assertFalse($this->validator->isValid('abcdefghij'));
+        $messages = $this->validator->getMessages();
         $this->assertEquals('Your value is too long', current($messages));
     }
 
@@ -86,15 +76,15 @@ class MessageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetMessageDefaultKey()
     {
-        $this->_validator->setMessage(
-            'Your value is too short', Validator\StringLength::TOO_SHORT
+        $this->validator->setMessage(
+            'Your value is too short', StringLength::TOO_SHORT
         );
 
-        $this->assertFalse($this->_validator->isValid('abc'));
-        $messages = $this->_validator->getMessages();
+        $this->assertFalse($this->validator->isValid('abc'));
+        $messages = $this->validator->getMessages();
         $this->assertEquals('Your value is too short', current($messages));
-        $errors = array_keys($this->_validator->getMessages());
-        $this->assertEquals(Validator\StringLength::TOO_SHORT, current($errors));
+        $errors = array_keys($this->validator->getMessages());
+        $this->assertEquals(StringLength::TOO_SHORT, current($errors));
     }
 
     /**
@@ -105,14 +95,14 @@ class MessageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetMessageWithValueParam()
     {
-        $this->_validator->setMessage(
+        $this->validator->setMessage(
             "Your value '%value%' is too long",
-            Validator\StringLength::TOO_LONG
+            StringLength::TOO_LONG
         );
 
         $inputInvalid = 'abcdefghij';
-        $this->assertFalse($this->_validator->isValid($inputInvalid));
-        $messages = $this->_validator->getMessages();
+        $this->assertFalse($this->validator->isValid($inputInvalid));
+        $messages = $this->validator->getMessages();
         $this->assertEquals("Your value '$inputInvalid' is too long", current($messages));
     }
 
@@ -126,14 +116,14 @@ class MessageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetMessageWithOtherParam()
     {
-        $this->_validator->setMessage(
+        $this->validator->setMessage(
             'Your value is too long, it should be no longer than %max%',
-            Validator\StringLength::TOO_LONG
+            StringLength::TOO_LONG
         );
 
         $inputInvalid = 'abcdefghij';
-        $this->assertFalse($this->_validator->isValid($inputInvalid));
-        $messages = $this->_validator->getMessages();
+        $this->assertFalse($this->validator->isValid($inputInvalid));
+        $messages = $this->validator->getMessages();
         $this->assertEquals('Your value is too long, it should be no longer than 8', current($messages));
     }
 
@@ -146,14 +136,14 @@ class MessageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetMessageWithUnknownParam()
     {
-        $this->_validator->setMessage(
+        $this->validator->setMessage(
             'Your value is too long, and btw, %shazam%!',
-            Validator\StringLength::TOO_LONG
+            StringLength::TOO_LONG
         );
 
         $inputInvalid = 'abcdefghij';
-        $this->assertFalse($this->_validator->isValid($inputInvalid));
-        $messages = $this->_validator->getMessages();
+        $this->assertFalse($this->validator->isValid($inputInvalid));
+        $messages = $this->validator->getMessages();
         $this->assertEquals('Your value is too long, and btw, %shazam%!', current($messages));
     }
 
@@ -168,7 +158,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $keyInvalid = 'invalidKey';
 
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'No message template exists for key');
-        $this->_validator->setMessage(
+        $this->validator->setMessage(
             'Your value is too long',
             $keyInvalid
         );
@@ -183,19 +173,19 @@ class MessageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetMessages()
     {
-        $this->_validator->setMessages(
+        $this->validator->setMessages(
             array(
-                Validator\StringLength::TOO_LONG  => 'Your value is too long',
-                Validator\StringLength::TOO_SHORT => 'Your value is too short'
+                StringLength::TOO_LONG  => 'Your value is too long',
+                StringLength::TOO_SHORT => 'Your value is too short'
             )
         );
 
-        $this->assertFalse($this->_validator->isValid('abcdefghij'));
-        $messages = $this->_validator->getMessages();
+        $this->assertFalse($this->validator->isValid('abcdefghij'));
+        $messages = $this->validator->getMessages();
         $this->assertEquals('Your value is too long', current($messages));
 
-        $this->assertFalse($this->_validator->isValid('abc'));
-        $messages = $this->_validator->getMessages();
+        $this->assertFalse($this->validator->isValid('abc'));
+        $messages = $this->validator->getMessages();
         $this->assertEquals('Your value is too short', current($messages));
     }
 
@@ -209,20 +199,20 @@ class MessageTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetProperty()
     {
-        $this->_validator->setMessage(
+        $this->validator->setMessage(
             'Your value is too long',
-            Validator\StringLength::TOO_LONG
+            StringLength::TOO_LONG
         );
 
         $inputInvalid = 'abcdefghij';
 
-        $this->assertFalse($this->_validator->isValid($inputInvalid));
-        $messages = $this->_validator->getMessages();
+        $this->assertFalse($this->validator->isValid($inputInvalid));
+        $messages = $this->validator->getMessages();
         $this->assertEquals('Your value is too long', current($messages));
 
-        $this->assertEquals($inputInvalid, $this->_validator->value);
-        $this->assertEquals(8, $this->_validator->max);
-        $this->assertEquals(4, $this->_validator->min);
+        $this->assertEquals($inputInvalid, $this->validator->value);
+        $this->assertEquals(8, $this->validator->max);
+        $this->assertEquals(4, $this->validator->min);
     }
 
     /**
@@ -233,17 +223,17 @@ class MessageTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPropertyException()
     {
-        $this->_validator->setMessage(
+        $this->validator->setMessage(
             'Your value is too long',
-            Validator\StringLength::TOO_LONG
+            StringLength::TOO_LONG
         );
 
-        $this->assertFalse($this->_validator->isValid('abcdefghij'));
-        $messages = $this->_validator->getMessages();
+        $this->assertFalse($this->validator->isValid('abcdefghij'));
+        $messages = $this->validator->getMessages();
         $this->assertEquals('Your value is too long', current($messages));
 
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'No property exists by the name ');
-        $property = $this->_validator->unknownProperty;
+        $this->validator->unknownProperty;
     }
 
     /**
@@ -253,7 +243,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessageVariables()
     {
-        $vars = $this->_validator->getMessageVariables();
+        $vars = $this->validator->getMessageVariables();
 
         $this->assertInternalType('array', $vars);
         $this->assertEquals(array('min', 'max'), $vars);
@@ -261,47 +251,24 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         foreach ($vars as $var) {
             $message .= "%$var% ";
         }
-        $this->_validator->setMessage($message, Validator\StringLength::TOO_SHORT);
+        $this->validator->setMessage($message, StringLength::TOO_SHORT);
 
-        $this->assertFalse($this->_validator->isValid('abc'));
-        $messages = $this->_validator->getMessages();
+        $this->assertFalse($this->validator->isValid('abc'));
+        $messages = $this->validator->getMessages();
         $this->assertEquals('variables: %notvar% 4 8 ', current($messages));
     }
-    
+
     public function testEqualsMessageTemplates()
     {
-        $validator = $this->_validator;
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
+        $validator = $this->validator;
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
-    
+
     public function testEqualsMessageVariables()
     {
-        $validator = $this->_validator;
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $validator = $this->validator;
+        $this->assertAttributeEquals($validator->getOption('messageVariables'),
+                                     'messageVariables', $validator);
     }
-
 }

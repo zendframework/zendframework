@@ -2,10 +2,10 @@
 
 namespace ZendTest\Di\Definition;
 
-use Zend\Di\Definition\BuilderDefinition,
-    Zend\Di\Definition\Builder,
-    Zend\Config\Factory as ConfigFactory,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Di\Definition\BuilderDefinition;
+use Zend\Di\Definition\Builder;
+use Zend\Config\Factory as ConfigFactory;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class BuilderDefinitionTest extends TestCase
 {
@@ -13,7 +13,7 @@ class BuilderDefinitionTest extends TestCase
     public function testBuilderImplementsDefinition()
     {
         $builder = new BuilderDefinition();
-        $this->assertInstanceOf('Zend\Di\Definition\Definition', $builder);
+        $this->assertInstanceOf('Zend\Di\Definition\DefinitionInterface', $builder);
     }
     
     public function testBuilderCanBuildClassWithMethods()

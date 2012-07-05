@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Layout;
 use Zend\Config;
 use Zend\Controller;
@@ -125,8 +122,7 @@ class Layout
     protected $_pluginClass = 'Zend\Layout\Controller\Plugin\Layout';
 
     /**
-     * @var \Zend\View\Renderer
-     */
+     * @var \Zend\View\Renderer\RendererInterface     */
     protected $_view;
 
     /**
@@ -510,10 +506,10 @@ class Layout
     /**
      * Set view object
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  \Zend\View\Renderer\RendererInterface $view
      * @return \Zend\Layout\Layout
      */
-    public function setView(\Zend\View\Renderer $view)
+    public function setView(\Zend\View\Renderer\RendererInterface $view)
     {
         $this->_view = $view;
         return $this;
@@ -569,8 +565,7 @@ class Layout
      * If no view object currently set, retrieves it from the ViewRenderer.
      *
      * @todo Set inflector from view renderer at same time
-     * @return \Zend\View\Renderer
-     */
+     * @return \Zend\View\Renderer\RendererInterface     */
     public function getView()
     {
         if (null === $this->_view) {

@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Amf\Adobe;
 
 use Zend\Amf\Exception,
@@ -28,15 +25,13 @@ use Zend\Amf\Exception,
     Zend\Code\Reflection\PropertyReflection,
     Zend\Server\Reflection,
     Zend\Server\Reflection\ReflectionClass as ServerReflectionClass,
-    SplFileInfo;
+    SplFileInfo,
+    DOMElement,
+    DOMDocument;
 
 /**
  * This class implements a service for generating AMF service descriptions as XML.
  *
- * @uses       Zend\Amf\Parser\TypeLoader
- * @uses       Zend\Loader
- * @uses       Zend\Reflection\ReflectionClass
- * @uses       Zend\Server\Reflection
  * @package    Zend_Amf
  * @subpackage Adobe
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -71,7 +66,6 @@ class Introspector
     /**
      * Constructor
      *
-     * @return void
      */
     public function __construct()
     {
@@ -137,7 +131,7 @@ class Introspector
      * @param  DOMElement $typexml target XML element
      * @return void
      */
-    protected function _addClassAttributes($typename, \DOMElement $typexml)
+    protected function _addClassAttributes($typename, DOMElement $typexml)
     {
         // Do not try to autoload here because _phpTypeToAS should
         // have already attempted to load this class

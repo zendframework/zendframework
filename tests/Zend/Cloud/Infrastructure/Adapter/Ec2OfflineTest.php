@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\Infrastructure\Adapter
+ * @package    ZendTest_Cloud_Infrastructure_Adapter
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -36,14 +36,14 @@ class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
     /**
      * Reference to Infrastructure object
      *
-     * @var Zend\Cloud\Infrastructure\Adapter
+     * @var \Zend\Cloud\Infrastructure\Adapter
      */
     protected $infrastructure;
 
     /**
      * Socket based HTTP client adapter
      *
-     * @var Zend\Http\Client\Adapter\Test
+     * @var \Zend\Http\Client\Adapter\Test
      */
     protected $httpClientAdapterTest;
     
@@ -60,7 +60,7 @@ class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->infrastructure = CloudFactory::getAdapter(array( 
-            CloudFactory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Ec2', 
+            CloudFactory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Ec2',
             Ec2::AWS_ACCESS_KEY         => '0123456789', 
             Ec2::AWS_SECRET_KEY         => 'test', 
             Ec2::AWS_REGION             => 'us-east-1'     
@@ -252,8 +252,4 @@ class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->infrastructure->destroyInstance(self::SERVER_ID));
         $this->assertTrue($this->infrastructure->isSuccessful());
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'ZendTest\Cloud\Infrastructure\Adapter\Ec2OfflineTest::main') {
-    Ec2OfflineTest::main();
 }

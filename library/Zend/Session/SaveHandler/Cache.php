@@ -20,23 +20,22 @@
 
 namespace Zend\Session\SaveHandler;
 
-use Zend\Session\SaveHandler as Savable,
-    Zend\Cache\Storage\Adapter as StorageAdapter,
+use Zend\Cache\Storage\ClearExpiredInterface;
+
+use Zend\Cache\Storage\StorageInterface as CacheStorage,
+    Zend\Cache\Storage\ClearExpiredInterface as ClearExpiredCacheStorage,
     Zend\Session\Exception;
 
 /**
  * Cache session save handler
  *
- * @uses       Zend\Config
- * @uses       Zend\Cache\Storage\Adapter
- * @uses       Zend\Session\SaveHandler\Exception
  * @category   Zend
  * @package    Zend_Session
  * @subpackage SaveHandler
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Cache implements Savable
+class Cache implements SaveHandlerInterface
 {
     /**
      * Session Save Path
@@ -53,21 +52,21 @@ class Cache implements Savable
     protected $sessionName;
 
     /**
-     * The cache storage adapter
-     * @var StorageAdapter
+     * The cache storage
+     * @var CacheStorage
      */
-    protected $storageAdapter;
+    protected $cacheStorage;
 
     /**
      * Constructor
      *
-     * @param  Zend\Cache\Storage\Adapter $storageAdapter
+     * @param  CacheStorage $cacheStorage
      * @return void
-     * @throws Zend\Session\Exception
+     * @throws Exception\ExceptionInterface
      */
-    public function __construct(StorageAdapter $storageAdapter)
+    public function __construct(CacheStorage $cacheStorage)
     {
-        $this->setStorageAdapter($storageAdapter);
+        $this->setCacheStorage($cacheStorage);
     }
 
     /**
@@ -77,10 +76,10 @@ class Cache implements Savable
      * @param string $name
      * @return boolean
      */
-    public function open($save_path, $name)
+    public function open($savePath, $name)
     {
         // @todo figure out if we want to use these
-        $this->sessionSavePath = $save_path;
+        $this->sessionSavePath = $savePath;
         $this->sessionName     = $name;
 
         return true;
@@ -104,7 +103,7 @@ class Cache implements Savable
      */
     public function read($id)
     {
-        return $this->getStorageAdapter()->getItem($id);
+        return $this->getCacheStorge()->getItem($id);
     }
 
     /**
@@ -116,7 +115,7 @@ class Cache implements Savable
      */
     public function write($id, $data)
     {
-        return $this->getStorageAdapter()->setItem($id, $data);
+        return $this->getCacheStorge()->setItem($id, $data);
     }
 
     /**
@@ -127,40 +126,42 @@ class Cache implements Savable
      */
     public function destroy($id)
     {
-        return $this->getStorageAdapter()->removeItem($id);
+        return $this->getCacheStorge()->removeItem($id);
     }
 
     /**
      * Garbage Collection
      *
      * @param int $maxlifetime
-     * @return true
+     * @return boolean
      */
     public function gc($maxlifetime)
     {
+        $cache = $this->getCacheStorge();
+        if ($cache instanceof ClearExpiredCacheStorage) {
+            return $cache->clearExpired();
+        }
         return true;
     }
 
     /**
-     * Set cache storage adapter
+     * Set cache storage
      *
-     * Allows passing a string class name or StorageAdapter object.
-     *
-     * @param Zend\Cache\Storage\Adapter
+     * @param CacheStorage
      * @return void
      */
-    public function setStorageAdapter(StorageAdapter $storageAdapter)
+    public function setCacheStorage(CacheStorage $cacheStorage)
     {
-        $this->storageAdapter = $storageAdapter;
+        $this->cacheStorage = $cacheStorage;
     }
 
     /**
      * Get Cache Storage Adapter Object
      *
-     * @return Zend\Cache\Storage\Adapter
+     * @return CacheStorage
      */
-    public function getStorageAdapter()
+    public function getCacheStorge()
     {
-        return $this->storageAdapter;
+        return $this->cacheStorage;
     }
 }

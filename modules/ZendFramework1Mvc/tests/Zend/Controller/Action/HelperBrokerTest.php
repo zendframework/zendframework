@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Controller\Action;
 
 require_once __DIR__ . '/../_files/HelperBrokerController.php';

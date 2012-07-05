@@ -3,10 +3,10 @@
 namespace ZendTest\Mvc\Controller;
 
 use PHPUnit_Framework_TestCase as TestCase,
-    Zend\EventManager\StaticEventManager,
+    Zend\EventManager\SharedEventManager,
     Zend\Http\Request,
     Zend\Http\Response,
-    Zend\Mvc\Controller\PluginBroker,
+    Zend\Mvc\Controller\PluginManager,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteMatch;
 
@@ -25,8 +25,6 @@ class ActionControllerTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-
-        StaticEventManager::resetInstance();
     }
 
     public function testDispatchInvokesNotFoundActionWhenNoActionPresentInRouteMatch()
@@ -34,7 +32,7 @@ class ActionControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $response = $this->controller->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
-        $this->assertInstanceOf('Zend\View\Model', $result);
+        $this->assertInstanceOf('Zend\View\Model\ModelInterface', $result);
         $this->assertEquals('content', $result->captureTo());
         $vars = $result->getVariables();
         $this->assertArrayHasKey('content', $vars, var_export($vars, 1));
@@ -47,7 +45,7 @@ class ActionControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $response = $this->controller->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
-        $this->assertInstanceOf('Zend\View\Model', $result);
+        $this->assertInstanceOf('Zend\View\Model\ModelInterface', $result);
         $this->assertEquals('content', $result->captureTo());
         $vars = $result->getVariables();
         $this->assertArrayHasKey('content', $vars, var_export($vars, 1));
@@ -74,7 +72,7 @@ class ActionControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $this->controller->events()->attach('dispatch', function($e) use ($response) {
+        $this->controller->getEventManager()->attach(MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, 100);
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -85,7 +83,7 @@ class ActionControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $this->controller->events()->attach('dispatch', function($e) use ($response) {
+        $this->controller->getEventManager()->attach(MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, -10);
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -96,10 +94,11 @@ class ActionControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $events = StaticEventManager::getInstance();
-        $events->attach('Zend\Stdlib\Dispatchable', 'dispatch', function($e) use ($response) {
+        $events = new SharedEventManager();
+        $events->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, 10);
+        $this->controller->getEventManager()->setSharedManager($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -108,10 +107,11 @@ class ActionControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $events = StaticEventManager::getInstance();
-        $events->attach('Zend\Mvc\Controller\ActionController', 'dispatch', function($e) use ($response) {
+        $events = new SharedEventManager();
+        $events->attach('Zend\Mvc\Controller\AbstractActionController', MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, 10);
+        $this->controller->getEventManager()->setSharedManager($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -120,10 +120,11 @@ class ActionControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $events = StaticEventManager::getInstance();
-        $events->attach(get_class($this->controller), 'dispatch', function($e) use ($response) {
+        $events = new SharedEventManager();
+        $events->attach(get_class($this->controller), MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, 10);
+        $this->controller->getEventManager()->setSharedManager($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -138,39 +139,39 @@ class ActionControllerTest extends TestCase
 
     public function testControllerIsLocatorAware()
     {
-        $this->assertInstanceOf('Zend\Mvc\LocatorAware', $this->controller);
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceLocatorAwareInterface', $this->controller);
     }
 
     public function testControllerIsEventAware()
     {
-        $this->assertInstanceOf('Zend\Mvc\InjectApplicationEvent', $this->controller);
+        $this->assertInstanceOf('Zend\Mvc\InjectApplicationEventInterface', $this->controller);
     }
 
     public function testControllerIsPluggable()
     {
-        $this->assertInstanceOf('Zend\Loader\Pluggable', $this->controller);
+        $this->assertTrue(method_exists($this->controller, 'plugin'));
     }
 
-    public function testComposesPluginBrokerByDefault()
+    public function testComposesPluginManagerByDefault()
     {
-        $broker = $this->controller->getBroker();
-        $this->assertInstanceOf('Zend\Mvc\Controller\PluginBroker', $broker);
+        $plugins = $this->controller->getPluginManager();
+        $this->assertInstanceOf('Zend\Mvc\Controller\PluginManager', $plugins);
     }
 
-    public function testPluginBrokerComposesController()
+    public function testPluginManagerComposesController()
     {
-        $broker = $this->controller->getBroker();
-        $controller = $broker->getController();
+        $plugins    = $this->controller->getPluginManager();
+        $controller = $plugins->getController();
         $this->assertSame($this->controller, $controller);
     }
 
-    public function testInjectingBrokerSetsControllerWhenPossible()
+    public function testInjectingPluginManagerSetsControllerWhenPossible()
     {
-        $broker = new PluginBroker();
-        $this->assertNull($broker->getController());
-        $this->controller->setBroker($broker);
-        $this->assertSame($this->controller, $broker->getController());
-        $this->assertSame($broker, $this->controller->getBroker());
+        $plugins = new PluginManager();
+        $this->assertNull($plugins->getController());
+        $this->controller->setPluginManager($plugins);
+        $this->assertSame($this->controller, $plugins->getController());
+        $this->assertSame($plugins, $this->controller->getPluginManager());
     }
 
     public function testMethodOverloadingShouldReturnPluginWhenFound()

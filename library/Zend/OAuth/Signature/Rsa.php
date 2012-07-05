@@ -18,15 +18,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\OAuth\Signature;
-use Zend\Crypt\Rsa as RSAEncryption;
+
+use Zend\Crypt\PublicKey\Rsa as RsaEnc;
+use Zend\Crypt\PublicKey\RsaOptions as RsaEncOptions;
 
 /**
- * @uses       Zend\Crypt\Rsa
- * @uses       Zend\OAuth\Signature\AbstractSignature
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -44,14 +41,12 @@ class Rsa extends AbstractSignature
      */
     public function sign(array $params, $method = null, $url = null) 
     {
-        $rsa = new RSAEncryption;
-        $rsa->setHashAlgorithm($this->_hashAlgorithm);
-        $sign = $rsa->sign(
-            $this->_getBaseSignatureString($params, $method, $url),
-            $this->_key,
-            RSAEncryption::BASE64
-        );
-        return $sign;
+        $rsa = new RsaEnc(new RsaEncOptions(array(
+            'hash_algorithm' => $this->_hashAlgorithm,
+            'bnary_output'   => true
+        )));
+
+        return $rsa->sign($this->_getBaseSignatureString($params, $method, $url), $this->_key);
     }
 
     /**

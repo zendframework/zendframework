@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db.testing"><info><title>Usage, API and Extensions Points</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db.testing"><title>Usage, API and Extensions Points</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         with and how it works internally.
     </para>
 
-    <note><info><title>Some Remarks on Database Testing</title></info>
+    <note><title>Some Remarks on Database Testing</title>
         
 
         <para>
@@ -27,7 +27,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.test.phpunit.db.testing.testcase"><info><title>The Zend_Test_PHPUnit_DatabaseTestCase class</title></info>
+    <section xml:id="zend.test.phpunit.db.testing.testcase"><title>The Zend_Test_PHPUnit_DatabaseTestCase class</title>
         
 
         <para>
@@ -106,7 +106,7 @@
             the PHPUnit Documentation</link>.
         </para>
 
-        <table xml:id="zend.test.phpunit.db.testing.testcase.api-methods"><info><title>Zend_Test_PHPUnit_DatabaseTestCase API Methods</title></info>
+        <table xml:id="zend.test.phpunit.db.testing.testcase.api-methods"><title>Zend_Test_PHPUnit_DatabaseTestCase API Methods</title>
             
 
             <tgroup cols="2">
@@ -187,7 +187,7 @@
         </table>
     </section>
 
-    <section xml:id="zend.test.phpunit.db.testing.controllerintegration"><info><title>Integrating Database Testing with the ControllerTestCase</title></info>
+    <section xml:id="zend.test.phpunit.db.testing.controllerintegration"><title>Integrating Database Testing with the ControllerTestCase</title>
         
 
         <para>
@@ -199,7 +199,7 @@
             also be accessed and used without the test case.
         </para>
 
-        <example xml:id="zend.test.phpunit.db.testing.controllerintegration.example"><info><title>Database integration example</title></info>
+        <example xml:id="zend.test.phpunit.db.testing.controllerintegration.example"><title>Database integration example</title>
             
 
             <para>

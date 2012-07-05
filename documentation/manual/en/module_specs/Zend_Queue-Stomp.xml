@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.stomp"><info><title>Stomp</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.stomp"><title>Stomp</title>
     
 
     <para>
@@ -23,7 +23,7 @@
         <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.germane-software.com/software/Java/Gozirra/">Gozirra</link>.
     </para>
 
-    <section xml:id="zend.queue.adapters-configuration.stomp"><info><title>Stomp - Supporting classes</title></info>
+    <section xml:id="zend.queue.adapters-configuration.stomp"><title>Stomp - Supporting classes</title>
         
 
         <itemizedlist>

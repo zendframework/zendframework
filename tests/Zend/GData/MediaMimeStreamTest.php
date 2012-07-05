@@ -19,14 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData;
 use Zend\GData;
 
 /**
- * Disabled; was not enabled in ZF1 test suite, and tests indicate different 
+ * Disabled; was not enabled in ZF1 test suite, and tests indicate different
  * functionality than actually present in class
  *
  * @category   Zend

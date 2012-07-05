@@ -19,16 +19,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\XmlRpc;
-use Zend\XmlRpc\Server,
-    Zend\XmlRpc\Request,
-    Zend\XmlRpc\Response,
-    Zend\XmlRpc\Value,
-    Zend\XmlRpc\Fault,
-    Zend\XmlRpc;
+
+use Zend\XmlRpc\Server;
+use Zend\XmlRpc\Request;
+use Zend\XmlRpc\Response;
+use Zend\XmlRpc\AbstractValue;
+use Zend\XmlRpc\Value;
+use Zend\XmlRpc\Fault;
+use Zend\XmlRpc;
 
 /**
  * Test case for Zend_XmlRpc_Server
@@ -334,7 +333,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $help = $this->_server->methodHelp('system.methodHelp', 'system.listMethods');
         $this->assertContains('Display help message for an XMLRPC method', $help);
 
-        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception', 'Method "foo" does not exist');
+        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception\\ExceptionInterface', 'Method "foo" does not exist');
         $this->_server->methodHelp('foo');
     }
 
@@ -354,7 +353,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($sig));
         $this->assertEquals(1, count($sig), var_export($sig, 1));
 
-        $this->setExpectedException('Zend\XmlRpc\Server\Exception', 'Method "foo" does not exist');
+        $this->setExpectedException('Zend\XmlRpc\Server\Exception\ExceptionInterface', 'Method "foo" does not exist');
         $this->_server->methodSignature('foo');
     }
 
@@ -429,10 +428,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testGetSetEncoding()
     {
         $this->assertEquals('UTF-8', $this->_server->getEncoding());
-        $this->assertEquals('UTF-8', Value::getGenerator()->getEncoding());
+        $this->assertEquals('UTF-8', AbstractValue::getGenerator()->getEncoding());
         $this->assertSame($this->_server, $this->_server->setEncoding('ISO-8859-1'));
         $this->assertEquals('ISO-8859-1', $this->_server->getEncoding());
-        $this->assertEquals('ISO-8859-1', Value::getGenerator()->getEncoding());
+        $this->assertEquals('ISO-8859-1', AbstractValue::getGenerator()->getEncoding());
     }
 
     /**
@@ -649,7 +648,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testCallingUnregisteredMethod()
     {
-        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception',
+        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception\\ExceptionInterface',
             'Unknown instance method called on server: foobarbaz');
         $this->_server->foobarbaz();
     }
@@ -662,13 +661,13 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidRequestClassThrowsException()
     {
-        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception', 'Invalid request class');
+        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception\\ExceptionInterface', 'Invalid request class');
         $this->_server->setRequest('stdClass');
     }
 
     public function testPassingInvalidResponseClassThrowsException()
     {
-        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception', 'Invalid response class');
+        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception\\ExceptionInterface', 'Invalid response class');
         $this->_server->setResponseClass('stdClass');
     }
 

@@ -18,12 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Serializer;
 
-use Zend\Loader\Broker;
+use Zend\Serializer\Adapter\AdapterInterface as Adapter;
 
 /**
  * @category   Zend
@@ -34,26 +31,25 @@ use Zend\Loader\Broker;
 class Serializer
 {
     /**
-     * Broker for loading adapters
+     * Plugin manager for loading adapters
      *
-     * @var null|Zend\Loader\Broker
+     * @var null|AdapterPluginManager
      */
-    private static $_adapterBroker = null;
+    private static $_adapters = null;
 
     /**
      * The default adapter.
      *
-     * @var string|Zend\Serializer\Adapter
+     * @var string|Adapter
      */
     protected static $_defaultAdapter = 'PhpSerialize';
 
     /**
      * Create a serializer adapter instance.
      *
-     * @param string|Zend\Serializer\Adapter $adapterName Name of the adapter class
-     * @param array |Zend\Config\Config $opts Serializer options
-     * @return Zend\Serializer\Adapter
-     * @throws Zend\Serializer\Exception
+     * @param string|Adapter $adapterName Name of the adapter class
+     * @param array |\Traversable $opts Serializer options
+     * @return Adapter
      */
     public static function factory($adapterName, $opts = array()) 
     {
@@ -61,60 +57,60 @@ class Serializer
             return $adapterName; // $adapterName is already an adapter object
         }
 
-        return self::getAdapterBroker()->load($adapterName, $opts);
+        return self::getAdapterPluginManager()->get($adapterName, $opts);
     }
 
     /**
-     * Get the adapter broker
+     * Get the adapter plugin manager
      *
-     * @return Zend\Loader\Broker
+     * @return AdapterPluginManager
      */
-    public static function getAdapterBroker() 
+    public static function getAdapterPluginManager() 
     {
-        if (self::$_adapterBroker === null) {
-            self::$_adapterBroker = self::_getDefaultAdapterBroker();
+        if (self::$_adapters === null) {
+            self::$_adapters = self::_getDefaultAdapterPluginManager();
         }
-        return self::$_adapterBroker;
+        return self::$_adapters;
     }
 
     /**
-     * Change the adapter broker
+     * Change the adapter plugin manager
      *
-     * @param  Zend\Loader\Broker $broker
+     * @param  AdapterPluginManager $adapters
      * @return void
      */
-    public static function setAdapterBroker(Broker $broker) 
+    public static function setAdapterPluginManager(AdapterPluginManager $adapters) 
     {
-        self::$_adapterBroker = $broker;
+        self::$_adapters = $adapters;
     }
     
     /**
-     * Resets the internal adapter broker
+     * Resets the internal adapter plugin manager
      *
-     * @return Zend\Loader\Broker
+     * @return AdapterPluginManager
      */
-    public static function resetAdapterBroker()
+    public static function resetAdapterPluginManager()
     {
-        self::$_adapterBroker = self::_getDefaultAdapterBroker();
-        return self::$_adapterBroker;
+        self::$_adapters = self::_getDefaultAdapterPluginManager();
+        return self::$_adapters;
     }
     
     /**
-     * Returns a default adapter broker
+     * Returns a default adapter plugin manager
      *
-     * @return Zend\Loader\Broker
+     * @return AdapterPluginManager
      */
-    protected static function _getDefaultAdapterBroker()
+    protected static function _getDefaultAdapterPluginManager()
     {
-        $broker = new AdapterBroker();
-        return $broker;
+        $adapters = new AdapterPluginManager();
+        return $adapters;
     }
 
     /**
      * Change the default adapter.
      *
-     * @param string|Zend\Serializer\Adapter $adapter
-     * @param array|Zend\Config\Config $options
+     * @param string|Adapter $adapter
+     * @param array|\Traversable $options
      */
     public static function setDefaultAdapter($adapter, $options = array()) 
     {
@@ -124,7 +120,7 @@ class Serializer
     /**
      * Get the default adapter.
      *
-     * @return Zend\Serializer\Adapter
+     * @return Adapter
      */
     public static function getDefaultAdapter() 
     {
@@ -140,7 +136,6 @@ class Serializer
      * @param mixed $value
      * @param array $options
      * @return string
-     * @throws Zend\Serializer\Exception
      */
     public static function serialize($value, array $options = array()) 
     {
@@ -160,7 +155,6 @@ class Serializer
      * @param string $serialized
      * @param array $options
      * @return mixed
-     * @throws Zend\Serializer\Exception
      */
     public static function unserialize($serialized, array $options = array()) 
     {

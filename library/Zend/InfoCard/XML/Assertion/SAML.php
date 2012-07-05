@@ -19,28 +19,22 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\InfoCard\XML\Assertion;
 
-use Zend\InfoCard\XML\Assertion as XMLAssertion,
-    Zend\InfoCard\XML\AbstractElement,
-    Zend\InfoCard\XML\Exception;
+use Zend\InfoCard\XML\Assertion as XMLAssertion;
+use Zend\InfoCard\XML\AbstractElement;
+use Zend\InfoCard\XML\Exception;
 
 /**
  * A Xml Assertion Document in SAML Token format
  *
- * @uses       \Zend\InfoCard\Exception
- * @uses       \Zend\InfoCard\XML\Assertion
- * @uses       \Zend\InfoCard\XML\AbstractElement
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SAML extends AbstractElement implements XMLAssertion
+class SAML extends AbstractElement implements AssertionInterface
 {
 
     /**
@@ -197,7 +191,7 @@ class SAML extends AbstractElement implements XMLAssertion
     /**
      * Return an array of conditions which the assertions are predicated on
      *
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws Exception\RuntimeException
      * @return array an array of conditions
      */
     public function getConditions()

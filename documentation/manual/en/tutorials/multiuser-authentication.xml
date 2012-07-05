@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.authentication"><info><title>Authenticating Users in Zend Framework</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.authentication"><title>Authenticating Users in Zend Framework</title>
     
 
-    <section xml:id="learning.multiuser.authentication.intro"><info><title>Introduction to Authentication</title></info>
+    <section xml:id="learning.multiuser.authentication.intro"><title>Introduction to Authentication</title>
         
 
         <para>
@@ -25,7 +25,7 @@
         </para>
     </section>
 
-    <section xml:id="learning.multiuser.authentication.basic-usage"><info><title>Basic Usage of Zend_Auth</title></info>
+    <section xml:id="learning.multiuser.authentication.basic-usage"><title>Basic Usage of Zend_Auth</title>
         
 
         <para>

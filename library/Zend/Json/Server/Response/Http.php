@@ -18,15 +18,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Json\Server\Response;
 
 use Zend\Json\Server\Response as JsonResponse;
 
 /**
- * @uses       \Zend\Json\Server\Response\Response
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

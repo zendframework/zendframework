@@ -18,14 +18,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter\Word;
 
+use Zend\Filter\Exception;
+
 /**
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\PregReplace
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,7 +38,6 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
      *
      * @param  string  $searchSeparator      Seperator to search for
      * @param  string  $replacementSeperator Seperator to replace with
-     * @return void
      */
     public function __construct($searchSeparator = ' ', $replacementSeparator = '-')
     {
@@ -53,7 +49,7 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
      * Sets a new seperator to search for
      *
      * @param  string  $separator  Seperator to search for
-     * @return $this
+     * @return SeparatorToSeparator
      */
     public function setSearchSeparator($separator)
     {
@@ -75,7 +71,7 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
      * Sets a new seperator which replaces the searched one
      *
      * @param  string  $separator  Seperator which replaces the searched one
-     * @return $this
+     * @return SeparatorToSeparator
      */
     public function setReplacementSeparator($separator)
     {
@@ -113,14 +109,15 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
      *
      * @param  string $value
      * @return string
+     * @throws Exception\RuntimeException
      */
     protected function _separatorToSeparatorFilter($value)
     {
         if ($this->_searchSeparator == null) {
-            throw new \Zend\Filter\Exception\RuntimeException('You must provide a search separator for this filter to work.');
+            throw new Exception\RuntimeException('You must provide a search separator for this filter to work.');
         }
 
-        $this->setMatchPattern('#' . preg_quote($this->_searchSeparator, '#') . '#');
+        $this->setPattern('#' . preg_quote($this->_searchSeparator, '#') . '#');
         $this->setReplacement($this->_replacementSeparator);
         return parent::filter($value);
     }

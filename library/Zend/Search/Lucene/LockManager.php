@@ -18,20 +18,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene;
 
-use Zend\Search\Lucene\Storage\Directory,
-	Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Storage\Directory\DirectoryInterface as Directory;
+use Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * This is an utility class which provides index locks processing functionality
  *
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
- * @uses       \Zend\Search\Lucene\Storage\Directory
- * @uses       \Zend\Search\Lucene\Storage\File
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -51,7 +45,7 @@ class LockManager
      * Obtain exclusive write lock on the index
      *
      * @param \Zend\Search\Lucene\Storage\Directory $lockDirectory
-     * @return \Zend\Search\Lucene\Storage\File
+     * @return \Zend\Search\Lucene\Storage\File\FileInterface
      * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     public static function obtainWriteLock(Directory $lockDirectory)
@@ -95,7 +89,7 @@ class LockManager
      *  it shoudln't be allowed to).
      *
      * @param \Zend\Search\Lucene\Storage\Directory $lockDirectory
-     * @return \Zend\Search\Lucene\Storage\File
+     * @return \Zend\Search\Lucene\Storage\File\FileInterface
      * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     private static function _startReadLockProcessing(Directory $lockDirectory)
@@ -128,7 +122,7 @@ class LockManager
      * It doesn't block other read or update processes, but prevent index from the premature cleaning-up
      *
      * @param \Zend\Search\Lucene\Storage\Directory $defaultLockDirectory
-     * @return \Zend\Search\Lucene\Storage\File
+     * @return \Zend\Search\Lucene\Storage\File\FileInterface
      * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
     public static function obtainReadLock(Directory $lockDirectory)

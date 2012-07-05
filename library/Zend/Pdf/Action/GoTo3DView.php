@@ -19,16 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\Action;
 
 /**
  * PDF 'Set the current view of a 3D annotation' action
  * PDF 1.6+ feature
  *
- * @uses       \Zend\Pdf\Action\AbstractAction
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Action
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

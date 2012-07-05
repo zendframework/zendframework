@@ -21,8 +21,7 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use Zend\Cache\Exception,
-    Zend\Cache\Utils;
+use Zend\Cache\Exception;
 
 /**
  * These are options specific to the Filesystem adapter
@@ -35,12 +34,6 @@ use Zend\Cache\Exception,
  */
 class FilesystemOptions extends AdapterOptions
 {
-    /**
-     * The adapter using these options
-     *
-     * @var null|Filesystem
-     */
-    protected $adapter;
 
     /**
      * Directory to store cache files
@@ -72,17 +65,6 @@ class FilesystemOptions extends AdapterOptions
     protected $dirUmask = 0007;
 
     /**
-     * Block writing files until writing by another process finished.
-     *
-     * NOTE: this only attempts if fileLocking is enabled
-     * NOTE: if disabled writing operations can throw a LockedException
-     * NOTE: This option can't be disabled on windows
-     *
-     * @var boolean
-     */
-    protected $fileBlocking = true;
-
-    /**
      * Lock files on writing
      *
      * @var boolean
@@ -106,15 +88,6 @@ class FilesystemOptions extends AdapterOptions
     protected $keyPattern = '/^[a-z0-9_\+\-]*$/Di';
 
     /**
-     * Overwrite default namespace pattern
-     *
-     * Defined in AdapterOptions.
-     *
-     * @var string
-     */
-    protected $namespacePattern = '/^[a-z0-9_\+\-]*$/Di';
-
-    /**
      * Namespace separator
      *
      * @var string
@@ -134,35 +107,6 @@ class FilesystemOptions extends AdapterOptions
      * @var boolean
      */
     protected $noCtime = true;
-
-    /**
-     * Read control enabled ?
-     *
-     * If enabled a hash (readControlAlgo) will be saved and check on read.
-     *
-     * @var boolean
-     */
-    protected $readControl = false;
-
-    /**
-     * The used hash algorithm if read control is enabled
-     *
-     * @var string
-     */
-    protected $readControlAlgo = 'crc32';
-
-    /**
-     * Filesystem adapter using this instance
-     *
-     * @param  Filesystem $filesystem
-     * @return FilesystemOptions
-     */
-    public function setAdapter(Filesystem $filesystem)
-    {
-        $this->adapter = $filesystem;
-        $this->updateCapabilities();
-        return $this;
-    }
 
     /**
      * Set cache dir
@@ -189,8 +133,11 @@ class FilesystemOptions extends AdapterOptions
             }
 
             $dir = rtrim(realpath($dir), \DIRECTORY_SEPARATOR);
+        } else {
+            $dir = sys_get_temp_dir();
         }
 
+        $this->triggerOptionEvent('cache_dir', $dir);
         $this->cacheDir = $dir;
         return $this;
     }
@@ -203,7 +150,7 @@ class FilesystemOptions extends AdapterOptions
     public function getCacheDir()
     {
         if ($this->cacheDir === null) {
-            $this->setCacheDir(sys_get_temp_dir());
+            $this->setCacheDir(null);
         }
 
         return $this->cacheDir;
@@ -217,7 +164,9 @@ class FilesystemOptions extends AdapterOptions
      */
     public function setClearStatCache($flag)
     {
-        $this->clearStatCache = (bool) $flag;
+        $flag = (bool) $flag;
+        $this->triggerOptionEvent('clear_stat_cache', $flag);
+        $this->clearStatCache = $flag;
         return $this;
     }
 
@@ -246,6 +195,7 @@ class FilesystemOptions extends AdapterOptions
                 "Directory level '{$level}' must be between 0 and 16"
             );
         }
+        $this->triggerOptionEvent('dir_level', $level);
         $this->dirLevel = $level;
         return $this;
     }
@@ -302,6 +252,7 @@ class FilesystemOptions extends AdapterOptions
             }
         });
 
+        $this->triggerOptionEvent('dir_umask', $umask);
         $this->dirUmask = $umask;
         return $this;
     }
@@ -317,43 +268,6 @@ class FilesystemOptions extends AdapterOptions
     }
 
     /**
-     * Set block writing files until writing by another process finished.
-     *
-     * NOTE: this only attempts if fileLocking is enabled
-     * NOTE: if disabled writing operations can throw a LockedException
-     * NOTE: This option can't be disabled on windows
-     *
-     * @param  bool $flag
-     * @return FilesystemOptions
-     */
-    public function setFileBlocking($flag)
-    {
-        $flag = (bool) $flag;
-        if ($flag && substr(\PHP_OS, 0, 3) == 'WIN') {
-            throw new Exception\InvalidArgumentException(
-                "This option can't be disabled on windows"
-            );
-        }
-
-        $this->fileBlocking = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Get block writing files until writing by another process finished.
-     *
-     * NOTE: this only attempts if fileLocking is enabled
-     * NOTE: if disabled writing operations can throw a LockedException
-     * NOTE: This option can't be disabled on windows
-     *
-     * @return bool
-     */
-    public function getFileBlocking()
-    {
-        return $this->fileBlocking;
-    }
-
-    /**
      * Set file locking
      *
      * @param  bool $flag
@@ -361,7 +275,9 @@ class FilesystemOptions extends AdapterOptions
      */
     public function setFileLocking($flag)
     {
-        $this->fileLocking = (bool)$flag;
+        $flag = (bool) $flag;
+        $this->triggerOptionEvent('file_locking', $flag);
+        $this->fileLocking = $flag;
         return $this;
     }
 
@@ -422,6 +338,7 @@ class FilesystemOptions extends AdapterOptions
             }
         });
 
+        $this->triggerOptionEvent('file_umask', $umask);
         $this->fileUmask = $umask;
         return $this;
     }
@@ -444,8 +361,9 @@ class FilesystemOptions extends AdapterOptions
      */
     public function setNamespaceSeparator($separator)
     {
-        $this->namespaceSeparator = (string) $separator;
-        $this->updateCapabilities();
+        $separator = (string) $separator;
+        $this->triggerOptionEvent('namespace_separator', $separator);
+        $this->namespaceSeparator = $separator;
         return $this;
     }
 
@@ -467,8 +385,9 @@ class FilesystemOptions extends AdapterOptions
      */
     public function setNoAtime($flag)
     {
-        $this->noAtime = (bool) $flag;
-        $this->updateCapabilities();
+        $flag = (bool) $flag;
+        $this->triggerOptionEvent('no_atime', $flag);
+        $this->noAtime = $flag;
         return $this;
     }
 
@@ -490,8 +409,9 @@ class FilesystemOptions extends AdapterOptions
      */
     public function setNoCtime($flag)
     {
-        $this->noCtime = (bool) $flag;
-        $this->updateCapabilities();
+        $flag = (bool) $flag;
+        $this->triggerOptionEvent('no_ctime', $flag);
+        $this->noCtime = $flag;
         return $this;
     }
 
@@ -503,57 +423,6 @@ class FilesystemOptions extends AdapterOptions
     public function getNoCtime()
     {
         return $this->noCtime;
-    }
-
-    /**
-     * Set read control
-     *
-     * @param  bool $flag
-     * @return FilesystemOptions
-     */
-    public function setReadControl($flag)
-    {
-        $this->readControl = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Get read control
-     *
-     * @return bool
-     */
-    public function getReadControl()
-    {
-        return $this->readControl;
-    }
-
-    /**
-     * Set real control algo
-     *
-     * @param  string $algo
-     * @return FilesystemOptions
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setReadControlAlgo($algo)
-    {
-        $algo = strtolower($algo);
-
-        if (!in_array($algo, Utils::getHashAlgos())) {
-            throw new Exception\InvalidArgumentException("Unsupported hash algorithm '{$algo}");
-        }
-
-        $this->readControlAlgo = $algo;
-        return $this;
-    }
-
-    /**
-     * Get read control algo
-     *
-     * @return string
-     */
-    public function getReadControlAlgo()
-    {
-        return $this->readControlAlgo;
     }
 
     /**
@@ -576,20 +445,5 @@ class FilesystemOptions extends AdapterOptions
         }
 
         return $umask;
-    }
-
-    /**
-     * Update target capabilities
-     *
-     * Returns immediately if no adapter is present.
-     *
-     * @return void
-     */
-    protected function updateCapabilities()
-    {
-        if (!$this->adapter) {
-            return;
-        }
-        $this->adapter->updateCapabilities();
     }
 }

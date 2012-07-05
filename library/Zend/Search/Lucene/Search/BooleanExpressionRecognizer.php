@@ -19,17 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Search;
 use Zend\Search\Lucene;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception\UnexpectedValueException
- * @uses       \Zend\Search\Lucene\AbstractFSM
- * @uses       \Zend\Search\Lucene\FSMAction
- * @uses       \Zend\Search\Lucene\Search\QueryParser
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search

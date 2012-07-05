@@ -21,8 +21,6 @@
 
 namespace Zend\Mail\Header;
 
-use Zend\Mail\Header;
-
 /**
  * @todo       Add accessors for setting date from DateTime, Zend\Date, or a string
  * @category   Zend
@@ -31,7 +29,7 @@ use Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Date implements Header
+class Date implements HeaderInterface
 {
     /**
      * @var string
@@ -45,16 +43,9 @@ class Date implements Header
      */
     protected $encoding = 'ASCII';
 
-    /**
-     * Factory: create header object from string
-     * 
-     * @param  string $headerLine 
-     * @return Date
-     * @throws Exception\InvalidArgumentException
-     */
     public static function fromString($headerLine)
     {
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'date') {
@@ -67,55 +58,29 @@ class Date implements Header
         return $header;
     }
 
-    /**
-     * Get the header name 
-     * 
-     * @return string
-     */
     public function getFieldName()
     {
         return 'Date';
     }
 
-    /**
-     * Get the header value
-     * 
-     * @return string
-     */
-    public function getFieldValue()
+    public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
         return $this->value;
     }
 
-    /**
-     * Set header encoding
-     * 
-     * @param  string $encoding 
-     * @return AbstractAddressList
-     */
     public function setEncoding($encoding) 
     {
         $this->encoding = $encoding;
         return $this;
     }
 
-    /**
-     * Get header encoding
-     * 
-     * @return string
-     */
     public function getEncoding()
     {
         return $this->encoding;
     }
 
-    /**
-     * Serialize header to string
-     * 
-     * @return string
-     */
     public function toString()
     {
-        return 'Date: ' . $this->getFieldValue();
+        return 'Date: ' . $this->getFieldValue(HeaderInterface::FORMAT_RAW);
     }
 }

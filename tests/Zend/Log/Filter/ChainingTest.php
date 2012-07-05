@@ -21,8 +21,8 @@
 
 namespace ZendTest\Log\Filter;
 
-use \Zend\Log\Logger,
-    \Zend\Log\Writer;
+use \Zend\Log\Logger;
+use \Zend\Log\Writer;
 
 /**
  * @category   Zend
@@ -46,6 +46,9 @@ class ChainingTest extends \PHPUnit_Framework_TestCase
         fclose($this->log);
     }
 
+    /**
+     * @group disable
+     */
     public function testFilterAllWriters()
     {
         // filter out anything above a WARNing for all writers
@@ -74,11 +77,13 @@ class ChainingTest extends \PHPUnit_Framework_TestCase
 
         rewind($this->log);
         $logdata = stream_get_contents($this->log);
+
         $this->assertContains($warn, $logdata);
         $this->assertContains($err, $logdata);
 
         rewind($log2);
         $logdata = stream_get_contents($log2);
+
         $this->assertContains($err, $logdata);
         $this->assertNotContains($warn, $logdata);
     }

@@ -20,7 +20,6 @@
  */
 
 /**
- * @uses       DOMXPath
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Flickr

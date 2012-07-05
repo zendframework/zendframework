@@ -1,12 +1,9 @@
 <?php
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\LiveDocx;
 
-use Zend\Service\LiveDocx\MailMerge,
-    Zend\Soap\Client as SoapClient,
+use Zend\Service\LiveDocx\MailMerge;
+use Zend\Soap\Client as SoapClient,
     PHPUnit_Framework_TestCase as TestCase;
 
 

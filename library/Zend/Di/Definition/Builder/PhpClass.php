@@ -8,13 +8,25 @@ class PhpClass
     protected $name                 = null;
     protected $instantiator         = '__construct';
     protected $injectionMethods     = array();
-    
+    protected $superTypes           = array();
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return PhpClass
+     */
     public function setName($name)
     {
         $this->name = $name;
         return $this;
     }
-    
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
@@ -30,18 +42,29 @@ class PhpClass
     {
         return $this->instantiator;
     }
-    
+
     public function addSuperType($superType)
     {
         $this->superTypes[] = $superType;
         return $this;
     }
-    
+
+    /**
+     * Get super types
+     *
+     * @return array
+     */
     public function getSuperTypes()
     {
         return $this->superTypes;
     }
-    
+
+    /**
+     * Add injection method
+     *
+     * @param InjectionMethod $injectionMethod
+     * @return PhpClass
+     */
     public function addInjectionMethod(InjectionMethod $injectionMethod)
     {
         $this->injectionMethods[] = $injectionMethod;

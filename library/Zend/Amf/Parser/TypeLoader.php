@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Amf\Parser;
 
 use Zend\Loader\PluginBroker;
@@ -30,12 +27,6 @@ use Zend\Loader\PluginBroker;
  * Loads a local class and executes the instantiation of that class.
  *
  * @todo       PHP 5.3 can drastically change this class w/ namespace and the new call_user_func w/ namespace
- * @uses       Zend\Amf\Exception
- * @uses       Zend\Amf\Value\Messaging\AcknowledgeMessage
- * @uses       Zend\Amf\Value\Messaging\AsyncMessage
- * @uses       Zend\Amf\Value\Messaging\CommandMessage
- * @uses       Zend\Amf\Value\Messaging\ErrorMessage
- * @uses       Zend\Amf\Value\Messaging\RemotingMessage
  * @package    Zend_Amf
  * @subpackage Parser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -176,6 +167,7 @@ final class TypeLoader
      *
      * @param resource $resource
      * @return mixed
+     * @throws Exception\ExceptionInterface
      */
     public static function handleResource($resource)
     {
@@ -188,7 +180,7 @@ final class TypeLoader
                 $resource = $parser->parse($resource);
             }
             return $resource;
-        } catch(Exception $e) {
+        } catch(Exception\ExceptionInterface $e) {
             throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         } catch(\Exception $e) {
             throw new Exception\RuntimeException('Can not serialize resource type: '. get_resource_type($resource), 0, $e);

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.client"><info><title>Zend_Rest_Client</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.client"><title>Zend_Rest_Client</title>
     
 
-    <section xml:id="zend.rest.client.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.rest.client.introduction"><title>Introduction</title>
         
 
         <para>
@@ -13,7 +13,7 @@
             address in the <classname>Zend_Rest_Client</classname> constructor.
         </para>
 
-        <example xml:id="zend.rest.client.introduction.example-1"><info><title>A basic REST request</title></info>
+        <example xml:id="zend.rest.client.introduction.example-1"><title>A basic REST request</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -26,7 +26,7 @@ echo $client->sayHello('Davey', 'Day')->get(); // "Hello Davey, Good Day"
 ]]></programlisting>
         </example>
 
-        <note><info><title>Differences in calling</title></info>
+        <note><title>Differences in calling</title>
             
 
             <para>
@@ -45,7 +45,7 @@ echo $client->get();
         </note>
     </section>
 
-    <section xml:id="zend.rest.client.return"><info><title>Responses</title></info>
+    <section xml:id="zend.rest.client.return"><title>Responses</title>
         
 
         <para>
@@ -61,7 +61,7 @@ echo $client->get();
             type.
         </para>
 
-        <example xml:id="zend.rest.client.return.example-1"><info><title>Response Status</title></info>
+        <example xml:id="zend.rest.client.return.example-1"><title>Response Status</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -93,7 +93,7 @@ if ($result->isSuccess()) {
             for the object, or an array of <acronym>PHP</acronym> value results.
         </para>
 
-        <example xml:id="zend.rest.client.return.example-2"><info><title>Using Technorati's Rest Service</title></info>
+        <example xml:id="zend.rest.client.return.example-2"><title>Using Technorati's Rest Service</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -105,7 +105,7 @@ echo $result->firstname() .' '. $result->lastname();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.rest.client.return.example-3"><info><title>Example Technorati Response</title></info>
+        <example xml:id="zend.rest.client.return.example-3"><title>Example Technorati Response</title>
             
 
             <programlisting language="xml"><![CDATA[
@@ -151,7 +151,7 @@ echo $result->firstname() .' '. $result->lastname();
             name.
         </para>
 
-        <note><info><title>Multiple items</title></info>
+        <note><title>Multiple items</title>
             
 
             <para>
@@ -162,7 +162,7 @@ echo $result->firstname() .' '. $result->lastname();
         </note>
     </section>
 
-    <section xml:id="zend.rest.client.args"><info><title>Request Arguments</title></info>
+    <section xml:id="zend.rest.client.args"><title>Request Arguments</title>
         
 
         <para>
@@ -176,7 +176,7 @@ echo $result->firstname() .' '. $result->lastname();
             method when calling a <classname>Zend_Rest_Server</classname> service.
         </para>
 
-        <example xml:id="zend.rest.client.args.example-1"><info><title>Setting Request Arguments</title></info>
+        <example xml:id="zend.rest.client.args.example-1"><title>Setting Request Arguments</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -207,7 +207,7 @@ $client->arg('value1')->arg2('value2')->get();
             the service.
         </para>
 
-        <warning><info><title>Strictness of Zend_Rest_Client</title></info>
+        <warning><title>Strictness of Zend_Rest_Client</title>
             
 
             <para>

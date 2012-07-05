@@ -19,20 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Test\PHPUnit\Db\Operation;
 
 /**
  * Operation for Inserting on setup or teardown of a database tester.
  *
- * @uses       PHPUnit_Extensions_Database_DataSet_IDataSet
- * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
- * @uses       PHPUnit_Extensions_Database_Operation_Exception
- * @uses       PHPUnit_Extensions_Database_Operation_IDatabaseOperation
- * @uses       \Zend\Test\PHPUnit\Db\Connection
- * @uses	   \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

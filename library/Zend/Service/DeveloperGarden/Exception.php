@@ -20,7 +20,6 @@
  */
 
 /**
- * @uses       Zend\Service\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -28,6 +27,6 @@
  * @author     Marco Kaiser
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_DeveloperGarden_Exception extends Zend\Service\Exception
+class Zend_Service_DeveloperGarden_Exception extends \Exception
 {
 }

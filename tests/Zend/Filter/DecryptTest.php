@@ -21,8 +21,8 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\Decrypt as DecryptFilter,
-    Zend\Filter\Encrypt as EncryptFilter;
+use Zend\Filter\Decrypt as DecryptFilter;
+use Zend\Filter\Encrypt as EncryptFilter;
 
 /**
  * @category   Zend
@@ -213,6 +213,10 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
      */
     public function testEncryptionWithDecryptionOpenssl()
     {
+        if (version_compare(phpversion(), '5.4', '>=')) {
+            $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
+        }
+
         if (!extension_loaded('openssl')) {
             $this->markTestSkipped('Openssl extension not installed');
         }

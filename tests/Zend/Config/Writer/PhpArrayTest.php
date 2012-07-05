@@ -21,15 +21,15 @@
 
 namespace ZendTest\Config\Writer;
 
-use \Zend\Config\Writer\PhpArray,
-    \Zend\Config\Config,
-    ZendTest\Config\Writer\files\PhpReader;
+use Zend\Config\Writer\PhpArray;
+use Zend\Config\Config;
+use ZendTest\Config\Writer\TestAssets\PhpReader;
 
 /**
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */

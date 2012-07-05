@@ -44,7 +44,7 @@ class PluginSpecBroker extends PluginBroker implements LazyLoadingBroker
      * method, and then scanned for a "specs" key; if found, it is used to
      * configure plugin specifications.
      * 
-     * @param  array|Traversable $options 
+     * @param  array|\Traversable $options
      * @return PluginSpecBroker
      */
     public function setOptions($options)

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\Outline;
 use Zend\Pdf\Exception;
 use Zend\Pdf;
@@ -37,14 +34,6 @@ use Zend\Pdf\ObjectFactory;
  * Instances of this class trace object update uperations. That allows to avoid outlines PDF tree update
  * which should be performed at each document update otherwise.
  *
- * @uses       SplObjectStorage
- * @uses       \Zend\Pdf\Action
- * @uses       \Zend\Pdf\Color
- * @uses       \Zend\Pdf\Destination
- * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\Outline
- * @uses       \Zend\Pdf\ObjectFactory
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Outline
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -72,7 +61,7 @@ class Loaded extends AbstractOutline
      * Get outline title.
      *
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function getTitle()
     {
@@ -235,7 +224,7 @@ class Loaded extends AbstractOutline
      * Get outline target.
      *
      * @return \Zend\Pdf\InternalStructure\NavigationTarget
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function getTarget()
     {
@@ -257,7 +246,7 @@ class Loaded extends AbstractOutline
      *
      * @param \Zend\Pdf\InternalStructure\NavigationTarget|string $target
      * @return \Zend\Pdf\Outline\AbstractOutline
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function setTarget($target = null)
     {
@@ -305,7 +294,7 @@ class Loaded extends AbstractOutline
      * @param SplObjectStorage $processedOutlines  List of already processed Outline dictionaries,
      *                                             used to avoid cyclic references
      * @return \Zend\Pdf\Action\AbstractAction
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct(InternalType\AbstractTypeObject $dictionary, \SplObjectStorage $processedDictionaries = null)
     {
@@ -364,7 +353,7 @@ class Loaded extends AbstractOutline
      * @param \Zend\Pdf\InternalType\AbstractTypeObject $prev     Previous outline dictionary reference
      * @param SplObjectStorage $processedOutlines  List of already processed outlines
      * @return \Zend\Pdf\InternalType\AbstractTypeObject
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function dumpOutline(ObjectFactory $factory,
                                               $updateNavigation,

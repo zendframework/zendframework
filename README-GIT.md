@@ -84,14 +84,14 @@ repository.
  5. Create a new branch for the ZF repository (named "zf/master" here)
 
     ```sh
-    % git branch -b zf/master zf2/master
+    % git checkout -b zf/master zf2/master
     ```
 
  6. Create your master branch off the ZF branch, and push to your
     repository
 
     ```sh
-    % git branch -b master
+    % git checkout -b master
     % git push origin HEAD:master
     ```
 
@@ -194,9 +194,9 @@ repository, we suggest doing some cleanup of these branches.
 
 RSS feeds may be found at:
 
-https://github.com/zendframework/zf2/commits/<branch>.atom
+`https://github.com/zendframework/zf2/commits/<branch>.atom`
 
-where <branch> is a branch in the repository.
+where &lt;branch&gt; is a branch in the repository.
 
 To subscribe to git email notifications, send an email to:
 

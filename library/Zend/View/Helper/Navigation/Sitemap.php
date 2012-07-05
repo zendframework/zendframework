@@ -322,6 +322,9 @@ class Sitemap extends AbstractHelper
      */
     public function getDomSitemap(AbstractContainer $container = null)
     {
+        // Reset the urls
+        $this->urls = array();
+
         if (null === $container) {
             $container = $this->getContainer();
         }
@@ -457,9 +460,6 @@ class Sitemap extends AbstractHelper
      */
     public function render($container = null)
     {
-        // Reset the urls
-        $this->urls = array();
-
         $dom = $this->getDomSitemap($container);
         $xml = $this->getUseXmlDeclaration() ?
             $dom->saveXML() :

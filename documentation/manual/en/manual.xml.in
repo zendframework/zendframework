@@ -933,6 +933,12 @@
                     <xi:include href="../en/module_specs/Zend_I18n-Translating.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.i18n.view.helpers.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.i18n.view.helpers.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
         </chapter>
 
         <!--<chapter xml:id="zend.infocard"><title>Zend_InfoCard</title>-->
@@ -1994,7 +2000,7 @@
 
         <chapter xml:id="zend.validator">
             <title>Zend\Validator</title>
-            
+
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.validator.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/zend.validator.xml" parse="xml"/>

@@ -47,7 +47,7 @@ class ConstraintObject
      *
      * @var string[]
      */
-    protected $columns;
+    protected $columns = array();
 
     /**
      *
@@ -192,6 +192,11 @@ class ConstraintObject
     public function getType()
     {
         return $this->type;
+    }
+
+    public function hasColumns()
+    {
+        return (!empty($this->columns));
     }
 
     /**

@@ -91,17 +91,13 @@ class Connection implements ConnectionInterface
     /**
      * @return null
      */
-    public function getDefaultCatalog()
+    public function getCurrentSchema()
     {
-        return null;
-    }
-
-    /**
-     * @return null
-     */
-    public function getDefaultSchema()
-    {
-        // TODO: Implement getDefaultSchema() method.
+        $result = pg_query($this->resource, 'SELECT CURRENT_SCHEMA AS "currentschema"');
+        if ($result == false) {
+            return null;
+        }
+        return pg_fetch_result($result, 0, 'currentschema');
     }
 
     /**
@@ -227,19 +223,11 @@ class Connection implements ConnectionInterface
      */
     public function getLastGeneratedValue($name = null)
     {
-        // @todo create a feature that opts-into this behavior, using sql to find serial name
-        $result = @pg_query($this->resource, 'SELECT LASTVAL() as "lastvalue"');
-        if ($result == false) {
+        if ($name == null) {
             return null;
         }
-        return pg_fetch_result($result, 0, 'lastvalue');
+        $result = pg_query($this->resource, 'SELECT CURRVAL(\'' . str_replace('\'', '\\\'', $name) . '\') as "currval"');
+        return pg_fetch_result($result, 0, 'currval');
     }
 
-    /**
-     * @return null
-     */
-    public function getCurrentSchema()
-    {
-        return null;
-    }
 }

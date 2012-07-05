@@ -93,6 +93,10 @@ class Connection implements ConnectionInterface
      */
     public function getCurrentSchema()
     {
+        if (!$this->isConnected()) {
+            $this->connect();
+        }
+
         $result = pg_query($this->resource, 'SELECT CURRENT_SCHEMA AS "currentschema"');
         if ($result == false) {
             return null;

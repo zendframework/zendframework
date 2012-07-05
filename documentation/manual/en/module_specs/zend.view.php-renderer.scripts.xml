@@ -69,8 +69,8 @@
 
         <?php foreach ($this->books as $key => $val): ?>
         <tr>
-            <td><?php echo $this->escape($val['author']) ?></td>
-            <td><?php echo $this->escape($val['title']) ?></td>
+            <td><?php echo $this->escapeHtml($val['author']) ?></td>
+            <td><?php echo $this->escapeHtml($val['title']) ?></td>
         </tr>
         <?php endforeach; ?>
 
@@ -90,12 +90,17 @@
             One of the most important tasks to perform in a view script is to make sure that output
             is escaped properly; among other things, this helps to avoid cross-site scripting
             attacks.  Unless you are using a function, method, or helper that does escaping on its
-            own, you should always escape variables when you output them.
+            own, you should always escape variables when you output them and pay careful attention
+            to applying the correct escaping strategy to each HTML context you use.
         </para>
 
         <para>
-            The <classname>PhpRenderer</classname> includes an <classname>Escape</classname> helper
-            you can utilize for this purpose.
+            The <classname>PhpRenderer</classname> includes a selection of helpers you can use for
+            this purpose: <classname>EscapeHtml</classname>, <classname>EscapeHtmlAttr</classname>
+            <classname>EscapeJs</classname>, <classname>EscapeCss</classname>, and
+            <classname>EscapeUrl</classname>. Matching the correct helper (or combination of
+            helpers) to the context into which you are injecting untrusted variables will ensure
+            that you are protected against Cross-Site Scripting (XSS) vulnerabilities. 
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -103,46 +108,13 @@
 echo $this->variable;
 
 // good view-script practice:
-echo $this->escape($this->variable);
+echo $this->escapeHtml($this->variable);
+
+// and remember context is always relevant!
+<script type="text/javascript">
+    var foo = "<?php echo $this->escapeJs($variable) ?>";
+</script>
 ]]></programlisting>
 
-        <para>
-            By default, the escape() method uses the <acronym>PHP</acronym>
-            <function xlink:href="http://php.net/htmlspecialchars">htmlspecialchars()</function> function for escaping, using UTF-8 as the
-            characterset, and the <constant>ENT_QUOTES</constant> setting. However, depending on
-            your environment, you may wish for escaping to occur in a different way. You may change
-            either the encoding or callback used, using the <methodname>setEncoding()</methodname>
-            or <methodname>setCallback()</methodname> method of the helper.
-        </para>
-
-        <programlisting language="php"><![CDATA[
-// $view is a PhpRenderer instance
-$escaper = $view->plugin('escape');
-
-// specify a different encoding to use for the default htmlspecialchars usage
-$escaper->setEncoding('ISO-8859-1');
-
-// tell it to use htmlentities as the escaping callback
-$escaper->setCallback('htmlentities');
-
-// or tell it to use a static class method as the callback
-$escaper->setCallback(array('SomeClass', 'methodName'));
-
-// or an instance method
-$obj = new SomeClass();
-$escaper->setCallback(array($obj, 'methodName'));
-
-// or use a closure to curry arguments to another function, 
-// or inline an escaping mechanism.
-$escaper->setCallback(function ($value) {
-    $value = str_rot13($value);
-    return base64_encode($value);
-});
-]]></programlisting>
-
-        <para>
-            The callback function or method should take the value to be escaped as its first
-            parameter, and all other parameters should be optional.
-        </para>
     </section>
 </section>

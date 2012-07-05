@@ -105,6 +105,13 @@ class Form extends Fieldset implements FormInterface
     protected $isValid = false;
 
     /**
+     * Is the form prepared ?
+     *
+     * @var bool
+     */
+    protected $isPrepared = false;
+
+    /**
      * Validation group, if any
      *
      * @var null|array
@@ -155,12 +162,16 @@ class Form extends Fieldset implements FormInterface
      */
     public function prepare()
     {
-        $this->getInputFilter();
+        if (!$this->isPrepared) {
+            $this->getInputFilter();
 
-        foreach ($this->getIterator() as $elementOrFieldset) {
-            if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
-                $elementOrFieldset->prepareElement($this);
+            foreach ($this->getIterator() as $elementOrFieldset) {
+                if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
+                    $elementOrFieldset->prepareElement($this);
+                }
             }
+
+            $this->isPrepared = true;
         }
     }
 

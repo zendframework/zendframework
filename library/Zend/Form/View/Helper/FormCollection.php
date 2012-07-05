@@ -65,7 +65,6 @@ class FormCollection extends AbstractHelper
         $markup = '';
         $templateMarkup = '';
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
-        $escapeHtmlAttrHelper = $this->getEscapeHtmlAttrHelper();
         $rowHelper = $this->getRowHelper();
 
         if ($element instanceof CollectionElement && $element->shouldCreateTemplate()) {
@@ -90,7 +89,7 @@ class FormCollection extends AbstractHelper
         if (!empty($templateMarkup)) {
             $markup .= sprintf(
                 '<span data-template="%s"></span>',
-                $escapeHtmlAttrHelper($templateMarkup)
+                $escapeHtmlHelper($templateMarkup)
             );
         }
 

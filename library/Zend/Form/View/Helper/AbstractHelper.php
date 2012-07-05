@@ -214,7 +214,6 @@ abstract class AbstractHelper extends BaseAbstractHelper
         $attributes = $this->prepareAttributes($attributes);
 
         $escape     = $this->getEscapeHtmlHelper();
-        $escapeAttr = $this->getEscapeHtmlAttrHelper();
         $strings    = array();
         foreach ($attributes as $key => $value) {
             $key = strtolower($key);
@@ -225,7 +224,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
                 }
             }
             //@TODO Escape event attributes like AbstractHtmlElement view helper does in _htmlAttribs ??
-            $strings[] = sprintf('%s="%s"', $escape($key), $escapeAttr($value));
+            $strings[] = sprintf('%s="%s"', $escape($key), $escape($value));
         }
         return implode(' ', $strings);
     }

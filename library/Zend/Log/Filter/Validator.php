@@ -43,7 +43,8 @@ class Validator implements FilterInterface
     /**
      * Filter out any log messages not matching the validator
      *
-     * @param  ZendValidator $validator
+     * @param ZendValidator $validator
+     * @return Validator
      */
     public function __construct(ZendValidator $validator)
     {

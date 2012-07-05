@@ -51,7 +51,6 @@ class Mail extends AbstractWriter
      */
     protected $eventsToMail = array();
 
-
     /**
      * Mail message instance to use
      *
@@ -87,8 +86,9 @@ class Mail extends AbstractWriter
     /**
      * Constructor
      * 
-     * @param  MailMessage $mail
-     * @param  Transport\TransportInterface $transport Optional
+     * @param MailMessage $mail
+     * @param Transport\TransportInterface $transport Optional
+     * @return Mail
      */
     public function __construct(MailMessage $mail, Transport\TransportInterface $transport = null)
     {

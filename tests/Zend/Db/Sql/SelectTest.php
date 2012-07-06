@@ -136,7 +136,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test where() will accept any array with string key (without ?) to be used as Operator predicate
      * @covers Zend\Db\Sql\Select::where
      */
-    public function testWhereArugment1IsAssociativeArrayNotContainingReplacementCharacter()
+    public function testWhereArgument1IsAssociativeArrayNotContainingReplacementCharacter()
     {
         $select = new Select;
         $select->where(array('name' => 'Ralph', 'age' => 33));
@@ -161,7 +161,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test where() will accept an indexed array to be used by joining string expressions
      * @covers Zend\Db\Sql\Select::where
      */
-    public function testWhereArugment1IsIndexedArray()
+    public function testWhereArgument1IsIndexedArray()
     {
         $select = new Select;
         $select->where(array('name = "Ralph"'));
@@ -180,7 +180,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test where() will accept an indexed array to be used by joining string expressions, combined by OR
      * @covers Zend\Db\Sql\Select::where
      */
-    public function testWhereArugment1IsIndexedArrayArgument2IsOr()
+    public function testWhereArgument1IsIndexedArrayArgument2IsOr()
     {
         $select = new Select;
         $select->where(array('name = "Ralph"'), Where::OP_OR);
@@ -199,7 +199,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test where() will accept a closure to be executed with Where object as argument
      * @covers Zend\Db\Sql\Select::where
      */
-    public function testWhereArugment1IsClosure()
+    public function testWhereArgument1IsClosure()
     {
         $select = new Select;
         $where = $select->getRawState('where');
@@ -214,7 +214,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test where() will accept a Where object
      * @covers Zend\Db\Sql\Select::where
      */
-    public function testWhereArugment1IsWhereObject()
+    public function testWhereArgument1IsWhereObject()
     {
         $select = new Select;
         $select->where($newWhere = new Where);
@@ -340,7 +340,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         );
 
         // table as TableIdentifier
-        $select1 = new Select();
+        $select1 = new Select;
         $select1->from(new TableIdentifier('foo', 'bar'));
         $sqlPrep1 = // same
         $sqlStr1 = 'SELECT "bar"."foo".* FROM "bar"."foo"';
@@ -349,8 +349,8 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         );
 
         // table with alias
-        $select2 = new Select();
-        $select2->from(array('f'=>'foo'));
+        $select2 = new Select;
+        $select2->from(array('f' => 'foo'));
         $sqlPrep2 = // same
         $sqlStr2 = 'SELECT "f".* FROM "foo" AS "f"';
         $internalTests2 = array(
@@ -358,8 +358,8 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         );
 
         // table with alias with table as TableIdentifier
-        $select3 = new Select();
-        $select3->from(new TableIdentifier(array('f'=>'foo')));
+        $select3 = new Select;
+        $select3->from(array('f' => new TableIdentifier('foo')));
         $sqlPrep3 = // same
         $sqlStr3 = 'SELECT "f".* FROM "foo" AS "f"';
         $internalTests3 = array(

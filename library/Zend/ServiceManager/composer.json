@@ -1,0 +1,19 @@
+{
+    "name": "zendframework/zend-servicemanager",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "servicemanager"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\ServiceManager": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "suggest": {
+        "zendframework/zend-di": "Zend\\Di component"
+    }
+}

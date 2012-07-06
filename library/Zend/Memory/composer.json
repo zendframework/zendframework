@@ -1,0 +1,16 @@
+{
+    "name": "zendframework/zend-memory",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "memory"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Memory": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

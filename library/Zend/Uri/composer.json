@@ -1,0 +1,17 @@
+{
+    "name": "zendframework/zend-uri",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "uri"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Uri": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-validator": "self.version"
+    }
+}

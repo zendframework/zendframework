@@ -1,0 +1,20 @@
+{
+    "name": "zendframework/zend-barcode",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "barcode"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Barcode": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-validator": "Zend\\Validator component"
+    }
+}

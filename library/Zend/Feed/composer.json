@@ -1,0 +1,20 @@
+{
+    "name": "zendframework/zend-feed",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "feed"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Feed": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "suggest": {
+        "zendframework/zend-uri": "Zend\\Uri component",
+        "zendframework/zend-validator": "Zend\\Validator component"
+    }
+}

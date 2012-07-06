@@ -1067,12 +1067,6 @@
                 </xi:fallback>
             </xi:include>
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader-Broker.xml" parse="xml">
-                <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Loader-Broker.xml" parse="xml"/>
-                </xi:fallback>
-            </xi:include>
-
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader-PluginClassLocator.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Loader-PluginClassLocator.xml" parse="xml"/>
@@ -1088,12 +1082,6 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader-ClassMapAutoloader.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Loader-ClassMapAutoloader.xml" parse="xml"/>
-                </xi:fallback>
-            </xi:include>
-
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader-PluginSpecBroker.xml" parse="xml">
-                <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Loader-PluginSpecBroker.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
 
@@ -1115,18 +1103,11 @@
                 </xi:fallback>
             </xi:include>
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader-PluginBroker.xml" parse="xml">
-                <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Loader-PluginBroker.xml" parse="xml"/>
-                </xi:fallback>
-            </xi:include>
-
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader-PrefixPathMapper.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Loader-PrefixPathMapper.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
-
         </chapter>
 
         <!--<chapter xml:id="zend.log"><title>Zend_Log</title>-->

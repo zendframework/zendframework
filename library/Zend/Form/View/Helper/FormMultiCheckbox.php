@@ -22,7 +22,6 @@
 namespace Zend\Form\View\Helper;
 
 use Traversable;
-use Zend\Loader\Pluggable;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 

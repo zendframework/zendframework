@@ -46,8 +46,8 @@ class ControllerLoaderFactory implements FactoryInterface
      * configuration's "controllers" array. If a controller is matched, the
      * scoped manager will attempt to load the controller, pulling it from
      * a DI service if a matching service is not found. Finally, it will
-     * attempt to inject the controller plugin broker into the controller if
-     * it subscribes to the Pluggable interface.
+     * attempt to inject the controller plugin manager if the controller
+     * implements a setPluginManager() method.
      *
      * @param  ServiceLocatorInterface $serviceLocator
      * @return ServiceManager

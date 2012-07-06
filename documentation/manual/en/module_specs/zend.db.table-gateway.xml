@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0"
-         xml:id="zend.db.tablegateway">
+         xml:id="zend.db.table-gateway">
     <title>Zend\Db\TableGateway</title>
 
     <para>
@@ -38,7 +38,7 @@ interface Zend\Db\TableGateway\TableGatewayInterface
     </para>
 
 
-    <section xml:id="zend.db.tablegateway.basic">
+    <section xml:id="zend.db.table-gateway.basic">
         <title>Basic Usage</title>
 
         <para>
@@ -132,7 +132,7 @@ $rowset = $artistTable->select(function (Select $select) {
 
     </section>
 
-    <section xml:id="zend.db.tablegateway.features">
+    <section xml:id="zend.db.table-gateway.features">
         <title>TableGateway Features</title>
 
         <para>

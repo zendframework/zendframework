@@ -16,12 +16,12 @@
 
         <para>
             Creating an adapter can simply be done by instantiating the
-            Zend\Db\Adapter\Adapter class.  The most common use case, while not the
+            <classname>Zend\Db\Adapter\Adapter</classname> class.  The most common use case, while not the
             most explicit, is to pass an array of information to the Adapter.
         </para>
 
         <programlisting language="php"><![CDATA[
-            $adapter = new Zend\Db\Adapter\Adapter($driverArray);
+$adapter = new Zend\Db\Adapter\Adapter($driverArray);
 ]]></programlisting>
 
         <para>
@@ -134,12 +134,12 @@
         </para>
 
             <programlisting language="php"><![CDATA[
-            $adapter = new Zend\Db\Adapter\Adapter(array(
-                'driver' => 'Mysqli',
-                'database' => 'zend_db_example',
-                'username' => 'developer',
-                'password' => 'developer-password'
-            ));
+$adapter = new Zend\Db\Adapter\Adapter(array(
+    'driver' => 'Mysqli',
+    'database' => 'zend_db_example',
+    'username' => 'developer',
+    'password' => 'developer-password'
+));
 ]]></programlisting>
 
         <para>
@@ -169,19 +169,19 @@
 
         <para>
             The more expressive and explicit way of creating an adapter is by injecting all your
-            dependencies up front.  Zend\Db\Adapter\Adapter uses constructor injection, and all
+            dependencies up front.  <classname>Zend\Db\Adapter\Adapter</classname> uses constructor injection, and all
             required dependencies are injected through the constructor, which has the following
             signature (in pseudo-code):
         </para>
 
 
             <programlisting language="php"><![CDATA[
-            use Zend\Db\Adapter\Platform\PlatformInterface,
-                Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Adapter\Platform\PlatformInterface,
+    Zend\Db\ResultSet\ResultSet;
 
-            class Zend\Db\Adapter\Adapter {
-                public function __construct($driver, PlatformInterface $platform = null, ResultSet $queryResultSetPrototype = null)
-            }
+class Zend\Db\Adapter\Adapter {
+    public function __construct($driver, PlatformInterface $platform = null, ResultSet $queryResultSetPrototype = null)
+}
 ]]></programlisting>
 
         <para>
@@ -189,24 +189,24 @@
         </para>
 
         <para>
-            $driver - an array or an instance of Zend\Db\Adapter\Driver\DriverInterface
-            $platform - (optional) an instance of Zend\Db\Platform\PlatformInterface, the default will be created based off the driver implementation
-            $queryResultSetPrototype - (optional) an instance of Zend\Db\ResultSet\ResultSet, to understand this object's role, see the section below on querying through the adapter
+            $driver - an array or an instance of <classname>Zend\Db\Adapter\Driver\DriverInterface</classname>
+            $platform - (optional) an instance of <classname>Zend\Db\Platform\PlatformInterface</classname>, the default will be created based off the driver implementation
+            $queryResultSetPrototype - (optional) an instance of <classname>Zend\Db\ResultSet\ResultSet</classname>, to understand this object's role, see the section below on querying through the adapter
         </para>
 
     </section>
 
-    <section xml:id="zend.db.adapter.query-preparing"><title>Query Preparation Through Zend\Db\Adapter\Adapter::query()</title>
+    <section xml:id="zend.db.adapter.query-preparing"><title>Query Preparation Through <classname>Zend\Db\Adapter\Adapter</classname>::query()</title>
 
         <para>
             By default, query() prefers that you use "preparation" as a means for processing SQL
             statements.  This generally means that you will supply a SQL statement with the values
             substituted by placeholders, and then the parameters for those placeholders are
-            supplied separately.  An example of this workflow with Zend\Db\Adapter\Adapter is:
+            supplied separately.  An example of this workflow with <classname>Zend\Db\Adapter\Adapter</classname> is:
         </para>
 
         <programlisting language="php"><![CDATA[
-    $adapter->query('SELECT * FROM `artist` WHERE `id` = ?', array(5));
+$adapter->query('SELECT * FROM `artist` WHERE `id` = ?', array(5));
 ]]></programlisting>
 
         <para>
@@ -288,9 +288,9 @@
             specific Statement to use so you can manage your own prepare-then-execute workflow.
         </para>
 
-            <programlisting language="php"><![CDATA[
-            $statement = $adapter->createStatement($sql, $optionalParameters);
-            $result = $statement->execute();
+        <programlisting language="php"><![CDATA[
+$statement = $adapter->createStatement($sql, $optionalParameters);
+$result = $statement->execute();
 ]]></programlisting>
 
     </section>
@@ -300,23 +300,23 @@
 
         <para>
             The Platform object provides an API to assist in crafting queries in a way that
-            is specific to the SQL implemetation of a particular vendor.  Nuances such
+            is specific to the SQL implementation of a particular vendor.  Nuances such
             as how identifiers or values are quoted, or what the identifier separator
             character is are handled by this object.  To get an idea of the capabilities,
             the interface for a platform object looks like this:
         </para>
 
         <programlisting language="php"><![CDATA[
-        interface Zend\Db\Adapter\Platform\PlatformInterface
-        {
-            public function getName();
-            public function getQuoteIdentifierSymbol();
-            public function quoteIdentifier($identifier);
-            public function getQuoteValueSymbol();
-            public function quoteValue($value);
-            public function getIdentifierSeparator();
-            public function quoteIdentifierInFragment($identifier, array $additionalSafeWords = array());
-        }
+interface Zend\Db\Adapter\Platform\PlatformInterface
+{
+    public function getName();
+    public function getQuoteIdentifierSymbol();
+    public function quoteIdentifier($identifier);
+    public function getQuoteValueSymbol();
+    public function quoteValue($value);
+    public function getIdentifierSeparator();
+    public function quoteIdentifierInFragment($identifier, array $additionalSafeWords = array());
+}
 ]]></programlisting>
 
         <para>
@@ -324,8 +324,8 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-        $platform = new Zend\Db\Adapter\Platform\Mysql;
-        $column = $platform->quoteIdentifier('first_name'); // returns `first_name`
+$platform = new Zend\Db\Adapter\Platform\Mysql;
+$column = $platform->quoteIdentifier('first_name'); // returns `first_name`
 ]]></programlisting>
 
         <para>
@@ -333,9 +333,9 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-        $platform = $adapter->getPlatform();
-        // or
-        $platform = $adapter->platform; // magic property access
+$platform = $adapter->getPlatform();
+// or
+$platform = $adapter->platform; // magic property access
 ]]></programlisting>
 
     </section>
@@ -359,37 +359,37 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-        $adapter = new Zend\Db\Adapter\Adapter($driverConfig);
+$adapter = new Zend\Db\Adapter\Adapter($driverConfig);
 
-        $qi = function($name) use ($adapter) { return $adapter->platform->quoteIdentifier($name); };
-        $fp = function($name) use ($adapter) { return $adapter->driver->formatParameterName($name); };
+$qi = function($name) use ($adapter) { return $adapter->platform->quoteIdentifier($name); };
+$fp = function($name) use ($adapter) { return $adapter->driver->formatParameterName($name); };
 
-        $sql = 'UPDATE ' . $qi('artist')
-            . ' SET ' . $qi('name') . ' = ' . $fp('name')
-            . ' WHERE ' . $qi('id') . ' = ' . $fp('id');
+$sql = 'UPDATE ' . $qi('artist')
+    . ' SET ' . $qi('name') . ' = ' . $fp('name')
+    . ' WHERE ' . $qi('id') . ' = ' . $fp('id');
 
-        /* @var $statement Zend\Db\Adapter\DriverStatementInterface */
-        $statement = $adapter->query($sql);
+/* @var $statement Zend\Db\Adapter\DriverStatementInterface */
+$statement = $adapter->query($sql);
 
-        $parameters = array(
-            'name' => 'Updated Artist',
-            'id' => 1
-        );
+$parameters = array(
+    'name' => 'Updated Artist',
+    'id' => 1
+);
 
-        $statement->execute($parameters);
+$statement->execute($parameters);
 
-        // DATA INSERTED, NOW CHECK
+// DATA INSERTED, NOW CHECK
 
-        /* @var $statement Zend\Db\Adapter\DriverStatementInterface */
-        $statement = $adapter->query('SELECT * FROM '
-            . $qi('artist')
-            . ' WHERE id = ' . $fp('id'));
+/* @var $statement Zend\Db\Adapter\DriverStatementInterface */
+$statement = $adapter->query('SELECT * FROM '
+    . $qi('artist')
+    . ' WHERE id = ' . $fp('id'));
 
-        /* @var $results Zend\Db\ResultSet\ResultSet */
-        $results = $statement->execute(array('id' => 1));
+/* @var $results Zend\Db\ResultSet\ResultSet */
+$results = $statement->execute(array('id' => 1));
 
-        $row = $results->current();
-        $name = $row['name'];
+$row = $results->current();
+$name = $row['name'];
 ]]></programlisting>
 
     </section>

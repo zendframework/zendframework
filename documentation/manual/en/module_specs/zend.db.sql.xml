@@ -4,12 +4,12 @@
     <title>Zend\Db\Sql</title>
 
     <para>
-        Zend\Db\Sql is a SQL abstraction layer for building platform specific
-        SQL queries via a object-oriented API.  The end result of an Zend\Db\Sql
+        <classname>Zend\Db\Sql</classname> is a SQL abstraction layer for building platform specific
+        SQL queries via a object-oriented API.  The end result of an <classname>Zend\Db\Sql</classname>
         object will be to either produce a Statement and Parameter container that
         represents the target query, or a full string that can be directly executed
-        against the database platform.  To achieve this, there is Zend\Db\Sql
-        objects require a Zend\Db\Adapter\Adapter object in order to produce
+        against the database platform.  To achieve this, there is <classname>Zend\Db\Sql</classname>
+        objects require a <classname>Zend\Db\Adapter\Adapter</classname> object in order to produce
         the desired results.
     </para>
 
@@ -20,12 +20,13 @@
             As there are for primary tasks associated with interacting with a database
             (from the DML, or Data Manipulation Language): selecting, inserting, updating
             and deleting.  As such, there are four primary objects that developers can
-            interact or buiding queries, Zend\Db\Sql\Select, Insert, Update and Delete.
+            interact or building queries, <classname>Zend\Db\Sql\Select</classname>,
+            <classname>Insert</classname>, <classname>Update</classname> and <classname>Delete</classname>.
         </para>
 
         <para>
             Since these four tasks are so closely related, and generally used together
-            within the same application, Zend\Db\Sql\Sql objects help you create them
+            within the same application, <classname>Zend\Db\Sql\Sql</classname> objects help you create them
             and produce the result you are attempting to achieve.
         </para>
 
@@ -109,9 +110,9 @@ public function getSqlString(PlatformInterface $adapterPlatform = null);
         <title>Zend\Db\Sql\Select</title>
 
         <para>
-            Zend\Db\Sql\Select is an object who's primary function is to present a unified
+            <classname>Zend\Db\Sql\Select</classname> is an object who's primary function is to present a unified
             API for building platform specific SQL SELECT queries.  The object can be
-            instantiated and consumed without Zend\Db\Sql\Sql:
+            instantiated and consumed without <classname>Zend\Db\Sql\Sql</classname>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -367,9 +368,9 @@ See where section below.
             Predicate (and PredicateSet).  All of the parts that make up a where
             or having that are and'ed or or'd together are called predicates.  The full
             set of predicates is called a PredicateSet.  This object set generally contains
-            the values (and identifiers) separate from the fragement they belong to until
+            the values (and identifiers) separate from the fragment they belong to until
             the last possible moment when the statement is either used to be prepared
-            (parameteritized), or exectued.  In parameterization, the parameters will be
+            (parameteritized), or executed.  In parameterization, the parameters will be
             replaced with their proper placeholder (a named or positional parameter), and
             the values stored inside a Adapter\ParameterContainer.  When executed, the values
             will be interpolated into the fragments they belong to and properly quoted.
@@ -379,7 +380,7 @@ See where section below.
             It is important to know that in this API, a distinction is made between what
             elements are considered identifiers (TYPE_IDENTIFIER) and which of those is
             a value (TYPE_VALUE).  There is also a special use case type for literal values
-            (TYPE_LITERAL).  These are all exposed via the Zend\Db\Sql\ExpressionInterface
+            (TYPE_LITERAL).  These are all exposed via the <classname>Zend\Db\Sql\ExpressionInterface</classname>
             interface.
         </para>
 

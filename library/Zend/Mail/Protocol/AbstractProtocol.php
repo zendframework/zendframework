@@ -97,14 +97,6 @@ abstract class AbstractProtocol
 
 
     /**
-     * String template for parsing server responses using sscanf (default: 3 digit code and response string)
-     * @var resource
-     * @deprecated Since 1.10.3
-     */
-    protected $_template = '%d%s';
-
-
-    /**
      * Log of mail requests and server responses for a session
      * @var array
      */

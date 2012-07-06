@@ -4,10 +4,10 @@
     <title>I18n Filters</title>
 
     <para>
-    	Zend Framework comes with a set of filters related to Internationalization.
+        Zend Framework comes with a set of filters related to Internationalization.
     </para>
 
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.filter.alnum.xml"/>
-   	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.filter.alpha.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.filter.alnum.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.filter.alpha.xml"/>
 
 </section>

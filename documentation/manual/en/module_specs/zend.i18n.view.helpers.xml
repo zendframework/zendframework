@@ -22,7 +22,10 @@
         </para>
 
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.view.helper.currency-format.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.view.helper.date-format.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.view.helper.number-format.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.view.helper.translate.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.view.helper.translate-plural.xml"/>
     </section>
 
 </section>

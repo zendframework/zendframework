@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.i18n.view.helper.translate"><title>Translate Helper</title>
+
+	<para>
+		The <classname>Translate</classname> view helper can be used to
+		translate content. It acts as a wrapper for the
+		<classname>Zend\I18n\Translator\Translator</classname> class.
+	</para>
+
+	<example xml:id="zend.i18n.view.helper.translate.setup">
+		<title>Translate Setup</title>
+		<para>
+			Before using the <classname>Translate</classname> view helper,
+			you must have first created a <classname>Translator</classname> object
+			and have attached it to the view helper.
+			If you use the <classname>Zend\I18n\Translator\TranslatorServiceFactory</classname>
+			to create your <classname>Translator</classname> object, this will be
+			done automatically for you.
+		</para>
+
+		<para>
+			If you are not using the <classname>TranslatorServiceFactory</classname>, then you will need
+			to manually attach your <classname>Translator</classname> object, such as:
+		</para>
+		<programlisting language="php"><![CDATA[
+// Somewhere early in the process...
+$serviceLocator->get('ViewHelperManager')->get('translate')->setTranslator($translator);
+]]></programlisting>
+	</example>
+
+	<example xml:id="zend.i18n.view.helper.translate.usage">
+		<title>Basic Usage of Translate</title>
+
+    	<programlisting language="php"><![CDATA[
+// Within your view
+
+echo $this->translate("Some translated text.");
+
+echo $this->translate("Translated text from a custom text domain.", "customDomain");
+
+echo sprintf($this->translate("The current time is %s."), $currentTime);
+
+echo $this->translate("Translate in a specific locale", "default", "de_DE");
+]]></programlisting>
+
+		<para>
+			<methodname>translate(string $message [, string $textDomain [, string $locale ]])</methodname>
+		</para>
+
+		<itemizedlist>
+	        <listitem>
+	            <para>
+	                <varname>$message</varname> : The message to be translated.
+	            </para>
+	        </listitem>
+	        <listitem>
+	            <para>
+	                <varname>$textDomain</varname> : (Optional) The text domain where this translation lives.
+	                Defaults to the value "default".
+	            </para>
+	        </listitem>
+	        <listitem>
+	            <para>
+	                <varname>$locale</varname> : (Optional) Locale in which the message would be translated (locale name, e.g. en_US).
+	                If unset, it will use the default locale (<classname>Locale::getDefault()</classname>)
+	            </para>
+	        </listitem>
+		</itemizedlist>
+
+	</example>
+
+</section>

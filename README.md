@@ -144,6 +144,9 @@ that have been made, and is a good resource.
       "headers()", etc. All such accessors were renamed to prepend
       "get", and, in the case of "events()", renamed to indicate the
       actual object retrieved ("getEventManager()"). 
+ - SECURITY FIX: XmlRpc (Matthew Weier O'Phinney)
+    - A security issue arising from XML eXternal Entity (XXE) injection
+      was patched; see http://framework.zend.com/security/advisory/ZF2012-01
 
 Over *400* pull requests for a variety of features and bugfixes were handled
 since beta4!

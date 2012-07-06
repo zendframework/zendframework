@@ -95,7 +95,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
 
     public function testHydratorClassMethodsCamelCase()
     {
-        $hydrator = new ClassMethods(true);
+        $hydrator = new ClassMethods(false);
         $datas = $hydrator->extract($this->classMethodsCamelCase);
         $this->assertTrue(isset($datas['fooBar']));
         $this->assertEquals($datas['fooBar'], '1');
@@ -109,7 +109,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     
     public function testHydratorClassMethodsCamelCaseWithSetterMissing()
     {
-        $hydrator = new ClassMethods(true);
+        $hydrator = new ClassMethods(false);
         $datas = $hydrator->extract($this->classMethodsCamelCaseMissing);
         $this->assertTrue(isset($datas['fooBar']));
         $this->assertEquals($datas['fooBar'], '1');
@@ -123,7 +123,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     
     public function testHydratorClassMethodsUnderscore()
     {
-        $hydrator = new ClassMethods(false);
+        $hydrator = new ClassMethods(true);
         $datas = $hydrator->extract($this->classMethodsUnderscore);
         $this->assertTrue(isset($datas['foo_bar']));
         $this->assertEquals($datas['foo_bar'], '1');
@@ -137,7 +137,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
 
     public function testHydratorClassMethodsIgnoresInvalidValues()
     {
-        $hydrator = new ClassMethods(false);
+        $hydrator = new ClassMethods(true);
         $data = array(
             'foo_bar' => '1',
             'foo_bar_baz' => '2',
@@ -145,5 +145,19 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         );
         $test = $hydrator->hydrate($data, $this->classMethodsUnderscore);
         $this->assertSame($this->classMethodsUnderscore, $test);
+    }
+
+    public function testHydratorClassMethodsDefaultBehaviorIsConvertUnderscoreToCamelCase()
+    {
+        $hydrator = new ClassMethods();
+        $datas = $hydrator->extract($this->classMethodsUnderscore);
+        $this->assertTrue(isset($datas['foo_bar']));
+        $this->assertEquals($datas['foo_bar'], '1');
+        $this->assertTrue(isset($datas['foo_bar_baz']));
+        $this->assertFalse(isset($datas['fooBar']));
+        $test = $hydrator->hydrate(array('foo_bar' => 'foo', 'foo_bar_baz' => 'bar'), $this->classMethodsUnderscore);
+        $this->assertSame($this->classMethodsUnderscore, $test);
+        $this->assertEquals($test->getFooBar(), 'foo');
+        $this->assertEquals($test->getFooBarBaz(), 'bar');
     }
 }

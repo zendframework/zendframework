@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.i18n.filter.alpha">
+	<title>Alpha Filter</title>
+
+	<para>
+		The <classname>Alpha</classname> filter can be used to return
+		only alphabetic characters in the native language.
+		All other characters are supressed.
+	</para>
+
+	<example xml:id="zend.i18n.filter.alpha.options">
+		<title>Supported options for Alpha Filter</title>
+
+		<para>
+			The following options are supported for <classname>Alpha</classname>:
+		</para>
+
+		<para>
+			<methodname>Alpha([ boolean $allowWhiteSpace [, string $locale ]])</methodname>
+		</para>
+
+		<itemizedlist>
+	        <listitem>
+	            <para>
+	                <varname>$allowWhiteSpace</varname> : If set to true then
+	                whitespace characters are allowed. Otherwise they are
+	                suppressed. Default is "false" (whitespace is not allowed).
+	            </para>
+	        </listitem>
+	        <listitem>
+	            <para>
+	                <varname>$locale</varname> : The locale string used in
+	                identifying the characters to filter
+	                (locale name, e.g. en_US). If unset, it will use the
+	                default locale
+	                (<classname>Locale::getDefault()</classname>).
+	            </para>
+	        </listitem>
+        </itemizedlist>
+	</example>
+
+	<example xml:id="zend.i18n.filter.alpha.usage">
+		<title>Alpha Filter Usage</title>
+
+		<programlisting language="php"><![CDATA[
+$filter = \Zend\I18n\Filter\Alpha();
+echo $filter->filter("This is (my) content: 123");
+// Returns "Thisismycontent"
+]]></programlisting>
+
+		<note>
+            <para>
+                Note: <classname>Alpha</classname> works on almost all
+                languages, except: Chinese, Japanese and Korean.
+                Within these languages the english alphabet is used
+                instead of the characters from these languages.
+                The language itself is detected using the
+                <classname>Locale</classname>.
+            </para>
+
+            <para>
+            	The following getter/setter is also available
+            	for <varname>locale</varname>:
+            	<methodname>getLocale()</methodname>
+				and <methodname>setLocale()</methodname>
+            </para>
+        </note>
+
+	</example>
+
+	<example xml:id="zend.i18n.filter.alpha.allow-whitespace">
+		<title>Allow Whitespace Option</title>
+
+		<programlisting language="php"><![CDATA[
+// First param in constructor is $allowWhiteSpace
+$filter = \Zend\I18n\Filter\Alpha(true);
+echo $filter->filter("This is (my) content: 123");
+// Returns "This is my content "
+]]></programlisting>
+
+		<para>
+			The following getter/setter is also available for
+			<varname>allowWhiteSpace</varname>:
+			<methodname>getAllowWhiteSpace()</methodname>
+			and <methodname>setAllowWhiteSpace()</methodname>.
+		</para>
+
+	</example>
+</section>

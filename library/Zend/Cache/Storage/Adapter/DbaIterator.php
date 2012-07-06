@@ -21,7 +21,7 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use APCIterator as BaseApcIterator,
+use Zend\Cache\Exception,
     Zend\Cache\Storage\IterableInterface,
     Zend\Cache\Storage\IteratorInterface;
 
@@ -32,9 +32,8 @@ use APCIterator as BaseApcIterator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ApcIterator implements IteratorInterface
+class DbaIterator implements IteratorInterface
 {
-
     /**
      * The apc storage intance
      *
@@ -50,11 +49,11 @@ class ApcIterator implements IteratorInterface
     protected $mode = IteratorInterface::CURRENT_AS_KEY;
 
     /**
-     * The base APCIterator instance
+     * The dba resource handle
      *
-     * @var BaseApcIterator
+     * @var resource
      */
-    protected $baseIterator;
+    protected $handle;
 
     /**
      * The length of the namespace prefix
@@ -64,24 +63,33 @@ class ApcIterator implements IteratorInterface
     protected $prefixLength;
 
     /**
+     * The current internal key
+     *
+     * @var string|boolean
+     */
+    protected $currentInternalKey;
+
+    /**
      * Constructor
      *
-     * @param Apc             $storage
-     * @param BaseApcIterator $baseIterator
-     * @param string          $prefix
+     * @param Dba      $storage
+     * @param resource $handle
+     * @param string   $prefix
      * @return void
      */
-    public function __construct(Apc $storage, BaseApcIterator $baseIterator, $prefix)
+    public function __construct(Dba $storage, $handle, $prefix)
     {
         $this->storage      = $storage;
-        $this->baseIterator = $baseIterator;
+        $this->handle       = $handle;
         $this->prefixLength = strlen($prefix);
+
+        $this->rewind();
     }
 
     /**
      * Get storage instance
      *
-     * @return Apc
+     * @return Dba
      */
     public function getStorage()
     {
@@ -112,10 +120,11 @@ class ApcIterator implements IteratorInterface
 
     /* Iterator */
 
-	/**
-	 * Get current key, value or metadata.
-	 *
-	 * @return mixed
+    /**
+     * Get current key, value or metadata.
+     *
+     * @return mixed
+     * @throws Exception\RuntimeException
      */
     public function current()
     {
@@ -134,46 +143,69 @@ class ApcIterator implements IteratorInterface
         return $key;
     }
 
-	/**
-	 * Get current key
-	 *
-	 * @return string
+    /**
+     * Get current key
+     *
+     * @return string
+     * @throws Exception\RuntimeException
      */
     public function key()
     {
-        $key = $this->baseIterator->key();
+        if ($this->currentInternalKey === false) {
+            throw new Exception\RuntimeException("Iterater is on an invalid state");
+        }
 
         // remove namespace prefix
-        return substr($key, $this->prefixLength);
+        return substr($this->currentInternalKey, $this->prefixLength);
     }
 
     /**
      * Move forward to next element
      *
      * @return void
+     * @throws Exception\RuntimeException
      */
     public function next()
     {
-        $this->baseIterator->next();
+        if ($this->currentInternalKey === false) {
+            throw new Exception\RuntimeException("Iterater is on an invalid state");
+        }
+
+        $this->currentInternalKey = dba_nextkey($this->handle);
+
+        // Workaround for PHP-Bug #62492
+        if ($this->currentInternalKey === null) {
+            $this->currentInternalKey = false;
+        }
     }
 
-	/**
-	 * Checks if current position is valid
-	 *
-	 * @return boolean
+    /**
+     * Checks if current position is valid
+     *
+     * @return boolean
      */
     public function valid()
     {
-        return $this->baseIterator->valid();
+        return ($this->currentInternalKey !== false);
     }
 
-	/**
-	 * Rewind the Iterator to the first element.
-	 *
-	 * @return void
+    /**
+     * Rewind the Iterator to the first element.
+     *
+     * @return void
+     * @throws Exception\RuntimeException
      */
     public function rewind()
     {
-        return $this->baseIterator->rewind();
+        if ($this->currentInternalKey === false) {
+            throw new Exception\RuntimeException("Iterater is on an invalid state");
+        }
+
+        $this->currentInternalKey = dba_firstkey($this->handle);
+
+        // Workaround for PHP-Bug #62492
+        if ($this->currentInternalKey === null) {
+            $this->currentInternalKey = false;
+        }
     }
 }

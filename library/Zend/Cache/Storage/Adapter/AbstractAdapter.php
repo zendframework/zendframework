@@ -105,7 +105,6 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
      * detach all registered plugins to free
      * event handles of event manager
      *
-     *
      * @return void
      */
     public function __destruct()

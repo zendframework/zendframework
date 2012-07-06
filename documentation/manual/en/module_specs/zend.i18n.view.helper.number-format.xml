@@ -8,21 +8,41 @@
 		class within the Internationalization extension (Intl).
 	</para>
 
-	<example xml:id="zend.i18n.view.helper.number-format.usage"><title>Basic Usage of NumberFormat</title>
+	<example xml:id="zend.i18n.view.helper.number-format.usage">
+		<title>Basic Usage of NumberFormat</title>
     	<programlisting language="php"><![CDATA[
 // Within your view
+
+// Example of Decimal formatting:
 echo $this->numberFormat(
     1234567.891234567890000,
     NumberFormatter::DECIMAL,
     NumberFormatter::TYPE_DEFAULT,
     "de_DE"
 );
+// This returns: "1.234.567,891"
 
-// This returns: '1.234.567,891'
+// Example of Percent formatting:
+echo $this->numberFormat(
+    0.80,
+    NumberFormatter::PERCENT,
+    NumberFormatter::TYPE_DEFAULT,
+    "en_US"
+);
+// This returns: "80%"
+
+// Example of Scientific notation formatting:
+echo $this->numberFormat(
+    0.00123456789,
+    NumberFormatter::SCIENTIFIC,
+    NumberFormatter::TYPE_DEFAULT,
+    "fr_FR"
+);
+// This returns: "1,23456789E-3"
 ]]></programlisting>
 
 		<para>
-			<methodname>numberFormat($number, $formatStyle, $formatType, $locale)</methodname>
+			<methodname>numberFormat(number $number [, int $formatStyle [, int $formatType [, string $locale ]]])</methodname>
 		</para>
 
 		<itemizedlist>
@@ -33,14 +53,21 @@ echo $this->numberFormat(
 	        </listitem>
 	        <listitem>
 	            <para>
-	                <varname>$formatStyle</varname> : (Optional) Style of the formatting, one of the format style constants.
+	                <varname>$formatStyle</varname> : (Optional) Style of the formatting, one of the
+	                <link xmlns:xlink="http://www.w3.org/1999/xlink"
+					xlink:href="http://us.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformatstyle"
+					>format style constants</link>.
 	                If unset, it will use <varname>NumberFormatter::DECIMAL</varname> as the default style.
+
 	            </para>
 	        </listitem>
 	        <listitem>
 	            <para>
-	                <varname>$formatType</varname> : (Optional) The formatting type to use. If unset, will use
-	                <varname>NumberFormatter::TYPE_DEFAULT</varname> as the default type.
+	                <varname>$formatType</varname> : (Optional) The
+	                <link xmlns:xlink="http://www.w3.org/1999/xlink"
+					xlink:href="http://us.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.types"
+					>formatting type</link> to use.
+	                If unset, it will use <varname>NumberFormatter::TYPE_DEFAULT</varname> as the default type.
 	            </para>
 	        </listitem>
 	        <listitem>
@@ -53,11 +80,12 @@ echo $this->numberFormat(
 
 	</example>
 
-	<example xml:id="zend.i18n.view.helper.number-format.setter-usage"><title>NumberFormat Setters</title>
+	<example xml:id="zend.i18n.view.helper.number-format.setter-usage">
+		<title>NumberFormat Setters</title>
 		<para>
 			The <varname>$formatStyle</varname>, <varname>$formatType</varname>, and
-			<varname>$locale</varname> can be set prior to formatting
-			so that they are not required each time the helper is used:
+			<varname>$locale</varname> options can be set prior to formatting and will be applied
+			each time the helper is used.
 		</para>
 
 	    <programlisting language="php"><![CDATA[
@@ -69,12 +97,6 @@ $this->plugin("numberformat")
 
 echo $this->numberFormat(0.56);  // "56%"
 echo $this->numberFormat(0.90);  // "90%"
-
-$this->plugin("numberformat")
-            ->setLocale("de_DE");
-
-echo $this->numberFormat(0.56);  // "56 %"
-echo $this->numberFormat(0.90);  // "90 %"
 ]]></programlisting>
 
 	</example>

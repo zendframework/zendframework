@@ -375,7 +375,7 @@ class Filesystem extends AbstractAdapter implements
     /**
      * Optimize the storage
      *
-     * @return void
+     * @return boolean
      * @return Exception\RuntimeException
      */
     public function optimize()
@@ -421,8 +421,9 @@ class Filesystem extends AbstractAdapter implements
                     $events->detach($handle);
                 }
             };
-            $handle = $this->getEventManager()->attach($callback);
+            $handle = $events->attach($callback);
         }
+
         return $this->totalSpace;
     }
 

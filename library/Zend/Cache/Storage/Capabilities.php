@@ -58,56 +58,101 @@ class Capabilities
 
     /**
      * Expire read
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|boolean
      */
     protected $_expiredRead;
 
     /**
-     * Max key length
+     * Max. key length
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|int
      */
     protected $_maxKeyLength;
 
     /**
-     * Max ttl
+     * Max. TTL (0 means infinite)
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|int
      */
     protected $_maxTtl;
 
     /**
      * Namespace is prefix
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|boolean
      */
     protected $_namespaceIsPrefix;
 
     /**
      * Namespace separator
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|string
      */
     protected $_namespaceSeparator;
 
     /**
      * Static ttl
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|boolean
      */
     protected $_staticTtl;
 
    /**
-    * Capability property
+    * Supported datatypes
     *
     * If it's NULL the capability isn't set and the getter
     * returns the base capability or the default value.
     *
-    * @var null|mixed
+    * @var null|array
     */
     protected $_supportedDatatypes;
 
     /**
      * Supported metdata
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|array
      */
     protected $_supportedMetadata;
 
     /**
-     * Ttl precision
+     * TTL precision
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|int
      */
     protected $_ttlPrecision;
 
     /**
      * Use request time
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|boolean
      */
     protected $_useRequestTime;
 

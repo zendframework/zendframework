@@ -722,7 +722,7 @@ class Memory extends AbstractAdapter implements
                         'object'   => true,
                         'resource' => true,
                     ),
-                    'supportedMetadata' => array('mtime'),
+                    'supportedMetadata'  => array('mtime'),
                     'maxTtl'             => PHP_INT_MAX,
                     'staticTtl'          => false,
                     'ttlPrecision'       => 0.05,

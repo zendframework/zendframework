@@ -102,7 +102,7 @@ class Apc
      * Get options.
      *
      * @return ApcOptions
-     * @see setOptions()
+     * @see    setOptions()
      */
     public function getOptions()
     {
@@ -308,10 +308,6 @@ class Apc
      * @param  string $normalizedKey
      * @return array|boolean Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
-     *
-     * @triggers getMetadata.pre(PreEvent)
-     * @triggers getMetadata.post(PostEvent)
-     * @triggers getMetadata.exception(ExceptionEvent)
      */
     protected function internalGetMetadata(& $normalizedKey)
     {

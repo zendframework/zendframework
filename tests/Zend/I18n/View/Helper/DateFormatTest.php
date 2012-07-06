@@ -68,6 +68,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
 
     public function currencyTestsDataProvider()
     {
+        $date = new DateTime('2012-07-02T22:44:03Z');
         return array(
             // FULL format varies based on OS
             // array(
@@ -75,7 +76,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
             //     'Europe/Berlin',
             //     IntlDateFormatter::FULL,
             //     IntlDateFormatter::FULL,
-            //     new DateTime('2012-07-02T22:44:03Z'),
+            //     $date,
             //     'Dienstag, 3. Juli 2012 00:44:03 Deutschland',
             // ),
             array(
@@ -83,7 +84,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 'Europe/Berlin',
                 IntlDateFormatter::LONG,
                 IntlDateFormatter::LONG,
-                new DateTime('2012-07-02T22:44:03Z'),
+                $date,
                 '3. Juli 2012 00:44:03 MESZ',
             ),
             array(
@@ -91,7 +92,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 'Europe/Berlin',
                 IntlDateFormatter::MEDIUM,
                 IntlDateFormatter::MEDIUM,
-                new DateTime('2012-07-02T22:44:03Z'),
+                $date,
                 '03.07.2012 00:44:03',
             ),
             array(
@@ -99,7 +100,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 'Europe/Berlin',
                 IntlDateFormatter::SHORT,
                 IntlDateFormatter::SHORT,
-                new DateTime('2012-07-02T22:44:03Z'),
+                $date,
                 '03.07.12 00:44',
             ),
             // FULL format varies based on OS
@@ -108,7 +109,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
             //     'Europe/Moscow',
             //     IntlDateFormatter::FULL,
             //     IntlDateFormatter::FULL,
-            //     new DateTime('2012-07-02T22:44:03Z'),
+            //     $date,
             //     '3 июля 2012 г. 2:44:03 Россия (Москва)',
             // ),
             // LONG format varies based on OS for ru_RU locale
@@ -117,7 +118,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
             //     'Europe/Moscow',
             //     IntlDateFormatter::LONG,
             //     IntlDateFormatter::LONG,
-            //     new DateTime('2012-07-02T22:44:03Z'),
+            //     $date,
             //     '3 июля 2012 г. 2:44:03 GMT+04:00',
             // ),
             array(
@@ -125,7 +126,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 'Europe/Moscow',
                 IntlDateFormatter::MEDIUM,
                 IntlDateFormatter::MEDIUM,
-                new DateTime('2012-07-02T22:44:03Z'),
+                $date,
                 '03.07.2012 2:44:03',
             ),
             array(
@@ -133,7 +134,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 'Europe/Moscow',
                 IntlDateFormatter::SHORT,
                 IntlDateFormatter::SHORT,
-                new DateTime('2012-07-02T22:44:03Z'),
+                $date,
                 '03.07.12 2:44',
             ),
             // FULL format varies based on OS
@@ -142,7 +143,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
             //     'America/New_York',
             //     IntlDateFormatter::FULL,
             //     IntlDateFormatter::FULL,
-            //     new DateTime('2012-07-02T22:44:03Z'),
+            //     $date,
             //     'Monday, July 2, 2012 6:44:03 PM ET',
             // ),
             array(
@@ -150,7 +151,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 'America/New_York',
                 IntlDateFormatter::LONG,
                 IntlDateFormatter::LONG,
-                new DateTime('2012-07-02T22:44:03Z'),
+                $date,
                 'July 2, 2012 6:44:03 PM EDT',
             ),
             array(
@@ -158,7 +159,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 'America/New_York',
                 IntlDateFormatter::MEDIUM,
                 IntlDateFormatter::MEDIUM,
-                new DateTime('2012-07-02T22:44:03Z'),
+                $date,
                 'Jul 2, 2012 6:44:03 PM',
             ),
             array(
@@ -166,7 +167,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 'America/New_York',
                 IntlDateFormatter::SHORT,
                 IntlDateFormatter::SHORT,
-                new DateTime('2012-07-02T22:44:03Z'),
+                $date,
                 '7/2/12 6:44 PM',
             ),
         );

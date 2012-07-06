@@ -33,18 +33,18 @@ use Zend\Stdlib\Exception;
 class ClassMethods implements HydratorInterface
 {
     /**
-     * CamelCase usage to extract attribute with getter/setter method name
+     * Flag defining whether array keys are underscore-separated (true) or camel case (false)
      * @var boolean
      */
-    protected $useCamelCase;
+    protected $underscoreSeparatedKeys;
     
     /**
      * Define if extract values will use camel case or name with underscore
-     * @param boolean $useCamelCase 
+     * @param boolean $underscoreSeparatedKeys 
      */
-    public function __construct($useCamelCase = true)
+    public function __construct($underscoreSeparatedKeys = true)
     {
-        $this->useCamelCase = $useCamelCase;
+        $this->underscoreSeparatedKeys = $underscoreSeparatedKeys;
     }
     
     /**
@@ -81,7 +81,7 @@ class ClassMethods implements HydratorInterface
                 }
                 $attribute = substr($method, 3);
                 $attribute = lcfirst($attribute);
-                if (!$this->useCamelCase) {
+                if ($this->underscoreSeparatedKeys) {
                     $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
                 }
 
@@ -131,7 +131,7 @@ class ClassMethods implements HydratorInterface
         };
 
         foreach ($data as $property => $value) {
-            if (!$this->useCamelCase) {
+            if ($this->underscoreSeparatedKeys) {
                 $property = preg_replace_callback('/(_[a-z])/', $transform, $property);
             }
             $method = 'set' . ucfirst($property);

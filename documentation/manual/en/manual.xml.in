@@ -573,21 +573,39 @@
         <chapter xml:id="zend.db">
             <title>Zend_Db</title>
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Db-Adapter.xml" parse="xml">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.db.adapter.xml" parse="xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Db-Adapter.xml" parse="xml"/>
+                    <xi:include href="../en/module_specs/zend.db.adapter.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Db-Sql.xml" parse="xml">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.db.result-set.xml" parse="xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Db-Sql.xml" parse="xml"/>
+                    <xi:include href="../en/module_specs/zend.db.result-set.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Db-TableGateway.xml" parse="xml">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.db.sql.xml" parse="xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Db-TableGateway.xml" parse="xml"/>
+                    <xi:include href="../en/module_specs/zend.db.sql.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.db.table-gateway.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.db.table-gateway.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.db.row-gateway.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.db.row-gateway.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.db.metadata.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.db.metadata.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
         </chapter>

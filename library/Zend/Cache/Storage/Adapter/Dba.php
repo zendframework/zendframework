@@ -464,6 +464,7 @@ class Dba extends AbstractAdapter implements
                         'object'   => false,
                         'resource' => false,
                     ),
+                    'minTtl'             => 0,
                     'supportedMetadata'  => array(),
                     'maxKeyLength'       => 0, // TODO: maxKeyLength ????
                     'namespaceIsPrefix'  => true,

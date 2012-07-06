@@ -29,7 +29,6 @@ use Zend\Cache\Storage\IterableInterface,
     Zend\Cache\Storage\ClearExpiredInterface,
     Zend\Cache\Storage\ClearByNamespaceInterface,
     Zend\Cache\Storage\ClearByPrefixInterface,
-    Zend\Cache\Storage\ExpirableInterface,
     Zend\Cache\Storage\FlushableInterface,
     Zend\Cache\Storage\OptimizableInterface,
     Zend\Cache\Storage\TagableInterface,
@@ -235,11 +234,12 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testHasItemReturnsFalseOnExpiredItem()
     {
-        if (!$this->_storage instanceof ExpirableInterface) {
-            $this->markTestSkipped("Adapter doesn't support TTL expiration");
+        $capabilities = $this->_storage->getCapabilities();
+
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
         }
 
-        $capabilities = $this->_storage->getCapabilities();
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
 
@@ -301,11 +301,12 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testGetItemReturnsNullOnExpiredItem()
     {
-        if (!$this->_storage instanceof ExpirableInterface) {
-            $this->markTestSkipped("Adapter doesn't support TTL expiration");
+        $capabilities = $this->_storage->getCapabilities();
+
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
         }
 
-        $capabilities = $this->_storage->getCapabilities();
         if ($capabilities->getUseRequestTime()) {
             $this->markTestSkipped("Can't test get expired item if request time will be used");
         }
@@ -543,11 +544,12 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetExpiredItem()
     {
-        if (!$this->_storage instanceof ExpirableInterface) {
-            $this->markTestSkipped("Adapter doesn't support TTL expiration");
+        $capabilities = $this->_storage->getCapabilities();
+
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
         }
 
-        $capabilities = $this->_storage->getCapabilities();
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
 
@@ -573,11 +575,12 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetExpiredItems()
     {
-        if (!$this->_storage instanceof ExpirableInterface) {
-            $this->markTestSkipped("Adapter doesn't support TTL expiration");
+        $capabilities = $this->_storage->getCapabilities();
+
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
         }
 
-        $capabilities = $this->_storage->getCapabilities();
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
 
@@ -825,11 +828,12 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testTouchItem()
     {
-        if (!$this->_storage instanceof ExpirableInterface) {
-            $this->markTestSkipped("Adapter doesn't support TTL expiration");
+        $capabilities = $this->_storage->getCapabilities();
+
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
         }
 
-        $capabilities = $this->_storage->getCapabilities();
         $this->_options->setTtl(2 * $capabilities->getTtlPrecision());
 
         $this->assertTrue($this->_storage->setItem('key', 'value'));

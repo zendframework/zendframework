@@ -1189,6 +1189,7 @@ class Filesystem extends AbstractAdapter implements
                         'resource' => false,
                     ),
                     'supportedMetadata'  => $metadata,
+                    'minTtl'             => 1,
                     'maxTtl'             => 0,
                     'staticTtl'          => false,
                     'ttlPrecision'       => 1,

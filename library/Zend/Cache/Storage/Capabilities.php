@@ -77,6 +77,16 @@ class Capabilities
     protected $_maxKeyLength;
 
     /**
+     * Min. TTL (0 means items never expire)
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|int
+     */
+    protected $_minTtl;
+
+    /**
      * Max. TTL (0 means infinite)
      *
     * If it's NULL the capability isn't set and the getter
@@ -281,6 +291,32 @@ class Capabilities
     }
 
     /**
+     * Get minimum supported time-to-live
+     *
+     * @return int 0 means items never expire
+     */
+    public function getMinTtl()
+    {
+        return $this->getCapability('minTtl', 0);
+    }
+
+    /**
+     * Set minimum supported time-to-live
+     *
+     * @param  stdClass $marker
+     * @param  int $minTtl
+     * @return Capabilities Fluent interface
+     */
+    public function setMinTtl(stdClass $marker, $minTtl)
+    {
+        $minTtl = (int) $minTtl;
+        if ($minTtl < 0) {
+            throw new Exception\InvalidArgumentException('$minTtl must be greater or equal 0');
+        }
+        return $this->setCapability($marker, 'minTtl', $minTtl);
+    }
+
+    /**
      * Get maximum supported time-to-live
      *
      * @return int 0 means infinite
@@ -299,7 +335,7 @@ class Capabilities
      */
     public function setMaxTtl(stdClass $marker, $maxTtl)
     {
-        $maxTtl = (int)$maxTtl;
+        $maxTtl = (int) $maxTtl;
         if ($maxTtl < 0) {
             throw new Exception\InvalidArgumentException('$maxTtl must be greater or equal 0');
         }

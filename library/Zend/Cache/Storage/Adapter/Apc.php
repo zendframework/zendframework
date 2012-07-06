@@ -41,10 +41,13 @@ use APCIterator as BaseApcIterator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Apc
-    extends AbstractAdapter
-    implements ClearByPrefixInterface, ClearByNamespaceInterface, FlushableInterface, IterableInterface,
-               AvailableSpaceCapableInterface, TotalSpaceCapableInterface
+class Apc extends AbstractAdapter implements
+    ClearByPrefixInterface,
+    ClearByNamespaceInterface,
+    FlushableInterface,
+    IterableInterface,
+    AvailableSpaceCapableInterface,
+    TotalSpaceCapableInterface
 {
     /**
      * Buffered total space in bytes
@@ -650,6 +653,7 @@ class Apc
                         'atime', 'ctime', 'mtime', 'rtime',
                         'size', 'hits', 'ttl',
                     ),
+                    'minTtl'             => 1,
                     'maxTtl'             => 0,
                     'staticTtl'          => true,
                     'ttlPrecision'       => 1,

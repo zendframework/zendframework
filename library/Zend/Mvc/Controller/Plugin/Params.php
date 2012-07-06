@@ -41,8 +41,11 @@ class Params extends AbstractPlugin
      * @param mixed $default
      * @return mixed
      */
-    public function __invoke($param, $default = null)
+    public function __invoke($param = NULL, $default = null)
     {
+        if ($param === NULL) {
+            return $this;
+        }
         return $this->fromRoute($param, $default);
     }
 

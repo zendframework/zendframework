@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0"
-    xml:id="zend.view.helpers">
+    xml:id="zend.i18n.view.helpers">
     <title>I18n View Helpers</title>
 
     <para>
@@ -13,7 +13,7 @@
     	See the section on <link linkend="zend.view.helpers">view helpers</link> for more information.
     </para>
 
-    <section xml:id="zend.view.helpers.initial">
+    <section xml:id="zend.i18n.view.helpers.initial">
         <title>Included I18n Helpers</title>
 
         <para>

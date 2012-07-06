@@ -23,7 +23,6 @@ namespace Zend\Captcha;
 
 use DirectoryIterator;
 use Zend\Captcha\Exception;
-use Zend\Loader\Pluggable;
 use Zend\Stdlib\ErrorHandler;
 
 /**

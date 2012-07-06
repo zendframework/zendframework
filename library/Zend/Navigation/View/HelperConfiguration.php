@@ -23,6 +23,7 @@ namespace Zend\Navigation\View;
 
 use Zend\ServiceManager\ConfigurationInterface;
 use Zend\ServiceManager\ServiceManager;
+use Zend\View\HelperPluginManager;
 
 /**
  * Service manager configuration for navigation view helpers
@@ -48,9 +49,9 @@ class HelperConfiguration implements ConfigurationInterface
      */
     public function configureServiceManager(ServiceManager $serviceManager)
     {
-        $serviceManager->setFactory('navigation', function($sm) {
+        $serviceManager->setFactory('navigation', function(HelperPluginManager $pm) {
             $helper = new \Zend\View\Helper\Navigation;
-            $helper->setServiceLocator($sm);
+            $helper->setServiceLocator($pm->getServiceLocator());
             return $helper;
         });
     }

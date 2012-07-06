@@ -121,7 +121,7 @@ abstract class AbstractNavigationFactory implements FactoryInterface
     /**
      * @param array $pages
      * @param RouteMatch $routeMatch
-     * @param UrlHelper $urlHelper
+     * @param Router $router
      * @return mixed
      */
     protected function injectComponents(array $pages, RouteMatch $routeMatch = null, Router $router = null)

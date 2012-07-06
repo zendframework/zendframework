@@ -21,6 +21,7 @@
 
 namespace ZendTest\Form\View\Helper;
 
+use Zend\Form\Element;
 use Zend\Form\Element\MultiCheckbox as MultiCheckboxElement;
 use Zend\Form\View\Helper\FormMultiCheckbox as FormMultiCheckboxHelper;
 
@@ -220,5 +221,25 @@ class FormMultiCheckboxTest extends CommonTestCase
     {
         $element = $this->getElement();
         $this->assertSame($this->helper, $this->helper->__invoke());
+    }
+
+    public function testEnsureUseHiddenElementMethodExists()
+    {
+        $element = new Element();
+        $element->setName('codeType');
+        $element->setOptions(array('label' => 'Code Type'));
+        $element->setAttributes(array(
+            'type' => 'radio',
+            'options' => array(
+                'Markdown' => 'markdown',
+                'HTML'     => 'html',
+                'Wiki'     => 'wiki',
+            ),
+            'value' => array('markdown'),
+        ));
+
+        $markup = $this->helper->render($element);
+        $this->assertNotContains('type="hidden"', $markup);
+        // Lack of error also indicates this test passes
     }
 }

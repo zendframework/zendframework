@@ -1,87 +1,123 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Code
+ * @subpackage Annotation
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Code\Annotation;
 
-use Zend\Code\Exception;
+use Zend\EventManager\Event;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerInterface;
 
-class AnnotationManager
+/**
+ * Pluggable annotation manager
+ *
+ * Simply composes an EventManager. When createAnnotation() is called, it fires
+ * off an event of the same name, passing it the resolved annotation class, the
+ * annotation content, and the raw annotation string; the first listener to 
+ * return an object will halt execution of the event, and that object will be
+ * returned as the annotation.
+ *
+ * @category   Zend
+ * @package    Zend_Code
+ * @subpackage Annotation
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class AnnotationManager implements EventManagerAwareInterface
 {
+    const EVENT_CREATE_ANNOTATION = 'createAnnotation';
 
     /**
-     * @var string[]
+     * @var EventManagerInterface
      */
-    protected $annotationNames = array();
+    protected $events;
 
     /**
-     * @var Annotation[]
+     * Set the event manager instance
+     * 
+     * @param  EventManagerInterface $events 
+     * @return AnnotationManager
      */
-    protected $annotations = array();
-
-    /**
-     * Constructor
-     *
-     * @param array $annotations
-     */
-    public function __construct(array $annotations = array())
+    public function setEventManager(EventManagerInterface $events)
     {
-        if ($annotations) {
-            foreach ($annotations as $annotation) {
-                $this->registerAnnotation($annotation);
-            }
-        }
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_class($this),
+        ));
+        $this->events = $events;
+        return $this;
     }
 
     /**
-     * Register annotations
+     * Retrieve event manager
      *
-     * @param AnnotationInterface $annotation
-     * @throws \Zend\Code\Exception\InvalidArgumentException
+     * Lazy loads an instance if none registered.
+     * 
+     * @return EventManagerInterface
      */
-    public function registerAnnotation(AnnotationInterface $annotation)
+    public function getEventManager()
     {
-        $class = get_class($annotation);
-
-        if (in_array($class, $this->annotationNames)) {
-            throw new Exception\InvalidArgumentException('An annotation for this class ' . $class . ' already exists');
+        if (null === $this->events) {
+            $this->setEventManager(new EventManager());
         }
-
-        $this->annotations[]     = $annotation;
-        $this->annotationNames[] = $class;
+        return $this->events;
     }
 
     /**
-     * Checks if the manager has annotations for a class
-     *
-     * @param $class
-     * @return bool
+     * Attach a parser to listen to the createAnnotation event
+     * 
+     * @param  Parser\ParserInterface $parser 
+     * @return AnnotationManager
      */
-    public function hasAnnotation($class)
+    public function attach(Parser\ParserInterface $parser)
     {
-        // otherwise, only if its name exists as a key
-        return in_array($class, $this->annotationNames);
+        $this->getEventManager()
+             ->attach(self::EVENT_CREATE_ANNOTATION, array($parser, 'onCreateAnnotation'));
+
+        return $this;
     }
 
     /**
      * Create Annotation
      *
-     * @param string $class
-     * @param        $content
-     * @throws \Zend\Code\Exception\RuntimeException
-     * @return AnnotationInterface
+     * @param  array $annotationData
+     * @return false|\stdClass
      */
-    public function createAnnotation($class, $content = null)
+    public function createAnnotation(array $annotationData)
     {
-        if (!$this->hasAnnotation($class)) {
-            throw new Exception\RuntimeException('This annotation class is not supported by this annotation manager');
-        }
+        $event = new Event();
+        $event->setName(self::EVENT_CREATE_ANNOTATION);
+        $event->setTarget($this);
+        $event->setParams(array(
+            'class'   => $annotationData[0],
+            'content' => $annotationData[1],
+            'raw'     => $annotationData[2],
+        ));
 
-        $index      = array_search($class, $this->annotationNames);
-        $annotation = $this->annotations[$index];
+        $results = $this->getEventManager()
+                        ->trigger($event, function ($r) {
+                            return (is_object($r));
+                        });
 
-        $newAnnotation = clone $annotation;
-        if ($content) {
-            $newAnnotation->initialize($content);
-        }
-        return $newAnnotation;
+        $annotation = $results->last();
+        return (is_object($annotation) ? $annotation : false);
     }
 }

@@ -23,8 +23,7 @@
 namespace ZendTest\Session;
 
 use Zend\Session\SessionManager,
-    Zend\Session,
-    Zend\Registry;
+    Zend\Session;
 
 /**
  * @category   Zend
@@ -48,7 +47,6 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->forceAutoloader();
         $this->error   = false;
         $this->manager = new SessionManager();
-        Registry::_unsetInstance();
     }
 
     protected function forceAutoloader()

@@ -20,11 +20,11 @@
  
 namespace Zend\Feed\Reader\Entry;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Exception,
-    DOMElement,
-    DOMDocument,
-    DOMXPath;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Exception;
+use DOMElement;
+use DOMDocument;
+use DOMXPath;
 
 /**
 * @category Zend
@@ -91,8 +91,10 @@ abstract class AbstractEntry
         $this->_domDocument = $entry->ownerDocument;
         if ($type !== null) {
             $this->_data['type'] = $type;
+        } else if ($this->_domDocument !== null) {
+            $this->_data['type'] = Reader\Reader::detectType($this->_domDocument);
         } else {
-            $this->_data['type'] = Reader\Reader::detectType($feed);
+            $this->_data['type'] = Reader\Reader::TYPE_ANY;		
         }
         $this->_loadExtensions();
     }

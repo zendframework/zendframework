@@ -23,6 +23,7 @@ namespace Zend\Form\View\Helper\Captcha;
 
 use Zend\Captcha\Dumb as CaptchaAdapter;
 use Zend\Form\ElementInterface;
+use Zend\Form\Exception;
 
 /**
  * @category   Zend
@@ -35,23 +36,21 @@ class Dumb extends AbstractWord
 {
     /**
      * Render the captcha
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @return string
      */
     public function render(ElementInterface $element)
     {
-        $attributes = $element->getAttributes();
+        $captcha = $element->getCaptcha();
 
-        if (!isset($attributes['captcha']) 
-            || !$attributes['captcha'] instanceof CaptchaAdapter
-        ) {
+        if ($captcha === null || !$captcha instanceof CaptchaAdapter) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has a "captcha" attribute of type Zend\Captcha\Dumb; none found',
                 __METHOD__
             ));
         }
-        $captcha = $attributes['captcha'];
+
         $captcha->generate();
 
         $label = sprintf(

@@ -21,8 +21,8 @@
 
 namespace ZendTest\Log\Filter;
 
-use \Zend\Log\Logger,
-    \Zend\Log\Filter\Priority;
+use \Zend\Log\Logger;
+use \Zend\Log\Filter\Priority;
 
 /**
  * @category   Zend

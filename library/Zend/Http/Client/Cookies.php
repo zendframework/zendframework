@@ -31,7 +31,7 @@ use Zend\Stdlib\ParametersInterface,
  * be used along with Zend_Http_Client in order to manage cookies across HTTP requests and
  * responses.
  *
- * The class contains an array of Zend\Http\Header\Cookie objects. Cookies can be added 
+ * The class contains an array of Zend\Http\Header\Cookie objects. Cookies can be added
  * automatically from a request or manually. Then, the Cookies class can find and return the
  * cookies needed for a specific HTTP request.
  *
@@ -49,7 +49,7 @@ use Zend\Stdlib\ParametersInterface,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Cookies //implements ParametersInterface
+class Cookies
 {
     /**
      * Return cookie(s) as a Zend\Http\Header\Cookie object
@@ -96,7 +96,7 @@ class Cookies //implements ParametersInterface
     protected $_rawCookies = array();
 
     /**
-     * Construct 
+     * Construct
      *
      */
     public function __construct()
@@ -139,7 +139,7 @@ class Cookies //implements ParametersInterface
      */
     public function addCookiesFromResponse(Response $response, $ref_uri)
     {
-        $cookie_hdrs = $response->headers()->get('Set-Cookie');
+        $cookie_hdrs = $response->getHeaders()->get('Set-Cookie');
 
         if (is_array($cookie_hdrs)) {
             foreach ($cookie_hdrs as $cookie) {
@@ -375,7 +375,7 @@ class Cookies //implements ParametersInterface
     }
 
     /**
-     * Tells if the array of cookies is empty 
+     * Tells if the array of cookies is empty
      *
      * @return bool
      */

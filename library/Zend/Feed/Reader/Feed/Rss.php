@@ -20,11 +20,11 @@
 
 namespace Zend\Feed\Reader\Feed;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Exception,
-    Zend\Date,
-    DOMDocument;
+use DateTime;
+use DOMDocument;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Exception;
 
 /**
 * @category Zend
@@ -190,7 +190,7 @@ class Rss extends AbstractFeed
     /**
      * Get the feed modification date
      *
-     * @return Date\Date
+     * @return DateTime
      * @throws Exception\RuntimeException
      */
     public function getDateModified()
@@ -211,17 +211,16 @@ class Rss extends AbstractFeed
             if ($dateModified) {
                 $dateModifiedParsed = strtotime($dateModified);
                 if ($dateModifiedParsed) {
-                    $date = new Date\Date($dateModifiedParsed);
+                    $date = new DateTime('@' . $dateModifiedParsed);
                 } else {
-                    $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
-                    Date\Date::RFC_2822, Date\Date::DATES);
-                    $date = new Date\Date;
+                    $dateStandards = array(DateTime::RSS, DateTime::RFC822,
+                                           DateTime::RFC2822, null);
                     foreach ($dateStandards as $standard) {
                         try {
-                            $date->set($dateModified, $standard);
+                            $date = DateTime::createFromFormat($standard, $dateModified);
                             break;
-                        } catch (Date\Exception $e) {
-                            if ($standard == Date\Date::DATES) {
+                        } catch (\Exception $e) {
+                            if ($standard == null) {
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
@@ -255,7 +254,7 @@ class Rss extends AbstractFeed
     /**
      * Get the feed lastBuild date
      *
-     * @return Date\Date
+     * @return DateTime
      */
     public function getLastBuildDate()
     {
@@ -272,17 +271,16 @@ class Rss extends AbstractFeed
             if ($lastBuildDate) {
                 $lastBuildDateParsed = strtotime($lastBuildDate);
                 if ($lastBuildDateParsed) {
-                    $date = new Date\Date($lastBuildDateParsed);
+                    $date = new DateTime('@' . $lastBuildDateParsed);
                 } else {
-                    $dateStandards = array(Date\Date::RSS, Date\Date::RFC_822,
-                    Date\Date::RFC_2822, Date\Date::DATES);
-                    $date = new Date\Date;
+                    $dateStandards = array(DateTime::RSS, DateTime::RFC822,
+                                           DateTime::RFC2822, null);
                     foreach ($dateStandards as $standard) {
                         try {
-                            $date->set($lastBuildDate, $standard);
+                            $date = DateTime::createFromFormat($standard, $lastBuildDateParsed);
                             break;
-                        } catch (Date\Exception $e) {
-                            if ($standard == Date\Date::DATES) {
+                        } catch (\Exception $e) {
+                            if ($standard == null) {
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'

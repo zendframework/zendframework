@@ -20,12 +20,12 @@
 
 namespace Zend\Feed\Writer\Renderer\Feed;
 
-use DOMDocument,
-    DOMElement,
-    Zend\Date,
-    Zend\Feed\Writer,
-    Zend\Feed\Writer\Renderer,
-    Zend\Uri;
+use DateTime;
+use DOMDocument;
+use DOMElement;
+use Zend\Feed\Writer;
+use Zend\Feed\Writer\Renderer;
+use Zend\Uri;
 
 /**
 * @category Zend
@@ -133,6 +133,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
@@ -160,6 +161,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
@@ -196,7 +198,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $updated = $dom->createElement('pubDate');
         $root->appendChild($updated);
         $text = $dom->createTextNode(
-            $this->getDataContainer()->getDateModified()->get(Date\Date::RSS)
+            $this->getDataContainer()->getDateModified()->format(DateTime::RSS)
         );
         $updated->appendChild($text);
     }
@@ -235,6 +237,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
@@ -309,6 +312,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setImage(DOMDocument $dom, DOMElement $root)
     {
@@ -451,7 +455,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $lastBuildDate = $dom->createElement('lastBuildDate');
         $root->appendChild($lastBuildDate);
         $text = $dom->createTextNode(
-            $this->getDataContainer()->getLastBuildDate()->get(Date\Date::RSS)
+            $this->getDataContainer()->getLastBuildDate()->format(DateTime::RSS)
         );
         $lastBuildDate->appendChild($text);
     }

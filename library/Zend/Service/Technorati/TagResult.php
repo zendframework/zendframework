@@ -34,7 +34,7 @@ use DomElement;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TagResult extends Result
+class TagResult extends AbstractResult
 {
     /**
      * Technorati weblog object corresponding to queried keyword.
@@ -63,7 +63,7 @@ class TagResult extends Result
     /**
      * The datetime the entry was created.
      *
-     * @var     ZendDate
+     * @var     \DateTime
      * @access  protected
      */
     protected $created;
@@ -73,7 +73,7 @@ class TagResult extends Result
      * Called 'postupdate' in original XML response,
      * it has been renamed to provide more coherence.
      *
-     * @var     ZendDate
+     * @var     \DateTime
      * @access  protected
      */
     protected $updated;
@@ -143,7 +143,7 @@ class TagResult extends Result
     /**
      * Returns the datetime the entry was created.
      *
-     * @return  ZendDate
+     * @return  \DateTime
      */
     public function getCreated()
     {
@@ -153,7 +153,7 @@ class TagResult extends Result
     /**
      * Returns the datetime the entry was updated.
      *
-     * @return  ZendDate
+     * @return  \DateTime
      */
     public function getUpdated()
     {

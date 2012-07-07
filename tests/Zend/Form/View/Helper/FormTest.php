@@ -74,7 +74,7 @@ class FormTest extends CommonTestCase
 
         $markup = $this->helper->openTag($form);
 
-        $escape = $this->renderer->plugin('escape');
+        $escape = $this->renderer->plugin('escapehtml');
         foreach ($attributes as $attribute => $value) {
             $this->assertContains(sprintf('%s="%s"', $attribute, $escape($value)), $markup);
         }

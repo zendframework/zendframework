@@ -21,8 +21,10 @@
 
 namespace Zend\Service\Rackspace\Files;
 
-use Zend\Service\Rackspace\Files\Container,
-        Zend\Service\Rackspace\Files as RackspaceFiles;
+use Countable;
+use Iterator;
+use ArrayAccess;
+use Zend\Service\Rackspace\Files as RackspaceFiles;
 
 /**
  * List of servers retrived from the GoGrid web service
@@ -33,31 +35,35 @@ use Zend\Service\Rackspace\Files\Container,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ContainerList implements \Countable, \Iterator, \ArrayAccess
+class ContainerList implements
+    Countable,
+    Iterator,
+    ArrayAccess
 {
     /**
      * @var array Array of Zend\Service\GoGrid\Object
      */
     protected $objects = array();
+
     /**
      * @var int Iterator key
      */
     protected $iteratorKey = 0;
+
     /**
      * @var RackspaceFiles
      */
     protected $service;
+
     /**
      * Constructor
      *
+     * @param RackspaceFiles $service
      * @param  array $list
-     * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
-    public function __construct(RackspaceFiles $service,$list = array())
+    public function __construct(RackspaceFiles $service, array $list = array())
     {
-        if (!($service instanceof RackspaceFiles) || !is_array($list)) {
-            throw new Exception\InvalidArgumentException("You must pass a RackspaceFiles object and an array");
-        }
         $this->service= $service;
         $this->_constructFromArray($list);
     }
@@ -76,8 +82,8 @@ class ContainerList implements \Countable, \Iterator, \ArrayAccess
     /**
      * Add an object
      *
-     * @param  Zend\Service\Rackspace\Files\Container $obj
-     * @return Zend\Service\Rackspace\Files\ContainerList
+     * @param  Container $obj
+     * @return ContainerList
      */
     protected function _addObject (Container $obj)
     {
@@ -100,7 +106,7 @@ class ContainerList implements \Countable, \Iterator, \ArrayAccess
      *
      * Implement Iterator::current()
      *
-     * @return Zend\Service\Rackspace\Files\Container
+     * @return Container
      */
     public function current()
     {
@@ -173,15 +179,15 @@ class ContainerList implements \Countable, \Iterator, \ArrayAccess
      * Implement ArrayAccess::offsetGet()
      *
      * @param   int     $offset
-     * @throws  OutOfBoundsException
-     * @return  Zend\Service\Rackspace\Files\Container
+     * @throws  Exception\OutOfBoundsException
+     * @return  Container
      */
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset)) {
             return $this->objects[$offset];
         } else {
-            throw new  Exception\OutOfBoundsException('Illegal index');
+            throw new Exception\OutOfBoundsException('Illegal index');
         }
     }
 
@@ -192,11 +198,11 @@ class ContainerList implements \Countable, \Iterator, \ArrayAccess
      *
      * @param   int     $offset
      * @param   string  $value
-     * @throws  Zend\Service\Rackspace\Exception
+     * @throws  Exception\RuntimeException
      */
     public function offsetSet($offset, $value)
     {
-        throw new Exception('You are trying to set read-only property');
+        throw new Exception\RuntimeException('You are trying to set read-only property');
     }
 
     /**
@@ -205,10 +211,10 @@ class ContainerList implements \Countable, \Iterator, \ArrayAccess
      * Implement ArrayAccess::offsetUnset()
      *
      * @param   int     $offset
-     * @throws  Zend\Service\Rackspace\Exception
+     * @throws  Exception\RuntimeException
      */
     public function offsetUnset($offset)
     {
-        throw new Exception('You are trying to unset read-only property');
+        throw new Exception\RuntimeException('You are trying to unset read-only property');
     }
 }

@@ -5,9 +5,9 @@ namespace Zend\Loader;
 // Grab SplAutoloader interface
 require_once __DIR__ . '/SplAutoloader.php';
 
-use GlobIterator,
-    SplFileInfo,
-    Traversable;
+use GlobIterator;
+use SplFileInfo;
+use Traversable;
 
 class ModuleAutoloader implements SplAutoloader
 {

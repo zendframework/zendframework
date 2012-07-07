@@ -20,8 +20,8 @@
 
 namespace Zend\Validator;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -62,14 +62,14 @@ class CreditCard extends AbstractValidator
      *
      * @var array
      */
-    protected $_messageTemplates = array(
-        self::CHECKSUM       => "'%value%' seems to contain an invalid checksum",
-        self::CONTENT        => "'%value%' must contain only digits",
+    protected $messageTemplates = array(
+        self::CHECKSUM       => "The input seems to contain an invalid checksum",
+        self::CONTENT        => "The input must contain only digits",
         self::INVALID        => "Invalid type given. String expected",
-        self::LENGTH         => "'%value%' contains an invalid amount of digits",
-        self::PREFIX         => "'%value%' is not from an allowed institute",
-        self::SERVICE        => "'%value%' seems to be an invalid creditcard number",
-        self::SERVICEFAILURE => "An exception has been raised while validating '%value%'",
+        self::LENGTH         => "The input contains an invalid amount of digits",
+        self::PREFIX         => "The input is not from an allowed institute",
+        self::SERVICE        => "The input seems to be an invalid creditcard number",
+        self::SERVICEFAILURE => "An exception has been raised while validating the input.",
     );
 
     /**
@@ -150,13 +150,13 @@ class CreditCard extends AbstractValidator
     /**
      * Constructor
      *
-     * @param string|array|Traversable $type OPTIONAL Type of CCI to allow
+     * @param string|array|Traversable $options OPTIONAL Type of CCI to allow
      */
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp['type'] = array_shift($options);
             if (!empty($options)) {

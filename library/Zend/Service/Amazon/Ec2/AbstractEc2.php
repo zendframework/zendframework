@@ -20,9 +20,9 @@
  */
 
 namespace Zend\Service\Amazon\Ec2;
-use Zend\Service\Amazon,
-    Zend\Service\Amazon\Ec2\Exception,
-    Zend\Crypt\Hmac;
+use Zend\Service\Amazon;
+use Zend\Service\Amazon\Ec2\Exception;
+use Zend\Crypt\Hmac;
 
 /**
  * Provides the basic functionality to send a request to the Amazon Ec2 Query API
@@ -232,7 +232,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
 
         $data .= implode('&', $arrData);
 
-        $hmac = Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Hmac::BINARY);
+        $hmac = Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Hmac::OUTPUT_BINARY);
 
         return base64_encode($hmac);
     }

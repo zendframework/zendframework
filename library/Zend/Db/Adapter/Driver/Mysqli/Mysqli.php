@@ -48,14 +48,16 @@ class Mysqli implements DriverInterface
      * @param null|Statement $statementPrototype
      * @param null|Result $resultPrototype
      */
-    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, $options = null)
+    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, $options = array())
     {
         if (!$connection instanceof Connection) {
             $connection = new Connection($connection);
         }
 
+        $options = array_intersect_key(array_merge($this->options, $options), $this->options);
+
         $this->registerConnection($connection);
-        $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
+        $this->registerStatementPrototype(($statementPrototype) ?: new Statement($options['buffer_results']));
         $this->registerResultPrototype(($resultPrototype) ?: new Result());
     }
 

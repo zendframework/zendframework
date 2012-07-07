@@ -222,13 +222,13 @@ class HmacTest extends \PHPUnit_Framework_TestCase
     public function testWrongHashAlgorithm()
     {
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
-                                    'Hash algorithm provided is not supported on this PHP installation');
+                                    'Hash algorithm is not supported on this PHP installation');
         $hash = HMAC::compute('key', 'wrong', 'test');
     }
 
     public function testBinaryOutput()
     {
-        $data = HMAC::compute('key', 'sha256', 'test', HMAC::BINARY);
+        $data = HMAC::compute('key', 'sha256', 'test', HMAC::OUTPUT_BINARY);
         $this->assertEquals('Aq+1YwSQLGVvy3N83QPeYgW7bUAdooEu/ZstNqCK8Vk=', base64_encode($data));
     }
 }

@@ -31,7 +31,6 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Mvc\Application,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\View\DefaultRenderingStrategy,
-    Zend\Registry,
     Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
     Zend\View\Model\ModelInterface as Model,
     Zend\View\Renderer\FeedRenderer,
@@ -76,7 +75,7 @@ class DefaultRenderingStrategyTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->strategy);
-        $listeners = $events->getListeners('render');
+        $listeners = $events->getListeners(MvcEvent::EVENT_RENDER);
 
         $expectedCallback = array($this->strategy, 'render');
         $expectedPriority = -10000;
@@ -97,10 +96,10 @@ class DefaultRenderingStrategyTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->strategy);
-        $this->assertEquals(1, count($events->getListeners('render')));
+        $this->assertEquals(1, count($events->getListeners(MvcEvent::EVENT_RENDER)));
 
         $events->detachAggregate($this->strategy);
-        $this->assertEquals(0, count($events->getListeners('render')));
+        $this->assertEquals(0, count($events->getListeners(MvcEvent::EVENT_RENDER)));
     }
 
     public function testWillRenderAlternateStrategyWhenSelected()

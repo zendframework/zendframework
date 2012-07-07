@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<entry xmlns='http://www.w3.org/2005/Atom' 
-xmlns:media='http://search.yahoo.com/mrss/' 
-xmlns:gd='http://schemas.google.com/g/2005' 
-xmlns:yt='http://gdata.youtube.com/schemas/2007' 
-xmlns:gml='http://www.opengis.net/gml' 
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:media='http://search.yahoo.com/mrss/'
+xmlns:gd='http://schemas.google.com/g/2005'
+xmlns:yt='http://gdata.youtube.com/schemas/2007'
+xmlns:gml='http://www.opengis.net/gml'
 xmlns:georss='http://www.georss.org/georss'
 xmlns:app='http://purl.org/atom/app#'>
   <id>http://gdata.youtube.com/feeds/videos/UMFI1hdm96E</id>
@@ -98,7 +98,7 @@ xmlns:app='http://purl.org/atom/app#'>
     <media:category label='Music'
     scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>
     Music</media:category>
-    <media:category 
+    <media:category
     scheme='http://gdata.youtube.com/schemas/2007/developertags.cat'>
     DeveloperTag1</media:category>
     <media:content url='http://www.youtube.com/v/UMFI1hdm96E'

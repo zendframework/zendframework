@@ -21,9 +21,9 @@
 
 namespace Zend\Log\Writer;
 
-use Zend\Log\Formatter,
-    Zend\Log\Exception,
-    Zend\Db\Adapter\Adapter;
+use Zend\Log\Formatter;
+use Zend\Log\Exception;
+use Zend\Db\Adapter\Adapter;
 
 /**
  * @category   Zend
@@ -40,7 +40,7 @@ class Db extends AbstractWriter
      * @var Adapter
      */
     protected $db;
-    
+
     /**
      * Table name
      * 
@@ -61,7 +61,7 @@ class Db extends AbstractWriter
      * @var string 
      */
     protected $separator = '_';
-    
+
     /**
      * Constructor
      *
@@ -71,6 +71,8 @@ class Db extends AbstractWriter
      * @param string $tableName
      * @param array $columnMap
      * @param string $separator
+     * @return Db
+     * @throw Exception\InvalidArgumentException
      */
     public function __construct(Adapter $db, $tableName, array $columnMap = null, $separator = null)
     {
@@ -133,6 +135,7 @@ class Db extends AbstractWriter
         $statement->execute($dataToInsert);
         
     }
+
     /**
      * Prepare the INSERT SQL statement
      * 
@@ -149,6 +152,7 @@ class Db extends AbstractWriter
                
         return $sql;
     }
+
     /**
      * Map event into column using the $columnMap array
      * 
@@ -161,6 +165,7 @@ class Db extends AbstractWriter
         if (empty($event)) {
             return array();
         }
+
         $data = array();
         foreach ($event as $name => $value) {
             if (is_array($value)) {
@@ -175,6 +180,7 @@ class Db extends AbstractWriter
         }
         return $data;
     }
+
     /**
      * Transform event into column for the db table
      * 
@@ -186,6 +192,7 @@ class Db extends AbstractWriter
         if (empty($event)) {
             return array();
         }
+
         $data = array();
         foreach ($event as $name => $value) {
             if (is_array($value)) {

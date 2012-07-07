@@ -22,8 +22,7 @@
 namespace ZendTest\Form\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Form\View\HelperLoader;
-use Zend\Registry;
+use Zend\Form\View\HelperConfiguration;
 use Zend\View\Helper\Doctype;
 use Zend\View\Renderer\PhpRenderer;
 
@@ -43,16 +42,13 @@ abstract class CommonTestCase extends TestCase
 
     public function setUp()
     {
-        $regKey = 'Zend_View_Helper_Doctype';
-        if (Registry::isRegistered($regKey)) {
-            $registry = Registry::getInstance();
-            unset($registry[$regKey]);
-        }
+        Doctype::unsetDoctypeRegistry();
 
         $this->renderer = new PhpRenderer;
-        $broker = $this->renderer->getBroker();
-        $loader = $broker->getClassLoader();
-        $loader->registerPlugins(new HelperLoader());
+        $helpers = $this->renderer->getHelperPluginManager();
+        $config  = new HelperConfiguration();
+        $config->configureServiceManager($helpers);
+
         $this->helper->setView($this->renderer);
     }
 
@@ -69,7 +65,7 @@ abstract class CommonTestCase extends TestCase
 
     public function testInjectingEncodingProxiesToEscapeHelper()
     {
-        $escape = $this->renderer->plugin('escape');
+        $escape = $this->renderer->plugin('escapehtml');
         $this->helper->setEncoding('iso-8859-1');
         $this->assertEquals('iso-8859-1', $escape->getEncoding());
     }

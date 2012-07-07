@@ -21,9 +21,9 @@
 
 namespace Zend\Service\AgileZen\Resources;
 
-use Zend\Service\AgileZen\AgileZen,
-    Zend\Service\AgileZen\Entity,
-    Zend\Service\AgileZen\Container;
+use Zend\Service\AgileZen\AgileZen;
+use Zend\Service\AgileZen\AbstractEntity;
+use Zend\Service\AgileZen\Container;
 
 /**
  * @category   Zend
@@ -32,7 +32,7 @@ use Zend\Service\AgileZen\AgileZen,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Role extends Entity
+class Role extends AbstractEntity
 {
     /**
      * Name

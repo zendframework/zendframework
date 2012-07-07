@@ -29,7 +29,7 @@ use Zend\Crypt\Hmac;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class V1 extends Authentication
+class V1 extends AbstractAuthentication
 {
     /**
      * Signature Version
@@ -92,7 +92,7 @@ class V1 extends Authentication
             $data .= $key . $value;
         }
 
-        $hmac = Hmac::compute($this->_secretKey, 'SHA1', $data, Hmac::BINARY);
+        $hmac = Hmac::compute($this->_secretKey, 'SHA1', $data, Hmac::OUTPUT_BINARY);
 
         $paramaters['Signature'] = base64_encode($hmac);
         

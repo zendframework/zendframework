@@ -199,7 +199,7 @@ class MenuTest extends AbstractTest
     public function testTranslationUsingZendTranslateAdapter()
     {
         $translator = $this->_getTranslator();
-        $this->_helper->setTranslator($translator->getAdapter());
+        $this->_helper->setTranslator($translator);
 
         $expected = $this->_getExpected('menu/translated.html');
         $this->assertEquals($expected, $this->_helper->render());
@@ -495,5 +495,15 @@ class MenuTest extends AbstractTest
         $actual = $this->_helper->renderMenu(null, $options);
 
         $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * Returns the contens of the expected $file, normalizes newlines
+     * @param  string $file
+     * @return string
+     */
+    protected function _getExpected($file)
+    {
+        return str_replace("\n", PHP_EOL, parent::_getExpected($file));
     }
 }

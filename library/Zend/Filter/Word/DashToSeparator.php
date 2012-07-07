@@ -36,7 +36,7 @@ class DashToSeparator extends AbstractSeparator
      */
     public function filter($value)
     {
-        $this->setMatchPattern('#-#');
+        $this->setPattern('#-#');
         $this->setReplacement($this->_separator);
         return parent::filter($value);
     }

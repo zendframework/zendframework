@@ -90,7 +90,7 @@ class CreateViewModelListenerTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->listener);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
 
         $expectedArrayCallback = array($this->listener, 'createViewModelFromArray');
         $expectedNullCallback  = array($this->listener, 'createViewModelFromNull');
@@ -118,10 +118,10 @@ class CreateViewModelListenerTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->listener);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(2, count($listeners));
         $events->detachAggregate($this->listener);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(0, count($listeners));
     }
 

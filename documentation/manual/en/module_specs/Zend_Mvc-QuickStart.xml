@@ -19,6 +19,29 @@
       and module repositories. This can be done in the following ways.
     </para>
 
+    <section xml:id="zend.mvc.quick-start.install.using-composer">
+      <title>Using Composer</title>
+
+      <para>
+        Simply clone the <classname>ZendSkeletonApplication</classname>
+        repository:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+prompt> git clone git://github.com/zendframework/ZendSkeletonApplication.git my-application
+]]></programlisting>
+
+      <para>
+        Then run <link xlink:href="http://getcomposer.org/">Composer</link>'s <varname>install</varname> command to install the ZF library and any other configured dependencies:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+prompt> php ./composer.phar install
+]]></programlisting>
+
+    </section>
+
+
     <section xml:id="zend.mvc.quick-start.install.using-git">
       <title>Using Git</title>
 
@@ -183,7 +206,10 @@ return array(
     <programlisting language="php"><![CDATA[
 namespace <your module name here>;
 
-class Module implements AutoloaderProvider
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
+
+class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 {
     public function getAutoloaderConfig()
     {
@@ -231,7 +257,7 @@ class Module implements AutoloaderProvider
     <itemizedlist>
       <listitem>
         <para>
-          <classname>Zend\Mvc\Controller\ActionController</classname> allows
+          <classname>Zend\Mvc\Controller\AbstractActionController</classname> allows
           routes to match an "action". When matched, a method named
           after the action will be called by the controller. As an example,
           if you had a route that returned "foo" for the
@@ -242,7 +268,7 @@ class Module implements AutoloaderProvider
 
       <listitem>
         <para>
-          <classname>Zend\Mvc\Controller\RestfulController</classname>
+          <classname>Zend\Mvc\Controller\AbstractRestfulController</classname>
           introspects the Request to determine what HTTP method was used, and
           calls a method based on that accordingly.
         </para>
@@ -297,15 +323,14 @@ class Module implements AutoloaderProvider
 <?php
 namespace <module name>\Controller;
 
-use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class HelloController extends ActionController
+class HelloController extends AbstractActionController
 {
     public function worldAction()
     {
-        $request = $this->getRequest();
-        $message = $request->query()->get('message', 'foo');
+        $message = $this->params()->fromQuery('message', 'foo');
         return new ViewModel(array('message' => $message));
     }
 }
@@ -331,13 +356,13 @@ class HelloController extends ActionController
       <listitem>
         <para>
           We're pulling a message from the query parameters (yes, this is a
-          superbly bad idea in production!).
+          superbly bad idea in production!  Always sanitize your inputs!).
         </para>
       </listitem>
 
       <listitem>
         <para>
-          We're returning an array of values that will get processed later.
+          We're returning a ViewModel with an array of values that will get processed later.
         </para>
       </listitem>
     </itemizedlist>
@@ -371,7 +396,7 @@ class HelloController extends ActionController
     <programlisting language="php"><![CDATA[
 <h1>Greetings!</h1>
 
-<p>You said "<?php echo $this->escape($message) ?>".</p>
+<p>You said "<?php echo $this->escapeHtml($message) ?>".</p>
 ]]></programlisting>
 
     <para>
@@ -380,11 +405,12 @@ class HelloController extends ActionController
 
     <note>
       <para>
-        What is the method <methodname>escape()</methodname>? It's actually a
+        What is the method <methodname>escapeHtml()</methodname>? It's actually a
         <link linkend="zend.view.helpers">view helper</link>, and it's designed
-        to help mitigate from <acronym>XSS</acronym> attacks. Never trust user
+        to help mitigate <acronym>XSS</acronym> attacks. Never trust user
         input; if you are at all uncertain about the source of a given variable
-        in your view script, escape it.
+        in your view script, escape it using one of the <link linkend="zend.view.helpers">provided escape view helper</link> depending
+        on the type of data you have.
       </para>
     </note>
   </section>
@@ -401,8 +427,8 @@ class HelloController extends ActionController
       <para>
         <classname>ZendSkeletonApplication</classname> ships with a "default
         route" that will likely get you to this action. That route
-        basically expects "/{controller}/{action}", which allows
-        you to specify this: "/zend-user-hello/world". We're
+        basically expects "/{module}/{controller}/{action}", which allows
+        you to specify this: "/zend-user/hello/world". We're
         going to create a route here mainly for illustration purposes, as
         creating explicit routes is a recommended practice.
         The application will look for a 
@@ -410,6 +436,50 @@ class HelloController extends ActionController
         routing. The default generated router is a 
         <classname>Zend\Mvc\Router\Http\TreeRouteStack</classname>.
       </para>
+
+      <para>
+        To use the "default route" functionality, you will need to add a 
+        the following route definition to your module.  Replace 
+      </para>
+
+      <programlisting language="php"><![CDATA[
+return array(
+    '<module-name>' => array(
+        'type'    => 'Literal',
+        'options' => array(
+            'route'    => '/<module-name>',
+            'defaults' => array(
+                '__NAMESPACE__' => '<module-namespace>\Controller',
+                'controller'    => '<module-name>-Index',
+                'action'        => 'index',
+            ),
+        ),
+        'may_terminate' => true,
+        'child_routes' => array(
+            'default' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/[:controller[/:action]]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
+                    'defaults' => array(
+                    ),
+                ),
+            ),
+        ),
+    ),
+    'controller' => array(
+        'classes' => array(
+            '<module-name>-Index' => '<module-namespace>\Controller\IndexController',
+            // Do similar for each other controller in your module
+        ),
+    ),
+    // ... other configuration ...
+);
+]]></programlisting>
+
     </note>
 
     <para>
@@ -504,15 +574,9 @@ return array(
     <para>
       Now we can test things out! Create a new vhost pointing its
       document root to the <filename>public</filename> directory of your
-      application, and fire it up in a browser. You should see a simple
-      page with these details:
+      application, and fire it up in a browser. You should see the 
+      default homepage template of ZendSkeletonApplication.
     </para>
-
-    <programlisting language="php"><![CDATA[
-Module:     Application
-Controller: Index
-Action:     index
-]]></programlisting>
 
     <para>
       Now alter the location in your URL to append the path

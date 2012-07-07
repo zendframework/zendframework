@@ -36,11 +36,11 @@ interface StreamInterface
 {
     /**
      * Set output stream
-     * 
+     *
      * This function sets output stream where the result will be stored.
-     * 
+     *
      * @param resource $stream Stream to write the output to
-     * 
+     *
      */
     function setOutputStream($stream);
 }

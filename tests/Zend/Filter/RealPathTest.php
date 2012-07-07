@@ -95,10 +95,6 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
         $this->_filter->setExists(false);
         $this->assertFalse($this->_filter->getExists());
 
-        $this->_filter->setExists(true);
-        $this->_filter->setExists(array('exists' => false));
-        $this->assertFalse($this->_filter->getExists());
-
         $this->_filter->setExists(array('unknown'));
         $this->assertTrue($this->_filter->getExists());
     }

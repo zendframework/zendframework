@@ -20,14 +20,14 @@
 
 namespace Zend\Feed\Reader\Extension\Atom;
 
-use DOMDocument,
-    DOMElement,
-    stdClass,
-    Zend\Date,
-    Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Extension,
-    Zend\Uri;
+use DateTime;
+use DOMDocument;
+use DOMElement;
+use stdClass;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Extension;
+use Zend\Uri;
 
 /**
 * @category Zend
@@ -187,8 +187,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($dateCreated) {
-            $date = new Date\Date;
-            $date->set($dateCreated, Date\Date::ISO_8601);
+            $date = DateTime::createFromFormat(DateTime::ISO8601, $dateCreated);
         }
 
         $this->_data['datecreated'] = $date;
@@ -216,8 +215,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($dateModified) {
-            $date = new Date\Date;
-            $date->set($dateModified, Date\Date::ISO_8601);
+            $date = DateTime::createFromFormat(DateTime::ISO8601, $dateModified);
         }
 
         $this->_data['datemodified'] = $date;
@@ -566,7 +564,7 @@ class Entry extends Extension\AbstractEntry
      */
     protected function _absolutiseUri($link)
     {
-        if (!Uri\UriFactory::factory($link)->isValid()) {
+        if (!Uri\UriFactory::factory($link)->isAbsolute()) {
             if ($this->getBaseUrl() !== null) {
                 $link = $this->getBaseUrl() . $link;
                 if (!Uri\UriFactory::factory($link)->isValid()) {

@@ -20,11 +20,10 @@
 
 namespace Zend\Feed\Reader\Feed\Atom;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Feed,
-    Zend\Date,
-    DOMElement,
-    DOMXPath;
+use DOMElement;
+use DOMXPath;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Feed;
 
 /**
 * @category Zend

@@ -41,9 +41,10 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Memcached
-    extends AbstractAdapter
-    implements FlushableInterface, AvailableSpaceCapableInterface, TotalSpaceCapableInterface
+class Memcached extends AbstractAdapter implements
+    FlushableInterface,
+    AvailableSpaceCapableInterface,
+    TotalSpaceCapableInterface
 {
     /**
      * Major version of ext/memcached
@@ -106,7 +107,7 @@ class Memcached
         // get notified on change options
         $memc   = $this->memcached;
         $memcMV = static::$extMemcachedMajorVersion;
-        $this->events()->attach('option', function ($event) use ($memc, $memcMV) {
+        $this->getEventManager()->attach('option', function ($event) use ($memc, $memcMV) {
             $params = $event->getParams();
 
             if (isset($params['lib_options'])) {
@@ -569,6 +570,7 @@ class Memcached
                         'resource' => false,
                     ),
                     'supportedMetadata'  => array(),
+                    'minTtl'             => 1,
                     'maxTtl'             => 0,
                     'staticTtl'          => true,
                     'ttlPrecision'       => 1,

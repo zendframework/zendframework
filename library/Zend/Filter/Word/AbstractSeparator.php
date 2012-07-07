@@ -20,6 +20,7 @@
 
 namespace Zend\Filter\Word;
 
+use Zend\Filter\Exception;
 use Zend\Filter\PregReplace as PregReplaceFilter;
 
 /**
@@ -37,10 +38,16 @@ abstract class AbstractSeparator extends PregReplaceFilter
      * Constructor
      *
      * @param  string $separator Space by default
-     * @return void
      */
     public function __construct($separator = ' ')
     {
+        if (is_array($separator)) {
+            $temp = ' ';
+            if (isset($separator['separator']) && is_string($separator['separator'])) {
+                $temp = $separator['separator'];
+            }
+            $separator = $temp;
+        }
         $this->setSeparator($separator);
     }
 
@@ -48,12 +55,13 @@ abstract class AbstractSeparator extends PregReplaceFilter
      * Sets a new seperator
      *
      * @param  string  $separator  Seperator
-     * @return $this
+     * @return AbstractSeparator
+     * @throws Exception\InvalidArgumentException
      */
     public function setSeparator($separator)
     {
-        if ($separator == null) {
-            throw new \Zend\Filter\Exception\InvalidArgumentException('"' . $separator . '" is not a valid separator.');
+        if (!is_string($separator)) {
+            throw new Exception\InvalidArgumentException('"' . $separator . '" is not a valid separator.');
         }
         $this->_separator = $separator;
         return $this;

@@ -21,8 +21,6 @@
 
 namespace Zend\Service\Twitter\Exception;
 
-use Zend\Service\Twitter\Exception;
-
 /**
  * @category   Zend
  * @package    Zend_Service
@@ -30,5 +28,6 @@ use Zend\Service\Twitter\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OutOfRangeException extends \OutOfRangeException implements Exception
-{}
+class OutOfRangeException extends \OutOfRangeException implements ExceptionInterface
+{
+}

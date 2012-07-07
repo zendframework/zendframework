@@ -20,9 +20,9 @@
 
 namespace Zend\Feed\Writer;
 
-use Zend\Uri,
-    Zend\Date,
-    Zend\Validator;
+use DateTime;
+use Zend\Uri;
+use Zend\Validator;
 
 /**
  * @category Zend
@@ -131,64 +131,58 @@ class AbstractFeed
     /**
      * Set the feed creation date
      *
-     * @param null|integer|Date\Date
+     * @param null|integer|DateTime
      * @throws Exception\InvalidArgumentException
      */
     public function setDateCreated($date = null)
     {
-        $zdate = null;
         if ($date === null) {
-            $zdate = new Date\Date;
-        } elseif (ctype_digit((string)$date)) {
-            $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
-        } elseif ($date instanceof Date\Date) {
-            $zdate = $date;
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid Date\Date object or UNIX Timestamp passed as parameter');
+            $date = new DateTime();
+        } elseif (is_int($date)) {
+            $date = new DateTime('@' . $date);
+        } elseif (!$date instanceof DateTime) {
+            throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
+                                                         . ' passed as parameter');
         }
-        $this->_data['dateCreated'] = $zdate;
+        $this->_data['dateCreated'] = $date;
     }
 
     /**
      * Set the feed modification date
      *
-     * @param null|integer|Date\Date
+     * @param null|integer|DateTime
      * @throws Exception\InvalidArgumentException
      */
     public function setDateModified($date = null)
     {
-        $zdate = null;
         if ($date === null) {
-            $zdate = new Date\Date;
-        } elseif (ctype_digit((string)$date)) {
-            $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
-        } elseif ($date instanceof Date\Date) {
-            $zdate = $date;
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid Date\Date object or UNIX Timestamp passed as parameter');
+            $date = new DateTime();
+        } elseif (is_int($date)) {
+            $date = new DateTime('@' . $date);
+        } elseif (!$date instanceof DateTime) {
+            throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
+                                                         . ' passed as parameter');
         }
-        $this->_data['dateModified'] = $zdate;
+        $this->_data['dateModified'] = $date;
     }
 
     /**
      * Set the feed last-build date. Ignored for Atom 1.0.
      *
-     * @param null|integer|Date\Date
+     * @param null|integer|DateTime
      * @throws Exception\InvalidArgumentException
      */
     public function setLastBuildDate($date = null)
     {
-        $zdate = null;
         if ($date === null) {
-            $zdate = new Date\Date;
-        } elseif (ctype_digit((string)$date)) {
-            $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
-        } elseif ($date instanceof Date\Date) {
-            $zdate = $date;
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid Date\Date object or UNIX Timestamp passed as parameter');
+            $date = new DateTime();
+        } elseif (is_int($date)) {
+            $date = new DateTime('@' . $date);
+        } elseif (!$date instanceof DateTime) {
+            throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
+                                                         . ' passed as parameter');
         }
-        $this->_data['lastBuildDate'] = $zdate;
+        $this->_data['lastBuildDate'] = $date;
     }
 
     /**

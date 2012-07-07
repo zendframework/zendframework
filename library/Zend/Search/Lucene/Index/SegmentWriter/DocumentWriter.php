@@ -26,7 +26,7 @@ use Zend\Search\Lucene\Analysis\Analyzer;
 use Zend\Search\Lucene\Document;
 use Zend\Search\Lucene\Exception as LuceneException;
 use Zend\Search\Lucene\Index;
-use Zend\Search\Lucene\Search\Similarity;
+use Zend\Search\Lucene\Search\Similarity\AbstractSimilarity;
 use Zend\Search\Lucene\Storage\Directory;
 
 /**
@@ -79,7 +79,7 @@ class DocumentWriter extends AbstractSegmentWriter
     {
         $storedFields = array();
         $docNorms     = array();
-        $similarity   = Similarity::getDefault();
+        $similarity   = AbstractSimilarity::getDefault();
 
         foreach ($document->getFieldNames() as $fieldName) {
             $field = $document->getField($fieldName);

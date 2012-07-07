@@ -21,6 +21,8 @@
 
 namespace Zend\Service\Amazon\Ec2\Exception;
 
+use Zend\Service\Amazon\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Service_Amazon
@@ -28,8 +30,6 @@ namespace Zend\Service\Amazon\Ec2\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements \Zend\Service\Amazon\Ec2\Exception
-{}
-
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
+{
+}

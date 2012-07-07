@@ -21,8 +21,8 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\HtmlEntities as HtmlEntitiesFilter,
-    Zend\Filter\Exception;
+use Zend\Filter\HtmlEntities as HtmlEntitiesFilter;
+use Zend\Filter\Exception;
 
 /**
  * @category   Zend

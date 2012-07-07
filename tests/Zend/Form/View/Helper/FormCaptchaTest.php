@@ -23,7 +23,7 @@ namespace ZendTest\Form\View\Helper;
 
 use DirectoryIterator;
 use Zend\Captcha;
-use Zend\Form\Element;
+use Zend\Form\Element\Captcha as CaptchaElement;
 use Zend\Form\View\Helper\FormCaptcha as FormCaptchaHelper;
 use Zend\View\Renderer\PhpRenderer;
 
@@ -81,11 +81,11 @@ class FormCaptchaTest extends CommonTestCase
 
     public function getElement()
     {
-        $element = new Element('foo');
+        $element = new CaptchaElement('foo');
         return $element;
     }
 
-    public function testRaisesExceptionIfElementHasNoCaptchaAttribute()
+    public function testRaisesExceptionIfElementHasNoCaptcha()
     {
         $element = $this->getElement();
         $this->setExpectedException('Zend\Form\Exception\ExceptionInterface', 'captcha');
@@ -98,7 +98,7 @@ class FormCaptchaTest extends CommonTestCase
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));
         $element = $this->getElement();
-        $element->setAttribute('captcha', $captcha);
+        $element->setCaptcha($captcha);
         $markup = $this->helper->render($element);
         $this->assertContains($captcha->getLabel(), $markup);
     }
@@ -109,7 +109,7 @@ class FormCaptchaTest extends CommonTestCase
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));
         $element = $this->getElement();
-        $element->setAttribute('captcha', $captcha);
+        $element->setCaptcha($captcha);
         $markup = $this->helper->render($element);
         $this->assertContains('<pre>' . $captcha->getFiglet()->render($captcha->getWord()) . '</pre>', $markup);
     }
@@ -138,7 +138,7 @@ class FormCaptchaTest extends CommonTestCase
             'font'         => __DIR__. '/../../../Pdf/_fonts/Vera.ttf',
         ));
         $element = $this->getElement();
-        $element->setAttribute('captcha', $captcha);
+        $element->setCaptcha($captcha);
         $markup = $this->helper->render($element);
         $this->assertContains('<img ', $markup);
         $this->assertContains($captcha->getImgUrl(), $markup);
@@ -155,7 +155,7 @@ class FormCaptchaTest extends CommonTestCase
         $service->setPrivateKey($this->privateKey);
 
         $element = $this->getElement();
-        $element->setAttribute('captcha', $captcha);
+        $element->setCaptcha($captcha);
         $markup = $this->helper->render($element);
         $this->assertContains('foo-challenge', $markup);
         $this->assertContains('foo-response', $markup);

@@ -21,8 +21,8 @@
 
 namespace ZendTest\Service\Rackspace\Servers;
 
-use Zend\Service\Rackspace\Servers,
-    Zend\Http\Client\Adapter\Test as HttpTest;
+use Zend\Service\Rackspace\Servers;
+use Zend\Http\Client\Adapter\Test as HttpTest;
 
 
 /**

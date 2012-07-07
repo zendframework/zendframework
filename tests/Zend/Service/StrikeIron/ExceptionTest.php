@@ -44,6 +44,6 @@ class ExceptionTest extends \PHPUnit_Framework_TestCase
     public function testInheritsFromZendException()
     {
         $exception = new \Zend\Service\StrikeIron\Exception\RuntimeException();
-        $this->assertInstanceOf('Zend\Service\StrikeIron\Exception', $exception);
+        $this->assertInstanceOf('Zend\Service\StrikeIron\Exception\ExceptionInterface', $exception);
     }
 }

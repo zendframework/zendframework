@@ -21,10 +21,10 @@
 
 namespace Zend\Dojo\View\Helper;
 
-use Zend\Dojo\View\Exception,
-    Zend\Registry,
-    Zend\View\Renderer\RendererInterface as View,
-    Zend\View\Helper\AbstractHelper as AbstractViewHelper;
+use Zend\Dojo\View\Exception;
+use Zend\Registry;
+use Zend\View\Renderer\RendererInterface as View;
+use Zend\View\Helper\AbstractHelper as AbstractViewHelper;
 
 /**
  * Zend_Dojo_View_Helper_Dojo: Dojo View Helper

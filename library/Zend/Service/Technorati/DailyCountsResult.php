@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Technorati;
 
-use DomElement,
-    Zend\Date\Date as ZendDate;
+use DateTime;
+use DomElement;
 
 /**
  * Represents a single Technorati DailyCounts query result object.
@@ -35,13 +35,12 @@ use DomElement,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DailyCountsResult extends Result
+class DailyCountsResult extends AbstractResult
 {
     /**
      * Date of count.
      *
-     * @var     ZendDate
-     * @access  protected
+     * @var DateTime
      */
     protected $date;
 
@@ -66,14 +65,14 @@ class DailyCountsResult extends Result
         parent::__construct($dom);
 
         // filter fields
-        $this->date  = new ZendDate(strtotime($this->date));
+        $this->date  = new DateTime($this->date);
         $this->count = (int) $this->count;
     }
 
     /**
      * Returns the date of count.
      *
-     * @return  ZendDate
+     * @return DateTime
      */
     public function getDate()
     {

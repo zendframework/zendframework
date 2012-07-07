@@ -1,0 +1,21 @@
+{
+    "name": "zendframework/zend-session",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "session"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Session": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "suggest": {
+        "zendframework/zend-validator": "Zend\\Validator component",
+        "zendframework/zend-filter": "Zend\\Filter component",
+        "zendframework/zend-eventmanager": "Zend\\EventManager component"
+    }
+}

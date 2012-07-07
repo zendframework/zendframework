@@ -21,13 +21,14 @@
 
 namespace ZendTest\XmlRpc;
 
-use Zend\Http\Client\Adapter,
-    Zend\Http,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\XmlRpc\Client,
-    Zend\XmlRpc\Value,
-    Zend\XmlRpc;
+use Zend\Http\Client\Adapter;
+use Zend\Http;
+use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
+use Zend\XmlRpc\Client;
+use Zend\XmlRpc\AbstractValue;
+use Zend\XmlRpc\Value;
+use Zend\XmlRpc;
 
 /**
  * Test case for Zend\XmlRpc\Client
@@ -278,7 +279,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $expects = 'date.method response';
         $this->setServerResponseTo($expects);
-        $this->assertSame($expects, $this->xmlrpcClient->call('date.method', array(Value::getXmlRpcValue(time(), Value::XMLRPC_TYPE_DATETIME), 'foo')));
+        $this->assertSame($expects, $this->xmlrpcClient->call('date.method', array(AbstractValue::getXmlRpcValue(time(), AbstractValue::XMLRPC_TYPE_DATETIME), 'foo')));
     }
 
     public function testAllowsSkippingSystemCallForArrayStructLookup()
@@ -576,7 +577,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->xmlrpcClient->setHttpClient($this->httpClient);
 
         $this->setServerResponseTo(array());
-        $this->assertNull($this->xmlrpcClient->getHttpClient()->getRequest()->getUri());
+        $this->assertNull($this->xmlrpcClient->getHttpClient()->getRequest()->getUriString());
         $this->xmlrpcClient->call('foo');
         $uri = $this->xmlrpcClient->getHttpClient()->getUri();
 

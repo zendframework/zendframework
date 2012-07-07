@@ -32,8 +32,6 @@ class Ean5 extends AbstractAdapter
      * Constructor
      *
      * Sets check flag to false.
-     *
-     * @return void
      */
     public function __construct()
     {

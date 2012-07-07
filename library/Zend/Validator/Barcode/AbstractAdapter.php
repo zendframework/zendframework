@@ -131,7 +131,7 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Returns the allowed barcode length
      *
-     * @return string
+     * @return int|array
      */
     public function getLength()
     {
@@ -161,7 +161,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * Sets the checksum validation method
      *
      * @param callback $checksum Checksum method to call
-     * @return \Zend\Validator\Barcode\AbstractAdapter
+     * @return AbstractAdapter
      */
     protected function setChecksum($checksum)
     {
@@ -173,7 +173,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * Sets the checksum validation, if no value is given, the actual setting is returned
      *
      * @param  boolean $check
-     * @return \Zend\Validator\Barcode\AbstractAdapter|boolean
+     * @return AbstractAdapter|boolean
      */
     public function useChecksum($check = null)
     {
@@ -188,8 +188,8 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Sets the length of this barcode
      *
-     * @param integer $length
-     * @return \Zend\Validator\Barcode\AbstractAdapter
+     * @param int|array $length
+     * @return AbstractAdapter
      */
     protected function setLength($length)
     {
@@ -201,7 +201,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * Sets the allowed characters of this barcode
      *
      * @param integer $characters
-     * @return \Zend\Validator\Barcode\AbstractAdapter
+     * @return AbstractAdapter
      */
     protected function setCharacters($characters)
     {
@@ -216,7 +216,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * @param  string $value The barcode to validate
      * @return boolean
      */
-    protected function _gtin($value)
+    protected function gtin($value)
     {
         $barcode = substr($value, 0, -1);
         $sum     = 0;
@@ -246,7 +246,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * @param  string $value The barcode to validate
      * @return boolean
      */
-    protected function _identcode($value)
+    protected function identcode($value)
     {
         $barcode = substr($value, 0, -1);
         $sum     = 0;
@@ -276,7 +276,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * @param  string $value The barcode to validate
      * @return boolean
      */
-    protected function _code25($value)
+    protected function code25($value)
     {
         $barcode = substr($value, 0, -1);
         $sum     = 0;
@@ -306,7 +306,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * @param  string $value The barcode to validate
      * @return boolean
      */
-    protected function _postnet($value)
+    protected function postnet($value)
     {
         $checksum = substr($value, -1, 1);
         $values   = str_split(substr($value, 0, -1));

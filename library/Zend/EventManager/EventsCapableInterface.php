@@ -37,5 +37,5 @@ interface EventsCapableInterface
      *
      * @return EventManagerInterface
      */
-    public function events();
+    public function getEventManager();
 }

@@ -35,18 +35,20 @@ use Zend\Crypt\Symmetric\Exception;
  */
 class BlockCipherTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var BlockCipher */
+    /** 
+     * @var BlockCipher 
+     */
     protected $blockCipher;
     protected $plaintext;
 
     public function setUp()
     {
         try {
-            $cipher            = new Mcrypt(array(
-                                                 'algorithm' => 'aes',
-                                                 'mode'      => 'cbc',
-                                                 'padding'   => 'pkcs7'
-                                            ));
+            $cipher = new Mcrypt(array(
+                'algorithm' => 'aes',
+                'mode'      => 'cbc',
+                'padding'   => 'pkcs7'
+            ));
             $this->blockCipher = new BlockCipher($cipher);
         } catch (Exception\RuntimeException $e) {
             $this->markTestSkipped('Mcrypt is not installed, I cannot execute the BlockCipherTest');

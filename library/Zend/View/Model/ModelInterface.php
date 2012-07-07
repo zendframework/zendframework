@@ -21,8 +21,8 @@
 
 namespace Zend\View\Model;
 
-use Countable,
-    IteratorAggregate;
+use Countable;
+use IteratorAggregate;
 
 /**
  * Interface describing a view model.
@@ -108,9 +108,10 @@ interface ModelInterface extends Countable, IteratorAggregate
      * 
      * @param  ModelInterface $child
      * @param  null|string $captureTo Optional; if specified, the "capture to" value to set on the child
+     * @param  null|bool $append Optional; if specified, append to child  with the same capture
      * @return ModelInterface
      */
-    public function addChild(ModelInterface $child, $captureTo = null);
+    public function addChild(ModelInterface $child, $captureTo = null, $append = false);
 
     /**
      * Return all children.
@@ -157,4 +158,20 @@ interface ModelInterface extends Countable, IteratorAggregate
      * @return bool
      */
     public function terminate();
+	
+	
+	/**
+     * Set flag indicating whether or not append to child  with the same capture
+     * 
+     * @param  bool $append 
+     * @return ModelInterface
+     */
+    public function setAppend($append);
+
+    /**
+     * Is this append to child  with the same capture?
+     * 
+     * @return bool
+     */
+    public function isAppend();
 }

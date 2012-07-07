@@ -15,4 +15,5 @@ namespace Zend\ModuleManager\Exception;
  * @package  Zend_ModuleManager
  */
 interface ExceptionInterface
-{}
+{
+}

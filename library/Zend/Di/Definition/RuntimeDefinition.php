@@ -2,10 +2,10 @@
 
 namespace Zend\Di\Definition;
 
-use Zend\Di\Definition\Annotation,
-    Zend\Code\Annotation\AnnotationManager,
-    Zend\Code\Annotation\AnnotationCollection,
-    Zend\Code\Reflection;
+use Zend\Di\Definition\Annotation;
+use Zend\Code\Annotation\AnnotationCollection;
+use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Reflection;
 
 class RuntimeDefinition implements DefinitionInterface
 {
@@ -31,7 +31,10 @@ class RuntimeDefinition implements DefinitionInterface
     protected $injectionMethods = array();
 
     /**
+     * Constructor
      *
+     * @param null|IntrospectionStrategy $introspectionStrategy
+     * @param array|null $explicitClasses
      */
     public function __construct(IntrospectionStrategy $introspectionStrategy = null, array $explicitClasses = null)
     {
@@ -49,7 +52,7 @@ class RuntimeDefinition implements DefinitionInterface
     {
         $this->introspectionStrategy = $introspectionStrategy;
     }
-    
+
     /**
      * @return IntrospectionStrategy
      */
@@ -58,6 +61,11 @@ class RuntimeDefinition implements DefinitionInterface
         return $this->introspectionStrategy;
     }
 
+    /**
+     * Set explicit classes
+     *
+     * @param array $explicitClasses
+     */
     public function setExplicitClasses(array $explicitClasses)
     {
         $this->explicitLookups = true;
@@ -73,8 +81,8 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * Return nothing
-     * 
+     * Retrieves registered classes names
+     *
      * @return array
      */
     public function getClasses()
@@ -93,7 +101,7 @@ class RuntimeDefinition implements DefinitionInterface
         if ($this->explicitLookups === true) {
             return (array_key_exists($class, $this->classes));
         }
-        
+
         return class_exists($class) || interface_exists($class);
     }
 
@@ -168,6 +176,13 @@ class RuntimeDefinition implements DefinitionInterface
         return $this->classes[$class]['methods'];
     }
 
+    /**
+     * Check if method has parameters
+     *
+     * @param string $class
+     * @param string $method
+     * @return bool
+     */
     public function hasMethodParameters($class, $method)
     {
         if (!isset($this->classes[$class])) {
@@ -309,9 +324,6 @@ class RuntimeDefinition implements DefinitionInterface
                 }
             }
         }
-
-
-        //var_dump($this->classes);
     }
 
     protected function processParams(&$def, Reflection\ClassReflection $rClass, Reflection\MethodReflection $rMethod)

@@ -20,12 +20,12 @@
 
 namespace Zend\View;
 
-use ArrayAccess,
-    Zend\EventManager\Event,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Stdlib\ResponseInterface as Response,
-    Zend\View\Model\ModelInterface as Model,
-    Zend\View\Renderer\RendererInterface as Renderer;
+use ArrayAccess;
+use Zend\EventManager\Event;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * @category   Zend

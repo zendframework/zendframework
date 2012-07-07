@@ -21,8 +21,8 @@
 
 namespace Zend\Log\Filter;
 
-use Zend\Log\Exception,
-    Zend\Validator\ValidatorInterface as ZendValidator;
+use Zend\Log\Exception;
+use Zend\Validator\ValidatorInterface as ZendValidator;
 
 /**
  * @category   Zend
@@ -43,7 +43,8 @@ class Validator implements FilterInterface
     /**
      * Filter out any log messages not matching the validator
      *
-     * @param  ZendValidator $validator
+     * @param ZendValidator $validator
+     * @return Validator
      */
     public function __construct(ZendValidator $validator)
     {

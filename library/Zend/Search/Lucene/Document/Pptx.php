@@ -21,9 +21,9 @@
 
 namespace Zend\Search\Lucene\Document;
 
-use Zend\Search\Lucene,
-	Zend\Search\Lucene\Exception\ExtensionNotLoadedException,
-	Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Exception\ExtensionNotLoadedException;
+use Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * Pptx document.

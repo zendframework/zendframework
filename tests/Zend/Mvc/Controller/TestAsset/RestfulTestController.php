@@ -2,9 +2,9 @@
 
 namespace ZendTest\Mvc\Controller\TestAsset;
 
-use Zend\Mvc\Controller\RestfulController;
+use Zend\Mvc\Controller\AbstractRestfulController;
 
-class RestfulTestController extends RestfulController
+class RestfulTestController extends AbstractRestfulController
 {
     public $entities = array();
     public $entity   = array();

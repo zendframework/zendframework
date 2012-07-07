@@ -55,11 +55,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = Registry::REGISTRY_KEY;
-        if (\Zend\Registry::isRegistered($regKey)) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry[$regKey]);
-        }
+        Registry::unsetRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new Helper\HeadStyle();
     }
@@ -327,11 +323,8 @@ h1 {
         echo "Captured text";
         $this->helper->__invoke()->captureEnd();
 
-        try {
-            $this->helper->__invoke()->captureStart();
-        } catch (View\Exception\ExceptionInterface $e) {
-            $this->fail('Serial capturing should work');
-        }
+        $this->helper->__invoke()->captureStart();
+
         $this->helper->__invoke()->captureEnd();
     }
 

@@ -21,8 +21,8 @@
 
 namespace ZendTest\XmlRpc;
 
-use Zend\XmlRpc\Response,
-    Zend\XmlRpc\Value;
+use Zend\XmlRpc\Response;
+use Zend\XmlRpc\AbstractValue;
 
 /**
  * Test case for Zend_XmlRpc_Response
@@ -218,10 +218,10 @@ EOD;
     public function testSetGetEncoding()
     {
         $this->assertEquals('UTF-8', $this->_response->getEncoding());
-        $this->assertEquals('UTF-8', Value::getGenerator()->getEncoding());
+        $this->assertEquals('UTF-8', AbstractValue::getGenerator()->getEncoding());
         $this->assertSame($this->_response, $this->_response->setEncoding('ISO-8859-1'));
         $this->assertEquals('ISO-8859-1', $this->_response->getEncoding());
-        $this->assertEquals('ISO-8859-1', Value::getGenerator()->getEncoding());
+        $this->assertEquals('ISO-8859-1', AbstractValue::getGenerator()->getEncoding());
     }
 
     public function testLoadXmlCreatesFaultWithMissingNodes()
@@ -258,5 +258,20 @@ EOD;
     public function trackError($error)
     {
         $this->_errorOccured = true;
+    }
+
+    /**
+     * @group ZF-12293
+     */
+    public function testDoesNotAllowExternalEntities()
+    {
+        $payload = file_get_contents(dirname(__FILE__) . '/_files/ZF12293-response.xml');
+        $payload = sprintf($payload, 'file://' . realpath(dirname(__FILE__) . '/_files/ZF12293-payload.txt'));
+        $this->_response->loadXml($payload);
+        $value = $this->_response->getReturnValue();
+        $this->assertTrue(empty($value));
+        if (is_string($value)) {
+            $this->assertNotContains('Local file inclusion', $value);
+        }
     }
 }

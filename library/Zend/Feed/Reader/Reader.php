@@ -20,12 +20,12 @@
 
 namespace Zend\Feed\Reader;
 
-use Zend\Cache\Storage\StorageInterface as CacheStorage,
-    Zend\Http,
-    Zend\Loader,
-    Zend\Stdlib\ErrorHandler,
-    DOMDocument,
-    DOMXPath;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\Http;
+use Zend\Loader;
+use Zend\Stdlib\ErrorHandler;
+use DOMDocument;
+use DOMXPath;
 
 /**
 * @category Zend
@@ -243,11 +243,11 @@ class Reader
             } else {
                 $responseXml = $response->getBody();
                 $cache->setItem($cacheId, $responseXml);
-                if ($response->headers()->get('ETag')) {
-                    $cache->setItem($cacheId . '_etag', $response->headers()->get('ETag')->getFieldValue());
+                if ($response->getHeaders()->get('ETag')) {
+                    $cache->setItem($cacheId . '_etag', $response->getHeaders()->get('ETag')->getFieldValue());
                 }
-                if ($response->headers()->get('Last-Modified')) {
-                    $cache->setItem($cacheId . '_lastmodified', $response->headers()->get('Last-Modified')->getFieldValue());
+                if ($response->getHeaders()->get('Last-Modified')) {
+                    $cache->setItem($cacheId . '_lastmodified', $response->getHeaders()->get('Last-Modified')->getFieldValue());
                 }
             }
             return self::importString($responseXml);

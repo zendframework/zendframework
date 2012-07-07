@@ -265,7 +265,7 @@ class RouteNotFoundStrategyTest extends TestCase
         $events = new EventManager();
         $events->attachAggregate($this->strategy);
 
-        foreach (array('dispatch' => -90, 'dispatch.error' => 1) as $event => $expectedPriority) {
+        foreach (array(MvcEvent::EVENT_DISPATCH => -90, MvcEvent::EVENT_DISPATCH_ERROR => 1) as $event => $expectedPriority) {
             $listeners        = $events->getListeners($event);
             $expectedCallback = array($this->strategy, 'prepareNotFoundViewModel');
             $found            = false;
@@ -281,7 +281,7 @@ class RouteNotFoundStrategyTest extends TestCase
             $this->assertTrue($found, 'Listener not found');
         }
 
-        $listeners        = $events->getListeners('dispatch.error');
+        $listeners        = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $expectedCallback = array($this->strategy, 'detectNotFoundError');
         $expectedPriority = 1;
         $found            = false;
@@ -301,14 +301,14 @@ class RouteNotFoundStrategyTest extends TestCase
     {
         $events = new EventManager();
         $events->attachAggregate($this->strategy);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(1, count($listeners));
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $this->assertEquals(2, count($listeners));
         $events->detachAggregate($this->strategy);
-        $listeners = $events->getListeners('dispatch');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(0, count($listeners));
-        $listeners = $events->getListeners('dispatch.error');
+        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $this->assertEquals(0, count($listeners));
     }
 }

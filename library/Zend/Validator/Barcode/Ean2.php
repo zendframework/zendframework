@@ -30,8 +30,6 @@ class Ean2 extends AbstractAdapter
 {
     /**
      * Constructor for this barcode adapter
-     *
-     * @return void
      */
     public function __construct()
     {

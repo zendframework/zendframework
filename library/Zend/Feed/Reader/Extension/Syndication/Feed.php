@@ -20,9 +20,9 @@
 
 namespace Zend\Feed\Reader\Extension\Syndication;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Extension,
-    Zend\Date;
+use DateTime;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Extension;
 
 /**
  * @category   Zend
@@ -118,15 +118,14 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
     /**
      * Get update base
      *
-     * @return Date\Date|null
+     * @return DateTime|null
      */
     public function getUpdateBase()
     {
         $updateBase = $this->_getData('updateBase');
         $date = null;
         if ($updateBase) {
-            $date = new Date\Date;
-            $date->set($updateBase, Date\Date::W3C);
+            $date = DateTime::createFromFormat(DateTime::W3C, $updateBase);
         }
         return $date;
     }

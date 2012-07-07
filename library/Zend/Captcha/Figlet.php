@@ -34,7 +34,7 @@ use Zend\Text\Figlet\Figlet as FigletManager;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Figlet extends Word
+class Figlet extends AbstractWord
 {
     /**
      * Figlet text renderer

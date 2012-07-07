@@ -21,13 +21,11 @@
 
 namespace ZendTest\Tag\Cloud;
 
-use Zend\Tag,
-    Zend\Tag\Cloud,
-    Zend\Tag\Cloud\DecoratorBroker,
-    Zend\Loader\Broker,
-    Zend\Loader\PluginBroker,
-    Zend\Tag\Exception\InvalidArgumentException,
-    ZendTest\Tag\Cloud\TestAsset;
+use Zend\Tag;
+use Zend\Tag\Cloud;
+use Zend\Tag\Cloud\DecoratorPluginManager;
+use Zend\Tag\Exception\InvalidArgumentException;
+use ZendTest\Tag\Cloud\TestAsset;
 
 /**
  * @category   Zend
@@ -72,12 +70,8 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     {
         $cloud = $this->_getCloud();
 
-        try {
-            $cloud->setCloudDecorator(new \stdClass());
-            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals('DecoratorInterface is no instance of Zend\Tag\Cloud\Decorator\Cloud', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Tag\Exception\InvalidArgumentException', 'DecoratorInterface');
+        $cloud->setCloudDecorator(new \stdClass());
     }
 
     public function testSetTagDecoratorViaArray()
@@ -102,27 +96,23 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     {
         $cloud = $this->_getCloud();
 
-        try {
-            $cloud->setTagDecorator(new \stdClass());
-            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals('DecoratorInterface is no instance of Zend\Tag\Cloud\Decorator\Tag', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Tag\Exception\InvalidArgumentException', 'DecoratorInterface');
+        $cloud->setTagDecorator(new \stdClass());
     }
 
-    public function testSetDecoratorBroker()
+    public function testSetDecoratorPluginManager()
     {
-        $broker = new PluginBroker();
-        $cloud  = $this->_getCloud(array(), null);
-        $cloud->setDecoratorBroker($broker);
-        $this->assertSame($broker, $cloud->getDecoratorBroker());
+        $decorators = new DecoratorPluginManager();
+        $cloud      = $this->_getCloud(array(), null);
+        $cloud->setDecoratorPluginManager($decorators);
+        $this->assertSame($decorators, $cloud->getDecoratorPluginManager());
     }
 
-    public function testSetDecoratorBrokerViaOptions()
+    public function testSetDecoratorPluginManagerViaOptions()
     {
-        $broker = new PluginBroker();
-        $cloud  = $this->_getCloud(array('decoratorBroker' => $broker), null);
-        $this->assertSame($broker, $cloud->getDecoratorBroker());
+        $decorators = new DecoratorPluginManager();
+        $cloud      = $this->_getCloud(array('decoratorPluginManager' => $decorators), null);
+        $this->assertSame($decorators, $cloud->getDecoratorPluginManager());
     }
 
     public function testAppendTagAsArray()
@@ -149,12 +139,8 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     {
         $cloud = $this->_getCloud();
 
-        try {
-            $cloud->appendTag('foo');
-            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals('Tag must be an instance of Zend\Tag\TaggableInterface or an array', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Tag\Exception\InvalidArgumentException', 'TaggableInterface');
+        $cloud->appendTag('foo');
     }
 
     public function testSetTagsAsArray()
@@ -197,12 +183,8 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     {
         $cloud = $this->_getCloud();
 
-        try {
-            $cloud->setTags(array('foo'));
-            $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
-        } catch (InvalidArgumentException $e) {
-            $this->assertEquals('Tag must be an instance of Zend\Tag\TaggableInterface or an array', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Tag\Exception\InvalidArgumentException', 'TaggableInterface');
+        $cloud->setTags(array('foo'));
     }
 
     public function testConstructorWithArray()
@@ -262,18 +244,16 @@ class CloudTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, (string) $cloud);
     }
 
-    protected function _getCloud($options = null, $setDecoratorBroker = true)
+    protected function _getCloud($options = null, $setDecoratorPluginManager = true)
     {
         $cloud = new Tag\Cloud($options);
 
-        if ($setDecoratorBroker) {
-            $loader = $cloud->getDecoratorBroker()->getClassLoader();
-            $loader->registerPlugins(array(
-                'clouddummy'  => 'ZendTest\Tag\Cloud\TestAsset\CloudDummy',
-                'clouddummy1' => 'ZendTest\Tag\Cloud\TestAsset\CloudDummy1',
-                'clouddummy2' => 'ZendTest\Tag\Cloud\TestAsset\CloudDummy2',
-                'tagdummy'    => 'ZendTest\Tag\Cloud\TestAsset\TagDummy',
-            ));
+        if ($setDecoratorPluginManager) {
+            $decorators = $cloud->getDecoratorPluginManager();
+            $decorators->setInvokableClass('clouddummy',  'ZendTest\Tag\Cloud\TestAsset\CloudDummy');
+            $decorators->setInvokableClass('clouddummy1', 'ZendTest\Tag\Cloud\TestAsset\CloudDummy1');
+            $decorators->setInvokableClass('clouddummy2', 'ZendTest\Tag\Cloud\TestAsset\CloudDummy2');
+            $decorators->setInvokableClass('tagdummy',    'ZendTest\Tag\Cloud\TestAsset\TagDummy');
         }
 
         return $cloud;

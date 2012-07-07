@@ -28,7 +28,7 @@ namespace Zend\View\Helper;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HtmlPage extends HtmlElement
+class HtmlPage extends AbstractHtmlElement
 {
     /**
      * Default file type for html

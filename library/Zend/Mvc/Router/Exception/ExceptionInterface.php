@@ -28,4 +28,5 @@ use Zend\Mvc\Exception\ExceptionInterface as Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface ExceptionInterface extends Exception
-{}
+{
+}

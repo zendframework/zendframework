@@ -58,41 +58,43 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
                 'config_cache_enabled' => false,
                 'cache_dir'            => 'data/cache',
                 'module_paths'         => array(),
-            ),
-            'service_manager' => array(
-                'factories' => array(
-                    'Configuration' => function() {
-                        return array(
-                            'navigation' => array(
-                                'file'    => __DIR__ . '/_files/navigation.xml',
-                                'default' => array(
-                                    array(
-                                        'label' => 'Page 1',
-                                        'uri'   => 'page1.html'
-                                    ),
-                                    array(
-                                        'label' => 'MVC Page',
-                                        'route' => 'foo',
-                                        'pages' => array(
+                'extra_config'         => array(
+                    'service_manager' => array(
+                        'factories' => array(
+                            'Configuration' => function() {
+                                return array(
+                                    'navigation' => array(
+                                        'file'    => __DIR__ . '/_files/navigation.xml',
+                                        'default' => array(
                                             array(
-                                                'label' => 'Sub MVC Page',
-                                                'route' => 'foo'
+                                                'label' => 'Page 1',
+                                                'uri'   => 'page1.html'
+                                            ),
+                                            array(
+                                                'label' => 'MVC Page',
+                                                'route' => 'foo',
+                                                'pages' => array(
+                                                    array(
+                                                        'label' => 'Sub MVC Page',
+                                                        'route' => 'foo'
+                                                    )
+                                                )
+                                            ),
+                                            array(
+                                                'label' => 'Page 3',
+                                                'uri'   => 'page3.html'
                                             )
                                         )
-                                    ),
-                                    array(
-                                        'label' => 'Page 3',
-                                        'uri'   => 'page3.html'
                                     )
-                                )
-                            )
-                        );
-                    }
+                                );
+                            }
+                        )
+                    ),
                 )
             ),
         );
 
-        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfiguration($config['service_manager']));
+        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfiguration);
         $sm->setService('ApplicationConfiguration', $config);
         $sm->get('ModuleManager')->loadModules();
         $sm->get('Application')->bootstrap();
@@ -133,7 +135,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $recursive = function($that, $pages) use (&$recursive) {
             foreach($pages as $page) {
                 if ($page instanceof MvcPage) {
-                    $that->assertInstanceOf('Zend\View\Helper\Url', $page->getUrlHelper());
+                    $that->assertInstanceOf('Zend\Mvc\Router\RouteStackInterface', $page->getRouter());
                     $that->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $page->getRouteMatch());
                 }
 

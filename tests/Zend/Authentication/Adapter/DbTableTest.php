@@ -114,12 +114,8 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         $this->_adapter->setIdentity('non_existent_username');
         $this->_adapter->setCredential('my_password');
 
-        try {
-            $result = $this->_adapter->authenticate();
-            $this->assertEquals(Authentication\Result::FAILURE_IDENTITY_NOT_FOUND, $result->getCode());
-        } catch (Adapter\Exception\RuntimeException $e) {
-            $this->fail('Exception should have been thrown');
-        }
+        $result = $this->_adapter->authenticate();
+        $this->assertEquals(Authentication\Result::FAILURE_IDENTITY_NOT_FOUND, $result->getCode());
     }
 
     /**
@@ -134,12 +130,8 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         $this->_adapter->setIdentity('my_username');
         $this->_adapter->setCredential('my_password');
 
-        try {
-            $result = $this->_adapter->authenticate();
-            $this->assertEquals(Authentication\Result::FAILURE_IDENTITY_AMBIGUOUS, $result->getCode());
-        } catch (Adapter\Exception\RuntimeException $e) {
-            $this->fail('Exception should have been thrown');
-        }
+        $result = $this->_adapter->authenticate();
+        $this->assertEquals(Authentication\Result::FAILURE_IDENTITY_AMBIGUOUS, $result->getCode());
     }
 
     /**
@@ -208,12 +200,9 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         $select->where('1 = 0');
         $this->_adapter->setIdentity('my_username');
         $this->_adapter->setCredential('my_password');
-        try {
-            $result = $this->_adapter->authenticate();
-            $this->assertEquals(Authentication\Result::FAILURE_IDENTITY_NOT_FOUND, $result->getCode());
-        } catch (Adapter\Exception\RuntimeException $e) {
-            $this->fail('Exception should have been thrown');
-        }
+
+        $result = $this->_adapter->authenticate();
+        $this->assertEquals(Authentication\Result::FAILURE_IDENTITY_NOT_FOUND, $result->getCode());
     }
 
     /**

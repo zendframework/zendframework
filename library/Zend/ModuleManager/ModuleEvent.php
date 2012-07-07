@@ -22,6 +22,14 @@ use Zend\EventManager\Event;
 class ModuleEvent extends Event
 {
     /**
+     * Module events triggered by eventmanager
+     */
+    CONST EVENT_LOAD_MODULES        = 'loadModules';
+    CONST EVENT_LOAD_MODULE_RESOLVE = 'loadModule.resolve';
+    CONST EVENT_LOAD_MODULE         = 'loadModule';
+    CONST EVENT_LOAD_MODULES_POST   = 'loadModules.post';
+
+    /**
      * Get the name of a given module
      *
      * @return string

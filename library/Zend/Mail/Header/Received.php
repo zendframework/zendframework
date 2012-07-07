@@ -45,13 +45,6 @@ class Received implements HeaderInterface, MultipleHeadersInterface
      */
     protected $encoding = 'ASCII';
 
-    /**
-     * Factory: create Received header object from string
-     * 
-     * @param  string $headerLine 
-     * @return Received
-     * @throws Exception\InvalidArgumentException
-     */
     public static function fromString($headerLine)
     {
         list($name, $value) = explode(': ', $headerLine, 2);
@@ -67,56 +60,30 @@ class Received implements HeaderInterface, MultipleHeadersInterface
         return $header;
     }
 
-    /**
-     * Get header name
-     * 
-     * @return string
-     */
     public function getFieldName()
     {
         return 'Received';
     }
 
-    /**
-     * Get header value
-     * 
-     * @return string
-     */
-    public function getFieldValue()
+    public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
         return $this->value;
     }
 
-    /**
-     * Set header encoding
-     * 
-     * @param  string $encoding 
-     * @return AbstractAddressList
-     */
     public function setEncoding($encoding) 
     {
         $this->encoding = $encoding;
         return $this;
     }
 
-    /**
-     * Get header encoding
-     * 
-     * @return string
-     */
     public function getEncoding()
     {
         return $this->encoding;
     }
 
-    /**
-     * Serialize to string
-     * 
-     * @return string
-     */
     public function toString()
     {
-        return 'Received: ' . $this->getFieldValue();
+        return 'Received: ' . $this->getFieldValue(HeaderInterface::FORMAT_RAW);
     }
 
     /**

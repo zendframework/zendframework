@@ -21,7 +21,6 @@
 namespace Zend\Ldap;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -216,7 +215,7 @@ class Ldap
      *  accountFilterFormat
      *  allowEmptyPassword
      *  useStartTls
-     *  optRefferals
+     *  optReferrals
      *  tryUsernameSplit
      *  networkTimeout
      *
@@ -227,7 +226,7 @@ class Ldap
     public function setOptions($options)
     {
         if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
+            $options = iterator_to_array($options);
         }
 
         $permittedOptions = array(

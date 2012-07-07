@@ -1,0 +1,16 @@
+{
+    "name": "zendframework/zend-stdlib",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "stdlib"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Stdlib": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

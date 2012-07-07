@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Log\Formatter;
 
 use Zend\Log\Exception;
@@ -47,8 +44,9 @@ class ErrorHandler implements FormatterInterface
     /**
      * Class constructor
      *
-     * @param  null|string  $format  Format specifier for log messages
-     * @throws Zend\Log\Exception\InvalidArgumentException
+     * @param null|string $format Format specifier for log messages
+     * @return ErrorHandler
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($format = null)
     {

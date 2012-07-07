@@ -106,10 +106,10 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
         SCANNER_END:
 
         foreach ($annotations as $annotation) {
-            if ($this->annotationManager->hasAnnotation($annotation[0])) {
-                $this->append(
-                    $this->annotationManager->createAnnotation($annotation[0], trim($annotation[1], '()'))
-                );
+            $annotation[]     = '@' . $annotation[0] . $annotation[1];
+            $annotationObject = $this->annotationManager->createAnnotation($annotation);
+            if ($annotationObject) {
+                $this->append($annotationObject);
             }
         }
     }

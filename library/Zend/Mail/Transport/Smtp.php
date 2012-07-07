@@ -21,12 +21,11 @@
 
 namespace Zend\Mail\Transport;
 
-use Zend\Loader\Pluggable,
-    Zend\Mail\Address,
-    Zend\Mail\Headers,
-    Zend\Mail\Message,
-    Zend\Mail\Protocol,
-    Zend\Mail\Protocol\Exception as ProtocolException;
+use Zend\Mail\Address;
+use Zend\Mail\Headers;
+use Zend\Mail\Message;
+use Zend\Mail\Protocol;
+use Zend\Mail\Protocol\Exception as ProtocolException;
 
 /**
  * SMTP connection object
@@ -39,7 +38,7 @@ use Zend\Loader\Pluggable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Smtp implements TransportInterface, Pluggable
+class Smtp implements TransportInterface
 {
     /**
      * @var SmtpOptions
@@ -50,16 +49,16 @@ class Smtp implements TransportInterface, Pluggable
      * @var Protocol\Smtp
      */
     protected $connection;
-    
+
     /**
      * @var boolean
      */
     protected $autoDisconnect = true;
 
     /**
-     * @var Protocol\SmtpBroker
+     * @var Protocol\SmtpPluginManager
      */
-    protected $broker;
+    protected $plugins;
 
     /**
      * Constructor.
@@ -88,7 +87,7 @@ class Smtp implements TransportInterface, Pluggable
 
     /**
      * Get options
-     * 
+     *
      * @return SmtpOptions
      */
     public function getOptions()
@@ -97,67 +96,63 @@ class Smtp implements TransportInterface, Pluggable
     }
 
     /**
-     * Set broker for obtaining SMTP protocol connection
+     * Set plugin manager for obtaining SMTP protocol connection
      *
-     * @param  Protocol\SmtpBroker $broker
+     * @param  Protocol\SmtpPluginManager $plugins
      * @throws Exception\InvalidArgumentException
      * @return Smtp
      */
-    public function setBroker($broker)
+    public function setPluginManager(Protocol\SmtpPluginManager $plugins)
     {
-        if (!$broker instanceof Protocol\SmtpBroker) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an SmtpBroker argument; received "%s"',
-                __METHOD__,
-                (is_object($broker) ? get_class($broker) : gettype($broker))
-            ));
-        }
-        $this->broker = $broker;
+        $this->plugins = $plugins;
         return $this;
     }
-    
+
     /**
-     * Get broker for loading SMTP protocol connection
+     * Get plugin manager for loading SMTP protocol connection
      *
-     * @return Protocol\SmtpBroker
+     * @return Protocol\SmtpPluginManager
      */
-    public function getBroker()
+    public function getPluginManager()
     {
-        if (null === $this->broker) {
-            $this->setBroker(new Protocol\SmtpBroker());
+        if (null === $this->plugins) {
+            $this->setPluginManager(new Protocol\SmtpPluginManager());
         }
-        return $this->broker;
+        return $this->plugins;
     }
+
     /**
      * Set the automatic disconnection when destruct
-     * 
+     *
      * @param  boolean $flag
      * @return Smtp
      */
-    public function setAutoDisconnect($flag) 
+    public function setAutoDisconnect($flag)
     {
         $this->autoDisconnect = (bool) $flag;
         return $this;
     }
+
     /**
      * Get the automatic disconnection value
-     * 
+     *
      * @return boolean
      */
     public function getAutoDisconnect()
     {
         return $this->autoDisconnect;
     }
+
     /**
      * Return an SMTP connection
-     * 
-     * @param  string $name 
-     * @param  array|null $options 
+     *
+     * @param  string $name
+     * @param  array|null $options
      * @return Protocol\Smtp
      */
     public function plugin($name, array $options = null)
     {
-        return $this->getBroker()->load($name, $options);
+        return $this->getPluginManager()->get($name, $options);
     }
 
     /**
@@ -173,7 +168,7 @@ class Smtp implements TransportInterface, Pluggable
             }
             if ($this->autoDisconnect) {
                 $this->connection->disconnect();
-            }    
+            }
         }
     }
 
@@ -197,9 +192,10 @@ class Smtp implements TransportInterface, Pluggable
     {
         return $this->connection;
     }
+
     /**
      * Disconnect the connection protocol instance
-     * 
+     *
      * @return void
      */
     public function disconnect()
@@ -208,6 +204,7 @@ class Smtp implements TransportInterface, Pluggable
             $this->connection->disconnect();
         }
     }
+
     /**
      * Send an email via the SMTP connection protocol
      *
@@ -269,7 +266,7 @@ class Smtp implements TransportInterface, Pluggable
             return $sender->getEmail();
         }
 
-        $from = $message->from();
+        $from = $message->getFrom();
         if (!count($from)) { // Per RFC 2822 3.6
             throw new Exception\RuntimeException(sprintf(
                 '%s transport expects either a Sender or at least one From address in the Message; none provided',
@@ -291,13 +288,13 @@ class Smtp implements TransportInterface, Pluggable
     protected function prepareRecipients(Message $message)
     {
         $recipients = array();
-        foreach ($message->to() as $address) {
+        foreach ($message->getTo() as $address) {
             $recipients[] = $address->getEmail();
         }
-        foreach ($message->cc() as $address) {
+        foreach ($message->getCc() as $address) {
             $recipients[] = $address->getEmail();
         }
-        foreach ($message->bcc() as $address) {
+        foreach ($message->getBcc() as $address) {
             $recipients[] = $address->getEmail();
         }
         $recipients = array_unique($recipients);
@@ -312,7 +309,7 @@ class Smtp implements TransportInterface, Pluggable
      */
     protected function prepareHeaders(Message $message)
     {
-        $headers = clone $message->headers();
+        $headers = clone $message->getHeaders();
         $headers->removeHeader('Bcc');
         return $headers->toString();
     }
@@ -330,17 +327,17 @@ class Smtp implements TransportInterface, Pluggable
 
     /**
      * Lazy load the connection, and pass it helo
-     * 
+     *
      * @return Protocol\Smtp
      */
     protected function lazyLoadConnection()
     {
         // Check if authentication is required and determine required class
-        $options    = $this->getOptions();
-        $host       = $options->getHost();
-        $port       = $options->getPort();
-        $config     = $options->getConnectionConfig();
-        $connection = $this->plugin($options->getConnectionClass(), array($host, $port, $config));
+        $options        = $this->getOptions();
+        $config         = $options->getConnectionConfig();
+        $config['host'] = $options->getHost();
+        $config['port'] = $options->getPort();
+        $connection = $this->plugin($options->getConnectionClass(), $config);
         $this->connection = $connection;
         $this->connection->connect();
         $this->connection->helo($options->getName());

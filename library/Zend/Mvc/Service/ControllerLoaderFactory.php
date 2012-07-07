@@ -21,7 +21,6 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Loader\Pluggable;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\Di\DiServiceInitializer;
 use Zend\ServiceManager\FactoryInterface;
@@ -42,15 +41,15 @@ class ControllerLoaderFactory implements FactoryInterface
     /**
      * Create the controller loader service
      *
-     * Creates and returns a scoped service manager. The only controllers 
-     * this manager will allow are those defined in the application 
+     * Creates and returns a scoped service manager. The only controllers
+     * this manager will allow are those defined in the application
      * configuration's "controllers" array. If a controller is matched, the
-     * scoped manager will attempt to load the controller, pulling it from 
+     * scoped manager will attempt to load the controller, pulling it from
      * a DI service if a matching service is not found. Finally, it will
-     * attempt to inject the controller plugin broker into the controller if
-     * it subscribes to the Pluggable interface.
-     * 
-     * @param  ServiceLocatorInterface $serviceLocator 
+     * attempt to inject the controller plugin manager if the controller
+     * implements a setPluginManager() method.
+     *
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return ServiceManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
@@ -60,24 +59,8 @@ class ControllerLoaderFactory implements FactoryInterface
         }
 
         $controllerLoader = $serviceLocator->createScopedServiceManager();
+
         $configuration    = $serviceLocator->get('Configuration');
-
-
-        if (isset($configuration['controller'])) {
-            foreach ($configuration['controller'] as $type => $specs) {
-                if ($type == 'classes') {
-                    foreach ($specs as $name => $value) {
-                        $controllerLoader->setInvokableClass($name, $value);
-                    }
-                }
-                if ($type == 'factories') {
-                    foreach ($specs as $name => $value) {
-                        $controllerLoader->setFactory($name, $value);
-                    }
-                }
-            }
-        }
-
         if (isset($configuration['di']) && $serviceLocator->has('Di')) {
             $di = $serviceLocator->get('Di');
             $controllerLoader->addAbstractFactory(
@@ -97,8 +80,8 @@ class ControllerLoaderFactory implements FactoryInterface
                 $instance->setEventManager($serviceLocator->get('EventManager'));
             }
 
-            if ($instance instanceof Pluggable) {
-                $instance->setBroker(clone $serviceLocator->get('ControllerPluginBroker'));
+            if (method_exists($instance, 'setPluginManager')) {
+                $instance->setPluginManager($serviceLocator->get('ControllerPluginBroker'));
             }
         });
 

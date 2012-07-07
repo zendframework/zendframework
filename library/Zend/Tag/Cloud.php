@@ -23,8 +23,6 @@ namespace Zend\Tag;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Tag\Exception\InvalidArgumentException,
-    Zend\Loader\Broker;
 
 /**
  * @category   Zend
@@ -51,16 +49,16 @@ class Cloud
     /**
      * List of all tags
      *
-     * @var \Zend\Tag\ItemList
+     * @var ItemList
      */
     protected $_tags = null;
 
     /**
-     * Plugin broker for decorators
+     * Plugin manager for decorators
      *
-     * @var \Zend\Loader\Broker
+     * @var Cloud\DecoratorPluginManager
      */
-    protected $_decoratorBroker = null;
+    protected $_decorators = null;
 
     /**
      * Option keys to skip when calling setOptions()
@@ -90,8 +88,8 @@ class Cloud
     /**
      * Set options from array
      *
-     * @param  array $options Configuration for \Zend\Tag\Cloud
-     * @return \Zend\Tag\Cloud
+     * @param  array $options Configuration for Cloud
+     * @return Cloud
      */
     public function setOptions(array $options)
     {
@@ -124,44 +122,42 @@ class Cloud
      * decorators.
      *
      * @param  array $tags
-     * @throws \Zend\Tag\Exception\InvalidArgumentException
-     * @return \Zend\Tag\Cloud
+     * @throws Exception\InvalidArgumentException
+     * @return Cloud
      */
     public function setTags(array $tags)
     {
-        // Validate and cleanup the tags
-        $itemList = $this->getItemList();
-
         foreach ($tags as $tag) {
-            if ($tag instanceof TaggableInterface) {
-                $itemList[] = $tag;
-            } else if (is_array($tag)) {
-                $itemList[] = new Item($tag);
-            } else {
-                throw new InvalidArgumentException('Tag must be an instance of Zend\Tag\TaggableInterface or an array');
-            }
+            $this->appendTag($tag);
         }
-
         return $this;
     }
 
     /**
      * Append a single tag to the cloud
      *
-     * @param  \Zend\Tag\TaggableInterface|array $tag
-     * @throws \Zend\Tag\Exception\InvalidArgumentException
-     * @return \Zend\Tag\Cloud
+     * @param  TaggableInterface|array $tag
+     * @throws Exception\InvalidArgumentException
+     * @return Cloud
      */
     public function appendTag($tag)
     {
         $tags = $this->getItemList();
+
         if ($tag instanceof TaggableInterface) {
             $tags[] = $tag;
-        } else if (is_array($tag)) {
-            $tags[] = new Item($tag);
-        } else {
-            throw new InvalidArgumentException('Tag must be an instance of Zend\Tag\TaggableInterface or an array');
+            return $this;
+        } 
+
+        if (!is_array($tag)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Tag must be an instance of %s\TaggableInterface or an array; received "%s"',
+                __NAMESPACE__,
+                (is_object($tag) ? get_class($tag) : gettype($tag))
+            ));
         }
+
+        $tags[] = new Item($tag);
 
         return $this;
     }
@@ -169,8 +165,8 @@ class Cloud
     /**
      * Set the item list
      *
-     * @param  \Zend\Tag\ItemList $itemList
-     * @return \Zend\Tag\Cloud
+     * @param  ItemList $itemList
+     * @return Cloud
      */
     public function setItemList(ItemList $itemList)
     {
@@ -183,7 +179,7 @@ class Cloud
      *
      * If item list is undefined, creates one.
      *
-     * @return \Zend\Tag\ItemList
+     * @return ItemList
      */
     public function getItemList()
     {
@@ -197,8 +193,8 @@ class Cloud
      * Set the decorator for the cloud
      *
      * @param  mixed $decorator
-     * @throws \Zend\Tag\Exception\InvalidArgumentException
-     * @return \Zend\Tag\Cloud
+     * @throws Exception\InvalidArgumentException
+     * @return Cloud
      */
     public function setCloudDecorator($decorator)
     {
@@ -215,11 +211,11 @@ class Cloud
         }
 
         if (is_string($decorator)) {
-            $decorator = $this->getDecoratorBroker()->load($decorator, $options);
+            $decorator = $this->getDecoratorPluginManager()->get($decorator, $options);
         }
 
-        if (!($decorator instanceof Cloud\Decorator\Cloud)) {
-            throw new InvalidArgumentException('DecoratorInterface is no instance of Zend\Tag\Cloud\Decorator\Cloud');
+        if (!($decorator instanceof Cloud\Decorator\AbstractCloud)) {
+            throw new Exception\InvalidArgumentException('DecoratorInterface is no instance of Cloud\Decorator\AbstractCloud');
         }
 
         $this->_cloudDecorator = $decorator;
@@ -244,8 +240,8 @@ class Cloud
      * Set the decorator for the tags
      *
      * @param  mixed $decorator
-     * @throws \Zend\Tag\Exception\InvalidArgumentException
-     * @return \Zend\Tag\Cloud
+     * @throws Exception\InvalidArgumentException
+     * @return Cloud
      */
     public function setTagDecorator($decorator)
     {
@@ -262,11 +258,11 @@ class Cloud
         }
 
         if (is_string($decorator)) {
-            $decorator = $this->getDecoratorBroker()->load($decorator, $options);
+            $decorator = $this->getDecoratorPluginManager()->get($decorator, $options);
         }
 
-        if (!($decorator instanceof Cloud\Decorator\Tag)) {
-            throw new InvalidArgumentException('DecoratorInterface is no instance of Zend\Tag\Cloud\Decorator\Tag');
+        if (!($decorator instanceof Cloud\Decorator\AbstractTag)) {
+            throw new Exception\InvalidArgumentException('DecoratorInterface is no instance of Cloud\Decorator\Tag');
         }
 
         $this->_tagDecorator = $decorator;
@@ -288,29 +284,29 @@ class Cloud
     }
 
     /**
-     * Set plugin broker for use with decorators
+     * Set plugin manager for use with decorators
      *
-     * @param  \Zend\Loader\Broker $broker
-     * @return \Zend\Tag\Cloud
+     * @param  Cloud\DecoratorPluginManager $decorators
+     * @return Cloud
      */
-    public function setDecoratorBroker(Broker $broker)
+    public function setDecoratorPluginManager(Cloud\DecoratorPluginManager $decorators)
     {
-        $this->_decoratorBroker = $broker;
+        $this->_decorators = $decorators;
         return $this;
     }
 
     /**
-     * Get the plugin broker for decorators
+     * Get the plugin manager for decorators
      *
-     * @return \Zend\Loader\Broker
+     * @return Cloud\DecoratorPluginManager
      */
-    public function getDecoratorBroker()
+    public function getDecoratorPluginManager()
     {
-        if ($this->_decoratorBroker === null) {
-            $this->_decoratorBroker = new Cloud\DecoratorBroker();
+        if ($this->_decorators === null) {
+            $this->_decorators = new Cloud\DecoratorPluginManager();
         }
 
-        return $this->_decoratorBroker;
+        return $this->_decorators;
     }
 
     /**

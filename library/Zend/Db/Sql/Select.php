@@ -530,7 +530,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $joinSpecArgArray[$j] = array();
             $joinSpecArgArray[$j][] = strtoupper($join['type']); // type
             $joinSpecArgArray[$j][] = $nameArg; // table
-            $joinSpecArgArray[$j][] = $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')')); // on
+            $joinSpecArgArray[$j][] = $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')', 'BETWEEN')); // on
         }
 
         return array($joinSpecArgArray);
@@ -564,7 +564,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 }
                 $columnSql .= $columnParts['sql'];
             } else {
-                $columnSql .= $platform->quoteIdentifier($column);
+                $columnSql .= $platform->quoteIdentifierInFragment($column);
             }
             $groups[] = $columnSql;
         }
@@ -599,9 +599,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 }
             }
             if (strtoupper($v) == self::ORDER_DESENDING) {
-                $orders[] = array($platform->quoteIdentifier($k), self::ORDER_DESENDING);
+                $orders[] = array($platform->quoteIdentifierInFragment($k), self::ORDER_DESENDING);
             } else {
-                $orders[] = array($platform->quoteIdentifier($k), self::ORDER_ASCENDING);
+                $orders[] = array($platform->quoteIdentifierInFragment($k), self::ORDER_ASCENDING);
             }
         }
         return array($orders);

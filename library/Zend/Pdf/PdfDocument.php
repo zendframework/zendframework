@@ -540,7 +540,7 @@ class PdfDocument
 
         // Refresh named destinations list
         foreach ($this->_namedTargets as $name => $namedTarget) {
-            if ($namedTarget instanceof Destination\Explicit) {
+            if ($namedTarget instanceof Destination\AbstractExplicitDestination) {
                 // Named target is an explicit destination
                 if ($this->resolveDestination($namedTarget, false) === null) {
                     unset($this->_namedTargets[$name]);
@@ -828,7 +828,7 @@ class PdfDocument
      * Return specified named destination
      *
      * @param string $name
-     * @return \Zend\Pdf\Destination\Explicit|\Zend\Pdf\Action\GoToAction
+     * @return \Zend\Pdf\Destination\AbstractExplicitDestination|\Zend\Pdf\Action\GoToAction
      */
     public function getNamedDestination($name)
     {
@@ -843,13 +843,13 @@ class PdfDocument
      * Set specified named destination
      *
      * @param string $name
-     * @param \Zend\Pdf\Destination\Explicit|\Zend\Pdf\Action\GoToAction $target
+     * @param \Zend\Pdf\Destination\AbstractExplicitDestination|\Zend\Pdf\Action\GoToAction $target
      */
     public function setNamedDestination($name, $destination = null)
     {
         if ($destination !== null  &&
             !$destination instanceof Action\GoToAction  &&
-            !$destination instanceof Destination\Explicit) {
+            !$destination instanceof Destination\AbstractExplicitDestination) {
             throw new Exception\InvalidArgumentException('PDF named destination must refer an explicit destination or a GoTo PDF action.');
         }
 
@@ -924,7 +924,7 @@ class PdfDocument
                 $destination = $destination->getDestination();
             }
 
-            if (!$destination instanceof Destination\Explicit) {
+            if (!$destination instanceof Destination\AbstractExplicitDestination) {
                 throw new Exception\CorruptedPdfException('Named destination target has to be an explicit destination.');
             }
         }

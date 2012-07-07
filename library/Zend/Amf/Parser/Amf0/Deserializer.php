@@ -20,6 +20,8 @@
  */
 
 namespace Zend\Amf\Parser\Amf0;
+
+use DateTime;
 use Zend\Amf\Parser\AbstractDeserializer,
     Zend\Amf,
     Zend\Amf\Parser\Exception as ParserException;
@@ -216,9 +218,9 @@ class Deserializer extends AbstractDeserializer
     }
 
     /**
-     * Convert AS Date to Zend_Date
+     * Convert AS Date to DateTime
      *
-     * @return Zend\Date\Date
+     * @return DateTime
      */
     public function readDate()
     {
@@ -230,8 +232,7 @@ class Deserializer extends AbstractDeserializer
         // so read and ignore.
         $offset = $this->_stream->readInt();
 
-        $date   = new \Zend\Date\Date($timestamp);
-        return $date;
+        return new DateTime('@' . $timestamp);
     }
 
     /**

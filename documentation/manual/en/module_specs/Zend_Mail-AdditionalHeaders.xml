@@ -17,7 +17,7 @@
                 <para>
                     <methodname>setDate($date = null)</methodname>: sets the Date: header.
                     This method uses current time stamp by default. Or You can pass time stamp,
-                    date string or <classname>Zend_Date</classname> instance to this method.
+                    date string or <classname>DateTime</classname> instance to this method.
                 </para>
             </listitem>
 

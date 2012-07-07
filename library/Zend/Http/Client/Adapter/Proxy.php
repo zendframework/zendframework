@@ -81,7 +81,7 @@ class Proxy extends Socket
         if (! $this->config['proxy_host']) {
             return parent::connect($host, $port, $secure);
         }
-        
+
         /* Url might require stream context even if proxy connection doesn't */
         if ($secure) {
             $this->config['sslusecontext'] = true;
@@ -172,7 +172,7 @@ class Proxy extends Socket
                 throw new AdapterException\RuntimeException('Error writing request to server');
             }
         }
-        
+
         return $request;
     }
 

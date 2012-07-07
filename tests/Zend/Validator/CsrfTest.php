@@ -23,10 +23,10 @@ namespace ZendTest\Validator;
 
 use Zend\Session\Configuration\StandardConfiguration;
 use Zend\Session\Container;
-use Zend\Validator;
+use Zend\Validator\Csrf;
 
 /**
- * Zend\Validator\Csrf
+ * Zend\Csrf
  *
  * @category   Zend
  * @package    Zend
@@ -37,6 +37,12 @@ use Zend\Validator;
  */
 class CsrfTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Csrf */
+    public $validator;
+
+    /** @var TestAsset\SessionManager */
+    public $sessionManager;
+
     public function setUp()
     {
         // Setup session handling
@@ -48,7 +54,7 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $this->sessionManager = $sessionManager;
         Container::setDefaultManager($sessionManager);
 
-        $this->validator = new Validator\Csrf;
+        $this->validator = new Csrf;
     }
 
     public function tearDown()
@@ -112,7 +118,7 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
             'session' => $container,
             'timeout' => 600,
         );
-        $validator = new Validator\Csrf($options);
+        $validator = new Csrf($options);
         foreach ($options as $key => $value) {
             if ($key == 'session') {
                 $this->assertSame($container, $value);
@@ -148,11 +154,11 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
     {
         $this->validator->isValid('foo');
         $messages = $this->validator->getMessages();
-        $this->assertArrayHasKey(Validator\Csrf::NOT_SAME, $messages);
-        $this->assertEquals("The form submitted did not originate from the expected site", $messages[Validator\Csrf::NOT_SAME]);
+        $this->assertArrayHasKey(Csrf::NOT_SAME, $messages);
+        $this->assertEquals("The form submitted did not originate from the expected site", $messages[Csrf::NOT_SAME]);
     }
 
-    public function testIsValidReturnsTrueeWhenValueMatchesHash()
+    public function testIsValidReturnsTrueWhenValueMatchesHash()
     {
         $hash = $this->validator->getHash();
         $this->assertTrue($this->validator->isValid($hash));

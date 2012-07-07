@@ -21,8 +21,8 @@
 
 namespace ZendTest\View\Helper;
 
-use Zend\View\Renderer\PhpRenderer as View,
-    Zend\View\Helper\DeclareVars;
+use Zend\View\Renderer\PhpRenderer as View;
+use Zend\View\Helper\DeclareVars;
 
 /**
  * @category   Zend

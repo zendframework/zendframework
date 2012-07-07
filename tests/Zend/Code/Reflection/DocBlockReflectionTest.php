@@ -55,8 +55,16 @@ class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
     {
         $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
-        $this->assertEquals(1, count($classReflection->getDocBlock()->getTags()));
+        $this->assertEquals(3, count($classReflection->getDocBlock()->getTags()));
         $this->assertEquals(1, count($classReflection->getDocBlock()->getTags('author')));
+        $this->assertEquals(1, count($classReflection->getDocBlock()->getTags('property')));
+        $this->assertEquals(1, count($classReflection->getDocBlock()->getTags('method')));
+
+        $methodTag = $classReflection->getDocBlock()->getTag('method');
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\MethodTag', $methodTag);
+
+        $propertyTag = $classReflection->getDocBlock()->getTag('property');
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\PropertyTag', $propertyTag);
 
         $this->assertFalse($classReflection->getDocBlock()->getTag('version'));
 
@@ -65,6 +73,8 @@ class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
         $returnTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('return');
         $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\TagInterface', $returnTag);
         $this->assertEquals('mixed', $returnTag->getType());
+
+
     }
 
     public function testDocBlockLines()
@@ -76,7 +86,7 @@ class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
         $classDocBlock = $classReflection->getDocBlock();
 
         $this->assertEquals(5, $classDocBlock->getStartLine());
-        $this->assertEquals(15, $classDocBlock->getEndLine());
+        $this->assertEquals(17, $classDocBlock->getEndLine());
 
     }
 
@@ -96,6 +106,8 @@ It indeed is longer than 3 lines
 now.
 
 @author Ralph Schindler <ralph.schindler@zend.com>
+@method test()
+@property \$test
 
 EOS;
 
@@ -111,8 +123,10 @@ EOS;
 
         $expectedString = 'DocBlock [ /* DocBlock */ ] {' . PHP_EOL
                         . PHP_EOL
-                        . '  - Tags [1] {' . PHP_EOL
+                        . '  - Tags [3] {' . PHP_EOL
                         . '    DocBlock Tag [ * @author ]' . PHP_EOL
+                        . '    DocBlock Tag [ * @method ]' . PHP_EOL
+                        . '    DocBlock Tag [ * @property ]' . PHP_EOL
                         . '  }' . PHP_EOL
                         . '}' . PHP_EOL;
 

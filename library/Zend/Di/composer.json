@@ -1,0 +1,17 @@
+{
+    "name": "zendframework/zend-di",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "di"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Di": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-code": "self.version"
+    }
+}

@@ -20,8 +20,8 @@
 
 namespace Zend\Feed\Writer;
 
-use Zend\Date,
-    Zend\Uri;
+use DateTime;
+use Zend\Uri;
 
 /**
 * @category Zend
@@ -133,25 +133,25 @@ class Deleted
     /**
      * Set when
      *
-     * @param null|string|Date\Date $date
+     * @param null|string|DateTime $date
      * @throws Exception\InvalidArgumentException
      */
     public function setWhen($date = null)
     {
-        $zdate = null;
         if ($date === null) {
-            $zdate = new Date\Date;
-        } elseif (ctype_digit((string)$date)) {
-            $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
-        } elseif ($date instanceof Date\Date) {
-            $zdate = $date;
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid Date\Date object or UNIX Timestamp'
+            $date = new DateTime();
+        } elseif (is_int($date)) {
+            $date = new DateTime('@' . $date);
+        } elseif (!$date instanceof DateTime) {
+            throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
             . ' passed as parameter');
         }
-        $this->_data['when'] = $zdate;
+        $this->_data['when'] = $date;
     }
-    
+
+    /**
+     * @return \DateTime
+     */
     public function getWhen()
     {
         if (!array_key_exists('when', $this->_data)) {

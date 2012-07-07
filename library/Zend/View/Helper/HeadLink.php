@@ -21,8 +21,8 @@
 
 namespace Zend\View\Helper;
 
-use Zend\View,
-    Zend\View\Exception;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Zend_Layout_View_Helper_HeadLink
@@ -33,7 +33,7 @@ use Zend\View,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HeadLink extends Placeholder\Container\Standalone
+class HeadLink extends Placeholder\Container\AbstractStandalone
 {
     /**
      * $_validAttributes
@@ -286,7 +286,7 @@ class HeadLink extends Placeholder\Container\Standalone
             }
         }
 
-        if ($this->view instanceof \Zend\Loader\Pluggable) {
+        if (method_exists($this->view, 'plugin')) {
             $link .= ($this->view->plugin('doctype')->isXhtml()) ? '/>' : '>';
         } else {
             $link .= '/>';

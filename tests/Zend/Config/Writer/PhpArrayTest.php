@@ -21,9 +21,9 @@
 
 namespace ZendTest\Config\Writer;
 
-use \Zend\Config\Writer\PhpArray,
-    \Zend\Config\Config,
-    ZendTest\Config\Writer\files\PhpReader;
+use Zend\Config\Writer\PhpArray;
+use Zend\Config\Config;
+use ZendTest\Config\Writer\TestAssets\PhpReader;
 
 /**
  * @category   Zend

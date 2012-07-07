@@ -361,7 +361,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
         $return = array(
             'result'  => $result,
             'status'  => $response->getStatusCode(),
-            'headers' => $response->headers(),
+            'headers' => $response->getHeaders(),
         );
         return $return;
     }

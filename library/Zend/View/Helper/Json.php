@@ -21,8 +21,8 @@
 
 namespace Zend\View\Helper;
 
-use Zend\Http\Response,
-    Zend\Json\Json as JsonFormatter;
+use Zend\Http\Response;
+use Zend\Json\Json as JsonFormatter;
 
 /**
  * Helper for simplifying JSON responses
@@ -41,8 +41,8 @@ class Json extends AbstractHelper
 
     /**
      * Set the response object
-     * 
-     * @param  Response $response 
+     *
+     * @param  Response $response
      * @return Json
      */
     public function setResponse(Response $response)
@@ -63,7 +63,7 @@ class Json extends AbstractHelper
         $data = JsonFormatter::encode($data, null, $jsonOptions);
 
         if ($this->response instanceof Response) {
-            $headers = $this->response->headers();
+            $headers = $this->response->getHeaders();
             $headers->addHeaderLine('Content-Type', 'application/json');
         }
 

@@ -36,9 +36,10 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class WinCache
-    extends AbstractAdapter
-    implements FlushableInterface, AvailableSpaceCapableInterface, TotalSpaceCapableInterface
+class WinCache extends AbstractAdapter implements
+    FlushableInterface,
+    AvailableSpaceCapableInterface,
+    TotalSpaceCapableInterface
 {
 
     /**
@@ -472,6 +473,7 @@ class WinCache
                     'supportedMetadata' => array(
                         'internal_key', 'ttl', 'hits', 'size'
                     ),
+                    'minTtl'             => 1,
                     'maxTtl'             => 0,
                     'staticTtl'          => true,
                     'ttlPrecision'       => 1,
@@ -483,7 +485,7 @@ class WinCache
             );
 
             // update namespace separator on change option
-            $this->events()->attach('option', function ($event) use ($capabilities, $marker) {
+            $this->getEventManager()->attach('option', function ($event) use ($capabilities, $marker) {
                 $params = $event->getParams();
 
                 if (isset($params['namespace_separator'])) {

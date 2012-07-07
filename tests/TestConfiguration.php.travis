@@ -1,0 +1,41 @@
+<?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   UnitTests
+ */
+
+/**
+ * This file defines specific configuration that differs from the standard configuration
+ * for running the unit tests with Travis-CI (http://www.travis-ci.org)
+ *
+ * See TestConfiguration.php.dist to get more details.
+ *
+ * Never commit passwords to the source code repository.
+ */
+
+/**
+ * Zend\Code\Annotation
+ */
+defined('TESTS_ZEND_CODE_ANNOTATION_DOCTRINE_SUPPORT') || define('TESTS_ZEND_CODE_ANNOTATION_DOCTRINE_SUPPORT', true);
+
+/**
+ * Zend\Auth\Adapter\DbTable tests
+ */
+defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED') || define('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED', true);
+
+/**
+ * Zend\Form\Annotation
+ */
+defined('TESTS_ZEND_FORM_ANNOTATION_SUPPORT') || define('TESTS_ZEND_FORM_ANNOTATION_SUPPORT', true);
+
+/**
+ * Zend\Cache\Storage\Adapter
+ */
+defined('TESTS_ZEND_CACHE_APC_ENABLED') || define('TESTS_ZEND_CACHE_APC_ENABLED', true);
+defined('TESTS_ZEND_CACHE_SQLITE_ENABLED') || define('TESTS_ZEND_CACHE_SQLITE_ENABLED', true);
+
+require_once __DIR__ . '/TestConfiguration.php.dist';

@@ -21,9 +21,9 @@
 
 namespace ZendTest\Config\Writer;
 
-use \Zend\Config\Writer\Xml as XmlWriter,
-    \Zend\Config\Config,
-    \Zend\Config\Reader\Xml as XmlReader;
+use Zend\Config\Writer\Xml as XmlWriter;
+use Zend\Config\Config;
+use Zend\Config\Reader\Xml as XmlReader;
 
 /**
  * @category   Zend
@@ -33,7 +33,7 @@ use \Zend\Config\Writer\Xml as XmlWriter,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class XmlTest extends \PHPUnit_Framework_TestCase
+class XmlTest extends AbstractWriterTestCase
 {
     protected $_tempName;
 

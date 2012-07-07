@@ -21,8 +21,8 @@
 
 namespace ZendTest\Log\Writer;
 
-use Zend\Log\Writer\Mock as MockWriter,
-    Zend\Log\Logger;
+use Zend\Log\Writer\Mock as MockWriter;
+use Zend\Log\Logger;
 
 /**
  * @category   Zend

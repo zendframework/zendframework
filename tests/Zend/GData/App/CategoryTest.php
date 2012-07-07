@@ -20,6 +20,7 @@
  */
 
 namespace ZendTest\GData\App;
+
 use Zend\GData\App\Extension;
 
 /**

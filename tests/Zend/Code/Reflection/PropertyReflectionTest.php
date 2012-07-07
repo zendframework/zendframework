@@ -22,6 +22,7 @@
 namespace ZendTest\Code\Reflection;
 
 use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Annotation\Parser\GenericAnnotationParser;
 
 /**
  * @category   Zend
@@ -43,9 +44,11 @@ class PropertyReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testAnnotationScanningIsPossible()
     {
-        $manager = new AnnotationManager(array(
-            new TestAsset\SampleAnnotation(),
-        ));
+        $manager = new AnnotationManager();
+        $parser = new GenericAnnotationParser();
+        $parser->registerAnnotation(new TestAsset\SampleAnnotation());
+        $manager->attach($parser);
+
         $property = new \Zend\Code\Reflection\PropertyReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', '_prop2');
         $annotations = $property->getAnnotations($manager);
         $this->assertInstanceOf('Zend\Code\Annotation\AnnotationCollection', $annotations);

@@ -20,9 +20,9 @@
  */
 
 namespace ZendTest\Service\GoGrid;
-use Zend\Service\GoGrid\Job,
-        Zend\Service\GoGrid\ObjectList,
-        Zend\Http\Client\Adapter\Test as HttpTest;
+use Zend\Service\GoGrid\Job;
+use Zend\Service\GoGrid\ObjectList;
+use Zend\Http\Client\Adapter\Test as HttpTest;
 
 /**
  * Test helper

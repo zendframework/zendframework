@@ -21,8 +21,8 @@
 
 namespace Zend\Service\AgileZen\Resources;
 
-use Zend\Service\AgileZen\AgileZen,
-    Zend\Service\AgileZen\Entity;
+use Zend\Service\AgileZen\AgileZen;
+use Zend\Service\AgileZen\AbstractEntity;
 
 /**
  * @category   Zend
@@ -31,7 +31,7 @@ use Zend\Service\AgileZen\AgileZen,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Project extends Entity
+class Project extends AbstractEntity
 {
     /**
      * Name

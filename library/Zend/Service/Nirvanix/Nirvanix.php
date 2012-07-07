@@ -21,9 +21,9 @@
 
 namespace Zend\Service\Nirvanix;
 
-use Traversable,
-    Zend\Http\Client as HttpClient,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Http\Client as HttpClient;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * This class allows Nirvanix authentication credentials to be specified

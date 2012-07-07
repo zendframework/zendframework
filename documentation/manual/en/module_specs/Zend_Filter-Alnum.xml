@@ -48,7 +48,7 @@ $return = $filter->filter('This is (my) content: 123');
                 <classname>Zend_Filter_Alnum</classname> works on almost all languages. But actually
                 there are three exceptions: Chinese, Japanese and Korean. Within these languages the
                 english alphabet is use instead of the characters from these languages. The language
-                itself is detected by using <classname>Zend_Locale</classname>.
+                itself is detected by using <classname>Locale</classname>.
             </para>
         </note>
     </section>

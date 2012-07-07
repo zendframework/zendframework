@@ -21,8 +21,6 @@
 
 namespace Zend\Service\StrikeIron\Exception;
 
-use Zend\Service\StrikeIron\Exception;
-
 /**
  * @category   Zend
  * @package    Zend_Service
@@ -30,5 +28,6 @@ use Zend\Service\StrikeIron\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException extends \RuntimeException implements Exception
-{}
+class RuntimeException extends \RuntimeException implements ExceptionInterface
+{
+}

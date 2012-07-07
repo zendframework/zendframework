@@ -21,9 +21,9 @@
 
 namespace Zend\Log\Writer;
 
-use Zend\Log\Logger,
-    Zend\Log\Formatter,
-    Zend\Log\Exception;
+use Zend\Log\Logger;
+use Zend\Log\Formatter;
+use Zend\Log\Exception;
 
 /**
  * Writes log messages to syslog

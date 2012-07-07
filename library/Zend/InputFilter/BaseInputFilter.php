@@ -71,7 +71,7 @@ class BaseInputFilter implements InputFilterInterface
             ));
         }
 
-        if (empty($name)) {
+        if (is_null($name) || $name === '') {
             $name = $input->getName();
         }
         $this->inputs[$name] = $input;
@@ -149,6 +149,7 @@ class BaseInputFilter implements InputFilterInterface
         $valid               = true;
         
         $inputs = $this->validationGroup ?: array_keys($this->inputs);
+        //var_dump($inputs);
         foreach ($inputs as $name) {
             $input = $this->inputs[$name]; 
             if (!array_key_exists($name, $this->data) || (is_string($this->data[$name]) && strlen($this->data[$name]) === 0)) {
@@ -167,8 +168,7 @@ class BaseInputFilter implements InputFilterInterface
                 // make sure we have a value (empty) for validation
                 $this->data[$name] = '';
             }
-            
-            $value = $this->data[$name];
+
             if ($input instanceof InputFilterInterface) {
                 if (!$input->isValid()) {
                     $this->invalidInputs[$name] = $input;
@@ -219,14 +219,30 @@ class BaseInputFilter implements InputFilterInterface
         }
 
         if (is_array($name)) {
-            $this->validateValidationGroup($name);
-            $this->validationGroup = $name;
+            $inputs = array();
+            foreach ($name as $key => $value) {
+                if (!$this->has($key)) {
+                    $inputs[] = $value;
+                } else {
+                    $inputs[] = $key;
+
+                    // Recursively populate validation groups for sub input filters
+                    $this->inputs[$key]->setValidationGroup($value);
+                }
+            }
+
+            if (!empty($inputs)) {
+                $this->validateValidationGroup($inputs);
+                $this->validationGroup = $inputs;
+            }
+
             return $this;
         }
 
         $inputs = func_get_args();
         $this->validateValidationGroup($inputs);
         $this->validationGroup = $inputs;
+
         return $this;
     }
 

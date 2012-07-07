@@ -20,9 +20,9 @@
  
 namespace Zend\Feed\Writer\Extension\ITunes\Renderer;
 
-use Zend\Feed\Writer\Extension,
-    DOMDocument,
-    DOMElement;
+use Zend\Feed\Writer\Extension;
+use DOMDocument;
+use DOMElement;
 
 /**
 * @category Zend

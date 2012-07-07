@@ -55,7 +55,7 @@ interface AdapterInterface
     /**
      * Returns the allowed barcode length
      *
-     * @return integer
+     * @return int|array
      */
     public function getLength();
 
@@ -77,7 +77,7 @@ interface AdapterInterface
      * Sets the checksum validation, if no value is given, the actual setting is returned
      *
      * @param  boolean $check
-     * @return \Zend\Validator\Barcode\AbstractAdapter|boolean
+     * @return AbstractAdapter|boolean
      */
     public function useChecksum($check = null);
 }

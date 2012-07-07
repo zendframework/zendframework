@@ -29,7 +29,7 @@ use Zend\Crypt\Hmac;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class S3 extends Authentication
+class S3 extends AbstractAuthentication
 {
     /**
      * Add the S3 Authorization signature to the request headers
@@ -96,8 +96,8 @@ class S3 extends Authentication
                     $sig_str .= '?torrent';
                 }
         
-        $signature = base64_encode(Hmac::compute($this->_secretKey, 'sha1', utf8_encode($sig_str), Hmac::BINARY));
-        $headers['Authorization'] = 'AWS ' . $this->_accessKey . ':' . $signature;
+        $signature = Hmac::compute($this->_secretKey, 'sha1', utf8_encode($sig_str), Hmac::OUTPUT_BINARY);
+        $headers['Authorization'] = 'AWS ' . $this->_accessKey . ':' . base64_encode($signature);
 
         return $sig_str;
     }

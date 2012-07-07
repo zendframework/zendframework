@@ -26,7 +26,7 @@ use ArrayObject,
     Zend\Cache\Storage\Event,
     Zend\Cache\Storage\StorageInterface,
     Zend\EventManager\EventsCapableInterface,
-    Zend\Stdlib\Options;
+    Zend\Stdlib\AbstractOptions;
 
 /**
  * Unless otherwise marked, all options in this class affect all adapters.
@@ -37,7 +37,7 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AdapterOptions extends Options
+class AdapterOptions extends AbstractOptions
 {
 
     /**
@@ -265,7 +265,7 @@ class AdapterOptions extends Options
     {
         if ($this->adapter instanceof EventsCapableInterface) {
             $event = new Event('option', $this->adapter, new ArrayObject(array($optionName => $optionValue)));
-            $this->adapter->events()->trigger($event);
+            $this->adapter->getEventManager()->trigger($event);
         }
     }
 

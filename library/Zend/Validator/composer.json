@@ -1,0 +1,20 @@
+{
+    "name": "zendframework/zend-validator",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "validator"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Validator": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "suggest": {
+        "zendframework/zend-i18n": "Zend\\I18n component",
+        "zendframework/zend-db": "Zend\\Db component"
+    }
+}

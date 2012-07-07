@@ -39,6 +39,16 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('objectCallback-test', $filter('test'));
     }
 
+    public function testConstructorWithOptions()
+    {
+        $filter = new CallbackFilter(array(
+            'callback'        => array($this, 'objectCallbackWithParams'),
+            'callback_params' => 0,
+        ));
+
+        $this->assertEquals('objectCallbackWithParams-test-0', $filter('test'));
+    }
+
     public function testStaticCallback()
     {
         $filter = new CallbackFilter(
@@ -49,16 +59,16 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingDefaultOptions()
     {
-        $filter = new CallbackFilter(array($this, 'objectCallback'), 'options');
-        $this->assertEquals('options', $filter->getOptions());
+        $filter = new CallbackFilter(array($this, 'objectCallback'), 'param');
+        $this->assertEquals(array('param'), $filter->getCallbackParams());
         $this->assertEquals('objectCallback-test', $filter('test'));
     }
 
     public function testSettingDefaultOptionsAfterwards()
     {
         $filter = new CallbackFilter(array($this, 'objectCallback'));
-        $filter->setOptions('options');
-        $this->assertEquals('options', $filter->getOptions());
+        $filter->setCallbackParams('param');
+        $this->assertEquals(array('param'), $filter->getCallbackParams());
         $this->assertEquals('objectCallback-test', $filter('test'));
     }
 
@@ -82,5 +92,10 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public static function staticCallback($value)
     {
         return 'staticCallback-' . $value;
+    }
+
+    public function objectCallbackWithParams($value, $param = null)
+    {
+        return 'objectCallbackWithParams-' . $value . '-' . $param;
     }
 }

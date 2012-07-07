@@ -21,12 +21,12 @@
 
 namespace Zend\Mvc\Router\Http;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Mvc\Router\RouteBroker,
-    Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\PriorityList;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Mvc\Router\RoutePluginManager;
+use Zend\Mvc\Router\Exception;
+use Zend\Mvc\Router\PriorityList;
 
 /**
  * RouteInterface part.
@@ -63,15 +63,15 @@ class Part extends TreeRouteStack implements RouteInterface
     /**
      * Create a new part route.
      *
-     * @param  mixed       $route
-     * @param  boolean     $mayTerminate
-     * @param  RouteBroker $routeBroker
-     * @param  array|null  $childRoutes
+     * @param  mixed              $route
+     * @param  boolean            $mayTerminate
+     * @param  RoutePluginManager $routePlugins
+     * @param  array|null         $childRoutes
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($route, $mayTerminate, RouteBroker $routeBroker, array $childRoutes = null)
+    public function __construct($route, $mayTerminate, RoutePluginManager $routePlugins, array $childRoutes = null)
     {
-        $this->routeBroker = $routeBroker;
+        $this->routePluginManager = $routePlugins;
 
         if (!$route instanceof RouteInterface) {
             $route = $this->routeFromArray($route);
@@ -92,7 +92,7 @@ class Part extends TreeRouteStack implements RouteInterface
      *
      * @see    Route::factory()
      * @param  mixed $options
-     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return Part
      */
     public static function factory($options = array())
@@ -107,8 +107,8 @@ class Part extends TreeRouteStack implements RouteInterface
             throw new Exception\InvalidArgumentException('Missing "route" in options array');
         }
 
-        if (!isset($options['route_broker'])) {
-            throw new Exception\InvalidArgumentException('Missing "route_broker" in options array');
+        if (!isset($options['route_plugins'])) {
+            throw new Exception\InvalidArgumentException('Missing "route_plugins" in options array');
         }
 
         if (!isset($options['may_terminate'])) {
@@ -122,7 +122,7 @@ class Part extends TreeRouteStack implements RouteInterface
             $options['child_routes'] = ArrayUtils::iteratorToArray($options['child_routes']);
         }
 
-        return new static($options['route'], $options['may_terminate'], $options['route_broker'], $options['child_routes']);
+        return new static($options['route'], $options['may_terminate'], $options['route_plugins'], $options['child_routes']);
     }
 
     /**
@@ -141,7 +141,7 @@ class Part extends TreeRouteStack implements RouteInterface
 
         $match = $this->route->match($request, $pathOffset);
 
-        if ($match !== null && method_exists($request, 'uri')) {
+        if ($match !== null && method_exists($request, 'getUri')) {
             if ($this->childRoutes !== null) {
                 $this->addRoutes($this->childRoutes);
                 $this->childRoutes = null;
@@ -149,7 +149,7 @@ class Part extends TreeRouteStack implements RouteInterface
 
             $nextOffset = $pathOffset + $match->getLength();
 
-            $uri        = $request->uri();
+            $uri        = $request->getUri();
             $pathLength = strlen($uri->getPath());
 
             if ($this->mayTerminate && $nextOffset === $pathLength) {

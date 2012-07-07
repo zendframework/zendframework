@@ -1,0 +1,19 @@
+{
+    "name": "zendframework/zend-http",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "http"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Http": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-loader": "self.version",
+        "zendframework/zend-stdlib": "self.version",
+        "zendframework/zend-uri": "self.version"
+    }
+}

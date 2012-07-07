@@ -38,13 +38,9 @@ class TagDataTest extends AudioscrobblerTestCase
     {
         $this->markTestSkipped('Invalid test, communicating with real-world service.');
 
-        try {
-            $as = $this->getAudioscrobblerService();
-            $response = $as->tagGetTopTags();
-            $this->assertNotNull(count($response->tag));
-        } catch (Exception $e ) {
-            $this->fail("Exception: [" . $e->getMessage() . "] thrown by test");
-        }
+        $as = $this->getAudioscrobblerService();
+        $response = $as->tagGetTopTags();
+        $this->assertNotNull(count($response->tag));
     }
 
     public function testGetTopArtists()

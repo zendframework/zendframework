@@ -22,9 +22,9 @@ namespace Zend\Filter\Encrypt;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Filter\Exception,
-    Zend\Filter\Compress,
-    Zend\Filter\Decompress;
+use Zend\Filter\Exception;
+use Zend\Filter\Compress;
+use Zend\Filter\Decompress;
 
 /**
  * Encryption adapter for openssl
@@ -82,6 +82,7 @@ class Openssl implements EncryptionAlgorithmInterface
      *   'package'     => pack envelope keys into encrypted string, simplifies decryption
      *
      * @param string|array|Traversable $options Options for this adapter
+     * @throws Exception\ExtensionNotLoadedException
      */
     public function __construct($options = array())
     {
@@ -119,7 +120,8 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets the encryption keys
      *
      * @param  string|array $keys Key with type association
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
+     * @throws Exception\InvalidArgumentException
      */
     protected function _setKeys($keys)
     {
@@ -216,7 +218,7 @@ class Openssl implements EncryptionAlgorithmInterface
      *
      * @param  string $key Private key
      * @param  string $passphrase
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
      */
     public function setPrivateKey($key, $passphrase = null)
     {
@@ -285,7 +287,7 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets a new passphrase
      *
      * @param string $passphrase
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
      */
     public function setPassphrase($passphrase)
     {
@@ -307,7 +309,7 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets a internal compression for values to encrypt
      *
      * @param string|array $compression
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
      */
     public function setCompression($compression)
     {
@@ -333,7 +335,7 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets if the envelope keys should be included in the encrypted value
      *
      * @param boolean $package
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return Openssl
      */
     public function setPackage($package)
     {

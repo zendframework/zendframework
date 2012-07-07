@@ -14,6 +14,6 @@ namespace Zend\Service\WindowsAzure\Exception;
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  */
-class InvalidArgumentException extends RuntimeException
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
 }

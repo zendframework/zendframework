@@ -12,8 +12,8 @@
       <title>Accessing the Request and Response</title>
 
       <para>
-        When using <classname>ActionController</classname> or
-        <classname>RestfulController</classname>, the request and response
+        When using <classname>AbstractActionController</classname> or
+        <classname>AbstractRestfulController</classname>, the request and response
         object are composed directly into the controller as soon as
         <methodname>dispatch()</methodname> is called. You may access them in the
         following ways:
@@ -32,8 +32,8 @@ $response = $this->response;
       <para>
         Additionally, if your controller implements
         <classname>InjectApplicationEventInterface</classname> (as both
-        <classname>ActionController</classname> and
-        <classname>RestfulController</classname> do), you can access these
+        <classname>AbstractActionController</classname> and
+        <classname>AbstractRestfulController</classname> do), you can access these
         objects from the attached <classname>MvcEvent</classname>:
       </para>
 
@@ -61,8 +61,8 @@ $response = $event->getResponse();
       <para>
         Within your controller, if you implement
         <classname>InjectApplicationEventInterface</classname> (as both
-        <classname>ActionController</classname> and
-        <classname>RestfulController</classname> do), you can access this
+        <classname>AbstractActionController</classname> and
+        <classname>AbstractRestfulController</classname> do), you can access this
         object from the attached <classname>MvcEvent</classname>:
       </para>
 
@@ -148,7 +148,7 @@ class Module
 
         $listeners   = new Listeners\ViewListener();
         $listeners->setView($view);
-        $application->events()->attachAggregate($listeners);
+        $application->getEventManager()->attachAggregate($listeners);
     }
 }
 ]]></programlisting>

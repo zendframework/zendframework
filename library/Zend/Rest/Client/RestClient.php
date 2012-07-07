@@ -65,8 +65,8 @@ class RestClient extends \Zend\Service\AbstractService
 
     /**
      * Set HTTP client instance to use with this service instance
-     * 
-     * @param  HttpClient $client 
+     *
+     * @param  HttpClient $client
      * @return RestClient
      */
     public function setHttpClient(HttpClient $client)
@@ -79,7 +79,7 @@ class RestClient extends \Zend\Service\AbstractService
      * Get the HTTP client instance registered with this service instance
      *
      * If none set, will check for a default instance.
-     * 
+     *
      * @return HttpClient
      */
     public function getHttpClient()
@@ -140,8 +140,8 @@ class RestClient extends \Zend\Service\AbstractService
         $this->uri->setPath($path);
 
         /**
-         * Get the HTTP client and configure it for the endpoint URI.  Do this 
-         * each time as the Zend\Http\Client instance may be shared with other 
+         * Get the HTTP client and configure it for the endpoint URI.  Do this
+         * each time as the Zend\Http\Client instance may be shared with other
          * Zend\Service\AbstractService subclasses.
          */
         $client = $this->getHttpClient();
@@ -186,7 +186,7 @@ class RestClient extends \Zend\Service\AbstractService
         if (is_string($data)) {
             $request->setContent($data);
         } elseif (is_array($data) || is_object($data)) {
-            $request->post()->fromArray((array) $data);
+            $request->getPost()->fromArray((array) $data);
         }
         return $client->send($request);
     }

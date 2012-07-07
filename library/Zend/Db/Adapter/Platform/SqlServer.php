@@ -50,6 +50,20 @@ class SqlServer implements PlatformInterface
     }
 
     /**
+     * Quote identifier chain
+     *
+     * @param string|string[] $identifierChain
+     * @return string
+     */
+    public function quoteIdentifierChain($identifierChain)
+    {
+        if (is_array($identifierChain)) {
+            $identifierChain = implode('].[', $identifierChain);
+        }
+        return '[' . $identifierChain . ']';
+    }
+
+    /**
      * Get quote value symbol
      * 
      * @return string 
@@ -68,6 +82,21 @@ class SqlServer implements PlatformInterface
     public function quoteValue($value)
     {
         return '\'' . str_replace('\'', '\'\'', $value) . '\'';
+    }
+
+    /**
+     * Quote value list
+     *
+     * @param string|string[] $valueList
+     * @return string
+     */
+    public function quoteValueList($valueList)
+    {
+        $valueList = str_replace('\'', '\'\'', $valueList);
+        if (is_array($valueList)) {
+            $valueList = implode('\', \'', $valueList);
+        }
+        return '\'' . $valueList . '\'';
     }
 
     /**

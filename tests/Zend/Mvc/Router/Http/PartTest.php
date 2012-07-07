@@ -5,7 +5,7 @@ use ArrayObject,
     PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request as Request,
     Zend\Stdlib\Request as BaseRequest,
-    Zend\Mvc\Router\RouteBroker,
+    Zend\Mvc\Router\RoutePluginManager,
     Zend\Mvc\Router\Http\Part,
     ZendTest\Mvc\Router\FactoryTester;
 
@@ -13,10 +13,8 @@ class PartTest extends TestCase
 {
     public static function getRoute()
     {
-        $routeBroker = new RouteBroker();
-        $routeBroker->getClassLoader()->registerPlugins(array(
-            'part' => 'Zend\Mvc\Router\Http\Part'
-        ));
+        $routePlugins = new RoutePluginManager();
+        $routePlugins->setInvokableClass('part', 'Zend\Mvc\Router\Http\Part');
 
         return new Part(
             array(
@@ -29,7 +27,7 @@ class PartTest extends TestCase
                 )
             ),
             true,
-            $routeBroker,
+            $routePlugins,
             array(
                 'bar' => array(
                     'type'    => 'Zend\Mvc\Router\Http\Literal',
@@ -236,7 +234,7 @@ class PartTest extends TestCase
     {
         $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Base route may not be a part route');
 
-        $route = new Part(self::getRoute(), true, new RouteBroker());
+        $route = new Part(self::getRoute(), true, new RoutePluginManager());
     }
 
     public function testNoMatchWithoutUriMethod()
@@ -261,12 +259,12 @@ class PartTest extends TestCase
         $tester->testFactory(
             'Zend\Mvc\Router\Http\Part',
             array(
-                'route'        => 'Missing "route" in options array',
-                'route_broker' => 'Missing "route_broker" in options array'
+                'route'         => 'Missing "route" in options array',
+                'route_plugins' => 'Missing "route_plugins" in options array'
             ),
             array(
-                'route'        => new \Zend\Mvc\Router\Http\Literal('/foo'),
-                'route_broker' => new RouteBroker()
+                'route'         => new \Zend\Mvc\Router\Http\Literal('/foo'),
+                'route_plugins' => new RoutePluginManager()
             )
         );
     }
@@ -299,7 +297,7 @@ class PartTest extends TestCase
                     ),
                 ),
             ),
-            'route_broker' => new RouteBroker(),
+            'route_plugins' => new RoutePluginManager(),
             'may_terminate' => true,
             'child_routes'  => $children,
         );

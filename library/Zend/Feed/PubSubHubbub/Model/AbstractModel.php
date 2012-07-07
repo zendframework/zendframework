@@ -20,7 +20,8 @@
 
 namespace Zend\Feed\PubSubHubbub\Model;
 
-use Zend\Db\TableGateway;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\TableGateway\TableGatewayInterface;
 
 /**
  * @category   Zend
@@ -31,28 +32,25 @@ use Zend\Db\TableGateway;
 class AbstractModel
 {
     /**
-     * Zend_Db_Table instance to host database methods
+     * Zend\Db\TableGateway\TableGatewayInterface instance to host database methods
      *
-     * @var TableGateway\TableGatewayInterface
+     * @var TableGatewayInterface
      */
     protected $_db = null;
- 
+
     /**
      * Constructor
-     * 
-     * @param  array $data 
-     * @param  TableGateway\TableGatewayInterface $tableGateway
-     * @return void
+     *
+     * @param null|TableGatewayInterface $tableGateway
      */
-    public function __construct(TableGateway\TableGatewayInterface $tableGateway = null)
+    public function __construct(TableGatewayInterface $tableGateway = null)
     {
         if ($tableGateway === null) {
             $parts = explode('\\', get_called_class());
             $table = strtolower(array_pop($parts));
-            $this->_db = new TableGateway\TableGateway($table);
+            $this->_db = new TableGateway($table, null);
         } else {
             $this->_db = $tableGateway;
         }
     }
-
 }

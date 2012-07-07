@@ -53,10 +53,13 @@ class Metadata implements MetadataInterface
     {
         switch ($adapter->getPlatform()->getName()) {
             case 'MySQL':
+                return new Source\MysqlMetadata($adapter);
             case 'SQLServer':
-                return new Source\InformationSchemaMetadata($adapter);
+                return new Source\SqlServerMetadata($adapter);
             case 'SQLite':
                 return new Source\SqliteMetadata($adapter);
+            case 'PostgreSQL':
+                return new Source\PostgresqlMetadata($adapter);
         }
 
         throw new \Exception('cannot create source from adapter');
@@ -65,25 +68,25 @@ class Metadata implements MetadataInterface
     // @todo methods
 
     /**
-     * @param null $schema
-     * @param null $database
+     * Get base tables and views
+     *
+     * @param string $schema
      * @return Object\TableObject[]
      */
-    public function getTables($schema = null)
+    public function getTables($schema = null, $includeViews = false)
     {
-        return $this->source->getTables();
+        return $this->source->getTables($schema, $includeViews);
     }
-
+    
     /**
-     * Get views
-     * 
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
+     * Get base tables and views
+     *
+     * @param string $schema
+     * @return Object\TableObject[]
      */
     public function getViews($schema = null)
     {
-        return $this->source->getViews();
+        return $this->source->getViews($schema);
     }
 
     /**
@@ -95,7 +98,7 @@ class Metadata implements MetadataInterface
      */
     public function getTriggers($schema = null)
     {
-        return $this->source->getTriggers();
+        return $this->source->getTriggers($schema);
     }
 
     /**
@@ -121,7 +124,7 @@ class Metadata implements MetadataInterface
      */
     public function getColumns($table, $schema = null)
     {
-        return $this->source->getColumns($table);
+        return $this->source->getColumns($table, $schema);
     }
 
     /**
@@ -135,7 +138,7 @@ class Metadata implements MetadataInterface
      */
     public function getConstraintKeys($constraint, $table, $schema = null)
     {
-        return $this->source->getConstraintKeys($constraint, $table);
+        return $this->source->getConstraintKeys($constraint, $table, $schema);
     }
 
     /**
@@ -157,7 +160,7 @@ class Metadata implements MetadataInterface
      */
     public function getSchemas()
     {
-        // TODO: Implement getSchemas() method.
+        return $this->source->getSchemas();
     }
 
     /**
@@ -167,9 +170,9 @@ class Metadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getTableNames($schema = null)
+    public function getTableNames($schema = null, $includeViews = false)
     {
-        return $this->source->getTableNames($schema);
+        return $this->source->getTableNames($schema, $includeViews);
     }
 
     /**
@@ -193,7 +196,7 @@ class Metadata implements MetadataInterface
      */
     public function getViewNames($schema = null)
     {
-        // TODO: Implement getViewNames() method.
+        return $this->source->getTable($schema);
     }
 
     /**
@@ -205,7 +208,7 @@ class Metadata implements MetadataInterface
      */
     public function getView($viewName, $schema = null)
     {
-        // TODO: Implement getView() method.
+        return $this->source->getView($viewName, $schema);
     }
 
     /**
@@ -216,7 +219,7 @@ class Metadata implements MetadataInterface
      */
     public function getTriggerNames($schema = null)
     {
-        // TODO: Implement getTriggerNames() method.
+        return $this->source->getTriggerNames($schema);
     }
 
     /**
@@ -228,7 +231,7 @@ class Metadata implements MetadataInterface
      */
     public function getTrigger($triggerName, $schema = null)
     {
-        // TODO: Implement getTrigger() method.
+        return $this->source->getTrigger($triggerName, $schema);
     }
 
     /**
@@ -252,7 +255,7 @@ class Metadata implements MetadataInterface
      */
     public function getColumn($columnName, $table, $schema = null)
     {
-        // TODO: Implement getColumn() method.
+        return $this->source->getColumn($columnName, $table, $schema);
     }
 
 }

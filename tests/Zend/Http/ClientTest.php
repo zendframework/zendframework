@@ -14,20 +14,15 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->setMethod('post');
         $this->assertEquals(Client::ENC_URLENCODED, $client->getEncType());
     }
-    
+
     public function testIfZeroValueCookiesCanBeSet()
     {
-        try {
-            $client = new Client();
-            $client->addCookie("test", 0);
-            $client->addCookie("test2", "0");
-            $client->addCookie("test3", false);
-        } catch (Exception\InvalidArgumentException $e) {
-            $this->fail('Zero Values should be valid');
-        }
-        $this->assertTrue(true);
+        $client = new Client();
+        $client->addCookie("test", 0);
+        $client->addCookie("test2", "0");
+        $client->addCookie("test3", false);
     }
-    
+
     /**
     * @expectedException Zend\Http\Exception\InvalidArgumentException
     */
@@ -35,7 +30,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $client = new Client();
         $client->addCookie("test", null);
-    } 
+    }
 
     public function testIfCookieHeaderCanBeSet()
     {
@@ -43,7 +38,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client();
         $client->addCookie($header);
-        
+
         $cookies = $client->getCookies();
         $this->assertEquals(1, count($cookies));
         $this->assertEquals($header, $cookies['foo']);
@@ -58,7 +53,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client();
         $client->addCookie($headers);
-        
+
         $cookies = $client->getCookies();
         $this->assertEquals(2, count($cookies));
     }
@@ -69,10 +64,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             new SetCookie('foo'),
             new SetCookie('bar')
         ));
-        
+
         $client = new Client();
         $client->addCookie($headers);
-        
+
         $cookies = $client->getCookies();
         $this->assertEquals(2, count($cookies));
     }

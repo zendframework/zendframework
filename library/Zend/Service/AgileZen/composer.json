@@ -1,0 +1,17 @@
+{
+    "name": "zendframework/zend-service-agilezen",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "agilezen"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Service\\AgileZen": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-http": "self.version"
+    }
+}

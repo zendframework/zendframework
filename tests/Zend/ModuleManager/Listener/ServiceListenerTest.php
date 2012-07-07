@@ -47,7 +47,10 @@ class ServiceListenerTest extends TestCase
     {
         $this->services = new ServiceManager();
         $this->listener = new ServiceListener($this->services);
+        $this->listener->addServiceManager($this->services, 'service_manager', 'Zend\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfiguration');
         $this->event    = new ModuleEvent();
+        $this->configListener = new ConfigListener();
+        $this->event->setConfigListener($this->configListener);
     }
 
     public function testPassingInvalidModuleDoesNothing()
@@ -94,7 +97,7 @@ class ServiceListenerTest extends TestCase
 
     public function assertServiceManagerIsConfigured()
     {
-        $this->listener->configureServiceManager();
+        $this->listener->onLoadModulesPost($this->event);
         foreach ($this->getServiceConfiguration() as $prop => $expected) {
             if ($prop == 'invokables') {
                 $prop = 'invokableClasses';
@@ -147,7 +150,6 @@ class ServiceListenerTest extends TestCase
         $configListener = new ConfigListener();
         $configListener->setMergedConfig($config);
         $this->event->setConfigListener($configListener);
-        $this->listener->onLoadModulesPost($this->event);
         $this->assertServiceManagerIsConfigured();
     }
 }

@@ -21,13 +21,13 @@
 
 namespace ZendTest\GData\App;
 
-use Zend\GData,
-    Zend\GData\App,
-    Zend\GData\App\Extension,
-    Zend\Http,
-    Zend\Http\Header\Etag,
-    Zend\Uri,
-    ZendTest\GData\TestAsset;
+use Zend\GData;
+use Zend\GData\App;
+use Zend\GData\App\Extension;
+use Zend\Http;
+use Zend\Http\Header\Etag;
+use Zend\Uri;
+use ZendTest\GData\TestAsset;
 
 /**
  * @category   Zend
@@ -567,7 +567,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $v1TestString = 'TEST-v1';
         $v2TestString = 'TEST-v2';
 
-        App\Base::flushNamespaceLookupCache();
+        App\AbstractBase::flushNamespaceLookupCache();
         $entry = $this->service->newEntry();
         $entry->registerNamespace($prefix, $v1TestString, 1, 0);
         $entry->registerNamespace($prefix, $v2TestString, 2, 0);
@@ -592,7 +592,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $testString12 = 'TEST-v1-2';
         $testString22 = 'TEST-v2-2';
 
-        App\Base::flushNamespaceLookupCache();
+        App\AbstractBase::flushNamespaceLookupCache();
         $entry = $this->service->newEntry();
         $entry->registerNamespace($prefix, $testString10, 1, 0);
         $entry->registerNamespace($prefix, $testString20, 2, 0);

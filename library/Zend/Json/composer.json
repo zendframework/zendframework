@@ -1,0 +1,19 @@
+{
+    "name": "zendframework/zend-json",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "json"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Json": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "suggest": {
+        "zendframework/zend-server": "Zend\\Server component"
+    }
+}

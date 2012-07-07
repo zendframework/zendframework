@@ -22,7 +22,7 @@
 namespace ZendTest\Form\View\Helper\Captcha;
 
 use Zend\Captcha\ReCaptcha;
-use Zend\Form\Element;
+use Zend\Form\Element\Captcha as CaptchaElement;
 use Zend\Form\View\Helper\Captcha\ReCaptcha as ReCaptchaHelper;
 use Zend\Service\ReCaptcha\ReCaptcha as ReCaptchaService;
 use ZendTest\Form\View\Helper\CommonTestCase;
@@ -51,11 +51,19 @@ class ReCaptchaTest extends CommonTestCase
         parent::setUp();
     }
 
-    public function getElement() 
+    public function getElement()
     {
-        $element = new Element('foo');
-        $element->setAttribute('captcha', $this->captcha);
+        $element = new CaptchaElement('foo');
+        $element->setCaptcha($this->captcha);
         return $element;
+    }
+
+    public function testMissingCaptchaAttributeThrowsDomainException()
+    {
+        $element = new CaptchaElement('foo');
+
+        $this->setExpectedException('Zend\Form\Exception\DomainException');
+        $this->helper->render($element);
     }
 
     public function testRendersHiddenInputForChallengeField()

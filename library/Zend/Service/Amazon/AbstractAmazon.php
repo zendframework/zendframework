@@ -21,7 +21,7 @@
 
 namespace Zend\Service\Amazon;
 
-use Zend\Date\Date;
+use DateTime;
 
 /**
  * Abstract Amazon class that handles the credentials for any of the Web Services that
@@ -79,14 +79,14 @@ abstract class AbstractAmazon extends \Zend\Service\AbstractService
      * Set the RFC1123 request date - useful for testing the services with signature
      * If preserve is set, the specific object is kept for further requests
      *
-     * @param null|\Zend\Date\Date $date
-     * @param null|boolean         $preserve if the set date must be kept for further requests
+     * @param null|DateTime $date
+     * @param null|boolean  $preserve if the set date must be kept for further requests
      * @return void
      */
-    public function setRequestDate(Date $date = null, $preserve = null)
+    public function setRequestDate(DateTime $date = null, $preserve = null)
     {
 
-        if ($date instanceof Date && !is_null($preserve)) {
+        if ($date instanceof DateTime && !is_null($preserve)) {
             $date->{self::DATE_PRESERVE_KEY} = (boolean) $preserve;
         }
 
@@ -158,14 +158,14 @@ abstract class AbstractAmazon extends \Zend\Service\AbstractService
     public function getRequestDate()
     {
         if (!is_object($this->requestDate)) {
-            $date = new Date();
+            $date = new DateTime();
         } else {
             $date = $this->requestDate;
             if (empty($date->{self::DATE_PRESERVE_KEY})) {
                 $this->requestDate = null;
             }
         }
-        return $date->get(Date::RFC_1123);
+        return $date->format(DateTime::RFC1123);
     }
 
     /**

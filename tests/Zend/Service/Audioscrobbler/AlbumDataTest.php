@@ -102,18 +102,14 @@ class AlbumDataTest extends AudioscrobblerTestCase
 
         $this->setAudioscrobblerResponse($albumInfoResponse);
 
-        try {
-            $as = $this->getAudioscrobblerService();
-            $as->set('album', 'Metallica');
-            $as->set('artist', 'Metallica');
-            $response = $as->albumGetInfo();
-            $track = $response->tracks->track[0];
-            $this->assertEquals((string)$response['artist'], 'Metallica');
-            $this->assertEquals((string)$response['title'], 'Metallica');
-            $this->assertEquals((string)$track->url, 'http://www.last.fm/music/Metallica/_/Enter+Sandman+%28LP+Version%29');
-            $this->assertEquals(count($response->tracks->track), 12);
-        } catch (Exception $e ) {
-            $this->fail("Exception: [" . $e->getMessage() . "] thrown by test");
-        }
+        $as = $this->getAudioscrobblerService();
+        $as->set('album', 'Metallica');
+        $as->set('artist', 'Metallica');
+        $response = $as->albumGetInfo();
+        $track = $response->tracks->track[0];
+        $this->assertEquals((string)$response['artist'], 'Metallica');
+        $this->assertEquals((string)$response['title'], 'Metallica');
+        $this->assertEquals((string)$track->url, 'http://www.last.fm/music/Metallica/_/Enter+Sandman+%28LP+Version%29');
+        $this->assertEquals(count($response->tracks->track), 12);;
     }
 }

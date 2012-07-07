@@ -24,7 +24,6 @@ namespace ZendTest\Amf;
 use Zend\Amf\Parser,
     Zend\Amf\Value\Messaging,
     Zend\Amf\Value,
-    Zend\Date,
     Zend\Locale\Locale;
 
 /**
@@ -188,38 +187,6 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         date_default_timezone_set('America/Chicago');
         $dateSrc = '1978-10-23 4:20 America/Chicago';
         $date = new \DateTime($dateSrc, new \DateTimeZone('America/Chicago'));
-        $data = $date;
-
-        // Create an acknowlege message for a response to a RemotingMessage
-        $acknowledgeMessage = new Messaging\AcknowledgeMessage(null);
-        $acknowledgeMessage->correlationId = '77D952FE-47FA-D789-83B6-097D43403C6C';
-        $acknowledgeMessage->clientId = '2D043296-C81C-7189-4325-000007D62DA1';
-        $acknowledgeMessage->messageId = '2A686BAF-7D69-11C8-9A0F-0000513C0958';
-        $acknowledgeMessage->destination = null;
-        $acknowledgeMessage->timeToLive = 0;
-        $acknowledgeMessage->timestamp = '124569971300';
-        $acknowledgeMessage->body = $data;
-
-        $newBody = new Value\MessageBody($this->responseURI,null,$acknowledgeMessage);
-
-        // serialize the data to an AMF output stream
-        $this->_response->setObjectEncoding(0x03);
-        $this->_response->addAmfBody($newBody);
-        $this->_response->finalize();
-        $testResponse = $this->_response->getResponse();
-
-        // Load the expected response.
-        $mockResponse = file_get_contents(__DIR__ .'/TestAsset/Response/dateAmf3Response.bin');
-
-        // Check that the response matches the expected serialized value
-        $this->assertEquals($mockResponse, $testResponse);
-    }
-
-    public function testZendDateTimeSerializedToAmf3Date()
-    {
-        // Create php object to serialize
-        $date = new Date\Date('October 23, 1978', null, 'en_US');
-        $date->set('4:20:00',Date\Date::TIMES);
         $data = $date;
 
         // Create an acknowlege message for a response to a RemotingMessage
@@ -904,24 +871,6 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $date = new \DateTime($dateSrc, new \DateTimeZone('America/Chicago'));
         $data = $date;
         $newBody = new Value\MessageBody('/1/onResult',null,$data);
-        $this->_response->setObjectEncoding(0x00);
-        $this->_response->addAmfBody($newBody);
-        $this->_response->finalize();
-        $testResponse = $this->_response->getResponse();
-
-        // Load the expected response.
-        $mockResponse = file_get_contents(__DIR__ .'/TestAsset/Response/dateAmf0Response.bin');
-
-        // Check that the response matches the expected serialized value
-        $this->assertEquals($mockResponse, $testResponse);
-    }
-
-    public function testZendDateSerializedToAmf0Date()
-    {
-        $date = new Date\Date('October 23, 1978', null, 'en_US');
-        $date->set('4:20:00',Date\Date::TIMES);
-
-        $newBody = new Value\MessageBody('/1/onResult',null,$date);
         $this->_response->setObjectEncoding(0x00);
         $this->_response->addAmfBody($newBody);
         $this->_response->finalize();

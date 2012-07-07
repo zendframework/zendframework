@@ -664,9 +664,9 @@ N/A
             <programlisting language="php"><![CDATA[
 use Zend\Http\Request;
 $request = new Request();
-$request->headers()->get('Content-Type'); // return content type
-$request->headers()->addHeader(new Cookie('foo' => 'bar'));
-foreach ($request->headers() as $header) {
+$request->getHeaders()->get('Content-Type'); // return content type
+$request->getHeaders()->addHeader(new Cookie('foo' => 'bar'));
+foreach ($request->getHeaders() as $header) {
     echo $header->getFieldName() . ' with value ' . $header->getFieldValue();
 }
 ]]></programlisting>

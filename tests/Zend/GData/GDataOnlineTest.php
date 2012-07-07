@@ -235,12 +235,7 @@ class GDataOnlineTest extends \PHPUnit_Framework_TestCase
         // cleanup and remove the album
         // first we wait 5 seconds
         sleep(5);
-        try {
-            $albumEntry->delete();
-        } catch (App\Exception $e) {
-            $this->fail('Tried to delete the test album, got exception: ' .
-                $e->getMessage());
-        }
+        $albumEntry->delete();
     }
 
     function testIsAuthenticated()
@@ -309,7 +304,7 @@ class GDataOnlineTest extends \PHPUnit_Framework_TestCase
     public function testDisableXMLToObjectMappingReturnsStringForFeed()
     {
         $gdata = new GData\GData();
-        $gdata->useObjectMapping(false);
+        $gdata::useObjectMapping(false);
         $xmlString = $gdata->getFeed(
             'http://gdata.youtube.com/feeds/api/standardfeeds/top_rated');
         $this->assertEquals('string', gettype($xmlString));
@@ -318,7 +313,7 @@ class GDataOnlineTest extends \PHPUnit_Framework_TestCase
     public function testDisableXMLToObjectMappingReturnsStringForEntry()
     {
         $gdata = new GData\GData();
-        $gdata->useObjectMapping(false);
+        $gdata::useObjectMapping(false);
         $xmlString = $gdata->getFeed(
             'http://gdata.youtube.com/feeds/api/videos/O4SWAfisH-8');
         $this->assertEquals('string', gettype($xmlString));
@@ -327,11 +322,11 @@ class GDataOnlineTest extends \PHPUnit_Framework_TestCase
     public function testDisableAndReEnableXMLToObjectMappingReturnsObject()
     {
         $gdata = new GData\GData();
-        $gdata->useObjectMapping(false);
+        $gdata::useObjectMapping(false);
         $xmlString = $gdata->getEntry(
             'http://gdata.youtube.com/feeds/api/videos/O4SWAfisH-8');
         $this->assertEquals('string', gettype($xmlString));
-        $gdata->useObjectMapping(true);
+        $gdata::useObjectMapping(true);
         $entry = $gdata->getEntry(
             'http://gdata.youtube.com/feeds/api/videos/O4SWAfisH-8');
         $this->assertTrue($entry instanceof GData\Entry);

@@ -16,7 +16,7 @@ use Zend\EventManager\EventManager;
 
 /**
  * Module manager
- * 
+ *
  * @category Zend
  * @package  Zend_ModuleManager
  */
@@ -66,6 +66,19 @@ class ModuleManager implements ModuleManagerInterface
         }
     }
 
+    public function onLoadModules()
+    {
+        if (true === $this->modulesAreLoaded) {
+            return $this;
+        }
+
+        foreach ($this->getModules() as $moduleName) {
+            $this->loadModule($moduleName);
+        }
+
+        $this->modulesAreLoaded = true;
+    }
+
     /**
      * Load the provided modules.
      *
@@ -79,15 +92,16 @@ class ModuleManager implements ModuleManagerInterface
             return $this;
         }
 
-        $this->events()->trigger(__FUNCTION__ . '.pre', $this, $this->getEvent());
+        $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULES, $this, $this->getEvent());
 
-        foreach ($this->getModules() as $moduleName) {
-            $this->loadModule($moduleName);
-        }
+        /**
+         * Having a dedicated .post event abstracts the complexity of priorities from the user.
+         * Users can attach to the .post event and be sure that important
+         * things like config merging are complete without having to worry if
+         * they set a low enough priority.
+         */
+        $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULES_POST, $this, $this->getEvent());
 
-        $this->events()->trigger(__FUNCTION__ . '.post', $this, $this->getEvent());
-
-        $this->modulesAreLoaded = true;
         return $this;
     }
 
@@ -108,7 +122,7 @@ class ModuleManager implements ModuleManagerInterface
         $event = $this->getEvent();
         $event->setModuleName($moduleName);
 
-        $result = $this->events()->trigger(__FUNCTION__ . '.resolve', $this, $event, function ($r) {
+        $result = $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, $this, $event, function ($r) {
             return (is_object($r));
         });
 
@@ -122,7 +136,7 @@ class ModuleManager implements ModuleManagerInterface
         }
         $event->setModule($module);
 
-        $this->events()->trigger(__FUNCTION__, $this, $event);
+        $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE, $this, $event);
         $this->loadedModules[$moduleName] = $module;
         return $module;
     }
@@ -142,9 +156,9 @@ class ModuleManager implements ModuleManagerInterface
     }
 
     /**
-     * Get an instance of a module class by the module name 
-     * 
-     * @param  string $moduleName 
+     * Get an instance of a module class by the module name
+     *
+     * @param  string $moduleName
      * @return mixed
      */
     public function getModule($moduleName)
@@ -223,6 +237,7 @@ class ModuleManager implements ModuleManagerInterface
             'module_manager',
         ));
         $this->events = $events;
+        $this->attachDefaultListeners();
         return $this;
     }
 
@@ -233,11 +248,22 @@ class ModuleManager implements ModuleManagerInterface
      *
      * @return EventManagerInterface
      */
-    public function events()
+    public function getEventManager()
     {
         if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
         }
         return $this->events;
+    }
+
+    /**
+     * Register the default event listeners
+     *
+     * @return ModuleManager
+     */
+    protected function attachDefaultListeners()
+    {
+        $events = $this->getEventManager();
+        $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($this, 'onLoadModules'));
     }
 }

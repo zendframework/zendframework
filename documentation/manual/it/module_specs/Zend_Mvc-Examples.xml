@@ -12,8 +12,8 @@
       <info><title>Accedere alle Request e Response (richieste e risposte)</title></info>
 
       <para>
-        Quando utilizzi <classname>ActionController</classname> oppure
-        <classname>RestfulController</classname> la gli oggetti 
+        Quando utilizzi <classname>AbstractActionController</classname> oppure
+        <classname>AbstractRestfulController</classname> la gli oggetti
         richiesta e la risposta sono costruiti direttamente dentro 
         il controller prima dei chiamare il metodo <methodname>dispatch()</methodname>.
         Puoi accedere a queste variabili nei seguenti modi:
@@ -32,7 +32,7 @@ $response = $this->response;
       <para>
         In aggiunta, il tuo controller implementa 
         <classname>InjectApplicationEvent</classname> (come anche
-        <classname>ActionController</classname> e  <classname>RestfulController</classname> 
+        <classname>AbstractActionController</classname> e  <classname>AbstractRestfulController</classname>
         fanno) e puoi accedere a questi oggetti dal collegamento 
         con <classname>MvcEvent</classname>
       </para>
@@ -62,15 +62,15 @@ $response = $event->getResponse();
       <para>
         In aggiunta, il tuo controller implementa 
         <classname>InjectApplicationEvent</classname> (come anche
-        <classname>ActionController</classname> e  <classname>RestfulController</classname> 
+        <classname>AbstractActionController</classname> e  <classname>AbstractRestfulController</classname>
         fanno) e puoi accedere a questi oggetti dal collegamento 
         con <classname>MvcEvent</classname>
       </para>
       <!-- <para>
         Within your controller, if you implement
         <classname>InjectApplicationEvent</classname> (as both
-        <classname>ActionController</classname> and
-        <classname>RestfulController</classname> do), you can access this
+        <classname>AbstractActionController</classname> and
+        <classname>AbstractRestfulController</classname> do), you can access this
         object from the attached <classname>MvcEvent</classname>:
       </para> --> <!-- Again? see before...-->
 
@@ -165,7 +165,7 @@ class Module
 
         $listeners   = new Listeners\ViewListener();
         $listeners->setView($view);
-        $application->events()->attachAggregate($listeners);
+        $application->getEventManager()->attachAggregate($listeners);
     }
 }
 ]]></programlisting>

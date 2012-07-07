@@ -24,7 +24,7 @@ namespace Zend\Cache\Storage\Plugin;
 use Zend\Cache\Exception,
     Zend\Serializer\Adapter\AdapterInterface as SerializerAdapter,
     Zend\Serializer\Serializer as SerializerFactory,
-    Zend\Stdlib\Options;
+    Zend\Stdlib\AbstractOptions;
 
 /**
  * @category   Zend
@@ -33,7 +33,7 @@ use Zend\Cache\Exception,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PluginOptions extends Options
+class PluginOptions extends AbstractOptions
 {
     /**
      * Used by:

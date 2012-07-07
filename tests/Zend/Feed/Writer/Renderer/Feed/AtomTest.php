@@ -20,10 +20,10 @@
  */
 
 namespace ZendTest\Feed\Writer\Renderer\Feed;
+
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Reader;
-use Zend\Date;
 
 /**
  * @category   Zend
@@ -69,11 +69,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testBuildMethodRunsMinimalWriterContainerProperlyBeforeICheckAtomCompliance()
     {
         $feed = new Renderer\Feed\Atom($this->_validWriter);
-        try {
-            $feed->render();
-        } catch (Writer\Exception $e) {
-            $this->fail('Valid Writer object caused an exception when building which should never happen');
-        }
+        $feed->render();
     }
 
     public function testFeedEncodingHasBeenSet()
@@ -155,7 +151,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $atomFeed = new Renderer\Feed\Atom($this->_validWriter);
         $atomFeed->render();
         $feed = Reader\Reader::importString($atomFeed->saveXml());
-        $this->assertEquals(1234567890, $feed->getDateModified()->get(Date\Date::TIMESTAMP));
+        $this->assertEquals(1234567890, $feed->getDateModified()->getTimestamp());
     }
 
     /**

@@ -21,8 +21,7 @@
 
 namespace ZendTest\Validator;
 
-use Zend\Validator,
-    ReflectionClass;
+use Zend\Validator\Regex;
 
 /**
  * @category   Zend
@@ -52,7 +51,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
             array('/[a-z]/', false, array('123', 'A'))
             );
         foreach ($valuesExpected as $element) {
-            $validator = new Validator\Regex($element[0]);
+            $validator = new Regex($element[0]);
             foreach ($element[2] as $input) {
                 $this->assertEquals($element[1], $validator->isValid($input));
             }
@@ -66,7 +65,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessages()
     {
-        $validator = new Validator\Regex('/./');
+        $validator = new Regex('/./');
         $this->assertEquals(array(), $validator->getMessages());
     }
 
@@ -77,7 +76,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPattern()
     {
-        $validator = new Validator\Regex('/./');
+        $validator = new Regex('/./');
         $this->assertEquals('/./', $validator->getPattern());
     }
 
@@ -89,7 +88,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
     public function testBadPattern()
     {
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Internal error parsing');
-        $validator = new Validator\Regex('/');
+        $validator = new Regex('/');
     }
 
     /**
@@ -97,7 +96,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
      */
     public function testNonStringValidation()
     {
-        $validator = new Validator\Regex('/./');
+        $validator = new Regex('/./');
         $this->assertFalse($validator->isValid(array(1 => 1)));
     }
 
@@ -113,7 +112,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
             $this->markTestIncomplete( // Skipped because Travis-CI PHP 5.3.3 don't allow set the locale
                 "Test skipped because the PHP version is lower than 5.3.4 or the environment don't support quoted characters");
         }
-        $validator = new Validator\Regex('/^[[:alpha:]\']+$/iu');
+        $validator = new Regex('/^[[:alpha:]\']+$/iu');
         $this->assertEquals($expected, $validator->isValid($input),
                             'Reason: ' . implode('', $validator->getMessages()));
     }
@@ -135,40 +134,18 @@ class RegexTest extends \PHPUnit_Framework_TestCase
             array(false, 'test99'),
         );
     }
-    
+
     public function testEqualsMessageTemplates()
     {
-        $validator = new Validator\Regex('//');
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
+        $validator = new Regex('//');
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
-    
+
     public function testEqualsMessageVariables()
     {
-        $validator = new Validator\Regex('//');
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $validator = new Regex('//');
+        $this->assertAttributeEquals($validator->getOption('messageVariables'),
+                                     'messageVariables', $validator);
     }
 }

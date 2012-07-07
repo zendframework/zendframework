@@ -21,7 +21,7 @@
 
 namespace ZendTest\GData\App\TestAsset;
 
-use Zend\GData\App\Base;
+use Zend\GData\App\AbstractBase;
 
 /**
  * Minimal implementation of Zend_GData_App_Base
@@ -33,7 +33,7 @@ use Zend\GData\App\Base;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-class MockBase extends Base
+class MockBase extends AbstractBase
 {
     // This space intentionally left blank.
 }

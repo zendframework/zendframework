@@ -21,7 +21,7 @@ use Zend\Db\Adapter\Adapter,
  * @package    Zend_Db
  * @subpackage Sql
  */
-class Insert implements SqlInterface, PreparableSqlInterface
+class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
 {
     /**#@+
      * Constants
@@ -125,7 +125,6 @@ class Insert implements SqlInterface, PreparableSqlInterface
     public function getRawState($key = null)
     {
         $rawState = array(
-            'columns' => $this->columns,
             'table' => $this->table,
             'columns' => $this->columns,
             'values' => $this->values
@@ -158,8 +157,16 @@ class Insert implements SqlInterface, PreparableSqlInterface
 
         foreach ($this->columns as $cIndex => $column) {
             $columns[$cIndex] = $platform->quoteIdentifier($column);
-            $values[$cIndex] = $driver->formatParameterName($column);
-            $parameterContainer->offsetSet($column, $this->values[$cIndex]);
+            if ($this->values[$cIndex] instanceof Expression) {
+                $exprData = $this->processExpression($this->values[$cIndex], $platform, $driver);
+                $values[$cIndex] = $exprData['sql'];
+                if (count($exprData['parameters']) > 0) {
+                    $parameterContainer->merge($exprData['parameters']);
+                }
+            } else {
+                $values[$cIndex] = $driver->formatParameterName($column);
+                $parameterContainer->offsetSet($column, $this->values[$cIndex]);
+            }
         }
 
         $sql = sprintf(
@@ -186,7 +193,16 @@ class Insert implements SqlInterface, PreparableSqlInterface
         $columns = array_map(array($adapterPlatform, 'quoteIdentifier'), $this->columns);
         $columns = implode(', ', $columns);
 
-        $values = array_map(array($adapterPlatform, 'quoteValue'), $this->values);
+        $values = array();
+        foreach ($this->values as $value) {
+            if ($value instanceof Expression) {
+                $exprData = $this->processExpression($value, $adapterPlatform);
+                $values[] = $exprData['sql'];
+            } else {
+                $values[] = $adapterPlatform->quoteValue($value);
+            }
+        }
+
         $values = implode(', ', $values);
 
         return sprintf($this->specifications[self::SPECIFICATION_INSERT], $table, $columns, $values);

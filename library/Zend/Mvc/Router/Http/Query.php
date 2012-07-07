@@ -23,10 +23,10 @@ namespace Zend\Mvc\Router\Http;
 
 use Zend\Mvc\Router\Http\RouteMatch;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Mvc\Router\Exception;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Mvc\Router\Exception;
 
 /**
  * Query route.
@@ -68,8 +68,8 @@ class Query implements RouteInterface
      * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
-     * @param  array|\Traversable $options
-     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @param  array|Traversable $options
+     * @throws Exception\InvalidArgumentException
      * @return Query
      */
     public static function factory($options = array())
@@ -98,11 +98,11 @@ class Query implements RouteInterface
      */
     public function match(Request $request, $pathOffset = null)
     {
-        if (!method_exists($request, 'query')) {
+        if (!method_exists($request, 'getQuery')) {
             return null;
         }
 
-        $matches = $this->recursiveUrldecode($request->query()->toArray());
+        $matches = $this->recursiveUrldecode($request->getQuery()->toArray());
 
         return new RouteMatch(array_merge($this->defaults, $matches));
     }

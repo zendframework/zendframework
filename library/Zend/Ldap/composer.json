@@ -1,0 +1,16 @@
+{
+    "name": "zendframework/zend-ldap",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "ldap"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Ldap": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

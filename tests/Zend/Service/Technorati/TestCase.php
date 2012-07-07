@@ -42,12 +42,9 @@ class TestCase extends \PHPUnit_Framework_TestCase
     protected function _testConstruct($className, $args)
     {
         $reflection = new \ReflectionClass($className);
-        try {
-            $object = $reflection->newInstanceArgs($args);
-            $this->assertInstanceOf($className, $object);
-        } catch (Technorati\Exception\RuntimeException $e) {
-            $this->fail("Exception " . $e->getMessage() . " thrown");
-        }
+
+        $object = $reflection->newInstanceArgs($args);
+        $this->assertInstanceOf($className, $object);
     }
 
     protected function _testResultSetItemsInstanceOfResult($resultSetClassName, $args, $resultClassName)

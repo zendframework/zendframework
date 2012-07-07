@@ -42,17 +42,10 @@ class Subject implements UnstructuredInterface
      */
     protected $encoding = 'ASCII';
 
-    /**
-     * Factory from header line
-     *
-     * @param  string $headerLine
-     * @throws Exception\InvalidArgumentException
-     * @return Subject
-     */
     public static function fromString($headerLine)
     {
-        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
-        list($name, $value) = explode(': ', $headerLine, 2);
+        $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
+        list($name, $value) = explode(': ', $decodedLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'subject') {
@@ -60,72 +53,47 @@ class Subject implements UnstructuredInterface
         }
 
         $header = new static();
+        if ($decodedLine != $headerLine) {
+            $header->setEncoding('UTF-8');
+        }
         $header->setSubject($value);
         
         return $header;
     }
 
-    /**
-     * Get the header name
-     * 
-     * @return string
-     */
     public function getFieldName()
     {
         return 'Subject';
     }
 
-    /**
-     * Get the header value
-     * 
-     * @return string
-     */
-    public function getFieldValue()
+    public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
-        return HeaderWrap::wrap($this->subject, $this);
+        if (HeaderInterface::FORMAT_ENCODED) {
+            return HeaderWrap::wrap($this->subject, $this);
+        }
+
+        return $this->subject;
     }
 
-    /**
-     * Set header encoding
-     * 
-     * @param  string $encoding 
-     * @return Subject
-     */
     public function setEncoding($encoding) 
     {
         $this->encoding = $encoding;
         return $this;
     }
 
-    /**
-     * Get header encoding
-     * 
-     * @return string
-     */
     public function getEncoding()
     {
         return $this->encoding;
     }
 
-    /**
-     * Set the value of the header
-     * 
-     * @param  string $subject 
-     * @return Subject
-     */
     public function setSubject($subject)
     {
         $this->subject = (string) $subject;
         return $this;
     }
 
-    /**
-     * String representation of header
-     * 
-     * @return string
-     */
     public function toString()
     {
-        return 'Subject: ' . $this->getFieldValue();
+        return 'Subject: ' . $this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
     }
 }

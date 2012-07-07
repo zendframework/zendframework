@@ -32,7 +32,7 @@ use DomDocument;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class CosmosResultSet extends ResultSet
+class CosmosResultSet extends AbstractResultSet
 {
     /**
      * Technorati weblog url, if queried URL is a valid weblog.
@@ -155,7 +155,7 @@ class CosmosResultSet extends ResultSet
     }
 
     /**
-     * Implements ResultSet::current().
+     * Implements AbstractResultSet::current().
      *
      * @return CosmosResult current result
      */

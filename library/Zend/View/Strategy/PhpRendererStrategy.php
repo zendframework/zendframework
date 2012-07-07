@@ -21,12 +21,12 @@
 
 namespace Zend\View\Strategy;
 
-use Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregateInterface,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\View\Renderer\PhpRenderer,
-    Zend\View\ViewEvent;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\ViewEvent;
 
 /**
  * @category   Zend

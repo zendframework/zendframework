@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set.ip"><title>Ip</title>
+    
+
+    <para>
+        <classname>Zend\Validator\Ip</classname> allows you to validate if a given value is an IP
+        address. It supports the IPv4, IPv6 and IPvFeature definitions.
+    </para>
+
+    <section xml:id="zend.validator.set.ip.options"><title>Supported options for Zend\Validator\Ip</title>
+        
+
+        <para>
+            The following options are supported for <classname>Zend\Validator\Ip</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>allowipv4</property></emphasis>: Defines if the validator
+                    allows IPv4 addresses. This option defaults to <constant>TRUE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>allowipv6</property></emphasis>: Defines if the validator
+                    allows IPv6 addresses. This option defaults to <constant>TRUE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>allowipvfuture</property></emphasis>: Defines if the validator
+                    allows IPvFuture addresses. This option defaults to <constant>false</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>allowliteral</property></emphasis>: Defines if the validator
+                    allows IPv6 or IPvFuture with URI literal style (the IP surrounded by brackets).
+                    This option defaults to <constant>true</constant>.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+
+    <section xml:id="zend.validator.set.ip.basic"><title>Basic usage</title>
+        
+
+        <para>
+            A basic example of usage is below:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend\Validator\Ip();
+if ($validator->isValid($ip)) {
+    // ip appears to be valid
+} else {
+    // ip is invalid; print the reasons
+}
+]]></programlisting>
+
+        <note><title>Invalid IP addresses</title>
+            
+
+            <para>
+                Keep in mind that <classname>Zend\Validator\Ip</classname> only validates IP
+                addresses. Addresses like '<filename>mydomain.com</filename>' or
+                '<filename>192.168.50.1/index.html</filename>' are no valid
+                IP addresses. They are either hostnames or valid <acronym>URL</acronym>s but not IP
+                addresses.
+            </para>
+        </note>
+
+        <note><title>IPv6/IPvFuture validation</title>
+            
+
+            <para>
+                <classname>Zend\Validator\Ip</classname> validates IPv6/IPvFuture addresses with regex. The
+                reason is that the filters and methods from <acronym>PHP</acronym> itself don't
+                follow the <acronym>RFC</acronym>. Many other available classes also don't follow
+                it.
+            </para>
+        </note>
+    </section>
+
+    <section xml:id="zend.validator.set.ip.singletype"><title>Validate IPv4 or IPV6 alone</title>
+        
+
+        <para>
+            Sometimes it's useful to validate only one of the supported formats. For example when
+            your network only supports IPv4. In this case it would be useless to allow IPv6 within
+            this validator.
+        </para>
+
+        <para>
+            To limit <classname>Zend\Validator\Ip</classname> to one protocol you can set the options
+            <property>allowipv4</property> or <property>allowipv6</property> to
+            <constant>FALSE</constant>. You can do this either by giving the option to the
+            constructor or by using <methodname>setOptions()</methodname> afterwards.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend\Validator\Ip(array('allowipv6' => false));
+if ($validator->isValid($ip)) {
+    // ip appears to be valid ipv4 address
+} else {
+    // ip is no ipv4 address
+}
+]]></programlisting>
+
+        <note><title>Default behaviour</title>
+            
+
+            <para>
+                The default behaviour which <classname>Zend\Validator\Ip</classname> follows is to
+                allow both standards.
+            </para>
+        </note>
+    </section>
+</section>

@@ -21,9 +21,9 @@
 
 namespace ZendTest\Config\Writer;
 
-use \Zend\Config\Writer\Json as JsonWriter,
-    \Zend\Config\Config,
-    \Zend\Config\Reader\Json as JsonReader;
+use Zend\Config\Writer\Json as JsonWriter;
+use Zend\Config\Config;
+use Zend\Config\Reader\Json as JsonReader;
 
 /**
  * @category   Zend
@@ -35,14 +35,11 @@ use \Zend\Config\Writer\Json as JsonWriter,
  */
 class JsonTest extends AbstractWriterTestCase
 {
-
     public function setUp()
     {
         $this->reader = new JsonReader();
         $this->writer = new JsonWriter();
     }
-
-   
 
     public function testNoSection()
     {
@@ -58,7 +55,7 @@ class JsonTest extends AbstractWriterTestCase
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = $this->reader->fromFile(__DIR__ . '/files/allsections.json');
+        $config = $this->reader->fromFile(__DIR__ . '/_files/allsections.json');
 
         $this->writer->toFile($this->getTestAssetFileName(), $config);
 

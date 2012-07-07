@@ -21,10 +21,10 @@
 
 namespace Zend\Service\Rackspace;
 
-use Zend\Http\Client as HttpClient,
-    Zend\Validator\Ip as IpValidator;
+use Zend\Http\Client as HttpClient;
+use Zend\Validator\Ip as IpValidator;
 
-class Servers extends Rackspace
+class Servers extends AbstractRackspace
 {
     const LIMIT_FILE_SIZE           = 10240;
     const LIMIT_NUM_FILE            = 5;
@@ -50,7 +50,7 @@ class Servers extends Rackspace
      * If $details is true returns detail info
      * 
      * @param  boolean $details
-     * @return Zend\Service\Rackspace\Servers\ServerList|boolean
+     * @return Servers\ServerList|boolean
      */
     public function listServers($details=false)
     {
@@ -85,7 +85,8 @@ class Servers extends Rackspace
      * Get the specified server
      * 
      * @param  string $id 
-     * @return Zend\Service\Rackspace\Servers\Server
+     * @return Servers\Server
+     * @throws Exception\InvalidArgumentException
      */
     public function getServer($id) 
     {
@@ -127,7 +128,8 @@ class Servers extends Rackspace
      * @param  array $data 
      * @param  array $metadata
      * @param  array $files
-     * @return Zend\Service\Rackspace\Servers\Server|boolean
+     * @return Servers\Server|boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function createServer(array $data, $metadata=array(),$files=array())
     {
@@ -202,7 +204,8 @@ class Servers extends Rackspace
      * @param  string $id
      * @param  string $name
      * @param  string $password
-     * @return boolean 
+     * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     protected function updateServer($id,$name=null,$password=null)
     {
@@ -252,7 +255,8 @@ class Servers extends Rackspace
      * 
      * @param  string $id
      * @param  string $name
-     * @return boolean 
+     * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function changeServerName($id,$name)
     {
@@ -269,7 +273,8 @@ class Servers extends Rackspace
      * 
      * @param  string $id
      * @param  string $password
-     * @return boolean 
+     * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function changeServerPassword($id,$password)
     {
@@ -285,7 +290,8 @@ class Servers extends Rackspace
      * Delete a server
      * 
      * @param  string $id
-     * @return boolean 
+     * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function deleteServer($id)
     {
@@ -369,6 +375,7 @@ class Servers extends Rackspace
      * @param  string $ip 
      * @param  string $groupId
      * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function shareIpAddress($id,$ip,$groupId,$configure=true)
     {
@@ -419,7 +426,8 @@ class Servers extends Rackspace
      * 
      * @param  string $id
      * @param  string $ip
-     * @return boolean 
+     * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function unshareIpAddress($id,$ip)
     {
@@ -467,6 +475,7 @@ class Servers extends Rackspace
      * @param  string $id
      * @param  boolean $hard 
      * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function rebootServer($id,$hard=false)
     {
@@ -521,6 +530,7 @@ class Servers extends Rackspace
      * @param  string $id
      * @param  string $imageId
      * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function rebuildServer($id,$imageId)
     {
@@ -575,6 +585,7 @@ class Servers extends Rackspace
      * @param  string $id
      * @param  string $flavorId
      * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function resizeServer($id,$flavorId)
     {
@@ -630,7 +641,8 @@ class Servers extends Rackspace
      * confirmed after 24 hours if they are not explicitly confirmed or reverted.
      *
      * @param  string $id
-     * @return boolean 
+     * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function confirmResizeServer($id)
     {
@@ -681,7 +693,8 @@ class Servers extends Rackspace
      * reverted.
      *
      * @param  string $id
-     * @return boolean 
+     * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function revertResizeServer($id)
     {
@@ -767,6 +780,7 @@ class Servers extends Rackspace
      * 
      * @param  string $flavorId
      * @return array|boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function getFlavor($flavorId)
     {
@@ -803,7 +817,7 @@ class Servers extends Rackspace
      * Get the list of the images
      * 
      * @param  boolean $details
-     * @return Zend\Service\Rackspace\Servers\ImageList|boolean 
+     * @return Servers\ImageList|boolean
      */
     public function listImages($details=false)
     {
@@ -838,7 +852,8 @@ class Servers extends Rackspace
      * Get detail about an image
      * 
      * @param  string $id
-     * @return Zend\Service\Rackspace\Servers\Image|boolean
+     * @return Servers\ImageList|boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function getImage($id)
     {
@@ -875,8 +890,9 @@ class Servers extends Rackspace
      * Create an image for a serverId
      * 
      * @param  string $serverId
-     * @param  string $name 
-     * @return Zend\Service\Rackspace\Servers\Image
+     * @param  string $name
+     * @return Servers\Image
+     * @throws Exception\InvalidArgumentException
      */
     public function createImage($serverId,$name)
     {
@@ -928,7 +944,8 @@ class Servers extends Rackspace
      * Delete an image
      * 
      * @param  string $id
-     * @return boolean 
+     * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function deleteImage($id)
     {
@@ -963,7 +980,8 @@ class Servers extends Rackspace
      * Get the backup schedule of a server
      * 
      * @param  string $id server's Id
-     * @return array|boolean 
+     * @return array|boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function getBackupSchedule($id)
     {
@@ -1006,7 +1024,8 @@ class Servers extends Rackspace
      * @param  string $id server's Id
      * @param  string $weekly
      * @param  string $daily
-     * @return boolean 
+     * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function changeBackupSchedule($id,$weekly,$daily)
     {
@@ -1059,6 +1078,7 @@ class Servers extends Rackspace
      * 
      * @param  string $id server's Id
      * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function disableBackupSchedule($id)
     {
@@ -1097,7 +1117,7 @@ class Servers extends Rackspace
      * Get the list of shared IP groups
      * 
      * @param  boolean $details
-     * @return Zend\Service\Rackspace\Servers\SharedIpGroupList|boolean 
+     * @return Servers\SharedIpGroupList|boolean
      */
     public function listSharedIpGroups($details=false)
     {
@@ -1132,7 +1152,8 @@ class Servers extends Rackspace
      * Get the shared IP group
      * 
      * @param  integer $id
-     * @return Zend\Service\Rackspace\Servers\SharedIpGroup|boolean 
+     * @return Servers\SharedIpGroup|boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function getSharedIpGroup($id)
     {
@@ -1170,7 +1191,8 @@ class Servers extends Rackspace
      * 
      * @param  string $name
      * @param  string $serverId
-     * @return array|boolean 
+     * @return array|boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function createSharedIpGroup($name,$serverId)
     {
@@ -1214,6 +1236,7 @@ class Servers extends Rackspace
      * 
      * @param  integer $id 
      * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function deleteSharedIpGroup($id)
     {

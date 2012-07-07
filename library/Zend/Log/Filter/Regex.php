@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Log\Filter;
 
 use Zend\Log\Exception;
@@ -46,6 +43,7 @@ class Regex implements FilterInterface
      * Filter out any log messages not matching the pattern
      *
      * @param string $regex Regular expression to test the log message
+     * @return Regex
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($regex)

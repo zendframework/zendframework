@@ -135,8 +135,8 @@ class InputTest extends TestCase
     public function testIsValidReturnsTrueIfValidationChainSucceeds()
     {
         $input  = new Input('foo');
-        $input->setValue('bar');
-        $validator = new Validator\Alpha();
+        $input->setValue('123');
+        $validator = new Validator\Digits();
         $input->getValidatorChain()->addValidator($validator);
         $this->assertTrue($input->isValid());
     }
@@ -144,10 +144,10 @@ class InputTest extends TestCase
     public function testValidationOperatesOnFilteredValue()
     {
         $input  = new Input('foo');
-        $input->setValue(' bar ');
+        $input->setValue(' 123 ');
         $filter = new Filter\StringTrim();
         $input->getFilterChain()->attach($filter);
-        $validator = new Validator\Alpha();
+        $validator = new Validator\Digits();
         $input->getValidatorChain()->addValidator($validator);
         $this->assertTrue($input->isValid());
     }

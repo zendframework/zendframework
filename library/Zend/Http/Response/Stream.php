@@ -37,21 +37,21 @@ use Zend\Http\Response,
  */
 class Stream extends Response
 {
-    
+
     /**
      * The Content-Length value, if set
      *
      * @var int
      */
     protected $contentLength = null;
-    
+
     /**
      * The portion of the body that has alredy been streamed
      *
      * @var int
      */
     protected $contentStreamed = 0;
-    
+
     /**
      * Response as stream
      *
@@ -139,7 +139,7 @@ class Stream extends Response
         return $this;
     }
 
-    
+
     /**
      * Create a new Zend\Http\Response\Stream object from a stream
      *
@@ -149,14 +149,14 @@ class Stream extends Response
      */
     public static function fromStream($responseString, $stream)
     {
-    
+
         if (!is_resource($stream)) {
             throw new Exception\InvalidArgumentException('A valid stream is required');
         }
 
         $headerComplete = false;
         $headersString  = '';
-        
+
         $responseArray = explode("\n",$responseString);
 
         while (count($responseArray)) {
@@ -167,35 +167,35 @@ class Stream extends Response
                 $headerComplete = true;
                 break;
             }
-            
+
         }
-        
+
         if (!$headerComplete) {
             while (false !== ($nextLine = fgets($stream))) {
-                
+
                 $headersString .= trim($nextLine)."\r\n";
                 if ($nextLine == "\r\n" || $nextLine == "\n") {
                     $headerComplete = true;
                     break;
                 }
             }
-        } 
+        }
 
         if (!$headerComplete) {
             throw new Exception\OutOfRangeException('End of header not found');
         }
-            
+
         $response = static::fromString($headersString);
-    
+
         if (is_resource($stream)) {
             $response->setStream($stream);
         }
-        
+
         if (count($responseArray)) {
             $response->content = implode("\n", $responseArray);
-        } 
-    
-        $headers = $response->headers();
+        }
+
+        $headers = $response->getHeaders();
         foreach($headers as $header) {
             if ($header instanceof \Zend\Http\Header\ContentLength) {
                 $response->contentLength = (int) $header->getFieldValue();
@@ -210,8 +210,8 @@ class Stream extends Response
 
         return $response;
     }
-    
-    
+
+
     /**
      * Get the response body as string
      *
@@ -248,7 +248,7 @@ class Stream extends Response
         return $this->content;
     }
 
-    
+
     /**
      * Read stream content and return it as string
      *
@@ -267,15 +267,15 @@ class Stream extends Response
         if (!is_resource($this->stream) || $bytes == 0) {
             return '';
         }
-    
+
         $this->content         .= stream_get_contents($this->stream, $bytes);
         $this->contentStreamed += strlen($this->content);
-    
+
         if ($this->contentLength == $this->contentStreamed) {
             $this->stream = null;
         }
     }
-        
+
     /**
      * Destructor
      */

@@ -21,9 +21,9 @@
 
 namespace ZendTest\Log;
 
-use Zend\Log\Logger,
-    Zend\Log\Writer\Mock as MockWriter,
-    Zend\Stdlib\SplPriorityQueue;
+use Zend\Log\Logger;
+use Zend\Log\Writer\Mock as MockWriter;
+use Zend\Stdlib\SplPriorityQueue;
 
 /**
  * @category   Zend
@@ -51,15 +51,15 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('U', $this->logger->getDateTimeFormat());
     }
 
-    public function testUsesWriterBrokerByDefault()
+    public function testUsesWriterPluginManagerByDefault()
     {
-        $this->assertInstanceOf('Zend\Log\WriterBroker', $this->logger->getBroker());
+        $this->assertInstanceOf('Zend\Log\WriterPluginManager', $this->logger->getPluginManager());
     }
 
-    public function testPassingValidStringClassToSetBroker()
+    public function testPassingValidStringClassToSetPluginManager()
     {
-        $this->logger->setBroker('Zend\Loader\PluginBroker');
-        $this->assertInstanceOf('Zend\Loader\PluginBroker', $this->logger->getBroker());
+        $this->logger->setPluginManager('Zend\Log\WriterPluginManager');
+        $this->assertInstanceOf('Zend\Log\WriterPluginManager', $this->logger->getPluginManager());
     }
 
     public static function provideInvalidClasses()
@@ -73,13 +73,13 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideInvalidClasses
      */
-    public function testPassingInvalidArgumentToSetBrokerRaisesException($broker)
+    public function testPassingInvalidArgumentToSetPluginManagerRaisesException($plugins)
     {
-        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must implement');
-        $this->logger->setBroker($broker);
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException');
+        $this->logger->setPluginManager($plugins);
     }
 
-    public function testPassingShortNameToBrokerReturnsWriterByThatName()
+    public function testPassingShortNameToPluginReturnsWriterByThatName()
     {
         $writer = $this->logger->plugin('mock');
         $this->assertInstanceOf('Zend\Log\Writer\Mock', $writer);

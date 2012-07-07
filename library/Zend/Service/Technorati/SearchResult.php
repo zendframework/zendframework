@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Technorati;
 
-use DomElement,
-    Zend\Uri;
+use DomElement;
+use Zend\Uri;
 
 /**
  * Represents a single Technorati Search query result object.
@@ -35,7 +35,7 @@ use DomElement,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SearchResult extends Result
+class SearchResult extends AbstractResult
 {
     /**
      * Technorati weblog object corresponding to queried keyword.
@@ -64,7 +64,7 @@ class SearchResult extends Result
     /**
      * The datetime the entry was created.
      *
-     * @var     ZendDate
+     * @var     \DateTime
      * @access  protected
      */
     protected $created;
@@ -132,7 +132,7 @@ class SearchResult extends Result
     /**
      * Returns the datetime the entry was created.
      *
-     * @return  ZendDate
+     * @return  \DateTime
      */
     public function getCreated()
     {

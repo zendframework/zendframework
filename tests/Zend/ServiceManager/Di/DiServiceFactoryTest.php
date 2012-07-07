@@ -2,12 +2,18 @@
 
 namespace ZendTest\ServiceManager\Di;
 
-use Zend\ServiceManager\Di\DiServiceFactory,
-    Zend\ServiceManager\Di\DiInstanceManagerProxy;
+use Zend\Di\Di;
+use Zend\ServiceManager\Di\DiServiceFactory;
+use Zend\ServiceManager\Di\DiInstanceManagerProxy;
+use Zend\ServiceManager\Di\DiAbstractServiceFactory;
+use Zend\ServiceManager\ServiceManager;
 
 class DiServiceFactoryTest extends \PHPUnit_Framework_TestCase
 {
 
+    /**
+     * @var DiServiceFactory
+     */
     protected $diServiceFactory = null;
 
     /**@#+

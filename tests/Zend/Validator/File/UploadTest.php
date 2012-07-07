@@ -20,6 +20,7 @@
  */
 
 namespace ZendTest\Validator\File;
+
 use Zend\Validator\File;
 
 /**

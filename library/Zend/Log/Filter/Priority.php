@@ -48,7 +48,7 @@ class Priority implements FilterInterface
      *
      * @param int $priority Priority
      * @param string $operator Comparison operator
-     * @return void
+     * @return Priority
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($priority, $operator = null)

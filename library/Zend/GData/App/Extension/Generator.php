@@ -21,8 +21,6 @@
 
 namespace Zend\GData\App\Extension;
 
-use Zend\GData\App\Extension;
-
 /**
  * Represents the atom:generator element
  *
@@ -32,7 +30,7 @@ use Zend\GData\App\Extension;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Generator extends Extension
+class Generator extends AbstractExtension
 {
 
     protected $_rootElement = 'generator';

@@ -27,7 +27,7 @@ use Zend\Navigation;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Translator;
+use Zend\I18n\Translator\Translator;
 use Zend\View;
 use Zend\View\Exception;
 
@@ -41,7 +41,7 @@ use Zend\View\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractHelper
-    extends View\Helper\HtmlElement
+    extends View\Helper\AbstractHtmlElement
     implements HelperInterface,
                ServiceLocatorAwareInterface
 {
@@ -81,7 +81,7 @@ abstract class AbstractHelper
     /**
      * Translator
      *
-     * @var \Zend\Translator\Adapter
+     * @var Translator
      */
     protected $translator;
 
@@ -315,15 +315,9 @@ abstract class AbstractHelper
      *                           Default is null, which sets no translator.
      * @return AbstractHelper  fluent interface, returns self
      */
-    public function setTranslator($translator = null)
+    public function setTranslator(Translator $translator = null)
     {
-        if (null == $translator ||
-            $translator instanceof Translator\Adapter\AbstractAdapter) {
-            $this->translator = $translator;
-        } elseif ($translator instanceof Translator\Translator) {
-            $this->translator = $translator->getAdapter();
-        }
-
+        $this->translator = $translator;
         return $this;
     }
 
@@ -332,7 +326,7 @@ abstract class AbstractHelper
      *
      * Implements {@link HelperInterface::getTranslator()}.
      *
-     * @return Translator\Adapter\AbstractAdapter|null  translator or null
+     * @return Translator|null  translator or null
      */
     public function getTranslator()
     {
@@ -679,7 +673,7 @@ abstract class AbstractHelper
             'target' => $page->getTarget()
         );
 
-        $escaper = $this->view->plugin('escape');
+        $escaper = $this->view->plugin('escapeHtml');
 
         return '<a' . $this->_htmlAttribs($attribs) . '>'
              . $escaper($label)
@@ -782,7 +776,7 @@ abstract class AbstractHelper
     /**
      * Converts an associative array to a string of tag attributes.
      *
-     * Overloads {@link View\Helper\HtmlElement::_htmlAttribs()}.
+     * Overloads {@link View\Helper\AbstractHtmlElement::_htmlAttribs()}.
      *
      * @param  array $attribs  an array where each key-value pair is converted
      *                         to an attribute name and value
@@ -803,7 +797,7 @@ abstract class AbstractHelper
     /**
      * Normalize an ID
      *
-     * Overrides {@link View\Helper\HtmlElement::_normalizeId()}.
+     * Overrides {@link View\Helper\AbstractHtmlElement::_normalizeId()}.
      *
      * @param  string $value
      * @return string

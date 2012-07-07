@@ -24,7 +24,6 @@ namespace ZendTest\Feed\Writer\Renderer\Feed;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Reader;
-use Zend\Date;
 
 /**
  * @category   Zend
@@ -65,11 +64,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     public function testBuildMethodRunsMinimalWriterContainerProperlyBeforeICheckRssCompliance()
     {
         $feed = new Renderer\Feed\Rss($this->_validWriter);
-        try {
-            $feed->render();
-        } catch (Writer\Exception\ExceptionInterface $e) {
-            $this->fail('Valid Writer object caused an exception when building which should never happen');
-        }
+        $feed->render();
     }
 
     public function testFeedEncodingHasBeenSet()
@@ -155,7 +150,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $rssFeed = new Renderer\Feed\Rss($this->_validWriter);
         $rssFeed->render();
         $feed = Reader\Reader::importString($rssFeed->saveXml());
-        $this->assertEquals(1234567890, $feed->getDateModified()->get(Date\Date::TIMESTAMP));
+        $this->assertEquals(1234567890, $feed->getDateModified()->getTimestamp());
     }
 
     public function testFeedUpdatedDateIfMissingThrowsNoException()
@@ -171,7 +166,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $rssFeed = new Renderer\Feed\Rss($this->_validWriter);
         $rssFeed->render();
         $feed = Reader\Reader::importString($rssFeed->saveXml());
-        $this->assertEquals(1234567890, $feed->getLastBuildDate()->get(Date\Date::TIMESTAMP));
+        $this->assertEquals(1234567890, $feed->getLastBuildDate()->getTimestamp());
     }
 
     public function testFeedGeneratorHasBeenSet()

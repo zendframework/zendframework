@@ -21,15 +21,15 @@
 
 namespace Zend\View\Renderer;
 
-use JsonSerializable,
-    Traversable,
-    Zend\Json\Json,
-    Zend\Stdlib\ArrayUtils,
-    Zend\View\Exception,
-    Zend\View\Model\ModelInterface as Model,
-    Zend\View\Model\JsonModel,
-    Zend\View\Renderer\RendererInterface as Renderer,
-    Zend\View\Resolver\ResolverInterface as Resolver;
+use JsonSerializable;
+use Traversable;
+use Zend\Json\Json;
+use Zend\Stdlib\ArrayUtils;
+use Zend\View\Exception;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Model\JsonModel;
+use Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\View\Resolver\ResolverInterface as Resolver;
 
 /**
  * JSON renderer
@@ -224,6 +224,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             $childValues = $this->recurseModel($child);
             if ($captureTo) {
                 // Capturing to a specific key
+                //TODO please complete if append is true. must change old value to array and append to array?
                 $values[$captureTo] = $childValues;
             } elseif ($mergeChildren) {
                 // Merging values with parent

@@ -21,8 +21,8 @@
 
 namespace ZendTest\Filter\Compress;
 
-use Zend\Filter\Compress\Tar as TarCompression,
-    Zend\Loader\StandardAutoloader;
+use Zend\Filter\Compress\Tar as TarCompression;
+use Zend\Loader\StandardAutoloader;
 
 /**
  * @category   Zend

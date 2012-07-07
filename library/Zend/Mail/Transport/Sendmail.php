@@ -26,7 +26,8 @@ use Zend\Mail\Address\AddressInterface;
 use Traversable,
     Zend\Mail,
     Zend\Mail\Exception,
-    Zend\Mail\Headers;
+    Zend\Mail\Headers,
+    Zend\Mail\Header\HeaderInterface;
 
 /**
  * Class for sending email via the PHP internal mail() function
@@ -48,7 +49,7 @@ class Sendmail implements TransportInterface
 
     /**
      * Callback to use when sending mail; typically, {@link mailHandler()}
-     * 
+     *
      * @var callable
      */
     protected $callable;
@@ -135,7 +136,7 @@ class Sendmail implements TransportInterface
 
     /**
      * Send a message
-     * 
+     *
      * @param  \Zend\Mail\Message $message
      */
     public function send(Mail\Message $message)
@@ -158,7 +159,7 @@ class Sendmail implements TransportInterface
      */
     protected function prepareRecipients(Mail\Message $message)
     {
-        $headers = $message->headers();
+        $headers = $message->getHeaders();
 
         if (!$headers->has('to')) {
             throw new Exception\RuntimeException('Invalid email; contains no "To" header');
@@ -172,7 +173,7 @@ class Sendmail implements TransportInterface
 
         // If not on Windows, return normal string
         if (!$this->isWindowsOs()) {
-            return $to->getFieldValue();
+            return $to->getFieldValue(HeaderInterface::FORMAT_ENCODED);
         }
 
         // Otherwise, return list of emails
@@ -186,7 +187,7 @@ class Sendmail implements TransportInterface
 
     /**
      * Prepare the subject line string
-     * 
+     *
      * @param  \Zend\Mail\Message $message
      * @return string
      */
@@ -197,7 +198,7 @@ class Sendmail implements TransportInterface
 
     /**
      * Prepare the body string
-     * 
+     *
      * @param  \Zend\Mail\Message $message
      * @return string
      */
@@ -216,7 +217,7 @@ class Sendmail implements TransportInterface
 
     /**
      * Prepare the textual representation of headers
-     * 
+     *
      * @param  \Zend\Mail\Message $message
      * @return string
      */
@@ -224,11 +225,11 @@ class Sendmail implements TransportInterface
     {
         // On Windows, simply return verbatim
         if ($this->isWindowsOs()) {
-            return $message->headers()->toString();
+            return $message->getHeaders()->toString();
         }
 
         // On *nix platforms, strip the "to" header
-        $headers = clone $message->headers();
+        $headers = clone $message->getHeaders();
         $headers->removeHeader('To');
         $headers->removeHeader('Subject');
         return $headers->toString();
@@ -237,9 +238,9 @@ class Sendmail implements TransportInterface
     /**
      * Prepare additional_parameters argument
      *
-     * Basically, overrides the MAIL FROM envelope with either the Sender or 
+     * Basically, overrides the MAIL FROM envelope with either the Sender or
      * From address.
-     * 
+     *
      * @param  \Zend\Mail\Message $message
      * @return string
      */
@@ -257,7 +258,7 @@ class Sendmail implements TransportInterface
             return $parameters;
         }
 
-        $from = $message->from();
+        $from = $message->getFrom();
         if (count($from)) {
             $from->rewind();
             $sender      = $from->current();
@@ -315,7 +316,7 @@ class Sendmail implements TransportInterface
 
     /**
      * Is this a windows OS?
-     * 
+     *
      * @return bool
      */
     protected function isWindowsOs()

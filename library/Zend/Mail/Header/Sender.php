@@ -44,17 +44,10 @@ class Sender implements HeaderInterface
      */
     protected $encoding = 'ASCII';
 
-    /**
-     * Factory: create Sender header object from string
-     *
-     * @param  string $headerLine
-     * @return Sender
-     * @throws Exception\InvalidArgumentException on invalid header line
-     */
     public static function fromString($headerLine)
     {
-        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
-        list($name, $value) = explode(': ', $headerLine, 2);
+        $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
+        list($name, $value) = explode(': ', $decodedLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'sender') {
@@ -62,6 +55,9 @@ class Sender implements HeaderInterface
         }
 
         $header = new static();
+        if ($decodedLine != $headerLine) {
+            $header->setEncoding('UTF-8');
+        }
 
         // Check for address, and set if found
         if (preg_match('^(?P<name>.*?)<(?P<email>[^>]+)>$', $value, $matches)) {
@@ -69,7 +65,7 @@ class Sender implements HeaderInterface
             if (empty($name)) {
                 $name = null;
             } else {
-                $name = iconv_mime_decode($name, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
+                $name = iconv_mime_decode($name, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
             }
             $header->setAddress($matches['email'], $name);
         }
@@ -77,22 +73,12 @@ class Sender implements HeaderInterface
         return $header;
     }
 
-    /**
-     * Get header name
-     *
-     * @return string
-     */
     public function getFieldName()
     {
         return 'Sender';
     }
 
-    /**
-     * Get header value
-     *
-     * @return string
-     */
-    public function getFieldValue()
+    public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
         if (!$this->address instanceof Mail\Address\AddressInterface) {
             return '';
@@ -102,7 +88,9 @@ class Sender implements HeaderInterface
         $name  = $this->address->getName();
         if (!empty($name)) {
             $encoding = $this->getEncoding();
-            if ('ASCII' !== $encoding) {
+            if ($format == HeaderInterface::FORMAT_ENCODED
+                && 'ASCII' !== $encoding
+            ) {
                 $name  = HeaderWrap::mimeEncodeValue($name, $encoding);
             }
             $email = sprintf('%s %s', $name, $email);
@@ -110,36 +98,20 @@ class Sender implements HeaderInterface
         return $email;
     }
 
-    /**
-     * Set header encoding
-     *
-     * @param  string $encoding
-     * @return Sender
-     */
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
         return $this;
     }
 
-    /**
-     * Get header encoding
-     *
-     * @return string
-     */
     public function getEncoding()
     {
         return $this->encoding;
     }
 
-    /**
-     * Serialize to string
-     *
-     * @return string
-     */
     public function toString()
     {
-        return 'Sender: ' . $this->getFieldValue();
+        return 'Sender: ' . $this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
     }
 
     /**

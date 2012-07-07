@@ -10,12 +10,14 @@
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
+use Zend\Db\Adapter\Exception\ErrorException as BaseErrorException;
+
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
  */
-class ErrorException extends \Exception
+class ErrorException extends BaseErrorException
 {
 
     /**

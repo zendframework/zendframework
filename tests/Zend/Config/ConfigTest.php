@@ -21,7 +21,7 @@
 
 namespace ZendTest\Config;
 
-use \Zend\Config\Config;
+use Zend\Config\Config;
 
 /**
  * @category   Zend
@@ -473,20 +473,14 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config2 = new Config(array(), true);
 
         $config2->merge($config);
-        try {
-            $config2->key2 = 'no';
-        }  catch (\Zend\Config\Exception\RuntimeException $e) {
-            $this->fail('Unexpected exception at top level has been raised: ' . $e->getMessage());
-        }
+
+        $config2->key2 = 'no';
+
         $this->assertEquals('no', $config2->key2);
 
-        try {
-            $config2->key->nested = 'no';
-        }  catch (\Zend\Config\Exception\RuntimeException $e) {
-            $this->fail('Unexpected exception on nested object has been raised: ' . $e->getMessage());
-        }
-        $this->assertEquals('no', $config2->key->nested);
+        $config2->key->nested = 'no';
 
+        $this->assertEquals('no', $config2->key->nested);
     }
 
     /**

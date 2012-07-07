@@ -21,8 +21,9 @@
 
 namespace Zend\Mail\Storage\Part;
 
-use Zend\Mail\Storage\Part,
-    Zend\Mime;
+use Zend\Mail\Headers;
+use Zend\Mail\Storage\Part;
+use Zend\Mime;
 
 /**
  * @category   Zend
@@ -72,8 +73,7 @@ class File extends Part
             $header .= $line;
         }
 
-        $body = null; // "Declare" variable since it's passed by reference
-        Mime\Decode::splitMessage($header, $this->_headers, $body);
+        $this->_headers = Headers::fromString($header);
 
         $this->_contentPos[0] = ftell($this->_fh);
         if ($endPos !== null) {

@@ -21,13 +21,13 @@
 
 namespace Zend\View\Model;
 
-use ArrayAccess,
-    ArrayIterator,
-    Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\View\Exception,
-    Zend\View\Model,
-    Zend\View\Variables as ViewVariables;
+use ArrayAccess;
+use ArrayIterator;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\View\Exception;
+use Zend\View\Model;
+use Zend\View\Variables as ViewVariables;
 
 /**
  * @category   Zend
@@ -76,6 +76,14 @@ class ViewModel implements ModelInterface
      * @var array|ArrayAccess&Traversable
      */
     protected $variables = array();
+	
+	
+	/**
+     * Is this append to child  with the same capture?
+     * 
+     * @var bool
+     */
+    protected $append = false;
 
     /**
      * Constructor
@@ -284,14 +292,19 @@ class ViewModel implements ModelInterface
      * 
      * @param  ModelInterface $child
      * @param  null|string $captureTo Optional; if specified, the "capture to" value to set on the child
+     * @param  null|bool $append Optional; if specified, append to child  with the same capture
      * @return ViewModel
      */
-    public function addChild(ModelInterface $child, $captureTo = null)
+    public function addChild(ModelInterface $child, $captureTo = null, $append = null)
     {
         $this->children[] = $child;
         if (null !== $captureTo) {
             $child->setCaptureTo($captureTo);
         }
+		if (null !== $captureTo) {
+			$child->setAppend($append);
+		}
+		
         return $this;
     }
 
@@ -359,6 +372,28 @@ class ViewModel implements ModelInterface
     public function terminate()
     {
         return $this->terminate;
+    }
+	
+	/**
+     * Set flag indicating whether or not append to child  with the same capture
+     * 
+     * @param  bool $append 
+     * @return ViewModel
+     */
+    public function setAppend($append)
+    {
+        $this->append = (bool) $append;
+        return $this;
+    }
+
+    /**
+     * Is this append to child  with the same capture?
+     * 
+     * @return bool
+     */
+    public function isAppend()
+    {
+        return $this->append;
     }
 
     /**

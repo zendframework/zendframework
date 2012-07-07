@@ -21,10 +21,10 @@
 
 namespace ZendTest\View\Helper;
 
-use Zend\Paginator,
-    Zend\View\Helper,
-    Zend\View\Renderer\PhpRenderer as View,
-    Zend\View\Resolver;
+use Zend\Paginator;
+use Zend\View\Helper;
+use Zend\View\Renderer\PhpRenderer as View;
+use Zend\View\Resolver;
 
 /**
  * @category   Zend
@@ -131,11 +131,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
         $this->_viewHelper->getView()->paginator = $this->_paginator;
         Helper\PaginationControl::setDefaultViewPartial('testPagination.phtml');
 
-        try {
-            $output = $this->_viewHelper->__invoke();
-        } catch (\Zend\View\Exception\ExceptionInterface $e) {
-            $this->fail('Could not find paginator in the view instance');
-        }
+        $output = $this->_viewHelper->__invoke();
 
         $this->assertContains('pagination control', $output, $output);
     }
@@ -147,12 +143,11 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
     {
         Helper\PaginationControl::setDefaultViewPartial('testPagination.phtml');
 
-        try {
-            $output = $this->_viewHelper->__invoke();
-        } catch (\Exception $e) {
-            $this->assertInstanceOf('Zend\View\Exception\ExceptionInterface', $e);
-            $this->assertEquals('No paginator instance provided or incorrect type', $e->getMessage());
-        }
+        $this->setExpectedException(
+            'Zend\View\Exception\ExceptionInterface',
+            'No paginator instance provided or incorrect type'
+        );
+        $this->_viewHelper->__invoke();
     }
 
     /**
@@ -191,11 +186,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
     {
         $all = new Paginator\ScrollingStyle\All();
 
-        try {
-            $output = $this->_viewHelper->__invoke($this->_paginator, $all, 'testPagination.phtml');
-        } catch (\Exception $e) {
-            $this->fail('Could not use object for sliding style');
-        }
+        $output = $this->_viewHelper->__invoke($this->_paginator, $all, 'testPagination.phtml');
 
         $this->assertContains('page count (11) equals pages in range (11)', $output, $output);
     }

@@ -370,7 +370,7 @@ if ($input->hasUnknown()) {
                 mapping a rule name to an array of error identifiers. Error
                 identifiers are fixed strings, to identify the reason for a
                 validation failure, while messages can be customized.
-                See <link linkend="zend.validate.introduction.using">this section</link> for
+                See <link linkend="zend.validator.introduction.using">this section</link> for
                 more information.
             </para>
 

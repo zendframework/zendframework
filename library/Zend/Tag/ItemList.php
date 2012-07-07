@@ -23,11 +23,11 @@ namespace Zend\Tag;
 
 use Zend\Amf\Parser\Exception;
 
-use Zend\Tag\Exception\InvalidArgumentException,
-	Zend\Tag\Exception\OutOfBoundsException,
-    Countable,
-    SeekableIterator,
-    ArrayAccess;
+use Zend\Tag\Exception\InvalidArgumentException;
+use Zend\Tag\Exception\OutOfBoundsException;
+use Countable;
+use SeekableIterator;
+use ArrayAccess;
 
 /**
  * @category   Zend

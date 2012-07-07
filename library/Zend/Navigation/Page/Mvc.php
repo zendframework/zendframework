@@ -21,9 +21,9 @@
 
 namespace Zend\Navigation\Page;
 
-use Zend\Mvc\Router\RouteMatch,
-    Zend\Navigation\Exception,
-    Zend\View\Helper\Url as UrlHelper;
+use Zend\Mvc\Router\RouteMatch;
+use Zend\Mvc\Router\RouteStackInterface;
+use Zend\Navigation\Exception;
 
 /**
  * Represents a page that is defined using controller, action, route
@@ -86,21 +86,21 @@ class Mvc extends AbstractPage
     protected $routeMatch;
 
     /**
-     * View helper for assembling URLs
+     * Router for assembling URLs
      *
      * @see getHref()
-     * @var UrlHelper
+     * @var RouteStackInterface
      */
-    protected $urlHelper = null;
+    protected $router = null;
 
     /**
-     * Default urlHelper to be used if urlHelper is not given.
+     * Default router to be used if router is not given.
      *
      * @see getHref()
      *
-     * @var UrlHelper
+     * @var RouteStackInterface
      */
-    protected static $defaultUrlHelper = null;
+    protected static $defaultRouter= null;
 
     // Accessors:
 
@@ -165,12 +165,12 @@ class Mvc extends AbstractPage
     /**
      * Returns href for this page
      *
-     * This method uses {@link UrlHelper} to assemble
+     * This method uses {@link RouteStackInterface} to assemble
      * the href based on the page's properties.
      *
-     * @see UrlHelper
+     * @see RouteStackInterface
      * @return string  page href
-     * @throws Exception\DomainException if no UrlHelper is set
+     * @throws Exception\DomainException if no router is set
      */
     public function getHref()
     {
@@ -178,15 +178,15 @@ class Mvc extends AbstractPage
             return $this->hrefCache;
         }
 
-        $helper = $this->urlHelper;
-        if (null === $helper) {
-            $helper = self::$defaultUrlHelper;
+        $router = $this->router;
+        if (null === $router) {
+            $router = self::$defaultRouter;
         }
 
-        if (!$helper instanceof UrlHelper) {
+        if (!$router instanceof RouteStackInterface) {
             throw new Exception\DomainException(
                 __METHOD__
-                . ' cannot execute as no Zend\View\Helper\Url instance is composed'
+                . ' cannot execute as no Zend\Mvc\Router\RouteStackInterface instance is composed'
             );
         }
 
@@ -200,10 +200,19 @@ class Mvc extends AbstractPage
             $params['action'] = $param;
         }
 
-        $url = $helper(
-            $this->getRoute(),
-            $params
-        );
+        switch (true) {
+            case ($this->getRoute() !== null):
+                $name = $this->getRoute();
+                break;
+            case ($this->getRouteMatch() !== null):
+                $name = $this->getRouteMatch()->getMatchedRouteName();
+                break;
+            default:
+                throw new Exception\DomainException('No route name could be found');
+        }
+
+        $options = array('name' => $name);
+        $url = $router->assemble($params, $options);
 
         // Add the fragment identifier if it is set
         $fragment = $this->getFragment();
@@ -372,49 +381,49 @@ class Mvc extends AbstractPage
     }
 
     /**
-     * Get the url helper.
+     * Get the router.
      *
-     * @return null|\Zend\View\Helper\Url
+     * @return null|RouteStackInterface
      */
-    public function getUrlHelper()
+    public function getRouter()
     {
-        return $this->urlHelper;
+        return $this->router;
     }
 
     /**
-     * Sets action helper for assembling URLs
+     * Sets router for assembling URLs
      *
      * @see getHref()
      *
-     * @param  UrlHelper $helper URL helper plugin
+     * @param  RouteStackInterface $router Router
      * @return Mvc    fluent interface, returns self
      */
-    public function setUrlHelper(UrlHelper $helper)
+    public function setRouter(RouteStackInterface $router)
     {
-        $this->urlHelper = $helper;
+        $this->router = $router;
         return $this;
     }
 
     /**
-     * Sets the default view helper for assembling URLs.
+     * Sets the default router for assembling URLs.
      *
      * @see getHref()
-     * @param  null|UrlHelper $helper  URL helper
+     * @param  RouteStackInterface $router Router
      * @return void
      */
-    public static function setDefaultUrlHelper($helper)
+    public static function setDefaultRouter($router)
     {
-        self::$defaultUrlHelper = $helper;
+        self::$defaultRouter = $router;
     }
 
     /**
-     * Gets the default view helper for assembling URLs.
+     * Gets the default router for assembling URLs.
      *
-     * @return UrlHelper
+     * @return RouteStackInterface
      */
-    public static function getDefaultUrlHelper()
+    public static function getDefaultRouter()
     {
-        return self::$defaultUrlHelper;
+        return self::$defaultRouter;
     }
 
     // Public methods:

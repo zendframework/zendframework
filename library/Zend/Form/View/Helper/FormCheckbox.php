@@ -51,7 +51,7 @@ class FormCheckbox extends FormInput
      * Returns the option for prefixing the element with a hidden element
      * for the unset value.
      *
-     * @return  boolean
+     * @return boolean
      */
     public function getUseHiddenElement()
     {
@@ -62,7 +62,8 @@ class FormCheckbox extends FormInput
      * Sets the option for prefixing the element with a hidden element
      * for the unset value.
      *
-     * @return  boolean
+     * @param  boolean $useHiddenElement
+     * @return FormCheckbox
      */
     public function setUseHiddenElement($useHiddenElement)
     {
@@ -72,8 +73,8 @@ class FormCheckbox extends FormInput
 
     /**
      * Render a form <input> element from the provided $element
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @return string
      */
     public function render(ElementInterface $element)
@@ -100,11 +101,11 @@ class FormCheckbox extends FormInput
             }
         }
 
-        if (!is_array($options) && !$options instanceof Traversable) { 
+        if (!is_array($options) && !$options instanceof Traversable) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has an array or Traversable "options" attribute.',
                 __METHOD__
-            )); 
+            ));
         }
 
         $attributes['name']    = $name;
@@ -118,8 +119,8 @@ class FormCheckbox extends FormInput
         $attributes['value'] = $options['checkedValue'];
 
         $rendered = sprintf(
-            '<input %s%s', 
-            $this->createAttributesString($attributes), 
+            '<input %s%s',
+            $this->createAttributesString($attributes),
             $closingBracket
         );
 
@@ -134,7 +135,7 @@ class FormCheckbox extends FormInput
             );
 
             $rendered = sprintf(
-                '<input type="hidden" %s%s', 
+                '<input type="hidden" %s%s',
                 $this->createAttributesString($hiddenAttributes),
                 $closingBracket
             ) . $rendered;
@@ -147,9 +148,9 @@ class FormCheckbox extends FormInput
      * Invoke helper as functor
      *
      * Proxies to {@link render()}.
-     * 
-     * @param  ElementInterface $element 
-     * @return string
+     *
+     * @param  ElementInterface $element
+     * @return string|FormCheckbox
      */
     public function __invoke(ElementInterface $element = null)
     {
@@ -162,7 +163,7 @@ class FormCheckbox extends FormInput
 
     /**
      * Return input type
-     * 
+     *
      * @return string
      */
     protected function getInputType()

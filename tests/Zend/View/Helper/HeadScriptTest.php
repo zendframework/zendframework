@@ -56,11 +56,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = Registry::REGISTRY_KEY;
-        if (\Zend\Registry::isRegistered($regKey)) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry[$regKey]);
-        }
+        Registry::unsetRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new Helper\HeadScript();
     }
@@ -361,11 +357,9 @@ document.write(bar.strlen());');
         $this->helper->__invoke()->captureStart();
         echo "this is something captured";
         $this->helper->__invoke()->captureEnd();
-        try {
-            $this->helper->__invoke()->captureStart();
-        } catch (View\Exception\ExceptionInterface $e) {
-            $this->fail('Serial captures should be allowed');
-        }
+
+        $this->helper->__invoke()->captureStart();
+
         echo "this is something else captured";
         $this->helper->__invoke()->captureEnd();
     }

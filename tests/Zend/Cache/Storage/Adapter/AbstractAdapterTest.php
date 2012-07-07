@@ -728,7 +728,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         // init mock
         $this->_storage = $this->getMockForAbstractAdapter(array($internalMethod));
-        $this->_storage->events()->attach($eventName, function ($event) use ($expectedArgs) {
+        $this->_storage->getEventManager()->attach($eventName, function ($event) use ($expectedArgs) {
             $params = $event->getParams();
             foreach ($expectedArgs as $k => $v) {
                 $params[$k] = $v;

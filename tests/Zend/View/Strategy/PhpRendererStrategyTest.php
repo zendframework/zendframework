@@ -25,7 +25,6 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\EventManager\EventManager,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
-    Zend\Registry,
     Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
     Zend\View\Model\ModelInterface as Model,
     Zend\View\Renderer\PhpRenderer,
@@ -44,9 +43,7 @@ class PhpRendererStrategyTest extends TestCase
     public function setUp()
     {
         // Necessary to ensure placeholders do not persist between individual tests
-        if (Registry::isRegistered(PlaceholderRegistry::REGISTRY_KEY)) {
-            Registry::getInstance()->offsetUnset(PlaceholderRegistry::REGISTRY_KEY);
-        }
+        PlaceholderRegistry::unsetRegistry();
 
         $this->renderer = new PhpRenderer;
         $this->strategy = new PhpRendererStrategy($this->renderer);
@@ -63,7 +60,7 @@ class PhpRendererStrategyTest extends TestCase
     protected function assertResponseNotInjected()
     {
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertTrue(empty($content));
         $this->assertFalse($headers->has('content-type'));
     }
@@ -82,7 +79,7 @@ class PhpRendererStrategyTest extends TestCase
         $this->strategy->injectResponse($this->event);
         $this->assertResponseNotInjected();
     }
-    
+
     public function testResponseContentSetToContentPlaceholderWhenResultAndArticlePlaceholderAreEmpty()
     {
         $this->renderer->placeholder('content')->set('Content');
@@ -155,7 +152,7 @@ class PhpRendererStrategyTest extends TestCase
             $this->assertTrue($found, 'Listener not found');
         }
     }
-    
+
     public function testCanAttachListenersAtSpecifiedPriority()
     {
         $events = new EventManager();

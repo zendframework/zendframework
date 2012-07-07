@@ -22,7 +22,7 @@ namespace Zend\Mvc;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManagerAwareInterface;
-use Zend\Mvc\MvcEvent;
+use Zend\ModuleManager\ModuleManagerInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\RequestInterface;
 use Zend\Stdlib\ResponseInterface;
@@ -51,7 +51,7 @@ use Zend\Stdlib\ResponseInterface;
  * $response->send();
  * </code>
  *
- * bootstrap() opts in to the default route, dispatch, and view listeners, 
+ * bootstrap() opts in to the default route, dispatch, and view listeners,
  * sets up the MvcEvent, and triggers the bootstrap event. This can be omitted
  * if you wish to setup your own listeners and/or workflow; alternately, you
  * can simply extend the class to override such behavior.
@@ -83,7 +83,7 @@ class Application implements
     protected $event;
 
     /**
-     * @var EventManager
+     * @var EventManagerInterface
      */
     protected $events;
 
@@ -103,7 +103,7 @@ class Application implements
     protected $serviceManager = null;
 
     /**
-     * @var \Zend\ModuleManager\ModuleManager
+     * @var ModuleManagerInterface
      */
     protected $moduleManager;
 
@@ -111,7 +111,7 @@ class Application implements
      * Constructor
      *
      * @param mixed $configuration
-     * @param ServiceManager $serviceManager 
+     * @param ServiceManager $serviceManager
      */
     public function __construct($configuration, ServiceManager $serviceManager)
     {
@@ -127,7 +127,7 @@ class Application implements
 
     /**
      * Retrieve the application configuration
-     * 
+     *
      * @return array|object
      */
     public function getConfiguration()
@@ -138,16 +138,16 @@ class Application implements
     /**
      * Bootstrap the application
      *
-     * Defines and binds the MvcEvent, and passes it the request, response, and 
-     * router. Attaches the ViewManager as a listener. Triggers the bootstrap 
+     * Defines and binds the MvcEvent, and passes it the request, response, and
+     * router. Attaches the ViewManager as a listener. Triggers the bootstrap
      * event.
-     * 
+     *
      * @return Application
      */
     public function bootstrap()
     {
         $serviceManager = $this->serviceManager;
-        $events         = $this->events();
+        $events         = $this->getEventManager();
 
         $events->attach($serviceManager->get('RouteListener'));
         $events->attach($serviceManager->get('DispatchListener'));
@@ -162,13 +162,13 @@ class Application implements
               ->setRouter($serviceManager->get('Router'));
 
         // Trigger bootstrap events
-        $events->trigger('bootstrap', $event);
+        $events->trigger(MvcEvent::EVENT_BOOTSTRAP, $event);
         return $this;
     }
 
     /**
      * Retrieve the service manager
-     * 
+     *
      * @return ServiceManager
      */
     public function getServiceManager()
@@ -179,7 +179,7 @@ class Application implements
     /**
      * Get the request object
      *
-     * @return Request
+     * @return RequestInterface
      */
     public function getRequest()
     {
@@ -189,7 +189,7 @@ class Application implements
     /**
      * Get the response object
      *
-     * @return Response
+     * @return ResponseInterface
      */
     public function getResponse()
     {
@@ -230,9 +230,37 @@ class Application implements
      *
      * @return EventManagerInterface
      */
-    public function events()
+    public function getEventManager()
     {
         return $this->events;
+    }
+
+    /**
+     * Static method for quick and easy initialization of the Application.
+     *
+     * If you use this init() method, you cannot specify a service with the
+     * name of 'ApplicationConfiguration' in your service manager config. That
+     * name is reserved to hold the array from application.config.php
+     *
+     * The following services can only be overridden from application.config.php:
+     *
+     * - ModuleManager
+     * - SharedEventManager
+     * - EventManager & Zend\EventManager\EventManagerInterface
+     *
+     * All other services are configured after module loading, thus can be
+     * overridden by modules.
+     *
+     * @param array $configuration
+     * @return Application
+     */
+    public static function init($configuration = array())
+    {
+        $smConfig = isset($configuration['service_manager']) ? $configuration['service_manager'] : array();
+        $serviceManager = new ServiceManager(new Service\ServiceManagerConfiguration($smConfig));
+        $serviceManager->setService('ApplicationConfiguration', $configuration);
+        $serviceManager->get('ModuleManager')->loadModules();
+        return $serviceManager->get('Application')->bootstrap();
     }
 
     /**
@@ -249,11 +277,11 @@ class Application implements
      *           discovered controller, and controller class (if known).
      *           Typically, a handler should return a populated Response object
      *           that can be returned immediately.
-     * @return SendableResponse
+     * @return ResponseInterface
      */
     public function run()
     {
-        $events = $this->events();
+        $events = $this->getEventManager();
         $event  = $this->getMvcEvent();
 
         // Define callback used to determine whether or not to short-circuit
@@ -268,12 +296,12 @@ class Application implements
         };
 
         // Trigger route event
-        $result = $events->trigger('route', $event, $shortCircuit);
+        $result = $events->trigger(MvcEvent::EVENT_ROUTE, $event, $shortCircuit);
         if ($result->stopped()) {
             $response = $result->last();
             if ($response instanceof ResponseInterface) {
                 $event->setTarget($this);
-                $events->trigger('finish', $event);
+                $events->trigger(MvcEvent::EVENT_FINISH, $event);
                 return $response;
             }
             if ($event->getError()) {
@@ -286,13 +314,13 @@ class Application implements
         }
 
         // Trigger dispatch event
-        $result = $events->trigger('dispatch', $event, $shortCircuit);
+        $result = $events->trigger(MvcEvent::EVENT_DISPATCH, $event, $shortCircuit);
 
         // Complete response
         $response = $result->last();
         if ($response instanceof ResponseInterface) {
             $event->setTarget($this);
-            $events->trigger('finish', $event);
+            $events->trigger(MvcEvent::EVENT_FINISH, $event);
             return $response;
         }
 
@@ -309,14 +337,14 @@ class Application implements
      * event object.
      *
      * @param  MvcEvent $event
-     * @return Response
+     * @return ResponseInterface
      */
     protected function completeRequest(MvcEvent $event)
     {
-        $events = $this->events();
+        $events = $this->getEventManager();
         $event->setTarget($this);
-        $events->trigger('render', $event);
-        $events->trigger('finish', $event);
+        $events->trigger(MvcEvent::EVENT_RENDER, $event);
+        $events->trigger(MvcEvent::EVENT_FINISH, $event);
         return $event->getResponse();
     }
 }

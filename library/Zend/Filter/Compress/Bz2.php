@@ -112,6 +112,7 @@ class Bz2 extends AbstractCompressionAlgorithm
      *
      * @param  string $content
      * @return string
+     * @throws Exception\RuntimeException
      */
     public function compress($content)
     {
@@ -141,6 +142,7 @@ class Bz2 extends AbstractCompressionAlgorithm
      *
      * @param  string $content
      * @return string
+     * @throws Exception\RuntimeException
      */
     public function decompress($content)
     {

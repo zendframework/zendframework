@@ -30,7 +30,7 @@ namespace Zend\View\Helper;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HtmlList extends FormElement
+class HtmlList extends AbstractHtmlElement
 {
     /**
      * Generates a 'List' element.
@@ -47,13 +47,14 @@ class HtmlList extends FormElement
         foreach ($items as $item) {
             if (!is_array($item)) {
                 if ($escape) {
-                    $escaper = $this->view->plugin('escape');
+                    $escaper = $this->view->plugin('escapeHtml');
                     $item    = $escaper($item);
                 }
                 $list .= '<li>' . $item . '</li>' . self::EOL;
             } else {
-                if (6 < strlen($list)) {
-                    $list = substr($list, 0, strlen($list) - 6)
+                $itemLength = 5 + strlen(self::EOL);
+                if ($itemLength < strlen($list)) {
+                    $list = substr($list, 0, strlen($list) - $itemLength)
                      . $this($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
                 } else {
                     $list .= '<li>' . $this($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
@@ -67,10 +68,7 @@ class HtmlList extends FormElement
             $attribs = '';
         }
 
-        $tag = 'ul';
-        if ($ordered) {
-            $tag = 'ol';
-        }
+        $tag = ($ordered) ? 'ol' : 'ul';
 
         return '<' . $tag . $attribs . '>' . self::EOL . $list . '</' . $tag . '>' . self::EOL;
     }

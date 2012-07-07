@@ -1,0 +1,16 @@
+{
+    "name": "zendframework/zend-config",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "config"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Config": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

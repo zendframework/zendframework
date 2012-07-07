@@ -27,6 +27,8 @@ class TagManager
     {
         $this->addTagPrototype(new Tag\ParamTag());
         $this->addTagPrototype(new Tag\ReturnTag());
+        $this->addTagPrototype(new Tag\MethodTag());
+        $this->addTagPrototype(new Tag\PropertyTag());
         $this->addTagPrototype(new Tag\GenericTag());
     }
 

@@ -20,10 +20,10 @@
 
 namespace Zend\Feed\Writer;
 
-use Zend\Loader\ShortNameLocator,
-    Zend\Loader\PrefixPathLoader,
-    Zend\Loader\PrefixPathMapper,
-    Zend\Loader\Exception\PluginLoaderException;
+use Zend\Loader\ShortNameLocator;
+use Zend\Loader\PrefixPathLoader;
+use Zend\Loader\PrefixPathMapper;
+use Zend\Loader\Exception\PluginLoaderException;
 
 /**
 * @category Zend

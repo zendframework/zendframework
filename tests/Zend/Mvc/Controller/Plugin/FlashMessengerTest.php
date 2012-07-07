@@ -21,8 +21,8 @@
 
 namespace ZendTest\Mvc\Controller\Plugin;
 
-use Zend\Mvc\Controller\Plugin\FlashMessenger,
-    ZendTest\Session\TestAsset\TestManager as SessionManager;
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
+use ZendTest\Session\TestAsset\TestManager as SessionManager;
 
 /**
  * @category   Zend

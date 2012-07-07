@@ -21,14 +21,14 @@
 
 namespace Zend\View\Strategy;
 
-use Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregateInterface,
-    Zend\Feed\Writer\Feed,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\View\Model,
-    Zend\View\Renderer\FeedRenderer,
-    Zend\View\ViewEvent;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Feed\Writer\Feed;
+use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
+use Zend\View\Model;
+use Zend\View\Renderer\FeedRenderer;
+use Zend\View\ViewEvent;
 
 /**
  * @category   Zend
@@ -110,7 +110,7 @@ class FeedStrategy implements ListenerAggregateInterface
             return;
         }
 
-        $headers = $request->headers();
+        $headers = $request->getHeaders();
         if ($headers->has('accept')) {
             $accept  = $headers->get('accept');
             foreach ($accept->getPrioritized() as $mediaType) {
@@ -162,10 +162,20 @@ class FeedStrategy implements ListenerAggregateInterface
                   ? 'application/rss+xml'
                   : 'application/atom+xml';
 
+        $model   = $e->getModel();
+        $charset = '';
+
+        if ($model instanceof Model\FeedModel) {
+
+            $feed = $model->getFeed();
+
+            $charset = '; charset=' . $feed->getEncoding() . ';';
+        }
+
         // Populate response
         $response = $e->getResponse();
         $response->setContent($result);
-        $headers = $response->headers();
-        $headers->addHeaderLine('content-type', $feedType);
+        $headers = $response->getHeaders();
+        $headers->addHeaderLine('content-type', $feedType . $charset);
     }
 }

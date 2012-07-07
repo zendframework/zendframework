@@ -21,14 +21,14 @@
 
 namespace ZendTest\View\Helper\Navigation;
 
-use Zend\Navigation\Page\AbstractPage,
-    Zend\Navigation\Page\Uri as UriPage,
-    Zend\Config,
-    Zend\Acl,
-    Zend\Acl\Role,
-    Zend\Acl\Resource,
-    Zend\View,
-    Zend\View\Helper\Navigation;
+use Zend\Navigation\Page\AbstractPage;
+use Zend\Navigation\Page\Uri as UriPage;
+use Zend\Config;
+use Zend\Acl;
+use Zend\Acl\Role;
+use Zend\Acl\Resource;
+use Zend\View;
+use Zend\View\Helper\Navigation;
 
 /**
  * Tests Zend_View_Helper_Navigation_Links
@@ -728,5 +728,15 @@ class LinksTest extends AbstractTest
         $actual = $this->_helper->setRenderFlag($flag)->render();
 
         $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * Returns the contens of the expected $file, normalizes newlines
+     * @param  string $file
+     * @return string
+     */
+    protected function _getExpected($file)
+    {
+        return str_replace("\n", PHP_EOL, parent::_getExpected($file));
     }
 }

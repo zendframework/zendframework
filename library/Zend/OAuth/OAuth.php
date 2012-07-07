@@ -71,7 +71,7 @@ class OAuth
             self::$httpClient = new HTTPClient;
         } else {
             $request = self::$httpClient->getRequest();
-            $headers = $request->headers();
+            $headers = $request->getHeaders();
             if ($headers->has('Authorization')) {
                 $auth = $headers->get('Authorization');
                 $headers->removeHeader($auth);

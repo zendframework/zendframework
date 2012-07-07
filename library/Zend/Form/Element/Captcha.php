@@ -21,6 +21,7 @@
 
 namespace Zend\Form\Element;
 
+use Traversable;
 use Zend\Captcha as ZendCaptcha;
 use Zend\Form\Element;
 use Zend\Form\Exception;
@@ -36,25 +37,32 @@ use Zend\InputFilter\InputProviderInterface;
 class Captcha extends Element implements InputProviderInterface
 {
     /**
-     * Set a single element attribute
-     * 
-     * @param  string $key 
-     * @param  mixed $value 
-     * @return Element
+     * @var \Zend\Captcha\AdapterInterface
      */
-    public function setAttribute($key, $value)
+    protected $captcha;
+
+    /**
+     * Accepted options for Captcha:
+     * - captcha: a valid Zend\Captcha\AdapterInterface
+     *
+     * @param array|\Traversable $options
+     * @return Captcha
+     */
+    public function setOptions($options)
     {
-        if ('captcha' == strtolower($key)) {
-            $this->setCaptcha($value);
-            return $this;
+        parent::setOptions($options);
+
+        if (isset($options['captcha'])) {
+            $this->setCaptcha($options['captcha']);
         }
-        return parent::setAttribute($key, $value);
+
+        return $this;
     }
 
     /**
      * Set captcha
-     * 
-     * @param  array|ZendCaptcha\AdapterInterface $captcha 
+     *
+     * @param  array|ZendCaptcha\AdapterInterface $captcha
      * @return Captcha
      */
     public function setCaptcha($captcha)
@@ -68,25 +76,26 @@ class Captcha extends Element implements InputProviderInterface
                 (is_object($captcha) ? get_class($captcha) : gettype($captcha))
             ));
         }
-        $this->attributes['captcha'] = $captcha;
+        $this->captcha = $captcha;
+
         return $this;
     }
 
     /**
      * Retrieve captcha (if any)
-     * 
+     *
      * @return null|ZendCaptcha\AdapterInterface
      */
     public function getCaptcha()
     {
-        return $this->getAttribute('captcha');
+        return $this->captcha;
     }
 
     /**
      * Provide default input rules for this element
      *
      * Attaches the captcha as a validator.
-     * 
+     *
      * @return array
      */
     public function getInputSpecification()

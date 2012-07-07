@@ -21,7 +21,7 @@
 
 namespace ZendTest\Config\Reader;
 
-use \Zend\Config\Reader\Xml;
+use Zend\Config\Reader\Xml;
 
 /**
  * @category   Zend

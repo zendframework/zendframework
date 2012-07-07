@@ -102,53 +102,31 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadOk()
     {
-        try {
-            $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
-        } catch (\Exception $e) {
-            $this->fail('exception raised while loading maildir');
-        }
+        new Storage\Maildir(array('dirname' => $this->_maildir));
     }
 
     public function testLoadConfig()
     {
-        try {
-            $mail = new Storage\Maildir(new Config\Config(array('dirname' => $this->_maildir)));
-        } catch (\Exception $e) {
-            $this->fail('exception raised while loading maildir');
-        }
+        new Storage\Maildir(new Config\Config(array('dirname' => $this->_maildir)));
     }
 
     public function testLoadFailure()
     {
-        try {
-            $mail = new Storage\Maildir(array('dirname' => '/This/Dir/Does/Not/Exist'));
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception raised while loading unknown dir');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        new Storage\Maildir(array('dirname' => '/This/Dir/Does/Not/Exist'));
     }
 
     public function testLoadInvalid()
     {
-        try {
-            $mail = new Storage\Maildir(array('dirname' => __DIR__));
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception while loading invalid dir');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        new Storage\Maildir(array('dirname' => __DIR__));
     }
 
     public function testClose()
     {
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
 
-        try {
-            $mail->close();
-        } catch (\Exception $e) {
-            $this->fail('exception raised while closing maildir');
-        }
+        $mail->close();
     }
 
     public function testHasTop()
@@ -169,11 +147,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
 
-        try {
-            $mail->noop();
-        } catch (\Exception $e) {
-            $this->fail('exception raised while doing nothing (noop)');
-        }
+        $mail->noop();
     }
 
     public function testCount()
@@ -240,39 +214,24 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
 
-        try {
-            $mail->getSize(0);
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception raised while getting size for message 0');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->getSize(0);
     }
 
     public function testFetchWrongMessageBody()
     {
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
 
-        try {
-            $mail->getMessage(0);
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception raised while fetching message 0');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->getMessage(0);
     }
 
     public function testFailedRemove()
     {
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
 
-        try {
-            $mail->removeMessage(1);
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception raised while deleting message (maildir is read-only)');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->removeMessage(1);
     }
 
     public function testHasFlag()
@@ -316,13 +275,9 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
     public function testWrongUniqueId()
     {
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
-        try {
-            $mail->getNumberByUniqueId('this_is_an_invalid_id');
-        } catch (\Exception $e) {
-            return; // test ok
-        }
 
-        $this->fail('no exception while getting number for invalid id');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $mail->getNumberByUniqueId('this_is_an_invalid_id');
     }
 
     public function isFileTest($dir)

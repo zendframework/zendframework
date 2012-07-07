@@ -103,4 +103,23 @@ class TranslatorTest extends TestCase
         
         $this->assertEquals('bar', $this->translator->translate('foo'));
     }
+
+    public function testTranslatePlurals()
+    {
+        $this->translator->setLocale('en_EN');
+        $this->translator->addTranslationFile(
+            'phparray',
+            $this->testFilesDir . '/translation_en.php',
+            'default',
+            'en_EN'
+        );
+
+        $pl0 = $this->translator->translatePlural('Message 5', 'Message 5 Plural', 1);
+        $pl1 = $this->translator->translatePlural('Message 5', 'Message 5 Plural', 2);
+        $pl2 = $this->translator->translatePlural('Message 5', 'Message 5 Plural', 10);
+
+        $this->assertEquals('Message 5 (en) Plural 0', $pl0);
+        $this->assertEquals('Message 5 (en) Plural 1', $pl1);
+        $this->assertEquals('Message 5 (en) Plural 2', $pl2);
+    }
 }

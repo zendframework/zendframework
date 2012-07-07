@@ -47,64 +47,23 @@ class PhpArrayTest extends TestCase
         $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $textDomain);
     }
 
-    public function testTranslatorAddsFile()
+    public function testLoaderReturnsValidTextDomain()
     {
-        $translator = new Translator();
-        $translator->addTranslationFile('phparray', $this->testFilesDir . '/translation_en.php');
+        $loader = new PhpArrayLoader();
+        $textDomain = $loader->load($this->testFilesDir . '/translation_en.php', 'en_EN');
 
-        $this->assertEquals('Message 1 (en)', $translator->translate('Message 1'));
-        $this->assertEquals('Message 6', $translator->translate('Message 6'));
-    }
-
-    public function testTranslatorAddsFileToTextDomain()
-    {
-        $translator = new Translator();
-        $translator->addTranslationFile('phparray', $this->testFilesDir . '/translation_en.php', 'user');
-
-        $this->assertEquals('Message 2 (en)', $translator->translate('Message 2', 'user'));
-    }
-
-    public function testTranslatorAddsPattern()
-    {
-        $translator = new Translator();
-        $translator->addTranslationPattern(
-            'phparray',
-            $this->testFilesDir . '/testarray',
-            'translation-%s.php'
-        );
-
-        $this->assertEquals('Message 1 (en)', $translator->translate('Message 1', 'default', 'en_US'));
-        $this->assertEquals('Nachricht 1', $translator->translate('Message 1', 'default', 'de_DE'));
+        $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
+        $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
     public function testLoaderLoadsPluralRules()
     {
-        $loader = new PhpArrayLoader();
-        $domain = $loader->load($this->testFilesDir . '/translation_en.php', 'en_EN');
+        $loader     = new PhpArrayLoader();
+        $textDomain = $loader->load($this->testFilesDir . '/translation_en.php', 'en_EN');
 
-        $this->assertEquals(2, $domain->getPluralRule()->evaluate(0));
-        $this->assertEquals(0, $domain->getPluralRule()->evaluate(1));
-        $this->assertEquals(1, $domain->getPluralRule()->evaluate(2));
-        $this->assertEquals(2, $domain->getPluralRule()->evaluate(10));
-    }
-
-    public function testTranslatorTranslatesPlurals()
-    {
-        $translator = new Translator();
-        $translator->setLocale('en_EN');
-        $translator->addTranslationFile(
-            'phparray',
-            $this->testFilesDir . '/translation_en.php',
-            'default',
-            'en_EN'
-        );
-
-        $pl0 = $translator->translatePlural('Message 5', 'Message 5 Plural', 1);
-        $pl1 = $translator->translatePlural('Message 5', 'Message 5 Plural', 2);
-        $pl2 = $translator->translatePlural('Message 5', 'Message 5 Plural', 10);
-
-        $this->assertEquals('Message 5 (en) Plural 0', $pl0);
-        $this->assertEquals('Message 5 (en) Plural 1', $pl1);
-        $this->assertEquals('Message 5 (en) Plural 2', $pl2);
+        $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(0));
+        $this->assertEquals(0, $textDomain->getPluralRule()->evaluate(1));
+        $this->assertEquals(1, $textDomain->getPluralRule()->evaluate(2));
+        $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(10));
     }
 }

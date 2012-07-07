@@ -51,7 +51,8 @@ class SharedEventManager implements SharedEventManagerInterface
      * "getAll" event of both an AbstractResource and EntityResource:
      *
      * <code>
-     * SharedEventManager::getInstance()->connect(
+     * $sharedEventManager = $serviceLocator->get('SharedEventManager');
+     * $sharedEventManager->attach(
      *     array('My\Resource\AbstractResource', 'My\Resource\EntityResource'),
      *     'getAll',
      *     function ($e) use ($cache) {

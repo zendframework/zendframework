@@ -9,5 +9,5 @@
 
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.filter.alnum.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.filter.alpha.xml"/>
-
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.i18n.filter.number-format.xml"/>
 </section>

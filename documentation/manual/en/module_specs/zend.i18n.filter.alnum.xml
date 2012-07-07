@@ -26,15 +26,26 @@
                     whitespace characters are allowed. Otherwise they are
                     suppressed. Default is "false" (whitespace is not allowed).
                 </para>
+                <para>
+	            	Methods for getting/setting the allowWhiteSpace option
+	            	are also available:
+	            	<methodname>getAllowWhiteSpace()</methodname> and
+	            	<methodname>setAllowWhiteSpace()</methodname>
+	            </para>
             </listitem>
             <listitem>
                 <para>
                     <varname>$locale</varname> : The locale string used in
-                    identifying the characters and digits to filter
+                    identifying the characters to filter
                     (locale name, e.g. en_US). If unset, it will use the
                     default locale
                     (<classname>Locale::getDefault()</classname>).
                 </para>
+                <para>
+	            	Methods for getting/setting the locale are also available:
+	            	<methodname>getLocale()</methodname> and
+	            	<methodname>setLocale()</methodname>
+	            </para>
             </listitem>
         </itemizedlist>
     </example>
@@ -43,9 +54,15 @@
         <title>Alnum Filter Usage</title>
 
         <programlisting language="php"><![CDATA[
+// Default settings, deny whitespace
 $filter = \Zend\I18n\Filter\Alnum();
 echo $filter->filter("This is (my) content: 123");
 // Returns "Thisismycontent123"
+
+// First param in constructor is $allowWhiteSpace
+$filter = \Zend\I18n\Filter\Alnum(true);
+echo $filter->filter("This is (my) content: 123");
+// Returns "This is my content 123"
 ]]></programlisting>
 
         <note>
@@ -57,33 +74,8 @@ echo $filter->filter("This is (my) content: 123");
                 The language itself is detected using the
                 <classname>Locale</classname>.
             </para>
-
-            <para>
-                The following getter/setter is also available
-                for <varname>locale</varname>:
-                <methodname>getLocale()</methodname>
-                and <methodname>setLocale()</methodname>
-            </para>
         </note>
 
     </example>
 
-    <example xml:id="zend.i18n.filter.alnum.allow-whitespace">
-        <title>Allow Whitespace Option</title>
-
-        <programlisting language="php"><![CDATA[
-// First param in constructor is $allowWhiteSpace
-$filter = \Zend\I18n\Filter\Alnum(true);
-echo $filter->filter("This is (my) content: 123");
-// Returns "This is my content 123"
-]]></programlisting>
-
-        <para>
-            The following getter/setter is also available for
-            <varname>allowWhiteSpace</varname>:
-            <methodname>getAllowWhiteSpace()</methodname>
-            and <methodname>setAllowWhiteSpace()</methodname>.
-        </para>
-
-    </example>
 </section>

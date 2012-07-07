@@ -27,11 +27,11 @@
                     suppressed. Default is "false" (whitespace is not allowed).
                 </para>
                 <para>
-	            	Methods for getting/setting the allowWhiteSpace option
-	            	are also available:
-	            	<methodname>getAllowWhiteSpace()</methodname> and
-	            	<methodname>setAllowWhiteSpace()</methodname>
-	            </para>
+                    Methods for getting/setting the allowWhiteSpace option
+                    are also available:
+                    <methodname>getAllowWhiteSpace()</methodname> and
+                    <methodname>setAllowWhiteSpace()</methodname>
+                </para>
             </listitem>
             <listitem>
                 <para>
@@ -42,10 +42,10 @@
                     (<classname>Locale::getDefault()</classname>).
                 </para>
                 <para>
-	            	Methods for getting/setting the locale are also available:
-	            	<methodname>getLocale()</methodname> and
-	            	<methodname>setLocale()</methodname>
-	            </para>
+                    Methods for getting/setting the locale are also available:
+                    <methodname>getLocale()</methodname> and
+                    <methodname>setLocale()</methodname>
+                </para>
             </listitem>
         </itemizedlist>
     </example>
@@ -75,7 +75,6 @@ echo $filter->filter("This is (my) content: 123");
                 <classname>Locale</classname>.
             </para>
         </note>
-
     </example>
 
 </section>

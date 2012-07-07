@@ -81,9 +81,9 @@ class PhpMethodTest extends \PHPUnit_Framework_TestCase
         $target = <<<EOS
     /**
      * Enter description here...
-     * 
+     *
      * @return bool
-     * 
+     *
      */
     public function someMethod()
     {

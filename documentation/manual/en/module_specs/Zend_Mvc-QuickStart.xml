@@ -28,7 +28,7 @@
       </para>
 
       <programlisting language="php"><![CDATA[
-prompt> git clone --recursive git://github.com/zendframework/ZendSkeletonApplication.git my-application
+prompt> git clone git://github.com/zendframework/ZendSkeletonApplication.git my-application
 ]]></programlisting>
 
       <para>

@@ -63,6 +63,7 @@ class FactoryTest extends TestCase
     {
         $fieldset = $this->factory->createFieldset(array(
             'name'       => 'foo',
+            'object'     => 'ZendTest\Form\TestAsset\Model',
             'attributes' => array(
                 'type'         => 'fieldset',
                 'class'        => 'foo-class',
@@ -74,6 +75,7 @@ class FactoryTest extends TestCase
         $this->assertEquals('fieldset', $fieldset->getAttribute('type'));
         $this->assertEquals('foo-class', $fieldset->getAttribute('class'));
         $this->assertEquals('my.form.fieldset', $fieldset->getAttribute('data-js-type'));
+        $this->assertEquals(new \ZendTest\Form\TestAsset\Model, $fieldset->getObject());
     }
 
     public function testCanCreateFieldsetsWithElements()
@@ -234,6 +236,7 @@ class FactoryTest extends TestCase
     {
         $form = $this->factory->createForm(array(
             'name'       => 'foo',
+            'object'     => 'ZendTest\Form\TestAsset\Model',
             'attributes' => array(
                 'method' => 'get',
             ),
@@ -241,6 +244,7 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\Form\FormInterface', $form);
         $this->assertEquals('foo', $form->getName());
         $this->assertEquals('get', $form->getAttribute('method'));
+        $this->assertEquals(new \ZendTest\Form\TestAsset\Model, $form->getObject());
     }
 
     public function testCanCreateFormsWithNamedInputFilters()

@@ -32,6 +32,7 @@ use Zend\EventManager\EventManagerInterface;
  * - Attributes
  * - Flags
  * - Hydrator
+ * - Object
  * - InputFilter
  * - Type
  *
@@ -59,6 +60,7 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleFlagsAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleHydratorAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleInputFilterAnnotation'));
+        $this->listeners[] = $events->attach('configureForm', array($this, 'handleObjectAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleOptionsAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleTypeAnnotation'));
 
@@ -140,6 +142,25 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
 
         $formSpec = $e->getParam('formSpec');
         $formSpec['input_filter'] = $annotation->getInputFilter();
+    }
+
+    /**
+     * Handle the Object annotation
+     *
+     * Sets the object to bind to the form or fieldset
+     *
+     * @param  \Zend\EventManager\EventInterface $e
+     * @return void
+     */
+    public function handleObjectAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof Object) {
+            return;
+        }
+
+        $formSpec = $e->getParam('formSpec');
+        $formSpec['object'] = $annotation->getObject();
     }
 
     /**

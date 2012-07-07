@@ -69,6 +69,12 @@ class Query
      * @var array
      */
     protected $_xpathNamespaces = array();
+    
+    /**
+     * XPath PHP Functions
+     * @var mixed
+     */
+    protected $_xpathPhpFunctions;
 
     /**
      * Constructor
@@ -279,6 +285,17 @@ class Query
     }
 
     /**
+     * Register PHP Functions to use in internal DOMXPath
+     * 
+     * @param mixed $restrict
+     * @return void
+     */
+    public function registerXpathPhpFunctions($xpathPhpFunctions = true)
+    {
+        $this->_xpathPhpFunctions = $xpathPhpFunctions;
+    }
+
+    /**
      * Prepare node list
      *
      * @param  DOMDocument $document
@@ -290,6 +307,12 @@ class Query
         $xpath      = new DOMXPath($document);
         foreach ($this->_xpathNamespaces as $prefix => $namespaceUri) {
             $xpath->registerNamespace($prefix, $namespaceUri);
+        }
+        if ($this->_xpathPhpFunctions) {
+            $xpath->registerNamespace("php", "http://php.net/xpath");
+            ($this->_xpathPhpFunctions === true) ?
+                $xpath->registerPHPFunctions()
+                : $xpath->registerPHPFunctions($this->_xpathPhpFunctions);
         }
         $xpathQuery = (string) $xpathQuery;
         return $xpath->query($xpathQuery);

@@ -33,13 +33,6 @@ use Zend\Mail\Headers;
 class ContentType implements HeaderInterface
 {
     /**
-     * Header encoding
-     * 
-     * @var string
-     */
-    protected $encoding = 'ASCII';
-
-    /**
      * @var string
      */
     protected $type;
@@ -69,7 +62,7 @@ class ContentType implements HeaderInterface
         if (count($values)) {
             foreach ($values as $keyValuePair) {
                 list($key, $value) = explode('=', $keyValuePair);
-                $value = trim($value, "\"\' \t\n\r\0\x0B");
+                $value = trim($value, "'\" \t\n\r\0\x0B");
                 $header->addParameter($key, $value);
             }
         }
@@ -99,18 +92,18 @@ class ContentType implements HeaderInterface
 
     public function setEncoding($encoding) 
     {
-        $this->encoding = $encoding;
+        // This header must be always in US-ASCII
         return $this;
     }
 
     public function getEncoding()
     {
-        return $this->encoding;
+        return 'ASCII';
     }
 
     public function toString()
     {
-        return 'Content-Type: ' . $this->getFieldValue(HeaderInterface::FORMAT_RAW);
+        return 'Content-Type: ' . $this->getFieldValue();
     }
 
     /**

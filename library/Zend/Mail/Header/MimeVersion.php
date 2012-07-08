@@ -65,17 +65,18 @@ class MimeVersion implements HeaderInterface
 
     public function setEncoding($encoding)
     {
-        // irrelevant to this implementation
+        // This header must be always in US-ASCII
+        return $this;
     }
 
     public function getEncoding()
     {
-        // irrelevant to this implementation
+        return 'ASCII';
     }
 
     public function toString()
     {
-        return 'MIME-Version: ' . $this->getFieldValue(HeaderInterface::FORMAT_RAW);
+        return 'MIME-Version: ' . $this->getFieldValue();
     }
 
     /**

@@ -38,13 +38,6 @@ class Received implements HeaderInterface, MultipleHeadersInterface
      */
     protected $value;
 
-    /**
-     * Header encoding
-     * 
-     * @var string
-     */
-    protected $encoding = 'ASCII';
-
     public static function fromString($headerLine)
     {
         list($name, $value) = explode(': ', $headerLine, 2);
@@ -72,18 +65,18 @@ class Received implements HeaderInterface, MultipleHeadersInterface
 
     public function setEncoding($encoding) 
     {
-        $this->encoding = $encoding;
+        // This header must be always in US-ASCII
         return $this;
     }
 
     public function getEncoding()
     {
-        return $this->encoding;
+        return 'ASCII';
     }
 
     public function toString()
     {
-        return 'Received: ' . $this->getFieldValue(HeaderInterface::FORMAT_RAW);
+        return 'Received: ' . $this->getFieldValue();
     }
 
     /**

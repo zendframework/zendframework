@@ -1,0 +1,21 @@
+{
+    "name": "zendframework/zend-navigation",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "navigation"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Navigation": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "suggest": {
+        "zendframework/zend-config": "Zend\\Config component",
+        "zendframework/zend-mvc": "Zend\\Mvc component",
+        "zendframework/zend-view": "Zend\\View component"
+    }
+}

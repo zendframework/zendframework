@@ -64,11 +64,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     public function testBuildMethodRunsMinimalWriterContainerProperlyBeforeICheckRssCompliance()
     {
         $feed = new Renderer\Feed\Rss($this->_validWriter);
-        try {
-            $feed->render();
-        } catch (Writer\Exception\ExceptionInterface $e) {
-            $this->fail('Valid Writer object caused an exception when building which should never happen');
-        }
+        $feed->render();
     }
 
     public function testFeedEncodingHasBeenSet()

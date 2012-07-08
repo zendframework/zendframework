@@ -1,0 +1,21 @@
+{
+    "name": "zendframework/zend-service-amazon",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "amazon"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Service\\Amazon": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-http": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-rest": "Zend\\Rest component",
+        "zendframework/zend-crypt": "Zend\\Crypt component"
+    }
+}

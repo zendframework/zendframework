@@ -1,0 +1,16 @@
+{
+    "name": "zendframework/zend-serializer",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "serializer"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Serializer": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

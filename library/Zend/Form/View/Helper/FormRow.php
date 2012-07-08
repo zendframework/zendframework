@@ -23,7 +23,6 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
-use Zend\Loader\Pluggable;
 use Zend\Form\View\Helper\AbstractHelper;
 
 /**
@@ -73,7 +72,7 @@ class FormRow extends AbstractHelper
      */
     public function render(ElementInterface $element)
     {
-        $escapeHelper        = $this->getEscapeHelper();
+        $escapeHtmlHelper    = $this->getEscapeHtmlHelper();
         $labelHelper         = $this->getLabelHelper();
         $elementHelper       = $this->getElementHelper();
         $elementErrorsHelper = $this->getElementErrorsHelper();
@@ -82,7 +81,7 @@ class FormRow extends AbstractHelper
         $elementErrors       = $elementErrorsHelper->render($element);
 
         if (!empty($label)) {
-            $label = $escapeHelper($label);
+            $label = $escapeHtmlHelper($label);
             $labelAttributes = $element->getLabelAttributes();
 
             if (empty($labelAttributes)) {

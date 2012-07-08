@@ -1,0 +1,16 @@
+{
+    "name": "zendframework/zend-test",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "test"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Test": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

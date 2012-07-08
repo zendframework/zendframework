@@ -81,6 +81,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
         'Input',
         'InputFilter',
         'Name',
+        'Options',
         'Required',
         'Type',
         'Validator',

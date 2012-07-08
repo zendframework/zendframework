@@ -336,7 +336,6 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsLinkFromAtom10WithRelativeUrl()
     {
-        $this->markTestIncomplete('Pending fix for \Zend\URI\URL::validate()');
         $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/link/plain/atom10-relative.xml')
         );
@@ -375,7 +374,6 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsFeedLinkFromAtom10IfRelativeUri()
     {
-        $this->markTestIncomplete('Pending fix for \Zend\URI\URL::validate()');
         $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/feedlink/plain/atom10-relative.xml')
         );

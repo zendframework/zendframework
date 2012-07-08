@@ -1,0 +1,16 @@
+ {
+    "name": "zendframework/zend-acl",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "acl"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Acl": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

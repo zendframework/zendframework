@@ -252,11 +252,7 @@ class PartialLoopTest extends TestCase
         $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
-        try {
-            $result = $this->helper->__invoke('partialLoop.phtml', array());
-        } catch (\Exception $e) {
-            $this->fail('Empty array should not cause partialLoop to throw exception');
-        }
+        $this->helper->__invoke('partialLoop.phtml', array());
     }
 
     /**

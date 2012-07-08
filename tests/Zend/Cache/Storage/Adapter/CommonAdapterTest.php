@@ -21,6 +21,8 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
+use Zend\Http\Header\Expires;
+
 use Zend\Cache\Storage\IterableInterface,
     Zend\Cache\Storage\IteratorInterface,
     Zend\Cache\Storage\StorageInterface,
@@ -234,6 +236,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $capabilities = $this->_storage->getCapabilities();
 
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
+        }
+
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
 
@@ -296,6 +302,11 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     public function testGetItemReturnsNullOnExpiredItem()
     {
         $capabilities = $this->_storage->getCapabilities();
+
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
+        }
+
         if ($capabilities->getUseRequestTime()) {
             $this->markTestSkipped("Can't test get expired item if request time will be used");
         }
@@ -405,6 +416,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->setItem('key', 'value'));
         $this->assertEquals('value', $this->_storage->getItem('key'));
         $this->assertTrue($this->_storage->hasItem('key'));
+
         $this->assertTrue($this->_storage->removeItem('key'));
         $this->assertFalse($this->_storage->hasItem('key'));
         $this->assertNull($this->_storage->getItem('key'));
@@ -534,6 +546,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $capabilities = $this->_storage->getCapabilities();
 
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
+        }
+
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
 
@@ -560,6 +576,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     public function testSetAndGetExpiredItems()
     {
         $capabilities = $this->_storage->getCapabilities();
+
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
+        }
 
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
@@ -809,6 +829,11 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     public function testTouchItem()
     {
         $capabilities = $this->_storage->getCapabilities();
+
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
+        }
+
         $this->_options->setTtl(2 * $capabilities->getTtlPrecision());
 
         $this->assertTrue($this->_storage->setItem('key', 'value'));
@@ -987,10 +1012,6 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         if ( !($this->_storage instanceof TagableInterface) ) {
             $this->markTestSkipped("Storage doesn't implement TagableInterface");
         }
-
-        $capabilities = $this->_storage->getCapabilities();
-        $ttl = $capabilities->getTtlPrecision();
-        $this->_options->setTtl($ttl);
 
         $this->assertSame(array(), $this->_storage->setItems(array(
             'key1' => 'value1',

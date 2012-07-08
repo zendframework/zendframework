@@ -46,8 +46,8 @@ class ControllerLoaderFactory implements FactoryInterface
      * configuration's "controllers" array. If a controller is matched, the
      * scoped manager will attempt to load the controller, pulling it from
      * a DI service if a matching service is not found. Finally, it will
-     * attempt to inject the controller plugin broker into the controller if
-     * it subscribes to the Pluggable interface.
+     * attempt to inject the controller plugin manager if the controller
+     * implements a setPluginManager() method.
      *
      * @param  ServiceLocatorInterface $serviceLocator
      * @return ServiceManager
@@ -60,17 +60,16 @@ class ControllerLoaderFactory implements FactoryInterface
 
         $controllerLoader = $serviceLocator->createScopedServiceManager();
 
-        // @TODO: Add support for DI. We cannot pull the Configuration service here, as it causes a circular dependency.
-        //$configuration    = $serviceLocator->get('Configuration');
-        //if (isset($configuration['di']) && $serviceLocator->has('Di')) {
-        //    $di = $serviceLocator->get('Di');
-        //    $controllerLoader->addAbstractFactory(
-        //        new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI)
-        //    );
-        //    $controllerLoader->addInitializer(
-        //        new DiServiceInitializer($di, $serviceLocator)
-        //    );
-        //}
+        $configuration    = $serviceLocator->get('Configuration');
+        if (isset($configuration['di']) && $serviceLocator->has('Di')) {
+            $di = $serviceLocator->get('Di');
+            $controllerLoader->addAbstractFactory(
+                new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI)
+            );
+            $controllerLoader->addInitializer(
+                new DiServiceInitializer($di, $serviceLocator)
+            );
+        }
 
         $controllerLoader->addInitializer(function ($instance) use ($serviceLocator) {
             if ($instance instanceof ServiceLocatorAwareInterface) {

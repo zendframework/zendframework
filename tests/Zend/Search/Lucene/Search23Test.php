@@ -136,11 +136,7 @@ class Search23Test extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(Search\QueryParser::queryParsingExceptionsSuppressed());
 
-        try {
-            $query = Search\QueryParser::parse('contents:[business TO by}');
-        } catch (Lucene\Exception\ExceptionInterface $e) {
-            $this->fail('exception raised while parsing a query');
-        }
+        $query = Search\QueryParser::parse('contents:[business TO by}');
 
         $this->assertEquals('contents business to by', $query->__toString());
 

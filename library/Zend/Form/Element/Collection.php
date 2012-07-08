@@ -133,27 +133,15 @@ class Collection extends Fieldset
      */
     public function populateValues($data)
     {
-        $count = $this->count;
-
         if ($this->targetElement instanceof FieldsetInterface) {
-            foreach ($data as $key => $value) {
-                if ($count > 0) {
-                    $this->fieldsets[$key]->populateValues($value);
-                    unset($data[$key]);
-
-                }
-
-                $count--;
+            foreach ($this->byName as $name => $fieldset) {
+                $fieldset->populateValues($data[$name]);
+                unset($data[$name]);
             }
         } else {
-            foreach ($data as $key => $value) {
-                if ($count > 0) {
-                    $this->elements[$key]->setAttribute('value', $value);
-                    unset($data[$key]);
-
-                }
-
-                $count--;
+            foreach ($this->byName as $name => $element) {
+                $element->setAttribute('value', $data[$name]);
+                unset($data[$name]);
             }
         }
 

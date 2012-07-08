@@ -124,21 +124,23 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
                 'config_cache_enabled' => false,
                 'cache_dir'            => 'data/cache',
                 'module_paths'         => array(),
-            ),
-            'service_manager' => array(
-                'factories' => array(
-                    'Configuration' => function() use ($config) {
-                        return array(
-                            'navigation' => array(
-                                'default' => $config->get('nav_test1')
-                            )
-                        );
-                    }
-                )
+                'extra_config'         => array(
+                    'service_manager' => array(
+                        'factories' => array(
+                            'Configuration' => function() use ($config) {
+                                return array(
+                                    'navigation' => array(
+                                        'default' => $config->get('nav_test1'),
+                                    ),
+                                );
+                            }
+                        ),
+                    ),
+                ),
             ),
         );
 
-        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfiguration($smConfig['service_manager']));
+        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfiguration);
         $sm->setService('ApplicationConfiguration', $smConfig);
         $sm->get('ModuleManager')->loadModules();
         $sm->get('Application')->bootstrap();
@@ -153,7 +155,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns the contens of the exepcted $file
+     * Returns the contens of the expected $file
      * @param  string $file
      * @return string
      */

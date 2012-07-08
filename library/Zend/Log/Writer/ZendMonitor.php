@@ -38,7 +38,7 @@ class ZendMonitor extends AbstractWriter
     protected $isEnabled = true;
 
     /**
-     * Is this for a Zend Server intance?
+     * Is this for a Zend Server instance?
      *
      * @var boolean
      */

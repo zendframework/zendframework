@@ -116,8 +116,12 @@ class SqliteMetadata extends AbstractSource
 
     protected function loadConstraintData($table, $schema)
     {
-        parent::loadConstraintData($table, $schema);
-        return;
+        if (isset($this->data['constraints'][$schema][$table])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('constraints', $schema, $table);
+
         $this->loadColumnData($table, $schema);
         $primaryKey = array();
 
@@ -137,9 +141,10 @@ class SqliteMetadata extends AbstractSource
                 continue;
             }
             $constraint = array(
-                'constraint_name'  => $index['name'],
-                'constraint_type'  => 'UNIQUE',
-                'columns' => array(),
+                'constraint_name' => $index['name'],
+                'constraint_type' => 'UNIQUE',
+                'table_name'      => $table,
+                'columns'         => array(),
             );
 
             $info = $this->fetchPragma('index_info', $index['name'], $schema);
@@ -151,45 +156,45 @@ class SqliteMetadata extends AbstractSource
                 $constraint['constraint_type'] = 'PRIMARY KEY';
                 $primaryKey = null;
             }
-            $constraints[] = $constraint;
+            $constraints[$constraint['constraint_name']] = $constraint;
         }
 
         if (null !== $primaryKey) {
-            $constraints[] = array(
-                'constraint_name'  => '_zf_pk_' . $table,
+            $constraintName = '_zf_' . $table . '_PRIMARY';
+            $constraints[$constraintName] = array(
+                'constraint_name'  => $constraintName,
                 'constraint_type'  => 'PRIMARY KEY',
+                'table_name'       => $table,
                 'columns' => $primaryKey,
             );
         }
 
         $foreignKeys = $this->fetchPragma('foreign_key_list', $table, $schema);
 
-        $id = $constraint = null;
+        $id = $name = null;
         foreach ($foreignKeys as $fk) {
             if ($id !== $fk['id']) {
-                if (null !== $constraint) {
-                    $constraints[] = $constraint;
-                }
                 $id = $fk['id'];
-                $constraint = array(
-                    'constraint_name'  => '_zf_fk_' . $table . '_' . $id,
+                $name = '_zf_' . $table . '_FOREIGN_KEY_' . ($id + 1);
+                $constraints[$name] = array(
+                    'constraint_name'  => $name,
                     'constraint_type'  => 'FOREIGN KEY',
+                    'table_name'       => $table,
                     'columns'          => array(),
-                    'referenced_table'     => $fk['table'],
-                    'referenced_columns' => array(),
+                    'referenced_table_schema' => $schema,
+                    'referenced_table_name'   => $fk['table'],
+                    'referenced_columns'      => array(),
                     // TODO: Verify match, on_update, and on_delete values conform to SQL Standard
                     'match_option'     => strtoupper($fk['match']),
                     'update_rule'      => strtoupper($fk['on_update']),
                     'delete_rule'      => strtoupper($fk['on_delete']),
                 );
             }
-            $constraint['columns'][] = $fk['from'];
-            $constraint['referenced_columns'][] = $fk['to'];
-        }
-        if (null !== $constraint) {
-            $constraints[] = $constraint;
+            $constraints[$name]['columns'][] = $fk['from'];
+            $constraints[$name]['referenced_columns'][] = $fk['to'];
         }
 
+        $this->data['constraints'][$schema][$table] = $constraints;
     }
 
     protected function loadTriggerData($schema)

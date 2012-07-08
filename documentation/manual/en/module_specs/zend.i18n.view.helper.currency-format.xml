@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.i18n.view.helper.currency-format"><title>CurrencyFormat Helper</title>
+
+	<para>
+		The <classname>CurrencyFormat</classname> view helper can be used to simplify rendering
+		of localized currency values. It acts as a wrapper for the <classname>NumberFormatter</classname>
+		class within the Internationalization extension (Intl).
+	</para>
+
+	<example xml:id="zend.i18n.view.helper.currency-format.usage">
+		<title>Basic Usage of CurrencyFormat</title>
+    	<programlisting language="php"><![CDATA[
+// Within your view
+
+echo $this->currencyFormat(1234.56, "USD", "en_US");
+// This returns: "$1,234.56"
+
+echo $this->currencyFormat(1234.56, "EUR", "de_DE");
+// This returns: "1.234,56 €"
+]]></programlisting>
+
+		<para>
+			<methodname>currencyFormat(float $number , string $currencyCode [, string $locale ])</methodname>
+		</para>
+
+		<itemizedlist>
+	        <listitem>
+	            <para>
+	                <varname>$number</varname> : The numeric currency value.
+	            </para>
+	        </listitem>
+	        <listitem>
+	            <para>
+	                <varname>$currencyCode</varname> : The 3-letter ISO 4217 currency code indicating the currency to use.
+	            </para>
+	        </listitem>
+	        <listitem>
+	            <para>
+	                <varname>$locale</varname> : (Optional) Locale in which the currency would be formatted (locale name, e.g. en_US).
+	                If unset, it will use the default locale (<classname>Locale::getDefault()</classname>)
+	            </para>
+	        </listitem>
+		</itemizedlist>
+
+	</example>
+
+	<example xml:id="zend.i18n.view.helper.currency-format.setter-usage">
+		<title>CurrencyFormat Setters</title>
+		<para>
+			The <varname>$currencyCode</varname> and <varname>$locale</varname> options can be set prior to formatting
+			and will be applied each time the helper is used:
+		</para>
+
+	    <programlisting language="php"><![CDATA[
+// Within your view
+$this->plugin("currencyformat")->setCurrencyCode("USD")->setLocale("en_US");
+
+echo $this->currencyFormat(1234.56);  // "$1,234.56"
+echo $this->currencyFormat(5678.90);  // "$5,678.90"
+]]></programlisting>
+
+	</example>
+</section>

@@ -424,7 +424,7 @@ class ArticleController extends AbstractActionController
     <!-- This is from the $articleView view model, and the "content/article" 
          template -->
     <article class="twelve columns">
-        <?php echo $this->escape('article') ?>
+        <?php echo $this->escapeHtml('article') ?>
     </article>
 
 <?php // "content/main-sidebar template ?>

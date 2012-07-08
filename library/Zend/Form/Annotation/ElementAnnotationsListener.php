@@ -66,6 +66,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleFilterAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleFlagsAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleInputAnnotation'));
+        $this->listeners[] = $events->attach('configureElement', array($this, 'handleOptionsAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleRequiredAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleTypeAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleValidatorAnnotation'));
@@ -246,6 +247,25 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $name       = $e->getParam('name');
         $filterSpec = $e->getParam('filterSpec');
         $filterSpec[$name] = $annotation->getInput();
+    }
+
+    /**
+     * Handle the Options annotation
+     *
+     * Sets the element options in the specification.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
+    public function handleOptionsAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof Options) {
+            return;
+        }
+
+        $elementSpec = $e->getParam('elementSpec');
+        $elementSpec['spec']['options'] = $annotation->getOptions();
     }
 
     /**

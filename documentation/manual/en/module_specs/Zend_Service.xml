@@ -103,12 +103,6 @@
                 <link linkend="zend.service.windowsazure">Windows Azure</link>
             </para>
         </listitem>
-
-        <listitem>
-            <para>
-                <link linkend="zend.service.yahoo">Yahoo!</link>
-            </para>
-        </listitem>
     </itemizedlist>
 
     <para>

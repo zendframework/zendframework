@@ -570,12 +570,7 @@ class TechnoratiTest extends TestCase
                             array_merge($callbackRequiredOptions, array($pair)) :
                             array($pair);
 
-            try {
-                call_user_func_array(array($technorati, $callbackMethod), $options);
-            } catch (Technorati\Exception\RuntimeException $e) {
-                $this->fail("Exception " . $e->getMessage() . " thrown " .
-                            "for option '$option' value '$value'");
-            }
+            call_user_func_array(array($technorati, $callbackMethod), $options);
         }
     }
 

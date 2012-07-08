@@ -942,19 +942,6 @@
                 <entry>---</entry>
             </row>
             <row>
-                <entry morerows="1" valign="middle">
-                    <emphasis>
-                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.service.yahoo.html">
-                            <classname>Zend_Service_Yahoo</classname>
-                        </link>
-                    </emphasis>
-                </entry>
-                <entry morerows="1" valign="middle">&requirements.hard;</entry>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&php.manual.link;/ref.dom.php">dom</link>
-                </entry>
-            </row>
-            <row>
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&php.manual.link;/ref.libxml.php">libxml</link>
                 </entry>

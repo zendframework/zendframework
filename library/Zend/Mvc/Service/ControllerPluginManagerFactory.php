@@ -21,13 +21,7 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Mvc\Controller\PluginManager as ControllerPluginManager;
-use Zend\Mvc\Exception;
-use Zend\ServiceManager\ConfigurationInterface;
-use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\ServiceManagerAwareInterface;
 
 /**
  * @category   Zend
@@ -36,8 +30,10 @@ use Zend\ServiceManager\ServiceManagerAwareInterface;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ControllerPluginManagerFactory implements FactoryInterface
+class ControllerPluginManagerFactory extends AbstractPluginManagerFactory
 {
+    const PLUGIN_MANAGER_CLASS = 'Zend\Mvc\Controller\PluginManager';
+
     /**
      * Create and return the MVC controller plugin manager
      *
@@ -46,8 +42,7 @@ class ControllerPluginManagerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $plugins = new ControllerPluginManager();
-        $plugins->setServiceLocator($serviceLocator);
+        $plugins = parent::createService($serviceLocator);
         return $plugins;
     }
 }

@@ -22,6 +22,7 @@ namespace Zend\Form;
 
 use IteratorAggregate;
 use Traversable;
+use Zend\Form\Element\Collection;
 use Zend\Form\Exception;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
@@ -104,6 +105,13 @@ class Form extends Fieldset implements FormInterface
     protected $isValid = false;
 
     /**
+     * Is the form prepared ?
+     *
+     * @var bool
+     */
+    protected $isPrepared = false;
+
+    /**
      * Validation group, if any
      *
      * @var null|array
@@ -154,12 +162,16 @@ class Form extends Fieldset implements FormInterface
      */
     public function prepare()
     {
-        $this->getInputFilter();
+        if (!$this->isPrepared) {
+            $this->getInputFilter();
 
-        foreach ($this->getIterator() as $elementOrFieldset) {
-            if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
-                $elementOrFieldset->prepareElement($this);
+            foreach ($this->getIterator() as $elementOrFieldset) {
+                if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
+                    $elementOrFieldset->prepareElement($this);
+                }
             }
+
+            $this->isPrepared = true;
         }
     }
 
@@ -358,6 +370,7 @@ class Form extends Fieldset implements FormInterface
         $filter->setValidationGroup(InputFilterInterface::VALIDATE_ALL);
 
         if ($this->validationGroup !== null) {
+            $this->prepareValidationGroup($this, $this->data, $this->validationGroup);
             $filter->setValidationGroup($this->validationGroup);
         }
 
@@ -441,8 +454,41 @@ class Form extends Fieldset implements FormInterface
         if (!is_array($arg)) {
             $arg = (array) $arg;
         }
+
         $this->validationGroup = $arg;
         return $this;
+    }
+
+    /**
+     * Prepare the validation group in case Collection elements were used (this function also handle the case where elements
+     * could have been dynamically added or removed from a collection using JavaScript)
+     *
+     * @param FieldsetInterface $formOrFieldset
+     * @param array             $data
+     * @param array             $validationGroup
+     */
+    protected function prepareValidationGroup(FieldsetInterface $formOrFieldset, array $data, array &$validationGroup)
+    {
+        foreach ($validationGroup as $key => &$value) {
+            if (!$formOrFieldset->has($key)) {
+                continue;
+            }
+
+            $fieldset = $formOrFieldset->byName[$key];
+
+            if ($fieldset instanceof Collection) {
+                $values = array();
+                $count = count($data[$key]);
+
+                for ($i = 0 ; $i != $count ; ++$i) {
+                    $values[] = $value;
+                }
+
+                $value = $values;
+            } else {
+                $this->prepareValidationGroup($fieldset, $data[$key], $validationGroup[$key]);
+            }
+        }
     }
 
     /**

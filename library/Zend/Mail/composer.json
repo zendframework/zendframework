@@ -1,0 +1,20 @@
+{
+    "name": "zendframework/zend-mail",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "mail"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Mail": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-mime": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-validator": "Zend\\Validator component"
+    }
+}

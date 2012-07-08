@@ -59,6 +59,7 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleFlagsAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleHydratorAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleInputFilterAnnotation'));
+        $this->listeners[] = $events->attach('configureForm', array($this, 'handleOptionsAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleTypeAnnotation'));
 
         $this->listeners[] = $events->attach('discoverName', array($this, 'handleNameAnnotation'));
@@ -139,6 +140,25 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
 
         $formSpec = $e->getParam('formSpec');
         $formSpec['input_filter'] = $annotation->getInputFilter();
+    }
+
+    /**
+     * Handle the Options annotation
+     *
+     * Sets the options key of the form specification.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
+    public function handleOptionsAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof Options) {
+            return;
+        }
+
+        $formSpec = $e->getParam('formSpec');
+        $formSpec['options'] = $annotation->getOptions();
     }
 
     /**

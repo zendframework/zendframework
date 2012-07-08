@@ -323,11 +323,8 @@ h1 {
         echo "Captured text";
         $this->helper->__invoke()->captureEnd();
 
-        try {
-            $this->helper->__invoke()->captureStart();
-        } catch (View\Exception\ExceptionInterface $e) {
-            $this->fail('Serial capturing should work');
-        }
+        $this->helper->__invoke()->captureStart();
+
         $this->helper->__invoke()->captureEnd();
     }
 

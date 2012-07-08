@@ -1,0 +1,16 @@
+{
+    "name": "zendframework/zend-dojo",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "dojo"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Dojo": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

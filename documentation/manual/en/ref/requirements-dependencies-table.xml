@@ -4472,21 +4472,6 @@
                 </entry>
             </row>
             <row>
-                <entry morerows="11" valign="middle">
-                    <emphasis>
-                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.service.yahoo.html">
-                            <classname>Zend_Service_Yahoo</classname>
-                        </link>
-                    </emphasis>
-                </entry>
-                <entry morerows="2" valign="middle">&requirements.hard;</entry>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.exception.html">
-                        <classname>Zend_Exception</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.http.html">
                         <classname>Zend_Http</classname>

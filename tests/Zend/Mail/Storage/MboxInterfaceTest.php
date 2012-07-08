@@ -76,13 +76,8 @@ class InterfaceTest extends \PHPUnit_Framework_TestCase
     {
         $list = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
-        try {
-            $list[1] = 'test';
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception thrown while writing to array access');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\RuntimeException');
+        $list[1] = 'test';
     }
 
     public function testIterationKey()
@@ -145,25 +140,16 @@ class InterfaceTest extends \PHPUnit_Framework_TestCase
     {
         $list = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
-        try {
-            $result = $list->noop();
-            $this->assertTrue($result);
-        } catch (\Exception $e) {
-            $this->fail('exception raised while calling noop thru fallback');
-        }
+        $result = $list->noop();
+        $this->assertTrue($result);
     }
 
     public function testWrongVariable()
     {
         $list = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
-        try {
-            $list->thisdoesnotexist;
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception thrown while reading wrong variable (via __get())');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $list->thisdoesnotexist;
     }
 
     public function testGetHeaders()
@@ -177,12 +163,7 @@ class InterfaceTest extends \PHPUnit_Framework_TestCase
     {
         $list = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
-        try {
-            $list[1]->thisdoesnotexist;
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception thrown while reading wrong header');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $list[1]->thisdoesnotexist;
     }
 }

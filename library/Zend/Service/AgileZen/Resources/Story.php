@@ -22,7 +22,7 @@
 namespace Zend\Service\AgileZen\Resources;
 
 use Zend\Service\AgileZen\AgileZen;
-use Zend\Service\AgileZen\Entity;
+use Zend\Service\AgileZen\AbstractEntity;
 use Zend\Service\AgileZen\Container;
 
 /**
@@ -32,7 +32,7 @@ use Zend\Service\AgileZen\Container;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Story extends Entity
+class Story extends AbstractEntity
 {
     /**
      * Text

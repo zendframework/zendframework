@@ -1,0 +1,17 @@
+{
+    "name": "zendframework/zend-service-rackspace",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "rackspace"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Service\\Rackspace": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-http": "self.version"
+    }
+}

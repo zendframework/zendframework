@@ -81,7 +81,7 @@ class ApcIterator implements IteratorInterface
     /**
      * Get storage instance
      *
-     * @return StorageInterface
+     * @return Apc
      */
     public function getStorage()
     {

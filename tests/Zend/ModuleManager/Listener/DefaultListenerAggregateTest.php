@@ -46,7 +46,7 @@ class DefaultListenerAggregateTest extends TestCase
         $this->includePath = get_include_path();
 
         $this->defaultListeners = new DefaultListenerAggregate(
-            new ListenerOptions(array( 
+            new ListenerOptions(array(
                 'module_paths'         => array(
                     realpath(__DIR__ . '/TestAsset'),
                 ),
@@ -80,9 +80,12 @@ class DefaultListenerAggregateTest extends TestCase
 
         $events = $moduleManager->getEventManager()->getEvents();
         $expectedEvents = array(
-            'loadModules.pre' => array(
+            'loadModules' => array(
                 'Zend\Loader\ModuleAutoloader',
-                'Zend\ModuleManager\Listener\ConfigListener',
+                'config-pre' => 'Zend\ModuleManager\Listener\ConfigListener',
+                'config-post' => 'Zend\ModuleManager\Listener\ConfigListener',
+                'Zend\ModuleManager\Listener\LocatorRegistrationListener',
+                'Zend\ModuleManager\ModuleManager',
             ),
             'loadModule.resolve' => array(
                 'Zend\ModuleManager\Listener\ModuleResolverListener',
@@ -91,10 +94,6 @@ class DefaultListenerAggregateTest extends TestCase
                 'Zend\ModuleManager\Listener\AutoloaderListener',
                 'Zend\ModuleManager\Listener\InitTrigger',
                 'Zend\ModuleManager\Listener\OnBootstrapListener',
-                'Zend\ModuleManager\Listener\ConfigListener',
-                'Zend\ModuleManager\Listener\LocatorRegistrationListener',
-            ),
-            'loadModules.post' => array(
                 'Zend\ModuleManager\Listener\ConfigListener',
                 'Zend\ModuleManager\Listener\LocatorRegistrationListener',
             ),
@@ -119,10 +118,12 @@ class DefaultListenerAggregateTest extends TestCase
         $listenerAggregate = new DefaultListenerAggregate;
         $moduleManager     = new ModuleManager(array('ListenerTestModule'));
 
+        $this->assertEquals(1, count($moduleManager->getEventManager()->getEvents()));
+
         $listenerAggregate->attach($moduleManager->getEventManager());
-        $this->assertEquals(4, count($moduleManager->getEventManager()->getEvents()));
+        $this->assertEquals(3, count($moduleManager->getEventManager()->getEvents()));
 
         $listenerAggregate->detach($moduleManager->getEventManager());
-        $this->assertEquals(0, count($moduleManager->getEventManager()->getEvents()));
+        $this->assertEquals(1, count($moduleManager->getEventManager()->getEvents()));
     }
 }

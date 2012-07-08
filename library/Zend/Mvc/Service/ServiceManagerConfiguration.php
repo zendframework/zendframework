@@ -41,13 +41,8 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      *
      * @var array
      */
-    protected $services = array(
-        'DispatchListener'   => 'Zend\Mvc\DispatchListener',
-        'Request'            => 'Zend\Http\PhpEnvironment\Request',
-        'Response'           => 'Zend\Http\PhpEnvironment\Response',
-        'RouteListener'      => 'Zend\Mvc\RouteListener',
+    protected $invokables = array(
         'SharedEventManager' => 'Zend\EventManager\SharedEventManager',
-        'ViewManager'        => 'Zend\Mvc\View\ViewManager',
     );
 
     /**
@@ -56,19 +51,8 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * @var array
      */
     protected $factories = array(
-        'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
-        'Configuration'           => 'Zend\Mvc\Service\ConfigurationFactory',
-        'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
-        'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
-        'DependencyInjector'      => 'Zend\Mvc\Service\DiFactory',
-        'EventManager'            => 'Zend\Mvc\Service\EventManagerFactory',
-        'ModuleManager'           => 'Zend\Mvc\Service\ModuleManagerFactory',
-        'Router'                  => 'Zend\Mvc\Service\RouterFactory',
-        'ViewHelperManager'       => 'Zend\Mvc\Service\ViewHelperManagerFactory',
-        'ViewFeedRenderer'        => 'Zend\Mvc\Service\ViewFeedRendererFactory',
-        'ViewFeedStrategy'        => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
-        'ViewJsonRenderer'        => 'Zend\Mvc\Service\ViewJsonRendererFactory',
-        'ViewJsonStrategy'        => 'Zend\Mvc\Service\ViewJsonStrategyFactory',
+        'EventManager'  => 'Zend\Mvc\Service\EventManagerFactory',
+        'ModuleManager' => 'Zend\Mvc\Service\ModuleManagerFactory',
     );
 
     /**
@@ -84,13 +68,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * @var array
      */
     protected $aliases = array(
-        'Config'                                  => 'Configuration',
-        'ControllerPluginBroker'                  => 'ControllerPluginManager',
-        'Di'                                      => 'DependencyInjector',
-        'Zend\Di\LocatorInterface'                => 'DependencyInjector',
         'Zend\EventManager\EventManagerInterface' => 'EventManager',
-        'Zend\Mvc\Controller\PluginBroker'        => 'ControllerPluginBroker',
-        'Zend\Mvc\Controller\PluginManager'       => 'ControllerPluginManager',
     );
 
     /**
@@ -114,8 +92,8 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      */
     public function __construct(array $configuration = array())
     {
-        if (isset($configuration['services'])) {
-            $this->services = array_merge($this->services, $configuration['services']);
+        if (isset($configuration['invokables'])) {
+            $this->invokables = array_merge($this->invokables, $configuration['invokables']);
         }
 
         if (isset($configuration['factories'])) {
@@ -149,8 +127,8 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      */
     public function configureServiceManager(ServiceManager $serviceManager)
     {
-        foreach ($this->services as $name => $service) {
-            $serviceManager->setInvokableClass($name, $service);
+        foreach ($this->invokables as $name => $class) {
+            $serviceManager->setInvokableClass($name, $class);
         }
 
         foreach ($this->factories as $name => $factoryClass) {

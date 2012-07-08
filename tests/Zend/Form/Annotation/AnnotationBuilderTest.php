@@ -174,4 +174,21 @@ class AnnotationBuilderTest extends TestCase
         $this->assertTrue($composed->has('username'));
         $this->assertTrue($composed->has('password'));
     }
+
+    public function testCanHandleOptionsAnnotation()
+    {
+        $entity  = new TestAsset\Annotation\EntityUsingOptions();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $this->assertTrue($form->useAsBaseFieldset());
+
+        $this->assertTrue($form->has('username'));
+
+        $username = $form->get('username');
+        $this->assertInstanceOf('Zend\Form\Element', $username);
+
+        $this->assertEquals('Username:', $username->getLabel());
+        $this->assertEquals(array('class' => 'label'), $username->getLabelAttributes());
+    }
 }

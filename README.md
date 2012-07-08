@@ -4,155 +4,152 @@ Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bran
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.0beta4*
+*Zend Framework 2.0.0beta5*
+
+6 July 2012
 
 THIS RELEASE IS A DEVELOPMENT RELEASE AND NOT INTENDED FOR PRODUCTION USE.
 PLEASE USE AT YOUR OWN RISK.
 
-This is the fourth in a series of planned beta releases. The beta release
-cycle will follow the "gmail" style of betas, whereby new features will
-be added in each new release, and BC will not be guaranteed; beta
-releases will happen _approximately_ every six weeks. 
+This is the fifth and last in a series of planned beta releases. The
+beta release cycle has followed the "gmail" style of betas, whereby new
+features have been added in each new release, and BC has not been
+guaranteed.
 
-Once the established milestones have been reached and the featureset has reached
-maturity and reasonable stability, we will freeze the API and prepare for
-Release Candidate (RC) status. At this time, we are only planning for one more
-beta release (beta5) before starting the RC process.
+Following this release, we plan to perform some repository cleanup, a
+standards audit, and documentation migration. Once these tasks are
+complete, we will prepare our first Release Candidate (RC).
 
-### NEW FEATURES IN BETA4
+### NEW FEATURES IN BETA5
 
-PLEASE NOTE: this beta includes a large number of breaks from the previous beta,
-due to introduction of the ServiceManager, changes to the EventManager, renaming
-of the ModuleManager, rewrite of the Form component (and removal of the Dojo
-component), and several changes in the View layer. Please consult the
-ZendSkeletonApplication to get an idea of the changes necessary to make your
-application work with beta4.
+PLEASE NOTE: this beta includes a number of breaks from the previous
+beta. Please read the notes below prefixed with "BC BREAK" for specific
+breakages. The ZendSkeletonApplication typically reflects any BC changes
+that have been made, and is a good resource.
 
- - Config component (Enrico Zimuel)
-    -  Added reader and writer implementations for JSON and YAML configuration
- - Crypt and Math (Enrico Zimuel)
-    - Creates a generic API for string and stream en/decryption
-    - Provides bcrypt support
-    - Provides `BigInteger` support
-    - Provides common methodology surrounding credential encryption and hashing
- - Db layer (Ralph Schindler)
-    - Zend\Db\Adapter: added buffer() to the ResultInterface, added that feature
-      to Mysqli Result object
-    - Zend\Db\Adapter: added ability to subselect Sqlite for returning a true
-      count()
-    - Zend\Db\Adapter: added API to return helper closures from the Adapter API
-    - Renamed "database" to "schema" in all usages across Zend\Db
-    - Zend\Db\Adapter: Various fixes for PDO connection parameters
-    - Zend\Db\Sql: created a shared AbstractSql implementation to share
-      expression processing
-    - Zend\Db\Sql: created a more robust "Expression" object for use in Select
-      and Predicates
-    - Zend\Db\Sql: created an internal workflow and architecture to handle the
-      creation of platform specific queries
-    - Zend\Db\Sql: implemented limit() and offset() API to Select
-    - Zend\Db\Sql: added having(), order() to SELECT API
-    - Zend\Db\Sql: added alias support to Select::columns()
-    - Zend\Db\TableGateway: reorganized AbstractTableGateway and TableGateway,
-      removed other extensions in favor of "Features"
-    - Zend\Db\TableGateway: created a "Features" API in TableGatway to promote
-      horizontal extension of TableGatway
- - Di (Ralph Schindler, Marco Pivetta)
-    - Added method injectDependencies($instance), to allow injecting an object
-      after an instance is already available (used in the ServiceManager)
-    - Various fixes based on issue reports
- - Dojo
-    - REMOVED. Support was for out-dated versions of Dojo, and with the new Form
-      rewrite, it needs to be completely rewritten. This is targetted for post
-      2.0.0 at this time.
- - EventManager (Matthew Weier O'Phinney)
-    - New SharedEventManager, a non-static version of the original
-      StaticEventManager
-    - StaticEventManager now extends SharedEventManager and implements a
-      singleton pattern
-    - New ServiceManager creates a shared instance of SharedEventManager and
-      injects it in a non-shared EventManager instance per service; static usage
-      is discouraged at this time.
-    - attachAggregate() now accepts an optional $priority, which, when present,
-      will be passed to the ListenerAggregate, allowing specifying a priority
-      during attachment of its events.
-    - EventManager now can handle arrays of events as well as wildcard events
-    - SharedEventManager now can handle arrays of contexts, wildcard contexts,
-      and arrays/wildcard events.
- - Form (Matthew Weier O'Phinney, Kyle Spraggs, Guilherme Blanco)
-    - Complete rewrite
-    - Elements compose a name and attributes
-    - Fieldsets compose a name, attributes, and elements and fieldsets
-    - Forms compose a name, attributes, elements, fieldsets, an InputFilter, and
-      optionally a Hydrator and bound object.
-    - New form view helpers accept the Form objects in order to generate markup.
-    - Object binding allows direct binding of model data to and from the Form.
- - InputFilter (Matthew Weier O'Phinney)
-    - New component for object-oriented creation of input filters
-    - Input objects compose filter and validator chains, as well as metadata
-      such as required, allow empty, break on failure, and more.
-    - InputFilter objects compose Input and InputFilter objects, and allow
-      validating the entire set or specified validation groups.
- - Log (Enrico Zimuel, Benoit Durand)
-    - Refactored to provide more flexibility
-    - Adds API discoverability (instead of method overloading)
-    - Uses the PluginBroker for loading writers and formatters
-    - Uses PriorityQueue to manage writer priority
-    - Uses FilterChain for filtering messages
-    - Adds a renderer for exceptions, a JSON formatter, and additional interfaces
- - Mail (Enrico Zimuel)
-    - Allow batch sending via the SMTP transport
- - ModuleManager (Evan Coury, Matthew Weier O'Phinney)
-    - Renamed from "Module" to "ModuleManager"
-    - Renamed "Consumer" subnamespace to "Feature"
-    - Added new listeners:
-      - OnBootstrapListener (Module classes defining onBootstrap() will have
-        that method attached as a listener on the Application bootstrap event)
-      - LocatorRegistrationListener (Module classes implementing the
-        LocatorRegisteredInterface feature will be injected in the
-        ServiceManager)
-      - ServiceListener (Module classes defining getServiceConfiguration() will
-        have that method called, and the configuration merged; once all modules
-        are loaded, that merged configuration will be passed to the
-        ServiceManager)
- - MVC (Matthew Weier O'Phinney, Ralph Schindler, Evan Coury)
-    - Removed Bootstrap class and rewrote Application class
-      - Composes a ServiceManager, and simply fires events
-    - Added RouteListener and DispatchListener classes, implementing the default
-      route and dispatch strategies.
-    - Created a new "Service" subnamespace, with ServiceManager configuration
-      and factories for the default MVC services.
-    - Created a new "ViewManager" class, which triggers on the bootstrap event,
-      at which time it creates the various objects of the view layer and wires
-      them together as well as registers them with the appropriate events.
-    - InjectTemplateListener now uses the controller namespace to further
-      namespace the view template; the default is now 
-      "<normalized top-level namespace>/<normalized controller name>/<action>"
- - ServiceManager component (Ralph Schindler, Matthew Weier O'Phinney)
-    - Highly performant, programmatic service creation
-    - Largely replaces DI, but can also consume Zend\Di
-    - Allows:
-      - Service registration
-      - Lazy-loaded service objects
-      - Service factories
-      - Service aliasing
-      - Abstract (fallback) factories
-      - Initializers (manipulate instances after creation)
-    - Fully integrated in the MVC solution
- - Renamed interfaces (Gabriel Baker, Sascha Prolic, Maks3w)
-   - Most, if not all, interfaces were renamed to suffix with the word
-     "Interface". This is to promote discovery of interfaces, as well as make
-     naming simpler.
-   - Exceptions are affected by this as well. Exception marker interfaces were
-     renamed to ExceptionInterface and pushed into the Exception subnamespace of
-     each component
- - Composer support (Rob Allen, Marco Pivetta, Kyle Spraggs)
-   - Zend Framework is now installable via Composer (http://packagist.org/), as
-     are each of its individual components
- - Travis CI integration (Marco Pivetta, Maks3w)
-   - ZF2 is tested on each commit by http://travis-ci.org/
+ - Escaper component (Padraic Brady)
+    - Provides context-specific escaping mechanisms for HTML content,
+      HTML attributes, URLs, CSS, and JavaScript.
+    - BC BREAK: The escape() view helper was removed, and replaced with
+      escapeHtml(), escapeHtmlAttr(), escapeJs(), escapeCss(), and
+      escapeUrl() implementations.
+ - New I18n component (Ben Scholzen, Chris Martin, Dennis Portnov,
+   Matthew Weier O'Phinney)
+    - New component leveraging PHP's ext/intl extension to provide
+      internationalization (i18n) and localization (L10n) features and
+      capabilities to applications.
+    - LEVERAGES:
+        - DateTime, DateTimezone, IntlDateFormatter
+        - Locale
+        - NumberFormatter
+    - BC BREAK: REMOVES the following components:
+        - Zend\Currency
+        - Zend\Date
+        - Zend\Locale
+        - Zend\Measure
+        - Zend\Translator
+        - All filters, validators, and view helpers that relied on the
+          above.
+    - PROVIDES:
+        - Zend\I18n\Translator, including support for gettext and
+          PHP-array-based translations (more are planned).
+        - Zend\I18n\Filter, containing localized filtering capabilites
+          for Alnum (alphanumeric), Alpha (alphabetic), and NumberFormat
+          (numerical strings).
+        - Zend\I18n\Validator, containing localized validation
+          capabilities for Alnum (alphanumeric), Alpha (alphabetic),
+          Iban (international bank account number standard), Int
+          (integer), and PostCode (localized postal codes).
+        - Zend\I18n\View, containing localized view helpers for
+          CurrencyFormat, DateFormat, NumberFormat, Translate, and
+          TranslatePlural.
+ - Db layer additions (Ralph Schindler, Rob Allen, Guillaume Metayer,
+   Sascha Howe, Chris Testroet, Evan Coury, Ben Youngblood)
+    - Metadata support
+    - Postgresql adapter/driver
+    - New HydratingResultSet, allowing the ability to specify a custom
+      hydrator (from Zend\Stdlib\Hydrator) for hydrating row objects.
+    - Many bugfixes and stabilizations
+ - Form additions (Matthew Weier O'Phinney, Michaël Gallego, Yanick Rochon)
+    - Annotations support: Ability to use annotations with a domain
+      object in order to define a form, fieldsets, elements, inputs and
+      input filters, and more.
+    - Hydration of fieldsets; fieldsets may compose their own hydrators
+      if desired.
+    - Collection support; allows multiple instances of the same
+      fieldset. As an example, you might have an interface that
+      allows adding a set of form elements via an XHR call; on the
+      backend, these would be defined as a collection, allowing
+      arbitrary numbers of these fieldsets to be submitted.
+    - New view helpers covering most HTML5-specific element types, most
+      XHTML-specific element types. Additionally, a number of the
+      HTML5-specific element types now have Element implementations to
+      create turn-key solutions that include validation and filtering.
+    - BC BREAK: Options support. Many attributes were being used not as
+      HTML attributes but to define behavior. The ElementInterface now
+      has an accessor and mutator for options. Examples of options
+      include labels for non-radio/checkbox/select elements, the CAPTCHA
+      adapter for CAPTCHA elements, CSRF tokens, etc. If you were
+      defining labels in your forms, please move the label and label
+      attributes definitions from the "attributes" to the "options" of
+      the element, fieldset, or form.
+    - BC BREAK: new interface, ElementPrepareAwareInterface, defining
+      the method "prepareElement(Form $form)". The FieldsetInterface,
+      and, by extension, FormInterface, extend this new interface. It is
+      used to allow preparing elements prior to creating a
+      representation.
+ - MVC additions (Kyle Spraggs, Evan Coury, Matthew Weier O'Phinney)
+    - New "Params" controller plugin. Allows retrieving query, post,
+      cookie, header, and route parameters. Usage is
+      $this->params()->fromQuery($name, $default).
+    - New listener, Zend\Mvc\ModuleRouteListener. When enabled, if a
+      route match contains a "\__NAMESPACE__" key, that namespace value
+      will be prepended to the value of the "controller" key. This
+      should typically be used in the root route for a given module, to
+      ensure controller names do not clash.
+    - Bootstrap simplification. A new "init()" method was created that
+      accepts the path to a configuration file, and then creates and
+      bootstraps the application; this eliminates all common boilerplate
+      for the bootstrap scripts.
+ - Hydrator changes (Adam Lundrigan)
+    - BC BREAK: the ClassMethods hydrator now assumes by default that
+      it should convert between underscore_separated names and
+      camelCase.
+ - BC BREAK: Doctrine Annotations Parser (Matthew Weier O'Phinney, Marco
+   Pivetta, Guilherme Blanco)
+    - Zend\Code\Annotation now has a dependency on Doctrine\Common for
+      its annotation parser.
+    - Annotations now conform to Doctrine's standards by default, but
+      the AnnotationManager in ZF2 allows attaching alternate parsers
+      for specific annotation types.
+ - BC BREAK: Removal of Plugin Broker usage (Matthew Weier O'Phinney,
+   Evan Coury)
+    - All uses of the Plugin Broker / Plugin Class Locator combination
+      were removed. A new class, Zend\ServiceManager\AbstractPluginManager, 
+      was created and used to replace all previous usages of the plugin
+      broker. This provides more flexibility in creation of plugins, as
+      well as reduces the number of APIs developers need to learn.
+    - Configuration of plugin managers is now done at the top-level. All
+      plugin manager configuration follows the format utilized by
+      Zend\ServiceManager\ServiceConfiguration, and
+      Zend\ModuleManager\Listener\ServiceListener has been updated to
+      allow informing it of plugin manager instances it should manage,
+      as well as the configuration key to utilize.
+ - BC BREAK: Coding Standards (Maks3w, Sascha Prolic, Rob Allen)
+    - Renamed most abstract classes to prefix them with the term
+      "Abstract". In particular, ActionController and RestfulController
+      are now AbstractActionController and AbstractRestfulController.
+    - Renamed getters in HTTP, EventManager, and Mail components. These
+      components were using accessors such as "events()", "query()",
+      "headers()", etc. All such accessors were renamed to prepend
+      "get", and, in the case of "events()", renamed to indicate the
+      actual object retrieved ("getEventManager()"). 
+ - SECURITY FIX: XmlRpc (Matthew Weier O'Phinney)
+    - A security issue arising from XML eXternal Entity (XXE) injection
+      was patched; see http://framework.zend.com/security/advisory/ZF2012-01
 
 Over *400* pull requests for a variety of features and bugfixes were handled
-since beta3!
+since beta4!
 
 ### SYSTEM REQUIREMENTS
 

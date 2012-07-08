@@ -1,0 +1,19 @@
+{
+    "name": "zendframework/zend-service-technorati",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "technorati"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Service\\Technorati": ""
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-http": "self.version",
+        "zendframework/zend-rest": "self.version",
+        "zendframework/zend-uri": "self.version"
+    }
+}

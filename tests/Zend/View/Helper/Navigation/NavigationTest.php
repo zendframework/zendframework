@@ -420,4 +420,14 @@ class NavigationTest extends AbstractTest
 
         $this->assertTrue(strpos($render, 'p2') !== false);
     }
+    
+    /**
+     * Returns the contens of the expected $file, normalizes newlines
+     * @param  string $file
+     * @return string
+     */
+    protected function _getExpected($file)
+    {
+        return str_replace("\n", PHP_EOL, parent::_getExpected($file));
+    }
 }

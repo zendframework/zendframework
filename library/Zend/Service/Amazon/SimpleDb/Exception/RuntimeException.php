@@ -21,6 +21,8 @@
 
 namespace Zend\Service\Amazon\SimpleDb\Exception;
 
+use Zend\Service\Amazon\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Service_Amazon
@@ -28,9 +30,6 @@ namespace Zend\Service\Amazon\SimpleDb\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException
-    extends \RuntimeException
-    implements \Zend\Service\Amazon\SimpleDb\Exception
-{}
-
-
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
+{
+}

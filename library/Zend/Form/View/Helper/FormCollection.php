@@ -64,7 +64,7 @@ class FormCollection extends AbstractHelper
 
         $markup = '';
         $templateMarkup = '';
-        $escapeHelper = $this->getEscapeHelper();
+        $escapeHtmlHelper = $this->getEscapeHtmlHelper();
         $rowHelper = $this->getRowHelper();
 
         if ($element instanceof CollectionElement && $element->shouldCreateTemplate()) {
@@ -87,9 +87,11 @@ class FormCollection extends AbstractHelper
 
         // If $templateMarkup is not empty, use it for simplify adding new element in JavaScript
         if (!empty($templateMarkup)) {
+            $escapeHtmlAttribHelper = $this->getEscapeHtmlAttrHelper();
+
             $markup .= sprintf(
                 '<span data-template="%s"></span>',
-                $escapeHelper($templateMarkup)
+                $escapeHtmlAttribHelper($templateMarkup)
             );
         }
 
@@ -98,7 +100,7 @@ class FormCollection extends AbstractHelper
             $label = $element->getLabel();
 
             if (!empty($label)) {
-                $label = $escapeHelper($label);
+                $label = $escapeHtmlHelper($label);
 
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',

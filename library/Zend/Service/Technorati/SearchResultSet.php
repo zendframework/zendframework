@@ -32,7 +32,7 @@ use DomDocument;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SearchResultSet extends ResultSet
+class SearchResultSet extends AbstractResultSet
 {
     /**
      * Number of query results.
@@ -62,7 +62,7 @@ class SearchResultSet extends ResultSet
     }
 
     /**
-     * Implements ResultSet::current().
+     * Implements AbstractResultSet::current().
      *
      * @return SearchResult current result
      */

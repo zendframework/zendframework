@@ -562,10 +562,6 @@ class Form extends Fieldset implements FormInterface
             }
 
             $name = $element->getName();
-            if ($inputFilter->has($name)) {
-                // if we already have an input by this name, use it
-                continue;
-            }
 
             // Create an input based on the specification returned from the element
             $spec  = $element->getInputSpecification();

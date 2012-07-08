@@ -198,6 +198,21 @@ class ValidatorChain implements
     }
 
     /**
+     * Merge the validator chain with the one given in parameter
+     *
+     * @param ValidatorChain $validatorChain
+     * @return ValidatorChain
+     */
+    public function merge(ValidatorChain $validatorChain)
+    {
+        foreach ($validatorChain->validators as $validator) {
+            $this->validators[] = $validator;
+        }
+
+        return $this;
+    }
+
+    /**
      * Returns array of validation failure messages
      *
      * @return array

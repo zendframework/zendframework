@@ -193,6 +193,21 @@ class FilterChain extends AbstractFilter implements Countable
     }
 
     /**
+     * Merge the filter chain with the one given in parameter
+     *
+     * @param FilterChain $filterChain
+     * @return FilterChain
+     */
+    public function merge(FilterChain $filterChain)
+    {
+        foreach ($filterChain->filters as $filter) {
+            $this->attach($filter);
+        }
+
+        return $this;
+    }
+
+    /**
      * Get all the filters
      *
      * @return SplPriorityQueue

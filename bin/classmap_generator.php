@@ -163,13 +163,14 @@ $l = new ClassFileLocator($libraryPath);
 // classname => filename, where the filename is relative to the library path
 $map = new stdClass;
 foreach ($l as $file) {
-    $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
     $filename  = str_replace($libraryPath . '/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()) . '/' . $file->getFilename());
 
     // Add in relative path to library
     $filename  = $relativePathForClassmap . $filename;
 
-    $map->{$namespace . $file->classname} = $filename;
+    foreach ($file->getClasses() as $class) {
+        $map->{$class} = $filename;
+    }
 }
 
 if ($appending) {

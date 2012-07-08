@@ -20,12 +20,12 @@
 
 namespace Zend\File;
 
-// import SPL classes/interfaces into local scope
-use DirectoryIterator,
-    FilterIterator,
-    RecursiveIterator,
-    RecursiveDirectoryIterator,
-    RecursiveIteratorIterator;
+use DirectoryIterator;
+use FilterIterator;
+use RecursiveIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use SplFileInfo;
 
 /**
  * Locate files containing PHP classes, interfaces, abstracts or traits
@@ -62,20 +62,20 @@ class ClassFileLocator extends FilterIterator
         }
 
         parent::__construct($dirOrIterator);
+        $this->setInfoClass('Zend\File\PhpClassFile');
     }
 
     /**
      * Filter for files containing PHP classes, interfaces, or abstracts
-     * 
+     *
      * @return bool
      */
     public function accept()
     {
         $file = $this->getInnerIterator()->current();
-
-        // If we somehow have something other than an SplFileInfo object, just 
+        // If we somehow have something other than an SplFileInfo object, just
         // return false
-        if (!$file instanceof \SplFileInfo) {
+        if (!$file instanceof SplFileInfo) {
             return false;
         }
 
@@ -95,13 +95,11 @@ class ClassFileLocator extends FilterIterator
         $t_trait  = defined('T_TRAIT') ? T_TRAIT : -1; // For preserve PHP 5.3 compatibility
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
-
             if (!is_array($token)) {
                 // single character token found; skip
                 $i++;
                 continue;
             }
-
             switch ($token[0]) {
                 case T_NAMESPACE:
                     // Namespace found; grab it for later
@@ -110,6 +108,11 @@ class ClassFileLocator extends FilterIterator
                         $token = $tokens[$i];
                         if (is_string($token)) {
                             if (';' === $token) {
+                                $saveNamespace = false;
+                                break;
+                            }
+                            if ('{' === $token) {
+                                $saveNamespace = true;
                                 break;
                             }
                             continue;
@@ -122,9 +125,9 @@ class ClassFileLocator extends FilterIterator
                                 break;
                         }
                     }
-
-                    // Set the namespace of this file in the object
-                    $file->namespace = $namespace;
+                    if ($saveNamespace) {
+                        $savedNamespace = $namespace;
+                    }
                     break;
                 case $t_trait:
                 case T_CLASS:
@@ -141,8 +144,18 @@ class ClassFileLocator extends FilterIterator
                         if (T_STRING == $type) {
                             // If a classname was found, set it in the object, and
                             // return boolean true (found)
-                            $file->classname = $content;
-                            return true;
+                            if (!isset($namespace) || null === $namespace) {
+                                if (isset($saveNamespace) && $saveNamespace) {
+                                    $namespace = $savedNamespace;
+                                } else {
+                                    $namespace = null;
+                                }
+
+                            }
+                            $class = (null === $namespace) ? $content : $namespace . '\\' . $content;
+                            $file->addClass($class);
+                            $namespace = null;
+                            break;
                         }
                     }
                     break;
@@ -150,7 +163,10 @@ class ClassFileLocator extends FilterIterator
                     break;
             }
         }
-
+        $classes = $file->getClasses();
+        if (!empty($classes)) {
+            return true;
+        }
         // No class-type tokens found; return false
         return false;
     }

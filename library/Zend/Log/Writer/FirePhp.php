@@ -34,10 +34,18 @@ use Zend\Log\Logger;
 class FirePhp extends AbstractWriter
 {
     /**
+     * Whether or not the writer is enabled.
+     * 
+     * @var bool
+     */
+    private $enabled;
+
+    /**
      * Initializes a new instance of this class.
      */
     public function __construct()
     {
+        $this->enabled = true;
         $this->formatter = new FirePhpFormatter();
     }
 
@@ -46,10 +54,13 @@ class FirePhp extends AbstractWriter
      *
      * @param array $event event data
      * @return void
-     * @throws Exception\RuntimeException
      */
     protected function doWrite(array $event)
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
+
         $line = $this->formatter->format($event);
 
         switch ($event['priority']) {
@@ -82,4 +93,27 @@ class FirePhp extends AbstractWriter
                 break;
         }
     }
+
+    /**
+     * Checks whether or not the writer is enabled.
+     * 
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Enables or disables the writer.
+     * 
+     * @param bool $enabled The flag to set.
+     * @return FirePhp
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
+
 }

@@ -6,7 +6,7 @@
     <para>
         The <classname>Captcha</classname> element can be used with forms
         where authenticated users are not necessary, but you want to prevent
-        spam submissions. It is meant to be paired with one of the
+        spam submissions. It is pairs with one of the
         <classname>Zend/Form/View/Helper/Captcha/*</classname> view helpers
         that matches the type of <acronym>CAPTCHA</acronym> adapter in use.
     </para>

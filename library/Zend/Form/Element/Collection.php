@@ -133,6 +133,20 @@ class Collection extends Fieldset
      */
     public function populateValues($data)
     {
+        if (!is_array($data) && !$data instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable set of data; received "%s"',
+                __METHOD__,
+                (is_object($data) ? get_class($data) : gettype($data))
+            ));
+        }
+
+        // Can't do anything with empty data
+        if (empty($data)) {
+
+            return;
+        }
+
         if ($this->targetElement instanceof FieldsetInterface) {
             foreach ($this->byName as $name => $fieldset) {
                 $fieldset->populateValues($data[$name]);

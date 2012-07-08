@@ -111,9 +111,9 @@ class Amazon
         $client->getHttpClient()->resetParameters();
         $response = $client->restGet('/onca/xml', $options);
 
-        if ($response->isError()) {
+        if ($response->isClientError()) {
             throw new Exception\RuntimeException('An error occurred sending request. Status code: '
-                                           . $response->getStatus());
+                                           . $response->getStatusCode());
         }
 
         $dom = new \DOMDocument();
@@ -144,9 +144,9 @@ class Amazon
         $options = $this->_prepareOptions('ItemLookup', $options, $defaultOptions);
         $response = $client->restGet('/onca/xml', $options);
 
-        if ($response->isError()) {
+        if ($response->isClientError()) {
             throw new Exception\RuntimeException(
-                'An error occurred sending request. Status code: ' . $response->getStatus()
+                'An error occurred sending request. Status code: ' . $response->getStatusCode()
             );
         }
 

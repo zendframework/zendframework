@@ -17,6 +17,11 @@ class MbString extends AbstractStringAdapter
         'UTF-8', // TODO
     );
 
+    /**
+     * Constructor
+     *
+     * @throws Exception\ExtensionNotLoadedException
+     */
     public function __construct()
     {
         if (!extension_loaded('mbstring')) {

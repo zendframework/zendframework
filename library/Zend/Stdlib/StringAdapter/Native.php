@@ -20,15 +20,6 @@ class Native extends AbstractStringAdapter
         'UCS-4', 'UCS-4BE', 'UCS-4LE',
     );
 
-    public function __construct()
-    {
-        if (!extension_loaded('mbstring')) {
-            throw new Exception\ExtensionNotLoadedException(
-                'PHP extension "mbstring" is required for this adapter'
-            );
-        }
-    }
-
     public function isCharsetSupported($charset)
     {
         $charset = strtoupper($charset);

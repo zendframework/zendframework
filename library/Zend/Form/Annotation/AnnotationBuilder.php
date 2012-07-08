@@ -85,7 +85,8 @@ class AnnotationBuilder implements EventManagerAwareInterface
         'Options',
         'Required',
         'Type',
-        'Validator',
+        'ValidationGroup',
+        'Validator'
     );
 
     /**
@@ -245,19 +246,6 @@ class AnnotationBuilder implements EventManagerAwareInterface
         $formSpec    = ArrayUtils::iteratorToArray($this->getFormSpecification($entity));
         $formFactory = $this->getFormFactory();
         return $formFactory->createForm($formSpec);
-    }
-
-    /**
-     * Create a fieldset from an object
-     *
-     * @param $entity
-     * @return \Zend\Form\Fieldset
-     */
-    public function createFieldset($entity)
-    {
-        $fieldsetSpec = ArrayUtils::iteratorToArray($this->getFormSpecification($entity));
-        $formFactory  = $this->getFormFactory();
-        return $formFactory->createFieldset($fieldsetSpec);
     }
 
     /**

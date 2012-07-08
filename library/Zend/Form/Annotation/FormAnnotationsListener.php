@@ -35,6 +35,7 @@ use Zend\EventManager\EventManagerInterface;
  * - Object
  * - InputFilter
  * - Type
+ * - ValidationGroup
  *
  * See the individual annotation classes for more details. The handlers 
  * registered work with the annotation values, as well as the form 
@@ -63,6 +64,7 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleObjectAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleOptionsAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleTypeAnnotation'));
+        $this->listeners[] = $events->attach('configureForm', array($this, 'handleValidationGroupAnnotation'));
 
         $this->listeners[] = $events->attach('discoverName', array($this, 'handleNameAnnotation'));
         $this->listeners[] = $events->attach('discoverName', array($this, 'discoverFallbackName'));
@@ -199,5 +201,24 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
 
         $formSpec = $e->getParam('formSpec');
         $formSpec['type'] = $annotation->getType();
+    }
+
+    /**
+     * Handle the ValidationGroup annotation
+     *
+     * Sets the validation group to use in the form specification.
+     *
+     * @param  \Zend\EventManager\EventInterface $e
+     * @return void
+     */
+    public function handleValidationGroupAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof ValidationGroup) {
+            return;
+        }
+
+        $formSpec = $e->getParam('formSpec');
+        $formSpec['validation_group'] = $annotation->getValidationGroup();
     }
 }

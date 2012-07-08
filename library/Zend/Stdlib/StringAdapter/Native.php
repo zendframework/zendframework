@@ -20,12 +20,6 @@ class Native extends AbstractStringAdapter
         'UCS-4', 'UCS-4BE', 'UCS-4LE',
     );
 
-    public function isCharsetSupported($charset)
-    {
-        $charset = strtoupper($charset);
-        return in_array($charset, static::$charsets);
-    }
-
     public function strlen($str, $charset = 'UTF-8')
     {
         if (StringUtils::isSingleByteCharset($charset)) {

@@ -31,12 +31,6 @@ class MbString extends AbstractStringAdapter
         }
     }
 
-    public function isCharsetSupported($charset)
-    {
-        $charset = strtoupper($charset);
-        return in_array($charset, static::$charsets);
-    }
-
     public function strlen($str, $charset = 'UTF-8')
     {
         return mb_strlen($str, $charset);

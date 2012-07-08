@@ -6,6 +6,24 @@ abstract class AbstractStringAdapter implements StringAdapterInterface
 {
 
     /**
+     * List of supported character sets (upper case)
+     *
+     * @var string[]
+     */
+    protected static $charsets = array();
+
+    public function isCharsetSupported($charset)
+    {
+        $charset = strtoupper($charset);
+        return in_array($charset, static::$charsets);
+    }
+
+    public function getSupportedCharsets()
+    {
+        return static::$charsets;
+    }
+
+    /**
      * Word wrap
      *
      * @param  string  $string

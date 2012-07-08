@@ -4,6 +4,7 @@ namespace Zend\Stdlib;
 
 use Zend\Loader\Broker,
     Zend\Loader\PluginBroker,
+    Zend\Stdlib\StringAdapter\StringAdapterInterface,
     Zend\Stdlib\StringAdapter\MbString as MbStringAdapter,
     Zend\Stdlib\StringAdapter\Iconv as IconvAdapter,
     Zend\Stdlib\StringAdapter\Native as NativeAdapter;
@@ -11,7 +12,7 @@ use Zend\Loader\Broker,
 class StringUtils
 {
 
-    protected static $broker;
+    protected static $adapterRegistry;
     protected static $singleByteCharsets = array(
         'ASCII', '7BIT', '8BIT',
         'ISO-8859-1', 'ISO-8859-2', 'ISO-8859-3', 'ISO-8859-4', 'ISO-8859-5',
@@ -23,44 +24,47 @@ class StringUtils
     );
 
     /**
-     * Get broker
+     * Get registered string adapters
      *
-     * @return Zend\Loader\Broker
+     * @return Zend\Stdlib\StringAdapter\StringAdapterInterface[]
      */
-    public static function getBroker()
+    public static function getRegisteredAdapters()
     {
-        if (static::$broker === null) {
-            $broker = new PluginBroker();
+        if (static::$adapterRegistry === null) {
+            static::$adapterRegistry = array();
 
             if (extension_loaded('mbstring')) {
-                $broker->register('mbstring', new MbStringAdapter());
+                static::$adapterRegistry[] = new MbStringAdapter();
             }
 
             if (extension_loaded('iconv')) {
-                $broker->register('iconv', new IconvAdapter());
+                static::$adapterRegistry[] = new IconvAdapter();
             }
 
-            $broker->register('native', new NativeAdapter());
-
-            static::setBroker($broker);
+            static::$adapterRegistry[] = new NativeAdapter();
         }
-        return static::$broker;
+
+        return static::$adapterRegistry;
     }
 
-    public static function setBroker(Broker $broker)
+    public static function registerAdapter(StringAdapterInterface $adapter)
     {
-        static::$broker = $broker;
+        if (!in_array($adapter, static::$adapterRegistry, true)) {
+            static::$adapterRegistry[] = $adapter;
+        }
     }
 
-    public static function resetBroker()
+    public static function unregisterAdapter(StringAdapterInterface $adapter)
     {
-        static::$broker = null;
+        $index = array_search($adapter, static::$adapterRegistry, true);
+        if ($index !== false) {
+            unset(static::$adapterRegistry[$index]);
+        }
     }
 
     public static function getAdapterByCharset($charset = 'UTF-8')
     {
-        $broker = static::getBroker();
-        foreach ($broker->getPlugins() as $adapter) {
+        foreach (static::getRegisteredAdapters() as $adapter) {
             if ($adapter->isCharsetSupported($charset)) {
                 return $adapter;
             }

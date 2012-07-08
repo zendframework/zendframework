@@ -7,6 +7,8 @@ interface StringAdapterInterface
 
     public function isCharsetSupported($charset);
 
+    public function getSupportedCharsets();
+
     public function strlen($str, $charset = 'UTF-8');
 
     public function substr($str, $offset = 0, $length = null, $charset = 'UTF-8');

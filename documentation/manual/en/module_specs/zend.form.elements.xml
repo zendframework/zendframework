@@ -26,5 +26,6 @@
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.form.element.captcha.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.form.element.csrf.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.form.element.color.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.form.element.date-time.xml"/>
 
 </section>

@@ -10,10 +10,10 @@
         xlink:href="http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#color-state-(type=color)"
         >HTML5 inputs with type color</link>.
         This element adds filters and a <classname>Regex</classname>
-        validator in it's input filter specification to validate a
+        validator to it's input filter specification in order to validate a
         <link xmlns:xlink="http://www.w3.org/1999/xlink"
         xlink:href="http://www.whatwg.org/specs/web-apps/current-work/multipage/common-microsyntaxes.html#valid-simple-color">
-        HTML5 valid simple color</link> on the server.
+        HTML5 valid simple color</link> value on the server.
     </para>
 
     <example xml:id="zend.form.element.color.usage">

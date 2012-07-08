@@ -50,15 +50,15 @@ class Time extends DateTime
     protected function getStepValidator()
     {
         $stepValue = (isset($this->attributes['step']))
-                     ? $this->attributes['step'] : 1; // Minutes
+                     ? $this->attributes['step'] : 60; // Seconds
 
         $baseValue = (isset($this->attributes['min']))
                      ? $this->attributes['min'] : '00:00:00';
 
         return new DateStepValidator(array(
-            'format'       => 'H:i:s',
-            'baseValue'    => $baseValue,
-            'step' => new \DateInterval("PT{$stepValue}M"),
+            'format'    => 'H:i:s',
+            'baseValue' => $baseValue,
+            'step'      => new \DateInterval("PT{$stepValue}S"),
         ));
     }
 }

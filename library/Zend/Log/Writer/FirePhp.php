@@ -86,7 +86,7 @@ class FirePhp extends AbstractWriter
                 \FB::info($line);
                 break;
             case Logger::DEBUG:
-                \FB::log($line);
+                \FB::trace($line);
                 break;
             default:
                 \FB::log($line);

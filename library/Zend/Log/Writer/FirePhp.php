@@ -65,14 +65,8 @@ class FirePhp extends AbstractWriter
 
         switch ($event['priority']) {
             case Logger::EMERG:
-                \FB::log($line);
-                break;
             case Logger::ALERT:
-                \FB::log($line);
-                break;
             case Logger::CRIT:
-                \FB::log($line);
-                break;
             case Logger::ERR:
                 \FB::error($line);
                 break;
@@ -80,8 +74,6 @@ class FirePhp extends AbstractWriter
                 \FB::warn($line);
                 break;
             case Logger::NOTICE:
-                \FB::log($line);
-                break;
             case Logger::INFO:
                 \FB::info($line);
                 break;

@@ -77,20 +77,20 @@ $form->add($dateTime);
                         a <classname>Zend\Validator\GreaterThan</classname> validator
                         will be added to ensure the date value is greater than the
                         minimum value.
-                       </para>
-                       <para>
+                    </para>
+                    <para>
                         If the <varname>max</varname> attribute is set,
                         a <classname>Zend\Validator\LessThanValidator</classname> validator
                         will be added to ensure the date value is less than the
                         minimum value.
-                       </para>
-                       <para>
+                    </para>
+                    <para>
                         If the <varname>step</varname> attribute is set to "any",
                         step validations will be skipped. Otherwise, a
                         a <classname>Zend\Validator\DateStep</classname> validator
                         will be added to ensure the date value is within a certain
                         interval of minutes (default is 1 minute).
-                       </para>
+                    </para>
                     <para>Returns array</para>
                 </listitem>
             </varlistentry>

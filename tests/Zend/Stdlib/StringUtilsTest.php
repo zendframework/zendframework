@@ -28,21 +28,21 @@ use PHPUnit_Framework_TestCase as TestCase,
 class StringUtilsTest extends TestCase
 {
 
-    protected $bufferedAdapters;
+    protected $bufferedWrappers;
 
     public function setUp()
     {
-        $this->bufferedAdapters = StringUtils::getRegisteredAdapters();
+        $this->bufferedWrappers = StringUtils::getRegisteredWrappers();
     }
 
     public function tearDown()
     {
-        // reset registered adapters
-        foreach (StringUtils::getRegisteredAdapters() as $adapter) {
-            StringUtils::unregisterAdapter($adapter);
+        // reset registered wrappers
+        foreach (StringUtils::getRegisteredWrappers() as $wrapper) {
+            StringUtils::unregisterWrapper($wrapper);
         }
-        foreach ($this->bufferedAdapters as $adapter) {
-            StringUtils::registerAdapter($adapter);
+        foreach ($this->bufferedWrappers as $wrapper) {
+            StringUtils::registerWrapper($wrapper);
         }
 
     }
@@ -81,16 +81,16 @@ class StringUtilsTest extends TestCase
         $this->assertFalse(StringUtils::isSingleByteCharset($charset));
     }
 
-    public function testGetAdapterByCharset()
+    public function testGetWrapper()
     {
-        $adapter = StringUtils::getAdapterByCharset('UTF-8');
+        $wrapper = StringUtils::getWrapper('UTF-8');
 
         if (extension_loaded('mbstring')) {
-            $this->assertInstanceOf('Zend\Stdlib\StringAdapter\MbString', $adapter);
+            $this->assertInstanceOf('Zend\Stdlib\StringWrapper\MbString', $wrapper);
         } elseif (extension_loaded('iconv')) {
-            $this->assertInstanceOf('Zend\Stdlib\StringAdapter\Iconv', $adapter);
+            $this->assertInstanceOf('Zend\Stdlib\StringWrapper\Iconv', $wrapper);
         } else {
-            $this->assertInstanceOf('Zend\Stdlib\StringAdapter\Native', $adapter);
+            $this->assertInstanceOf('Zend\Stdlib\StringWrapper\Native', $wrapper);
         }
     }
 }

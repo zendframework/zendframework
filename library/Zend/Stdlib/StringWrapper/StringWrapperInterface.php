@@ -1,8 +1,8 @@
 <?php
 
-namespace Zend\Stdlib\StringAdapter;
+namespace Zend\Stdlib\StringWrapper;
 
-interface StringAdapterInterface
+interface StringWrapperInterface
 {
 
     public function isCharsetSupported($charset);

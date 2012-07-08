@@ -1,8 +1,8 @@
 <?php
 
-namespace Zend\Stdlib\StringAdapter;
+namespace Zend\Stdlib\StringWrapper;
 
-class MbString extends AbstractStringAdapter
+class MbString extends AbstractStringWrapper
 {
 
     /**

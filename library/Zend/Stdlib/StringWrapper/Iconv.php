@@ -1,8 +1,8 @@
 <?php
 
-namespace Zend\Stdlib\StringAdapter;
+namespace Zend\Stdlib\StringWrapper;
 
-class Iconv extends AbstractStringAdapter
+class Iconv extends AbstractStringWrapper
 {
 
     /**

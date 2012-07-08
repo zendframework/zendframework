@@ -1,8 +1,8 @@
 <?php
 
-namespace Zend\Stdlib\StringAdapter;
+namespace Zend\Stdlib\StringWrapper;
 
-abstract class AbstractStringAdapter implements StringAdapterInterface
+abstract class AbstractStringWrapper implements StringWrapperInterface
 {
 
     /**

@@ -4,15 +4,15 @@ namespace Zend\Stdlib;
 
 use Zend\Loader\Broker,
     Zend\Loader\PluginBroker,
-    Zend\Stdlib\StringAdapter\StringAdapterInterface,
-    Zend\Stdlib\StringAdapter\MbString as MbStringAdapter,
-    Zend\Stdlib\StringAdapter\Iconv as IconvAdapter,
-    Zend\Stdlib\StringAdapter\Native as NativeAdapter;
+    Zend\Stdlib\StringWrapper\StringWrapperInterface,
+    Zend\Stdlib\StringWrapper\MbString as MbStringWrapper,
+    Zend\Stdlib\StringWrapper\Iconv as IconvWrapper,
+    Zend\Stdlib\StringWrapper\Native as NativeWrapper;
 
 class StringUtils
 {
 
-    protected static $adapterRegistry;
+    protected static $wrapperRegistry;
     protected static $singleByteCharsets = array(
         'ASCII', '7BIT', '8BIT',
         'ISO-8859-1', 'ISO-8859-2', 'ISO-8859-3', 'ISO-8859-4', 'ISO-8859-5',
@@ -24,53 +24,53 @@ class StringUtils
     );
 
     /**
-     * Get registered string adapters
+     * Get registered wrappers
      *
-     * @return Zend\Stdlib\StringAdapter\StringAdapterInterface[]
+     * @return Zend\Stdlib\StringWrapper\StringWrapperInterface[]
      */
-    public static function getRegisteredAdapters()
+    public static function getRegisteredWrappers()
     {
-        if (static::$adapterRegistry === null) {
-            static::$adapterRegistry = array();
+        if (static::$wrapperRegistry === null) {
+            static::$wrapperRegistry = array();
 
             if (extension_loaded('mbstring')) {
-                static::$adapterRegistry[] = new MbStringAdapter();
+                static::$wrapperRegistry[] = new MbStringWrapper();
             }
 
             if (extension_loaded('iconv')) {
-                static::$adapterRegistry[] = new IconvAdapter();
+                static::$wrapperRegistry[] = new IconvWrapper();
             }
 
-            static::$adapterRegistry[] = new NativeAdapter();
+            static::$wrapperRegistry[] = new NativeWrapper();
         }
 
-        return static::$adapterRegistry;
+        return static::$wrapperRegistry;
     }
 
-    public static function registerAdapter(StringAdapterInterface $adapter)
+    public static function registerWrapper(StringWrapperInterface $wrapper)
     {
-        if (!in_array($adapter, static::$adapterRegistry, true)) {
-            static::$adapterRegistry[] = $adapter;
+        if (!in_array($wrapper, static::$wrapperRegistry, true)) {
+            static::$wrapperRegistry[] = $wrapper;
         }
     }
 
-    public static function unregisterAdapter(StringAdapterInterface $adapter)
+    public static function unregisterWrapper(StringWrapperInterface $wrapper)
     {
-        $index = array_search($adapter, static::$adapterRegistry, true);
+        $index = array_search($wrapper, static::$wrapperRegistry, true);
         if ($index !== false) {
-            unset(static::$adapterRegistry[$index]);
+            unset(static::$wrapperRegistry[$index]);
         }
     }
 
-    public static function getAdapterByCharset($charset = 'UTF-8')
+    public static function getWrapper($charset = 'UTF-8')
     {
-        foreach (static::getRegisteredAdapters() as $adapter) {
-            if ($adapter->isCharsetSupported($charset)) {
-                return $adapter;
+        foreach (static::getRegisteredWrappers() as $wrapper) {
+            if ($wrapper->isCharsetSupported($charset)) {
+                return $wrapper;
             }
         }
 
-        throw new Exception\RuntimeException("No string adapter found for charset '{$charset}'");
+        throw new Exception\RuntimeException("No wrapper found for charset '{$charset}'");
     }
 
     public static function isSingleByteCharset($charset)

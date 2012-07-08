@@ -1,10 +1,10 @@
 <?php
 
-namespace Zend\Stdlib\StringAdapter;
+namespace Zend\Stdlib\StringWrapper;
 
 use Zend\Stdlib\StringUtils;
 
-class Native extends AbstractStringAdapter
+class Native extends AbstractStringWrapper
 {
 
     /**

@@ -38,7 +38,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
 {
     /**
      * Seed attributes
-     * 
+     *
      * @var array
      */
     protected $attributes = array(
@@ -68,9 +68,9 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
      *
      * Does not allow setting value attribute; this will always be
      * retrieved from the validator.
-     * 
-     * @param  string $name 
-     * @param  mixed $value 
+     *
+     * @param  string $name
+     * @param  mixed $value
      * @return Csrf
      */
     public function setAttribute($name, $value)
@@ -87,8 +87,8 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
      *
      * Retrieves validator hash when asked for 'value' attribute;
      * otherwise, proxies to parent.
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return mixed
      */
     public function getAttribute($name)
@@ -104,7 +104,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
      * Override: get attributes
      *
      * Seeds 'value' attribute with validator hash
-     * 
+     *
      * @return array
      */
     public function getAttributes()
@@ -119,7 +119,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
      * Provide default input rules for this element
      *
      * Attaches the captcha as a validator.
-     * 
+     *
      * @return array
      */
     public function getInputSpecification()

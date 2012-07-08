@@ -20,8 +20,8 @@
         <title>Basic Usage of Zend\Form\Element\Color</title>
 
         <para>
-            This element automatically adds an attribute <varname>"type"</varname>
-            of <varname>"color"</varname>.
+            This element automatically adds a <varname>"type"</varname>
+            attribute of value <varname>"color"</varname>.
         </para>
 
         <programlisting language="php"><![CDATA[

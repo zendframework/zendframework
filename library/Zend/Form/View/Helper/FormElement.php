@@ -57,7 +57,7 @@ class FormElement extends BaseAbstractHelper
         }
 
         if ($element instanceof Element\Csrf) {
-            $helper = $renderer->plugin('form_input');
+            $helper = $renderer->plugin('form_hidden');
             return $helper($element);
         }
 
@@ -69,27 +69,32 @@ class FormElement extends BaseAbstractHelper
         $type    = $element->getAttribute('type');
         $options = $element->getAttribute('options');
 
-        if ($type == 'checkbox') {
+        if ('checkbox' == $type) {
             $helper = $renderer->plugin('form_checkbox');
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'multi_checkbox') {
+        if ('color' == $type) {
+            $helper = $renderer->plugin('form_color');
+            return $helper($element);
+        }
+
+        if ('multi_checkbox' == $type && is_array($options)) {
             $helper = $renderer->plugin('form_multi_checkbox');
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'radio') {
+        if ('radio' == $type && is_array($options)) {
             $helper = $renderer->plugin('form_radio');
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'select') {
+        if ('select' == $type && is_array($options)) {
             $helper = $renderer->plugin('form_select');
             return $helper($element);
         }
 
-        if ($type == 'textarea') {
+        if ('textarea' == $type) {
             $helper = $renderer->plugin('form_textarea');
             return $helper($element);
         }

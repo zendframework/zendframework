@@ -4,7 +4,7 @@
 
     <para>
         The <classname>Alpha</classname> filter can be used to return
-        only alphabetic characters in the native language.
+        only alphabetic characters in the unicode "letter" category.
         All other characters are supressed.
     </para>
 

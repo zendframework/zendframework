@@ -10,11 +10,11 @@
 
 namespace Zend\Http\Client;
 
-use Zend\Stdlib\ParametersInterface;
-use Zend\Uri;
+use ArrayIterator;
 use Zend\Http\Header\Cookie;
 use Zend\Http\Response;
-use ArrayIterator;
+use Zend\Stdlib\ParametersInterface;
+use Zend\Uri;
 
 /**
  * A Cookies object is designed to contain and maintain HTTP cookies, and should

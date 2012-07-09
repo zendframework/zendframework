@@ -10,11 +10,11 @@
 
 namespace Zend\Http\PhpEnvironment;
 
-use Zend\Http\Request as HttpRequest;
-use Zend\Uri\Http as HttpUri;
 use Zend\Http\Header\Cookie;
+use Zend\Http\Request as HttpRequest;
 use Zend\Stdlib\Parameters;
 use Zend\Stdlib\ParametersInterface;
+use Zend\Uri\Http as HttpUri;
 
 /**
  * HTTP Request for current PHP environment

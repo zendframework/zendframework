@@ -11,10 +11,10 @@
 namespace Zend\Http\Client\Adapter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter;
 use Zend\Http\Client\Adapter\Exception as AdapterException;
 use Zend\Http\Response;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * A sockets based (stream\socket\client) adapter class for Zend\Http\Client. Can be used

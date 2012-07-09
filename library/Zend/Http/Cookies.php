@@ -10,9 +10,9 @@
 
 namespace Zend\Http;
 
-use Zend\Uri;
 use Zend\Http\Header\Cookie;
 use Zend\Http\Response;
+use Zend\Uri;
 
 /**
  * A Zend_Http_CookieJar object is designed to contain and maintain HTTP cookies, and should

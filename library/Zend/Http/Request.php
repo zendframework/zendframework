@@ -10,12 +10,12 @@
 
 namespace Zend\Http;
 
-use Zend\Stdlib\RequestInterface;
 use Zend\Stdlib\Message;
-use Zend\Stdlib\ParametersInterface;
 use Zend\Stdlib\Parameters;
-use Zend\Uri\Http as HttpUri;
+use Zend\Stdlib\ParametersInterface;
+use Zend\Stdlib\RequestInterface;
 use Zend\Uri\Exception as ExceptionUri;
+use Zend\Uri\Http as HttpUri;
 
 class Request extends Message implements RequestInterface
 {

@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Http\Client\Adapter;
+
 use Zend\Http\Client;
 use Zend\Http\Client\Adapter\Exception as AdapterException;
 

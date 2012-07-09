@@ -11,8 +11,8 @@
 namespace Zend\Http\Client\Adapter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Http\Response;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * A testing-purposes adapter.

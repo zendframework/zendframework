@@ -15,9 +15,7 @@ namespace Zend\Http\Client\Adapter\Exception;
  * @category  Zend
  * @package   Zend_Application
  */
-class TimeoutException
-    extends RuntimeException
-    implements ExceptionInterface
+class TimeoutException extends RuntimeException implements ExceptionInterface
 {
     const READ_TIMEOUT = 1000;
 }

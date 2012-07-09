@@ -17,7 +17,6 @@ use Zend\Http\Exception;
  * @category  Zend
  * @package   Zend_Application
  */
-class RuntimeException
-    extends Exception\RuntimeException
-    implements ExceptionInterface
+class RuntimeException extends Exception\RuntimeException implements 
+    ExceptionInterface
 {}

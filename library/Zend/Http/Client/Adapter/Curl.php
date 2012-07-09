@@ -11,11 +11,11 @@
 namespace Zend\Http\Client\Adapter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
+use Zend\Http\Client;
 use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter;
 use Zend\Http\Client\Adapter\Exception as AdapterException;
-use Zend\Http\Client;
 use Zend\Http\Request;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * An adapter class for Zend\Http\Client based on the curl extension.

@@ -10,11 +10,11 @@
 
 namespace Zend\Http;
 
-use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use ArrayIterator;
-use Zend\Uri\Http;
+use Traversable;
 use Zend\Stdlib;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Uri\Http;
 
 /**
  * Http client

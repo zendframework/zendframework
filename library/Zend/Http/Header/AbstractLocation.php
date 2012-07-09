@@ -10,8 +10,8 @@
 
 namespace Zend\Http\Header;
 
-use Zend\Uri\Http as HttpUri;
 use Zend\Uri\Exception as UriException;
+use Zend\Uri\Http as HttpUri;
 
 /**
  * Abstract Location Header

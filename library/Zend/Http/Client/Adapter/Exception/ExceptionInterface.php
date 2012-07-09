@@ -17,6 +17,5 @@ use Zend\Http\Client\Exception\ExceptionInterface as HttpClientException;
  * @package    Zend_Http
  * @subpackage Client_Adapter
  */
-interface ExceptionInterface
-    extends HttpClientException
+interface ExceptionInterface extends HttpClientException
 {}

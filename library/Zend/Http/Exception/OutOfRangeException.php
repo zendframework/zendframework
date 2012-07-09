@@ -10,7 +10,6 @@
 
 namespace Zend\Http\Exception;
 
-class OutOfRangeException
-    extends \OutOfRangeException
-    implements ExceptionInterface
+class OutOfRangeException extends \OutOfRangeException implements 
+    ExceptionInterface
 {}

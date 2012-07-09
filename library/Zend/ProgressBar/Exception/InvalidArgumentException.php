@@ -16,7 +16,6 @@ namespace Zend\ProgressBar\Exception;
  * @category   Zend
  * @package    Zend_ProgressBar
  */
-class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements ExceptionInterface
+class InvalidArgumentException extends \InvalidArgumentException implements 
+    ExceptionInterface
 {}

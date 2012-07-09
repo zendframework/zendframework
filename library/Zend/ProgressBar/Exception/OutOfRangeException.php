@@ -16,8 +16,6 @@ namespace Zend\ProgressBar\Exception;
  * @category   Zend
  * @package    Zend_ProgressBar
  */
-class OutOfRangeException
-    extends \OutOfRangeException
-    implements ExceptionInterface
+class OutOfRangeException extends \OutOfRangeException implements ExceptionInterface
 {
 }

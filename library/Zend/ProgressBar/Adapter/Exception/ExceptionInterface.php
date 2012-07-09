@@ -18,7 +18,6 @@ use Zend\ProgressBar\Exception\ExceptionInterface as ProgressBarException;
  * @category  Zend
  * @package   Zend_ProgressBar
  */
-interface ExceptionInterface
-    extends ProgressBarException
+interface ExceptionInterface extends ProgressBarException
 {
 }

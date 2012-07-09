@@ -10,9 +10,8 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use Zend\Cache\Exception,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\IteratorInterface;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\IteratorInterface;
 
 /**
  * @category   Zend

@@ -10,8 +10,8 @@
 
 namespace Zend\Cache\Pattern;
 
-use Zend\Cache\Exception;
 use Traversable;
+use Zend\Cache\Exception;
 
 /**
  * @category   Zend

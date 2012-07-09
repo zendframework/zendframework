@@ -11,11 +11,11 @@
 namespace Zend\Cache\Storage\Plugin;
 
 use Traversable;
-use Zend\EventManager\EventManagerInterface;
 use Zend\Cache\Exception;
 use Zend\Cache\Storage\ClearExpiredInterface;
 use Zend\Cache\Storage\StorageInterface;
 use Zend\Cache\Storage\PostEvent;
+use Zend\EventManager\EventManagerInterface;
 
 /**
  * @category   Zend

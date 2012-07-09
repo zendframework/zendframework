@@ -10,12 +10,14 @@
 
 namespace Zend\Cache\Storage;
 
+use Iterator;
+
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
  */
-interface IteratorInterface extends \Iterator
+interface IteratorInterface extends Iterator
 {
 
     const CURRENT_AS_SELF     = 0;

@@ -15,12 +15,12 @@ use ArrayObject;
 use stdClass;
 use Traversable;
 use Zend\Cache\Exception;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\Capabilities;
 use Zend\Cache\Storage\ClearByPrefixInterface;
 use Zend\Cache\Storage\ClearByNamespaceInterface;
 use Zend\Cache\Storage\FlushableInterface;
 use Zend\Cache\Storage\IterableInterface;
-use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;
 
 /**
@@ -29,11 +29,11 @@ use Zend\Cache\Storage\TotalSpaceCapableInterface;
  * @subpackage Storage
  */
 class Apc extends AbstractAdapter implements
-    ClearByPrefixInterface,
+    AvailableSpaceCapableInterface,
     ClearByNamespaceInterface,
+    ClearByPrefixInterface,
     FlushableInterface,
     IterableInterface,
-    AvailableSpaceCapableInterface,
     TotalSpaceCapableInterface
 {
     /**

@@ -11,7 +11,6 @@
 namespace Zend\Cache\Storage\Adapter;
 
 use Countable;
-use Zend\Cache\Storage\IterableInterface;
 use Zend\Cache\Storage\IteratorInterface;
 use Zend\Cache\Storage\StorageInterface;
 

@@ -12,9 +12,9 @@ namespace Zend\Cache\Storage\Adapter;
 
 use ArrayObject;
 use Zend\Cache\Exception;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\ClearByNamespaceInterface;
 use Zend\Cache\Storage\FlushableInterface;
-use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;
 use Zend\Stdlib\ErrorHandler;
 
@@ -23,10 +23,11 @@ use Zend\Stdlib\ErrorHandler;
  * @package    Zend_Cache
  * @subpackage Storage
  */
-class ZendServerDisk
-    extends AbstractZendServer
-    implements FlushableInterface, ClearByNamespaceInterface,
-               AvailableSpaceCapableInterface, TotalSpaceCapableInterface
+class ZendServerDisk extends AbstractZendServer implements 
+    AvailableSpaceCapableInterface, 
+    ClearByNamespaceInterface,
+    FlushableInterface, 
+    TotalSpaceCapableInterface
 {
 
     /**

@@ -13,9 +13,9 @@ namespace Zend\Cache\Storage\Adapter;
 use ArrayObject;
 use stdClass;
 use Zend\Cache\Exception;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\Capabilities;
 use Zend\Cache\Storage\FlushableInterface;
-use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;
 
 /**
@@ -24,8 +24,8 @@ use Zend\Cache\Storage\TotalSpaceCapableInterface;
  * @subpackage Storage
  */
 class WinCache extends AbstractAdapter implements
-    FlushableInterface,
     AvailableSpaceCapableInterface,
+    FlushableInterface,
     TotalSpaceCapableInterface
 {
 

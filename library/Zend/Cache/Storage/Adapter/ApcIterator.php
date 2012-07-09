@@ -11,7 +11,6 @@
 namespace Zend\Cache\Storage\Adapter;
 
 use APCIterator as BaseApcIterator;
-use Zend\Cache\Storage\IterableInterface;
 use Zend\Cache\Storage\IteratorInterface;
 
 /**

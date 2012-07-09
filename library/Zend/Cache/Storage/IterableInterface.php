@@ -10,6 +10,8 @@
 
 namespace Zend\Cache\Storage;
 
+use IteratorAggregate;
+
 /**
  * @category   Zend
  * @package    Zend_Cache
@@ -17,6 +19,6 @@ namespace Zend\Cache\Storage;
  *
  * @method IteratorInterface getIterator() Get the storage iterator
  */
-interface IterableInterface extends \IteratorAggregate
+interface IterableInterface extends IteratorAggregate
 {
 }

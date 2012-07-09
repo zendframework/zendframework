@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_OAuth
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id:$
  */
 
@@ -30,8 +28,6 @@ use Zend\OAuth\Token\Access as AccessToken,
  * @package    Zend_OAuth
  * @subpackage UnitTests
  * @group      Zend_OAuth
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AccessTest extends \PHPUnit_Framework_TestCase
 {

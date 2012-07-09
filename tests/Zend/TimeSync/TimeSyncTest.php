@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    TimeSync
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\TimeSync;
@@ -27,8 +25,6 @@ use Zend\TimeSync;
  * @category   Zend
  * @package    TimeSync
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      TimeSync
  */
 class TimeSyncTest extends \PHPUnit_Framework_TestCase

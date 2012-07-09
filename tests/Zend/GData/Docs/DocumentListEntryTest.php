@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_GData_Docs
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\GData\Docs;
@@ -26,8 +24,6 @@ use Zend\GData\Docs;
  * @category   Zend
  * @package    Zend_GData_Docsj
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_Docsj
  */

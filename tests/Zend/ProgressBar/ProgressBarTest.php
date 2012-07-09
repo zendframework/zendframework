@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_ProgressBar
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\ProgressBar;
@@ -25,8 +23,6 @@ namespace ZendTest\ProgressBar;
  * @category   Zend
  * @package    Zend_Console
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_ProgressBar
  */
 class ProgressBarTest extends \PHPUnit_Framework_TestCase

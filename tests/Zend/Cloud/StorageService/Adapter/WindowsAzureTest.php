@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    ZendTest_Cloud_StorageService_Adapter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Cloud\StorageService\Adapter;
@@ -29,8 +27,6 @@ use ZendTest\Cloud\StorageService\TestCase,
  * @category   Zend
  * @package    ZendTest_Cloud_StorageService_Adapter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class WindowsAzureTest extends TestCase
 {

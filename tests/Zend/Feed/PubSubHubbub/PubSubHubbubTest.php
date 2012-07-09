@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Feed\PubSubHubbub;
@@ -29,8 +27,6 @@ use Zend\Feed\Reader\Reader as FeedReader;
  * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PubSubHubbubTest extends \PHPUnit_Framework_TestCase
 {

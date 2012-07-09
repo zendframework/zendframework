@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    ZendTest_Cloud_Queue_Adapter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group disable
  */
 
@@ -31,8 +29,6 @@ use ZendTest\Cloud\QueueService\TestCase,
  * @category   Zend
  * @package    ZendTest_Cloud_Queue_Adapter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class WindowsAzureTest extends TestCase
 {

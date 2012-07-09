@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Memory
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Memory;
@@ -30,8 +28,6 @@ use Zend\Cache\StorageFactory as CacheFactory,
  * @category   Zend
  * @package    Zend_Memory
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Memory
  */
 class AccessControllerTest extends \PHPUnit_Framework_TestCase

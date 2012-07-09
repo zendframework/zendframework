@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Code_Scanner
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Code\Scanner;
@@ -28,8 +26,6 @@ use Zend\Code\Scanner\DocBlockScanner,
  * @category   Zend
  * @package    Zend_Code_Scanner
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Code_Scanner
  */
 class DocBlockScannerTest extends TestCase

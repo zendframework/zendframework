@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Amf
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Amf\TestAsset;
@@ -29,8 +27,6 @@ namespace ZendTest\Amf\TestAsset;
  * @subpackage UnitTests
  * @group      Zend_Amf
  * @group ZF-6205
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ReferenceTest 
 {

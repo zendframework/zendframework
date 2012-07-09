@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Math
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Math;
@@ -27,8 +25,6 @@ use Zend\Math\Math;
  * @category   Zend
  * @package    Zend_Math
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Math
  */
 class MathTest extends \PHPUnit_Framework_TestCase

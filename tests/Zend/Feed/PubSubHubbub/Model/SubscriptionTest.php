@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Feed\PubSubHubbub\Model;
@@ -32,8 +30,6 @@ use Zend\Feed\PubSubHubbub\Model\Subscription;
  * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Pubsubhubbub_Model
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SubscriptionTest extends \PHPUnit_Framework_TestCase
 {

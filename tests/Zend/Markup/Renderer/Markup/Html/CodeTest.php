@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
@@ -30,8 +28,6 @@ use Zend\Markup\Renderer\Markup\Html\Code as CodeMarkup,
  * @package    Zend_Markup
  * @subpackage UnitTests
  * @group      Zend_Markup
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class CodeTest extends \PHPUnit_Framework_TestCase
 {

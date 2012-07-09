@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Queue\Adapter;
@@ -26,8 +24,6 @@ namespace ZendTest\Queue\Adapter;
  * @package    Zend_Queue
  * @subpackage UnitTests
  * @group      Zend_Queue
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MessageClass extends \Zend\Queue\Message
 {

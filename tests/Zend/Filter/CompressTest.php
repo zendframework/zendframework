@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Filter;
@@ -28,8 +26,6 @@ use Zend\Filter\Compress as CompressFilter;
  * @package    Zend_Filter
  * @subpackage UnitTests
  * @group      Zend_Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class CompressTest extends \PHPUnit_Framework_TestCase
 {

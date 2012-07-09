@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Authentication\Adapter\TestAsset;
@@ -30,8 +28,6 @@ OpenId::$exitOnRedirect = false;
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ResponseHelper extends Response
 {

@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Dom;
@@ -30,8 +28,6 @@ use Zend\Dom\Query,
  * @category   Zend
  * @package    Zend_Dom
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dom
  */
 class QueryTest extends \PHPUnit_Framework_TestCase

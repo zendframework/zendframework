@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Paginator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Paginator\TestAsset;
@@ -27,8 +25,6 @@ use Zend\Paginator\ScrollingStylePluginManager as BaseScrollingStylePluginManage
  * @category   Zend
  * @package    Zend_Paginator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ScrollingStylePluginManager extends BaseScrollingStylePluginManager
 {

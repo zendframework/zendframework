@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend\Service\Rackspace
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Service\Rackspace;
@@ -32,8 +30,6 @@ use Zend\Http\Client\Adapter\Test as HttpTest;
  * @category   Zend
  * @package    Zend\Service\Rackspace\Files
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend\Service
  * @group      Zend\Service\Rackspace
  * @group      Zend\Service\Rackspace\Files

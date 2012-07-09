@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Pdf;
@@ -43,8 +41,6 @@ use Zend\Pdf\InternalType;
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_PDF
  */
 class DrawingTest extends \PHPUnit_Framework_TestCase

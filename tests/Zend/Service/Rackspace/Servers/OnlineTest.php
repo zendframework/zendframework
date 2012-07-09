@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend\Service\Rackspace\Servers
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Service\Rackspace\Servers;
@@ -27,8 +25,6 @@ use Zend\Service\Rackspace\Servers;
  * @category   Zend
  * @package    Zend\Service\Rackspace\Servers
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  */
@@ -418,8 +414,6 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
  * @category   Zend
  * @package    Zend\Service\Rackspace\Servers
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend\Service
  * @group      Zend\Service\Rackspace
  */

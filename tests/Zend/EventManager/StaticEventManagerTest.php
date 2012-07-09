@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_EventManager
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\EventManager;
@@ -31,8 +29,6 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @package    Zend_EventManager
  * @subpackage UnitTests
  * @group      Zend_EventManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class StaticEventManagerTest extends TestCase
 {

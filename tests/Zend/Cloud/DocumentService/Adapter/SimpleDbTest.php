@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    ZendTest_Cloud_DocumentService_Adapter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Cloud\DocumentService\Adapter;
@@ -31,8 +29,6 @@ use ZendTest\Cloud\DocumentService\TestCase,
  * @category   Zend
  * @package    ZendTest_Cloud_DocumentService_Adapter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SimpleDbTest extends TestCase
 {

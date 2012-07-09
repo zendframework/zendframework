@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Acl
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Acl;
@@ -30,8 +28,6 @@ use Zend\Acl,
  * @package    Zend_Acl
  * @subpackage UnitTests
  * @group      Zend_Acl
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AclTest extends \PHPUnit_Framework_TestCase
 {

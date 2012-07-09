@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Cloud_QueueService
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Cloud\QueueService;
@@ -31,8 +29,6 @@ use Zend\Config\Factory as ConfigFactory,
  * @category   Zend
  * @package    Zend_Cloud_QueueService
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cloud
  */
 class FactoryTest extends PHPUnitTestCase

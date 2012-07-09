@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Session
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id:$
  */
 
@@ -29,8 +27,6 @@ use Zend\Session\Configuration\SessionConfiguration;
  * @package    Zend_Session
  * @subpackage UnitTests
  * @group      Zend_Session
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @runTestsInSeparateProcesses
  */
 class SessionConfigurationTest extends \PHPUnit_Framework_TestCase

@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_GData_App
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\GData\App\TestAsset;
@@ -29,8 +27,6 @@ use Zend\GData\App\AbstractBase;
  * @category   Zend
  * @package    Zend_GData
  * @subpackage Unittests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 class MockBase extends AbstractBase

@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Math_BigInteger
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Math\BigInteger;
@@ -29,8 +27,6 @@ use Zend\Math\BigInteger\BigInteger as BigInt,
  * @category   Zend
  * @package    Zend_Math_BigInteger
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Math
  */
 class BigIntegerTest extends \PHPUnit_Framework_TestCase

@@ -11,8 +11,8 @@
 namespace Zend\Mail\Storage;
 
 use RecursiveIterator;
-use Zend\Mail\Header\HeaderInterface;
 use Zend\Mail\Headers;
+use Zend\Mail\Header\HeaderInterface;
 use Zend\Mime;
 
 /**

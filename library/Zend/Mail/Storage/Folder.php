@@ -10,12 +10,14 @@
 
 namespace Zend\Mail\Storage;
 
+use RecursiveIterator;
+
 /**
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
  */
-class Folder implements \RecursiveIterator
+class Folder implements RecursiveIterator
 {
     /**
      * subfolders of folder array(localName => \Zend\Mail\Storage\Folder folder)

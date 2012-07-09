@@ -11,8 +11,8 @@
 namespace Zend\Mail;
 
 use ArrayIterator;
-use Iterator;
 use Countable;
+use Iterator;
 use Traversable;
 use Zend\Loader\PluginClassLocator;
 
@@ -25,7 +25,7 @@ use Zend\Loader\PluginClassLocator;
  * @package    Zend_Mail
  * @subpackage Header
  */
-class Headers implements Iterator, Countable
+class Headers implements Countable, Iterator
 {
     /** @var string End of Line for fields */
     const EOL = "\r\n";

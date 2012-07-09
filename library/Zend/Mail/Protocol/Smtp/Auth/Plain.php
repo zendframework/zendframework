@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Mail\Protocol\Smtp\Auth;
+
 use Zend\Mail\Protocol\Smtp;
 
 /**

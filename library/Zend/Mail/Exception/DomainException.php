@@ -18,8 +18,6 @@ use Zend\Mail\Exception;
  * @category   Zend
  * @package    Zend_Mail
  */
-class DomainException
-    extends \DomainException
-    implements ExceptionInterface
+class DomainException extends \DomainException implements ExceptionInterface
 {
 }

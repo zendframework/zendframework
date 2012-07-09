@@ -283,23 +283,6 @@ class Twitter extends Client\RestClient
     }
 
     /**
-     * Set date header
-     *
-     * @param  int|string $value
-     * @deprecated Not supported by Twitter since April 08, 2009
-     * @return void
-     */
-    protected function setDate($value)
-    {
-        if (is_int($value)) {
-            $date = date($this->dateFormat, $value);
-        } else {
-            $date = date($this->dateFormat, strtotime($value));
-        }
-        $this->localHttpClient->setHeaders(array('If-Modified-Since' => $date));
-    }
-
-    /**
      * Public Timeline status
      *
      * @throws Http\Client\Exception if HTTP request fails or times out

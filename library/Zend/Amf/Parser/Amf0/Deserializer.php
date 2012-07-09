@@ -11,8 +11,8 @@
 namespace Zend\Amf\Parser\Amf0;
 
 use DateTime;
-use Zend\Amf\Parser\AbstractDeserializer;
 use Zend\Amf;
+use Zend\Amf\Parser\AbstractDeserializer;
 use Zend\Amf\Parser\Exception as ParserException;
 
 /**

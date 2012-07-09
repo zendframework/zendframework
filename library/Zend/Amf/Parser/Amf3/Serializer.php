@@ -11,12 +11,12 @@
 namespace Zend\Amf\Parser\Amf3;
 
 use DateTime;
-use Zend\Amf\Parser\AbstractSerializer;
-use Zend\Amf;
-use Zend\Amf\Parser;
-use Zend\Amf\Value;
 use DOMDocument;
 use SimpleXMLElement;
+use Zend\Amf;
+use Zend\Amf\Parser;
+use Zend\Amf\Parser\AbstractSerializer;
+use Zend\Amf\Value;
 
 /**
  * Detect PHP object type and convert it to a corresponding AMF3 object type

@@ -10,8 +10,8 @@
 
 namespace Zend\Amf\Parser;
 
-use Zend\Loader\PluginBroker;
 use Zend\Amf\Exception as AMFException;
+use Zend\Loader\PluginBroker;
 
 /**
  * Broker for parser resources

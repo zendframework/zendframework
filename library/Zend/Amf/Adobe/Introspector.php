@@ -10,14 +10,14 @@
 
 namespace Zend\Amf\Adobe;
 
+use DOMDocument;
+use DOMElement;
+use SplFileInfo;
 use Zend\Amf\Exception;
 use Zend\Code\Reflection\ClassReflection;
 use Zend\Code\Reflection\PropertyReflection;
 use Zend\Server\Reflection;
 use Zend\Server\Reflection\ReflectionClass as ServerReflectionClass;
-use SplFileInfo;
-use DOMElement;
-use DOMDocument;
 
 /**
  * This class implements a service for generating AMF service descriptions as XML.

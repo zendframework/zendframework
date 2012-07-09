@@ -331,6 +331,27 @@ class Collection extends Fieldset
     }
 
     /**
+     * @return array
+     */
+    public function extract()
+    {
+        // In this specific situation, object holds the data, that is too say an array
+        if (!is_array($this->object)) {
+            return array();
+        }
+
+        $values = array();
+        foreach ($this->object as $key => $value) {
+            if ($value instanceof $this->targetElement->object) {
+                $this->targetElement->object = $value;
+                $values[$key] = $this->targetElement->extract();
+            }
+        }
+
+        return $values;
+    }
+
+    /**
      * If both count and targetElement are set, add them to the fieldset
      *
      * @return void

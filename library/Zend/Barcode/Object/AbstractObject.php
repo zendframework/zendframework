@@ -12,8 +12,8 @@ namespace Zend\Barcode\Object;
 
 use Traversable;
 use Zend\Barcode;
-use Zend\Validator\Barcode as BarcodeValidator;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Validator\Barcode as BarcodeValidator;
 
 /**
  * Class for generate Barcode

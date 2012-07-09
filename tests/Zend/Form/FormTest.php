@@ -824,6 +824,9 @@ class FormTest extends TestCase
 
     public function testCanCorrectlyPopulateDataToOneToManyEntites()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped("The Intl extension is not loaded");
+        }
         $product = $this->getOneToManyEntity();
         $emptyProduct = new TestAsset\Entity\Product();
 

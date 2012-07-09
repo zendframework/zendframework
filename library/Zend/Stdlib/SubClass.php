@@ -6,11 +6,6 @@ abstract class SubClass
 {
 
     /**
-     * @var array
-     */
-    protected static $cache = array();
-
-    /**
      * Checks if the object has this class as one of its parents
      *
      * @see https://bugs.php.net/bug.php?id=53727
@@ -28,12 +23,13 @@ abstract class SubClass
         } else {
             $className = $object;
         }
-        if (!array_key_exists(strtolower($className), self::$cache)) {
-            $parents = class_parents($className, true) + class_implements($className, true);
-            foreach ($parents as $parent) {
-                self::$cache[strtolower($className)] = strtolower($parent);
-            }
+        static $isSubclassFuncCache = null; // null as unset, array when set
+        if ($isSubclassFuncCache === null) {
+            $isSubclassFuncCache = array();
         }
-        return (isset(self::$cache[strtolower($className)][strtolower($type)]));
+        if (!array_key_exists($className, $isSubclassFuncCache)) {
+            $isSubclassFuncCache[$className] = class_parents($className, true) + class_implements($className, true);
+        }
+        return (isset($isSubclassFuncCache[$className][$type]));
     }
 }

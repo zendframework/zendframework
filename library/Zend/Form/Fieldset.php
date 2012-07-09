@@ -540,6 +540,37 @@ class Fieldset extends Element implements FieldsetInterface
     }
 
     /**
+     * Extract values from the bound object and populate
+     * the fieldset elements
+     *
+     * @return void
+     */
+    protected function extract()
+    {
+        if (!is_object($this->object)) {
+            return;
+        }
+        $hydrator = $this->getHydrator();
+        if (!$hydrator instanceof Hydrator\HydratorInterface) {
+            return;
+        }
+
+        $values = $hydrator->extract($this->object);
+        if (!is_array($values)) {
+            // Do nothing if the hydrator returned a non-array
+            return;
+        }
+
+        // Recursively extract and populate values for nested fieldsets
+        foreach ($this->fieldsets as $fieldset) {
+            $fieldset->extract();
+            unset($values[$fieldset->getName()]);
+        }
+
+        $this->populateValues($values);
+    }
+
+    /**
      * Make a deep clone of a fieldset
      *
      * @return void

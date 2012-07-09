@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Markup\Renderer\Markup;
+
 use Zend\Markup\Token;
 
 /**

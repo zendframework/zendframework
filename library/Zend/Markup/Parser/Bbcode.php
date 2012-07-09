@@ -11,10 +11,10 @@
 namespace Zend\Markup\Parser;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Markup\Parser;
 use Zend\Markup\Token;
 use Zend\Markup\TokenList;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend

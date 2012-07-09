@@ -10,11 +10,13 @@
 
 namespace Zend\Markup;
 
+use RecursiveIterator;
+
 /**
  * @category   Zend
  * @package    Zend_Markup
  */
-class TokenList implements \RecursiveIterator
+class TokenList implements RecursiveIterator
 {
 
     /**

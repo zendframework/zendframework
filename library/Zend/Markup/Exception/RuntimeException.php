@@ -10,7 +10,5 @@
 
 namespace Zend\Markup\Exception;
 
-class RuntimeException
-    extends \RuntimeException
-    implements ExceptionInterface
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {}

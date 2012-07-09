@@ -11,8 +11,8 @@
 namespace Zend\Markup\Renderer;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Markup\Renderer\Markup\Html\Root as RootMarkup;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * HTML renderer

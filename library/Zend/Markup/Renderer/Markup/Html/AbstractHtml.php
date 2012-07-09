@@ -10,10 +10,10 @@
 
 namespace Zend\Markup\Renderer\Markup\Html;
 
-use Zend\Markup\Renderer\Markup\AbstractMarkup;
-use Zend\Markup;
-use Zend\Filter\HtmlEntities as HtmlEntitiesFilter;
 use Zend\Filter\Callback as CallbackFilter;
+use Zend\Filter\HtmlEntities as HtmlEntitiesFilter;
+use Zend\Markup;
+use Zend\Markup\Renderer\Markup\AbstractMarkup;
 
 /**
  * Abstract markup

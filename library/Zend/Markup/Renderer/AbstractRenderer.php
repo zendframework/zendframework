@@ -11,11 +11,11 @@
 namespace Zend\Markup\Renderer;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Markup\Token;
-use Zend\Markup\TokenList;
 use Zend\Markup\Parser;
 use Zend\Markup\Renderer\Markup;
+use Zend\Markup\Token;
+use Zend\Markup\TokenList;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Defines the basic rendering functionality

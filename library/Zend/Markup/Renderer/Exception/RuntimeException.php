@@ -12,7 +12,6 @@ namespace Zend\Markup\Renderer\Exception;
 
 use Zend\Markup\Exception;
 
-class RuntimeException
-    extends Exception\RuntimeException
-    implements ExceptionInterface
+class RuntimeException extends Exception\RuntimeException implements 
+    ExceptionInterface
 {}

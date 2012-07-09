@@ -10,10 +10,10 @@
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\InvalidArgumentException;
-use Zend\Serializer\Exception\RuntimeException;
 use stdClass;
 use Traversable;
+use Zend\Serializer\Exception\InvalidArgumentException;
+use Zend\Serializer\Exception\RuntimeException;
 
 /**
  * @link       http://www.python.org

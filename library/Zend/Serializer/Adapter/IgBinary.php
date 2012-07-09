@@ -10,8 +10,8 @@
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\RuntimeException;
 use Zend\Serializer\Exception\ExtensionNotLoadedException;
+use Zend\Serializer\Exception\RuntimeException;
 
 /**
  * @category   Zend

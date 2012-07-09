@@ -11,9 +11,9 @@
 namespace Zend\Serializer\Adapter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Serializer\Adapter\AdapterInterface as SerializationAdapter;
 use Zend\Serializer\Exception\InvalidArgumentException;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend

@@ -14,6 +14,5 @@ namespace Zend\Serializer\Exception;
  * @category   Zend
  * @package    Zend_Serializer
  */
-class ExtensionNotLoadedException
-    extends RuntimeException
+class ExtensionNotLoadedException extends RuntimeException
 {}

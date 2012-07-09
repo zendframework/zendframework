@@ -15,7 +15,5 @@ namespace Zend\Serializer\Exception;
  * @category   Zend
  * @package    Zend_Serializer
  */
-class RuntimeException
-    extends \RuntimeException
-    implements ExceptionInterface
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {}

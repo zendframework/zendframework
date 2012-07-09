@@ -10,8 +10,8 @@
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\RuntimeException;
 use Zend\Amf\Parser as AmfParser;
+use Zend\Serializer\Exception\RuntimeException;
 
 /**
  * @category   Zend

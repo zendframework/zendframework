@@ -111,34 +111,34 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set cache dir
      *
-     * @param  string $dir
+     * @param  string $cacheDir
      * @return FilesystemOptions
      * @throws Exception\InvalidArgumentException
      */
-    public function setCacheDir($dir)
+    public function setCacheDir($cacheDir)
     {
-        if ($dir !== null) {
-            if (!is_dir($dir)) {
+        if ($cacheDir !== null) {
+            if (!is_dir($cacheDir)) {
                 throw new Exception\InvalidArgumentException(
-                    "Cache directory '{$dir}' not found or not a directoy"
+                    "Cache directory '{$cacheDir}' not found or not a directoy"
                 );
-            } elseif (!is_writable($dir)) {
+            } elseif (!is_writable($cacheDir)) {
                 throw new Exception\InvalidArgumentException(
-                    "Cache directory '{$dir}' not writable"
+                    "Cache directory '{$cacheDir}' not writable"
                 );
-            } elseif (!is_readable($dir)) {
+            } elseif (!is_readable($cacheDir)) {
                 throw new Exception\InvalidArgumentException(
-                    "Cache directory '{$dir}' not readable"
+                    "Cache directory '{$cacheDir}' not readable"
                 );
             }
 
-            $dir = rtrim(realpath($dir), \DIRECTORY_SEPARATOR);
+            $cacheDir = rtrim(realpath($cacheDir), \DIRECTORY_SEPARATOR);
         } else {
-            $dir = sys_get_temp_dir();
+            $cacheDir = sys_get_temp_dir();
         }
 
-        $this->triggerOptionEvent('cache_dir', $dir);
-        $this->cacheDir = $dir;
+        $this->triggerOptionEvent('cache_dir', $cacheDir);
+        $this->cacheDir = $cacheDir;
         return $this;
     }
 
@@ -159,14 +159,14 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set clear stat cache
      *
-     * @param  bool $flag
+     * @param  bool $clearStatCache
      * @return FilesystemOptions
      */
-    public function setClearStatCache($flag)
+    public function setClearStatCache($clearStatCache)
     {
-        $flag = (bool) $flag;
-        $this->triggerOptionEvent('clear_stat_cache', $flag);
-        $this->clearStatCache = $flag;
+        $clearStatCache = (bool) $clearStatCache;
+        $this->triggerOptionEvent('clear_stat_cache', $clearStatCache);
+        $this->clearStatCache = $clearStatCache;
         return $this;
     }
 
@@ -183,20 +183,20 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set dir level
      *
-     * @param  int $level
+     * @param  int $dirLevel
      * @return FilesystemOptions
      * @throws Exception\InvalidArgumentException
      */
-    public function setDirLevel($level)
+    public function setDirLevel($dirLevel)
     {
-        $level = (int) $level;
-        if ($level < 0 || $level > 16) {
+        $dirLevel = (int) $dirLevel;
+        if ($dirLevel < 0 || $dirLevel > 16) {
             throw new Exception\InvalidArgumentException(
-                "Directory level '{$level}' must be between 0 and 16"
+                "Directory level '{$dirLevel}' must be between 0 and 16"
             );
         }
-        $this->triggerOptionEvent('dir_level', $level);
-        $this->dirLevel = $level;
+        $this->triggerOptionEvent('dir_level', $dirLevel);
+        $this->dirLevel = $dirLevel;
         return $this;
     }
 
@@ -213,15 +213,15 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set dir perm
      *
-     * @param  string|int $perm
+     * @param  string|int $dirPerm
      * @return FilesystemOptions
      */
-    public function setDirPerm($perm)
+    public function setDirPerm($dirPerm)
     {
-        $perm = $this->normalizeUmask($perm);
+        $dirPerm = $this->normalizeUmask($dirPerm);
 
         // use umask
-        return $this->setDirUmask(~$perm);
+        return $this->setDirUmask(~$dirPerm);
     }
 
     /**
@@ -237,14 +237,14 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set dir umask
      *
-     * @param  string|int $umask
+     * @param  string|int $dirUmask
      * @return FilesystemOptions
      * @throws Exception\InvalidArgumentException
      */
-    public function setDirUmask($umask)
+    public function setDirUmask($dirUmask)
     {
-        $umask = $this->normalizeUmask($umask, function($umask) {
-            if ((~$umask & 0700) != 0700 ) {
+        $dirUmask = $this->normalizeUmask($dirUmask, function($dirUmask) {
+            if ((~$dirUmask & 0700) != 0700 ) {
                 throw new Exception\InvalidArgumentException(
                     'Invalid directory umask or directory permissions: '
                     . 'need permissions to execute, read and write directories by owner'
@@ -252,8 +252,8 @@ class FilesystemOptions extends AdapterOptions
             }
         });
 
-        $this->triggerOptionEvent('dir_umask', $umask);
-        $this->dirUmask = $umask;
+        $this->triggerOptionEvent('dir_umask', $dirUmask);
+        $this->dirUmask = $dirUmask;
         return $this;
     }
 
@@ -270,14 +270,14 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set file locking
      *
-     * @param  bool $flag
+     * @param  bool $fileLocking
      * @return FilesystemOptions
      */
-    public function setFileLocking($flag)
+    public function setFileLocking($fileLocking)
     {
-        $flag = (bool) $flag;
-        $this->triggerOptionEvent('file_locking', $flag);
-        $this->fileLocking = $flag;
+        $fileLocking = (bool) $fileLocking;
+        $this->triggerOptionEvent('file_locking', $fileLocking);
+        $this->fileLocking = $fileLocking;
         return $this;
     }
 
@@ -294,15 +294,15 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set file perm
      *
-     * @param  int $perm
+     * @param  int $filePerm
      * @return FilesystemOptions
      */
-    public function setFilePerm($perm)
+    public function setFilePerm($filePerm)
     {
-        $perm = $this->normalizeUmask($perm);
+        $filePerm = $this->normalizeUmask($filePerm);
 
         // use umask
-        return $this->setFileUmask(~$perm);
+        return $this->setFileUmask(~$filePerm);
     }
 
     /**
@@ -318,19 +318,19 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set file umask
      *
-     * @param  int $umask
+     * @param  int $fileUmask
      * @return FilesystemOptions
      * @throws Exception\InvalidArgumentException
      */
-    public function setFileUmask($umask)
+    public function setFileUmask($fileUmask)
     {
-        $umask = $this->normalizeUmask($umask, function($umask) {
-            if ((~$umask & 0600) != 0600 ) {
+        $fileUmask = $this->normalizeUmask($fileUmask, function($fileUmask) {
+            if ((~$fileUmask & 0600) != 0600 ) {
                 throw new Exception\InvalidArgumentException(
                     'Invalid file umask or file permission: '
                     . 'need permissions to read and write files by owner'
                 );
-            } elseif ((~$umask & 0111) > 0) {
+            } elseif ((~$fileUmask & 0111) > 0) {
                 throw new Exception\InvalidArgumentException(
                     'Invalid file umask or file permission: '
                     . 'executable cache files are not allowed'
@@ -338,8 +338,8 @@ class FilesystemOptions extends AdapterOptions
             }
         });
 
-        $this->triggerOptionEvent('file_umask', $umask);
-        $this->fileUmask = $umask;
+        $this->triggerOptionEvent('file_umask', $fileUmask);
+        $this->fileUmask = $fileUmask;
         return $this;
     }
 
@@ -356,14 +356,14 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set namespace separator
      *
-     * @param  string $separator
+     * @param  string $namespaceSeperator
      * @return FilesystemOptions
      */
-    public function setNamespaceSeparator($separator)
+    public function setNamespaceSeparator($namespaceSeperator)
     {
-        $separator = (string) $separator;
-        $this->triggerOptionEvent('namespace_separator', $separator);
-        $this->namespaceSeparator = $separator;
+        $namespaceSeperator = (string) $namespaceSeperator;
+        $this->triggerOptionEvent('namespace_separator', $namespaceSeperator);
+        $this->namespaceSeparator = $namespaceSeperator;
         return $this;
     }
 
@@ -380,14 +380,14 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set no atime
      *
-     * @param  bool $flag
+     * @param  bool $noAtime
      * @return FilesystemOptions
      */
-    public function setNoAtime($flag)
+    public function setNoAtime($noAtime)
     {
-        $flag = (bool) $flag;
-        $this->triggerOptionEvent('no_atime', $flag);
-        $this->noAtime = $flag;
+        $noAtime = (bool) $noAtime;
+        $this->triggerOptionEvent('no_atime', $noAtime);
+        $this->noAtime = $noAtime;
         return $this;
     }
 
@@ -404,14 +404,14 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set no ctime
      *
-     * @param  bool $flag
+     * @param  bool $noCtime
      * @return FilesystemOptions
      */
-    public function setNoCtime($flag)
+    public function setNoCtime($noCtime)
     {
-        $flag = (bool) $flag;
-        $this->triggerOptionEvent('no_ctime', $flag);
-        $this->noCtime = $flag;
+        $noCtime = (bool) $noCtime;
+        $this->triggerOptionEvent('no_ctime', $noCtime);
+        $this->noCtime = $noCtime;
         return $this;
     }
 

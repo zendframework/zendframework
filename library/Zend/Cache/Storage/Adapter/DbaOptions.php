@@ -65,14 +65,14 @@ class DbaOptions extends AdapterOptions
     /**
      * Set namespace separator
      *
-     * @param  string $separator
+     * @param  string $namespaceSeparator
      * @return DbaOptions
      */
-    public function setNamespaceSeparator($separator)
+    public function setNamespaceSeparator($namespaceSeparator)
     {
-        $separator = (string) $separator;
-        $this->triggerOptionEvent('namespace_separator', $separator);
-        $this->namespaceSeparator = $separator;
+        $namespaceSeparator = (string) $namespaceSeparator;
+        $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
+        $this->namespaceSeparator = $namespaceSeparator;
         return $this;
     }
 

@@ -218,7 +218,7 @@ class Translator
      */
     public function setFallbackLocale($locale)
     {
-        $this->locale = $locale;
+        $this->fallbackLocale= $locale;
         return $this;
     }
 
@@ -229,11 +229,11 @@ class Translator
      */
     public function getFallbackLocale()
     {
-        if ($this->locale === null) {
-            $this->locale = Locale::getDefault();
+        if ($this->fallbackLocale === null) {
+            $this->fallbackLocale = Locale::getDefault();
         }
 
-        return $this->locale;
+        return $this->fallbackLocale;
     }
 
     /**

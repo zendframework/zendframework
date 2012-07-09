@@ -396,7 +396,7 @@ class Fieldset extends Element implements FieldsetInterface
 
             $element = $this->get($name);
 
-            if ($element instanceof FieldsetInterface && is_array($value) && !empty($value)) {
+            if ($element instanceof FieldsetInterface && is_array($value)) {
                 $element->populateValues($value);
                 continue;
             }

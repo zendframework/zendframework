@@ -10,7 +10,7 @@
 
 namespace Zend\Mail\Transport;
 
-use use;
+use Traversable;
 use Zend\Mail;
 use Zend\Mail\Address\AddressInterface;
 use Zend\Mail\Exception;

@@ -24,7 +24,7 @@ use Zend\Stdlib\ArrayUtils;
  * @category  Zend
  * @package   Zend_Navigation
  */
-abstract class AbstractContainer implements RecursiveIterator, Countable
+abstract class AbstractContainer implements Countable, RecursiveIterator
 {
     /**
      * Contains sub pages

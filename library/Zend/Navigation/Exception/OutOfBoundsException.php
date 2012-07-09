@@ -17,7 +17,5 @@ namespace Zend\Navigation\Exception;
  * @package    Zend_Navigation
  * @subpackage Exception
  */
-class OutOfBoundsException
-    extends \OutOfBoundsException
-    implements ExceptionInterface
+class OutOfBoundsException extends \OutOfBoundsException implements ExceptionInterface
 {}

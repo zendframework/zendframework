@@ -26,6 +26,8 @@ abstract class SubClass
         if (is_object($object)) {
             $object = get_class($object);
         }
+        $type = strtolower($type);
+        $object = strtolower($object);
         if (!array_key_exists($object, self::$cache)) {
             self::$cache[$object] = class_parents($object, true) + class_implements($object, true);
         }

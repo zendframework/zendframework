@@ -36,6 +36,15 @@ use Zend\InputFilter\InputProviderInterface;
 class Checkbox extends Element implements InputProviderInterface
 {
     /**
+     * Seed attributes
+     *
+     * @var array
+     */
+    protected $attributes = array(
+        'type' => 'checkbox'
+    );
+
+    /**
      * @var bool
      */
     protected $useHiddenElement = true;

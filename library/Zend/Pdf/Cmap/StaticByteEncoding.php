@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\Cmap;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * Custom cmap type used for the Adobe Standard 14 PDF fonts.

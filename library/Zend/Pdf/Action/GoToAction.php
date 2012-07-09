@@ -9,9 +9,10 @@
  */
 
 namespace Zend\Pdf\Action;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
 use Zend\Pdf\Destination;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 
 /**

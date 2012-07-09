@@ -9,10 +9,13 @@
  */
 
 namespace Zend\Pdf\Action;
-use Zend\Pdf\Exception;
-use Zend\Pdf\ObjectFactory;
-use Zend\Pdf\InternalType;
+
+use Countable;
+use RecursiveIterator;
 use Zend\Pdf;
+use Zend\Pdf\Exception;
+use Zend\Pdf\InternalType;
+use Zend\Pdf\ObjectFactory;
 
 /**
  * Abstract PDF action representation class
@@ -20,7 +23,9 @@ use Zend\Pdf;
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Action
  */
-abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget implements \RecursiveIterator, \Countable
+abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget implements 
+    Countable,
+    RecursiveIterator
 {
     /**
      * Action dictionary

@@ -9,10 +9,11 @@
  */
 
 namespace Zend\Pdf\Resource\Font\CidFont;
-use Zend\Pdf\Exception;
-use Zend\Pdf\Resource\Font as FontResource;
-use Zend\Pdf\InternalType;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
+use Zend\Pdf\InternalType;
+use Zend\Pdf\Resource\Font as FontResource;
 
 /**
  * Adobe PDF CIDFont font object implementation

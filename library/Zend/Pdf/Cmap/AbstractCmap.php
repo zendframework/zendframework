@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\Cmap;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * Abstract helper class for {@link \Zend\Pdf\Resource\Font\AbstractFont}

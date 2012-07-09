@@ -9,9 +9,10 @@
  */
 
 namespace Zend\Pdf\Resource;
+
+use Zend\Pdf;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\ObjectFactory;
-use Zend\Pdf;
 
 
 /**

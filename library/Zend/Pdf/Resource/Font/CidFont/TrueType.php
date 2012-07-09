@@ -9,10 +9,11 @@
  */
 
 namespace Zend\Pdf\Resource\Font\CidFont;
-use Zend\Pdf\BinaryParser\Font\OpenType as OpenTypeFontParser;
-use Zend\Pdf\Resource\Font as FontResource;
-use Zend\Pdf\InternalType;
+
 use Zend\Pdf;
+use Zend\Pdf\BinaryParser\Font\OpenType as OpenTypeFontParser;
+use Zend\Pdf\InternalType;
+use Zend\Pdf\Resource\Font as FontResource;
 
 /**
  * Type 2 CIDFonts implementation

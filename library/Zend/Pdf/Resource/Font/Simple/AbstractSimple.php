@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\Resource\Font\Simple;
-use Zend\Pdf\Resource\Font as FontResource;
+
 use Zend\Pdf\InternalType;
+use Zend\Pdf\Resource\Font as FontResource;
 
 /**
  * Adobe PDF Simple fonts implementation

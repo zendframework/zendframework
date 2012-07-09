@@ -9,9 +9,9 @@
  */
 
 namespace Zend\Pdf;
-use Zend\Pdf\Exception;
 
 use Zend\Memory;
+use Zend\Pdf\Exception;
 
 /**
  * General entity which describes PDF document.

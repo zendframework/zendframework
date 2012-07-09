@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\InternalType\StreamFilter\Compression;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * LZW stream filter

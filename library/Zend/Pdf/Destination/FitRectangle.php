@@ -9,9 +9,10 @@
  */
 
 namespace Zend\Pdf\Destination;
+
+use Zend\Pdf;
 use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
-use Zend\Pdf;
 
 /**
  * \Zend\Pdf\Destination\FitRectangle explicit detination

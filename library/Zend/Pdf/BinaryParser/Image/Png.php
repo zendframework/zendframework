@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\BinaryParser\Image;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * Abstract base class for Image file parsers.

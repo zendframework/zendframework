@@ -19,4 +19,3 @@ namespace Zend\Pdf\Action;
 class Unknown extends AbstractAction
 {
 }
-

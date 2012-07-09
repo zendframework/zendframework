@@ -9,9 +9,10 @@
  */
 
 namespace Zend\Pdf\Resource\Font\Simple\Parsed;
-use Zend\Pdf\InternalType;
-use Zend\Pdf\BinaryParser\Font\OpenType as OpenTypeFontParser;
+
 use Zend\Pdf;
+use Zend\Pdf\BinaryParser\Font\OpenType as OpenTypeFontParser;
+use Zend\Pdf\InternalType;
 
 /**
  * Parsed and (optionaly) embedded fonts implementation

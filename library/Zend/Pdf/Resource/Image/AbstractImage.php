@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Pdf\Resource\Image;
+
 use Zend\Pdf\InternalType;
 use Zend\Pdf\Resource;
 

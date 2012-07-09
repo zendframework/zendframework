@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\Resource\Font\Simple\Standard;
-use Zend\Pdf\InternalType;
+
 use Zend\Pdf;
+use Zend\Pdf\InternalType;
 
 /**
  * Abstract class definition for the standard 14 Type 1 PDF fonts.

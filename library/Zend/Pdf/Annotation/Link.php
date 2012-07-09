@@ -9,11 +9,12 @@
  */
 
 namespace Zend\Pdf\Annotation;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Destination;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalStructure;
 use Zend\Pdf\InternalType;
-use Zend\Pdf\Destination;
 
 /**
  * A link annotation represents either a hypertext link to a destination elsewhere in

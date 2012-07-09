@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\BinaryParser;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * Abstract utility class for parsing binary files.

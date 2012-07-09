@@ -39,4 +39,3 @@ interface ColorInterface
      */
     public function getComponents();
 }
-

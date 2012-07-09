@@ -17,8 +17,6 @@ namespace Zend\Pdf\Exception;
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Exception
  */
-class LogicException
-    extends \LogicException
-    implements ExceptionInterface
+class LogicException extends \LogicException implements ExceptionInterface
 {
 }

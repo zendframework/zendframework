@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\PdfParser;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\InternalType\IndirectObjectReference;
 use Zend\Pdf\ObjectFactory;

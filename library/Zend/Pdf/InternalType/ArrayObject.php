@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\InternalType;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * PDF file 'array' element implementation

@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Pdf\Trailer;
+
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 

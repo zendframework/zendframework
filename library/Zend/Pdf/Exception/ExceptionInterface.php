@@ -20,4 +20,3 @@ namespace Zend\Pdf\Exception;
 interface ExceptionInterface
 {
 }
-

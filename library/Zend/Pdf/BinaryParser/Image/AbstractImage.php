@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Pdf\BinaryParser\Image;
+
 use Zend\Pdf\BinaryParser;
 
 /**

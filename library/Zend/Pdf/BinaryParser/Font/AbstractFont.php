@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\BinaryParser\Font;
-use Zend\Pdf\BinaryParser;
+
 use Zend\Log;
+use Zend\Pdf\BinaryParser;
 
 /**
  * Abstract helper class for {@link \Zend\Pdf\Font} that parses font files.

@@ -20,4 +20,3 @@ namespace Zend\Pdf\Action;
 class Named extends AbstractAction
 {
 }
-

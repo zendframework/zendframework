@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Pdf\InternalType\IndirectObjectReference;
+
 use Zend\Pdf\PdfParser;
 
 /**
@@ -69,4 +70,3 @@ class Context
         return $this->_refTable;
     }
 }
-

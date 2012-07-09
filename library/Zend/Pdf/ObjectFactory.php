@@ -9,11 +9,11 @@
  */
 
 namespace Zend\Pdf;
-use Zend\Pdf\Exception;
 
-use Zend\Pdf\ObjectFactory\UpdateInfoContainer;
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
+use Zend\Pdf\ObjectFactory\UpdateInfoContainer;
 
 /**
  * PDF element factory.
@@ -407,4 +407,3 @@ class ObjectFactory
         return false;
     }
 }
-

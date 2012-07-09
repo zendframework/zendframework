@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\Resource\Image;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 
 /**
@@ -120,4 +121,3 @@ class Jpeg extends AbstractImage
         return $this->_imageProperties;
     }
 }
-

@@ -9,8 +9,11 @@
  */
 
 namespace Zend\Pdf\Outline;
-use Zend\Pdf\Exception;
+
+use Countable;
+use RecursiveIterator;
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\ObjectFactory;
 
@@ -22,7 +25,9 @@ use Zend\Pdf\ObjectFactory;
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Outline
  */
-abstract class AbstractOutline implements \RecursiveIterator, \Countable
+abstract class AbstractOutline implements 
+    Countable,
+    RecursiveIterator
 {
     /**
      * True if outline is open.

@@ -9,11 +9,12 @@
  */
 
 namespace Zend\Pdf\InternalStructure;
-use Zend\Pdf\Exception;
+
+use Zend\Pdf;
 use Zend\Pdf\Action;
 use Zend\Pdf\Destination;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
-use Zend\Pdf;
 
 /**
  * PDF target (action or destination)

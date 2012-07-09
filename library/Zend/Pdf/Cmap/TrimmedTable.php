@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\Cmap;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * Implements the "trimmed table mapping" character map (type 6).

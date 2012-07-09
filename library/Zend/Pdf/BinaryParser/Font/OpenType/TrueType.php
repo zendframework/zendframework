@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\BinaryParser\Font\OpenType;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * Parses an OpenType font file containing TrueType outlines.

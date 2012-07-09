@@ -65,4 +65,3 @@ class GrayScale implements ColorInterface
         return array($this->_grayLevel->value);
     }
 }
-

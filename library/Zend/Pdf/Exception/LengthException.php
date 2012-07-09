@@ -17,8 +17,6 @@ namespace Zend\Pdf\Exception;
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Exception
  */
-class LengthException
-    extends \LengthException
-    implements ExceptionInterface
+class LengthException extends \LengthException implements ExceptionInterface
 {
 }

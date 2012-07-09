@@ -9,9 +9,13 @@
  */
 
 namespace Zend\Pdf\InternalStructure;
+
+use ArrayAccess;
+use Countable;
+use Iterator;
+use Zend\Pdf;
 use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
-use Zend\Pdf;
 
 /**
  * PDF name tree representation class
@@ -21,7 +25,7 @@ use Zend\Pdf;
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  */
-class NameTree implements \ArrayAccess, \Iterator, \Countable
+class NameTree implements ArrayAccess, Countable, Iterator
 {
     /**
      * Elements

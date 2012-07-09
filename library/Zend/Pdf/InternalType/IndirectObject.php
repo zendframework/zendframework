@@ -9,9 +9,10 @@
  */
 
 namespace Zend\Pdf\InternalType;
+
+use Zend\Pdf;
 use Zend\Pdf\Exception;
 use Zend\Pdf\ObjectFactory;
-use Zend\Pdf;
 
 /**
  * PDF file 'indirect object' element implementation

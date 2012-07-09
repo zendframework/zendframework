@@ -20,4 +20,3 @@ namespace Zend\Pdf\Action;
 class ImportData extends AbstractAction
 {
 }
-

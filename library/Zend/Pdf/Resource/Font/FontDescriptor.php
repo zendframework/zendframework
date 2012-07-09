@@ -9,10 +9,11 @@
  */
 
 namespace Zend\Pdf\Resource\Font;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
-use Zend\Pdf\InternalType;
 use Zend\Pdf\BinaryParser\Font\OpenType as OpenTypeFontParser;
+use Zend\Pdf\Exception;
+use Zend\Pdf\InternalType;
 
 /**
  * FontDescriptor implementation

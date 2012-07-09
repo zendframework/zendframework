@@ -9,9 +9,10 @@
  */
 
 namespace Zend\Pdf\Resource\Font;
+
+use Zend\Pdf;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\Resource;
-use Zend\Pdf;
 
 /**
  * Abstract class which manages PDF fonts.
@@ -507,4 +508,3 @@ abstract class AbstractFont extends Resource\AbstractResource
         return ceil(($value / $this->_unitsPerEm) * 1000);    // always round up
     }
 }
-

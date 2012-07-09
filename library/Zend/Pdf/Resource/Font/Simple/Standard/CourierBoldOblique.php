@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Pdf\Resource\Font\Simple\Standard;
+
 use Zend\Pdf;
 use Zend\Pdf\Cmap;
 

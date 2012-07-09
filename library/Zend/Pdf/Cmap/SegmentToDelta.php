@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\Cmap;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * Implements the "segment mapping to delta values" character map (type 4).

@@ -19,4 +19,3 @@ namespace Zend\Pdf\Action;
 class GoToR extends AbstractAction
 {
 }
-

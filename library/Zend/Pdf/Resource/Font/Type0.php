@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\Resource\Font;
-use Zend\Pdf\InternalType;
+
 use Zend\Pdf;
+use Zend\Pdf\InternalType;
 
 /**
  * Adobe PDF composite fonts implementation

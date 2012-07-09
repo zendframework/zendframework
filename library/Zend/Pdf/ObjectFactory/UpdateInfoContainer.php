@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Pdf\ObjectFactory;
+
 use Zend\Pdf;
 
 /**
@@ -117,4 +118,3 @@ class UpdateInfoContainer
         return $this->_dump->getRef();
     }
 }
-

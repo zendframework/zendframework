@@ -9,11 +9,12 @@
  */
 
 namespace Zend\Pdf\Outline;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
 use Zend\Pdf\Action;
 use Zend\Pdf\Color;
 use Zend\Pdf\Destination;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\ObjectFactory;
 

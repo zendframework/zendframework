@@ -10,16 +10,14 @@
 
 namespace Zend\Pdf;
 
+use Zend\Pdf\Exception;
+use Zend\Pdf\InternalType;
+
 /**
  * PDF Page
  *
  * @package    Zend_PDF
  */
-
-use Zend\Pdf\Exception;
-
-use Zend\Pdf\InternalType;
-
 class Page
 {
     /**** Class Constants ****/
@@ -1796,4 +1794,3 @@ class Page
         return $this;
     }
 }
-

@@ -9,9 +9,10 @@
  */
 
 namespace Zend\Pdf\BinaryParser\Font\OpenType;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
 use Zend\Pdf\Cmap;
+use Zend\Pdf\Exception;
 
 /**
  * Abstract base class for OpenType font file parsers.

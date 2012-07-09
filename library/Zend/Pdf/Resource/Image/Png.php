@@ -9,10 +9,11 @@
  */
 
 namespace Zend\Pdf\Resource\Image;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
-use Zend\Pdf\ObjectFactory;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
+use Zend\Pdf\ObjectFactory;
 
 /**
  * PNG image

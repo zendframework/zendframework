@@ -17,8 +17,7 @@ namespace Zend\Pdf\Exception;
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Exception
  */
-class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements ExceptionInterface
+class InvalidArgumentException extends \InvalidArgumentException implements 
+    ExceptionInterface
 {
 }

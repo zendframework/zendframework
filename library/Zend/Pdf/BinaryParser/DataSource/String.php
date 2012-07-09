@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\BinaryParser\DataSource;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 
 /**
  * Concrete subclass of {@link \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource}

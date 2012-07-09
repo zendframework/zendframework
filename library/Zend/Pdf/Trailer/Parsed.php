@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\Trailer;
-use Zend\Pdf\InternalType;
+
 use Zend\Pdf\Exception;
+use Zend\Pdf\InternalType;
 
 /**
  * PDF file trailer.

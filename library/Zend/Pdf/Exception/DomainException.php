@@ -17,8 +17,6 @@ namespace Zend\Pdf\Exception;
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Exception
  */
-class DomainException
-    extends \DomainException
-    implements ExceptionInterface
+class DomainException extends \DomainException implements ExceptionInterface
 {
 }

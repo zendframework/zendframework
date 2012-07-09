@@ -10,6 +10,8 @@
 
 namespace Zend\Pdf;
 
+use Zend\Pdf\Exception;
+
 /**
  * Abstract factory class which vends {@link \Zend\Pdf\Resource\Image\AbstractImage} objects.
  *
@@ -20,8 +22,6 @@ namespace Zend\Pdf;
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Image
  */
-use Zend\Pdf\Exception;
-
 abstract class Image
 {
     /**** Class Constants ****/

@@ -9,10 +9,11 @@
  */
 
 namespace Zend\Pdf\InternalType;
+
+use Zend\Pdf;
 use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType\StreamFilter\Compression as CompressionFilter;
 use Zend\Pdf\ObjectFactory;
-use Zend\Pdf;
 
 /**
  * PDF file 'stream object' element implementation

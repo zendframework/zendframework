@@ -9,8 +9,9 @@
  */
 
 namespace Zend\Pdf\Trailer;
-use Zend\Pdf\Exception;
+
 use Zend\Pdf;
+use Zend\Pdf\Exception;
 use Zend\Pdf\InternalType;
 
 /**

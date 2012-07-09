@@ -106,4 +106,3 @@ class RunLength implements StreamFilterInterface
         return $output;
     }
 }
-

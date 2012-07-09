@@ -27,6 +27,31 @@ use Zend\Form\Factory;
 
 class NumberTest extends TestCase
 {
+    public function testProvidesInputSpecificationWithDefaultAttributes()
+    {
+        $element = new NumberElement();
+
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('validators', $inputSpec);
+        $this->assertInternalType('array', $inputSpec['validators']);
+
+        $expectedClasses = array(
+            'Zend\I18n\Validator\Float',
+            'Zend\Validator\Step',
+        );
+        foreach ($inputSpec['validators'] as $validator) {
+            $class = get_class($validator);
+            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            switch ($class) {
+                case 'Zend\Validator\Step':
+                    $this->assertEquals(1, $validator->getStep());
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     public function testProvidesInputSpecificationThatIncludesValidatorsBasedOnAttributes()
     {
         $element = new NumberElement();

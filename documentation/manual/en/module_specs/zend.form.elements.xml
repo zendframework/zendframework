@@ -31,7 +31,10 @@
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.form.element.date.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.form.element.email.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.form.element.month.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.form.element.number.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.form.element.range.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.form.element.time.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.form.element.url.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.form.element.week.xml"/>
 
 </section>

@@ -16,4 +16,3 @@ namespace Zend\Rest\Exception;
  */
 interface ExceptionInterface
 {}
-

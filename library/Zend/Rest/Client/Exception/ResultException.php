@@ -16,7 +16,5 @@ namespace Zend\Rest\Client\Exception;
  * @package    Zend_Rest
  * @subpackage Client
  */
-class ResultException 
-    extends \Exception
-    implements ExceptionInterface
+class ResultException extends \Exception implements ExceptionInterface
 {}

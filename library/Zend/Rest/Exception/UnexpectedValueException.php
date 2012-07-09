@@ -10,7 +10,6 @@
 
 namespace Zend\Rest\Exception;
 
-class UnexpectedValueException
-    extends \UnexpectedValueException
-    implements ExceptionInterface
+class UnexpectedValueException extends \UnexpectedValueException implements 
+    ExceptionInterface
 {}

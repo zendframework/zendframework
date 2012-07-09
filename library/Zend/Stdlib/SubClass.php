@@ -24,13 +24,16 @@ abstract class SubClass
             return is_subclass_of($object, $type);
         }
         if (is_object($object)) {
-            $object = get_class($object);
+            $className = get_class($object);
+        } else {
+            $className = $object;
         }
-        $type = strtolower($type);
-        $object = strtolower($object);
-        if (!array_key_exists($object, self::$cache)) {
-            self::$cache[$object] = class_parents($object, true) + class_implements($object, true);
+        if (!array_key_exists(strtolower($className), self::$cache)) {
+            $parents = class_parents($className, true) + class_implements($className, true);
+            foreach ($parents as $parent) {
+                self::$cache[strtolower($className)] = strtolower($parent);
+            }
         }
-        return (isset(self::$cache[$object][$type]));
+        return (isset(self::$cache[strtolower($className)][strtolower($type)]));
     }
 }

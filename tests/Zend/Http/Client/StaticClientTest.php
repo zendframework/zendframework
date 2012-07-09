@@ -1,4 +1,13 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
+
 namespace ZendTest\Http\Client;
 
 use Zend\Http\ClientStatic as HTTPClient,
@@ -11,8 +20,6 @@ use Zend\Http\ClientStatic as HTTPClient,
  * @category   Zend
  * @package    Zend\Http\Client
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend\Http
  * @group      Zend\Http\Client
  */

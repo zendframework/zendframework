@@ -1,20 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter\Encrypt;
@@ -25,6 +16,8 @@ use Zend\Filter\Encrypt\Openssl as OpensslEncryption;
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
 class OpensslTest extends \PHPUnit_Framework_TestCase
@@ -145,7 +138,7 @@ bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt';
 
         $r = $filter->setPublicKey(array('private' => __DIR__ . '/../_files/publickey.pem'));
         $this->assertSame($filter, $r);
-        
+
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not valid');
         $filter->setPublicKey(123);
 
@@ -157,7 +150,7 @@ bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt';
     public function testSetPrivateKey()
     {
         $filter = new OpensslEncryption();
-        
+
         $filter->setPrivateKey(array('public' => __DIR__ . '/../_files/privatekey.pem'));
         $test = $filter->getPrivateKey();
         $this->assertEquals(array(
@@ -177,8 +170,8 @@ cAkcoMuBcgWhIn/46C1PAkEAzLK/ibrdMQLOdO4SuDgj/2nc53NZ3agl61ew8Os6
 d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
 -----END RSA PRIVATE KEY-----
 '), $test);
-            
-            
+
+
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not valid');
         $filter->setPrivateKey(123);
 
@@ -229,7 +222,7 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
     public function testEncryptionWithoutPublicKey()
     {
         $filter = new OpensslEncryption();
-        
+
         $this->setExpectedException('\Zend\Filter\Exception\RuntimeException', 'without public key');
         $filter->encrypt('unknown');
     }

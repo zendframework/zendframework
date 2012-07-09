@@ -52,4 +52,3 @@ interface ContainerInterface
      */
     public function isLocked();
 }
-

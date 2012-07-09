@@ -16,8 +16,6 @@ namespace Zend\Memory\Exception;
  * @category   Zend
  * @package    Zend_Memory
  */
-class RuntimeException
-    extends \RuntimeException
-    implements ExceptionInterface
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 }

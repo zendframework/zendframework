@@ -143,7 +143,7 @@ class DependencyInjectorProxy extends Di
         $methodClass = $instance->getClass();
         $callParameters = $this->resolveMethodParameters($methodClass, $method, $params, $alias, $methodIsRequired);
 
-        if ($callParameters === false) {
+        if ($callParameters !== false) {
             $instance->addMethod(array(
                 'method' => $method,
                 'params' => $callParameters,

@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Json\Server;
+
 use Zend\Json\Server\Exception\InvalidArgumentException;
 use Zend\Json\Server\Exception\RuntimeException;
 
@@ -458,4 +459,3 @@ class Smd
         return $this->toJson();
     }
 }
-

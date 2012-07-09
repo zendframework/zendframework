@@ -10,6 +10,8 @@
 
 namespace Zend\Json\Server;
 
+use Zend\Server\Cache as ServerCache;
+
 /**
  * Zend_Json_Server_Cache: cache Zend_Json_Server server definition and SMD
  *
@@ -17,7 +19,7 @@ namespace Zend\Json\Server;
  * @package    Zend_Json
  * @subpackage Server
  */
-class Cache extends \Zend\Server\Cache
+class Cache extends ServerCache
 {
     /**
      * Cache a service map description (SMD) to a file

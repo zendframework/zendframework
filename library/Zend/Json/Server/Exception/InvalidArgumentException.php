@@ -17,7 +17,6 @@ use Zend\Json\Exception;
  * @package    Zend_Json
  * @subpackage Server
  */
-class InvalidArgumentException
-    extends Exception\InvalidArgumentException
-    implements ExceptionInterface
+class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+    ExceptionInterface
 {}

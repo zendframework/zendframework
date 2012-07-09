@@ -14,7 +14,6 @@ namespace Zend\Json\Exception;
  * @category   Zend
  * @package    Zend_Json
  */
-class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements ExceptionInterface
+class InvalidArgumentException extends \InvalidArgumentException implements 
+    ExceptionInterface
 {}

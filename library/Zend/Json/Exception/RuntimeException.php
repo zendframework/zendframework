@@ -14,7 +14,5 @@ namespace Zend\Json\Exception;
  * @category   Zend
  * @package    Zend_Json
  */
-class RuntimeException
-    extends \RuntimeException
-    implements ExceptionInterface
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {}

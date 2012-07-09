@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Json\Server;
+
 use Zend\Json;
 
 /**

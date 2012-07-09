@@ -183,4 +183,3 @@ class Error
         return $this->toJson();
     }
 }
-

@@ -17,7 +17,6 @@ use Zend\Json\Exception;
  * @package    Zend_Json
  * @subpackage Server
  */
-class RuntimeException
-    extends Exception\RuntimeException
-    implements ExceptionInterface
+class RuntimeException extends Exception\RuntimeException implements 
+    ExceptionInterface
 {}

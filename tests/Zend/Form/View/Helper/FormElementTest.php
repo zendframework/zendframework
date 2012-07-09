@@ -97,6 +97,7 @@ class FormElementTest extends TestCase
 
         $element->setAttribute('type', $type);
         $element->setAttribute('options', array('option' => 'value'));
+        $element->setAttribute('src', 'http://zend.com/img.png');
         $markup  = $this->helper->render($element);
 
         $this->assertContains('<input', $markup);

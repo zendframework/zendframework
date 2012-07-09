@@ -16,7 +16,5 @@ namespace Zend\Queue\Exception;
  * @category   Zend
  * @package    Zend_Queue
  */
-class DomainException 
-    extends \DomainException
-    implements ExceptionInterface
+class DomainException extends \DomainException implements ExceptionInterface
 {}

@@ -16,7 +16,5 @@ namespace Zend\Queue\Exception;
  * @category   Zend
  * @package    Zend_Queue
  */
-class RuntimeException
-    extends \RuntimeException
-    implements ExceptionInterface
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {}

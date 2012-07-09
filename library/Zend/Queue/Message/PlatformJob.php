@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Queue\Message;
+
 use Zend\Queue\Exception;
 
 /**

@@ -9,11 +9,12 @@
  */
 
 namespace Zend\Queue\Adapter;
-use ZendAPI_Job,
-    ZendAPI_Queue,
-    Zend\Queue\Queue,
-    Zend\Queue\Message,
-    Zend\Queue\Exception;
+
+use ZendAPI_Job;
+use ZendAPI_Queue;
+use Zend\Queue\Exception;
+use Zend\Queue\Message;
+use Zend\Queue\Queue;
 
 /**
  * Zend Platform JobQueue adapter

@@ -10,9 +10,9 @@
 
 namespace Zend\Queue;
 
+use Countable;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Countable;
 
 /**
  * Class for connecting to queues performing common operations.

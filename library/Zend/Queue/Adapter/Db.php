@@ -10,12 +10,12 @@
 
 namespace Zend\Queue\Adapter;
 
-use Zend\Queue\Queue;
+use Zend\Db\Adapter\AbstractAdapter as AbstractDBAdapter;
+use Zend\Db as DB_ns;
+use Zend\Db\Select;
 use Zend\Queue\Exception;
-use Zend\Queue\Message,
-    Zend\Db as DB_ns,
-    Zend\Db\Adapter\AbstractAdapter as AbstractDBAdapter,
-    Zend\Db\Select;
+use Zend\Queue\Message;
+use Zend\Queue\Queue;
 
 /**
  * Class for using connecting to a Zend_DB-based queuing system

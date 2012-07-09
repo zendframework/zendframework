@@ -10,17 +10,17 @@
 
 namespace Zend\Queue\Message;
 
-use Iterator;
 use Countable;
-use Zend\Queue\Queue;
+use Iterator;
 use Zend\Queue\Exception;
+use Zend\Queue\Queue;
 
 /**
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Message
  */
-class MessageIterator implements Iterator, Countable
+class MessageIterator implements Countable, Iterator
 {
     /**
      * The data for the queue message

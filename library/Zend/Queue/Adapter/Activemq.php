@@ -10,10 +10,10 @@
 
 namespace Zend\Queue\Adapter;
 
-use Zend\Queue\Queue;
-use Zend\Queue\Message;
-use Zend\Queue\Stomp\Client;
 use Zend\Queue\Exception;
+use Zend\Queue\Message;
+use Zend\Queue\Queue;
+use Zend\Queue\Stomp\Client;
 
 /**
  * Class for using Stomp to talk to an Stomp compliant server

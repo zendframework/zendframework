@@ -11,9 +11,9 @@
 namespace Zend\Queue\Adapter;
 
 use Memcache;
-use Zend\Queue\Queue;
-use Zend\Queue\Message;
 use Zend\Queue\Exception;
+use Zend\Queue\Message;
+use Zend\Queue\Queue;
 
 /**
  * Class for using connecting to a Memcache-based queuing system

@@ -16,7 +16,5 @@ namespace Zend\Queue\Exception;
  * @category   Zend
  * @package    Zend_Queue
  */
-class RangeException 
-    extends \RangeException
-    implements ExceptionInterface
+class RangeException extends \RangeException implements ExceptionInterface
 {}

@@ -11,10 +11,10 @@
 namespace Zend\Queue\Adapter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Queue\Adapter;
-use Zend\Queue\Queue;
 use Zend\Queue\Exception;
+use Zend\Queue\Queue;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Class for connecting to queues performing common operations.

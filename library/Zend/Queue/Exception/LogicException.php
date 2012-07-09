@@ -16,7 +16,5 @@ namespace Zend\Queue\Exception;
  * @category   Zend
  * @package    Zend_Queue
  */
-class LogicException
-    extends \LogicException
-    implements ExceptionInterface
+class LogicException extends \LogicException implements ExceptionInterface
 {}

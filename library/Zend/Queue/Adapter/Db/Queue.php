@@ -10,12 +10,14 @@
 
 namespace Zend\Queue\Adapter\Db;
 
+use Zend\Db\Table\AbstractTable;
+
 /**
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
  */
-class Queue extends \Zend\Db\Table\AbstractTable
+class Queue extends AbstractTable
 {
     /**
      * @var string

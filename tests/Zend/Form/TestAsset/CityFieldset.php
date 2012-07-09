@@ -11,7 +11,7 @@ class CityFieldset extends Fieldset implements InputFilterProviderInterface
     public function __construct()
     {
         parent::__construct('city');
-        $this->setHydrator(new ClassMethodsHydrator())
+        $this->setHydrator(new ClassMethodsHydrator(false))
              ->setObject(new Entity\City());
 
         $name = new \Zend\Form\Element('name', array('label' => 'Name of the city'));

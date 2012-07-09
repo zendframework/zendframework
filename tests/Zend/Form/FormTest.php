@@ -764,7 +764,7 @@ class FormTest extends TestCase
 
         $nestedFieldset = $basicFieldset->get('nested_fieldset');
         $this->assertEquals('basic_fieldset[nested_fieldset][anotherField]', $nestedFieldset->get('anotherField')
-                                                                                            ->getName());
+            ->getName());
     }
 
     public function testCanCorrectlyExtractDataFromComposedEntities()

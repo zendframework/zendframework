@@ -14,6 +14,7 @@
         "php": ">=5.3.3"
     },
     "suggest": {
+        "ext-mongo": "*",
         "zendframework/zend-mail": "Zend\\Mail component"
     }
 }

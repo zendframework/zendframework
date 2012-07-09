@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Ldap\Filter\Exception;
@@ -25,8 +23,6 @@ use Zend\Ldap\Exception\ExceptionInterface as MainLdapException;
 /**
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface ExceptionInterface extends MainLdapException
 {

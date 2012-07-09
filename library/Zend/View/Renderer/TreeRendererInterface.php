@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Renderer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\View\Renderer;
@@ -25,8 +23,6 @@ namespace Zend\View\Renderer;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Renderer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface TreeRendererInterface
 {

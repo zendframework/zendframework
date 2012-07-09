@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Pdf\Destination;
@@ -26,8 +24,6 @@ namespace Zend\Pdf\Destination;
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Unknown extends AbstractExplicitDestination
 {

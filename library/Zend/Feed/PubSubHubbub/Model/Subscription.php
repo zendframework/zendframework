@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @subpackage Entity
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Feed\PubSubHubbub\Model;
@@ -29,8 +27,6 @@ use Zend\Feed\PubSubHubbub;
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @subpackage Entity
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Subscription extends AbstractModel implements SubscriptionPersistenceInterface
 {

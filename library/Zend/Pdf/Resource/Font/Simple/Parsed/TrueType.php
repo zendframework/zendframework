@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Pdf\Resource\Font\Simple\Parsed;
@@ -33,8 +31,6 @@ use Zend\Pdf\BinaryParser\Font\OpenType as OpenTypeFontParser;
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class TrueType extends AbstractParsed
 {

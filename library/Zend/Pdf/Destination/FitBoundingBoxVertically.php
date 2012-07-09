@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Pdf\Destination;
@@ -36,8 +34,6 @@ use Zend\Pdf;
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FitBoundingBoxVertically extends AbstractExplicitDestination
 {

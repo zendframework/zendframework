@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Address
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Mail\Address;
@@ -25,8 +23,6 @@ namespace Zend\Mail\Address;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Address
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface AddressInterface
 {

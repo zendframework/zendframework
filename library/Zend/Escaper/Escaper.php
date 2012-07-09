@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Escaper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Escaper;
@@ -26,8 +24,6 @@ use Zend\Escaper\Exception;
  * Context specific methods for use in secure output escaping
  *
  * @package    Zend_Escaper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Escaper
 {

@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Outline
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Pdf\Outline;
@@ -35,8 +33,6 @@ use Zend\Pdf\ObjectFactory;
  *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Outline
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Created extends AbstractOutline
 {

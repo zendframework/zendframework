@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Navigation\View;
@@ -31,8 +29,6 @@ use Zend\View\HelperPluginManager;
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HelperConfiguration implements ConfigurationInterface
 {

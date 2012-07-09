@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Loader
  * @subpackage Exception
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Loader;
@@ -32,7 +30,6 @@ require_once __DIR__ . '/SplAutoloader.php';
  * class is not found, a PHP warning will be raised by include().
  *
  * @package    Zend_Loader
- * @license New BSD {@link http://framework.zend.com/license/new-bsd}
  */
 class StandardAutoloader implements SplAutoloader
 {

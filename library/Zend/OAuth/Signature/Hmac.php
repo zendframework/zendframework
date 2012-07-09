@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_OAuth;
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\OAuth\Signature;
@@ -24,8 +22,6 @@ use Zend\Crypt\Hmac as HMACEncryption;
 /**
  * @category   Zend
  * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Hmac extends AbstractSignature
 {

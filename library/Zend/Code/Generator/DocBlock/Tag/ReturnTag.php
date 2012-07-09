@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Code_Generator
  * @subpackage PHP
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Code\Generator\DocBlock\Tag;
@@ -27,8 +25,6 @@ use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
 /**
  * @category   Zend
  * @package    Zend_Code_Generator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ReturnTag extends Tag
 {

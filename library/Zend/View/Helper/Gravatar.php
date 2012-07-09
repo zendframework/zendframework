@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend\View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\View\Helper;
@@ -28,8 +26,6 @@ use Zend\View\Exception;
  *
  * @package    Zend\View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Gravatar extends AbstractHtmlElement
 {

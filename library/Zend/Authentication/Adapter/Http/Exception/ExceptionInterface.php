@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter_HTTP_Exception
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Authentication\Adapter\Http\Exception;
@@ -29,8 +27,6 @@ use Zend\Authentication\Adapter\Exception\ExceptionInterface as Exception;
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter_Http_Exception
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface ExceptionInterface extends Exception
 {}

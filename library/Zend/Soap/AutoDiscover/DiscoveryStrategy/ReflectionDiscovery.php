@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Soap\AutoDiscover\DiscoveryStrategy;
@@ -31,8 +29,6 @@ use Zend\Server\Reflection\AbstractFunction,
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 class ReflectionDiscovery implements DiscoveryStrategyInterface

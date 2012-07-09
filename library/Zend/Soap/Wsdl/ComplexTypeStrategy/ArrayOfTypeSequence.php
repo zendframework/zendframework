@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Soap
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
@@ -28,8 +26,6 @@ use Zend\Soap\Wsdl;
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ArrayOfTypeSequence extends DefaultComplexType
 {

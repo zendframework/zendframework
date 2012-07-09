@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_I18n
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\I18n\View\Helper;
@@ -31,8 +29,6 @@ use Zend\I18n\Translator\Translator;
  * @category   Zend
  * @package    Zend_I18n
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class TranslatePlural extends AbstractHelper
 {

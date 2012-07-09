@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Validator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Validator;
@@ -25,8 +23,6 @@ use Zend\ServiceManager\AbstractPluginManager;
 /**
  * @category   Zend
  * @package    Zend_Validator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ValidatorPluginManager extends AbstractPluginManager
 {

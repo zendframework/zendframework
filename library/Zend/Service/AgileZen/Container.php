@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Service
  * @subpackage AgileZen
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Service\AgileZen;
@@ -30,8 +28,6 @@ use Traversable;
  * @category   Zend
  * @package    Zend_Service
  * @subpackage AgileZen
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Container implements Countable, Iterator, ArrayAccess
 {

@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Amf\Response;
@@ -28,8 +26,6 @@ use Zend\Amf\Parser,
  * Handles converting the PHP object ready for response back into AMF
  *
  * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class StreamResponse implements ResponseInterface
 {

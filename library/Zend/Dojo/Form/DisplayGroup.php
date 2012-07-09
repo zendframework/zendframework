@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Dojo\Form;
@@ -31,8 +29,6 @@ use Zend\View\Renderer\RendererInterface as View;
  *
  * @package    Zend_Dojo
  * @subpackage Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DisplayGroup extends \Zend\Form\DisplayGroup
 {

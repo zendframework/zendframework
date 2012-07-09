@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Escaper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Escaper\Exception;
@@ -28,8 +26,6 @@ use Zend\Escaper\Exception;
  * @uses       \InvalidArgumentException
  * @category   Zend
  * @package    Zend_Escaper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException extends \InvalidArgumentException
     implements Exception\ExceptionInterface

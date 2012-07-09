@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Code
  * @subpackage Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Code\Reflection\Exception;
@@ -27,8 +25,6 @@ use Zend\Code\Exception;
  * @category   Zend
  * @package    Zend_Code
  * @subpackage Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException extends Exception\RuntimeException implements 
     ExceptionInterface

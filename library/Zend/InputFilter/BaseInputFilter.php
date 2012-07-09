@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_InputFilter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\InputFilter;
@@ -29,8 +27,6 @@ use Zend\Stdlib\ArrayUtils;
  *             should a message be returned? if so, what message?
  * @category   Zend
  * @package    Zend_InputFilter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BaseInputFilter implements InputFilterInterface
 {

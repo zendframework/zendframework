@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Resolver
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\View\Resolver;
@@ -32,8 +30,6 @@ use Zend\View\Resolver\ResolverInterface as Resolver;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Resolver
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AggregateResolver implements Countable, IteratorAggregate, ResolverInterface
 {

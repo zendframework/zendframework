@@ -16,8 +16,6 @@
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage Zend\OpenId\Provider\GenericProvider
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\OpenId\Provider\User;
@@ -28,8 +26,6 @@ namespace Zend\OpenId\Provider\User;
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage Zend\OpenId\Provider\GenericProvider
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractUser
 {

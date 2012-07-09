@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Service\WindowsAzure\Storage;
@@ -27,8 +25,6 @@ use Zend\Service\WindowsAzure\Exception\UnknownPropertyException;
  * @category                       Zend
  * @package                        Zend_Service_WindowsAzure
  * @subpackage                     Storage
- * @copyright                      Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license                        http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @property string $Name          Name of the container
  * @property string $Etag          Etag of the container

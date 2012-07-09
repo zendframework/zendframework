@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_File
  * @subpackage Exception
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\File\Exception;
@@ -25,7 +23,6 @@ namespace Zend\File\Exception;
  * Exception class raised when invalid arguments are discovered
  * 
  * @package    Zend_File
- * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
  */
 class InvalidArgumentException 
     extends \InvalidArgumentException 

@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Amf
  * @subpackage Parser
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Amf\Parser;
@@ -29,8 +27,6 @@ use Zend\Loader\PluginBroker;
  * @todo       PHP 5.3 can drastically change this class w/ namespace and the new call_user_func w/ namespace
  * @package    Zend_Amf
  * @subpackage Parser
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 final class TypeLoader
 {

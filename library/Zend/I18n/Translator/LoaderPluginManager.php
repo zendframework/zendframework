@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_I18n
  * @subpackage Translator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\I18n\Translator;
@@ -34,8 +32,6 @@ use Zend\ServiceManager\AbstractPluginManager;
  * @category   Zend
  * @package    Zend_I18n
  * @subpackage Translator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class LoaderPluginManager extends AbstractPluginManager
 {

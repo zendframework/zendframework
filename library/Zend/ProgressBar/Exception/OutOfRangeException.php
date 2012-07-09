@@ -14,9 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_ProgressBar
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @version    $Id$
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\ProgressBar\Exception;
@@ -26,8 +24,6 @@ namespace Zend\ProgressBar\Exception;
  *
  * @category   Zend
  * @package    Zend_ProgressBar
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class OutOfRangeException
     extends \OutOfRangeException

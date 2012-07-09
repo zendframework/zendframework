@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @since      Preview Release 0.2
  */
 
@@ -25,8 +23,6 @@ namespace Zend\Session\Validator;
  * @category   Zend
  * @package    Zend_Session
  * @subpackage Validator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HttpUserAgent implements ValidatorInterface
 {

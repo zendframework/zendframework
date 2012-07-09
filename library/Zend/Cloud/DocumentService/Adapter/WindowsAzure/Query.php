@@ -13,8 +13,6 @@
  * @category   Zend
  * @package    Zend_Cloud_DocumentService_Adapter
  * @subpackage WindowsAzure
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Cloud\DocumentService\Adapter\WindowsAzure;
@@ -31,8 +29,6 @@ use Zend\Cloud\DocumentService\QueryAdapter\QueryAdapterInterface,
  * @category   Zend
  * @package    Zend_Cloud_DocumentService_Adapter
  * @subpackage WindowsAzure
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Query implements QueryAdapterInterface
 {

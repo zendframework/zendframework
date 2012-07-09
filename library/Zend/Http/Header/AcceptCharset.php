@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend\Http\Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 namespace Zend\Http\Header;
 
@@ -24,8 +22,6 @@ namespace Zend\Http\Header;
  *
  * @category   Zend
  * @package    Zend\Http\Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.2
  */
 class AcceptCharset extends AbstractAccept

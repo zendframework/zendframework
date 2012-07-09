@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Service
  * @subpackage SlideShare
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Service\SlideShare;
@@ -36,8 +34,6 @@ use Zend\Http\Client;
  * @package    Zend_Service
  * @subpackage SlideShare
  * @throws     Zend\Service\SlideShare\Exception
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SlideShare
 {

@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Code\Reflection;
@@ -29,8 +27,6 @@ use Zend\Code\Scanner\CachingFileScanner;
  * @todo       implement line numbers
  * @category   Zend
  * @package    Zend_Reflection
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PropertyReflection extends PhpReflectionProperty implements ReflectionInterface
 {

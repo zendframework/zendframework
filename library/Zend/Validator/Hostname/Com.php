@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Validator\Hostname;
@@ -25,8 +23,6 @@ namespace Zend\Validator\Hostname;
  *
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 return array(
     1  => '/^[\x{002d}0-9\x{0400}-\x{052f}]{1,63}$/iu',

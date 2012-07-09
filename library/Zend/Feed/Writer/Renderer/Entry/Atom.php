@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Feed\Writer\Renderer\Entry;
@@ -31,8 +29,6 @@ use Zend\Validator;
 /**
  * @category Zend
  * @package Zend_Feed_Writer
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {

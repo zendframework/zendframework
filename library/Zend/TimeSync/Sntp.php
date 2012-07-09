@@ -14,8 +14,6 @@
  *
  * @category  Zend
  * @package   Zend_TimeSync
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\TimeSync;
@@ -25,8 +23,6 @@ namespace Zend\TimeSync;
  *
  * @category  Zend
  * @package   Zend_TimeSync
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Sntp extends AbstractProtocol
 {

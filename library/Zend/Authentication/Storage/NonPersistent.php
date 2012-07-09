@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Authentication\Storage;
@@ -31,8 +29,6 @@ namespace Zend\Authentication\Storage;
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class NonPersistent implements StorageInterface
 {

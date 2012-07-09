@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Form;
@@ -23,8 +21,6 @@ namespace Zend\Form;
 /**
  * @category   Zend
  * @package    Zend\Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface ElementPrepareAwareInterface
 {

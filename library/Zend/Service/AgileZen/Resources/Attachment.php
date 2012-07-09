@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Service
  * @subpackage AgileZen_Resources
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Service\AgileZen\Resources;
@@ -28,8 +26,6 @@ use Zend\Service\AgileZen\AbstractEntity;
  * @category   Zend
  * @package    Zend_Service
  * @subpackage AgileZen_Resources
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Attachment extends AbstractEntity
 {

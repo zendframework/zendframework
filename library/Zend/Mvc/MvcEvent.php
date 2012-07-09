@@ -14,8 +14,6 @@
  *
  * @category   Zend
  * @package    Zend_Mvc
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Mvc;
@@ -29,8 +27,6 @@ use Zend\View\Model\ViewModel;
 /**
  * @category   Zend
  * @package    Zend_Mvc
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MvcEvent extends Event
 {

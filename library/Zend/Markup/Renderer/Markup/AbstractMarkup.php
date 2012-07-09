@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Markup\Renderer\Markup;
@@ -32,8 +30,6 @@ use Zend\Markup\Renderer\Markup,
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractMarkup implements Markup\MarkupInterface
 {

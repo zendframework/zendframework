@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_HTML
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Markup\Renderer\Markup\Html;
@@ -32,8 +30,6 @@ use Zend\Markup\Renderer\Markup\AbstractMarkup,
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_Html
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractHtml extends AbstractMarkup
 {

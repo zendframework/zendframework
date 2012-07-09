@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage DublinCore
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\GData\DublinCore\Extension;
@@ -28,8 +26,6 @@ namespace Zend\GData\DublinCore\Extension;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage DublinCore
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Date extends \Zend\GData\Extension
 {

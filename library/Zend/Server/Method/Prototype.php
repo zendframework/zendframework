@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Method
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Server\Method;
@@ -27,8 +25,6 @@ namespace Zend\Server\Method;
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Method
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Prototype
 {

@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Authentication
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Service\Amazon\Authentication;
@@ -26,8 +24,6 @@ use Zend\Crypt\Hmac;
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Authentication
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class V2 extends AbstractAuthentication
 {

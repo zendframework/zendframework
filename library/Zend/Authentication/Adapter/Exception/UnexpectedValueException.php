@@ -15,8 +15,6 @@
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Authentication\Adapter\Exception;
@@ -27,8 +25,6 @@ use Zend\Authentication\Exception;
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class UnexpectedValueException extends Exception\UnexpectedValueException implements 
     ExceptionInterface

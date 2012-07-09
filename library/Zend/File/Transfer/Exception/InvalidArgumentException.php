@@ -14,8 +14,6 @@
  *
  * @category  Zend
  * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\File\Transfer\Exception;
@@ -25,8 +23,6 @@ use Zend\File\Exception;
 /**
  * @category   Zend
  * @package    Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException extends Exception\InvalidArgumentException implements 
     ExceptionInterface

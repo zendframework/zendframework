@@ -98,6 +98,12 @@ class FieldsetTest extends TestCase
         );
     }
 
+    public function testExtractOnAnEmptyRelationship()
+    {
+        $form = new TestAsset\FormCollection();
+        $form->populateValues(array('fieldsets' => array()));
+    }
+
     public function testFieldsetIsEmptyByDefault()
     {
         $this->assertEquals(0, count($this->fieldset));

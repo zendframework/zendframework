@@ -15,9 +15,9 @@ use Zend\Filter\FilterChain;
 use Zend\View\Exception;
 use Zend\View\HelperPluginManager;
 use Zend\View\Model\ModelInterface as Model;
-use Zend\View\Resolver\TemplatePathStack;
 use Zend\View\Renderer\RendererInterface as Renderer;
 use Zend\View\Resolver\ResolverInterface as Resolver;
+use Zend\View\Resolver\TemplatePathStack;
 use Zend\View\Variables;
 
 /**

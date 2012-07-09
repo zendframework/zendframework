@@ -10,15 +10,15 @@
 
 namespace Zend\Db\TableGateway\Feature;
 
-use Zend\EventManager\EventManagerInterface,
-    Zend\Db\TableGateway\Exception,
-    Zend\Db\Sql\Select,
-    Zend\Db\Sql\Insert,
-    Zend\Db\Sql\Update,
-    Zend\Db\Sql\Delete,
-    Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\Driver\ResultInterface,
-    Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Sql\Delete;
+use Zend\Db\Sql\Insert;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Update;
+use Zend\Db\TableGateway\Exception;
+use Zend\EventManager\EventManagerInterface;
 
 /**
  * @category   Zend

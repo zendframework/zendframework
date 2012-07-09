@@ -10,8 +10,8 @@
 
 namespace Zend\Search\Lucene\Analysis\Analyzer\Common;
 
-use Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface;
 use Zend\Search\Lucene\Analysis;
+use Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface;
 use Zend\Search\Lucene\Analysis\TokenFilter\TokenFilterInterface;
 
 /**

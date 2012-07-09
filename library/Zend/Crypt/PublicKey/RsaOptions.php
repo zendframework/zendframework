@@ -10,10 +10,10 @@
 
 namespace Zend\Crypt\PublicKey;
 
-use Zend\Stdlib\AbstractOptions;
-use Zend\Crypt\PublicKey\Rsa\Exception;
-use Zend\Stdlib\ArrayUtils;
 use Traversable;
+use Zend\Crypt\PublicKey\Rsa\Exception;
+use Zend\Stdlib\AbstractOptions;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * RSA instance options

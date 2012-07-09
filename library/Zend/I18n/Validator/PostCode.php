@@ -10,8 +10,8 @@
 
 namespace Zend\I18n\Validator;
 
-use Traversable;
 use Locale;
+use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Callback;

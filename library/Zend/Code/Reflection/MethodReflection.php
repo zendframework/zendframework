@@ -13,8 +13,8 @@ namespace Zend\Code\Reflection;
 use ReflectionMethod as PhpReflectionMethod;
 use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
-use Zend\Code\Scanner\CachingFileScanner;
 use Zend\Code\Scanner\AnnotationScanner;
+use Zend\Code\Scanner\CachingFileScanner;
 
 /**
  * @category   Zend

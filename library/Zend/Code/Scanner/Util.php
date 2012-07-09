@@ -10,8 +10,8 @@
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\Exception;
 use stdClass;
+use Zend\Code\Exception;
 
 /**
  * Shared utility methods used by scanners

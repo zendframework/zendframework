@@ -11,10 +11,10 @@
 namespace Zend\Code\Reflection;
 
 use ReflectionClass;
-use Zend\Code\Reflection\FileReflection;
-use Zend\Code\Scanner\FileScanner;
 use Zend\Code\Annotation;
+use Zend\Code\Reflection\FileReflection;
 use Zend\Code\Scanner\AnnotationScanner;
+use Zend\Code\Scanner\FileScanner;
 
 /**
  * @category   Zend

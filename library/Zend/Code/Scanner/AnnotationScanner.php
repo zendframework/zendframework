@@ -10,9 +10,9 @@
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\NameInformation;
-use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Annotation\AnnotationCollection;
+use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\NameInformation;
 
 class AnnotationScanner extends AnnotationCollection implements ScannerInterface
 {

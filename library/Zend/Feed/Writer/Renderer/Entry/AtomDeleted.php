@@ -13,8 +13,8 @@ namespace Zend\Feed\Writer\Renderer\Entry;
 use DateTime;
 use DOMDocument;
 use DOMElement;
-use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer;
+use Zend\Feed\Writer\Renderer;
 
 /**
 * @category Zend

@@ -10,9 +10,9 @@
 
 namespace Zend\Soap\AutoDiscover\DiscoveryStrategy;
 
-use Zend\Server\Reflection\AbstractFunction,
-    Zend\Server\Reflection\Prototype,
-    Zend\Server\Reflection\ReflectionParameter;
+use Zend\Server\Reflection\AbstractFunction;
+use Zend\Server\Reflection\Prototype;
+use Zend\Server\Reflection\ReflectionParameter;
 
 /**
  * Describes how types, return values and method details are detected during AutoDiscovery of a WSDL.

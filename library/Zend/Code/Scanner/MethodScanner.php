@@ -10,9 +10,9 @@
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\NameInformation;
-use Zend\Code\Exception;
 use Zend\Code\Annotation;
+use Zend\Code\Exception;
+use Zend\Code\NameInformation;
 
 class MethodScanner implements ScannerInterface
 {

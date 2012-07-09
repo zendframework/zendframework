@@ -10,12 +10,12 @@
 
 namespace Zend\Feed\Reader;
 
+use DOMDocument;
+use DOMXPath;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
 use Zend\Http;
 use Zend\Loader;
 use Zend\Stdlib\ErrorHandler;
-use DOMDocument;
-use DOMXPath;
 
 /**
 * @category Zend

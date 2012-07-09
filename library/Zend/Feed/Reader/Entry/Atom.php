@@ -10,9 +10,9 @@
 
 namespace Zend\Feed\Reader\Entry;
 
-use Zend\Feed\Reader;
 use DOMElement;
 use DOMXPath;
+use Zend\Feed\Reader;
 
 /**
 * @category Zend

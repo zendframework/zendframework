@@ -10,8 +10,8 @@
 
 namespace Zend\I18n\Validator;
 
-use Zend\Validator\AbstractValidator;
 use Zend\I18n\Filter\Alnum as AlnumFilter;
+use Zend\Validator\AbstractValidator;
 
 /**
  * @category   Zend

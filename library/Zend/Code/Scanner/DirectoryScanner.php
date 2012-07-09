@@ -10,9 +10,9 @@
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\Exception;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Zend\Code\Exception;
 
 class DirectoryScanner implements ScannerInterface
 {

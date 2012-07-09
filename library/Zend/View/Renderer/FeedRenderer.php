@@ -11,9 +11,9 @@
 namespace Zend\View\Renderer;
 
 use Zend\View\Exception;
-use Zend\View\Resolver\ResolverInterface as Resolver;
-use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Model\FeedModel;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Resolver\ResolverInterface as Resolver;
 
 /**
  * Interface class for Zend_View compatible template engine implementations

@@ -14,7 +14,6 @@ use Zend\Acl;
 use Zend\Acl\Exception;
 use Zend\Acl\Role;
 
-
 /**
  * @category   Zend
  * @package    Zend_Acl

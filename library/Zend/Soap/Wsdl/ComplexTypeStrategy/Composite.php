@@ -10,9 +10,9 @@
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
-use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy,
-    Zend\Soap\Exception,
-    Zend\Soap\Wsdl;
+use Zend\Soap\Exception;
+use Zend\Soap\Wsdl;
+use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy;
 
 /**
  * Zend_Soap_Wsdl_Strategy_Composite

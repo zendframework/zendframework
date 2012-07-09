@@ -10,10 +10,10 @@
 
 namespace Zend\Session\Configuration;
 
-use Zend\Session\Configuration\ConfigurationInterface as Configurable,
-    Zend\Session\Exception,
-    Zend\Validator\Hostname as HostnameValidator,
-    Zend\Filter\Word\CamelCaseToUnderscore as CamelCaseToUnderscoreFilter;
+use Zend\Filter\Word\CamelCaseToUnderscore as CamelCaseToUnderscoreFilter;
+use Zend\Session\Configuration\ConfigurationInterface as Configurable;
+use Zend\Session\Exception;
+use Zend\Validator\Hostname as HostnameValidator;
 
 /**
  * Standard session configuration

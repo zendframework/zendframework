@@ -11,8 +11,8 @@
 namespace Zend\ModuleManager;
 
 use Traversable;
-use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerInterface;
 
 /**
  * Module manager

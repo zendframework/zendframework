@@ -10,8 +10,8 @@
 
 namespace Zend\Filter\File;
 
-use Zend\Filter\StringToLower;
 use Zend\Filter\Exception;
+use Zend\Filter\StringToLower;
 
 /**
  * @category   Zend

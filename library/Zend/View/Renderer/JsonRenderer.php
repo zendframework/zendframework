@@ -15,8 +15,8 @@ use Traversable;
 use Zend\Json\Json;
 use Zend\Stdlib\ArrayUtils;
 use Zend\View\Exception;
-use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Model\JsonModel;
+use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Renderer\RendererInterface as Renderer;
 use Zend\View\Resolver\ResolverInterface as Resolver;
 

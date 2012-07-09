@@ -10,9 +10,9 @@
 
 namespace Zend\Feed\Writer\Renderer\Feed;
 
-use Zend\Feed\Writer\Renderer;
-use Zend\Feed\Writer;
 use DOMDocument;
+use Zend\Feed\Writer;
+use Zend\Feed\Writer\Renderer;
 
 /**
 * @category Zend

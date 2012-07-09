@@ -14,8 +14,8 @@ use Zend\Http\Client;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Service\WindowsAzure\Credentials;
-use Zend\Service\WindowsAzure\RetryPolicy;
 use Zend\Service\WindowsAzure\Exception\DomainException;
+use Zend\Service\WindowsAzure\RetryPolicy;
 
 /**
  * @category   Zend

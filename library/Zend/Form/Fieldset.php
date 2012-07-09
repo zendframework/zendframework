@@ -12,9 +12,9 @@ namespace Zend\Form;
 
 use Traversable;
 use Zend\Form\Element\Collection;
-use Zend\Stdlib\PriorityQueue;
 use Zend\Stdlib\Hydrator;
 use Zend\Stdlib\Hydrator\HydratorInterface;
+use Zend\Stdlib\PriorityQueue;
 
 /**
  * @category   Zend

@@ -13,8 +13,8 @@ namespace Zend\Service\WindowsAzure\Storage;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Service\WindowsAzure\Credentials;
-use Zend\Service\WindowsAzure\Exception\InvalidArgumentException;
 use Zend\Service\WindowsAzure\Exception\DomainException;
+use Zend\Service\WindowsAzure\Exception\InvalidArgumentException;
 use Zend\Service\WindowsAzure\Exception\RuntimeException;
 use Zend\Service\WindowsAzure\RetryPolicy;
 

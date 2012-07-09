@@ -10,10 +10,10 @@
 
 namespace Zend\Session\Storage;
 
-use Traversable,
-    ArrayAccess,
-    Serializable,
-    Countable;
+use ArrayAccess;
+use Countable;
+use Serializable;
+use Traversable;
 
 /**
  * Session storage interface

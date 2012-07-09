@@ -10,8 +10,8 @@
 
 namespace Zend\GData\GApps;
 
-use Zend\GData\GApps;
 use Zend\GData\App\InvalidArgumentException;
+use Zend\GData\GApps;
 
 /**
  * Assists in constructing queries for Google Apps owner entries.

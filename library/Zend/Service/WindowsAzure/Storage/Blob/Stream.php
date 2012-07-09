@@ -10,8 +10,8 @@
 
 namespace Zend\Service\WindowsAzure\Storage\Blob;
 
-use Zend\Service\WindowsAzure\Exception\ExceptionInterface;
 use Zend\Service\WindowsAzure\Exception\DomainException;
+use Zend\Service\WindowsAzure\Exception\ExceptionInterface;
 use Zend\Service\WindowsAzure\Exception\RuntimeException;
 
 /**

@@ -11,9 +11,9 @@
 namespace Zend\Log;
 
 use DateTime;
-use Zend\Stdlib\SplPriorityQueue;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\SplPriorityQueue;
 
 /**
  * Logging messages with a stack of backends

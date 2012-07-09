@@ -10,8 +10,8 @@
 
 namespace Zend\GData\YouTube;
 
-use Zend\GData\YouTube;
 use Zend\GData\App;
+use Zend\GData\YouTube;
 
 /**
  * Represents the YouTube message flavor of an Atom entry

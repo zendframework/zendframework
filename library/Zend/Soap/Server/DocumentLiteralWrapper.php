@@ -10,10 +10,10 @@
 
 namespace Zend\Soap\Server;
 
-use ReflectionClass,
-    ReflectionObject,
-    Zend\Soap\Exception\UnexpectedValueException,
-    Zend\Soap\Exception\BadMethodCallException;
+use ReflectionClass;
+use ReflectionObject;
+use Zend\Soap\Exception\BadMethodCallException;
+use Zend\Soap\Exception\UnexpectedValueException;
 
 /**
  * Wraps WSDL Document/Literal Style service objects to hide SOAP request

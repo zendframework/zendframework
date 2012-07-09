@@ -11,12 +11,12 @@
 namespace Zend\Search\Lucene\Index;
 
 use Zend\Search\Lucene;
+use Zend\Search\Lucene\Exception\ExceptionInterface;
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene\Exception\InvalidFileFormatException;
+use Zend\Search\Lucene\Exception\RuntimeException;
 use Zend\Search\Lucene\Search\Similarity\AbstractSimilarity;
 use Zend\Search\Lucene\Storage\Directory;
-use Zend\Search\Lucene\Exception\ExceptionInterface;
-use Zend\Search\Lucene\Exception\RuntimeException;
-use Zend\Search\Lucene\Exception\InvalidFileFormatException;
-use Zend\Search\Lucene\Exception\InvalidArgumentException;
 
 /**
  * @category   Zend

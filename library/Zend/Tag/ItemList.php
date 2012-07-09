@@ -10,13 +10,12 @@
 
 namespace Zend\Tag;
 
-use Zend\Amf\Parser\Exception;
-
-use Zend\Tag\Exception\InvalidArgumentException;
-use Zend\Tag\Exception\OutOfBoundsException;
+use ArrayAccess;
 use Countable;
 use SeekableIterator;
-use ArrayAccess;
+use use;
+use Zend\Amf\Parser\Exception;
+use Zend\Tag\Exception\OutOfBoundsException;
 
 /**
  * @category   Zend

@@ -11,9 +11,9 @@
 namespace Zend\Filter\File;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Filter;
 use Zend\Filter\Exception;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend

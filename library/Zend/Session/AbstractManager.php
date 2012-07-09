@@ -10,10 +10,10 @@
 
 namespace Zend\Session;
 
-use Zend\Session\ManagerInterface as Manager,
-    Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler,
-    Zend\Session\Storage\StorageInterface as Storage,
-    Zend\Session\Configuration\ConfigurationInterface as Configuration;
+use Zend\Session\Configuration\ConfigurationInterface as Configuration;
+use Zend\Session\ManagerInterface as Manager;
+use Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler;
+use Zend\Session\Storage\StorageInterface as Storage;
 
 /**
  * Base ManagerInterface implementation

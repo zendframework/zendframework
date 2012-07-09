@@ -11,10 +11,10 @@
 namespace Zend\OAuth;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Http\Client as HttpClient;
 use Zend\Http\Request as HttpRequest;
 use Zend\Http\Response as HttpResponse;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend

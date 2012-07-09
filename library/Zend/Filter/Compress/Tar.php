@@ -10,10 +10,10 @@
 
 namespace Zend\Filter\Compress;
 
-use Archive_Tar,
-    RecursiveDirectoryIterator,
-    RecursiveIteratorIterator,
-    Zend\Filter\Exception;
+use Archive_Tar;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use Zend\Filter\Exception;
 
 /**
  * Compression adapter for Tar

@@ -12,9 +12,9 @@ namespace Zend\Mvc\Service;
 
 use Zend\Mvc\Exception;
 use Zend\Mvc\Router\RouteMatch;
-use Zend\View\Helper as ViewHelper;
 use Zend\ServiceManager\ConfigurationInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View\Helper as ViewHelper;
 
 /**
  * @category   Zend

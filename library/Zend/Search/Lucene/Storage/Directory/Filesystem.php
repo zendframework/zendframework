@@ -10,9 +10,9 @@
 
 namespace Zend\Search\Lucene\Storage\Directory;
 
+use Zend\Search\Lucene;
 use Zend\Search\Lucene\Storage\Directory;
 use Zend\Search\Lucene\Storage\File;
-use Zend\Search\Lucene;
 
 /**
  * FileSystem implementation of DirectoryInterface abstraction.

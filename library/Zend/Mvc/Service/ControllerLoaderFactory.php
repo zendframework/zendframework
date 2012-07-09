@@ -10,13 +10,13 @@
 
 namespace Zend\Mvc\Service;
 
+use Zend\EventManager\EventManagerAwareInterface;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\Di\DiServiceInitializer;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
-use Zend\EventManager\EventManagerAwareInterface;
 
 /**
  * @category   Zend

@@ -11,8 +11,8 @@
 namespace Zend\Service\WindowsAzure\Credentials;
 
 use Zend\Http\Request;
-use Zend\Service\WindowsAzure\Storage;
 use Zend\Service\WindowsAzure\Exception\DomainException;
+use Zend\Service\WindowsAzure\Storage;
 
 /**
  * @category   Zend

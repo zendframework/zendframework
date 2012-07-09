@@ -11,8 +11,8 @@
 namespace Zend\Validator;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Session\Container as SessionContainer;
+use Zend\Stdlib\ArrayUtils;
 
 class Csrf extends AbstractValidator
 {

@@ -12,7 +12,6 @@ namespace Zend\Search\Lucene\Analysis\Analyzer\Common\Utf8Num;
 use Zend\Search\Lucene\Analysis\Analyzer\Common;
 use Zend\Search\Lucene\Analysis\TokenFilter;
 
-
 /**
  * @category   Zend
  * @package    Zend_Search_Lucene

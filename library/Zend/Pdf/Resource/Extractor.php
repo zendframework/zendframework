@@ -14,7 +14,6 @@ use Zend\Pdf;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\ObjectFactory;
 
-
 /**
  * Resource extractor class is used to detach resources from original PDF document.
  *

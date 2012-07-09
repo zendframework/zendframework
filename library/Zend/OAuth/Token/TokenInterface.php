@@ -13,7 +13,6 @@ namespace Zend\OAuth\Token;
 use Zend\Http\Response as HTTPResponse;
 use Zend\OAuth\Http\Utility as HTTPUtility;
 
-
 interface TokenInterface
 {
 

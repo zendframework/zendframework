@@ -10,9 +10,9 @@
 
 namespace Zend\Feed\Writer\Extension\Slash\Renderer;
 
-use Zend\Feed\Writer\Extension;
 use DOMDocument;
 use DOMElement;
+use Zend\Feed\Writer\Extension;
 
 /**
 * @category Zend

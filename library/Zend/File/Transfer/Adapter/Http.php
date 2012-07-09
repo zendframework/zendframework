@@ -10,10 +10,10 @@
 
 namespace Zend\File\Transfer\Adapter;
 
-use Zend\File\Transfer,
-    Zend\File\Transfer\Exception,
-    Zend\ProgressBar,
-    Zend\ProgressBar\Adapter;
+use Zend\File\Transfer;
+use Zend\File\Transfer\Exception;
+use Zend\ProgressBar;
+use Zend\ProgressBar\Adapter;
 
 /**
  * File transfer adapter class for the HTTP protocol

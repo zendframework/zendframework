@@ -10,8 +10,8 @@
 
 namespace Zend\Validator;
 
-use Traversable;
 use DateTime;
+use Traversable;
 
 /**
  * @category   Zend

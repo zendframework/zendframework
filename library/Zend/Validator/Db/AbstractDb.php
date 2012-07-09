@@ -11,10 +11,10 @@
 namespace Zend\Validator\Db;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\Adapter\Driver\DriverInterface as DbDriverInterface;
 use Zend\Db\Sql\Select as DbSelect;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
 

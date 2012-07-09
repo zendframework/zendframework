@@ -10,8 +10,8 @@
 
 namespace Zend\Service\Rackspace\Files;
 
-use Zend\Service\Rackspace\Files\Object;
 use Zend\Service\Rackspace\Files as RackspaceFiles;
+use Zend\Service\Rackspace\Files\Object;
 
 /**
  * List of servers retrived from the GoGrid web service

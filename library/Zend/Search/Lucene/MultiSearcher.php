@@ -10,11 +10,11 @@
 
 namespace Zend\Search\Lucene;
 
-use Zend\Search\Lucene\Storage\Directory;
 use Zend\Search\Lucene\Exception\InvalidArgumentException;
-use Zend\Search\Lucene\Exception\UnsupportedMethodCallException;
 use Zend\Search\Lucene\Exception\OutOfRangeException;
 use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Exception\UnsupportedMethodCallException;
+use Zend\Search\Lucene\Storage\Directory;
 
 /**
  * Multisearcher allows to search through several independent indexes.

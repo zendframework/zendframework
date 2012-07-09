@@ -10,8 +10,8 @@
 
 namespace Zend\Db\Adapter\Driver\Pdo\Feature;
 
-use Zend\Db\Adapter\Driver\Feature\AbstractFeature,
-    Zend\Db\Adapter\Driver\Pdo;
+use Zend\Db\Adapter\Driver\Feature\AbstractFeature;
+use Zend\Db\Adapter\Driver\Pdo;
 
 /**
  * SqliteRowCounter

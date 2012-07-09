@@ -10,8 +10,8 @@
 
 namespace Zend\OAuth\Signature;
 
-use Zend\OAuth\Http\Utility as HTTPUtility;
 use Zend\OAuth\Exception;
+use Zend\OAuth\Http\Utility as HTTPUtility;
 use Zend\Uri;
 
 /**

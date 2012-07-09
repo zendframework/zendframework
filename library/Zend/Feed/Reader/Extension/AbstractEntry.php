@@ -10,10 +10,10 @@
 
 namespace Zend\Feed\Reader\Extension;
 
-use Zend\Feed\Reader;
-use DOMXPath;
 use DOMDocument;
 use DOMElement;
+use DOMXPath;
+use Zend\Feed\Reader;
 
 /**
 * @category Zend

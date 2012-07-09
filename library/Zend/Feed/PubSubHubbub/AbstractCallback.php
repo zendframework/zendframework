@@ -11,8 +11,8 @@
 namespace Zend\Feed\PubSubHubbub;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Http\PhpEnvironment\Response as PhpResponse;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend

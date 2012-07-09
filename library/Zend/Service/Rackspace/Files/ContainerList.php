@@ -10,9 +10,9 @@
 
 namespace Zend\Service\Rackspace\Files;
 
+use ArrayAccess;
 use Countable;
 use Iterator;
-use ArrayAccess;
 use Zend\Service\Rackspace\Files as RackspaceFiles;
 
 /**

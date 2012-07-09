@@ -10,8 +10,8 @@
 
 namespace Zend\InfoCard\XML\Assertion;
 
-use Zend\InfoCard\XML\Assertion as XMLAssertion;
 use Zend\InfoCard\XML\AbstractElement;
+use Zend\InfoCard\XML\Assertion as XMLAssertion;
 use Zend\InfoCard\XML\Exception;
 
 /**

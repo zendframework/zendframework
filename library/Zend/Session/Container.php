@@ -10,10 +10,10 @@
 
 namespace Zend\Session;
 
-use ArrayObject,
-    Iterator,
-    Zend\Session\ManagerInterface as Manager,
-    Zend\Session\Storage\StorageInterface as Storage;
+use ArrayObject;
+use Iterator;
+use Zend\Session\ManagerInterface as Manager;
+use Zend\Session\Storage\StorageInterface as Storage;
 
 /**
  * Session storage container

@@ -10,10 +10,9 @@
 
 namespace Zend\Mail\Transport;
 
-use Zend\Mail\Address\AddressInterface;
-
-use Traversable;
+use use;
 use Zend\Mail;
+use Zend\Mail\Address\AddressInterface;
 use Zend\Mail\Exception;
 use Zend\Mail\Headers;
 use Zend\Mail\Header\HeaderInterface;

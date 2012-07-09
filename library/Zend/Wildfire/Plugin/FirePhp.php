@@ -9,8 +9,8 @@
  */
 
 namespace Zend\Wildfire\Plugin;
-use Zend\Wildfire,
-    Zend\Wildfire\Plugin\Exception;
+use Zend\Wildfire;
+use Zend\Wildfire\Plugin\Exception;
 
 /**
  * Primary class for communicating with the FirePHP Firefox Extension.

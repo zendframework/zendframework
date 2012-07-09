@@ -11,8 +11,8 @@
 namespace Zend\OAuth\Token;
 
 use Zend\Http\Response as HTTPResponse;
-use Zend\OAuth\Http\Utility as HTTPUtility;
 use Zend\OAuth\Client;
+use Zend\OAuth\Http\Utility as HTTPUtility;
 
 /**
  * @category   Zend

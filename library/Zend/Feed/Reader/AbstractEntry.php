@@ -10,8 +10,8 @@
 
 namespace Zend\Feed\Reader;
 
-use DOMElement;
 use DOMDocument;
+use DOMElement;
 use DOMXPath;
 
 /**

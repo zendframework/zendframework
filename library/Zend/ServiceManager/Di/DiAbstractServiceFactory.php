@@ -10,9 +10,9 @@
 
 namespace Zend\ServiceManager\Di;
 
-use Zend\ServiceManager\AbstractFactoryInterface,
-    Zend\ServiceManager\ServiceLocatorInterface,
-    Zend\Di\Di;
+use Zend\Di\Di;
+use Zend\ServiceManager\AbstractFactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFactoryInterface
 {

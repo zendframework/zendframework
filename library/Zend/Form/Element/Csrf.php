@@ -10,10 +10,10 @@
 
 namespace Zend\Form\Element;
 
-use Zend\Form\Form;
 use Zend\Form\Element;
-use Zend\InputFilter\InputProviderInterface;
 use Zend\Form\ElementPrepareAwareInterface;
+use Zend\Form\Form;
+use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Csrf as CsrfValidator;
 
 /**

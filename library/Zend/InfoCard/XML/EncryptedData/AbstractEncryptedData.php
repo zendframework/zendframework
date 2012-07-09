@@ -9,8 +9,8 @@
  */
 
 namespace Zend\InfoCard\XML\EncryptedData;
-use Zend\InfoCard\XML\AbstractElement;
 use Zend\InfoCard\XML;
+use Zend\InfoCard\XML\AbstractElement;
 
 /**
  * An abstract class representing a generic EncryptedData XML block. This class is extended

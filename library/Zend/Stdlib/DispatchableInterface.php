@@ -10,8 +10,8 @@
 
 namespace Zend\Stdlib;
 
-use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Stdlib\RequestInterface as Request;
+use Zend\Stdlib\ResponseInterface as Response;
 
 interface DispatchableInterface
 {

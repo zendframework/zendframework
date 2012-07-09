@@ -18,7 +18,6 @@ use Zend\Service\WindowsAzure\Storage\Storage;
 use Zend\Service\WindowsAzure\Storage\Table;
 use Zend\Stdlib\ArrayUtils;
 
-
 /**
  * WindowsAzure adapter for document service.
  *

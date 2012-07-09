@@ -11,11 +11,11 @@
 namespace Zend\Dojo\View\Helper\Dojo;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Dojo\View\Exception;
 use Zend\Dojo\View\Helper\Dojo as DojoHelper;
-use Zend\View\Renderer\RendererInterface as View;
 use Zend\Json\Json;
+use Zend\Stdlib\ArrayUtils;
+use Zend\View\Renderer\RendererInterface as View;
 
 /**
  * Container for  Dojo View Helper

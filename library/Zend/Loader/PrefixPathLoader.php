@@ -10,10 +10,10 @@
 
 namespace Zend\Loader;
 
-use Zend\Stdlib\ArrayStack;
-use Zend\Stdlib\SplStack;
 use SplDoublyLinkedList;
 use SplFileInfo;
+use Zend\Stdlib\ArrayStack;
+use Zend\Stdlib\SplStack;
 
 /**
  * Prefix/Path plugin loader

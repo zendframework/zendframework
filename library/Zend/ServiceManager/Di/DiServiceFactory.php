@@ -10,11 +10,11 @@
 
 namespace Zend\ServiceManager\Di;
 
-use Zend\ServiceManager\FactoryInterface,
-    Zend\ServiceManager\ServiceLocatorInterface,
-    Zend\ServiceManager\Exception,
-    Zend\Di\Di,
-    Zend\Di\Exception\ClassNotFoundException as DiClassNotFoundException;
+use Zend\Di\Di;
+use Zend\Di\Exception\ClassNotFoundException as DiClassNotFoundException;
+use Zend\ServiceManager\Exception;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class DiServiceFactory extends Di implements FactoryInterface
 {

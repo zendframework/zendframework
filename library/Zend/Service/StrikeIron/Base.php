@@ -10,8 +10,8 @@
 
 namespace Zend\Service\StrikeIron;
 
-use SoapHeader;
 use SoapClient;
+use SoapHeader;
 
 /**
  * @category   Zend

@@ -10,8 +10,8 @@
 
 namespace Zend\OAuth\Token;
 
-use Zend\OAuth\Config\ConfigInterface as Config;
 use Zend\OAuth;
+use Zend\OAuth\Config\ConfigInterface as Config;
 use Zend\Uri;
 
 /**

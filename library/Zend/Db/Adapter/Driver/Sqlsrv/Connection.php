@@ -10,8 +10,8 @@
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend

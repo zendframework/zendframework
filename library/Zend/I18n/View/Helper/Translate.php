@@ -10,9 +10,9 @@
 
 namespace Zend\I18n\View\Helper;
 
-use Zend\View\Helper\AbstractHelper;
 use Zend\I18n\Exception;
 use Zend\I18n\Translator\Translator;
+use Zend\View\Helper\AbstractHelper;
 
 /**
  * View helper for translating messages.

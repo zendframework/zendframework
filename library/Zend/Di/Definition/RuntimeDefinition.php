@@ -10,10 +10,10 @@
 
 namespace Zend\Di\Definition;
 
-use Zend\Di\Definition\Annotation;
 use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Reflection;
+use Zend\Di\Definition\Annotation;
 
 class RuntimeDefinition implements DefinitionInterface
 {

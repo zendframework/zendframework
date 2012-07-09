@@ -10,8 +10,8 @@
 
 namespace Zend\Feed\Reader\Feed;
 
-use Iterator;
 use Countable;
+use Iterator;
 
 /**
 * @category Zend

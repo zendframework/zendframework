@@ -10,8 +10,8 @@
 
 namespace Zend\Feed\Reader\Extension\Podcast;
 
-use Zend\Feed\Reader\Extension;
 use DOMText;
+use Zend\Feed\Reader\Extension;
 
 /**
 * @category Zend

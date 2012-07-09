@@ -10,12 +10,12 @@
 
 namespace Zend\Mvc\Controller;
 
-use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventInterface as Event;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
-use Zend\Http\Request as HttpRequest;
+use Zend\EventManager\EventManagerInterface;
 use Zend\Http\PhpEnvironment\Response as HttpResponse;
+use Zend\Http\Request as HttpRequest;
 use Zend\Mvc\Exception;
 use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;

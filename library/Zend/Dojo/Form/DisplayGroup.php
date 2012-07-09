@@ -11,8 +11,8 @@
 namespace Zend\Dojo\Form;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Loader\PrefixPathMapper as PluginLoader;
+use Zend\Stdlib\ArrayUtils;
 use Zend\View\Renderer\RendererInterface as View;
 
 /**

@@ -10,8 +10,8 @@
 
 namespace Zend\Filter\File;
 
-use Zend\Filter\StringToUpper;
 use Zend\Filter\Exception;
+use Zend\Filter\StringToUpper;
 
 /**
  * @category   Zend

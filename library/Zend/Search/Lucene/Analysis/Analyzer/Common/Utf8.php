@@ -10,8 +10,8 @@
 
 namespace Zend\Search\Lucene\Analysis\Analyzer\Common;
 
-use Zend\Search\Lucene\Analysis;
 use Zend\Search\Lucene;
+use Zend\Search\Lucene\Analysis;
 use Zend\Search\Lucene\Exception\RuntimeException;
 
 /**

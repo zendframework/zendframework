@@ -17,16 +17,16 @@ use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\ApplicationInterface;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
 use Zend\ServiceManager\ConfigurationInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
+use Zend\View\Helper as ViewHelper;
 use Zend\View\HelperPluginManager as ViewHelperManager;
 use Zend\View\Renderer\PhpRenderer as ViewPhpRenderer;
 use Zend\View\Resolver as ViewResolver;
 use Zend\View\Strategy\PhpRendererStrategy;
 use Zend\View\View;
-use Zend\View\Helper as ViewHelper;
-use Zend\Mvc\Router\RouteMatch;
 
 /**
  * Prepares the view layer

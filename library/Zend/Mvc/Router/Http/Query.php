@@ -10,12 +10,11 @@
 
 namespace Zend\Mvc\Router\Http;
 
+use use;
+use Zend\Mvc\Router\Exception;
 use Zend\Mvc\Router\Http\RouteMatch;
-
-use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;
-use Zend\Mvc\Router\Exception;
 
 /**
  * Query route.

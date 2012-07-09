@@ -10,8 +10,8 @@
 
 namespace Zend\View\Helper;
 
-use Zend\View\Exception;
 use ArrayObject;
+use Zend\View\Exception;
 
 /**
  * Helper for setting and retrieving the doctype

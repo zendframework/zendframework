@@ -11,8 +11,8 @@
 namespace Zend\Soap;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Server\Client as ServerClient;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * \Zend\Soap\Client\Client

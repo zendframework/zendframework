@@ -10,10 +10,10 @@
 
 namespace Zend\Session;
 
-use Zend\EventManager\EventManagerInterface,
-    Zend\Session\Configuration\ConfigurationInterface as Configuration,
-    Zend\Session\Storage\StorageInterface as Storage,
-    Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler;
+use Zend\EventManager\EventManagerInterface;
+use Zend\Session\Configuration\ConfigurationInterface as Configuration;
+use Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler;
+use Zend\Session\Storage\StorageInterface as Storage;
 
 /**
  * Session manager interface

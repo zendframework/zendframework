@@ -10,9 +10,9 @@
 
 namespace Zend\Log\Writer;
 
+use Zend\Log\Exception;
 use Zend\Log\Filter;
 use Zend\Log\Formatter\FormatterInterface as Formatter;
-use Zend\Log\Exception;
 
 /**
  * @category   Zend

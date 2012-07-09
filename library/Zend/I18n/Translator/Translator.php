@@ -12,10 +12,10 @@ namespace Zend\I18n\Translator;
 
 use Locale;
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Cache;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
 use Zend\I18n\Exception;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Translator.

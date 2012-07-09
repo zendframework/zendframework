@@ -9,9 +9,9 @@
  */
 
 namespace Zend\OAuth\Http;
-use Zend\OAuth\Http as HTTPClient;
-use Zend\OAuth;
 use Zend\Http;
+use Zend\OAuth;
+use Zend\OAuth\Http as HTTPClient;
 
 /**
  * @category   Zend

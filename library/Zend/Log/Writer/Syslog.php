@@ -10,9 +10,9 @@
 
 namespace Zend\Log\Writer;
 
-use Zend\Log\Logger;
-use Zend\Log\Formatter;
 use Zend\Log\Exception;
+use Zend\Log\Formatter;
+use Zend\Log\Logger;
 
 /**
  * Writes log messages to syslog

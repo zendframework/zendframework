@@ -10,8 +10,8 @@
 
 namespace Zend\View\Helper\Placeholder\Container;
 
-use Zend\View\Helper\Placeholder\Registry;
 use Zend\View\Exception;
+use Zend\View\Helper\Placeholder\Registry;
 
 /**
  * Base class for targetted placeholder helpers

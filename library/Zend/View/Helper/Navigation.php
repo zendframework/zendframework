@@ -12,9 +12,9 @@ namespace Zend\View\Helper;
 
 use Zend\Navigation\AbstractContainer;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\View\Exception;
 use Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper;
 use Zend\View\Helper\Navigation\HelperInterface as NavigationHelper;
-use Zend\View\Exception;
 
 /**
  * Proxy helper for retrieving navigational helpers and forwarding calls

@@ -9,9 +9,9 @@
  */
 
 namespace Zend\Service\Amazon\Ec2;
+use Zend\Crypt\Hmac;
 use Zend\Service\Amazon;
 use Zend\Service\Amazon\Ec2\Exception;
-use Zend\Crypt\Hmac;
 
 /**
  * Provides the basic functionality to send a request to the Amazon Ec2 Query API

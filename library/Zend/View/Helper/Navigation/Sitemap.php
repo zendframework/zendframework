@@ -12,8 +12,8 @@ namespace Zend\View\Helper\Navigation;
 
 use DOMDocument;
 use RecursiveIteratorIterator;
-use Zend\Navigation\Page\AbstractPage;
 use Zend\Navigation\AbstractContainer;
+use Zend\Navigation\Page\AbstractPage;
 use Zend\Uri;
 use Zend\View;
 use Zend\View\Exception;

@@ -10,8 +10,8 @@
 
 namespace Zend\View\Helper;
 
-use Zend\Mvc\Router\RouteStackInterface;
 use Zend\Mvc\Router\RouteMatch;
+use Zend\Mvc\Router\RouteStackInterface;
 use Zend\View\Exception;
 
 /**

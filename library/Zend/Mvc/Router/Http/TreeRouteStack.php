@@ -10,12 +10,12 @@
 
 namespace Zend\Mvc\Router\Http;
 
-use Zend\Mvc\Router\Exception;
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Mvc\Router\SimpleRouteStack;
-use Zend\Mvc\Router\RouteInterface as BaseRoute;
+use Zend\Mvc\Router\Exception;
 use Zend\Mvc\Router\Http\RouteInterface;
+use Zend\Mvc\Router\RouteInterface as BaseRoute;
+use Zend\Mvc\Router\SimpleRouteStack;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Uri\Http as HttpUri;
 

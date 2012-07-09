@@ -10,11 +10,11 @@
 
 namespace Zend\View\Helper\Navigation;
 
-use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use RecursiveIteratorIterator;
+use Traversable;
 use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Page\AbstractPage;
+use Zend\Stdlib\ArrayUtils;
 use Zend\View;
 use Zend\View\Exception;
 

@@ -11,11 +11,11 @@
 namespace Zend\Mvc\Router\Http;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\RequestInterface as Request;
-use Zend\Mvc\Router\RoutePluginManager;
 use Zend\Mvc\Router\Exception;
 use Zend\Mvc\Router\PriorityList;
+use Zend\Mvc\Router\RoutePluginManager;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
 
 /**
  * RouteInterface part.

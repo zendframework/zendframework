@@ -10,9 +10,9 @@
 
 namespace Zend\Db\TableGateway\Feature\EventFeature;
 
-use Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\EventInterface,
-    Zend\Db\TableGateway\AbstractTableGateway;
+use Zend\Db\TableGateway\AbstractTableGateway;
+use Zend\EventManager\EventInterface;
+use Zend\EventManager\EventManagerInterface;
 
 /**
  * @category   Zend

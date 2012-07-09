@@ -10,8 +10,8 @@
 
 namespace Zend\Db\TableGateway\Feature;
 
-use Zend\Db\TableGateway\AbstractTableGateway,
-    Zend\Db\TableGateway\Exception;
+use Zend\Db\TableGateway\AbstractTableGateway;
+use Zend\Db\TableGateway\Exception;
 
 abstract class AbstractFeature extends AbstractTableGateway
 {

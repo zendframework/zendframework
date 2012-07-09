@@ -11,12 +11,12 @@
 namespace Zend\Service\Twitter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Http;
 use Zend\OAuth;
 use Zend\Rest;
-use Zend\Uri;
 use Zend\Rest\Client;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Uri;
 
 /**
  * @category   Zend

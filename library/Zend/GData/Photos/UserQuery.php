@@ -10,8 +10,8 @@
 
 namespace Zend\GData\Photos;
 
-use Zend\GData\Photos;
 use Zend\GData\App;
+use Zend\GData\Photos;
 
 /**
  * Assists in constructing queries for user entries.

@@ -12,11 +12,11 @@ namespace Zend\Di\Definition;
 
 use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
-use Zend\Code\Scanner\AggregateDirectoryScanner;
-use Zend\Code\Scanner\DirectoryScanner;
-use Zend\Code\Scanner\DerivedClassScanner;
-use Zend\Code\Scanner\FileScanner;
 use Zend\Code\Reflection;
+use Zend\Code\Scanner\AggregateDirectoryScanner;
+use Zend\Code\Scanner\DerivedClassScanner;
+use Zend\Code\Scanner\DirectoryScanner;
+use Zend\Code\Scanner\FileScanner;
 use Zend\Di\Definition\Annotation;
 
 class CompilerDefinition implements DefinitionInterface

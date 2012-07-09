@@ -10,8 +10,8 @@
 
 namespace Zend\Code\Generator\DocBlock;
 
-use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
 use Zend\Code\Generator\AbstractGenerator;
+use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
 
 /**
  * @category   Zend

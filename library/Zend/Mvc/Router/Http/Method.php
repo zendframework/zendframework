@@ -11,9 +11,9 @@
 namespace Zend\Mvc\Router\Http;
 
 use Traversable;
+use Zend\Mvc\Router\Exception;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;
-use Zend\Mvc\Router\Exception;
 
 /**
  * Method route.

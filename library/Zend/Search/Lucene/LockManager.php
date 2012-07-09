@@ -10,8 +10,8 @@
 
 namespace Zend\Search\Lucene;
 
-use Zend\Search\Lucene\Storage\Directory\DirectoryInterface as Directory;
 use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Storage\Directory\DirectoryInterface as Directory;
 
 /**
  * This is an utility class which provides index locks processing functionality

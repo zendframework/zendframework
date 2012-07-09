@@ -10,9 +10,9 @@
 
 namespace Zend\View\Helper\Escaper;
 
-use Zend\View\Helper;
-use Zend\View\Exception;
 use Zend\Escaper;
+use Zend\View\Exception;
+use Zend\View\Helper;
 
 /**
  * Helper for escaping values

@@ -10,8 +10,8 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Mvc\Exception\RuntimeException;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Zend\Mvc\Exception\RuntimeException;
 use Zend\Mvc\InjectApplicationEventInterface;
 
 /**

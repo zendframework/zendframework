@@ -12,11 +12,11 @@ namespace Zend\View\Helper\Navigation;
 
 use RecursiveIteratorIterator;
 use Zend\Acl;
+use Zend\I18n\Translator\Translator;
 use Zend\Navigation;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\I18n\Translator\Translator;
 use Zend\View;
 use Zend\View\Exception;
 

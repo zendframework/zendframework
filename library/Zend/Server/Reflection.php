@@ -10,8 +10,8 @@
 
 namespace Zend\Server;
 
-use Zend\Server\Reflection\ReflectionClass,
-    Zend\Server\Reflection\ReflectionFunction;
+use Zend\Server\Reflection\ReflectionClass;
+use Zend\Server\Reflection\ReflectionFunction;
 
 /**
  * Reflection for determining method signatures to use with server classes

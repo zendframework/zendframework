@@ -10,12 +10,12 @@
 
 namespace Zend\Db\ResultSet;
 
-use Iterator;
-use Zend\Db\Adapter\Driver\ResultInterface;
 use ArrayIterator;
-use IteratorAggregate;
-use Countable;
 use ArrayObject;
+use Countable;
+use Iterator;
+use IteratorAggregate;
+use Zend\Db\Adapter\Driver\ResultInterface;
 
 /**
  * @category   Zend

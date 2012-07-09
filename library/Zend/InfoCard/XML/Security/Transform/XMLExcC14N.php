@@ -10,8 +10,8 @@
 
 namespace Zend\InfoCard\XML\Security\Transform;
 
-use Zend\InfoCard\XML\Security\Transform;
 use Zend\InfoCard\XML\Security\Exception;
+use Zend\InfoCard\XML\Security\Transform;
 
 /**
  * A Transform to perform C14n XML Exclusive Canonicalization

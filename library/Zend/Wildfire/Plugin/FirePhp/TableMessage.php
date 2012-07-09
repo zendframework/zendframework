@@ -10,9 +10,9 @@
 
 namespace Zend\Wildfire\Plugin\FirePhp;
 
-use Zend\Wildfire\Plugin\FirePhp,
-    Zend\Wildfire\Plugin\Exception,
-    Zend\Wildfire;
+use Zend\Wildfire;
+use Zend\Wildfire\Plugin\Exception;
+use Zend\Wildfire\Plugin\FirePhp;
 
 /**
  * A message envelope that can be updated for the duration of the requet before

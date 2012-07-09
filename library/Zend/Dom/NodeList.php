@@ -10,12 +10,12 @@
 
 namespace Zend\Dom;
 
-use Iterator;
 use Countable;
 use DOMDocument;
+use DOMElement;
 use DOMNodeList;
 use DOMXPath;
-use DOMElement;
+use Iterator;
 
 /**
  * Nodelist for DOM XPath query

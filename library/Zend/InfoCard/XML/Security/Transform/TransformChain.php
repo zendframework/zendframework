@@ -10,8 +10,8 @@
 
 namespace Zend\InfoCard\XML\Security\Transform;
 
-use Zend\InfoCard\XML\Security\Transform;
 use Zend\InfoCard\XML\Security;
+use Zend\InfoCard\XML\Security\Transform;
 
 /**
  * A class to create a transform rule set based on XML URIs and then apply those rules

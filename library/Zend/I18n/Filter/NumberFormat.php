@@ -10,9 +10,9 @@
 
 namespace Zend\I18n\Filter;
 
-use Zend\I18n\Exception;
 use NumberFormatter;
 use Traversable;
+use Zend\I18n\Exception;
 
 class NumberFormat extends AbstractLocale
 {

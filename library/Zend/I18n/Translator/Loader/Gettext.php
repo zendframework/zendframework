@@ -11,8 +11,8 @@
 namespace Zend\I18n\Translator\Loader;
 
 use Zend\I18n\Exception;
-use Zend\I18n\Translator\TextDomain;
 use Zend\I18n\Translator\Plural\Rule as PluralRule;
+use Zend\I18n\Translator\TextDomain;
 
 /**
  * Gettext loader.

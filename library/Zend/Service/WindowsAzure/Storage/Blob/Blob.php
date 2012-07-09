@@ -16,8 +16,8 @@ use Zend\Service\WindowsAzure\Credentials;
 use Zend\Service\WindowsAzure\Exception\DomainException;
 use Zend\Service\WindowsAzure\Exception\InvalidArgumentException;
 use Zend\Service\WindowsAzure\Exception\RuntimeException;
-use Zend\Service\WindowsAzure\Storage;
 use Zend\Service\WindowsAzure\RetryPolicy;
+use Zend\Service\WindowsAzure\Storage;
 
 /**
  * @category   Zend

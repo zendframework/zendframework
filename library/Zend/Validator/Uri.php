@@ -11,8 +11,8 @@
 namespace Zend\Validator;
 
 use Traversable;
-use Zend\Uri\Uri as UriHandler;
 use Zend\Uri\Exception\ExceptionInterface as UriException;
+use Zend\Uri\Uri as UriHandler;
 
 /**
  * @category   Zend

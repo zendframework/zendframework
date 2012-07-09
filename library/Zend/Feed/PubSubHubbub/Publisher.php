@@ -11,8 +11,8 @@
 namespace Zend\Feed\PubSubHubbub;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Http\Request as HttpRequest;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Uri;
 use Zend\Version;
 

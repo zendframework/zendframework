@@ -10,9 +10,9 @@
 
 namespace Zend\Db\TableGateway\Feature;
 
+use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\RowGateway\RowGateway;
 use Zend\Db\RowGateway\RowGatewayInterface;
-use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\Exception;
 
 class RowGatewayFeature extends AbstractFeature

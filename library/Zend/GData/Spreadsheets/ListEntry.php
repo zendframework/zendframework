@@ -10,8 +10,8 @@
 
 namespace Zend\GData\Spreadsheets;
 
-use Zend\GData\Spreadsheets;
 use Zend\GData\App;
+use Zend\GData\Spreadsheets;
 
 /**
  * Concrete class for working with List entries.

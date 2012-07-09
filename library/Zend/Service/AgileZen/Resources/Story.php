@@ -10,8 +10,8 @@
 
 namespace Zend\Service\AgileZen\Resources;
 
-use Zend\Service\AgileZen\AgileZen;
 use Zend\Service\AgileZen\AbstractEntity;
+use Zend\Service\AgileZen\AgileZen;
 use Zend\Service\AgileZen\Container;
 
 /**

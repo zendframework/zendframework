@@ -10,8 +10,8 @@
 
 namespace Zend\Log\Writer;
 
-use Zend\Log\Formatter\Simple as SimpleFormatter;
 use Zend\Log\Exception;
+use Zend\Log\Formatter\Simple as SimpleFormatter;
 
 /**
  * @category   Zend

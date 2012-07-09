@@ -10,12 +10,12 @@
 
 namespace Zend\Soap;
 
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
+use stdClass;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use DOMDocument,
-    DOMNode,
-    SimpleXMLElement,
-    stdClass;
 
 /**
  * Zend_Soap_Server

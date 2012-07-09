@@ -10,9 +10,9 @@
 
 namespace Zend\Session;
 
-use Zend\EventManager\EventManager,
-    Zend\Session\Storage\StorageInterface as Storage,
-    Zend\Session\Validator\ValidatorInterface as Validator;
+use Zend\EventManager\EventManager;
+use Zend\Session\Storage\StorageInterface as Storage;
+use Zend\Session\Validator\ValidatorInterface as Validator;
 
 /**
  * Validator chain for validating sessions

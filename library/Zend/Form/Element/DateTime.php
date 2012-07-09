@@ -15,9 +15,9 @@ use DateTime as PhpDateTime;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Date as DateValidator;
+use Zend\Validator\DateStep as DateStepValidator;
 use Zend\Validator\GreaterThan as GreaterThanValidator;
 use Zend\Validator\LessThan as LessThanValidator;
-use Zend\Validator\DateStep as DateStepValidator;
 use Zend\Validator\ValidatorInterface;
 
 /**

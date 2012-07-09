@@ -10,8 +10,8 @@
 
 namespace Zend\Queue\Adapter;
 
-use Zend\Db\Adapter\AbstractAdapter as AbstractDBAdapter;
 use Zend\Db as DB_ns;
+use Zend\Db\Adapter\AbstractAdapter as AbstractDBAdapter;
 use Zend\Db\Select;
 use Zend\Queue\Exception;
 use Zend\Queue\Message;

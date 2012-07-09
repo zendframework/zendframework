@@ -11,9 +11,9 @@
 namespace Zend\Text\Table;
 
 use Traversable;
+use Zend\Loader\PrefixPathLoader;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Loader\PrefixPathLoader,
-    Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
+use Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
 
 /**
  * Zend\Text\Table\Table enables developers to create tables out of characters

@@ -9,8 +9,8 @@
  */
 
 namespace Zend\Search\Lucene\Index\SegmentWriter;
-use Zend\Search\Lucene\Storage\Directory;
 use Zend\Search\Lucene\Index as LuceneIndex;
+use Zend\Search\Lucene\Storage\Directory;
 
 /**
  * @category   Zend

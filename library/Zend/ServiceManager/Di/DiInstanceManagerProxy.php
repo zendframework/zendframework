@@ -10,8 +10,8 @@
 
 namespace Zend\ServiceManager\Di;
 
-use Zend\Di\InstanceManager as DiInstanceManager,
-    Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Di\InstanceManager as DiInstanceManager;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class DiInstanceManagerProxy extends DiInstanceManager
 {

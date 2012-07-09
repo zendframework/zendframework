@@ -11,9 +11,9 @@
 namespace Zend\OAuth\Config;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\OAuth\Config as OAuthConfig;
 use Zend\OAuth;
+use Zend\OAuth\Config as OAuthConfig;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Uri;
 
 /**

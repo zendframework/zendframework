@@ -10,8 +10,8 @@
 
 namespace Zend\Config\Writer;
 
-use Zend\Config\Exception;
 use XMLWriter;
+use Zend\Config\Exception;
 
 /**
  * @category   Zend

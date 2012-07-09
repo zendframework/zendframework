@@ -10,8 +10,8 @@
 
 namespace Zend\Soap\Client;
 
-use Zend\Soap\Client as SOAPClient,
-    Zend\Soap\Server as SOAPServer;
+use Zend\Soap\Client as SOAPClient;
+use Zend\Soap\Server as SOAPServer;
 
 /**
  * \Zend\Soap\Client\Local

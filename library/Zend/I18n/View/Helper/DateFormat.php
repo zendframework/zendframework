@@ -13,8 +13,8 @@ namespace Zend\I18n\View\Helper;
 use DateTime;
 use IntlDateFormatter;
 use Locale;
-use Zend\View\Helper\AbstractHelper;
 use Zend\I18n\Exception;
+use Zend\View\Helper\AbstractHelper;
 
 /**
  * View helper for formatting dates.

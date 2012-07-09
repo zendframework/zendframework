@@ -10,8 +10,8 @@
 
 namespace Zend\Service\WindowsAzure\Credentials;
 
-use Zend\Service\WindowsAzure\Storage;
 use Zend\Http\Request;
+use Zend\Service\WindowsAzure\Storage;
 
 /**
  * @category   Zend

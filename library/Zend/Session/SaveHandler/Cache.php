@@ -10,11 +10,10 @@
 
 namespace Zend\Session\SaveHandler;
 
+use use;
 use Zend\Cache\Storage\ClearExpiredInterface;
-
-use Zend\Cache\Storage\StorageInterface as CacheStorage,
-    Zend\Cache\Storage\ClearExpiredInterface as ClearExpiredCacheStorage,
-    Zend\Session\Exception;
+use Zend\Cache\Storage\ClearExpiredInterface as ClearExpiredCacheStorage;
+use Zend\Session\Exception;
 
 /**
  * Cache session save handler

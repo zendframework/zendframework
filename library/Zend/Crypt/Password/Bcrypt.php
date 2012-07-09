@@ -10,10 +10,10 @@
 
 namespace Zend\Crypt\Password;
 
-use Zend\Math\Math;
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Math\Exception as MathException;
+use Zend\Math\Math;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Bcrypt algorithm using crypt() function of PHP

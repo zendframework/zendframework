@@ -10,11 +10,11 @@
 
 namespace Zend\Di\ServiceLocator;
 
-use Zend\Di\Di;
-use Zend\Code\Generator\FileGenerator;
 use Zend\Code\Generator\ClassGenerator;
+use Zend\Code\Generator\FileGenerator;
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\ParameterGenerator;
+use Zend\Di\Di;
 use Zend\Di\Exception;
 
 /**

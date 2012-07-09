@@ -12,9 +12,9 @@ namespace Zend\Form\Element;
 
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
-use Zend\Validator\ValidatorInterface;
 use Zend\Validator\EmailAddress as EmailValidator;
 use Zend\Validator\Explode as ExplodeValidator;
+use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend

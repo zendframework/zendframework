@@ -11,8 +11,8 @@
 namespace Zend\Service\LiveDocx;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Soap\Client as SoapClient;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend

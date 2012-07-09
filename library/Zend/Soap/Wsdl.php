@@ -10,10 +10,10 @@
 
 namespace Zend\Soap;
 
-use DOMDocument,
-    DOMElement,
-    Zend\Uri\Uri,
-    Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy;
+use DOMDocument;
+use DOMElement;
+use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy;
+use Zend\Uri\Uri;
 
 /**
  * \Zend\Soap\Wsdl

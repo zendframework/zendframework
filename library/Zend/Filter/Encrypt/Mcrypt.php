@@ -11,10 +11,10 @@
 namespace Zend\Filter\Encrypt;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Filter\Exception;
 use Zend\Filter\Compress;
 use Zend\Filter\Decompress;
+use Zend\Filter\Exception;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Encryption adapter for mcrypt

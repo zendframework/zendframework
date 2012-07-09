@@ -10,10 +10,10 @@
 
 namespace Zend\Log\Formatter;
 
-use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use DOMDocument;
 use DOMElement;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend

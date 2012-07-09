@@ -9,9 +9,9 @@
  */
 
 namespace Zend\Search\Lucene\Search\Weight;
+use Zend\Search\Lucene;
 use Zend\Search\Lucene\Index;
 use Zend\Search\Lucene\Search\Query;
-use Zend\Search\Lucene;
 
 /**
  * @category   Zend

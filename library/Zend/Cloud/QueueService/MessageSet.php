@@ -10,6 +10,9 @@
 
 namespace Zend\Cloud\QueueService;
 
+use Countable;
+use IteratorAggregate;
+
 /**
  * Collection of message objects
  *
@@ -17,7 +20,9 @@ namespace Zend\Cloud\QueueService;
  * @package    Zend_Cloud
  * @subpackage QueueService
  */
-class MessageSet implements \Countable, \IteratorAggregate
+class MessageSet implements 
+    Countable, 
+    IteratorAggregate
 {
     /** @var int */
     protected $_messageCount;

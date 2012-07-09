@@ -10,6 +10,10 @@
 
 namespace Zend\Cloud\DocumentService;
 
+use ArrayAccess;
+use Countable;
+use IteratorAggregate;
+
 /**
  * Class encapsulating documents. Fields are stored in a name/value
  * array. Data are represented as strings.
@@ -20,8 +24,10 @@ namespace Zend\Cloud\DocumentService;
  * @package    Zend_Cloud
  * @subpackage DocumentService
  */
-class Document
-    implements \ArrayAccess, \IteratorAggregate, \Countable
+class Document implements 
+    ArrayAccess,
+    Countable,
+    IteratorAggregate
 {
     /** key in document denoting identifier */
     const KEY_FIELD = '_id';

@@ -12,4 +12,3 @@ namespace Zend\Cloud\Exception;
 
 interface ExceptionInterface
 {}
-

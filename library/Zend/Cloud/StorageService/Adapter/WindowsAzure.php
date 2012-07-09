@@ -11,12 +11,12 @@
 namespace Zend\Cloud\StorageService\Adapter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Cloud\StorageService\Adapter;
 use Zend\Cloud\StorageService\Exception;
 use Zend\Service\WindowsAzure\Exception as WindowsAzureException;
-use Zend\Service\WindowsAzure\Storage\Storage;
 use Zend\Service\WindowsAzure\Storage\Blob\Blob;
+use Zend\Service\WindowsAzure\Storage\Storage;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  *

@@ -10,9 +10,9 @@
 
 namespace Zend\Cloud\Infrastructure;
 
+use ArrayAccess;
 use Countable;
 use Iterator;
-use ArrayAccess;
 
 /**
  * List of instances
@@ -20,7 +20,10 @@ use ArrayAccess;
  * @package    Zend_Cloud
  * @subpackage Infrastructure
  */
-class InstanceList implements Countable, Iterator, ArrayAccess
+class InstanceList implements 
+    ArrayAccess,
+    Countable,
+    Iterator
 {
     /**
      * @var array Array of Zend\Cloud\Infrastructure\Instance

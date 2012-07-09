@@ -16,7 +16,6 @@ use Zend\Cloud\Infrastructure\Exception;
  * @package    Zend_Cloud_Infrastructure
  * @subpackage Infrastructure
  */
-class InvalidArgumentException
-    extends Exception\InvalidArgumentException
-    implements ExceptionInterface
+class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+    ExceptionInterface
 {}

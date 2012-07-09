@@ -11,16 +11,16 @@
 namespace Zend\Cloud\Infrastructure\Adapter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Service\Amazon\Ec2\Instance as Ec2Instance;
-use Zend\Service\Amazon\Ec2\Image as Ec2Image;
+use Zend\Cloud\Infrastructure\Image;
+use Zend\Cloud\Infrastructure\ImageList;
+use Zend\Cloud\Infrastructure\Instance;
+use Zend\Cloud\Infrastructure\InstanceList;
 use Zend\Service\Amazon\Ec2\AvailabilityZones as Ec2Zone;
 use Zend\Service\Amazon\Ec2\CloudWatch as Ec2Monitor;
 use Zend\Service\Amazon\Ec2\Exception as Ec2Exception;
-use Zend\Cloud\Infrastructure\Instance;
-use Zend\Cloud\Infrastructure\InstanceList;
-use Zend\Cloud\Infrastructure\Image;
-use Zend\Cloud\Infrastructure\ImageList;
+use Zend\Service\Amazon\Ec2\Image as Ec2Image;
+use Zend\Service\Amazon\Ec2\Instance as Ec2Instance;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Amazon EC2 adapter for infrastructure service

@@ -11,10 +11,10 @@
 namespace Zend\Cloud\QueueService\Adapter;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Service\Amazon\Sqs\Sqs as AmazonSqs;
-use Zend\Cloud\QueueService\Message;
 use Zend\Cloud\QueueService\Exception;
+use Zend\Cloud\QueueService\Message;
+use Zend\Service\Amazon\Sqs\Sqs as AmazonSqs;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * SQS adapter for simple queue service.

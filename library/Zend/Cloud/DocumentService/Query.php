@@ -10,7 +10,6 @@
 
 namespace Zend\Cloud\DocumentService;
 
-
 /**
  * Generic query object
  *

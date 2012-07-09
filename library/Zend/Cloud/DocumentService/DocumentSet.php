@@ -10,6 +10,9 @@
 
 namespace Zend\Cloud\DocumentService;
 
+use Countable;
+use IteratorAggregate;
+
 /**
  * Class encapsulating a set of documents
  *
@@ -17,7 +20,9 @@ namespace Zend\Cloud\DocumentService;
  * @package    Zend_Cloud
  * @subpackage DocumentService
  */
-class DocumentSet implements \Countable, \IteratorAggregate
+class DocumentSet implements 
+    Countable, 
+    IteratorAggregate
 {
     /** @var int */
     protected $_documentCount;

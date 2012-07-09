@@ -10,9 +10,9 @@
 
 namespace Zend\Cloud\DocumentService\Adapter\SimpleDb;
 
-use Zend\Cloud\DocumentService\Query as QueryInterface;
 use Zend\Cloud\DocumentService\Adapter\Exception;
 use Zend\Cloud\DocumentService\Adapter\SimpleDb as SimpleDbAdapter;
+use Zend\Cloud\DocumentService\Query as QueryInterface;
 
 /**
  * Class implementing Query adapter for working with SimpleDb queries in a

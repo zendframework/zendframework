@@ -28,8 +28,14 @@ abstract class SubClass
             $isSubclassFuncCache = array();
         }
         if (!array_key_exists($className, $isSubclassFuncCache)) {
-            $isSubclassFuncCache[$className] = class_parents($className, true) + class_implements($className, true);
+            $parents = class_parents($className, true) + class_implements($className, true);
+            $caseInsensitiveParents = array();
+            foreach ($parents as $parent) {
+                $caseInsensitiveParent = strtolower($parent);
+                $caseInsensitiveParents[$caseInsensitiveParent] = $caseInsensitiveParent;
+            }
+            $isSubclassFuncCache[strtolower($className)] = $caseInsensitiveParents;
         }
-        return (isset($isSubclassFuncCache[$className][$type]));
+        return (isset($isSubclassFuncCache[strtolower($className)][strtolower($type)]));
     }
 }

@@ -33,6 +33,7 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\Form\Exception;
 use Zend\Form\Factory;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\SubClass;
 
 /**
  * Parses a class' properties for annotations in order to create a form and
@@ -339,7 +340,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
             : 'Zend\Form\Element';
 
         // Compose as a fieldset or an element, based on specification type
-        if ($this->isFieldset($type)) {
+        if (SubClass::isSubclassOf($type, 'Zend\Form\FieldsetInterface')) {
             if (!isset($formSpec['fieldsets'])) {
                 $formSpec['fieldsets'] = array();
             }
@@ -386,23 +387,4 @@ class AnnotationBuilder implements EventManagerAwareInterface
         return (bool) $results->last();
     }
 
-    /**
-     * Determine if the type represents a fieldset
-     *
-     * For PHP versions >= 5.3.7, uses is_subclass_of; otherwise, uses
-     * reflection to determine the interfaces implemented.
-     *
-     * @param  string $type
-     * @return bool
-     */
-    protected function isFieldset($type)
-    {
-        if (version_compare(PHP_VERSION, '5.3.7', 'gte')) {
-            return is_subclass_of($type, 'Zend\Form\FieldsetInterface');
-        }
-
-        $r = new ClassReflection($type);
-        $interfaces = $r->getInterfaceNames();
-        return (in_array('Zend\Form\FieldsetInterface', $interfaces));
-    }
 }

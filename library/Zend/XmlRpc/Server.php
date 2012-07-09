@@ -21,10 +21,10 @@
 
 namespace Zend\XmlRpc;
 
-use ReflectionClass;
 use Zend\Server\AbstractServer;
 use Zend\Server\Definition;
 use Zend\Server\Reflection;
+use Zend\Stdlib\SubClass;
 
 /**
  * An XML-RPC server implementation
@@ -452,10 +452,9 @@ class Server extends AbstractServer
      */
     public function setResponseClass($class)
     {
-        if (!class_exists($class) or
-            ($c = new ReflectionClass($class) and !$c->isSubclassOf('Zend\\XmlRpc\\Response'))) {
-
+        if (!class_exists($class) || !SubClass::isSubclassOf($class, 'Zend\XmlRpc\Response')) {
             throw new Server\Exception\InvalidArgumentException('Invalid response class');
+
         }
         $this->responseClass = $class;
         return true;

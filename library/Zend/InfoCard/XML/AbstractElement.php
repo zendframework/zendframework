@@ -23,6 +23,7 @@ namespace Zend\InfoCard\XML;
 
 use DOMElement;
 use SimpleXMLElement;
+use Zend\Stdlib\SubClass;
 
 /**
  * An abstract class representing a an XML data block
@@ -80,7 +81,7 @@ abstract class AbstractElement extends SimpleXMLElement implements ElementInterf
             throw new Exception\InvalidArgumentException('Class provided for converting does not exist');
         }
 
-        if(!is_subclass_of($classname, 'Zend\InfoCard\XML\ElementInterface')) {
+        if (!SubClass::isSubclassOf($classname, 'Zend\InfoCard\XML\ElementInterface')) {
             throw new Exception\InvalidArgumentException("DOM element must be converted to an instance of Zend_InfoCard_Xml_Element");
         }
 

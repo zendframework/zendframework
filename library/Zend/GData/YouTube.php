@@ -759,8 +759,8 @@ class YouTube extends Media
             $messageEntry->setId($this->newId($videoId));
             // TODO there seems to be a bug where v1 inbox entries dont
             // retain their description...
-            $messageEntry->setDescription(
-                new YouTube\Extension\Description($body));
+            $messageEntry->setSummary(
+                new App\Extension\Summary($body));
 
         } else {
             if (!$videoId) {

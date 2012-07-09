@@ -127,7 +127,7 @@ class GData extends App
 
         $feed = self::importString($feedContent, $className);
         if ($client != null) {
-            $feed->setHttpClient($client);
+            $feed->setService($app);
         }
         return $feed;
     }

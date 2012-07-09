@@ -33,6 +33,8 @@ use Zend\GData\Spreadsheets;
  */
 class HttpExceptionTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Spreadsheets */
+    public $gdata;
 
     public function setUp()
     {
@@ -55,13 +57,8 @@ class HttpExceptionTest extends \PHPUnit_Framework_TestCase
             $entry = $this->gdata->insertRow($rowData, $this->sprKey);
             $this->fail('Expecting Zend\GData\App\HttpException');
         } catch (\Zend\GData\App\HttpException $hExc) {
-            $this->assertThat($hExc,
-                $this->isInstanceOf('Zend\GData\App\HttpException'),
-                'Expecting Zend\GData\App\HttpException, got '
-                . get_class($hExc));
-
             $message = $hExc->getMessage();
-            $this->assertEquals($message, 'Expected response code 200, got 400');
+            $this->assertEquals('Expected response code 200, got 400', $message);
             $body = $hExc->getRawResponseBody();
             $this->assertNotNull($body);
             $this->assertNotEquals(stripos($body,

@@ -60,13 +60,6 @@ class InboxEntry extends \Zend\GData\Media\Entry
     protected $_statistics = null;
 
     /**
-     * The yt:description element of this entry.
-     *
-     * @var \Zend\GData\YouTube\Extension\Description
-     */
-    protected $_description = null;
-
-    /**
      * Creates a subscription entry, representing an individual subscription
      * in a list of subscriptions, usually associated with an individual user.
      *
@@ -92,10 +85,6 @@ class InboxEntry extends \Zend\GData\Media\Entry
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_description != null) {
-            $element->appendChild(
-                $this->_description->getDOM($element->ownerDocument));
-        }
         if ($this->_rating != null) {
             $element->appendChild(
                 $this->_rating->getDOM($element->ownerDocument));
@@ -131,11 +120,6 @@ class InboxEntry extends \Zend\GData\Media\Entry
                 $rating->transferFromDOM($child);
                 $this->_rating = $rating;
                 break;
-            case $this->lookupNamespace('yt') . ':' . 'description':
-                $description = new Extension\Description();
-                $description->transferFromDOM($child);
-                $this->_description = $description;
-                break;
             case $this->lookupNamespace('yt') . ':' . 'statistics':
                 $statistics = new Extension\Statistics();
                 $statistics->transferFromDOM($child);
@@ -144,43 +128,6 @@ class InboxEntry extends \Zend\GData\Media\Entry
             default:
                 parent::takeChildFromDOM($child);
                 break;
-        }
-    }
-
-    /**
-     * Get the yt:description
-     *
-     * @throws \Zend\GData\App\VersionException
-     * @return \Zend\GData\YouTube\Extension\Description|null
-     */
-    public function getDescription()
-    {
-        if ($this->getMajorProtocolVersion() == 2) {
-            throw new App\VersionException('The getDescription ' .
-                ' method is only supported in version 1 of the YouTube ' .
-                'API.');
-        } else {
-            return $this->_description;
-        }
-    }
-
-    /**
-     * Sets the yt:description element for a new inbox entry.
-     *
-     * @param \Zend\GData\YouTube\Extension\Description $description The
-     *        description.
-     * @throws \Zend\GData\App\VersionException
-     * @return \Zend\GData\YouTube\InboxEntry Provides a fluent interface
-     */
-    public function setDescription($description = null)
-    {
-        if ($this->getMajorProtocolVersion() == 2) {
-            throw new App\VersionException('The setDescription ' .
-                ' method is only supported in version 1 of the YouTube ' .
-                'API.');
-        } else {
-            $this->_description = $description;
-            return $this;
         }
     }
 

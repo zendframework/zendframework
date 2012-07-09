@@ -94,49 +94,13 @@ abstract class AbstractFeedEntryParent extends AbstractBase
     }
 
     /**
-     * Set the HTTP client instance
-     *
-     * Sets the HTTP client object to use for retrieving the feed.
-     *
-     * @deprecated Deprecated as of Zend Framework 1.7. Use
-     *             setService() instead.
-     * @param  \Zend\Http\Client $httpClient
-     * @return AbstractFeedEntryParent Provides a fluent interface
-     */
-    public function setHttpClient(\Zend\Http\Client $httpClient)
-    {
-        if (!$this->_service) {
-            $this->_service = new App();
-        }
-        $this->_service->setHttpClient($httpClient);
-        return $this;
-    }
-
-    /**
-     * Gets the HTTP client object. If none is set, a new Zend_Http_Client
-     * will be used.
-     *
-     * @deprecated Deprecated as of Zend Framework 1.7. Use
-     *             getService() instead.
-     * @return Zend_Http_Client_Abstract
-     */
-    public function getHttpClient()
-    {
-        if (!$this->_service) {
-            $this->_service = new App();
-        }
-        $client = $this->_service->getHttpClient();
-        return $client;
-    }
-
-    /**
      * Set the active service instance for this object. This will be used to
      * perform network requests, such as when calling save() and delete().
      *
      * @param \Zend\GData\App $instance The new service instance.
      * @return AbstractFeedEntryParent Provides a fluent interface.
      */
-    public function setService($instance)
+    public function setService(App $instance = null)
     {
         $this->_service = $instance;
         return $this;

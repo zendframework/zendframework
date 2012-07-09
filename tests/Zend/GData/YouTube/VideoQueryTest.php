@@ -36,15 +36,6 @@ use Zend\GData\App;
 class VideoQueryTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testQueryStringConstruction () {
-        $yt = new YouTube();
-        $query = $yt->newVideoQuery();
-        $query->setOrderBy('viewCount');
-        $query->setVideoQuery('foobar');
-        $expectedString = '?orderby=viewCount&vq=foobar';
-        $this->assertEquals($expectedString, $query->getQueryString());
-    }
-
     public function testQueryStringConstructionV2() {
         $yt = new YouTube();
         $query = $yt->newVideoQuery();
@@ -52,34 +43,6 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
         $query->setVideoQuery('version2');
         $expectedString = '?orderby=viewCount&q=version2';
         $this->assertEquals($expectedString, $query->getQueryString(2));
-    }
-
-    public function testSafeSearchQueryV2() {
-        $yt = new YouTube();
-        $query = $yt->newVideoQuery();
-        $exceptionCaught = false;
-        $query->setRacy('include');
-        try {
-            $query->getQueryString(2);
-        } catch (App\VersionException $e) {
-          $exceptionCaught = true;
-        }
-        $this->assertTrue($exceptionCaught, 'Zend\GData\App\VersionException' .
-            ' expected but not found');
-    }
-
-    public function testLocationRadiusV1() {
-        $yt = new YouTube();
-        $query = $yt->newVideoQuery();
-        $exceptionCaught = false;
-        $query->setLocationRadius('1km');
-        try {
-            $query->getQueryString(1);
-        } catch (App\VersionException $e) {
-          $exceptionCaught = true;
-        }
-        $this->assertTrue($exceptionCaught, 'Zend\GData\App\VersionException' .
-            ' expected but not found');
     }
 
     public function testLocationV2() {

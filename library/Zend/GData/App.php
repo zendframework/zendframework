@@ -670,7 +670,7 @@ class App
         }
         if ($response->isRedirect() && $response->getStatusCode() != '304') {
             if ($remainingRedirects > 0) {
-                $newUrl = $response->getHeaders()->get('Location');
+                $newUrl = $response->getHeaders()->get('Location')->getFieldValue();
                 $response = $this->performHttpRequest(
                     $method, $newUrl, $headers, $body,
                     $contentType, $remainingRedirects);
@@ -722,7 +722,7 @@ class App
         }
         $feed = self::importString($feedContent, $className);
         if ($client != null) {
-            $feed->setHttpClient($client);
+            $feed->setService($app);
         }
         return $feed;
     }
@@ -767,7 +767,7 @@ class App
         $feed = self::importString($feedContent, $className,
             $majorProtocolVersion, $minorProtocolVersion);
         if ($this->getHttpClient() != null) {
-            $feed->setHttpClient($this->getHttpClient());
+            $feed->setService($this);
         }
         $etag = $response->getHeaders()->get('ETag');
         if ($etag instanceof Etag) {
@@ -812,7 +812,7 @@ class App
         $feed->setMajorProtocolVersion($majorProtocolVersion);
         $feed->setMinorProtocolVersion($minorProtocolVersion);
         $feed->transferFromXML($string);
-        $feed->setHttpClient(self::getstaticHttpClient());
+        $feed->setService(new static(self::getstaticHttpClient()));
         return $feed;
     }
 
@@ -954,7 +954,7 @@ class App
         $response = $this->post($data, $uri, null, null, $extraHeaders);
 
         $returnEntry = new $className($response->getBody());
-        $returnEntry->setHttpClient(self::getstaticHttpClient());
+        $returnEntry->setService(new static(self::getstaticHttpClient()));
 
         $etag = $response->getHeaders()->get('ETag');
         if ($etag instanceof Etag) {
@@ -993,7 +993,7 @@ class App
 
         $response = $this->put($data, $uri, null, null, $extraHeaders);
         $returnEntry = new $className($response->getBody());
-        $returnEntry->setHttpClient(self::getstaticHttpClient());
+        $returnEntry->setService(new static(self::getstaticHttpClient()));
 
         $etag = $response->getHeaders()->get('ETag');
         if ($etag instanceof Etag) {
@@ -1037,7 +1037,7 @@ class App
                 $reflectionObj = new \ReflectionClass($foundClassName);
                 $instance = $reflectionObj->newInstanceArgs($args);
                 if ($instance instanceof App\AbstractFeedEntryParent) {
-                    $instance->setHttpClient($this->_httpClient);
+                    $instance->setService($this);
 
                     // Propogate version data
                     $instance->setMajorProtocolVersion(

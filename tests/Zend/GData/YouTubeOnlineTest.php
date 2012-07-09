@@ -126,10 +126,10 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
     public function testRetrieveUserProfile()
     {
         $entry = $this->gdata->getUserProfile($this->ytAccount);
-        $this->assertEquals($this->ytAccount . ' Channel', $entry->title->text);
+        $this->assertEquals($this->ytAccount, $entry->title->text);
         $this->assertEquals($this->ytAccount, $entry->username->text);
         $this->assertEquals('I\'m a lonely test account, with little to do but sit around and wait for people to use me.  I get bored in between releases and often sleep to pass the time.  Please use me more often, as I love to show off my talent in breaking your code.',
-                $entry->description->text);
+                $entry->summary->text);
         $this->assertEquals(32, $entry->age->text);
         $this->assertEquals('crime and punishment, ps i love you, the stand', $entry->books->text);
         $this->assertEquals('Google', $entry->company->text);
@@ -202,20 +202,6 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testRetrieveTopRatedVideos()
-    {
-        $feed = $this->gdata->getTopRatedVideoFeed();
-        $this->assertTrue($feed->totalResults->text > 10);
-        $this->assertEquals('Top Rated', $feed->title->text);
-        $this->assertTrue(count($feed->entry) > 0);
-        foreach ($feed->entry as $entry) {
-            $this->assertTrue($entry->rating->average > 3);
-            $this->assertEquals(1, $entry->rating->min);
-            $this->assertEquals(5, $entry->rating->max);
-            $this->assertTrue($entry->rating->numRaters > 2);
-        }
-    }
-
     public function testRetrieveTopRatedVideosV2()
     {
         $this->gdata->setMajorProtocolVersion(2);
@@ -254,20 +240,6 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $positionOfAPIProjection = strpos(
             $client->getLastRawRequest(), "/feeds/api/");
         $this->assertTrue(is_numeric($positionOfAPIProjection));
-    }
-
-    public function testRetrieveMostViewedVideos()
-    {
-        $feed = $this->gdata->getMostViewedVideoFeed();
-        $this->assertTrue($feed->totalResults->text > 10);
-        $this->assertEquals('Most Viewed', $feed->title->text);
-        $this->assertTrue(count($feed->entry) > 0);
-        foreach ($feed->entry as $entry) {
-            if ($entry->rating) {
-                $this->assertEquals(1, $entry->rating->min);
-                $this->assertEquals(5, $entry->rating->max);
-            }
-        }
     }
 
     /**
@@ -903,32 +875,6 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
             'specified in YouTube.php');
     }
 
-    public function testGetInboxFeedForCurrentUserV1()
-    {
-        $developerKey = constant(
-            'TESTS_ZEND_GDATA_YOUTUBE_DEVELOPER_KEY');
-        $clientId = constant(
-            'TESTS_ZEND_GDATA_YOUTUBE_CLIENT_ID');
-        $client = GData\ClientLogin::getHttpClient(
-            $this->user, $this->pass, 'youtube' , null, 'ZF_UnitTest', null, null,
-            'https://www.google.com/youtube/accounts/ClientLogin');
-
-        $youtube = new YouTube($client, 'ZF_UnitTest',
-            $clientId, $developerKey);
-
-        $inboxFeed = $youtube->getInboxFeedForCurrentUser();
-        $this->assertTrue($inboxFeed instanceof YouTube\InboxFeed);
-        $this->assertTrue(count($inboxFeed->entries) > 0, 'Test account ' .
-            $this->ytAccount . ' had no messages in their inbox.');
-
-        // get the first entry
-        $inboxFeed->rewind();
-        $inboxEntry = $inboxFeed->current();
-        $this->assertTrue(
-            $inboxEntry instanceof YouTube\InboxEntry);
-        $this->assertTrue($inboxEntry->getTitle()->text != '');
-    }
-
     public function testGetInboxFeedForCurrentUserV2()
     {
         $developerKey = constant(
@@ -979,33 +925,6 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
             'Sending a v2 test message from Zend_GData_YouTubeOnlineTest.',
             $videoEntry, null, 'gdpython');
 
-        $this->assertTrue(
-            $sentMessage instanceof YouTube\InboxEntry);
-    }
-
-    public function testSendAMessageV1()
-    {
-        $developerKey = constant(
-            'TESTS_ZEND_GDATA_YOUTUBE_DEVELOPER_KEY');
-        $clientId = constant(
-            'TESTS_ZEND_GDATA_YOUTUBE_CLIENT_ID');
-        $client = GData\ClientLogin::getHttpClient(
-            $this->user, $this->pass, 'youtube' , null, 'ZF_UnitTest', null, null,
-            'https://www.google.com/youtube/accounts/ClientLogin');
-
-        $youtube = new YouTube($client, 'ZF_UnitTest',
-            $clientId, $developerKey);
-        $youtube->setMajorProtocolVersion(1);
-
-        // get a video from the recently featured video feed
-        $videoFeed = $youtube->getRecentlyFeaturedVideoFeed();
-        $videoEntry = $videoFeed->entry[0];
-        $this->assertTrue($videoEntry instanceof YouTube\VideoEntry);
-
-        // sending message to gdpython (python client library unit test user)
-        $sentMessage = $youtube->sendVideoMessage(
-            'Sending a v1 test message from Zend_GData_YouTubeOnlineTest.',
-            $videoEntry, null, 'gdpython');
         $this->assertTrue(
             $sentMessage instanceof YouTube\InboxEntry);
     }

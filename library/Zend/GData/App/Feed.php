@@ -103,7 +103,7 @@ class Feed extends AbstractFeedSourceParent
         switch ($absoluteNodeName) {
         case $this->lookupNamespace('atom') . ':' . 'entry':
             $newEntry = new $this->entryClassName($child);
-            $newEntry->setHttpClient($this->getHttpClient());
+            $newEntry->setService($this->getService());
             $newEntry->setMajorProtocolVersion($this->getMajorProtocolVersion());
             $newEntry->setMinorProtocolVersion($this->getMinorProtocolVersion());
             $this->_entry[] = $newEntry;
@@ -275,7 +275,7 @@ class Feed extends AbstractFeedSourceParent
             'of results found.');
         }
         $nextLinkHref = $nextLink->getHref();
-        $service = new App($this->getHttpClient());
+        $service = $this->getService();
 
         return $service->getFeed($nextLinkHref, get_called_class());
     }
@@ -295,7 +295,7 @@ class Feed extends AbstractFeedSourceParent
             'of results found.');
         }
         $previousLinkHref = $previousLink->getHref();
-        $service = new App($this->getHttpClient());
+        $service = $this->getService();
 
         return $service->getFeed($previousLinkHref, get_called_class());
     }
@@ -304,7 +304,7 @@ class Feed extends AbstractFeedSourceParent
      * Set the major protocol version that should be used. Values < 1 will
      * cause a \Zend_Gdata\App\InvalidArgumentException to be thrown.
      *
-     * This value will be propogated to all child entries.
+     * This value will be propagated to all child entries.
      *
      * @see _majorProtocolVersion
      * @param (int|NULL) $value The major protocol version to use.

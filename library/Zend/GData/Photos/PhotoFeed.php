@@ -257,7 +257,7 @@ class PhotoFeed extends \Zend\GData\Feed
                 }
 
                 $newEntry = new $entryClassName($child);
-                $newEntry->setHttpClient($this->getHttpClient());
+                $newEntry->setService($this->getService());
                 $this->_entry[] = $newEntry;
                 break;
             default:

@@ -46,14 +46,6 @@ class PlaylistListEntry extends \Zend\GData\Entry
     protected $_feedLink = array();
 
     /**
-     * Description of this playlist
-     *
-     * @deprecated Deprecated as of version 2 of the YouTube API.
-     * @var \Zend\GData\YouTube\Extension\Description
-     */
-    protected $_description = null;
-
-    /**
      * Id of this playlist
      *
      * @var \Zend\GData\YouTube\Extension\PlaylistId
@@ -93,9 +85,6 @@ class PlaylistListEntry extends \Zend\GData\Entry
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_description != null) {
-            $element->appendChild($this->_description->getDOM($element->ownerDocument));
-        }
         if ($this->_countHint != null) {
             $element->appendChild($this->_countHint->getDOM($element->ownerDocument));
         }
@@ -120,11 +109,6 @@ class PlaylistListEntry extends \Zend\GData\Entry
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName) {
-        case $this->lookupNamespace('yt') . ':' . 'description':
-            $description = new Extension\Description();
-            $description->transferFromDOM($child);
-            $this->_description = $description;
-            break;
         case $this->lookupNamespace('yt') . ':' . 'countHint':
             $countHint = new Extension\CountHint();
             $countHint->transferFromDOM($child);
@@ -147,38 +131,6 @@ class PlaylistListEntry extends \Zend\GData\Entry
     }
 
     /**
-     * Sets the description relating to the playlist.
-     *
-     * @deprecated Deprecated as of version 2 of the YouTube API.
-     * @param \Zend\GData\YouTube\Extension\Description $description The description relating to the video
-     * @return \Zend\GData\YouTube\PlaylistListEntry Provides a fluent interface
-     */
-    public function setDescription($description = null)
-    {
-        if ($this->getMajorProtocolVersion() >= 2) {
-            $this->setSummary($description);
-        } else {
-            $this->_description = $description;
-        }
-        return $this;
-    }
-
-    /**
-     * Returns the description relating to the video.
-     *
-     * @return \Zend\GData\YouTube\Extension\Description  The description
-     *         relating to the video
-     */
-    public function getDescription()
-    {
-        if ($this->getMajorProtocolVersion() >= 2) {
-            return $this->getSummary();
-        } else {
-            return $this->_description;
-        }
-    }
-
-    /**
      * Returns the countHint relating to the playlist.
      *
      * The countHint is the number of videos on a playlist.
@@ -189,13 +141,7 @@ class PlaylistListEntry extends \Zend\GData\Entry
      */
     public function getCountHint()
     {
-        if (($this->getMajorProtocolVersion() == null) ||
-            ($this->getMajorProtocolVersion() == 1)) {
-            throw new App\VersionException('The yt:countHint ' .
-                'element is not supported in versions earlier than 2.');
-        } else {
-            return $this->_countHint;
-        }
+        return $this->_countHint;
     }
 
     /**
@@ -206,13 +152,7 @@ class PlaylistListEntry extends \Zend\GData\Entry
      */
     public function getPlaylistId()
     {
-        if (($this->getMajorProtocolVersion() == null) ||
-            ($this->getMajorProtocolVersion() == 1)) {
-            throw new App\VersionException('The yt:playlistId ' .
-                'element is not supported in versions earlier than 2.');
-        } else {
-            return $this->_playlistId;
-        }
+        return $this->_playlistId;
     }
 
     /**
@@ -261,11 +201,7 @@ class PlaylistListEntry extends \Zend\GData\Entry
      */
     public function getPlaylistVideoFeedUrl()
     {
-        if ($this->getMajorProtocolVersion() >= 2) {
-            return $this->getContent()->getSrc();
-        } else {
-            return $this->getFeedLink(YouTube::PLAYLIST_REL)->href;
-        }
+        return $this->getContent()->getSrc();
     }
 
 }

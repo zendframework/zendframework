@@ -21,6 +21,8 @@
 
 namespace Zend\GData\App;
 
+use Zend\GData\App;
+
 /**
  * Atom feed class
  *
@@ -53,25 +55,6 @@ abstract class AbstractFeedSourceParent extends AbstractFeedEntryParent
     protected $_subtitle = null;
 
     /**
-     * Set the HTTP client instance
-     *
-     * Sets the HTTP client object to use for retrieving the feed.
-     *
-     * @deprecated Deprecated as of Zend Framework 1.7. Use
-     *             setService() instead.
-     * @param  \Zend\Http\Client $httpClient
-     * @return AbstractFeedSourceParent Provides a fluent interface
-     */
-    public function setHttpClient(\Zend\Http\Client $httpClient)
-    {
-        parent::setHttpClient($httpClient);
-        foreach ($this->_entry as $entry) {
-            $entry->setHttpClient($httpClient);
-        }
-        return $this;
-    }
-
-    /**
      * Set the active service instance for this feed and all enclosed entries.
      * This will be used to perform network requests, such as when calling
      * save() and delete().
@@ -79,7 +62,7 @@ abstract class AbstractFeedSourceParent extends AbstractFeedEntryParent
      * @param \Zend\GData\App $instance The new service instance.
      * @return AbstractFeedEntryParent Provides a fluent interface.
      */
-    public function setService($instance)
+    public function setService(App $instance = null)
     {
         parent::setService($instance);
         foreach ($this->_entry as $entry) {

@@ -54,7 +54,7 @@ class SpreadsheetEntry extends \Zend\GData\Entry
      */
     public function getWorksheets()
     {
-        $service = new Spreadsheets($this->getHttpClient());
+        $service = new Spreadsheets($this->getService()->getHttpClient());
         return $service->getWorksheetFeed($this);
     }
 

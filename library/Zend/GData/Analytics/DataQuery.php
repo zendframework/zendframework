@@ -325,15 +325,6 @@ class DataQuery extends GData\Query
     }
 
     /**
-     * @deprecated
-     * @param string $value
-     * @return DataQuery
-     */
-    public function setFilter($value)
-    {
-        return $this->addFilter($value);
-    }
-    /**
      * @param string $sort
      * @param boolean[optional] $descending
      * @return DataQuery
@@ -343,17 +334,6 @@ class DataQuery extends GData\Query
         // add to sort storage
         $this->_sort[] = ($descending?'-':'').$sort;
         return $this;
-    }
-
-    /**
-     * @deprecated
-     * @param string $sort
-     * @param boolean[optional] $descending
-     * @return DataQuery
-     */
-    public function setSort($sort, $descending=false)
-    {
-        return $this->addSort($sort, $descending);
     }
 
     /**

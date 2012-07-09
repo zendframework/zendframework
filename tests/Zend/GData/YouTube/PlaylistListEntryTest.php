@@ -42,9 +42,6 @@ class PlaylistListEntryTest extends \PHPUnit_Framework_TestCase
 {
 
     public function setUp() {
-        $this->entryText = file_get_contents(
-                'Zend/GData/YouTube/_files/PlaylistListEntryDataSample1.xml',
-                true);
         $this->v2entryText = file_get_contents(
                 'Zend/GData/YouTube/_files/PlaylistListEntryDataSampleV2.xml',
                 true);
@@ -114,18 +111,6 @@ class PlaylistListEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($this->entry->extensionAttributes));
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements() {
-        $this->entry->transferFromXML($this->entryText);
-        $this->assertTrue(is_array($this->entry->extensionElements));
-        $this->assertEquals(0, count($this->entry->extensionElements));
-    }
-
-    public function testSampleEntryShouldHaveNoExtensionAttributes() {
-        $this->entry->transferFromXML($this->entryText);
-        $this->assertTrue(is_array($this->entry->extensionAttributes));
-        $this->assertEquals(0, count($this->entry->extensionAttributes));
-    }
-
     public function testEmptyPlaylistListEntryToAndFromStringShouldMatch() {
         $entryXml = $this->entry->saveXML();
         $newPlaylistListEntry = new YouTube\PlaylistListEntry();
@@ -134,19 +119,6 @@ class PlaylistListEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newPlaylistListEntryXml);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElementsV2() {
-        $this->entry->transferFromXML($this->entryText);
-        $this->entry->setMajorProtocolVersion(2);
-        $this->assertTrue(is_array($this->entry->extensionElements));
-        $this->assertEquals(0, count($this->entry->extensionElements));
-    }
-
-    public function testSampleEntryShouldHaveNoExtensionAttributesV2() {
-        $this->entry->transferFromXML($this->entryText);
-        $this->entry->setMajorProtocolVersion(2);
-        $this->assertTrue(is_array($this->entry->extensionAttributes));
-        $this->assertEquals(0, count($this->entry->extensionAttributes));
-    }
 
     public function testGetFeedLinkReturnsAllStoredEntriesWhenUsedWithNoParameters() {
         // Prepare test data
@@ -179,11 +151,6 @@ class PlaylistListEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($entry2, $this->entry->getFeedLink('second'));
     }
 
-    public function testSamplePropertiesAreCorrect () {
-        $this->entry->transferFromXML($this->entryText);
-        $this->verifyAllSamplePropertiesAreCorrect($this->entry);
-    }
-
     public function testSamplePropertiesAreCorrectV2 () {
         $this->entry->transferFromXML($this->v2entryText);
         $this->entry->setMajorProtocolVersion(2);
@@ -199,40 +166,6 @@ class PlaylistListEntryTest extends \PHPUnit_Framework_TestCase
         $this->verifyAllSamplePropertiesAreCorrectV2($newPlaylistListEntry);
         $newPlaylistListEntryXml = $newPlaylistListEntry->saveXML();
         $this->assertEquals($entryXml, $newPlaylistListEntryXml);
-    }
-
-    public function testConvertPlaylistListEntryToAndFromString() {
-        $this->entry->transferFromXML($this->entryText);
-        $entryXml = $this->entry->saveXML();
-        $newPlaylistListEntry = new YouTube\PlaylistListEntry();
-        $newPlaylistListEntry->transferFromXML($entryXml);
-        $this->verifyAllSamplePropertiesAreCorrect($newPlaylistListEntry);
-        $newPlaylistListEntryXml = $newPlaylistListEntry->saveXML();
-        $this->assertEquals($entryXml, $newPlaylistListEntryXml);
-    }
-
-    public function testGettingCountHintOnV1EntryShouldThrowException() {
-        $exceptionCaught = false;
-        $this->entry->transferFromXML($this->entryText);
-        try {
-            $this->entry->getCountHint();
-        } catch (App\VersionException $e) {
-            $exceptionCaught = true;
-        }
-        $this->assertTrue($exceptionCaught, 'Calling getCountHint on a v1 ' .
-            'playlistListEntry should throw an exception');
-    }
-
-    public function testGettingPlaylistIdOnV1EntryShouldThrowException() {
-        $exceptionCaught = false;
-        $this->entry->transferFromXML($this->entryText);
-        try {
-            $this->entry->getPlaylistId();
-        } catch (App\VersionException $e) {
-            $exceptionCaught = true;
-        }
-        $this->assertTrue($exceptionCaught, 'Calling getPlaylistId on a v1 ' .
-            'playlistListEntry should throw an exception');
     }
 
     public function testGetPlaylistVideoFeedUrlWorksInV2() {

@@ -57,13 +57,6 @@ class VideoEntry extends MediaEntry
     protected $_statistics = null;
 
     /**
-     * If not null, specifies that the video has racy content.
-     *
-     * @var \Zend\GData\YouTube\Extension\Racy|null
-     */
-    protected $_racy = null;
-
-    /**
      * If not null, specifies that the video is private.
      *
      * @var \Zend\GData\YouTube\Extension\Private|null
@@ -145,10 +138,6 @@ class VideoEntry extends MediaEntry
             $element->appendChild($this->_statistics->getDOM(
                 $element->ownerDocument));
         }
-        if ($this->_racy != null) {
-            $element->appendChild($this->_racy->getDOM(
-                $element->ownerDocument));
-        }
         if ($this->_recorded != null) {
             $element->appendChild($this->_recorded->getDOM(
                 $element->ownerDocument));
@@ -193,11 +182,6 @@ class VideoEntry extends MediaEntry
             $statistics = new Extension\Statistics();
             $statistics->transferFromDOM($child);
             $this->_statistics = $statistics;
-            break;
-        case $this->lookupNamespace('yt') . ':' . 'racy':
-            $racy = new GDataExtension\Racy();
-            $racy->transferFromDOM($child);
-            $this->_racy = $racy;
             break;
         case $this->lookupNamespace('yt') . ':' . 'recorded':
             $recorded = new Extension\Recorded();
@@ -355,41 +339,6 @@ class VideoEntry extends MediaEntry
     public function getStatistics()
     {
         return $this->_statistics;
-    }
-
-    /**
-     * Specifies that the video has racy content.
-     *
-     * @param \Zend\GData\YouTube\Extension\Racy $racy The racy flag object
-     * @throws \Zend\GData\App\VersionException
-     * @return \Zend\GData\YouTube\VideoEntry Provides a fluent interface
-     */
-    public function setRacy($racy = null)
-    {
-        if ($this->getMajorProtocolVersion() == 2) {
-            throw new App\VersionException(
-                'Calling setRacy() on a YouTube VideoEntry is deprecated ' .
-                'as of version 2 of the API.');
-        }
-
-        $this->_racy = $racy;
-        return $this;
-    }
-
-    /**
-     * Returns the racy flag object.
-     *
-     * @throws \Zend\GData\App\VersionException
-     * @return \Zend\GData\YouTube\Extension\Racy|null  The racy flag object
-     */
-    public function getRacy()
-    {
-        if ($this->getMajorProtocolVersion() == 2) {
-            throw new App\VersionException(
-                'Calling getRacy() on a YouTube VideoEntry is deprecated ' .
-                'as of version 2 of the API.');
-        }
-        return $this->_racy;
     }
 
     /**

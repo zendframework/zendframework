@@ -9,6 +9,7 @@
  */
 
 namespace Zend\OpenId\Consumer\Storage;
+
 use Zend\OpenId;
 
 /**

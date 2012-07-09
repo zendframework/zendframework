@@ -775,9 +775,8 @@ class FormTest extends TestCase
         $form->bind($address);
         $form->setBindOnValidate(false);
 
-        if ($form->isValid()) {
-            $this->assertEquals($address, $form->getData());
-        }
+        $this->assertEquals(true, $form->isValid());
+        $this->assertEquals($address, $form->getData());
     }
 
     public function testCanCorrectlyPopulateDataToComposedEntities()
@@ -804,9 +803,8 @@ class FormTest extends TestCase
 
         $form->setData($data);
 
-        if ($form->isValid()) {
-            $this->assertEquals($address, $emptyAddress, var_export($address, 1) . "\n\n" . var_export($emptyAddress, 1));
-        }
+        $this->assertEquals(true, $form->isValid());
+        $this->assertEquals($address, $emptyAddress, var_export($address, 1) . "\n\n" . var_export($emptyAddress, 1));
     }
 
     public function testCanCorrectlyExtractDataFromOneToManyRelationship()
@@ -817,9 +815,8 @@ class FormTest extends TestCase
         $form->bind($product);
         $form->setBindOnValidate(false);
 
-        if ($form->isValid()) {
-            $this->assertEquals($product, $form->getData());
-        }
+        $this->assertEquals(true, $form->isValid());
+        $this->assertEquals($product, $form->getData());
     }
 
     public function testCanCorrectlyPopulateDataToOneToManyEntites()
@@ -847,8 +844,7 @@ class FormTest extends TestCase
 
         $form->setData($data);
 
-        if ($form->isValid()) {
-            $this->assertEquals($product, $emptyProduct, var_export($product, 1) . "\n\n" . var_export($emptyProduct, 1));
-        }
+        $this->assertEquals(true, $form->isValid());
+        $this->assertEquals($product, $emptyProduct, var_export($product, 1) . "\n\n" . var_export($emptyProduct, 1));
     }
 }

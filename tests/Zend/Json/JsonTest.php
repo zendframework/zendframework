@@ -147,11 +147,11 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testString5()
     {
-        $expected = '"INFO: Path \"Some more\""';
+        $expected = '"INFO: Path \u0022Some more\u0022"';
         $string   = 'INFO: Path "Some more"';
         $encoded  = Json\Encoder::encode($string);
         $this->assertEquals($expected, $encoded, 'Quote encoding incorrect: expected ' . serialize($expected) . '; received: ' . serialize($encoded) . "\n");
-        $this->assertEquals($string, Json\Decoder::decode($encoded));
+        $this->assertEquals($string, Json\Decoder::decode($encoded)); // Bug: does not accept \u0022 as token!
     }
 
     /**
@@ -704,7 +704,17 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     public function testNativeJSONEncoderWillProperlyEncodeSolidusInStringValues()
     {
         $source = "</foo><foo>bar</foo>";
-        $target = '"<\\/foo><foo>bar<\\/foo>"';
+        $target = '"\u003C\/foo\u003E\u003Cfoo\u003Ebar\u003C\/foo\u003E"';
+        
+        // first test ext/json
+        Json\Json::$useBuiltinEncoderDecoder = false;
+        $this->assertEquals($target, Json\Json::encode($source));
+    }
+
+    public function testNativeJSONEncoderWillProperlyEncodeHtmlSpecialCharsInStringValues()
+    {
+        $source = "<>&'\"";
+        $target = '"\u003C\u003E\u0026\u0027\u0022"';
         
         // first test ext/json
         Json\Json::$useBuiltinEncoderDecoder = false;
@@ -717,7 +727,17 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     public function testBuiltinJSONEncoderWillProperlyEncodeSolidusInStringValues()
     {
         $source = "</foo><foo>bar</foo>";
-        $target = '"<\\/foo><foo>bar<\\/foo>"';
+        $target = '"\u003C\/foo\u003E\u003Cfoo\u003Ebar\u003C\/foo\u003E"';
+        
+        // first test ext/json
+        Json\Json::$useBuiltinEncoderDecoder = true;
+        $this->assertEquals($target, Json\Json::encode($source));
+    }
+
+    public function testBuiltinJSONEncoderWillProperlyEncodeHtmlSpecialCharsInStringValues()
+    {
+        $source = "<>&'\"";
+        $target = '"\u003C\u003E\u0026\u0027\u0022"';
         
         // first test ext/json
         Json\Json::$useBuiltinEncoderDecoder = true;
@@ -782,7 +802,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $expected = <<<EOB
 {
  "simple":"simple test string",
- "stringwithjsonchars":"\\\\\\"[1,2]",
+ "stringwithjsonchars":"\\\\\\u0022[1,2]",
  "complex":{
   "foo":"bar",
   "far":"boo",

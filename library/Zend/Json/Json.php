@@ -118,7 +118,10 @@ class Json
 
         // Encoding
         if (function_exists('json_encode') && self::$useBuiltinEncoderDecoder !== true) {
-            $encodedResult = json_encode($valueToEncode);
+            $encodedResult = json_encode(
+                $valueToEncode,
+                JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP
+            );
         } else {
             $encodedResult = Encoder::encode($valueToEncode, $cycleCheck, $options);
         }

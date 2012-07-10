@@ -40,13 +40,6 @@ class UserProfileEntry extends \Zend\GData\Entry
     protected $_username = null;
 
     /**
-     * The description of the user
-     *
-     * @var string
-     */
-    protected $_description = null;
-
-    /**
      * The contents of the 'About Me' field.
      *
      * @var string
@@ -191,9 +184,6 @@ class UserProfileEntry extends \Zend\GData\Entry
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_description != null) {
-            $element->appendChild($this->_description->getDOM($element->ownerDocument));
-        }
         if ($this->_aboutMe != null) {
             $element->appendChild($this->_aboutMe->getDOM($element->ownerDocument));
         }
@@ -266,11 +256,6 @@ class UserProfileEntry extends \Zend\GData\Entry
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName) {
-        case $this->lookupNamespace('yt') . ':' . 'description':
-            $description = new Extension\Description();
-            $description->transferFromDOM($child);
-            $this->_description = $description;
-            break;
         case $this->lookupNamespace('yt') . ':' . 'aboutMe':
             $aboutMe = new Extension\AboutMe();
             $aboutMe->transferFromDOM($child);
@@ -477,14 +462,7 @@ class UserProfileEntry extends \Zend\GData\Entry
      */
     public function getLastName()
     {
-        if (($this->getMajorProtocolVersion() == null) ||
-           ($this->getMajorProtocolVersion() == 1)) {
-            throw new App\VersionException('The getLastName ' .
-                ' method is only supported as of version 2 of the YouTube ' .
-                'API.');
-        } else {
-            return $this->_lastName;
-        }
+        return $this->_lastName;
     }
 
     /**
@@ -495,14 +473,7 @@ class UserProfileEntry extends \Zend\GData\Entry
      */
     public function getStatistics()
     {
-        if (($this->getMajorProtocolVersion() == null) ||
-           ($this->getMajorProtocolVersion() == 1)) {
-            throw new App\VersionException('The getStatistics ' .
-                ' method is only supported as of version 2 of the YouTube ' .
-                'API.');
-        } else {
-            return $this->_statistics;
-        }
+        return $this->_statistics;
     }
 
     /**
@@ -513,14 +484,7 @@ class UserProfileEntry extends \Zend\GData\Entry
      */
     public function getThumbnail()
     {
-        if (($this->getMajorProtocolVersion() == null) ||
-           ($this->getMajorProtocolVersion() == 1)) {
-            throw new App\VersionException('The getThumbnail ' .
-                ' method is only supported as of version 2 of the YouTube ' .
-                'API.');
-        } else {
-            return $this->_thumbnail;
-        }
+        return $this->_thumbnail;
     }
 
     /**

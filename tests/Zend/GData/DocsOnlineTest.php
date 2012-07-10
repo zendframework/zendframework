@@ -45,7 +45,7 @@ class DocsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feed instanceof Docs\DocumentListFeed);
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Docs\DocumentListEntry);
-            $this->assertTrue($entry->getHttpClient() == $feed->getHttpClient());
+            $this->assertTrue($entry->getService() == $feed->getService());
         }
 
         $query = new Docs\Query();
@@ -53,7 +53,7 @@ class DocsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feed instanceof Docs\DocumentListFeed);
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Docs\DocumentListEntry);
-            $this->assertTrue($entry->getHttpClient() == $feed->getHttpClient());
+            $this->assertTrue($entry->getService() == $feed->getService());
         }
 
         $uri = $query->getQueryUrl();
@@ -61,7 +61,7 @@ class DocsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feed instanceof Docs\DocumentListFeed);
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Docs\DocumentListEntry);
-            $this->assertTrue($entry->getHttpClient() == $feed->getHttpClient());
+            $this->assertTrue($entry->getService() == $feed->getService());
         }
     }
 

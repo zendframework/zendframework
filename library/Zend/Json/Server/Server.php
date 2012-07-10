@@ -257,29 +257,6 @@ class Server extends AbstractServer
     }
 
     /**
-     * Set flag indicating whether or not to auto-emit response
-     *
-     * @param  bool $flag
-     * @return Server
-     * @deprecated Left just for BC, drop it as soon as not used by anyone - use setReturnResponse() with negation instead.
-     */
-    public function setAutoEmitResponse($flag)
-    {
-        return $this->setReturnResponse(!$flag);
-    }
-
-    /**
-     * Will we auto-emit the response?
-     *
-     * @return bool
-     * @deprecated Left just for BC, drop it as soon as not used by anyone - use getReturnResponse() with negation instead.
-     */
-    public function autoEmitResponse()
-    {
-        return !$this->getReturnResponse();
-    }
-
-    /**
      * Set return response flag
      *
      * If true, {@link handle()} will return the response instead of

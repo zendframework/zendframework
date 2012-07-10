@@ -54,19 +54,6 @@ class CurlTest extends CommonHttpTests
         parent::setUp();
     }
 
-    public function testSimpleRequests()
-    {
-        $this->markTestSkipped('Method PATCH not implemented.');
-    }
-
-    /**
-     * @dataProvider parameterArrayProvider
-     */
-    public function testPatchData($params)
-    {
-        $this->markTestSkipped('Method PATCH not implemented.');
-    }
-
     /**
      * Off-line common adapter tests
      */

@@ -41,10 +41,4 @@ class SubClassTest extends \PHPUnit_Framework_TestCase
         $test = SubClass::isSubclassOf('ZendTest\Stdlib\TestAsset\chiLdCLAss', 'ZendTest\Stdlib\TestAsset\testinterface');
         $this->assertTrue($test);
     }
-
-    public function testIsSubclassOfObjectToClassNameConversion()
-    {
-        $test = SubClass::isSubclassOf(new TestAsset\ChildClass(), 'ZendTest\Stdlib\TestAsset\testinterface');
-        $this->assertTrue($test);
-    }
 }

@@ -27,18 +27,13 @@ abstract class SubClass
      *
      * @see https://bugs.php.net/bug.php?id=53727
      *
-     * @param object|string $object
+     * @param string $className
      * @param string $type
      */
-    public static function isSubclassOf($object, $type)
+    public static function isSubclassOf($className, $type)
     {
         if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
-            return is_subclass_of($object, $type);
-        }
-        if (is_object($object)) {
-            return ($object instanceof $type);
-        } else {
-            $className = $object;
+            return is_subclass_of($className, $type);
         }
         if (is_subclass_of($className, $type)) {
             return true;

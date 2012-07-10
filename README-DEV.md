@@ -34,12 +34,13 @@ To run tests:
  -  Make sure you have a recent version of PHPUnit installed; 3.5.0
     minimally.
  -  Enter the `tests/` subdirectory.
+ -  Copy the `phpunit.xml.dist` file to `phpunit.xml`
  -  Execute PHPUnit, providing a path to a component directory for which
     you wish to run tests, or a specific test class file.
 
     ```sh
-    % phpunit ZendTest/Application
-    % phpunit ZendTest/Application/Resource/CacheManagerTest.php
+    % phpunit Zend/Http
+    % phpunit Zend/Http/Header/EtagTest.php
     ```
 
  -  You may also provide the `--group` switch; in such cases, provide the
@@ -54,6 +55,7 @@ To run tests:
     ```sh
     % phpunit --group ZF-XYZ Zend/Application
     ```
+
 You can turn on conditional tests with the TestConfiguration.php file.
 To do so:
 

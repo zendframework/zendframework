@@ -462,7 +462,13 @@ class Decoder
                     // single, escaped unicode character
                     $utf16 = chr(hexdec(substr($chrs, ($i + 2), 2)))
                            . chr(hexdec(substr($chrs, ($i + 4), 2)));
-                    $utf8 .= self::_utf162utf8($utf16);
+                    $utf8char = self::_utf162utf8($utf16);
+                    $search  = array('\\', "\n", "\t", "\r", chr(0x08), chr(0x0C), '"', '\'', '/');
+                    if (in_array($utf8char, $search)) {
+                        $replace = array('\\\\', '\\n', '\\t', '\\r', '\\b', '\\f', '\\"', '\\\'', '\\/');
+                        $utf8char  = str_replace($search, $replace, $utf8char);
+                    }
+                    $utf8 .= $utf8char;
                     $i += 5;
                     break;
                 case ($ord_chrs_c >= 0x20) && ($ord_chrs_c <= 0x7F):

@@ -46,7 +46,7 @@ abstract class SubClass
         if (!class_exists($type)) {
             return false;
         }
-        $r = new ReflectionClass($object);
+        $r = new ReflectionClass($className);
         return $r->implementsInterface($type);
     }
 }

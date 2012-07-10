@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-wildfire",
+    "description": "a component that facilitates communication between PHP code and » Wildfire client components",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -10,6 +11,7 @@
             "Zend\\Wildfire": ""
         }
     },
+    "target-dir": "Zend/Wildfire",
     "require": {
         "php": ">=5.3.3"
     }

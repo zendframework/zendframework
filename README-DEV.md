@@ -47,13 +47,13 @@ To run tests:
     top-level component name:
 
     ```sh
-    % phpunit --group Zend_Application
+    % phpunit --group Zend_Http
     ```
     This will likely lead to errors, so it's usually best to specify a
     specific component in which to run test:
 
     ```sh
-    % phpunit --group ZF-XYZ Zend/Application
+    % phpunit --group ZF-XYZ Zend/Http
     ```
 
 You can turn on conditional tests with the TestConfiguration.php file.

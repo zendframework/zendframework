@@ -9,7 +9,10 @@
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon\Ec2;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
 
 /**
  * Zend_Service_Amazon_Ec2_Elasticip test case.
@@ -25,33 +28,28 @@ class ElasticIpTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_Service_Amazon_Ec2_Elasticip
+     * @var \Zend\Service\Amazon\Ec2\Elasticip
      */
-    private $elasticip;
+    protected $elasticip;
+
+    /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
 
     /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->elasticip = new Ec2\ElasticIp('access_key', 'secret_access_key');
-
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        Ec2\ElasticIp::setDefaultHTTPClient($client);
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        unset($this->adapter);
-
-        $this->elasticip = null;
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
+        $this->elasticip = new Ec2\ElasticIp('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     public function testAllocateNewElasticIp()
@@ -68,7 +66,7 @@ class ElasticIpTest extends \PHPUnit_Framework_TestCase
                     . "<AllocateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <publicIp>67.202.55.255</publicIp>\r\n"
                     . "</AllocateAddressResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $ipAddress = $this->elasticip->allocate();
         $this->assertEquals('67.202.55.255', $ipAddress);
@@ -88,7 +86,7 @@ class ElasticIpTest extends \PHPUnit_Framework_TestCase
                     . "<AssociateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</AssociateAddressResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->elasticip->associate('67.202.55.255', 'i-ag8ga0a');
 
@@ -118,7 +116,7 @@ class ElasticIpTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </addressSet>\r\n"
                     . "</DescribeAddressesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $response = $this->elasticip->describe('67.202.55.255');
 
@@ -153,7 +151,7 @@ class ElasticIpTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </addressSet>\r\n"
                     . "</DescribeAddressesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $response = $this->elasticip->describe(array('67.202.55.255', '67.202.55.200'));
 
@@ -190,7 +188,7 @@ class ElasticIpTest extends \PHPUnit_Framework_TestCase
                     . "<DisassociateAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</DisassociateAddressResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->elasticip->disassocate('67.202.55.255');
 
@@ -215,7 +213,7 @@ class ElasticIpTest extends \PHPUnit_Framework_TestCase
                     . "<ReleaseAddressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</ReleaseAddressResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->elasticip->release('67.202.55.255');
 

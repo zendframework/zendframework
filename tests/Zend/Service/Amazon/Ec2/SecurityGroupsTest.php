@@ -9,7 +9,11 @@
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon\Ec2;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
+
 
 /**
  * Zend\Service\Amazon\Ec2\Securitygroups test case.
@@ -30,28 +34,23 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
     private $securitygroupsInstance;
 
     /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
+
+    /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->securitygroupsInstance = new Ec2\SecurityGroups('access_key', 'secret_access_key');
-
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        Ec2\SecurityGroups::setDefaultHTTPClient($client);
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        unset($this->adapter);
-
-        $this->securitygroupsInstance = null;
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
+        $this->securitygroupsInstance = new Ec2\SecurityGroups('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     /**
@@ -72,7 +71,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "<AuthorizeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</AuthorizeSecurityGroupIngressResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->securitygroupsInstance->authorizeIp('MyGroup', 'tcp', '80', '80', '0.0.0.0/0');
         $this->assertTrue($return);
@@ -94,7 +93,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "<AuthorizeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</AuthorizeSecurityGroupIngressResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->securitygroupsInstance->authorizeIp('MyGroup', 'tcp', '6000', '7000', '0.0.0.0/0');
         $this->assertTrue($return);
@@ -116,7 +115,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "<AuthorizeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</AuthorizeSecurityGroupIngressResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->securitygroupsInstance->authorizeGroup('MyGroup', 'groupname', '15333848');
         $this->assertTrue($return);
@@ -142,7 +141,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "<CreateSecurityGroupResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</CreateSecurityGroupResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->securitygroupsInstance->create('MyGroup', 'My Security Grup');
 
@@ -168,7 +167,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "<DeleteSecurityGroupResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</DeleteSecurityGroupResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->securitygroupsInstance->delete('MyGroup');
 
@@ -230,7 +229,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </securityGroupInfo>\r\n"
                     . "</DescribeSecurityGroupsResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->securitygroupsInstance->describe(array('WebServers','RangedPortsBySource'));
 
@@ -298,7 +297,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </securityGroupInfo>\r\n"
                     . "</DescribeSecurityGroupsResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->securitygroupsInstance->describe('WebServers');
 
@@ -358,7 +357,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </securityGroupInfo>\r\n"
                     . "</DescribeSecurityGroupsResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->securitygroupsInstance->describe('WebServers');
 
@@ -403,7 +402,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "<RevokeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</RevokeSecurityGroupIngressResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->securitygroupsInstance->revokeIp('MyGroup', 'tcp', '80', '80', '0.0.0.0/0');
         $this->assertTrue($return);
@@ -425,7 +424,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "<RevokeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</RevokeSecurityGroupIngressResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->securitygroupsInstance->revokeIp('MyGroup', 'tcp', '6000', '7000', '0.0.0.0/0');
         $this->assertTrue($return);
@@ -448,7 +447,7 @@ class SecurityGroupsTest extends \PHPUnit_Framework_TestCase
                     . "<RevokeSecurityGroupIngressResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</RevokeSecurityGroupIngressResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->securitygroupsInstance->revokeGroup('MyGroup', 'groupname', '15333848');
         $this->assertTrue($return);

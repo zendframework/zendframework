@@ -28,14 +28,14 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      *
      * @var Zend_Service_Amazon
      */
-    protected $_amazon;
+    protected $amazon;
 
     /**
      * HTTP client adapter for testing
      *
      * @var Zend\Http\Client\Adapter\Test
      */
-    protected $_httpClientAdapterTest;
+    protected $httpClientTestAdapter;
 
     /**
      * Sets up this test case
@@ -44,9 +44,9 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_amazon = new Amazon\Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'));
+        $this->amazon = new Amazon\Amazon(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'));
 
-        $this->_httpClientAdapterTest = new \Zend\Http\Client\Adapter\Test();
+        $this->httpClientTestAdapter = new \Zend\Http\Client\Adapter\Test();
     }
 
     /**

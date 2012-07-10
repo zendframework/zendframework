@@ -10,8 +10,9 @@
 
 namespace ZendTest\Service\Akismet;
 
-use Zend\Service\Akismet;
-use Zend\Http;
+use Zend\Service\Akismet\Akismet;
+use Zend\Http\Client\Adapter\Test as ClientTestAdapter;
+use Zend\Http\Client as HttpClient;
 
 /**
  * @category   Zend
@@ -22,15 +23,30 @@ use Zend\Http;
  */
 class AkismetTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Akismet
+     */
+    protected $akismet;
+
+    /**
+     * @var ClientTestAdapter
+     */
+    protected $adapter;
+
+    /**
+     * @var array
+     */
+    protected $comment;
+
     public function setUp()
     {
-        $this->akismet = new Akismet\Akismet('somebogusapikey', 'http://framework.zend.com/wiki/');
-        $adapter = new Http\Client\Adapter\Test();
-        $client = new Http\Client(null, array(
+        $this->akismet = new Akismet('somebogusapikey', 'http://framework.zend.com/wiki/');
+        $adapter = new ClientTestAdapter();
+        $client = new HttpClient(null, array(
             'adapter' => $adapter
         ));
         $this->adapter = $adapter;
-        Akismet\Akismet::setDefaultHttpClient($client);
+        $this->akismet->setHttpClient($client);
 
         $this->comment = array(
             'user_ip'         => '71.161.221.76',

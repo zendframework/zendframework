@@ -4,5 +4,5 @@ namespace Zend\ServiceManager;
 
 interface InitializerInterface
 {
-    public function initialize($instance);
+    public function initialize($instance, ServiceManager $serviceManager);
 }

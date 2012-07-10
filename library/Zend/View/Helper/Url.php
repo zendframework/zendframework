@@ -92,11 +92,13 @@ class Url extends AbstractHelper
         }
 
         if ($reuseMatchedParams && $this->routeMatch !== null) {
-            $params = array_merge($this->routeMatch->getParams(), $params);
+            $paramOriginalController = $this->routeMatch->getParam(\Zend\Mvc\ModuleRouteListener::ORIGINAL_CONTROLLER);
 
-            if(isset($params[\Zend\Mvc\ModuleRouteListener::ORIGINAL_CONTROLLER])) {
-                $params['controller'] = $params[\Zend\Mvc\ModuleRouteListener::ORIGINAL_CONTROLLER];
+            if(null !== $paramOriginalController) {
+                $this->routeMatch->setParam('controller', $paramOriginalController);
             }
+
+            $params = array_merge($this->routeMatch->getParams(), $params);
         }
 
         $options['name'] = $name;

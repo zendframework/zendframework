@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-docbook",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -10,6 +11,7 @@
             "Zend\\DocBook": ""
         }
     },
+    "target-dir": "Zend/DocBook",
     "require": {
         "php": ">=5.3.3",
         "zendframework/zend\\code": "self.version",

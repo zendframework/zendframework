@@ -2,8 +2,7 @@
 
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
-
-use Zend\Cache\Cache;
+use Zend\Cache\StorageFactory;
 use Zend\Service\LiveDocx\Helper;
 use Zend\Service\LiveDocx\MailMerge;
 
@@ -19,22 +18,20 @@ Helper::printLine(
 
 $cacheId = md5(__FILE__);
 
-$cacheFrontendOptions = array(
-    'lifetime' => 2592000, // 30 days
-    'automatic_serialization' => true
+$cache = array(
+    'adapter' => 'FileSystem',
+    'options' => array(
+        'cache_dir' => __DIR__ . '/cache',
+    ),
 );
 
-$cacheBackendOptions = array(
-    'cache_dir' => __DIR__ . '/cache'
-);
-
-if (!is_dir($cacheBackendOptions['cache_dir'])) {
-    mkdir($cacheBackendOptions['cache_dir']);
+if (!is_dir($cache['options']['cache_dir'])) {
+    mkdir($cache['options']['cache_dir']);
 }
 
-$cache = Cache::factory('Core', 'File', $cacheFrontendOptions, $cacheBackendOptions);
+$cache = StorageFactory::factory($cache);
 
-if (! $formats = $cache->load($cacheId)) {
+if (! $formats = $cache->getItem($cacheId)) {
     
     // Cache miss. Connect to backend service (expensive).
     
@@ -49,7 +46,7 @@ if (! $formats = $cache->load($cacheId)) {
     $formats->document = $mailMerge->getDocumentFormats();
     $formats->image    = $mailMerge->getImageExportFormats();
     
-    $cache->save($formats, $cacheId);
+    $cache->setItem($formats, $cacheId);
     
     unset($mailMerge);
     

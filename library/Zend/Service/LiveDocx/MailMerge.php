@@ -1043,7 +1043,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  string $filename
      * @throws Exception\RuntimeException
-     * @return void
+     * @return string
      * @since  LiveDocx 2.0
      */
     public function downloadImage($filename)

@@ -1,32 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage Demos
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
+
+use Zend\Loader\StandardAutoloader;
+use Zend\Service\Amazon\Exception\ExceptionInterface as AmazonException;
+use Zend\Service\Amazon\Query;
 
 /**
  * Query Amazon's Product Database
  */
 
-/**
- * @see Zend_Service_Amazon_Query
- */
-require_once 'Zend/Service/Amazon/Query.php';
+error_reporting(E_ALL);
+
+require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/library/Zend/Loader/StandardAutoloader.php';
+$loader = new StandardAutoloader(array('autoregister_zf' => true));
+$loader->register();
 
 $keywords = '';
 $searchFor = '';
@@ -166,7 +160,7 @@ if (isset($_POST) && strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
     </form>
 <?php
 if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-    $amazon = new Zend_Service_Amazon_Query("1338XJTNFMTHK413WFR2");
+    $amazon = new Query("1338XJTNFMTHK413WFR2");
 
     try {
         $amazon->category($searchFor)->ResponseGroup('Large')->Keywords($keywords);
@@ -204,7 +198,7 @@ if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
             echo '</div>';
         }
     }
-    catch (Zend_Service_Exception $e) {
+    catch (AmazonException $e) {
         echo '<p style="color: red; font-weight: bold">An error occured, please try again later. (' .$e->getMessage(). ')</p>';
     }
 }

@@ -2,8 +2,7 @@
 
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
-
-use Zend\Date\Date;
+use DateTime;
 use Zend\Service\LiveDocx\MailMerge;
 
 $mailMerge = new MailMerge();
@@ -23,9 +22,11 @@ if (!$mailMerge->imageExists($photoFilename)) {
 
 $mailMerge->setLocalTemplate('template.docx');
 
+$date = new DateTime();
+
 $mailMerge->assign('name',        'Daï Lemaitre')
           ->assign('company',     'Megasoft Co-operation')
-          ->assign('date',        Date::now()->toString(Date::DATE_LONG))
+          ->assign('date',         $date->format('Y-m-d'))
           ->assign('image:photo', $photoFilename);
 
 $mailMerge->createDocument();

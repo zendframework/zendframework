@@ -30,15 +30,4 @@ class SubClassTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($test2);
     }
 
-    public function testIsSubclassOfStripsTralingNamespaceSeparator()
-    {
-        $test = SubClass::isSubclassOf('\ZendTest\Stdlib\TestAsset\ChildClass', '\ZendTest\Stdlib\TestAsset\TestInterface');
-        $this->assertTrue($test);
-    }
-
-    public function testIsSubclassOfIsCaseInsensitve()
-    {
-        $test = SubClass::isSubclassOf('ZendTest\Stdlib\TestAsset\chiLdCLAss', 'ZendTest\Stdlib\TestAsset\testinterface');
-        $this->assertTrue($test);
-    }
 }

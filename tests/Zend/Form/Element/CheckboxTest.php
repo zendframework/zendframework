@@ -33,4 +33,28 @@ class CheckboxTest extends TestCase
         $this->assertEquals('1', $element->getCheckedValue());
         $this->assertEquals('0', $element->getUncheckedValue());
     }
+
+    public function testProvidesInputSpecificationThatIncludesValidatorsBasedOnAttributes()
+    {
+        $element = new CheckboxElement();
+
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('validators', $inputSpec);
+        $this->assertInternalType('array', $inputSpec['validators']);
+
+        $expectedClasses = array(
+            'Zend\Validator\InArray'
+        );
+        foreach ($inputSpec['validators'] as $validator) {
+            $class = get_class($validator);
+            $this->assertTrue(in_array($class, $expectedClasses), $class);
+            switch ($class) {
+                case 'Zend\Validator\InArray':
+                    $this->assertEquals(array($element->getCheckedValue(), $element->getUncheckedValue()), $validator->getHaystack());
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

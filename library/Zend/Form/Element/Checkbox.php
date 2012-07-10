@@ -25,6 +25,8 @@ use Traversable;
 use Zend\Form\Element;
 use Zend\Form\Exception;
 use Zend\InputFilter\InputProviderInterface;
+use Zend\Validator\InArray as InArrayValidator;
+use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
@@ -43,6 +45,11 @@ class Checkbox extends Element implements InputProviderInterface
     protected $attributes = array(
         'type' => 'checkbox'
     );
+
+    /**
+     * @var ValidatorInterface
+     */
+    protected $validator;
 
     /**
      * @var bool
@@ -154,6 +161,22 @@ class Checkbox extends Element implements InputProviderInterface
     }
 
     /**
+     * Get validator
+     *
+     * @return ValidatorInterface
+     */
+    protected function getValidator()
+    {
+        if (null === $this->validator) {
+            $this->validator = new InArrayValidator(array(
+                'haystack' => array($this->checkedValue, $this->uncheckedValue),
+                'strict'   => false
+            ));
+        }
+        return $this->validator;
+    }
+
+    /**
      * Provide default input rules for this element
      *
      * Attaches the captcha as a validator.
@@ -164,7 +187,8 @@ class Checkbox extends Element implements InputProviderInterface
     {
         $spec = array(
             'name' => $this->getName(),
-            'required' => true
+            'required' => true,
+            'validators' => $this->getValidator()
         );
 
         return $spec;

@@ -10,6 +10,8 @@
 
 namespace Zend\Stdlib;
 
+use ReflectionClass;
+
 /**
  * @see https://bugs.php.net/bug.php?id=53727
  *
@@ -38,21 +40,10 @@ abstract class SubClass
         } else {
             $className = $object;
         }
-        $className = ltrim($className, '\\');
-        $type = ltrim($type, '\\');
-        static $isSubclassFuncCache = null; // null as unset, array when set
-        if ($isSubclassFuncCache === null) {
-            $isSubclassFuncCache = array();
+        if (is_subclass_of($className, $type)) {
+            return true;
         }
-        if (!array_key_exists($className, $isSubclassFuncCache)) {
-            $parents = class_parents($className, true) + class_implements($className, true);
-            $caseInsensitiveParents = array();
-            foreach ($parents as $parent) {
-                $caseInsensitiveParent = strtolower($parent);
-                $caseInsensitiveParents[$caseInsensitiveParent] = $caseInsensitiveParent;
-            }
-            $isSubclassFuncCache[strtolower($className)] = $caseInsensitiveParents;
-        }
-        return (isset($isSubclassFuncCache[strtolower($className)][strtolower($type)]));
+        $r = new ReflectionClass($className);
+        return $r->implementsInterface($type);
     }
 }

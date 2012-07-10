@@ -36,7 +36,7 @@ abstract class SubClass
             return is_subclass_of($object, $type);
         }
         if (is_object($object)) {
-            $className = get_class($object);
+            return ($object instanceof $type);
         } else {
             $className = $object;
         }

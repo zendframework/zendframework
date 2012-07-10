@@ -163,6 +163,28 @@ class Collection extends Fieldset
     }
 
     /**
+     * Bind values to the object
+     *
+     * @param array $values
+     * @return array|mixed|void
+     */
+    public function bindValues(array $values = array())
+    {
+        $collection = array();
+        foreach ($values as $name => $value) {
+            $element = $this->get($name);
+
+            if ($element instanceof FieldsetInterface) {
+                $collection[] = $element->bindValues($value);
+            } else {
+                $collection[] = $value;
+            }
+        }
+
+        return $collection;
+    }
+
+    /**
      * Set the initial count of target element
      *
      * @param $count

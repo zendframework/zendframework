@@ -498,15 +498,8 @@ class Fieldset extends Element implements FieldsetInterface
             $element = $this->byName[$name];
 
             if ($element instanceof Collection) {
-                $collection = array();
-                foreach ($value as $subName => $subValue) {
-                    $collection[] = $element->get($subName)->bindValues($subValue);
-                }
-
-                $value = $collection;
-            }
-
-            if ($element instanceof FieldsetInterface && is_object($element->object)) {
+                $value = $element->bindValues($value);
+            } elseif ($element instanceof FieldsetInterface && is_object($element->object)) {
                 $value = $element->bindValues($value);
             }
 

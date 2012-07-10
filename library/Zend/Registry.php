@@ -24,7 +24,7 @@ class Registry extends ArrayObject
 {
     /**
      * Constructs a parent ArrayObject with default
-     * ARRAY_AS_PROPS to allow acces as an object
+     * ARRAY_AS_PROPS to allow access as an object
      *
      * @param array $array data array
      * @param integer $flags ArrayObject flags

@@ -1,32 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Flickr
- * @subpackage Demos
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
+
+use Zend\Loader\StandardAutoloader;
+use Zend\Service\Flickr\Exception\ExceptionInterface as FlickrException;
+use Zend\Service\Flickr\Flickr;
 
 /**
  * Query Yahoo! Web, Image and News searches
  */
 
-/**
- * @see Zend_Service_Flickr
- */
-require_once 'Zend/Service/Flickr.php';
+require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/library/Zend/Loader/StandardAutoloader.php';
+$loader = new StandardAutoloader(array('autoregister_zf' => true));
+$loader->register();
 
 if (isset($_POST) && strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
     $keywords = strip_tags($_POST['search_term']);
@@ -95,7 +87,7 @@ if (isset($_POST) && strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
     </form>
 <?php
 if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-    $flickr = new Zend_Service_Flickr('381e601d332ab5ce9c25939570cb5c4b');
+    $flickr = new Flickr('381e601d332ab5ce9c25939570cb5c4b');
 
     try {
         $results = $flickr->tagSearch($keywords, array('per_page' => 50, 'tag_mode' => 'all'));
@@ -152,8 +144,8 @@ if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
             echo '<p style="color: orange; font-weight: bold">No Results Found</p>';
         }
     }
-    catch (Zend_Service_Exception $e) {
-        echo '<p style="color: red; font-weight: bold">An error occured, please try again later. (' .$e->getMessage(). ')</p>';
+    catch (FlickrException $e) {
+        echo '<p style="color: red; font-weight: bold">An error occurred, please try again later. (' .$e->getMessage(). ')</p>';
     }
 }
 ?>

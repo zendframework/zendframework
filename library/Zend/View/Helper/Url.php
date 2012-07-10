@@ -24,21 +24,21 @@ class Url extends AbstractHelper
 {
     /**
      * RouteStackInterface instance.
-     * 
+     *
      * @var RouteStackInterface
      */
     protected $router;
-    
+
     /**
      * RouteInterface match returned by the router.
-     * 
+     *
      * @var RouteMatch.
      */
     protected $routeMatch;
 
     /**
      * Set the router to use for assembling.
-     * 
+     *
      * @param RouteStackInterface $router
      * @return Url
      */
@@ -47,10 +47,10 @@ class Url extends AbstractHelper
         $this->router = $router;
         return $this;
     }
-    
+
     /**
      * Set route match returned by the router.
-     * 
+     *
      * @param  RouteMatch $routeMatch
      * @return self
      */
@@ -83,18 +83,22 @@ class Url extends AbstractHelper
             if ($this->routeMatch === null) {
                 throw new Exception\RuntimeException('No RouteMatch instance provided');
             }
-            
+
             $name = $this->routeMatch->getMatchedRouteName();
-            
+
             if ($name === null) {
                 throw new Exception\RuntimeException('RouteMatch does not contain a matched route name');
             }
         }
-        
+
         if ($reuseMatchedParams && $this->routeMatch !== null) {
             $params = array_merge($this->routeMatch->getParams(), $params);
+
+            if(isset($params[\Zend\Mvc\ModuleRouteListener::ORIGINAL_CONTROLLER])) {
+                $params['controller'] = $params[\Zend\Mvc\ModuleRouteListener::ORIGINAL_CONTROLLER];
+            }
         }
-        
+
         $options['name'] = $name;
 
         return $this->router->assemble($params, $options);

@@ -221,7 +221,7 @@ abstract class AbstractActionController implements
      *
      * Will create a new MvcEvent if none provided.
      *
-     * @return Event
+     * @return MvcEvent
      */
     public function getEvent()
     {

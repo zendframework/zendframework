@@ -47,7 +47,7 @@ class DiServiceInitializerTest extends \PHPUnit_Framework_TestCase
         // test di is called with proper instance
         $this->mockDi->expects($this->once())->method('injectDependencies')->with($instance);
 
-        $this->diServiceInitializer->initialize($instance);
+        $this->diServiceInitializer->initialize($instance, $this->mockServiceLocator);
     }
 
     /**

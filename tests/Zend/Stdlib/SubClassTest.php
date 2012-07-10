@@ -16,9 +16,6 @@ class SubClassTest extends \PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
-        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
-            $this->markTestSkipped('Test is only for PHP Versions smaller then 5.3.7');
-        }
         require_once 'TestAsset/DummySubclasses.php';
     }
 

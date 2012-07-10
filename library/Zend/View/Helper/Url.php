@@ -10,6 +10,7 @@
 
 namespace Zend\View\Helper;
 
+use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface;
 use Zend\View\Exception;
@@ -92,7 +93,7 @@ class Url extends AbstractHelper
         }
 
         if ($reuseMatchedParams && $this->routeMatch !== null) {
-            $paramOriginalController = $this->routeMatch->getParam(\Zend\Mvc\ModuleRouteListener::ORIGINAL_CONTROLLER);
+            $paramOriginalController = $this->routeMatch->getParam(ModuleRouteListener::ORIGINAL_CONTROLLER);
 
             if(null !== $paramOriginalController) {
                 $this->routeMatch->setParam('controller', $paramOriginalController);

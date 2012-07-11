@@ -22,86 +22,94 @@ use Zend\Stdlib\ArrayUtils;
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Mcrypt implements SymmetricInterface
 {
     const DEFAULT_PADDING = 'pkcs7';
+
     /**
      * Key
      *
      * @var string
      */
     protected $key;
+
     /**
      * IV
      *
      * @var string
      */
     protected $iv;
+
     /**
      * Encryption algorithm
      *
      * @var string
      */
     protected $algo = 'aes';
+
     /**
      * Encryption mode
      *
      * @var string
      */
     protected $mode = 'cbc';
+
     /**
      * Padding
      *
      * @var Padding\PaddingInterface
      */
     protected $padding;
+
     /**
-     * Padding broker
+     * Padding plugins
      *
-     * @var PaddingBroker
+     * @var PaddingPluginManager
      */
-    protected static $paddingBroker = null;
+    protected static $paddingPlugins = null;
+
     /**
      * Supported cipher algorithms
      *
      * @var array
      */
     protected $supportedAlgos = array(
-        'aes'          => MCRYPT_RIJNDAEL_128,
-        'blowfish'     => MCRYPT_BLOWFISH,
-        'des'          => MCRYPT_DES,
-        '3des'         => MCRYPT_TRIPLEDES,
-        'tripledes'    => MCRYPT_TRIPLEDES,
-        'cast-128'     => MCRYPT_CAST_128,
-        'cast-256'     => MCRYPT_CAST_256,
-        'rijndael-128' => MCRYPT_RIJNDAEL_128,
-        'rijndael-192' => MCRYPT_RIJNDAEL_192,
-        'rijndael-256' => MCRYPT_RIJNDAEL_256,
-        'saferplus'    => MCRYPT_SAFERPLUS,
-        'serpent'      => MCRYPT_SERPENT,
-        'twofish'      => MCRYPT_TWOFISH
+        'aes'          => 'rijndael-128',
+        'blowfish'     => 'blowfish',
+        'des'          => 'des',
+        '3des'         => 'tripledes',
+        'tripledes'    => 'tripledes',
+        'cast-128'     => 'cast-128',
+        'cast-256'     => 'cast-256',
+        'rijndael-128' => 'rijndael-128',
+        'rijndael-192' => 'rijndael-192',
+        'rijndael-256' => 'rijndael-256',
+        'saferplus'    => 'saferplus',
+        'serpent'      => 'serpent',
+        'twofish'      => 'twofish'
     );
+
     /**
      * Supported encryption modes
      *
      * @var array
      */
     protected $supportedModes = array(
-        'cbc'  => MCRYPT_MODE_CBC,
-        'cfb'  => MCRYPT_MODE_CFB,
+        'cbc'  => 'cbc',
+        'cfb'  => 'cfb',
         'ctr'  => 'ctr',
-        'ofb'  => MCRYPT_MODE_OFB,
-        'nofb' => MCRYPT_MODE_NOFB,
+        'ofb'  => 'ofb',
+        'nofb' => 'nofb',
         'ncfb' => 'ncfb'
     );
 
     /**
      * Constructor
      *
-     * @param array|Traversable $options
+     * @param  array|Traversable $options
+     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
     {
@@ -135,8 +143,8 @@ class Mcrypt implements SymmetricInterface
                         $this->setSalt($value);
                         break;
                     case 'padding':
-                        $broker        = self::getPaddingBroker();
-                        $padding       = $broker->load($value, array());
+                        $plugins       = self::getPaddingPluginManager();
+                        $padding       = $plugins->get($value);
                         $this->padding = $padding;
                         break;
                 }
@@ -157,50 +165,52 @@ class Mcrypt implements SymmetricInterface
             return;
         }
         if (!isset($options['padding'])) {
-            $broker        = self::getPaddingBroker();
-            $padding       = $broker->load(self::DEFAULT_PADDING, array());
+            $plugins       = self::getPaddingPluginManager();
+            $padding       = $plugins->get(self::DEFAULT_PADDING);
             $this->padding = $padding;
         }
     }
 
     /**
-     * Returns the padding broker.  If it doesn't exist it's created.
+     * Returns the padding plugin manager.  If it doesn't exist it's created.
      *
-     * @return PaddingBroker
+     * @return PaddingPluginManager
      */
-    public static function getPaddingBroker()
+    public static function getPaddingPluginManager()
     {
-        if (self::$paddingBroker === null) {
-            self::setPaddingBroker(new PaddingBroker());
+        if (self::$paddingPlugins === null) {
+            self::setPaddingPluginManager(new PaddingPluginManager());
         }
 
-        return self::$paddingBroker;
+        return self::$paddingPlugins;
     }
 
     /**
-     * Set the symmetric cipher broker
+     * Set the padding plugin manager
      *
-     * @param  string|PaddingBroker $broker
+     * @param  string|PaddingPluginManager $plugins
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public static function setPaddingBroker($broker)
+    public static function setPaddingPluginManager($plugins)
     {
-        if (is_string($broker)) {
-            if (!class_exists($broker)) {
+        if (is_string($plugins)) {
+            if (!class_exists($plugins)) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                                                                 'Unable to locate padding broker of class "%s"',
-                                                                 $broker
-                                                             ));
+                    'Unable to locate padding plugin manager via class "%s"; class does not exist',
+                    $plugins
+                ));
             }
-            $broker = new $broker();
+            $plugins = new $plugins();
         }
-        if (!$broker instanceof PaddingBroker) {
+        if (!$plugins instanceof PaddingPluginManager) {
             throw new Exception\InvalidArgumentException(sprintf(
-                                                             'Padding broker must extend PaddingBroker; received "%s"',
-                                                             (is_object($broker) ? get_class($broker) : gettype($broker))
-                                                         ));
+                'Padding plugins must extend %s\PaddingPluginManager; received "%s"',
+                __NAMESPACE__,
+                (is_object($plugins) ? get_class($plugins) : gettype($plugins))
+            ));
         }
-        self::$paddingBroker = $broker;
+        self::$paddingPlugins = $plugins;
     }
 
     /**
@@ -218,6 +228,7 @@ class Mcrypt implements SymmetricInterface
      * Set the encryption key
      *
      * @param  string $key
+     * @throws Exception\InvalidArgumentException
      * @return Mcrypt
      */
     public function setKey($key)
@@ -246,6 +257,7 @@ class Mcrypt implements SymmetricInterface
      * Set the encryption algorithm (cipher)
      *
      * @param  string $algo
+     * @throws Exception\InvalidArgumentException
      * @return Mcrypt
      */
     public function setAlgorithm($algo)
@@ -295,6 +307,7 @@ class Mcrypt implements SymmetricInterface
      * Encrypt
      *
      * @param  string $data
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public function encrypt($data)
@@ -330,6 +343,7 @@ class Mcrypt implements SymmetricInterface
      * Decrypt
      *
      * @param  string $data
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public function decrypt($data)
@@ -381,6 +395,7 @@ class Mcrypt implements SymmetricInterface
      * Set the salt (IV)
      *
      * @param  string $salt
+     * @throws Exception\InvalidArgumentException
      * @return Mcrypt
      */
     public function setSalt($salt)
@@ -411,6 +426,7 @@ class Mcrypt implements SymmetricInterface
      * Set the cipher mode
      *
      * @param  string $mode
+     * @throws Exception\InvalidArgumentException
      * @return Mcrypt
      */
     public function setMode($mode)

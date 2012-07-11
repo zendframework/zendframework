@@ -1,23 +1,11 @@
 <?php
-
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData;
@@ -31,8 +19,6 @@ use Zend\Http\Client\Adapter;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HttpAdapterStreamingSocket extends Adapter\Socket
 {
@@ -59,15 +45,17 @@ class HttpAdapterStreamingSocket extends Adapter\Socket
     {
         // Make sure we're properly connected
         if (! $this->socket) {
-            throw new Adapter\Exception(
-                'Trying to write but we are not connected');
+            throw new Adapter\Exception\RuntimeException(
+                'Trying to write but we are not connected'
+            );
         }
 
         $host = $uri->getHost();
         $host = (strtolower($uri->getScheme()) == 'https' ? $this->config['ssltransport'] : 'tcp') . '://' . $host;
         if ($this->connected_to[0] != $host || $this->connected_to[1] != $uri->getPort()) {
-            throw new Adapter\Exception(
-                'Trying to write but we are connected to the wrong host');
+            throw new Adapter\Exception\RuntimeException(
+                'Trying to write but we are connected to the wrong host'
+            );
         }
 
         // Save request method for later
@@ -85,8 +73,9 @@ class HttpAdapterStreamingSocket extends Adapter\Socket
         // Send the headers over
         $request .= "\r\n";
         if (! @fwrite($this->socket, $request)) {
-            throw new Adapter\Exception(
-                'Error writing request to server');
+            throw new Adapter\Exception\RuntimeException(
+                'Error writing request to server'
+            );
         }
 
 
@@ -94,8 +83,9 @@ class HttpAdapterStreamingSocket extends Adapter\Socket
         $chunk = $body->read(self::CHUNK_SIZE);
         while ($chunk !== FALSE) {
             if (! @fwrite($this->socket, $chunk)) {
-                throw new Adapter\Exception(
-                    'Error writing request to server');
+                throw new Adapter\Exception\RuntimeException(
+                    'Error writing request to server'
+                );
             }
             $chunk = $body->read(self::CHUNK_SIZE);
         }

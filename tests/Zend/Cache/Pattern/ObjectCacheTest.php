@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace ZendTest\Cache\Pattern;
@@ -56,22 +45,22 @@ class TestObjectCache
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
 class ObjectCacheTest extends CommonPatternTest
 {
 
     /**
-     * @var Zend\Cache\Storage\Adapter\AdapterInterface
+     * @var Zend\Cache\Storage\StorageInterface
      */
     protected $_storage;
 
     public function setUp()
     {
         $class = __NAMESPACE__ . '\TestObjectCache';
-        $this->_storage = new Cache\Storage\Adapter\Memory();
+        $this->_storage = new Cache\Storage\Adapter\Memory(array(
+            'memory_limit' => 0
+        ));
         $this->_options = new Cache\Pattern\PatternOptions(array(
             'object'  => new $class(),
             'storage' => $this->_storage,
@@ -116,91 +105,13 @@ class ObjectCacheTest extends CommonPatternTest
 
         $generatedKey = $this->_pattern->generateKey('emptyMethod', $args);
         $usedKey      = null;
-        $this->_options->getStorage()->events()->attach('setItem.pre', function ($event) use (&$usedKey) {
+        $this->_options->getStorage()->getEventManager()->attach('setItem.pre', function ($event) use (&$usedKey) {
             $params = $event->getParams();
             $usedKey = $params['key'];
         });
 
         $this->_pattern->call('emptyMethod', $args);
         $this->assertEquals($generatedKey, $usedKey);
-    }
-
-    public function testGenerateKeyWithPredefinedCallbackAndArgumentKey()
-    {
-        $args     = array('arg1', 2, 3.33, null);
-        $options = array(
-            'callback_key' => 'callback',
-            'argument_key' => 'arguments',
-        );
-
-        $expectedKey = md5($options['callback_key'].$options['argument_key']);
-
-        $this->assertEquals(
-            $expectedKey,
-            $this->_pattern->generateKey('emptyMethod', $args, $options)
-        );
-    }
-
-    public function testGenerateKeyWithPredefinedEntityKey()
-    {
-        $args    = array('arg1', 2, 3.33, null);
-        $options = array(
-            'entity_key'   => 'object',
-            'argument_key' => 'arguments',
-        );
-        $callbackKey = $options['entity_key'].'::emptymethod';
-
-        $expectedKey = md5($callbackKey.$options['argument_key']);
-
-        $this->assertEquals(
-            $expectedKey,
-            $this->_pattern->generateKey('emptyMethod', $args, $options)
-        );
-    }
-
-    public function testGenerateKeyWithClassObjectKey()
-    {
-        $args = array('arg1', 2, 3.33, null);
-        $key = $this->_pattern->generateKey('emptyMethod', $args, array('callback_key' => 'test-object-cache::emptymethod'));
-
-        $class = __NAMESPACE__ . '\TestObjectCache';
-        $options = new Cache\Pattern\PatternOptions(array(
-            'object' => new $class(),
-            'storage' => $this->_storage,
-            'objectKey'  => 'test-object-cache',
-        ));
-        $this->_pattern->setOptions($options);
-
-        $keyWithClassObjectKey = $this->_pattern->generateKey('emptyMethod', $args);
-        $this->assertEquals($key, $keyWithClassObjectKey);
-    }
-
-    public function testCallWithClassObjectKey()
-    {
-        $class = __NAMESPACE__ . '\TestObjectCache';
-        $options = new Cache\Pattern\PatternOptions(array(
-            'object' => new $class(),
-            'storage' => $this->_storage,
-            'objectKey'  => 'test-object-cache',
-        ));
-        $this->_pattern->setOptions($options);
-
-        $args = array('arg1', 2, 3.33, null);
-
-        $usedCallbackKey      = null;
-        $this->_options->getStorage()->events()->attach('setItem.pre', function ($event) use (&$usedCallbackKey) {
-            $params = $event->getParams();
-            $usedCallbackKey = $params['options']['callback_key'];
-        });
-
-        $this->_pattern->call('emptyMethod', $args);
-        $this->assertEquals('test-object-cache::emptymethod', $usedCallbackKey);
-    }
-
-    public function testCallUnknownMethodException()
-    {
-        $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_pattern->call('notExiststingMethod');
     }
 
     public function testSetProperty()
@@ -258,5 +169,4 @@ class ObjectCacheTest extends CommonPatternTest
             $this->assertEquals('', $data);
         }
     }
-
 }

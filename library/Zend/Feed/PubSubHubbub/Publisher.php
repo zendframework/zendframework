@@ -1,34 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\PubSubHubbub;
 
 use Traversable;
+use Zend\Http\Request as HttpRequest;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Uri;
+use Zend\Version;
 
 /**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Publisher
 {
@@ -92,7 +82,7 @@ class Publisher
         }
 
         if (!is_array($options)) {
-            throw new Exception('Array or Traversable object'
+            throw new Exception\InvalidArgumentException('Array or Traversable object'
                                 . 'expected, got ' . gettype($options));
         }
         if (array_key_exists('hubUrls', $options)) {
@@ -230,7 +220,8 @@ class Publisher
      *
      * @param  string $url The Hub Server's URL
      * @return void
-     * @throws Exception\ExceptionInterface
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public function notifyHub($url)
     {
@@ -241,12 +232,12 @@ class Publisher
         }
         $client = $this->_getHttpClient();
         $client->setUri($url);
-        $response = $client->request();
-        if ($response->getStatus() !== 204) {
+        $response = $client->getResponse();
+        if ($response->getStatusCode() !== 204) {
             throw new Exception\RuntimeException('Notification to Hub Server '
                 . 'at "' . $url . '" appears to have failed with a status code of "'
-                . $response->getStatus() . '" and message "'
-                . $response->getMessage() . '"');
+                . $response->getStatusCode() . '" and message "'
+                . $response->getContent() . '"');
         }
     }
 
@@ -267,13 +258,13 @@ class Publisher
         $hubs   = $this->getHubUrls();
         if (empty($hubs)) {
             throw new Exception\RuntimeException('No Hub Server URLs'
-                . ' have been set so no notifcations can be sent');
+                . ' have been set so no notifications can be sent');
         }
         $this->_errors = array();
         foreach ($hubs as $url) {
             $client->setUri($url);
-            $response = $client->request();
-            if ($response->getStatus() !== 204) {
+            $response = $client->getResponse();
+            if ($response->getStatusCode() !== 204) {
                 $this->_errors[] = array(
                     'response' => $response,
                     'hubUrl' => $url
@@ -363,10 +354,7 @@ class Publisher
      */
     public function isSuccess()
     {
-        if (count($this->_errors) > 0) {
-            return false;
-        }
-        return true;
+        return !(count($this->_errors) != 0);
     }
 
     /**
@@ -390,9 +378,9 @@ class Publisher
     protected function _getHttpClient()
     {
         $client = PubSubHubbub::getHttpClient();
-        $client->setMethod(\Zend\Http\Request::METHOD_POST);
+        $client->setMethod(HttpRequest::METHOD_POST);
         $client->setOptions(array(
-            'useragent' => 'Zend_Feed_Pubsubhubbub_Publisher/' . \Zend\Version::VERSION,
+            'useragent' => 'Zend_Feed_Pubsubhubbub_Publisher/' . Version::VERSION,
         ));
         $params   = array();
         $params[] = 'hub.mode=publish';

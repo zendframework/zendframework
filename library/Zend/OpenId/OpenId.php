@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_OpenId
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_OpenId
  */
 
 namespace Zend\OpenId;
@@ -32,8 +22,6 @@ use Zend\Http\Response;
  *
  * @category   Zend
  * @package    Zend_OpenId
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class OpenId
 {
@@ -451,11 +439,12 @@ class OpenId
         }
 
         $response->setStatusCode(302);
-        $response->headers()->addHeaderLine('Location', $url);
+
+        $response->getHeaders()->addHeaderLine('Location', $url);
 
         if (!headers_sent()) {
             header($response->renderStatusLine());
-            foreach ($response->headers() as $header) {
+            foreach ($response->getHeaders() as $header) {
                 header($header->toString());
             }
         }
@@ -563,7 +552,7 @@ class OpenId
         }
         throw new Exception\RuntimeException(
             'The system doesn\'t have proper big integer extension',
-            Exception::UNSUPPORTED_LONG_MATH);
+            Exception\ExceptionInterface::UNSUPPORTED_LONG_MATH);
     }
 
     /**
@@ -589,9 +578,9 @@ class OpenId
             if ($cmp == 0) {
                 return "\0";
             } else if ($cmp < 0) {
-                throw new Exception(
+                throw new Exception\RuntimeException(
                     'Big integer arithmetic error',
-                    Exception::ERROR_LONG_MATH);
+                    Exception\ExceptionInterface::ERROR_LONG_MATH);
             }
             $bin = "";
             while (bccomp($bn, 0) > 0) {

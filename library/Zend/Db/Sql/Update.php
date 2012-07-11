@@ -10,11 +10,11 @@
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Adapter,
-    Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\Platform\PlatformInterface,
-    Zend\Db\Adapter\Platform\Sql92,
-    Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Platform\PlatformInterface;
+use Zend\Db\Adapter\Platform\Sql92;
 
 /**
  * @category   Zend
@@ -182,8 +182,16 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if (is_array($set)) {
             $setSql = array();
             foreach ($set as $column => $value) {
-                $parameterContainer->offsetSet($column, $value);
-                $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName($column);
+                if ($value instanceof Expression) {
+                    $exprData = $this->processExpression($value, $platform, $driver);
+                    $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $exprData['sql'];
+                    if (count($exprData['parameters']) > 0) {
+                        $parameterContainer->merge($exprData['parameters']);
+                    }
+                } else {
+                    $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName($column);
+                    $parameterContainer->offsetSet($column, $value);
+                }
             }
             $set = implode(', ', $setSql);
         }
@@ -215,8 +223,13 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $set = $this->set;
         if (is_array($set)) {
             $setSql = array();
-            foreach ($set as $setName => $setValue) {
-                $setSql[] = $adapterPlatform->quoteIdentifier($setName) . ' = ' . $adapterPlatform->quoteValue($setValue);
+            foreach ($set as $column => $value) {
+                if ($value instanceof Expression) {
+                    $exprData = $this->processExpression($value, $adapterPlatform);
+                    $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $exprData['sql'];
+                } else {
+                    $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $adapterPlatform->quoteValue($value);
+                }
             }
             $set = implode(', ', $setSql);
         }
@@ -243,5 +256,17 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             case 'where':
                 return $this->where;
         }
+    }
+	
+	/**
+     * __clone
+     *
+     * Resets the where object each time the Update is cloned.
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        $this->where = clone $this->where;
     }
 }

@@ -1,28 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage Ec2
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Amazon\Ec2;
-use Zend\Service\Amazon,
-    Zend\Service\Amazon\Ec2\Exception,
-    Zend\Crypt\Hmac;
+use Zend\Service\Amazon;
+use Zend\Service\Amazon\Ec2\Exception;
+use Zend\Crypt\Hmac;
+use Zend\Http\Client as HttpClient;
 
 /**
  * Provides the basic functionality to send a request to the Amazon Ec2 Query API
@@ -30,8 +20,6 @@ use Zend\Service\Amazon,
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractEc2 extends Amazon\AbstractAmazon
 {
@@ -85,8 +73,9 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
      * @param  string $region           Sets the AWS Region
      * @return void
      */
-    public function __construct($accessKey=null, $secretKey=null, $region=null)
+    public function __construct($accessKey = null, $secretKey = null, $region = null, HttpClient $httpClient = null)
     {
+        parent::__construct($accessKey, $secretKey, $httpClient);
         if(!$region) {
             $region = self::$_defaultRegion;
         } else {
@@ -97,8 +86,6 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
         }
 
         $this->_region = $region;
-
-        parent::__construct($accessKey, $secretKey);
     }
 
     /**
@@ -232,7 +219,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
 
         $data .= implode('&', $arrData);
 
-        $hmac = Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Hmac::BINARY);
+        $hmac = Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Hmac::OUTPUT_BINARY);
 
         return base64_encode($hmac);
     }

@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -24,9 +13,8 @@ namespace ZendTest\Form\View\Helper;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Captcha;
 use Zend\Form\Element;
-use Zend\Form\View\HelperLoader;
+use Zend\Form\View\HelperConfiguration;
 use Zend\Form\View\Helper\FormElement as FormElementHelper;
-use Zend\Registry;
 use Zend\View\Helper\Doctype;
 use Zend\View\Renderer\PhpRenderer;
 
@@ -34,8 +22,6 @@ use Zend\View\Renderer\PhpRenderer;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormElementTest extends TestCase
 {
@@ -45,17 +31,14 @@ class FormElementTest extends TestCase
     public function setUp()
     {
         $this->helper = new FormElementHelper();
-        
-        $regKey = 'Zend_View_Helper_Doctype';
-        if (Registry::isRegistered($regKey)) {
-            $registry = Registry::getInstance();
-            unset($registry[$regKey]);
-        }
+
+        Doctype::unsetDoctypeRegistry();
 
         $this->renderer = new PhpRenderer;
-        $broker = $this->renderer->getBroker();
-        $loader = $broker->getClassLoader();
-        $loader->registerPlugins(new HelperLoader());
+        $helpers = $this->renderer->getHelperPluginManager();
+        $config  = new HelperConfiguration();
+        $config->configureServiceManager($helpers);
+
         $this->helper->setView($this->renderer);
     }
 
@@ -93,9 +76,17 @@ class FormElementTest extends TestCase
      */
     public function testRendersExpectedInputElement($type)
     {
-        $element = new Element('foo');
+        if ($type === 'radio') {
+            $element = new Element\Radio('foo');
+        } elseif ($type === 'checkbox') {
+            $element = new Element\Checkbox('foo');
+        } else {
+            $element = new Element('foo');
+        }
+
         $element->setAttribute('type', $type);
         $element->setAttribute('options', array('option' => 'value'));
+        $element->setAttribute('src', 'http://zend.com/img.png');
         $markup  = $this->helper->render($element);
 
         $this->assertContains('<input', $markup);
@@ -106,7 +97,7 @@ class FormElementTest extends TestCase
     {
         return array(
             array('radio', 'input', 'type="radio"'),
-            array('checkbox', 'input', 'type="checkbox"'),
+            array('multi_checkbox', 'input', 'type="checkbox"'),
             array('select', 'option', '<select'),
         );
     }
@@ -117,7 +108,7 @@ class FormElementTest extends TestCase
      */
     public function testRendersMultiElementsAsExpected($type, $inputType, $additionalMarkup)
     {
-        $element = new Element('foo');
+        $element = new Element\MultiCheckbox('foo');
         $element->setAttribute('type', $type);
         $element->setAttribute('options', array(
             'option' => 'value1',
@@ -149,8 +140,20 @@ class FormElementTest extends TestCase
     public function testRendersCsrfAsExpected()
     {
         $element   = new Element\Csrf('foo');
-        $validator = $element->getValidator();
-        $hash      = $validator->getHash();
+        $inputSpec = $element->getInputSpecification();
+        $hash = '';
+
+        foreach ($inputSpec['validators'] as $validator) {
+            $class = get_class($validator);
+            switch ($class) {
+                case 'Zend\Validator\Csrf':
+                    $hash = $validator->getHash();
+                    break;
+                default:
+                    break;
+            }
+        }
+
         $markup    = $this->helper->render($element);
 
         $this->assertRegexp('#<input[^>]*(type="hidden")#', $markup);
@@ -166,5 +169,11 @@ class FormElementTest extends TestCase
 
         $this->assertContains('<textarea', $markup);
         $this->assertContains('>Initial content<', $markup);
+    }
+
+    public function testInvokeWithNoElementChainsHelper()
+    {
+        $element = new Element('foo');
+        $this->assertSame($this->helper, $this->helper->__invoke());
     }
 }

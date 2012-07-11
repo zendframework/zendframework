@@ -1,39 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Pattern
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Pattern;
 
-use Zend\Cache\Exception,
-    Zend\Cache\StorageFactory,
-    Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter,
-    Zend\Stdlib\Options;
+use Zend\Cache\Exception;
+use Zend\Cache\StorageFactory;
+use Zend\Cache\Storage\StorageInterface as Storage;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Pattern
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PatternOptions extends Options
+class PatternOptions extends AbstractOptions
 {
     /**
      * Used by:
@@ -149,7 +136,7 @@ class PatternOptions extends Options
      * - ClassCache
      * - ObjectCache
      * - OutputCache
-     * @var null|StorageAdapter
+     * @var null|Storage
      */
     protected $storage;
 
@@ -170,7 +157,7 @@ class PatternOptions extends Options
     /**
      * Used by:
      * - CaptureCache
-     * @var null|StorageAdapter
+     * @var null|Storage
      */
     protected $tagStorage;
 
@@ -623,6 +610,9 @@ class PatternOptions extends Options
      */
     public function getObjectKey()
     {
+        if (!$this->objectKey) {
+            return get_class($this->getObject());
+        }
         return $this->objectKey;
     }
 
@@ -686,13 +676,12 @@ class PatternOptions extends Options
      * - ObjectCache
      * - OutputCache
      *
-     * @param  string|array|StorageAdapter $storage
+     * @param  string|array|Storage $storage
      * @return PatternOptions
      */
     public function setStorage($storage)
     {
-        $storage = $this->storageFactory($storage);
-        $this->storage = $storage;
+        $this->storage = $this->storageFactory($storage);
         return $this;
     }
 
@@ -705,7 +694,7 @@ class PatternOptions extends Options
      * - ObjectCache
      * - OutputCache
      *
-     * @return null|StorageAdapter
+     * @return null|Storage
      */
     public function getStorage()
     {
@@ -772,13 +761,12 @@ class PatternOptions extends Options
      * Used by:
      * - CaptureCache
      *
-     * @param  string|array|StorageAdapter $tagStorage
+     * @param  string|array|Storage $tagStorage
      * @return PatternOptions
      */
     public function setTagStorage($tagStorage)
     {
-        $tagStorage = $this->storageFactory($tagStorage);
-        $this->tagStorage = $tagStorage;
+        $this->tagStorage = $this->storageFactory($tagStorage);
         return $this;
     }
 
@@ -788,7 +776,7 @@ class PatternOptions extends Options
      * Used by:
      * - CaptureCache
      *
-     * @return null|StorageAdapter
+     * @return null|Storage
      */
     public function getTagStorage()
     {
@@ -858,7 +846,7 @@ class PatternOptions extends Options
     /**
      * Create a storage object from a given specification
      *
-     * @param  array|string|StorageAdapter $storage
+     * @param  array|string|Storage $storage
      * @return StorageAdapter
      */
     protected function storageFactory($storage)
@@ -867,9 +855,9 @@ class PatternOptions extends Options
             $storage = StorageFactory::factory($storage);
         } elseif (is_string($storage)) {
             $storage = StorageFactory::adapterFactory($storage);
-        } elseif ( !($storage instanceof StorageAdapter) ) {
+        } elseif ( !($storage instanceof Storage) ) {
             throw new Exception\InvalidArgumentException(
-                'The storage must be an instanceof Zend\Cache\Storage\Adapter\AdapterInterface '
+                'The storage must be an instanceof Zend\Cache\Storage\StorageInterface '
                 . 'or an array passed to Zend\Cache\Storage::factory '
                 . 'or simply the name of the storage adapter'
             );

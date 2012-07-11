@@ -1,33 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper\Navigation;
 
 use RecursiveIteratorIterator;
 use Zend\Acl;
+use Zend\I18n\Translator\Translator;
 use Zend\Navigation;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Translator;
 use Zend\View;
 use Zend\View\Exception;
 
@@ -37,11 +26,9 @@ use Zend\View\Exception;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractHelper
-    extends View\Helper\HtmlElement
+    extends View\Helper\AbstractHtmlElement
     implements HelperInterface,
                ServiceLocatorAwareInterface
 {
@@ -81,7 +68,7 @@ abstract class AbstractHelper
     /**
      * Translator
      *
-     * @var \Zend\Translator\Adapter
+     * @var Translator
      */
     protected $translator;
 
@@ -192,19 +179,31 @@ abstract class AbstractHelper
         return $this->container;
     }
 
+    /**
+     * Verifies container and eventually fetches it from service locator if it is a string
+     *
+     * @param \Zend\Navigation\AbstractContainer|string|null $container
+     * @throws \Zend\View\Exception\InvalidArgumentException
+     */
     protected function parseContainer(&$container = null)
     {
         if (null === $container) {
-            ; // intentionally left blank
-        } else if (is_string($container)) {
+            return;
+        }
+
+        if (is_string($container)) {
             if (!$this->getServiceLocator()) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                    'Attempted to set container with alias "%s" but no ServiceLocator wwas set',
+                    'Attempted to set container with alias "%s" but no ServiceLocator was set',
                     $container
                 ));
             }
+
             $container = $this->getServiceLocator()->get($container);
-        } else if (!$container instanceof Navigation\AbstractContainer) {
+            return;
+        }
+
+        if (!$container instanceof Navigation\AbstractContainer) {
             throw new  Exception\InvalidArgumentException(
                 'Container must be a string alias or an instance of ' .
                     'Zend\Navigation\AbstractContainer'
@@ -215,7 +214,7 @@ abstract class AbstractHelper
     /**
      * Sets the minimum depth a page must have to be included when rendering
      *
-     * @param  int $minDepth [optional] minimum depth. Default is null, which 
+     * @param  int $minDepth [optional] minimum depth. Default is null, which
      *                       sets no minimum depth.
      * @return AbstractHelper fluent interface, returns self
      */
@@ -245,7 +244,7 @@ abstract class AbstractHelper
     /**
      * Sets the maximum depth a page can have to be included when rendering
      *
-     * @param  int $maxDepth [optional] maximum depth. Default is null, which 
+     * @param  int $maxDepth [optional] maximum depth. Default is null, which
      *                       sets no maximum depth.
      * @return AbstractHelper fluent interface, returns self
      */
@@ -297,21 +296,15 @@ abstract class AbstractHelper
      *
      * Implements {@link HelperInterface::setTranslator()}.
      *
-     * @param  mixed $translator [optional] translator.  Expects an object of 
+     * @param  mixed $translator [optional] translator.  Expects an object of
      *                           type {@link Translator\Adapter\AbstractAdapter}
-     *                           or {@link Translator\Translator}, or null. 
+     *                           or {@link Translator\Translator}, or null.
      *                           Default is null, which sets no translator.
      * @return AbstractHelper  fluent interface, returns self
      */
-    public function setTranslator($translator = null)
+    public function setTranslator(Translator $translator = null)
     {
-        if (null == $translator ||
-            $translator instanceof Translator\Adapter\AbstractAdapter) {
-            $this->translator = $translator;
-        } elseif ($translator instanceof Translator\Translator) {
-            $this->translator = $translator->getAdapter();
-        }
-
+        $this->translator = $translator;
         return $this;
     }
 
@@ -320,7 +313,7 @@ abstract class AbstractHelper
      *
      * Implements {@link HelperInterface::getTranslator()}.
      *
-     * @return Translator\Adapter\AbstractAdapter|null  translator or null
+     * @return Translator|null  translator or null
      */
     public function getTranslator()
     {
@@ -363,7 +356,7 @@ abstract class AbstractHelper
      *
      * Implements {@link HelperInterface::setRole()}.
      *
-     * @param  mixed $role [optional] role to set. Expects a string, an 
+     * @param  mixed $role [optional] role to set. Expects a string, an
      *                     instance of type {@link Acl\Role\RoleInterface}, or null. Default
      *                     is null, which will set no role.
      * @return AbstractHelper  fluent interface, returns self
@@ -377,7 +370,7 @@ abstract class AbstractHelper
             $this->role = $role;
         } else {
             throw new Exception\InvalidArgumentException(sprintf(
-                '$role must be a string, null, or an instance of ' 
+                '$role must be a string, null, or an instance of '
                 .  'Zend\Acl\Role\RoleInterface; %s given',
                 (is_object($role) ? get_class($role) : gettype($role))
             ));
@@ -456,7 +449,7 @@ abstract class AbstractHelper
      *
      * Implements {@link HelperInterface::setUseTranslator()}.
      *
-     * @param  bool $useTranslator [optional] whether translator should be used. 
+     * @param  bool $useTranslator [optional] whether translator should be used.
      *                             Default is true.
      * @return AbstractHelper  fluent interface, returns self
      */
@@ -667,7 +660,7 @@ abstract class AbstractHelper
             'target' => $page->getTarget()
         );
 
-        $escaper = $this->view->plugin('escape');
+        $escaper = $this->view->plugin('escapeHtml');
 
         return '<a' . $this->_htmlAttribs($attribs) . '>'
              . $escaper($label)
@@ -691,8 +684,8 @@ abstract class AbstractHelper
      *   will not be accepted if it is the descendant of a non-accepted page.
      *
      * @param  AbstractPage $page      page to check
-     * @param  bool         $recursive [optional] if true, page will not be 
-     *                                 accepted if it is the descendant of a 
+     * @param  bool         $recursive [optional] if true, page will not be
+     *                                 accepted if it is the descendant of a
      *                                 page that is not accepted. Default is true.
      * @return bool                    whether page should be accepted
      */
@@ -770,7 +763,7 @@ abstract class AbstractHelper
     /**
      * Converts an associative array to a string of tag attributes.
      *
-     * Overloads {@link View\Helper\HtmlElement::_htmlAttribs()}.
+     * Overloads {@link View\Helper\AbstractHtmlElement::_htmlAttribs()}.
      *
      * @param  array $attribs  an array where each key-value pair is converted
      *                         to an attribute name and value
@@ -791,7 +784,7 @@ abstract class AbstractHelper
     /**
      * Normalize an ID
      *
-     * Overrides {@link View\Helper\HtmlElement::_normalizeId()}.
+     * Overrides {@link View\Helper\AbstractHtmlElement::_normalizeId()}.
      *
      * @param  string $value
      * @return string
@@ -822,7 +815,7 @@ abstract class AbstractHelper
      * Sets default ACL role(s) to use when iterating pages if not explicitly
      * set later with {@link setRole()}
      *
-     * @param  mixed $role [optional] role to set. Expects null, string, or an 
+     * @param  mixed $role [optional] role to set. Expects null, string, or an
      *                     instance of {@link Acl\Role\RoleInterface}. Default is null, which
      *                     sets no default role.
      * @return void
@@ -830,8 +823,8 @@ abstract class AbstractHelper
      */
     public static function setDefaultRole($role = null)
     {
-        if (null === $role 
-            || is_string($role) 
+        if (null === $role
+            || is_string($role)
             || $role instanceof Acl\Role\RoleInterface
         ) {
             self::$defaultRole = $role;

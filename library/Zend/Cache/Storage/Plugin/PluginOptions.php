@@ -1,39 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Plugin;
 
-use Zend\Cache\Exception,
-    Zend\Serializer\Adapter\AdapterInterface as SerializerAdapter,
-    Zend\Serializer\Serializer as SerializerFactory,
-    Zend\Stdlib\Options;
+use Zend\Cache\Exception;
+use Zend\Serializer\Adapter\AdapterInterface as SerializerAdapter;
+use Zend\Serializer\Serializer as SerializerFactory;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PluginOptions extends Options
+class PluginOptions extends AbstractOptions
 {
     /**
      * Used by:
@@ -41,13 +28,6 @@ class PluginOptions extends Options
      * @var int
      */
     protected $clearingFactor = 0;
-
-    /**
-     * Used by:
-     * - ClearByFactor
-     * @var int
-     */
-    protected $clearByNamespace = true;
 
     /**
      * Used by:
@@ -95,7 +75,7 @@ class PluginOptions extends Options
      * Set automatic clearing factor
      *
      * Used by:
-     * - ClearByFactor
+     * - ClearExpiredByFactor
      *
      * @param  int $clearingFactor
      * @return PluginOptions
@@ -110,41 +90,13 @@ class PluginOptions extends Options
      * Get automatic clearing factor
      *
      * Used by:
-     * - ClearByFactor
+     * - ClearExpiredByFactor
      *
      * @return int
      */
     public function getClearingFactor()
     {
         return $this->clearingFactor;
-    }
-
-    /**
-     * Set flag indicating whether or not to clear by namespace
-     *
-     * Used by:
-     * - ClearByFactor
-     *
-     * @param  bool $clearByNamespace
-     * @return PluginOptions
-     */
-    public function setClearByNamespace($clearByNamespace)
-    {
-        $this->clearByNamespace = $clearByNamespace;
-        return $this;
-    }
-
-    /**
-     * Clear items by namespace?
-     *
-     * Used by:
-     * - ClearByFactor
-     *
-     * @return bool
-     */
-    public function getClearByNamespace()
-    {
-        return $this->clearByNamespace;
     }
 
     /**

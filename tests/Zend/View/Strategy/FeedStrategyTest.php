@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace ZendTest\View\Strategy;
@@ -37,8 +26,6 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FeedStrategyTest extends TestCase
 {
@@ -60,7 +47,7 @@ class FeedStrategyTest extends TestCase
     public function testRssAcceptHeaderSelectsFeedStrategy()
     {
         $request = new HttpRequest();
-        $request->headers()->addHeaderLine('Accept', 'application/rss+xml');
+        $request->getHeaders()->addHeaderLine('Accept', 'application/rss+xml');
         $this->event->setRequest($request);
         $result = $this->strategy->selectRenderer($this->event);
         $this->assertSame($this->renderer, $result);
@@ -69,7 +56,7 @@ class FeedStrategyTest extends TestCase
     public function testAtomAcceptHeaderSelectsFeedStrategy()
     {
         $request = new HttpRequest();
-        $request->headers()->addHeaderLine('Accept', 'application/atom+xml');
+        $request->getHeaders()->addHeaderLine('Accept', 'application/atom+xml');
         $this->event->setRequest($request);
         $result = $this->strategy->selectRenderer($this->event);
         $this->assertSame($this->renderer, $result);
@@ -85,7 +72,7 @@ class FeedStrategyTest extends TestCase
     protected function assertResponseNotInjected()
     {
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertTrue(empty($content));
         $this->assertFalse($headers->has('content-type'));
     }
@@ -125,7 +112,7 @@ class FeedStrategyTest extends TestCase
 
         $this->strategy->injectResponse($this->event);
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertEquals($expected, $content);
         $this->assertTrue($headers->has('content-type'));
         $this->assertEquals('application/atom+xml', $headers->get('content-type')->getFieldValue());
@@ -182,7 +169,7 @@ class FeedStrategyTest extends TestCase
 
         $this->strategy->injectResponse($this->event);
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertEquals($expected->export('atom'), $content);
         $this->assertTrue($headers->has('content-type'));
         $this->assertEquals('application/atom+xml', $headers->get('content-type')->getFieldValue());
@@ -198,7 +185,7 @@ class FeedStrategyTest extends TestCase
 
         $this->strategy->injectResponse($this->event);
         $content = $this->response->getContent();
-        $headers = $this->response->headers();
+        $headers = $this->response->getHeaders();
         $this->assertEquals($expected->export('rss'), $content);
         $this->assertTrue($headers->has('content-type'));
         $this->assertEquals('application/rss+xml', $headers->get('content-type')->getFieldValue());

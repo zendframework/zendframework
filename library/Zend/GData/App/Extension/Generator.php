@@ -1,27 +1,14 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage App
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData\App\Extension;
-
-use Zend\GData\App\Extension;
 
 /**
  * Represents the atom:generator element
@@ -29,10 +16,8 @@ use Zend\GData\App\Extension;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Generator extends Extension
+class Generator extends AbstractExtension
 {
 
     protected $_rootElement = 'generator';
@@ -74,7 +59,7 @@ class Generator extends Extension
     }
 
     /**
-     * @return \Zend\GData\App\Extension\Uri
+     * @return Uri
      */
     public function getUri()
     {
@@ -82,7 +67,7 @@ class Generator extends Extension
     }
 
     /**
-     * @param \Zend\GData\App\Extension\Uri $value
+     * @param Uri $value
      * @return \Zend\GData\App\Entry Provides a fluent interface
      */
     public function setUri($value)
@@ -92,7 +77,7 @@ class Generator extends Extension
     }
 
     /**
-     * @return Zend\GData\App\Extension\Version
+     * @return Version
      */
     public function getVersion()
     {
@@ -100,7 +85,7 @@ class Generator extends Extension
     }
 
     /**
-     * @param Zend\GData\App\Extension\Version $value
+     * @param Version $value
      * @return \Zend\GData\App\Entry Provides a fluent interface
      */
     public function setVersion($value)

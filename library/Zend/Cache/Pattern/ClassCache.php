@@ -1,34 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Pattern
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Pattern;
 
-use Zend\Cache,
-    Zend\Cache\Exception;
+use Zend\Cache;
+use Zend\Cache\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ClassCache extends CallbackCache
 {
@@ -55,22 +42,21 @@ class ClassCache extends CallbackCache
      *
      * @param  string $method  Method name to call
      * @param  array  $args    Method arguments
-     * @param  array  $options Cache options
      * @return mixed
      * @throws Exception
      */
-    public function call($method, array $args = array(), array $options = array())
+    public function call($method, array $args = array())
     {
-        $classOptions = $this->getOptions();
-        $classname    = $classOptions->getClass();
-        $method       = strtolower($method);
-        $callback     = $classname . '::' . $method;
+        $options   = $this->getOptions();
+        $classname = $options->getClass();
+        $method    = strtolower($method);
+        $callback  = $classname . '::' . $method;
 
-        $cache = $classOptions->getCacheByDefault();
+        $cache = $options->getCacheByDefault();
         if ($cache) {
-            $cache = !in_array($method, $classOptions->getClassNonCacheMethods());
+            $cache = !in_array($method, $options->getClassNonCacheMethods());
         } else {
-            $cache = in_array($method, $classOptions->getClassCacheMethods());
+            $cache = in_array($method, $options->getClassCacheMethods());
         }
 
         if (!$cache) {
@@ -81,34 +67,40 @@ class ClassCache extends CallbackCache
             }
         }
 
-        // speed up key generation
-        if (!isset($options['callback_key'])) {
-            $options['callback_key'] = $callback;
-        }
-
-        return parent::call($callback, $args, $options);
+        return parent::call($callback, $args);
     }
 
     /**
-     * Generate a key from the method name and arguments
+     * Generate a unique key in base of a key representing the callback part
+     * and a key representing the arguments part.
      *
-     * @param  string   $method  The method name
-     * @param  array    $args    Method arguments
+     * @param  string     $method  The method
+     * @param  array      $args    Callback arguments
      * @return string
      * @throws Exception
      */
-    public function generateKey($method, array $args = array(), array $options = array())
+    public function generateKey($method, array $args = array())
     {
-        // speed up key generation
-        $classOptions = $this->getOptions();
-        if (!isset($options['callback_key'])) {
-            $callback = $classOptions->getClass() . '::' . strtolower($method);
-            $options['callback_key'] = $callback;
-        } else {
-            $callback = $classOptions->getClass() . '::' . $method;
-        }
+        return $this->generateCallbackKey(
+            $this->getOptions()->getClass() . '::' . $method,
+            $args
+        );
+    }
 
-        return parent::generateKey($callback, $args, $options);
+    /**
+     * Generate a unique key in base of a key representing the callback part
+     * and a key representing the arguments part.
+     *
+     * @param  callback   $callback  A valid callback
+     * @param  array      $args      Callback arguments
+     * @return string
+     * @throws Exception
+     */
+    protected function generateCallbackKey($callback, array $args)
+    {
+        $callbackKey = md5(strtolower($callback));
+        $argumentKey = $this->generateArgumentsKey($args);
+        return $callbackKey . $argumentKey;
     }
 
     /**

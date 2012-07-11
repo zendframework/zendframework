@@ -1,4 +1,13 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
+ */
+
 namespace ZendTest\Db\Adapter;
 
 use Zend\Db\Adapter\Adapter;
@@ -143,13 +152,13 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox unit test: Test getDefaultSchema() returns default schema from connection object
-     * @covers Zend\Db\Adapter\Adapter::getDefaultSchema
+     * @testdox unit test: Test getCurrentSchema() returns current schema from connection object
+     * @covers Zend\Db\Adapter\Adapter::getCurrentSchema
      */
-    public function testGetDefaultSchema()
+    public function testGetCurrentSchema()
     {
-        $this->mockConnection->expects($this->any())->method('getDefaultSchema')->will($this->returnValue('FooSchema'));
-        $this->assertEquals('FooSchema', $this->adapter->getDefaultSchema());
+        $this->mockConnection->expects($this->any())->method('getCurrentSchema')->will($this->returnValue('FooSchema'));
+        $this->assertEquals('FooSchema', $this->adapter->getCurrentSchema());
     }
 
     /**

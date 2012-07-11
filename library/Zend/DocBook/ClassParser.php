@@ -11,8 +11,8 @@
 namespace Zend\DocBook;
 
 use ReflectionMethod;
-use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter;
 use Zend\Code\Reflection\ClassReflection;
+use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter;
 
 /**
  * @category   Zend

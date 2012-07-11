@@ -1,26 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
 
+use Traversable;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 
@@ -28,8 +18,6 @@ use Zend\Form\Exception;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormElementErrors extends AbstractHelper
 {
@@ -57,7 +45,7 @@ class FormElementErrors extends AbstractHelper
         $this->messageCloseString = (string) $messageCloseString;
         return $this;
     }
-    
+
     /**
      * Get the string used to close message representation
      *
@@ -79,7 +67,7 @@ class FormElementErrors extends AbstractHelper
         $this->messageOpenFormat = (string) $messageOpenFormat;
         return $this;
     }
-    
+
     /**
      * Get the formatted string used to open message representation
      *
@@ -101,7 +89,7 @@ class FormElementErrors extends AbstractHelper
         $this->messageSeparatorString = (string) $messageSeparatorString;
         return $this;
     }
-    
+
     /**
      * Get the string used to separate messages
      *
@@ -136,8 +124,8 @@ class FormElementErrors extends AbstractHelper
 
     /**
      * Render validation errors for the provided $element
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @param  array $attributes
      * @return string
      */
@@ -163,11 +151,15 @@ class FormElementErrors extends AbstractHelper
         }
 
         // Flatten message array
-        $escape          = $this->getEscapeHelper();
+        $escapeHtml      = $this->getEscapeHtmlHelper();
         $messagesToPrint = array();
-        array_walk_recursive($messages, function($item) use (&$messagesToPrint, $escape) {
-            $messagesToPrint[] = $escape($item);
+        array_walk_recursive($messages, function($item) use (&$messagesToPrint, $escapeHtml) {
+            $messagesToPrint[] = $escapeHtml($item);
         });
+
+        if (empty($messagesToPrint)) {
+            return '';
+        }
 
         // Generate markup
         $markup  = sprintf($this->getMessageOpenFormat(), $attributes);
@@ -181,16 +173,17 @@ class FormElementErrors extends AbstractHelper
      * Invoke helper as functor
      *
      * Proxies to {@link render()} if an element is passed.
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @param  array $attributes
      * @return string|FormElementErrors
      */
     public function __invoke(ElementInterface $element = null, array $attributes = array())
     {
-        if ($element) {
-            return $this->render($element, $attributes);
+        if (!$element) {
+            return $this;
         }
-        return $this;
+
+        return $this->render($element, $attributes);
     }
 }

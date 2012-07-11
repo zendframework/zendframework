@@ -1,27 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-webat this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Session
  */
 
 namespace Zend\Session\SaveHandler;
 
-use Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter;
-use Zend\Session\Exception;
+use Zend\Cache\Storage\ClearExpiredInterface as ClearExpiredCacheStorage;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\Sessin\Exception;
 
 /**
  * Cache session save handler
@@ -29,8 +20,6 @@ use Zend\Session\Exception;
  * @category   Zend
  * @package    Zend_Session
  * @subpackage SaveHandler
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Cache implements SaveHandlerInterface
 {
@@ -49,21 +38,21 @@ class Cache implements SaveHandlerInterface
     protected $sessionName;
 
     /**
-     * The cache storage adapter
-     * @var StorageAdapter
+     * The cache storage
+     * @var CacheStorage
      */
-    protected $storageAdapter;
+    protected $cacheStorage;
 
     /**
      * Constructor
      *
-     * @param  Zend\Cache\Storage\Adapter\AdapterInterface $storageAdapter
+     * @param  CacheStorage $cacheStorage
      * @return void
-     * @throws Zend\Session\Exception\ExceptionInterface
+     * @throws Exception\ExceptionInterface
      */
-    public function __construct(StorageAdapter $storageAdapter)
+    public function __construct(CacheStorage $cacheStorage)
     {
-        $this->setStorageAdapter($storageAdapter);
+        $this->setCacheStorage($cacheStorage);
     }
 
     /**
@@ -100,7 +89,7 @@ class Cache implements SaveHandlerInterface
      */
     public function read($id)
     {
-        return $this->getStorageAdapter()->getItem($id);
+        return $this->getCacheStorge()->getItem($id);
     }
 
     /**
@@ -112,7 +101,7 @@ class Cache implements SaveHandlerInterface
      */
     public function write($id, $data)
     {
-        return $this->getStorageAdapter()->setItem($id, $data);
+        return $this->getCacheStorge()->setItem($id, $data);
     }
 
     /**
@@ -123,40 +112,42 @@ class Cache implements SaveHandlerInterface
      */
     public function destroy($id)
     {
-        return $this->getStorageAdapter()->removeItem($id);
+        return $this->getCacheStorge()->removeItem($id);
     }
 
     /**
      * Garbage Collection
      *
      * @param int $maxlifetime
-     * @return true
+     * @return boolean
      */
     public function gc($maxlifetime)
     {
+        $cache = $this->getCacheStorge();
+        if ($cache instanceof ClearExpiredCacheStorage) {
+            return $cache->clearExpired();
+        }
         return true;
     }
 
     /**
-     * Set cache storage adapter
+     * Set cache storage
      *
-     * Allows passing a string class name or StorageAdapter object.
-     *
-     * @param Zend\Cache\Storage\Adapter\AdapterInterface
+     * @param CacheStorage
      * @return void
      */
-    public function setStorageAdapter(StorageAdapter $storageAdapter)
+    public function setCacheStorage(CacheStorage $cacheStorage)
     {
-        $this->storageAdapter = $storageAdapter;
+        $this->cacheStorage = $cacheStorage;
     }
 
     /**
      * Get Cache Storage Adapter Object
      *
-     * @return Zend\Cache\Storage\Adapter\AdapterInterface
+     * @return CacheStorage
      */
-    public function getStorageAdapter()
+    public function getCacheStorge()
     {
-        return $this->storageAdapter;
+        return $this->cacheStorage;
     }
 }

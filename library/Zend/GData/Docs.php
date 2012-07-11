@@ -1,23 +1,11 @@
 <?php
-
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Docs
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData;
@@ -29,20 +17,18 @@ namespace Zend\GData;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Docs
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Docs extends GData
 {
 
-    const DOCUMENTS_LIST_FEED_URI   = 'http://docs.google.com/feeds/documents/private/full';
-    const DOCUMENTS_FOLDER_FEED_URI = 'http://docs.google.com/feeds/folders/private/full';
+    const DOCUMENTS_LIST_FEED_URI   = 'https://docs.google.com/feeds/documents/private/full';
+    const DOCUMENTS_FOLDER_FEED_URI = 'https://docs.google.com/feeds/folders/private/full';
     const DOCUMENTS_CATEGORY_SCHEMA = 'http://schemas.google.com/g/2005#kind';
     const DOCUMENTS_CATEGORY_TERM   = 'http://schemas.google.com/docs/2007#folder';
-    const DOCUMENTS_FEED_URI        = 'http://docs.google.com/feeds/default/private/full/';
+    const DOCUMENTS_FEED_URI        = 'https://docs.google.com/feeds/default/private/full/';
     const DOCUMENTS_ACL_SCHEMEA     = 'http://schemas.google.com/g/2005#kind';
     const DOCUMENT_ACL_TERM         = 'http://schemas.google.com/acl/2007#accessRule';
-    const DOCUMENT_ACL_URI          = 'http://docs.google.com/feeds/default/private/full/';
+    const DOCUMENT_ACL_URI          = 'https://docs.google.com/feeds/default/private/full/';
     const AUTH_SERVICE_NAME         = 'writely';
 
     protected $_defaultPostUri = self::DOCUMENTS_LIST_FEED_URI;
@@ -63,9 +49,9 @@ class Docs extends GData
       'XLSX'=>'application/vnd.ms-excel',
       'PPT'=>'application/vnd.ms-powerpoint',
       'PPS'=>'application/vnd.ms-powerpoint');
-    
+
     /**
-    * Namespaces used for \Zend\Gdata\Docs
+    * Namespaces used for \Zend\GData\Docs
     *
     * @var array
     */
@@ -150,7 +136,7 @@ class Docs extends GData
      * @return \Zend\GData\Docs\DocumentListEntry
      */
     public function getDoc($docId, $docType) {
-        $location = 'http://docs.google.com/feeds/documents/private/full/' .
+        $location = 'https://docs.google.com/feeds/documents/private/full/' .
             $docType . '%3A' . $docId;
         return $this->getDocumentListEntry($location);
     }
@@ -203,7 +189,7 @@ class Docs extends GData
      *         which are enumerated in SUPPORTED_FILETYPES.
      * @param string $uri (optional) The URL to which the upload should be
      *         made.
-     *         Example: 'http://docs.google.com/feeds/documents/private/full'.
+     *         Example: 'https://docs.google.com/feeds/documents/private/full'.
      * @return \Zend\GData\Docs\DocumentListEntry The entry for the newly
      *         created Google Document.
      */
@@ -253,7 +239,7 @@ class Docs extends GData
      *       the appropriate type doesn't exist yet.
      */
     public function createFolder($folderName, $folderResourceId=null) {
-        $category = new App\Extension\Category(self::DOCUMENTS_CATEGORY_TERM, 
+        $category = new App\Extension\Category(self::DOCUMENTS_CATEGORY_TERM,
                                                           self::DOCUMENTS_CATEGORY_SCHEMA);
         $title = new App\Extension\Title($folderName);
         $entry = new Entry();
@@ -268,10 +254,10 @@ class Docs extends GData
 
         return $this->insertEntry($entry, $uri);
     }
-    
+
     /**
      * Share a document or folder with a given user, group, domain or make it public.
-     * 
+     *
      * @param string $documentId
      * @param string|null $email
      * @param string $scopeType
@@ -280,21 +266,21 @@ class Docs extends GData
      */
     public function setDocumentACL($documentId, $email = NULL, $scopeType = 'default', $role = 'reader')
     {
-        $category = new \Zend\Gdata\App\Extension\Category(self::DOCUMENT_ACL_TERM, self::DOCUMENTS_ACL_SCHEMEA);
-        
-        $entry = new \Zend\Gdata\Docs\ACLEntry();
-        
+        $category = new \Zend\GData\App\Extension\Category(self::DOCUMENT_ACL_TERM, self::DOCUMENTS_ACL_SCHEMEA);
+
+        $entry = new \Zend\GData\Docs\ACLEntry();
+
         $entry->setCategory(array($category));
-        
-        $entry->setScope(new \Zend\Gdata\Docs\Extension\ACLScope($scopeType, $email));
-        
-        $entry->setRole(new \Zend\Gdata\Docs\Extension\ACLRole($role));
-        
+
+        $entry->setScope(new \Zend\GData\Docs\Extension\ACLScope($scopeType, $email));
+
+        $entry->setRole(new \Zend\GData\Docs\Extension\ACLRole($role));
+
         $uri = self::DOCUMENT_ACL_URI . $documentId . '/acl';
-        
+
         //This requires version 3
         $this->setMajorProtocolVersion(3);
-        
+
         return $this->insertEntry($entry, $uri);
     }
 

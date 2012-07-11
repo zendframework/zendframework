@@ -1,0 +1,21 @@
+{
+    "name": "zendframework/zend-markup",
+    "description": "provides an extensible way for parsing text and rendering lightweight markup languages like BBcode and Textile",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "markup"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Markup": ""
+        }
+    },
+    "target-dir": "Zend/Markup",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-loader": "self.version",
+        "zendframework/zend-filter": "self.version",
+        "zendframework/zend-stdlib": "self.version"
+    }
+}

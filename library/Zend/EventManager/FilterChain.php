@@ -1,35 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_EventManager
  */
 
 namespace Zend\EventManager;
 
-use Zend\Stdlib\CallbackHandler,
-    Zend\Stdlib\Exception\InvalidCallbackException;
+use Zend\Stdlib\CallbackHandler;
 
 /**
  * FilterChain: intercepting filter manager
  *
  * @category   Zend
  * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FilterChain implements Filter\FilterInterface
 {
@@ -42,8 +29,6 @@ class FilterChain implements Filter\FilterInterface
      * Constructor
      *
      * Initializes Filter\FilterIterator in which filters will be aggregated
-     * 
-     * @return void
      */
     public function __construct()
     {
@@ -81,11 +66,12 @@ class FilterChain implements Filter\FilterInterface
      * @param  callback $callback PHP Callback
      * @param  int $priority Priority in the queue at which to execute; defaults to 1 (higher numbers == higher priority)
      * @return CallbackHandler (to allow later unsubscribe)
+     * @throws Exception\InvalidCallbackException
      */
     public function attach($callback, $priority = 1)
     {
         if (empty($callback)) {
-            throw new InvalidCallbackException('No callback provided');
+            throw new Exception\InvalidCallbackException('No callback provided');
         }
         $filter = new CallbackHandler($callback, array('priority' => $priority));
         $this->filters->insert($filter, $priority);
@@ -106,7 +92,7 @@ class FilterChain implements Filter\FilterInterface
     /**
      * Retrieve all filters
      * 
-     * @return FilterIterator
+     * @return Filter\FilterIterator
      */
     public function getFilters()
     {
@@ -133,6 +119,6 @@ class FilterChain implements Filter\FilterInterface
      */
     public function getResponses()
     {
-        return $this->responses;
+        return null;
     }
 }

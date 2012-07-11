@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xml:id="zend.form.element.number">
+    <title>Zend\Form\Element\Number</title>
+
+    <para>
+        The <classname>Number</classname> element is meant to be paired with the
+        <classname>Zend/Form/View/Helper/FormNumber</classname> for
+        <link xmlns:xlink="http://www.w3.org/1999/xlink"
+        xlink:href="http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#number-state-(type=number)"
+        >HTML5 inputs with type number</link>.
+        This element adds filters and validators to it's input filter specification
+        in order to validate HTML5 number input values on the server.
+    </para>
+
+    <example xml:id="zend.form.element.number.usage">
+        <title>Basic Usage of Zend\Form\Element\Number</title>
+
+        <para>
+            This element automatically adds a <varname>"type"</varname>
+            attribute of value <varname>"number"</varname>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Form\Element;
+use Zend\Form\Form;
+
+$number = new Element\Number('quantity');
+$number
+    ->setLabel('Quantity')
+    ->setAttributes(array(
+        'min'  => '0',
+        'max'  => '10',
+        'step' => '1', // default step interval is 1
+    ));
+
+$form = new Form('my-form');
+$form->add($number);
+]]></programlisting>
+
+        <note>
+            <para>
+                Note: the <varname>min</varname>, <varname>max</varname>, and
+                <varname>step</varname> attributes should be set prior to calling
+                Zend\Form::prepare(). Otherwise, the default input specification for
+                the element may not contain the correct validation rules.
+            </para>
+        </note>
+    </example>
+
+    <section xml:id="zend.form.element.number.methods">
+        <title>Available Methods</title>
+
+        <para>
+            The following methods are in addition to the inherited
+            <link linkend="zend.form.element.methods">methods of
+            <classname>Zend\Form\Element</classname></link>.
+        </para>
+
+        <variablelist>
+            <varlistentry xml:id="zend.form.element.number.methods.get-input-specification">
+                <term>getInputSpecification</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getInputSpecification</methodname>
+                        <void/>
+                    </methodsynopsis>
+                    <para>
+                        Returns a input filter specification, which includes
+                        <classname>Zend\Filter\StringTrim</classname> and
+                        will add the appropriate validators
+                        based on the values from the <varname>min</varname>,
+                        <varname>max</varname>, and <varname>step</varname> attributes.
+                    </para>
+                    <para>
+                        If the <varname>min</varname> attribute is set,
+                        a <classname>Zend\Validator\GreaterThan</classname> validator
+                        will be added to ensure the number value is greater than the
+                        minimum value. The <varname>min</varname> value should be a
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href="http://www.whatwg.org/specs/web-apps/current-work/multipage/common-microsyntaxes.html#valid-floating-point-number"
+                        >valid floating point number</link>.
+                    </para>
+                    <para>
+                        If the <varname>max</varname> attribute is set,
+                        a <classname>Zend\Validator\LessThanValidator</classname> validator
+                        will be added to ensure the number value is less than the
+                        maximum value. The <varname>max</varname> value should be a
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href="http://www.whatwg.org/specs/web-apps/current-work/multipage/common-microsyntaxes.html#valid-floating-point-number"
+                        >valid floating point number</link>.
+                    </para>
+                    <para>
+                        If the <varname>step</varname> attribute is set to "any",
+                        step validations will be skipped. Otherwise, a
+                        a <classname>Zend\Validator\Step</classname> validator
+                        will be added to ensure the number value is within a certain
+                        interval (default is 1). The <varname>step</varname> value should
+                        be either "any" or a <link xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href="http://www.whatwg.org/specs/web-apps/current-work/multipage/common-microsyntaxes.html#valid-floating-point-number"
+                        >valid floating point number</link>.
+                    </para>
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+</section>

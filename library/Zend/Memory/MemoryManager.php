@@ -1,26 +1,19 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Memory
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Memory
  */
 
 namespace Zend\Memory;
 
-use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
+use Zend\Cache\Storage\ClearByNamespaceInterface as ClearByNamespaceCacheStorage;
+use Zend\Cache\Storage\FlushableInterface as FlushableCacheStorage;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
 
 /**
  * Memory manager
@@ -30,15 +23,13 @@ use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
  *
  * @category   Zend
  * @package    Zend_Memory
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MemoryManager
 {
     /**
      * Storage cache object
      *
-     * @var CacheAdapter
+     * @var CacheStorage
      */
     private $_cache = null;
 
@@ -119,13 +110,6 @@ class MemoryManager
     private $_managerId;
 
     /**
-     * Tags array, used by backend to categorize stored values
-     *
-     * @var array
-     */
-    private $_tags;
-
-    /**
      * This function is intended to generate unique id, used by memory manager
      */
     private function _generateMemManagerId()
@@ -136,9 +120,7 @@ class MemoryManager
          * it should be changed by something else
          * (Ex. backend interface should be extended to provide this functionality)
          */
-        $this->_managerId = str_replace('.', '_', uniqid('ZendMemManager', true));
-        $this->_tags = array($this->_managerId);
-        $this->_managerId .= '_';
+        $this->_managerId = str_replace('.', '_', uniqid('ZendMemManager', true)) . '_';
     }
 
     /**
@@ -146,10 +128,10 @@ class MemoryManager
      *
      * If cache is not specified, then memory objects are never swapped
      *
-     * @param  CacheAdapter $cache
+     * @param  CacheStorage $cache
      * @return void
      */
-    public function __construct(CacheAdapter $cache = null)
+    public function __construct(CacheStorage $cache = null)
     {
         if ($cache === null) {
             return;
@@ -183,12 +165,16 @@ class MemoryManager
     /**
      * Object destructor
      *
-     * Clean up backend storage
+     * Clean up cache storage
      */
     public function __destruct()
     {
         if ($this->_cache !== null) {
-            $this->_cache->clear(CacheAdapter::MATCH_TAGS_OR, array('tags' => $this->_tags));
+            if ($this->_cache instanceof ClearByNamespaceCacheStorage) {
+                $this->_cache->clearByNamespace($this->_cache->getOptions()->getNamespace());
+            } elseif ($this->_cache instanceof FlushableCacheStorage) {
+                $this->_cache->flush();
+            }
         }
     }
 
@@ -415,7 +401,7 @@ class MemoryManager
         }
 
         if (!$container->isSwapped()) {
-            $this->_cache->setItem($this->_managerId . $id, $container->getRef(), array('tags' => $this->_tags));
+            $this->_cache->setItem($this->_managerId . $id, $container->getRef());
         }
 
         $this->_memorySize -= $this->_sizes[$id];
@@ -433,7 +419,7 @@ class MemoryManager
      */
     public function load(Container\Movable $container, $id)
     {
-        $value = $this->_cache->getItem($this->_managerId . $id, array('ttl' => 0));
+        $value = $this->_cache->getItem($this->_managerId . $id);
 
         // Try to swap other objects if necessary
         // (do not include specified object into check)

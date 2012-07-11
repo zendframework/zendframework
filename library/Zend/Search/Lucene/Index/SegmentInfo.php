@@ -1,40 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Search_Lucene
- * @subpackage Index
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Search
  */
 
 namespace Zend\Search\Lucene\Index;
 
-use Zend\Search\Lucene,
-	Zend\Search\Lucene\Search\Similarity,
-	Zend\Search\Lucene\Storage\Directory,
-	Zend\Search\Lucene\Exception\ExceptionInterface,
-	Zend\Search\Lucene\Exception\RuntimeException,
-	Zend\Search\Lucene\Exception\InvalidFileFormatException,
-	Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene;
+use Zend\Search\Lucene\Exception\ExceptionInterface;
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene\Exception\InvalidFileFormatException;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Search\Similarity\AbstractSimilarity;
+use Zend\Search\Lucene\Storage\Directory;
 
 /**
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SegmentInfo implements TermsStreamInterface
 {
@@ -164,7 +151,7 @@ class SegmentInfo implements TermsStreamInterface
      * normVector is a binary string.
      * Each byte corresponds to an indexed document in a segment and
      * encodes normalization factor (float value, encoded by
-     * \Zend\Search\Lucene\Search\Similarity::encodeNorm())
+     * \Zend\Search\Lucene\Search\Similarity\AbstractSimilarity::encodeNorm())
      *
      * @var array
      */
@@ -310,7 +297,7 @@ class SegmentInfo implements TermsStreamInterface
                                                    $fieldBits & 0x20 /* payloads are stored */);
             if ($fieldBits & 0x10) {
                 // norms are omitted for the indexed field
-                $this->_norms[$count] = str_repeat(chr(Similarity::encodeNorm(1.0)), $docCount);
+                $this->_norms[$count] = str_repeat(chr(AbstractSimilarity::encodeNorm(1.0)), $docCount);
             }
 
             $fieldNums[$count]  = $count;
@@ -927,7 +914,7 @@ class SegmentInfo implements TermsStreamInterface
      * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      * @return array
      */
-    public function termDocs(Term $term, $shift = 0, $docsFilter = null)
+    public function termDocs(Term $term, $shift = 0, DocsFilter $docsFilter = null)
     {
         $termInfo = $this->getTermInfo($term);
 
@@ -944,12 +931,6 @@ class SegmentInfo implements TermsStreamInterface
         $result = array();
 
         if ($docsFilter !== null) {
-            if (!$docsFilter instanceof DocsFilter) {
-                throw new InvalidArgumentException(
-                	'Documents filter must be an instance of Zend\Search\Lucene\Index\DocsFilter or null.'
-                );
-            }
-
             if (isset($docsFilter->segmentFilters[$this->_name])) {
                 // Filter already has some data for the current segment
 
@@ -1049,7 +1030,7 @@ class SegmentInfo implements TermsStreamInterface
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
      * @return \Zend\Search\Lucene\Index\TermInfo
      */
-    public function termFreqs(Term $term, $shift = 0, $docsFilter = null)
+    public function termFreqs(Term $term, $shift = 0, DocsFilter $docsFilter = null)
     {
         $termInfo = $this->getTermInfo($term);
 
@@ -1068,12 +1049,6 @@ class SegmentInfo implements TermsStreamInterface
         $result = array();
 
         if ($docsFilter !== null) {
-            if (!$docsFilter instanceof DocsFilter) {
-                throw new InvalidArgumentException(
-                	'Documents filter must be an instance of Zend\Search\Lucene\Index\DocsFilter or null.'
-                );
-            }
-
             if (isset($docsFilter->segmentFilters[$this->_name])) {
                 // Filter already has some data for the current segment
 
@@ -1175,7 +1150,7 @@ class SegmentInfo implements TermsStreamInterface
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
      * @return \Zend\Search\Lucene\Index\TermInfo
      */
-    public function termPositions(Term $term, $shift = 0, $docsFilter = null)
+    public function termPositions(Term $term, $shift = 0, DocsFilter $docsFilter = null)
     {
         $termInfo = $this->getTermInfo($term);
 
@@ -1194,12 +1169,6 @@ class SegmentInfo implements TermsStreamInterface
 
 
         if ($docsFilter !== null) {
-            if (!$docsFilter instanceof DocsFilter) {
-                throw new InvalidArgumentException(
-                	'Documents filter must be an instance of Zend_Search_Lucene_Index_DocsFilter or null.'
-                );
-            }
-
             if (isset($docsFilter->segmentFilters[$this->_name])) {
                 // Filter already has some data for the current segment
 
@@ -1398,7 +1367,7 @@ class SegmentInfo implements TermsStreamInterface
             $this->_loadNorm($fieldNum);
         }
 
-        return Similarity::decodeNorm( ord($this->_norms[$fieldNum][$id]) );
+        return AbstractSimilarity::decodeNorm( ord($this->_norms[$fieldNum][$id]) );
     }
 
     /**
@@ -1412,7 +1381,7 @@ class SegmentInfo implements TermsStreamInterface
         $fieldNum = $this->getFieldNum($fieldName);
 
         if ($fieldNum == -1  ||  !($this->_fields[$fieldNum]->isIndexed)) {
-            $similarity = Similarity::getDefault();
+            $similarity = AbstractSimilarity::getDefault();
 
             return str_repeat(chr($similarity->encodeNorm( $similarity->lengthNorm($fieldName, 0) )),
                               $this->_docCount);

@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_GData_GApps
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace ZendTest\GData;
@@ -27,8 +16,6 @@ use Zend\GData\GApps;
  * @category   Zend
  * @package    Zend_GData_GApps
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_GApps
  */
@@ -45,12 +32,12 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         if (!constant('TESTS_ZEND_GDATA_ONLINE_ENABLED')) {
             $this->markTestSkipped('Zend_GData online tests are not enabled');
         }
-        
+
         if (!constant('TESTS_ZEND_GDATA_GAPPS_ONLINE_ENABLED')) {
             $this->markTestSkipped('GAppsOnlineTest is skipped');
         }
-        
-        
+
+
         $this->id = uniqid('ZF-');
         $username = constant('TESTS_ZEND_GDATA_GAPPS_EMAIL');
         $pass = constant('TESTS_ZEND_GDATA_GAPPS_PASSWORD');
@@ -97,12 +84,9 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
 
         // Since we can't retrieve the password or hash function via the
         // API, let's see if a ClientLogin auth request succeeds
-        try {
-            GData\ClientLogin::getHttpClient($this->id . '@' .
-                $this->domain, self::PASSWORD, 'xapi');
-        } catch (\Zend\GData\App\AuthException $e) {
-           $this->fail("Unable to authenticate new user via ClientLogin.");
-        }
+        GData\ClientLogin::getHttpClient($this->id . '@' .
+            $this->domain, self::PASSWORD, 'xapi');
+
 
         // Check to make sure there are no extension elements/attributes
         // in the retrieved user
@@ -411,7 +395,7 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test the convenience delete method for groups
-    public function testCanDeleteGroup() {  
+    public function testCanDeleteGroup() {
         // Create a group
         $generatedGroupName = strtolower(uniqid('zf-group-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
@@ -648,7 +632,7 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('new description here', $description);
 
     }
-    
+
     public function testEmailListCRUDOperations() {
         // Create email list
         $generatedListName = strtolower(uniqid('zf-list-'));

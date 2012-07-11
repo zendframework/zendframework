@@ -5,7 +5,7 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Service_WindowsAzure
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\WindowsAzure\Storage;
@@ -13,8 +13,8 @@ namespace Zend\Service\WindowsAzure\Storage;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Service\WindowsAzure\Credentials;
-use Zend\Service\WindowsAzure\Exception\InvalidArgumentException;
 use Zend\Service\WindowsAzure\Exception\DomainException;
+use Zend\Service\WindowsAzure\Exception\InvalidArgumentException;
 use Zend\Service\WindowsAzure\Exception\RuntimeException;
 use Zend\Service\WindowsAzure\RetryPolicy;
 
@@ -137,14 +137,14 @@ class Queue extends Storage
         $response = $this->_performRequest($queueName, '?comp=metadata', Request::METHOD_GET);
         if ($response->isSuccess()) {
             // Parse metadata
-            $metadata = $this->_parseMetadataHeaders($response->headers()->toArray());
+            $metadata = $this->_parseMetadataHeaders($response->getHeaders()->toArray());
 
             // Return queue
             $queue                          = new QueueInstance(
                 $queueName,
                 $metadata
             );
-            $queue->ApproximateMessageCount = intval($response->headers()->get('x-ms-approximate-message-count'));
+            $queue->ApproximateMessageCount = intval($response->getHeaders()->get('x-ms-approximate-message-count'));
             return $queue;
         } else {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));

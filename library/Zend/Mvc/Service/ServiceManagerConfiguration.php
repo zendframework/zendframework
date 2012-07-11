@@ -1,26 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Service
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Service;
 
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerInterface;
 use Zend\ServiceManager\ConfigurationInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
@@ -29,64 +20,42 @@ use Zend\ServiceManager\ServiceManagerAwareInterface;
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage Service
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ServiceManagerConfiguration implements ConfigurationInterface
 {
     /**
      * Services that can be instantiated without factories
-     * 
+     *
      * @var array
      */
-    protected $services = array(
-        'DispatchListener' => 'Zend\Mvc\DispatchListener',
-        'Request'          => 'Zend\Http\PhpEnvironment\Request',
-        'Response'         => 'Zend\Http\PhpEnvironment\Response',
-        'RouteListener'    => 'Zend\Mvc\RouteListener',
-        'ViewManager'      => 'Zend\Mvc\View\ViewManager',
+    protected $invokables = array(
+        'SharedEventManager' => 'Zend\EventManager\SharedEventManager',
     );
 
     /**
      * Service factories
-     * 
+     *
      * @var array
      */
     protected $factories = array(
-        'Application'            => 'Zend\Mvc\Service\ApplicationFactory',
-        'Configuration'          => 'Zend\Mvc\Service\ConfigurationFactory',
-        'ControllerLoader'       => 'Zend\Mvc\Service\ControllerLoaderFactory',
-        'ControllerPluginBroker' => 'Zend\Mvc\Service\ControllerPluginBrokerFactory',
-        'ControllerPluginLoader' => 'Zend\Mvc\Service\ControllerPluginLoaderFactory',
-        'DependencyInjector'     => 'Zend\Mvc\Service\DiFactory',
-        'EventManager'           => 'Zend\Mvc\Service\EventManagerFactory',
-        'ModuleManager'          => 'Zend\Mvc\Service\ModuleManagerFactory',
-        'Router'                 => 'Zend\Mvc\Service\RouterFactory',
-        'ViewFeedRenderer'       => 'Zend\Mvc\Service\ViewFeedRendererFactory',
-        'ViewFeedStrategy'       => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
-        'ViewJsonRenderer'       => 'Zend\Mvc\Service\ViewJsonRendererFactory',
-        'ViewJsonStrategy'       => 'Zend\Mvc\Service\ViewJsonStrategyFactory',
+        'EventManager'  => 'Zend\Mvc\Service\EventManagerFactory',
+        'ModuleManager' => 'Zend\Mvc\Service\ModuleManagerFactory',
     );
 
     /**
      * Abstract factories
-     * 
+     *
      * @var array
      */
     protected $abstractFactories = array();
 
     /**
      * Aliases
-     * 
+     *
      * @var array
      */
     protected $aliases = array(
-        'Config'                                  => 'Configuration',
-        'Di'                                      => 'DependencyInjector',
-        'Zend\Di\LocatorInterface'                => 'DependencyInjector',
         'Zend\EventManager\EventManagerInterface' => 'EventManager',
-        'Zend\Mvc\Controller\PluginLoader'        => 'ControllerPluginLoader',
-        'Zend\Mvc\Controller\PluginBroker'        => 'ControllerPluginBroker',
     );
 
     /**
@@ -94,24 +63,24 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      *
      * Services are shared by default; this is primarily to indicate services
      * that should NOT be shared
-     * 
+     *
      * @var array
      */
     protected $shared = array(
-        'EventManager' => false
+        'EventManager' => false,
     );
 
     /**
      * Constructor
      *
      * Merges internal arrays with those passed via configuration
-     * 
-     * @param  array $configuration 
+     *
+     * @param  array $configuration
      */
     public function __construct(array $configuration = array())
     {
-        if (isset($configuration['services'])) {
-            $this->services = array_merge($this->services, $configuration['services']);
+        if (isset($configuration['invokables'])) {
+            $this->invokables = array_merge($this->invokables, $configuration['invokables']);
         }
 
         if (isset($configuration['factories'])) {
@@ -140,13 +109,13 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * service manager, also adds an initializer to inject ServiceManagerAware
      * classes with the service manager.
      *
-     * @param  ServiceManager $serviceManager 
+     * @param  ServiceManager $serviceManager
      * @return void
      */
     public function configureServiceManager(ServiceManager $serviceManager)
     {
-        foreach ($this->services as $name => $service) {
-            $serviceManager->setInvokableClass($name, $service);
+        foreach ($this->invokables as $name => $class) {
+            $serviceManager->setInvokableClass($name, $class);
         }
 
         foreach ($this->factories as $name => $factoryClass) {
@@ -166,7 +135,9 @@ class ServiceManagerConfiguration implements ConfigurationInterface
         }
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
-            if ($instance instanceof EventManagerAwareInterface) {
+            if ($instance instanceof EventManagerAwareInterface
+                && !$instance->getEventManager() instanceof EventManagerInterface
+            ) {
                 $instance->setEventManager($serviceManager->get('EventManager'));
             }
         });

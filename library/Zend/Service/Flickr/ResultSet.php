@@ -1,32 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Flickr
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
+
+namespace Zend\Service\Flickr;
+
+use DOMDocument;
+use DOMXPath;
+use SeekableIterator;
 
 /**
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Flickr
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Flickr_ResultSet implements SeekableIterator
+class ResultSet implements SeekableIterator
 {
     /**
      * Total number of available results
@@ -52,34 +45,33 @@ class Zend_Service_Flickr_ResultSet implements SeekableIterator
     /**
      * Results storage
      *
-     * @var DOMNodeList
+     * @var \DOMNodeList
      */
-    protected $_results = null;
+    protected $results = null;
 
     /**
-     * Reference to Zend_Service_Flickr object with which the request was made
+     * Reference to Flickr object with which the request was made
      *
-     * @var Zend_Service_Flickr
+     * @var Flickr
      */
-    private $_flickr;
+    private $flickr;
 
     /**
      * Current index for the Iterator
      *
      * @var int
      */
-    private $_currentIndex = 0;
+    private $currentIndex = 0;
 
     /**
      * Parse the Flickr Result Set
      *
-     * @param  DOMDocument         $dom
-     * @param  Zend_Service_Flickr $flickr
-     * @return void
+     * @param  DOMDocument $dom
+     * @param  Flickr      $flickr
      */
-    public function __construct(DOMDocument $dom, Zend_Service_Flickr $flickr)
+    public function __construct(DOMDocument $dom, Flickr $flickr)
     {
-        $this->_flickr = $flickr;
+        $this->flickr = $flickr;
 
         $xpath = new DOMXPath($dom);
 
@@ -90,12 +82,14 @@ class Zend_Service_Flickr_ResultSet implements SeekableIterator
         $perPage = $photos->getAttribute('perpage');
         $total   = $photos->getAttribute('total');
 
-        $this->totalResultsReturned  = ($page == $pages || $pages == 0) ? ($total - ($page - 1) * $perPage) : (int) $perPage;
+        $this->totalResultsReturned  = ($page == $pages || $pages == 0)
+            ? ($total - ($page - 1) * $perPage)
+            : (int)$perPage;
         $this->firstResultPosition   = ($page - 1) * $perPage + 1;
-        $this->totalResultsAvailable = (int) $total;
+        $this->totalResultsAvailable = (int)$total;
 
         if ($total > 0) {
-            $this->_results = $xpath->query('//photo');
+            $this->results = $xpath->query('//photo');
         }
     }
 
@@ -112,11 +106,11 @@ class Zend_Service_Flickr_ResultSet implements SeekableIterator
     /**
      * Implements SeekableIterator::current()
      *
-     * @return Zend_Service_Flickr_Result
+     * @return Result
      */
     public function current()
     {
-        return new Zend_Service_Flickr_Result($this->_results->item($this->_currentIndex), $this->_flickr);
+        return new Result($this->results->item($this->currentIndex), $this->flickr);
     }
 
     /**
@@ -126,7 +120,7 @@ class Zend_Service_Flickr_ResultSet implements SeekableIterator
      */
     public function key()
     {
-        return $this->_currentIndex;
+        return $this->currentIndex;
     }
 
     /**
@@ -136,7 +130,7 @@ class Zend_Service_Flickr_ResultSet implements SeekableIterator
      */
     public function next()
     {
-        $this->_currentIndex += 1;
+        $this->currentIndex += 1;
     }
 
     /**
@@ -146,23 +140,23 @@ class Zend_Service_Flickr_ResultSet implements SeekableIterator
      */
     public function rewind()
     {
-        $this->_currentIndex = 0;
+        $this->currentIndex = 0;
     }
 
     /**
      * Implements SeekableIterator::seek()
      *
      * @param  int $index
-     * @throws OutOfBoundsException
+     * @throws Exception\OutOfBoundsException
      * @return void
      */
     public function seek($index)
     {
-        $indexInt = (int) $index;
-        if ($indexInt >= 0 && (null === $this->_results || $indexInt < $this->_results->length)) {
-            $this->_currentIndex = $indexInt;
+        $indexInt = (int)$index;
+        if ($indexInt >= 0 && (null === $this->results || $indexInt < $this->results->length)) {
+            $this->currentIndex = $indexInt;
         } else {
-            throw new OutOfBoundsException("Illegal index '$index'");
+            throw new Exception\OutOfBoundsException("Illegal index '$index'");
         }
     }
 
@@ -173,7 +167,6 @@ class Zend_Service_Flickr_ResultSet implements SeekableIterator
      */
     public function valid()
     {
-        return null !== $this->_results && $this->_currentIndex < $this->_results->length;
+        return null !== $this->results && $this->currentIndex < $this->results->length;
     }
 }
-

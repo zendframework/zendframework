@@ -1,33 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_XmlRpc
  */
 
 namespace ZendTest\XmlRpc;
 
-use Zend\Http\Client\Adapter,
-    Zend\Http,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\XmlRpc\Client,
-    Zend\XmlRpc\Value,
-    Zend\XmlRpc;
+use Zend\Http\Client\Adapter;
+use Zend\Http;
+use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
+use Zend\XmlRpc\Client;
+use Zend\XmlRpc\AbstractValue;
+use Zend\XmlRpc\Value;
+use Zend\XmlRpc;
 
 /**
  * Test case for Zend\XmlRpc\Client
@@ -35,8 +25,6 @@ use Zend\Http\Client\Adapter,
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
 class ClientTest extends \PHPUnit_Framework_TestCase
@@ -278,7 +266,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $expects = 'date.method response';
         $this->setServerResponseTo($expects);
-        $this->assertSame($expects, $this->xmlrpcClient->call('date.method', array(Value::getXmlRpcValue(time(), Value::XMLRPC_TYPE_DATETIME), 'foo')));
+        $this->assertSame($expects, $this->xmlrpcClient->call('date.method', array(AbstractValue::getXmlRpcValue(time(), AbstractValue::XMLRPC_TYPE_DATETIME), 'foo')));
     }
 
     public function testAllowsSkippingSystemCallForArrayStructLookup()
@@ -576,7 +564,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->xmlrpcClient->setHttpClient($this->httpClient);
 
         $this->setServerResponseTo(array());
-        $this->assertNull($this->xmlrpcClient->getHttpClient()->getRequest()->getUri());
+        $this->assertNull($this->xmlrpcClient->getHttpClient()->getRequest()->getUriString());
         $this->xmlrpcClient->call('foo');
         $uri = $this->xmlrpcClient->getHttpClient()->getUri();
 

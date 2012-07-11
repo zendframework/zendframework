@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper;
@@ -30,8 +19,6 @@ use Zend\View;
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -56,11 +43,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $regKey = Registry::REGISTRY_KEY;
-        if (\Zend\Registry::isRegistered($regKey)) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry[$regKey]);
-        }
+        Registry::unsetRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new Helper\HeadScript();
     }
@@ -361,11 +344,9 @@ document.write(bar.strlen());');
         $this->helper->__invoke()->captureStart();
         echo "this is something captured";
         $this->helper->__invoke()->captureEnd();
-        try {
-            $this->helper->__invoke()->captureStart();
-        } catch (View\Exception\ExceptionInterface $e) {
-            $this->fail('Serial captures should be allowed');
-        }
+
+        $this->helper->__invoke()->captureStart();
+
         echo "this is something else captured";
         $this->helper->__invoke()->captureEnd();
     }
@@ -430,5 +411,41 @@ document.write(bar.strlen());');
 
         $this->assertEquals($expected, $test);
     }
-}
 
+    public function testConditionalWithAllowArbitraryAttributesDoesNotIncludeConditionalScript()
+    {
+        $this->helper->__invoke()->setAllowArbitraryAttributes(true);
+        $this->helper->__invoke()->appendFile('/js/foo.js', 'text/javascript', array('conditional' => 'lt IE 7'));
+        $test = $this->helper->__invoke()->toString();
+
+        $this->assertNotContains('conditional', $test);
+    }
+
+    public function testNoEscapeWithAllowArbitraryAttributesDoesNotIncludeNoEscapeScript()
+    {
+        $this->helper->__invoke()->setAllowArbitraryAttributes(true);
+        $this->helper->__invoke()->appendScript('// some script', 'text/javascript', array('noescape' => true));
+        $test = $this->helper->__invoke()->toString();
+
+        $this->assertNotContains('noescape', $test);
+    }
+
+    public function testNoEscapeDefaultsToFalse()
+    {
+        $this->helper->__invoke()->appendScript('// some script' . PHP_EOL, 'text/javascript', array());
+        $test = $this->helper->__invoke()->toString();
+
+        $this->assertContains('//<!--', $test);
+        $this->assertContains('//-->', $test);
+    }
+
+    public function testNoEscapeTrue()
+    {
+        $this->helper->__invoke()->appendScript('// some script' . PHP_EOL, 'text/javascript', array('noescape' => true));
+        $test = $this->helper->__invoke()->toString();
+
+        $this->assertNotContains('//<!--', $test);
+        $this->assertNotContains('//-->', $test);
+    }
+
+}

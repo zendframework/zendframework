@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -179,5 +168,40 @@ class FormSelectTest extends CommonTestCase
         $element->setAttribute('value', array('value1', 'value2'));
         $markup = $this->helper->render($element);
         $this->assertRegexp('#<select[^>]*?(name="foo\[\]")#', $markup);
+    }
+
+    public function getScalarOptionsDataProvider()
+    {
+        return array(
+            array(array('string'  => 'value')),
+            array(array('int'     => 1)),
+            array(array('int-neg' => -1)),
+            array(array('hex'     => 0x1A)),
+            array(array('oct'     => 0123)),
+            array(array('float'   => 2.1)),
+            array(array('float-e' => 1.2e3)),
+            array(array('float-E' => 7E-10)),
+            array(array('bool-t'  => true)),
+            array(array('bool-f'  => false)),
+        );
+    }
+
+    /**
+     * @group ZF2-338
+     * @dataProvider getScalarOptionsDataProvider
+     */
+    public function testScalarOptionValues($options)
+    {
+        $element = new Element('foo');
+        $element->setAttribute('options', $options);
+        $markup = $this->helper->render($element);
+        list($label, $value) = each($options);
+        $this->assertRegexp(sprintf('#option .*?value="%s"#', (string)$value), $markup);
+    }
+
+    public function testInvokeWithNoElementChainsHelper()
+    {
+        $element = $this->getElement();
+        $this->assertSame($this->helper, $this->helper->__invoke());
     }
 }

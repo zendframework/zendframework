@@ -1,46 +1,33 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage;
 
-use ArrayObject,
-    stdClass,
-    Zend\Cache\Exception,
-    Zend\EventManager\EventsCapableInterface;
+use ArrayObject;
+use stdClass;
+use Zend\Cache\Exception;
+use Zend\EventManager\EventsCapableInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Capabilities
 {
     /**
-     * The storage adapter
+     * The storage instance
      *
-     * @var Adapter
+     * @var StorageInterface
      */
-    protected $adapter;
+    protected $storage;
 
     /**
      * A marker to set/change capabilities
@@ -57,79 +44,112 @@ class Capabilities
     protected $baseCapabilities;
 
     /**
-     * Clear all namespaces
-     */
-    protected $_clearAllNamespaces;
-
-    /**
-     * Clear by namespace
-     */
-    protected $_clearByNamespace;
-
-    /**
      * Expire read
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|boolean
      */
     protected $_expiredRead;
 
     /**
-     * Iterable
-     */
-    protected $_iterable;
-
-    /**
-     * Max key length
+     * Max. key length
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|int
      */
     protected $_maxKeyLength;
 
     /**
-     * Max ttl
+     * Min. TTL (0 means items never expire)
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|int
+     */
+    protected $_minTtl;
+
+    /**
+     * Max. TTL (0 means infinite)
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|int
      */
     protected $_maxTtl;
 
     /**
      * Namespace is prefix
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|boolean
      */
     protected $_namespaceIsPrefix;
 
     /**
      * Namespace separator
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|string
      */
     protected $_namespaceSeparator;
 
     /**
      * Static ttl
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|boolean
      */
     protected $_staticTtl;
 
    /**
-    * Capability property
+    * Supported datatypes
     *
     * If it's NULL the capability isn't set and the getter
     * returns the base capability or the default value.
     *
-    * @var null|mixed
+    * @var null|array
     */
     protected $_supportedDatatypes;
 
     /**
      * Supported metdata
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|array
      */
     protected $_supportedMetadata;
 
     /**
-     * Supports tagging?
+     * TTL precision
      *
-     * @var bool
-     */
-    protected $_tagging;
-
-    /**
-     * Ttl precision
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|int
      */
     protected $_ttlPrecision;
 
     /**
      * Use request time
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|boolean
      */
     protected $_useRequestTime;
 
@@ -142,12 +162,12 @@ class Capabilities
      * @param null|Capabilities $baseCapabilities
      */
     public function __construct(
-        Adapter\AdapterInterface $adapter,
+        StorageInterface $storage,
         stdClass $marker,
         array $capabilities = array(),
         Capabilities $baseCapabilities = null
     ) {
-        $this->adapter = $adapter;
+        $this->storage = $storage;
         $this->marker  = $marker;
         $this->baseCapabilities = $baseCapabilities;
 
@@ -163,7 +183,7 @@ class Capabilities
      */
     public function getAdapter()
     {
-        return $this->adapter;
+        return $this->storage;
     }
 
     /**
@@ -258,6 +278,32 @@ class Capabilities
     }
 
     /**
+     * Get minimum supported time-to-live
+     *
+     * @return int 0 means items never expire
+     */
+    public function getMinTtl()
+    {
+        return $this->getCapability('minTtl', 0);
+    }
+
+    /**
+     * Set minimum supported time-to-live
+     *
+     * @param  stdClass $marker
+     * @param  int $minTtl
+     * @return Capabilities Fluent interface
+     */
+    public function setMinTtl(stdClass $marker, $minTtl)
+    {
+        $minTtl = (int) $minTtl;
+        if ($minTtl < 0) {
+            throw new Exception\InvalidArgumentException('$minTtl must be greater or equal 0');
+        }
+        return $this->setCapability($marker, 'minTtl', $minTtl);
+    }
+
+    /**
      * Get maximum supported time-to-live
      *
      * @return int 0 means infinite
@@ -276,7 +322,7 @@ class Capabilities
      */
     public function setMaxTtl(stdClass $marker, $maxTtl)
     {
-        $maxTtl = (int)$maxTtl;
+        $maxTtl = (int) $maxTtl;
         if ($maxTtl < 0) {
             throw new Exception\InvalidArgumentException('$maxTtl must be greater or equal 0');
         }
@@ -447,93 +493,6 @@ class Capabilities
     }
 
     /**
-     * Get if items are iterable
-     *
-     * @return boolean
-     */
-    public function getIterable()
-    {
-        return $this->getCapability('iterable', false);
-    }
-
-    /**
-     * Set if items are iterable
-     *
-     * @param  stdClass $marker
-     * @param  boolean $flag
-     * @return Capabilities Fluent interface
-     */
-    public function setIterable(stdClass $marker, $flag)
-    {
-        return $this->setCapability($marker, 'iterable', (bool)$flag);
-    }
-
-    /**
-     * Get support to clear items of all namespaces
-     *
-     * @return boolean
-     */
-    public function getClearAllNamespaces()
-    {
-        return $this->getCapability('clearAllNamespaces', false);
-    }
-
-    /**
-     * Set support to clear items of all namespaces
-     *
-     * @param  stdClass $marker
-     * @param  boolean $flag
-     * @return Capabilities Fluent interface
-     */
-    public function setClearAllNamespaces(stdClass $marker, $flag)
-    {
-        return $this->setCapability($marker, 'clearAllNamespaces', (bool)$flag);
-    }
-
-    /**
-     * Get support to clear items by namespace
-     *
-     * @return boolean
-     */
-    public function getClearByNamespace()
-    {
-        return $this->getCapability('clearByNamespace', false);
-    }
-
-    /**
-     * Set support to clear items by namespace
-     *
-     * @param  stdClass $marker
-     * @param  boolean $flag
-     * @return Capabilities Fluent interface
-     */
-    public function setClearByNamespace(stdClass $marker, $flag)
-    {
-        return $this->setCapability($marker, 'clearByNamespace', (bool)$flag);
-    }
-
-    /**
-     * Set value for tagging
-     *
-     * @param  mixed tagging
-     * @return $this
-     */
-    public function setTagging(stdClass $marker, $tagging)
-    {
-        return $this->setCapability($marker, 'tagging', (bool) $tagging);
-    }
-
-    /**
-     * Get value for tagging
-     *
-     * @return mixed
-     */
-    public function getTagging()
-    {
-        return $this->getCapability('tagging', false);
-    }
-
-    /**
      * Get a capability
      *
      * @param  string $name
@@ -572,8 +531,8 @@ class Capabilities
             $this->$property = $value;
 
             // trigger event
-            if ($this->adapter instanceof EventsCapableInterface) {
-                $this->adapter->events()->trigger('capability', $this->adapter, new ArrayObject(array(
+            if ($this->storage instanceof EventsCapableInterface) {
+                $this->storage->getEventManager()->trigger('capability', $this->storage, new ArrayObject(array(
                     $name => $value
                 )));
             }

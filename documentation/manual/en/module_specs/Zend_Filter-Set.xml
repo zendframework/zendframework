@@ -19,7 +19,6 @@
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Encryption.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-HtmlEntities.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Int.xml"/>
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-LocalizedToNormalized.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Null.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-PregReplace.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-RealPath.xml"/>

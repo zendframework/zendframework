@@ -1,38 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend\Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
  */
 
 namespace Zend\Http;
 
+use ArrayIterator;
 use Traversable;
+use Zend\Stdlib;
 use Zend\Stdlib\ArrayUtils;
-use ArrayIterator,
-    Zend\Uri\Http,
-    Zend\Stdlib;
+use Zend\Uri\Http;
 
 /**
  * Http client
  *
  * @category   Zend
  * @package    Zend\Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Client implements Stdlib\DispatchableInterface
 {
@@ -334,7 +322,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function getUri()
     {
-        return $this->getRequest()->uri();
+        return $this->getRequest()->getUri();
     }
 
     /**
@@ -415,7 +403,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setParameterPost(array $post)
     {
-        $this->getRequest()->post()->fromArray($post);
+        $this->getRequest()->getPost()->fromArray($post);
         return $this;
     }
 
@@ -427,7 +415,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setParameterGet(array $query)
     {
-        $this->getRequest()->query()->fromArray($query);
+        $this->getRequest()->getQuery()->fromArray($query);
         return $this;
     }
 
@@ -545,7 +533,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function hasHeader($name)
     {
-        $headers = $this->getRequest()->headers();
+        $headers = $this->getRequest()->getHeaders();
 
         if ($headers instanceof Headers) {
             return $headers->has($name);
@@ -562,7 +550,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function getHeader($name)
     {
-        $headers = $this->getRequest()->headers();
+        $headers = $this->getRequest()->getHeaders();
 
         if ($headers instanceof Headers) {
             if ($headers->get($name)) {
@@ -766,7 +754,7 @@ class Client implements Stdlib\DispatchableInterface
             $uri = $this->getUri();
 
             // query
-            $query = $this->getRequest()->query();
+            $query = $this->getRequest()->getQuery();
 
             if (!empty($query)) {
                 $queryArray = $query->toArray();
@@ -855,17 +843,17 @@ class Client implements Stdlib\DispatchableInterface
             }
 
             // Get the cookies from response (if any)
-            $setCookie = $response->cookie();
+            $setCookie = $response->getCookie();
             if (!empty($setCookie)) {
                 $this->addCookie($setCookie);
             }
 
             // If we got redirected, look for the Location header
-            if ($response->isRedirect() && ($response->headers()->has('Location'))) {
+            if ($response->isRedirect() && ($response->getHeaders()->has('Location'))) {
 
                 // Avoid problems with buggy servers that add whitespace at the
                 // end of some headers
-                $location = trim($response->headers()->get('Location')->getFieldValue());
+                $location = trim($response->getHeaders()->get('Location')->getFieldValue());
 
                 // Check whether we send the exact same request again, or drop the parameters
                 // and send a GET request
@@ -946,7 +934,7 @@ class Client implements Stdlib\DispatchableInterface
             }
         }
 
-        $this->getRequest()->file()->set($filename, array(
+        $this->getRequest()->getFile()->set($filename, array(
             'formname' => $formname,
             'filename' => basename($filename),
             'ctype' => $ctype,
@@ -964,9 +952,9 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function removeFileUpload($filename)
     {
-        $file = $this->getRequest()->file()->get($filename);
+        $file = $this->getRequest()->getFile()->get($filename);
         if (!empty($file)) {
-            $this->getRequest()->file()->set($filename, null);
+            $this->getRequest()->getFile()->set($filename, null);
             return true;
         }
         return false;
@@ -1026,7 +1014,7 @@ class Client implements Stdlib\DispatchableInterface
         }
 
         // Set the connection header
-        if (!$this->getRequest()->headers()->has('Connection')) {
+        if (!$this->getRequest()->getHeaders()->has('Connection')) {
             if (!$this->config['keepalive']) {
                 $headers['Connection'] = 'close';
             }
@@ -1044,7 +1032,7 @@ class Client implements Stdlib\DispatchableInterface
 
 
         // Set the user agent header
-        if (!$this->getRequest()->headers()->has('User-Agent') && isset($this->config['useragent'])) {
+        if (!$this->getRequest()->getHeaders()->has('User-Agent') && isset($this->config['useragent'])) {
             $headers['User-Agent'] = $this->config['useragent'];
         }
 
@@ -1078,7 +1066,7 @@ class Client implements Stdlib\DispatchableInterface
         }
 
         // Merge the headers of the request (if any)
-        $requestHeaders = $this->getRequest()->headers()->toArray();
+        $requestHeaders = $this->getRequest()->getHeaders()->toArray();
         foreach ($requestHeaders as $key => $value) {
             $headers[$key] = $value;
         }
@@ -1107,8 +1095,8 @@ class Client implements Stdlib\DispatchableInterface
         $body = '';
         $totalFiles = 0;
 
-        if (!$this->getRequest()->headers()->has('Content-Type')) {
-            $totalFiles = count($this->getRequest()->file()->toArray());
+        if (!$this->getRequest()->getHeaders()->has('Content-Type')) {
+            $totalFiles = count($this->getRequest()->getFile()->toArray());
             // If we have files to upload, force encType to multipart/form-data
             if ($totalFiles > 0) {
                 $this->setEncType(self::ENC_FORMDATA);
@@ -1118,26 +1106,26 @@ class Client implements Stdlib\DispatchableInterface
         }
 
         // If we have POST parameters or files, encode and add them to the body
-        if (count($this->getRequest()->post()->toArray()) > 0 || $totalFiles > 0) {
+        if (count($this->getRequest()->getPost()->toArray()) > 0 || $totalFiles > 0) {
             if (stripos($this->getEncType(), self::ENC_FORMDATA) === 0) {
                 $boundary = '---ZENDHTTPCLIENT-' . md5(microtime());
                 $this->setEncType(self::ENC_FORMDATA, $boundary);
 
                 // Get POST parameters and encode them
-                $params = self::flattenParametersArray($this->getRequest()->post()->toArray());
+                $params = self::flattenParametersArray($this->getRequest()->getPost()->toArray());
                 foreach ($params as $pp) {
                     $body .= $this->encodeFormData($boundary, $pp[0], $pp[1]);
                 }
 
                 // Encode files
-                foreach ($this->getRequest()->file()->toArray() as $key => $file) {
+                foreach ($this->getRequest()->getFile()->toArray() as $key => $file) {
                     $fhead = array('Content-Type' => $file['ctype']);
                     $body .= $this->encodeFormData($boundary, $file['formname'], $file['data'], $file['filename'], $fhead);
                 }
                 $body .= "--{$boundary}--\r\n";
             } elseif (stripos($this->getEncType(), self::ENC_URLENCODED) === 0) {
                 // Encode body as application/x-www-form-urlencoded
-                $body = http_build_query($this->getRequest()->post()->toArray());
+                $body = http_build_query($this->getRequest()->getPost()->toArray());
             } else {
                 throw new Client\Exception\RuntimeException("Cannot handle content type '{$this->encType}' automatically");
             }

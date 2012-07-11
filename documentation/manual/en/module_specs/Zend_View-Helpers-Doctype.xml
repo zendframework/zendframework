@@ -96,14 +96,14 @@ if ($view->doctype()->isHtml5()) {
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.doctype.xhtml1_rdfa">
+    <example xml:id="zend.view.helpers.initial.doctype.xhtml1_rdfa">
         <title>Choosing a Doctype to Use with the Open Graph Protocol</title>
 
         <para>
-            To implement the <ulink url="http://opengraphprotocol.org/">
-            Open Graph Protocol</ulink>, you may specify the XHTML1_RDFA doctype.
-            This doctype allows a developer to use the <ulink url="http://www.w3.org/TR/xhtml-rdfa-primer/">
-            Resource Description Framework</ulink> within an <acronym>XHTML</acronym> document.
+            To implement the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opengraphprotocol.org/">
+            Open Graph Protocol</link>, you may specify the XHTML1_RDFA doctype.
+            This doctype allows a developer to use the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/xhtml-rdfa-primer/">
+            Resource Description Framework</link> within an <acronym>XHTML</acronym> document.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -129,7 +129,7 @@ $doctypeHelper->doctype('XHTML1_RDFA');
             In the previous example, we set the property to og:type. The og references
             the Open Graph namespace we specified in the html tag.
             The content identifies the page as being about a musician.  See
-            the <ulink url="http://opengraphprotocol.org/">Open Graph Protocol documentation</ulink>
+            the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opengraphprotocol.org/">Open Graph Protocol documentation</link>
             for supported properties. The <link linkend="zend.view.helpers.initial.headmeta">HeadMeta helper</link>
             may be used to programmatically set these Open Graph Protocol meta tags.
         </para>

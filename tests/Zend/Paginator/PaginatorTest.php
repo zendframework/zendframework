@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Paginator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Paginator
  */
 
 namespace ZendTest\Paginator;
@@ -38,8 +27,6 @@ use ZendTest\Paginator\TestAsset\TestTable;
  * @category   Zend
  * @package    Zend_Paginator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Paginator
  */
 class PaginatorTest extends \PHPUnit_Framework_TestCase
@@ -84,7 +71,6 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->_config = Config\Factory::fromFile(__DIR__ . '/_files/config.xml', true);
 
         $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         Paginator\Paginator::setCache($this->_cache);
 
         $this->_restorePaginatorDefaults();
@@ -92,10 +78,6 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
-        if ($this->_cache) {
-            $this->_cache->clear(CacheAdapter::MATCH_ALL);
-            $this->_cache = null;
-        }
         $this->_dbConn = null;
         $this->_testCollection = null;
         $this->_paginator = null;
@@ -140,9 +122,8 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
         Paginator\Paginator::setOptions($this->_config->default);
 
-        Paginator\Paginator::setScrollingStyleBroker(new Paginator\ScrollingStyleBroker());
+        Paginator\Paginator::setScrollingStylePluginManager(new Paginator\ScrollingStylePluginManager());
 
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         $this->_paginator->setCacheEnabled(true);
     }
 
@@ -222,11 +203,11 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         Paginator\Paginator::setOptions($this->_config->testing);
         $this->assertEquals('Scrolling', Paginator\Paginator::getDefaultScrollingStyle());
 
-        $broker = Paginator\Paginator::getScrollingStyleBroker();
-        $this->assertInstanceOf('ZendTest\Paginator\TestAsset\ScrollingStyleBroker', $broker);
+        $plugins = Paginator\Paginator::getScrollingStylePluginManager();
+        $this->assertInstanceOf('ZendTest\Paginator\TestAsset\ScrollingStylePluginManager', $plugins);
 
-        $broker = Paginator\Paginator::getAdapterBroker();
-        $this->assertInstanceOf('ZendTest\Paginator\TestAsset\AdapterBroker', $broker);
+        $plugins = Paginator\Paginator::getAdapterPluginManager();
+        $this->assertInstanceOf('ZendTest\Paginator\TestAsset\AdapterPluginManager', $plugins);
 
         $paginator = Paginator\Paginator::factory(range(1, 101));
         $this->assertEquals(3, $paginator->getItemCountPerPage());

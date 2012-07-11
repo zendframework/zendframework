@@ -1,28 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_InfoCard
- * @subpackage Zend_InfoCard_Xml
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_InfoCard
  */
 
 namespace Zend\InfoCard\XML;
 
-use DOMElement,
-    SimpleXMLElement;
+use DOMElement;
+use SimpleXMLElement;
+use Zend\Stdlib\SubClass;
 
 /**
  * An abstract class representing a an XML data block
@@ -30,8 +20,6 @@ use DOMElement,
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractElement extends SimpleXMLElement implements ElementInterface
 {
@@ -80,7 +68,7 @@ abstract class AbstractElement extends SimpleXMLElement implements ElementInterf
             throw new Exception\InvalidArgumentException('Class provided for converting does not exist');
         }
 
-        if(!is_subclass_of($classname, 'Zend\InfoCard\XML\ElementInterface')) {
+        if (!SubClass::isSubclassOf($classname, 'Zend\InfoCard\XML\ElementInterface')) {
             throw new Exception\InvalidArgumentException("DOM element must be converted to an instance of Zend_InfoCard_Xml_Element");
         }
 

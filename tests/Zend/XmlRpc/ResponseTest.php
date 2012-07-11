@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_XmlRpc
  */
 
 namespace ZendTest\XmlRpc;
 
-use Zend\XmlRpc\Response,
-    Zend\XmlRpc\Value;
+use Zend\XmlRpc\Response;
+use Zend\XmlRpc\AbstractValue;
 
 /**
  * Test case for Zend_XmlRpc_Response
@@ -30,8 +19,6 @@ use Zend\XmlRpc\Response,
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_XmlRpc
  */
 class ResponseTest extends \PHPUnit_Framework_TestCase
@@ -218,10 +205,10 @@ EOD;
     public function testSetGetEncoding()
     {
         $this->assertEquals('UTF-8', $this->_response->getEncoding());
-        $this->assertEquals('UTF-8', Value::getGenerator()->getEncoding());
+        $this->assertEquals('UTF-8', AbstractValue::getGenerator()->getEncoding());
         $this->assertSame($this->_response, $this->_response->setEncoding('ISO-8859-1'));
         $this->assertEquals('ISO-8859-1', $this->_response->getEncoding());
-        $this->assertEquals('ISO-8859-1', Value::getGenerator()->getEncoding());
+        $this->assertEquals('ISO-8859-1', AbstractValue::getGenerator()->getEncoding());
     }
 
     public function testLoadXmlCreatesFaultWithMissingNodes()
@@ -258,5 +245,20 @@ EOD;
     public function trackError($error)
     {
         $this->_errorOccured = true;
+    }
+
+    /**
+     * @group ZF-12293
+     */
+    public function testDoesNotAllowExternalEntities()
+    {
+        $payload = file_get_contents(dirname(__FILE__) . '/_files/ZF12293-response.xml');
+        $payload = sprintf($payload, 'file://' . realpath(dirname(__FILE__) . '/_files/ZF12293-payload.txt'));
+        $this->_response->loadXml($payload);
+        $value = $this->_response->getReturnValue();
+        $this->assertTrue(empty($value));
+        if (is_string($value)) {
+            $this->assertNotContains('Local file inclusion', $value);
+        }
     }
 }

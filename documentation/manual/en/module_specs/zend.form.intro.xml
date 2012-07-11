@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<section 
-    xmlns="http://docbook.org/ns/docbook" version="5.0" 
+<section
+    xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.form.intro">
-    <title>Zend\Form</title>
+    <title>Introduction to Zend\Form</title>
 
     <para>
         <classname>Zend\Form</classname> is intended primarily as a bridge between your domain
@@ -55,9 +55,19 @@
     </para>
 
     <para>
-        Finally, a <classname>Factory</classname> is provided to facilitate creation of elements,
+        A <classname>Factory</classname> is provided to facilitate creation of elements,
         fieldsets, forms, and the related input filter. The default <classname>Form</classname>
         implementation is backed by a factory to facilitate extension and ease the process of form
         creation.
+    </para>
+
+    <para>
+        The code related to forms can often spread between a variety of concerns: a form definition,
+        an input filter definition, a domain model class, and one or more hydrator implementations.
+        As such, finding the various bits of code and how they relate can become tedious. To
+        simplify the situation, you can also annotate your domain model class, detailing the various
+        input filter definitions, attributes, and hydrators that should all be used together.
+        <classname>Zend\Form\Annotation\AnnotationBuilder</classname> can then be used to build the
+        various objects you need.
     </para>
 </section>

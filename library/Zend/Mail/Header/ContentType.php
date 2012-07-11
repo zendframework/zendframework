@@ -1,42 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Header;
+
+use Zend\Mail\Headers;
 
 /**
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Header
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ContentType implements HeaderInterface
 {
-    /**
-     * Header encoding
-     * 
-     * @var string
-     */
-    protected $encoding = 'ASCII';
-
     /**
      * @var string
      */
@@ -47,16 +29,9 @@ class ContentType implements HeaderInterface
      */
     protected $parameters = array();
 
-    /**
-     * Factory: create Content-Type header object from string
-     *
-     * @param  string $headerLine
-     * @throws Exception\InvalidArgumentException
-     * @return ContentType
-     */
     public static function fromString($headerLine)
     {
-        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
+        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
         list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
@@ -64,7 +39,7 @@ class ContentType implements HeaderInterface
             throw new Exception\InvalidArgumentException('Invalid header line for Content-Type string');
         }
 
-        $value  = str_replace("\r\n ", " ", $value);
+        $value  = str_replace(Headers::FOLDING, " ", $value);
         $values = preg_split('#\s*;\s*#', $value);
         $type   = array_shift($values);
 
@@ -74,7 +49,7 @@ class ContentType implements HeaderInterface
         if (count($values)) {
             foreach ($values as $keyValuePair) {
                 list($key, $value) = explode('=', $keyValuePair);
-                $value = trim($value, "\"\' \t\n\r\0\x0B");
+                $value = trim($value, "'\" \t\n\r\0\x0B");
                 $header->addParameter($key, $value);
             }
         }
@@ -82,22 +57,12 @@ class ContentType implements HeaderInterface
         return $header;
     }
 
-    /**
-     * Get header name
-     * 
-     * @return string
-     */
     public function getFieldName()
     {
         return 'Content-Type';
     }
 
-    /**
-     * Get header value
-     * 
-     * @return string
-     */
-    public function getFieldValue()
+    public function getFieldValue($format = HeaderInterface::FORMAT_RAW)
     {
         $prepared = $this->type;
         if (empty($this->parameters)) {
@@ -108,40 +73,24 @@ class ContentType implements HeaderInterface
         foreach ($this->parameters as $attribute => $value) {
             $values[] = sprintf('%s="%s"', $attribute, $value);
         }
-        $value = implode(";\r\n ", $values);
-        return $value;
+
+        return implode(';' . Headers::FOLDING, $values);
     }
 
-    /**
-     * Set header encoding
-     * 
-     * @param  string $encoding 
-     * @return ContentType
-     */
     public function setEncoding($encoding) 
     {
-        $this->encoding = $encoding;
+        // This header must be always in US-ASCII
         return $this;
     }
 
-    /**
-     * Get header encoding
-     * 
-     * @return string
-     */
     public function getEncoding()
     {
-        return $this->encoding;
+        return 'ASCII';
     }
 
-    /**
-     * Serialize header to string
-     * 
-     * @return string
-     */
     public function toString()
     {
-        return 'Content-Type: ' . $this->getFieldValue() . "\r\n";
+        return 'Content-Type: ' . $this->getFieldValue();
     }
 
     /**

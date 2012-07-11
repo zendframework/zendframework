@@ -10,8 +10,8 @@
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter\Driver\DriverInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -48,18 +48,16 @@ class Mysqli implements DriverInterface
      * @param null|Statement $statementPrototype
      * @param null|Result $resultPrototype
      */
-    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, $options = null)
+    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, $options = array())
     {
         if (!$connection instanceof Connection) {
             $connection = new Connection($connection);
         }
 
-        if (!$connection instanceof Connection) {
-            throw new Exception\InvalidArgumentException('$connection must be an array of parameters or a Pdo\Connection object');
-        }
+        $options = array_intersect_key(array_merge($this->options, $options), $this->options);
 
         $this->registerConnection($connection);
-        $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
+        $this->registerStatementPrototype(($statementPrototype) ?: new Statement($options['buffer_results']));
         $this->registerResultPrototype(($resultPrototype) ?: new Result());
     }
 

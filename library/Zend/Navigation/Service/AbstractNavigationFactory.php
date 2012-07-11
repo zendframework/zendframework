@@ -1,16 +1,30 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Navigation
+ */
 
 namespace Zend\Navigation\Service;
 
 use Zend\Config;
+use Zend\Mvc\Router\RouteMatch;
+use Zend\Mvc\Router\RouteStackInterface as Router;
 use Zend\Navigation\Exception;
 use Zend\Navigation\Navigation;
 use Zend\Navigation\Page\Mvc as MvcPage;
-use Zend\Mvc\Router\RouteMatch;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\View\Helper\Url as UrlHelper;
 
+/**
+ * Abstract navigation factory
+ *
+ * @category  Zend
+ * @package   Zend_Navigation
+ */
 abstract class AbstractNavigationFactory implements FactoryInterface
 {
     /**
@@ -18,14 +32,27 @@ abstract class AbstractNavigationFactory implements FactoryInterface
      */
     protected $pages;
 
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return \Zend\Navigation\Navigation
+     */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $pages = $this->getPages($serviceLocator);
         return new Navigation($pages);
     }
 
+    /**
+     * @abstract
+     * @return string
+     */
     abstract protected function getName();
 
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return array
+     * @throws \Zend\Navigation\Exception\InvalidArgumentException
+     */
     protected function getPages(ServiceLocatorInterface $serviceLocator)
     {
         if (null === $this->pages) {
@@ -42,15 +69,20 @@ abstract class AbstractNavigationFactory implements FactoryInterface
             }
 
             $application = $serviceLocator->get('Application');
-            $urlHelper   = $serviceLocator->get('ViewHelperBroker')->load('url');
             $routeMatch  = $application->getMvcEvent()->getRouteMatch();
+            $router      = $application->getMvcEvent()->getRouter();
             $pages       = $this->getPagesFromConfig($configuration['navigation'][$this->getName()]);
 
-            $this->pages = $this->injectComponents($pages, $routeMatch, $urlHelper);
+            $this->pages = $this->injectComponents($pages, $routeMatch, $router);
         }
         return $this->pages;
     }
 
+    /**
+     * @param string|\Zend\Config\Config|array $config
+     * @return array|null|\Zend\Config\Config
+     * @throws \Zend\Navigation\Exception\InvalidArgumentException
+     */
     protected function getPagesFromConfig($config = null)
     {
         if (is_string($config)) {
@@ -73,21 +105,27 @@ abstract class AbstractNavigationFactory implements FactoryInterface
         return $config;
     }
 
-    protected function injectComponents($pages, RouteMatch $routeMatch, UrlHelper $urlHelper)
+    /**
+     * @param array $pages
+     * @param RouteMatch $routeMatch
+     * @param Router $router
+     * @return mixed
+     */
+    protected function injectComponents(array $pages, RouteMatch $routeMatch = null, Router $router = null)
     {
         foreach($pages as &$page) {
             $hasMvc = isset($page['action']) || isset($page['controller']) || isset($page['route']);
             if ($hasMvc) {
-                if (!isset($page['routeMatch'])) {
+                if (!isset($page['routeMatch']) && $routeMatch) {
                     $page['routeMatch'] = $routeMatch;
                 }
-                if (!isset($page['urlHelper'])) {
-                    $page['urlHelper'] = $urlHelper;
+                if (!isset($page['router'])) {
+                    $page['router'] = $router;
                 }
             }
 
             if (isset($page['pages'])) {
-                $page['pages'] = $this->injectComponents($page['pages'], $routeMatch, $urlHelper);
+                $page['pages'] = $this->injectComponents($page['pages'], $routeMatch, $router);
             }
         }
         return $pages;

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xml:id="zend.form.element.captcha">
+    <title>Zend\Form\Element\Captcha</title>
+
+    <para>
+        The <classname>Captcha</classname> element can be used with forms
+        where authenticated users are not necessary, but you want to prevent
+        spam submissions. It is pairs with one of the
+        <classname>Zend/Form/View/Helper/Captcha/*</classname> view helpers
+        that matches the type of <acronym>CAPTCHA</acronym> adapter in use.
+    </para>
+
+    <example xml:id="zend.form.element.captcha.usage">
+        <title>Basic Usage of Zend\Form\Element\Captcha</title>
+
+        <para>
+            A <acronym>CAPTCHA</acronym> adapter must be attached
+            in order for validation to be included in the element's input filter specification.
+            See the section on <link linkend="zend.captcha.adapters">Zend CAPTCHA Adapters</link>
+            for more information on what adapters are available.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Captcha;
+use Zend\Form\Element;
+use Zend\Form\Form;
+
+$captcha = new Element\Captcha('captcha');
+$captcha
+    ->setCaptcha(new Captcha\Dumb())
+    ->setLabel('Please verify you are human');
+
+$form = new Form('my-form');
+$form->add($captcha);
+]]></programlisting>
+    </example>
+
+    <section xml:id="zend.form.element.captcha.methods">
+        <title>Available Methods</title>
+
+        <para>
+            The following methods are in addition to the inherited
+            <link linkend="zend.form.element.methods">methods of
+            <classname>Zend\Form\Element</classname></link>.
+        </para>
+
+        <variablelist>
+            <varlistentry xml:id="zend.form.element.captcha.methods.set-captcha">
+                <term>setCaptcha</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setCaptcha</methodname>
+                        <methodparam>
+                            <funcparams>array|Zend\Captcha\AdapterInterface $captcha</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                    <para>
+                        Set the <acronym>CAPTCHA</acronym> adapter for this element.
+                        If <varname>$captcha</varname> is an array,
+                        <classname>Zend\Captcha\Factory::factory()</classname> will
+                        be run to create the adapter from the array configuration.
+                    </para>
+                    <para>Returns <classname>Zend\Form\Element\Captcha</classname></para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.captcha.methods.get-captcha">
+                <term>getCaptcha</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getCaptcha</methodname>
+                        <void/>
+                    </methodsynopsis>
+                    <para>
+                        Return the <acronym>CAPTCHA</acronym> adapter for this element.
+                    </para>
+                    <para>Returns <classname>Zend\Captcha\AdapterInterface</classname></para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.captcha.methods.get-input-specification">
+                <term>getInputSpecification</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getInputSpecification</methodname>
+                        <void/>
+                    </methodsynopsis>
+                    <para>
+                        Returns a input filter specification, which includes a
+                        <classname>Zend\Filter\StringTrim</classname> filter,
+                        and a <acronym>CAPTCHA</acronym> validator.
+                    </para>
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+</section>

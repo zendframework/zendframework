@@ -11,16 +11,16 @@
 namespace Zend\ModuleManager\Listener;
 
 use Traversable;
-use Zend\Stdlib\Options;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * Listener options
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-class ListenerOptions extends Options
+class ListenerOptions extends AbstractOptions
 {
     /**
      * @var array
@@ -31,11 +31,16 @@ class ListenerOptions extends Options
      * @var array
      */
     protected $configGlobPaths = array();
-    
+
     /**
      * @var array
      */
     protected $configStaticPaths = array();
+
+    /**
+     * @var array
+     */
+    protected $extraConfig = array();
 
     /**
      * @var bool
@@ -83,18 +88,18 @@ class ListenerOptions extends Options
     }
 
     /**
-     * Get the glob patterns to load additional config files 
-     * 
+     * Get the glob patterns to load additional config files
+     *
      * @return array
      */
     public function getConfigGlobPaths()
     {
         return $this->configGlobPaths;
     }
-    
+
     /**
-     * Get the static paths to load additional config files 
-     * 
+     * Get the static paths to load additional config files
+     *
      * @return array
      */
     public function getConfigStaticPaths()
@@ -104,8 +109,8 @@ class ListenerOptions extends Options
 
     /**
      * Set the glob patterns to use for loading additional config files
-     * 
-     * @param array $configGlobPaths
+     *
+     * @param array|Traversable $configGlobPaths
      * @return ListenerOptions
      */
     public function setConfigGlobPaths($configGlobPaths)
@@ -119,12 +124,13 @@ class ListenerOptions extends Options
             );
         }
         $this->configGlobPaths = $configGlobPaths;
+        return $this;
     }
-    
+
     /**
      * Set the static paths to use for loading additional config files
-     * 
-     * @param array $configStaticPaths
+     *
+     * @param array|Traversable $configStaticPaths
      * @return ListenerOptions
      */
     public function setConfigStaticPaths($configStaticPaths)
@@ -138,6 +144,38 @@ class ListenerOptions extends Options
             );
         }
         $this->configStaticPaths = $configStaticPaths;
+        return $this;
+    }
+
+    /**
+     * Get any extra config to merge in.
+     *
+     * @return array|Traversable
+     */
+    public function getExtraConfig()
+    {
+        return $this->extraConfig;
+    }
+
+    /**
+     * Add some extra config array to the main config. This is mainly useful
+     * for unit testing purposes.
+     *
+     * @param array|Traversable $extraConfig
+     * @return ListenerOptions
+     */
+    public function setExtraConfig($extraConfig)
+    {
+        if (!is_array($extraConfig) && !$extraConfig instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(
+                sprintf('Argument passed to %s::%s() must be an array, '
+                . 'implement the \Traversable interface, or be an '
+                . 'instance of Zend\Config\Config. %s given.',
+                __CLASS__, __METHOD__, gettype($extraConfig))
+            );
+        }
+        $this->extraConfig = $extraConfig;
+        return $this;
     }
 
     /**

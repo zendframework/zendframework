@@ -7,10 +7,12 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt\Password;
 
-use Zend\Math\Math;
 use Traversable;
+use Zend\Math\Exception as MathException;
+use Zend\Math\Math;
 use Zend\Stdlib\ArrayUtils;
 
 /**
@@ -18,8 +20,6 @@ use Zend\Stdlib\ArrayUtils;
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Bcrypt implements PasswordInterface
 {
@@ -37,6 +37,7 @@ class Bcrypt implements PasswordInterface
      * Constructor
      *
      * @param array|Traversable $options
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
     {
@@ -65,17 +66,34 @@ class Bcrypt implements PasswordInterface
      * Bcrypt
      *
      * @param  string $password
+     * @throws Exception\RuntimeException
      * @return string
      */
     public function create($password)
     {
         if (empty($this->salt)) {
-            $salt = Math::randBytes(self::MIN_SALT_SIZE, true);
+            $salt = Math::randBytes(self::MIN_SALT_SIZE);   
         } else {
             $salt = $this->salt;
         }
         $salt64 = substr(str_replace('+', '.', base64_encode($salt)), 0, 22);
-        $hash   = crypt($password, '$2a$' . $this->cost . '$' . $salt64);
+        /**
+         * Check for security flaw in the bcrypt implementation used by crypt()
+         * @see http://php.net/security/crypt_blowfish.php
+         */
+        if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
+            $prefix = '$2y$';
+        } else {
+            $prefix = '$2a$';
+            // check if the password contains 8-bit character 
+            if (preg_match('/[\x80-\xFF]/', $password)) {
+                throw new Exception\RuntimeException(
+                        'The bcrypt implementation used by PHP can contains a security flaw using password with 8-bit character. ' .
+                        'We suggest to upgrade to PHP 5.3.7+ or use passwords with only 7-bit characters'
+                );
+            }
+        }
+        $hash   = crypt($password, $prefix . $this->cost . '$' . $salt64);
         if (strlen($hash) <= 13) {
             throw new Exception\RuntimeException('Error during the bcrypt generation');
         }
@@ -98,6 +116,7 @@ class Bcrypt implements PasswordInterface
      * Set the cost parameter
      *
      * @param  integer|string $cost
+     * @throws Exception\InvalidArgumentException
      * @return Bcrypt
      */
     public function setCost($cost)
@@ -128,6 +147,7 @@ class Bcrypt implements PasswordInterface
      * Set the salt value
      *
      * @param  string $salt
+     * @throws Exception\InvalidArgumentException
      * @return Bcrypt
      */
     public function setSalt($salt)

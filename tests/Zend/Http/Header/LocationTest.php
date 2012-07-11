@@ -1,44 +1,65 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace ZendTest\Http\Header;
 
 use Zend\Http\Header\Location;
+use Zend\Uri\Http as HttpUri;
 
 class LocationTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testLocationFromStringCreatesValidLocationHeader()
     {
-        $locationHeader = Location::fromString('Location: xxx');
+        $locationHeader = Location::fromString('Location: http://www.example.com/');
         $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $locationHeader);
         $this->assertInstanceOf('Zend\Http\Header\Location', $locationHeader);
     }
 
-    public function testLocationGetFieldNameReturnsHeaderName()
-    {
-        $locationHeader = new Location();
-        $this->assertEquals('Location', $locationHeader->getFieldName());
-    }
-
     public function testLocationGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('Location needs to be completed');
-
         $locationHeader = new Location();
-        $this->assertEquals('xxx', $locationHeader->getFieldValue());
+        $locationHeader->setUri('http://www.example.com/');
+        $this->assertEquals('http://www.example.com/', $locationHeader->getFieldValue());
+
+        $locationHeader->setUri('/path');
+        $this->assertEquals('/path', $locationHeader->getFieldValue());
     }
 
     public function testLocationToStringReturnsHeaderFormattedString()
     {
-        $this->markTestIncomplete('Location needs to be completed');
-
         $locationHeader = new Location();
+        $locationHeader->setUri('http://www.example.com/path?query');
 
-        // @todo set some values, then test output
-        $this->assertEmpty('Location: xxx', $locationHeader->toString());
+        $this->assertEquals('Location: http://www.example.com/path?query', $locationHeader->toString());
     }
 
-    /** Implmentation specific tests here */
-    
+    /** Implementation specific tests  */
+
+    public function testLocationCanSetAndAccessAbsoluteUri()
+    {
+        $locationHeader = Location::fromString('Location: http://www.example.com/path');
+        $uri = $locationHeader->uri();
+        $this->assertInstanceOf('Zend\Uri\Http', $uri);
+        $this->assertTrue($uri->isAbsolute());
+        $this->assertEquals('http://www.example.com/path', $locationHeader->getUri());
+    }
+
+    public function testLocationCanSetAndAccessRelativeUri()
+    {
+        $locationHeader = Location::fromString('Location: /path/to');
+        $uri = $locationHeader->uri();
+        $this->assertInstanceOf('Zend\Uri\Http', $uri);
+        $this->assertFalse($uri->isAbsolute());
+        $this->assertEquals('/path/to', $locationHeader->getUri());
+    }
+
 }
 

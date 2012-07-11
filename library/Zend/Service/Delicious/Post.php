@@ -1,26 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage Delicious
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Delicious;
-use \Zend\Date\Date;
+
+use DateTime;
 
 /**
  * Zend_Service_Delicious_Post represents a post of a user that can be edited
@@ -28,8 +18,6 @@ use \Zend\Date\Date;
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Delicious
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Post extends SimplePost
 {
@@ -38,27 +26,27 @@ class Post extends SimplePost
      *
      * @var Zend_Service_Delicious
      */
-    protected $_service;
+    protected $service;
 
     /**
      * @var int Number of people that have the same post
      */
-    protected $_others;
+    protected $others;
 
     /**
-     * @var \Zend\Date\Date Post date
+     * @var DateTime Post date
      */
-    protected $_date;
+    protected $date;
 
     /**
      * @var bool Post share
      */
-    protected $_shared = true;
+    protected $shared = true;
 
     /**
      * @var string Post hash
      */
-    protected $_hash;
+    protected $hash;
 
     /**
      * Constructs a new del.icio.us post
@@ -70,10 +58,10 @@ class Post extends SimplePost
      */
     public function __construct(Delicious $service, $values)
     {
-        $this->_service = $service;
+        $this->service = $service;
 
         if ($values instanceof \DOMElement) {
-            $values = self::_parsePostNode($values);
+            $values = self::parsePostNode($values);
         }
 
         if (!is_array($values) || !isset($values['url']) || !isset($values['title'])) {
@@ -81,8 +69,8 @@ class Post extends SimplePost
                                                      . " 'title')");
         }
 
-        if (isset($values['date']) && ! $values['date'] instanceof Date) {
-            throw new Exception("Date has to be an instance of \Zend\Date\Date");
+        if (isset($values['date']) && !$values['date'] instanceof DateTime) {
+            throw new Exception("Date has to be an instance of DateTime");
         }
 
         foreach (array('url', 'title', 'notes', 'others', 'tags', 'date', 'shared', 'hash') as $key) {
@@ -160,11 +148,11 @@ class Post extends SimplePost
     /**
      * Getter for date
      *
-     * @return \Zend\Date\Date
+     * @return DateTime
      */
     public function getDate()
     {
-        return $this->_date;
+        return $this->date;
     }
 
     /**
@@ -178,7 +166,7 @@ class Post extends SimplePost
      */
     public function getOthers()
     {
-        return $this->_others;
+        return $this->others;
     }
 
     /**
@@ -188,7 +176,7 @@ class Post extends SimplePost
      */
     public function getHash()
     {
-        return $this->_hash;
+        return $this->hash;
     }
 
     /**
@@ -198,7 +186,7 @@ class Post extends SimplePost
      */
     public function getShared()
     {
-        return $this->_shared;
+        return $this->shared;
     }
 
     /**
@@ -209,7 +197,7 @@ class Post extends SimplePost
      */
     public function setShared($isShared)
     {
-        $this->_shared = (bool) $isShared;
+        $this->shared = (bool) $isShared;
 
         return $this;
     }
@@ -221,7 +209,7 @@ class Post extends SimplePost
      */
     public function delete()
     {
-        return $this->_service->deletePost($this->_url);
+        return $this->service->deletePost($this->_url);
     }
 
     /**
@@ -235,17 +223,12 @@ class Post extends SimplePost
             'url'        => $this->_url,
             'description'=> $this->_title,
             'extended'   => $this->_notes,
-            'shared'     => ($this->_shared ? 'yes' : 'no'),
+            'shared'     => ($this->shared ? 'yes' : 'no'),
             'tags'       => implode(' ', (array) $this->_tags),
             'replace'    => 'yes'
         );
-        /*
-        if ($this->_date instanceof \Zend\Date\Date) {
-            $parms['dt'] = $this->_date->get('Y-m-d\TH:i:s\Z');
-        }
-        */
 
-        return $this->_service->makeRequest(Delicious::PATH_POSTS_ADD, $parms);
+        return $this->service->makeRequest(Delicious::PATH_POSTS_ADD, $parms);
     }
 
     /**
@@ -254,7 +237,7 @@ class Post extends SimplePost
      * @param  DOMElement $node
      * @return array
      */
-    protected static function _parsePostNode(\DOMElement $node)
+    protected static function parsePostNode(\DOMElement $node)
     {
         return array(
             'url'    => $node->getAttribute('href'),
@@ -262,7 +245,7 @@ class Post extends SimplePost
             'notes'  => $node->getAttribute('extended'),
             'others' => (int) $node->getAttribute('others'),
             'tags'   => explode(' ', $node->getAttribute('tag')),
-            'date'   => new Date(strtotime($node->getAttribute('time'))),
+            'date'   => new DateTime($node->getAttribute('time')),
             'shared' => ($node->getAttribute('shared') == 'no' ? false : true),
             'hash'   => $node->getAttribute('hash')
         );

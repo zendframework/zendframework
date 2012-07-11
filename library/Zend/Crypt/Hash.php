@@ -7,18 +7,18 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt;
 
 /**
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Hash
 {
-    const STRING = 'string';
-    const BINARY = 'binary';
+    const OUTPUT_STRING = 'string';
+    const OUTPUT_BINARY = 'binary';
+
     /**
      * List of hash algorithms supported
      *
@@ -30,16 +30,19 @@ class Hash
      * @param  string $hash
      * @param  string $data
      * @param  string $output
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
-    public static function compute($hash, $data, $output = self::STRING)
+    public static function compute($hash, $data, $output = self::OUTPUT_STRING)
     {
         $hash = strtolower($hash);
         if (!self::isSupported($hash)) {
-            throw new Exception\InvalidArgumentException('Hash algorithm provided is not supported on this PHP installation');
+            throw new Exception\InvalidArgumentException(
+                'Hash algorithm provided is not supported on this PHP installation'
+            );
         }
 
-        $output = ($output === self::BINARY);
+        $output = ($output === self::OUTPUT_BINARY);
         return hash($hash, $data, $output);
     }
 
@@ -50,7 +53,7 @@ class Hash
      * @param  string $output
      * @return integer
      */
-    public static function getOutputSize($hash, $output = self::STRING)
+    public static function getOutputSize($hash, $output = self::OUTPUT_STRING)
     {
         return strlen(self::compute($hash, 'data', $output));
     }

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ServiceManager
+ */
 
 namespace ZendTest\ServiceManager\Di;
 
@@ -47,7 +55,7 @@ class DiServiceInitializerTest extends \PHPUnit_Framework_TestCase
         // test di is called with proper instance
         $this->mockDi->expects($this->once())->method('injectDependencies')->with($instance);
 
-        $this->diServiceInitializer->initialize($instance);
+        $this->diServiceInitializer->initialize($instance, $this->mockServiceLocator);
     }
 
     /**

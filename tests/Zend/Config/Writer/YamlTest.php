@@ -1,41 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Config
  */
 
 namespace ZendTest\Config\Writer;
 
-use \Zend\Config\Writer\Yaml as YamlWriter,
-    \Zend\Config\Config,
-    \Zend\Config\Reader\Yaml as YamlReader;
+use Zend\Config\Writer\Yaml as YamlWriter;
+use Zend\Config\Config;
+use Zend\Config\Reader\Yaml as YamlReader;
 
 /**
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
 class YamlTest extends AbstractWriterTestCase
 {
-
     public function setUp()
     {
         if (!constant('TESTS_ZEND_CONFIG_YAML_ENABLED')) {
@@ -75,7 +61,7 @@ class YamlTest extends AbstractWriterTestCase
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = $this->reader->fromFile(__DIR__ . '/files/allsections.yaml');
+        $config = $this->reader->fromFile(__DIR__ . '/_files/allsections.yaml');
 
         $this->writer->toFile($this->getTestAssetFileName(), $config);
 

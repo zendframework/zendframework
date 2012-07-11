@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_PDF
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Pdf
  */
 
 namespace Zend\Pdf;
-use Zend\Pdf\Exception;
 
 use Zend\Memory;
+use Zend\Pdf\Exception;
 
 /**
  * General entity which describes PDF document.
@@ -35,8 +25,6 @@ use Zend\Memory;
  *
  * @category   Zend
  * @package    Zend_PDF
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PdfDocument
 {
@@ -540,7 +528,7 @@ class PdfDocument
 
         // Refresh named destinations list
         foreach ($this->_namedTargets as $name => $namedTarget) {
-            if ($namedTarget instanceof Destination\Explicit) {
+            if ($namedTarget instanceof Destination\AbstractExplicitDestination) {
                 // Named target is an explicit destination
                 if ($this->resolveDestination($namedTarget, false) === null) {
                     unset($this->_namedTargets[$name]);
@@ -828,7 +816,7 @@ class PdfDocument
      * Return specified named destination
      *
      * @param string $name
-     * @return \Zend\Pdf\Destination\Explicit|\Zend\Pdf\Action\GoToAction
+     * @return \Zend\Pdf\Destination\AbstractExplicitDestination|\Zend\Pdf\Action\GoToAction
      */
     public function getNamedDestination($name)
     {
@@ -843,13 +831,13 @@ class PdfDocument
      * Set specified named destination
      *
      * @param string $name
-     * @param \Zend\Pdf\Destination\Explicit|\Zend\Pdf\Action\GoToAction $target
+     * @param \Zend\Pdf\Destination\AbstractExplicitDestination|\Zend\Pdf\Action\GoToAction $target
      */
     public function setNamedDestination($name, $destination = null)
     {
         if ($destination !== null  &&
             !$destination instanceof Action\GoToAction  &&
-            !$destination instanceof Destination\Explicit) {
+            !$destination instanceof Destination\AbstractExplicitDestination) {
             throw new Exception\InvalidArgumentException('PDF named destination must refer an explicit destination or a GoTo PDF action.');
         }
 
@@ -924,7 +912,7 @@ class PdfDocument
                 $destination = $destination->getDestination();
             }
 
-            if (!$destination instanceof Destination\Explicit) {
+            if (!$destination instanceof Destination\AbstractExplicitDestination) {
                 throw new Exception\CorruptedPdfException('Named destination target has to be an explicit destination.');
             }
         }

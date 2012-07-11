@@ -1,37 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader;
 
-use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
-    Zend\Http,
-    Zend\Loader,
-    Zend\Stdlib\ErrorHandler,
-    DOMDocument,
-    DOMXPath;
+use DOMDocument;
+use DOMXPath;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\Http;
+use Zend\Loader;
+use Zend\Stdlib\ErrorHandler;
 
 /**
 * @category Zend
 * @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Reader
 {
@@ -66,7 +54,7 @@ class Reader
     /**
      * Cache instance
      *
-     * @var CacheAdapter
+     * @var CacheStorage
      */
     protected static $_cache = null;
 
@@ -112,7 +100,7 @@ class Reader
     /**
      * Get the Feed cache
      *
-     * @return CacheAdapter
+     * @return CacheStorage
      */
     public static function getCache()
     {
@@ -122,10 +110,10 @@ class Reader
     /**
      * Set the feed cache
      *
-     * @param  CacheAdapter $cache
+     * @param  CacheStorage $cache
      * @return void
      */
-    public static function setCache(CacheAdapter $cache)
+    public static function setCache(CacheStorage $cache)
     {
         self::$_cache = $cache;
     }
@@ -243,17 +231,17 @@ class Reader
             } else {
                 $responseXml = $response->getBody();
                 $cache->setItem($cacheId, $responseXml);
-                if ($response->headers()->get('ETag')) {
-                    $cache->setItem($cacheId . '_etag', $response->headers()->get('ETag')->getFieldValue());
+                if ($response->getHeaders()->get('ETag')) {
+                    $cache->setItem($cacheId . '_etag', $response->getHeaders()->get('ETag')->getFieldValue());
                 }
-                if ($response->headers()->get('Last-Modified')) {
-                    $cache->setItem($cacheId . '_lastmodified', $response->headers()->get('Last-Modified')->getFieldValue());
+                if ($response->getHeaders()->get('Last-Modified')) {
+                    $cache->setItem($cacheId . '_lastmodified', $response->getHeaders()->get('Last-Modified')->getFieldValue());
                 }
             }
             return self::importString($responseXml);
         } elseif ($cache) {
             $data = $cache->getItem($cacheId);
-            if ($data !== false) {
+            if ($data) {
                 return self::importString($data);
             }
             $response = $client->send();

@@ -1,29 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
 
-use Zend\Cache\Storage\Adapter\AdapterInterface,
-    Zend\Cache,
-    Zend\Stdlib\ErrorHandler;
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\IteratorInterface;
+use Zend\Cache\Storage\StorageInterface;
+use Zend\Cache\Storage\ClearExpiredInterface;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
+use Zend\Cache\Storage\ClearByPrefixInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\OptimizableInterface;
+use Zend\Cache\Storage\TaggableInterface;
+use Zend\Http\Header\Expires;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * PHPUnit test case
@@ -33,8 +30,6 @@ use Zend\Cache\Storage\Adapter\AdapterInterface,
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
 abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
@@ -43,7 +38,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * The storage adapter
      *
-     * @var AdapterInterface
+     * @var StorageInterface
      */
     protected $_storage;
 
@@ -60,7 +55,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->assertInstanceOf(
-            'Zend\Cache\Storage\Adapter\AdapterInterface',
+            'Zend\Cache\Storage\StorageInterface',
             $this->_storage,
             'Storage adapter instance is needed for tests'
         );
@@ -226,6 +221,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $capabilities = $this->_storage->getCapabilities();
 
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
+        }
+
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
 
@@ -276,18 +275,23 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $success = null;
 
         // $success = false on get missing item
-        $this->_storage->getItem('unknown', array(), $success);
+        $this->_storage->getItem('unknown', $success);
         $this->assertFalse($success);
 
         // $success = true on get valid item
         $this->_storage->setItem('test', 'test');
-        $this->_storage->getItem('test', array(), $success);
+        $this->_storage->getItem('test', $success);
         $this->assertTrue($success);
     }
 
     public function testGetItemReturnsNullOnExpiredItem()
     {
         $capabilities = $this->_storage->getCapabilities();
+
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
+        }
+
         if ($capabilities->getUseRequestTime()) {
             $this->markTestSkipped("Can't test get expired item if request time will be used");
         }
@@ -397,6 +401,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->setItem('key', 'value'));
         $this->assertEquals('value', $this->_storage->getItem('key'));
         $this->assertTrue($this->_storage->hasItem('key'));
+
         $this->assertTrue($this->_storage->removeItem('key'));
         $this->assertFalse($this->_storage->hasItem('key'));
         $this->assertNull($this->_storage->getItem('key'));
@@ -522,91 +527,13 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testSetGetHasAndRemoveItemWithSpecificNamespace()
-    {
-        $this->_options->setNamespace('defaultns');
-
-        // write "key" without a namespace
-        $this->assertTrue( $this->_storage->setItem('key', 'nons'));
-
-        // write "key" with a default namespace
-        $this->assertTrue( $this->_storage->setItem('key', 'ns1', array('namespace' => 'ns1')));
-
-        // write "key" with an other default namespace
-        $this->assertTrue( $this->_storage->setItem('key', 'ns2', array('namespace' => 'ns2')));
-
-        // test value of ns2
-        $this->assertEquals('ns2', $this->_storage->getItem('key', array('namespace' => 'ns2')));
-
-        // test value of ns1
-        $this->assertEquals('ns1', $this->_storage->getItem('key', array('namespace' => 'ns1')));
-
-        // test value without namespace
-        $this->assertEquals('nons', $this->_storage->getItem('key'));
-
-        // remove item without namespace
-        $this->assertTrue($this->_storage->removeItem('key'));
-        $this->assertFalse($this->_storage->hasItem('key'));
-
-        // remove item of ns1
-        $this->assertTrue($this->_storage->removeItem('key', array('namespace' => 'ns1')));
-        $this->assertFalse($this->_storage->hasItem('key', array('namespace' => 'ns1')));
-
-        // remove item of ns2
-        $this->assertTrue($this->_storage->removeItem('key', array('namespace' => 'ns2')));
-        $this->assertFalse($this->_storage->hasItem('key', array('namespace' => 'ns2')));
-    }
-
-    public function testSetGetHasAndRemoveItemsWithSpecificNamespace()
-    {
-        $this->_options->setNamespace('defaultns');
-
-        $items = array(
-            'key1' => 'value1',
-            'key2' => 'value2',
-            'key3' => 'value3',
-        );
-
-        $this->assertSame(array(), $this->_storage->setItems($items, array('namespace' => 'specificns')));
-        $this->assertEquals(array(),  $this->_storage->hasItems(array_keys($items)));
-
-        $rs = $this->_storage->getItems(array_keys($items), array('namespace' => 'specificns'));
-        $this->assertInternalType('array', $rs);
-        foreach ($items as $key => $value) {
-            $this->assertArrayHasKey($key, $rs);
-            $this->assertEquals($value, $rs[$key]);
-        }
-
-
-        $rs = $this->_storage->hasItems(array_keys($items), array('namespace' => 'specificns'));
-        $this->assertInternalType('array', $rs);
-        $this->assertEquals(count($items), count($rs));
-        foreach ($items as $key => $value) {
-            $this->assertContains($key, $rs);
-        }
-
-        // remove the first and the last item
-        $this->assertSame(array('missing'), $this->_storage->removeItems(array('missing', 'key1', 'key3'), array('namespace' => 'specificns')));
-        unset($items['key1'], $items['key3']);
-
-        $rs = $this->_storage->getItems(array_keys($items), array('namespace' => 'specificns'));
-        $this->assertInternalType('array', $rs);
-        foreach ($items as $key => $value) {
-            $this->assertArrayHasKey($key, $rs);
-            $this->assertEquals($value, $rs[$key]);
-        }
-
-        $rs = $this->_storage->hasItems(array_keys($items), array('namespace' => 'specificns'));
-        $this->assertInternalType('array', $rs);
-        $this->assertEquals(count($items), count($rs));
-        foreach ($items as $key => $value) {
-            $this->assertContains($key, $rs);
-        }
-    }
-
     public function testSetAndGetExpiredItem()
     {
         $capabilities = $this->_storage->getCapabilities();
+
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
+        }
 
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
@@ -623,16 +550,21 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals('value', $this->_storage->getItem('key'));
         }
 
+        $this->_options->setTtl(0);
         if ($capabilities->getExpiredRead()) {
-            $this->assertEquals('value', $this->_storage->getItem('key', array('ttl' => 0)));
+            $this->assertEquals('value', $this->_storage->getItem('key'));
         } else {
-            $this->assertNull($this->_storage->getItem('key', array('ttl' => 0)));
+            $this->assertNull($this->_storage->getItem('key'));
         }
     }
 
     public function testSetAndGetExpiredItems()
     {
         $capabilities = $this->_storage->getCapabilities();
+
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
+        }
 
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
@@ -656,8 +588,9 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($items, $rs);
         }
 
+        $this->_options->setTtl(0);
         if ($capabilities->getExpiredRead()) {
-            $rs = $this->_storage->getItems(array_keys($items), array('ttl' => 0));
+            $rs = $this->_storage->getItems(array_keys($items));
             ksort($rs);
             $this->assertEquals($items, $rs);
         }
@@ -792,172 +725,12 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         $success  = null;
         $casToken = null;
-        $this->assertEquals('value', $this->_storage->getItem('key', array(), $success, $casToken));
+        $this->assertEquals('value', $this->_storage->getItem('key', $success, $casToken));
         $this->assertNotNull($casToken);
 
         $this->assertTrue($this->_storage->checkAndSetItem($casToken, 'key', 'newValue'));
         $this->assertFalse($this->_storage->checkAndSetItem($casToken, 'key', 'failedValue'));
         $this->assertEquals('newValue', $this->_storage->getItem('key'));
-    }
-
-    public function testGetDelayedAndFetch()
-    {
-        $items = array(
-            'key1' => 'value1',
-            'key2' => 'value2',
-            'key3' => 'value3'
-        );
-
-        $this->assertSame(array(), $this->_storage->setItems($items));
-        $this->assertTrue($this->_storage->getDelayed(array_keys($items)));
-
-        $fetchedKeys = array();
-        while ( $item = $this->_storage->fetch() ) {
-            $this->assertArrayHasKey('key', $item);
-            $this->assertArrayHasKey('value', $item);
-
-            $this->assertArrayHasKey($item['key'], $items);
-            $this->assertEquals($items[$item['key']], $item['value']);
-            $fetchedKeys[] = $item['key'];
-        }
-        sort($fetchedKeys);
-        $this->assertEquals(array_keys($items), $fetchedKeys);
-    }
-
-    public function testGetDelayedAndFetchAll()
-    {
-        $items = array(
-            'key1' => 'value1',
-            'key2' => 'value2',
-            'key3' => 'value3'
-        );
-
-        $this->assertSame(array(), $this->_storage->setItems($items));
-        $this->assertTrue($this->_storage->getDelayed(array_keys($items)));
-
-        $fetchedItems = $this->_storage->fetchAll();
-        $this->assertEquals(count($items), count($fetchedItems));
-        foreach ($fetchedItems as $item) {
-            $this->assertArrayHasKey('key', $item);
-            $this->assertArrayHasKey('value', $item);
-            $this->assertEquals($items[$item['key']], $item['value']);
-        }
-    }
-
-    public function testGetDelayedAndFetchAllWithSelectValue()
-    {
-        $items = array(
-            'key1' => 'value1',
-            'key2' => 'value2',
-            'key3' => 'value3'
-        );
-
-        $this->assertSame(array(), $this->_storage->setItems($items));
-        $this->assertTrue($this->_storage->getDelayed(array_keys($items), array(
-            'select' => 'value'
-        )));
-
-        $fetchedItems = $this->_storage->fetchAll();
-        $this->assertEquals(count($items), count($fetchedItems));
-        foreach ($fetchedItems as $item) {
-            $this->assertArrayNotHasKey('key', $item);
-            $this->assertArrayHasKey('value', $item);
-            $this->assertContains($item['value'], $items);
-        }
-    }
-
-    public function testGetDelayedAndFetchAllWithSelectInfo()
-    {
-        $items = array(
-            'key1' => 'value1',
-            'key2' => 'value2',
-            'key3' => 'value3'
-        );
-
-        $this->assertSame(array(), $this->_storage->setItems($items));
-
-        $capabilities = $this->_storage->getCapabilities();
-        $this->assertTrue($this->_storage->getDelayed(array_keys($items), array(
-            'select' => $capabilities->getSupportedMetadata()
-        )));
-
-        $fetchedItems = $this->_storage->fetchAll();
-
-        $this->assertEquals(count($items), count($fetchedItems));
-        foreach ($fetchedItems as $item) {
-            if (is_array($capabilities->getSupportedMetadata())) {
-                foreach ($capabilities->getSupportedMetadata() as $selectProperty) {
-                    $this->assertArrayHasKey($selectProperty, $item);
-                }
-            }
-        }
-    }
-
-    public function testGetDelayedWithCallback()
-    {
-        $items = array(
-            'key1' => 'value1',
-            'key2' => 'value2',
-            'key3' => 'value3'
-        );
-
-        $this->assertSame(array(), $this->_storage->setItems($items));
-
-        $fetchedItems = array();
-        $this->assertTrue($this->_storage->getDelayed(array_keys($items), array(
-            'callback' => function($item) use (&$fetchedItems) {
-                $fetchedItems[] = $item;
-            },
-        )));
-
-        // wait for callback
-        sleep(1);
-
-        $this->assertEquals(count($items), count($fetchedItems));
-        foreach ($fetchedItems as $item) {
-            $this->assertArrayHasKey('key', $item);
-            $this->assertArrayHasKey('value', $item);
-            $this->assertEquals($items[$item['key']], $item['value']);
-        }
-    }
-
-    public function testGetDelayedWithCallbackAndSelectInfo()
-    {
-        $items = array(
-            'key1' => 'value1',
-            'key2' => 'value2',
-            'key3' => 'value3'
-        );
-
-        $this->assertSame(array(), $this->_storage->setItems($items));
-
-        $fetchedItems = array();
-        $capabilities = $this->_storage->getCapabilities();
-        $this->assertTrue($this->_storage->getDelayed(array_keys($items), array(
-            'callback' => function($item) use (&$fetchedItems) {
-                $fetchedItems[] = $item;
-            },
-            'select' => $capabilities->getSupportedMetadata()
-        )));
-
-        // wait for callback
-        sleep(1);
-
-        $this->assertEquals(count($items), count($fetchedItems));
-        foreach ($fetchedItems as $item) {
-            foreach ($capabilities->getSupportedMetadata() as $selectProperty) {
-                $this->assertArrayHasKey($selectProperty, $item);
-            }
-        }
-    }
-
-    public function testGetDelayedThrowExceptionOnActiveStatement()
-    {
-        $this->assertTrue($this->_storage->setItem('key', 'value'));
-        $this->assertTrue($this->_storage->getDelayed(array('key')));
-
-        $this->setExpectedException('Zend\Cache\Exception\ExceptionInterface');
-        $this->_storage->getDelayed(array('key'));
     }
 
     public function testIncrementItem()
@@ -1041,6 +814,11 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     public function testTouchItem()
     {
         $capabilities = $this->_storage->getCapabilities();
+
+        if ($capabilities->getMinTtl() === 0) {
+            $this->markTestSkipped("Adapter doesn't support item expiration");
+        }
+
         $this->_options->setTtl(2 * $capabilities->getTtlPrecision());
 
         $this->assertTrue($this->_storage->setItem('key', 'value'));
@@ -1076,15 +854,122 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(array('key'), $this->_storage->touchItems(array('key')));
     }
 
-    public function testClearExpiredByNamespace()
+    public function testOptimize()
     {
-        $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getClearByNamespace()) {
-            $this->setExpectedException('Zend\Cache\Exception\RuntimeException');
-            $this->_storage->clearByNamespace(AdapterInterface::MATCH_EXPIRED);
-            return;
+        if ( !($this->_storage instanceof OptimizableInterface) ) {
+            $this->markTestSkipped("Storage doesn't implement OptimizableInterface");
         }
 
+        $this->assertTrue($this->_storage->optimize());
+    }
+
+    public function testIterator()
+    {
+        if (!$this->_storage instanceof IterableInterface) {
+            $this->markTestSkipped("Storage doesn't implement IterableInterface");
+        }
+
+        $items = array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+        );
+        $this->assertSame(array(), $this->_storage->setItems($items));
+
+        // check iterator aggregate
+        $iterator = $this->_storage->getIterator();
+        $this->assertInstanceOf('Zend\Cache\Storage\IteratorInterface', $iterator);
+        $this->assertSame(IteratorInterface::CURRENT_AS_KEY, $iterator->getMode());
+
+        // check mode CURRENT_AS_KEY
+        $iterator = $this->_storage->getIterator();
+        $iterator->setMode(IteratorInterface::CURRENT_AS_KEY);
+        $keys = iterator_to_array($iterator, false);
+        sort($keys);
+        $this->assertSame(array_keys($items), $keys);
+
+        // check mode CURRENT_AS_VALUE
+        $iterator = $this->_storage->getIterator();
+        $iterator->setMode(IteratorInterface::CURRENT_AS_VALUE);
+        $result = iterator_to_array($iterator, true);
+        ksort($result);
+        $this->assertSame($items, $result);
+    }
+
+    public function testFlush()
+    {
+        if ( !($this->_storage instanceof FlushableInterface) ) {
+            $this->markTestSkipped("Storage doesn't implement OptimizableInterface");
+        }
+
+        $this->assertSame(array(), $this->_storage->setItems(array(
+           'key1' => 'value1',
+           'key2' => 'value2',
+        )));
+
+        $this->assertTrue($this->_storage->flush());
+        $this->assertFalse($this->_storage->hasItem('key1'));
+        $this->assertFalse($this->_storage->hasItem('key2'));
+    }
+
+    public function testClearByPrefix()
+    {
+        if ( !($this->_storage instanceof ClearByPrefixInterface) ) {
+            $this->markTestSkipped("Storage doesn't implement ClearByPrefixInterface");
+        }
+
+        $this->assertSame(array(), $this->_storage->setItems(array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+            'test' => 'value',
+        )));
+
+        $this->assertTrue($this->_storage->clearByPrefix('key'));
+        $this->assertFalse($this->_storage->hasItem('key1'));
+        $this->assertFalse($this->_storage->hasItem('key2'));
+        $this->assertTrue($this->_storage->hasItem('test'));
+    }
+
+    public function testClearByNamespace()
+    {
+        if ( !($this->_storage instanceof ClearByNamespaceInterface) ) {
+            $this->markTestSkipped("Storage doesn't implement ClearByNamespaceInterface");
+        }
+
+        // write 2 items of 2 different namespaces
+        $this->_options->setNamespace('ns1');
+        $this->assertTrue($this->_storage->setItem('key1', 'value1'));
+        $this->_options->setNamespace('ns2');
+        $this->assertTrue($this->_storage->setItem('key2', 'value2'));
+
+        // clear unknown namespace should return true but clear nothing
+        $this->assertTrue($this->_storage->clearByNamespace('unknown'));
+        $this->_options->setNamespace('ns1');
+        $this->assertTrue($this->_storage->hasItem('key1'));
+        $this->_options->setNamespace('ns2');
+        $this->assertTrue($this->_storage->hasItem('key2'));
+
+        // clear "ns1"
+        $this->assertTrue($this->_storage->clearByNamespace('ns1'));
+        $this->_options->setNamespace('ns1');
+        $this->assertFalse($this->_storage->hasItem('key1'));
+        $this->_options->setNamespace('ns2');
+        $this->assertTrue($this->_storage->hasItem('key2'));
+
+        // clear "ns2"
+        $this->assertTrue($this->_storage->clearByNamespace('ns2'));
+        $this->_options->setNamespace('ns1');
+        $this->assertFalse($this->_storage->hasItem('key1'));
+        $this->_options->setNamespace('ns2');
+        $this->assertFalse($this->_storage->hasItem('key2'));
+    }
+
+    public function testClearExpired()
+    {
+        if ( !($this->_storage instanceof ClearExpiredInterface) ) {
+            $this->markTestSkipped("Storage doesn't implement ClearExpiredInterface");
+        }
+
+        $capabilities = $this->_storage->getCapabilities();
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
 
@@ -1096,7 +981,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->_storage->setItem('key2', 'value2'));
 
-        $this->assertTrue($this->_storage->clearByNamespace(AdapterInterface::MATCH_EXPIRED));
+        $this->assertTrue($this->_storage->clearExpired());
 
         if ($capabilities->getUseRequestTime()) {
             $this->assertTrue($this->_storage->hasItem('key1'));
@@ -1107,247 +992,45 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->hasItem('key2'));
     }
 
-    public function testClearActiveByNamespace()
+    public function testTagable()
     {
-        $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getClearByNamespace()) {
-            $this->setExpectedException('Zend\Cache\Exception\RuntimeException');
-            $this->_storage->clearByNamespace(AdapterInterface::MATCH_ACTIVE);
-            return;
+        if ( !($this->_storage instanceof TaggableInterface) ) {
+            $this->markTestSkipped("Storage doesn't implement TaggableInterface");
         }
 
-        $ttl = $capabilities->getTtlPrecision();
-        $this->_options->setTtl($ttl);
-
-        $this->assertTrue($this->_storage->setItem('key1', 'value1'));
-
-        // wait until the first item expired
-        $wait = $ttl + $capabilities->getTtlPrecision();
-        usleep($wait * 2000000);
-
-        $this->assertTrue($this->_storage->setItem('key2', 'value2'));
-
-        $this->assertTrue($this->_storage->clearByNamespace(AdapterInterface::MATCH_ACTIVE));
-
-        if ($capabilities->getExpiredRead() && !$capabilities->getUseRequestTime()) {
-            $this->assertTrue($this->_storage->hasItem('key1', array('ttl' => 0)));
-        }
-        $this->assertFalse($this->_storage->hasItem('key2', array('ttl' => 0)));
-    }
-
-    public function testClearAllByNamespace()
-    {
-        $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getClearByNamespace()) {
-            $this->setExpectedException('Zend\Cache\Exception\RuntimeException');
-            $this->_storage->clearByNamespace(AdapterInterface::MATCH_ALL);
-            return;
-        }
-
-        $items = array(
+        $this->assertSame(array(), $this->_storage->setItems(array(
             'key1' => 'value1',
             'key2' => 'value2',
-            'key3' => 'value3'
-        );
-        $namespaces = array('ns1', 'ns2');
+            'key3' => 'value3',
+        )));
 
-        foreach ($namespaces as $ns) {
-            $this->_options->setNamespace($ns);
-            foreach ($items as $k => $v) {
-                $this->assertTrue($this->_storage->setItem($ns.$k, $ns.$v));
-            }
-        }
+        $this->assertTrue($this->_storage->setTags('key1', array('tag1a', 'tag1b')));
+        $this->assertTrue($this->_storage->setTags('key2', array('tag2a', 'tag2b')));
+        $this->assertTrue($this->_storage->setTags('key3', array('tag3a', 'tag3b')));
+        $this->assertFalse($this->_storage->setTags('missing', array('tag')));
 
-        $clearNs = array_shift($namespaces);
-        $this->_options->setNamespace($clearNs);
-        $this->assertTrue($this->_storage->clearByNamespace(AdapterInterface::MATCH_ALL));
+        // return tags
+        $tags = $this->_storage->getTags('key1');
+        $this->assertInternalType('array', $tags);
+        sort($tags);
+        $this->assertSame(array('tag1a', 'tag1b'), $tags);
 
-        // wait
-        usleep($capabilities->getTtlPrecision() * 2000000);
+        // this should remove nothing
+        $this->assertTrue($this->_storage->clearByTags(array('tag1a', 'tag2a')));
+        $this->assertTrue($this->_storage->hasItem('key1'));
+        $this->assertTrue($this->_storage->hasItem('key2'));
+        $this->assertTrue($this->_storage->hasItem('key3'));
 
-        foreach ($items as $k => $v) {
-            $this->assertFalse($this->_storage->hasItem($clearNs.$k));
-        }
+        // this should remove key1 and key2
+        $this->assertTrue($this->_storage->clearByTags(array('tag1a', 'tag2b'), true));
+        $this->assertFalse($this->_storage->hasItem('key1'));
+        $this->assertFalse($this->_storage->hasItem('key2'));
+        $this->assertTrue($this->_storage->hasItem('key3'));
 
-        foreach ($namespaces as $ns) {
-            $this->_options->setNamespace($ns);
-            foreach ($items as $k => $v) {
-                $this->assertTrue($this->_storage->hasItem($ns.$k));
-            }
-        }
+        // this should remove key3
+        $this->assertTrue($this->_storage->clearByTags(array('tag3a', 'tag3b'), true));
+        $this->assertFalse($this->_storage->hasItem('key1'));
+        $this->assertFalse($this->_storage->hasItem('key2'));
+        $this->assertFalse($this->_storage->hasItem('key3'));
     }
-
-    public function testClearAll()
-    {
-        $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getClearAllNamespaces()) {
-            $this->setExpectedException('Zend\Cache\Exception\ExceptionInterface');
-            $this->_storage->clear(AdapterInterface::MATCH_ALL);
-            return;
-        }
-
-        $items = array(
-            'key1' => 'value1',
-            'key2' => 'value2',
-            'key3' => 'value3'
-        );
-        $namespaces = array('ns1', 'ns2');
-
-        foreach ($namespaces as $ns) {
-            $this->_options->setNamespace($ns);
-            foreach ($items as $k => $v) {
-                $this->assertTrue($this->_storage->setItem($ns.$k, $ns.$v));
-            }
-        }
-
-        $this->assertTrue($this->_storage->clear(AdapterInterface::MATCH_ALL));
-
-        // wait
-        usleep($capabilities->getTtlPrecision() * 2000000);
-
-        foreach ($namespaces as $ns) {
-            $this->_options->setNamespace($ns);
-            foreach ($items as $k => $v) {
-                $this->assertFalse($this->_storage->hasItem($ns.$k));
-            }
-        }
-    }
-
-    public function testFindActive()
-    {
-        $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getIterable()) {
-            $this->markTestSkipped("Find isn't supported by this adapter");
-        }
-
-        $this->_options->setTtl($capabilities->getTtlPrecision());
-
-        $this->assertTrue($this->_storage->setItem('key1', 'value1'));
-        $this->assertTrue($this->_storage->setItem('key2', 'value2'));
-
-        // wait until first 2 items expired
-        usleep(($capabilities->getTtlPrecision() * 1000000) + 1000000);
-
-        $this->assertTrue($this->_storage->setItem('key3', 'value3'));
-        $this->assertTrue($this->_storage->setItem('key4', 'value4'));
-
-        $this->assertTrue($this->_storage->find(AdapterInterface::MATCH_ACTIVE));
-
-        if ($capabilities->getUseRequestTime()) {
-            $expectedItems = array(
-                'key1' => 'value1',
-                'key2' => 'value2',
-                'key3' => 'value3',
-                'key4' => 'value4'
-            );
-        } else {
-            $expectedItems = array(
-                'key3' => 'value3',
-                'key4' => 'value4'
-            );
-        }
-
-        $actualItems = array();
-        while (($item = $this->_storage->fetch()) !== false) {
-            // check $item
-            $this->assertArrayHasKey('key', $item);
-            $this->assertArrayHasKey('value', $item);
-
-            $actualItems[ $item['key'] ] = $item['value'];
-        }
-
-        ksort($actualItems);
-        $this->assertEquals($expectedItems, $actualItems);
-    }
-
-    public function testFindExpired()
-    {
-        $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getIterable()) {
-            $this->markTestSkipped("Find isn't supported by this adapter");
-        }
-
-        $this->_options->setTtl($capabilities->getTtlPrecision());
-
-        $this->assertTrue($this->_storage->setItem('key1', 'value1'));
-        $this->assertTrue($this->_storage->setItem('key2', 'value2'));
-
-        // wait until first 2 items expired
-        usleep($capabilities->getTtlPrecision() * 2000000);
-
-        $this->assertTrue($this->_storage->setItem('key3', 'value3'));
-        $this->assertTrue($this->_storage->setItem('key4', 'value4'));
-
-        $this->assertTrue($this->_storage->find(AdapterInterface::MATCH_EXPIRED));
-
-        if ($capabilities->getExpiredRead() && !$capabilities->getUseRequestTime()) {
-            $expectedItems = array(
-                'key1' => 'value1',
-                'key2' => 'value2'
-            );
-        } else {
-            $expectedItems = array();
-        }
-
-        $actualItems = array();
-        while (($item = $this->_storage->fetch()) !== false) {
-            // check $item
-            $this->assertArrayHasKey('key', $item);
-            $this->assertArrayHasKey('value', $item);
-            $this->assertEquals(2, count($item));
-
-            $actualItems[ $item['key'] ] = $item['value'];
-        }
-
-        ksort($actualItems);
-        $this->assertEquals($expectedItems, $actualItems);
-    }
-
-    /*
-    public function testGetCapacity()
-    {
-        $capacity = $this->_storage->getCapacity();
-
-        $this->assertArrayHasKey('total', $capacity);
-        $this->assertInternalType('numeric', $capacity['total']);
-
-        $this->assertArrayHasKey('free', $capacity);
-        $this->assertInternalType('numeric', $capacity['free']);
-
-        $this->assertGreaterThanOrEqual(
-            $capacity['free'], $capacity['total'],
-            "The total storage space must be greater or equal than the free space"
-        );
-    }
-
-    public function testOptimizeSimpleCall()
-    {
-        $rs = $this->_storage->optimize();
-        $this->assertTrue($rs);
-    }
-
-    public function testTagsAreUsedWhenCaching()
-    {
-        $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getTagging()) {
-            $this->markTestSkipped("Tags are not supported by this adapter");
-        }
-
-        // Ensure we don't have expired items in the cache for this test
-        $this->_options->setTtl(60);
-        $this->_storage->setItem('someitem', 'somevalue', array('tags' => array('foo')));
-        $this->assertTrue($this->_storage->find(AdapterInterface::MATCH_TAGS_OR, array('tags' => array('foo'))));
-        $actualItems = array();
-        while (($item = $this->_storage->fetch()) !== false) {
-            // check $item
-            $this->assertArrayHasKey('key', $item);
-            $this->assertArrayHasKey('value', $item);
-
-            $actualItems[ $item['key'] ] = $item['value'];
-        }
-        $this->assertEquals(1, count($actualItems));
-        $this->assertArrayHasKey('someitem', $actualItems);
-        $this->assertEquals('somevalue', $actualItems['someitem']);
-    }
-    */
 }

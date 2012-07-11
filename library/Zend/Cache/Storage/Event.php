@@ -1,35 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage;
 
-use ArrayObject,
-    Zend\EventManager\Event as BaseEvent;
+use ArrayObject;
+use Zend\EventManager\Event as BaseEvent;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Event extends BaseEvent
 {
@@ -38,12 +25,12 @@ class Event extends BaseEvent
      *
      * Accept a storage adapter and its parameters.
      *
-     * @param  string $name Event name
-     * @param  Adapter\AdapterInterface $storage
-     * @param  ArrayObject $params
+     * @param  string           $name Event name
+     * @param  StorageInterface $storage
+     * @param  ArrayObject      $params
      * @return void
      */
-    public function __construct($name, Adapter\AdapterInterface $storage, ArrayObject $params)
+    public function __construct($name, StorageInterface $storage, ArrayObject $params)
     {
         parent::__construct($name, $storage, $params);
     }
@@ -51,9 +38,9 @@ class Event extends BaseEvent
     /**
      * Set the event target/context
      *
-     * @param  Adapter $target
+     * @param  StorageInterface $target
      * @return Event
-     * @see    \Zend\EventManager\Event::setTarget()
+     * @see    Zend\EventManager\Event::setTarget()
      */
     public function setTarget($target)
     {
@@ -63,20 +50,20 @@ class Event extends BaseEvent
     /**
      * Alias of setTarget
      *
-     * @param  Adapter\AdapterInterface $adapter
+     * @param  StorageInterface $storage
      * @return Event
-     * @see    \Zend\EventManager\Event::setTarget()
+     * @see    Zend\EventManager\Event::setTarget()
      */
-    public function setStorage(Adapter\AdapterInterface $adapter)
+    public function setStorage(StorageInterface $storage)
     {
-        $this->target = $adapter;
+        $this->target = $storage;
         return $this;
     }
 
     /**
      * Alias of getTarget
      *
-     * @return Adapter\AdapterInterface
+     * @return StorageInterface
      */
     public function getStorage()
     {

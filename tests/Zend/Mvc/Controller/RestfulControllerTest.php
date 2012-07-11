@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
+ */
 
 namespace ZendTest\Mvc\Controller;
 
@@ -39,6 +47,7 @@ class RestfulControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertArrayHasKey('entities', $result);
         $this->assertEquals($entities, $result['entities']);
+        $this->assertEquals('getList', $this->routeMatch->getParam('action'));
     }
 
     public function testDispatchInvokesGetMethodWhenNoActionPresentAndIdentifierPresentOnGet()
@@ -49,17 +58,19 @@ class RestfulControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertArrayHasKey('entity', $result);
         $this->assertEquals($entity, $result['entity']);
+        $this->assertEquals('get', $this->routeMatch->getParam('action'));
     }
 
     public function testDispatchInvokesCreateMethodWhenNoActionPresentAndPostInvoked()
     {
         $entity = array('id' => 1, 'name' => __FUNCTION__);
         $this->request->setMethod('POST');
-        $post = $this->request->post();
+        $post = $this->request->getPost();
         $post->fromArray($entity);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertArrayHasKey('entity', $result);
         $this->assertEquals($entity, $result['entity']);
+        $this->assertEquals('create', $this->routeMatch->getParam('action'));
     }
 
     public function testDispatchInvokesUpdateMethodWhenNoActionPresentAndPutInvokedWithIdentifier()
@@ -76,6 +87,7 @@ class RestfulControllerTest extends TestCase
         $this->assertEquals(1, $test['id']);
         $this->assertArrayHasKey('name', $test);
         $this->assertEquals(__FUNCTION__, $test['name']);
+        $this->assertEquals('update', $this->routeMatch->getParam('action'));
     }
 
     public function testDispatchInvokesDeleteMethodWhenNoActionPresentAndDeleteInvokedWithIdentifier()
@@ -87,6 +99,7 @@ class RestfulControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals(array(), $result);
         $this->assertEquals(array(), $this->controller->entity);
+        $this->assertEquals('delete', $this->routeMatch->getParam('action'));
     }
 
     public function testDispatchCallsActionMethodBasedOnNormalizingAction()
@@ -111,7 +124,7 @@ class RestfulControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $this->controller->events()->attach('dispatch', function($e) use ($response) {
+        $this->controller->getEventManager()->attach(MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, 10);
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -122,7 +135,7 @@ class RestfulControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $this->controller->events()->attach('dispatch', function($e) use ($response) {
+        $this->controller->getEventManager()->attach(MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, -10);
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -134,10 +147,10 @@ class RestfulControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = new SharedEventManager();
-        $events->attach('Zend\Stdlib\DispatchableInterface', 'dispatch', function($e) use ($response) {
+        $events->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, 10);
-        $this->controller->events()->setSharedManager($events);
+        $this->controller->getEventManager()->setSharedManager($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -147,10 +160,10 @@ class RestfulControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = new SharedEventManager();
-        $events->attach('Zend\Mvc\Controller\RestfulController', 'dispatch', function($e) use ($response) {
+        $events->attach('Zend\Mvc\Controller\AbstractRestfulController', MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, 10);
-        $this->controller->events()->setSharedManager($events);
+        $this->controller->getEventManager()->setSharedManager($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -160,10 +173,10 @@ class RestfulControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = new SharedEventManager();
-        $events->attach(get_class($this->controller), 'dispatch', function($e) use ($response) {
+        $events->attach(get_class($this->controller), MvcEvent::EVENT_DISPATCH, function($e) use ($response) {
             return $response;
         }, 10);
-        $this->controller->events()->setSharedManager($events);
+        $this->controller->getEventManager()->setSharedManager($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -188,7 +201,7 @@ class RestfulControllerTest extends TestCase
 
     public function testControllerIsPluggable()
     {
-        $this->assertInstanceOf('Zend\Loader\Pluggable', $this->controller);
+        $this->assertTrue(method_exists($this->controller, 'plugin'));
     }
 
     public function testMethodOverloadingShouldReturnPluginWhenFound()

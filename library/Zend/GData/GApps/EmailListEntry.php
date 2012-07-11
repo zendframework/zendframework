@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage GApps
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData\GApps;
@@ -40,8 +29,6 @@ use Zend\GData\GApps;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class EmailListEntry extends \Zend\GData\Entry
 {
@@ -145,7 +132,7 @@ class EmailListEntry extends \Zend\GData\Entry
      *
      * @param \Zend\GData\GApps\Extension\EmailList $value The desired value
      *              this element, or null to unset.
-     * @return Zend_Gdata_GApps_EventEntry Provides a fluent interface
+     * @return EmailListEntry Provides a fluent interface
      */
     public function setEmailList($value)
     {
@@ -190,7 +177,7 @@ class EmailListEntry extends \Zend\GData\Entry
      * @param array $value A collection of Zend_Gdata_GApps_Extension_FeedLink
      *          instances representing all feed links for this entry, or
      *          null to unset.
-     * @return Zend_Gdata_GApps_EventEntry Provides a fluent interface
+     * @return EmailListEntry Provides a fluent interface
      */
     public function setFeedLink($value)
     {

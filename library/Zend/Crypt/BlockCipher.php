@@ -7,12 +7,13 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt;
 
-use Zend\Crypt\Symmetric\SymmetricInterface;
 use Zend\Crypt\Hmac;
-use Zend\Crypt\Utils;
 use Zend\Crypt\Key\Derivation\Pbkdf2;
+use Zend\Crypt\Symmetric\SymmetricInterface;
+use Zend\Crypt\Utils;
 use Zend\Math\Math;
 
 /**
@@ -20,42 +21,46 @@ use Zend\Math\Math;
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BlockCipher
 {
     const KEY_DERIV_HMAC = 'sha256';
+
     /**
      * Symmetric cipher
      *
      * @var SymmetricInterface
      */
     protected $cipher;
+
     /**
-     * Symmetric cipher broker
+     * Symmetric cipher plugin manager
      *
-     * @var SymmetricBroker
+     * @var SymmetricPluginManager
      */
-    protected static $symmetricBroker = null;
+    protected static $symmetricPlugins = null;
+
     /**
      * Hash algorithm fot HMAC
      *
      * @var string
      */
     protected $hash = 'sha256';
+
     /**
      * The output is binary?
      *
      * @var boolean
      */
     protected $binaryOutput = false;
+
     /**
      * User's key
      *
      * @var string
      */
     protected $key;
+
     /**
      * Number of iterations for Pbkdf2
      *
@@ -82,51 +87,50 @@ class BlockCipher
      */
     public static function factory($adapter, $options = array())
     {
-        $broker  = self::getSymmetricBroker();
-        $adapter = $broker->load($adapter, array($options));
+        $plugins = self::getSymmetricPluginManager();
+        $adapter = $plugins->get($adapter, (array) $options);
         return new self($adapter);
     }
 
     /**
-     * Returns the symmetric cipher broker.  If it doesn't exist it's created.
+     * Returns the symmetric cipher plugin manager.  If it doesn't exist it's created.
      *
-     * @return SymmetricBroker
+     * @return SymmetricPluginManager
      */
-    public static function getSymmetricBroker()
+    public static function getSymmetricPluginManager()
     {
-        if (self::$symmetricBroker === null) {
-            self::setSymmetricBroker(new SymmetricBroker());
+        if (self::$symmetricPlugins === null) {
+            self::setSymmetricPluginManager(new SymmetricPluginManager());
         }
 
-        return self::$symmetricBroker;
+        return self::$symmetricPlugins;
     }
 
     /**
-     * Set the symmetric cipher broker
+     * Set the symmetric cipher plugin manager
      *
-     * @param  string|SymmetricBroker $broker
+     * @param  string|SymmetricPluginManager $plugins
      * @throws Exception\InvalidArgumentException
      */
-    public static function setSymmetricBroker($broker)
+    public static function setSymmetricPluginManager($plugins)
     {
-        if (is_string($broker)) {
-            if (!class_exists($broker)) {
-                throw new Exception\InvalidArgumentException(
-                    sprintf(
-                        'Unable to locate symmetric cipher broker of class "%s"',
-                        $broker
-                    ));
-            }
-            $broker = new $broker();
-        }
-        if (!$broker instanceof SymmetricBroker) {
-            throw new Exception\InvalidArgumentException(
-                sprintf(
-                    'Symmetric cipher broker must extend SymmetricBroker; received "%s"',
-                    (is_object($broker) ? get_class($broker) : gettype($broker))
+        if (is_string($plugins)) {
+            if (!class_exists($plugins)) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Unable to locate symmetric cipher plugins using class "%s"; class does not exist',
+                    $plugins
                 ));
+            }
+            $plugins = new $plugins();
         }
-        self::$symmetricBroker = $broker;
+        if (!$plugins instanceof SymmetricPluginManager) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected an instance or extension of %s\SymmetricPluginManager; received "%s"',
+                __NAMESPACE__,
+                (is_object($plugins) ? get_class($plugins) : gettype($plugins))
+            ));
+        }
+        self::$symmetricPlugins = $plugins;
     }
 
     /**
@@ -278,7 +282,7 @@ class BlockCipher
     {
         if (!Hash::isSupported($hash)) {
             throw new Exception\InvalidArgumentException(
-                "The specified hash algorithm $hash is not supported by Zend\Crypt\Hash"
+                "The specified hash algorithm '{$hash}' is not supported by Zend\Crypt\Hash"
             );
         }
         $this->hash = $hash;
@@ -328,7 +332,7 @@ class BlockCipher
         $keyHmac = substr($hash, $keySize);
         // encryption
         $ciphertext = $this->cipher->encrypt($data);
-        // HMAC 
+        // HMAC
         $hmac = Hmac::compute($keyHmac,
                               $this->hash,
                               $this->cipher->getAlgorithm() . $ciphertext);
@@ -347,7 +351,10 @@ class BlockCipher
      */
     public function decrypt($data)
     {
-        if (empty($data)) {
+        if (!is_string($data)) {
+            throw new Exception\InvalidArgumentException('The data to decrypt must be a string');
+        }
+        if ('' === $data) {
             throw new Exception\InvalidArgumentException('The data to decrypt cannot be empty');
         }
         if (empty($this->key)) {

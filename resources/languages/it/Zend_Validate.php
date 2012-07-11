@@ -197,12 +197,13 @@ return array(
     "'%value%' appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'" => "'%value%' sembra essere un hostname DNS ma non rispetta lo schema per il TLD '%tld%'",
     "'%value%' appears to be a DNS hostname but cannot extract TLD part" => "'%value%' sembra essere un hostname DNS ma non è possibile estrarne il TLD",
     "'%value%' does not match the expected structure for a DNS hostname" => "'%value%' non sembra rispettare la struttura attesa per un hostname DNS",
-    "'%value%' does not appear to be a valid local network name" => "'%value%' non sembra essere un local network name valido",
-    "'%value%' appears to be a local network name but local network names are not allowed" => "'%value%' sembra essere un local network name, ma i local network names non sono consentiti",
+    "'%value%' does not appear to be a valid local network name" => "'%value%' non sembra essere un nome valido per una rete locale",
+    "'%value%' appears to be a local network name but local network names are not allowed" => "'%value%' sembra essere un nome di una rete locale e queste non sono consentite",
     "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded" => "'%value%' sembra essere un hostname DNS ma la notazione punycode data non può essere decodificata",
-
+    "'%value%' does not appear to be a valid URI hostname" => "'%value%' non sembra essere un hostname URI valido",
+    
     // Zend_Validate_Iban
-    "Unknown country within the IBAN '%value%'" => "Country Code sconosciuto nell'IBAN '%value%'",
+    "Unknown country within the IBAN '%value%'" => "Codice paese sconosciuto con l'IBAN '%value%'",
     "'%value%' has a false IBAN format" => "'%value%' ha un formato IBAN non valido",
     "'%value%' has failed the IBAN check" => "'%value%' ha fallito il controllo IBAN",
 

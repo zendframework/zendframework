@@ -1,43 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
-use Zend\Validator,
-    ReflectionClass;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validator_InArray
- */
-
+use Zend\Validator\InArray;
 
 /**
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
 class InArrayTest extends \PHPUnit_Framework_TestCase
@@ -49,7 +27,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
-        $validator = new Validator\InArray(array(1, 'a', 2.3));
+        $validator = new InArray(array(1, 'a', 2.3));
         $this->assertTrue($validator->isValid(1));
         $this->assertTrue($validator->isValid(1.0));
         $this->assertTrue($validator->isValid('1'));
@@ -66,7 +44,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessages()
     {
-        $validator = new Validator\InArray(array(1, 2, 3));
+        $validator = new InArray(array(1, 2, 3));
         $this->assertEquals(array(), $validator->getMessages());
     }
 
@@ -77,7 +55,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetHaystack()
     {
-        $validator = new Validator\InArray(array(1, 2, 3));
+        $validator = new InArray(array(1, 2, 3));
         $this->assertEquals(array(1, 2, 3), $validator->getHaystack());
     }
 
@@ -88,13 +66,13 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetStrict()
     {
-        $validator = new Validator\InArray(array(1, 2, 3));
+        $validator = new InArray(array(1, 2, 3));
         $this->assertFalse($validator->getStrict());
     }
 
     public function testGivingOptionsAsArrayAtInitiation()
     {
-        $validator = new Validator\InArray(
+        $validator = new InArray(
             array('haystack' =>
                 array(1, 'a', 2.3)
             )
@@ -110,7 +88,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingANewHaystack()
     {
-        $validator = new Validator\InArray(
+        $validator = new InArray(
             array('haystack' =>
                 array('test', 0, 'A')
             )
@@ -129,7 +107,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingNewStrictMode()
     {
-        $validator = new Validator\InArray(array(1, 2, 3));
+        $validator = new InArray(array(1, 2, 3));
         $this->assertFalse($validator->getStrict());
         $this->assertTrue($validator->isValid('1'));
         $this->assertTrue($validator->isValid(1));
@@ -142,7 +120,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingStrictViaInitiation()
     {
-        $validator = new Validator\InArray(
+        $validator = new InArray(
             array(
                 'haystack' => array('test', 0, 'A'),
                 'strict'   => true
@@ -153,7 +131,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testGettingRecursiveOption()
     {
-        $validator = new Validator\InArray(array(1, 2, 3));
+        $validator = new InArray(array(1, 2, 3));
         $this->assertFalse($validator->getRecursive());
 
         $validator->setRecursive(true);
@@ -162,7 +140,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingRecursiveViaInitiation()
     {
-        $validator = new Validator\InArray(
+        $validator = new InArray(
             array(
                 'haystack'  => array('test', 0, 'A'),
                 'recursive' => true
@@ -173,7 +151,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testRecursiveDetection()
     {
-        $validator = new Validator\InArray(
+        $validator = new InArray(
             array(
                 'haystack'  =>
                     array(
@@ -190,7 +168,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testRecursiveStandalone()
     {
-        $validator = new Validator\InArray(
+        $validator = new InArray(
             array(
                 'firstDimension' => array('test', 0, 'A'),
                 'secondDimension' => array('value', 2, 'a')
@@ -201,40 +179,11 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $validator->setRecursive(true);
         $this->assertTrue($validator->isValid('A'));
     }
-    
+
     public function testEqualsMessageTemplates()
     {
-        $validator = new Validator\InArray(array());
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
-    }
-    
-    public function testEqualsMessageVariables()
-    {
-        $validator = new Validator\InArray(array());
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $validator = new InArray(array());
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
 }

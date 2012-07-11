@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Di
+ */
 
 namespace Zend\Di\Definition\Builder;
 
@@ -9,13 +17,24 @@ class PhpClass
     protected $instantiator         = '__construct';
     protected $injectionMethods     = array();
     protected $superTypes           = array();
-    
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return PhpClass
+     */
     public function setName($name)
     {
         $this->name = $name;
         return $this;
     }
-    
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
@@ -31,18 +50,29 @@ class PhpClass
     {
         return $this->instantiator;
     }
-    
+
     public function addSuperType($superType)
     {
         $this->superTypes[] = $superType;
         return $this;
     }
-    
+
+    /**
+     * Get super types
+     *
+     * @return array
+     */
     public function getSuperTypes()
     {
         return $this->superTypes;
     }
-    
+
+    /**
+     * Add injection method
+     *
+     * @param InjectionMethod $injectionMethod
+     * @return PhpClass
+     */
     public function addInjectionMethod(InjectionMethod $injectionMethod)
     {
         $this->injectionMethods[] = $injectionMethod;

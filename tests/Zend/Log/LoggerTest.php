@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Log
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Log
  */
 
 namespace ZendTest\Log;
 
-use Zend\Log\Logger,
-    Zend\Log\Writer\Mock as MockWriter,
-    Zend\Stdlib\SplPriorityQueue;
+use Zend\Log\Logger;
+use Zend\Log\Writer\Mock as MockWriter;
+use Zend\Stdlib\SplPriorityQueue;
 
 /**
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
 class LoggerTest extends \PHPUnit_Framework_TestCase
@@ -51,15 +38,15 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('U', $this->logger->getDateTimeFormat());
     }
 
-    public function testUsesWriterBrokerByDefault()
+    public function testUsesWriterPluginManagerByDefault()
     {
-        $this->assertInstanceOf('Zend\Log\WriterBroker', $this->logger->getBroker());
+        $this->assertInstanceOf('Zend\Log\WriterPluginManager', $this->logger->getPluginManager());
     }
 
-    public function testPassingValidStringClassToSetBroker()
+    public function testPassingValidStringClassToSetPluginManager()
     {
-        $this->logger->setBroker('Zend\Loader\PluginBroker');
-        $this->assertInstanceOf('Zend\Loader\PluginBroker', $this->logger->getBroker());
+        $this->logger->setPluginManager('Zend\Log\WriterPluginManager');
+        $this->assertInstanceOf('Zend\Log\WriterPluginManager', $this->logger->getPluginManager());
     }
 
     public static function provideInvalidClasses()
@@ -73,13 +60,13 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideInvalidClasses
      */
-    public function testPassingInvalidArgumentToSetBrokerRaisesException($broker)
+    public function testPassingInvalidArgumentToSetPluginManagerRaisesException($plugins)
     {
-        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must implement');
-        $this->logger->setBroker($broker);
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException');
+        $this->logger->setPluginManager($plugins);
     }
 
-    public function testPassingShortNameToBrokerReturnsWriterByThatName()
+    public function testPassingShortNameToPluginReturnsWriterByThatName()
     {
         $writer = $this->logger->plugin('mock');
         $this->assertInstanceOf('Zend\Log\Writer\Mock', $writer);

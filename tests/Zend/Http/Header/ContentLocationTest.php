@@ -1,44 +1,65 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace ZendTest\Http\Header;
 
 use Zend\Http\Header\ContentLocation;
+use Zend\Uri\Http as HttpUri;
 
 class ContentLocationTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testContentLocationFromStringCreatesValidContentLocationHeader()
+    public function testContentLocationFromStringCreatesValidLocationHeader()
     {
-        $contentLocationHeader = ContentLocation::fromString('Content-Location: xxx');
+        $contentLocationHeader = ContentLocation::fromString('Content-Location: http://www.example.com/');
         $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $contentLocationHeader);
         $this->assertInstanceOf('Zend\Http\Header\ContentLocation', $contentLocationHeader);
     }
 
-    public function testContentLocationGetFieldNameReturnsHeaderName()
-    {
-        $contentLocationHeader = new ContentLocation();
-        $this->assertEquals('Content-Location', $contentLocationHeader->getFieldName());
-    }
-
     public function testContentLocationGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('ContentLocation needs to be completed');
-
         $contentLocationHeader = new ContentLocation();
-        $this->assertEquals('xxx', $contentLocationHeader->getFieldValue());
+        $contentLocationHeader->setUri('http://www.example.com/');
+        $this->assertEquals('http://www.example.com/', $contentLocationHeader->getFieldValue());
+
+        $contentLocationHeader->setUri('/path');
+        $this->assertEquals('/path', $contentLocationHeader->getFieldValue());
     }
 
     public function testContentLocationToStringReturnsHeaderFormattedString()
     {
-        $this->markTestIncomplete('ContentLocation needs to be completed');
-
         $contentLocationHeader = new ContentLocation();
+        $contentLocationHeader->setUri('http://www.example.com/path?query');
 
-        // @todo set some values, then test output
-        $this->assertEmpty('Content-Location: xxx', $contentLocationHeader->toString());
+        $this->assertEquals('Content-Location: http://www.example.com/path?query', $contentLocationHeader->toString());
     }
 
-    /** Implmentation specific tests here */
-    
+    /** Implementation specific tests  */
+
+    public function testContentLocationCanSetAndAccessAbsoluteUri()
+    {
+        $contentLocationHeader = ContentLocation::fromString('Content-Location: http://www.example.com/path');
+        $uri = $contentLocationHeader->uri();
+        $this->assertInstanceOf('Zend\Uri\Http', $uri);
+        $this->assertTrue($uri->isAbsolute());
+        $this->assertEquals('http://www.example.com/path', $contentLocationHeader->getUri());
+    }
+
+    public function testContentLocationCanSetAndAccessRelativeUri()
+    {
+        $contentLocationHeader = ContentLocation::fromString('Content-Location: /path/to');
+        $uri = $contentLocationHeader->uri();
+        $this->assertInstanceOf('Zend\Uri\Http', $uri);
+        $this->assertFalse($uri->isAbsolute());
+        $this->assertEquals('/path/to', $contentLocationHeader->getUri());
+    }
+
 }
 

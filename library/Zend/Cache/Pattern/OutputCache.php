@@ -1,36 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Pattern
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Pattern;
 
-use Zend\Cache\Exception,
-    Zend\Cache\StorageFactory,
-    Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter;
+use Zend\Cache\Exception;
+use Zend\Cache\StorageFactory;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Pattern
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class OutputCache extends AbstractPattern
 {
@@ -62,7 +48,7 @@ class OutputCache extends AbstractPattern
      * else start buffering output until end() is called or the script ends.
      *
      * @param  string  $key            Key
-     * @param  array   $storageOptions Options passing to Zend\Cache\Storage\Adapter\AdapterInterface::getItem
+     * @param  array   $storageOptions Options passing to Zend\Cache\Storage\StorageInterface::getItem
      * @return boolean
      * @throws Exception
      */
@@ -89,7 +75,7 @@ class OutputCache extends AbstractPattern
      * Stops bufferung output, write buffered data to cache using the given key on start()
      * and displays the buffer.
      *
-     * @param  array   $storageOptions Options passed to Zend\Cache\Storage\Adapter\AdapterInterface::setItem
+     * @param  array   $storageOptions Options passed to Zend\Cache\Storage\StorageInterface::setItem
      * @return boolean TRUE on success, FALSE on failure writing to cache
      * @throws Exception
      */

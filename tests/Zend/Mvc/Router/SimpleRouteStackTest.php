@@ -1,23 +1,32 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
+ */
+
 namespace ZendTest\Mvc\Router;
 
 use PHPUnit_Framework_TestCase as TestCase,
     ArrayIterator,
     Zend\Stdlib\Request,
     Zend\Uri\Http as HttpUri,
-    Zend\Mvc\Router\RouteBroker,
+    Zend\Mvc\Router\RoutePluginManager,
     Zend\Mvc\Router\SimpleRouteStack,
     ZendTest\Mvc\Router\FactoryTester;
 
 class SimpleRouteStackTest extends TestCase
 {
-    public function testSetRouteBroker()
+    public function testSetRoutePluginManager()
     {
-        $broker = new RouteBroker();
+        $routes = new RoutePluginManager();
         $stack  = new SimpleRouteStack();
-        $stack->setRouteBroker($broker);
+        $stack->setRoutePluginManager($routes);
         
-        $this->assertEquals($broker, $stack->routeBroker());
+        $this->assertEquals($routes, $stack->getRoutePluginManager());
     }
     
     public function testAddRoutesWithInvalidArgument()
@@ -234,7 +243,7 @@ class SimpleRouteStackTest extends TestCase
             'Zend\Mvc\Router\SimpleRouteStack',
             array(),
             array(
-                'route_broker'   => new RouteBroker(),
+                'route_plugins'  => new RoutePluginManager(),
                 'routes'         => array(),
                 'default_params' => array()
             )

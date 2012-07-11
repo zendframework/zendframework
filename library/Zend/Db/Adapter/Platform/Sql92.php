@@ -49,6 +49,21 @@ class Sql92 implements PlatformInterface
     }
 
     /**
+     * Quote identifier chain
+     *
+     * @param string|string[] $identifierChain
+     * @return string
+     */
+    public function quoteIdentifierChain($identifierChain)
+    {
+        $identifierChain = str_replace('"', '\\"', $identifierChain);
+        if (is_array($identifierChain)) {
+            $identifierChain = implode('"."', $identifierChain);
+        }
+        return '"' . $identifierChain . '"';
+    }
+
+    /**
      * Get quote value symbol
      * 
      * @return string 
@@ -70,6 +85,21 @@ class Sql92 implements PlatformInterface
     }
 
     /**
+     * Quote value list
+     *
+     * @param string|string[] $valueList
+     * @return string
+     */
+    public function quoteValueList($valueList)
+    {
+        $valueList = str_replace('\'', '\\' . '\'', $valueList);
+        if (is_array($valueList)) {
+            $valueList = implode('\', \'', $valueList);
+        }
+        return '\'' . $valueList . '\'';
+    }
+
+    /**
      * Get identifier separator
      * 
      * @return string 
@@ -88,11 +118,13 @@ class Sql92 implements PlatformInterface
      */
     public function quoteIdentifierInFragment($identifier, array $safeWords = array())
     {
-        $parts = preg_split('#([\.\s])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE);
+        $parts = preg_split('#([\.\s\W])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+
         foreach($parts as $i => $part) {
             if ($safeWords && in_array($part, $safeWords)) {
                 continue;
             }
+
             switch ($part) {
                 case ' ':
                 case '.':
@@ -106,6 +138,7 @@ class Sql92 implements PlatformInterface
                     $parts[$i] = '"' . str_replace('"', '\\' . '"', $part) . '"';
             }
         }
+
         return implode('', $parts);
     }
 

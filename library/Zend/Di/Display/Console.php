@@ -1,4 +1,13 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Di
+ */
+
 namespace Zend\Di\Display;
 
 use Zend\Di\Di;
@@ -10,8 +19,19 @@ class Console
      * @var Di
      */
     protected $di = null;
+
+    /**
+     * @var array
+     */
     protected $runtimeClasses = array();
 
+    /**
+     * Export
+     *
+     * @param Di $di
+     * @param array $runtimeClasses
+     * @return void
+     */
     public static function export(Di $di, array $runtimeClasses = array())
     {
         $console = new static($di);
@@ -19,6 +39,11 @@ class Console
         $console->render($di);
     }
 
+    /**
+     * Constructor
+     *
+     * @param null|Di $di
+     */
     public function __construct(Di $di = null)
     {
         $this->di = ($di) ?: new Di;

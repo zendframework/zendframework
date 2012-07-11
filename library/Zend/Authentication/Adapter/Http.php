@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Authentication
- * @subpackage Adapter_HTTP
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Authentication
  */
 
 namespace Zend\Authentication\Adapter;
@@ -34,8 +23,6 @@ use Zend\Uri\UriFactory;
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter_Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @todo       Support auth-int
  * @todo       Track nonces, nonce-count, opaque for replay protection and stale support
  * @todo       Support Authentication-Info header
@@ -348,7 +335,7 @@ class Http implements AdapterInterface
             $getHeader = 'Authorization';
         }
 
-        $headers = $this->_request->headers();
+        $headers = $this->_request->getHeaders();
         if (!$headers->has($getHeader)) {
             return $this->_challengeClient();
         }
@@ -412,7 +399,7 @@ class Http implements AdapterInterface
         $this->_response->setStatusCode($statusCode);
 
         // Send a challenge in each acceptable authentication scheme
-        $headers = $this->_response->headers();
+        $headers = $this->_response->getHeaders();
         if (in_array('basic', $this->_acceptSchemes)) {
             $headers->addHeaderLine($headerName, $this->_basicHeader());
         }
@@ -496,14 +483,19 @@ class Http implements AdapterInterface
             return $this->_challengeClient();
         }
 
-        $password = $this->_basicResolver->resolve($creds[0], $this->_realm);
-        if ($password && 
-            $this->_secureStringCompare($password, $creds[1])) {
+        $result = $this->_basicResolver->resolve($creds[0], $this->_realm, $creds[1]);
+        
+        if ($result
+            && !is_array($result)
+            && $this->_secureStringCompare($result, $creds[1])
+        ) {
             $identity = array('username'=>$creds[0], 'realm'=>$this->_realm);
             return new Authentication\Result(Authentication\Result::SUCCESS, $identity);
-        } else {
-            return $this->_challengeClient();
+        } elseif (is_array($result)) {
+            return new Authentication\Result(Authentication\Result::SUCCESS, $result);
         }
+
+        return $this->_challengeClient();
     }
 
     /**
@@ -614,7 +606,7 @@ class Http implements AdapterInterface
         // would be surprising if the user just logged in.
         $timeout = ceil(time() / $this->_nonceTimeout) * $this->_nonceTimeout;
 
-        $nonce = hash('md5', $timeout . ':' . $this->_request->server()->get('HTTP_USER_AGENT') . ':' . __CLASS__);
+        $nonce = hash('md5', $timeout . ':' . $this->_request->getServer()->get('HTTP_USER_AGENT') . ':' . __CLASS__);
         return $nonce;
     }
 
@@ -688,7 +680,7 @@ class Http implements AdapterInterface
         // Section 3.2.2.5 in RFC 2617 says the authenticating server must
         // verify that the URI field in the Authorization header is for the
         // same resource requested in the Request Line.
-        $rUri = $this->_request->uri();
+        $rUri = $this->_request->getUri();
         $cUri = UriFactory::factory($temp[1]);
 
         // Make sure the path portion of both URIs is the same
@@ -744,7 +736,7 @@ class Http implements AdapterInterface
             if (!$ret || empty($temp[1])) {
 
                 // Big surprise: IE isn't RFC 2617-compliant.
-                $headers = $this->_request->headers();
+                $headers = $this->_request->getHeaders();
                 if (!$headers->has('User-Agent')) {
                     return false;
                 }

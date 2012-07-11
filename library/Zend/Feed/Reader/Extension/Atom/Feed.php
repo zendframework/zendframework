@@ -1,37 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Reader\Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Extension\Atom;
 
-use Zend\Date,
-    Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Extension,
-    Zend\Uri,
-    DOMElement;
+use DateTime;
+use DOMElement;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Extension;
+use Zend\Uri;
 
 /**
 * @category Zend
 * @package Reader\Reader
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Feed extends Extension\AbstractFeed
 {
@@ -120,7 +108,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get the feed creation date
      *
-     * @return Date\Date|null
+     * @return DateTime|null
      */
     public function getDateCreated()
     {
@@ -137,8 +125,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if ($dateCreated) {
-            $date = new Date\Date;
-            $date->set($dateCreated, Date\Date::ISO_8601);
+            $date = DateTime::createFromFormat(DateTime::ISO8601, $dateCreated);
         }
 
         $this->_data['datecreated'] = $date;
@@ -149,7 +136,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get the feed modification date
      *
-     * @return Date\Date|null
+     * @return DateTime|null
      */
     public function getDateModified()
     {
@@ -166,8 +153,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if ($dateModified) {
-            $date = new Date\Date;
-            $date->set($dateModified, Date\Date::ISO_8601);
+            $date = DateTime::createFromFormat(DateTime::ISO8601, $dateModified);
         }
 
         $this->_data['datemodified'] = $date;
@@ -501,7 +487,7 @@ class Feed extends Extension\AbstractFeed
      */
     protected function _absolutiseUri($link)
     {
-        if (!Uri\UriFactory::factory($link)->isValid()) {
+        if (!Uri\UriFactory::factory($link)->isAbsolute()) {
             if ($this->getBaseUrl() !== null) {
                 $link = $this->getBaseUrl() . $link;
                 if (!Uri\UriFactory::factory($link)->isValid()) {

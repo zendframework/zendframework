@@ -1,53 +1,34 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
-use Zend\Validator,
-    ReflectionClass;
+
+use stdClass;
+use Zend\Validator\NotEmpty;
 
 /**
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
 class NotEmptyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validator_NotEmpty object
-     *
-     * @var Zend_Validator_NotEmpty
+     * @var NotEmpty
      */
-    protected $_validator;
+    protected $validator;
 
-    /**
-     * Creates a new Zend_Validator_NotEmpty object for each test method
-     *
-     * @return void
-     */
     public function setUp()
     {
-        $this->_validator = new Validator\NotEmpty();
+        $this->validator = new NotEmpty();
     }
 
     /**
@@ -76,7 +57,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
             array(array(5), true),
         );
         foreach ($valuesExpected as $i => $element) {
-            $this->assertEquals($element[1], $this->_validator->isValid($element[0]),
+            $this->assertEquals($element[1], $this->validator->isValid($element[0]),
                 "Failed test #$i");
         }
     }
@@ -88,20 +69,20 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnlyBoolean()
     {
-        $this->_validator->setType(Validator\NotEmpty::BOOLEAN);
-        $this->assertFalse($this->_validator->isValid(false));
-        $this->assertTrue($this->_validator->isValid(true));
-        $this->assertTrue($this->_validator->isValid(0));
-        $this->assertTrue($this->_validator->isValid(1));
-        $this->assertTrue($this->_validator->isValid(0.0));
-        $this->assertTrue($this->_validator->isValid(1.0));
-        $this->assertTrue($this->_validator->isValid(''));
-        $this->assertTrue($this->_validator->isValid('abc'));
-        $this->assertTrue($this->_validator->isValid('0'));
-        $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
-        $this->assertTrue($this->_validator->isValid(null));
+        $this->validator->setType(NotEmpty::BOOLEAN);
+        $this->assertFalse($this->validator->isValid(false));
+        $this->assertTrue($this->validator->isValid(true));
+        $this->assertTrue($this->validator->isValid(0));
+        $this->assertTrue($this->validator->isValid(1));
+        $this->assertTrue($this->validator->isValid(0.0));
+        $this->assertTrue($this->validator->isValid(1.0));
+        $this->assertTrue($this->validator->isValid(''));
+        $this->assertTrue($this->validator->isValid('abc'));
+        $this->assertTrue($this->validator->isValid('0'));
+        $this->assertTrue($this->validator->isValid('1'));
+        $this->assertTrue($this->validator->isValid(array()));
+        $this->assertTrue($this->validator->isValid(array('xxx')));
+        $this->assertTrue($this->validator->isValid(null));
     }
 
     /**
@@ -111,20 +92,20 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnlyInteger()
     {
-        $this->_validator->setType(Validator\NotEmpty::INTEGER);
-        $this->assertTrue($this->_validator->isValid(false));
-        $this->assertTrue($this->_validator->isValid(true));
-        $this->assertFalse($this->_validator->isValid(0));
-        $this->assertTrue($this->_validator->isValid(1));
-        $this->assertTrue($this->_validator->isValid(0.0));
-        $this->assertTrue($this->_validator->isValid(1.0));
-        $this->assertTrue($this->_validator->isValid(''));
-        $this->assertTrue($this->_validator->isValid('abc'));
-        $this->assertTrue($this->_validator->isValid('0'));
-        $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
-        $this->assertTrue($this->_validator->isValid(null));
+        $this->validator->setType(NotEmpty::INTEGER);
+        $this->assertTrue($this->validator->isValid(false));
+        $this->assertTrue($this->validator->isValid(true));
+        $this->assertFalse($this->validator->isValid(0));
+        $this->assertTrue($this->validator->isValid(1));
+        $this->assertTrue($this->validator->isValid(0.0));
+        $this->assertTrue($this->validator->isValid(1.0));
+        $this->assertTrue($this->validator->isValid(''));
+        $this->assertTrue($this->validator->isValid('abc'));
+        $this->assertTrue($this->validator->isValid('0'));
+        $this->assertTrue($this->validator->isValid('1'));
+        $this->assertTrue($this->validator->isValid(array()));
+        $this->assertTrue($this->validator->isValid(array('xxx')));
+        $this->assertTrue($this->validator->isValid(null));
     }
 
     /**
@@ -134,20 +115,20 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnlyFloat()
     {
-        $this->_validator->setType(Validator\NotEmpty::FLOAT);
-        $this->assertTrue($this->_validator->isValid(false));
-        $this->assertTrue($this->_validator->isValid(true));
-        $this->assertTrue($this->_validator->isValid(0));
-        $this->assertTrue($this->_validator->isValid(1));
-        $this->assertFalse($this->_validator->isValid(0.0));
-        $this->assertTrue($this->_validator->isValid(1.0));
-        $this->assertTrue($this->_validator->isValid(''));
-        $this->assertTrue($this->_validator->isValid('abc'));
-        $this->assertTrue($this->_validator->isValid('0'));
-        $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
-        $this->assertTrue($this->_validator->isValid(null));
+        $this->validator->setType(NotEmpty::FLOAT);
+        $this->assertTrue($this->validator->isValid(false));
+        $this->assertTrue($this->validator->isValid(true));
+        $this->assertTrue($this->validator->isValid(0));
+        $this->assertTrue($this->validator->isValid(1));
+        $this->assertFalse($this->validator->isValid(0.0));
+        $this->assertTrue($this->validator->isValid(1.0));
+        $this->assertTrue($this->validator->isValid(''));
+        $this->assertTrue($this->validator->isValid('abc'));
+        $this->assertTrue($this->validator->isValid('0'));
+        $this->assertTrue($this->validator->isValid('1'));
+        $this->assertTrue($this->validator->isValid(array()));
+        $this->assertTrue($this->validator->isValid(array('xxx')));
+        $this->assertTrue($this->validator->isValid(null));
     }
 
     /**
@@ -157,20 +138,20 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnlyString()
     {
-        $this->_validator->setType(Validator\NotEmpty::STRING);
-        $this->assertTrue($this->_validator->isValid(false));
-        $this->assertTrue($this->_validator->isValid(true));
-        $this->assertTrue($this->_validator->isValid(0));
-        $this->assertTrue($this->_validator->isValid(1));
-        $this->assertTrue($this->_validator->isValid(0.0));
-        $this->assertTrue($this->_validator->isValid(1.0));
-        $this->assertFalse($this->_validator->isValid(''));
-        $this->assertTrue($this->_validator->isValid('abc'));
-        $this->assertTrue($this->_validator->isValid('0'));
-        $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
-        $this->assertTrue($this->_validator->isValid(null));
+        $this->validator->setType(NotEmpty::STRING);
+        $this->assertTrue($this->validator->isValid(false));
+        $this->assertTrue($this->validator->isValid(true));
+        $this->assertTrue($this->validator->isValid(0));
+        $this->assertTrue($this->validator->isValid(1));
+        $this->assertTrue($this->validator->isValid(0.0));
+        $this->assertTrue($this->validator->isValid(1.0));
+        $this->assertFalse($this->validator->isValid(''));
+        $this->assertTrue($this->validator->isValid('abc'));
+        $this->assertTrue($this->validator->isValid('0'));
+        $this->assertTrue($this->validator->isValid('1'));
+        $this->assertTrue($this->validator->isValid(array()));
+        $this->assertTrue($this->validator->isValid(array('xxx')));
+        $this->assertTrue($this->validator->isValid(null));
     }
 
     /**
@@ -180,20 +161,20 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnlyZero()
     {
-        $this->_validator->setType(Validator\NotEmpty::ZERO);
-        $this->assertTrue($this->_validator->isValid(false));
-        $this->assertTrue($this->_validator->isValid(true));
-        $this->assertTrue($this->_validator->isValid(0));
-        $this->assertTrue($this->_validator->isValid(1));
-        $this->assertTrue($this->_validator->isValid(0.0));
-        $this->assertTrue($this->_validator->isValid(1.0));
-        $this->assertTrue($this->_validator->isValid(''));
-        $this->assertTrue($this->_validator->isValid('abc'));
-        $this->assertFalse($this->_validator->isValid('0'));
-        $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
-        $this->assertTrue($this->_validator->isValid(null));
+        $this->validator->setType(NotEmpty::ZERO);
+        $this->assertTrue($this->validator->isValid(false));
+        $this->assertTrue($this->validator->isValid(true));
+        $this->assertTrue($this->validator->isValid(0));
+        $this->assertTrue($this->validator->isValid(1));
+        $this->assertTrue($this->validator->isValid(0.0));
+        $this->assertTrue($this->validator->isValid(1.0));
+        $this->assertTrue($this->validator->isValid(''));
+        $this->assertTrue($this->validator->isValid('abc'));
+        $this->assertFalse($this->validator->isValid('0'));
+        $this->assertTrue($this->validator->isValid('1'));
+        $this->assertTrue($this->validator->isValid(array()));
+        $this->assertTrue($this->validator->isValid(array('xxx')));
+        $this->assertTrue($this->validator->isValid(null));
     }
 
     /**
@@ -203,20 +184,20 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnlyArray()
     {
-        $this->_validator->setType(Validator\NotEmpty::EMPTY_ARRAY);
-        $this->assertTrue($this->_validator->isValid(false));
-        $this->assertTrue($this->_validator->isValid(true));
-        $this->assertTrue($this->_validator->isValid(0));
-        $this->assertTrue($this->_validator->isValid(1));
-        $this->assertTrue($this->_validator->isValid(0.0));
-        $this->assertTrue($this->_validator->isValid(1.0));
-        $this->assertTrue($this->_validator->isValid(''));
-        $this->assertTrue($this->_validator->isValid('abc'));
-        $this->assertTrue($this->_validator->isValid('0'));
-        $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertFalse($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
-        $this->assertTrue($this->_validator->isValid(null));
+        $this->validator->setType(NotEmpty::EMPTY_ARRAY);
+        $this->assertTrue($this->validator->isValid(false));
+        $this->assertTrue($this->validator->isValid(true));
+        $this->assertTrue($this->validator->isValid(0));
+        $this->assertTrue($this->validator->isValid(1));
+        $this->assertTrue($this->validator->isValid(0.0));
+        $this->assertTrue($this->validator->isValid(1.0));
+        $this->assertTrue($this->validator->isValid(''));
+        $this->assertTrue($this->validator->isValid('abc'));
+        $this->assertTrue($this->validator->isValid('0'));
+        $this->assertTrue($this->validator->isValid('1'));
+        $this->assertFalse($this->validator->isValid(array()));
+        $this->assertTrue($this->validator->isValid(array('xxx')));
+        $this->assertTrue($this->validator->isValid(null));
     }
 
     /**
@@ -226,20 +207,20 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnlyNull()
     {
-        $this->_validator->setType(Validator\NotEmpty::NULL);
-        $this->assertTrue($this->_validator->isValid(false));
-        $this->assertTrue($this->_validator->isValid(true));
-        $this->assertTrue($this->_validator->isValid(0));
-        $this->assertTrue($this->_validator->isValid(1));
-        $this->assertTrue($this->_validator->isValid(0.0));
-        $this->assertTrue($this->_validator->isValid(1.0));
-        $this->assertTrue($this->_validator->isValid(''));
-        $this->assertTrue($this->_validator->isValid('abc'));
-        $this->assertTrue($this->_validator->isValid('0'));
-        $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
-        $this->assertFalse($this->_validator->isValid(null));
+        $this->validator->setType(NotEmpty::NULL);
+        $this->assertTrue($this->validator->isValid(false));
+        $this->assertTrue($this->validator->isValid(true));
+        $this->assertTrue($this->validator->isValid(0));
+        $this->assertTrue($this->validator->isValid(1));
+        $this->assertTrue($this->validator->isValid(0.0));
+        $this->assertTrue($this->validator->isValid(1.0));
+        $this->assertTrue($this->validator->isValid(''));
+        $this->assertTrue($this->validator->isValid('abc'));
+        $this->assertTrue($this->validator->isValid('0'));
+        $this->assertTrue($this->validator->isValid('1'));
+        $this->assertTrue($this->validator->isValid(array()));
+        $this->assertTrue($this->validator->isValid(array('xxx')));
+        $this->assertFalse($this->validator->isValid(null));
     }
 
     /**
@@ -249,20 +230,20 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnlyPHP()
     {
-        $this->_validator->setType(Validator\NotEmpty::PHP);
-        $this->assertFalse($this->_validator->isValid(false));
-        $this->assertTrue($this->_validator->isValid(true));
-        $this->assertFalse($this->_validator->isValid(0));
-        $this->assertTrue($this->_validator->isValid(1));
-        $this->assertFalse($this->_validator->isValid(0.0));
-        $this->assertTrue($this->_validator->isValid(1.0));
-        $this->assertFalse($this->_validator->isValid(''));
-        $this->assertTrue($this->_validator->isValid('abc'));
-        $this->assertFalse($this->_validator->isValid('0'));
-        $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertFalse($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
-        $this->assertFalse($this->_validator->isValid(null));
+        $this->validator->setType(NotEmpty::PHP);
+        $this->assertFalse($this->validator->isValid(false));
+        $this->assertTrue($this->validator->isValid(true));
+        $this->assertFalse($this->validator->isValid(0));
+        $this->assertTrue($this->validator->isValid(1));
+        $this->assertFalse($this->validator->isValid(0.0));
+        $this->assertTrue($this->validator->isValid(1.0));
+        $this->assertFalse($this->validator->isValid(''));
+        $this->assertTrue($this->validator->isValid('abc'));
+        $this->assertFalse($this->validator->isValid('0'));
+        $this->assertTrue($this->validator->isValid('1'));
+        $this->assertFalse($this->validator->isValid(array()));
+        $this->assertTrue($this->validator->isValid(array('xxx')));
+        $this->assertFalse($this->validator->isValid(null));
     }
 
     /**
@@ -272,20 +253,20 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnlySpace()
     {
-        $this->_validator->setType(Validator\NotEmpty::SPACE);
-        $this->assertTrue($this->_validator->isValid(false));
-        $this->assertTrue($this->_validator->isValid(true));
-        $this->assertTrue($this->_validator->isValid(0));
-        $this->assertTrue($this->_validator->isValid(1));
-        $this->assertTrue($this->_validator->isValid(0.0));
-        $this->assertTrue($this->_validator->isValid(1.0));
-        $this->assertTrue($this->_validator->isValid(''));
-        $this->assertTrue($this->_validator->isValid('abc'));
-        $this->assertTrue($this->_validator->isValid('0'));
-        $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertTrue($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
-        $this->assertTrue($this->_validator->isValid(null));
+        $this->validator->setType(NotEmpty::SPACE);
+        $this->assertTrue($this->validator->isValid(false));
+        $this->assertTrue($this->validator->isValid(true));
+        $this->assertTrue($this->validator->isValid(0));
+        $this->assertTrue($this->validator->isValid(1));
+        $this->assertTrue($this->validator->isValid(0.0));
+        $this->assertTrue($this->validator->isValid(1.0));
+        $this->assertTrue($this->validator->isValid(''));
+        $this->assertTrue($this->validator->isValid('abc'));
+        $this->assertTrue($this->validator->isValid('0'));
+        $this->assertTrue($this->validator->isValid('1'));
+        $this->assertTrue($this->validator->isValid(array()));
+        $this->assertTrue($this->validator->isValid(array('xxx')));
+        $this->assertTrue($this->validator->isValid(null));
     }
 
     /**
@@ -295,20 +276,20 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnlyAll()
     {
-        $this->_validator->setType(Validator\NotEmpty::ALL);
-        $this->assertFalse($this->_validator->isValid(false));
-        $this->assertTrue($this->_validator->isValid(true));
-        $this->assertFalse($this->_validator->isValid(0));
-        $this->assertTrue($this->_validator->isValid(1));
-        $this->assertFalse($this->_validator->isValid(0.0));
-        $this->assertTrue($this->_validator->isValid(1.0));
-        $this->assertFalse($this->_validator->isValid(''));
-        $this->assertTrue($this->_validator->isValid('abc'));
-        $this->assertFalse($this->_validator->isValid('0'));
-        $this->assertTrue($this->_validator->isValid('1'));
-        $this->assertFalse($this->_validator->isValid(array()));
-        $this->assertTrue($this->_validator->isValid(array('xxx')));
-        $this->assertFalse($this->_validator->isValid(null));
+        $this->validator->setType(NotEmpty::ALL);
+        $this->assertFalse($this->validator->isValid(false));
+        $this->assertTrue($this->validator->isValid(true));
+        $this->assertFalse($this->validator->isValid(0));
+        $this->assertTrue($this->validator->isValid(1));
+        $this->assertFalse($this->validator->isValid(0.0));
+        $this->assertTrue($this->validator->isValid(1.0));
+        $this->assertFalse($this->validator->isValid(''));
+        $this->assertTrue($this->validator->isValid('abc'));
+        $this->assertFalse($this->validator->isValid('0'));
+        $this->assertTrue($this->validator->isValid('1'));
+        $this->assertFalse($this->validator->isValid(array()));
+        $this->assertTrue($this->validator->isValid(array('xxx')));
+        $this->assertFalse($this->validator->isValid(null));
     }
 
     /**
@@ -318,12 +299,12 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testArrayConstantNotation()
     {
-        $filter = new Validator\NotEmpty(
+        $filter = new NotEmpty(
             array(
                 'type' => array(
-                    Validator\NotEmpty::ZERO,
-                    Validator\NotEmpty::STRING,
-                    Validator\NotEmpty::BOOLEAN
+                    NotEmpty::ZERO,
+                    NotEmpty::STRING,
+                    NotEmpty::BOOLEAN
                 )
             )
         );
@@ -350,12 +331,12 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testArrayConfigNotation()
     {
-        $filter = new Validator\NotEmpty(
+        $filter = new NotEmpty(
             array(
                 'type' => array(
-                    Validator\NotEmpty::ZERO,
-                    Validator\NotEmpty::STRING,
-                    Validator\NotEmpty::BOOLEAN),
+                    NotEmpty::ZERO,
+                    NotEmpty::STRING,
+                    NotEmpty::BOOLEAN),
                 'test' => false
             )
         );
@@ -382,8 +363,8 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testMultiConstantNotation()
     {
-        $filter = new Validator\NotEmpty(
-            Validator\NotEmpty::ZERO + Validator\NotEmpty::STRING + Validator\NotEmpty::BOOLEAN
+        $filter = new NotEmpty(
+            NotEmpty::ZERO + NotEmpty::STRING + NotEmpty::BOOLEAN
         );
 
         $this->assertFalse($filter->isValid(false));
@@ -408,7 +389,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringNotation()
     {
-        $filter = new Validator\NotEmpty(
+        $filter = new NotEmpty(
             array(
                 'type' => array('zero', 'string', 'boolean')
             )
@@ -436,7 +417,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testSingleStringNotation()
     {
-        $filter = new Validator\NotEmpty(
+        $filter = new NotEmpty(
             'boolean'
         );
 
@@ -465,7 +446,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
         $options = array('type' => 'all');
         $config  = new \Zend\Config\Config($options);
 
-        $filter = new Validator\NotEmpty(
+        $filter = new NotEmpty(
             $config
         );
 
@@ -492,7 +473,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     public function testSettingFalseType()
     {
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Unknown');
-        $this->_validator->setType(true);
+        $this->validator->setType(true);
     }
 
     /**
@@ -502,7 +483,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetType()
     {
-        $this->assertEquals(493, $this->_validator->getType());
+        $this->assertEquals(493, $this->validator->getType());
     }
 
     /**
@@ -510,7 +491,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringWithZeroShouldNotBeTreatedAsEmpty()
     {
-        $this->assertTrue($this->_validator->isValid('0'));
+        $this->assertTrue($this->validator->isValid('0'));
     }
 
     /**
@@ -520,7 +501,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessages()
     {
-        $this->assertEquals(array(), $this->_validator->getMessages());
+        $this->assertEquals(array(), $this->validator->getMessages());
     }
 
     /**
@@ -528,8 +509,8 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testNonStringValidation()
     {
-        $v2 = new Validator\NotEmpty();
-        $this->assertTrue($this->_validator->isValid($v2));
+        $v2 = new NotEmpty();
+        $this->assertTrue($this->validator->isValid($v2));
     }
 
     /**
@@ -539,7 +520,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testZF8767()
     {
-        $valid = new Validator\NotEmpty(Validator\NotEmpty::STRING);
+        $valid = new NotEmpty(NotEmpty::STRING);
 
         $this->assertFalse($valid->isValid(''));
         $messages = $valid->getMessages();
@@ -552,12 +533,12 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testObjects()
     {
-        $valid = new Validator\NotEmpty(Validator\NotEmpty::STRING);
-        $object = new ClassTest1();
+        $valid = new NotEmpty(NotEmpty::STRING);
+        $object = new stdClass();
 
         $this->assertFalse($valid->isValid($object));
 
-        $valid = new Validator\NotEmpty(Validator\NotEmpty::OBJECT);
+        $valid = new NotEmpty(NotEmpty::OBJECT);
         $this->assertTrue($valid->isValid($object));
     }
 
@@ -566,12 +547,12 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringObjects()
     {
-        $valid = new Validator\NotEmpty(Validator\NotEmpty::STRING);
+        $valid = new NotEmpty(NotEmpty::STRING);
         $object = new ClassTest2();
 
         $this->assertFalse($valid->isValid($object));
 
-        $valid = new Validator\NotEmpty(Validator\NotEmpty::OBJECT_STRING);
+        $valid = new NotEmpty(NotEmpty::OBJECT_STRING);
         $this->assertTrue($valid->isValid($object));
 
         $object = new ClassTest3();
@@ -583,7 +564,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testArrayConfigNotationWithoutKey()
     {
-        $filter = new Validator\NotEmpty(
+        $filter = new NotEmpty(
             array('zero', 'string', 'boolean')
         );
 
@@ -601,45 +582,14 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($filter->isValid(array('xxx')));
         $this->assertTrue($filter->isValid(null));
     }
-    
+
     public function testEqualsMessageTemplates()
     {
-        $validator = $this->_validator;
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
-    }
-    
-    public function testEqualsMessageVariables()
-    {
-        $validator = $this->_validator;
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $validator = $this->validator;
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
 }
-
-class ClassTest1 {}
 
 class ClassTest2
 {

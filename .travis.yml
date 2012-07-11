@@ -1,9 +1,17 @@
 language: php
 
 php:
+  - 5.3.3
   - 5.3
   - 5.4
 
-before_install: cp tests/TravisTestConfiguration.php tests/TestConfiguration.php
+before_install:
+ - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
+ - curl -s http://getcomposer.org/installer | php
+ - php composer.phar install --dev
 
-script: ./.travis/run-tests.sh
+script:
+ - php ./tests/run-tests.php
+
+notifications:
+  irc: "irc.freenode.org#zftalk.2"

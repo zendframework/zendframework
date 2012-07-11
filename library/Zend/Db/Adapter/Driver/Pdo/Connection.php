@@ -10,9 +10,9 @@
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface,
-    Zend\Db\Adapter\Driver\DriverInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -47,7 +47,8 @@ class Connection implements ConnectionInterface
     protected $inTransaction = false;
 
     /**
-     * @param array|\PDO $connectionParameters
+     * @param array|\PDO|null $connectionParameters
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      */
     public function __construct($connectionParameters = null)
     {
@@ -55,6 +56,8 @@ class Connection implements ConnectionInterface
             $this->setConnectionParameters($connectionParameters);
         } elseif ($connectionParameters instanceof \PDO) {
             $this->setResource($connectionParameters);
+        } elseif (null !== $connectionParameters) {
+            throw new Exception\InvalidArgumentException('$connection must be an array of parameters, a PDO object or null');
         }
     }
 
@@ -105,27 +108,32 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @return null
+     * Get current schema
+     * 
+     * @return string 
      */
-    public function getDefaultCatalog()
-    {
-        return null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDefaultSchema()
+    public function getCurrentSchema()
     {
         if (!$this->isConnected()) {
             $this->connect();
         }
 
+        switch ($this->driverName) {
+            case 'mysql':
+                $sql = 'SELECT DATABASE()';
+                break;
+            case 'sqlite':
+                return 'main';
+            case 'pgsql':
+            default:
+                $sql = 'SELECT CURRENT_SCHEMA';
+                break;
+        }
+
         /** @var $result \PDOStatement */
-        $result = $this->resource->query('SELECT DATABASE()');
+        $result = $this->resource->query($sql);
         if ($result instanceof \PDOStatement) {
-            $r = $result->fetch_row();
-            return $r[0];
+            return $result->fetchColumn();
         }
         return false;
     }
@@ -347,10 +355,14 @@ class Connection implements ConnectionInterface
      * 
      * @return integer 
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
+        if ($name === null && $this->driverName == 'pgsql') {
+            return null;
+        }
+
         try {
-            return $this->resource->lastInsertId();
+            return $this->resource->lastInsertId($name);
         } catch (\Exception $e) {
             // do nothing
         }

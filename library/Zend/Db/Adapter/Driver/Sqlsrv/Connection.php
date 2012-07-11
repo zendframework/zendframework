@@ -10,8 +10,8 @@
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -42,8 +42,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Constructor
-     * 
-     * @param mixed $connectionInfo 
+     *
+     * @param array|resource $connectionInfo
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      */
     public function __construct($connectionInfo)
     {
@@ -51,14 +52,16 @@ class Connection implements ConnectionInterface
             $this->setConnectionParameters($connectionInfo);
         } elseif (is_resource($connectionInfo)) {
             $this->setResource($connectionInfo);
+        } else {
+            throw new Exception\InvalidArgumentException('$connection must be an array of parameters or a resource');
         }
     }
 
     /**
      * Set driver
-     * 
+     *
      * @param  Sqlsrv $driver
-     * @return Connection 
+     * @return Connection
      */
     public function setDriver(Sqlsrv $driver)
     {
@@ -68,9 +71,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Set connection parameters
-     * 
+     *
      * @param  array $connectionParameters
-     * @return Connection 
+     * @return Connection
      */
     public function setConnectionParameters(array $connectionParameters)
     {
@@ -80,8 +83,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Get connection parameters
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function getConnectionParameters()
     {
@@ -89,21 +92,11 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * Get default catalog
-     * 
-     * @return null 
+     * Get current schema
+     *
+     * @return string
      */
-    public function getDefaultCatalog()
-    {
-        return null;
-    }
-
-    /**
-     * Get dafault schema
-     * 
-     * @return string 
-     */
-    public function getDefaultSchema()
+    public function getCurrentSchema()
     {
         if (!$this->isConnected()) {
             $this->connect();
@@ -116,9 +109,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Set resource
-     * 
+     *
      * @param  resource $resource
-     * @return Connection 
+     * @return Connection
      */
     public function setResource($resource)
     {
@@ -139,8 +132,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Connect
-     * 
-     * @return null 
+     *
+     * @return null
      */
     public function connect()
     {
@@ -184,7 +177,7 @@ class Connection implements ConnectionInterface
             throw new Exception\RuntimeException(
                 'Connect Error',
                 null,
-                new Exception\ErrorException(sqlsrv_errors())
+                new ErrorException(sqlsrv_errors())
             );
         }
 
@@ -205,7 +198,7 @@ class Connection implements ConnectionInterface
     public function disconnect()
     {
         sqlsrv_close($this->resource);
-        unset($this->resource);
+        $this->resource = null;
     }
 
     /**
@@ -238,7 +231,7 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * Rollback 
+     * Rollback
      */
     public function rollback()
     {
@@ -259,9 +252,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Execute
-     * 
+     *
      * @param  string $sql
-     * @return mixed 
+     * @return mixed
      */
     public function execute($sql)
     {
@@ -279,7 +272,7 @@ class Connection implements ConnectionInterface
                 throw new Exception\RuntimeException(
                     'An exception occured while trying to execute the provided $sql',
                     null,
-                    new Exception\ErrorException($errors)
+                    new ErrorException($errors)
                 );
             }
         }
@@ -290,9 +283,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Prepare
-     * 
+     *
      * @param  string $sql
-     * @return string 
+     * @return string
      */
     public function prepare($sql)
     {
@@ -306,10 +299,10 @@ class Connection implements ConnectionInterface
 
     /**
      * Get last generated id
-     * 
-     * @return mixed 
+     *
+     * @return mixed
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
         $sql = 'SELECT @@IDENTITY as Current_Identity';
         $result = sqlsrv_query($this->resource, $sql);

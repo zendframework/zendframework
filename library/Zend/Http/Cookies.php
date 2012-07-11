@@ -1,17 +1,25 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace Zend\Http;
 
-use Zend\Uri,
-    Zend\Http\Header\Cookie,
-    Zend\Http\Response;
+use Zend\Http\Header\Cookie;
+use Zend\Http\Response;
+use Zend\Uri;
 
 /**
  * A Zend_Http_CookieJar object is designed to contain and maintain HTTP cookies, and should
  * be used along with Zend_Http_Client in order to manage cookies across HTTP requests and
  * responses.
  *
- * The class contains an array of Zend\Http\Header\Cookie objects. Cookies can be added 
+ * The class contains an array of Zend\Http\Header\Cookie objects. Cookies can be added
  * automatically from a request or manually. Then, the Cookies class can find and return the
  * cookies needed for a specific HTTP request.
  *
@@ -26,53 +34,9 @@ use Zend\Uri,
  *
  * @category   Zend
  * @package    Zend\Http\Client
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Cookies extends Headers
 {
-
-
-
-
-//    /**
-//     * Return cookie(s) as a Zend\Http\Header\Cookie object
-//     *
-//     */
-//    const COOKIE_OBJECT = 0;
-//
-//    /**
-//     * Return cookie(s) as a string (suitable for sending in an HTTP request)
-//     *
-//     */
-//    const COOKIE_STRING_ARRAY = 1;
-//
-//    /**
-//     * Return all cookies as one long string (suitable for sending in an HTTP request)
-//     *
-//     */
-//    const COOKIE_STRING_CONCAT = 2;
-//
-//    /**
-//     * Array storing cookies
-//     *
-//     * Cookies are stored according to domain and path:
-//     * $cookies
-//     *  + www.mydomain.com
-//     *    + /
-//     *      - cookie1
-//     *      - cookie2
-//     *    + /somepath
-//     *      - othercookie
-//     *  + www.otherdomain.net
-//     *    + /
-//     *      - alsocookie
-//     *
-//     * @var array
-//     */
-
-
-
     /**
      * @var Headers
      */
@@ -91,13 +55,6 @@ class Cookies extends Headers
             . __NAMESPACE__ . '\Headers::fromtString() instead.'
         );
     }
-
-//    /**
-//     * The Zend\Http\Header\Cookie array
-//     *
-//     * @var array
-//     */
-//    protected $_rawCookies = array();
 
     public function __construct(Headers $headers, $context = self::CONTEXT_REQUEST)
     {
@@ -140,13 +97,9 @@ class Cookies extends Headers
      * @param Response $response
      * @param Uri\Uri|string $ref_uri Requested URI
      */
-    public function addCookiesFromResponse($response, $ref_uri)
+    public function addCookiesFromResponse(Response $response, $ref_uri)
     {
-        if (!$response instanceof Response) {
-            throw new Exception\InvalidArgumentException('$response is expected to be a Response object');
-        }
-
-        $cookie_hdrs = $response->headers()->get('Set-Cookie');
+        $cookie_hdrs = $response->getHeaders()->get('Set-Cookie');
 
         if (is_array($cookie_hdrs)) {
             foreach ($cookie_hdrs as $cookie) {
@@ -185,8 +138,7 @@ class Cookies extends Headers
     {
         if (is_string($uri)) {
             $uri = Uri\UriFactory::factory($uri, 'http');
-        }
-        if (!$uri instanceof Uri\Uri) {
+        } elseif (!$uri instanceof Uri\Uri) {
             throw new Exception\InvalidArgumentException("Invalid URI string or object passed");
         }
 
@@ -224,9 +176,7 @@ class Cookies extends Headers
     {
         if (is_string($uri)) {
             $uri = Uri\UriFactory::factory($uri, 'http');
-        }
-
-        if (!$uri instanceof Uri\Uri) {
+        } elseif (!$uri instanceof Uri\Uri) {
             throw new Exception\InvalidArgumentException('Invalid URI specified');
         }
 
@@ -365,7 +315,7 @@ class Cookies extends Headers
     }
 
     /**
-     * Tells if the array of cookies is empty 
+     * Tells if the array of cookies is empty
      *
      * @return bool
      */

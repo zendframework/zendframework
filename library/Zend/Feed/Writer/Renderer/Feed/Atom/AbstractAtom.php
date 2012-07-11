@@ -1,34 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Writer\Renderer\Feed\Atom;
 
-use Zend\Feed,
-    DOMDocument,
-    DOMElement;
+use Datetime;
+use DOMDocument;
+use DOMElement;
+use Zend\Feed;
 
 /**
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
 {
@@ -112,6 +101,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Feed\Exception\InvalidArgumentException
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
@@ -130,7 +120,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
         $updated = $dom->createElement('updated');
         $root->appendChild($updated);
         $text = $dom->createTextNode(
-            $this->getDataContainer()->getDateModified()->get(\Zend\Date\Date::ISO_8601)
+            $this->getDataContainer()->getDateModified()->format(DateTime::ISO8601)
         );
         $updated->appendChild($text);
     }
@@ -187,6 +177,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Feed\Exception\InvalidArgumentException
      */
     protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
     {
@@ -261,6 +252,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Feed\Exception\InvalidArgumentException
      */
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {

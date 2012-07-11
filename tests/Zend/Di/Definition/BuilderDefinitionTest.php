@@ -1,11 +1,19 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Di
+ */
 
 namespace ZendTest\Di\Definition;
 
-use Zend\Di\Definition\BuilderDefinition,
-    Zend\Di\Definition\Builder,
-    Zend\Config\Factory as ConfigFactory,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Di\Definition\BuilderDefinition;
+use Zend\Di\Definition\Builder;
+use Zend\Config\Factory as ConfigFactory;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class BuilderDefinitionTest extends TestCase
 {

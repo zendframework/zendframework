@@ -24,8 +24,6 @@ use Zend\Uri\Uri;
  *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class UriFactory
 {
@@ -34,7 +32,7 @@ abstract class UriFactory
      *
      * @var array
      */
-    static protected $schemeClasses = array(
+     protected static $schemeClasses = array(
         'http'   => 'Zend\Uri\Http',
         'https'  => 'Zend\Uri\Http',
         'mailto' => 'Zend\Uri\Mailto',
@@ -47,7 +45,7 @@ abstract class UriFactory
      * @param string $scheme
      * @param string $class
      */
-    static public function registerScheme($scheme, $class)
+    public static function registerScheme($scheme, $class)
     {
         $scheme = strtolower($scheme);
         static::$schemeClasses[$scheme] = $class;
@@ -61,7 +59,7 @@ abstract class UriFactory
      * @throws Exception\InvalidArgumentException
      * @return \Zend\Uri\Uri
      */
-    static public function factory($uriString, $defaultScheme = null)
+    public static function factory($uriString, $defaultScheme = null)
     {
         if (!is_string($uriString)) {
             throw new Exception\InvalidArgumentException(sprintf(

@@ -10,10 +10,10 @@
 
 namespace Zend\Db\RowGateway;
 
-use Zend\Db\Adapter\Adapter,
-    Zend\Db\ResultSet\Row,
-    Zend\Db\ResultSet\RowObjectInterface,
-    Zend\Db\Sql\Sql;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\ResultSet\Row;
+use Zend\Db\ResultSet\RowObjectInterface;
+use Zend\Db\Sql\Sql;
 
 /**
  * @category   Zend

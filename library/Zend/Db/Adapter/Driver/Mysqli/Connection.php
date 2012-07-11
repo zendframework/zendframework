@@ -10,8 +10,8 @@
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -27,7 +27,7 @@ class Connection implements ConnectionInterface
     protected $driver = null;
 
     /**
-     * Connection paramters
+     * Connection parameters
      * 
      * @var array 
      */
@@ -39,16 +39,17 @@ class Connection implements ConnectionInterface
     protected $resource = null;
 
     /**
-     * In transcaction
+     * In transaction
      * 
      * @var boolean
      */
-    protected $inTransaction = false;    
+    protected $inTransaction = false;
 
     /**
      * Constructor
-     * 
-     * @param mysqli $connectionInfo 
+     *
+     * @param array|mysqli|null $connectionInfo
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      */
     public function __construct($connectionInfo = null)
     {
@@ -56,6 +57,8 @@ class Connection implements ConnectionInterface
             $this->setConnectionParameters($connectionInfo);
         } elseif ($connectionInfo instanceof \mysqli) {
             $this->setResource($connectionInfo);
+        } elseif (null !== $connectionInfo) {
+            throw new Exception\InvalidArgumentException('$connection must be an array of parameters, a mysqli object or null');
         }
     }
 
@@ -92,21 +95,11 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * Get default catalog
-     * 
-     * @return null 
-     */
-    public function getDefaultCatalog()
-    {
-        return null;
-    }
-
-    /**
-     * Get default schema
+     * Get current schema
      * 
      * @return string 
      */
-    public function getDefaultSchema()
+    public function getCurrentSchema()
     {
         if (!$this->isConnected()) {
             $this->connect();
@@ -277,11 +270,11 @@ class Connection implements ConnectionInterface
     /**
      * Get last generated id
      * 
+     * @param  null $name Ignored
      * @return integer 
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
         return $this->resource->insert_id;
     }
-
 }

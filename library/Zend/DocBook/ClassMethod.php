@@ -11,10 +11,9 @@
 namespace Zend\DocBook;
 
 use Zend\Code\NameInformation;
-use Zend\Code\Reflection\MethodReflection;
 use Zend\Code\Reflection\DocBlockReflection;
+use Zend\Code\Reflection\MethodReflection;
 use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter;
-
 
 /**
  * @category   Zend

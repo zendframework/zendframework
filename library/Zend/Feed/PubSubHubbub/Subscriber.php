@@ -1,35 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\PubSubHubbub;
 
+use DateInterval;
+use DateTime;
 use Traversable;
+use Zend\Http\Request as HttpRequest;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Date,
-    Zend\Uri;
+use Zend\Uri;
+use Zend\Version;
 
 /**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Subscriber
 {
@@ -76,10 +67,10 @@ class Subscriber
     /**
      * The preferred verification mode (sync or async). By default, this
      * Subscriber prefers synchronous verification, but is considered
-     * desireable to support asynchronous verification if possible.
+     * desirable to support asynchronous verification if possible.
      *
      * Zend\Feed\Pubsubhubbub\Subscriber will always send both modes, whose
-     * order of occurance in the parameter list determines this preference.
+     * order of occurrence in the parameter list determines this preference.
      *
      * @var string
      */
@@ -142,10 +133,10 @@ class Subscriber
      *
      * @param  array|Traversable $options
      */
-    public function __construct($config = null)
+    public function __construct($options = null)
     {
-        if ($config !== null) {
-            $this->setOptions($config);
+        if ($options !== null) {
+            $this->setOptions($options);
         }
     }
 
@@ -163,7 +154,7 @@ class Subscriber
         }
 
         if (!is_array($options)) {
-            throw new Exception('Array or Traversable object'
+            throw new Exception\InvalidArgumentException('Array or Traversable object'
                                 . 'expected, got ' . gettype($options));
         }
         if (array_key_exists('hubUrls', $options)) {
@@ -302,7 +293,7 @@ class Subscriber
      * asynchronous if that's the Hub Server's utilised mode.
      *
      * Zend\Feed\Pubsubhubbub\Subscriber will always send both modes, whose
-     * order of occurance in the parameter list determines this preference.
+     * order of occurrence in the parameter list determines this preference.
      *
      * @param  string $mode Should be 'sync' or 'async'
      * @return Subscriber
@@ -479,8 +470,7 @@ class Subscriber
     /**
      * Add an optional parameter to the (un)subscribe requests
      *
-     * @param  string $name
-     * @param  string|null $value
+     * @param  array $parameters
      * @return Subscriber
      */
     public function setParameters(array $parameters)
@@ -558,7 +548,7 @@ class Subscriber
      */
     public function subscribeAll()
     {
-        return $this->_doRequest('subscribe');
+        $this->_doRequest('subscribe');
     }
 
     /**
@@ -569,7 +559,7 @@ class Subscriber
      */
     public function unsubscribeAll()
     {
-        return $this->_doRequest('unsubscribe');
+        $this->_doRequest('unsubscribe');
     }
 
     /**
@@ -634,10 +624,10 @@ class Subscriber
                 $client->setAuth($auth[0], $auth[1]);
             }
             $client->setUri($url);
-            $client->setRawData($this->_getRequestParameters($url, $mode));
-            $response = $client->request();
-            if ($response->getStatus() !== 204
-                && $response->getStatus() !== 202
+            $client->setRawBody($this->_getRequestParameters($url, $mode));
+            $response = $client->getResponse();
+            if ($response->getStatusCode() !== 204
+                && $response->getStatusCode() !== 202
             ) {
                 $this->_errors[] = array(
                     'response' => $response,
@@ -650,7 +640,7 @@ class Subscriber
              * are using async verification modes so they may update Models and
              * move these to asynchronous processes.
              */
-            } elseif ($response->getStatus() == 202) {
+            } elseif ($response->getStatusCode() == 202) {
                 $this->_asyncHubs[] = array(
                     'response' => $response,
                     'hubUrl'   => $url,
@@ -662,15 +652,14 @@ class Subscriber
     /**
      * Get a basic prepared HTTP client for use
      *
-     * @param  string $mode Must be "subscribe" or "unsubscribe"
      * @return \Zend\Http\Client
      */
     protected function _getHttpClient()
     {
         $client = PubSubHubbub::getHttpClient();
-        $client->setMethod(\Zend\Http\Client::POST);
+        $client->setMethod(HttpRequest::METHOD_POST);
         $client->setOptions(array('useragent' => 'Zend_Feed_Pubsubhubbub_Subscriber/'
-            . \Zend\Version::VERSION));
+            . Version::VERSION));
         return $client;
     }
 
@@ -715,7 +704,7 @@ class Subscriber
 
         /**
          * Establish a persistent verify_token and attach key to callback
-         * URL's path/querystring
+         * URL's path/query_string
          */
         $key   = $this->_generateSubscriptionKey($params, $hubUrl);
         $token = $this->_generateVerifyToken();
@@ -740,17 +729,17 @@ class Subscriber
         }
         
         // store subscription to storage
-        $now = new Date\Date;
+        $now = new DateTime();
         $expires = null;
         if (isset($params['hub.lease_seconds'])) {
-            $expires = $now->add($params['hub.lease_seconds'], Date\Date::SECOND)
-                ->get('yyyy-MM-dd HH:mm:ss');
+            $expires = $now->add(new DateInterval('PT' . $params['hub.lease_seconds'] . 'S'))
+                ->format('Y-m-d H:i:s');
         }
         $data = array(
             'id'                 => $key,
             'topic_url'          => $params['hub.topic'],
             'hub_url'            => $hubUrl,
-            'created_time'       => $now->get('yyyy-MM-dd HH:mm:ss'),
+            'created_time'       => $now->format('Y-m-d H:i:s'),
             'lease_seconds'      => $expires,
             'verify_token'       => hash('sha256', $params['hub.verify_token']),
             'secret'             => null,
@@ -783,13 +772,15 @@ class Subscriber
      * Simple helper to generate a verification token used in (un)subscribe
      * requests to a Hub Server.
      *
-     * @param  string $hubUrl The Hub Server URL for which this token will apply
+     * @param array   $params
+     * @param string $hubUrl The Hub Server URL for which this token will apply
      * @return string
      */
     protected function _generateSubscriptionKey(array $params, $hubUrl)
     {
         $keyBase = $params['hub.topic'] . $hubUrl;
         $key     = md5($keyBase);
+
         return $key;
     }
 

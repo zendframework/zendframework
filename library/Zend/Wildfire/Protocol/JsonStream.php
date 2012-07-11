@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Wildfire
- * @subpackage Protocol
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Wildfire
  */
 
 namespace Zend\Wildfire\Protocol;
-use Zend\Wildfire\Plugin,
-    Zend\Wildfire\Protocol\Exception,
-    Zend\Wildfire;
+use Zend\Wildfire;
+use Zend\Wildfire\Plugin;
+use Zend\Wildfire\Protocol\Exception;
 
 /**
  * Encodes messages into the Wildfire JSON Stream Communication Protocol.
@@ -30,8 +19,6 @@ use Zend\Wildfire\Plugin,
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Protocol
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class JsonStream
 {
@@ -146,16 +133,12 @@ class JsonStream
     /**
      * Retrieves all formatted data ready to be sent by the channel.
      *
-     * @param \Zend\Wildfire\Channel $channel The instance of the channel that will be transmitting the data
+     * @param Wildfire\Channel\HttpHeaders $channel The instance of the channel that will be transmitting the data
      * @return mixed Returns the data to be sent by the channel.
      * @throws \Zend\Wildfire\Exception
      */
-    public function getPayload(Wildfire\Channel $channel)
+    public function getPayload(Wildfire\Channel\HttpHeaders $channel)
     {
-        if (!$channel instanceof Wildfire\Channel\HttpHeaders) {
-            throw new Exception\InvalidArgumentException('The '.get_class($channel).' channel is not supported by the '.get_called_class().' protocol.');
-        }
-
         if ($this->_plugins) {
             foreach ($this->_plugins as $plugin) {
                 $plugin->flushMessages(self::PROTOCOL_URI);

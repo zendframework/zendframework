@@ -1,10 +1,18 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
+ */
 
 namespace ZendTest\Cache\Storage\Plugin;
-use Zend\Cache,
-    Zend\Cache\Storage\PostEvent,
-    ZendTest\Cache\Storage\TestAsset\MockAdapter,
-    ArrayObject;
+use Zend\Cache;
+use Zend\Cache\Storage\PostEvent;
+use ZendTest\Cache\Storage\TestAsset\OptimizableMockAdapter;
+use ArrayObject;
 
 class OptimizeByFactorTest extends CommonPluginTest
 {
@@ -18,7 +26,7 @@ class OptimizeByFactorTest extends CommonPluginTest
 
     public function setUp()
     {
-        $this->_adapter = new MockAdapter();
+        $this->_adapter = new OptimizableMockAdapter();
         $this->_options = new Cache\Storage\Plugin\PluginOptions(array(
             'optimizing_factor' => 1,
         ));
@@ -32,13 +40,11 @@ class OptimizeByFactorTest extends CommonPluginTest
 
         // check attached callbacks
         $expectedListeners = array(
-            'removeItem.post'        => 'optimizeByFactor',
-            'removeItems.post'       => 'optimizeByFactor',
-            'clear.post'             => 'optimizeByFactor',
-            'clearByNamespace.post'  => 'optimizeByFactor',
+            'removeItem.post'  => 'optimizeByFactor',
+            'removeItems.post' => 'optimizeByFactor',
         );
         foreach ($expectedListeners as $eventName => $expectedCallbackMethod) {
-            $listeners = $this->_adapter->events()->getListeners($eventName);
+            $listeners = $this->_adapter->getEventManager()->getListeners($eventName);
 
             // event should attached only once
             $this->assertSame(1, $listeners->count());
@@ -58,7 +64,7 @@ class OptimizeByFactorTest extends CommonPluginTest
         $this->_adapter->removePlugin($this->_plugin);
 
         // no events should be attached
-        $this->assertEquals(0, count($this->_adapter->events()->getEvents()));
+        $this->assertEquals(0, count($this->_adapter->getEventManager()->getEvents()));
     }
 
     public function testOptimizeByFactor()
@@ -80,5 +86,4 @@ class OptimizeByFactorTest extends CommonPluginTest
 
         $this->assertTrue($event->getResult());
     }
-
 }

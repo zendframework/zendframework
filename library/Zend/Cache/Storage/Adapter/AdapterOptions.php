@@ -1,31 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
 
-use ArrayObject,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage\Event,
-    Zend\EventManager\EventsCapableInterface,
-    Zend\Stdlib\Options;
+use ArrayObject;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\Event;
+use Zend\Cache\Storage\StorageInterface;
+use Zend\EventManager\EventsCapableInterface;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * Unless otherwise marked, all options in this class affect all adapters.
@@ -33,10 +23,8 @@ use ArrayObject,
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AdapterOptions extends Options
+class AdapterOptions extends AbstractOptions
 {
 
     /**
@@ -59,13 +47,6 @@ class AdapterOptions extends Options
      * @var string
      */
     protected $namespace = 'zfcache';
-
-    /**
-     * Validate namespace against pattern
-     *
-     * @var string
-     */
-    protected $namespacePattern = '';
 
     /**
      * Readable option
@@ -110,10 +91,10 @@ class AdapterOptions extends Options
     /**
      * Adapter using this instance
      *
-     * @param  AdapterInterface|null $adapter
+     * @param  StorageInterface|null $adapter
      * @return AdapterOptions
      */
-    public function setAdapter(AdapterInterface $adapter = null)
+    public function setAdapter(StorageInterface $adapter = null)
     {
         $this->adapter = $adapter;
         return $this;
@@ -122,23 +103,23 @@ class AdapterOptions extends Options
     /**
      * Set key pattern
      *
-     * @param  null|string $pattern
+     * @param  null|string $keyPattern
      * @return AdapterOptions
      */
-    public function setKeyPattern($pattern)
+    public function setKeyPattern($keyPattern)
     {
-        $pattern = (string) $pattern;
-        if ($this->keyPattern !== $pattern) {
+        $keyPattern = (string) $keyPattern;
+        if ($this->keyPattern !== $keyPattern) {
             // validate pattern
-            if ($pattern !== '') {
-                if (@preg_match($pattern, '') === false) {
+            if ($keyPattern !== '') {
+                if (@preg_match($keyPattern, '') === false) {
                     $err = error_get_last();
-                    throw new Exception\InvalidArgumentException("Invalid pattern '{$pattern}': {$err['message']}");
+                    throw new Exception\InvalidArgumentException("Invalid pattern '{$keyPattern}': {$err['message']}");
                 }
             }
 
-            $this->triggerOptionEvent('key_pattern', $pattern);
-            $this->keyPattern = $pattern;
+            $this->triggerOptionEvent('key_pattern', $keyPattern);
+            $this->keyPattern = $keyPattern;
         }
 
         return $this;
@@ -162,15 +143,8 @@ class AdapterOptions extends Options
      */
     public function setNamespace($namespace)
     {
-        $namespace = (string)$namespace;
+        $namespace = (string) $namespace;
         if ($this->namespace !== $namespace) {
-            $pattern = $this->getNamespacePattern();
-            if ($pattern && !preg_match($pattern, $namespace)) {
-                throw new Exception\InvalidArgumentException(
-                    "The namespace '{$namespace}' doesn't match agains pattern '{$pattern}'"
-                );
-            }
-
             $this->triggerOptionEvent('namespace', $namespace);
             $this->namespace = $namespace;
         }
@@ -189,59 +163,17 @@ class AdapterOptions extends Options
     }
 
     /**
-     * Set namespace pattern
-     *
-     * @param  null|string $pattern
-     * @return AdapterOptions
-     */
-    public function setNamespacePattern($pattern)
-    {
-        $pattern = (string) $pattern;
-        if ($this->namespacePattern !== $pattern) {
-            if ($pattern !== '') {
-                // validate pattern
-                if (@preg_match($pattern, '') === false) {
-                    $err = error_get_last();
-                    throw new Exception\InvalidArgumentException("Invalid pattern '{$pattern}': {$err['message']}");
-
-                // validate current namespace
-                } elseif (($ns = $this->getNamespace()) && !preg_match($pattern, $ns)) {
-                    throw new Exception\RuntimeException(
-                        "The current namespace '{$ns}' doesn't match agains pattern '{$pattern}'"
-                        . " - please change the namespace first"
-                    );
-                }
-            }
-
-            $this->triggerOptionEvent('namespace_pattern', $pattern);
-            $this->namespacePattern = $pattern;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get namespace pattern
-     *
-     * @return string
-     */
-    public function getNamespacePattern()
-    {
-        return $this->namespacePattern;
-    }
-
-    /**
      * Enable/Disable reading data from cache.
      *
-     * @param  boolean $flag
+     * @param  boolean $readable
      * @return AbstractAdapter
      */
-    public function setReadable($flag)
+    public function setReadable($readable)
     {
-        $flag = (bool) $flag;
-        if ($this->readable !== $flag) {
-            $this->triggerOptionEvent('readable', $flag);
-            $this->readable = $flag;
+        $readable = (bool) $readable;
+        if ($this->readable !== $readable) {
+            $this->triggerOptionEvent('readable', $readable);
+            $this->readable = $readable;
         }
         return $this;
     }
@@ -285,15 +217,15 @@ class AdapterOptions extends Options
     /**
      * Enable/Disable writing data to cache.
      *
-     * @param  boolean $flag
+     * @param  boolean $writable
      * @return AdapterOptions
      */
-    public function setWritable($flag)
+    public function setWritable($writable)
     {
-        $flag = (bool) $flag;
-        if ($this->writable !== $flag) {
-            $this->triggerOptionEvent('writable', $flag);
-            $this->writable = $flag;
+        $writable = (bool) $writable;
+        if ($this->writable !== $writable) {
+            $this->triggerOptionEvent('writable', $writable);
+            $this->writable = $writable;
         }
         return $this;
     }
@@ -320,7 +252,7 @@ class AdapterOptions extends Options
     {
         if ($this->adapter instanceof EventsCapableInterface) {
             $event = new Event('option', $this->adapter, new ArrayObject(array($optionName => $optionValue)));
-            $this->adapter->events()->trigger($event);
+            $this->adapter->getEventManager()->trigger($event);
         }
     }
 

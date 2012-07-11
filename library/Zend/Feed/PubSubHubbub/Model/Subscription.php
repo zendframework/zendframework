@@ -1,41 +1,30 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- * @subpackage Entity
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace Zend\Feed\PubSubHubbub\Model;
+
+use DateInterval;
+use DateTime;
 use Zend\Feed\PubSubHubbub;
-use Zend\Date;
 
 /**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @subpackage Entity
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Subscription extends AbstractModel implements SubscriptionPersistenceInterface
 {
     /**
-     * Common Date\Date object to assist with unit testing
+     * Common DateTime object to assist with unit testing
      * 
-     * @var Date\Date
+     * @var DateTime
      */
     protected $now;
     
@@ -60,8 +49,8 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
             if (array_key_exists('lease_seconds', $data) 
                 && $data['lease_seconds']
             ) {
-                $data['expiration_time'] = $now->add($data['lease_seconds'], Date\Date::SECOND)
-                ->get('yyyy-MM-dd HH:mm:ss');
+                $data['expiration_time'] = $now->add(new DateInterval('PT' . $data['lease_seconds'] . 'S'))
+                    ->format('Y-m-d H:i:s');
             }
             $this->_db->update(
                 $data,
@@ -133,25 +122,25 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
     }
 
     /**
-     * Get a new Date\Date or the one injected for testing
+     * Get a new DateTime or the one injected for testing
      * 
-     * @return Date\Date
+     * @return DateTime
      */
     public function getNow()
     {
         if (null === $this->now) {
-            return new Date\Date;
+            return new DateTime();
         }
         return $this->now;
     }
 
     /**
-     * Set a Date\Date instance for assisting with unit testing
+     * Set a DateTime instance for assisting with unit testing
      * 
-     * @param Date\Date $now
+     * @param DateTime $now
      * @return Subscription
      */
-    public function setNow(Date\Date $now)
+    public function setNow(DateTime $now)
     {
         $this->now = $now;
         return $this;

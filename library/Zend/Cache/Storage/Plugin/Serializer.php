@@ -1,40 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Plugin;
 
-use stdClass,
-    Traversable,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\Event,
-    Zend\Cache\Storage\PostEvent,
-    Zend\EventManager\EventManagerInterface;
+use stdClass;
+use Traversable;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\Event;
+use Zend\Cache\Storage\PostEvent;
+use Zend\EventManager\EventManagerInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Serializer extends AbstractPlugin
 {
@@ -76,10 +63,6 @@ class Serializer extends AbstractPlugin
         // read
         $handles[] = $events->attach('getItem.post',  array($this, 'onReadItemPost'), $postPriority);
         $handles[] = $events->attach('getItems.post', array($this, 'onReadItemsPost'), $postPriority);
-
-        // fetch / fetchAll
-        $handles[] = $events->attach('fetch.post', array($this, 'onFetchPost'), $postPriority);
-        $handles[] = $events->attach('fetchAll.post', array($this, 'onFetchAllPost'), $postPriority);
 
         // write
         $handles[] = $events->attach('setItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
@@ -139,8 +122,7 @@ class Serializer extends AbstractPlugin
      */
     public function onReadItemPost(PostEvent $event)
     {
-        $options    = $this->getOptions();
-        $serializer = $options->getSerializer();
+        $serializer = $this->getOptions()->getSerializer();
         $result     = $event->getResult();
         $result     = $serializer->unserialize($result);
         $event->setResult($result);
@@ -154,47 +136,10 @@ class Serializer extends AbstractPlugin
      */
     public function onReadItemsPost(PostEvent $event)
     {
-        $options    = $this->getOptions();
-        $serializer = $options->getSerializer();
+        $serializer = $this->getOptions()->getSerializer();
         $result     = $event->getResult();
         foreach ($result as &$value) {
             $value = $serializer->unserialize($value);
-        }
-        $event->setResult($result);
-    }
-
-    /**
-     * On fetch post
-     *
-     * @param  PostEvent $event
-     * @return void
-     */
-    public function onFetchPost(PostEvent $event)
-    {
-        $options    = $this->getOptions();
-        $serializer = $options->getSerializer();
-        $item       = $event->getResult();
-        if (isset($item['value'])) {
-            $item['value'] = $serializer->unserialize($item['value']);
-        }
-        $event->setResult($item);
-    }
-
-    /**
-     * On fetch all post
-     *
-     * @param  PostEvent $event
-     * @return void
-     */
-    public function onFetchAllPost(PostEvent $event)
-    {
-        $options    = $this->getOptions();
-        $serializer = $options->getSerializer();
-        $result     = $event->getResult();
-        foreach ($result as &$item) {
-            if (isset($item['value'])) {
-                $item['value'] = $serializer->unserialize($item['value']);
-            }
         }
         $event->setResult($result);
     }
@@ -207,8 +152,7 @@ class Serializer extends AbstractPlugin
      */
     public function onWriteItemPre(Event $event)
     {
-        $options    = $this->getOptions();
-        $serializer = $options->getSerializer();
+        $serializer = $this->getOptions()->getSerializer();
         $params     = $event->getParams();
         $params['value'] = $serializer->serialize($params['value']);
     }
@@ -221,8 +165,7 @@ class Serializer extends AbstractPlugin
      */
     public function onWriteItemsPre(Event $event)
     {
-        $options    = $this->getOptions();
-        $serializer = $options->getSerializer();
+        $serializer = $this->getOptions()->getSerializer();
         $params     = $event->getParams();
         foreach ($params['keyValuePairs'] as &$value) {
             $value = $serializer->serialize($value);
@@ -237,21 +180,22 @@ class Serializer extends AbstractPlugin
      */
     public function onIncrementItemPre(Event $event)
     {
-        $event->stopPropagation(true);
-
-        $cache    = $event->getTarget();
+        $storage  = $event->getTarget();
         $params   = $event->getParams();
-        $token    = null;
-        $oldValue = $cache->getItem(
-            $params['key'],
-            array('token' => &$token) + $params['options']
-        );
-        return $cache->checkAndSetItem(
-            $token,
-            $oldValue + $params['value'],
-            $params['key'],
-            $params['options']
-        );
+        $casToken = null;
+        $success  = null;
+        $oldValue = $storage->getItem($params['key'], $success, $casToken);
+        $newValue = $oldValue + $params['value'];
+
+        if ($success) {
+            $storage->checkAndSetItem($casToken, $params['key'], $oldValue + $params['value']);
+            $result = $newValue;
+        } else {
+            $result = false;
+        }
+
+        $event->stopPropagation(true);
+        return $result;
     }
 
     /**
@@ -262,19 +206,25 @@ class Serializer extends AbstractPlugin
      */
     public function onIncrementItemsPre(Event $event)
     {
-        $event->stopPropagation(true);
-
-        $cache  = $event->getTarget();
-        $params = $event->getParams();
-        $keyValuePairs = $cache->getItems(array_keys($params['keyValuePairs']), $params['options']);
-        foreach ($params['keyValuePairs'] as $key => &$value) {
+        $storage       = $event->getTarget();
+        $params        = $event->getParams();
+        $keyValuePairs = $storage->getItems(array_keys($params['keyValuePairs']));
+        foreach ($params['keyValuePairs'] as $key => & $value) {
             if (isset($keyValuePairs[$key])) {
                 $keyValuePairs[$key]+= $value;
             } else {
                 $keyValuePairs[$key] = $value;
             }
         }
-        return $cache->setItems($keyValuePairs, $params['options']);
+
+        $failedKeys = $storage->setItems($keyValuePairs);
+        $result     = array();
+        foreach ($failedKeys as $failedKey) {
+            unset($keyValuePairs[$failedKey]);
+        }
+
+        $event->stopPropagation(true);
+        return $keyValuePairs;
     }
 
     /**
@@ -285,21 +235,22 @@ class Serializer extends AbstractPlugin
      */
     public function onDecrementItemPre(Event $event)
     {
-        $event->stopPropagation(true);
-
-        $cache    = $event->getTarget();
+        $storage  = $event->getTarget();
         $params   = $event->getParams();
-        $token    = null;
-        $oldValue = $cache->getItem(
-            $params['key'],
-            array('token' => &$token) + $params['options']
-        );
-        return $cache->checkAndSetItem(
-            $token,
-            $oldValue - $params['value'],
-            $params['key'],
-            $params['options']
-        );
+        $success  = null;
+        $casToken = null;
+        $oldValue = $storage->getItem($params['key'], $success, $casToken);
+        $newValue = $oldValue - $params['value'];
+
+        if ($success) {
+            $storage->checkAndSetItem($casToken, $params['key'], $oldValue + $params['value']);
+            $result = $newValue;
+        } else {
+            $result = false;
+        }
+
+        $event->stopPropagation(true);
+        return $result;
     }
 
     /**
@@ -310,11 +261,9 @@ class Serializer extends AbstractPlugin
      */
     public function onDecrementItemsPre(Event $event)
     {
-        $event->stopPropagation(true);
-
-        $cache         = $event->getTarget();
+        $storage       = $event->getTarget();
         $params        = $event->getParams();
-        $keyValuePairs = $cache->getItems(array_keys($params['keyValuePairs']), $params['options']);
+        $keyValuePairs = $storage->getItems(array_keys($params['keyValuePairs']));
         foreach ($params['keyValuePairs'] as $key => &$value) {
             if (isset($keyValuePairs[$key])) {
                 $keyValuePairs[$key]-= $value;
@@ -322,7 +271,14 @@ class Serializer extends AbstractPlugin
                 $keyValuePairs[$key] = -$value;
             }
         }
-        return $cache->setItems($keyValuePairs, $params['options']);
+
+        $failedKeys = $storage->setItems($keyValuePairs);
+        foreach ($failedKeys as $failedKey) {
+            unset($keyValuePairs[$failedKey]);
+        }
+
+        $event->stopPropagation(true);
+        return $keyValuePairs;
     }
 
     /**

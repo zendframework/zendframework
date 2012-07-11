@@ -2,10 +2,15 @@
 
 namespace ZendTest\Code\Reflection\TestAsset;
 
+use ZendTest\Code\Reflection\TestAsset\SampleAnnotation as Sample;
+
 class TestSampleClass2 implements \IteratorAggregate
 {
-
     protected $_prop1 = null;
+
+    /**
+     * @Sample({"foo":"bar"})
+     */
     protected $_prop2 = null;
 
     public function getProp1()

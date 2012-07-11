@@ -18,12 +18,12 @@ use Zend\ModuleManager\ModuleEvent;
 
 /**
  * Locator registration listener
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-class LocatorRegistrationListener extends AbstractListener implements 
+class LocatorRegistrationListener extends AbstractListener implements
     ListenerAggregateInterface
 {
     /**
@@ -37,15 +37,15 @@ class LocatorRegistrationListener extends AbstractListener implements
     protected $listeners = array();
 
     /**
-     * loadModule 
+     * loadModule
      *
-     * Check each loaded module to see if it implements LocatorRegistered. If it 
+     * Check each loaded module to see if it implements LocatorRegistered. If it
      * does, we add it to an internal array for later.
-     * 
-     * @param  ModuleEvent $e 
+     *
+     * @param  ModuleEvent $e
      * @return void
      */
-    public function loadModule(ModuleEvent $e)
+    public function onLoadModule(ModuleEvent $e)
     {
         if (!$e->getModule() instanceof LocatorRegisteredInterface) {
             return;
@@ -54,17 +54,17 @@ class LocatorRegistrationListener extends AbstractListener implements
     }
 
     /**
-     * loadModulesPost 
+     * loadModulesPost
      *
-     * Once all the modules are loaded, loop 
-     * 
-     * @param  Event $e 
+     * Once all the modules are loaded, loop
+     *
+     * @param  Event $e
      * @return void
      */
-    public function loadModulesPost(Event $e)
+    public function onLoadModulesPost(Event $e)
     {
         $moduleManager = $e->getTarget();
-        $events        = $moduleManager->events()->getSharedManager();
+        $events        = $moduleManager->getEventManager()->getSharedManager();
 
         // Shared instance for module manager
         $events->attach('application', 'bootstrap', function ($e) use ($moduleManager) {
@@ -85,14 +85,14 @@ class LocatorRegistrationListener extends AbstractListener implements
     }
 
     /**
-     * Bootstrap listener 
+     * Bootstrap listener
      *
-     * This is ran during the MVC bootstrap event because it requires access to 
+     * This is ran during the MVC bootstrap event because it requires access to
      * the DI container.
      *
-     * @TODO: Check the application / locator / etc a bit better to make sure 
+     * @TODO: Check the application / locator / etc a bit better to make sure
      * the env looks how we're expecting it to?
-     * @param Event $e 
+     * @param Event $e
      * @return void
      */
     public function onBootstrap(Event $e)
@@ -112,12 +112,12 @@ class LocatorRegistrationListener extends AbstractListener implements
      * Attach one or more listeners
      *
      * @param  EventManagerInterface $events
-     * @return void
+     * @return LocatorRegistrationListener
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach('loadModule', array($this, 'loadModule'), 1000);
-        $this->listeners[] = $events->attach('loadModules.post', array($this, 'loadModulesPost'), 9000);
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, array($this, 'onLoadModule'));
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($this, 'onLoadModulesPost'), -1000);
         return $this;
     }
 

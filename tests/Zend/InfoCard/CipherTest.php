@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_InfoCard
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_InfoCard
  */
 
 namespace ZendTest\InfoCard;
@@ -28,8 +17,6 @@ use Zend\InfoCard\Cipher;
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_InfoCard
  */
 class CipherTest extends \PHPUnit_Framework_TestCase
@@ -100,8 +87,8 @@ class CipherTest extends \PHPUnit_Framework_TestCase
 
     public function testCipherFactory()
     {
-        if (!defined('MCRYPT_RIJNDAEL_128')) {
-            $this->markTestSkipped('Use of the Zend_InfoCard component requires the mcrypt extension to be enabled in PHP');
+        if(!extension_loaded('mcrypt') || !extension_loaded('openssl')) {
+            $this->markTestSkipped('Use of the Zend_InfoCard component requires the mcrypt and openssl extension to be enabled in PHP');
         }
 
         $this->assertTrue(Cipher::getInstanceByURI(Cipher::ENC_AES128CBC)

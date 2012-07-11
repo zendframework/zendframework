@@ -1,43 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
-use Zend\Validator,
-    ReflectionClass;
 
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validator_LessThan
- */
-
+use Zend\Validator\LessThan;
 
 /**
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
 class LessThanTest extends \PHPUnit_Framework_TestCase
@@ -67,7 +45,7 @@ class LessThanTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($valuesExpected as $element) {
-            $validator = new Validator\LessThan($element[0]);
+            $validator = new LessThan($element[0]);
             foreach ($element[2] as $input) {
                 $this->assertEquals($element[1], $validator->isValid($input));
             }
@@ -81,7 +59,7 @@ class LessThanTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessages()
     {
-        $validator = new Validator\LessThan(10);
+        $validator = new LessThan(10);
         $this->assertEquals(array(), $validator->getMessages());
     }
 
@@ -92,7 +70,7 @@ class LessThanTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMax()
     {
-        $validator = new Validator\LessThan(10);
+        $validator = new LessThan(10);
         $this->assertEquals(10, $validator->getMax());
     }
 
@@ -103,43 +81,21 @@ class LessThanTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInclusive()
     {
-        $validator = new Validator\LessThan(10);
+        $validator = new LessThan(10);
         $this->assertEquals(false, $validator->getInclusive());
     }
-    
+
     public function testEqualsMessageTemplates()
     {
-        $validator = new Validator\LessThan(10);
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
+        $validator = new LessThan(10);
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
-    
+
     public function testEqualsMessageVariables()
     {
-        $validator = new Validator\LessThan(10);
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $validator = new LessThan(10);
+        $this->assertAttributeEquals($validator->getOption('messageVariables'),
+                                     'messageVariables', $validator);
     }
 }

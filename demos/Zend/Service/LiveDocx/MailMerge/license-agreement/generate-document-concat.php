@@ -32,10 +32,9 @@ require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
  *       location. The specified paths are correct for Debian 5.0.3.
  */
 
-use Zend\Date\Date;
+use DateTime;
 use Zend\Log\Logger;
 use Zend\Log\Writer\Stream as Writer;
-use Zend\Registry;
 use Zend\Service\LiveDocx\Helper;
 use Zend\Service\LiveDocx\MailMerge;
 
@@ -75,8 +74,6 @@ $iterations = 3;
 
 $logger = new Logger(new Writer('php://stdout'));
 
-Registry::set('logger', $logger);
-
 // -----------------------------------------------------------------------------
 
 // Create temporary directory
@@ -104,6 +101,8 @@ $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
 
 $mailMerge->setLocalTemplate('template.docx');
 
+$date = new DateTime();
+
 for ($iteration = 1; $iteration <= $iterations; $iteration ++) {
     
     $tempFilename = sprintf('%s%s%010s.pdf', $tempDirectory, DIRECTORY_SEPARATOR, $iteration);
@@ -112,8 +111,8 @@ for ($iteration = 1; $iteration <= $iterations; $iteration ++) {
     $mailMerge->assign('software', randomString())
               ->assign('licensee', randomString())
               ->assign('company',  randomString())
-              ->assign('date',     Date::now()->toString(Date::DATE_LONG))
-              ->assign('time',     Date::now()->toString(Date::TIME_LONG))
+              ->assign('date',     $date->format('Y-m-d'))
+              ->assign('time',     $date->format('H:i:s'))
               ->assign('city',     randomString())
               ->assign('country',  randomString());
         
@@ -156,8 +155,7 @@ if (is_dir($tempDirectory)) {
 
 /**
  * Create a random string
- * 
- * @param $length
+ *
  * @return string
  */
 function randomString()
@@ -213,9 +211,9 @@ function recursiveRemoveDirectory($dir)
 function concatenatePdfFilenames($inputFilenames, $outputFilename, $processor = EXEC_PDFTK)
 {
     $ret = false;
-    
-    $logger = Registry::get('logger');
-    
+
+    $logger = new Logger(new Writer('php://stdout'));
+
     if (! (is_file(EXEC_PDFTK) || is_file(EXEC_GHOSTSCRIPT))) {
         $logger->log('Either pdftk or ghostscript are required for this sample application.', Logger::CRIT);
         exit();

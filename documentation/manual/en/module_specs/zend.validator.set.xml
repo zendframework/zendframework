@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validator.set"><title>Standard Validation Classes</title>
+
+
+    <para>
+        Zend Framework comes with a standard set of validation classes, which are ready for you to
+        use.
+    </para>
+
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.alnum.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.alpha.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.barcode.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.between.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.callback.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.creditCard.xml"/>
+
+    <section xml:id="zend.validator.set.ccnum"><title>Ccnum</title>
+
+
+        <note>
+            <para>
+                The <classname>Ccnum</classname> validator has been deprecated in favor of the
+                <classname>CreditCard</classname> validator. For security reasons you should use
+                CreditCard instead of Ccnum.
+            </para>
+        </note>
+    </section>
+
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.date.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.db.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.digits.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.emailAddress.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.float.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.greaterThan.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.hex.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.hostname.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.iban.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.identical.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.inArray.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.int.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.ip.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.isbn.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.lessThan.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.notEmpty.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.postCode.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.regex.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.sitemap.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.step.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zend.validator.stringLength.xml"/>
+</section>

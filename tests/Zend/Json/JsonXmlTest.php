@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_JSON
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Json
  */
 
 namespace ZendTest\Json;
@@ -36,8 +25,6 @@ error_reporting( E_ALL | E_STRICT ); // now required for each test suite
  * @category   Zend
  * @package    Zend_JSON
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_JSON
  */
 class JsonXmlTest extends \PHPUnit_Framework_TestCase
@@ -548,28 +535,24 @@ EOT;
      * @dataProvider providerNestingDepthIsHandledProperly
      */
     public function testNestingDepthIsHandledProperlyWhenNestingDepthExceedsMaximum($xmlStringContents)
-    {        
+    {
         Json\Json::$maxRecursionDepthAllowed = 1;
         Json\Json::fromXml($xmlStringContents, true);
     }
-    
+
     /**
      * @group ZF-11385
      * @dataProvider providerNestingDepthIsHandledProperly
      */
     public function testNestingDepthIsHandledProperlyWhenNestingDepthDoesNotExceedMaximum($xmlStringContents)
-    {   
-        try {
-            Json\Json::$maxRecursionDepthAllowed = 25;
-            $jsonString = Json\Json::fromXml($xmlStringContents, true);
-            $jsonArray = Json\Json::decode($jsonString, Json\Json::TYPE_ARRAY);
-            $this->assertNotNull($jsonArray, "JSON decode result is NULL");
-            $this->assertSame('A', $jsonArray['response']['message_type']['defaults']['close_rules']['after_responses']);
-        } catch ( Zend\Json\Exception\RecursionException $ex ) {
-            $this->fail('Zend_Json::fromXml does not implement recursion check properly');
-        }
+    {
+        Json\Json::$maxRecursionDepthAllowed = 25;
+        $jsonString = Json\Json::fromXml($xmlStringContents, true);
+        $jsonArray = Json\Json::decode($jsonString, Json\Json::TYPE_ARRAY);
+        $this->assertNotNull($jsonArray, "JSON decode result is NULL");
+        $this->assertSame('A', $jsonArray['response']['message_type']['defaults']['close_rules']['after_responses']);
     }
-    
+
     /**
      * XML document provider for ZF-11385 tests
      * @return array
@@ -611,7 +594,7 @@ EOT;
 			<feed_status>D</feed_status>
 		</defaults>
 	</message_type>
-	<execution_time>0.0790269374847</execution_time>	
+	<execution_time>0.0790269374847</execution_time>
 </response>
 EOT;
         return array(array($xmlStringContents));

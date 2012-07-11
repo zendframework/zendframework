@@ -1,29 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_OpenId
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_OpenId
  */
 
 namespace ZendTest\OpenId;
 
-use Zend\OpenId\OpenId, 
-    Zend\OpenId\Provider,
-    Zend\OpenId\Extension;
+use Zend\OpenId\OpenId;
+use Zend\OpenId\Provider;
+use Zend\OpenId\Extension;
 
 /**
  * @outputBuffering enabled
@@ -31,8 +20,6 @@ use Zend\OpenId\OpenId,
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_OpenId
  */
 class ProviderTest extends \PHPUnit_Framework_TestCase
@@ -748,7 +735,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
                 'openid_assoc_handle' => self::HANDLE,
                 'openid_return_to' => 'http://www.test.com/test.php'
             ), null, $response) );
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -776,7 +763,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
                 'openid_assoc_handle' => self::HANDLE,
                 'openid_return_to' => 'http://www.test.com/test.php'
             ), null, $response) );
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -808,7 +795,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
                 'openid_identity' => 'http://identity/',
                 'openid_unknown' => 'http://www.test.com/test.php',
             ), null, $response);
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -839,7 +826,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue( $provider->respondToConsumer(array(
                 'openid_return_to' => 'http://www.test.com/test.php',
             ), $sreg, $response) );
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -878,7 +865,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $this->assertSame( 'http://www.test.com/test.php?openid.mode=cancel', $headers->get('Location')->getFieldValue() );
 
@@ -888,7 +875,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_mode'=>'checkid_immediate',
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -919,7 +906,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -953,7 +940,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_ns_sreg'=>Extension\Sreg::NAMESPACE_1_1,
             'openid_sreg_required'=>'nickname'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -987,7 +974,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1020,7 +1007,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1054,7 +1041,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_ns_sreg'=>Extension\Sreg::NAMESPACE_1_1,
             'openid_sreg_required'=>'nickname'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1088,7 +1075,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $this->assertSame( 'http://www.test.com/test.php?openid.mode=cancel', $headers->get('Location')->getFieldValue() );
 
@@ -1101,7 +1088,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $this->assertSame( 'http://www.test.com/test.php?openid.mode=cancel', $headers->get('Location')->getFieldValue() );
 
@@ -1114,7 +1101,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1141,7 +1128,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_trust_root'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertEquals(0, count($headers));
         $this->assertSame( '', $response->getBody() );
 
@@ -1157,7 +1144,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1189,7 +1176,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1226,7 +1213,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_sreg_optional'=>'email',
             ),
             $sreg, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1262,7 +1249,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_sreg_required'=>'nickname,email',
             ),
             $sreg, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1317,7 +1304,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $this->assertSame( 'http://www.test.com/test.php?openid.mode=cancel', $headers->get('Location')->getFieldValue() );
 
@@ -1327,7 +1314,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_mode'=>'checkid_setup',
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1349,7 +1336,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1372,7 +1359,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1395,7 +1382,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $this->assertSame( 'http://www.test.com/test.php?openid.mode=cancel', $headers->get('Location')->getFieldValue() );
 
@@ -1407,7 +1394,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1434,7 +1421,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_trust_root'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertEquals(0, count($headers));
         $this->assertSame( '', $response->getBody() );
 
@@ -1450,7 +1437,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1482,7 +1469,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_identity'=>self::USER,
             'openid_return_to'=>'http://www.test.com/test.php'),
             null, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1519,7 +1506,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_sreg_optional'=>'email',
             ),
             $sreg, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1555,7 +1542,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'openid_sreg_required'=>'nickname,email',
             ),
             $sreg, $response));
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );
@@ -1610,7 +1597,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
                 'openid_assoc_handle' => self::HANDLE,
                 'openid_return_to' => 'http://www.test.com/test.php'
             ), null, $response) );
-        $headers = $response->headers();
+        $headers = $response->getHeaders();
         $this->assertTrue($headers->has('Location'));
         $url = parse_url($headers->get('Location')->getFieldValue());
         $this->assertSame( 'www.test.com', $url['host'] );

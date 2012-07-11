@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_EventManager
  */
 
 namespace Zend\EventManager\Filter;
 
-use Zend\Stdlib\CallbackHandler,
-    Zend\Stdlib\SplPriorityQueue;
+use Zend\Stdlib\CallbackHandler;
+use Zend\Stdlib\SplPriorityQueue;
 
 /**
  * Specialized priority queue implementation for use with an intercepting 
@@ -31,8 +21,6 @@ use Zend\Stdlib\CallbackHandler,
  *
  * @category   Zend
  * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FilterIterator extends SplPriorityQueue
 {
@@ -96,7 +84,7 @@ class FilterIterator extends SplPriorityQueue
      * @param  mixed $context 
      * @param  array $params 
      * @param  FilterIterator $chain 
-     * @return void
+     * @return mixed
      */
     public function next($context = null, array $params = array(), $chain = null)
     {

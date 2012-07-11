@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Loader
- * @subpackage Exception
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Loader
  */
 
 namespace Zend\Loader;
@@ -31,8 +20,6 @@ require_once __DIR__ . '/SplAutoloader.php';
  * 
  * @catebory   Zend
  * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
  */
 class ClassMapAutoloader implements SplAutoloader
 {
@@ -85,7 +72,7 @@ class ClassMapAutoloader implements SplAutoloader
      * An autoload map should be an associative array containing 
      * classname/file pairs.
      * 
-     * @param  string|array $location 
+     * @param  string|array $map 
      * @return ClassMapAutoloader
      */
     public function registerAutoloadMap($map)
@@ -99,7 +86,10 @@ class ClassMapAutoloader implements SplAutoloader
 
         if (!is_array($map)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
-            throw new Exception\InvalidArgumentException('Map file provided does not return a map');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Map file provided does not return a map. Map file: "%s"',
+                (isset($location) && is_string($location) ? $location : 'unexpected type: ' . gettype($map))
+            ));
         }
 
         $this->map = array_merge($this->map, $map);
@@ -177,7 +167,10 @@ class ClassMapAutoloader implements SplAutoloader
     {
         if (!file_exists($location)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
-            throw new Exception\InvalidArgumentException('Map file provided does not exist');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Map file provided does not exist. Map file: "%s"',
+                (is_string($location) ? $location : 'unexpected type: ' . gettype($location))
+            ));
         }
 
         if (!$path = static::realPharPath($location)) {

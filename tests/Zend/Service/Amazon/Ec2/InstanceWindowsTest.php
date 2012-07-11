@@ -1,26 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon\Ec2\WindowsInstance;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
 
 /**
  * Zend_Service_Amazon_Ec2_Instance_Windows test case.
@@ -30,8 +22,6 @@ use Zend\Service\Amazon\Ec2\WindowsInstance;
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
@@ -45,27 +35,23 @@ class InstanceWindowsTest extends \PHPUnit_Framework_TestCase
     private $instance;
 
     /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
+
+    /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->instance = new WindowsInstance('access_key', 'secret_access_key');
-
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        WindowsInstance::setDefaultHTTPClient($client);
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        unset($this->adapter);
-        $this->instance = null;
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
+        $this->instance = new WindowsInstance('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     /**
@@ -99,7 +85,7 @@ class InstanceWindowsTest extends \PHPUnit_Framework_TestCase
                     ."      </storage>\r\n"
                     ."  </bundleInstanceTask>\r\n"
                     ."</BundleInstanceResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->bundle('i-12345678', 'my-bucket', 'my-new-image');
 
@@ -155,7 +141,7 @@ class InstanceWindowsTest extends \PHPUnit_Framework_TestCase
                     ."      </storage>\r\n"
                     ."  </bundleInstanceTask>\r\n"
                     ."</CancelBundleTaskResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->cancelBundle('bun-cla322b9');
 
@@ -212,7 +198,7 @@ class InstanceWindowsTest extends \PHPUnit_Framework_TestCase
                     ."    </item>\r\n"
                     ."  </bundleInstanceTasksSet>\r\n"
                     ."</DescribeBundleTasksResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->describeBundle('bun-cla322b9');
 

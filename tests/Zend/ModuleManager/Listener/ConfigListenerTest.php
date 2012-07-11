@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_ModuleManager
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ModuleManager
  */
 
 namespace ZendTest\ModuleManager\Listener;
@@ -55,13 +44,13 @@ class ConfigListenerTest extends TestCase
         $autoloader->register();
 
         $this->moduleManager = new ModuleManager(array());
-        $this->moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $this->moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
     }
 
     public function tearDown()
     {
         $file = glob($this->tmpdir . DIRECTORY_SEPARATOR . '*');
-        @unlink($file[0]); // change this if there's ever > 1 file 
+        @unlink($file[0]); // change this if there's ever > 1 file
         @rmdir($this->tmpdir);
         // Restore original autoloaders
         AutoloaderFactory::unregisterAutoloaders();
@@ -85,7 +74,7 @@ class ConfigListenerTest extends TestCase
         $configListener = new ConfigListener;
 
         $moduleManager = $this->moduleManager;
-        $moduleManager->events()->attach('loadModule', $configListener);
+        $configListener->attach($moduleManager->getEventManager());
         $moduleManager->setModules(array('SomeModule', 'ListenerTestModule'));
         $moduleManager->loadModules();
 
@@ -107,18 +96,18 @@ class ConfigListenerTest extends TestCase
 
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule', 'ListenerTestModule'));
-        $moduleManager->events()->attach('loadModule', $configListener);
+        $configListener->attach($moduleManager->getEventManager());
         $moduleManager->loadModules(); // This should cache the config
 
         $modules = $moduleManager->getLoadedModules();
         $this->assertTrue($modules['ListenerTestModule']->getConfigCalled);
 
-        // Now we check to make sure it uses the config and doesn't hit 
+        // Now we check to make sure it uses the config and doesn't hit
         // the module objects getConfig() method(s)
         $moduleManager = new ModuleManager(array('SomeModule', 'ListenerTestModule'));
-        $moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
         $configListener = new ConfigListener($options);
-        $moduleManager->events()->attach('loadModule', $configListener);
+        $configListener->attach($moduleManager->getEventManager());
         $moduleManager->loadModules();
         $modules = $moduleManager->getLoadedModules();
         $this->assertFalse($modules['ListenerTestModule']->getConfigCalled);
@@ -132,24 +121,24 @@ class ConfigListenerTest extends TestCase
 
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('BadConfigModule', 'SomeModule'));
-        $moduleManager->events()->attach('loadModule', $configListener);
+        $configListener->attach($moduleManager->getEventManager());
         $moduleManager->loadModules();
     }
-    
+
     public function testBadGlobPathTrowsInvalidArgumentException()
     {
         $this->setExpectedException('InvalidArgumentException');
         $configListener = new ConfigListener;
         $configListener->addConfigGlobPath(array('asd'));
     }
-    
+
     public function testBadGlobPathArrayTrowsInvalidArgumentException()
     {
         $this->setExpectedException('InvalidArgumentException');
         $configListener = new ConfigListener;
         $configListener->addConfigGlobPaths('asd');
     }
-    
+
     public function testBadStaticPathArrayTrowsInvalidArgumentException()
     {
         $this->setExpectedException('InvalidArgumentException');
@@ -165,7 +154,7 @@ class ConfigListenerTest extends TestCase
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));
 
-        $moduleManager->events()->attachAggregate($configListener);
+        $configListener->attach($moduleManager->getEventManager());
 
         $moduleManager->loadModules();
         $configObjectCheck = $configListener->getMergedConfig();
@@ -182,7 +171,7 @@ class ConfigListenerTest extends TestCase
         $this->assertSame('loaded', $config['php']);
         $this->assertSame('loaded', $config['xml']);
     }
-    
+
     public function testCanMergeConfigFromStaticPath()
     {
         $configListener = new ConfigListener;
@@ -193,7 +182,7 @@ class ConfigListenerTest extends TestCase
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));
 
-        $moduleManager->events()->attachAggregate($configListener);
+        $moduleManager->getEventManager()->attachAggregate($configListener);
 
         $moduleManager->loadModules();
         $configObjectCheck = $configListener->getMergedConfig();
@@ -210,7 +199,7 @@ class ConfigListenerTest extends TestCase
         $this->assertSame('loaded', $config['php']);
         $this->assertSame('loaded', $config['xml']);
     }
-    
+
     public function testCanMergeConfigFromStaticPaths()
     {
         $configListener = new ConfigListener;
@@ -223,7 +212,7 @@ class ConfigListenerTest extends TestCase
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));
 
-        $moduleManager->events()->attachAggregate($configListener);
+        $moduleManager->getEventManager()->attachAggregate($configListener);
 
         $moduleManager->loadModules();
         $configObjectCheck = $configListener->getMergedConfig();
@@ -253,7 +242,7 @@ class ConfigListenerTest extends TestCase
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));
 
-        $moduleManager->events()->attachAggregate($configListener);
+        $moduleManager->getEventManager()->attachAggregate($configListener);
 
         $moduleManager->loadModules();
         $configObjectFromGlob = $configListener->getMergedConfig();
@@ -261,9 +250,9 @@ class ConfigListenerTest extends TestCase
         // This time, don't add the glob path
         $configListener = new ConfigListener($options);
         $moduleManager = new ModuleManager(array('SomeModule'));
-        $moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
 
-        $moduleManager->events()->attachAggregate($configListener);
+        $moduleManager->getEventManager()->attachAggregate($configListener);
 
         $moduleManager->loadModules();
 
@@ -276,7 +265,7 @@ class ConfigListenerTest extends TestCase
         $this->assertNotNull($configObjectFromGlob->xml);
         $this->assertSame($configObjectFromGlob->xml, $configObjectFromCache->xml);
     }
-    
+
     public function testCanCacheMergedConfigFromStatic()
     {
         $options = new ListenerOptions(array(
@@ -293,7 +282,7 @@ class ConfigListenerTest extends TestCase
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));
 
-        $moduleManager->events()->attachAggregate($configListener);
+        $moduleManager->getEventManager()->attachAggregate($configListener);
 
         $moduleManager->loadModules();
         $configObjectFromGlob = $configListener->getMergedConfig();
@@ -301,9 +290,9 @@ class ConfigListenerTest extends TestCase
         // This time, don't add the glob path
         $configListener = new ConfigListener($options);
         $moduleManager = new ModuleManager(array('SomeModule'));
-        $moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
 
-        $moduleManager->events()->attachAggregate($configListener);
+        $moduleManager->getEventManager()->attachAggregate($configListener);
 
         $moduleManager->loadModules();
 
@@ -329,7 +318,7 @@ class ConfigListenerTest extends TestCase
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));
 
-        $moduleManager->events()->attachAggregate($configListener);
+        $moduleManager->getEventManager()->attachAggregate($configListener);
         $moduleManager->loadModules();
 
         // Test as object
@@ -338,7 +327,7 @@ class ConfigListenerTest extends TestCase
         $this->assertSame('loaded', $configObject->php);
         $this->assertSame('loaded', $configObject->xml);
     }
-    
+
     public function testCanMergeConfigFromArrayOfStatic()
     {
         $configListener = new ConfigListener;
@@ -351,7 +340,7 @@ class ConfigListenerTest extends TestCase
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));
 
-        $moduleManager->events()->attachAggregate($configListener);
+        $moduleManager->getEventManager()->attachAggregate($configListener);
         $moduleManager->loadModules();
 
         // Test as object
@@ -373,7 +362,7 @@ class ConfigListenerTest extends TestCase
             __DIR__ . '/_files/good/merge2.php',
         ));
 
-        $moduleManager->events()->attachAggregate($configListener);
+        $moduleManager->getEventManager()->attachAggregate($configListener);
         $moduleManager->loadModules();
 
         $mergedConfig = $configListener->getMergedConfig(false);
@@ -386,12 +375,12 @@ class ConfigListenerTest extends TestCase
         $configListener = new ConfigListener;
 
         $moduleManager = $this->moduleManager;
-        $this->assertEquals(1, count($moduleManager->events()->getEvents()));
+        $this->assertEquals(2, count($moduleManager->getEventManager()->getEvents()));
 
-        $configListener->attach($moduleManager->events());
-        $this->assertEquals(4, count($moduleManager->events()->getEvents()));
+        $configListener->attach($moduleManager->getEventManager());
+        $this->assertEquals(3, count($moduleManager->getEventManager()->getEvents()));
 
-        $configListener->detach($moduleManager->events());
-        $this->assertEquals(1, count($moduleManager->events()->getEvents()));
+        $configListener->detach($moduleManager->getEventManager());
+        $this->assertEquals(2, count($moduleManager->getEventManager()->getEvents()));
     }
 }

@@ -1,36 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
-use Zend\Validator\Barcode,
-    ReflectionClass;
+
+use Zend\Validator\Barcode;
 
 /**
- * \Zend\Validator\Barcode
+ * \Zend\Barcode
  *
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
 class BarcodeTest extends \PHPUnit_Framework_TestCase
@@ -140,7 +127,7 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($barcode->useChecksum());
     }
 
-    public function testDefaultdArrayConstructWithMissingAdapter()
+    public function testDefaultArrayConstructWithMissingAdapter()
     {
         $barcode = new Barcode(array('options' => 'unknown', 'checksum' => false));
         $this->assertTrue($barcode->isValid('0075678164125'));
@@ -466,40 +453,18 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
         $barcode = new Barcode('ean13');
         $this->assertFalse($barcode->isValid('3RH1131-1BB40'));
     }
-    
+
     public function testEqualsMessageTemplates()
     {
         $validator = new Barcode('code25');
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageTemplates');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageTemplates')
-        );
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
+                                     'messageTemplates', $validator);
     }
-    
+
     public function testEqualsMessageVariables()
     {
         $validator = new Barcode('code25');
-        $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
-            return;
-        }
-        
-        $property = $reflection->getProperty('_messageVariables');
-        $property->setAccessible(true);
-
-        $this->assertEquals(
-            $property->getValue($validator),
-            $validator->getOption('messageVariables')
-        );
+        $this->assertAttributeEquals($validator->getOption('messageVariables'),
+                                     'messageVariables', $validator);
     }
 }

@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace Zend\Validator\Barcode;
@@ -23,21 +13,17 @@ namespace Zend\Validator\Barcode;
 /**
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Issn extends AbstractAdapter
 {
     /**
      * Constructor for this barcode adapter
-     *
-     * @return void
      */
     public function __construct()
     {
         $this->setLength(array(8, 13));
         $this->setCharacters('0123456789X');
-        $this->setChecksum('_gtin');
+        $this->setChecksum('gtin');
     }
 
     /**
@@ -66,9 +52,9 @@ class Issn extends AbstractAdapter
     public function hasValidChecksum($value)
     {
         if (strlen($value) == 8) {
-            $this->setChecksum('_issn');
+            $this->setChecksum('issn');
         } else {
-            $this->setChecksum('_gtin');
+            $this->setChecksum('gtin');
         }
 
         return parent::hasValidChecksum($value);
@@ -81,7 +67,7 @@ class Issn extends AbstractAdapter
      * @param  string $value The barcode to validate
      * @return boolean
      */
-    protected function _issn($value)
+    protected function issn($value)
     {
         $checksum = substr($value, -1, 1);
         $values   = str_split(substr($value, 0, -1));
@@ -100,7 +86,7 @@ class Issn extends AbstractAdapter
         $check  = ($check === 0 ? 0 : (11 - $check));
         if ($check == $checksum) {
             return true;
-        } else if (($check == 10) && ($checksum == 'X')) {
+        } elseif (($check == 10) && ($checksum == 'X')) {
             return true;
         }
 

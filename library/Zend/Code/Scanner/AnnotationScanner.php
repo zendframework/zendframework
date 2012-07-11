@@ -1,10 +1,18 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Code
+ */
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\NameInformation;
-use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Annotation\AnnotationCollection;
+use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\NameInformation;
 
 class AnnotationScanner extends AnnotationCollection implements ScannerInterface
 {
@@ -106,10 +114,10 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
         SCANNER_END:
 
         foreach ($annotations as $annotation) {
-            if ($this->annotationManager->hasAnnotation($annotation[0])) {
-                $this->append(
-                    $this->annotationManager->createAnnotation($annotation[0], trim($annotation[1], '()'))
-                );
+            $annotation[]     = '@' . $annotation[0] . $annotation[1];
+            $annotationObject = $this->annotationManager->createAnnotation($annotation);
+            if ($annotationObject) {
+                $this->append($annotationObject);
             }
         }
     }

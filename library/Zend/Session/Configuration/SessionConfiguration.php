@@ -1,27 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-webat this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Session
  */
 
 namespace Zend\Session\Configuration;
 
-use Zend\Validator\Hostname as HostnameValidator,
-    Zend\Session\Exception;
+use Zend\Session\Exception;
+use Zend\Validator\Hostname as HostnameValidator;
 
 /**
  * Session configuration proxying to session INI options
@@ -29,8 +19,6 @@ use Zend\Validator\Hostname as HostnameValidator,
  * @category   Zend
  * @package    Zend_Session
  * @subpackage Configuration
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SessionConfiguration extends StandardConfiguration
 {
@@ -126,27 +114,17 @@ class SessionConfiguration extends StandardConfiguration
                 // No remote storage option; just return the current value
                 return $this->rememberMeSeconds;
             case 'url_rewriter_tags':
-                $key = 'url_rewriter.tags';
-                break;
+                return ini_get('url_rewriter.tags');
             // The following all need a transformation on the retrieved value;
             // however they use the same key naming scheme
             case 'use_cookies':
             case 'use_only_cookies':
             case 'use_trans_sid':
             case 'cookie_httponly':
-                $transform = function ($value) {
-                    return (bool) $value;
-                };
+                return (bool) ini_get('session.' . $storageOption);
             default:
-                $key = 'session.' . $storageOption;
-                break;
+                return ini_get('session.' . $storageOption);
         }
-
-        $value = ini_get($key);
-        if (false !== $transform) {
-            $value = $transform($value);
-        }
-        return $value;
     }
 
     /**

@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace ZendTest\Mail\Storage;
@@ -29,8 +18,6 @@ use Zend\Mail\Storage\Message;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
 class InterfaceTest extends \PHPUnit_Framework_TestCase
@@ -76,13 +63,8 @@ class InterfaceTest extends \PHPUnit_Framework_TestCase
     {
         $list = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
-        try {
-            $list[1] = 'test';
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception thrown while writing to array access');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\RuntimeException');
+        $list[1] = 'test';
     }
 
     public function testIterationKey()
@@ -145,25 +127,16 @@ class InterfaceTest extends \PHPUnit_Framework_TestCase
     {
         $list = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
-        try {
-            $result = $list->noop();
-            $this->assertTrue($result);
-        } catch (\Exception $e) {
-            $this->fail('exception raised while calling noop thru fallback');
-        }
+        $result = $list->noop();
+        $this->assertTrue($result);
     }
 
     public function testWrongVariable()
     {
         $list = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
-        try {
-            $list->thisdoesnotexist;
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception thrown while reading wrong variable (via __get())');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $list->thisdoesnotexist;
     }
 
     public function testGetHeaders()
@@ -177,12 +150,7 @@ class InterfaceTest extends \PHPUnit_Framework_TestCase
     {
         $list = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
-        try {
-            $list[1]->thisdoesnotexist;
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception thrown while reading wrong header');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        $list[1]->thisdoesnotexist;
     }
 }

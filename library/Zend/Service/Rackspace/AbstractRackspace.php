@@ -29,64 +29,75 @@ abstract class AbstractRackspace
     const AUTHTOKEN_LEGACY       = "X-Storage-Token";
     const CDNM_URL               = "X-CDN-Management-Url";
     const MANAGEMENT_URL         = "X-Server-Management-Url";
+
     /**
      * Rackspace Key
      *
      * @var string
      */
     protected $key;
+
     /**
      * Rackspace account name
      *
      * @var string
      */
     protected $user;
+
     /**
      * Token of authentication
      *
      * @var string
      */
     protected $token;
+
     /**
      * Authentication URL
      *
      * @var string
      */
     protected $authUrl;
+
     /**
      * @var HttpClient
      */
     protected $httpClient;
+
     /**
      * Error Msg
      *
      * @var string
      */
     protected $errorMsg;
+
     /**
      * HTTP error code
      *
      * @var string
      */
     protected $errorCode;
+
     /**
      * Storage URL
      *
      * @var string
      */
     protected $storageUrl;
+
     /**
      * CDN URL
      *
      * @var string
      */
     protected $cdnUrl;
+
     /**
      * Server management URL
      *
      * @var string
      */
     protected $managementUrl;
+
     /**
      * Constructor
      *
@@ -98,7 +109,7 @@ abstract class AbstractRackspace
      * @param string $authUrl
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($user, $key, $authUrl=self::US_AUTH_URL)
+    public function __construct($user, $key, $authUrl = self::US_AUTH_URL, HttpClient $httpClient = null)
     {
         if (!isset($user)) {
             throw new Exception\InvalidArgumentException("The user cannot be empty");
@@ -112,7 +123,29 @@ abstract class AbstractRackspace
         $this->setUser($user);
         $this->setKey($key);
         $this->setAuthUrl($authUrl);
+        $this->setHttpClient($httpClient ?: new HttpClient);
     }
+
+    /**
+     * @param HttpClient $httpClient
+     * @return AbstractRackspace
+     */
+    public function setHttpClient(HttpClient $httpClient)
+    {
+        $this->httpClient = $httpClient;
+        return $this;
+    }
+
+    /**
+     * get the HttpClient instance
+     *
+     * @return HttpClient
+     */
+    public function getHttpClient()
+    {
+        return $this->httpClient;
+    }
+
     /**
      * Get User account
      *
@@ -122,6 +155,7 @@ abstract class AbstractRackspace
     {
         return $this->user;
     }
+
     /**
      * Get user key
      *
@@ -131,6 +165,7 @@ abstract class AbstractRackspace
     {
         return $this->key;
     }
+
     /**
      * Get authentication URL
      *
@@ -140,6 +175,7 @@ abstract class AbstractRackspace
     {
         return $this->authUrl;
     }
+
     /**
      * Get the storage URL
      *
@@ -154,6 +190,7 @@ abstract class AbstractRackspace
         }
         return $this->storageUrl;
     }
+
     /**
      * Get the CDN URL
      *
@@ -168,6 +205,7 @@ abstract class AbstractRackspace
         }
         return $this->cdnUrl;
     }
+
     /**
      * Get the management server URL
      *
@@ -183,6 +221,7 @@ abstract class AbstractRackspace
         }
         return $this->managementUrl;
     }
+
     /**
      * Set the user account
      *
@@ -195,6 +234,7 @@ abstract class AbstractRackspace
             $this->user = $user;
         }
     }
+
     /**
      * Set the authentication key
      *
@@ -207,6 +247,7 @@ abstract class AbstractRackspace
             $this->key = $key;
         }
     }
+
     /**
      * Set the Authentication URL
      *
@@ -222,6 +263,7 @@ abstract class AbstractRackspace
             throw new Exception\InvalidArgumentException("The authentication URL is not valid");
         }
     }
+
     /**
      * Get the authentication token
      *
@@ -237,6 +279,7 @@ abstract class AbstractRackspace
         }
         return $this->token;
     }
+
     /**
      * Get the error msg of the last HTTP call
      *
@@ -246,6 +289,7 @@ abstract class AbstractRackspace
     {
         return $this->errorMsg;
     }
+
     /**
      * Get the error code of the last HTTP call
      *
@@ -255,18 +299,7 @@ abstract class AbstractRackspace
     {
         return $this->errorCode;
     }
-    /**
-     * get the HttpClient instance
-     *
-     * @return HttpClient
-     */
-    public function getHttpClient()
-    {
-        if (empty($this->httpClient)) {
-            $this->httpClient = new HttpClient();
-        }
-        return $this->httpClient;
-    }
+
     /**
      * Return true is the last call was successful
      *
@@ -276,6 +309,7 @@ abstract class AbstractRackspace
     {
         return (empty($this->errorMsg));
     }
+
     /**
      * HTTP call
      *
@@ -310,6 +344,7 @@ abstract class AbstractRackspace
         $this->errorCode = null;
         return $client->send();
     }
+
     /**
      * Authentication
      *

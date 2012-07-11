@@ -13,8 +13,9 @@ namespace Zend\Service\SlideShare;
 use SimpleXMLElement;
 use Zend\Cache\StorageFactory as CacheFactory;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
-use Zend\Http;
-use Zend\Http\Client;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Exception as HttpException;
+use Zend\Http\Request as HttpRequest;
 
 /**
  * The Zend\Service\SlideShare component is used to interface with the
@@ -95,7 +96,7 @@ class SlideShare
      *
      * @var Zend\Http\Client
      */
-    protected $httpclient;
+    protected $httpClient;
 
     /**
      * The Cache object to use to perform caching
@@ -105,15 +106,33 @@ class SlideShare
     protected $cacheobject;
 
     /**
+     * The Constructor
+     *
+     * @param string $apikey The API key
+     * @param string $sharedSecret The shared secret
+     * @param string $username The username
+     * @param string $password The password
+     */
+    public function __construct($apikey, $sharedSecret, $username = null, $password = null, HttpClient $httpClient = null)
+    {
+        $this->setApiKey($apikey)
+            ->setSharedSecret($sharedSecret)
+            ->setUserName($username)
+            ->setPassword($password);
+
+        $this->setHttpClient($httpClient ?: new HttpClient(null, array('maxredirects' => 2, 'timeout' => 5)));
+    }
+
+    /**
      * Sets the Zend\Http\Client object to use in requests. If not provided a default will
      * be used.
      *
      * @param Zend\Http\Client $client The HTTP client instance to use
      * @return Zend\Service\SlideShare\SlideShare
      */
-    public function setHttpClient(Http\Client $client)
+    public function setHttpClient(HttpClient $httpClient)
     {
-        $this->httpclient = $client;
+        $this->httpClient = $httpClient;
         return $this;
     }
 
@@ -121,21 +140,11 @@ class SlideShare
      * Returns the instance of the Zend\Http\Client which will be used. Creates an instance
      * of Zend\Http\Client if no previous client was set.
      *
-     * @return Zend\Http\Client The HTTP client which will be used
+     * @return HttpClient The HTTP client which will be used
      */
     public function getHttpClient()
     {
-
-        if (!($this->httpclient instanceof Http\Client)) {
-            $client = new Http\Client();
-            $client->setOptions(array('maxredirects' => 2,
-                                     'timeout'      => 5));
-
-            $this->setHttpClient($client);
-        }
-
-        $this->httpclient->resetParameters();
-        return $this->httpclient;
+        return $this->httpClient;
     }
 
     /**
@@ -273,24 +282,6 @@ class SlideShare
     }
 
     /**
-     * The Constructor
-     *
-     * @param string $apikey The API key
-     * @param string $sharedSecret The shared secret
-     * @param string $username The username
-     * @param string $password The password
-     */
-    public function __construct($apikey, $sharedSecret, $username = null, $password = null)
-    {
-        $this->setApiKey($apikey)
-             ->setSharedSecret($sharedSecret)
-             ->setUserName($username)
-             ->setPassword($password);
-
-        $this->httpclient = new Http\Client();
-    }
-
-    /**
      * Uploads the specified Slide show the the server
      *
      * @param Zend\Service\SlideShare\SlideShow $ss The slide show object representing the slide show to upload
@@ -337,16 +328,19 @@ class SlideShare
             $params['slideshow_tags'] = "";
         }
 
+        $httpClient = $this->getHttpClient();
 
-        $client = $this->getHttpClient();
-        $client->setUri(self::SERVICE_UPLOAD_URI);
-        $client->setParameterPost($params);
-        $client->setFileUpload($filename, "slideshow_srcfile");
+        $request = new HttpRequest;
+        $request->setUri(self::SERVICE_UPLOAD_URI);
+        $request->getPost()->fromArray($params);
+        $request->setMethod(HttpRequest::METHOD_POST);
+        $request->getFile()->set('slideshow_srcfile', $filename);
+        $httpClient->setEncType(HttpClient::ENC_URLENCODED);
 
         try {
-            $response = $client->request('POST');
-        } catch(Client\Exception $e) {
-            throw new Client\Exception\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
+            $response = $httpClient->send();
+        } catch(HttpException\ExceptionInterface $e) {
+            throw new HttpException\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
         }
 
         $sxe = simplexml_load_string($response->getBody());
@@ -390,16 +384,19 @@ class SlideShare
         $cache_key = md5("__zendslideshare_cache_ss_$ss_id");
 
         if (!$retval = $cache->getItem($cache_key)) {
-            $client = $this->getHttpClient();
 
-            $client->setUri(self::SERVICE_GET_SHOW_URI);
-            $client->setParameterPost($params);
-            $client->setMethod(Http\Request::METHOD_POST);
+            $httpClient = $this->getHttpClient();
+
+            $request = new HttpRequest;
+            $request->setUri(self::SERVICE_GET_SHOW_URI);
+            $request->getPost()->fromArray($params);
+            $request->setMethod(HttpRequest::METHOD_POST);
+            $httpClient->setEncType(HttpClient::ENC_URLENCODED);
 
             try {
-                $response = $client->send();
-            } catch(Client\Exception $e) {
-                throw new Client\Exception\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
+                $response = $httpClient->send();
+            } catch(HttpException\ExceptionInterface $e) {
+                throw new HttpException\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
             }
 
             $sxe = simplexml_load_string($response->getBody());
@@ -526,16 +523,18 @@ class SlideShare
 
         if (!$retval = $cache->getItem($cache_key)) {
 
-            $client = $this->getHttpClient();
+            $httpClient = $this->getHttpClient();
 
-            $client->setUri($queryUri);
-            $client->setParameterPost($params);
-            $client->setMethod(Http\Request::METHOD_POST);
+            $request = new HttpRequest;
+            $request->setUri($queryUri);
+            $request->getPost()->fromArray($params);
+            $request->setMethod(HttpRequest::METHOD_POST);
+            $httpClient->setEncType(HttpClient::ENC_URLENCODED);
 
             try {
-                $response = $client->send();
-            } catch(Client\Exception $e) {
-                throw new Client\Exception\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
+                $response = $httpClient->send();
+            } catch(HttpException\ExceptionInterface $e) {
+                throw new HttpException\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
             }
 
             $sxe = simplexml_load_string($response->getBody());
@@ -589,16 +588,18 @@ class SlideShare
 
         if (!$retval = $cache->getItem($cache_key)) {
 
-            $client = $this->getHttpClient();
+            $httpClient = $this->getHttpClient();
 
-            $client->setUri(self::SERVICE_SEARCH_SLIDESHOWS_URI);
-            $client->setParameterPost($params);
-            $client->setMethod(Http\Request::METHOD_POST);
+            $request = new HttpRequest;
+            $request->setUri(self::SERVICE_SEARCH_SLIDESHOWS_URI);
+            $request->getPost()->fromArray($params);
+            $request->setMethod(HttpRequest::METHOD_POST);
+            $httpClient->setEncType(HttpClient::ENC_URLENCODED);
 
             try {
-                $response = $client->send();
-            } catch(Client\Exception $e) {
-                throw new Client\Exception\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
+                $response = $httpClient->send();
+            } catch(HttpException\ExceptionInterface $e) {
+                throw new HttpException\RuntimeException("Service Request Failed: {$e->getMessage()}", 0, $e);
             }
 
             $sxe = simplexml_load_string($response->getBody());

@@ -57,33 +57,21 @@ class Escaper
     /**
      * Static Matcher which escapes characters for HTML Attribute contexts
      *
-<<<<<<< HEAD
-     * @var Closure
-=======
      * @var callable
->>>>>>> Zend\Escaper (micro) optimisations
      */
     protected $htmlAttrMatcher;
 
     /**
      * Static Matcher which escapes characters for Javascript contexts
      *
-<<<<<<< HEAD
-     * @var Closure
-=======
      * @var callable
->>>>>>> Zend\Escaper (micro) optimisations
      */
     protected $jsMatcher;
 
     /**
      * Static Matcher which escapes characters for CSS Attribute contexts
      *
-<<<<<<< HEAD
-     * @var Closure
-=======
      * @var callable
->>>>>>> Zend\Escaper (micro) optimisations
      */
     protected $cssMatcher;
 
@@ -132,8 +120,8 @@ class Escaper
             $this->encoding = $encoding;
         }
 
-        if (version_compare(\PHP_VERSION, '5.4') >= 0) {
-            $this->htmlSpecialCharsFlags = \ENT_QUOTES | \ENT_SUBSTITUTE;
+        if (defined('ENT_SUBSTITUTE')) {
+            $this->htmlSpecialCharsFlags|= \ENT_SUBSTITUTE;
         }
 
         // set matcher callbacks

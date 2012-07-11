@@ -30,23 +30,23 @@ class TimeSync implements IteratorAggregate
     /**
      * Contains array of timeserver objects
      *
-     * @var array
+     * @var AbstractProtocol[]
      */
-    protected $_timeservers = array();
+    protected $timeservers = array();
 
     /**
      * Holds a reference to the timeserver that is currently being used
      *
-     * @var object
+     * @var AbstractProtocol
      */
-    protected $_current;
+    protected $current;
 
     /**
      * Allowed timeserver schemes
      *
      * @var array
      */
-    protected $_allowedSchemes = array(
+    protected $allowedSchemes = array(
         'Ntp',
         'Sntp',
     );
@@ -62,10 +62,10 @@ class TimeSync implements IteratorAggregate
     );
 
     /**
-     * Zend_TimeSync constructor
+     * Constructor
      *
-     * @param  string|array $target - OPTIONAL single timeserver, or an array of timeservers.
-     * @param  string       $alias  - OPTIONAL an alias for this timeserver
+     * @param string|array $target OPTIONAL single timeserver, or an array of timeservers.
+     * @param string       $alias  OPTIONAL an alias for this timeserver
      */
     public function __construct($target = null, $alias = null)
     {
@@ -82,7 +82,7 @@ class TimeSync implements IteratorAggregate
      */
     public function getIterator()
     {
-        return new ArrayObject($this->_timeservers);
+        return new ArrayObject($this->timeservers);
     }
 
     /**
@@ -104,25 +104,25 @@ class TimeSync implements IteratorAggregate
      * );
      * </code>
      *
-     * If no port number has been suplied, the default matching port
+     * If no port number has been supplied, the default matching port
      * number will be used.
      *
      * Supported protocols are:
      * - ntp
      * - sntp
      *
-     * @param  string|array $target - Single timeserver, or an array of timeservers.
-     * @param  string       $alias  - OPTIONAL an alias for this timeserver
+     * @param  string|array $target Single timeserver, or an array of timeservers.
+     * @param  string       $alias  OPTIONAL an alias for this timeserver
      * @throws Exception\ExceptionInterface
      */
     public function addServer($target, $alias = null)
     {
         if (is_array($target)) {
-            foreach ($target as $key => $server) {
-                $this->_addServer($server, $key);
+            foreach ($target as $alias => $server) {
+                $this->addAServer($server, $alias);
             }
         } else {
-            $this->_addServer($target, $alias);
+            $this->addAServer($target, $alias);
         }
     }
 
@@ -131,7 +131,7 @@ class TimeSync implements IteratorAggregate
      *
      * This will replace any currently defined options.
      *
-     * @param   array $options - An array of options to be set
+     * @param array $options An array of options to be set
      */
     public static function setOptions(array $options)
     {
@@ -141,15 +141,15 @@ class TimeSync implements IteratorAggregate
     }
 
     /**
-     * Marks a nameserver as current
+     * Marks a timeserver as current
      *
-     * @param   string|integer $alias - The alias from the timeserver to set as current
-     * @throws  Exception\InvalidArgumentException
+     * @param  string|integer $alias The alias from the timeserver to set as current
+     * @throws Exception\InvalidArgumentException
      */
     public function setServer($alias)
     {
-        if (isset($this->_timeservers[$alias]) === true) {
-            $this->_current = $this->_timeservers[$alias];
+        if (isset($this->timeservers[$alias])) {
+            $this->current = $this->timeservers[$alias];
         } else {
             throw new Exception\InvalidArgumentException("'$alias' does not point to valid timeserver");
         }
@@ -158,9 +158,9 @@ class TimeSync implements IteratorAggregate
     /**
      * Returns the value to the option
      *
-     * @param   string $key - The option's identifier
-     * @return  mixed
-     * @throws  Exception\OutOfBoundsException
+     * @param  string $key The option's identifier
+     * @return mixed
+     * @throws Exception\OutOfBoundsException
      */
     public static function getOptions($key = null)
     {
@@ -168,7 +168,7 @@ class TimeSync implements IteratorAggregate
             return self::$options;
         }
 
-        if (isset(self::$options[$key]) === true) {
+        if (isset(self::$options[$key])) {
             return self::$options[$key];
         } else {
             throw new Exception\OutOfBoundsException("'$key' does not point to valid option");
@@ -179,21 +179,21 @@ class TimeSync implements IteratorAggregate
      * Return a specified timeserver by alias
      * If no alias is given it will return the current timeserver
      *
-     * @param   string|integer $alias - The alias from the timeserver to return
-     * @return  object
-     * @throws  Exception\InvalidArgumentException
+     * @param  string|integer $alias The alias from the timeserver to return
+     * @return AbstractProtocol
+     * @throws Exception\InvalidArgumentException
      */
     public function getServer($alias = null)
     {
         if ($alias === null) {
-            if (isset($this->_current) && $this->_current !== false) {
-                return $this->_current;
+            if (isset($this->current) && $this->current !== false) {
+                return $this->current;
             } else {
                 throw new Exception\InvalidArgumentException('there is no timeserver set');
             }
         }
-        if (isset($this->_timeservers[$alias]) === true) {
-            return $this->_timeservers[$alias];
+        if (isset($this->timeservers[$alias])) {
+            return $this->timeservers[$alias];
         } else {
             throw new Exception\InvalidArgumentException("'$alias' does not point to valid timeserver");
         }
@@ -202,7 +202,7 @@ class TimeSync implements IteratorAggregate
     /**
      * Returns information sent/returned from the current timeserver
      *
-     * @return  array
+     * @return array
      */
     public function getInfo()
     {
@@ -221,11 +221,11 @@ class TimeSync implements IteratorAggregate
      */
     public function getDate()
     {
-        foreach ($this->_timeservers as $alias => $server) {
-            $this->_current = $server;
+        foreach ($this->timeservers as $server) {
+            $this->current = $server;
             try {
                 return $server->getDate();
-            } catch (Exception\ExceptionInterface $e) {
+            } catch (Exception\RuntimeException $e) {
                 if (!isset($masterException)) {
                     $masterException = new Exception\RuntimeException($e->getMessage(), $e->getCode());
                 } else {
@@ -240,11 +240,11 @@ class TimeSync implements IteratorAggregate
     /**
      * Adds a timeserver object to the timeserver list
      *
-     * @param  string|array $target   - Single timeserver, or an array of timeservers.
-     * @param  string       $alias    - An alias for this timeserver
+     * @param  string $target Single timeserver.
+     * @param  string $alias  An alias for this timeserver
      * @throws Exception\RuntimeException
      */
-    protected function _addServer($target, $alias)
+    protected function addAServer($target, $alias)
     {
         $pos = strpos($target, '://');
         if ($pos) {
@@ -261,7 +261,7 @@ class TimeSync implements IteratorAggregate
             if ($posbr and ($pos > $posbr)) {
                 $port = substr($address, $pos + 1);
                 $address = substr($address, 0, $pos);
-            } else if (!$posbr and $pos) {
+            } elseif (!$posbr and $pos) {
                 $port = substr($address, $pos + 1);
                 $address = substr($address, 0, $pos);
             } else {
@@ -272,13 +272,17 @@ class TimeSync implements IteratorAggregate
         }
 
         $protocol = ucfirst(strtolower($protocol));
-        if (!in_array($protocol, $this->_allowedSchemes)) {
+        if (!in_array($protocol, $this->allowedSchemes)) {
             throw new Exception\RuntimeException("'$protocol' is not a supported protocol");
         }
 
         $className = 'Zend\\TimeSync\\' . $protocol;
-        $timeServerObj = new $className($address, $port);
+        if ($port) {
+            $timeServerObj = new $className($address, $port);
+        } else {
+            $timeServerObj = new $className($address);
+        }
 
-        $this->_timeservers[$alias] = $timeServerObj;
+        $this->timeservers[$alias] = $timeServerObj;
     }
 }

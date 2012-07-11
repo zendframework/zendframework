@@ -23,44 +23,51 @@ abstract class AbstractProtocol
     /**
      * Holds the current socket connection
      *
-     * @var array
+     * @var resource
      */
-    protected $_socket;
+    protected $socket;
 
     /**
-     * Exceptions that might have occured
+     * Exceptions that might have occurred
      *
      * @var array
      */
-    protected $_exceptions;
+    protected $exceptions;
 
     /**
      * Hostname for timeserver
      *
      * @var string
      */
-    protected $_timeserver;
+    protected $timeserver;
+
+    /**
+     * Port number for this timeserver
+     *
+     * @var integer
+     */
+    protected $port;
 
     /**
      * Holds information passed/returned from timeserver
      *
      * @var array
      */
-    protected $_info = array();
+    protected $info = array();
 
     /**
      * Abstract method that prepares the data to send to the timeserver
      *
-     * @return mixed
+     * @return string
      */
-    abstract protected function _prepare();
+    abstract protected function prepare();
 
     /**
      * Abstract method that reads the data returned from the timeserver
      *
-     * @return mixed
+     * @return string
      */
-    abstract protected function _read();
+    abstract protected function read();
 
     /**
      * Abstract method that writes data to to the timeserver
@@ -68,7 +75,7 @@ abstract class AbstractProtocol
      * @param  string $data Data to write
      * @return void
      */
-    abstract protected function _write($data);
+    abstract protected function write($data);
 
     /**
      * Abstract method that extracts the binary data returned from the timeserver
@@ -76,7 +83,7 @@ abstract class AbstractProtocol
      * @param  string|array $data Data returned from the timeserver
      * @return integer
      */
-    abstract protected function _extract($data);
+    abstract protected function extract($data);
 
     /**
      * Connect to the specified timeserver.
@@ -84,16 +91,16 @@ abstract class AbstractProtocol
      * @return void
      * @throws Exception\RuntimeException When the connection failed
      */
-    protected function _connect()
+    protected function connect()
     {
-        $socket = @fsockopen($this->_timeserver, $this->_port, $errno, $errstr,
+        $socket = @fsockopen($this->timeserver, $this->port, $errno, $errstr,
                              TimeSync::$options['timeout']);
         if ($socket === false) {
             throw new Exception\RuntimeException('could not connect to ' .
-                "'$this->_timeserver' on port '$this->_port', reason: '$errstr'");
+                "'$this->timeserver' on port '$this->port', reason: '$errstr'");
         }
 
-        $this->_socket = $socket;
+        $this->socket = $socket;
     }
 
     /**
@@ -101,25 +108,25 @@ abstract class AbstractProtocol
      *
      * @return void
      */
-    protected function _disconnect()
+    protected function disconnect()
     {
-        @fclose($this->_socket);
-        $this->_socket = null;
+        @fclose($this->socket);
+        $this->socket = null;
     }
 
     /**
      * Return information sent/returned from the timeserver
      *
-     * @return  array
+     * @return array
      */
     public function getInfo()
     {
-        if (empty($this->_info) === true) {
-            $this->_write($this->_prepare());
-            $timestamp = $this->_extract($this->_read());
+        if (empty($this->info)) {
+            $this->write($this->prepare());
+            $this->extract($this->read());
         }
 
-        return $this->_info;
+        return $this->info;
     }
 
     /**
@@ -129,12 +136,13 @@ abstract class AbstractProtocol
      */
     public function getDate()
     {
-        $this->_write($this->_prepare());
-        $this->_extract($this->_read());
+        $this->write($this->prepare());
+        $this->extract($this->read());
 
         // Apply to the local time the offset obtained from the server
         $info = $this->getInfo();
         $time = (time() + round($info['offset']));
+
         return new DateTime('@' . $time);
     }
 }

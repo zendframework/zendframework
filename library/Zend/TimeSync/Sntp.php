@@ -19,39 +19,30 @@ namespace Zend\TimeSync;
 class Sntp extends AbstractProtocol
 {
     /**
-     * Port number for this timeserver
-     *
-     * @var integer
-     */
-    protected $_port = 37;
-
-    /**
      * Socket delay
      *
      * @var integer
      */
-    private $_delay;
+    private $delay;
 
     /**
      * Class constructor, sets the timeserver and port number
      *
      * @param string  $timeserver Timeserver to connect to
-     * @param integer $port       Port of the timeserver when it differs from the default port
+     * @param integer $port       (Optional) Port for this timeserver. By default 37
      */
-    public function __construct($timeserver, $port)
+    public function __construct($timeserver, $port = 37)
     {
-        $this->_timeserver = 'udp://' . $timeserver;
-        if ($port !== null) {
-            $this->_port = $port;
-        }
+        $this->timeserver = 'udp://' . $timeserver;
+        $this->port = $port;
     }
 
     /**
      * Prepares the data that will be send to the timeserver
      *
-     * @return array
+     * @return string
      */
-    protected function _prepare()
+    protected function prepare()
     {
         return "\n";
     }
@@ -61,10 +52,10 @@ class Sntp extends AbstractProtocol
      *
      * @return string
      */
-    protected function _read()
+    protected function read()
     {
-        $result       = fread($this->_socket, 49);
-        $this->_delay = (($this->_delay - time()) / 2);
+        $result       = fread($this->socket, 49);
+        $this->delay = (($this->delay - time()) / 2);
 
         return $result;
     }
@@ -75,11 +66,11 @@ class Sntp extends AbstractProtocol
      * @param  string $data Data to write to the timeserver
      * @return void
      */
-    protected function _write($data)
+    protected function write($data)
     {
-        $this->_connect();
-        $this->_delay = time();
-        fwrite($this->_socket, $data);
+        $this->connect();
+        $this->delay = time();
+        fwrite($this->socket, $data);
     }
 
     /**
@@ -88,15 +79,15 @@ class Sntp extends AbstractProtocol
      * @param  string $result Data to extract
      * @return integer
      */
-    protected function _extract($result)
+    protected function extract($result)
     {
         $dec   = hexdec('7fffffff');
         $time  = abs(($dec - hexdec(bin2hex($result))) - $dec);
         $time -= 2208988800;
         // Socket delay
-        $time -= $this->_delay;
+        $time -= $this->delay;
 
-        $this->_info['offset'] = $this->_delay;
+        $this->info['offset'] = $this->delay;
 
         return $time;
     }

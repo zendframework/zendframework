@@ -16,6 +16,7 @@ namespace Zend\TimeSync\Exception;
  * @category   Zend
  * @package    Zend_TimeSync
  */
-class OutOfBoundsException extends \OutOfBoundsException implements ExceptionInterface
+class OutOfBoundsException extends \OutOfBoundsException
+    implements ExceptionInterface
 {
 }

@@ -22,46 +22,10 @@ use Zend\Form\Exception;
 class FormCheckbox extends FormInput
 {
     /**
-     * @var boolean
-     */
-    protected $useHiddenElement = true;
-
-    /**
-     * @var array
-     */
-    protected $defaultStateValues = array(
-        'checkedValue'   => '1',
-        'uncheckedValue' => '0',
-    );
-
-    /**
-     * Returns the option for prefixing the element with a hidden element
-     * for the unset value.
-     *
-     * @return boolean
-     */
-    public function getUseHiddenElement()
-    {
-        return $this->useHiddenElement;
-    }
-
-    /**
-     * Sets the option for prefixing the element with a hidden element
-     * for the unset value.
-     *
-     * @param  boolean $useHiddenElement
-     * @return FormCheckbox
-     */
-    public function setUseHiddenElement($useHiddenElement)
-    {
-        $this->useHiddenElement = (bool) $useHiddenElement;
-        return $this;
-    }
-
-    /**
      * Render a form <input> element from the provided $element
      *
      * @param  ElementInterface $element
+     * @throws \Zend\Form\Exception\DomainException
      * @return string
      */
     public function render(ElementInterface $element)
@@ -74,36 +38,16 @@ class FormCheckbox extends FormInput
             ));
         }
 
-        $attributes = $element->getAttributes();
-        if (empty($attributes['options'])) {
-            $attributes['options'] = array();
-        }
-        $options = $attributes['options'];
-        unset($attributes['options']);
-
-        // default checked/unchecked values
-        foreach ($this->defaultStateValues as $key => $value) {
-            if (empty($options[$key])) {
-                $options[$key] = $value;
-            }
-        }
-
-        if (!is_array($options) && !$options instanceof Traversable) {
-            throw new Exception\DomainException(sprintf(
-                '%s requires that the element has an array or Traversable "options" attribute.',
-                __METHOD__
-            ));
-        }
-
+        $attributes            = $element->getAttributes();
         $attributes['name']    = $name;
         $attributes['checked'] = '';
         $attributes['type']    = $this->getInputType();
         $closingBracket        = $this->getInlineClosingBracket();
 
-        if (isset($attributes['value']) && $attributes['value'] == $options['checkedValue']) {
+        if (isset($attributes['value']) && $attributes['value'] == $element->getCheckedValue()) {
             $attributes['checked'] = 'checked';
         }
-        $attributes['value'] = $options['checkedValue'];
+        $attributes['value'] = $element->getCheckedValue();
 
         $rendered = sprintf(
             '<input %s%s',
@@ -111,14 +55,12 @@ class FormCheckbox extends FormInput
             $closingBracket
         );
 
-        $useHiddenElement = isset($attributes['useHiddenElement'])
-            ? (bool) $attributes['useHiddenElement']
-            : $this->useHiddenElement;
+        $useHiddenElement = $element->useHiddenElement();
 
         if ($useHiddenElement) {
             $hiddenAttributes = array(
                 'name'  => $attributes['name'],
-                'value' => $options['uncheckedValue'],
+                'value' => $element->getUncheckedValue()
             );
 
             $rendered = sprintf(

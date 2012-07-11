@@ -17,6 +17,7 @@ use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Hydrator;
+use Zend\Stdlib\SubClass;
 
 /**
  * @category   Zend
@@ -72,33 +73,20 @@ class Factory
         $spec = $this->validateSpecification($spec, __METHOD__);
         $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Element';
 
-        if ($type instanceof FormInterface) {
+        if (SubClass::isSubclassOf($type, 'Zend\Form\FormInterface')) {
             return $this->createForm($spec);
         }
 
-        if ($type instanceof FieldsetInterface) {
+        if (SubClass::isSubclassOf($type, 'Zend\Form\FieldsetInterface')) {
             return $this->createFieldset($spec);
         }
 
-        if ($type instanceof ElementInterface) {
+        if (SubClass::isSubclassOf($type, 'Zend\Form\ElementInterface')) {
             return $this->createElement($spec);
         }
 
-        if (is_string($type) && class_exists($type)) {
-            $reflection = new ReflectionClass($type);
-            if ($reflection->implementsInterface('Zend\Form\FormInterface')) {
-                return $this->createForm($spec);
-            }
-            if ($reflection->implementsInterface('Zend\Form\FieldsetInterface')) {
-                return $this->createFieldset($spec);
-            }
-            if ($reflection->implementsInterface('Zend\Form\ElementInterface')) {
-                return $this->createElement($spec);
-            }
-        }
-
         throw new Exception\DomainException(sprintf(
-            '%s expects the $spec["type"] to implement one of %s, %s, %s, or a valid full qualified class name; received %s',
+            '%s expects the $spec["type"] to implement one of %s, %s, or %s; received %s',
             __METHOD__,
             'Zend\Form\ElementInterface',
             'Zend\Form\FieldsetInterface',

@@ -11,6 +11,7 @@
 namespace Zend\Di;
 
 use Closure;
+use Zend\Stdlib\SubClass;
 
 class Di implements DependencyInjectionInterface
 {
@@ -309,7 +310,7 @@ class Di implements DependencyInjectionInterface
                                         if ($methodParams) {
                                             foreach ($methodParams as $methodParam) {
                                                 $objectToInjectClass = $this->getClass($objectToInject);
-                                                if ($objectToInjectClass == $methodParam[1] || $this->isSubclassOf($objectToInjectClass, $methodParam[1])) {
+                                                if ($objectToInjectClass == $methodParam[1] || SubClass::isSubclassOf($objectToInjectClass, $methodParam[1])) {
                                                     if ($this->resolveAndCallInjectionMethodForInstance($instance, $typeInjectionMethod, array($methodParam[0] => $objectToInject), $instanceAlias, true, $type)) {
                                                         $calledMethods[$typeInjectionMethod] = true;
                                                     }
@@ -582,7 +583,7 @@ class Di implements DependencyInjectionInterface
                     }
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                    if ($pInstanceClass === $type || $this->isSubclassOf($pInstanceClass, $type)) {
+                    if ($pInstanceClass === $type || SubClass::isSubclassOf($pInstanceClass, $type)) {
                         $computedParams['required'][$fqParamPos] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
@@ -599,7 +600,7 @@ class Di implements DependencyInjectionInterface
                     }
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                    if ($pInstanceClass === $type || $this->isSubclassOf($pInstanceClass, $type)) {
+                    if ($pInstanceClass === $type || SubClass::isSubclassOf($pInstanceClass, $type)) {
                         $computedParams['required'][$fqParamPos] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
@@ -679,28 +680,6 @@ class Di implements DependencyInjectionInterface
     protected function getClass($instance)
     {
         return get_class($instance);
-    }
-
-    /**
-     * @see https://bugs.php.net/bug.php?id=53727
-     *
-     * @param $class
-     * @param $type
-     * @return bool
-     */
-    protected function isSubclassOf($class, $type)
-    {
-        /* @var $isSubclassFunc Closure */
-        static $isSubclassFuncCache = null; // null as unset, array when set
-
-        if ($isSubclassFuncCache === null) {
-            $isSubclassFuncCache = array();
-        }
-
-        if (!array_key_exists($class, $isSubclassFuncCache)) {
-            $isSubclassFuncCache[$class] = class_parents($class, true) + class_implements($class, true);
-        }
-        return (isset($isSubclassFuncCache[$class][$type]));
     }
 
 }

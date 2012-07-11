@@ -10,8 +10,6 @@
 
 namespace Zend\ServiceManager;
 
-use Zend\Code\Reflection\ClassReflection;
-
 /**
  * ServiceManager implementation for managing plugins
  *
@@ -182,24 +180,4 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
         return $instance;
     }
 
-    /**
-     * Determine if a class implements a given interface
-     *
-     * For PHP versions >= 5.3.7, uses is_subclass_of; otherwise, uses
-     * reflection to determine the interfaces implemented.
-     *
-     * @param  string $class
-     * @param  string $type
-     * @return bool
-     */
-    protected function isSubclassOf($class, $type)
-    {
-        if (version_compare(PHP_VERSION, '5.3.7', 'gte')) {
-            return is_subclass_of($class, $type);
-        }
-
-        $r = new ClassReflection($class);
-        $interfaces = $r->getInterfaceNames();
-        return (in_array($type, $interfaces));
-    }
 }

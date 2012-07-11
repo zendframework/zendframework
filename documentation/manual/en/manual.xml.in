@@ -828,6 +828,12 @@
                     <xi:include href="../en/module_specs/zend.form.quick-start.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.form.elements.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.form.elements.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
         </chapter>
 
         <!--<chapter xml:id="zend.gdata"><title>Zend_Gdata</title>-->
@@ -945,7 +951,9 @@
 
         </chapter>
 
-        <chapter xml:id="zend.i18n"><title>Zend_I18n</title>
+        <chapter xml:id="zend.i18n">
+            <title>Zend_I18n</title>
+
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_I18n-Translating.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_I18n-Translating.xml" parse="xml"/>

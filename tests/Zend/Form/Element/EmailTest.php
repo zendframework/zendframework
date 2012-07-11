@@ -17,6 +17,23 @@ use Zend\Validator\EmailAddress as EmailValidator;
 
 class EmailTest extends TestCase
 {
+    public function testProvidesInputSpecificationThatIncludesDefaultValidators()
+    {
+        $element = new EmailElement();
+
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('validators', $inputSpec);
+        $this->assertInternalType('array', $inputSpec['validators']);
+
+        $expectedClasses = array(
+            'Zend\Validator\Regex'
+        );
+        foreach ($inputSpec['validators'] as $validator) {
+            $class = get_class($validator);
+            $this->assertTrue(in_array($class, $expectedClasses), $class);
+        }
+    }
+
     public function testProvidesInputSpecificationThatIncludesValidatorsBasedOnAttributes()
     {
         $element = new EmailElement();
@@ -36,7 +53,7 @@ class EmailTest extends TestCase
             $this->assertTrue(in_array($class, $expectedClasses), $class);
             switch ($class) {
                 case 'Zend\Validator\Explode':
-                    $this->assertInstanceOf('Zend\Validator\EmailAddress', $validator->getValidator());
+                    $this->assertInstanceOf('Zend\Validator\Regex', $validator->getValidator());
                     break;
                 default:
                     break;

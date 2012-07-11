@@ -101,9 +101,9 @@ class DateTime extends Element implements InputProviderInterface
                      ? $this->attributes['min'] : '1970-01-01T00:00:00Z';
 
         return new DateStepValidator(array(
-            'format'       => PhpDateTime::ISO8601,
-            'baseValue'    => $baseValue,
-            'step' => new DateInterval("PT{$stepValue}M"),
+            'format'    => PhpDateTime::ISO8601,
+            'baseValue' => $baseValue,
+            'step'      => new DateInterval("PT{$stepValue}M"),
         ));
     }
 

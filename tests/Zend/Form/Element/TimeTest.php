@@ -23,7 +23,7 @@ class TimeTest extends TestCase
             'inclusive' => true,
             'min'       => '00:00:00',
             'max'       => '00:01:00',
-            'step'      => '1',
+            'step'      => '60',
         ));
 
         $inputSpec = $element->getInputSpecification();
@@ -52,7 +52,7 @@ class TimeTest extends TestCase
                     $this->assertEquals('00:01:00', $validator->getMax());
                     break;
                 case 'Zend\Validator\DateStep':
-                    $dateInterval = new \DateInterval('PT1M');
+                    $dateInterval = new \DateInterval('PT60S');
                     $this->assertEquals($dateInterval, $validator->getStep());
                     break;
                 default:

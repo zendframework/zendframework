@@ -183,18 +183,19 @@ class Element implements ElementInterface
     /**
      * Clear all attributes
      *
-     * @return void
+     * @return Element|ElementInterface
      */
     public function clearAttributes()
     {
         $this->attributes = array();
+        return $this;
     }
 
     /**
      * Set the label used for this element
      *
      * @param $label
-     * @return ElementInterface
+     * @return Element|ElementInterface
      */
     public function setLabel($label)
     {
@@ -219,7 +220,7 @@ class Element implements ElementInterface
      * Set the attributes to use with the label
      *
      * @param array $labelAttributes
-     * @return Element
+     * @return Element|ElementInterface
      */
     public function setLabelAttributes(array $labelAttributes)
     {

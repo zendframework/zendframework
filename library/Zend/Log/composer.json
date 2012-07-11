@@ -4,7 +4,8 @@
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
-        "log"
+        "log",
+        "logging"
     ],
     "autoload": {
         "psr-0": {
@@ -13,9 +14,12 @@
     },
     "target-dir": "Zend/Log",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
-        "zendframework/zend-mail": "Zend\\Mail component"
+        "zendframework/zend-db": "Zend\\Db component",
+        "zendframework/zend-mail": "Zend\\Mail component",
+        "zendframework/zend-validator": "Zend\\Validator component"
     }
 }

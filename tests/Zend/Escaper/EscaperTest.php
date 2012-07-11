@@ -59,10 +59,10 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
         '0'     => '0',
         '9'     => '9',
         /* Basic control characters and null */
-        "\r"    => '&#x0d;',
-        "\n"    => '&#x0a;',
+        "\r"    => '&#x0D;',
+        "\n"    => '&#x0A;',
         "\t"    => '&#x09;',
-        "\0"    => '&#xfffd;', // should use Unicode replacement char
+        "\0"    => '&#xFFFD;', // should use Unicode replacement char
         /* Encode chars as named entities where possible */
         '<'     => '&lt;',
         '>'     => '&gt;',
@@ -74,8 +74,8 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
 
     protected $jsSpecialChars = array(
         /* HTML special chars - escape without exception to hex */
-        '<'     => '\\x3c',
-        '>'     => '\\x3e',
+        '<'     => '\\x3C',
+        '>'     => '\\x3E',
         '\''    => '\\x27',
         '"'     => '\\x22',
         '&'     => '\\x26',
@@ -93,8 +93,8 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
         '0'     => '0',
         '9'     => '9',
         /* Basic control characters and null */
-        "\r"    => '\\x0d',
-        "\n"    => '\\x0a',
+        "\r"    => '\\x0D',
+        "\n"    => '\\x0A',
         "\t"    => '\\x09',
         "\0"    => '\\x00',
         /* Encode spaces for quoteless attribute protection */
@@ -138,17 +138,17 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
 
     protected $cssSpecialChars = array(
         /* HTML special chars - escape without exception to hex */
-        '<'     => '\\3c ',
-        '>'     => '\\3e ',
+        '<'     => '\\3C ',
+        '>'     => '\\3E ',
         '\''    => '\\27 ',
         '"'     => '\\22 ',
         '&'     => '\\26 ',
         /* Characters beyond ASCII value 255 to unicode escape */
         'Ā'     => '\\100 ',
         /* Immune chars excluded */
-        ','     => '\\2c ',
-        '.'     => '\\2e ',
-        '_'     => '\\5f ',
+        ','     => '\\2C ',
+        '.'     => '\\2E ',
+        '_'     => '\\5F ',
         /* Basic alnums exluded */
         'a'     => 'a',
         'A'     => 'A',
@@ -157,8 +157,8 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
         '0'     => '0',
         '9'     => '9',
         /* Basic control characters and null */
-        "\r"    => '\\d ',
-        "\n"    => '\\a ',
+        "\r"    => '\\D ',
+        "\n"    => '\\A ',
         "\t"    => '\\9 ',
         "\0"    => '\\0 ',
         /* Encode spaces for quoteless attribute protection */

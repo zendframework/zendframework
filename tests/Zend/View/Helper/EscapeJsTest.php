@@ -86,11 +86,11 @@ class EscapeJsTest extends TestCase
             ),
         );
         $expected = array(
-            'foo' => '\x3cb\x3ebar\x3c\x2fb\x3e',
+            'foo' => '\x3Cb\x3Ebar\x3C\x2Fb\x3E',
             'baz' => array(
-                '\x3cem\x3ebat\x3c\x2fem\x3e',
+                '\x3Cem\x3Ebat\x3C\x2Fem\x3E',
                 'second' => array(
-                    '\x3ci\x3ethird\x3c\x2fi\x3e',
+                    '\x3Ci\x3Ethird\x3C\x2Fi\x3E',
                 ),
             ),
         );
@@ -103,7 +103,7 @@ class EscapeJsTest extends TestCase
         $object = new TestAsset\Stringified;
         $test = $this->helper->__invoke($object);
         $this->assertEquals(
-            'ZendTest\x5cView\x5cHelper\x5cTestAsset\x5cStringified',
+            'ZendTest\x5CView\x5CHelper\x5CTestAsset\x5CStringified',
             $test
         );
     }
@@ -123,11 +123,11 @@ class EscapeJsTest extends TestCase
         $object->array = $original;
 
         $expected = array(
-            'foo' => '\x3cb\x3ebar\x3c\x2fb\x3e',
+            'foo' => '\x3Cb\x3Ebar\x3C\x2Fb\x3E',
             'baz' => array(
-                '\x3cem\x3ebat\x3c\x2fem\x3e',
+                '\x3Cem\x3Ebat\x3C\x2Fem\x3E',
                 'second' => array(
-                    '\x3ci\x3ethird\x3c\x2fi\x3e',
+                    '\x3Ci\x3Ethird\x3C\x2Fi\x3E',
                 ),
             ),
         );
@@ -152,11 +152,11 @@ class EscapeJsTest extends TestCase
         }
 
         $expected = array(
-            'foo' => '\x3cb\x3ebar\x3c\x2fb\x3e',
+            'foo' => '\x3Cb\x3Ebar\x3C\x2Fb\x3E',
             'baz' => array(
-                '\x3cem\x3ebat\x3c\x2fem\x3e',
+                '\x3Cem\x3Ebat\x3C\x2Fem\x3E',
                 'second' => array(
-                    '\x3ci\x3ethird\x3c\x2fi\x3e',
+                    '\x3Ci\x3Ethird\x3C\x2Fi\x3E',
                 ),
             ),
         );

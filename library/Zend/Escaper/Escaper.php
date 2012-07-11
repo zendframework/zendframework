@@ -257,7 +257,7 @@ class Escaper
         if (($ord <= 0x1f && $chr != "\t" && $chr != "\n" && $chr != "\r")
             || ($ord >= 0x7f && $ord <= 0x9f)
         ) {
-            return '&#xfffd;';
+            return '&#xFFFD;';
         }
 
         /**
@@ -269,19 +269,20 @@ class Escaper
         }
 
         $hex = bin2hex($chr);
-        $int = hexdec($hex);
-        if (isset(static::$htmlNamedEntityMap[$int])) {
-            return '&' . static::$htmlNamedEntityMap[$int] . ';';
+        $ord = hexdec($hex);
+        if (isset(static::$htmlNamedEntityMap[$ord])) {
+            return '&' . static::$htmlNamedEntityMap[$ord] . ';';
         }
 
         /**
-         * Per OWASP recommendations, we'll use hex entities for any other
-         * characters where a named entity does not exist.
+         * Per OWASP recommendations, we'll use upper hex entities
+         * for any other characters where a named entity does not exist.
          */
-        if ($int > 255) {
-            $hex = str_pad($hex, 4, '0', \STR_PAD_LEFT);
+        if ($ord > 255) {
+            return sprintf('&#x%04X;', $ord);
+        } else {
+            return sprintf('&#x%02X;', $ord);
         }
-        return '&#x' . $hex . ';';
     }
 
     /**
@@ -295,10 +296,10 @@ class Escaper
     {
         $chr = $matches[0];
         if (strlen($chr) == 1) {
-            return '\\x' . bin2hex($chr);
+            return sprintf('\\x%02X', ord($chr));
         } else {
             $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
-            return '\\u' . str_pad(bin2hex($chr), 4, '0', \STR_PAD_LEFT);
+            return sprintf('\\u%04s', strtoupper(bin2hex($chr)));
         }
     }
 
@@ -312,14 +313,13 @@ class Escaper
     public function cssMatcher($matches)
     {
         $chr = $matches[0];
-        if ($chr === "\0") {
-            return '\\0 ';
-        } elseif (strlen($chr) == 1) {
-            return '\\' . ltrim(bin2hex($chr), '0') . ' ';
+        if (strlen($chr) == 1) {
+            $ord = ord($chr);
         } else {
             $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
-            return '\\' . ltrim(bin2hex($chr), '0') . ' ';
+            $ord = hexdec(bin2hex($chr));
         }
+        return sprintf('\\%X ', $ord);
     }
 
     /**

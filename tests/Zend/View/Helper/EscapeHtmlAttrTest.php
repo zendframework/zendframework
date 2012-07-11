@@ -86,11 +86,11 @@ class EscapeHtmlAttrTest extends TestCase
             ),
         );
         $expected = array(
-            'foo' => '&lt;b&gt;bar&lt;&#x2f;b&gt;',
+            'foo' => '&lt;b&gt;bar&lt;&#x2F;b&gt;',
             'baz' => array(
-                '&lt;em&gt;bat&lt;&#x2f;em&gt;',
+                '&lt;em&gt;bat&lt;&#x2F;em&gt;',
                 'second' => array(
-                    '&lt;i&gt;third&lt;&#x2f;i&gt;',
+                    '&lt;i&gt;third&lt;&#x2F;i&gt;',
                 ),
             ),
         );
@@ -103,7 +103,7 @@ class EscapeHtmlAttrTest extends TestCase
         $object = new TestAsset\Stringified;
         $test = $this->helper->__invoke($object);
         $this->assertEquals(
-            'ZendTest&#x5c;View&#x5c;Helper&#x5c;TestAsset&#x5c;Stringified',
+            'ZendTest&#x5C;View&#x5C;Helper&#x5C;TestAsset&#x5C;Stringified',
             $test
         );
     }
@@ -123,11 +123,11 @@ class EscapeHtmlAttrTest extends TestCase
         $object->array = $original;
 
         $expected = array(
-            'foo' => '&lt;b&gt;bar&lt;&#x2f;b&gt;',
+            'foo' => '&lt;b&gt;bar&lt;&#x2F;b&gt;',
             'baz' => array(
-                '&lt;em&gt;bat&lt;&#x2f;em&gt;',
+                '&lt;em&gt;bat&lt;&#x2F;em&gt;',
                 'second' => array(
-                    '&lt;i&gt;third&lt;&#x2f;i&gt;',
+                    '&lt;i&gt;third&lt;&#x2F;i&gt;',
                 ),
             ),
         );
@@ -152,11 +152,11 @@ class EscapeHtmlAttrTest extends TestCase
         }
 
         $expected = array(
-            'foo' => '&lt;b&gt;bar&lt;&#x2f;b&gt;',
+            'foo' => '&lt;b&gt;bar&lt;&#x2F;b&gt;',
             'baz' => array(
-                '&lt;em&gt;bat&lt;&#x2f;em&gt;',
+                '&lt;em&gt;bat&lt;&#x2F;em&gt;',
                 'second' => array(
-                    '&lt;i&gt;third&lt;&#x2f;i&gt;',
+                    '&lt;i&gt;third&lt;&#x2F;i&gt;',
                 ),
             ),
         );

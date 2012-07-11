@@ -17,6 +17,7 @@
         "zendframework/zend-mime": "self.version"
     },
     "suggest": {
-        "zendframework/zend-validator": "Zend\\Validator component"
+        "zendframework/zend-validator": "Zend\\Validator component",
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component"
     }
 }

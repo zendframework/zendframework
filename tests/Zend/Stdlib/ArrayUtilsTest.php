@@ -12,7 +12,7 @@ namespace ZendTest\Stdlib;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
-use \ArrayObject;
+use ArrayObject;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Config\Config;
 

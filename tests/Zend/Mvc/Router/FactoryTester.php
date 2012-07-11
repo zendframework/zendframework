@@ -11,7 +11,7 @@
 namespace ZendTest\Mvc\Router;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use \ArrayIterator;
+use ArrayIterator;
 
 /**
  * Helper to test route factories.

@@ -27,43 +27,10 @@ class InboxFeedTest extends \PHPUnit_Framework_TestCase
 {
 
     public function setUp() {
-        $this->feedText = file_get_contents(
-            'Zend/GData/YouTube/_files/InboxFeedDataSample1.xml',
-            true);
         $this->V2feedText = file_get_contents(
             'Zend/GData/YouTube/_files/InboxFeedDataSampleV2.xml',
             true);
         $this->feed = new YouTube\InboxFeed();
-    }
-
-    private function verifyAllSamplePropertiesAreCorrect ($inboxFeed) {
-        $this->assertEquals('http://gdata.youtube.com/feeds/api/users/' .
-            'default/inbox',
-            $inboxFeed->id->text);
-        $this->assertEquals('2008-06-10T20:55:40.271Z',
-            $inboxFeed->updated->text);
-        $this->assertEquals('http://schemas.google.com/g/2005#kind',
-            $inboxFeed->category[0]->scheme);
-        $this->assertEquals(
-            'http://gdata.youtube.com/schemas/2007#videoMessage',
-            $inboxFeed->category[0]->term);
-        $this->assertEquals(
-            'http://www.youtube.com/img/pic_youtubelogo_123x63.gif',
-            $inboxFeed->logo->text);
-        $this->assertEquals('text', $inboxFeed->title->type);
-        $this->assertEquals('Inbox of andyland74',
-            $inboxFeed->title->text);
-        $this->assertEquals('self', $inboxFeed->getLink('self')->rel);
-        $this->assertEquals('application/atom+xml',
-            $inboxFeed->getLink('self')->type);
-        $this->assertEquals(
-            'http://gdata.youtube.com/feeds/api/users/andyland74/inbox?...',
-            $inboxFeed->getLink('self')->href);
-        $this->assertEquals('andyland74', $inboxFeed->author[0]->name->text);
-        $this->assertEquals(
-            'http://gdata.youtube.com/feeds/api/users/andyland74',
-            $inboxFeed->author[0]->uri->text);
-        $this->assertEquals(1, $inboxFeed->totalResults->text);
     }
 
     private function verifyAllSamplePropertiesAreCorrectV2 ($inboxFeed) {
@@ -118,18 +85,6 @@ class InboxFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($this->feed->extensionAttributes));
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements() {
-        $this->feed->transferFromXML($this->feedText);
-        $this->assertTrue(is_array($this->feed->extensionElements));
-        $this->assertEquals(0, count($this->feed->extensionElements));
-    }
-
-    public function testSampleEntryShouldHaveNoExtensionAttributes() {
-        $this->feed->transferFromXML($this->feedText);
-        $this->assertTrue(is_array($this->feed->extensionAttributes));
-        $this->assertEquals(0, count($this->feed->extensionAttributes));
-    }
-
     public function testEmptyInboxFeedToAndFromStringShouldMatch() {
         $feedXml = $this->feed->saveXML();
         $newInboxFeed = new YouTube\InboxFeed();
@@ -138,24 +93,9 @@ class InboxFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feedXml == $newInboxFeedXml);
     }
 
-    public function testSamplePropertiesAreCorrect () {
-        $this->feed->transferFromXML($this->feedText);
-        $this->verifyAllSamplePropertiesAreCorrect($this->feed);
-    }
-
     public function testSamplePropertiesAreCorrectV2 () {
         $this->feed->transferFromXML($this->V2feedText);
         $this->verifyAllSamplePropertiesAreCorrectV2($this->feed);
-    }
-
-    public function testConvertInboxFeedToAndFromString() {
-        $this->feed->transferFromXML($this->feedText);
-        $feedXml = $this->feed->saveXML();
-        $newInboxFeed = new YouTube\InboxFeed();
-        $newInboxFeed->transferFromXML($feedXml);
-        $this->verifyAllSamplePropertiesAreCorrect($newInboxFeed);
-        $newInboxFeedXml = $newInboxFeed->saveXML();
-        $this->assertEquals($feedXml, $newInboxFeedXml);
     }
 
     public function testConvertInboxFeedToAndFromStringV2() {

@@ -329,14 +329,7 @@ class Form extends Fieldset implements FormInterface
         }
 
         if (!is_array($this->data)) {
-            $hydrator = $this->getHydrator();
-            if (!$hydrator instanceof Hydrator\HydratorInterface) {
-                throw new Exception\DomainException(sprintf(
-                    '%s is unable to validate as there is no data currently set',
-                    __METHOD__
-                ));
-            }
-            $data = $hydrator->extract($this->object);
+            $data = $this->extract();
             if (!is_array($data)) {
                 throw new Exception\DomainException(sprintf(
                     '%s is unable to validate as there is no data currently set',
@@ -481,8 +474,8 @@ class Form extends Fieldset implements FormInterface
 
     /**
      * Set the input filter used by this form
-     * 
-     * @param  InputFilterInterface $inputFilter 
+     *
+     * @param  InputFilterInterface $inputFilter
      * @return FormInterface
      */
     public function setInputFilter(InputFilterInterface $inputFilter)
@@ -494,7 +487,7 @@ class Form extends Fieldset implements FormInterface
 
     /**
      * Retrieve input filter used by this form
-     * 
+     *
      * @return null|InputFilterInterface
      */
     public function getInputFilter()
@@ -550,10 +543,6 @@ class Form extends Fieldset implements FormInterface
             }
 
             $name = $element->getName();
-            if ($inputFilter->has($name)) {
-                // if we already have an input by this name, use it
-                continue;
-            }
 
             // Create an input based on the specification returned from the element
             $spec  = $element->getInputSpecification();
@@ -600,31 +589,21 @@ class Form extends Fieldset implements FormInterface
     }
 
     /**
-     * Extract values from the bound object and populate
-     * the form elements
-     * 
-     * @return void
+     * Recursively extract values for elements and sub-fieldsets, and populate form values
+     *
+     * @return array
      */
     protected function extract()
     {
-        if (!is_object($this->object)) {
-            return;
-        }
-        $hydrator = $this->getHydrator();
-        if (!$hydrator instanceof Hydrator\HydratorInterface) {
-            return;
-        }
-
-        $values = $hydrator->extract($this->object);
-        if (!is_array($values)) {
-            // Do nothing if the hydrator returned a non-array
-            return;
-        }
-
         if (null !== $this->baseFieldset) {
-            $this->baseFieldset->populateValues($values);
+            $name = $this->baseFieldset->getName();
+            $values[$name] = $this->baseFieldset->extract();
+            $this->baseFieldset->populateValues($values[$name]);
         } else {
+            $values = parent::extract();
             $this->populateValues($values);
         }
+
+        return $values;
     }
 }

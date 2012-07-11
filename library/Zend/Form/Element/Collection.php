@@ -164,6 +164,28 @@ class Collection extends Fieldset
     }
 
     /**
+     * Bind values to the object
+     *
+     * @param array $values
+     * @return array|mixed|void
+     */
+    public function bindValues(array $values = array())
+    {
+        $collection = array();
+        foreach ($values as $name => $value) {
+            $element = $this->get($name);
+
+            if ($element instanceof FieldsetInterface) {
+                $collection[] = $element->bindValues($value);
+            } else {
+                $collection[] = $value;
+            }
+        }
+
+        return $collection;
+    }
+
+    /**
      * Set the initial count of target element
      *
      * @param $count
@@ -329,6 +351,27 @@ class Collection extends Fieldset
         if ($this->shouldCreateTemplate) {
             $this->remove($this->templatePlaceholder);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function extract()
+    {
+        // In this specific situation, object holds the data, that is too say an array
+        if (!is_array($this->object)) {
+            return array();
+        }
+
+        $values = array();
+        foreach ($this->object as $key => $value) {
+            if ($value instanceof $this->targetElement->object) {
+                $this->targetElement->object = $value;
+                $values[$key] = $this->targetElement->extract();
+            }
+        }
+
+        return $values;
     }
 
     /**

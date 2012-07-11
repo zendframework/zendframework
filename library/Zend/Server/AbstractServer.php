@@ -21,25 +21,6 @@ use ReflectionClass;
 abstract class AbstractServer implements Server
 {
     /**
-     * @deprecated
-     * @var array List of PHP magic methods (lowercased)
-     */
-    protected static $magic_methods = array(
-        '__call',
-        '__clone',
-        '__construct',
-        '__destruct',
-        '__get',
-        '__isset',
-        '__set',
-        '__set_state',
-        '__sleep',
-        '__tostring',
-        '__unset',
-        '__wakeup',
-    );
-
-    /**
      * @var bool Flag; whether or not overwriting existing methods is allowed
      */
     protected $overwriteExistingMethods = false;
@@ -72,22 +53,6 @@ abstract class AbstractServer implements Server
     public function getFunctions()
     {
         return $this->table;
-    }
-
-    /**
-     * Lowercase a string
-     *
-     * Lowercase's a string by reference
-     *
-     * @deprecated
-     * @param  string $string value
-     * @param  string $key
-     * @return string Lower cased string
-     */
-    public static function lowerCase(&$value, &$key)
-    {
-        trigger_error(__CLASS__ . '::' . __METHOD__ . '() is deprecated and will be removed in a future version', E_USER_NOTICE);
-        return $value = strtolower($value);
     }
 
     /**

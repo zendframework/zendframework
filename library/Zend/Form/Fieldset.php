@@ -486,15 +486,8 @@ class Fieldset extends Element implements FieldsetInterface
             $element = $this->byName[$name];
 
             if ($element instanceof Collection) {
-                $collection = array();
-                foreach ($value as $subName => $subValue) {
-                    $collection[] = $element->get($subName)->bindValues($subValue);
-                }
-
-                $value = $collection;
-            }
-
-            if ($element instanceof FieldsetInterface && is_object($element->object)) {
+                $value = $element->bindValues($value);
+            } elseif ($element instanceof FieldsetInterface && is_object($element->object)) {
                 $value = $element->bindValues($value);
             }
 
@@ -525,6 +518,48 @@ class Fieldset extends Element implements FieldsetInterface
     public function useAsBaseFieldset()
     {
         return $this->useAsBaseFieldset;
+    }
+
+    /**
+     * Extract values from the bound object
+     *
+     * @return array
+     */
+    protected function extract()
+    {
+        if (!is_object($this->object)) {
+            return array();
+        }
+        $hydrator = $this->getHydrator();
+        if (!$hydrator instanceof Hydrator\HydratorInterface) {
+            return array();
+        }
+
+        $values = $hydrator->extract($this->object);
+
+        if (!is_array($values)) {
+            // Do nothing if the hydrator returned a non-array
+            return array();
+        }
+
+        // Recursively extract and populate values for nested fieldsets
+        foreach ($this->fieldsets as $fieldset) {
+            $name = $fieldset->getName();
+
+            if (isset($values[$name])) {
+                $object = $values[$name];
+
+                // Is the object bound to the fieldset of the same type ? Note that we are using a little hack
+                // here, as in case of collection, we bind array to object instance, and let the collection extract
+                // the data
+                if ($fieldset instanceof Collection || (is_object($object) && $object instanceof $fieldset->object)) {
+                    $fieldset->object = $object;
+                    $values[$name] = $fieldset->extract();
+                }
+            }
+        }
+
+        return $values;
     }
 
     /**

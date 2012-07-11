@@ -1043,7 +1043,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  string $filename
      * @throws Exception\RuntimeException
-     * @return void
+     * @return string
      * @since  LiveDocx 2.0
      */
     public function downloadImage($filename)
@@ -1191,32 +1191,4 @@ class MailMerge extends AbstractLiveDocx
 
         return array_merge($arrayKeys, $arrayValues);
     }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Return supported image formats (lowercase).
-     *
-     * Note, this method is DEPRECATED and will be removed in the next major
-     * release of the Zend Framework implementation of the LiveDocx service.
-     *
-     * @return array
-     * @since  LiveDocx 1.2
-     * @deprecated since LiveDocx 2.0
-     */
-    public function getImageFormats()
-    {
-        $replacement = 'getImageExportFormats';
-
-        $errorMessage = sprintf(
-            "%s::%s is deprecated as of LiveDocx 2.0. "
-            . "It has been replaced by %s::%s() (drop in replacement)",
-            __CLASS__, __FUNCTION__, __CLASS__, $replacement
-        );
-
-        trigger_error($errorMessage, E_USER_NOTICE);
-
-        return $this->$replacement();
-    }
-
 }

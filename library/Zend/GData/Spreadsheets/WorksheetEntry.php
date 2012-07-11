@@ -136,7 +136,7 @@ class WorksheetEntry extends \Zend\GData\Entry
      */
     public function getContentsAsRows()
     {
-        $service = new Spreadsheets($this->getHttpClient());
+        $service = new Spreadsheets($this->getService()->getHttpClient());
         return $service->getSpreadsheetListFeedContents($this);
     }
 
@@ -154,7 +154,7 @@ class WorksheetEntry extends \Zend\GData\Entry
      */
     public function getContentsAsCells($range = null, $empty = false)
     {
-        $service = new Spreadsheets($this->getHttpClient());
+        $service = new Spreadsheets($this->getService()->getHttpClient());
         return $service->getSpreadsheetCellFeedContents($this, $range, $empty);
     }
 

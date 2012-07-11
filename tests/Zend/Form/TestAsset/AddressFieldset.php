@@ -19,7 +19,7 @@ class AddressFieldset extends Fieldset implements InputFilterProviderInterface
     public function __construct()
     {
         parent::__construct('address');
-        $this->setHydrator(new ClassMethodsHydrator())
+        $this->setHydrator(new ClassMethodsHydrator(false))
              ->setObject(new Entity\Address());
 
         $street = new \Zend\Form\Element('street', array('label' => 'Street'));

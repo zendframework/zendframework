@@ -190,6 +190,14 @@ class Factory
             ));
         }
 
+        if (isset($spec['object'])) {
+            $this->prepareAndInjectObject($spec['object'], $fieldset, __METHOD__);
+        }
+
+        if (isset($spec['hydrator'])) {
+            $this->prepareAndInjectHydrator($spec['hydrator'], $fieldset, __METHOD__);
+        }
+
         if (isset($spec['elements'])) {
             $this->prepareAndInjectElements($spec['elements'], $fieldset, __METHOD__);
         }
@@ -236,8 +244,8 @@ class Factory
             $this->prepareAndInjectInputFilter($spec['input_filter'], $form, __METHOD__);
         }
 
-        if (isset($spec['hydrator'])) {
-            $this->prepareAndInjectHydrator($spec['hydrator'], $form, __METHOD__);
+        if (isset($spec['validation_group'])) {
+            $this->prepareAndInjectValidationGroup($spec['validation_group'], $form, __METHOD__);
         }
 
         return $form;
@@ -318,6 +326,81 @@ class Factory
     }
 
     /**
+     * Prepare and inject an object
+     *
+     * Takes a string indicating a class name, instantiates the class
+     * by that name, and injects the class instance as the bound object.
+     *
+     * @param  string           $objectName
+     * @param  FieldsetInterface $fieldset
+     * @param  string           $method
+     * @throws Exception\DomainException
+     * @return void
+     */
+    protected function prepareAndInjectObject($objectName, FieldsetInterface $fieldset, $method)
+    {
+        if (!is_string($objectName)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects string class name; received "%s"',
+                $method,
+                (is_object($objectName) ? get_class($objectName) : gettype($objectName))
+            ));
+        }
+
+        if (!class_exists($objectName)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects string class name to be a valid class name; received "%s"',
+                $method,
+                $objectName
+            ));
+        }
+
+        $fieldset->setObject(new $objectName);
+    }
+
+    /**
+     * Prepare and inject a named hydrator
+     *
+     * Takes a string indicating a hydrator class name, instantiates the class
+     * by that name, and injects the hydrator instance into the form.
+     *
+     * @param  string $hydratorName
+     * @param  FieldsetInterface $fieldset
+     * @param  string $method
+     * @return void
+     * @throws Exception\DomainException if $hydratorName is not a string, does not resolve to a known class, or the class does not implement Hydrator\HydratorInterface
+     */
+    protected function prepareAndInjectHydrator($hydratorName, FieldsetInterface $fieldset, $method)
+    {
+        if (!is_string($hydratorName)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects string hydrator class name; received "%s"',
+                $method,
+                (is_object($hydratorName) ? get_class($hydratorName) : gettype($hydratorName))
+            ));
+        }
+
+        if (!class_exists($hydratorName)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects string hydrator name to be a valid class name; received "%s"',
+                $method,
+                $hydratorName
+            ));
+        }
+
+        $hydrator = new $hydratorName;
+        if (!$hydrator instanceof Hydrator\HydratorInterface) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects a valid implementation of Zend\Form\Hydrator\HydratorInterface; received "%s"',
+                $method,
+                $hydratorName
+            ));
+        }
+
+        $fieldset->setHydrator($hydrator);
+    }
+
+    /**
      * Prepare an input filter instance and inject in the provided form
      *
      * If the input filter specified is a string, assumes it is a class name,
@@ -361,45 +444,28 @@ class Factory
     }
 
     /**
-     * Prepare and inject a named hydrator
+     * Prepare a validaiton group and inject in the provided form
      *
-     * Takes a string indicating a hydrator class name, instantiates the class
-     * by that name, and injects the hydrator instance into the form.
+     * Takes an array of elements names
      *
-     * @param  string $hydratorName
+     * @param  string|array|Traversable $spec
      * @param  FormInterface $form
      * @param  string $method
      * @return void
-     * @throws Exception\DomainException if $hydratorName is not a string, does not resolve to a known class, or the class does not implement Hydrator\HydratorInterface
+     * @throws Exception\DomainException if validation group given is not an array
      */
-    protected function prepareAndInjectHydrator($hydratorName, FormInterface $form, $method)
+    protected function prepareAndInjectValidationGroup($spec, FormInterface $form, $method)
     {
-        if (!is_string($hydratorName)) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects string hydrator class name; received "%s"',
-                $method,
-                (is_object($hydratorName) ? get_class($hydratorName) : gettype($hydratorName))
-            ));
+        if (!is_array($spec)) {
+            if (!class_exists($spec)) {
+                throw new Exception\DomainException(sprintf(
+                    '%s expects an array for validation group; received "%s"',
+                    $method,
+                    $spec
+                ));
+            }
         }
 
-        if (!class_exists($hydratorName)) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects string hydrator name to be a valid class name; received "%s"',
-                $method,
-                $hydratorName
-            ));
-        }
-
-        $hydrator = new $hydratorName;
-        if (!$hydrator instanceof Hydrator\HydratorInterface) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects a valid implementation of Zend\Form\Hydrator\HydratorInterface; received "%s"',
-                $method,
-                $hydratorName
-            ));
-        }
-
-        $form->setHydrator($hydrator);
-        return;
+        $form->setValidationGroup($spec);
     }
 }

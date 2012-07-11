@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Queue\Adapter;
+
 use Zend\Db\Select;
 
 /*

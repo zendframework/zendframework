@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Mime;
+
 use Zend\Mime;
 
 /**

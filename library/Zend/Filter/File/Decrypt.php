@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Filter\File;
+
 use Zend\Filter;
 use Zend\Filter\Exception;
 

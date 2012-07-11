@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Wildfire\Plugin;
+
 use Zend\Wildfire;
 use Zend\Wildfire\Plugin\Exception;
 

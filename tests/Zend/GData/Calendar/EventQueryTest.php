@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData\Calendar;
+
 use Zend\GData\Calendar;
 use Zend\GData\App;
 

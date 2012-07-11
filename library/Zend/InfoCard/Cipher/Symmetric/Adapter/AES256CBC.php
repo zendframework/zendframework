@@ -9,6 +9,7 @@
  */
 
 namespace Zend\InfoCard\Cipher\Symmetric\Adapter;
+
 use Zend\InfoCard\Cipher;
 
 /**

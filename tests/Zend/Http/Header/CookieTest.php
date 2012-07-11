@@ -9,9 +9,9 @@
  */
 
 namespace ZendTest\Http;
+
 use Zend\Http\Header\Cookie;
 use Zend\Http\Header\SetCookie;
-//use Zend\Uri;
 
 /**
  * Zend_Http_Cookie unit tests

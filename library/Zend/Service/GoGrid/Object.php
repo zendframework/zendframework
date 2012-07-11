@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\GoGrid;
+
 class Object
 {
      /**

@@ -9,6 +9,7 @@
  */
 
 namespace Zend\InfoCard\XML\EncryptedData;
+
 use Zend\InfoCard\XML;
 use Zend\InfoCard\XML\AbstractElement;
 

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Test\PHPUnit\Db\Operation;
+
 use Zend\Test\PHPUnit\Db;
 
 /**

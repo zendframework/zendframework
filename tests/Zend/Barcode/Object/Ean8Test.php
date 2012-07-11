@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Barcode\Object;
+
 use Zend\Barcode\Object\Ean8;
 
 /**

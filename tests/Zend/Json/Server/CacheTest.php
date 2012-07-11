@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Json\Server;
+
 use Zend\Json\Server;
 
 /**

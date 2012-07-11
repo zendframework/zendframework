@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Queue;
+
 use Zend\Queue;
 use Zend\Log;
 use Zend\Log\Writer;

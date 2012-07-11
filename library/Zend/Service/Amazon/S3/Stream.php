@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\Amazon\S3;
+
 use Zend\Service\Amazon;
 use Zend\Service\Amazon\S3\Exception;
 

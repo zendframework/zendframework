@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Service\Delicious;
+
 use Zend\Service\Delicious;
 
 /**

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Memory;
+
 use Zend\Memory;
 use Zend\Memory\Container;
 

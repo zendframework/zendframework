@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\Amazon\Authentication;
+
 use Zend\Crypt\Hmac;
 
 /**

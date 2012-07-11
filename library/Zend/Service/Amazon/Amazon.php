@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\Amazon;
+
 use Zend\Crypt\Hmac;
 use Zend\Rest\Client;
 use Zend\Service;

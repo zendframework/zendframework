@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Dom;
+
 use Zend\Dom\Query;
 use Zend\Dom\NodeList;
 use Zend\Dom\Exception\ExceptionInterface as DOMException;

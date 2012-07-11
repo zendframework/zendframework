@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Pdf;
+
 use Zend\Pdf;
 
 /** \Zend\Pdf\Page */

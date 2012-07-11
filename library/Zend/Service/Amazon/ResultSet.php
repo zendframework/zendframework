@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\Amazon;
+
 use Zend\Service\Amazon\Exception;
 
 /**

@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Test;
+
 use Zend\Db\Statement;
 
 /**

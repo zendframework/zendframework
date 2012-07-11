@@ -9,6 +9,7 @@
  */
 
 namespace Zend\GData\Docs;
+
 use Zend\GData\App;
 
 /**

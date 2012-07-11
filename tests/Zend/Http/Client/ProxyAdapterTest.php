@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Http\Client;
+
 use Zend\Http\Client;
 
 /**

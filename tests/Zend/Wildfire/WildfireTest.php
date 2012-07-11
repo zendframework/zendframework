@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Wildfire;
+
 use Zend\Wildfire\Channel;
 use Zend\Wildfire\Plugin\FirePhp;
 use Zend\Controller;

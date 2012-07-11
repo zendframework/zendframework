@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\EventManager;
+
 use Zend\EventManager\GlobalEventManager;
 use Zend\EventManager\EventManager;
 

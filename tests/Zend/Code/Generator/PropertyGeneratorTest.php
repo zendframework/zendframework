@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Code\Generator;
+
 use Zend\Code\Generator\PropertyGenerator;
 use Zend\Code\Generator\PropertyValueGenerator;
 

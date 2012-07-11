@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Queue\Stomp;
+
 use Zend\Queue\Stomp;
 
 /*

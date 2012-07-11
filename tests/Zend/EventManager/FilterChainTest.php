@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Stdlib;
+
 use Zend\EventManager\FilterChain;
 use Zend\Stdlib\CallbackHandler;
 

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Json\Server\Smd;
+
 use Zend\Json\Server\Smd\Service;
 use Zend\Json\Server;
 

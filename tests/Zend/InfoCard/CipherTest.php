@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\InfoCard;
+
 use Zend\InfoCard\Cipher\PKI\Adapter;
 use Zend\InfoCard\Cipher;
 

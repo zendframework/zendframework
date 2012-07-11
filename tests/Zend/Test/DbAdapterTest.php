@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Test;
+
 use Zend\Test;
 
 /**

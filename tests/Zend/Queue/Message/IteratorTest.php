@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Queue\Message;
+
 use Zend\Queue;
 
 /*

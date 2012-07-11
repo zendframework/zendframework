@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Markup;
+
 use Zend\Markup;
 
 /**

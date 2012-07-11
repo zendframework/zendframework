@@ -9,6 +9,7 @@
  */
 
 namespace Zend\GData\Spreadsheets;
+
 use Zend\GData\App;
 
 /**

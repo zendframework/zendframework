@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Pdf\InternalType\Object;
+
 use Zend\Pdf\InternalType;
 use Zend\Pdf\ObjectFactory;
 

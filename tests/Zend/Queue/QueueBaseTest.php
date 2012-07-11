@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Queue;
+
 use Zend\Queue;
 use Zend\Queue\Adapter;
 

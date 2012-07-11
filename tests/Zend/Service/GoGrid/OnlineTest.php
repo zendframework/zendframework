@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Service\GoGrid;
+
 use Zend\Service\GoGrid\Server;
 
 

@@ -28,7 +28,7 @@ class Response
      *
      * @var boolean
      */
-    protected $_status = null;
+    protected $status = null;
 
     /**
      * Error code
@@ -38,7 +38,7 @@ class Response
      *
      * @var string
      */
-    protected $_errorCode = null;
+    protected $errorCode = null;
 
     /**
      * Class constructor used to construct a response
@@ -71,9 +71,9 @@ class Response
     public function setStatus($status)
     {
         if ($status === 'true') {
-            $this->_status = true;
+            $this->status = true;
         } else {
-            $this->_status = false;
+            $this->status = false;
         }
 
         return $this;
@@ -86,7 +86,7 @@ class Response
      */
     public function getStatus()
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -107,7 +107,7 @@ class Response
      */
     public function setErrorCode($errorCode)
     {
-        $this->_errorCode = $errorCode;
+        $this->errorCode = $errorCode;
 
         return $this;
     }
@@ -119,7 +119,7 @@ class Response
      */
     public function getErrorCode()
     {
-        return $this->_errorCode;
+        return $this->errorCode;
     }
 
     /**

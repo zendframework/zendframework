@@ -11,6 +11,8 @@
 namespace ZendTest\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2\Exception;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
 
 /**
  * Zend\Service\Amazon\Ec2\Availabilityzones test case.
@@ -26,34 +28,28 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend\Service\Amazon\Ec2\Availabilityzones
+     * @var \Zend\Service\Amazon\Ec2\AvailabilityZones
      */
-    private $availabilityZones;
+    protected $availabilityZones;
+
+    /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
 
     /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->availabilityZones = new Ec2\AvailabilityZones('access_key', 'secret_access_key');
-
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        Ec2\AvailabilityZones::setDefaultHttpClient($client);
-
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        unset($this->adapter);
-
-        $this->availabilityZones = null;
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
+        $this->availabilityZones = new Ec2\AvailabilityZones('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     public function testDescribeSingleAvailabilityZone()
@@ -75,7 +71,7 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </availabilityZoneInfo>\r\n"
                     . "</DescribeAvailabilityZonesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $response = $this->availabilityZones->describe('us-east-1a');
         $this->assertInternalType('array', $response);
@@ -110,7 +106,7 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </availabilityZoneInfo>\r\n"
                     . "</DescribeAvailabilityZonesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $response = $this->availabilityZones->describe();
 

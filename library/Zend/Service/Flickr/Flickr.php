@@ -13,7 +13,8 @@ namespace Zend\Service\Flickr;
 use DOMDocument;
 use DOMXPath;
 use Zend\I18n\Validator\Int as IntValidator;
-use Zend\Rest\Client\RestClient;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Request as HttpRequest;
 use Zend\Validator\Between as BetweenValidator;
 
 /**
@@ -36,12 +37,9 @@ class Flickr
     public $apiKey;
 
     /**
-     * Reference to REST client object
-     *
-     * @var RestClient
+     * @var HttpClient
      */
-    protected $restClient = null;
-
+    protected $httpClient = null;
 
     /**
      * Performs object initializations
@@ -51,11 +49,29 @@ class Flickr
      *
      * @param  string $apiKey Your Flickr API key
      */
-    public function __construct($apiKey)
+    public function __construct($apiKey, HttpClient $httpClient = null)
     {
-        $this->apiKey = (string)$apiKey;
+        $this->apiKey = (string) $apiKey;
+        $this->setHttpClient($httpClient ?: new HttpClient);
     }
 
+    /**
+     * @param HttpClient $httpClient
+     * @return Flickr
+     */
+    public function setHttpClient(HttpClient $httpClient)
+    {
+        $this->httpClient = $httpClient;
+        return $this;
+    }
+
+    /**
+     * @return HttpClient
+     */
+    public function getHttpClient()
+    {
+        return $this->httpClient;
+    }
 
     /**
      * Find Flickr photos by tag.
@@ -91,9 +107,10 @@ class Flickr
         $this->validateTagSearch($options);
 
         // now search for photos
-        $restClient = $this->getRestClient();
-        $restClient->getHttpClient()->resetParameters();
-        $response = $restClient->restGet('/services/rest/', $options);
+        $request = new HttpRequest;
+        $request->setUri('/services/rest/');
+        $request->getQuery()->fromArray($options);
+        $response = $this->httpClient->send($request);
 
         if ($response->isServerError() || $response->isClientError()) {
             throw new Exception\RuntimeException('An error occurred sending request. Status code: '
@@ -147,9 +164,10 @@ class Flickr
         $this->validateUserSearch($options);
 
         // now search for photos
-        $restClient = $this->getRestClient();
-        $restClient->getHttpClient()->resetParameters();
-        $response = $restClient->restGet('/services/rest/', $options);
+        $request = new HttpRequest;
+        $request->setUri('/services/rest/');
+        $request->getQuery()->fromArray($options);
+        $response = $this->httpClient->send($request);
 
         if ($response->isServerError() || $response->isClientError()) {
             throw new Exception\RuntimeException('An error occurred sending request. Status code: '
@@ -191,9 +209,10 @@ class Flickr
         $this->validateGroupPoolGetPhotos($options);
 
         // now search for photos
-        $restClient = $this->getRestClient();
-        $restClient->getHttpClient()->resetParameters();
-        $response = $restClient->restGet('/services/rest/', $options);
+        $request = new HttpRequest;
+        $request->setUri('/services/rest/');
+        $request->getQuery()->fromArray($options);
+        $response = $this->httpClient->send($request);
 
         if ($response->isServerError() || $response->isClientError()) {
             throw new Exception\RuntimeException('An error occurred sending request. Status code: '
@@ -229,9 +248,10 @@ class Flickr
             throw new Exception\InvalidArgumentException('You must supply a username');
         }
 
-        $restClient = $this->getRestClient();
-        $restClient->getHttpClient()->resetParameters();
-        $response = $restClient->restGet('/services/rest/', $options);
+        $request = new HttpRequest;
+        $request->setUri('/services/rest/');
+        $request->getQuery()->fromArray($options);
+        $response = $this->httpClient->send($request);
 
         if ($response->isServerError() || $response->isClientError()) {
             throw new Exception\RuntimeException('An error occurred sending request. Status code: '
@@ -266,9 +286,10 @@ class Flickr
 
         $options = array('api_key' => $this->apiKey, 'method' => $method, 'find_email' => (string)$email);
 
-        $restClient = $this->getRestClient();
-        $restClient->getHttpClient()->resetParameters();
-        $response = $restClient->restGet('/services/rest/', $options);
+        $request = new HttpRequest;
+        $request->setUri('/services/rest/');
+        $request->getQuery()->fromArray($options);
+        $response = $this->httpClient->send($request);
 
         if ($response->isServerError() || $response->isClientError()) {
             throw new Exception\RuntimeException('An error occurred sending request. Status code: '
@@ -300,9 +321,10 @@ class Flickr
 
         $options = array('api_key' => $this->apiKey, 'method' => $method, 'photo_id' => $id);
 
-        $restClient = $this->getRestClient();
-        $restClient->getHttpClient()->resetParameters();
-        $response = $restClient->restGet('/services/rest/', $options);
+        $request = new HttpRequest;
+        $request->setUri('/services/rest/');
+        $request->getQuery()->fromArray($options);
+        $response = $this->httpClient->send($request);
 
         $dom = new DOMDocument();
         $dom->loadXML($response->getBody());
@@ -316,22 +338,6 @@ class Flickr
 
         return $retval;
     }
-
-
-    /**
-     * Returns a reference to the REST client, instantiating it if necessary
-     *
-     * @return RestClient
-     */
-    public function getRestClient()
-    {
-        if (null === $this->restClient) {
-            $this->restClient = new RestClient(self::URI_BASE);
-        }
-
-        return $this->restClient;
-    }
-
 
     /**
      * Validate User Search Options
@@ -347,19 +353,16 @@ class Flickr
 
         $this->compareOptions($options, $validOptions);
 
-        $between = new BetweenValidator(1, 500, true);
-        if (!$between->isValid($options['per_page'])) {
+        if ($options['per_page'] < 1 || $options['per_page'] > 500) {
             throw new Exception\DomainException($options['per_page'] . ' is not valid for the "per_page" option');
         }
 
-        $int = new IntValidator();
-        $int->setLocale('en');
-        if (!$int->isValid($options['page'])) {
+        if (!is_int($options['page'])) {
             throw new Exception\DomainException($options['page'] . ' is not valid for the "page" option');
         }
 
         // validate extras, which are delivered in csv format
-        if ($options['extras']) {
+        if (isset($options['extras'])) {
             $extras      = explode(',', $options['extras']);
             $validExtras = array('license', 'date_upload', 'date_taken', 'owner_name', 'icon_server');
             foreach ($extras as $extra) {
@@ -390,19 +393,16 @@ class Flickr
 
         $this->compareOptions($options, $validOptions);
 
-        $between = new BetweenValidator(1, 500, true);
-        if (!$between->isValid($options['per_page'])) {
+        if ($options['per_page'] < 1 || $options['per_page'] > 500) {
             throw new Exception\DomainException($options['per_page'] . ' is not valid for the "per_page" option');
         }
 
-        $int = new IntValidator();
-        $int->setLocale('en');
-        if (!$int->isValid($options['page'])) {
+        if (!is_int($options['page'])) {
             throw new Exception\DomainException($options['page'] . ' is not valid for the "page" option');
         }
 
         // validate extras, which are delivered in csv format
-        if ($options['extras']) {
+        if (isset($options['extras'])) {
             $extras      = explode(',', $options['extras']);
             $validExtras = array('license', 'date_upload', 'date_taken', 'owner_name', 'icon_server');
             foreach ($extras as $extra) {
@@ -429,14 +429,11 @@ class Flickr
 
         $this->compareOptions($options, $validOptions);
 
-        $between = new BetweenValidator(1, 500, true);
-        if (!$between->isValid($options['per_page'])) {
+        if ($options['per_page'] < 1 || $options['per_page'] > 500) {
             throw new Exception\DomainException($options['per_page'] . ' is not valid for the "per_page" option');
         }
 
-        $int = new IntValidator();
-        $int->setLocale('en');
-        if (!$int->isValid($options['page'])) {
+        if (!is_int($options['page'])) {
             throw new Exception\DomainException($options['page'] . ' is not valid for the "page" option');
         }
 

@@ -83,9 +83,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function testTagSearchBasic()
     {
-        $this->flickr->getRestClient()
-            ->getHttpClient()
-            ->setAdapter($this->httpClientAdapterTest);
+        $this->flickr->getHttpClient()->setAdapter($this->httpClientAdapterTest);
 
         $this->httpClientAdapterTest->setResponse($this->loadResponse(__FUNCTION__));
 
@@ -155,9 +153,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function testUserSearchExceptionUsernameInvalid()
     {
-        $this->flickr->getRestClient()
-            ->getHttpClient()
-            ->setAdapter($this->httpClientAdapterTest);
+        $this->flickr->getHttpClient()->setAdapter($this->httpClientAdapterTest);
 
         $this->httpClientAdapterTest->setResponse($this->loadResponse(__FUNCTION__));
 
@@ -175,9 +171,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function testUserSearchExceptionEmailInvalid()
     {
-        $this->flickr->getRestClient()
-            ->getHttpClient()
-            ->setAdapter($this->httpClientAdapterTest);
+        $this->flickr->getHttpClient()->setAdapter($this->httpClientAdapterTest);
 
         $this->httpClientAdapterTest->setResponse($this->loadResponse(__FUNCTION__));
 
@@ -255,7 +249,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
             'Zend\Service\Flickr\Exception\DomainException',
             '"page" option'
         );
-        $this->flickrProxy->proxyValidateUserSearch(array('per_page' => 10, 'page' => 1.23));
+        $this->flickrProxy->proxyValidateUserSearch(array('per_page' => 10, 'page' => 'foo'));
     }
 
     /**
@@ -321,9 +315,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function testGroupPoolGetPhotosBasic()
     {
-        $this->flickr->getRestClient()
-            ->getHttpClient()
-            ->setAdapter($this->httpClientAdapterTest);
+        $this->flickr->getHttpClient()->setAdapter($this->httpClientAdapterTest);
 
         $this->httpClientAdapterTest->setResponse($this->loadResponse(__FUNCTION__));
 
@@ -434,9 +426,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function testGroupPoolGetPhotosExceptionGroupIdInvalid()
     {
-        $this->flickr->getRestClient()
-            ->getHttpClient()
-            ->setAdapter($this->httpClientAdapterTest);
+        $this->flickr->getHttpClient()->setAdapter($this->httpClientAdapterTest);
 
         $this->httpClientAdapterTest->setResponse($this->loadResponse(__FUNCTION__));
 
@@ -484,7 +474,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     protected function saveResponse($name)
     {
         file_put_contents("$this->filesPath/$name.response",
-                          $this->flickr->getRestClient()->getHttpClient()->getLastResponse()->asString());
+                          $this->flickr->getHttpClient()->getLastResponse()->asString());
     }
 
     /**

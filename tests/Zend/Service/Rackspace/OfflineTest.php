@@ -32,19 +32,22 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      *
      * @var Zend\Service\Rackspace\Files
      */
-    protected $_files;
+    protected $files;
+
     /**
      * HTTP client adapter for testing
      *
      * @var Zend\Http\Client\Adapter\Test
      */
-    protected $_httpClientAdapterTest;
+    protected $httpClientAdapterTest;
+
     /**
      * Path to test data files
      *
      * @var string
      */
-    protected $_filesPath;
+    protected $filesPath;
+
     /**
      * Sets up this test case
      *
@@ -52,10 +55,11 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_files = new RackspaceFiles('foo','bar');
-        $this->_filesPath   = __DIR__ . '/_files';
-        $this->_httpClientAdapterTest = new HttpTest();
+        $this->files = new RackspaceFiles('foo','bar');
+        $this->filesPath   = __DIR__ . '/_files';
+        $this->httpClientAdapterTest = new HttpTest();
     }
+
     /**
      * Utility method for returning a string HTTP response, which is loaded from a file
      *
@@ -64,8 +68,9 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     protected function _loadResponse($name)
     {
-        return file_get_contents("$this->_filesPath/$name.response");
+        return file_get_contents("$this->filesPath/$name.response");
     }
+
     /**
      * Ensures that __construct() throws an exception when given an empty key attribute
      *
@@ -79,6 +84,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         );
         $file= new RackspaceFiles(null,'bar');
     }
+
     /**
      * Ensures that __construct() throws an exception when given an empty secret attribute
      *
@@ -92,6 +98,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         );
         $file= new RackspaceFiles('foo',null);
     }
+
     /**
      * Test the default authentication URL
      *
@@ -99,8 +106,9 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultAuthUrl()
     {
-        $this->assertEquals($this->_files->getAuthUrl(),RackspaceFiles::US_AUTH_URL,'The default Authentication URL is changed');
+        $this->assertEquals($this->files->getAuthUrl(),RackspaceFiles::US_AUTH_URL,'The default Authentication URL is changed');
     }
+
     /**
      * Test the set of the key
      * 
@@ -109,9 +117,10 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     public function testSetKey()
     {
         $key= '1234567890';
-        $this->_files->setKey($key);
-        $this->assertEquals($this->_files->getKey(),$key);
+        $this->files->setKey($key);
+        $this->assertEquals($this->files->getKey(),$key);
     }
+
     /**
      * Test the set of the user
      *
@@ -120,9 +129,10 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     public function testSetUser()
     {
         $user= 'test';
-        $this->_files->setUser($user);
-        $this->assertEquals($this->_files->getUser(),$user);
+        $this->files->setUser($user);
+        $this->assertEquals($this->files->getUser(),$user);
     }
+
     /**
      * Test the set of an invalid authentication URL
      *
@@ -134,8 +144,9 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
             'Zend\Service\Rackspace\Exception\InvalidArgumentException',
             'The authentication URL is not valid'
         );
-        $this->_files->setAuthUrl('http://test');
+        $this->files->setAuthUrl('http://test');
     }
+
     /**
      * Check the authentication and the results (token, storage_url, cdn_url)
      *
@@ -143,17 +154,18 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticate()
     {
-        $this->_files->getHttpClient()
-                    ->setAdapter($this->_httpClientAdapterTest);
+        $this->files->getHttpClient()
+                    ->setAdapter($this->httpClientAdapterTest);
 
-        $this->_httpClientAdapterTest->setResponse($this->_loadResponse(__FUNCTION__));
+        $this->httpClientAdapterTest->setResponse($this->_loadResponse(__FUNCTION__));
 
-        $this->assertTrue($this->_files->authenticate(),'Authentication failed');
-        $this->assertTrue($this->_files->isSuccessful(),'Authentication call failed');
-        $this->assertEquals($this->_files->getToken(),'0f0223cd-f157-4d04-bb2d-ccda1a5643af','The token is not valid');
-        $this->assertEquals($this->_files->getStorageUrl(),'https://storage101.ord1.clouddrive.com/v1/test','The storage URL is not valid');
-        $this->assertEquals($this->_files->getCdnUrl(),'https://cdn2.clouddrive.com/v1/test','The CDN URL is not valid');
+        $this->assertTrue($this->files->authenticate(),'Authentication failed');
+        $this->assertTrue($this->files->isSuccessful(),'Authentication call failed');
+        $this->assertEquals($this->files->getToken(),'0f0223cd-f157-4d04-bb2d-ccda1a5643af','The token is not valid');
+        $this->assertEquals($this->files->getStorageUrl(),'https://storage101.ord1.clouddrive.com/v1/test','The storage URL is not valid');
+        $this->assertEquals($this->files->getCdnUrl(),'https://cdn2.clouddrive.com/v1/test','The CDN URL is not valid');
     }
+
     /**
      * Test the authentication error (401 Unauthorized - Bad username or password)
      *
@@ -161,15 +173,15 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticateError()
     {
-        $this->_files->getHttpClient()
-                    ->setAdapter($this->_httpClientAdapterTest);
+        $this->files->getHttpClient()
+                    ->setAdapter($this->httpClientAdapterTest);
 
-        $this->_httpClientAdapterTest->setResponse($this->_loadResponse(__FUNCTION__));
+        $this->httpClientAdapterTest->setResponse($this->_loadResponse(__FUNCTION__));
 
-        $this->assertFalse($this->_files->authenticate());
-        $this->assertFalse($this->_files->isSuccessful());
-        $this->assertEquals($this->_files->getErrorCode(),'401');
-        $this->assertEquals($this->_files->getErrorMsg(),'Bad username or password');
+        $this->assertFalse($this->files->authenticate());
+        $this->assertFalse($this->files->isSuccessful());
+        $this->assertEquals($this->files->getErrorCode(),'401');
+        $this->assertEquals($this->files->getErrorMsg(),'Bad username or password');
 
     }
 }

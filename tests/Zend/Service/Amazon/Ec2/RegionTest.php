@@ -10,6 +10,9 @@
 
 namespace ZendTest\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
+
 
 /**
  * Zend\Service\Amazon\Ec\Region test case.
@@ -30,28 +33,23 @@ class RegionTest extends \PHPUnit_Framework_TestCase
     private $regionInstance;
 
     /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
+
+    /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
-    {$this->regionInstance = new Ec2\Region('access_key', 'secret_access_key');
-
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        Ec2\Region::setDefaultHTTPClient($client);
-
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
     {
-        unset($this->adapter);
-
-        $this->Zend_Service_Amazon_Ec2_Availabilityzones = null;
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
+        $this->regionInstance = new Ec2\Region('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     public function testDescribeSingleRegion()
@@ -73,7 +71,7 @@ class RegionTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </regionInfo>\r\n"
                     . "</DescribeRegionsResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $response = $this->regionInstance->describe('us-east-1');
 
@@ -110,7 +108,7 @@ class RegionTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </regionInfo>\r\n"
                     . "</DescribeRegionsResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $response = $this->regionInstance->describe(array('us-east-1','us-west-1'));
 

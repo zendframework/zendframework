@@ -188,6 +188,40 @@ class QueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($result), $result->getXpathQuery());
     }
 
+    public function testXpathPhpFunctionsShouldBeDisableByDefault()
+    {
+        $this->loadHtml();
+        try {
+            $this->query->queryXpath('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]');
+        } catch (\Exception $e) {
+            return ;
+        }
+        $this->assertFails('XPath PHPFunctions should be disable by default');
+    }
+
+    public function testXpathPhpFunctionsShouldBeEnableWithoutParameter()
+    {
+        $this->loadHtml();
+        $this->query->registerXpathPhpFunctions();
+        $result = $this->query->queryXpath('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]');
+        $this->assertEquals('content-type', 
+                            strtolower($result->current()->getAttribute('http-equiv')), 
+                            $result->getXpathQuery());
+    }
+
+    public function testXpathPhpFunctionsShouldBeNotCalledWhenSpecifiedFunction()
+    {
+        $this->loadHtml();
+        try {
+            $this->query->registerXpathPhpFunctions('stripos');
+            $this->query->queryXpath('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]');
+        } catch (\Exception $e) {
+            // $e->getMessage() - Not allowed to call handler 'strtolower()
+            return ;
+        }
+        $this->assertFails('Not allowed to call handler strtolower()');
+    }
+
     /**
      * @group ZF-9243
      */

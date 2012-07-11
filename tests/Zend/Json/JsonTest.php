@@ -163,6 +163,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringOfHtmlSpecialCharsEncodedToUnicodeEscapes()
     {
+        Json\Json::$useBuiltinEncoderDecoder = false;
         $expected = '"\\u003C\\u003E\\u0026\\u0027\\u0022"';
         $string   = '<>&\'"';
         $encoded  = Json\Encoder::encode($string);
@@ -181,8 +182,9 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringOfOtherSpecialCharsEncodedToUnicodeEscapes()
     {
-        $string   = "\\ - \n - \t - \r - " .chr(0x08). " - " .chr(0x0C). " - /";
-        $encoded  = '"\u005C - \u000A - \u0009 - \u000D - \u0008 - \u000C - \u002F"';
+        Json\Json::$useBuiltinEncoderDecoder = false;
+        $string   = "\\ - \n - \t - \r - " .chr(0x08). " - " .chr(0x0C). " - / - \v";
+        $encoded  = '"\u005C - \u000A - \u0009 - \u000D - \u0008 - \u000C - \u002F - \u000B"';
         $this->assertEquals($string, Json\Decoder::decode($encoded));
     }
 

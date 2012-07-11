@@ -27,9 +27,11 @@ interface InputInterface
     public function setRequired($required);
     public function setValidatorChain(ValidatorChain $validatorChain);
     public function setValue($value);
+    public function merge(InputInterface $input);
 
     public function allowEmpty();
     public function breakOnFailure();
+    public function getErrorMessage();
     public function getFilterChain();
     public function getName();
     public function getRawValue();

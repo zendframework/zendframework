@@ -27,7 +27,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
 {
     /**
      * Standard boolean attributes, with expected values for enabling/disabling
-     * 
+     *
      * @var array
      */
     protected $booleanAttributes = array(
@@ -58,7 +58,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
 
     /**
      * Attributes globally valid for all tags
-     * 
+     *
      * @var array
      */
     protected $validGlobalAttributes = array(
@@ -138,7 +138,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
      * Attributes valid for the tag represented by this helper
      *
      * This should be overridden in extending classes
-     * 
+     *
      * @var array
      */
     protected $validTagAttributes = array(
@@ -155,7 +155,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
         $this->getDoctypeHelper()->setDoctype($doctype);
         return $this;
     }
-    
+
     /**
      * Get value for doctype
      *
@@ -177,7 +177,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
         $this->getEscapeHtmlHelper()->setEncoding($encoding);
         return $this;
     }
-    
+
     /**
      * Get character encoding
      *
@@ -192,8 +192,8 @@ abstract class AbstractHelper extends BaseAbstractHelper
      * Create a string of all attribute/value pairs
      *
      * Escapes all attribute values
-     * 
-     * @param  array $attributes 
+     *
+     * @param  array $attributes
      * @return string
      */
     public function createAttributesString(array $attributes)
@@ -221,8 +221,8 @@ abstract class AbstractHelper extends BaseAbstractHelper
      *
      * If no ID attribute present, attempts to use the name attribute.
      * If no name attribute is present, either, returns null.
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @return null|string
      */
     public function getId(ElementInterface $element)
@@ -239,7 +239,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
      * Get the closing bracket for an inline tag
      *
      * Closes as either "/>" for XHTML doctypes or ">" otherwise.
-     * 
+     *
      * @return string
      */
     public function getInlineClosingBracket()
@@ -253,7 +253,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
 
     /**
      * Retrieve the doctype helper
-     * 
+     *
      * @return Doctype
      */
     protected function getDoctypeHelper()
@@ -275,7 +275,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
 
     /**
      * Retrieve the escapeHtml helper
-     * 
+     *
      * @return EscapeHtml
      */
     protected function getEscapeHtmlHelper()
@@ -297,7 +297,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
 
     /**
      * Retrieve the escapeHtmlAttr helper
-     * 
+     *
      * @return EscapeHtmlAttr
      */
     protected function getEscapeHtmlAttrHelper()
@@ -320,12 +320,12 @@ abstract class AbstractHelper extends BaseAbstractHelper
     /**
      * Prepare attributes for rendering
      *
-     * Ensures appropriate attributes are present (e.g., if "name" is present, 
+     * Ensures appropriate attributes are present (e.g., if "name" is present,
      * but no "id", sets the latter to the former).
      *
      * Removes any invalid attributes
-     * 
-     * @param  array $attributes 
+     *
+     * @param  array $attributes
      * @return array
      */
     protected function prepareAttributes(array $attributes)
@@ -361,15 +361,19 @@ abstract class AbstractHelper extends BaseAbstractHelper
      * Prepare a boolean attribute value
      *
      * Prepares the expected representation for the boolean attribute specified.
-     * 
-     * @param  string $attribute 
-     * @param  mixed $value 
+     *
+     * @param  string $attribute
+     * @param  mixed $value
      * @return string
      */
     protected function prepareBooleanAttributeValue($attribute, $value)
     {
+        if (!is_bool($value) && in_array($value, $this->booleanAttributes[$attribute])) {
+            return $value;
+        }
+
         $value = (bool) $value;
-        return ($value 
+        return ($value
             ? $this->booleanAttributes[$attribute]['on']
             : $this->booleanAttributes[$attribute]['off']
         );

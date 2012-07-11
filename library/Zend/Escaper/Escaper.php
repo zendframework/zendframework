@@ -245,7 +245,7 @@ class Escaper
      * @param array $matches
      * @return string
      */
-    public function htmlAttrMatcher($matches)
+    protected function htmlAttrMatcher($matches)
     {
         $chr = $matches[0];
         $ord = ord($chr);
@@ -292,7 +292,7 @@ class Escaper
      * @param array $matches
      * @return string
      */
-    public function jsMatcher($matches)
+    protected function jsMatcher($matches)
     {
         $chr = $matches[0];
         if (strlen($chr) == 1) {
@@ -310,7 +310,7 @@ class Escaper
      * @param array $matches
      * @return string
      */
-    public function cssMatcher($matches)
+    protected function cssMatcher($matches)
     {
         $chr = $matches[0];
         if (strlen($chr) == 1) {

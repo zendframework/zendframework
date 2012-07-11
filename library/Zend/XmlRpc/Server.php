@@ -13,7 +13,6 @@ namespace Zend\XmlRpc;
 use Zend\Server\AbstractServer;
 use Zend\Server\Definition;
 use Zend\Server\Reflection;
-use Zend\Stdlib\SubClass;
 
 /**
  * An XML-RPC server implementation
@@ -439,7 +438,7 @@ class Server extends AbstractServer
      */
     public function setResponseClass($class)
     {
-        if (!class_exists($class) || !SubClass::isSubclassOf($class, 'Zend\XmlRpc\Response')) {
+        if (!class_exists($class) || !self::isSubclassOf($class, 'Zend\XmlRpc\Response')) {
             throw new Server\Exception\InvalidArgumentException('Invalid response class');
 
         }
@@ -587,5 +586,29 @@ class Server extends AbstractServer
         $system = new Server\System($this);
         $this->_system = $system;
         $this->setClass($system, 'system');
+    }
+
+    /**
+     * Checks if the object has this class as one of its parents
+     *
+     * @see https://bugs.php.net/bug.php?id=53727
+     * @see https://github.com/zendframework/zf2/pull/1807
+     *
+     * @param string $className
+     * @param string $type
+     */
+    protected static function isSubclassOf($className, $type)
+    {
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return is_subclass_of($className, $type);
+        }
+        if (is_subclass_of($className, $type)) {
+            return true;
+        }
+        if (!interface_exists($type)) {
+            return false;
+        }
+        $r = new ReflectionClass($className);
+        return $r->implementsInterface($type);
     }
 }

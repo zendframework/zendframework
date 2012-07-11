@@ -11,7 +11,7 @@
 namespace Zend\Di;
 
 use Closure;
-use Zend\Stdlib\SubClass;
+use ReflectionClass;
 
 class Di implements DependencyInjectionInterface
 {
@@ -310,7 +310,7 @@ class Di implements DependencyInjectionInterface
                                         if ($methodParams) {
                                             foreach ($methodParams as $methodParam) {
                                                 $objectToInjectClass = $this->getClass($objectToInject);
-                                                if ($objectToInjectClass == $methodParam[1] || SubClass::isSubclassOf($objectToInjectClass, $methodParam[1])) {
+                                                if ($objectToInjectClass == $methodParam[1] || self::isSubclassOf($objectToInjectClass, $methodParam[1])) {
                                                     if ($this->resolveAndCallInjectionMethodForInstance($instance, $typeInjectionMethod, array($methodParam[0] => $objectToInject), $instanceAlias, true, $type)) {
                                                         $calledMethods[$typeInjectionMethod] = true;
                                                     }
@@ -583,7 +583,7 @@ class Di implements DependencyInjectionInterface
                     }
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                    if ($pInstanceClass === $type || SubClass::isSubclassOf($pInstanceClass, $type)) {
+                    if ($pInstanceClass === $type || self::isSubclassOf($pInstanceClass, $type)) {
                         $computedParams['required'][$fqParamPos] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
@@ -600,7 +600,7 @@ class Di implements DependencyInjectionInterface
                     }
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                    if ($pInstanceClass === $type || SubClass::isSubclassOf($pInstanceClass, $type)) {
+                    if ($pInstanceClass === $type || self::isSubclassOf($pInstanceClass, $type)) {
                         $computedParams['required'][$fqParamPos] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
@@ -682,4 +682,27 @@ class Di implements DependencyInjectionInterface
         return get_class($instance);
     }
 
+    /**
+     * Checks if the object has this class as one of its parents
+     *
+     * @see https://bugs.php.net/bug.php?id=53727
+     * @see https://github.com/zendframework/zf2/pull/1807
+     *
+     * @param string $className
+     * @param string $type
+     */
+    protected static function isSubclassOf($className, $type)
+    {
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return is_subclass_of($className, $type);
+        }
+        if (is_subclass_of($className, $type)) {
+            return true;
+        }
+        if (!interface_exists($type)) {
+            return false;
+        }
+        $r = new ReflectionClass($className);
+        return $r->implementsInterface($type);
+    }
 }

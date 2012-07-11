@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.introduction"><title>Introduction</title>
-    
 
     <para>
         <classname>Zend_TimeSync</classname> is able to receive internet or network time from a time
@@ -18,7 +15,6 @@
     </para>
 
     <note><title>Background</title>
-        
 
         <para>
             <classname>Zend_TimeSync</classname> is not able to change the server's time, but it
@@ -28,7 +24,6 @@
     </note>
 
     <section xml:id="zend.timesync.introduction.why"><title>Why Zend_TimeSync ?</title>
-        
 
         <para>
             So why would someone use <classname>Zend_TimeSync</classname> ?
@@ -79,7 +74,7 @@
 
                 <para>
                     If your application is running on more than one server and these servers' time
-                    bases are not syncronized, you can expect problems within your application when
+                    bases are not synchronized, you can expect problems within your application when
                     part of the application is coming from one server and another part from another
                     server.
                 </para>
@@ -104,7 +99,6 @@
     </section>
 
     <section xml:id="zend.timesync.introduction.ntp"><title>What is NTP ?</title>
-        
 
         <para>
             The Network Time Protocol (<emphasis>NTP</emphasis>) is a protocol
@@ -115,7 +109,6 @@
     </section>
 
     <section xml:id="zend.timesync.introduction.sntp"><title>What is SNTP?</title>
-        
 
         <para>
             The Simple Network Time Protocol (<emphasis>SNTP</emphasis>) is a
@@ -126,7 +119,6 @@
     </section>
 
     <section xml:id="zend.timesync.introduction.problematic"><title>Problematic usage</title>
-        
 
         <para>
             Be warned that when you are using <classname>Zend_TimeSync</classname> you will have to
@@ -137,7 +129,6 @@
     </section>
 
     <section xml:id="zend.timesync.introduction.decision"><title>Decide which server to use</title>
-        
 
         <para>
             You should select the time server that you want to use very carefully according to the

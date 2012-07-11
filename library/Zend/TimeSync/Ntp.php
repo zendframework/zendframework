@@ -21,24 +21,15 @@ use Zend\TimeSync\Exception;
 class Ntp extends AbstractProtocol
 {
     /**
-     * NTP port number (123) assigned by the Internet Assigned Numbers Authority
-     *
-     * @var integer
-     */
-    protected $_port = 123;
-
-    /**
      * NTP class constructor, sets the timeserver and port number
      *
-     * @param string  $timeserver Adress of the timeserver to connect to
-     * @param integer $port       (Optional) Port for this timeserver
+     * @param string  $timeserver Address of the timeserver to connect to
+     * @param integer $port       (Optional) Port for this timeserver. By default 123
      */
     public function __construct($timeserver, $port = 123)
     {
-        $this->_timeserver = 'udp://' . $timeserver;
-        if ($port !== null) {
-            $this->_port = $port;
-        }
+        $this->timeserver = 'udp://' . $timeserver;
+        $this->port = $port;
     }
 
     /**
@@ -50,7 +41,7 @@ class Ntp extends AbstractProtocol
      *
      * @return string
      */
-    protected function _prepare()
+    protected function prepare()
     {
         $frac   = microtime();
         $fracba = ($frac & 0xff000000) >> 24;
@@ -94,7 +85,7 @@ class Ntp extends AbstractProtocol
 
         /*
          * The local time, in timestamp format, at the peer when its latest NTP message
-         * was sent. Contanis an integer and a fractional part
+         * was sent. Contains an integer and a fractional part
          */
         $ntppacket .= chr($secba)  . chr($secbb)  . chr($secbc)  . chr($secbd);
         $ntppacket .= chr($fracba) . chr($fracbb) . chr($fracbc) . chr($fracbd);
@@ -108,14 +99,14 @@ class Ntp extends AbstractProtocol
 
         /*
          * This is the local time, in timestamp format, when the latest NTP message from
-         * the peer arrived. Contanis an integer and a fractional part.
+         * the peer arrived. Contains an integer and a fractional part.
          */
         $ntppacket .= $nulbyte;
         $ntppacket .= $nulbyte;
 
         /*
          * The local time, in timestamp format, at which the
-         * NTP message departed the sender. Contanis an integer
+         * NTP message departed the sender. Contains an integer
          * and a fractional part.
          */
         $ntppacket .= chr($secba)  . chr($secbb)  . chr($secbc)  . chr($secbd);
@@ -130,12 +121,13 @@ class Ntp extends AbstractProtocol
      * @param string $input
      * @return integer
      */
-    protected function _getInteger($input)
+    protected function getInteger($input)
     {
         $f1  = str_pad(ord($input[0]), 2, '0', STR_PAD_LEFT);
         $f1 .= str_pad(ord($input[1]), 2, '0', STR_PAD_LEFT);
         $f1 .= str_pad(ord($input[2]), 2, '0', STR_PAD_LEFT);
         $f1 .= str_pad(ord($input[3]), 2, '0', STR_PAD_LEFT);
+
         return (int) $f1;
     }
 
@@ -145,7 +137,7 @@ class Ntp extends AbstractProtocol
      * @param string $input
      * @return float
      */
-    protected function _getFloat($input)
+    protected function getFloat($input)
     {
         $f1  = str_pad(ord($input[0]), 2, '0', STR_PAD_LEFT);
         $f1 .= str_pad(ord($input[1]), 2, '0', STR_PAD_LEFT);
@@ -154,6 +146,7 @@ class Ntp extends AbstractProtocol
         $f2  = $f1 >> 17;
         $f3  = ($f1 & 0x0001FFFF);
         $f1  = $f2 . '.' . $f3;
+
         return (float) $f1;
     }
 
@@ -163,7 +156,7 @@ class Ntp extends AbstractProtocol
      * @param string $input
      * @return float
      */
-    protected function _getTimestamp($input)
+    protected function getTimestamp($input)
     {
         $f1  = (ord($input[0]) * pow(256, 3));
         $f1 += (ord($input[1]) * pow(256, 2));
@@ -185,35 +178,36 @@ class Ntp extends AbstractProtocol
      * This will return an array with binary data listing:
      *
      * @return array
-     * @throws Exception\ExceptionInterface When timeserver can not be connected
+     * @throws Exception\RuntimeException When timeserver can not be connected
      */
-    protected function _read()
+    protected function read()
     {
-        $flags = ord(fread($this->_socket, 1));
-        $info  = stream_get_meta_data($this->_socket);
+        $flags = ord(fread($this->socket, 1));
+        $info  = stream_get_meta_data($this->socket);
 
         if ($info['timed_out'] === true) {
-            fclose($this->_socket);
+            fclose($this->socket);
             throw new Exception\RuntimeException('could not connect to ' .
-                "'$this->_timeserver' on port '$this->_port', reason: 'server timed out'");
+                "'$this->timeserver' on port '$this->port', reason: 'server timed out'");
         }
 
         $result = array(
             'flags'          => $flags,
-            'stratum'        => ord(fread($this->_socket, 1)),
-            'poll'           => ord(fread($this->_socket, 1)),
-            'precision'      => ord(fread($this->_socket, 1)),
-            'rootdelay'      => $this->_getFloat(fread($this->_socket, 4)),
-            'rootdispersion' => $this->_getFloat(fread($this->_socket, 4)),
-            'referenceid'    => fread($this->_socket, 4),
-            'referencestamp' => $this->_getTimestamp(fread($this->_socket, 8)),
-            'originatestamp' => $this->_getTimestamp(fread($this->_socket, 8)),
-            'receivestamp'   => $this->_getTimestamp(fread($this->_socket, 8)),
-            'transmitstamp'  => $this->_getTimestamp(fread($this->_socket, 8)),
+            'stratum'        => ord(fread($this->socket, 1)),
+            'poll'           => ord(fread($this->socket, 1)),
+            'precision'      => ord(fread($this->socket, 1)),
+            'rootdelay'      => $this->getFloat(fread($this->socket, 4)),
+            'rootdispersion' => $this->getFloat(fread($this->socket, 4)),
+            'referenceid'    => fread($this->socket, 4),
+            'referencestamp' => $this->getTimestamp(fread($this->socket, 8)),
+            'originatestamp' => $this->getTimestamp(fread($this->socket, 8)),
+            'receivestamp'   => $this->getTimestamp(fread($this->socket, 8)),
+            'transmitstamp'  => $this->getTimestamp(fread($this->socket, 8)),
             'clientreceived' => microtime(true)
         );
 
-        $this->_disconnect();
+        $this->disconnect();
+
         return $result;
     }
 
@@ -223,12 +217,12 @@ class Ntp extends AbstractProtocol
      * @param  string $data Data to send to the timeserver
      * @return void
      */
-    protected function _write($data)
+    protected function write($data)
     {
-        $this->_connect();
+        $this->connect();
 
-        fwrite($this->_socket, $data);
-        stream_set_timeout($this->_socket, TimeSync::$options['timeout']);
+        fwrite($this->socket, $data);
+        stream_set_timeout($this->socket, TimeSync::$options['timeout']);
     }
 
     /**
@@ -237,7 +231,7 @@ class Ntp extends AbstractProtocol
      * @param  string|array $binary Data returned from the timeserver
      * @return integer Difference in seconds
      */
-    protected function _extract($binary)
+    protected function extract($binary)
     {
         /*
          * Leap Indicator bit 1100 0000
@@ -246,21 +240,21 @@ class Ntp extends AbstractProtocol
          * the last day of the current month.
          */
         $leap = ($binary['flags'] & 0xc0) >> 6;
-        switch($leap) {
+        switch ($leap) {
             case 0:
-                $this->_info['leap'] = '0 - no warning';
+                $this->info['leap'] = '0 - no warning';
                 break;
 
             case 1:
-                $this->_info['leap'] = '1 - last minute has 61 seconds';
+                $this->info['leap'] = '1 - last minute has 61 seconds';
                 break;
 
             case 2:
-                $this->_info['leap'] = '2 - last minute has 59 seconds';
+                $this->info['leap'] = '2 - last minute has 59 seconds';
                 break;
 
             default:
-                $this->_info['leap'] = '3 - not syncronised';
+                $this->info['leap'] = '3 - not syncronised';
                 break;
         }
 
@@ -269,7 +263,7 @@ class Ntp extends AbstractProtocol
          *
          * This should be 3 (RFC 1305)
          */
-        $this->_info['version'] = ($binary['flags'] & 0x38) >> 3;
+        $this->info['version'] = ($binary['flags'] & 0x38) >> 3;
 
         /*
          * Mode bit 0000 0111
@@ -279,29 +273,29 @@ class Ntp extends AbstractProtocol
          * instantiation of the protocol machine, called an association.
          */
         $mode = ($binary['flags'] & 0x07);
-        switch($mode) {
+        switch ($mode) {
             case 1:
-                $this->_info['mode'] = 'symetric active';
+                $this->info['mode'] = 'symmetric active';
                 break;
 
             case 2:
-                $this->_info['mode'] = 'symetric passive';
+                $this->info['mode'] = 'symmetric passive';
                 break;
 
             case 3:
-                $this->_info['mode'] = 'client';
+                $this->info['mode'] = 'client';
                 break;
 
             case 4:
-                $this->_info['mode'] = 'server';
+                $this->info['mode'] = 'server';
                 break;
 
             case 5:
-                $this->_info['mode'] = 'broadcast';
+                $this->info['mode'] = 'broadcast';
                 break;
 
             default:
-                $this->_info['mode'] = 'reserved';
+                $this->info['mode'] = 'reserved';
                 break;
         }
 
@@ -313,15 +307,15 @@ class Ntp extends AbstractProtocol
          * Identifies the particular reference clock.
          */
         $refid = strtoupper($binary['referenceid']);
-        switch($binary['stratum']) {
+        switch ($binary['stratum']) {
             case 0:
                 if (substr($refid, 0, 3) === 'DCN') {
                     $ntpserviceid = 'DCN routing protocol';
-                } else if (substr($refid, 0, 4) === 'NIST') {
+                } elseif (substr($refid, 0, 4) === 'NIST') {
                     $ntpserviceid = 'NIST public modem';
-                } else if (substr($refid, 0, 3) === 'TSP') {
+                } elseif (substr($refid, 0, 3) === 'TSP') {
                     $ntpserviceid = 'TSP time protocol';
-                } else if (substr($refid, 0, 3) === 'DTS') {
+                } elseif (substr($refid, 0, 3) === 'DTS') {
                     $ntpserviceid = 'Digital Time Service';
                 }
                 break;
@@ -329,15 +323,15 @@ class Ntp extends AbstractProtocol
             case 1:
                 if (substr($refid, 0, 4) === 'ATOM') {
                     $ntpserviceid = 'Atomic Clock (calibrated)';
-                } else if (substr($refid, 0, 3) === 'VLF') {
+                } elseif (substr($refid, 0, 3) === 'VLF') {
                     $ntpserviceid = 'VLF radio';
-                } else if ($refid === 'CALLSIGN') {
+                } elseif ($refid === 'CALLSIGN') {
                     $ntpserviceid = 'Generic radio';
-                } else if (substr($refid, 0, 4) === 'LORC') {
+                } elseif (substr($refid, 0, 4) === 'LORC') {
                     $ntpserviceid = 'LORAN-C radionavigation';
-                } else if (substr($refid, 0, 4) === 'GOES') {
+                } elseif (substr($refid, 0, 4) === 'GOES') {
                     $ntpserviceid = 'GOES UHF environment satellite';
-                } else if (substr($refid, 0, 3) === 'GPS') {
+                } elseif (substr($refid, 0, 3) === 'GPS') {
                     $ntpserviceid = 'GPS UHF satellite positioning';
                 }
                 break;
@@ -353,24 +347,24 @@ class Ntp extends AbstractProtocol
                 break;
         }
 
-        $this->_info['ntpid'] = $ntpserviceid;
+        $this->info['ntpid'] = $ntpserviceid;
 
         /*
          * Stratum
          *
          * Indicates the stratum level of the local clock
          */
-        switch($binary['stratum']) {
+        switch ($binary['stratum']) {
             case 0:
-                $this->_info['stratum'] = 'undefined';
+                $this->info['stratum'] = 'undefined';
                 break;
 
             case 1:
-                $this->_info['stratum'] = 'primary reference';
+                $this->info['stratum'] = 'primary reference';
                 break;
 
             default:
-                $this->_info['stratum'] = 'secondary reference';
+                $this->info['stratum'] = 'secondary reference';
                 break;
         }
 
@@ -381,7 +375,7 @@ class Ntp extends AbstractProtocol
          * Both positive and negative values, depending on clock precision and skew, are
          * possible.
          */
-        $this->_info['rootdelay'] = $binary['rootdelay'];
+        $this->info['rootdelay'] = $binary['rootdelay'];
 
         /*
          * Indicates the maximum error relative to the primary reference source at the
@@ -389,7 +383,7 @@ class Ntp extends AbstractProtocol
          *
          * Only positive values greater than zero are possible.
          */
-        $this->_info['rootdispersion'] = $binary['rootdispersion'];
+        $this->info['rootdispersion'] = $binary['rootdispersion'];
 
         /*
          * The roundtrip delay of the peer clock relative to the local clock
@@ -398,19 +392,19 @@ class Ntp extends AbstractProtocol
          * Note that this variable can take on both positive and negative values,
          * depending on clock precision and skew-error accumulation.
          */
-        $this->_info['roundtrip']  = $binary['receivestamp'];
-        $this->_info['roundtrip'] -= $binary['originatestamp'];
-        $this->_info['roundtrip'] -= $binary['transmitstamp'];
-        $this->_info['roundtrip'] += $binary['clientreceived'];
-        $this->_info['roundtrip'] /= 2;
+        $this->info['roundtrip']  = $binary['receivestamp'];
+        $this->info['roundtrip'] -= $binary['originatestamp'];
+        $this->info['roundtrip'] -= $binary['transmitstamp'];
+        $this->info['roundtrip'] += $binary['clientreceived'];
+        $this->info['roundtrip'] /= 2;
 
         // The offset of the peer clock relative to the local clock, in seconds.
-        $this->_info['offset']  = $binary['receivestamp'];
-        $this->_info['offset'] -= $binary['originatestamp'];
-        $this->_info['offset'] += $binary['transmitstamp'];
-        $this->_info['offset'] -= $binary['clientreceived'];
-        $this->_info['offset'] /= 2;
-        $time = (time() - $this->_info['offset']);
+        $this->info['offset']  = $binary['receivestamp'];
+        $this->info['offset'] -= $binary['originatestamp'];
+        $this->info['offset'] += $binary['transmitstamp'];
+        $this->info['offset'] -= $binary['clientreceived'];
+        $this->info['offset'] /= 2;
+        $time = (time() - $this->info['offset']);
 
         return $time;
     }

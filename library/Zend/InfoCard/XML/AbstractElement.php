@@ -12,7 +12,6 @@ namespace Zend\InfoCard\XML;
 
 use DOMElement;
 use SimpleXMLElement;
-use Zend\Stdlib\SubClass;
 
 /**
  * An abstract class representing a an XML data block
@@ -68,7 +67,7 @@ abstract class AbstractElement extends SimpleXMLElement implements ElementInterf
             throw new Exception\InvalidArgumentException('Class provided for converting does not exist');
         }
 
-        if (!SubClass::isSubclassOf($classname, 'Zend\InfoCard\XML\ElementInterface')) {
+        if (!self::isSubclassOf($classname, 'Zend\InfoCard\XML\ElementInterface')) {
             throw new Exception\InvalidArgumentException("DOM element must be converted to an instance of Zend_InfoCard_Xml_Element");
         }
 
@@ -82,5 +81,29 @@ abstract class AbstractElement extends SimpleXMLElement implements ElementInterf
         }
 
         return $sxe;
+    }
+
+    /**
+     * Checks if the object has this class as one of its parents
+     *
+     * @see https://bugs.php.net/bug.php?id=53727
+     * @see https://github.com/zendframework/zf2/pull/1807
+     *
+     * @param string $className
+     * @param string $type
+     */
+    protected static function isSubclassOf($className, $type)
+    {
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return is_subclass_of($className, $type);
+        }
+        if (is_subclass_of($className, $type)) {
+            return true;
+        }
+        if (!interface_exists($type)) {
+            return false;
+        }
+        $r = new ReflectionClass($className);
+        return $r->implementsInterface($type);
     }
 }

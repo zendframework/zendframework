@@ -11,6 +11,7 @@
 namespace Zend\Form\Annotation;
 
 use ArrayObject;
+use ReflectionClass;
 use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Annotation\Parser;
@@ -22,7 +23,6 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\Form\Exception;
 use Zend\Form\Factory;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\SubClass;
 
 /**
  * Parses a class' properties for annotations in order to create a form and
@@ -329,7 +329,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
             : 'Zend\Form\Element';
 
         // Compose as a fieldset or an element, based on specification type
-        if (SubClass::isSubclassOf($type, 'Zend\Form\FieldsetInterface')) {
+        if (self::isSubclassOf($type, 'Zend\Form\FieldsetInterface')) {
             if (!isset($formSpec['fieldsets'])) {
                 $formSpec['fieldsets'] = array();
             }
@@ -376,4 +376,27 @@ class AnnotationBuilder implements EventManagerAwareInterface
         return (bool) $results->last();
     }
 
+    /**
+     * Checks if the object has this class as one of its parents
+     *
+     * @see https://bugs.php.net/bug.php?id=53727
+     * @see https://github.com/zendframework/zf2/pull/1807
+     *
+     * @param string $className
+     * @param string $type
+     */
+    protected static function isSubclassOf($className, $type)
+    {
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return is_subclass_of($className, $type);
+        }
+        if (is_subclass_of($className, $type)) {
+            return true;
+        }
+        if (!interface_exists($type)) {
+            return false;
+        }
+        $r = new ReflectionClass($className);
+        return $r->implementsInterface($type);
+    }
 }

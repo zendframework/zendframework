@@ -10,12 +10,12 @@
 
 namespace ZendTest\Dojo\Form\Element;
 
-use Zend\Dojo\Form\Element\TextBox as TextBoxElement,
-    Zend\Dojo\Form\Decorator\DijitElement as DijitElementDecorator,
-    Zend\Dojo\View\Helper\Dojo as DojoHelper,
-    Zend\Form\Decorator\Description as DescriptionDecorator,
-    Zend\Registry,
-    Zend\View;
+use Zend\Dojo\Form\Element\TextBox as TextBoxElement;
+use Zend\Dojo\Form\Decorator\DijitElement as DijitElementDecorator;
+use Zend\Dojo\View\Helper\Dojo as DojoHelper;
+use Zend\Form\Decorator\Description as DescriptionDecorator;
+use Zend\Registry;
+use Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_Dijit.

@@ -10,11 +10,11 @@
 
 namespace ZendTest\Mvc\Router\Http;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\Request as Request,
-    Zend\Stdlib\Request as BaseRequest,
-    Zend\Mvc\Router\Http\Method as HttpMethod,
-    ZendTest\Mvc\Router\FactoryTester;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Request as Request;
+use Zend\Stdlib\Request as BaseRequest;
+use Zend\Mvc\Router\Http\Method as HttpMethod;
+use ZendTest\Mvc\Router\FactoryTester;
 
 class MethodTest extends TestCase
 {

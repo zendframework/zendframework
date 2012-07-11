@@ -10,8 +10,8 @@
 
 namespace ZendTest\Db\Sql\Predicate;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Db\Sql\Predicate\Between;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Db\Sql\Predicate\Between;
 
 class BetweenTest extends TestCase
 {

@@ -10,8 +10,8 @@
 
 namespace ZendTest\Mvc\Router;
 
-use Zend\Mvc\Router\RoutePluginManager,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Mvc\Router\RoutePluginManager;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @category   Zend

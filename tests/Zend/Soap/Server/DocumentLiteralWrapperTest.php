@@ -10,10 +10,10 @@
 
 namespace ZendTest\Soap\Server;
 
-use Zend\Soap\Client\Local as SoapClient,
-    Zend\Soap\Server,
-    Zend\Soap\Server\DocumentLiteralWrapper,
-    ZendTest\Soap\TestAsset\MyCalculatorService;
+use Zend\Soap\Client\Local as SoapClient;
+use Zend\Soap\Server;
+use Zend\Soap\Server\DocumentLiteralWrapper;
+use ZendTest\Soap\TestAsset\MyCalculatorService;
 
 class DocumentLiteralWrapperTest extends \PHPUnit_Framework_TestCase
 {

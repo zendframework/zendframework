@@ -24,8 +24,8 @@
             <title>Basic SMTP Transport Usage</title>
 
             <programlisting language="php"><![CDATA[
-use Zend\Mail\Transport\Smtp as SmtpTransport,
-    Zend\Mail\Transport\SmtpOptions;
+use Zend\Mail\Transport\Smtp as SmtpTransport;
+use Zend\Mail\Transport\SmtpOptions;
 
 // Setup SMTP transport
 $transport = new SmtpTransport();
@@ -42,8 +42,8 @@ $transport->setOptions($options);
             <title>SMTP Transport Usage with PLAIN AUTH</title>
 
             <programlisting language="php"><![CDATA[
-use Zend\Mail\Transport\Smtp as SmtpTransport,
-    Zend\Mail\Transport\SmtpOptions;
+use Zend\Mail\Transport\Smtp as SmtpTransport;
+use Zend\Mail\Transport\SmtpOptions;
 
 // Setup SMTP transport using LOGIN authentication
 $transport = new SmtpTransport();
@@ -64,8 +64,8 @@ $transport->setOptions($options);
             <title>SMTP Transport Usage with LOGIN AUTH</title>
 
             <programlisting language="php"><![CDATA[
-use Zend\Mail\Transport\Smtp as SmtpTransport,
-    Zend\Mail\Transport\SmtpOptions;
+use Zend\Mail\Transport\Smtp as SmtpTransport;
+use Zend\Mail\Transport\SmtpOptions;
 
 // Setup SMTP transport using LOGIN authentication
 $transport = new SmtpTransport();
@@ -86,8 +86,8 @@ $transport->setOptions($options);
             <title>SMTP Transport Usage with CRAM-MD5 AUTH</title>
 
             <programlisting language="php"><![CDATA[
-use Zend\Mail\Transport\Smtp as SmtpTransport,
-    Zend\Mail\Transport\SmtpOptions;
+use Zend\Mail\Transport\Smtp as SmtpTransport;
+use Zend\Mail\Transport\SmtpOptions;
 
 // Setup SMTP transport using LOGIN authentication
 $transport = new SmtpTransport();

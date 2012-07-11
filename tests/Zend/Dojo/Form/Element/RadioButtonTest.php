@@ -10,12 +10,12 @@
 
 namespace ZendTest\Dojo\Form\Element;
 
-use Zend\Dojo\Form\Element\RadioButton as RadioButtonElement,
-    Zend\Dojo\View\Helper\Dojo as DojoHelper,
-    Zend\Registry,
-    Zend\Translator\Translator,
-    Zend\Validator\InArray as InArrayValidator,
-    Zend\View;
+use Zend\Dojo\Form\Element\RadioButton as RadioButtonElement;
+use Zend\Dojo\View\Helper\Dojo as DojoHelper;
+use Zend\Registry;
+use Zend\Translator\Translator;
+use Zend\Validator\InArray as InArrayValidator;
+use Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_RadioButton.

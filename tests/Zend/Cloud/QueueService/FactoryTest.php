@@ -11,8 +11,8 @@
 namespace ZendTest\Cloud\QueueService;
 
 use Zend\Config\Factory as ConfigFactory;
-use Zend\Cloud\QueueService\Factory,
-    PHPUnit_Framework_TestCase as PHPUnitTestCase;
+use Zend\Cloud\QueueService\Factory;
+use PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**
  * Test class for \Zend\Cloud\QueueService\Factory

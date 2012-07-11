@@ -10,14 +10,14 @@
 
 namespace ZendTest\Mvc\View;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\EventManager\EventManager,
-    Zend\Http\Request,
-    Zend\Http\Response,
-    Zend\Mvc\Application,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\View\RouteNotFoundStrategy,
-    Zend\View\Model\ViewModel;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\EventManager\EventManager;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\Mvc\Application;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\View\RouteNotFoundStrategy;
+use Zend\View\Model\ViewModel;
 
 /**
  * @category   Zend

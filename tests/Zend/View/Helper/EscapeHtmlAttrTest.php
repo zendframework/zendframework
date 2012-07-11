@@ -10,9 +10,9 @@
 
 namespace ZendTest\View\Helper;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    stdClass,
-    Zend\View\Helper\EscapeHtmlAttr as EscapeHelper;
+use PHPUnit_Framework_TestCase as TestCase;
+use stdClass;
+use Zend\View\Helper\EscapeHtmlAttr as EscapeHelper;
 
 class EscapeHtmlAttrTest extends TestCase
 {

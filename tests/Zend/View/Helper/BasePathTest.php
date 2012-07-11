@@ -10,8 +10,8 @@
 
 namespace ZendTest\View\Helper;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\View\Helper\BasePath;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\View\Helper\BasePath;
 
 /**
  * @category   Zend

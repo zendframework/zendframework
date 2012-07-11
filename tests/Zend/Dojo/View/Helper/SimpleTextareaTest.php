@@ -10,10 +10,10 @@
 
 namespace ZendTest\Dojo\View\Helper;
 
-use Zend\Dojo\View\Helper\SimpleTextarea as SimpleTextareaHelper,
-    Zend\Dojo\View\Helper\Dojo as DojoHelper,
-    Zend\Registry,
-    Zend\View\Renderer\PhpRenderer as View;
+use Zend\Dojo\View\Helper\SimpleTextarea as SimpleTextareaHelper;
+use Zend\Dojo\View\Helper\Dojo as DojoHelper;
+use Zend\Registry;
+use Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_SimpleTextarea.

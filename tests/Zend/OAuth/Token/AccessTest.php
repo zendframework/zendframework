@@ -10,8 +10,8 @@
 
 namespace ZendTest\OAuth\Token;
 
-use Zend\OAuth\Token\Access as AccessToken,
-    Zend\Http\Response as HTTPResponse;
+use Zend\OAuth\Token\Access as AccessToken;
+use Zend\Http\Response as HTTPResponse;
 
 /**
  * @category   Zend

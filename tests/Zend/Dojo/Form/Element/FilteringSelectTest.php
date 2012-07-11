@@ -10,11 +10,11 @@
 
 namespace ZendTest\Dojo\Form\Element;
 
-use Zend\Dojo\Form\Element\FilteringSelect as FilteringSelectElement,
-    Zend\Dojo\View\Helper\Dojo as DojoHelper,
-    Zend\Registry,
-    Zend\Validator\InArray as InArrayValidator,
-    Zend\View;
+use Zend\Dojo\Form\Element\FilteringSelect as FilteringSelectElement;
+use Zend\Dojo\View\Helper\Dojo as DojoHelper;
+use Zend\Registry;
+use Zend\Validator\InArray as InArrayValidator;
+use Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_FilteringSelect.

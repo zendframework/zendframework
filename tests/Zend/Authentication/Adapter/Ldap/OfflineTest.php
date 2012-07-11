@@ -10,8 +10,8 @@
 
 namespace ZendTest\Authentication\Adapter\Ldap;
 
-use Zend\Authentication\Adapter,
-    Zend\Ldap;
+use Zend\Authentication\Adapter;
+use Zend\Ldap;
 
 /**
  * @category   Zend

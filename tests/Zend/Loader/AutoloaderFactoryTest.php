@@ -10,8 +10,8 @@
 
 namespace ZendTest\Loader;
 
-use ReflectionClass,
-    Zend\Loader\AutoloaderFactory;
+use ReflectionClass;
+use Zend\Loader\AutoloaderFactory;
 
 /**
  * @category   Zend

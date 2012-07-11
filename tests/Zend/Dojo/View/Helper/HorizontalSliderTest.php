@@ -10,12 +10,12 @@
 
 namespace ZendTest\Dojo\View\Helper;
 
-use Zend\Dojo\View\Helper\HorizontalSlider as HorizontalSliderHelper,
-    Zend\Dojo\View\Helper\Dojo as DojoHelper,
-    Zend\Dojo\Form\Form as DojoForm,
-    Zend\Dojo\Form\SubForm as DojoSubForm,
-    Zend\Registry,
-    Zend\View;
+use Zend\Dojo\View\Helper\HorizontalSlider as HorizontalSliderHelper;
+use Zend\Dojo\View\Helper\Dojo as DojoHelper;
+use Zend\Dojo\Form\Form as DojoForm;
+use Zend\Dojo\Form\SubForm as DojoSubForm;
+use Zend\Registry;
+use Zend\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_HorizontalSlider.

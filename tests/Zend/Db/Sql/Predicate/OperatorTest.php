@@ -10,8 +10,8 @@
 
 namespace ZendTest\Db\Sql\Predicate;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Db\Sql\Predicate\Operator;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Db\Sql\Predicate\Operator;
 
 class OperatorTest extends TestCase
 {

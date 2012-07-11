@@ -10,8 +10,8 @@
 
 namespace ZendTest\Mvc\Router\Http;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Mvc\Router\Http\RouteMatch;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Mvc\Router\Http\RouteMatch;
 
 class RouteMatchTest extends TestCase
 {

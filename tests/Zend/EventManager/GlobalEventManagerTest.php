@@ -9,8 +9,8 @@
  */
 
 namespace ZendTest\EventManager;
-use Zend\EventManager\GlobalEventManager,
-    Zend\EventManager\EventManager;
+use Zend\EventManager\GlobalEventManager;
+use Zend\EventManager\EventManager;
 
 /**
  * @category   Zend

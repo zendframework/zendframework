@@ -10,8 +10,8 @@
 
 namespace ZendTest\ServiceManager\TestAsset;
 
-use Zend\ServiceManager\InitializerInterface,
-    Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\InitializerInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class FooInitializer implements InitializerInterface
 {

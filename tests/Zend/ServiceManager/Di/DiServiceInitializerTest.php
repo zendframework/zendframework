@@ -10,8 +10,8 @@
 
 namespace ZendTest\ServiceManager\Di;
 
-use Zend\ServiceManager\Di\DiServiceInitializer,
-    Zend\ServiceManager\Di\DiInstanceManagerProxy;
+use Zend\ServiceManager\Di\DiServiceInitializer;
+use Zend\ServiceManager\Di\DiInstanceManagerProxy;
 
 class DiServiceInitializerTest extends \PHPUnit_Framework_TestCase
 {

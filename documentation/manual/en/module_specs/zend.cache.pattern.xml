@@ -56,8 +56,8 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-use Zend\Cache\PatternFactory,
-    Zend\Cache\Pattern\PatternOptions;
+use Zend\Cache\PatternFactory;
+use Zend\Cache\Pattern\PatternOptions;
 
 // Via the factory:
 $callbackCache = PatternFactory::factory('callback', array(

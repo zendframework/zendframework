@@ -251,8 +251,8 @@ return array(
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 class BarController extends AbstractActionController
 {
@@ -352,8 +352,8 @@ class BarController extends AbstractActionController
             <programlisting language="php"><![CDATA[
 namespace Content\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 class ArticleController extends AbstractActionController
 {
@@ -568,8 +568,8 @@ return array(
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 class BarController extends AbstractActionController
 {
@@ -601,8 +601,8 @@ class BarController extends AbstractActionController
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 class BarController extends AbstractActionController
 {
@@ -635,8 +635,8 @@ class BarController extends AbstractActionController
             <programlisting language="php"><![CDATA[
 namespace Content\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 class ArticleController extends AbstractActionController
 {
@@ -667,8 +667,8 @@ class ArticleController extends AbstractActionController
             <programlisting language="php"><![CDATA[
 namespace Content\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 class ArticleController extends AbstractActionController
 {
@@ -940,12 +940,12 @@ class Module
             <programlisting language="php"><![CDATA[
 namespace Content\View;
 
-use Zend\EventManager\EventCollection,
-    Zend\EventManager\ListenerAggregate,
-    Zend\Feed\Writer\Feed,
-    Zend\View\Renderer\FeedRenderer,
-    Zend\View\Renderer\JsonRenderer,
-    Zend\View\Renderer\PhpRenderer;
+use Zend\EventManager\EventCollection;
+use Zend\EventManager\ListenerAggregate;
+use Zend\Feed\Writer\Feed;
+use Zend\View\Renderer\FeedRenderer;
+use Zend\View\Renderer\JsonRenderer;
+use Zend\View\Renderer\PhpRenderer;
 
 class AcceptStrategy implements ListenerAggregate
 {

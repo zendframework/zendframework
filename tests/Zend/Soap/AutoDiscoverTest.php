@@ -13,8 +13,8 @@ namespace ZendTest\Soap;
 /** Include Common TestTypes */
 require_once 'TestAsset/commontypes.php';
 
-use Zend\Soap\AutoDiscover,
-    Zend\Soap\AutoDiscoverException;
+use Zend\Soap\AutoDiscover;
+use Zend\Soap\AutoDiscoverException;
 
 /** PHPUnit Test Case */
 

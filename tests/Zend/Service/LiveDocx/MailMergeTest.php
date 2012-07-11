@@ -11,8 +11,8 @@
 namespace ZendTest\Service\LiveDocx;
 
 use Zend\Service\LiveDocx\MailMerge;
-use Zend\Soap\Client as SoapClient,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Soap\Client as SoapClient;
+use PHPUnit_Framework_TestCase as TestCase;
 
 
 class MailMergeTest extends \PHPUnit_Framework_TestCase

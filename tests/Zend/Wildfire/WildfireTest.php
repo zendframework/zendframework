@@ -9,10 +9,10 @@
  */
 
 namespace ZendTest\Wildfire;
-use Zend\Wildfire\Channel,
-    Zend\Wildfire\Plugin\FirePhp,
-    Zend\Controller,
-    Zend\Controller\Request\Simple as SimpleRequest;
+use Zend\Wildfire\Channel;
+use Zend\Wildfire\Plugin\FirePhp;
+use Zend\Controller;
+use Zend\Controller\Request\Simple as SimpleRequest;
 
 /**
  * @category   Zend

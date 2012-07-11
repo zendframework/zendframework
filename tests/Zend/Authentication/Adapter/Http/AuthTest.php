@@ -10,11 +10,11 @@
 
 namespace ZendTest\Authentication\Adapter\Http;
 
-use Zend\Authentication\Adapter\Http,
-    Zend\Http\Headers,
-    Zend\Http\Request,
-    Zend\Http\Response,
-    Zend\Stdlib\Parameters;
+use Zend\Authentication\Adapter\Http;
+use Zend\Http\Headers;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\Stdlib\Parameters;
 
 /**
  * @category   Zend

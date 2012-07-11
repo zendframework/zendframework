@@ -9,9 +9,9 @@
  */
 
 namespace ZendTest\Dom;
-use Zend\Dom\Query,
-    Zend\Dom\NodeList,
-    Zend\Dom\Exception\ExceptionInterface as DOMException;
+use Zend\Dom\Query;
+use Zend\Dom\NodeList;
+use Zend\Dom\Exception\ExceptionInterface as DOMException;
 
 /**
  * Test class for Zend_Dom_Query.

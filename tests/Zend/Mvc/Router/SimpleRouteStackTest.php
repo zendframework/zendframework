@@ -10,13 +10,13 @@
 
 namespace ZendTest\Mvc\Router;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    ArrayIterator,
-    Zend\Stdlib\Request,
-    Zend\Uri\Http as HttpUri,
-    Zend\Mvc\Router\RoutePluginManager,
-    Zend\Mvc\Router\SimpleRouteStack,
-    ZendTest\Mvc\Router\FactoryTester;
+use PHPUnit_Framework_TestCase as TestCase;
+use ArrayIterator;
+use Zend\Stdlib\Request;
+use Zend\Uri\Http as HttpUri;
+use Zend\Mvc\Router\RoutePluginManager;
+use Zend\Mvc\Router\SimpleRouteStack;
+use ZendTest\Mvc\Router\FactoryTester;
 
 class SimpleRouteStackTest extends TestCase
 {

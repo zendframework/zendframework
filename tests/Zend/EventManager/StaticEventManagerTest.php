@@ -10,10 +10,10 @@
 
 namespace ZendTest\EventManager;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    stdClass,
-    Zend\EventManager\EventManager,
-    Zend\EventManager\StaticEventManager;
+use PHPUnit_Framework_TestCase as TestCase;
+use stdClass;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\StaticEventManager;
 
 /**
  * @category   Zend

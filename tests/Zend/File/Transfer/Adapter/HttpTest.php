@@ -10,11 +10,11 @@
 
 namespace ZendTest\File\Transfer\Adapter;
 
-use Zend\File\Transfer\Adapter,
-    Zend\File\Transfer\Exception\RuntimeException,
-    Zend\ProgressBar,
-    Zend\ProgressBar\Adapter as AdapterProgressBar,
-    Zend\Validator\File as FileValidator;
+use Zend\File\Transfer\Adapter;
+use Zend\File\Transfer\Exception\RuntimeException;
+use Zend\ProgressBar;
+use Zend\ProgressBar\Adapter as AdapterProgressBar;
+use Zend\Validator\File as FileValidator;
 
 /**
  * Test class for Zend\File\Transfer\Adapter\Http

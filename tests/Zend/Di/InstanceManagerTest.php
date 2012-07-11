@@ -10,8 +10,8 @@
 
 namespace ZendTest\Di;
 
-use Zend\Di\InstanceManager,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Di\InstanceManager;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class InstanceManagerTest extends TestCase
 {

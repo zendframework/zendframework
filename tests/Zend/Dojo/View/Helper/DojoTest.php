@@ -10,12 +10,12 @@
 
 namespace ZendTest\Dojo\View\Helper;
 
-use Zend\Dojo\View\Helper\Dojo as DojoHelper,
-    Zend\Dojo\View\Helper\Dojo\Container as DojoContainer,
-    Zend\Json\Json,
-    Zend\Registry,
-    Zend\View\Renderer\PhpRenderer,
-    Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\Dojo\View\Helper\Dojo as DojoHelper;
+use Zend\Dojo\View\Helper\Dojo\Container as DojoContainer;
+use Zend\Json\Json;
+use Zend\Registry;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * Test class for Zend_Dojo_View_Helper_Dojo.

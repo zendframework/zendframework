@@ -9,10 +9,10 @@
  */
 
 namespace ZendTest\InfoCard;
-use Zend\InfoCard\XML\EncryptedData,
-    Zend\InfoCard\XML\KeyInfo,
-    Zend\InfoCard\XML,
-    Zend\InfoCard\XML\Exception;
+use Zend\InfoCard\XML\EncryptedData;
+use Zend\InfoCard\XML\KeyInfo;
+use Zend\InfoCard\XML;
+use Zend\InfoCard\XML\Exception;
 
 
 /**

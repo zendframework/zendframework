@@ -10,8 +10,8 @@
 
 namespace ZendTest\Stdlib;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Stdlib\ErrorHandler;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Stdlib\ErrorHandler;
 
 class ErrorHandlerTest extends TestCase
 {

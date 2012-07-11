@@ -10,18 +10,18 @@
 
 namespace ZendTest\View;
 
-use ArrayObject,
-    PHPUnit_Framework_TestCase as TestCase,
-    stdClass,
-    Zend\Http\Request,
-    Zend\Http\Response,
-    Zend\View\Model\ViewModel,
-    Zend\View\Model\JsonModel,
-    Zend\View\Renderer\PhpRenderer,
-    Zend\View\Renderer,
-    Zend\View\Resolver,
-    Zend\View\Variables as ViewVariables,
-    Zend\View\View;
+use ArrayObject;
+use PHPUnit_Framework_TestCase as TestCase;
+use stdClass;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Renderer;
+use Zend\View\Resolver;
+use Zend\View\Variables as ViewVariables;
+use Zend\View\View;
 
 class ViewTest extends TestCase
 {

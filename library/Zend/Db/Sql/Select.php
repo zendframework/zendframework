@@ -517,11 +517,22 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $joinSpecArgArray = array();
         foreach ($this->joins as $j => $join) {
             $joinSpecArgArray[$j] = array();
-            $joinSpecArgArray[$j][] = strtoupper($join['type']); // type
+            // type
+            $joinSpecArgArray[$j][] = strtoupper($join['type']);
+            // table name
             $joinSpecArgArray[$j][] = (is_array($join['name']))
                 ? $platform->quoteIdentifier(current($join['name'])) . ' AS ' . $platform->quoteIdentifier(key($join['name']))
-                : $platform->quoteIdentifier($join['name']); // table
-            $joinSpecArgArray[$j][] = $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')', 'BETWEEN')); // on
+                : $platform->quoteIdentifier($join['name']);
+            // on expression
+            $joinSpecArgArray[$j][] = ($join['on'] instanceof ExpressionInterface)
+                ? $this->processExpression($join['on'], $platform, ($adapter) ? $adapter->getDriver() : null, 'join')
+                : $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')', 'BETWEEN')); // on
+            if (is_array($joinSpecArgArray[$j][2])) {
+                if (count($joinSpecArgArray[$j][2]['parameters']) > 0) {
+                    $parameterContainer->merge($joinSpecArgArray[$j][2]['parameters']);
+                }
+                $joinSpecArgArray[$j][2] = $joinSpecArgArray[$j][2]['sql'];
+            }
         }
 
         return array($joinSpecArgArray);

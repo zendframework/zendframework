@@ -104,4 +104,13 @@ class SqlServerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('[foo].[bar]', $this->platform->quoteIdentifierInFragment('foo.bar'));
         $this->assertEquals('[foo] as [bar]', $this->platform->quoteIdentifierInFragment('foo as bar'));
     }
+
+    /**
+     * @group ZF2-386
+     * @covers Zend\Db\Adapter\Platform\SqlServer::quoteIdentifierInFragment
+     */
+    public function testQuoteIdentifierInFragmentIgnoresSingleCharSafeWords()
+    {
+        $this->assertEquals('([foo].[bar] = [boo].[baz])', $this->platform->quoteIdentifierInFragment('(foo.bar = boo.baz)', array('(', ')', '=')));
+    }
 }

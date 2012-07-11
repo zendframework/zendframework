@@ -43,12 +43,9 @@ if (!is_dir($libPath)) {
         echo "Unable to locate autoloader via include_path; aborting" . PHP_EOL;
         exit(2);
     }
-} else {
-    // Try to load StandardAutoloader from library
-    if (false === include($libPath . '/Zend/Loader/StandardAutoloader.php')) {
-        echo "Unable to locate autoloader via library; aborting" . PHP_EOL;
-        exit(2);
-    }
+} elseif (false === include($libPath . '/Zend/Loader/StandardAutoloader.php')) { 
+    echo "Unable to locate autoloader via library; aborting" . PHP_EOL;
+    exit(2);
 }
 
 // Setup autoloading
@@ -93,7 +90,7 @@ if (empty($rstFile)) {
 $xml = new \DOMDocument;
 $xml->load($docbook);
 
-$xsltFile = 'doc2rst.xsl';
+$xsltFile = __DIR__ . '/doc2rst.xsl';
 
 // Load the XSLT file
 $xsl = new \DOMDocument;
@@ -170,7 +167,7 @@ class RstConvert {
         } else {
             $output = '';
         }    
-        for ($i=1; $i<$tot; $i++) {
+        for ($i=1; $i < $tot; $i++) {
             if ('' !== trim($rows[$i])) {
                 $output .= "    {$rows[$i]}\n";
             }
@@ -203,10 +200,10 @@ class RstConvert {
      * @return string 
      */
     public static function maintitle($text) {
-        $text    = str_replace("\\", "\\\\", trim($text));
+        $text    = str_replace('\\', '\\\\', trim($text));
         $count   = strlen($text);
         $output  = $text . "\n";
-        $output .= str_repeat("=", $count) . "\n";
+        $output .= str_repeat('=', $count) . "\n";
         return $output;
     }
 
@@ -217,10 +214,10 @@ class RstConvert {
      * @return string 
      */
     public static function title($text) {
-        $text    = str_replace("\\", "\\\\", trim($text));
+        $text    = str_replace('\\', '\\\\', trim($text));
         $count   = strlen($text);
         $output  = "\n" . $text . "\n";
-        $output .= str_repeat("-", $count) . "\n";
+        $output .= str_repeat('-', $count) . "\n";
         return $output;
     }
 
@@ -231,7 +228,7 @@ class RstConvert {
      * @return string 
      */
     public static function formatText($text) {
-        return str_replace("\\", "\\\\", trim(preg_replace('/\s+/', ' ', str_replace("\n", '', $text))));
+        return str_replace('\\', '\\\\', trim(preg_replace('/\s+/', ' ', str_replace("\n", '', $text))));
     }
 
     /**
@@ -249,6 +246,7 @@ class RstConvert {
             return " `$value`_ ";
         }    
     }
+    
     /**
      * Get all the external links of the document
      * 
@@ -261,6 +259,7 @@ class RstConvert {
         }
         return $output;
     }
+    
     /**
      * Convert the table tag
      * 
@@ -299,9 +298,9 @@ class RstConvert {
             'columnWidths' => $widthCol,
             'decorator'    => 'ascii'
         ));
-        for ($j=0; $j<$totRow; $j++) {
+        for ($j=0; $j < $totRow; $j++) {
             $row = new Table\Row();
-            for ($i=0; $i<$totCol; $i++) {
+            for ($i=0; $i < $totCol; $i++) {
                 $row->appendColumn(new Table\Column($table[$j][$i]));
             }
             $tableText->appendRow($row);
@@ -310,20 +309,22 @@ class RstConvert {
         // if thead exists change the table style with head (= instead of -)
         if ($head) {
             $table  = explode("\n", $output);
-            $output = '';
+            $newOutput = '';
             $i      = 0;
             foreach ($table as $row) {
-                if ('+-' === substr($row,0,2)) {
+                if ('+-' === substr($row, 0, 2)) {
                     $i++;
                 }
                 if (2 === $i) {
-                    $row = str_replace('-','=', $row);
+                    $row = str_replace('-', '=', $row);
                 }
-                $output .= "$row\n";
+                $newOutput .= "$row\n";
             }
+            return $newOutput;
         }
         return $output;
     }
+    
     /**
      * Convert an XML file name to the RST ZF2 standard naming convention 
      * For instance, Zend_Config-XmlIntro.xml become zend.config.xml-intro.rst
@@ -332,13 +333,13 @@ class RstConvert {
      * @return string 
      */
     public static function XmlFileNameToRst($name) {
-        if ('.xml' === strtolower(substr($name,-4))) {
+        if ('.xml' === strtolower(substr($name, -4))) {
             $name = substr($name, 0, strlen($name)-4);
         }
         $tot = strlen($name);
         $output = '';
         $word = false;
-        for ($i=0; $i<$tot; $i++) {
+        for ($i=0; $i < $tot; $i++) {
 
             if (preg_match('/[A-Z]/', $name[$i])) {
                 if ($word) {

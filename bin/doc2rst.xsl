@@ -35,7 +35,7 @@
 <xsl:template match="doc:para">  
 <xsl:text>
 </xsl:text>
-<xsl:if test="name(..) != 'section'">
+<xsl:if test="name(..) = 'note'">
 <xsl:text>    </xsl:text>
 </xsl:if>
 <xsl:apply-templates/>
@@ -53,15 +53,41 @@
 .. include:: <xsl:value-of select="php:function('ZendBin\RstConvert::XmlFileNameToRst', string(@href))" />
 </xsl:template>
 
-<!-- classname, methodname, type, command, property -->
-<xsl:template match="//doc:classname|//doc:methodname|//doc:type|//doc:command|//doc:property"> ``<xsl:value-of select="normalize-space()" />`` </xsl:template>
+<!-- classname, interfacename, methodname, type, command, property, constant, filename, varname -->
+<xsl:template match="//doc:classname|//doc:interfacename|//doc:methodname|//doc:type|//doc:command|//doc:property|//doc:constant|//doc:filename|//doc:varname"> ``<xsl:value-of select="normalize-space()" />`` </xsl:template>
 
-<!-- acronym, emphasis -->
-<xsl:template match="//doc:acronym|/doc:emphasis"> *<xsl:value-of select="normalize-space()" />* </xsl:template>
+<!-- acronym  -->
+<xsl:template match="//doc:acronym"> *<xsl:value-of select="normalize-space()" />* </xsl:template>
+
+<!-- emphasis  -->
+<xsl:template match="/doc:emphasis"> **<xsl:value-of select="normalize-space()" />** </xsl:template>
+
+<!-- example -->
+<xsl:template match ="//doc:example">
+<xsl:apply-templates />
+</xsl:template>
 
 <!-- programlisting -->
 <xsl:template match="//doc:programlisting">
 <xsl:value-of select="php:function('ZendBin\RstConvert::programlisting', string(.))" />
+</xsl:template>
+
+<!-- varlistentry -->
+<xsl:template match="//doc:varlistentry">
+<xsl:if test="@xml:id != ''">
+.. _<xsl:value-of select="@xml:id" />:
+<xsl:text>
+</xsl:text>
+</xsl:if>
+**<xsl:value-of select="doc:term" />**
+<xsl:text>
+</xsl:text>
+<xsl:if test="doc:listitem/doc:methodsynopsis">
+    ``<xsl:value-of select="doc:listitem/doc:methodsynopsis/doc:methodname" />(<xsl:value-of select="php:function('ZendBin\RstConvert::formatText', string(doc:listitem/doc:methodsynopsis/doc:methodparam/doc:funcparams))" />)``
+<xsl:text>
+</xsl:text>
+</xsl:if>
+    <xsl:apply-templates select="doc:listitem/doc:para" />
 </xsl:template>
 
 <!-- itemizedlist -->

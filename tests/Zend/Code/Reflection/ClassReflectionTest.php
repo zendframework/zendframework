@@ -109,6 +109,39 @@ EOS;
         $this->assertEquals(trim($target), trim($contents));
     }
 
+    public function testGetContentsReturnsContentsWithImplementsOnSeparateLine()
+    {
+        $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass9');
+        $target = <<<EOS
+{
+    protected \$_prop1 = null;
+
+    /**
+     * @Sample({"foo":"bar"})
+     */
+    protected \$_prop2 = null;
+
+    public function getProp1()
+    {
+        return \$this->_prop1;
+    }
+
+    public function getProp2(\$param1, TestSampleClass \$param2)
+    {
+        return \$this->_prop2;
+    }
+
+    public function getIterator()
+    {
+        return array();
+    }
+
+}
+EOS;
+        $contents = $reflectionClass->getContents();
+        $this->assertEquals(trim($target), trim($contents));
+    }
+
     public function testStartLine()
     {
         $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');

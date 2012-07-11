@@ -62,7 +62,7 @@ class FormCheckboxTest extends CommonTestCase
     {
         $element = new Element\Checkbox('foo');
         $markup  = $this->helper->render($element);
-        $this->assertRegexp('#type="checkbox"\s+value="1"#', $markup);
+        $this->assertRegexp('#type="checkbox".*?(value="1")#', $markup);
         $this->assertRegexp('#type="hidden"\s+name="foo"\s+value="0"#', $markup);
     }
 
@@ -71,8 +71,7 @@ class FormCheckboxTest extends CommonTestCase
         $element = new Element\Checkbox('foo');
         $element->setUseHiddenElement(false);
         $markup  = $this->helper->render($element);
-        $this->assertRegexp('#type="checkbox"\s+value="1"#', $markup);
+        $this->assertRegexp('#type="checkbox".*?(value="1")#', $markup);
         $this->assertNotRegexp('#type="hidden"\s+name="foo"\s+value="0"#', $markup);
     }
-
 }

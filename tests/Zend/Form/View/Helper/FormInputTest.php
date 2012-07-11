@@ -390,6 +390,7 @@ class FormInputTest extends CommonTestCase
     }
 
     /**
+     * @group ZF2-391
      * @dataProvider booleanAttributeTypes
      */
     public function testBooleanAttributeTypesAreRenderedCorrectly($attribute, $on, $off)

@@ -1,25 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage App
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData\App;
+
+use Zend\GData\App;
 
 /**
  * Atom feed class
@@ -27,8 +18,6 @@ namespace Zend\GData\App;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractFeedSourceParent extends AbstractFeedEntryParent
 {
@@ -53,25 +42,6 @@ abstract class AbstractFeedSourceParent extends AbstractFeedEntryParent
     protected $_subtitle = null;
 
     /**
-     * Set the HTTP client instance
-     *
-     * Sets the HTTP client object to use for retrieving the feed.
-     *
-     * @deprecated Deprecated as of Zend Framework 1.7. Use
-     *             setService() instead.
-     * @param  \Zend\Http\Client $httpClient
-     * @return AbstractFeedSourceParent Provides a fluent interface
-     */
-    public function setHttpClient(\Zend\Http\Client $httpClient)
-    {
-        parent::setHttpClient($httpClient);
-        foreach ($this->_entry as $entry) {
-            $entry->setHttpClient($httpClient);
-        }
-        return $this;
-    }
-
-    /**
      * Set the active service instance for this feed and all enclosed entries.
      * This will be used to perform network requests, such as when calling
      * save() and delete().
@@ -79,7 +49,7 @@ abstract class AbstractFeedSourceParent extends AbstractFeedEntryParent
      * @param \Zend\GData\App $instance The new service instance.
      * @return AbstractFeedEntryParent Provides a fluent interface.
      */
-    public function setService($instance)
+    public function setService(App $instance = null)
     {
         parent::setService($instance);
         foreach ($this->_entry as $entry) {

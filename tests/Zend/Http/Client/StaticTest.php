@@ -1,31 +1,20 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
  */
 
 namespace ZendTest\Http\Client;
 
-use Zend\Uri\Http as UriHttp,
-    Zend\Http\Client as HTTPClient,
-    Zend\Http,
-    Zend\Http\Header\SetCookie,
-    Zend\Http\Request;
+use Zend\Uri\Http as UriHttp;
+use Zend\Http\Client as HTTPClient;
+use Zend\Http;
+use Zend\Http\Header\SetCookie;
+use Zend\Http\Request;
 
 /**
  * This Testsuite includes all Zend_Http_Client tests that do not rely
@@ -36,8 +25,6 @@ use Zend\Uri\Http as UriHttp,
  * @category   Zend
  * @package    Zend_Http_Client
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
@@ -484,11 +471,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             'outputstream' => realpath(__DIR__ . '/_files/zend_http_client_stream.file'),
         );
         $client = new HTTPClient($url, $config);
-        try {
-            $result = $client->send();
-        } catch (Http\Exception\ExceptionInterface $e) {
-            $this->fail('Unexpected exception was thrown: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
-        }
+
+        $result = $client->send();
+
         // we can safely return until we can verify link is still active
         // @todo verify link is still active
         return;

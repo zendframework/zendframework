@@ -1,39 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
 
+use Zend\I18n\Translator;
 use Zend\Validator\AbstractValidator;
-use Zend\Validator\Alpha;
+use Zend\I18n\Validator\Alpha;
 use Zend\Validator\Between;
 use Zend\Validator\StaticValidator;
 use Zend\Validator\ValidatorPluginManager;
-use Zend\Translator;
 
 /**
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
 class StaticValidatorTest extends \PHPUnit_Framework_TestCase
@@ -83,11 +70,9 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetGlobalDefaultTranslator()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new Translator\Translator('ArrayAdapter', array(), 'en');
-        restore_error_handler();
+        $translator = new Translator\Translator();
         AbstractValidator::setDefaultTranslator($translator);
-        $this->assertSame($translator->getAdapter(), AbstractValidator::getDefaultTranslator());
+        $this->assertSame($translator, AbstractValidator::getDefaultTranslator());
     }
 
     public function testGlobalDefaultTranslatorUsedWhenNoLocalTranslatorSet()
@@ -99,9 +84,7 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
     public function testLocalTranslatorPreferredOverGlobalTranslator()
     {
         $this->testCanSetGlobalDefaultTranslator();
-        set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new Translator\Translator('ArrayAdapter', array(), 'en');
-        restore_error_handler();
+        $translator = new Translator\Translator();
         $this->validator->setTranslator($translator);
         $this->assertNotSame(AbstractValidator::getDefaultTranslator(), $this->validator->getTranslator());
     }
@@ -112,11 +95,14 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
         AbstractValidator::setMessageLength(10);
         $this->assertEquals(10, AbstractValidator::getMessageLength());
 
-        $translator = new Translator\Translator(
-            'ArrayAdapter',
-            array(Alpha::INVALID => 'This is the translated message for %value%'),
-            'en'
+        $loader = new TestAsset\ArrayTranslator();
+        $loader->translations = array(
+            Alpha::INVALID => 'This is the translated message for %value%', 
         );
+        $translator = new Translator\Translator();
+        $translator->getPluginManager()->setService('default', $loader);
+        $translator->addTranslationFile('default', null);
+
         $this->validator->setTranslator($translator);
         $this->assertFalse($this->validator->isValid(123));
         $messages = $this->validator->getMessages();
@@ -137,11 +123,9 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testSetGetDefaultTranslator()
     {
-        set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new Translator\Translator('ArrayAdapter', array(), 'en');
-        restore_error_handler();
+        $translator = new Translator\Translator();
         AbstractValidator::setDefaultTranslator($translator);
-        $this->assertSame($translator->getAdapter(), AbstractValidator::getDefaultTranslator());
+        $this->assertSame($translator, AbstractValidator::getDefaultTranslator());
     }
 
     /* plugin loading */

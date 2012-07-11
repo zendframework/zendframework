@@ -10,28 +10,26 @@
 
 namespace Zend\Paginator;
 
-use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
-use Zend\Paginator\Adapter\AdapterInterface;
 use ArrayIterator;
 use Countable;
 use Iterator;
 use IteratorAggregate;
 use Traversable;
-use Zend\Cache\Storage\StorageInterface as CacheStorage;
 use Zend\Cache\Storage\IteratorInterface as CacheIterator;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\Db\Sql;
 use Zend\Db\Table\AbstractRowset as DbAbstractRowset;
 use Zend\Db\Table\Select as DbTableSelect;
-use Zend\Db\Sql;
 use Zend\Filter\FilterInterface;
 use Zend\Json\Json;
+use Zend\Paginator\Adapter\AdapterInterface;
+use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\View;
 
 /**
  * @category   Zend
  * @package    Zend_Paginator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Paginator implements Countable, IteratorAggregate
 {

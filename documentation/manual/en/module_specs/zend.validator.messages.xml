@@ -80,25 +80,15 @@ $validator->setMessage(
         </para>
 
         <programlisting language="php"><![CDATA[
-$translator = new Zend\Translator\Tranlator(
-    array(
-        'adapter' => 'array',
-        'content' => '/resources/languages',
-        'locale'  => $language,
-        'scan' => Zend\Translator\Tranlator::LOCALE_DIRECTORY
-    )
+$translator = new Zend\I18n\Translator\Translator();
+$translator->addTranslationFile(
+    'phpArray'
+    'resources/languages/en.php',
+    'default',
+    'en_US
 );
 Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
 ]]></programlisting>
-
-        <note><title>Used translation adapter</title>
-
-
-            <para>
-                As translation adapter Zend Framework chose the array adapter. It is simple to
-                edit and created very fast.
-            </para>
-        </note>
 
         <note><title>Supported languages</title>
 

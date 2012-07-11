@@ -297,13 +297,6 @@
             </row>
             <row>
                 <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.service.yahoo.html">
-                        <classname>Zend_Service_Yahoo</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
-                <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.xmlrpc.html">
                         <classname>Zend_XmlRpc</classname>
                     </link>

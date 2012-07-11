@@ -1,37 +1,27 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon\Ec2\ReservedInstance;
+
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
 
 /**
  * Zend_Service_Amazon_Ec2_Instance_Reserved test case.
-
  * @todo Should this class be named Zend_Service_Amazon_Ec2_Instance_ReservedTest?
  *
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_Ec2
@@ -40,32 +30,29 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_Service_Amazon_Ec2_Instance_Reserved
+     * @var \Zend\Service\Amazon\Ec2\ReservedInstance
      */
     private $instance;
+
+    /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
 
     /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->instance = new ReservedInstance('access_key', 'secret_access_key');
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
 
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        ReservedInstance::setDefaultHTTPClient($client);
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        unset($this->adapter);
-        $this->instance = null;
+        $this->instance = new ReservedInstance('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     /**
@@ -97,7 +84,7 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
                     ."    </item>\r\n"
                     ."  </reservedInstancesSet>\r\n"
                     ."</DescribeReservedInstancesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->describeInstances('4b2293b4-5813-4cc8-9ce3-1957fc1dcfc8');
 
@@ -146,7 +133,7 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
                     ."    </item>\r\n"
                     ."  </reservedInstancesOfferingsSet>\r\n"
                     ."</DescribeReservedInstancesOfferingsResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->describeOfferings();
 
@@ -183,7 +170,7 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
                     ."<PurchaseReservedInstancesOfferingResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     ."  <reservedInstancesId>4b2293b4-5813-4cc8-9ce3-1957fc1dcfc8</reservedInstancesId>\r\n"
                     ."</PurchaseReservedInstancesOfferingResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->purchaseOffering('4b2293b4-5813-4cc8-9ce3-1957fc1dcfc8');
 

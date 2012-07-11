@@ -1,36 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
 
 use Zend\Form\Element;
 use Zend\Form\ElementInterface;
+use Zend\Form\Element\Collection as CollectionElement;
 use Zend\Form\FieldsetInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormCollection extends AbstractHelper
 {
@@ -63,22 +51,17 @@ class FormCollection extends AbstractHelper
 
         $markup = '';
         $templateMarkup = '';
-        $attributes = $element->getAttributes();
-        $escapeHelper = $this->getEscapeHelper();
+        $escapeHtmlHelper = $this->getEscapeHtmlHelper();
         $rowHelper = $this->getRowHelper();
 
-        if (isset($attributes['shouldCreateTemplate']) && $attributes['shouldCreateTemplate'] === true) {
-            $templatePlaceholder = $attributes['templatePlaceholder'];
-            $elementOrFieldset = $element->get($templatePlaceholder);
+        if ($element instanceof CollectionElement && $element->shouldCreateTemplate()) {
+            $elementOrFieldset = $element->getTemplateElement();
 
             if ($elementOrFieldset instanceof FieldsetInterface) {
                 $templateMarkup .= $this->render($elementOrFieldset);
             } elseif ($elementOrFieldset instanceof ElementInterface) {
                 $templateMarkup .= $rowHelper($elementOrFieldset);
             }
-
-            // Remove it as we don't want to draw it multiple times
-            $element->remove($templatePlaceholder);
         }
 
         foreach($element->getIterator() as $elementOrFieldset) {
@@ -91,16 +74,20 @@ class FormCollection extends AbstractHelper
 
         // If $templateMarkup is not empty, use it for simplify adding new element in JavaScript
         if (!empty($templateMarkup)) {
+            $escapeHtmlAttribHelper = $this->getEscapeHtmlAttrHelper();
+
             $markup .= sprintf(
                 '<span data-template="%s"></span>',
-                $escapeHelper($templateMarkup)
+                $escapeHtmlAttribHelper($templateMarkup)
             );
         }
 
         // Every collection is wrapped by a fieldset if needed
         if ($this->shouldWrap) {
-            if (isset($attributes['label'])) {
-                $label = $escapeHelper($attributes['label']);
+            $label = $element->getLabel();
+
+            if (!empty($label)) {
+                $label = $escapeHtmlHelper($label);
 
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',

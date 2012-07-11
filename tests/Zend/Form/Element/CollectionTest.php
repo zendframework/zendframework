@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace ZendTest\Form\Element;
@@ -40,38 +29,6 @@ class CollectionTest extends TestCase
     {
         $placeholder = $this->form->get('colors')->getTemplatePlaceholder();
         $this->assertEquals('__index__', $placeholder);
-    }
-
-    public function testGenerateEmptySpecificationWhenTemplateIsNotWanted()
-    {
-        $spec = $this->form->get('colors')->getInputFilterSpecification();
-        $this->assertEquals(array(), $spec);
-    }
-
-    public function testGenerateSpecificationWhenTemplateIsWanted()
-    {
-        $collection = $this->form->get('colors');
-        $collection->setShouldCreateTemplate(true);
-        $spec = $collection->getInputFilterSpecification();
-
-        $expectedSpec = array(
-            '__index__' => array(
-                'required' => false
-            )
-        );
-
-        $this->assertEquals($expectedSpec, $spec);
-
-        $collection->setTemplatePlaceholder('__template__');
-        $spec = $collection->getInputFilterSpecification();
-
-        $expectedSpec = array(
-            '__template__' => array(
-                'required' => false
-            )
-        );
-
-        $this->assertEquals($expectedSpec, $spec);
     }
 
     public function testCannotAllowNewElementsIfAllowAddIsFalse()
@@ -108,5 +65,61 @@ class CollectionTest extends TestCase
         $data[] = 'orange';
         $collection->populateValues($data);
         $this->assertEquals(3, count($collection->getElements()));
+    }
+
+    public function testCanValidateFormWithCollectionWithoutTemplate()
+    {
+        $this->form->setData(array(
+            'colors' => array(
+                '#ffffff',
+                '#ffffff'
+            ),
+            'fieldsets' => array(
+                array(
+                    'field' => 'oneValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                ),
+                array(
+                    'field' => 'twoValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                )
+            )
+        ));
+
+        $this->assertEquals(true, $this->form->isValid());
+    }
+
+    public function testCanValidateFormWithCollectionWithTemplate()
+    {
+        $collection = $this->form->get('colors');
+        $collection->setShouldCreateTemplate(true);
+        $collection->setTemplatePlaceholder('__template__');
+
+        $this->form->setData(array(
+            'colors' => array(
+                '#ffffff',
+                '#ffffff'
+            ),
+            'fieldsets' => array(
+                array(
+                    'field' => 'oneValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                ),
+                array(
+                    'field' => 'twoValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                )
+            )
+        ));
+
+        $this->assertEquals(true, $this->form->isValid());
     }
 }

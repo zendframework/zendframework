@@ -2,8 +2,7 @@
 
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
-
-use Zend\Date\Date;
+use DateTime;
 use Zend\Service\LiveDocx\Helper;
 use Zend\Service\LiveDocx\MailMerge;
 
@@ -31,14 +30,15 @@ $mailMerge->assign('customer_number', sprintf("#%'10s",  rand(0,1000000000)))
           ->assign('invoice_number',  sprintf("#%'10s",  rand(0,1000000000)))
           ->assign('account_number',  sprintf("#%'10s",  rand(0,1000000000)));
 
+$date = new DateTime();
+
 $billData = array (  
     'phone'         => '+22 (0)333 444 555',
-    'date'          => Date::now()->toString(Date::DATE_LONG),
+    'date'          => $date->format('Y-m-d'),
     'name'          => 'James Henry Brown',
     'service_phone' => '+22 (0)333 444 559',
     'service_fax'   => '+22 (0)333 444 558',
-    'month'         => sprintf('%s %s', Date::now()->toString(Date::MONTH_NAME),
-                                        Date::now()->toString(Date::YEAR)),
+    'month'         => $date->format('F Y'),
     'monthly_fee'   =>  '15.00',
     'total_net'     =>  '19.60',
     'tax'           =>  '19.00',

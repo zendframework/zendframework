@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_ModuleManager
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ModuleManager
  */
 
 namespace ZendTest\ModuleManager\Listener;
@@ -46,7 +35,7 @@ class DefaultListenerAggregateTest extends TestCase
         $this->includePath = get_include_path();
 
         $this->defaultListeners = new DefaultListenerAggregate(
-            new ListenerOptions(array( 
+            new ListenerOptions(array(
                 'module_paths'         => array(
                     realpath(__DIR__ . '/TestAsset'),
                 ),
@@ -80,9 +69,12 @@ class DefaultListenerAggregateTest extends TestCase
 
         $events = $moduleManager->getEventManager()->getEvents();
         $expectedEvents = array(
-            'loadModules.pre' => array(
+            'loadModules' => array(
                 'Zend\Loader\ModuleAutoloader',
-                'Zend\ModuleManager\Listener\ConfigListener',
+                'config-pre' => 'Zend\ModuleManager\Listener\ConfigListener',
+                'config-post' => 'Zend\ModuleManager\Listener\ConfigListener',
+                'Zend\ModuleManager\Listener\LocatorRegistrationListener',
+                'Zend\ModuleManager\ModuleManager',
             ),
             'loadModule.resolve' => array(
                 'Zend\ModuleManager\Listener\ModuleResolverListener',
@@ -91,10 +83,6 @@ class DefaultListenerAggregateTest extends TestCase
                 'Zend\ModuleManager\Listener\AutoloaderListener',
                 'Zend\ModuleManager\Listener\InitTrigger',
                 'Zend\ModuleManager\Listener\OnBootstrapListener',
-                'Zend\ModuleManager\Listener\ConfigListener',
-                'Zend\ModuleManager\Listener\LocatorRegistrationListener',
-            ),
-            'loadModules.post' => array(
                 'Zend\ModuleManager\Listener\ConfigListener',
                 'Zend\ModuleManager\Listener\LocatorRegistrationListener',
             ),
@@ -119,10 +107,12 @@ class DefaultListenerAggregateTest extends TestCase
         $listenerAggregate = new DefaultListenerAggregate;
         $moduleManager     = new ModuleManager(array('ListenerTestModule'));
 
+        $this->assertEquals(1, count($moduleManager->getEventManager()->getEvents()));
+
         $listenerAggregate->attach($moduleManager->getEventManager());
-        $this->assertEquals(4, count($moduleManager->getEventManager()->getEvents()));
+        $this->assertEquals(3, count($moduleManager->getEventManager()->getEvents()));
 
         $listenerAggregate->detach($moduleManager->getEventManager());
-        $this->assertEquals(0, count($moduleManager->getEventManager()->getEvents()));
+        $this->assertEquals(1, count($moduleManager->getEventManager()->getEvents()));
     }
 }

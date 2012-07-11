@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon_S3
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace ZendTest\Service\Amazon\S3;
@@ -28,8 +17,6 @@ use Zend\Service\Amazon\S3\S3;
  * @category   Zend
  * @package    Zend_Service_Amazon_S3
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
  * @group      Zend_Service_Amazon_S3
@@ -185,7 +172,7 @@ BODY;
             ->with(array(
                     "Date"          => "Tue, 15 May 2012 15:18:31 +0000",
                     "Content-Type"  => "application/xml",
-                    "Authorization" => "AWS AKIAIDCZ2WXN6NNB7YZA:Y+T4nZxI1wBi1Yn1BMnOK9CDiOM=",
+                    "Authorization" => "AWS AKIAIDCZ2WXN6NNB7YZA:NjNlNGY4OWQ5YzQ4ZDcwMDYyZDU4OWY1MDRjOWNlMmJkMDgzODhlMw==",
                     ));
 
         /**

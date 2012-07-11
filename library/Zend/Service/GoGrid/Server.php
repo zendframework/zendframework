@@ -1,31 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend\Service
- * @subpackage GoGrid
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\GoGrid;
 
-use Zend\Service\GoGrid\GoGrid as GoGridAbstract;
-use Zend\Service\GoGrid\Object as GoGridObject;
-use Zend\Service\GoGrid\ObjectList as GoGridObjectList;
-
-class Server extends GoGridAbstract
+class Server extends AbstractGoGrid
 {
     const API_GRID_SERVER_LIST   = 'grid/server/list';
     const API_GRID_SERVER_GET    = 'grid/server/get';
@@ -42,11 +27,11 @@ class Server extends GoGridAbstract
      * This call will list all the servers in the system.
      *
      * @param array $options
-     * @return Zend\Service\GoGrid\ObjectList
+     * @return ObjectList
      */
     public function getList($options=array()) {
         $result = parent::_call(self::API_GRID_SERVER_LIST, $options);
-        return new GoGridObjectList($result);
+        return new ObjectList($result);
     }
     /**
      * Get Server
@@ -54,7 +39,8 @@ class Server extends GoGridAbstract
      * This call will retrieve one or many server objects from your list of servers
      *
      * @param string|array $server
-     * @return Zend\Service\GoGrid\ObjectList
+     * @return ObjectList
+     * @throws Exception\InvalidArgumentException
      */
     public function get($server)
     {
@@ -64,7 +50,7 @@ class Server extends GoGridAbstract
         $options=array();
         $options['server']= $server;
         $result= $this->_call(self::API_GRID_SERVER_GET, $options);
-        return new GoGridObjectList($result);
+        return new ObjectList($result);
     }
     /**
      * Add Server
@@ -77,7 +63,8 @@ class Server extends GoGridAbstract
      * @param string $image
      * @param string $ram
      * @param string $ip
-     * @return Zend\Service\GoGrid\ObjectList
+     * @return ObjectList
+     * @throws Exception\InvalidArgumentException
      */
     public function add($name,$image,$ram,$ip, $options=array()) {
         if (empty($name) || strlen($name)>20) {
@@ -99,7 +86,7 @@ class Server extends GoGridAbstract
         }
         $options['ip']= $ip;
         $result= $this->_call(self::API_GRID_SERVER_ADD, $options);
-        return new GoGridObjectList($result);
+        return new ObjectList($result);
     }
     /**
      * Edit Server
@@ -111,7 +98,8 @@ class Server extends GoGridAbstract
      * Description (Change freeform text description) 
      * 
      * @param string|array $server
-     * @return GoGridObjectList 
+     * @return ObjectList
+     * @throws Exception\InvalidArgumentException
      */
     public function edit($server,$options=array())
     {
@@ -120,7 +108,7 @@ class Server extends GoGridAbstract
         }
         $options['server']= $server;
         $result= $this->_call(self::API_GRID_SERVER_EDIT, $options);
-        return new GoGridObjectList($result);
+        return new ObjectList($result);
     }
     /**
      * Power Server
@@ -130,7 +118,8 @@ class Server extends GoGridAbstract
      *
      * @param string $server
      * @param string $power
-     * @return GoGridObjectList
+     * @return ObjectList
+     * @throws Exception\InvalidArgumentException
      */
     public function power($server,$power) {
         if (empty($server)) {
@@ -144,13 +133,13 @@ class Server extends GoGridAbstract
         $options['server']= $server;
         $options['power']= $power;
         $result= $this->_call(self::API_GRID_SERVER_POWER, $options);
-        return new GoGridObjectList($result);
+        return new ObjectList($result);
     }
     /**
      * Start a server
      *
      * @param string $server
-     * @return GoGridObjectList
+     * @return ObjectList
      */
     public function start($server) {
        return $this->power($server,self::API_POWER_START);
@@ -159,7 +148,7 @@ class Server extends GoGridAbstract
      * Stop a server
      *
      * @param string $server
-     * @return GoGridObjectList
+     * @return ObjectList
      */
     public function stop($server) {
        return $this->power($server,self::API_POWER_STOP);
@@ -168,7 +157,7 @@ class Server extends GoGridAbstract
      * Restart a server
      *
      * @param string $server
-     * @return GoGridObjectList
+     * @return ObjectList
      */
     public function restart($server) {
        return $this->power($server,self::API_POWER_RESTART);
@@ -177,7 +166,8 @@ class Server extends GoGridAbstract
      * Delete a server
      * 
      * @param string $server 
-     * @return GoGridObjectList
+     * @return ObjectList
+     * @throws Exception\InvalidArgumentException
      */
     public function delete($server) {
         if (empty($server)) {
@@ -186,6 +176,6 @@ class Server extends GoGridAbstract
         $options=array();
         $options['server']= $server;
         $result= $this->_call(self::API_GRID_SERVER_DELETE, $options);
-        return new GoGridObjectList($result);
+        return new ObjectList($result);
     }
 }

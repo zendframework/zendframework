@@ -13,8 +13,8 @@ namespace Zend\Db\RowGateway;
 use ArrayAccess;
 use Countable;
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\Sql\TableIdentifier;
 use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\TableIdentifier;
 
 /**
  * @category   Zend

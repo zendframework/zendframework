@@ -10,9 +10,9 @@
 
 namespace Zend\Config;
 
+use ArrayAccess;
 use Countable;
 use Iterator;
-use ArrayAccess;
 use Zend\Stdlib\ArrayUtils;
 
 /**

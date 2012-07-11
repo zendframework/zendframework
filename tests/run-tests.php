@@ -21,6 +21,9 @@
  *
  * To get a list of all @group tags: phpunit --list-groups Zend/
  *
+ * Also is possible pass specific PHPUnit's switches using the environment
+ * variable PHPUNIT_OPTS.
+ *
  * @category Zend
  * @package  UnitTests
  */
@@ -32,6 +35,10 @@ $phpunit_bin      = 'phpunit';
 $phpunit_conf     = (file_exists('phpunit.xml') ? 'phpunit.xml' : 'phpunit.xml.dist');
 $phpunit_opts     = "-c $phpunit_conf";
 $phpunit_coverage = '';
+
+if (getenv('PHPUNIT_OPTS') !== false) {
+    $phpunit_opts .= ' ' . getenv('PHPUNIT_OPTS');
+}
 
 $run_as     = 'paths';
 $components = array();

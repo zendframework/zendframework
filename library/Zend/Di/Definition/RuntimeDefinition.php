@@ -1,11 +1,19 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Di
+ */
 
 namespace Zend\Di\Definition;
 
-use Zend\Di\Definition\Annotation;
 use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Reflection;
+use Zend\Di\Definition\Annotation;
 
 class RuntimeDefinition implements DefinitionInterface
 {
@@ -52,7 +60,7 @@ class RuntimeDefinition implements DefinitionInterface
     {
         $this->introspectionStrategy = $introspectionStrategy;
     }
-    
+
     /**
      * @return IntrospectionStrategy
      */
@@ -82,7 +90,7 @@ class RuntimeDefinition implements DefinitionInterface
 
     /**
      * Retrieves registered classes names
-     * 
+     *
      * @return array
      */
     public function getClasses()
@@ -101,7 +109,7 @@ class RuntimeDefinition implements DefinitionInterface
         if ($this->explicitLookups === true) {
             return (array_key_exists($class, $this->classes));
         }
-        
+
         return class_exists($class) || interface_exists($class);
     }
 
@@ -324,9 +332,6 @@ class RuntimeDefinition implements DefinitionInterface
                 }
             }
         }
-
-
-        //var_dump($this->classes);
     }
 
     protected function processParams(&$def, Reflection\ClassReflection $rClass, Reflection\MethodReflection $rMethod)

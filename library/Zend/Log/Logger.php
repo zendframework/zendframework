@@ -1,37 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Log
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Log
  */
 
 namespace Zend\Log;
 
 use DateTime;
-use Zend\Stdlib\SplPriorityQueue;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\SplPriorityQueue;
 
 /**
  * Logging messages with a stack of backends
  *
  * @category   Zend
  * @package    Zend_Log
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Logger implements LoggerInterface
 {
@@ -230,12 +218,13 @@ class Logger implements LoggerInterface
     {
         return $this->writers;
     }
+
     /**
      * Set the writers
      *
      * @param  SplPriorityQueue $writers
-     * @throws Exception\InvalidArgumentException
      * @return Logger
+     * @throws Exception\InvalidArgumentException
      */
     public function setWriters(SplPriorityQueue $writers)
     {
@@ -247,6 +236,7 @@ class Logger implements LoggerInterface
         $this->writers = $writers;
         return $this;
     }
+
     /**
      * Add a message as a log entry
      *
@@ -388,9 +378,9 @@ class Logger implements LoggerInterface
      * Register logging system as an error handler to log PHP errors
      *
      * @link http://www.php.net/manual/en/function.set-error-handler.php
-     *
      * @param  Logger $logger
-     * @return boolean
+     * @return bool
+     * @throws Exception\InvalidArgumentException if logger is null
      */
     public static function registerErrorHandler(Logger $logger)
     {
@@ -427,12 +417,18 @@ class Logger implements LoggerInterface
                 } else {
                     $priority = Logger::INFO;
                 }
-                $logger->log($priority, $errstr, array('errno'=>$errno, 'file'=>$errfile, 'line'=>$errline, 'context'=>$errcontext));
+                $logger->log($priority, $errstr, array(
+                    'errno' => $errno,
+                    'file' => $errfile,
+                    'line' => $errline,
+                    'context' => $errcontext
+                ));
             }
         });
         self::$registeredErrorHandler = true;
         return true;
     }
+
     /**
      * Unregister error handler
      *
@@ -442,13 +438,14 @@ class Logger implements LoggerInterface
         restore_error_handler();
         self::$registeredErrorHandler = false;
     }
+
     /**
      * Register logging system as an exception handler to log PHP exceptions
      *
      * @link http://www.php.net/manual/en/function.set-exception-handler.php
-     *
      * @param Logger $logger
-     * @return type
+     * @return bool
+     * @throws Exception\InvalidArgumentException if logger is null
      */
     public static function registerExceptionHandler(Logger $logger)
     {
@@ -462,9 +459,11 @@ class Logger implements LoggerInterface
         }
 
         set_exception_handler(function ($exception) use ($logger){
-            $extra = array ('file'  => $exception->getFile(),
-                            'line'  => $exception->getLine(),
-                            'trace' => $exception->getTrace());
+            $extra = array(
+                'file'  => $exception->getFile(),
+                'line'  => $exception->getLine(),
+                'trace' => $exception->getTrace()
+            );
             if (isset($exception->xdebug_message)) {
                 $extra['xdebug'] = $exception->xdebug_message;
             }

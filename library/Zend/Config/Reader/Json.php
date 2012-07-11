@@ -11,8 +11,8 @@
 namespace Zend\Config\Reader;
 
 use Zend\Config\Exception;
-use Zend\Json\Json as JsonFormat;
 use Zend\Json\Exception as JsonException;
+use Zend\Json\Json as JsonFormat;
 
 /**
  * JSON config reader.

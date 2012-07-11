@@ -1,23 +1,11 @@
 <?php
-
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Gdata
- * @subpackage App
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace Zend\GData;
@@ -34,8 +22,6 @@ use Zend\Uri;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class App
 {
@@ -608,10 +594,10 @@ class App
         if (self::getGzipEnabled()) {
             // some services require the word 'gzip' to be in the user-agent
             // header in addition to the accept-encoding header
-            if (strpos($this->_httpClient->headers()->get('User-Agent'),
+            if (strpos($this->_httpClient->getHeaders()->get('User-Agent'),
                 'gzip') === false) {
                 $headers['User-Agent'] =
-                    $this->_httpClient->headers()->get('User-Agent') . ' (gzip)';
+                    $this->_httpClient->getHeaders()->get('User-Agent') . ' (gzip)';
             }
             $headers['Accept-encoding'] = 'gzip, deflate';
         } else {
@@ -670,7 +656,7 @@ class App
         }
         if ($response->isRedirect() && $response->getStatusCode() != '304') {
             if ($remainingRedirects > 0) {
-                $newUrl = $response->headers()->get('Location');
+                $newUrl = $response->getHeaders()->get('Location')->getFieldValue();
                 $response = $this->performHttpRequest(
                     $method, $newUrl, $headers, $body,
                     $contentType, $remainingRedirects);
@@ -722,7 +708,7 @@ class App
         }
         $feed = self::importString($feedContent, $className);
         if ($client != null) {
-            $feed->setHttpClient($client);
+            $feed->setService($app);
         }
         return $feed;
     }
@@ -767,7 +753,7 @@ class App
         $feed = self::importString($feedContent, $className,
             $majorProtocolVersion, $minorProtocolVersion);
         if ($this->getHttpClient() != null) {
-            $feed->setHttpClient($this->getHttpClient());
+            $feed->setService($this);
         }
         $etag = $response->getHeaders()->get('ETag');
         if ($etag instanceof Etag) {
@@ -812,7 +798,7 @@ class App
         $feed->setMajorProtocolVersion($majorProtocolVersion);
         $feed->setMinorProtocolVersion($minorProtocolVersion);
         $feed->transferFromXML($string);
-        $feed->setHttpClient(self::getstaticHttpClient());
+        $feed->setService(new static(self::getstaticHttpClient()));
         return $feed;
     }
 
@@ -954,7 +940,7 @@ class App
         $response = $this->post($data, $uri, null, null, $extraHeaders);
 
         $returnEntry = new $className($response->getBody());
-        $returnEntry->setHttpClient(self::getstaticHttpClient());
+        $returnEntry->setService(new static(self::getstaticHttpClient()));
 
         $etag = $response->getHeaders()->get('ETag');
         if ($etag instanceof Etag) {
@@ -993,7 +979,7 @@ class App
 
         $response = $this->put($data, $uri, null, null, $extraHeaders);
         $returnEntry = new $className($response->getBody());
-        $returnEntry->setHttpClient(self::getstaticHttpClient());
+        $returnEntry->setService(new static(self::getstaticHttpClient()));
 
         $etag = $response->getHeaders()->get('ETag');
         if ($etag instanceof Etag) {
@@ -1037,7 +1023,7 @@ class App
                 $reflectionObj = new \ReflectionClass($foundClassName);
                 $instance = $reflectionObj->newInstanceArgs($args);
                 if ($instance instanceof App\AbstractFeedEntryParent) {
-                    $instance->setHttpClient($this->_httpClient);
+                    $instance->setService($this);
 
                     // Propogate version data
                     $instance->setMajorProtocolVersion(

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ServiceManager
+ */
 
 namespace Zend\ServiceManager;
 
@@ -195,7 +203,7 @@ class ServiceManager implements ServiceLocatorInterface
         $cName = $this->canonicalizeName($name);
         $rName = $name;
 
-        if ($this->allowOverride === false && $this->has(array($cName, $rName))) {
+        if ($this->allowOverride === false && $this->has(array($cName, $rName), false)) {
             throw new Exception\InvalidServiceNameException(sprintf(
                 'A service by the name or alias "%s" already exists and cannot be overridden; please use an alternate name',
                 $cName
@@ -222,7 +230,7 @@ class ServiceManager implements ServiceLocatorInterface
             );
         }
 
-        if ($this->allowOverride === false && $this->has(array($cName, $rName))) {
+        if ($this->allowOverride === false && $this->has(array($cName, $rName), false)) {
             throw new Exception\InvalidServiceNameException(sprintf(
                 'A service by the name or alias "%s" already exists and cannot be overridden, please use an alternate name',
                 $cName
@@ -301,7 +309,7 @@ class ServiceManager implements ServiceLocatorInterface
         $cName = $this->canonicalizeName($name);
         $rName = $name;
 
-        if ($this->allowOverride === false && $this->has($cName)) {
+        if ($this->allowOverride === false && $this->has($cName, false)) {
             throw new Exception\InvalidServiceNameException(sprintf(
                 '%s: A service by the name "%s" or alias already exists and cannot be overridden, please use an alternate name.',
                 __METHOD__,
@@ -464,7 +472,7 @@ class ServiceManager implements ServiceLocatorInterface
      * @param $name
      * @return bool
      */
-    public function canCreate($name)
+    public function canCreate($name, $checkAbstractFactories = true)
     {
         if (is_array($name)) {
             list($cName, $rName) = $name;
@@ -492,7 +500,7 @@ class ServiceManager implements ServiceLocatorInterface
             return true;
         }
 
-        if ($this->canCreateFromAbstractFactory($cName, $rName)) {
+        if ($checkAbstractFactories && $this->canCreateFromAbstractFactory($cName, $rName)) {
             return true;
         }
 
@@ -503,7 +511,7 @@ class ServiceManager implements ServiceLocatorInterface
      * @param $name
      * @return bool
      */
-    public function has($name, $usePeeringServiceManagers = true)
+    public function has($name, $checkAbstractFactories = true, $usePeeringServiceManagers = true)
     {
         if (is_array($name)) {
             list($cName, $rName) = $name;
@@ -512,7 +520,7 @@ class ServiceManager implements ServiceLocatorInterface
             $cName = $this->canonicalizeName($rName);
         }
 
-        if ($this->canCreate(array($cName, $rName))) {
+        if ($this->canCreate(array($cName, $rName), $checkAbstractFactories)) {
             return true;
         }
 
@@ -577,7 +585,7 @@ class ServiceManager implements ServiceLocatorInterface
             throw new Exception\InvalidServiceNameException('Invalid service name alias');
         }
 
-        if ($this->allowOverride === false && $this->has(array($cAlias, $alias))) {
+        if ($this->allowOverride === false && $this->has(array($cAlias, $alias), false)) {
             throw new Exception\InvalidServiceNameException('An alias by this name already exists');
         }
 

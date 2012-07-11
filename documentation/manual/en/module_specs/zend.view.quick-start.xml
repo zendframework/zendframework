@@ -424,7 +424,7 @@ class ArticleController extends AbstractActionController
     <!-- This is from the $articleView view model, and the "content/article" 
          template -->
     <article class="twelve columns">
-        <?php echo $this->escape('article') ?>
+        <?php echo $this->escapeHtml('article') ?>
     </article>
 
 <?php // "content/main-sidebar template ?>
@@ -987,7 +987,7 @@ class AcceptStrategy implements ListenerAggregate
     public function selectRenderer($e)
     {
         $request = $e->getRequest();
-        $headers = $request->headers();
+        $headers = $request->getHeaders();
 
         // No Accept header? return PhpRenderer
         if (!$headers->has('accept')) {
@@ -1022,13 +1022,13 @@ class AcceptStrategy implements ListenerAggregate
 
         if ($renderer === $this->jsonRenderer) {
             // JSON Renderer; set content-type header
-            $headers = $response->headers();
+            $headers = $response->getHeaders();
             $headers->addHeaderLine('content-type', 'application/json');
         } elseif ($renderer === $this->feedRenderer) {
             // Feed Renderer; set content-type header, and export the feed if
             // necessary
             $feedType  = $this->feedRenderer->getFeedType();
-            $headers   = $response->headers();
+            $headers   = $response->getHeaders();
             $mediatype = 'application/'
                        . (('rss' == $feedType) ? 'rss' : 'atom')
                        . '+xml';

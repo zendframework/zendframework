@@ -1,38 +1,25 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Service
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Service;
 
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerInterface;
 use Zend\ServiceManager\ConfigurationInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\EventManagerAwareInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage Service
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ServiceManagerConfiguration implements ConfigurationInterface
 {
@@ -41,13 +28,8 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      *
      * @var array
      */
-    protected $services = array(
-        'DispatchListener'   => 'Zend\Mvc\DispatchListener',
-        'Request'            => 'Zend\Http\PhpEnvironment\Request',
-        'Response'           => 'Zend\Http\PhpEnvironment\Response',
-        'RouteListener'      => 'Zend\Mvc\RouteListener',
+    protected $invokables = array(
         'SharedEventManager' => 'Zend\EventManager\SharedEventManager',
-        'ViewManager'        => 'Zend\Mvc\View\ViewManager',
     );
 
     /**
@@ -56,19 +38,8 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * @var array
      */
     protected $factories = array(
-        'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
-        'Configuration'           => 'Zend\Mvc\Service\ConfigurationFactory',
-        'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
-        'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
-        'DependencyInjector'      => 'Zend\Mvc\Service\DiFactory',
-        'EventManager'            => 'Zend\Mvc\Service\EventManagerFactory',
-        'ModuleManager'           => 'Zend\Mvc\Service\ModuleManagerFactory',
-        'Router'                  => 'Zend\Mvc\Service\RouterFactory',
-        'ViewHelperManager'       => 'Zend\Mvc\Service\ViewHelperManagerFactory',
-        'ViewFeedRenderer'        => 'Zend\Mvc\Service\ViewFeedRendererFactory',
-        'ViewFeedStrategy'        => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
-        'ViewJsonRenderer'        => 'Zend\Mvc\Service\ViewJsonRendererFactory',
-        'ViewJsonStrategy'        => 'Zend\Mvc\Service\ViewJsonStrategyFactory',
+        'EventManager'  => 'Zend\Mvc\Service\EventManagerFactory',
+        'ModuleManager' => 'Zend\Mvc\Service\ModuleManagerFactory',
     );
 
     /**
@@ -84,13 +55,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * @var array
      */
     protected $aliases = array(
-        'Config'                                  => 'Configuration',
-        'ControllerPluginBroker'                  => 'ControllerPluginManager',
-        'Di'                                      => 'DependencyInjector',
-        'Zend\Di\LocatorInterface'                => 'DependencyInjector',
         'Zend\EventManager\EventManagerInterface' => 'EventManager',
-        'Zend\Mvc\Controller\PluginBroker'        => 'ControllerPluginBroker',
-        'Zend\Mvc\Controller\PluginManager'       => 'ControllerPluginManager',
     );
 
     /**
@@ -114,8 +79,8 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      */
     public function __construct(array $configuration = array())
     {
-        if (isset($configuration['services'])) {
-            $this->services = array_merge($this->services, $configuration['services']);
+        if (isset($configuration['invokables'])) {
+            $this->invokables = array_merge($this->invokables, $configuration['invokables']);
         }
 
         if (isset($configuration['factories'])) {
@@ -149,8 +114,8 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      */
     public function configureServiceManager(ServiceManager $serviceManager)
     {
-        foreach ($this->services as $name => $service) {
-            $serviceManager->setInvokableClass($name, $service);
+        foreach ($this->invokables as $name => $class) {
+            $serviceManager->setInvokableClass($name, $class);
         }
 
         foreach ($this->factories as $name => $factoryClass) {

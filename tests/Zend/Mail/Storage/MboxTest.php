@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mail
  */
 
 namespace ZendTest\Mail\Storage;
@@ -28,8 +17,6 @@ use Zend\Mail\Storage;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
 class MboxTest extends \PHPUnit_Framework_TestCase
@@ -74,64 +61,37 @@ class MboxTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadOk()
     {
-        try {
-            $mail = new Storage\Mbox(array('filename' => $this->_mboxFile));
-        } catch (\Exception $e) {
-            $this->fail('exception raised while loading mbox file');
-        }
+        new Storage\Mbox(array('filename' => $this->_mboxFile));
     }
 
     public function testLoadConfig()
     {
-        try {
-            $mail = new Storage\Mbox(new Config\Config(array('filename' => $this->_mboxFile)));
-        } catch (\Exception $e) {
-            $this->fail('exception raised while loading mbox folder');
-        }
+        new Storage\Mbox(new Config\Config(array('filename' => $this->_mboxFile)));
     }
 
     public function testNoParams()
     {
-        try {
-            $mail = new Storage\Mbox(array());
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception raised with empty params');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        new Storage\Mbox(array());
     }
 
     public function testLoadFailure()
     {
-        try {
-            $mail = new Storage\Mbox(array('filename' => 'ThisFileDoesNotExist'));
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception raised while loading unknown file');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\RuntimeException');
+        new Storage\Mbox(array('filename' => 'ThisFileDoesNotExist'));
     }
 
     public function testLoadInvalid()
     {
-        try {
-            $mail = new Storage\Mbox(array('filename' => __FILE__));
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception while loading invalid file');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
+        new Storage\Mbox(array('filename' => __FILE__));
     }
 
     public function testClose()
     {
         $mail = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
-        try {
-            $mail->close();
-        } catch (\Exception $e) {
-            $this->fail('exception raised while closing mbox file');
-        }
+        $mail->close();
     }
 
     public function testHasTop()
@@ -152,11 +112,7 @@ class MboxTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
-        try {
-            $mail->noop();
-        } catch (\Exception $e) {
-            $this->fail('exception raised while doing nothing (noop)');
-        }
+        $mail->noop();
     }
 
     public function testCount()
@@ -224,13 +180,8 @@ class MboxTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
-        try {
-            $mail->removeMessage(1);
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception raised while deleting message (mbox is read-only)');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\RuntimeException');
+        $mail->removeMessage(1);
     }
 
     public function testCapa()
@@ -254,13 +205,8 @@ class MboxTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Mbox(array('filename' => $this->_mboxFile));
 
-        try {
-            $mail->seek(INF);
-        } catch (\Exception $e) {
-            return; // test ok
-        }
-
-        $this->fail('no exception raised while seeking to not invalid id');
+        $this->setExpectedException('Zend\Mail\Storage\Exception\OutOfBoundsException');
+        $mail->seek(INF);
     }
 
     public function testSleepWake()

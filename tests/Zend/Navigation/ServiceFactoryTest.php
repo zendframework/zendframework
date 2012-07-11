@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Navigation
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Navigation
  */
 
 namespace ZendTest\Navigation;
@@ -36,8 +25,6 @@ use Zend\ServiceManager\ServiceManager;
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Navigation
  */
 class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
@@ -58,41 +45,43 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
                 'config_cache_enabled' => false,
                 'cache_dir'            => 'data/cache',
                 'module_paths'         => array(),
-            ),
-            'service_manager' => array(
-                'factories' => array(
-                    'Configuration' => function() {
-                        return array(
-                            'navigation' => array(
-                                'file'    => __DIR__ . '/_files/navigation.xml',
-                                'default' => array(
-                                    array(
-                                        'label' => 'Page 1',
-                                        'uri'   => 'page1.html'
-                                    ),
-                                    array(
-                                        'label' => 'MVC Page',
-                                        'route' => 'foo',
-                                        'pages' => array(
+                'extra_config'         => array(
+                    'service_manager' => array(
+                        'factories' => array(
+                            'Configuration' => function() {
+                                return array(
+                                    'navigation' => array(
+                                        'file'    => __DIR__ . '/_files/navigation.xml',
+                                        'default' => array(
                                             array(
-                                                'label' => 'Sub MVC Page',
-                                                'route' => 'foo'
+                                                'label' => 'Page 1',
+                                                'uri'   => 'page1.html'
+                                            ),
+                                            array(
+                                                'label' => 'MVC Page',
+                                                'route' => 'foo',
+                                                'pages' => array(
+                                                    array(
+                                                        'label' => 'Sub MVC Page',
+                                                        'route' => 'foo'
+                                                    )
+                                                )
+                                            ),
+                                            array(
+                                                'label' => 'Page 3',
+                                                'uri'   => 'page3.html'
                                             )
                                         )
-                                    ),
-                                    array(
-                                        'label' => 'Page 3',
-                                        'uri'   => 'page3.html'
                                     )
-                                )
-                            )
-                        );
-                    }
+                                );
+                            }
+                        )
+                    ),
                 )
             ),
         );
 
-        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfiguration($config['service_manager']));
+        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfiguration);
         $sm->setService('ApplicationConfiguration', $config);
         $sm->get('ModuleManager')->loadModules();
         $sm->get('Application')->bootstrap();

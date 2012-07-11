@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Renderer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Renderer;
@@ -26,8 +15,8 @@ use Traversable;
 use Zend\Json\Json;
 use Zend\Stdlib\ArrayUtils;
 use Zend\View\Exception;
-use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Model\JsonModel;
+use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Renderer\RendererInterface as Renderer;
 use Zend\View\Resolver\ResolverInterface as Resolver;
 
@@ -37,8 +26,6 @@ use Zend\View\Resolver\ResolverInterface as Resolver;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Renderer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class JsonRenderer implements Renderer, TreeRendererInterface
 {
@@ -224,6 +211,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             $childValues = $this->recurseModel($child);
             if ($captureTo) {
                 // Capturing to a specific key
+                //TODO please complete if append is true. must change old value to array and append to array?
                 $values[$captureTo] = $childValues;
             } elseif ($mergeChildren) {
                 // Merging values with parent

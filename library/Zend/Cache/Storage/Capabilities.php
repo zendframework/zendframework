@@ -1,37 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage;
 
-use ArrayObject,
-    stdClass,
-    Zend\Cache\Exception,
-    Zend\EventManager\EventsCapableInterface;
+use ArrayObject;
+use stdClass;
+use Zend\Cache\Exception;
+use Zend\EventManager\EventsCapableInterface;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Capabilities
 {
@@ -58,56 +45,111 @@ class Capabilities
 
     /**
      * Expire read
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|boolean
      */
     protected $_expiredRead;
 
     /**
-     * Max key length
+     * Max. key length
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|int
      */
     protected $_maxKeyLength;
 
     /**
-     * Max ttl
+     * Min. TTL (0 means items never expire)
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|int
+     */
+    protected $_minTtl;
+
+    /**
+     * Max. TTL (0 means infinite)
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|int
      */
     protected $_maxTtl;
 
     /**
      * Namespace is prefix
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|boolean
      */
     protected $_namespaceIsPrefix;
 
     /**
      * Namespace separator
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|string
      */
     protected $_namespaceSeparator;
 
     /**
      * Static ttl
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|boolean
      */
     protected $_staticTtl;
 
    /**
-    * Capability property
+    * Supported datatypes
     *
     * If it's NULL the capability isn't set and the getter
     * returns the base capability or the default value.
     *
-    * @var null|mixed
+    * @var null|array
     */
     protected $_supportedDatatypes;
 
     /**
      * Supported metdata
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|array
      */
     protected $_supportedMetadata;
 
     /**
-     * Ttl precision
+     * TTL precision
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|int
      */
     protected $_ttlPrecision;
 
     /**
      * Use request time
+     *
+    * If it's NULL the capability isn't set and the getter
+    * returns the base capability or the default value.
+     *
+     * @var null|boolean
      */
     protected $_useRequestTime;
 
@@ -236,6 +278,32 @@ class Capabilities
     }
 
     /**
+     * Get minimum supported time-to-live
+     *
+     * @return int 0 means items never expire
+     */
+    public function getMinTtl()
+    {
+        return $this->getCapability('minTtl', 0);
+    }
+
+    /**
+     * Set minimum supported time-to-live
+     *
+     * @param  stdClass $marker
+     * @param  int $minTtl
+     * @return Capabilities Fluent interface
+     */
+    public function setMinTtl(stdClass $marker, $minTtl)
+    {
+        $minTtl = (int) $minTtl;
+        if ($minTtl < 0) {
+            throw new Exception\InvalidArgumentException('$minTtl must be greater or equal 0');
+        }
+        return $this->setCapability($marker, 'minTtl', $minTtl);
+    }
+
+    /**
      * Get maximum supported time-to-live
      *
      * @return int 0 means infinite
@@ -254,7 +322,7 @@ class Capabilities
      */
     public function setMaxTtl(stdClass $marker, $maxTtl)
     {
-        $maxTtl = (int)$maxTtl;
+        $maxTtl = (int) $maxTtl;
         if ($maxTtl < 0) {
             throw new Exception\InvalidArgumentException('$maxTtl must be greater or equal 0');
         }

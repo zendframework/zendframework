@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\Reader\Entry;
@@ -27,8 +16,6 @@ use Zend\Feed\Reader;
 * @category Zend
 * @package Zend_Feed
 * @subpackage UnitTests
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 * @group Zend_Feed
 * @group Zend_Feed_Reader
 */
@@ -133,5 +120,36 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('UTF-8', $entry->getEncoding());
     }
 
-
+    /**
+    * When not passing the optional argument type
+    */
+    public function testFeedEntryCanDetectFeedType()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/atom.xml')
+        );
+        $entry = $feed->current();
+        $stub = $this->getMockForAbstractClass(
+            'Zend\Feed\Reader\Entry\AbstractEntry', 
+            array($entry->getElement(), $entry->getId())
+        );
+        $this->assertEquals($entry->getType(), $stub->getType());
+    }
+	
+    /**
+    * When passing a newly created DOMElement without any DOMDocument assigned
+    */
+    public  function testFeedEntryCanSetAnyType()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/atom.xml')
+        );
+        $entry = $feed->current();
+        $domElement = new \DOMElement($entry->getElement()->tagName);
+        $stub = $this->getMockForAbstractClass(
+            'Zend\Feed\Reader\Entry\AbstractEntry', 
+            array($domElement, $entry->getId())
+        );
+        $this->assertEquals($stub->getType(), Reader\Reader::TYPE_ANY);
+    }
 }

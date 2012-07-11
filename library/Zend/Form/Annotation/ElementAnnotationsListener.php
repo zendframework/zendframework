@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Annotation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\Annotation;
@@ -35,6 +24,8 @@ use Zend\EventManager\EventManagerInterface;
  * - Filter
  * - Flags
  * - Input
+ * - Hydrator
+ * - Object
  * - Required
  * - Type
  * - Validator
@@ -46,8 +37,6 @@ use Zend\EventManager\EventManagerInterface;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ElementAnnotationsListener extends AbstractAnnotationsListener
 {
@@ -65,7 +54,10 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleErrorMessageAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleFilterAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleFlagsAnnotation'));
+        $this->listeners[] = $events->attach('configureElement', array($this, 'handleHydratorAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleInputAnnotation'));
+        $this->listeners[] = $events->attach('configureElement', array($this, 'handleObjectAnnotation'));
+        $this->listeners[] = $events->attach('configureElement', array($this, 'handleOptionsAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleRequiredAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleTypeAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleValidatorAnnotation'));
@@ -228,6 +220,25 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
     }
 
     /**
+     * Handle the Hydrator annotation
+     *
+     * Sets the hydrator class to use in the fieldset specification.
+     *
+     * @param  \Zend\EventManager\EventInterface $e
+     * @return void
+     */
+    public function handleHydratorAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof Hydrator) {
+            return;
+        }
+
+        $elementSpec = $e->getParam('element');
+        $elementSpec['hydrator'] = $annotation->getHydrator();
+    }
+
+    /**
      * Handle the Input annotation
      *
      * Sets the filter specification for the current element to the specified 
@@ -246,6 +257,44 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $name       = $e->getParam('name');
         $filterSpec = $e->getParam('filterSpec');
         $filterSpec[$name] = $annotation->getInput();
+    }
+
+    /**
+     * Handle the Object annotation
+     *
+     * Sets the object to bind to the form or fieldset
+     *
+     * @param  \Zend\EventManager\EventInterface $e
+     * @return void
+     */
+    public function handleObjectAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof Object) {
+            return;
+        }
+
+        $elementSpec = $e->getParam('elementSpec');
+        $elementSpec['object'] = $annotation->getObject();
+    }
+
+    /**
+     * Handle the Options annotation
+     *
+     * Sets the element options in the specification.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
+    public function handleOptionsAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof Options) {
+            return;
+        }
+
+        $elementSpec = $e->getParam('elementSpec');
+        $elementSpec['spec']['options'] = $annotation->getOptions();
     }
 
     /**

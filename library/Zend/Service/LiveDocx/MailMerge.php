@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage LiveDocx
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\LiveDocx;
@@ -27,8 +16,6 @@ use DateTime;
  * @category   Zend
  * @package    Zend_Service
  * @subpackage LiveDocx
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MailMerge extends AbstractLiveDocx
 {
@@ -1056,7 +1043,7 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  string $filename
      * @throws Exception\RuntimeException
-     * @return void
+     * @return string
      * @since  LiveDocx 2.0
      */
     public function downloadImage($filename)
@@ -1204,32 +1191,4 @@ class MailMerge extends AbstractLiveDocx
 
         return array_merge($arrayKeys, $arrayValues);
     }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Return supported image formats (lowercase).
-     *
-     * Note, this method is DEPRECATED and will be removed in the next major
-     * release of the Zend Framework implementation of the LiveDocx service.
-     *
-     * @return array
-     * @since  LiveDocx 1.2
-     * @deprecated since LiveDocx 2.0
-     */
-    public function getImageFormats()
-    {
-        $replacement = 'getImageExportFormats';
-
-        $errorMessage = sprintf(
-            "%s::%s is deprecated as of LiveDocx 2.0. "
-            . "It has been replaced by %s::%s() (drop in replacement)",
-            __CLASS__, __FUNCTION__, __CLASS__, $replacement
-        );
-
-        trigger_error($errorMessage, E_USER_NOTICE);
-
-        return $this->$replacement();
-    }
-
 }

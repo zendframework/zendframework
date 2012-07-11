@@ -1,50 +1,40 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
 
-use APCIterator as BaseApcIterator,
-    ArrayObject,
-    stdClass,
-    Traversable,
-    Zend\Cache\Exception,
-    Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\ClearByPrefixInterface,
-    Zend\Cache\Storage\ClearByNamespaceInterface,
-    Zend\Cache\Storage\FlushableInterface,
-    Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\AvailableSpaceCapableInterface,
-    Zend\Cache\Storage\TotalSpaceCapableInterface;
+use APCIterator as BaseApcIterator;
+use ArrayObject;
+use stdClass;
+use Traversable;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
+use Zend\Cache\Storage\ClearByPrefixInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
 
 /**
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Storage
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Apc
-    extends AbstractAdapter
-    implements ClearByPrefixInterface, ClearByNamespaceInterface, FlushableInterface, IterableInterface,
-               AvailableSpaceCapableInterface, TotalSpaceCapableInterface
+class Apc extends AbstractAdapter implements
+    AvailableSpaceCapableInterface,
+    ClearByNamespaceInterface,
+    ClearByPrefixInterface,
+    FlushableInterface,
+    IterableInterface,
+    TotalSpaceCapableInterface
 {
     /**
      * Buffered total space in bytes
@@ -102,7 +92,7 @@ class Apc
      * Get options.
      *
      * @return ApcOptions
-     * @see setOptions()
+     * @see    setOptions()
      */
     public function getOptions()
     {
@@ -308,10 +298,6 @@ class Apc
      * @param  string $normalizedKey
      * @return array|boolean Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
-     *
-     * @triggers getMetadata.pre(PreEvent)
-     * @triggers getMetadata.post(PostEvent)
-     * @triggers getMetadata.exception(ExceptionEvent)
      */
     protected function internalGetMetadata(& $normalizedKey)
     {
@@ -654,6 +640,7 @@ class Apc
                         'atime', 'ctime', 'mtime', 'rtime',
                         'size', 'hits', 'ttl',
                     ),
+                    'minTtl'             => 1,
                     'maxTtl'             => 0,
                     'staticTtl'          => true,
                     'ttlPrecision'       => 1,

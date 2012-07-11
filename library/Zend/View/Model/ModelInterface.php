@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Model
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Model;
@@ -35,8 +24,6 @@ use IteratorAggregate;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Model
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface ModelInterface extends Countable, IteratorAggregate
 {
@@ -108,9 +95,10 @@ interface ModelInterface extends Countable, IteratorAggregate
      * 
      * @param  ModelInterface $child
      * @param  null|string $captureTo Optional; if specified, the "capture to" value to set on the child
+     * @param  null|bool $append Optional; if specified, append to child  with the same capture
      * @return ModelInterface
      */
-    public function addChild(ModelInterface $child, $captureTo = null);
+    public function addChild(ModelInterface $child, $captureTo = null, $append = false);
 
     /**
      * Return all children.
@@ -157,4 +145,20 @@ interface ModelInterface extends Countable, IteratorAggregate
      * @return bool
      */
     public function terminate();
+	
+	
+	/**
+     * Set flag indicating whether or not append to child  with the same capture
+     * 
+     * @param  bool $append 
+     * @return ModelInterface
+     */
+    public function setAppend($append);
+
+    /**
+     * Is this append to child  with the same capture?
+     * 
+     * @return bool
+     */
+    public function isAppend();
 }

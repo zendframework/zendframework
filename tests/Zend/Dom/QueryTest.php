@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Dojo
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Dom
  */
 
 namespace ZendTest\Dom;
@@ -30,8 +19,6 @@ use Zend\Dom\Query,
  * @category   Zend
  * @package    Zend_Dom
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dom
  */
 class QueryTest extends \PHPUnit_Framework_TestCase
@@ -201,6 +188,40 @@ class QueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($result), $result->getXpathQuery());
     }
 
+    public function testXpathPhpFunctionsShouldBeDisableByDefault()
+    {
+        $this->loadHtml();
+        try {
+            $this->query->queryXpath('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]');
+        } catch (\Exception $e) {
+            return ;
+        }
+        $this->assertFails('XPath PHPFunctions should be disable by default');
+    }
+
+    public function testXpathPhpFunctionsShouldBeEnableWithoutParameter()
+    {
+        $this->loadHtml();
+        $this->query->registerXpathPhpFunctions();
+        $result = $this->query->queryXpath('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]');
+        $this->assertEquals('content-type', 
+                            strtolower($result->current()->getAttribute('http-equiv')), 
+                            $result->getXpathQuery());
+    }
+
+    public function testXpathPhpFunctionsShouldBeNotCalledWhenSpecifiedFunction()
+    {
+        $this->loadHtml();
+        try {
+            $this->query->registerXpathPhpFunctions('stripos');
+            $this->query->queryXpath('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]');
+        } catch (\Exception $e) {
+            // $e->getMessage() - Not allowed to call handler 'strtolower()
+            return ;
+        }
+        $this->assertFails('Not allowed to call handler strtolower()');
+    }
+
     /**
      * @group ZF-9243
      */
@@ -282,4 +303,42 @@ EOF;
         $this->assertEquals('utf-8', $doc->encoding);
     }
 
+    /**
+     * @group ZF-11376
+     */
+    public function testXhtmlDocumentWithXmlDeclaration()
+    {
+        $xhtmlWithXmlDecl = <<<EOB
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head><title /></head>
+    <body><p>Test paragraph.</p></body>
+</html>
+EOB;
+        $this->query->setDocument($xhtmlWithXmlDecl, 'utf-8');
+        $this->assertEquals(1, $this->query->execute('//p')->count());
+    }
+
+    /**
+     * @group ZF-12106
+     */
+    public function testXhtmlDocumentWithXmlAndDoctypeDeclaration()
+    {
+        $xhtmlWithXmlDecl = <<<EOB
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Virtual Library</title>
+  </head>
+  <body>
+    <p>Moved to <a href="http://example.org/">example.org</a>.</p>
+  </body>
+</html>
+EOB;
+        $this->query->setDocument($xhtmlWithXmlDecl, 'utf-8');
+        $this->assertEquals(1, $this->query->execute('//p')->count());
+    }
 }

@@ -1,21 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_InputFilter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_InputFilter
  */
 
 namespace Zend\InputFilter;
@@ -26,8 +16,6 @@ use Zend\Validator\ValidatorChain;
 /**
  * @category   Zend
  * @package    Zend_InputFilter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Input implements InputInterface
 {
@@ -95,7 +83,6 @@ class Input implements InputInterface
         return $this;
     }
 
-
     public function allowEmpty()
     {
         return $this->allowEmpty;
@@ -104,6 +91,11 @@ class Input implements InputInterface
     public function breakOnFailure()
     {
         return $this->breakOnFailure;
+    }
+
+    public function getErrorMessage()
+    {
+        return $this->errorMessage;
     }
 
     public function getFilterChain()
@@ -141,6 +133,22 @@ class Input implements InputInterface
     {
         $filter = $this->getFilterChain();
         return $filter->filter($this->value);
+    }
+
+    public function merge(InputInterface $input)
+    {
+        $this->setAllowEmpty($input->allowEmpty());
+        $this->setBreakOnFailure($input->breakOnFailure());
+        $this->setErrorMessage($input->getErrorMessage());
+        $this->setName($input->getName());
+        $this->setRequired($input->isRequired());
+        $this->setValue($input->getValue());
+
+        $filterChain = $input->getFilterChain();
+        $this->getFilterChain()->merge($filterChain);
+
+        $validatorChain = $input->getValidatorChain();
+        $this->getValidatorChain()->merge($validatorChain);
     }
 
     public function isValid($context = null)

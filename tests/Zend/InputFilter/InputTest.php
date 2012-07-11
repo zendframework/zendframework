@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_InputFilter
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_InputFilter
  */
 
 namespace ZendTest\InputFilter;
@@ -135,8 +124,8 @@ class InputTest extends TestCase
     public function testIsValidReturnsTrueIfValidationChainSucceeds()
     {
         $input  = new Input('foo');
-        $input->setValue('bar');
-        $validator = new Validator\Alpha();
+        $input->setValue('123');
+        $validator = new Validator\Digits();
         $input->getValidatorChain()->addValidator($validator);
         $this->assertTrue($input->isValid());
     }
@@ -144,10 +133,10 @@ class InputTest extends TestCase
     public function testValidationOperatesOnFilteredValue()
     {
         $input  = new Input('foo');
-        $input->setValue(' bar ');
+        $input->setValue(' 123 ');
         $filter = new Filter\StringTrim();
         $input->getFilterChain()->attach($filter);
-        $validator = new Validator\Alpha();
+        $validator = new Validator\Digits();
         $input->getValidatorChain()->addValidator($validator);
         $this->assertTrue($input->isValid());
     }

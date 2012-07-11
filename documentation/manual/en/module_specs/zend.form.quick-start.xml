@@ -818,4 +818,221 @@ use Zend\Form\FormInterface;
 $form->setValidationGroup(FormInterface::VALIDATE_ALL);
 ]]></programlisting>
     </example>
+
+    <example xml:id="zend.form.quick-start.annotations">
+        <title>Using Annotations</title>
+
+        <para>
+            Creating a complete forms solution can often be tedious: you'll create some domain model
+            object, an input filter for validating it, a form object for providing a representation
+            for it, and potentially a hydrator for mapping the form elements and fieldsets to the
+            domain model. Wouldn't it be nice to have a central place to define all of these?
+        </para>
+
+        <para>
+            Annotations allow us to solve this problem. You can define the following behaviors with
+            the shipped annotations in <classname>Zend\Form</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>AllowEmpty</code>: mark an input as allowing an empty value. This
+                    annotation does not require a value.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Attributes</code>: specify the form, fieldset, or element attributes. This
+                    annotation requires an associative array of values, in a JSON object format:
+                    <code>@Attributes({"class":"zend_form","type":"text"})</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>ComposedObject</code>: specify another object with annotations to parse.
+                    Typically, this is used if a property references another object, which will then
+                    be added to your form as an additional fieldset. Expects a string value
+                    indicating the class for the object being composed.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>ErrorMessage</code>: specify the error message to return for an element in
+                    the case of a failed validation. Expects a string value.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Exclude</code>: mark a property to exclude from the form or fieldset. This
+                    annotation does not require a value.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Filter</code>: provide a specification for a filter to use on a given
+                    element. Expects an associative array of values, with a "name" key pointing to a
+                    string filter name, and an "options" key pointing to an associatve array of
+                    filter options for the constructor: <code>@Filter({"name": "Boolean", "options":
+                        {"casting":true}})</code>. This annotation may be specified multiple times.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Flags</code>: flags to pass to the fieldset or form composing an element
+                    or fieldset; these are usually used to specify the name or priority. The
+                    annotation expects an associative array: <code>@Flags({"priority": 100})</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Hydrator</code>: specify the hydrator class to use for this given form or
+                    fieldset. A string value is expected.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>InputFilter</code>: specify the input filter class to use for this given
+                    form or fieldset. A string value is expected.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Input</code>: specify the input class to use for this given element. A
+                    string value is expected.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Name</code>: specify the name of the current element, fieldset, or form. A
+                    string value is expected.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Options</code>: options to pass to the fieldset or form that are used to
+                    inform behavior -- things that are not attributes; e.g. labels, CAPTCHA
+                    adapters, etc. The annotation expects an associative array: 
+                    <code>@Options({"label": "Username:"})</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Required</code>: indicate whether an element is required. A boolean value
+                    is expected. By default, all elements are required, so this annotation is mainly
+                    present to allow disabling a requirement.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Type</code>: indicate the class to use for the current element, fieldset,
+                    or form. A string value is expected.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Validator</code>: provide a specification for a validator to use on a given
+                    element. Expects an associative array of values, with a "name" key pointing to a
+                    string validator name, and an "options" key pointing to an associatve array of
+                    validator options for the constructor: <code>@Validator({"name": "StringLength", "options":
+                        {"min":3, "max": 25}})</code>. This annotation may be specified multiple times.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            To use annotations, you simply include them in your class and/or property docblocks.
+            Annotation names will be resolved according to the import statements in your class; as
+            such, you can make them as long or as short as you want depending on what you import.
+        </para>
+
+        <para>
+            Here's a simple example.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Form\Annotation;
+
+/**
+ * @Annotation\Name("user")
+ * @Annotation\Hydrator("Zend\Stdlib\Hydrator\ObjectProperty")
+ */
+class User
+{
+    /**
+     * @Annotation\Exclude()
+     */
+    public $id;
+
+    /**
+     * @Annotation\Filter({"name":"StringTrim"})
+     * @Annotation\Validator({"name":"StringLength", "options":{"min":1, "max":25}})
+     * @Annotation\Validator({"name":"Regex", "options":{"pattern":"/^[a-zA-Z][a-zA-Z0-9_-]{0,24}$/"}})
+     * @Annotation\Attributes({"type":"text"})
+     * @Annotation\Options({"label":"Username:"})
+     */
+    public $username;
+
+    /**
+     * @Annotation\Type("Zend\Form\Element\Email")
+     * @Annotation\Options({"label":"Your email address:"})
+     */
+    public $email;
+}
+]]></programlisting>
+        
+        <para>
+            The above will hint to the annotation build to create a form with name "user", which
+            uses the hydrator <classname>Zend\Stdlib\Hydrator\ObjectProperty</classname>. That form
+            will have two elements, "username" and "email". The "username" element will have an
+            associated input that has a <classname>StringTrim</classname> filter, and two
+            validators: a <classname>StringLength</classname> validator indicating the username is
+            between 1 and 25 characters, and a <classname>Regex</classname> validator asserting it
+            follows a specific accepted pattern. The form element itself will have an attribute
+            "type" with value "text" (a text element), and a label "Username:". The "email" element
+            will be of type <classname>Zend\Form\Element\Email</classname>, and have the label "Your
+            email address:".
+        </para>
+
+        <para>
+            To use the above, we need <classname>Zend\Form\Annotation\AnnotationBuilder</classname>:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Form\Annotation\AnnotationBuilder;
+
+$builder = new AnnotationBuilder();
+$form    = $builder->createForm('User');
+]]></programlisting>
+
+        <para>
+            At this point, you have a form with the appropriate hydrator attached, an input filter
+            with the appropriate inputs, and all elements.
+        </para>
+
+        <note>
+            <title>You're not done</title>
+
+            <para>
+                In all liklihood, you'll need to add some more elements to the form you construct.
+                For example, you'll want a submit button, and likely a CSRF-protection element. We
+                recommend creating a fieldset with common elements such as these that you can then
+                attach to the form you build via annotations.
+            </para>
+        </note>
+    </example>
 </section>

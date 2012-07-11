@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
+ */
 
 namespace ZendTest\Mvc\Controller\Plugin;
 
@@ -74,6 +82,11 @@ class ParamsTest extends TestCase
 
         $value = $this->plugin->fromPost('value');
         $this->assertEquals($value, 'post:1234');
+    }
+
+    public function testInvokeWithNoArgumentsReturnsInstance()
+    {
+        $this->assertSame($this->plugin, $this->plugin->__invoke());
     }
 
     protected function setQuery()

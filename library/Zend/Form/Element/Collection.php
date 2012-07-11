@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\Element;
@@ -29,15 +18,14 @@ use Zend\Form\Fieldset;
 use Zend\Form\FieldsetInterface;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Stdlib\PriorityQueue;
 
 /**
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Collection extends Fieldset implements InputFilterProviderInterface
+class Collection extends Fieldset
 {
     /**
      * Default template placeholder
@@ -45,45 +33,84 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     const DEFAULT_TEMPLATE_PLACEHOLDER = '__index__';
 
     /**
-     * Constructor
+     * Element used in the collection
+     *
+     * @var ElementInterface
      */
-    public function __construct()
-    {
-        $this->setCount(1);
-        $this->setAllowAdd(true);
-        $this->setTemplatePlaceholder(self::DEFAULT_TEMPLATE_PLACEHOLDER);
-
-        parent::__construct();
-    }
+    protected $targetElement;
 
     /**
-     * Set a single element attribute
+     * Initial count of target element
      *
-     * @param string $key
-     * @param mixed $value
-     * @return Element|ElementInterface
+     * @var int
      */
-    public function setAttribute($key, $value)
+    protected $count = 1;
+
+    /**
+     * Are new elements allowed to be added dynamically ?
+     *
+     * @var bool
+     */
+    protected $allowAdd = true;
+
+    /**
+     * Is the template generated ?
+     *
+     * @var bool
+     */
+    protected $shouldCreateTemplate = false;
+
+    /**
+     * Placeholder used in template content for making your life easier with JavaScript
+     *
+     * @var string
+     */
+    protected $templatePlaceholder = self::DEFAULT_TEMPLATE_PLACEHOLDER;
+
+    /**
+     * Element used as a template
+     *
+     * @var ElementInterface|FieldsetInterface
+     */
+    protected $templateElement;
+
+
+    /**
+     * Accepted options for Collection:
+     * - target_element: an array or element used in the collection
+     * - count: number of times the element is added initially
+     * - allow_add: if set to true, elements can be added to the form dynamically (using JavaScript)
+     * - should_create_template: if set to true, a template is generated (inside a <span>)
+     * - template_placeholder: placeholder used in the data template
+     *
+     * @param array|\Traversable $options
+     * @return Collection
+     */
+    public function setOptions($options)
     {
-        switch(strtolower($key)) {
-            case 'count':
-                $this->setCount($value);
-                return $this;
-            case 'targetelement':
-                $this->setTargetElement($value);
-                return $this;
-            case 'allowadd':
-                $this->setAllowAdd($value);
-                return $this;
-            case 'shouldcreatetemplate':
-                $this->setShouldCreateTemplate($value);
-                return $this;
-            case 'templateplaceholder':
-                $this->setTemplatePlaceholder($value);
-                return $this;
+        parent::setOptions($options);
+
+        if (isset($options['target_element'])) {
+            $this->setTargetElement($options['target_element']);
         }
 
-        return parent::setAttribute($key, $value);
+        if (isset($options['count'])) {
+            $this->setCount($options['count']);
+        }
+
+        if (isset($options['allow_add'])) {
+            $this->setAllowAdd($options['allow_add']);
+        }
+
+        if (isset($options['should_create_template'])) {
+            $this->setShouldCreateTemplate($options['should_create_template']);
+        }
+
+        if (isset($options['template_placeholder'])) {
+            $this->setTemplatePlaceholder($options['template_placeholder']);
+        }
+
+        return $this;
     }
 
     /**
@@ -93,34 +120,36 @@ class Collection extends Fieldset implements InputFilterProviderInterface
      */
     public function populateValues($data)
     {
-        $count = $this->getCount();
+        if (!is_array($data) && !$data instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable set of data; received "%s"',
+                __METHOD__,
+                (is_object($data) ? get_class($data) : gettype($data))
+            ));
+        }
 
-        if ($this->getTargetElement() instanceof FieldsetInterface) {
-            foreach ($data as $key => $value) {
-                if ($count > 0) {
-                    $this->fieldsets[$key]->populateValues($value);
-                    unset($data[$key]);
+        // Can't do anything with empty data
+        if (empty($data)) {
 
-                }
+            return;
+        }
 
-                $count--;
+        if ($this->targetElement instanceof FieldsetInterface) {
+            foreach ($this->byName as $name => $fieldset) {
+                $fieldset->populateValues($data[$name]);
+                unset($data[$name]);
             }
         } else {
-            foreach ($data as $key => $value) {
-                if ($count > 0) {
-                    $this->elements[$key]->setAttribute('value', $value);
-                    unset($data[$key]);
-
-                }
-
-                $count--;
+            foreach ($this->byName as $name => $element) {
+                $element->setAttribute('value', $data[$name]);
+                unset($data[$name]);
             }
         }
 
         // If there are still data, this means that elements or fieldsets were dynamically added. If allowed by the user, add them
-        if (!empty($data) && $this->getAllowAdd()) {
+        if (!empty($data) && $this->allowAdd) {
             foreach ($data as $key => $value) {
-                $elementOrFieldset = clone $this->getTargetElement();
+                $elementOrFieldset = $this->createNewTargetElementInstance();
                 $elementOrFieldset->setName($key);
 
                 if ($elementOrFieldset instanceof FieldsetInterface) {
@@ -135,6 +164,28 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     }
 
     /**
+     * Bind values to the object
+     *
+     * @param array $values
+     * @return array|mixed|void
+     */
+    public function bindValues(array $values = array())
+    {
+        $collection = array();
+        foreach ($values as $name => $value) {
+            $element = $this->get($name);
+
+            if ($element instanceof FieldsetInterface) {
+                $collection[] = $element->bindValues($value);
+            } else {
+                $collection[] = $value;
+            }
+        }
+
+        return $collection;
+    }
+
+    /**
      * Set the initial count of target element
      *
      * @param $count
@@ -142,7 +193,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
      */
     public function setCount($count)
     {
-        $this->attributes['count'] = $count > 0 ? $count : 0;
+        $this->count = $count > 0 ? $count : 0;
         return $this;
     }
 
@@ -153,7 +204,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
      */
     public function getCount()
     {
-        return $this->getAttribute('count');
+        return $this->count;
     }
 
     /**
@@ -181,7 +232,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
             ));
         }
 
-        $this->attributes['targetElement'] = $elementOrFieldset;
+        $this->targetElement = $elementOrFieldset;
 
         return $this;
     }
@@ -193,7 +244,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
      */
     public function getTargetElement()
     {
-        return $this->getAttribute('targetElement');
+        return $this->targetElement;
     }
 
     /**
@@ -204,7 +255,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
      */
     public function setAllowAdd($allowAdd)
     {
-        $this->attributes['allowAdd'] = (bool)$allowAdd;
+        $this->allowAdd = (bool)$allowAdd;
         return $this;
     }
 
@@ -215,7 +266,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
      */
     public function getAllowAdd()
     {
-        return $this->getAttribute('allowAdd');
+        return $this->allowAdd;
     }
 
     /**
@@ -226,12 +277,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
      */
     public function setShouldCreateTemplate($shouldCreateTemplate)
     {
-        $this->attributes['shouldCreateTemplate'] = (bool)$shouldCreateTemplate;
-
-        // If it doesn't exist yet, create it
-        if ($shouldCreateTemplate && !$this->has($this->getTemplatePlaceholder())) {
-            $this->addTemplateElement();
-        }
+        $this->shouldCreateTemplate = (bool)$shouldCreateTemplate;
 
         return $this;
     }
@@ -243,7 +289,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
      */
     public function shouldCreateTemplate()
     {
-        return $this->getAttribute('shouldCreateTemplate');
+        return $this->shouldCreateTemplate;
     }
 
     /**
@@ -255,7 +301,7 @@ class Collection extends Fieldset implements InputFilterProviderInterface
     public function setTemplatePlaceholder($templatePlaceholder)
     {
         if (is_string($templatePlaceholder)) {
-            $this->attributes['templatePlaceholder'] = $templatePlaceholder;
+            $this->templatePlaceholder = $templatePlaceholder;
         }
 
         return $this;
@@ -268,7 +314,64 @@ class Collection extends Fieldset implements InputFilterProviderInterface
      */
     public function getTemplatePlaceholder()
     {
-        return $this->attributes['templatePlaceholder'];
+        return $this->templatePlaceholder;
+    }
+
+    /**
+     * Get a template element used for rendering purposes only
+     *
+     * @return null|ElementInterface|FieldsetInterface
+     */
+    public function getTemplateElement()
+    {
+        if ($this->templateElement === null) {
+            $this->templateElement = $this->createTemplateElement();
+        }
+
+        return $this->templateElement;
+    }
+
+    /**
+     * Prepare the collection by adding a dummy template element if the user want one
+     *
+     * @param Form $form
+     * @return mixed|void
+     */
+    public function prepareElement(Form $form)
+    {
+        // Create a template that will also be prepared
+        if ($this->shouldCreateTemplate) {
+            $templateElement = $this->getTemplateElement();
+            $this->add($templateElement);
+        }
+
+        parent::prepareElement($form);
+
+        // The template element has been prepared, but we don't want it to be rendered nor validated, so remove it from the list
+        if ($this->shouldCreateTemplate) {
+            $this->remove($this->templatePlaceholder);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function extract()
+    {
+        // In this specific situation, object holds the data, that is too say an array
+        if (!is_array($this->object)) {
+            return array();
+        }
+
+        $values = array();
+        foreach ($this->object as $key => $value) {
+            if ($value instanceof $this->targetElement->object) {
+                $this->targetElement->object = $value;
+                $values[$key] = $this->targetElement->extract();
+            }
+        }
+
+        return $values;
     }
 
     /**
@@ -278,54 +381,44 @@ class Collection extends Fieldset implements InputFilterProviderInterface
      */
     protected function prepareCollection()
     {
-        if ($this->getTargetElement() !== null) {
-            for ($i = 0 ; $i != $this->getCount() ; ++$i) {
-                $elementOrFieldset = clone $this->getTargetElement();
+        if ($this->targetElement !== null) {
+            for ($i = 0 ; $i != $this->count ; ++$i) {
+                $elementOrFieldset = $this->createNewTargetElementInstance();
                 $elementOrFieldset->setName($i);
 
                 $this->add($elementOrFieldset);
             }
-
-            // If a template is wanted, we add a "dummy" element
-            if ($this->shouldCreateTemplate()) {
-                $this->addTemplateElement();
-            }
         }
     }
 
     /**
-     * Add a "dummy" template element to be used with JavaScript
+     * Create a new instance of the target element
      *
-     * @return Collection
+     * @return ElementInterface
      */
-    protected function addTemplateElement()
+    protected function createNewTargetElementInstance()
     {
-        if ($this->getTargetElement() !== null) {
-            $elementOrFieldset = clone $this->getTargetElement();
-            $elementOrFieldset->setName($this->getTemplatePlaceholder());
-            $this->add($elementOrFieldset);
-        }
-
-        return $this;
+        return clone $this->targetElement;
     }
 
     /**
-     * Should return an array specification compatible with
-     * {@link Zend\InputFilter\Factory::createInputFilter()}.
+     * Create a dummy template element
      *
-     * @return array
+     * @return null|ElementInterface|FieldsetInterface
      */
-    public function getInputFilterSpecification()
+    protected function createTemplateElement()
     {
-        // Ignore any template
-        if ($this->shouldCreateTemplate()) {
-            return array(
-                $this->getTemplatePlaceholder() => array(
-                    'required' => false
-                )
-            );
+        if (!$this->shouldCreateTemplate) {
+            return null;
         }
 
-        return array();
+        if ($this->templateElement) {
+            return $this->templateElement;
+        }
+
+        $elementOrFieldset = $this->createNewTargetElementInstance();
+        $elementOrFieldset->setName($this->templatePlaceholder);
+
+        return $elementOrFieldset;
     }
 }

@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Mvc
  */
 
 namespace ZendTest\Mvc;
@@ -42,8 +31,6 @@ use Zend\Uri\UriFactory;
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ApplicationTest extends TestCase
 {
@@ -72,11 +59,22 @@ class ApplicationTest extends TestCase
         };
         $sm = $this->serviceManager = new ServiceManager(
             new ServiceManagerConfiguration(array(
-                'services'  => array(
-                    'ViewManager' => 'ZendTest\Mvc\TestAsset\MockViewManager'
+                'invokables' => array(
+                    'DispatchListener' => 'Zend\Mvc\DispatchListener',
+                    'Request'          => 'Zend\Http\PhpEnvironment\Request',
+                    'Response'         => 'Zend\Http\PhpEnvironment\Response',
+                    'RouteListener'    => 'Zend\Mvc\RouteListener',
+                    'ViewManager'      => 'ZendTest\Mvc\TestAsset\MockViewManager'
                 ),
                 'factories' => array(
-                    'Configuration' => $config,
+                    'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
+                    'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
+                    'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
+                    'Router'                  => 'Zend\Mvc\Service\RouterFactory',
+                    'Configuration'           => $config,
+                ),
+                'aliases' => array(
+                    'ControllerPluginBroker' => 'ControllerPluginManager',
                 ),
             ))
         );

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
+ */
 
 namespace ZendTest\Form\TestAsset;
 
@@ -14,17 +22,11 @@ class CountryFieldset extends Fieldset implements InputFilterProviderInterface
         $this->setHydrator(new ClassMethodsHydrator())
              ->setObject(new Entity\Country());
 
-        $name = new \Zend\Form\Element('name');
-        $name->setAttributes(array(
-            'type' => 'text',
-            'label' => 'Name of the country'
-        ));
+        $name = new \Zend\Form\Element('name', array('label' => 'Name of the country'));
+        $name->setAttribute('type', 'text');
 
-        $continent = new \Zend\Form\Element('continent');
-        $continent->setAttributes(array(
-            'type' => 'text',
-            'label' => 'Continent of the city'
-        ));
+        $continent = new \Zend\Form\Element('continent', array('label' => 'Continent of the city'));
+        $continent->setAttribute('type', 'text');
 
         $this->add($name);
         $this->add($continent);

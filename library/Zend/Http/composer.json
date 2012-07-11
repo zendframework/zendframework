@@ -1,0 +1,21 @@
+{
+    "name": "zendframework/zend-http",
+    "description": "provides an easy interface for preforming Hyper-Text Transfer Protocol (HTTP) requests",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "http"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Http": ""
+        }
+    },
+    "target-dir": "Zend/Http",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-loader": "self.version",
+        "zendframework/zend-stdlib": "self.version",
+        "zendframework/zend-uri": "self.version"
+    }
+}

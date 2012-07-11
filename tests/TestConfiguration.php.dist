@@ -418,38 +418,6 @@ defined('TESTS_ZEND_LDAP_ALT_PASSWORD') || define('TESTS_ZEND_LDAP_ALT_PASSWORD'
 //(defined('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE') || define('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE', 'OU=Test,OU=Sales,DC=example,DC=com');
 
 /**
- * Zend\Locale tests
- *
- * If the TESTS_ZEND_LOCALE_FORMAT_SETLOCALE property below is a valid,
- * locally recognized locale (try "locale -a"), then all tests in
- * tests/Zend/Locale/ test suites will execute *after*
- *    setlocale(LC_ALL, TESTS_ZEND_LOCALE_FORMAT_SETLOCALE);
- * Primarily, this switches certain PHP functions to emit "localized" output,
- * including the built-in "to string" for integer and float conversions.
- * Thus, a locale of 'fr_FR' yields number-to-string conversions in a
- * localized form with the decimal place separator chosen via:
- *    setlocale(LC_ALL, 'fr_FR@euro');
- */
-//define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', 'fr');
-//define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', 'fr_FR@euro');
-defined('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE') || define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', false);
-
-/**
- * Zend\Date tests
- *
- * If the BCMATH_ENABLED property below is false, all arithmetic
- * operations will use ordinary PHP math operators and functions.
- * Otherwise, the bcmath functions will be used for unlimited precision.
- *
- * If the EXTENDED_COVERAGE property below is false, most of the I18N
- * unit tests will not be computed... this speeds tests up to 80 minutes
- * when doing reports. *
- * Edit TestConfiguration.php, not TestConfiguration.php.dist.
- */
-defined('TESTS_ZEND_LOCALE_BCMATH_ENABLED') || define('TESTS_ZEND_LOCALE_BCMATH_ENABLED', true);
-defined('TESTS_ZEND_I18N_EXTENDED_COVERAGE') || define('TESTS_ZEND_I18N_EXTENDED_COVERAGE', true);
-
-/**
  * Zend\Mail\Storage tests
  *
  * TESTS_ZEND_MAIL_SERVER_TESTDIR and TESTS_ZEND_MAIL_SERVER_FORMAT are used for POP3 and IMAP tests.
@@ -774,12 +742,6 @@ defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_PREFIX') || define('TESTS_ZEND_SE
 defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNTESTS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNTESTS', false);
 defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNONPROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNONPROD', false);
 defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX', 'phpazuretestsession');
-
-/**
- * Zend\Service\Yahoo online tests
- */
-defined('TESTS_ZEND_SERVICE_YAHOO_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_YAHOO_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID') || define('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID', 'Enter APPID here');
 
 /**
  * Zend\Soap\AutoDiscover scenario tests for complex objects and wsdl generation

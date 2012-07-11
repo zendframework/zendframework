@@ -1,8 +1,19 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Di
+ */
 
 namespace Zend\Di\ServiceLocator;
 
-use Zend\Code\Generator as CodeGen;
+use Zend\Code\Generator\ClassGenerator;
+use Zend\Code\Generator\FileGenerator;
+use Zend\Code\Generator\MethodGenerator;
+use Zend\Code\Generator\ParameterGenerator;
 use Zend\Di\Di;
 use Zend\Di\Exception;
 
@@ -22,7 +33,7 @@ class Generator
      * Constructor
      *
      * Requires a DependencyInjection manager on which to operate.
-     * 
+     *
      * @param Di $injector
      */
     public function __construct(Di $injector)
@@ -32,8 +43,8 @@ class Generator
 
     /**
      * Set the class name for the generated service locator container
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return Generator
      */
     public function setContainerClass($name)
@@ -44,8 +55,8 @@ class Generator
 
     /**
      * Set the namespace to use for the generated class file
-     * 
-     * @param  string $namespace 
+     *
+     * @param  string $namespace
      * @return Generator
      */
     public function setNamespace($namespace)
@@ -57,11 +68,11 @@ class Generator
     /**
      * Construct, configure, and return a PHP classfile code generation object
      *
-     * Creates a Zend\CodeGenerator\Php\PhpFile object that has 
+     * Creates a Zend\CodeGenerator\Php\PhpFile object that has
      * created the specified class and service locator methods.
-     * 
-     * @param  null|string $filename 
-     * @return CodeGen\FileGenerator
+     *
+     * @param  null|string $filename
+     * @return FileGenerator
      * @throws Exception\RuntimeException
      */
     public function getCodeGenerator($filename = null)
@@ -74,11 +85,13 @@ class Generator
         $getters        = array();
         $definitions    = $injector->definitions();
 
-        foreach ($definitions->getClasses() as $name) {
+        $fetched = array_unique(array_merge($definitions->getClasses(), $im->getAliases()));
+
+        foreach ($fetched as $name) {
             $getter = $this->normalizeAlias($name);
             $meta   = $injector->get($name);
             $params = $meta->getParams();
-            
+
             // Build parameter list for instantiation
             foreach ($params as $key => $param) {
                 if (null === $param || is_scalar($param) || is_array($param)) {
@@ -88,6 +101,7 @@ class Generator
                     }
                     $params[$key] = $string;
                 } elseif ($param instanceof GeneratorInstance) {
+                    /* @var $param GeneratorInstance */
                     $params[$key] = sprintf('$this->%s()', $this->normalizeAlias($param->getName()));
                 } else {
                     $message = sprintf('Unable to use object arguments when building containers. Encountered with "%s", parameter of type "%s"', $name, get_class($param));
@@ -106,7 +120,6 @@ class Generator
             }
 
             // Create instantiation code
-            $creation    = '';
             $constructor = $meta->getConstructor();
             if ('__construct' != $constructor) {
                 // Constructor callback
@@ -188,9 +201,9 @@ class Generator
             // End getter body
             $getterBody .= "return \$object;\n";
 
-            $getterDef = new CodeGen\MethodGenerator();
-            $getterDef->setName($getter)
-                      ->setBody($getterBody);
+            $getterDef = new MethodGenerator();
+            $getterDef->setName($getter);
+            $getterDef->setBody($getterBody);
             $getters[] = $getterDef;
 
             // Get cases for case statements
@@ -215,14 +228,14 @@ class Generator
         $switch .= "}\n\n";
 
         // Build get() method
-        $nameParam   = new CodeGen\ParameterGenerator();
+        $nameParam   = new ParameterGenerator();
         $nameParam->setName('name');
-        $paramsParam = new CodeGen\ParameterGenerator();
+        $paramsParam = new ParameterGenerator();
         $paramsParam->setName('params')
                     ->setType('array')
                     ->setDefaultValue(array());
 
-        $get = new CodeGen\MethodGenerator();
+        $get = new MethodGenerator();
         $get->setName('get');
         $get->setParameters(array(
             $nameParam,
@@ -239,7 +252,7 @@ class Generator
         }
 
         // Create class code generation object
-        $container = new CodeGen\ClassGenerator();
+        $container = new ClassGenerator();
         $container->setName($this->containerClass)
                   ->setExtendedClass('ServiceLocator')
                   ->addMethodFromGenerator($get)
@@ -247,7 +260,7 @@ class Generator
                   ->addMethods($aliasMethods);
 
         // Create PHP file code generation object
-        $classFile = new CodeGen\FileGenerator();
+        $classFile = new FileGenerator();
         $classFile->setUse('Zend\Di\ServiceLocator')
                   ->setClass($container);
 
@@ -265,11 +278,11 @@ class Generator
     /**
      * Reduces aliases
      *
-     * Takes alias list and reduces it to a 2-dimensional array of 
-     * class names pointing to an array of aliases that resolve to 
+     * Takes alias list and reduces it to a 2-dimensional array of
+     * class names pointing to an array of aliases that resolve to
      * it.
-     * 
-     * @param  array $aliasList 
+     *
+     * @param  array $aliasList
      * @return array
      */
     protected function reduceAliases(array $aliasList)
@@ -292,24 +305,24 @@ class Generator
 
     /**
      * Create a PhpMethod code generation object named after a given alias
-     * 
-     * @param  string $alias 
-     * @param  class $class Class to which alias refers
-     * @return CodeGen\MethodGenerator
+     *
+     * @param  string $alias
+     * @param  string $class Class to which alias refers
+     * @return MethodGenerator
      */
     protected function getCodeGenMethodFromAlias($alias, $class)
     {
         $alias = $this->normalizeAlias($alias);
-        $method = new CodeGen\MethodGenerator();
-        $method->setName($alias)
-               ->setBody(sprintf('return $this->get(\'%s\');', $class));
+        $method = new MethodGenerator();
+        $method->setName($alias);
+        $method->setBody(sprintf('return $this->get(\'%s\');', $class));
         return $method;
     }
 
     /**
      * Normalize an alias to a getter method name
-     * 
-     * @param  string $alias 
+     *
+     * @param  string $alias
      * @return string
      */
     protected function normalizeAlias($alias)

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xml:id="zend.form.element.color">
+    <title>Zend\Form\Element\Color</title>
+
+    <para>
+        The <classname>Color</classname> element is meant to be paired with the
+        <classname>Zend/Form/View/Helper/FormColor</classname> for
+        <link xmlns:xlink="http://www.w3.org/1999/xlink"
+        xlink:href="http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#color-state-(type=color)"
+        >HTML5 inputs with type color</link>.
+        This element adds filters and a <classname>Regex</classname>
+        validator to it's input filter specification in order to validate a
+        <link xmlns:xlink="http://www.w3.org/1999/xlink"
+        xlink:href="http://www.whatwg.org/specs/web-apps/current-work/multipage/common-microsyntaxes.html#valid-simple-color">
+        HTML5 valid simple color</link> value on the server.
+    </para>
+
+    <example xml:id="zend.form.element.color.usage">
+        <title>Basic Usage of Zend\Form\Element\Color</title>
+
+        <para>
+            This element automatically adds a <varname>"type"</varname>
+            attribute of value <varname>"color"</varname>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Form\Element;
+use Zend\Form\Form;
+
+$color = new Element\Color('color');
+$color->setLabel('Background color');
+
+$form = new Form('my-form');
+$form->add($color);
+]]></programlisting>
+    </example>
+
+    <section xml:id="zend.form.element.color.methods">
+        <title>Available Methods</title>
+
+        <para>
+            The following methods are in addition to the inherited
+            <link linkend="zend.form.element.methods">methods of
+            <classname>Zend\Form\Element</classname></link>.
+        </para>
+
+        <variablelist>
+            <varlistentry xml:id="zend.form.element.color.methods.get-input-specification">
+                <term>getInputSpecification</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getInputSpecification</methodname>
+                        <void/>
+                    </methodsynopsis>
+                    <para>
+                        Returns a input filter specification, which includes
+                        <classname>Zend\Filter\StringTrim</classname> and
+                        <classname>Zend\Filter\StringToLower</classname> filters,
+                        and a <classname>Zend\Validator\Regex</classname> to validate
+                        the RGB hex format.
+                    </para>
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+</section>

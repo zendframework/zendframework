@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0"
+         xml:id="zend.db.sql">
+    <title>Zend\Db\Sql</title>
+
+    <para>
+        <classname>Zend\Db\Sql</classname> is a SQL abstraction layer for building platform specific
+        SQL queries via a object-oriented API.  The end result of an <classname>Zend\Db\Sql</classname>
+        object will be to either produce a Statement and Parameter container that
+        represents the target query, or a full string that can be directly executed
+        against the database platform.  To achieve this, there is <classname>Zend\Db\Sql</classname>
+        objects require a <classname>Zend\Db\Adapter\Adapter</classname> object in order to produce
+        the desired results.
+    </para>
+
+    <section xml:id="zend.db.sql.sql">
+        <title>Zend\Db\Sql\Sql (Quickstart)</title>
+
+        <para>
+            As there are for primary tasks associated with interacting with a database
+            (from the DML, or Data Manipulation Language): selecting, inserting, updating
+            and deleting.  As such, there are four primary objects that developers can
+            interact or building queries, <classname>Zend\Db\Sql\Select</classname>,
+            <classname>Insert</classname>, <classname>Update</classname> and <classname>Delete</classname>.
+        </para>
+
+        <para>
+            Since these four tasks are so closely related, and generally used together
+            within the same application, <classname>Zend\Db\Sql\Sql</classname> objects help you create them
+            and produce the result you are attempting to achieve.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Db\Sql\Sql;
+$sql = new Sql($adapter);
+$select = $sql->select(); // @return Zend\Db\Sql\Select
+$insert = $sql->insert(); // @return Zend\Db\Sql\Insert
+$update = $sql->update(); // @return Zend\Db\Sql\Update
+$delete = $sql->delete(); // @return Zend\Db\Sql\Delete
+]]></programlisting>
+
+        <para>
+            As a developer, you can now interact with these objects, as described in
+            the sections below, to specialize each query.  Once they have been populated
+            with values, they are ready to either be prepared or executed.
+        </para>
+
+        <para>
+            To prepare (using a Select object):
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Db\Sql\Sql;
+$select = new Sql($adapter);
+$select->from('foo');
+$select->where(array('id' => 2));
+
+$statement = $sql->prepareStatementForSqlObject($select);
+$results = $statement->execute();
+]]></programlisting>
+
+        <para>
+            To execute (using a Select object)
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Db\Sql\Sql;
+$select = new Sql($adapter);
+$select->from('foo');
+$select->where(array('id' => 2));
+
+$selectString = $sql->getSqlStringForSqlObject($select);
+$results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+]]></programlisting>
+
+        <para>
+            Zend\Db\Sql\Sql objects can also be bound to a particular table so that in
+            getting a select, insert, update, or delete object, they are all primarily
+            seeded with the same table when produced.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Db\Sql\Sql;
+$select = new Sql($adapter, 'foo');
+$select->where(array('id' => 2)); // $select already has the from('foo') applied
+]]></programlisting>
+
+    </section>
+
+    <section xml:id="zend.db.sql.sql-objects">
+        <title>Zend\Db\Sql's Select, Insert, Update and Delete</title>
+
+        <para>
+            Each of these objects implement the following (2) interfaces:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+public function prepareStatement(Adapter $adapter, StatementInterface $statement);
+public function getSqlString(PlatformInterface $adapterPlatform = null);
+]]></programlisting>
+
+        <para>
+            These are the functions you can call to either produce (a) a prepared statement,
+            or (b) a string to be executed.
+        </para>
+
+    </section>
+
+    <section xml:id="zend.db.sql.select">
+        <title>Zend\Db\Sql\Select</title>
+
+        <para>
+            <classname>Zend\Db\Sql\Select</classname> is an object who's primary function is to present a unified
+            API for building platform specific SQL SELECT queries.  The object can be
+            instantiated and consumed without <classname>Zend\Db\Sql\Sql</classname>:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Db\Sql\Select;
+$select = new Select();
+// or, to produce a $select bound to a specific table
+$select = new Select('foo');
+]]></programlisting>
+
+        <para>
+            If a table is provided to the Select object, then from() cannot be called later
+            to change the name of the table.
+        </para>
+
+        <para>
+            Once you have a valid Select object, the following API can be used to further
+            specify various select statement parts:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
+{
+    const JOIN_INNER = 'inner';
+    const JOIN_OUTER = 'outer';
+    const JOIN_LEFT = 'left';
+    const JOIN_RIGHT = 'right';
+    const SQL_STAR = '*';
+    const ORDER_ASCENDING = 'ASC';
+    const ORDER_DESENDING = 'DESC';
+
+    public $where; // @param Where $where
+
+    public function __construct($table = null);
+    public function from($table);
+    public function columns(array $columns, $prefixColumnsWithTable = true);
+    public function join($name, $on, $columns = self::SQL_STAR, $type = self::JOIN_INNER);
+    public function where($predicate, $combination = Predicate\PredicateSet::OP_AND);
+    public function group($group);
+    public function having($predicate, $combination = Predicate\PredicateSet::OP_AND);
+    public function order($order);
+    public function limit($limit);
+    public function offset($offset);
+}
+]]></programlisting>
+
+        <para>
+            from():
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// as a string:
+$select->from('foo');
+
+// as an array to specify an alias:
+// produces SELECT "t".* FROM "table" AS "t"
+
+$select->from(array('t' => 'table'));
+
+// using a Sql\TableIdentifier:
+// same output as above
+
+$select->from(new TableIdentifier(array('t' => 'table')));
+]]></programlisting>
+
+        <para>
+            columns():
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// as array of names
+$select->columns(array('foo', 'bar'));
+
+// as an associative array with aliases as the keys:
+// produces 'bar' AS 'foo', 'bax' AS 'baz'
+
+$select->columns(array('foo' => 'bar', 'baz' => 'bax'));
+]]></programlisting>
+
+        <para>
+            join():
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$select->join(
+	'foo' // table name,
+	'id = bar.id', // expression to join on (will be quoted by platform object before insertion),
+	array('bar', 'baz'), // (optional) list of columns, same requiremetns as columns() above
+	$select::JOIN_OUTER // (optional), one of inner, outer, left, right also represtned by constants in the API
+);
+
+$select->from(array('f' => 'foo'))  // base table
+    ->join(array('b' => 'bar'),     // join table with alias
+    'f.foo_id = b.foo_id');         // join expression
+]]></programlisting>
+
+        <para>
+            where(), having():
+        </para>
+
+        <programlisting language="php"><![CDATA[
+see Where/Having section below
+]]></programlisting>
+
+        <para>
+            order():
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$select = new Select;
+$select->order('id DESC'); // produces 'id' DESC
+
+$select = new Select;
+$select->order('id DESC')
+	->order('name ASC, age DESC'); // produces 'id' DESC, 'name' ASC, 'age' DESC
+
+$select = new Select;
+$select->order(array('name ASC', 'age DESC')); // produces 'name' ASC, 'age' DESC
+]]></programlisting>
+
+        <para>
+            limit() and offset():
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$select = new Select;
+$select->limit(5); // always takes an integer/numeric
+$select->offset(10); // similarly takes an integer/numeric
+]]></programlisting>
+
+    </section>
+
+    <section xml:id="zend.db.sql.insert">
+        <title>Zend\Db\Sql\Insert</title>
+
+        <para>
+            The Insert API:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class Insert implements SqlInterface, PreparableSqlInterface
+{
+	const VALUES_MERGE = 'merge';
+	const VALUES_SET   = 'set';
+
+	public function __construct($table = null);
+	public function into($table);
+	public function columns(array $columns);
+	public function values(array $values, $flag = self::VALUES_SET);
+}
+]]></programlisting>
+
+        <para>
+            Similarly to Select objects, the table can be set at construction time
+            or via into().
+        </para>
+
+        <para>
+            columns():
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$insert->columns(array('foo', 'bar')); // set the valid columns
+]]></programlisting>
+
+        <para>
+            values():
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// default behavior of values is to set the values
+// succesive calls will not preserve values from previous calls
+$insert->values(array(
+	'col_1' => 'value1',
+	'col_2' => 'value2'
+));
+]]></programlisting>
+
+        <programlisting language="php"><![CDATA[
+// merging values with previous calls
+$insert->values(array('col_2' => 'value2'), $insert::VALUES);
+]]></programlisting>
+
+    </section>
+
+    <section xml:id="zend.db.sql.update">
+        <title>Zend\Db\Sql\Update</title>
+
+        <programlisting language="php"><![CDATA[
+class Update
+{
+    const VALUES_MERGE = 'merge';
+    const VALUES_SET   = 'set';
+
+    public $where; // @param Where $where
+    public function __construct($table = null);
+    public function table($table);
+    public function set(array $values, $flag = self::VALUES_SET);
+    public function where($predicate, $combination = Predicate\PredicateSet::OP_AND);
+}
+]]></programlisting>
+
+        <para>
+            set():
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$update->set(array('foo' => 'bar', 'baz' => bax'));
+]]></programlisting>
+
+        <para>
+            where():
+        </para>
+
+        <programlisting language="php"><![CDATA[
+See where section below.
+]]></programlisting>
+
+    </section>
+
+    <section xml:id="zend.db.sql.delete">
+        <title>Zend\Db\Sql\Delete</title>
+
+        <programlisting language="php"><![CDATA[
+class Delete
+{
+    public $where; // @param Where $where
+    public function __construct($table = null);
+    public function from($table);
+    public function where($predicate, $combination = Predicate\PredicateSet::OP_AND);
+}
+]]></programlisting>
+
+        <para>
+            where():
+        </para>
+
+        <programlisting language="php"><![CDATA[
+See where section below.
+]]></programlisting>
+
+    </section>
+
+    <section xml:id="zend.db.sql.where">
+        <title>Zend\Db\Sql\Where &amp; Zend\Db\Sql\Having</title>
+
+        <para>
+            In the following, we will talk about Where, Having is implies as being the same API.
+        </para>
+
+
+        <para>
+            Effectively, Where and Having extend from the same base object, a
+            Predicate (and PredicateSet).  All of the parts that make up a where
+            or having that are and'ed or or'd together are called predicates.  The full
+            set of predicates is called a PredicateSet.  This object set generally contains
+            the values (and identifiers) separate from the fragment they belong to until
+            the last possible moment when the statement is either used to be prepared
+            (parameteritized), or executed.  In parameterization, the parameters will be
+            replaced with their proper placeholder (a named or positional parameter), and
+            the values stored inside a Adapter\ParameterContainer.  When executed, the values
+            will be interpolated into the fragments they belong to and properly quoted.
+        </para>
+
+        <para>
+            It is important to know that in this API, a distinction is made between what
+            elements are considered identifiers (TYPE_IDENTIFIER) and which of those is
+            a value (TYPE_VALUE).  There is also a special use case type for literal values
+            (TYPE_LITERAL).  These are all exposed via the <classname>Zend\Db\Sql\ExpressionInterface</classname>
+            interface.
+        </para>
+
+        <para>
+            The Zend\Db\Sql\Where (Predicate/PredicateSet) API:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Where & Having:
+class Predicate extends PredicateSet
+{
+	public $and;
+	public $or;
+	public $AND;
+	public $OR;
+	public $NEST;
+	public $UNNSET;
+
+    public function nest();
+    public function setUnnest(Predicate $predicate);
+    public function unnest();
+    public function equalTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function lessThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function greaterThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function lessThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function greaterThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function like($identifier, $like);
+    public function literal($literal, $parameter);
+    public function isNull($identifier);
+    public function isNotNull($identifier);
+    public function in($identifier, array $valueSet = array());
+    public function between($identifier, $minValue, $maxValue);
+
+
+   	// Inherited From PredicateSet
+
+    public function addPredicate(PredicateInterface $predicate, $combination = null);
+    public function getPredicates();
+    public function orPredicate(PredicateInterface $predicate);
+    public function andPredicate(PredicateInterface $predicate);
+    public function getExpressionData();
+    public function count();
+
+}
+]]></programlisting>
+
+        <para>
+            Each method in the Where API will produce a coresponding Predicate object of a similarly
+            named type, described below, with the full API of the object:
+        </para>
+
+        <para>
+            equalTo(), lessThan(), greaterThan(), lessThanOrEqualTo(), greaterThanOrEqualTo():
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$where->equalTo('id', 5);
+
+// same as the following workflow
+$where->addPredicate(
+	new Predicate\Operator($left, Operator::OPERATOR_EQUAL_TO, $right, $leftType, $rightType)
+);
+
+class Operator implements PredicateInterface
+{
+    const OPERATOR_EQUAL_TO                  = '=';
+    const OP_EQ                              = '=';
+    const OPERATOR_NOT_EQUAL_TO              = '!=';
+    const OP_NE                              = '!=';
+    const OPERATOR_LESS_THAN                 = '<';
+    const OP_LT                              = '<';
+    const OPERATOR_LESS_THAN_OR_EQUAL_TO     = '<=';
+    const OP_LTE                             = '<=';
+    const OPERATOR_GREATER_THAN              = '>';
+    const OP_GT                              = '>';
+    const OPERATOR_GREATER_THAN_OR_EQUAL_TO  = '>=';
+    const OP_GTE                             = '>=';
+
+    public function __construct($left = null, $operator = self::OPERATOR_EQUAL_TO, $right = null, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function setLeft($left);
+    public function getLeft();
+    public function setLeftType($type);
+    public function getLeftType();
+    public function setOperator($operator);
+    public function getOperator();
+    public function setRight($value);
+    public function getRight();
+    public function setRightType($type);
+    public function getRightType();
+    public function getExpressionData();
+}
+]]></programlisting>
+
+        <para>
+            like($identifier, $like):
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$where->like($identifier, $like):
+
+// same as
+$where->addPredicate(
+	new Predicate\Like($identifier, $like)
+);
+
+// full API
+
+class Like implements PredicateInterface
+{
+    public function __construct($identifier = null, $like = null);
+    public function setIdentifier($identifier);
+    public function getIdentifier();
+    public function setLike($like);
+    public function getLike();
+}
+]]></programlisting>
+
+        <para>
+            literal($literal, $parameter);
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$where->literal($literal, $parameter);
+
+// same as
+$where->addPredicate(
+    new Predicate\Expression($literal, $parameter)
+);
+
+// full API
+class Expression implements ExpressionInterface, PredicateInterface
+{
+    const PLACEHOLDER = '?';
+	public function __construct($expression = null, $valueParameter = null /*[, $valueParameter, ... ]*/);
+    public function setExpression($expression);
+    public function getExpression();
+    public function setParameters($parameters);
+    public function getParameters();
+    public function setTypes(array $types);
+    public function getTypes();
+}
+]]></programlisting>
+
+        <para>
+            isNull($identifier);
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$where->isNull($identifier);
+
+// same as
+$where->addPredicate(
+    new Predicate\IsNull($identifier)
+);
+
+// full API
+class IsNull implements PredicateInterface
+{
+    public function __construct($identifier = null);
+    public function setIdentifier($identifier);
+    public function getIdentifier();
+}
+]]></programlisting>
+
+        <para>
+            isNotNull($identifier);
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$where->isNotNull($identifier);
+
+// same as
+$where->addPredicate(
+    new Predicate\IsNotNull($identifier)
+);
+
+// full API
+class IsNotNull implements PredicateInterface
+{
+    public function __construct($identifier = null);
+    public function setIdentifier($identifier);
+    public function getIdentifier();
+}
+]]></programlisting>
+
+        <para>
+            in($identifier, array $valueSet = array());
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$where->in($identifier, array $valueSet = array());
+
+// same as
+$where->addPredicate(
+    new Predicate\In($identifier, $valueSet)
+);
+
+// full API
+class In implements PredicateInterface
+{
+    public function __construct($identifier = null, array $valueSet = array());
+    public function setIdentifier($identifier);
+    public function getIdentifier();
+    public function setValueSet(array $valueSet);
+    public function getValueSet();
+}
+]]></programlisting>
+
+        <para>
+            between($identifier, $minValue, $maxValue);
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$where->between($identifier, $minValue, $maxValue);
+
+// same as
+$where->addPredicate(
+    new Predicate\Between($identifier, $minValue, $maxValue)
+);
+
+// full API
+class Between implements PredicateInterface
+{
+    public function __construct($identifier = null, $minValue = null, $maxValue = null);
+    public function setIdentifier($identifier);
+    public function getIdentifier();
+    public function setMinValue($minValue);
+    public function getMinValue();
+    public function setMaxValue($maxValue);
+    public function getMaxValue();
+    public function setSpecification($specification);
+}
+]]></programlisting>
+
+    </section>
+</section>
+
+
+
+
+
+
+
+
+

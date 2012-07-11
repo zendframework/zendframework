@@ -7,37 +7,43 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_ModuleManager
  */
+
 namespace Zend\ModuleManager\Listener;
 
 use ArrayAccess;
 use Traversable;
 use Zend\Config\Config;
 use Zend\Config\Factory as ConfigFactory;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\ModuleEvent;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Glob;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 
 /**
  * Config listener
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-class ConfigListener extends AbstractListener implements 
-    ConfigMergerInterface, 
+class ConfigListener extends AbstractListener implements
+    ConfigMergerInterface,
     ListenerAggregateInterface
 {
-	const STATIC_PATH = 'static_path';
-	const GLOB_PATH = 'glob_path';
+    const STATIC_PATH = 'static_path';
+    const GLOB_PATH   = 'glob_path';
 
     /**
      * @var array
      */
     protected $listeners = array();
+
+    /**
+     * @var array
+     */
+    protected $configs = array();
 
     /**
      * @var array
@@ -95,9 +101,16 @@ class ConfigListener extends AbstractListener implements
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach('loadModule', array($this, 'loadModule'), 1000);
-        $this->listeners[] = $events->attach('loadModules.pre', array($this, 'loadModulesPre'), 9000);
-        $this->listeners[] = $events->attach('loadModules.post', array($this, 'loadModulesPost'), 9000);
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($this, 'onloadModulesPre'), 1000);
+
+        if ($this->skipConfig) {
+            // We already have the config from cache, no need to collect or merge.
+            return $this;
+        }
+
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, array($this, 'onLoadModule'));
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($this, 'onLoadModulesPost'), -1000);
+
         return $this;
     }
 
@@ -107,9 +120,10 @@ class ConfigListener extends AbstractListener implements
      * @param  ModuleEvent $e
      * @return ConfigListener
      */
-    public function loadModulesPre(ModuleEvent $e)
+    public function onloadModulesPre(ModuleEvent $e)
     {
         $e->setConfigListener($this);
+
         return $this;
     }
 
@@ -119,34 +133,48 @@ class ConfigListener extends AbstractListener implements
      * @param  ModuleEvent $e
      * @return ConfigListener
      */
-    public function loadModule(ModuleEvent $e)
+    public function onLoadModule(ModuleEvent $e)
     {
-        if (true === $this->skipConfig) {
-            return;
-        }
         $module = $e->getParam('module');
-        if (is_callable(array($module, 'getConfig'))) {
-            $this->mergeModuleConfig($module);
+
+        if (!$module instanceof ConfigProviderInterface
+            && !is_callable(array($module, 'getConfig'))
+        ) {
+            return $this;
         }
+
+        $config = $module->getConfig();
+        $this->addConfig($e->getModuleName(), $config);
+
         return $this;
     }
 
     /**
      * Merge all config files matched by the given glob()s
      *
-     * This should really only be called by the module manager.
+     * This is only attached if config is not cached.
      *
      * @param  ModuleEvent $e
      * @return ConfigListener
      */
-    public function loadModulesPost(ModuleEvent $e)
+    public function onLoadModulesPost(ModuleEvent $e)
     {
-        if (true === $this->skipConfig) {
-            return $this;
-        }
+        // Load the config files
         foreach ($this->paths as $path) {
-            $this->mergePath($path);
+            $this->addConfigByPath($path['path'], $path['type']);
         }
+
+        // Merge all of the collected configs
+        $this->mergedConfig = $this->getOptions()->getExtraConfig() ?: array();
+        foreach ($this->configs as $key => $config) {
+            $this->mergedConfig = ArrayUtils::merge($this->mergedConfig, $config);
+        }
+
+        // If enabled, update the config cache
+        if ($this->getOptions()->getConfigCacheEnabled()) {
+            $this->updateCache();
+        }
+
         return $this;
     }
 
@@ -198,27 +226,9 @@ class ConfigListener extends AbstractListener implements
     }
 
     /**
-     * Add a path of config files to merge after loading modules
-     *
-     * @param  string $path
-     * @return ConfigListener
-     */
-    protected function addConfigPath($path, $type)
-    {
-        if (!is_string($path)) {
-            throw new Exception\InvalidArgumentException(
-                sprintf('Parameter to %s::%s() must be a string; %s given.',
-                __CLASS__, __METHOD__, gettype($path))
-            );
-        }
-        $this->paths[] = array('type' => $type, 'path' => $path);
-        return $this;
-    }
-
-    /**
      * Add an array of glob paths of config files to merge after loading modules
      *
-     * @param  mixed $globPaths
+     * @param  array|Traversable $globPaths
      * @return ConfigListener
      */
     public function addConfigGlobPaths($globPaths)
@@ -242,12 +252,12 @@ class ConfigListener extends AbstractListener implements
     /**
      * Add an array of static paths of config files to merge after loading modules
      *
-     * @param  mixed $staticPaths
+     * @param  array|Traversable $staticPaths
      * @return ConfigListener
      */
     public function addConfigStaticPaths($staticPaths)
     {
-    	$this->addConfigPaths($staticPaths, self::STATIC_PATH);
+        $this->addConfigPaths($staticPaths, self::STATIC_PATH);
         return $this;
     }
 
@@ -259,7 +269,7 @@ class ConfigListener extends AbstractListener implements
      */
     public function addConfigStaticPath($staticPath)
     {
-    	$this->addConfigPath($staticPath, self::STATIC_PATH);
+        $this->addConfigPath($staticPath, self::STATIC_PATH);
         return $this;
     }
 
@@ -271,7 +281,7 @@ class ConfigListener extends AbstractListener implements
      */
     protected function addConfigPaths($paths, $type)
     {
-    	if ($paths instanceof Traversable) {
+        if ($paths instanceof Traversable) {
             $paths = ArrayUtils::iteratorToArray($paths);
         }
 
@@ -290,74 +300,32 @@ class ConfigListener extends AbstractListener implements
     }
 
     /**
-     * Merge all config files matching a glob
+     * Add a path of config files to load and merge after loading modules
      *
-     * @param  mixed $path
+     * @param  string $path
+     * @param  string $type
      * @return ConfigListener
      */
-    protected function mergePath($path)
+    protected function addConfigPath($path, $type)
     {
-        switch ($path['type']) {
-            case self::STATIC_PATH:
-                $config = ConfigFactory::fromFile($path['path']);
-                break;
-
-            case self::GLOB_PATH:
-                $config = ConfigFactory::fromFiles(Glob::glob($path['path'], Glob::GLOB_BRACE));
-                break;
-        }
-        $this->mergeTraversableConfig($config);
-        if ($this->getOptions()->getConfigCacheEnabled()) {
-            $this->updateCache();
-        }
-        return $this;
-    }
-
-    /**
-     * mergeModuleConfig
-     *
-     * @param  mixed $module
-     * @return ConfigListener
-     */
-    protected function mergeModuleConfig($module)
-    {
-        if (false !== $this->skipConfig
-            || (!$module instanceof ConfigProviderInterface
-                && !is_callable(array($module, 'getConfig')))
-        ) {
-            return $this;
-        }
-
-        $config = $module->getConfig();
-        try {
-            $this->mergeTraversableConfig($config);
-        } catch (Exception\InvalidArgumentException $e) {
-            // Throw a more descriptive exception
+        if (!is_string($path)) {
             throw new Exception\InvalidArgumentException(
-                sprintf('getConfig() method of %s must be an array, '
-                . 'implement the \Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.',
-                get_class($module), gettype($config))
+                sprintf('Parameter to %s::%s() must be a string; %s given.',
+                __CLASS__, __METHOD__, gettype($path))
             );
         }
-
-        if ($this->getOptions()->getConfigCacheEnabled()) {
-            $this->updateCache();
-        }
-
+        $this->paths[] = array('type' => $type, 'path' => $path);
         return $this;
     }
 
-    /**
-     * @param  $config
-     * @throws Exception\InvalidArgumentException
-     * @return void
-     */
-    protected function mergeTraversableConfig($config)
+
+
+    protected function addConfig($key, $config)
     {
         if ($config instanceof Traversable) {
             $config = ArrayUtils::iteratorToArray($config);
         }
+
         if (!is_array($config)) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Config being merged must be an array, '
@@ -365,7 +333,37 @@ class ConfigListener extends AbstractListener implements
                 . 'instance of Zend\Config\Config. %s given.', gettype($config))
             );
         }
-        $this->setMergedConfig(ArrayUtils::merge($this->mergedConfig, $config));
+
+        $this->configs[$key] = $config;
+
+        return $this;
+    }
+
+    /**
+     * Given a path (glob or static), fetch the config and add it to the array
+     * of configs to merge.
+     *
+     * @param string $path
+     * @param string $type
+     * @return ConfigListener
+     */
+    protected function addConfigByPath($path, $type)
+    {
+        switch ($type) {
+            case self::STATIC_PATH:
+                $this->addConfig($path, ConfigFactory::fromFile($path));
+                break;
+
+            case self::GLOB_PATH:
+                // We want to keep track of where each value came from so we don't
+                // use ConfigFactory::fromFiles() since it does merging internally.
+                foreach(Glob::glob($path, Glob::GLOB_BRACE) as $file) {
+                    $this->addConfig($file, ConfigFactory::fromFile($file));
+                }
+                break;
+        }
+
+        return $this;
     }
 
     /**

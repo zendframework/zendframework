@@ -1,32 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form;
 
 use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Element implements ElementInterface
 {
@@ -36,20 +25,34 @@ class Element implements ElementInterface
     protected $attributes = array();
 
     /**
+     * @var string
+     */
+    protected $label;
+
+    /**
+     * @var array
+     */
+    protected $labelAttributes;
+
+    /**
      * @var array Validation error messages
      */
     protected $messages = array();
 
 
     /**
-     * Constructor
-     *
-     * @param null|string|int $name Optional name for the element
+     * @param  null|int|string  $name    Optional name for the element
+     * @param  array            $options Optional options for the element
+     * @throws Exception\InvalidArgumentException
      */
-    public function __construct($name = null)
+    public function __construct($name = null, $options = array())
     {
         if (null !== $name) {
             $this->setName($name);
+        }
+
+        if (!empty($options)) {
+            $this->setOptions($options);
         }
     }
 
@@ -64,7 +67,7 @@ class Element implements ElementInterface
         $this->setAttribute('name', $name);
         return $this;
     }
-    
+
     /**
      * Get value for name
      *
@@ -73,6 +76,36 @@ class Element implements ElementInterface
     public function getName()
     {
         return $this->getAttribute('name');
+    }
+
+    /**
+     * Set options for an element. Accepted options are:
+     * - label: label to associate with the element
+     * - label_attributes: attributes to use when the label is rendered
+     *
+     * @param  array|\Traversable $options
+     * @return Element|ElementInterface
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setOptions($options)
+    {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        } elseif (!is_array($options)) {
+            throw new Exception\InvalidArgumentException(
+                'The options parameter must be an array or a Traversable'
+            );
+        }
+
+        if (isset($options['label'])) {
+            $this->setLabel($options['label']);
+        }
+
+        if (isset($options['label_attributes'])) {
+            $this->setLabelAttributes($options['label_attributes']);
+        }
+
+        return $this;
     }
 
     /**
@@ -149,12 +182,60 @@ class Element implements ElementInterface
 
     /**
      * Clear all attributes
-     * 
-     * @return void
+     *
+     * @return Element|ElementInterface
      */
     public function clearAttributes()
     {
         $this->attributes = array();
+        return $this;
+    }
+
+    /**
+     * Set the label used for this element
+     *
+     * @param $label
+     * @return Element|ElementInterface
+     */
+    public function setLabel($label)
+    {
+        if (is_string($label)) {
+            $this->label = $label;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Retrieve the label used for this element
+     *
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * Set the attributes to use with the label
+     *
+     * @param array $labelAttributes
+     * @return Element|ElementInterface
+     */
+    public function setLabelAttributes(array $labelAttributes)
+    {
+        $this->labelAttributes = $labelAttributes;
+        return $this;
+    }
+
+    /**
+     * Get the attributes to use with the label
+     *
+     * @return array
+     */
+    public function getLabelAttributes()
+    {
+        return $this->labelAttributes;
     }
 
     /**
@@ -182,7 +263,7 @@ class Element implements ElementInterface
      * Get validation error messages, if any.
      *
      * Returns a list of validation failure messages, if any.
-     * 
+     *
      * @return array|Traversable
      */
     public function getMessages()

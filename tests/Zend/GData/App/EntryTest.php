@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_GData_App
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_GData
  */
 
 namespace ZendTest\GData\App;
@@ -33,8 +22,6 @@ use ZendTest\GData\TestAsset;
  * @category   Zend
  * @package    Zend_GData_App
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_App
  */
@@ -42,7 +29,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 {
     public $entryText;
     public $httpEntrySample;
-    /** @var \Zend\GData\App */
+    /** @var \Zend\GData\App\Entry */
     public $entry;
     /** @var \Zend\Http\Client\Adapter\AdapterInterface */
     public $adapter;
@@ -134,7 +121,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->entry->getEtag(), $data);
     }
 
-    public function testCanSetAndgetService()
+    public function testCanSetAndGetService()
     {
         $data = new App();
         $this->entry->setService($data);
@@ -145,42 +132,10 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->entry->getService(), $data);
     }
 
-    public function testsetServiceProvidesFluentInterface()
+    public function testSetServiceProvidesFluentInterface()
     {
         $result = $this->entry->setService(null);
         $this->assertEquals($this->entry, $result);
-    }
-
-    public function testGetHttpClientPullsFromServiceInstance()
-    {
-        $s = new App();
-        $this->entry->setService($s);
-
-        $c = new GData\HttpClient();
-        $s->setHttpClient($c);
-        $this->assertEquals($this->entry->getHttpClient(),
-                $s->getHttpClient());
-
-        $c = new Http\Client();
-        $s->setHttpClient($c);
-        $this->assertEquals($this->entry->getHttpClient(),
-                $s->getHttpClient($c));
-    }
-
-    public function testSetHttpClientPushesIntoServiceInstance()
-    {
-        $s = new App();
-        $this->entry->setService($s);
-
-        $c = new GData\HttpClient();
-        $this->entry->setHttpClient($c);
-        $this->assertEquals(get_class($s->getHttpClient()),
-                'Zend\GData\HttpClient');
-
-        $c = new Http\Client();
-        $this->entry->setHttpClient($c);
-        $this->assertEquals(get_class($s->getHttpClient()),
-                'Zend\Http\Client');
     }
 
     public function testSaveSupportsGDataV2()

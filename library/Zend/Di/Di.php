@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Di
+ */
 
 namespace Zend\Di;
 
@@ -229,7 +237,7 @@ class Di implements DependencyInjectionInterface
     public function injectDependencies($instance, array $params = array())
     {
         $definitions = $this->definitions();
-        $class = get_class($instance);
+        $class = $this->getClass($instance);
         $injectionMethods = array(
             $class => ($definitions->hasClass($class)) ? $definitions->getMethods($class) : array()
         );
@@ -300,7 +308,8 @@ class Di implements DependencyInjectionInterface
                                         $methodParams = $definitions->getMethodParameters($type, $typeInjectionMethod);
                                         if ($methodParams) {
                                             foreach ($methodParams as $methodParam) {
-                                                if (get_class($objectToInject) == $methodParam[1] || $this->isSubclassOf(get_class($objectToInject), $methodParam[1])) {
+                                                $objectToInjectClass = $this->getClass($objectToInject);
+                                                if ($objectToInjectClass == $methodParam[1] || $this->isSubclassOf($objectToInjectClass, $methodParam[1])) {
                                                     if ($this->resolveAndCallInjectionMethodForInstance($instance, $typeInjectionMethod, array($methodParam[0] => $objectToInject), $instanceAlias, true, $type)) {
                                                         $calledMethods[$typeInjectionMethod] = true;
                                                     }
@@ -315,7 +324,7 @@ class Di implements DependencyInjectionInterface
                     }
                     if ($methodsToCall) {
                         foreach ($methodsToCall as $methodInfo) {
-                            $this->resolveAndCallInjectionMethodForInstance($instance, $methodInfo['method'], $methodInfo['args'], $instanceAlias, true, get_class($instance));
+                            $this->resolveAndCallInjectionMethodForInstance($instance, $methodInfo['method'], $methodInfo['args'], $instanceAlias, true, $instanceClass);
                         }
                     }
                 }
@@ -375,7 +384,7 @@ class Di implements DependencyInjectionInterface
         }
 
         if (is_array($callback)) {
-            $class = (is_object($callback[0])) ? get_class($callback[0]) : $callback[0];
+            $class = (is_object($callback[0])) ? $this->getClass($callback[0]) : $callback[0];
             $method = $callback[1];
         } elseif (is_string($callback) && strpos($callback, '::') !== false) {
             list($class, $method) = explode('::', $callback, 2);
@@ -402,7 +411,7 @@ class Di implements DependencyInjectionInterface
      */
     protected function resolveAndCallInjectionMethodForInstance($instance, $method, $params, $alias, $methodIsRequired, $methodClass = null)
     {
-        $methodClass = ($methodClass) ?: get_class($instance);
+        $methodClass = ($methodClass) ?: $this->getClass($instance);
         $callParameters = $this->resolveMethodParameters($methodClass, $method, $params, $alias, $methodIsRequired);
         if ($callParameters == false) {
             return false;
@@ -655,6 +664,21 @@ class Di implements DependencyInjectionInterface
         }
 
         return $resolvedParams; // return ordered list of parameters
+    }
+
+    /**
+     * Utility method used to retrieve the class of a particular instance. This is here to allow extending classes to
+     * override how class names are resolved
+     *
+     * @internal this method is used by the ServiceLocator\DependencyInjectorProxy class to interact with instances
+     *           and is a hack to be used internally until a major refactor does not split the `resolveMethodParameters`. Do not
+     *           rely on its functionality.
+     * @param Object $instance
+     * @return string
+     */
+    protected function getClass($instance)
+    {
+        return get_class($instance);
     }
 
     /**

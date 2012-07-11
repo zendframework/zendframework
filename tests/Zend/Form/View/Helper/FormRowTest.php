@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -31,8 +20,6 @@ use Zend\View\Renderer\PhpRenderer;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormRowTest extends TestCase
 {
@@ -54,7 +41,7 @@ class FormRowTest extends TestCase
     public function testCanGenerateLabel()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
+        $element->setLabel('The value for foo:');
         $markup = $this->helper->render($element);
         $this->assertContains('>The value for foo:<', $markup);
         $this->assertContains('<label', $markup);
@@ -64,7 +51,7 @@ class FormRowTest extends TestCase
     public function testCanCreateLabelValueBeforeInput()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
+        $element->setLabel('The value for foo:');
         $this->helper->setLabelPosition('prepend');
         $markup = $this->helper->render($element);
         $this->assertContains('<label>The value for foo:<', $markup);
@@ -74,7 +61,9 @@ class FormRowTest extends TestCase
     public function testCanCreateLabelValueAfterInput()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
+        $element->setOptions(array(
+            'label' => 'The value for foo:',
+        ));
         $this->helper->setLabelPosition('append');
         $markup = $this->helper->render($element);
         $this->assertContains('<label><input', $markup);
@@ -84,8 +73,8 @@ class FormRowTest extends TestCase
     function testCanRenderRowLabelAttributes()
     {
         $element = new Element('foo');
-        $element->setAttribute('label', 'The value for foo:');
-        $element->setAttribute('rowLabelAttributes', array('class' => 'bar'));
+        $element->setLabel('The value for foo:');
+        $element->setLabelAttributes(array('class' => 'bar'));
         $this->helper->setLabelPosition('append');
         $markup = $this->helper->render($element);
         $this->assertContains("<label class=\"bar\">", $markup);
@@ -107,10 +96,10 @@ class FormRowTest extends TestCase
             'This is the third label' => 'value3',
         );
 
-        $element = new Element('foo');
+        $element = new Element\MultiCheckbox('foo');
         $element->setAttribute('type', 'multi_checkbox');
-        $element->setAttribute('label', 'This is a multi-checkbox');
         $element->setAttribute('options', $options);
+        $element->setLabel('This is a multi-checkbox');
         $markup = $this->helper->render($element);
         $this->assertContains("<fieldset>", $markup);
         $this->assertContains("<legend>", $markup);

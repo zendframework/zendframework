@@ -1,26 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
+use Zend\I18n\Translator\Translator;
 use Zend\View\Exception;
 
 /**
@@ -28,8 +18,6 @@ use Zend\View\Exception;
  *
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HeadTitle extends Placeholder\Container\AbstractStandalone
 {
@@ -124,21 +112,13 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
     /**
      * Sets a translation Adapter for translation
      *
-     * @param  Zend_Translator|\Zend\Translator\Adapter\Adapter $translate
+     * @param  Translator $translator
      * @return \Zend\View\Helper\HeadTitle
      * @throws Exception\InvalidArgumentException
      */
-    public function setTranslator($translate)
+    public function setTranslator(Translator $translator)
     {
-        if ($translate instanceof \Zend\Translator\Adapter\AbstractAdapter) {
-            $this->_translator = $translate;
-        } elseif ($translate instanceof \Zend\Translator\Translator) {
-            $this->_translator = $translate->getAdapter();
-        } else {
-            throw new Exception\InvalidArgumentException(
-                "You must set an instance of Zend_Translator or Zend_Translator_Adapter"
-            );
-        }
+        $this->_translator = $translator;
         return $this;
     }
 
@@ -148,7 +128,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
      * If none is currently registered, attempts to pull it from the registry
      * using the key 'Zend_Translator'.
      *
-     * @return Zend_Translator_Adapter|null
+     * @return Translator|null
      */
     public function getTranslator()
     {
@@ -184,7 +164,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
      * @param  string|null $locale
      * @return string
      */
-    public function toString($indent = null, $locale = null)
+    public function toString($indent = null, $locale = 'default')
     {
         $indent = (null !== $indent)
                 ? $this->getWhitespace($indent)

@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_ModuleManager
- * @subpackage Listener
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ModuleManager
  */
 
 namespace Zend\ModuleManager\Listener;
@@ -34,8 +23,6 @@ use Zend\Stdlib\ArrayUtils;
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ServiceListener implements ListenerAggregateInterface
 {
@@ -50,18 +37,49 @@ class ServiceListener implements ListenerAggregateInterface
     protected $listeners = array();
 
     /**
+     * Default service manager used to fulfill other SMs that need to be lazy loaded
+     *
+     * @var ServiceManager
+     */
+    protected $defaultServiceManager;
+
+    /**
+     * @var array
+     */
+    protected $defaultServiceConfiguration;
+
+    /**
      * @var array
      */
     protected $serviceManagers = array();
 
     /**
-     * @param string $key
      * @param ServiceManager $serviceManager
+     */
+    public function __construct(ServiceManager $serviceManager, $configuration = null)
+    {
+        $this->defaultServiceManager = $serviceManager;
+        $this->defaultServiceConfiguration = $configuration;
+    }
+
+    /**
+     * @param string $key
+     * @param ServiceManager|string $serviceManager
      * @return ServiceListener
      */
-    public function addServiceManager(ServiceManager $serviceManager, $key, $moduleInterface, $method)
+    public function addServiceManager($serviceManager, $key, $moduleInterface, $method)
     {
-        $this->serviceManagers[spl_object_hash($serviceManager)] = array(
+        if (is_string($serviceManager)) {
+            $smKey = $serviceManager;
+        } elseif ($serviceManager instanceof ServiceManager) {
+            $smKey = spl_object_hash($serviceManager);
+        } else {
+            throw new Exception\RuntimeException(sprintf(
+                'Invalid service manager provided, expected ServiceManager or string, %s provided',
+                (string) $serviceManager
+            ));
+        }
+        $this->serviceManagers[$smKey] = array(
             'service_manager'        => $serviceManager,
             'config_key'             => $key,
             'module_class_interface' => $moduleInterface,
@@ -77,8 +95,8 @@ class ServiceListener implements ListenerAggregateInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach('loadModule', array($this, 'onLoadModule'), 1500);
-        $this->listeners[] = $events->attach('loadModules.post', array($this, 'onLoadModulesPost'), 8500);
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, array($this, 'onLoadModule'));
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES_POST, array($this, 'onLoadModulesPost'));
         return $this;
     }
 
@@ -156,6 +174,10 @@ class ServiceListener implements ListenerAggregateInterface
         $configListener = $e->getConfigListener();
         $config         = $configListener->getMergedConfig(false);
 
+        if ($this->defaultServiceConfiguration) {
+            $config = ArrayUtils::merge(array('service_manager' => $this->defaultServiceConfiguration), $config);
+        }
+
         foreach ($this->serviceManagers as $key => $sm) {
 
             if (isset($config[$sm['config_key']])
@@ -177,6 +199,16 @@ class ServiceListener implements ListenerAggregateInterface
                 $smConfig = ArrayUtils::merge($smConfig, $configs);
             }
 
+            if (!$sm['service_manager'] instanceof ServiceManager) {
+                $instance = $this->defaultServiceManager->get($sm['service_manager']);
+                if (!$instance instanceof ServiceManager) {
+                    throw new Exception\RuntimeException(sprintf(
+                        'Could not find a valid ServiceManager for %s',
+                        $sm['service_manager']
+                    ));
+                }
+                $sm['service_manager'] = $instance;
+            }
             $serviceConfig = new ServiceConfiguration($smConfig);
             $serviceConfig->configureServiceManager($sm['service_manager']);
         }
@@ -202,9 +234,8 @@ class ServiceListener implements ListenerAggregateInterface
 
         if (!$config instanceof ServiceConfiguration) {
             throw new Exception\RuntimeException(sprintf(
-                'Invalid service manager configuration class provided; received "%s", expected class implementing %s',
-                $class,
-                'Zend\ServiceManager\ConfigurationInterface'
+                'Invalid service manager configuration class provided; received "%s", expected an instance of Zend\ServiceManager\Configuration',
+                $class
             ));
         }
 

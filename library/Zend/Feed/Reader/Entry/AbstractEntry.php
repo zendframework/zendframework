@@ -1,36 +1,24 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
- 
+
 namespace Zend\Feed\Reader\Entry;
 
+use DOMDocument;
+use DOMElement;
+use DOMXPath;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Exception;
-use DOMElement;
-use DOMDocument;
-use DOMXPath;
 
 /**
 * @category Zend
 * @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 */
 abstract class AbstractEntry
 {
@@ -91,8 +79,10 @@ abstract class AbstractEntry
         $this->_domDocument = $entry->ownerDocument;
         if ($type !== null) {
             $this->_data['type'] = $type;
+        } else if ($this->_domDocument !== null) {
+            $this->_data['type'] = Reader\Reader::detectType($this->_domDocument);
         } else {
-            $this->_data['type'] = Reader\Reader::detectType($feed);
+            $this->_data['type'] = Reader\Reader::TYPE_ANY;		
         }
         $this->_loadExtensions();
     }

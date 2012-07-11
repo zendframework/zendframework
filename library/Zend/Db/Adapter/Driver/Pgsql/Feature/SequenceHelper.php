@@ -1,8 +1,9 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: ralphschindler
- * Date: 6/6/12
- * Time: 12:16 PM
- * To change this template use File | Settings | File Templates.
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */

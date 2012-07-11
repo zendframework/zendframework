@@ -1,33 +1,22 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_File
  */
 
 namespace Zend\File\Transfer\Adapter;
 
-use Zend\File\Transfer,
-    Zend\File\Transfer\Exception,
-    Zend\Filter,
-    Zend\Filter\Exception as FilterException,
-    Zend\Loader,
-    Zend\Translator,
-    Zend\Translator\Adapter as AdapterTranslator,
-    Zend\Validator;
+use Zend\File\Transfer;
+use Zend\File\Transfer\Exception;
+use Zend\Filter;
+use Zend\Filter\Exception as FilterException;
+use Zend\I18n\Translator\Translator;
+use Zend\Loader;
+use Zend\Validator;
 
 /**
  * Abstract class for file transfers (Downloads and Uploads)
@@ -41,8 +30,6 @@ use Zend\File\Transfer,
  * @todo      Rewrite
  * @category  Zend
  * @package   Zend_File_Transfer
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractAdapter
 {
@@ -82,7 +69,7 @@ abstract class AbstractAdapter
     protected $messages = array();
 
     /**
-     * @var AdapterTranslator\AbstractAdapter
+     * @var Translator
      */
     protected $translator;
 
@@ -1093,28 +1080,19 @@ abstract class AbstractAdapter
     /**
      * Set translator object for localization
      *
-     * @param  Translator\Translator|AdapterTranslator\AbstractAdapter|null $translator
+     * @param  Translator|null $translator
      * @return AbstractAdapter
      */
-    public function setTranslator($translator = null)
+    public function setTranslator(Translator $translator = null)
     {
-        if (null === $translator) {
-            $this->translator = null;
-        } elseif ($translator instanceof AdapterTranslator\AbstractAdapter) {
-            $this->translator = $translator;
-        } elseif ($translator instanceof Translator\Translator) {
-            $this->translator = $translator->getAdapter();
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid translator specified');
-        }
-
+        $this->translator = $translator;
         return $this;
     }
 
     /**
      * Retrieve localization translator object
      *
-     * @return AdapterTranslator\AbstractAdapter|null
+     * @return Translator|null
      */
     public function getTranslator()
     {

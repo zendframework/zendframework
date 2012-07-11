@@ -1,0 +1,21 @@
+{
+    "name": "zendframework/zend-log",
+    "description": "component for general purpose logging",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "log"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Log": ""
+        }
+    },
+    "target-dir": "Zend/Log",
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "suggest": {
+        "zendframework/zend-mail": "Zend\\Mail component"
+    }
+}

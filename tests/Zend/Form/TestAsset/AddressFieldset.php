@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
+ */
 
 namespace ZendTest\Form\TestAsset;
 
@@ -11,19 +19,14 @@ class AddressFieldset extends Fieldset implements InputFilterProviderInterface
     public function __construct()
     {
         parent::__construct('address');
-        $this->setHydrator(new ClassMethodsHydrator())
+        $this->setHydrator(new ClassMethodsHydrator(false))
              ->setObject(new Entity\Address());
 
-        $street = new \Zend\Form\Element('street');
-        $street->setAttributes(array(
-            'type' => 'text',
-            'label' => 'Street'
-        ));
+        $street = new \Zend\Form\Element('street', array('label' => 'Street'));
+        $street->setAttribute('type', 'text');
 
         $city = new CityFieldset;
-        $city->setAttributes(array(
-            'label' => 'City'
-        ));
+        $city->setLabel('City');
 
         $this->add($street);
         $this->add($city);

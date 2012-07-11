@@ -1,0 +1,20 @@
+{
+    "name": "zendframework/zend-service-nirvanix",
+    "description": " ",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "nirvanix"
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend\\Service\\Nirvanix": ""
+        }
+    },
+    "target-dir": "Zend/Service/Nirvanix",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-http": "self.version",
+        "zendframework/zend-stdlib": "self.version"
+    }
+}

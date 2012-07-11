@@ -89,7 +89,6 @@ abstract class AutoloaderFactory
                     );
                 }
 
-                require_once __DIR__ . '/../Stdlib/SubClass.php';
                 if (!self::isSubclassOf($class, 'Zend\Loader\SplAutoloader')) {
                     require_once 'Exception/InvalidArgumentException.php';
                     throw new Exception\InvalidArgumentException(
@@ -184,7 +183,7 @@ abstract class AutoloaderFactory
         if (null !== static::$standardAutoloader) {
             return static::$standardAutoloader;
         }
-        
+
         // Extract the filename from the classname
         $stdAutoloader = substr(strrchr(static::STANDARD_AUTOLOADER, '\\'), 1);
 

@@ -8,7 +8,6 @@
             <exclude>./Zend/Dojo/</exclude>
             <exclude>./Zend/Queue/</exclude>
             <exclude>./Zend/Service/</exclude>
-            <exclude>./Zend/Test/</exclude>
             <exclude>./Zend/Wildfire/</exclude>
         </testsuite>
     </testsuites>
@@ -20,7 +19,6 @@
             <group>Zend_Dojo</group>
             <group>Zend_Queue</group>
             <group>Zend_Service</group>
-            <group>Zend_Test</group>
             <group>Zend_Wildfire</group>
         </exclude>
     </groups>

@@ -159,7 +159,7 @@ class PdfDocument
      *
      * @return Zend\Memory\MemoryManager
      */
-    static public function getMemoryManager()
+    public static function getMemoryManager()
     {
         if (self::$_memoryManager === null) {
             self::$_memoryManager = new Memory\MemoryManager();
@@ -173,7 +173,7 @@ class PdfDocument
      *
      * @param Zend\Memory\MemoryManager $memoryManager
      */
-    static public function setMemoryManager(Memory\MemoryManager $memoryManager)
+    public static function setMemoryManager(Memory\MemoryManager $memoryManager)
     {
         self::$_memoryManager = $memoryManager;
     }

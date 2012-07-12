@@ -21,7 +21,7 @@ use Zend\Config\Config;
  */
 class NirvanixTest extends TestCase
 {
-	protected $_clientType = 'Zend\Service\Nirvanix';
+    protected $_clientType = 'Zend\Service\Nirvanix';
 
     public function testFetchItemStream()
     {

@@ -81,7 +81,7 @@ class SharedAccessSignatureTest extends \PHPUnit_Framework_TestCase
         $credentials = new SharedAccessSignature('myaccount', '', false);
         $result = $credentials->createSignedQueryString(
             'pictures/blob.txt',
-        	'',
+            '',
             'b',
             'w',
             '2009-02-09',

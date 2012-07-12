@@ -57,7 +57,7 @@ class Cipher
      * @return mixed an Instance of Zend\InfoCard\Cipher\Symmetric or Zend\InfoCard\Cipher\PKI
      *               depending on URI
      */
-    static public function getInstanceByURI($uri)
+    public static function getInstanceByURI($uri)
     {
         switch($uri) {
             case self::ENC_AES256CBC:

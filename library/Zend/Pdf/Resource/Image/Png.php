@@ -328,7 +328,7 @@ class Png extends AbstractImage
      */
     public function getPixelWidth()
     {
-    return $this->_width;
+        return $this->_width;
     }
 
     /**

@@ -117,7 +117,7 @@ class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
      * @param integer $d
      * @return integer
      */
-    function testFunc($a=100, $b=200, $d=300)
+    public function testFunc($a=100, $b=200, $d=300)
     {
 
     }
@@ -135,7 +135,7 @@ class Zend_Soap_AutoDiscover_Test
      *
      * @return string
      */
-    function testFunc1()
+    public function testFunc1()
     {
         return "Hello World";
     }
@@ -146,7 +146,7 @@ class Zend_Soap_AutoDiscover_Test
      * @param string $who Some Arg
      * @return string
      */
-    function testFunc2($who)
+    public function testFunc2($who)
     {
         return "Hello $who!";
     }
@@ -158,7 +158,7 @@ class Zend_Soap_AutoDiscover_Test
      * @param int $when Some
      * @return string
      */
-    function testFunc3($who, $when)
+    public function testFunc3($who, $when)
     {
         return "Hello $who, How are you $when";
     }
@@ -168,7 +168,7 @@ class Zend_Soap_AutoDiscover_Test
      *
      * @return string
      */
-    static function testFunc4()
+    public static function testFunc4()
     {
         return "I'm Static!";
     }

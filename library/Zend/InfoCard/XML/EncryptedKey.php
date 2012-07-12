@@ -26,7 +26,7 @@ class EncryptedKey extends AbstractElement implements KeyInfo\KeyInfoInterface
      * @param string $xmlData The EncryptedKey XML Block
      * @return EncryptedKey
      */
-    static public function getInstance($xmlData)
+    public static function getInstance($xmlData)
     {
         if($xmlData instanceof AbstractElement) {
             $strXmlData = $xmlData->asXML();

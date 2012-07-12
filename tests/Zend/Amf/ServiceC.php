@@ -17,7 +17,7 @@ namespace ZendTest\Amf;
  */
 class ServiceC
 {
-    function __construct()
+    public function __construct()
     {
         //Construction...
     }

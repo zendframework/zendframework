@@ -186,7 +186,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
      */
     public function testThrowStrictSetFormatter()
     {
-    	$this->setExpectedException('PHPUnit_Framework_Error');
+        $this->setExpectedException('PHPUnit_Framework_Error');
         $this->writer->setFormatter(new \StdClass());
     }
 }

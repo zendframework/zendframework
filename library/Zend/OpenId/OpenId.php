@@ -44,13 +44,13 @@ class OpenId
     /**
      * Allows enable/disable stoping execution of PHP script after redirect()
      */
-    static public $exitOnRedirect = true;
+    public static $exitOnRedirect = true;
 
     /**
      * Alternative request URL that can be used to override the default
      * selfUrl() response
      */
-    static public $selfUrl = null;
+    public static $selfUrl = null;
 
     /**
      * Sets alternative request URL that can be used to override the default
@@ -59,7 +59,7 @@ class OpenId
      * @param string $selfUrl the URL to be set
      * @return string the old value of overriding URL
      */
-    static public function setSelfUrl($selfUrl = null)
+    public static function setSelfUrl($selfUrl = null)
     {
         $ret = self::$selfUrl;
         self::$selfUrl = $selfUrl;
@@ -71,7 +71,7 @@ class OpenId
      *
      * @return string
      */
-    static public function selfUrl()
+    public static function selfUrl()
     {
         if (self::$selfUrl !== null) {
             return self::$selfUrl;
@@ -139,7 +139,7 @@ class OpenId
      * @param string $url absilute or relative URL
      * @return string
      */
-    static public function absoluteUrl($url)
+    public static function absoluteUrl($url)
     {
         if (empty($url)) {
             return self::selfUrl();
@@ -180,7 +180,7 @@ class OpenId
      * @param array $params variable/value pairs
      * @return string URL encoded query string
      */
-    static public function paramsToQuery($params)
+    public static function paramsToQuery($params)
     {
         foreach($params as $key => $value) {
             if (isset($query)) {
@@ -200,7 +200,7 @@ class OpenId
      * @param string &$id url to be normalized
      * @return bool
      */
-    static public function normalizeUrl(&$id)
+    public static function normalizeUrl(&$id)
     {
         // RFC 3986, 6.2.2.  Syntax-Based Normalization
 
@@ -360,7 +360,7 @@ class OpenId
      * @param string &$id identifier to be normalized
      * @return bool
      */
-    static public function normalize(&$id)
+    public static function normalize(&$id)
     {
         $id = trim($id);
         if (strlen($id) === 0) {
@@ -404,7 +404,7 @@ class OpenId
      * @param Response $response
      * @param string $method redirection method ('GET' or 'POST')
      */
-    static public function redirect($url, $params = null,
+    public static function redirect($url, $params = null,
         Response $response = null, $method = 'GET')
     {
         $url = self::absoluteUrl($url);
@@ -462,7 +462,7 @@ class OpenId
      * @param integer $len length of requested string
      * @return string RAW random binary string
      */
-    static public function randomBytes($len)
+    public static function randomBytes($len)
     {
         $key = '';
         for($i=0; $i < $len; $i++) {
@@ -484,7 +484,7 @@ class OpenId
      * @return string RAW digital signature
      * @throws Exception\InvalidArgumentException
      */
-    static public function digest($func, $data)
+    public static function digest($func, $data)
     {
         if (function_exists('openssl_digest')) {
             return openssl_digest($data, $func, true);
@@ -513,7 +513,7 @@ class OpenId
      *  variant of the message digest
      * @return string RAW HMAC value
      */
-    static public function hashHmac($macFunc, $data, $secret)
+    public static function hashHmac($macFunc, $data, $secret)
     {
         if (function_exists('hash_hmac')) {
             return hash_hmac($macFunc, $data, $secret, 1);
@@ -537,7 +537,7 @@ class OpenId
      * @return mixed
      * @throws Exception\RuntimeException
      */
-    static protected function binToBigNum($bin)
+    protected static function binToBigNum($bin)
     {
         if (extension_loaded('gmp')) {
             return gmp_init(bin2hex($bin), 16);
@@ -563,7 +563,7 @@ class OpenId
      * @return string
      * @throws Exception\RuntimeException
      */
-    static protected function bigNumToBin($bn)
+    protected static function bigNumToBin($bn)
     {
         if (extension_loaded('gmp')) {
             $s = gmp_strval($bn, 16);
@@ -609,7 +609,7 @@ class OpenId
      * @param string $priv_key private key in binary representation
      * @return mixed
      */
-    static public function createDhKey($p, $g, $priv_key = null)
+    public static function createDhKey($p, $g, $priv_key = null)
     {
         if (function_exists('openssl_dh_compute_key')) {
             $dh_details = array(
@@ -656,7 +656,7 @@ class OpenId
      * @param mixed $dh Diffie-Hellman key
      * @return array
      */
-    static public function getDhKeyDetails($dh)
+    public static function getDhKeyDetails($dh)
     {
         if (function_exists('openssl_dh_compute_key')) {
             $details = openssl_pkey_get_details($dh);
@@ -677,7 +677,7 @@ class OpenId
      * @return string
      * @throws Exception\RuntimeException
      */
-    static public function computeDhSecret($pub_key, $dh)
+    public static function computeDhSecret($pub_key, $dh)
     {
         if (function_exists('openssl_dh_compute_key')) {
             $ret = openssl_dh_compute_key($pub_key, $dh);
@@ -714,7 +714,7 @@ class OpenId
      * @param string $str binary representation of arbitrary precision integer
      * @return string big-endian signed representation
      */
-    static public function btwoc($str)
+    public static function btwoc($str)
     {
         if (ord($str[0]) > 127) {
             return "\0" . $str;

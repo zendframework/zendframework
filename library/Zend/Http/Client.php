@@ -123,7 +123,7 @@ class Client implements Stdlib\DispatchableInterface
      *
      * @var resource
      */
-    static protected $_fileInfoDb = null;
+    protected static $_fileInfoDb = null;
 
     /**
      * Constructor

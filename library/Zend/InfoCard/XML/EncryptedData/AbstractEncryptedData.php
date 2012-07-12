@@ -69,5 +69,5 @@ abstract class AbstractEncryptedData extends AbstractElement
      *
      * @return string the value of the encrypted CipherValue block
      */
-    abstract function getCipherValue();
+    abstract public function getCipherValue();
 }

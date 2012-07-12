@@ -119,7 +119,7 @@ class TestFixingMultiplePrototypes
      * @param integer $d
      * @return integer
      */
-    function testFunc($a=100, $b=200, $d=300)
+    public function testFunc($a=100, $b=200, $d=300)
     {
 
     }
@@ -137,7 +137,7 @@ class Test
      *
      * @return string
      */
-    function testFunc1()
+    public function testFunc1()
     {
         return "Hello World";
     }
@@ -148,7 +148,7 @@ class Test
      * @param string $who Some Arg
      * @return string
      */
-    function testFunc2($who)
+    public function testFunc2($who)
     {
         return "Hello $who!";
     }
@@ -160,7 +160,7 @@ class Test
      * @param int $when Some
      * @return string
      */
-    function testFunc3($who, $when)
+    public function testFunc3($who, $when)
     {
         return "Hello $who, How are you $when";
     }
@@ -170,7 +170,7 @@ class Test
      *
      * @return string
      */
-    static function testFunc4()
+    public static function testFunc4()
     {
         return "I'm Static!";
     }
@@ -445,7 +445,7 @@ class TestClass
      *
      * @return string
      */
-    function testFunc1()
+    public function testFunc1()
     {
         return "Hello World";
     }
@@ -456,7 +456,7 @@ class TestClass
      * @param string $who Some Arg
      * @return string
      */
-    function testFunc2($who)
+    public function testFunc2($who)
     {
         return "Hello $who!";
     }
@@ -468,7 +468,7 @@ class TestClass
      * @param int $when Some
      * @return string
      */
-    function testFunc3($who, $when)
+    public function testFunc3($who, $when)
     {
         return "Hello $who, How are you $when";
     }
@@ -478,7 +478,7 @@ class TestClass
      *
      * @return string
      */
-    static function testFunc4()
+    public static function testFunc4()
     {
         return "I'm Static!";
     }
@@ -549,7 +549,7 @@ class ServerTestClass
      *
      * @return string
      */
-    function testFunc1()
+    public function testFunc1()
     {
         return "Hello World";
     }
@@ -560,7 +560,7 @@ class ServerTestClass
      * @param string $who Some Arg
      * @return string
      */
-    function testFunc2($who)
+    public function testFunc2($who)
     {
         return "Hello $who!";
     }
@@ -572,7 +572,7 @@ class ServerTestClass
      * @param int $when Some
      * @return string
      */
-    function testFunc3($who, $when)
+    public function testFunc3($who, $when)
     {
         return "Hello $who, How are you $when";
     }
@@ -582,7 +582,7 @@ class ServerTestClass
      *
      * @return string
      */
-    static function testFunc4()
+    public static function testFunc4()
     {
         return "I'm Static!";
     }
@@ -592,7 +592,7 @@ class ServerTestClass
      *
      * @return void
      */
-    function testFunc5()
+    public function testFunc5()
     {
         trigger_error("Test Message", E_USER_ERROR);
     }
@@ -617,13 +617,13 @@ class TestLocalSoapClient extends \SoapClient
      * @param string $wsdl
      * @param array $options
      */
-    function __construct(\Zend\Soap\Server $server, $wsdl, $options)
+    public function __construct(\Zend\Soap\Server $server, $wsdl, $options)
     {
         $this->server = $server;
         parent::__construct($wsdl, $options);
     }
 
-    function __doRequest($request, $location, $action, $version, $one_way = 0)
+    public function __doRequest($request, $location, $action, $version, $one_way = 0)
     {
         ob_start();
         $this->server->handle($request);

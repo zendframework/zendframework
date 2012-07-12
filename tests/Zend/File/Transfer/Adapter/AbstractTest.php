@@ -639,7 +639,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testFileSizeByTmpName()
     {
-    	$expectedSize = sprintf("%.2fkB", 1.14);
+        $expectedSize = sprintf("%.2fkB", 1.14);
         $options = $this->adapter->getOptions();
         $this->assertTrue($options['baz']['useByteString']);
         $this->assertEquals($expectedSize, $this->adapter->getFileSize('baz.text'));

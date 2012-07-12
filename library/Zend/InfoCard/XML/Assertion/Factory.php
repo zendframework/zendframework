@@ -41,7 +41,7 @@ final class Factory
      * @param string $xmlData The XML-Formatted Assertion
      * @return object
      */
-    static public function getInstance($xmlData)
+    public static function getInstance($xmlData)
     {
 
         if($xmlData instanceof XML\AbstractElement) {

@@ -389,37 +389,37 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $test);
     }
 
-	/**
-	 * @issue ZF-7722
-	 */
-	public function testCharsetValidateFail()
-	{
-		$view = new View();
-		$view->plugin('doctype')->__invoke('HTML4_STRICT');
+    /**
+     * @issue ZF-7722
+     */
+    public function testCharsetValidateFail()
+    {
+        $view = new View();
+        $view->plugin('doctype')->__invoke('HTML4_STRICT');
 
         $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $view->plugin('headMeta')->setCharset('utf-8');
-	}
+    }
 
-	/**
-	 * @issue ZF-7722
-	 */
+    /**
+     * @issue ZF-7722
+     */
     public function testCharset()
     {
-		$view = new View();
-		$view->plugin('doctype')->__invoke('HTML5');
+        $view = new View();
+        $view->plugin('doctype')->__invoke('HTML5');
 
-		$view->plugin('headMeta')->setCharset('utf-8');
-		$this->assertEquals(
-			'<meta charset="utf-8">',
-			$view->plugin('headMeta')->toString());
+        $view->plugin('headMeta')->setCharset('utf-8');
+        $this->assertEquals(
+            '<meta charset="utf-8">',
+            $view->plugin('headMeta')->toString());
 
-		$view->plugin('doctype')->__invoke('XHTML5');
+        $view->plugin('doctype')->__invoke('XHTML5');
 
-		$this->assertEquals(
-			'<meta charset="utf-8"/>',
-			$view->plugin('headMeta')->toString());
-	}
+        $this->assertEquals(
+            '<meta charset="utf-8"/>',
+            $view->plugin('headMeta')->toString());
+    }
 
      /**
      * @group ZF-9743

@@ -183,7 +183,7 @@ abstract class TestCase extends PHPUnitTestCase
             foreach ($receivedMessages as $m) {
                 $this->assertEquals($message, $m->getBody());
             }
-		  $this->_commonQueue->deleteQueue($queueURL);
+          $this->_commonQueue->deleteQueue($queueURL);
         } catch (Exception $e) {
             if(isset($queueURL)) $this->_commonQueue->deleteQueue($queueURL);
             throw $e;
@@ -276,9 +276,9 @@ abstract class TestCase extends PHPUnitTestCase
             // now there should be no messages left
             $receivedMessages2 = $this->_commonQueue->receiveMessages($queueURL);
             $this->assertInstanceOf('Zend\Cloud\QueueService\MessageSet', $receivedMessages2);
-		    $this->assertEquals(0, count($receivedMessages2));
+            $this->assertEquals(0, count($receivedMessages2));
 
-		    $this->_commonQueue->deleteQueue($queueURL);
+            $this->_commonQueue->deleteQueue($queueURL);
         } catch (Exception $e) {
             if(isset($queueURL)) $this->_commonQueue->deleteQueue($queueURL);
             throw $e;

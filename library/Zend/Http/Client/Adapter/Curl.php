@@ -357,9 +357,9 @@ class Curl implements HttpAdapter, StreamInterface
 
         // Treating basic auth headers in a special way
         if (array_key_exists('Authorization', $headers) && 'Basic' == substr($headers['Authorization'], 0, 5)) {
-        	curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        	curl_setopt($this->curl, CURLOPT_USERPWD, base64_decode(substr($headers['Authorization'], 6)));
-        	unset($headers['Authorization']);
+            curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_setopt($this->curl, CURLOPT_USERPWD, base64_decode(substr($headers['Authorization'], 6)));
+            unset($headers['Authorization']);
         }
 
         // set additional headers

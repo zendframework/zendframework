@@ -85,7 +85,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
         return $this;
     }
 
-	/**
+    /**
      * Set the JSONP callback function name
      *
      * @param  string $callback

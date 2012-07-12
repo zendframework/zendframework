@@ -227,15 +227,15 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
     /**
      * @group   ZF-3247
      */
-	public function testSlideShareObjectHandlesUnicodeCharactersWell()
-	{
+    public function testSlideShareObjectHandlesUnicodeCharactersWell()
+    {
         $slideShow = new SlideShare\SlideShow();
 
-		$slideShow->setTitle('Unicode test: ஸ்றீனிவாஸ ராமானுஜன் ஐயங்கார்');
+        $slideShow->setTitle('Unicode test: ஸ்றீனிவாஸ ராமானுஜன் ஐயங்கார்');
 
-		if (!extension_loaded('mbstring')) {
-		    $this->markTestSkipped('Extension "mbstring" not loaded');
-		}
+        if (!extension_loaded('mbstring')) {
+            $this->markTestSkipped('Extension "mbstring" not loaded');
+        }
         $this->assertEquals('UTF-8', mb_detect_encoding($slideShow->getTitle()));
-	}
+    }
 }

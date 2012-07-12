@@ -201,7 +201,7 @@ class QueryToken
 
                     default:
                         throw new Lucene\Exception\InvalidArgumentException(
-                        	'Unrecognized query syntax lexeme: \'' . $tokenText . '\''
+                            'Unrecognized query syntax lexeme: \'' . $tokenText . '\''
                         );
                 }
                 break;
@@ -211,7 +211,7 @@ class QueryToken
 
             default:
                 throw new Lucene\Exception\InvalidArgumentException(
-                	'Unrecognized lexeme type: \'' . $tokenCategory . '\''
+                    'Unrecognized lexeme type: \'' . $tokenCategory . '\''
                 );
         }
     }

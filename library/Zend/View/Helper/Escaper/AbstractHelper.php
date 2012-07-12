@@ -133,6 +133,6 @@ abstract class AbstractHelper extends Helper\AbstractHelper
      * @param string $value
      * @return string
      */
-    protected abstract function escape($value);
+    abstract protected function escape($value);
 
 }

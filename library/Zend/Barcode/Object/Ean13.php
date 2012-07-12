@@ -40,17 +40,17 @@ class Ean13 extends AbstractObject
         ));
 
     protected $parities = array(
-		0 => array('A','A','A','A','A','A'),
-		1 => array('A','A','B','A','B','B'),
-		2 => array('A','A','B','B','A','B'),
-		3 => array('A','A','B','B','B','A'),
-		4 => array('A','B','A','A','B','B'),
-		5 => array('A','B','B','A','A','B'),
-		6 => array('A','B','B','B','A','A'),
-		7 => array('A','B','A','B','A','B'),
-		8 => array('A','B','A','B','B','A'),
-		9 => array('A','B','B','A','B','A')
-	);
+        0 => array('A','A','A','A','A','A'),
+        1 => array('A','A','B','A','B','B'),
+        2 => array('A','A','B','B','A','B'),
+        3 => array('A','A','B','B','B','A'),
+        4 => array('A','B','A','A','B','B'),
+        5 => array('A','B','B','A','A','B'),
+        6 => array('A','B','B','B','A','A'),
+        7 => array('A','B','A','B','A','B'),
+        8 => array('A','B','A','B','B','A'),
+        9 => array('A','B','B','A','B','A')
+    );
 
     /**
      * Default options for Postnet barcode

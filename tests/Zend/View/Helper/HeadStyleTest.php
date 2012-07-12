@@ -408,7 +408,7 @@ a {
     {
         $style = 'a{display:none;}';
         $this->helper->appendStyle($style, array(
-        	'conditional' => 'IE 8'
+            'conditional' => 'IE 8'
         ));
         $value = $this->helper->toString();
 

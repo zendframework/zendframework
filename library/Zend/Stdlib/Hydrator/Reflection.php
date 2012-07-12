@@ -20,7 +20,7 @@ class Reflection implements HydratorInterface
      * Simple in-memory array cache of ReflectionProperties used.
      * @var array
      */
-    static protected $reflProperties = array();
+    protected static $reflProperties = array();
 
     /**
      * Extract values from an object

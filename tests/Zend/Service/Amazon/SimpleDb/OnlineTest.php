@@ -452,9 +452,9 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      * @param $domainName	string	Valid domain name of the domain to create
      * @return 				boolean True if successful, false if not
      */
-	public function testCreateDomain()
-	{
-	    $domainName = $this->_testDomainNamePrefix . '_testCreateDomain';
+    public function testCreateDomain()
+    {
+        $domainName = $this->_testDomainNamePrefix . '_testCreateDomain';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
         try {
@@ -468,9 +468,9 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-	public function testDeleteDomain()
-	{
-	    $domainName = $this->_testDomainNamePrefix . '_testDeleteDomain';
+    public function testDeleteDomain()
+    {
+        $domainName = $this->_testDomainNamePrefix . '_testDeleteDomain';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
         try {

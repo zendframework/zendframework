@@ -65,7 +65,7 @@ class ViewModel implements ModelInterface
     protected $variables = array();
 
 
-	/**
+    /**
      * Is this append to child  with the same capture?
      *
      * @var bool
@@ -288,9 +288,9 @@ class ViewModel implements ModelInterface
         if (null !== $captureTo) {
             $child->setCaptureTo($captureTo);
         }
-		if (null !== $captureTo) {
-			$child->setAppend($append);
-		}
+        if (null !== $captureTo) {
+            $child->setAppend($append);
+        }
 
         return $this;
     }
@@ -361,7 +361,7 @@ class ViewModel implements ModelInterface
         return $this->terminate;
     }
 
-	/**
+    /**
      * Set flag indicating whether or not append to child  with the same capture
      *
      * @param  bool $append

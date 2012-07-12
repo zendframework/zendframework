@@ -67,7 +67,7 @@ class Security
      * @return bool True if the signature validated, false otherwise
      * @throws Security\Exception\ExceptionInterface
      */
-    static public function validateXMLSignature($strXMLInput)
+    public static function validateXMLSignature($strXMLInput)
     {
         if(!extension_loaded('openssl')) {
             throw new Security\Exception\ExtensionNotLoadedException("You must have the openssl extension installed to use this class");
@@ -202,7 +202,7 @@ class Security
      * @param string $exponent The RSA exponent in binary format
      * @return string The PEM encoded version of the key
      */
-    static protected function _getPublicKeyFromModExp($modulus, $exponent)
+    protected static function _getPublicKeyFromModExp($modulus, $exponent)
     {
         $modulusInteger  = self::_encodeValue($modulus, self::ASN_TYPE_INTEGER);
         $exponentInteger = self::_encodeValue($exponent, self::ASN_TYPE_INTEGER);
@@ -231,7 +231,7 @@ class Security
      * @return string The encoded value
      * @throws Security\Exception\RuntimeException
      */
-    static protected function _encodeValue($data, $type)
+    protected static function _encodeValue($data, $type)
     {
         // Null pad some data when we get it (integer values > 128 and bitstrings)
         if( (($type == self::ASN_TYPE_INTEGER) && (ord($data) > 0x7f)) ||
@@ -267,7 +267,7 @@ class Security
      * @param string $b
      * @return bool
      */
-    static protected function _secureStringCompare($a, $b)
+    protected static function _secureStringCompare($a, $b)
     {
         if (strlen($a) !== strlen($b)) {
             return false;

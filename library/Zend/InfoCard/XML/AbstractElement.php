@@ -40,7 +40,7 @@ abstract class AbstractElement extends SimpleXMLElement implements ElementInterf
      * @param \Zend\InfoCard\XML\ElementInterface $e The object to convert
      * @return DOMElement A DOMElement representation of the same object
      */
-    static public function convertToDOM(ElementInterface $e)
+    public static function convertToDOM(ElementInterface $e)
     {
         $dom = dom_import_simplexml($e);
 
@@ -62,7 +62,7 @@ abstract class AbstractElement extends SimpleXMLElement implements ElementInterf
      * @param string $classname The name of the class to convert it to (must inhert from \Zend\InfoCard\XML\Element)
      * @return \Zend\InfoCard\XML\ElementInterface a Xml Element object from the DOM element
      */
-    static public function convertToObject(\DOMElement $e, $classname)
+    public static function convertToObject(\DOMElement $e, $classname)
     {
         if (!class_exists($classname)) {
             throw new Exception\InvalidArgumentException('Class provided for converting does not exist');

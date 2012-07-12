@@ -37,7 +37,7 @@ final class Factory
      * @return \Zend\InfoCard\XML\EncryptedData\AbstractEncryptedData
      * @throws XML\Exception\InvalidArgumentException
      */
-    static public function getInstance($xmlData)
+    public static function getInstance($xmlData)
     {
 
         if($xmlData instanceof XML\AbstractElement) {

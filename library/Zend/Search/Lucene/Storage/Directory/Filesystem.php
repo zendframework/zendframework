@@ -104,12 +104,12 @@ class Filesystem implements DirectoryInterface
         if (!is_dir($path)) {
             if (file_exists($path)) {
                 throw new Lucene\Exception\InvalidArgumentException(
-                	'Path exists, but it\'s not a directory'
+                    'Path exists, but it\'s not a directory'
                 );
             } else {
                 if (!self::mkdirs($path)) {
                     throw new Lucene\Exception\InvalidArgumentException(
-                    	"Can't create directory '$path'."
+                        "Can't create directory '$path'."
                     );
                 }
             }
@@ -283,7 +283,7 @@ class Filesystem implements DirectoryInterface
         if (file_exists($this->_dirPath . '/' . $to)) {
             if (!unlink($this->_dirPath . '/' . $to)) {
                 throw new Lucene\Exception\RuntimeException(
-                	'Delete operation failed'
+                    'Delete operation failed'
                 );
             }
         }

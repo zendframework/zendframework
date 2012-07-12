@@ -64,7 +64,7 @@ class NumberFormatTest extends TestCase
         $this->assertEquals($expected, $filter->filter($value));
     }
 
-    static public function numberToFormattedProvider()
+    public static function numberToFormattedProvider()
     {
         return array(
             array(
@@ -91,7 +91,7 @@ class NumberFormatTest extends TestCase
         );
     }
 
-    static public function formattedToNumberProvider()
+    public static function formattedToNumberProvider()
     {
         return array(
             array(

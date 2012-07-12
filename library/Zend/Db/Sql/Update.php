@@ -258,7 +258,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
     }
 
-	/**
+    /**
      * __clone
      *
      * Resets the where object each time the Update is cloned.

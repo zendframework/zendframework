@@ -190,5 +190,5 @@ abstract class AbstractEntry
      *
      * @return void
      */
-    protected abstract function _registerNamespaces();
+    abstract protected function _registerNamespaces();
 }

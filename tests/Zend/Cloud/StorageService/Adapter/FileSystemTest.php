@@ -42,12 +42,12 @@ class FileSystemTest extends TestCase
 
     public function testGetClient()
     {
-    	$this->assertTrue(is_string($this->_commonStorage->getClient()));
+        $this->assertTrue(is_string($this->_commonStorage->getClient()));
     }
 
     public function testNoParams()
     {
-	    $this->markTestIncomplete('No config params needed for FileSystem');
+        $this->markTestIncomplete('No config params needed for FileSystem');
     }
 
     // TODO: Create a custom test for FileSystem that checks fetchMetadata() with file system MD.
@@ -66,7 +66,7 @@ class FileSystemTest extends TestCase
         $this->markTestIncomplete("FileSystem doesn't support writable metadata.");
     }
 
-	/**
+    /**
      * Tears down this test case
      *
      * @return void

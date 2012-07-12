@@ -35,6 +35,12 @@ abstract class AbstractValidator implements ValidatorInterface
     protected static $defaultTranslator;
 
     /**
+     * Default text domain to be used with translator
+     * @var string
+     */
+    protected static $defaultTranslatorTextDomain = 'default';
+
+    /**
      * Limits the maximum returned length of a error message
      *
      * @var Integer
@@ -42,12 +48,13 @@ abstract class AbstractValidator implements ValidatorInterface
     protected static $messageLength = -1;
 
     protected $abstractOptions = array(
-        'messages'           => array(),  // Array of validation failure messages
-        'messageTemplates'   => array(),  // Array of validation failure message templates
-        'messageVariables'   => array(),  // Array of additional variables available for validation failure messages
-        'translator'         => null,     // Translation object to used -> Zend\I18n\Translator\Translator
-        'translatorDisabled' => false,    // Is translation disabled?
-        'valueObscured'      => false,    // Flag indicating whether or not value should be obfuscated in error messages
+        'messages'             => array(),   // Array of validation failure messages
+        'messageTemplates'     => array(),   // Array of validation failure message templates
+        'messageVariables'     => array(),   // Array of additional variables available for validation failure messages
+        'translator'           => null,      // Translation object to used -> Zend\I18n\Translator\Translator
+        'translatorTextDomain' => null,      // Translation text domain
+        'translatorDisabled'   => false,     // Is translation disabled?
+        'valueObscured'        => false,     // Flag indicating whether or not value should be obfuscated in error messages
     );
 
     /**
@@ -390,12 +397,16 @@ abstract class AbstractValidator implements ValidatorInterface
      * Set translation object
      *
      * @param  Translator|null $translator
+     * @param  string          $textDomain (optional)
      * @return AbstractValidator
      * @throws Exception\InvalidArgumentException
      */
-    public function setTranslator(Translator $translator = null)
+    public function setTranslator(Translator $translator = null, $textDomain = null)
     {
         $this->abstractOptions['translator'] = $translator;
+        if (null !== $textDomain) {
+            $this->setTranslatorTextDomain($textDomain);
+        }
         return $this;
     }
 
@@ -411,7 +422,7 @@ abstract class AbstractValidator implements ValidatorInterface
         }
 
         if (null === $this->abstractOptions['translator']) {
-            return self::getDefaultTranslator();
+            $this->abstractOptions['translator'] = self::getDefaultTranslator();
         }
 
         return $this->abstractOptions['translator'];
@@ -424,19 +435,50 @@ abstract class AbstractValidator implements ValidatorInterface
      */
     public function hasTranslator()
     {
-        return (bool)$this->abstractOptions['translator'];
+        return (bool) $this->abstractOptions['translator'];
+    }
+
+    /**
+     * Set translation text domain
+     *
+     * @param  string $textDomain
+     * @return AbstractValidator
+     */
+    public function setTranslatorTextDomain($textDomain = 'default')
+    {
+        $this->abstractOptions['translatorTextDomain'] = $textDomain;
+        return $this;
+    }
+
+    /**
+     * Return the translation text domain
+     *
+     * @return string
+     */
+    public function getTranslatorTextDomain()
+    {
+        if (null === $this->abstractOptions['translatorTextDomain']) {
+            $this->abstractOptions['translatorTextDomain'] =
+                self::getDefaultTranslatorTextDomain();
+        }
+        return $this->abstractOptions['translatorTextDomain'];
     }
 
     /**
      * Set default translation object for all validate objects
      *
      * @param  Translator|null $translator
+     * @param  string          $textDomain (optional)
      * @return void
      * @throws Exception\InvalidArgumentException
      */
-    public static function setDefaultTranslator(Translator $translator = null)
-    {
+    public static function setDefaultTranslator(
+        Translator $translator = null, $textDomain = null
+    ) {
         self::$defaultTranslator = $translator;
+        if (null !== $textDomain) {
+            self::setDefaultTranslatorTextDomain($textDomain);
+        }
     }
 
     /**
@@ -457,6 +499,27 @@ abstract class AbstractValidator implements ValidatorInterface
     public static function hasDefaultTranslator()
     {
         return (bool) self::$defaultTranslator;
+    }
+
+    /**
+     * Set default translation text domain for all validate objects
+     *
+     * @param  string $textDomain
+     * @return void
+     */
+    public static function setDefaultTranslatorTextDomain($textDomain = 'default')
+    {
+        self::$defaultTranslatorTextDomain = $textDomain;
+    }
+
+    /**
+     * Get default translation text domain for all validate objects
+     *
+     * @return string
+     */
+    public static function getDefaultTranslatorTextDomain()
+    {
+        return self::$defaultTranslatorTextDomain;
     }
 
     /**
@@ -501,6 +564,13 @@ abstract class AbstractValidator implements ValidatorInterface
         self::$messageLength = $length;
     }
 
+    /**
+     * Translate a validation message
+     *
+     * @param  string $messageKey
+     * @param  string $message
+     * @return string
+     */
     protected function translateMessage($messageKey, $message)
     {
         $translator = $this->getTranslator();
@@ -508,11 +578,15 @@ abstract class AbstractValidator implements ValidatorInterface
             return $message;
         }
 
-        $translated = $translator->translate($messageKey);
+        $translated = $translator->translate(
+            $messageKey, $this->getTranslatorTextDomain()
+        );
         if ($translated !== $messageKey) {
             return $translated;
         }
 
-        return $translator->translate($message);
+        return $translator->translate(
+            $message, $this->getTranslatorTextDomain()
+        );
     }
 }

@@ -176,7 +176,7 @@ class Breadcrumbs extends AbstractHelper
         } else {
             $html = $active->getLabel();
             if ($this->getUseTranslator() && $t = $this->getTranslator()) {
-                $html = $t->translate($html);
+                $html = $t->translate($html, $this->getTranslatorTextDomain());
             }
             $escaper = $this->view->plugin('escapeHtml');
             $html    = $escaper($html);

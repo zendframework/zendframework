@@ -10,7 +10,6 @@
 
 namespace Zend\View\Helper;
 
-use Zend\I18n\Translator\Translator;
 use Zend\View\Exception;
 
 /**
@@ -26,19 +25,6 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
      * @var string
      */
     protected $_regKey = 'Zend_View_Helper_HeadTitle';
-
-    /**
-     * Whether or not auto-translation is enabled
-     * @var boolean
-     */
-    protected $_translate = false;
-
-    /**
-     * Translation object
-     *
-     * @var \Zend\Translator\Adapter\Adapter
-     */
-    protected $_translator;
 
     /**
      * Default title rendering order (i.e. order in which each title attached)
@@ -110,61 +96,12 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
     }
 
     /**
-     * Sets a translation Adapter for translation
-     *
-     * @param  Translator $translator
-     * @return \Zend\View\Helper\HeadTitle
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setTranslator(Translator $translator)
-    {
-        $this->_translator = $translator;
-        return $this;
-    }
-
-    /**
-     * Retrieve translation object
-     *
-     * If none is currently registered, attempts to pull it from the registry
-     * using the key 'Zend_Translator'.
-     *
-     * @return Translator|null
-     */
-    public function getTranslator()
-    {
-        return $this->_translator;
-    }
-
-    /**
-     * Enables translation
-     *
-     * @return \Zend\View\Helper\HeadTitle
-     */
-    public function enableTranslation()
-    {
-        $this->_translate = true;
-        return $this;
-    }
-
-    /**
-     * Disables translation
-     *
-     * @return \Zend\View\Helper\HeadTitle
-     */
-    public function disableTranslation()
-    {
-        $this->_translate = false;
-        return $this;
-    }
-
-    /**
      * Turn helper into string
      *
      * @param  string|null $indent
-     * @param  string|null $locale
      * @return string
      */
-    public function toString($indent = null, $locale = 'default')
+    public function toString($indent = null)
     {
         $indent = (null !== $indent)
                 ? $this->getWhitespace($indent)
@@ -172,9 +109,13 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
 
         $items = array();
 
-        if($this->_translate && $translator = $this->getTranslator()) {
+        if ($this->getUseTranslator()
+            && null !== ($translator = $this->getTranslator())
+        ) {
             foreach ($this as $item) {
-                $items[] = $translator->translate($item, $locale);
+                $items[] = $translator->translate(
+                    $item, $this->getTranslatorTextDomain()
+                );
             }
         } else {
             foreach ($this as $item) {

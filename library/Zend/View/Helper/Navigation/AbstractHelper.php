@@ -12,7 +12,6 @@ namespace Zend\View\Helper\Navigation;
 
 use RecursiveIteratorIterator;
 use Zend\Acl;
-use Zend\I18n\Translator\Translator;
 use Zend\Navigation;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
@@ -66,13 +65,6 @@ abstract class AbstractHelper
     protected $indent = '';
 
     /**
-     * Translator
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
      * ACL to use when iterating pages
      *
      * @var Acl\Acl
@@ -92,13 +84,6 @@ abstract class AbstractHelper
      * @var string|Acl\Role
      */
     protected $role;
-
-    /**
-     * Whether translator should be used for page labels and titles
-     *
-     * @var bool
-     */
-    protected $useTranslator = true;
 
     /**
      * Whether ACL should be used for filtering out pages
@@ -292,35 +277,6 @@ abstract class AbstractHelper
     }
 
     /**
-     * Sets translator to use in helper
-     *
-     * Implements {@link HelperInterface::setTranslator()}.
-     *
-     * @param  mixed $translator [optional] translator.  Expects an object of
-     *                           type {@link Translator\Adapter\AbstractAdapter}
-     *                           or {@link Translator\Translator}, or null.
-     *                           Default is null, which sets no translator.
-     * @return AbstractHelper  fluent interface, returns self
-     */
-    public function setTranslator(Translator $translator = null)
-    {
-        $this->translator = $translator;
-        return $this;
-    }
-
-    /**
-     * Returns translator used in helper
-     *
-     * Implements {@link HelperInterface::getTranslator()}.
-     *
-     * @return Translator|null  translator or null
-     */
-    public function getTranslator()
-    {
-        return $this->translator;
-    }
-
-    /**
      * Sets ACL to use when iterating pages
      *
      * Implements {@link HelperInterface::setAcl()}.
@@ -442,33 +398,6 @@ abstract class AbstractHelper
     {
         $this->renderInvisible = (bool) $renderInvisible;
         return $this;
-    }
-
-    /**
-     * Sets whether translator should be used
-     *
-     * Implements {@link HelperInterface::setUseTranslator()}.
-     *
-     * @param  bool $useTranslator [optional] whether translator should be used.
-     *                             Default is true.
-     * @return AbstractHelper  fluent interface, returns self
-     */
-    public function setUseTranslator($useTranslator = true)
-    {
-        $this->useTranslator = (bool) $useTranslator;
-        return $this;
-    }
-
-    /**
-     * Returns whether translator should be used
-     *
-     * Implements {@link HelperInterface::getUseTranslator()}.
-     *
-     * @return bool  whether translator should be used
-     */
-    public function getUseTranslator()
-    {
-        return $this->useTranslator;
     }
 
     // Magic overloads:
@@ -616,18 +545,6 @@ abstract class AbstractHelper
     public function hasRole()
     {
         return null !== $this->role;
-    }
-
-    /**
-     * Checks if the helper has a translator
-     *
-     * Implements {@link HelperInterface::hasTranslator()}.
-     *
-     * @return bool  whether the helper has a translator or not
-     */
-    public function hasTranslator()
-    {
-        return null !== $this->translator;
     }
 
     /**

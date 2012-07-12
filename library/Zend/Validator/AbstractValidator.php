@@ -12,7 +12,6 @@ namespace Zend\Validator;
 
 use Traversable;
 use Zend\I18n\Translator\Translator;
-use Zend\Registry;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\Exception\InvalidArgumentException;
 

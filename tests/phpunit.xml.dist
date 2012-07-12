@@ -5,7 +5,6 @@
             <exclude>./Zend/_files/</exclude>
             <exclude>./Zend/AllTests/</exclude>
             <exclude>./Zend/Amf/</exclude>
-            <exclude>./Zend/Dojo/</exclude>
             <exclude>./Zend/Queue/</exclude>
             <exclude>./Zend/Service/</exclude>
             <exclude>./Zend/Test/</exclude>
@@ -17,7 +16,6 @@
         <exclude>
             <group>disable</group>
             <group>Zend_Amf</group>
-            <group>Zend_Dojo</group>
             <group>Zend_Queue</group>
             <group>Zend_Service</group>
             <group>Zend_Test</group>

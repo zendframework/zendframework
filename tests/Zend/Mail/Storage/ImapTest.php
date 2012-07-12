@@ -11,7 +11,7 @@
 namespace ZendTest\Mail\Storage;
 
 use Zend\Config;
-use Zend\Mail\Exception as MailException; 
+use Zend\Mail\Exception as MailException;
 use Zend\Mail\Protocol;
 use Zend\Mail\Protocol\Exception as ProtocolException;
 use Zend\Mail\Storage;

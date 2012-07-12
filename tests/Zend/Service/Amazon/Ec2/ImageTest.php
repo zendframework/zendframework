@@ -530,7 +530,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testModifyAttributeThrowsExceptionOnInvalidAttribute()
     {
         $this->setExpectedException(
-            'Zend\Service\Amazon\Ec2\Exception\InvalidArgumentException', 
+            'Zend\Service\Amazon\Ec2\Exception\InvalidArgumentException',
             'Invalid attribute passed in.');
         $return = $this->ec2ImageInstance->modifyAttribute('ami-61a54008', 'invalidPermission', 'add', '495219933132', 'all');
     }

@@ -57,7 +57,7 @@ class DeclareVars extends AbstractHelper
                 foreach ($key as $name => $value) {
                     $this->_declareVar($name, $value);
                 }
-            } else if (!isset($view->vars()->$key)) {
+            } elseif (!isset($view->vars()->$key)) {
                 $this->_declareVar($key);
             }
         }

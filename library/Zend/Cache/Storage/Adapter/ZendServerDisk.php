@@ -23,10 +23,10 @@ use Zend\Stdlib\ErrorHandler;
  * @package    Zend_Cache
  * @subpackage Storage
  */
-class ZendServerDisk extends AbstractZendServer implements 
-    AvailableSpaceCapableInterface, 
+class ZendServerDisk extends AbstractZendServer implements
+    AvailableSpaceCapableInterface,
     ClearByNamespaceInterface,
-    FlushableInterface, 
+    FlushableInterface,
     TotalSpaceCapableInterface
 {
 

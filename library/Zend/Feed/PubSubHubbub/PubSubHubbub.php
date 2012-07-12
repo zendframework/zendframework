@@ -24,7 +24,7 @@ class PubSubHubbub
      */
     const VERIFICATION_MODE_SYNC  = 'sync';
     const VERIFICATION_MODE_ASYNC = 'async';
-    
+
     /**
      * Subscription States
      */

@@ -22,36 +22,42 @@ use Zend\GData\Calendar\Extension;
 class HiddenTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->hiddenText = file_get_contents(
                 'Zend/GData/Calendar/_files/HiddenElementSample1.xml',
                 true);
         $this->hidden = new Extension\Hidden();
     }
 
-    public function testEmptyHiddenShouldHaveNoExtensionElements() {
+    public function testEmptyHiddenShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->hidden->extensionElements));
         $this->assertTrue(count($this->hidden->extensionElements) == 0);
     }
 
-    public function testEmptyHiddenShouldHaveNoExtensionAttributes() {
+    public function testEmptyHiddenShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->hidden->extensionAttributes));
         $this->assertTrue(count($this->hidden->extensionAttributes) == 0);
     }
 
-    public function testSampleHiddenShouldHaveNoExtensionElements() {
+    public function testSampleHiddenShouldHaveNoExtensionElements()
+    {
         $this->hidden->transferFromXML($this->hiddenText);
         $this->assertTrue(is_array($this->hidden->extensionElements));
         $this->assertTrue(count($this->hidden->extensionElements) == 0);
     }
 
-    public function testSampleHiddenShouldHaveNoExtensionAttributes() {
+    public function testSampleHiddenShouldHaveNoExtensionAttributes()
+    {
         $this->hidden->transferFromXML($this->hiddenText);
         $this->assertTrue(is_array($this->hidden->extensionAttributes));
         $this->assertTrue(count($this->hidden->extensionAttributes) == 0);
     }
 
-    public function testNormalHiddenShouldHaveNoExtensionElements() {
+    public function testNormalHiddenShouldHaveNoExtensionElements()
+    {
         $this->hidden->value = true;
         $this->assertEquals($this->hidden->value, true);
         $this->assertEquals(count($this->hidden->extensionElements), 0);
@@ -71,7 +77,8 @@ class HiddenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newHidden2->value, true);
     }
 
-    public function testEmptyHiddenToAndFromStringShouldMatch() {
+    public function testEmptyHiddenToAndFromStringShouldMatch()
+    {
         $hiddenXml = $this->hidden->saveXML();
         $newHidden = new Extension\Hidden();
         $newHidden->transferFromXML($hiddenXml);
@@ -79,7 +86,8 @@ class HiddenTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($hiddenXml == $newHiddenXml);
     }
 
-    public function testHiddenWithValueToAndFromStringShouldMatch() {
+    public function testHiddenWithValueToAndFromStringShouldMatch()
+    {
         $this->hidden->value = true;
         $hiddenXml = $this->hidden->saveXML();
         $newHidden = new Extension\Hidden();
@@ -89,7 +97,8 @@ class HiddenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $newHidden->value);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->hidden->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -103,7 +112,8 @@ class HiddenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newHidden->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullHiddenToAndFromString() {
+    public function testConvertFullHiddenToAndFromString()
+    {
         $this->hidden->transferFromXML($this->hiddenText);
         $this->assertEquals($this->hidden->value, false);
     }

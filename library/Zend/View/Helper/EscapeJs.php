@@ -21,7 +21,7 @@ use Zend\View\Helper\Escaper;
  */
 class EscapeJs extends Escaper\AbstractHelper
 {
-    
+
     /**
      * Escape a value for current escaping strategy
      *

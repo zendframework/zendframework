@@ -124,7 +124,8 @@ class HttpClient extends Http\Client
      *
      * @return string The private key
      */
-    public function getAuthSubPrivateKeyId() {
+    public function getAuthSubPrivateKeyId()
+    {
         return $this->_authSubPrivateKeyId;
     }
 
@@ -133,7 +134,8 @@ class HttpClient extends Http\Client
      *
      * @return string The token
      */
-    public function getAuthSubToken() {
+    public function getAuthSubToken()
+    {
         return $this->_authSubToken;
     }
 
@@ -143,7 +145,8 @@ class HttpClient extends Http\Client
      * @param string $token The token
      * @return \Zend\GData\HttpClient Provides a fluent interface
      */
-    public function setAuthSubToken($token) {
+    public function setAuthSubToken($token)
+    {
         $this->_authSubToken = $token;
         return $this;
     }
@@ -153,7 +156,8 @@ class HttpClient extends Http\Client
      *
      * @return string The token
      */
-    public function getClientLoginToken() {
+    public function getClientLoginToken()
+    {
         return $this->_clientLoginToken;
     }
 
@@ -163,7 +167,8 @@ class HttpClient extends Http\Client
      * @param string $token The token
      * @return \Zend\GData\HttpClient Provides a fluent interface
      */
-    public function setClientLoginToken($token) {
+    public function setClientLoginToken($token)
+    {
         $this->_clientLoginToken = $token;
         return $this;
     }
@@ -189,7 +194,8 @@ class HttpClient extends Http\Client
      * @return array The processed values in an associative array,
      *               using the same names as the params
      */
-    public function filterHttpRequest($method, $url, $headers = array(), $body = null, $contentType = null) {
+    public function filterHttpRequest($method, $url, $headers = array(), $body = null, $contentType = null)
+    {
         if ($this->getAuthSubToken() != null) {
             // AuthSub authentication
             if ($this->getAuthSubPrivateKeyId() != null) {
@@ -231,7 +237,8 @@ class HttpClient extends Http\Client
      * @param \Zend\Http\Response $response The response object to filter
      * @return \Zend\Http\Response The filterd response object
      */
-    public function filterHttpResponse($response) {
+    public function filterHttpResponse($response)
+    {
         return $response;
     }
 
@@ -298,8 +305,7 @@ class HttpClient extends Http\Client
             $this->setHeaders(self::CONTENT_LENGTH,
                 $this->raw_post_data->getTotalSize());
             return $this->raw_post_data;
-        }
-        else {
+        } else {
             return parent::prepareBody();
         }
     }

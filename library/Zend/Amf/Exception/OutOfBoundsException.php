@@ -14,7 +14,7 @@ namespace Zend\Amf\Exception;
  * @category   Zend
  * @package    Zend_Amf
  */
-class OutOfBoundsException extends \OutOfBoundsException implements 
+class OutOfBoundsException extends \OutOfBoundsException implements
     ExceptionInterface
 {
 }

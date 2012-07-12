@@ -21,7 +21,8 @@ namespace Zend\GData\App\Extension;
 class Element extends AbstractExtension
 {
 
-    public function __construct($rootElement=null, $rootNamespace=null, $rootNamespaceURI=null, $text=null){
+    public function __construct($rootElement=null, $rootNamespace=null, $rootNamespaceURI=null, $text=null)
+    {
         parent::__construct();
         $this->_rootElement = $rootElement;
         $this->_rootNamespace = $rootNamespace;

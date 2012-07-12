@@ -75,7 +75,7 @@ class SubFormTest extends \PHPUnit_Framework_TestCase
     public function testShouldRegisterDojoViewHelper()
     {
         $view = $this->form->getView();
-        
+
         $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->plugin('dojo'));
     }
 }

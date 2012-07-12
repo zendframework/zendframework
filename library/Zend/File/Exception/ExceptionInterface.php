@@ -12,7 +12,7 @@ namespace Zend\File\Exception;
 
 /**
  * Marker interface for exceptions found in this component
- * 
+ *
  * @package    Zend_File
  * @subpackage Exception
  */

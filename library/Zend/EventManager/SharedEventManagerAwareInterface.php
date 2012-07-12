@@ -21,7 +21,7 @@ interface SharedEventManagerAwareInterface
 {
     /**
      * Inject a SharedEventManager instance
-     * 
+     *
      * @param  SharedEventManagerInterface $sharedEventManager
      * @return SharedEventManagerAwareInterface
      */

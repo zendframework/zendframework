@@ -24,7 +24,7 @@ class Name extends AbstractStringAnnotation
 {
     /**
      * Retrieve the name
-     * 
+     *
      * @return null|string
      */
     public function getName()

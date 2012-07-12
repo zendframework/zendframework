@@ -26,8 +26,8 @@ class EventManagerFactory implements FactoryInterface
      *
      * Creates a new EventManager instance, seeding it with a shared instance
      * of SharedEventManager.
-     * 
-     * @param  ServiceLocatorInterface $serviceLocator 
+     *
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return EventManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

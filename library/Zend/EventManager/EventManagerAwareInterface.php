@@ -21,7 +21,7 @@ interface EventManagerAwareInterface extends EventsCapableInterface
 {
     /**
      * Inject an EventManager instance
-     * 
+     *
      * @param  EventManagerInterface $eventManager
      * @return void
      */

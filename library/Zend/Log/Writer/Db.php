@@ -30,8 +30,8 @@ class Db extends AbstractWriter
 
     /**
      * Table name
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $tableName;
 
@@ -44,8 +44,8 @@ class Db extends AbstractWriter
 
     /**
      * Field separator for sub-elements
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $separator = '_';
 
@@ -53,8 +53,8 @@ class Db extends AbstractWriter
      * Constructor
      *
      * We used the Adapter instead of Zend\Db for a performance reason.
-     * 
-     * @param Adapter $db 
+     *
+     * @param Adapter $db
      * @param string $tableName
      * @param array $columnMap
      * @param string $separator
@@ -66,11 +66,11 @@ class Db extends AbstractWriter
         if ($db === null) {
             throw new Exception\InvalidArgumentException('You must pass a valid Zend\Db\Adapter\Adapter');
         }
-        
+
         $this->db        = $db;
         $this->tableName = $tableName;
         $this->columnMap = $columnMap;
-        
+
         if (!empty($separator)) {
             $this->separator = $separator;
         }
@@ -120,34 +120,34 @@ class Db extends AbstractWriter
 
         $statement = $this->db->query($this->prepareInsert($this->db, $this->tableName, $dataToInsert));
         $statement->execute($dataToInsert);
-        
+
     }
 
     /**
      * Prepare the INSERT SQL statement
-     * 
+     *
      * @param  Adapter $db
      * @param  string $tableName
      * @param  array $fields
-     * @return string 
+     * @return string
      */
-    protected function prepareInsert(Adapter $db, $tableName, array $fields) 
-    {               
+    protected function prepareInsert(Adapter $db, $tableName, array $fields)
+    {
         $sql = 'INSERT INTO ' . $db->platform->quoteIdentifier($tableName) . ' (' .
                implode(",",array_map(array($db->platform, 'quoteIdentifier'), $fields)) . ') VALUES (' .
                implode(",",array_map(array($db->driver, 'formatParameterName'), $fields)) . ')';
-               
+
         return $sql;
     }
 
     /**
      * Map event into column using the $columnMap array
-     * 
+     *
      * @param  array $event
      * @param  array $columnMap
-     * @return array 
+     * @return array
      */
-    protected function mapEventIntoColumn(array $event, array $columnMap = null) 
+    protected function mapEventIntoColumn(array $event, array $columnMap = null)
     {
         if (empty($event)) {
             return array();
@@ -163,18 +163,18 @@ class Db extends AbstractWriter
                 }
             } elseif (isset($columnMap[$name])) {
                 $data[$columnMap[$name]] = $value;
-            } 
+            }
         }
         return $data;
     }
 
     /**
      * Transform event into column for the db table
-     * 
+     *
      * @param  array $event
-     * @return array 
+     * @return array
      */
-    protected function eventIntoColumn(array $event) 
+    protected function eventIntoColumn(array $event)
     {
         if (empty($event)) {
             return array();

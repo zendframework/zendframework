@@ -18,15 +18,15 @@ interface InputFilterAwareInterface
 {
     /**
      * Set input filter
-     * 
-     * @param  InputFilterInterface $inputFilter 
+     *
+     * @param  InputFilterInterface $inputFilter
      * @return InputFilterAwareInterface
      */
     public function setInputFilter(InputFilterInterface $inputFilter);
 
     /**
      * Retrieve input filter
-     * 
+     *
      * @return InputFilterInterface
      */
     public function getInputFilter();

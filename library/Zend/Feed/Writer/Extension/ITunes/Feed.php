@@ -25,18 +25,18 @@ class Feed
      * @var array
      */
     protected $_data = array();
-    
+
     /**
      * Encoding of all text values
      *
      * @var string
      */
     protected $_encoding = 'UTF-8';
-    
+
     /**
      * Set feed encoding
-     * 
-     * @param  string $enc 
+     *
+     * @param  string $enc
      * @return Feed
      */
     public function setEncoding($enc)
@@ -44,17 +44,17 @@ class Feed
         $this->_encoding = $enc;
         return $this;
     }
-    
+
     /**
      * Get feed encoding
-     * 
+     *
      * @return string
      */
     public function getEncoding()
     {
         return $this->_encoding;
     }
-    
+
     /**
      * Set a block value of "yes" or "no". You may also set an empty string.
      *
@@ -75,11 +75,11 @@ class Feed
         $this->_data['block'] = $value;
         return $this;
     }
-    
+
     /**
      * Add feed authors
-     * 
-     * @param  array $values 
+     *
+     * @param  array $values
      * @return Feed
      */
     public function addItunesAuthors(array $values)
@@ -89,11 +89,11 @@ class Feed
         }
         return $this;
     }
-    
+
     /**
      * Add feed author
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -106,14 +106,14 @@ class Feed
         if (!isset($this->_data['authors'])) {
             $this->_data['authors'] = array();
         }
-        $this->_data['authors'][] = $value;   
+        $this->_data['authors'][] = $value;
         return $this;
     }
-    
+
     /**
      * Set feed categories
-     * 
-     * @param  array $values 
+     *
+     * @param  array $values
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -141,16 +141,16 @@ class Feed
                         . ' contain a maximum of 255 characters each');
                     }
                     $this->_data['categories'][$key][] = $val;
-                } 
+                }
             }
         }
         return $this;
     }
-    
+
     /**
      * Set feed image (icon)
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -168,11 +168,11 @@ class Feed
         $this->_data['image'] = $value;
         return $this;
     }
-    
+
     /**
      * Set feed cumulative duration
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -189,11 +189,11 @@ class Feed
         $this->_data['duration'] = $value;
         return $this;
     }
-    
+
     /**
      * Set "explicit" flag
-     * 
-     * @param  bool $value 
+     *
+     * @param  bool $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -206,11 +206,11 @@ class Feed
         $this->_data['explicit'] = $value;
         return $this;
     }
-    
+
     /**
      * Set feed keywords
-     * 
-     * @param  array $value 
+     *
+     * @param  array $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -229,11 +229,11 @@ class Feed
         $this->_data['keywords'] = $value;
         return $this;
     }
-    
+
     /**
      * Set new feed URL
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -246,25 +246,25 @@ class Feed
         $this->_data['newFeedUrl'] = $value;
         return $this;
     }
-    
+
     /**
      * Add feed owners
-     * 
-     * @param  array $values 
+     *
+     * @param  array $values
      * @return Feed
      */
     public function addItunesOwners(array $values)
     {
         foreach ($values as $value) {
-            $this->addItunesOwner($value); 
+            $this->addItunesOwner($value);
         }
         return $this;
     }
-    
+
     /**
      * Add feed owner
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -286,11 +286,11 @@ class Feed
         $this->_data['owners'][] = $value;
         return $this;
     }
-    
+
     /**
      * Set feed subtitle
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -303,11 +303,11 @@ class Feed
         $this->_data['subtitle'] = $value;
         return $this;
     }
-    
+
     /**
      * Set feed summary
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -320,12 +320,12 @@ class Feed
         $this->_data['summary'] = $value;
         return $this;
     }
-    
+
     /**
      * Overloading: proxy to internal setters
-     * 
-     * @param  string $method 
-     * @param  array $params 
+     *
+     * @param  string $method
+     * @param  array $params
      * @return mixed
      * @throws Writer\Exception\BadMethodCallException
      */

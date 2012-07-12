@@ -36,8 +36,7 @@ class ListFeedTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(2, count($this->listFeed->entries));
         $this->assertEquals(2, $this->listFeed->entries->count());
-        foreach($this->listFeed->entries as $entry)
-        {
+        foreach($this->listFeed->entries as $entry) {
             $this->assertInstanceOf('Zend\GData\Spreadsheets\ListEntry', $entry);
         }
 
@@ -48,8 +47,7 @@ class ListFeedTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(2, count($newListFeed->entries));
         $this->assertEquals(2, $newListFeed->entries->count());
-        foreach($newListFeed->entries as $entry)
-        {
+        foreach($newListFeed->entries as $entry) {
             $this->assertInstanceOf('Zend\GData\Spreadsheets\ListEntry', $entry);
         }
 

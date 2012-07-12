@@ -220,32 +220,32 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public function testCanAddMultipleSeparatorsToEditor()
     {
         $this->element->setPlugins(array('undo', '|', 'bold', '|', 'italic'));
-        
+
         $plugins = $this->element->getPlugins();
         $this->assertEquals(5, count($plugins));
     }
-    
+
     public function testMinHeightCanBeSetToPixels()
     {
         $this->element->setMinHeight('250px');
         $this->assertEquals($this->element->getDijitParam('minHeight'), $this->element->getMinHeight());
         $this->assertEquals('250px', $this->element->getMinHeight());
     }
-    
+
     public function testMinHeightCanBeSetToPercentage()
     {
         $this->element->setMinHeight('50%');
         $this->assertEquals($this->element->getDijitParam('minHeight'), $this->element->getMinHeight());
         $this->assertEquals('50%', $this->element->getMinHeight());
     }
-    
+
     public function testMinHeightDefaultMeasurementIsEm()
     {
         $this->element->setMinHeight('10');
         $this->assertEquals($this->element->getDijitParam('minHeight'), $this->element->getMinHeight());
         $this->assertEquals('10em', $this->element->getMinHeight());
     }
-    
+
     public function testShouldNotHaveExtraPluginsByDefault()
     {
         $extraPlugins = $this->element->getExtraPlugins();

@@ -103,7 +103,8 @@ class testclass
      * test if we can send an array as a paramater without it getting nested two
      * Used to test  ZF-5388
      */
-    public function testSingleArrayParamater($inputArray){
+    public function testSingleArrayParamater($inputArray)
+    {
         if( $inputArray[0] == 'item1' ){
             return true;
         }

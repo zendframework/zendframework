@@ -17,6 +17,6 @@ use Zend\Paginator\Exception;
  * @package    Zend\Paginator\Adapter
  * @subpackage Exception
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
 {}

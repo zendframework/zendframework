@@ -18,7 +18,7 @@ use Zend\Barcode\Exception;
  * @category   Zend
  * @package    Zend_Barcode
  */
-class RuntimeException extends Exception\RuntimeException implements 
+class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface
 {
 }

@@ -337,7 +337,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
                     array_push($folderStack, $parentFolder);
                     $parentFolder = $folder;
                     break;
-                } else if ($stack) {
+                } elseif ($stack) {
                     $parent = array_pop($stack);
                     $parentFolder = array_pop($folderStack);
                 }
@@ -394,7 +394,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
         // TODO: we assume / as the hierarchy delim - need to get that from the folder class!
         if ($parentFolder instanceof Folder) {
             $folder = $parentFolder->getGlobalName() . '/' . $name;
-        } else if ($parentFolder != null) {
+        } elseif ($parentFolder != null) {
             $folder = $parentFolder . '/' . $name;
         } else {
             $folder = $name;

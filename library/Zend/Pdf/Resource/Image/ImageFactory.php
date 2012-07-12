@@ -24,7 +24,8 @@ use Zend\Pdf\Exception;
  */
 class ImageFactory
 {
-    public static function factory($filename) {
+    public static function factory($filename)
+    {
         if(!is_file($filename)) {
             throw new Exception\IOException("Cannot create image resource. File not found.");
         }

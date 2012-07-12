@@ -21,10 +21,10 @@ class AcceptEncoding extends AbstractAccept
 {
 
     protected $regexAddType = '#^([a-zA-Z0-9+-]+|\*)$#';
-    
+
     /**
      * Get field name
-     * 
+     *
      * @return string
      */
     public function getFieldName()
@@ -34,30 +34,30 @@ class AcceptEncoding extends AbstractAccept
 
     /**
      * Cast to string
-     * 
+     *
      * @return string
      */
     public function toString()
     {
         return 'Accept-Encoding: ' . $this->getFieldValue();
     }
-    
+
     /**
      * Add an encoding, with the given priority
-     * 
-     * @param  string $type 
-     * @param  int|float $priority 
+     *
+     * @param  string $type
+     * @param  int|float $priority
      * @return Accept
      */
     public function addEncoding($type, $priority = 1)
     {
         return $this->addType($type, $priority);
     }
-    
+
     /**
      * Does the header have the requested encoding?
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return bool
      */
     public function hasEncoding($type)

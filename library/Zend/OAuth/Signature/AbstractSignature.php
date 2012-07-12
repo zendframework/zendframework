@@ -46,10 +46,10 @@ abstract class AbstractSignature implements SignatureInterface
 
     /**
      * Constructor
-     * 
-     * @param  string $consumerSecret 
-     * @param  null|string $tokenSecret 
-     * @param  null|string $hashAlgo 
+     *
+     * @param  string $consumerSecret
+     * @param  null|string $tokenSecret
+     * @param  null|string $hashAlgo
      * @return void
      */
     public function __construct($consumerSecret, $tokenSecret = null, $hashAlgo = null)
@@ -66,8 +66,8 @@ abstract class AbstractSignature implements SignatureInterface
 
     /**
      * Normalize the base signature URL
-     * 
-     * @param  string $url 
+     *
+     * @param  string $url
      * @return string
      * @throws Exception\InvalidArgumentException
      */
@@ -89,7 +89,7 @@ abstract class AbstractSignature implements SignatureInterface
 
     /**
      * Assemble key from consumer and token secrets
-     * 
+     *
      * @return string
      */
     protected function _assembleKey()
@@ -106,17 +106,17 @@ abstract class AbstractSignature implements SignatureInterface
 
     /**
      * Get base signature string
-     * 
-     * @param  array $params 
-     * @param  null|string $method 
-     * @param  null|string $url 
+     *
+     * @param  array $params
+     * @param  null|string $method
+     * @param  null|string $url
      * @return string
      */
     protected function _getBaseSignatureString(array $params, $method = null, $url = null)
     {
         $encodedParams = array();
         foreach ($params as $key => $value) {
-            $encodedParams[HTTPUtility::urlEncode($key)] = 
+            $encodedParams[HTTPUtility::urlEncode($key)] =
                 HTTPUtility::urlEncode($value);
         }
         $baseStrings = array();
@@ -140,8 +140,8 @@ abstract class AbstractSignature implements SignatureInterface
 
     /**
      * Transform an array to a byte value ordered query string
-     * 
-     * @param  array $params 
+     *
+     * @param  array $params
      * @return string
      */
     protected function _toByteValueOrderedQueryString(array $params)

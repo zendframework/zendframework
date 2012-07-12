@@ -23,7 +23,8 @@ class Author extends AbstractCollection
      *
      * @return array
      */
-    public function getValues() {
+    public function getValues()
+    {
         $authors = array();
         foreach ($this->getIterator() as $element) {
             $authors[] = $element['name'];

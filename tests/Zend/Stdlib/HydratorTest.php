@@ -53,7 +53,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->classMethodsUnderscore = new ClassMethodsUnderscore();
         $this->reflection = new ReflectionAsset;
     }
-    
+
     public function testInitiateValues()
     {
         $this->assertEquals($this->classMethodsCamelCase->getFooBar(), '1');
@@ -92,7 +92,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($test->getFooBar(), 'foo');
         $this->assertEquals($test->getFooBarBaz(), 'bar');
     }
-    
+
     public function testHydratorClassMethodsCamelCaseWithSetterMissing()
     {
         $hydrator = new ClassMethods(false);
@@ -106,7 +106,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($test->getFooBar(), 'foo');
         $this->assertEquals($test->getFooBarBaz(), '2');
     }
-    
+
     public function testHydratorClassMethodsUnderscore()
     {
         $hydrator = new ClassMethods(true);

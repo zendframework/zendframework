@@ -65,7 +65,7 @@ class Spreadsheets extends GData
     {
         if ($location == null) {
             $uri = self::SPREADSHEETS_FEED_URI;
-        } else if ($location instanceof Spreadsheets\DocumentQuery) {
+        } elseif ($location instanceof Spreadsheets\DocumentQuery) {
             if ($location->getDocumentType() == null) {
                 $location->setDocumentType('spreadsheets');
             }
@@ -110,7 +110,7 @@ class Spreadsheets extends GData
                 $location->setDocumentType('worksheets');
             }
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Spreadsheets\SpreadsheetEntry) {
+        } elseif ($location instanceof Spreadsheets\SpreadsheetEntry) {
             $uri = $location->getLink(self::WORKSHEETS_FEED_LINK_URI)->href;
         } else {
             $uri = $location;
@@ -149,7 +149,7 @@ class Spreadsheets extends GData
     {
         if ($location instanceof Spreadsheets\CellQuery) {
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Spreadsheets\WorksheetEntry) {
+        } elseif ($location instanceof Spreadsheets\WorksheetEntry) {
             $uri = $location->getLink(self::CELL_FEED_LINK_URI)->href;
         } else {
             $uri = $location;
@@ -184,7 +184,7 @@ class Spreadsheets extends GData
     {
         if ($location instanceof Spreadsheets\ListQuery) {
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Spreadsheets\WorksheetEntry) {
+        } elseif ($location instanceof Spreadsheets\WorksheetEntry) {
             $uri = $location->getLink(self::LIST_FEED_LINK_URI)->href;
         } else {
             $uri = $location;
@@ -332,7 +332,7 @@ class Spreadsheets extends GData
         $cellQuery = null;
         if ($location instanceof Spreadsheets\CellQuery) {
             $cellQuery = $location;
-        } else if ($location instanceof Spreadsheets\WorksheetEntry) {
+        } elseif ($location instanceof Spreadsheets\WorksheetEntry) {
             $url = $location->getLink(self::CELL_FEED_LINK_URI)->href;
             $cellQuery = new Spreadsheets\CellQuery($url);
         } else {

@@ -40,7 +40,7 @@ class CipherTest extends \PHPUnit_Framework_TestCase
         // string so if our hash doesn't match then something broke.
         $this->assertSame(md5($result), "286c1991e1f7040229a6f223065b91b5");
     }
-    
+
     public function testPkiPaddingWithThrowExceptionOnBadInput()
     {
             if (!extension_loaded('openssl')) {
@@ -54,7 +54,7 @@ class CipherTest extends \PHPUnit_Framework_TestCase
             /* yay */
         }
     }
-    
+
     public function testPkiPaddingWithThrowExceptionOnBadInput2()
     {
         if (!extension_loaded('openssl')) {
@@ -73,7 +73,7 @@ class CipherTest extends \PHPUnit_Framework_TestCase
         }
 
     }
-        
+
     public function testPKIDecryptThrowsExceptionOnBadKey()
     {
         if (!extension_loaded('openssl')) {
@@ -98,11 +98,11 @@ class CipherTest extends \PHPUnit_Framework_TestCase
                           instanceof Adapter\RSA);
 
     }
-    
+
     public function testCipherFactoryThrowsExceptionOnBadInput()
     {
         $this->setExpectedException('Zend\InfoCard\Cipher\Exception\InvalidArgumentException', 'Unknown Cipher URI');
         Cipher::getInstanceByURI("Broken");
     }
-    
+
 }

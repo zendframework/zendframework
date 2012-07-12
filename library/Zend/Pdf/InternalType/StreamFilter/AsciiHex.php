@@ -83,9 +83,9 @@ class AsciiHex implements StreamFilterInterface
                 default:
                     if ($charCode >= 0x30 /*'0'*/ && $charCode <= 0x39 /*'9'*/) {
                         $code = $charCode - 0x30;
-                    } else if ($charCode >= 0x41 /*'A'*/ && $charCode <= 0x46 /*'F'*/) {
+                    } elseif ($charCode >= 0x41 /*'A'*/ && $charCode <= 0x46 /*'F'*/) {
                         $code = $charCode - 0x37/*0x41 - 0x0A*/;
-                    } else if ($charCode >= 0x61 /*'a'*/ && $charCode <= 0x66 /*'f'*/) {
+                    } elseif ($charCode >= 0x61 /*'a'*/ && $charCode <= 0x66 /*'f'*/) {
                         $code = $charCode - 0x57/*0x61 - 0x0A*/;
                     } else {
                         throw new Exception\CorruptedPdfException('Wrong character in a encoded stream');

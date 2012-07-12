@@ -215,7 +215,7 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
         $this->assertFalse($input->isRequired());
         $this->assertFalse($input->allowEmpty());
-       
+
     }
 
     public function testFactoryWillCreateInputWithSuggestedAllowEmptyFlagAndImpliesRequiredFlag()
@@ -314,7 +314,7 @@ class FactoryTest extends TestCase
         ));
         $this->assertInstanceOf('Zend\InputFilter\InputFilter', $inputFilter);
         $this->assertEquals(4, count($inputFilter));
-        
+
         foreach (array('foo', 'bar', 'baz', 'bat') as $name) {
             $input = $inputFilter->get($name);
 

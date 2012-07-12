@@ -48,15 +48,15 @@ class Bcmath implements AdapterInterface
                 $base    = 10;
                 $operand = $m[1];
             // octal
-            } else if (preg_match('#^(0[0-7]+)$#', $operand, $m)) {
+            } elseif (preg_match('#^(0[0-7]+)$#', $operand, $m)) {
                 $base    = 8;
                 $operand = $m[1];
             // hex
-            } else if (preg_match('#^(?:0x)?([0-9a-f]+)$#', strtolower($operand), $m)) {
+            } elseif (preg_match('#^(?:0x)?([0-9a-f]+)$#', strtolower($operand), $m)) {
                 $base    = 16;
                 $operand = $m[1];
             // scientific notation
-            } else if (preg_match('#^([1-9]?\.?[0-9]+)[eE]\+?([0-9]+)$#', $operand, $m)) {
+            } elseif (preg_match('#^([1-9]?\.?[0-9]+)[eE]\+?([0-9]+)$#', $operand, $m)) {
                 $base    = 10;
                 $operand = bcmul($m[1], bcpow('10', $m[2]));
             } else {

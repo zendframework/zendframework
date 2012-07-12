@@ -17,7 +17,7 @@ use Zend\Authentication\Adapter\Exception;
  * @package    Zend_Authentication
  * @subpackage Adapter_Http
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
 {
 }

@@ -24,10 +24,11 @@ class Object
      *
      * @param array $data
      */
-    public function __construct($data=array()) {
+    public function __construct($data=array())
+    {
         if (!empty($data) && is_array($data)) {
             $this->_attributes= $data;
-        } 
+        }
     }
     /**
      * Get Attribute with a specific key
@@ -35,7 +36,8 @@ class Object
      * @param array $data
      * @return misc|boolean
      */
-    public function getAttribute($key) {
+    public function getAttribute($key)
+    {
         if (array_key_exists($key,$this->_attributes)) {
             return $this->_attributes[$key];
         }

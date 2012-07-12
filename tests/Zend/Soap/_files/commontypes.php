@@ -128,7 +128,8 @@ class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
  * @package    Zend_Soap
  * @subpackage UnitTests
  */
-class Zend_Soap_AutoDiscover_Test {
+class Zend_Soap_AutoDiscover_Test
+{
     /**
      * Test Function 1
      *
@@ -318,20 +319,23 @@ class Zend_Soap_AutoDiscover_MyService
      *    @param string $foo
      *    @return Zend_Soap_AutoDiscover_MyResponse[]
      */
-    public function foo($foo) {
+    public function foo($foo)
+    {
     }
     /**
      *    @param string $bar
      *    @return Zend_Soap_AutoDiscover_MyResponse[]
      */
-    public function bar($bar) {
+    public function bar($bar)
+    {
     }
 
     /**
      *    @param string $baz
      *    @return Zend_Soap_AutoDiscover_MyResponse[]
      */
-    public function baz($baz) {
+    public function baz($baz)
+    {
     }
 }
 
@@ -346,27 +350,31 @@ class Zend_Soap_AutoDiscover_MyServiceSequence
      *    @param string $foo
      *    @return string[]
      */
-    public function foo($foo) {
+    public function foo($foo)
+    {
     }
     /**
      *    @param string $bar
      *    @return string[]
      */
-    public function bar($bar) {
+    public function bar($bar)
+    {
     }
 
     /**
      *    @param string $baz
      *    @return string[]
      */
-    public function baz($baz) {
+    public function baz($baz)
+    {
     }
 
     /**
      *    @param string $baz
      *    @return string[][][]
      */
-    public function bazNested($baz) {
+    public function bazNested($baz)
+    {
     }
 }
 

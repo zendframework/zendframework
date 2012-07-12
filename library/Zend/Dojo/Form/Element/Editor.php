@@ -580,7 +580,7 @@ class Editor extends Dijit
         }
         return $this->getDijitParam('updateInterval');
     }
-    
+
     /**
      * Add a single editor extra plugin.
      *
@@ -594,12 +594,12 @@ class Editor extends Dijit
         if (in_array($plugin, $extraPlugins)) {
             return $this;
         }
-    
+
         $extraPlugins[] = (string) $plugin;
         $this->setDijitParam('extraPlugins', $extraPlugins);
         return $this;
     }
-    
+
     /**
      * Add multiple extra plugins.
      *
@@ -613,7 +613,7 @@ class Editor extends Dijit
         }
         return $this;
     }
-    
+
     /**
      * Overwrite many extra plugins at once.
      *
@@ -626,7 +626,7 @@ class Editor extends Dijit
         $this->addExtraPlugins($plugins);
         return $this;
     }
-    
+
     /**
      * Get all extra plugins.
      *
@@ -639,7 +639,7 @@ class Editor extends Dijit
         }
         return $this->getDijitParam('extraPlugins');
     }
-    
+
     /**
      * Is a given extra plugin registered?
      *
@@ -651,7 +651,7 @@ class Editor extends Dijit
         $extraPlugins = $this->getExtraPlugins();
         return in_array((string) $plugin, $extraPlugins);
     }
-    
+
     /**
      * Remove a given extra plugin.
      *
@@ -668,7 +668,7 @@ class Editor extends Dijit
         $this->setDijitParam('extraPlugins', $extraPlugins);
         return $this;
     }
-    
+
     /**
      * Clear all extra plugins.
      *

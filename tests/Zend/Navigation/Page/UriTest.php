@@ -96,15 +96,15 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function testGetHrefWithFragmentIdentifier()
     {
         $uri = 'http://www.example.com/foo.html';
-        
+
         $page = new Page\Uri();
         $page->setUri($uri);
         $page->setFragment('bar');
-        
+
         $this->assertEquals($uri . '#bar', $page->getHref());
-        
+
         $page->setUri('#');
-        
+
         $this->assertEquals('#bar', $page->getHref());
     }
 }

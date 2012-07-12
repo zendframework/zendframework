@@ -24,7 +24,7 @@ class Bar implements \Zend\Markup\Renderer\Markup\MarkupInterface
     public function setEncoding($encoding = 'UTF-8')
     {
     }
-   
+
     public function setRenderer(AbstractRenderer $renderer)
     {
     }

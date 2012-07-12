@@ -24,18 +24,18 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
 
     /**
      * Constructor
-     * 
-     * @param  Zend_Feed_Writer_Feed_Source $container 
+     *
+     * @param  Zend_Feed_Writer_Feed_Source $container
      * @return void
      */
     public function __construct (Writer\Source $container)
     {
         parent::__construct($container);
     }
-    
+
     /**
      * Render Atom Feed Metadata (Source element)
-     * 
+     *
      * @return \Zend\Feed\Writer\Renderer\Feed\Atom
      */
     public function render()
@@ -61,7 +61,7 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
         $this->_setAuthors($this->_dom, $root);
         $this->_setCopyright($this->_dom, $root);
         $this->_setCategories($this->_dom, $root);
-        
+
         foreach ($this->_extensions as $ext) {
             $ext->setType($this->getType());
             $ext->setRootElement($this->getRootElement());
@@ -70,10 +70,10 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
         }
         return $this;
     }
-    
+
     /**
      * Set feed generator string
-     * 
+     *
      * @param  DOMDocument $dom
      * @param  DOMElement $root
      * @return void

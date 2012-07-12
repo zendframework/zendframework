@@ -108,7 +108,7 @@ class Console
         }
 
         echo PHP_EOL . '  Configurations:' . PHP_EOL;
-        
+
         foreach ($configuredTypes as $type) {
             $info = $this->di->instanceManager()->getConfiguration($type);
             echo '    ' . $type . PHP_EOL;

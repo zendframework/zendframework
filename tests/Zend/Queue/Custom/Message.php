@@ -33,7 +33,8 @@ class Message extends \Zend\Queue\Message
     /**
      * We adjusted the constructor to accept both an array and an object.
      */
-    public function __construct($mixed) {
+    public function __construct($mixed)
+    {
         // we still have to support the code in \Zend\Queue\Queue::receive that
         // passes in an array
         if (is_array($mixed)) {
@@ -49,7 +50,8 @@ class Message extends \Zend\Queue\Message
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->_data['body'];
     }
 

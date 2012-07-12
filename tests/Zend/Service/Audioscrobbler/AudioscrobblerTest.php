@@ -72,7 +72,7 @@ class AudioscrobblerTest extends AudioscrobblerTestCase
     public function testCallInterceptMethodsRequireExactlyOneParameterAndThrowExceptionOtherwise()
     {
         $this->setExpectedException("Zend\Service\Audioscrobbler\Exception\InvalidArgumentException", 'A value is required for setting a parameter field');
-        
+
         $as = new Audioscrobbler\Audioscrobbler();
         $as->setUser();
     }

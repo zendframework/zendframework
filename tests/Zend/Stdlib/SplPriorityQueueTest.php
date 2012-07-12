@@ -66,9 +66,9 @@ class SplPriorityQueueTest extends \PHPUnit_Framework_TestCase
     public function testCanRetrieveQueueAsArray()
     {
         $expected = array(
-            'bar', 
-            'foo', 
-            'baz', 
+            'bar',
+            'foo',
+            'baz',
             'bat',
         );
         $test     = $this->queue->toArray();

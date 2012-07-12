@@ -35,7 +35,7 @@ class Replace extends AbstractMarkup
      * @var string
      */
     protected $_end;
-    
+
 
     /**
      * Constructor

@@ -35,7 +35,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(NullFilter::TYPE_INTEGER, $filter->getType());
     }
-    
+
     /**
      * @param mixed $value
      * @param bool  $expected
@@ -45,7 +45,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new NullFilter();
         $this->assertSame($expected, $filter->filter($value));
-    }    
+    }
 
     /**
      * @param int $type

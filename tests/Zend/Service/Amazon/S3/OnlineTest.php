@@ -524,7 +524,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $this->_amazon->removeObject("testgetobjectparams1/zftest2", "testdata");
         $this->_amazon->removeBucket("testgetobjectparams1");
     }
-    
+
     public function testCommonPrefixes()
     {
         $this->_amazon->createBucket($this->_bucket);

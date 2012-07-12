@@ -86,7 +86,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
      *
      * @return Uri\Uri
      */
-    public function getEndpoint() 
+    public function getEndpoint()
     {
     	return $this->_endpoint;
     }
@@ -95,7 +95,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
      * Get attributes API method
      *
      * @param string $domainName Domain name within database
-     * @param string 
+     * @param string
      */
     public function getAttributes(
         $domainName, $itemName, $attributeName = null
@@ -129,7 +129,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
                 $data = (string)$valueNodes;
             }
             if (isset($attributes[$name])) {
-                $attributes[$name]->addValue($data);    
+                $attributes[$name]->addValue($data);
             } else {
                 $attributes[$name] = new Attribute($itemName, $name, $data);
             }
@@ -175,13 +175,13 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
 
     /**
      * Add many attributes at once
-     * 
-     * @param  array $items 
-     * @param  string $domainName 
-     * @param  array $replace 
+     *
+     * @param  array $items
+     * @param  string $domainName
+     * @param  array $replace
      * @return void
      */
-    public function batchPutAttributes($items, $domainName, array $replace = array()) 
+    public function batchPutAttributes($items, $domainName, array $replace = array())
     {
 
         $params               = array();
@@ -198,8 +198,8 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
                 foreach($attribute->getValues() as $value) {
                     $params['Item.' . $itemIndex . '.Attribute.' . $attributeIndex . '.Name'] = $attribute->getName();
                     $params['Item.' . $itemIndex . '.Attribute.' . $attributeIndex . '.Value'] = $value;
-                    if (isset($replace[$name]) 
-                        && isset($replace[$name][$attribute->getName()]) 
+                    if (isset($replace[$name])
+                        && isset($replace[$name][$attribute->getName()])
                         && $replace[$name][$attribute->getName()]
                     ) {
                         $params['Item.' . $itemIndex . '.Attribute.' . $attributeIndex . '.Replace'] = 'true';
@@ -215,13 +215,13 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
 
     /**
      * Delete attributes
-     * 
-     * @param  string $domainName 
-     * @param  string $itemName 
-     * @param  array $attributes 
+     *
+     * @param  string $domainName
+     * @param  string $itemName
+     * @param  array $attributes
      * @return void
      */
-    public function deleteAttributes($domainName, $itemName, array $attributes = array()) 
+    public function deleteAttributes($domainName, $itemName, array $attributes = array())
     {
         $params               = array();
 	    $params['Action']     = 'DeleteAttributes';
@@ -249,7 +249,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
      * @param $nextToken          int
      * @return array              0 or more domain names
      */
-    public function listDomains($maxNumberOfDomains = 100, $nextToken = null) 
+    public function listDomains($maxNumberOfDomains = 100, $nextToken = null)
     {
         $params                       = array();
 	    $params['Action']             = 'ListDomains';
@@ -280,7 +280,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
      * @param $domainName string Name of the domain for which metadata will be requested
      * @return array Key/value array of metadatum names and values.
      */
-    public function domainMetadata($domainName) 
+    public function domainMetadata($domainName)
     {
         $params               = array();
 	    $params['Action']     = 'DomainMetadata';
@@ -305,7 +305,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
      * @param $domainName	string	Valid domain name of the domain to create
      * @return 				boolean True if successful, false if not
      */
-	public function createDomain($domainName) 
+	public function createDomain($domainName)
 	{
         $params               = array();
 	    $params['Action']     = 'CreateDomain';
@@ -320,7 +320,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
      * @param 	$domainName string  Valid domain name of the domain to delete
      * @return 				boolean True if successful, false if not
      */
-	public function deleteDomain($domainName) 
+	public function deleteDomain($domainName)
 	{
 	    $params               = array();
 	    $params['Action']     = 'DeleteDomain';
@@ -336,7 +336,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
      * @param  null|string $nextToken
      * @return Zend\Service\Amazon\SimpleDb\Page
      */
-	public function select($selectExpression, $nextToken = null) 
+	public function select($selectExpression, $nextToken = null)
 	{
         $params                     = array();
 	    $params['Action']           = 'Select';
@@ -368,12 +368,12 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
 
         return new Page($attributes, $nextToken);
     }
-    
+
 	/**
 	 * Quote SDB value
-	 * 
+	 *
 	 * Wraps it in ''
-	 * 
+	 *
 	 * @param string $value
 	 * @return string
 	 */
@@ -382,10 +382,10 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
     	// wrap in single quotes and convert each ' inside to ''
     	return "'" . str_replace("'", "''", $value) . "'";
     }
-    
+
 	/**
 	 * Quote SDB column or table name
-	 * 
+	 *
 	 * Wraps it in ``
 	 * @param string $name
 	 * @return string
@@ -397,7 +397,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
     	}
     	return "`$name`";
     }
-    
+
    /**
      * Sends a HTTP request to the SimpleDB service using Zend\Http\Client
      *
@@ -437,7 +437,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
         } catch (Http\Client\Exception\ExceptionInterface $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();
             throw new Exception\RuntimeException($message, $zhce->getCode(), $zhce);
-        } 
+        }
 
         $response = new Response($httpResponse);
         $this->_checkForErrors($response);

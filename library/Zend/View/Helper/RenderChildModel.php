@@ -16,7 +16,7 @@ use Zend\View\Model\ModelInterface as Model;
 /**
  * Helper for rendering child view models
  *
- * Finds children matching "capture-to" values, and renders them using the 
+ * Finds children matching "capture-to" values, and renders them using the
  * composed view instance.
  *
  * @package    Zend_View
@@ -38,8 +38,8 @@ class RenderChildModel extends AbstractHelper
      * Invoke as a function
      *
      * Proxies to {render()}.
-     * 
-     * @param  string $child 
+     *
+     * @param  string $child
      * @return string
      */
     public function __invoke($child)
@@ -52,8 +52,8 @@ class RenderChildModel extends AbstractHelper
      *
      * If a matching child model is found, it is rendered. If not, an empty
      * string is returned.
-     * 
-     * @param  string $child 
+     *
+     * @param  string $child
      * @return string
      */
     public function render($child)
@@ -77,8 +77,8 @@ class RenderChildModel extends AbstractHelper
      * Iterates through the current view model, looking for a child model that
      * has a captureTo value matching the requested $child. If found, that child
      * model is returned; otherwise, a boolean false is returned.
-     * 
-     * @param  string $child 
+     *
+     * @param  string $child
      * @return false|Model
      */
     protected function findChild($child)
@@ -94,7 +94,7 @@ class RenderChildModel extends AbstractHelper
 
     /**
      * Get the current view model
-     * 
+     *
      * @return null|Model
      */
     protected function getCurrent()
@@ -111,7 +111,7 @@ class RenderChildModel extends AbstractHelper
 
     /**
      * Retrieve the view model helper
-     * 
+     *
      * @return ViewModel
      */
     protected function getViewModelHelper()

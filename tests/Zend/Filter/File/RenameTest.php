@@ -358,7 +358,7 @@ class RenameTest extends \PHPUnit_Framework_TestCase
             array('source'    => $this->_oldFile,
                   'target'    => $this->_newFile,
                   'overwrite' => false)), $filter->getFile());
-        
+
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'could not be renamed');
         $this->assertEquals($this->_newFile, $filter->getNewName($this->_oldFile));
     }

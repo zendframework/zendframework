@@ -43,8 +43,7 @@ class BlobStorageSharedAccessTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $storageClient = $this->createAdministrativeStorageInstance();
-        for ($i = 1; $i <= self::$uniqId; $i++)
-        {
+        for ($i = 1; $i <= self::$uniqId; $i++) {
             try { $storageClient->deleteContainer(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSA_CONTAINER_PREFIX . $i); } catch (\Exception $e) { }
         }
         try { $storageClient->deleteContainer('$root'); } catch (\Exception $e) { }

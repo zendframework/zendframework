@@ -78,7 +78,7 @@ class TextareaTest extends \PHPUnit_Framework_TestCase
         $html = $this->helper->__invoke('foo[bar]', '', array(), array('id' => 'foo-bar'));
         $this->assertContains('id="foo-bar"', $html);
     }
-    
+
     public function testGeneratedMarkupShouldNotIncludeTypeAttribute()
     {
         $html = $this->getElement();

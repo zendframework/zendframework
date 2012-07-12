@@ -20,8 +20,8 @@ use IteratorAggregate;
  * @package    Zend_Cloud
  * @subpackage DocumentService
  */
-class DocumentSet implements 
-    Countable, 
+class DocumentSet implements
+    Countable,
     IteratorAggregate
 {
     /** @var int */

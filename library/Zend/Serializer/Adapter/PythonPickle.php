@@ -1333,7 +1333,8 @@ class PythonPickle extends AbstractAdapter
      *
      * @return void
      */
-    protected function _loadTuple3() {
+    protected function _loadTuple3()
+    {
         $value3 = array_pop($this->_stack);
         $value2 = array_pop($this->_stack);
         $value1 = array_pop($this->_stack);

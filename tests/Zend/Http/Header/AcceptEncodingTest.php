@@ -40,12 +40,12 @@ class AcceptEncodingTest extends \PHPUnit_Framework_TestCase
         $acceptEncodingHeader = new AcceptEncoding();
         $acceptEncodingHeader->addEncoding('compress', 0.5)
                              ->addEncoding('gzip', 1);
-         
+
         $this->assertEquals('Accept-Encoding: compress;q=0.5,gzip', $acceptEncodingHeader->toString());
     }
 
     /** Implmentation specific tests here */
-    
+
     public function testCanParseCommaSeparatedValues()
     {
         $header = AcceptEncoding::fromString('Accept-Encoding: compress;q=0.5,gzip');
@@ -68,13 +68,13 @@ class AcceptEncodingTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertEquals($expected, $test);
     }
-    
+
     public function testWildcharEncoder()
     {
         $acceptHeader = new AcceptEncoding();
         $acceptHeader->addEncoding('compress', 0.8)
                      ->addEncoding('*', 0.4);
-        
+
         $this->assertTrue($acceptHeader->hasEncoding('compress'));
         $this->assertTrue($acceptHeader->hasEncoding('gzip'));
         $this->assertEquals('Accept-Encoding: compress;q=0.8,*;q=0.4', $acceptHeader->toString());

@@ -57,7 +57,7 @@ class Statement implements StatementInterface
     protected $parameterContainer;
 
     /**
-     * @param  Pgsql $driver 
+     * @param  Pgsql $driver
      * @return Statement
      */
     public function setDriver(Pgsql $driver)
@@ -67,7 +67,7 @@ class Statement implements StatementInterface
     }
 
     /**
-     * @param  resource $pgsql 
+     * @param  resource $pgsql
      * @return void
      * @throws Exception\RuntimeException for invalid or missing postgresql connection
      */

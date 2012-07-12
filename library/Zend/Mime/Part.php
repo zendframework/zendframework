@@ -16,8 +16,8 @@ namespace Zend\Mime;
  * @category   Zend
  * @package    Zend_Mime
  */
-class Part {
-
+class Part
+{
     public $type = Mime::TYPE_OCTETSTREAM;
     public $encoding = Mime::ENCODING_8BIT;
     public $id;

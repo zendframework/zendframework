@@ -17,7 +17,7 @@ use Zend\Authentication\Adapter\Exception;
  * @package    Zend_Authentication
  * @subpackage Adapter_Http
  */
-class RuntimeException extends Exception\RuntimeException implements 
+class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface
 {
 }

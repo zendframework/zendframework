@@ -17,6 +17,6 @@ use Zend\Cloud\DocumentService\Exception;
  * @package    Zend_Cloud
  * @subpackage DocumentService_Adapter
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
 {}

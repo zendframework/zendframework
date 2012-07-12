@@ -59,7 +59,7 @@ class Serializer extends AbstractSerializer
      */
     public function writeTypeMarker(&$data, $markerType = null, $dataByVal = false)
     {
-        // Workaround for PHP5 with E_STRICT enabled complaining about "Only 
+        // Workaround for PHP5 with E_STRICT enabled complaining about "Only
         // variables should be passed by reference"
         if ((null === $data) && ($dataByVal !== false)) {
             $data = &$dataByVal;
@@ -138,9 +138,9 @@ class Serializer extends AbstractSerializer
                     // Handle object types.
                     if ($data instanceof DateTime) {
                         $markerType = Amf\Constants::AMF3_DATE;
-                    } else if ($data instanceof Value\ByteArray) {
+                    } elseif ($data instanceof Value\ByteArray) {
                         $markerType = Amf\Constants::AMF3_BYTEARRAY;
-                    } else if (($data instanceof DOMDocument) || ($data instanceof SimpleXMLElement)) {
+                    } elseif (($data instanceof DOMDocument) || ($data instanceof SimpleXMLElement)) {
                         $markerType = Amf\Constants::AMF3_XMLSTRING;
                     } else {
                         $markerType = Amf\Constants::AMF3_OBJECT;

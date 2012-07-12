@@ -22,7 +22,8 @@ use Zend\Http\Header\Etag;
 class FeedTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->etagLocalName = 'etag';
         $this->expectedEtag = 'W/"CE4BRXw4cCp7ImA9WxRVFEs."';
         $this->expectedMismatchExceptionMessage = "ETag mismatch";
@@ -38,7 +39,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->openSearchNamespacev2 = 'http://a9.com/-/spec/opensearch/1.1/';
     }
 
-    public function testXMLHasNoEtagsWhenUsingV1() {
+    public function testXMLHasNoEtagsWhenUsingV1()
+    {
         $etagData = Etag::fromString('Etag: Quux');
         $this->feed->setEtag($etagData);
         $domNode = $this->feed->getDOM(null, 1, null);
@@ -47,7 +49,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
                 $this->gdNamespace, $this->etagLocalName));
     }
 
-    public function testXMLHasNoEtagsWhenUsingV1X() {
+    public function testXMLHasNoEtagsWhenUsingV1X()
+    {
         $etagData = Etag::fromString('Etag: Quux');
         $this->feed->setEtag($etagData);
         $domNode = $this->feed->getDOM(null, 1, 1);
@@ -56,7 +59,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
                 $this->gdNamespace, $this->etagLocalName));
     }
 
-    public function testXMLHasEtagsWhenUsingV2() {
+    public function testXMLHasEtagsWhenUsingV2()
+    {
         $etagData = Etag::fromString('Etag: Quux');
         $this->feed->setEtag($etagData);
         $domNode = $this->feed->getDOM(null, 2, null);
@@ -66,7 +70,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
                 $this->gdNamespace, $this->etagLocalName)->nodeValue);
     }
 
-    public function testXMLHasEtagsWhenUsingV2X() {
+    public function testXMLHasEtagsWhenUsingV2X()
+    {
         $etagData = Etag::fromString('Etag: Quux');
         $this->feed->setEtag($etagData);
         $domNode = $this->feed->getDOM(null, 2, 1);
@@ -76,13 +81,15 @@ class FeedTest extends \PHPUnit_Framework_TestCase
                 $this->gdNamespace, $this->etagLocalName)->nodeValue);
     }
 
-    public function testXMLETagsPropagateToFeed() {
+    public function testXMLETagsPropagateToFeed()
+    {
         $this->feed->transferFromXML($this->feedTextV2);
         $etagValue = $this->feed->getEtag();
         $this->assertEquals($this->expectedEtag, $this->feed->getEtag());
     }
 
-    public function testXMLandHTMLEtagsDifferingThrowsException() {
+    public function testXMLandHTMLEtagsDifferingThrowsException()
+    {
         $exceptionCaught = false;
         $this->feed->setEtag(Etag::fromString("Etag: Foo"));
         try {
@@ -93,7 +100,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($exceptionCaught, "Exception Zend_GData_IO_Exception expected");
     }
 
-    public function testHttpAndXmlEtagsDifferingThrowsExceptionWithMessage() {
+    public function testHttpAndXmlEtagsDifferingThrowsExceptionWithMessage()
+    {
         $messageCorrect = false;
         $this->feed->setEtag(Etag::fromString("Etag: Foo"));
         try {
@@ -105,13 +113,15 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($messageCorrect, "Exception Zend_GData_IO_Exception message incorrect");
     }
 
-    public function testNothingBadHappensWhenHttpAndXmlEtagsMatch() {
+    public function testNothingBadHappensWhenHttpAndXmlEtagsMatch()
+    {
         $this->feed->setEtag(Etag::fromString('Etag: ' . $this->expectedEtag));
         $this->feed->transferFromXML($this->feedTextV2);
         $this->assertEquals($this->expectedEtag, $this->feed->getEtag()->getFieldValue());
     }
 
-    public function testLookUpOpenSearchv1Namespace() {
+    public function testLookUpOpenSearchv1Namespace()
+    {
         $this->feed->setMajorProtocolVersion(1);
         $this->feed->setMinorProtocolVersion(0);
         $this->assertEquals($this->openSearchNamespacev1,
@@ -121,7 +131,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $this->feed->lookupNamespace('openSearch', 1));
     }
 
-    public function testLookupOpenSearchv2Namespace() {
+    public function testLookupOpenSearchv2Namespace()
+    {
         $this->feed->setMajorProtocolVersion(2);
         $this->feed->setMinorProtocolVersion(0);
         $this->assertEquals($this->openSearchNamespacev2,
@@ -131,13 +142,15 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $this->feed->lookupNamespace('openSearch'));
     }
 
-    public function testNoExtensionElementsInV1Feed() {
+    public function testNoExtensionElementsInV1Feed()
+    {
         $this->feed->setMajorProtocolVersion(1);
         $this->feed->transferFromXML($this->feedTextV1);
         $this->assertEquals(0, sizeof($this->feed->extensionElements));
     }
 
-    public function testNoExtensionElementsInV2Feed() {
+    public function testNoExtensionElementsInV2Feed()
+    {
         $this->feed->setMajorProtocolVersion(2);
         $this->feed->transferFromXML($this->feedTextV2);
         $this->assertEquals(0, sizeof($this->feed->extensionElements));

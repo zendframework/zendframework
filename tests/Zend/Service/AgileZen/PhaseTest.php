@@ -15,7 +15,7 @@ use Zend\Service\AgileZen\AgileZen as AgileZenService;
 class PhaseTest extends \PHPUnit_Framework_TestCase
 {
     protected static $phaseId;
-    
+
     public function setUp()
     {
         if (!constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_ENABLED')) {
@@ -27,7 +27,7 @@ class PhaseTest extends \PHPUnit_Framework_TestCase
         if(!defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID')) {
             self::markTestSkipped('The project Id constant must be setted.');
         }
-        $this->agileZen = new AgileZenService(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY'));                                               
+        $this->agileZen = new AgileZenService(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY'));
     }
     public function testAddPhase()
     {
@@ -55,7 +55,7 @@ class PhaseTest extends \PHPUnit_Framework_TestCase
                 constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'),
                 self::$phaseId
         );
-        
+
         $this->assertTrue($this->agileZen->isSuccessful());
         $this->assertTrue($phase instanceof \Zend\Service\AgileZen\Resources\Phase);
         $this->assertEquals(self::$phaseId, $phase->getId());

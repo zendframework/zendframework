@@ -17,7 +17,7 @@ use Zend\EventManager\ListenerAggregateInterface;
 /**
  * Base annotations listener.
  *
- * Provides an implementation of detach() that should work with any listener. 
+ * Provides an implementation of detach() that should work with any listener.
  * Also provides listeners for the "Name" annotation -- handleNameAnnotation()
  * will listen for the "Name" annotation, while discoverFallbackName() listens
  * on the "discoverName" event and will use the class or property name, as
@@ -37,8 +37,8 @@ abstract class AbstractAnnotationsListener implements ListenerAggregateInterface
 
     /**
      * Detach listeners
-     * 
-     * @param  EventManagerInterface $events 
+     *
+     * @param  EventManagerInterface $events
      * @return void
      */
     public function detach(EventManagerInterface $events)
@@ -52,8 +52,8 @@ abstract class AbstractAnnotationsListener implements ListenerAggregateInterface
 
     /**
      * Attempt to discover a name set via annotation
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return false|string
      */
     public function handleNameAnnotation($e)
@@ -76,8 +76,8 @@ abstract class AbstractAnnotationsListener implements ListenerAggregateInterface
 
     /**
      * Discover the fallback name via reflection
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return string
      */
     public function discoverFallbackName($e)

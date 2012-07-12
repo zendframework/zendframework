@@ -32,7 +32,8 @@ class ShortWords implements TokenFilterInterface
      *
      * @param integer $short  minimum allowed length of term which passes this filter (default 2)
      */
-    public function __construct($length = 2) {
+    public function __construct($length = 2)
+    {
         $this->length = $length;
     }
 
@@ -42,7 +43,8 @@ class ShortWords implements TokenFilterInterface
      * @param \Zend\Search\Lucene\Analysis\Token $srcToken
      * @return \Zend\Search\Lucene\Analysis\Token
      */
-    public function normalize(Token $srcToken) {
+    public function normalize(Token $srcToken)
+    {
         if (strlen($srcToken->getTermText()) < $this->length) {
             return null;
         } else {

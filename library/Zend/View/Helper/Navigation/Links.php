@@ -724,8 +724,8 @@ class Links extends AbstractHelper
      * Implements {@link HelperInterface::render()}.
      *
      * @param  AbstractContainer string|$container [optional] container to render.
-     *                                         Default is to render the 
-     *                                         container registered in the 
+     *                                         Default is to render the
+     *                                         container registered in the
      *                                         helper.
      * @return string                          helper output
      */

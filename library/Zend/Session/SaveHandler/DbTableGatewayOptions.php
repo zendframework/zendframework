@@ -145,7 +145,7 @@ class DbTableGatewayOptions extends AbstractOptions
 
     /**
      * Set Modified Column
-     * 
+     *
      * @param string $modifiedColumn
      * @return DbTableGatewayOptions
      * @throws Exception\InvalidArgumentException

@@ -302,8 +302,8 @@ class Introspector
 
     /**
      * Load a service class from the service path
-     * 
-     * @param  string $class 
+     *
+     * @param  string $class
      * @return bool
      */
     protected function _loadClass($class)

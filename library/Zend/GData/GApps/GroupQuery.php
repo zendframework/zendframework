@@ -90,8 +90,7 @@ class GroupQuery extends AbstractQuery
     {
         if ($value !== null) {
             $this->_params['member'] = $value;
-        }
-        else {
+        } else {
             unset($this->_params['member']);
         }
     }

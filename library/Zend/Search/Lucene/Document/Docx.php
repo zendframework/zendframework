@@ -22,7 +22,8 @@ use Zend\Search\Lucene\Exception\RuntimeException;
  * @package    Zend_Search_Lucene
  * @subpackage Document
  */
-class Docx extends AbstractOpenXML {
+class Docx extends AbstractOpenXML
+{
     /**
      * Xml Schema - WordprocessingML
      *

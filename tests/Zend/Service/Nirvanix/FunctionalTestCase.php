@@ -49,8 +49,8 @@ abstract class FunctionalTestCase extends TestCase
     public function makeNirvanixResponse($hash)
     {
         $xml = "<?xml version='1.0'?><Response>";
-        foreach ($hash as $k => $v) { 
-            $xml .= "<$k>$v</$k>"; 
+        foreach ($hash as $k => $v) {
+            $xml .= "<$k>$v</$k>";
         }
         $xml .= "</Response>";
 

@@ -24,11 +24,13 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     protected $_response = null;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->_response = new ReCaptcha\Response();
     }
 
-    public function testSetAndGet() {
+    public function testSetAndGet()
+    {
         /* Set and get status */
         $status = 'true';
         $this->_response->setStatus($status);
@@ -44,17 +46,19 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($errorCode, $this->_response->getErrorCode());
     }
 
-    public function testIsValid() {
+    public function testIsValid()
+    {
         $this->_response->setStatus('true');
         $this->assertSame(true, $this->_response->isValid());
     }
 
-    public function testIsInvalid() {
+    public function testIsInvalid()
+    {
         $this->_response->setStatus('false');
         $this->assertSame(false, $this->_response->isValid());
     }
 
-    public function testSetFromHttpResponse() 
+    public function testSetFromHttpResponse()
     {
         $status       = 'false';
         $errorCode    = 'foobar';
@@ -70,7 +74,8 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($errorCode, $this->_response->getErrorCode());
     }
 
-    public function testConstructor() {
+    public function testConstructor()
+    {
         $status = 'true';
         $errorCode = 'ok';
 
@@ -80,7 +85,8 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($errorCode, $response->getErrorCode());
     }
 
-    public function testConstructorWithHttpResponse() {
+    public function testConstructorWithHttpResponse()
+    {
         $status       = 'false';
         $errorCode    = 'foobar';
         $responseBody = $status . "\n" . $errorCode;

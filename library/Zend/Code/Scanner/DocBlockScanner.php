@@ -176,8 +176,7 @@ class DocBlockScanner implements ScannerInterface
         $currentWord = null;
         $currentLine = null;
 
-        $MACRO_STREAM_ADVANCE_CHAR       = function ($positionsForward = 1) use (&$stream, &$streamIndex, &$currentChar, &$currentWord, &$currentLine, &$annotationMode)
-        {
+        $MACRO_STREAM_ADVANCE_CHAR       = function ($positionsForward = 1) use (&$stream, &$streamIndex, &$currentChar, &$currentWord, &$currentLine, &$annotationMode) {
             $positionsForward = ($positionsForward > 0) ? $positionsForward : 1;
             $streamIndex      = ($streamIndex === null) ? 0 : $streamIndex + $positionsForward;
             if (!isset($stream[$streamIndex])) {
@@ -200,37 +199,29 @@ class DocBlockScanner implements ScannerInterface
             }
             return $currentChar;
         };
-        $MACRO_STREAM_ADVANCE_WORD       = function () use (&$currentWord, &$MACRO_STREAM_ADVANCE_CHAR)
-        {
+        $MACRO_STREAM_ADVANCE_WORD       = function () use (&$currentWord, &$MACRO_STREAM_ADVANCE_CHAR) {
             return $MACRO_STREAM_ADVANCE_CHAR(strlen($currentWord));
         };
-        $MACRO_STREAM_ADVANCE_LINE       = function () use (&$currentLine, &$MACRO_STREAM_ADVANCE_CHAR)
-        {
+        $MACRO_STREAM_ADVANCE_LINE       = function () use (&$currentLine, &$MACRO_STREAM_ADVANCE_CHAR) {
             return $MACRO_STREAM_ADVANCE_CHAR(strlen($currentLine));
         };
-        $MACRO_TOKEN_ADVANCE             = function () use (&$tokenIndex, &$tokens)
-        {
+        $MACRO_TOKEN_ADVANCE             = function () use (&$tokenIndex, &$tokens) {
             $tokenIndex          = ($tokenIndex === null) ? 0 : $tokenIndex + 1;
             $tokens[$tokenIndex] = array('DOCBLOCK_UNKNOWN', '');
         };
-        $MACRO_TOKEN_SET_TYPE            = function ($type) use (&$tokenIndex, &$tokens)
-        {
+        $MACRO_TOKEN_SET_TYPE            = function ($type) use (&$tokenIndex, &$tokens) {
             $tokens[$tokenIndex][0] = $type;
         };
-        $MACRO_TOKEN_APPEND_CHAR         = function () use (&$currentChar, &$tokens, &$tokenIndex)
-        {
+        $MACRO_TOKEN_APPEND_CHAR         = function () use (&$currentChar, &$tokens, &$tokenIndex) {
             $tokens[$tokenIndex][1] .= $currentChar;
         };
-        $MACRO_TOKEN_APPEND_WORD         = function () use (&$currentWord, &$tokens, &$tokenIndex)
-        {
+        $MACRO_TOKEN_APPEND_WORD         = function () use (&$currentWord, &$tokens, &$tokenIndex) {
             $tokens[$tokenIndex][1] .= $currentWord;
         };
-        $MACRO_TOKEN_APPEND_WORD_PARTIAL = function ($length) use (&$currentWord, &$tokens, &$tokenIndex)
-        {
+        $MACRO_TOKEN_APPEND_WORD_PARTIAL = function ($length) use (&$currentWord, &$tokens, &$tokenIndex) {
             $tokens[$tokenIndex][1] .= substr($currentWord, 0, $length);
         };
-        $MACRO_TOKEN_APPEND_LINE         = function () use (&$currentLine, &$tokens, &$tokenIndex)
-        {
+        $MACRO_TOKEN_APPEND_LINE         = function () use (&$currentLine, &$tokens, &$tokenIndex) {
             $tokens[$tokenIndex][1] .= $currentLine;
         };
 

@@ -243,9 +243,9 @@ class Created extends AbstractOutline
         $target = $this->getTarget();
         if ($target === null) {
             // Do nothing
-        } else if ($target instanceof Pdf\Destination\AbstractDestination) {
+        } elseif ($target instanceof Pdf\Destination\AbstractDestination) {
             $outlineDictionary->Dest = $target->getResource();
-        } else if ($target instanceof Action\AbstractAction) {
+        } elseif ($target instanceof Action\AbstractAction) {
             $outlineDictionary->A    = $target->getResource();
         } else {
             throw new Exception\CorruptedPdfException('Outline target has to be \Zend\Pdf\Destination, \Zend\Pdf\Action object or null');

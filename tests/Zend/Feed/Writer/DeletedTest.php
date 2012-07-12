@@ -45,7 +45,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         $entry = new Writer\Deleted;
         $this->assertTrue(is_null($entry->getReference()));
     }
-    
+
     public function testSetWhenDefaultsToCurrentTime()
     {
         $entry = new Writer\Deleted;
@@ -61,7 +61,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         $myDate = new DateTime('@' . 1234567890);
         $this->assertEquals($myDate, $entry->getWhen());
     }
- 
+
     /**
      * @group ZF-12070
      */
@@ -83,7 +83,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         $myDate = new DateTime('@' . 123);
         $this->assertEquals($myDate, $entry->getWhen());
     }
-    
+
     public function testSetWhenUsesDateTimeObject()
     {
         $myDate = new DateTime('@' . 1234567890);
@@ -91,7 +91,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         $entry->setWhen($myDate);
         $this->assertEquals($myDate, $entry->getWhen());
     }
-    
+
     public function testSetWhenThrowsExceptionOnInvalidParameter()
     {
         $entry = new Writer\Deleted;
@@ -101,13 +101,13 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
-    
+
     public function testGetWhenReturnsNullIfDateNotSet()
     {
         $entry = new Writer\Deleted;
         $this->assertTrue(is_null($entry->getWhen()));
     }
-    
+
     public function testAddsByNameFromArray()
     {
         $entry = new Writer\Deleted;

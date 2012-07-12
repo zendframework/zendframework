@@ -96,7 +96,7 @@ class DocumentWriter extends AbstractSegmentWriter
                             $this->_termDictionary[$termKey] = $term;
                             $this->_termDocs[$termKey] = array();
                             $this->_termDocs[$termKey][$this->_docCount] = array();
-                        } else if (!isset($this->_termDocs[$termKey][$this->_docCount])) {
+                        } elseif (!isset($this->_termDocs[$termKey][$this->_docCount])) {
                             // Existing term, but new term entry
                             $this->_termDocs[$termKey][$this->_docCount] = array();
                         }
@@ -114,7 +114,7 @@ class DocumentWriter extends AbstractSegmentWriter
                                                                                $document->boost*
                                                                                $field->boost ));
                     }
-                } else if (($fieldUtf8Value = $field->getUtf8Value()) == '') {
+                } elseif (($fieldUtf8Value = $field->getUtf8Value()) == '') {
                     // Field contains empty value. Treat it as non-indexed and non-tokenized
                     $field = clone($field);
                     $field->isIndexed = $field->isTokenized = false;
@@ -127,7 +127,7 @@ class DocumentWriter extends AbstractSegmentWriter
                         $this->_termDictionary[$termKey] = $term;
                         $this->_termDocs[$termKey] = array();
                         $this->_termDocs[$termKey][$this->_docCount] = array();
-                    } else if (!isset($this->_termDocs[$termKey][$this->_docCount])) {
+                    } elseif (!isset($this->_termDocs[$termKey][$this->_docCount])) {
                         // Existing term, but new term entry
                         $this->_termDocs[$termKey][$this->_docCount] = array();
                     }

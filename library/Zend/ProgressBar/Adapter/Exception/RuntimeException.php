@@ -18,6 +18,6 @@ use Zend\ProgressBar\Exception;
  * @category   Zend
  * @package    Zend_ProgressBar
  */
-class RuntimeException extends Exception\RuntimeException implements 
+class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface
 {}

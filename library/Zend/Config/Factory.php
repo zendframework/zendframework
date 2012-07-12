@@ -43,7 +43,7 @@ class Factory
      * Read a config from a file.
      *
      * @param  string  $filename
-     * @param  boolean $returnConfigObject 
+     * @param  boolean $returnConfigObject
      * @return array|Config
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
@@ -51,16 +51,16 @@ class Factory
     public static function fromFile($filename, $returnConfigObject = false)
     {
         $pathinfo = pathinfo($filename);
-        
+
         if (!isset($pathinfo['extension'])) {
             throw new Exception\RuntimeException(sprintf(
                 'Filename "%s" is missing an extension and cannot be auto-detected',
                 $filename
             ));
         }
-        
+
         $extension = strtolower($pathinfo['extension']);
-       
+
         if ($extension === 'php') {
             if (!is_file($filename) || !is_readable($filename)) {
                 throw new Exception\RuntimeException(sprintf(
@@ -68,7 +68,7 @@ class Factory
                     $filename
                 ));
             }
-            
+
             $config = include $filename;
         } elseif (isset(self::$extensions[$extension])) {
             $reader = self::$extensions[$extension];
@@ -93,7 +93,7 @@ class Factory
      * Read configuration from multiple files and merge them.
      *
      * @param  array   $files
-     * @param  boolean $returnConfigObject 
+     * @param  boolean $returnConfigObject
      * @return array|Config
      */
     public static function fromFiles(array $files, $returnConfigObject = false)

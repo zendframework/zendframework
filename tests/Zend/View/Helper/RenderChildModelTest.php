@@ -67,7 +67,7 @@ class RenderChildModelTest extends TestCase
         $result = $this->helper->render('child1');
         $this->assertContains('Content for layout', $result, $result);
     }
-    
+
     public function setupSecondChild()
     {
         $child2 = new ViewModel();

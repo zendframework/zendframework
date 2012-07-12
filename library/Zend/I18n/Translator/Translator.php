@@ -247,8 +247,8 @@ class Translator
 
     /**
      * Set the plugin manager for translation loaders
-     * 
-     * @param  LoaderPluginManager $pluginManager 
+     *
+     * @param  LoaderPluginManager $pluginManager
      * @return Translator
      */
     public function setPluginManager(LoaderPluginManager $pluginManager)
@@ -288,9 +288,9 @@ class Translator
 
         if ($translation !== null && $translation !== '') {
             return $translation;
-        } 
-        
-        if (null !== ($fallbackLocale = $this->getFallbackLocale()) 
+        }
+
+        if (null !== ($fallbackLocale = $this->getFallbackLocale())
             && $locale !== $fallbackLocale
         ) {
             return $this->translate($message, $textDomain, $fallbackLocale);
@@ -321,14 +321,14 @@ class Translator
         $translation = $this->getTranslatedMessage($singular, $locale, $textDomain);
 
         if ($translation === null || $translation === '') {
-            if (null !== ($fallbackLocale = $this->getFallbackLocale()) 
+            if (null !== ($fallbackLocale = $this->getFallbackLocale())
                 && $locale !== $fallbackLocale
             ) {
                 return $this->translatePlural(
-                    $singular, 
-                    $plural, 
-                    $number, 
-                    $textDomain, 
+                    $singular,
+                    $plural,
+                    $number,
+                    $textDomain,
                     $fallbackLocale
                 );
             }

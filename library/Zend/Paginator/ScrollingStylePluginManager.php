@@ -16,7 +16,7 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Plugin manager implementation for scrolling style adapters
  *
  * Enforces that adapters retrieved are instances of
- * ScrollingStyle\ScrollingStyleInterface. Additionally, it registers a number 
+ * ScrollingStyle\ScrollingStyleInterface. Additionally, it registers a number
  * of default adapters available.
  *
  * @category   Zend
@@ -26,7 +26,7 @@ class ScrollingStylePluginManager extends AbstractPluginManager
 {
     /**
      * Default set of adapters
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -40,8 +40,8 @@ class ScrollingStylePluginManager extends AbstractPluginManager
      * Validate the plugin
      *
      * Checks that the adapter loaded is an instance of ScrollingStyle\ScrollingStyleInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

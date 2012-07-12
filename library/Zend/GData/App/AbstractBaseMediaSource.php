@@ -64,7 +64,8 @@ abstract class AbstractBaseMediaSource implements MediaSource
      *
      * @return string
      */
-    public function getSlug(){
+    public function getSlug()
+    {
         return $this->_slug;
     }
 
@@ -75,7 +76,8 @@ abstract class AbstractBaseMediaSource implements MediaSource
      * @var string The slug value
      * @return \Zend\GData\App\MediaSource Provides a fluent interface
      */
-    public function setSlug($value){
+    public function setSlug($value)
+    {
         $this->_slug = $value;
         return $this;
     }
@@ -95,7 +97,7 @@ abstract class AbstractBaseMediaSource implements MediaSource
         $method = 'get'.ucfirst($name);
         if (method_exists($this, $method)) {
             return $this->$method();
-        } else if (property_exists($this, "_${name}")) {
+        } elseif (property_exists($this, "_${name}")) {
             return $this->{'_' . $name};
         } else {
             throw new InvalidArgumentException(
@@ -119,7 +121,7 @@ abstract class AbstractBaseMediaSource implements MediaSource
         $method = 'set'.ucfirst($name);
         if (method_exists($this, $method)) {
             $this->$method($val);
-        } else if (isset($this->{'_' . $name}) || ($this->{'_' . $name} === null)) {
+        } elseif (isset($this->{'_' . $name}) || ($this->{'_' . $name} === null)) {
             $this->{'_' . $name} = $val;
         } else {
             throw new InvalidArgumentException(

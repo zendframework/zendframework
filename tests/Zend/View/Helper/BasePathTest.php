@@ -26,18 +26,18 @@ class BasePathTest extends TestCase
     {
         $helper = new BasePath();
         $helper->setBasePath('/foo');
-        
+
         $this->assertEquals('/foo', $helper());
     }
-    
+
     public function testBasePathWithFile()
     {
         $helper = new BasePath();
         $helper->setBasePath('/foo');
-        
+
         $this->assertEquals('/foo/bar', $helper('bar'));
     }
-    
+
     public function testBasePathNoDoubleSlashes()
     {
         $helper = new BasePath();
@@ -50,7 +50,7 @@ class BasePathTest extends TestCase
     {
         $helper = new BasePath();
         $helper->setBasePath('/foo');
-        
+
         $this->assertEquals('/foo/bar', $helper('/bar'));
     }
 }

@@ -22,7 +22,7 @@ class FormSelectTest extends CommonTestCase
         parent::setUp();
     }
 
-    public function getElement() 
+    public function getElement()
     {
         $element = new Element('foo');
         $options = array(

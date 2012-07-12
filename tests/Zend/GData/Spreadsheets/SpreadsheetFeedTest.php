@@ -32,8 +32,7 @@ class SpreadsheetFeedTest extends \PHPUnit_Framework_TestCase
     public function testToAndFromString()
     {
         $this->assertTrue(count($this->sprFeed->entries) == 1);
-        foreach($this->sprFeed->entries as $entry)
-        {
+        foreach($this->sprFeed->entries as $entry) {
             $this->assertTrue($entry instanceof Spreadsheets\SpreadsheetEntry);
         }
 
@@ -43,8 +42,7 @@ class SpreadsheetFeedTest extends \PHPUnit_Framework_TestCase
         $newSprFeed->transferFromDom($doc->documentElement);
 
         $this->assertTrue(count($newSprFeed->entries) == 1);
-        foreach($newSprFeed->entries as $entry)
-        {
+        foreach($newSprFeed->entries as $entry) {
             $this->assertTrue($entry instanceof Spreadsheets\SpreadsheetEntry);
         }
     }

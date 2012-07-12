@@ -32,7 +32,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($filter->filter(array('message' => 'test123')));
         $this->assertFalse($filter->filter(array('message' => '(%$')));
     }
-    
+
     public function testValidatorChain()
     {
         $validatorChain = new ValidatorChain();

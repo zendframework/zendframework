@@ -62,7 +62,7 @@ if (defined('TESTS_GENERATE_REPORT') && TESTS_GENERATE_REPORT === true) {
     $lastArg = end($_SERVER['argv']);
     if (is_dir($zfCoreTests . '/' . $lastArg)) {
         $codeCoverageFilter->addDirectoryToWhitelist($zfCoreLibrary . '/' . $lastArg);
-    } else if (is_file($zfCoreTests . '/' . $lastArg)) {
+    } elseif (is_file($zfCoreTests . '/' . $lastArg)) {
         $codeCoverageFilter->addDirectoryToWhitelist(dirname($zfCoreLibrary . '/' . $lastArg));
     } else {
         $codeCoverageFilter->addDirectoryToWhitelist($zfCoreLibrary);

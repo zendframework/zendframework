@@ -39,7 +39,7 @@ class HttpResponse extends StreamResponse
         }
         return parent::getResponse();
     }
-    
+
     protected function isIeOverSsl()
     {
         $ssl = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;

@@ -22,36 +22,42 @@ use Zend\GData\Calendar\Extension;
 class TimezoneTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->timezoneText = file_get_contents(
                 'Zend/GData/Calendar/_files/TimezoneElementSample1.xml',
                 true);
         $this->timezone = new Extension\Timezone();
     }
 
-    public function testEmptyTimezoneShouldHaveNoExtensionElements() {
+    public function testEmptyTimezoneShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->timezone->extensionElements));
         $this->assertTrue(count($this->timezone->extensionElements) == 0);
     }
 
-    public function testEmptyTimezoneShouldHaveNoExtensionAttributes() {
+    public function testEmptyTimezoneShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->timezone->extensionAttributes));
         $this->assertTrue(count($this->timezone->extensionAttributes) == 0);
     }
 
-    public function testSampleTimezoneShouldHaveNoExtensionElements() {
+    public function testSampleTimezoneShouldHaveNoExtensionElements()
+    {
         $this->timezone->transferFromXML($this->timezoneText);
         $this->assertTrue(is_array($this->timezone->extensionElements));
         $this->assertTrue(count($this->timezone->extensionElements) == 0);
     }
 
-    public function testSampleTimezoneShouldHaveNoExtensionAttributes() {
+    public function testSampleTimezoneShouldHaveNoExtensionAttributes()
+    {
         $this->timezone->transferFromXML($this->timezoneText);
         $this->assertTrue(is_array($this->timezone->extensionAttributes));
         $this->assertTrue(count($this->timezone->extensionAttributes) == 0);
     }
 
-    public function testNormalTimezoneShouldHaveNoExtensionElements() {
+    public function testNormalTimezoneShouldHaveNoExtensionElements()
+    {
         $this->timezone->value = "America/Chicago";
         $this->assertEquals($this->timezone->value, "America/Chicago");
         $this->assertEquals(count($this->timezone->extensionElements), 0);
@@ -71,7 +77,8 @@ class TimezoneTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newTimezone2->value, "America/Chicago");
     }
 
-    public function testEmptyTimezoneToAndFromStringShouldMatch() {
+    public function testEmptyTimezoneToAndFromStringShouldMatch()
+    {
         $timezoneXml = $this->timezone->saveXML();
         $newTimezone = new Extension\Timezone();
         $newTimezone->transferFromXML($timezoneXml);
@@ -79,7 +86,8 @@ class TimezoneTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($timezoneXml == $newTimezoneXml);
     }
 
-    public function testTimezoneWithValueToAndFromStringShouldMatch() {
+    public function testTimezoneWithValueToAndFromStringShouldMatch()
+    {
         $this->timezone->value = "America/Chicago";
         $timezoneXml = $this->timezone->saveXML();
         $newTimezone = new Extension\Timezone();
@@ -89,7 +97,8 @@ class TimezoneTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("America/Chicago", $newTimezone->value);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->timezone->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -103,7 +112,8 @@ class TimezoneTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newTimezone->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullTimezoneToAndFromString() {
+    public function testConvertFullTimezoneToAndFromString()
+    {
         $this->timezone->transferFromXML($this->timezoneText);
         $this->assertEquals($this->timezone->value, "America/Los_Angeles");
     }

@@ -96,8 +96,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(9, count($items));
 
         $i = 0;
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($i, $key);
             $i++;
         }
@@ -151,8 +150,7 @@ class SearchTest extends AbstractOnlineTestCase
             Ldap\Ldap::SEARCH_SCOPE_SUB, array(), 'l'
         );
         $this->assertEquals(5, $items->count());
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($lSorted[$key], $item['l'][0]);
         }
     }
@@ -243,15 +241,13 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals($isCount, $items->count());
 
         $i = 0;
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($i, $key);
             $i++;
         }
         $this->assertEquals($isCount, $i);
         $i = 0;
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($i, $key);
             $i++;
         }
@@ -259,15 +255,13 @@ class SearchTest extends AbstractOnlineTestCase
 
         $items->close();
         $i = 0;
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($i, $key);
             $i++;
         }
         $this->assertEquals($isCount, $i);
         $i = 0;
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($i, $key);
             $i++;
         }
@@ -524,8 +518,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, $current['dn']);
 
         $i = 0;
-        foreach ($items as $key => $item)
-        {
+        foreach ($items as $key => $item) {
             $this->assertEquals($i, $key);
             $i++;
         }

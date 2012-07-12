@@ -15,6 +15,6 @@ namespace Zend\Form\Exception;
  * @package    Zend_Form
  * @subpackage Exception
  */
-class UnexpectedValueException extends \UnexpectedValueException implements 
+class UnexpectedValueException extends \UnexpectedValueException implements
     ExceptionInterface
 {}

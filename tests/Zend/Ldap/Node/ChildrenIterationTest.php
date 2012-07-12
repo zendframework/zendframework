@@ -67,7 +67,7 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
                 $this->assertEquals(Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE)
                         ->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER), $dn
                 );
-            } else if ($i == 1) {
+            } elseif ($i == 1) {
                 $this->assertEquals('ou=Node', $rdn);
                 $this->assertEquals($this->createDn('ou=Node,'), $dn);
             } else {

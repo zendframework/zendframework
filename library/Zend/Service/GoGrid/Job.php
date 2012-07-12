@@ -22,7 +22,8 @@ class Job extends AbstractGoGrid
      * @param array $options
      * @return ObjectList
      */
-    public function getList($options=null) {
+    public function getList($options=null)
+    {
         $result= parent::_call(self::API_GRID_JOB_LIST, $options);
         return new ObjectList($result);
     }

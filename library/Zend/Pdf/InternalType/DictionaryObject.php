@@ -41,7 +41,7 @@ class DictionaryObject extends AbstractTypeObject
     {
         if ($val === null) {
             return;
-        } else if (!is_array($val)) {
+        } elseif (!is_array($val)) {
             throw new Exception\RuntimeException('Argument must be an array');
         }
 

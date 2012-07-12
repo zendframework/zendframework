@@ -127,7 +127,8 @@ class MultiTerm extends AbstractQuery
      * @param  boolean|null $sign
      * @return void
      */
-    public function addTerm(Index\Term $term, $sign = null) {
+    public function addTerm(Index\Term $term, $sign = null)
+    {
         if ($sign !== true || $this->_signs !== null) {       // Skip, if all terms are required
             if ($this->_signs === null) {                     // Check, If all previous terms are required
                 $this->_signs = array();
@@ -627,7 +628,7 @@ class MultiTerm extends AbstractQuery
 
             if ($this->_signs === null || $this->_signs[$id] === true) {
                 $query .= '+';
-            } else if ($this->_signs[$id] === false) {
+            } elseif ($this->_signs[$id] === false) {
                 $query .= '-';
             }
 

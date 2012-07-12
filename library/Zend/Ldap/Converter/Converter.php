@@ -94,19 +94,19 @@ class Converter
                 default:
                     if (is_string($value)) {
                         return $value;
-                    } else if (is_int($value) || is_float($value)) {
+                    } elseif (is_int($value) || is_float($value)) {
                         return (string)$value;
-                    } else if (is_bool($value)) {
+                    } elseif (is_bool($value)) {
                         return self::toldapBoolean($value);
-                    } else if (is_object($value)) {
+                    } elseif (is_object($value)) {
                         if ($value instanceof DateTime) {
                             return self::toLdapDatetime($value);
                         } else {
                             return self::toLdapSerialize($value);
                         }
-                    } else if (is_array($value)) {
+                    } elseif (is_array($value)) {
                         return self::toLdapSerialize($value);
-                    } else if (is_resource($value) && get_resource_type($value) === 'stream') {
+                    } elseif (is_resource($value) && get_resource_type($value) === 'stream') {
                         return stream_get_contents($value);
                     } else {
                         return null;
@@ -135,7 +135,7 @@ class Converter
             if (is_int($date)) {
                 $date = new DateTime('@' . $date);
                 $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
-            } else if (is_string($date)) {
+            } elseif (is_string($date)) {
                 $date = new DateTime($date);
             } else {
                 throw new Exception\InvalidArgumentException('Parameter $date is not of the expected type');
@@ -212,7 +212,7 @@ class Converter
                 if (is_numeric($value)) {
                     // prevent numeric values to be treated as date/time
                     return $value;
-                } else if ('TRUE' === $value || 'FALSE' === $value) {
+                } elseif ('TRUE' === $value || 'FALSE' === $value) {
                     return self::fromLdapBoolean($value);
                 }
                 if (preg_match('/^\d{4}[\d\+\-Z\.]*$/', $value)) {
@@ -366,7 +366,7 @@ class Converter
     {
         if ('TRUE' === $value) {
             return true;
-        } else if ('FALSE' === $value) {
+        } elseif ('FALSE' === $value) {
             return false;
         } else {
             throw new Exception\InvalidArgumentException('The given value is not a boolean value');

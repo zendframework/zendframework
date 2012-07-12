@@ -15,6 +15,6 @@ namespace Zend\Code\Exception;
  * @package    Zend_Code
  * @subpackage Exception
  */
-class InvalidArgumentException extends \InvalidArgumentException implements 
+class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
 {}

@@ -14,7 +14,7 @@
  * @subpackage DeveloperGarden
  * @author     Marco Kaiser
  */
-class Zend_Service_DeveloperGarden_IpLocation 
+class Zend_Service_DeveloperGarden_IpLocation
     extends Zend_Service_DeveloperGarden_Client_AbstractClient
 {
     /**

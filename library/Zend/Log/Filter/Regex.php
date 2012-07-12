@@ -54,7 +54,7 @@ class Regex implements FilterInterface
     {
         $message = $event['message'];
         if (is_array($event['message'])) {
-            $message = var_export($message, TRUE); 
+            $message = var_export($message, TRUE);
         }
         return preg_match($this->regex, $message) > 0;
     }

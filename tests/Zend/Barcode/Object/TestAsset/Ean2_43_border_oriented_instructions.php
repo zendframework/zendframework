@@ -1,27 +1,27 @@
 <?php
 return
 array (
-  0 => 
+  0 =>
   array (
     'type' => 'polygon',
-    'points' => 
+    'points' =>
     array (
-      0 => 
+      0 =>
       array (
         0 => 53,
         1 => 0,
       ),
-      1 => 
+      1 =>
       array (
         0 => -2,
         1 => 32,
       ),
-      2 => 
+      2 =>
       array (
         0 => 18,
         1 => 68,
       ),
-      3 => 
+      3 =>
       array (
         0 => 74,
         1 => 36,
@@ -30,27 +30,27 @@ array (
     'color' => 16777215,
     'filled' => true,
   ),
-  1 => 
+  1 =>
   array (
     'type' => 'polygon',
-    'points' => 
+    'points' =>
     array (
-      0 => 
+      0 =>
       array (
         0 => 58,
         1 => 10,
       ),
-      1 => 
+      1 =>
       array (
         0 => 15,
         1 => 35,
       ),
-      2 => 
+      2 =>
       array (
         0 => 15,
         1 => 35,
       ),
-      3 => 
+      3 =>
       array (
         0 => 58,
         1 => 10,
@@ -59,27 +59,27 @@ array (
     'color' => 0,
     'filled' => true,
   ),
-  2 => 
+  2 =>
   array (
     'type' => 'polygon',
-    'points' => 
+    'points' =>
     array (
-      0 => 
+      0 =>
       array (
         0 => 59,
         1 => 12,
       ),
-      1 => 
+      1 =>
       array (
         0 => 16,
         1 => 37,
       ),
-      2 => 
+      2 =>
       array (
         0 => 16,
         1 => 37,
       ),
-      3 => 
+      3 =>
       array (
         0 => 59,
         1 => 12,
@@ -88,27 +88,27 @@ array (
     'color' => 0,
     'filled' => true,
   ),
-  3 => 
+  3 =>
   array (
     'type' => 'polygon',
-    'points' => 
+    'points' =>
     array (
-      0 => 
+      0 =>
       array (
         0 => 60,
         1 => 13,
       ),
-      1 => 
+      1 =>
       array (
         0 => 17,
         1 => 38,
       ),
-      2 => 
+      2 =>
       array (
         0 => 17,
         1 => 38,
       ),
-      3 => 
+      3 =>
       array (
         0 => 60,
         1 => 13,
@@ -117,27 +117,27 @@ array (
     'color' => 0,
     'filled' => true,
   ),
-  4 => 
+  4 =>
   array (
     'type' => 'polygon',
-    'points' => 
+    'points' =>
     array (
-      0 => 
+      0 =>
       array (
         0 => 61,
         1 => 16,
       ),
-      1 => 
+      1 =>
       array (
         0 => 18,
         1 => 41,
       ),
-      2 => 
+      2 =>
       array (
         0 => 18,
         1 => 41,
       ),
-      3 => 
+      3 =>
       array (
         0 => 61,
         1 => 16,
@@ -146,27 +146,27 @@ array (
     'color' => 0,
     'filled' => true,
   ),
-  5 => 
+  5 =>
   array (
     'type' => 'polygon',
-    'points' => 
+    'points' =>
     array (
-      0 => 
+      0 =>
       array (
         0 => 62,
         1 => 16,
       ),
-      1 => 
+      1 =>
       array (
         0 => 19,
         1 => 41,
       ),
-      2 => 
+      2 =>
       array (
         0 => 19,
         1 => 41,
       ),
-      3 => 
+      3 =>
       array (
         0 => 62,
         1 => 16,
@@ -175,27 +175,27 @@ array (
     'color' => 0,
     'filled' => true,
   ),
-  6 => 
+  6 =>
   array (
     'type' => 'polygon',
-    'points' => 
+    'points' =>
     array (
-      0 => 
+      0 =>
       array (
         0 => 62,
         1 => 17,
       ),
-      1 => 
+      1 =>
       array (
         0 => 19,
         1 => 42,
       ),
-      2 => 
+      2 =>
       array (
         0 => 19,
         1 => 42,
       ),
-      3 => 
+      3 =>
       array (
         0 => 62,
         1 => 17,
@@ -204,27 +204,27 @@ array (
     'color' => 0,
     'filled' => true,
   ),
-  7 => 
+  7 =>
   array (
     'type' => 'polygon',
-    'points' => 
+    'points' =>
     array (
-      0 => 
+      0 =>
       array (
         0 => 63,
         1 => 19,
       ),
-      1 => 
+      1 =>
       array (
         0 => 20,
         1 => 44,
       ),
-      2 => 
+      2 =>
       array (
         0 => 20,
         1 => 44,
       ),
-      3 => 
+      3 =>
       array (
         0 => 63,
         1 => 19,
@@ -233,27 +233,27 @@ array (
     'color' => 0,
     'filled' => true,
   ),
-  8 => 
+  8 =>
   array (
     'type' => 'polygon',
-    'points' => 
+    'points' =>
     array (
-      0 => 
+      0 =>
       array (
         0 => 64,
         1 => 21,
       ),
-      1 => 
+      1 =>
       array (
         0 => 21,
         1 => 46,
       ),
-      2 => 
+      2 =>
       array (
         0 => 21,
         1 => 46,
       ),
-      3 => 
+      3 =>
       array (
         0 => 64,
         1 => 21,
@@ -262,27 +262,27 @@ array (
     'color' => 0,
     'filled' => true,
   ),
-  9 => 
+  9 =>
   array (
     'type' => 'polygon',
-    'points' => 
+    'points' =>
     array (
-      0 => 
+      0 =>
       array (
         0 => 65,
         1 => 23,
       ),
-      1 => 
+      1 =>
       array (
         0 => 22,
         1 => 48,
       ),
-      2 => 
+      2 =>
       array (
         0 => 22,
         1 => 48,
       ),
-      3 => 
+      3 =>
       array (
         0 => 65,
         1 => 23,
@@ -291,27 +291,27 @@ array (
     'color' => 0,
     'filled' => true,
   ),
-  10 => 
+  10 =>
   array (
     'type' => 'polygon',
-    'points' => 
+    'points' =>
     array (
-      0 => 
+      0 =>
       array (
         0 => 68,
         1 => 27,
       ),
-      1 => 
+      1 =>
       array (
         0 => 25,
         1 => 52,
       ),
-      2 => 
+      2 =>
       array (
         0 => 25,
         1 => 52,
       ),
-      3 => 
+      3 =>
       array (
         0 => 68,
         1 => 27,
@@ -320,32 +320,32 @@ array (
     'color' => 0,
     'filled' => true,
   ),
-  11 => 
+  11 =>
   array (
     'type' => 'polygon',
-    'points' => 
+    'points' =>
     array (
-      0 => 
+      0 =>
       array (
         0 => 53,
         1 => 0,
       ),
-      1 => 
+      1 =>
       array (
         0 => 74,
         1 => 36,
       ),
-      2 => 
+      2 =>
       array (
         0 => 18,
         1 => 68,
       ),
-      3 => 
+      3 =>
       array (
         0 => -2,
         1 => 32,
       ),
-      4 => 
+      4 =>
       array (
         0 => 53,
         1 => 0,
@@ -354,12 +354,12 @@ array (
     'color' => 0,
     'filled' => false,
   ),
-  12 => 
+  12 =>
   array (
     'type' => 'text',
     'text' => '43',
     'size' => 10,
-    'position' => 
+    'position' =>
     array (
       0 => 9,
       1 => 50,

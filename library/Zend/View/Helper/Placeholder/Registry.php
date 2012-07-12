@@ -21,7 +21,7 @@ use Zend\View\Exception;
 class Registry
 {
     /**
-     * @var Registry Singleton instance 
+     * @var Registry Singleton instance
      */
     protected static $instance;
 
@@ -55,7 +55,7 @@ class Registry
      * Unset the singleton
      *
      * Primarily useful for testing purposes; sets {@link $instance} to null.
-     * 
+     *
      * @return void
      */
     public static function unsetRegistry()

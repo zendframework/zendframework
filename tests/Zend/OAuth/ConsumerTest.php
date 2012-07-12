@@ -242,7 +242,8 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
 class RequestToken48231 extends OAuth\Http\RequestToken
 {
     public function __construct(){}
-    public function execute(array $params = null){
+    public function execute(array $params = null)
+    {
         $return = new OAuth\Token\Request;
         return $return;}
     public function setParams(array $customServiceParameters){}
@@ -251,7 +252,8 @@ class RequestToken48231 extends OAuth\Http\RequestToken
 class AccessToken48231 extends OAuth\Http\AccessToken
 {
     public function __construct(){}
-    public function execute(array $params = null){
+    public function execute(array $params = null)
+    {
         $return = new OAuth\Token\Access;
         return $return;}
     public function setParams(array $customServiceParameters){}
@@ -259,10 +261,12 @@ class AccessToken48231 extends OAuth\Http\AccessToken
 
 class Consumer48231 extends OAuth\Consumer
 {
-    public function __construct(array $options = array()){
+    public function __construct(array $options = array())
+    {
         $this->_requestToken = new OAuth\Token\Request;
         $this->_accessToken = new OAuth\Token\Access;
         parent::__construct($options);}
-    public function getCallbackUrl(){
+    public function getCallbackUrl()
+    {
         return 'http://www.example.com/local';}
 }

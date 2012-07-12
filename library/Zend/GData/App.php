@@ -1051,7 +1051,8 @@ class App
      * @return mixed A new feed of the same type as the one originally
      *          passed in, containing all relevant entries.
      */
-    public function retrieveAllEntriesForFeed($feed) {
+    public function retrieveAllEntriesForFeed($feed)
+    {
         $feedClass = get_class($feed);
         $reflectionObj = new \ReflectionClass($feedClass);
         $result = $reflectionObj->newInstance();
@@ -1066,8 +1067,7 @@ class App
             } else {
                 $feed = null;
             }
-        }
-        while ($feed != null);
+        } while ($feed != null);
         return $result;
     }
 

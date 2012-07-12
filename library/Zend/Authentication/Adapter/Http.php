@@ -484,7 +484,7 @@ class Http implements AdapterInterface
         }
 
         $result = $this->_basicResolver->resolve($creds[0], $this->_realm, $creds[1]);
-        
+
         if ($result
             && !is_array($result)
             && $this->_secureStringCompare($result, $creds[1])

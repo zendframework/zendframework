@@ -17,6 +17,6 @@ require_once __DIR__ . '/ExceptionInterface.php';
  * @package    Zend_Loader
  * @subpackage Exception
  */
-class MissingResourceNamespaceException extends \Exception implements 
+class MissingResourceNamespaceException extends \Exception implements
     ExceptionInterface
 {}

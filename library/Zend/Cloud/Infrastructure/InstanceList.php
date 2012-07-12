@@ -20,7 +20,7 @@ use Iterator;
  * @package    Zend_Cloud
  * @subpackage Infrastructure
  */
-class InstanceList implements 
+class InstanceList implements
     ArrayAccess,
     Countable,
     Iterator

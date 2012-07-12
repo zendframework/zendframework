@@ -19,8 +19,8 @@ use SeekableIterator;
  * @package    Zend_Mail
  * @subpackage Storage
  */
-abstract class AbstractStorage implements 
-    ArrayAccess, 
+abstract class AbstractStorage implements
+    ArrayAccess,
     Countable,
     SeekableIterator
 {

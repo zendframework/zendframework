@@ -86,7 +86,7 @@ class Ini implements ReaderInterface
         );
         $ini = parse_ini_file($filename, true);
         restore_error_handler();
-        
+
         return $this->process($ini);
     }
 
@@ -114,7 +114,7 @@ class Ini implements ReaderInterface
         );
         $ini = parse_ini_string($string, true);
         restore_error_handler();
-        
+
         return $this->process($ini);
     }
 

@@ -32,7 +32,7 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
     	$this->assertEquals('https://example.com/oauth/authorize', $config->getAuthorizeUrl());
     	$this->assertEquals('https://example.com/oauth/request_token', $config->getRequestTokenUrl());
     	$this->assertEquals('https://example.com/oauth/access_token', $config->getAccessTokenUrl());
-    	
+
     }
 
 }

@@ -16,7 +16,7 @@ use Zend\ModuleManager\ModuleEvent;
 
 /**
  * Autoloader listener
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Listener

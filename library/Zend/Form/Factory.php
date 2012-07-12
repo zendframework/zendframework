@@ -202,7 +202,7 @@ class Factory
      * Specification follows that of {@link createFieldset()}, and adds the
      * following keys:
      *
-     * - input_filter: input filter instance, named input filter class, or 
+     * - input_filter: input filter instance, named input filter class, or
      *   array specification for the input filter factory
      * - hydrator: hydrator instance or named hydrator class
      *

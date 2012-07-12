@@ -15,7 +15,7 @@ use Zend\Service\AgileZen\AgileZen as AgileZenService;
 class TaskTest extends \PHPUnit_Framework_TestCase
 {
     protected static $taskId;
-  
+
     public function setUp()
     {
         if (!constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_ENABLED')) {
@@ -27,7 +27,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
         if(!defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID')) {
             self::markTestSkipped('The project ID costant has to be set.');
         }
-        $this->agileZen = new AgileZenService(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY'));                                               
+        $this->agileZen = new AgileZenService(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY'));
     }
     public function testAddTask()
     {
@@ -77,7 +77,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($task instanceof \Zend\Service\AgileZen\Resources\Task);
         $this->assertEquals(self::$taskId, $task->getId());
     }
-    
+
     public function testUpdateTask()
     {
         if (empty(self::$taskId)) {

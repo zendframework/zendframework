@@ -18,12 +18,12 @@ use Zend\Stdlib\AbstractOptions;
 class TestOptions extends AbstractOptions
 {
     protected $testField;
-    
-    public function setTestField($value) 
+
+    public function setTestField($value)
     {
         $this->testField = $value;
     }
-    
+
     public function getTestField()
     {
         return $this->testField;

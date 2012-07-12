@@ -221,7 +221,7 @@ class Loaded extends AbstractOutline
                 throw new Exception\CorruptedPdfException('Outline dictionary may contain Dest or A entry, but not both.');
             }
             return Destination\AbstractDestination::load($this->_outlineDictionary->Dest);
-        } else if ($this->_outlineDictionary->A !== null) {
+        } elseif ($this->_outlineDictionary->A !== null) {
             return Action\AbstractAction::load($this->_outlineDictionary->A);
         }
 
@@ -247,10 +247,10 @@ class Loaded extends AbstractOutline
         if ($target === null) {
             $this->_outlineDictionary->Dest = null;
             $this->_outlineDictionary->A    = null;
-        } else if ($target instanceof Destination\AbstractDestination) {
+        } elseif ($target instanceof Destination\AbstractDestination) {
             $this->_outlineDictionary->Dest = $target->getResource();
             $this->_outlineDictionary->A    = null;
-        } else if ($target instanceof Action\AbstractAction) {
+        } elseif ($target instanceof Action\AbstractAction) {
             $this->_outlineDictionary->Dest = null;
             $this->_outlineDictionary->A    = $target->getResource();
         } else {
@@ -366,7 +366,7 @@ class Loaded extends AbstractOutline
         if (count($this->_originalChildOutlines) != count($this->childOutlines)) {
             // If original and current children arrays have different size then children list was updated
             $updateChildNavigation = true;
-        } else if ( !(array_keys($this->_originalChildOutlines) === array_keys($this->childOutlines)) ) {
+        } elseif ( !(array_keys($this->_originalChildOutlines) === array_keys($this->childOutlines)) ) {
             // If original and current children arrays have different keys (with a glance to an order) then children list was updated
             $updateChildNavigation = true;
         } else {

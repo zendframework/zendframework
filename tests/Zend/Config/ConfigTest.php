@@ -483,8 +483,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         ), true);
 
         $keyList = array();
-        foreach ($config as $key => $value)
-        {
+        foreach ($config as $key => $value) {
             $keyList[] = $key;
             if ($key == 'first') {
                 unset($config->$key); // uses magic Zend\Config\Config::__unset() method
@@ -509,8 +508,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         ), true);
 
         $keyList = array();
-        foreach ($config as $key => $value)
-        {
+        foreach ($config as $key => $value) {
             $keyList[] = $key;
             if ($key == 'second') {
                 unset($config->$key); // uses magic Zend\Config\Config::__unset() method
@@ -535,8 +533,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         ), true);
 
         $keyList = array();
-        foreach ($config as $key => $value)
-        {
+        foreach ($config as $key => $value) {
             $keyList[] = $key;
             if ($key == 'third') {
                 unset($config->$key); // uses magic Zend\Config\Config::__unset() method
@@ -576,7 +573,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      * @depends testMerge
      * @link http://framework.zend.com/issues/browse/ZF2-186
      */
-    public function testZF2_186_mergeReplacingUnnamedConfigSettings(){
+    public function testZF2_186_mergeReplacingUnnamedConfigSettings()
+    {
         $arrayA = array(
             'flag' => true,
             'text' => 'foo',

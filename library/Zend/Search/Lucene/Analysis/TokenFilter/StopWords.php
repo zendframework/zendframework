@@ -38,7 +38,8 @@ class StopWords implements TokenFilterInterface
      *
      * @param array $stopwords array (set) of words that will be filtered out
      */
-    public function __construct($stopwords = array()) {
+    public function __construct($stopwords = array())
+    {
         $this->_stopSet = array_flip($stopwords);
     }
 
@@ -48,7 +49,8 @@ class StopWords implements TokenFilterInterface
      * @param \Zend\Search\Lucene\Analysis\Token $srcToken
      * @return \Zend\Search\Lucene\Analysis\Token
      */
-    public function normalize(Token $srcToken) {
+    public function normalize(Token $srcToken)
+    {
         if (array_key_exists($srcToken->getTermText(), $this->_stopSet)) {
             return null;
         } else {
@@ -66,7 +68,8 @@ class StopWords implements TokenFilterInterface
      * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
-    public function loadFromFile($filepath = null) {
+    public function loadFromFile($filepath = null)
+    {
         if (! $filepath || ! file_exists($filepath)) {
             throw new InvalidArgumentException('You have to provide valid file path');
         }

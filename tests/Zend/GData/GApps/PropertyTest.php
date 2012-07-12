@@ -24,36 +24,42 @@ use Zend\GData\GApps\Extension\Property;
 class PropertyTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->thePropertyText = file_get_contents(
                 'Zend/GData/GApps/_files/PropertyElementSample1.xml',
                 true);
         $this->theProperty = new Property();
     }
 
-    public function testEmptyPropertyShouldHaveNoExtensionElements() {
+    public function testEmptyPropertyShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->theProperty->extensionElements));
         $this->assertTrue(count($this->theProperty->extensionElements) == 0);
     }
 
-    public function testEmptyPropertyShouldHaveNoExtensionAttributes() {
+    public function testEmptyPropertyShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->theProperty->extensionAttributes));
         $this->assertTrue(count($this->theProperty->extensionAttributes) == 0);
     }
 
-    public function testSamplePropertyShouldHaveNoExtensionElements() {
+    public function testSamplePropertyShouldHaveNoExtensionElements()
+    {
         $this->theProperty->transferFromXML($this->thePropertyText);
         $this->assertTrue(is_array($this->theProperty->extensionElements));
         $this->assertTrue(count($this->theProperty->extensionElements) == 0);
     }
 
-    public function testSamplePropertyShouldHaveNoExtensionAttributes() {
+    public function testSamplePropertyShouldHaveNoExtensionAttributes()
+    {
         $this->theProperty->transferFromXML($this->thePropertyText);
         $this->assertTrue(is_array($this->theProperty->extensionAttributes));
         $this->assertTrue(count($this->theProperty->extensionAttributes) == 0);
     }
 
-    public function testNormalPropertyShouldHaveNoExtensionElements() {
+    public function testNormalPropertyShouldHaveNoExtensionElements()
+    {
         $this->theProperty->name = "foo";
         $this->theProperty->value = "bar";
 
@@ -79,7 +85,8 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("bar", $newProperty2->value);
     }
 
-    public function testEmptyPropertyToAndFromStringShouldMatch() {
+    public function testEmptyPropertyToAndFromStringShouldMatch()
+    {
         $propertyXml = $this->theProperty->saveXML();
         $newProperty = new Property();
         $newProperty->transferFromXML($propertyXml);
@@ -87,7 +94,8 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($propertyXml == $newPropertyXml);
     }
 
-    public function testPropertyWithValueToAndFromStringShouldMatch() {
+    public function testPropertyWithValueToAndFromStringShouldMatch()
+    {
         $this->theProperty->name = "foo2";
         $this->theProperty->value = "bar2";
         $propertyXml = $this->theProperty->saveXML();
@@ -99,7 +107,8 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("bar2", $this->theProperty->value);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->theProperty->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -113,7 +122,8 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newProperty->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullNameToAndFromString() {
+    public function testConvertFullNameToAndFromString()
+    {
         $this->theProperty->transferFromXML($this->thePropertyText);
         $this->assertEquals("Some Name", $this->theProperty->name);
         $this->assertEquals("Some Value", $this->theProperty->value);

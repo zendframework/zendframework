@@ -214,9 +214,9 @@ class Fuzzy extends AbstractQuery
                         // we don't have anything to compare.  That means if we just add
                         // the letters for current term we get the new word
                         $similarity = (($prefixUtf8Length == 0)? 0 : 1 - strlen($target)/$prefixUtf8Length);
-                    } else if (strlen($target) == 0) {
+                    } elseif (strlen($target) == 0) {
                         $similarity = (($prefixUtf8Length == 0)? 0 : 1 - $termRestLength/$prefixUtf8Length);
-                    } else if ($maxDistance < abs($termRestLength - strlen($target))){
+                    } elseif ($maxDistance < abs($termRestLength - strlen($target))){
                         //just adding the characters of term to target or vice-versa results in too many edits
                         //for example "pre" length is 3 and "prefixes" length is 8.  We can see that
                         //given this optimal circumstance, the edit distance cannot be less than 5.
@@ -282,7 +282,7 @@ class Fuzzy extends AbstractQuery
 
         if (count($this->_matches) == 0) {
             return new EmptyResult();
-        } else if (count($this->_matches) == 1) {
+        } elseif (count($this->_matches) == 1) {
             return new Term(reset($this->_matches));
         } else {
             $rewrittenQuery = new Boolean();
@@ -433,9 +433,9 @@ class Fuzzy extends AbstractQuery
                     // we don't have anything to compare.  That means if we just add
                     // the letters for current term we get the new word
                     $similarity = (($prefixUtf8Length == 0)? 0 : 1 - strlen($target)/$prefixUtf8Length);
-                } else if (strlen($target) == 0) {
+                } elseif (strlen($target) == 0) {
                     $similarity = (($prefixUtf8Length == 0)? 0 : 1 - $termRestLength/$prefixUtf8Length);
-                } else if ($maxDistance < abs($termRestLength - strlen($target))){
+                } elseif ($maxDistance < abs($termRestLength - strlen($target))){
                     //just adding the characters of term to target or vice-versa results in too many edits
                     //for example "pre" length is 3 and "prefixes" length is 8.  We can see that
                     //given this optimal circumstance, the edit distance cannot be less than 5.

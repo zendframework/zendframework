@@ -150,7 +150,8 @@ class GenericProvider
      * @param string $id user identity URL
      * @return bool
      */
-    public function hasUser($id) {
+    public function hasUser($id)
+    {
         if (!OpenId\OpenId::normalize($id)) {
             return false;
         }
@@ -193,7 +194,8 @@ class GenericProvider
      *
      * @return mixed
      */
-    public function getLoggedInUser() {
+    public function getLoggedInUser()
+    {
         return $this->_user->getLoggedInUser();
     }
 
@@ -213,9 +215,9 @@ class GenericProvider
         }
         if ($version >= 2.0 && isset($params['openid_realm'])) {
             $root = $params['openid_realm'];
-        } else if ($version < 2.0 && isset($params['openid_trust_root'])) {
+        } elseif ($version < 2.0 && isset($params['openid_trust_root'])) {
             $root = $params['openid_trust_root'];
-        } else if (isset($params['openid_return_to'])) {
+        } elseif (isset($params['openid_return_to'])) {
             $root = $params['openid_return_to'];
         } else {
             return false;
@@ -318,7 +320,7 @@ class GenericProvider
         if ($params === null) {
             if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 $params = $_GET;
-            } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $params = $_POST;
             } else {
                 return false;
@@ -337,21 +339,21 @@ class GenericProvider
                     $ret .= $key . ':' . $val . "\n";
                 }
                 return $ret;
-            } else if ($params['openid_mode'] == 'checkid_immediate') {
+            } elseif ($params['openid_mode'] == 'checkid_immediate') {
                 $ret = $this->_checkId($version, $params, 1, $extensions, $response);
                 if (is_bool($ret)) return $ret;
                 if (!empty($params['openid_return_to'])) {
                     OpenId\OpenId::redirect($params['openid_return_to'], $ret, $response);
                 }
                 return true;
-            } else if ($params['openid_mode'] == 'checkid_setup') {
+            } elseif ($params['openid_mode'] == 'checkid_setup') {
                 $ret = $this->_checkId($version, $params, 0, $extensions, $response);
                 if (is_bool($ret)) return $ret;
                 if (!empty($params['openid_return_to'])) {
                     OpenId\OpenId::redirect($params['openid_return_to'], $ret, $response);
                 }
                 return true;
-            } else if ($params['openid_mode'] == 'check_authentication') {
+            } elseif ($params['openid_mode'] == 'check_authentication') {
                 $response = $this->_checkAuthentication($version, $params);
                 $ret = '';
                 foreach ($response as $key => $val) {
@@ -374,7 +376,7 @@ class GenericProvider
     {
         if ($func == 'sha1') {
             $macLen = 20; /* 160 bit */
-        } else if ($func == 'sha256') {
+        } elseif ($func == 'sha256') {
             $macLen = 32; /* 256 bit */
         } else {
             return false;
@@ -402,7 +404,7 @@ class GenericProvider
         if (isset($params['openid_assoc_type']) &&
             $params['openid_assoc_type'] == 'HMAC-SHA1') {
             $macFunc = 'sha1';
-        } else if (isset($params['openid_assoc_type']) &&
+        } elseif (isset($params['openid_assoc_type']) &&
             $params['openid_assoc_type'] == 'HMAC-SHA256' &&
             $version >= 2.0) {
             $macFunc = 'sha256';
@@ -419,10 +421,10 @@ class GenericProvider
         if (empty($params['openid_session_type']) ||
             $params['openid_session_type'] == 'no-encryption') {
             $ret['mac_key'] = base64_encode($secret);
-        } else if (isset($params['openid_session_type']) &&
+        } elseif (isset($params['openid_session_type']) &&
             $params['openid_session_type'] == 'DH-SHA1') {
             $dhFunc = 'sha1';
-        } else if (isset($params['openid_session_type']) &&
+        } elseif (isset($params['openid_session_type']) &&
             $params['openid_session_type'] == 'DH-SHA256' &&
             $version >= 2.0) {
             $dhFunc = 'sha256';
@@ -516,9 +518,9 @@ class GenericProvider
             foreach ($params as $key => $val) {
                 if (strpos($key, 'openid_ns_') === 0) {
                     $key = 'openid.ns.' . substr($key, strlen('openid_ns_'));
-                } else if (strpos($key, 'openid_sreg_') === 0) {
+                } elseif (strpos($key, 'openid_sreg_') === 0) {
                     $key = 'openid.sreg.' . substr($key, strlen('openid_sreg_'));
-                } else if (strpos($key, 'openid_') === 0) {
+                } elseif (strpos($key, 'openid_') === 0) {
                     $key = 'openid.' . substr($key, strlen('openid_'));
                 }
                 $params2[$key] = $val;
@@ -582,15 +584,15 @@ class GenericProvider
         if ($trusted === false) {
             $ret['openid.mode'] = 'cancel';
             return $ret;
-        } else if ($trusted === null) {
+        } elseif ($trusted === null) {
             /* Redirect to Server Trust Screen */
             $params2 = array();
             foreach ($params as $key => $val) {
                 if (strpos($key, 'openid_ns_') === 0) {
                     $key = 'openid.ns.' . substr($key, strlen('openid_ns_'));
-                } else if (strpos($key, 'openid_sreg_') === 0) {
+                } elseif (strpos($key, 'openid_sreg_') === 0) {
                     $key = 'openid.sreg.' . substr($key, strlen('openid_sreg_'));
-                } else if (strpos($key, 'openid_') === 0) {
+                } elseif (strpos($key, 'openid_') === 0) {
                     $key = 'openid.' . substr($key, strlen('openid_'));
                 }
                 $params2[$key] = $val;

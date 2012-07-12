@@ -17,7 +17,7 @@ require_once __DIR__ . '/ExceptionInterface.php';
  * @package    Zend_Loader
  * @subpackage Exception
  */
-class BadMethodCallException extends \BadMethodCallException implements 
+class BadMethodCallException extends \BadMethodCallException implements
     ExceptionInterface
 {
 }

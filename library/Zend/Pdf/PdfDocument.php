@@ -394,7 +394,7 @@ class PdfDocument
         foreach ($pages->Kids->items as $child) {
             if ($child->Type->value == 'Pages') {
                 $this->_loadPages($child, $attributes);
-            } else if ($child->Type->value == 'Page') {
+            } elseif ($child->Type->value == 'Page') {
                 foreach (self::$_inheritableAttributes as $property) {
                     if ($child->$property === null && array_key_exists($property, $attributes)) {
                         /**
@@ -533,7 +533,7 @@ class PdfDocument
                 if ($this->resolveDestination($namedTarget, false) === null) {
                     unset($this->_namedTargets[$name]);
                 }
-            } else if ($namedTarget instanceof Action\AbstractAction) {
+            } elseif ($namedTarget instanceof Action\AbstractAction) {
                 // Named target is an action
                 if ($this->_cleanUpAction($namedTarget, false) === null) {
                     // Action is a GoTo action with an unresolved destination
@@ -555,7 +555,7 @@ class PdfDocument
                     if ($this->resolveDestination($target, false) === null) {
                         $outline->setTarget(null);
                     }
-                } else if ($target instanceof Action\AbstractAction) {
+                } elseif ($target instanceof Action\AbstractAction) {
                     // Outline target is an action
                     if ($this->_cleanUpAction($target, false) === null) {
                         // Action is a GoTo action with an unresolved destination
@@ -575,7 +575,7 @@ class PdfDocument
                     // Action is a GoTo action with an unresolved destination
                     $this->setOpenAction(null);
                 }
-            } else if ($openAction instanceof Destination\AbstractDestination) {
+            } elseif ($openAction instanceof Destination\AbstractDestination) {
                 // OpenAction target is a destination
                 if ($this->resolveDestination($openAction, false) === null) {
                     $this->setOpenAction(null);
@@ -641,7 +641,7 @@ class PdfDocument
             if (count($this->_originalOutlines) != count($this->outlines)) {
                 // If original and current outlines arrays have different size then outlines list was updated
                 $updateOutlinesNavigation = true;
-            } else if ( !(array_keys($this->_originalOutlines) === array_keys($this->outlines)) ) {
+            } elseif ( !(array_keys($this->_originalOutlines) === array_keys($this->outlines)) ) {
                 // If original and current outlines arrays have different keys (with a glance to an order) then outlines list was updated
                 $updateOutlinesNavigation = true;
             } else {

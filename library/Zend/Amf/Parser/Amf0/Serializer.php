@@ -49,8 +49,8 @@ class Serializer extends AbstractSerializer
      */
     public function writeTypeMarker(&$data, $markerType = null, $dataByVal = false)
     {
-        // Workaround for PHP5 with E_STRICT enabled complaining about "Only 
-        // variables should be passed by reference" 
+        // Workaround for PHP5 with E_STRICT enabled complaining about "Only
+        // variables should be passed by reference"
         if ((null === $data) && ($dataByVal !== false)) {
             $data = &$dataByVal;
         }
@@ -146,7 +146,7 @@ class Serializer extends AbstractSerializer
                             $markerType = Amf\Constants::AMF0_OBJECT;
                             break;
                             // check if it is a sparse indexed array
-                         } else if ($key != $i) {
+                         } elseif ($key != $i) {
                              $markerType = Amf\Constants::AMF0_MIXEDARRAY;
                              break;
                          }
@@ -176,18 +176,18 @@ class Serializer extends AbstractSerializer
      * @param mixed $objectByVal object to check for reference
      * @return Boolean true, if the reference was written, false otherwise
      */
-    protected function writeObjectReference(&$object, $markerType, $objectByVal = false) 
+    protected function writeObjectReference(&$object, $markerType, $objectByVal = false)
     {
-        // Workaround for PHP5 with E_STRICT enabled complaining about "Only 
+        // Workaround for PHP5 with E_STRICT enabled complaining about "Only
         // variables should be passed by reference"
         if ((null === $object) && ($objectByVal !== false)) {
             $object = &$objectByVal;
         }
 
-        if ($markerType == Amf\Constants::AMF0_OBJECT 
-            || $markerType == Amf\Constants::AMF0_MIXEDARRAY 
+        if ($markerType == Amf\Constants::AMF0_OBJECT
+            || $markerType == Amf\Constants::AMF0_MIXEDARRAY
             || $markerType == Amf\Constants::AMF0_ARRAY
-            || $markerType == Amf\Constants::AMF0_TYPEDOBJECT 
+            || $markerType == Amf\Constants::AMF0_TYPEDOBJECT
         ) {
             $ref = array_search($object, $this->_referenceObjects,true);
             //handle object reference

@@ -29,10 +29,10 @@ abstract class Glob
     const GLOB_ONLYDIR  = 0x20;
     const GLOB_ERR      = 0x30;
     /**#@-*/
-    
+
     /**
      * Find pathnames matching a pattern.
-     * 
+     *
      * @see    http://docs.php.net/glob
      * @param  string  $pattern
      * @param  integer $flags
@@ -47,10 +47,10 @@ abstract class Glob
             return self::systemGlob($pattern, $flags);
         }
     }
-    
+
     /**
      * Use the glob function provided by the system.
-     * 
+     *
      * @param  string  $pattern
      * @param  integer $flags
      * @return array|false
@@ -81,10 +81,10 @@ abstract class Glob
 
         return glob($pattern, $globFlags);
     }
-    
+
     /**
      * Expand braces manually, then use the system glob.
-     * 
+     *
      * @param  string  $pattern
      * @param  integer $flags
      * @return array|false
@@ -94,26 +94,26 @@ abstract class Glob
         if (!$flags & self::GLOB_BRACE) {
             return self::systemGlob($pattern, $flags);
         }
-        
+
         $flags &= ~self::GLOB_BRACE;
         $length = strlen($pattern);
         $paths  = array();
-        
+
         if ($flags & self::GLOB_NOESCAPE) {
             $begin = strpos($pattern, '{');
         } else {
             $begin = 0;
-            
+
             while (true) {
                 if ($begin === $length) {
                     $begin = false;
                     break;
-                } else if ($pattern[$begin] === '\\' && ($begin + 1) < $length) {
+                } elseif ($pattern[$begin] === '\\' && ($begin + 1) < $length) {
                     $begin++;
-                } else if ($pattern[$begin] === '{') {
+                } elseif ($pattern[$begin] === '{') {
                     break;
                 }
-                
+
                 $begin++;
             }
         }
@@ -121,7 +121,7 @@ abstract class Glob
         if ($begin === false) {
             return self::systemGlob($pattern, $flags);
         }
-        
+
         $next = self::nextBraceSub($pattern, $begin + 1, $flags);
 
         if ($next === null) {
@@ -140,7 +140,7 @@ abstract class Glob
 
         $p = $begin + 1;
 
-        while (true) {           
+        while (true) {
             $subPattern = substr($pattern, 0, $begin)
                         . substr($pattern, $p, $next - $p)
                         . substr($pattern, $rest + 1);
@@ -150,7 +150,7 @@ abstract class Glob
             if ($result) {
                 $paths = array_merge($paths, $result);
             }
-            
+
             if ($pattern[$next] === '}') {
                 break;
             }
@@ -158,17 +158,17 @@ abstract class Glob
             $p    = $next + 1;
             $next = self::nextBraceSub($pattern, $p, $flags);
         }
-        
+
         return array_unique($paths);
     }
-    
+
     /**
      * Find the end of the sub-pattern in a brace expression.
-     * 
+     *
      * @param  string  $pattern
      * @param  integer $begin
      * @param  integer $flags
-     * @return integer|null 
+     * @return integer|null
      */
     protected static function nextBraceSub($pattern, $begin, $flags)
     {
@@ -181,12 +181,12 @@ abstract class Glob
                 if (++$current === $length) {
                     break;
                 }
-                
+
                 $current++;
-            } else {               
+            } else {
                 if (($pattern[$current] === '}' && $depth-- === 0) || ($pattern[$current] === ',' && $depth === 0)) {
                     break;
-                } else if ($pattern[$current++] === '{') {
+                } elseif ($pattern[$current++] === '{') {
                     $depth++;
                 }
             }

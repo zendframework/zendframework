@@ -218,7 +218,7 @@ class MailHide extends ReCaptcha
         /* Decide on how much of the local part we want to reveal */
         if (strlen($emailParts[0]) <= 4) {
             $emailParts[0] = substr($emailParts[0], 0, 1);
-        } else if (strlen($emailParts[0]) <= 6) {
+        } elseif (strlen($emailParts[0]) <= 6) {
             $emailParts[0] = substr($emailParts[0], 0, 3);
         } else {
             $emailParts[0] = substr($emailParts[0], 0, 4);
@@ -289,16 +289,16 @@ class MailHide extends ReCaptcha
         $enc = $this->getOption('encoding');
 
         /* Genrate the HTML used to represent the email address */
-        $html = htmlentities($this->getEmailLocalPart(), ENT_COMPAT, $enc) 
-            . '<a href="' 
-                . htmlentities($url, ENT_COMPAT, $enc) 
-                . '" onclick="window.open(\'' 
-                    . htmlentities($url, ENT_COMPAT, $enc) 
+        $html = htmlentities($this->getEmailLocalPart(), ENT_COMPAT, $enc)
+            . '<a href="'
+                . htmlentities($url, ENT_COMPAT, $enc)
+                . '" onclick="window.open(\''
+                    . htmlentities($url, ENT_COMPAT, $enc)
                     . '\', \'\', \'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width='
                     . $this->options['popupWidth']
-                    . ',height=' 
+                    . ',height='
                     . $this->options['popupHeight']
-                . '\'); return false;" title="' 
+                . '\'); return false;" title="'
                 . $this->options['linkTitle']
                 . '">' . $this->options['linkHiddenText'] . '</a>@'
                 . htmlentities($this->getEmailDomainPart(), ENT_COMPAT, $enc);

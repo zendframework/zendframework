@@ -87,8 +87,8 @@ class SqliteMetadata extends AbstractSource
         $this->prepareDataHierarchy('sqlite_columns', $schema, $table);
 
         $p = $this->adapter->getPlatform();
-        
-        
+
+
         $results = $this->fetchPragma('table_info', $table, $schema);
 
         $columns = array();
@@ -109,7 +109,7 @@ class SqliteMetadata extends AbstractSource
             );
             // TODO: populate character_ and numeric_values with correct info
         }
-        
+
         $this->data['columns'][$schema][$table] = $columns;
         $this->data['sqlite_columns'][$schema][$table] = $results;
     }

@@ -22,20 +22,22 @@ use Zend\GData\App\Extension;
 class CategoryTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->categoryText = file_get_contents(
                 'Zend/GData/App/_files/CategoryElementSample1.xml',
                 true);
         $this->category = new Extension\Category();
     }
 
-    public function testEmptyCategoryShouldHaveEmptyExtensionsList() {
+    public function testEmptyCategoryShouldHaveEmptyExtensionsList()
+    {
         $this->assertTrue(is_array($this->category->extensionElements));
         $this->assertTrue(count($this->category->extensionElements) == 0);
     }
 
-    public function testNormalCategoryShouldHaveNoExtensionElements() {
-
+    public function testNormalCategoryShouldHaveNoExtensionElements()
+    {
         $this->category->scheme = 'http://schemas.google.com/g/2005#kind';
         $this->assertEquals($this->category->scheme, 'http://schemas.google.com/g/2005#kind');
         $this->assertEquals(count($this->category->extensionElements), 0);
@@ -55,7 +57,8 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newCategory2->scheme, 'http://schemas.google.com/g/2005#kind');
     }
 
-    public function testEmptyCategoryToAndFromStringShouldMatch() {
+    public function testEmptyCategoryToAndFromStringShouldMatch()
+    {
         $categoryXml = $this->category->saveXML();
         $newCategory = new Extension\Category();
         $newCategory->transferFromXML($categoryXml);
@@ -63,7 +66,8 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($categoryXml == $newCategoryXml);
     }
 
-    public function testCategoryWithSchemeAndTermToAndFromStringShouldMatch() {
+    public function testCategoryWithSchemeAndTermToAndFromStringShouldMatch()
+    {
         $this->category->scheme = 'http://schemas.google.com/g/2005#kind';
         $this->category->term = 'http://schemas.google.com/g/2005#event';
         $this->category->label = 'event kind';
@@ -77,7 +81,8 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('event kind', $newCategory->label);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->category->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -91,7 +96,8 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newCategory->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullCategoryToAndFromString() {
+    public function testConvertFullCategoryToAndFromString()
+    {
         $this->category->transferFromXML($this->categoryText);
         $this->assertEquals('http://schemas.google.com/g/2005#kind', $this->category->scheme);
         $this->assertEquals('http://schemas.google.com/g/2005#event', $this->category->term);

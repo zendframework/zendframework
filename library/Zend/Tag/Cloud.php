@@ -134,7 +134,7 @@ class Cloud
         if ($tag instanceof TaggableInterface) {
             $tags[] = $tag;
             return $this;
-        } 
+        }
 
         if (!is_array($tag)) {
             throw new Exception\InvalidArgumentException(sprintf(

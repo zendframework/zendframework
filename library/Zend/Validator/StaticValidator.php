@@ -23,7 +23,7 @@ class StaticValidator
 
     /**
      * Set plugin manager to use for locating validators
-     * 
+     *
      * @param  ValidatorPluginManager|null $plugins
      * @return void
      */
@@ -38,7 +38,7 @@ class StaticValidator
 
     /**
      * Get plugin manager for locating validators
-     * 
+     *
      * @return ValidatorPluginManager
      */
     public static function getPluginManager()

@@ -41,7 +41,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         } else {
             $this->prefix = '$2a$';
         }
-        $this->bcryptPassword = $this->prefix . '14$MTIzNDU2Nzg5MDEyMzQ1NeWUUefVlefsTbFhsbqKFv/vPSZBrSFVm';    
+        $this->bcryptPassword = $this->prefix . '14$MTIzNDU2Nzg5MDEyMzQ1NeWUUefVlefsTbFhsbqKFv/vPSZBrSFVm';
     }
 
     public function testConstructByOptions()
@@ -121,12 +121,12 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->bcrypt->verify($this->password, $this->bcryptPassword));
         $this->assertFalse($this->bcrypt->verify(substr($this->password, -1), $this->bcryptPassword));
     }
-    
+
     public function testPasswordWith8bitCharacter()
     {
         $password = 'test' . chr(128);
         $this->bcrypt->setSalt($this->salt);
-        
+
         if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
             $this->assertEquals('$2y$14$MTIzNDU2Nzg5MDEyMzQ1NexAbOIUHkG6Ra.TK9QxHOVUhDxOe4dkW', $this->bcrypt->create($password));
         } else {

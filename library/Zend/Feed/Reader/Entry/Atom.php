@@ -47,7 +47,7 @@ class Atom extends AbstractEntry implements EntryInterface
 
         $threadClass = Reader\Reader::getPluginLoader()->getClassName('Thread\\Entry');
         $this->_extensions['Thread\\Entry'] = new $threadClass($entry, $entryKey, $type);
-        
+
         $threadClass = Reader\Reader::getPluginLoader()->getClassName('DublinCore\\Entry');
         $this->_extensions['DublinCore\\Entry'] = new $threadClass($entry, $entryKey, $type);
     }
@@ -317,7 +317,7 @@ class Atom extends AbstractEntry implements EntryInterface
 
         return $this->_data['commentfeedlink'];
     }
-    
+
     /**
      * Get category data as a Reader\Reader_Collection_Category object
      *
@@ -330,7 +330,7 @@ class Atom extends AbstractEntry implements EntryInterface
         }
 
         $categoryCollection = $this->getExtension('Atom')->getCategories();
-        
+
         if (count($categoryCollection) == 0) {
             $categoryCollection = $this->getExtension('DublinCore')->getCategories();
         }
@@ -339,7 +339,7 @@ class Atom extends AbstractEntry implements EntryInterface
 
         return $this->_data['categories'];
     }
-    
+
     /**
      * Get source feed metadata from the entry
      *
@@ -355,7 +355,7 @@ class Atom extends AbstractEntry implements EntryInterface
 
         $this->_data['source'] = $source;
 
-        return $this->_data['source']; 
+        return $this->_data['source'];
     }
 
     /**

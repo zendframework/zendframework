@@ -15,7 +15,8 @@ use Zend\Authentication\Result;
 
 class WrongPassword extends AbstractAuthentication
 {
-    public function authenticate() {
+    public function authenticate()
+    {
         return new Result(
             Result::FAILURE_CREDENTIAL_INVALID,
             null,

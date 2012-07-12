@@ -76,7 +76,7 @@ class Jpeg extends AbstractImage
         $imageDictionary->BitsPerComponent = new InternalType\NumericObject($imageInfo['bits']);
         if ($imageInfo[2] == IMAGETYPE_JPEG) {
             $imageDictionary->Filter       = new InternalType\NameObject('DCTDecode');
-        } else if ($imageInfo[2] == IMAGETYPE_JPEG2000){
+        } elseif ($imageInfo[2] == IMAGETYPE_JPEG2000){
             $imageDictionary->Filter       = new InternalType\NameObject('JPXDecode');
         }
 
@@ -103,21 +103,24 @@ class Jpeg extends AbstractImage
     /**
      * Image width
      */
-    public function getPixelWidth() {
+    public function getPixelWidth()
+    {
         return $this->_width;
     }
 
     /**
      * Image height
      */
-    public function getPixelHeight() {
+    public function getPixelHeight()
+    {
         return $this->_height;
     }
 
     /**
      * Image properties
      */
-    public function getProperties() {
+    public function getProperties()
+    {
         return $this->_imageProperties;
     }
 }

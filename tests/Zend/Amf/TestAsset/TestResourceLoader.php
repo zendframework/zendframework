@@ -16,8 +16,8 @@ class TestResourceLoader implements PrefixPathMapper
 {
     public $suffix;
     public $namespace = 'ZendTest\\Amf\\TestAsset\\';
-    
-    public function __construct($suffix) 
+
+    public function __construct($suffix)
     {
         $this->suffix = $suffix;
     }
@@ -27,7 +27,7 @@ class TestResourceLoader implements PrefixPathMapper
     public function isLoaded($name) {}
     public function getClassName($name) {}
 
-    public function load($name) 
+    public function load($name)
     {
         return $this->namespace . $name . $this->suffix;
     }

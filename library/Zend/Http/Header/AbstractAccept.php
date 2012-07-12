@@ -27,12 +27,12 @@ abstract class AbstractAccept implements HeaderInterface
     protected $priorityQueue;
     protected $types = array();
 
-    protected $regexAddType; 
-    
+    protected $regexAddType;
+
     /**
      * Factory method: parse Accept header string
-     * 
-     * @param  string $headerLine 
+     *
+     * @param  string $headerLine
      * @return Accept
      */
     public static function fromString($headerLine)
@@ -87,7 +87,7 @@ abstract class AbstractAccept implements HeaderInterface
 
     /**
      * Get field value
-     * 
+     *
      * @return string
      */
     public function getFieldValue()
@@ -101,10 +101,10 @@ abstract class AbstractAccept implements HeaderInterface
 
     /**
      * Add a type, with the given priority
-     * 
-     * @param  string $type 
-     * @param  int|float $priority 
-     * @param  int $level 
+     *
+     * @param  string $type
+     * @param  int|float $priority
+     * @param  int $level
      * @return Accept
      */
     protected function addType($type, $priority = 1, $level = null)
@@ -140,7 +140,7 @@ abstract class AbstractAccept implements HeaderInterface
                 $level
             ));
         }
-        
+
         $this->types[$type] = true;
 
         if (!empty($level)) {
@@ -155,7 +155,7 @@ abstract class AbstractAccept implements HeaderInterface
                 'priority'   => $priority
             );
         }
-        
+
         $value = $type;
         if (!empty($level)) {
             $value .= sprintf(';level=%d', $level);
@@ -170,8 +170,8 @@ abstract class AbstractAccept implements HeaderInterface
 
     /**
      * Does the header have the requested type?
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return bool
      */
     protected function hasType($type)
@@ -184,7 +184,7 @@ abstract class AbstractAccept implements HeaderInterface
         }
 
         // Check for media type
-        if (false !== strstr($type, '/')) {      
+        if (false !== strstr($type, '/')) {
             // Parent type wildcard matching
             $parent = substr($type, 0, strpos($type, '/'));
             if (isset($this->types[$parent . '/*'])) {
@@ -206,7 +206,7 @@ abstract class AbstractAccept implements HeaderInterface
 
     /**
      * Get a prioritized list of types
-     * 
+     *
      * @return PriorityQueue
      */
     public function getPrioritized()
@@ -220,7 +220,7 @@ abstract class AbstractAccept implements HeaderInterface
 
     /**
      * Create the priority queue
-     * 
+     *
      * @return void
      */
     protected function createPriorityQueue()
@@ -232,7 +232,7 @@ abstract class AbstractAccept implements HeaderInterface
                 continue;
             }
 
-            // Hack to ensure priorities are correct; was not treating 
+            // Hack to ensure priorities are correct; was not treating
             // fractional values correctly
             $suffix = '';
             $level = 0;

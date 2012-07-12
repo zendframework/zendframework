@@ -48,7 +48,8 @@ class Sreg extends AbstractExtension
      *
      * @return array
      */
-    public function getProperties() {
+    public function getProperties()
+    {
         if (is_array($this->_props)) {
             return $this->_props;
         } else {
@@ -61,7 +62,8 @@ class Sreg extends AbstractExtension
      *
      * @return string
      */
-    public function getPolicyUrl() {
+    public function getPolicyUrl()
+    {
         return $this->_policy_url;
     }
 
@@ -70,7 +72,8 @@ class Sreg extends AbstractExtension
      *
      * @return float
      */
-    public function getVersion() {
+    public function getVersion()
+    {
         return $this->_version;
     }
 

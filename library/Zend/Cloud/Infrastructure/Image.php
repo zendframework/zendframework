@@ -12,11 +12,11 @@ namespace Zend\Cloud\Infrastructure;
 
 /**
  * Instance of an infrastructure service
- * 
+ *
  * @package    Zend_Cloud
  * @subpackage Infrastructure
  */
-class Image 
+class Image
 {
     const IMAGE_ID           = 'imageId';
     const IMAGE_OWNERID      = 'ownerId';
@@ -31,37 +31,37 @@ class Image
 
     /**
      * Image's attributes
-     * 
+     *
      * @var array
      */
     protected $attributes = array();
 
     /**
      * The Image adapter (if exists)
-     * 
+     *
      * @var object
      */
     protected $adapter;
 
     /**
      * Required attributes
-     * 
+     *
      * @var array
      */
     protected $attributeRequired = array(
-        self::IMAGE_ID, 
-        self::IMAGE_DESCRIPTION, 
-        self::IMAGE_PLATFORM, 
+        self::IMAGE_ID,
+        self::IMAGE_DESCRIPTION,
+        self::IMAGE_PLATFORM,
         self::IMAGE_ARCHITECTURE,
     );
 
     /**
      * Constructor
-     * 
+     *
      * @param array $data
-     * @param object $adapter 
+     * @param object $adapter
      */
-    public function __construct($data, $adapter = null) 
+    public function __construct($data, $adapter = null)
     {
         if (is_object($data)) {
             if (method_exists($data, 'toArray')) {
@@ -70,7 +70,7 @@ class Image
                 $data = iterator_to_array($data);
             }
         }
-        
+
         if (empty($data) || !is_array($data)) {
             throw new Exception\InvalidArgumentException('You must pass an array of parameters');
         }
@@ -95,7 +95,7 @@ class Image
      * @param array $data
      * @return mixed|boolean
      */
-    public function getAttribute($key) 
+    public function getAttribute($key)
     {
         if (!empty($this->attributes[$key])) {
             return $this->attributes[$key];
@@ -105,7 +105,7 @@ class Image
 
     /**
      * Get all the attributes
-     * 
+     *
      * @return array
      */
     public function getAttributes()
@@ -115,7 +115,7 @@ class Image
 
     /**
      * Get the image ID
-     * 
+     *
      * @return string
      */
     public function getId()
@@ -125,7 +125,7 @@ class Image
 
     /**
      * Get the Owner ID
-     * 
+     *
      * @return string
      */
     public function getOwnerId()
@@ -135,8 +135,8 @@ class Image
 
     /**
      * Get the name
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getName()
     {
@@ -145,8 +145,8 @@ class Image
 
     /**
      * Get the description
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getDescription()
     {
@@ -155,8 +155,8 @@ class Image
 
     /**
      * Get the platform
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getPlatform()
     {
@@ -165,8 +165,8 @@ class Image
 
     /**
      * Get the architecture
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getArchitecture()
     {

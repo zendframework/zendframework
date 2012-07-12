@@ -23,19 +23,19 @@ class InstanceManager /* implements InstanceManagerInterface */
      * @var array
      */
     protected $sharedInstancesWithParams = array('hashShort' => array(), 'hashLong' => array());
-    
+
     /**
      * Array of class aliases
      * @var array key: alias, value: class
      */
     protected $aliases = array();
-    
+
     /**
      * The template to use for housing configuration information
-     * @var array 
+     * @var array
      */
     protected $configurationTemplate = array(
-        /** 
+        /**
          * alias|class => alias|class
          * interface|abstract => alias|class|object
          * name => value
@@ -56,13 +56,13 @@ class InstanceManager /* implements InstanceManagerInterface */
      * @var array
      */
     protected $configurations = array();
-    
+
     /**
      * An array of globally preferred implementations for interfaces/abstracts
      * @var array
      */
     protected $typePreferences = array();
-    
+
     /**
      * Does this instance manager have this shared instance
      * @return bool
@@ -71,7 +71,7 @@ class InstanceManager /* implements InstanceManagerInterface */
     {
         return isset($this->sharedInstances[$classOrAlias]);
     }
-    
+
     /**
      * getSharedInstance()
      */
@@ -130,8 +130,8 @@ class InstanceManager /* implements InstanceManagerInterface */
         ksort($params);
         $hashKey = $this->createHashForKeys($classOrAlias, array_keys($params));
         $hashValue = $this->createHashForValues($classOrAlias, $params);
-        
-        if (!isset($this->sharedInstancesWithParams[$hashKey]) 
+
+        if (!isset($this->sharedInstancesWithParams[$hashKey])
             || !is_array($this->sharedInstancesWithParams[$hashKey])) {
             $this->sharedInstancesWithParams[$hashKey] = array();
         }
@@ -139,13 +139,13 @@ class InstanceManager /* implements InstanceManagerInterface */
         $this->sharedInstancesWithParams['hashShort'][$hashKey] = true;
         $this->sharedInstancesWithParams['hashLong'][$hashKey . '/' . $hashValue] = $instance;
     }
-    
+
     public function getSharedInstanceWithParameters($classOrAlias, array $params, $fastHashFromHasLookup = null)
     {
         if ($fastHashFromHasLookup) {
             return $this->sharedInstancesWithParams['hashLong'][$fastHashFromHasLookup];
         }
-        
+
         ksort($params);
         $hashKey = $this->createHashForKeys($classOrAlias, array_keys($params));
         if (isset($this->sharedInstancesWithParams['hashShort'][$hashKey])) {
@@ -177,7 +177,7 @@ class InstanceManager /* implements InstanceManagerInterface */
     {
         return $this->aliases;
     }
-    
+
     /**
      * getClassFromAlias()
      *
@@ -202,7 +202,7 @@ class InstanceManager /* implements InstanceManagerInterface */
         }
         return $alias;
     }
-    
+
     protected function getBaseAlias($alias)
     {
         if (!$this->hasAlias($alias)) {
@@ -217,12 +217,12 @@ class InstanceManager /* implements InstanceManagerInterface */
             if ($r > 100) {
                 throw new Exception\RuntimeException(
                     sprintf('Possible infinite recursion in DI alias! Max recursion of 100 levels reached at alias "%s".', $alias)
-                ); 
+                );
             }
         }
         return $lastAlias;
     }
-    
+
     /**
      * Add alias
      *
@@ -262,7 +262,7 @@ class InstanceManager /* implements InstanceManagerInterface */
         }
         return true;
     }
-    
+
     public function setConfiguration($aliasOrClass, array $configuration, $append = false)
     {
         $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
@@ -297,16 +297,16 @@ class InstanceManager /* implements InstanceManagerInterface */
     {
         $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
         if (isset($this->configurations[$key])) {
-            return $this->configurations[$key];            
+            return $this->configurations[$key];
         } else {
             return $this->configurationTemplate;
         }
     }
-    
+
     /**
      * setParameters() is a convenience method for:
      *    setConfiguration($type, array('parameters' => array(...)), true);
-     *     
+     *
      * @param string $type Alias or Class
      * @param array $parameters Multi-dim array of parameters and their values
      * @return void
@@ -315,11 +315,11 @@ class InstanceManager /* implements InstanceManagerInterface */
     {
         $this->setConfiguration($aliasOrClass, array('parameters' => $parameters), true);
     }
-    
+
     /**
      * setInjections() is a convenience method for:
      *    setConfiguration($type, array('injections' => array(...)), true);
-     *     
+     *
      * @param string $type Alias or Class
      * @param array $methods Multi-dim array of methods and their parameters
      * @return void
@@ -421,7 +421,7 @@ class InstanceManager /* implements InstanceManagerInterface */
     {
         return $classOrAlias . ':' . implode('|', $paramKeys);
     }
-    
+
     protected function createHashForValues($classOrAlias, $paramValues)
     {
         $hashValue = '';

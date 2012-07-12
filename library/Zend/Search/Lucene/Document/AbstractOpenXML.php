@@ -97,7 +97,8 @@ abstract class AbstractOpenXML extends Document
      * @param string $path
      * @return string
      */
-    protected function absoluteZipPath($path) {
+    protected function absoluteZipPath($path)
+    {
         $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
         $parts = array_filter(explode(DIRECTORY_SEPARATOR, $path), 'strlen');
         $absolutes = array();

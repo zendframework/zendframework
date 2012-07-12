@@ -15,7 +15,7 @@ namespace Zend\Authentication\Exception;
  * @package    Zend_Authentication
  * @subpackage Exception
  */
-class UnexpectedValueException extends \UnexpectedValueException implements 
+class UnexpectedValueException extends \UnexpectedValueException implements
     ExceptionInterface
 {
 }

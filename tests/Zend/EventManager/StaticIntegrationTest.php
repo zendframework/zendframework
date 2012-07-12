@@ -32,8 +32,8 @@ class StaticIntegrationTest extends TestCase
         $counter = (object) array('count' => 0);
         $events  = StaticEventManager::getInstance();
         $events->attach(
-            'ZendTest\EventManager\TestAsset\ClassWithEvents', 
-            'foo', 
+            'ZendTest\EventManager\TestAsset\ClassWithEvents',
+            'foo',
             function ($e) use ($counter) {
                 $counter->count++;
             }
@@ -49,8 +49,8 @@ class StaticIntegrationTest extends TestCase
         $test = (object) array('results' => array());
         $events = StaticEventManager::getInstance();
         $events->attach(
-            'ZendTest\EventManager\TestAsset\ClassWithEvents', 
-            'foo', 
+            'ZendTest\EventManager\TestAsset\ClassWithEvents',
+            'foo',
             function ($e) use ($test) {
                 $test->results[] = 'static';
             }
@@ -69,8 +69,8 @@ class StaticIntegrationTest extends TestCase
         $test = (object) array('results' => array());
         $events = StaticEventManager::getInstance();
         $events->attach(
-            'ZendTest\EventManager\TestAsset\ClassWithEvents', 
-            'foo', 
+            'ZendTest\EventManager\TestAsset\ClassWithEvents',
+            'foo',
             function ($e) use ($test) {
                 $test->results[] = 'static';
             },
@@ -95,8 +95,8 @@ class StaticIntegrationTest extends TestCase
     {
         $counter = (object) array('count' => 0);
         StaticEventManager::getInstance()->attach(
-            'ZendTest\EventManager\TestAsset\ClassWithEvents', 
-            'foo', 
+            'ZendTest\EventManager\TestAsset\ClassWithEvents',
+            'foo',
             function ($e) use ($counter) {
                 $counter->count++;
             }
@@ -111,8 +111,8 @@ class StaticIntegrationTest extends TestCase
     {
         $counter = (object) array('count' => 0);
         StaticEventManager::getInstance()->attach(
-            'ZendTest\EventManager\TestAsset\ClassWithEvents', 
-            'foo', 
+            'ZendTest\EventManager\TestAsset\ClassWithEvents',
+            'foo',
             function ($e) use ($counter) {
                 $counter->count++;
             }
@@ -130,8 +130,8 @@ class StaticIntegrationTest extends TestCase
         $test = (object) array('results' => array());
         $events = StaticEventManager::getInstance();
         $events->attach(
-            'ZendTest\EventManager\TestAsset\ClassWithEvents', 
-            'foo', 
+            'ZendTest\EventManager\TestAsset\ClassWithEvents',
+            'foo',
             function ($e) use ($test) {
                 $test->results[] = 'static';
             },

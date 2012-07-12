@@ -79,7 +79,7 @@ class StreamResponse implements ResponseInterface
             $stream->writeByte($header->mustRead);
             $stream->writeLong(Amf\Constants::UNKNOWN_CONTENT_LENGTH);
             if (is_object($header->data)) {
-                // Workaround for PHP5 with E_STRICT enabled complaining about 
+                // Workaround for PHP5 with E_STRICT enabled complaining about
                 // "Only variables should be passed by reference"
                 $placeholder = null;
                 $serializer->writeTypeMarker($placeholder, null, $header->data);
@@ -99,7 +99,7 @@ class StreamResponse implements ResponseInterface
             $bodyData   = $body->getData();
             $markerType = ($this->_objectEncoding == Amf\Constants::AMF0_OBJECT_ENCODING) ? null : Amf\Constants::AMF0_AMF3;
             if (is_object($bodyData)) {
-                // Workaround for PHP5 with E_STRICT enabled complaining about 
+                // Workaround for PHP5 with E_STRICT enabled complaining about
                 // "Only variables should be passed by reference"
                 $placeholder = null;
                 $serializer->writeTypeMarker($placeholder, $markerType, $bodyData);

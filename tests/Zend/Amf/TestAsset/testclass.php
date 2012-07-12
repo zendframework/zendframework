@@ -10,7 +10,8 @@
 
 namespace ZendTest\Amf\TestAsset;
 
-class testclass {
+class testclass
+{
     function returnFile()
     {
         return fopen(__DIR__ . "/testdata", "r");

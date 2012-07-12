@@ -67,12 +67,14 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Schedule an entry for deletion at test tear-down.
-    protected function autoDelete($entry) {
+    protected function autoDelete($entry)
+    {
         $this->autoDeletePool[] = $entry;
     }
 
     // Test Create/Read/Update/Destroy operations on a UserEntry
-    public function testUserCRUDOperations() {
+    public function testUserCRUDOperations()
+    {
         // Create a new user
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
@@ -109,7 +111,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
 
     // Test to make sure that users with unicode characters can be created
     // okay.
-    public function testUsersSupportUnicode() {
+    public function testUsersSupportUnicode()
+    {
         // Create a user
         $user = $this->gdata->createUser($this->id, 'テスト', 'ユーザー',
             sha1(self::PASSWORD), self::PASSWORD_HASH);
@@ -121,14 +124,16 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test to make sure that a page of users can be retrieved.
-    public function testRetrievePageOfUsers() {
+    public function testRetrievePageOfUsers()
+    {
         $feed = $this->gdata->retrievePageOfUsers();
         $this->assertTrue(count($feed->entries) > 0);
     }
 
     // Test to make sure that a page of users can be retrieved with a
     // startUsername parameter.
-    public function testRetrievePageOfUsersWithStartingUsername() {
+    public function testRetrievePageOfUsersWithStartingUsername()
+    {
         $feed = $this->gdata->retrievePageOfUsers();
         $this->assertTrue(count($feed->entries) > 0);
         $username = $feed->entries[0]->login->username;
@@ -139,7 +144,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     // Test to see if all users can be retrieved
     // NOTE: This test may timeout if the domain used for testing contains
     //       many pages of users.
-    public function testRetrieveAllUsers() {
+    public function testRetrieveAllUsers()
+    {
         // Create 35 users to make sure that there's more than one page.
         for ($i = 0; $i < 25; $i++) {
             $user = $this->gdata->createUser(uniqid('ZF-'), self::GIVEN_NAME,
@@ -152,7 +158,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test to see if a user can be manually updated by calling updateUser().
-    public function testManualUserEntryUpdate() {
+    public function testManualUserEntryUpdate()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
@@ -162,7 +169,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test to see if a user can be suspended, then un-suspended
-    public function testCanSuspendAndRestoreUser() {
+    public function testCanSuspendAndRestoreUser()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
@@ -179,7 +187,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test the convenience delete method for users
-    public function testCanDeleteUser() {
+    public function testCanDeleteUser()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
@@ -196,7 +205,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($rUser);
     }
 
-    public function testNicknameCRUDOperations() {
+    public function testNicknameCRUDOperations()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
@@ -224,7 +234,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($nickname);
     }
 
-    public function testRetrieveNicknames() {
+    public function testRetrieveNicknames()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME,
             self::FAMILY_NAME, sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
@@ -247,7 +258,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($generatedNickname));
     }
 
-    public function testRetrievePageOfNicknames() {
+    public function testRetrievePageOfNicknames()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME,
             self::FAMILY_NAME, sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
@@ -264,7 +276,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(count($results->entry) >= 5);
     }
 
-    public function testRetrieveAllNicknames() {
+    public function testRetrieveAllNicknames()
+    {
         // Create 3 users, each with 10 nicknames
         for ($i = 0; $i < 3; $i++) {
             $user = $this->gdata->createUser(uniqid('ZF-'), self::GIVEN_NAME,
@@ -283,7 +296,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test the convenience delete method for nicknames
-    public function testCanDeleteNickname() {
+    public function testCanDeleteNickname()
+    {
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
         $this->autoDelete($user);
@@ -302,7 +316,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($rNick);
     }
 
-    public function testGroupCRUDOperations() {
+    public function testGroupCRUDOperations()
+    {
         // Create group
         $generatedGroupName = strtolower(uniqid('zf-group-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'zf-group-',
@@ -335,7 +350,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testCanAssignMultipleGroupsToOneUser() {
+    public function testCanAssignMultipleGroupsToOneUser()
+    {
         // Create a user
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
@@ -358,7 +374,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testCanRetrievePageOfGroups() {
+    public function testCanRetrievePageOfGroups()
+    {
         // Create a group
         $generatedGroupName = strtolower(uniqid('zf-group-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
@@ -371,7 +388,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testCanRetrieveAllGroups() {
+    public function testCanRetrieveAllGroups()
+    {
         // Create a couple of users to make sure we don't hit the limit
         // on the max number of groups.
         for ($i = 0; $i < 3; $i++) {
@@ -396,7 +414,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test the convenience delete method for groups
-    public function testCanDeleteGroup() {
+    public function testCanDeleteGroup()
+    {
         // Create a group
         $generatedGroupName = strtolower(uniqid('zf-group-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
@@ -432,7 +451,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testCanRetrievePageOfMembers() {
+    public function testCanRetrievePageOfMembers()
+    {
         // Create a new group
         $generatedGroupName = strtolower(uniqid('zf-group-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
@@ -457,7 +477,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testCanRetrievAllMembers() {
+    public function testCanRetrievAllMembers()
+    {
         // Create a new group
         $generatedGroupName = strtolower(uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
@@ -482,7 +503,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test the convenience removeMemberFromGroup method for group members
-    public function testCanRemoveMemberFromGroup() {
+    public function testCanRemoveMemberFromGroup()
+    {
         // Create a group
         $generatedGroupName = strtolower(uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
@@ -509,7 +531,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testCanRetrieveGroupOwners() {
+    public function testCanRetrieveGroupOwners()
+    {
         // Create a new group
         $generatedGroupName = strtolower(uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
@@ -534,7 +557,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test the convenience removeOwnerFromGroup method for group owners
-    public function testCanRemoveOwnerFromGroup() {
+    public function testCanRemoveOwnerFromGroup()
+    {
         // Create a group
         $generatedGroupName = strtolower(uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
@@ -561,7 +585,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test the convenience isMember method
-    public function testIsMember() {
+    public function testIsMember()
+    {
         // Create a group
         $generatedGroupName = strtolower(uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
@@ -585,7 +610,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test the convenience isOwner method
-    public function testIsOwner() {
+    public function testIsOwner()
+    {
         // Create a group
         $generatedGroupName = strtolower(uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
@@ -609,7 +635,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test the convenience updateGroup method
-    public function testCanUpdateGroup() {
+    public function testCanUpdateGroup()
+    {
         // Create a group
         $generatedGroupName = strtolower(uniqid('zf-list-'));
         $group = $this->gdata->createGroup($generatedGroupName, 'Test Group',
@@ -634,7 +661,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testEmailListCRUDOperations() {
+    public function testEmailListCRUDOperations()
+    {
         // Create email list
         $generatedListName = strtolower(uniqid('zf-list-'));
         $list = $this->gdata->createEmailList($generatedListName);
@@ -656,7 +684,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($entryCount - 1, count($listFeed->entry));
     }
 
-    public function testCanAssignMultipleEmailListsToOneUser() {
+    public function testCanAssignMultipleEmailListsToOneUser()
+    {
         // Create a user
         $user = $this->gdata->createUser($this->id, self::GIVEN_NAME, self::FAMILY_NAME,
             sha1(self::PASSWORD), self::PASSWORD_HASH);
@@ -677,7 +706,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($listCount, count($subscriptions->entry));
     }
 
-    public function testCanRetrievePageOfEmailLists() {
+    public function testCanRetrievePageOfEmailLists()
+    {
         // Create an email list
         $generatedListName = strtolower(uniqid('zf-list-'));
         $list = $this->gdata->createEmailList($generatedListName);
@@ -688,7 +718,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(count($feed->entry) > 0);
     }
 
-    public function testCanRetrieveAllEmailLists() {
+    public function testCanRetrieveAllEmailLists()
+    {
         // Create a couple of users to make sure we don't hit the limit
         // on the max number of email lists.
         for ($i = 0; $i < 3; $i++) {
@@ -711,7 +742,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test the convenience delete method for email lists
-    public function testCanDeleteEmailList() {
+    public function testCanDeleteEmailList()
+    {
         // Create an email list
         $generatedListName = strtolower(uniqid('zf-list-'));
         $list = $this->gdata->createEmailList($generatedListName);
@@ -745,7 +777,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testCanRetrievePageOfRecipients() {
+    public function testCanRetrievePageOfRecipients()
+    {
         // Create a new email list
         $generatedListName = strtolower(uniqid('zf-list-'));
         $list = $this->gdata->createEmailList($generatedListName);
@@ -769,7 +802,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(count($recipientFeed->entry) == $userCount);
     }
 
-    public function testCanRetrievAllRecipients() {
+    public function testCanRetrievAllRecipients()
+    {
         // Create a new email list
         $generatedListName = strtolower(uniqid('zf-list-'));
         $list = $this->gdata->createEmailList($generatedListName);
@@ -795,7 +829,8 @@ class GAppsOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     // Test the convenience delete method for email list recipients
-    public function testCanDeleteEmailListRecipient() {
+    public function testCanDeleteEmailListRecipient()
+    {
         // Create an email list
         $generatedListName = strtolower(uniqid('zf-list-'));
         $list = $this->gdata->createEmailList($generatedListName);

@@ -40,10 +40,10 @@ class Pbkdf2
         $result = '';
         for ($block = 1; $block <= $num; $block++) {
             $hmac = Hmac::compute($password, $hash, $salt . pack('N', $block), Hmac::OUTPUT_BINARY);
-            $mix  = $hmac; 
+            $mix  = $hmac;
             for ($i = 1; $i < $iterations; $i++) {
                 $hmac = Hmac::compute($password, $hash, $hmac, Hmac::OUTPUT_BINARY);
-                $mix ^= $hmac;    
+                $mix ^= $hmac;
             }
             $result .= $mix;
         }

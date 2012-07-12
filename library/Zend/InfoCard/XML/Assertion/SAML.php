@@ -40,11 +40,13 @@ class SAML extends AbstractElement implements AssertionInterface
      */
     const CONDITION_TIME_ADJ = 3600; // +- 5 minutes
 
-    protected function _getServerName() {
+    protected function _getServerName()
+    {
         return $_SERVER['SERVER_NAME'];
     }
 
-    protected function _getServerPort() {
+    protected function _getServerPort()
+    {
         return $_SERVER['SERVER_PORT'];
     }
 

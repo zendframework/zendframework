@@ -14,7 +14,7 @@ namespace Zend\Amf\Exception;
  * @category   Zend
  * @package    Zend_Amf
  */
-class InvalidArgumentException extends \InvalidArgumentException implements 
+class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
 {
 }

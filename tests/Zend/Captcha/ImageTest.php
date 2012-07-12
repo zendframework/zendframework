@@ -46,7 +46,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         if (isset($this->word)) {
             unset($this->word);
         }
-        
+
         $this->testDir = $this->getTmpDir() . '/ZF_test_images';
         if (!is_dir($this->testDir)) {
             @mkdir($this->testDir);

@@ -32,7 +32,7 @@ class ViewModel extends AbstractHelper
 
     /**
      * Get the root view model
-     * 
+     *
      * @return null|Model
      */
     public function getRoot()
@@ -42,7 +42,7 @@ class ViewModel extends AbstractHelper
 
     /**
      * Is a root view model composed?
-     * 
+     *
      * @return bool
      */
     public function hasRoot()
@@ -52,7 +52,7 @@ class ViewModel extends AbstractHelper
 
     /**
      * Get the current view model
-     * 
+     *
      * @return null|Model
      */
     public function getCurrent()
@@ -62,7 +62,7 @@ class ViewModel extends AbstractHelper
 
     /**
      * Is a current view model composed?
-     * 
+     *
      * @return bool
      */
     public function hasCurrent()
@@ -72,8 +72,8 @@ class ViewModel extends AbstractHelper
 
     /**
      * Set the root view model
-     * 
-     * @param  Model $model 
+     *
+     * @param  Model $model
      * @return ViewModel
      */
     public function setRoot(Model $model)
@@ -84,8 +84,8 @@ class ViewModel extends AbstractHelper
 
     /**
      * Set the current view model
-     * 
-     * @param  Model $model 
+     *
+     * @param  Model $model
      * @return ViewModel
      */
     public function setCurrent(Model $model)

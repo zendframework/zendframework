@@ -17,7 +17,7 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Plugin manager implementation for cache plugins
  *
  * Enforces that plugins retrieved are instances of
- * Plugin\PluginInterface. Additionally, it registers a number of default 
+ * Plugin\PluginInterface. Additionally, it registers a number of default
  * plugins available.
  *
  * @category   Zend
@@ -28,7 +28,7 @@ class PluginManager extends AbstractPluginManager
 {
     /**
      * Default set of plugins
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -41,7 +41,7 @@ class PluginManager extends AbstractPluginManager
 
     /**
      * Do not share by default
-     * 
+     *
      * @var array
      */
     protected $shareByDefault = false;
@@ -50,8 +50,8 @@ class PluginManager extends AbstractPluginManager
      * Validate the plugin
      *
      * Checks that the plugin loaded is an instance of Plugin\PluginInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */

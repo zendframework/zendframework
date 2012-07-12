@@ -85,11 +85,9 @@ class TableEntityTest extends \PHPUnit_Framework_TestCase
 
         $exceptionRaised = false;
         $target = new TestAsset\Entity();
-        try
-        {
+        try {
             $target->setAzureValues($values, true);
-        }
-        catch (\Exception $ex) {
+        } catch (\Exception $ex) {
             $exceptionRaised = true;
         }
 

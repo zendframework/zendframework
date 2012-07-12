@@ -26,7 +26,7 @@ class Deleted
      * @var array
      */
     protected $_data = array();
-    
+
     /**
      * Holds the value "atom" or "rss" depending on the feed type set when
      * when last exported.
@@ -34,7 +34,7 @@ class Deleted
      * @var string
      */
     protected $_type = null;
-    
+
     /**
      * Set the feed character encoding
      *
@@ -61,7 +61,7 @@ class Deleted
         }
         return $this->_data['encoding'];
     }
-    
+
     /**
      * Unset a specific data point
      *
@@ -73,7 +73,7 @@ class Deleted
             unset($this->_data[$name]);
         }
     }
-    
+
     /**
      * Set the current feed type being exported to "rss" or "atom". This allows
      * other objects to gracefully choose whether to execute or not, depending
@@ -85,7 +85,7 @@ class Deleted
     {
         $this->_type = $type;
     }
-    
+
     /**
      * Retrieve the current or last feed type exported.
      *
@@ -109,7 +109,7 @@ class Deleted
         }
         $this->_data['reference'] = $reference;
     }
-    
+
     public function getReference()
     {
         if (!array_key_exists('reference', $this->_data)) {
@@ -157,8 +157,8 @@ class Deleted
     public function setBy(array $by)
     {
         $author = array();
-        if (!array_key_exists('name', $by) 
-            || empty($by['name']) 
+        if (!array_key_exists('name', $by)
+            || empty($by['name'])
             || !is_string($by['name'])
         ) {
             throw new Exception\InvalidArgumentException('Invalid parameter: author array must include a'
@@ -173,8 +173,8 @@ class Deleted
             $author['email'] = $by['email'];
         }
         if (isset($by['uri'])) {
-            if (empty($by['uri']) 
-                || !is_string($by['uri']) 
+            if (empty($by['uri'])
+                || !is_string($by['uri'])
                 || !Uri\UriFactory::factory($by['uri'])->isValid()
             ) {
                 throw new Exception\InvalidArgumentException('Invalid parameter: "uri" array value must'
@@ -184,7 +184,7 @@ class Deleted
         }
         $this->_data['by'] = $author;
     }
-    
+
     public function getBy()
     {
         if (!array_key_exists('by', $this->_data)) {
@@ -192,12 +192,12 @@ class Deleted
         }
         return $this->_data['by'];
     }
-    
+
     public function setComment($comment)
     {
         $this->_data['comment'] = $comment;
     }
-    
+
     public function getComment()
     {
         if (!array_key_exists('comment', $this->_data)) {

@@ -66,7 +66,7 @@ class ObjectList implements
 
     /**
      * Constructor
-     * 
+     *
      * @param array $list
      */
     public function __construct(array $list = array())
@@ -90,7 +90,7 @@ class ObjectList implements
         }
         if (!$this->_error) {
             $this->_constructFromArray($list['list']);
-        }    
+        }
     }
 
     /**
@@ -254,19 +254,21 @@ class ObjectList implements
 
     /**
      * Check if the service call was successful
-     * 
+     *
      * @return boolen
      */
-    public function isSuccess() {
+    public function isSuccess()
+    {
         return ($this->_error===false);
     }
 
     /**
      * Get the error masg
-     * 
-     * @return string 
+     *
+     * @return string
      */
-    public function getError() {
+    public function getError()
+    {
         return $this->_errorMsg;
     }
 
@@ -276,7 +278,8 @@ class ObjectList implements
      * @param string $key
      * @return string|array
      */
-    public function getSummary($key=null) {
+    public function getSummary($key=null)
+    {
         if (!empty($key)) {
             if (array_key_exists($key, $this->_summary)) {
                 return $this->_summary[$key];
@@ -292,7 +295,8 @@ class ObjectList implements
      *
      * @return string
      */
-    public function getMethod() {
+    public function getMethod()
+    {
         return $this->_method;
     }
 
@@ -301,7 +305,8 @@ class ObjectList implements
      *
      * @return string
      */
-    public function getStatus() {
+    public function getStatus()
+    {
         return $this->_status;
     }
 }

@@ -15,9 +15,9 @@ namespace My;
  * @package    Zend_Amf
  * @subpackage UnitTests
  */
-class ServiceA 
+class ServiceA
 {
-    function __construct() 
+    function __construct()
     {
         //Construction...
     }

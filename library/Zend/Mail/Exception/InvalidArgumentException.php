@@ -16,7 +16,7 @@ namespace Zend\Mail\Exception;
  * @category   Zend
  * @package    Zend_Mail
  */
-class InvalidArgumentException extends \InvalidArgumentException implements 
+class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
 {
 }

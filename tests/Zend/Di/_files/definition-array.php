@@ -1,20 +1,20 @@
 <?php return array (
-  'My\\DbAdapter' => 
+  'My\\DbAdapter' =>
   array (
-    'superTypes' => 
+    'superTypes' =>
     array (
     ),
     'instantiator' => '__construct',
     'methods' =>
     array (
-      '__construct' => 
+      '__construct' =>
       array (
         'username' => NULL,
         'password' => NULL,
       ),
     ),
   ),
-  'My\\EntityA' => 
+  'My\\EntityA' =>
   array (
     'supertypes' =>
     array (
@@ -24,7 +24,7 @@
     array (
     ),
   ),
-  'My\\Mapper' => 
+  'My\\Mapper' =>
   array (
     'supertypes' =>
     array (
@@ -33,27 +33,27 @@
     'instantiator' => '__construct',
     'methods' =>
     array (
-      'setDbAdapter' => 
+      'setDbAdapter' =>
       array (
         'dbAdapter' => 'My\\DbAdapter',
       ),
     ),
   ),
-  'My\\RepositoryA' => 
+  'My\\RepositoryA' =>
   array (
     'superTypes' =>
     array (
     ),
     'instantiator' => '__construct',
-    'injectionMethods' => 
+    'injectionMethods' =>
     array (
-      'setMapper' => 
+      'setMapper' =>
       array (
         'mapper' => 'My\\Mapper',
       ),
     ),
   ),
-  'My\\RepositoryB' => 
+  'My\\RepositoryB' =>
   array (
     'superTypes' =>
     array (

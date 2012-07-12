@@ -20,10 +20,10 @@ namespace Zend\Http\Header;
 class AcceptCharset extends AbstractAccept
 {
     protected $regexAddType = '#^([a-zA-Z0-9+-]+|\*)$#';
-    
+
     /**
      * Get field name
-     * 
+     *
      * @return string
      */
     public function getFieldName()
@@ -33,30 +33,30 @@ class AcceptCharset extends AbstractAccept
 
     /**
      * Cast to string
-     * 
+     *
      * @return string
      */
     public function toString()
     {
         return 'Accept-Charset: ' . $this->getFieldValue();
     }
-    
+
     /**
      * Add a charset, with the given priority
-     * 
-     * @param  string $type 
-     * @param  int|float $priority 
+     *
+     * @param  string $type
+     * @param  int|float $priority
      * @return Accept
      */
     public function addCharset($type, $priority = 1)
     {
         return $this->addType($type, $priority);
     }
-    
+
     /**
      * Does the header have the requested charset?
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return bool
      */
     public function hasCharset($type)

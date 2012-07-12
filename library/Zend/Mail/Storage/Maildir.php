@@ -276,7 +276,7 @@ class Maildir extends AbstractStorage
         if ($dh) {
             $this->_getMaildirFiles($dh, $dirname . '/new/', array(Mail\Storage::FLAG_RECENT));
             closedir($dh);
-        } else if (file_exists($dirname . '/new/')) {
+        } elseif (file_exists($dirname . '/new/')) {
             throw new Exception\RuntimeException('cannot read recent mails in maildir');
         }
     }

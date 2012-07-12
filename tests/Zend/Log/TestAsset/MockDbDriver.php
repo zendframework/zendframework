@@ -17,5 +17,5 @@ class MockDbDriver
     {
         $this->calls[$method][] = $params;
     }
-    
+
 }

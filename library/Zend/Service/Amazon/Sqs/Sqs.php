@@ -180,7 +180,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
 
         if ($result->SendMessageResult->MessageId === null) {
             throw new Exception\RuntimeException($result->Error->Code);
-        } else if ((string) $result->SendMessageResult->MD5OfMessageBody != $checksum) {
+        } elseif ((string) $result->SendMessageResult->MD5OfMessageBody != $checksum) {
             throw new Exception\RuntimeException('MD5 of body does not match message sent');
         }
 
@@ -273,7 +273,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
         if ($result->GetQueueAttributesResult->Attribute === null) {
             throw new Exception\RuntimeException($result->Error->Code);
         }
-        
+
         if(count($result->GetQueueAttributesResult->Attribute) > 1) {
             $attr_result = array();
             foreach($result->GetQueueAttributesResult->Attribute as $attribute) {
@@ -396,8 +396,7 @@ class Sqs extends \Zend\Service\Amazon\AbstractAmazon
         $data .= $this->_sqsEndpoint . "\n";
         if ($queue_url !== null) {
             $data .= parse_url($queue_url, PHP_URL_PATH);
-        }
-        else {
+        } else {
             $data .= '/';
         }
         $data .= "\n";

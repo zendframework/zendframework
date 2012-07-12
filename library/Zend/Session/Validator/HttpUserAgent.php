@@ -42,7 +42,7 @@ class HttpUserAgent implements ValidatorInterface
     public function isValid()
     {
         $userAgent = isset($_SERVER['HTTP_USER_AGENT'])
-                   ? $_SERVER['HTTP_USER_AGENT'] 
+                   ? $_SERVER['HTTP_USER_AGENT']
                    : null;
 
         return $userAgent === $this->getData();
@@ -50,7 +50,7 @@ class HttpUserAgent implements ValidatorInterface
 
     /**
      * Retrieve token for validating call
-     * 
+     *
      * @return string
      */
     public function getData()
@@ -60,7 +60,7 @@ class HttpUserAgent implements ValidatorInterface
 
     /**
      * Return validator name
-     * 
+     *
      * @return string
      */
     public function getName()

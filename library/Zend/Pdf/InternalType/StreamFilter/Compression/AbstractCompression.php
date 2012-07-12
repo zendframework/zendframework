@@ -41,7 +41,7 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter\Stre
         // breaking ties in order a,b,c.
         if ($pa <= $pb && $pa <= $pc) {
             return $a;
-        } else if ($pb <= $pc) {
+        } elseif ($pb <= $pc) {
             return $b;
         } else {
             return $c;
@@ -140,7 +140,8 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter\Stre
      * @return string
      * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
-    protected static function _applyEncodeParams($data, $params) {
+    protected static function _applyEncodeParams($data, $params)
+    {
         $predictor        = self::_getPredictorValue($params);
         $colors           = self::_getColorsValue($params);
         $bitsPerComponent = self::_getBitsPerComponentValue($params);
@@ -271,7 +272,8 @@ abstract class AbstractCompression implements Pdf\InternalType\StreamFilter\Stre
      * @param array $params
      * @return string
      */
-    protected static function _applyDecodeParams($data, $params) {
+    protected static function _applyDecodeParams($data, $params)
+    {
         $predictor        = self::_getPredictorValue($params);
         $colors           = self::_getColorsValue($params);
         $bitsPerComponent = self::_getBitsPerComponentValue($params);

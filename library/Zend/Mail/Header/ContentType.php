@@ -53,7 +53,7 @@ class ContentType implements HeaderInterface
                 $header->addParameter($key, $value);
             }
         }
-        
+
         return $header;
     }
 
@@ -77,7 +77,7 @@ class ContentType implements HeaderInterface
         return implode(';' . Headers::FOLDING, $values);
     }
 
-    public function setEncoding($encoding) 
+    public function setEncoding($encoding)
     {
         // This header must be always in US-ASCII
         return $this;
@@ -115,7 +115,7 @@ class ContentType implements HeaderInterface
 
     /**
      * Retrieve the content type
-     * 
+     *
      * @return string
      */
     public function getType()
@@ -125,9 +125,9 @@ class ContentType implements HeaderInterface
 
     /**
      * Add a parameter pair
-     * 
-     * @param  string $name 
-     * @param  string $value 
+     *
+     * @param  string $name
+     * @param  string $value
      * @return ContentType
      */
     public function addParameter($name, $value)
@@ -139,7 +139,7 @@ class ContentType implements HeaderInterface
 
     /**
      * Get all parameters
-     * 
+     *
      * @return array
      */
     public function getParameters()
@@ -149,8 +149,8 @@ class ContentType implements HeaderInterface
 
     /**
      * Get a parameter by name
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return null|string
      */
     public function getParameter($name)
@@ -164,8 +164,8 @@ class ContentType implements HeaderInterface
 
     /**
      * Remove a named parameter
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return bool
      */
     public function removeParameter($name)

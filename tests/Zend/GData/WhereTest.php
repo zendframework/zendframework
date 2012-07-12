@@ -21,36 +21,42 @@ use Zend\GData\Extension;
 class WhereTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->whereText = file_get_contents(
                 'Zend/GData/_files/WhereElementSample1.xml',
                 true);
         $this->where = new Extension\Where();
     }
 
-    public function testEmptyWhereShouldHaveNoExtensionElements() {
+    public function testEmptyWhereShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->where->extensionElements));
         $this->assertTrue(count($this->where->extensionElements) == 0);
     }
 
-    public function testEmptyWhereShouldHaveNoExtensionAttributes() {
+    public function testEmptyWhereShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->where->extensionAttributes));
         $this->assertTrue(count($this->where->extensionAttributes) == 0);
     }
 
-    public function testSampleWhereShouldHaveNoExtensionElements() {
+    public function testSampleWhereShouldHaveNoExtensionElements()
+    {
         $this->where->transferFromXML($this->whereText);
         $this->assertTrue(is_array($this->where->extensionElements));
         $this->assertTrue(count($this->where->extensionElements) == 0);
     }
 
-    public function testSampleWhereShouldHaveNoExtensionAttributes() {
+    public function testSampleWhereShouldHaveNoExtensionAttributes()
+    {
         $this->where->transferFromXML($this->whereText);
         $this->assertTrue(is_array($this->where->extensionAttributes));
         $this->assertTrue(count($this->where->extensionAttributes) == 0);
     }
 
-    public function testNormalWhereShouldHaveNoExtensionElements() {
+    public function testNormalWhereShouldHaveNoExtensionElements()
+    {
         $this->where->valueString = "Test Value String";
         $this->where->rel = "http://schemas.google.com/g/2005#event.alternate";
         $this->where->label = "Test Label";
@@ -80,7 +86,8 @@ class WhereTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Test Label", $newWhere2->label);
     }
 
-    public function testEmptyWhereToAndFromStringShouldMatch() {
+    public function testEmptyWhereToAndFromStringShouldMatch()
+    {
         $whereXml = $this->where->saveXML();
         $newWhere = new Extension\Where();
         $newWhere->transferFromXML($whereXml);
@@ -88,7 +95,8 @@ class WhereTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($whereXml == $newWhereXml);
     }
 
-    public function testWhereWithValueToAndFromStringShouldMatch() {
+    public function testWhereWithValueToAndFromStringShouldMatch()
+    {
         $this->where->valueString = "Test Value String";
         $this->where->rel = "http://schemas.google.com/g/2005#event.alternate";
         $this->where->label = "Test Label";
@@ -102,7 +110,8 @@ class WhereTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Test Label", $this->where->label);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->where->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -116,7 +125,8 @@ class WhereTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newWhere->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullWhereToAndFromString() {
+    public function testConvertFullWhereToAndFromString()
+    {
         $this->where->transferFromXML($this->whereText);
         $this->assertEquals("Joe's Pub", $this->where->valueString);
         $this->assertEquals("http://schemas.google.com/g/2005#event", $this->where->rel);

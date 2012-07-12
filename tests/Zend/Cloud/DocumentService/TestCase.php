@@ -352,7 +352,8 @@ abstract class TestCase extends PHPUnitTestCase
         return $this->_dummyCollectionNamePrefix . $name; //.mt_rand();
     }
 
-    protected function _wait() {
+    protected function _wait()
+    {
         sleep($this->_waitPeriod);
     }
 

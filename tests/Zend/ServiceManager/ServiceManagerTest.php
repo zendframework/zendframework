@@ -489,8 +489,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     public function testAssignAliasWithExistingServiceName()
     {
         $this->serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\FooFactory');
-        $this->serviceManager->setFactory('bar', function ($sm)
-            {
+        $this->serviceManager->setFactory('bar', function ($sm) {
                 return new Bar(array('a'));
             });
         $this->serviceManager->setAllowOverride(false);

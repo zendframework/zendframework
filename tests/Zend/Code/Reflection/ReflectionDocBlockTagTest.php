@@ -82,7 +82,7 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
         $paramTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('param');
 
-        
+
         $this->assertEquals($paramTag->getType(), 'int', 'Second Match Failed');
         $this->assertEquals($paramTag->getVariableName(), '$var', 'Third Match Failed');
         $this->assertEquals($paramTag->getDescription(),'Description of $var', 'Final Match Failed');
@@ -97,7 +97,7 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass7');
         $paramTag        = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('param');
 
-        
+
         $this->assertEquals('Zend\Foo\Bar', $paramTag->getType());
         $this->assertEquals('$var', $paramTag->getVariableName());
         $this->assertEquals('desc', $paramTag->getDescription());

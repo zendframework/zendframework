@@ -22,7 +22,7 @@ class SplQueue extends \SplQueue implements Serializable
 {
     /**
      * Return an array representing the queue
-     * 
+     *
      * @return array
      */
     public function toArray()
@@ -36,7 +36,7 @@ class SplQueue extends \SplQueue implements Serializable
 
     /**
      * Serialize
-     * 
+     *
      * @return string
      */
     public function serialize()
@@ -46,7 +46,7 @@ class SplQueue extends \SplQueue implements Serializable
 
     /**
      * Unserialize
-     * 
+     *
      * @param  string $data
      * @return void
      */

@@ -71,8 +71,8 @@ class Editor extends Dijit
             }
         }
 
-        // Previous versions allowed specifying "degrade" to allow using a 
-        // textarea instead of a div -- but this is insecure. Removing the 
+        // Previous versions allowed specifying "degrade" to allow using a
+        // textarea instead of a div -- but this is insecure. Removing the
         // parameter if set to prevent its injection in the dijit.
         if (isset($params['degrade'])) {
             unset($params['degrade']);
@@ -106,14 +106,14 @@ class Editor extends Dijit
                . $value
                . "</div>\n";
 
-        // Embed a textarea in a <noscript> tag to allow for graceful 
+        // Embed a textarea in a <noscript> tag to allow for graceful
         // degradation
         $html .= '<noscript>'
                . $this->view->formTextarea($hiddenId, $value, $attribs)
                . '</noscript>';
 
         $html  .= '<input' . $this->_htmlAttribs($hiddenAttribs) . $this->getClosingBracket();
-        
+
         return $html;
     }
 

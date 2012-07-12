@@ -21,7 +21,7 @@ class WriterPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of writers
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -39,8 +39,8 @@ class WriterPluginManager extends AbstractPluginManager
      * Validate the plugin
      *
      * Checks that the writer loaded is an instance of Writer\WriterInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

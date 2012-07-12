@@ -75,7 +75,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
         $this->methodParameters[$method][$fqName] = array(
             $parameterName, $type, $required
         );
-        
+
         return $this;
     }
 

@@ -13,9 +13,9 @@
  * @package    Zend_Amf
  * @subpackage UnitTests
  */
-class ServiceB 
+class ServiceB
 {
-    function __construct() 
+    function __construct()
     {
         //Construction...
     }

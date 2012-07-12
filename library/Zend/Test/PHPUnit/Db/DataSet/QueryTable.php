@@ -54,8 +54,7 @@ class QueryTable extends \PHPUnit_Extensions_Database_DataSet_QueryTable
      */
     protected function createTableMetaData()
     {
-        if ($this->tableMetaData === NULL)
-        {
+        if ($this->tableMetaData === NULL) {
             $this->loadData();
             $keys = array();
             if(count($this->data) > 0) {

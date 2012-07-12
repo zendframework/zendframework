@@ -212,27 +212,27 @@ EOD;
     public function testLoadXmlCreatesFaultWithMissingNodes()
     {
         $sxl = new \SimpleXMLElement('<?xml version="1.0"?><methodResponse><params><param>foo</param></params></methodResponse>');
-        
+
         $this->assertFalse($this->_response->loadXml($sxl->asXML()));
         $this->assertTrue($this->_response->isFault());
         $fault = $this->_response->getFault();
         $this->assertEquals(653, $fault->getCode());
     }
-    
+
     public function testLoadXmlCreatesFaultWithMissingNodes2()
     {
         $sxl = new \SimpleXMLElement('<?xml version="1.0"?><methodResponse><params>foo</params></methodResponse>');
-        
+
         $this->assertFalse($this->_response->loadXml($sxl->asXML()));
         $this->assertTrue($this->_response->isFault());
         $fault = $this->_response->getFault();
         $this->assertEquals(653, $fault->getCode());
     }
-    
+
     public function testLoadXmlThrowsExceptionWithMissingNodes3()
     {
         $sxl = new \SimpleXMLElement('<?xml version="1.0"?><methodResponse><bar>foo</bar></methodResponse>');
-        
+
         $this->assertFalse($this->_response->loadXml($sxl->asXML()));
         $this->assertTrue($this->_response->isFault());
         $fault = $this->_response->getFault();

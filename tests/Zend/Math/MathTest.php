@@ -26,8 +26,8 @@ class MathTest extends \PHPUnit_Framework_TestCase
             array(2, 1, 10000, 100, 0.9, 1.1, false),
             array(2, 1, 10000, 100, 0.8, 1.2, true)
         );
-    }        
-    
+    }
+
     public function testRandBytes()
     {
         for ($length=1; $length<4096; $length++) {
@@ -36,16 +36,16 @@ class MathTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($length, strlen($rand));
         }
     }
-       
+
     /**
      * A Monte Carlo test that generates $cycles numbers from 0 to $tot
-     * and test if the numbers are above or below the line y=x with a 
+     * and test if the numbers are above or below the line y=x with a
      * frequency range of [$min, $max]
-     * 
+     *
      * Note: this code is inspired by the random number generator test
      * included in the PHP-CryptLib project of Anthony Ferrara
      * @see https://github.com/ircmaxell/PHP-CryptLib
-     * 
+     *
      * @dataProvider provideRandInt
      */
     public function testRandInt($num, $valid, $cycles, $tot, $min, $max, $strong)
@@ -67,7 +67,7 @@ class MathTest extends \PHPUnit_Framework_TestCase
                     $up++;
                 } elseif ($x < $y) {
                     $down++;
-                } 
+                }
             }
             $this->assertGreaterThan(0, $up);
             $this->assertGreaterThan(0, $down);
@@ -76,12 +76,12 @@ class MathTest extends \PHPUnit_Framework_TestCase
                 $count++;
             }
             $i++;
-        } while ($i < $num && $count < $valid); 
+        } while ($i < $num && $count < $valid);
         if ($count < $valid) {
             $this->fail('The random number generator failed the Monte Carlo test');
         }
     }
-    
+
     public function testRandBigInteger()
     {
         try {

@@ -107,7 +107,7 @@ class Http extends AbstractAdapter
         $content = 0;
         if (isset($_SERVER['CONTENT_LENGTH'])) {
             $content = $_SERVER['CONTENT_LENGTH'];
-        } else if (!empty($_POST)) {
+        } elseif (!empty($_POST)) {
             $content = serialize($_POST);
         }
 
@@ -339,7 +339,7 @@ class Http extends AbstractAdapter
                 if (is_array($call)) {
                     $status = $call + $status;
                 }
-            } else if (self::isUploadProgressAvailable()) {
+            } elseif (self::isUploadProgressAvailable()) {
                 $call = call_user_func(self::$callbackUploadProgress, $id);
                 if (is_array($call)) {
                     $status = $call + $status;
@@ -355,7 +355,7 @@ class Http extends AbstractAdapter
             if (!is_array($call)) {
                 $status['done']    = true;
                 $status['message'] = 'Failure while retrieving the upload progress';
-            } else if (!empty($status['cancel_upload'])) {
+            } elseif (!empty($status['cancel_upload'])) {
                 $status['done']    = true;
                 $status['message'] = 'The upload has been canceled';
             } else {

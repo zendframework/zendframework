@@ -84,7 +84,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $line = $f->format($fields);
         $this->assertContains('object', $line);
     }
-    
+
     /**
      * @group ZF-10427
      */

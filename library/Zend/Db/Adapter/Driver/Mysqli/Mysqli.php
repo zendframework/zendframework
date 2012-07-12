@@ -63,9 +63,9 @@ class Mysqli implements DriverInterface
 
     /**
      * Register connection
-     * 
+     *
      * @param  Connection $connection
-     * @return Mysqli 
+     * @return Mysqli
      */
     public function registerConnection(Connection $connection)
     {
@@ -76,8 +76,8 @@ class Mysqli implements DriverInterface
 
     /**
      * Register statement prototype
-     * 
-     * @param Statement $statementPrototype 
+     *
+     * @param Statement $statementPrototype
      */
     public function registerStatementPrototype(Statement $statementPrototype)
     {
@@ -95,8 +95,8 @@ class Mysqli implements DriverInterface
 
     /**
      * Register result prototype
-     * 
-     * @param Result $resultPrototype 
+     *
+     * @param Result $resultPrototype
      */
     public function registerResultPrototype(Result $resultPrototype)
     {
@@ -113,9 +113,9 @@ class Mysqli implements DriverInterface
 
     /**
      * Get database platform name
-     * 
+     *
      * @param  string $nameFormat
-     * @return string 
+     * @return string
      */
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
     {

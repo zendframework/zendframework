@@ -19,7 +19,7 @@ class Configuration
      * @var array
      */
     protected $data = array();
-    
+
     /**
      * Constructor
      *
@@ -55,7 +55,7 @@ class Configuration
         if (isset($this->data['instance'])) {
             $this->configureInstance($di, $this->data['instance']);
         }
-        
+
     }
 
     public function configureDefinition(Di $di, $definition)
@@ -136,11 +136,11 @@ class Configuration
         }
 
     }
-    
+
     public function configureInstance(Di $di, $instanceData)
     {
         $im = $di->instanceManager();
-        
+
         foreach ($instanceData as $target => $data) {
             switch (strtolower($target)) {
                 case 'aliases':
@@ -183,5 +183,5 @@ class Configuration
 
     }
 
-    
+
 }

@@ -134,7 +134,8 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testGetUrlDetails() {
+    public function testGetUrlDetails()
+    {
         $details = $this->delicious->getUrlDetails(self::TEST_URL);
 
         $this->assertInternalType('array', $details);

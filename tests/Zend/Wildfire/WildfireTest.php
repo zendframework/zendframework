@@ -1021,7 +1021,8 @@ class Request extends \Zend\Controller\Request\HttpTestCase
     protected $_enabled = false;
     protected $_enabled_headerName = false;
 
-    public function setUserAgentExtensionEnabled($enabled, $headerName = "User-Agent") {
+    public function setUserAgentExtensionEnabled($enabled, $headerName = "User-Agent")
+    {
         $this->_enabled = $enabled;
         $this->_enabled_headerName = $headerName;
     }

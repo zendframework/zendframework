@@ -16,7 +16,7 @@ namespace Zend\Barcode\Exception;
  * @category   Zend
  * @package    Zend_Barcode
  */
-class UnexpectedValueException extends \UnexpectedValueException implements 
+class UnexpectedValueException extends \UnexpectedValueException implements
     ExceptionInterface
 {
 }

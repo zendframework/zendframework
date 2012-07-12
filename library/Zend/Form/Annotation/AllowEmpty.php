@@ -13,7 +13,7 @@ namespace Zend\Form\Annotation;
 /**
  * AllowEmpty annotation
  *
- * Presence of this annotation is a hint that the associated 
+ * Presence of this annotation is a hint that the associated
  * \Zend\InputFilter\Input should enable the allow_empty flag.
  *
  * @Annotation

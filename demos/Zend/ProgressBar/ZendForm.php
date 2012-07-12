@@ -100,7 +100,8 @@ if (isset($_GET['progress_key'])) {
         }
     </style>
     <script type="text/javascript">
-        function makeRequest(url) {
+        function makeRequest(url)
+        {
             var httpRequest;
 
             if (window.XMLHttpRequest) {
@@ -108,7 +109,7 @@ if (isset($_GET['progress_key'])) {
                 if (httpRequest.overrideMimeType) {
                     httpRequest.overrideMimeType('text/xml');
                 }
-            } else if (window.ActiveXObject) {
+            } elseif (window.ActiveXObject) {
                 try {
                     httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
                 } catch (e) {
@@ -132,15 +133,18 @@ if (isset($_GET['progress_key'])) {
 
         }
 
-        function observeProgress() {
+        function observeProgress()
+        {
             setTimeout("getProgress()", 1500);
         }
 
-        function getProgress() {
+        function getProgress()
+        {
             makeRequest('ZendForm.php?progress_key=' + document.getElementById('progress_key').value);
         }
 
-        function evalProgress(httpRequest) {
+        function evalProgress(httpRequest)
+        {
             try {
                 if (httpRequest.readyState == 4) {
                     if (httpRequest.status == 200) {
@@ -161,14 +165,16 @@ if (isset($_GET['progress_key'])) {
             }
         }
 
-        function update(data) {
+        function update(data)
+        {
             document.getElementById('pg-percent').style.width = data.percent + '%';
 
             document.getElementById('pg-text-1').innerHTML = data.text;
             document.getElementById('pg-text-2').innerHTML = data.text;
         }
 
-        function finish() {
+        function finish()
+        {
             document.getElementById('pg-percent').style.width = '100%';
 
             document.getElementById('pg-text-1').innerHTML = 'Upload done';

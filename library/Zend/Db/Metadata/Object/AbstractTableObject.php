@@ -49,8 +49,8 @@ abstract class AbstractTableObject
 
     /**
      * Constructor
-     * 
-     * @param string $name 
+     *
+     * @param string $name
      */
     public function __construct($name)
     {
@@ -61,8 +61,8 @@ abstract class AbstractTableObject
 
     /**
      * Set columns
-     * 
-     * @param array $columns 
+     *
+     * @param array $columns
      */
     public function setColumns(array $columns)
     {
@@ -71,8 +71,8 @@ abstract class AbstractTableObject
 
     /**
      * Get columns
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function getColumns()
     {
@@ -81,8 +81,8 @@ abstract class AbstractTableObject
 
     /**
      * Set constraints
-     * 
-     * @param array $constraints 
+     *
+     * @param array $constraints
      */
     public function setConstraints($constraints)
     {
@@ -91,8 +91,8 @@ abstract class AbstractTableObject
 
     /**
      * Get constraints
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function getConstraints()
     {
@@ -101,8 +101,8 @@ abstract class AbstractTableObject
 
     /**
      * Set name
-     * 
-     * @param string $name 
+     *
+     * @param string $name
      */
     public function setName($name)
     {
@@ -111,8 +111,8 @@ abstract class AbstractTableObject
 
     /**
      * Get name
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getName()
     {

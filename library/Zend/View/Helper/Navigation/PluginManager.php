@@ -17,7 +17,7 @@ use Zend\View\HelperPluginManager;
  * Plugin manager implementation for navigation helpers
  *
  * Enforces that helpers retrieved are instances of
- * Navigation\HelperInterface. Additionally, it registers a number of default 
+ * Navigation\HelperInterface. Additionally, it registers a number of default
  * helpers.
  *
  * @category   Zend
@@ -28,7 +28,7 @@ class PluginManager extends HelperPluginManager
 {
     /**
      * Default set of helpers
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -42,8 +42,8 @@ class PluginManager extends HelperPluginManager
      * Validate the plugin
      *
      * Checks that the helper loaded is an instance of AbstractHelper.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

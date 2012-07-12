@@ -35,22 +35,26 @@ class NicknameFeedTest extends \PHPUnit_Framework_TestCase
         $this->emptyNicknameFeed = new GApps\NicknameFeed();
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionElements() {
+    public function testEmptyFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->emptyNicknameFeed->extensionElements));
         $this->assertTrue(count($this->emptyNicknameFeed->extensionElements) == 0);
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionAttributes() {
+    public function testEmptyFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->emptyNicknameFeed->extensionAttributes));
         $this->assertTrue(count($this->emptyNicknameFeed->extensionAttributes) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionElements() {
+    public function testSampleFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->nicknameFeed->extensionElements));
         $this->assertTrue(count($this->nicknameFeed->extensionElements) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionAttributes() {
+    public function testSampleFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->nicknameFeed->extensionAttributes));
         $this->assertTrue(count($this->nicknameFeed->extensionAttributes) == 0);
     }

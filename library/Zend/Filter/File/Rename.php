@@ -179,7 +179,7 @@ class Rename extends Filter\AbstractFilter
      * @param  array $options
      * @return array
      */
-    protected function _convertOptions($options) 
+    protected function _convertOptions($options)
     {
         $files = array();
         foreach ($options as $key => $value) {

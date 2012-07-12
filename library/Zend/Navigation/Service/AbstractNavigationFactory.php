@@ -94,9 +94,9 @@ abstract class AbstractNavigationFactory implements FactoryInterface
                     $config
                 ));
             }
-        } else if ($config instanceof Config\Config) {
+        } elseif ($config instanceof Config\Config) {
             $config = $config->toArray();
-        } else if (!is_array($config)) {
+        } elseif (!is_array($config)) {
             throw new Exception\InvalidArgumentException('
                 Invalid input, expected array, filename, or Zend\Config object'
             );

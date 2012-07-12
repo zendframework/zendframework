@@ -39,12 +39,12 @@ class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
         $acceptLanguageHeader = new AcceptLanguage();
         $acceptLanguageHeader->addLanguage('da', 0.8)
                              ->addLanguage('en-gb', 1);
-        
+
         $this->assertEquals('Accept-Language: da;q=0.8,en-gb', $acceptLanguageHeader->toString());
     }
 
     /** Implmentation specific tests here */
-    
+
     public function testCanParseCommaSeparatedValues()
     {
         $header = AcceptLanguage::fromString('Accept-Language: da;q=0.8,en-gb');
@@ -67,13 +67,13 @@ class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertEquals($expected, $test);
     }
-    
+
     public function testWildcharLanguage()
     {
         $acceptHeader = new AcceptLanguage();
         $acceptHeader->addLanguage('da', 0.8)
                      ->addLanguage('*', 0.4);
-        
+
         $this->assertTrue($acceptHeader->hasLanguage('da'));
         $this->assertTrue($acceptHeader->hasLanguage('en'));
         $this->assertEquals('Accept-Language: da;q=0.8,*;q=0.4', $acceptHeader->toString());

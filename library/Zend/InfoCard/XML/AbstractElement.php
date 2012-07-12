@@ -11,6 +11,7 @@
 namespace Zend\InfoCard\XML;
 
 use DOMElement;
+use ReflectionClass;
 use SimpleXMLElement;
 
 /**

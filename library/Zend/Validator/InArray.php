@@ -124,10 +124,18 @@ class InArray extends AbstractValidator
      * option is true, then the type of $value is also checked.
      *
      * @param  mixed $value
+     * @throws Exception\RuntimeException If 0 is present in the haystack and strict mode is disabled.
+     * See {@link http://php.net/manual/function.in-array.php#104501}
      * @return boolean
      */
     public function isValid($value)
     {
+        if (!$this->strict && in_array(0, $this->getHaystack(), true)) {
+            // Strings are treated as 0 integer by PHP
+            // ZF2-337 http://php.net/manual/function.in-array.php#104501
+            throw new Exception\RuntimeException('Comparisons with 0 are only possible in strict mode');
+        }
+
         $this->setValue($value);
         if ($this->getRecursive()) {
             $iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($this->getHaystack()));

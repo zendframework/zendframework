@@ -94,16 +94,42 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(1, 'a', 2.3), $this->validator->getHaystack());
     }
 
+    /**
+     * @group ZF2-337
+     */
     public function testSettingNewStrictMode()
     {
-        $this->assertFalse($this->validator->getStrict());
-        $this->assertTrue($this->validator->isValid('1'));
-        $this->assertTrue($this->validator->isValid(1));
+        $validator = new InArray(
+            array(
+                 'haystack' => array('test', 0, 'A'),
+            )
+        );
+        $validator->setStrict(true);
+        $this->assertTrue($validator->getStrict());
+        $this->assertFalse($validator->isValid('b'));
+        $this->assertFalse($validator->isValid('a'));
+        $this->assertTrue($validator->isValid('A'));
+        $this->assertFalse($validator->isValid('0'));
+        $this->assertTrue($validator->isValid(0));
+    }
 
-        $this->validator->setStrict(true);
-        $this->assertTrue($this->validator->getStrict());
-        $this->assertFalse($this->validator->isValid('1'));
-        $this->assertTrue($this->validator->isValid(1));
+    /**
+     * @group ZF2-337
+     */
+    public function testNotSetStrictModeWith0InTheHaystack()
+    {
+        $validator = new InArray(
+            array(
+                 'haystack' => array('test', 0, 'A'),
+            )
+        );
+        $this->assertFalse($validator->getStrict());
+
+        $this->setExpectedException(
+            'Zend\Validator\Exception\RuntimeException',
+            'Comparisons with 0 are only possible in strict mode'
+        );
+        $this->assertFalse($validator->isValid('b'));
     }
 
     public function testSettingStrictViaInitiation()

@@ -7,7 +7,6 @@
             <exclude>./Zend/Amf/</exclude>
             <exclude>./Zend/Queue/</exclude>
             <exclude>./Zend/Service/</exclude>
-            <exclude>./Zend/Wildfire/</exclude>
         </testsuite>
     </testsuites>
 
@@ -17,7 +16,6 @@
             <group>Zend_Amf</group>
             <group>Zend_Queue</group>
             <group>Zend_Service</group>
-            <group>Zend_Wildfire</group>
         </exclude>
     </groups>
 </phpunit>

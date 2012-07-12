@@ -40,7 +40,6 @@
         "zendframework/zend-db": "self.version",
         "zendframework/zend-di": "self.version",
         "zendframework/zend-docbook": "self.version",
-        "zendframework/zend-dojo": "self.version",
         "zendframework/zend-dom": "self.version",
         "zendframework/zend-escaper": "self.version",
         "zendframework/zend-eventmanager": "self.version",

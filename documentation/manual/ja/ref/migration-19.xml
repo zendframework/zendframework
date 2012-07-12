@@ -360,33 +360,6 @@ $container = new Zend_Navigation(array(
             compatibility implications.
         </para>
 
-        <section xml:id="migration.19.security.zend.dojo.editor"><info><title>Zend_Dojo_View_Helper_Editor</title></info>
-            
-
-            <para>
-                A slight change was made in the 1.9 series to modify the default usage of the Editor
-                dijit to use <acronym>div</acronym> tags instead of a <acronym>textarea</acronym>
-                tag; the latter usage has <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">security
-                implications</link>, and usage of <acronym>div</acronym> tags is recommended by the
-                Dojo project.
-            </para>
-
-            <para>
-                In order to still allow graceful degradation, a new <varname>degrade</varname>
-                option was added to the view helper; this would allow developers to optionally use a
-                <acronym>textarea</acronym> instead. However, this opens applications developed with
-                that usage to <acronym>XSS</acronym> vectors. In 1.9.7, we have removed this option.
-                Graceful degradation is still supported, however, via a <acronym>noscript</acronym>
-                tag that embeds a <acronym>textarea</acronym>. This solution addressess all security
-                concerns.
-            </para>
-
-            <para>
-                The takeaway is that if you were using the <varname>degrade</varname> flag, it will
-                simply be ignored at this time.
-            </para>
-        </section>
-
         <section xml:id="migration.19.security.zend.filter.html-entities"><info><title>Zend_Filter_HtmlEntities</title></info>
             
 

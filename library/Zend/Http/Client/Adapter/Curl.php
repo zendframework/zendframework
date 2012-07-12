@@ -300,6 +300,11 @@ class Curl implements HttpAdapter, StreamInterface
                 }
                 break;
 
+            case 'PATCH' :
+                $curlMethod = CURLOPT_CUSTOMREQUEST;
+                $curlValue = "PATCH";
+                break;
+
             case 'DELETE' :
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "DELETE";

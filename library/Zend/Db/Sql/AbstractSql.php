@@ -10,8 +10,8 @@
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Platform\PlatformInterface,
-    Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Platform\PlatformInterface;
 
 abstract class AbstractSql
 {

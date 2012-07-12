@@ -11,8 +11,8 @@
 namespace Zend\Config\Writer;
 
 use Traversable;
-use Zend\Config\Exception;
 use Zend\Config\Config;
+use Zend\Config\Exception;
 use Zend\Stdlib\ArrayUtils;
 
 /**

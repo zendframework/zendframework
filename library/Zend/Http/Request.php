@@ -1,13 +1,21 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace Zend\Http;
 
-use Zend\Stdlib\RequestInterface,
-    Zend\Stdlib\Message,
-    Zend\Stdlib\ParametersInterface,
-    Zend\Stdlib\Parameters,
-    Zend\Uri\Http as HttpUri,
-    Zend\Uri\Exception as ExceptionUri;
+use Zend\Stdlib\Message;
+use Zend\Stdlib\Parameters;
+use Zend\Stdlib\ParametersInterface;
+use Zend\Stdlib\RequestInterface;
+use Zend\Uri\Exception as ExceptionUri;
+use Zend\Uri\Http as HttpUri;
 
 class Request extends Message implements RequestInterface
 {

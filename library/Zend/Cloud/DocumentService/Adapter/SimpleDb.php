@@ -1,31 +1,22 @@
 <?php
 /**
- * LICENSE
+ * Zend Framework (http://framework.zend.com/)
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Cloud_DocumentService
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace Zend\Cloud\DocumentService\Adapter;
 
 use Traversable;
+use Zend\Cloud\DocumentService\Adapter\SimpleDb\Query;
+use Zend\Cloud\DocumentService\Document;
+use Zend\Service\Amazon\Exception as AmazonException;
+use Zend\Service\Amazon\SimpleDb\Attribute;
+use Zend\Service\Amazon\SimpleDb\SimpleDb as SimpleDbService;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Cloud\DocumentService\Adapter\SimpleDb\Query,
-    Zend\Service\Amazon\Exception as AmazonException,
-    Zend\Service\Amazon\SimpleDb\SimpleDb as SimpleDbService,
-    Zend\Service\Amazon\SimpleDb\Attribute,
-    Zend\Cloud\DocumentService\Document;
 
 /**
  * SimpleDB adapter for document service.
@@ -33,8 +24,6 @@ use Zend\Cloud\DocumentService\Adapter\SimpleDb\Query,
  * @category   Zend
  * @package    Zend_Cloud_DocumentService
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SimpleDb extends AbstractAdapter
 {

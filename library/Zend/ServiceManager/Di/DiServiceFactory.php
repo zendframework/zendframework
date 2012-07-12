@@ -1,12 +1,20 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ServiceManager
+ */
 
 namespace Zend\ServiceManager\Di;
 
-use Zend\ServiceManager\FactoryInterface,
-    Zend\ServiceManager\ServiceLocatorInterface,
-    Zend\ServiceManager\Exception,
-    Zend\Di\Di,
-    Zend\Di\Exception\ClassNotFoundException as DiClassNotFoundException;
+use Zend\Di\Di;
+use Zend\Di\Exception\ClassNotFoundException as DiClassNotFoundException;
+use Zend\ServiceManager\Exception;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class DiServiceFactory extends Di implements FactoryInterface
 {

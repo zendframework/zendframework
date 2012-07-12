@@ -1,28 +1,17 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage Sqs
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\Amazon\Sqs;
+use Zend\Crypt\Hmac;
 use Zend\Service\Amazon;
 use Zend\Service\Amazon\Sqs\Exception;
-use Zend\Crypt\Hmac;
 
 /**
  * Class for connecting to the Amazon Simple Queue Service (SQS)
@@ -30,8 +19,6 @@ use Zend\Crypt\Hmac;
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon_Sqs
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://aws.amazon.com/sqs/ Amazon Simple Queue Service
  */
 class Sqs extends \Zend\Service\Amazon\AbstractAmazon

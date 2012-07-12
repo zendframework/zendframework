@@ -1,29 +1,28 @@
 <?php
 /**
- * @category   Zend
- * @package    Zend_Cloud_Infrastructure
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace Zend\Cloud\Infrastructure\Adapter;
 
 use Traversable;
+use Zend\Cloud\Infrastructure\Image;
+use Zend\Cloud\Infrastructure\ImageList;
+use Zend\Cloud\Infrastructure\Instance;
+use Zend\Cloud\Infrastructure\InstanceList;
+use Zend\Service\Rackspace\Servers as RackspaceServers;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Service\Rackspace\Servers as RackspaceServers,
-    Zend\Cloud\Infrastructure\Instance,
-    Zend\Cloud\Infrastructure\InstanceList,
-    Zend\Cloud\Infrastructure\Image,
-    Zend\Cloud\Infrastructure\ImageList;
 
 /**
  * Rackspace servers adapter for infrastructure service
  *
  * @package    Zend_Cloud_Infrastructure
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Rackspace extends AbstractAdapter
 {

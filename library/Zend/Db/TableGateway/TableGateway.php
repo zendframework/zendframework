@@ -10,11 +10,11 @@
 
 namespace Zend\Db\TableGateway;
 
-use Zend\Db\Adapter\Adapter,
-    Zend\Db\ResultSet\ResultSetInterface,
-    Zend\Db\ResultSet\ResultSet,
-    Zend\Db\Sql\Sql,
-    Zend\Db\Sql\TableIdentifier;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\ResultSet\ResultSetInterface;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\TableIdentifier;
 
 /**
  * @category   Zend

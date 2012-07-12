@@ -10,19 +10,17 @@
 
 namespace Zend\Http\PhpEnvironment;
 
-use Zend\Http\Request as HttpRequest;
-use Zend\Uri\Http as HttpUri;
 use Zend\Http\Header\Cookie;
+use Zend\Http\Request as HttpRequest;
 use Zend\Stdlib\Parameters;
 use Zend\Stdlib\ParametersInterface;
+use Zend\Uri\Http as HttpUri;
 
 /**
  * HTTP Request for current PHP environment
  *
  * @category   Zend
  * @package    Zend_Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Request extends HttpRequest
 {

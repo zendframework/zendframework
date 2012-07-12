@@ -1,33 +1,32 @@
 <?php
 /**
- * @category   Zend
- * @package    Zend_Cloud_Infrastructure
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cloud
  */
 
 namespace Zend\Cloud\Infrastructure\Adapter;
 
 use Traversable;
+use Zend\Cloud\Infrastructure\Image;
+use Zend\Cloud\Infrastructure\ImageList;
+use Zend\Cloud\Infrastructure\Instance;
+use Zend\Cloud\Infrastructure\InstanceList;
+use Zend\Service\Amazon\Ec2\AvailabilityZones as Ec2Zone;
+use Zend\Service\Amazon\Ec2\CloudWatch as Ec2Monitor;
+use Zend\Service\Amazon\Ec2\Exception as Ec2Exception;
+use Zend\Service\Amazon\Ec2\Image as Ec2Image;
+use Zend\Service\Amazon\Ec2\Instance as Ec2Instance;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Service\Amazon\Ec2\Instance as Ec2Instance,
-    Zend\Service\Amazon\Ec2\Image as Ec2Image,
-    Zend\Service\Amazon\Ec2\AvailabilityZones as Ec2Zone,
-    Zend\Service\Amazon\Ec2\CloudWatch as Ec2Monitor,
-    Zend\Service\Amazon\Ec2\Exception as Ec2Exception,
-    Zend\Cloud\Infrastructure\Instance,    
-    Zend\Cloud\Infrastructure\InstanceList,
-    Zend\Cloud\Infrastructure\Image,
-    Zend\Cloud\Infrastructure\ImageList;
 
 /**
  * Amazon EC2 adapter for infrastructure service
  *
  * @package    Zend_Cloud_Infrastructure
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Ec2 extends AbstractAdapter
 {

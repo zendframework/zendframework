@@ -10,9 +10,9 @@
 
 namespace Zend\Db\ResultSet;
 
-use Zend\Stdlib\Hydrator\HydratorInterface;
-use Zend\Stdlib\Hydrator\ArraySerializable;
 use ArrayObject;
+use Zend\Stdlib\Hydrator\ArraySerializable;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
  * @category   Zend

@@ -1,40 +1,26 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Markup
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Markup
  */
 
 namespace ZendTest\Markup\Renderer;
 
-use ZendTest\Markup\Renderer\TestAsset\SimpleRenderer,
-    Zend\Markup\Token,
-    Zend\Markup\TokenList,
-    Zend\Markup\Renderer\Markup\Replace as ReplaceMarkup,
-    Zend\Filter\StringToUpper as StringToUpperFilter;
+use ZendTest\Markup\Renderer\TestAsset\SimpleRenderer;
+use Zend\Markup\Token;
+use Zend\Markup\TokenList;
+use Zend\Markup\Renderer\Markup\Replace as ReplaceMarkup;
+use Zend\Filter\StringToUpper as StringToUpperFilter;
 
 /**
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage UnitTests
  * @group      Zend_Markup
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AbstractRendererTest extends \PHPUnit_Framework_TestCase
 {

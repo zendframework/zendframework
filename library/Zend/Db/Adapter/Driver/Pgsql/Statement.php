@@ -11,8 +11,8 @@
 namespace Zend\Db\Adapter\Driver\Pgsql;
 
 use Zend\Db\Adapter\Driver\StatementInterface;
-use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend

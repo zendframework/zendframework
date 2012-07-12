@@ -10,12 +10,12 @@
 
 namespace Zend\Http;
 
+use ArrayIterator;
+use Countable;
+use Iterator;
+use Traversable;
 use Zend\Http\HeaderLoader;
 use Zend\Loader\PluginClassLocator;
-use Iterator;
-use Countable;
-use Traversable;
-use ArrayIterator;
 
 /**
  * Basic HTTP headers collection functionality
@@ -25,7 +25,7 @@ use ArrayIterator;
  * @package    Zend_Http
  * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
  */
-class Headers implements Iterator, Countable
+class Headers implements Countable, Iterator
 {
     /**
      * @var \Zend\Loader\PluginClassLoader

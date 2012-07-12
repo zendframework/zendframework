@@ -1,10 +1,18 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Cache
+ */
 
 namespace ZendTest\Cache\Storage\Plugin;
-use Zend\Cache,
-    Zend\Cache\Storage\ExceptionEvent,
-    ZendTest\Cache\Storage\TestAsset\MockAdapter,
-    ArrayObject;
+use Zend\Cache;
+use Zend\Cache\Storage\ExceptionEvent;
+use ZendTest\Cache\Storage\TestAsset\MockAdapter;
+use ArrayObject;
 
 class ExceptionHandlerTest extends CommonPluginTest
 {

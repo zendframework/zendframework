@@ -12,7 +12,7 @@ namespace Zend\ModuleManager\Exception;
 
 /**
  * Invalid Argument Exception
- * 
+ *
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage Exception

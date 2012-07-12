@@ -215,7 +215,7 @@ class Author
      * @param   string $input   description input value
      * @return  Author  $this instance
      */
-    public function setDescription($input) 
+    public function setDescription($input)
     {
         $this->description = (string) $input;
         return $this;
@@ -229,7 +229,7 @@ class Author
      * @throws  Exception\RuntimeException if $input is an invalid URI
      *          (via Utils::normalizeUriHttp)
      */
-    public function setThumbnailPicture($input) 
+    public function setThumbnailPicture($input)
     {
         $this->thumbnailPicture = Utils::normalizeUriHttp($input);
         return $this;

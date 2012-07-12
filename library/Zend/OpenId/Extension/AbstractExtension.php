@@ -40,7 +40,7 @@ abstract class AbstractExtension
                         return false;
                     }
                 }
-            } else if (!is_object($extensions) ||
+            } elseif (!is_object($extensions) ||
                        !($extensions instanceof AbstractExtension) ||
                        !$extensions->$func($params)) {
                 return false;

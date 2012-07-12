@@ -59,7 +59,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         include_once $fileToReflect;
         $reflectionFile = new FileReflection($fileToReflect);
         $nonExistentClass = 'Some_Non_Existent_Class';
-        
+
         $this->setExpectedException('Zend\Code\Reflection\Exception\InvalidArgumentException', 'Class by name Some_Non_Existent_Class not found');
         $reflectionFile->getClass($nonExistentClass);
     }
@@ -98,7 +98,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass7.php';
         include_once $fileToReflect;
         $reflectionFile = new FileReflection($fileToReflect);
-        
+
         $this->assertTrue($reflectionFile->getDocBlock() instanceof \Zend\Code\Reflection\DocBlockReflection);
         $this->assertEquals('Jeremiah Small <jsmall@soliantconsulting.com>', $reflectionFile->getDocBlock()->getTag('author')->getContent());
     }
@@ -123,7 +123,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ZendTest\Code\Reflection\TestAsset\TestSampleInterface', $class->getName());
         $this->assertTrue($class->isInterface());
     }
-    
+
     public function testFileCanReflectFileWithUses()
     {
         $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass8.php';

@@ -22,19 +22,22 @@ use Zend\GData\App\Extension;
 class GeneratorTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->generatorText = file_get_contents(
                 'Zend/GData/App/_files/GeneratorElementSample1.xml',
                 true);
         $this->generator = new Extension\Generator();
     }
 
-    public function testEmptyGeneratorShouldHaveEmptyExtensionsList() {
+    public function testEmptyGeneratorShouldHaveEmptyExtensionsList()
+    {
         $this->assertTrue(is_array($this->generator->extensionElements));
         $this->assertTrue(count($this->generator->extensionElements) == 0);
     }
 
-    public function testEmptyGeneratorToAndFromStringShouldMatch() {
+    public function testEmptyGeneratorToAndFromStringShouldMatch()
+    {
         $generatorXml = $this->generator->saveXML();
         $newGenerator = new Extension\Generator();
         $newGenerator->transferFromXML($generatorXml);
@@ -42,7 +45,8 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($generatorXml == $newGeneratorXml);
     }
 
-    public function testGeneratorToAndFromStringShouldMatch() {
+    public function testGeneratorToAndFromStringShouldMatch()
+    {
         $this->generator->uri = 'http://code.google.com/apis/gdata/';
         $this->generator->version = '1.0';
         $this->generator->text = 'Google data APIs';
@@ -57,7 +61,8 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Google data APIs', $newGenerator->text);
     }
 
-    public function testConvertGeneratorWithDraftToAndFromString() {
+    public function testConvertGeneratorWithDraftToAndFromString()
+    {
         $this->generator->transferFromXML($this->generatorText);
         $this->assertEquals('http://code.google.com/apis/gdata/',
                 $this->generator->uri);

@@ -19,7 +19,7 @@ class InvalidUriPartException extends InvalidArgumentException
 {
     /**
      * Part-specific error codes
-     * 
+     *
      * @var integer
      */
     const INVALID_SCHEME    = 1;
@@ -31,5 +31,5 @@ class InvalidUriPartException extends InvalidArgumentException
     const INVALID_AUTHORITY = 30;
     const INVALID_PATH      = 32;
     const INVALID_QUERY     = 64;
-    const INVALID_FRAGMENT  = 128;  
+    const INVALID_FRAGMENT  = 128;
 }

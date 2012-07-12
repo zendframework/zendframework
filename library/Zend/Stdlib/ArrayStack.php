@@ -24,9 +24,9 @@ class ArrayStack extends ArrayObject
     /**
      * Retrieve iterator
      *
-     * Retrieve an array copy of the object, reverse its order, and return an 
+     * Retrieve an array copy of the object, reverse its order, and return an
      * ArrayIterator with that reversed array.
-     * 
+     *
      * @return ArrayIterator
      */
     public function getIterator()

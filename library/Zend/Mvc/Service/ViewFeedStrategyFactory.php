@@ -26,10 +26,10 @@ class ViewFeedStrategyFactory implements FactoryInterface
      *
      * Retrieves the ViewFeedRenderer service from the service locator, and
      * injects it into the constructor for the feed strategy.
-     * 
+     *
      * It then attaches the strategy to the View service, at a priority of 100.
      *
-     * @param  ServiceLocatorInterface $serviceLocator 
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return FeedStrategy
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

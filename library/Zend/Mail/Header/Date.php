@@ -34,7 +34,7 @@ class Date implements HeaderInterface
 
         $header = new static();
         $header->value= $value;
-        
+
         return $header;
     }
 
@@ -48,7 +48,7 @@ class Date implements HeaderInterface
         return $this->value;
     }
 
-    public function setEncoding($encoding) 
+    public function setEncoding($encoding)
     {
         // This header must be always in US-ASCII
         return $this;

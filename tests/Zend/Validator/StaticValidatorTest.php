@@ -97,7 +97,7 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
 
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
-            Alpha::INVALID => 'This is the translated message for %value%', 
+            Alpha::INVALID => 'This is the translated message for %value%',
         );
         $translator = new Translator\Translator();
         $translator->getPluginManager()->setService('default', $loader);

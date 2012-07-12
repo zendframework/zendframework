@@ -126,7 +126,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
                     array_push($folderStack, $parentFolder);
                     $parentFolder = $folder;
                     break;
-                } else if ($stack) {
+                } elseif ($stack) {
                     $parent = array_pop($stack);
                     $parentFolder = array_pop($folderStack);
                 }
@@ -156,7 +156,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
         }
         $currentFolder = $this->_rootFolder;
         $subname = trim($rootFolder, $this->_delim);
-        
+
         while ($currentFolder) {
             @list($entry, $subname) = @explode($this->_delim, $subname, 2);
             $currentFolder = $currentFolder->$entry;

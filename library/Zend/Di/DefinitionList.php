@@ -119,7 +119,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         }
         return false;
     }
-    
+
     public function getClassSupertypes($class)
     {
         $supertypes = array();
@@ -130,7 +130,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         // @todo remove duplicates?
         return $supertypes;
     }
-    
+
     public function getInstantiator($class)
     {
         /** @var $definition Definition\DefinitionInterface */
@@ -228,5 +228,5 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         }
         return array();
     }
-    
+
 }

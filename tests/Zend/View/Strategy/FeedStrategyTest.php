@@ -117,7 +117,7 @@ class FeedStrategyTest extends TestCase
         $this->assertTrue($headers->has('content-type'));
         $this->assertEquals('application/atom+xml', $headers->get('content-type')->getFieldValue());
     }
-    
+
     protected function getFeedData($type)
     {
         return array(

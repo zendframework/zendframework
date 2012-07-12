@@ -12,7 +12,7 @@ namespace Zend\Text\Exception;
 
 use Zend\Text\Exception;
 
-class OutOfBoundsException 
+class OutOfBoundsException
     extends \OutOfBoundsException
     implements ExceptionInterface
 {}

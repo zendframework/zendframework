@@ -12,9 +12,9 @@ abstract class BarClass
 {
     const BAR = 5;
     const FOO = self::BAR;
-    
+
     protected static $bar = 'value';
-    
+
     final public function one()
     {
         // foo
@@ -24,11 +24,11 @@ abstract class BarClass
     {
         // two
     }
-    
+
     protected function three(\ArrayObject $o, &$t = 2, FooBarBaz\BazBarFoo $bbf = self::BAR)
     {
         $x = 5 + 5;
         $y = 'this string';
     }
-    
+
 }

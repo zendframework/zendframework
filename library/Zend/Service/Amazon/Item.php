@@ -102,7 +102,7 @@ class Item
      * Parse the given <Item> element
      *
      * @param DOMElement $dom
-     * 
+     *
      * @group ZF-9547
      */
     public function __construct(DOMElement $dom)
@@ -188,7 +188,7 @@ class Item
                     $this->Tracks[] = (string) $t->data;
                 }
             }
-        } else if ($result->length == 1) {
+        } elseif ($result->length == 1) {
             foreach ($xpath->query('./*/text()', $result->item(0)) as $t) {
                 $this->Tracks[] = (string) $t->data;
             }

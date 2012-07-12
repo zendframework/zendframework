@@ -5,6 +5,6 @@
     <atom10:category scheme="http://example.com/schema2" term="topic1" label="topic1"/>
     <atom10:category scheme="http://example.com/schema1" term="cat_dog" label="Cat &amp; Dog"/>
     <entry>
-    
+
     </entry>
 </feed>

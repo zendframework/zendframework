@@ -13,7 +13,8 @@ namespace ZendTest\Soap\TestAsset;
 /**
  * Test Class
  */
-class WsdlTestClass {
+class WsdlTestClass
+{
     /**
      * @var integer
      */

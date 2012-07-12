@@ -27,10 +27,10 @@ class ClassFileLocator extends FilterIterator
 {
     /**
      * Create an instance of the locator iterator
-     * 
-     * Expects either a directory, or a DirectoryIterator (or its recursive variant) 
+     *
+     * Expects either a directory, or a DirectoryIterator (or its recursive variant)
      * instance.
-     * 
+     *
      * @param  string|DirectoryIterator $dirOrIterator
      */
     public function __construct($dirOrIterator = '.')

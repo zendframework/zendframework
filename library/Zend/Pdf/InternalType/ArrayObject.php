@@ -49,7 +49,7 @@ class ArrayObject extends AbstractTypeObject
                 }
                 $this->items[] = $element;
             }
-        } else if ($val !== null){
+        } elseif ($val !== null){
             throw new Exception\RuntimeException('Argument must be an array');
         }
     }

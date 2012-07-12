@@ -22,31 +22,31 @@ use Zend\Stdlib\ArrayUtils;
 class JsonModel extends ViewModel
 {
     /**
-     * JSON probably won't need to be captured into a 
+     * JSON probably won't need to be captured into a
      * a parent container by default.
-     * 
+     *
      * @var string
      */
     protected $captureTo = null;
 
     /**
      * JSONP callback (if set, wraps the return in a function call)
-     * 
+     *
      * @var string
      */
     protected $jsonpCallback = null;
 
     /**
      * JSON is usually terminal
-     * 
+     *
      * @var bool
      */
     protected $terminate = true;
 
     /**
      * Set the JSONP callback function name
-     * 
-     * @param  string $callback 
+     *
+     * @param  string $callback
      * @return JsonModel
      */
     public function setJsonpCallback($callback)
@@ -57,7 +57,7 @@ class JsonModel extends ViewModel
 
     /**
      * Serialize to JSON
-     * 
+     *
      * @return string
      */
     public function serialize()
@@ -67,8 +67,7 @@ class JsonModel extends ViewModel
             $variables = ArrayUtils::iteratorToArray($variables);
         }
 
-        if(!is_null($this->jsonpCallback))
-        {
+        if(!is_null($this->jsonpCallback)) {
             return $this->jsonpCallback.'('.Json::encode($variables).');';
         } else {
             return Json::encode($variables);

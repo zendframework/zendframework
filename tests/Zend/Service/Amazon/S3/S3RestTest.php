@@ -58,7 +58,7 @@ class S3RestTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        
+
         $accessKey = 'accessKey';
         $secretKey = 'secretKey';
 
@@ -144,7 +144,7 @@ BODY;
 
         /**
          * Check of request inside _makeRequest
-         * 
+         *
          */
         $this->uriHttp->expects($this->once())
             ->method('getHost')
@@ -161,7 +161,7 @@ BODY;
 
         $this->httpClient->expects($this->once())
              ->method('setUri')
-            ->with($this->uriHttp);  
+            ->with($this->uriHttp);
 
         $this->httpClient->expects($this->once())
             ->method('setMethod')

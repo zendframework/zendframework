@@ -108,7 +108,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         return $response;
     }
 
-    public function testGetAttributes() {
+    public function testGetAttributes()
+    {
         $domainName = $this->_testDomainNamePrefix . '_testGetAttributes';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
@@ -148,7 +149,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testPutAttributes() {
+    public function testPutAttributes()
+    {
         $domainName = $this->_testDomainNamePrefix . '_testPutAttributes';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
@@ -180,7 +182,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testBatchPutAttributes() {
+    public function testBatchPutAttributes()
+    {
         $domainName = $this->_testDomainNamePrefix . '_testBatchPutAttributes';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
@@ -272,7 +275,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testDeleteAttributes() {
+    public function testDeleteAttributes()
+    {
         $domainName = $this->_testDomainNamePrefix . '_testDeleteAttributes';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
@@ -344,7 +348,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      * @param $nextToken          Integer between 1 and 100
      * @return array              0 or more domain names
      */
-    public function testListDomains() {
+    public function testListDomains()
+    {
         $domainName = null;
         try {
             // Create some domains
@@ -411,7 +416,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      * @param $domainName string Name of the domain for which metadata will be requested
      * @return array Key/value array of metadatum names and values.
      */
-    public function testDomainMetadata() {
+    public function testDomainMetadata()
+    {
         $domainName = $this->_testDomainNamePrefix . '_testDomainMetadata';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
@@ -446,7 +452,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      * @param $domainName	string	Valid domain name of the domain to create
      * @return 				boolean True if successful, false if not
      */
-	public function testCreateDomain() {
+	public function testCreateDomain()
+	{
 	    $domainName = $this->_testDomainNamePrefix . '_testCreateDomain';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
@@ -461,7 +468,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-	public function testDeleteDomain() {
+	public function testDeleteDomain()
+	{
 	    $domainName = $this->_testDomainNamePrefix . '_testDeleteDomain';
         $this->request('deleteDomain', array($domainName));
         $this->request('createDomain', array($domainName));
@@ -479,7 +487,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    private function _wait() {
+    private function _wait()
+    {
         sleep($this->_testWaitPeriod);
     }
 

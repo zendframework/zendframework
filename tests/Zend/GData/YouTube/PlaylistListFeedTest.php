@@ -22,7 +22,8 @@ use Zend\GData\YouTube;
 class PlaylistListFeedTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->V2feedText = file_get_contents(
                 'Zend/GData/YouTube/_files/PlaylistListFeedDataSampleV2.xml',
                 true);
@@ -30,7 +31,8 @@ class PlaylistListFeedTest extends \PHPUnit_Framework_TestCase
         $this->feed = new YouTube\PlaylistListFeed();
     }
 
-    private function verifyAllSamplePropertiesAreCorrectV2 ($playlistListFeed) {
+    private function verifyAllSamplePropertiesAreCorrectV2 ($playlistListFeed)
+    {
         $this->assertEquals('tag:youtube.com,2008:user:GoogleDevelopers:playlists',
             $playlistListFeed->id->text);
         $this->assertEquals('2008-12-10T09:56:03.000Z',
@@ -59,31 +61,36 @@ class PlaylistListFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(70, $playlistListFeed->totalResults->text);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->feed->extensionElements));
         $this->assertEquals(0, count($this->feed->extensionElements));
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->feed->extensionAttributes));
         $this->assertEquals(0, count($this->feed->extensionAttributes));
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElementsV2() {
+    public function testSampleEntryShouldHaveNoExtensionElementsV2()
+    {
         $this->feed->setMajorProtocolVersion(2);
         $this->feed->transferFromXML($this->V2feedText);
         $this->assertTrue(is_array($this->feed->extensionElements));
         $this->assertEquals(0, count($this->feed->extensionElements));
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributesV2() {
+    public function testSampleEntryShouldHaveNoExtensionAttributesV2()
+    {
         $this->feed->setMajorProtocolVersion(2);
         $this->feed->transferFromXML($this->V2feedText);
         $this->assertTrue(is_array($this->feed->extensionAttributes));
         $this->assertEquals(0, count($this->feed->extensionAttributes));
     }
 
-    public function testEmptyPlaylistListFeedToAndFromStringShouldMatch() {
+    public function testEmptyPlaylistListFeedToAndFromStringShouldMatch()
+    {
         $feedXml = $this->feed->saveXML();
         $newPlaylistListFeed = new YouTube\PlaylistListFeed();
         $newPlaylistListFeed->transferFromXML($feedXml);
@@ -91,7 +98,8 @@ class PlaylistListFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feedXml == $newPlaylistListFeedXml);
     }
 
-    public function testEmptyPlaylistListFeedToAndFromStringShouldMatchV2() {
+    public function testEmptyPlaylistListFeedToAndFromStringShouldMatchV2()
+    {
         $this->feed->setMajorProtocolVersion(2);
         $this->feed->transferFromXML($this->V2feedText);
         $feedXml = $this->feed->saveXML();
@@ -102,7 +110,8 @@ class PlaylistListFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feedXml == $newPlaylistListFeedXml);
     }
 
-    public function testSamplePropertiesAreCorrectV2 () {
+    public function testSamplePropertiesAreCorrectV2 ()
+    {
         $this->feed->setMajorProtocolVersion(2);
         $this->feed->transferFromXML($this->V2feedText);
         $this->verifyAllSamplePropertiesAreCorrectV2($this->feed);

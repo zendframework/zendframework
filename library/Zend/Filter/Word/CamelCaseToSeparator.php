@@ -18,8 +18,8 @@ class CamelCaseToSeparator extends AbstractSeparator
 {
     /**
      * Defined by Zend\Filter\Filter
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return string
      */
     public function filter($value)

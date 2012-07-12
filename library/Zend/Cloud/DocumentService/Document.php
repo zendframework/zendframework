@@ -24,7 +24,7 @@ use IteratorAggregate;
  * @package    Zend_Cloud
  * @subpackage DocumentService
  */
-class Document implements 
+class Document implements
     ArrayAccess,
     Countable,
     IteratorAggregate

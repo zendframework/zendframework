@@ -23,21 +23,21 @@ class Yaml implements ReaderInterface
 {
     /**
      * Directory of the YAML file
-     * 
+     *
      * @var string
      */
     protected $directory;
 
     /**
      * YAML decoder callback
-     * 
+     *
      * @var callable
      */
     protected $yamlDecoder;
 
     /**
      * Constructor
-     * 
+     *
      * @param callable $yamlDecoder
      */
     public function __construct($yamlDecoder = null)
@@ -99,14 +99,14 @@ class Yaml implements ReaderInterface
         if (null === $this->getYamlDecoder()) {
              throw new Exception\RuntimeException("You didn't specify a Yaml callback decoder");
         }
-        
+
         $this->directory = dirname($filename);
-        
+
         $config = call_user_func($this->getYamlDecoder(), file_get_contents($filename));
         if (null === $config) {
             throw new Exception\RuntimeException("Error parsing YAML data");
-        }  
-        
+        }
+
         return $this->process($config);
     }
 
@@ -126,14 +126,14 @@ class Yaml implements ReaderInterface
         if (empty($string)) {
             return array();
         }
-        
+
         $this->directory = null;
-        
+
         $config = call_user_func($this->getYamlDecoder(), $string);
         if (null === $config) {
             throw new Exception\RuntimeException("Error parsing YAML data");
-        }   
-        
+        }
+
         return $this->process($config);
     }
 
@@ -157,7 +157,7 @@ class Yaml implements ReaderInterface
                 $reader = clone $this;
                 unset($data[$key]);
                 $data = array_replace_recursive($data, $reader->fromFile($this->directory . '/' . $value));
-            } 
+            }
         }
         return $data;
     }

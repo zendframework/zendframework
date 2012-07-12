@@ -143,7 +143,7 @@ class Gz extends AbstractCompressionAlgorithm
             gzwrite($file, $content);
             gzclose($file);
             $compressed = true;
-        } else if ($this->options['mode'] == 'deflate') {
+        } elseif ($this->options['mode'] == 'deflate') {
             $compressed = gzdeflate($content, $this->getLevel());
         } else {
             $compressed = gzcompress($content, $this->getLevel());
@@ -186,7 +186,7 @@ class Gz extends AbstractCompressionAlgorithm
             $file       = gzopen($archive, 'r');
             $compressed = gzread($file, $size);
             gzclose($file);
-        } else if ($mode == 'deflate') {
+        } elseif ($mode == 'deflate') {
             $compressed = gzinflate($content);
         } else {
             $compressed = gzuncompress($content);

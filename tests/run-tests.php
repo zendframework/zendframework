@@ -126,7 +126,8 @@ if ($run_as == 'groups') {
 exit($result);
 
 // Functions
-function getAll($phpunit_conf) {
+function getAll($phpunit_conf)
+{
     $components = array();
     $conf = simplexml_load_file($phpunit_conf);
     $excludes = $conf->xpath('/phpunit/testsuites/testsuite/exclude/text()');

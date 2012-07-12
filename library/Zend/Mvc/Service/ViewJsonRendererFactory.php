@@ -24,7 +24,7 @@ class ViewJsonRendererFactory implements FactoryInterface
     /**
      * Create and return the JSON view renderer
      *
-     * @param  ServiceLocatorInterface $serviceLocator 
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return JsonRenderer
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

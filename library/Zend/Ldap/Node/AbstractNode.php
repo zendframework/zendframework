@@ -286,8 +286,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
             }
 
             return count($this->currentData[$name]) > 0;
-        }
-        else {
+        } else {
             return false;
         }
     }

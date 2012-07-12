@@ -66,7 +66,7 @@ class Server implements ServerDefinition
     protected $_response;
 
     /**
-     * Flag: whether or not to return a response instead of automatically 
+     * Flag: whether or not to return a response instead of automatically
      * emitting it. By default, returns it.
      * @var boolean
      */
@@ -285,8 +285,8 @@ class Server implements ServerDefinition
 
     /**
      * Set broker instance
-     * 
-     * @param  string|Broker $broker 
+     *
+     * @param  string|Broker $broker
      * @return Server
      * @throws Exception\InvalidArgumentException
      */
@@ -533,8 +533,7 @@ class Server implements ServerDefinition
         }
 
         // Iterate through each of the service calls in the AMF request
-        foreach($responseBody as $body)
-        {
+        foreach($responseBody as $body) {
             try {
                 if ($handleAuth) {
                     if ($this->_handleAuth(

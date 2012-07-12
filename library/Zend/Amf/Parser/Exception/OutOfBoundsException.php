@@ -17,7 +17,7 @@ use Zend\Amf\Exception;
  * @package    Zend_Amv
  * @subpackage Parser
  */
-class OutOfBoundsException extends Exception\OutOfBoundsException implements 
+class OutOfBoundsException extends Exception\OutOfBoundsException implements
     ExceptionInterface
 {
 }

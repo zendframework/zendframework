@@ -49,7 +49,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped("Zend_Http_Client dynamic tests are not enabled in TestConfiguration.php");
         }
     }
-    
+
     /**
      * Test simple GET
      */
@@ -58,7 +58,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
         $response= HTTPClient::get($this->baseuri . 'testSimpleRequests.php');
         $this->assertTrue($response->isSuccess());
     }
-    
+
     /**
      * Test GET with query string in URI
      */
@@ -68,7 +68,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response->isSuccess());
         $this->assertContains('foo',$response->getBody());
     }
-    
+
     /**
      * Test GET with query as params
      */
@@ -79,7 +79,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('foo',$response->getBody());
         $this->assertContains('bar',$response->getBody());
     }
-    
+
     /**
      * Test simple POST
      */
@@ -90,7 +90,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('foo',$response->getBody());
         $this->assertContains('bar',$response->getBody());
     }
-    
+
     /**
      * Test POST with header Content-Type
      */

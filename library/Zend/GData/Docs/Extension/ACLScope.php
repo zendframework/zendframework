@@ -153,4 +153,3 @@ class ACLScope extends \Zend\GData\Extension
                "\nValue: " . $this->getValue();
     }
 }
-?>

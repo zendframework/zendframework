@@ -103,7 +103,7 @@ class Wildcard extends AbstractQuery
             }
 
             return substr($word, 0, $questionMarkPosition);
-        } else if ($astrericPosition !== false) {
+        } elseif ($astrericPosition !== false) {
             return substr($word, 0, $astrericPosition);
         }
 
@@ -187,7 +187,7 @@ class Wildcard extends AbstractQuery
 
         if (count($this->_matches) == 0) {
             return new EmptyResult();
-        } else if (count($this->_matches) == 1) {
+        } elseif (count($this->_matches) == 1) {
             return new Term(reset($this->_matches));
         } else {
             $rewrittenQuery = new MultiTerm();

@@ -15,9 +15,9 @@ use Zend\ServiceManager\AbstractPluginManager;
 /**
  * Plugin manager implementation for routes
  *
- * Enforces that routes retrieved are instances of RouteInterface. It overrides 
- * createFromInvokable() to call the route's factory method in order to get an 
- * instance. The manager is marked to not share by default, in order to allow 
+ * Enforces that routes retrieved are instances of RouteInterface. It overrides
+ * createFromInvokable() to call the route's factory method in order to get an
+ * instance. The manager is marked to not share by default, in order to allow
  * multiple route instances of the same type.
  *
  * @category   Zend
@@ -36,8 +36,8 @@ class RoutePluginManager extends AbstractPluginManager
      *
      * Checks that the filter loaded is either a valid callback or an instance
      * of FilterInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */
@@ -60,9 +60,9 @@ class RoutePluginManager extends AbstractPluginManager
      *
      * Overrides parent implementation by invoking the route factory,
      * passing $creationOptions as the argument.
-     * 
-     * @param  string $canonicalName 
-     * @param  string $requestedName 
+     *
+     * @param  string $canonicalName
+     * @param  string $requestedName
      * @return null|\stdClass
      * @throws Exception\RuntimeException If resolved class does not exist, or does not implement RouterInterface
      */

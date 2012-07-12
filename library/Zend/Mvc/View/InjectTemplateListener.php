@@ -122,8 +122,8 @@ class InjectTemplateListener implements ListenerAggregateInterface
 
     /**
      * Determine the top-level namespace of the controller
-     * 
-     * @param  string $controller 
+     *
+     * @param  string $controller
      * @return string
      */
     protected function deriveModuleNamespace($controller)

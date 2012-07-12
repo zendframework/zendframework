@@ -95,7 +95,8 @@ class MockupStream
         }
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         unset(self::$tests[$this->test]);
     }
 }

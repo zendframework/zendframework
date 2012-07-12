@@ -90,7 +90,7 @@ class FileSystemTest extends TestCase
 
         if (!file_exists($path)) {
             return true;
-        } else if (!is_dir($path)) {
+        } elseif (!is_dir($path)) {
             return unlink($path);
         } else {
             foreach (scandir($path) as $item) {

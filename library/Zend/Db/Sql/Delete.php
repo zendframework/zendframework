@@ -62,8 +62,8 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Constructor
-     * 
-     * @param  null|string $table 
+     *
+     * @param  null|string $table
      * @param  null|string $schema
      * @return void
      */
@@ -77,8 +77,8 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Create from statement
-     * 
-     * @param  string $table 
+     *
+     * @param  string $table
      * @param  null|string $schema
      * @return Delete
      */
@@ -101,8 +101,8 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Create where clause
-     * 
-     * @param  Where|Closure|string|array $predicate 
+     *
+     * @param  Where|Closure|string|array $predicate
      * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
      * @return Delete
      */
@@ -133,9 +133,9 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     /**
      * Prepare the delete statement
-     * 
-     * @param  Adapter $adapter 
-     * @param  StatementInterface $statement 
+     *
+     * @param  Adapter $adapter
+     * @param  StatementInterface $statement
      * @return void
      */
     public function prepareStatement(Adapter $adapter, StatementInterface $statement)
@@ -167,7 +167,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Get the SQL string, based on the platform
      *
      * Platform defaults to Sql92 if none provided
-     * 
+     *
      * @param  null|PlatformInterface $adapterPlatform
      * @return string
      */
@@ -194,8 +194,8 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Property overloading
      *
      * Overloads "where" only.
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return mixed
      */
     public function __get($name)

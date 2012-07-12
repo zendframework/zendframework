@@ -164,10 +164,10 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
 
 	/**
 	 * Create an HTML5-style meta charset tag. Something like <meta charset="utf-8">
-	 * 
+	 *
 	 * Not valid in a non-HTML5 doctype
 	 *
-	 * @param string $charset 
+	 * @param string $charset
 	 * @return \Zend\View\Helper\HeadMeta Provides a fluent interface
 	 */
     public function setCharset($charset)

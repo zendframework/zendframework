@@ -31,14 +31,15 @@ class FactoryTest extends PHPUnitTestCase
         $this->assertTrue(is_string(\Zend\Cloud\DocumentService\Factory::DOCUMENT_ADAPTER_KEY));
     }
 
-    public function testGetAdapterWithConfig() {
+    public function testGetAdapterWithConfig()
+    {
         // SimpleDB adapter
         $simpleDbAdapter = DocumentFactory::getAdapter(
                                     new Config(SimpleDbTest::getConfigArray(), true)
                                 );
 
         $this->assertEquals('Zend\Cloud\DocumentService\Adapter\SimpleDb', get_class($simpleDbAdapter));
-        
+
         // Azure adapter
         /*
          * Disable WindowsAzure test

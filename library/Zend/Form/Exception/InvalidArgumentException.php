@@ -15,6 +15,6 @@ namespace Zend\Form\Exception;
  * @package    Zend_Form
  * @subpackage Exception
  */
-class InvalidArgumentException extends \InvalidArgumentException implements 
+class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
 {}

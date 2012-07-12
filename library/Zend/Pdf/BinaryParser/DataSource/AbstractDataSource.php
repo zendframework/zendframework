@@ -33,7 +33,7 @@ use Zend\Pdf\Exception;
  * - If the data source cannot be opened for any reason (such as insufficient
  *   permissions, missing file, etc.), it should throw an appropriate exception.
  *
- * The destructor is also not defined in this abstract class. However, 
+ * The destructor is also not defined in this abstract class. However,
  * implementing classes should define one, and have it close the data source.
  *
  * @package    Zend_PDF

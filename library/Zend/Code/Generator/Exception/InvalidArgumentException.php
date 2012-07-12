@@ -17,6 +17,6 @@ use Zend\Code\Exception;
  * @package    Zend_Code
  * @subpackage Generator
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
 {}

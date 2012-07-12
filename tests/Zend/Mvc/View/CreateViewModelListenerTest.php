@@ -119,7 +119,7 @@ class CreateViewModelListenerTest extends TestCase
         $result = $this->event->getResult();
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
-    
+
     public function testViewModelCreatesViewModelWithNullResult()
     {
         $this->event->setResult(null);

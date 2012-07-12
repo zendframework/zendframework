@@ -20,10 +20,10 @@ class Hmac extends AbstractSignature
 {
     /**
      * Sign a request
-     * 
-     * @param  array $params 
-     * @param  mixed $method 
-     * @param  mixed $url 
+     *
+     * @param  array $params
+     * @param  mixed $method
+     * @param  mixed $url
      * @return string
      */
     public function sign(array $params, $method = null, $url = null)

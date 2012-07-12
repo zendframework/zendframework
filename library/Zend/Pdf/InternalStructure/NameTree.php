@@ -95,7 +95,8 @@ class NameTree implements ArrayAccess, Countable, Iterator
     }
 
 
-    public function valid() {
+    public function valid()
+    {
         return current($this->_items)!==false;
     }
 

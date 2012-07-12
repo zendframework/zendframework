@@ -96,8 +96,7 @@ class Entry extends App\MediaEntry
             $etag = $attribute->nodeValue;
             if ($this->_etag === null) {
                 $this->_etag = $etag;
-            }
-            elseif ($this->_etag->getFieldValue() != $etag) {
+            } elseif ($this->_etag->getFieldValue() != $etag) {
                 throw new App\IOException("ETag mismatch");
             }
             break;

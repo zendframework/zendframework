@@ -29,10 +29,10 @@ class Entry extends Extension\AbstractRenderer
      * @var bool
      */
     protected $_called = false;
-    
+
     /**
      * Render entry
-     * 
+     *
      * @return void
      */
     public function render()
@@ -45,21 +45,21 @@ class Entry extends Extension\AbstractRenderer
             $this->_appendNamespaces();
         }
     }
-    
+
     /**
      * Append namespaces to root element
-     * 
+     *
      * @return void
      */
     protected function _appendNamespaces()
     {
         $this->getRootElement()->setAttribute('xmlns:content',
-            'http://purl.org/rss/1.0/modules/content/');  
+            'http://purl.org/rss/1.0/modules/content/');
     }
 
     /**
      * Set entry content
-     * 
+     *
      * @param  DOMDocument $dom
      * @param  DOMElement $root
      * @return void

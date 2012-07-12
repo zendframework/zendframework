@@ -46,7 +46,7 @@ class RsaTest extends \PHPUnit_Framework_TestCase
 
     /** @var Rsa */
     protected $rsa;
-    
+
     /** @var Rsa */
     protected $rsaBase64Out;
 
@@ -141,7 +141,7 @@ CERT;
         ));
         $this->assertInstanceOf('Zend\Crypt\PublicKey\Rsa', $rsa);
         $this->assertInstanceOf('Zend\Crypt\PublicKey\RsaOptions', $rsa->getOptions());
-    }    
+    }
 
     public function testFacrotyCreatesKeys()
     {

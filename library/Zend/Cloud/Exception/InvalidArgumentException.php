@@ -15,6 +15,6 @@ namespace Zend\Cloud\Exception;
  * @package    Zend_Cloud
  * @subpackage Exception
  */
-class InvalidArgumentException extends \InvalidArgumentException implements 
+class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
 {}

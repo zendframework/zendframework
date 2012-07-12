@@ -496,8 +496,8 @@ EOT;
     /**
      *  @group ZF-3257
      */
-    public function testUsingXML8() {
-
+    public function testUsingXML8()
+    {
         // Set the XML contents that will be tested here.
         $xmlStringContents = <<<EOT
 <?xml version="1.0"?>

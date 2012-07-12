@@ -65,7 +65,8 @@ class DailyCountsResultSet extends AbstractResultSet
      *
      * @return  \Zend\Uri\Http
      */
-    public function getSearchUrl() {
+    public function getSearchUrl()
+    {
         return $this->searchUrl;
     }
 
@@ -74,7 +75,8 @@ class DailyCountsResultSet extends AbstractResultSet
      *
      * @return  int
      */
-    public function getDays() {
+    public function getDays()
+    {
         return $this->days;
     }
 

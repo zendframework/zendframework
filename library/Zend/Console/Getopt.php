@@ -603,8 +603,7 @@ class Getopt
      */
     public function setAliases($aliasMap)
     {
-        foreach ($aliasMap as $flag => $alias)
-        {
+        foreach ($aliasMap as $flag => $alias) {
             if ($this->_getoptConfig[self::CONFIG_IGNORECASE]) {
                 $flag = strtolower($flag);
                 $alias = strtolower($alias);
@@ -634,8 +633,7 @@ class Getopt
      */
     public function setHelp($helpMap)
     {
-        foreach ($helpMap as $flag => $help)
-        {
+        foreach ($helpMap as $flag => $help) {
             if (!isset($this->_ruleMap[$flag])) {
                 continue;
             }
@@ -672,7 +670,7 @@ class Getopt
             }
             if (substr($argv[0], 0, 2) == '--') {
                 $this->_parseLongOption($argv);
-            } else if (substr($argv[0], 0, 1) == '-' && ('-' != $argv[0] || count($argv) >1))  {
+            } elseif (substr($argv[0], 0, 1) == '-' && ('-' != $argv[0] || count($argv) >1))  {
                 $this->_parseShortOptionCluster($argv);
             } else if($this->_getoptConfig[self::CONFIG_PARSEALL]) {
                 $this->_remainingArgs[] = array_shift($argv);
@@ -760,7 +758,7 @@ class Getopt
         } else {
             $realFlag = $this->_ruleMap[$flag];
         }
-        
+
         switch ($this->_rules[$realFlag]['param']) {
             case 'required':
                 if (count($argv) > 0) {
@@ -810,10 +808,10 @@ class Getopt
 
         return $this->_setSingleOptionValue($this->_getoptConfig['numericFlagsOption'], $value);
     }
-    
+
     /**
      * Add relative to options' flag value
-     * 
+     *
      * If options list already has current flag as key
      * and parser should follow cumulative params by configuration,
      * we should to add new param to array, not to overwrite
@@ -941,8 +939,7 @@ class Getopt
      */
     protected function _addRulesModeZend($rules)
     {
-        foreach ($rules as $ruleCode => $helpMessage)
-        {
+        foreach ($rules as $ruleCode => $helpMessage) {
             // this may have to translate the long parm type if there
             // are any complaints that =string will not work (even though that use
             // case is not documented)

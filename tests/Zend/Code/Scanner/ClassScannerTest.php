@@ -64,7 +64,7 @@ class ClassScannerTest extends TestCase
             $this->assertInstanceOf('Zend\Code\Scanner\MethodScanner', $method);
         }
     }
-    
+
     public function testClassScannerCanScanInterface()
     {
         $file  = new FileScanner(__DIR__ . '/../TestAsset/FooInterface.php');

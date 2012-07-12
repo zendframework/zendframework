@@ -22,58 +22,58 @@ class Invite extends AbstractEntity
 {
     /**
      * Create time
-     * 
+     *
      * @var string
      */
     protected $createTime;
 
     /**
      * Service
-     * 
-     * @var AgileZen 
+     *
+     * @var AgileZen
      */
     protected $service;
 
     /**
      * Email
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $email;
 
     /**
      * Token
-     * 
+     *
      * @var string
      */
     protected $token;
 
     /**
      * Sender
-     * 
-     * @var User 
+     *
+     * @var User
      */
     protected $sender;
 
     /**
      * Role
-     * 
-     * @var Role 
+     *
+     * @var Role
      */
     protected $role;
 
     /**
      * Project Id
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $projectId;
 
     /**
      * Constructor
-     * 
+     *
      * @param AgileZen $service
-     * @param array $data 
+     * @param array $data
      */
     public function __construct(AgileZen $service, array $data)
     {
@@ -84,21 +84,21 @@ class Invite extends AbstractEntity
         $this->createTime = $data['createTime'];
 
         $data['role']['projectId'] = $data['projectId'];
-        
+
         $this->email      = $data['email'];
         $this->token      = $data['token'];
         $this->sender     = new User($service, $data['sender']);
         $this->role       = new Role($service, $data['role']);
         $this->projectId  = $data['projectId'];
         $this->service    = $service;
-        
+
         parent::__construct($data['id']);
     }
 
     /**
      * Get the create time
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getCreateTime()
     {
@@ -107,8 +107,8 @@ class Invite extends AbstractEntity
 
     /**
      * Get the email
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getEmail()
     {
@@ -117,8 +117,8 @@ class Invite extends AbstractEntity
 
     /**
      * Get the token
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getToken()
     {
@@ -127,8 +127,8 @@ class Invite extends AbstractEntity
 
     /**
      * Get the sender
-     * 
-     * @return User 
+     *
+     * @return User
      */
     public function getSender()
     {
@@ -137,8 +137,8 @@ class Invite extends AbstractEntity
 
     /**
      * Get the role
-     * 
-     * @return Role 
+     *
+     * @return Role
      */
     public function getRole()
     {
@@ -147,8 +147,8 @@ class Invite extends AbstractEntity
 
     /**
      * Get the project's Id
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getProjectId()
     {

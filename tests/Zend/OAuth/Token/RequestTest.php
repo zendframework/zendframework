@@ -35,7 +35,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $response = new HTTPResponse;
         $response->setContent($body)
                  ->setStatusCode(200);
-                 
+
         $token = new RequestToken($response);
         $this->assertEquals('jZaee4GF52O3lUb9', $token->getToken());
     }
@@ -43,11 +43,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testConstructorParsesRequestTokenSecretFromResponseBody()
     {
         $body = 'oauth_token=jZaee4GF52O3lUb9&oauth_token_secret=J4Ms4n8sxjYc0A8K0KOQFCTL0EwUQTri';
-        
+
         $response = new HTTPResponse;
         $response->setContent($body)
                  ->setStatusCode(200);
-        
+
         $token = new RequestToken($response);
         $this->assertEquals('J4Ms4n8sxjYc0A8K0KOQFCTL0EwUQTri', $token->getTokenSecret());
     }
@@ -58,7 +58,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $response = new HTTPResponse;
         $response->setContent($body)
                  ->setStatusCode(200);
-                 
+
         $token = new RequestToken($response);
         $this->assertEquals('J4Ms4n8sxjYc0A8K0KOQFCTL0EwUQTri', $token->oauth_token_secret);
     }
@@ -95,7 +95,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $response = new HTTPResponse;
         $response->setContent($body)
                  ->setStatusCode(200);
-                 
+
         $token = new RequestToken($response);
         $this->assertTrue($token->isValid());
     }

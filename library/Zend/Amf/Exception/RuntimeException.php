@@ -14,7 +14,7 @@ namespace Zend\Amf\Exception;
  * @category   Zend
  * @package    Zend_Amf
  */
-class RuntimeException extends \RuntimeException implements 
+class RuntimeException extends \RuntimeException implements
     ExceptionInterface
 {
 }

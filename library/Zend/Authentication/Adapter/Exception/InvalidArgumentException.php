@@ -16,4 +16,4 @@ class InvalidArgumentException
     extends Exception\InvalidArgumentException
     implements ExceptionInterface
 {
-} 
+}

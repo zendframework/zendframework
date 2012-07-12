@@ -108,7 +108,7 @@ class TranslatorTest extends TestCase
         $loader->textDomain = new TextDomain(array('foo' => 'bar'));
         $this->translator->getPluginManager()->setService('test', $loader);
         $this->translator->addTranslationFile('test', null);
-        
+
         $this->assertEquals('bar', $this->translator->translate('foo'));
     }
 

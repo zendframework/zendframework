@@ -21,36 +21,42 @@ use Zend\GData\Extension;
 class EventStatusTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->eventStatusText = file_get_contents(
                 'Zend/GData/_files/EventStatusElementSample1.xml',
                 true);
         $this->eventStatus = new Extension\EventStatus();
     }
 
-    public function testEmptyEventStatusShouldHaveNoExtensionElements() {
+    public function testEmptyEventStatusShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->eventStatus->extensionElements));
         $this->assertTrue(count($this->eventStatus->extensionElements) == 0);
     }
 
-    public function testEmptyEventStatusShouldHaveNoExtensionAttributes() {
+    public function testEmptyEventStatusShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->eventStatus->extensionAttributes));
         $this->assertTrue(count($this->eventStatus->extensionAttributes) == 0);
     }
 
-    public function testSampleEventStatusShouldHaveNoExtensionElements() {
+    public function testSampleEventStatusShouldHaveNoExtensionElements()
+    {
         $this->eventStatus->transferFromXML($this->eventStatusText);
         $this->assertTrue(is_array($this->eventStatus->extensionElements));
         $this->assertTrue(count($this->eventStatus->extensionElements) == 0);
     }
 
-    public function testSampleEventStatusShouldHaveNoExtensionAttributes() {
+    public function testSampleEventStatusShouldHaveNoExtensionAttributes()
+    {
         $this->eventStatus->transferFromXML($this->eventStatusText);
         $this->assertTrue(is_array($this->eventStatus->extensionAttributes));
         $this->assertTrue(count($this->eventStatus->extensionAttributes) == 0);
     }
 
-    public function testNormalEventStatusShouldHaveNoExtensionElements() {
+    public function testNormalEventStatusShouldHaveNoExtensionElements()
+    {
         $this->eventStatus->value = "http://schemas.google.com/g/2005#event.tentative";
 
         $this->assertEquals("http://schemas.google.com/g/2005#event.tentative", $this->eventStatus->value);
@@ -72,7 +78,8 @@ class EventStatusTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("http://schemas.google.com/g/2005#event.tentative", $newEventStatus2->value);
     }
 
-    public function testEmptyEventStatusToAndFromStringShouldMatch() {
+    public function testEmptyEventStatusToAndFromStringShouldMatch()
+    {
         $eventStatusXml = $this->eventStatus->saveXML();
         $newEventStatus = new Extension\EventStatus();
         $newEventStatus->transferFromXML($eventStatusXml);
@@ -80,7 +87,8 @@ class EventStatusTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($eventStatusXml == $newEventStatusXml);
     }
 
-    public function testEventStatusWithValueToAndFromStringShouldMatch() {
+    public function testEventStatusWithValueToAndFromStringShouldMatch()
+    {
         $this->eventStatus->value = "http://schemas.google.com/g/2005#event.tentative";
         $eventStatusXml = $this->eventStatus->saveXML();
         $newEventStatus = new Extension\EventStatus();
@@ -90,7 +98,8 @@ class EventStatusTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("http://schemas.google.com/g/2005#event.tentative", $this->eventStatus->value);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->eventStatus->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -104,7 +113,8 @@ class EventStatusTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newEventStatus->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullEventStatusToAndFromString() {
+    public function testConvertFullEventStatusToAndFromString()
+    {
         $this->eventStatus->transferFromXML($this->eventStatusText);
         $this->assertEquals("http://schemas.google.com/g/2005#event.confirmed", $this->eventStatus->value);
     }

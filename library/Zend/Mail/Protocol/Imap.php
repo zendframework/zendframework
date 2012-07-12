@@ -524,9 +524,9 @@ class Imap
     {
         if (is_array($from)) {
             $set = implode(',', $from);
-        } else if ($to === null) {
+        } elseif ($to === null) {
             $set = (int)$from;
-        } else if ($to === INF) {
+        } elseif ($to === INF) {
             $set = (int)$from . ':*';
         } else {
             $set = (int)$from . ':' . (int)$to;

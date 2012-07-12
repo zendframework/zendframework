@@ -101,7 +101,7 @@ class File extends Part
                     $this->_partPos[] = $part;
                 }
                 $part = array($pos);
-            } else if ($line == '--' . $boundary . '--') {
+            } elseif ($line == '--' . $boundary . '--') {
                 $part[1] = $lastPos;
                 $this->_partPos[] = $part;
                 break;
@@ -137,7 +137,7 @@ class File extends Part
      *
      * @return int size
      */
-    public function getSize() 
+    public function getSize()
     {
         return $this->_contentPos[1] - $this->_contentPos[0];
     }

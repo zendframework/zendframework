@@ -25,9 +25,9 @@ abstract class HeaderWrap
 {
     /**
      * Wrap a long header line
-     * 
-     * @param  string          $value 
-     * @param  HeaderInterface $header 
+     *
+     * @param  string          $value
+     * @param  HeaderInterface $header
      * @return string
      */
     public static function wrap($value, HeaderInterface $header)
@@ -60,7 +60,7 @@ abstract class HeaderWrap
 
     /**
      * Wrap a structured header line
-     * 
+     *
      * @param  string              $value
      * @param  StructuredInterface $header
      * @return string
@@ -85,11 +85,11 @@ abstract class HeaderWrap
     /**
      * MIME-encode a value
      *
-     * Performs quoted-printable encoding on a value, setting maximum 
-     * line-length to 998. 
-     * 
-     * @param  string $value 
-     * @param  string $encoding 
+     * Performs quoted-printable encoding on a value, setting maximum
+     * line-length to 998.
+     *
+     * @param  string $value
+     * @param  string $encoding
      * @param  int    $lineLength maximum line-length, by default 998
      * @return string Returns the mime encode value without the last line ending
      */

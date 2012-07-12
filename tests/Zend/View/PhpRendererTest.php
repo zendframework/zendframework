@@ -169,14 +169,14 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
             $this->assertContains("<li>$value</li>", $content);
         }
     }
-    
+
     /**
      * @group ZF2-68
      */
     public function testCanSpecifyArrayForVarsAndGetAlwaysArrayObject()
     {
         $vars = array('foo' => 'bar');
-        $this->renderer->setVars($vars);       
+        $this->renderer->setVars($vars);
         $this->assertTrue($this->renderer->vars() instanceof Variables);
     }
 
@@ -252,7 +252,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
         $test = $this->renderer->render('testLocalVars.phtml');
         $this->assertContains($expected, $test);
-    }    
+    }
 
     public function testRendersTemplatesInAStack()
     {

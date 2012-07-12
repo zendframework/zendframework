@@ -51,7 +51,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
                 $dir = dirname($dir);
                 if (!file_exists($dir)) {
                     throw new StorageException\InvalidArgumentException("parent $dir not found");
-                } else if (!is_dir($dir)) {
+                } elseif (!is_dir($dir)) {
                     throw new StorageException\InvalidArgumentException("parent $dir not a directory");
                 } else {
                     throw new StorageException\RuntimeException('cannot create maildir');
@@ -105,7 +105,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
     {
         if ($parentFolder instanceof Folder) {
             $folder = $parentFolder->getGlobalName() . $this->_delim . $name;
-        } else if ($parentFolder != null) {
+        } elseif ($parentFolder != null) {
             $folder = rtrim($parentFolder, $this->_delim) . $this->_delim . $name;
         } else {
             $folder = $name;
@@ -531,7 +531,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
 
         if (!copy($old_file, $temp_file['filename'])) {
             $exception = new StorageException\RuntimeException('cannot copy message file');
-        } else if (!link($temp_file['filename'], $new_file)) {
+        } elseif (!link($temp_file['filename'], $new_file)) {
             $exception = new StorageException\RuntimeException('cannot link message file to final dir');
         }
         @unlink($temp_file['filename']);

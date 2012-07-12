@@ -170,7 +170,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         $xml = $dom->saveXml();
 
-        
+
         $parsed = $this->_request->loadXml($xml);
         $this->assertTrue($parsed, $xml);
 

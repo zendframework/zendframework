@@ -290,8 +290,7 @@ abstract class AbstractValue
             }
         }
 
-        switch (self::getXmlRpcTypeByValue($value))
-        {
+        switch (self::getXmlRpcTypeByValue($value)) {
             case self::XMLRPC_TYPE_DATETIME:
                 return new Value\DateTime($value);
 

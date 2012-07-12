@@ -17,7 +17,7 @@ use Zend\Amf\Exception;
  * @package    Zend_Amf
  * @subpackage Parser
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
 {
 }

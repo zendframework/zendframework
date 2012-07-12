@@ -89,11 +89,9 @@ abstract class AbstractQuery extends Query
      {
          if ($domain !== null) {
              return GApps::APPS_BASE_FEED_URI . '/' . $domain;
-         }
-         else if ($this->_domain !== null) {
+         } elseif ($this->_domain !== null) {
              return GApps::APPS_BASE_FEED_URI . '/' . $this->_domain;
-         }
-         else {
+         } else {
              throw new \Zend\GData\App\InvalidArgumentException(
                  'Domain must be specified.');
          }

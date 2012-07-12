@@ -75,7 +75,7 @@ class Rss extends AbstractFeed
         if (array_key_exists('authors', $this->_data)) {
             return $this->_data['authors'];
         }
-        
+
         $authors = array();
         $authors_dc = $this->getExtension('DublinCore')->getAuthors();
         if (!empty($authors_dc)) {
@@ -109,7 +109,7 @@ class Rss extends AbstractFeed
                         $data['name'] = $matches[1];
                     }
                     $authors[] = $data;
-                } 
+                }
             }
         }
 
@@ -619,7 +619,7 @@ class Rss extends AbstractFeed
 
         return $this->_data['hubs'];
     }
-    
+
     /**
      * Get all categories
      *
@@ -650,7 +650,7 @@ class Rss extends AbstractFeed
         } else {
             $categoryCollection = $this->getExtension('DublinCore')->getCategories();
         }
-        
+
         if (count($categoryCollection) == 0) {
             $categoryCollection = $this->getExtension('Atom')->getCategories();
         }

@@ -209,7 +209,7 @@ class HTML extends Document
             if(!in_array($node->parentNode->tagName, $this->_inlineTags)) {
                 $text .= ' ';
             }
-        } else if ($node->nodeType == XML_ELEMENT_NODE  &&  $node->nodeName != 'script') {
+        } elseif ($node->nodeType == XML_ELEMENT_NODE  &&  $node->nodeName != 'script') {
             foreach ($node->childNodes as $childNode) {
                 $this->_retrieveNodeText($childNode, $text);
             }

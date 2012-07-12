@@ -100,7 +100,7 @@ class AccordionContainerTest extends \PHPUnit_Framework_TestCase
     {
         $this->helper->captureStart('foo', array(), array('style' => 'height: 200px; width: 100px;'));
         $this->view->plugin('accordionPane')->captureStart('bar', array('title' => 'Captured Pane'));
-        
+
         $this->setExpectedException('Zend\Dojo\View\Exception\RuntimeException', 'Lock already exists for id ');
         $this->view->plugin('accordionPane')->captureStart('bar', array('title' => 'Captured Pane'));
     }
@@ -108,7 +108,7 @@ class AccordionContainerTest extends \PHPUnit_Framework_TestCase
     public function testCapturingShouldRaiseErrorWhenNonexistentIdPassedToEnd()
     {
         $this->helper->captureStart('foo', array(), array('style' => 'height: 200px; width: 100px;'));
-        
+
         $this->setExpectedException('Zend\Dojo\View\Exception\RuntimeException', 'No capture lock exists for id ');
         $html = $this->helper->captureEnd('bar');
     }

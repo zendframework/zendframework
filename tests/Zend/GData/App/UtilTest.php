@@ -147,7 +147,8 @@ class UtilTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testFindGreatestBoundedValueReturnsMax() {
+    public function testFindGreatestBoundedValueReturnsMax()
+    {
         $data = array(-1 => null,
                       0 => null,
                       1 => null,
@@ -159,7 +160,8 @@ class UtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(5, $result);
     }
 
-    public function testFindGreatestBoundedValueReturnsMaxWhenBounded() {
+    public function testFindGreatestBoundedValueReturnsMaxWhenBounded()
+    {
         $data = array(-1 => null,
                       0 => null,
                       1 => null,
@@ -171,7 +173,8 @@ class UtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $result);
     }
 
-    public function testFindGreatestBoundedValueReturnsMaxWhenUnbounded() {
+    public function testFindGreatestBoundedValueReturnsMaxWhenUnbounded()
+    {
         $data = array(-1 => null,
                       0 => null,
                       1 => null,
@@ -183,7 +186,8 @@ class UtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(5, $result);
     }
 
-    public function testFindGreatestBoundedValueReturnsZeroWhenZeroBounded() {
+    public function testFindGreatestBoundedValueReturnsZeroWhenZeroBounded()
+    {
         $data = array(-1 => null,
                       0 => null,
                       1 => null,
@@ -195,7 +199,8 @@ class UtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $result);
     }
 
-    public function testFindGreatestBoundedValueFailsWhenNegativelyBounded() {
+    public function testFindGreatestBoundedValueFailsWhenNegativelyBounded()
+    {
         $data = array(-1 => null,
                       0 => null,
                       1 => null,

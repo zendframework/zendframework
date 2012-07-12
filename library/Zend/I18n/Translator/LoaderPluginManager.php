@@ -17,7 +17,7 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Plugin manager implementation for translation loaders.
  *
  * Enforces that filters retrieved are either callbacks or instances of
- * Loader\LoaderInterface. Additionally, it registers a number of default 
+ * Loader\LoaderInterface. Additionally, it registers a number of default
  * loaders.
  *
  * @category   Zend
@@ -28,7 +28,7 @@ class LoaderPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of loaders
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -40,8 +40,8 @@ class LoaderPluginManager extends AbstractPluginManager
      * Validate the plugin
      *
      * Checks that the filter loaded is an instance of Loader\LoaderInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */

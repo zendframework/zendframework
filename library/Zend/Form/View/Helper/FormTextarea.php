@@ -42,8 +42,8 @@ class FormTextarea extends AbstractHelper
 
     /**
      * Render a form <textarea> element from the provided $element
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @return string
      */
     public function render(ElementInterface $element)
@@ -62,8 +62,8 @@ class FormTextarea extends AbstractHelper
         $escapeHtml         = $this->getEscapeHtmlHelper();
 
         return sprintf(
-            '<textarea %s>%s</textarea>', 
-            $this->createAttributesString($attributes), 
+            '<textarea %s>%s</textarea>',
+            $this->createAttributesString($attributes),
             $escapeHtml($content)
         );
     }
@@ -72,8 +72,8 @@ class FormTextarea extends AbstractHelper
      * Invoke helper as functor
      *
      * Proxies to {@link render()}.
-     * 
-     * @param  ElementInterface|null $element 
+     *
+     * @param  ElementInterface|null $element
      * @return string|FormTextarea
      */
     public function __invoke(ElementInterface $element = null)

@@ -67,8 +67,8 @@ class MvcEvent extends Event
 
     /**
      * Set application instance
-     * 
-     * @param  ApplicationInterface $application 
+     *
+     * @param  ApplicationInterface $application
      * @return MvcEvent
      */
     public function setApplication(ApplicationInterface $application)
@@ -80,7 +80,7 @@ class MvcEvent extends Event
 
     /**
      * Get application instance
-     * 
+     *
      * @return ApplicationInterface
      */
     public function getApplication()
@@ -230,7 +230,7 @@ class MvcEvent extends Event
 
     /**
      * Does the event represent an error response?
-     * 
+     *
      * @return bool
      */
     public function isError()
@@ -240,8 +240,8 @@ class MvcEvent extends Event
 
     /**
      * Set the error message (indicating error in handling request)
-     * 
-     * @param  string $message 
+     *
+     * @param  string $message
      * @return MvcEvent
      */
     public function setError($message)
@@ -252,7 +252,7 @@ class MvcEvent extends Event
 
     /**
      * Retrieve the error message, if any
-     * 
+     *
      * @return string
      */
     public function getError()
@@ -262,7 +262,7 @@ class MvcEvent extends Event
 
     /**
      * Get the currently registered controller name
-     * 
+     *
      * @return string
      */
     public function getController()

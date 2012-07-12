@@ -185,13 +185,13 @@ class Paginator implements Countable, IteratorAggregate
         if ($adapter == self::INTERNAL_ADAPTER) {
             if (is_array($data)) {
                 $adapter = 'array';
-            } else if ($data instanceof DbTableSelect) {
+            } elseif ($data instanceof DbTableSelect) {
                 $adapter = 'db_table_select';
-            } else if ($data instanceof DbSelect) {
+            } elseif ($data instanceof DbSelect) {
                 $adapter = 'db_select';
-            } else if ($data instanceof Iterator) {
+            } elseif ($data instanceof Iterator) {
                 $adapter = 'iterator';
-            } else if (is_integer($data)) {
+            } elseif (is_integer($data)) {
                 $adapter = 'null';
             } else {
                 $type = (is_object($data)) ? get_class($data) : gettype($data);
@@ -375,7 +375,7 @@ class Paginator implements Countable, IteratorAggregate
     {
         if ($adapter instanceof AdapterInterface) {
             $this->_adapter = $adapter;
-        } else if ($adapter instanceof AdapterAggregateInterface) {
+        } elseif ($adapter instanceof AdapterAggregateInterface) {
             $this->_adapter = $adapter->getPaginatorAdapter();
         } else {
             throw new Exception\InvalidArgumentException(
@@ -604,7 +604,7 @@ class Paginator implements Countable, IteratorAggregate
     {
         if ($pageNumber == null) {
             $pageNumber = $this->getCurrentPageNumber();
-        } else if ($pageNumber < 0) {
+        } elseif ($pageNumber < 0) {
             $pageNumber = ($this->count() + 1) + $pageNumber;
         }
 

@@ -21,7 +21,7 @@ abstract class AbstractAuthentication implements \Zend\Authentication\Adapter\Ad
     protected $_username;
     protected $_password;
 
-    public function setCredentials($username, $password) 
+    public function setCredentials($username, $password)
     {
         $this->_username = $username;
         $this->_password = $password;

@@ -36,7 +36,8 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $this->transport->setConnection($this->connection);
     }
 
-    public function testSendMinimalMail() {
+    public function testSendMinimalMail()
+    {
         $headers = new Headers();
         $headers->addHeaderLine('Date', 'Sun, 10 Jun 2012 20:07:24 +0200');
         $message = new Message();

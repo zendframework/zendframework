@@ -56,7 +56,7 @@ class ItemListTest extends \PHPUnit_Framework_TestCase
         $list->seek(2);
         $this->assertEquals($list->current()->getTitle(), $values[2]);
     }
-    
+
     public function testSeektableIteratorThrowsBoundsException()
     {
         $list = new Tag\ItemList();
@@ -66,7 +66,7 @@ class ItemListTest extends \PHPUnit_Framework_TestCase
             $list[] = $this->_getItem($value);
         }
         $list->seek(2);
-        
+
         $this->setExpectedException('Zend\Tag\Exception\OutOfBoundsException', 'Invalid seek position');
         $list->seek(3);
     }

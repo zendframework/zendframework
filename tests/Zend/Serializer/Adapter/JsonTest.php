@@ -97,7 +97,8 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeNull() {
+    public function testUnserializeNull()
+    {
         $value    = 'null';
         $expected = null;
 

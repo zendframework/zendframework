@@ -32,9 +32,9 @@ class Json extends AbstractAdapter
 
     /**
      * Serialize PHP value to JSON
-     * 
-     * @param  mixed $value 
-     * @param  array $opts 
+     *
+     * @param  mixed $value
+     * @param  array $opts
      * @return string
      * @throws InvalidArgumentException|RuntimeException on JSON encoding exception
      */
@@ -53,9 +53,9 @@ class Json extends AbstractAdapter
 
     /**
      * Deserialize JSON to PHP value
-     * 
-     * @param  string $json 
-     * @param  array $opts 
+     *
+     * @param  string $json
+     * @param  array $opts
      * @return mixed
      * @throws InvalidArgumentException|RuntimeException
      */

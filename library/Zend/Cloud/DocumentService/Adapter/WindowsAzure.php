@@ -466,7 +466,7 @@ class WindowsAzure extends AbstractAdapter
     public function select($fields = null)
     {
         $queryClass = $this->getQueryClass();
-        
+
         $query = new $queryClass();
         $defaultClass = self::DEFAULT_QUERY_CLASS;
         if (!$query instanceof $defaultClass) {

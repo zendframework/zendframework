@@ -90,7 +90,7 @@ class OpenId
                 $url = substr($_SERVER['HTTP_HOST'], 0, $pos);
                 $port = substr($_SERVER['HTTP_HOST'], $pos);
             }
-        } else if (isset($_SERVER['SERVER_NAME'])) {
+        } elseif (isset($_SERVER['SERVER_NAME'])) {
             $url = $_SERVER['SERVER_NAME'];
             if (isset($_SERVER['SERVER_PORT'])) {
                 $port = ':' . $_SERVER['SERVER_PORT'];
@@ -118,13 +118,13 @@ class OpenId
             } else {
                 $url .= substr($_SERVER['REQUEST_URI'], 0, $query);
             }
-        } else if (isset($_SERVER['SCRIPT_URL'])) {
+        } elseif (isset($_SERVER['SCRIPT_URL'])) {
             $url .= $_SERVER['SCRIPT_URL'];
-        } else if (isset($_SERVER['REDIRECT_URL'])) {
+        } elseif (isset($_SERVER['REDIRECT_URL'])) {
             $url .= $_SERVER['REDIRECT_URL'];
-        } else if (isset($_SERVER['PHP_SELF'])) {
+        } elseif (isset($_SERVER['PHP_SELF'])) {
             $url .= $_SERVER['PHP_SELF'];
-        } else if (isset($_SERVER['SCRIPT_NAME'])) {
+        } elseif (isset($_SERVER['SCRIPT_NAME'])) {
             $url .= $_SERVER['SCRIPT_NAME'];
             if (isset($_SERVER['PATH_INFO'])) {
                 $url .= $_SERVER['PATH_INFO'];
@@ -143,7 +143,7 @@ class OpenId
     {
         if (empty($url)) {
             return self::selfUrl();
-        } else if (!preg_match('|^([^:]+)://|', $url)) {
+        } elseif (!preg_match('|^([^:]+)://|', $url)) {
             if (preg_match('|^([^:]+)://([^:@]*(?:[:][^@]*)?@)?([^/:@?#]*)(?:[:]([^/?#]*))?(/[^?]*)?((?:[?](?:[^#]*))?(?:#.*)?)$|', self::selfUrl(), $reg)) {
                 $scheme = $reg[1];
                 $auth = $reg[2];
@@ -216,9 +216,9 @@ class OpenId
                 ++$i;
                 if ($id[$i] >= '0' && $id[$i] <= '9') {
                     $c = ord($id[$i]) - ord('0');
-                } else if ($id[$i] >= 'A' && $id[$i] <= 'F') {
+                } elseif ($id[$i] >= 'A' && $id[$i] <= 'F') {
                     $c = ord($id[$i]) - ord('A') + 10;
-                } else if ($id[$i] >= 'a' && $id[$i] <= 'f') {
+                } elseif ($id[$i] >= 'a' && $id[$i] <= 'f') {
                     $c = ord($id[$i]) - ord('a') + 10;
                 } else {
                     return false;
@@ -226,9 +226,9 @@ class OpenId
                 ++$i;
                 if ($id[$i] >= '0' && $id[$i] <= '9') {
                     $c = ($c << 4) | (ord($id[$i]) - ord('0'));
-                } else if ($id[$i] >= 'A' && $id[$i] <= 'F') {
+                } elseif ($id[$i] >= 'A' && $id[$i] <= 'F') {
                     $c = ($c << 4) | (ord($id[$i]) - ord('A') + 10);
-                } else if ($id[$i] >= 'a' && $id[$i] <= 'f') {
+                } elseif ($id[$i] >= 'a' && $id[$i] <= 'f') {
                     $c = ($c << 4) | (ord($id[$i]) - ord('a') + 10);
                 } else {
                     return false;
@@ -302,7 +302,7 @@ class OpenId
                             } else {
                                     $res .= '/..';
                             }
-                        } else if ($i != $n && $path[$i] != '/') {
+                        } elseif ($i != $n && $path[$i] != '/') {
                             $res .= '/.';
                         }
                     } else {
@@ -320,7 +320,7 @@ class OpenId
             if ($port == 80) {
                 $port = '';
             }
-        } else if ($scheme == 'https') {
+        } elseif ($scheme == 'https') {
             if ($port == 443) {
                 $port = '';
             }
@@ -370,9 +370,9 @@ class OpenId
         // 7.2.1
         if (strpos($id, 'xri://$ip*') === 0) {
             $id = substr($id, strlen('xri://$ip*'));
-        } else if (strpos($id, 'xri://$dns*') === 0) {
+        } elseif (strpos($id, 'xri://$dns*') === 0) {
             $id = substr($id, strlen('xri://$dns*'));
-        } else if (strpos($id, 'xri://') === 0) {
+        } elseif (strpos($id, 'xri://') === 0) {
             $id = substr($id, strlen('xri://'));
         }
 
@@ -423,7 +423,7 @@ class OpenId
             }
             $body .= "<input type=\"submit\" value=\"Continue OpenID transaction\">\n";
             $body .= "</form></body></html>\n";
-        } else if (is_array($params) && count($params) > 0) {
+        } elseif (is_array($params) && count($params) > 0) {
             if (strpos($url, '?') === false) {
                 $url .= '?' . self::paramsToQuery($params);
             } else {
@@ -488,11 +488,11 @@ class OpenId
     {
         if (function_exists('openssl_digest')) {
             return openssl_digest($data, $func, true);
-        } else if (function_exists('hash')) {
+        } elseif (function_exists('hash')) {
             return hash($func, $data, true);
-        } else if ($func === 'sha1') {
+        } elseif ($func === 'sha1') {
             return sha1($data, true);
-        } else if ($func === 'sha256') {
+        } elseif ($func === 'sha256') {
             if (function_exists('mhash')) {
                 return mhash(MHASH_SHA256 , $data);
             }
@@ -541,7 +541,7 @@ class OpenId
     {
         if (extension_loaded('gmp')) {
             return gmp_init(bin2hex($bin), 16);
-        } else if (extension_loaded('bcmath')) {
+        } elseif (extension_loaded('bcmath')) {
             $bn = 0;
             $len = strlen($bin);
             for ($i = 0; $i < $len; $i++) {
@@ -569,15 +569,15 @@ class OpenId
             $s = gmp_strval($bn, 16);
             if (strlen($s) % 2 != 0) {
                 $s = '0' . $s;
-            } else if ($s[0] > '7') {
+            } elseif ($s[0] > '7') {
                 $s = '00' . $s;
             }
             return pack("H*", $s);
-        } else if (extension_loaded('bcmath')) {
+        } elseif (extension_loaded('bcmath')) {
             $cmp = bccomp($bn, 0);
             if ($cmp == 0) {
                 return "\0";
-            } else if ($cmp < 0) {
+            } elseif ($cmp < 0) {
                 throw new Exception\RuntimeException(
                     'Big integer arithmetic error',
                     Exception\ExceptionInterface::ERROR_LONG_MATH);
@@ -629,7 +629,7 @@ class OpenId
             $bn_priv_key = self::binToBigNum($priv_key);
             if (extension_loaded('gmp')) {
                 $bn_pub_key  = gmp_powm($bn_g, $bn_priv_key, $bn_p);
-            } else if (extension_loaded('bcmath')) {
+            } elseif (extension_loaded('bcmath')) {
                 $bn_pub_key  = bcpowmod($bn_g, $bn_priv_key, $bn_p);
             }
             $pub_key     = self::bigNumToBin($bn_pub_key);
@@ -685,11 +685,11 @@ class OpenId
                 $ret = "\0" . $ret;
             }
             return $ret;
-        } else if (extension_loaded('gmp')) {
+        } elseif (extension_loaded('gmp')) {
             $bn_pub_key = self::binToBigNum($pub_key);
             $bn_secret  = gmp_powm($bn_pub_key, $dh['priv_key'], $dh['p']);
             return self::bigNumToBin($bn_secret);
-        } else if (extension_loaded('bcmath')) {
+        } elseif (extension_loaded('bcmath')) {
             $bn_pub_key = self::binToBigNum($pub_key);
             $bn_secret  = bcpowmod($bn_pub_key, $dh['priv_key'], $dh['p']);
             return self::bigNumToBin($bn_secret);

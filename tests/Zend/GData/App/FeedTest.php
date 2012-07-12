@@ -26,19 +26,22 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     /** @var App\Feed */
     public $feed;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->feedText = file_get_contents(
                 'Zend/GData/App/_files/FeedSample1.xml',
                 true);
         $this->feed = new App\Feed();
     }
 
-    public function testEmptyFeedShouldHaveEmptyExtensionsList() {
+    public function testEmptyFeedShouldHaveEmptyExtensionsList()
+    {
         $this->assertTrue(is_array($this->feed->extensionElements));
         $this->assertTrue(count($this->feed->extensionElements) == 0);
     }
 
-    public function testEmptyFeedToAndFromStringShouldMatch() {
+    public function testEmptyFeedToAndFromStringShouldMatch()
+    {
         $feedXml = $this->feed->saveXML();
         $newFeed = new App\Feed();
         $newFeed->transferFromXML($feedXml);
@@ -46,7 +49,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feedXml == $newFeedXml);
     }
 
-    public function testConvertFeedToAndFromString() {
+    public function testConvertFeedToAndFromString()
+    {
         $this->feed->transferFromXML($this->feedText);
         $feedXml = $this->feed->saveXML();
         $newFeed = new App\Feed();
@@ -88,7 +92,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('xhtml', $entry->content->type);
     }
 
-    public function testCanAddIndividualEntries() {
+    public function testCanAddIndividualEntries()
+    {
         $this->feed->transferFromXML($this->feedText);
         $this->assertEquals(1, count($this->feed->entry));
         $oldTitle = $this->feed->entry[0]->title->text;
@@ -100,13 +105,15 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Foo", $this->feed->entry[1]->title->text);
     }
 
-    public function testCanSetAndGetEtag() {
+    public function testCanSetAndGetEtag()
+    {
         $data = Etag::fromString("Etag: W/&amp;FooBarBaz&amp;");
         $this->feed->setEtag($data);
         $this->assertEquals($this->feed->getEtag(), $data);
     }
 
-    public function testSetServicePropagatesToChildren() {
+    public function testSetServicePropagatesToChildren()
+    {
         // Setup
         $entries = array(new App\Entry(), new App\Entry());
         foreach ($entries as $entry) {

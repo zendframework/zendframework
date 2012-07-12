@@ -31,8 +31,8 @@ class TextDomain extends ArrayObject
 
     /**
      * Set the plural rule
-     * 
-     * @param  PluralRule $rule 
+     *
+     * @param  PluralRule $rule
      * @return TextDomain
      */
     public function setPluralRule(PluralRule $rule)

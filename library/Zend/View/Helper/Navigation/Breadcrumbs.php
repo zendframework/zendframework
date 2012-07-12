@@ -121,9 +121,9 @@ class Breadcrumbs extends AbstractHelper
      * Sets which partial view script to use for rendering menu
      *
      * @param  string|array $partial partial view script or null. If an array is
-     *                               given, it is expected to contain two 
-     *                               values; the partial view script to use, 
-     *                               and the module where the script can be 
+     *                               given, it is expected to contain two
+     *                               values; the partial view script to use,
+     *                               and the module where the script can be
      *                               found.
      * @return Breadcrumbs fluent interface, returns self
      */
@@ -209,13 +209,13 @@ class Breadcrumbs extends AbstractHelper
      * so in the script it will be available in <code>$this->container</code>.
      *
      * @param  AbstractContainer $container [optional] container to pass to view script.
-     *                              Default is to use the container registered 
+     *                              Default is to use the container registered
      *                              in the helper.
-     * @param  string|array $partial [optional] partial view script to use. 
-     *                               Default is to use the partial registered 
-     *                               in the helper.  If an array is given, it 
-     *                               is expected to contain two values; the 
-     *                               partial view script to use, and the module 
+     * @param  string|array $partial [optional] partial view script to use.
+     *                               Default is to use the partial registered
+     *                               in the helper.  If an array is given, it
+     *                               is expected to contain two values; the
+     *                               partial view script to use, and the module
      *                               where the script can be found.
      * @return string               helper output
      * @throws Exception\RuntimeException if no partial provided

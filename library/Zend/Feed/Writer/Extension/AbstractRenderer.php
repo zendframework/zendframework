@@ -23,32 +23,32 @@ abstract class AbstractRenderer implements Renderer
      * @var DOMDocument
      */
     protected $_dom = null;
-    
+
     /**
      * @var mixed
      */
     protected $_entry = null;
-    
+
     /**
      * @var DOMElement
      */
     protected $_base = null;
-    
+
     /**
      * @var mixed
      */
     protected $_container = null;
-    
+
     /**
      * @var string
      */
     protected $_type = null;
-    
+
     /**
      * @var DOMElement
      */
     protected $_rootElement = null;
-    
+
     /**
      * Encoding of all text values
      *
@@ -58,19 +58,19 @@ abstract class AbstractRenderer implements Renderer
 
     /**
      * Constructor
-     * 
-     * @param  mixed $container 
+     *
+     * @param  mixed $container
      * @return void
      */
     public function __construct($container)
     {
         $this->_container = $container;
     }
-    
+
     /**
      * Set feed encoding
-     * 
-     * @param  string $enc 
+     *
+     * @param  string $enc
      * @return AbstractRenderer
      */
     public function setEncoding($enc)
@@ -78,20 +78,20 @@ abstract class AbstractRenderer implements Renderer
         $this->_encoding = $enc;
         return $this;
     }
-    
+
     /**
      * Get feed encoding
-     * 
+     *
      * @return string
      */
     public function getEncoding()
     {
         return $this->_encoding;
     }
-    
+
     /**
      * Set DOMDocument and DOMElement on which to operate
-     * 
+     *
      * @param  DOMDocument $dom
      * @param  DOMElement $base
      * @return AbstractRenderer
@@ -102,21 +102,21 @@ abstract class AbstractRenderer implements Renderer
         $this->_base = $base;
         return $this;
     }
-    
+
     /**
      * Get data container being rendered
-     * 
+     *
      * @return mixed
      */
     public function getDataContainer()
     {
         return $this->_container;
     }
-    
+
     /**
      * Set feed type
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return AbstractRenderer
      */
     public function setType($type)
@@ -124,21 +124,21 @@ abstract class AbstractRenderer implements Renderer
         $this->_type = $type;
         return $this;
     }
-    
+
     /**
      * Get feedtype
-     * 
+     *
      * @return string
      */
     public function getType()
     {
         return $this->_type;
     }
-    
+
     /**
-     * Set root element of document 
-     * 
-     * @param  DOMElement $root 
+     * Set root element of document
+     *
+     * @param  DOMElement $root
      * @return AbstractRenderer
      */
     public function setRootElement(DOMElement $root)
@@ -146,20 +146,20 @@ abstract class AbstractRenderer implements Renderer
         $this->_rootElement = $root;
         return $this;
     }
-    
+
     /**
      * Get root element
-     * 
+     *
      * @return DOMElement
      */
     public function getRootElement()
     {
         return $this->_rootElement;
     }
-    
+
     /**
      * Append namespaces to feed
-     * 
+     *
      * @return void
      */
     abstract protected function _appendNamespaces();

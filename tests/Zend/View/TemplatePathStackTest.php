@@ -225,13 +225,13 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsRelativePharPath()
     {
-        $path = 'phar://' . __DIR__ 
-            . DIRECTORY_SEPARATOR . '_templates' 
-            . DIRECTORY_SEPARATOR . 'view.phar' 
-            . DIRECTORY_SEPARATOR . 'start' 
-            . DIRECTORY_SEPARATOR . '..' 
+        $path = 'phar://' . __DIR__
+            . DIRECTORY_SEPARATOR . '_templates'
+            . DIRECTORY_SEPARATOR . 'view.phar'
+            . DIRECTORY_SEPARATOR . 'start'
+            . DIRECTORY_SEPARATOR . '..'
             . DIRECTORY_SEPARATOR . 'views';
-        
+
         $this->stack->addPath($path);
         $test = $this->stack->resolve('foo' . DIRECTORY_SEPARATOR . 'hello.phtml');
         $this->assertEquals($path . DIRECTORY_SEPARATOR . 'foo' . DIRECTORY_SEPARATOR . 'hello.phtml', $test);

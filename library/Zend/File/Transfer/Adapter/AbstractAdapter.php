@@ -418,13 +418,13 @@ abstract class AbstractAdapter
         foreach ($validators as $name => $validatorInfo) {
             if ($validatorInfo instanceof Validator\ValidatorInterface) {
                 $this->addValidator($validatorInfo, null, null, $files);
-            } else if (is_string($validatorInfo)) {
+            } elseif (is_string($validatorInfo)) {
                 if (!is_int($name)) {
                     $this->addValidator($name, null, $validatorInfo, $files);
                 } else {
                     $this->addValidator($validatorInfo, null, null, $files);
                 }
-            } else if (is_array($validatorInfo)) {
+            } elseif (is_array($validatorInfo)) {
                 $argc                = count($validatorInfo);
                 $breakChainOnFailure = false;
                 $options             = array();
@@ -592,7 +592,8 @@ abstract class AbstractAdapter
      * @param array $options Options to set
      * @param array $files   (Optional) Files to set the options for
      */
-    public function setOptions($options = array(), $files = null) {
+    public function setOptions($options = array(), $files = null)
+    {
         $file = $this->getFiles($files, false, true);
 
         if (is_array($options)) {
@@ -629,7 +630,8 @@ abstract class AbstractAdapter
      * @param  array $files (Optional) Files to return the options for
      * @return array Options for given files
      */
-    public function getOptions($files = null) {
+    public function getOptions($files = null)
+    {
         $file = $this->getFiles($files, false, true);
 
         foreach ($file as $key => $content) {
@@ -1070,7 +1072,7 @@ abstract class AbstractAdapter
 
         if (empty($destinations)) {
             $destinations = $this->getTmpDir();
-        } else if (count($destinations) == 1) {
+        } elseif (count($destinations) == 1) {
             $destinations = current($destinations);
         }
 
@@ -1144,9 +1146,9 @@ abstract class AbstractAdapter
         foreach($files as $key => $value) {
             if (file_exists($value['name'])) {
                 $result[$key] = hash_file($hash, $value['name']);
-            } else if (file_exists($value['tmp_name'])) {
+            } elseif (file_exists($value['tmp_name'])) {
                 $result[$key] = hash_file($hash, $value['tmp_name']);
-            } else if (empty($value['options']['ignoreNoFile'])) {
+            } elseif (empty($value['options']['ignoreNoFile'])) {
                 throw new Exception\InvalidArgumentException("The file '{$value['name']}' does not exist");
             }
         }
@@ -1176,7 +1178,7 @@ abstract class AbstractAdapter
                 } else {
                     $result[$key] = $value['size'];
                 }
-            } else if (empty($value['options']['ignoreNoFile'])) {
+            } elseif (empty($value['options']['ignoreNoFile'])) {
                 throw new Exception\InvalidArgumentException("The file '{$value['name']}' does not exist");
             } else {
                 continue;
@@ -1200,7 +1202,7 @@ abstract class AbstractAdapter
     {
         if (file_exists($value['name'])) {
             $result = sprintf("%u", @filesize($value['name']));
-        } else if (file_exists($value['tmp_name'])) {
+        } elseif (file_exists($value['tmp_name'])) {
             $result = sprintf("%u", @filesize($value['tmp_name']));
         } else {
             return null;
@@ -1224,7 +1226,7 @@ abstract class AbstractAdapter
         foreach($files as $key => $value) {
             if (file_exists($value['name']) || file_exists($value['tmp_name'])) {
                 $result[$key] = $value['type'];
-            } else if (empty($value['options']['ignoreNoFile'])) {
+            } elseif (empty($value['options']['ignoreNoFile'])) {
                 throw new Exception\InvalidArgumentException("the file '{$value['name']}' does not exist");
             } else {
                 continue;
@@ -1248,7 +1250,7 @@ abstract class AbstractAdapter
     {
         if (file_exists($value['name'])) {
             $file = $value['name'];
-        } else if (file_exists($value['tmp_name'])) {
+        } elseif (file_exists($value['tmp_name'])) {
             $file = $value['tmp_name'];
         } else {
             return null;

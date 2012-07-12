@@ -66,18 +66,18 @@ class HostnameTest extends TestCase
         $request = new Request();
         $request->setUri('http://' . $hostname . '/');
         $match = $route->match($request);
-        
+
         if ($params === null) {
             $this->assertNull($match);
         } else {
             $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
-                       
+
             foreach ($params as $key => $value) {
                 $this->assertEquals($value, $match->getParam($key));
             }
         }
     }
-    
+
     /**
      * @dataProvider routeProvider
      * @param        Hostname $route
@@ -90,37 +90,37 @@ class HostnameTest extends TestCase
             // Data which will not match are not tested for assembling.
             return;
         }
-        
+
         $uri  = new HttpUri();
         $path = $route->assemble($params, array('uri' => $uri));
-        
+
         $this->assertEquals('', $path);
         $this->assertEquals($hostname, $uri->getHost());
     }
-   
+
     public function testNoMatchWithoutUriMethod()
     {
         $route   = new Hostname('example.com');
         $request = new BaseRequest();
-        
+
         $this->assertNull($route->match($request));
     }
-    
+
     public function testAssemblingWithMissingParameter()
     {
         $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Missing parameter "foo"');
-        
+
         $route = new Hostname(':foo.example.com');
         $uri   = new HttpUri();
         $route->assemble(array(), array('uri' => $uri));
     }
-    
+
     public function testGetAssembledParams()
     {
         $route = new Hostname(':foo.example.com');
         $uri   = new HttpUri();
         $route->assemble(array('foo' => 'bar', 'baz' => 'bat'), array('uri' => $uri));
-        
+
         $this->assertEquals(array('foo'), $route->getAssembledParams());
     }
 

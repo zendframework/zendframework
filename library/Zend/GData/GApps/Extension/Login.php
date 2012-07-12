@@ -183,44 +183,36 @@ class Login extends \Zend\GData\Extension
         case 'admin':
             if ($attribute->nodeValue == "true") {
                 $this->_admin = true;
-            }
-            else if ($attribute->nodeValue == "false") {
+            } elseif ($attribute->nodeValue == "false") {
                 $this->_admin = false;
-            }
-            else {
+            } else {
                 throw new App\InvalidArgumentException("Expected 'true' or 'false' for apps:login#admin.");
             }
             break;
         case 'agreedToTerms':
             if ($attribute->nodeValue == "true") {
                 $this->_agreedToTerms = true;
-            }
-            else if ($attribute->nodeValue == "false") {
+            } elseif ($attribute->nodeValue == "false") {
                 $this->_agreedToTerms = false;
-            }
-            else {
+            } else {
                 throw new App\InvalidArgumentException("Expected 'true' or 'false' for apps:login#agreedToTerms.");
             }
             break;
         case 'suspended':
             if ($attribute->nodeValue == "true") {
                 $this->_suspended = true;
-            }
-            else if ($attribute->nodeValue == "false") {
+            } elseif ($attribute->nodeValue == "false") {
                 $this->_suspended = false;
-            }
-            else {
+            } else {
                 throw new App\InvalidArgumentException("Expected 'true' or 'false' for apps:login#suspended.");
             }
             break;
         case 'changePasswordAtNextLogin':
             if ($attribute->nodeValue == "true") {
                 $this->_changePasswordAtNextLogin = true;
-            }
-            else if ($attribute->nodeValue == "false") {
+            } elseif ($attribute->nodeValue == "false") {
                 $this->_changePasswordAtNextLogin = false;
-            }
-            else {
+            } else {
                 throw new App\InvalidArgumentException("Expected 'true' or 'false' for apps:login#changePasswordAtNextLogin.");
             }
             break;

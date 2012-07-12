@@ -175,7 +175,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
     {
         $input  = "A 'single' and " . '"double"';
         $result = "A 'single' and &quot;double&quot;";
-        
+
         $this->_filter->setQuoteStyle(ENT_COMPAT);
         $this->assertEquals($result, $this->_filter->filter($input));
     }
@@ -206,7 +206,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
 
         $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-text.txt');
 
-        // restore_error_handler can emit an E_WARNING; let's ignore that, as 
+        // restore_error_handler can emit an E_WARNING; let's ignore that, as
         // we want to test the returned value
         set_error_handler(array($this, 'errorHandler'), E_NOTICE | E_WARNING);
         $result = $this->_filter->filter($string);
@@ -226,7 +226,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
 
         $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-text.txt');
 
-        // restore_error_handler can emit an E_WARNING; let's ignore that, as 
+        // restore_error_handler can emit an E_WARNING; let's ignore that, as
         // we want to test the returned value
         set_error_handler(array($this, 'errorHandler'), E_NOTICE | E_WARNING);
         $result = $this->_filter->filter($string);
@@ -246,7 +246,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
 
         $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-dash-only.txt');
 
-        // restore_error_handler can emit an E_WARNING; let's ignore that, as 
+        // restore_error_handler can emit an E_WARNING; let's ignore that, as
         // we want to test the returned value
         // Also, explicit try, so that we don't mess up PHPUnit error handlers
         set_error_handler(array($this, 'errorHandler'), E_NOTICE | E_WARNING);

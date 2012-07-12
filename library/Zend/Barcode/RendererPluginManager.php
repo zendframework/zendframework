@@ -16,7 +16,7 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Plugin manager implementation for barcode renderers.
  *
  * Enforces that barcode parsers retrieved are instances of
- * Renderer\AbstractRenderer. Additionally, it registers a number of default 
+ * Renderer\AbstractRenderer. Additionally, it registers a number of default
  * barcode renderers.
  *
  * @category   Zend
@@ -26,7 +26,7 @@ class RendererPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of barcode renderers
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -40,8 +40,8 @@ class RendererPluginManager extends AbstractPluginManager
      *
      * Checks that the barcode parser loaded is an instance
      * of Renderer\AbstractRenderer.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

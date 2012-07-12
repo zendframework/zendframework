@@ -28,7 +28,7 @@ class MethodScannerTest extends TestCase
         $this->assertFalse($method->isPrivate());
         $this->assertFalse($method->isStatic());
     }
-    
+
     public function testMethodScannerReturnsParameters()
     {
         $file       = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');

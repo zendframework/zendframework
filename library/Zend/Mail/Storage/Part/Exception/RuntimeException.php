@@ -19,6 +19,6 @@ use Zend\Mail\Storage\Exception;
  * @subpackage Storage
  * @package    Zend_Mail
  */
-class RuntimeException extends Exception\RuntimeException implements 
+class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface
 {}

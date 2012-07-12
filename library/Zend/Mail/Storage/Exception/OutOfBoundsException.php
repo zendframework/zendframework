@@ -19,6 +19,6 @@ use Zend\Mail\Exception;
  * @package    Zend_Mail
  * @subpackage Storage
  */
-class OutOfBoundsException extends Exception\OutOfBoundsException implements 
+class OutOfBoundsException extends Exception\OutOfBoundsException implements
     ExceptionInterface
 {}

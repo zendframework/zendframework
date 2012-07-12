@@ -17,6 +17,6 @@ use Zend\Paginator\Exception;
  * @package    Zend\Paginator\Adapter
  * @subpackage Exception
  */
-class UnexpectedValueException extends Exception\UnexpectedValueException implements 
+class UnexpectedValueException extends Exception\UnexpectedValueException implements
     ExceptionInterface
 {}

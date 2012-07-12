@@ -31,8 +31,8 @@ abstract class Factory
 
     /**
      * Create a captcha adapter instance
-     * 
-     * @param  array|Traversable $options 
+     *
+     * @param  array|Traversable $options
      * @return AdapterInterface
      * @throws Exception\InvalidArgumentException for a non-array, non-Traversable $options
      * @throws Exception\DomainException if class is missing or invalid
@@ -69,7 +69,7 @@ abstract class Factory
                 $class
             ));
         }
-        
+
         unset($options['class']);
 
         if (isset($options['options'])) {

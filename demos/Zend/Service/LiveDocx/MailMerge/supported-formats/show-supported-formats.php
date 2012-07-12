@@ -8,7 +8,7 @@ use Zend\Service\LiveDocx\MailMerge;
 
 Helper::printLine(
     PHP_EOL . 'Template, Document and Image Formats' .
-    PHP_EOL . 
+    PHP_EOL .
     PHP_EOL . 'The following formats are supported by LiveDocx:' .
     PHP_EOL .
     PHP_EOL
@@ -29,5 +29,5 @@ printf("Supported IMAGE file formats (output)    : %s%s",
     Helper::arrayDecorator($mailMerge->getImageExportFormats()), PHP_EOL);
 
 print PHP_EOL;
-    
+
 unset($mailMerge);

@@ -72,22 +72,22 @@ class RegexTest extends TestCase
         $request = new Request();
         $request->setUri('http://example.com' . $path);
         $match = $route->match($request, $offset);
-        
+
         if ($params === null) {
             $this->assertNull($match);
         } else {
             $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
-            
+
             if ($offset === null) {
-                $this->assertEquals(strlen($path), $match->getLength());            
+                $this->assertEquals(strlen($path), $match->getLength());
             }
-            
+
             foreach ($params as $key => $value) {
                 $this->assertEquals($value, $match->getParam($key));
             }
         }
     }
-    
+
     /**
      * @dataProvider routeProvider
      * @param        Regex   $route
@@ -101,32 +101,32 @@ class RegexTest extends TestCase
             // Data which will not match are not tested for assembling.
             return;
         }
-                
+
         $result = $route->assemble($params);
-        
+
         if ($offset !== null) {
             $this->assertEquals($offset, strpos($path, $result, $offset));
         } else {
             $this->assertEquals($path, $result);
         }
     }
-    
+
     public function testNoMatchWithoutUriMethod()
     {
         $route   = new Regex('/foo', '/foo');
         $request = new BaseRequest();
-        
+
         $this->assertNull($route->match($request));
     }
-    
+
     public function testGetAssembledParams()
     {
         $route = new Regex('/(?<foo>.+)', '/%foo%');
         $route->assemble(array('foo' => 'bar', 'baz' => 'bat'));
-        
+
         $this->assertEquals(array('foo'), $route->getAssembledParams());
     }
-    
+
     public function testFactory()
     {
         $tester = new FactoryTester($this);

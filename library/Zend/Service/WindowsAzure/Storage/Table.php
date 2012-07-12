@@ -462,7 +462,7 @@ class Table extends AbstractBatchStorage
             if (count($query) > 0) {
                 $queryString = '?' . implode('&', $query);
             }
-        } else if (get_class($tableName) == 'TableEntityQuery') {
+        } elseif (get_class($tableName) == 'TableEntityQuery') {
             // Option 2: $tableName is a TableEntityQuery instance
 
             // Build queryString

@@ -20,8 +20,8 @@ class SqlServer implements PlatformInterface
 
     /**
      * Get name
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getName()
     {
@@ -30,8 +30,8 @@ class SqlServer implements PlatformInterface
 
     /**
      * Get quote identifier symbol
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getQuoteIdentifierSymbol()
     {
@@ -40,9 +40,9 @@ class SqlServer implements PlatformInterface
 
     /**
      * Quote identifier
-     * 
+     *
      * @param  string $identifier
-     * @return string 
+     * @return string
      */
     public function quoteIdentifier($identifier)
     {
@@ -65,8 +65,8 @@ class SqlServer implements PlatformInterface
 
     /**
      * Get quote value symbol
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getQuoteValueSymbol()
     {
@@ -75,9 +75,9 @@ class SqlServer implements PlatformInterface
 
     /**
      * Quote value
-     * 
+     *
      * @param  string $value
-     * @return string 
+     * @return string
      */
     public function quoteValue($value)
     {
@@ -101,8 +101,8 @@ class SqlServer implements PlatformInterface
 
     /**
      * Get identifier separator
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getIdentifierSeparator()
     {
@@ -111,10 +111,10 @@ class SqlServer implements PlatformInterface
 
     /**
      * Quote identifier in fragment
-     * 
+     *
      * @param  string $identifier
      * @param  array $safeWords
-     * @return string 
+     * @return string
      */
     public function quoteIdentifierInFragment($identifier, array $safeWords = array())
     {

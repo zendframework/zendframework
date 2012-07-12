@@ -177,7 +177,8 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      * @param  mixed $offset
      * @return boolean
      */
-    public function offsetExists($offset) {
+    public function offsetExists($offset)
+    {
         return array_key_exists($offset, $this->_items);
     }
 
@@ -187,7 +188,8 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      * @param  mixed $offset
      * @return TaggableInterface
      */
-    public function offsetGet($offset) {
+    public function offsetGet($offset)
+    {
         return $this->_items[$offset];
     }
 
@@ -199,7 +201,8 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      * @throws OutOfBoundsException When item does not implement Zend\Tag\TaggableInterface
      * @return void
      */
-    public function offsetSet($offset, $item) {
+    public function offsetSet($offset, $item)
+    {
         // We need to make that check here, as the method signature must be
         // compatible with ArrayAccess::offsetSet()
         if (!($item instanceof TaggableInterface)) {
@@ -219,7 +222,8 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
      * @param  mixed $offset
      * @return void
      */
-    public function offsetUnset($offset) {
+    public function offsetUnset($offset)
+    {
         unset($this->_items[$offset]);
     }
 }

@@ -101,7 +101,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Test construct with missing params
      */
-    public function testConstructExceptionMissingParams() 
+    public function testConstructExceptionMissingParams()
     {
         $this->setExpectedException(
             'Zend\Cloud\Infrastructure\Exception\InvalidArgumentException',
@@ -269,7 +269,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     abstract protected function _getConfig();
 
-    protected function _wait() {
+    protected function _wait()
+    {
         sleep($this->_waitPeriod);
     }
 

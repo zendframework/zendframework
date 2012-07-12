@@ -16,6 +16,6 @@ use Zend\File\Exception;
  * @category   Zend
  * @package    Zend_File_Transfer
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
 {}

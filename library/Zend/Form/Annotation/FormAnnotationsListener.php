@@ -26,8 +26,8 @@ use Zend\EventManager\EventManagerInterface;
  * - Type
  * - ValidationGroup
  *
- * See the individual annotation classes for more details. The handlers 
- * registered work with the annotation values, as well as the form 
+ * See the individual annotation classes for more details. The handlers
+ * registered work with the annotation values, as well as the form
  * specification passed in the event object.
  *
  * @category   Zend
@@ -38,8 +38,8 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
 {
     /**
      * Attach listeners
-     * 
-     * @param  EventManagerInterface $events 
+     *
+     * @param  EventManagerInterface $events
      * @return void
      */
     public function attach(EventManagerInterface $events)
@@ -61,8 +61,8 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
      * Handle the Attributes annotation
      *
      * Sets the attributes key of the form specification.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleAttributesAnnotation($e)
@@ -80,8 +80,8 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
      * Handle the Flags annotation
      *
      * Sets the flags key of the form specification.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleFlagsAnnotation($e)
@@ -99,8 +99,8 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
      * Handle the Hydrator annotation
      *
      * Sets the hydrator class to use in the form specification.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleHydratorAnnotation($e)
@@ -118,8 +118,8 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
      * Handle the InputFilter annotation
      *
      * Sets the input filter class to use in the form specification.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleInputFilterAnnotation($e)
@@ -156,8 +156,8 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
      * Handle the Options annotation
      *
      * Sets the options key of the form specification.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleOptionsAnnotation($e)
@@ -175,8 +175,8 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
      * Handle the Type annotation
      *
      * Sets the form class to use in the form specification.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleTypeAnnotation($e)

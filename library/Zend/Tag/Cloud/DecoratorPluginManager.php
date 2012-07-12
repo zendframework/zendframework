@@ -17,7 +17,7 @@ use Zend\Tag\Exception;
  * Plugin manager implementation for decorators.
  *
  * Enforces that decorators retrieved are instances of
- * Decorator\DecoratorInterface. Additionally, it registers a number of default 
+ * Decorator\DecoratorInterface. Additionally, it registers a number of default
  * decorators available.
  *
  * @category   Zend
@@ -28,7 +28,7 @@ class DecoratorPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of decorators
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -42,8 +42,8 @@ class DecoratorPluginManager extends AbstractPluginManager
      *
      * Checks that the decorator loaded is an instance
      * of Decorator\DecoratorInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

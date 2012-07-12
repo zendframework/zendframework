@@ -41,8 +41,7 @@ class QueueStorageTest extends \PHPUnit_Framework_TestCase
             return;
         }
         $storageClient = $this->createStorageInstance();
-        for ($i = 1; $i <= self::$uniqId; $i++)
-        {
+        for ($i = 1; $i <= self::$uniqId; $i++) {
             try { $storageClient->deleteQueue(TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_PREFIX . $i); } catch (\Exception $e) { }
         }
     }

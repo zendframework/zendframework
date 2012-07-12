@@ -14,7 +14,7 @@ use Zend\Form\FormInterface;
 
 /**
  * View helper for rendering Form objects
- * 
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View
@@ -23,7 +23,7 @@ class Form extends AbstractHelper
 {
     /**
      * Attributes valid for this tag (form)
-     * 
+     *
      * @var array
      */
     protected $validTagAttributes = array(
@@ -39,7 +39,7 @@ class Form extends AbstractHelper
 
     /**
      * Invoke as function
-     * 
+     *
      * @return Form
      */
     public function __invoke()
@@ -49,8 +49,8 @@ class Form extends AbstractHelper
 
     /**
      * Generate an opening form tag
-     * 
-     * @param  null|FormInterface $form 
+     *
+     * @param  null|FormInterface $form
      * @return string
      */
     public function openTag(FormInterface $form = null)
@@ -74,7 +74,7 @@ class Form extends AbstractHelper
 
     /**
      * Generate a closing form tag
-     * 
+     *
      * @return string
      */
     public function closeTag()

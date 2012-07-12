@@ -48,7 +48,7 @@ class Dumb extends AbstractWord
 
     /**
      * Retrieve optional view helper name to use when rendering this captcha
-     * 
+     *
      * @return string
      */
     public function getHelperName()

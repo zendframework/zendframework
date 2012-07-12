@@ -22,7 +22,7 @@ use Zend\Cloud\Infrastructure\Image;
  * @package    Zend_Cloud
  * @subpackage Infrastructure
  */
-class ImageList implements 
+class ImageList implements
     ArrayAccess,
     Countable,
     Iterator
@@ -39,7 +39,7 @@ class ImageList implements
 
     /**
      * The Image adapter (if exists)
-     * 
+     *
      * @var object
      */
     protected $adapter;

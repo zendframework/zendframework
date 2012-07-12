@@ -26,8 +26,8 @@ class RouteListener implements ListenerAggregateInterface
 
     /**
      * Attach to an event manager
-     * 
-     * @param  EventManagerInterface $events 
+     *
+     * @param  EventManagerInterface $events
      * @return void
      */
     public function attach(EventManagerInterface $events)
@@ -37,8 +37,8 @@ class RouteListener implements ListenerAggregateInterface
 
     /**
      * Detach all our listeners from the event manager
-     * 
-     * @param  EventManagerInterface $events 
+     *
+     * @param  EventManagerInterface $events
      * @return void
      */
     public function detach(EventManagerInterface $events)
@@ -57,8 +57,8 @@ class RouteListener implements ListenerAggregateInterface
      * create a 404 response.
      *
      * Seeds the event with the route match on completion.
-     * 
-     * @param  MvcEvent $e 
+     *
+     * @param  MvcEvent $e
      * @return null|Router\RouteMatch
      */
     public function onRoute($e)

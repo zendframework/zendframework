@@ -290,7 +290,8 @@ class FirePhp implements Wildfire\Plugin
      * @param array $Filter An array of members to exclude
      * @return void
      */
-    public function setObjectFilter($class, $filter) {
+    public function setObjectFilter($class, $filter)
+    {
       $this->_objectFilters[$class] = $filter;
     }
 

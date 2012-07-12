@@ -27,7 +27,7 @@ class StaticEventManager extends SharedEventManager
 
     /**
      * Singleton
-     * 
+     *
      * @return void
      */
     protected function __construct()
@@ -45,7 +45,7 @@ class StaticEventManager extends SharedEventManager
 
     /**
      * Retrieve instance
-     * 
+     *
      * @return StaticEventManager
      */
     public static function getInstance()
@@ -58,7 +58,7 @@ class StaticEventManager extends SharedEventManager
 
     /**
      * Reset the singleton instance
-     * 
+     *
      * @return void
      */
     public static function resetInstance()

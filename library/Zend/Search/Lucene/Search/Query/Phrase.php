@@ -95,7 +95,7 @@ class Phrase extends AbstractQuery
                 $this->_terms[$termId] = ($field !== null)? new Index\Term($termText, $field):
                                                             new Index\Term($termText);
             }
-        } else if ($terms === null) {
+        } elseif ($terms === null) {
             $this->_terms = array();
         } else {
             throw new InvalidArgumentException('terms argument must be array of strings or null');
@@ -106,7 +106,7 @@ class Phrase extends AbstractQuery
                 throw new InvalidArgumentException('terms and offsets arguments must have the same size.');
             }
             $this->_offsets = $offsets;
-        } else if ($offsets === null) {
+        } elseif ($offsets === null) {
             $this->_offsets = array();
             foreach ($this->_terms as $termId => $term) {
                 $position = count($this->_offsets);
@@ -148,7 +148,8 @@ class Phrase extends AbstractQuery
      * @param integer $position
      * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      */
-    public function addTerm(Index\Term $term, $position = null) {
+    public function addTerm(Index\Term $term, $position = null)
+    {
         if ((count($this->_terms) != 0)&&(end($this->_terms)->field != $term->field)) {
             throw new InvalidArgumentException('All phrase terms must be in the same field: ' .
                                                    $term->field . ':' . $term->text);
@@ -157,7 +158,7 @@ class Phrase extends AbstractQuery
         $this->_terms[] = $term;
         if ($position !== null) {
             $this->_offsets[] = $position;
-        } else if (count($this->_offsets) != 0) {
+        } elseif (count($this->_offsets) != 0) {
             $this->_offsets[] = end($this->_offsets) + 1;
         } else {
             $this->_offsets[] = 0;
@@ -175,7 +176,7 @@ class Phrase extends AbstractQuery
     {
         if (count($this->_terms) == 0) {
             return new EmptyResult();
-        } else if ($this->_terms[0]->field !== null) {
+        } elseif ($this->_terms[0]->field !== null) {
             return $this;
         } else {
             $query = new Boolean();

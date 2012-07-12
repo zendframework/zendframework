@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
 
     Successful response returned for a Cosmos request
     http://api.technorati.com/cosmos?key=VALID_API_KEY&url=www.simonecarletti.com/blog
-    
+
     This is the most simple Cosmos request.
-    
+
 -->
 <!-- generator="Technorati API version 1.0" -->
 <!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN" "http://api.technorati.com/dtd/tapi-002.xml">

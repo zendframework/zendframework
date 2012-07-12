@@ -42,8 +42,7 @@ class BlobStreamTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $storageClient = $this->createStorageInstance();
-        for ($i = 1; $i <= self::$uniqId; $i++)
-        {
+        for ($i = 1; $i <= self::$uniqId; $i++) {
             try { $storageClient->deleteContainer(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSTREAM_CONTAINER_PREFIX . $i); } catch (\Exception $e) { }
             try { $storageClient->unregisterStreamWrapper('azure'); } catch (\Exception $e) { }
         }

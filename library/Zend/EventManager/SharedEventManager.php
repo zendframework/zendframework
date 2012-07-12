@@ -17,7 +17,7 @@ use Zend\Stdlib\PriorityQueue;
  * Shared/contextual EventManager
  *
  * Allows attaching to EMs composed by other classes without having an instance first.
- * The assumption is that the SharedEventManager will be injected into EventManager 
+ * The assumption is that the SharedEventManager will be injected into EventManager
  * instances, and then queried for additional listeners when triggering an event.
  *
  * @category   Zend
@@ -34,8 +34,8 @@ class SharedEventManager implements SharedEventManagerInterface
     /**
      * Attach a listener to an event
      *
-     * Allows attaching a callback to an event offerred by one or more 
-     * identifying components. As an example, the following connects to the 
+     * Allows attaching a callback to an event offerred by one or more
+     * identifying components. As an example, the following connects to the
      * "getAll" event of both an AbstractResource and EntityResource:
      *
      * <code>
@@ -54,9 +54,9 @@ class SharedEventManager implements SharedEventManagerInterface
      *     }
      * );
      * </code>
-     * 
+     *
      * @param  string|array $id Identifier(s) for event emitting component(s)
-     * @param  string $event 
+     * @param  string $event
      * @param  callback $callback PHP Callback
      * @param  int $priority Priority at which listener should execute
      * @return void
@@ -74,9 +74,9 @@ class SharedEventManager implements SharedEventManagerInterface
 
     /**
      * Detach a listener from an event offered by a given resource
-     * 
+     *
      * @param  string|int $id
-     * @param  CallbackHandler $listener 
+     * @param  CallbackHandler $listener
      * @return bool Returns true if event and listener found, and unsubscribed; returns false if either event or listener not found
      */
     public function detach($id, CallbackHandler $listener)
@@ -89,7 +89,7 @@ class SharedEventManager implements SharedEventManagerInterface
 
     /**
      * Retrieve all registered events for a given resource
-     * 
+     *
      * @param  string|int $id
      * @return array
      */
@@ -103,9 +103,9 @@ class SharedEventManager implements SharedEventManagerInterface
 
     /**
      * Retrieve all listeners for a given identifier and event
-     * 
+     *
      * @param  string|int $id
-     * @param  string|int $event 
+     * @param  string|int $event
      * @return false|PriorityQueue
      */
     public function getListeners($id, $event)
@@ -118,9 +118,9 @@ class SharedEventManager implements SharedEventManagerInterface
 
     /**
      * Clear all listeners for a given identifier, optionally for a specific event
-     * 
-     * @param  string|int $id 
-     * @param  null|string $event 
+     *
+     * @param  string|int $id
+     * @param  null|string $event
      * @return bool
      */
     public function clearListeners($id, $event = null)

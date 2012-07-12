@@ -24,7 +24,7 @@ use Zend\Mail\Transport\Exception as TransportException;
  * completion, so any log entries accumulated are sent in a single email.
  * The email is sent using a Zend\Mail\Transport\TransportInterface object
  * (Sendmail is default).
- * 
+ *
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
@@ -72,7 +72,7 @@ class Mail extends AbstractWriter
 
     /**
      * Constructor
-     * 
+     *
      * @param MailMessage $mail
      * @param Transport\TransportInterface $transport Optional
      * @return Mail

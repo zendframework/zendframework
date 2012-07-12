@@ -258,7 +258,8 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $ssTest->delete($entry);
     }
 
-    public function testCustomElementsCollected() {
+    public function testCustomElementsCollected()
+    {
         $rowData = array();
         $rowData['a1'] = 'new';
         $rowData['b1'] = 'row';

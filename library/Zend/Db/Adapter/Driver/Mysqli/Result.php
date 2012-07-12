@@ -75,7 +75,7 @@ class Result implements \Iterator, ResultInterface
      * @param mixed $resource
      * @param mixed $generatedValue
      * @param bool|null $isBuffered
-     * @return Result 
+     * @return Result
      */
     public function initialize($resource, $generatedValue, $isBuffered = null)
     {
@@ -114,7 +114,7 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Return the resource
-     * @return mixed 
+     * @return mixed
      */
     public function getResource()
     {
@@ -123,8 +123,8 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Is query result?
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function isQueryResult()
     {
@@ -165,11 +165,11 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Mysqli's binding and returning of statement values
-     * 
-     * Mysqli requires you to bind variables to the extension in order to 
+     *
+     * Mysqli requires you to bind variables to the extension in order to
      * get data out.  These values have to be references:
      * @see http://php.net/manual/en/mysqli-stmt.bind-result.php
-     * 
+     *
      * @throws \RuntimeException
      * @return bool
      */
@@ -210,8 +210,8 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Load from mysqli result
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     protected function loadFromMysqliResult()
     {

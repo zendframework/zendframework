@@ -22,8 +22,8 @@ use Zend\Crypt\Symmetric\Exception;
  */
 class BlockCipherTest extends \PHPUnit_Framework_TestCase
 {
-    /** 
-     * @var BlockCipher 
+    /**
+     * @var BlockCipher
      */
     protected $blockCipher;
     protected $plaintext;

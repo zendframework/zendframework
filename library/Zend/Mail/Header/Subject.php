@@ -24,7 +24,7 @@ class Subject implements UnstructuredInterface
 
     /**
      * Header encoding
-     * 
+     *
      * @var string
      */
     protected $encoding = 'ASCII';
@@ -44,7 +44,7 @@ class Subject implements UnstructuredInterface
             $header->setEncoding('UTF-8');
         }
         $header->setSubject($value);
-        
+
         return $header;
     }
 
@@ -62,7 +62,7 @@ class Subject implements UnstructuredInterface
         return $this->subject;
     }
 
-    public function setEncoding($encoding) 
+    public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
         return $this;

@@ -57,7 +57,7 @@ class BuilderDefinition implements DefinitionInterface
                             $class->addInjectionMethod($injectionMethod);
                         }
                         break;
-                    
+
                 }
             }
             $this->addClass($class);
@@ -80,7 +80,7 @@ class BuilderDefinition implements DefinitionInterface
      * Create a class builder object using default class builder class
      *
      * This method is a factory that can be used in place of addClass().
-     * 
+     *
      * @param  null|string $name Optional name of class to assign
      * @return Builder\PhpClass
      */
@@ -98,8 +98,8 @@ class BuilderDefinition implements DefinitionInterface
 
     /**
      * Set the class to use with {@link createClass()}
-     * 
-     * @param  string $class 
+     *
+     * @param  string $class
      * @return BuilderDefinition
      */
     public function setClassBuilder($class)
@@ -111,9 +111,9 @@ class BuilderDefinition implements DefinitionInterface
     /**
      * Get the class used for {@link createClass()}
      *
-     * This is primarily to allow developers to temporarily override 
+     * This is primarily to allow developers to temporarily override
      * the builder strategy.
-     * 
+     *
      * @return string
      */
     public function getClassBuilder()

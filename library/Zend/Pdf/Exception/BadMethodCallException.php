@@ -17,7 +17,7 @@ namespace Zend\Pdf\Exception;
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Exception
  */
-class BadMethodCallException extends \BadMethodCallException implements 
+class BadMethodCallException extends \BadMethodCallException implements
     ExceptionInterface
 {
 }

@@ -22,19 +22,22 @@ use Zend\GData\App\Extension;
 class ControlTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->controlText = file_get_contents(
                 'Zend/GData/App/_files/ControlElementSample1.xml',
                 true);
         $this->control = new Extension\Control();
     }
 
-    public function testEmptyControlShouldHaveEmptyExtensionsList() {
+    public function testEmptyControlShouldHaveEmptyExtensionsList()
+    {
         $this->assertTrue(is_array($this->control->extensionElements));
         $this->assertTrue(count($this->control->extensionElements) == 0);
     }
 
-    public function testEmptyControlToAndFromStringShouldMatch() {
+    public function testEmptyControlToAndFromStringShouldMatch()
+    {
         $controlXml = $this->control->saveXML();
         $newControl = new Extension\Control();
         $newControl->transferFromXML($controlXml);
@@ -42,7 +45,8 @@ class ControlTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($controlXml == $newControlXml);
     }
 
-    public function testControlWithDraftToAndFromStringShouldMatch() {
+    public function testControlWithDraftToAndFromStringShouldMatch()
+    {
         $draft = new Extension\Draft('yes');
         $this->control->draft = $draft;
         $controlXml = $this->control->saveXML();
@@ -53,7 +57,8 @@ class ControlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('yes', $newControl->draft->text);
     }
 
-    public function testConvertControlWithDraftToAndFromString() {
+    public function testConvertControlWithDraftToAndFromString()
+    {
         $this->control->transferFromXML($this->controlText);
         $this->assertEquals('yes', $this->control->draft->text);
     }

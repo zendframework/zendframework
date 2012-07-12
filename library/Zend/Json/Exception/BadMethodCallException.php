@@ -15,6 +15,6 @@ namespace Zend\Json\Exception;
  * @package    Zend_Json
  * @subpackage Exception
  */
-class BadMethodCallException extends \BadMethodCallException implements 
+class BadMethodCallException extends \BadMethodCallException implements
     ExceptionInterface
 {}

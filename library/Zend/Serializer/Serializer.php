@@ -39,7 +39,7 @@ class Serializer
      * @param array |\Traversable $opts Serializer options
      * @return Adapter
      */
-    public static function factory($adapterName, $opts = array()) 
+    public static function factory($adapterName, $opts = array())
     {
         if ($adapterName instanceof Adapter) {
             return $adapterName; // $adapterName is already an adapter object
@@ -53,7 +53,7 @@ class Serializer
      *
      * @return AdapterPluginManager
      */
-    public static function getAdapterPluginManager() 
+    public static function getAdapterPluginManager()
     {
         if (self::$_adapters === null) {
             self::$_adapters = self::_getDefaultAdapterPluginManager();
@@ -67,11 +67,11 @@ class Serializer
      * @param  AdapterPluginManager $adapters
      * @return void
      */
-    public static function setAdapterPluginManager(AdapterPluginManager $adapters) 
+    public static function setAdapterPluginManager(AdapterPluginManager $adapters)
     {
         self::$_adapters = $adapters;
     }
-    
+
     /**
      * Resets the internal adapter plugin manager
      *
@@ -82,7 +82,7 @@ class Serializer
         self::$_adapters = self::_getDefaultAdapterPluginManager();
         return self::$_adapters;
     }
-    
+
     /**
      * Returns a default adapter plugin manager
      *
@@ -100,7 +100,7 @@ class Serializer
      * @param string|Adapter $adapter
      * @param array|\Traversable $options
      */
-    public static function setDefaultAdapter($adapter, $options = array()) 
+    public static function setDefaultAdapter($adapter, $options = array())
     {
         self::$_defaultAdapter = self::factory($adapter, $options);
     }
@@ -110,7 +110,7 @@ class Serializer
      *
      * @return Adapter
      */
-    public static function getDefaultAdapter() 
+    public static function getDefaultAdapter()
     {
         if (!self::$_defaultAdapter instanceof Adapter) {
             self::setDefaultAdapter(self::$_defaultAdapter);
@@ -125,7 +125,7 @@ class Serializer
      * @param array $options
      * @return string
      */
-    public static function serialize($value, array $options = array()) 
+    public static function serialize($value, array $options = array())
     {
         if (isset($options['adapter'])) {
             $adapter = self::factory($options['adapter']);
@@ -144,7 +144,7 @@ class Serializer
      * @param array $options
      * @return mixed
      */
-    public static function unserialize($serialized, array $options = array()) 
+    public static function unserialize($serialized, array $options = array())
     {
         if (isset($options['adapter'])) {
             $adapter = self::factory($options['adapter']);

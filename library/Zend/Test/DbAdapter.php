@@ -46,7 +46,7 @@ class DbAdapter extends \Zend\Db\Adapter\AbstractAdapter
 
     /**
      * @var string
-     */ 
+     */
     protected $_quoteIdentifierSymbol = '';
 
     /**
@@ -85,7 +85,7 @@ class DbAdapter extends \Zend\Db\Adapter\AbstractAdapter
 
     /**
      * @var string
-     */ 
+     */
     public function setQuoteIdentifierSymbol($symbol)
     {
         $this->_quoteIdentifierSymbol = $symbol;

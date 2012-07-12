@@ -21,36 +21,42 @@ use Zend\GData\Extension;
 class AttendeeStatusTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->attendeeStatusText = file_get_contents(
                 'Zend/GData/_files/AttendeeStatusElementSample1.xml',
                 true);
         $this->attendeeStatus = new Extension\AttendeeStatus();
     }
 
-    public function testEmptyAttendeeStatusShouldHaveNoExtensionElements() {
+    public function testEmptyAttendeeStatusShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->attendeeStatus->extensionElements));
         $this->assertTrue(count($this->attendeeStatus->extensionElements) == 0);
     }
 
-    public function testEmptyAttendeeStatusShouldHaveNoExtensionAttributes() {
+    public function testEmptyAttendeeStatusShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->attendeeStatus->extensionAttributes));
         $this->assertTrue(count($this->attendeeStatus->extensionAttributes) == 0);
     }
 
-    public function testSampleAttendeeStatusShouldHaveNoExtensionElements() {
+    public function testSampleAttendeeStatusShouldHaveNoExtensionElements()
+    {
         $this->attendeeStatus->transferFromXML($this->attendeeStatusText);
         $this->assertTrue(is_array($this->attendeeStatus->extensionElements));
         $this->assertTrue(count($this->attendeeStatus->extensionElements) == 0);
     }
 
-    public function testSampleAttendeeStatusShouldHaveNoExtensionAttributes() {
+    public function testSampleAttendeeStatusShouldHaveNoExtensionAttributes()
+    {
         $this->attendeeStatus->transferFromXML($this->attendeeStatusText);
         $this->assertTrue(is_array($this->attendeeStatus->extensionAttributes));
         $this->assertTrue(count($this->attendeeStatus->extensionAttributes) == 0);
     }
 
-    public function testNormalAttendeeStatusShouldHaveNoExtensionElements() {
+    public function testNormalAttendeeStatusShouldHaveNoExtensionElements()
+    {
         $this->attendeeStatus->value = "http://schemas.google.com/g/2005#event.accepted";
 
         $this->assertEquals("http://schemas.google.com/g/2005#event.accepted", $this->attendeeStatus->value);
@@ -72,7 +78,8 @@ class AttendeeStatusTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("http://schemas.google.com/g/2005#event.accepted", $newAttendeeStatus2->value);
     }
 
-    public function testEmptyAttendeeStatusToAndFromStringShouldMatch() {
+    public function testEmptyAttendeeStatusToAndFromStringShouldMatch()
+    {
         $attendeeStatusXml = $this->attendeeStatus->saveXML();
         $newAttendeeStatus = new Extension\AttendeeStatus();
         $newAttendeeStatus->transferFromXML($attendeeStatusXml);
@@ -80,7 +87,8 @@ class AttendeeStatusTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($attendeeStatusXml == $newAttendeeStatusXml);
     }
 
-    public function testAttendeeStatusWithValueToAndFromStringShouldMatch() {
+    public function testAttendeeStatusWithValueToAndFromStringShouldMatch()
+    {
         $this->attendeeStatus->value = "http://schemas.google.com/g/2005#event.accepted";
         $attendeeStatusXml = $this->attendeeStatus->saveXML();
         $newAttendeeStatus = new Extension\AttendeeStatus();
@@ -90,7 +98,8 @@ class AttendeeStatusTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("http://schemas.google.com/g/2005#event.accepted", $this->attendeeStatus->value);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->attendeeStatus->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -104,7 +113,8 @@ class AttendeeStatusTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newAttendeeStatus->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullAttendeeStatusToAndFromString() {
+    public function testConvertFullAttendeeStatusToAndFromString()
+    {
         $this->attendeeStatus->transferFromXML($this->attendeeStatusText);
         $this->assertEquals("http://schemas.google.com/g/2005#event.invited", $this->attendeeStatus->value);
     }

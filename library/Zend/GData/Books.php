@@ -62,7 +62,7 @@ class Books extends GData
     {
         if ($location == null) {
             $uri = self::VOLUME_FEED_URI;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -84,7 +84,7 @@ class Books extends GData
     {
         if ($volumeId !== null) {
             $uri = self::VOLUME_FEED_URI . "/" . $volumeId;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;

@@ -88,7 +88,7 @@ class MysqliResult
      * @param resource $resource
      * @return array
      */
-    public function parse($resource) 
+    public function parse($resource)
     {
         $result   = array();
         $fieldcnt = mysqli_num_fields($resource);

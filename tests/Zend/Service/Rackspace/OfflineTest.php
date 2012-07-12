@@ -108,7 +108,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test the set of the key
-     * 
+     *
      * @return void
      */
     public function testSetKey()

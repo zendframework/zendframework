@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
 
     Successful response returned for a Bloginfo request
     http://api.technorati.com/bloginfo?key=VALID_API_KEY&url=www.simonecarletti.com/blog
-    
+
     The request has the following properties:
      * url is a valid blog
      * url is missing a valid schema and might cause Zend_Uri_Http parser to fail

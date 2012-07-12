@@ -85,8 +85,8 @@ class ComboBox extends Dijit
             $html .= $this->_createFormElement($id, $value, $params, $attribs);
             return $html;
         }
-        
-        // required for correct type casting in declerative mode 
+
+        // required for correct type casting in declerative mode
         if (isset($params['autocomplete'])) {
             $params['autocomplete'] = ($params['autocomplete']) ? 'true' : 'false';
         }

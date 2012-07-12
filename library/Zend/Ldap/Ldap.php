@@ -879,7 +879,7 @@ class Ldap
 
         if ($basedn === null) {
             $basedn = $this->getBaseDn();
-        } else if ($basedn instanceof Dn) {
+        } elseif ($basedn instanceof Dn) {
                 $basedn = $basedn->toString();
         }
 
@@ -1137,7 +1137,7 @@ class Ldap
             $value = Dn::unescapeValue($value);
             if (!array_key_exists($key, $entry)) {
                 $entry[$key] = array($value);
-            } else if (!in_array($value, $entry[$key])) {
+            } elseif (!in_array($value, $entry[$key])) {
                     $entry[$key] = array_merge(array($value), $entry[$key]);
             }
         }
@@ -1348,7 +1348,7 @@ class Ldap
         $emulate = (bool)$alwaysEmulate;
         if (!function_exists('ldap_rename')) {
             $emulate = true;
-        } else if ($recursively) {
+        } elseif ($recursively) {
             $emulate = true;
         }
 
@@ -1368,7 +1368,7 @@ class Ldap
             $isOK      = @ldap_rename($this->getResource(), $from, $newRdn, $newParent, true);
             if ($isOK === false) {
                 throw new Exception\LdapException($this, 'renaming ' . $from . ' to ' . $to);
-            } else if (!$this->exists($to)) {
+            } elseif (!$this->exists($to)) {
                 $emulate = true;
             }
         }

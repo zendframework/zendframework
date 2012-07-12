@@ -430,7 +430,7 @@ class ClassGenerator extends AbstractGenerator
             } else {
                 if (is_string($property)) {
                     $this->addProperty($property);
-                } else if (is_array($property)) {
+                } elseif (is_array($property)) {
                     call_user_func_array(array($this, 'addProperty'), $property);
                 }
             }
@@ -529,7 +529,7 @@ class ClassGenerator extends AbstractGenerator
             } else {
                 if (is_string($method)) {
                     $this->addMethod($method);
-                } else if (is_array($method)) {
+                } elseif (is_array($method)) {
                     call_user_func_array(array($this, 'addMethod'), $method);
                 }
             }

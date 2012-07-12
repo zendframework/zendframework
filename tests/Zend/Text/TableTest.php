@@ -134,7 +134,7 @@ class TableTest extends \PHPUnit_Framework_TestCase
     public function testColumnRenderInvalidArgument()
     {
         $column = new Table\Column();
-        
+
         $this->setExpectedException('Zend\Text\Table\Exception\InvalidArgumentException', 'must be an integer and greater than 0');
         $column->render(0);
     }

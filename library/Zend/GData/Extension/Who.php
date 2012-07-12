@@ -149,8 +149,7 @@ class Who extends Extension
     {
         if ($this->_valueString != null) {
             return $this->_valueString;
-        }
-        else {
+        } else {
             return parent::__toString();
         }
     }

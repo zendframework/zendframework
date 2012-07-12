@@ -339,8 +339,7 @@ class Queue implements Countable
     {
         if ($this->isSupported('delete')) {
             $deleted = $this->getAdapter()->delete($this->getName());
-        }
-        else {
+        } else {
             $deleted = true;
         }
 

@@ -29,23 +29,27 @@ class CalendarTest extends \PHPUnit_Framework_TestCase
         $this->eventFeed = new Calendar\EventFeed();
     }
 
-    public function testEmptyEventFeedShouldHaveNoExtensionElements() {
+    public function testEmptyEventFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->eventFeed->extensionElements));
         $this->assertTrue(count($this->eventFeed->extensionElements) == 0);
     }
 
-    public function testEmptyEventFeedShouldHaveNoExtensionAttributes() {
+    public function testEmptyEventFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->eventFeed->extensionAttributes));
         $this->assertTrue(count($this->eventFeed->extensionAttributes) == 0);
     }
 
-    public function testSampleEventFeedShouldHaveNoExtensionElements() {
+    public function testSampleEventFeedShouldHaveNoExtensionElements()
+    {
         $this->eventFeed->transferFromXML($this->eventFeedText);
         $this->assertTrue(is_array($this->eventFeed->extensionElements));
         $this->assertTrue(count($this->eventFeed->extensionElements) == 0);
     }
 
-    public function testSampleEventFeedShouldHaveNoExtensionAttributes() {
+    public function testSampleEventFeedShouldHaveNoExtensionAttributes()
+    {
         $this->eventFeed->transferFromXML($this->eventFeedText);
         $this->assertTrue(is_array($this->eventFeed->extensionAttributes));
         $this->assertTrue(count($this->eventFeed->extensionAttributes) == 0);

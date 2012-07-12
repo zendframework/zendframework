@@ -89,7 +89,7 @@ class StreamObject extends IndirectObject
         $dictionaryArray['DecodeParms'] = array();
         if ($this->_dictionary->Filter === null) {
             // Do nothing.
-        } else if ($this->_dictionary->Filter->getType() == AbstractTypeObject::TYPE_ARRAY) {
+        } elseif ($this->_dictionary->Filter->getType() == AbstractTypeObject::TYPE_ARRAY) {
             foreach ($this->_dictionary->Filter->items as $id => $filter) {
                 $dictionaryArray['Filter'][$id]      = $filter->value;
                 $dictionaryArray['DecodeParms'][$id] = array();
@@ -104,7 +104,7 @@ class StreamObject extends IndirectObject
                     }
                 }
             }
-        } else if ($this->_dictionary->Filter->getType() != AbstractTypeObject::TYPE_NULL) {
+        } elseif ($this->_dictionary->Filter->getType() != AbstractTypeObject::TYPE_NULL) {
             $dictionaryArray['Filter'][0]      = $this->_dictionary->Filter->value;
             $dictionaryArray['DecodeParms'][0] = array();
             if ($this->_dictionary->DecodeParms !== null ) {
@@ -123,7 +123,7 @@ class StreamObject extends IndirectObject
         $dictionaryArray['FDecodeParms'] = array();
         if ($this->_dictionary->FFilter === null) {
             // Do nothing.
-        } else if ($this->_dictionary->FFilter->getType() == AbstractTypeObject::TYPE_ARRAY) {
+        } elseif ($this->_dictionary->FFilter->getType() == AbstractTypeObject::TYPE_ARRAY) {
             foreach ($this->_dictionary->FFilter->items as $id => $filter) {
                 $dictionaryArray['FFilter'][$id]      = $filter->value;
                 $dictionaryArray['FDecodeParms'][$id] = array();
@@ -384,7 +384,7 @@ class StreamObject extends IndirectObject
         if ($this->_streamDecoded) {
             $this->_initialDictionaryData = $this->_extractDictionaryData();
             $this->_encodeStream();
-        } else if ($this->_initialDictionaryData != null) {
+        } elseif ($this->_initialDictionaryData != null) {
             $newDictionary   = $this->_extractDictionaryData();
 
             if ($this->_initialDictionaryData !== $newDictionary) {

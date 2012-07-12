@@ -194,7 +194,7 @@ class Json
      * @param SimpleXMLElement $simpleXmlElementObject
      * @return Zend_Json_Expr|string
      */
-    protected static function _getXmlValue($simpleXmlElementObject) 
+    protected static function _getXmlValue($simpleXmlElementObject)
     {
         $pattern   = '/^[\s]*new Zend[_\\]Json[_\\]Expr[\s]*\([\s]*[\"\']{1}(.*)[\"\']{1}[\s]*\)[\s]*$/';
         $matchings = array();
@@ -226,13 +226,13 @@ class Json
      * @param integer $recursionDepth
      * @return array
      */
-    protected static function _processXml($simpleXmlElementObject, $ignoreXmlAttributes, $recursionDepth = 0) 
+    protected static function _processXml($simpleXmlElementObject, $ignoreXmlAttributes, $recursionDepth = 0)
     {
         // Keep an eye on how deeply we are involved in recursion.
         if ($recursionDepth > self::$maxRecursionDepthAllowed) {
             // XML tree is too deep. Exit now by throwing an exception.
             throw new RecursionException(
-                "Function _processXml exceeded the allowed recursion depth of " 
+                "Function _processXml exceeded the allowed recursion depth of "
                 .  self::$maxRecursionDepthAllowed
             );
         }
@@ -249,7 +249,7 @@ class Json
                 }
                 if (!empty($value)) {
                     $attributes['@text'] = $value;
-                } 
+                }
                 return array($name => $attributes);
             }
 
@@ -310,7 +310,8 @@ class Json
      * @return mixed - JSON formatted string on success
      * @throws \Zend\Json\Exception\RuntimeException if the input not a XML formatted string
      */
-    public static function fromXml ($xmlStringContents, $ignoreXmlAttributes=true) {
+    public static function fromXml ($xmlStringContents, $ignoreXmlAttributes=true)
+    {
         // Load the XML formatted string into a Simple XML Element object.
         $simpleXmlElementObject = simplexml_load_string($xmlStringContents);
 
@@ -332,9 +333,9 @@ class Json
 
     /**
      * Pretty-print JSON string
-     * 
+     *
      * Use 'indent' option to select indentation string - by default it's a tab
-     * 
+     *
      * @param string $json Original JSON string
      * @param array $options Encoding options
      * @return string
@@ -344,16 +345,16 @@ class Json
         $tokens = preg_split('|([\{\}\]\[,])|', $json, -1, PREG_SPLIT_DELIM_CAPTURE);
         $result = "";
         $indent = 0;
-        
+
         $ind = "\t";
         if(isset($options['indent'])) {
             $ind = $options['indent'];
         }
-        
+
         $inLiteral = false;
         foreach($tokens as $token) {
             if($token == "") continue;
-            
+
             $prefix = str_repeat($ind, $indent);
             if(!$inLiteral && ($token == "{" || $token == "[")) {
                 $indent++;
@@ -364,7 +365,7 @@ class Json
             } else if(!$inLiteral && ($token == "}" || $token == "]")) {
                 $indent--;
                 $prefix = str_repeat($ind, $indent);
-                $result .= "\n$prefix$token";                
+                $result .= "\n$prefix$token";
             } else if(!$inLiteral && $token == ",") {
                 $result .= "$token\n";
             } else {

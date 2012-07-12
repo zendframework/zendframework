@@ -130,7 +130,8 @@ class TestFixingMultiplePrototypes
  * @package    Zend_Soap
  * @subpackage UnitTests
  */
-class Test {
+class Test
+{
     /**
      * Test Function 1
      *
@@ -320,20 +321,23 @@ class MyService
      *    @param string $foo
      *    @return \ZendTest\Soap\TestAsset\MyResponse[]
      */
-    public function foo($foo) {
+    public function foo($foo)
+    {
     }
     /**
      *    @param string $bar
      *    @return \ZendTest\Soap\TestAsset\MyResponse[]
      */
-    public function bar($bar) {
+    public function bar($bar)
+    {
     }
 
     /**
      *    @param string $baz
      *    @return \ZendTest\Soap\TestAsset\MyResponse[]
      */
-    public function baz($baz) {
+    public function baz($baz)
+    {
     }
 }
 
@@ -348,27 +352,31 @@ class MyServiceSequence
      *    @param string $foo
      *    @return string[]
      */
-    public function foo($foo) {
+    public function foo($foo)
+    {
     }
     /**
      *    @param string $bar
      *    @return string[]
      */
-    public function bar($bar) {
+    public function bar($bar)
+    {
     }
 
     /**
      *    @param string $baz
      *    @return string[]
      */
-    public function baz($baz) {
+    public function baz($baz)
+    {
     }
 
     /**
      *    @param string $baz
      *    @return string[][][]
      */
-    public function bazNested($baz) {
+    public function bazNested($baz)
+    {
     }
 }
 
@@ -430,7 +438,8 @@ class NoReturnType
 
 /* Client test classes */
 /** Test Class */
-class TestClass {
+class TestClass
+{
     /**
      * Test Function 1
      *
@@ -476,7 +485,8 @@ class TestClass {
 }
 
 /** Test class 2 */
-class TestData1 {
+class TestData1
+{
     /**
      * Property1
      *
@@ -493,7 +503,8 @@ class TestData1 {
 }
 
 /** Test class 2 */
-class TestData2 {
+class TestData2
+{
     /**
      * Property1
      *
@@ -509,7 +520,8 @@ class TestData2 {
      public $property2;
 }
 
-class MockSoapServer {
+class MockSoapServer
+{
     public $handle = null;
     public function handle()
     {
@@ -518,9 +530,11 @@ class MockSoapServer {
     public function __call($name, $args) {}
 }
 
-class MockServer extends \Zend\Soap\Server {
+class MockServer extends \Zend\Soap\Server
+{
     public $mockSoapServer = null;
-    protected function _getSoap() {
+    protected function _getSoap()
+    {
         $this->mockSoapServer = new MockSoapServer();
         return $this->mockSoapServer;
     }

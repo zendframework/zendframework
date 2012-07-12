@@ -15,7 +15,7 @@ namespace Zend\Captcha\Exception;
  * @package    Zend_Captcha
  * @subpackage Exception
  */
-class InvalidArgumentException extends \InvalidArgumentException implements 
+class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
 {
 }

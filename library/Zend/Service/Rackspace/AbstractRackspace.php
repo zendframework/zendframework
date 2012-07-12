@@ -211,7 +211,7 @@ abstract class AbstractRackspace
      *
      * @return string|boolean
      * @throws Exception\RuntimeException
-     */     
+     */
     public function getManagementUrl()
     {
         if (empty($this->managementUrl)) {

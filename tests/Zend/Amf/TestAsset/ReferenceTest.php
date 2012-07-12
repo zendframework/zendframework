@@ -19,9 +19,9 @@ namespace ZendTest\Amf\TestAsset;
  * @group      Zend_Amf
  * @group ZF-6205
  */
-class ReferenceTest 
+class ReferenceTest
 {
-    public function getReference() 
+    public function getReference()
     {
         $o = new TestObject();
         $o->recursive = new TestObject();

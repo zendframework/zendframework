@@ -145,7 +145,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
         Reader\Reader::import('http://www.planet-php.net/rdf/');
     }
-    
+
     /**
      * @group ZF-8328
      * @expectedException Zend\Feed\Reader\Exception\RuntimeException
@@ -200,7 +200,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $links = Reader\Reader::findFeedLinks('http://www.example.com');
         $this->assertEquals(0, count($links));
     }
-    
+
     /**
      * @group ZF-8327
      */
@@ -213,7 +213,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $links = Reader\Reader::findFeedLinks('http://www.infopod.com.br');
         $this->assertEquals('http://feeds.feedburner.com/jonnyken/infoblog', $links->rss);
     }
-    
+
     /**
      * @group ZF-8330
      */
@@ -226,7 +226,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $links = Reader\Reader::findFeedLinks('http://meiobit.com');
         $this->assertEquals('http://meiobit.com/rss.xml', $links->rss);
     }
-    
+
     /**
      * @group ZF-8330
      */

@@ -29,7 +29,7 @@ class WindowsAzureTest extends TestCase
      * @var int
      */
     protected $_waitPeriod = 10;
-    
+
     protected $_clientType = 'Zend\Service\WindowsAzure\Storage\Queue';
 
     /**

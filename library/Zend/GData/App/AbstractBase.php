@@ -456,7 +456,7 @@ abstract class AbstractBase
         $method = 'get'.ucfirst($name);
         if (method_exists($this, $method)) {
             return $this->$method();
-        } else if (property_exists($this, "_${name}")) {
+        } elseif (property_exists($this, "_${name}")) {
             return $this->{'_' . $name};
         } else {
             throw new InvalidArgumentException(
@@ -482,7 +482,7 @@ abstract class AbstractBase
         $method = 'set'.ucfirst($name);
         if (method_exists($this, $method)) {
             $this->$method($val);
-        } else if (isset($this->{'_' . $name}) || ($this->{'_' . $name} === null)) {
+        } elseif (isset($this->{'_' . $name}) || ($this->{'_' . $name} === null)) {
             $this->{'_' . $name} = $val;
         } else {
             throw new InvalidArgumentException(

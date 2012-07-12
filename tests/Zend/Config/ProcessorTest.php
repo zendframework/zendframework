@@ -181,7 +181,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
                                     'Cannot use ' . gettype(array()) . ' as token name.');
         $processor->addToken(array(), 'bar');
     }
-    
+
     public function testSingleValueToken()
     {
         $processor = new TokenProcessor();
@@ -190,18 +190,18 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $out = $processor->processValue($data);
         $this->assertEquals($out, 'test');
     }
-    
+
     public function testTokenReadOnly()
     {
         $config = new Config($this->tokenBare, false);
         $processor = new TokenProcessor();
         $processor->addToken('BARETOKEN', 'some replaced value');
-        
+
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
                                     'Cannot process config because it is read-only');
         $processor->process($config);
     }
-    
+
     public function testTokenPrefix()
     {
         $config = new Config($this->tokenPrefix, true);
@@ -287,7 +287,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($tokens));
         $this->assertTrue(in_array('SOME_USERLAND_CONSTANT', $tokens));
         $this->assertTrue(!$processor->getUserOnly());
-        
+
         $this->assertEquals('some constant value', $config->simple);
         $this->assertEquals('some text with some constant value inside', $config->inside);
         $this->assertEquals('some constant value', $config->nested->simple);
@@ -305,17 +305,17 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $processor->process($config);
 
         $tokens = $processor->getTokens();
-        
+
         $this->assertTrue(is_array($tokens));
         $this->assertTrue(in_array('SOME_USERLAND_CONSTANT', $tokens));
         $this->assertTrue($processor->getUserOnly());
-        
+
         $this->assertEquals('some constant value', $config->simple);
         $this->assertEquals('some text with some constant value inside', $config->inside);
         $this->assertEquals('some constant value', $config->nested->simple);
         $this->assertEquals('some text with some constant value inside', $config->nested->inside);
     }
-    
+
     /**
      * @depends testTokenSurround
      */
@@ -358,7 +358,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testTranslatorSingleValue()
-    {        
+    {
         $translator = new Translator();
         $translator->addTranslationFile('phparray', $this->translatorFile);
         $processor  = new TranslatorProcessor($translator);
@@ -371,7 +371,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $config = new Config($this->filter, true);
         $filter = new StringToLower();
         $processor = new FilterProcessor($filter);
-        
+
         $this->assertTrue($processor->getFilter() instanceof StringToLower);
         $processor->process($config);
 
@@ -384,21 +384,21 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $config = new Config($this->filter, false);
         $filter = new StringToLower();
         $processor = new FilterProcessor($filter);
-        
+
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
                                     'Cannot process config because it is read-only');
         $processor->process($config);
     }
-    
+
     public function testFilterValue()
     {
         $filter = new StringToLower();
         $processor = new FilterProcessor($filter);
-        
+
         $value = 'TEST';
         $this->assertEquals('test', $processor->processValue($value));
     }
-    
+
     /**
      * @depends testFilter
      */
@@ -421,7 +421,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('some mixedcase value', $config->simple);
         $this->assertEquals('other mixed case value', $config->nested->simple);
     }
-    
+
     public function testQueueReadOnly()
     {
         $config = new Config($this->filter, false);
@@ -433,7 +433,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
          */
         $queue = new Queue();
         $queue->insert($lowerProcessor);
-        
+
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
                                     'Cannot process config because it is read-only');
         $queue->process($config);
@@ -452,10 +452,10 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $queue = new Queue();
         $queue->insert($upperProcessor);
         $queue->insert($lowerProcessor);
-        
+
         $data ='TeSt';
         $this->assertEquals('test', $queue->processValue($data));
-        
+
     }
 
     /**

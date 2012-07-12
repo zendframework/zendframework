@@ -216,7 +216,8 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('foobar     [', $adapter->getLastOutput());
     }
 
-    public function testSetOutputStreamOpen() {
+    public function testSetOutputStreamOpen()
+    {
         $adapter = new Adapter\Console();
         $adapter->setOutputStream('zendprogressbaradapterconsole://test1');
         $this->assertArrayHasKey('test1', MockupStream::$tests);
@@ -225,12 +226,13 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     public function testSetOutputStreamOpenFail()
     {
         $adapter = new Adapter\Console();
-        
+
         $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\RuntimeException', 'Unable to open stream');
         $adapter->setOutputStream(null);
     }
 
-    public function testSetOutputStreamReplaceStream() {
+    public function testSetOutputStreamReplaceStream()
+    {
         $adapter = new Adapter\Console();
         $adapter->setOutputStream('zendprogressbaradapterconsole://test2');
         $this->assertArrayHasKey('test2', MockupStream::$tests);
@@ -239,7 +241,8 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayNotHasKey('test2', MockupStream::$tests);
     }
 
-    public function testgetOutputStream() {
+    public function testgetOutputStream()
+    {
         $adapter = new Adapter\Console();
         $adapter->setOutputStream('zendprogressbaradapterconsole://test4');
         $resource = $adapter->getOutputStream();
@@ -247,20 +250,23 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Hello Word!', MockupStream::$tests['test4']);
     }
 
-    public function testgetOutputStreamReturnigStdout() {
+    public function testgetOutputStreamReturnigStdout()
+    {
         $adapter = new Adapter\Console();
         $resource = $adapter->getOutputStream();
         $this->assertTrue(is_resource($resource));
     }
 
-    public function testFinishEol() {
+    public function testFinishEol()
+    {
         $adapter = new Adapter\Console();
         $adapter->setOutputStream('zendprogressbaradapterconsole://test5');
         $adapter->finish();
         $this->assertEquals(PHP_EOL, MockupStream::$tests['test5']);
     }
 
-    public function testFinishNone() {
+    public function testFinishNone()
+    {
         $adapter = new Adapter\Console();
         $adapter->setOutputStream('zendprogressbaradapterconsole://test7');
         $adapter->setFinishAction(Adapter\Console::FINISH_ACTION_NONE);
@@ -271,7 +277,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     public function testSetBarLeftChar()
     {
         $adapter = new Adapter\Console();
-        
+
         $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException','Character may not be empty');
         $adapter->setBarLeftChar(null);
     }
@@ -279,7 +285,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     public function testSetBarRightChar()
     {
         $adapter = new Adapter\Console();
-        
+
         $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException','Character may not be empty');
         $adapter->setBarRightChar(null);
     }
@@ -287,7 +293,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     public function testSetInvalidFinishAction()
     {
         $adapter = new Adapter\Console();
-        
+
         $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException','Invalid finish action specified');
         $adapter->setFinishAction('CUSTOM_FINISH_ACTION');
     }

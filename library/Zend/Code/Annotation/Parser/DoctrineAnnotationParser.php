@@ -17,10 +17,10 @@ use Zend\Code\Exception;
 use Zend\EventManager\EventInterface;
 
 /**
- * A parser for docblock annotations that utilizes the annotation parser from 
+ * A parser for docblock annotations that utilizes the annotation parser from
  * Doctrine\Common.
  *
- * Consumes Doctrine\Common\Annotations\DocParser, and responds to events from 
+ * Consumes Doctrine\Common\Annotations\DocParser, and responds to events from
  * AnnotationManager. If the annotation examined is in the list of classes we
  * are interested in, the raw annotation is passed to the DocParser in order to
  * retrieve the annotation object instance. Otherwise, it is skipped.
@@ -64,7 +64,7 @@ class DoctrineAnnotationParser implements ParserInterface
      * Retrieve the DocParser instance
      *
      * If none is registered, lazy-loads a new instance.
-     * 
+     *
      * @return DocParser
      */
     public function getDocParser()
@@ -77,8 +77,8 @@ class DoctrineAnnotationParser implements ParserInterface
 
     /**
      * Handle annotation creation
-     * 
-     * @param  EventInterface $e 
+     *
+     * @param  EventInterface $e
      * @return false|\stdClass
      */
     public function onCreateAnnotation(EventInterface $e)
@@ -119,8 +119,8 @@ class DoctrineAnnotationParser implements ParserInterface
 
     /**
      * Specify an allowed annotation class
-     * 
-     * @param  string $annotation 
+     *
+     * @param  string $annotation
      * @return DoctrineAnnotationParser
      */
     public function registerAnnotation($annotation)
@@ -131,8 +131,8 @@ class DoctrineAnnotationParser implements ParserInterface
 
     /**
      * Set many allowed annotations at once
-     * 
-     * @param  array|Traversable $annotations Array or traversable object of 
+     *
+     * @param  array|Traversable $annotations Array or traversable object of
      *         annotation class names
      * @return DoctrineAnnotationParser
      */

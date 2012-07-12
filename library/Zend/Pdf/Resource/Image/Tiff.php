@@ -87,7 +87,8 @@ class Tiff extends AbstractImage
      * @param string $bytes
      * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
-    protected function unpackBytes($type, $bytes) {
+    protected function unpackBytes($type, $bytes)
+    {
         if(!isset($this->_endianType)) {
             throw new Exception\CorruptedImageException(
                 'The unpackBytes function can only be used after the endianness of the file is known'
@@ -395,21 +396,24 @@ class Tiff extends AbstractImage
     /**
      * Image width (defined in \Zend\Pdf\Resource\Image\AbstractImage)
      */
-    public function getPixelWidth() {
+    public function getPixelWidth()
+    {
         return $this->_width;
     }
 
     /**
      * Image height (defined in \Zend\Pdf\Resource\Image\AbstractImage)
      */
-    public function getPixelHeight() {
+    public function getPixelHeight()
+    {
         return $this->_height;
     }
 
     /**
      * Image properties (defined in \Zend\Pdf\Resource\Image\AbstractImage)
      */
-    public function getProperties() {
+    public function getProperties()
+    {
         return $this->_imageProperties;
     }
 }

@@ -44,7 +44,8 @@ class TypeloaderTest extends \PHPUnit_Framework_TestCase
      * Test that we can find and load the remote matching class name
      *
      */
-    public function testLoadTypeSuccess(){
+    public function testLoadTypeSuccess()
+    {
         $class = Parser\TypeLoader::loadType('flex.messaging.messages.RemotingMessage');
         $this->assertEquals('Zend\\Amf\\Value\\Messaging\\RemotingMessage', $class);
     }
@@ -60,7 +61,8 @@ class TypeloaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ZendTest\\Amf\\TestAsset\\Contact', $class);
     }
 
-    public function testUnknownClassMap() {
+    public function testUnknownClassMap()
+    {
         $class = Parser\TypeLoader::loadType('com.example.vo.Bogus');
         $this->assertEquals('stdClass', $class);
     }

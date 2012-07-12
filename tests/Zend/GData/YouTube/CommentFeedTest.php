@@ -22,14 +22,16 @@ use Zend\GData\YouTube;
 class CommentFeedTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->feedText = file_get_contents(
                 'Zend/GData/YouTube/_files/CommentFeedDataSample1.xml',
                 true);
         $this->feed = new YouTube\CommentFeed();
     }
 
-    private function verifyAllSamplePropertiesAreCorrect ($commentFeed) {
+    private function verifyAllSamplePropertiesAreCorrect ($commentFeed)
+    {
         $this->assertEquals('http://gdata.youtube.com/feeds/videos/Lnio-pqLPgg/comments',
             $commentFeed->id->text);
         $this->assertEquals('2007-09-21T02:32:55.032Z', $commentFeed->updated->text);
@@ -48,29 +50,34 @@ class CommentFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(4, $commentFeed->itemsPerPage->text);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->feed->extensionElements));
         $this->assertTrue(count($this->feed->extensionElements) == 0);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->feed->extensionAttributes));
         $this->assertTrue(count($this->feed->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements() {
+    public function testSampleEntryShouldHaveNoExtensionElements()
+    {
         $this->feed->transferFromXML($this->feedText);
         $this->assertTrue(is_array($this->feed->extensionElements));
         $this->assertTrue(count($this->feed->extensionElements) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributes() {
+    public function testSampleEntryShouldHaveNoExtensionAttributes()
+    {
         $this->feed->transferFromXML($this->feedText);
         $this->assertTrue(is_array($this->feed->extensionAttributes));
         $this->assertTrue(count($this->feed->extensionAttributes) == 0);
     }
 
-    public function testEmptyCommentFeedToAndFromStringShouldMatch() {
+    public function testEmptyCommentFeedToAndFromStringShouldMatch()
+    {
         $entryXml = $this->feed->saveXML();
         $newCommentFeed = new YouTube\CommentFeed();
         $newCommentFeed->transferFromXML($entryXml);
@@ -78,12 +85,14 @@ class CommentFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newCommentFeedXml);
     }
 
-    public function testSamplePropertiesAreCorrect () {
+    public function testSamplePropertiesAreCorrect ()
+    {
         $this->feed->transferFromXML($this->feedText);
         $this->verifyAllSamplePropertiesAreCorrect($this->feed);
     }
 
-    public function testConvertCommentFeedToAndFromString() {
+    public function testConvertCommentFeedToAndFromString()
+    {
         $this->feed->transferFromXML($this->feedText);
         $entryXml = $this->feed->saveXML();
         $newCommentFeed = new YouTube\CommentFeed();

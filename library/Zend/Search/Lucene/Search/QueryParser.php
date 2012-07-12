@@ -517,7 +517,7 @@ class QueryParser extends Lucene\AbstractFSM
         $tokens = Analyzer\Analyzer::getDefault()->tokenize($this->_rqFirstTerm, $this->_encoding);
         if (count($tokens) > 1) {
             throw new QueryParserException('Range query boundary terms must be non-multiple word terms');
-        } else if (count($tokens) == 1) {
+        } elseif (count($tokens) == 1) {
             $from = new Index\Term(reset($tokens)->getTermText(), $this->_context->getField());
         } else {
             $from = null;
@@ -526,7 +526,7 @@ class QueryParser extends Lucene\AbstractFSM
         $tokens = Analyzer\Analyzer::getDefault()->tokenize($this->_currentToken->text, $this->_encoding);
         if (count($tokens) > 1) {
             throw new QueryParserException('Range query boundary terms must be non-multiple word terms');
-        } else if (count($tokens) == 1) {
+        } elseif (count($tokens) == 1) {
             $to = new Index\Term(reset($tokens)->getTermText(), $this->_context->getField());
         } else {
             $to = null;
@@ -559,7 +559,7 @@ class QueryParser extends Lucene\AbstractFSM
         $tokens = Analyzer\Analyzer::getDefault()->tokenize($this->_rqFirstTerm, $this->_encoding);
         if (count($tokens) > 1) {
             throw new QueryParserException('Range query boundary terms must be non-multiple word terms');
-        } else if (count($tokens) == 1) {
+        } elseif (count($tokens) == 1) {
             $from = new Index\Term(reset($tokens)->getTermText(), $this->_context->getField());
         } else {
             $from = null;
@@ -568,7 +568,7 @@ class QueryParser extends Lucene\AbstractFSM
         $tokens = Analyzer\Analyzer::getDefault()->tokenize($this->_currentToken->text, $this->_encoding);
         if (count($tokens) > 1) {
             throw new QueryParserException('Range query boundary terms must be non-multiple word terms');
-        } else if (count($tokens) == 1) {
+        } elseif (count($tokens) == 1) {
             $to = new Index\Term(reset($tokens)->getTermText(), $this->_context->getField());
         } else {
             $to = null;

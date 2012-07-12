@@ -76,13 +76,14 @@ class SmtpProtocolSpy extends Smtp
         $this->_addLog($request . self::EOL);
     }
 
-    protected function _expect($code, $timeout = null) {
+    protected function _expect($code, $timeout = null)
+    {
         return '';
     }
 
     /**
      * Are we connected?
-     * 
+     *
      * @return bool
      */
     public function isConnected()
@@ -92,7 +93,7 @@ class SmtpProtocolSpy extends Smtp
 
     /**
      * Get server name we opened a connection with
-     * 
+     *
      * @return null|string
      */
     public function getHelo()
@@ -102,7 +103,7 @@ class SmtpProtocolSpy extends Smtp
 
     /**
      * Get value of mail property
-     * 
+     *
      * @return null|string
      */
     public function getMail()
@@ -112,7 +113,7 @@ class SmtpProtocolSpy extends Smtp
 
     /**
      * Get recipients
-     * 
+     *
      * @return array
      */
     public function getRecipients()

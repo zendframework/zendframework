@@ -18,7 +18,7 @@ use Zend\Text\Exception;
  * @category  Zend
  * @package   Zend_Text_Figlet
  */
-class UnexpectedValueException 
+class UnexpectedValueException
     extends Exception\UnexpectedValueException
     implements ExceptionInterface
 {}

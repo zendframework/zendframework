@@ -62,7 +62,7 @@ class Feed extends Extension\AbstractFeed
                 $list = $this->_xpath->query('//dc10:publisher');
             }
         }
-        
+
         if ($list->length) {
             foreach ($list as $author) {
                 $authors[] = array(
@@ -238,7 +238,7 @@ class Feed extends Extension\AbstractFeed
 
         return $this->_data['date'];
     }
-    
+
     /**
      * Get categories (subjects under DC)
      *
@@ -249,13 +249,13 @@ class Feed extends Extension\AbstractFeed
         if (array_key_exists('categories', $this->_data)) {
             return $this->_data['categories'];
         }
-        
+
         $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc11:subject');
 
         if (!$list->length) {
             $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc10:subject');
         }
-        
+
         if ($list->length) {
             $categoryCollection = new Collection\Category;
             foreach ($list as $category) {
@@ -268,9 +268,9 @@ class Feed extends Extension\AbstractFeed
         } else {
             $categoryCollection = new Collection\Category;
         }
-        
+
         $this->_data['categories'] = $categoryCollection;
-        return $this->_data['categories'];  
+        return $this->_data['categories'];
     }
 
     /**

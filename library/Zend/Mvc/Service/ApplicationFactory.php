@@ -24,10 +24,10 @@ class ApplicationFactory implements FactoryInterface
     /**
      * Create the Application service
      *
-     * Creates a Zend\Mvc\Application service, passing it the configuration 
+     * Creates a Zend\Mvc\Application service, passing it the configuration
      * service and the service manager instance.
-     * 
-     * @param  ServiceLocatorInterface $serviceLocator 
+     *
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return Application
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

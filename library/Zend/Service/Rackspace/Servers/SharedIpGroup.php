@@ -20,20 +20,20 @@ class SharedIpGroup
     const ERROR_PARAM_NO_SERVERS = 'The servers parameter must be an array of Ids';
     /**
      * Name of the shared IP group
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $name;
     /**
      * Id of the shared IP group
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $id;
     /**
      * Array of servers of the shared IP group
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $serversId = array();
     /**
@@ -44,7 +44,7 @@ class SharedIpGroup
     protected $service;
     /**
      * Construct
-     * 
+     *
      * @param array $data
      * @return void
      */
@@ -61,13 +61,13 @@ class SharedIpGroup
         }
         if (isset($data['servers']) && !is_array($data['servers'])) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_SERVERS);
-        } 
+        }
         $this->service= $service;
         $this->name = $data['name'];
         $this->id = $data['id'];
         if (isset($data['servers'])) {
             $this->serversId= $data['servers'];
-        }    
+        }
     }
     /**
      * Get the name of the shared IP group
@@ -80,8 +80,8 @@ class SharedIpGroup
     }
     /**
      * Get the id of the shared IP group
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getId()
     {
@@ -89,8 +89,8 @@ class SharedIpGroup
     }
     /**
      * Get the server's array of the shared IP group
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getServersId()
     {
@@ -101,13 +101,13 @@ class SharedIpGroup
                 if (isset($info['servers'])) {
                     $this->serversId= $info['servers'];
                 }
-            }    
+            }
         }
         return $this->serversId;
     }
     /**
-     * Get the server 
-     * 
+     * Get the server
+     *
      * @param integer $id
      * @return Zend\Service\Rackspace\Servers\Server|boolean
      */
@@ -123,21 +123,21 @@ class SharedIpGroup
     }
     /**
      * Create a server in the shared Ip Group
-     * 
+     *
      * @param array $data
      * @param array $metadata
-     * @param array $files 
+     * @param array $files
      * @return Zend\Service\Rackspace\Servers\Server|boolean
      */
-    public function createServer(array $data, $metadata=array(),$files=array()) 
+    public function createServer(array $data, $metadata=array(),$files=array())
     {
         $data['sharedIpGroupId']= (integer) $this->id;
         return $this->service->createServer($data,$metadata,$files);
     }
     /**
      * To Array
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function toArray()
     {

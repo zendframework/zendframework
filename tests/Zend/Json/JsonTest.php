@@ -732,7 +732,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestIncomplete('Test is not yet finished.');
     }
-    
+
     /**
      * @group ZF-8663
      */
@@ -740,7 +740,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $source = "</foo><foo>bar</foo>";
         $target = '"\u003C\/foo\u003E\u003Cfoo\u003Ebar\u003C\/foo\u003E"';
-        
+
         // first test ext/json
         Json\Json::$useBuiltinEncoderDecoder = false;
         $this->assertEquals($target, Json\Json::encode($source));
@@ -750,12 +750,12 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $source = "<>&'\"";
         $target = '"\u003C\u003E\u0026\u0027\u0022"';
-        
+
         // first test ext/json
         Json\Json::$useBuiltinEncoderDecoder = false;
         $this->assertEquals($target, Json\Json::encode($source));
     }
-    
+
     /**
      * @group ZF-8663
      */
@@ -763,7 +763,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $source = "</foo><foo>bar</foo>";
         $target = '"\u003C\/foo\u003E\u003Cfoo\u003Ebar\u003C\/foo\u003E"';
-        
+
         // first test ext/json
         Json\Json::$useBuiltinEncoderDecoder = true;
         $this->assertEquals($target, Json\Json::encode($source));
@@ -773,12 +773,12 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $source = "<>&'\"";
         $target = '"\u003C\u003E\u0026\u0027\u0022"';
-        
+
         // first test ext/json
         Json\Json::$useBuiltinEncoderDecoder = true;
         $this->assertEquals($target, Json\Json::encode($source));
     }
-    
+
     /**
      * @group ZF-8918
      */

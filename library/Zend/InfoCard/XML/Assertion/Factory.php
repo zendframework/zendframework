@@ -46,7 +46,7 @@ final class Factory
 
         if($xmlData instanceof XML\AbstractElement) {
             $strXmlData = $xmlData->asXML();
-        } else if (is_string($xmlData)) {
+        } elseif (is_string($xmlData)) {
             $strXmlData = $xmlData;
         } else {
             throw new XML\Exception\InvalidArgumentException("Invalid Data provided to create instance");

@@ -20,7 +20,7 @@ class GlobTest extends TestCase
         if (!defined('GLOB_BRACE')) {
             $this->markTestSkipped('GLOB_BRACE not available');
         }
-        
+
         $this->assertEquals(
             glob(__DIR__ . '/_files/{alph,bet}a', GLOB_BRACE),
             Glob::glob(__DIR__ . '/_files/{alph,bet}a', Glob::GLOB_BRACE, true)

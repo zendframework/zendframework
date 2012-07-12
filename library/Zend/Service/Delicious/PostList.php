@@ -44,7 +44,7 @@ class PostList implements \Countable, \Iterator, \ArrayAccess
         $this->service = $service;
         if ($posts instanceof \DOMNodeList) {
             $this->constructFromNodeList($posts);
-        } else if (is_array($posts)) {
+        } elseif (is_array($posts)) {
             $this->constructFromArray($posts);
         }
     }

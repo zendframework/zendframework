@@ -46,8 +46,8 @@ class Zend_Service_DeveloperGarden_Request_LocalSearch_LocalSearchRequest
      * @param integer $account
      * @return Zend_Service_DeveloperGarden_Request_AbstractRequest
      */
-    public function __construct($environment, 
-        Zend_Service_DeveloperGarden_LocalSearch_SearchParameters $searchParameters, 
+    public function __construct($environment,
+        Zend_Service_DeveloperGarden_LocalSearch_SearchParameters $searchParameters,
         $account = null
     ) {
         parent::__construct($environment);

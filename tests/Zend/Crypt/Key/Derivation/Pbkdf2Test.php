@@ -44,8 +44,8 @@ class Pbkdf2Test extends \PHPUnit_Framework_TestCase
 
     /**
      * Test vectors from RFC 6070
-     * 
-     * @see http://tools.ietf.org/html/draft-josefsson-pbkdf2-test-vectors-06 
+     *
+     * @see http://tools.ietf.org/html/draft-josefsson-pbkdf2-test-vectors-06
      */
     public static function provideTestVectors()
     {
@@ -59,7 +59,7 @@ class Pbkdf2Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideTestVectors 
+     * @dataProvider provideTestVectors
      */
     public function testRFC670($hash, $password, $salt, $cycles, $length, $expect)
     {

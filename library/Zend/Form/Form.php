@@ -100,6 +100,13 @@ class Form extends Fieldset implements FormInterface
     protected $isPrepared = false;
 
     /**
+     * Are the form elements/fieldsets wrapped by the form name ?
+     *
+     * @var bool
+     */
+    protected $wrapElements = false;
+
+    /**
      * Validation group, if any
      *
      * @var null|array
@@ -153,9 +160,14 @@ class Form extends Fieldset implements FormInterface
         if (!$this->isPrepared) {
             $this->getInputFilter();
 
-            foreach ($this->getIterator() as $elementOrFieldset) {
-                if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
-                    $elementOrFieldset->prepareElement($this);
+            // If the user wants to, elements names can be wrapped by the form's name
+            if ($this->wrapElements) {
+                $this->prepareElement($this);
+            } else {
+                foreach ($this->getIterator() as $elementOrFieldset) {
+                    if ($elementOrFieldset instanceof ElementPrepareAwareInterface) {
+                        $elementOrFieldset->prepareElement($this);
+                    }
                 }
             }
 
@@ -586,6 +598,28 @@ class Form extends Fieldset implements FormInterface
             // Recursively attach sub filters
             $this->attachInputFilterDefaults($filter, $fieldset);
         }
+    }
+
+    /**
+     * Are the form elements/fieldsets names wrapped by the form name ?
+     *
+     * @param  bool $wrapElements
+     * @return Form
+     */
+    public function setWrapElements($wrapElements)
+    {
+        $this->wrapElements = (bool) $wrapElements;
+        return $this;
+    }
+
+    /**
+     * If true, form elements/fieldsets name's are wrapped around the form name itself
+     *
+     * @return bool
+     */
+    public function getWrapElements()
+    {
+        return $this->wrapElements;
     }
 
     /**

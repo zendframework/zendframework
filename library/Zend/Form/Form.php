@@ -601,16 +601,20 @@ class Form extends Fieldset implements FormInterface
     }
 
     /**
-     * @param $wrapElements
+     * Are the form elements/fieldsets names wrapped by the form name ?
+     *
+     * @param  bool $wrapElements
      * @return Form
      */
     public function setWrapElements($wrapElements)
     {
-        $this->wrapElements = (bool)$wrapElements;
+        $this->wrapElements = (bool) $wrapElements;
         return $this;
     }
 
     /**
+     * If true, form elements/fieldsets name's are wrapped around the form name itself
+     *
      * @return bool
      */
     public function getWrapElements()

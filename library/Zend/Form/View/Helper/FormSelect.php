@@ -134,8 +134,8 @@ class FormSelect extends AbstractHelper
 
             if (is_scalar($optionSpec)) {
                 $optionSpec = array(
-                    'label' => $key,
-                    'value' => $optionSpec,
+                    'label' => $optionSpec,
+                    'value' => $key
                 );
             }
 

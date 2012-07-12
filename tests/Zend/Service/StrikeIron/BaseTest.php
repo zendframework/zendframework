@@ -13,10 +13,6 @@ namespace ZendTest\Service\StrikeIron;
 use Zend\Service\StrikeIron;
 
 /**
- * Test helper
- */
-
-/**
  * @ see Zend_Service_StrikeIron_BaseTest
  */
 

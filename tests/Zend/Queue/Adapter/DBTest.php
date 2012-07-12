@@ -100,9 +100,6 @@ class DBTest extends AdapterTest
     {
         try {
             $config = $this->getTestConfig();
-            /**
-             * @see Zend_Db_Select
-             */
             $config['options'][Select::FOR_UPDATE] = array();
             $queue = $this->createQueue(__FUNCTION__, $config);
             $this->fail('FOR_UPDATE accepted an array');

@@ -11,15 +11,6 @@
 namespace ZendTest\Service\StrikeIron;
 
 /**
- * Test helper
- */
-
-/**
- * @see \Zend\Service\StrikeIron\Exception
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests

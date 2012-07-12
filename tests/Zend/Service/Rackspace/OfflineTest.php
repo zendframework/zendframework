@@ -15,10 +15,6 @@ use Zend\Service\Rackspace\Files\ContainerList;
 use Zend\Http\Client\Adapter\Test as HttpTest;
 
 /**
- * Test helper
- */
-
-/**
  * @category   Zend
  * @package    Zend\Service\Rackspace\Files
  * @subpackage UnitTests

@@ -11,8 +11,6 @@
 namespace ZendTest\Amf\Value;
 
 /**
- * Test case for Zend_Amf_Value_MessageBody
- *
  * @category   Zend
  * @package    Zend_Amf
  * @subpackage UnitTests

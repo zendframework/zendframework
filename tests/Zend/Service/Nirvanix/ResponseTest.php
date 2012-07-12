@@ -14,7 +14,6 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Service\Nirvanix\Response;
 
 /**
- * @see        Zend\Service\Nirvanix\Response
  * @category   Zend
  * @package    Zend_Service_Nirvanix
  * @subpackage UnitTests

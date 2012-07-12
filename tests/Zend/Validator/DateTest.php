@@ -15,7 +15,6 @@ use stdClass;
 use Zend\Validator;
 
 /**
- * @see Zend_Validator_Date
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests

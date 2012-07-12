@@ -13,15 +13,6 @@ namespace ZendTest\Service\Delicious;
 use Zend\Service\Delicious;
 
 /**
- * Test helper
- */
-
-/**
- * @see Zend_Service_Delicious_SimplePost
- */
-
-
-/**
  * @category   Zend_Service
  * @package    Zend_Service_Delicious
  * @subpackage UnitTests

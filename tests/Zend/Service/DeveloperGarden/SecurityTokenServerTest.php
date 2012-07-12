@@ -9,14 +9,6 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_SecurityTokenServer
- */
-
-/**
- * @see Zend_Service_DeveloperGarden_SecurityTokenServer_Cache
- */
-
-/**
  * Zend_Service_DeveloperGarden test case
  *
  * @category   Zend

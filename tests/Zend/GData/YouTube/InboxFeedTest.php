@@ -13,11 +13,6 @@ namespace ZendTest\GData\YouTube;
 use Zend\GData\YouTube;
 
 /**
- * Test helper
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_GData_YouTube
  * @subpackage UnitTests

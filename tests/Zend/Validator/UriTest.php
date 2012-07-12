@@ -14,14 +14,6 @@ use Zend\Validator;
 use Zend\Uri\Exception\InvalidArgumentException;
 
 /**
- * Test helper
- */
-
-/**
- * @see \Zend\Validator\Uri
- */
-
-/**
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests

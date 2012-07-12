@@ -13,11 +13,6 @@ namespace ZendTest\GData\Books;
 use Zend\GData\Books;
 
 /**
- * Test helper
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_GData_Books
  * @subpackage UnitTests

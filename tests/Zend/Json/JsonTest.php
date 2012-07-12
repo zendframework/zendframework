@@ -958,7 +958,7 @@ class ToJSONClass
 
 /**
  * Serializable class exposing a toArray() method
- * @see ZF-11167
+ * @group ZF-11167
  */
 class ZF11167_ToArrayClass
 {
@@ -981,7 +981,7 @@ class ZF11167_ToArrayClass
 
 /**
  * Serializable class exposing both toArray() and toJson() methods
- * @see ZF-11167
+ * @group ZF-11167
  */
 class ZF11167_ToArrayToJsonClass extends ZF11167_ToArrayClass
 {

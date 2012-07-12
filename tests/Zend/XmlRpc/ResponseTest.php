@@ -14,8 +14,6 @@ use Zend\XmlRpc\Response;
 use Zend\XmlRpc\AbstractValue;
 
 /**
- * Test case for Zend_XmlRpc_Response
- *
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage UnitTests

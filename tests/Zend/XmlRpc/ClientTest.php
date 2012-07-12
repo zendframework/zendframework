@@ -20,8 +20,6 @@ use Zend\XmlRpc\Value;
 use Zend\XmlRpc;
 
 /**
- * Test case for Zend\XmlRpc\Client
- *
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage UnitTests

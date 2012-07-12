@@ -16,11 +16,6 @@ use Zend\Cache\StorageFactory as CacheFactory;
 use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
 
 /**
- * @see \Zend\Service\SlideShare
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_Service_SlideShare
  * @subpackage UnitTests

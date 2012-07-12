@@ -263,17 +263,6 @@
             <row>
                 <entry>
                     <emphasis>
-                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dojo.html">
-                            <classname>Zend_Dojo</classname>
-                        </link>
-                    </emphasis>
-                </entry>
-                <entry>---</entry>
-                <entry>---</entry>
-            </row>
-            <row>
-                <entry>
-                    <emphasis>
                         <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dom.html">
                             <classname>Zend_Dom</classname>
                         </link>

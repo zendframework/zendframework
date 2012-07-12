@@ -369,14 +369,6 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
         </para>
 
         <para>
-            Aussi, nous pouvons toujours utiliser des décorateurs différents avec l'élément. Si
-            nous avions voulu utiliser un décorateur
-            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/">Dojo</link> <classname>DateTextBox</classname>
-            -- qui accepte et retourne des chaines -- we aurions pu, sans modification sur
-            l'élément lui-même.
-        </para>
-
-        <para>
             Enfin, vous avez une API uniforme pour décrire un élement se composant se plusieurs
             segments distincts.
         </para>

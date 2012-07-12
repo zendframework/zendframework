@@ -232,15 +232,14 @@ class RstConvert
      * @param  string $text
      * @return string
      */
-    public static function formatText($text)
-    {
-        return str_replace('\\', '\\\\', trim(preg_replace('/\s+/', ' ', str_replace("\n", '', $text))));
+    public static function formatText($text) {
+        return str_replace('\\', '\\\\', preg_replace('/\s+/m', ' ', preg_replace('/([\.:])\s*[\r\n]\s*$/', '$1', $text)));
     }
 
     /**
-     * Conver the link tag
+     * Convert the link tag
      *
-     * @param  DOMElement $node
+     * @param  \DOMElement $node
      * @return string
      */
     public static function link($node)
@@ -271,7 +270,7 @@ class RstConvert
     /**
      * Convert the table tag
      *
-     * @param  DOMElement $node
+     * @param  \DOMElement $node
      * @return string
      */
     public static function table($node)

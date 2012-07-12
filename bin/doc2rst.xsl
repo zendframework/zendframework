@@ -13,7 +13,7 @@
 </xsl:template>
 
 <!-- title -->
-<xsl:template match="/doc:section|/doc:appendix|/doc:chapter"> 
+<xsl:template match="/doc:section|/doc:appendix|/doc:chapter">
 <xsl:if test="../@xml:id != ''">
 .. _<xsl:value-of select="@xml:id" />:
 </xsl:if>
@@ -32,11 +32,11 @@
 </xsl:template>
 
 <!-- para -->
-<xsl:template match="doc:para">  
+<xsl:template match="doc:para">
 <xsl:text>
 </xsl:text>
 <xsl:if test="name(..) = 'note'">
-<xsl:text>    </xsl:text>
+<xsl:text>   </xsl:text>
 </xsl:if>
 <xsl:apply-templates/>
 <xsl:text>
@@ -54,13 +54,13 @@
 </xsl:template>
 
 <!-- classname, interfacename, methodname, type, command, property, constant, filename, varname -->
-<xsl:template match="//doc:classname|//doc:interfacename|//doc:methodname|//doc:type|//doc:command|//doc:property|//doc:constant|//doc:filename|//doc:varname"> ``<xsl:value-of select="normalize-space()" />`` </xsl:template>
+<xsl:template match="//doc:classname|//doc:interfacename|//doc:methodname|//doc:type|//doc:command|//doc:property|//doc:constant|//doc:filename|//doc:varname">``<xsl:value-of select="normalize-space()" />``</xsl:template>
 
 <!-- acronym  -->
-<xsl:template match="//doc:acronym"> *<xsl:value-of select="normalize-space()" />* </xsl:template>
+<xsl:template match="//doc:acronym">*<xsl:value-of select="normalize-space()" />*</xsl:template>
 
 <!-- emphasis  -->
-<xsl:template match="/doc:emphasis"> **<xsl:value-of select="normalize-space()" />** </xsl:template>
+<xsl:template match="//doc:emphasis">**<xsl:value-of select="normalize-space()" />**</xsl:template>
 
 <!-- example -->
 <xsl:template match ="//doc:example">

@@ -12,6 +12,12 @@ namespace Zend\Di\Display;
 
 use Zend\Di\Di;
 
+/**
+ * Exporter for class definitions
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class Console
 {
 
@@ -28,8 +34,8 @@ class Console
     /**
      * Export
      *
-     * @param Di $di
-     * @param array $runtimeClasses
+     * @param  Di    $di
+     * @param  array $runtimeClasses
      * @return void
      */
     public static function export(Di $di, array $runtimeClasses = array())
@@ -61,7 +67,6 @@ class Console
         $this->runtimeClasses[] = $runtimeClass;
     }
 
-
     public function render()
     {
 
@@ -88,7 +93,6 @@ class Console
             $definition = $this->di->definitions()->getDefinitionForClass($runtimeClass);
             $this->renderClassDefinition($definition, $runtimeClass);
         }
-
 
         echo PHP_EOL . 'Instance Configuration Info:' . PHP_EOL;
 

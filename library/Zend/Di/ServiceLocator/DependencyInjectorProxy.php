@@ -36,8 +36,8 @@ class DependencyInjectorProxy extends Di
     /**
      * Override, as we want it to use the functionality defined in the proxy
      *
-     * @param  string $name
-     * @param  array $params
+     * @param  string            $name
+     * @param  array             $params
      * @return GeneratorInstance
      */
     public function get($name, array $params = array())
@@ -70,9 +70,9 @@ class DependencyInjectorProxy extends Di
      *
      * Returns code generation artifacts.
      *
-     * @param  string $class
-     * @param  null|array $params
-     * @param  null|string $alias
+     * @param  string            $class
+     * @param  null|array        $params
+     * @param  null|string       $alias
      * @return GeneratorInstance
      */
     public function createInstanceViaConstructor($class, $params, $alias = null)
@@ -92,11 +92,11 @@ class DependencyInjectorProxy extends Di
     /**
      * Override instance creation via callback
      *
-     * @param  callback    $callback
-     * @param  null|array  $params
-     * @param  null|string $alias
+     * @param  callback                           $callback
+     * @param  null|array                         $params
+     * @param  null|string                        $alias
+     * @throws \Zend\Di\Exception\InvalidCallbackException
      * @return GeneratorInstance
-     * @throws Exception\InvalidCallbackException
      */
     public function createInstanceViaCallback($callback, $params, $alias)
     {
@@ -156,6 +156,7 @@ class DependencyInjectorProxy extends Di
                 'method' => $method,
                 'params' => $callParameters,
             ));
+
             return true;
         }
 
@@ -169,6 +170,7 @@ class DependencyInjectorProxy extends Di
     {
         if ($instance instanceof GeneratorInstance) {
             /* @var $instance GeneratorInstance */
+
             return $instance->getClass();
         }
 

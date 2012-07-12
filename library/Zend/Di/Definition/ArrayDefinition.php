@@ -10,12 +10,18 @@
 
 namespace Zend\Di\Definition;
 
+/**
+ * Class definitions based on a given array
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class ArrayDefinition implements DefinitionInterface
 {
 
     protected $dataArray = array();
 
-    public function __construct(Array $dataArray)
+    public function __construct(array $dataArray)
     {
         foreach ($dataArray as $class => $value) {
             // force lower names

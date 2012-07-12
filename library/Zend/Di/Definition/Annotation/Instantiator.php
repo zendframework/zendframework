@@ -12,6 +12,12 @@ namespace Zend\Di\Definition\Annotation;
 
 use Zend\Code\Annotation\AnnotationInterface;
 
+/**
+ * Annotation for instantiator
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class Instantiator implements AnnotationInterface
 {
 

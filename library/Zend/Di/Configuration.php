@@ -12,7 +12,15 @@ namespace Zend\Di;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Di\Definition\ArrayDefinition;
+use Zend\Di\Definition\RuntimeDefinition;
 
+/**
+ * Configures Di instances
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class Configuration
 {
     /**
@@ -23,7 +31,7 @@ class Configuration
     /**
      * Constructor
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options)
@@ -43,7 +51,7 @@ class Configuration
     /**
      * Configure
      *
-     * @param Di $di
+     * @param  Di   $di
      * @return void
      */
     public function configure(Di $di)
@@ -65,7 +73,7 @@ class Configuration
                 case 'compiler':
                     foreach ($definitionData as $filename) {
                         if (is_readable($filename)) {
-                            $di->definitions()->addDefinition(new \Zend\Di\Definition\ArrayDefinition(include $filename), false);
+                            $di->definitions()->addDefinition(new ArrayDefinition(include $filename), false);
                         }
                     }
                     break;
@@ -74,7 +82,7 @@ class Configuration
                         // Remove runtime from definition list if not enabled
                         $definitions = array();
                         foreach ($di->definitions() as $definition) {
-                            if (!$definition instanceof \Zend\Di\Definition\RuntimeDefinition) {
+                            if (!$definition instanceof RuntimeDefinition) {
                                 $definitions[] = $definition;
                             }
                         }
@@ -182,6 +190,5 @@ class Configuration
         }
 
     }
-
 
 }

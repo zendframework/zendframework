@@ -10,8 +10,10 @@
 
 namespace Zend\Di\Exception;
 
-class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements ExceptionInterface
+/**
+ * @category   Zend
+ * @package    Zend_Di
+ */
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
 }

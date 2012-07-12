@@ -12,6 +12,12 @@ namespace Zend\Di;
 
 use Closure;
 
+/**
+ * Simple service locator implementation capable of using closures to generate instances
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class ServiceLocator implements ServiceLocatorInterface
 {
     /**
@@ -43,13 +49,14 @@ class ServiceLocator implements ServiceLocatorInterface
     /**
      * Register a service with the locator
      *
-     * @param  string $name
-     * @param  mixed $service
+     * @param  string         $name
+     * @param  mixed          $service
      * @return ServiceLocator
      */
     public function set($name, $service)
     {
         $this->services[$name] = $service;
+
         return $this;
     }
 
@@ -68,7 +75,7 @@ class ServiceLocator implements ServiceLocatorInterface
      * method.
      *
      * @param  string $name
-     * @param  array $params
+     * @param  array  $params
      * @return mixed
      */
     public function get($name, array $params = array())
@@ -78,6 +85,7 @@ class ServiceLocator implements ServiceLocatorInterface
                 return null;
             }
             $method = $this->map[$name];
+
             return $this->$method($params);
         }
 

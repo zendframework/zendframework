@@ -11,7 +11,6 @@
 namespace Zend\Di\Definition;
 
 use Zend\Code\Annotation\AnnotationCollection;
-use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Reflection;
 use Zend\Code\Scanner\AggregateDirectoryScanner;
 use Zend\Code\Scanner\DerivedClassScanner;
@@ -19,6 +18,12 @@ use Zend\Code\Scanner\DirectoryScanner;
 use Zend\Code\Scanner\FileScanner;
 use Zend\Di\Definition\Annotation;
 
+/**
+ * Class definitions based on a set of directories to be scanned
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class CompilerDefinition implements DefinitionInterface
 {
     protected $isCompiled = false;
@@ -136,6 +141,7 @@ class CompilerDefinition implements DefinitionInterface
             if (!$this->allowReflectionExceptions) {
                 throw $e;
             }
+
             return;
         }
         $className = $rClass->getName();
@@ -189,10 +195,10 @@ class CompilerDefinition implements DefinitionInterface
                 if (!$this->allowReflectionExceptions) {
                     throw $e;
                 }
+
                 return;
             }
         }
-
 
         foreach ($rClass->getMethods(Reflection\MethodReflection::IS_PUBLIC) as $rMethod) {
 
@@ -226,7 +232,6 @@ class CompilerDefinition implements DefinitionInterface
                     continue 2;
                 }
             }
-
 
             // method
             // by annotation
@@ -452,7 +457,7 @@ class CompilerDefinition implements DefinitionInterface
     /**
      * Return whether the class exists
      *
-     * @param string $class
+     * @param  string $class
      * @return bool
      */
     public function hasClass($class)
@@ -463,35 +468,37 @@ class CompilerDefinition implements DefinitionInterface
     /**
      * Return the supertypes for this class
      *
-     * @param string $class
-     * @return array of types
+     * @param  string $class
+     * @return array  of types
      */
     public function getClassSupertypes($class)
     {
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return $this->classes[$class]['supertypes'];
     }
 
     /**
      * Get the instantiator
      *
-     * @param string $class
-     * @return string|callable
+     * @param  string          $class
+     * @return string|\Callable
      */
     public function getInstantiator($class)
     {
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return $this->classes[$class]['instantiator'];
     }
 
     /**
      * Return if there are injection methods
      *
-     * @param string $class
+     * @param  string $class
      * @return bool
      */
     public function hasMethods($class)
@@ -499,14 +506,15 @@ class CompilerDefinition implements DefinitionInterface
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return (count($this->classes[$class]['methods']) > 0);
     }
 
     /**
      * Return injection methods
      *
-     * @param string $class
-     * @param string $method
+     * @param  string $class
+     * @param  string $method
      * @return bool
      */
     public function hasMethod($class, $method)
@@ -514,13 +522,14 @@ class CompilerDefinition implements DefinitionInterface
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return isset($this->classes[$class]['methods'][$method]);
     }
 
     /**
      * Return an array of the injection methods
      *
-     * @param string $class
+     * @param  string $class
      * @return array
      */
     public function getMethods($class)
@@ -528,6 +537,7 @@ class CompilerDefinition implements DefinitionInterface
         if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
+
         return $this->classes[$class]['methods'];
     }
 
@@ -536,6 +546,7 @@ class CompilerDefinition implements DefinitionInterface
         if (!isset($this->classes[$class])) {
             return false;
         }
+
         return (array_key_exists($method, $this->classes[$class]));
     }
 
@@ -547,8 +558,8 @@ class CompilerDefinition implements DefinitionInterface
      *     #2 - Optional?, boolean
      *     #3 - Instantiable, boolean if class exists, otherwise null
      *
-     * @param string $class
-     * @param string $method
+     * @param  string $class
+     * @param  string $method
      * @return array
      */
     public function getMethodParameters($class, $method)
@@ -556,6 +567,7 @@ class CompilerDefinition implements DefinitionInterface
         if (!is_array($this->classes[$class])) {
             $this->processClass($class);
         }
+
         return $this->classes[$class]['parameters'][$method];
     }
 }

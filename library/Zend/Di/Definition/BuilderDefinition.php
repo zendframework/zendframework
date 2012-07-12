@@ -12,6 +12,12 @@ namespace Zend\Di\Definition;
 
 use Zend\Di\Exception;
 
+/**
+ * Class definitions based on a configuration array
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class BuilderDefinition implements DefinitionInterface
 {
     /**
@@ -27,7 +33,7 @@ class BuilderDefinition implements DefinitionInterface
     /**
      * Create classes from array
      *
-     * @param array $builderData
+     * @param  array $builderData
      * @return void
      */
     public function createClassesFromArray(array $builderData)
@@ -67,12 +73,13 @@ class BuilderDefinition implements DefinitionInterface
     /**
      * Add class
      *
-     * @param Builder\PhpClass $phpClass
+     * @param  Builder\PhpClass  $phpClass
      * @return BuilderDefinition
      */
     public function addClass(Builder\PhpClass $phpClass)
     {
         $this->classes[] = $phpClass;
+
         return $this;
     }
 
@@ -81,7 +88,7 @@ class BuilderDefinition implements DefinitionInterface
      *
      * This method is a factory that can be used in place of addClass().
      *
-     * @param  null|string $name Optional name of class to assign
+     * @param  null|string      $name Optional name of class to assign
      * @return Builder\PhpClass
      */
     public function createClass($name = null)
@@ -93,18 +100,20 @@ class BuilderDefinition implements DefinitionInterface
         }
 
         $this->addClass($class);
+
         return $class;
     }
 
     /**
      * Set the class to use with {@link createClass()}
      *
-     * @param  string $class
+     * @param  string            $class
      * @return BuilderDefinition
      */
     public function setClassBuilder($class)
     {
         $this->defaultClassBuilder = $class;
+
         return $this;
     }
 
@@ -130,11 +139,12 @@ class BuilderDefinition implements DefinitionInterface
         foreach ($this->classes as $class) {
             $classNames[] = $class->getName();
         }
+
         return $classNames;
     }
 
     /**
-     * @param string $class
+     * @param  string $class
      * @return bool
      */
     public function hasClass($class)
@@ -144,12 +154,13 @@ class BuilderDefinition implements DefinitionInterface
                 return true;
             }
         }
+
         return false;
     }
 
     /**
-     * @param string $name
-     * @return bool
+     * @param  string $name
+     * @return bool|Builder\PhpClass
      */
     protected function getClass($name)
     {
@@ -158,27 +169,30 @@ class BuilderDefinition implements DefinitionInterface
                 return $classObj;
             }
         }
+
         return false;
     }
 
     /**
-     * @param string $class
-     * @return array
-     * @throws Exception\RuntimeException
+     * @param  string                     $class
+     * @throws \Zend\Di\Exception\RuntimeException
+     * @return array|\string[]
      */
     public function getClassSupertypes($class)
     {
         $class = $this->getClass($class);
+
         if ($class === false) {
             throw new Exception\RuntimeException('Cannot find class object in this builder definition.');
         }
+
         return $class->getSuperTypes();
     }
 
     /**
-     * @param string $class
+     * @param  string                     $class
+     * @throws \Zend\Di\Exception\RuntimeException
      * @return array|string
-     * @throws Exception\RuntimeException
      */
     public function getInstantiator($class)
     {
@@ -186,13 +200,14 @@ class BuilderDefinition implements DefinitionInterface
         if ($class === false) {
             throw new Exception\RuntimeException('Cannot find class object in this builder definition.');
         }
+
         return $class->getInstantiator();
     }
 
     /**
-     * @param string $class
+     * @param  string                     $class
+     * @throws \Zend\Di\Exception\RuntimeException
      * @return bool
-     * @throws Exception\RuntimeException
      */
     public function hasMethods($class)
     {
@@ -201,13 +216,14 @@ class BuilderDefinition implements DefinitionInterface
         if ($class === false) {
             throw new Exception\RuntimeException('Cannot find class object in this builder definition.');
         }
+
         return (count($class->getInjectionMethods()) > 0);
     }
 
     /**
-     * @param string $class
-     * @return array
-     * @throws Exception\RuntimeException
+     * @param  string                     $class
+     * @throws \Zend\Di\Exception\RuntimeException
+     * @return array|string[]
      */
     public function getMethods($class)
     {
@@ -217,17 +233,19 @@ class BuilderDefinition implements DefinitionInterface
         }
         $methods = $class->getInjectionMethods();
         $methodNames = array();
+
         foreach ($methods as $methodObj) {
             $methodNames[] = $methodObj->getName();
         }
+
         return $methodNames;
     }
 
     /**
-     * @param string $class
-     * @param string $method
+     * @param  string                     $class
+     * @param  string                     $method
+     * @throws \Zend\Di\Exception\RuntimeException
      * @return bool
-     * @throws Exception\RuntimeException
      */
     public function hasMethod($class, $method)
     {
@@ -241,12 +259,13 @@ class BuilderDefinition implements DefinitionInterface
                 return true;
             }
         }
+
         return false;
     }
 
     /**
-     * @param string $class
-     * @param string $method
+     * @param  string $class
+     * @param  string $method
      * @return bool
      */
     public function hasMethodParameters($class, $method)
@@ -264,14 +283,15 @@ class BuilderDefinition implements DefinitionInterface
         if (!$method instanceof Builder\InjectionMethod) {
             return false;
         }
+
         return (count($method->getParameters()) > 0);
     }
 
     /**
-     * @param string $class
-     * @param string $method
-     * @return array
-     * @throws Exception\RuntimeException
+     * @param  string                     $class
+     * @param  string                     $method
+     * @throws \Zend\Di\Exception\RuntimeException
+     * @return array|\array[]
      */
     public function getMethodParameters($class, $method)
     {
@@ -292,8 +312,8 @@ class BuilderDefinition implements DefinitionInterface
         foreach ($method->getParameters() as $name => $info) {
             $methodParameters[$class->getName() . '::' . $method->getName() . ':' . $name] = $info;
         }
+
         return $methodParameters;
     }
-
 
 }

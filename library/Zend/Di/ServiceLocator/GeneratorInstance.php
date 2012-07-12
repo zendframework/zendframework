@@ -95,24 +95,26 @@ class GeneratorInstance
      * In the case of an instance created via a callback, we need to set the
      * class name after creating the generator instance.
      *
-     * @param  string $class
+     * @param  string            $class
      * @return GeneratorInstance
      */
     public function setClass($class)
     {
         $this->class = $class;
+
         return $this;
     }
 
     /**
      * Set instance alias
      *
-     * @param  string $alias
+     * @param  string            $alias
      * @return GeneratorInstance
      */
     public function setAlias($alias)
     {
         $this->alias = $alias;
+
         return $this;
     }
 
@@ -140,12 +142,13 @@ class GeneratorInstance
     /**
      * Set methods
      *
-     * @param array $methods
+     * @param  array             $methods
      * @return GeneratorInstance
      */
     public function setMethods(array $methods)
     {
         $this->methods = $methods;
+
         return $this;
     }
 
@@ -158,6 +161,7 @@ class GeneratorInstance
     public function addMethod($method)
     {
         $this->methods[] = $method;
+
         return $this;
     }
 

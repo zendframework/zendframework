@@ -13,6 +13,13 @@ namespace Zend\Di\Definition;
 use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Annotation\Parser\GenericAnnotationParser;
 
+/**
+ * Strategy used to discover methods to be considered as endpoints for dependency injection based on implemented
+ * interfaces, annotations and method names
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class IntrospectionStrategy
 {
     /**
@@ -66,6 +73,7 @@ class IntrospectionStrategy
         $parser            = new GenericAnnotationParser();
         $parser->registerAnnotation(new Annotation\Inject());
         $annotationManager->attach($parser);
+
         return $annotationManager;
     }
 

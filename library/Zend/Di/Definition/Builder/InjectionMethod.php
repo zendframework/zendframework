@@ -10,6 +10,12 @@
 
 namespace Zend\Di\Definition\Builder;
 
+/**
+ * Definitions for an injection endpoint method
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class InjectionMethod
 {
     const PARAMETER_POSTION_NEXT = 'next';
@@ -20,6 +26,7 @@ class InjectionMethod
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -35,6 +42,7 @@ class InjectionMethod
             $class,
             ($isRequired == null) ? true : false
         );
+
         return $this;
     }
 

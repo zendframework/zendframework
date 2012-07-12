@@ -10,6 +10,10 @@
 
 namespace Zend\Di\Definition;
 
+/**
+ * @category   Zend
+ * @package    Zend_Di
+ */
 interface DefinitionInterface
 {
     /**
@@ -20,43 +24,43 @@ interface DefinitionInterface
 
     /**
      * @abstract
-     * @param string $class
+     * @param  string $class
      * @return bool
      */
     public function hasClass($class);
 
     /**
      * @abstract
-     * @param string $class
+     * @param  string   $class
      * @return string[]
      */
     public function getClassSupertypes($class);
 
     /**
      * @abstract
-     * @param string $class
+     * @param  string       $class
      * @return string|array
      */
     public function getInstantiator($class);
 
     /**
      * @abstract
-     * @param string $class
+     * @param  string $class
      * @return bool
      */
     public function hasMethods($class);
 
     /**
      * @abstract
-     * @param string $class
+     * @param  string   $class
      * @return string[]
      */
     public function getMethods($class);
 
     /**
      * @abstract
-     * @param string $class
-     * @param string $method
+     * @param  string $class
+     * @param  string $method
      * @return bool
      */
     public function hasMethod($class, $method);
@@ -89,4 +93,3 @@ interface DefinitionInterface
      */
     public function getMethodParameters($class, $method);
 }
-

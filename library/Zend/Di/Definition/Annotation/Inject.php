@@ -12,6 +12,12 @@ namespace Zend\Di\Definition\Annotation;
 
 use Zend\Code\Annotation\AnnotationInterface;
 
+/**
+ * Annotation for injection endpoints for dependencies
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class Inject implements AnnotationInterface
 {
 

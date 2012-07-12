@@ -10,6 +10,12 @@
 
 namespace Zend\Di\Definition;
 
+/**
+ * Class definitions for a single class
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class ClassDefinition implements DefinitionInterface, PartialMarker
 {
 
@@ -19,7 +25,6 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     protected $methods = array();
     protected $methodParameters = array();
 
-
     public function __construct($class)
     {
         $this->class = $class;
@@ -28,18 +33,20 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     public function setInstantiator($instantiator)
     {
         $this->instantiator = $instantiator;
+
         return $this;
     }
 
     public function setSupertypes(array $supertypes)
     {
         $this->supertypes = $supertypes;
+
         return $this;
     }
 
     /**
-     * @param string $method
-     * @param bool|null $isRequired
+     * @param  string          $method
+     * @param  bool|null       $isRequired
      * @return ClassDefinition
      */
     public function addMethod($method, $isRequired = null)
@@ -55,7 +62,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     /**
      * @param $method
      * @param $parameterName
-     * @param array $parameterInfo (keys: required, type)
+     * @param  array           $parameterInfo (keys: required, type)
      * @return ClassDefinition
      */
     public function addMethodParameter($method, $parameterName, array $parameterInfo)
@@ -88,7 +95,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param string $class
+     * @param  string $class
      * @return bool
      */
     public function hasClass($class)
@@ -97,7 +104,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param string $class
+     * @param  string   $class
      * @return string[]
      */
     public function getClassSupertypes($class)
@@ -106,7 +113,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param string $class
+     * @param  string       $class
      * @return string|array
      */
     public function getInstantiator($class)
@@ -115,7 +122,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param string $class
+     * @param  string $class
      * @return bool
      */
     public function hasMethods($class)
@@ -124,7 +131,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param string $class
+     * @param  string   $class
      * @return string[]
      */
     public function getMethods($class)
@@ -133,8 +140,8 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param string $class
-     * @param string $method
+     * @param  string $class
+     * @param  string $method
      * @return bool
      */
     public function hasMethod($class, $method)
@@ -147,8 +154,8 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param string $class
-     * @param string $method
+     * @param  string $class
+     * @param  string $method
      * @return bool
      */
     public function hasMethodParameters($class, $method)
@@ -178,6 +185,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
         if (array_key_exists($method, $this->methodParameters)) {
             return $this->methodParameters[$method];
         }
+
         return null;
     }
 }

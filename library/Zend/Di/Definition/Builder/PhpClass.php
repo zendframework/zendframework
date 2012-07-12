@@ -10,6 +10,12 @@
 
 namespace Zend\Di\Definition\Builder;
 
+/**
+ * Object containing definitions for a single class
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class PhpClass
 {
     protected $defaultMethodBuilder = 'Zend\Di\Definition\Builder\InjectionMethod';
@@ -21,12 +27,13 @@ class PhpClass
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string   $name
      * @return PhpClass
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -43,6 +50,7 @@ class PhpClass
     public function setInstantiator($instantiator)
     {
         $this->instantiator = $instantiator;
+
         return $this;
     }
 
@@ -54,6 +62,7 @@ class PhpClass
     public function addSuperType($superType)
     {
         $this->superTypes[] = $superType;
+
         return $this;
     }
 
@@ -70,12 +79,13 @@ class PhpClass
     /**
      * Add injection method
      *
-     * @param InjectionMethod $injectionMethod
+     * @param  InjectionMethod $injectionMethod
      * @return PhpClass
      */
     public function addInjectionMethod(InjectionMethod $injectionMethod)
     {
         $this->injectionMethods[] = $injectionMethod;
+
         return $this;
     }
 
@@ -88,7 +98,7 @@ class PhpClass
      * order to provide a more fluent interface for building classes with
      * injection methods.
      *
-     * @param  null|string $name
+     * @param  null|string     $name
      * @return InjectionMethod
      */
     public function createInjectionMethod($name = null)
@@ -99,18 +109,20 @@ class PhpClass
             $method->setName($name);
         }
         $this->addInjectionMethod($method);
+
         return $method;
     }
 
     /**
      * Override which class will be used by {@link createInjectionMethod()}
      *
-     * @param  string $class
+     * @param  string   $class
      * @return PhpClass
      */
     public function setMethodBuilder($class)
     {
         $this->defaultMethodBuilder = $class;
+
         return $this;
     }
 

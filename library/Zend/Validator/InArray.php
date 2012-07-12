@@ -10,12 +10,12 @@
 
 namespace Zend\Validator;
 
-use Traversable;
-use Zend\Stdlib\ArrayUtils;
+use RecursiveArrayIterator;
+use RecursiveIteratorIterator;
 
 /**
- * @category   Zend
- * @package    Zend_Validate
+ * @category Zend
+ * @package  Zend_Validate
  */
 class InArray extends AbstractValidator
 {
@@ -25,7 +25,7 @@ class InArray extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::NOT_IN_ARRAY => "The input was not found in the haystack",
+        self::NOT_IN_ARRAY => 'The input was not found in the haystack',
     );
 
     /**
@@ -50,55 +50,16 @@ class InArray extends AbstractValidator
     protected $recursive = false;
 
     /**
-     * Sets validator options
-     *
-     * @param  array|Traversable $options
-     * @throws Exception\InvalidArgumentException
-     */
-    public function __construct($options = null)
-    {
-        if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
-        }
-        if (!is_array($options)) {
-            throw new Exception\InvalidArgumentException('Array expected as parameter');
-        } else {
-            $count = func_num_args();
-            $temp  = array();
-            if ($count > 1) {
-                $temp['haystack'] = func_get_arg(0);
-                $temp['strict']   = func_get_arg(1);
-                $options = $temp;
-            } else {
-                $temp = func_get_arg(0);
-                if (!array_key_exists('haystack', $options)) {
-                    $options = array();
-                    $options['haystack'] = $temp;
-                } else {
-                    $options = $temp;
-                }
-            }
-        }
-
-        $this->setHaystack($options['haystack']);
-        if (array_key_exists('strict', $options)) {
-            $this->setStrict($options['strict']);
-        }
-
-        if (array_key_exists('recursive', $options)) {
-            $this->setRecursive($options['recursive']);
-        }
-
-        parent::__construct();
-    }
-
-    /**
      * Returns the haystack option
      *
      * @return mixed
+     * @throws Exception\RuntimeException if haystack option is not set
      */
     public function getHaystack()
     {
+        if ($this->haystack == null) {
+            throw new Exception\RuntimeException('haystack option is mandatory');
+        }
         return $this->haystack;
     }
 
@@ -169,8 +130,8 @@ class InArray extends AbstractValidator
     {
         $this->setValue($value);
         if ($this->getRecursive()) {
-            $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($this->haystack));
-            foreach($iterator as $element) {
+            $iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($this->getHaystack()));
+            foreach ($iterator as $element) {
                 if ($this->strict) {
                     if ($element === $value) {
                         return true;
@@ -180,7 +141,7 @@ class InArray extends AbstractValidator
                 }
             }
         } else {
-            if (in_array($value, $this->haystack, $this->strict)) {
+            if (in_array($value, $this->getHaystack(), $this->strict)) {
                 return true;
             }
         }

@@ -13,8 +13,6 @@ namespace ZendTest\XmlRpc\Server;
 use Zend\XmlRpc\Server;
 
 /**
- * Test case for Zend_XmlRpc_Server_Fault
- *
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage UnitTests

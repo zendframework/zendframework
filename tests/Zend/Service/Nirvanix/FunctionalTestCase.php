@@ -16,7 +16,6 @@ use Zend\Http\Client\Adapter\Test as TestAdapter;
 use Zend\Service\Nirvanix\Nirvanix;
 
 /**
- * @see        Zend\Service\Nirvanix\Nirvanix
  * @category   Zend
  * @package    Zend_Service_Nirvanix
  * @subpackage UnitTests

@@ -70,9 +70,6 @@ class MemcacheqTest extends AdapterTest
     // test the constants
     public function testConst()
     {
-        /**
-         * @see Zend_Queue_Adapter_Memcacheq
-         */
         $this->assertTrue(is_string(Adapter\Memcacheq::DEFAULT_HOST));
         $this->assertTrue(is_integer(Adapter\Memcacheq::DEFAULT_PORT));
         $this->assertTrue(is_string(Adapter\Memcacheq::EOL));

@@ -73,9 +73,6 @@ class ActivemqTest extends AdapterTest
 
     public function testConst()
     {
-        /**
-         * @see Zend_Queue_Adapter_Activemq
-         */
         $this->assertTrue(is_string(Adapter\Activemq::DEFAULT_SCHEME));
         $this->assertTrue(is_string(Adapter\Activemq::DEFAULT_HOST));
         $this->assertTrue(is_integer(Adapter\Activemq::DEFAULT_PORT));

@@ -14,10 +14,6 @@ use Zend\OpenId\OpenId;
 use Zend\OpenId\Consumer\Storage;
 
 /**
- * @see Storage\File
- */
-
-/**
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage UnitTests

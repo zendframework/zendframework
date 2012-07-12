@@ -13,8 +13,6 @@ namespace ZendTest\XmlRpc;
 use Zend\XmlRpc\Generator\GeneratorInterface as Generator;
 
 /**
- * Test case for Zend_XmlRpc_Generator_*
- *
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage UnitTests

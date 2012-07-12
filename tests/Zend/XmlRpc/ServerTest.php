@@ -19,8 +19,6 @@ use Zend\XmlRpc\Fault;
 use Zend\XmlRpc;
 
 /**
- * Test case for Zend_XmlRpc_Server
- *
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage UnitTests

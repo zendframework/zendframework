@@ -157,7 +157,6 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @group ZF2-169
-     * @see http://framework.zend.com/issues/browse/ZF2-169
      */
     public function testZF2_169()
     {

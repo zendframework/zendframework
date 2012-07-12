@@ -9,10 +9,6 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_VoiceCall
- */
-
-/**
  * Zend_Service_DeveloperGarden test case
  *
  * @category   Zend

@@ -15,8 +15,6 @@ use Zend\Amf\Value\Messaging;
 use Zend\Amf\Value;
 
 /**
- * Test case for Zend_Amf_Response
- *
  * @category   Zend
  * @package    Zend_Amf
  * @subpackage UnitTests

@@ -13,15 +13,6 @@ namespace ZendTest\Service\StrikeIron;
 use Zend\Service\StrikeIron;
 
 /**
- * Test helper
- */
-
-/**
- * @see \Zend\Service\StrikeIron\Decorator
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests

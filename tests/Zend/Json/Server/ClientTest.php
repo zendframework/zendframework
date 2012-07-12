@@ -18,8 +18,6 @@ use Zend\Json\Server\Request;
 use Zend\Json\Server\Response;
 
 /**
- * Test case for Zend\Json\Server\Client
- *
  * @category   Zend
  * @package    Zend_Json
  * @subpackage UnitTests

@@ -13,8 +13,6 @@ namespace ZendTest\Amf\Util;
 use Zend\Amf\Util;
 
 /**
- * Test case for Zend_Amf_Util_BinaryStream
- *
  * @category   Zend
  * @package    Zend_Amf
  * @subpackage UnitTests

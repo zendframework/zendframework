@@ -15,11 +15,6 @@ use Zend\GData\App\Extension;
 use Zend\GData\App;
 
 /**
- * Test helper
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_GData_YouTube
  * @subpackage UnitTests

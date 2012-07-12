@@ -161,7 +161,7 @@ class Form extends Fieldset implements FormInterface
             $this->getInputFilter();
 
             // If the user wants to, elements names can be wrapped by the form's name
-            if ($this->wrapElements) {
+            if ($this->wrapElements()) {
                 $this->prepareElement($this);
             } else {
                 foreach ($this->getIterator() as $elementOrFieldset) {
@@ -617,7 +617,7 @@ class Form extends Fieldset implements FormInterface
      *
      * @return bool
      */
-    public function getWrapElements()
+    public function wrapElements()
     {
         return $this->wrapElements;
     }

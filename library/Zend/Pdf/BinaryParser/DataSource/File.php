@@ -12,6 +12,7 @@ namespace Zend\Pdf\BinaryParser\DataSource;
 
 use Zend\Pdf;
 use Zend\Pdf\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Concrete subclass of {@link \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource}
@@ -84,7 +85,9 @@ class File extends AbstractDataSource
     public function __destruct()
     {
         if (is_resource($this->_fileResource)) {
-            @fclose($this->_fileResource);
+            ErrorHandler::start(E_WARNING);
+            fclose($this->_fileResource);
+            ErrorHandler::stop();
         }
     }
 

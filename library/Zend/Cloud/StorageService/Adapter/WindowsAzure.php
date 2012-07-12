@@ -17,6 +17,7 @@ use Zend\Service\WindowsAzure\Exception as WindowsAzureException;
 use Zend\Service\WindowsAzure\Storage\Blob\Blob;
 use Zend\Service\WindowsAzure\Storage\Storage;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  *
@@ -218,11 +219,15 @@ class WindowsAzure implements AdapterInterface
                 $temporaryFilePath
             );
         } catch(WindowsAzureException\ExceptionInterface $e) {
-            @unlink($temporaryFilePath);
+            ErrorHandler::start(E_WARNING);
+            unlink($temporaryFilePath);
+            ErrorHandler::stop();
             throw new Exception\RuntimeException('Error on store: '.$e->getMessage(), $e->getCode(), $e);
         }
         if ($removeTemporaryFilePath) {
-            @unlink($temporaryFilePath);
+            ErrorHandler::start(E_WARNING);
+            unlink($temporaryFilePath);
+            ErrorHandler::stop();
         }
     }
 

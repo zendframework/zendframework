@@ -18,6 +18,7 @@ use Zend\Search\Lucene\Exception\RuntimeException;
 use Zend\Search\Lucene\Exception\UnsupportedMethodCallException;
 use Zend\Search\Lucene\Index;
 use Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -139,8 +140,13 @@ class Wildcard extends AbstractQuery
             );
         }
 
-        /** @todo check for PCRE unicode support may be performed through Zend_Environment in some future */
-        if (@preg_match('/\pL/u', 'a') == 1) {
+        /** 
+         * @todo check for PCRE unicode support may be performed through Zend_Environment in some future 
+         */
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/\pL/u', 'a');
+        ErrorHandler::stop();
+        if ($result == 1) {
             // PCRE unicode support is turned on
             // add Unicode modifier to the match expression
             $matchExpression .= 'u';
@@ -304,7 +310,10 @@ class Wildcard extends AbstractQuery
         $words = array();
 
         $matchExpression = '/^' . str_replace(array('\\?', '\\*'), array('.', '.*') , preg_quote($this->_pattern->text, '/')) . '$/';
-        if (@preg_match('/\pL/u', 'a') == 1) {
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/\pL/u', 'a');
+        ErrorHandler::stop();
+        if ($result == 1) {
             // PCRE unicode support is turned on
             // add Unicode modifier to the match expression
             $matchExpression .= 'u';

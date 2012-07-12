@@ -11,6 +11,7 @@
 namespace Zend\Mime;
 
 use Zend\Mail\Headers;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -128,7 +129,9 @@ class Decode
             list($headers, $body) = explode("\n\n", $message, 2);
         // at last resort find anything that looks like a new line
         } else {
-            @list($headers, $body) = @preg_split("%([\r\n]+)\\1%U", $message, 2);
+            ErrorHandler::start(E_NOTICE|E_WARNING);
+            list($headers, $body) = preg_split("%([\r\n]+)\\1%U", $message, 2);
+            ErrorHandler::stop();
         }
 
         $headers = Headers::fromString($headers, $EOL);

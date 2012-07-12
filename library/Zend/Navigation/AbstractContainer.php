@@ -15,6 +15,7 @@ use RecursiveIterator;
 use RecursiveIteratorIterator;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend_Navigation_Container
@@ -348,7 +349,10 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
      */
     public function __call($method, $arguments)
     {
-        if (@preg_match('/(find(?:One|All)?By)(.+)/', $method, $match)) {
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/(find(?:One|All)?By)(.+)/', $method, $match);
+        ErrorHandler::stop();
+        if ($result) {
             return $this->{$match[1]}($match[2], $arguments[0]);
         }
 

@@ -14,6 +14,7 @@ use Zend\Mail\Exception as MailException;
 use Zend\Mail\Storage;
 use Zend\Mail\Storage\Exception as StorageException;
 use Zend\Mail\Storage\Folder;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -472,7 +473,10 @@ class Maildir extends Folder\Maildir implements WritableInterface
         if (!link($temp_file['filename'], $new_filename)) {
             $exception = new StorageException\RuntimeException('cannot link message file to final dir');
         }
-        @unlink($temp_file['filename']);
+
+        ErrorHandler::start(E_WARNING);
+        unlink($temp_file['filename']);
+        ErrorHandler::stop();
 
         if ($exception) {
             throw $exception;
@@ -534,7 +538,10 @@ class Maildir extends Folder\Maildir implements WritableInterface
         } elseif (!link($temp_file['filename'], $new_file)) {
             $exception = new StorageException\RuntimeException('cannot link message file to final dir');
         }
-        @unlink($temp_file['filename']);
+
+        ErrorHandler::start(E_WARNING);
+        unlink($temp_file['filename']);
+        ErrorHandler::stop();
 
         if ($exception) {
             throw $exception;
@@ -600,7 +607,10 @@ class Maildir extends Folder\Maildir implements WritableInterface
         if (!rename($old_file, $new_file)) {
             $exception = new StorageException\RuntimeException('cannot move message file');
         }
-        @unlink($temp_file['filename']);
+
+        ErrorHandler::start(E_WARNING);
+        unlink($temp_file['filename']);
+        ErrorHandler::stop();
 
         if ($exception) {
             throw $exception;
@@ -691,7 +701,9 @@ class Maildir extends Folder\Maildir implements WritableInterface
     public function getQuota($fromStorage = false)
     {
         if ($fromStorage) {
-            $fh = @fopen($this->_rootdir . 'maildirsize', 'r');
+            ErrorHandler::start(E_WARNING);
+            $fh = fopen($this->_rootdir . 'maildirsize', 'r');
+            ErrorHandler::stop();
             if (!$fh) {
                 throw new StorageException\RuntimeException('cannot open maildirsize');
             }

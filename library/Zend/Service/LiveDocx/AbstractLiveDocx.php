@@ -13,6 +13,7 @@ namespace Zend\Service\LiveDocx;
 use Traversable;
 use Zend\Soap\Client as SoapClient;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -339,10 +340,12 @@ abstract class AbstractLiveDocx
             }
 
             try {
-                @$this->getSoapClient()->LogIn(array(
+                ErrorHandler::start(E_WARNING);
+                $this->getSoapClient()->LogIn(array(
                     'username' => $this->getUsername(),
                     'password' => $this->getPassword(),
                 ));
+                ErrorHandler::stop();
                 $this->setIsLoggedIn(true);
             } catch (\Exception $e) {
                 throw new Exception\RuntimeException(

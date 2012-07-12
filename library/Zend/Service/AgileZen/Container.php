@@ -129,7 +129,7 @@ class Container implements Countable, Iterator, ArrayAccess
      *
      * Implement Iterator::current()
      *
-     * @return Zend\Service\AgileZen\Resources\*
+     * @return AbstractEntity
      */
     public function current()
     {
@@ -208,7 +208,7 @@ class Container implements Countable, Iterator, ArrayAccess
      *
      * @param   int     $offset
      * @throws  Exception\OutOfBoundsException
-     * @return  Zend\Service\AgileZen\Resources\*
+     * @return  AbstractEntity
      */
     public function offsetGet($offset)
     {

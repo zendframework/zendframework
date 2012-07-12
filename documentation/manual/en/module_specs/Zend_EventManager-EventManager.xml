@@ -46,7 +46,7 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-use Zend\EventManager\EventCollection,
+use Zend\EventManager\EventCollection;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAware;
 
@@ -809,9 +809,9 @@ class SomeValueObject
             </para>
 
             <programlisting language="php"><![CDATA[
-use Zend\Cache\Cache,
-    Zend\EventManager\EventCollection,
-    Zend\EventManager\ListenerAggregate;
+use Zend\Cache\Cache;
+use Zend\EventManager\EventCollection;
+use Zend\EventManager\ListenerAggregate;
 
 class CacheListener implements ListenerAggregate
 {

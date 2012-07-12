@@ -112,6 +112,17 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager->addAbstractFactory(10);
     }
 
+    public function testServiceManagerIsPassedToInitializer()
+    {
+        $initializer = new TestAsset\FooInitializer();
+        $this->serviceManager->addInitializer($initializer);
+        $this->serviceManager->setFactory('foo', function () {
+            return new \stdClass();
+        });
+        $obj = $this->serviceManager->get('foo');
+        $this->assertSame($this->serviceManager, $initializer->sm);
+    }
+
     /**
      * @covers Zend\ServiceManager\ServiceManager::addInitializer
      */

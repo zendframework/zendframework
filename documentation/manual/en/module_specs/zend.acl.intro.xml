@@ -116,9 +116,9 @@
             </para>
 
             <programlisting language="php"><![CDATA[
-use Zend\Acl\Acl,
-    Zend\Acl\Role\GenericRole as Role,
-    Zend\Acl\Resource\GenericResource as Resource;
+use Zend\Acl\Acl;
+use Zend\Acl\Role\GenericRole as Role;
+use Zend\Acl\Resource\GenericResource as Resource;
 
 $acl = new Acl();
 
@@ -258,9 +258,9 @@ $acl = new Acl();
         </para>
 
         <programlisting language="php"><![CDATA[
-use Zend\Acl\Acl,
-    Zend\Acl\Role\GenericRole as Role,
-    Zend\Acl\Resource\GenericResource as Resource;
+use Zend\Acl\Acl;
+use Zend\Acl\Role\GenericRole as Role;
+use Zend\Acl\Resource\GenericResource as Resource;
 
 $acl = new Acl();
 
@@ -311,8 +311,8 @@ $acl->addRole(new Role('administrator'));
         </para>
 
         <programlisting language="php"><![CDATA[
-use Zend\Acl\Acl,
-    Zend\Acl\Role\GenericRole as Role;
+use Zend\Acl\Acl;
+use Zend\Acl\Role\GenericRole as Role;
 
 $acl = new Acl();
 

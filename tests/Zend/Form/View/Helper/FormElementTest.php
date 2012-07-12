@@ -78,12 +78,15 @@ class FormElementTest extends TestCase
     {
         if ($type === 'radio') {
             $element = new Element\Radio('foo');
+        } elseif ($type === 'checkbox') {
+            $element = new Element\Checkbox('foo');
         } else {
             $element = new Element('foo');
         }
 
         $element->setAttribute('type', $type);
         $element->setAttribute('options', array('option' => 'value'));
+        $element->setAttribute('src', 'http://zend.com/img.png');
         $markup  = $this->helper->render($element);
 
         $this->assertContains('<input', $markup);

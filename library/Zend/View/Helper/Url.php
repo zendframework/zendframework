@@ -10,6 +10,7 @@
 
 namespace Zend\View\Helper;
 
+use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface;
 use Zend\View\Exception;
@@ -24,21 +25,21 @@ class Url extends AbstractHelper
 {
     /**
      * RouteStackInterface instance.
-     * 
+     *
      * @var RouteStackInterface
      */
     protected $router;
-    
+
     /**
      * RouteInterface match returned by the router.
-     * 
+     *
      * @var RouteMatch.
      */
     protected $routeMatch;
 
     /**
      * Set the router to use for assembling.
-     * 
+     *
      * @param RouteStackInterface $router
      * @return Url
      */
@@ -47,10 +48,10 @@ class Url extends AbstractHelper
         $this->router = $router;
         return $this;
     }
-    
+
     /**
      * Set route match returned by the router.
-     * 
+     *
      * @param  RouteMatch $routeMatch
      * @return self
      */
@@ -83,18 +84,24 @@ class Url extends AbstractHelper
             if ($this->routeMatch === null) {
                 throw new Exception\RuntimeException('No RouteMatch instance provided');
             }
-            
+
             $name = $this->routeMatch->getMatchedRouteName();
-            
+
             if ($name === null) {
                 throw new Exception\RuntimeException('RouteMatch does not contain a matched route name');
             }
         }
-        
+
         if ($reuseMatchedParams && $this->routeMatch !== null) {
-            $params = array_merge($this->routeMatch->getParams(), $params);
+            $routeMatchParams = $this->routeMatch->getParams();
+
+            if (isset($routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER])) {
+                $routeMatchParams['controller'] = $routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER];
+            }
+
+            $params = array_merge($routeMatchParams, $params);
         }
-        
+
         $options['name'] = $name;
 
         return $this->router->assemble($params, $options);

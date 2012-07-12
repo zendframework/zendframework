@@ -10,11 +10,11 @@
 
 namespace ZendTest\Dojo;
 
-use Zend\Dojo\BuildLayer,
-    Zend\Dojo\View\Helper\Dojo\Container as DojoContainer,
-    Zend\Json\Json,
-    Zend\Registry,
-    Zend\View;
+use Zend\Dojo\BuildLayer;
+use Zend\Dojo\View\Helper\Dojo\Container as DojoContainer;
+use Zend\Json\Json;
+use Zend\Registry;
+use Zend\View;
 
 /**
  * @category   Zend

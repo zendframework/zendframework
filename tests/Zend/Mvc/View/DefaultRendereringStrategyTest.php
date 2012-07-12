@@ -10,25 +10,25 @@
 
 namespace ZendTest\Mvc\View;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    ReflectionClass,
-    stdClass,
-    Zend\EventManager\Event,
-    Zend\EventManager\EventManager,
-    Zend\Http\Request,
-    Zend\Http\Response,
-    Zend\Mvc\Application,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\View\DefaultRenderingStrategy,
-    Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
-    Zend\View\Model\ModelInterface as Model,
-    Zend\View\Renderer\FeedRenderer,
-    Zend\View\Renderer\JsonRenderer,
-    Zend\View\Renderer\PhpRenderer,
-    Zend\View\Resolver\TemplateMapResolver,
-    Zend\View\View,
-    Zend\View\ViewEvent,
-    Zend\View\Model\ViewModel;
+use PHPUnit_Framework_TestCase as TestCase;
+use ReflectionClass;
+use stdClass;
+use Zend\EventManager\Event;
+use Zend\EventManager\EventManager;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\Mvc\Application;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\View\DefaultRenderingStrategy;
+use Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Renderer\FeedRenderer;
+use Zend\View\Renderer\JsonRenderer;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Resolver\TemplateMapResolver;
+use Zend\View\View;
+use Zend\View\ViewEvent;
+use Zend\View\Model\ViewModel;
 
 /**
  * @category   Zend

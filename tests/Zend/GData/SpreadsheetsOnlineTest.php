@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData;
+
 use Zend\GData\Spreadsheets;
 
 /**
@@ -20,6 +21,8 @@ use Zend\GData\Spreadsheets;
  */
 class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Spreadsheets */
+    public $gdata;
 
     public function setUp()
     {
@@ -72,7 +75,7 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feed instanceof Spreadsheets\SpreadsheetFeed);
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Spreadsheets\SpreadsheetEntry);
-            $this->assertTrue($entry->getHttpClient() == $feed->getHttpClient());
+            $this->assertTrue($entry->getService() == $feed->getService());
         }
 
         $query = new Spreadsheets\DocumentQuery();
@@ -80,7 +83,7 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feed instanceof Spreadsheets\SpreadsheetFeed);
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Spreadsheets\SpreadsheetEntry);
-            $this->assertTrue($entry->getHttpClient() == $feed->getHttpClient());
+            $this->assertTrue($entry->getService() == $feed->getService());
         }
 
         $uri = $query->getQueryUrl();
@@ -88,7 +91,7 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feed instanceof Spreadsheets\SpreadsheetFeed);
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Spreadsheets\SpreadsheetEntry);
-            $this->assertTrue($entry->getHttpClient() == $feed->getHttpClient());
+            $this->assertTrue($entry->getService() == $feed->getService());
         }
     }
 
@@ -100,7 +103,7 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feed instanceof Spreadsheets\WorksheetFeed);
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Spreadsheets\WorksheetEntry);
-            $this->assertTrue($entry->getHttpClient() == $feed->getHttpClient());
+            $this->assertTrue($entry->getService() == $feed->getService());
         }
 
         $uri = $query->getQueryUrl();
@@ -108,7 +111,7 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feed instanceof Spreadsheets\WorksheetFeed);
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Spreadsheets\WorksheetEntry);
-            $this->assertTrue($entry->getHttpClient() == $feed->getHttpClient());
+            $this->assertTrue($entry->getService() == $feed->getService());
         }
     }
 
@@ -121,14 +124,14 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feed instanceof Spreadsheets\CellFeed);
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Spreadsheets\CellEntry);
-            $this->assertTrue($entry->getHttpClient() == $feed->getHttpClient());
+            $this->assertTrue($entry->getService() == $feed->getService());
         }
 
         $feed = $this->gdata->getCellFeed($query->getQueryUrl());
         $this->assertTrue($feed instanceof Spreadsheets\CellFeed);
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Spreadsheets\CellEntry);
-            $this->assertTrue($entry->getHttpClient() == $feed->getHttpClient());
+            $this->assertTrue($entry->getService() == $feed->getService());
         }
     }
 
@@ -141,14 +144,14 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feed instanceof Spreadsheets\ListFeed);
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Spreadsheets\ListEntry);
-            $this->assertTrue($entry->getHttpClient() == $feed->getHttpClient());
+            $this->assertTrue($entry->getService() == $feed->getService());
         }
 
         $feed = $this->gdata->getListFeed($query->getQueryUrl());
         $this->assertTrue($feed instanceof Spreadsheets\ListFeed);
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Spreadsheets\ListEntry);
-            $this->assertTrue($entry->getHttpClient() == $feed->getHttpClient());
+            $this->assertTrue($entry->getService() == $feed->getService());
         }
     }
 
@@ -237,7 +240,7 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $entry = $this->gdata->insertRow($rowData, $this->sprKey);
         $rowData['a1'] = 'newer';
         $entry = $this->gdata->updateRow($entry, $rowData);
-        $ssTest = new Spreadsheets($entry->getHttpClient());
+        $ssTest = new Spreadsheets($entry->getService()->getHttpClient());
         $ssTest->delete($entry->getEditLink()->href);
     }
 
@@ -251,7 +254,7 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $entry = $this->gdata->insertRow($rowData, $this->sprKey);
         $rowData['a1'] = 'newer';
         $entry = $this->gdata->updateRow($entry, $rowData);
-        $ssTest = new Spreadsheets($entry->getHttpClient());
+        $ssTest = new Spreadsheets($entry->getService()->getHttpClient());
         $ssTest->delete($entry);
     }
 
@@ -276,7 +279,7 @@ class SpreadsheetsOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('data', $entry->customByName['c1']->getText());
         $this->assertEquals('here', $entry->customByName['d1']->getText());
 
-        $ssTest = new Spreadsheets($entry->getHttpClient());
+        $ssTest = new Spreadsheets($entry->getService()->getHttpClient());
         $ssTest->delete($entry);
     }
 

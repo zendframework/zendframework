@@ -112,8 +112,8 @@
         </para>
         
          <programlisting language="php"><![CDATA[
-use Zend\Cloud\Infrastructure\Adapter\Ec2 as Ec2Adapter,
-    Zend\Cloud\Infrastructure\Factory as FactoryInfrastructure;
+use Zend\Cloud\Infrastructure\Adapter\Ec2 as Ec2Adapter;
+use Zend\Cloud\Infrastructure\Factory as FactoryInfrastructure;
 
 $key    = 'key';
 $secret = 'secret';

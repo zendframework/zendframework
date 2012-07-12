@@ -108,7 +108,10 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
         $startnum  = $this->getStartLine($includeDocBlock);
         $endnum    = $this->getEndLine() - $this->getStartLine();
 
-        return implode('', array_splice($filelines, $startnum, $endnum, true));
+        // Ensure we get between the open and close braces
+        $lines = array_slice($filelines, $startnum, $endnum);
+        array_unshift($lines, $filelines[$startnum-1]);
+        return strstr(implode('', $lines), '{');
     }
 
     /**

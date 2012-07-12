@@ -10,7 +10,6 @@
 
 namespace Zend\Form\Element;
 
-
 /**
  * @category   Zend
  * @package    Zend_Form
@@ -18,4 +17,12 @@ namespace Zend\Form\Element;
  */
 class Radio extends MultiCheckbox
 {
+    /**
+     * Seed attributes
+     *
+     * @var array
+     */
+    protected $attributes = array(
+        'type' => 'radio'
+    );
 }

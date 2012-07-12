@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\ProgressBar\Adapter;
+
 use Zend\ProgressBar\Adapter;
 
 require_once 'MockupStream.php';

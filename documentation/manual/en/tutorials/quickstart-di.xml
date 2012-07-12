@@ -259,9 +259,9 @@ namespace My {
     type-hinting information.
   </para>
   <programlisting language="php"><![CDATA[
-use Zend\Di\DependencyInjector,
-    Zend\Di\Definition,
-    Zend\Di\Definition\Builder;
+use Zend\Di\DependencyInjector;
+use Zend\Di\Definition;
+use Zend\Di\Definition\Builder;
 
 // Describe this class:
 $builder = new Definition\BuilderDefinition;
@@ -472,9 +472,9 @@ file_put_contents(__DIR__ . '/My/DiDefinition.php', $codeGenerator->generate());
     consuming definitions from multiple places:
   </para>
   <programlisting language="php"><![CDATA[
-use Zend\Di\DependencyInjector,
-    Zend\Di\Definition,
-    Zend\Di\Definition\Builder;
+use Zend\Di\DependencyInjector;
+use Zend\Di\Definition;
+use Zend\Di\Definition\Builder;
 
 $di = new DependencyInjector;
 $diDefAggregate = new Definition\Aggregate();

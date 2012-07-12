@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Test\PHPUnit\Db\DataSet;
+
 use Zend\Db\Select;
 
 /**

@@ -45,9 +45,9 @@ class DateTimeLocal extends DateTime
                      ? $this->attributes['min'] : '1970-01-01T00:00:00';
 
         return new DateStepValidator(array(
-            'format'       => \DateTime::ISO8601,
-            'baseValue'    => $baseValue,
-            'step' => new \DateInterval("PT{$stepValue}M"),
+            'format'    => \DateTime::ISO8601,
+            'baseValue' => $baseValue,
+            'step'      => new \DateInterval("PT{$stepValue}M"),
         ));
     }
 }

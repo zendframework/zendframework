@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Cache\Pattern;
+
 use Zend\Cache;
 
 /**

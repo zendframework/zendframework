@@ -10,8 +10,8 @@
 
 namespace ZendTest\Loader;
 
-use Zend\Loader\ClassMapAutoloader,
-    Zend\Loader\Exception\InvalidArgumentException;
+use Zend\Loader\ClassMapAutoloader;
+use Zend\Loader\Exception\InvalidArgumentException;
 
 /**
  * @category   Zend

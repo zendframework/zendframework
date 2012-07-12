@@ -10,11 +10,11 @@
 
 namespace ZendTest\Dojo\View\Helper;
 
-use Zend\Dojo\View\Helper\NumberSpinner as NumberSpinnerHelper,
-    Zend\Dojo\View\Helper\Dojo as DojoHelper,
-    Zend\Json\Json,
-    Zend\Registry,
-    Zend\View;
+use Zend\Dojo\View\Helper\NumberSpinner as NumberSpinnerHelper;
+use Zend\Dojo\View\Helper\Dojo as DojoHelper;
+use Zend\Json\Json;
+use Zend\Registry;
+use Zend\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_NumberSpinner.

@@ -9,8 +9,9 @@
  */
 
 namespace ZendTest\Soap;
-use Zend\Soap\Wsdl,
-    Zend\Soap\Wsdl\ComplexTypeStrategy;
+
+use Zend\Soap\Wsdl;
+use Zend\Soap\Wsdl\ComplexTypeStrategy;
 
 /**
  * Test cases for Zend_Soap_Wsdl

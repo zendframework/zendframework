@@ -16,6 +16,7 @@ use Zend\Form\Annotation;
  * @Annotation\Name("some_name")
  * @Annotation\Attributes({"legend":"Some Fieldset"})
  * @Annotation\InputFilter("ZendTest\Form\TestAsset\Annotation\InputFilter")
+ * @Annotation\ValidationGroup({"omit", "keep"})
  */
 class ClassEntity
 {

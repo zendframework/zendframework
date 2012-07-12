@@ -13,8 +13,8 @@ namespace ZendTest\Cloud\DocumentService;
 use Zend\Cloud\DocumentService\Adapter;
 use Zend\Cloud\DocumentService\Document;
 use Zend\Cloud\DocumentService\Factory;
-use Zend\Cloud\DocumentService\QueryAdapter,
-    PHPUnit_Framework_TestCase as PHPUnitTestCase;
+use Zend\Cloud\DocumentService\QueryAdapter;
+use PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**
  * This class forces the adapter tests to implement tests for all methods on

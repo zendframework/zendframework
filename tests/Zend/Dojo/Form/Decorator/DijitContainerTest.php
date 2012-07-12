@@ -10,13 +10,13 @@
 
 namespace ZendTest\Dojo\Form\Decorator;
 
-use Zend\Dojo\Form\Decorator\DijitContainer as DijitContainerDecorator,
-    Zend\Dojo\Form\Decorator\ContentPane as ContentPaneDecorator,
-    Zend\Dojo\Form\SubForm as DojoSubForm,
-    Zend\Dojo\Form\Form as DojoForm,
-    Zend\Dojo\View\Helper\Dojo as DojoHelper,
-    Zend\Registry,
-    Zend\View;
+use Zend\Dojo\Form\Decorator\DijitContainer as DijitContainerDecorator;
+use Zend\Dojo\Form\Decorator\ContentPane as ContentPaneDecorator;
+use Zend\Dojo\Form\SubForm as DojoSubForm;
+use Zend\Dojo\Form\Form as DojoForm;
+use Zend\Dojo\View\Helper\Dojo as DojoHelper;
+use Zend\Registry;
+use Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Decorator_DijitContainer.

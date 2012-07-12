@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\XmlRpc\Server;
+
 use Zend\XmlRpc\Server;
 
 /**

@@ -10,8 +10,8 @@
 
 namespace ZendTest\Service\Nirvanix;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Service\Nirvanix\Response;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Service\Nirvanix\Response;
 
 /**
  * @see        Zend\Service\Nirvanix\Response

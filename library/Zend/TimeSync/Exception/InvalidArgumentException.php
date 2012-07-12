@@ -16,6 +16,7 @@ namespace Zend\TimeSync\Exception;
  * @category   Zend
  * @package    Zend_TimeSync
  */
-class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
+class InvalidArgumentException extends \InvalidArgumentException
+    implements ExceptionInterface
 {
 }

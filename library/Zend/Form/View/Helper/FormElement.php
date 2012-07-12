@@ -44,7 +44,7 @@ class FormElement extends BaseAbstractHelper
         }
 
         if ($element instanceof Element\Csrf) {
-            $helper = $renderer->plugin('form_input');
+            $helper = $renderer->plugin('form_hidden');
             return $helper($element);
         }
 
@@ -56,28 +56,133 @@ class FormElement extends BaseAbstractHelper
         $type    = $element->getAttribute('type');
         $options = $element->getAttribute('options');
 
-        if ($type == 'checkbox') {
+        if ('checkbox' == $type) {
             $helper = $renderer->plugin('form_checkbox');
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'multi_checkbox') {
+        if ('color' == $type) {
+            $helper = $renderer->plugin('form_color');
+            return $helper($element);
+        }
+
+        if ('date' == $type) {
+            $helper = $renderer->plugin('form_date');
+            return $helper($element);
+        }
+
+        if ('datetime' == $type) {
+            $helper = $renderer->plugin('form_date_time');
+            return $helper($element);
+        }
+
+        if ('datetime-local' == $type) {
+            $helper = $renderer->plugin('form_date_time_local');
+            return $helper($element);
+        }
+
+        if ('email' == $type) {
+            $helper = $renderer->plugin('form_email');
+            return $helper($element);
+        }
+
+        if ('file' == $type) {
+            $helper = $renderer->plugin('form_file');
+            return $helper($element);
+        }
+
+        if ('hidden' == $type) {
+            $helper = $renderer->plugin('form_hidden');
+            return $helper($element);
+        }
+
+        if ('image' == $type) {
+            $helper = $renderer->plugin('form_image');
+            return $helper($element);
+        }
+
+        if ('month' == $type) {
+            $helper = $renderer->plugin('form_month');
+            return $helper($element);
+        }
+
+        if ('multi_checkbox' == $type && is_array($options)) {
             $helper = $renderer->plugin('form_multi_checkbox');
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'radio') {
+        if ('number' == $type) {
+            $helper = $renderer->plugin('form_number');
+            return $helper($element);
+        }
+
+        if ('password' == $type) {
+            $helper = $renderer->plugin('form_password');
+            return $helper($element);
+        }
+
+        if ('radio' == $type && is_array($options)) {
             $helper = $renderer->plugin('form_radio');
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'select') {
+        if ('range' == $type) {
+            $helper = $renderer->plugin('form_range');
+            return $helper($element);
+        }
+
+        if ('reset' == $type) {
+            $helper = $renderer->plugin('form_reset');
+            return $helper($element);
+        }
+
+        if ('search' == $type) {
+            $helper = $renderer->plugin('form_search');
+            return $helper($element);
+        }
+
+        if ('select' == $type && is_array($options)) {
             $helper = $renderer->plugin('form_select');
             return $helper($element);
         }
 
-        if ($type == 'textarea') {
+        if ('submit' == $type) {
+            $helper = $renderer->plugin('form_submit');
+            return $helper($element);
+        }
+
+        if ('tel' == $type) {
+            $helper = $renderer->plugin('form_tel');
+            return $helper($element);
+        }
+
+        if ('text' == $type) {
+            $helper = $renderer->plugin('form_text');
+            return $helper($element);
+        }
+
+        if ('textarea' == $type) {
             $helper = $renderer->plugin('form_textarea');
+            return $helper($element);
+        }
+
+        if ('time' == $type) {
+            $helper = $renderer->plugin('form_time');
+            return $helper($element);
+        }
+
+        if ('time' == $type) {
+            $helper = $renderer->plugin('form_time');
+            return $helper($element);
+        }
+
+        if ('url' == $type) {
+            $helper = $renderer->plugin('form_url');
+            return $helper($element);
+        }
+
+        if ('week' == $type) {
+            $helper = $renderer->plugin('form_week');
             return $helper($element);
         }
 

@@ -38,22 +38,23 @@ To run tests:
     you wish to run tests, or a specific test class file.
 
     ```sh
-    % phpunit ZendTest/Application
-    % phpunit ZendTest/Application/Resource/CacheManagerTest.php
+    % phpunit Zend/Http
+    % phpunit Zend/Http/Header/EtagTest.php
     ```
 
  -  You may also provide the `--group` switch; in such cases, provide the
     top-level component name:
 
     ```sh
-    % phpunit --group Zend_Application
+    % phpunit --group Zend_Http
     ```
     This will likely lead to errors, so it's usually best to specify a
     specific component in which to run test:
 
     ```sh
-    % phpunit --group ZF-XYZ Zend/Application
+    % phpunit --group ZF-XYZ Zend/Http
     ```
+
 You can turn on conditional tests with the TestConfiguration.php file.
 To do so:
 

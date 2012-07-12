@@ -10,8 +10,8 @@
 
 namespace ZendTest\Session;
 
-use Zend\Session\SessionManager,
-    Zend\Session;
+use Zend\Session\SessionManager;
+use Zend\Session;
 
 /**
  * @category   Zend

@@ -11,10 +11,10 @@
 namespace ZendTest\View\Helper;
 
 use ArrayObject;
-use Iterator,
-    PHPUnit_Framework_TestCase as TestCase,
-    Zend\View\Helper\PartialLoop,
-    Zend\View\Renderer\PhpRenderer as View;
+use Iterator;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\View\Helper\PartialLoop;
+use Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_View_Helper_PartialLoop.

@@ -9,6 +9,7 @@
  */
 
 namespace Zend\GData\GApps\Extension;
+
 use Zend\GData\App;
 
 /**

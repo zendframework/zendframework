@@ -10,12 +10,12 @@
 
 namespace ZendTest\Mvc\Controller\Plugin;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\Request,
-    Zend\Http\Response,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\Router\RouteMatch,
-    ZendTest\Mvc\Controller\TestAsset\SampleController;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
+use ZendTest\Mvc\Controller\TestAsset\SampleController;
 
 class ParamsTest extends TestCase
 {

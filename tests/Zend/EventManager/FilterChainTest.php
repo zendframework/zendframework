@@ -9,8 +9,9 @@
  */
 
 namespace ZendTest\Stdlib;
-use Zend\EventManager\FilterChain,
-    Zend\Stdlib\CallbackHandler;
+
+use Zend\EventManager\FilterChain;
+use Zend\Stdlib\CallbackHandler;
 
 /**
  * @category   Zend

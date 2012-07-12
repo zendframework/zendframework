@@ -10,8 +10,8 @@
 
 namespace ZendTest\Authentication;
 
-use Zend\Authentication\AuthenticationService,
-    Zend\Authentication as Auth;
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication as Auth;
 
 /**
  * @category   Zend

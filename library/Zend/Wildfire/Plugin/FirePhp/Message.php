@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Wildfire\Plugin\FirePhp;
+
 use Zend\Wildfire;
 
 /**

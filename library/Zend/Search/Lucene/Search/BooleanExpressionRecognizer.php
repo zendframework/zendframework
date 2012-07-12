@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Search\Lucene\Search;
+
 use Zend\Search\Lucene;
 
 /**

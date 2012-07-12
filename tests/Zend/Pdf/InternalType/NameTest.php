@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Pdf\InternalType;
+
 use Zend\Pdf\InternalType;
 
 /**

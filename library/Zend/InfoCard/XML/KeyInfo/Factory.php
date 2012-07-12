@@ -9,6 +9,7 @@
  */
 
 namespace Zend\InfoCard\XML\KeyInfo;
+
 use Zend\InfoCard\XML;
 
 /**

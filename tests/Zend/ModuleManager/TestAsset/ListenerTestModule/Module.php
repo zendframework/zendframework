@@ -13,14 +13,14 @@ namespace ListenerTestModule;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\LocatorRegisteredInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
-use Zend\EventManager\Event;
+use Zend\EventManager\EventInterface;
 
 /**
  * @category   Zend
  * @package    Zend_ModuleManager
  * @subpackage UnitTest
  */
-class Module implements 
+class Module implements
     AutoloaderProviderInterface,
     LocatorRegisteredInterface,
     BootstrapListenerInterface
@@ -55,7 +55,7 @@ class Module implements
         );
     }
 
-    public function onBootstrap(Event $e)
+    public function onBootstrap(EventInterface $e)
     {
         $this->onBootstrapCalled = true;
     }

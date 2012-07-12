@@ -9,6 +9,7 @@
  */
 
 namespace Zend\OAuth\Signature;
+
 use Zend\Crypt\Hmac as HMACEncryption;
 
 /**

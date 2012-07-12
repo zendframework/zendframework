@@ -10,12 +10,12 @@
 
 namespace ZendTest\Mvc\Router\Http;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\Request as Request,
-    Zend\Stdlib\Request as BaseRequest,
-    Zend\Uri\Http as HttpUri,
-    Zend\Mvc\Router\Http\Scheme,
-    ZendTest\Mvc\Router\FactoryTester;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Request as Request;
+use Zend\Stdlib\Request as BaseRequest;
+use Zend\Uri\Http as HttpUri;
+use Zend\Mvc\Router\Http\Scheme;
+use ZendTest\Mvc\Router\FactoryTester;
 
 class SchemeTest extends TestCase
 {

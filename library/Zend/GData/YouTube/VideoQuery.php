@@ -230,7 +230,7 @@ class VideoQuery extends \Zend\GData\Query
     }
 
     /**
-     * Sets the formatted video query (vq) URL param value
+     * Sets the formatted video query URL param value
      *
      * @param string $value
      * @return \Zend\GData\YouTube\VideoQuery Provides a fluent interface
@@ -238,9 +238,9 @@ class VideoQuery extends \Zend\GData\Query
     public function setVideoQuery($value = null)
     {
         if ($value != null) {
-            $this->_params['vq'] = $value;
+            $this->_params['q'] = $value;
         } else {
-            unset($this->_params['vq']);
+            unset($this->_params['q']);
         }
         return $this;
     }
@@ -259,42 +259,6 @@ class VideoQuery extends \Zend\GData\Query
             unset($this->_params['format']);
         }
         return $this;
-    }
-
-    /**
-     * Sets whether or not to include racy videos in the search results
-     *
-     * @param string $value
-     * @return \Zend\GData\YouTube\VideoQuery Provides a fluent interface
-     */
-    public function setRacy($value = null)
-    {
-        switch ($value) {
-            case 'include':
-                $this->_params['racy'] = $value;
-                break;
-            case 'exclude':
-                $this->_params['racy'] = $value;
-                break;
-            case null:
-                unset($this->_params['racy']);
-                break;
-        }
-        return $this;
-    }
-
-    /**
-     * Whether or not to include racy videos in the search results
-     *
-     * @return string|null The value of racy if it exists, null otherwise.
-     */
-    public function getRacy()
-    {
-        if (array_key_exists('racy', $this->_params)) {
-            return $this->_params['racy'];
-        } else {
-            return null;
-        }
     }
 
     /**
@@ -378,8 +342,8 @@ class VideoQuery extends \Zend\GData\Query
      */
     public function getVideoQuery()
     {
-        if (array_key_exists('vq', $this->_params)) {
-            return $this->_params['vq'];
+        if (array_key_exists('q', $this->_params)) {
+            return $this->_params['q'];
         } else {
             return null;
         }
@@ -430,44 +394,6 @@ class VideoQuery extends \Zend\GData\Query
         foreach ($this->_params as $name => $value) {
             if (substr($name, 0, 1) == '_') {
                 continue;
-            }
-
-            switch($name) {
-                case 'location-radius':
-                    if ($majorProtocolVersion == 1) {
-                        throw new App\VersionException("The $name " .
-                            "parameter is only supported in version 2.");
-                    }
-                    break;
-
-                case 'racy':
-                    if ($majorProtocolVersion == 2) {
-                        throw new App\VersionException("The $name " .
-                            "parameter is not supported in version 2. " .
-                            "Please use 'safeSearch'.");
-                    }
-                    break;
-
-                case 'safeSearch':
-                    if ($majorProtocolVersion == 1) {
-                        throw new App\VersionException("The $name " .
-                            "parameter is only supported in version 2. " .
-                            "Please use 'racy'.");
-                    }
-                    break;
-
-                case 'uploader':
-                    if ($majorProtocolVersion == 1) {
-                        throw new App\VersionException("The $name " .
-                            "parameter is only supported in version 2.");
-                    }
-                    break;
-
-                case 'vq':
-                    if ($majorProtocolVersion == 2) {
-                        $name = 'q';
-                    }
-                    break;
             }
 
             $queryArray[] = urlencode($name) . '=' . urlencode($value);

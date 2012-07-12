@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Feed\Writer\Extension\ITunes;
+
 use Zend\Feed\Writer;
 
 /**

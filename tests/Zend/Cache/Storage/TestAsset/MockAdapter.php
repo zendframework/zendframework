@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Cache\Storage\TestAsset;
+
 use Zend\Cache\Storage\Adapter\AbstractAdapter;
 
 class MockAdapter extends AbstractAdapter

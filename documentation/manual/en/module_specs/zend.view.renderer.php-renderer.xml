@@ -80,8 +80,8 @@ $renderer = new PhpRenderer();
         </para>
 
         <programlisting language="php"><![CDATA[
-use Zend\View\Renderer\PhpRenderer,
-    Zend\View\Resolver;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Resolver;
 
 $renderer = new PhpRenderer();
 
@@ -185,8 +185,8 @@ return array(
                 </para>
 
                 <programlisting language="php"><![CDATA[
-use Zend\View\Model\ViewModel,
-    Zend\View\Renderer\PhpRenderer;
+use Zend\View\Model\ViewModel;
+use Zend\View\Renderer\PhpRenderer;
 
 $renderer = new PhpRenderer();
 

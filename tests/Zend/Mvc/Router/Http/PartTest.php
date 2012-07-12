@@ -10,13 +10,13 @@
 
 namespace ZendTest\Mvc\Router\Http;
 
-use ArrayObject,
-    PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\Request as Request,
-    Zend\Stdlib\Request as BaseRequest,
-    Zend\Mvc\Router\RoutePluginManager,
-    Zend\Mvc\Router\Http\Part,
-    ZendTest\Mvc\Router\FactoryTester;
+use ArrayObject;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Request as Request;
+use Zend\Stdlib\Request as BaseRequest;
+use Zend\Mvc\Router\RoutePluginManager;
+use Zend\Mvc\Router\Http\Part;
+use ZendTest\Mvc\Router\FactoryTester;
 
 class PartTest extends TestCase
 {

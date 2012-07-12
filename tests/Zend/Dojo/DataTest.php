@@ -10,8 +10,8 @@
 
 namespace ZendTest\Dojo;
 
-use Zend\Dojo\Data as DojoData,
-    Zend\Json\Json;
+use Zend\Dojo\Data as DojoData;
+use Zend\Json\Json;
 
 /**
  * @category   Zend

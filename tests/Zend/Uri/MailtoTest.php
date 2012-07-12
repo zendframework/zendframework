@@ -10,8 +10,8 @@
 
 namespace ZendTest\Uri;
 
-use Zend\Uri\Mailto as MailtoUri,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Uri\Mailto as MailtoUri;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @category   Zend

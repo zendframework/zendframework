@@ -10,8 +10,8 @@
 
 namespace ZendTest\Stdlib;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Stdlib\Glob;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Stdlib\Glob;
 
 class GlobTest extends TestCase
 {

@@ -14,7 +14,7 @@ use Zend\ProgressBar\Exception;
 use Zend\Session;
 
 /**
- * Zend_ProgressBar offers an interface for multiple enviroments.
+ * Zend_ProgressBar offers an interface for multiple environments.
  *
  * @category  Zend
  * @package   Zend_ProgressBar

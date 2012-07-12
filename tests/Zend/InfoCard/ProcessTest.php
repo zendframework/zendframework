@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\InfoCard;
+
 use Zend\InfoCard;
 use Zend\InfoCard\Cipher;
 use Zend\InfoCard\Adapter;

@@ -10,8 +10,8 @@
 
 namespace ZendTest\Http\PhpEnvironment;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\PhpEnvironment\Request;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\PhpEnvironment\Request;
 
 class RequestTest extends TestCase
 {

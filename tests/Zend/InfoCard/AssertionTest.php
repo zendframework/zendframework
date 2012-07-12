@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\InfoCard;
+
 use Zend\InfoCard\XML\Assertion;
 
 /**

@@ -48,7 +48,7 @@ class DiServiceInitializer extends Di implements InitializerInterface
     /**
      * @param $instance
      */
-    public function initialize($instance)
+    public function initialize($instance, ServiceLocatorInterface $serviceLocator)
     {
         $instanceManager = $this->di->instanceManager;
         $this->di->instanceManager = $this->diInstanceManagerProxy;

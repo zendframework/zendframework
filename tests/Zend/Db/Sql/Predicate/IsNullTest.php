@@ -10,8 +10,8 @@
 
 namespace ZendTest\Db\Sql\Predicate;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Db\Sql\Predicate\IsNotNull;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Db\Sql\Predicate\IsNotNull;
 
 class IsNotNullTest extends TestCase
 {

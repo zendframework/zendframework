@@ -26,27 +26,27 @@ class Post extends SimplePost
      *
      * @var Zend_Service_Delicious
      */
-    protected $_service;
+    protected $service;
 
     /**
      * @var int Number of people that have the same post
      */
-    protected $_others;
+    protected $others;
 
     /**
      * @var DateTime Post date
      */
-    protected $_date;
+    protected $date;
 
     /**
      * @var bool Post share
      */
-    protected $_shared = true;
+    protected $shared = true;
 
     /**
      * @var string Post hash
      */
-    protected $_hash;
+    protected $hash;
 
     /**
      * Constructs a new del.icio.us post
@@ -58,10 +58,10 @@ class Post extends SimplePost
      */
     public function __construct(Delicious $service, $values)
     {
-        $this->_service = $service;
+        $this->service = $service;
 
         if ($values instanceof \DOMElement) {
-            $values = self::_parsePostNode($values);
+            $values = self::parsePostNode($values);
         }
 
         if (!is_array($values) || !isset($values['url']) || !isset($values['title'])) {
@@ -152,7 +152,7 @@ class Post extends SimplePost
      */
     public function getDate()
     {
-        return $this->_date;
+        return $this->date;
     }
 
     /**
@@ -166,7 +166,7 @@ class Post extends SimplePost
      */
     public function getOthers()
     {
-        return $this->_others;
+        return $this->others;
     }
 
     /**
@@ -176,7 +176,7 @@ class Post extends SimplePost
      */
     public function getHash()
     {
-        return $this->_hash;
+        return $this->hash;
     }
 
     /**
@@ -186,7 +186,7 @@ class Post extends SimplePost
      */
     public function getShared()
     {
-        return $this->_shared;
+        return $this->shared;
     }
 
     /**
@@ -197,7 +197,7 @@ class Post extends SimplePost
      */
     public function setShared($isShared)
     {
-        $this->_shared = (bool) $isShared;
+        $this->shared = (bool) $isShared;
 
         return $this;
     }
@@ -209,7 +209,7 @@ class Post extends SimplePost
      */
     public function delete()
     {
-        return $this->_service->deletePost($this->_url);
+        return $this->service->deletePost($this->_url);
     }
 
     /**
@@ -223,12 +223,12 @@ class Post extends SimplePost
             'url'        => $this->_url,
             'description'=> $this->_title,
             'extended'   => $this->_notes,
-            'shared'     => ($this->_shared ? 'yes' : 'no'),
+            'shared'     => ($this->shared ? 'yes' : 'no'),
             'tags'       => implode(' ', (array) $this->_tags),
             'replace'    => 'yes'
         );
 
-        return $this->_service->makeRequest(Delicious::PATH_POSTS_ADD, $parms);
+        return $this->service->makeRequest(Delicious::PATH_POSTS_ADD, $parms);
     }
 
     /**
@@ -237,7 +237,7 @@ class Post extends SimplePost
      * @param  DOMElement $node
      * @return array
      */
-    protected static function _parsePostNode(\DOMElement $node)
+    protected static function parsePostNode(\DOMElement $node)
     {
         return array(
             'url'    => $node->getAttribute('href'),

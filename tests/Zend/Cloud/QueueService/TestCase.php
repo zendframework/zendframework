@@ -12,8 +12,8 @@ namespace ZendTest\Cloud\QueueService;
 
 use Zend\Cloud\QueueService\Adapter;
 use Zend\Config\Config;
-use Zend\Cloud\QueueService\Factory,
-    PHPUnit_Framework_TestCase as PHPUnitTestCase;
+use Zend\Cloud\QueueService\Factory;
+use PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**
  * This class forces the adapter tests to implement tests for all methods on

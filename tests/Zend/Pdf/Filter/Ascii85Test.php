@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Pdf\Filter;
+
 use Zend\Pdf\InternalType\StreamFilter;
 
 /**

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Cache\TestAsset;
+
 use Zend\Cache;
 
 class DummyPattern extends Cache\Pattern\AbstractPattern

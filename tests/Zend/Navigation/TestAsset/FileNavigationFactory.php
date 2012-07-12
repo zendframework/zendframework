@@ -10,7 +10,7 @@
 
 namespace ZendTest\Navigation\TestAsset;
 
-use \Zend\Navigation\Service\AbstractNavigationFactory;
+use Zend\Navigation\Service\AbstractNavigationFactory;
 
 class FileNavigationFactory extends AbstractNavigationFactory
 {

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Feed\Reader\Integration;
+
 use Zend\Feed\Reader;
 
 /**

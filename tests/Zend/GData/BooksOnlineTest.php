@@ -23,6 +23,9 @@ use Zend\GData\App\Extension;
 class BooksOnlineTest extends \PHPUnit_Framework_TestCase
 {
 
+    /** @var Books */
+    public $gdata;
+
     public function setUp()
     {
         if (!constant('TESTS_ZEND_GDATA_ONLINE_ENABLED')) {
@@ -47,7 +50,7 @@ class BooksOnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feed instanceof Books\VolumeFeed);
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Books\VolumeEntry);
-            $this->assertEquals($feed->getHttpClient(), $entry->getHttpClient());
+            $this->assertEquals($feed->getService(), $entry->getService());
         }
 
         $this->assertEquals(5, $feed->startIndex->text);
@@ -67,7 +70,7 @@ class BooksOnlineTest extends \PHPUnit_Framework_TestCase
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Books\VolumeEntry);
             $this->assertEquals(
-                $feed->getHttpClient(), $entry->getHttpClient());
+                $feed->getService(), $entry->getService());
         }
 
         $entry = new Books\VolumeEntry();
@@ -84,7 +87,7 @@ class BooksOnlineTest extends \PHPUnit_Framework_TestCase
         foreach ($feed->entries as $entry) {
             $this->assertTrue($entry instanceof Books\VolumeEntry);
             $this->assertEquals(
-                $feed->getHttpClient(), $entry->getHttpClient());
+                $feed->getService(), $entry->getService());
         }
 
         $entry = new Books\VolumeEntry();

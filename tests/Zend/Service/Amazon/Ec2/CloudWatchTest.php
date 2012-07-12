@@ -9,7 +9,10 @@
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon\Ec2;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
 
 /**
  * Zend\Service\Amazon\Ec2\CloudWatch test case.
@@ -30,26 +33,23 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
     private $cloudWatchInstance;
 
     /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
+
+    /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->cloudWatchInstance = new Ec2\CloudWatch('access_key', 'secret_access_key');
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        Ec2\CloudWatch::setDefaultHTTPClient($client);
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        unset($this->adapter);
-        $this->cloudWatchInstance = null;
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
+        $this->cloudWatchInstance = new Ec2\CloudWatch('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     /**
@@ -85,7 +85,7 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
                     ."    <Label>NetworkIn</Label>"
                     ."  </GetMetricStatisticsResult>\r\n"
                     ."</GetMetricStatisticsResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->cloudWatchInstance->getMetricStatistics(array('MeasureName' => 'NetworkIn', 'Statistics' => array('Average')));
 
@@ -156,7 +156,7 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
                     ."    </Metrics>\r\n"
                     ."  </ListMetricsResult>\r\n"
                     ."</ListMetricsResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->cloudWatchInstance->listMetrics();
 
@@ -239,7 +239,7 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
                     ."    <RequestId>6fb864fd-d557-11de-ac37-475775222f21</RequestId>\r\n"
                     ."  </ResponseMetadata>\r\n"
                     ."</GetMetricStatisticsResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
         
         $return = $this->cloudWatchInstance->getMetricStatistics(
             array(

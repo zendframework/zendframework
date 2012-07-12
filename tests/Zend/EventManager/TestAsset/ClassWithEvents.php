@@ -10,8 +10,8 @@
 
 namespace ZendTest\EventManager\TestAsset;
 
-use Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventManager;
 
 /**
  * @category   Zend

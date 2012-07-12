@@ -43,33 +43,33 @@ class MailHide extends ReCaptcha
      *
      * @var string
      */
-    protected $_email = null;
+    protected $email = null;
 
     /**
      * @var \Zend\Validator\ValidatorInterface
      */
-    protected $_emailValidator;
+    protected $emailValidator;
 
     /**
      * Binary representation of the private key
      *
      * @var string
      */
-    protected $_privateKeyPacked = null;
+    protected $privateKeyPacked = null;
 
     /**
      * The local part of the email
      *
      * @var string
      */
-    protected $_emailLocalPart = null;
+    protected $emailLocalPart = null;
 
     /**
      * The domain part of the email
      *
      * @var string
      */
-    protected $_emailDomainPart = null;
+    protected $emailDomainPart = null;
 
     /**
      * Local constructor
@@ -111,10 +111,10 @@ class MailHide extends ReCaptcha
      */
     public function getEmailValidator()
     {
-        if (null === $this->_emailValidator) {
+        if (null === $this->emailValidator) {
             $this->setEmailValidator(new \Zend\Validator\EmailAddress());
         }
-        return $this->_emailValidator;
+        return $this->emailValidator;
     }
 
     /**
@@ -125,7 +125,7 @@ class MailHide extends ReCaptcha
      */
     public function setEmailValidator(\Zend\Validator\ValidatorInterface $validator)
     {
-        $this->_emailValidator = $validator;
+        $this->emailValidator = $validator;
         return $this;
     }
 
@@ -191,7 +191,7 @@ class MailHide extends ReCaptcha
         parent::setPrivateKey($privateKey);
 
         /* Pack the private key into a binary string */
-        $this->_privateKeyPacked = pack('H*', $this->_privateKey);
+        $this->privateKeyPacked = pack('H*', $this->privateKey);
 
         return $this;
     }
@@ -206,7 +206,7 @@ class MailHide extends ReCaptcha
      */
     public function setEmail($email)
     {
-        $this->_email = $email;
+        $this->email = $email;
 
         $validator = $this->getEmailValidator();
         if (!$validator->isValid($email)) {
@@ -224,8 +224,8 @@ class MailHide extends ReCaptcha
             $emailParts[0] = substr($emailParts[0], 0, 4);
         }
 
-        $this->_emailLocalPart = $emailParts[0];
-        $this->_emailDomainPart = $emailParts[1];
+        $this->emailLocalPart = $emailParts[0];
+        $this->emailDomainPart = $emailParts[1];
 
         return $this;
     }
@@ -237,7 +237,7 @@ class MailHide extends ReCaptcha
      */
     public function getEmail()
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -247,7 +247,7 @@ class MailHide extends ReCaptcha
      */
     public function getEmailLocalPart()
     {
-        return $this->_emailLocalPart;
+        return $this->emailLocalPart;
     }
 
     /**
@@ -257,7 +257,7 @@ class MailHide extends ReCaptcha
      */
     public function getEmailDomainPart()
     {
-        return $this->_emailDomainPart;
+        return $this->emailDomainPart;
     }
 
     /**
@@ -275,11 +275,11 @@ class MailHide extends ReCaptcha
             throw new MailHideException('Missing email address');
         }
 
-        if ($this->_publicKey === null) {
+        if ($this->publicKey === null) {
             throw new MailHideException('Missing public key');
         }
 
-        if ($this->_privateKey === null) {
+        if ($this->privateKey === null) {
             throw new MailHideException('Missing private key');
         }
 
@@ -295,12 +295,12 @@ class MailHide extends ReCaptcha
                 . '" onclick="window.open(\'' 
                     . htmlentities($url, ENT_COMPAT, $enc) 
                     . '\', \'\', \'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width='
-                    . $this->_options['popupWidth'] 
+                    . $this->options['popupWidth']
                     . ',height=' 
-                    . $this->_options['popupHeight'] 
+                    . $this->options['popupHeight']
                 . '\'); return false;" title="' 
-                . $this->_options['linkTitle'] 
-                . '">' . $this->_options['linkHiddenText'] . '</a>@' 
+                . $this->options['linkTitle']
+                . '">' . $this->options['linkHiddenText'] . '</a>@'
                 . htmlentities($this->getEmailDomainPart(), ENT_COMPAT, $enc);
 
         return $html;
@@ -314,15 +314,15 @@ class MailHide extends ReCaptcha
     protected function _getUrl()
     {
         /* Figure out how much we need to pad the email */
-        $numPad = self::ENCRYPTION_BLOCK_SIZE - (strlen($this->_email) % self::ENCRYPTION_BLOCK_SIZE);
+        $numPad = self::ENCRYPTION_BLOCK_SIZE - (strlen($this->email) % self::ENCRYPTION_BLOCK_SIZE);
 
         /* Pad the email */
-        $emailPadded = str_pad($this->_email, strlen($this->_email) + $numPad, chr($numPad));
+        $emailPadded = str_pad($this->email, strlen($this->email) + $numPad, chr($numPad));
 
         /* Encrypt the email */
-        $emailEncrypted = mcrypt_encrypt(self::ENCRYPTION_CIPHER, $this->_privateKeyPacked, $emailPadded, self::ENCRYPTION_MODE, self::ENCRYPTION_IV);
+        $emailEncrypted = mcrypt_encrypt(self::ENCRYPTION_CIPHER, $this->privateKeyPacked, $emailPadded, self::ENCRYPTION_MODE, self::ENCRYPTION_IV);
 
         /* Return the url */
-        return self::MAILHIDE_SERVER . '?k=' . $this->_publicKey . '&c=' . strtr(base64_encode($emailEncrypted), '+/', '-_');
+        return self::MAILHIDE_SERVER . '?k=' . $this->publicKey . '&c=' . strtr(base64_encode($emailEncrypted), '+/', '-_');
     }
 }

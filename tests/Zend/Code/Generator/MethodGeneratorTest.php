@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Code\Generator;
+
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\ParameterGenerator;
 use Zend\Code\Generator\ValueGenerator;
@@ -68,9 +69,9 @@ class PhpMethodTest extends \PHPUnit_Framework_TestCase
         $target = <<<EOS
     /**
      * Enter description here...
-     * 
+     *
      * @return bool
-     * 
+     *
      */
     public function someMethod()
     {

@@ -10,8 +10,8 @@
 
 namespace ZendTest\Di;
 
-use Zend\Di\ServiceLocator,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Di\ServiceLocator;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class ServiceLocatorTest extends TestCase
 {

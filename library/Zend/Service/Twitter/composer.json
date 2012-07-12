@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-service-twitter",
+    "description": "provides a client for the » Twitter REST API",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -10,6 +11,7 @@
             "Zend\\Service\\Twitter": ""
         }
     },
+    "target-dir": "Zend/Service/Twitter",
     "require": {
         "php": ">=5.3.3",
         "zendframework/zend-http": "self.version",

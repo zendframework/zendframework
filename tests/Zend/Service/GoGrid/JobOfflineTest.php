@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Service\GoGrid;
+
 use Zend\Service\GoGrid\Job;
 use Zend\Service\GoGrid\ObjectList;
 use Zend\Http\Client\Adapter\Test as HttpTest;

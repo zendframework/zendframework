@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Text;
+
 use Zend\Text;
 
 /**

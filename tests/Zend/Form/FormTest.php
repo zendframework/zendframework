@@ -753,7 +753,7 @@ class FormTest extends TestCase
 
         $nestedFieldset = $basicFieldset->get('nested_fieldset');
         $this->assertEquals('basic_fieldset[nested_fieldset][anotherField]', $nestedFieldset->get('anotherField')
-                                                                                            ->getName());
+            ->getName());
     }
 
     public function testCanCorrectlyExtractDataFromComposedEntities()
@@ -764,9 +764,8 @@ class FormTest extends TestCase
         $form->bind($address);
         $form->setBindOnValidate(false);
 
-        if ($form->isValid()) {
-            $this->assertEquals($address, $form->getData());
-        }
+        $this->assertEquals(true, $form->isValid());
+        $this->assertEquals($address, $form->getData());
     }
 
     public function testCanCorrectlyPopulateDataToComposedEntities()
@@ -793,9 +792,8 @@ class FormTest extends TestCase
 
         $form->setData($data);
 
-        if ($form->isValid()) {
-            $this->assertEquals($address, $emptyAddress, var_export($address, 1) . "\n\n" . var_export($emptyAddress, 1));
-        }
+        $this->assertEquals(true, $form->isValid());
+        $this->assertEquals($address, $emptyAddress, var_export($address, 1) . "\n\n" . var_export($emptyAddress, 1));
     }
 
     public function testCanCorrectlyExtractDataFromOneToManyRelationship()
@@ -806,13 +804,15 @@ class FormTest extends TestCase
         $form->bind($product);
         $form->setBindOnValidate(false);
 
-        if ($form->isValid()) {
-            $this->assertEquals($product, $form->getData());
-        }
+        $this->assertEquals(true, $form->isValid());
+        $this->assertEquals($product, $form->getData());
     }
 
     public function testCanCorrectlyPopulateDataToOneToManyEntites()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped("The Intl extension is not loaded");
+        }
         $product = $this->getOneToManyEntity();
         $emptyProduct = new TestAsset\Entity\Product();
 
@@ -836,8 +836,7 @@ class FormTest extends TestCase
 
         $form->setData($data);
 
-        if ($form->isValid()) {
-            $this->assertEquals($product, $emptyProduct, var_export($product, 1) . "\n\n" . var_export($emptyProduct, 1));
-        }
+        $this->assertEquals(true, $form->isValid());
+        $this->assertEquals($product, $emptyProduct, var_export($product, 1) . "\n\n" . var_export($emptyProduct, 1));
     }
 }

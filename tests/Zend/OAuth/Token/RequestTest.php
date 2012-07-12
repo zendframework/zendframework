@@ -10,8 +10,8 @@
 
 namespace ZendTest\OAuth\Token;
 
-use Zend\OAuth\Token\Request as RequestToken,
-    Zend\Http\Response as HTTPResponse;
+use Zend\OAuth\Token\Request as RequestToken;
+use Zend\Http\Response as HTTPResponse;
 
 /**
  * @category   Zend

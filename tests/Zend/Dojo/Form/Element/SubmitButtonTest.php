@@ -10,11 +10,11 @@
 
 namespace ZendTest\Dojo\Form\Element;
 
-use Zend\Dojo\Form\Element\SubmitButton as SubmitButtonElement,
-    Zend\Dojo\View\Helper\Dojo as DojoHelper,
-    Zend\Registry,
-    Zend\Translator\Translator,
-    Zend\View;
+use Zend\Dojo\Form\Element\SubmitButton as SubmitButtonElement;
+use Zend\Dojo\View\Helper\Dojo as DojoHelper;
+use Zend\Registry;
+use Zend\Translator\Translator;
+use Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_SubmitButton.

@@ -10,16 +10,21 @@
 
 namespace Zend\Service\Audioscrobbler;
 
-use Zend\Http;
-use Zend\Service\AbstractService;
+use Zend\Http\Client as HttpClient;
 
 /**
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Audioscrobbler
  */
-class Audioscrobbler extends AbstractService
+class Audioscrobbler
 {
+
+    /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
     /**
      * Array that contains parameters being used by the webservice
      */
@@ -33,13 +38,33 @@ class Audioscrobbler extends AbstractService
     /**
      * Sets up character encoding, instantiates the HTTP client, and assigns the web service version.
      */
-    public function __construct()
+    public function __construct(HttpClient $httpClient = null)
     {
+        $this->setHttpClient(($httpClient) ?: new HttpClient);
+
         $this->set('version', '1.0');
 
         iconv_set_encoding('output_encoding', 'UTF-8');
         iconv_set_encoding('input_encoding', 'UTF-8');
         iconv_set_encoding('internal_encoding', 'UTF-8');
+    }
+
+    /**
+     * @param HttpClient $httpClient
+     * @return AbstractAmazon
+     */
+    public function setHttpClient(HttpClient $httpClient)
+    {
+        $this->httpClient = $httpClient;
+        return $this;
+    }
+
+    /**
+     * @return HttpClient
+     */
+    public function getHttpClient()
+    {
+        return $this->httpClient;
     }
 
     /**

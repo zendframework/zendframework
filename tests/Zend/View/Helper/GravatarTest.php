@@ -10,9 +10,9 @@
 
 namespace ZendTest\View\Helper;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\View\Renderer\PhpRenderer as View,
-    Zend\View\Helper\Gravatar;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\View\Renderer\PhpRenderer as View;
+use Zend\View\Helper\Gravatar;
 
 /**
  * @category   Zend

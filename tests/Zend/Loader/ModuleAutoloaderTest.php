@@ -10,9 +10,9 @@
 
 namespace ZendTest\Loader\ModuleAutoloaderTest;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Loader\ModuleAutoloader,
-    InvalidArgumentException;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Loader\ModuleAutoloader;
+use InvalidArgumentException;
 
 class ManagerTest extends TestCase
 {

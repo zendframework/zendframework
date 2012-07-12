@@ -9,11 +9,14 @@
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon\Ec2\ReservedInstance;
+
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
 
 /**
  * Zend_Service_Amazon_Ec2_Instance_Reserved test case.
-
  * @todo Should this class be named Zend_Service_Amazon_Ec2_Instance_ReservedTest?
  *
  * @category   Zend
@@ -27,32 +30,29 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_Service_Amazon_Ec2_Instance_Reserved
+     * @var \Zend\Service\Amazon\Ec2\ReservedInstance
      */
     private $instance;
+
+    /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
 
     /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->instance = new ReservedInstance('access_key', 'secret_access_key');
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
 
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        ReservedInstance::setDefaultHTTPClient($client);
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        unset($this->adapter);
-        $this->instance = null;
+        $this->instance = new ReservedInstance('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     /**
@@ -84,7 +84,7 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
                     ."    </item>\r\n"
                     ."  </reservedInstancesSet>\r\n"
                     ."</DescribeReservedInstancesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->describeInstances('4b2293b4-5813-4cc8-9ce3-1957fc1dcfc8');
 
@@ -133,7 +133,7 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
                     ."    </item>\r\n"
                     ."  </reservedInstancesOfferingsSet>\r\n"
                     ."</DescribeReservedInstancesOfferingsResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->describeOfferings();
 
@@ -170,7 +170,7 @@ class InstanceReservedTest extends \PHPUnit_Framework_TestCase
                     ."<PurchaseReservedInstancesOfferingResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     ."  <reservedInstancesId>4b2293b4-5813-4cc8-9ce3-1957fc1dcfc8</reservedInstancesId>\r\n"
                     ."</PurchaseReservedInstancesOfferingResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->purchaseOffering('4b2293b4-5813-4cc8-9ce3-1957fc1dcfc8');
 

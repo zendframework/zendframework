@@ -964,8 +964,8 @@ $client->setParameterPost(array(
             <para></para>
 
             <programlisting language="php" role="php"><![CDATA[
-use Zend\Http\Request,
-    Zend\Http\Client;
+use Zend\Http\Request;
+use Zend\Http\Client;
 $request = new Request();
 $request->setUri('http://www.test.com');
 $request->setMethod('POST');

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Service\StrikeIron\BaseTest;
+
 use Zend\Service\StrikeIron;
 
 /**

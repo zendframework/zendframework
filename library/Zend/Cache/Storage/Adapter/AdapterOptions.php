@@ -103,23 +103,23 @@ class AdapterOptions extends AbstractOptions
     /**
      * Set key pattern
      *
-     * @param  null|string $pattern
+     * @param  null|string $keyPattern
      * @return AdapterOptions
      */
-    public function setKeyPattern($pattern)
+    public function setKeyPattern($keyPattern)
     {
-        $pattern = (string) $pattern;
-        if ($this->keyPattern !== $pattern) {
+        $keyPattern = (string) $keyPattern;
+        if ($this->keyPattern !== $keyPattern) {
             // validate pattern
-            if ($pattern !== '') {
-                if (@preg_match($pattern, '') === false) {
+            if ($keyPattern !== '') {
+                if (@preg_match($keyPattern, '') === false) {
                     $err = error_get_last();
-                    throw new Exception\InvalidArgumentException("Invalid pattern '{$pattern}': {$err['message']}");
+                    throw new Exception\InvalidArgumentException("Invalid pattern '{$keyPattern}': {$err['message']}");
                 }
             }
 
-            $this->triggerOptionEvent('key_pattern', $pattern);
-            $this->keyPattern = $pattern;
+            $this->triggerOptionEvent('key_pattern', $keyPattern);
+            $this->keyPattern = $keyPattern;
         }
 
         return $this;
@@ -165,15 +165,15 @@ class AdapterOptions extends AbstractOptions
     /**
      * Enable/Disable reading data from cache.
      *
-     * @param  boolean $flag
+     * @param  boolean $readable
      * @return AbstractAdapter
      */
-    public function setReadable($flag)
+    public function setReadable($readable)
     {
-        $flag = (bool) $flag;
-        if ($this->readable !== $flag) {
-            $this->triggerOptionEvent('readable', $flag);
-            $this->readable = $flag;
+        $readable = (bool) $readable;
+        if ($this->readable !== $readable) {
+            $this->triggerOptionEvent('readable', $readable);
+            $this->readable = $readable;
         }
         return $this;
     }
@@ -217,15 +217,15 @@ class AdapterOptions extends AbstractOptions
     /**
      * Enable/Disable writing data to cache.
      *
-     * @param  boolean $flag
+     * @param  boolean $writable
      * @return AdapterOptions
      */
-    public function setWritable($flag)
+    public function setWritable($writable)
     {
-        $flag = (bool) $flag;
-        if ($this->writable !== $flag) {
-            $this->triggerOptionEvent('writable', $flag);
-            $this->writable = $flag;
+        $writable = (bool) $writable;
+        if ($this->writable !== $writable) {
+            $this->triggerOptionEvent('writable', $writable);
+            $this->writable = $writable;
         }
         return $this;
     }

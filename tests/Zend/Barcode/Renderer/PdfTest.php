@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Barcode\Renderer;
+
 use Zend\Pdf;
 use Zend\Barcode;
 use Zend\Barcode\Object;

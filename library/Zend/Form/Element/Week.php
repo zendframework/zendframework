@@ -56,9 +56,9 @@ class Week extends DateTime
                      ? $this->attributes['min'] : '1970-W01';
 
         return new DateStepValidator(array(
-            'format'       => 'Y-\WW',
-            'baseValue'    => $baseValue,
-            'step' => new \DateInterval("P{$stepValue}W"),
+            'format'    => 'Y-\WW',
+            'baseValue' => $baseValue,
+            'step'      => new \DateInterval("P{$stepValue}W"),
         ));
     }
 }

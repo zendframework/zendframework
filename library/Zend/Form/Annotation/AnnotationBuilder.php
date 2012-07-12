@@ -11,6 +11,7 @@
 namespace Zend\Form\Annotation;
 
 use ArrayObject;
+use ReflectionClass;
 use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Annotation\Parser;
@@ -68,10 +69,12 @@ class AnnotationBuilder implements EventManagerAwareInterface
         'Input',
         'InputFilter',
         'Name',
+        'Object',
         'Options',
         'Required',
         'Type',
-        'Validator',
+        'ValidationGroup',
+        'Validator'
     );
 
     /**
@@ -326,7 +329,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
             : 'Zend\Form\Element';
 
         // Compose as a fieldset or an element, based on specification type
-        if ($this->isFieldset($type)) {
+        if (self::isSubclassOf($type, 'Zend\Form\FieldsetInterface')) {
             if (!isset($formSpec['fieldsets'])) {
                 $formSpec['fieldsets'] = array();
             }
@@ -374,22 +377,26 @@ class AnnotationBuilder implements EventManagerAwareInterface
     }
 
     /**
-     * Determine if the type represents a fieldset
+     * Checks if the object has this class as one of its parents
      *
-     * For PHP versions >= 5.3.7, uses is_subclass_of; otherwise, uses
-     * reflection to determine the interfaces implemented.
+     * @see https://bugs.php.net/bug.php?id=53727
+     * @see https://github.com/zendframework/zf2/pull/1807
      *
-     * @param  string $type
-     * @return bool
+     * @param string $className
+     * @param string $type
      */
-    protected function isFieldset($type)
+    protected static function isSubclassOf($className, $type)
     {
-        if (version_compare(PHP_VERSION, '5.3.7', 'gte')) {
-            return is_subclass_of($type, 'Zend\Form\FieldsetInterface');
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return is_subclass_of($className, $type);
         }
-
-        $r = new ClassReflection($type);
-        $interfaces = $r->getInterfaceNames();
-        return (in_array('Zend\Form\FieldsetInterface', $interfaces));
+        if (is_subclass_of($className, $type)) {
+            return true;
+        }
+        if (!interface_exists($type)) {
+            return false;
+        }
+        $r = new ReflectionClass($className);
+        return $r->implementsInterface($type);
     }
 }

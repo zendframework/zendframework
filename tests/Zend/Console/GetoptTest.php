@@ -9,8 +9,9 @@
  */
 
 namespace ZendTest\Console;
-use Zend\Console\Getopt,
-    Zend\Console\GetoptException;
+
+use Zend\Console\Getopt;
+use Zend\Console\GetoptException;
 
 /**
  * @category   Zend

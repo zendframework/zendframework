@@ -9,8 +9,12 @@
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2\Exception;
+
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
 
 /**
  * Zend\Service\Amazon\Ec2\Image test case.
@@ -31,23 +35,23 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     private $ec2ImageInstance;
 
     /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
+
+    /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->ec2ImageInstance = new Ec2\Image('access_key', 'secret_access_key');
-
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        Ec2\Image::setDefaultHTTPClient($client);
-    }
-
-    protected function tearDown()
-    {
-        $this->ec2ImageInstance = null;
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
+        $this->ec2ImageInstance = new Ec2\Image('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     public function testDeregister()
@@ -64,7 +68,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "<DeregisterImageResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</DeregisterImageResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->deregister('ami-61a54008');
 
@@ -109,7 +113,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </imagesSet>\r\n"
                     . "</DescribeImagesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->describe(array('ami-be3adfd7', 'ami-be3adfd6'));
 
@@ -169,7 +173,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </imagesSet>\r\n"
                     . "</DescribeImagesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->describe('ami-be3adfd7');
 
@@ -228,7 +232,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </imagesSet>\r\n"
                     . "</DescribeImagesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->describe(null, array('2060296256884', '206029621532'));
 
@@ -288,7 +292,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </imagesSet>\r\n"
                     . "</DescribeImagesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->describe(null, '206029621532');
 
@@ -347,7 +351,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </imagesSet>\r\n"
                     . "</DescribeImagesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->describe(null, null, array('46361432890', '432432265322'));
 
@@ -407,7 +411,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </imagesSet>\r\n"
                     . "</DescribeImagesResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->describe(null, null, '46361432890');
 
@@ -448,7 +452,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </launchPermission>\r\n"
                     . "</DescribeImageAttributeResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->describeAttribute('ami-61a54008', 'launchPermission');
 
@@ -475,7 +479,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "    </item>\r\n"
                     . "  </productCodes>\r\n"
                     . "</DescribeImageAttributeResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->describeAttribute('ami-61a54008', 'productCodes');
 
@@ -497,7 +501,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "<ModifyImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</ModifyImageAttributeResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->modifyAttribute('ami-61a54008', 'launchPermission', 'add', '495219933132', 'all');
         $this->assertTrue($return);
@@ -517,7 +521,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "<ModifyImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</ModifyImageAttributeResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->modifyAttribute('ami-61a54008', 'launchPermission', 'add', array('495219933132', '495219933133'), array('all', 'all'));
         $this->assertTrue($return);
@@ -545,7 +549,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "<ModifyImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</ModifyImageAttributeResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->modifyAttribute('ami-61a54008', 'productCodes', null, null, null, '774F4FF8');
 
@@ -567,7 +571,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "<RegisterImageResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <imageId>ami-61a54008</imageId>\r\n"
                     . "</RegisterImageResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->register('mybucket-myimage.manifest.xml');
 
@@ -589,7 +593,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                     . "<ResetImageAttributeResponse xmlns=\"http://ec2.amazonaws.com/doc/2009-04-04/\">\r\n"
                     . "  <return>true</return>\r\n"
                     . "</ResetImageAttributeResponse>\r\n";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->ec2ImageInstance->resetAttribute('ami-61a54008', 'launchPermission');
 

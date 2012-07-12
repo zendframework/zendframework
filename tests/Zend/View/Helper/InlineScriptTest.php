@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\View\Helper;
+
 use Zend\View\Helper\Placeholder\Registry;
 use Zend\View\Helper;
 

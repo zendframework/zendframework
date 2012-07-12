@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.i18n.filter.alnum">
+    <title>Alnum Filter</title>
+
+    <para>
+        The <classname>Alnum</classname> filter can be used to return
+        only alphabetic characters and digits in the
+        unicode "letter" and "number" categories, respectively.
+        All other characters are supressed.
+    </para>
+
+    <example xml:id="zend.i18n.filter.alnum.options">
+        <title>Supported options for Alnum Filter</title>
+
+        <para>
+            The following options are supported for <classname>Alnum</classname>:
+        </para>
+
+        <para>
+            <methodname>Alnum([ boolean $allowWhiteSpace [, string $locale ]])</methodname>
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <varname>$allowWhiteSpace</varname> : If set to true then
+                    whitespace characters are allowed. Otherwise they are
+                    suppressed. Default is "false" (whitespace is not allowed).
+                </para>
+                <para>
+                    Methods for getting/setting the allowWhiteSpace option
+                    are also available:
+                    <methodname>getAllowWhiteSpace()</methodname> and
+                    <methodname>setAllowWhiteSpace()</methodname>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <varname>$locale</varname> : The locale string used in
+                    identifying the characters to filter
+                    (locale name, e.g. en_US). If unset, it will use the
+                    default locale
+                    (<classname>Locale::getDefault()</classname>).
+                </para>
+                <para>
+                    Methods for getting/setting the locale are also available:
+                    <methodname>getLocale()</methodname> and
+                    <methodname>setLocale()</methodname>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </example>
+
+    <example xml:id="zend.i18n.filter.alnum.usage">
+        <title>Alnum Filter Usage</title>
+
+        <programlisting language="php"><![CDATA[
+// Default settings, deny whitespace
+$filter = \Zend\I18n\Filter\Alnum();
+echo $filter->filter("This is (my) content: 123");
+// Returns "Thisismycontent123"
+
+// First param in constructor is $allowWhiteSpace
+$filter = \Zend\I18n\Filter\Alnum(true);
+echo $filter->filter("This is (my) content: 123");
+// Returns "This is my content 123"
+]]></programlisting>
+
+        <note>
+            <para>
+                Note: <classname>Alnum</classname> works on almost all
+                languages, except: Chinese, Japanese and Korean.
+                Within these languages the english alphabet is used
+                instead of the characters from these languages.
+                The language itself is detected using the
+                <classname>Locale</classname>.
+            </para>
+        </note>
+    </example>
+
+</section>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.introduction"><title>Introduction</title>
+
+    <para>
+        <classname>Zend_TimeSync</classname> is able to receive internet or network time from a time
+        server using the <emphasis>NTP</emphasis> or <emphasis>SNTP</emphasis> protocol.
+        With <classname>Zend_TimeSync</classname>, Zend Framework is able to act independently from
+        the time settings of the server where it is running.
+    </para>
+
+    <para>
+        To be independent from the actual time of the server, <classname>Zend_TimeSync</classname>
+        works with the difference of the real time which is sent through NTP or SNTP and the
+        internal server's time.
+    </para>
+
+    <note><title>Background</title>
+
+        <para>
+            <classname>Zend_TimeSync</classname> is not able to change the server's time, but it
+            will return a <classname>DateTime</classname> instance from
+            which the difference from the server's time can be worked with.
+        </para>
+    </note>
+
+    <section xml:id="zend.timesync.introduction.why"><title>Why Zend_TimeSync ?</title>
+
+        <para>
+            So why would someone use <classname>Zend_TimeSync</classname> ?
+        </para>
+
+        <para>
+            Normally every server within a multi-server farm will have a service running which
+            synchronizes its own time with a time server. So within a standard environment it should
+            not be necessary to use <classname>Zend_TimeSync</classname>. But it can become handy if
+            there is no service available and if you don't have the right to install such a service.
+        </para>
+
+        <para>
+            Here are some example use cases, for which <classname>Zend_TimeSync</classname> is
+            perfect suited:
+        </para>
+
+        <itemizedlist mark="opencircle">
+            <listitem>
+                <para>
+                    <emphasis>Server without time service</emphasis>
+                </para>
+
+                <para>
+                    If your application is running on a server and this server does not have any
+                    time service running, it may make sense to use
+                    <classname>Zend_TimeSync</classname> in your application.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Separate database server</emphasis>
+                </para>
+
+                <para>
+                    If your database is running on a different server and this server is not
+                    connected with <emphasis>NTP</emphasis> or <emphasis>SNTP</emphasis>
+                    to the application server, you might have problems using storing and using time
+                    stamp data.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Multiple servers</emphasis>
+                </para>
+
+                <para>
+                    If your application is running on more than one server and these servers' time
+                    bases are not synchronized, you can expect problems within your application when
+                    part of the application is coming from one server and another part from another
+                    server.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Batch processing</emphasis>
+                </para>
+
+                <para>
+                    If you want to work with a time service within a batch file or within a
+                    command line application, <classname>Zend_TimeSync</classname> may be of use.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            <classname>Zend_TimeSync</classname> may provide a good solution in all of these cases
+            and can be used if you are unable to run any services on your server.
+        </para>
+    </section>
+
+    <section xml:id="zend.timesync.introduction.ntp"><title>What is NTP ?</title>
+
+        <para>
+            The Network Time Protocol (<emphasis>NTP</emphasis>) is a protocol
+            for synchronizing multiple systems' clocks over packet-switched, variable-latency data
+            networks. NTP uses UDP port 123 as its transport layer. See the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Network_Time_Protocol">wikipedia article</link>
+            for details about this protocol.
+        </para>
+    </section>
+
+    <section xml:id="zend.timesync.introduction.sntp"><title>What is SNTP?</title>
+
+        <para>
+            The Simple Network Time Protocol (<emphasis>SNTP</emphasis>) is a
+            protocol synchronizing multiple systems' clocks over packet-switched, variable-latency
+            data networks. SNTP uses UDP port 37 as its transport layer. It is closely related to
+            the Network Time Protocol, but simpler.
+        </para>
+    </section>
+
+    <section xml:id="zend.timesync.introduction.problematic"><title>Problematic usage</title>
+
+        <para>
+            Be warned that when you are using <classname>Zend_TimeSync</classname> you will have to
+            think about some details related to the structure of time sync and the internet itself.
+            Correct usage and best practices will be described here. Read carefully before you begin
+            using <classname>Zend_TimeSync</classname>.
+        </para>
+    </section>
+
+    <section xml:id="zend.timesync.introduction.decision"><title>Decide which server to use</title>
+
+        <para>
+            You should select the time server that you want to use very carefully according to the
+            following criteria:
+        </para>
+
+        <itemizedlist mark="opencircle">
+            <listitem>
+                <para>
+                    Distance
+                </para>
+
+                <para>
+                    The distance from your application server to the time server. If your server is
+                    in Europe, it would make little sense to select a time server in Tahiti. Always
+                    select a server which is not far away. This reduces the request time and overall
+                    network load.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Speed
+                </para>
+
+                <para>
+                    How long it takes to receive the request is also relevant. Try different servers
+                    to get the best result. If you are requesting a server which is never
+                    accessible, you will always have an unnecessary delay.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Splitting
+                </para>
+
+                <para>
+                    Do not always use the same server. All time servers will lock out requests from
+                    servers that are flooding the server. If your application requires heavy use of
+                    time servers, you should consider one of the pools described later.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            So where can you find a time server? Generally you can use any timeserver you can
+            connect to. This can be a time server within your LAN or any public time server you have
+            access to. If you decide to use a public time server, you should consider using a server
+            pool. Server pools are public addresses from which you will get a random, pooled time
+            server by requesting the time. This way you will not have to split your requests. There
+            are public server pools available for many regions which you may use to avoid problems
+            mentioned above.
+        </para>
+
+        <para>
+            See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.pool.ntp.org">pool.ntp.org</link> to find your nearest
+            server pool. For example, if your server is located within Germany you can connect to
+            <emphasis>0.europe.pool.ntp.org</emphasis>.
+        </para>
+    </section>
+</section>

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Amf\Value;
+
 use Zend\Amf\Value;
 
 /**

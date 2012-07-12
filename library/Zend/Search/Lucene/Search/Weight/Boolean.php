@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Search\Lucene\Search\Weight;
+
 use Zend\Search\Lucene;
 use Zend\Search\Lucene\Search\Query;
 

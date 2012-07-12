@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData\Books;
+
 use Zend\GData\Books;
 
 /**

@@ -1,33 +1,21 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Service
- * @subpackage LiveDocx
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Service
  */
 
 namespace Zend\Service\LiveDocx;
-use Zend\Date\Date;
+
+use DateTime;
 
 /**
- * @category   Demos
- * @package    Demos_Zend_Service
- * @subpackage LiveDocx
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category   Zend
+ * @package    Zend_Service
+ * @subpackage Demos
  */
 class Helper
 {
@@ -142,14 +130,12 @@ class Helper
     {
         $ret = '';
         
-        $date = new Date();
-        
         if (count($result) > 0) {
             foreach ($result as $record) {
-                $date->set($record['createTime']);
-                $createTimeFormatted = $date->get(Date::RFC_1123);
-                $date->set($record['modifyTime']);
-                $modifyTimeFormatted = $date->get(Date::RFC_1123);
+                $date = new DateTime($record['createTime']);
+                $createTimeFormatted = $date->format(DateTime::RFC1123);
+                $date = new DateTime($record['modifyTime']);
+                $modifyTimeFormatted = $date->format(DateTime::RFC1123);
                 $ret .= sprintf('         Filename  : %s%s', $record['filename'], PHP_EOL);
                 $ret .= sprintf('         File Size : %d b%s', $record['fileSize'], PHP_EOL);
                 $ret .= sprintf('     Creation Time : %d (%s)%s', $record['createTime'], $createTimeFormatted, PHP_EOL);
@@ -157,9 +143,7 @@ class Helper
                 $ret .= PHP_EOL;
             }
         }
-        
-        unset($date);
-        
+
         return $ret;
     }
     

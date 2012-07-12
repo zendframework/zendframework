@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xml:id="zend.form.element">
+    <title>Zend\Form\Element</title>
+
+    <para>
+        <classname>Zend\Form\Element</classname> is a base class for all
+        specialized elements and Zend\Form\Fieldset, but can also be used
+        for all generic <varname>text</varname>, <varname>select</varname>,
+        <varname>radio</varname>, etc. type form inputs which
+        do not have a specialized element available.
+    </para>
+
+    <example xml:id="zend.form.element.usage">
+        <title>Basic Usage of Zend\Form\Element</title>
+
+        <para>
+            At the bare minimum, each element or fieldset requires a name.
+            You will also typically provide some attributes to hint to the view
+            layer how it might render the item.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Form\Element;
+use Zend\Form\Form;
+
+$username = new Element('username');
+$username
+    ->setLabel('Username');
+    ->setAttributes(array(
+        'type'  => 'text',
+        'class' => 'username',
+        'size'  => '30',
+    ));
+
+$password = new Element('password');
+$password
+    ->setLabel('Password');
+    ->setAttributes(array(
+        'type'  => 'password',
+        'size'  => '30',
+    ));
+
+$form = new Form('my-form');
+$form
+    ->add($username)
+    ->add($password);
+]]></programlisting>
+    </example>
+
+    <section xml:id="zend.form.element.methods">
+        <title>Available Methods</title>
+
+        <variablelist>
+            <varlistentry xml:id="zend.form.element.methods.set-name">
+                <term>setName</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setName</methodname>
+                        <methodparam>
+                            <funcparams>string $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                    <para>
+                        Set the name for this element.
+                    </para>
+                    <para>Returns <classname>Zend\Form\Element</classname></para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.get-name">
+                <term>getName</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getName</methodname>
+                        <void/>
+                    </methodsynopsis>
+                    <para>
+                        Return the name for this element.
+                    </para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.set-label">
+                <term>setLabel</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setLabel</methodname>
+                        <methodparam>
+                            <funcparams>string $label</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                    <para>
+                        Set the label content for this element.
+                    </para>
+                    <para>Returns <classname>Zend\Form\Element</classname></para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.get-label">
+                <term>getLabel</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getLabel</methodname>
+                        <void/>
+                    </methodsynopsis>
+                    <para>
+                        Return the label content for this element.
+                    </para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.set-label-attributes">
+                <term>setLabelAttributes</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setLabelAttributes</methodname>
+                        <methodparam>
+                            <funcparams>array $labelAttributes</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                    <para>
+                        Set the attributes to use with the label.
+                    </para>
+                    <para>Returns <classname>Zend\Form\Element</classname></para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.get-label-attributes">
+                <term>getLabelAttributes</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getLabelAttributes</methodname>
+                        <void/>
+                    </methodsynopsis>
+                    <para>
+                        Return the attributes to use with the label.
+                    </para>
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.set-options">
+                <term>setOptions</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setOptions</methodname>
+                        <methodparam>
+                            <funcparams>array $options</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                    <para>
+                        Set options for an element. Accepted options are:
+                        <varname>"label"</varname> and <varname>"label_attributes"</varname>,
+                        which call <methodname>setLabel</methodname>
+                        and <methodname>setLabelAttributes</methodname>, respectively.
+                    </para>
+                    <para>Returns <classname>Zend\Form\Element</classname></para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.set-attribute">
+                <term>setAttribute</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setAttribute</methodname>
+                        <methodparam>
+                            <funcparams>string $key, mixed $value</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                    <para>
+                        Set a single element attribute.
+                    </para>
+                    <para>Returns <classname>Zend\Form\Element</classname></para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.get-attribute">
+                <term>getAttribute</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getAttribute</methodname>
+                        <methodparam>
+                            <funcparams>string $key</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                    <para>
+                        Retrieve a single element attribute.
+                    </para>
+                    <para>Returns mixed</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.has-attribute">
+                <term>hasAttribute</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>hasAttribute</methodname>
+                        <methodparam>
+                            <funcparams>string $key</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                    <para>
+                        Check if a specific attribute exists for this element.
+                    </para>
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.set-attributes">
+                <term>setAttributes</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setAttributes</methodname>
+                        <methodparam>
+                            <funcparams>array|Traversable $arrayOrTraversable</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                    <para>
+                        Set many attributes at once.
+                        Implementation will decide if this will overwrite or merge.
+                    </para>
+                    <para>Returns <classname>Zend\Form\Element</classname></para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.get-attributes">
+                <term>getAttributes</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getAttributes</methodname>
+                        <void/>
+                    </methodsynopsis>
+                    <para>
+                        Retrieve all attributes at once.
+                    </para>
+                    <para>Returns array|Traversable</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.clear-attributes">
+                <term>clearAttributes</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>clearAttributes</methodname>
+                        <void/>
+                    </methodsynopsis>
+                    <para>
+                        Clear all attributes for this element.
+                    </para>
+                    <para>Returns <classname>Zend\Form\Element</classname></para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.set-messages">
+                <term>setMessages</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setMessages</methodname>
+                        <methodparam>
+                            <funcparams>array|Traversable $messages</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                    <para>
+                        Set a list of messages to report when validation fails.
+                    </para>
+                    <para>Returns <classname>Zend\Form\Element</classname></para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.form.element.methods.get-messages">
+                <term>setMessages</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getMessages</methodname>
+                        <void/>
+                    </methodsynopsis>
+                    <para>
+                        Returns a list of validation failure messages, if any.
+                    </para>
+                    <para>Returns array|Traversable</para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+</section>

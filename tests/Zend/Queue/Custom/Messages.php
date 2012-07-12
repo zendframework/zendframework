@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Queue\Custom;
+
 use Zend\Queue as QueueNS;
 
 /**

@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\Amazon\Ec2;
+
 use Zend\Crypt\Hmac;
 
 /**

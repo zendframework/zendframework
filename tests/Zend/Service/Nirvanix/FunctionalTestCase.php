@@ -10,10 +10,10 @@
 
 namespace ZendTest\Service\Nirvanix;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\Client as HttpClient,
-    Zend\Http\Client\Adapter\Test as TestAdapter,
-    Zend\Service\Nirvanix\Nirvanix;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as TestAdapter;
+use Zend\Service\Nirvanix\Nirvanix;
 
 /**
  * @see        Zend\Service\Nirvanix\Nirvanix

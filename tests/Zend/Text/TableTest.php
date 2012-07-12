@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Text;
+
 use Zend\Text\Table;
 use Zend\Text\Table\Decorator;
 

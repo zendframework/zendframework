@@ -10,12 +10,12 @@
 
 namespace ZendTest\Db\ResultSet;
 
-use ArrayObject,
-    ArrayIterator,
-    PHPUnit_Framework_TestCase as TestCase,
-    SplStack,
-    stdClass,
-    Zend\Db\ResultSet\ResultSet;
+use ArrayObject;
+use ArrayIterator;
+use PHPUnit_Framework_TestCase as TestCase;
+use SplStack;
+use stdClass;
+use Zend\Db\ResultSet\ResultSet;
 
 /**
  * @category   Zend

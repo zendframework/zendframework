@@ -9,7 +9,10 @@
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon\Ec2\WindowsInstance;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as HttpClientTestAdapter;
 
 /**
  * Zend_Service_Amazon_Ec2_Instance_Windows test case.
@@ -32,27 +35,23 @@ class InstanceWindowsTest extends \PHPUnit_Framework_TestCase
     private $instance;
 
     /**
+     * @var HttpClient
+     */
+    protected $httpClient = null;
+
+    /**
+     * @var HttpClientTestAdapter
+     */
+    protected $httpClientTestAdapter = null;
+
+    /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->instance = new WindowsInstance('access_key', 'secret_access_key');
-
-        $adapter = new \Zend\Http\Client\Adapter\Test();
-        $client = new \Zend\Http\Client(null, array(
-            'adapter' => $adapter
-        ));
-        $this->adapter = $adapter;
-        WindowsInstance::setDefaultHTTPClient($client);
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        unset($this->adapter);
-        $this->instance = null;
+        $this->httpClientTestAdapter = new HttpClientTestAdapter;
+        $this->httpClient = new HttpClient(null, array('adapter' => $this->httpClientTestAdapter));
+        $this->instance = new WindowsInstance('access_key', 'secret_access_key', null, $this->httpClient);
     }
 
     /**
@@ -86,7 +85,7 @@ class InstanceWindowsTest extends \PHPUnit_Framework_TestCase
                     ."      </storage>\r\n"
                     ."  </bundleInstanceTask>\r\n"
                     ."</BundleInstanceResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->bundle('i-12345678', 'my-bucket', 'my-new-image');
 
@@ -142,7 +141,7 @@ class InstanceWindowsTest extends \PHPUnit_Framework_TestCase
                     ."      </storage>\r\n"
                     ."  </bundleInstanceTask>\r\n"
                     ."</CancelBundleTaskResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->cancelBundle('bun-cla322b9');
 
@@ -199,7 +198,7 @@ class InstanceWindowsTest extends \PHPUnit_Framework_TestCase
                     ."    </item>\r\n"
                     ."  </bundleInstanceTasksSet>\r\n"
                     ."</DescribeBundleTasksResponse>";
-        $this->adapter->setResponse($rawHttpResponse);
+        $this->httpClientTestAdapter->setResponse($rawHttpResponse);
 
         $return = $this->instance->describeBundle('bun-cla322b9');
 

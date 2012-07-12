@@ -36,8 +36,6 @@ class Rename extends Filter\AbstractFilter
      * 'overwrite' => Shall existing files be overwritten ?
      *
      * @param  string|array|Traversable $options Target file or directory to be renamed
-     * @param  string $target Source filename or directory (deprecated)
-     * @param  bool $overwrite Should existing files be overwritten (deprecated)
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options)
@@ -48,18 +46,6 @@ class Rename extends Filter\AbstractFilter
             $options = array('target' => $options);
         } elseif (!is_array($options)) {
             throw new Exception\InvalidArgumentException('Invalid options argument provided to filter');
-        }
-
-        if (1 < func_num_args()) {
-            $argv = func_get_args();
-            array_shift($argv);
-            $source    = array_shift($argv);
-            $overwrite = false;
-            if (!empty($argv)) {
-                $overwrite = array_shift($argv);
-            }
-            $options['source']    = $source;
-            $options['overwrite'] = $overwrite;
         }
 
         $this->setFile($options);

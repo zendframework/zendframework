@@ -28,19 +28,18 @@ class FormCheckboxTest extends CommonTestCase
 
     public function getElement() 
     {
-        $element = new Element('foo');
+        $element = new Element\Checkbox('foo');
         $options = array(
-            'checkedValue'   => 'checked',
-            'uncheckedValue' => 'unchecked',
+            'checked_value'   => 'checked',
+            'unchecked_value' => 'unchecked',
         );
-        $element->setAttribute('options', $options);
+        $element->setOptions($options);
         return $element;
     }
 
     public function testUsesOptionsAttributeToGenerateCheckedAndUnCheckedValues()
     {
         $element = $this->getElement();
-        $options = $element->getAttribute('options');
         $markup  = $this->helper->render($element);
 
         $this->assertContains('type="checkbox"', $markup);
@@ -61,27 +60,18 @@ class FormCheckboxTest extends CommonTestCase
 
     public function testNoOptionsAttributeCreatesDefaultCheckedAndUncheckedValues()
     {
-        $element = new Element('foo');
+        $element = new Element\Checkbox('foo');
         $markup  = $this->helper->render($element);
-        $this->assertRegexp('#type="checkbox"\s+value="1"#', $markup);
+        $this->assertRegexp('#type="checkbox".*?(value="1")#', $markup);
         $this->assertRegexp('#type="hidden"\s+name="foo"\s+value="0"#', $markup);
-    }
-
-    public function testSetUseHiddenElementDoesNotRenderHiddenInput()
-    {
-        $element = new Element('foo');
-        $markup  = $this->helper->setUseHiddenElement(false)->render($element);
-        $this->assertRegexp('#type="checkbox"\s+value="1"#', $markup);
-        $this->assertNotRegexp('#type="hidden"\s+name="foo"\s+value="0"#', $markup);
     }
 
     public function testSetUseHiddenElementAttributeDoesNotRenderHiddenInput()
     {
-        $element = new Element('foo');
-        $element->setAttribute('useHiddenElement', false);
+        $element = new Element\Checkbox('foo');
+        $element->setUseHiddenElement(false);
         $markup  = $this->helper->render($element);
-        $this->assertRegexp('#type="checkbox"\s+value="1"#', $markup);
+        $this->assertRegexp('#type="checkbox".*?(value="1")#', $markup);
         $this->assertNotRegexp('#type="hidden"\s+name="foo"\s+value="0"#', $markup);
     }
-
 }

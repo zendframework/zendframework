@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Soap\AutoDiscover;
+
 require_once __DIR__ . '/../TestAsset/commontypes.php';
 
 use Zend\Soap\Client;

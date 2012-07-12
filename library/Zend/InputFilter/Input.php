@@ -83,7 +83,6 @@ class Input implements InputInterface
         return $this;
     }
 
-
     public function allowEmpty()
     {
         return $this->allowEmpty;
@@ -92,6 +91,11 @@ class Input implements InputInterface
     public function breakOnFailure()
     {
         return $this->breakOnFailure;
+    }
+
+    public function getErrorMessage()
+    {
+        return $this->errorMessage;
     }
 
     public function getFilterChain()
@@ -129,6 +133,22 @@ class Input implements InputInterface
     {
         $filter = $this->getFilterChain();
         return $filter->filter($this->value);
+    }
+
+    public function merge(InputInterface $input)
+    {
+        $this->setAllowEmpty($input->allowEmpty());
+        $this->setBreakOnFailure($input->breakOnFailure());
+        $this->setErrorMessage($input->getErrorMessage());
+        $this->setName($input->getName());
+        $this->setRequired($input->isRequired());
+        $this->setValue($input->getValue());
+
+        $filterChain = $input->getFilterChain();
+        $this->getFilterChain()->merge($filterChain);
+
+        $validatorChain = $input->getValidatorChain();
+        $this->getValidatorChain()->merge($validatorChain);
     }
 
     public function isValid($context = null)

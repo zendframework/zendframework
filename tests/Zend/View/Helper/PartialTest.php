@@ -10,9 +10,9 @@
 
 namespace ZendTest\View\Helper;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\View\Helper\Partial,
-    Zend\View\Renderer\PhpRenderer as View;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\View\Helper\Partial;
+use Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Partial view helper.

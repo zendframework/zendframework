@@ -10,12 +10,12 @@
 
 namespace ZendTest\Db\Sql;
 
-use Zend\Db\Sql\Select,
-    Zend\Db\Sql\Expression,
-    Zend\Db\Sql\Where,
-    Zend\Db\Sql\TableIdentifier,
-    Zend\Db\Adapter\ParameterContainer,
-    Zend\Db\Adapter\Platform\Sql92;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Where;
+use Zend\Db\Sql\TableIdentifier;
+use Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Platform\Sql92;
 
 class SelectTest extends \PHPUnit_Framework_TestCase
 {
@@ -145,7 +145,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test where() will accept any array with string key (without ?) to be used as Operator predicate
      * @covers Zend\Db\Sql\Select::where
      */
-    public function testWhereArugment1IsAssociativeArrayNotContainingReplacementCharacter()
+    public function testWhereArgument1IsAssociativeArrayNotContainingReplacementCharacter()
     {
         $select = new Select;
         $select->where(array('name' => 'Ralph', 'age' => 33));
@@ -170,7 +170,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test where() will accept an indexed array to be used by joining string expressions
      * @covers Zend\Db\Sql\Select::where
      */
-    public function testWhereArugment1IsIndexedArray()
+    public function testWhereArgument1IsIndexedArray()
     {
         $select = new Select;
         $select->where(array('name = "Ralph"'));
@@ -189,7 +189,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test where() will accept an indexed array to be used by joining string expressions, combined by OR
      * @covers Zend\Db\Sql\Select::where
      */
-    public function testWhereArugment1IsIndexedArrayArgument2IsOr()
+    public function testWhereArgument1IsIndexedArrayArgument2IsOr()
     {
         $select = new Select;
         $select->where(array('name = "Ralph"'), Where::OP_OR);
@@ -208,7 +208,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test where() will accept a closure to be executed with Where object as argument
      * @covers Zend\Db\Sql\Select::where
      */
-    public function testWhereArugment1IsClosure()
+    public function testWhereArgument1IsClosure()
     {
         $select = new Select;
         $where = $select->getRawState('where');
@@ -223,7 +223,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @testdox unit test: Test where() will accept a Where object
      * @covers Zend\Db\Sql\Select::where
      */
-    public function testWhereArugment1IsWhereObject()
+    public function testWhereArgument1IsWhereObject()
     {
         $select = new Select;
         $select->where($newWhere = new Where);
@@ -349,7 +349,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         );
 
         // table as TableIdentifier
-        $select1 = new Select();
+        $select1 = new Select;
         $select1->from(new TableIdentifier('foo', 'bar'));
         $sqlPrep1 = // same
         $sqlStr1 = 'SELECT "bar"."foo".* FROM "bar"."foo"';
@@ -358,8 +358,8 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         );
 
         // table with alias
-        $select2 = new Select();
-        $select2->from(array('f'=>'foo'));
+        $select2 = new Select;
+        $select2->from(array('f' => 'foo'));
         $sqlPrep2 = // same
         $sqlStr2 = 'SELECT "f".* FROM "foo" AS "f"';
         $internalTests2 = array(
@@ -367,8 +367,8 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         );
 
         // table with alias with table as TableIdentifier
-        $select3 = new Select();
-        $select3->from(new TableIdentifier(array('f'=>'foo')));
+        $select3 = new Select;
+        $select3->from(array('f' => new TableIdentifier('foo')));
         $sqlPrep3 = // same
         $sqlStr3 = 'SELECT "f".* FROM "foo" AS "f"';
         $internalTests3 = array(
@@ -620,12 +620,12 @@ class SelectTest extends \PHPUnit_Framework_TestCase
 
         // joins with a few keywords in the on clause
         $select28 = new Select;
-        $select28->from('foo')->join('zac', 'm = n AND c.x BETWEEN x AND y.z');
+        $select28->from('foo')->join('zac', '(m = n AND c.x) BETWEEN x AND y.z');
         $sqlPrep28 = // same
-        $sqlStr28 = 'SELECT "foo".*, "zac".* FROM "foo" INNER JOIN "zac" ON "m" = "n" AND "c"."x" BETWEEN "x" AND "y"."z"';
+        $sqlStr28 = 'SELECT "foo".*, "zac".* FROM "foo" INNER JOIN "zac" ON ("m" = "n" AND "c"."x") BETWEEN "x" AND "y"."z"';
         $internalTests28 = array(
             'processSelect' => array(array(array('"foo".*'), array('"zac".*')), '"foo"'),
-            'processJoin'   => array(array(array('INNER', '"zac"', '"m" = "n" AND "c"."x" BETWEEN "x" AND "y"."z"')))
+            'processJoin'   => array(array(array('INNER', '"zac"', '("m" = "n" AND "c"."x") BETWEEN "x" AND "y"."z"')))
         );
 
         // order with compound name
@@ -646,6 +646,16 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $internalTests30 = array(
             'processSelect' => array(array(array('"foo".*')), '"foo"'),
             'processGroup'  => array(array('"c1"."d2"'))
+        );
+
+        // join with expression in ON part
+        $select31 = new Select;
+        $select31->from('foo')->join('zac', new Expression('(m = n AND c.x) BETWEEN x AND y.z'));
+        $sqlPrep31 = // same
+        $sqlStr31 = 'SELECT "foo".*, "zac".* FROM "foo" INNER JOIN "zac" ON (m = n AND c.x) BETWEEN x AND y.z';
+        $internalTests31 = array(
+            'processSelect' => array(array(array('"foo".*'), array('"zac".*')), '"foo"'),
+            'processJoin'   => array(array(array('INNER', '"zac"', '(m = n AND c.x) BETWEEN x AND y.z')))
         );
 
         /**
@@ -688,6 +698,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select28, $sqlPrep28, array(),    $sqlStr28, $internalTests28),
             array($select29, $sqlPrep29, array(),    $sqlStr29, $internalTests29),
             array($select30, $sqlPrep30, array(),    $sqlStr30, $internalTests30),
+            array($select31, $sqlPrep31, array(),    $sqlStr31, $internalTests31),
         );
     }
 

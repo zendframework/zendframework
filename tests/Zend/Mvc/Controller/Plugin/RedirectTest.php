@@ -10,13 +10,13 @@
 
 namespace ZendTest\Mvc\Controller\Plugin;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\Response,
-    Zend\Mvc\Controller\Plugin\Redirect as RedirectPlugin,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\Router\Http\Literal as LiteralRoute,
-    Zend\Mvc\Router\SimpleRouteStack,
-    ZendTest\Mvc\Controller\TestAsset\SampleController;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Response;
+use Zend\Mvc\Controller\Plugin\Redirect as RedirectPlugin;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\Http\Literal as LiteralRoute;
+use Zend\Mvc\Router\SimpleRouteStack;
+use ZendTest\Mvc\Controller\TestAsset\SampleController;
 
 class RedirectTest extends TestCase
 {

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData\Docs;
+
 use Zend\GData\Docs;
 
 /**

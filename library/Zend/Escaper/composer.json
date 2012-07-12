@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-escaper",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -10,6 +11,7 @@
             "Zend\\Escaper": ""
         }
     },
+    "target-dir": "Zend/Escaper",
     "require": {
         "php": ">=5.3.3"
     }

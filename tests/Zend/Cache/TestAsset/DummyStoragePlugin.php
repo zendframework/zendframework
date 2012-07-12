@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Cache\TestAsset;
+
 use Zend\Cache\Storage\Plugin\AbstractPlugin;
 
 class DummyStoragePlugin extends AbstractPlugin

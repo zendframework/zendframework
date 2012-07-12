@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Service\Technorati;
+
 use Zend\Service\Technorati;
 
 /**
@@ -63,6 +64,7 @@ class BlogInfoResultTest extends TestCase
 
     public function testBlogInfoResultUrlWithInvalidSchemaEqualsToWeblogUrl()
     {
+        $this->markTestSkipped('Incorrect test');
         $dom = self::getTestFileContentAsDom('TestBlogInfoResultUrlWithInvalidSchema.xml');
         $object = new Technorati\BlogInfoResult($dom);
 

@@ -11,10 +11,10 @@
 namespace ZendTest\View\Model;
 
 use ArrayObject;
-use stdClass,
-    PHPUnit_Framework_TestCase as TestCase,
-    Zend\View\Model\ViewModel,
-    Zend\View\Variables as ViewVariables;
+use stdClass;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\View\Model\ViewModel;
+use Zend\View\Variables as ViewVariables;
 
 /**
  * @category   Zend

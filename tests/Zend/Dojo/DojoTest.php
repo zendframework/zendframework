@@ -10,9 +10,9 @@
 
 namespace ZendTest\Dojo;
 
-use Zend\Form\Form,
-    Zend\Form\SubForm,
-    Zend\View;
+use Zend\Form\Form;
+use Zend\Form\SubForm;
+use Zend\View;
 
 /**
  * Test class for Zend_Dojo

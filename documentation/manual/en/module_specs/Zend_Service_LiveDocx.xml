@@ -556,7 +556,7 @@ file_put_contents('document.pdf', $document);
                 relative to the original page size. The range of this parameter is 10 to 400.
                 <varname>$format</varname> is the format of the images returned by this method. The
                 supported formats can be obtained by calling
-                <methodname>getImageFormats()</methodname>.
+                <methodname>getImageExportFormats()</methodname>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -826,7 +826,7 @@ Zend_Debug::dump($phpLiveDocx->getDocumentFormats());
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.service.livedocx.mailmerge.information.getimageformats"><title>Get Array of Supported Image File Formats</title>
+            <example xml:id="zend.service.livedocx.mailmerge.information.getimageexportformats"><title>Get Array of Supported Image File Formats</title>
                 
 
                 <para>
@@ -842,7 +842,7 @@ $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 $phpLiveDocx->setUsername('myUsername')
             ->setPassword('myPassword');
 
-Zend_Debug::dump($phpLiveDocx->getImageFormats());
+Zend_Debug::dump($phpLiveDocx->getImageExportFormats());
 ]]></programlisting>
 
                 <para>

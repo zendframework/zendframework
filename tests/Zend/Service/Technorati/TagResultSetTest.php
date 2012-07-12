@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Service\Technorati;
+
 use Zend\Service\Technorati;
 
 /**

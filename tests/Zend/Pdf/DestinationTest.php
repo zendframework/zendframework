@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Pdf;
+
 use Zend\Pdf;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\Destination;

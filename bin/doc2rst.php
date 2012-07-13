@@ -244,12 +244,12 @@ class RstConvert
      */
     public static function link($node)
     {
-        $value = self::formatText($node[0]->nodeValue);
+        $value = trim(self::formatText($node[0]->nodeValue));
         if ($node[0]->getAttribute('linkend')) {
-            return " :ref:`$value <" . $node[0]->getAttribute('linkend') . ">` ";
+            return ":ref:`$value <" . $node[0]->getAttribute('linkend') . ">`";
         } else {
-            self::$links[$value] = $node[0]->getAttribute('xlink:href');
-            return " `$value`_ ";
+            self::$links[$value] = trim($node[0]->getAttribute('xlink:href'));
+            return "`$value`_";
         }
     }
 

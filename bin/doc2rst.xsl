@@ -98,7 +98,8 @@
 <!-- note -->
 <xsl:template match="//doc:note">
 .. note::
-    **<xsl:value-of select="php:function('ZendBin\RstConvert::formatText', string(doc:title))" />**
+<xsl:if test="doc:title">    **<xsl:value-of select="php:function('ZendBin\RstConvert::formatText', string(doc:title))" />**
+</xsl:if>
 <xsl:apply-templates select="*[name(.) != 'title']"/>
 </xsl:template>
 

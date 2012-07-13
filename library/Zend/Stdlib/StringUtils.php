@@ -7,6 +7,7 @@ use Zend\Loader\Broker,
     Zend\Stdlib\StringWrapper\StringWrapperInterface,
     Zend\Stdlib\StringWrapper\MbString as MbStringWrapper,
     Zend\Stdlib\StringWrapper\Iconv as IconvWrapper,
+    Zend\Stdlib\StringWrapper\Intl as IntlWrapper,
     Zend\Stdlib\StringWrapper\Native as NativeWrapper;
 
 class StringUtils
@@ -32,6 +33,10 @@ class StringUtils
     {
         if (static::$wrapperRegistry === null) {
             static::$wrapperRegistry = array();
+
+            if (extension_loaded('intl')) {
+                static::$wrapperRegistry[] = new IntlWrapper();
+            }
 
             if (extension_loaded('mbstring')) {
                 static::$wrapperRegistry[] = new MbStringWrapper();
@@ -64,17 +69,33 @@ class StringUtils
 
     public static function getWrapper($charset = 'UTF-8')
     {
+        $charsets = func_get_args();
+
         foreach (static::getRegisteredWrappers() as $wrapper) {
-            if ($wrapper->isCharsetSupported($charset)) {
-                return $wrapper;
+            foreach ($charsets as $charset) {
+                if (!$wrapper->isCharsetSupported($charset)) {
+                    continue 2;
+                }
             }
+
+            return $wrapper;
         }
 
-        throw new Exception\RuntimeException("No wrapper found for charset '{$charset}'");
+        throw new Exception\RuntimeException('No wrapper found supporting charset(s) ' . implode(', ', $charsets));
+    }
+
+    public static function getSingleByteCharsets()
+    {
+        return static::$singleByteCharsets;
     }
 
     public static function isSingleByteCharset($charset)
     {
         return in_array(strtoupper($charset), static::$singleByteCharsets);
+    }
+
+    public static function isValidUtf8($string)
+    {
+        return ($string === '' || preg_match('/^./su', $string) == 1);
     }
 }

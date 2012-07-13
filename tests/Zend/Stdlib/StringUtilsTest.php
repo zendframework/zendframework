@@ -83,14 +83,45 @@ class StringUtilsTest extends TestCase
 
     public function testGetWrapper()
     {
-        $wrapper = StringUtils::getWrapper('UTF-8');
-
+        $wrapper = StringUtils::getWrapper('ISO-8859-1');
         if (extension_loaded('mbstring')) {
             $this->assertInstanceOf('Zend\Stdlib\StringWrapper\MbString', $wrapper);
         } elseif (extension_loaded('iconv')) {
             $this->assertInstanceOf('Zend\Stdlib\StringWrapper\Iconv', $wrapper);
         } else {
             $this->assertInstanceOf('Zend\Stdlib\StringWrapper\Native', $wrapper);
+        }
+
+        try {
+            $wrapper = StringUtils::getWrapper('UTF-8');
+            if (extension_loaded('intl')) {
+                $this->assertInstanceOf('Zend\Stdlib\StringWrapper\Intl', $wrapper);
+            } elseif (extension_loaded('mbstring')) {
+                $this->assertInstanceOf('Zend\Stdlib\StringWrapper\MbString', $wrapper);
+            } elseif (extension_loaded('iconv')) {
+                $this->assertInstanceOf('Zend\Stdlib\StringWrapper\Iconv', $wrapper);
+            }
+        } catch (Exception $e) {
+            if (extension_loaded('intl')
+                || extension_loaded('mbstring')
+                || extension_loaded('iconv')
+            ) {
+                $this->fail("Failed to get intl, mbstring or iconv wrapper for UTF-8");
+            }
+        }
+
+        try {
+            $wrapper = StringUtils::getWrapper('UTF-8', 'ISO-8859-1');
+            if (extension_loaded('mbstring')) {
+                $this->assertInstanceOf('Zend\Stdlib\StringWrapper\MbString', $wrapper);
+            } elseif (extension_loaded('iconv')) {
+                $this->assertInstanceOf('Zend\Stdlib\StringWrapper\Iconv', $wrapper);
+            }
+        } catch (Exception $e) {
+            if (extension_loaded('mbstring') || extension_loaded('iconv')
+            ) {
+                $this->fail("Failed to get mbstring or iconv wrapper for UTF-8 and ISO-8859-1");
+            }
         }
     }
 }

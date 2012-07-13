@@ -10,17 +10,17 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      *
      * @var string[]
      */
-    protected static $charsets = array();
+    protected $charsets = array();
 
     public function isCharsetSupported($charset)
     {
         $charset = strtoupper($charset);
-        return in_array($charset, static::$charsets);
+        return in_array($charset, $this->charsets);
     }
 
     public function getSupportedCharsets()
     {
-        return static::$charsets;
+        return $this->$charsets;
     }
 
     /**

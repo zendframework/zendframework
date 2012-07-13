@@ -8,10 +8,10 @@
  * @package   Zend_Session
  */
 
-namespace Zend\Session\Configuration;
+namespace Zend\Session\Config;
 
 use Zend\Filter\Word\CamelCaseToUnderscore as CamelCaseToUnderscoreFilter;
-use Zend\Session\Configuration\ConfigurationInterface as Configurable;
+use Zend\Session\Config\ConfigInterface;
 use Zend\Session\Exception;
 use Zend\Validator\Hostname as HostnameValidator;
 
@@ -22,10 +22,12 @@ use Zend\Validator\Hostname as HostnameValidator;
  * @package    Zend_Session
  * @subpackage Configuration
  */
-class StandardConfiguration implements Configurable
+class StandardConfig implements ConfigInterface
 {
     /**
-     * @var Zend\Filter Filter to convert CamelCase to underscore_separated
+     * Filter to convert CamelCase to underscore_separated
+     *
+     * @var Zend\Filter
      */
     protected $camelCaseToUnderscoreFilter;
 
@@ -116,8 +118,12 @@ class StandardConfiguration implements Configurable
     public function setSavePath($savePath)
     {
         if (!is_dir($savePath)) {
-            throw new Exception\InvalidArgumentException('Invalid save_path provided');
+            throw new Exception\InvalidArgumentException('Invalid save_path; not a directory');
         }
+        if (!is_writable($savePath)) {
+            throw new Exception\InvalidArgumentException('Invalid save_path; not writable');
+        }
+
         $this->savePath = $savePath;
         $this->setStorageOption('save_path', $savePath);
         return $this;
@@ -244,7 +250,9 @@ class StandardConfiguration implements Configurable
             throw new Exception\InvalidArgumentException('Invalid cookie_lifetime; must be numeric');
         }
         if (0 > $cookieLifetime) {
-            throw new Exception\InvalidArgumentException('Invalid cookie_lifetime; must be a positive integer or zero');
+            throw new Exception\InvalidArgumentException(
+                'Invalid cookie_lifetime; must be a positive integer or zero'
+            );
         }
 
         $this->cookieLifetime = (int) $cookieLifetime;
@@ -315,7 +323,9 @@ class StandardConfiguration implements Configurable
         $validator = new HostnameValidator(HostnameValidator::ALLOW_ALL);
 
         if (!empty($cookieDomain) && !$validator->isValid($cookieDomain)) {
-            throw new Exception\InvalidArgumentException('Invalid cookie domain: ' . implode('; ', $validator->getMessages()));
+            throw new Exception\InvalidArgumentException(
+                'Invalid cookie domain: ' . implode('; ', $validator->getMessages())
+            );
         }
 
         $this->cookieDomain = $cookieDomain;

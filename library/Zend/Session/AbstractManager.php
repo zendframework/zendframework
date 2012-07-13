@@ -10,7 +10,7 @@
 
 namespace Zend\Session;
 
-use Zend\Session\Configuration\ConfigurationInterface as Configuration;
+use Zend\Session\Config\ConfigInterface as Config;
 use Zend\Session\ManagerInterface as Manager;
 use Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler;
 use Zend\Session\Storage\StorageInterface as Storage;
@@ -64,7 +64,7 @@ abstract class AbstractManager implements Manager
      * @param  SaveHandler $saveHandler
      * @return void
      */
-    public function __construct(Configuration $config = null, Storage $storage = null, SaveHandler $saveHandler = null)
+    public function __construct(Config $config = null, Storage $storage = null, SaveHandler $saveHandler = null)
     {
         $this->setOptions($config);
         $this->setStorage($storage);
@@ -79,12 +79,14 @@ abstract class AbstractManager implements Manager
      * @param  null|Configuration $config
      * @return void
      */
-    public function setOptions(Configuration $config = null)
+    public function setOptions(Config $config = null)
     {
         if (null === $config) {
             $config = new $this->configDefaultClass();
-            if (!$config instanceof Configuration) {
-                throw new Exception\InvalidArgumentException('Default configuration type provided is invalid; must implement Zend\\Session\\Configuration');
+            if (!$config instanceof Config) {
+                throw new Exception\InvalidArgumentException(
+                    'Default configuration type provided is invalid; must implement Zend\\Session\\Configuration'
+                );
             }
         }
 
@@ -112,7 +114,9 @@ abstract class AbstractManager implements Manager
         if (null === $storage) {
             $storage = new $this->storageDefaultClass();
             if (!$storage instanceof Storage) {
-                throw new Exception\InvalidArgumentException('Default storage type provided is invalid; must implement Zend\\Session\\Storage');
+                throw new Exception\InvalidArgumentException(
+                    'Default storage type provided is invalid; must implement Zend\\Session\\Storage'
+                );
             }
         }
 

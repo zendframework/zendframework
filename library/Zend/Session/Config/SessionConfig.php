@@ -8,7 +8,7 @@
  * @package   Zend_Session
  */
 
-namespace Zend\Session\Configuration;
+namespace Zend\Session\Config;
 
 use Zend\Session\Exception;
 use Zend\Validator\Hostname as HostnameValidator;
@@ -20,7 +20,7 @@ use Zend\Validator\Hostname as HostnameValidator;
  * @package    Zend_Session
  * @subpackage Configuration
  */
-class SessionConfiguration extends StandardConfiguration
+class SessionConfig extends StandardConfig
 {
     /**
      * Used with {@link handleError()}; stores PHP error code

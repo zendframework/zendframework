@@ -12,7 +12,6 @@ namespace Zend\Session\SaveHandler;
 
 use Zend\Cache\Storage\ClearExpiredInterface as ClearExpiredCacheStorage;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
-use Zend\Sessin\Exception;
 
 /**
  * Cache session save handler
@@ -47,8 +46,6 @@ class Cache implements SaveHandlerInterface
      * Constructor
      *
      * @param  CacheStorage $cacheStorage
-     * @return void
-     * @throws Exception\ExceptionInterface
      */
     public function __construct(CacheStorage $cacheStorage)
     {
@@ -58,7 +55,7 @@ class Cache implements SaveHandlerInterface
     /**
      * Open Session
      *
-     * @param string $save_path
+     * @param string $savePath
      * @param string $name
      * @return boolean
      */
@@ -133,12 +130,13 @@ class Cache implements SaveHandlerInterface
     /**
      * Set cache storage
      *
-     * @param CacheStorage
-     * @return void
+     * @param  CacheStorage $cacheStorage
+     * @return Cache
      */
     public function setCacheStorage(CacheStorage $cacheStorage)
     {
         $this->cacheStorage = $cacheStorage;
+        return $this;
     }
 
     /**

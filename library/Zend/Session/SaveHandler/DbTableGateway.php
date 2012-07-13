@@ -57,20 +57,20 @@ class DbTableGateway implements SaveHandlerInterface
     /**
      * Constructor
      *
-     * @param  Zend\Db\Adapter\Adapter $adapter
-     * @param  DbTableGatewayOptions $options
+     * @param TableGateway $tableGateway
+     * @param DbTableGatewayOptions $options
      */
     public function __construct(TableGateway $tableGateway, DbTableGatewayOptions $options)
     {
         $this->tableGateway = $tableGateway;
-        $this->options = $options;
+        $this->options      = $options;
     }
 
     /**
      * Open Session
      *
-     * @param string $save_path
-     * @param string $name
+     * @param  string $savePath
+     * @param  string $name
      * @return boolean
      */
     public function open($savePath, $name)
@@ -102,7 +102,7 @@ class DbTableGateway implements SaveHandlerInterface
     {
 
         $rows = $this->tableGateway->select(array(
-            $this->options->getIdColumn() => $id,
+            $this->options->getIdColumn()   => $id,
             $this->options->getNameColumn() => $this->sessionName,
         ));
 
@@ -150,13 +150,13 @@ class DbTableGateway implements SaveHandlerInterface
     /**
      * Destroy session
      *
-     * @param string $id
+     * @param  string $id
      * @return boolean
      */
     public function destroy($id)
     {
         return (bool) $this->tableGateway->delete(array(
-            $this->options->getIdColumn() => $id,
+            $this->options->getIdColumn()   => $id,
             $this->options->getNameColumn() => $this->sessionName,
         ));
     }

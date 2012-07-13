@@ -53,16 +53,6 @@ class DbTableGatewayOptions extends AbstractOptions
     protected $nameColumn = 'name';
 
     /**
-     * Get Data Column
-     *
-     * @return string
-     */
-    public function getDataColumn()
-    {
-        return $this->dataColumn;
-    }
-
-    /**
      * Set Data Column
      *
      * @param string $dataColumn
@@ -80,13 +70,13 @@ class DbTableGatewayOptions extends AbstractOptions
     }
 
     /**
-     * Get Id Column
+     * Get Data Column
      *
      * @return string
      */
-    public function getIdColumn()
+    public function getDataColumn()
     {
-        return $this->idColumn;
+        return $this->dataColumn;
     }
 
     /**
@@ -104,6 +94,16 @@ class DbTableGatewayOptions extends AbstractOptions
         }
         $this->idColumn = $idColumn;
         return $this;
+    }
+
+    /**
+     * Get Id Column
+     *
+     * @return string
+     */
+    public function getIdColumn()
+    {
+        return $this->idColumn;
     }
 
     /**
@@ -134,16 +134,6 @@ class DbTableGatewayOptions extends AbstractOptions
     }
 
     /**
-     * Get Modified Column
-     *
-     * @return string
-     */
-    public function getModifiedColumn()
-    {
-        return $this->modifiedColumn;
-    }
-
-    /**
      * Set Modified Column
      *
      * @param string $modifiedColumn
@@ -161,13 +151,13 @@ class DbTableGatewayOptions extends AbstractOptions
     }
 
     /**
-     * Get Name Column
+     * Get Modified Column
      *
      * @return string
      */
-    public function getNameColumn()
+    public function getModifiedColumn()
     {
-        return $this->nameColumn;
+        return $this->modifiedColumn;
     }
 
     /**
@@ -185,5 +175,15 @@ class DbTableGatewayOptions extends AbstractOptions
         }
         $this->nameColumn = $nameColumn;
         return $this;
+    }
+
+    /**
+     * Get Name Column
+     *
+     * @return string
+     */
+    public function getNameColumn()
+    {
+        return $this->nameColumn;
     }
 }

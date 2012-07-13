@@ -22,7 +22,7 @@ class RemoteAddr implements SessionValidator
     /**
      * Internal data.
      *
-     * @var int
+     * @var string
      */
     protected $data;
 
@@ -39,10 +39,8 @@ class RemoteAddr implements SessionValidator
     protected static $useProxy = false;
 
     /**
-     * Constructor - get the current user IP and store it in the session
-     * as 'valid data'
-     *
-     * @return void
+     * Constructor
+     * get the current user IP and store it in the session as 'valid data'
      */
     public function __construct($data = null)
     {
@@ -60,7 +58,7 @@ class RemoteAddr implements SessionValidator
      */
     public function isValid()
     {
-        return $this->getIpAddress() === $this->getData();
+        return ($this->getIpAddress() === $this->getData());
     }
 
     /**

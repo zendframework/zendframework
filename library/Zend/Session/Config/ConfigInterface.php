@@ -8,7 +8,7 @@
  * @package   Zend_Session
  */
 
-namespace Zend\Session\Configuration;
+namespace Zend\Session\Config;
 
 /**
  * Standard session configuration
@@ -16,7 +16,7 @@ namespace Zend\Session\Configuration;
  * @category   Zend
  * @package    Zend_Session
  */
-interface ConfigurationInterface
+interface ConfigInterface
 {
     public function setOptions(array $options);
     public function setOption($option, $value);
@@ -24,11 +24,11 @@ interface ConfigurationInterface
     public function getOption($option);
     public function toArray();
 
-    public function setSavePath($savePath);
-    public function getSavePath();
-
     public function setName($name);
     public function getName();
+
+    public function setSavePath($savePath);
+    public function getSavePath();
 
     public function setCookieLifetime($cookieLifetime);
     public function getCookieLifetime();

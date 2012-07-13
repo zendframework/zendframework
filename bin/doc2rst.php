@@ -83,6 +83,7 @@ if (empty($rstFile)) {
 }
 
 if (is_dir($rstFile)) {
+    $rstFile  = realpath($rstFile) . DIRECTORY_SEPARATOR;
     $rstFile .= RstConvert::XmlFileNameToRst(basename($docbook));
 }
 

@@ -161,7 +161,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
         return count($this->_entries);
     }
 
-	/**
+    /**
      * Return the current entry
      *
      * @return Zend_Feed_Reader_Entry_Interface
@@ -181,7 +181,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
         return $this->_entriesKey;
     }
 
-	/**
+    /**
      * Move the feed pointer forward
      *
      * @return void

@@ -35,7 +35,7 @@ class Queue1Test extends QueueBaseTest
     protected function setUp()
     {
         $this->_originaltimezone = date_default_timezone_get();
-    	date_default_timezone_set('GMT');
+        date_default_timezone_set('GMT');
 
         // Test Zend_Config
         $this->config = array(

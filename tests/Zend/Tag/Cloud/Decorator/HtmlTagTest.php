@@ -12,7 +12,7 @@ namespace ZendTest\Tag\Cloud\Decorator;
 
 use	Zend\Tag,
     Zend\Tag\Cloud\Decorator,
-	Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException;
+    Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException;
 
 /**
  * @category   Zend

@@ -46,7 +46,7 @@ class Nirvanix implements AdapterInterface
      *
      * @param  array|Traversable $options
      */
-    function __construct($options = array())
+    public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);

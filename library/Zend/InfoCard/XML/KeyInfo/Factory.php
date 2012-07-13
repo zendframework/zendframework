@@ -36,7 +36,7 @@ class Factory
      * @return \Zend\InfoCard\XML\KeyInfo\AbstractKeyInfo
      * @throws XML\Exception\InvalidArgumentException
      */
-    static public function getInstance($xmlData)
+    public static function getInstance($xmlData)
     {
 
         if($xmlData instanceof XML\AbstractElement) {

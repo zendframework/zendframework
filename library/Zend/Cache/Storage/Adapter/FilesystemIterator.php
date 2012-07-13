@@ -106,10 +106,10 @@ class FilesystemIterator implements IteratorInterface
 
     /* Iterator */
 
-	/**
-	 * Get current key, value or metadata.
-	 *
-	 * @return mixed
+    /**
+     * Get current key, value or metadata.
+     *
+     * @return mixed
      */
     public function current()
     {
@@ -128,10 +128,10 @@ class FilesystemIterator implements IteratorInterface
         return $key;
     }
 
-	/**
-	 * Get current key
-	 *
-	 * @return string
+    /**
+     * Get current key
+     *
+     * @return string
      */
     public function key()
     {
@@ -151,10 +151,10 @@ class FilesystemIterator implements IteratorInterface
         $this->globIterator->next();
     }
 
-	/**
-	 * Checks if current position is valid
-	 *
-	 * @return boolean
+    /**
+     * Checks if current position is valid
+     *
+     * @return boolean
      */
     public function valid()
     {
@@ -168,10 +168,10 @@ class FilesystemIterator implements IteratorInterface
         }
     }
 
-	/**
-	 * Rewind the Iterator to the first element.
-	 *
-	 * @return void
+    /**
+     * Rewind the Iterator to the first element.
+     *
+     * @return void
      */
     public function rewind()
     {

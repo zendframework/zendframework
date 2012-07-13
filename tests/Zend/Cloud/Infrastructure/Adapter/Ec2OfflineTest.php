@@ -80,7 +80,7 @@ class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static function getConfigArray()
+    public static function getConfigArray()
     {
          return array(
             CloudFactory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Ec2',

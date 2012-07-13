@@ -43,7 +43,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $this->assertContains((string)$fields['priority'], $line);
     }
 
-    function testComplexValues()
+    public function testComplexValues()
     {
         $fields = array('timestamp'    => 0,
                         'priority'     => 42,
@@ -90,15 +90,15 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultFormatShouldDisplayExtraInformations()
     {
-    	$message = 'custom message';
-    	$exception = new \RuntimeException($message);
-    	$event = array(
-    	    'timestamp'    => date('c'),
-    	    'message'      => 'Application error',
-    	    'priority'     => 2,
-    	    'priorityName' => 'CRIT',
-    	    'info'         => $exception,
-    	);
+        $message = 'custom message';
+        $exception = new \RuntimeException($message);
+        $event = array(
+            'timestamp'    => date('c'),
+            'message'      => 'Application error',
+            'priority'     => 2,
+            'priorityName' => 'CRIT',
+            'info'         => $exception,
+        );
 
         $formatter = new Simple();
         $output = $formatter->format($event);

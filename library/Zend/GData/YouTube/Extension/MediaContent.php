@@ -34,7 +34,7 @@ class MediaContent extends \Zend\GData\Media\Extension\MediaContent
     protected $_format = null;
 
 
-    function __construct()
+    public function __construct()
     {
         $this->registerAllNamespaces(\Zend\GData\YouTube::$namespaces);
         parent::__construct();

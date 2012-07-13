@@ -43,7 +43,7 @@ class Docx extends AbstractOpenXML
     {
         if (!class_exists('ZipArchive', false)) {
             throw new ExtensionNotLoadedException(
-            	'MS Office documents processing functionality requires Zip extension to be loaded'
+                'MS Office documents processing functionality requires Zip extension to be loaded'
             );
         }
 

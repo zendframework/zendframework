@@ -980,26 +980,26 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
 
 class TestObject1
 {
-  var $name = 'Name';
-  var $value = 'Value';
+  public $name = 'Name';
+  public $value = 'Value';
   protected static $protectedStatic = 'ProtectedStatic';
 }
 
 class TestObject2
 {
-  var $public = 'Public';
+  public $public = 'Public';
   private $private = 'Private';
   protected $protected = 'Protected';
 
-  static $static = 'Static';
-  static private $staticPrivate = 'StaticPrivate';
-  static protected $staticProtected = 'StaticProtected';
+  public static $static = 'Static';
+  private static $staticPrivate = 'StaticPrivate';
+  protected static $staticProtected = 'StaticProtected';
 }
 
 class TestObject3
 {
-  var $name = 'Name';
-  var $value = 'Value';
+  public $name = 'Name';
+  public $value = 'Value';
 }
 
 class JsonEncodingTestClass

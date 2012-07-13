@@ -326,8 +326,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
 
         $this->setExpectedException(
-        	'Zend\Soap\Exception\InvalidArgumentException',
-        	'A class has already been registered with this soap server instance'
+            'Zend\Soap\Exception\InvalidArgumentException',
+            'A class has already been registered with this soap server instance'
             );
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
     }

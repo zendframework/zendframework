@@ -21,7 +21,7 @@ use Zend\Config\Config;
  */
 class S3Test extends TestCase
 {
-	protected $_clientType = 'Zend\Service\Amazon\S3\S3';
+    protected $_clientType = 'Zend\Service\Amazon\S3\S3';
 
     /**
      * Sets up this test case

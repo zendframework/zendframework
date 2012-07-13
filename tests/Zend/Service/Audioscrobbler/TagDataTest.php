@@ -19,7 +19,7 @@ namespace ZendTest\Service\Audioscrobbler;
  */
 class TagDataTest extends AudioscrobblerTestCase
 {
-    var $header = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n";
+    public $header = "HTTP/1.1 200 OK\r\nContent-type: text/xml\r\n\r\n";
 
     public function testGetTopTags()
     {

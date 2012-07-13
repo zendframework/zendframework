@@ -24,7 +24,7 @@ abstract class AbstractRetryPolicy
      * @param array        $parameters     Parameters for function call
      * @return mixed
      */
-    public abstract function execute($function, $parameters = array());
+    abstract public function execute($function, $parameters = array());
 
     /**
      * Create a NoRetry instance

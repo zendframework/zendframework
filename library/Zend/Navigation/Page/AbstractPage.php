@@ -1103,7 +1103,7 @@ abstract class AbstractPage extends AbstractContainer
      *
      * @return string  a hash code value for this page
      */
-    public final function hashCode()
+    final public function hashCode()
     {
         return spl_object_hash($this);
     }

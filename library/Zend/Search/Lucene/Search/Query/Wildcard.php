@@ -135,7 +135,7 @@ class Wildcard extends AbstractQuery
 
         if ($prefixLength < self::$_minPrefixLength) {
             throw new RuntimeException(
-            	'At least ' . self::$_minPrefixLength . ' non-wildcard characters are required at the beginning of pattern.'
+                'At least ' . self::$_minPrefixLength . ' non-wildcard characters are required at the beginning of pattern.'
             );
         }
 
@@ -275,7 +275,7 @@ class Wildcard extends AbstractQuery
     public function matchedDocs()
     {
         throw new UnsupportedMethodCallException(
-        	'Wildcard query should not be directly used for search. Use $query->rewrite($index)'
+            'Wildcard query should not be directly used for search. Use $query->rewrite($index)'
         );
     }
 
@@ -290,7 +290,7 @@ class Wildcard extends AbstractQuery
     public function score($docId, Lucene\SearchIndexInterface $reader)
     {
         throw new UnsupportedMethodCallException(
-        	'Wildcard query should not be directly used for search. Use $query->rewrite($index)'
+            'Wildcard query should not be directly used for search. Use $query->rewrite($index)'
         );
     }
 

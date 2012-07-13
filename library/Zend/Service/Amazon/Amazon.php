@@ -223,7 +223,7 @@ class Amazon
      * @param  array $options
      * @return string
      */
-    static public function computeSignature($baseUri, $secretKey, array $options)
+    public static function computeSignature($baseUri, $secretKey, array $options)
     {
         $signature = self::buildRawSignature($baseUri, $options);
         return base64_encode(
@@ -238,7 +238,7 @@ class Amazon
      * @param  array $options
      * @return string
      */
-    static public function buildRawSignature($baseUri, $options)
+    public static function buildRawSignature($baseUri, $options)
     {
         ksort($options);
         $params = array();

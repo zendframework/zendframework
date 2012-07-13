@@ -874,7 +874,9 @@ class Acl
 
         if (null !== ($result = $this->roleDFSVisitOnePrivilege($role, $resource, $privilege, $dfs))) {
             return $result;
-        } while (null !== ($role = array_pop($dfs['stack']))) {
+        }
+
+        while (null !== ($role = array_pop($dfs['stack']))) {
             if (!isset($dfs['visited'][$role->getRoleId()])) {
                 if (null !== ($result = $this->roleDFSVisitOnePrivilege($role, $resource, $privilege, $dfs))) {
                     return $result;

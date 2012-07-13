@@ -12,7 +12,7 @@ namespace ZendTest\Amf\TestAsset\Authentication;
 
 class testclass
 {
-    function hello()
+    public function hello()
     {
         return "hello!";
     }

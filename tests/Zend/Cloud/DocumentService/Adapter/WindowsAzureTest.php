@@ -42,7 +42,7 @@ class WindowsAzureTest extends TestCase
         }
     }
 
-    static function getConfigArray()
+    public static function getConfigArray()
     {
          return array(
             \Zend\Cloud\DocumentService\Factory::DOCUMENT_ADAPTER_KEY => 'Zend\Cloud\DocumentService\Adapter\WindowsAzure',
@@ -73,36 +73,36 @@ class WindowsAzureTest extends TestCase
     {
         return array(
             array(
-	        	parent::ID_FIELD => array("Amazon", "0385333498"),
-	        	"name" =>	"The Sirens of Titan",
-	        	"author" =>	"Kurt Vonnegut",
-	        	"year"	=> 1959,
-	        	"pages" =>	336,
-	        	"keyword" => "Book"
-	        	),
+                parent::ID_FIELD => array("Amazon", "0385333498"),
+                "name" =>	"The Sirens of Titan",
+                "author" =>	"Kurt Vonnegut",
+                "year"	=> 1959,
+                "pages" =>	336,
+                "keyword" => "Book"
+                ),
             array(
-	        	parent::ID_FIELD => array("Amazon", "0802131786"),
-	        	"name" =>	"Tropic of Cancer",
-	        	"author" =>	"Henry Miller",
-	        	"year"	=> 1934,
-	        	"pages" =>	318,
-	        	"keyword" => "Book"
-	        	),
+                parent::ID_FIELD => array("Amazon", "0802131786"),
+                "name" =>	"Tropic of Cancer",
+                "author" =>	"Henry Miller",
+                "year"	=> 1934,
+                "pages" =>	318,
+                "keyword" => "Book"
+                ),
             array(
-	        	parent::ID_FIELD => array("Amazon", "B000T9886K"),
-	        	"name" =>	"In Between",
-	        	"author" =>	"Paul Van Dyk",
-	        	"year"	=> 2007,
-	        	"keyword" => "CD"
-	        	),
-	       array(
-	        	parent::ID_FIELD => array("Amazon", "1579124585"),
-	        	"name" =>	"The Right Stuff",
-	        	"author" =>	"Tom Wolfe",
-	        	"year"	=> 1979,
-	        	"pages" =>	304,
-	        	"keyword" => "Book"
-	        	),
+                parent::ID_FIELD => array("Amazon", "B000T9886K"),
+                "name" =>	"In Between",
+                "author" =>	"Paul Van Dyk",
+                "year"	=> 2007,
+                "keyword" => "CD"
+                ),
+           array(
+                parent::ID_FIELD => array("Amazon", "1579124585"),
+                "name" =>	"The Right Stuff",
+                "author" =>	"Tom Wolfe",
+                "year"	=> 1979,
+                "pages" =>	304,
+                "keyword" => "Book"
+                ),
         );
     }
 

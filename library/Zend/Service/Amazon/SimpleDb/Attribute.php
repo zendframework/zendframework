@@ -29,7 +29,7 @@ class Attribute
      * @param  array $values
      * @return void
      */
-    function __construct($itemName, $name, $values)
+    public function __construct($itemName, $name, $values)
     {
         $this->_itemName = $itemName;
         $this->_name     = $name;
@@ -41,7 +41,7 @@ class Attribute
         }
     }
 
-	/**
+    /**
      * Return the item name to which the attribute belongs
      *
      * @return string
@@ -51,7 +51,7 @@ class Attribute
         return $this->_itemName;
     }
 
-	/**
+    /**
      * Retrieve attribute values
      *
      * @return array
@@ -61,7 +61,7 @@ class Attribute
         return $this->_values;
     }
 
-	/**
+    /**
      * Retrieve the attribute name
      *
      * @return string

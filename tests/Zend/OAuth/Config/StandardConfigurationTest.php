@@ -24,14 +24,14 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSiteUrlArePropertlyBuiltFromDefaultPaths()
     {
-    	$config = new StandardConfig(
-    		array(
-    			'siteUrl'	=> 'https://example.com/oauth/'
-    		)
-    	);
-    	$this->assertEquals('https://example.com/oauth/authorize', $config->getAuthorizeUrl());
-    	$this->assertEquals('https://example.com/oauth/request_token', $config->getRequestTokenUrl());
-    	$this->assertEquals('https://example.com/oauth/access_token', $config->getAccessTokenUrl());
+        $config = new StandardConfig(
+            array(
+                'siteUrl'	=> 'https://example.com/oauth/'
+            )
+        );
+        $this->assertEquals('https://example.com/oauth/authorize', $config->getAuthorizeUrl());
+        $this->assertEquals('https://example.com/oauth/request_token', $config->getRequestTokenUrl());
+        $this->assertEquals('https://example.com/oauth/access_token', $config->getAccessTokenUrl());
 
     }
 

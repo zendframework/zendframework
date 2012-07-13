@@ -23,7 +23,7 @@ use Zend\Service\WindowsAzure\Storage\Blob\Blob;
  */
 class BlobStorageTest extends \PHPUnit_Framework_TestCase
 {
-    static $path;
+    public static $path;
 
     public function __construct()
     {

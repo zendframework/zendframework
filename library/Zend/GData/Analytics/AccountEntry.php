@@ -19,18 +19,18 @@ use Zend\GData;
  */
 class AccountEntry extends GData\Entry
 {
-	protected $_accountId;
-	protected $_accountName;
-	protected $_profileId;
-	protected $_webPropertyId;
-	protected $_currency;
-	protected $_timezone;
-	protected $_tableId;
+    protected $_accountId;
+    protected $_accountName;
+    protected $_profileId;
+    protected $_webPropertyId;
+    protected $_currency;
+    protected $_timezone;
+    protected $_tableId;
 
-	/**
-	 * @see Zend_Gdata_Entry::__construct()
-	 */
-	public function __construct($element = null)
+    /**
+     * @see Zend_Gdata_Entry::__construct()
+     */
+    public function __construct($element = null)
     {
         $this->registerAllNamespaces(GData\Analytics::$namespaces);
         parent::__construct($element);
@@ -44,18 +44,18 @@ class AccountEntry extends GData\Entry
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName){
-        	case $this->lookupNamespace('ga') . ':' . 'property';
-	            $property = new Extension\Property();
-	            $property->transferFromDOM($child);
-	            $this->{$property->getName()} = $property;
+            case $this->lookupNamespace('ga') . ':' . 'property';
+                $property = new Extension\Property();
+                $property->transferFromDOM($child);
+                $this->{$property->getName()} = $property;
                 break;
-        	case $this->lookupNamespace('ga') . ':' . 'tableId';
-	            $tableId = new Extension\TableId();
-	            $tableId->transferFromDOM($child);
-	            $this->_tableId = $tableId;
+            case $this->lookupNamespace('ga') . ':' . 'tableId';
+                $tableId = new Extension\TableId();
+                $tableId->transferFromDOM($child);
+                $this->_tableId = $tableId;
                 break;
-        	default:
-            	parent::takeChildFromDOM($child);
+            default:
+                parent::takeChildFromDOM($child);
                 break;
         }
     }

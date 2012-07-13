@@ -24,7 +24,7 @@ class MysqlResult
      *
      * Key => Value is Mysql type (exact string) => PHP type
      */
-    static public $fieldTypes = array(
+    public static $fieldTypes = array(
         "int"       => "int",
         "timestamp" => "int",
         "year"      => "int",

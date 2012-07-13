@@ -22,7 +22,7 @@ use Zend\Service\WindowsAzure\Storage\Blob\Blob;
  */
 class BlobStreamTest extends \PHPUnit_Framework_TestCase
 {
-    static $path;
+    public static $path;
 
     public function __construct()
     {
@@ -77,7 +77,7 @@ class BlobStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testReadFile()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
+        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
             $containerName = $this->generateName();
             $fileName = 'azure://' . $containerName . '/test.txt';
 
@@ -101,7 +101,7 @@ class BlobStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteFile()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
+        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
             $containerName = $this->generateName();
             $fileName = 'azure://' . $containerName . '/test.txt';
 
@@ -124,7 +124,7 @@ class BlobStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnlinkFile()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
+        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
             $containerName = $this->generateName();
             $fileName = 'azure://' . $containerName . '/test.txt';
 
@@ -149,7 +149,7 @@ class BlobStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testCopyFile()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
+        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
             $containerName = $this->generateName();
             $sourceFileName = 'azure://' . $containerName . '/test.txt';
             $destinationFileName = 'azure://' . $containerName . '/test2.txt';
@@ -175,7 +175,7 @@ class BlobStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenameFile()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
+        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
             $containerName = $this->generateName();
             $sourceFileName = 'azure://' . $containerName . '/test.txt';
             $destinationFileName = 'azure://' . $containerName . '/test2.txt';
@@ -201,7 +201,7 @@ class BlobStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testMkdir()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
+        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
             $containerName = $this->generateName();
 
             $storageClient = $this->createStorageInstance();
@@ -223,7 +223,7 @@ class BlobStreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testRmdir()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
+        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
             $containerName = $this->generateName();
 
             $storageClient = $this->createStorageInstance();

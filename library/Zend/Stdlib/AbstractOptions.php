@@ -31,11 +31,8 @@ abstract class AbstractOptions implements ParameterObjectInterface
      * @return AbstractOptions
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($options = null, $strict = null)
+    public function __construct($options = null)
     {
-        if (null !== $strict) {
-            $this->enableStrictMode($strict);
-        }
         if (null !== $options) {
             $this->setFromArray($options);
         }
@@ -57,20 +54,6 @@ abstract class AbstractOptions implements ParameterObjectInterface
         foreach ($options as $key => $value) {
             $this->__set($key, $value);
         }
-    }
-
-    /**
-     * With strict mode on, an exception will be thrown if there are values in
-     * an array with no matching setting in the options class. When off, the
-     * extra values will simply be ignored.
-     *
-     * @param bool $strict
-     * @return AbstractOptions
-     */
-    public function enableStrictMode($strict)
-    {
-        $this->__strictMode__ = $strict;
-        return $this;
     }
 
     /**

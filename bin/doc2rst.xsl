@@ -13,8 +13,8 @@
 </xsl:template>
 
 <!-- title -->
-<xsl:template match="/doc:section|/doc:appendix|/doc:chapter">
-<xsl:if test="../@xml:id != ''">
+<xsl:template match="/doc:article|/doc:section|/doc:appendix|/doc:chapter">
+<xsl:if test="@xml:id != ''">
 .. _<xsl:value-of select="@xml:id" />:
 </xsl:if>
 <xsl:text>

@@ -100,8 +100,7 @@ class ViewModel implements ModelInterface
      */
     public function __set($name, $value)
     {
-        $variables = $this->getVariables();
-        $variables[$name] = $value;
+        $this->setVariable($name, $value);
     }
 
     /**

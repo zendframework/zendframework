@@ -173,16 +173,16 @@ class FormSelectTest extends CommonTestCase
     public function getScalarOptionsDataProvider()
     {
         return array(
-            array(array('string'  => 'value')),
-            array(array('int'     => 1)),
-            array(array('int-neg' => -1)),
-            array(array('hex'     => 0x1A)),
-            array(array('oct'     => 0123)),
-            array(array('float'   => 2.1)),
-            array(array('float-e' => 1.2e3)),
-            array(array('float-E' => 7E-10)),
-            array(array('bool-t'  => true)),
-            array(array('bool-f'  => false)),
+            array(array('value' => 'string')),
+            array(array(1       => 'int')),
+            array(array(-1      => 'int-neg')),
+            array(array(0x1A    => 'hex')),
+            array(array(0123    => 'oct')),
+            array(array(2.1     => 'float')),
+            array(array(1.2e3   => 'float-e')),
+            array(array(7E-10   => 'float-E')),
+            array(array(true    => 'bool-t')),
+            array(array(false   => 'bool-f')),
         );
     }
 
@@ -195,7 +195,7 @@ class FormSelectTest extends CommonTestCase
         $element = new Element('foo');
         $element->setAttribute('options', $options);
         $markup = $this->helper->render($element);
-        list($label, $value) = each($options);
+        list($value, $label) = each($options);
         $this->assertRegexp(sprintf('#option .*?value="%s"#', (string)$value), $markup);
     }
 

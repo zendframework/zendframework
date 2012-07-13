@@ -233,4 +233,17 @@ class ViewModelTest extends TestCase
         $this->assertFalse(isset($model->foo));
         $this->assertFalse(isset($variables['foo']));
     }
+
+    public function testPropertyOverloadingAllowsWritingPropertiesAfterSetVariablesHasBeenCalled()
+    {
+        $model = new ViewModel();
+        $model->setVariables(array('foo' => 'bar'));
+        $model->bar = 'baz';
+
+        $this->assertTrue(isset($model->bar));
+        $this->assertEquals('baz', $model->bar);
+        $variables = $model->getVariables();
+        $this->assertArrayHasKey('bar', $variables);
+        $this->assertEquals('baz', $variables['bar']);
+    }
 }

@@ -126,7 +126,7 @@ function zendBindEvent(el, eventName, eventHandler)
 {
     if (el.addEventListener){
         el.addEventListener(eventName, eventHandler, false);
-    } elseif (el.attachEvent){
+    } else if (el.attachEvent){
         el.attachEvent('on'+eventName, eventHandler);
     }
 }

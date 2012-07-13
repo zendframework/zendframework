@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<article xml:id="learning.di"><title>Learning Dependency Injection</title>
+<article xmlns="http://docbook.org/ns/docbook" xml:id="learning.di"><title>Learning Dependency Injection</title>
 
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.di.very-brief-introduction-to-di">
   <title>Very brief introduction to Di.</title>
@@ -26,13 +26,13 @@ $b = new B(new A));
     on DI</link>.
   </para>
 </section>
-<section xml:id="learning.di.very-brief-introduction-to-di-container"><title>Very brief introduction to Di Container.</title>
+<section xmlns="http://docbook.org/ns/docbook" xml:id="learning.di.very-brief-introduction-to-di-container"><title>Very brief introduction to Di Container.</title>
   
   <programlisting language="php"><![CDATA[
 TBD.
 ]]></programlisting>
 </section>
-<section xml:id="learning.di.simplest-usage-case-2-classes-one-consumes-the-other"><title>Simplest usage case (2 classes, one consumes the other)</title>
+<section xmlns="http://docbook.org/ns/docbook" xml:id="learning.di.simplest-usage-case-2-classes-one-consumes-the-other"><title>Simplest usage case (2 classes, one consumes the other)</title>
   
   <para>
     In the simplest use case, a developer might have one class
@@ -206,7 +206,7 @@ namespace My {
     based injection.
   </para>
 </section>
-<section xml:id="learning.di.simplest-usage-case-without-type-hints"><title>Simplest Usage Case Without Type-hints</title>
+<section xmlns="http://docbook.org/ns/docbook" xml:id="learning.di.simplest-usage-case-without-type-hints"><title>Simplest Usage Case Without Type-hints</title>
   
   <para>
     If your code does not have type-hints or you are using 3rd party
@@ -301,7 +301,7 @@ $c = $di->get('My\C', $parameters);
     objects you might require.
   </para>
 </section>
-<section xml:id="learning.di.simplest-usage-case-with-compiled-definition"><title>Simplest usage case with Compiled Definition</title>
+<section xmlns="http://docbook.org/ns/docbook" xml:id="learning.di.simplest-usage-case-with-compiled-definition"><title>Simplest usage case with Compiled Definition</title>
   
   <para>
     Without going into the gritty details, as you might expect, PHP at
@@ -431,7 +431,7 @@ if (!file_exists(__DIR__ . '/di-definition.php') && $isProduction) {
     of your application's dispatched actions.
   </para>
 </section>
-<section xml:id="learning.di.creating-a-precompiled-definition-for-others-to-use"><title>Creating a precompiled definition for others to use</title>
+<section xmlns="http://docbook.org/ns/docbook" xml:id="learning.di.creating-a-precompiled-definition-for-others-to-use"><title>Creating a precompiled definition for others to use</title>
   
   <para>
     If you are a 3rd party code developer, it makes sense to produce a
@@ -463,7 +463,7 @@ $class->setMethod(array(
 file_put_contents(__DIR__ . '/My/DiDefinition.php', $codeGenerator->generate());
 ]]></programlisting>
 </section>
-<section xml:id="learning.di.using-multiple-definitions-from-multiple-sources"><title>Using Multiple Definitions From Multiple Sources</title>
+<section xmlns="http://docbook.org/ns/docbook" xml:id="learning.di.using-multiple-definitions-from-multiple-sources"><title>Using Multiple Definitions From Multiple Sources</title>
   
   <para>
     In all actuality, you will be using code from multiple places, some
@@ -518,7 +518,7 @@ $propertiesFromConfig = array(
 $im->setProperties($propertiesFromConfig);
 ]]></programlisting>
 </section>
-<section xml:id="learning.di.generating-service-locators"><title>Generating Service Locators</title>
+<section xmlns="http://docbook.org/ns/docbook" xml:id="learning.di.generating-service-locators"><title>Generating Service Locators</title>
     
 
     <para>

@@ -554,15 +554,6 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.registry"><title>Zend_Registry</title>-->
-            <!---->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Registry.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_Registry.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
-        <!--</chapter>-->
-
         <!--<chapter xml:id="zend.rest"><title>Zend_Rest</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Rest.xml" parse="xml">-->
@@ -917,25 +908,6 @@
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Tag_Cloud.xml" parse="xml">-->
                 <!--<xi:fallback>-->
                     <!--<xi:include href="../en/module_specs/Zend_Tag_Cloud.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
-        <!--</chapter>-->
-
-        <!--<chapter xml:id="zend.test"><title>Zend_Test</title>-->
-            <!---->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Test.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_Test.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Test-PHPUnit.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_Test-PHPUnit.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Test-PHPUnit-Db.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_Test-PHPUnit-Db.xml" parse="xml"/>-->
                 <!--</xi:fallback>-->
             <!--</xi:include>-->
         <!--</chapter>-->

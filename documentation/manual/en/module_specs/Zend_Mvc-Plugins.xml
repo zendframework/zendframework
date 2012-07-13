@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<section 
+<section
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.controller-plugins">
   <title>Controller Plugins</title>
@@ -29,6 +29,12 @@
     <listitem>
       <para>
         <classname>Zend\Mvc\Controller\Plugin\Forward</classname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <classname>Zend\Mvc\Controller\Plugin\PostRedirectGet</classname>
       </para>
     </listitem>
 
@@ -257,6 +263,30 @@ return array(
     'foo'     => $foo,
 );
 ]]></programlisting>
+  </section>
+
+  <section xml:id="zend.mvc.controller-plugins.postredirectget">
+    <title>The Post/Redirect/Get Plugin</title>
+
+    <para>
+      When a user POSTs data to a page, their browser will try to protect them
+      from sending the POST again, breaking the back button and causing browser
+      warning pop-ups. Instead, when receiving a POST, we should store the data
+      and redirect the user to a page using a GET request. For this, we will use
+      the FlashMessenger plugin to store data across requests.
+    </para>
+
+    <para>
+      This plugin can be invoked with one argument:
+    </para>
+
+    <listitem>
+      <para>
+        <varname>$redirect</varname> is a string containing either the name of the
+        named route or the URL the user should be directed to. The plugin will try
+        to match a route before redirecting to a URL.
+      </para>
+    </listitem>
   </section>
 
   <section xml:id="zend.mvc.controller-plugins.redirect">

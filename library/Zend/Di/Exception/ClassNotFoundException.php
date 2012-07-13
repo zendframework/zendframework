@@ -12,6 +12,10 @@ namespace Zend\Di\Exception;
 
 use DomainException;
 
+/**
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class ClassNotFoundException extends DomainException implements ExceptionInterface
 {
 }

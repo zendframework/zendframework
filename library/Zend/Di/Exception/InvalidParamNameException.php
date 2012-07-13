@@ -10,6 +10,10 @@
 
 namespace Zend\Di\Exception;
 
+/**
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class InvalidParamNameException extends InvalidArgumentException
 {
 }

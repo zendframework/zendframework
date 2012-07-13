@@ -12,6 +12,12 @@ namespace Zend\Di\Display;
 
 use Zend\Di\Di;
 
+/**
+ * Exporter for class definitions
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class Console
 {
 
@@ -21,15 +27,15 @@ class Console
     protected $di = null;
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $runtimeClasses = array();
 
     /**
      * Export
      *
-     * @param Di $di
-     * @param array $runtimeClasses
+     * @param  Di    $di
+     * @param  array $runtimeClasses
      * @return void
      */
     public static function export(Di $di, array $runtimeClasses = array())
@@ -49,6 +55,9 @@ class Console
         $this->di = ($di) ?: new Di;
     }
 
+    /**
+     * @param string[] $runtimeClasses
+     */
     public function addRuntimeClasses(array $runtimeClasses)
     {
         foreach ($runtimeClasses as $runtimeClass) {
@@ -56,11 +65,13 @@ class Console
         }
     }
 
+    /**
+     * @param string $runtimeClass
+     */
     public function addRuntimeClass($runtimeClass)
     {
         $this->runtimeClasses[] = $runtimeClass;
     }
-
 
     public function render()
     {
@@ -88,7 +99,6 @@ class Console
             $definition = $this->di->definitions()->getDefinitionForClass($runtimeClass);
             $this->renderClassDefinition($definition, $runtimeClass);
         }
-
 
         echo PHP_EOL . 'Instance Configuration Info:' . PHP_EOL;
 
@@ -130,6 +140,9 @@ class Console
 
     }
 
+    /**
+     * @param object $definition
+     */
     protected function renderDefinition($definition)
     {
         echo '  Definition Type: ' . get_class($definition) . PHP_EOL;
@@ -147,6 +160,10 @@ class Console
         }
     }
 
+    /**
+     * @param \Zend\Di\Definition\DefinitionInterface $definition
+     * @param string                                  $class
+     */
     protected function renderClassDefinition($definition, $class)
     {
         echo PHP_EOL . '    Parameters For Class: ' . $class . PHP_EOL;

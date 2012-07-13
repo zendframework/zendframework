@@ -163,7 +163,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     /**
      * Get parent reflection class of reflected class
      *
-     * @return \Zend\Code\Reflection\ReflectionClass
+     * @return \Zend\Code\Reflection\ClassReflection|bool
      */
     public function getParentClass()
     {
@@ -172,9 +172,9 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
             $zendReflection = new ClassReflection($phpReflection->getName());
             unset($phpReflection);
             return $zendReflection;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

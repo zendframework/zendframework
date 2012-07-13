@@ -24,25 +24,6 @@ use Zend\View\Helper\AbstractHelper;
 class Translate extends AbstractHelper
 {
     /**
-     * Translator instance.
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
-     * Set translator.
-     *
-     * @param  Translator $translator
-     * @return Translate
-     */
-    public function setTranslator(Translator $translator)
-    {
-        $this->translator = $translator;
-        return $this;
-    }
-
-    /**
      * Translate a message.
      *
      * @param  string $message
@@ -53,10 +34,10 @@ class Translate extends AbstractHelper
      */
     public function __invoke($message, $textDomain = 'default', $locale = null)
     {
-        if ($this->translator === null) {
+        $translator = $this->getTranslator();
+        if (null !== $translator) {
             throw new Exception\RuntimeException('Translator has not been set');
         }
-
-        return $this->translator->translate($message, $textDomain, $locale);
+        return $translator->translate($message, $textDomain, $locale);
     }
 }

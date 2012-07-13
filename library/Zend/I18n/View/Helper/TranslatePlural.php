@@ -24,25 +24,6 @@ use Zend\View\Helper\AbstractHelper;
 class TranslatePlural extends AbstractHelper
 {
     /**
-     * Translator instance.
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
-     * Set translator.
-     *
-     * @param  Translator $translator
-     * @return Translate
-     */
-    public function setTranslator(Translator $translator)
-    {
-        $this->translator = $translator;
-        return $this;
-    }
-
-    /**
      * Translate a plural message.
      *
      * @param  string  $singular
@@ -60,10 +41,10 @@ class TranslatePlural extends AbstractHelper
         $textDomain = 'default',
         $locale = null
     ) {
-        if ($this->translator === null) {
+        $translator = $this->getTranslator();
+        if (null !== $translator) {
             throw new Exception\RuntimeException('Translator has not been set');
         }
-
-        return $this->translator->translatePlural($singular, $plural, $number, $textDomain, $locale);
+        return $translator->translatePlural($singular, $plural, $number, $textDomain, $locale);
     }
 }

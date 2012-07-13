@@ -16,5 +16,13 @@ namespace Zend\Di;
  */
 interface ServiceLocatorInterface extends LocatorInterface
 {
+    /**
+     * Register a service with the locator
+     *
+     * @abstract
+     * @param string $name
+     * @param mixed $service
+     * @return ServiceLocatorInterface
+     */
     public function set($name, $service);
 }

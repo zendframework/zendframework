@@ -20,9 +20,14 @@ use Zend\Code\Annotation\AnnotationInterface;
  */
 class Instantiator implements AnnotationInterface
 {
-
+    /**
+     * @var mixed
+     */
     protected $content = null;
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize($content)
     {
         $this->content = $content;

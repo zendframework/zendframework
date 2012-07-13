@@ -27,7 +27,7 @@ class Console
     protected $di = null;
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $runtimeClasses = array();
 
@@ -55,6 +55,9 @@ class Console
         $this->di = ($di) ?: new Di;
     }
 
+    /**
+     * @param string[] $runtimeClasses
+     */
     public function addRuntimeClasses(array $runtimeClasses)
     {
         foreach ($runtimeClasses as $runtimeClass) {
@@ -62,6 +65,9 @@ class Console
         }
     }
 
+    /**
+     * @param string $runtimeClass
+     */
     public function addRuntimeClass($runtimeClass)
     {
         $this->runtimeClasses[] = $runtimeClass;
@@ -134,6 +140,9 @@ class Console
 
     }
 
+    /**
+     * @param object $definition
+     */
     protected function renderDefinition($definition)
     {
         echo '  Definition Type: ' . get_class($definition) . PHP_EOL;
@@ -151,6 +160,10 @@ class Console
         }
     }
 
+    /**
+     * @param \Zend\Di\Definition\DefinitionInterface $definition
+     * @param string $class
+     */
     protected function renderClassDefinition($definition, $class)
     {
         echo PHP_EOL . '    Parameters For Class: ' . $class . PHP_EOL;

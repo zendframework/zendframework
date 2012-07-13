@@ -60,6 +60,9 @@ class CompilerDefinition implements DefinitionInterface
         $this->introspectionStrategy = $introspectionStrategy;
     }
 
+    /**
+     * @param bool $allowReflectionExceptions
+     */
     public function setAllowReflectionExceptions($allowReflectionExceptions = true)
     {
         $this->allowReflectionExceptions = (bool) $allowReflectionExceptions;
@@ -124,6 +127,9 @@ class CompilerDefinition implements DefinitionInterface
         }
     }
 
+    /**
+     * @return ArrayDefinition
+     */
     public function toArrayDefinition()
     {
         return new ArrayDefinition(
@@ -131,6 +137,10 @@ class CompilerDefinition implements DefinitionInterface
         );
     }
 
+    /**
+     * @param string $class
+     * @throws \ReflectionException
+     */
     protected function processClass($class)
     {
         $strategy = $this->introspectionStrategy; // localize for readability
@@ -168,6 +178,7 @@ class CompilerDefinition implements DefinitionInterface
             }
         }
 
+        /* @var $rTarget \Zend\Code\Reflection\ClassReflection */
         $rTarget = $rClass;
         $supertypes = array();
         do {
@@ -261,6 +272,11 @@ class CompilerDefinition implements DefinitionInterface
         }
     }
 
+    /**
+     * @param array $def
+     * @param \Zend\Code\Reflection\ClassReflection  $rClass
+     * @param \Zend\Code\Reflection\MethodReflection $rMethod
+     */
     protected function processParams(&$def, Reflection\ClassReflection $rClass, Reflection\MethodReflection $rMethod)
     {
         if (count($rMethod->getParameters()) === 0) {
@@ -447,7 +463,7 @@ class CompilerDefinition implements DefinitionInterface
     /**
      * Return nothing
      *
-     * @return array
+     * @return string[]
      */
     public function getClasses()
     {
@@ -469,7 +485,7 @@ class CompilerDefinition implements DefinitionInterface
      * Return the supertypes for this class
      *
      * @param  string $class
-     * @return array  of types
+     * @return string[] of types
      */
     public function getClassSupertypes($class)
     {
@@ -484,7 +500,7 @@ class CompilerDefinition implements DefinitionInterface
      * Get the instantiator
      *
      * @param  string          $class
-     * @return string|\Callable
+     * @return array|\Callable|string
      */
     public function getInstantiator($class)
     {
@@ -530,7 +546,7 @@ class CompilerDefinition implements DefinitionInterface
      * Return an array of the injection methods
      *
      * @param  string $class
-     * @return array
+     * @return string[]
      */
     public function getMethods($class)
     {

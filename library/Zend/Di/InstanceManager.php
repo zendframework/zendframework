@@ -71,6 +71,7 @@ class InstanceManager /* implements InstanceManagerInterface */
 
     /**
      * Does this instance manager have this shared instance
+     * @param string $classOrAlias
      * @return bool
      */
     public function hasSharedInstance($classOrAlias)
@@ -147,6 +148,14 @@ class InstanceManager /* implements InstanceManagerInterface */
         $this->sharedInstancesWithParams['hashLong'][$hashKey . '/' . $hashValue] = $instance;
     }
 
+    /**
+     * Retrieves an instance by its name and the parameters stored at its instantiation
+     *
+     * @param string $classOrAlias
+     * @param array $params
+     * @param bool|null $fastHashFromHasLookup
+     * @return object|bool false if no instance was found
+     */
     public function getSharedInstanceWithParameters($classOrAlias, array $params, $fastHashFromHasLookup = null)
     {
         if ($fastHashFromHasLookup) {
@@ -212,6 +221,11 @@ class InstanceManager /* implements InstanceManagerInterface */
         return $alias;
     }
 
+    /**
+     * @param string $alias
+     * @return string|bool
+     * @throws Exception\RuntimeException
+     */
     protected function getBaseAlias($alias)
     {
         if (!$this->hasAlias($alias)) {
@@ -274,6 +288,13 @@ class InstanceManager /* implements InstanceManagerInterface */
         return true;
     }
 
+    /**
+     * Sets configuration for a single alias/class
+     *
+     * @param string $aliasOrClass
+     * @param array $configuration
+     * @param bool $append
+     */
     public function setConfiguration($aliasOrClass, array $configuration, $append = false)
     {
         $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
@@ -305,6 +326,10 @@ class InstanceManager /* implements InstanceManagerInterface */
         return $classes;
     }
 
+    /**
+     * @param string $aliasOrClass
+     * @return array
+     */
     public function getConfiguration($aliasOrClass)
     {
         $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
@@ -319,7 +344,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      * setParameters() is a convenience method for:
      *    setConfiguration($type, array('parameters' => array(...)), true);
      *
-     * @param  string $type       Alias or Class
+     * @param string $aliasOrClass Alias or Class
      * @param  array  $parameters Multi-dim array of parameters and their values
      * @return void
      */
@@ -332,8 +357,8 @@ class InstanceManager /* implements InstanceManagerInterface */
      * setInjections() is a convenience method for:
      *    setConfiguration($type, array('injections' => array(...)), true);
      *
-     * @param  string $type    Alias or Class
-     * @param  array  $methods Multi-dim array of methods and their parameters
+     * @param string $aliasOrClass Alias or Class
+     * @param array $injections Multi-dim array of methods and their parameters
      * @return void
      */
     public function setInjections($aliasOrClass, array $injections)
@@ -411,6 +436,14 @@ class InstanceManager /* implements InstanceManagerInterface */
         unset($this->typePreferences[$key]);
     }
 
+    /**
+     * Adds a type preference. A type preference is a redirection to a preferred alias or type when an abstract type
+     * $interfaceOrAbstract is requested
+     *
+     * @param string $interfaceOrAbstract
+     * @param string $preferredImplementation
+     * @return self
+     */
     public function addTypePreference($interfaceOrAbstract, $preferredImplementation)
     {
         $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
@@ -422,6 +455,13 @@ class InstanceManager /* implements InstanceManagerInterface */
         return $this;
     }
 
+    /**
+     * Removes a previously set type preference
+     *
+     * @param string $interfaceOrAbstract
+     * @param string $preferredType
+     * @return bool|self
+     */
     public function removeTypePreference($interfaceOrAbstract, $preferredType)
     {
         $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
@@ -433,11 +473,21 @@ class InstanceManager /* implements InstanceManagerInterface */
         return $this;
     }
 
+    /**
+     * @param string $classOrAlias
+     * @param string[] $paramKeys
+     * @return string
+     */
     protected function createHashForKeys($classOrAlias, $paramKeys)
     {
         return $classOrAlias . ':' . implode('|', $paramKeys);
     }
 
+    /**
+     * @param string $classOrAlias
+     * @param array $paramValues
+     * @return string
+     */
     protected function createHashForValues($classOrAlias, $paramValues)
     {
         $hashValue = '';

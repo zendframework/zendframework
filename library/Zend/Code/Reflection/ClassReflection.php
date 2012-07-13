@@ -163,7 +163,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     /**
      * Get parent reflection class of reflected class
      *
-     * @return \Zend\Code\Reflection\ReflectionClass
+     * @return \Zend\Code\Reflection\ClassReflection
      */
     public function getParentClass()
     {

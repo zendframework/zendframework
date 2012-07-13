@@ -66,6 +66,10 @@ class Configuration
 
     }
 
+    /**
+     * @param Di $di
+     * @param array $definition
+     */
     public function configureDefinition(Di $di, $definition)
     {
         foreach ($definition as $definitionType => $definitionData) {
@@ -89,9 +93,11 @@ class Configuration
                         $definitions = new DefinitionList($definitions);
                         $di->setDefinitionList($definitions);
                     } elseif (isset($definitionData['use_annotations']) && $definitionData['use_annotations']) {
-                        $di->definitions()->getDefinitionByType('\Zend\Di\Definition\RuntimeDefinition')
-                            ->getIntrospectionStrategy()
-                            ->setUseAnnotations(true);
+                        /* @var $runtimeDefinition Definition\RuntimeDefinition */
+                        $runtimeDefinition = $di
+                            ->definitions()
+                            ->getDefinitionByType('\Zend\Di\Definition\RuntimeDefinition');
+                        $runtimeDefinition->getIntrospectionStrategy()->setUseAnnotations(true);
                     }
                     break;
                 case 'class':
@@ -145,6 +151,12 @@ class Configuration
 
     }
 
+    /**
+     * Configures a given Di instance
+     *
+     * @param Di $di
+     * @param $instanceData
+     */
     public function configureInstance(Di $di, $instanceData)
     {
         $im = $di->instanceManager();

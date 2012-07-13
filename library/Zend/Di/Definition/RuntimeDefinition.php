@@ -88,6 +88,9 @@ class RuntimeDefinition implements DefinitionInterface
         $this->classes = $explicitClasses;
     }
 
+    /**
+     * @param string $class
+     */
     public function forceLoadClass($class)
     {
         $this->processClass($class);
@@ -96,7 +99,7 @@ class RuntimeDefinition implements DefinitionInterface
     /**
      * Retrieves registered classes names
      *
-     * @return array
+     * @return string[]
      */
     public function getClasses()
     {
@@ -122,7 +125,7 @@ class RuntimeDefinition implements DefinitionInterface
      * Return the supertypes for this class
      *
      * @param  string $class
-     * @return array  of types
+     * @return string[] of types
      */
     public function getClassSupertypes($class)
     {
@@ -137,7 +140,7 @@ class RuntimeDefinition implements DefinitionInterface
      * Get the instantiator
      *
      * @param  string          $class
-     * @return string|\Callable
+     * @return array|\Callable|string
      */
     public function getInstantiator($class)
     {
@@ -183,7 +186,7 @@ class RuntimeDefinition implements DefinitionInterface
      * Return an array of the injection methods
      *
      * @param  string $class
-     * @return array
+     * @return string[]
      */
     public function getMethods($class)
     {
@@ -231,6 +234,9 @@ class RuntimeDefinition implements DefinitionInterface
         return $this->classes[$class]['parameters'][$method];
     }
 
+    /**
+     * @param string $class
+     */
     protected function processClass($class)
     {
         $strategy = $this->introspectionStrategy; // localize for readability
@@ -344,6 +350,11 @@ class RuntimeDefinition implements DefinitionInterface
         }
     }
 
+    /**
+     * @param array $def
+     * @param \Zend\Code\Reflection\ClassReflection $rClass
+     * @param \Zend\Code\Reflection\MethodReflection $rMethod
+     */
     protected function processParams(&$def, Reflection\ClassReflection $rClass, Reflection\MethodReflection $rMethod)
     {
         if (count($rMethod->getParameters()) === 0) {

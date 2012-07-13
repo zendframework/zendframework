@@ -47,11 +47,7 @@ class ServiceLocator implements ServiceLocatorInterface
     protected $services = array();
 
     /**
-     * Register a service with the locator
-     *
-     * @param  string         $name
-     * @param  mixed          $service
-     * @return ServiceLocator
+     * {@inheritDoc}
      */
     public function set($name, $service)
     {

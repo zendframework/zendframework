@@ -89,7 +89,7 @@ interface DefinitionInterface
      * @abstract
      * @param $class
      * @param $method
-     * @return array[]
+     * @return array
      */
     public function getMethodParameters($class, $method);
 }

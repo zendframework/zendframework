@@ -20,7 +20,9 @@ use SplDoublyLinkedList;
  */
 class DefinitionList extends SplDoublyLinkedList implements Definition\DefinitionInterface
 {
-
+    /**
+     * @param Definition\DefinitionInterface[] $definitions
+     */
     public function __construct($definitions)
     {
         if (!is_array($definitions)) {
@@ -80,6 +82,10 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         return false;
     }
 
+    /**
+     * @param string $class
+     * @return bool|Definition\DefinitionInterface
+     */
     public function getDefinitionForClass($class)
     {
         /** @var $definition Definition\DefinitionInterface */
@@ -92,15 +98,17 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         return false;
     }
 
+    /**
+     * @param string $class
+     * @return bool|Definition\DefinitionInterface
+     */
     public function forClass($class)
     {
         return $this->getDefinitionForClass($class);
     }
 
     /**
-     * Get classes
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getClasses()
     {
@@ -114,10 +122,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
     }
 
     /**
-     * Check for class
-     *
-     * @param  string $class
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasClass($class)
     {
@@ -131,6 +136,9 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getClassSupertypes($class)
     {
         $supertypes = array();
@@ -142,6 +150,9 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         return $supertypes;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getInstantiator($class)
     {
         /** @var $definition Definition\DefinitionInterface */
@@ -160,10 +171,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
     }
 
     /**
-     * Check for methods
-     *
-     * @param  string $class
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethods($class)
     {
@@ -182,11 +190,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
     }
 
     /**
-     * Check for method
-     *
-     * @param  string $class
-     * @param  string $method
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethod($class, $method)
     {
@@ -205,10 +209,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
     }
 
     /**
-     * Get methods
-     *
-     * @param  string $class
-     * @return array|
+     * {@inheritDoc}
      */
     public function getMethods($class)
     {
@@ -227,6 +228,9 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         return $methods;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function hasMethodParameters($class, $method)
     {
         $methodParameters = $this->getMethodParameters($class, $method);
@@ -234,6 +238,9 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
         return ($methodParameters !== array());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getMethodParameters($class, $method)
     {
         /** @var $definition Definition\DefinitionInterface */

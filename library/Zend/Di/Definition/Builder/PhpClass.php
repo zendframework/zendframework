@@ -18,10 +18,29 @@ namespace Zend\Di\Definition\Builder;
  */
 class PhpClass
 {
+    /**
+     * @var string
+     */
     protected $defaultMethodBuilder = 'Zend\Di\Definition\Builder\InjectionMethod';
+
+    /**
+     * @var null|string
+     */
     protected $name                 = null;
+
+    /**
+     * @var string|\Callable|array
+     */
     protected $instantiator         = '__construct';
+
+    /**
+     * @var InjectionMethod[]
+     */
     protected $injectionMethods     = array();
+
+    /**
+     * @var array
+     */
     protected $superTypes           = array();
 
     /**
@@ -47,6 +66,10 @@ class PhpClass
         return $this->name;
     }
 
+    /**
+     * @param string|\Callable|array $instantiator
+     * @return PhpClass
+     */
     public function setInstantiator($instantiator)
     {
         $this->instantiator = $instantiator;
@@ -54,11 +77,18 @@ class PhpClass
         return $this;
     }
 
+    /**
+     * @return array|\Callable|string
+     */
     public function getInstantiator()
     {
         return $this->instantiator;
     }
 
+    /**
+     * @param string $superType
+     * @return PhpClass
+     */
     public function addSuperType($superType)
     {
         $this->superTypes[] = $superType;
@@ -104,6 +134,7 @@ class PhpClass
     public function createInjectionMethod($name = null)
     {
         $builder = $this->defaultMethodBuilder;
+        /* @var $method InjectionMethod */
         $method  = new $builder();
         if (null !== $name) {
             $method->setName($name);
@@ -138,6 +169,9 @@ class PhpClass
         return $this->defaultMethodBuilder;
     }
 
+    /**
+     * @return InjectionMethod[]
+     */
     public function getInjectionMethods()
     {
         return $this->injectionMethods;

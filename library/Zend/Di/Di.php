@@ -79,8 +79,8 @@ class Di implements DependencyInjectionInterface
     }
 
     /**
-     * @param  DefinitionList $definition
-     * @return Di
+     * @param DefinitionList $definitions
+     * @return self
      */
     public function setDefinitionList(DefinitionList $definitions)
     {
@@ -267,6 +267,15 @@ class Di implements DependencyInjectionInterface
         $this->handleInjectDependencies($instance, $injectionMethods, $params, $class, null, null);
     }
 
+    /**
+     * @param object $instance
+     * @param array $injectionMethods
+     * @param array $params
+     * @param string|null $instanceClass
+     * @param string|null$instanceAlias
+     * @param string $requestedName
+     * @throws Exception\RuntimeException
+     */
     protected function handleInjectDependencies($instance, $injectionMethods, $params, $instanceClass, $instanceAlias, $requestedName)
     {
         // localize dependencies
@@ -417,10 +426,12 @@ class Di implements DependencyInjectionInterface
      * This parameter will handle any injection methods and resolution of
      * dependencies for such methods
      *
-     * @param  object $object
-     * @param  string $method
-     * @param  array  $params
-     * @param  string $alias
+     * @param object $instance
+     * @param string $method
+     * @param array  $params
+     * @param string $alias
+     * @param bool $methodIsRequired
+     * @param string|null $methodClass
      * @return bool
      */
     protected function resolveAndCallInjectionMethodForInstance($instance, $method, $params, $alias, $methodIsRequired, $methodClass = null)
@@ -707,7 +718,7 @@ class Di implements DependencyInjectionInterface
      * @see https://github.com/zendframework/zf2/pull/1807
      *
      * @param string $className
-     * @param string $type
+     * @param $type
      * @return bool
      */
     protected static function isSubclassOf($className, $type)

@@ -422,4 +422,15 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Mime\Decode::splitHeaderField($header, 'foo'), 'bar');
         $this->assertEquals(Mime\Decode::splitHeaderField($header, 'baz'), 42);
     }
+       
+    public function testStrictParseMessage()
+    {        
+        try {
+            $message = new Message(array('file' => $this->_file, 'strict' => true));
+        } catch (Exception\RuntimeException $e) {
+            return; // ok
+        }
+
+        $this->fail('no exception raised while creating message from file strictly');
+    }
 }

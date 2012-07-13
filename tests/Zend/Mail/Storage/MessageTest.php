@@ -425,12 +425,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
        
     public function testStrictParseMessage()
     {        
-        try {
-            $message = new Message(array('file' => $this->_file, 'strict' => true));
-        } catch (Exception\RuntimeException $e) {
-            return; // ok
-        }
-
-        $this->fail('no exception raised while creating message from file strictly');
+        $this->setExpectedException('Zend\\Mail\\Exception\\RuntimeException');
+        $message = new Message(array('file' => $this->_file, 'strict' => true));
     }
 }

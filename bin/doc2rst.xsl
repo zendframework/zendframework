@@ -69,7 +69,7 @@
 
 <!-- programlisting -->
 <xsl:template match="//doc:programlisting">
-<xsl:value-of select="php:function('ZendBin\RstConvert::programlisting', string(.))" />
+<xsl:value-of select="php:function('ZendBin\RstConvert::programlisting', string(.), string(@xml:lang|@language))" />
 </xsl:template>
 
 <!-- varlistentry -->

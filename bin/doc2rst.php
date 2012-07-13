@@ -142,12 +142,13 @@ class RstConvert
      * Convert the programlisting tag
      *
      * @param  string $text
+     * @param  string $language
      * @return string
      */
-    public static function programlisting($text)
+    public static function programlisting($text, $language = 'php')
     {
         $rows   = explode("\n", $text);
-        $output = "\n.. code-block:: php\n    :linenos:\n";
+        $output = "\n.. code-block:: $language\n    :linenos:\n";
         foreach ($rows as $row) {
             $output .= "    $row\n";
         }

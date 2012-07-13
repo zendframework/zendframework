@@ -233,7 +233,7 @@ class RstConvert
      * @return string
      */
     public static function formatText($text) {
-        return str_replace('\\', '\\\\', preg_replace('/\s+/m', ' ', preg_replace('/([\.:])\s*[\r\n]\s*$/', '$1', $text)));
+        return str_replace('\\', '\\\\', preg_replace('/\s+/m', ' ', preg_replace('/(([\.:])|^\s([A-Z0-9]))\s*[\r\n]\s*$/', '$2$3', $text)));
     }
 
     /**

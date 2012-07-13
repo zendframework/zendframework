@@ -422,4 +422,13 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Mime\Decode::splitHeaderField($header, 'foo'), 'bar');
         $this->assertEquals(Mime\Decode::splitHeaderField($header, 'baz'), 42);
     }
+       
+    public function testStrictParseMessage()
+    {
+        $this->setExpectedException('Zend\\Mail\\Exception\\RuntimeException');
+
+        $raw = file_get_contents($this->_file);
+        $raw = "From foo@example.com  Sun Jan 01 00:00:00 2000\n" . $raw;
+        $message = new Message(array('raw' => $raw, 'strict' => true));
+    }
 }

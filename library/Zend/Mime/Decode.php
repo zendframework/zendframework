@@ -100,9 +100,10 @@ class Decode
      * @param  Headers         $headers output param, headers container
      * @param  string          $body    output param, content of message
      * @param  string          $EOL EOL string; defaults to {@link Zend_Mime::LINEEND}
+     * @param  boolean         $strict  enable strict mode for parsing message
      * @return null
      */
-    public static function splitMessage($message, &$headers, &$body, $EOL = Mime::LINEEND)
+    public static function splitMessage($message, &$headers, &$body, $EOL = Mime::LINEEND, $strict = false)
     {
         if ($message instanceof Headers) {
             $message = $message->toString();
@@ -114,6 +115,14 @@ class Decode
             // TODO: we're ignoring \r for now - is this function fast enough and is it safe to asume noone needs \r?
             $body = str_replace(array("\r", "\n"), array('', $EOL), $message);
             return;
+        }
+
+        // see @ZF2-372, pops the first line off a message if it doesn't contain a header
+        if (!$strict) {
+            $parts = explode(': ', $firstline, 2);
+            if (count($parts) != 2) {
+                $message = substr($message, strpos($message, $EOL)+1);
+            }
         }
 
         // find an empty line between headers and body

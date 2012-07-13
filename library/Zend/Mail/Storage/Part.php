@@ -80,6 +80,7 @@ class Part implements RecursiveIterator, Part\PartInterface
      * - headers    headers as array (name => value) or string, if a content part is found it's used as toplines
      * - noToplines ignore content found after headers in param 'headers'
      * - content    content as string
+     * - strict     strictly parse raw content
      *
      * @param   array $params  full message with or without headers
      * @throws Exception\InvalidArgumentException
@@ -97,9 +98,11 @@ class Part implements RecursiveIterator, Part\PartInterface
             $this->_mail       = $params['handler'];
             $this->_messageNum = $params['id'];
         }
+        
+        $params['strict'] = isset($params['strict']) ? $params['strict'] : false;
 
         if (isset($params['raw'])) {
-            Mime\Decode::splitMessage($params['raw'], $this->_headers, $this->_content);
+            Mime\Decode::splitMessage($params['raw'], $this->_headers, $this->_content, Mime\Mime::LINEEND, $params['strict']);
         } elseif (isset($params['headers'])) {
             if (is_array($params['headers'])) {
                 $this->_headers = new Headers();

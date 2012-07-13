@@ -389,7 +389,7 @@ class Curl implements HttpAdapter, StreamInterface
         } elseif ($method == 'PUT') {
             // This is a PUT by a setRawData string, not by file-handle
             curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
-        } else if ($method == 'PATCH') {
+        } elseif ($method == 'PATCH') {
             curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
         }
 

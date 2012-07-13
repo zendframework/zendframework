@@ -145,8 +145,9 @@ class RstConvert
      * @param  string $language
      * @return string
      */
-    public static function programlisting($text, $language = 'php')
+    public static function programlisting($text, $language)
     {
+        $language = ($language)?:'php';
         $rows   = explode("\n", $text);
         $output = "\n.. code-block:: $language\n    :linenos:\n";
         foreach ($rows as $row) {

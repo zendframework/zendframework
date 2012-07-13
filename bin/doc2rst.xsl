@@ -107,9 +107,11 @@
 
 <!-- table -->
 <xsl:template match="//doc:table">
+<xsl:if test="@xml:id != ''">
 .. _<xsl:value-of select="@xml:id" />:
 <xsl:text>
 </xsl:text>
+</xsl:if>
 <xsl:value-of select="php:function('ZendBin\RstConvert::title', string(doc:title))" />
 <xsl:value-of select="php:function('ZendBin\RstConvert::table', doc:tgroup)" />
 </xsl:template>

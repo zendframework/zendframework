@@ -10,7 +10,6 @@
 
 namespace Zend\Log\Writer;
 
-use FB;
 use FirePhp as FirePhpInstance;
 use Zend\Log\Formatter\FirePhp as FirePhpFormatter;
 use Zend\Log\Logger;

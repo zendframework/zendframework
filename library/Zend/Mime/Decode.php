@@ -116,6 +116,12 @@ class Decode
             return;
         }
 
+        // see @ZF2-372, pops the first line off a message if it doesn't contain a header
+        $parts = explode(': ', $firstline, 2);
+        if (count($parts) != 2) {
+            $message = substr($message, strpos($message, $EOL)+1);
+        }
+
         // find an empty line between headers and body
         // default is set new line
         if (strpos($message, $EOL . $EOL)) {

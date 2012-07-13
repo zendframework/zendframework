@@ -10,6 +10,8 @@
 
 namespace Zend\Log\Writer;
 
+use FB;
+use FirePhp as FirePhpInstance;
 use Zend\Log\Formatter\FirePhp as FirePhpFormatter;
 use Zend\Log\Logger;
 
@@ -21,18 +23,23 @@ use Zend\Log\Logger;
 class FirePhp extends AbstractWriter
 {
     /**
-     * Whether or not the writer is enabled.
+     * The instance of FirePhp that is used to log messages to.
      * 
-     * @var bool
+     * @var FB
      */
-    private $enabled;
+    private $firephp;
 
     /**
      * Initializes a new instance of this class.
      */
-    public function __construct()
+    public function __construct(FirePhpInstance $instance = null)
     {
-        $this->enabled = true;
+        if ($instance === null) {
+            $this->firephp = FirePhpInstance::getInstance(true);
+        } else {
+            $this->firephp = $instance;
+        }
+        
         $this->formatter = new FirePhpFormatter();
     }
 
@@ -44,7 +51,7 @@ class FirePhp extends AbstractWriter
      */
     protected function doWrite(array $event)
     {
-        if (!$this->isEnabled()) {
+        if (!$this->firephp->getEnabled()) {
             return;
         }
 
@@ -55,43 +62,43 @@ class FirePhp extends AbstractWriter
             case Logger::ALERT:
             case Logger::CRIT:
             case Logger::ERR:
-                \FB::error($line);
+                $this->firephp->error($line);
                 break;
             case Logger::WARN:
-                \FB::warn($line);
+                $this->firephp->warn($line);
                 break;
             case Logger::NOTICE:
             case Logger::INFO:
-                \FB::info($line);
+                $this->firephp->info($line);
                 break;
             case Logger::DEBUG:
-                \FB::trace($line);
+                $this->firephp->trace($line);
                 break;
             default:
-                \FB::log($line);
+                $this->firephp->log($line);
                 break;
         }
     }
 
     /**
-     * Checks whether or not the writer is enabled.
+     * Gets the FirePhp instance that is used for logging.
      * 
-     * @return bool
+     * @return FirePhpInstance
      */
-    public function isEnabled()
+    public function getFirePhp()
     {
-        return $this->enabled;
+        return $this->firephp;
     }
 
     /**
-     * Enables or disables the writer.
+     * Sets the FirePhp instance that is used for logging.
      * 
-     * @param bool $enabled The flag to set.
+     * @param FirePhpInstance $instance The FirePhp instance to set.
      * @return FirePhp
      */
-    public function setEnabled($enabled)
+    public function setFirePhp(FirePhpInstance $instance)
     {
-        $this->enabled = $enabled;
+        $this->firephp = $instance;
         return $this;
     }
 

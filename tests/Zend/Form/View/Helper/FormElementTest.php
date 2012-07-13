@@ -111,9 +111,9 @@ class FormElementTest extends TestCase
         $element = new Element\MultiCheckbox('foo');
         $element->setAttribute('type', $type);
         $element->setAttribute('options', array(
-            'option' => 'value1',
-            'label'  => 'value2',
-            'last'   => 'value3',
+            'value1' => 'option',
+            'value2' => 'label',
+            'value3' => 'last',
         ));
         $element->setAttribute('value', 'value2');
         $markup  = $this->helper->render($element);

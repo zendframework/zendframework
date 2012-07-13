@@ -19,12 +19,23 @@ use Traversable;
 abstract class AbstractOptions implements ParameterObjectInterface
 {
     /**
+     * We use the __ prefix to avoid collisions with properties in
+     * user-implmentations.
+     *
+     * @var bool
+     */
+    protected $__strictMode__ = true;
+
+    /**
      * @param  array|Traversable|null $options
      * @return AbstractOptions
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($options = null)
+    public function __construct($options = null, $strict = null)
     {
+        if (null !== $strict) {
+            $this->enableStrictMode($strict);
+        }
         if (null !== $options) {
             $this->setFromArray($options);
         }
@@ -49,6 +60,20 @@ abstract class AbstractOptions implements ParameterObjectInterface
     }
 
     /**
+     * With strict mode on, an exception will be thrown if there are values in
+     * an array with no matching setting in the options class. When off, the
+     * extra values will simply be ignored.
+     *
+     * @param bool $strict
+     * @return AbstractOptions
+     */
+    public function enableStrictMode($strict)
+    {
+        $this->__strictMode__ = $strict;
+        return $this;
+    }
+
+    /**
      * @param string $key name of option with underscore
      * @return string name of setter method
      * @throws Exception\BadMethodCallException if setter method is undefined
@@ -58,13 +83,6 @@ abstract class AbstractOptions implements ParameterObjectInterface
         $parts = explode('_', $key);
         $parts = array_map('ucfirst', $parts);
         $setter = 'set' . implode('', $parts);
-        if (!method_exists($this, $setter)) {
-            throw new Exception\BadMethodCallException(
-                'The option "' . $key . '" does not '
-                . 'have a matching ' . $setter . ' setter method '
-                . 'which must be defined'
-            );
-        }
         return $setter;
     }
 
@@ -78,13 +96,6 @@ abstract class AbstractOptions implements ParameterObjectInterface
         $parts = explode('_', $key);
         $parts = array_map('ucfirst', $parts);
         $getter = 'get' . implode('', $parts);
-        if (!method_exists($this, $getter)) {
-            throw new Exception\BadMethodCallException(
-                'The option "' . $key . '" does not '
-                . 'have a matching ' . $getter . ' getter method '
-                . 'which must be defined'
-            );
-        }
         return $getter;
     }
 
@@ -97,6 +108,13 @@ abstract class AbstractOptions implements ParameterObjectInterface
     public function __set($key, $value)
     {
         $setter = $this->assembleSetterNameFromKey($key);
+        if ($this->__strictMode__ && !method_exists($this, $setter)) {
+            throw new Exception\BadMethodCallException(
+                'The option "' . $key . '" does not '
+                . 'have a matching ' . $setter . ' setter method '
+                . 'which must be defined'
+            );
+        }
         $this->{$setter}($value);
     }
 
@@ -108,6 +126,13 @@ abstract class AbstractOptions implements ParameterObjectInterface
     public function __get($key)
     {
         $getter = $this->assembleGetterNameFromKey($key);
+        if (!method_exists($this, $getter)) {
+            throw new Exception\BadMethodCallException(
+                'The option "' . $key . '" does not '
+                . 'have a matching ' . $getter . ' getter method '
+                . 'which must be defined'
+            );
+        }
         return $this->{$getter}();
     }
 

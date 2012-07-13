@@ -723,11 +723,11 @@ class Di implements DependencyInjectionInterface
      */
     protected static function isSubclassOf($className, $type)
     {
-        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
-            return is_subclass_of($className, $type);
-        }
         if (is_subclass_of($className, $type)) {
             return true;
+        }
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return false;
         }
         if (!interface_exists($type)) {
             return false;

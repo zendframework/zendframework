@@ -934,18 +934,7 @@
                     </emphasis>
                 </entry>
             </row>
-            <row>
-                <entry>
-                    <emphasis>
-                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.test.html">
-                            <classname>Zend_Test</classname>
-                        </link>
-                    </emphasis>
-                </entry>
-                <entry>---</entry>
-                <entry>---</entry>
-            </row>
-            <row>
+             <row>
                 <entry>
                     <emphasis>
                         <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.text.html">

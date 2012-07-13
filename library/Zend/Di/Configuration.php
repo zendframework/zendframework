@@ -67,7 +67,7 @@ class Configuration
     }
 
     /**
-     * @param Di $di
+     * @param Di    $di
      * @param array $definition
      */
     public function configureDefinition(Di $di, $definition)

@@ -77,7 +77,7 @@ class Generator
      * Creates a Zend\CodeGenerator\Php\PhpFile object that has
      * created the specified class and service locator methods.
      *
-     * @param  null|string                $filename
+     * @param  null|string                         $filename
      * @throws \Zend\Di\Exception\RuntimeException
      * @return FileGenerator
      */

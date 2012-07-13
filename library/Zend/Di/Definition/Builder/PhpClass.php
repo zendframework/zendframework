@@ -67,7 +67,7 @@ class PhpClass
     }
 
     /**
-     * @param string|\Callable|array $instantiator
+     * @param  string|\Callable|array $instantiator
      * @return PhpClass
      */
     public function setInstantiator($instantiator)
@@ -86,7 +86,7 @@ class PhpClass
     }
 
     /**
-     * @param string $superType
+     * @param  string   $superType
      * @return PhpClass
      */
     public function addSuperType($superType)

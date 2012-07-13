@@ -318,8 +318,8 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * @param array $def
-     * @param \Zend\Code\Reflection\ClassReflection $rClass
+     * @param array                                  $def
+     * @param \Zend\Code\Reflection\ClassReflection  $rClass
      * @param \Zend\Code\Reflection\MethodReflection $rMethod
      */
     protected function processParams(&$def, Reflection\ClassReflection $rClass, Reflection\MethodReflection $rMethod)

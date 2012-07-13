@@ -79,7 +79,7 @@ class Di implements DependencyInjectionInterface
     }
 
     /**
-     * @param DefinitionList $definitions
+     * @param  DefinitionList $definitions
      * @return self
      */
     public function setDefinitionList(DefinitionList $definitions)
@@ -268,12 +268,12 @@ class Di implements DependencyInjectionInterface
     }
 
     /**
-     * @param object $instance
-     * @param array $injectionMethods
-     * @param array $params
+     * @param object      $instance
+     * @param array       $injectionMethods
+     * @param array       $params
      * @param string|null $instanceClass
      * @param string|null$instanceAlias
-     * @param string $requestedName
+     * @param  string                     $requestedName
      * @throws Exception\RuntimeException
      */
     protected function handleInjectDependencies($instance, $injectionMethods, $params, $instanceClass, $instanceAlias, $requestedName)
@@ -426,12 +426,12 @@ class Di implements DependencyInjectionInterface
      * This parameter will handle any injection methods and resolution of
      * dependencies for such methods
      *
-     * @param object $instance
-     * @param string $method
-     * @param array  $params
-     * @param string $alias
-     * @param bool $methodIsRequired
-     * @param string|null $methodClass
+     * @param  object      $instance
+     * @param  string      $method
+     * @param  array       $params
+     * @param  string      $alias
+     * @param  bool        $methodIsRequired
+     * @param  string|null $methodClass
      * @return bool
      */
     protected function resolveAndCallInjectionMethodForInstance($instance, $method, $params, $alias, $methodIsRequired, $methodClass = null)
@@ -457,7 +457,7 @@ class Di implements DependencyInjectionInterface
      * @param  string                                $method
      * @param  array                                 $callTimeUserParams
      * @param  string                                $alias
-     * @param  bool $methodIsRequired
+     * @param  bool                                  $methodIsRequired
      * @param  bool                                  $isInstantiator
      * @throws Exception\MissingPropertyException
      * @throws Exception\CircularDependencyException

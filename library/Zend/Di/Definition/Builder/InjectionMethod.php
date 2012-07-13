@@ -29,7 +29,7 @@ class InjectionMethod
     protected $parameters = array();
 
     /**
-     * @param string|null $name
+     * @param  string|null $name
      * @return self
      */
     public function setName($name)
@@ -48,9 +48,9 @@ class InjectionMethod
     }
 
     /**
-     * @param string $name
-     * @param string|null $class
-     * @param mixed|null $isRequired
+     * @param  string          $name
+     * @param  string|null     $class
+     * @param  mixed|null      $isRequired
      * @return InjectionMethod
      */
     public function addParameter($name, $class = null, $isRequired = null)

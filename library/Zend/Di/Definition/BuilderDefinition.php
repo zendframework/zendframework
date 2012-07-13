@@ -162,7 +162,7 @@ class BuilderDefinition implements DefinitionInterface
     }
 
     /**
-     * @param  string $name
+     * @param  string                $name
      * @return bool|Builder\PhpClass
      */
     protected function getClass($name)
@@ -284,6 +284,7 @@ class BuilderDefinition implements DefinitionInterface
         }
 
         /* @var $method Builder\InjectionMethod */
+
         return (count($method->getParameters()) > 0);
     }
 

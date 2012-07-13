@@ -83,7 +83,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
     }
 
     /**
-     * @param string $class
+     * @param  string                              $class
      * @return bool|Definition\DefinitionInterface
      */
     public function getDefinitionForClass($class)
@@ -99,7 +99,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
     }
 
     /**
-     * @param string $class
+     * @param  string                              $class
      * @return bool|Definition\DefinitionInterface
      */
     public function forClass($class)

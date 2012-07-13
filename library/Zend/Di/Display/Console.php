@@ -162,7 +162,7 @@ class Console
 
     /**
      * @param \Zend\Di\Definition\DefinitionInterface $definition
-     * @param string $class
+     * @param string                                  $class
      */
     protected function renderClassDefinition($definition, $class)
     {

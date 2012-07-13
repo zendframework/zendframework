@@ -136,7 +136,7 @@ class CompilerDefinition implements DefinitionInterface
     }
 
     /**
-     * @param string $class
+     * @param  string               $class
      * @throws \ReflectionException
      */
     protected function processClass($class)
@@ -272,7 +272,7 @@ class CompilerDefinition implements DefinitionInterface
     }
 
     /**
-     * @param array $def
+     * @param array                                  $def
      * @param \Zend\Code\Reflection\ClassReflection  $rClass
      * @param \Zend\Code\Reflection\MethodReflection $rMethod
      */

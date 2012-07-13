@@ -97,8 +97,8 @@ interface DefinitionInterface
      *
      *
      * @abstract
-     * @param string $class
-     * @param string $method
+     * @param  string $class
+     * @param  string $method
      * @return array
      */
     public function getMethodParameters($class, $method);

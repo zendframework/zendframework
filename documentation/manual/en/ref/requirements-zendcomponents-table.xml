@@ -188,17 +188,6 @@
                 </entry>
             </row>
             <row>
-                <entry>
-                    <emphasis>
-                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.date.html">
-                            <classname>Zend_Date</classname>
-                        </link>
-                    </emphasis>
-                </entry>
-                <entry>---</entry>
-                <entry>---</entry>
-            </row>
-            <row>
                 <entry morerows="8" valign="middle">
                     <emphasis>
                         <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.db.html">
@@ -470,25 +459,6 @@
                 <entry>---</entry>
             </row>
             <row>
-                <entry morerows="1" valign="middle">
-                    <emphasis>
-                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.locale.html">
-                            <classname>Zend_Locale</classname>
-                        </link>
-                    </emphasis>
-                </entry>
-                <entry>&requirements.soft;</entry>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&php.manual.link;/ref.bc.php">bcmath</link>
-                </entry>
-            </row>
-            <row>
-                <entry>&requirements.hard;</entry>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&php.manual.link;/ref.iconv.php">iconv</link>
-                </entry>
-            </row>
-            <row>
                 <entry morerows="2" valign="middle">
                     <emphasis>
                         <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.log.html">
@@ -560,7 +530,7 @@
                 </entry>
             </row>
             <row>
-                <entry morerows="1" validn="middle">
+                <entry morerows="1" valign="middle">
                     <emphasis>
                         <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.openid.html">
                             <classname>Zend_OpenId</classname>
@@ -619,17 +589,6 @@
                     <emphasis>
                         <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.progressbar.html">
                             <classname>Zend_ProgressBar</classname>
-                        </link>
-                    </emphasis>
-                </entry>
-                <entry>---</entry>
-                <entry>---</entry>
-            </row>
-            <row>
-                <entry>
-                    <emphasis>
-                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.registry.html">
-                            <classname>Zend_Registry</classname>
                         </link>
                     </emphasis>
                 </entry>
@@ -1007,19 +966,6 @@
                 </entry>
                 <entry>---</entry>
                 <entry>---</entry>
-            </row>
-            <row>
-                <entry>
-                    <emphasis>
-                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.translator.html">
-                            <classname>Zend_Translator</classname>
-                        </link>
-                    </emphasis>
-                </entry>
-                <entry>&requirements.hard;</entry>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&php.manual.link;/ref.xml.php">xml</link>
-                </entry>
             </row>
             <row>
                 <entry>

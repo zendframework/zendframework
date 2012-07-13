@@ -224,16 +224,14 @@ foreach ($servers as $srv) {
  
         <variablelist>
             <varlistentry xml:id="zend.service.rackspace.servers.methods.change-backup-schedule">
-                <term>
+                <term>changeBackupSchedule</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>changeBackupSchedule</methodname>
                         <methodparam>
                             <funcparams>string $id, string $weekly, string $daily</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         This operation creates a new backup schedule or updates an existing backup schedule for
                         the specified server.
@@ -252,16 +250,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.change-server-name">
-                <term>
+                <term>changeServerName</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>changeServerName</methodname>
                         <methodparam>
                             <funcparams>string $id, string $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Change the name of a server.
                         Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
@@ -276,16 +272,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.change-server-password">
-                <term>
+                <term>changeServerPassword</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>changeServerPassword</methodname>
                         <methodparam>
                             <funcparams>string $id, string $password</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Change the admin password of a server.
                         Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
@@ -300,16 +294,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.confirm-resize-server">
-                <term>
+                <term>confirmResizeServer</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>confirmResizeServer</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Confirm the resize of a server. During a resize operation, the original server is saved for a period of time to allow roll
                         back if there is a problem. Once the newly resized server is tested and has been confirmed
@@ -325,16 +317,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.create-image">
-                <term>
+                <term>createImage</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>createImage</methodname>
                         <methodparam>
                             <funcparams>string $serverId,string $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Create an image from a server.
                         Return a new instance of <classname>Zend\Service\Rackspace\Servers\Image</classname>.
@@ -350,16 +340,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.create-shared-ip-group">
-                <term>
+                <term>createSharedIpGroup</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>createSharedIpGroup</methodname>
                         <methodparam>
                             <funcparams>string $name, string $serverId</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         This operation creates a new shared IP group. Please note, on a create request, the shared IP
                         group can be created empty or can be initially populated with a single server.
@@ -376,16 +364,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.create-server">
-                <term>
+                <term>createServer</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>createServer</methodname>
                         <methodparam>
                             <funcparams>array $data, $metadata=array(),$files=array()</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Create a server with the attributes specified in <emphasis>$data</emphasis>. You can specify also
                         optional parameters: <emphasis>metadata</emphasis> and <emphasis>files</emphasis>.
@@ -427,16 +413,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.disable-backup-schedule">
-                <term>
+                <term>disableBackupSchedule</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>disableBackupSchedule</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Disable the backup of a server.
                         Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
@@ -448,16 +432,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.delete-image">
-                <term>
+                <term>deleteImage</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>deleteImage</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Delete a image.
                         Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
@@ -469,16 +451,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.delete-shared-ip-group">
-                <term>
+                <term>deleteSharedIpGroup</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>deleteSharedIpGroup</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Delete a shared IP group.
                         Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
@@ -490,16 +470,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.delete-server">
-                <term>
+                <term>deleteServer</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>deleteServer</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Delete a server.
                         Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
@@ -511,16 +489,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.get-backup-schedule">
-                <term>
+                <term>getBackupSchedule</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getBackupSchedule</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return the backup schedule of a server. The return is an associative array with the following values: enabled, weekly, daily.
                         In case of error the return is <emphasis>false</emphasis>.
@@ -532,16 +508,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.get-flavor">
-                <term>
+                <term>getFlavor</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getFlavor</methodname>
                         <methodparam>
                             <funcparams>string $flavorId</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return the information about a flavor. The return is an associative array with the following values: id, ram, disk, name.
                         In case of error the return is <emphasis>false</emphasis>.
@@ -553,16 +527,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.get-image">
-                <term>
+                <term>getImage</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getImage</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return an image as instance of <classname>Zend\Service\Rackspace\Servers\Image</classname>.
                         In case of error the return is <emphasis>false</emphasis>.
@@ -574,16 +546,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.get-shared-ip-group">
-                <term>
+                <term>getSharedIpGroup</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getSharedIpGroup</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return the shared IP group as instance of <classname>Zend\Service\Rackspace\Servers\SharedIpGroup</classname>
                         In case of error the return is <emphasis>false</emphasis>.
@@ -595,16 +565,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.get-server">
-                <term>
+                <term>getServer</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getServer</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return the server specified by the Id as instance of <classname>Zend\Service\Rackspace\Servers\Server</classname>.
                         In case of error the return is <emphasis>false</emphasis>.
@@ -616,16 +584,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.get-server-ip">
-                <term>
+                <term>getServerIp</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getServerIp</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return the public and private IP addresses of a server.
                         Return an associative array contains the key <emphasis>'public'</emphasis> and <emphasis>'private'</emphasis> for the IP addresses.
@@ -638,16 +604,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.get-server-private-ip">
-                <term>
+                <term>getServerPrivateIp</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getServerPrivateIp</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return the private IP addresses of the server.
                         Return an associative array contains the IP addresses.
@@ -660,16 +624,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.get-server-public-ip">
-                <term>
+                <term>getServerPublicIp</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getServerPublicIp</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return the public IP addresses of the server.
                         Return an associative array contains the IP addresses.
@@ -682,16 +644,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.list-flavors">
-                <term>
+                <term>listFlavors</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>listFlavors</methodname>
                         <methodparam>
                             <funcparams>boolean $details=false</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return all the available flavors as associative array. 
                         In case of error the return is <emphasis>false</emphasis>.
@@ -703,16 +663,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.list-images">
-                <term>
+                <term>listImages</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>listImages</methodname>
                         <methodparam>
                             <funcparams>boolean $details=false</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return all the available images as instance of <classname>Zend\Service\Rackspace\Servers\ImageList</classname>
                         In case of error the return is <emphasis>false</emphasis>.
@@ -724,16 +682,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.list-server">
-                <term>
+                <term>listServer</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>listServer</methodname>
                         <methodparam>
                             <funcparams>boolean $details=false</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return all the available servers with a new instance of <classname>Zend\Service\Rackspace\Servers\ServerList</classname>.
                         In case of error the return is <emphasis>false</emphasis>.
@@ -745,16 +701,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.list-shared-ip-groups">
-                <term>
+                <term>listSharedIpGroups</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>listSharedIpGroups</methodname>
                         <methodparam>
                             <funcparams>boolean $details=false</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return all the shared IP groups as instance of <classname>Zend\Service\Rackspace\Servers\SharedIpGroupList</classname>
                         In case of error the return is <emphasis>false</emphasis>.
@@ -766,16 +720,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.reboot-server">
-                <term>
+                <term>rebootServer</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>rebootServer</methodname>
                         <methodparam>
                             <funcparams>string $id, boolean $hard=false</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Reboot a server. 
                         Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
@@ -793,16 +745,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.rebuild-server">
-                <term>
+                <term>rebuildServer</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>rebuildServer</methodname>
                         <methodparam>
                             <funcparams>string $id, string $imageId</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Rebuild a server. The rebuild function removes all data on the server and replaces it with the specified image,
                         server's Id and IP addresses will remain the same.
@@ -818,16 +768,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.resize-server">
-                <term>
+                <term>resizeServer</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>resizeServer</methodname>
                         <methodparam>
                             <funcparams>string $id, string $flavorId</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Resize a server. The resize function converts an existing server to a different flavor, in essence, scaling the
                         server up or down. The original server is saved for a period of time to allow rollback if there
@@ -846,16 +794,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.revert-resize-server">
-                <term>
+                <term>revertResizeServer</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>revertResizeServer</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Revert the resize of a server. During a resize operation, the original server is saved for a period of time to allow for roll
                         back if there is a problem. If you determine there is a problem with a newly resized server,
@@ -871,16 +817,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.share-ip-address">
-                <term>
+                <term>shareIpAddress</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>shareIpAddress</methodname>
                         <methodparam>
                             <funcparams>string $id, string $ip, string $groupId, boolean $configure=true</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Share an IP address for a server.
                         Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
@@ -903,16 +847,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.unshare-ip-address">
-                <term>
+                <term>unshareIpAddress</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>unshareIpAddress</methodname>
                         <methodparam>
                             <funcparams>string $id, string $ip</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Unshare an IP address for a server.
                         Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
@@ -927,16 +869,14 @@ foreach ($servers as $srv) {
             </varlistentry>
             
             <varlistentry xml:id="zend.service.rackspace.servers.methods.update-server">
-                <term>
+                <term>updateServer</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>updateServer</methodname>
                         <methodparam>
                             <funcparams>string $id,string $name=null,string $password=null</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Change the name or/and the admin password of a server.
                         In case of error the return is <emphasis>false</emphasis>.

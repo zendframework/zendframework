@@ -900,11 +900,6 @@
                     <xi:include href="../en/module_specs/Zend_Http_Cookie-Handling.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Http_Response.xml" parse="xml">
-                <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Http_Response.xml" parse="xml"/>
-                </xi:fallback>
-            </xi:include>
             <!-- NEW DOCUMENTATION-->
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Http.xml" parse="xml">
                 <xi:fallback>
@@ -1780,21 +1775,6 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Service_WindowsAzure.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Service_WindowsAzure.xml" parse="xml"/>
-                </xi:fallback>
-            </xi:include>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Service_WindowsAzure_Blob.xml" parse="xml">
-                <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Service_WindowsAzure_Blob.xml" parse="xml"/>
-                </xi:fallback>
-            </xi:include>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Service_WindowsAzure_Queue.xml" parse="xml">
-                <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Service_WindowsAzure_Queue.xml" parse="xml"/>
-                </xi:fallback>
-            </xi:include>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Service_WindowsAzure_Table.xml" parse="xml">
-                <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Service_WindowsAzure_Table.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
         </chapter>

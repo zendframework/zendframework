@@ -100,7 +100,7 @@ abstract class AbstractWord extends AbstractAdapter
      * Error messages
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::MISSING_VALUE => 'Empty captcha value',
         self::MISSING_ID    => 'Captcha ID field is missing',
         self::BAD_CAPTCHA   => 'Captcha value is wrong',

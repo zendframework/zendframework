@@ -35,4 +35,12 @@ abstract class CommonWordTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Captcha\Exception\InvalidArgumentException', 'not found');
         $wordAdapter->getSession();
     }
+
+    public function testErrorMessages()
+    {
+        $wordAdapter = new $this->wordClass;
+        $this->assertFalse($wordAdapter->isValid('foo'));
+        $messages = $wordAdapter->getMessages();
+        $this->assertFalse(empty($messages));
+    }
 }

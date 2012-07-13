@@ -14,7 +14,8 @@
     "target-dir": "Zend/Service/LiveDocx",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-soap": "self.version"
+        "zendframework/zend-soap": "self.version",
+        "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
         "zendframework/zend-date": "Zend\\Date component"

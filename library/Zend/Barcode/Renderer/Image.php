@@ -11,6 +11,7 @@
 namespace Zend\Barcode\Renderer;
 
 use Zend\Barcode\Exception\RendererCreationException;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Class for rendering the barcode as image
@@ -312,7 +313,10 @@ class Image extends AbstractRenderer
         header("Content-Type: image/" . $this->imageType);
         $functionName = 'image' . $this->imageType;
         $functionName($this->resource);
-        @imagedestroy($this->resource);
+
+        ErrorHandler::start(E_WARNING);
+        imagedestroy($this->resource);
+        ErrorHandler::stop();
     }
 
     /**

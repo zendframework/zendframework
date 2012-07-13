@@ -10,6 +10,8 @@
 
 namespace Zend\InfoCard\XML;
 
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * @category   Zend
  * @package    Zend_InfoCard
@@ -187,7 +189,10 @@ class Security
 
         $canonical_signedinfo = $transformer->applyTransforms($sxe->Signature->SignedInfo->asXML());
 
-        if(@openssl_verify($canonical_signedinfo, $signatureValue, $public_key)) {
+        ErrorHandler::start(E_WARNING);
+        $result = openssl_verify($canonical_signedinfo, $signatureValue, $public_key);
+        ErrorHandler::stop();
+        if ($result) {
             return (string)$sxe->Signature->SignedInfo->Reference['URI'];
         }
 

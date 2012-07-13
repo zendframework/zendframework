@@ -16,6 +16,7 @@ use Zend\Search\Lucene\Index;
 use Zend\Search\Lucene\Search\Exception\QueryParserException;
 use Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter;
 use Zend\Search\Lucene\Search\Query;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * It's an internal abstract class intended to finalize ase a query processing after query parsing.
@@ -128,8 +129,13 @@ class Term extends AbstractPreprocessing
         // -------------------------------------
         // Recognize wildcard queries
 
-        /** @todo check for PCRE unicode support may be performed through Zend_Environment in some future */
-        if (@preg_match('/\pL/u', 'a') == 1) {
+        /** 
+         * @todo check for PCRE unicode support may be performed through Zend_Environment in some future 
+         */
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/\pL/u', 'a');
+        ErrorHandler::stop();
+        if ($result == 1) {
             $word = iconv($this->_encoding, 'UTF-8', $this->_word);
             $wildcardsPattern = '/[*?]/u';
             $subPatternsEncoding = 'UTF-8';
@@ -223,8 +229,13 @@ class Term extends AbstractPreprocessing
 
         // -------------------------------------
         // Recognize wildcard queries
-        /** @todo check for PCRE unicode support may be performed through Zend_Environment in some future */
-        if (@preg_match('/\pL/u', 'a') == 1) {
+        /** 
+         * @todo check for PCRE unicode support may be performed through Zend_Environment in some future 
+         */
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/\pL/u', 'a');
+        ErrorHandler::stop();
+        if ($result == 1) {
             $word = iconv($this->_encoding, 'UTF-8', $this->_word);
             $wildcardsPattern = '/[*?]/u';
             $subPatternsEncoding = 'UTF-8';

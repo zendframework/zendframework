@@ -11,6 +11,7 @@
 namespace Zend\Cache\Pattern;
 
 use Zend\Cache\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -80,7 +81,10 @@ class CaptureCache extends AbstractPattern
               . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         if (file_exists($file)) {
-            if (($content = @file_get_contents($file)) === false) {
+            ErrorHandler::start(E_WARNING);
+            $content = file_get_contents($file);
+            ErrorHandler::stop();
+            if ($content === false) {
                 $lastErr = error_get_last();
                 throw new Exception\RuntimeException("Failed to read cached pageId '{$pageId}': {$lastErr['message']}");
             }
@@ -268,10 +272,14 @@ class CaptureCache extends AbstractPattern
             $flags = $flags | LOCK_EX;
         }
 
-        $put = @file_put_contents($file, $data, $flags);
+        ErrorHandler::start(E_WARNING);
+        $put = file_put_contents($file, $data, $flags);
+        ErrorHandler::stop();
         if ( $put < strlen((binary)$data) ) {
             $lastErr = error_get_last();
-            @unlink($file); // remove old or incomplete written file
+            ErrorHandler::start(E_WARNING);
+            unlink($file); // remove old or incomplete written file
+            ErrorHandler::stop();
             throw new Exception\RuntimeException($lastErr['message']);
         }
     }

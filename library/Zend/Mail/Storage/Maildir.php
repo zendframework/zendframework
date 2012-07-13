@@ -11,6 +11,7 @@
 namespace Zend\Mail\Storage;
 
 use Zend\Mail;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -265,14 +266,18 @@ class Maildir extends AbstractStorage
             $this->close();
         }
 
-        $dh = @opendir($dirname . '/cur/');
+        ErrorHandler::start(E_WARNING);
+        $dh = opendir($dirname . '/cur/');
+        ErrorHandler::stop();
         if (!$dh) {
             throw new Exception\RuntimeException('cannot open maildir');
         }
         $this->_getMaildirFiles($dh, $dirname . '/cur/');
         closedir($dh);
 
-        $dh = @opendir($dirname . '/new/');
+        ErrorHandler::start(E_WARNING);
+        $dh = opendir($dirname . '/new/');
+        ErrorHandler::stop();
         if ($dh) {
             $this->_getMaildirFiles($dh, $dirname . '/new/', array(Mail\Storage::FLAG_RECENT));
             closedir($dh);
@@ -295,15 +300,20 @@ class Maildir extends AbstractStorage
                 continue;
             }
 
-            @list($uniq, $info) = explode(':', $entry, 2);
-            @list(,$size) = explode(',', $uniq, 2);
+            ErrorHandler::start(E_NOTICE);
+            list($uniq, $info) = explode(':', $entry, 2);
+            list(,$size) = explode(',', $uniq, 2);
+            ErrorHandler::stop();
             if ($size && $size[0] == 'S' && $size[1] == '=') {
                 $size = substr($size, 2);
             }
             if (!ctype_digit($size)) {
                 $size = null;
             }
-            @list($version, $flags) = explode(',', $info, 2);
+
+            ErrorHandler::start(E_NOTICE);
+            list($version, $flags) = explode(',', $info, 2);
+            ErrorHandler::stop();
             if ($version != 2) {
                 $flags = '';
             }

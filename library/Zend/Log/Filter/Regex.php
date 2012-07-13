@@ -11,6 +11,7 @@
 namespace Zend\Log\Filter;
 
 use Zend\Log\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -35,7 +36,10 @@ class Regex implements FilterInterface
      */
     public function __construct($regex)
     {
-        if (@preg_match($regex, '') === false) {
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match($regex, '');
+        ErrorHandler::stop();
+        if ($result === false) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid regular expression "%s"',
                 $regex

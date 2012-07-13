@@ -10,6 +10,8 @@
 
 namespace Zend\GData\App;
 
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * Abstract class for all XML elements
  *
@@ -281,10 +283,12 @@ abstract class AbstractBase
     {
         if ($xml) {
             // Load the feed as an XML DOMDocument object
-            @ini_set('track_errors', 1);
+            ErrorHandler::start(E_WARNING);
+            ini_set('track_errors', 1);
             $doc = new \DOMDocument();
-            $success = @$doc->loadXML($xml);
-            @ini_restore('track_errors');
+            $success = $doc->loadXML($xml);
+            ini_restore('track_errors');
+            ErrorHandler::stop();
             if (!$success) {
                 throw new Exception("DOMDocument cannot parse XML: $php_errormsg");
             }

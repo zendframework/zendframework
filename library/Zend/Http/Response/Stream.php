@@ -12,6 +12,7 @@ namespace Zend\Http\Response;
 
 use Zend\Http\Exception;
 use Zend\Http\Response;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend_Http_Response represents an HTTP 1.0 / 1.1 response message. It
@@ -271,7 +272,9 @@ class Stream extends Response
             $this->stream = null; //Could be listened by others
         }
         if ($this->cleanup) {
-            @unlink($this->stream_name);
+            ErrorHandler::start(E_WARNING);
+            unlink($this->stream_name);
+            ErrorHandler::stop();
         }
     }
 }

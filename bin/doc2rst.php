@@ -55,7 +55,7 @@ $loader->register();
 $rules = array(
     'help|h'      => 'Get usage message',
     'docbook|d-s' => 'Docbook file to convert',
-    'output|o-s'  => 'Output file; if not provided, assumes <docbook>.rst"',
+    'output|o-s'  => 'Output dir; if not provided, assumes normalize(<docbook>).rst"',
 );
 
 try {
@@ -79,11 +79,11 @@ if (!file_exists($docbook)) {
 
 $rstFile = $opts->getOption('o');
 if (empty($rstFile)) {
-    if (substr($docbook,-4) === '.xml') {
-        $rstFile = substr($docbook, 0, strlen($docbook)-4) . '.rst';
-    } else {
-        $rstFile = $docbook . '.rst';
-    }
+    $rstFile = '.';
+}
+
+if (is_dir($rstFile)) {
+    $rstFile .= RstConvert::XmlFileNameToRst(basename($docbook));
 }
 
 // Load the docbook file (input)

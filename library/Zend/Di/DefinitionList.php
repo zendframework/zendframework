@@ -21,7 +21,7 @@ use SplDoublyLinkedList;
 class DefinitionList extends SplDoublyLinkedList implements Definition\DefinitionInterface
 {
     /**
-     * @param Definition\DefinitionInterface[] $definitions
+     * @param Definition\DefinitionInterface|Definition\DefinitionInterface[] $definitions
      */
     public function __construct($definitions)
     {

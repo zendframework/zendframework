@@ -18,8 +18,6 @@ namespace Zend\Di\Definition\Builder;
  */
 class InjectionMethod
 {
-    const PARAMETER_POSTION_NEXT = 'next';
-
     /**
      * @var string|null
      */

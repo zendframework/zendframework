@@ -119,9 +119,7 @@ class CompilerDefinition implements DefinitionInterface
      */
     public function compile()
     {
-        /*
-         * @var $classScanner \Zend\Code\Scanner\DerivedClassScanner
-         */
+        /* @var $classScanner \Zend\Code\Scanner\DerivedClassScanner */
         foreach ($this->directoryScanner->getClassNames() as $class) {
             $this->processClass($class);
         }
@@ -174,7 +172,7 @@ class CompilerDefinition implements DefinitionInterface
             if (($annotations instanceof AnnotationCollection)
                 && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Instantiator')
             ) {
-                // @todo Instnatiator support in annotations
+                // @todo Instantiator support in annotations
             }
         }
 
@@ -260,7 +258,8 @@ class CompilerDefinition implements DefinitionInterface
                 preg_match($interfaceInjectorPattern, $rIface->getName(), $matches);
                 if ($matches) {
                     foreach ($rIface->getMethods() as $rMethod) {
-                        if ($rMethod->getName() === '__construct') { // ctor not allowed in ifaces
+                        if ($rMethod->getName() === '__construct') {
+                            // constructor not allowed in interfaces
                             continue;
                         }
                         $def['methods'][$rMethod->getName()] = true;
@@ -395,7 +394,8 @@ class CompilerDefinition implements DefinitionInterface
 //                preg_match($interfaceInjectorPattern, $sInterface->getName(), $matches);
 //                if ($matches) {
 //                    foreach ($sInterface->getMethods(true) as $sMethod) {
-//                        if ($sMethod->getName() === '__construct') { // ctor not allowed in ifaces
+//                        if ($sMethod->getName() === '__construct') {
+                              // constructor not allowed in interfaces
 //                            continue;
 //                        }
 //                        $def['methods'][$sMethod->getName()] = true;
@@ -461,9 +461,7 @@ class CompilerDefinition implements DefinitionInterface
 //    }
 
     /**
-     * Return nothing
-     *
-     * @return string[]
+     * {@inheritDoc}
      */
     public function getClasses()
     {
@@ -471,10 +469,7 @@ class CompilerDefinition implements DefinitionInterface
     }
 
     /**
-     * Return whether the class exists
-     *
-     * @param  string $class
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasClass($class)
     {
@@ -482,10 +477,7 @@ class CompilerDefinition implements DefinitionInterface
     }
 
     /**
-     * Return the supertypes for this class
-     *
-     * @param  string $class
-     * @return string[] of types
+     * {@inheritDoc}
      */
     public function getClassSupertypes($class)
     {
@@ -497,10 +489,7 @@ class CompilerDefinition implements DefinitionInterface
     }
 
     /**
-     * Get the instantiator
-     *
-     * @param  string          $class
-     * @return array|\Callable|string
+     * {@inheritDoc}
      */
     public function getInstantiator($class)
     {
@@ -512,10 +501,7 @@ class CompilerDefinition implements DefinitionInterface
     }
 
     /**
-     * Return if there are injection methods
-     *
-     * @param  string $class
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethods($class)
     {
@@ -527,11 +513,7 @@ class CompilerDefinition implements DefinitionInterface
     }
 
     /**
-     * Return injection methods
-     *
-     * @param  string $class
-     * @param  string $method
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethod($class, $method)
     {
@@ -543,10 +525,7 @@ class CompilerDefinition implements DefinitionInterface
     }
 
     /**
-     * Return an array of the injection methods
-     *
-     * @param  string $class
-     * @return string[]
+     * {@inheritDoc}
      */
     public function getMethods($class)
     {
@@ -557,6 +536,9 @@ class CompilerDefinition implements DefinitionInterface
         return $this->classes[$class]['methods'];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function hasMethodParameters($class, $method)
     {
         if (!isset($this->classes[$class])) {
@@ -567,16 +549,7 @@ class CompilerDefinition implements DefinitionInterface
     }
 
     /**
-     * Return the parameters for a method
-     *
-     * 3 item array:
-     *     #1 - Class name, string if it exists, else null
-     *     #2 - Optional?, boolean
-     *     #3 - Instantiable, boolean if class exists, otherwise null
-     *
-     * @param  string $class
-     * @param  string $method
-     * @return array
+     * {@inheritDoc}
      */
     public function getMethodParameters($class, $method)
     {

@@ -133,7 +133,7 @@ class BuilderDefinition implements DefinitionInterface
     }
 
     /**
-     * @return string[]
+     * {@inheritDoc}
      */
     public function getClasses()
     {
@@ -148,8 +148,7 @@ class BuilderDefinition implements DefinitionInterface
     }
 
     /**
-     * @param  string $class
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasClass($class)
     {
@@ -178,9 +177,8 @@ class BuilderDefinition implements DefinitionInterface
     }
 
     /**
-     * @param  string                     $class
+     * {@inheritDoc}
      * @throws \Zend\Di\Exception\RuntimeException
-     * @return array|\string[]
      */
     public function getClassSupertypes($class)
     {
@@ -194,9 +192,8 @@ class BuilderDefinition implements DefinitionInterface
     }
 
     /**
-     * @param  string                     $class
+     * {@inheritDoc}
      * @throws \Zend\Di\Exception\RuntimeException
-     * @return array|string
      */
     public function getInstantiator($class)
     {
@@ -209,9 +206,8 @@ class BuilderDefinition implements DefinitionInterface
     }
 
     /**
-     * @param  string                     $class
+     * {@inheritDoc}
      * @throws \Zend\Di\Exception\RuntimeException
-     * @return bool
      */
     public function hasMethods($class)
     {
@@ -225,9 +221,8 @@ class BuilderDefinition implements DefinitionInterface
     }
 
     /**
-     * @param  string                     $class
+     * {@inheritDoc}
      * @throws \Zend\Di\Exception\RuntimeException
-     * @return array|string[]
      */
     public function getMethods($class)
     {
@@ -247,10 +242,8 @@ class BuilderDefinition implements DefinitionInterface
     }
 
     /**
-     * @param  string                     $class
-     * @param  string                     $method
+     * {@inheritDoc}
      * @throws \Zend\Di\Exception\RuntimeException
-     * @return bool
      */
     public function hasMethod($class, $method)
     {
@@ -271,9 +264,7 @@ class BuilderDefinition implements DefinitionInterface
     }
 
     /**
-     * @param  string $class
-     * @param  string $method
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethodParameters($class, $method)
     {
@@ -297,10 +288,8 @@ class BuilderDefinition implements DefinitionInterface
     }
 
     /**
-     * @param  string                     $class
-     * @param  string                     $method
+     * {@inheritDoc}
      * @throws \Zend\Di\Exception\RuntimeException
-     * @return array|\array[]
      */
     public function getMethodParameters($class, $method)
     {

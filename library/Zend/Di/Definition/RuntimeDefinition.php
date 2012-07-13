@@ -97,9 +97,7 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * Retrieves registered classes names
-     *
-     * @return string[]
+     * {@inheritDoc}
      */
     public function getClasses()
     {
@@ -107,10 +105,7 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * Return whether the class exists
-     *
-     * @param  string $class
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasClass($class)
     {
@@ -122,10 +117,7 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * Return the supertypes for this class
-     *
-     * @param  string $class
-     * @return string[] of types
+     * {@inheritDoc}
      */
     public function getClassSupertypes($class)
     {
@@ -137,10 +129,7 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * Get the instantiator
-     *
-     * @param  string          $class
-     * @return array|\Callable|string
+     * {@inheritDoc}
      */
     public function getInstantiator($class)
     {
@@ -152,10 +141,7 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * Return if there are injection methods
-     *
-     * @param  string $class
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethods($class)
     {
@@ -167,11 +153,7 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * Return injection methods
-     *
-     * @param  string $class
-     * @param  string $method
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethod($class, $method)
     {
@@ -183,10 +165,7 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * Return an array of the injection methods
-     *
-     * @param  string $class
-     * @return string[]
+     * {@inheritDoc}
      */
     public function getMethods($class)
     {
@@ -198,11 +177,7 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * Check if method has parameters
-     *
-     * @param  string $class
-     * @param  string $method
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethodParameters($class, $method)
     {
@@ -214,16 +189,7 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * Return the parameters for a method
-     *
-     * 3 item array:
-     *     #1 - Class name, string if it exists, else null
-     *     #2 - Optional?, boolean
-     *     #3 - Instantiable, boolean if class exists, otherwise null
-     *
-     * @param  string $class
-     * @param  string $method
-     * @return array
+     * {@inheritDoc}
      */
     public function getMethodParameters($class, $method)
     {
@@ -262,7 +228,7 @@ class RuntimeDefinition implements DefinitionInterface
 
             if (($annotations instanceof AnnotationCollection)
                 && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Instantiator')) {
-                // @todo Instnatiator support in annotations
+                // @todo Instantiator support in annotations
             }
         }
 
@@ -338,7 +304,8 @@ class RuntimeDefinition implements DefinitionInterface
                 preg_match($interfaceInjectorPattern, $rIface->getName(), $matches);
                 if ($matches) {
                     foreach ($rIface->getMethods() as $rMethod) {
-                        if ($rMethod->getName() === '__construct') { // ctor not allowed in ifaces
+                        if ($rMethod->getName() === '__construct') {
+                            // constructor not allowed in interfaces
                             continue;
                         }
                         $def['methods'][$rMethod->getName()] = true;

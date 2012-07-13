@@ -18,7 +18,11 @@ use Zend\Di\Di;
 use Zend\Di\Exception;
 
 /**
- * @todo refactor to use new Definition interface
+ * Generator that creates the body of a service locator that can emulate the logic of the given Zend\Di\Di instance
+ * without class definitions
+ *
+ * @category   Zend
+ * @package    Zend_Di
  */
 class Generator
 {
@@ -68,7 +72,7 @@ class Generator
     }
 
     /**
-     * Construct, configure, and return a PHP classfile code generation object
+     * Construct, configure, and return a PHP class file code generation object
      *
      * Creates a Zend\CodeGenerator\Php\PhpFile object that has
      * created the specified class and service locator methods.

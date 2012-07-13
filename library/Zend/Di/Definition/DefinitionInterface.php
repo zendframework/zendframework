@@ -17,12 +17,16 @@ namespace Zend\Di\Definition;
 interface DefinitionInterface
 {
     /**
+     * Retrieves classes in this definition
+     *
      * @abstract
      * @return string[]
      */
     public function getClasses();
 
     /**
+     * Return whether the class exists in this definition
+     *
      * @abstract
      * @param  string $class
      * @return bool
@@ -30,6 +34,8 @@ interface DefinitionInterface
     public function hasClass($class);
 
     /**
+     * Return the supertypes for this class
+     *
      * @abstract
      * @param  string   $class
      * @return string[]
@@ -44,6 +50,8 @@ interface DefinitionInterface
     public function getInstantiator($class);
 
     /**
+     * Return if there are injection methods
+     *
      * @abstract
      * @param  string $class
      * @return bool
@@ -51,6 +59,8 @@ interface DefinitionInterface
     public function hasMethods($class);
 
     /**
+     * Return an array of the injection methods for a given class
+     *
      * @abstract
      * @param  string   $class
      * @return string[]
@@ -87,8 +97,8 @@ interface DefinitionInterface
      *
      *
      * @abstract
-     * @param $class
-     * @param $method
+     * @param string $class
+     * @param string $method
      * @return array
      */
     public function getMethodParameters($class, $method);

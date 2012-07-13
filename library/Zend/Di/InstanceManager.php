@@ -108,17 +108,17 @@ class InstanceManager /* implements InstanceManagerInterface */
      *
      * @param  string      $classOrAlias
      * @param  array       $params
-     * @param  bool        $returnFashHashLookupKey
+     * @param  bool        $returnFastHashLookupKey
      * @return bool|string
      */
-    public function hasSharedInstanceWithParameters($classOrAlias, array $params, $returnFashHashLookupKey = false)
+    public function hasSharedInstanceWithParameters($classOrAlias, array $params, $returnFastHashLookupKey = false)
     {
         ksort($params);
         $hashKey = $this->createHashForKeys($classOrAlias, array_keys($params));
         if (isset($this->sharedInstancesWithParams['hashShort'][$hashKey])) {
             $hashValue = $this->createHashForValues($classOrAlias, $params);
             if (isset($this->sharedInstancesWithParams['hashLong'][$hashKey . '/' . $hashValue])) {
-                return ($returnFashHashLookupKey) ? $hashKey . '/' . $hashValue : true;
+                return ($returnFastHashLookupKey) ? $hashKey . '/' . $hashValue : true;
             }
         }
 

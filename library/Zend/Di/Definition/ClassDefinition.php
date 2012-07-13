@@ -116,7 +116,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @return string[]
+     * {@inheritDoc}
      */
     public function getClasses()
     {
@@ -124,8 +124,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param  string $class
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasClass($class)
     {
@@ -133,8 +132,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param  string   $class
-     * @return string[]
+     * {@inheritDoc}
      */
     public function getClassSupertypes($class)
     {
@@ -142,8 +140,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param  string       $class
-     * @return string|array
+     * {@inheritDoc}
      */
     public function getInstantiator($class)
     {
@@ -151,8 +148,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param  string $class
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethods($class)
     {
@@ -160,8 +156,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param  string   $class
-     * @return string[]
+     * {@inheritDoc}
      */
     public function getMethods($class)
     {
@@ -169,9 +164,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param  string $class
-     * @param  string $method
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethod($class, $method)
     {
@@ -183,9 +176,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param  string $class
-     * @param  string $method
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasMethodParameters($class, $method)
     {
@@ -193,21 +184,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * getMethodParameters() return information about a methods parameters.
-     *
-     * Should return an ordered named array of parameters for a given method.
-     * Each value should be an array, of length 4 with the following information:
-     *
-     * array(
-     *     0, // string|null: Type Name (if it exists)
-     *     1, // bool: whether this param is required
-     *     2, // string: fully qualified path to this parameter
-     * );
-     *
-     *
-     * @param $class
-     * @param $method
-     * @return array[]
+     * {@inheritDoc}
      */
     public function getMethodParameters($class, $method)
     {

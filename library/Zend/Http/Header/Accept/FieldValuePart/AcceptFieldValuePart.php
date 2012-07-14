@@ -21,7 +21,7 @@ namespace Zend\Http\Header\Accept\FieldValuePart;
 class AcceptFieldValuePart extends AbstractFieldValuePart
 {
 
-	/**
+    /**
      * @return string
      */
     public function getSubtype ()
@@ -29,7 +29,7 @@ class AcceptFieldValuePart extends AbstractFieldValuePart
         return $this->getInternalValues()->subtype;
     }
 
-	/**
+    /**
      * @return string
      */
     public function getSubtypeRaw ()
@@ -37,7 +37,7 @@ class AcceptFieldValuePart extends AbstractFieldValuePart
         return $this->getInternalValues()->subtypeRaw;
     }
 
-	/**
+    /**
      * @return string
      */
     public function getFormat ()

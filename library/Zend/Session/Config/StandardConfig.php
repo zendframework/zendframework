@@ -227,7 +227,7 @@ class StandardConfig implements ConfigInterface
      * Set session.save_path
      *
      * @param  string $savePath
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException on invalid path
      */
     public function setSavePath($savePath)
@@ -261,7 +261,7 @@ class StandardConfig implements ConfigInterface
      * Set session.name
      *
      * @param  string $name
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setName($name)
@@ -291,7 +291,7 @@ class StandardConfig implements ConfigInterface
      * Set session.gc_probability
      *
      * @param  int $gcProbability
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setGcProbability($gcProbability)
@@ -309,10 +309,24 @@ class StandardConfig implements ConfigInterface
     }
 
     /**
+     * Get session.gc_probability
+     *
+     * @return int
+     */
+    public function getGcProbability()
+    {
+        if (!isset($this->options['gc_probability'])) {
+            $this->options['gc_probability'] = $this->getStorageOption('gc_probability');
+        }
+
+        return $this->options['gc_probability'];
+    }
+
+    /**
      * Set session.gc_divisor
      *
      * @param  int $gcDivisor
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setGcDivisor($gcDivisor)
@@ -330,10 +344,24 @@ class StandardConfig implements ConfigInterface
     }
 
     /**
-     * Set gc.maxlifetime
+     * Get session.gc_divisor
+     *
+     * @return int
+     */
+    public function getGcDivisor()
+    {
+        if (!isset($this->options['gc_divisor'])) {
+            $this->options['gc_divisor'] = $this->getStorageOption('gc_divisor');
+        }
+
+        return $this->options['gc_divisor'];
+    }
+
+    /**
+     * Set gc_maxlifetime
      *
      * @param  int $gcMaxlifetime
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setGcMaxlifetime($gcMaxlifetime)
@@ -353,10 +381,24 @@ class StandardConfig implements ConfigInterface
     }
 
     /**
+     * Get session.gc_maxlifetime
+     *
+     * @return int
+     */
+    public function getGcMaxlifetime()
+    {
+        if (!isset($this->options['gc_maxlifetime'])) {
+            $this->options['gc_maxlifetime'] = $this->getStorageOption('gc_maxlifetime');
+        }
+
+        return $this->options['gc_maxlifetime'];
+    }
+
+    /**
      * Set session.cookie_lifetime
      *
      * @param  int $cookieLifetime
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setCookieLifetime($cookieLifetime)
@@ -392,7 +434,7 @@ class StandardConfig implements ConfigInterface
      * Set session.cookie_path
      *
      * @param  string $cookiePath
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setCookiePath($cookiePath)
@@ -426,7 +468,7 @@ class StandardConfig implements ConfigInterface
      * Set session.cookie_domain
      *
      * @param  string $cookieDomain
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setCookieDomain($cookieDomain)
@@ -465,7 +507,7 @@ class StandardConfig implements ConfigInterface
      * Set session.cookie_secure
      *
      * @param  bool $cookieSecure
-     * @return StandardConfiguration
+     * @return StandardConfig
      */
     public function setCookieSecure($cookieSecure)
     {
@@ -520,7 +562,7 @@ class StandardConfig implements ConfigInterface
      * Set session.use_cookies
      *
      * @param  bool $useCookies
-     * @return StandardConfiguration
+     * @return StandardConfig
      */
     public function setUseCookies($useCookies)
     {
@@ -546,24 +588,42 @@ class StandardConfig implements ConfigInterface
      * Set session.entropy_file
      *
      * @param  string $entropyFile
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setEntropyFile($entropyFile)
     {
-        if (is_dir($entropyFile) || !is_readable($entropyFile)) {
-            throw new Exception\InvalidArgumentException('Invalid entropy_file provided');
+        if (!is_file($entropyFile) || !is_readable($entropyFile)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                "entropy_file '%s' doesn't exist or not readable",
+                $entropyFile
+            ));
         }
+
         $this->setOption('entropy_file', $entropyFile);
         $this->setStorageOption('entropy_file', $entropyFile);
         return $this;
     }
 
     /**
+     * Get session.entropy_file
+     *
+     * @return string
+     */
+    public function getEntropyFile()
+    {
+        if (!isset($this->options['entropy_file'])) {
+            $this->options['entropy_file'] = $this->getStorageOption('entropy_file');
+        }
+
+        return $this->options['entropy_file'];
+    }
+
+    /**
      * set session.entropy_length
      *
      * @param  int $entropyLength
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setEntropyLength($entropyLength)
@@ -581,10 +641,24 @@ class StandardConfig implements ConfigInterface
     }
 
     /**
+     * Get session.entropy_length
+     *
+     * @return string
+     */
+    public function getEntropyLength()
+    {
+        if (!isset($this->options['entropy_length'])) {
+            $this->options['entropy_length'] = $this->getStorageOption('entropy_length');
+        }
+
+        return $this->options['entropy_length'];
+    }
+
+    /**
      * Set session.cache_expire
      *
      * @param  int $cacheExpire
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setCacheExpire($cacheExpire)
@@ -604,10 +678,24 @@ class StandardConfig implements ConfigInterface
     }
 
     /**
+     * Get session.cache_expire
+     *
+     * @return string
+     */
+    public function getCacheExpire()
+    {
+        if (!isset($this->options['cache_expire'])) {
+            $this->options['cache_expire'] = $this->getStorageOption('cache_expire');
+        }
+
+        return $this->options['cache_expire'];
+    }
+
+    /**
      * Set session.hash_bits_per_character
      *
      * @param  int $hashBitsPerCharacter
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setHashBitsPerCharacter($hashBitsPerCharacter)
@@ -622,10 +710,24 @@ class StandardConfig implements ConfigInterface
     }
 
     /**
+     * Get session.hash_bits_per_character
+     *
+     * @return string
+     */
+    public function getHashBitsPerCharacter()
+    {
+        if (!isset($this->options['hash_bits_per_character'])) {
+            $this->options['hash_bits_per_character'] = $this->getStorageOption('hash_bits_per_character');
+        }
+
+        return $this->options['hash_bits_per_character'];
+    }
+
+    /**
      * Set remember_me_seconds
      *
      * @param  int $rememberMeSeconds
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setRememberMeSeconds($rememberMeSeconds)
@@ -664,7 +766,6 @@ class StandardConfig implements ConfigInterface
      */
     public function toArray()
     {
-        $options = $this->options;
         $extraOpts = array(
             'cookie_domain'       => $this->getCookieDomain(),
             'cookie_httponly'     => $this->getCookieHttpOnly(),
@@ -676,37 +777,6 @@ class StandardConfig implements ConfigInterface
             'save_path'           => $this->getSavePath(),
             'use_cookies'         => $this->getUseCookies(),
         );
-        return array_merge($options, $extraOpts);
-    }
-
-    /**
-     * Intercept get*() and set*() methods
-     *
-     * Intercepts getters and setters and passes them to getOption() and setOption(),
-     * respectively.
-     *
-     * @param  string $method
-     * @param  array $args
-     * @return mixed
-     * @throws Exception\BadMethodCallException on non-getter/setter method
-     */
-    public function __call($method, $args)
-    {
-        if ('get' == substr($method, 0, 3)) {
-            // Call to a getter; return matching option.
-            // Transform method from MixedCase to underscore_separated.
-            $option = substr($method, 3);
-            $key    = $this->getCamelCaseToUnderscoreFilter()->filter($option);
-            return $this->getOption($key);
-        }
-        if ('set' == substr($method, 0, 3)) {
-            // Call to a setter; return matching option.
-            // Transform method from MixedCase to underscore_separated.
-            $option = substr($method, 3);
-            $key    = $this->getCamelCaseToUnderscoreFilter()->filter($option);
-            $value  = array_shift($args);
-            return $this->setOption($key, $value);
-        }
-        throw new Exception\BadMethodCallException(sprintf('Method "%s" does not exist', $method));
+        return array_merge($this->options, $extraOpts);
     }
 }

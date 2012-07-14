@@ -107,8 +107,6 @@ class SessionConfig extends StandardConfig
      */
     public function getStorageOption($storageOption)
     {
-        $key       = false;
-        $transform = false;
         switch ($storageOption) {
             case 'remember_me_seconds':
                 // No remote storage option; just return the current value
@@ -128,19 +126,6 @@ class SessionConfig extends StandardConfig
     }
 
     /**
-     * Handle PHP errors
-     *
-     * @param  int $code
-     * @param  string $message
-     * @return void
-     */
-    protected function handleError($code, $message)
-    {
-        $this->phpErrorCode    = $code;
-        $this->phpErrorMessage = $message;
-    }
-
-    /**
      * Set session.save_handler
      *
      * @param  string $phpSaveHandler
@@ -154,7 +139,9 @@ class SessionConfig extends StandardConfig
         ini_set('session.save_handler', $phpSaveHandler);
         restore_error_handler();
         if ($this->phpErrorCode >= E_WARNING) {
-            throw new Exception\InvalidArgumentException('Invalid save handler specified');
+            throw new Exception\InvalidArgumentException(
+                'Invalid save handler specified: ' . $this->phpErrorMessage
+            );
         }
 
         $this->setOption('save_handler', $phpSaveHandler);
@@ -204,24 +191,6 @@ class SessionConfig extends StandardConfig
     }
 
     /**
-     * Retrieve list of valid hash functions
-     *
-     * @return array
-     */
-    protected function getHashFunctions()
-    {
-        if (empty($this->validHashFunctions)) {
-            /**
-             * @see http://php.net/manual/en/session.configuration.php#ini.session.hash-function
-             * "0" and "1" refer to MD5-128 and SHA1-160, respectively, and are
-             * valid in addition to whatever is reported by hash_algos()
-             */
-            $this->validHashFunctions = array('0', '1') + hash_algos();
-        }
-        return $this->validHashFunctions;
-    }
-
-    /**
      * Set session.hash_function
      *
      * @param  string|int $hashFunction
@@ -260,5 +229,36 @@ class SessionConfig extends StandardConfig
         $this->setOption('hash_bits_per_character', $hashBitsPerCharacter);
         ini_set('session.hash_bits_per_character', $hashBitsPerCharacter);
         return $this;
+    }
+
+    /**
+     * Retrieve list of valid hash functions
+     *
+     * @return array
+     */
+    protected function getHashFunctions()
+    {
+        if (empty($this->validHashFunctions)) {
+            /**
+             * @link http://php.net/manual/en/session.configuration.php#ini.session.hash-function
+             * "0" and "1" refer to MD5-128 and SHA1-160, respectively, and are
+             * valid in addition to whatever is reported by hash_algos()
+             */
+            $this->validHashFunctions = array('0', '1') + hash_algos();
+        }
+        return $this->validHashFunctions;
+    }
+
+    /**
+     * Handle PHP errors
+     *
+     * @param  int $code
+     * @param  string $message
+     * @return void
+     */
+    protected function handleError($code, $message)
+    {
+        $this->phpErrorCode    = $code;
+        $this->phpErrorMessage = $message;
     }
 }

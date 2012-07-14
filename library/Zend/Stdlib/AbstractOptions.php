@@ -83,7 +83,6 @@ abstract class AbstractOptions implements ParameterObjectInterface
      */
     protected function assembleSetterNameFromKey($key)
     {
-
         return 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
     }
 

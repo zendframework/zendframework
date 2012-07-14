@@ -168,7 +168,7 @@ class SessionManager extends AbstractManager
     {
         if ($this->sessionExists()) {
             throw new Exception\InvalidArgumentException(
-                'Can not set session name; session has already started'
+                'Cannot set session name after a session has already started'
             );
         }
 

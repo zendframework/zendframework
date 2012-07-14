@@ -10,19 +10,25 @@
 
 namespace ZendTest\Session;
 
-use Zend\Session\Configuration\StandardConfiguration;
+use Zend\Session\Config\SessionConfig;
 
 /**
  * @category   Zend
  * @package    Zend_Session
  * @subpackage UnitTests
  * @group      Zend_Session
+ * @runTestsInSeparateProcesses
  */
-class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
+class SessionConfigTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var SessionConfig
+     */
+    protected $config;
+
     public function setUp()
     {
-        $this->config = new StandardConfiguration;
+        $this->config = new SessionConfig;
     }
 
     // session.save_path
@@ -33,12 +39,29 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->config->setSavePath(__DIR__ . '/foobarboguspath');
     }
 
+    public function testSavePathDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.save_path'), $this->config->getSavePath());
+    }
+
     public function testSavePathIsMutable()
     {
         $this->config->setSavePath(__DIR__);
         $this->assertEquals(__DIR__, $this->config->getSavePath());
     }
+
+    public function testSavePathAltersIniSetting()
+    {
+        $this->config->setSavePath(__DIR__);
+        $this->assertEquals(__DIR__, ini_get('session.save_path'));
+    }
+
     // session.name
+
+    public function testNameDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.name'), $this->config->getName());
+    }
 
     public function testNameIsMutable()
     {
@@ -46,7 +69,18 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('FOOBAR', $this->config->getName());
     }
 
+    public function testNameAltersIniSetting()
+    {
+        $this->config->setName('FOOBAR');
+        $this->assertEquals('FOOBAR', ini_get('session.name'));
+    }
+
     // session.save_handler
+
+    public function testSaveHandlerDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.save_handler'), $this->config->getSaveHandler(), var_export($this->config->toArray(), 1));
+    }
 
     public function testSaveHandlerIsMutable()
     {
@@ -54,12 +88,35 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('user', $this->config->getSaveHandler());
     }
 
+    public function testSaveHandlerAltersIniSetting()
+    {
+        $this->config->setSaveHandler('user');
+        $this->assertEquals('user', ini_get('session.save_handler'));
+    }
+
+    public function testSettingInvalidSaveHandlerRaisesException()
+    {
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid save handler specified');
+        $this->config->setPhpSaveHandler('foobar_bogus');
+    }
+
     // session.gc_probability
+
+    public function testGcProbabilityDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.gc_probability'), $this->config->getGcProbability());
+    }
 
     public function testGcProbabilityIsMutable()
     {
         $this->config->setGcProbability(20);
         $this->assertEquals(20, $this->config->getGcProbability());
+    }
+
+    public function testGcProbabilityAltersIniSetting()
+    {
+        $this->config->setGcProbability(24);
+        $this->assertEquals(24, ini_get('session.gc_probability'));
     }
 
     public function testSettingInvalidGcProbabilityRaisesException()
@@ -82,10 +139,21 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
 
     // session.gc_divisor
 
+    public function testGcDivisorDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.gc_divisor'), $this->config->getGcDivisor());
+    }
+
     public function testGcDivisorIsMutable()
     {
         $this->config->setGcDivisor(20);
         $this->assertEquals(20, $this->config->getGcDivisor());
+    }
+
+    public function testGcDivisorAltersIniSetting()
+    {
+        $this->config->setGcDivisor(24);
+        $this->assertEquals(24, ini_get('session.gc_divisor'));
     }
 
     public function testSettingInvalidGcDivisorRaisesException()
@@ -102,10 +170,21 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
 
     // session.gc_maxlifetime
 
+    public function testGcMaxlifetimeDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.gc_maxlifetime'), $this->config->getGcMaxlifetime());
+    }
+
     public function testGcMaxlifetimeIsMutable()
     {
         $this->config->setGcMaxlifetime(20);
         $this->assertEquals(20, $this->config->getGcMaxlifetime());
+    }
+
+    public function testGcMaxlifetimeAltersIniSetting()
+    {
+        $this->config->setGcMaxlifetime(24);
+        $this->assertEquals(24, ini_get('session.gc_maxlifetime'));
     }
 
     public function testSettingInvalidGcMaxlifetimeRaisesException()
@@ -122,6 +201,11 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
 
     // session.serialize_handler
 
+    public function testSerializeHandlerDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.serialize_handler'), $this->config->getSerializeHandler());
+    }
+
     public function testSerializeHandlerIsMutable()
     {
         $value = extension_loaded('wddx') ? 'wddx' : 'php_binary';
@@ -129,7 +213,25 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $this->config->getSerializeHandler());
     }
 
+    public function testSerializeHandlerAltersIniSetting()
+    {
+        $value = extension_loaded('wddx') ? 'wddx' : 'php_binary';
+        $this->config->setSerializeHandler($value);
+        $this->assertEquals($value, ini_get('session.serialize_handler'));
+    }
+
+    public function testSettingInvalidSerializeHandlerRaisesException()
+    {
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid serialize handler specified');
+        $this->config->setSerializeHandler('foobar_bogus');
+    }
+
     // session.cookie_lifetime
+
+    public function testCookieLifetimeDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.cookie_lifetime'), $this->config->getCookieLifetime());
+    }
 
     public function testCookieLifetimeIsMutable()
     {
@@ -137,10 +239,16 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(20, $this->config->getCookieLifetime());
     }
 
+    public function testCookieLifetimeAltersIniSetting()
+    {
+        $this->config->setCookieLifetime(24);
+        $this->assertEquals(24, ini_get('session.cookie_lifetime'));
+    }
+
     public function testCookieLifetimeCanBeZero()
     {
         $this->config->setCookieLifetime(0);
-        $this->assertEquals(0, $this->config->getCookieLifetime());
+        $this->assertEquals(0, ini_get('session.cookie_lifetime'));
     }
 
     public function testSettingInvalidCookieLifetimeRaisesException()
@@ -157,10 +265,21 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
 
     // session.cookie_path
 
+    public function testCookiePathDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.cookie_path'), $this->config->getCookiePath());
+    }
+
     public function testCookiePathIsMutable()
     {
         $this->config->setCookiePath('/foo');
         $this->assertEquals('/foo', $this->config->getCookiePath());
+    }
+
+    public function testCookiePathAltersIniSetting()
+    {
+        $this->config->setCookiePath('/bar');
+        $this->assertEquals('/bar', ini_get('session.cookie_path'));
     }
 
     public function testSettingInvalidCookiePathRaisesException()
@@ -183,6 +302,11 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
 
     // session.cookie_domain
 
+    public function testCookieDomainDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.cookie_domain'), $this->config->getCookieDomain());
+    }
+
     public function testCookieDomainIsMutable()
     {
         $this->config->setCookieDomain('example.com');
@@ -193,6 +317,12 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $this->config->setCookieDomain('');
         $this->assertEquals('', $this->config->getCookieDomain());
+    }
+
+    public function testCookieDomainAltersIniSetting()
+    {
+        $this->config->setCookieDomain('localhost');
+        $this->assertEquals('localhost', ini_get('session.cookie_domain'));
     }
 
     public function testSettingInvalidCookieDomainRaisesException()
@@ -209,48 +339,111 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
 
     // session.cookie_secure
 
+    public function testCookieSecureDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.cookie_secure'), $this->config->getCookieSecure());
+    }
+
     public function testCookieSecureIsMutable()
     {
-        $this->config->setCookieSecure(true);
-        $this->assertEquals(true, $this->config->getCookieSecure());
+        $value = ini_get('session.cookie_secure') ? false : true;
+        $this->config->setCookieSecure($value);
+        $this->assertEquals($value, $this->config->getCookieSecure());
+    }
+
+    public function testCookieSecureAltersIniSetting()
+    {
+        $value = ini_get('session.cookie_secure') ? false : true;
+        $this->config->setCookieSecure($value);
+        $this->assertEquals($value, ini_get('session.cookie_secure'));
     }
 
     // session.cookie_httponly
 
+    public function testCookieHttpOnlyDefaultsToIniSettings()
+    {
+        $this->assertSame((bool) ini_get('session.cookie_httponly'), $this->config->getCookieHttpOnly());
+    }
+
     public function testCookieHttpOnlyIsMutable()
     {
-        $this->config->setCookieHttpOnly(true);
-        $this->assertEquals(true, $this->config->getCookieHttpOnly());
+        $value = ini_get('session.cookie_httponly') ? false : true;
+        $this->config->setCookieHttpOnly($value);
+        $this->assertEquals($value, $this->config->getCookieHttpOnly());
+    }
+
+    public function testCookieHttpOnlyAltersIniSetting()
+    {
+        $value = ini_get('session.cookie_httponly') ? false : true;
+        $this->config->setCookieHttpOnly($value);
+        $this->assertEquals($value, ini_get('session.cookie_httponly'));
     }
 
     // session.use_cookies
 
+    public function testUseCookiesDefaultsToIniSettings()
+    {
+        $this->assertSame((bool) ini_get('session.use_cookies'), $this->config->getUseCookies());
+    }
+
     public function testUseCookiesIsMutable()
     {
-        $this->config->setUseCookies(true);
-        $this->assertEquals(true, (bool) $this->config->getUseCookies());
+        $value = ini_get('session.use_cookies') ? false : true;
+        $this->config->setUseCookies($value);
+        $this->assertEquals($value, (bool) $this->config->getUseCookies());
+    }
+
+    public function testUseCookiesAltersIniSetting()
+    {
+        $value = ini_get('session.use_cookies') ? false : true;
+        $this->config->setUseCookies($value);
+        $this->assertEquals($value, (bool) ini_get('session.use_cookies'));
     }
 
     // session.use_only_cookies
 
+    public function testUseOnlyCookiesDefaultsToIniSettings()
+    {
+        $this->assertSame((bool) ini_get('session.use_only_cookies'), $this->config->getUseOnlyCookies());
+    }
+
     public function testUseOnlyCookiesIsMutable()
     {
-        $this->config->setUseOnlyCookies(true);
-        $this->assertEquals(true, (bool) $this->config->getUseOnlyCookies());
+        $value = ini_get('session.use_only_cookies') ? false : true;
+        $this->config->setOption('use_only_cookies', $value);
+        $this->assertEquals($value, (bool) $this->config->getOption('use_only_cookies'));
+    }
+
+    public function testUseOnlyCookiesAltersIniSetting()
+    {
+        $value = ini_get('session.use_only_cookies') ? false : true;
+        $this->config->setOption('use_only_cookies', $value);
+        $this->assertEquals($value, (bool) ini_get('session.use_only_cookies'));
     }
 
     // session.referer_check
 
+    public function testRefererCheckDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.referer_check'), $this->config->getRefererCheck());
+    }
+
     public function testRefererCheckIsMutable()
     {
-        $this->config->setRefererCheck('FOOBAR');
-        $this->assertEquals('FOOBAR', $this->config->getRefererCheck());
+        $this->config->setOption('referer_check', 'FOOBAR');
+        $this->assertEquals('FOOBAR', $this->config->getOption('referer_check'));
     }
 
     public function testRefererCheckMayBeEmpty()
     {
-        $this->config->setRefererCheck('');
-        $this->assertEquals('', $this->config->getRefererCheck());
+        $this->config->setOption('referer_check', '');
+        $this->assertEquals('', $this->config->getOption('referer_check'));
+    }
+
+    public function testRefererCheckAltersIniSetting()
+    {
+        $this->config->setOption('referer_check', 'BARBAZ');
+        $this->assertEquals('BARBAZ', ini_get('session.referer_check'));
     }
 
     // session.entropy_file
@@ -267,13 +460,29 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->config->setEntropyFile(__DIR__);
     }
 
+    public function testEntropyFileDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.entropy_file'), $this->config->getEntropyFile());
+    }
+
     public function testEntropyFileIsMutable()
     {
         $this->config->setEntropyFile(__FILE__);
         $this->assertEquals(__FILE__, $this->config->getEntropyFile());
     }
 
+    public function testEntropyFileAltersIniSetting()
+    {
+        $this->config->setEntropyFile(__FILE__);
+        $this->assertEquals(__FILE__, ini_get('session.entropy_file'));
+    }
+
     // session.entropy_length
+
+    public function testEntropyLengthDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.entropy_length'), $this->config->getEntropyLength());
+    }
 
     public function testEntropyLengthIsMutable()
     {
@@ -281,21 +490,29 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(20, $this->config->getEntropyLength());
     }
 
+    public function testEntropyLengthAltersIniSetting()
+    {
+        $this->config->setEntropyLength(24);
+        $this->assertEquals(24, ini_get('session.entropy_length'));
+    }
+
     public function testEntropyLengthCanBeZero()
     {
         $this->config->setEntropyLength(0);
-        $this->assertEquals(0, $this->config->getEntropyLength());
+        $this->assertEquals(0, ini_get('session.entropy_length'));
     }
 
     public function testSettingInvalidEntropyLengthRaisesException()
     {
-        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid entropy_length; must be numeric');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException',
+                                    'Invalid entropy_length; must be numeric');
         $this->config->setEntropyLength('foobar_bogus');
     }
 
     public function testSettingInvalidEntropyLengthRaisesException2()
     {
-        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid entropy_length; must be a positive integer or zero');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException',
+                                    'Invalid entropy_length; must be a positive integer or zero');
         $this->config->setEntropyLength(-1);
     }
 
@@ -311,6 +528,11 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCacheLimiterDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.cache_limiter'), $this->config->getCacheLimiter());
+    }
+
     /**
      * @dataProvider cacheLimiters
      */
@@ -320,12 +542,38 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($cacheLimiter, $this->config->getCacheLimiter());
     }
 
+    /**
+     * @dataProvider cacheLimiters
+     */
+    public function testCacheLimiterAltersIniSetting($cacheLimiter)
+    {
+        $this->config->setCacheLimiter($cacheLimiter);
+        $this->assertEquals($cacheLimiter, ini_get('session.cache_limiter'));
+    }
+
+    public function testSettingInvalidCacheLimiterRaisesException()
+    {
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid cache limiter provided');
+        $this->config->setCacheLimiter('foobar_bogus');
+    }
+
     // session.cache_expire
+
+    public function testCacheExpireDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.cache_expire'), $this->config->getCacheExpire());
+    }
 
     public function testCacheExpireIsMutable()
     {
         $this->config->setCacheExpire(20);
         $this->assertEquals(20, $this->config->getCacheExpire());
+    }
+
+    public function testCacheExpireAltersIniSetting()
+    {
+        $this->config->setCacheExpire(24);
+        $this->assertEquals(24, ini_get('session.cache_expire'));
     }
 
     public function testSettingInvalidCacheExpireRaisesException()
@@ -342,10 +590,23 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
 
     // session.use_trans_sid
 
+    public function testUseTransSidDefaultsToIniSettings()
+    {
+        $this->assertSame((bool) ini_get('session.use_trans_sid'), $this->config->getUseTransSid());
+    }
+
     public function testUseTransSidIsMutable()
     {
-        $this->config->setUseTransSid(true);
-        $this->assertEquals(true, (bool) $this->config->getUseTransSid());
+        $value = ini_get('session.use_trans_sid') ? false : true;
+        $this->config->setOption('use_trans_sid', $value);
+        $this->assertEquals($value, (bool) $this->config->getOption('use_trans_sid'));
+    }
+
+    public function testUseTransSidAltersIniSetting()
+    {
+        $value = ini_get('session.use_trans_sid') ? false : true;
+        $this->config->setOption('use_trans_sid', $value);
+        $this->assertEquals($value, (bool) ini_get('session.use_trans_sid'));
     }
 
     // session.hash_function
@@ -360,6 +621,11 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         return $provider;
     }
 
+    public function testHashFunctionDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.hash_function'), $this->config->getHashFunction());
+    }
+
     /**
      * @dataProvider hashFunctions
      */
@@ -367,6 +633,21 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $this->config->setHashFunction($hashFunction);
         $this->assertEquals($hashFunction, $this->config->getHashFunction());
+    }
+
+    /**
+     * @dataProvider hashFunctions
+     */
+    public function testHashFunctionAltersIniSetting($hashFunction)
+    {
+        $this->config->setHashFunction($hashFunction);
+        $this->assertEquals($hashFunction, ini_get('session.hash_function'));
+    }
+
+    public function testSettingInvalidHashFunctionRaisesException()
+    {
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid hash function provided');
+        $this->config->setHashFunction('foobar_bogus');
     }
 
     // session.hash_bits_per_character
@@ -380,6 +661,11 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testHashBitsPerCharacterDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('session.hash_bits_per_character'), $this->config->getHashBitsPerCharacter());
+    }
+
     /**
      * @dataProvider hashBitsPerCharacters
      */
@@ -389,13 +675,28 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($hashBitsPerCharacter, $this->config->getHashBitsPerCharacter());
     }
 
+    /**
+     * @dataProvider hashBitsPerCharacters
+     */
+    public function testHashBitsPerCharacterAltersIniSetting($hashBitsPerCharacter)
+    {
+        $this->config->setHashBitsPerCharacter($hashBitsPerCharacter);
+        $this->assertEquals($hashBitsPerCharacter, ini_get('session.hash_bits_per_character'));
+    }
+
     public function testSettingInvalidHashBitsPerCharacterRaisesException()
     {
-        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid hash bits per character provided');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException',
+                                    'Invalid hash bits per character provided');
         $this->config->setHashBitsPerCharacter('foobar_bogus');
     }
 
     // url_rewriter.tags
+
+    public function testUrlRewriterTagsDefaultsToIniSettings()
+    {
+        $this->assertSame(ini_get('url_rewriter.tags'), $this->config->getUrlRewriterTags());
+    }
 
     public function testUrlRewriterTagsIsMutable()
     {
@@ -403,27 +704,40 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('a=href,form=action', $this->config->getUrlRewriterTags());
     }
 
+    public function testUrlRewriterTagsAltersIniSetting()
+    {
+        $this->config->setUrlRewriterTags('a=href,fieldset=');
+        $this->assertEquals('a=href,fieldset=', ini_get('url_rewriter.tags'));
+    }
+
     // remember_me_seconds
+
+    public function testRememberMeSecondsDefaultsToTwoWeeks()
+    {
+        $this->assertEquals(1209600, $this->config->getRememberMeSeconds());
+    }
 
     public function testRememberMeSecondsIsMutable()
     {
-        $this->config->setRememberMeSeconds(20);
-        $this->assertEquals(20, $this->config->getRememberMeSeconds());
-    }
-
-    public function testSettingInvalidRememberMeSecondsRaisesException()
-    {
-        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid remember_me_seconds; must be numeric');
-        $this->config->setRememberMeSeconds('foobar_bogus');
-    }
-
-    public function testSettingInvalidRememberMeSecondsRaisesException2()
-    {
-        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid remember_me_seconds; must be a positive integer');
-        $this->config->setRememberMeSeconds(-1);
+        $this->config->setRememberMeSeconds(604800);
+        $this->assertEquals(604800, $this->config->getRememberMeSeconds());
     }
 
     // setOptions
+
+    /**
+     * @dataProvider optionsProvider
+     */
+    public function testSetOptionsTranslatesUnderscoreSeparatedKeys($option, $getter, $value)
+    {
+        $options = array($option => $value);
+        $this->config->setOptions($options);
+        if ('getOption' == $getter) {
+            $this->assertSame($value, $this->config->getOption($option));
+        } else {
+            $this->assertSame($value, $this->config->$getter());
+        }
+    }
 
     public function optionsProvider()
     {
@@ -440,7 +754,7 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'save_handler',
-                'getSaveHandler',
+                'getOption',
                 'user',
             ),
             array(
@@ -535,7 +849,7 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'hash_bits_per_character',
-                'getHashBitsPerCharacter',
+                'getOption',
                 5,
             ),
             array(
@@ -544,15 +858,5 @@ class StandardConfigurationTest extends \PHPUnit_Framework_TestCase
                 'a=href',
             ),
         );
-    }
-
-    /**
-     * @dataProvider optionsProvider
-     */
-    public function testSetOptionsTranslatesUnderscoreSeparatedKeys($option, $getter, $value)
-    {
-        $options = array($option => $value);
-        $this->config->setOptions($options);
-        $this->assertSame($value, $this->config->$getter());
     }
 }

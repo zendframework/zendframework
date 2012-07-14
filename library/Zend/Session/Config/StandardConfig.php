@@ -233,10 +233,10 @@ class StandardConfig implements ConfigInterface
     public function setSavePath($savePath)
     {
         if (!is_dir($savePath)) {
-            throw new Exception\InvalidArgumentException('Invalid save_path; not a directory');
+            throw new Exception\InvalidArgumentException('Invalid save_path provided; not a directory');
         }
         if (!is_writable($savePath)) {
-            throw new Exception\InvalidArgumentException('Invalid save_path; not writable');
+            throw new Exception\InvalidArgumentException('Invalid save_path provided; not writable');
         }
 
         $this->savePath = $savePath;
@@ -256,6 +256,8 @@ class StandardConfig implements ConfigInterface
         }
         return $this->savePath;
     }
+
+
 
     /**
      * Set session.name
@@ -595,7 +597,7 @@ class StandardConfig implements ConfigInterface
     {
         if (!is_file($entropyFile) || !is_readable($entropyFile)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                "entropy_file '%s' doesn't exist or not readable",
+                "Invalid entropy_file provided: '%s'; doesn't exist or not readable",
                 $entropyFile
             ));
         }
@@ -778,5 +780,36 @@ class StandardConfig implements ConfigInterface
             'use_cookies'         => $this->getUseCookies(),
         );
         return array_merge($this->options, $extraOpts);
+    }
+
+    /**
+     * Intercept get*() and set*() methods
+     *
+     * Intercepts getters and setters and passes them to getOption() and setOption(),
+     * respectively.
+     *
+     * @param  string $method
+     * @param  array $args
+     * @return mixed
+     * @throws Exception\BadMethodCallException on non-getter/setter method
+     */
+    public function __call($method, $args)
+    {
+        $prefix = substr($method, 0, 3);
+        $option = substr($method, 3);
+        $key    = strtolower(preg_replace('#(?<=[a-z])([A-Z])#', '_\1', $option));
+
+        if ($prefix === 'set') {
+            $value  = array_shift($args);
+            return $this->setOption($key, $value);
+        } elseif ($prefix === 'get') {
+            return $this->getOption($key);
+        } else {
+            throw new Exception\BadMethodCallException(sprintf(
+                'Method "%s" does not exist in %s',
+                $method,
+                get_called_class()
+            ));
+        }
     }
 }

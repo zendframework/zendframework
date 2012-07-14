@@ -26,7 +26,7 @@ use Zend\Session\Storage\StorageInterface as Storage;
 abstract class AbstractManager implements Manager
 {
     /**
-     * @var Configuration
+     * @var Config
      */
     protected $config;
 
@@ -80,9 +80,9 @@ abstract class AbstractManager implements Manager
                     __NAMESPACE__
                 ));
             }
-
-            $this->config = $config;
         }
+
+        $this->config = $config;
 
         // init storage
         if ($storage === null) {
@@ -102,12 +102,13 @@ abstract class AbstractManager implements Manager
                     __NAMESPACE__
                 ));
             }
-
-            $this->storage = $storage;
         }
 
+        $this->storage = $storage;
+
+        // save handler
         if ($saveHandler !== null) {
-            $this->setSaveHandler($saveHandler);
+            $this->saveHandler = $saveHandler;
         }
     }
 

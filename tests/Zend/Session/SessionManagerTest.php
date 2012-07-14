@@ -57,15 +57,15 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         return false;
     }
 
-    public function testManagerUsesSessionConfigurationByDefault()
+    public function testManagerUsesSessionConfigByDefault()
     {
         $config = $this->manager->getConfig();
-        $this->assertTrue($config instanceof Session\Configuration\SessionConfiguration);
+        $this->assertTrue($config instanceof Session\Config\SessionConfig);
     }
 
     public function testCanPassConfigurationToConstructor()
     {
-        $config = new Session\Configuration\StandardConfiguration();
+        $config = new Session\Config\StandardConfig();
         $manager = new SessionManager($config);
         $this->assertSame($config, $manager->getConfig());
     }
@@ -229,7 +229,8 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingNameWhenAnActiveSessionExistsRaisesException()
     {
-        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Cannot set session name after a session has already started');
+        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException',
+                                    'Cannot set session name after a session has already started');
         $this->manager->start();
         $this->manager->setName('foobar');
     }

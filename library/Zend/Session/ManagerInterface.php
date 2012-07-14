@@ -23,10 +23,13 @@ use Zend\Session\Storage\StorageInterface as Storage;
  */
 interface ManagerInterface
 {
-    public function __construct(Config $config = null, Storage $storage = null, SaveHandler $saveHandler = null);
-
+    public function setConfig(Config $config);
     public function getConfig();
+
+    public function setStorage(Storage $storage);
     public function getStorage();
+
+    public function setSaveHandler(SaveHandler $saveHandler);
     public function getSaveHandler();
 
     public function sessionExists();
@@ -36,6 +39,7 @@ interface ManagerInterface
 
     public function setName($name);
     public function getName();
+
     public function setId($id);
     public function getId();
     public function regenerateId();

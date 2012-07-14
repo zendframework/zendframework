@@ -124,16 +124,6 @@ class Container extends ArrayObject
     }
 
     /**
-     * Get manager instance
-     *
-     * @return Manager
-     */
-    public function getManager()
-    {
-        return $this->manager;
-    }
-
-    /**
      * Set session manager
      *
      * @param  null|Manager $manager
@@ -152,6 +142,16 @@ class Container extends ArrayObject
         }
         $this->manager = $manager;
         return $this;
+    }
+
+    /**
+     * Get manager instance
+     *
+     * @return Manager
+     */
+    public function getManager()
+    {
+        return $this->manager;
     }
 
     /**

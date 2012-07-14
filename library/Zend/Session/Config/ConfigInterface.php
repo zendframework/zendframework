@@ -18,10 +18,10 @@ namespace Zend\Session\Config;
  */
 interface ConfigInterface
 {
-    public function setOptions(array $options);
+    public function setOptions($options);
     public function setOption($option, $value);
-    public function hasOption($option);
     public function getOption($option);
+    public function hasOption($option);
     public function toArray();
 
     public function setName($name);
@@ -40,8 +40,10 @@ interface ConfigInterface
     public function getCookieSecure();
     public function setCookieHttpOnly($cookieHttpOnly);
     public function getCookieHttpOnly();
+
     public function setUseCookies($useCookies);
     public function getUseCookies();
+
     public function setRememberMeSeconds($rememberMeSeconds);
     public function getRememberMeSeconds();
 }

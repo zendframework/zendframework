@@ -74,11 +74,11 @@ abstract class AbstractAdapter
     protected $translator;
 
     /**
-     * Is translation disabled?
+     * Is translation enabled?
      *
      * @var bool
      */
-    protected $translatorDisabled = false;
+    protected $translatorEnabled = true;
 
     /**
      * Internal list of validators
@@ -1098,7 +1098,7 @@ abstract class AbstractAdapter
      */
     public function getTranslator()
     {
-        if ($this->translatorIsDisabled()) {
+        if ($this->isTranslatorEnabled()) {
             return null;
         }
 
@@ -1106,25 +1106,25 @@ abstract class AbstractAdapter
     }
 
     /**
-     * Indicate whether or not translation should be disabled
+     * Indicate whether or not translation should be enabled
      *
      * @param  bool $flag
      * @return AbstractAdapter
      */
-    public function setDisableTranslator($flag)
+    public function setTranslatorEnabled($flag)
     {
-        $this->translatorDisabled = (bool) $flag;
+        $this->translatorEnabled = (bool) $flag;
         return $this;
     }
 
     /**
-     * Is translation disabled?
+     * Is translation enabled?
      *
      * @return bool
      */
-    public function translatorIsDisabled()
+    public function isTranslatorEnabled()
     {
-        return $this->translatorDisabled;
+        return $this->translatorEnabled;
     }
 
     /**

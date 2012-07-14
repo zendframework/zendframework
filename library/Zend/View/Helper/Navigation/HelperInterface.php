@@ -125,20 +125,20 @@ interface HelperInterface
     public function setRenderInvisible($renderInvisible = true);
 
     /**
-     * Sets whether translator should be used
+     * Sets whether translator should be enabled and used
      *
-     * @param  bool $useTranslator [optional] whether translator should be used.
-     *                             Default is true.
+     * @param  bool $enabled    [optional] whether translator should be used.
+     *                          Default is true.
      * @return HelperInterface  fluent interface, returns self
      */
-    public function setUseTranslator($useTranslator = true);
+    public function setTranslatorEnabled($enabled = true);
 
     /**
-     * Returns whether translator should be used
+     * Returns whether translator should be enabled and used
      *
      * @return bool  whether translator should be used
      */
-    public function getUseTranslator();
+    public function isTranslatorEnabled();
 
     /**
      * Checks if the helper has a container

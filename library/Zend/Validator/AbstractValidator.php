@@ -53,7 +53,7 @@ abstract class AbstractValidator implements ValidatorInterface
         'messageVariables'     => array(),   // Array of additional variables available for validation failure messages
         'translator'           => null,      // Translation object to used -> Zend\I18n\Translator\Translator
         'translatorTextDomain' => null,      // Translation text domain
-        'translatorDisabled'   => false,     // Is translation disabled?
+        'translatorEnabled'    => true,      // Is translation enabled?
         'valueObscured'        => false,     // Flag indicating whether or not value should be obfuscated in error messages
     );
 
@@ -417,7 +417,7 @@ abstract class AbstractValidator implements ValidatorInterface
      */
     public function getTranslator()
     {
-        if ($this->isTranslatorDisabled()) {
+        if (! $this->isTranslatorEnabled()) {
             return null;
         }
 
@@ -523,25 +523,25 @@ abstract class AbstractValidator implements ValidatorInterface
     }
 
     /**
-     * Indicate whether or not translation should be disabled
+     * Indicate whether or not translation should be enabled
      *
      * @param  bool $flag
      * @return AbstractValidator
      */
-    public function setTranslatorDisabled($flag)
+    public function setTranslatorEnabled($flag)
     {
-        $this->abstractOptions['translatorDisabled'] = (bool) $flag;
+        $this->abstractOptions['translatorEnabled'] = (bool) $flag;
         return $this;
     }
 
     /**
-     * Is translation disabled?
+     * Is translation enabled?
      *
      * @return bool
      */
-    public function isTranslatorDisabled()
+    public function isTranslatorEnabled()
     {
-        return $this->abstractOptions['translatorDisabled'];
+        return $this->abstractOptions['translatorEnabled'];
     }
 
     /**

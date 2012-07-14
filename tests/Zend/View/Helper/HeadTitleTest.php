@@ -182,7 +182,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
         $translator->getPluginManager()->setService('default', $loader);
         $translator->addTranslationFile('default', null);
 
-        $this->helper->enableTranslation();
+        $this->helper->setTranslatorEnabled(true);
         $this->helper->setTranslator($translator);
         $this->helper->__invoke('Message_1');
         $this->assertEquals('<title>Message 1 (en)</title>', $this->helper->toString());

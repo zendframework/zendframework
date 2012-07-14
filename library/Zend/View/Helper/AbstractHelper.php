@@ -47,7 +47,7 @@ abstract class AbstractHelper implements HelperInterface
      *
      * @var bool
      */
-    protected $useTranslator = true;
+    protected $translatorEnabled = true;
 
     /**
      * Default translation object for all validate objects
@@ -128,26 +128,26 @@ abstract class AbstractHelper implements HelperInterface
     }
 
     /**
-     * Sets whether translator should be used
+     * Sets whether translator is enabled and should be used
      *
-     * @param  bool $useTranslator [optional] whether translator should be used.
-     *                             Default is true.
+     * @param  bool $enabled [optional] whether translator should be used.
+     *                       Default is true.
      * @return AbstractHelper
      */
-    public function setUseTranslator($useTranslator = true)
+    public function setTranslatorEnabled($enabled = true)
     {
-        $this->useTranslator = (bool) $useTranslator;
+        $this->translatorEnabled = (bool) $enabled;
         return $this;
     }
 
     /**
-     * Returns whether translator should be used
+     * Returns whether translator is enabled and should be used
      *
      * @return bool
      */
-    public function getUseTranslator()
+    public function isTranslatorEnabled()
     {
-        return $this->useTranslator;
+        return $this->translatorEnabled;
     }
 
     /**

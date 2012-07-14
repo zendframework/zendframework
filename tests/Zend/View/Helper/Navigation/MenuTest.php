@@ -196,7 +196,7 @@ class MenuTest extends AbstractTest
     {
         $translator = $this->_getTranslator();
         $this->_helper->setTranslator($translator);
-        $this->_helper->setUseTranslator(false);
+        $this->_helper->setTranslatorEnabled(false);
 
         $expected = $this->_getExpected('menu/default1.html');
         $this->assertEquals($expected, $this->_helper->render());

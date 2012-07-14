@@ -83,10 +83,8 @@ abstract class AbstractOptions implements ParameterObjectInterface
      */
     protected function assembleSetterNameFromKey($key)
     {
-        $parts = explode('_', $key);
-        $parts = array_map('ucfirst', $parts);
-        $setter = 'set' . implode('', $parts);
-        return $setter;
+
+        return 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
     }
 
     /**
@@ -96,10 +94,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
      */
     protected function assembleGetterNameFromKey($key)
     {
-        $parts = explode('_', $key);
-        $parts = array_map('ucfirst', $parts);
-        $getter = 'get' . implode('', $parts);
-        return $getter;
+        return 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
     }
 
     /**

@@ -57,6 +57,26 @@ abstract class AbstractOptions implements ParameterObjectInterface
     }
 
     /**
+     * Cast to array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $array = array();
+        $transform = function($letters) {
+            $letter = array_shift($letters);
+            return '_' . strtolower($letter);
+        };
+        foreach ($this as $key => $value) {
+            if ($key === '__strictMode__') continue;
+            $normalizedKey = preg_replace_callback('/([A-Z])/', $transform, $key);
+            $array[$normalizedKey] = $value;
+        }
+        return $array;
+    }
+
+    /**
      * @param string $key name of option with underscore
      * @return string name of setter method
      * @throws Exception\BadMethodCallException if setter method is undefined

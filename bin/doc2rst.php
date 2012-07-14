@@ -55,7 +55,7 @@ $loader->register();
 $rules = array(
     'help|h'      => 'Get usage message',
     'docbook|d-s' => 'Docbook file to convert',
-    'output|o-s'  => 'Output file; if not provided, assumes <docbook>.rst"',
+    'output|o-s'  => 'Output dir; if not provided, assumes normalize(<docbook>).rst"',
 );
 
 try {
@@ -79,11 +79,12 @@ if (!file_exists($docbook)) {
 
 $rstFile = $opts->getOption('o');
 if (empty($rstFile)) {
-    if (substr($docbook,-4) === '.xml') {
-        $rstFile = substr($docbook, 0, strlen($docbook)-4) . '.rst';
-    } else {
-        $rstFile = $docbook . '.rst';
-    }
+    $rstFile = '.';
+}
+
+if (is_dir($rstFile)) {
+    $rstFile  = realpath($rstFile) . DIRECTORY_SEPARATOR;
+    $rstFile .= RstConvert::XmlFileNameToRst(basename($docbook));
 }
 
 // Load the docbook file (input)
@@ -142,12 +143,14 @@ class RstConvert
      * Convert the programlisting tag
      *
      * @param  string $text
+     * @param  string $language
      * @return string
      */
-    public static function programlisting($text)
+    public static function programlisting($text, $language)
     {
+        $language = ($language)?:'php';
         $rows   = explode("\n", $text);
-        $output = "\n.. code-block:: php\n    :linenos:\n";
+        $output = "\n.. code-block:: $language\n    :linenos:\n";
         foreach ($rows as $row) {
             $output .= "    $row\n";
         }
@@ -232,25 +235,24 @@ class RstConvert
      * @param  string $text
      * @return string
      */
-    public static function formatText($text)
-    {
-        return str_replace('\\', '\\\\', trim(preg_replace('/\s+/', ' ', str_replace("\n", '', $text))));
+    public static function formatText($text) {
+        return str_replace('\\', '\\\\', preg_replace('/\s+/m', ' ', preg_replace('/(([\.:])|^\s([A-Z0-9]))\s*[\r\n]\s*$/', '$2$3', $text)));
     }
 
     /**
-     * Conver the link tag
+     * Convert the link tag
      *
-     * @param  DOMElement $node
+     * @param  \DOMElement $node
      * @return string
      */
     public static function link($node)
     {
-        $value = self::formatText($node[0]->nodeValue);
+        $value = trim(self::formatText($node[0]->nodeValue));
         if ($node[0]->getAttribute('linkend')) {
-            return " :ref:`$value <" . $node[0]->getAttribute('linkend') . ">` ";
+            return ":ref:`$value <" . $node[0]->getAttribute('linkend') . ">`";
         } else {
-            self::$links[$value] = $node[0]->getAttribute('xlink:href');
-            return " `$value`_ ";
+            self::$links[$value] = trim($node[0]->getAttribute('xlink:href'));
+            return "`$value`_";
         }
     }
 
@@ -271,7 +273,7 @@ class RstConvert
     /**
      * Convert the table tag
      *
-     * @param  DOMElement $node
+     * @param  \DOMElement $node
      * @return string
      */
     public static function table($node)

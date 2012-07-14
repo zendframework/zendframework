@@ -13,8 +13,8 @@
 </xsl:template>
 
 <!-- title -->
-<xsl:template match="/doc:section|/doc:appendix|/doc:chapter"> 
-<xsl:if test="../@xml:id != ''">
+<xsl:template match="/doc:article|/doc:section|/doc:appendix|/doc:chapter">
+<xsl:if test="@xml:id != ''">
 .. _<xsl:value-of select="@xml:id" />:
 </xsl:if>
 <xsl:text>
@@ -32,11 +32,11 @@
 </xsl:template>
 
 <!-- para -->
-<xsl:template match="doc:para">  
+<xsl:template match="doc:para">
 <xsl:text>
 </xsl:text>
 <xsl:if test="name(..) = 'note'">
-<xsl:text>    </xsl:text>
+<xsl:text>   </xsl:text>
 </xsl:if>
 <xsl:apply-templates/>
 <xsl:text>
@@ -54,13 +54,13 @@
 </xsl:template>
 
 <!-- classname, interfacename, methodname, type, command, property, constant, filename, varname -->
-<xsl:template match="//doc:classname|//doc:interfacename|//doc:methodname|//doc:type|//doc:command|//doc:property|//doc:constant|//doc:filename|//doc:varname"> ``<xsl:value-of select="normalize-space()" />`` </xsl:template>
+<xsl:template match="//doc:classname|//doc:interfacename|//doc:methodname|//doc:type|//doc:command|//doc:property|//doc:constant|//doc:filename|//doc:varname">``<xsl:value-of select="normalize-space()" />``</xsl:template>
 
 <!-- acronym  -->
-<xsl:template match="//doc:acronym"> *<xsl:value-of select="normalize-space()" />* </xsl:template>
+<xsl:template match="//doc:acronym">*<xsl:value-of select="normalize-space()" />*</xsl:template>
 
 <!-- emphasis  -->
-<xsl:template match="/doc:emphasis"> **<xsl:value-of select="normalize-space()" />** </xsl:template>
+<xsl:template match="//doc:emphasis">**<xsl:value-of select="normalize-space()" />**</xsl:template>
 
 <!-- example -->
 <xsl:template match ="//doc:example">
@@ -69,7 +69,7 @@
 
 <!-- programlisting -->
 <xsl:template match="//doc:programlisting">
-<xsl:value-of select="php:function('ZendBin\RstConvert::programlisting', string(.))" />
+<xsl:value-of select="php:function('ZendBin\RstConvert::programlisting', string(.), string(@xml:lang|@language))" />
 </xsl:template>
 
 <!-- varlistentry -->
@@ -98,15 +98,20 @@
 <!-- note -->
 <xsl:template match="//doc:note">
 .. note::
-    **<xsl:value-of select="php:function('ZendBin\RstConvert::formatText', string(doc:title))" />**
-<xsl:apply-templates select="*[name(.) != 'title']"/>
+<xsl:if test="doc:title != ''">    **<xsl:value-of select="php:function('ZendBin\RstConvert::formatText', string(doc:title))" />**
+</xsl:if>
+<xsl:if test="doc:info/doc:title != ''">    **<xsl:value-of select="php:function('ZendBin\RstConvert::formatText', string(doc:info/doc:title))" />**
+</xsl:if>
+<xsl:apply-templates select="*[(name(.) != 'title') and (name(.) != 'info')]"/>
 </xsl:template>
 
 <!-- table -->
 <xsl:template match="//doc:table">
+<xsl:if test="@xml:id != ''">
 .. _<xsl:value-of select="@xml:id" />:
 <xsl:text>
 </xsl:text>
+</xsl:if>
 <xsl:value-of select="php:function('ZendBin\RstConvert::title', string(doc:title))" />
 <xsl:value-of select="php:function('ZendBin\RstConvert::table', doc:tgroup)" />
 </xsl:template>

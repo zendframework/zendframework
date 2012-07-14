@@ -166,7 +166,7 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
                 'text/xml;level=2;q=0.4';
         $acceptHeader = Accept::fromString($acceptStr);
 
-        $expected = (object) array('typeString' => 'text/html',
+        $expected = array('typeString' => 'text/html',
                 'type' => 'text',
                 'subtype' => 'html',
                 'subtypeRaw' => 'html',
@@ -176,12 +176,26 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
                 'raw' => 'text/html;q=1; version=23; level=5');
 
         $this->assertFalse($acceptHeader->match('text/html; version=22'));
-        $this->assertEquals($expected, $acceptHeader->match('text/html; version=23'));
+
+        $res = $acceptHeader->match('text/html; version=23');
+        foreach ($expected as $key => $value) {
+            $this->assertEquals($value, $res->$key);
+        }
+
         $this->assertFalse($acceptHeader->match('text/html; version=24'));
 
-        $this->assertEquals($expected, $acceptHeader->match('text/html; version=22-24'));
+        $res = $acceptHeader->match('text/html; version=22-24');
+        foreach ($expected as $key => $value) {
+            $this->assertEquals($value, $res->$key);
+        }
+
         $this->assertFalse($acceptHeader->match('text/html; version=20|22|24'));
-        $this->assertEquals($expected, $acceptHeader->match('text/html; version=22|23|24'));
+
+        $res = $acceptHeader->match('text/html; version=22|23|24');
+        foreach ($expected as $key => $value) {
+            $this->assertEquals($value, $res->$key);
+        }
+
     }
 
     public function testVersioningAndPriorization()
@@ -190,7 +204,7 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
                 'text/html;level=2;q=0.4';
         $acceptHeader = Accept::fromString($acceptStr);
 
-        $expected = (object) array('typeString' => 'text/json',
+        $expected = array('typeString' => 'text/json',
                 'type' => 'text',
                 'subtype' => 'json',
                 'subtypeRaw' => 'json',
@@ -199,9 +213,11 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
                 'params' => array('q' => 0.9, 'version' => 15.3),
                 'raw' => 'text/json; version=15.3; q=0.9');
 
-
         $str = 'text/html; version=17, text/json; version=15-16';
-        $this->assertEquals($expected, $acceptHeader->match($str));
+        $res = $acceptHeader->match($str);
+        foreach ($expected as $key => $value) {
+            $this->assertEquals($value, $res->$key);
+        }
 
         $expected = (object) array('typeString' => 'text/html',
                 'type' => 'text',
@@ -213,7 +229,10 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
                 'raw' => 'text/html;level=2;q=0.4');
 
         $str = 'text/html; version=17,text/json; version=15-16; q=0.5';
-        $this->assertEquals($expected, $acceptHeader->match($str));
+        $res = $acceptHeader->match($str);
+        foreach ($expected as $key => $value) {
+            $this->assertEquals($value, $res->$key);
+        }
     }
 
 
@@ -224,7 +243,7 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
                            . 'text/html;level=2;q=0.4, */*;q=0.5';
         $acceptHdr = Accept::fromString($acceptStr);
 
-        $expected = (object) array('typeString' => 'text/html',
+        $expected = array('typeString' => 'text/html',
                 'type' => 'text',
                 'subtype' => 'html',
                 'subtypeRaw' => 'html',
@@ -233,8 +252,16 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
                 'params' => array('level' => 1),
                 'raw' => 'text/html;level=1');
 
-        $this->assertEquals($expected, $acceptHdr->match('text/html'));
-        $this->assertEquals($expected, $acceptHdr->match('text'));
+        $res = $acceptHdr->match('text/html');
+        foreach ($expected as $key => $value) {
+            $this->assertEquals($value, $res->$key);
+        }
+
+        $res = $acceptHdr->match('text');
+        foreach ($expected as $key => $value) {
+            $this->assertEquals($value, $res->$key);
+        }
+
     }
 
     public function testWildcardDefaults()
@@ -251,7 +278,7 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
                 'raw' => 'image');
 
         $this->assertEquals($expected, $acceptHdr->match('image'));
-        //            $this->assertEquals($expected, $this->_handler->match('text'));
+        //  $this->assertEquals($expected, $this->_handler->match('text'));
     }
 
 }

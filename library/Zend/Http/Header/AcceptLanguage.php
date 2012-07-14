@@ -9,6 +9,8 @@
  */
 
 namespace Zend\Http\Header;
+use Zend\Http\Header\Accept\FieldValuePart;
+
 
 /**
  * Accept Language Header
@@ -21,10 +23,10 @@ class AcceptLanguage extends AbstractAccept
 {
 
     protected $regexAddType = '#^([a-zA-Z0-9+-]+|\*)$#';
-    
+
     /**
      * Get field name
-     * 
+     *
      * @return string
      */
     public function getFieldName()
@@ -34,35 +36,50 @@ class AcceptLanguage extends AbstractAccept
 
     /**
      * Cast to string
-     * 
+     *
      * @return string
      */
     public function toString()
     {
         return 'Accept-Language: ' . $this->getFieldValue();
     }
-    
+
     /**
      * Add a language, with the given priority
-     * 
-     * @param  string $type 
-     * @param  int|float $priority 
+     *
+     * @param  string $type
+     * @param  int|float $priority
      * @return Accept
      */
     public function addLanguage($type, $priority = 1)
     {
         return $this->addType($type, $priority);
     }
-    
+
     /**
      * Does the header have the requested language?
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return bool
      */
     public function hasLanguage($type)
     {
         return $this->hasType($type);
     }
-    
+
+
+    /**
+     * Parse the keys contained in the header line
+     *
+     * @param string mediaType
+     * @return \Zend\Http\Header\Accept\FieldValuePart\LanguageFieldValuePart
+     * @see \Zend\Http\Header\AbstractAccept::parseFieldValuePart()
+     */
+    protected function parseFieldValuePart($fieldValuePart)
+    {
+        $internalValues = parent::parseFieldValuePart($fieldValuePart);
+
+        return new FieldValuePart\LanguageFieldValuePart($internalValues);
+    }
+
 }

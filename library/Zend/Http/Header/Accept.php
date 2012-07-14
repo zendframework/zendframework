@@ -9,6 +9,8 @@
  */
 
 namespace Zend\Http\Header;
+use Zend\Http\Header\Accept\FieldValuePart;
+
 
 /**
  * Accept Header
@@ -65,7 +67,14 @@ class Accept extends AbstractAccept
         return $this->hasType($type);
     }
 
-    protected function getAcceptParamsFromMediaRangeString($mediaType)
+    /**
+     * Parse the keys contained in the header line
+     *
+     * @param string mediaType
+     * @return \Zend\Http\Header\Accept\FieldValuePart\CharsetFieldValuePart
+     * @see \Zend\Http\Header\AbstractAccept::parseFieldValuePart()
+     */
+    protected function parseFieldValuePart($mediaType)
     {
         $raw = $mediaType;
         if ($pos = strpos($mediaType, '/')) {
@@ -74,7 +83,7 @@ class Accept extends AbstractAccept
             $type = trim(substr($mediaType, 0));
         }
 
-        $params = $this->parseMediaRanges($mediaType);
+        $params = $this->getParametersFromFieldValuePart($mediaType);
 
         if ($pos = strpos($mediaType, ';')) {
             $mediaType = trim(substr($mediaType, 0, $pos));
@@ -94,7 +103,7 @@ class Accept extends AbstractAccept
             $subtype = trim(substr($subtype, 0, $pos));
         }
 
-        return (object) array(
+        $aggregated = array(
                 'typeString' => trim($mediaType),
                 'type'    => $type,
                 'subtype' => $subtype,
@@ -104,5 +113,7 @@ class Accept extends AbstractAccept
                 'params' => $params,
                 'raw' => trim($raw)
         );
+
+        return new FieldValuePart\AcceptFieldValuePart((object) $aggregated);
     }
 }

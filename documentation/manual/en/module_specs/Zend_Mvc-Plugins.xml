@@ -287,6 +287,27 @@ return array(
         to match a route before redirecting to a URL.
       </para>
     </listitem>
+
+    <para>
+      Usage example:
+    </para>
+
+    <para>
+	// Pass in the route/url you want to redirect to after the POST
+	$prg = $this->prg('/user/register');
+
+	if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
+	    // returned a response to redirect us
+	    return $prg;
+	} else if ($prg === false) {
+	    // this wasn't a POST request, but there were no params in the flash messenger
+	    // probably this is the first time the form was loaded
+	    return array('form' => $myForm);
+	}
+
+	// $prg is an array containing the POST params from the previous request
+	$form->setData($prg);
+    </para>
   </section>
 
   <section xml:id="zend.mvc.controller-plugins.redirect">

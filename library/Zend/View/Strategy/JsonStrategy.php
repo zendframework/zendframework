@@ -97,27 +97,27 @@ class JsonStrategy implements ListenerAggregateInterface
         }
 
         $headers = $request->getHeaders();
-        if ($headers->has('accept')) {
-            $accept  = $headers->get('Accept');
-
-            $match = $accept->match('application/json, application/javascript');
-
-            if ($match && $match->getFormat() == 'json') {
-                // application/json Accept header found
-                return $this->renderer;
-            }
-
-            if ($match) {
-                // application/javascript Accept header found
-                if (false != ($callback = $request->getQuery()->get('callback'))) {
-                    $this->renderer->setJsonpCallback($callback);
-                }
-                return $this->renderer;
-            }
+        if (!$headers->has('accept')) {
+            return;
         }
 
-        // Not matched!
-        return;
+
+        $accept  = $headers->get('Accept');
+        if (($match = $accept->match('application/json, application/javascript')) == false) {
+            return;
+        }
+
+        if ($match->getFormat() == 'json') {
+            // application/json Accept header found
+            return $this->renderer;
+        }
+
+        // application/javascript Accept header found
+        if (false != ($callback = $request->getQuery()->get('callback'))) {
+            $this->renderer->setJsonpCallback($callback);
+        }
+
+        return $this->renderer;
     }
 
     /**

@@ -12,7 +12,7 @@
             simple statement that illustrates how resolution works is as follows:
         </para>
 
-        <programlisting xml:lang="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $filename = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $classname) 
           . '.php';
 ]]></programlisting>
@@ -111,7 +111,7 @@ $filename = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $classname)
         <example xml:id="zend.loader.standard-autoloader.quick-start.example-manual-configuration"><title>Manual Configuration</title>
             
 
-            <programlisting xml:lang="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // This example assumes ZF is on your include_path.
 // You could also load the autoloader class from a path relative to the
 // current script, or via an absolute path.
@@ -162,7 +162,7 @@ $loader->register();
                 The following is equivalent to the previous example.
             </para>
 
-            <programlisting xml:lang="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Loader/StandardAutoloader.php';
 $loader = new Zend\Loader\StandardAutoloader(array(
     'autoregister_zf' => true,

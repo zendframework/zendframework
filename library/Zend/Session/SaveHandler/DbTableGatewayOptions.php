@@ -23,16 +23,22 @@ use Zend\Stdlib\AbstractOptions;
 class DbTableGatewayOptions extends AbstractOptions
 {
     /**
-     * Data Column
-     * @var string
-     */
-    protected $dataColumn = 'data';
-
-    /**
      * ID Column
      * @var string
      */
     protected $idColumn = 'id';
+
+    /**
+     * Name Column
+     * @var string
+     */
+    protected $nameColumn = 'name';
+
+    /**
+     * Data Column
+     * @var string
+     */
+    protected $dataColumn = 'data';
 
     /**
      * Lifetime Column
@@ -46,38 +52,6 @@ class DbTableGatewayOptions extends AbstractOptions
      */
     protected $modifiedColumn = 'modified';
 
-    /**
-     * Name Column
-     * @var string
-     */
-    protected $nameColumn = 'name';
-
-    /**
-     * Set Data Column
-     *
-     * @param string $dataColumn
-     * @return DbTableGatewayOptions
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setDataColumn($dataColumn)
-    {
-        $dataColumn = (string) $dataColumn;
-        if (strlen($dataColumn) === 0) {
-            throw new Exception\InvalidArgumentException('$dataColumn must be a non-empty string');
-        }
-        $this->dataColumn = $dataColumn;
-        return $this;
-    }
-
-    /**
-     * Get Data Column
-     *
-     * @return string
-     */
-    public function getDataColumn()
-    {
-        return $this->dataColumn;
-    }
 
     /**
      * Set Id Column
@@ -107,13 +81,57 @@ class DbTableGatewayOptions extends AbstractOptions
     }
 
     /**
-     * Get Lifetime Column
+     * Set Name Column
+     *
+     * @param string $nameColumn
+     * @return DbTableGatewayOptions
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setNameColumn($nameColumn)
+    {
+        $nameColumn = (string) $nameColumn;
+        if (strlen($nameColumn) === 0) {
+            throw new Exception\InvalidArgumentException('$nameColumn must be a non-empty string');
+        }
+        $this->nameColumn = $nameColumn;
+        return $this;
+    }
+
+    /**
+     * Get Name Column
      *
      * @return string
      */
-    public function getLifetimeColumn()
+    public function getNameColumn()
     {
-        return $this->lifetimeColumn;
+        return $this->nameColumn;
+    }
+
+    /**
+     * Set Data Column
+     *
+     * @param string $dataColumn
+     * @return DbTableGatewayOptions
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setDataColumn($dataColumn)
+    {
+        $dataColumn = (string) $dataColumn;
+        if (strlen($dataColumn) === 0) {
+            throw new Exception\InvalidArgumentException('$dataColumn must be a non-empty string');
+        }
+        $this->dataColumn = $dataColumn;
+        return $this;
+    }
+
+    /**
+     * Get Data Column
+     *
+     * @return string
+     */
+    public function getDataColumn()
+    {
+        return $this->dataColumn;
     }
 
     /**
@@ -131,6 +149,16 @@ class DbTableGatewayOptions extends AbstractOptions
         }
         $this->lifetimeColumn = $lifetimeColumn;
         return $this;
+    }
+
+    /**
+     * Get Lifetime Column
+     *
+     * @return string
+     */
+    public function getLifetimeColumn()
+    {
+        return $this->lifetimeColumn;
     }
 
     /**
@@ -158,32 +186,5 @@ class DbTableGatewayOptions extends AbstractOptions
     public function getModifiedColumn()
     {
         return $this->modifiedColumn;
-    }
-
-    /**
-     * Set Name Column
-     *
-     * @param string $nameColumn
-     * @return DbTableGatewayOptions
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setNameColumn($nameColumn)
-    {
-        $nameColumn = (string) $nameColumn;
-        if (strlen($nameColumn) === 0) {
-            throw new Exception\InvalidArgumentException('$nameColumn must be a non-empty string');
-        }
-        $this->nameColumn = $nameColumn;
-        return $this;
-    }
-
-    /**
-     * Get Name Column
-     *
-     * @return string
-     */
-    public function getNameColumn()
-    {
-        return $this->nameColumn;
     }
 }

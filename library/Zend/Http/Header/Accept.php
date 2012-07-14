@@ -74,23 +74,23 @@ class Accept extends AbstractAccept
      * @return \Zend\Http\Header\Accept\FieldValuePart\CharsetFieldValuePart
      * @see \Zend\Http\Header\AbstractAccept::parseFieldValuePart()
      */
-    protected function parseFieldValuePart($mediaType)
+    protected function parseFieldValuePart($fieldValuePart)
     {
-        $raw = $mediaType;
-        if ($pos = strpos($mediaType, '/')) {
-            $type = trim(substr($mediaType, 0, $pos));
+        $raw = $fieldValuePart;
+        if ($pos = strpos($fieldValuePart, '/')) {
+            $type = trim(substr($fieldValuePart, 0, $pos));
         } else {
-            $type = trim(substr($mediaType, 0));
+            $type = trim(substr($fieldValuePart, 0));
         }
 
-        $params = $this->getParametersFromFieldValuePart($mediaType);
+        $params = $this->getParametersFromFieldValuePart($fieldValuePart);
 
-        if ($pos = strpos($mediaType, ';')) {
-            $mediaType = trim(substr($mediaType, 0, $pos));
+        if ($pos = strpos($fieldValuePart, ';')) {
+            $fieldValuePart = trim(substr($fieldValuePart, 0, $pos));
         }
 
-        if ($pos = strpos($mediaType, '/')) {
-            $subtypeWhole = $format = $subtype = trim(substr($mediaType, strpos($mediaType, '/')+1));
+        if ($pos = strpos($fieldValuePart, '/')) {
+            $subtypeWhole = $format = $subtype = trim(substr($fieldValuePart, strpos($fieldValuePart, '/')+1));
         } else {
             $subtypeWhole = '';
             $format = '*';
@@ -104,14 +104,14 @@ class Accept extends AbstractAccept
         }
 
         $aggregated = array(
-                'typeString' => trim($mediaType),
-                'type'    => $type,
-                'subtype' => $subtype,
+                'typeString' => trim($fieldValuePart),
+                'type'       => $type,
+                'subtype'    => $subtype,
                 'subtypeRaw' => $subtypeWhole,
-                'format'  => $format,
-                'priority' => isset($params['q']) ? $params['q'] : 1,
-                'params' => $params,
-                'raw' => trim($raw)
+                'format'     => $format,
+                'priority'   => isset($params['q']) ? $params['q'] : 1,
+                'params'     => $params,
+                'raw'        => trim($raw)
         );
 
         return new FieldValuePart\AcceptFieldValuePart((object) $aggregated);

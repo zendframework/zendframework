@@ -78,4 +78,19 @@ class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($acceptHeader->hasLanguage('en'));
         $this->assertEquals('Accept-Language: da;q=0.8, *;q=0.4', $acceptHeader->toString());
     }
+
+    public function testWildcards()
+    {
+        $accept = AcceptLanguage::fromString('*, en-*, en-us');
+        $res = $accept->getPrioritized();
+
+        $this->assertEquals('en-us', $res[0]->getLanguage());
+        $this->assertEquals('en', $res[0]->getPrimaryTag());
+        $this->assertEquals('us', $res[0]->getSubTag());
+
+        $this->assertEquals('en-*', $res[1]->getLanguage());
+        $this->assertEquals('en', $res[1]->getPrimaryTag());
+
+        $this->assertTrue($accept->hasLanguage('nl'));
+    }
 }

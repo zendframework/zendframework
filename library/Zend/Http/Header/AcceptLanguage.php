@@ -76,9 +76,39 @@ class AcceptLanguage extends AbstractAccept
      */
     protected function parseFieldValuePart($fieldValuePart)
     {
-        $internalValues = parent::parseFieldValuePart($fieldValuePart);
+        $raw = $fieldValuePart;
+        if ($pos = strpos($fieldValuePart, '-')) {
+            $type = trim(substr($fieldValuePart, 0, $pos));
+        } else {
+            $type = trim(substr($fieldValuePart, 0));
+        }
 
-        return new FieldValuePart\LanguageFieldValuePart($internalValues);
+        $params = $this->getParametersFromFieldValuePart($fieldValuePart);
+
+        if ($pos = strpos($fieldValuePart, ';')) {
+            $fieldValuePart = $type = trim(substr($fieldValuePart, 0, $pos));
+        }
+
+        if ($pos = strpos($fieldValuePart, '-')) {
+            $subtypeWhole = $format = $subtype = trim(substr($fieldValuePart, strpos($fieldValuePart, '-')+1));
+        } else {
+            $subtypeWhole = '';
+            $format = '*';
+            $subtype = '*';
+        }
+
+        $aggregated = array(
+                'typeString' => trim($fieldValuePart),
+                'type'       => $type,
+                'subtype'    => $subtype,
+                'subtypeRaw' => $subtypeWhole,
+                'format'     => $format,
+                'priority'   => isset($params['q']) ? $params['q'] : 1,
+                'params'     => $params,
+                'raw'        => trim($raw)
+        );
+
+        return new FieldValuePart\LanguageFieldValuePart((object) $aggregated);
     }
 
 }

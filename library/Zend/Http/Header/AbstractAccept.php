@@ -14,6 +14,7 @@ namespace Zend\Http\Header;
  * Abstract Accept Header
  *
  * Naming conventions:
+ *
  *    Accept: audio/mp3; q=0.2; version=0.5, audio/basic+mp3
  *   |------------------------------------------------------|  header line
  *   |------|                                                  field name
@@ -34,6 +35,7 @@ namespace Zend\Http\Header;
  * @category   Zend
  * @package    Zend\Http\Header
  * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
+ * @author     Dolf Schimmel - Freeaqingme
  */
 abstract class AbstractAccept implements HeaderInterface
 {
@@ -66,7 +68,7 @@ abstract class AbstractAccept implements HeaderInterface
             $headerLine = substr($headerLine, $pos);
         }
 
-        foreach($this->getFieldValuePartsFromHeaderLine($headerLine) as $value) {
+        foreach ($this->getFieldValuePartsFromHeaderLine($headerLine) as $value) {
             $this->addFieldValuePartToQueue($value);
         }
     }
@@ -136,13 +138,13 @@ abstract class AbstractAccept implements HeaderInterface
 
         return (object) array(
                             'typeString' => trim($fieldValuePart),
-                            'type'    => $type,
-                            'subtype' => $subtype,
+                            'type'       => $type,
+                            'subtype'    => $subtype,
                             'subtypeRaw' => $subtypeWhole,
-                            'format'  => $format,
-                            'priority' => isset($params['q']) ? $params['q'] : 1,
-                            'params' => $params,
-                            'raw' => trim($raw)
+                            'format'     => $format,
+                            'priority'   => isset($params['q']) ? $params['q'] : 1,
+                            'params'     => $params,
+                            'raw'        => trim($raw)
         );
     }
 
@@ -151,20 +153,18 @@ abstract class AbstractAccept implements HeaderInterface
      *
      * @param string mediaType
      */
-    protected function getParametersFromFieldValuePart ($fieldValuePart)
+    protected function getParametersFromFieldValuePart($fieldValuePart)
     {
         $params = array();
-        if (($pos = strpos($fieldValuePart, ';'))) {
+        if ((($pos = strpos($fieldValuePart, ';')) !== false)) {
             preg_match_all('/(?:[^;"]|"(?:[^\\\"]|\\\.)*")+/', $fieldValuePart, $paramsStrings);
 
             if (isset($paramsStrings[0])) {
                 array_shift($paramsStrings[0]);
                 $paramsStrings = $paramsStrings[0];
-            } else {
-                $paramsStrings = array();
             }
 
-            foreach($paramsStrings as $param) {
+            foreach ($paramsStrings as $param) {
                 $explode = explode('=', $param, 2);
 
                 $value = trim($explode[1]);
@@ -296,7 +296,7 @@ abstract class AbstractAccept implements HeaderInterface
 
         foreach ($this->getPrioritized() as $left) {
             foreach ($matchAgainst as $right) {
-                if($right->type == '*' || $left->type == '*') {
+                if ($right->type == '*' || $left->type == '*') {
                     if ($res = $this->matchAcceptParams($left, $right)) {
                         return $res;
                     }
@@ -330,11 +330,11 @@ abstract class AbstractAccept implements HeaderInterface
      */
     protected function matchAcceptParams($match1, $match2)
     {
-        foreach($match2->params as $key => $value) {
+        foreach ($match2->params as $key => $value) {
             if (isset($match1->params[$key])) {
                 if (strpos($value, '-')) {
                     $values = explode('-', $value, 2);
-                    if($values[0] > $match1->params[$key] ||
+                    if ($values[0] > $match1->params[$key] ||
                             $values[1] < $match1->params[$key])
                     {
                         return false;
@@ -342,8 +342,8 @@ abstract class AbstractAccept implements HeaderInterface
                 } elseif (strpos($value, '|')) {
                     $options = explode('|', $value);
                     $good = false;
-                    foreach($options as $option) {
-                        if($option == $match1->params[$key]) {
+                    foreach ($options as $option) {
+                        if ($option == $match1->params[$key]) {
                             $good = true;
                             break;
                         }
@@ -352,7 +352,7 @@ abstract class AbstractAccept implements HeaderInterface
                     if (!$good) {
                         return false;
                     }
-                } elseif($match1->params[$key] != $value) {
+                } elseif ($match1->params[$key] != $value) {
                     return false;
                 }
             }
@@ -406,24 +406,24 @@ abstract class AbstractAccept implements HeaderInterface
 
             // Asterisks
             $values = array('type', 'subtype','format');
-            foreach($values as $value) {
-                if($a->$value == '*' && $b->$value != '*') {
+            foreach ($values as $value) {
+                if ($a->$value == '*' && $b->$value != '*') {
                     return 1;
-                } elseif($b->$value == '*' && $a->$value != '*') {
+                } elseif ($b->$value == '*' && $a->$value != '*') {
                     return -1;
                 }
             }
 
-            if($a->type == 'application' && $b->type != 'application') {
+            if ($a->type == 'application' && $b->type != 'application') {
                 return -1;
-            } elseif($b->type == 'application' && $a->type != 'application') {
+            } elseif ($b->type == 'application' && $a->type != 'application') {
                 return 1;
             }
 
             //@todo count number of dots in case of type==application in subtype
 
             // So far they're still the same. Longest stringlength may be more specific
-            if(strlen($a->raw) == strlen($b->raw)) return 0;
+            if (strlen($a->raw) == strlen($b->raw)) return 0;
             return (strlen($a->raw) > strlen($b->raw)) ? -1 : 1;
         };
 

@@ -48,31 +48,31 @@ abstract class AbstractFieldValuePart
     /**
      * @return string $typeString
      */
-    public function getTypeString ()
+    public function getTypeString()
     {
         return $this->getInternalValues()->typeString;
     }
 
     /**
-     * @return priority $priority
+     * @return float $priority
      */
-    public function getPriority ()
+    public function getPriority()
     {
-        return $this->getInternalValues()->priority;
+        return (float) $this->getInternalValues()->priority;
     }
 
     /**
-     * @return params $params
+     * @return StdClass $params
      */
-    public function getParams ()
+    public function getParams()
     {
-        return $this->getInternalValues()->params;
+        return (object) $this->getInternalValues()->params;
     }
 
     /**
      * @return raw $raw
      */
-    public function getRaw ()
+    public function getRaw()
     {
         return $this->getInternalValues()->raw;
     }
@@ -80,6 +80,7 @@ abstract class AbstractFieldValuePart
     /**
      *
      * @param mixed
+     * @return mixed
      */
     public function __get($key)
     {

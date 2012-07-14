@@ -17,6 +17,12 @@ use Zend\Http\Header\Accept;
 class AcceptTest extends \PHPUnit_Framework_TestCase
 {
 
+    public function testInvalidHeaderLine()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $acceptHeader = Accept::fromString('');
+    }
+
     public function testAcceptFromStringCreatesValidAcceptHeader()
     {
         $acceptHeader = Accept::fromString('Accept: xxx');
@@ -47,6 +53,10 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             'Accept: text/html;q=0.8, application/json, application/atom+xml;q=0.9',
             $acceptHeader->toString());
+
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $acceptHeader->addMediaType('\\', 0.9);
+
     }
 
 
@@ -108,6 +118,34 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         $test = array();
         foreach($header->getPrioritized() as $type) {
             $this->assertEquals(array_shift($expected), $type->raw);
+        }
+    }
+
+    public function testPrios()
+    {
+        $values = array('invalidPrio' => false,
+                        -0.0001       => false,
+                        1.0001        => false,
+                        1.000         => true,
+                        0.999         => true,
+                        0.000         => true,
+                        0.001         => true,
+                        1             => true,
+                        0             => true
+                );
+
+        $header = new Accept();
+        foreach ($values as $prio => $shouldPass) {
+            try {
+                $header->addMediaType('text/html', $prio);
+                if (!$shouldPass) {
+                    $this->fail('Exception expected');
+                }
+            } catch (\Zend\Http\Header\Exception\InvalidArgumentException $e) {
+                if ($shouldPass) {
+                    throw $e;
+                }
+            }
         }
     }
 
@@ -194,6 +232,23 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function testWildcardWithDifferentParamsAndRanges()
+    {
+        $acceptHeader = Accept::fromString('Accept: */*; version=21');
+        $this->assertFalse($acceptHeader->match('*/*; version=20|22'));
+
+        $acceptHeader = Accept::fromString('Accept: */*; version=19');
+        $this->assertFalse($acceptHeader->match('*/*; version=20-22'));
+
+        $acceptHeader = Accept::fromString('Accept: */*; version=23');
+        $this->assertFalse($acceptHeader->match('*/*; version=20-22'));
+
+        $acceptHeader = Accept::fromString('Accept: */*; version=21');
+        $res = $acceptHeader->match('*/*; version=20-22');
+        $this->assertInstanceOf('Zend\Http\Header\Accept\FieldValuePart\AcceptFieldValuePart', $res);
+        $this->assertEquals('21', $res->getParams()->version);
+    }
+
     public function testVersioningAndPriorization()
     {
         $acceptStr = 'Accept: text/html; version=23, text/json; version=15.3; q=0.9,' .
@@ -259,6 +314,43 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         }
 
     }
+
+    public function testPrioritizing_2()
+    {
+        $accept = Accept::fromString("Accept: application/text, \tapplication/*");
+        $res = $accept->getPrioritized();
+        $this->assertEquals('application/text', $res[0]->raw);
+        $this->assertEquals('application/*', $res[1]->raw);
+
+        $accept = Accept::fromString("Accept: \tapplication/*, application/text");
+        $res = $accept->getPrioritized();
+        $this->assertEquals('application/text', $res[0]->raw);
+        $this->assertEquals('application/*', $res[1]->raw);
+
+        $accept = Accept::fromString("Accept: text/xml, application/xml");
+        $res = $accept->getPrioritized();
+        $this->assertEquals('application/xml', $res[0]->raw);
+        $this->assertEquals('text/xml', $res[1]->raw);
+
+        $accept = Accept::fromString("Accept: application/xml, text/xml");
+        $res = $accept->getPrioritized();
+        $this->assertEquals('application/xml', $res[0]->raw);
+        $this->assertEquals('text/xml', $res[1]->raw);
+
+        $accept = Accept::fromString("Accept: application/vnd.foobar+xml; q=0.9, text/xml");
+        $res = $accept->getPrioritized();
+        $this->assertEquals(1.0, $res[0]->getPriority());
+        $this->assertEquals(0.9, $res[1]->getPriority());
+        $this->assertEquals('application/vnd.foobar+xml', $res[1]->getTypeString());
+        $this->assertEquals('vnd.foobar+xml', $res[1]->getSubtypeRaw());
+        $this->assertEquals('vnd.foobar', $res[1]->getSubtype());
+        $this->assertEquals('xml', $res[1]->getFormat());
+
+        $accept = Accept::fromString('Accept: text/xml, application/vnd.foobar+xml; version="\'Ѿ"');
+        $res = $accept->getPrioritized();
+        $this->assertEquals('application/vnd.foobar+xml; version="\'Ѿ"', $res[0]->getRaw());
+    }
+
 
     public function testWildcardDefaults()
     {

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData\App;
+
 use Zend\GData\App;
 
 /**
@@ -21,21 +22,23 @@ use Zend\GData\App;
 class CaptchaRequiredExceptionTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->exampleException = new App\CaptchaRequiredException('testtoken', 'Captcha?ctoken=testtoken');
     }
 
-    public function testExceptionContainsValidInformation() {
+    public function testExceptionContainsValidInformation()
+    {
         $this->assertEquals('testtoken', $this->exampleException->getCaptchaToken());
         $this->assertEquals('https://www.google.com/accounts/Captcha?ctoken=testtoken', $this->exampleException->getCaptchaUrl());
     }
 
-    public function testExceptionIsThrowable() {
+    public function testExceptionIsThrowable()
+    {
         $caught = false;
         try {
             throw $this->exampleException;
-        }
-        catch(App\CaptchaRequiredException $e) {
+        } catch(App\CaptchaRequiredException $e) {
             $caught = true;
         }
 

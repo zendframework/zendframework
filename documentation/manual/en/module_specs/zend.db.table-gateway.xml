@@ -119,8 +119,8 @@ var_dump($artistRow->toArray());
         </para>
 
         <programlisting language="php"><![CDATA[
-use Zend\Db\TableGateway\TableGateway,
-	Zend\Db\Sql\Select;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Select;
 $artistTable = new TableGateway('artist', $adapter);
 
 // search for at most 2 artists who's name starts with Brit, ascending

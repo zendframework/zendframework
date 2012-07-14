@@ -26,7 +26,7 @@ use Zend\Text\Table;
 
 /*
  * Convert the ZF documentation from DocBook to reStructuredText format
- * 
+ *
  * Usage:
  * --help|-h        Get usage message
  * --docbook|-d     Docbook file to convert
@@ -43,7 +43,7 @@ if (!is_dir($libPath)) {
         echo "Unable to locate autoloader via include_path; aborting" . PHP_EOL;
         exit(2);
     }
-} elseif (false === include($libPath . '/Zend/Loader/StandardAutoloader.php')) { 
+} elseif (false === include($libPath . '/Zend/Loader/StandardAutoloader.php')) {
     echo "Unable to locate autoloader via library; aborting" . PHP_EOL;
     exit(2);
 }
@@ -76,7 +76,7 @@ if (!file_exists($docbook)) {
     echo "Error: the docbook file $docbook doesn't exist.\n";
     exit(2);
 }
-    
+
 $rstFile = $opts->getOption('o');
 if (empty($rstFile)) {
     if (substr($docbook,-4) === '.xml') {
@@ -102,10 +102,10 @@ $xsl->load($xsltFile);
 
 $proc = new \XSLTProcessor;
 $proc->registerPHPFunctions();
-$proc->importStyleSheet($xsl); 
+$proc->importStyleSheet($xsl);
 
 echo "Writing to $rstFile\n";
-    
+
 $output = $proc->transformToXml($xml);
 if (false === $output) {
     echo "Error during the conversion\n";
@@ -132,19 +132,20 @@ echo "Conversion done.\n";
 exit(0);
 
 /**
- * XSLT php:function() 
+ * XSLT php:function()
  */
-class RstConvert {
-    
+class RstConvert
+{
     public static $links = array();
-    
+
     /**
      * Convert the programlisting tag
-     * 
+     *
      * @param  string $text
-     * @return string 
+     * @return string
      */
-    public static function programlisting($text) {
+    public static function programlisting($text)
+    {
         $rows   = explode("\n", $text);
         $output = "\n.. code-block:: php\n    :linenos:\n";
         foreach ($rows as $row) {
@@ -155,18 +156,19 @@ class RstConvert {
 
     /**
      * Convert the note tag
-     * 
+     *
      * @param  string $text
-     * @return string 
+     * @return string
      */
-    public static function note($text) {
+    public static function note($text)
+    {
         $rows = explode("\n", $text);
         $tot  = count($rows);
         if ('' !== trim($rows[0])) {
             $output = "    **" . trim($rows[0]) . "**\n";
         } else {
             $output = '';
-        }    
+        }
         for ($i=1; $i < $tot; $i++) {
             if ('' !== trim($rows[$i])) {
                 $output .= "    {$rows[$i]}\n";
@@ -177,11 +179,12 @@ class RstConvert {
 
     /**
      * Convert the listitem tag
-     * 
+     *
      * @param  string $text
-     * @return string 
+     * @return string
      */
-    public static function listitem($text) {
+    public static function listitem($text)
+    {
         $rows = explode("\n", $text);
         $output = "\n";
         foreach ($rows as $row) {
@@ -195,11 +198,12 @@ class RstConvert {
 
     /**
      * Convert the first section/title tag (maintitle)
-     * 
+     *
      * @param  string $text
-     * @return string 
+     * @return string
      */
-    public static function maintitle($text) {
+    public static function maintitle($text)
+    {
         $text    = str_replace('\\', '\\\\', trim($text));
         $count   = strlen($text);
         $output  = $text . "\n";
@@ -209,11 +213,12 @@ class RstConvert {
 
     /**
      * Convert all the section/title, except for the first
-     * 
+     *
      * @param  string $text
-     * @return string 
+     * @return string
      */
-    public static function title($text) {
+    public static function title($text)
+    {
         $text    = str_replace('\\', '\\\\', trim($text));
         $count   = strlen($text);
         $output  = "\n" . $text . "\n";
@@ -223,50 +228,54 @@ class RstConvert {
 
     /**
      * Format the string removing \n, multiple white spaces and \ in \\
-     * 
+     *
      * @param  string $text
-     * @return string 
+     * @return string
      */
-    public static function formatText($text) {
+    public static function formatText($text)
+    {
         return str_replace('\\', '\\\\', trim(preg_replace('/\s+/', ' ', str_replace("\n", '', $text))));
     }
 
     /**
      * Conver the link tag
-     * 
+     *
      * @param  DOMElement $node
-     * @return string 
+     * @return string
      */
-    public static function link($node) {
+    public static function link($node)
+    {
         $value = self::formatText($node[0]->nodeValue);
         if ($node[0]->getAttribute('linkend')) {
             return " :ref:`$value <" . $node[0]->getAttribute('linkend') . ">` ";
         } else {
             self::$links[$value] = $node[0]->getAttribute('xlink:href');
             return " `$value`_ ";
-        }    
+        }
     }
-    
+
     /**
      * Get all the external links of the document
-     * 
-     * @return string 
+     *
+     * @return string
      */
-    public static function getLinks() {
+    public static function getLinks()
+    {
         $output = '';
         foreach (self::$links as $key => $value) {
             $output .= ".. _`$key`: $value\n";
         }
         return $output;
     }
-    
+
     /**
      * Convert the table tag
-     * 
+     *
      * @param  DOMElement $node
      * @return string
      */
-    public static function table($node) {       
+    public static function table($node)
+    {
         // check if thead exists
         if (0 !== $node[0]->getElementsByTagName('thead')->length) {
             $head = true;
@@ -304,7 +313,7 @@ class RstConvert {
                 $row->appendColumn(new Table\Column($table[$j][$i]));
             }
             $tableText->appendRow($row);
-        }    
+        }
         $output = $tableText->render();
         // if thead exists change the table style with head (= instead of -)
         if ($head) {
@@ -324,15 +333,16 @@ class RstConvert {
         }
         return $output;
     }
-    
+
     /**
-     * Convert an XML file name to the RST ZF2 standard naming convention 
+     * Convert an XML file name to the RST ZF2 standard naming convention
      * For instance, Zend_Config-XmlIntro.xml become zend.config.xml-intro.rst
-     * 
+     *
      * @param  string $name
-     * @return string 
+     * @return string
      */
-    public static function XmlFileNameToRst($name) {
+    public static function XmlFileNameToRst($name)
+    {
         if ('.xml' === strtolower(substr($name, -4))) {
             $name = substr($name, 0, strlen($name)-4);
         }

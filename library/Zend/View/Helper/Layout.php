@@ -69,7 +69,7 @@ class Layout extends AbstractHelper
 
     /**
      * Get the root view model
-     * 
+     *
      * @return null|Model
      */
     protected function getRoot()
@@ -86,7 +86,7 @@ class Layout extends AbstractHelper
 
     /**
      * Retrieve the view model helper
-     * 
+     *
      * @return ViewModel
      */
     protected function getViewModelHelper()

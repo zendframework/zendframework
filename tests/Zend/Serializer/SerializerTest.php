@@ -60,7 +60,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         Serializer::factory('unknown');
     }
-    
+
     public function testFactoryOnADummyClassAdapter()
     {
         $adapters = new AdapterPluginManager();

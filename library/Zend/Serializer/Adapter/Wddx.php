@@ -31,7 +31,7 @@ class Wddx extends AbstractAdapter
 
     /**
      * Constructor
-     * 
+     *
      * @param  array $options
      * @return void
      * @throws ExtensionNotLoadedException if wddx extension not found
@@ -47,9 +47,9 @@ class Wddx extends AbstractAdapter
 
     /**
      * Serialize PHP to WDDX
-     * 
-     * @param  mixed $value 
-     * @param  array $opts 
+     *
+     * @param  mixed $value
+     * @param  array $opts
      * @return string
      * @throws RuntimeException on wddx error
      */
@@ -72,9 +72,9 @@ class Wddx extends AbstractAdapter
 
     /**
      * Unserialize from WDDX to PHP
-     * 
-     * @param  string $wddx 
-     * @param  array $opts 
+     *
+     * @param  string $wddx
+     * @param  array $opts
      * @return mixed
      * @throws RuntimeException on wddx error
      */

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Navigation;
+
 use Zend\Navigation\Page;
 
 /**

@@ -10,11 +10,11 @@
 
 namespace ZendTest\View\Renderer;
 
-use ArrayObject,
-    PHPUnit_Framework_TestCase as TestCase,
-    stdClass,
-    Zend\View\Renderer\JsonRenderer,
-    Zend\View\Model\ViewModel;
+use ArrayObject;
+use PHPUnit_Framework_TestCase as TestCase;
+use stdClass;
+use Zend\View\Renderer\JsonRenderer;
+use Zend\View\Model\ViewModel;
 
 /**
  * @category   Zend
@@ -188,7 +188,7 @@ class JsonRendererTest extends TestCase
         $this->assertEquals($expected, $test);
     }
 
-	/**
+    /**
      * @dataProvider getNonObjectModels
      */
     public function testRendersNonObjectModelAsJsonWithJsonpCallback($model)

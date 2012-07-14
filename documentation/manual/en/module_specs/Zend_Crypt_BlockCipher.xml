@@ -87,8 +87,8 @@ $blockCipher = BlockCipher::factory('mcrypt', array(
     </para>
 
     <programlisting language="php"><![CDATA[
-use Zend\Crypt\BlockCipher,
-    Zend\Crypt\Symmetric\Mcrypt;
+use Zend\Crypt\BlockCipher;
+use Zend\Crypt\Symmetric\Mcrypt;
 
 $blockCipher = new BlockCipher(new Mcrypt(array('algo' => 'aes'));
 $blockCipher->setKey('encryption key');

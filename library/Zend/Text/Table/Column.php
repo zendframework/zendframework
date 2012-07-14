@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Text\Table;
+
 use Zend\Text;
 
 /**

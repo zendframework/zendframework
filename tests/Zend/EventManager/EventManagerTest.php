@@ -10,14 +10,14 @@
 
 namespace ZendTest\EventManager;
 
-use ArrayIterator,
-    stdClass,
-    Zend\EventManager\Event,
-    Zend\EventManager\EventInterface,
-    Zend\EventManager\EventManager,
-    Zend\EventManager\ResponseCollection,
-    Zend\EventManager\StaticEventManager,
-    Zend\Stdlib\CallbackHandler;
+use ArrayIterator;
+use stdClass;
+use Zend\EventManager\Event;
+use Zend\EventManager\EventInterface;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\ResponseCollection;
+use Zend\EventManager\StaticEventManager;
+use Zend\Stdlib\CallbackHandler;
 
 /**
  * @category   Zend

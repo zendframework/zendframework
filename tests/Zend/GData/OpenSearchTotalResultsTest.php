@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData;
+
 use Zend\GData\Extension;
 
 /**
@@ -21,36 +22,42 @@ use Zend\GData\Extension;
 class OpenSearchTotalResultsTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->openSearchTotalResultsText = file_get_contents(
                 'Zend/GData/_files/OpenSearchTotalResultsElementSample1.xml',
                 true);
         $this->openSearchTotalResults = new Extension\OpenSearchTotalResults();
     }
 
-    public function testEmptyOpenSearchTotalResultsShouldHaveNoExtensionElements() {
+    public function testEmptyOpenSearchTotalResultsShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->openSearchTotalResults->extensionElements));
         $this->assertTrue(count($this->openSearchTotalResults->extensionElements) == 0);
     }
 
-    public function testEmptyOpenSearchTotalResultsShouldHaveNoExtensionAttributes() {
+    public function testEmptyOpenSearchTotalResultsShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->openSearchTotalResults->extensionAttributes));
         $this->assertTrue(count($this->openSearchTotalResults->extensionAttributes) == 0);
     }
 
-    public function testSampleOpenSearchTotalResultsShouldHaveNoExtensionElements() {
+    public function testSampleOpenSearchTotalResultsShouldHaveNoExtensionElements()
+    {
         $this->openSearchTotalResults->transferFromXML($this->openSearchTotalResultsText);
         $this->assertTrue(is_array($this->openSearchTotalResults->extensionElements));
         $this->assertTrue(count($this->openSearchTotalResults->extensionElements) == 0);
     }
 
-    public function testSampleOpenSearchTotalResultsShouldHaveNoExtensionAttributes() {
+    public function testSampleOpenSearchTotalResultsShouldHaveNoExtensionAttributes()
+    {
         $this->openSearchTotalResults->transferFromXML($this->openSearchTotalResultsText);
         $this->assertTrue(is_array($this->openSearchTotalResults->extensionAttributes));
         $this->assertTrue(count($this->openSearchTotalResults->extensionAttributes) == 0);
     }
 
-    public function testNormalOpenSearchTotalResultsShouldHaveNoExtensionElements() {
+    public function testNormalOpenSearchTotalResultsShouldHaveNoExtensionElements()
+    {
         $this->openSearchTotalResults->text = "42";
 
         $this->assertEquals("42", $this->openSearchTotalResults->text);
@@ -72,7 +79,8 @@ class OpenSearchTotalResultsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("42", $newOpenSearchTotalResults2->text);
     }
 
-    public function testEmptyOpenSearchTotalResultsToAndFromStringShouldMatch() {
+    public function testEmptyOpenSearchTotalResultsToAndFromStringShouldMatch()
+    {
         $openSearchTotalResultsXml = $this->openSearchTotalResults->saveXML();
         $newOpenSearchTotalResults = new Extension\OpenSearchTotalResults();
         $newOpenSearchTotalResults->transferFromXML($openSearchTotalResultsXml);
@@ -80,7 +88,8 @@ class OpenSearchTotalResultsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($openSearchTotalResultsXml == $newOpenSearchTotalResultsXml);
     }
 
-    public function testOpenSearchTotalResultsWithValueToAndFromStringShouldMatch() {
+    public function testOpenSearchTotalResultsWithValueToAndFromStringShouldMatch()
+    {
         $this->openSearchTotalResults->text = "42";
         $openSearchTotalResultsXml = $this->openSearchTotalResults->saveXML();
         $newOpenSearchTotalResults = new Extension\OpenSearchTotalResults();
@@ -90,7 +99,8 @@ class OpenSearchTotalResultsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("42", $this->openSearchTotalResults->text);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->openSearchTotalResults->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -104,7 +114,8 @@ class OpenSearchTotalResultsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newOpenSearchTotalResults->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullOpenSearchTotalResultsToAndFromString() {
+    public function testConvertFullOpenSearchTotalResultsToAndFromString()
+    {
         $this->openSearchTotalResults->transferFromXML($this->openSearchTotalResultsText);
         $this->assertEquals("12", $this->openSearchTotalResults->text);
     }

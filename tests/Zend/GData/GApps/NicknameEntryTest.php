@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData\GApps;
+
 use Zend\GData\GApps;
 
 /**
@@ -21,14 +22,16 @@ use Zend\GData\GApps;
 class NicknameEntryTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->entryText = file_get_contents(
                 'Zend/GData/GApps/_files/NicknameEntryDataSample1.xml',
                 true);
         $this->entry = new GApps\NicknameEntry();
     }
 
-    private function verifyAllSamplePropertiesAreCorrect ($nicknameEntry) {
+    private function verifyAllSamplePropertiesAreCorrect ($nicknameEntry)
+    {
         $this->assertEquals('https://apps-apis.google.com/a/feeds/example.com/nickname/2.0/Susy',
             $nicknameEntry->id->text);
         $this->assertEquals('1970-01-01T00:00:00.000Z', $nicknameEntry->updated->text);
@@ -50,29 +53,34 @@ class NicknameEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $nicknameEntry->login->agreedToTerms);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements() {
+    public function testSampleEntryShouldHaveNoExtensionElements()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributes() {
+    public function testSampleEntryShouldHaveNoExtensionAttributes()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testEmptyNicknameEntryToAndFromStringShouldMatch() {
+    public function testEmptyNicknameEntryToAndFromStringShouldMatch()
+    {
         $entryXml = $this->entry->saveXML();
         $newNicknameEntry = new GApps\NicknameEntry();
         $newNicknameEntry->transferFromXML($entryXml);
@@ -80,12 +88,14 @@ class NicknameEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newNicknameEntryXml);
     }
 
-    public function testSamplePropertiesAreCorrect () {
+    public function testSamplePropertiesAreCorrect ()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->verifyAllSamplePropertiesAreCorrect($this->entry);
     }
 
-    public function testConvertNicknameEntryToAndFromString() {
+    public function testConvertNicknameEntryToAndFromString()
+    {
         $this->entry->transferFromXML($this->entryText);
         $entryXml = $this->entry->saveXML();
         $newNicknameEntry = new GApps\NicknameEntry();

@@ -20,7 +20,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
     public function testSetCookieConstructor()
     {
         $setCookieHeader = new SetCookie(
-            'myname', 'myvalue', 'Wed, 13-Jan-2021 22:23:01 GMT', 
+            'myname', 'myvalue', 'Wed, 13-Jan-2021 22:23:01 GMT',
             '/accounts', 'docs.foo.com', true, true, 99, 9
         );
         $this->assertEquals('myname', $setCookieHeader->getName());
@@ -154,10 +154,9 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-    
+
     /**
      * @group ZF2-169
-     * @see http://framework.zend.com/issues/browse/ZF2-169
      */
     public function testZF2_169()
     {
@@ -181,7 +180,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $c = new SetCookie();
         $this->assertEquals('Set-Cookie', $c->getFieldName());
     }
-    
+
     /**
      * @dataProvider validCookieWithInfoProvider
      */
@@ -190,11 +189,11 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $cookie = SetCookie::fromString($cStr);
         if (! $cookie instanceof SetCookie) {
             $this->fail("Failed creating a cookie object from '$cStr'");
-        }        
+        }
         $this->assertEquals($expected, $cookie->getFieldValue());
         $this->assertEquals($cookie->getFieldName() . ': ' . $expected, $cookie->toString());
     }
-    
+
     /**
      * @dataProvider validCookieWithInfoProvider
      */
@@ -203,7 +202,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $cookie = SetCookie::fromString($cStr);
         if (! $cookie instanceof SetCookie) {
             $this->fail("Failed creating a cookie object from '$cStr'");
-        }        
+        }
         $this->assertEquals($cookie->getFieldName() . ': ' . $expected, $cookie->toString());
     }
 

@@ -12,12 +12,12 @@ namespace ZendTest\Amf\TestAsset\Server;
 
 class testException
 {
-    public function __construct() 
+    public function __construct()
     {
         throw new \Exception("Oops, exception!");
     }
 
-    public function hello() 
+    public function hello()
     {
         return "hello";
     }

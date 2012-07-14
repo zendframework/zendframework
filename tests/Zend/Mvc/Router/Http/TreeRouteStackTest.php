@@ -10,15 +10,15 @@
 
 namespace ZendTest\Mvc\Router\Http;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    ArrayIterator,
-    Zend\Http\Request as Request,
-    Zend\Http\PhpEnvironment\Request as PhpRequest,
-    Zend\Stdlib\Request as BaseRequest,
-    Zend\Uri\Http as HttpUri,
-    Zend\Mvc\Router\Http\TreeRouteStack,
-    Zend\Mvc\Router\Http\Hostname,
-    ZendTest\Mvc\Router\FactoryTester;
+use PHPUnit_Framework_TestCase as TestCase;
+use ArrayIterator;
+use Zend\Http\Request as Request;
+use Zend\Http\PhpEnvironment\Request as PhpRequest;
+use Zend\Stdlib\Request as BaseRequest;
+use Zend\Uri\Http as HttpUri;
+use Zend\Mvc\Router\Http\TreeRouteStack;
+use Zend\Mvc\Router\Http\Hostname;
+use ZendTest\Mvc\Router\FactoryTester;
 
 class TreeRouteStackTest extends TestCase
 {
@@ -163,7 +163,7 @@ class TreeRouteStackTest extends TestCase
         $stack = new TreeRouteStack();
         $stack->setRequestUri($uri);
         $stack->addRoute(
-        	'foo',
+            'foo',
             array(
                 'type' => 'Hostname',
                 'options' => array(
@@ -195,7 +195,7 @@ class TreeRouteStackTest extends TestCase
         $stack = new TreeRouteStack();
         $stack->setRequestUri($uri);
         $stack->addRoute(
-        	'index',
+            'index',
             array(
                 'type' => 'Literal',
                 'options' => array(

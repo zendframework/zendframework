@@ -66,11 +66,9 @@ class SendEventNotifications extends \Zend\GData\Extension
         case 'value':
             if ($attribute->nodeValue == "true") {
                 $this->_value = true;
-            }
-            else if ($attribute->nodeValue == "false") {
+            } elseif ($attribute->nodeValue == "false") {
                 $this->_value = false;
-            }
-            else {
+            } else {
                 throw new \Zend\GData\App\InvalidArgumentException("Expected 'true' or 'false' for gCal:selected#value.");
             }
             break;

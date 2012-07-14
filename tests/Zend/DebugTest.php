@@ -10,7 +10,7 @@
 
 namespace ZendTest;
 
-use \Zend\Debug;
+use Zend\Debug;
 
 /**
  * @category   Zend

@@ -16,7 +16,7 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Plugin manager implementation for pagination adapters
  *
  * Enforces that adapters retrieved are instances of
- * Adapter\AdapterInterface. Additionally, it registers a number 
+ * Adapter\AdapterInterface. Additionally, it registers a number
  * of default adapters available.
  *
  * @category   Zend
@@ -26,7 +26,7 @@ class AdapterPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of adapters
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -46,8 +46,8 @@ class AdapterPluginManager extends AbstractPluginManager
      * Validate the plugin
      *
      * Checks that the adapter loaded is an instance of Adapter\AdapterInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

@@ -28,8 +28,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Connection parameters
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $connectionParameters = array();
 
@@ -40,7 +40,7 @@ class Connection implements ConnectionInterface
 
     /**
      * In transaction
-     * 
+     *
      * @var boolean
      */
     protected $inTransaction = false;
@@ -74,9 +74,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Set connection parameters
-     * 
+     *
      * @param  array $connectionParameters
-     * @return Connection 
+     * @return Connection
      */
     public function setConnectionParameters(array $connectionParameters)
     {
@@ -86,8 +86,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Get connection parameters
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function getConnectionParameters()
     {
@@ -96,8 +96,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Get current schema
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getCurrentSchema()
     {
@@ -113,9 +113,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Set resource
-     * 
+     *
      * @param  mysqli $resource
-     * @return Connection 
+     * @return Connection
      */
     public function setResource(mysqli $resource)
     {
@@ -125,7 +125,7 @@ class Connection implements ConnectionInterface
 
     /**
      * Get resource
-     * 
+     *
      * @return \mysqli
      */
     public function getResource()
@@ -136,8 +136,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Connect
-     * 
-     * @return null 
+     *
+     * @return null
      */
     public function connect()
     {
@@ -183,8 +183,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Is connected
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function isConnected()
     {
@@ -227,8 +227,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Rollback
-     * 
-     * @return Connection 
+     *
+     * @return Connection
      */
     public function rollback()
     {
@@ -246,9 +246,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Execute
-     * 
+     *
      * @param  string $sql
-     * @return Result 
+     * @return Result
      */
     public function execute($sql)
     {
@@ -269,9 +269,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Get last generated id
-     * 
+     *
      * @param  null $name Ignored
-     * @return integer 
+     * @return integer
      */
     public function getLastGeneratedValue($name = null)
     {

@@ -12,11 +12,11 @@ namespace Zend\File\Exception;
 
 /**
  * Exception class raised when invalid arguments are discovered
- * 
+ *
  * @package    Zend_File
  */
-class InvalidArgumentException 
-    extends \InvalidArgumentException 
+class InvalidArgumentException
+    extends \InvalidArgumentException
     implements ExceptionInterface
 {
 }

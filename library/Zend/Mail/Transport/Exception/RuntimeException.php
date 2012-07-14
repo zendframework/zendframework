@@ -18,6 +18,6 @@ use Zend\Mail\Exception;
  * @category   Zend
  * @package    Zend_Mail
  */
-class RuntimeException extends Exception\RuntimeException implements 
+class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface
 {}

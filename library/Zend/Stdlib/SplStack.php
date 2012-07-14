@@ -22,7 +22,7 @@ class SplStack extends \SplStack implements Serializable
 {
     /**
      * Serialize to an array representing the stack
-     * 
+     *
      * @return array
      */
     public function toArray()
@@ -36,7 +36,7 @@ class SplStack extends \SplStack implements Serializable
 
     /**
      * Serialize
-     * 
+     *
      * @return string
      */
     public function serialize()
@@ -46,7 +46,7 @@ class SplStack extends \SplStack implements Serializable
 
     /**
      * Unserialize
-     * 
+     *
      * @param  string $data
      * @return void
      */

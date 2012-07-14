@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Feed\Reader\Entry;
+
 use Zend\Feed\Reader\Extension;
 use Zend\Feed\Reader;
 
@@ -95,7 +96,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals(null, $entry->getExtension('Foo'));
     }
-    
+
     /**
      * @group ZF-8213
      */
@@ -107,7 +108,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals('UTF-8', $entry->getEncoding());
     }
-    
+
     /**
      * @group ZF-8213
      */
@@ -130,16 +131,16 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         );
         $entry = $feed->current();
         $stub = $this->getMockForAbstractClass(
-            'Zend\Feed\Reader\Entry\AbstractEntry', 
+            'Zend\Feed\Reader\Entry\AbstractEntry',
             array($entry->getElement(), $entry->getId())
         );
         $this->assertEquals($entry->getType(), $stub->getType());
     }
-	
+
     /**
     * When passing a newly created DOMElement without any DOMDocument assigned
     */
-    public  function testFeedEntryCanSetAnyType()
+    public function testFeedEntryCanSetAnyType()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/atom.xml')
@@ -147,7 +148,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $domElement = new \DOMElement($entry->getElement()->tagName);
         $stub = $this->getMockForAbstractClass(
-            'Zend\Feed\Reader\Entry\AbstractEntry', 
+            'Zend\Feed\Reader\Entry\AbstractEntry',
             array($domElement, $entry->getId())
         );
         $this->assertEquals($stub->getType(), Reader\Reader::TYPE_ANY);

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Cache\Storage\Plugin;
+
 use Zend\Cache;
 use Zend\Cache\Storage\ExceptionEvent;
 use ZendTest\Cache\Storage\TestAsset\MockAdapter;

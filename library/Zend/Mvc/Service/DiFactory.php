@@ -27,14 +27,14 @@ class DiFactory implements FactoryInterface
     /**
      * Create and return abstract factory seeded by dependency injector
      *
-     * Creates and returns an abstract factory seeded by the dependency 
+     * Creates and returns an abstract factory seeded by the dependency
      * injector. If the "di" key of the configuration service is set, that
      * sub-array is passed to a DiConfiguration object and used to configure
-     * the DI instance. The DI instance is then used to seed the 
+     * the DI instance. The DI instance is then used to seed the
      * DiAbstractServiceFactory, which is then registered with the service
      * manager.
-     * 
-     * @param  ServiceLocatorInterface $serviceLocator 
+     *
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return Di
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\View\Helper;
+
 use Zend\View\Helper;
 
 /**
@@ -162,7 +163,8 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($doctype->isRdfa());
     }
 
-    public function testCanRegisterCustomHtml5Doctype() {
+    public function testCanRegisterCustomHtml5Doctype()
+    {
         $doctype = $this->helper->__invoke('<!DOCTYPE html>');
         $this->assertEquals('CUSTOM', $doctype->getDoctype());
         $this->assertTrue($doctype->isHtml5());

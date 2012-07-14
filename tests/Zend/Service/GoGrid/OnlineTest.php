@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Service\GoGrid;
+
 use Zend\Service\GoGrid\Server;
 
 
@@ -28,8 +29,8 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Server id of testing
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $serverId;
 
@@ -73,7 +74,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         file_put_contents(__DIR__ . '/_files/' . $this->getName() . '.response', $this->gogrid->getHttpClient()->getResponse()->toString());
     }
     */
-    
+
     public function testAddServer()
     {
         $result= $this->gogrid->add(TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_NAME,
@@ -82,9 +83,9 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
                            TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IP);
         $this->assertTrue($result->isSuccess());
     }
-    
-    
-    
+
+
+
     public function testGetServer()
     {
         $result = $this->gogrid->get(TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_NAME);
@@ -98,7 +99,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($ip['ip'], TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IP);
         $this->assertEquals($ram['name'], TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_RAM);
     }
-    
+
     public function testListServer()
     {
         $result = $this->gogrid->getList();
@@ -112,7 +113,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertTrue($found);
     }
-    
+
     public function testEditServer()
     {
         $options = array (
@@ -121,27 +122,27 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $result = $this->gogrid->edit(TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_NAME, $options);
         $this->assertTrue($result->isSuccess());
     }
-    
+
     public function testStopServer()
     {
         $result = $this->gogrid->stop(TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_NAME);
         $this->assertTrue($result->isSuccess());
-        
+
     }
-    
+
     public function testStartServer()
     {
         $result = $this->gogrid->start(TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_NAME);
         $this->assertTrue($result->isSuccess());
     }
-    
+
     public function testRestartServer()
     {
         $result = $this->gogrid->restart(TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_NAME);
         $this->assertTrue($result->isSuccess());
     }
-    
-    
+
+
     public function testDeleteServer()
     {
         $result = $this->gogrid->delete(TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_NAME);

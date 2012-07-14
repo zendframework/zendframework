@@ -9,6 +9,7 @@
  */
 
 namespace Zend\GData\Spreadsheets;
+
 use Zend\GData\App;
 
 /**
@@ -234,7 +235,7 @@ class DocumentQuery extends \Zend\GData\Query
             if ($this->_spreadsheetKey != null) {
                 $uri .= '/'.$this->_spreadsheetKey;
             }
-        } else if ($this->_documentType == 'worksheets') {
+        } elseif ($this->_documentType == 'worksheets') {
             if ($this->_spreadsheetKey != null) {
                 $uri .= '/'.$this->_spreadsheetKey;
             } else {

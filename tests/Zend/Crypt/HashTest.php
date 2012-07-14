@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Crypt;
+
 use Zend\Crypt\Hash;
 
 /**

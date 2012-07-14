@@ -9,16 +9,8 @@
  */
 
 namespace ZendTest\Service\StrikeIron;
+
 use Zend\Service\StrikeIron;
-
-/**
- * Test helper
- */
-
-/**
- * @see StrikeIron\BaseTest
- */
-
 
 /**
  * @category   Zend

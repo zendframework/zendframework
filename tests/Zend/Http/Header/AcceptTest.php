@@ -78,8 +78,6 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-
-
     public function testLevel()
     {
         $acceptHeader = new Accept();
@@ -93,7 +91,6 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
                         $acceptHeader->toString()
                 );
     }
-
 
     public function testPrioritizedLevel()
     {
@@ -113,7 +110,6 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals(array_shift($expected), $type->raw);
         }
     }
-
 
     public function testWildcharMediaType()
     {

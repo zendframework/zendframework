@@ -12,19 +12,19 @@ namespace ZendTest\Amf\TestAsset\Authentication;
 
 use Zend\Acl\Acl as ZendAcl;
 
-class Acl 
+class Acl
 {
-    function hello() 
+    public function hello()
     {
         return "hello!";
     }
 
-    function hello2() 
+    public function hello2()
     {
         return "hello2!";
     }
 
-    function initAcl(ZendAcl $acl) 
+    public function initAcl(ZendAcl $acl)
     {
         $acl->allow("testrole", null, "hello");
         $acl->allow("testrole2", null, "hello2");

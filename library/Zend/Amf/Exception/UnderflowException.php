@@ -14,7 +14,7 @@ namespace Zend\Amf\Exception;
  * @category   Zend
  * @package    Zend_Amf
  */
-class UnderflowException extends \UnderflowException implements 
+class UnderflowException extends \UnderflowException implements
     ExceptionInterface
 {
 }

@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\Amazon\SimpleDb;
+
 use Zend\Http;
 
 /**

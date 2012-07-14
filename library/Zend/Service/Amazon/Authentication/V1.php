@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\Amazon\Authentication;
+
 use Zend\Crypt\Hmac;
 
 /**
@@ -27,7 +28,7 @@ class V1 extends AbstractAuthentication
      * Signature Encoding Method
      */
     protected $_signatureMethod = 'HmacSHA256';
-    
+
     /**
      * Generate the required attributes for the signature
      * @param string $url
@@ -44,7 +45,7 @@ class V1 extends AbstractAuthentication
         }
 
         $data = $this->_signParameters($url, $parameters);
-        
+
         return $data;
     }
 
@@ -82,7 +83,7 @@ class V1 extends AbstractAuthentication
         $hmac = Hmac::compute($this->_secretKey, 'SHA1', $data, Hmac::OUTPUT_BINARY);
 
         $paramaters['Signature'] = base64_encode($hmac);
-        
+
         return $data;
     }
 }

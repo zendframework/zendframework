@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
+
 use Zend\Cache;
 
 /**

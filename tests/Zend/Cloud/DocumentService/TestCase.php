@@ -13,8 +13,8 @@ namespace ZendTest\Cloud\DocumentService;
 use Zend\Cloud\DocumentService\Adapter;
 use Zend\Cloud\DocumentService\Document;
 use Zend\Cloud\DocumentService\Factory;
-use Zend\Cloud\DocumentService\QueryAdapter,
-    PHPUnit_Framework_TestCase as PHPUnitTestCase;
+use Zend\Cloud\DocumentService\QueryAdapter;
+use PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**
  * This class forces the adapter tests to implement tests for all methods on
@@ -64,7 +64,7 @@ abstract class TestCase extends PHPUnitTestCase
 
     public function testGetClient()
     {
-    	$this->assertTrue(is_a($this->_commonDocument->getClient(), $this->_clientType));
+        $this->assertTrue(is_a($this->_commonDocument->getClient(), $this->_clientType));
     }
 
     public function testCreateCollection()
@@ -352,7 +352,8 @@ abstract class TestCase extends PHPUnitTestCase
         return $this->_dummyCollectionNamePrefix . $name; //.mt_rand();
     }
 
-    protected function _wait() {
+    protected function _wait()
+    {
         sleep($this->_waitPeriod);
     }
 

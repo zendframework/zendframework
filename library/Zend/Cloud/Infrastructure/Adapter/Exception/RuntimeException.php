@@ -17,6 +17,6 @@ use Zend\Cloud\Infrastructure\Exception;
  * @package    Zend_Cloud
  * @subpackage Infrastructure_Adapter
  */
-class RuntimeException extends Exception\RuntimeException implements 
+class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface
 {}

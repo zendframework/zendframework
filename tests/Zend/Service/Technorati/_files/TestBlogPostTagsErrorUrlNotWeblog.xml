@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
 
     Error response returned for a Blogposttags request
     http://api.technorati.com/blogposttags?key=VALID_API_KEY&url=www.simonecarletti.com
-    
+
     The request has the following properties:
      * url is a site, not a claimed blog
-    
+
     Please note how this request is considered an error because `url`
     is not a claimed blog.
     The same request for `Bloginfo` simple returns the blog URL

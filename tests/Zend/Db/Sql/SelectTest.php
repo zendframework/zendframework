@@ -10,12 +10,12 @@
 
 namespace ZendTest\Db\Sql;
 
-use Zend\Db\Sql\Select,
-    Zend\Db\Sql\Expression,
-    Zend\Db\Sql\Where,
-    Zend\Db\Sql\TableIdentifier,
-    Zend\Db\Adapter\ParameterContainer,
-    Zend\Db\Adapter\Platform\Sql92;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Where;
+use Zend\Db\Sql\TableIdentifier;
+use Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Platform\Sql92;
 
 class SelectTest extends \PHPUnit_Framework_TestCase
 {

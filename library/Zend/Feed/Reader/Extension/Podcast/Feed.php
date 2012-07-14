@@ -212,7 +212,7 @@ class Feed extends Extension\AbstractFeed
 
         if (!empty($email)) {
             $owner = $email . (empty($name) ? '' : ' (' . $name . ')');
-        } else if (!empty($name)) {
+        } elseif (!empty($name)) {
             $owner = $name;
         }
 

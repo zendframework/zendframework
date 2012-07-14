@@ -19,11 +19,11 @@ use Zend\Http\Client;
  */
 class Analytics extends GData
 {
-	const AUTH_SERVICE_NAME = 'analytics';
-	const ANALYTICS_FEED_URI = 'https://www.google.com/analytics/feeds';
-	const ANALYTICS_ACCOUNT_FEED_URI = 'https://www.google.com/analytics/feeds/accounts';
+    const AUTH_SERVICE_NAME = 'analytics';
+    const ANALYTICS_FEED_URI = 'https://www.google.com/analytics/feeds';
+    const ANALYTICS_ACCOUNT_FEED_URI = 'https://www.google.com/analytics/feeds/accounts';
 
-	public static $namespaces = array(
+    public static $namespaces = array(
         array('ga', 'http://schemas.google.com/analytics/2009', 1, 0)
     );
 
@@ -61,7 +61,7 @@ class Analytics extends GData
      */
     public function getDataFeed($location = self::ANALYTICS_FEED_URI)
     {
-		if ($location instanceof Query) {
+        if ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -76,6 +76,6 @@ class Analytics extends GData
      */
     public function newDataQuery()
     {
-    	return new Analytics\DataQuery();
+        return new Analytics\DataQuery();
     }
 }

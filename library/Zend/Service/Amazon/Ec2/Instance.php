@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon;
 use Zend\Service\Amazon\Ec2\Exception;
 
@@ -326,7 +327,7 @@ class Instance extends AbstractEc2
         } elseif($instanceId) {
             $params['InstanceId.1'] = $instanceId;
         }
-        
+
         $response = $this->sendRequest($params);
         $xpath = $response->getXPath();
 

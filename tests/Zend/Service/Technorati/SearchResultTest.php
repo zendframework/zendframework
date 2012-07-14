@@ -14,15 +14,6 @@ use DateTime;
 use Zend\Service\Technorati;
 
 /**
- * Test helper
- */
-
-/**
- * @see Technorati\SearchResult
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_Service_Technorati
  * @subpackage UnitTests

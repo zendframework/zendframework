@@ -9,12 +9,8 @@
  */
 
 namespace ZendTest\GData\YouTube;
+
 use Zend\GData\YouTube;
-
-/**
- * Test helper
- */
-
 
 /**
  * @category   Zend
@@ -26,14 +22,16 @@ use Zend\GData\YouTube;
 class ContactEntryTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->entryText = file_get_contents(
                 'Zend/GData/YouTube/_files/ContactEntryDataSample1.xml',
                 true);
         $this->entry = new YouTube\ContactEntry();
     }
 
-    private function verifyAllSamplePropertiesAreCorrect ($contactEntry) {
+    private function verifyAllSamplePropertiesAreCorrect ($contactEntry)
+    {
         $this->assertEquals('http://gdata.youtube.com/feeds/users/davidchoimusic/contacts/testuser',
             $contactEntry->id->text);
         $this->assertEquals('2007-09-21T02:44:41.134Z', $contactEntry->updated->text);
@@ -52,29 +50,34 @@ class ContactEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('accepted', $contactEntry->status->text);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements() {
+    public function testSampleEntryShouldHaveNoExtensionElements()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributes() {
+    public function testSampleEntryShouldHaveNoExtensionAttributes()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testEmptyContactEntryToAndFromStringShouldMatch() {
+    public function testEmptyContactEntryToAndFromStringShouldMatch()
+    {
         $entryXml = $this->entry->saveXML();
         $newContactEntry = new YouTube\ContactEntry();
         $newContactEntry->transferFromXML($entryXml);
@@ -82,12 +85,14 @@ class ContactEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newContactEntryXml);
     }
 
-    public function testSamplePropertiesAreCorrect () {
+    public function testSamplePropertiesAreCorrect ()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->verifyAllSamplePropertiesAreCorrect($this->entry);
     }
 
-    public function testConvertContactEntryToAndFromString() {
+    public function testConvertContactEntryToAndFromString()
+    {
         $this->entry->transferFromXML($this->entryText);
         $entryXml = $this->entry->saveXML();
         $newContactEntry = new YouTube\ContactEntry();

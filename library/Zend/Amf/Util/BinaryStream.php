@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Amf\Util;
+
 use Zend\Amf\Exception;
 
 /**

@@ -10,9 +10,9 @@
 
 namespace ZendTest\View\Helper;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    stdClass,
-    Zend\View\Helper\EscapeHtmlAttr as EscapeHelper;
+use PHPUnit_Framework_TestCase as TestCase;
+use stdClass;
+use Zend\View\Helper\EscapeHtmlAttr as EscapeHelper;
 
 class EscapeHtmlAttrTest extends TestCase
 {
@@ -166,7 +166,7 @@ class EscapeHtmlAttrTest extends TestCase
 
     /**
      * @expectedException \Zend\Escaper\Exception\InvalidArgumentException
-     * 
+     *
      * PHP 5.3 instates default encoding on empty string instead of the expected
      * warning level error for htmlspecialchars() encoding param. PHP 5.4 attempts
      * to guess the encoding or take it from php.ini default_charset when an empty
@@ -189,7 +189,7 @@ class EscapeHtmlAttrTest extends TestCase
 
     /**
      * @expectedException \Zend\Escaper\Exception\InvalidArgumentException
-     * 
+     *
      * All versions of PHP - when an invalid encoding is set on htmlspecialchars()
      * a warning level error is issued and escaping continues with the default encoding
      * for that PHP version. Preventing the continuation behaviour offsets display_errors

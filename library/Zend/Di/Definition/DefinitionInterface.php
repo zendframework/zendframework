@@ -10,53 +10,67 @@
 
 namespace Zend\Di\Definition;
 
+/**
+ * @category   Zend
+ * @package    Zend_Di
+ */
 interface DefinitionInterface
 {
     /**
+     * Retrieves classes in this definition
+     *
      * @abstract
      * @return string[]
      */
     public function getClasses();
 
     /**
+     * Return whether the class exists in this definition
+     *
      * @abstract
-     * @param string $class
+     * @param  string $class
      * @return bool
      */
     public function hasClass($class);
 
     /**
+     * Return the supertypes for this class
+     *
      * @abstract
-     * @param string $class
+     * @param  string   $class
      * @return string[]
      */
     public function getClassSupertypes($class);
 
     /**
      * @abstract
-     * @param string $class
+     * @param  string       $class
      * @return string|array
      */
     public function getInstantiator($class);
 
     /**
+     * Return if there are injection methods
+     *
      * @abstract
-     * @param string $class
+     * @param  string $class
      * @return bool
      */
     public function hasMethods($class);
 
     /**
+     * Return an array of the injection methods for a given class
+     *
      * @abstract
-     * @param string $class
+     * @param  string   $class
      * @return string[]
      */
     public function getMethods($class);
 
     /**
      * @abstract
-     * @param string $class
-     * @param string $method
+     * @param  string $class
+     * @param  string $method
      * @return bool
      */
     public function hasMethod($class, $method);
@@ -83,10 +97,9 @@ interface DefinitionInterface
      *
      *
      * @abstract
-     * @param $class
-     * @param $method
-     * @return array[]
+     * @param  string $class
+     * @param  string $method
+     * @return array
      */
     public function getMethodParameters($class, $method);
 }
-

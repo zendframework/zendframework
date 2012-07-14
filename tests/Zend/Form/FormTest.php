@@ -839,4 +839,24 @@ class FormTest extends TestCase
         $this->assertEquals(true, $form->isValid());
         $this->assertEquals($product, $emptyProduct, var_export($product, 1) . "\n\n" . var_export($emptyProduct, 1));
     }
+
+    public function testAssertElementsNamesAreNotWrappedAroundFormNameByDefault()
+    {
+        $form = new \ZendTest\Form\TestAsset\FormCollection();
+        $form->prepare();
+
+        $this->assertEquals('colors[0]', $form->get('colors')->get('0')->getName());
+        $this->assertEquals('fieldsets[0][field]', $form->get('fieldsets')->get('0')->get('field')->getName());
+    }
+
+    public function testAssertElementsNamesCanBeWrappedAroundFormName()
+    {
+        $form = new \ZendTest\Form\TestAsset\FormCollection();
+        $form->setWrapElements(true);
+        $form->setName('foo');
+        $form->prepare();
+
+        $this->assertEquals('foo[colors][0]', $form->get('colors')->get('0')->getName());
+        $this->assertEquals('foo[fieldsets][0][field]', $form->get('fieldsets')->get('0')->get('field')->getName());
+    }
 }

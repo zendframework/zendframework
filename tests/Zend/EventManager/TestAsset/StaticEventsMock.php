@@ -10,8 +10,8 @@
 
 namespace ZendTest\EventManager\TestAsset;
 
-use Zend\EventManager\SharedEventManagerInterface,
-    Zend\Stdlib\CallbackHandler;
+use Zend\EventManager\SharedEventManagerInterface;
+use Zend\Stdlib\CallbackHandler;
 
 /**
  * @category   Zend

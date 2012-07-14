@@ -9,13 +9,9 @@
  */
 
 namespace ZendTest\GData\YouTube;
+
 use Zend\GData\YouTube;
 use Zend\GData\Extension;
-
-/**
- * Test helper
- */
-
 
 /**
  * @category   Zend
@@ -27,7 +23,8 @@ use Zend\GData\Extension;
 class SubscriptionEntryTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->entryText = file_get_contents(
                 'Zend/GData/YouTube/_files/SubscriptionEntryDataSample1.xml',
                 true);
@@ -51,7 +48,8 @@ class SubscriptionEntryTest extends \PHPUnit_Framework_TestCase
         $this->entry = new YouTube\SubscriptionEntry();
     }
 
-    private function verifyAllSamplePropertiesAreCorrect ($subscriptionListEntry) {
+    private function verifyAllSamplePropertiesAreCorrect ($subscriptionListEntry)
+    {
         $this->assertEquals(
             'http://gdata.youtube.com/feeds/users/testuser/' .
             'subscriptions/35bbde297dba88db',
@@ -154,41 +152,48 @@ class SubscriptionEntryTest extends \PHPUnit_Framework_TestCase
             $subscriptionListEntry->getContent()->getSrc());
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements() {
+    public function testSampleEntryShouldHaveNoExtensionElements()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributes() {
+    public function testSampleEntryShouldHaveNoExtensionAttributes()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElementsV2() {
+    public function testSampleEntryShouldHaveNoExtensionElementsV2()
+    {
         $this->entry->transferFromXML($this->v2entryText_channel);
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributesV2() {
+    public function testSampleEntryShouldHaveNoExtensionAttributesV2()
+    {
         $this->entry->transferFromXML($this->v2entryText_channel);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testEmptySubscriptionEntryToAndFromStringShouldMatch() {
+    public function testEmptySubscriptionEntryToAndFromStringShouldMatch()
+    {
         $entryXml = $this->entry->saveXML();
         $newSubscriptionEntry = new YouTube\SubscriptionEntry();
         $newSubscriptionEntry->transferFromXML($entryXml);
@@ -196,7 +201,8 @@ class SubscriptionEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newSubscriptionEntryXml);
     }
 
-    public function testEmptySubscriptionEntryToAndFromStringShouldMatchV2() {
+    public function testEmptySubscriptionEntryToAndFromStringShouldMatchV2()
+    {
         $this->entry->transferFromXML($this->v2entryText_channel);
         $entryXml = $this->entry->saveXML();
         $newSubscriptionEntry = new YouTube\SubscriptionEntry();
@@ -206,7 +212,8 @@ class SubscriptionEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newSubscriptionEntryXml);
     }
 
-    public function testGetFeedLinkReturnsAllStoredEntriesWhenUsedWithNoParameters() {
+    public function testGetFeedLinkReturnsAllStoredEntriesWhenUsedWithNoParameters()
+    {
         // Prepare test data
         $entry1 = new Extension\FeedLink();
         $entry1->rel = "first";
@@ -221,7 +228,8 @@ class SubscriptionEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($this->entry->feedLink));
     }
 
-    public function testGetFeedLinkCanReturnEntriesByRelValue() {
+    public function testGetFeedLinkCanReturnEntriesByRelValue()
+    {
         // Prepare test data
         $entry1 = new Extension\FeedLink();
         $entry1->rel = "first";
@@ -237,18 +245,21 @@ class SubscriptionEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($entry2, $this->entry->getFeedLink('second'));
     }
 
-    public function testSamplePropertiesAreCorrect () {
+    public function testSamplePropertiesAreCorrect ()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->verifyAllSamplePropertiesAreCorrect($this->entry);
     }
 
-    public function testSamplePropertiesAreCorrectV2 () {
+    public function testSamplePropertiesAreCorrectV2 ()
+    {
         $this->entry->transferFromXML($this->v2entryText_channel);
         $this->entry->setMajorProtocolVersion(2);
         $this->verifyAllSamplePropertiesAreCorrectV2($this->entry);
     }
 
-    public function testConvertSubscriptionEntryToAndFromString() {
+    public function testConvertSubscriptionEntryToAndFromString()
+    {
         $this->entry->transferFromXML($this->entryText);
         $entryXml = $this->entry->saveXML();
         $newSubscriptionEntry = new YouTube\SubscriptionEntry();
@@ -258,7 +269,8 @@ class SubscriptionEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($entryXml, $newSubscriptionEntryXml);
     }
 
-    public function testExceptionThrownInChannelSubscription() {
+    public function testExceptionThrownInChannelSubscription()
+    {
         $this->entry->transferFromXML($this->entryText);
         $exceptionCaught = false;
         try {
@@ -270,7 +282,8 @@ class SubscriptionEntryTest extends \PHPUnit_Framework_TestCase
             'calling getCountHint() on a v1 subscription entry.');
     }
 
-    public function testChannelSubscriptionFunctionalityV2() {
+    public function testChannelSubscriptionFunctionalityV2()
+    {
         $this->entry->transferFromXML($this->v2entryText_channel);
         $this->assertEquals('androiddevelopers',
             $this->entry->getUsername()->text);
@@ -283,7 +296,8 @@ class SubscriptionEntryTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testPlaylistSubscriptionFunctionalityV2() {
+    public function testPlaylistSubscriptionFunctionalityV2()
+    {
         $this->entry->transferFromXML($this->v2entryText_playlist);
         $this->entry->setMajorProtocolVersion(2);
         $this->assertEquals('From Google Engineers',
@@ -299,7 +313,8 @@ class SubscriptionEntryTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testFavoritesSubscriptionFunctionalityV2() {
+    public function testFavoritesSubscriptionFunctionalityV2()
+    {
         $this->entry->transferFromXML($this->v2entryText_favorites);
         $categories = $this->entry->getCategory();
         foreach($categories as $category) {
@@ -310,7 +325,8 @@ class SubscriptionEntryTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testQuerySubscriptionFunctionalityV2() {
+    public function testQuerySubscriptionFunctionalityV2()
+    {
         $this->entry->transferFromXML($this->v2entryText_query);
         $categories = $this->entry->getCategory();
         foreach($categories as $category) {

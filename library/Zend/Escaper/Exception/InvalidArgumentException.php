@@ -10,16 +10,13 @@
 
 namespace Zend\Escaper\Exception;
 
-use Zend\Escaper\Exception;
-
 /**
  * Invalid argument exception
  *
- * @uses       \InvalidArgumentException
  * @category   Zend
  * @package    Zend_Escaper
  */
-class InvalidArgumentException extends \InvalidArgumentException
-    implements Exception\ExceptionInterface
+class InvalidArgumentException extends \InvalidArgumentException implements
+    ExceptionInterface
 {
 }

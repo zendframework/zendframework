@@ -10,17 +10,17 @@
 
 namespace ZendTest\View\Strategy;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\EventManager\EventManager,
-    Zend\Feed\Writer\FeedFactory,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\View\Model\ModelInterface as Model,
-    Zend\View\Model\FeedModel,
-    Zend\View\Model\ViewModel,
-    Zend\View\Renderer\FeedRenderer,
-    Zend\View\Strategy\FeedStrategy,
-    Zend\View\ViewEvent;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\EventManager\EventManager;
+use Zend\Feed\Writer\FeedFactory;
+use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Model\FeedModel;
+use Zend\View\Model\ViewModel;
+use Zend\View\Renderer\FeedRenderer;
+use Zend\View\Strategy\FeedStrategy;
+use Zend\View\ViewEvent;
 
 /**
  * @category   Zend
@@ -117,7 +117,7 @@ class FeedStrategyTest extends TestCase
         $this->assertTrue($headers->has('content-type'));
         $this->assertEquals('application/atom+xml', $headers->get('content-type')->getFieldValue());
     }
-    
+
     protected function getFeedData($type)
     {
         return array(

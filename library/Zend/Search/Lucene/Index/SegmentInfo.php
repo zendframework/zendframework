@@ -328,7 +328,7 @@ class SegmentInfo implements TermsStreamInterface
         if ($this->_delGen == -1) {
             // There is no delete file for this segment
             return null;
-        } else if ($this->_delGen == 0) {
+        } elseif ($this->_delGen == 0) {
             // It's a segment with pre-2.1 format delete file
             // Try to load deletions file
             return $this->_loadPre21DelFile();
@@ -702,7 +702,8 @@ class SegmentInfo implements TermsStreamInterface
      * @param integer $fieldNum
      * @return integer
      */
-    private function _getFieldPosition($fieldNum) {
+    private function _getFieldPosition($fieldNum)
+    {
         // Treat values which are not in a translation table as a 'direct value'
         return isset($this->_fieldsDicPositions[$fieldNum]) ?
                            $this->_fieldsDicPositions[$fieldNum] : $fieldNum;
@@ -1485,7 +1486,7 @@ class SegmentInfo implements TermsStreamInterface
             if ($file == $this->_name . '.del') {
                 // Matches <segment_name>.del file name
                 $delFileList[] = 0;
-            } else if (preg_match('/^' . $this->_name . '_([a-zA-Z0-9]+)\.del$/i', $file, $matches)) {
+            } elseif (preg_match('/^' . $this->_name . '_([a-zA-Z0-9]+)\.del$/i', $file, $matches)) {
                 // Matches <segment_name>_NNN.del file names
                 $delFileList[] = (int)base_convert($matches[1], 36, 10);
             }
@@ -1522,7 +1523,7 @@ class SegmentInfo implements TermsStreamInterface
             if ($latestDelGen == $this->_delGen) {
                 // Delete file hasn't been updated by any concurrent process
                 return;
-            } else if ($latestDelGen > $this->_delGen) {
+            } elseif ($latestDelGen > $this->_delGen) {
                 // Delete file has been updated by some concurrent process
                 // Reload deletions file
                 $this->_delGen  = $latestDelGen;
@@ -1531,7 +1532,7 @@ class SegmentInfo implements TermsStreamInterface
                 return;
             } else {
                 throw new RuntimeException(
-                	'Delete file processing workflow is corrupted for the segment \'' . $this->_name . '\'.'
+                    'Delete file processing workflow is corrupted for the segment \'' . $this->_name . '\'.'
                 );
             }
         }
@@ -1734,10 +1735,10 @@ class SegmentInfo implements TermsStreamInterface
         $argList = func_get_args();
         if (count($argList) > 2) {
             throw new InvalidArgumentException('Wrong number of arguments');
-        } else if (count($argList) == 2) {
+        } elseif (count($argList) == 2) {
             $startId = $argList[0];
             $mode    = $argList[1];
-        } else if (count($argList) == 1) {
+        } elseif (count($argList) == 1) {
             $startId = $argList[0];
             $mode    = self::SM_TERMS_ONLY;
         } else {
@@ -1910,7 +1911,7 @@ class SegmentInfo implements TermsStreamInterface
         if ($highIndex == 0) {
             // skip start entry
             $this->nextTerm();
-        } else if ($prefix->field == $this->_lastTerm->field  &&  $prefix->text  == $this->_lastTerm->text) {
+        } elseif ($prefix->field == $this->_lastTerm->field  &&  $prefix->text  == $this->_lastTerm->text) {
             // We got exact match in the dictionary index
 
             if ($this->_termsScanMode == self::SM_FULL_INFO  ||  $this->_termsScanMode == self::SM_MERGE_INFO) {

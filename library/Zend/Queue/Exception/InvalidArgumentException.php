@@ -16,6 +16,6 @@ namespace Zend\Queue\Exception;
  * @category   Zend
  * @package    Zend_Queue
  */
-class InvalidArgumentException extends \InvalidArgumentException implements 
+class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
 {}

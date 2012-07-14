@@ -20,7 +20,7 @@ class CacheControl implements HeaderInterface
     /**
      * Array of Cache-Control directives
      *
-	 * @var array
+     * @var array
      */
     protected $directives = array();
 

@@ -31,7 +31,7 @@ class TemplatePathStack implements ResolverInterface
      * Default suffix to use
      *
      * Appends this suffix if the template requested does not use it.
-     * 
+     *
      * @var string
      */
     protected $defaultSuffix = 'phtml';
@@ -43,7 +43,7 @@ class TemplatePathStack implements ResolverInterface
 
     /**
      * Reason for last lookup failure
-     * 
+     *
      * @var false|string
      */
     protected $lastLookupFailure = false;
@@ -128,7 +128,7 @@ class TemplatePathStack implements ResolverInterface
         $this->defaultSuffix = ltrim($this->defaultSuffix, '.');
         return $this;
     }
-    
+
     /**
      * Get default file suffix
      *
@@ -315,7 +315,7 @@ class TemplatePathStack implements ResolverInterface
                     if (!file_exists($filePath)) {
                         break;
                     }
-                } 
+                }
                 if ($this->useStreamWrapper()) {
                     // If using a stream wrapper, prepend the spec to the path
                     $filePath = 'zend.view://' . $filePath;
@@ -330,7 +330,7 @@ class TemplatePathStack implements ResolverInterface
 
     /**
      * Get the last lookup failure message, if any
-     * 
+     *
      * @return false|string
      */
     public function getLastLookupFailure()

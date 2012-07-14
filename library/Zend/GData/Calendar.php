@@ -61,7 +61,7 @@ class Calendar extends GData
     {
         if ($location == null) {
             $uri = self::CALENDAR_EVENT_FEED_URI;
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -79,7 +79,7 @@ class Calendar extends GData
         if ($location == null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -109,7 +109,7 @@ class Calendar extends GData
         if ($location == null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;

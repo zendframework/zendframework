@@ -33,7 +33,7 @@ abstract class ArrayUtils
     {
         if (!is_array($value)) {
             return false;
-        } 
+        }
 
         if (!$value) {
             return $allowEmpty;
@@ -53,7 +53,7 @@ abstract class ArrayUtils
     {
         if (!is_array($value)) {
             return false;
-        } 
+        }
 
         if (!$value) {
             return $allowEmpty;
@@ -80,8 +80,8 @@ abstract class ArrayUtils
     {
         if (!is_array($value)) {
             return false;
-        } 
-        
+        }
+
         if (!$value) {
             return $allowEmpty;
         }
@@ -113,8 +113,8 @@ abstract class ArrayUtils
     {
         if (!is_array($value)) {
             return false;
-        } 
-        
+        }
+
         if (!$value) {
             return $allowEmpty;
         }
@@ -155,8 +155,8 @@ abstract class ArrayUtils
     {
         if (!is_array($value)) {
             return false;
-        } 
-        
+        }
+
         if (!$value) {
             return $allowEmpty;
         }

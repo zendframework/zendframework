@@ -17,6 +17,6 @@ require_once __DIR__ . '/ExceptionInterface.php';
  * @package    Zend_Loader
  * @subpackage Exception
  */
-class InvalidArgumentException extends \InvalidArgumentException implements 
+class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
 {}

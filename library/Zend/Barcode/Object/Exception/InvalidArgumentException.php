@@ -18,7 +18,7 @@ use Zend\Barcode\Exception;
  * @category   Zend
  * @package    Zend_Barcode
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
 {
 }

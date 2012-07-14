@@ -9,12 +9,8 @@
  */
 
 namespace ZendTest\GData\YouTube;
+
 use Zend\GData\YouTube;
-
-/**
- * Test helper
- */
-
 
 /**
  * @category   Zend
@@ -26,14 +22,16 @@ use Zend\GData\YouTube;
 class SubscriptionFeedTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->V2feedText = file_get_contents(
                 'Zend/GData/YouTube/_files/SubscriptionFeedDataSampleV2.xml',
                 true);
         $this->feed = new YouTube\SubscriptionFeed();
     }
 
-    private function verifyAllSamplePropertiesAreCorrectV2 ($subscriptionFeed) {
+    private function verifyAllSamplePropertiesAreCorrectV2 ($subscriptionFeed)
+    {
         $this->assertEquals('tag:youtube.com,2008:user:zfgdata:subscriptions',
             $subscriptionFeed->id->text);
         $this->assertEquals('2007-09-20T21:01:13.000-07:00',
@@ -84,17 +82,20 @@ class SubscriptionFeedTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->feed->extensionElements));
         $this->assertEquals(0, count($this->feed->extensionElements));
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->feed->extensionAttributes));
         $this->assertEquals(0, count($this->feed->extensionAttributes));
     }
 
-    public function testEmptySubscriptionFeedToAndFromStringShouldMatch() {
+    public function testEmptySubscriptionFeedToAndFromStringShouldMatch()
+    {
         $feedXml = $this->feed->saveXML();
         $newSubscriptionFeed = new YouTube\SubscriptionFeed();
         $newSubscriptionFeed->transferFromXML($feedXml);
@@ -102,12 +103,14 @@ class SubscriptionFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feedXml == $newSubscriptionFeedXml);
     }
 
-    public function testSamplePropertiesAreCorrectV2 () {
+    public function testSamplePropertiesAreCorrectV2 ()
+    {
         $this->feed->transferFromXML($this->V2feedText);
         $this->verifyAllSamplePropertiesAreCorrectV2($this->feed);
     }
 
-    public function testConvertSubscriptionFeedToAndFromStringV2() {
+    public function testConvertSubscriptionFeedToAndFromStringV2()
+    {
         $this->feed->transferFromXML($this->V2feedText);
         $this->feed->setMajorProtocolVersion(2);
         $feedXml = $this->feed->saveXML();

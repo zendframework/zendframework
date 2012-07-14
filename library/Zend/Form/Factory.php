@@ -17,7 +17,6 @@ use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Hydrator;
-use Zend\Stdlib\SubClass;
 
 /**
  * @category   Zend
@@ -73,15 +72,15 @@ class Factory
         $spec = $this->validateSpecification($spec, __METHOD__);
         $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Element';
 
-        if (SubClass::isSubclassOf($type, 'Zend\Form\FormInterface')) {
+        if (self::isSubclassOf($type, 'Zend\Form\FormInterface')) {
             return $this->createForm($spec);
         }
 
-        if (SubClass::isSubclassOf($type, 'Zend\Form\FieldsetInterface')) {
+        if (self::isSubclassOf($type, 'Zend\Form\FieldsetInterface')) {
             return $this->createFieldset($spec);
         }
 
-        if (SubClass::isSubclassOf($type, 'Zend\Form\ElementInterface')) {
+        if (self::isSubclassOf($type, 'Zend\Form\ElementInterface')) {
             return $this->createElement($spec);
         }
 
@@ -203,7 +202,7 @@ class Factory
      * Specification follows that of {@link createFieldset()}, and adds the
      * following keys:
      *
-     * - input_filter: input filter instance, named input filter class, or 
+     * - input_filter: input filter instance, named input filter class, or
      *   array specification for the input filter factory
      * - hydrator: hydrator instance or named hydrator class
      *
@@ -455,5 +454,29 @@ class Factory
         }
 
         $form->setValidationGroup($spec);
+    }
+
+    /**
+     * Checks if the object has this class as one of its parents
+     *
+     * @see https://bugs.php.net/bug.php?id=53727
+     * @see https://github.com/zendframework/zf2/pull/1807
+     *
+     * @param string $className
+     * @param string $type
+     */
+    protected static function isSubclassOf($className, $type)
+    {
+        if (is_subclass_of($className, $type)) {
+            return true;
+        }
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return false;
+        }
+        if (!interface_exists($type)) {
+            return false;
+        }
+        $r = new ReflectionClass($className);
+        return $r->implementsInterface($type);
     }
 }

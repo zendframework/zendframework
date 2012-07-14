@@ -10,10 +10,10 @@
 
 namespace ZendTest\View\Helper;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\Response,
-    Zend\Json\Json as JsonFormatter,
-    Zend\View\Helper\Json as JsonHelper;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Response;
+use Zend\Json\Json as JsonFormatter;
+use Zend\View\Helper\Json as JsonHelper;
 
 /**
  * Test class for Zend_View_Helper_Json

@@ -25,6 +25,6 @@ abstract class AbstractCollection extends \ArrayObject
      *
      * @return array
      */
-    public abstract function getValues();
+    abstract public function getValues();
 
 }

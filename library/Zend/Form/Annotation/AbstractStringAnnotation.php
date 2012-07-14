@@ -25,7 +25,7 @@ abstract class AbstractStringAnnotation
 
     /**
      * Receive and process the contents of an annotation
-     * 
+     *
      * @param  array $data
      * @return void
      * @throws Exception\DomainException if a 'value' key is missing, or its value is not a string

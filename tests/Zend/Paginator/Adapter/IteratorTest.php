@@ -95,7 +95,8 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-8084
      */
-    public function testGetItemsSerializable() {
+    public function testGetItemsSerializable()
+    {
         $items = $this->_adapter->getItems(0, 1);
         $innerIterator = $items->getInnerIterator();
         $items = unserialize(serialize($items));
@@ -105,7 +106,8 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-4151
      */
-    public function testEmptySet() {
+    public function testEmptySet()
+    {
         $iterator = new \ArrayIterator(array());
         $this->_adapter = new Adapter\Iterator($iterator);
         $actual = $this->_adapter->getItems(0, 10);

@@ -16,7 +16,6 @@ use DateTimeZone;
 use DateInterval;
 
 /**
- * @see        \Zend\Validator\DateStep
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests

@@ -18,6 +18,7 @@
         "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
+        "ext-mongo": "*",
         "zendframework/zend-db": "Zend\\Db component",
         "zendframework/zend-mail": "Zend\\Mail component",
         "zendframework/zend-validator": "Zend\\Validator component"

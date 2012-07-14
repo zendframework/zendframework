@@ -91,7 +91,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
 
 class ExtensionHelper extends Extension\AbstractExtension
 {
-    function wrong($data)
+    public function wrong($data)
     {
         return false;
     }

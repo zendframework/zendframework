@@ -62,7 +62,7 @@ class Statement implements StatementInterface
     protected $bufferResults = false;
 
     /**
-     * @param  bool $bufferResults 
+     * @param  bool $bufferResults
      */
     public function __construct($bufferResults = false)
     {

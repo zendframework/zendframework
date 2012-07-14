@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData\Calendar;
+
 use Zend\GData\Calendar\Extension;
 
 /**
@@ -21,36 +22,42 @@ use Zend\GData\Calendar\Extension;
 class QuickAddTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->quickAddText = file_get_contents(
                 'Zend/GData/Calendar/_files/QuickAddElementSample1.xml',
                 true);
         $this->quickAdd = new Extension\QuickAdd();
     }
 
-    public function testEmptyQuickAddShouldHaveNoExtensionElements() {
+    public function testEmptyQuickAddShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->quickAdd->extensionElements));
         $this->assertTrue(count($this->quickAdd->extensionElements) == 0);
     }
 
-    public function testEmptyQuickAddShouldHaveNoExtensionAttributes() {
+    public function testEmptyQuickAddShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->quickAdd->extensionAttributes));
         $this->assertTrue(count($this->quickAdd->extensionAttributes) == 0);
     }
 
-    public function testSampleQuickAddShouldHaveNoExtensionElements() {
+    public function testSampleQuickAddShouldHaveNoExtensionElements()
+    {
         $this->quickAdd->transferFromXML($this->quickAddText);
         $this->assertTrue(is_array($this->quickAdd->extensionElements));
         $this->assertTrue(count($this->quickAdd->extensionElements) == 0);
     }
 
-    public function testSampleQuickAddShouldHaveNoExtensionAttributes() {
+    public function testSampleQuickAddShouldHaveNoExtensionAttributes()
+    {
         $this->quickAdd->transferFromXML($this->quickAddText);
         $this->assertTrue(is_array($this->quickAdd->extensionAttributes));
         $this->assertTrue(count($this->quickAdd->extensionAttributes) == 0);
     }
 
-    public function testNormalQuickAddShouldHaveNoExtensionElements() {
+    public function testNormalQuickAddShouldHaveNoExtensionElements()
+    {
         $this->quickAdd->value = false;
         $this->assertEquals($this->quickAdd->value, false);
         $this->assertEquals(count($this->quickAdd->extensionElements), 0);
@@ -70,7 +77,8 @@ class QuickAddTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newQuickAdd2->value, false);
     }
 
-    public function testEmptyQuickAddToAndFromStringShouldMatch() {
+    public function testEmptyQuickAddToAndFromStringShouldMatch()
+    {
         $quickAddXml = $this->quickAdd->saveXML();
         $newQuickAdd = new Extension\QuickAdd();
         $newQuickAdd->transferFromXML($quickAddXml);
@@ -78,7 +86,8 @@ class QuickAddTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($quickAddXml == $newQuickAddXml);
     }
 
-    public function testQuickAddWithValueToAndFromStringShouldMatch() {
+    public function testQuickAddWithValueToAndFromStringShouldMatch()
+    {
         $this->quickAdd->value = false;
         $quickAddXml = $this->quickAdd->saveXML();
         $newQuickAdd = new Extension\QuickAdd();
@@ -88,7 +97,8 @@ class QuickAddTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $newQuickAdd->value);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->quickAdd->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -102,7 +112,8 @@ class QuickAddTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newQuickAdd->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullQuickAddToAndFromString() {
+    public function testConvertFullQuickAddToAndFromString()
+    {
         $this->quickAdd->transferFromXML($this->quickAddText);
         $this->assertEquals($this->quickAdd->value, true);
     }

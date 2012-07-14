@@ -26,7 +26,7 @@ class Options extends AbstractArrayAnnotation
 {
     /**
      * Retrieve the options
-     * 
+     *
      * @return null|array
      */
     public function getOptions()

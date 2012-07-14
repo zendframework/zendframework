@@ -67,11 +67,11 @@ class BaseInputFilterTest extends TestCase
         $bar = new Input();
         $bar->getFilterChain()->attachByName('stringtrim');
         $bar->getValidatorChain()->addValidator(new Validator\Digits());
-        
+
         $baz = new Input();
         $baz->setRequired(false);
         $baz->getFilterChain()->attachByName('stringtrim');
-        $baz->getValidatorChain()->addValidator(new Validator\StringLength(1, 6)); 
+        $baz->getValidatorChain()->addValidator(new Validator\StringLength(1, 6));
 
         $filter->add($foo, 'foo')
                ->add($bar, 'bar')
@@ -98,7 +98,7 @@ class BaseInputFilterTest extends TestCase
         $baz->setRequired(false);
         $baz->getFilterChain()->attachByName('stringtrim');
         $baz->getValidatorChain()->addValidator(new Validator\StringLength(1, 6));
-        
+
         $filter->add($foo, 'foo')
                ->add($bar, 'bar')
                ->add($baz, 'baz');
@@ -322,7 +322,7 @@ class BaseInputFilterTest extends TestCase
      */
 
     /**
-     * Idea for this one is that validation may need to rely on context -- e.g., a "password confirmation" 
+     * Idea for this one is that validation may need to rely on context -- e.g., a "password confirmation"
      * field may need to know what the original password entered was in order to compare.
      */
     public function testValidationCanUseContext()

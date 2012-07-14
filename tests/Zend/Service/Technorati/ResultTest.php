@@ -9,20 +9,6 @@
  */
 
 namespace ZendTest\Service\Technorati;
-use Zend\Service\Technorati;
-
-/**
- * Test helper
- */
-
-/**
- * @see Technorati\Result
- */
-
-/**
- * @see Technorati\SearchResult
- */
-
 
 /**
  * @category   Zend

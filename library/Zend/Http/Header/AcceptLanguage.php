@@ -67,7 +67,6 @@ class AcceptLanguage extends AbstractAccept
         return $this->hasType($type);
     }
 
-
     /**
      * Parse the keys contained in the header line
      *

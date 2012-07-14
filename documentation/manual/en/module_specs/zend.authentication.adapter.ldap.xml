@@ -34,12 +34,12 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-use Zend\Authentication\AuthenticationService,
-    Zend\Authentication\Adapter\Ldap as AuthAdapter,
-    Zend\Config\Reader\Ini as ConfigReader,
-    Zend\Log\Logger,
-    Zend\Log\Writer\Stream as LogWriter,
-    Zend\Log\Filter\Priority as LogFilter;
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Adapter\Ldap as AuthAdapter;
+use Zend\Config\Reader\Ini as ConfigReader;
+use Zend\Log\Logger;
+use Zend\Log\Writer\Stream as LogWriter;
+use Zend\Log\Filter\Priority as LogFilter;
 
 $username = $this->_request->getParam('username');
 $password = $this->_request->getParam('password');

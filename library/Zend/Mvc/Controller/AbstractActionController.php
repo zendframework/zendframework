@@ -33,9 +33,9 @@ use Zend\View\Model\ViewModel;
  * @subpackage Controller
  */
 abstract class AbstractActionController implements
-    Dispatchable, 
-    EventManagerAwareInterface, 
-    InjectApplicationEventInterface, 
+    Dispatchable,
+    EventManagerAwareInterface,
+    InjectApplicationEventInterface,
     ServiceLocatorAwareInterface
 {
     //use \Zend\EventManager\ProvidesEvents;
@@ -268,7 +268,7 @@ abstract class AbstractActionController implements
     /**
      * Set plugin manager
      *
-     * @param  string|PluginManager $plugins 
+     * @param  string|PluginManager $plugins
      * @return ActionController
      * @throws Exception\InvalidArgumentException
      */

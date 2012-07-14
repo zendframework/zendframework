@@ -17,7 +17,7 @@ use Zend\Mail\Exception;
  * @package    Zend_Mail
  * @subpackage Header
  */
-class BadMethodCallException extends Exception\BadMethodCallException implements 
+class BadMethodCallException extends Exception\BadMethodCallException implements
     ExceptionInterface
 {
 }

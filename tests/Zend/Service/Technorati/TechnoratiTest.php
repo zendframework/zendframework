@@ -9,12 +9,8 @@
  */
 
 namespace ZendTest\Service\Technorati;
+
 use Zend\Service\Technorati;
-
-/**
- * Test helper
- */
-
 
 /**
  * @category   Zend
@@ -42,14 +38,8 @@ class TechnoratiTest extends TestCase
 
     public function setUp()
     {
-        /**
-         * @see \Zend\Http\Client\Adapter\Test
-         */
         $adapter = new \Zend\Http\Client\Adapter\Test();
 
-        /**
-         * @see \Zend\Http\Client
-         */
         $client = new \Zend\Http\Client(Technorati\Technorati::API_URI_BASE, array(
             'adapter' => $adapter
         ));

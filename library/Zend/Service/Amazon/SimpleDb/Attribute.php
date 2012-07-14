@@ -23,13 +23,13 @@ class Attribute
 
     /**
      * Constructor
-     * 
-     * @param  string $itemName 
-     * @param  string $name 
-     * @param  array $values 
+     *
+     * @param  string $itemName
+     * @param  string $name
+     * @param  array $values
      * @return void
      */
-    function __construct($itemName, $name, $values) 
+    public function __construct($itemName, $name, $values)
     {
         $this->_itemName = $itemName;
         $this->_name     = $name;
@@ -41,7 +41,7 @@ class Attribute
         }
     }
 
-	/**
+    /**
      * Return the item name to which the attribute belongs
      *
      * @return string
@@ -51,7 +51,7 @@ class Attribute
         return $this->_itemName;
     }
 
-	/**
+    /**
      * Retrieve attribute values
      *
      * @return array
@@ -61,7 +61,7 @@ class Attribute
         return $this->_values;
     }
 
-	/**
+    /**
      * Retrieve the attribute name
      *
      * @return string
@@ -70,17 +70,17 @@ class Attribute
     {
         return $this->_name;
     }
-    
+
     /**
      * Add value
-     * 
-     * @param  mixed $value 
+     *
+     * @param  mixed $value
      * @return void
      */
     public function addValue($value)
     {
         if (is_array($value)) {
-             $this->_values += $value;   
+             $this->_values += $value;
         } else {
             $this->_values[] = $value;
         }

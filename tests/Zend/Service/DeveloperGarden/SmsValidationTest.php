@@ -9,10 +9,6 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_SmsValidation
- */
-
-/**
  * Zend_Service_DeveloperGarden test case
  *
  * @category   Zend

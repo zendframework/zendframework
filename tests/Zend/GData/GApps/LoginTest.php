@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData\GApps;
+
 use Zend\GData\GApps\Extension;
 
 /**
@@ -21,36 +22,42 @@ use Zend\GData\GApps\Extension;
 class LoginTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->loginText = file_get_contents(
                 'Zend/GData/GApps/_files/LoginElementSample1.xml',
                 true);
         $this->login = new Extension\Login();
     }
 
-    public function testEmptyLoginShouldHaveNoExtensionElements() {
+    public function testEmptyLoginShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->login->extensionElements));
         $this->assertTrue(count($this->login->extensionElements) == 0);
     }
 
-    public function testEmptyLoginShouldHaveNoExtensionAttributes() {
+    public function testEmptyLoginShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->login->extensionAttributes));
         $this->assertTrue(count($this->login->extensionAttributes) == 0);
     }
 
-    public function testSampleLoginShouldHaveNoExtensionElements() {
+    public function testSampleLoginShouldHaveNoExtensionElements()
+    {
         $this->login->transferFromXML($this->loginText);
         $this->assertTrue(is_array($this->login->extensionElements));
         $this->assertTrue(count($this->login->extensionElements) == 0);
     }
 
-    public function testSampleLoginShouldHaveNoExtensionAttributes() {
+    public function testSampleLoginShouldHaveNoExtensionAttributes()
+    {
         $this->login->transferFromXML($this->loginText);
         $this->assertTrue(is_array($this->login->extensionAttributes));
         $this->assertTrue(count($this->login->extensionAttributes) == 0);
     }
 
-    public function testNormalLoginShouldHaveNoExtensionElements() {
+    public function testNormalLoginShouldHaveNoExtensionElements()
+    {
         $this->login->username = "johndoe";
         $this->login->password = "abcdefg1234567890";
         $this->login->hashFunctionName = "Foo";
@@ -96,7 +103,8 @@ class LoginTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $newLogin2->agreedToTerms);
     }
 
-    public function testEmptyLoginToAndFromStringShouldMatch() {
+    public function testEmptyLoginToAndFromStringShouldMatch()
+    {
         $loginXml = $this->login->saveXML();
         $newLogin = new Extension\Login();
         $newLogin->transferFromXML($loginXml);
@@ -104,7 +112,8 @@ class LoginTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($loginXml == $newLoginXml);
     }
 
-    public function testLoginWithValueToAndFromStringShouldMatch() {
+    public function testLoginWithValueToAndFromStringShouldMatch()
+    {
         $this->login->username = "johndoe";
         $this->login->password = "abcdefg1234567890";
         $this->login->hashFunctionName = "Foo";
@@ -127,7 +136,8 @@ class LoginTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->login->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -141,7 +151,8 @@ class LoginTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newLogin->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullLoginToAndFromString() {
+    public function testConvertFullLoginToAndFromString()
+    {
         $this->login->transferFromXML($this->loginText);
         $this->assertEquals("SusanJones-1321", $this->login->username);
         $this->assertEquals("123\$\$abc", $this->login->password);

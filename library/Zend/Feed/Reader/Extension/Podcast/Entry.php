@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Feed\Reader\Extension\Podcast;
+
 use Zend\Feed\Reader\Extension;
 
 /**

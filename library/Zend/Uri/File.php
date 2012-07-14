@@ -20,7 +20,7 @@ namespace Zend\Uri;
  */
 class File extends Uri
 {
-    static protected $validSchemes = array('file');
+    protected static $validSchemes = array('file');
 
     /**
      * Check if the URI is a valid File URI

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Queue\Bugs;
+
 use Zend\Queue;
 
 /*

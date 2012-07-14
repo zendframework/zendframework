@@ -24,7 +24,7 @@ class Stream
      * @param resource $resource Stream resource
      * @return array
      */
-    public function parse($resource) 
+    public function parse($resource)
     {
         return stream_get_contents($resource);
     }

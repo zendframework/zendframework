@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Service\Rackspace\Servers;
+
 use Zend\Service\Rackspace\Servers;
 
 
@@ -30,49 +31,49 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Check if the resize was successfully done
-     * 
-     * @var boolean 
+     *
+     * @var boolean
      */
     protected $resize;
 
     /**
      * List of flavors available
-     * 
+     *
      * @var array
      */
     protected $flavors;
 
     /**
      * List of images available
-     * 
-     * @var Zend\Service\Rackspace\Servers\ImageList 
+     *
+     * @var Zend\Service\Rackspace\Servers\ImageList
      */
     protected $images;
 
     /**
      * Id of the image created
-     * 
+     *
      * @var string
      */
     protected $imageId;
 
     /**
      * Server id of testing
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $serverId;
 
     /**
      * Admin password of the server
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $adminPass;
 
     /**
      * Shared Ip group
-     * 
+     *
      * @var Zend\Service\Rackspace\Servers\SharedIpGroup
      */
     protected $sharedIpGroup;
@@ -109,11 +110,11 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         // terms of use compliance: safe delay between each test
         sleep(2);
     }
-    
+
     /**
      * Wait n seconds for status change
-     * 
-     * @param string  $status 
+     *
+     * @param string  $status
      * @param integer $timeout
      * @return boolean
      */
@@ -152,7 +153,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      * Test create server
      */
     public function testCreateServer()
-    {       
+    {
         $data = array (
             'name'     => TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME,
             'imageId'  => TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGEID,
@@ -409,14 +410,14 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test get shared IP group 
+     * Test get shared IP group
      */
     public function testGetSharedIpGroup()
     {
         $groupId= $this->sharedIpGroup->getId();
         $group= $this->rackspace->getSharedIpGroup($groupId);
         $this->assertTrue($group!==false);
-        $this->assertEquals($group->getId(), $groupId);   
+        $this->assertEquals($group->getId(), $groupId);
     }
 
     /**
@@ -424,7 +425,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteSharedIpGroup()
     {
-        $this->assertTrue($this->rackspace->deleteSharedIpGroup($this->sharedIpGroup->getId())); 
+        $this->assertTrue($this->rackspace->deleteSharedIpGroup($this->sharedIpGroup->getId()));
     }
 
     /**

@@ -23,8 +23,8 @@ class StaticFilter
 
     /**
      * Set plugin manager for resolving filter classes
-     * 
-     * @param  FilterPluginManager $manager 
+     *
+     * @param  FilterPluginManager $manager
      * @return void
      */
     public static function setPluginManager(FilterPluginManager $manager = null)
@@ -38,7 +38,7 @@ class StaticFilter
 
     /**
      * Get plugin manager for loading filter classes
-     * 
+     *
      * @return FilterPluginManager
      */
     public static function getPluginManager()

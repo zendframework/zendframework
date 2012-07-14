@@ -16,7 +16,7 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Plugin manager implementation for parser adapters
  *
  * Enforces that parsers retrieved are instances of
- * Parser\ParserInterface. Additionally, it registers a number of default 
+ * Parser\ParserInterface. Additionally, it registers a number of default
  * parsers available.
  *
  * @category   Zend
@@ -26,7 +26,7 @@ class ParserPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of parsers
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -38,8 +38,8 @@ class ParserPluginManager extends AbstractPluginManager
      * Validate the plugin
      *
      * Checks that the parser loaded is an instance of Parser\ParserInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

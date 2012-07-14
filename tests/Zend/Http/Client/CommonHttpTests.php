@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Http\Client;
+
 use Zend\Http\Client as HTTPClient;
 use Zend\Http;
 use Zend\Http\Client\Adapter;
@@ -993,7 +994,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function parameterArrayProvider()
+    public static function parameterArrayProvider()
     {
         return array(
             array(
@@ -1034,7 +1035,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function invalidConfigProvider()
+    public static function invalidConfigProvider()
     {
         return array(
             array(false),

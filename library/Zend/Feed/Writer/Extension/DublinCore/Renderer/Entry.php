@@ -29,10 +29,10 @@ class Entry extends Extension\AbstractRenderer
      * @var bool
      */
     protected $_called = false;
-    
+
     /**
      * Render entry
-     * 
+     *
      * @return void
      */
     public function render()
@@ -45,23 +45,23 @@ class Entry extends Extension\AbstractRenderer
             $this->_appendNamespaces();
         }
     }
-    
+
     /**
      * Append namespaces to entry
-     * 
+     *
      * @return void
      */
     protected function _appendNamespaces()
     {
         $this->getRootElement()->setAttribute('xmlns:dc',
-            'http://purl.org/dc/elements/1.1/');  
+            'http://purl.org/dc/elements/1.1/');
     }
 
     /**
      * Set entry author elements
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
@@ -75,7 +75,7 @@ class Entry extends Extension\AbstractRenderer
             if (array_key_exists('name', $data)) {
                 $text = $dom->createTextNode($data['name']);
                 $author->appendChild($text);
-                $root->appendChild($author);   
+                $root->appendChild($author);
             }
         }
         $this->_called = true;

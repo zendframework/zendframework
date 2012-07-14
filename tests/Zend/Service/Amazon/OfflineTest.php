@@ -287,42 +287,42 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
             ))
         );
     }
-    
-	/**
+
+    /**
      * Testing if Amazon service component can handle return values where the
      * item-list is not empty
-     * 
+     *
      * @group ZF-9547
      */
     public function testAmazonComponentHandlesValidBookResults()
     {
-    	$xml = file_get_contents(__DIR__."/_files/amazon-response-valid.xml");
+        $xml = file_get_contents(__DIR__."/_files/amazon-response-valid.xml");
         $dom = new \DOMDocument();
         $dom->loadXML($xml);
-        
-    	$result = new Amazon\ResultSet($dom);
 
-    	$currentItem = null;
+        $result = new Amazon\ResultSet($dom);
+
+        $currentItem = null;
 
         $currentItem = $result->current();
 
-    	$this->assertInstanceOf('Zend\Service\Amazon\Item', $currentItem);
-    	$this->assertEquals('0754512673', $currentItem->ASIN);
+        $this->assertInstanceOf('Zend\Service\Amazon\Item', $currentItem);
+        $this->assertEquals('0754512673', $currentItem->ASIN);
     }
-    
+
     /**
      * Testing if Amazon service component can handle return values where the
      * item-list is empty (no results found)
-     * 
+     *
      * @group ZF-9547
      */
     public function testAmazonComponentHandlesEmptyBookResults()
     {
-    	$xml = file_get_contents(__DIR__."/_files/amazon-response-invalid.xml");
+        $xml = file_get_contents(__DIR__."/_files/amazon-response-invalid.xml");
         $dom = new \DOMDocument();
         $dom->loadXML($xml);
-        
-    	$result = new Amazon\ResultSet($dom);
+
+        $result = new Amazon\ResultSet($dom);
 
         $this->setExpectedException('Zend\Service\Amazon\Exception\ExceptionInterface');
         $result->current();

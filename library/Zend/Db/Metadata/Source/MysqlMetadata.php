@@ -95,7 +95,7 @@ class MysqlMetadata extends AbstractSource
                 'is_updatable' => ('YES' == $row['IS_UPDATABLE']),
             );
         }
-        
+
         $this->data['table_names'][$schema] = $tables;
     }
 
@@ -342,13 +342,13 @@ class MysqlMetadata extends AbstractSource
 
         $sql = 'SELECT ' . implode(', ', $isColumns)
         . ' FROM ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','TABLES')) . 'T'
-        
+
         . ' INNER JOIN ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','KEY_COLUMN_USAGE')) . 'KCU'
         . ' ON ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
         . '  = ' . $p->quoteIdentifierChain(array('KCU','TABLE_SCHEMA'))
         . ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
         . '  = ' . $p->quoteIdentifierChain(array('KCU','TABLE_NAME'))
-        
+
         . ' WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_TYPE'))
         . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
 
@@ -469,7 +469,7 @@ class MysqlMetadata extends AbstractSource
         $sql = 'SELECT ' . implode(', ', $isColumns)
         . ' FROM ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA','TRIGGERS'))
         . ' WHERE ';
-        
+
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= $p->quoteIdentifier('TRIGGER_SCHEMA')
             . ' = ' . $p->quoteValue($schema);
@@ -477,9 +477,9 @@ class MysqlMetadata extends AbstractSource
             $sql .= $p->quoteIdentifier('TRIGGER_SCHEMA')
             . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
         }
-        
+
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-        
+
         $data = array();
         foreach ($results->toArray() as $row) {
             $row = array_change_key_case($row, CASE_LOWER);

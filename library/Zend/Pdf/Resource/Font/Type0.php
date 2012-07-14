@@ -58,7 +58,7 @@ class Type0 extends AbstractFont
      *
      * @return string
      */
-    static private function getToUnicodeCMapData()
+    private static function getToUnicodeCMapData()
     {
         return '/CIDInit /ProcSet findresource begin '              . "\n"
              . '12 dict begin '                                     . "\n"

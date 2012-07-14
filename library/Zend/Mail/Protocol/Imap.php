@@ -42,7 +42,7 @@ class Imap
      * @param  bool     $ssl   use ssl? 'SSL', 'TLS' or false
      * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
-    function __construct($host = '', $port = null, $ssl = false)
+    public function __construct($host = '', $port = null, $ssl = false)
     {
         if ($host) {
             $this->connect($host, $port, $ssl);
@@ -105,7 +105,7 @@ class Imap
      */
     protected function _nextLine()
     {
-        $line = @fgets($this->_socket);
+        $line = fgets($this->_socket);
         if ($line === false) {
             throw new Exception\RuntimeException('cannot read - connection closed?');
         }
@@ -309,7 +309,7 @@ class Imap
 
         foreach ($tokens as $token) {
             if (is_array($token)) {
-                if (@fwrite($this->_socket, $line . ' ' . $token[0] . "\r\n") === false) {
+                if (fwrite($this->_socket, $line . ' ' . $token[0] . "\r\n") === false) {
                     throw new Exception\RuntimeException('cannot write - connection closed?');
                 }
                 if (!$this->_assumedNextLine('+ ')) {
@@ -321,7 +321,7 @@ class Imap
             }
         }
 
-        if (@fwrite($this->_socket, $line . "\r\n") === false) {
+        if (fwrite($this->_socket, $line . "\r\n") === false) {
             throw new Exception\RuntimeException('cannot write - connection closed?');
         }
     }
@@ -524,9 +524,9 @@ class Imap
     {
         if (is_array($from)) {
             $set = implode(',', $from);
-        } else if ($to === null) {
+        } elseif ($to === null) {
             $set = (int)$from;
-        } else if ($to === INF) {
+        } elseif ($to === INF) {
             $set = (int)$from . ':*';
         } else {
             $set = (int)$from . ':' . (int)$to;

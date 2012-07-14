@@ -95,7 +95,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             if (isset($columnParameters[1])) {
                 array_shift($columnParameters);
                 $selectParameters[0][$i] = $columnParameters;
-            } 
+            }
         }
 
         // first, produce column list without compound names (using the AS portion only)

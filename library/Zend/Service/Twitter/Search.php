@@ -140,7 +140,7 @@ class Search extends Client\RestClient
     {
         if (!$options) {
             $options = $this->getOptions();
-        } else if (!$options instanceof SearchOptions) {
+        } elseif (!$options instanceof SearchOptions) {
             $options = new SearchOptions($options);
         }
 

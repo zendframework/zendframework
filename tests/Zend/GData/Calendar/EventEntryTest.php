@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData\Calendar;
+
 use Zend\GData\Calendar;
 
 /**
@@ -21,14 +22,16 @@ use Zend\GData\Calendar;
 class EventEntryTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->entryText = file_get_contents(
                 'Zend/GData/Calendar/_files/EventEntrySample1.xml',
                 true);
         $this->entry = new Calendar\EventEntry();
     }
 
-    public function testSetters() {
+    public function testSetters()
+    {
         $entry = new Calendar\EventEntry();
         $who = new \Zend\GData\Extension\Who();
         $who->setValueString("John Doe");
@@ -39,29 +42,34 @@ class EventEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("John Doe", $whoRetrieved->getValueString());
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements() {
+    public function testSampleEntryShouldHaveNoExtensionElements()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributes() {
+    public function testSampleEntryShouldHaveNoExtensionAttributes()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testEmptyEventEntryToAndFromStringShouldMatch() {
+    public function testEmptyEventEntryToAndFromStringShouldMatch()
+    {
         $entryXml = $this->entry->saveXML();
         $newEventEntry = new Calendar\EventEntry();
         $newEventEntry->transferFromXML($entryXml);
@@ -69,7 +77,8 @@ class EventEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newEventEntryXml);
     }
 
-    public function testConvertEventEntryToAndFromString() {
+    public function testConvertEventEntryToAndFromString()
+    {
         $this->entry->transferFromXML($this->entryText);
         $entryXml = $this->entry->saveXML();
         $newEventEntry = new Calendar\EventEntry();
@@ -89,7 +98,8 @@ class EventEntryTest extends \PHPUnit_Framework_TestCase
     }
 
 /*
-    public function testEventEntryWithTextAndTypeToAndFromStringShouldMatch() {
+    public function testEventEntryWithTextAndTypeToAndFromStringShouldMatch()
+    {
         $this->feed->text = '<img src="http://www.example.com/image.jpg"/>';
         $this->feed->type = 'xhtml';
         $feedXml = $this->feed->saveXML();
@@ -101,7 +111,8 @@ class EventEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('xhtml', $newEventEntry->type);
     }
 
-    public function testEventEntryWithSrcAndTypeToAndFromStringShouldMatch() {
+    public function testEventEntryWithSrcAndTypeToAndFromStringShouldMatch()
+    {
         $this->feed->src = 'http://www.example.com/image.png';
         $this->feed->type = 'image/png';
         $feedXml = $this->feed->saveXML();
@@ -113,7 +124,8 @@ class EventEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('image/png', $newEventEntry->type);
     }
 
-    public function testConvertEventEntryWithSrcAndTypeToAndFromString() {
+    public function testConvertEventEntryWithSrcAndTypeToAndFromString()
+    {
         $this->feed->transferFromXML($this->feedText);
         $this->assertEquals('http://www.example.com/image.png', $this->feed->src);
         $this->assertEquals('image/png', $this->feed->type);

@@ -22,14 +22,16 @@ use Zend\GData\GApps\MemberEntry;
 class MemberEntryTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->entryText = file_get_contents(
                 'Zend/GData/GApps/_files/MemberEntryDataSample1.xml',
                 true);
         $this->entry = new MemberEntry();
     }
 
-    private function verifyAllSamplePropertiesAreCorrect ($memberEntry) {
+    private function verifyAllSamplePropertiesAreCorrect ($memberEntry)
+    {
         $this->assertEquals('https://www.google.com/a/feeds/group/2.0/example.com/us-sales/member/suejones%40example.com',
             $memberEntry->id->text);
         $this->assertEquals('1970-01-01T00:00:00.000Z', $memberEntry->updated->text);
@@ -47,29 +49,34 @@ class MemberEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('true', $memberEntry->property[2]->value);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements() {
+    public function testSampleEntryShouldHaveNoExtensionElements()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributes() {
+    public function testSampleEntryShouldHaveNoExtensionAttributes()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testEmptyMemberEntryToAndFromStringShouldMatch() {
+    public function testEmptyMemberEntryToAndFromStringShouldMatch()
+    {
         $entryXml = $this->entry->saveXML();
         $newMemberEntry = new MemberEntry();
         $newMemberEntry->transferFromXML($entryXml);
@@ -77,12 +84,14 @@ class MemberEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newMemberEntryXml);
     }
 
-    public function testSamplePropertiesAreCorrect () {
+    public function testSamplePropertiesAreCorrect ()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->verifyAllSamplePropertiesAreCorrect($this->entry);
     }
 
-    public function testConvertMemberEntryToAndFromString() {
+    public function testConvertMemberEntryToAndFromString()
+    {
         $this->entry->transferFromXML($this->entryText);
         $entryXml = $this->entry->saveXML();
         $newMemberEntry = new MemberEntry();

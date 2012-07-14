@@ -23,11 +23,11 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
 {
     /**
      * Common DateTime object to assist with unit testing
-     * 
+     *
      * @var DateTime
      */
     protected $now;
-    
+
     /**
      * Save subscription to RDMBS
      *
@@ -46,7 +46,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
         if ($result && (0 < count($result))) {
             $data['created_time'] = $result->current()->created_time;
             $now = $this->getNow();
-            if (array_key_exists('lease_seconds', $data) 
+            if (array_key_exists('lease_seconds', $data)
                 && $data['lease_seconds']
             ) {
                 $data['expiration_time'] = $now->add(new DateInterval('PT' . $data['lease_seconds'] . 'S'))
@@ -62,11 +62,11 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
         $this->_db->insert($data);
         return true;
     }
-    
+
     /**
      * Get subscription by ID/key
-     * 
-     * @param  string $key 
+     *
+     * @param  string $key
      * @return array
      * @throws PubSubHubbub\Exception\InvalidArgumentException
      */
@@ -85,8 +85,8 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
 
     /**
      * Determine if a subscription matching the key exists
-     * 
-     * @param  string $key 
+     *
+     * @param  string $key
      * @return bool
      * @throws PubSubHubbub\Exception\InvalidArgumentException
      */
@@ -123,7 +123,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
 
     /**
      * Get a new DateTime or the one injected for testing
-     * 
+     *
      * @return DateTime
      */
     public function getNow()
@@ -136,7 +136,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
 
     /**
      * Set a DateTime instance for assisting with unit testing
-     * 
+     *
      * @param DateTime $now
      * @return Subscription
      */

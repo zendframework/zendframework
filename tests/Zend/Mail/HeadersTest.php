@@ -304,7 +304,8 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($class, $test);
     }
 
-    public function testClone() {
+    public function testClone()
+    {
         $headers = new Mail\Headers();
         $headers->addHeader(new Header\Bcc());
         $headers2 = clone($headers);

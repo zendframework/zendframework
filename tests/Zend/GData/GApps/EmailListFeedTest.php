@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData\GApps;
+
 use Zend\GData\GApps;
 
 /**
@@ -34,22 +35,26 @@ class EmailListFeedTest extends \PHPUnit_Framework_TestCase
         $this->emptyEmailListFeed = new GApps\EmailListFeed();
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionElements() {
+    public function testEmptyFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->emptyEmailListFeed->extensionElements));
         $this->assertTrue(count($this->emptyEmailListFeed->extensionElements) == 0);
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionAttributes() {
+    public function testEmptyFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->emptyEmailListFeed->extensionAttributes));
         $this->assertTrue(count($this->emptyEmailListFeed->extensionAttributes) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionElements() {
+    public function testSampleFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->emailListFeed->extensionElements));
         $this->assertTrue(count($this->emailListFeed->extensionElements) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionAttributes() {
+    public function testSampleFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->emailListFeed->extensionAttributes));
         $this->assertTrue(count($this->emailListFeed->extensionAttributes) == 0);
     }

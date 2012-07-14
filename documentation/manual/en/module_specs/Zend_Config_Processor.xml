@@ -88,9 +88,9 @@ echo $config->foo;
             </para>
                 
             <programlisting language="php"><![CDATA[
-use Zend\Filter\StringToUpper,
-    Zend\Config\Processor\Filter as FilterProcessor,
-    Zend\Config\Config;
+use Zend\Filter\StringToUpper;
+use Zend\Config\Processor\Filter as FilterProcessor;
+use Zend\Config\Config;
 
 $config = new Config(array ('foo' => 'bar'), true);
 $upper = new StringToUpper();
@@ -119,11 +119,11 @@ echo $config->foo;
             </para>
                 
             <programlisting language="php"><![CDATA[
-use Zend\Filter\StringToLower,
-    Zend\Filter\StringToUpper,
-    Zend\Config\Processor\Filter as FilterProcessor,
-    Zend\Config\Processor\Queue,
-    Zend\Config\Config;
+use Zend\Filter\StringToLower;
+use Zend\Filter\StringToUpper;
+use Zend\Config\Processor\Filter as FilterProcessor;
+use Zend\Config\Processor\Queue;
+use Zend\Config\Config;
 
 $config = new Config(array ('foo' => 'bar'), true);
 $upper  = new StringToUpper();
@@ -186,9 +186,9 @@ echo $config->foo;
             </para>
                 
             <programlisting language="php"><![CDATA[
-use Zend\Config\Config,
-    Zend\Config\Processor\Translator as TranslatorProcessor,
-    Zend\I18n\Translator\Translator;
+use Zend\Config\Config;
+use Zend\Config\Processor\Translator as TranslatorProcessor;
+use Zend\I18n\Translator\Translator;
     
 $config = new Config(array('animal' => 'dog'), true);
 

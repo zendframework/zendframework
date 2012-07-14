@@ -12,6 +12,7 @@ namespace Zend\Mail\Storage\Folder;
 
 use Zend\Mail\Storage;
 use Zend\Mail\Storage\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -87,7 +88,9 @@ class Maildir extends Storage\Maildir implements FolderInterface
         $this->_rootFolder = new Storage\Folder('/', '/', false);
         $this->_rootFolder->INBOX = new Storage\Folder('INBOX', 'INBOX', true);
 
-        $dh = @opendir($this->_rootdir);
+        ErrorHandler::start(E_WARNING);
+        $dh = opendir($this->_rootdir);
+        ErrorHandler::stop();
         if (!$dh) {
             throw new Exception\RuntimeException("can't read folders in maildir");
         }
@@ -126,7 +129,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
                     array_push($folderStack, $parentFolder);
                     $parentFolder = $folder;
                     break;
-                } else if ($stack) {
+                } elseif ($stack) {
                     $parent = array_pop($stack);
                     $parentFolder = array_pop($folderStack);
                 }
@@ -156,9 +159,11 @@ class Maildir extends Storage\Maildir implements FolderInterface
         }
         $currentFolder = $this->_rootFolder;
         $subname = trim($rootFolder, $this->_delim);
-        
+
         while ($currentFolder) {
-            @list($entry, $subname) = @explode($this->_delim, $subname, 2);
+            ErrorHandler::start(E_NOTICE);
+            list($entry, $subname) = explode($this->_delim, $subname, 2);
+            ErrorHandler::stop();
             $currentFolder = $currentFolder->$entry;
             if (!$subname) {
                 break;

@@ -15,6 +15,7 @@ use Traversable;
 use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 use Zend\View;
 use Zend\View\Exception;
 
@@ -127,7 +128,10 @@ class Links extends AbstractHelper
      */
     public function __call($method, array $arguments = array())
     {
-        if (@preg_match('/find(Rel|Rev)(.+)/', $method, $match)) {
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/find(Rel|Rev)(.+)/', $method, $match);
+        ErrorHandler::stop();
+        if ($result) {
             return $this->findRelation($arguments[0],
                                        strtolower($match[1]),
                                        strtolower($match[2]));
@@ -724,8 +728,8 @@ class Links extends AbstractHelper
      * Implements {@link HelperInterface::render()}.
      *
      * @param  AbstractContainer string|$container [optional] container to render.
-     *                                         Default is to render the 
-     *                                         container registered in the 
+     *                                         Default is to render the
+     *                                         container registered in the
      *                                         helper.
      * @return string                          helper output
      */

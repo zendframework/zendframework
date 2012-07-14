@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon\Ec2;
 
 use Zend\Http\Client as HttpClient;

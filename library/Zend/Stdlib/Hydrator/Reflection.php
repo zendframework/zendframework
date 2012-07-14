@@ -20,7 +20,7 @@ class Reflection implements HydratorInterface
      * Simple in-memory array cache of ReflectionProperties used.
      * @var array
      */
-    static protected $reflProperties = array();
+    protected static $reflProperties = array();
 
     /**
      * Extract values from an object
@@ -68,7 +68,7 @@ class Reflection implements HydratorInterface
     {
         if (is_object($input)) {
             $input = get_class($input);
-        } else if (!is_string($input)) {
+        } elseif (!is_string($input)) {
             throw new Exception\InvalidArgumentException('Input must be a string or an object.');
         }
 

@@ -14,7 +14,7 @@ namespace Zend\Text\Exception;
  * @category  Zend
  * @package   Zend_Text
  */
-class RuntimeException 
+class RuntimeException
     extends \RuntimeException
     implements ExceptionInterface
 {}

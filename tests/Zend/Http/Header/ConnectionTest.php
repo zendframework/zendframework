@@ -54,6 +54,6 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('close', $connectionHeader->getFieldValue());
 
     }
-    
+
 }
 

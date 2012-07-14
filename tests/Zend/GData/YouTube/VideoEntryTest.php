@@ -15,11 +15,6 @@ use Zend\GData\App\Extension;
 use Zend\GData\App;
 
 /**
- * Test helper
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_GData_YouTube
  * @subpackage UnitTests
@@ -29,7 +24,8 @@ use Zend\GData\App;
 class VideoEntryTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->privateEntryText = file_get_contents(
                 'Zend/GData/YouTube/_files/VideoEntryDataSamplePrivate.xml',
                 true);
@@ -39,7 +35,8 @@ class VideoEntryTest extends \PHPUnit_Framework_TestCase
         $this->entry = new YouTube\VideoEntry();
     }
 
-    private function createRandomString() {
+    private function createRandomString()
+    {
         $randomString = '';
         for ($x = 0; $x < 10; $x++) {
             $randomCharacter = chr(rand(97,122));
@@ -48,7 +45,8 @@ class VideoEntryTest extends \PHPUnit_Framework_TestCase
         return $randomString;
     }
 
-    private function verifyAllPrivateSamplePropertiesAreCorrect ($videoEntry) {
+    private function verifyAllPrivateSamplePropertiesAreCorrect ($videoEntry)
+    {
         $this->assertEquals('http://gdata.youtube.com/feeds/videos/UMFI1hdm96E',
             $videoEntry->id->text);
         $this->assertEquals('UMFI1hdm96E', $videoEntry->getVideoId());
@@ -136,7 +134,8 @@ class VideoEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2008-09-25', $videoEntry->getVideoRecorded());
     }
 
-    public function verifyAllV2SamplePropertiesAreCorrect($videoEntry) {
+    public function verifyAllV2SamplePropertiesAreCorrect($videoEntry)
+    {
          $this->assertEquals('tag:youtube.com,2008:video:UMFI1hdm96E',
             $videoEntry->id->text);
         $this->assertEquals('UMFI1hdm96E', $videoEntry->getVideoId());
@@ -233,7 +232,8 @@ class VideoEntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testGetVideoId() {
+    public function testGetVideoId()
+    {
         $videoEntry = new YouTube\VideoEntry();
 
         // assert valid ID
@@ -241,7 +241,8 @@ class VideoEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ABCDEFG12AB', $videoEntry->getVideoId());
     }
 
-    public function testGetVideoIdV2() {
+    public function testGetVideoIdV2()
+    {
         $v2VideoEntry = new YouTube\VideoEntry();
         $v2VideoEntry->setMajorProtocolVersion(2);
 
@@ -254,8 +255,8 @@ class VideoEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('UMFI1hdm96E', $v2VideoEntry->getVideoId());
     }
 
-    public function testGetVideoIdException() {
-
+    public function testGetVideoIdException()
+    {
         $exceptionCaught = false;
         $videoEntry = new YouTube\VideoEntry();
 
@@ -273,29 +274,34 @@ class VideoEntryTest extends \PHPUnit_Framework_TestCase
             'Zend_GData_AppException');
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElementsV2() {
+    public function testSampleEntryShouldHaveNoExtensionElementsV2()
+    {
         $this->entry->transferFromXML($this->v2EntryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributesV2() {
+    public function testSampleEntryShouldHaveNoExtensionAttributesV2()
+    {
         $this->entry->transferFromXML($this->v2EntryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testEmptyVideoEntryToAndFromStringShouldMatch() {
+    public function testEmptyVideoEntryToAndFromStringShouldMatch()
+    {
         $entryXml = $this->entry->saveXML();
         $newVideoEntry = new YouTube\VideoEntry();
         $newVideoEntry->transferFromXML($entryXml);
@@ -303,25 +309,29 @@ class VideoEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newVideoEntryXml);
     }
 
-    public function testPrivateSamplePropertiesAreCorrect () {
+    public function testPrivateSamplePropertiesAreCorrect ()
+    {
         $this->entry->transferFromXML($this->privateEntryText);
         $this->verifyAllPrivateSamplePropertiesAreCorrect($this->entry);
     }
 
-    public function testV2SamplePropertiesAreCorrect() {
+    public function testV2SamplePropertiesAreCorrect()
+    {
         $this->entry->transferFromXML($this->v2EntryText);
         $this->entry->setMajorProtocolVersion(2);
         $this->verifyAllV2SamplePropertiesAreCorrect($this->entry);
     }
 
-    public function testVideoPrivate() {
+    public function testVideoPrivate()
+    {
         $this->entry->transferFromXml($this->privateEntryText);
         $videoEntry = $this->entry;
 
         $this->assertTrue($videoEntry->isVideoPrivate());
     }
 
-    public function testSetVideoPublic() {
+    public function testSetVideoPublic()
+    {
         $this->entry->transferFromXml($this->privateEntryText);
         $videoEntry = $this->entry;
         $videoEntry->setVideoPublic();

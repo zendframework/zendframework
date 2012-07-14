@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData\Spreadsheets;
+
 use Zend\GData\Spreadsheets;
 use Zend\GData\Spreadsheets\Extension;
 use Zend\GData\App;

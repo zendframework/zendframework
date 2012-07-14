@@ -9,7 +9,9 @@
  */
 
 namespace TestNamespace;
+
 use Zend\Validator\ValidatorLoader as BaseValidatorLoader;
+
 require_once __DIR__ . '/MyDigits.php';
 require_once __DIR__ . '/StringEquals.php';
 

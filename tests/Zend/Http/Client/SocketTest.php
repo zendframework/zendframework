@@ -229,7 +229,7 @@ class SocketTest extends CommonHttpTests
      *
      * @return array
      */
-    static public function invalidContextProvider()
+    public static function invalidContextProvider()
     {
         return array(
             array(new \stdClass()),

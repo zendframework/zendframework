@@ -43,8 +43,7 @@ class SessionHandlerTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $storageClient = $this->createStorageInstance();
-        for ($i = 1; $i <= self::$uniqId; $i++)
-        {
+        for ($i = 1; $i <= self::$uniqId; $i++) {
             try { $storageClient->deleteTable(TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX . $i); } catch (\Exception $e) { }
         }
     }

@@ -16,7 +16,7 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Plugin manager implementation for the symmetric adapter instances.
  *
  * Enforces that symmetric adapters retrieved are instances of
- * Symmetric\SymmetricInterface. Additionally, it registers a number of default 
+ * Symmetric\SymmetricInterface. Additionally, it registers a number of default
  * symmetric adapters available.
  *
  * @category   Zend
@@ -26,7 +26,7 @@ class SymmetricPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of symmetric adapters
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -35,7 +35,7 @@ class SymmetricPluginManager extends AbstractPluginManager
 
     /**
      * Do not share by default
-     * 
+     *
      * @var bool
      */
     protected $shareByDefault = false;
@@ -45,8 +45,8 @@ class SymmetricPluginManager extends AbstractPluginManager
      *
      * Checks that the adapter loaded is an instance
      * of Symmetric\SymmetricInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

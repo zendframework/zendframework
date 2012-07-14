@@ -13,8 +13,8 @@ namespace ZendTest\Cloud\DocumentService;
 use Zend\Cloud\DocumentService\Factory as DocumentFactory;
 use Zend\Config\Config;
 use ZendTest\Cloud\DocumentService\Adapter\SimpleDbTest;
-use ZendTest\Cloud\DocumentService\Adapter\WindowsAzureTest,
-    PHPUnit_Framework_TestCase as PHPUnitTestCase;
+use ZendTest\Cloud\DocumentService\Adapter\WindowsAzureTest;
+use PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**
  * Test class for Zend\Cloud\DocumentService\Factory
@@ -31,14 +31,15 @@ class FactoryTest extends PHPUnitTestCase
         $this->assertTrue(is_string(\Zend\Cloud\DocumentService\Factory::DOCUMENT_ADAPTER_KEY));
     }
 
-    public function testGetAdapterWithConfig() {
+    public function testGetAdapterWithConfig()
+    {
         // SimpleDB adapter
         $simpleDbAdapter = DocumentFactory::getAdapter(
                                     new Config(SimpleDbTest::getConfigArray(), true)
                                 );
 
         $this->assertEquals('Zend\Cloud\DocumentService\Adapter\SimpleDb', get_class($simpleDbAdapter));
-        
+
         // Azure adapter
         /*
          * Disable WindowsAzure test

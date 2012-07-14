@@ -10,8 +10,8 @@
 
 namespace ZendTest\Stdlib;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Stdlib\Glob;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Stdlib\Glob;
 
 class GlobTest extends TestCase
 {
@@ -20,7 +20,7 @@ class GlobTest extends TestCase
         if (!defined('GLOB_BRACE')) {
             $this->markTestSkipped('GLOB_BRACE not available');
         }
-        
+
         $this->assertEquals(
             glob(__DIR__ . '/_files/{alph,bet}a', GLOB_BRACE),
             Glob::glob(__DIR__ . '/_files/{alph,bet}a', Glob::GLOB_BRACE, true)

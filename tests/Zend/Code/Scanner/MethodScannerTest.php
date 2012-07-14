@@ -10,8 +10,8 @@
 
 namespace ZendTest\Code\Scanner;
 
-use Zend\Code\Scanner\FileScanner,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Code\Scanner\FileScanner;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class MethodScannerTest extends TestCase
 {
@@ -28,7 +28,7 @@ class MethodScannerTest extends TestCase
         $this->assertFalse($method->isPrivate());
         $this->assertFalse($method->isStatic());
     }
-    
+
     public function testMethodScannerReturnsParameters()
     {
         $file       = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');

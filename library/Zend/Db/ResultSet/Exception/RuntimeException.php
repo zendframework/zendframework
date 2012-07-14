@@ -17,7 +17,7 @@ use Zend\Db\ResultSet\Exception;
  * @package    Zend_Db
  * @subpackage ResultSet
  */
-class RuntimeException 
-    extends \RuntimeException 
+class RuntimeException
+    extends \RuntimeException
     implements Exception
 {}

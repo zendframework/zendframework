@@ -30,9 +30,9 @@ class PredicateSet implements PredicateInterface, Countable
 
     /**
      * Constructor
-     * 
-     * @param  null|array $predicates 
-     * @param  string $defaultCombination 
+     *
+     * @param  null|array $predicates
+     * @param  string $defaultCombination
      * @return void
      */
     public function __construct(array $predicates = null, $defaultCombination = self::COMBINED_BY_AND)
@@ -47,9 +47,9 @@ class PredicateSet implements PredicateInterface, Countable
 
     /**
      * Add predicate to set
-     * 
-     * @param  PredicateInterface $predicate 
-     * @param  string $combination 
+     *
+     * @param  PredicateInterface $predicate
+     * @param  string $combination
      * @return PredicateSet
      */
     public function addPredicate(PredicateInterface $predicate, $combination = null)
@@ -79,8 +79,8 @@ class PredicateSet implements PredicateInterface, Countable
 
     /**
      * Add predicate using OR operator
-     * 
-     * @param  PredicateInterface $predicate 
+     *
+     * @param  PredicateInterface $predicate
      * @return PredicateSet
      */
     public function orPredicate(PredicateInterface $predicate)
@@ -91,8 +91,8 @@ class PredicateSet implements PredicateInterface, Countable
 
     /**
      * Add predicate using AND operator
-     * 
-     * @param  PredicateInterface $predicate 
+     *
+     * @param  PredicateInterface $predicate
      * @return PredicateSet
      */
     public function andPredicate(PredicateInterface $predicate)
@@ -133,7 +133,7 @@ class PredicateSet implements PredicateInterface, Countable
 
     /**
      * Get count of attached predicates
-     * 
+     *
      * @return int
      */
     public function count()

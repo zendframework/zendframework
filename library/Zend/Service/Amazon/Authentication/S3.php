@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\Amazon\Authentication;
+
 use Zend\Crypt\Hmac;
 
 /**
@@ -31,25 +32,25 @@ class S3 extends AbstractAuthentication
         if (! is_array($headers)) {
             $headers = array($headers);
         }
-        
+
         $type = $md5 = $date = '';
-        
+
         // Search for the Content-type, Content-MD5 and Date headers
         foreach ($headers as $key => $val) {
             if (strcasecmp($key, 'content-type') == 0) {
                 $type = $val;
-            } else if (strcasecmp($key, 'content-md5') == 0) {
+            } elseif (strcasecmp($key, 'content-md5') == 0) {
                 $md5 = $val;
-            } else if (strcasecmp($key, 'date') == 0) {
+            } elseif (strcasecmp($key, 'date') == 0) {
                 $date = $val;
             }
         }
-        
+
         // If we have an x-amz-date header, use that instead of the normal Date
         if (isset($headers['x-amz-date']) && isset($date)) {
             $date = '';
         }
-        
+
         $sig_str = "$method\n$md5\n$type\n$date\n";
 
         // For x-amz- headers, combine like keys, lowercase them, sort them
@@ -71,18 +72,18 @@ class S3 extends AbstractAuthentication
                 $sig_str .= $key . ':' . implode(',', $val) . "\n";
             }
         }
-        
+
         $sig_str .= '/'.parse_url($path, PHP_URL_PATH);
         if (strpos($path, '?location') !== false) {
             $sig_str .= '?location';
-        } else 
+        } else
             if (strpos($path, '?acl') !== false) {
                 $sig_str .= '?acl';
-            } else 
+            } else
                 if (strpos($path, '?torrent') !== false) {
                     $sig_str .= '?torrent';
                 }
-        
+
         $signature = Hmac::compute($this->_secretKey, 'sha1', utf8_encode($sig_str), Hmac::OUTPUT_BINARY);
         $headers['Authorization'] = 'AWS ' . $this->_accessKey . ':' . base64_encode($signature);
 

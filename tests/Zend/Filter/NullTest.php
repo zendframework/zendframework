@@ -35,7 +35,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(NullFilter::TYPE_INTEGER, $filter->getType());
     }
-    
+
     /**
      * @param mixed $value
      * @param bool  $expected
@@ -45,7 +45,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new NullFilter();
         $this->assertSame($expected, $filter->filter($value));
-    }    
+    }
 
     /**
      * @param int $type
@@ -104,7 +104,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(63, $filter->getType());
     }
 
-    static public function defaultTestProvider()
+    public static function defaultTestProvider()
     {
         return array(
             array(null, null),
@@ -123,7 +123,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function typeTestProvider()
+    public static function typeTestProvider()
     {
         return array(
             array(
@@ -255,7 +255,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function combinedTypeTestProvider()
+    public static function combinedTypeTestProvider()
     {
         return array(
             array(

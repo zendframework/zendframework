@@ -19,6 +19,6 @@ use Zend\Json\Exception;
  * @package    Zend_Json
  * @subpackage Server
  */
-class ErrorException extends Exception\BadMethodCallException implements 
+class ErrorException extends Exception\BadMethodCallException implements
     ExceptionInterface
 {}

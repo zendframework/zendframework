@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\Amazon;
+
 use Zend\Service\Amazon\Exception;
 
 /**
@@ -51,7 +52,7 @@ class Query extends Amazon
         if (strtolower($method) === 'category') {
             $this->_searchIndex = $args[0];
             $this->_search['SearchIndex'] = $args[0];
-        } else if (isset($this->_search['SearchIndex']) || $this->_searchIndex !== null || $this->_searchIndex === 'asin') {
+        } elseif (isset($this->_search['SearchIndex']) || $this->_searchIndex !== null || $this->_searchIndex === 'asin') {
             $this->_search[$method] = $args[0];
         } else {
             throw new Exception\RuntimeException('You must set a category before setting the search parameters');

@@ -10,8 +10,8 @@
 
 namespace ZendTest\Uri;
 
-use Zend\Uri\File as FileUri,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Uri\File as FileUri;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @category   Zend

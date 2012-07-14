@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Server\Reflection;
+
 use Zend\Server\Reflection\Node;
 
 /**

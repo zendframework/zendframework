@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData\GApps;
+
 use Zend\GData\GApps\Extension;
 
 /**
@@ -21,36 +22,42 @@ use Zend\GData\GApps\Extension;
 class QuotaTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->quotaText = file_get_contents(
                 'Zend/GData/GApps/_files/QuotaElementSample1.xml',
                 true);
         $this->quota = new Extension\Quota();
     }
 
-    public function testEmptyQuotaShouldHaveNoExtensionElements() {
+    public function testEmptyQuotaShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->quota->extensionElements));
         $this->assertTrue(count($this->quota->extensionElements) == 0);
     }
 
-    public function testEmptyQuotaShouldHaveNoExtensionAttributes() {
+    public function testEmptyQuotaShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->quota->extensionAttributes));
         $this->assertTrue(count($this->quota->extensionAttributes) == 0);
     }
 
-    public function testSampleQuotaShouldHaveNoExtensionElements() {
+    public function testSampleQuotaShouldHaveNoExtensionElements()
+    {
         $this->quota->transferFromXML($this->quotaText);
         $this->assertTrue(is_array($this->quota->extensionElements));
         $this->assertTrue(count($this->quota->extensionElements) == 0);
     }
 
-    public function testSampleQuotaShouldHaveNoExtensionAttributes() {
+    public function testSampleQuotaShouldHaveNoExtensionAttributes()
+    {
         $this->quota->transferFromXML($this->quotaText);
         $this->assertTrue(is_array($this->quota->extensionAttributes));
         $this->assertTrue(count($this->quota->extensionAttributes) == 0);
     }
 
-    public function testNormalQuotaShouldHaveNoExtensionElements() {
+    public function testNormalQuotaShouldHaveNoExtensionElements()
+    {
         $this->quota->limit = "123456789";
 
         $this->assertEquals("123456789", $this->quota->limit);
@@ -72,7 +79,8 @@ class QuotaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("123456789", $newQuota2->limit);
     }
 
-    public function testEmptyQuotaToAndFromStringShouldMatch() {
+    public function testEmptyQuotaToAndFromStringShouldMatch()
+    {
         $quotaXml = $this->quota->saveXML();
         $newQuota = new Extension\Quota();
         $newQuota->transferFromXML($quotaXml);
@@ -80,7 +88,8 @@ class QuotaTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($quotaXml == $newQuotaXml);
     }
 
-    public function testQuotaWithValueToAndFromStringShouldMatch() {
+    public function testQuotaWithValueToAndFromStringShouldMatch()
+    {
         $this->quota->limit = "123456789";
         $quotaXml = $this->quota->saveXML();
         $newQuota = new Extension\Quota();
@@ -90,7 +99,8 @@ class QuotaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("123456789", $this->quota->limit);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->quota->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -104,7 +114,8 @@ class QuotaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newQuota->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullQuotaToAndFromString() {
+    public function testConvertFullQuotaToAndFromString()
+    {
         $this->quota->transferFromXML($this->quotaText);
         $this->assertEquals("2048", $this->quota->limit);
     }

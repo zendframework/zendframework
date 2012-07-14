@@ -23,7 +23,8 @@ use Zend\GData\App;
 class VideoQueryTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testQueryStringConstructionV2() {
+    public function testQueryStringConstructionV2()
+    {
         $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $query->setOrderBy('viewCount');
@@ -32,7 +33,8 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedString, $query->getQueryString(2));
     }
 
-    public function testLocationV2() {
+    public function testLocationV2()
+    {
         $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $query->setLocation('-37.122,122.01');
@@ -40,7 +42,8 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedString, $query->getQueryString(2));
     }
 
-    public function testLocationExceptionOnNonNumericV2() {
+    public function testLocationExceptionOnNonNumericV2()
+    {
         $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $exceptionCaught = false;
@@ -55,7 +58,8 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
             'IllegalArgumentException when using alpha in setLocation');
     }
 
-    public function testLocationExceptionOnOnlyOneCoordinateV2() {
+    public function testLocationExceptionOnOnlyOneCoordinateV2()
+    {
         $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $exceptionCaught = false;
@@ -71,7 +75,8 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
             'in setLocation');
     }
 
-    public function testUploaderExceptionOnInvalidV2() {
+    public function testUploaderExceptionOnInvalidV2()
+    {
         $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $exceptionCaught = false;
@@ -87,7 +92,8 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
             'setUploader.');
     }
 
-    public function testProjectionPresentInV2Query() {
+    public function testProjectionPresentInV2Query()
+    {
         $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $query->setVideoQuery('foo');
@@ -95,7 +101,8 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedString, $query->getQueryUrl(2));
     }
 
-    public function testSafeSearchParametersInV2() {
+    public function testSafeSearchParametersInV2()
+    {
         $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $exceptionCaught = false;

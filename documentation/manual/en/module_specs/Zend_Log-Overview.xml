@@ -189,8 +189,8 @@ DEBUG   = 7;  // Debug: debug messages
         </para>
 
         <programlisting language="php"><![CDATA[
-use Zend\Log\Logger,
-    Zend\Log\Writer\Stream as StreamWriter;
+use Zend\Log\Logger;
+use Zend\Log\Writer\Stream as StreamWriter;
     
 $logger = new Logger;
 $writer = new StreamWriter('php://output');

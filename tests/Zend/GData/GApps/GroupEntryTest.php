@@ -22,14 +22,16 @@ use Zend\GData\GApps\GroupEntry;
 class GroupEntryTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->entryText = file_get_contents(
                 'Zend/GData/GApps/_files/GroupEntryDataSample1.xml',
                 true);
         $this->entry = new GroupEntry();
     }
 
-    private function verifyAllSamplePropertiesAreCorrect ($groupEntry) {
+    private function verifyAllSamplePropertiesAreCorrect ($groupEntry)
+    {
         $this->assertEquals('https://www.google.com/a/feeds/group/2.0/example.com/us-sales',
             $groupEntry->id->text);
         $this->assertEquals('1970-01-01T00:00:00.000Z', $groupEntry->updated->text);
@@ -49,29 +51,34 @@ class GroupEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Domain', $groupEntry->property[3]->value);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements() {
+    public function testSampleEntryShouldHaveNoExtensionElements()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributes() {
+    public function testSampleEntryShouldHaveNoExtensionAttributes()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testEmptyGroupEntryToAndFromStringShouldMatch() {
+    public function testEmptyGroupEntryToAndFromStringShouldMatch()
+    {
         $entryXml = $this->entry->saveXML();
         $newGroupEntry = new GroupEntry();
         $newGroupEntry->transferFromXML($entryXml);
@@ -79,12 +86,14 @@ class GroupEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newGroupEntryXml);
     }
 
-    public function testSamplePropertiesAreCorrect () {
+    public function testSamplePropertiesAreCorrect ()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->verifyAllSamplePropertiesAreCorrect($this->entry);
     }
 
-    public function testConvertGroupEntryToAndFromString() {
+    public function testConvertGroupEntryToAndFromString()
+    {
         $this->entry->transferFromXML($this->entryText);
         $entryXml = $this->entry->saveXML();
         $newGroupEntry = new GroupEntry();

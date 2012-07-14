@@ -17,6 +17,7 @@ use Zend\Search\Lucene\Search;
 use Zend\Search\Lucene\Search\Exception\QueryParserException;
 use Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter;
 use Zend\Search\Lucene\Search\Query;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * It's an internal abstract class intended to finalize ase a query processing after query parsing.
@@ -156,8 +157,13 @@ class Fuzzy extends AbstractPreprocessing
         // -------------------------------------
         // Recognize wildcard queries
 
-        /** @todo check for PCRE unicode support may be performed through Zend_Environment in some future */
-        if (@preg_match('/\pL/u', 'a') == 1) {
+        /** 
+         * @todo check for PCRE unicode support may be performed through Zend_Environment in some future 
+         */
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/\pL/u', 'a');
+        ErrorHandler::stop();
+        if ($result == 1) {
             $subPatterns = preg_split('/[*?]/u', iconv($this->_encoding, 'UTF-8', $this->_word));
         } else {
             $subPatterns = preg_split('/[*?]/', $this->_word);
@@ -206,8 +212,13 @@ class Fuzzy extends AbstractPreprocessing
         // -------------------------------------
         // Recognize wildcard queries
 
-        /** @todo check for PCRE unicode support may be performed through Zend_Environment in some future */
-        if (@preg_match('/\pL/u', 'a') == 1) {
+        /** 
+         * @todo check for PCRE unicode support may be performed through Zend_Environment in some future 
+         */
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/\pL/u', 'a');
+        ErrorHandler::stop();
+        if ($result == 1) {
             $subPatterns = preg_split('/[*?]/u', iconv($this->_encoding, 'UTF-8', $this->_word));
         } else {
             $subPatterns = preg_split('/[*?]/', $this->_word);

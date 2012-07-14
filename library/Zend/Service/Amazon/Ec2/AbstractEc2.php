@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon;
 use Zend\Service\Amazon\Ec2\Exception;
 use Zend\Crypt\Hmac;
@@ -176,7 +177,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
         $parameters['AWSAccessKeyId']   = $this->_getAccessKey();
         $parameters['SignatureVersion'] = $this->_ec2SignatureVersion;
         $parameters['Timestamp']        = gmdate('Y-m-d\TH:i:s\Z');
-        $parameters['Version']          = $this->_ec2ApiVersion;   
+        $parameters['Version']          = $this->_ec2ApiVersion;
         $parameters['SignatureMethod']  = $this->_ec2SignatureMethod;
         $parameters['Signature']        = $this->signParameters($parameters);
 

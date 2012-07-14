@@ -101,9 +101,6 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
 
     public function testConfigObject()
     {
-        /**
-         * @see Zend\Config\Config
-         */
         $config = new Config\Config(array(
                                          'host'     => TESTS_ZEND_LDAP_HOST,
                                          'username' => TESTS_ZEND_LDAP_USERNAME,

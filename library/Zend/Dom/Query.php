@@ -57,7 +57,7 @@ class Query
      * @var array
      */
     protected $xpathNamespaces = array();
-    
+
     /**
      * XPath PHP Functions
      * @var mixed
@@ -278,7 +278,7 @@ class Query
 
     /**
      * Register PHP Functions to use in internal DOMXPath
-     * 
+     *
      * @param  mixed $restrict
      * @return void
      */

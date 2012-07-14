@@ -10,12 +10,12 @@
 
 namespace ZendTest\Mvc\View;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    stdClass,
-    Zend\EventManager\EventManager,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\View\CreateViewModelListener,
-    Zend\View\Model\ViewModel;
+use PHPUnit_Framework_TestCase as TestCase;
+use stdClass;
+use Zend\EventManager\EventManager;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\View\CreateViewModelListener;
+use Zend\View\Model\ViewModel;
 
 /**
  * @category   Zend
@@ -119,7 +119,7 @@ class CreateViewModelListenerTest extends TestCase
         $result = $this->event->getResult();
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
-    
+
     public function testViewModelCreatesViewModelWithNullResult()
     {
         $this->event->setResult(null);

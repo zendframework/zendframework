@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData;
+
 use Zend\GData\Extension;
 
 /**
@@ -20,36 +21,42 @@ use Zend\GData\Extension;
 class ExtendedPropertyTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->extendedPropertyText = file_get_contents(
                 'Zend/GData/_files/ExtendedPropertyElementSample1.xml',
                 true);
         $this->extendedProperty = new Extension\ExtendedProperty();
     }
 
-    public function testEmptyExtendedPropertyShouldHaveNoExtensionElements() {
+    public function testEmptyExtendedPropertyShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->extendedProperty->extensionElements));
         $this->assertTrue(count($this->extendedProperty->extensionElements) == 0);
     }
 
-    public function testEmptyExtendedPropertyShouldHaveNoExtensionAttributes() {
+    public function testEmptyExtendedPropertyShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->extendedProperty->extensionAttributes));
         $this->assertTrue(count($this->extendedProperty->extensionAttributes) == 0);
     }
 
-    public function testSampleExtendedPropertyShouldHaveNoExtensionElements() {
+    public function testSampleExtendedPropertyShouldHaveNoExtensionElements()
+    {
         $this->extendedProperty->transferFromXML($this->extendedPropertyText);
         $this->assertTrue(is_array($this->extendedProperty->extensionElements));
         $this->assertTrue(count($this->extendedProperty->extensionElements) == 0);
     }
 
-    public function testSampleExtendedPropertyShouldHaveNoExtensionAttributes() {
+    public function testSampleExtendedPropertyShouldHaveNoExtensionAttributes()
+    {
         $this->extendedProperty->transferFromXML($this->extendedPropertyText);
         $this->assertTrue(is_array($this->extendedProperty->extensionAttributes));
         $this->assertTrue(count($this->extendedProperty->extensionAttributes) == 0);
     }
 
-    public function testNormalExtendedPropertyShouldHaveNoExtensionElements() {
+    public function testNormalExtendedPropertyShouldHaveNoExtensionElements()
+    {
         $this->extendedProperty->name = "http://www.example.com/schemas/2007#mycal.foo";
         $this->extendedProperty->value = "5678";
 
@@ -75,7 +82,8 @@ class ExtendedPropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("5678", $newExtendedProperty2->value);
     }
 
-    public function testEmptyExtendedPropertyToAndFromStringShouldMatch() {
+    public function testEmptyExtendedPropertyToAndFromStringShouldMatch()
+    {
         $extendedPropertyXml = $this->extendedProperty->saveXML();
         $newExtendedProperty = new Extension\ExtendedProperty();
         $newExtendedProperty->transferFromXML($extendedPropertyXml);
@@ -83,7 +91,8 @@ class ExtendedPropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($extendedPropertyXml == $newExtendedPropertyXml);
     }
 
-    public function testExtendedPropertyWithValueToAndFromStringShouldMatch() {
+    public function testExtendedPropertyWithValueToAndFromStringShouldMatch()
+    {
         $this->extendedProperty->name = "http://www.example.com/schemas/2007#mycal.foo";
         $this->extendedProperty->value = "5678";
         $extendedPropertyXml = $this->extendedProperty->saveXML();
@@ -95,7 +104,8 @@ class ExtendedPropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("5678", $this->extendedProperty->value);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->extendedProperty->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -109,7 +119,8 @@ class ExtendedPropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newExtendedProperty->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullExtendedPropertyToAndFromString() {
+    public function testConvertFullExtendedPropertyToAndFromString()
+    {
         $this->extendedProperty->transferFromXML($this->extendedPropertyText);
         $this->assertEquals("http://www.example.com/schemas/2007#mycal.id", $this->extendedProperty->name);
         $this->assertEquals("1234", $this->extendedProperty->value);

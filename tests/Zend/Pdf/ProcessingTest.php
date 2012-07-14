@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Pdf;
+
 use Zend\Pdf;
 use Zend\Pdf\Color;
 
@@ -394,7 +395,8 @@ class ProcessingTest extends \PHPUnit_Framework_TestCase
 
 class ExtendedZendPDF extends Pdf\PdfDocument
 {
-    public function __get($name) {
+    public function __get($name)
+    {
         if(isset($this->$name)) {
             return $this->$name;
         }
@@ -402,7 +404,8 @@ class ExtendedZendPDF extends Pdf\PdfDocument
 }
 class ExtendedZendPDFPage extends Pdf\Page
 {
-    public function __get($name) {
+    public function __get($name)
+    {
         if(isset($this->$name)) {
             return $this->$name;
         }

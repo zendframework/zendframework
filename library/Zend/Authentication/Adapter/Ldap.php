@@ -333,11 +333,11 @@ class Ldap implements AdapterInterface
                      * server options.
                      */
                     continue;
-                } else if ($err == LdapException::LDAP_NO_SUCH_OBJECT) {
+                } elseif ($err == LdapException::LDAP_NO_SUCH_OBJECT) {
                     $code = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
                     $messages[0] = "Account not found: $username";
                     $failedAuthorities[$dname] = $zle->getMessage();
-                } else if ($err == LdapException::LDAP_INVALID_CREDENTIALS) {
+                } elseif ($err == LdapException::LDAP_INVALID_CREDENTIALS) {
                     $code = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
                     $messages[0] = 'Invalid credentials';
                     $failedAuthorities[$dname] = $zle->getMessage();

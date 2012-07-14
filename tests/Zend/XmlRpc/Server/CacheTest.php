@@ -9,11 +9,10 @@
  */
 
 namespace ZendTest\XmlRpc\Server;
+
 use Zend\XmlRpc\Server;
 
 /**
- * Test case for Zend\XmlRpc\Server\Cache
- *
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage UnitTests

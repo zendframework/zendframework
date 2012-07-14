@@ -471,7 +471,8 @@ abstract class AbstractFeedEntryParent extends AbstractBase
      * @param Etag $value
      * @return Entry Provides a fluent interface
      */
-    public function setEtag(Etag $value) {
+    public function setEtag(Etag $value)
+    {
         $this->_etag = $value;
         return $this;
     }
@@ -481,7 +482,8 @@ abstract class AbstractFeedEntryParent extends AbstractBase
      *
      * @return Etag|null
      */
-    public function getEtag() {
+    public function getEtag()
+    {
         return $this->_etag;
     }
 

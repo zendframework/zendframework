@@ -10,17 +10,17 @@
 
 namespace ZendTest\View\Strategy;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\EventManager\EventManager,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\View\Model\ModelInterface as Model,
-    Zend\View\Model\JsonModel,
-    Zend\View\Model\ViewModel,
-    Zend\View\Renderer\JsonRenderer,
-    Zend\View\Strategy\JsonStrategy,
-    Zend\View\ViewEvent,
-    Zend\Stdlib\Parameters;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\EventManager\EventManager;
+use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Model\JsonModel;
+use Zend\View\Model\ViewModel;
+use Zend\View\Renderer\JsonRenderer;
+use Zend\View\Strategy\JsonStrategy;
+use Zend\View\ViewEvent;
+use Zend\Stdlib\Parameters;
 
 /**
  * @category   Zend
@@ -177,7 +177,7 @@ class JsonStrategyTest extends TestCase
             $this->assertTrue($found, 'Listener not found');
         }
     }
-    
+
     public function testCanAttachListenersAtSpecifiedPriority()
     {
         $events = new EventManager();

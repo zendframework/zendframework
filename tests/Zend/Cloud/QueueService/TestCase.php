@@ -12,8 +12,8 @@ namespace ZendTest\Cloud\QueueService;
 
 use Zend\Cloud\QueueService\Adapter;
 use Zend\Config\Config;
-use Zend\Cloud\QueueService\Factory,
-    PHPUnit_Framework_TestCase as PHPUnitTestCase;
+use Zend\Cloud\QueueService\Factory;
+use PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**
  * This class forces the adapter tests to implement tests for all methods on
@@ -34,7 +34,7 @@ abstract class TestCase extends PHPUnitTestCase
     protected $_dummyNamePrefix = '/TestItem';
     protected $_dummyDataPrefix = 'TestData';
     protected $_clientType = 'stdClass';
-    
+
     /**
      * Config object
      *
@@ -183,7 +183,7 @@ abstract class TestCase extends PHPUnitTestCase
             foreach ($receivedMessages as $m) {
                 $this->assertEquals($message, $m->getBody());
             }
-		  $this->_commonQueue->deleteQueue($queueURL);
+          $this->_commonQueue->deleteQueue($queueURL);
         } catch (Exception $e) {
             if(isset($queueURL)) $this->_commonQueue->deleteQueue($queueURL);
             throw $e;
@@ -276,9 +276,9 @@ abstract class TestCase extends PHPUnitTestCase
             // now there should be no messages left
             $receivedMessages2 = $this->_commonQueue->receiveMessages($queueURL);
             $this->assertInstanceOf('Zend\Cloud\QueueService\MessageSet', $receivedMessages2);
-		    $this->assertEquals(0, count($receivedMessages2));
+            $this->assertEquals(0, count($receivedMessages2));
 
-		    $this->_commonQueue->deleteQueue($queueURL);
+            $this->_commonQueue->deleteQueue($queueURL);
         } catch (Exception $e) {
             if(isset($queueURL)) $this->_commonQueue->deleteQueue($queueURL);
             throw $e;

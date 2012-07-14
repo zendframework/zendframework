@@ -12,6 +12,7 @@ namespace ZendTest\Captcha;
 
 use Zend\Captcha\ReCaptcha;
 use Zend\Service\ReCaptcha\ReCaptcha as ReCaptchaService;
+
 /**
  * @category   Zend
  * @package    Zend_Captcha
@@ -118,6 +119,6 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
     public function testUsesReCaptchaHelper()
     {
         $captcha = new ReCaptcha;
-        $this->assertEquals('captcha/recaptcha', $captcha->getHelperName());   
+        $this->assertEquals('captcha/recaptcha', $captcha->getHelperName());
     }
 }

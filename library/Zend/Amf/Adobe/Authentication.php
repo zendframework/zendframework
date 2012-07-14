@@ -90,7 +90,7 @@ Roles file format:
      */
     public function authenticate()
     {
-        if (empty($this->_username) 
+        if (empty($this->_username)
             || empty($this->_password)
         ) {
             throw new AuthenticationAdapter\Exception\InvalidArgumentException('Username/password should be set');

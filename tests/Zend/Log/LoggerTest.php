@@ -78,7 +78,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $writers = $this->logger->getWriters();
         $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
     }
-    
+
     /**
      * @dataProvider provideInvalidClasses
      */
@@ -93,7 +93,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Log\Exception\RuntimeException', 'No log writer specified');
         $this->logger->log(Logger::INFO, 'test');
     }
-    
+
     public function testSetWriters()
     {
         $writer1 = $this->logger->plugin('mock');
@@ -102,7 +102,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $writers->insert($writer1, 1);
         $writers->insert($writer2, 2);
         $this->logger->setWriters($writers);
-        
+
         $writers = $this->logger->getWriters();
         $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
         $writer = $writers->extract();
@@ -110,7 +110,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $writer = $writers->extract();
         $this->assertTrue($writer instanceof \Zend\Log\Writer\Mock);
     }
-    
+
     public function testAddWriterWithPriority()
     {
         $writer1 = $this->logger->plugin('mock');
@@ -124,9 +124,9 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($writer instanceof \Zend\Log\Writer\Null);
         $writer = $writers->extract();
         $this->assertTrue($writer instanceof \Zend\Log\Writer\Mock);
-        
+
     }
-    
+
     public function testAddWithSamePriority()
     {
         $writer1 = $this->logger->plugin('mock');
@@ -141,17 +141,17 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $writer = $writers->extract();
         $this->assertTrue($writer instanceof \Zend\Log\Writer\Null);
     }
-    
+
     public function testLogging()
     {
         $writer = new MockWriter;
         $this->logger->addWriter($writer);
         $this->logger->log(Logger::INFO, 'tottakai');
-        
+
         $this->assertEquals(count($writer->events), 1);
         $this->assertContains('tottakai', $writer->events[0]['message']);
     }
-    
+
     public function testLoggingArray()
     {
         $writer = new MockWriter;
@@ -161,7 +161,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(count($writer->events), 1);
         $this->assertContains('test', $writer->events[0]['message']);
     }
-    
+
     public static function provideAttributes()
     {
         return array(
@@ -205,7 +205,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException');
         $this->logger->log(Logger::ERR, $message, $extra);
     }
-    
+
     public function testRegisterErrorHandler()
     {
         $writer = new MockWriter;

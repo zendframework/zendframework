@@ -10,8 +10,8 @@
 
 namespace ZendTest\OAuth\Http;
 
-use Zend\OAuth\Http,
-    Zend\OAuth;
+use Zend\OAuth\Http;
+use Zend\OAuth;
 
 /**
  * @category   Zend

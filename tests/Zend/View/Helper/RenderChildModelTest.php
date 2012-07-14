@@ -10,11 +10,11 @@
 
 namespace ZendTest\View\Helper;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\View\Helper\RenderChildModel,
-    Zend\View\Model\ViewModel,
-    Zend\View\Renderer\PhpRenderer,
-    Zend\View\Resolver\TemplateMapResolver;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\View\Helper\RenderChildModel;
+use Zend\View\Model\ViewModel;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Resolver\TemplateMapResolver;
 
 /**
  * @category   Zend
@@ -67,7 +67,7 @@ class RenderChildModelTest extends TestCase
         $result = $this->helper->render('child1');
         $this->assertContains('Content for layout', $result, $result);
     }
-    
+
     public function setupSecondChild()
     {
         $child2 = new ViewModel();

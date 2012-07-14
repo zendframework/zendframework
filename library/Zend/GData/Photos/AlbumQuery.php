@@ -9,6 +9,7 @@
  */
 
 namespace Zend\GData\Photos;
+
 use Zend\GData\App;
 
 /**

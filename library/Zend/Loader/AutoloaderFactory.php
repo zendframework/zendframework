@@ -10,6 +10,8 @@
 
 namespace Zend\Loader;
 
+use ReflectionClass;
+
 require_once __DIR__ . '/SplAutoloader.php';
 
 if (class_exists('Zend\Loader\AutoloaderFactory')) return;
@@ -89,8 +91,7 @@ abstract class AutoloaderFactory
                     );
                 }
 
-                require_once __DIR__ . '/../Stdlib/SubClass.php';
-                if (!\Zend\Stdlib\SubClass::isSubclassOf($class, 'Zend\Loader\SplAutoloader')) {
+                if (!self::isSubclassOf($class, 'Zend\Loader\SplAutoloader')) {
                     require_once 'Exception/InvalidArgumentException.php';
                     throw new Exception\InvalidArgumentException(
                         sprintf('Autoloader class %s must implement Zend\\Loader\\SplAutoloader', $class)
@@ -184,7 +185,7 @@ abstract class AutoloaderFactory
         if (null !== static::$standardAutoloader) {
             return static::$standardAutoloader;
         }
-        
+
         // Extract the filename from the classname
         $stdAutoloader = substr(strrchr(static::STANDARD_AUTOLOADER, '\\'), 1);
 
@@ -194,5 +195,29 @@ abstract class AutoloaderFactory
         $loader = new StandardAutoloader();
         static::$standardAutoloader = $loader;
         return static::$standardAutoloader;
+    }
+
+    /**
+     * Checks if the object has this class as one of its parents
+     *
+     * @see https://bugs.php.net/bug.php?id=53727
+     * @see https://github.com/zendframework/zf2/pull/1807
+     *
+     * @param string $className
+     * @param string $type
+     */
+    protected static function isSubclassOf($className, $type)
+    {
+        if (is_subclass_of($className, $type)) {
+            return true;
+        }
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return false;
+        }
+        if (!interface_exists($type)) {
+            return false;
+        }
+        $r = new ReflectionClass($className);
+        return $r->implementsInterface($type);
     }
 }

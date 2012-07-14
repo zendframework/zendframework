@@ -16,7 +16,7 @@ namespace Zend\Mail\Exception;
  * @category   Zend
  * @package    Zend_Mail
  */
-class BadMethodCallException extends \BadMethodCallException implements 
+class BadMethodCallException extends \BadMethodCallException implements
     ExceptionInterface
 {
 }

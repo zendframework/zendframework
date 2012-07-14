@@ -10,11 +10,11 @@
 
 namespace ZendTest\Stdlib;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    stdClass,
-    \ArrayObject,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Config\Config;
+use PHPUnit_Framework_TestCase as TestCase;
+use stdClass;
+use ArrayObject;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Config\Config;
 
 class ArrayUtilsTest extends TestCase
 {

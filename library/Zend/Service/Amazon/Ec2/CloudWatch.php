@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon;
 use Zend\Service\Amazon\Ec2\Exception;
 
@@ -266,7 +267,7 @@ class CloudWatch extends AbstractEc2
                 $options['Dimensions.member.' . $x . '.Value'] = $dimVal;
                 $x++;
             }
-            
+
             unset($options['Dimensions']);
         }
 

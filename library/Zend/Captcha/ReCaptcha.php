@@ -68,7 +68,7 @@ class ReCaptcha extends AbstractAdapter
      * Error messages
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::MISSING_VALUE => 'Missing captcha fields',
         self::ERR_CAPTCHA   => 'Failed to validate captcha',
         self::BAD_CAPTCHA   => 'Captcha value is wrong: %value%',

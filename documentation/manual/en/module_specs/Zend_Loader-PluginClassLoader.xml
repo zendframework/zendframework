@@ -519,8 +519,8 @@ PluginLoader::addStaticMap(array(
             <programlisting language="php"><![CDATA[
 namespace My\Plugins;
 
-use Zend\Loader\PluginClassLoader,
-    Zend\View\Helper\HelperLoader;
+use Zend\Loader\PluginClassLoader;
+use Zend\View\Helper\HelperLoader;
 
 class PluginLoader extends PluginClassLoader
 {

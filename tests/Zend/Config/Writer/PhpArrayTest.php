@@ -36,7 +36,7 @@ class PhpArrayTest extends AbstractWriterTestCase
     public function testRender()
     {
         $config = new Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
-        
+
         $configString = $this->writer->toString($config);
 
         // build string line by line as we are trailing-whitespace sensitive.
@@ -49,7 +49,7 @@ class PhpArrayTest extends AbstractWriterTestCase
         $expected .= "    1 => 'foo',\n";
         $expected .= "  ),\n";
         $expected .= ");\n";
-        
+
         $this->assertEquals($expected, $configString);
     }
 }

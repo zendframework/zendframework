@@ -132,7 +132,8 @@ class Frame implements StompFrame
      * @return \Zend\Queue\Stomp\Frame
      * @throws \Zend\Queue\Exception
      */
-    public function setHeader($header, $value) {
+    public function setHeader($header, $value)
+    {
         if (!is_string($header)) {
             throw new Exception\InvalidArgumentException('$header is not a string: ' . print_r($header, true));
         }

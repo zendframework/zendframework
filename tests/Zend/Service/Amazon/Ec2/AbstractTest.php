@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Service\Amazon\Ec2;
+
 use Zend\Service\Amazon;
 use Zend\Service\Amazon\Ec2\Exception;
 
@@ -37,15 +38,15 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             'Invalid Amazon Ec2 Region');
         TestAmazonAbstract::setRegion('eu-west-1a');
     }
-    
+
     public function testSignParamsWithSpaceEncodesWithPercentInsteadOfPlus()
     {
         $class = new TestAmazonAbstract('TestAccessKey', 'TestSecretKey');
         $ret = $class->testSign(array('Action' => 'Space Test'));
-        
+
         // this is the encode signuature with urlencode - It's Invalid!
         $invalidSignature = 'EeHAfo7cMcLyvH4SW4fEpjo51xJJ4ES1gdjRPxZTlto=';
-        
+
         $this->assertNotEquals($ret, $invalidSignature);
     }
 }
@@ -57,7 +58,7 @@ class TestAmazonAbstract extends \Zend\Service\Amazon\Ec2\AbstractEc2
     {
         return $this->_region;
     }
-    
+
     public function testSign($params)
     {
         return $this->signParameters($params);

@@ -10,12 +10,12 @@
 
 namespace ZendTest\OpenId;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http,
-    Zend\OpenId\OpenId,
-    Zend\OpenId\Consumer\GenericConsumer as Consumer,
-    Zend\OpenId\Consumer\Storage,
-    Zend\OpenId\Extension;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http;
+use Zend\OpenId\OpenId;
+use Zend\OpenId\Consumer\GenericConsumer as Consumer;
+use Zend\OpenId\Consumer\Storage;
+use Zend\OpenId\Extension;
 
 
 /**
@@ -828,7 +828,7 @@ class ConsumerTest extends TestCase
 
     /**
      * testing verify
-     * 
+     *
      */
     public function testVerifyDumb()
     {

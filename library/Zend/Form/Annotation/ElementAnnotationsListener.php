@@ -30,7 +30,7 @@ use Zend\EventManager\EventManagerInterface;
  * - Type
  * - Validator
  *
- * See the individual annotation classes for more details. The handlers registered 
+ * See the individual annotation classes for more details. The handlers registered
  * work with the annotation values, as well as the element and input specification
  * passed in the event object.
  *
@@ -42,8 +42,8 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 {
     /**
      * Attach listeners
-     * 
-     * @param  EventManagerInterface $events 
+     *
+     * @param  EventManagerInterface $events
      * @return void
      */
     public function attach(EventManagerInterface $events)
@@ -72,8 +72,8 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
      * Handle the AllowEmpty annotation
      *
      * Sets the allow_empty flag on the input specification array.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleAllowEmptyAnnotation($e)
@@ -91,8 +91,8 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
      * Handle the Attributes annotation
      *
      * Sets the attributes array of the element specification.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleAttributesAnnotation($e)
@@ -108,8 +108,8 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 
     /**
      * Allow creating fieldsets from composed entity properties
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleComposedObjectAnnotation($e)
@@ -147,8 +147,8 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
      * Handle the ErrorMessage annotation
      *
      * Sets the error_message of the input specification.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleErrorMessageAnnotation($e)
@@ -164,8 +164,8 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 
     /**
      * Determine if the element has been marked to exclude from the definition
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return bool
      */
     public function handleExcludeAnnotation($e)
@@ -181,8 +181,8 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
      * Handle the Filter annotation
      *
      * Adds a filter to the filter chain specification for the input.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleFilterAnnotation($e)
@@ -202,10 +202,10 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
     /**
      * Handle the Flags annotation
      *
-     * Sets the element flags in the specification (used typically for setting 
+     * Sets the element flags in the specification (used typically for setting
      * priority).
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleFlagsAnnotation($e)
@@ -241,10 +241,10 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
     /**
      * Handle the Input annotation
      *
-     * Sets the filter specification for the current element to the specified 
+     * Sets the filter specification for the current element to the specified
      * input class name.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleInputAnnotation($e)
@@ -282,8 +282,8 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
      * Handle the Options annotation
      *
      * Sets the element options in the specification.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleOptionsAnnotation($e)
@@ -301,8 +301,8 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
      * Handle the Required annotation
      *
      * Sets the required flag on the input based on the annotation value.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleRequiredAnnotation($e)
@@ -320,8 +320,8 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
      * Handle the Type annotation
      *
      * Sets the element class type to use in the element specification.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleTypeAnnotation($e)
@@ -339,8 +339,8 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
      * Handle the Validator annotation
      *
      * Adds a validator to the validator chain of the input specification.
-     * 
-     * @param  \Zend\EventManager\EventInterface $e 
+     *
+     * @param  \Zend\EventManager\EventInterface $e
      * @return void
      */
     public function handleValidatorAnnotation($e)

@@ -23,7 +23,7 @@ use Zend\Rest\Client;
  */
 class ResultTest extends \PHPUnit_Framework_TestCase
 {
-    static $path;
+    public static $path;
 
     public function __construct($name = NULL, array $data = array(), $dataName = '')
     {

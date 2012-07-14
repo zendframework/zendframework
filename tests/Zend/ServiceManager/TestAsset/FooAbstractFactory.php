@@ -10,8 +10,8 @@
 
 namespace ZendTest\ServiceManager\TestAsset;
 
-use Zend\ServiceManager\AbstractFactoryInterface,
-    Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\AbstractFactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class FooAbstractFactory implements AbstractFactoryInterface
 {

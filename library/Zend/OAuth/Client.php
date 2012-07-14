@@ -131,8 +131,7 @@ class Client extends HttpClient
             $this->setHeaders(array('Content-Length' =>
                 $this->raw_post_data->getTotalSize()));
             return $this->raw_post_data;
-        }
-        else {
+        } else {
             return parent::prepareBody();
         }
     }

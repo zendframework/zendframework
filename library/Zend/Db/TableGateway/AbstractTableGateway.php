@@ -122,8 +122,8 @@ abstract class AbstractTableGateway implements TableGatewayInterface
 
     /**
      * Get table name
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getTable()
     {
@@ -132,7 +132,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
 
     /**
      * Get adapter
-     * 
+     *
      * @return Adapter
      */
     public function getAdapter()
@@ -176,7 +176,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
 
     /**
      * Select
-     * 
+     *
      * @param string|array|\Closure $where
      * @return ResultSet
      */
@@ -414,8 +414,8 @@ abstract class AbstractTableGateway implements TableGatewayInterface
 
     /**
      * Get last insert value
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getLastInsertValue()
     {
@@ -424,7 +424,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
 
     /**
      * __get
-     * 
+     *
      * @param  string $property
      * @return mixed
      */

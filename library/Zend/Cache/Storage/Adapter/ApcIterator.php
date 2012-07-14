@@ -98,10 +98,10 @@ class ApcIterator implements IteratorInterface
 
     /* Iterator */
 
-	/**
-	 * Get current key, value or metadata.
-	 *
-	 * @return mixed
+    /**
+     * Get current key, value or metadata.
+     *
+     * @return mixed
      */
     public function current()
     {
@@ -120,10 +120,10 @@ class ApcIterator implements IteratorInterface
         return $key;
     }
 
-	/**
-	 * Get current key
-	 *
-	 * @return string
+    /**
+     * Get current key
+     *
+     * @return string
      */
     public function key()
     {
@@ -143,20 +143,20 @@ class ApcIterator implements IteratorInterface
         $this->baseIterator->next();
     }
 
-	/**
-	 * Checks if current position is valid
-	 *
-	 * @return boolean
+    /**
+     * Checks if current position is valid
+     *
+     * @return boolean
      */
     public function valid()
     {
         return $this->baseIterator->valid();
     }
 
-	/**
-	 * Rewind the Iterator to the first element.
-	 *
-	 * @return void
+    /**
+     * Rewind the Iterator to the first element.
+     *
+     * @return void
      */
     public function rewind()
     {

@@ -560,7 +560,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
              * outlines from fonts yet, so this means no embed.
              */
             $this->isEmbeddable = false;
-        } else if ($this->isBitSet(1, $embeddingFlags)) {
+        } elseif ($this->isBitSet(1, $embeddingFlags)) {
             /* Restricted license embedding. We currently don't have any way to
              * enforce this, so interpret this as no embed. This may be revised
              * in the future...
@@ -1043,7 +1043,7 @@ abstract class AbstractOpenType extends Pdf\BinaryParser\Font\AbstractFont
                     return null;
             }
 
-        } else if ($platformID == 1) {    // Macintosh encoding.
+        } elseif ($platformID == 1) {    // Macintosh encoding.
             switch ($languageID) {
                 case 0:
                     return 'en';

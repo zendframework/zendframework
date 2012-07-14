@@ -21,7 +21,7 @@ abstract class FeedFactory
 {
     /**
      * Create and return a Feed based on data provided.
-     * 
+     *
      * @param  array|\Traversable $data
      * @return Feed
      */
@@ -73,8 +73,8 @@ abstract class FeedFactory
 
     /**
      * Normalize a key
-     * 
-     * @param  string $key 
+     *
+     * @param  string $key
      * @return string
      */
     protected static function convertKey($key)
@@ -85,9 +85,9 @@ abstract class FeedFactory
 
     /**
      * Create and attach entries to a feed
-     * 
-     * @param  array|Traversable $entries 
-     * @param  Feed $feed 
+     *
+     * @param  array|Traversable $entries
+     * @param  Feed $feed
      * @return void
      */
     protected static function createEntries($entries, Feed $feed)

@@ -11,10 +11,10 @@
 namespace ZendTest\View\Model;
 
 use ArrayObject;
-use stdClass,
-    PHPUnit_Framework_TestCase as TestCase,
-    Zend\View\Model\ViewModel,
-    Zend\View\Variables as ViewVariables;
+use stdClass;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\View\Model\ViewModel;
+use Zend\View\Variables as ViewVariables;
 
 /**
  * @category   Zend
@@ -232,5 +232,18 @@ class ViewModelTest extends TestCase
         unset($model->foo);
         $this->assertFalse(isset($model->foo));
         $this->assertFalse(isset($variables['foo']));
+    }
+
+    public function testPropertyOverloadingAllowsWritingPropertiesAfterSetVariablesHasBeenCalled()
+    {
+        $model = new ViewModel();
+        $model->setVariables(array('foo' => 'bar'));
+        $model->bar = 'baz';
+
+        $this->assertTrue(isset($model->bar));
+        $this->assertEquals('baz', $model->bar);
+        $variables = $model->getVariables();
+        $this->assertArrayHasKey('bar', $variables);
+        $this->assertEquals('baz', $variables['bar']);
     }
 }

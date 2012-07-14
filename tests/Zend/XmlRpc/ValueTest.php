@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\XmlRpc;
+
 use stdClass;
 use DateTime;
 use Zend\XmlRpc\AbstractValue;
@@ -582,7 +583,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
     public function testMarshalDateTimeFromInvalidString()
     {
-        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 
+        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException',
                                     "The timezone could not be found in the database");
         AbstractValue::getXmlRpcValue('foobarbaz', AbstractValue::XMLRPC_TYPE_DATETIME);
     }

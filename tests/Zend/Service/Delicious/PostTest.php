@@ -15,19 +15,6 @@ use Zend\Service\Delicious;
 use Zend\Service\Delicious\Post;
 
 /**
- * Test helper
- */
-
-/**
- * @see Zend_Service_Delicious
- */
-
-/**
- * @see Zend_Service_Delicious_Post
- */
-
-
-/**
  * @category   Zend_Service
  * @package    Zend_Service_Delicious
  * @subpackage UnitTests

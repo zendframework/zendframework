@@ -10,11 +10,11 @@
 
 namespace ZendTest\Mvc\Router\Http;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\Request as Request,
-    Zend\Stdlib\Request as BaseRequest,
-    Zend\Mvc\Router\Http\Literal,
-    ZendTest\Mvc\Router\FactoryTester;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Request as Request;
+use Zend\Stdlib\Request as BaseRequest;
+use Zend\Mvc\Router\Http\Literal;
+use ZendTest\Mvc\Router\FactoryTester;
 
 class LiteralTest extends TestCase
 {
@@ -66,18 +66,18 @@ class LiteralTest extends TestCase
         $request = new Request();
         $request->setUri('http://example.com' . $path);
         $match = $route->match($request, $offset);
-        
+
         if (!$shouldMatch) {
             $this->assertNull($match);
         } else {
             $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
-            
+
             if ($offset === null) {
-                $this->assertEquals(strlen($path), $match->getLength());            
+                $this->assertEquals(strlen($path), $match->getLength());
             }
         }
     }
-    
+
     /**
      * @dataProvider routeProvider
      * @param        Literal $route
@@ -91,32 +91,32 @@ class LiteralTest extends TestCase
             // Data which will not match are not tested for assembling.
             return;
         }
-                
+
         $result = $route->assemble();
-        
+
         if ($offset !== null) {
             $this->assertEquals($offset, strpos($path, $result, $offset));
         } else {
             $this->assertEquals($path, $result);
         }
     }
-    
+
     public function testNoMatchWithoutUriMethod()
     {
         $route   = new Literal('/foo');
         $request = new BaseRequest();
-        
+
         $this->assertNull($route->match($request));
     }
-    
+
     public function testGetAssembledParams()
     {
         $route = new Literal('/foo');
         $route->assemble(array('foo' => 'bar'));
-        
+
         $this->assertEquals(array(), $route->getAssembledParams());
     }
-    
+
     public function testFactory()
     {
         $tester = new FactoryTester($this);

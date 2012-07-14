@@ -24,7 +24,7 @@ class CompilerDefinitionTest extends TestCase
         $definition->compile();
 
         $this->assertTrue($definition->hasClass('ZendTest\Di\TestAsset\CompilerClasses\A'));
-        
+
         $assertClasses = array(
             'ZendTest\Di\TestAsset\CompilerClasses\A',
             'ZendTest\Di\TestAsset\CompilerClasses\B',
@@ -38,14 +38,14 @@ class CompilerDefinitionTest extends TestCase
 
         // @todo this needs to be resolved, not the short name
         // $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\D'));
-        
+
         $this->assertEquals('__construct', $definition->getInstantiator('ZendTest\Di\TestAsset\CompilerClasses\A'));
         $this->assertTrue($definition->hasMethods('ZendTest\Di\TestAsset\CompilerClasses\C'));
-        
+
 
         $this->assertArrayHasKey('setB', $definition->getMethods('ZendTest\Di\TestAsset\CompilerClasses\C'));
         $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\CompilerClasses\C', 'setB'));
-        
+
         $this->assertEquals(
             array('ZendTest\Di\TestAsset\CompilerClasses\C::setB:0' => array('b', 'ZendTest\Di\TestAsset\CompilerClasses\B', true)),
             $definition->getMethodParameters('ZendTest\Di\TestAsset\CompilerClasses\C', 'setB')
@@ -64,7 +64,7 @@ class CompilerDefinitionTest extends TestCase
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\D', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
     }
-    
+
     public function testCompilerDirectoryScannerAndFileScanner()
     {
         $definition = new CompilerDefinition;
@@ -75,7 +75,7 @@ class CompilerDefinitionTest extends TestCase
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\D', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
     }
-    
+
     public function testCompilerFileScanner()
     {
         $definition = new CompilerDefinition;

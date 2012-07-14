@@ -164,7 +164,7 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
         /* Encode spaces for quoteless attribute protection */
         ' '     => '\\20 ',
     );
-        
+
 
     public function setUp()
     {
@@ -202,24 +202,33 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
     public function testHtmlEscapingConvertsSpecialChars()
     {
         foreach ($this->htmlSpecialChars as $key => $value) {
-            $this->assertEquals($value, $this->escaper->escapeHtml($key), 'Failed to escape: '
-                .$key);
+            $this->assertEquals(
+                $value,
+                $this->escaper->escapeHtml($key),
+                'Failed to escape: ' . $key
+            );
         }
     }
 
     public function testHtmlAttributeEscapingConvertsSpecialChars()
     {
         foreach ($this->htmlAttrSpecialChars as $key => $value) {
-            $this->assertEquals($value, $this->escaper->escapeHtmlAttr($key),
-                'Failed to escape: ' . $key);
+            $this->assertEquals(
+                $value,
+                $this->escaper->escapeHtmlAttr($key),
+                'Failed to escape: ' . $key
+            );
         }
     }
 
     public function testJavascriptEscapingConvertsSpecialChars()
     {
         foreach ($this->jsSpecialChars as $key => $value) {
-            $this->assertEquals($value, $this->escaper->escapeJs($key), 'Failed to escape: '
-                .$key);
+            $this->assertEquals(
+                $value,
+                $this->escaper->escapeJs($key),
+                'Failed to escape: ' . $key
+            );
         }
     }
 
@@ -236,8 +245,11 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
     public function testCssEscapingConvertsSpecialChars()
     {
         foreach ($this->cssSpecialChars as $key => $value) {
-            $this->assertEquals($value, $this->escaper->escapeCss($key), 'Failed to escape: '
-                .$key);
+            $this->assertEquals(
+                $value,
+                $this->escaper->escapeCss($key),
+                'Failed to escape: ' . $key
+            );
         }
     }
 
@@ -254,8 +266,11 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
     public function testUrlEscapingConvertsSpecialChars()
     {
         foreach ($this->urlSpecialChars as $key => $value) {
-            $this->assertEquals($value, $this->escaper->escapeUrl($key), 'Failed to escape: '
-                .$key);
+            $this->assertEquals(
+                $value,
+                $this->escaper->escapeUrl($key),
+                'Failed to escape: ' . $key
+            );
         }
     }
 
@@ -263,7 +278,7 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
      * Range tests to confirm escaped range of characters is within OWASP recommendation
      */
 
-    /** 
+    /**
      * Only testing the first few 2 ranges on this prot. function as that's all these
      * other range tests require
      */
@@ -280,7 +295,7 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Convert a Unicode Codepoint to a literal UTF-8 character.
-     * 
+     *
      * @param int Unicode codepoint in hex notation
      * @return string UTF-8 literal string
      */
@@ -310,10 +325,11 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
     public function testJavascriptEscapingEscapesOwaspRecommendedRanges()
     {
         $immune = array(',', '.', '_'); // Exceptions to escaping ranges
-        for ($chr=0; $chr < 0xFF; $chr++) { 
+        for ($chr=0; $chr < 0xFF; $chr++) {
             if ($chr >= 0x30 && $chr <= 0x39
-            || $chr >= 0x41 && $chr <= 0x5A
-            || $chr >= 0x61 && $chr <= 0x7A) {
+                || $chr >= 0x41 && $chr <= 0x5A
+                || $chr >= 0x61 && $chr <= 0x7A
+            ) {
                 $literal = $this->codepointToUtf8($chr);
                 $this->assertEquals($literal, $this->escaper->escapeJs($literal));
             } else {
@@ -324,7 +340,8 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
                     $this->assertNotEquals(
                         $literal,
                         $this->escaper->escapeJs($literal),
-                        "$literal should be escaped!");
+                        $literal . ' should be escaped!'
+                    );
                 }
             }
         }
@@ -333,10 +350,11 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
     public function testHtmlAttributeEscapingEscapesOwaspRecommendedRanges()
     {
         $immune = array(',', '.', '-', '_'); // Exceptions to escaping ranges
-        for ($chr=0; $chr < 0xFF; $chr++) { 
+        for ($chr=0; $chr < 0xFF; $chr++) {
             if ($chr >= 0x30 && $chr <= 0x39
-            || $chr >= 0x41 && $chr <= 0x5A
-            || $chr >= 0x61 && $chr <= 0x7A) {
+                || $chr >= 0x41 && $chr <= 0x5A
+                || $chr >= 0x61 && $chr <= 0x7A
+            ) {
                 $literal = $this->codepointToUtf8($chr);
                 $this->assertEquals($literal, $this->escaper->escapeHtmlAttr($literal));
             } else {
@@ -347,7 +365,8 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
                     $this->assertNotEquals(
                         $literal,
                         $this->escaper->escapeHtmlAttr($literal),
-                        "$literal should be escaped!");
+                        $literal . ' should be escaped!'
+                    );
                 }
             }
         }
@@ -356,10 +375,11 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
     public function testCssEscapingEscapesOwaspRecommendedRanges()
     {
         $immune = array(); // CSS has no exceptions to escaping ranges
-        for ($chr=0; $chr < 0xFF; $chr++) { 
+        for ($chr=0; $chr < 0xFF; $chr++) {
             if ($chr >= 0x30 && $chr <= 0x39
-            || $chr >= 0x41 && $chr <= 0x5A
-            || $chr >= 0x61 && $chr <= 0x7A) {
+                || $chr >= 0x41 && $chr <= 0x5A
+                || $chr >= 0x61 && $chr <= 0x7A
+            ) {
                 $literal = $this->codepointToUtf8($chr);
                 $this->assertEquals($literal, $this->escaper->escapeCss($literal));
             } else {
@@ -367,7 +387,8 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
                 $this->assertNotEquals(
                     $literal,
                     $this->escaper->escapeCss($literal),
-                    "$literal should be escaped!");
+                    $literal . ' should be escaped!'
+                );
             }
         }
     }

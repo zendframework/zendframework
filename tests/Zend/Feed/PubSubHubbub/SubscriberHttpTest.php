@@ -59,7 +59,7 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
             $this->_client->setAdapter('\Zend\Http\Client\Adapter\Socket');
             PubSubHubbub::setHttpClient($this->_client);
             $this->_subscriber = new Subscriber;
-            
+
             $this->_storage = $this->_getCleanMock('\Zend\Feed\PubSubHubbub\Model\Subscription');
             $this->_subscriber->setStorage($this->_storage);
 
@@ -98,8 +98,9 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
             .'&hub.verify_token=abc',
             $this->_client->getResponse()->getBody());
     }
-    
-    protected function _getCleanMock($className) {
+
+    protected function _getCleanMock($className)
+    {
         $class = new \ReflectionClass($className);
         $methods = $class->getMethods();
         $stubMethods = array();

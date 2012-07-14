@@ -26,7 +26,7 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
      * @var PregReplaceFilter
      */
     protected $filter;
-    
+
     public function setUp()
     {
         $this->filter = new PregReplaceFilter();

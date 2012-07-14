@@ -15,8 +15,10 @@ namespace ZendTest\Amf;
  * @package    Zend_Amf
  * @subpackage UnitTests
  */
-class ServiceC {
-    function __construct() {
+class ServiceC
+{
+    public function __construct()
+    {
         //Construction...
     }
 

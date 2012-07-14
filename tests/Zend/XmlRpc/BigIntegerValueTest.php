@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\XmlRpc;
+
 use Zend\XmlRpc\AbstractValue;
 use Zend\XmlRpc\Value\BigInteger;
 use Zend\XmlRpc\Exception;
@@ -16,8 +17,6 @@ use Zend\XmlRpc\Generator\GeneratorInterface as Generator;
 use Zend\Math\BigInteger as MathBigInteger;
 
 /**
- * Test case for Zend_XmlRpc_Value
- *
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage UnitTests

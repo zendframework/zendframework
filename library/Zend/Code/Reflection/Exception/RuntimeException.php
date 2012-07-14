@@ -17,6 +17,6 @@ use Zend\Code\Exception;
  * @package    Zend_Code
  * @subpackage Reflection
  */
-class RuntimeException extends Exception\RuntimeException implements 
+class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface
 {}

@@ -116,4 +116,3 @@ class ACLRole extends \Zend\GData\Extension
         return "Value: " . $this->getValue();
     }
 }
-?>

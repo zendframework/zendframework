@@ -20,7 +20,7 @@ use Zend\EventManager\EventManagerInterface;
  *
  * Simply composes an EventManager. When createAnnotation() is called, it fires
  * off an event of the same name, passing it the resolved annotation class, the
- * annotation content, and the raw annotation string; the first listener to 
+ * annotation content, and the raw annotation string; the first listener to
  * return an object will halt execution of the event, and that object will be
  * returned as the annotation.
  *
@@ -39,8 +39,8 @@ class AnnotationManager implements EventManagerAwareInterface
 
     /**
      * Set the event manager instance
-     * 
-     * @param  EventManagerInterface $events 
+     *
+     * @param  EventManagerInterface $events
      * @return AnnotationManager
      */
     public function setEventManager(EventManagerInterface $events)
@@ -57,7 +57,7 @@ class AnnotationManager implements EventManagerAwareInterface
      * Retrieve event manager
      *
      * Lazy loads an instance if none registered.
-     * 
+     *
      * @return EventManagerInterface
      */
     public function getEventManager()
@@ -70,8 +70,8 @@ class AnnotationManager implements EventManagerAwareInterface
 
     /**
      * Attach a parser to listen to the createAnnotation event
-     * 
-     * @param  Parser\ParserInterface $parser 
+     *
+     * @param  Parser\ParserInterface $parser
      * @return AnnotationManager
      */
     public function attach(Parser\ParserInterface $parser)

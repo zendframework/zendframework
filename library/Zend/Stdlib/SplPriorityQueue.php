@@ -31,11 +31,11 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
     /**
      * Insert a value with a given priority
      *
-     * Utilizes {@var $serial} to ensure that values of equal priority are 
+     * Utilizes {@var $serial} to ensure that values of equal priority are
      * emitted in the same order in which they are inserted.
-     * 
-     * @param  mixed $datum 
-     * @param  mixed $priority 
+     *
+     * @param  mixed $datum
+     * @param  mixed $priority
      * @return void
      */
     public function insert($datum, $priority)
@@ -50,7 +50,7 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
      * Serialize to an array
      *
      * Array will be priority => data pairs
-     * 
+     *
      * @return array
      */
     public function toArray()
@@ -79,7 +79,7 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
 
     /**
      * Serialize
-     * 
+     *
      * @return string
      */
     public function serialize()
@@ -102,7 +102,7 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
 
     /**
      * Deserialize
-     * 
+     *
      * @param  string $data
      * @return void
      */

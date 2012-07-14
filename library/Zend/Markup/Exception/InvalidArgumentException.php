@@ -10,6 +10,6 @@
 
 namespace Zend\Markup\Exception;
 
-class InvalidArgumentException extends \InvalidArgumentException implements 
+class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
 {}

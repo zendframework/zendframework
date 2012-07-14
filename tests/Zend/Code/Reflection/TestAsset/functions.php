@@ -10,7 +10,8 @@
 
 namespace ZendTest\Code\Reflection\TestAsset;
 
-function function1() {
+function function1()
+{
     return 'foo';
 }
 
@@ -24,8 +25,8 @@ function function1() {
  * @param unknown_type $two
  * @return string
  */
-function function2($one, $two = 'two') {
-
+function function2($one, $two = 'two')
+{
     return 'blah';
 }
 
@@ -37,7 +38,8 @@ function function2($one, $two = 'two') {
  * @param int $two
  * @return true
  */
-function function6($one, $two = 2) {
+function function6($one, $two = 2)
+{
     return true;
 }
 

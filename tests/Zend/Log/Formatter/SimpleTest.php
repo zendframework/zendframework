@@ -11,7 +11,7 @@
 namespace ZendTest\Log\Formatter;
 
 use ZendTest\Log\TestAsset\StringObject;
-use \Zend\Log\Formatter\Simple;
+use Zend\Log\Formatter\Simple;
 
 /**
  * @category   Zend
@@ -43,7 +43,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $this->assertContains((string)$fields['priority'], $line);
     }
 
-    function testComplexValues()
+    public function testComplexValues()
     {
         $fields = array('timestamp'    => 0,
                         'priority'     => 42,
@@ -84,21 +84,21 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $line = $f->format($fields);
         $this->assertContains('object', $line);
     }
-    
+
     /**
      * @group ZF-10427
      */
     public function testDefaultFormatShouldDisplayExtraInformations()
     {
-    	$message = 'custom message';
-    	$exception = new \RuntimeException($message);
-    	$event = array(
-    	    'timestamp'    => date('c'),
-    	    'message'      => 'Application error',
-    	    'priority'     => 2,
-    	    'priorityName' => 'CRIT',
-    	    'info'         => $exception,
-    	);
+        $message = 'custom message';
+        $exception = new \RuntimeException($message);
+        $event = array(
+            'timestamp'    => date('c'),
+            'message'      => 'Application error',
+            'priority'     => 2,
+            'priorityName' => 'CRIT',
+            'info'         => $exception,
+        );
 
         $formatter = new Simple();
         $output = $formatter->format($event);

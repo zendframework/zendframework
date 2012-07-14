@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Code\Generator;
+
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\ParameterGenerator;
 use Zend\Code\Generator\ValueGenerator;

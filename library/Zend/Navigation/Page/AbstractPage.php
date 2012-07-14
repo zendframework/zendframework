@@ -643,15 +643,15 @@ abstract class AbstractPage extends AbstractContainer
     /**
      * Sets ACL resource assoicated with this page
      *
-     * @param  string|AclResource $resource [optional] resource to associate 
-     *                                      with page. Default is null, which 
+     * @param  string|AclResource $resource [optional] resource to associate
+     *                                      with page. Default is null, which
      *                                      sets no resource.
      * @return AbstractPage fluent interface, returns self
      * @throws Exception\InvalidArgumentException if $resource is invalid
      */
     public function setResource($resource = null)
     {
-        if (null === $resource 
+        if (null === $resource
             || is_string($resource)
             || $resource instanceof AclResource
         ) {
@@ -778,7 +778,7 @@ abstract class AbstractPage extends AbstractContainer
      */
     public function isVisible($recursive = false)
     {
-        if ($recursive 
+        if ($recursive
             && isset($this->parent)
             && $this->parent instanceof self
         ) {
@@ -1103,7 +1103,7 @@ abstract class AbstractPage extends AbstractContainer
      *
      * @return string  a hash code value for this page
      */
-    public final function hashCode()
+    final public function hashCode()
     {
         return spl_object_hash($this);
     }

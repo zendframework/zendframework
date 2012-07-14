@@ -249,8 +249,8 @@ switch ($result->getCode()) {
                 </para>
 
                 <programlisting language="php"><![CDATA[
-use Zend\Authentication\AuthenticationService,
-    Zend\Authentication\Storage\Session as SessionStorage;
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Storage\Session as SessionStorage;
 
 $auth = new AuthenticationService();
 

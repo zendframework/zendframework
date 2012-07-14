@@ -471,7 +471,7 @@ class AutoDiscover
                 );
                 // Add the wrapper element part, which must be named 'parameters'
                 $args['parameters'] = array('element' => $wsdl->addElement($element));
-            } else if ($prototype->getReturnType() != "void") {
+            } elseif ($prototype->getReturnType() != "void") {
                 // RPC style: add the return value as a typed part
                 $args['return'] = array('type' => $wsdl->getType($this->_discoveryStrategy->getFunctionReturnType($function, $prototype)));
             }

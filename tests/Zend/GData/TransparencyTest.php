@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData;
+
 use Zend\GData\Extension;
 
 /**
@@ -20,36 +21,42 @@ use Zend\GData\Extension;
 class TransparencyTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->transparencyText = file_get_contents(
                 'Zend/GData/_files/TransparencyElementSample1.xml',
                 true);
         $this->transparency = new Extension\Transparency();
     }
 
-    public function testEmptyTransparencyShouldHaveNoExtensionElements() {
+    public function testEmptyTransparencyShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->transparency->extensionElements));
         $this->assertTrue(count($this->transparency->extensionElements) == 0);
     }
 
-    public function testEmptyTransparencyShouldHaveNoExtensionAttributes() {
+    public function testEmptyTransparencyShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->transparency->extensionAttributes));
         $this->assertTrue(count($this->transparency->extensionAttributes) == 0);
     }
 
-    public function testSampleTransparencyShouldHaveNoExtensionElements() {
+    public function testSampleTransparencyShouldHaveNoExtensionElements()
+    {
         $this->transparency->transferFromXML($this->transparencyText);
         $this->assertTrue(is_array($this->transparency->extensionElements));
         $this->assertTrue(count($this->transparency->extensionElements) == 0);
     }
 
-    public function testSampleTransparencyShouldHaveNoExtensionAttributes() {
+    public function testSampleTransparencyShouldHaveNoExtensionAttributes()
+    {
         $this->transparency->transferFromXML($this->transparencyText);
         $this->assertTrue(is_array($this->transparency->extensionAttributes));
         $this->assertTrue(count($this->transparency->extensionAttributes) == 0);
     }
 
-    public function testNormalTransparencyShouldHaveNoExtensionElements() {
+    public function testNormalTransparencyShouldHaveNoExtensionElements()
+    {
         $this->transparency->value = "http://schemas.google.com/g/2005#event.opaque";
 
         $this->assertEquals("http://schemas.google.com/g/2005#event.opaque", $this->transparency->value);
@@ -71,7 +78,8 @@ class TransparencyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("http://schemas.google.com/g/2005#event.opaque", $newTransparency2->value);
     }
 
-    public function testEmptyTransparencyToAndFromStringShouldMatch() {
+    public function testEmptyTransparencyToAndFromStringShouldMatch()
+    {
         $transparencyXml = $this->transparency->saveXML();
         $newTransparency = new Extension\Transparency();
         $newTransparency->transferFromXML($transparencyXml);
@@ -79,7 +87,8 @@ class TransparencyTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($transparencyXml == $newTransparencyXml);
     }
 
-    public function testTransparencyWithValueToAndFromStringShouldMatch() {
+    public function testTransparencyWithValueToAndFromStringShouldMatch()
+    {
         $this->transparency->value = "http://schemas.google.com/g/2005#event.opaque";
         $transparencyXml = $this->transparency->saveXML();
         $newTransparency = new Extension\Transparency();
@@ -89,7 +98,8 @@ class TransparencyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("http://schemas.google.com/g/2005#event.opaque", $this->transparency->value);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->transparency->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -103,7 +113,8 @@ class TransparencyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newTransparency->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullTransparencyToAndFromString() {
+    public function testConvertFullTransparencyToAndFromString()
+    {
         $this->transparency->transferFromXML($this->transparencyText);
         $this->assertEquals("http://schemas.google.com/g/2005#event.transparent", $this->transparency->value);
     }

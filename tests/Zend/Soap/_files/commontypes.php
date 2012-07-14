@@ -117,7 +117,7 @@ class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
      * @param integer $d
      * @return integer
      */
-    function testFunc($a=100, $b=200, $d=300)
+    public function testFunc($a=100, $b=200, $d=300)
     {
 
     }
@@ -128,13 +128,14 @@ class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
  * @package    Zend_Soap
  * @subpackage UnitTests
  */
-class Zend_Soap_AutoDiscover_Test {
+class Zend_Soap_AutoDiscover_Test
+{
     /**
      * Test Function 1
      *
      * @return string
      */
-    function testFunc1()
+    public function testFunc1()
     {
         return "Hello World";
     }
@@ -145,7 +146,7 @@ class Zend_Soap_AutoDiscover_Test {
      * @param string $who Some Arg
      * @return string
      */
-    function testFunc2($who)
+    public function testFunc2($who)
     {
         return "Hello $who!";
     }
@@ -157,7 +158,7 @@ class Zend_Soap_AutoDiscover_Test {
      * @param int $when Some
      * @return string
      */
-    function testFunc3($who, $when)
+    public function testFunc3($who, $when)
     {
         return "Hello $who, How are you $when";
     }
@@ -167,7 +168,7 @@ class Zend_Soap_AutoDiscover_Test {
      *
      * @return string
      */
-    static function testFunc4()
+    public static function testFunc4()
     {
         return "I'm Static!";
     }
@@ -318,20 +319,23 @@ class Zend_Soap_AutoDiscover_MyService
      *    @param string $foo
      *    @return Zend_Soap_AutoDiscover_MyResponse[]
      */
-    public function foo($foo) {
+    public function foo($foo)
+    {
     }
     /**
      *    @param string $bar
      *    @return Zend_Soap_AutoDiscover_MyResponse[]
      */
-    public function bar($bar) {
+    public function bar($bar)
+    {
     }
 
     /**
      *    @param string $baz
      *    @return Zend_Soap_AutoDiscover_MyResponse[]
      */
-    public function baz($baz) {
+    public function baz($baz)
+    {
     }
 }
 
@@ -346,27 +350,31 @@ class Zend_Soap_AutoDiscover_MyServiceSequence
      *    @param string $foo
      *    @return string[]
      */
-    public function foo($foo) {
+    public function foo($foo)
+    {
     }
     /**
      *    @param string $bar
      *    @return string[]
      */
-    public function bar($bar) {
+    public function bar($bar)
+    {
     }
 
     /**
      *    @param string $baz
      *    @return string[]
      */
-    public function baz($baz) {
+    public function baz($baz)
+    {
     }
 
     /**
      *    @param string $baz
      *    @return string[][][]
      */
-    public function bazNested($baz) {
+    public function bazNested($baz)
+    {
     }
 }
 

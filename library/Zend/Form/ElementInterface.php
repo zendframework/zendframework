@@ -21,15 +21,15 @@ interface ElementInterface
      *
      * In most cases, this will proxy to the attributes for storage, but is
      * present to indicate that elements are generally named.
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return ElementInterface
      */
     public function setName($name);
 
     /**
      * Retrieve the element name
-     * 
+     *
      * @return string
      */
     public function getName();
@@ -44,9 +44,9 @@ interface ElementInterface
 
     /**
      * Set a single element attribute
-     * 
-     * @param  string $key 
-     * @param  mixed $value 
+     *
+     * @param  string $key
+     * @param  mixed $value
      * @return ElementInterface
      */
     public function setAttribute($key, $value);
@@ -71,7 +71,7 @@ interface ElementInterface
      * Set many attributes at once
      *
      * Implementation will decide if this will overwrite or merge.
-     * 
+     *
      * @param  array|\Traversable $arrayOrTraversable
      * @return ElementInterface
      */
@@ -79,7 +79,7 @@ interface ElementInterface
 
     /**
      * Retrieve all attributes at once
-     * 
+     *
      * @return array|\Traversable
      */
     public function getAttributes();
@@ -111,7 +111,7 @@ interface ElementInterface
      * Get validation error messages, if any
      *
      * Returns a list of validation failure messages, if any.
-     * 
+     *
      * @return array|\Traversable
      */
     public function getMessages();

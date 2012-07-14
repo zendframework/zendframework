@@ -300,6 +300,11 @@ class Curl implements HttpAdapter, StreamInterface
                 }
                 break;
 
+            case 'PATCH' :
+                $curlMethod = CURLOPT_CUSTOMREQUEST;
+                $curlValue = "PATCH";
+                break;
+
             case 'DELETE' :
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "DELETE";
@@ -352,9 +357,9 @@ class Curl implements HttpAdapter, StreamInterface
 
         // Treating basic auth headers in a special way
         if (array_key_exists('Authorization', $headers) && 'Basic' == substr($headers['Authorization'], 0, 5)) {
-        	curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        	curl_setopt($this->curl, CURLOPT_USERPWD, base64_decode(substr($headers['Authorization'], 6)));
-        	unset($headers['Authorization']);
+            curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_setopt($this->curl, CURLOPT_USERPWD, base64_decode(substr($headers['Authorization'], 6)));
+            unset($headers['Authorization']);
         }
 
         // set additional headers
@@ -383,6 +388,8 @@ class Curl implements HttpAdapter, StreamInterface
             unset($this->config['curloptions'][CURLOPT_INFILESIZE]);
         } elseif ($method == 'PUT') {
             // This is a PUT by a setRawData string, not by file-handle
+            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
+        } elseif ($method == 'PATCH') {
             curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
         }
 

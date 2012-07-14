@@ -113,7 +113,7 @@ class ObjectFactory
      * @param integer $objCount
      * @return \Zend\Pdf\ObjectFactory
      */
-    static public function createFactory($objCount)
+    public static function createFactory($objCount)
     {
         return new self($objCount);
     }

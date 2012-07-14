@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData;
+
 use Zend\GData\Extension;
 
 /**
@@ -20,36 +21,42 @@ use Zend\GData\Extension;
 class RecurrenceExceptionTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->recurrenceExceptionText = file_get_contents(
                 'Zend/GData/_files/RecurrenceExceptionElementSample1.xml',
                 true);
         $this->recurrenceException = new Extension\RecurrenceException();
     }
 
-    public function testEmptyRecurrenceExceptionShouldHaveNoExtensionElements() {
+    public function testEmptyRecurrenceExceptionShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->recurrenceException->extensionElements));
         $this->assertTrue(count($this->recurrenceException->extensionElements) == 0);
     }
 
-    public function testEmptyRecurrenceExceptionShouldHaveNoExtensionAttributes() {
+    public function testEmptyRecurrenceExceptionShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->recurrenceException->extensionAttributes));
         $this->assertTrue(count($this->recurrenceException->extensionAttributes) == 0);
     }
 
-    public function testSampleRecurrenceExceptionShouldHaveNoExtensionElements() {
+    public function testSampleRecurrenceExceptionShouldHaveNoExtensionElements()
+    {
         $this->recurrenceException->transferFromXML($this->recurrenceExceptionText);
         $this->assertTrue(is_array($this->recurrenceException->extensionElements));
         $this->assertTrue(count($this->recurrenceException->extensionElements) == 0);
     }
 
-    public function testSampleRecurrenceExceptionShouldHaveNoExtensionAttributes() {
+    public function testSampleRecurrenceExceptionShouldHaveNoExtensionAttributes()
+    {
         $this->recurrenceException->transferFromXML($this->recurrenceExceptionText);
         $this->assertTrue(is_array($this->recurrenceException->extensionAttributes));
         $this->assertTrue(count($this->recurrenceException->extensionAttributes) == 0);
     }
 
-    public function testNormalRecurrenceExceptionShouldHaveNoExtensionElements() {
+    public function testNormalRecurrenceExceptionShouldHaveNoExtensionElements()
+    {
         $this->recurrenceException->specialized = "false";
 
         $this->assertEquals("false", $this->recurrenceException->specialized);
@@ -71,7 +78,8 @@ class RecurrenceExceptionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("false", $newRecurrenceException2->specialized);
     }
 
-    public function testEmptyRecurrenceExceptionToAndFromStringShouldMatch() {
+    public function testEmptyRecurrenceExceptionToAndFromStringShouldMatch()
+    {
         $recurrenceExceptionXml = $this->recurrenceException->saveXML();
         $newRecurrenceException = new Extension\RecurrenceException();
         $newRecurrenceException->transferFromXML($recurrenceExceptionXml);
@@ -79,7 +87,8 @@ class RecurrenceExceptionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($recurrenceExceptionXml == $newRecurrenceExceptionXml);
     }
 
-    public function testRecurrenceExceptionWithValueToAndFromStringShouldMatch() {
+    public function testRecurrenceExceptionWithValueToAndFromStringShouldMatch()
+    {
         $this->recurrenceException->specialized = "false";
         $recurrenceExceptionXml = $this->recurrenceException->saveXML();
         $newRecurrenceException = new Extension\RecurrenceException();
@@ -89,7 +98,8 @@ class RecurrenceExceptionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("false", $this->recurrenceException->specialized);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->recurrenceException->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -103,7 +113,8 @@ class RecurrenceExceptionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newRecurrenceException->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullRecurrenceExceptionToAndFromString() {
+    public function testConvertFullRecurrenceExceptionToAndFromString()
+    {
         $this->recurrenceException->transferFromXML($this->recurrenceExceptionText);
         $this->assertEquals("true", $this->recurrenceException->specialized);
         $this->assertTrue($this->recurrenceException->entryLink instanceof Extension\EntryLink);

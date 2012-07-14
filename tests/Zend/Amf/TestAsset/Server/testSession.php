@@ -16,7 +16,8 @@ namespace ZendTest\Amf\TestAsset\Server;
 class testSession
 {
     /** Check if the session is available or create it. */
-    public function __construct() {
+    public function __construct()
+    {
         if (!isset($_SESSION['count'])) {
             $_SESSION['count'] = 0;
         }

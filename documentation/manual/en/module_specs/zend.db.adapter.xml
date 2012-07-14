@@ -176,8 +176,8 @@ $adapter = new Zend\Db\Adapter\Adapter(array(
 
 
             <programlisting language="php"><![CDATA[
-use Zend\Db\Adapter\Platform\PlatformInterface,
-    Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Adapter\Platform\PlatformInterface;
+use Zend\Db\ResultSet\ResultSet;
 
 class Zend\Db\Adapter\Adapter {
     public function __construct($driver, PlatformInterface $platform = null, ResultSet $queryResultSetPrototype = null)

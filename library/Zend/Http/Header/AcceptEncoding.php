@@ -59,8 +59,7 @@ class AcceptEncoding extends AbstractAccept
      * Does the header have the requested encoding?
      *
      * @param  string $type
-     * @return booluse Zend\Http\Header\Accept\FieldValuePart;
-
+     * @return bool
      */
     public function hasEncoding($type)
     {

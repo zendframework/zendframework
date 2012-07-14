@@ -26,10 +26,10 @@ class ViewJsonStrategyFactory implements FactoryInterface
      *
      * Retrieves the ViewJsonRenderer service from the service locator, and
      * injects it into the constructor for the JSON strategy.
-     * 
+     *
      * It then attaches the strategy to the View service, at a priority of 100.
      *
-     * @param  ServiceLocatorInterface $serviceLocator 
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return JsonStrategy
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

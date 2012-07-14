@@ -147,7 +147,7 @@ if (!$usingStdout) {
 // Get the ClassFileLocator, and pass it the library path
 $l = new ClassFileLocator($libraryPath);
 
-// Iterate over each element in the path, and create a map of 
+// Iterate over each element in the path, and create a map of
 // classname => filename, where the filename is relative to the library path
 $map = new stdClass;
 foreach ($l as $file) {

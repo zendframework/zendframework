@@ -16,8 +16,8 @@
     </para>
 
     <programlisting language="php"><![CDATA[
-use Zend\Crypt\Key\Derivation\PBKDF2,
-    Zend\Math\Math;
+use Zend\Crypt\Key\Derivation\PBKDF2;
+use Zend\Math\Math;
 
 $pass = 'password';
 $salt = Math::randBytes(strlen($pass), true);

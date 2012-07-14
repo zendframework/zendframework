@@ -23,8 +23,8 @@ class ObjectProperty implements HydratorInterface
      * Extract values from an object
      *
      * Extracts the accessible non-static properties of the given $object.
-     * 
-     * @param  object $object 
+     *
+     * @param  object $object
      * @return array
      * @throws Exception\BadMethodCallException for a non-object $object
      */
@@ -44,9 +44,9 @@ class ObjectProperty implements HydratorInterface
      * Hydrate an object by populating public properties
      *
      * Hydrates an object by setting public properties of the object.
-     * 
-     * @param  array $data 
-     * @param  object $object 
+     *
+     * @param  array $data
+     * @param  object $object
      * @return object
      * @throws Exception\BadMethodCallException for a non-object $object
      */

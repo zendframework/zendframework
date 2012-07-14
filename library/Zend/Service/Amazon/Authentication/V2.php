@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Service\Amazon\Authentication;
+
 use Zend\Crypt\Hmac;
 
 /**
@@ -27,7 +28,7 @@ class V2 extends AbstractAuthentication
      * Signature Encoding Method
      */
     protected $_signatureMethod = 'HmacSHA256';
-    
+
     /**
      * Type of http request
      * @var string
@@ -51,18 +52,19 @@ class V2 extends AbstractAuthentication
         }
 
         $data = $this->_signParameters($url, $parameters);
-        
+
         return $data;
     }
-    
+
     /**
      * Set http request type to POST or GET
      * @param $method string
      */
-    public function setHttpMethod($method = "POST") {
+    public function setHttpMethod($method = "POST")
+    {
         $this->_httpMethod = strtoupper($method);
     }
-    
+
     /**
      * Get the current http request type
      * @return string

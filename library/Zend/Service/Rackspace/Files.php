@@ -116,7 +116,7 @@ class Files extends AbstractRackspace
      * - total count containers
      * - size in bytes of all the containers
      * - total objects in all the containers
-     * 
+     *
      * @return array|boolean
      */
     public function getInfoAccount()
@@ -146,7 +146,7 @@ class Files extends AbstractRackspace
         }
         $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container),'GET',null,$options);
         if ($result->isSuccess() && ($result->getBody()!=='[]')) {
-            return new Files\ObjectList($this,json_decode($result->getBody(),true),$container);  
+            return new Files\ObjectList($this,json_decode($result->getBody(),true),$container);
         }
         return false;
     }
@@ -258,11 +258,12 @@ class Files extends AbstractRackspace
     }
     /**
      * Get a container
-     * 
+     *
      * @param string $container
      * @return Container|boolean
      */
-    public function getContainer($container) {
+    public function getContainer($container)
+    {
         $result= $this->getMetadataContainer($container);
         if (!empty($result)) {
             return new Files\Container($this,$result);
@@ -310,7 +311,7 @@ class Files extends AbstractRackspace
         return false;
     }
     /**
-     * Store a file in a container 
+     * Store a file in a container
      *
      * @param string $container
      * @param string $object
@@ -318,7 +319,8 @@ class Files extends AbstractRackspace
      * @param array $metadata
      * @return boolean
      */
-    public function storeObject($container,$object,$content,$metadata=array()) {
+    public function storeObject($container,$object,$content,$metadata=array())
+    {
         if (empty($container)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
@@ -360,7 +362,8 @@ class Files extends AbstractRackspace
      * @param string $object
      * @return boolean
      */
-    public function deleteObject($container,$object) {
+    public function deleteObject($container,$object)
+    {
         if (empty($container)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
@@ -393,7 +396,8 @@ class Files extends AbstractRackspace
      * @param string $content_type
      * @return boolean
      */
-    public function copyObject($container_source,$obj_source,$container_dest,$obj_dest,$metadata=array(),$content_type=null) {
+    public function copyObject($container_source,$obj_source,$container_dest,$obj_dest,$metadata=array(),$content_type=null)
+    {
         if (empty($container_source)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_SOURCE_CONTAINER);
         }
@@ -437,7 +441,8 @@ class Files extends AbstractRackspace
      * @param string $object
      * @return array|boolean
      */
-    public function getMetadataObject($container,$object) {
+    public function getMetadataObject($container,$object)
+    {
         if (empty($container)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
@@ -480,7 +485,7 @@ class Files extends AbstractRackspace
     /**
      * Set the metadata of a object in a container
      * The old metadata values are replaced with the new one
-     * 
+     *
      * @param string $container
      * @param string $object
      * @param array $metadata
@@ -523,7 +528,8 @@ class Files extends AbstractRackspace
      * @param integer $ttl
      * @return array|boolean
      */
-    public function enableCdnContainer ($container,$ttl=self::CDN_TTL_MIN) {
+    public function enableCdnContainer ($container,$ttl=self::CDN_TTL_MIN)
+    {
         if (empty($container)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
@@ -614,7 +620,8 @@ class Files extends AbstractRackspace
      * @param string $container
      * @return array|boolean
      */
-    public function getInfoCdnContainer($container) {
+    public function getInfoCdnContainer($container)
+    {
         if (empty($container)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }

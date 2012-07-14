@@ -23,19 +23,20 @@ class Server extends AbstractGoGrid
     const API_POWER_RESTART      = 'restart';
     /**
      * Get Server List
-     * 
+     *
      * This call will list all the servers in the system.
      *
      * @param array $options
      * @return ObjectList
      */
-    public function getList($options=array()) {
+    public function getList($options=array())
+    {
         $result = parent::_call(self::API_GRID_SERVER_LIST, $options);
         return new ObjectList($result);
     }
     /**
      * Get Server
-     * 
+     *
      * This call will retrieve one or many server objects from your list of servers
      *
      * @param string|array $server
@@ -54,7 +55,7 @@ class Server extends AbstractGoGrid
     }
     /**
      * Add Server
-     * 
+     *
      * This call will add a single server object to your grid.
      * To create an image sandbox pass the optional isSandbox parameter to true.
      * If isSandbox is set to true, the request parameter server.ram is ignored and non-mandatory.
@@ -66,7 +67,8 @@ class Server extends AbstractGoGrid
      * @return ObjectList
      * @throws Exception\InvalidArgumentException
      */
-    public function add($name,$image,$ram,$ip, $options=array()) {
+    public function add($name,$image,$ram,$ip, $options=array())
+    {
         if (empty($name) || strlen($name)>20) {
             throw new Exception\InvalidArgumentException("You must specify the name of the server in a string of 20 character max.");
         }
@@ -90,13 +92,13 @@ class Server extends AbstractGoGrid
     }
     /**
      * Edit Server
-     * 
+     *
      * This call will edit a single server object in your grid.
      * You can use this call to edit a server's:
      * RAM (Upgrade RAM)
      * Server Type (Change between Web/App Server and Database Server)
-     * Description (Change freeform text description) 
-     * 
+     * Description (Change freeform text description)
+     *
      * @param string|array $server
      * @return ObjectList
      * @throws Exception\InvalidArgumentException
@@ -112,7 +114,7 @@ class Server extends AbstractGoGrid
     }
     /**
      * Power Server
-     * 
+     *
      * This call will issue a power command to a server object in your grid.
      * Supported power commands are: start, stop, and restart
      *
@@ -121,7 +123,8 @@ class Server extends AbstractGoGrid
      * @return ObjectList
      * @throws Exception\InvalidArgumentException
      */
-    public function power($server,$power) {
+    public function power($server,$power)
+    {
         if (empty($server)) {
             throw new Exception\InvalidArgumentException("The server.power API needs a id/name server parameter");
         }
@@ -141,7 +144,8 @@ class Server extends AbstractGoGrid
      * @param string $server
      * @return ObjectList
      */
-    public function start($server) {
+    public function start($server)
+    {
        return $this->power($server,self::API_POWER_START);
     }
     /**
@@ -150,7 +154,8 @@ class Server extends AbstractGoGrid
      * @param string $server
      * @return ObjectList
      */
-    public function stop($server) {
+    public function stop($server)
+    {
        return $this->power($server,self::API_POWER_STOP);
     }
     /**
@@ -159,17 +164,19 @@ class Server extends AbstractGoGrid
      * @param string $server
      * @return ObjectList
      */
-    public function restart($server) {
+    public function restart($server)
+    {
        return $this->power($server,self::API_POWER_RESTART);
     }
     /**
      * Delete a server
-     * 
-     * @param string $server 
+     *
+     * @param string $server
      * @return ObjectList
      * @throws Exception\InvalidArgumentException
      */
-    public function delete($server) {
+    public function delete($server)
+    {
         if (empty($server)) {
             throw new Exception\InvalidArgumentException("The server.delete API needs an id/name server parameter");
         }

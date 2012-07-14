@@ -27,7 +27,7 @@ abstract class AbstractExtension
      * @param mixed &$params argument to pass to given funcion
      * @return bool
      */
-    static public function forAll($extensions, $func, &$params)
+    public static function forAll($extensions, $func, &$params)
     {
         if ($extensions !== null) {
             if (is_array($extensions)) {
@@ -40,7 +40,7 @@ abstract class AbstractExtension
                         return false;
                     }
                 }
-            } else if (!is_object($extensions) ||
+            } elseif (!is_object($extensions) ||
                        !($extensions instanceof AbstractExtension) ||
                        !$extensions->$func($params)) {
                 return false;

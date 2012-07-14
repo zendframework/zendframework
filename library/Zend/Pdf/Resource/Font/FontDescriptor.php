@@ -58,7 +58,7 @@ class FontDescriptor
      * @return \Zend\Pdf\InternalType\DictionaryObject
      * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
-    static public function factory(AbstractFont $font,
+    public static function factory(AbstractFont $font,
                                    OpenTypeFontParser\AbstractOpenType $fontParser,
                                    $embeddingOptions)
     {

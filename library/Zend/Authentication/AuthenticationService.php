@@ -32,9 +32,9 @@ class AuthenticationService
 
     /**
      * Constructor
-     * 
-     * @param  Storage\StorageInterface $storage 
-     * @param  Adapter\AdapterInterface $adapter 
+     *
+     * @param  Storage\StorageInterface $storage
+     * @param  Adapter\AdapterInterface $adapter
      */
     public function __construct(Storage\StorageInterface $storage = null, Adapter\AdapterInterface $adapter = null)
     {

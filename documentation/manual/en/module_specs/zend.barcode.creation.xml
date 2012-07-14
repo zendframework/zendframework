@@ -77,8 +77,8 @@ $renderer = Barcode::factory(
             </para>
 
             <programlisting language="php"><![CDATA[
-use Zend\Config,
-    Zend\Barcode;
+use Zend\Config;
+use Zend\Barcode;
 
 // Using only one Zend\Config\Config object
 $config = new Config(array(

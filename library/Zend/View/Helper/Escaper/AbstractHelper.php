@@ -58,8 +58,8 @@ abstract class AbstractHelper extends Helper\AbstractHelper
 
     /**
      * Set the encoding to use for escape operations
-     * 
-     * @param  string $encoding 
+     *
+     * @param  string $encoding
      * @return AbstractEscaper
      */
     public function setEncoding($encoding)
@@ -76,7 +76,7 @@ abstract class AbstractHelper extends Helper\AbstractHelper
 
     /**
      * Get the encoding to use for escape operations
-     * 
+     *
      * @return string
      */
     public function getEncoding()
@@ -86,8 +86,8 @@ abstract class AbstractHelper extends Helper\AbstractHelper
 
     /**
      * Invoke this helper: escape a value
-     * 
-     * @param  mixed $value 
+     *
+     * @param  mixed $value
      * @param  int $recurse Expects one of the recursion constants; used to decide whether or not to recurse the given value when escaping
      * @return mixed Given a scalar, a scalar value is returned. Given an object, with the $recurse flag not allowing object recursion, returns a string. Otherwise, returns an array.
      * @throws Exception\InvalidArgumentException
@@ -133,6 +133,6 @@ abstract class AbstractHelper extends Helper\AbstractHelper
      * @param string $value
      * @return string
      */
-    protected abstract function escape($value);
+    abstract protected function escape($value);
 
 }

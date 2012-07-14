@@ -10,12 +10,12 @@
 
 namespace ZendTest\Mvc\Controller\Plugin;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Mvc\Controller\Plugin\Url as UrlPlugin,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\Router\Http\Literal as LiteralRoute,
-    Zend\Mvc\Router\SimpleRouteStack,
-    ZendTest\Mvc\Controller\TestAsset\SampleController;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Mvc\Controller\Plugin\Url as UrlPlugin;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\Http\Literal as LiteralRoute;
+use Zend\Mvc\Router\SimpleRouteStack;
+use ZendTest\Mvc\Controller\TestAsset\SampleController;
 
 class UrlTest extends TestCase
 {

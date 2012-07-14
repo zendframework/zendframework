@@ -10,8 +10,8 @@
 
 namespace ZendTest\Code\Scanner;
 
-use Zend\Code\Scanner\TokenArrayScanner,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Code\Scanner\TokenArrayScanner;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class TokenArrayScannerTest extends TestCase
 {
@@ -62,4 +62,4 @@ class TokenArrayScannerTest extends TestCase
 
 
 
- 
+

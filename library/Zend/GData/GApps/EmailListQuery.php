@@ -94,8 +94,7 @@ class EmailListQuery extends AbstractQuery
     {
         if ($value !== null) {
             $this->_params['recipient'] = $value;
-        }
-        else {
+        } else {
             unset($this->_params['recipient']);
         }
     }

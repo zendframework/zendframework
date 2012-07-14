@@ -285,13 +285,6 @@ Zend_Loader_Autoloader::getInstance();
             </listitem>
 
             <listitem>
-                <para>
-                    <classname>Zend_Dojo</classname> : aides de vues, éléments de formulaires
-                    et décorateurs
-                </para>
-            </listitem>
-
-            <listitem>
                 <para><classname>Zend_File_Transfer</classname> : adaptateurs</para>
             </listitem>
 

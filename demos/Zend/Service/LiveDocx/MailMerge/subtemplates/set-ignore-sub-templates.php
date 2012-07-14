@@ -15,11 +15,11 @@ $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
 // -----------------------------------------------------------------------------
 
 foreach ($templateFilesnames as $_templateFilesname) {
-    
+
     if ($mailMerge->templateExists($_templateFilesname)) {
         $mailMerge->deleteTemplate($_templateFilesname);
     }
-    
+
     $mailMerge->uploadTemplate($_templateFilesname);
 }
 

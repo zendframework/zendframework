@@ -18,7 +18,7 @@ use Zend\Text\Exception;
  * @category  Zend
  * @package   Zend_Text
  */
-class InvalidArgumentException 
+class InvalidArgumentException
     extends Exception\InvalidArgumentException
     implements ExceptionInterface
 {}

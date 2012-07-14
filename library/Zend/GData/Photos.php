@@ -122,14 +122,14 @@ class Photos extends GData
                 $location->setUser($userName);
             }
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             if ($userName !== null) {
                 $location->setUser($userName);
             }
             $uri = $location->getQueryUrl();
-        } else if ($location !== null) {
+        } elseif ($location !== null) {
             $uri = $location;
-        } else if ($userName !== null) {
+        } elseif ($userName !== null) {
             $uri = self::PICASA_BASE_FEED_URI . '/' .
                 self::DEFAULT_PROJECTION . '/' . self::USER_PATH . '/' .
                 $userName;
@@ -156,10 +156,10 @@ class Photos extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('feed');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -184,10 +184,10 @@ class Photos extends GData
             $uri = self::PICASA_BASE_FEED_URI . '/' .
                 self::DEFAULT_PROJECTION . '/' .
                 self::COMMUNITY_SEARCH_PATH;
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('feed');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -208,10 +208,10 @@ class Photos extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -232,10 +232,10 @@ class Photos extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -256,10 +256,10 @@ class Photos extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -280,10 +280,10 @@ class Photos extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -304,10 +304,10 @@ class Photos extends GData
         if ($location === null) {
             throw new App\InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Photos\UserQuery) {
+        } elseif ($location instanceof Photos\UserQuery) {
             $location->setType('entry');
             $uri = $location->getQueryUrl();
-        } else if ($location instanceof Query) {
+        } elseif ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;

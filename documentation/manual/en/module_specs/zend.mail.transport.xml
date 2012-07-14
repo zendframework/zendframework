@@ -44,8 +44,8 @@
             <title>Sendmail Transport Usage</title>
 
             <programlisting language="php"><![CDATA[
-use Zend\Mail\Message,
-    Zend\Mail\Transport\Sendmail as SendmailTransport;
+use Zend\Mail\Message;
+use Zend\Mail\Transport\Sendmail as SendmailTransport;
 
 $message = new Message();
 $message->addTo('matthew@zend.com')
@@ -62,9 +62,9 @@ $transport->send($message);
             <title>SMTP Transport Usage</title>
 
             <programlisting language="php"><![CDATA[
-use Zend\Mail\Message,
-    Zend\Mail\Transport\Smtp as SmtpTransport,
-    Zend\Mail\Transport\SmtpOptions;
+use Zend\Mail\Message;
+use Zend\Mail\Transport\Smtp as SmtpTransport;
+use Zend\Mail\Transport\SmtpOptions;
 
 $message = new Message();
 $message->addTo('matthew@zend.com')
@@ -92,9 +92,9 @@ $transport->send($message);
             <title>File Transport Usage</title>
 
             <programlisting language="php"><![CDATA[
-use Zend\Mail\Message,
-    Zend\Mail\Transport\File as FileTransport,
-    Zend\Mail\Transport\FileOptions;
+use Zend\Mail\Message;
+use Zend\Mail\Transport\File as FileTransport;
+use Zend\Mail\Transport\FileOptions;
 
 $message = new Message();
 $message->addTo('matthew@zend.com')

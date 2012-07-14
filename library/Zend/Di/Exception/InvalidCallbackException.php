@@ -10,6 +10,12 @@
 
 namespace Zend\Di\Exception;
 
+/**
+ * Exception to be thrown when an invalid php callback is provided
+ *
+ * @category   Zend
+ * @package    Zend_Di
+ */
 class InvalidCallbackException extends InvalidArgumentException
 {
 }

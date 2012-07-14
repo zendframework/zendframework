@@ -242,8 +242,7 @@ abstract class AbstractFunction
 
         if (!empty($docBlock)) {
             // Get help text
-            if (preg_match(':/\*\*\s*\r?\n\s*\*\s(.*?)\r?\n\s*\*(\s@|/):s', $docBlock, $matches))
-            {
+            if (preg_match(':/\*\*\s*\r?\n\s*\*\s(.*?)\r?\n\s*\*(\s@|/):s', $docBlock, $matches)) {
                 $helpText = $matches[1];
                 $helpText = preg_replace('/(^\s*\*\s)/m', '', $helpText);
                 $helpText = preg_replace('/\r?\n\s*\*\s*(\r?\n)*/s', "\n", $helpText);
@@ -254,8 +253,7 @@ abstract class AbstractFunction
             $return     = 'void';
             if (preg_match('/@return\s+(\S+)/', $docBlock, $matches)) {
                 $return = explode('|', $matches[1]);
-                if (preg_match('/@return\s+\S+\s+(.*?)(@|\*\/)/s', $docBlock, $matches))
-                {
+                if (preg_match('/@return\s+\S+\s+(.*?)(@|\*\/)/s', $docBlock, $matches)) {
                     $value = $matches[1];
                     $value = preg_replace('/\s?\*\s/m', '', $value);
                     $value = preg_replace('/\s{2,}/', ' ', $value);
@@ -266,8 +264,7 @@ abstract class AbstractFunction
             // Get param types and description
             if (preg_match_all('/@param\s+([^\s]+)/m', $docBlock, $matches)) {
                 $paramTypesTmp = $matches[1];
-                if (preg_match_all('/@param\s+\S+\s+(\$\S+)\s+(.*?)(@|\*\/)/s', $docBlock, $matches))
-                {
+                if (preg_match_all('/@param\s+\S+\s+(\$\S+)\s+(.*?)(@|\*\/)/s', $docBlock, $matches)) {
                     $paramDesc = $matches[2];
                     foreach ($paramDesc as $key => $value) {
                         $value = preg_replace('/\s?\*\s/m', '', $value);

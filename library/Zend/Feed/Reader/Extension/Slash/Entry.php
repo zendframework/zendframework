@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Feed\Reader\Extension\Slash;
+
 use Zend\Feed\Reader\Extension;
 
 /**

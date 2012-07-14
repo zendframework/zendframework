@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData\GApps;
+
 use Zend\GData\GApps;
 
 /**
@@ -34,22 +35,26 @@ class UserFeedTest extends \PHPUnit_Framework_TestCase
         $this->emptyUserFeed = new GApps\UserFeed();
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionElements() {
+    public function testEmptyFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->emptyUserFeed->extensionElements));
         $this->assertTrue(count($this->emptyUserFeed->extensionElements) == 0);
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionAttributes() {
+    public function testEmptyFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->emptyUserFeed->extensionAttributes));
         $this->assertTrue(count($this->emptyUserFeed->extensionAttributes) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionElements() {
+    public function testSampleFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->userFeed->extensionElements));
         $this->assertTrue(count($this->userFeed->extensionElements) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionAttributes() {
+    public function testSampleFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->userFeed->extensionAttributes));
         $this->assertTrue(count($this->userFeed->extensionAttributes) == 0);
     }

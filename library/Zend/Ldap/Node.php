@@ -240,7 +240,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     {
         if (is_string($dn) || is_array($dn)) {
             $dn = Dn::factory($dn);
-        } else if ($dn instanceof Dn) {
+        } elseif ($dn instanceof Dn) {
             $dn = clone $dn;
         } else {
             throw new Exception\LdapException(null, '$dn is of a wrong data type.');
@@ -264,7 +264,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     {
         if (is_string($dn) || is_array($dn)) {
             $dn = Dn::factory($dn);
-        } else if ($dn instanceof Dn) {
+        } elseif ($dn instanceof Dn) {
             $dn = clone $dn;
         } else {
             throw new Exception\LdapException(null, '$dn is of a wrong data type.');
@@ -293,7 +293,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         }
         if (is_string($data['dn']) || is_array($data['dn'])) {
             $dn = Dn::factory($data['dn']);
-        } else if ($data['dn'] instanceof Dn) {
+        } elseif ($data['dn'] instanceof Dn) {
             $dn = clone $data['dn'];
         } else {
             throw new Exception\LdapException(null, '\'dn\' key is of a wrong data type.');
@@ -316,7 +316,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         foreach ($this->getRdnArray() as $key => $value) {
             if (!array_key_exists($key, $this->currentData) || $overwrite) {
                 Attribute::setAttribute($this->currentData, $key, $value, false);
-            } else if (!in_array($value, $this->currentData[$key])) {
+            } elseif (!in_array($value, $this->currentData[$key])) {
                 Attribute::setAttribute($this->currentData, $key, $value, true);
             }
         }
@@ -393,7 +393,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     {
         if ($this->isNew() || $this->willBeDeleted()) {
             return false;
-        } else if ($this->newDn !== null) {
+        } elseif ($this->newDn !== null) {
             return ($this->dn != $this->newDn);
         } else {
             return false;
@@ -605,7 +605,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         foreach ($this->currentData as $key => $value) {
             if (!array_key_exists($key, $this->originalData) && !empty($value)) {
                 $changed[$key] = $value;
-            } else if ($this->originalData[$key] !== $this->currentData[$key]) {
+            } elseif ($this->originalData[$key] !== $this->currentData[$key]) {
                 $changed[$key] = $value;
             }
         }
@@ -629,9 +629,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         foreach ($this->currentData as $key => $value) {
             if (!array_key_exists($key, $this->originalData) && !empty($value)) {
                 $changes['add'][$key] = $value;
-            } else if (count($this->originalData[$key]) === 0 && !empty($value)) {
+            } elseif (count($this->originalData[$key]) === 0 && !empty($value)) {
                 $changes['add'][$key] = $value;
-            } else if ($this->originalData[$key] !== $this->currentData[$key]) {
+            } elseif ($this->originalData[$key] !== $this->currentData[$key]) {
                 if (empty($value)) {
                     $changes['delete'][$key] = $value;
                 } else {
@@ -812,10 +812,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         $rdn  = $this->getRdnArray(Dn::ATTR_CASEFOLD_LOWER);
         if ($name == 'dn') {
             throw new Exception\LdapException(null, 'DN cannot be changed.');
-        }
-        else if (array_key_exists($name, $rdn)) {
+        } elseif (array_key_exists($name, $rdn)) {
             throw new Exception\LdapException(null, 'Cannot change attribute because it\'s part of the RDN');
-        } else if (in_array($name, self::$systemAttributes)) {
+        } elseif (in_array($name, self::$systemAttributes)) {
             throw new Exception\LdapException(null, 'Cannot change attribute because it\'s read-only');
         } else {
             return true;

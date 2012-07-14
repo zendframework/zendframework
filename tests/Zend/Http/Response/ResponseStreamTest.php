@@ -18,9 +18,9 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
     public function testResponseFactoryFromStringCreatesValidResponse()
     {
         $string = 'HTTP/1.0 200 OK' . "\r\n\r\n".'Foo Bar'."\r\n";
-		$stream = fopen('php://temp','rb+');
-		fwrite($stream, 'Bar Foo');
-		rewind($stream);
+        $stream = fopen('php://temp','rb+');
+        fwrite($stream, 'Bar Foo');
+        rewind($stream);
 
         $response = Stream::fromStream($string, $stream);
         $this->assertEquals(200, $response->getStatusCode());

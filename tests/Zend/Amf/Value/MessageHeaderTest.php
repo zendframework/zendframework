@@ -9,11 +9,10 @@
  */
 
 namespace ZendTest\Amf\Value;
+
 use Zend\Amf\Value;
 
 /**
- * Test case for Zend_Amf_Value_MessageHeader
- *
  * @category   Zend
  * @package    Zend_Amf
  * @subpackage UnitTests

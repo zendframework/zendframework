@@ -11,7 +11,6 @@
 namespace ZendTest\Service\Nirvanix;
 
 /**
- * @see        FunctionalTestCase
  * @category   Zend
  * @package    Zend_Service_Nirvanix
  * @subpackage UnitTests

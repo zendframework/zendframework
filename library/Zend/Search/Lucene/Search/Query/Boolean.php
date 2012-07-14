@@ -102,7 +102,8 @@ class Boolean extends AbstractQuery
      * @param  boolean|null $sign
      * @return void
      */
-    public function addSubquery(AbstractQuery $subquery, $sign=null) {
+    public function addSubquery(AbstractQuery $subquery, $sign=null)
+    {
         if ($sign !== true || $this->_signs !== null) {       // Skip, if all subqueries are required
             if ($this->_signs === null) {                     // Check, If all previous subqueries are required
                 $this->_signs = array();
@@ -245,7 +246,7 @@ class Boolean extends AbstractQuery
                 // remove subquery from a subqueries list
                 unset($subqueries[$id]);
                 unset($signs[$id]);
-           } else if ($subquery instanceof MultiTerm) {
+           } elseif ($subquery instanceof MultiTerm) {
                 $subTerms = $subquery->getTerms();
                 $subSigns = $subquery->getSigns();
 
@@ -267,7 +268,7 @@ class Boolean extends AbstractQuery
                         foreach ($subSigns as $sign) {
                             if ($sign === true) {
                                 $hasRequired   = true;
-                            } else if ($sign === false) {
+                            } elseif ($sign === false) {
                                 $hasProhibited = true;
                                 break;
                             }
@@ -371,7 +372,7 @@ class Boolean extends AbstractQuery
 
             // Clear terms list
             $terms = array();
-        } else if (count($terms) > 1  &&  count(array_unique($boostFactors)) == 1) {
+        } elseif (count($terms) > 1  &&  count(array_unique($boostFactors)) == 1) {
             $clause = new MultiTerm($terms, $tsigns);
             $clause->setBoost(reset($boostFactors));
 
@@ -390,7 +391,7 @@ class Boolean extends AbstractQuery
 
             // Clear prohibited terms list
             $prohibitedTerms = array();
-        } else if (count($prohibitedTerms) > 1) {
+        } elseif (count($prohibitedTerms) > 1) {
             // prepare signs array
             $prohibitedSigns = array();
             foreach ($prohibitedTerms as $id => $term) {
@@ -774,7 +775,7 @@ class Boolean extends AbstractQuery
 
             if ($this->_signs === null || $this->_signs[$id] === true) {
                 $query .= '+';
-            } else if ($this->_signs[$id] === false) {
+            } elseif ($this->_signs[$id] === false) {
                 $query .= '-';
             }
 

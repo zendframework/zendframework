@@ -46,7 +46,7 @@ class Attribute
                     $valArray[] = $v;
                 }
             }
-        } else if ($value !== null) {
+        } elseif ($value !== null) {
             $value = self::valueToLdap($value);
             if ($value !== null) {
                 $valArray[] = $value;
@@ -83,10 +83,10 @@ class Attribute
                 $retArray[] = self::valueFromLDAP($v);
             }
             return $retArray;
-        } else if (is_int($index)) {
+        } elseif (is_int($index)) {
             if (!isset($data[$attribName])) {
                 return null;
-            } else if ($index >= 0 && $index < count($data[$attribName])) {
+            } elseif ($index >= 0 && $index < count($data[$attribName])) {
                 return self::valueFromLDAP($data[$attribName][$index]);
             } else {
                 return null;
@@ -248,7 +248,7 @@ class Attribute
                 $password = '"' . $password . '"';
                 if (function_exists('mb_convert_encoding')) {
                     $password = mb_convert_encoding($password, 'UTF-16LE', 'UTF-8');
-                } else if (function_exists('iconv')) {
+                } elseif (function_exists('iconv')) {
                     $password = iconv('UTF-8', 'UTF-16LE', $password);
                 } else {
                     $len = strlen($password);
@@ -363,7 +363,7 @@ class Attribute
     {
         if ($value instanceof DateTime) {
             return $value->format('U');
-        } else if (is_string($value)) {
+        } elseif (is_string($value)) {
             try {
                 return Converter\Converter::fromLdapDateTime($value, false)->format('U');
             } catch (Converter\Exception\InvalidArgumentException $e) {

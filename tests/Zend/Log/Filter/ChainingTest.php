@@ -10,8 +10,8 @@
 
 namespace ZendTest\Log\Filter;
 
-use \Zend\Log\Logger;
-use \Zend\Log\Writer;
+use Zend\Log\Logger;
+use Zend\Log\Writer;
 
 /**
  * @category   Zend

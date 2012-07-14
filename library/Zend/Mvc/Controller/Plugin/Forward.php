@@ -47,8 +47,8 @@ class Forward extends AbstractPlugin
 
     /**
      * Set maximum number of nested forwards allowed
-     * 
-     * @param  int $maxNestedForwards 
+     *
+     * @param  int $maxNestedForwards
      * @return Forward
      */
     public function setMaxNestedForwards($maxNestedForwards)
@@ -59,7 +59,7 @@ class Forward extends AbstractPlugin
 
     /**
      * Dispatch another controller
-     * 
+     *
      * @param  string $name Controller name; either a class name or an alias used in the DI container or service locator
      * @param  null|array $params Parameters with which to seed a custom RouteMatch object for the new controller
      * @return mixed
@@ -110,7 +110,7 @@ class Forward extends AbstractPlugin
 
     /**
      * Get the locator
-     * 
+     *
      * @return ServiceLocatorInterface
      * @throws Exception\DomainException if unable to find locator
      */
@@ -135,7 +135,7 @@ class Forward extends AbstractPlugin
 
     /**
      * Get the event
-     * 
+     *
      * @return MvcEvent
      * @throws Exception\DomainException if unable to find event
      */

@@ -124,7 +124,7 @@ interface EntryInterface
      * @return string
      */
     public function getCommentFeedLink();
-    
+
     /**
      * Get all categories
      *

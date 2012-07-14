@@ -18,105 +18,105 @@ namespace Zend\Db\Metadata\Object;
 class TriggerObject
 {
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $name;
 
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $eventManipulation;
 
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $eventObjectCatalog;
 
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $eventObjectSchema;
 
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $eventObjectTable;
 
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $actionOrder;
 
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $actionCondition;
 
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $actionStatement;
 
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $actionOrientation;
 
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $actionTiming;
 
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $actionReferenceOldTable;
 
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $actionReferenceNewTable;
 
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $actionReferenceOldRow;
 
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $actionReferenceNewRow;
 
     /**
-     * 
+     *
      *
      * @var \DateTime
      */

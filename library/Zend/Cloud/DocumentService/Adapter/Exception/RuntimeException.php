@@ -16,7 +16,7 @@ use Zend\Cloud\DocumentService\Exception;
  * @package    Zend_Cloud
  * @subpackage DocumentService_Adapter
  */
-class RuntimeException extends Exception\RuntimeException implements 
+class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface
 {
 }

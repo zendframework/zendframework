@@ -69,7 +69,8 @@ class Error extends \Zend\GData\App\AbstractBase
      * @see getErrorCode
      * @param integer $value The new value for the error code.
      */
-    public function setErrorCode($value) {
+    public function setErrorCode($value)
+    {
        $this->_errorCode = $value;
     }
 
@@ -109,7 +110,8 @@ class Error extends \Zend\GData\App\AbstractBase
      * @see setErrorCode
      * @return integer The error code returned by the Google Apps server.
      */
-    public function getErrorCode() {
+    public function getErrorCode()
+    {
         return $this->_errorCode;
     }
 
@@ -119,7 +121,8 @@ class Error extends \Zend\GData\App\AbstractBase
      * @see getReason
      * @param string $value The reason this exception occurred.
      */
-    public function setReason($value) {
+    public function setReason($value)
+    {
        $this->_reason = $value;
     }
 
@@ -129,7 +132,8 @@ class Error extends \Zend\GData\App\AbstractBase
      * @see setReason
      * @return string The reason this exception occurred.
      */
-    public function getReason() {
+    public function getReason()
+    {
        return $this->_reason;
     }
 
@@ -139,7 +143,8 @@ class Error extends \Zend\GData\App\AbstractBase
      * @see getInvalidInput
      * @param string $value The invalid input that triggered this exception.
      */
-    public function setInvalidInput($value) {
+    public function setInvalidInput($value)
+    {
        $this->_invalidInput = $value;
     }
 
@@ -149,7 +154,8 @@ class Error extends \Zend\GData\App\AbstractBase
      * @see setInvalidInput
      * @return string The reason this exception occurred.
      */
-    public function getInvalidInput() {
+    public function getInvalidInput()
+    {
        return $this->_invalidInput;
     }
 
@@ -206,7 +212,8 @@ class Error extends \Zend\GData\App\AbstractBase
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return "Error " . $this->getErrorCode() . ": " . $this->getReason() .
             "\n\tInvalid Input: \"" . $this->getInvalidInput() . "\"";
     }

@@ -368,13 +368,6 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
         </para>
 
         <para>
-            Additionally, we can use different decorators with the element. If we wanted to use a
-            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/">Dojo</link> <classname>DateTextBox</classname>
-            dijit decorator -- which accepts and returns string values -- we can, with no
-            modifications to the element itself.
-        </para>
-
-        <para>
             In the end, you get a uniform element <acronym>API</acronym> you can use to describe an
             element representing a composite value.
         </para>

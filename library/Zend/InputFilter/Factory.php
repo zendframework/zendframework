@@ -36,7 +36,7 @@ class Factory
         $this->defaultFilterChain = $filterChain;
         return $this;
     }
-    
+
     /**
      * Get default filter chain, if any
      *
@@ -49,7 +49,7 @@ class Factory
 
     /**
      * Clear the default filter chain (i.e., don't inject one into new inputs)
-     * 
+     *
      * @return void
      */
     public function clearDefaultFilterChain()
@@ -68,7 +68,7 @@ class Factory
         $this->defaultValidatorChain = $validatorChain;
         return $this;
     }
-    
+
     /**
      * Get default validator chain, if any
      *
@@ -81,7 +81,7 @@ class Factory
 
     /**
      * Clear the default validator chain (i.e., don't inject one into new inputs)
-     * 
+     *
      * @return void
      */
     public function clearDefaultValidatorChain()
@@ -91,8 +91,8 @@ class Factory
 
     /**
      * Factory for input objects
-     * 
-     * @param  array|Traversable $inputSpecification 
+     *
+     * @param  array|Traversable $inputSpecification
      * @return InputInterface|InputFilterInterface
      */
     public function createInput($inputSpecification)
@@ -187,8 +187,8 @@ class Factory
 
     /**
      * Factory for input filters
-     * 
-     * @param  array|Traversable $inputFilterSpecification 
+     *
+     * @param  array|Traversable $inputFilterSpecification
      * @return InputFilterInterface
      */
     public function createInputFilter($inputFilterSpecification)

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Server;
+
 use Zend\Server;
 use Zend\Server\Method;
 

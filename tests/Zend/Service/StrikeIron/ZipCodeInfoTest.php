@@ -11,19 +11,6 @@
 namespace ZendTest\Service\StrikeIron;
 
 /**
- * Test helper
- */
-
-/**
- * @see \Zend\Service\StrikeIron\StrikeIron
- */
-
-/**
- * @see \Zend\Service\StrikeIron\ZipCodeInfo
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests

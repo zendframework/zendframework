@@ -34,7 +34,7 @@ class DummyRouteWithParam extends DummyRoute
     {
         return new RouteMatch(array('foo' => 'bar'), -4);
     }
-    
+
     /**
      * assemble(): defined by RouteInterface interface.
      *
@@ -48,7 +48,7 @@ class DummyRouteWithParam extends DummyRoute
         if (isset($params['foo'])) {
             return $params['foo'];
         }
-        
+
         return '';
     }
 }

@@ -28,7 +28,7 @@ class SqsTest extends TestCase
      * @var int
      */
     protected $_waitPeriod = 10;
-    
+
     protected $_clientType = 'Zend\Service\Amazon\Sqs';
 
     /**
@@ -91,7 +91,8 @@ class SqsTest extends TestCase
         }
     }
 
-    public function testStoreQueueMetadata() {
+    public function testStoreQueueMetadata()
+    {
         $this->markTestSkipped('SQS does not currently support storing metadata');
     }
 

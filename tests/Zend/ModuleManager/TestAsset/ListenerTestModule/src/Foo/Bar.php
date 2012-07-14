@@ -10,8 +10,8 @@
 
 namespace Foo;
 
-use ListenerTestModule\Module,
-    Zend\ModuleManager\ModuleManager;
+use ListenerTestModule\Module;
+use Zend\ModuleManager\ModuleManager;
 
 class Bar
 {

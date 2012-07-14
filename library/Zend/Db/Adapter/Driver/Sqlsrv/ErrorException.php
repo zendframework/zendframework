@@ -22,15 +22,15 @@ class ErrorException extends BaseErrorException
 
     /**
      * Errors
-     * 
+     *
      * @var array
      */
     protected $errors = array();
 
     /**
      * Construct
-     * 
-     * @param boolean $errors 
+     *
+     * @param boolean $errors
      */
     public function __construct($errors = false)
     {

@@ -12,8 +12,8 @@ namespace ZendTest\Queue\Stomp;
 
 use Zend\Queue\Stomp\Client;
 use Zend\Queue\Stomp\Connection;
-use Zend\Queue\Stomp\Frame,
-    PHPUnit_Framework_TestCase as Testcase;
+use Zend\Queue\Stomp\Frame;
+use PHPUnit_Framework_TestCase as Testcase;
 
 /*
  * The adapter test class provides a universal test class for all of the
@@ -44,7 +44,7 @@ class ConnectionSocketOverload extends Connection
 
 class ConnectionTest extends TestCase
 {
-    var $_socket = null;
+    public $_socket = null;
 
     public function setUp()
     {

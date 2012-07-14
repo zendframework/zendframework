@@ -20,15 +20,15 @@ interface InjectApplicationEventInterface
 {
     /**
      * Compose an Event
-     * 
-     * @param  Event $event 
+     *
+     * @param  Event $event
      * @return void
      */
     public function setEvent(Event $event);
 
     /**
      * Retrieve the composed event
-     * 
+     *
      * @return Event
      */
     public function getEvent();

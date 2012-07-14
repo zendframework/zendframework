@@ -36,7 +36,7 @@ abstract class AbstractGenerator implements GeneratorInterface
 
     /**
      * Initialize internal objects
-     * 
+     *
      * @return void
      */
     abstract protected function _init();
@@ -45,7 +45,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      * Start XML element
      *
      * Method opens a new XML element with an element name and an optional value
-     * 
+     *
      * @param string $name XML tag name
      * @param string $value Optional value of the XML tag
      * @return AbstractGenerator Fluent interface
@@ -77,7 +77,7 @@ abstract class AbstractGenerator implements GeneratorInterface
 
     /**
      * Return encoding
-     * 
+     *
      * @return string
      */
     public function getEncoding()
@@ -87,8 +87,8 @@ abstract class AbstractGenerator implements GeneratorInterface
 
     /**
      * Set XML encoding
-     * 
-     * @param  string $encoding 
+     *
+     * @param  string $encoding
      * @return AbstractGenerator
      */
     public function setEncoding($encoding)
@@ -146,7 +146,7 @@ abstract class AbstractGenerator implements GeneratorInterface
 
     /**
      * End XML element
-     * 
+     *
      * @param string $name
      */
     abstract protected function _closeElement($name);

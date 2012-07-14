@@ -14,7 +14,7 @@ namespace Zend\Cache\Exception;
  * @category   Zend
  * @package    Zend_Cache
  */
-class BadMethodCallException extends \BadMethodCallException implements 
+class BadMethodCallException extends \BadMethodCallException implements
     ExceptionInterface
 {
 }

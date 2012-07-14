@@ -36,9 +36,9 @@
 
         <programlisting language="php"><![CDATA[
 // The new marketing group inherits permissions from staff
-use Zend\Acl\Acl,
-    Zend\Acl\Role\GenericRole as Role,
-    Zend\Acl\Resource\GenericResource as Resource;
+use Zend\Acl\Acl;
+use Zend\Acl\Role\GenericRole as Role;
+use Zend\Acl\Resource\GenericResource as Resource;
 
 $acl = new Acl();
     

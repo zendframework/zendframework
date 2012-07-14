@@ -10,12 +10,12 @@
 
 namespace ZendTest\View\Renderer;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Feed\Writer\Factory as FeedFactory,
-    Zend\View\Model\ModelInterface as Model,
-    Zend\View\Model\FeedModel,
-    Zend\View\Model\ViewModel,
-    Zend\View\Renderer\FeedRenderer;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Feed\Writer\Factory as FeedFactory;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Model\FeedModel;
+use Zend\View\Model\ViewModel;
+use Zend\View\Renderer\FeedRenderer;
 
 /**
  * @category   Zend

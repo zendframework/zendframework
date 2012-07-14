@@ -33,8 +33,8 @@ class Required
 
     /**
      * Receive and process the contents of an annotation
-     * 
-     * @param  array $data 
+     *
+     * @param  array $data
      * @return void
      */
     public function __construct(array $data)
@@ -55,7 +55,7 @@ class Required
 
     /**
      * Get value of required flag
-     * 
+     *
      * @return bool
      */
     public function getRequired()

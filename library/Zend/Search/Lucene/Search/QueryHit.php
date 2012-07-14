@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Search\Lucene\Search;
+
 use Zend\Search\Lucene;
 use Zend\Search\Lucene\Document;
 
@@ -36,7 +37,7 @@ class QueryHit
      * @var integer
      */
     public $id;
-    
+
     /**
      * Number of the document in the index
      * @var integer
@@ -61,7 +62,7 @@ class QueryHit
     {
         $this->_index = $index;
     }
-    
+
     /**
      * Magic method for checking the existence of a field
      *
@@ -72,7 +73,7 @@ class QueryHit
     {
         return isset($this->getDocument()->$offset);
     }
-    
+
 
     /**
      * Convenience function for getting fields from the document

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Json\Server\Smd;
+
 use Zend\Json\Server\Smd\Service;
 use Zend\Json\Server;
 
@@ -39,7 +40,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'requires a name');
         $service = new Service(null);
     }
-    
+
     public function testConstructorShouldThrowExceptionWhenNoNameSetWhenArrayProvided()
     {
         $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'requires a name');
@@ -57,7 +58,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
         $this->service->setName('0ab-?');
     }
-    
+
     public function testNameAccessorsShouldWorkWithNormalInput()
     {
         $this->assertEquals('foo', $this->service->getName());
@@ -81,7 +82,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid transport');
         $this->service->setTransport('REST');
     }
-    
+
     public function testTransportAccessorsShouldWorkUnderNormalInput()
     {
         $this->service->setTransport('POST');

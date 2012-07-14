@@ -47,9 +47,9 @@ class ExceptionHandler implements FormatterInterface
 
     /**
      * Get the type of a function
-     * 
+     *
      * @param string $type
-     * @return string 
+     * @return string
      */
     protected function getType($type)
     {

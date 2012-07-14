@@ -10,8 +10,8 @@
 
 namespace ZendTest\Acl\TestAsset\UseCase1;
 
-use Zend\Acl\Assertion\AssertionInterface,
-    Zend\Acl as ZendAcl;
+use Zend\Acl\Assertion\AssertionInterface;
+use Zend\Acl as ZendAcl;
 
 class UserIsBlogPostOwnerAssertion implements AssertionInterface
 {

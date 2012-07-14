@@ -79,4 +79,3 @@ class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Accept-Language: da;q=0.8, *;q=0.4', $acceptHeader->toString());
     }
 }
-

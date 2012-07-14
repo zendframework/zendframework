@@ -23,7 +23,7 @@ use Zend\Pdf\ObjectFactory;
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Action
  */
-abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget implements 
+abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget implements
     Countable,
     RecursiveIterator
 {
@@ -74,7 +74,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
                     $processedActions->attach($dictionary->Next);
                     $this->next[] = self::load($dictionary->Next, $processedActions);
                 }
-            } else if ($dictionary->Next instanceof InternalType\ArrayObject) {
+            } elseif ($dictionary->Next instanceof InternalType\ArrayObject) {
                 foreach ($dictionary->Next->items as $chainedActionDictionary) {
                     // Check if dictionary object is not already processed
                     if (!$processedActions->contains($chainedActionDictionary)) {
@@ -212,7 +212,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
         if (count($this->_originalNextList) != count($this->next)) {
             // If original and current children arrays have different size then children list was updated
             $childListUpdated = true;
-        } else if ( !(array_keys($this->_originalNextList) === array_keys($this->next)) ) {
+        } elseif ( !(array_keys($this->_originalNextList) === array_keys($this->next)) ) {
             // If original and current children arrays have different keys (with a glance to an order) then children list was updated
             $childListUpdated = true;
         } else {

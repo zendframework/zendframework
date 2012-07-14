@@ -10,8 +10,8 @@
 
 namespace ZendTest\Session;
 
-use Zend\Session\SessionManager,
-    Zend\Session;
+use Zend\Session\SessionManager;
+use Zend\Session;
 
 /**
  * @category   Zend
@@ -242,7 +242,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('xdebug')) {
             $this->markTestSkipped('Xdebug required for this test');
         }
-        
+
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $this->manager->start();
@@ -267,7 +267,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('xdebug')) {
             $this->markTestSkipped('Xdebug required for this test');
         }
-        
+
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $this->manager->start();
@@ -374,7 +374,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('xdebug')) {
             $this->markTestSkipped('Xdebug required for this test');
         }
-        
+
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $this->manager->start();
@@ -410,7 +410,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('xdebug')) {
             $this->markTestSkipped('Xdebug required for this test');
         }
-        
+
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $this->manager->start();
@@ -435,7 +435,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('xdebug')) {
             $this->markTestSkipped('Xdebug required for this test');
         }
-        
+
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $this->manager->start();
@@ -466,7 +466,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('xdebug')) {
             $this->markTestSkipped('Xdebug required for this test');
         }
-        
+
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $config->setRememberMeSeconds(3600);
@@ -501,7 +501,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('xdebug')) {
             $this->markTestSkipped('Xdebug required for this test');
         }
-        
+
         $config = $this->manager->getConfig();
         $config->setUseCookies(true);
         $this->manager->start();

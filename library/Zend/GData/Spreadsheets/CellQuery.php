@@ -9,6 +9,7 @@
  */
 
 namespace Zend\GData\Spreadsheets;
+
 use Zend\GData\App;
 
 /**
@@ -311,7 +312,7 @@ class CellQuery extends \Zend\GData\Query
     {
         if (is_bool($value)) {
             $this->_params['return-empty'] = ($value?'true':'false');
-        } else if ($value != null) {
+        } elseif ($value != null) {
             $this->_params['return-empty'] = $value;
         } else {
             unset($this->_params['return-empty']);

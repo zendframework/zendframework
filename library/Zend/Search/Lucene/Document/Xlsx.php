@@ -70,7 +70,7 @@ class Xlsx extends AbstractOpenXML
     {
         if (!class_exists('ZipArchive', false)) {
             throw new ExtensionNotLoadedException(
-            	'MS Office documents processing functionality requires Zip extension to be loaded'
+                'MS Office documents processing functionality requires Zip extension to be loaded'
             );
         }
 
@@ -148,7 +148,7 @@ class Xlsx extends AbstractOpenXML
                             $value = (string)$c->v;
                             if ($value == '0') {
                                 $value = false;
-                            } else if ($value == '1') {
+                            } elseif ($value == '1') {
                                 $value = true;
                             } else {
                                 $value = (bool)$c->v;
@@ -206,14 +206,12 @@ class Xlsx extends AbstractOpenXML
         }
 
         // Store meta data properties
-        foreach ($coreProperties as $key => $value)
-        {
+        foreach ($coreProperties as $key => $value) {
             $this->addField(Field::Text($key, $value, 'UTF-8'));
         }
 
         // Store title (if not present in meta data)
-        if (!isset($coreProperties['title']))
-        {
+        if (!isset($coreProperties['title'])) {
             $this->addField(Field::Text('title', $fileName, 'UTF-8'));
         }
     }
@@ -224,7 +222,8 @@ class Xlsx extends AbstractOpenXML
      * @param \SimpleXMLElement $is
      * @return string
      */
-    private function _parseRichText($is = null) {
+    private function _parseRichText($is = null)
+    {
         $value = array();
 
         if (isset($is->t)) {

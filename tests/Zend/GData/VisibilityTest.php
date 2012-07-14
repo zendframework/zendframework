@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\GData;
+
 use Zend\GData\Extension;
 
 /**
@@ -20,36 +21,42 @@ use Zend\GData\Extension;
 class VisibilityTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->visibilityText = file_get_contents(
                 'Zend/GData/_files/VisibilityElementSample1.xml',
                 true);
         $this->visibility = new Extension\Visibility();
     }
 
-    public function testEmptyVisibilityShouldHaveNoExtensionElements() {
+    public function testEmptyVisibilityShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->visibility->extensionElements));
         $this->assertTrue(count($this->visibility->extensionElements) == 0);
     }
 
-    public function testEmptyVisibilityShouldHaveNoExtensionAttributes() {
+    public function testEmptyVisibilityShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->visibility->extensionAttributes));
         $this->assertTrue(count($this->visibility->extensionAttributes) == 0);
     }
 
-    public function testSampleVisibilityShouldHaveNoExtensionElements() {
+    public function testSampleVisibilityShouldHaveNoExtensionElements()
+    {
         $this->visibility->transferFromXML($this->visibilityText);
         $this->assertTrue(is_array($this->visibility->extensionElements));
         $this->assertTrue(count($this->visibility->extensionElements) == 0);
     }
 
-    public function testSampleVisibilityShouldHaveNoExtensionAttributes() {
+    public function testSampleVisibilityShouldHaveNoExtensionAttributes()
+    {
         $this->visibility->transferFromXML($this->visibilityText);
         $this->assertTrue(is_array($this->visibility->extensionAttributes));
         $this->assertTrue(count($this->visibility->extensionAttributes) == 0);
     }
 
-    public function testNormalVisibilityShouldHaveNoExtensionElements() {
+    public function testNormalVisibilityShouldHaveNoExtensionElements()
+    {
         $this->visibility->value = "http://schemas.google.com/g/2005#event.private";
 
         $this->assertEquals("http://schemas.google.com/g/2005#event.private", $this->visibility->value);
@@ -71,7 +78,8 @@ class VisibilityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("http://schemas.google.com/g/2005#event.private", $newVisibility2->value);
     }
 
-    public function testEmptyVisibilityToAndFromStringShouldMatch() {
+    public function testEmptyVisibilityToAndFromStringShouldMatch()
+    {
         $visibilityXml = $this->visibility->saveXML();
         $newVisibility = new Extension\Visibility();
         $newVisibility->transferFromXML($visibilityXml);
@@ -79,7 +87,8 @@ class VisibilityTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($visibilityXml == $newVisibilityXml);
     }
 
-    public function testVisibilityWithValueToAndFromStringShouldMatch() {
+    public function testVisibilityWithValueToAndFromStringShouldMatch()
+    {
         $this->visibility->value = "http://schemas.google.com/g/2005#event.private";
         $visibilityXml = $this->visibility->saveXML();
         $newVisibility = new Extension\Visibility();
@@ -89,7 +98,8 @@ class VisibilityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("http://schemas.google.com/g/2005#event.private", $this->visibility->value);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->visibility->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -103,7 +113,8 @@ class VisibilityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newVisibility->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullVisibilityToAndFromString() {
+    public function testConvertFullVisibilityToAndFromString()
+    {
         $this->visibility->transferFromXML($this->visibilityText);
         $this->assertEquals("http://schemas.google.com/g/2005#event.confidential", $this->visibility->value);
     }

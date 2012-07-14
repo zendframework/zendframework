@@ -326,21 +326,24 @@ class Png extends AbstractImage
     /**
      * Image width
      */
-    public function getPixelWidth() {
-    return $this->_width;
+    public function getPixelWidth()
+    {
+        return $this->_width;
     }
 
     /**
      * Image height
      */
-    public function getPixelHeight() {
+    public function getPixelHeight()
+    {
         return $this->_height;
     }
 
     /**
      * Image properties
      */
-    public function getProperties() {
+    public function getProperties()
+    {
         return $this->_imageProperties;
     }
 }

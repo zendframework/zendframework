@@ -10,12 +10,12 @@
 
 namespace ZendTest\View;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\Request,
-    Zend\Http\Response,
-    Zend\View\Model\ViewModel,
-    Zend\View\Renderer\PhpRenderer,
-    Zend\View\ViewEvent;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\View\Model\ViewModel;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\ViewEvent;
 
 class ViewEventTest extends TestCase
 {

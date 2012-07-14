@@ -16,7 +16,7 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Plugin manager implementation for the padding adapter instances.
  *
  * Enforces that padding adapters retrieved are instances of
- * Padding\PaddingInterface. Additionally, it registers a number of default 
+ * Padding\PaddingInterface. Additionally, it registers a number of default
  * padding adapters available.
  *
  * @category   Zend
@@ -27,7 +27,7 @@ class PaddingPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of padding adapters
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -36,7 +36,7 @@ class PaddingPluginManager extends AbstractPluginManager
 
     /**
      * Do not share by default
-     * 
+     *
      * @var bool
      */
     protected $shareByDefault = false;
@@ -45,8 +45,8 @@ class PaddingPluginManager extends AbstractPluginManager
      * Validate the plugin
      *
      * Checks that the padding adaper loaded is an instance of Padding\PaddingInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

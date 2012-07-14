@@ -112,7 +112,8 @@ class ReCaptcha extends FormInput
     {
         $js =<<<EOJ
 <script type="text/javascript" language="JavaScript">
-function windowOnLoad(fn) {
+function windowOnLoad(fn)
+{
     var old = window.onload;
     window.onload = function() {
         if (old) {
@@ -121,7 +122,8 @@ function windowOnLoad(fn) {
         fn();
     };
 }
-function zendBindEvent(el, eventName, eventHandler) {
+function zendBindEvent(el, eventName, eventHandler)
+{
     if (el.addEventListener){
         el.addEventListener(eventName, eventHandler, false);
     } else if (el.attachEvent){

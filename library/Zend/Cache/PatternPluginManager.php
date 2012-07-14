@@ -16,7 +16,7 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Plugin manager implementation for cache pattern adapters
  *
  * Enforces that adatpers retrieved are instances of
- * Pattern\PatternInterface. Additionally, it registers a number of default 
+ * Pattern\PatternInterface. Additionally, it registers a number of default
  * patterns available.
  *
  * @category   Zend
@@ -26,7 +26,7 @@ class PatternPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of adapters
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -40,7 +40,7 @@ class PatternPluginManager extends AbstractPluginManager
 
     /**
      * Don't share by default
-     * 
+     *
      * @var array
      */
     protected $shareByDefault = false;
@@ -49,8 +49,8 @@ class PatternPluginManager extends AbstractPluginManager
      * Validate the plugin
      *
      * Checks that the pattern adapter loaded is an instance of Pattern\PatternInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */

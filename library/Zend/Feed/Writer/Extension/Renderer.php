@@ -22,30 +22,30 @@ interface Renderer
     /**
      * Constructor
      *
-     * @param  mixed $container 
+     * @param  mixed $container
      * @return void
      */
     public function __construct($container);
-    
+
     /**
      * Set DOMDocument and DOMElement on which to operate
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $base 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $base
      * @return void
      */
     public function setDomDocument(DOMDocument $dom, DOMElement $base);
-    
+
     /**
      * Render
-     * 
+     *
      * @return void
      */
     public function render();
-    
+
     /**
      * Retrieve container
-     * 
+     *
      * @return mixed
      */
     public function getDataContainer();

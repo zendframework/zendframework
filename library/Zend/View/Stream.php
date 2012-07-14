@@ -68,7 +68,7 @@ class Stream
         }
 
         /**
-         * Convert <?= ?> to long-form <?php echo ?> and <? ?> to <?php ?>
+         * Convert <?= ?> to long-form <?php echo ?> and <?php ?> to <?php ?>
          *
          */
         $this->_data = preg_replace('/\<\?\=/',          "<?php echo ",  $this->_data);

@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Barcode\Object;
+
 use Zend\Barcode;
 
 /**
@@ -33,15 +34,15 @@ class Code128Test extends TestCommon
     public function testChecksum()
     {
         $this->assertSame(33, $this->object->getChecksum('BarCode 1'));
-    	$this->assertSame(47, $this->object->getChecksum('CODE-128'));
+        $this->assertSame(47, $this->object->getChecksum('CODE-128'));
         $this->assertSame(32, $this->object->getChecksum('FRAMEWORK-ZEND-COM'));
     }
 
     public function testKnownBarcodeConversion()
     {
-    	$barcode = new TestAsset\Code128Test();
-    	$this->assertSame(array(104, 13, 17, 18, 19), $barcode->convertToBarcodeChars(-123));
-    	$this->assertSame(array(104, 40, 41, 99, 34, 56, 78), $barcode->convertToBarcodeChars('HI345678'));
+        $barcode = new TestAsset\Code128Test();
+        $this->assertSame(array(104, 13, 17, 18, 19), $barcode->convertToBarcodeChars(-123));
+        $this->assertSame(array(104, 40, 41, 99, 34, 56, 78), $barcode->convertToBarcodeChars('HI345678'));
     }
 
     public function testSetText()

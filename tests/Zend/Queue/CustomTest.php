@@ -9,6 +9,7 @@
  */
 
 namespace ZendTest\Queue;
+
 use Zend\Queue;
 
 /*
@@ -109,7 +110,8 @@ class CustomTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class CustomObject {
+class CustomObject
+{
     public $a;
 
     public function __construct()

@@ -148,7 +148,7 @@ class DataParser
 //        while ($this->offset < strlen($this->data)) {
 //            if (strpos("\x00\t\n\f\r ", $this->data[$this->offset]) !== false) {
 //                $this->offset++;
-//            } else if (ord($this->data[$this->offset]) == 0x25 && $skipComment) { // '%'
+//            } elseif (ord($this->data[$this->offset]) == 0x25 && $skipComment) { // '%'
 //                $this->skipComment();
 //            } else {
 //                return;
@@ -162,8 +162,7 @@ class DataParser
      */
     public function skipComment()
     {
-        while ($this->offset < strlen($this->data))
-        {
+        while ($this->offset < strlen($this->data)) {
             if (ord($this->data[$this->offset]) != 0x0A || // Line feed
                 ord($this->data[$this->offset]) != 0x0d    // Carriage return
                ) {
@@ -304,9 +303,9 @@ class DataParser
             default:
                 if (strcasecmp($nextLexeme, 'true') == 0) {
                     return ($this->_elements[] = new InternalType\BooleanObject(true));
-                } else if (strcasecmp($nextLexeme, 'false') == 0) {
+                } elseif (strcasecmp($nextLexeme, 'false') == 0) {
                     return ($this->_elements[] = new InternalType\BooleanObject(false));
-                } else if (strcasecmp($nextLexeme, 'null') == 0) {
+                } elseif (strcasecmp($nextLexeme, 'null') == 0) {
                     return ($this->_elements[] = new InternalType\NullObject());
                 }
 
@@ -582,7 +581,7 @@ class DataParser
         if ($this->data[$this->offset] == "\r" &&
             $this->data[$this->offset + 1] == "\n"    ) {
             $this->offset += 2;
-        } else if ($this->data[$this->offset] == "\n"    ) {
+        } elseif ($this->data[$this->offset] == "\n"    ) {
             $this->offset++;
         } else {
             throw new Exception\CorruptedPdfException(sprintf('PDF file syntax error. Offset - 0x%X. \'stream\' must be followed by either cr-lf sequence or lf character only.', $this->offset - strlen($nextLexeme)));

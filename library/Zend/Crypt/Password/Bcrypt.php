@@ -72,7 +72,7 @@ class Bcrypt implements PasswordInterface
     public function create($password)
     {
         if (empty($this->salt)) {
-            $salt = Math::randBytes(self::MIN_SALT_SIZE);   
+            $salt = Math::randBytes(self::MIN_SALT_SIZE);
         } else {
             $salt = $this->salt;
         }
@@ -85,7 +85,7 @@ class Bcrypt implements PasswordInterface
             $prefix = '$2y$';
         } else {
             $prefix = '$2a$';
-            // check if the password contains 8-bit character 
+            // check if the password contains 8-bit character
             if (preg_match('/[\x80-\xFF]/', $password)) {
                 throw new Exception\RuntimeException(
                         'The bcrypt implementation used by PHP can contains a security flaw using password with 8-bit character. ' .

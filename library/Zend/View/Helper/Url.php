@@ -93,13 +93,13 @@ class Url extends AbstractHelper
         }
 
         if ($reuseMatchedParams && $this->routeMatch !== null) {
-            $paramsRouteMatch = $this->routeMatch->getParams();
+            $routeMatchParams = $this->routeMatch->getParams();
 
-            if (isset($paramsRouteMatch[ModuleRouteListener::ORIGINAL_CONTROLLER])) {
-                $paramsRouteMatch['controller'] = $paramsRouteMatch[ModuleRouteListener::ORIGINAL_CONTROLLER];
+            if (isset($routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER])) {
+                $routeMatchParams['controller'] = $routeMatchParams[ModuleRouteListener::ORIGINAL_CONTROLLER];
             }
 
-            $params = array_merge($paramsRouteMatch, $params);
+            $params = array_merge($routeMatchParams, $params);
         }
 
         $options['name'] = $name;

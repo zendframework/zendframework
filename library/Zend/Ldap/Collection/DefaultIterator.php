@@ -128,7 +128,7 @@ class DefaultIterator implements \Iterator, \Countable
         if (is_callable($attributeNameTreatment)) {
             if (is_string($attributeNameTreatment) && !function_exists($attributeNameTreatment)) {
                 $this->attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
-            } else if (is_array($attributeNameTreatment)
+            } elseif (is_array($attributeNameTreatment)
                 && !method_exists($attributeNameTreatment[0], $attributeNameTreatment[1])
             ) {
                 $this->attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
@@ -265,7 +265,7 @@ class DefaultIterator implements \Iterator, \Countable
                 if ($code === Exception\LdapException::LDAP_SIZELIMIT_EXCEEDED) {
                     // we have reached the size limit enforced by the server
                     return;
-                } else if ($code > Exception\LdapException::LDAP_SUCCESS) {
+                } elseif ($code > Exception\LdapException::LDAP_SUCCESS) {
                     throw new Exception\LdapException($this->ldap, 'getting next entry (' . $msg . ')');
                 }
             }

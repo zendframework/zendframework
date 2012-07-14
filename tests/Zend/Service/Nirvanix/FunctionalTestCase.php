@@ -10,13 +10,12 @@
 
 namespace ZendTest\Service\Nirvanix;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\Client as HttpClient,
-    Zend\Http\Client\Adapter\Test as TestAdapter,
-    Zend\Service\Nirvanix\Nirvanix;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Test as TestAdapter;
+use Zend\Service\Nirvanix\Nirvanix;
 
 /**
- * @see        Zend\Service\Nirvanix\Nirvanix
  * @category   Zend
  * @package    Zend_Service_Nirvanix
  * @subpackage UnitTests
@@ -50,8 +49,8 @@ abstract class FunctionalTestCase extends TestCase
     public function makeNirvanixResponse($hash)
     {
         $xml = "<?xml version='1.0'?><Response>";
-        foreach ($hash as $k => $v) { 
-            $xml .= "<$k>$v</$k>"; 
+        foreach ($hash as $k => $v) {
+            $xml .= "<$k>$v</$k>";
         }
         $xml .= "</Response>";
 

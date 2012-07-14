@@ -36,22 +36,26 @@ class OwnerFeedTest extends \PHPUnit_Framework_TestCase
         $this->emptyOwnerFeed = new OwnerFeed();
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionElements() {
+    public function testEmptyFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->emptyOwnerFeed->extensionElements));
         $this->assertTrue(count($this->emptyOwnerFeed->extensionElements) == 0);
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionAttributes() {
+    public function testEmptyFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->emptyOwnerFeed->extensionAttributes));
         $this->assertTrue(count($this->emptyOwnerFeed->extensionAttributes) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionElements() {
+    public function testSampleFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->ownerFeed->extensionElements));
         $this->assertTrue(count($this->ownerFeed->extensionElements) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionAttributes() {
+    public function testSampleFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->ownerFeed->extensionAttributes));
         $this->assertTrue(count($this->ownerFeed->extensionAttributes) == 0);
     }

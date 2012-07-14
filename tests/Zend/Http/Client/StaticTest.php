@@ -546,7 +546,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function validMethodProvider()
+    public static function validMethodProvider()
     {
         return array(
             array('OPTIONS'),
@@ -563,7 +563,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function invalidMethodProvider()
+    public static function invalidMethodProvider()
     {
         return array(
             array('N@5TYM3T#0D'),
@@ -578,7 +578,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function invalidConfigProvider()
+    public static function invalidConfigProvider()
     {
         return array(
             array(false),

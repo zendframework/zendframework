@@ -36,7 +36,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
     protected $service;
     /**
      * The container name of the object list
-     * 
+     *
      * @var string
      */
     protected $container;

@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Search\Lucene\Analysis\Analyzer\Common\Text;
+
 use Zend\Search\Lucene\Analysis\Analyzer\Common;
 use Zend\Search\Lucene\Analysis\TokenFilter;
 

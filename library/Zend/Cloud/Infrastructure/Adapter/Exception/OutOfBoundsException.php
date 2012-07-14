@@ -16,6 +16,6 @@ use Zend\Cloud\Infrastructure\Exception;
  * @package    Zend_Cloud
  * @subpackage Infrastructure_Adapter
  */
-class OutOfBoundsException extends Exception\OutOfBoundsException implements 
+class OutOfBoundsException extends Exception\OutOfBoundsException implements
     ExceptionInterface
 {}

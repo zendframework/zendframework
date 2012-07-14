@@ -10,13 +10,13 @@
 
 namespace ZendTest\Mvc\Controller;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    stdClass,
-    Zend\EventManager\SharedEventManager,
-    Zend\Http\Request,
-    Zend\Http\Response,
-    Zend\Mvc\MvcEvent,
-    Zend\Mvc\Router\RouteMatch;
+use PHPUnit_Framework_TestCase as TestCase;
+use stdClass;
+use Zend\EventManager\SharedEventManager;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
 
 class RestfulControllerTest extends TestCase
 {

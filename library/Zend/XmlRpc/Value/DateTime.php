@@ -9,6 +9,7 @@
  */
 
 namespace Zend\XmlRpc\Value;
+
 use Zend\XmlRpc\Exception;
 
 /**

@@ -14,8 +14,6 @@ use Zend\XmlRpc\Request;
 use ZendTest\AllTests\StreamWrapper\PHPInput;
 
 /**
- * Test case for Zend\XmlRpc\Request\Http
- *
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage UnitTests

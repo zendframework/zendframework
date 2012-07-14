@@ -10,9 +10,9 @@
 
 namespace ZendTest\Db\Sql\Predicate;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Db\Sql\Predicate\IsNull,
-    Zend\Db\Sql\Predicate\Predicate;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Db\Sql\Predicate\IsNull;
+use Zend\Db\Sql\Predicate\Predicate;
 
 class PredicateTest extends TestCase
 {
@@ -179,7 +179,7 @@ class PredicateTest extends TestCase
 
         $this->assertContains('%s = %s', $parts[5]);
         $this->assertContains(array('baz.bat', 'foo'), $parts[5]);
-        
+
         $this->assertEquals(')', $parts[6]);
     }
 }

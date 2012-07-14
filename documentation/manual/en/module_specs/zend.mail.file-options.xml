@@ -24,8 +24,8 @@
             <title>File Transport Usage</title>
 
             <programlisting language="php"><![CDATA[
-use Zend\Mail\Transport\File as FileTransport,
-    Zend\Mail\Transport\FileOptions;
+use Zend\Mail\Transport\File as FileTransport;
+use Zend\Mail\Transport\FileOptions;
 
 // Setup SMTP transport using LOGIN authentication
 $transport = new FileTransport();

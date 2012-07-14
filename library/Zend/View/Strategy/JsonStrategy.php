@@ -99,12 +99,15 @@ class JsonStrategy implements ListenerAggregateInterface
         $headers = $request->getHeaders();
         if ($headers->has('accept')) {
             $accept  = $headers->get('Accept');
-            if ($accept->hasMediaType('application/json')) {
+
+            $match = $accept->match('application/json, application/javascript');
+
+            if ($match && $match->getFormat() == 'json') {
                 // application/json Accept header found
                 return $this->renderer;
             }
 
-            if ($accept->hasMediaType('application/javascript')) {
+            if ($match) {
                 // application/javascript Accept header found
                 if (false != ($callback = $request->getQuery()->get('callback'))) {
                     $this->renderer->setJsonpCallback($callback);

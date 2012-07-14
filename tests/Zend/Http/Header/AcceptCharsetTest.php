@@ -41,7 +41,7 @@ class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
         $acceptCharsetHeader->addCharset('iso-8859-5', 0.8)
                             ->addCharset('unicode-1-1', 1);
 
-        $this->assertEquals('Accept-Charset: iso-8859-5;q=0.8,unicode-1-1', $acceptCharsetHeader->toString());
+        $this->assertEquals('Accept-Charset: iso-8859-5;q=0.8, unicode-1-1', $acceptCharsetHeader->toString());
     }
 
     /** Implmentation specific tests here */
@@ -64,9 +64,8 @@ class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
 
         $test = array();
         foreach($header->getPrioritized() as $type) {
-            $test[] = $type;
+            $this->assertEquals(array_shift($expected), $type->getCharset());
         }
-        $this->assertEquals($expected, $test);
     }
 
     public function testWildcharCharset()
@@ -77,7 +76,7 @@ class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($acceptHeader->hasCharset('iso-8859-5'));
         $this->assertTrue($acceptHeader->hasCharset('unicode-1-1'));
-        $this->assertEquals('Accept-Charset: iso-8859-5;q=0.8,*;q=0.4', $acceptHeader->toString());
+        $this->assertEquals('Accept-Charset: iso-8859-5;q=0.8, *;q=0.4', $acceptHeader->toString());
     }
 }
 

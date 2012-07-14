@@ -9,6 +9,8 @@
  */
 
 namespace Zend\Http\Header;
+use Zend\Http\Header\Accept\FieldValuePart;
+
 
 /**
  * Accept Header
@@ -49,9 +51,9 @@ class Accept extends AbstractAccept
      * @param  int $level
      * @return Accept
      */
-    public function addMediaType($type, $priority = 1, $level = null)
+    public function addMediaType($type, $priority = 1, array $params = array())
     {
-        return $this->addType($type, $priority, $level);
+        return $this->addType($type, $priority, $params);
     }
 
     /**
@@ -63,5 +65,55 @@ class Accept extends AbstractAccept
     public function hasMediaType($type)
     {
         return $this->hasType($type);
+    }
+
+    /**
+     * Parse the keys contained in the header line
+     *
+     * @param string mediaType
+     * @return \Zend\Http\Header\Accept\FieldValuePart\CharsetFieldValuePart
+     * @see \Zend\Http\Header\AbstractAccept::parseFieldValuePart()
+     */
+    protected function parseFieldValuePart($fieldValuePart)
+    {
+        $raw = $fieldValuePart;
+        if ($pos = strpos($fieldValuePart, '/')) {
+            $type = trim(substr($fieldValuePart, 0, $pos));
+        } else {
+            $type = trim(substr($fieldValuePart, 0));
+        }
+
+        $params = $this->getParametersFromFieldValuePart($fieldValuePart);
+
+        if ($pos = strpos($fieldValuePart, ';')) {
+            $fieldValuePart = trim(substr($fieldValuePart, 0, $pos));
+        }
+
+        if ($pos = strpos($fieldValuePart, '/')) {
+            $subtypeWhole = $format = $subtype = trim(substr($fieldValuePart, strpos($fieldValuePart, '/')+1));
+        } else {
+            $subtypeWhole = '';
+            $format = '*';
+            $subtype = '*';
+        }
+
+        $pos = strpos($subtype, '+');
+        if (false !== $pos) {
+            $format = trim(substr($subtype, $pos+1));
+            $subtype = trim(substr($subtype, 0, $pos));
+        }
+
+        $aggregated = array(
+                'typeString' => trim($fieldValuePart),
+                'type'       => $type,
+                'subtype'    => $subtype,
+                'subtypeRaw' => $subtypeWhole,
+                'format'     => $format,
+                'priority'   => isset($params['q']) ? $params['q'] : 1,
+                'params'     => $params,
+                'raw'        => trim($raw)
+        );
+
+        return new FieldValuePart\AcceptFieldValuePart((object) $aggregated);
     }
 }

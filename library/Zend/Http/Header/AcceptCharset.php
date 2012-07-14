@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Http\Header;
+use Zend\Http\Header\Accept\FieldValuePart;
 
 /**
  * Accept Charset Header
@@ -62,5 +63,19 @@ class AcceptCharset extends AbstractAccept
     public function hasCharset($type)
     {
         return $this->hasType($type);
+    }
+
+    /**
+     * Parse the keys contained in the header line
+     *
+     * @param string mediaType
+     * @return \Zend\Http\Header\Accept\FieldValuePart\CharsetFieldValuePart
+     * @see \Zend\Http\Header\AbstractAccept::parseFieldValuePart()
+     */
+    protected function parseFieldValuePart($fieldValuePart)
+    {
+        $internalValues = parent::parseFieldValuePart($fieldValuePart);
+
+        return new FieldValuePart\CharsetFieldValuePart($internalValues);
     }
 }

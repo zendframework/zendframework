@@ -126,7 +126,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             'Accept-language' => 'en,de,*',
         ));
 
-        $this->assertEquals($this->_client->getHeader('Accept-encoding'), 'gzip,deflate', 'Returned value of header is not as expected');
+        $this->assertEquals($this->_client->getHeader('Accept-encoding'), 'gzip, deflate', 'Returned value of header is not as expected');
         $this->assertEquals($this->_client->getHeader('X-Fake-Header'), null, 'Non-existing header should not return a value');
     }
 

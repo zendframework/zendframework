@@ -9,6 +9,7 @@
  */
 
 namespace Zend\Http\Header;
+use Zend\Http\Header\Accept\FieldValuePart;
 
 /**
  * Accept Encoding Header
@@ -64,4 +65,19 @@ class AcceptEncoding extends AbstractAccept
     {
         return $this->hasType($type);
     }
+
+    /**
+     * Parse the keys contained in the header line
+     *
+     * @param string mediaType
+     * @return \Zend\Http\Header\Accept\FieldValuePart\EncodingFieldValuePart
+     * @see \Zend\Http\Header\AbstractAccept::parseFieldValuePart()
+     */
+    protected function parseFieldValuePart($fieldValuePart)
+    {
+        $internalValues = parent::parseFieldValuePart($fieldValuePart);
+
+        return new FieldValuePart\EncodingFieldValuePart($internalValues);
+    }
 }
+

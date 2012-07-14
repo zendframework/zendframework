@@ -100,12 +100,12 @@ class FeedStrategy implements ListenerAggregateInterface
         $headers = $request->getHeaders();
         if ($headers->has('accept')) {
             $accept  = $headers->get('accept');
-            if ($accept->match('application/rss+xml')) {
+            if ($accept->hasMediaType('application/rss+xml')) {
                 $this->renderer->setFeedType('rss');
                 return $this->renderer;
             }
 
-            if ($accept->match('application/atom+xml')) {
+            if ($accept->hasMediaType('application/atom+xml')) {
                 $this->renderer->setFeedType('atom');
                 return $this->renderer;
             }

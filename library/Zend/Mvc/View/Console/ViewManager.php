@@ -82,6 +82,7 @@ class ViewManager implements ListenerAggregateInterface
     protected $rendererStrategy;
     protected $resolver;
     protected $routeNotFoundStrategy;
+    protected $event;
     protected $view;
     protected $viewModel;
     /**@-*/
@@ -132,8 +133,8 @@ class ViewManager implements ListenerAggregateInterface
         $this->services = $services;
         $this->event    = $event;
 
-        $routeNotFoundStrategy   = $this->getRouteNotFoundStrategy();
-        $exceptionStrategy       = $this->getExceptionStrategy();
+//        $routeNotFoundStrategy   = $this->getRouteNotFoundStrategy();
+//        $exceptionStrategy       = $this->getExceptionStrategy();
         $mvcRenderingStrategy    = $this->getMvcRenderingStrategy();
         $createViewModelListener = new CreateViewModelListener();
 //        $injectTemplateListener  = new InjectTemplateListener();
@@ -142,152 +143,16 @@ class ViewManager implements ListenerAggregateInterface
         $this->registerMvcRenderingStrategies($events);
         $this->registerViewStrategies();
 
-        $events->attach($routeNotFoundStrategy);
-        $events->attach($exceptionStrategy);
+//        $events->attach($routeNotFoundStrategy);
+//        $events->attach($exceptionStrategy);
         $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
         $events->attach($mvcRenderingStrategy);
 
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);
-        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($routeNotFoundStrategy, 'prepareNotFoundViewModel'), -90);
+        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromString'), -80);
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromNull'), -80);
-        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($injectTemplateListener, 'injectTemplate'), -90);
+//        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($routeNotFoundStrategy, 'prepareNotFoundViewModel'), -90);
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($injectViewModelListener, 'injectViewModel'), -100);
-    }
-
-    /**
-     * Instantiates and configures the renderer's helper manager
-     *
-     * @return ViewHelperManager
-     */
-    public function getHelperManager()
-    {
-        if ($this->helperManager) {
-            return $this->helperManager;
-        }
-
-        return $this->helperManager = $this->services->get('ViewHelperManager');
-    }
-
-    /**
-     * Instantiates and configures the renderer's resolver
-     *
-     * @return ViewAggregateResolver
-     */
-    public function getResolver()
-    {
-        if ($this->resolver) {
-            return $this->resolver;
-        }
-
-        $map = array();
-        if (isset($this->config['template_map'])) {
-            $map = $this->config['template_map'];
-        }
-        $templateMapResolver = new ViewResolver\TemplateMapResolver($map);
-
-        $stack = array();
-        if (isset($this->config['template_path_stack'])) {
-            $stack = $this->config['template_path_stack'];
-        }
-        $templatePathStack = new ViewResolver\TemplatePathStack();
-        $templatePathStack->addPaths($stack);
-
-        $this->resolver = new ViewResolver\AggregateResolver();
-        $this->resolver->attach($templateMapResolver);
-        $this->resolver->attach($templatePathStack);
-
-        $this->services->setService('ViewTemplateMapResolver', $templateMapResolver);
-        $this->services->setService('ViewTemplatePathStack', $templatePathStack);
-        $this->services->setService('ViewResolver', $this->resolver);
-
-        $this->services->setAlias('Zend\View\Resolver\TemplateMapResolver', 'ViewTemplateMapResolver');
-        $this->services->setAlias('Zend\View\Resolver\TemplatePathStack', 'ViewTemplatePathStack');
-        $this->services->setAlias('Zend\View\Resolver\AggregateResolver', 'ViewResolver');
-        $this->services->setAlias('Zend\View\Resolver\ResolverInterface', 'ViewResolver');
-
-        return $this->resolver;
-    }
-
-    /**
-     * Instantiates and configures the renderer
-     *
-     * @return ViewPhpRenderer
-     */
-    public function getRenderer()
-    {
-        if ($this->renderer) {
-            return $this->renderer;
-        }
-
-        $this->renderer = new ViewPhpRenderer;
-        $this->renderer->setHelperPluginManager($this->getHelpermanager());
-        $this->renderer->setResolver($this->getResolver());
-
-        $model       = $this->getViewModel();
-        $modelHelper = $this->renderer->plugin('view_model');
-        $modelHelper->setRoot($model);
-
-        $this->services->setService('ViewRenderer', $this->renderer);
-        $this->services->setAlias('Zend\View\Renderer\PhpRenderer', 'ViewRenderer');
-        $this->services->setAlias('Zend\View\Renderer\RendererInterface', 'ViewRenderer');
-
-        return $this->renderer;
-    }
-
-    /**
-     * Instantiates and configures the renderer strategy for the view
-     *
-     * @return PhpRendererStrategy
-     */
-    public function getRendererStrategy()
-    {
-        if ($this->rendererStrategy) {
-            return $this->rendererStrategy;
-        }
-
-        $this->rendererStrategy = new PhpRendererStrategy(
-            $this->getRenderer()
-        );
-
-        $this->services->setService('ViewPhpRendererStrategy', $this->rendererStrategy);
-        $this->services->setAlias('Zend\View\Strategy\PhpRendererStrategy', 'ViewPhpRendererStrategy');
-
-        return $this->rendererStrategy;
-    }
-
-    /**
-     * Instantiates and configures the view
-     *
-     * @return View
-     */
-    public function getView()
-    {
-        if ($this->view) {
-            return $this->view;
-        }
-
-        $this->view = new View();
-        $this->view->setEventManager($this->services->get('EventManager'));
-        $this->view->getEventManager()->attach($this->getRendererStrategy());
-
-        $this->services->setService('View', $this->view);
-        $this->services->setAlias('Zend\View\View', 'View');
-
-        return $this->view;
-    }
-
-    /**
-     * Retrieves the layout template name from the configuration
-     *
-     * @return string
-     */
-    public function getLayoutTemplate()
-    {
-        $layout = 'layout/layout';
-        if (isset($this->config['layout'])) {
-            $layout = $this->config['layout'];
-        }
-        return $layout;
     }
 
     /**
@@ -302,10 +167,10 @@ class ViewManager implements ListenerAggregateInterface
         }
 
         $this->mvcRenderingStrategy = new DefaultRenderingStrategy($this->getView());
-        $this->mvcRenderingStrategy->setLayoutTemplate($this->getLayoutTemplate());
 
         $this->services->setService('DefaultRenderingStrategy', $this->mvcRenderingStrategy);
         $this->services->setAlias('Zend\Mvc\View\DefaultRenderingStrategy', 'DefaultRenderingStrategy');
+        $this->services->setAlias('Zend\Mvc\View\Console\DefaultRenderingStrategy', 'DefaultRenderingStrategy');
 
         return $this->mvcRenderingStrategy;
     }

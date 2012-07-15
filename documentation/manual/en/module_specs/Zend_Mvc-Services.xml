@@ -56,7 +56,7 @@
                   <listitem>
                       <para>
                           <classname>VeiwManager</classname>, mapping to
-                          <classname>Zend\Mvc\View\ViewManager</classname>.
+                          <classname>Zend\Mvc\View\Http\ViewManager</classname>.
                       </para>
                   </listitem>
               </itemizedlist>
@@ -338,7 +338,7 @@
       <para>
           The View layer within <classname>Zend\Mvc</classname> consists of a large number of
           collaborators and event listeners. As such,
-          <classname>Zend\Mvc\View\ViewManager</classname> was created to handle creation of the
+          <classname>Zend\Mvc\View\Http\ViewManager</classname> was created to handle creation of the
           various objects, as well as wiring them together and establishing event listeners.
       </para>
 
@@ -451,7 +451,7 @@
             <listitem>
                 <para>
                     <classname>DefaultRenderingStrategy</classname>, representing and aliased to
-                    <classname>Zend\Mvc\View\DefaultRenderingStrategy</classname>. If the
+                    <classname>Zend\Mvc\View\Http\DefaultRenderingStrategy</classname>. If the
                     <varname>layout</varname> key is prsent, it is used to seed the strategy's
                     layout template. It is seeded with the <classname>View</classname> service.
                 </para>
@@ -460,7 +460,7 @@
             <listitem>
                 <para>
                     <classname>ExceptionStrategy</classname>, representing and aliased to
-                    <classname>Zend\Mvc\View\ExceptionStrategy</classname>. If the
+                    <classname>Zend\Mvc\View\Http\ExceptionStrategy</classname>. If the
                     <varname>dislay_exceptions</varname> or <varname>exception_template</varname>
                     keys are present, they are usd to configure the strategy.
                 </para>
@@ -469,7 +469,7 @@
             <listitem>
                 <para>
                     <classname>RouteNotFoundStrategy</classname>, representing and aliased to
-                    <classname>Zend\Mvc\View\RouteNotFoundStrategy</classname> and
+                    <classname>Zend\Mvc\View\Http\RouteNotFoundStrategy</classname> and
                     <classname>404Stategy</classname>. If the
                     <varname>display_not_found_reason</varname> or
                     <varname>not_found_template</varname> keys are present, they are used to
@@ -490,9 +490,9 @@
       <para>
           The <classname>ViewManager</classname> also creates several other listeners, but does not
           expose them as services; these include
-          <classname>Zend\Mvc\View\CreateViewModelListener</classname>,
-          <classname>Zend\Mvc\View\InjectTemplateListener</classname>, and
-          <classname>Zend\Mvc\View\InjectViewModelListener</classname>. These, along with
+          <classname>Zend\Mvc\View\Http\CreateViewModelListener</classname>,
+          <classname>Zend\Mvc\View\Http\InjectTemplateListener</classname>, and
+          <classname>Zend\Mvc\View\Http\InjectViewModelListener</classname>. These, along with
           <classname>RouteNotFoundStrategy</classname>,
           <classname>ExceptionStrategy</classname>, and
           <classname>DefaultRenderingStrategy</classname> are attached as listeners either to the

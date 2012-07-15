@@ -24,15 +24,13 @@
  */
 namespace Zend\Mvc\Router\Console;
 
-use Traversable,
-    Zend\Stdlib\IteratorToArray,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Mvc\Router\Exception,
-    Zend\Console\Request as ConsoleRequest,
-    Zend\Filter\FilterChain,
-    Zend\Validator\ValidatorChain,
-    Zend\Mvc\Exception\InvalidArgumentException
-    ;
+use Traversable;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Mvc\Router\Exception;
+use Zend\Console\Request as ConsoleRequest;
+use Zend\Filter\FilterChain;
+use Zend\Validator\ValidatorChain;
+use Zend\Mvc\Exception\InvalidArgumentException;
 
 /**
  * Segment route.
@@ -43,7 +41,7 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Catchall implements Route
+class Catchall implements RouteInterface
 {
 
     /**
@@ -87,17 +85,11 @@ class Catchall implements Route
     /**
      * Create a new simple console route.
      *
-     * @param  string                                   $route
-     * @param  array                                    $constraints
      * @param  array                                    $defaults
-     * @param  array                                    $aliases
-     * @param  null|array|Traversable|FilterChain       $filters
-     * @param  null|array|Traversable|ValidatorChain    $validators
-     * @return \Zend\Mvc\Router\Console\Simple
+     * @return Catchall
      */
-    public function __construct(
-        array $defaults = array()
-    ){
+    public function __construct(array $defaults = array())
+    {
         $this->defaults = $defaults;
     }
 
@@ -118,10 +110,9 @@ class Catchall implements Route
      *
      * @see     Route::match()
      * @param   Request             $request
-     * @param   null|int            $pathOffset
      * @return  RouteMatch
      */
-    public function match(Request $request, $pathOffset = null)
+    public function match(Request $request)
     {
         if (!$request instanceof ConsoleRequest) {
             return null;

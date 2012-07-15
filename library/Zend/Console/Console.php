@@ -75,7 +75,6 @@ abstract class Console
                  */
                 static::$instance->setCharset(new $className());
             }
-
         }
 
         return static::$instance;
@@ -113,18 +112,28 @@ abstract class Console
 
     /**
      * @static
-     * @return \Zend\Console\Adapter
+     * @return \Zend\Console\Adapter|null
      */
-    static protected function detectBestAdapter(){
+    static public function detectBestAdapter(){
+        // Check if we are in a console environment
+        if(!static::isConsole()){
+            return null;
+        }
+
+        // Check if we're on windows
         if(static::isWindows()){
             if(static::isAnsicon()){
-                return __NAMESPACE__.'\Adapter\WindowsAnsicon';
+                $className = __NAMESPACE__.'\Adapter\WindowsAnsicon';
             }else{
-                return __NAMESPACE__.'\Adapter\Windows';
+                $className = __NAMESPACE__.'\Adapter\Windows';
             }
-        }else{
-            return __NAMESPACE__.'\Adapter\Posix';
+
+            return new $className();
         }
+
+        // Default is a Posix console
+        $className = __NAMESPACE__.'\Adapter\Posix';
+        return new $className();
     }
 
     /**

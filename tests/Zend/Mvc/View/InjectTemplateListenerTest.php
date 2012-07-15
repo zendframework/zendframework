@@ -14,7 +14,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\EventManager\EventManager;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
-use Zend\Mvc\View\InjectTemplateListener;
+use Zend\Mvc\View\Http\InjectTemplateListener;
 use Zend\View\Model\ViewModel;
 
 /**

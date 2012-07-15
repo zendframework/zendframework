@@ -23,7 +23,7 @@
  */
 namespace Zend\Mvc\Router\Console;
 
-use Zend\Mvc\Router\Route as BaseRoute;
+use Zend\Mvc\Router\RouteInterface as BaseRoute;
 
 /**
  * Tree specific route interface.
@@ -32,7 +32,7 @@ use Zend\Mvc\Router\Route as BaseRoute;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Route extends BaseRoute
+interface RouteInterface extends BaseRoute
 {
     /**
      * Get a list of parameters used while assembling.

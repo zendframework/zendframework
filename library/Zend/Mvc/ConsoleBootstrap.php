@@ -82,7 +82,7 @@ class ConsoleBootstrap extends Bootstrap implements Bootstrapper
                     'factory'
                 ),
             ),
-            'Zend\Mvc\View\DefaultRenderingStrategy' => array(
+            'Zend\Mvc\View\Http\DefaultRenderingStrategy' => array(
                 'setLayoutTemplate' => array(
                     'layoutTemplate' => array(
                         'required' => false,
@@ -90,7 +90,7 @@ class ConsoleBootstrap extends Bootstrap implements Bootstrapper
                     ),
                 ),
             ),
-            'Zend\Mvc\View\ExceptionStrategy' => array(
+            'Zend\Mvc\View\Http\ExceptionStrategy' => array(
                 'setDisplayExceptions' => array(
                     'displayExceptions' => array(
                         'required' => false,
@@ -104,7 +104,7 @@ class ConsoleBootstrap extends Bootstrap implements Bootstrapper
                     ),
                 ),
             ),
-            'Zend\Mvc\View\RouteNotFoundStrategy' => array(
+            'Zend\Mvc\View\Http\RouteNotFoundStrategy' => array(
                 'setDisplayNotFoundReason' => array(
                     'displayNotFoundReason' => array(
                         'required' => false,
@@ -118,7 +118,7 @@ class ConsoleBootstrap extends Bootstrap implements Bootstrapper
                     ),
                 ),
             ),
-            'Zend\Mvc\View\InjectRoutematchParamsListener' => array(
+            'Zend\Mvc\View\Http\InjectRoutematchParamsListener' => array(
                 'setOverwrite' => array(
                     'overwrite' => array(
                         'required' => false,
@@ -182,24 +182,24 @@ class ConsoleBootstrap extends Bootstrap implements Bootstrapper
         $staticEvents        = StaticEventManager::getInstance();
         $view                = $locator->get('Zend\View\View');
         $consoleStrategy     = $locator->get('Zend\View\Strategy\ConsoleStrategy');
-        $defaultViewStrategy = $locator->get('Zend\Mvc\View\DefaultRenderingStrategy');
+        $defaultViewStrategy = $locator->get('Zend\Mvc\View\Http\DefaultRenderingStrategy');
         $view->events()->attachAggregate($consoleStrategy);
         $events->attachAggregate($defaultViewStrategy);
 
         // Error strategies
-//        $noRouteStrategy   = $locator->get('Zend\Mvc\View\RouteNotFoundStrategy');
-//        $exceptionStrategy = $locator->get('Zend\Mvc\View\ExceptionStrategy');
+//        $noRouteStrategy   = $locator->get('Zend\Mvc\View\Http\RouteNotFoundStrategy');
+//        $exceptionStrategy = $locator->get('Zend\Mvc\View\Http\ExceptionStrategy');
 //        $events->attachAggregate($noRouteStrategy);
 //        $events->attachAggregate($exceptionStrategy);
 
         // Param inject strategy
-        $injectStrategy = $locator->get('Zend\Mvc\View\InjectRoutematchParamsListener');
+        $injectStrategy = $locator->get('Zend\Mvc\View\Http\InjectRoutematchParamsListener');
         $events->attachAggregate($injectStrategy);
 
         // Template/ViewModel listeners
-        $createViewModelListener = $locator->get('Zend\Mvc\View\CreateViewModelListener');
-//        $injectTemplateListener  = $locator->get('Zend\Mvc\View\InjectTemplateListener');
-        $injectViewModelListener = $locator->get('Zend\Mvc\View\InjectViewModelListener');
+        $createViewModelListener = $locator->get('Zend\Mvc\View\Http\CreateViewModelListener');
+//        $injectTemplateListener  = $locator->get('Zend\Mvc\View\Http\InjectTemplateListener');
+        $injectViewModelListener = $locator->get('Zend\Mvc\View\Http\InjectViewModelListener');
         $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($createViewModelListener, 'createViewModelFromNull'), -80);
         $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($createViewModelListener, 'createViewModelFromString'), -80);
 //        $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($injectTemplateListener, 'injectTemplate'), -90);

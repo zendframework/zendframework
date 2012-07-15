@@ -89,7 +89,7 @@
 
     <listitem>
       <para>
-        <classname>Zend\Mvc\View</classname>, which provides the default
+        <classname>Zend\Mvc\View\Http</classname>, which provides the default
         wiring for renderer selection, view script resolution, helper
         registration, and more; additionally, it provides a number of
         listeners that tie into the MVC workflow to provide features such as
@@ -433,7 +433,7 @@ $application = new Application($config, $serviceManager);
         <listitem>
             <para>
                 Attaches the <classname>ViewManager</classname> listener
-                (<classname>Zend\Mvc\View\ViewManager</classname>).
+                (<classname>Zend\Mvc\View\Http\ViewManager</classname>).
             </para>
         </listitem>
 

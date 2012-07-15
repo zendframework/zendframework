@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mvc\View;
+namespace Zend\Mvc\View\Http;
 
 use Zend\EventManager\EventCollection,
     Zend\EventManager\ListenerAggregate,

@@ -2,21 +2,20 @@
 
 namespace Zend\Console;
 
-use Zend\Stdlib\RequestDescription,
-    Zend\Stdlib\Message,
-    Zend\Stdlib\ParametersDescription,
-    Zend\Stdlib\Parameters
-;
+use Zend\Stdlib\Message;
+use Zend\Stdlib\Parameters;
+use Zend\Stdlib\ParametersInterface;
+use Zend\Stdlib\RequestInterface;
 
-class Request extends Message implements RequestDescription
+class Request extends Message implements RequestInterface
 {
     /**
-     * @var \Zend\Stdlib\ParametersDescription
+     * @var \Zend\Stdlib\Parameters
      */
     protected $params = null;
 
     /**
-     * @var \Zend\Stdlib\ParametersDescription
+     * @var \Zend\Stdlib\Parameters
      */
     protected $envParams = null;
 
@@ -68,10 +67,10 @@ class Request extends Message implements RequestDescription
     /**
      * Exchange parameters object
      *
-     * @param \Zend\Stdlib\ParametersDescription $params
+     * @param \Zend\Stdlib\Parameters $params
      * @return Request
      */
-    public function setParams(ParametersDescription $params)
+    public function setParams(Parameters $params)
     {
         $this->params = $params;
         $this->setContent($params);
@@ -81,7 +80,7 @@ class Request extends Message implements RequestDescription
     /**
      * Return the container responsible for parameters
      *
-     * @return \Zend\Stdlib\ParametersDescription
+     * @return \Zend\Stdlib\Parameters
      */
     public function getParams()
     {
@@ -108,7 +107,7 @@ class Request extends Message implements RequestDescription
     /**
      * Return the container responsible for parameters
      *
-     * @return \Zend\Stdlib\ParametersDescription
+     * @return \Zend\Stdlib\Parameters
      */
     public function params()
     {
@@ -123,10 +122,10 @@ class Request extends Message implements RequestDescription
      * Provide an alternate Parameter Container implementation for env parameters in this object, (this is NOT the
      * primary API for value setting, for that see env())
      *
-     * @param \Zend\Stdlib\ParametersDescription $env
+     * @param \Zend\Stdlib\Parameters $env
      * @return \Zend\Console\Request
      */
-    public function setEnv(ParametersDescription $env)
+    public function setEnv(Parameters $env)
     {
         $this->envParams = $env;
         return $this;
@@ -135,7 +134,7 @@ class Request extends Message implements RequestDescription
     /**
      * Return the parameter container responsible for env parameters
      *
-     * @return \Zend\Stdlib\ParametersDescription
+     * @return \Zend\Stdlib\Parameters
      */
     public function env()
     {

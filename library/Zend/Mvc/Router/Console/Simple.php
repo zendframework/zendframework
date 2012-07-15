@@ -25,8 +25,8 @@
 namespace Zend\Mvc\Router\Console;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray,
-    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\ArrayUtils,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Mvc\Router\Exception,
     Zend\Console\Request as ConsoleRequest,
     Zend\Filter\FilterChain,
@@ -43,7 +43,7 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Simple implements Route
+class Simple implements RouteInterface
 {
     /**
      * Parts of the route.
@@ -92,6 +92,7 @@ class Simple implements Route
      * @param  array                                    $aliases
      * @param  null|array|Traversable|FilterChain       $filters
      * @param  null|array|Traversable|ValidatorChain    $validators
+     * @throws \Zend\Mvc\Exception\InvalidArgumentException
      * @return \Zend\Mvc\Router\Console\Simple
      */
     public function __construct(
@@ -111,7 +112,7 @@ class Simple implements Route
                 $this->filters = $filters;
             }elseif($filters instanceof Traversable){
                 $this->filters = new FilterChain(array(
-                    'filters' => IteratorToArray::convert($filters, false) 
+                    'filters' => ArrayUtils::iteratorToArray($filters, false) 
                 ));
             }elseif(is_array($filters)){
                 $this->filters = new FilterChain(array(
@@ -143,12 +144,13 @@ class Simple implements Route
      *
      * @see    Route::factory()
      * @param  array|Traversable $options
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
      * @return Simple
      */
     public static function factory($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
@@ -491,7 +493,7 @@ class Simple implements Route
         }
 
         /** @var $request ConsoleRequest */
-        /** @var $params \Zend\Stdlib\ParametersDescription */
+        /** @var $params \Zend\Stdlib\Parameters */
         $params = $request->getParams()->toArray();
         $matches = array();
 

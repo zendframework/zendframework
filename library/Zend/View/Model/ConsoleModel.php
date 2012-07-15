@@ -41,27 +41,20 @@ class ConsoleModel extends ViewModel
     protected $captureTo = null;
 
     /**
-     * Console output should be terminal.
+     * Console output should always be terminal.
      * 
      * @var bool
      */
     protected $terminate = true;
 
     /**
-     * The error level to return after the application ends.
-     *
-     * @var int
-     */
-    protected $errorLevel = 0;
-
-    /**
-     * Set error level to return from the application.
+     * Set error level to return after the application ends.
      *
      * @param int $errorLevel
      */
     public function setErrorLevel($errorLevel)
     {
-        $this->errorLevel = $errorLevel;
+        $this->options['errorLevel'] = $errorLevel;
     }
 
     /**
@@ -69,6 +62,8 @@ class ConsoleModel extends ViewModel
      */
     public function getErrorLevel()
     {
-        return $this->errorLevel;
+        if(array_key_exists('errorLevel', $this->options)){
+            return $this->options['errorLevel'];
+        }
     }
 }

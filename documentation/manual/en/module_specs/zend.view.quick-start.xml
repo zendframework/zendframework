@@ -84,7 +84,7 @@
         <para>
             Additionally, Zend Framework provides integration with the MVC via a
             number of event listeners in the
-            <classname linkend="zend.mvc.view">Zend\Mvc\View</classname> namespace.
+            <classname linkend="zend.mvc.view">Zend\Mvc\View\Http</classname> namespace.
         </para>
     </section>
 
@@ -182,7 +182,7 @@ return array(
             // template name "layout" for the site layout. Let's tell it to use
             // "site/layout" (which we mapped via the TemplateMapResolver,
             // above).
-            'Zend\Mvc\View\DefaultRenderingStrategy' => array(
+            'Zend\Mvc\View\Http\DefaultRenderingStrategy' => array(
                 'parameters' => array(
                     'layoutTemplate' => 'site/layout',
                 ),
@@ -197,7 +197,7 @@ return array(
             //
             // Additionally, we'll tell it that we want to display an exception
             // stack trace; you'll likely want to disable this by default.
-            'Zend\Mvc\View\ExceptionStrategy' => array(
+            'Zend\Mvc\View\Http\ExceptionStrategy' => array(
                 'parameters' => array(
                     'displayExceptions' => true,
                     'exceptionTemplate' => 'site/error',
@@ -221,7 +221,7 @@ return array(
             // Additionally, a number of 404 situations derive from exceptions
             // raised during routing or dispatching. You can opt-in to display
             // these.
-            'Zend\Mvc\View\RouteNotFoundStrategy' => array(
+            'Zend\Mvc\View\Http\RouteNotFoundStrategy' => array(
                 'parameters' => array(
                     'displayExceptions'     => true,
                     'displayNotFoundReason' => true,
@@ -528,7 +528,7 @@ return array(
             // template name "layout" for the site layout. Let's tell it to use
             // "site/layout" (which we mapped via the TemplateMapResolver,
             // above).
-            'Zend\Mvc\View\DefaultRenderingStrategy' => array(
+            'Zend\Mvc\View\Http\DefaultRenderingStrategy' => array(
                 'parameters' => array(
                     'baseTemplate' => 'site/layout',
                 ),
@@ -540,7 +540,7 @@ return array(
 
             <para>
                 A listener on the controllers,
-                <classname>Zend\Mvc\View\InjectViewModelListener</classname>,
+                <classname>Zend\Mvc\View\Http\InjectViewModelListener</classname>,
                 will take a view model returned from a controller and inject it
                 as a child of the root (layout) view model. By default, view
                 models will capture to the "content" variable of the root view

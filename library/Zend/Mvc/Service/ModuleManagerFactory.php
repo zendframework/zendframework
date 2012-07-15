@@ -33,10 +33,7 @@ class ModuleManagerFactory implements FactoryInterface
     protected $defaultServiceConfiguration = array(
         'invokables' => array(
             'DispatchListener' => 'Zend\Mvc\DispatchListener',
-            'Request'          => 'Zend\Http\PhpEnvironment\Request',
-            'Response'         => 'Zend\Http\PhpEnvironment\Response',
             'RouteListener'    => 'Zend\Mvc\RouteListener',
-            'ViewManager'      => 'Zend\Mvc\View\ViewManager',
         ),
         'factories' => array(
             'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
@@ -44,7 +41,11 @@ class ModuleManagerFactory implements FactoryInterface
             'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
             'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
             'DependencyInjector'      => 'Zend\Mvc\Service\DiFactory',
+            'Request'                 => 'Zend\Mvc\Service\RequestFactory',
+            'Response'                => 'Zend\Mvc\Service\ResponseFactory',
             'Router'                  => 'Zend\Mvc\Service\RouterFactory',
+            'ConsoleAdapter'          => 'Zend\Mvc\Service\ConsoleAdapterFactory',
+            'ViewManager'             => 'Zend\Mvc\Service\ViewManagerFactory',
             'ViewHelperManager'       => 'Zend\Mvc\Service\ViewHelperManagerFactory',
             'ViewFeedRenderer'        => 'Zend\Mvc\Service\ViewFeedRendererFactory',
             'ViewFeedStrategy'        => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
@@ -52,6 +53,7 @@ class ModuleManagerFactory implements FactoryInterface
             'ViewJsonStrategy'        => 'Zend\Mvc\Service\ViewJsonStrategyFactory',
         ),
         'aliases' => array(
+            'Console'                           => 'ConsoleAdapter',
             'Config'                            => 'Configuration',
             'ControllerPluginBroker'            => 'ControllerPluginManager',
             'Di'                                => 'DependencyInjector',

@@ -22,7 +22,7 @@ use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router;
 use Zend\Mvc\Service\ServiceManagerConfiguration;
-use Zend\Mvc\View\ViewManager;
+use Zend\Mvc\View\Http\ViewManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\Uri\UriFactory;

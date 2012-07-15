@@ -39,6 +39,11 @@ class Element implements ElementInterface
      */
     protected $messages = array();
 
+    /**
+     * @var array custom options
+     */
+    protected $options = array();
+
 
     /**
      * @param  null|int|string  $name    Optional name for the element
@@ -99,11 +104,15 @@ class Element implements ElementInterface
 
         if (isset($options['label'])) {
             $this->setLabel($options['label']);
+            unset($options['label']);
         }
 
         if (isset($options['label_attributes'])) {
             $this->setLabelAttributes($options['label_attributes']);
+            unset($options['label_attributes']);
         }
+
+        $this->options = $options;
 
         return $this;
     }

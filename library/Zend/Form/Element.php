@@ -118,6 +118,16 @@ class Element implements ElementInterface
     }
 
     /**
+     * get defined options
+     *
+     * @return array()
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
      * Set a single element attribute
      *
      * @param  string $key

@@ -25,13 +25,13 @@ interface FormInterface extends FieldsetInterface
     const VALUES_NORMALIZED = 0x11;
     const VALUES_RAW        = 0x12;
     const VALUES_AS_ARRAY   = 0x13;
- 
+
     /**
      * Set data to validate and/or populate elements
      *
      * Typically, also passes data on to the composed input filter.
-     * 
-     * @param  array|\ArrayAccess $data 
+     *
+     * @param  array|\ArrayAccess $data
      * @return FormInterface
      */
     public function setData($data);
@@ -49,23 +49,23 @@ interface FormInterface extends FieldsetInterface
 
     /**
      * Whether or not to bind values to the bound object when validation succeeds
-     * 
-     * @param  int $bindOnValidateFlag 
+     *
+     * @param  int $bindOnValidateFlag
      * @return void
      */
     public function setBindOnValidate($bindOnValidateFlag);
 
     /**
      * Set input filter
-     * 
-     * @param  InputFilterInterface $inputFilter 
+     *
+     * @param  InputFilterInterface $inputFilter
      * @return FormInterface
      */
     public function setInputFilter(InputFilterInterface $inputFilter);
 
     /**
      * Retrieve input filter
-     * 
+     *
      * @return InputFilterInterface
      */
     public function getInputFilter();
@@ -74,7 +74,7 @@ interface FormInterface extends FieldsetInterface
      * Validate the form
      *
      * Typically, will proxy to the composed input filter.
-     * 
+     *
      * @return bool
      */
     public function isValid();
@@ -82,10 +82,10 @@ interface FormInterface extends FieldsetInterface
     /**
      * Retrieve the validated data
      *
-     * By default, retrieves normalized values; pass one of the VALUES_* 
+     * By default, retrieves normalized values; pass one of the VALUES_*
      * constants to shape the behavior.
-     * 
-     * @param  int $flag 
+     *
+     * @param  int $flag
      * @return array|object
      */
     public function getData($flag = FormInterface::VALUES_NORMALIZED);

@@ -14,7 +14,7 @@ use Zend\Stdlib\CallbackHandler;
 use Zend\Stdlib\SplPriorityQueue;
 
 /**
- * Specialized priority queue implementation for use with an intercepting 
+ * Specialized priority queue implementation for use with an intercepting
  * filter chain.
  *
  * Allows removal
@@ -26,8 +26,8 @@ class FilterIterator extends SplPriorityQueue
 {
     /**
      * Does the queue contain a given value?
-     * 
-     * @param  mixed $datum 
+     *
+     * @param  mixed $datum
      * @return bool
      */
     public function contains($datum)
@@ -46,8 +46,8 @@ class FilterIterator extends SplPriorityQueue
      *
      * This is an expensive operation. It must first iterate through all values,
      * and then re-populate itself. Use only if absolutely necessary.
-     * 
-     * @param  mixed $datum 
+     *
+     * @param  mixed $datum
      * @return bool
      */
     public function remove($datum)
@@ -80,10 +80,10 @@ class FilterIterator extends SplPriorityQueue
      * Iterate the next filter in the chain
      *
      * Iterates and calls the next filter in the chain.
-     * 
-     * @param  mixed $context 
-     * @param  array $params 
-     * @param  FilterIterator $chain 
+     *
+     * @param  mixed $context
+     * @param  array $params
+     * @param  FilterIterator $chain
      * @return mixed
      */
     public function next($context = null, array $params = array(), $chain = null)

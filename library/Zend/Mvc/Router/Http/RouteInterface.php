@@ -14,14 +14,14 @@ use Zend\Mvc\Router\RouteInterface as BaseRoute;
 
 /**
  * Tree specific route interface.
- * 
+ *
  * @package    Zend_Mvc_Router
  */
 interface RouteInterface extends BaseRoute
 {
     /**
      * Get a list of parameters used while assembling.
-     * 
+     *
      * @return array
      */
     public function getAssembledParams();

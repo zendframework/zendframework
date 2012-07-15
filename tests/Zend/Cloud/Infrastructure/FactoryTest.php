@@ -30,14 +30,15 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_string(CloudFactory::INFRASTRUCTURE_ADAPTER_KEY));
     }
 
-    public function testGetAdapterWithConfig() {
+    public function testGetAdapterWithConfig()
+    {
         // EC2 adapter
         $Ec2Adapter = CloudFactory::getAdapter(
                             new Config(Ec2OfflineTest::getConfigArray(),true)
                       );
 
         $this->assertEquals('Zend\Cloud\Infrastructure\Adapter\Ec2', get_class($Ec2Adapter));
-        
+
         // Rackspace adapter
         $rackspaceAdapter = CloudFactory::getAdapter(
                                 new Config(RackspaceOfflineTest::getConfigArray(),true)

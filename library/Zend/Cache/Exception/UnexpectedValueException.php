@@ -14,7 +14,7 @@ namespace Zend\Cache\Exception;
  * @category   Zend
  * @package    Zend_Cache
  */
-class UnexpectedValueException extends \UnexpectedValueException implements 
+class UnexpectedValueException extends \UnexpectedValueException implements
     ExceptionInterface
 {
 }

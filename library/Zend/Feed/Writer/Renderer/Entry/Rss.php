@@ -25,7 +25,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
 {
     /**
      * Constructor
-     * 
+     *
      * @param  Writer\Entry $container
      * @return void
      */
@@ -33,10 +33,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     {
         parent::__construct($container);
     }
-    
+
     /**
      * Render RSS entry
-     * 
+     *
      * @return Rss
      */
     public function render()
@@ -46,7 +46,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $this->_dom->substituteEntities = false;
         $entry = $this->_dom->createElement('item');
         $this->_dom->appendChild($entry);
-        
+
         $this->_setTitle($this->_dom, $entry);
         $this->_setDescription($this->_dom, $entry);
         $this->_setDateCreated($this->_dom, $entry);
@@ -66,12 +66,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
 
         return $this;
     }
-    
+
     /**
      * Set entry title
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -95,10 +95,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $text = $dom->createTextNode($this->getDataContainer()->getTitle());
         $title->appendChild($text);
     }
-    
+
     /**
      * Set entry description
-     * 
+     *
      * @param  DOMDocument $dom
      * @param  DOMElement $root
      * @return void
@@ -128,12 +128,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $text = $dom->createCDATASection($this->getDataContainer()->getDescription());
         $subtitle->appendChild($text);
     }
-    
+
     /**
      * Set date entry was last modified
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
@@ -149,12 +149,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         );
         $updated->appendChild($text);
     }
-    
+
     /**
      * Set date entry was created
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
@@ -168,12 +168,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
             );
         }
     }
-    
+
     /**
      * Set entry authors
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
@@ -193,12 +193,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
             $root->appendChild($author);
         }
     }
-    
+
     /**
      * Set entry enclosure
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -242,12 +242,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $enclosure->setAttribute('url', $data['uri']);
         $root->appendChild($enclosure);
     }
-    
+
     /**
      * Set link to entry
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setLink(DOMDocument $dom, DOMElement $root)
@@ -260,12 +260,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $text = $dom->createTextNode($this->getDataContainer()->getLink());
         $link->appendChild($text);
     }
-    
+
     /**
      * Set entry identifier
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setId(DOMDocument $dom, DOMElement $root)
@@ -287,12 +287,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
             $id->setAttribute('isPermaLink', 'false');
         }
     }
-    
+
     /**
      * Set link to entry comments
-     * 
-     * @param  DOMDocument $dom 
-     * @param  DOMElement $root 
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
     protected function _setCommentLink(DOMDocument $dom, DOMElement $root)
@@ -306,12 +306,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $clink->appendChild($text);
         $root->appendChild($clink);
     }
-    
+
     /**
      * Set entry categories
-     * 
-     * @param DOMDocument $dom 
-     * @param DOMElement $root 
+     *
+     * @param DOMDocument $dom
+     * @param DOMElement $root
      * @return void
      */
     protected function _setCategories(DOMDocument $dom, DOMElement $root)

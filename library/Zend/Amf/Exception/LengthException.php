@@ -14,7 +14,7 @@ namespace Zend\Amf\Exception;
  * @category   Zend
  * @package    Zend_Amf
  */
-class LengthException extends \LengthException implements 
+class LengthException extends \LengthException implements
     ExceptionInterface
 {
 }

@@ -13,15 +13,6 @@ namespace ZendTest\Service\Technorati;
 use Zend\Service\Technorati;
 
 /**
- * Test helper
- */
-
-/**
- * @see Technorati\TagResultSet
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_Service_Technorati
  * @subpackage UnitTests

@@ -21,36 +21,42 @@ use Zend\GData\Extension;
 class OriginalEventTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->originalEventText = file_get_contents(
                 'Zend/GData/_files/OriginalEventElementSample1.xml',
                 true);
         $this->originalEvent = new Extension\OriginalEvent();
     }
 
-    public function testEmptyOriginalEventShouldHaveNoExtensionElements() {
+    public function testEmptyOriginalEventShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->originalEvent->extensionElements));
         $this->assertTrue(count($this->originalEvent->extensionElements) == 0);
     }
 
-    public function testEmptyOriginalEventShouldHaveNoExtensionAttributes() {
+    public function testEmptyOriginalEventShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->originalEvent->extensionAttributes));
         $this->assertTrue(count($this->originalEvent->extensionAttributes) == 0);
     }
 
-    public function testSampleOriginalEventShouldHaveNoExtensionElements() {
+    public function testSampleOriginalEventShouldHaveNoExtensionElements()
+    {
         $this->originalEvent->transferFromXML($this->originalEventText);
         $this->assertTrue(is_array($this->originalEvent->extensionElements));
         $this->assertTrue(count($this->originalEvent->extensionElements) == 0);
     }
 
-    public function testSampleOriginalEventShouldHaveNoExtensionAttributes() {
+    public function testSampleOriginalEventShouldHaveNoExtensionAttributes()
+    {
         $this->originalEvent->transferFromXML($this->originalEventText);
         $this->assertTrue(is_array($this->originalEvent->extensionAttributes));
         $this->assertTrue(count($this->originalEvent->extensionAttributes) == 0);
     }
 
-    public function testNormalOriginalEventShouldHaveNoExtensionElements() {
+    public function testNormalOriginalEventShouldHaveNoExtensionElements()
+    {
         $this->originalEvent->href = "http://www.google.com/calendar/feeds/nobody@gmail.com/private/composite";
         $this->originalEvent->id = "abcdef123456789";
 
@@ -76,7 +82,8 @@ class OriginalEventTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("abcdef123456789", $newOriginalEvent2->id);
     }
 
-    public function testEmptyOriginalEventToAndFromStringShouldMatch() {
+    public function testEmptyOriginalEventToAndFromStringShouldMatch()
+    {
         $originalEventXml = $this->originalEvent->saveXML();
         $newOriginalEvent = new Extension\OriginalEvent();
         $newOriginalEvent->transferFromXML($originalEventXml);
@@ -84,7 +91,8 @@ class OriginalEventTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($originalEventXml == $newOriginalEventXml);
     }
 
-    public function testOriginalEventWithValueToAndFromStringShouldMatch() {
+    public function testOriginalEventWithValueToAndFromStringShouldMatch()
+    {
         $this->originalEvent->href = "http://www.google.com/calendar/feeds/nobody@gmail.com/private/composite";
         $this->originalEvent->id = "abcdef123456789";
         $originalEventXml = $this->originalEvent->saveXML();
@@ -96,7 +104,8 @@ class OriginalEventTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("abcdef123456789", $this->originalEvent->id);
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->originalEvent->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -110,7 +119,8 @@ class OriginalEventTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newOriginalEvent->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullOriginalEventToAndFromString() {
+    public function testConvertFullOriginalEventToAndFromString()
+    {
         $this->originalEvent->transferFromXML($this->originalEventText);
         $this->assertEquals("http://www.google.com/calendar/feeds/userID/private/full/123456789", $this->originalEvent->href);
         $this->assertEquals("i8fl1nrv2bl57c1qgr3f0onmgg", $this->originalEvent->id);

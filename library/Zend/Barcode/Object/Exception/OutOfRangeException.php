@@ -18,7 +18,7 @@ use Zend\Barcode\Exception;
  * @category   Zend
  * @package    Zend_Barcode
  */
-class OutOfRangeException extends Exception\OutOfRangeException implements 
+class OutOfRangeException extends Exception\OutOfRangeException implements
     ExceptionInterface
 {
 }

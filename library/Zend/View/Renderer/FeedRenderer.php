@@ -50,9 +50,9 @@ class FeedRenderer implements RendererInterface
 
     /**
      * Set the resolver used to map a template name to a resource the renderer may consume.
-     * 
+     *
      * @todo   Determine use case for resolvers for feeds
-     * @param  Resolver $resolver 
+     * @param  Resolver $resolver
      * @return FeedRenderer
      */
     public function setResolver(Resolver $resolver)
@@ -128,7 +128,7 @@ class FeedRenderer implements RendererInterface
         $this->feedType = $feedType;
         return $this;
     }
-    
+
     /**
      * Get feed type
      *

@@ -188,7 +188,7 @@ class JsonRendererTest extends TestCase
         $this->assertEquals($expected, $test);
     }
 
-	/**
+    /**
      * @dataProvider getNonObjectModels
      */
     public function testRendersNonObjectModelAsJsonWithJsonpCallback($model)

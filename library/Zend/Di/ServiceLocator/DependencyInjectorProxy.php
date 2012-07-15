@@ -14,7 +14,11 @@ use Zend\Di\Di;
 use Zend\Di\Exception;
 
 /**
- * Proxy used to analyze how instances are created by a given Di.
+ * Proxy used to analyze how instances are created by a given Di. Overrides Zend\Di\Di to produce artifacts that
+ * represent the process used to instantiate a particular instance
+ *
+ * @category   Zend
+ * @package    Zend_Di
  */
 class DependencyInjectorProxy extends Di
 {
@@ -34,18 +38,17 @@ class DependencyInjectorProxy extends Di
     }
 
     /**
-     * Override, as we want it to use the functionality defined in the proxy
-     *
-     * @param  string $name
-     * @param  array $params
+     * {@inheritDoc}
      * @return GeneratorInstance
      */
     public function get($name, array $params = array())
     {
         return parent::get($name, $params);
     }
+
     /**
      * {@inheritDoc}
+     * @return GeneratorInstance
      */
     public function newInstance($name, array $params = array(), $isShared = true)
     {
@@ -66,13 +69,7 @@ class DependencyInjectorProxy extends Di
     }
 
     /**
-     * Override createInstanceViaConstructor method from injector
-     *
-     * Returns code generation artifacts.
-     *
-     * @param  string $class
-     * @param  null|array $params
-     * @param  null|string $alias
+     * {@inheritDoc}
      * @return GeneratorInstance
      */
     public function createInstanceViaConstructor($class, $params, $alias = null)
@@ -90,13 +87,9 @@ class DependencyInjectorProxy extends Di
     }
 
     /**
-     * Override instance creation via callback
-     *
-     * @param  callback    $callback
-     * @param  null|array  $params
-     * @param  null|string $alias
+     * {@inheritDoc}
+     * @throws \Zend\Di\Exception\InvalidCallbackException
      * @return GeneratorInstance
-     * @throws Exception\InvalidCallbackException
      */
     public function createInstanceViaCallback($callback, $params, $alias)
     {
@@ -156,6 +149,7 @@ class DependencyInjectorProxy extends Di
                 'method' => $method,
                 'params' => $callParameters,
             ));
+
             return true;
         }
 
@@ -169,6 +163,7 @@ class DependencyInjectorProxy extends Di
     {
         if ($instance instanceof GeneratorInstance) {
             /* @var $instance GeneratorInstance */
+
             return $instance->getClass();
         }
 

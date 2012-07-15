@@ -84,7 +84,7 @@ class Encoder
     {
         if (is_object($value)) {
             return $this->_encodeObject($value);
-        } else if (is_array($value)) {
+        } elseif (is_array($value)) {
             return $this->_encodeArray($value);
         }
 
@@ -148,7 +148,7 @@ class Encoder
         }
 
         $className = get_class($value);
-        return '{"__className":' 
+        return '{"__className":'
             . $this->_encodeString($className)
             . $props . '}';
     }

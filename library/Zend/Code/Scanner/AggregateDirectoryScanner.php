@@ -97,7 +97,7 @@ class AggregateDirectoryScanner extends DirectoryScanner
     {
         // @todo
     }
-    
+
     public function __toString()
     {
         // @todo

@@ -363,7 +363,7 @@ abstract class AbstractRestfulController implements
     /**
      * Set plugin manager
      *
-     * @param  string|PluginManager $plugins 
+     * @param  string|PluginManager $plugins
      * @return RestfulController
      * @throws Exception\InvalidArgumentException
      */

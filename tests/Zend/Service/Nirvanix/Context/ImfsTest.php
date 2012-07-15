@@ -14,7 +14,6 @@ use Zend\Service\Nirvanix\Context\Imfs as ImfsContext;
 use ZendTest\Service\Nirvanix\FunctionalTestCase;
 
 /**
- * @see        Zend\Service\Nirvanix\Context\Imfs
  * @category   Zend
  * @package    Zend_Service_Nirvanix
  * @subpackage UnitTests

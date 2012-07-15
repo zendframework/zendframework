@@ -36,8 +36,7 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
             return 'daily'; //Default specified by spec
         }
 
-        switch ($period)
-        {
+        switch ($period) {
             case 'hourly':
             case 'daily':
             case 'weekly':
@@ -84,8 +83,7 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
         $period = $this->getUpdatePeriod();
         $ticks = 1;
 
-        switch ($period)
-        {
+        switch ($period) {
             //intentional fall through
             case 'yearly':
                 $ticks *= 52; //TODO: fix generalisation, how?

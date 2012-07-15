@@ -16,7 +16,6 @@ use Zend\Http\Client\Adapter\Test as TestAdapter;
 use Zend\Service\Nirvanix\Nirvanix;
 
 /**
- * @see        Zend\Service\Nirvanix\Nirvanix
  * @category   Zend
  * @package    Zend_Service_Nirvanix
  * @subpackage UnitTests
@@ -50,8 +49,8 @@ abstract class FunctionalTestCase extends TestCase
     public function makeNirvanixResponse($hash)
     {
         $xml = "<?xml version='1.0'?><Response>";
-        foreach ($hash as $k => $v) { 
-            $xml .= "<$k>$v</$k>"; 
+        foreach ($hash as $k => $v) {
+            $xml .= "<$k>$v</$k>";
         }
         $xml .= "</Response>";
 

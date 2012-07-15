@@ -14,8 +14,6 @@ use Zend\XmlRpc\AbstractValue;
 use Zend\XmlRpc;
 
 /**
- * Test case for Zend_XmlRpc_Fault
- *
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage UnitTests
@@ -161,19 +159,19 @@ class FaultTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\XmlRpc\Exception\InvalidArgumentException', 'Invalid fault structure');
         $this->assertFalse($this->_fault->loadXml('<methodResponse><fault/></methodResponse>'));
     }
-    
+
     public function testLoadXmlThrowsExceptionOnInvalidInput3()
     {
         $this->setExpectedException('Zend\XmlRpc\Exception\InvalidArgumentException', 'Invalid fault structure');
         $this->_fault->loadXml('<methodResponse><fault/></methodResponse>');
     }
-    
+
     public function testLoadXmlThrowsExceptionOnInvalidInput4()
     {
         $this->setExpectedException('Zend\XmlRpc\Exception\InvalidArgumentException', 'Fault code and string required');
         $this->_fault->loadXml('<methodResponse><fault><value><struct/></value></fault></methodResponse>');
     }
-    
+
     /**
      * Zend_XmlRpc_Fault::isFault() test
      */

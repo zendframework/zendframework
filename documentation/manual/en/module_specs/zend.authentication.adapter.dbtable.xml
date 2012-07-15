@@ -312,9 +312,7 @@ $adapter = new AuthAdapter($db,
                            'users',
                            'username',
                            'password',
-                           "MD5(CONCAT('"
-                                . Zend\Registry::get('staticSalt')
-                                . "', ?, password_salt))"
+                           "MD5(CONCAT('staticSalt', ?, password_salt))"
                           );
 ]]></programlisting>
 

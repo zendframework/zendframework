@@ -138,7 +138,7 @@ class QueryParserContext
 
         if ($sign == QueryToken::TT_REQUIRED) {
             $this->_nextEntrySign = true;
-        } else if ($sign == QueryToken::TT_PROHIBITED) {
+        } elseif ($sign == QueryToken::TT_PROHIBITED) {
             $this->_nextEntrySign = false;
         } else {
             throw new UnexpectedValueException('Unrecognized sign type.');

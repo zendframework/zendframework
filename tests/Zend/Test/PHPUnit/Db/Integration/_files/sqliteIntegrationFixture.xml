@@ -1,6 +1,0 @@
-<?xml version="1.0" ?>
-<dataset>
-    <foo id="1" foo="foo" bar="bar" baz="baz" />
-    <foo id="2" foo="bar" bar="bar" baz="bar" />
-    <foo id="3" foo="baz" bar="baz" baz="baz" />
-</dataset>

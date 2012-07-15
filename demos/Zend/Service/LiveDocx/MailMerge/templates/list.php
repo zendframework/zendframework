@@ -8,7 +8,7 @@ use Zend\Service\LiveDocx\MailMerge;
 
 Helper::printLine(
     PHP_EOL . 'Remotely Stored Templates' .
-    PHP_EOL . 
+    PHP_EOL .
     PHP_EOL . 'The following templates are currently stored on the LiveDocx server:' .
     PHP_EOL .
     PHP_EOL

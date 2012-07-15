@@ -292,7 +292,7 @@ class Socket implements HttpAdapter, StreamInterface
         $response = '';
         $gotStatus = false;
 
-        while (($line = @fgets($this->socket)) !== false) {
+        while (($line = fgets($this->socket)) !== false) {
             $gotStatus = $gotStatus || (strpos($line, 'HTTP') !== false);
             if ($gotStatus) {
                 $response .= $line;
@@ -335,7 +335,7 @@ class Socket implements HttpAdapter, StreamInterface
             if (strtolower($transfer_encoding->getFieldValue()) == 'chunked') {
 
                 do {
-                    $line  = @fgets($this->socket);
+                    $line  = fgets($this->socket);
                     $this->_checkSocketReadTimeout();
 
                     $chunk = $line;
@@ -364,7 +364,7 @@ class Socket implements HttpAdapter, StreamInterface
                               break;
                              }
                         } else {
-                            $line = @fread($this->socket, $read_to - $current_pos);
+                            $line = fread($this->socket, $read_to - $current_pos);
                             if ($line === false || strlen($line) === 0) {
                                 $this->_checkSocketReadTimeout();
                                 break;
@@ -409,12 +409,12 @@ class Socket implements HttpAdapter, StreamInterface
                  $current_pos = ftell($this->socket)) {
 
                  if ($this->out_stream) {
-                     if (@stream_copy_to_stream($this->socket, $this->out_stream, $read_to - $current_pos) == 0) {
+                     if (stream_copy_to_stream($this->socket, $this->out_stream, $read_to - $current_pos) == 0) {
                           $this->_checkSocketReadTimeout();
                           break;
                      }
                  } else {
-                    $chunk = @fread($this->socket, $read_to - $current_pos);
+                    $chunk = fread($this->socket, $read_to - $current_pos);
                     if ($chunk === false || strlen($chunk) === 0) {
                         $this->_checkSocketReadTimeout();
                         break;
@@ -432,12 +432,12 @@ class Socket implements HttpAdapter, StreamInterface
 
             do {
                 if ($this->out_stream) {
-                    if (@stream_copy_to_stream($this->socket, $this->out_stream) == 0) {
+                    if (stream_copy_to_stream($this->socket, $this->out_stream) == 0) {
                           $this->_checkSocketReadTimeout();
                           break;
                      }
                 } else {
-                    $buff = @fread($this->socket, 8192);
+                    $buff = fread($this->socket, 8192);
                     if ($buff === false || strlen($buff) === 0) {
                         $this->_checkSocketReadTimeout();
                         break;

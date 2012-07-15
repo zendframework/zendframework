@@ -125,7 +125,7 @@ class ReCaptcha
 
         if ($ip !== null) {
             $this->setIp($ip);
-        } else if (isset($_SERVER['REMOTE_ADDR'])) {
+        } elseif (isset($_SERVER['REMOTE_ADDR'])) {
             $this->setIp($_SERVER['REMOTE_ADDR']);
         }
 

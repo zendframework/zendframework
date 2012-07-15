@@ -32,8 +32,7 @@ class WorksheetFeedTest extends \PHPUnit_Framework_TestCase
     public function testToAndFromString()
     {
         $this->assertTrue(count($this->wksFeed->entries) == 1);
-        foreach($this->wksFeed->entries as $entry)
-        {
+        foreach($this->wksFeed->entries as $entry) {
             $this->assertTrue($entry instanceof Spreadsheets\WorksheetEntry);
         }
 
@@ -43,8 +42,7 @@ class WorksheetFeedTest extends \PHPUnit_Framework_TestCase
         $newWksFeed->transferFromDom($doc->documentElement);
 
         $this->assertTrue(count($newWksFeed->entries) == 1);
-        foreach($newWksFeed->entries as $entry)
-        {
+        foreach($newWksFeed->entries as $entry) {
             $this->assertTrue($entry instanceof Spreadsheets\WorksheetEntry);
         }
     }

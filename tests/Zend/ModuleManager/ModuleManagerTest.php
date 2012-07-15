@@ -38,7 +38,7 @@ class ModuleManagerTest extends TestCase
         $this->includePath = get_include_path();
 
         $this->defaultListeners = new DefaultListenerAggregate(
-            new ListenerOptions(array( 
+            new ListenerOptions(array(
                 'module_paths'         => array(
                     realpath(__DIR__ . '/TestAsset'),
                 ),
@@ -49,7 +49,7 @@ class ModuleManagerTest extends TestCase
     public function tearDown()
     {
         $file = glob($this->tmpdir . DIRECTORY_SEPARATOR . '*');
-        @unlink($file[0]); // change this if there's ever > 1 file 
+        @unlink($file[0]); // change this if there's ever > 1 file
         @rmdir($this->tmpdir);
         // Restore original autoloaders
         AutoloaderFactory::unregisterAutoloaders();
@@ -67,7 +67,7 @@ class ModuleManagerTest extends TestCase
         // Restore original include_path
         set_include_path($this->includePath);
     }
-    
+
     public function testEventManagerIdentifiers()
     {
         $moduleManager = new ModuleManager(array());

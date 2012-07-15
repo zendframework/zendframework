@@ -10,7 +10,7 @@
 
 namespace Zend\Http\Exception;
 
-class RuntimeException extends \RuntimeException implements 
+class RuntimeException extends \RuntimeException implements
     ExceptionInterface
 {
 }

@@ -8,7 +8,7 @@ use Zend\Service\LiveDocx\MailMerge;
 
 Helper::printLine(
     PHP_EOL . 'Using the Free Public Server' .
-    PHP_EOL . 
+    PHP_EOL .
     PHP_EOL . 'This sample application illustrates how to use the Zend Framework LiveDocx component with the free, public LiveDocx server.' .
     PHP_EOL .
     PHP_EOL

@@ -18,6 +18,6 @@ use Zend\ProgressBar\Exception;
  * @category   Zend
  * @package    Zend_ProgressBar
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
 {}

@@ -35,22 +35,26 @@ class EmailListRecipientFeedTest extends \PHPUnit_Framework_TestCase
         $this->emptyEmailListRecipientFeed = new GApps\EmailListRecipientFeed();
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionElements() {
+    public function testEmptyFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->emptyEmailListRecipientFeed->extensionElements));
         $this->assertTrue(count($this->emptyEmailListRecipientFeed->extensionElements) == 0);
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionAttributes() {
+    public function testEmptyFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->emptyEmailListRecipientFeed->extensionAttributes));
         $this->assertTrue(count($this->emptyEmailListRecipientFeed->extensionAttributes) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionElements() {
+    public function testSampleFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->emailListRecipientFeed->extensionElements));
         $this->assertTrue(count($this->emailListRecipientFeed->extensionElements) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionAttributes() {
+    public function testSampleFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->emailListRecipientFeed->extensionAttributes));
         $this->assertTrue(count($this->emailListRecipientFeed->extensionAttributes) == 0);
     }

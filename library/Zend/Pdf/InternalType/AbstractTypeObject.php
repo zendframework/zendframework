@@ -138,9 +138,9 @@ abstract class AbstractTypeObject
     {
         if (is_numeric($input)) {
             return new NumericObject($input);
-        } else if (is_bool($input)) {
+        } elseif (is_bool($input)) {
             return new BooleanObject($input);
-        } else if (is_array($input)) {
+        } elseif (is_array($input)) {
             $pdfElementsArray = array();
             $isDictionary = false;
 

@@ -21,7 +21,7 @@ use Zend\View\Helper\Escaper;
  */
 class EscapeCss extends Escaper\AbstractHelper
 {
-    
+
     /**
      * Escape a value for current escaping strategy
      *
@@ -32,5 +32,5 @@ class EscapeCss extends Escaper\AbstractHelper
     {
         return $this->getEscaper()->escapeCss($value);
     }
-    
+
 }

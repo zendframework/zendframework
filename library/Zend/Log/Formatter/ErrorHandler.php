@@ -20,14 +20,14 @@ use Zend\Log\Exception;
 class ErrorHandler implements FormatterInterface
 {
     const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%) %message% (errno %extra[errno]%) in %extra[file]% on line %extra[line]%';
-    
+
     /**
      * Format
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $format;
-    
+
     /**
      * Class constructor
      *

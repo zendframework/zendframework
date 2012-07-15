@@ -73,7 +73,7 @@ class Base
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable of options');
         }
-        
+
         if (isset($options['baseUrl'])) {
             $this->host = $options['baseUrl'];
         }

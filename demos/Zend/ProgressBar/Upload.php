@@ -107,7 +107,8 @@ if (isset($_GET['uploadId'])) {
         }
     </style>
     <script type="text/javascript">
-        function makeRequest(url) {
+        function makeRequest(url)
+        {
             var httpRequest;
 
             if (window.XMLHttpRequest) {
@@ -115,7 +116,7 @@ if (isset($_GET['uploadId'])) {
                 if (httpRequest.overrideMimeType) {
                     httpRequest.overrideMimeType('text/xml');
                 }
-            } else if (window.ActiveXObject) {
+            } elseif (window.ActiveXObject) {
                 try {
                     httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
                 } catch (e) {
@@ -139,15 +140,18 @@ if (isset($_GET['uploadId'])) {
 
         }
 
-        function observeProgress() {
+        function observeProgress()
+        {
             setTimeout("getProgress()", 1500);
         }
 
-        function getProgress() {
+        function getProgress()
+        {
             makeRequest('Upload.php?uploadId=' + document.getElementById('uploadId').value);
         }
 
-        function evalProgress(httpRequest) {
+        function evalProgress(httpRequest)
+        {
             try {
                 if (httpRequest.readyState == 4) {
                     if (httpRequest.status == 200) {
@@ -168,14 +172,16 @@ if (isset($_GET['uploadId'])) {
             }
         }
 
-        function update(data) {
+        function update(data)
+        {
             document.getElementById('pg-percent').style.width = data.percent + '%';
 
             document.getElementById('pg-text-1').innerHTML = data.timeRemaining + ' seconds remaining';
             document.getElementById('pg-text-2').innerHTML = data.timeRemaining + ' seconds remaining';
         }
 
-        function finish() {
+        function finish()
+        {
             document.getElementById('pg-percent').style.width = '100%';
 
             document.getElementById('pg-text-1').innerHTML = 'Upload done';

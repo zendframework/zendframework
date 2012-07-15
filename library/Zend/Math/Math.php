@@ -43,7 +43,7 @@ class Math
                 if ($rand !== false && strlen($rand) === $length) {
                     return $rand;
                 }
-            }    
+            }
         }
         if ($strong) {
             throw new Exception\RuntimeException(
@@ -81,8 +81,8 @@ class Math
             );
         }
         $log    = log($range, 2);
-        $bytes  = (int) ($log / 8) + 1; 
-        $bits   = (int) $log + 1; 
+        $bytes  = (int) ($log / 8) + 1;
+        $bits   = (int) $log + 1;
         $filter = (int) (1 << $bits) - 1;
         do {
             $rnd = hexdec(bin2hex(self::randBytes($bytes, $strong)));

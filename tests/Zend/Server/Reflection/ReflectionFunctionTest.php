@@ -13,8 +13,6 @@ namespace ZendTest\Server\Reflection;
 use Zend\Server\Reflection;
 
 /**
- * Test case for Zend_Server_Reflection_Function
- *
  * @category   Zend
  * @package    Zend_Server
  * @subpackage UnitTests
@@ -42,13 +40,13 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($prototypes));
         $this->assertTrue(0 < count($prototypes));
     }
-    
+
     public function testConstructorThrowsExceptionOnNonFunction()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
         $params = $r->getParameters();
-        
+
         $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid reflection class');
         $r = new Reflection\ReflectionFunction($params[0]);
     }

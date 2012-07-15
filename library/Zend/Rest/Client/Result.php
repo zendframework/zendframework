@@ -17,7 +17,7 @@ use IteratorAggregate;
  * @package    Zend_Rest
  * @subpackage Client
  */
-class Result implements IteratorAggregate 
+class Result implements IteratorAggregate
 {
     /**
      * @var SimpleXMLElement

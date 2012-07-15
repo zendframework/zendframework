@@ -1,4 +1,4 @@
- {
+{
     "name": "zendframework/zend-acl",
     "description": "provides a lightweight and flexible access control list (ACL) implementation for privileges management",
     "license": "BSD-3-Clause",

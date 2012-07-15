@@ -26,7 +26,7 @@ class BcmathTest extends \PHPUnit_Framework_TestCase
     protected $adapter = null;
 
     protected $opts = array();
-    
+
     public function setUp()
     {
         if (!extension_loaded('bcmath')) {

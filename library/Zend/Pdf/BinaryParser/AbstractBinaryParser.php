@@ -167,11 +167,13 @@ abstract class AbstractBinaryParser
         $this->_dataSource->moveToOffset($offset);
     }
 
-    public function getOffset() {
+    public function getOffset()
+    {
        return $this->_dataSource->getOffset();
     }
 
-    public function getSize() {
+    public function getSize()
+    {
        return $this->_dataSource->getSize();
     }
 
@@ -245,7 +247,7 @@ abstract class AbstractBinaryParser
                     $number = ($number << 8) | ord($bytes[$i]);
                 }
             }
-        } else if ($byteOrder == self::BYTE_ORDER_LITTLE_ENDIAN) {
+        } elseif ($byteOrder == self::BYTE_ORDER_LITTLE_ENDIAN) {
             $number = ord($bytes[$size - 1]);
             if (($number & 0x80) == 0x80) {
                 /* Negative number. See discussion above.
@@ -300,7 +302,7 @@ abstract class AbstractBinaryParser
             for ($i = 1; $i < $size; $i++) {
                 $number = ($number << 8) | ord($bytes[$i]);
             }
-        } else if ($byteOrder == self::BYTE_ORDER_LITTLE_ENDIAN) {
+        } elseif ($byteOrder == self::BYTE_ORDER_LITTLE_ENDIAN) {
             $number = 0;
             for ($i = --$size; $i >= 0; $i--) {
                 $number |= ord($bytes[$i]) << ($i * 8);
@@ -391,7 +393,7 @@ abstract class AbstractBinaryParser
                 return $bytes;
             }
             return iconv('UTF-16BE', $characterSet, $bytes);
-        } else if ($byteOrder == self::BYTE_ORDER_LITTLE_ENDIAN) {
+        } elseif ($byteOrder == self::BYTE_ORDER_LITTLE_ENDIAN) {
             if ($characterSet == 'UTF-16LE') {
                 return $bytes;
             }

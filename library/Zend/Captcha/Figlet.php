@@ -44,7 +44,7 @@ class Figlet extends AbstractWord
 
     /**
      * Retrieve the composed figlet manager
-     * 
+     *
      * @return FigletManager
      */
     public function getFiglet()
@@ -65,7 +65,7 @@ class Figlet extends AbstractWord
 
     /**
      * Get helper name used to render captcha
-     * 
+     *
      * @return string
      */
     public function getHelperName()

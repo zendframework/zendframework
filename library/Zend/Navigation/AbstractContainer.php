@@ -15,6 +15,7 @@ use RecursiveIterator;
 use RecursiveIteratorIterator;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Zend_Navigation_Container
@@ -154,7 +155,7 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
             );
         }
 
-        // Because adding a page to a container removes it from the original 
+        // Because adding a page to a container removes it from the original
         // (see {@link Page\AbstractPage::setParent()}), iteration of the
         // original container will break. As such, we need to iterate the
         // container into an array first.
@@ -237,7 +238,7 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
      * Checks if the container has the given page
      *
      * @param  Page\AbstractPage $page page to look for
-     * @param  bool $recursive [optional] whether to search recursively. 
+     * @param  bool $recursive [optional] whether to search recursively.
      *                         Default is false.
      * @return bool whether page is in container
      */
@@ -348,7 +349,10 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
      */
     public function __call($method, $arguments)
     {
-        if (@preg_match('/(find(?:One|All)?By)(.+)/', $method, $match)) {
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/(find(?:One|All)?By)(.+)/', $method, $match);
+        ErrorHandler::stop();
+        if ($result) {
             return $this->{$match[1]}($match[2], $arguments[0]);
         }
 

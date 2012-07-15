@@ -30,10 +30,10 @@ class MailTest extends \PHPUnit_Framework_TestCase
      */
     protected $writer;
     /**
-     * @var Logger 
+     * @var Logger
      */
     protected $log;
-    
+
     protected function setUp()
     {
         $message = new MailMessage();
@@ -48,7 +48,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
 
         $this->writer = new MailWriter($message, $transport);
         $this->log = new Logger();
-        $this->log->addWriter($this->writer);   
+        $this->log->addWriter($this->writer);
     }
 
     protected function tearDown()
@@ -62,11 +62,11 @@ class MailTest extends \PHPUnit_Framework_TestCase
      * @return void
      */
     public function testNormalLoggingMultiplePerLevel()
-    {                
+    {
         $this->log->info('an info message');
         $this->log->info('a second info message');
         unset($this->log);
-        
+
         $contents = file_get_contents(__DIR__ . '/' . self::FILENAME);
         $this->assertContains('an info message', $contents);
         $this->assertContains('a second info message', $contents);
@@ -75,11 +75,11 @@ class MailTest extends \PHPUnit_Framework_TestCase
     public function testSetSubjectPrependText()
     {
         $this->writer->setSubjectPrependText('test');
-        
+
         $this->log->info('an info message');
         $this->log->info('a second info message');
         unset($this->log);
-        
+
         $contents = file_get_contents(__DIR__ . '/' . self::FILENAME);
         $this->assertContains('an info message', $contents);
         $this->assertContains('Subject: test', $contents);

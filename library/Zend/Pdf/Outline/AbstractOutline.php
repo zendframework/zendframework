@@ -25,7 +25,7 @@ use Zend\Pdf\ObjectFactory;
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Outline
  */
-abstract class AbstractOutline implements 
+abstract class AbstractOutline implements
     Countable,
     RecursiveIterator
 {

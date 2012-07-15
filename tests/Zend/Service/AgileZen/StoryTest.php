@@ -15,7 +15,7 @@ use Zend\Service\AgileZen\AgileZen as AgileZenService;
 class StoryTest extends \PHPUnit_Framework_TestCase
 {
     protected static $storyId;
-     
+
     public function setUp()
     {
         if (!constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_ENABLED')) {
@@ -27,7 +27,7 @@ class StoryTest extends \PHPUnit_Framework_TestCase
         if(!defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID')) {
             self::markTestSkipped('The project ID costant has to be set.');
         }
-        $this->agileZen = new AgileZenService(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY'));                                               
+        $this->agileZen = new AgileZenService(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY'));
     }
     public function testAddStory()
     {
@@ -62,7 +62,7 @@ class StoryTest extends \PHPUnit_Framework_TestCase
             'details' => 'updated details of the test story'
         );
         $story = $this->agileZen->updateStory(
-            constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'), 
+            constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'),
             self::$storyId,
             $data
         );

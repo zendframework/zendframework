@@ -59,8 +59,8 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
 
     /**
      * Set the session manager
-     * 
-     * @param  Manager $manager 
+     *
+     * @param  Manager $manager
      * @return FlashMessenger
      */
     public function setSessionManager(Manager $manager)
@@ -73,7 +73,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
      * Retrieve the session manager
      *
      * If none composed, lazy-loads a SessionManager instance
-     * 
+     *
      * @return Manager
      */
     public function getSessionManager()
@@ -86,7 +86,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
 
     /**
      * Get session container for flash messages
-     * 
+     *
      * @return Container
      */
     public function getContainer()
@@ -101,7 +101,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     }
 
     /**
-     * Change the namespace messages are added to 
+     * Change the namespace messages are added to
      *
      * Useful for per action controller messaging between requests
      *
@@ -116,7 +116,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
 
     /**
      * Get the message namespace
-     * 
+     *
      * @return string
      */
     public function getNamespace()
@@ -272,7 +272,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
      *
      * Iterates through the session container, removing messages into the local
      * scope.
-     * 
+     *
      * @return void
      */
     protected function getMessagesFromContainer()

@@ -19,11 +19,27 @@ use Zend\Escaper\Exception;
  */
 class Escaper
 {
+    /**
+     * Entity Map mapping Unicode codepoints to any available named HTML entities.
+     *
+     * While HTML supports far more named entities, the lowest common denominator
+     * has become HTML5's XML Serialisation which is restricted to the those named
+     * entities that XML supports. Using HTML entities would result in this error:
+     *     XML Parsing Error: undefined entity
+     *
+     * @var array
+     */
+    protected static $htmlNamedEntityMap = array(
+        34 => 'quot',         // quotation mark
+        38 => 'amp',          // ampersand
+        60 => 'lt',           // less-than sign
+        62 => 'gt',           // greater-than sign
+    );
 
     /**
      * Current encoding for escaping. If not UTF-8, we convert strings from this encoding
      * pre-escaping and back to this encoding post-escaping.
-     * 
+     *
      * @var string
      */
     protected $encoding = 'utf-8';
@@ -33,35 +49,35 @@ class Escaper
      * htmlspecialchars(). We modify these for PHP 5.4 to take advantage
      * of the new ENT_SUBSTITUTE flag for correctly dealing with invalid
      * UTF-8 sequences.
-     * 
+     *
      * @var string
      */
-    protected $htmlSpecialCharsFlags = ENT_QUOTES;
+    protected $htmlSpecialCharsFlags = \ENT_QUOTES;
 
     /**
      * Static Matcher which escapes characters for HTML Attribute contexts
-     * 
-     * @var Closure
+     *
+     * @var callable
      */
-    protected $htmlAttrMatcher = null;
+    protected $htmlAttrMatcher;
 
     /**
      * Static Matcher which escapes characters for Javascript contexts
-     * 
-     * @var Closure
+     *
+     * @var callable
      */
-    protected $jsMatcher = null;
+    protected $jsMatcher;
 
     /**
      * Static Matcher which escapes characters for CSS Attribute contexts
-     * 
-     * @var Closure
+     *
+     * @var callable
      */
-    protected $cssMatcher = null;
+    protected $cssMatcher;
 
     /**
      * List of all encoding supported by this class
-     * 
+     *
      * @var array
      */
     protected $supportedEncodings = array(
@@ -80,34 +96,43 @@ class Escaper
      * Constructor: Single parameter allows setting of global encoding for use by
      * the current object. If PHP 5.4 is detected, additional ENT_SUBSTITUTE flag
      * is set for htmlspecialchars() calls.
-     * 
+     *
      * @param string $encoding
      */
     public function __construct($encoding = null)
     {
-        if (!is_null($encoding)) {
-            if (empty($encoding)) {
+        if ($encoding !== null) {
+            $encoding = (string) $encoding;
+            if ($encoding === '') {
                 throw new Exception\InvalidArgumentException(
-                    get_called_class() . ' constructor parameter does not allow a NULL or '
-                    . 'blank string value'
+                    get_called_class() . ' constructor parameter does not allow a blank value'
                 );
             }
-            if (!in_array(strtolower($encoding), $this->supportedEncodings)) {
+
+            $encoding = strtolower($encoding);
+            if (!in_array($encoding, $this->supportedEncodings)) {
                 throw new Exception\InvalidArgumentException(
                     'Value of \'' . $encoding . '\' passed to ' . get_called_class()
                     . ' constructor parameter is invalid. Provide an encoding supported by htmlspecialchars()'
                 );
             }
-            $this->encoding = strtolower($encoding);
+
+            $this->encoding = $encoding;
         }
-        if (version_compare(PHP_VERSION, '5.4') >= 0) {
-            $this->htmlSpecialCharsFlags = ENT_QUOTES | ENT_SUBSTITUTE;
+
+        if (defined('ENT_SUBSTITUTE')) {
+            $this->htmlSpecialCharsFlags|= \ENT_SUBSTITUTE;
         }
+
+        // set matcher callbacks
+        $this->htmlAttrMatcher = array($this, 'htmlAttrMatcher');
+        $this->jsMatcher       = array($this, 'jsMatcher');
+        $this->cssMatcher      = array($this, 'cssMatcher');
     }
 
     /**
      * Return the encoding that all output/input is expected to be encoded in.
-     * 
+     *
      * @return string
      */
     public function getEncoding()
@@ -118,7 +143,7 @@ class Escaper
     /**
      * Escape a string for the HTML Body context where there are very few characters
      * of special meaning. Internally this will use htmlspecialchars().
-     * 
+     *
      * @param string $string
      * @return string
      */
@@ -132,21 +157,18 @@ class Escaper
      * Escape a string for the HTML Attribute context. We use an extended set of characters
      * to escape that are not covered by htmlspecialchars() to cover cases where an attribute
      * might be unquoted or quoted illegally (e.g. backticks are valid quotes for IE).
-     * 
+     *
      * @param string $string
      * @return string
      */
     public function escapeHtmlAttr($string)
     {
         $string = $this->toUtf8($string);
-        if (strlen($string) == 0 || ctype_digit($string)) {
+        if ($string === '' || ctype_digit($string)) {
             return $string;
         }
-        $result = preg_replace_callback(
-            '/[^a-zA-Z0-9,\.\-_]/Su',
-            array($this, 'htmlAttrMatcher'),
-            $string
-        );
+
+        $result = preg_replace_callback('/[^a-z0-9,\.\-_]/iSu', $this->htmlAttrMatcher, $string);
         return $this->fromUtf8($result);
     }
 
@@ -158,21 +180,18 @@ class Escaper
      * of cases where HTML escaping was not applied on top of Javascript escaping correctly.
      * Backslash escaping is not used as it still leaves the escaped character as-is and so
      * is not useful in a HTML context.
-     * 
+     *
      * @param string $string
      * @return string
      */
     public function escapeJs($string)
     {
         $string = $this->toUtf8($string);
-        if (strlen($string) == 0 || ctype_digit($string)) {
+        if ($string === '' || ctype_digit($string)) {
             return $string;
         }
-        $result = preg_replace_callback(
-            '/[^a-zA-Z0-9,\._]/Su',
-            array($this, 'jsMatcher'),
-            $string
-        );
+
+        $result = preg_replace_callback('/[^a-z0-9,\._]/iSu', $this->jsMatcher, $string);
         return $this->fromUtf8($result);
     }
 
@@ -180,7 +199,7 @@ class Escaper
      * Escape a string for the URI or Parameter contexts. This should not be used to escape
      * an entire URI - only a subcomponent being inserted. The function is a simple proxy
      * to rawurlencode() which now implements RFC 3986 since PHP 5.3 completely.
-     * 
+     *
      * @param string $string
      * @return string
      */
@@ -192,106 +211,109 @@ class Escaper
     /**
      * Escape a string for the CSS context. CSS escaping can be applied to any string being
      * inserted into CSS and escapes everything except alphanumerics.
-     * 
+     *
      * @param string $string
      * @return string
      */
     public function escapeCss($string)
     {
         $string = $this->toUtf8($string);
-        if (strlen($string) == 0 || ctype_digit($string)) {
+        if ($string === '' || ctype_digit($string)) {
             return $string;
         }
-        $result = preg_replace_callback(
-            '/[^a-zA-Z0-9]/Su',
-            array($this, 'cssMatcher'),
-            $string
-        );
+
+        $result = preg_replace_callback('/[^a-z0-9]/iSu', $this->cssMatcher, $string);
         return $this->fromUtf8($result);
     }
 
     /**
      * Callback function for preg_replace_callback that applies HTML Attribute
      * escaping to all matches.
-     * 
+     *
      * @param array $matches
      * @return string
      */
-    public function htmlAttrMatcher($matches)
+    protected function htmlAttrMatcher($matches)
     {
         $chr = $matches[0];
         $ord = ord($chr);
+
         /**
          * The following replaces characters undefined in HTML with the
          * hex entity for the Unicode replacement character.
          */
         if (($ord <= 0x1f && $chr != "\t" && $chr != "\n" && $chr != "\r")
-        || ($ord >= 0x7f && $ord <= 0x9f)) {
+            || ($ord >= 0x7f && $ord <= 0x9f)
+        ) {
             return '&#xFFFD;';
         }
+
         /**
          * Check if the current character to escape has a name entity we should
-         * replace it with while grabbing the hex value of the character.
+         * replace it with while grabbing the integer value of the character.
          */
-        if (strlen($chr) == 1) {
-            $hex = strtoupper(substr('00' . bin2hex($chr), -2));
-        } else {
+        if (strlen($chr) > 1) {
             $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
-            $hex = strtoupper(substr('0000' . bin2hex($chr), -4));
         }
-        $int = hexdec($hex);
-        if (array_key_exists($int, $this->htmlNamedEntityMap)) {
-            return sprintf('&%s;', $this->htmlNamedEntityMap[$int]);
+
+        $hex = bin2hex($chr);
+        $ord = hexdec($hex);
+        if (isset(static::$htmlNamedEntityMap[$ord])) {
+            return '&' . static::$htmlNamedEntityMap[$ord] . ';';
         }
+
         /**
-         * Per OWASP recommendations, we'll use hex entities for any other
-         * characters where a named entity does not exist.
+         * Per OWASP recommendations, we'll use upper hex entities
+         * for any other characters where a named entity does not exist.
          */
-        return sprintf('&#x%s;', $hex);
+        if ($ord > 255) {
+            return sprintf('&#x%04X;', $ord);
+        } else {
+            return sprintf('&#x%02X;', $ord);
+        }
     }
 
     /**
      * Callback function for preg_replace_callback that applies Javascript
      * escaping to all matches.
-     * 
+     *
      * @param array $matches
      * @return string
      */
-    public function jsMatcher($matches)
+    protected function jsMatcher($matches)
     {
         $chr = $matches[0];
         if (strlen($chr) == 1) {
-            return sprintf('\\x%s', strtoupper(substr('00' . bin2hex($chr), -2)));
+            return sprintf('\\x%02X', ord($chr));
         } else {
             $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
-            return sprintf('\\u%s', strtoupper(substr('0000' . bin2hex($chr), -4)));
+            return sprintf('\\u%04s', strtoupper(bin2hex($chr)));
         }
     }
 
     /**
      * Callback function for preg_replace_callback that applies CSS
      * escaping to all matches.
-     * 
+     *
      * @param array $matches
      * @return string
      */
-    public function cssMatcher($matches)
+    protected function cssMatcher($matches)
     {
         $chr = $matches[0];
         if (strlen($chr) == 1) {
-            $hex = ltrim(strtoupper(bin2hex($chr)), '0');
-            if (strlen($hex) == 0) $hex = '0';
-            return sprintf('\\%s ', $hex);
+            $ord = ord($chr);
         } else {
             $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
-            return sprintf('\\%s ', ltrim(strtoupper(bin2hex($chr)), '0'));
+            $ord = hexdec(bin2hex($chr));
         }
+        return sprintf('\\%X ', $ord);
     }
 
     /**
      * Converts a string to UTF-8 from the base encoding. The base encoding is set via this
      * class' constructor.
-     * 
+     *
      * @param string $string
      * @return string
      */
@@ -302,11 +324,13 @@ class Escaper
         } else {
             $result = $this->convertEncoding($string, 'UTF-8', $this->getEncoding());
         }
+
         if (!$this->isUtf8($result)) {
             throw new Exception\RuntimeException(sprintf(
                 'String to be escaped was not valid UTF-8 or could not be converted: %s', $result
             ));
         }
+
         return $result;
     }
 
@@ -321,29 +345,25 @@ class Escaper
         if ($this->getEncoding() === 'utf-8') {
             return $string;
         }
+
         return $this->convertEncoding($string, $this->getEncoding(), 'UTF-8');
     }
 
     /**
      * Checks if a given string appears to be valid UTF-8 or not.
-     * 
+     *
      * @param string $string
      * @return bool
      */
     protected function isUtf8($string)
     {
-        if (strlen($string) == 0) {
-            return true;
-        } elseif (preg_match('/^./su', $string) == 1) {
-            return true;
-        }
-        return false;
+        return ($string === '' || preg_match('/^./su', $string));
     }
 
     /**
      * Encoding conversion helper which wraps iconv and mbstring where they exist or throws
      * and exception where neither is available.
-     * 
+     *
      * @param string $string
      * @return string
      */
@@ -361,27 +381,11 @@ class Escaper
                 . ' when escaping for non UTF-8 strings.'
             );
         }
+
         if ($result === false) {
             return ''; // return non-fatal blank string on encoding errors from users
         } else {
             return $result;
         }
     }
-
-    /**
-     * Entity Map mapping Unicode codepoints to any available named HTML entities.
-     *
-     * While HTML supports far more named entities, the lowest common denominator
-     * has become HTML5's XML Serialisation which is restricted to the those named
-     * entities that XML supports. Using HTML entities would result in this error:
-     *     XML Parsing Error: undefined entity
-     * 
-     * @var array
-     */
-    protected $htmlNamedEntityMap = array(
-        34 => 'quot',         /* quotation mark */
-        38 => 'amp',          /* ampersand */
-        60 => 'lt',           /* less-than sign */
-        62 => 'gt',           /* greater-than sign */
-    );
 }

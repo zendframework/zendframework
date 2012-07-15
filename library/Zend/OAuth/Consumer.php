@@ -146,9 +146,9 @@ class Consumer extends OAuth
      * @throws Exception\InvalidArgumentException on invalid authorization token, non-matching response authorization token, or unprovided authorization token
      */
     public function getAccessToken(
-        $queryData, 
+        $queryData,
         Token\Request $token,
-        $httpMethod = null, 
+        $httpMethod = null,
         Http\AccessToken $request = null
     ) {
         $authorizedToken = new Token\AuthorizedRequest($queryData);

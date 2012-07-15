@@ -10,14 +10,14 @@
 
 namespace ZendTest\Amf\TestAsset\Authentication;
 
-class NoAcl 
+class NoAcl
 {
-    function hello() 
+    public function hello()
     {
         return "hello!";
     }
 
-    function initAcl() 
+    public function initAcl()
     {
         return false;
     }

@@ -54,10 +54,10 @@ class TranslatePlural extends AbstractHelper
      * @throws Exception\RuntimeException
      */
     public function __invoke(
-        $singular, 
-        $plural, 
+        $singular,
+        $plural,
         $number,
-        $textDomain = 'default', 
+        $textDomain = 'default',
         $locale = null
     ) {
         if ($this->translator === null) {

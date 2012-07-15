@@ -22,11 +22,11 @@ class Access extends AbstractToken
 {
     /**
      * Cast to HTTP header
-     * 
-     * @param  string $url 
+     *
+     * @param  string $url
      * @param  Config $config
-     * @param  null|array $customParams 
-     * @param  null|string $realm 
+     * @param  null|array $customParams
+     * @param  null|string $realm
      * @return string
      * @throws OAuth\Exception\InvalidArgumentException
      */
@@ -47,10 +47,10 @@ class Access extends AbstractToken
 
     /**
      * Cast to HTTP query string
-     * 
-     * @param  mixed $url 
-     * @param  Zend\OAuth\Config $config 
-     * @param  null|array $params 
+     *
+     * @param  mixed $url
+     * @param  Zend\OAuth\Config $config
+     * @param  null|array $params
      * @return string
      * @throws OAuth\Exception\InvalidArgumentException
      */
@@ -70,11 +70,11 @@ class Access extends AbstractToken
 
     /**
      * Get OAuth client
-     * 
-     * @param  array $oauthOptions 
-     * @param  null|string $uri 
+     *
+     * @param  array $oauthOptions
+     * @param  null|string $uri
      * @param  null|array|\Traversable $config
-     * @param  bool $excludeCustomParamsFromHeader 
+     * @param  bool $excludeCustomParamsFromHeader
      * @return OAuth\Client
      */
     public function getHttpClient(array $oauthOptions, $uri = null, $config = null, $excludeCustomParamsFromHeader = true)

@@ -23,8 +23,8 @@ use Zend\Stdlib\DispatchableInterface;
  * Default dispatch listener
  *
  * Pulls controllers from the service manager's "ControllerLoader" service.
- * If the controller cannot be found, or is not dispatchable, sets up a "404" 
- * result. 
+ * If the controller cannot be found, or is not dispatchable, sets up a "404"
+ * result.
  *
  * If the controller subscribes to InjectApplicationEventInterface, it injects
  * the current MvcEvent into the controller.
@@ -49,7 +49,7 @@ class DispatchListener implements ListenerAggregateInterface
     /**
      * Attach listeners to an event manager
      *
-     * @param  EventManagerInterface $events 
+     * @param  EventManagerInterface $events
      * @return void
      */
     public function attach(EventManagerInterface $events)
@@ -59,8 +59,8 @@ class DispatchListener implements ListenerAggregateInterface
 
     /**
      * Detach listeners from an event manager
-     * 
-     * @param  EventManagerInterface $events 
+     *
+     * @param  EventManagerInterface $events
      * @return void
      */
     public function detach(EventManagerInterface $events)
@@ -74,8 +74,8 @@ class DispatchListener implements ListenerAggregateInterface
 
     /**
      * Listen to the "dispatch" event
-     * 
-     * @param  MvcEvent $e 
+     *
+     * @param  MvcEvent $e
      * @return mixed
      */
     public function onDispatch(MvcEvent $e)
@@ -100,7 +100,7 @@ class DispatchListener implements ListenerAggregateInterface
             if (! $return) {
                 $return = $e->getResult();
             }
-            
+
             return $this->complete($return, $e);
         } catch (\Exception $exception) {
             $e->setError($application::ERROR_EXCEPTION)
@@ -154,9 +154,9 @@ class DispatchListener implements ListenerAggregateInterface
 
     /**
      * Complete the dispatch
-     * 
-     * @param  mixed $return 
-     * @param  MvcEvent $event 
+     *
+     * @param  mixed $return
+     * @param  MvcEvent $event
      * @return mixed
      */
     protected function complete($return, MvcEvent $event)

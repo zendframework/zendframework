@@ -17,6 +17,6 @@ use Zend\Mail\Exception;
  * @package    Zend_Mail
  * @subpackage Header
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
 {}

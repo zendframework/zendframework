@@ -38,7 +38,7 @@ class FilterChain extends AbstractFilter implements Countable
 
     /**
      * Initialize filter chain
-     * 
+     *
      */
     public function __construct($options = null)
     {
@@ -90,7 +90,7 @@ class FilterChain extends AbstractFilter implements Countable
 
     /**
      * Return the count of attached filters
-     * 
+     *
      * @return int
      */
     public function count()
@@ -100,7 +100,7 @@ class FilterChain extends AbstractFilter implements Countable
 
     /**
      * Get plugin manager instance
-     * 
+     *
      * @return FilterPluginManager
      */
     public function getPluginManager()
@@ -113,8 +113,8 @@ class FilterChain extends AbstractFilter implements Countable
 
     /**
      * Set plugin manager instance
-     * 
-     * @param  FilterPluginManager $plugins 
+     *
+     * @param  FilterPluginManager $plugins
      * @return FilterChain
      */
     public function setPluginManager(FilterPluginManager $plugins)
@@ -125,9 +125,9 @@ class FilterChain extends AbstractFilter implements Countable
 
     /**
      * Retrieve a filter plugin by name
-     * 
-     * @param  mixed $name 
-     * @param  array $options 
+     *
+     * @param  mixed $name
+     * @param  array $options
      * @return Filter
      */
     public function plugin($name, array $options = array())
@@ -138,7 +138,7 @@ class FilterChain extends AbstractFilter implements Countable
 
     /**
      * Attach a filter to the chain
-     * 
+     *
      * @param  callback|FilterInterface $callback A Filter implementation or valid PHP callback
      * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
      * @return FilterChain
@@ -161,11 +161,11 @@ class FilterChain extends AbstractFilter implements Countable
     /**
      * Attach a filter to the chain using a short name
      *
-     * Retrieves the filter from the attached plugin broker, and then calls attach() 
+     * Retrieves the filter from the attached plugin broker, and then calls attach()
      * with the retrieved instance.
-     * 
-     * @param  string $name 
-     * @param  mixed $options 
+     *
+     * @param  string $name
+     * @param  mixed $options
      * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
      * @return FilterChain
      */

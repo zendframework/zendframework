@@ -64,7 +64,7 @@ class Object
     protected $container;
     /**
      * Constructor
-     * 
+     *
      * You must pass the RackspaceFiles object of the caller and an associative
      * array with the keys "name", "container", "hash", "bytes", "content_type",
      * "last_modified", "file" where:
@@ -75,9 +75,9 @@ class Object
      * content_type= content type of the object's content
      * last_modified= date of the last modified of the object
      * content= content of the object
-     * 
+     *
      * @param RackspaceFiles $service
-     * @param array $data 
+     * @param array $data
      */
     public function __construct(RackspaceFiles $service,$data)
     {
@@ -118,7 +118,7 @@ class Object
      *
      * @return string
      */
-    public function getName() 
+    public function getName()
     {
         return $this->name;
     }
@@ -127,7 +127,7 @@ class Object
      *
      * @return string
      */
-    public function getContainer() 
+    public function getContainer()
     {
         return $this->container;
     }
@@ -136,7 +136,7 @@ class Object
      *
      * @return string|boolean
      */
-    public function getHash() 
+    public function getHash()
     {
         return $this->hash;
     }
@@ -145,7 +145,7 @@ class Object
      *
      * @return integer|boolean
      */
-    public function getSize() 
+    public function getSize()
     {
         return $this->size;
     }
@@ -154,7 +154,7 @@ class Object
      *
      * @return string
      */
-    public function getContentType() 
+    public function getContentType()
     {
         return $this->contentType;
     }
@@ -163,7 +163,7 @@ class Object
      *
      * @return string
      */
-    public function getLastModified() 
+    public function getLastModified()
     {
         return $this->lastModified;
     }
@@ -172,7 +172,7 @@ class Object
      *
      * @return string
      */
-    public function getContent() 
+    public function getContent()
     {
         return $this->content;
     }
@@ -183,7 +183,7 @@ class Object
      * @param string $key
      * @return string|array|boolean
      */
-    public function getMetadata($key=null) 
+    public function getMetadata($key=null)
     {
         $result= $this->service->getMetadataObject($this->container,$this->name);
         if (!empty($result)) {
@@ -199,11 +199,11 @@ class Object
     /**
      * Set the metadata value
      * The old metadata values are replaced with the new one
-     * 
+     *
      * @param array $metadata
      * @return boolean
      */
-    public function setMetadata($metadata) 
+    public function setMetadata($metadata)
     {
         return $this->service->setMetadataObject($this->container,$this->name,$metadata);
     }
@@ -218,7 +218,7 @@ class Object
      * @param string $content_type
      * @return boolean
      */
-    public function copyTo($container_dest,$name_dest,$metadata=array(),$content_type=null) 
+    public function copyTo($container_dest,$name_dest,$metadata=array(),$content_type=null)
     {
         return $this->service->copyObject($this->container,$this->name,$container_dest,$name_dest,$metadata,$content_type);
     }
@@ -227,7 +227,7 @@ class Object
      *
      * @return string
      */
-    public function getCdnUrl() 
+    public function getCdnUrl()
     {
         $result= $this->service->getInfoCdnContainer($this->container);
         if ($result!==false) {
@@ -242,7 +242,7 @@ class Object
      *
      * @return string
      */
-    public function getCdnUrlSsl() 
+    public function getCdnUrlSsl()
     {
         $result= $this->service->getInfoCdnContainer($this->container);
         if ($result!==false) {

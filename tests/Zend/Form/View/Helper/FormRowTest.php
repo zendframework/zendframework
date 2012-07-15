@@ -70,7 +70,7 @@ class FormRowTest extends TestCase
         $this->assertContains('</label>', $markup);
     }
 
-    function testCanRenderRowLabelAttributes()
+    public function testCanRenderRowLabelAttributes()
     {
         $element = new Element('foo');
         $element->setLabel('The value for foo:');

@@ -46,7 +46,7 @@ class Nirvanix implements AdapterInterface
      *
      * @param  array|Traversable $options
      */
-    function __construct($options = array())
+    public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
@@ -216,14 +216,10 @@ class Nirvanix implements AdapterInterface
 
         // Need to special case this as Nirvanix returns an array if there is
         // more than one, but doesn't return an array if there is only one.
-        if ($length == 1)
-        {
+        if ($length == 1) {
             $metadata[(string)$metadataNode->Metadata->Type->value] = (string)$metadataNode->Metadata->Value;
-        }
-        else if ($length > 1)
-        {
-            for ($i=0; $i<$length; $i++)
-            {
+        } elseif ($length > 1) {
+            for ($i=0; $i<$length; $i++) {
                 $metadata[(string)$metadataNode->Metadata[$i]->Type] = (string)$metadataNode->Metadata[$i]->Value;
             }
         }
@@ -356,8 +352,7 @@ class Nirvanix implements AdapterInterface
                 //more than one, but doesn't return an array if there is only one.
                 if ($numFiles == 1) {
                     $resultArray[] = (string)$response->ListFolder->File->Name;
-                }
-                else {
+                } else {
                     foreach ($response->ListFolder->File as $arrayElem) {
                         $resultArray[] = (string) $arrayElem->Name;
                     }

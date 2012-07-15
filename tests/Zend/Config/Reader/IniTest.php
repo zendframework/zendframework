@@ -24,10 +24,10 @@ class IniTest extends AbstractReaderTestCase
     {
         $this->reader = new Ini();
     }
-    
+
     /**
      * getTestAssetPath(): defined by AbstractReaderTestCase.
-     * 
+     *
      * @see    AbstractReaderTestCase::getTestAssetPath()
      * @return string
      */
@@ -35,14 +35,14 @@ class IniTest extends AbstractReaderTestCase
     {
         return __DIR__ . '/TestAssets/Ini/' . $name . '.ini';
     }
-    
+
     public function testInvalidIniFile()
     {
         $this->reader = new Ini();
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
         $arrayIni = $this->reader->fromFile($this->getTestAssetPath('invalid'));
     }
-    
+
     public function testFromString()
     {
         $ini = <<<ECS
@@ -51,13 +51,13 @@ bar[]= "baz"
 bar[]= "foo"
 
 ECS;
-        
+
         $arrayIni = $this->reader->fromString($ini);
         $this->assertEquals($arrayIni['test'], 'foo');
         $this->assertEquals($arrayIni['bar'][0], 'baz');
         $this->assertEquals($arrayIni['bar'][1], 'foo');
     }
-    
+
     public function testInvalidString()
     {
         $ini = <<<ECS
@@ -67,7 +67,7 @@ ECS;
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
         $arrayIni = $this->reader->fromString($ini);
     }
-    
+
     public function testFromStringWithSection()
     {
         $ini = <<<ECS
@@ -77,7 +77,7 @@ bar[]= "baz"
 bar[]= "foo"
 
 ECS;
-        
+
         $arrayIni = $this->reader->fromString($ini);
         $this->assertEquals($arrayIni['all']['test'], 'foo');
         $this->assertEquals($arrayIni['all']['bar'][0], 'baz');

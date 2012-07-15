@@ -13,7 +13,7 @@ namespace ZendTest\Mail\Header;
 use Zend\Mail\Header;
 
 /**
- * This test is primarily to test that AbstractAddressList headers perform 
+ * This test is primarily to test that AbstractAddressList headers perform
  * header folding and MIME encoding properly.
  *
  * @category   Zend

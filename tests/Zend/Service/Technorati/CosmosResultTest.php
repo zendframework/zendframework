@@ -14,15 +14,6 @@ use DateTime;
 use Zend\Service\Technorati;
 
 /**
- * Test helper
- */
-
-/**
- * @see Technorati\CosmosResult
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_Service_Technorati
  * @subpackage UnitTests

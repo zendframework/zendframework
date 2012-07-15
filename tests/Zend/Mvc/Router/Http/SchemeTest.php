@@ -23,50 +23,50 @@ class SchemeTest extends TestCase
     {
         $request = new Request();
         $request->setUri('https://example.com/');
-        
+
         $route = new Scheme('https');
         $match = $route->match($request);
-        
+
         $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
     }
-    
+
     public function testNoMatchingOnDifferentScheme()
     {
         $request = new Request();
         $request->setUri('http://example.com/');
-        
+
         $route = new Scheme('https');
         $match = $route->match($request);
-        
+
         $this->assertNull($match);
     }
-    
+
     public function testAssembling()
     {
         $uri   = new HttpUri();
         $route = new Scheme('https');
         $path  = $route->assemble(array(), array('uri' => $uri));
-        
+
         $this->assertEquals('', $path);
         $this->assertEquals('https', $uri->getScheme());
     }
-    
+
     public function testNoMatchWithoutUriMethod()
     {
         $route   = new Scheme('https');
         $request = new BaseRequest();
-        
+
         $this->assertNull($route->match($request));
     }
-    
+
     public function testGetAssembledParams()
     {
         $route = new Scheme('https');
         $route->assemble(array('foo' => 'bar'));
-        
+
         $this->assertEquals(array(), $route->getAssembledParams());
     }
-    
+
     public function testFactory()
     {
         $tester = new FactoryTester($this);

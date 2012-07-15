@@ -232,7 +232,7 @@ class Code128 extends AbstractObject
                     $result[] = $code;
                     $currentCharset = 'C';
                 }
-            } else if (in_array($char, $this->charSets['B']) && $currentCharset != 'B'
+            } elseif (in_array($char, $this->charSets['B']) && $currentCharset != 'B'
                   && !(in_array($char, $this->charSets['A']) && $currentCharset == 'A')) {
                 /**
                  * Switch to B as B contains the char and B is not the current charset.
@@ -244,7 +244,7 @@ class Code128 extends AbstractObject
                 }
                 $result[] = $code;
                 $currentCharset = 'B';
-            } else if (array_key_exists($char, $this->charSets['A']) && $currentCharset != 'A'
+            } elseif (array_key_exists($char, $this->charSets['A']) && $currentCharset != 'A'
                   && !(array_key_exists($char, $this->charSets['B']) && $currentCharset == 'B')) {
                 /**
                  * Switch to C as C contains the char and C is not the current charset.

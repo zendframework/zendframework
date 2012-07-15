@@ -224,7 +224,7 @@ class Page
                     break;
 
             }
-        } else if ($param1 instanceof Page && $param2 === null && $param3 === null) {
+        } elseif ($param1 instanceof Page && $param2 === null && $param3 === null) {
             // Clone existing page.
             // Let already existing content and resources to be shared between pages
             // We don't give existing content modification functionality, so we don't need "deep copy"
@@ -255,7 +255,7 @@ class Page
             }
 
             return;
-        } else if (is_string($param1) &&
+        } elseif (is_string($param1) &&
                    ($param2 === null || $param2 instanceof ObjectFactory) &&
                    $param3 === null) {
             if ($param2 !== null) {
@@ -298,7 +298,7 @@ class Page
              * @todo support of pagesize recalculation to "default user space units"
              */
 
-        } else if (is_numeric($param1) && is_numeric($param2) &&
+        } elseif (is_numeric($param1) && is_numeric($param2) &&
                    ($param3 === null || $param3 instanceof ObjectFactory)) {
             if ($param3 !== null) {
                 $this->_objFactory = $param3;
@@ -1147,7 +1147,7 @@ class Page
             // drawEllipse($x1, $y1, $x2, $y2);
             $startAngle = null;
             $fillType = self::SHAPE_DRAW_FILL_AND_STROKE;
-        } else if ($param6 === null) {
+        } elseif ($param6 === null) {
             // drawEllipse($x1, $y1, $x2, $y2, $fillType);
             $startAngle = null;
             $fillType = $param5;

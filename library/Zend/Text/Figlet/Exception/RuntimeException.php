@@ -18,7 +18,7 @@ use Zend\Text\Exception;
  * @category  Zend
  * @package   Zend_Text_Figlet
  */
-class RuntimeException 
+class RuntimeException
     extends Exception\RuntimeException
     implements ExceptionInterface
 {}

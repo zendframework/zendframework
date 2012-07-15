@@ -24,7 +24,7 @@ class MysqlResult
      *
      * Key => Value is Mysql type (exact string) => PHP type
      */
-    static public $fieldTypes = array(
+    public static $fieldTypes = array(
         "int"       => "int",
         "timestamp" => "int",
         "year"      => "int",
@@ -36,7 +36,7 @@ class MysqlResult
      * @param resource $resource
      * @return array
      */
-    public function parse($resource) 
+    public function parse($resource)
     {
         $result   = array();
         $fieldcnt = mysql_num_fields($resource);

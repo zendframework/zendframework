@@ -15,7 +15,7 @@ use Zend\ServiceManager\AbstractPluginManager;
 /**
  * Plugin manager implementation for SMTP extensions.
  *
- * Enforces that SMTP extensions retrieved are instances of Smtp. Additionally, 
+ * Enforces that SMTP extensions retrieved are instances of Smtp. Additionally,
  * it registers a number of default extensions available.
  *
  * @category   Zend
@@ -26,7 +26,7 @@ class SmtpPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of extensions
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -40,8 +40,8 @@ class SmtpPluginManager extends AbstractPluginManager
      * Validate the plugin
      *
      * Checks that the extension loaded is an instance of Smtp.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

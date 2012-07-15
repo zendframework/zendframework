@@ -202,7 +202,7 @@ class Factory
      * Specification follows that of {@link createFieldset()}, and adds the
      * following keys:
      *
-     * - input_filter: input filter instance, named input filter class, or 
+     * - input_filter: input filter instance, named input filter class, or
      *   array specification for the input filter factory
      * - hydrator: hydrator instance or named hydrator class
      *
@@ -467,11 +467,11 @@ class Factory
      */
     protected static function isSubclassOf($className, $type)
     {
-        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
-            return is_subclass_of($className, $type);
-        }
         if (is_subclass_of($className, $type)) {
             return true;
+        }
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return false;
         }
         if (!interface_exists($type)) {
             return false;

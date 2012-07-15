@@ -28,7 +28,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed->setItunesBlock('yes');
         $this->assertEquals('yes', $feed->getItunesBlock());
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -37,7 +37,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed = new Writer\Feed;
         $feed->setItunesBlock('123');
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -46,21 +46,21 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed = new Writer\Feed;
         $feed->setItunesBlock(str_repeat('a', 256));
     }
-    
+
     public function testAddAuthors()
     {
         $feed = new Writer\Feed;
         $feed->addItunesAuthors(array('joe', 'jane'));
         $this->assertEquals(array('joe', 'jane'), $feed->getItunesAuthors());
     }
-    
+
     public function testAddAuthor()
     {
         $feed = new Writer\Feed;
         $feed->addItunesAuthor('joe');
         $this->assertEquals(array('joe'), $feed->getItunesAuthors());
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -69,7 +69,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed = new Writer\Feed;
         $feed->addItunesAuthor(str_repeat('a', 256));
     }
-    
+
     public function testSetCategories()
     {
         $feed = new Writer\Feed;
@@ -80,7 +80,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed->setItunesCategories($cats);
         $this->assertEquals($cats, $feed->getItunesCategories());
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -94,21 +94,21 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed->setItunesCategories($cats);
         $this->assertEquals($cats, $feed->getItunesAuthors());
     }
-    
+
     public function testSetImageAsPngFile()
     {
         $feed = new Writer\Feed;
         $feed->setItunesImage('http://www.example.com/image.png');
         $this->assertEquals('http://www.example.com/image.png', $feed->getItunesImage());
     }
-    
+
     public function testSetImageAsJpgFile()
     {
         $feed = new Writer\Feed;
         $feed->setItunesImage('http://www.example.com/image.jpg');
         $this->assertEquals('http://www.example.com/image.jpg', $feed->getItunesImage());
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -117,7 +117,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed = new Writer\Feed;
         $feed->setItunesImage('http://');
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -126,28 +126,28 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed = new Writer\Feed;
         $feed->setItunesImage('http://www.example.com/image.gif');
     }
-    
+
     public function testSetDurationAsSeconds()
     {
         $feed = new Writer\Feed;
         $feed->setItunesDuration(23);
         $this->assertEquals(23, $feed->getItunesDuration());
     }
-    
+
     public function testSetDurationAsMinutesAndSeconds()
     {
         $feed = new Writer\Feed;
         $feed->setItunesDuration('23:23');
         $this->assertEquals('23:23', $feed->getItunesDuration());
     }
-    
+
     public function testSetDurationAsHoursMinutesAndSeconds()
     {
         $feed = new Writer\Feed;
         $feed->setItunesDuration('23:23:23');
         $this->assertEquals('23:23:23', $feed->getItunesDuration());
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -156,7 +156,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed = new Writer\Feed;
         $feed->setItunesDuration('abc');
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -165,7 +165,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed = new Writer\Feed;
         $feed->setItunesDuration('23:456');
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -174,28 +174,28 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed = new Writer\Feed;
         $feed->setItunesDuration('23:234:45');
     }
-    
+
     public function testSetExplicitToYes()
     {
         $feed = new Writer\Feed;
         $feed->setItunesExplicit('yes');
         $this->assertEquals('yes', $feed->getItunesExplicit());
     }
-    
+
     public function testSetExplicitToNo()
     {
         $feed = new Writer\Feed;
         $feed->setItunesExplicit('no');
         $this->assertEquals('no', $feed->getItunesExplicit());
     }
-    
+
     public function testSetExplicitToClean()
     {
         $feed = new Writer\Feed;
         $feed->setItunesExplicit('clean');
         $this->assertEquals('clean', $feed->getItunesExplicit());
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -204,7 +204,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed = new Writer\Feed;
         $feed->setItunesExplicit('abc');
     }
-    
+
     public function testSetKeywords()
     {
         $feed = new Writer\Feed;
@@ -214,7 +214,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed->setItunesKeywords($words);
         $this->assertEquals($words, $feed->getItunesKeywords());
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -226,7 +226,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         );
         $feed->setItunesKeywords($words);
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -238,14 +238,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         );
         $feed->setItunesKeywords($words);
     }
-    
+
     public function testSetNewFeedUrl()
     {
         $feed = new Writer\Feed;
         $feed->setItunesNewFeedUrl('http://example.com/feed');
         $this->assertEquals('http://example.com/feed', $feed->getItunesNewFeedUrl());
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -254,28 +254,28 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed = new Writer\Feed;
         $feed->setItunesNewFeedUrl('http://');
     }
-    
+
     public function testAddOwner()
     {
         $feed = new Writer\Feed;
         $feed->addItunesOwner(array('name'=>'joe','email'=>'joe@example.com'));
         $this->assertEquals(array(array('name'=>'joe','email'=>'joe@example.com')), $feed->getItunesOwners());
     }
-    
+
     public function testAddOwners()
     {
         $feed = new Writer\Feed;
         $feed->addItunesOwners(array(array('name'=>'joe','email'=>'joe@example.com')));
         $this->assertEquals(array(array('name'=>'joe','email'=>'joe@example.com')), $feed->getItunesOwners());
     }
-    
+
     public function testSetSubtitle()
     {
         $feed = new Writer\Feed;
         $feed->setItunesSubtitle('abc');
         $this->assertEquals('abc', $feed->getItunesSubtitle());
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
@@ -284,14 +284,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed = new Writer\Feed;
         $feed->setItunesSubtitle(str_repeat('a', 256));
     }
-    
+
     public function testSetSummary()
     {
         $feed = new Writer\Feed;
         $feed->setItunesSummary('abc');
         $this->assertEquals('abc', $feed->getItunesSummary());
     }
-    
+
     /**
      * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */

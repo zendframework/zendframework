@@ -194,7 +194,7 @@ class TestAdapterTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static public function validHttpResponseProvider()
+    public static function validHttpResponseProvider()
     {
         return array(
            array("HTTP/1.1 200 OK\r\n\r\n"),

@@ -37,7 +37,7 @@ abstract class NavigationTarget
             if (($resource->Type === null  ||  $resource->Type->value =='Action')  &&  $resource->S !== null) {
                 // It's a well-formed action, load it
                 return Action\AbstractAction::load($resource);
-            } else if ($resource->D !== null) {
+            } elseif ($resource->D !== null) {
                 // It's a destination
                 $resource = $resource->D;
             } else {

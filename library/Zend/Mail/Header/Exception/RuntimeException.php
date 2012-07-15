@@ -17,6 +17,6 @@ use Zend\Mail\Exception;
  * @package    Zend_Mail
  * @subpackage Header
  */
-class RuntimeException extends Exception\RuntimeException implements 
+class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface
 {}

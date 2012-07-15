@@ -24,10 +24,10 @@ class JsonTest extends AbstractReaderTestCase
     {
         $this->reader = new Json();
     }
-    
+
     /**
      * getTestAssetPath(): defined by AbstractReaderTestCase.
-     * 
+     *
      * @see    AbstractReaderTestCase::getTestAssetPath()
      * @return string
      */
@@ -35,36 +35,36 @@ class JsonTest extends AbstractReaderTestCase
     {
         return __DIR__ . '/TestAssets/Json/' . $name . '.json';
     }
-    
+
     public function testInvalidJsonFile()
     {
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
         $arrayJson = $this->reader->fromFile($this->getTestAssetPath('invalid'));
     }
-    
+
     public function testIncludeAsElement()
     {
         $arrayJson = $this->reader->fromFile($this->getTestAssetPath('include-base_nested'));
         $this->assertEquals($arrayJson['bar']['foo'], 'foo');
     }
-    
+
     public function testFromString()
     {
         $json = '{ "test" : "foo", "bar" : [ "baz", "foo" ] }';
-        
+
         $arrayJson = $this->reader->fromString($json);
-        
+
         $this->assertEquals($arrayJson['test'], 'foo');
         $this->assertEquals($arrayJson['bar'][0], 'baz');
         $this->assertEquals($arrayJson['bar'][1], 'foo');
     }
-    
+
     public function testInvalidString()
     {
         $json = '{"foo":"bar"';
-        
+
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
         $arrayIni = $this->reader->fromString($json);
     }
-    
+
 }

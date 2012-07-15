@@ -10,6 +10,8 @@
 
 namespace Zend\GData\App;
 
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * Abstract class for all XML elements
  *
@@ -281,10 +283,12 @@ abstract class AbstractBase
     {
         if ($xml) {
             // Load the feed as an XML DOMDocument object
-            @ini_set('track_errors', 1);
+            ErrorHandler::start(E_WARNING);
+            ini_set('track_errors', 1);
             $doc = new \DOMDocument();
-            $success = @$doc->loadXML($xml);
-            @ini_restore('track_errors');
+            $success = $doc->loadXML($xml);
+            ini_restore('track_errors');
+            ErrorHandler::stop();
             if (!$success) {
                 throw new Exception("DOMDocument cannot parse XML: $php_errormsg");
             }
@@ -456,7 +460,7 @@ abstract class AbstractBase
         $method = 'get'.ucfirst($name);
         if (method_exists($this, $method)) {
             return $this->$method();
-        } else if (property_exists($this, "_${name}")) {
+        } elseif (property_exists($this, "_${name}")) {
             return $this->{'_' . $name};
         } else {
             throw new InvalidArgumentException(
@@ -482,7 +486,7 @@ abstract class AbstractBase
         $method = 'set'.ucfirst($name);
         if (method_exists($this, $method)) {
             $this->$method($val);
-        } else if (isset($this->{'_' . $name}) || ($this->{'_' . $name} === null)) {
+        } elseif (isset($this->{'_' . $name}) || ($this->{'_' . $name} === null)) {
             $this->{'_' . $name} = $val;
         } else {
             throw new InvalidArgumentException(

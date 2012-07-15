@@ -28,7 +28,7 @@ class Predicate extends PredicateSet
 
     /**
      * Begin nesting predicates
-     * 
+     *
      * @return PredicateSet
      */
     public function nest()
@@ -42,8 +42,8 @@ class Predicate extends PredicateSet
 
     /**
      * Indicate what predicate will be unnested
-     * 
-     * @param  Predicate $predicate 
+     *
+     * @param  Predicate $predicate
      * @return void
      */
     public function setUnnest(Predicate $predicate)
@@ -71,11 +71,11 @@ class Predicate extends PredicateSet
      * Create "Equal To" predicate
      *
      * Utilizes Operator predicate
-     * 
-     * @param  scalar $left 
-     * @param  scalar $right 
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType 
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType 
+     *
+     * @param  scalar $left
+     * @param  scalar $right
+     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType
+     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType
      * @return Predicate
      */
     public function equalTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -93,11 +93,11 @@ class Predicate extends PredicateSet
      * Create "Less Than" predicate
      *
      * Utilizes Operator predicate
-     * 
-     * @param  scalar $left 
-     * @param  scalar $right 
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType 
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType 
+     *
+     * @param  scalar $left
+     * @param  scalar $right
+     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType
+     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType
      * @return Predicate
      */
     public function lessThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -115,11 +115,11 @@ class Predicate extends PredicateSet
      * Create "Greater Than" predicate
      *
      * Utilizes Operator predicate
-     * 
-     * @param  scalar $left 
-     * @param  scalar $right 
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType 
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType 
+     *
+     * @param  scalar $left
+     * @param  scalar $right
+     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType
+     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType
      * @return Predicate
      */
     public function greaterThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -137,11 +137,11 @@ class Predicate extends PredicateSet
      * Create "Less Than Or Equal To" predicate
      *
      * Utilizes Operator predicate
-     * 
-     * @param  scalar $left 
-     * @param  scalar $right 
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType 
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType 
+     *
+     * @param  scalar $left
+     * @param  scalar $right
+     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType
+     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType
      * @return Predicate
      */
     public function lessThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -159,11 +159,11 @@ class Predicate extends PredicateSet
      * Create "Greater Than Or Equal To" predicate
      *
      * Utilizes Operator predicate
-     * 
-     * @param  scalar $left 
-     * @param  scalar $right 
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType 
-     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType 
+     *
+     * @param  scalar $left
+     * @param  scalar $right
+     * @param  TYPE_IDENTIFIER|TYPE_VALUE $leftType
+     * @param  TYPE_IDENTIFIER|TYPE_VALUE $rightType
      * @return Predicate
      */
     public function greaterThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -181,8 +181,8 @@ class Predicate extends PredicateSet
      * Create "Like" predicate
      *
      * Utilizes Like predicate
-     * 
-     * @param  string $identifier 
+     *
+     * @param  string $identifier
      * @param  string $like
      * @return Predicate
      */
@@ -201,8 +201,8 @@ class Predicate extends PredicateSet
      * Create "Literal" predicate
      *
      * Utilizes Like predicate
-     * 
-     * @param  string $literal 
+     *
+     * @param  string $literal
      * @param  scalar|array $parameter
      * @return Predicate
      */
@@ -221,8 +221,8 @@ class Predicate extends PredicateSet
      * Create "IS NULL" predicate
      *
      * Utilizes IsNull predicate
-     * 
-     * @param  string $identifier 
+     *
+     * @param  string $identifier
      * @return Predicate
      */
     public function isNull($identifier)
@@ -240,8 +240,8 @@ class Predicate extends PredicateSet
      * Create "IS NOT NULL" predicate
      *
      * Utilizes IsNotNull predicate
-     * 
-     * @param  string $identifier 
+     *
+     * @param  string $identifier
      * @return Predicate
      */
     public function isNotNull($identifier)
@@ -259,9 +259,9 @@ class Predicate extends PredicateSet
      * Create "in" predicate
      *
      * Utilizes In predicate
-     * 
-     * @param  string $identifier 
-     * @param  array $valueSet 
+     *
+     * @param  string $identifier
+     * @param  array $valueSet
      * @return Predicate
      */
     public function in($identifier, array $valueSet = array())
@@ -279,10 +279,10 @@ class Predicate extends PredicateSet
      * Create "between" predicate
      *
      * Utilizes Between predicate
-     * 
-     * @param  string $identifier 
-     * @param  scalar $minValue 
-     * @param  scalar $maxValue 
+     *
+     * @param  string $identifier
+     * @param  scalar $minValue
+     * @param  scalar $maxValue
      * @return Predicate
      */
     public function between($identifier, $minValue, $maxValue)
@@ -300,8 +300,8 @@ class Predicate extends PredicateSet
      * Overloading
      *
      * Overloads "or", "and", "nest", and "unnest"
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return Predicate
      */
     public function __get($name)

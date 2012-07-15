@@ -47,8 +47,8 @@ class Property extends GData\Extension
     {
         switch ($attribute->localName) {
             case 'name':
-            	$this->_name = substr($attribute->nodeValue, 3);
-    	        break;
+                $this->_name = substr($attribute->nodeValue, 3);
+                break;
             case 'value':
                 $this->_value = $attribute->nodeValue;
                 break;
@@ -85,8 +85,8 @@ class Property extends GData\Extension
      */
     public function setName($name)
     {
-    	$this->_name = $name;
-    	return $this;
+        $this->_name = $name;
+        return $this;
     }
 
     /**
@@ -94,7 +94,7 @@ class Property extends GData\Extension
      */
     public function getName()
     {
-    	return $this->_name;
+        return $this->_name;
     }
 
     /**

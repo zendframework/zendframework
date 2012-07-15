@@ -496,8 +496,8 @@ EOT;
     /**
      *  @group ZF-3257
      */
-    public function testUsingXML8() {
-
+    public function testUsingXML8()
+    {
         // Set the XML contents that will be tested here.
         $xmlStringContents = <<<EOT
 <?xml version="1.0"?>
@@ -562,40 +562,40 @@ EOT;
     {
         $xmlStringContents = <<<EOT
 <response>
-	<status>success</status>
-	<description>200 OK</description>
-	<message_type>
-		<system_name>A</system_name>
-		<shortname>B</shortname>
-		<long_name>C</long_name>
-		<as_verb>D</as_verb>
-		<as_noun>E</as_noun>
-		<challenge_phrase>F</challenge_phrase>
-		<recipient_details>G</recipient_details>
-		<sender_details>H</sender_details>
-		<example_text>A</example_text>
-		<short_description>B</short_description>
-		<long_description>C</long_description>
-		<version>D</version>
-		<developer>E</developer>
-		<config_instructions>A</config_instructions>
-		<config_fragment>B</config_fragment>
-		<icon_small>C</icon_small>
-		<icon_medium>D</icon_medium>
-		<icon_large>E</icon_large>
-		<defaults>
-			<close_rules>
-				<after_responses>A</after_responses>
-			</close_rules>
-			<recipient_visibility>B</recipient_visibility>
-			<recipient_invite>C</recipient_invite>
-			<results_visibility>A</results_visibility>
-			<response_visibility>B</response_visibility>
-			<recipient_resubmit>C</recipient_resubmit>
-			<feed_status>D</feed_status>
-		</defaults>
-	</message_type>
-	<execution_time>0.0790269374847</execution_time>
+    <status>success</status>
+    <description>200 OK</description>
+    <message_type>
+        <system_name>A</system_name>
+        <shortname>B</shortname>
+        <long_name>C</long_name>
+        <as_verb>D</as_verb>
+        <as_noun>E</as_noun>
+        <challenge_phrase>F</challenge_phrase>
+        <recipient_details>G</recipient_details>
+        <sender_details>H</sender_details>
+        <example_text>A</example_text>
+        <short_description>B</short_description>
+        <long_description>C</long_description>
+        <version>D</version>
+        <developer>E</developer>
+        <config_instructions>A</config_instructions>
+        <config_fragment>B</config_fragment>
+        <icon_small>C</icon_small>
+        <icon_medium>D</icon_medium>
+        <icon_large>E</icon_large>
+        <defaults>
+            <close_rules>
+                <after_responses>A</after_responses>
+            </close_rules>
+            <recipient_visibility>B</recipient_visibility>
+            <recipient_invite>C</recipient_invite>
+            <results_visibility>A</results_visibility>
+            <response_visibility>B</response_visibility>
+            <recipient_resubmit>C</recipient_resubmit>
+            <feed_status>D</feed_status>
+        </defaults>
+    </message_type>
+    <execution_time>0.0790269374847</execution_time>
 </response>
 EOT;
         return array(array($xmlStringContents));

@@ -22,7 +22,7 @@ use Zend\Loader\PluginClassLoader;
 class ParserLoader extends PluginClassLoader
 {
     /**
-     * @var array Pre-aliased parsers 
+     * @var array Pre-aliased parsers
      */
     protected $plugins = array(
         'mysqlresult'   => 'Zend\Amf\Parser\Resource\MysqlResult',

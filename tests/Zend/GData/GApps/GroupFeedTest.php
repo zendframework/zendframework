@@ -36,22 +36,26 @@ class GroupFeedTest extends \PHPUnit_Framework_TestCase
         $this->emptyGroupFeed = new GroupFeed();
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionElements() {
+    public function testEmptyFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->emptyGroupFeed->extensionElements));
         $this->assertTrue(count($this->emptyGroupFeed->extensionElements) == 0);
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionAttributes() {
+    public function testEmptyFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->emptyGroupFeed->extensionAttributes));
         $this->assertTrue(count($this->emptyGroupFeed->extensionAttributes) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionElements() {
+    public function testSampleFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->groupFeed->extensionElements));
         $this->assertTrue(count($this->groupFeed->extensionElements) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionAttributes() {
+    public function testSampleFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->groupFeed->extensionAttributes));
         $this->assertTrue(count($this->groupFeed->extensionAttributes) == 0);
     }

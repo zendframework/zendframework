@@ -26,7 +26,7 @@ class FilterPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of filters
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -87,8 +87,8 @@ class FilterPluginManager extends AbstractPluginManager
      *
      * Checks that the filter loaded is either a valid callback or an instance
      * of FilterInterface.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */

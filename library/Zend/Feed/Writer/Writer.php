@@ -21,20 +21,20 @@ use Zend\Loader\ShortNameLocator;
 */
 class Writer
 {
-	/**
-	 * Namespace constants
-	 */
-	const NAMESPACE_ATOM_03  = 'http://purl.org/atom/ns#';
+    /**
+     * Namespace constants
+     */
+    const NAMESPACE_ATOM_03  = 'http://purl.org/atom/ns#';
     const NAMESPACE_ATOM_10  = 'http://www.w3.org/2005/Atom';
     const NAMESPACE_RDF      = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
     const NAMESPACE_RSS_090  = 'http://my.netscape.com/rdf/simple/0.9/';
     const NAMESPACE_RSS_10   = 'http://purl.org/rss/1.0/';
 
     /**
-	 * Feed type constants
-	 */
-	const TYPE_ANY              = 'any';
-	const TYPE_ATOM_03          = 'atom-03';
+     * Feed type constants
+     */
+    const TYPE_ANY              = 'any';
+    const TYPE_ATOM_03          = 'atom-03';
     const TYPE_ATOM_10          = 'atom-10';
     const TYPE_ATOM_ANY         = 'atom';
     const TYPE_RSS_090          = 'rss-090';
@@ -47,7 +47,7 @@ class Writer
     const TYPE_RSS_10           = 'rss-10';
     const TYPE_RSS_20           = 'rss-20';
     const TYPE_RSS_ANY          = 'rss';
-    
+
     /**
      * PluginLoader instance used by component
      *
@@ -75,7 +75,7 @@ class Writer
         'entryRenderer' => array(),
         'feedRenderer'  => array(),
     );
-    
+
     /**
      * Set plugin loader for use with Extensions
      *
@@ -254,7 +254,7 @@ class Writer
         self::registerExtension('Threading');
         self::registerExtension('ITunes');
     }
-    
+
     public static function lcfirst($str)
     {
         $str[0] = strtolower($str[0]);

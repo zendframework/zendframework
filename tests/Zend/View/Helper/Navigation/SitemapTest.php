@@ -48,7 +48,7 @@ class SitemapTest extends AbstractTest
     protected function setUp()
     {
         $this->_originaltimezone = date_default_timezone_get();
-    	date_default_timezone_set('Europe/Berlin');
+        date_default_timezone_set('Europe/Berlin');
 
         if (isset($_SERVER['SERVER_NAME'])) {
             $this->_oldServer['SERVER_NAME'] = $_SERVER['SERVER_NAME'];
@@ -173,7 +173,7 @@ class SitemapTest extends AbstractTest
 
     public function testThrowExceptionOnInvalidLoc()
     {
-	    $this->markTestIncomplete('Zend\URI changes affect this test');
+        $this->markTestIncomplete('Zend\URI changes affect this test');
         $nav = clone $this->_nav2;
         $nav->addPage(array('label' => 'Invalid', 'uri' => 'http://w.'));
 

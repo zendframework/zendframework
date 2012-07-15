@@ -13,11 +13,6 @@ namespace ZendTest\GData\YouTube;
 use Zend\GData\YouTube;
 
 /**
- * Test helper
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_GData_YouTube
  * @subpackage UnitTests
@@ -27,14 +22,16 @@ use Zend\GData\YouTube;
 class PlaylistVideoEntryTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->V2entryText = file_get_contents(
                 'Zend/GData/YouTube/_files/PlaylistVideoEntryDataSampleV2.xml',
                 true);
         $this->entry = new YouTube\PlaylistVideoEntry();
     }
 
-    private function verifyAllSamplePropertiesAreCorrectV2 ($playlistVideoEntry) {
+    private function verifyAllSamplePropertiesAreCorrectV2 ($playlistVideoEntry)
+    {
         $this->assertEquals(
             'tag:youtube.com,2008:playlist:4E6265CEF8BAA793:579617126485907C',
             $playlistVideoEntry->id->text);
@@ -197,31 +194,36 @@ class PlaylistVideoEntryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElementsV2() {
+    public function testSampleEntryShouldHaveNoExtensionElementsV2()
+    {
         $this->entry->setMajorProtocolVersion(2);
         $this->entry->transferFromXML($this->V2entryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributesV2() {
+    public function testSampleEntryShouldHaveNoExtensionAttributesV2()
+    {
         $this->entry->setMajorProtocolVersion(2);
         $this->entry->transferFromXML($this->V2entryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testEmptyPlaylistVideoEntryToAndFromStringShouldMatch() {
+    public function testEmptyPlaylistVideoEntryToAndFromStringShouldMatch()
+    {
         $entryXml = $this->entry->saveXML();
         $newPlaylistVideoEntry = new YouTube\PlaylistVideoEntry();
         $newPlaylistVideoEntry->transferFromXML($entryXml);
@@ -229,7 +231,8 @@ class PlaylistVideoEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newPlaylistVideoEntryXml);
     }
 
-    public function testEmptyPlaylistVideoEntryToAndFromStringShouldMatchV2() {
+    public function testEmptyPlaylistVideoEntryToAndFromStringShouldMatchV2()
+    {
         $this->entry->setMajorProtocolVersion(2);
         $entryXml = $this->entry->saveXML();
         $newPlaylistVideoEntry = new YouTube\PlaylistVideoEntry();
@@ -239,13 +242,15 @@ class PlaylistVideoEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newPlaylistVideoEntryXml);
     }
 
-    public function testSamplePropertiesAreCorrectV2 () {
+    public function testSamplePropertiesAreCorrectV2 ()
+    {
         $this->entry->setMajorProtocolVersion(2);
         $this->entry->transferFromXML($this->V2entryText);
         $this->verifyAllSamplePropertiesAreCorrectV2($this->entry);
     }
 
-    public function testConvertPlaylistVideoEntryToAndFromStringV2() {
+    public function testConvertPlaylistVideoEntryToAndFromStringV2()
+    {
         $this->entry->setMajorProtocolVersion(2);
         $this->entry->transferFromXML($this->V2entryText);
         $entryXml = $this->entry->saveXML();

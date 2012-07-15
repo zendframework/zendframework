@@ -36,8 +36,7 @@ class CellFeedTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(2, count($this->cellFeed->entries));
         $this->assertEquals(2, $this->cellFeed->entries->count());
-        foreach($this->cellFeed->entries as $entry)
-        {
+        foreach($this->cellFeed->entries as $entry) {
             $this->assertInstanceOf('Zend\GData\Spreadsheets\CellEntry', $entry);
         }
         $this->assertInstanceOf('Zend\GData\Spreadsheets\Extension\RowCount',
@@ -54,8 +53,7 @@ class CellFeedTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(2, count($newCellFeed->entries));
         $this->assertEquals(2, $newCellFeed->entries->count());
-        foreach($newCellFeed->entries as $entry)
-        {
+        foreach($newCellFeed->entries as $entry) {
             $this->assertInstanceOf('Zend\GData\Spreadsheets\CellEntry', $entry);
         }
         $this->assertInstanceOf('Zend\GData\Spreadsheets\Extension\RowCount',

@@ -54,19 +54,6 @@ class CurlTest extends CommonHttpTests
         parent::setUp();
     }
 
-    public function testSimpleRequests()
-    {
-        $this->markTestSkipped('Method PATCH not implemented.');
-    }
-
-    /**
-     * @dataProvider parameterArrayProvider
-     */
-    public function testPatchData($params)
-    {
-        $this->markTestSkipped('Method PATCH not implemented.');
-    }
-
     /**
      * Off-line common adapter tests
      */
@@ -141,7 +128,7 @@ class CurlTest extends CommonHttpTests
         $this->client = new \Zend\Http\Client($this->client->getUri(true), $config);
 
         $this->setExpectedException(
-        	'Zend\Http\Client\Adapter\Exception\RuntimeException',
+            'Zend\Http\Client\Adapter\Exception\RuntimeException',
             'Unknown or erroreous cURL option'
             );
         $this->client->send();

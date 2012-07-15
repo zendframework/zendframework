@@ -17,7 +17,7 @@ use Zend\Authentication\Exception;
  * @package    Zend_Authentication
  * @subpackage Adapter
  */
-class UnexpectedValueException extends Exception\UnexpectedValueException implements 
+class UnexpectedValueException extends Exception\UnexpectedValueException implements
     ExceptionInterface
 {
 }

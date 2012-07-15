@@ -90,13 +90,13 @@ class RunLength implements StreamFilterInterface
             if ($length == 128) {
                 // EOD byte
                 break;
-            } else if ($length < 128) {
+            } elseif ($length < 128) {
                 $length++;
 
                 $output .= substr($data, $offset, $length);
 
                 $offset += $length;
-            } else if ($length > 128) {
+            } elseif ($length > 128) {
                 $output .= str_repeat($data[$offset], 257 - $length);
 
                 $offset++;

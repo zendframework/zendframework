@@ -127,7 +127,7 @@ abstract class AbstractMarkup implements Markup\MarkupInterface
 
     /**
      * Filter
-     * 
+     *
      * @param string $value
      *
      * @return string

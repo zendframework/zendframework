@@ -17,6 +17,6 @@ use Zend\Paginator\Exception;
  * @package    Zend\Paginator\Adapter
  * @subpackage Exception
  */
-class RuntimeException extends Exception\RuntimeException implements 
+class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface
 {}

@@ -155,7 +155,7 @@ class ServiceListener implements ListenerAggregateInterface
             // We're keeping track of which modules provided which configuration to which serivce managers.
             // The actual merging takes place later. Doing it this way will enable us to provide more powerful
             // debugging tools for showing which modules overrode what.
-            $this->serviceManagers[$key]['configuration'][$e->getModuleName()] = $config;
+            $this->serviceManagers[$key]['configuration'][$e->getModuleName() . '::' . $sm['module_class_method'] . '()'] = $config;
         }
     }
 
@@ -175,16 +175,22 @@ class ServiceListener implements ListenerAggregateInterface
         $config         = $configListener->getMergedConfig(false);
 
         if ($this->defaultServiceConfiguration) {
-            $config = ArrayUtils::merge(array('service_manager' => $this->defaultServiceConfiguration), $config);
+            $defaultConfig = array('service_manager' => $this->defaultServiceConfiguration);
         }
 
         foreach ($this->serviceManagers as $key => $sm) {
+
+            if (isset($defaultConfig[$sm['config_key']])
+                && is_array($defaultConfig[$sm['config_key']])
+                && !empty($defaultConfig[$sm['config_key']])
+            ) {
+                $this->serviceManagers[$key]['configuration']['default_config'] = $defaultConfig[$sm['config_key']];
+            }
 
             if (isset($config[$sm['config_key']])
                 && is_array($config[$sm['config_key']])
                 && !empty($config[$sm['config_key']])
             ) {
-
                 $this->serviceManagers[$key]['configuration']['merged_config'] = $config[$sm['config_key']];
             }
 
@@ -193,7 +199,7 @@ class ServiceListener implements ListenerAggregateInterface
             foreach ($this->serviceManagers[$key]['configuration'] as $configs) {
                 if (isset($configs['configuration_classes'])) {
                     foreach ($configs['configuration_classes'] as $class) {
-                        $config = ArrayUtils::merge($configs, $this->serviceConfigurationToArray($class));
+                        $configs = ArrayUtils::merge($configs, $this->serviceConfigurationToArray($class));
                     }
                 }
                 $smConfig = ArrayUtils::merge($smConfig, $configs);

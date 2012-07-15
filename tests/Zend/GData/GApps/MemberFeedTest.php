@@ -36,22 +36,26 @@ class MemberFeedTest extends \PHPUnit_Framework_TestCase
         $this->emptyMemberFeed = new MemberFeed();
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionElements() {
+    public function testEmptyFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->emptyMemberFeed->extensionElements));
         $this->assertTrue(count($this->emptyMemberFeed->extensionElements) == 0);
     }
 
-    public function testEmptyFeedShouldHaveNoExtensionAttributes() {
+    public function testEmptyFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->emptyMemberFeed->extensionAttributes));
         $this->assertTrue(count($this->emptyMemberFeed->extensionAttributes) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionElements() {
+    public function testSampleFeedShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->memberFeed->extensionElements));
         $this->assertTrue(count($this->memberFeed->extensionElements) == 0);
     }
 
-    public function testSampleFeedShouldHaveNoExtensionAttributes() {
+    public function testSampleFeedShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->memberFeed->extensionAttributes));
         $this->assertTrue(count($this->memberFeed->extensionAttributes) == 0);
     }

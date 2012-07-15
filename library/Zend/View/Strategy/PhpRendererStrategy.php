@@ -130,7 +130,7 @@ class PhpRendererStrategy implements ListenerAggregateInterface
      * Populates the content of the response object from the view rendering
      * results.
      *
-     * @param  ViewEvent $e
+     * @param ViewEvent $e
      * @return void
      */
     public function injectResponse(ViewEvent $e)

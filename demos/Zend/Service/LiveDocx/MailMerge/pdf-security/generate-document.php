@@ -26,7 +26,7 @@ $mailMerge->assign('software', 'Magic Graphical Compression Suite v1.9')
           ->assign('city',     'Berlin')
           ->assign('country',  'Germany');
 
-// Available on premium service only 
+// Available on premium service only
 $mailMerge->setDocumentPassword('aaaaaaaaaa');
 
 // Available on premium service only
@@ -34,7 +34,7 @@ $mailMerge->setDocumentAccessPermissions(
     array(
         'AllowHighLevelPrinting',  // getDocumentAccessOptions() returns
         'AllowExtractContents'     // array of permitted values
-    ),   
+    ),
     'myDocumentAccessPassword'
 );
 

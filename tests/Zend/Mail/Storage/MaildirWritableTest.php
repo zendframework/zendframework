@@ -115,7 +115,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateFolder()
     {
-    	$this->markTestIncomplete("Fail");
+        $this->markTestIncomplete("Fail");
         $mail = new Writable\Maildir($this->_params);
         $mail->createFolder('subfolder.test1');
         $mail->createFolder('test2', 'INBOX.subfolder');
@@ -158,7 +158,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateFolderExistingDir()
     {
-    	$this->markTestIncomplete("Fail");
+        $this->markTestIncomplete("Fail");
         $mail = new Writable\Maildir($this->_params);
         unset($mail->getFolders()->subfolder->test);
 
@@ -176,7 +176,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveFolderName()
     {
-    	$this->markTestIncomplete("Fail");
+        $this->markTestIncomplete("Fail");
         $mail = new Writable\Maildir($this->_params);
         $mail->removeFolder('INBOX.subfolder.test');
 
@@ -186,7 +186,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveFolderInstance()
     {
-    	$this->markTestIncomplete("Fail");
+        $this->markTestIncomplete("Fail");
         $mail = new Writable\Maildir($this->_params);
         $mail->removeFolder($mail->getFolders()->subfolder->test);
 
@@ -204,7 +204,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveSelectedFolder()
     {
-    	$this->markTestIncomplete("Fail");
+        $this->markTestIncomplete("Fail");
         $mail = new Writable\Maildir($this->_params);
         $mail->selectFolder('subfolder.test');
 
@@ -222,7 +222,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
     public function testRenameFolder()
     {
-    	$this->markTestIncomplete("Fail");
+        $this->markTestIncomplete("Fail");
         $mail = new Writable\Maildir($this->_params);
 
         $mail->renameFolder('INBOX.subfolder', 'INBOX.foo');
@@ -234,7 +234,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
     public function testRenameSelectedFolder()
     {
-    	$this->markTestIncomplete("Fail");
+        $this->markTestIncomplete("Fail");
         $mail = new Writable\Maildir($this->_params);
         $mail->selectFolder('subfolder.test');
 
@@ -269,7 +269,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
     public function testCopy()
     {
-    	$this->markTestIncomplete("Fail");
+        $this->markTestIncomplete("Fail");
         $mail = new Writable\Maildir($this->_params);
 
         $mail->selectFolder('subfolder.test');
@@ -427,7 +427,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
     public function testAppendMessage()
     {
-    	$this->markTestIncomplete("Fail");
+        $this->markTestIncomplete("Fail");
         $mail = new Writable\Maildir($this->_params);
         $mail->setQuota(array('size' => 3000, 'count' => 6, 'X' => 0));
         $this->assertFalse($mail->checkQuota(false, true));
@@ -458,7 +458,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveMessage()
     {
-    	$this->markTestIncomplete("Fail");
+        $this->markTestIncomplete("Fail");
         $mail = new Writable\Maildir($this->_params);
         $mail->setQuota(array('size' => 3000, 'count' => 5, 'X' => 0));
         $this->assertTrue($mail->checkQuota(false, true));
@@ -469,7 +469,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
     public function testCopyMessage()
     {
-    	$this->markTestIncomplete("Fail");
+        $this->markTestIncomplete("Fail");
         $mail = new Writable\Maildir($this->_params);
         $mail->setQuota(array('size' => 3000, 'count' => 6, 'X' => 0));
         $this->assertFalse($mail->checkQuota(false, true));
@@ -501,7 +501,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
     public function testMove()
     {
-    	$this->markTestIncomplete("Fail");
+        $this->markTestIncomplete("Fail");
         $mail = new Writable\Maildir($this->_params);
         $target = $mail->getFolders()->subfolder->test;
         $mail->selectFolder($target);

@@ -14,11 +14,6 @@ use Zend\GData\YouTube;
 use Zend\GData\Extension;
 
 /**
- * Test helper
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_GData_YouTube
  * @subpackage UnitTests
@@ -28,14 +23,16 @@ use Zend\GData\Extension;
 class UserProfileEntryTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->V2entryText = file_get_contents(
                 'Zend/GData/YouTube/_files/UserProfileEntryDataSampleV2.xml',
                 true);
         $this->entry = new YouTube\UserProfileEntry();
     }
 
-    private function verifyAllSamplePropertiesAreCorrectV2 ($userProfileEntry) {
+    private function verifyAllSamplePropertiesAreCorrectV2 ($userProfileEntry)
+    {
         $this->assertEquals('tag:youtube.com,2008:user:zfgdata',
             $userProfileEntry->id->text);
         $this->assertEquals('2008-12-15T13:30:56.000-08:00',
@@ -66,29 +63,34 @@ class UserProfileEntryTest extends \PHPUnit_Framework_TestCase
             $userProfileEntry->getFirstName()->text);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertEquals(0, count($this->entry->extensionElements));
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertEquals(0, count($this->entry->extensionAttributes));
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElementsV2() {
+    public function testSampleEntryShouldHaveNoExtensionElementsV2()
+    {
         $this->entry->transferFromXML($this->V2entryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertEquals(0, count($this->entry->extensionElements));
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributesV2() {
+    public function testSampleEntryShouldHaveNoExtensionAttributesV2()
+    {
         $this->entry->transferFromXML($this->V2entryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertEquals(0, count($this->entry->extensionAttributes));
     }
 
-    public function testEmptyUserProfileEntryToAndFromStringShouldMatch() {
+    public function testEmptyUserProfileEntryToAndFromStringShouldMatch()
+    {
         $entryXml = $this->entry->saveXML();
         $newUserProfileEntry = new YouTube\UserProfileEntry();
         $newUserProfileEntry->transferFromXML($entryXml);
@@ -96,7 +98,8 @@ class UserProfileEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newUserProfileEntryXml);
     }
 
-    public function testEmptyUserProfileEntryToAndFromStringShouldMatchV2() {
+    public function testEmptyUserProfileEntryToAndFromStringShouldMatchV2()
+    {
         $this->entry->setMajorProtocolVersion(2);
         $entryXml = $this->entry->saveXML();
         $newUserProfileEntry = new YouTube\UserProfileEntry();
@@ -106,7 +109,8 @@ class UserProfileEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newUserProfileEntryXml);
     }
 
-    public function testGetFeedLinkReturnsAllStoredEntriesWhenUsedWithNoParameters() {
+    public function testGetFeedLinkReturnsAllStoredEntriesWhenUsedWithNoParameters()
+    {
         // Prepare test data
         $entry1 = new Extension\FeedLink();
         $entry1->rel = "first";
@@ -121,7 +125,8 @@ class UserProfileEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($this->entry->feedLink));
     }
 
-    public function testGetFeedLinkCanReturnEntriesByRelValue() {
+    public function testGetFeedLinkCanReturnEntriesByRelValue()
+    {
         // Prepare test data
         $entry1 = new Extension\FeedLink();
         $entry1->rel = "first";
@@ -137,13 +142,15 @@ class UserProfileEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($entry2, $this->entry->getFeedLink('second'));
     }
 
-    public function testSamplePropertiesAreCorrectV2 () {
+    public function testSamplePropertiesAreCorrectV2 ()
+    {
         $this->entry->transferFromXML($this->V2entryText);
         $this->entry->setMajorProtocolVersion(2);
         $this->verifyAllSamplePropertiesAreCorrectV2($this->entry);
     }
 
-    public function testConvertUserProfileEntryToAndFromStringV2() {
+    public function testConvertUserProfileEntryToAndFromStringV2()
+    {
         $this->entry->transferFromXML($this->V2entryText);
         $entryXml = $this->entry->saveXML();
         $newUserProfileEntry = new YouTube\UserProfileEntry();
@@ -154,7 +161,8 @@ class UserProfileEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($entryXml, $newUserProfileEntryXml);
     }
 
-    public function testYTStatisticsInUserProfileEntryV2() {
+    public function testYTStatisticsInUserProfileEntryV2()
+    {
         $this->entry->transferFromXML($this->V2entryText);
         $this->entry->setMajorProtocolVersion(2);
         $statistics = $this->entry->getStatistics();

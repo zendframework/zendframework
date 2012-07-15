@@ -24,12 +24,12 @@ $mailMerge->assign('software', 'Magic Graphical Compression Suite v1.9')
 
 /**
  * ALTERNATIVE: Concatenating PDF files locally - basic
- * 
+ *
  * You can also assign multiple sets of data. In this case, each set of data
  * will populate the template and the resulting document (one per set of data)
  * will be appended to the previous document. Thus, in this example, we create
  * two documents that are concatenated into one PDF file.
- * 
+ *
  * NOTE: In the case that you wish to generate several thousand documents that
  *       are concatenated into one PDF, please take a look at the sample
  *       application 'generate-document-pdftk.php' in this directory.
@@ -55,7 +55,7 @@ $fieldValues = array (
         'time'     => Date::now()->toString(Date::TIME_LONG),
         'city'     => 'Berlin',
         'country'  => 'Germany'
-    )    
+    )
 );
 
 $mailMerge->assign($fieldValues);

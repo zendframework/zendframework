@@ -142,8 +142,7 @@ class ClientLogin
                 $goog_resp['Error'] == 'CaptchaRequired') {
                 throw new App\CaptchaRequiredException(
                     $goog_resp['CaptchaToken'], $goog_resp['CaptchaUrl']);
-            }
-            else {
+            } else {
                 throw new App\AuthException('Authentication with Google failed. Reason: ' .
                     (isset($goog_resp['Error']) ? $goog_resp['Error'] : 'Unspecified.'));
             }

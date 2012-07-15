@@ -213,7 +213,7 @@ class DateStep extends AbstractValidator
         if (is_int($param)) {
             // Convert from timestamp
             $dateObj = date_create("@$param");
-        } else if (is_string($param)) {
+        } elseif (is_string($param)) {
             // Custom week format support
             if (strpos($this->getFormat(), 'Y-\WW') === 0
                 && preg_match('/^([0-9]{4})\-W([0-9]{2})/', $param, $matches)
@@ -339,9 +339,9 @@ class DateStep extends AbstractValidator
                         && 0 == $diffParts['minutes'] && 0 == $diffParts['seconds']
                     ) {
                         return true;
-                    } else if ('minutes' === $intervalUnit && 0 == $diffParts['seconds']) {
+                    } elseif ('minutes' === $intervalUnit && 0 == $diffParts['seconds']) {
                         return true;
-                    } else if ('seconds' === $intervalUnit) {
+                    } elseif ('seconds' === $intervalUnit) {
                         return true;
                     }
                 }

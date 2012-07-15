@@ -13,11 +13,6 @@ namespace ZendTest\GData\YouTube;
 use Zend\GData\YouTube;
 
 /**
- * Test helper
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_GData_YouTube
  * @subpackage UnitTests
@@ -27,14 +22,16 @@ use Zend\GData\YouTube;
 class InboxFeedTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->V2feedText = file_get_contents(
             'Zend/GData/YouTube/_files/InboxFeedDataSampleV2.xml',
             true);
         $this->feed = new YouTube\InboxFeed();
     }
 
-    private function verifyAllSamplePropertiesAreCorrectV2 ($inboxFeed) {
+    private function verifyAllSamplePropertiesAreCorrectV2 ($inboxFeed)
+    {
         $this->assertEquals('tag:youtube,2008:user:andyland74:inbox',
             $inboxFeed->id->text);
         $this->assertEquals('2008-07-21T17:54:30.236Z',
@@ -76,17 +73,20 @@ class InboxFeedTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->feed->extensionElements));
         $this->assertEquals(0, count($this->feed->extensionElements));
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->feed->extensionAttributes));
         $this->assertEquals(0, count($this->feed->extensionAttributes));
     }
 
-    public function testEmptyInboxFeedToAndFromStringShouldMatch() {
+    public function testEmptyInboxFeedToAndFromStringShouldMatch()
+    {
         $feedXml = $this->feed->saveXML();
         $newInboxFeed = new YouTube\InboxFeed();
         $newInboxFeed->transferFromXML($feedXml);
@@ -94,12 +94,14 @@ class InboxFeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($feedXml == $newInboxFeedXml);
     }
 
-    public function testSamplePropertiesAreCorrectV2 () {
+    public function testSamplePropertiesAreCorrectV2 ()
+    {
         $this->feed->transferFromXML($this->V2feedText);
         $this->verifyAllSamplePropertiesAreCorrectV2($this->feed);
     }
 
-    public function testConvertInboxFeedToAndFromStringV2() {
+    public function testConvertInboxFeedToAndFromStringV2()
+    {
         $this->feed->setMajorProtocolVersion(2);
         $this->feed->transferFromXML($this->V2feedText);
         $feedXml = $this->feed->saveXML();

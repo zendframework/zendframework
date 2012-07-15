@@ -22,36 +22,42 @@ use Zend\GData\Calendar\Extension;
 class LinkTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->linkText = file_get_contents(
                 'Zend/GData/Calendar/_files/LinkElementSample1.xml',
                 true);
         $this->link = new Extension\Link();
     }
 
-    public function testEmptyLinkShouldHaveNoExtensionElements() {
+    public function testEmptyLinkShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->link->extensionElements));
         $this->assertTrue(count($this->link->extensionElements) == 0);
     }
 
-    public function testEmptyLinkShouldHaveNoExtensionAttributes() {
+    public function testEmptyLinkShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->link->extensionAttributes));
         $this->assertTrue(count($this->link->extensionAttributes) == 0);
     }
 
-    public function testSampleLinkShouldHaveNoExtensionElements() {
+    public function testSampleLinkShouldHaveNoExtensionElements()
+    {
         $this->link->transferFromXML($this->linkText);
         $this->assertTrue(is_array($this->link->extensionElements));
         $this->assertTrue(count($this->link->extensionElements) == 0);
     }
 
-    public function testSampleLinkShouldHaveNoExtensionAttributes() {
+    public function testSampleLinkShouldHaveNoExtensionAttributes()
+    {
         $this->link->transferFromXML($this->linkText);
         $this->assertTrue(is_array($this->link->extensionAttributes));
         $this->assertTrue(count($this->link->extensionAttributes) == 0);
     }
 
-    public function testNormalLinkShouldHaveNoExtensionElements() {
+    public function testNormalLinkShouldHaveNoExtensionElements()
+    {
         $this->link->rel = "http://nowhere.invalid/";
         $this->link->title = "Somewhere";
         $this->link->href = "http://somewhere.invalid/";
@@ -95,7 +101,8 @@ class LinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newLink2->webcontent->width, "2");
     }
 
-    public function testEmptyLinkToAndFromStringShouldMatch() {
+    public function testEmptyLinkToAndFromStringShouldMatch()
+    {
         $linkXml = $this->link->saveXML();
         $newLink = new Extension\Link();
         $newLink->transferFromXML($linkXml);
@@ -103,7 +110,8 @@ class LinkTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($linkXml == $newLinkXml);
     }
 
-    public function testLinkWithValueToAndFromStringShouldMatch() {
+    public function testLinkWithValueToAndFromStringShouldMatch()
+    {
         $this->link->rel = "http://nowhere.invalid/";
         $this->link->title = "Somewhere";
         $this->link->href = "http://somewhere.invalid/";
@@ -123,7 +131,8 @@ class LinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->link->webcontent->width, "2");
     }
 
-    public function testExtensionAttributes() {
+    public function testExtensionAttributes()
+    {
         $extensionAttributes = $this->link->extensionAttributes;
         $extensionAttributes['foo1'] = array('name'=>'foo1', 'value'=>'bar');
         $extensionAttributes['foo2'] = array('name'=>'foo2', 'value'=>'rab');
@@ -137,7 +146,8 @@ class LinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('rab', $newLink->extensionAttributes['foo2']['value']);
     }
 
-    public function testConvertFullLinkToAndFromString() {
+    public function testConvertFullLinkToAndFromString()
+    {
         $this->link->transferFromXML($this->linkText);
         $this->assertEquals($this->link->rel, "http://schemas.google.com/gCal/2005/webContent");
         $this->assertEquals($this->link->title, "Independence Day");

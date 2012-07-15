@@ -10,16 +10,13 @@
 
 namespace Zend\Escaper\Exception;
 
-use Zend\Escaper\Exception;
-
 /**
  * Invalid argument exception
  *
- * @uses       \RuntimeException
  * @category   Zend
  * @package    Zend_Escaper
  */
-class RuntimeException extends \RuntimeException
-    implements Exception\ExceptionInterface
+class RuntimeException extends \RuntimeException implements
+    ExceptionInterface
 {
 }

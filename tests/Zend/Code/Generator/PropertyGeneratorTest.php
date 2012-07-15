@@ -117,7 +117,7 @@ EOS;
 
         $targetSource = $property->generate();
         $targetSource = str_replace("\r", '', $targetSource);
-            
+
         $this->assertEquals($expectedSource, $targetSource);
     }
 

@@ -278,7 +278,8 @@ class Weblog
      *
      * @return  float   weblog latitude coordinate
      */
-    public function getLat() {
+    public function getLat()
+    {
         return $this->lat;
     }
 

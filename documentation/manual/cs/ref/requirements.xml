@@ -770,10 +770,6 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><link xlink:href="http://framework.zend.com/manual/en/zend.registry.html"><code>Zend_Registry</code></link></entry>
-                        <entry>---</entry>
-                    </row>
-                    <row>
                         <entry>Zend_Request</entry>
                         <entry>---</entry>
                     </row>

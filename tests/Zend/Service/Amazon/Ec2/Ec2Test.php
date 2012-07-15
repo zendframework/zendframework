@@ -76,7 +76,7 @@ class Ec2Test extends \PHPUnit_Framework_TestCase
     {
         try {
             $object = Ec2\Ec2::factory('avaavaavailabilityzones', 'access_key', 'secret_access_key');
-            $this->fail('RuntimeException was expected but not thrown');    
+            $this->fail('RuntimeException was expected but not thrown');
         } catch (Ec2\Exception\RuntimeException $e) {
         }
     }

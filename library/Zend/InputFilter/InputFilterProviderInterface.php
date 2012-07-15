@@ -17,9 +17,9 @@ namespace Zend\InputFilter;
 interface InputFilterProviderInterface
 {
     /**
-     * Should return an array specification compatible with 
+     * Should return an array specification compatible with
      * {@link Zend\InputFilter\Factory::createInputFilter()}.
-     * 
+     *
      * @return array
      */
     public function getInputFilterSpecification();

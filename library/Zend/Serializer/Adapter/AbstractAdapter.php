@@ -66,7 +66,7 @@ abstract class AbstractAdapter implements SerializationAdapter
      * @param  mixed $value Option value
      * @return AbstractAdapter
      */
-    public function setOption($name, $value) 
+    public function setOption($name, $value)
     {
         $this->_options[(string) $name] = $value;
         return $this;
@@ -77,7 +77,7 @@ abstract class AbstractAdapter implements SerializationAdapter
      *
      * @return array
      */
-    public function getOptions() 
+    public function getOptions()
     {
         return $this->_options;
     }
@@ -89,7 +89,7 @@ abstract class AbstractAdapter implements SerializationAdapter
      * @return mixed
      * @throws InvalidArgumentException
      */
-    public function getOption($name) 
+    public function getOption($name)
     {
         $name = (string) $name;
         if (!array_key_exists($name, $this->_options)) {

@@ -163,7 +163,7 @@ class TreeRouteStackTest extends TestCase
         $stack = new TreeRouteStack();
         $stack->setRequestUri($uri);
         $stack->addRoute(
-        	'foo',
+            'foo',
             array(
                 'type' => 'Hostname',
                 'options' => array(
@@ -195,7 +195,7 @@ class TreeRouteStackTest extends TestCase
         $stack = new TreeRouteStack();
         $stack->setRequestUri($uri);
         $stack->addRoute(
-        	'index',
+            'index',
             array(
                 'type' => 'Literal',
                 'options' => array(

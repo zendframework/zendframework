@@ -52,7 +52,7 @@ class Transfer
         if (!is_string($adapter)) {
             throw new Exception\InvalidArgumentException('Adapter must be a string');
         }
-        
+
         if ($adapter[0] != '\\') {
             $adapter = '\Zend\File\Transfer\Adapter\\' . ucfirst($adapter);
         }

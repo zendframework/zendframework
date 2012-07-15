@@ -22,7 +22,7 @@ class Atom extends AbstractAtom implements Renderer\RendererInterface
 {
     /**
      * Constructor
-     * 
+     *
      * @param  Writer\Feed $container
      * @return void
      */
@@ -33,7 +33,7 @@ class Atom extends AbstractAtom implements Renderer\RendererInterface
 
     /**
      * Render Atom feed
-     * 
+     *
      * @return Atom
      */
     public function render()
@@ -63,14 +63,14 @@ class Atom extends AbstractAtom implements Renderer\RendererInterface
         $this->_setCopyright($this->_dom, $root);
         $this->_setCategories($this->_dom, $root);
         $this->_setHubs($this->_dom, $root);
-        
+
         foreach ($this->_extensions as $ext) {
             $ext->setType($this->getType());
             $ext->setRootElement($this->getRootElement());
             $ext->setDOMDocument($this->getDOMDocument(), $root);
             $ext->render();
         }
-        
+
         foreach ($this->_container as $entry) {
             if ($this->getDataContainer()->getEncoding()) {
                 $entry->setEncoding($this->getDataContainer()->getEncoding());

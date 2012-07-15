@@ -10,6 +10,10 @@
 
 namespace Zend\Di;
 
+/**
+ * @category   Zend
+ * @package    Zend_Di
+ */
 interface DependencyInjectionInterface extends LocatorInterface
 {
     /**
@@ -17,9 +21,9 @@ interface DependencyInjectionInterface extends LocatorInterface
      *
      * Forces retrieval of a discrete instance of the given class, using the
      * constructor parameters provided.
-     * 
-     * @param  mixed $name Class name or service alias
-     * @param  array $params Parameters to pass to the constructor
+     *
+     * @param  mixed       $name   Class name or service alias
+     * @param  array       $params Parameters to pass to the constructor
      * @return object|null
      */
     public function newInstance($name, array $params = array());

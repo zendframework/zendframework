@@ -40,7 +40,7 @@ class Elastic extends Sliding
 
         if ($originalPageRange + $pageNumber - 1 < $pageRange) {
             $pageRange = $originalPageRange + $pageNumber - 1;
-        } else if ($originalPageRange + $pageNumber - 1 > count($paginator)) {
+        } elseif ($originalPageRange + $pageNumber - 1 > count($paginator)) {
             $pageRange = $originalPageRange + count($paginator) - $pageNumber;
         }
 

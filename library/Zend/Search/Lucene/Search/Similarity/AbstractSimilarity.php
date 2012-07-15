@@ -389,7 +389,7 @@ abstract class AbstractSimilarity
      * @param float $f
      * @return integer
      */
-    static function encodeNorm($f)
+    public static function encodeNorm($f)
     {
       return self::_floatToByte($f);
     }

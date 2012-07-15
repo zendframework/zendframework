@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
 
     Successful response returned for a Search request
     http://api.technorati.com/search?key=VALID_API_KEY&query=google
-    
-    Be aware that some test cases underlined how sometimes Technorati 
+
+    Be aware that some test cases underlined how sometimes Technorati
     doesn't take care of its DTD.
     For instance, in the following response `author` node is invalid
     according to current DTD declaration.
-    
+
     See http://framework.zend.com/issues/browse/ZF-2203
 
 -->

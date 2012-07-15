@@ -43,7 +43,7 @@ function buildModulePhar($name, $format = Phar::PHAR, $compression = Phar::NONE,
         foreach ($glob as $file) {
             if (!is_dir($file)) {
                 unlink($file);
-            }   
+            }
         }
     }
     $filename = $name . '.phar';
@@ -52,7 +52,7 @@ function buildModulePhar($name, $format = Phar::PHAR, $compression = Phar::NONE,
         case 'normal':
             $phar['Module.php'] = "<?php \n\nnamespace {$name};\n\nclass Module\n{}";
             break;
-        case 'fake': 
+        case 'fake':
             $phar['Module.php'] = '<?php //no class here';
             break;
         case 'nested':

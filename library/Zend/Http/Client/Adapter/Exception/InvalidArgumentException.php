@@ -17,6 +17,6 @@ use Zend\Http\Client\Exception;
  * @category  Zend
  * @package   Zend_Application
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
 {}

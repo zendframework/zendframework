@@ -20,8 +20,6 @@ use Zend\XmlRpc\Value;
 use Zend\XmlRpc;
 
 /**
- * Test case for Zend\XmlRpc\Client
- *
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage UnitTests
@@ -651,13 +649,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $baseUri = "http://foo:80";
         $this->httpAdapter = new Adapter\Test();
         $this->httpClient = new Http\Client(null, array('adapter' => $this->httpAdapter));
-        
+
         $respBody = file_get_contents(dirname(__FILE__) . "/_files/ZF1897-response-chunked.txt");
         $this->httpAdapter->setResponse($respBody);
 
         $this->xmlrpcClient = new Client($baseUri);
         $this->xmlrpcClient->setHttpClient($this->httpClient);
-        
+
         $this->assertEquals('FOO', $this->xmlrpcClient->call('foo'));
     }
 
@@ -715,8 +713,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 }
 
 /** related to ZF-8478 */
-class PythonSimpleXMLRPCServerWithUnsupportedIntrospection extends Client\ServerProxy {
-    public function __call($method, $args) {
+class PythonSimpleXMLRPCServerWithUnsupportedIntrospection extends Client\ServerProxy
+{
+    public function __call($method, $args)
+    {
         if ($method == 'methodSignature') {
             return 'signatures not supported';
         }
@@ -725,8 +725,10 @@ class PythonSimpleXMLRPCServerWithUnsupportedIntrospection extends Client\Server
 }
 
 /** related to ZF-8478 */
-class TestClient extends Client {
-    public function getProxy($namespace = '') {
+class TestClient extends Client
+{
+    public function getProxy($namespace = '')
+    {
         if (empty($this->_proxyCache[$namespace])) {
             $this->_proxyCache[$namespace] = new PythonSimpleXMLRPCServerWithUnsupportedIntrospection($this, $namespace);
         }

@@ -182,7 +182,7 @@ class Zip extends AbstractCompressionAlgorithm
      *
      * @param  string $content
      * @return string
-     * @throws Exception\RuntimeException If archive file not found, target directory not found, 
+     * @throws Exception\RuntimeException If archive file not found, target directory not found,
      *                                    or error during decompression
      */
     public function decompress($content)

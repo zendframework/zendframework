@@ -10,12 +10,13 @@
 
 namespace ZendTest\Amf\TestAsset;
 
-class testclass {
-    function returnFile()
+class testclass
+{
+    public function returnFile()
     {
         return fopen(__DIR__ . "/testdata", "r");
     }
-    function returnCtx()
+    public function returnCtx()
     {
         $opts = array(
             'http'=>array(

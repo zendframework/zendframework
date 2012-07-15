@@ -13,7 +13,7 @@ namespace Zend\Form\Annotation;
 /**
  * Validator annotation
  *
- * Expects an associative array defining the validator. 
+ * Expects an associative array defining the validator.
  *
  * Typically, this includes the "name" with an associated string value
  * indicating the validator name or class, and optionally an "options" key
@@ -31,7 +31,7 @@ class Validator extends AbstractArrayAnnotation
 {
     /**
      * Retrieve the validator specification
-     * 
+     *
      * @return null|array
      */
     public function getValidator()

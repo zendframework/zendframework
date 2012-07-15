@@ -204,7 +204,7 @@ class Csrf extends AbstractValidator
     /**
      * Retrieve CSRF token
      *
-     * If no CSRF token currently exists, or should be regenrated, 
+     * If no CSRF token currently exists, or should be regenrated,
      * generates one.
      *
      * @param  bool $regenerate    default false

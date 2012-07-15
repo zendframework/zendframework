@@ -395,7 +395,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
         $attrString = '';
         if (!empty($item->attributes)) {
             foreach ($item->attributes as $key => $value) {
-                if ((!$this->arbitraryAttributesAllowed() && !in_array($key, $this->_optionalAttributes)) 
+                if ((!$this->arbitraryAttributesAllowed() && !in_array($key, $this->_optionalAttributes))
                     || in_array($key, array('conditional', 'noescape')))
                 {
                     continue;
@@ -424,7 +424,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
             if ($addScriptEscape) {
                 $html .= $indent . '    ' . $escapeEnd . PHP_EOL;
             }
-            
+
             $html .= $indent;
         }
         $html .= '</script>';

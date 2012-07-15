@@ -29,14 +29,14 @@ interface ValidatorInterface
 
     /**
      * Get data from validator to be used for validation comparisons
-     * 
+     *
      * @return mixed
      */
     public function getData();
 
     /**
      * Get validator name for use with storing validators between requests
-     * 
+     *
      * @return string
      */
     public function getName();

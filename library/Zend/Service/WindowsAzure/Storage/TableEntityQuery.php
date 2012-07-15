@@ -123,7 +123,7 @@ class TableEntityQuery
 
         if (count($this->_where) == 0) {
             $cond = '';
-        } else if ($cond !== '') {
+        } elseif ($cond !== '') {
             $cond = ' ' . strtolower(trim($cond)) . ' ';
         }
 

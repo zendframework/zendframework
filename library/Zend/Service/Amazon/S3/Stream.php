@@ -118,8 +118,7 @@ class Stream
             $this->_writeBuffer = true;
             $this->_getS3Client($path);
             return true;
-        }
-        else {
+        } else {
             // Otherwise, just see if the file exists or not
             $info = $this->_getS3Client($path)->getInfo($name);
             if ($info) {
@@ -153,9 +152,9 @@ class Stream
     /**
      * Read from the stream
      *
-     * http://bugs.php.net/21641 - stream_read() is always passed PHP's 
-     * internal read buffer size (8192) no matter what is passed as $count 
-     * parameter to fread(). 
+     * http://bugs.php.net/21641 - stream_read() is always passed PHP's
+     * internal read buffer size (8192) no matter what is passed as $count
+     * parameter to fread().
      *
      * @param  integer $count
      * @return string
@@ -395,8 +394,7 @@ class Stream
 
         if (preg_match('@^([a-z0-9+.]|-)+://$@', $path)) {
             $this->_bucketList = $this->_getS3Client($path)->getBuckets();
-        }
-        else {
+        } else {
             $host = parse_url($path, PHP_URL_HOST);
             $this->_bucketList = $this->_getS3Client($path)->getObjectsByBucket($host);
         }

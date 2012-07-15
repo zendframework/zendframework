@@ -27,7 +27,7 @@ class IgBinary extends AbstractAdapter
 
     /**
      * Constructor
-     * 
+     *
      * @param  array|\Traversable $options
      * @return void
      * @throws ExtensionNotLoadedException If igbinary extension is not present
@@ -47,9 +47,9 @@ class IgBinary extends AbstractAdapter
 
     /**
      * Serialize PHP value to igbinary
-     * 
-     * @param  mixed $value 
-     * @param  array $opts 
+     *
+     * @param  mixed $value
+     * @param  array $opts
      * @return string
      * @throws RuntimeException on igbinary error
      */
@@ -65,9 +65,9 @@ class IgBinary extends AbstractAdapter
 
     /**
      * Deserialize igbinary string to PHP value
-     * 
-     * @param  string|binary $serialized 
-     * @param  array $opts 
+     *
+     * @param  string|binary $serialized
+     * @param  array $opts
      * @return mixed
      * @throws RuntimeException on igbinary error
      */

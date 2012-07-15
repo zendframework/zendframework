@@ -94,8 +94,7 @@ class NicknameQuery extends AbstractQuery
     {
         if ($value !== null) {
             $this->_params['username'] = $value;
-        }
-        else {
+        } else {
             unset($this->_params['username']);
         }
     }

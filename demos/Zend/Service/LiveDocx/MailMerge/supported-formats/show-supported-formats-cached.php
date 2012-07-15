@@ -8,7 +8,7 @@ use Zend\Service\LiveDocx\MailMerge;
 
 Helper::printLine(
     PHP_EOL . 'Template, Document and Image Formats' .
-    PHP_EOL . 
+    PHP_EOL .
     PHP_EOL . 'The following formats are supported by LiveDocx:' .
     PHP_EOL .
     PHP_EOL . '(Note these method calls are cached for maximum performance. The supported formats change very infrequently, hence, they are good candidates to be cached.)' .
@@ -32,28 +32,28 @@ if (!is_dir($cache['options']['cache_dir'])) {
 $cache = StorageFactory::factory($cache);
 
 if (! $formats = $cache->getItem($cacheId)) {
-    
+
     // Cache miss. Connect to backend service (expensive).
-    
+
     $mailMerge = new MailMerge();
-    
+
     $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
               ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
-    
+
     $formats = new \StdClass();
-    
+
     $formats->template = $mailMerge->getTemplateFormats();
     $formats->document = $mailMerge->getDocumentFormats();
     $formats->image    = $mailMerge->getImageExportFormats();
-    
+
     $cache->setItem($formats, $cacheId);
-    
+
     unset($mailMerge);
-    
+
 } else {
-    
+
     // Cache hit. Continue.
-    
+
 }
 
 unset($cache);

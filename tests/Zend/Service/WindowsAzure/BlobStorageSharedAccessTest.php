@@ -23,7 +23,7 @@ use Zend\Service\WindowsAzure\Storage\Blob\Blob;
  */
 class BlobStorageSharedAccessTest extends \PHPUnit_Framework_TestCase
 {
-    static $path;
+    public static $path;
 
     public function __construct()
     {
@@ -43,8 +43,7 @@ class BlobStorageSharedAccessTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $storageClient = $this->createAdministrativeStorageInstance();
-        for ($i = 1; $i <= self::$uniqId; $i++)
-        {
+        for ($i = 1; $i <= self::$uniqId; $i++) {
             try { $storageClient->deleteContainer(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSA_CONTAINER_PREFIX . $i); } catch (\Exception $e) { }
         }
         try { $storageClient->deleteContainer('$root'); } catch (\Exception $e) { }
@@ -101,7 +100,7 @@ class BlobStorageSharedAccessTest extends \PHPUnit_Framework_TestCase
      */
     public function testSharedAccess_OnlyWrite()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
+        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
             $containerName = $this->generateName();
 
             // Account owner performs this part
@@ -111,10 +110,10 @@ class BlobStorageSharedAccessTest extends \PHPUnit_Framework_TestCase
             $sharedAccessUrl = $administrativeStorageClient->generateSharedAccessUrl(
                 $containerName,
                 '',
-            	'c',
-            	'w',
-            	$administrativeStorageClient->isoDate(time() - 500),
-            	$administrativeStorageClient->isoDate(time() + 3000)
+                'c',
+                'w',
+                $administrativeStorageClient->isoDate(time() - 500),
+                $administrativeStorageClient->isoDate(time() + 3000)
             );
 
 
@@ -158,10 +157,10 @@ class BlobStorageSharedAccessTest extends \PHPUnit_Framework_TestCase
             $sharedAccessUrl1 = $administrativeStorageClient->generateSharedAccessUrl(
                 $containerName,
                 '',
-            	'c',
-            	'w',
-            	$administrativeStorageClient->isoDate(time() - 500),
-            	$administrativeStorageClient->isoDate(time() + 3000)
+                'c',
+                'w',
+                $administrativeStorageClient->isoDate(time() - 500),
+                $administrativeStorageClient->isoDate(time() + 3000)
             );
             $sharedAccessUrl2 = str_replace($administrativeStorageClient->getAccountName(), 'bogusaccount', $sharedAccessUrl1);
 
@@ -173,10 +172,10 @@ class BlobStorageSharedAccessTest extends \PHPUnit_Framework_TestCase
 
             $exceptionThrown = false;
             try {
-	            $credentials->setPermissionSet(array(
-	                $sharedAccessUrl1,
-	                $sharedAccessUrl2
-	            ));
+                $credentials->setPermissionSet(array(
+                    $sharedAccessUrl1,
+                    $sharedAccessUrl2
+                ));
             } catch (\Exception $ex) {
                 $exceptionThrown = true;
             }

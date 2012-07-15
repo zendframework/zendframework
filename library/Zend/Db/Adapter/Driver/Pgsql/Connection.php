@@ -59,7 +59,7 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @param  array $connectionParameters 
+     * @param  array $connectionParameters
      * @return Connection
      */
     public function setConnectionParameters(array $connectionParameters)
@@ -69,7 +69,7 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @param  Pgsql $driver 
+     * @param  Pgsql $driver
      * @return Connection
      */
     public function setDriver(Pgsql $driver)
@@ -79,7 +79,7 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @param  resource $resource 
+     * @param  resource $resource
      * @return Connection
      */
     public function setResource($resource)
@@ -114,7 +114,7 @@ class Connection implements ConnectionInterface
 
     /**
      * Connect to the database
-     * 
+     *
      * @return void
      * @throws Exception\RuntimeException on failure
      */
@@ -199,7 +199,7 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @param  string $sql 
+     * @param  string $sql
      * @return resource|\Zend\Db\ResultSet\ResultSetInterface
      */
     public function execute($sql)

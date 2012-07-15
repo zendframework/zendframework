@@ -80,11 +80,9 @@ class EntryLink extends Extension
         case 'readOnly':
             if ($attribute->nodeValue == "true") {
                 $this->_readOnly = true;
-            }
-            else if ($attribute->nodeValue == "false") {
+            } elseif ($attribute->nodeValue == "false") {
                 $this->_readOnly = false;
-            }
-            else {
+            } else {
                 throw new \Zend\GData\App\InvalidArgumentException("Expected 'true' or 'false' for gCal:selected#value.");
             }
             break;

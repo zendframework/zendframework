@@ -129,8 +129,7 @@ class Feed extends App\Feed
             $etag = $attribute->nodeValue;
             if (!($this->_etag instanceof Etag)) {
                 $this->_etag = $etag;
-            }
-            elseif ($this->_etag->getFieldValue() != $etag) {
+            } elseif ($this->_etag->getFieldValue() != $etag) {
                 throw new App\IOException("ETag mismatch");
             }
             break;
@@ -147,7 +146,8 @@ class Feed extends App\Feed
      *        value of the totalResults property. Use null to unset.
      * @return \Zend\GData\Feed Provides a fluent interface.
      */
-    function setTotalResults($value) {
+    public function setTotalResults($value)
+    {
         $this->_totalResults = $value;
         return $this;
     }
@@ -158,7 +158,8 @@ class Feed extends App\Feed
      * @return \Zend\GData\Extension\OpenSearchTotalResults|null The value of
      *         the totalResults property, or null if unset.
      */
-    function getTotalResults() {
+    public function getTotalResults()
+    {
         return $this->_totalResults;
     }
 
@@ -169,7 +170,8 @@ class Feed extends App\Feed
      *        for the startIndex property. Use null to unset.
      * @return \Zend\GData\Feed Provides a fluent interface.
      */
-    function setStartIndex($value) {
+    public function setStartIndex($value)
+    {
         $this->_startIndex = $value;
         return $this;
     }
@@ -180,7 +182,8 @@ class Feed extends App\Feed
      * @return \Zend\GData\Extension\OpenSearchStartIndex|null The value of the
      *         startIndex property, or null if unset.
      */
-    function getStartIndex() {
+    public function getStartIndex()
+    {
         return $this->_startIndex;
     }
 
@@ -191,7 +194,8 @@ class Feed extends App\Feed
      *        value for the itemsPerPage property. Use nul to unset.
      * @return \Zend\GData\Feed Provides a fluent interface.
      */
-    function setItemsPerPage($value) {
+    public function setItemsPerPage($value)
+    {
         $this->_itemsPerPage = $value;
         return $this;
     }
@@ -202,7 +206,8 @@ class Feed extends App\Feed
      * @return \Zend\GData\Extension\OpenSearchItemsPerPage|null The value of
      *         the itemsPerPage property, or null if unset.
      */
-    function getItemsPerPage() {
+    public function getItemsPerPage()
+    {
         return $this->_itemsPerPage;
     }
 

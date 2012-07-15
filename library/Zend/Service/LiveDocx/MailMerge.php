@@ -21,7 +21,7 @@ class MailMerge extends AbstractLiveDocx
 {
     /**
      * URI of LiveDocx.MailMerge WSDL.
-     * @since LiveDocx 1.0 
+     * @since LiveDocx 1.0
      */
     const WSDL = 'https://api.livedocx.com/2.0/mailmerge.asmx?WSDL';
 
@@ -42,7 +42,7 @@ class MailMerge extends AbstractLiveDocx
      */
     protected $blockFieldValues = array();
 
-    
+
     /**
      * Constructor
      *
@@ -128,11 +128,11 @@ class MailMerge extends AbstractLiveDocx
         if (!is_readable($filename)) {
             throw new Exception\InvalidArgumentException(
                 'Cannot read local template from disk.'
-            );            
+            );
         }
 
         $this->logIn();
-        
+
         try {
             $this->getSoapClient()->SetLocalTemplate(array(
                 'template' => base64_encode(file_get_contents($filename)),
@@ -159,7 +159,7 @@ class MailMerge extends AbstractLiveDocx
     public function setRemoteTemplate($filename)
     {
         $this->logIn();
-        
+
         try {
             $this->getSoapClient()->SetRemoteTemplate(array(
                 'filename' => $filename,
@@ -184,7 +184,7 @@ class MailMerge extends AbstractLiveDocx
     public function setFieldValues($values)
     {
         $this->logIn();
-        
+
         foreach ($values as $value) {
             if (is_array($value)) {
                 $method = 'multiAssocArrayToArrayOfArrayOfString';
@@ -193,7 +193,7 @@ class MailMerge extends AbstractLiveDocx
             }
             break;
         }
-        
+
         try {
             $this->getSoapClient()->SetFieldValues(array(
                 'fieldValues' => self::$method($values),
@@ -218,7 +218,7 @@ class MailMerge extends AbstractLiveDocx
     public function setFieldValue($field, $value)
     {
         $this->fieldValues[$field] = $value;
-        
+
         return $this;
     }
 
@@ -234,7 +234,7 @@ class MailMerge extends AbstractLiveDocx
     public function setBlockFieldValues($blockName, $blockFieldValues)
     {
         $this->logIn();
-        
+
         try {
             $this->getSoapClient()->SetBlockFieldValues(array(
                 'blockName'        => $blockName,
@@ -281,9 +281,9 @@ class MailMerge extends AbstractLiveDocx
 
     /**
      * Set a password to open to document.
-     * 
+     *
      * This method can only be used for PDF documents.
-     * 
+     *
      * @param  string  $password
      * @throws Exception\RuntimeException
      * @return MailMerge
@@ -292,7 +292,7 @@ class MailMerge extends AbstractLiveDocx
     public function setDocumentPassword($password)
     {
         $this->logIn();
-        
+
         try {
             $this->getSoapClient()->SetDocumentPassword(array(
                 'password' => $password,
@@ -302,20 +302,20 @@ class MailMerge extends AbstractLiveDocx
                 $e->getMessage()
             );
         }
-        
-        return $this;        
+
+        return $this;
     }
-    
+
     /**
      * Set a master password for document and determine which security features
      * are accessible without using the master password.
      *
      * An array of supported permissions can be retrieved with
      * getDocumentAccessOptions().
-     * 
+     *
      * This method can only be used for PDF documents
-     * 
-     * @param  array  $permissions 
+     *
+     * @param  array  $permissions
      * @param  string $password
      * @throws Exception\RuntimeException
      * @return MailMerge
@@ -324,7 +324,7 @@ class MailMerge extends AbstractLiveDocx
     public function setDocumentAccessPermissions($permissions, $password)
     {
         $this->logIn();
-        
+
         try {
             $this->getSoapClient()->SetDocumentAccessPermissions(array(
                 'permissions' => $permissions,
@@ -335,10 +335,10 @@ class MailMerge extends AbstractLiveDocx
                 $e->getMessage()
             );
         }
-        
-        return $this;        
-    }    
-    
+
+        return $this;
+    }
+
     /**
      * Merge assigned data with template to generate document.
      *
@@ -349,7 +349,7 @@ class MailMerge extends AbstractLiveDocx
     public function createDocument()
     {
         $this->logIn();
-        
+
         if (count($this->fieldValues) > 0) {
             $this->setFieldValues($this->fieldValues);
         }
@@ -378,9 +378,9 @@ class MailMerge extends AbstractLiveDocx
     public function retrieveDocument($format)
     {
         $this->logIn();
-        
+
         $format = strtolower($format);
-        
+
         try {
             $result = $this->getSoapClient()->RetrieveDocument(array(
                 'format' => $format,
@@ -407,7 +407,7 @@ class MailMerge extends AbstractLiveDocx
     public function getMetafiles($fromPage, $toPage)
     {
         $this->logIn();
-        
+
         $ret    = array();
         $result = $this->getSoapClient()->GetMetafiles(array(
             'fromPage' => (integer) $fromPage,
@@ -439,7 +439,7 @@ class MailMerge extends AbstractLiveDocx
     public function getAllMetafiles()
     {
         $this->logIn();
-        
+
         $ret    = array();
         $result = $this->getSoapClient()->GetAllMetafiles();
 
@@ -456,8 +456,8 @@ class MailMerge extends AbstractLiveDocx
         }
 
         return $ret;
-    }    
-    
+    }
+
     /**
      * Return graphical bitmap data for specified page range of created document.
      * Returned array contains bitmap data (binary) - array key is page number.
@@ -468,13 +468,13 @@ class MailMerge extends AbstractLiveDocx
      * @param  string  $format
      * @return array
      * @since  LiveDocx 1.2
-     */    
+     */
     public function getBitmaps($fromPage, $toPage, $zoomFactor, $format)
     {
         $this->logIn();
-        
+
         $ret = array();
-        
+
         $result = $this->getSoapClient()->GetBitmaps(array(
             'fromPage'   => (integer) $fromPage,
             'toPage'     => (integer) $toPage,
@@ -494,9 +494,9 @@ class MailMerge extends AbstractLiveDocx
             }
         }
 
-        return $ret;        
+        return $ret;
     }
-    
+
     /**
      * Return graphical bitmap data for all pages of created document.
      * Returned array contains bitmap data (binary) - array key is page number.
@@ -505,11 +505,11 @@ class MailMerge extends AbstractLiveDocx
      * @param  string  $format
      * @return array
      * @since  LiveDocx 1.2
-     */    
+     */
     public function getAllBitmaps($zoomFactor, $format)
     {
         $this->logIn();
-        
+
         $ret    = array();
         $result = $this->getSoapClient()->GetAllBitmaps(array(
             'zoomFactor' => (integer) $zoomFactor,
@@ -528,8 +528,8 @@ class MailMerge extends AbstractLiveDocx
             }
         }
 
-        return $ret;        
-    }    
+        return $ret;
+    }
 
     /**
      * Return all the fields in the template.
@@ -540,7 +540,7 @@ class MailMerge extends AbstractLiveDocx
     public function getFieldNames()
     {
         $this->logIn();
-        
+
         $ret    = array();
         $result = $this->getSoapClient()->GetFieldNames();
 
@@ -565,7 +565,7 @@ class MailMerge extends AbstractLiveDocx
     public function getBlockFieldNames($blockName)
     {
         $this->logIn();
-        
+
         $ret    = array();
         $result = $this->getSoapClient()->GetBlockFieldNames(array(
             'blockName' => $blockName,
@@ -591,7 +591,7 @@ class MailMerge extends AbstractLiveDocx
     public function getBlockNames()
     {
         $this->logIn();
-        
+
         $ret    = array();
         $result = $this->getSoapClient()->GetBlockNames();
 
@@ -623,7 +623,7 @@ class MailMerge extends AbstractLiveDocx
         }
 
         $this->logIn();
-        
+
         try {
             $this->getSoapClient()->UploadTemplate(array(
                 'template' => base64_encode(file_get_contents($filename)),
@@ -647,7 +647,7 @@ class MailMerge extends AbstractLiveDocx
     public function downloadTemplate($filename)
     {
         $this->logIn();
-        
+
         try {
             $result = $this->getSoapClient()->DownloadTemplate(array(
                 'filename' => basename($filename),
@@ -672,7 +672,7 @@ class MailMerge extends AbstractLiveDocx
     public function deleteTemplate($filename)
     {
         $this->logIn();
-        
+
         $this->getSoapClient()->DeleteTemplate(array(
             'filename' => basename($filename),
         ));
@@ -682,12 +682,12 @@ class MailMerge extends AbstractLiveDocx
      * List all templates stored on LiveDocx service.
      *
      * @return array
-     * @since  LiveDocx 1.0 
+     * @since  LiveDocx 1.0
      */
     public function listTemplates()
     {
         $this->logIn();
-        
+
         $ret    = array();
         $result = $this->getSoapClient()->ListTemplates();
 
@@ -708,7 +708,7 @@ class MailMerge extends AbstractLiveDocx
     public function templateExists($filename)
     {
         $this->logIn();
-        
+
         $result = $this->getSoapClient()->TemplateExists(array(
             'filename' => basename($filename),
         ));
@@ -775,7 +775,7 @@ class MailMerge extends AbstractLiveDocx
 
         return $this;
     }
-    
+
     /**
      * Share a document - i.e. the document is available to all over the Internet.
      *
@@ -785,7 +785,7 @@ class MailMerge extends AbstractLiveDocx
     public function shareDocument()
     {
         $this->logIn();
-        
+
         $ret    = null;
         $result = $this->getSoapClient()->ShareDocument();
 
@@ -805,7 +805,7 @@ class MailMerge extends AbstractLiveDocx
     public function listSharedDocuments()
     {
         $this->logIn();
-        
+
         $ret    = array();
         $result = $this->getSoapClient()->ListSharedDocuments();
 
@@ -828,7 +828,7 @@ class MailMerge extends AbstractLiveDocx
     public function deleteSharedDocument($filename)
     {
         $this->logIn();
-        
+
         $this->getSoapClient()->DeleteSharedDocument(array(
             'filename' => basename($filename),
         ));
@@ -845,7 +845,7 @@ class MailMerge extends AbstractLiveDocx
     public function downloadSharedDocument($filename)
     {
         $this->logIn();
-        
+
         try {
             $result = $this->getSoapClient()->DownloadSharedDocument(array(
                 'filename' => basename($filename),
@@ -869,11 +869,11 @@ class MailMerge extends AbstractLiveDocx
     public function sharedDocumentExists($filename)
     {
         $this->logIn();
-        
+
         $ret             = false;
         $sharedDocuments = $this->listSharedDocuments();
         foreach ($sharedDocuments as $shareDocument) {
-            if (isset($shareDocument['filename']) 
+            if (isset($shareDocument['filename'])
                 && (basename($filename) === $shareDocument['filename'])
             ) {
                 $ret = true;
@@ -893,7 +893,7 @@ class MailMerge extends AbstractLiveDocx
     public function getTemplateFormats()
     {
         $this->logIn();
-        
+
         $ret    = array();
         $result = $this->getSoapClient()->GetTemplateFormats();
 
@@ -914,7 +914,7 @@ class MailMerge extends AbstractLiveDocx
     public function getDocumentFormats()
     {
         $this->logIn();
-        
+
         $ret    = array();
         $result = $this->getSoapClient()->GetDocumentFormats();
 
@@ -925,7 +925,7 @@ class MailMerge extends AbstractLiveDocx
 
         return $ret;
     }
-        
+
     /**
      * Return the names of all fonts that are installed on backend server.
      *
@@ -935,7 +935,7 @@ class MailMerge extends AbstractLiveDocx
     public function getFontNames()
     {
         $this->logIn();
-        
+
         $ret    = array();
         $result = $this->getSoapClient()->GetFontNames();
 
@@ -944,8 +944,8 @@ class MailMerge extends AbstractLiveDocx
         }
 
         return $ret;
-    }    
-    
+    }
+
     /**
      * Return supported document access options.
      *
@@ -955,7 +955,7 @@ class MailMerge extends AbstractLiveDocx
     public function getDocumentAccessOptions()
     {
         $this->logIn();
-        
+
         $ret    = array();
         $result = $this->getSoapClient()->GetDocumentAccessOptions();
 
@@ -1123,12 +1123,12 @@ class MailMerge extends AbstractLiveDocx
      *
      * @param  array $list
      * @return array
-     * @since  LiveDocx 1.0 
+     * @since  LiveDocx 1.0
      */
     protected function backendListArrayToMultiAssocArray($list)
     {
         $ret = array();
-        
+
         if (isset($list->ArrayOfString)) {
            foreach ($list->ArrayOfString as $a) {
                if (is_array($a)) {      // 1 template only
@@ -1167,7 +1167,7 @@ class MailMerge extends AbstractLiveDocx
     {
         $arrayKeys   = array_keys($assoc);
         $arrayValues = array_values($assoc);
-        
+
         return array($arrayKeys, $arrayValues);
     }
 

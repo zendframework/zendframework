@@ -27,7 +27,7 @@ testing:
                 setObject:
                     name: setObject
                     params:
-                        - 
+                        -
                             __reference: params
         -
             class: ZendTest\Di\TestAsset\InspectedClass
@@ -39,4 +39,4 @@ testing:
         params:    ZendTest\Di\TestAsset\DummyParams
         injected:  ZendTest\Di\TestAsset\InjectedMethod
         inspected: ZendTest\Di\TestAsset\InspectedClass
-        
+

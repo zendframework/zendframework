@@ -15,7 +15,7 @@ use Zend\Cloud\Exception\InvalidArgumentException;
 
 /**
  * Factory for infrastructure adapters
- * 
+ *
  * @package    Zend_Cloud
  * @subpackage Infrastructure
  */

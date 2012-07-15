@@ -58,7 +58,8 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
     /**
      *  Per RFC 2822 3.6
      */
-    public function testSendMailWithoutMinimalHeaders() {
+    public function testSendMailWithoutMinimalHeaders()
+    {
         $this->setExpectedException(
             'Zend\Mail\Transport\Exception\RuntimeException',
             'transport expects either a Sender or at least one From address in the Message; none provided'
@@ -71,7 +72,8 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
      *  Per RFC 2821 3.3 (page 18)
      *  - RCPT (recipient) must be called before DATA (headers or body)
      */
-    public function testSendMailWithoutRecipient() {
+    public function testSendMailWithoutRecipient()
+    {
         $this->setExpectedException(
             'Zend\Mail\Transport\Exception\RuntimeException',
             'at least one recipient if the message has at least one header or body'
@@ -81,7 +83,8 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $this->transport->send($message);
     }
 
-    public function testSendMinimalMail() {
+    public function testSendMinimalMail()
+    {
         $headers = new Headers();
         $headers->addHeaderLine('Date', 'Sun, 10 Jun 2012 20:07:24 +0200');
         $message = new Message();

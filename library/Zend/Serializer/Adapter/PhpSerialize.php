@@ -26,7 +26,7 @@ class PhpSerialize extends AbstractAdapter
 
     /**
      * Constructor
-     * 
+     *
      * @param  array|\Traversable $options
      * @return void
      */
@@ -43,9 +43,9 @@ class PhpSerialize extends AbstractAdapter
 
     /**
      * Serialize using serialize()
-     * 
-     * @param  mixed $value 
-     * @param  array $opts 
+     *
+     * @param  mixed $value
+     * @param  array $opts
      * @return string
      * @throws RuntimeException On serialize error
      */
@@ -67,10 +67,10 @@ class PhpSerialize extends AbstractAdapter
 
     /**
      * Unserialize
-     * 
+     *
      * @todo   Allow integration with unserialize_callback_func
-     * @param  string $serialized 
-     * @param  array $opts 
+     * @param  string $serialized
+     * @param  array $opts
      * @return mixed
      * @throws RuntimeException on unserialize error
      */
@@ -89,7 +89,7 @@ class PhpSerialize extends AbstractAdapter
             return $serialized;
         }
 
-        // If we have a serialized boolean false value, just return false; 
+        // If we have a serialized boolean false value, just return false;
         // prevents the unserialize handler from creating an error.
         if ($serialized === self::$serializedFalse) {
             return false;

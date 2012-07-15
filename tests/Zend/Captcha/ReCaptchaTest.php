@@ -119,6 +119,6 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
     public function testUsesReCaptchaHelper()
     {
         $captcha = new ReCaptcha;
-        $this->assertEquals('captcha/recaptcha', $captcha->getHelperName());   
+        $this->assertEquals('captcha/recaptcha', $captcha->getHelperName());
     }
 }

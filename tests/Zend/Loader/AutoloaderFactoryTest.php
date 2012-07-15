@@ -79,7 +79,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         }
         include __DIR__ . '/_files/InvalidInterfaceAutoloader.php';
         AutoloaderFactory::factory(array(
-            'InvalidInterfaceAutoloader' => array()            
+            'InvalidInterfaceAutoloader' => array()
         ));
     }
 

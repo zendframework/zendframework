@@ -15,7 +15,6 @@ use stdClass;
 use Zend\Validator;
 
 /**
- * @see Zend_Validator_Date
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
@@ -119,8 +118,8 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->setFormat('d/m/Y')->isValid('2008/10/22'));
         $this->assertTrue($this->validator->setFormat('d/m/Y')->isValid('22/10/08'));
         $this->assertFalse($this->validator->setFormat('d/m/Y')->isValid('22/10'));
-        // Omitting the following assertion, as it varies from 5.3.3 to 5.3.11, 
-        // and there is no indication in the PHP changelog as to when or why it 
+        // Omitting the following assertion, as it varies from 5.3.3 to 5.3.11,
+        // and there is no indication in the PHP changelog as to when or why it
         // may have changed. Leaving for posterity, to indicate original expectation.
         // $this->assertFalse($this->validator->setFormat('s')->isValid(0));
     }

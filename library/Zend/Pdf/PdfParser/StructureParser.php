@@ -236,7 +236,7 @@ class StructureParser
                 for ($count2 = 0; $count2 < $entries; $count2++) {
                     if ($entryField1Size == 0) {
                         $type = 1;
-                    } else if ($entryField1Size == 1) { // Optimyze one-byte field case
+                    } elseif ($entryField1Size == 1) { // Optimyze one-byte field case
                         $type = ord($xrefStreamData[$streamOffset++]);
                     } else {
                         $type = DataParser::parseIntFromStream($xrefStreamData, $streamOffset, $entryField1Size);

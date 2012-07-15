@@ -17,7 +17,7 @@ use Zend\ServiceManager\ConfigurationInterface;
  * Plugin manager implementation for renderer adapters
  *
  * Enforces that renderers retrieved are instances of
- * Renderer\AbstractRenderer. Additionally, it registers a number of default 
+ * Renderer\AbstractRenderer. Additionally, it registers a number of default
  * renderers available.
  *
  * @category   Zend
@@ -27,7 +27,7 @@ class RendererPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of renderers
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -43,8 +43,8 @@ class RendererPluginManager extends AbstractPluginManager
      * Constructor
      *
      * After processing parent constructor, adds an initializer (injectParser()).
-     * 
-     * @param  null|ConfigurationInterface $configuration 
+     *
+     * @param  null|ConfigurationInterface $configuration
      * @return void
      */
     public function __construct(ConfigurationInterface $configuration = null)
@@ -55,7 +55,7 @@ class RendererPluginManager extends AbstractPluginManager
 
     /**
      * Inject parser into broker, for injecting into renderer
-     * 
+     *
      * @param  Parser\ParserInterface $parser
      * @return RendererBroker
      */
@@ -67,7 +67,7 @@ class RendererPluginManager extends AbstractPluginManager
 
     /**
      * Retrieve parser instance
-     * 
+     *
      * @return null|Parser\ParserInterface
      */
     public function getParser()
@@ -77,8 +77,8 @@ class RendererPluginManager extends AbstractPluginManager
 
     /**
      * Inject the composed parser into the retrieved renderer instance
-     * 
-     * @param  Renderer\AbstractRenderer $instance 
+     *
+     * @param  Renderer\AbstractRenderer $instance
      * @return void
      */
     public function injectParser($instance)
@@ -94,8 +94,8 @@ class RendererPluginManager extends AbstractPluginManager
      * Validate the plugin
      *
      * Checks that the parser loaded is an instance of Renderer\AbstractRenderer.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

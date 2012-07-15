@@ -29,7 +29,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
 
     /**
      * Header encoding
-     * 
+     *
      * @var string
      */
     protected $encoding = 'ASCII';
@@ -50,7 +50,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
 
     /**
      * Constructor
-     * 
+     *
      * @param string $fieldName  Optional
      * @param string $fieldValue Optional
      */
@@ -99,7 +99,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
 
     /**
      * Set header value
-     * 
+     *
      * @param  string $fieldValue
      * @return GenericHeader
      */
@@ -124,7 +124,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         return $this->fieldValue;
     }
 
-    public function setEncoding($encoding) 
+    public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
         return $this;

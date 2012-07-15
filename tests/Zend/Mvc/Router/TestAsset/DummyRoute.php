@@ -50,7 +50,7 @@ class DummyRoute implements RouteInterface
 
     /**
      * factory(): defined by RouteInterface interface
-     * 
+     *
      * @param  array|\Traversable $options
      * @return DummyRoute
      */

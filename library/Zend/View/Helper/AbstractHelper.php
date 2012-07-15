@@ -41,7 +41,7 @@ abstract class AbstractHelper implements HelperInterface
 
     /**
      * Get the view object
-     * 
+     *
      * @return null|Renderer
      */
     public function getView()

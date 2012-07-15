@@ -14,5 +14,5 @@ class RuntimeException
     extends \RuntimeException
     implements \Zend\Acl\Exception\ExceptionInterface
 {
-    
+
 }

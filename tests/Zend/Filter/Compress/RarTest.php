@@ -203,19 +203,19 @@ class RarTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($callback, $filter->getCallback());
 
     }
-    
+
     public function testSettingCallbackThrowsExceptionOnMissingCallback()
     {
         $filter = new RarCompression();
-        
+
         $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', 'must be between');
         $filter->compress('test.txt');
     }
-    
+
     public function testSettingCallbackThrowsExceptionOnInvalidCallback()
     {
         $filter = new RarCompression();
-        
+
         $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', 'must be between');
         $filter->setCallback('invalidCallback');
     }

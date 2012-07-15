@@ -26,7 +26,7 @@ class FormCheckboxTest extends CommonTestCase
         parent::setUp();
     }
 
-    public function getElement() 
+    public function getElement()
     {
         $element = new Element\Checkbox('foo');
         $options = array(

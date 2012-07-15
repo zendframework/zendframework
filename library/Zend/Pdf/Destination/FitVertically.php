@@ -42,7 +42,7 @@ class FitVertically extends AbstractExplicitDestination
 
         if ($page instanceof Pdf\Page) {
             $destinationArray->items[] = $page->getPageDictionary();
-        } else if (is_integer($page)) {
+        } elseif (is_integer($page)) {
             $destinationArray->items[] = new InternalType\NumericObject($page);
         } else {
             throw new Exception\InvalidArgumentException('$page parametr must be a \Zend\Pdf\Page object or a page number.');

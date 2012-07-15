@@ -13,8 +13,6 @@ namespace ZendTest\Amf\Value;
 use Zend\Amf\Value\Messaging;
 
 /**
- * Test case for Zend_Amf_Value_MessageBody
- *
  * @category   Zend
  * @package    Zend_Amf
  * @subpackage UnitTests

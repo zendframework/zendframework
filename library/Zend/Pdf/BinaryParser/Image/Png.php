@@ -36,70 +36,80 @@ class Png extends AbstractImage
 
     /**** Public Interface ****/
 
-     public function getWidth() {
+     public function getWidth()
+     {
           if(!$this->_isParsed) {
                $this->parse();
           }
           return $this->_width;
      }
 
-     public function getHeight() {
+     public function getHeight()
+     {
           if(!$this->_isParsed) {
                $this->parse();
           }
           return $this->_width;
      }
 
-     public function getBitDepth() {
+     public function getBitDepth()
+     {
           if(!$this->_isParsed) {
                $this->parse();
           }
           return $this->_bits;
      }
 
-     public function getColorSpace() {
+     public function getColorSpace()
+     {
           if(!$this->_isParsed) {
                $this->parse();
           }
           return $this->_color;
      }
 
-     public function getCompressionStrategy() {
+     public function getCompressionStrategy()
+     {
           if(!$this->_isParsed) {
                $this->parse();
           }
           return $this->_compression;
      }
 
-     public function getPaethFilter() {
+     public function getPaethFilter()
+     {
           if(!$this->_isParsed) {
                $this->parse();
           }
           return $this->_preFilter;
      }
 
-     public function getInterlacingMode() {
+     public function getInterlacingMode()
+     {
           if(!$this->_isParsed) {
                $this->parse();
           }
           return $this->_interlacing;
      }
 
-     public function getRawImageData() {
+     public function getRawImageData()
+     {
           if(!$this->_isParsed) {
                $this->parse();
           }
           return $this->_imageData;
      }
 
-     public function getRawPaletteData() {
+     public function getRawPaletteData()
+     {
           if(!$this->_isParsed) {
                $this->parse();
           }
           return $this->_paletteData;
      }
 
-     public function getRawTransparencyData() {
+     public function getRawTransparencyData()
+     {
           if(!$this->_isParsed) {
                $this->parse();
           }
@@ -137,7 +147,8 @@ class Png extends AbstractImage
     }
 
 
-    protected function _parseSignature() {
+    protected function _parseSignature()
+    {
          $this->moveToOffset(1); //Skip the first byte (%)
          if('PNG' != $this->readBytes(3)) {
                $this->_isPNG = false;
@@ -146,14 +157,16 @@ class Png extends AbstractImage
          }
     }
 
-    protected function _checkSignature() {
+    protected function _checkSignature()
+    {
          if(!isset($this->_isPNG)) {
               $this->_parseSignature();
          }
          return $this->_isPNG;
     }
 
-    protected function _parseChunks() {
+    protected function _parseChunks()
+    {
          $this->moveToOffset(33); //Variable chunks start at the end of IHDR
 
          //Start processing chunks. If there are no more bytes to read parsing is complete.
@@ -195,7 +208,8 @@ class Png extends AbstractImage
          }
     }
 
-    protected function _parseIHDRChunk() {
+    protected function _parseIHDRChunk()
+    {
          $this->moveToOffset(12); //IHDR must always start at offset 12 and run for 17 bytes
          if(!$this->readBytes(4) == 'IHDR') {
               throw new Exception\CorruptedImageException('This PNG is corrupt. The first chunk in a PNG file must be IHDR.');
@@ -212,7 +226,8 @@ class Png extends AbstractImage
          }
     }
 
-    protected function _parseIDATChunk($chunkOffset, $chunkLength) {
+    protected function _parseIDATChunk($chunkOffset, $chunkLength)
+    {
          $this->moveToOffset($chunkOffset);
          if(!isset($this->_imageData)) {
               $this->_imageData = $this->readBytes($chunkLength);
@@ -221,12 +236,14 @@ class Png extends AbstractImage
          }
     }
 
-    protected function _parsePLTEChunk($chunkOffset, $chunkLength) {
+    protected function _parsePLTEChunk($chunkOffset, $chunkLength)
+    {
          $this->moveToOffset($chunkOffset);
          $this->_paletteData = $this->readBytes($chunkLength);
     }
 
-    protected function _parseTRNSChunk($chunkOffset, $chunkLength) {
+    protected function _parseTRNSChunk($chunkOffset, $chunkLength)
+    {
          $this->moveToOffset($chunkOffset);
 
          //Processing of tRNS data varies dependending on the color depth

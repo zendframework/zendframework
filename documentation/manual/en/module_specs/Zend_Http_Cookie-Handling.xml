@@ -40,7 +40,7 @@
                 <listitem>
                     <para>
                         Through the constructor, using the following syntax:
-                        <command>new <classname>Zend_Http_Cookie</classname>(string $name, string
+                        <command>new Zend_Http_Cookie(string $name, string
                             $value, string $domain, [int $expires, [string $path, [boolean
                             $secure]]]);</command>
                     </para>

@@ -22,65 +22,65 @@ class Task extends AbstractEntity
 {
     /**
      * Text
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $text;
 
     /**
      * Create time
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $createTime;
 
     /**
      * Status
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $status;
 
     /**
      * Finish time
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $finishTime;
 
     /**
      * Finished by
-     * 
+     *
      * @var User
      */
     protected $finishedBy;
 
     /**
      * AgileZen service
-     * 
-     * @var AgileZen 
+     *
+     * @var AgileZen
      */
     protected $service;
 
     /**
      * Project Id
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $projectId;
 
     /**
      * Constructor
-     * 
+     *
      * @param AgileZen $service
-     * @param array $data 
+     * @param array $data
      */
     public function __construct(AgileZen $service, array $data)
     {
         if (!array_key_exists('id', $data)) {
              throw new Exception\InvalidArgumentException("You must pass the id of the task");
         }
-        
+
         $this->text       = $data['text'];
         $this->createTime = $data['createTime'];
         $this->status     = $data['status'];
@@ -95,13 +95,13 @@ class Task extends AbstractEntity
         }
 
         $this->service= $service;
-        
+
         parent::__construct($data['id']);
     }
     /**
      * Get text
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getText()
     {
@@ -110,8 +110,8 @@ class Task extends AbstractEntity
 
     /**
      * Get create time
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getCreateTime()
     {
@@ -120,8 +120,8 @@ class Task extends AbstractEntity
 
     /**
      * Get status
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getStatus()
     {
@@ -130,8 +130,8 @@ class Task extends AbstractEntity
 
     /**
      * Get finish time
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getFinishTime()
     {
@@ -140,8 +140,8 @@ class Task extends AbstractEntity
 
     /**
      * Get finished by
-     * 
-     * @return Zend\Service\AgileZen\Resources\User 
+     *
+     * @return Zend\Service\AgileZen\Resources\User
      */
     public function getFinishedBy()
     {
@@ -150,8 +150,8 @@ class Task extends AbstractEntity
 
     /**
      * Get the project's Id
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getProjectId()
     {

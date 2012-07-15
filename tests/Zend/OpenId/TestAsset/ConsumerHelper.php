@@ -15,7 +15,7 @@ use Zend\OpenId\Consumer\Storage;
 use Zend\Session\Container as SessionContainer;
 use ZendTest\Session\TestAsset\TestManager as SessionManager;
 
-class ConsumerHelper extends Consumer 
+class ConsumerHelper extends Consumer
 {
     public function __construct(Storage\AbstractStorage $storage = null,
                                 $dumbMode = false)

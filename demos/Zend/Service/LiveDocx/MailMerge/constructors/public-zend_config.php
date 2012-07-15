@@ -9,7 +9,7 @@ use Zend\Service\LiveDocx\MailMerge;
 
 Helper::printLine(
     PHP_EOL . 'Using the Public LiveDocx Service with \Zend\Config\Config' .
-    PHP_EOL . 
+    PHP_EOL .
     PHP_EOL . 'This sample application illustrates how to use the Zend Framework LiveDocx component with a \Zend\Config\Config object. This is useful, for example, to store connection credentials in an external ini file.' .
     PHP_EOL .
     PHP_EOL

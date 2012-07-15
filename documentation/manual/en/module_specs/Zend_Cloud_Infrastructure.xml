@@ -21,7 +21,7 @@
                 <para>
                     <emphasis>create a new instance</emphasis>;
                 </para>
-            </listitem>               
+            </listitem>
             <listitem>
                 <para>
                     <emphasis>delete a new instance</emphasis>;
@@ -51,7 +51,7 @@
                 <para>
                     <emphasis>wait for a status change of an instance</emphasis>;
                 </para>
-            </listitem>  
+            </listitem>
             <listitem>
                 <para>
                     <emphasis>get the public IP or DNS name of the instance</emphasis>;
@@ -77,8 +77,8 @@
                     <emphasis>deploy of an instance (run arbitrary shell script on an instance)</emphasis>;
                 </para>
             </listitem>
-        </itemizedlist> 
-        
+        </itemizedlist>
+
         <note>
             <title>Deployment of an instance</title>
 
@@ -90,7 +90,7 @@
                 extensions can be used to connect only to Gnu/Linux instances (servers).
             </para>
         </note>
-    
+
         <para>
             This class is managed by a factory to initialize specific cloud computing adapters.
         </para>
@@ -98,19 +98,19 @@
 
     <section xml:id="zend.cloud.infrastructure.quick-start">
         <title>Quick Start</title>
-        
+
         <para>
             To use this class you have to initialize the factory with a specific adapters.  You can
             check the supported apadters in the specific Chapter <link
                 linkend="zend.cloud.infrastructure.adapter">Zend\Cloud\Infrastructure\Adapter</link>.
             We are planning to support other cloud computing vendors very soon.
         </para>
-        
+
         <para>
             For instance, to work with the AMAZON EC2 adapter you have to initialize the class with
             following parameters:
         </para>
-        
+
          <programlisting language="php"><![CDATA[
 use Zend\Cloud\Infrastructure\Adapter\Ec2 as Ec2Adapter;
 use Zend\Cloud\Infrastructure\Factory as FactoryInfrastructure;
@@ -119,14 +119,14 @@ $key    = 'key';
 $secret = 'secret';
 $region = 'region';
 
-$infrastructure = FactoryInfrastructure::getAdapter(array( 
-    FactoryInfrastructure::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Ec2', 
-    Ec2Adapter::AWS_ACCESS_KEY => $key, 
+$infrastructure = FactoryInfrastructure::getAdapter(array(
+    FactoryInfrastructure::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Ec2',
+    Ec2Adapter::AWS_ACCESS_KEY => $key,
     Ec2Adapter::AWS_SECRET_KEY => $secret,
     Ec2Adapter::AWS_REGION     => $region,
-)); 
+));
 ]]></programlisting>
-        
+
         <para>
             <classname>Zend\Cloud\Infrastructure</classname> has only a couple of methods that are vendor specific.
             These methods are the creation of a new instance and the monitoring of an instance.
@@ -144,37 +144,35 @@ $instance= $infrastructure->createInstance('name of the instance', $param);
 printf ("Name of the instance: %s\n", $instance->getName());
 printf ("ID of the instance  : %s\n", $instance->getId());
 ]]></programlisting>
-            
+
         <para>
             The interface of the <methodname>createInstance</methodname> is always the same, only
             the content of <emphasis>$param</emphasis> is specific to the adapter.  for more
             information about the adapter supported by Zend\Cloud\Infrastructure go to the specific
             <link linkend="zend.cloud.infrastructure.adapter">page of the manual</link>.
         </para>
-        
+
         <para>
             The <classname>Zend\Cloud\Infrastructure</classname> uses the classes
             <classname>Zend\Cloud\Infrastructure\Instance</classname> and
             <classname>Zend\Cloud\Infrastructure\Image</classname> to manage the instances (servers)
-            and the images of an instance. 
+            and the images of an instance.
         </para>
     </section>
- 
+
     <section xml:id="zend.cloud.infrastructure.methods">
         <title>Available Methods</title>
- 
+
         <variablelist>
             <varlistentry xml:id="zend.cloud.infrastructure.methods.create-instance">
-                <term>
+                <term>createInstance</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>createInstance</methodname>
                         <methodparam>
                             <funcparams>string $name, array $options</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Create an instance.
                         The return value is an instance of <classname>Zend\Cloud\Infrastructure\Instance</classname>.
@@ -189,23 +187,21 @@ printf ("ID of the instance  : %s\n", $instance->getId());
                     </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.deploy-instance">
-                <term>
+                <term>deployInstance</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>deployInstance</methodname>
                         <methodparam>
                             <funcparams>string $id, array $param, string|array $cmd</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Run arbitrary shell scripts on an instance.
                         Return a string or an array contains all the standard output (errors included) of the scripts executed in the instance.
                         <note><title>Requirement</title>
-                            
+
                             <para>
                                 In order to use the deployInstance method you have to install the SSH2 extension (ext/ssh2) of PHP.
                                 The SSH2 extensions can be used to connect only to Gnu/Linux instances (servers).
@@ -215,154 +211,138 @@ printf ("ID of the instance  : %s\n", $instance->getId());
                     </para>
                     <para>
                         <emphasis>$id</emphasis> is the ID of the instance
-                    </para>    
+                    </para>
                     <para>
                         <emphasis>$param</emphasis> is an array contains the username and the password to be used for the SSH connection.
-                        The username and the password must be specified using the following constants key of the <classname>Zend\Cloud\Infrastructure\Instance</classname>: 
+                        The username and the password must be specified using the following constants key of the <classname>Zend\Cloud\Infrastructure\Instance</classname>:
                         SSH_USERNAME, SSH_PASSWORD.
-                    </para> 
+                    </para>
                     <para>
                         <emphasis>$cmd</emphasis> is a string (or an array) contains the commands line to be executed in the instance.
-                    </para> 
+                    </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.destroy-instance">
-                <term>
+                <term>destroyInstance</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>destroyInstance</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Destroy an instance.
                         Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
                     </para>
                     <para>
                         <emphasis>$id</emphasis> is the ID of the instance
-                    </para>    
+                    </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.get-adapter">
-                <term>
+                <term>getAdapter</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getAdapter</methodname>
                         <methodparam>
                             <funcparams/>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return the adapter object.
-                    </para>    
+                    </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.get-adapter-result">
-                <term>
+                <term>getAdapterResult</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getAdapterResult</methodname>
                         <methodparam>
                             <funcparams/>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return the original adapter result.
-                    </para>    
+                    </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.get-last-http-request">
-                <term>
+                <term>getLastHttpRequest</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getLastHttpRequest</methodname>
                         <methodparam>
                             <funcparams/>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return the last HTTP Request of the adapter.
-                    </para>    
+                    </para>
                 </listitem>
             </varlistentry>
-            
+
              <varlistentry xml:id="zend.cloud.infrastructure.methods.get-last-http-response">
-                <term>
+                <term>getLastHttpResponse</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>getLastHttpResponse</methodname>
                         <methodparam>
                             <funcparams/>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return the last HTTP Response of the adapter.
-                    </para>    
+                    </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.images-instance">
-                <term>
+                <term>imagesInstance</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>imagesInstance</methodname>
                         <methodparam>
                             <funcparams/>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return all the available images to use for an instance.
                         The return value is an instance of <classname>Zend\Cloud\Infrastructure\ImageList</classname>
                     </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.list-instances">
-                <term>
+                <term>listInstances</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>listInstances</methodname>
                         <methodparam>
                             <funcparams/>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
-                        Return the list of of the available instances. 
+                        Return the list of of the available instances.
                         The return is an instance of <classname>Zend\Cloud\Infrastructure\InstanceList</classname>.
                     </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.monitor-instance">
-                <term>
+                <term>monitorInstance</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>monitorInstance</methodname>
                         <methodparam>
                             <funcparams>string $id,string $metric,array $options=null</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Monitor an instance. Return the system information about the metric of an instance.
                         The return value is an array that contains samples of values, timestamp and the elaboration of the average value.
@@ -373,90 +353,82 @@ printf ("ID of the instance  : %s\n", $instance->getId());
                     <para>
                         <emphasis>$metric</emphasis> is the metric to be monitored. The allowed metrics are reported as contants of the
                         <classname>Zend\Cloud\Infrastructure\Instance</classname> class: MONITOR_CPU, MONITOR_RAM,
-                        MONITOR_NETWORK_IN, MONITOR_NETWORK_OUT, MONITOR_DISK, MONITOR_DISK_WRITE, MONITOR_DISK_READ.                       
+                        MONITOR_NETWORK_IN, MONITOR_NETWORK_OUT, MONITOR_DISK, MONITOR_DISK_WRITE, MONITOR_DISK_READ.
                     </para>
                     <para>
                         <emphasis>$options</emphasis> is the optional array contains the adapter specific options.
                     </para>
                 </listitem>
             </varlistentry>
-            
+
              <varlistentry xml:id="zend.cloud.infrastructure.methods.public-dns-instance">
-                <term>
+                <term>publicDnsInstance</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>publicDnsInstance</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return the public DNS name or the IP address of the instance. The return value is a string.
                         In case of error the return is <emphasis>false</emphasis>.
                     </para>
                     <para>
                         <emphasis>$id</emphasis> is the ID of the instance
-                    </para>    
+                    </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.reboot-instance">
-                <term>
+                <term>rebootInstance</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>rebootInstance</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
-                        Reboot an instance. 
+                        Reboot an instance.
                         Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
                     </para>
                     <para>
                         <emphasis>$id</emphasis> is the ID of the instance
-                    </para>    
+                    </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.start-instance">
-                <term>
+                <term>startInstance</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>startInstance</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Start an instance.
                         Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
                     </para>
                     <para>
                         <emphasis>$id</emphasis> is the ID of the instance
-                    </para>    
+                    </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.status-instance">
-                <term>
+                <term>statusInstance</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>statusInstance</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
-                        Get the status of an instance. The return value is a string. 
+                        Get the status of an instance. The return value is a string.
                         The available status are reported in the following constants of the class <classname>Zend\Cloud\Infrastructure\Instance</classname>:
                         STATUS_STOPPED, STATUS_RUNNING, STATUS_SHUTTING_DOWN, STATUS_REBOOTING,
                         STATUS_TERMINATED, STATUS_PENDING, STATUS_REBUILD.
@@ -464,49 +436,45 @@ printf ("ID of the instance  : %s\n", $instance->getId());
                     </para>
                     <para>
                         <emphasis>$id</emphasis> is the ID of the instance
-                    </para>    
+                    </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.stop-instance">
-                <term>
+                <term>stopInstance</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>stopInstance</methodname>
                         <methodparam>
                             <funcparams>string $id</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Stop an instance.
                         Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
                     </para>
                     <para>
                         <emphasis>$id</emphasis> is the ID of the instance
-                    </para>    
+                    </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.wait-status-instance">
-                <term>
+                <term>waitStatusInstance</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>waitStatusInstance</methodname>
                         <methodparam>
                             <funcparams>string $id, string $status,integer $timeout=30</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Wait the status change of an instance for a maximum time of <emphasis>n</emphasis> seconds.
                         Return <emphasis>true</emphasis> if the status changes as expected, <emphasis>false</emphasis> if not.
                     </para>
                     <para>
                         <emphasis>$id</emphasis> is the ID of the instance;
-                    </para>    
+                    </para>
                     <para>
                         <emphasis>$status</emphasis> is the status to wait for;
                     </para>
@@ -515,18 +483,16 @@ printf ("ID of the instance  : %s\n", $instance->getId());
                     </para>
                 </listitem>
             </varlistentry>
-            
+
             <varlistentry xml:id="zend.cloud.infrastructure.methods.zones-instance">
-                <term>
+                <term>zonesInstance</term>
+                    <listitem>
                     <methodsynopsis>
                         <methodname>zonesInstance</methodname>
                         <methodparam>
                             <funcparams/>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-                
-                <listitem>
                     <para>
                         Return all the available zones for an instance.
                         The return value is an array.

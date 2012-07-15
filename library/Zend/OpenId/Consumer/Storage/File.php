@@ -11,6 +11,7 @@
 namespace Zend\OpenId\Consumer\Storage;
 
 use Zend\OpenId;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * External storage implemmentation using serialized files
@@ -93,7 +94,9 @@ class File extends AbstractStorage
     {
         $name1 = $this->_dir . '/assoc_url_' . md5($url);
         $name2 = $this->_dir . '/assoc_handle_' . md5($handle);
-        $lock = @fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -102,7 +105,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            $f = @fopen($name1, 'w+');
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name1, 'w+');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;
@@ -110,18 +115,24 @@ class File extends AbstractStorage
             $data = serialize(array($url, $handle, $macFunc, $secret, $expires));
             fwrite($f, $data);
             if (function_exists('symlink')) {
-                @unlink($name2);
+                ErrorHandler::start(E_WARNING);
+                unlink($name2);
+                ErrorHandler::stop();
                 if (symlink($name1, $name2)) {
                     fclose($f);
                     fclose($lock);
                     return true;
                 }
             }
-            $f2 = @fopen($name2, 'w+');
+            ErrorHandler::start(E_WARNING);
+            $f2 = fopen($name2, 'w+');
+            ErrorHandler::stop();
             if ($f2) {
                 fwrite($f2, $data);
                 fclose($f2);
-                @unlink($name1);
+                ErrorHandler::start(E_WARNING);
+                unlink($name1);
+                ErrorHandler::stop();
                 $ret = true;
             } else {
                 $ret = false;
@@ -150,7 +161,9 @@ class File extends AbstractStorage
     public function getAssociation($url, &$handle, &$macFunc, &$secret, &$expires)
     {
         $name1 = $this->_dir . '/assoc_url_' . md5($url);
-        $lock = @fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -159,7 +172,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            $f = @fopen($name1, 'r');
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name1, 'r');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;
@@ -173,8 +188,10 @@ class File extends AbstractStorage
                 } else {
                     $name2 = $this->_dir . '/assoc_handle_' . md5($handle);
                     fclose($f);
-                    @unlink($name2);
-                    @unlink($name1);
+                    ErrorHandler::start(E_WARNING);
+                    unlink($name2);
+                    unlink($name1);
+                    ErrorHandler::stop();
                     fclose($lock);
                     return false;
                 }
@@ -203,7 +220,9 @@ class File extends AbstractStorage
     public function getAssociationByHandle($handle, &$url, &$macFunc, &$secret, &$expires)
     {
         $name2 = $this->_dir . '/assoc_handle_' . md5($handle);
-        $lock = @fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -212,7 +231,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            $f = @fopen($name2, 'r');
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name2, 'r');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;
@@ -225,9 +246,11 @@ class File extends AbstractStorage
                     $ret = true;
                 } else {
                     fclose($f);
-                    @unlink($name2);
+                    ErrorHandler::start(E_WARNING);
+                    unlink($name2);
                     $name1 = $this->_dir . '/assoc_url_' . md5($url);
-                    @unlink($name1);
+                    unlink($name1);
+                    ErrorHandler::stop();
                     fclose($lock);
                     return false;
                 }
@@ -250,7 +273,9 @@ class File extends AbstractStorage
     public function delAssociation($url)
     {
         $name1 = $this->_dir . '/assoc_url_' . md5($url);
-        $lock = @fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/assoc.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -259,7 +284,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            $f = @fopen($name1, 'r');
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name1, 'r');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;
@@ -270,8 +297,10 @@ class File extends AbstractStorage
                 if ($url === $storedUrl) {
                     $name2 = $this->_dir . '/assoc_handle_' . md5($handle);
                     fclose($f);
-                    @unlink($name2);
-                    @unlink($name1);
+                    ErrorHandler::start(E_WARNING);
+                    unlink($name2);
+                    unlink($name1);
+                    ErrorHandler::stop();
                     fclose($lock);
                     return true;
                 }
@@ -298,7 +327,9 @@ class File extends AbstractStorage
     public function addDiscoveryInfo($id, $realId, $server, $version, $expires)
     {
         $name = $this->_dir . '/discovery_' . md5($id);
-        $lock = @fopen($this->_dir . '/discovery.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/discovery.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -307,7 +338,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            $f = @fopen($name, 'w+');
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name, 'w+');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;
@@ -337,7 +370,9 @@ class File extends AbstractStorage
     public function getDiscoveryInfo($id, &$realId, &$server, &$version, &$expires)
     {
         $name = $this->_dir . '/discovery_' . md5($id);
-        $lock = @fopen($this->_dir . '/discovery.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/discovery.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -346,7 +381,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            $f = @fopen($name, 'r');
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name, 'r');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;
@@ -359,7 +396,9 @@ class File extends AbstractStorage
                     $ret = true;
                 } else {
                     fclose($f);
-                    @unlink($name);
+                    ErrorHandler::start(E_WARNING);
+                    unlink($name);
+                    ErrorHandler::stop();
                     fclose($lock);
                     return false;
                 }
@@ -382,7 +421,9 @@ class File extends AbstractStorage
     public function delDiscoveryInfo($id)
     {
         $name = $this->_dir . '/discovery_' . md5($id);
-        $lock = @fopen($this->_dir . '/discovery.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/discovery.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -391,7 +432,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            @unlink($name);
+            ErrorHandler::start(E_WARNING);
+            unlink($name);
+            ErrorHandler::stop();
             fclose($lock);
             return true;
         } catch (\Exception $e) {
@@ -410,7 +453,9 @@ class File extends AbstractStorage
     public function isUniqueNonce($provider, $nonce)
     {
         $name = $this->_dir . '/nonce_' . md5($provider.';'.$nonce);
-        $lock = @fopen($this->_dir . '/nonce.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/nonce.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock === false) {
             return false;
         }
@@ -419,7 +464,9 @@ class File extends AbstractStorage
             return false;
         }
         try {
-            $f = @fopen($name, 'x');
+            ErrorHandler::start(E_WARNING);
+            $f = fopen($name, 'x');
+            ErrorHandler::stop();
             if ($f === false) {
                 fclose($lock);
                 return false;
@@ -441,14 +488,18 @@ class File extends AbstractStorage
      */
     public function purgeNonces($date=null)
     {
-        $lock = @fopen($this->_dir . '/nonce.lock', 'w+');
+        ErrorHandler::start(E_WARNING);
+        $lock = fopen($this->_dir . '/nonce.lock', 'w+');
+        ErrorHandler::stop();
         if ($lock !== false) {
             flock($lock, LOCK_EX);
         }
         try {
             if (!is_int($date) && !is_string($date)) {
                 foreach (glob($this->_dir . '/nonce_*') as $name) {
-                    @unlink($name);
+                    ErrorHandler::start(E_WARNING);
+                    unlink($name);
+                    ErrorHandler::stop();
                 }
             } else {
                 if (is_string($date)) {
@@ -458,7 +509,9 @@ class File extends AbstractStorage
                 }
                 foreach (glob($this->_dir . '/nonce_*') as $name) {
                     if (filemtime($name) < $time) {
-                        @unlink($name);
+                        ErrorHandler::start(E_WARNING);
+                        unlink($name);
+                        ErrorHandler::stop();
                     }
                 }
             }

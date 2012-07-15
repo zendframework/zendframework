@@ -52,9 +52,9 @@ final class Version
     /**
      * Fetches the version of the latest stable release.
      *
-     * This uses the GitHub API (v3) and only returns refs that begin with 
-     * 'tags/release-'. Because GitHub returns the refs in alphabetical order, 
-     * we need to reduce the array to a single value, comparing the version 
+     * This uses the GitHub API (v3) and only returns refs that begin with
+     * 'tags/release-'. Because GitHub returns the refs in alphabetical order,
+     * we need to reduce the array to a single value, comparing the version
      * numbers with version_compare().
      *
      * @see http://developer.github.com/v3/git/refs/#get-all-references
@@ -69,7 +69,7 @@ final class Version
 
             $apiResponse = Json::decode(file_get_contents($url), Json::TYPE_ARRAY);
 
-            // Simplify the API response into a simple array of version numbers 
+            // Simplify the API response into a simple array of version numbers
             $tags = array_map(function($tag){
                 return substr($tag['ref'], 18); // Reliable because we're filtering on 'refs/tags/release-'
             }, $apiResponse);
@@ -86,8 +86,8 @@ final class Version
     /**
      * Returns true if the running version of Zend Framework is
      * the latest (or newer??) than the latest tag on GitHub,
-     * which is returned by static::getLatest(). 
-     * 
+     * which is returned by static::getLatest().
+     *
      * @return boolean
      */
     public static function isLatest()

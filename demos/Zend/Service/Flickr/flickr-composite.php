@@ -143,8 +143,7 @@ if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
         } else {
             echo '<p style="color: orange; font-weight: bold">No Results Found</p>';
         }
-    }
-    catch (FlickrException $e) {
+    } catch (FlickrException $e) {
         echo '<p style="color: red; font-weight: bold">An error occurred, please try again later. (' .$e->getMessage(). ')</p>';
     }
 }

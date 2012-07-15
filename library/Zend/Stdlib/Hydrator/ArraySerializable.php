@@ -21,10 +21,10 @@ class ArraySerializable implements HydratorInterface
 {
     /**
      * Extract values from the provided object
-     * 
+     *
      * Extracts values via the object's getArrayCopy() method.
-     * 
-     * @param  object $object 
+     *
+     * @param  object $object
      * @return array
      * @throws Exception\BadMethodCallException for an $object not implementing getArrayCopy()
      */
@@ -42,11 +42,11 @@ class ArraySerializable implements HydratorInterface
     /**
      * Hydrate an object
      *
-     * Hydrates an object by passing $data to either its exchangeArray() or 
+     * Hydrates an object by passing $data to either its exchangeArray() or
      * populate() method.
-     * 
-     * @param  array $data 
-     * @param  object $object 
+     *
+     * @param  array $data
+     * @param  object $object
      * @return object
      * @throws Exception\BadMethodCallException for an $object not implementing exchangeArray() or populate()
      */
@@ -54,7 +54,7 @@ class ArraySerializable implements HydratorInterface
     {
         if (is_callable(array($object, 'exchangeArray'))) {
             $object->exchangeArray($data);
-        } else if (is_callable(array($object, 'populate'))) {
+        } elseif (is_callable(array($object, 'populate'))) {
             $object->populate($data);
         } else {
             throw new Exception\BadMethodCallException(sprintf(

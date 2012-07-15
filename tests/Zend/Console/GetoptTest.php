@@ -227,7 +227,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         unset($opts->a);
         $this->assertFalse(isset($opts->a));
     }
-    
+
     /**
      * @group ZF-5948
      */
@@ -319,7 +319,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
     {
         $opts = new Getopt('abp:', array('--apple'));
         $opts->setAliases(array('a' => 'apple'));
-        
+
         $this->setExpectedException('\Zend\Console\Exception\InvalidArgumentException', 'defined more than once');
         $opts->setAliases(array('b' => 'apple'));
     }
@@ -329,7 +329,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         $opts = new Getopt('abp:', array('--apple'));
         $opts->setAliases(array('c' => 'cumquat'));
         $opts->setArguments(array('-c'));
-        
+
         $this->setExpectedException('\Zend\Console\Exception\RuntimeException', 'not recognized');
         $opts->parse();
     }
@@ -490,7 +490,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
     public function testUsingDashWithoutOptionNotAsLastArgumentThrowsException()
     {
         $opts = new Getopt("abp:", array("-", "file1"));
-        
+
         $this->setExpectedException('\Zend\Console\Exception\RuntimeException');
         $opts->parse();
     }
@@ -515,7 +515,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
             array('colors=s' => 'Colors-option'),
             array('--colors=red', '--colors=green', '--colors=blue')
         );
-        
+
         $this->assertInternalType('string', $opts->colors);
         $this->assertEquals('blue', $opts->colors, 'Should be equal to last variable');
     }
@@ -535,7 +535,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
     public function testGetoptIgnoreCumulativeFlagsByDefault()
     {
         $opts = new Getopt('v', array('-v', '-v', '-v'));
-        
+
         $this->assertEquals(true, $opts->v);
     }
 

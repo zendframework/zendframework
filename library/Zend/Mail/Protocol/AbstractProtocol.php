@@ -120,26 +120,26 @@ abstract class AbstractProtocol
     }
 
     /**
-     * Set the maximum log size 
-     * 
+     * Set the maximum log size
+     *
      * @param integer $maximumLog Maximum log size
      */
     public function setMaximumLog($maximumLog)
     {
         $this->_maximumLog = (int) $maximumLog;
     }
-    
-    
+
+
     /**
-     * Get the maximum log size 
-     * 
+     * Get the maximum log size
+     *
      * @return int the maximum log size
      */
     public function getMaximumLog()
     {
         return $this->_maximumLog;
     }
-    
+
 
     /**
      * Create a connection to the remote host

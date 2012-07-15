@@ -29,8 +29,8 @@ class ModuleRouteListener implements ListenerAggregateInterface
 
     /**
      * Attach to an event manager
-     * 
-     * @param  EventManagerInterface $events 
+     *
+     * @param  EventManagerInterface $events
      * @return void
      */
     public function attach(EventManagerInterface $events, $priority = 1)
@@ -40,8 +40,8 @@ class ModuleRouteListener implements ListenerAggregateInterface
 
     /**
      * Detach all our listeners from the event manager
-     * 
-     * @param  EventManagerInterface $events 
+     *
+     * @param  EventManagerInterface $events
      * @return void
      */
     public function detach(EventManagerInterface $events)
@@ -57,11 +57,11 @@ class ModuleRouteListener implements ListenerAggregateInterface
      * Listen to the "route" event and determine if the module namespace should
      * be prepended to the controller name.
      *
-     * If the route match contains a parameter key matching the MODULE_NAMESPACE 
-     * constant, that value will be prepended, with a namespace separator, to 
+     * If the route match contains a parameter key matching the MODULE_NAMESPACE
+     * constant, that value will be prepended, with a namespace separator, to
      * the matched controller parameter.
-     * 
-     * @param  MvcEvent $e 
+     *
+     * @param  MvcEvent $e
      * @return null
      */
     public function onRoute($e)
@@ -92,7 +92,7 @@ class ModuleRouteListener implements ListenerAggregateInterface
         // Keep the originally matched controller name around
         $matches->setParam(self::ORIGINAL_CONTROLLER, $controller);
 
-        // Prepend the controllername with the module, and replace it in the 
+        // Prepend the controllername with the module, and replace it in the
         // matches
         $controller = $module . '\\' . $controller;
         $matches->setParam('controller', $controller);

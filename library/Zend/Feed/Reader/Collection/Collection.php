@@ -17,6 +17,6 @@ namespace Zend\Feed\Reader\Collection;
 class Collection extends \ArrayObject
 {
 
-    
+
 
 }

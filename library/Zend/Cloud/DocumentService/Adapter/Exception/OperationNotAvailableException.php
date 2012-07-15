@@ -17,6 +17,6 @@ use Zend\Cloud\DocumentService\Exception;
  * @package    Zend_Cloud
  * @subpackage DocumentService_Adapter
  */
-class OperationNotAvailableException extends Exception\OperationNotAvailableException implements 
+class OperationNotAvailableException extends Exception\OperationNotAvailableException implements
     ExceptionInterface
 {}

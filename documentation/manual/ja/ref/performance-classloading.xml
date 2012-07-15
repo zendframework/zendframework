@@ -284,10 +284,6 @@ Zend_Loader_Autoloader::getInstance();
             </para></listitem>
 
             <listitem><para>
-                <classname>Zend_Dojo</classname>: ビューヘルパ、フォーム要素およびデコレータ
-            </para></listitem>
-
-            <listitem><para>
                 <classname>Zend_File_Transfer</classname>: アダプタ
             </para></listitem>
 

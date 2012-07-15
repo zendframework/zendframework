@@ -37,7 +37,7 @@ class Document
      * @var float
      */
     public $boost = 1.0;
-    
+
     /**
      * Magic method for checking the existence of a field
      *

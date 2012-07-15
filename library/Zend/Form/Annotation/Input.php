@@ -25,7 +25,7 @@ class Input extends AbstractStringAnnotation
 {
     /**
      * Retrieve the input class
-     * 
+     *
      * @return null|string
      */
     public function getInput()

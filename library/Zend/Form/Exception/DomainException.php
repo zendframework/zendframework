@@ -15,6 +15,6 @@ namespace Zend\Form\Exception;
  * @package    Zend_Form
  * @subpackage Exception
  */
-class DomainException extends \DomainException implements 
+class DomainException extends \DomainException implements
     ExceptionInterface
 {}

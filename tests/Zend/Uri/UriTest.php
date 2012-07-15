@@ -371,7 +371,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($uri->isValid());
     }
 
-	/**
+    /**
      * Test that valid relative URIs pass validation
      *
      * @param string $uriString
@@ -394,7 +394,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($uri->isValid());
     }
 
-	/**
+    /**
      * Test that invalid relative URIs fail validation
      *
      * @param \Zend\Uri\Uri $uri
@@ -848,7 +848,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-	/**
+    /**
      * Data provider for valid relative URIs, not necessarily complete
      *
      * @return array
@@ -965,7 +965,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-	/**
+    /**
      * Data provider for invalid relative URI objects
      *
      * @return array

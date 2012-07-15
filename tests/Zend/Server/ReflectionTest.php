@@ -13,8 +13,6 @@ namespace ZendTest\Server;
 use Zend\Server\Reflection;
 
 /**
- * Test case for Zend\Server\Reflection
- *
  * @category   Zend
  * @package    Zend_Server
  * @subpackage UnitTests

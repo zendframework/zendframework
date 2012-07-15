@@ -168,7 +168,7 @@ class Mcrypt implements EncryptionAlgorithmInterface
             }
 
             $vector = mcrypt_create_iv($size, $method);
-        } else if (strlen($vector) != $size) {
+        } elseif (strlen($vector) != $size) {
             throw new Exception\InvalidArgumentException('The given vector has a wrong size for the set algorithm');
         }
 
@@ -312,7 +312,7 @@ class Mcrypt implements EncryptionAlgorithmInterface
         if (empty($keysizes) || ($this->_encryption['salt'] == true)) {
             $keysize = mcrypt_enc_get_key_size($cipher);
             $key     = substr(md5($key), 0, $keysize);
-        } else if (!in_array(strlen($key), $keysizes)) {
+        } elseif (!in_array(strlen($key), $keysizes)) {
             throw new Exception\RuntimeException('The given key has a wrong size for the set algorithm');
         }
 

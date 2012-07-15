@@ -39,7 +39,8 @@ class TestCallbackCache
  * Test function
  * @see ZendTest\Cache\Pattern\Foo::bar
  */
-function bar () {
+function bar ()
+{
     return call_user_func_array(__NAMESPACE__ . '\TestCallbackCache::bar', func_get_args());
 }
 

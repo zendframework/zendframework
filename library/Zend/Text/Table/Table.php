@@ -383,9 +383,9 @@ class Table
                 // Else check if we have to draw the row separator
                 if ($this->_autoSeparate & self::AUTO_SEPARATE_ALL) {
                     $drawSeparator = true;
-                } else if ($rowNum === 1 && $this->_autoSeparate & self::AUTO_SEPARATE_HEADER) {
+                } elseif ($rowNum === 1 && $this->_autoSeparate & self::AUTO_SEPARATE_HEADER) {
                     $drawSeparator = true;
-                } else if ($rowNum === ($numRows - 1) && $this->_autoSeparate & self::AUTO_SEPARATE_FOOTER) {
+                } elseif ($rowNum === ($numRows - 1) && $this->_autoSeparate & self::AUTO_SEPARATE_FOOTER) {
                     $drawSeparator = true;
                 } else {
                     $drawSeparator = false;

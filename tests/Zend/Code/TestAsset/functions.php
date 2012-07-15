@@ -2,10 +2,10 @@
 
 namespace ZendTest\Code\TestAsset;
 
-function foo_bar() {
-    
+function foo_bar()
+{
 }
 
-function bar_foo() {
-    
+function bar_foo()
+{
 }

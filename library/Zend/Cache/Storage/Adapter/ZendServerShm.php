@@ -21,7 +21,7 @@ use Zend\Cache\Storage\TotalSpaceCapableInterface;
  * @package    Zend_Cache
  * @subpackage Storage
  */
-class ZendServerShm extends AbstractZendServer implements 
+class ZendServerShm extends AbstractZendServer implements
     ClearByNamespaceInterface,
     FlushableInterface,
     TotalSpaceCapableInterface

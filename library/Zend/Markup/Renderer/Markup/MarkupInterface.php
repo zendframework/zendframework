@@ -17,7 +17,6 @@ use Zend\Markup\Token;
 /**
  * Interface for a markup
  *
- * @uses       \Zend\Markup\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup

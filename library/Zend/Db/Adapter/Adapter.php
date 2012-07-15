@@ -93,7 +93,7 @@ class Adapter
 
     /**
      * getDriver()
-     * 
+     *
      * @throws Exception
      * @return Driver\DriverInterface
      */
@@ -184,10 +184,10 @@ class Adapter
 
     /**
      * Create statement
-     * 
+     *
      * @param  string $initialSql
      * @param  ParameterContainer $initialParameters
-     * @return Driver\StatementInterface 
+     * @return Driver\StatementInterface
      */
     public function createStatement($initialSql = null, $initialParameters = null)
     {

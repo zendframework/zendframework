@@ -12,6 +12,7 @@ namespace Zend\Mail\Storage\Folder;
 
 use Zend\Mail\Storage;
 use Zend\Mail\Storage\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -90,7 +91,9 @@ class Mbox extends Storage\Mbox implements FolderInterface
             $parentFolder = $this->_rootFolder;
         }
 
-        $dh = @opendir($currentDir);
+        ErrorHandler::start(E_WARNING);
+        $dh = opendir($currentDir);
+        ErrorHandler::stop();
         if (!$dh) {
             throw new Exception\InvalidArgumentException("can't read dir $currentDir");
         }
@@ -132,7 +135,9 @@ class Mbox extends Storage\Mbox implements FolderInterface
         $currentFolder = $this->_rootFolder;
         $subname = trim($rootFolder, DIRECTORY_SEPARATOR);
         while ($currentFolder) {
-            @list($entry, $subname) = @explode(DIRECTORY_SEPARATOR, $subname, 2);
+            ErrorHandler::start(E_NOTICE);
+            list($entry, $subname) = explode(DIRECTORY_SEPARATOR, $subname, 2);
+            ErrorHandler::stop();
             $currentFolder = $currentFolder->$entry;
             if (!$subname) {
                 break;

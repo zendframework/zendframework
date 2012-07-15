@@ -21,9 +21,9 @@ class PhpCode extends AbstractAdapter
 {
     /**
      * Serialize PHP using var_export
-     * 
-     * @param  mixed $value 
-     * @param  array $opts 
+     *
+     * @param  mixed $value
+     * @param  array $opts
      * @return string
      */
     public function serialize($value, array $opts = array())
@@ -35,9 +35,9 @@ class PhpCode extends AbstractAdapter
      * Deserialize PHP string
      *
      * Warning: this uses eval(), and should likely be avoided.
-     * 
-     * @param  string $code 
-     * @param  array $opts 
+     *
+     * @param  string $code
+     * @param  array $opts
      * @return mixed
      * @throws RuntimeException on eval error
      */

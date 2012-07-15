@@ -21,13 +21,13 @@ class Rsa extends AbstractSignature
 {
     /**
      * Sign a request
-     * 
-     * @param  array $params 
-     * @param  null|string $method 
-     * @param  null|string $url 
+     *
+     * @param  array $params
+     * @param  null|string $method
+     * @param  null|string $url
      * @return string
      */
-    public function sign(array $params, $method = null, $url = null) 
+    public function sign(array $params, $method = null, $url = null)
     {
         $rsa = new RsaEnc(new RsaEncOptions(array(
             'hash_algorithm' => $this->_hashAlgorithm,
@@ -39,7 +39,7 @@ class Rsa extends AbstractSignature
 
     /**
      * Assemble encryption key
-     * 
+     *
      * @return string
      */
     protected function _assembleKey()

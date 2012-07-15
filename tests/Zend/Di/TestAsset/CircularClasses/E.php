@@ -14,6 +14,6 @@ class E
 {
     public function __construct(C $c)
     {
-        
+
     }
 }

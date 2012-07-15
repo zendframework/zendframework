@@ -38,8 +38,7 @@ class DocumentListFeedTest extends \PHPUnit_Framework_TestCase
         // There should be 2 entries in the feed.
         $this->assertEquals(2, count($this->docFeed->entries));
         $this->assertEquals(2, $this->docFeed->entries->count());
-        foreach($this->docFeed->entries as $entry)
-        {
+        foreach($this->docFeed->entries as $entry) {
             $this->assertInstanceOf('Zend\GData\Docs\DocumentListEntry', $entry);
         }
 
@@ -49,8 +48,7 @@ class DocumentListFeedTest extends \PHPUnit_Framework_TestCase
         $newDocFeed->transferFromDom($doc->documentElement);
 
         $this->assertEquals(count($newDocFeed->entries), count($this->docFeed->entries));
-        foreach($newDocFeed->entries as $entry)
-        {
+        foreach($newDocFeed->entries as $entry) {
             $this->assertInstanceOf('Zend\GData\Docs\DocumentListEntry', $entry);
         }
     }

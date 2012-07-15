@@ -25,7 +25,7 @@ class RowGateway extends AbstractRowGateway
 
     /**
      * Constructor
-     * 
+     *
      * @param string $tableGateway
      * @param string|\Zend\Db\Sql\TableIdentifier $table
      * @param Adapter $adapter

@@ -292,7 +292,7 @@ class S3 implements AdapterInterface
     {
         if (isset($options[self::BUCKET_NAME])) {
             $bucket = $options[self::BUCKET_NAME];
-        } else if (isset($this->_defaultBucketName)) {
+        } elseif (isset($this->_defaultBucketName)) {
             $bucket = $this->_defaultBucketName;
         } else {
             throw new Exception\InvalidArgumentException('Bucket name must be specified for S3 adapter.');

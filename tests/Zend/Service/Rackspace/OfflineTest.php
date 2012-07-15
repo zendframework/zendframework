@@ -15,10 +15,6 @@ use Zend\Service\Rackspace\Files\ContainerList;
 use Zend\Http\Client\Adapter\Test as HttpTest;
 
 /**
- * Test helper
- */
-
-/**
  * @category   Zend
  * @package    Zend\Service\Rackspace\Files
  * @subpackage UnitTests
@@ -112,7 +108,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test the set of the key
-     * 
+     *
      * @return void
      */
     public function testSetKey()

@@ -36,7 +36,7 @@ class Received implements HeaderInterface, MultipleHeadersInterface
 
         $header = new static();
         $header->value= $value;
-        
+
         return $header;
     }
 
@@ -50,7 +50,7 @@ class Received implements HeaderInterface, MultipleHeadersInterface
         return $this->value;
     }
 
-    public function setEncoding($encoding) 
+    public function setEncoding($encoding)
     {
         // This header must be always in US-ASCII
         return $this;

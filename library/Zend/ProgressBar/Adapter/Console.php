@@ -222,7 +222,7 @@ class Console extends AbstractAdapter
                 // Try to determine the width through stty
                 if (preg_match('#\d+ (\d+)#', @shell_exec('stty size'), $match) === 1) {
                     $this->_width = (int) $match[1];
-                } else if (preg_match('#columns = (\d+);#', @shell_exec('stty'), $match) === 1) {
+                } elseif (preg_match('#columns = (\d+);#', @shell_exec('stty'), $match) === 1) {
                     $this->_width = (int) $match[1];
                 }
             }

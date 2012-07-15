@@ -39,58 +39,58 @@ class Ec2 extends AbstractAdapter
     const AWS_SECURITY_GROUP = 'securityGroup';
 
     /**
-     * Ec2 Instance 
-     * 
+     * Ec2 Instance
+     *
      * @var Ec2Instance
      */
     protected $ec2;
 
     /**
      * Ec2 Image
-     * 
+     *
      * @var Ec2Image
      */
     protected $ec2Image;
 
     /**
      * Ec2 Zone
-     * 
+     *
      * @var Ec2Zone
      */
     protected $ec2Zone;
 
     /**
-     * Ec2 Monitor 
-     * 
+     * Ec2 Monitor
+     *
      * @var Ec2Monitor
      */
     protected $ec2Monitor;
 
     /**
      * AWS Access Key
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $accessKey;
 
     /**
      * AWS Access Secret
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $accessSecret;
 
     /**
-     * Region zone 
-     * 
-     * @var string 
+     * Region zone
+     *
+     * @var string
      */
     protected $region;
 
     /**
      * Map array between EC2 and Infrastructure status
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $mapStatus = array (
         'running'       => Instance::STATUS_RUNNING,
@@ -104,8 +104,8 @@ class Ec2 extends AbstractAdapter
 
     /**
      * Map monitor metrics between Infrastructure and EC2
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $mapMetrics= array (
         Instance::MONITOR_CPU         => 'CPUUtilization',
@@ -114,7 +114,7 @@ class Ec2 extends AbstractAdapter
         Instance::MONITOR_NETWORK_IN  => 'NetworkIn',
         Instance::MONITOR_NETWORK_OUT => 'NetworkOut',
     );
-    
+
     /**
      * Constructor
      *
@@ -125,12 +125,12 @@ class Ec2 extends AbstractAdapter
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         }
-        
+
         if (empty($options) || !is_array($options)) {
             throw new Exception\InvalidArgumentException('Invalid options provided');
         }
-        
-        if (!isset($options[self::AWS_ACCESS_KEY]) 
+
+        if (!isset($options[self::AWS_ACCESS_KEY])
             || !isset($options[self::AWS_SECRET_KEY])
         ) {
             throw new Exception\InvalidArgumentException('AWS keys not specified!');
@@ -157,13 +157,13 @@ class Ec2 extends AbstractAdapter
 
     /**
      * Convert the attributes of EC2 into attributes of Infrastructure
-     * 
+     *
      * @param  array $attr
-     * @return array|boolean 
+     * @return array|boolean
      */
     private function convertAttributes($attr)
     {
-        $result = array();       
+        $result = array();
         if (!empty($attr) && is_array($attr)) {
             $result[Instance::INSTANCE_ID]         = $attr['instanceId'];
             unset ($attr['instanceId']);
@@ -175,7 +175,7 @@ class Ec2 extends AbstractAdapter
             unset ($attr['availabilityZone']);
             $result[Instance::INSTANCE_LAUNCHTIME] = $attr['launchTime'];
             unset ($attr['launchTime']);
-            
+
             switch ($attr['instanceType']) {
                 case Ec2Instance::MICRO:
                     $result[Instance::INSTANCE_CPU]     = '1 virtual core';
@@ -218,8 +218,8 @@ class Ec2 extends AbstractAdapter
      * Return the list of available instances
      *
      * @return boolean|InstanceList
-     */ 
-    public function listInstances() 
+     */
+    public function listInstances()
     {
         $this->resetError();
         try {
@@ -227,7 +227,7 @@ class Ec2 extends AbstractAdapter
         } catch (Ec2Exception\RunTimeException $e) {
             $this->setError($e);
             return false;
-        }    
+        }
         $result = array();
         foreach ($this->adapterResult['instances'] as $instance) {
             $result[]= $this->convertAttributes($instance);
@@ -243,7 +243,7 @@ class Ec2 extends AbstractAdapter
      *
      * @param  string
      * @return string|boolean
-     */ 
+     */
     public function statusInstance($id)
     {
         $this->resetError();
@@ -252,18 +252,18 @@ class Ec2 extends AbstractAdapter
         } catch (Ec2Exception\RunTimeException $e) {
             $this->setError($e);
             return false;
-        }       
+        }
         $result = $this->adapterResult['instances'][0];
         return $this->mapStatus[$result['instanceState']['name']];
     }
 
     /**
      * Return the public DNS name of the instance
-     * 
+     *
      * @param  string $id
-     * @return string|boolean 
+     * @return string|boolean
      */
-    public function publicDnsInstance($id) 
+    public function publicDnsInstance($id)
     {
         $this->resetError();
         try {
@@ -281,7 +281,7 @@ class Ec2 extends AbstractAdapter
      *
      * @param string $id
      * @return boolean
-     */ 
+     */
     public function rebootInstance($id)
     {
         $this->resetError();
@@ -300,7 +300,7 @@ class Ec2 extends AbstractAdapter
      * @param string $name
      * @param array $options
      * @return Instance|boolean
-     */ 
+     */
     public function createInstance($name, $options)
     {
         $this->resetError();
@@ -318,29 +318,29 @@ class Ec2 extends AbstractAdapter
      *
      * @param  string $id
      * @return boolean
-     */ 
+     */
     public function stopInstance($id)
     {
        throw new Exception\RuntimeException('The stopInstance method is not implemented in the adapter');
     }
- 
+
     /**
      * Start an instance
      *
      * @param  string $id
      * @return boolean
-     */ 
+     */
     public function startInstance($id)
     {
         throw new Exception\RuntimeException('The startInstance method is not implemented in the adapter');
     }
- 
+
     /**
      * Destroy an instance
      *
      * @param  string $id
      * @return boolean
-     */ 
+     */
     public function destroyInstance($id)
     {
         $this->resetError();
@@ -352,19 +352,19 @@ class Ec2 extends AbstractAdapter
         }
         return true;
     }
- 
+
     /**
      * Return a list of all the available instance images
      *
      * @return boolean|ImageList
-     */ 
+     */
     public function imagesInstance()
     {
         if (!isset($this->ec2Image)) {
             $this->ec2Image = new Ec2Image($this->accessKey, $this->accessSecret, $this->region);
             $this->ec2Image->setHttpClient($this->ec2->getHttpClient());
         }
-        
+
         $this->resetError();
         try {
             $this->adapterResult = $this->ec2Image->describe();
@@ -372,7 +372,7 @@ class Ec2 extends AbstractAdapter
             $this->setError($e);
             return false;
         }
-        
+
         $images = array();
         $i = 0;
         foreach ($this->adapterResult as $result) {
@@ -409,7 +409,7 @@ class Ec2 extends AbstractAdapter
 
     /**
      * Return all the available zones
-     * 
+     *
      * @return boolean|array
      */
     public function zonesInstance()
@@ -418,7 +418,7 @@ class Ec2 extends AbstractAdapter
             $this->ec2Zone = new Ec2Zone($this->accessKey,$this->accessSecret,$this->region);
             $this->ec2Zone->setHttpClient($this->ec2->getHttpClient());
         }
-        
+
         $this->resetError();
         try {
             $this->adapterResult = $this->ec2Zone->describe();
@@ -440,12 +440,12 @@ class Ec2 extends AbstractAdapter
 
     /**
      * Return the system information about the $metric of an instance
-     * 
+     *
      * @param  string $id
      * @param  string $metric
      * @param  null|array $options
      * @return boolean|array
-     */ 
+     */
     public function monitorInstance($id, $metric, $options = null)
     {
         if (empty($id) || empty($metric)) {
@@ -454,7 +454,7 @@ class Ec2 extends AbstractAdapter
 
         if (!in_array($metric,$this->validMetrics)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'The metric "%s" is not valid', 
+                'The metric "%s" is not valid',
                 $metric
             ));
         }
@@ -463,8 +463,8 @@ class Ec2 extends AbstractAdapter
             throw new Exception\InvalidArgumentException('The options must be an array');
         }
 
-        if (!empty($options) 
-            && (empty($options[Instance::MONITOR_START_TIME]) 
+        if (!empty($options)
+            && (empty($options[Instance::MONITOR_START_TIME])
                 || empty($options[Instance::MONITOR_END_TIME]))
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -472,7 +472,7 @@ class Ec2 extends AbstractAdapter
                 $options[Instance::MONITOR_START_TIME],
                 $options[Instance::MONITOR_END_TIME]
             ));
-        }      
+        }
 
         if (!isset($this->ec2Monitor)) {
             $this->ec2Monitor = new Ec2Monitor($this->accessKey, $this->accessSecret, $this->region);
@@ -521,9 +521,9 @@ class Ec2 extends AbstractAdapter
     }
 
     /**
-     * Get the adapter 
-     * 
-     * @return Ec2Instance 
+     * Get the adapter
+     *
+     * @return Ec2Instance
      */
     public function getAdapter()
     {
@@ -532,8 +532,8 @@ class Ec2 extends AbstractAdapter
 
     /**
      * Get last HTTP request
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getLastHttpRequest()
     {
@@ -542,17 +542,17 @@ class Ec2 extends AbstractAdapter
 
     /**
      * Get the last HTTP response
-     * 
+     *
      * @return \Zend\Http\Response
      */
     public function getLastHttpResponse()
     {
         return $this->ec2->getHttpClient()->getResponse()->toString();
     }
-    
+
     /**
      * Set the error message and error code from Ec2Exception\RunTimeException
-     * 
+     *
      * @return void
      */
     protected function setError(Ec2Exception\RunTimeException $e)

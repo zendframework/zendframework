@@ -34,18 +34,18 @@ class SetCookie implements MultipleHeaderInterface
 
     /**
      * Version
-     * 
+     *
      * @var integer
      */
     protected $version = null;
-    
+
     /**
      * Max Age
-     * 
+     *
      * @var integer
      */
     protected $maxAge = null;
-    
+
     /**
      * Cookie expiry date
      *
@@ -121,7 +121,7 @@ class SetCookie implements MultipleHeaderInterface
                         case 'version' : $header->setVersion((int) $headerValue); break;
                         case 'maxage'  : $header->setMaxAge((int) $headerValue); break;
                         default:
-                            // Intentionally omitted 
+                            // Intentionally omitted
                     }
                 }
 
@@ -180,11 +180,11 @@ class SetCookie implements MultipleHeaderInterface
         if ($version!==null) {
             $this->setVersion($version);
         }
-        
+
         if ($maxAge!==null) {
             $this->setMaxAge($maxAge);
         }
-        
+
         if ($domain) {
             $this->setDomain($domain);
         }
@@ -223,7 +223,7 @@ class SetCookie implements MultipleHeaderInterface
         if ($this->getName() == '') {
             throw new Exception\RuntimeException('A cookie name is required to generate a field value for this cookie');
         }
-        
+
         $value = $this->getValue();
         if (strpos($value, '"')!==false) {
             $value = '"'.urlencode(str_replace('"', '', $value)).'"';
@@ -236,12 +236,12 @@ class SetCookie implements MultipleHeaderInterface
         if ($version!==null) {
             $fieldValue .= '; Version=' . $version;
         }
-        
+
         $maxAge = $this->getMaxAge();
         if ($maxAge!==null) {
             $fieldValue .= '; Max-Age=' . $maxAge;
         }
-        
+
         $expires = $this->getExpires();
         if ($expires) {
             $fieldValue .= '; Expires=' . $expires;
@@ -308,7 +308,7 @@ class SetCookie implements MultipleHeaderInterface
 
     /**
      * Set version
-     * 
+     *
      * @param integer $version
      */
     public function setVersion($version)
@@ -318,20 +318,20 @@ class SetCookie implements MultipleHeaderInterface
         }
         $this->version = $version;
     }
-    
+
     /**
      * Get version
-     * 
+     *
      * @return integer
      */
     public function getVersion()
     {
         return $this->version;
     }
-    
+
     /**
      * Set Max-Age
-     * 
+     *
      * @param integer $maxAge
      */
     public function setMaxAge($maxAge)
@@ -341,17 +341,17 @@ class SetCookie implements MultipleHeaderInterface
         }
         $this->maxAge = $maxAge;
     }
-    
+
     /**
      * Get Max-Age
-     * 
+     *
      * @return integer
      */
     public function getMaxAge()
     {
         return $this->maxAge;
     }
-    
+
     /**
      * @param int $expires
      * @return SetCookie

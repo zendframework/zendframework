@@ -57,7 +57,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testWriteWithDefaultsUsingArray()
-    {      
+    {
         // log to the mock db adapter
         $message  = 'message-to-log';
         $priority = 2;
@@ -81,11 +81,11 @@ class DbTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
     }
-    
+
     public function testWriteWithDefaultsUsingArrayAndSeparator()
-    {      
+    {
         $this->writer = new DbWriter($this->db, $this->tableName, null, '-');
-        
+
         // log to the mock db adapter
         $message  = 'message-to-log';
         $priority = 2;
@@ -109,12 +109,12 @@ class DbTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
     }
-    
+
     public function testWriteUsesOptionalCustomColumnNames()
     {
         $this->writer = new DbWriter($this->db, $this->tableName, array(
             'message' => 'new-message-field' ,
-            'priority' => 'new-priority-field' 
+            'priority' => 'new-priority-field'
         ));
 
         // log to the mock db adapter
@@ -136,7 +136,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
     }
-    
+
     public function testWriteUsesParamsWithArray()
     {
         $this->writer = new DbWriter($this->db, $this->tableName, array(
@@ -147,7 +147,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
                 'file' => 'new-file'
             )
         ));
-        
+
         // log to the mock db adapter
         $message  = 'message-to-log';
         $priority = 2;
@@ -186,7 +186,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
      */
     public function testThrowStrictSetFormatter()
     {
-    	$this->setExpectedException('PHPUnit_Framework_Error');
+        $this->setExpectedException('PHPUnit_Framework_Error');
         $this->writer->setFormatter(new \StdClass());
     }
 }

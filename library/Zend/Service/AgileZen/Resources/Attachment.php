@@ -22,72 +22,72 @@ class Attachment extends AbstractEntity
 {
     /**
      * File name
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $fileName;
 
     /**
      * Size
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $size;
 
     /**
      * Content type
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $contentType;
 
     /**
      * Token
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $token;
 
     /**
      * Service
-     * 
-     * @var AgileZen 
+     *
+     * @var AgileZen
      */
     protected $service;
 
     /**
      * Project Id
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $projectId;
 
     /**
      * Constructor
-     * 
+     *
      * @param AgileZen $service
-     * @param array $data 
+     * @param array $data
      */
     public function __construct(AgileZen $service, array $data)
     {
         if (!array_key_exists('id', $data)) {
              throw new Exception\InvalidArgumentException("You must pass the id of the attachment");
         }
-        
+
         $this->fileName    = $data['fileName'];
         $this->size        = $data['sizeInBytes'];
         $this->contentType = $data['contentType'];
         $this->token       = $data['token'];
         $this->projectId   = $data['projectId'];
         $this->service     = $service;
-        
+
         parent::__construct($data['id']);
     }
 
     /**
      * Get file name
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getFileName()
     {
@@ -96,8 +96,8 @@ class Attachment extends AbstractEntity
 
     /**
      * Get size
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getSize()
     {
@@ -106,8 +106,8 @@ class Attachment extends AbstractEntity
 
     /**
      * Get content type
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getContentType()
     {
@@ -116,8 +116,8 @@ class Attachment extends AbstractEntity
 
     /**
      * Get token
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getToken()
     {
@@ -126,8 +126,8 @@ class Attachment extends AbstractEntity
 
     /**
      * Get the project's Id
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getProjectId()
     {

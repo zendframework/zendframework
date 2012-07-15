@@ -27,8 +27,8 @@ class RouterFactory implements FactoryInterface
      * Retrieves the "router" key of the Configuration service, and uses it
      * to instantiate the router. Uses the TreeRouteStack implementation by
      * default.
-     * 
-     * @param  ServiceLocatorInterface $serviceLocator 
+     *
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return TreeRouteStack
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

@@ -38,9 +38,9 @@ class RootDse extends AbstractNode
         $data = $ldap->getEntry($dn, array('*', '+'), true);
         if (isset($data['domainfunctionality'])) {
             return new RootDse\ActiveDirectory($dn, $data);
-        } else if (isset($data['dsaname'])) {
+        } elseif (isset($data['dsaname'])) {
             return new RootDse\eDirectory($dn, $data);
-        } else if (isset($data['structuralobjectclass'])
+        } elseif (isset($data['structuralobjectclass'])
             && $data['structuralobjectclass'][0] === 'OpenLDAProotDSE'
         ) {
             return new RootDse\OpenLdap($dn, $data);

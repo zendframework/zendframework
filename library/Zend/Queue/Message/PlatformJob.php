@@ -133,8 +133,8 @@ class PlatformJob extends Message
      *
      * @return void
      */
-    protected function _setJobProperties() {
-
+    protected function _setJobProperties()
+    {
         if (isset($this->_data['script'])) {
             $this->_job->setScript($this->_data['script']);
         }

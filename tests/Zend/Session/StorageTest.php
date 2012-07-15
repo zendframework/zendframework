@@ -87,7 +87,7 @@ class StorageTest extends \PHPUnit_Framework_TestCase
     {
         $this->storage->foo = 'bar';
         $this->storage->lock('foo');
-        
+
         $this->storage->bar = 'baz';
         $this->assertEquals('baz', $this->storage->bar);
 

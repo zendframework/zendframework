@@ -15,6 +15,6 @@ namespace Zend\Code\Exception;
  * @package    Zend_Code
  * @subpackage Exception
  */
-class BadMethodCallException extends \BadMethodCallException implements 
+class BadMethodCallException extends \BadMethodCallException implements
     ExceptionInterface
 {}

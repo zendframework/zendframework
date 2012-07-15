@@ -44,7 +44,7 @@ class ConnectionSocketOverload extends Connection
 
 class ConnectionTest extends TestCase
 {
-    var $_socket = null;
+    public $_socket = null;
 
     public function setUp()
     {

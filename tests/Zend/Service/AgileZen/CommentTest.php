@@ -16,9 +16,9 @@ class CommentTest extends \PHPUnit_Framework_TestCase
 {
     const TEXT        = 'This is the test comment';
     const TEXT_UPDATE = 'This is the updated comment';
-    
+
     protected static $commentId;
-   
+
     public function setUp()
     {
         if (!constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_ENABLED')) {
@@ -33,7 +33,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
         if(!defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_STORY_ID')) {
             self::markTestSkipped('The story ID costant has to be set.');
         }
-        $this->agileZen = new AgileZenService(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY'));                                               
+        $this->agileZen = new AgileZenService(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY'));
     }
     public function testAddComment()
     {
@@ -49,7 +49,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($comment instanceof \Zend\Service\AgileZen\Resources\Comment);
         self::$commentId = $comment->getId();
     }
-    
+
     public function testGetComments()
     {
         $comments = $this->agileZen->getComments(
@@ -84,7 +84,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$commentId, $comment->getId());
         $this->assertEquals(self::TEXT, $comment->getText());
     }
-    
+
     public function testUpdateAttachment()
     {
         if (empty(self::$commentId)) {

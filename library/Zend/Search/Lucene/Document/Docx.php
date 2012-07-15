@@ -22,7 +22,8 @@ use Zend\Search\Lucene\Exception\RuntimeException;
  * @package    Zend_Search_Lucene
  * @subpackage Document
  */
-class Docx extends AbstractOpenXML {
+class Docx extends AbstractOpenXML
+{
     /**
      * Xml Schema - WordprocessingML
      *
@@ -42,7 +43,7 @@ class Docx extends AbstractOpenXML {
     {
         if (!class_exists('ZipArchive', false)) {
             throw new ExtensionNotLoadedException(
-            	'MS Office documents processing functionality requires Zip extension to be loaded'
+                'MS Office documents processing functionality requires Zip extension to be loaded'
             );
         }
 

@@ -20,8 +20,8 @@ use IteratorAggregate;
  * @package    Zend_Cloud
  * @subpackage QueueService
  */
-class MessageSet implements 
-    Countable, 
+class MessageSet implements
+    Countable,
     IteratorAggregate
 {
     /** @var int */

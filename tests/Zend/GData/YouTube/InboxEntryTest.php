@@ -13,11 +13,6 @@ namespace ZendTest\GData\YouTube;
 use Zend\GData\YouTube;
 
 /**
- * Test helper
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_GData_YouTube
  * @subpackage UnitTests
@@ -29,7 +24,8 @@ class InboxEntryTest extends \PHPUnit_Framework_TestCase
     /** @var YouTube\InboxEntry */
     public $entry;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->v2entryText = file_get_contents(
                 'Zend/GData/YouTube/_files/' .
                 'InboxEntryDataSampleV2.xml',
@@ -100,31 +96,36 @@ class InboxEntryTest extends \PHPUnit_Framework_TestCase
             $InboxEntry->getStatistics()->getViewCount());
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertEquals(0, count($this->entry->extensionElements));
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertEquals(0, count($this->entry->extensionAttributes));
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElementsV2() {
+    public function testSampleEntryShouldHaveNoExtensionElementsV2()
+    {
         $this->entry->setMajorProtocolVersion(2);
         $this->entry->transferFromXML($this->v2entryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertEquals(0, count($this->entry->extensionElements));
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributesV2() {
+    public function testSampleEntryShouldHaveNoExtensionAttributesV2()
+    {
         $this->entry->setMajorProtocolVersion(2);
         $this->entry->transferFromXML($this->v2entryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertEquals(0, count($this->entry->extensionAttributes));
     }
 
-    public function testEmptyInboxEntryToAndFromStringShouldMatchV2() {
+    public function testEmptyInboxEntryToAndFromStringShouldMatchV2()
+    {
         $this->entry->transferFromXML($this->v2entryText);
         $entryXml = $this->entry->saveXML();
         $newInboxEntry = new YouTube\InboxEntry();
@@ -134,7 +135,8 @@ class InboxEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newInboxEntryXml);
     }
 
-    public function testSamplePropertiesAreCorrectV2 () {
+    public function testSamplePropertiesAreCorrectV2 ()
+    {
         $this->entry->setMajorProtocolVersion(2);
         $this->entry->transferFromXML($this->v2entryText);
         $this->verifyAllSamplePropertiesAreCorrectV2($this->entry);

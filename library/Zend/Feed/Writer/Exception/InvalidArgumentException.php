@@ -21,7 +21,7 @@ use Zend\Feed\Exception;
  * @package    Zend_Feed
  * @subpackage Writer
  */
-class InvalidArgumentException 
+class InvalidArgumentException
     extends Exception\InvalidArgumentException
     implements ExceptionInterface
 {}

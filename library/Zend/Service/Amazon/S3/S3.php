@@ -159,8 +159,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
 
         if($location) {
             $data = '<CreateBucketConfiguration><LocationConstraint>'.$location.'</LocationConstraint></CreateBucketConfiguration>';
-        }
-        else {
+        } else {
             $data = null;
         }
         $response = $this->_makeRequest('PUT', $bucket, null, array(), $data);
@@ -224,25 +223,24 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
 
         if ($response->getStatusCode() == 200) {
             $headers = $response->getHeaders();
-            
+
             //False if header not found
             $info['type']  = $headers->get('Content-type');
             $info['size']  = $headers->get('Content-length');
             $info['mtime'] = $headers->get('Last-modified');
             $info['etag']  = $headers->get('Content-type');
-            
+
             //Prevents from the fatal error method call on a non-object
             foreach ($info as $key => $value)
                 if ($value instanceof Header\HeaderInterface) {
                     $info[$key] = $value->getFieldValue();
                 }
-                
+
             if ($info['mtime']) {
                 $info['mtime'] = strtotime($headers->get('Last-modified')->getFieldValue());
             }
-                     
-        }
-        else {
+
+        } else {
             return false;
         }
 
@@ -407,8 +405,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         $object = $this->_fixupObjectName($object);
         if ($paidobject) {
             $response = $this->_makeRequest('GET', $object, null, array(self::S3_REQUESTPAY_HEADER => 'requester'));
-        }
-        else {
+        } else {
             $response = $this->_makeRequest('GET', $object);
         }
 
@@ -478,10 +475,10 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             if ($etagHeader instanceof Header\Etag) {
                 $etag = $etagHeader->getFieldValue();
             }
-            
+
             // It is escaped by double quotes for some reason
             $etag = str_replace('"', '', $etag);
-             
+
             if (is_resource($data) || $etag == md5($data)) {
                 return true;
             }
@@ -646,8 +643,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         }
         if (!empty($parts[1])) {
             $endpoint->setPath('/'.$parts[1]);
-        }
-        else {
+        } else {
             $endpoint->setPath('/');
             if ($parts[0]) {
                 $path = $parts[0].'/';
@@ -728,11 +724,9 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         foreach ($headers as $key=>$val) {
             if (strcasecmp($key, 'content-type') == 0) {
                 $type = $val;
-            }
-            else if (strcasecmp($key, 'content-md5') == 0) {
+            } elseif (strcasecmp($key, 'content-md5') == 0) {
                 $md5 = $val;
-            }
-            else if (strcasecmp($key, 'date') == 0) {
+            } elseif (strcasecmp($key, 'date') == 0) {
                 $date = $val;
             }
         }
@@ -751,8 +745,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             if (substr($key, 0, 6) == 'x-amz-') {
                 if (is_array($val)) {
                     $amz_headers[$key] = $val;
-                }
-                else {
+                } else {
                     $amz_headers[$key][] = preg_replace('/\s+/', ' ', $val);
                 }
             }
@@ -769,21 +762,19 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         $urlPathParts = explode('/', $urlPath);
         if (!empty($urlPathParts[0]))
             $urlPathParts[0] = strtolower($urlPathParts[0]);
-        
+
         $sig_str .= '/'.implode('/', $urlPathParts);
         if (strpos($path, '?location') !== false) {
             $sig_str .= '?location';
-        }
-        else if (strpos($path, '?acl') !== false) {
+        } elseif (strpos($path, '?acl') !== false) {
             $sig_str .= '?acl';
-        }
-        else if (strpos($path, '?torrent') !== false) {
+        } elseif (strpos($path, '?torrent') !== false) {
             $sig_str .= '?torrent';
         }
 
         $signature = base64_encode(Hmac::compute($this->_getSecretKey(), 'sha1', utf8_encode($sig_str), true));
         $headers['Authorization'] = 'AWS ' . $this->_getAccessKey() . ':' . $signature;
-        
+
         return $headers;
     }
 

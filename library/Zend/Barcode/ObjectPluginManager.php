@@ -16,7 +16,7 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Plugin manager implementation for barcode parsers.
  *
  * Enforces that barcode parsers retrieved are instances of
- * Object\AbstractObject. Additionally, it registers a number of default 
+ * Object\AbstractObject. Additionally, it registers a number of default
  * barcode parsers.
  *
  * @category   Zend
@@ -26,7 +26,7 @@ class ObjectPluginManager extends AbstractPluginManager
 {
     /**
      * Default set of barcode parsers
-     * 
+     *
      * @var array
      */
     protected $invokableClasses = array(
@@ -55,8 +55,8 @@ class ObjectPluginManager extends AbstractPluginManager
      *
      * Checks that the barcode parser loaded is an instance
      * of Object\AbstractObject.
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

@@ -13,10 +13,6 @@ namespace ZendTest\Service\StrikeIron\BaseTest;
 use Zend\Service\StrikeIron;
 
 /**
- * Test helper
- */
-
-/**
  * @category   Zend
  * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests
@@ -40,15 +36,15 @@ class MockSoapClient
             // testMethodResultWrappingAnyObject
             return new \stdclass();
 
-        } else if ($method == 'WrapThis') {
+        } elseif ($method == 'WrapThis') {
             // testMethodResultWrappingAnObjectAndSelectingDefaultResultProperty
             return (object)array('WrapThisResult' => 'unwraped');
 
-        } else if ($method == 'ThrowTheException') {
+        } elseif ($method == 'ThrowTheException') {
             // testMethodExceptionsAreWrapped
             throw new \Exception('foo', 43);
 
-        } else if ($method == 'ReturnNoOutputHeaders') {
+        } elseif ($method == 'ReturnNoOutputHeaders') {
             // testGettingSubscriptionInfoThrowsWhenHeaderNotFound
             $outputHeaders = array();
 

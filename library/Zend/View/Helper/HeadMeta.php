@@ -162,14 +162,14 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
         return parent::__call($method, $args);
     }
 
-	/**
-	 * Create an HTML5-style meta charset tag. Something like <meta charset="utf-8">
-	 * 
-	 * Not valid in a non-HTML5 doctype
-	 *
-	 * @param string $charset 
-	 * @return \Zend\View\Helper\HeadMeta Provides a fluent interface
-	 */
+    /**
+     * Create an HTML5-style meta charset tag. Something like <meta charset="utf-8">
+     *
+     * Not valid in a non-HTML5 doctype
+     *
+     * @param string $charset
+     * @return \Zend\View\Helper\HeadMeta Provides a fluent interface
+     */
     public function setCharset($charset)
     {
         $item = new \stdClass;
@@ -344,9 +344,9 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
             if ($this->view->plugin('doctype')->isHtml5()
                 && $type == 'charset'
             ) {
-				$tpl = ($this->view->plugin('doctype')->isXhtml())
-					? '<meta %s="%s"/>'
-					: '<meta %s="%s">';
+                $tpl = ($this->view->plugin('doctype')->isXhtml())
+                    ? '<meta %s="%s"/>'
+                    : '<meta %s="%s">';
             } elseif ($this->view->plugin('doctype')->isXhtml()) {
                 $tpl = '<meta %s="%s" content="%s" %s/>';
             } else {

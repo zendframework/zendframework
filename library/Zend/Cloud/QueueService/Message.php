@@ -26,7 +26,7 @@ class Message
      * @param string $body Message text
      * @param string $message Original message
      */
-    function __construct($body, $message)
+    public function __construct($body, $message)
     {
         $this->_body = $body;
         $this->_clientMessage = $message;

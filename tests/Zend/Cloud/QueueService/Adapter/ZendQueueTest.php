@@ -29,7 +29,7 @@ class ZendQueueTest extends TestCase
      * @var int
      */
     protected $_waitPeriod = 0;
-    
+
     protected $_clientType = 'Zend\Queue\Queue';
 
     public function testPeekMessages()

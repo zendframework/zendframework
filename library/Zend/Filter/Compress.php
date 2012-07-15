@@ -165,8 +165,8 @@ class Compress extends AbstractFilter
 
     /**
      * Get individual or all options from underlying adapter
-     * 
-     * @param  null|string $option 
+     *
+     * @param  null|string $option
      * @return mixed
      */
     public function getOptions($option = null)

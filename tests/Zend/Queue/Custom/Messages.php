@@ -89,7 +89,8 @@ class Messages extends \Zend\Queue\Message\MessageIterator implements \ArrayAcce
     /**
      * @see SPL ArrayIterator::append
      */
-    public function append($value) {
+    public function append($value)
+    {
         $this->_data[] = $value;
     }
 
@@ -100,7 +101,8 @@ class Messages extends \Zend\Queue\Message\MessageIterator implements \ArrayAcce
     /**
      * @see SPL ArrayAccess::offsetSet
      */
-    public function offsetSet($offset, $value) {
+    public function offsetSet($offset, $value)
+    {
         if (! $value instanceof Message) {
             throw new QueueNS\Exception(
                 '$value must be a child or an instance of \ZendTest\Queue\Custom\Messag'
@@ -114,14 +116,16 @@ class Messages extends \Zend\Queue\Message\MessageIterator implements \ArrayAcce
     /**
      * @see SPL ArrayAccess::offsetGet
      */
-    public function offsetGet($offset) {
+    public function offsetGet($offset)
+    {
         return $this->_data[$offset];
     }
 
     /**
      * @see SPL ArrayAccess::offsetUnset
      */
-    public function offsetUnset($offset) {
+    public function offsetUnset($offset)
+    {
         if (! $this->_connected) {
             throw new QueueNS\Exception('Cannot delete message after serialization');
         }
@@ -133,7 +137,8 @@ class Messages extends \Zend\Queue\Message\MessageIterator implements \ArrayAcce
     /**
      * @see SPL ArrayAccess::offsetExists
      */
-    public function offsetExists($offset) {
+    public function offsetExists($offset)
+    {
         return isSet($this->_data[$offset]);
     }
 
@@ -144,7 +149,8 @@ class Messages extends \Zend\Queue\Message\MessageIterator implements \ArrayAcce
     /**
      * @see SPL SeekableIterator::seek
      */
-    public function seek($index) {
+    public function seek($index)
+    {
         $this->_pointer = $index;
     }
 }

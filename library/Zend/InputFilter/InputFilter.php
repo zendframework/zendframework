@@ -25,8 +25,8 @@ class InputFilter extends BaseInputFilter
 
     /**
      * Set factory to use when adding inputs and filters by spec
-     * 
-     * @param  Factory $factory 
+     *
+     * @param  Factory $factory
      * @return InputFilter
      */
     public function setFactory(Factory $factory)
@@ -39,7 +39,7 @@ class InputFilter extends BaseInputFilter
      * Get factory to use when adding inputs and filters by spec
      *
      * Lazy-loads a Factory instance if none attached.
-     * 
+     *
      * @return Factory
      */
     public function getFactory()
@@ -52,9 +52,9 @@ class InputFilter extends BaseInputFilter
 
     /**
      * Add an input to the input filter
-     * 
-     * @param  array|Traversable|InputInterface|InputFilterInterface $input 
-     * @param  null|string $name 
+     *
+     * @param  array|Traversable|InputInterface|InputFilterInterface $input
+     * @param  null|string $name
      * @return InputFilter
      */
     public function add($input, $name = null)

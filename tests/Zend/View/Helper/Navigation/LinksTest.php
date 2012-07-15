@@ -716,7 +716,7 @@ class LinksTest extends AbstractTest
 
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * Returns the contens of the expected $file, normalizes newlines
      * @param  string $file

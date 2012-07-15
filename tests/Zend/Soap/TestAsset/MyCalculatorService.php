@@ -11,7 +11,7 @@
 namespace ZendTest\Soap\TestAsset;
 
 /**
- * MyCalculatorService 
+ * MyCalculatorService
  *
  * Class used in DocumentLiteralWrapperTest
  */

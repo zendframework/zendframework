@@ -13,11 +13,6 @@ namespace ZendTest\GData\YouTube;
 use Zend\GData\YouTube;
 
 /**
- * Test helper
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_GData_YouTube
  * @subpackage UnitTests
@@ -27,7 +22,8 @@ use Zend\GData\YouTube;
 class ActivityEntryTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->entryText = file_get_contents(
                 'Zend/GData/YouTube/_files/ActivityEntryDataSample1.xml',
                 true);
@@ -35,7 +31,8 @@ class ActivityEntryTest extends \PHPUnit_Framework_TestCase
         $this->entry->setMajorProtocolVersion(2);
     }
 
-    private function verifyAllSamplePropertiesAreCorrect ($activityEntry) {
+    private function verifyAllSamplePropertiesAreCorrect ($activityEntry)
+    {
         $this->assertEquals(
             'tag:youtube.com,2008:event:Z2RweXRob24xMTIzNDMwMDAyMzI5NTQ2N' .
             'zg2MA%3D%3D',
@@ -85,29 +82,34 @@ class ActivityEntryTest extends \PHPUnit_Framework_TestCase
             $activityEntry->author[0]->uri->text);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionElements() {
+    public function testEmptyEntryShouldHaveNoExtensionElements()
+    {
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testEmptyEntryShouldHaveNoExtensionAttributes() {
+    public function testEmptyEntryShouldHaveNoExtensionAttributes()
+    {
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionElements() {
+    public function testSampleEntryShouldHaveNoExtensionElements()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionElements));
         $this->assertTrue(count($this->entry->extensionElements) == 0);
     }
 
-    public function testSampleEntryShouldHaveNoExtensionAttributes() {
+    public function testSampleEntryShouldHaveNoExtensionAttributes()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertTrue(is_array($this->entry->extensionAttributes));
         $this->assertTrue(count($this->entry->extensionAttributes) == 0);
     }
 
-    public function testEmptyActivityEntryToAndFromStringShouldMatch() {
+    public function testEmptyActivityEntryToAndFromStringShouldMatch()
+    {
         $entryXml = $this->entry->saveXML();
         $newActivityEntry = new YouTube\ActivityEntry();
         $newActivityEntry->transferFromXML($entryXml);
@@ -115,12 +117,14 @@ class ActivityEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entryXml == $newActivityEntryXml);
     }
 
-    public function testSamplePropertiesAreCorrect () {
+    public function testSamplePropertiesAreCorrect ()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->verifyAllSamplePropertiesAreCorrect($this->entry);
     }
 
-    public function testHelperMethods() {
+    public function testHelperMethods()
+    {
         $this->entry->transferFromXML($this->entryText);
         $this->assertEquals('z3U0kuLH974',
             $this->entry->getVideoId()->getText());
@@ -132,7 +136,8 @@ class ActivityEntryTest extends \PHPUnit_Framework_TestCase
             $this->entry->getActivityType());
     }
 
-    public function testConvertActivityEntryToAndFromString() {
+    public function testConvertActivityEntryToAndFromString()
+    {
         $this->entry->transferFromXML($this->entryText);
         $entryXml = $this->entry->saveXML();
         $newActivityEntry = new YouTube\ActivityEntry();

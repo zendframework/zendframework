@@ -18,7 +18,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @package    Zend_Mvc
  * @subpackage Service
  */
-class ConfigurationFactory implements FactoryInterface
+class ConfigFactory implements FactoryInterface
 {
     /**
      * Create the application configuration service

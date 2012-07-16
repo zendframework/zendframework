@@ -10,7 +10,7 @@
 
 namespace Zend\Navigation\View;
 
-use Zend\ServiceManager\ConfigurationInterface;
+use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\View\HelperPluginManager;
 
@@ -21,7 +21,7 @@ use Zend\View\HelperPluginManager;
  * @package    Zend_Navigation
  * @subpackage View
  */
-class HelperConfiguration implements ConfigurationInterface
+class HelperConfig implements ConfigInterface
 {
     /**
      * Configure the provided service manager instance with the configuration

@@ -118,9 +118,9 @@ class Application implements
      *
      * @return array|object
      */
-    public function getConfiguration()
+    public function getConfig()
     {
-        return $this->serviceManager->get('Configuration');
+        return $this->serviceManager->get('Config');
     }
 
     /**
@@ -227,7 +227,7 @@ class Application implements
      * Static method for quick and easy initialization of the Application.
      *
      * If you use this init() method, you cannot specify a service with the
-     * name of 'ApplicationConfiguration' in your service manager config. That
+     * name of 'ApplicationConfig' in your service manager config. That
      * name is reserved to hold the array from application.config.php
      *
      * The following services can only be overridden from application.config.php:
@@ -245,8 +245,8 @@ class Application implements
     public static function init($configuration = array())
     {
         $smConfig = isset($configuration['service_manager']) ? $configuration['service_manager'] : array();
-        $serviceManager = new ServiceManager(new Service\ServiceManagerConfiguration($smConfig));
-        $serviceManager->setService('ApplicationConfiguration', $configuration);
+        $serviceManager = new ServiceManager(new Service\ServiceManagerConfig($smConfig));
+        $serviceManager->setService('ApplicationConfig', $configuration);
         $serviceManager->get('ModuleManager')->loadModules();
         return $serviceManager->get('Application')->bootstrap();
     }

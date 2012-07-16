@@ -24,7 +24,7 @@ class RouterFactory implements FactoryInterface
     /**
      * Create and return the router
      *
-     * Retrieves the "router" key of the Configuration service, and uses it
+     * Retrieves the "router" key of the Config service, and uses it
      * to instantiate the router. Uses the TreeRouteStack implementation by
      * default.
      *

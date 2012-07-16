@@ -21,7 +21,7 @@ use Zend\Modulemanager\ModuleManager;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router;
-use Zend\Mvc\Service\ServiceManagerConfiguration;
+use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\Mvc\View\ViewManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
@@ -58,7 +58,7 @@ class ApplicationTest extends TestCase
             ));
         };
         $sm = $this->serviceManager = new ServiceManager(
-            new ServiceManagerConfiguration(array(
+            new ServiceManagerConfig(array(
                 'invokables' => array(
                     'DispatchListener' => 'Zend\Mvc\DispatchListener',
                     'Request'          => 'Zend\Http\PhpEnvironment\Request',
@@ -71,14 +71,15 @@ class ApplicationTest extends TestCase
                     'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
                     'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
                     'Router'                  => 'Zend\Mvc\Service\RouterFactory',
-                    'Configuration'           => $config,
+                    'Config'                  => $config,
                 ),
                 'aliases' => array(
+                    'Configuration'          => 'Config',
                     'ControllerPluginBroker' => 'ControllerPluginManager',
                 ),
             ))
         );
-        $sm->setService('ApplicationConfiguration', $appConfig);
+        $sm->setService('ApplicationConfig', $appConfig);
         $sm->setAllowOverride(true);
 
         $this->application = $sm->get('Application');
@@ -143,10 +144,10 @@ class ApplicationTest extends TestCase
         $this->assertSame($this->serviceManager, $this->application->getServiceManager());
     }
 
-    public function testConfigurationIsPopulated()
+    public function testConfigIsPopulated()
     {
-        $smConfig  = $this->serviceManager->get('Configuration');
-        $appConfig = $this->application->getConfiguration();
+        $smConfig  = $this->serviceManager->get('Config');
+        $appConfig = $this->application->getConfig();
         $this->assertEquals($smConfig, $appConfig, sprintf('SM config: %s; App config: %s', var_export($smConfig, 1), var_export($appConfig, 1)));
     }
 

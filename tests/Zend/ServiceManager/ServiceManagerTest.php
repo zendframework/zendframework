@@ -432,7 +432,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     {
         $di = $this->getMock('Zend\Di\Di');
         $factory = new DiAbstractServiceFactory($di);
-        $factory->instanceManager()->setConfiguration('ZendTest\ServiceManager\TestAsset\Bar', array('parameters' => array('foo' => array('a'))));
+        $factory->instanceManager()->setConfig('ZendTest\ServiceManager\TestAsset\Bar', array('parameters' => array('foo' => array('a'))));
         $this->serviceManager->addAbstractFactory($factory);
 
         $this->assertTrue($this->serviceManager->has('ZendTest\ServiceManager\TestAsset\Bar', true));

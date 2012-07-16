@@ -15,7 +15,7 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\ModuleEvent;
-use Zend\ServiceManager\Configuration as ServiceConfiguration;
+use Zend\ServiceManager\Config as ServiceConfig;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
 
@@ -46,7 +46,7 @@ class ServiceListener implements ListenerAggregateInterface
     /**
      * @var array
      */
-    protected $defaultServiceConfiguration;
+    protected $defaultServiceConfig;
 
     /**
      * @var array
@@ -59,7 +59,7 @@ class ServiceListener implements ListenerAggregateInterface
     public function __construct(ServiceManager $serviceManager, $configuration = null)
     {
         $this->defaultServiceManager = $serviceManager;
-        $this->defaultServiceConfiguration = $configuration;
+        $this->defaultServiceConfig = $configuration;
     }
 
     /**
@@ -118,8 +118,8 @@ class ServiceListener implements ListenerAggregateInterface
      * configure the service manager.
      *
      * If the module does not implement ServiceProviderInterface and does not
-     * implement the "getServiceConfiguration()" method, does nothing. Also,
-     * if the return value of that method is not a ServiceConfiguration object,
+     * implement the "getServiceConfig()" method, does nothing. Also,
+     * if the return value of that method is not a ServiceConfig object,
      * or not an array or Traversable that can seed one, does nothing.
      *
      * @param  ModuleEvent $e
@@ -139,8 +139,8 @@ class ServiceListener implements ListenerAggregateInterface
 
             $config = $module->{$sm['module_class_method']}();
 
-            if ($config instanceof ServiceConfiguration) {
-                $config = $this->serviceConfigurationToArray($config);
+            if ($config instanceof ServiceConfig) {
+                $config = $this->serviceConfigToArray($config);
             }
 
             if ($config instanceof Traversable) {
@@ -163,7 +163,7 @@ class ServiceListener implements ListenerAggregateInterface
      * Use merged configuration to configure service manager
      *
      * If the merged configuration has a non-empty, array 'service_manager'
-     * key, it will be passed to a ServiceManager Configuration object, and
+     * key, it will be passed to a ServiceManager Config object, and
      * used to configure the service manager.
      *
      * @param  ModuleEvent $e
@@ -174,8 +174,8 @@ class ServiceListener implements ListenerAggregateInterface
         $configListener = $e->getConfigListener();
         $config         = $configListener->getMergedConfig(false);
 
-        if ($this->defaultServiceConfiguration) {
-            $defaultConfig = array('service_manager' => $this->defaultServiceConfiguration);
+        if ($this->defaultServiceConfig) {
+            $defaultConfig = array('service_manager' => $this->defaultServiceConfig);
         }
 
         foreach ($this->serviceManagers as $key => $sm) {
@@ -199,7 +199,7 @@ class ServiceListener implements ListenerAggregateInterface
             foreach ($this->serviceManagers[$key]['configuration'] as $configs) {
                 if (isset($configs['configuration_classes'])) {
                     foreach ($configs['configuration_classes'] as $class) {
-                        $configs = ArrayUtils::merge($configs, $this->serviceConfigurationToArray($class));
+                        $configs = ArrayUtils::merge($configs, $this->serviceConfigToArray($class));
                     }
                 }
                 $smConfig = ArrayUtils::merge($smConfig, $configs);
@@ -215,7 +215,7 @@ class ServiceListener implements ListenerAggregateInterface
                 }
                 $sm['service_manager'] = $instance;
             }
-            $serviceConfig = new ServiceConfiguration($smConfig);
+            $serviceConfig = new ServiceConfig($smConfig);
             $serviceConfig->configureServiceManager($sm['service_manager']);
         }
 
@@ -228,19 +228,19 @@ class ServiceListener implements ListenerAggregateInterface
      * Extracts the various service configuration arrays, and then merges with
      * the internal service configuration.
      *
-     * @param  ServiceConfiguration|string $config Instance of ServiceConfiguration or class name
+     * @param  ServiceConfig|string $config Instance of ServiceConfig or class name
      * @return array
      */
-    protected function serviceConfigurationToArray($config)
+    protected function serviceConfigToArray($config)
     {
         if (is_string($config) && class_exists($config)) {
             $class  = $config;
             $config = new $class;
         }
 
-        if (!$config instanceof ServiceConfiguration) {
+        if (!$config instanceof ServiceConfig) {
             throw new Exception\RuntimeException(sprintf(
-                'Invalid service manager configuration class provided; received "%s", expected an instance of Zend\ServiceManager\Configuration',
+                'Invalid service manager configuration class provided; received "%s", expected an instance of Zend\ServiceManager\Config',
                 $class
             ));
         }

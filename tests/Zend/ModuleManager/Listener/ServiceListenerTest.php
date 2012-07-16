@@ -16,7 +16,7 @@ use stdClass;
 use Zend\ModuleManager\Listener\ConfigListener;
 use Zend\ModuleManager\Listener\ServiceListener;
 use Zend\ModuleManager\ModuleEvent;
-use Zend\ServiceManager\Configuration as ServiceConfig;
+use Zend\ServiceManager\Config as ServiceConfig;
 use Zend\ServiceManager\ServiceManager;
 
 class ServiceListenerTest extends TestCase

@@ -197,6 +197,23 @@ class ViewModel implements ModelInterface
     }
 
     /**
+     * Get a single view variable
+     *
+     * @param  string       $name
+     * @param  mixed|null   $default (optional) default value if the variable is not present.
+     * @return mixed
+     */
+    public function getVariable($name, $default = null)
+    {
+        $name = (string)$name;
+        if(array_key_exists($name,$this->variables)){
+            return $this->variables[$name];
+        }else{
+            return $default;
+        }
+    }
+
+    /**
      * Set view variable
      *
      * @param  string $name

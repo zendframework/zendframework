@@ -35,7 +35,6 @@ class CreateViewModelListener implements ListenerAggregateInterface
     {
         $this->listeners[] = $events->attach('dispatch', array($this, 'createViewModelFromArray'),  -80);
         $this->listeners[] = $events->attach('dispatch', array($this, 'createViewModelFromNull'),   -80);
-        $this->listeners[] = $events->attach('dispatch', array($this, 'createViewModelFromString'), -80);
     }
 
     /**
@@ -84,24 +83,6 @@ class CreateViewModelListener implements ListenerAggregateInterface
         }
 
         $model = new ViewModel;
-        $e->setResult($model);
-    }
-
-    /**
-     * Inspect the result, and cast it to a ViewModel if a string is detected
-     *
-     * @param MvcEvent $e
-     * @return void
-    */
-    public function createViewModelFromString(MvcEvent $e)
-    {
-        $result = $e->getResult();
-        if (!is_string($result)) {
-            return;
-        }
-
-        $model = new ViewModel;
-        $model->setVariable('result',$result);
         $e->setResult($model);
     }
 }

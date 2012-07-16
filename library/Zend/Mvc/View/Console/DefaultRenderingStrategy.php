@@ -82,18 +82,35 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
             return $result;
         }
 
-        // Martial arguments
+        // martial arguments
         $response  = $e->getResponse();
         $viewModel = $e->getViewModel();
 
-        // Martial Console-specific options
+        // collect results from child models
+        $responseText = '';
+        if($result->hasChildren()){
+            foreach($result->getChildren() as $child){
+                /* @var $child ViewModel */
+                $responseText .= $child->getVariable(ConsoleViewModel::RESULT);
+            }
+        }
+
+        // fetch result from primary model
+        $responseText .= $result->getVariable(ConsoleViewModel::RESULT);
+
+        // append console response to response object
+        $response->setContent(
+            $response->getContent() . $responseText
+        );
+
+        // pass on console-specific options
         if(
-            $response instanceof ConsoleResponse &&
-            $viewModel instanceof ConsoleViewModel
+            $response  instanceof ConsoleResponse &&
+            $result    instanceof ConsoleViewModel
         ){
             /* @var $response ConsoleResponse */
-            /* @var $viewModel ConsoleViewModel */
-            $errorLevel = $viewModel->getErrorLevel();
+            /* @var $result ConsoleViewModel */
+            $errorLevel = $result->getErrorLevel();
             $response->setErrorLevel($errorLevel);
         }
 

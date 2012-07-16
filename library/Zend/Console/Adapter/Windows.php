@@ -74,10 +74,10 @@ class Windows extends Virtual implements Adapter
             $output,
             $return
         );
-        if($return || !$output){
+        if($return || empty($output)){
             $this->probeResult = '';
         }else{
-            $this->probeResult = trim($output);
+            $this->probeResult = trim(join("\n",$output));
         }
     }
 

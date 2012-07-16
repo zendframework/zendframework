@@ -33,6 +33,8 @@ use Traversable,
  */
 class ConsoleModel extends ViewModel
 {
+    const RESULT = 'result';
+
     /**
      * Console output doesn't support containers.
      * 

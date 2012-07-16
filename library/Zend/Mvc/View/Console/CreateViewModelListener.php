@@ -26,7 +26,7 @@ use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\View\Http\CreateViewModelListener as HttpCreateViewModelListener;
 use Zend\Stdlib\ArrayUtils;
-use Zend\View\Model\ViewModel;
+use Zend\View\Model\ConsoleModel;
 
 class CreateViewModelListener extends HttpCreateViewModelListener implements ListenerAggregateInterface
 {
@@ -55,8 +55,11 @@ class CreateViewModelListener extends HttpCreateViewModelListener implements Lis
             return;
         }
 
-        $model = new ViewModel;
-        $model->setVariable('result',$result);
+        // create Console model
+        $model = new ConsoleModel;
+
+        // store the result in a model variable
+        $model->setVariable(ConsoleModel::RESULT, $result);
         $e->setResult($model);
     }
 }

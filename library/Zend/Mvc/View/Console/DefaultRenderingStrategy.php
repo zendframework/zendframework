@@ -33,19 +33,13 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
     protected $listeners = array();
 
     /**
-     * @var View
-     */
-    protected $view;
-
-    /**
      * Set view
      *
      * @param  View $view
      * @return DefaultRenderingStrategy
      */
-    public function __construct(View $view)
+    public function __construct()
     {
-        $this->view = $view;
         return $this;
     }
 

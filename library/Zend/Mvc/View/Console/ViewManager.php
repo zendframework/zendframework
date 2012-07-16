@@ -166,7 +166,7 @@ class ViewManager implements ListenerAggregateInterface
             return $this->mvcRenderingStrategy;
         }
 
-        $this->mvcRenderingStrategy = new DefaultRenderingStrategy($this->getView());
+        $this->mvcRenderingStrategy = new DefaultRenderingStrategy();
 
         $this->services->setService('DefaultRenderingStrategy', $this->mvcRenderingStrategy);
         $this->services->setAlias('Zend\Mvc\View\DefaultRenderingStrategy', 'DefaultRenderingStrategy');

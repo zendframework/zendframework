@@ -99,7 +99,7 @@ class ElementTest extends TestCase
     
     public function testCanSetCustomOptionFromConstructor()
     {
-        $element = new Element($foo, array(
+        $element = new Element('foo', array(
             'custom' => 'option'
         ));
         $options = $element->getOptions();
@@ -109,7 +109,7 @@ class ElementTest extends TestCase
     
     public function testCanSetCustomOptionFromMethod()
     {
-        $element = new Element($foo);
+        $element = new Element('foo');
         $element->setOptions(array(
             'custom' => 'option'
         ));

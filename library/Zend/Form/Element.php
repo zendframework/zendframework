@@ -104,12 +104,10 @@ class Element implements ElementInterface
 
         if (isset($options['label'])) {
             $this->setLabel($options['label']);
-            unset($options['label']);
         }
 
         if (isset($options['label_attributes'])) {
             $this->setLabelAttributes($options['label_attributes']);
-            unset($options['label_attributes']);
         }
 
         $this->options = $options;

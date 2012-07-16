@@ -61,7 +61,7 @@ class CallbackHandler
      * instance, this method will pass the object to a WeakRef instance prior
      * to registering the callback.
      *
-     * @param  callback $callback
+     * @param  callable $callback
      * @return void
      */
     protected function registerCallback($callback)
@@ -109,7 +109,7 @@ class CallbackHandler
     /**
      * Retrieve registered callback
      *
-     * @return Callback
+     * @return callable
      */
     public function getCallback()
     {

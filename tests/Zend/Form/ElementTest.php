@@ -94,7 +94,7 @@ class ElementTest extends TestCase
     public function testCanPassNameToConstructor()
     {
         $element = new Element('foo');
-        $this->assertEquals('foo', $element->getName());unknown_type
+        $this->assertEquals('foo', $element->getName());
     }
     
     public function testCanSetCustomOptionFromConstructor()

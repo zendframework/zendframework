@@ -91,6 +91,8 @@ abstract class AbstractOptions implements ParameterObjectInterface
                 . 'have a matching ' . $setter . ' setter method '
                 . 'which must be defined'
             );
+        } elseif (!$this->__strictMode__ && !method_exists($this, $setter)) {
+            return;
         }
         $this->{$setter}($value);
     }

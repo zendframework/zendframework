@@ -8,12 +8,12 @@
  * @package   Zend_Session
  */
 
-namespace Zend\Session\Configuration;
+namespace Zend\Session\Config;
 
-use Zend\Filter\Word\CamelCaseToUnderscore as CamelCaseToUnderscoreFilter;
-use Zend\Session\Configuration\ConfigurationInterface as Configurable;
+use Zend\Session\Config\ConfigInterface;
 use Zend\Session\Exception;
 use Zend\Validator\Hostname as HostnameValidator;
+use Traversable;
 
 /**
  * Standard session configuration
@@ -22,62 +22,178 @@ use Zend\Validator\Hostname as HostnameValidator;
  * @package    Zend_Session
  * @subpackage Configuration
  */
-class StandardConfiguration implements Configurable
+class StandardConfig implements ConfigInterface
 {
     /**
-     * @var Zend\Filter Filter to convert CamelCase to underscore_separated
-     */
-    protected $camelCaseToUnderscoreFilter;
-
-    /**
-     * @var string session.cookie_domain
-     */
-    protected $cookieDomain;
-
-    /**
-     * @var bool session.cookie_httponly
-     */
-    protected $cookieHttpOnly;
-
-    /**
-     * @var int session.cookie_lifetime
-     */
-    protected $cookieLifetime;
-
-    /**
-     * @var string session.cookie_path
-     */
-    protected $cookiePath;
-
-    /**
-     * @var bool session.cookie_secure
-     */
-    protected $cookieSecure;
-
-    /**
-     * @var string session.name
+     * session.name
+     *
+     * @var string
      */
     protected $name;
 
     /**
-     * @var array All options
-     */
-    protected $options = array();
-
-    /**
-     * @var int remember_me_seconds
-     */
-    protected $rememberMeSeconds;
-
-    /**
-     * @var string session.save_path
+     * session.save_path
+     *
+     * @var string
      */
     protected $savePath;
 
     /**
-     * @var bool session.use_cookies
+     * session.cookie_lifetime
+     *
+     * @var int
+     */
+    protected $cookieLifetime;
+
+    /**
+     * session.cookie_path
+     *
+     * @var string
+     */
+    protected $cookiePath;
+
+    /**
+     * session.cookie_domain
+     *
+     * @var string
+     */
+    protected $cookieDomain;
+
+    /**
+     * session.cookie_secure
+     *
+     * @var bool
+     */
+    protected $cookieSecure;
+
+    /**
+     * session.cookie_httponly
+     *
+     * @var bool
+     */
+    protected $cookieHttpOnly;
+
+    /**
+     * remember_me_seconds
+     *
+     * @var int
+     */
+    protected $rememberMeSeconds;
+
+    /**
+     * session.use_cookies
+     *
+     * @var bool
      */
     protected $useCookies;
+
+    /**
+     * All options
+     *
+     * @var array
+     */
+    protected $options = array();
+
+
+    /**
+     * Set many options at once
+     *
+     * If a setter method exists for the key, that method will be called;
+     * otherwise, a standard option will be set with the value provided via
+     * {@link setOption()}.
+     *
+     * @param  array|Traversable $options
+     * @return StandardConfig
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setOptions($options)
+    {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Parameter provided to %s must be an array or Traversable',
+                __METHOD__
+            ));
+        }
+
+        foreach ($options as $key => $value) {
+            $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+            if (method_exists($this, $setter)) {
+                $this->{$setter}($value);
+            } else {
+                $this->setOption($key, $value);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Get all options set
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * Set an individual option
+     *
+     * Keys are normalized to lowercase. After setting internally, calls
+     * {@link setStorageOption()} to allow further processing.
+     *
+     *
+     * @param  string $option
+     * @param  mixed $value
+     * @return StandardConfig
+     */
+    public function setOption($option, $value)
+    {
+        $option                 = strtolower($option);
+        $this->options[$option] = $value;
+        $this->setStorageOption($option, $value);
+        return $this;
+    }
+
+    /**
+     * Get an individual option
+     *
+     * Keys are normalized to lowercase. If the option is not found, attempts
+     * to retrieve it via {@link getStorageOption()}; if a value is returned
+     * from that method, it will be set as the internal value and returned.
+     *
+     * Returns null for unfound options
+     *
+     * @param  string $option
+     * @return mixed
+     */
+    public function getOption($option)
+    {
+        $option = strtolower($option);
+        if (array_key_exists($option, $this->options)) {
+            return $this->options[$option];
+        }
+
+        $value = $this->getStorageOption($option);
+        if (null !== $value) {
+            $this->setOption($option, $value);
+            return $value;
+        }
+
+        return null;
+    }
+
+    /**
+     * Check to see if an internal option has been set for the key provided.
+     *
+     * @param  string $option
+     * @return bool
+     */
+    public function hasOption($option)
+    {
+        $option = strtolower($option);
+        return array_key_exists($option, $this->options);
+    }
 
     /**
      * Set storage option in backend configuration store
@@ -87,10 +203,11 @@ class StandardConfiguration implements Configurable
      *
      * @param  string $storageName
      * @param  mixed $storageValue
-     * @return StandardConfiguration
+     * @return StandardConfig
      */
     public function setStorageOption($storageName, $storageValue)
     {
+        return $this;
     }
 
     /**
@@ -110,14 +227,18 @@ class StandardConfiguration implements Configurable
      * Set session.save_path
      *
      * @param  string $savePath
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException on invalid path
      */
     public function setSavePath($savePath)
     {
         if (!is_dir($savePath)) {
-            throw new Exception\InvalidArgumentException('Invalid save_path provided');
+            throw new Exception\InvalidArgumentException('Invalid save_path provided; not a directory');
         }
+        if (!is_writable($savePath)) {
+            throw new Exception\InvalidArgumentException('Invalid save_path provided; not writable');
+        }
+
         $this->savePath = $savePath;
         $this->setStorageOption('save_path', $savePath);
         return $this;
@@ -136,11 +257,13 @@ class StandardConfiguration implements Configurable
         return $this->savePath;
     }
 
+
+
     /**
      * Set session.name
      *
      * @param  string $name
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setName($name)
@@ -170,7 +293,7 @@ class StandardConfiguration implements Configurable
      * Set session.gc_probability
      *
      * @param  int $gcProbability
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setGcProbability($gcProbability)
@@ -188,10 +311,24 @@ class StandardConfiguration implements Configurable
     }
 
     /**
+     * Get session.gc_probability
+     *
+     * @return int
+     */
+    public function getGcProbability()
+    {
+        if (!isset($this->options['gc_probability'])) {
+            $this->options['gc_probability'] = $this->getStorageOption('gc_probability');
+        }
+
+        return $this->options['gc_probability'];
+    }
+
+    /**
      * Set session.gc_divisor
      *
      * @param  int $gcDivisor
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setGcDivisor($gcDivisor)
@@ -209,10 +346,24 @@ class StandardConfiguration implements Configurable
     }
 
     /**
-     * Set gc.maxlifetime
+     * Get session.gc_divisor
+     *
+     * @return int
+     */
+    public function getGcDivisor()
+    {
+        if (!isset($this->options['gc_divisor'])) {
+            $this->options['gc_divisor'] = $this->getStorageOption('gc_divisor');
+        }
+
+        return $this->options['gc_divisor'];
+    }
+
+    /**
+     * Set gc_maxlifetime
      *
      * @param  int $gcMaxlifetime
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setGcMaxlifetime($gcMaxlifetime)
@@ -232,10 +383,24 @@ class StandardConfiguration implements Configurable
     }
 
     /**
+     * Get session.gc_maxlifetime
+     *
+     * @return int
+     */
+    public function getGcMaxlifetime()
+    {
+        if (!isset($this->options['gc_maxlifetime'])) {
+            $this->options['gc_maxlifetime'] = $this->getStorageOption('gc_maxlifetime');
+        }
+
+        return $this->options['gc_maxlifetime'];
+    }
+
+    /**
      * Set session.cookie_lifetime
      *
      * @param  int $cookieLifetime
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setCookieLifetime($cookieLifetime)
@@ -244,7 +409,9 @@ class StandardConfiguration implements Configurable
             throw new Exception\InvalidArgumentException('Invalid cookie_lifetime; must be numeric');
         }
         if (0 > $cookieLifetime) {
-            throw new Exception\InvalidArgumentException('Invalid cookie_lifetime; must be a positive integer or zero');
+            throw new Exception\InvalidArgumentException(
+                'Invalid cookie_lifetime; must be a positive integer or zero'
+            );
         }
 
         $this->cookieLifetime = (int) $cookieLifetime;
@@ -269,7 +436,7 @@ class StandardConfiguration implements Configurable
      * Set session.cookie_path
      *
      * @param  string $cookiePath
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setCookiePath($cookiePath)
@@ -303,7 +470,7 @@ class StandardConfiguration implements Configurable
      * Set session.cookie_domain
      *
      * @param  string $cookieDomain
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setCookieDomain($cookieDomain)
@@ -315,7 +482,9 @@ class StandardConfiguration implements Configurable
         $validator = new HostnameValidator(HostnameValidator::ALLOW_ALL);
 
         if (!empty($cookieDomain) && !$validator->isValid($cookieDomain)) {
-            throw new Exception\InvalidArgumentException('Invalid cookie domain: ' . implode('; ', $validator->getMessages()));
+            throw new Exception\InvalidArgumentException(
+                'Invalid cookie domain: ' . implode('; ', $validator->getMessages())
+            );
         }
 
         $this->cookieDomain = $cookieDomain;
@@ -340,7 +509,7 @@ class StandardConfiguration implements Configurable
      * Set session.cookie_secure
      *
      * @param  bool $cookieSecure
-     * @return StandardConfiguration
+     * @return StandardConfig
      */
     public function setCookieSecure($cookieSecure)
     {
@@ -369,7 +538,7 @@ class StandardConfiguration implements Configurable
      * unusual casing
      *
      * @param  bool $cookieHttpOnly
-     * @return StandardConfiguration
+     * @return StandardConfig
      */
     public function setCookieHttpOnly($cookieHttpOnly)
     {
@@ -395,7 +564,7 @@ class StandardConfiguration implements Configurable
      * Set session.use_cookies
      *
      * @param  bool $useCookies
-     * @return StandardConfiguration
+     * @return StandardConfig
      */
     public function setUseCookies($useCookies)
     {
@@ -421,24 +590,42 @@ class StandardConfiguration implements Configurable
      * Set session.entropy_file
      *
      * @param  string $entropyFile
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setEntropyFile($entropyFile)
     {
-        if (is_dir($entropyFile) || !is_readable($entropyFile)) {
-            throw new Exception\InvalidArgumentException('Invalid entropy_file provided');
+        if (!is_file($entropyFile) || !is_readable($entropyFile)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                "Invalid entropy_file provided: '%s'; doesn't exist or not readable",
+                $entropyFile
+            ));
         }
+
         $this->setOption('entropy_file', $entropyFile);
         $this->setStorageOption('entropy_file', $entropyFile);
         return $this;
     }
 
     /**
+     * Get session.entropy_file
+     *
+     * @return string
+     */
+    public function getEntropyFile()
+    {
+        if (!isset($this->options['entropy_file'])) {
+            $this->options['entropy_file'] = $this->getStorageOption('entropy_file');
+        }
+
+        return $this->options['entropy_file'];
+    }
+
+    /**
      * set session.entropy_length
      *
      * @param  int $entropyLength
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setEntropyLength($entropyLength)
@@ -456,10 +643,24 @@ class StandardConfiguration implements Configurable
     }
 
     /**
+     * Get session.entropy_length
+     *
+     * @return string
+     */
+    public function getEntropyLength()
+    {
+        if (!isset($this->options['entropy_length'])) {
+            $this->options['entropy_length'] = $this->getStorageOption('entropy_length');
+        }
+
+        return $this->options['entropy_length'];
+    }
+
+    /**
      * Set session.cache_expire
      *
      * @param  int $cacheExpire
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setCacheExpire($cacheExpire)
@@ -479,10 +680,24 @@ class StandardConfiguration implements Configurable
     }
 
     /**
+     * Get session.cache_expire
+     *
+     * @return string
+     */
+    public function getCacheExpire()
+    {
+        if (!isset($this->options['cache_expire'])) {
+            $this->options['cache_expire'] = $this->getStorageOption('cache_expire');
+        }
+
+        return $this->options['cache_expire'];
+    }
+
+    /**
      * Set session.hash_bits_per_character
      *
      * @param  int $hashBitsPerCharacter
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setHashBitsPerCharacter($hashBitsPerCharacter)
@@ -497,10 +712,24 @@ class StandardConfiguration implements Configurable
     }
 
     /**
+     * Get session.hash_bits_per_character
+     *
+     * @return string
+     */
+    public function getHashBitsPerCharacter()
+    {
+        if (!isset($this->options['hash_bits_per_character'])) {
+            $this->options['hash_bits_per_character'] = $this->getStorageOption('hash_bits_per_character');
+        }
+
+        return $this->options['hash_bits_per_character'];
+    }
+
+    /**
      * Set remember_me_seconds
      *
      * @param  int $rememberMeSeconds
-     * @return StandardConfiguration
+     * @return StandardConfig
      * @throws Exception\InvalidArgumentException
      */
     public function setRememberMeSeconds($rememberMeSeconds)
@@ -533,97 +762,12 @@ class StandardConfiguration implements Configurable
     }
 
     /**
-     * Set many options at once
-     *
-     * If a setter method exists for the key, that method will be called;
-     * otherwise, a standard option will be set with the value provided via
-     * {@link setOption()}.
-     *
-     * @param  array $options
-     * @return StandardConfiguration
-     */
-    public function setOptions(array $options)
-    {
-        foreach ($options as $key => $value) {
-            // translate key from underscore_separated to TitleCased
-            $methodKey = str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-            $method = 'set' . $methodKey;
-            if (method_exists($this, $method)) {
-                $this->$method($value);
-            } else {
-                $this->setOption($key, $value);
-            }
-        }
-        return $this;
-    }
-
-    /**
-     * Set an individual option
-     *
-     * Keys are normalized to lowercase. After setting internally, calls
-     * {@link setStorageOption()} to allow further processing.
-     *
-     *
-     * @param  string $option
-     * @param  mixed $value
-     * @return StandardConfiguration
-     */
-    public function setOption($option, $value)
-    {
-        $option = $this->normalizeOption($option);
-        $this->options[$option] = $value;
-        $this->setStorageOption($option, $value);
-        return $this;
-    }
-
-    /**
-     * Get an individual option
-     *
-     * Keys are normalized to lowercase. If the option is not found, attempts
-     * to retrieve it via {@link getStorageOption()}; if a value is returned
-     * from that method, it will be set as the internal value and returned.
-     *
-     * Returns null for unfound options
-     *
-     * @param  string $option
-     * @return mixed
-     */
-    public function getOption($option)
-    {
-        $option = $this->normalizeOption($option);
-        if (array_key_exists($option, $this->options)) {
-            return $this->options[$option];
-        }
-
-        $value = $this->getStorageOption($option);
-        if (null !== $value) {
-            $this->setOption($option, $value);
-            return $value;
-        }
-
-        return null;
-    }
-
-    /**
-     * Check to see if an internal option has been set for the key provided.
-     *
-     * @param  string $option
-     * @return bool
-     */
-    public function hasOption($option)
-    {
-        $option = $this->normalizeOption($option);
-        return array_key_exists($option, $this->options);
-    }
-
-    /**
      * Cast configuration to an array
      *
      * @return array
      */
     public function toArray()
     {
-        $options = $this->options;
         $extraOpts = array(
             'cookie_domain'       => $this->getCookieDomain(),
             'cookie_httponly'     => $this->getCookieHttpOnly(),
@@ -635,7 +779,7 @@ class StandardConfiguration implements Configurable
             'save_path'           => $this->getSavePath(),
             'use_cookies'         => $this->getUseCookies(),
         );
-        return array_merge($options, $extraOpts);
+        return array_merge($this->options, $extraOpts);
     }
 
     /**
@@ -651,45 +795,21 @@ class StandardConfiguration implements Configurable
      */
     public function __call($method, $args)
     {
-        if ('get' == substr($method, 0, 3)) {
-            // Call to a getter; return matching option.
-            // Transform method from MixedCase to underscore_separated.
-            $option = substr($method, 3);
-            $key    = $this->getCamelCaseToUnderscoreFilter()->filter($option);
-            return $this->getOption($key);
-        }
-        if ('set' == substr($method, 0, 3)) {
-            // Call to a setter; return matching option.
-            // Transform method from MixedCase to underscore_separated.
-            $option = substr($method, 3);
-            $key    = $this->getCamelCaseToUnderscoreFilter()->filter($option);
+        $prefix = substr($method, 0, 3);
+        $option = substr($method, 3);
+        $key    = strtolower(preg_replace('#(?<=[a-z])([A-Z])#', '_\1', $option));
+
+        if ($prefix === 'set') {
             $value  = array_shift($args);
             return $this->setOption($key, $value);
+        } elseif ($prefix === 'get') {
+            return $this->getOption($key);
+        } else {
+            throw new Exception\BadMethodCallException(sprintf(
+                'Method "%s" does not exist in %s',
+                $method,
+                get_called_class()
+            ));
         }
-        throw new Exception\BadMethodCallException(sprintf('Method "%s" does not exist', $method));
-    }
-
-    /**
-     * Normalize an option name to lowercase
-     *
-     * @param  string $option
-     * @return string
-     */
-    protected function normalizeOption($option)
-    {
-        return strtolower((string) $option);
-    }
-
-    /**
-     * Retrieve the CamelCaseToUnderscoreFilter
-     *
-     * @return CamelCaseToUnderscoreFilter
-     */
-    protected function getCamelCaseToUnderscoreFilter()
-    {
-        if (null === $this->camelCaseToUnderscoreFilter) {
-            $this->camelCaseToUnderscoreFilter = new CamelCaseToUnderscoreFilter();
-        }
-        return $this->camelCaseToUnderscoreFilter;
     }
 }

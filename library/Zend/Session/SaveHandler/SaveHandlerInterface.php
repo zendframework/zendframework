@@ -22,7 +22,7 @@ interface SaveHandlerInterface
     /**
      * Open Session - retrieve resources
      *
-     * @param string $save_path
+     * @param string $savePath
      * @param string $name
      */
     public function open($savePath, $name);

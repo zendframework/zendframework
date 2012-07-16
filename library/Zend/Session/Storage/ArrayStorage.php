@@ -17,7 +17,7 @@ use Zend\Session\Exception;
  * Array session storage
  *
  * Defines an ArrayObject interface for accessing session storage, with options
- * for setting metadata, locking, and marking as immutable.
+ * for setting metadata, locking, and marking as isImmutable.
  *
  * @category   Zend
  * @package    Zend_Session
@@ -26,10 +26,10 @@ use Zend\Session\Exception;
 class ArrayStorage extends ArrayObject implements StorageInterface
 {
     /**
-     * Is storage marked immutable?
+     * Is storage marked isImmutable?
      * @var bool
      */
-    protected $_immutable = false;
+    protected $isImmutable = false;
 
     /**
      * Constructor
@@ -37,13 +37,15 @@ class ArrayStorage extends ArrayObject implements StorageInterface
      * Instantiates storage as an ArrayObject, allowing property access.
      * Also sets the initial request access time.
      *
-     * @param  array|ArrayAccess $input
+     * @param  array $input
      * @param  int $flags
      * @param  string $iteratorClass
-     * @return void
      */
-    public function __construct($input = array(), $flags = \ArrayObject::ARRAY_AS_PROPS, $iteratorClass = '\\ArrayIterator')
-    {
+    public function __construct(
+        $input = array(),
+        $flags = ArrayObject::ARRAY_AS_PROPS,
+        $iteratorClass = '\\ArrayIterator'
+    ) {
         parent::__construct($input, $flags, $iteratorClass);
         $this->setMetadata('_REQUEST_ACCESS_TIME', microtime(true));
     }
@@ -61,22 +63,33 @@ class ArrayStorage extends ArrayObject implements StorageInterface
     /**
      * Set a value in the storage object
      *
-     * If the object is marked as immutable, or the object or key is marked as
+     * If the object is marked as isImmutable, or the object or key is marked as
      * locked, raises an exception.
      *
      * @param  string $key
      * @param  mixed $value
      * @return void
      */
+
+    /**
+     * @param  mixed $key
+     * @param  mixed $value
+     * @throws Exception\RuntimeException
+     */
     public function offsetSet($key, $value)
     {
         if ($this->isImmutable()) {
-            throw new Exception\RuntimeException('Cannot set key "' . $key . '" as storage is marked immutable');
+            throw new Exception\RuntimeException(sprintf(
+                'Cannot set key "%s" as storage is marked isImmutable', $key
+            ));
         }
         if ($this->isLocked($key)) {
-            throw new Exception\RuntimeException('Cannot set key "' . $key . '" due to locking');
+            throw new Exception\RuntimeException(sprintf(
+                'Cannot set key "%s" due to locking', $key
+            ));
         }
-        return parent::offsetSet($key, $value);
+
+        parent::offsetSet($key, $value);
     }
 
     /**
@@ -107,7 +120,7 @@ class ArrayStorage extends ArrayObject implements StorageInterface
     public function isLocked($key = null)
     {
         if ($this->isImmutable()) {
-            // immutable trumps all
+            // isImmutable trumps all
             return true;
         }
 
@@ -167,24 +180,24 @@ class ArrayStorage extends ArrayObject implements StorageInterface
     }
 
     /**
-     * Mark the storage container as immutable
+     * Mark the storage container as isImmutable
      *
      * @return ArrayStorage
      */
     public function markImmutable()
     {
-        $this->_immutable = true;
+        $this->isImmutable = true;
         return $this;
     }
 
     /**
-     * Is the storage container marked as immutable?
+     * Is the storage container marked as isImmutable?
      *
      * @return bool
      */
     public function isImmutable()
     {
-        return $this->_immutable;
+        return $this->isImmutable;
     }
 
     /**
@@ -201,11 +214,14 @@ class ArrayStorage extends ArrayObject implements StorageInterface
      * @param  mixed $value
      * @param  bool $overwriteArray Whether to overwrite or merge array values; by default, merges
      * @return ArrayStorage
+     * @throws Exception\RuntimeException
      */
     public function setMetadata($key, $value, $overwriteArray = false)
     {
-        if ($this->_immutable) {
-            throw new Exception\InvalidArgumentException('Cannot set metadata key "' . $key . '" as storage is marked immutable');
+        if ($this->isImmutable) {
+            throw new Exception\RuntimeException(sprintf(
+                'Cannot set key "%s" as storage is marked isImmutable', $key
+            ));
         }
 
         if (!isset($this['__ZF'])) {
@@ -265,6 +281,7 @@ class ArrayStorage extends ArrayObject implements StorageInterface
      *
      * @param  null|int|string $key
      * @return ArrayStorage
+     * @throws Exception\RuntimeException
      */
     public function clear($key = null)
     {
@@ -291,6 +308,20 @@ class ArrayStorage extends ArrayObject implements StorageInterface
     }
 
     /**
+     * Load the storage from another array
+     *
+     * Overwrites any data that was previously set.
+     *
+     * @param  array $array
+     * @return ArrayStorage
+     */
+    public function fromArray(array $array)
+    {
+        $this->exchangeArray($array);
+        return $this;
+    }
+
+    /**
      * Cast the object to an array
      *
      * Returns data only, no metadata.
@@ -304,19 +335,5 @@ class ArrayStorage extends ArrayObject implements StorageInterface
             unset($values['__ZF']);
         }
         return $values;
-    }
-
-    /**
-     * Load the storage from another array
-     *
-     * Overwrites any data that was previously set.
-     *
-     * @param  array $array
-     * @return ArrayStorage
-     */
-    public function fromArray(array $array)
-    {
-        $this->exchangeArray($array);
-        return $this;
     }
 }

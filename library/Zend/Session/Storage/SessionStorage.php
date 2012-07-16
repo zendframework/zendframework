@@ -10,6 +10,8 @@
 
 namespace Zend\Session\Storage;
 
+use ArrayObject;
+
 /**
  * Session storage in $_SESSION
  *
@@ -28,12 +30,11 @@ class SessionStorage extends ArrayStorage
      * Sets the $_SESSION superglobal to an ArrayObject, maintaining previous
      * values if any discovered.
      *
-     * @param  null|array|ArrayAccess $input
+     * @param  array|null $input
      * @param  int $flags
      * @param  string $iteratorClass
-     * @return void
      */
-    public function __construct($input = null, $flags = \ArrayObject::ARRAY_AS_PROPS, $iteratorClass = '\\ArrayIterator')
+    public function __construct($input = null, $flags = ArrayObject::ARRAY_AS_PROPS, $iteratorClass = '\\ArrayIterator')
     {
         $resetSession = true;
         if ((null === $input) && isset($_SESSION)) {
@@ -83,17 +84,18 @@ class SessionStorage extends ArrayStorage
     }
 
     /**
-     * Mark object as immutable
+     * Mark object as isImmutable
      *
-     * @return void
+     * @return SessionStorage
      */
     public function markImmutable()
     {
         $this['_IMMUTABLE'] = true;
+        return $this;
     }
 
     /**
-     * Determine if this object is immutable
+     * Determine if this object is isImmutable
      *
      * @return bool
      */

@@ -20,6 +20,11 @@ use Zend\Session\Storage\ArrayStorage;
  */
 class StorageTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var ArrayStorage
+     */
+    protected $storage;
+
     public function setUp()
     {
         $this->storage = new ArrayStorage;
@@ -211,7 +216,8 @@ class StorageTest extends \PHPUnit_Framework_TestCase
         $this->storage->foo = 'bar';
         $this->storage->bar = 'baz';
         $this->storage->markImmutable();
-        $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'Cannot clear storage as it is marked immutable');
+        $this->setExpectedException('Zend\Session\Exception\RuntimeException',
+                                    'Cannot clear storage as it is marked immutable');
         $this->storage->clear();
     }
 }

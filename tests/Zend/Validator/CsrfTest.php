@@ -10,7 +10,7 @@
 
 namespace ZendTest\Validator;
 
-use Zend\Session\Configuration\StandardConfiguration;
+use Zend\Session\Config\StandardConfig;
 use Zend\Session\Container;
 use Zend\Validator\Csrf;
 
@@ -34,7 +34,7 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
     {
         // Setup session handling
         $_SESSION = array();
-        $sessionConfig = new StandardConfiguration(array(
+        $sessionConfig = new StandardConfig(array(
             'storage' => 'Zend\Session\Storage\ArrayStorage',
         ));
         $sessionManager       = new TestAsset\SessionManager($sessionConfig);

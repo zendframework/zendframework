@@ -57,20 +57,20 @@ class DbTableGateway implements SaveHandlerInterface
     /**
      * Constructor
      *
-     * @param  Zend\Db\Adapter\Adapter $adapter
-     * @param  DbTableGatewayOptions $options
+     * @param TableGateway $tableGateway
+     * @param DbTableGatewayOptions $options
      */
     public function __construct(TableGateway $tableGateway, DbTableGatewayOptions $options)
     {
         $this->tableGateway = $tableGateway;
-        $this->options = $options;
+        $this->options      = $options;
     }
 
     /**
      * Open Session
      *
-     * @param string $save_path
-     * @param string $name
+     * @param  string $savePath
+     * @param  string $name
      * @return boolean
      */
     public function open($savePath, $name)
@@ -100,9 +100,8 @@ class DbTableGateway implements SaveHandlerInterface
      */
     public function read($id)
     {
-
         $rows = $this->tableGateway->select(array(
-            $this->options->getIdColumn() => $id,
+            $this->options->getIdColumn()   => $id,
             $this->options->getNameColumn() => $this->sessionName,
         ));
 
@@ -127,36 +126,37 @@ class DbTableGateway implements SaveHandlerInterface
     {
         $data = array(
             $this->options->getModifiedColumn() => time(),
-            $this->options->getDataColumn() => (string) $data,
+            $this->options->getDataColumn()     => (string) $data,
         );
 
         $rows = $this->tableGateway->select(array(
-            $this->options->getIdColumn() => $id,
+            $this->options->getIdColumn()   => $id,
             $this->options->getNameColumn() => $this->sessionName,
         ));
 
         if ($row = $rows->current()) {
             return (bool) $this->tableGateway->update($data, array(
-                $this->options->getIdColumn() => $id,
+                $this->options->getIdColumn()   => $id,
                 $this->options->getNameColumn() => $this->sessionName,
             ));
         }
         $data[$this->options->getLifetimeColumn()] = $this->lifetime;
-        $data[$this->options->getIdColumn()] = $id;
-        $data[$this->options->getNameColumn()] = $this->sessionName;
+        $data[$this->options->getIdColumn()]       = $id;
+        $data[$this->options->getNameColumn()]     = $this->sessionName;
+
         return (bool) $this->tableGateway->insert($data);
     }
 
     /**
      * Destroy session
      *
-     * @param string $id
+     * @param  string $id
      * @return boolean
      */
     public function destroy($id)
     {
         return (bool) $this->tableGateway->delete(array(
-            $this->options->getIdColumn() => $id,
+            $this->options->getIdColumn()   => $id,
             $this->options->getNameColumn() => $this->sessionName,
         ));
     }
@@ -169,9 +169,11 @@ class DbTableGateway implements SaveHandlerInterface
      */
     public function gc($maxlifetime)
     {
-        $this->delete($this->getAdapter()->quoteIdentifier($this->options->getModifiedColumn()) . ' + '
-                    . $this->getAdapter()->quoteIdentifier($this->options->getLifetimeColumn()) . ' < '
-                    . $this->getAdapter()->quote(time()));
-        return true;
+        $platform = $this->tableGateway->getAdapter()->getPlatform();
+        return (bool) $this->tableGateway->delete(sprintf('%s + %s > %d',
+            $platform->quoteIdentifier($this->options->getModifiedColumn()),
+            $platform->quoteIdentifier($this->options->getLifetimeColumn()),
+            time()
+        ));
     }
 }

@@ -11,7 +11,7 @@
 namespace Zend\Session;
 
 use Zend\EventManager\EventManagerInterface;
-use Zend\Session\Configuration\ConfigurationInterface as Configuration;
+use Zend\Session\Config\ConfigInterface as Config;
 use Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler;
 use Zend\Session\Storage\StorageInterface as Storage;
 
@@ -23,10 +23,13 @@ use Zend\Session\Storage\StorageInterface as Storage;
  */
 interface ManagerInterface
 {
-    public function __construct(Configuration $config = null, Storage $storage = null, SaveHandler $saveHandler = null);
-
+    public function setConfig(Config $config);
     public function getConfig();
+
+    public function setStorage(Storage $storage);
     public function getStorage();
+
+    public function setSaveHandler(SaveHandler $saveHandler);
     public function getSaveHandler();
 
     public function sessionExists();
@@ -34,10 +37,11 @@ interface ManagerInterface
     public function destroy();
     public function writeClose();
 
-    public function getName();
     public function setName($name);
-    public function getId();
+    public function getName();
+
     public function setId($id);
+    public function getId();
     public function regenerateId();
 
     public function rememberMe($ttl = null);

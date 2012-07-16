@@ -29,7 +29,9 @@ use Zend\Session\Storage\StorageInterface as Storage;
 class Container extends ArrayObject
 {
     /**
-     * @var string Container name
+     * Container name
+     *
+     * @var string
      */
     protected $name;
 
@@ -39,12 +41,16 @@ class Container extends ArrayObject
     protected $manager;
 
     /**
-     * @var string default manager class to use if no manager has been provided
+     * Default manager class to use if no manager has been provided
+     *
+     * @var string
      */
     protected static $managerDefaultClass = 'Zend\\Session\\SessionManager';
 
     /**
-     * @var Manager Default manager to use when instantiating a container without providing a ManagerInterface
+     * Default manager to use when instantiating a container without providing a ManagerInterface
+     *
+     * @var Manager
      */
     protected static $defaultManager;
 
@@ -55,12 +61,14 @@ class Container extends ArrayObject
      *
      * @param  null|string $name
      * @param  Manager $manager
-     * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($name = 'Default', Manager $manager = null)
     {
         if (!preg_match('/^[a-z][a-z0-9_\\\]+$/i', $name)) {
-            throw new Exception\InvalidArgumentException('Name passed to container is invalid; must consist of alphanumerics, backslashes and underscores only');
+            throw new Exception\InvalidArgumentException(
+                'Name passed to container is invalid; must consist of alphanumerics, backslashes and underscores only'
+            );
         }
         $this->name = $name;
         $this->setManager($manager);
@@ -96,7 +104,9 @@ class Container extends ArrayObject
         if (null === self::$defaultManager) {
             $manager = new self::$managerDefaultClass();
             if (!$manager instanceof Manager) {
-                throw new Exception\InvalidArgumentException('Invalid default manager type provided; must implement ManagerInterface');
+                throw new Exception\InvalidArgumentException(
+                    'Invalid default manager type provided; must implement ManagerInterface'
+                );
             }
             self::$defaultManager = $manager;
         }
@@ -114,6 +124,27 @@ class Container extends ArrayObject
     }
 
     /**
+     * Set session manager
+     *
+     * @param  null|Manager $manager
+     * @return Container
+     * @throws Exception\InvalidArgumentException
+     */
+    protected function setManager(Manager $manager = null)
+    {
+        if (null === $manager) {
+            $manager = self::getDefaultManager();
+            if (!$manager instanceof Manager) {
+                throw new Exception\InvalidArgumentException(
+                    'Manager provided is invalid; must implement ManagerInterface interface'
+                );
+            }
+        }
+        $this->manager = $manager;
+        return $this;
+    }
+
+    /**
      * Get manager instance
      *
      * @return Manager
@@ -121,24 +152,6 @@ class Container extends ArrayObject
     public function getManager()
     {
         return $this->manager;
-    }
-
-    /**
-     * Set session manager
-     *
-     * @param  null|Manager $manager
-     * @return Container
-     */
-    protected function setManager(Manager $manager = null)
-    {
-        if (null === $manager) {
-            $manager = self::getDefaultManager();
-            if (!$manager instanceof Manager) {
-                throw new Exception\InvalidArgumentException('Manager provided is invalid; must implement ManagerInterface interface');
-            }
-        }
-        $this->manager = $manager;
-        return $this;
     }
 
     /**
@@ -382,7 +395,7 @@ class Container extends ArrayObject
         if (null === ($storage = $this->verifyNamespace(false))) {
             return false;
         }
-        $name    = $this->getName();
+        $name = $this->getName();
 
         // Return early if the key isn't set
         if (!isset($storage[$name][$key])) {
@@ -444,8 +457,9 @@ class Container extends ArrayObject
      * Set the TTL for the entire container, a single key, or a set of keys.
      *
      * @param  int $ttl TTL in seconds
-     * @param  null|string|array $vars
+     * @param  string|array|null $vars
      * @return Container
+     * @throws Exception\InvalidArgumentException
      */
     public function setExpirationSeconds($ttl, $vars = null)
     {
@@ -475,7 +489,9 @@ class Container extends ArrayObject
             // Create metadata array to merge in
             $data = array('EXPIRE_KEYS' => $expires);
         } else {
-            throw new Exception\InvalidArgumentException('Unknown data provided as second argument to ' . __METHOD__);
+            throw new Exception\InvalidArgumentException(
+                'Unknown data provided as second argument to ' . __METHOD__
+            );
         }
 
         $storage->setMetadata(
@@ -521,7 +537,9 @@ class Container extends ArrayObject
             // Create metadata array to merge in
             $data = array('EXPIRE_HOPS_KEYS' => $expires);
         } else {
-            throw new Exception\InvalidArgumentException('Unknown data provided as second argument to ' . __METHOD__);
+            throw new Exception\InvalidArgumentException(
+                'Unknown data provided as second argument to ' . __METHOD__
+            );
         }
 
         $storage->setMetadata(

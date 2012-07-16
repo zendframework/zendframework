@@ -73,7 +73,7 @@ if (!$opts->getOptions() || $opts->getOption('h')) {
 
 $docbook = $opts->getOption('d');
 if (!file_exists($docbook)) {
-    echo "Error: the docbook file $docbook doesn't exist.\n";
+    echo "Error: the docbook file $docbook doesn't exist." . PHP_EOL;
     exit(2);
 }
 
@@ -83,8 +83,8 @@ if (empty($rstFile)) {
 }
 
 if (is_dir($rstFile)) {
-    $rstFile  = realpath($rstFile) . DIRECTORY_SEPARATOR;
-    $rstFile .= RstConvert::XmlFileNameToRst(basename($docbook));
+    $rstFile = realpath($rstFile) . DIRECTORY_SEPARATOR;
+    $rstFile .= RstConvert::xmlFileNameToRst(basename($docbook));
 }
 
 // Load the docbook file (input)
@@ -96,7 +96,7 @@ $xsltFile = __DIR__ . '/doc2rst.xsl';
 // Load the XSLT file
 $xsl = new \DOMDocument;
 if (!file_exists($xsltFile)) {
-    echo "The $xsltFile is missing, I cannot procede with the conversion.\n";
+    echo "The $xsltFile is missing, I cannot proceed with the conversion." . PHP_EOL;
     exit(2);
 }
 $xsl->load($xsltFile);
@@ -109,27 +109,33 @@ echo "Writing to $rstFile\n";
 
 $output = $proc->transformToXml($xml);
 if (false === $output) {
-    echo "Error during the conversion\n";
+    echo 'Error during the conversion' . PHP_EOL;
     exit(2);
 }
 
 // remove single spaces in the beginning of new lines
-$lines = explode("\n", $output);
+$lines  = explode("\n", $output);
 $output = '';
 foreach ($lines as $line) {
-    if (empty($line)) {
+    if ($line === '') {
         $output .= "\n";
     } elseif (($line[0] === ' ') && ($line[1] !== ' ')) {
         $output .= substr($line, 1) . "\n";
     } else {
-        $output .= "$line\n";
+        // Remove trailing spaces
+        $output .= rtrim($line). "\n";
     }
 }
 // Add the list of the external links at the end of the document
-$output .= "\n" . RstConvert::getLinks();
+if(!empty(RstConvert::$links)) {
+    $output .= "\n" . RstConvert::getLinks();
+}
+if(!empty(RstConvert::$footnote)) {
+    $output .= "\n" . join("\n", RstConvert::$footnote);
+}
 
 file_put_contents($rstFile, $output);
-echo "Conversion done.\n";
+echo 'Conversion done.' . PHP_EOL;
 exit(0);
 
 /**
@@ -137,80 +143,26 @@ exit(0);
  */
 class RstConvert
 {
-    public static $links = array();
+    public static $links    = array();
+    public static $footnote = array();
 
     /**
-     * Convert the programlisting tag
+     * Indent a text 4 spaces
      *
      * @param  string $text
-     * @param  string $language
      * @return string
      */
-    public static function programlisting($text, $language)
+    public static function indent($text)
     {
-        $language = ($language)?:'php';
         $rows   = explode("\n", $text);
-        $output = "\n.. code-block:: $language\n    :linenos:\n";
+        $output = '';
         foreach ($rows as $row) {
-            $output .= "    $row\n";
-        }
-        return $output;
-    }
-
-    /**
-     * Convert the note tag
-     *
-     * @param  string $text
-     * @return string
-     */
-    public static function note($text)
-    {
-        $rows = explode("\n", $text);
-        $tot  = count($rows);
-        if ('' !== trim($rows[0])) {
-            $output = "    **" . trim($rows[0]) . "**\n";
-        } else {
-            $output = '';
-        }
-        for ($i=1; $i < $tot; $i++) {
-            if ('' !== trim($rows[$i])) {
-                $output .= "    {$rows[$i]}\n";
+            if ($row === '' || preg_match('/^\s+$/', $row)) {
+                $output .= "\n";
+            } else {
+                $output .= "   $row\n";
             }
         }
-        return $output;
-    }
-
-    /**
-     * Convert the listitem tag
-     *
-     * @param  string $text
-     * @return string
-     */
-    public static function listitem($text)
-    {
-        $rows = explode("\n", $text);
-        $output = "\n";
-        foreach ($rows as $row) {
-            if ('' !== trim($row)) {
-                $output .= "    - ". trim($row) . "\n";
-            }
-        }
-        $output .= "\n";
-        return $output;
-    }
-
-    /**
-     * Convert the first section/title tag (maintitle)
-     *
-     * @param  string $text
-     * @return string
-     */
-    public static function maintitle($text)
-    {
-        $text    = str_replace('\\', '\\\\', trim($text));
-        $count   = strlen($text);
-        $output  = $text . "\n";
-        $output .= str_repeat('=', $count) . "\n";
         return $output;
     }
 
@@ -218,25 +170,65 @@ class RstConvert
      * Convert all the section/title, except for the first
      *
      * @param  string $text
+     * @param  string $sign decorator character by default paragraph character
+     * @param  bool   $top  put decorator line on top too
      * @return string
      */
-    public static function title($text)
+    public static function title($text, $sign = '-', $top = false)
     {
-        $text    = str_replace('\\', '\\\\', trim($text));
-        $count   = strlen($text);
-        $output  = "\n" . $text . "\n";
-        $output .= str_repeat('-', $count) . "\n";
-        return $output;
+        $text   = trim(self::formatText($text));
+        $line   = str_repeat($sign, strlen($text));
+        $output = $text . "\n" . $line . "\n";
+        if ($top) {
+            $output = $line . "\n" . $output;
+        }
+        return "\n" . $output . "\n";
     }
 
     /**
      * Format the string removing \n, multiple white spaces and \ in \\
      *
+     * @param  string         $text
+     * @param  \DOMDocument[] $preceding previously sibling
+     * @param  \DOMDocument[] $following following sibling
+     * @return string
+     */
+    public static function formatText($text, $preceding = false, $following = false)
+    {
+        $text = self::escapeChars(trim(preg_replace('/\s+/m', ' ', $text)));
+        if (!empty($preceding)) {
+            // Escape whitespace for plurals
+            if (preg_match('/^s\s/', $text)) {
+                $text = '\ ' . $text;
+            } elseif (!in_array($text[0],
+                                array('-', '.', ',', ':', ';', '!', '?', '\\', '/', "'", '"', ')', ']', '}', '>', ' '))
+            ) {
+                $text = ' ' . $text;
+            }
+        }
+
+        if (!empty($following)) {
+            if ($following[0]->localName == 'superscript') {
+                $text .= '\ ';
+            } elseif (!in_array(substr($text, -1), array('-', '/', "'", '"', '(', '[', '{', '<', ' '))) {
+                // Omitted  ':' in the list
+                $text .= ' ';
+            }
+        }
+        return $text;
+    }
+
+    /**
+     * Escape chars
+     *
      * @param  string $text
      * @return string
      */
-    public static function formatText($text) {
-        return str_replace('\\', '\\\\', preg_replace('/\s+/m', ' ', preg_replace('/(([\.:])|^\s([A-Z0-9]))\s*[\r\n]\s*$/', '$2$3', $text)));
+    public static function escapeChars($text)
+    {
+        // Exclude special character if preceded by any valid preceded character
+        return preg_replace('/((([-:\/\'"\(\[\{<\s])([_`\*\|][^\s]))|([_][-\.,:;!?\/\\\'"\)\]\}>\s]))/S', '$3\\\$4$5',
+                            str_replace('\\', '\\\\', $text));
     }
 
     /**
@@ -254,6 +246,19 @@ class RstConvert
             self::$links[$value] = trim($node[0]->getAttribute('xlink:href'));
             return "`$value`_";
         }
+    }
+
+    /**
+     * Convert the footnote
+     *
+     * @param  \DOMElement $value
+     * @return string
+     */
+    public static function footnote($value)
+    {
+        $value = self::formatText($value);
+        self::$footnote[] = ".. [#] $value";
+        return '[#]_';
     }
 
     /**
@@ -297,7 +302,7 @@ class RstConvert
             $i = 0;
             foreach ($cols as $col) {
                 $table[$j][$i] = self::formatText($col->nodeValue);
-                $length = strlen($table[$j][$i]);
+                $length        = strlen($table[$j][$i]);
                 if ($length > $widthCol[$i]) {
                     $widthCol[$i] = $length;
                 }
@@ -306,12 +311,12 @@ class RstConvert
             $j++;
         }
         $tableText = new Table\Table(array(
-            'columnWidths' => $widthCol,
-            'decorator'    => 'ascii'
-        ));
-        for ($j=0; $j < $totRow; $j++) {
+                                          'columnWidths' => $widthCol,
+                                          'decorator'    => 'ascii'
+                                     ));
+        for ($j = 0; $j < $totRow; $j++) {
             $row = new Table\Row();
-            for ($i=0; $i < $totCol; $i++) {
+            for ($i = 0; $i < $totCol; $i++) {
                 $row->appendColumn(new Table\Column($table[$j][$i]));
             }
             $tableText->appendRow($row);
@@ -319,9 +324,9 @@ class RstConvert
         $output = $tableText->render();
         // if thead exists change the table style with head (= instead of -)
         if ($head) {
-            $table  = explode("\n", $output);
+            $table     = explode("\n", $output);
             $newOutput = '';
-            $i      = 0;
+            $i         = 0;
             foreach ($table as $row) {
                 if ('+-' === substr($row, 0, 2)) {
                     $i++;
@@ -333,7 +338,7 @@ class RstConvert
             }
             return $newOutput;
         }
-        return $output;
+        return $output . "\n";
     }
 
     /**
@@ -343,15 +348,15 @@ class RstConvert
      * @param  string $name
      * @return string
      */
-    public static function XmlFileNameToRst($name)
+    public static function xmlFileNameToRst($name)
     {
         if ('.xml' === strtolower(substr($name, -4))) {
-            $name = substr($name, 0, strlen($name)-4);
+            $name = substr($name, 0, strlen($name) - 4);
         }
-        $tot = strlen($name);
+        $tot    = strlen($name);
         $output = '';
-        $word = false;
-        for ($i=0; $i < $tot; $i++) {
+        $word   = false;
+        for ($i = 0; $i < $tot; $i++) {
 
             if (preg_match('/[A-Z]/', $name[$i])) {
                 if ($word) {
@@ -366,6 +371,18 @@ class RstConvert
                 $word = true;
             }
         }
-        return $output.'.rst';
+        return $output . '.rst';
+    }
+
+    /**
+     * Convert an XML file name to the RST ZF2 standard naming convention
+     * For instance, Zend_Config-XmlIntro.xml become zend.config.xml-intro.rst
+     *
+     * @param  string $href
+     * @return string
+     */
+    public static function imageFileName($href)
+    {
+        return '../images/' . basename($href);
     }
 }

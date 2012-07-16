@@ -10,7 +10,7 @@
 
 namespace Zend\Form\View;
 
-use Zend\ServiceManager\ConfigurationInterface;
+use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\ServiceManager;
 
 /**
@@ -20,7 +20,7 @@ use Zend\ServiceManager\ServiceManager;
  * @package    Zend_Form
  * @subpackage View
  */
-class HelperConfiguration implements ConfigurationInterface
+class HelperConfig implements ConfigInterface
 {
     /**
      * @var array Pre-aliased view helpers

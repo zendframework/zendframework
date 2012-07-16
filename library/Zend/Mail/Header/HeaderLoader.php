@@ -29,7 +29,7 @@ class HeaderLoader extends PluginClassLoader
         'cc'           => 'Zend\Mail\Header\Cc',
         'contenttype'  => 'Zend\Mail\Header\ContentType',
         'content_type' => 'Zend\Mail\Header\ContentType',
-        'content-type' => 'Zend\Mail\Header\ContentType',        
+        'content-type' => 'Zend\Mail\Header\ContentType',
         'date'         => 'Zend\Mail\Header\Date',
         'from'         => 'Zend\Mail\Header\From',
         'message-id'   => 'Zend\Mail\Header\MessageId',

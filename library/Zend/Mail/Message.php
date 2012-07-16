@@ -434,8 +434,7 @@ class Message
 
         return (string) $this->body;
     }
-    
-    
+
     /**
      * Set the message id header value
      *

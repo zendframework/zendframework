@@ -16,7 +16,7 @@ use Zend\Acl\Role\GenericRole;
 use Zend\Acl\Resource\GenericResource;
 use Zend\Config\Factory as ConfigFactory;
 use Zend\Mvc\Router\RouteMatch;
-use Zend\Mvc\Service\ServiceManagerConfiguration;
+use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
 use Zend\I18n\Translator\Translator;
 use Zend\View\Renderer\PhpRenderer;
@@ -114,7 +114,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
                 'extra_config'         => array(
                     'service_manager' => array(
                         'factories' => array(
-                            'Configuration' => function() use ($config) {
+                            'Config' => function() use ($config) {
                                 return array(
                                     'navigation' => array(
                                         'default' => $config->get('nav_test1'),
@@ -127,8 +127,8 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfiguration);
-        $sm->setService('ApplicationConfiguration', $smConfig);
+        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfig);
+        $sm->setService('ApplicationConfig', $smConfig);
         $sm->get('ModuleManager')->loadModules();
         $sm->get('Application')->bootstrap();
         $sm->setFactory('Navigation', 'Zend\Navigation\Service\DefaultNavigationFactory');

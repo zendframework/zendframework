@@ -77,26 +77,6 @@ abstract class AbstractOptions implements ParameterObjectInterface
     }
 
     /**
-     * @param string $key name of option with underscore
-     * @return string name of setter method
-     * @throws Exception\BadMethodCallException if setter method is undefined
-     */
-    protected function assembleSetterNameFromKey($key)
-    {
-        return 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-    }
-
-    /**
-     * @param string $key name of option with underscore
-     * @return string name of getter method
-     * @throws Exception\BadMethodCallException if getter method is undefined
-     */
-    protected function assembleGetterNameFromKey($key)
-    {
-        return 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-    }
-
-    /**
      * @see ParameterObject::__set()
      * @param string $key
      * @param mixed $value
@@ -104,7 +84,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
      */
     public function __set($key, $value)
     {
-        $setter = $this->assembleSetterNameFromKey($key);
+        $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
         if ($this->__strictMode__ && !method_exists($this, $setter)) {
             throw new Exception\BadMethodCallException(
                 'The option "' . $key . '" does not '
@@ -122,7 +102,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
      */
     public function __get($key)
     {
-        $getter = $this->assembleGetterNameFromKey($key);
+        $getter = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
         if (!method_exists($this, $getter)) {
             throw new Exception\BadMethodCallException(
                 'The option "' . $key . '" does not '

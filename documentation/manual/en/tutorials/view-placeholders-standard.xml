@@ -441,7 +441,7 @@ site = {
             <itemizedlist>
                 <listitem>
                     <para>
-                        You can render your <methodname>headScript()</methodname> tag whereever you
+                        You can render your <methodname>headScript()</methodname> tag wherever you
                         like in your layout script; just because the title references "head" does
                         not mean it needs to be rendered in that location.
                     </para>

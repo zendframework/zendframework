@@ -24,7 +24,7 @@ class ServiceProviderModule
         $this->config = $config;
     }
 
-    public function getServiceConfiguration()
+    public function getServiceConfig()
     {
         return $this->config;
     }

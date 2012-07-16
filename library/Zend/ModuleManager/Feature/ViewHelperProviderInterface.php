@@ -23,5 +23,5 @@ interface ViewHelperProviderInterface
      *
      * @return array|\Zend\ServiceManager\Configuration
      */
-    public function getViewHelperConfiguration();
+    public function getViewHelperConfig();
 }

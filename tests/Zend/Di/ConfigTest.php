@@ -10,17 +10,17 @@
 
 namespace ZendTest\Di;
 
-use Zend\Di\Configuration;
+use Zend\Di\Config;
 use Zend\Di\Di;
 use Zend\Config\Factory as ConfigFactory;
 use PHPUnit_Framework_TestCase as TestCase;
 
-class ConfigurationTest extends TestCase
+class ConfigTest extends TestCase
 {
-    public function testConfigurationCanConfigureInstanceManagerWithIniFile()
+    public function testConfigCanConfigureInstanceManagerWithIniFile()
     {
         $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-a');
-        $config = new Configuration($ini->di);
+        $config = new Config($ini->di);
         $di = new Di();
         $di->configure($config);
 
@@ -41,20 +41,20 @@ class ConfigurationTest extends TestCase
         $this->assertTrue($im->hasTypePreferences('my-mapper'));
         $this->assertContains('my-dbAdapter', $im->getTypePreferences('my-mapper'));
 
-        $this->assertTrue($im->hasConfiguration('My\DbAdapter'));
+        $this->assertTrue($im->hasConfig('My\DbAdapter'));
         $expected = array('parameters' => array('username' => 'readonly', 'password' => 'mypassword'), 'injections' => array(), 'shared' => true);
-        $this->assertEquals($expected, $im->getConfiguration('My\DbAdapter'));
+        $this->assertEquals($expected, $im->getConfig('My\DbAdapter'));
 
-        $this->assertTrue($im->hasConfiguration('my-dbAdapter'));
+        $this->assertTrue($im->hasConfig('my-dbAdapter'));
         $expected = array('parameters' => array('username' => 'readwrite'), 'injections' => array(), 'shared' => true);
-        $this->assertEquals($expected, $im->getConfiguration('my-dbAdapter'));
+        $this->assertEquals($expected, $im->getConfig('my-dbAdapter'));
     }
 
-    public function testConfigurationCanConfigureBuilderDefinitionFromIni()
+    public function testConfigCanConfigureBuilderDefinitionFromIni()
     {
         $this->markTestIncomplete('Builder not updated to new DI yet');
         $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-b');
-        $config = new Configuration($ini->di);
+        $config = new Config($ini->di);
         $di = new Di($config);
         $definition = $di->getDefinition();
 
@@ -81,10 +81,10 @@ class ConfigurationTest extends TestCase
 
     }
 
-    public function testConfigurationCanConfigureRuntimeDefinitionDefaultFromIni()
+    public function testConfigCanConfigureRuntimeDefinitionDefaultFromIni()
     {
         $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-c');
-        $config = new Configuration($ini->di);
+        $config = new Config($ini->di);
         $di = new Di();
         $di->configure($config);
         $definition = $di->definitions()->getDefinitionByType('Zend\Di\Definition\RuntimeDefinition');
@@ -92,30 +92,30 @@ class ConfigurationTest extends TestCase
         $this->assertFalse($definition->getIntrospectionStrategy()->getUseAnnotations());
     }
 
-    public function testConfigurationCanConfigureRuntimeDefinitionDisabledFromIni()
+    public function testConfigCanConfigureRuntimeDefinitionDisabledFromIni()
     {
         $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-d');
-        $config = new Configuration($ini->di);
+        $config = new Config($ini->di);
         $di = new Di();
         $di->configure($config);
         $definition = $di->definitions()->getDefinitionByType('Zend\Di\Definition\RuntimeDefinition');
         $this->assertFalse($definition);
     }
 
-    public function testConfigurationCanConfigureRuntimeDefinitionUseAnnotationFromIni()
+    public function testConfigCanConfigureRuntimeDefinitionUseAnnotationFromIni()
     {
         $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-e');
-        $config = new Configuration($ini->di);
+        $config = new Config($ini->di);
         $di = new Di();
         $di->configure($config);
         $definition = $di->definitions()->getDefinitionByType('Zend\Di\Definition\RuntimeDefinition');
         $this->assertTrue($definition->getIntrospectionStrategy()->getUseAnnotations());
     }
 
-    public function testConfigurationCanConfigureCompiledDefinition()
+    public function testConfigCanConfigureCompiledDefinition()
     {
         $config = ConfigFactory::fromFile(__DIR__ . '/_files/sample.php', true);
-        $config = new Configuration($config->di);
+        $config = new Config($config->di);
         $di = new Di();
         $di->configure($config);
         $definition = $di->definitions()->getDefinitionByType('Zend\Di\Definition\ArrayDefinition');

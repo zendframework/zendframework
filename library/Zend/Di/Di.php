@@ -55,9 +55,9 @@ class Di implements DependencyInjectionInterface
      *
      * @param null|DefinitionList  $definitions
      * @param null|InstanceManager $instanceManager
-     * @param null|Configuration   $config
+     * @param null|Config   $config
      */
-    public function __construct(DefinitionList $definitions = null, InstanceManager $instanceManager = null, Configuration $config = null)
+    public function __construct(DefinitionList $definitions = null, InstanceManager $instanceManager = null, Config $config = null)
     {
         $this->definitions = ($definitions) ?: new DefinitionList(new Definition\RuntimeDefinition());
         $this->instanceManager = ($instanceManager) ?: new InstanceManager();
@@ -70,10 +70,10 @@ class Di implements DependencyInjectionInterface
     /**
      * Provide a configuration object to configure this instance
      *
-     * @param  Configuration $config
+     * @param  Config $config
      * @return void
      */
-    public function configure(Configuration $config)
+    public function configure(Config $config)
     {
         $config->configure($this);
     }
@@ -296,11 +296,11 @@ class Di implements DependencyInjectionInterface
             }
 
             if ($requestedName) {
-                $instanceConfiguration = $instanceManager->getConfiguration($requestedName);
+                $instanceConfig = $instanceManager->getConfig($requestedName);
 
-                if ($instanceConfiguration['injections']) {
+                if ($instanceConfig['injections']) {
                     $objectsToInject = $methodsToCall = array();
-                    foreach ($instanceConfiguration['injections'] as $injectName => $injectValue) {
+                    foreach ($instanceConfig['injections'] as $injectName => $injectValue) {
                         if (is_int($injectName) && is_string($injectValue)) {
                             $objectsToInject[] = $this->get($injectValue, $params);
                         } elseif (is_string($injectName) && is_array($injectValue)) {
@@ -483,13 +483,13 @@ class Di implements DependencyInjectionInterface
         $aliases = $this->instanceManager->getAliases();
 
         // for the alias in the dependency tree
-        if ($alias && $this->instanceManager->hasConfiguration($alias)) {
-            $iConfig['thisAlias'] = $this->instanceManager->getConfiguration($alias);
+        if ($alias && $this->instanceManager->hasConfig($alias)) {
+            $iConfig['thisAlias'] = $this->instanceManager->getConfig($alias);
         }
 
         // for the current class in the dependency tree
-        if ($this->instanceManager->hasConfiguration($class)) {
-            $iConfig['thisClass'] = $this->instanceManager->getConfiguration($class);
+        if ($this->instanceManager->hasConfig($class)) {
+            $iConfig['thisClass'] = $this->instanceManager->getConfig($class);
         }
 
         // for the parent class, provided we are deeper than one node
@@ -501,10 +501,10 @@ class Di implements DependencyInjectionInterface
             $requestedClass = $requestedAlias = null;
         }
 
-        if ($requestedClass != $class && $this->instanceManager->hasConfiguration($requestedClass)) {
-            $iConfig['requestedClass'] = $this->instanceManager->getConfiguration($requestedClass);
+        if ($requestedClass != $class && $this->instanceManager->hasConfig($requestedClass)) {
+            $iConfig['requestedClass'] = $this->instanceManager->getConfig($requestedClass);
             if ($requestedAlias) {
-                $iConfig['requestedAlias'] = $this->instanceManager->getConfiguration($requestedAlias);
+                $iConfig['requestedAlias'] = $this->instanceManager->getConfig($requestedAlias);
             }
         }
 
@@ -664,7 +664,7 @@ class Di implements DependencyInjectionInterface
                     );
                 }
                 array_push($this->currentDependencies, $class);
-                $dConfig = $this->instanceManager->getConfiguration($computedParams['required'][$fqParamPos][0]);
+                $dConfig = $this->instanceManager->getConfig($computedParams['required'][$fqParamPos][0]);
                 if ($dConfig['shared'] === false) {
                     $resolvedParams[$index] = $this->newInstance($computedParams['required'][$fqParamPos][0], $callTimeUserParams, false);
                 } else {

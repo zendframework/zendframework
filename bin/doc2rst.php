@@ -1,22 +1,13 @@
 #!/usr/bin/env php
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace ZendBin;
 
 use Zend\Console;
@@ -25,12 +16,15 @@ use Zend\Loader\StandardAutoloader;
 use Zend\Text\Table;
 
 /*
- * Convert the ZF documentation from DocBook to reStructuredText format
- *
+ * Convert a file from DocBook to reStructuredText format
+ * 
+ * Note: this script has been created to convert the Zend Framework
+ * documentation. We have not tested it with other docBook file formats.
+ * 
  * Usage:
  * --help|-h        Get usage message
  * --docbook|-d     Docbook file to convert
- * --output|-o      File output in reStructuredText format; By default,
+ * --output|-o      Output file in reStructuredText format; By default,
  *                  assumes <docbook>.rst
  */
 echo "DocBook to reStructuredText conversion for ZF documentation\n";
@@ -55,7 +49,7 @@ $loader->register();
 $rules = array(
     'help|h'      => 'Get usage message',
     'docbook|d-s' => 'Docbook file to convert',
-    'output|o-s'  => 'Output dir; if not provided, assumes normalize(<docbook>).rst"',
+    'output|o-s'  => 'Output file in reStructuredText format; By default assumes <docbook>.rst"',
 );
 
 try {
@@ -79,12 +73,11 @@ if (!file_exists($docbook)) {
 
 $rstFile = $opts->getOption('o');
 if (empty($rstFile)) {
-    $rstFile = '.';
-}
-
-if (is_dir($rstFile)) {
-    $rstFile = realpath($rstFile) . DIRECTORY_SEPARATOR;
-    $rstFile .= RstConvert::xmlFileNameToRst(basename($docbook));
+    $rstFile = $docbook;
+    if ('.xml' === substr($rstFile, -4)) {
+        $rstFile = substr($rstFile, 0, strlen($docbook)-4);
+    }
+    $rstFile .= '.rst';
 }
 
 // Load the docbook file (input)

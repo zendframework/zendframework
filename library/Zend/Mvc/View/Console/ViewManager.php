@@ -18,6 +18,7 @@ use Zend\Mvc\ApplicationInterface;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
+use Zend\Mvc\View\SendResponseListener;
 use Zend\ServiceManager\ConfigurationInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
@@ -139,6 +140,7 @@ class ViewManager implements ListenerAggregateInterface
         $createViewModelListener = new CreateViewModelListener();
 //        $injectTemplateListener  = new InjectTemplateListener();
         $injectViewModelListener = new InjectViewModelListener();
+        $sendResponseListener    = new SendResponseListener();
 
         $this->registerMvcRenderingStrategies($events);
         $this->registerViewStrategies();
@@ -147,6 +149,7 @@ class ViewManager implements ListenerAggregateInterface
 //        $events->attach($exceptionStrategy);
         $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
         $events->attach($mvcRenderingStrategy);
+        $events->attach($sendResponseListener);
 
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromString'), -80);

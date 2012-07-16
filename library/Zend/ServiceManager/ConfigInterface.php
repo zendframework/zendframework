@@ -10,7 +10,7 @@
 
 namespace Zend\ServiceManager;
 
-interface ConfigurationInterface
+interface ConfigInterface
 {
     public function configureServiceManager(ServiceManager $serviceManager);
 }

@@ -3,6 +3,7 @@ Subject: multipart
 Date: Sun, 01 Jan 2000 00:00:00 +0000
 From: =?UTF-8?Q?"Peter M=C3=BCller"?= <peter-mueller@example.com>
 ContENT-type: multipart/alternative; boUNDary="crazy-multipart"
+Message-ID: <CALTvGe4_oYgf9WsYgauv7qXh2-6=KbPLExmJNG7fCs9B=1nOYg@mail.example.com>
 MIME-version: 1.0
 
 multipart message

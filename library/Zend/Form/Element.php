@@ -126,6 +126,21 @@ class Element implements ElementInterface
     }
 
     /**
+     * return the specified option
+     * 
+     * @param string $option
+     * @return NULL|multitype:
+     */
+    public function getOption($option)
+    {
+        if (!isset($this->options[$option])) {
+            return null;
+        }
+        
+        return $this->options[$option];
+    }
+    
+    /**
      * Set a single element attribute
      *
      * @param  string $key

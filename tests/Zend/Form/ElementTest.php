@@ -94,7 +94,7 @@ class ElementTest extends TestCase
     public function testCanPassNameToConstructor()
     {
         $element = new Element('foo');
-        $this->assertEquals('foo', $element->getName());
+        $this->assertEquals('foo', $element->getName());unknown_type
     }
     
     public function testCanSetCustomOptionFromConstructor()
@@ -117,5 +117,15 @@ class ElementTest extends TestCase
         $options = $element->getOptions();
         $this->assertArrayHasKey('custom', $options);
         $this->assertEquals('option', $options['custom']);
+    }
+    
+    public function testCanRetrieveSpecificOption()
+    {
+        $element = new Element('foo');
+        $element->setOptions(array(
+            'custom' => 'option'
+        ));
+        $option = $element->getOption('custom');
+        $this->assertEquals('option', $option);
     }
 }

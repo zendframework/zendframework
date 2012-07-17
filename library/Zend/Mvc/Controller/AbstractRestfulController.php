@@ -252,7 +252,7 @@ abstract class AbstractRestfulController implements
      */
     public function processInputData(Request $request)
     {     
-        if ($request->getMethod() == 'post') {
+        if (strtolower($request->getMethod()) == 'post') {
             return $request->getPost()->toArray();
         } else {
             $content = $request->getContent();

@@ -10,8 +10,7 @@
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\ExtensionNotLoadedException;
-use Zend\Serializer\Exception\RuntimeException;
+use Zend\Serializer\Exception;
 
 /**
  * @link       http://www.infoloom.com/gcaconfs/WEB/chicago98/simeonov.HTM
@@ -20,52 +19,74 @@ use Zend\Serializer\Exception\RuntimeException;
  * @package    Zend_Serializer
  * @subpackage Adapter
  */
-class Wddx extends AbstractAdapter
+class Wddx implements AdapterInterface
 {
     /**
-     * @var array Default options
+     * Comment
+     *
+     * @var string
      */
-    protected $_options = array(
-        'comment' => null,
-    );
+    protected $comment = null;
 
     /**
      * Constructor
      *
-     * @param  array $options
-     * @return void
-     * @throws ExtensionNotLoadedException if wddx extension not found
+     * @param  string $comment
+     * @throws Exception\ExtensionNotLoadedException if wddx extension not found
      */
-    public function __construct($options = array())
+    public function __construct($comment = null)
     {
         if (!extension_loaded('wddx')) {
-            throw new ExtensionNotLoadedException('PHP extension "wddx" is required for this adapter');
+            throw new Exception\ExtensionNotLoadedException(
+                'PHP extension "wddx" is required for this adapter'
+            );
         }
 
-        parent::__construct($options);
+        if ($comment !== null) {
+            $this->comment = (string) $comment;
+        }
+    }
+
+    /**
+     * Set WDDX header comment
+     *
+     * @param  string $comment
+     * @return Wddx
+     */
+    public function setComment($comment)
+    {
+        $this->comment = (string) $comment;
+        return $this;
+    }
+
+    /**
+     * Get WDDX header comment
+     *
+     * @return null|string
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 
     /**
      * Serialize PHP to WDDX
      *
      * @param  mixed $value
-     * @param  array $opts
      * @return string
-     * @throws RuntimeException on wddx error
+     * @throws Exception\RuntimeException on wddx error
      */
-    public function serialize($value, array $opts = array())
+    public function serialize($value)
     {
-        $opts = $opts + $this->_options;
-
-        if (isset($opts['comment']) && $opts['comment']) {
-            $wddx = wddx_serialize_value($value, (string)$opts['comment']);
+        if ($this->comment) {
+            $wddx = wddx_serialize_value($value, $this->comment);
         } else {
             $wddx = wddx_serialize_value($value);
         }
 
         if ($wddx === false) {
             $lastErr = error_get_last();
-            throw new RuntimeException($lastErr['message']);
+            throw new Exception\RuntimeException('Serialization failed:' . $lastErr['message']);
         }
         return $wddx;
     }
@@ -74,11 +95,10 @@ class Wddx extends AbstractAdapter
      * Unserialize from WDDX to PHP
      *
      * @param  string $wddx
-     * @param  array $opts
      * @return mixed
-     * @throws RuntimeException on wddx error
+     * @throws Exception\RuntimeException on wddx error
      */
-    public function unserialize($wddx, array $opts = array())
+    public function unserialize($wddx)
     {
         $ret = wddx_deserialize($wddx);
 
@@ -90,9 +110,9 @@ class Wddx extends AbstractAdapter
                 if (isset($simpleXml->data[0]->null[0])) {
                     return null; // valid null
                 }
-                throw new RuntimeException('Invalid wddx');
+                throw new Exception\RuntimeException('Unserialization failed: Invalid wddx packet');
             } catch (\Exception $e) {
-                throw new RuntimeException($e->getMessage(), 0, $e);
+                throw new Exception\RuntimeException('Unserialization failed: ' . $e->getMessage(), 0, $e);
             }
         }
 

@@ -67,7 +67,7 @@ class PostRedirectGetTest extends TestCase
         )));
 
         $result         = $this->controller->dispatch($this->request, $this->response);
-        $prgResultUrl   = $this->controller->prg('/test/getPage');
+        $prgResultUrl   = $this->controller->prg('/test/getPage', true);
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultUrl);
         $this->assertTrue($prgResultUrl->getHeaders()->has('Location'));
@@ -95,5 +95,22 @@ class PostRedirectGetTest extends TestCase
         $prgResult = $this->controller->prg('home');
 
         $this->assertFalse($prgResult);
+    }
+
+    /**
+     * @expectedException Zend\Mvc\Exception\RuntimeException
+     */
+    public function testThrowsExceptionOnRouteWithoutRouter()
+    {
+        $controller = $this->controller;
+        $controller = $controller->getEvent()->setRouter(new SimpleRouteStack);
+
+        $this->request->setMethod('POST');
+        $this->request->setPost(new Parameters(array(
+            'postval1' => 'value'
+        )));
+
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->controller->prg('some/route');
     }
 }

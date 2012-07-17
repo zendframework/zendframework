@@ -277,14 +277,18 @@ return array(
     </para>
 
     <para>
-      This plugin can be invoked with one argument:
+      This plugin can be invoked with two arguments:
     </para>
 
     <listitem>
       <para>
         <varname>$redirect</varname> is a string containing either the name of the
-        named route or the URL the user should be directed to. The plugin will try
-        to match a route before redirecting to a URL.
+        named route or the URL the user should be directed to.
+      </para>
+      <para>
+        <varname>$redirectToUrl</varname> is a boolean. Passing true will cause the
+        treat the first parameter as a URL instead of a route name. This argument
+        defaults to false.
       </para>
     </listitem>
 
@@ -294,7 +298,7 @@ return array(
 
     <programlisting language="php">
 	// Pass in the route/url you want to redirect to after the POST
-	$prg = $this->prg('/user/register');
+	$prg = $this->prg('/user/register', true);
 
 	if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
 	    // returned a response to redirect us

@@ -11,7 +11,7 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Mvc\Router\Exception\RuntimeException;
+use Zend\Mvc\Exception\RuntimeException;
 
 /**
  * Plugin to help facilitate Post/Redirect/Get (http://en.wikipedia.org/wiki/Post/Redirect/Get)
@@ -22,26 +22,50 @@ use Zend\Mvc\Router\Exception\RuntimeException;
  */
 class PostRedirectGet extends AbstractPlugin
 {
-    public function __invoke($redirect)
+    public function __invoke($redirect, $redirectToUrl = false)
     {
         $controller = $this->getController();
         $request = $controller->getRequest();
-        $flashMessenger = $controller->flashMessenger()->setNamespace('prg-post');
+
+        if (method_exists($controller, 'getPluginManager')) {
+            $flashMessenger = $controller->getPluginManager()->get('FlashMessenger');
+        } else {
+            $flashMessenger = new FlashMessenger();
+        }
+
+        $flashMessenger->setNamespace('prg-post');
 
         if ($request->isPost()) {
             $flashMessenger->addMessage($request->getPost()->toArray());
-            try {
-                return $controller->redirect()->toRoute($redirect);
-            } catch (RuntimeException $e) {
-                return $controller->redirect()->toUrl($redirect);
+
+            if (method_exists($controller, 'getPluginManager')) {
+                // get the redirect plugin from the plugin manager
+                $redirector = $controller->getPluginManager()->get('Redirect');
+            } else {
+
+                /*
+                 * if the user wants to redirect to a route, the redirector has to come
+                 * from the plugin manager -- otherwise no router will be injected
+                 */
+                if ($redirectToUrl === false) {
+                    throw new RuntimeException('Could not redirect to a route without a router');
+                }
+
+                $redirector = new Redirect();
             }
+
+            if ($redirectToUrl === false) {
+                return $redirector->toRoute($redirect);
+            }
+
+            return $redirector->toUrl($redirect);
         } else {
             $messages = $flashMessenger->getMessages();
             if (count($messages)) {
                 return $messages[0];
-            } else {
-                return false;
             }
+
+            return false;
         }
     }
 }

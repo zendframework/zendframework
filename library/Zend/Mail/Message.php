@@ -436,40 +436,6 @@ class Message
     }
 
     /**
-     * Set the message id header value
-     *
-     * @param  string $id
-     * @return Message
-     */
-    public function setMessageId($id = null)
-    {
-        $headers = $this->getHeaders();
-        if (!$headers->has('message-id')) {
-            $header = new Header\MessageId();
-            $headers->addHeader($header);
-        } else {
-            $header = $headers->get('message-');
-        }
-        $header->setId($id);
-        return $this;
-    }
-
-    /**
-    * Get the message id header value
-    *
-    * @return null|string
-    */
-    public function getMessageId()
-    {
-        $headers = $this->getHeaders();
-        if (!$headers->has('message-id')) {
-            return null;
-        }
-        $header = $headers->get('message-id');
-        return $header->getFieldValue();
-    }
-
-    /**
      * Retrieve a header by name
      *
      * If not found, instantiates one based on $headerClass.

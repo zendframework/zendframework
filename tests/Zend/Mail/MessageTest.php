@@ -470,21 +470,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $header = $headers->get('subject');
         $this->assertEquals('test subject', $header->getFieldValue());
     }
-    
-    public function testMessageIdIsEmptyByDefault()
-    {
-        $this->assertNull($this->message->getMessageId());
-    }
-    
-    public function testSettingMessageIdProxiesToHeader()
-    {
-        $this->message->setMessageId();
-        $headers = $this->message->getHeaders();
-        $this->assertInstanceOf('Zend\Mail\Headers', $headers);
-        $this->assertTrue($headers->has('message-id'));
-        $header = $headers->get('message-id');
-        $this->assertContains('@', $header->getFieldValue());
-    }
 
     public function testBodyIsEmptyByDefault()
     {

@@ -30,7 +30,7 @@ class MathTest extends \PHPUnit_Framework_TestCase
 
     public function testRandBytes()
     {
-        for ($length=1; $length<4096; $length++) {
+        for ($length = 1; $length < 4096; $length++) {
             $rand = Math::randBytes($length);
             $this->assertTrue($rand !== false);
             $this->assertEquals($length, strlen($rand));
@@ -81,24 +81,4 @@ class MathTest extends \PHPUnit_Framework_TestCase
             $this->fail('The random number generator failed the Monte Carlo test');
         }
     }
-
-    public function testRandBigInteger()
-    {
-        try {
-            $math = new \Zend\Math\BigInteger\BigInteger();
-        } catch (\Zend\Math\BigInteger\Exception\RuntimeException $e) {
-            if (strpos($e->getMessage(), 'math support is not detected') !== false) {
-                $this->markTestSkipped($e->getMessage());
-            } else {
-                throw $e;
-            }
-        }
-        $math = new Math;
-        $higher = '155172898181473697471232257763715539915724801966915404479707795314057629378541917580651227423698188993727816152646631438561595825688188889951272158842675419950341258706556549803580104870537681476726513255747040765857479291291572334510643245094715007229621094194349783925984760375594985848253359305585439638443';
-        $lower  = '155172898181473697471232257763715539915724801966915404479707795314057629378541917580651227423698188993727816152646631438561595825688188889951272158842675419950341258706556549803580104870537681476726513255747040765857479291291572334510643245094715007229621094194349783925984760375594985848253359305585439638442';
-        $result = $math->rand($lower, $higher);
-        $this->assertTrue(bccomp($result, $higher) !== '1');
-        $this->assertTrue(bccomp($result, $lower) !== '-1');
-    }
-
 }

@@ -28,37 +28,37 @@ class BigIntegerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (extension_loaded('bcmath')) {
-            $this->adapters['bcmath'] = true;
-            $this->availableAdapter = 'Bcmath';
-        }
-        if (extension_loaded('gmp')) {
-            $this->adapters['gmp'] = true;
-            $this->availableAdapter = 'Gmp';
-        }
-
-        if (null == $this->availableAdapter) {
+        if (!extension_loaded('bcmath') && !extension_loaded('gmp')) {
             $this->markTestSkipped('Missing bcmath or gmp extensions');
         }
     }
 
-    public function testFactoryValidAdapter()
+    public function testFactoryCreatesBcmathAdapter()
     {
-        if ($this->availableAdapter === 'Gmp') {
-            $bigInt = BigInt::factory('Gmp');
-            $this->assertTrue($bigInt instanceof Adapter\Gmp);
-        } elseif ($this->availableAdapter === 'Bcmath') {
-            $bigInt = BigInt::factory('Bcmath');
-            $this->assertTrue($bigInt instanceof Adapter\Bcmath);
+        if (!extension_loaded('bcmath')) {
+            $this->markTestSkipped('Missing bcmath extensions');
         }
+
+        $bigInt = BigInt::factory('Bcmath');
+        $this->assertTrue($bigInt instanceof Adapter\Bcmath);
     }
 
-    public function testFactoryNoAdapter()
+    public function testFactoryCreatesGmpAdapter()
+    {
+        if (!extension_loaded('gmp')) {
+            $this->markTestSkipped('Missing gmp extensions');
+        }
+
+        $bigInt = BigInt::factory('Gmp');
+        $this->assertTrue($bigInt instanceof Adapter\Gmp);
+    }
+
+    public function testFactoryUsesDefaultAdapter()
     {
         $this->assertTrue(BigInt::factory() instanceof AdapterInterface);
     }
 
-    public function testFactoryUnknownAdapter()
+    public function testFactoryUnknownAdapterRaisesServiceManagerException()
     {
         $this->setExpectedException('Zend\ServiceManager\Exception\ExceptionInterface');
         BigInt::factory('unknown');

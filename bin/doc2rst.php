@@ -140,7 +140,7 @@ class RstConvert
     public static $footnote = array();
 
     /**
-     * Indent a text 4 spaces
+     * Indent the text 3 spaces by default
      *
      * @param  string $text
      * @return string
@@ -154,6 +154,46 @@ class RstConvert
                 $output .= "\n";
             } else {
                 $output .= "   $row\n";
+            }
+        }
+        return $output;
+    }
+
+    /**
+     * Indent the text 2 spaces
+     *
+     * @param  string $text
+     * @return string
+     */
+    public static function indent2($text)
+    {
+        $rows   = explode("\n", $text);
+        $output = '';
+        foreach ($rows as $row) {
+            if ($row === '' || preg_match('/^\s+$/', $row)) {
+                $output .= "\n";
+            } else {
+                $output .= "  $row\n";
+            }
+        }
+        return $output;
+    }
+
+    /**
+     * Indent the text 7 spaces
+     *
+     * @param  string $text
+     * @return string
+     */
+    public static function indent7($text)
+    {
+        $rows   = explode("\n", $text);
+        $output = '';
+        foreach ($rows as $row) {
+            if ($row === '' || preg_match('/^\s+$/', $row)) {
+                $output .= "\n";
+            } else {
+                $output .= "       $row\n";
             }
         }
         return $output;
@@ -175,7 +215,7 @@ class RstConvert
         if ($top) {
             $output = $line . "\n" . $output;
         }
-        return "\n" . $output . "\n";
+        return $output . "\n";
     }
 
     /**
@@ -188,27 +228,35 @@ class RstConvert
      */
     public static function formatText($text, $preceding = false, $following = false)
     {
-        $text = self::escapeChars(trim(preg_replace('/\s+/m', ' ', $text)));
-        if (!empty($preceding)) {
-            // Escape whitespace for plurals
-            if (preg_match('/^s\s/', $text)) {
-                $text = '\ ' . $text;
-            } elseif (!in_array($text[0],
-                                array('-', '.', ',', ':', ';', '!', '?', '\\', '/', "'", '"', ')', ']', '}', '>', ' '))
+        $hasPreceding = !empty($preceding);
+        $hasFollowing = !empty($following);
+        $escaped = self::escapeChars(trim(preg_replace('/\s+/m', ' ', $text)));
+
+        if ($hasPreceding) {
+            if (!in_array($escaped[0],
+                          array('-', '.', ',', ':', ';', '!', '?', '\\', '/', "'", '"', ')', ']', '}', '>', ' '))
             ) {
-                $text = ' ' . $text;
+                $escaped = ' ' . $escaped;
+                if (preg_match('/[^\s]/', $text[0])) {
+                    $escaped = '\\' . $escaped;
+                }
+            }
+        } else {
+            // Escape characters in the bullet list or format character
+            if (preg_match('/^([-\+•‣⁃]($|\s)|[_`\*\|])/', $escaped)) {
+                $escaped = '\\' . $escaped;
             }
         }
 
-        if (!empty($following)) {
+        if ($hasFollowing) {
             if ($following[0]->localName == 'superscript') {
-                $text .= '\ ';
-            } elseif (!in_array(substr($text, -1), array('-', '/', "'", '"', '(', '[', '{', '<', ' '))) {
+                $escaped .= '\ ';
+            } elseif (!in_array(substr($escaped, -1), array('-', '/', "'", '"', '(', '[', '{', '<', ' '))) {
                 // Omitted  ':' in the list
-                $text .= ' ';
+                $escaped .= ' ';
             }
         }
-        return $text;
+        return $escaped;
     }
 
     /**
@@ -222,6 +270,18 @@ class RstConvert
         // Exclude special character if preceded by any valid preceded character
         return preg_replace('/((([-:\/\'"\(\[\{<\s])([_`\*\|][^\s]))|([_][-\.,:;!?\/\\\'"\)\]\}>\s]))/S', '$3\\\$4$5',
                             str_replace('\\', '\\\\', $text));
+    }
+
+    /**
+     * Escape an specific char
+     *
+     * @param  string $text
+     * @param  string $char Char to escape
+     * @return string
+     */
+    public static function escapeChar($text, $char)
+    {
+        return preg_replace(sprintf('/([^\s])(\\%s[^-\.,:;!?\/\\\'"\)\]\}>\s])/', $char), '$1\\\$2', $text);
     }
 
     /**
@@ -249,8 +309,7 @@ class RstConvert
      */
     public static function footnote($value)
     {
-        $value = self::formatText($value);
-        self::$footnote[] = ".. [#] $value";
+        self::$footnote[] = '.. [#] ' . trim($value);
         return '[#]_';
     }
 

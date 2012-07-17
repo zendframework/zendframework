@@ -135,5 +135,4 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'eval failed: syntax error');
         $this->adapter->unserialize($value);
     }
-
 }

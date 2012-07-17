@@ -18,7 +18,7 @@ use Zend\Stdlib\ErrorHandler;
  * @package    Zend_Serializer
  * @subpackage Adapter
  */
-class PhpSerialize extends AbstractAdapter
+class PhpSerialize implements AdapterInterface
 {
     /**
      * Serialized boolean false value

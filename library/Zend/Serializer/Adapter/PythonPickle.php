@@ -23,7 +23,7 @@ use Zend\Serializer\Exception;
  * @package    Zend_Serializer
  * @subpackage Adapter
  */
-class PythonPickle extends AbstractAdapter
+class PythonPickle implements AdapterInterface
 {
     /**
      * Pickle opcodes. See pickletools.py for extensive docs.

@@ -40,17 +40,6 @@ class CaptureCache extends AbstractPattern
             throw new Exception\RuntimeException("Capturing already stated with page id '{$this->pageId}'");
         }
 
-        $classOptions = $this->getOptions();
-
-        if (isset($options['tags'])) {
-            $classOptions->setTags($options['tags']);
-            unset($options['tags']);
-        }
-
-        if ($classOptions->getTags() && !$classOptions->getTagStorage()) {
-            throw new Exception\RuntimeException('Tags are defined but missing a tag storage');
-        }
-
         if (($pageId = (string) $pageId) === '') {
             $pageId = $this->detectPageId();
         }
@@ -77,8 +66,8 @@ class CaptureCache extends AbstractPattern
         }
 
         $file = $this->getOptions()->getPublicDir()
-              . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
-              . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+              . \DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
+              . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         if (file_exists($file)) {
             ErrorHandler::start(E_WARNING);
@@ -108,8 +97,8 @@ class CaptureCache extends AbstractPattern
         }
 
         $file = $this->getOptions()->getPublicDir()
-              . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
-              . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+              . \DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
+              . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         return file_exists($file);
     }
@@ -129,8 +118,8 @@ class CaptureCache extends AbstractPattern
         }
 
         $file = $this->getOptions()->getPublicDir()
-              . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
-              . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+              . \DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
+              . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         if (file_exists($file)) {
             if (!@unlink($file)) {
@@ -186,8 +175,8 @@ class CaptureCache extends AbstractPattern
         $path = rtrim(dirname($pageId), '/');
 
         // convert requested "/" to the valid local directory separator
-        if ('/' != DIRECTORY_SEPARATOR) {
-            $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
+        if ('/' != \DIRECTORY_SEPARATOR) {
+            $path = str_replace('/', \DIRECTORY_SEPARATOR, $path);
         }
 
         return $path;
@@ -223,25 +212,6 @@ class CaptureCache extends AbstractPattern
 
         $this->createDirectoryStructure($publicDir . \DIRECTORY_SEPARATOR . $path);
         $this->putFileContent($publicDir . \DIRECTORY_SEPARATOR . $file, $output);
-
-        $tagStorage = $options->getTagStorage();
-        if ($tagStorage) {
-            $tagKey     = $options->getTagKey();
-            $tagIndex = $tagStorage->getTagStorage()->getItem($tagKey);
-            if (!$tagIndex) {
-                $tagIndex = null;
-            }
-
-            if ($this->tags) {
-                $tagIndex[$file] = &$this->tags;
-            } elseif ($tagIndex) {
-                unset($tagIndex[$file]);
-            }
-
-            if ($tagIndex !== null) {
-                $tagStorage->setItem($tagKey, $tagIndex);
-            }
-        }
     }
 
     /**

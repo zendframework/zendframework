@@ -148,27 +148,6 @@ class PatternOptions extends AbstractOptions
     protected $storage;
 
     /**
-     * Used by:
-     * - CaptureCache
-     * @var string
-     */
-    protected $tagKey = 'ZendCachePatternCaptureCache_Tags';
-
-    /**
-     * Used by:
-     * - CaptureCache
-     * @var array
-     */
-    protected $tags = array();
-
-    /**
-     * Used by:
-     * - CaptureCache
-     * @var null|Storage
-     */
-    protected $tagStorage;
-
-    /**
      * Constructor
      *
      * @param  array|Traversable|null $options
@@ -707,88 +686,6 @@ class PatternOptions extends AbstractOptions
     public function getStorage()
     {
         return $this->storage;
-    }
-
-    /**
-     * Set tag key
-     *
-     * @param  string $tagKey
-     * @return PatternOptions
-     */
-    public function setTagKey($tagKey)
-    {
-        if (($tagKey = (string)$tagKey) === '') {
-            throw new Exception\InvalidArgumentException("Missing tag key '{$tagKey}'");
-        }
-
-        $this->tagKey = $tagKey;
-        return $this;
-    }
-
-    /**
-     * Get tag key
-     *
-     * @return string
-     */
-    public function getTagKey()
-    {
-        return $this->tagKey;
-    }
-
-    /**
-     * Set tags
-     *
-     * Used by:
-     * - CaptureCache
-     *
-     * @param  array $tags
-     * @return PatternOptions
-     */
-    public function setTags(array $tags)
-    {
-        $this->tags = $tags;
-        return $this;
-    }
-
-    /**
-     * Get tags
-     *
-     * Used by:
-     * - CaptureCache
-     *
-     * @return array
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * Set storage adapter for tags
-     *
-     * Used by:
-     * - CaptureCache
-     *
-     * @param  string|array|Storage $tagStorage
-     * @return PatternOptions
-     */
-    public function setTagStorage($tagStorage)
-    {
-        $this->tagStorage = $this->storageFactory($tagStorage);
-        return $this;
-    }
-
-    /**
-     * Get storage adapter for tags
-     *
-     * Used by:
-     * - CaptureCache
-     *
-     * @return null|Storage
-     */
-    public function getTagStorage()
-    {
-        return $this->tagStorage;
     }
 
     /**

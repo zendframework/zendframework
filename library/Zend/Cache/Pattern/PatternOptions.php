@@ -723,30 +723,6 @@ class PatternOptions extends AbstractOptions
     }
 
     /**
-     * Normalize a umask
-     *
-     * Allows specifying a umask as either an octal or integer. If the umask
-     * fails required permissions, raises an exception.
-     *
-     * @param  int|string $umask
-     * @param  callable   $comparison Callback used to verify the umask is acceptable for the given purpose
-     * @return int
-     * @throws Exception\InvalidArgumentException
-     */
-    protected function normalizeUmask($umask, $comparison)
-    {
-        if (is_string($umask)) {
-            $umask = octdec($umask);
-        } else {
-            $umask = (int)$umask;
-        }
-
-        $comparison($umask);
-
-        return $umask;
-    }
-
-    /**
      * Create a storage object from a given specification
      *
      * @param  array|string|Storage $storage

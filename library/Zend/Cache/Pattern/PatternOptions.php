@@ -697,9 +697,7 @@ class PatternOptions extends AbstractOptions
      */
     protected function recursiveStrtolower(array $array)
     {
-        return array_values(array_unique(array_map(function($value) {
-            return strtolower($value);
-        }, $array)));
+        return array_values(array_unique(array_map('strtolower', $array)));
     }
 
     /**

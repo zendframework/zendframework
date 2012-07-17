@@ -68,12 +68,13 @@ class CaptureCache extends AbstractPattern
               . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         if (file_exists($file)) {
-            ErrorHandler::start(E_WARNING);
+            ErrorHandler::start();
             $content = file_get_contents($file);
-            ErrorHandler::stop();
+            $error   = ErrorHandler::stop();
             if ($content === false) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException("Failed to read cached pageId '{$pageId}': {$lastErr['message']}");
+                throw new Exception\RuntimeException(
+                    "Failed to read cached pageId '{$pageId}'", 0, $error
+                );
             }
             return $content;
         }
@@ -118,9 +119,13 @@ class CaptureCache extends AbstractPattern
               . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         if (file_exists($file)) {
-            if (!@unlink($file)) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException("Failed to remove cached pageId '{$pageId}': {$lastErr['message']}");
+            ErrorHandler::start();
+            $res = unlink($file);
+            $err = ErrorHandler::stop();
+            if (!$res) {
+                throw new Exception\RuntimeException(
+                    "Failed to remove cached pageId '{$pageId}'", 0, $err
+                );
             }
         }
     }

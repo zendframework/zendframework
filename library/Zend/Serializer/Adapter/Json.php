@@ -11,43 +11,77 @@
 namespace Zend\Serializer\Adapter;
 
 use Zend\Json\Json as ZendJson;
-use Zend\Serializer\Exception\InvalidArgumentException;
-use Zend\Serializer\Exception\RuntimeException;
+use Zend\Serializer\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
  */
-class Json extends AbstractAdapter
+class Json implements AdapterInterface
 {
     /**
-     * @var array Default options
+     * @var JsonOptions
      */
-    protected $_options = array(
-        'cycleCheck'           => false,
-        'enableJsonExprFinder' => false,
-        'objectDecodeType'     => ZendJson::TYPE_ARRAY,
-    );
+    protected $options = null;
+
+    /**
+     * Constructor.
+     *
+     * @param  JsonOptions $options Optional
+     */
+    public function __construct(JsonOptions $options = null)
+    {
+        if ($options === null) {
+            $options = new JsonOptions();;
+        }
+        $this->options = $options;
+    }
+
+    /**
+     * Set options
+     *
+     * @param  JsonOptions $options
+     * @return Json
+     */
+    public function setOptions(JsonOptions $options)
+    {
+        $this->options = $options;
+        return $this;
+    }
+
+    /**
+     * Get options
+     *
+     * @return JsonOptions
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
 
     /**
      * Serialize PHP value to JSON
      *
      * @param  mixed $value
-     * @param  array $opts
      * @return string
-     * @throws InvalidArgumentException|RuntimeException on JSON encoding exception
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
-    public function serialize($value, array $opts = array())
+    public function serialize($value)
     {
-        $opts = $opts + $this->_options;
+        $cycleCheck = $this->options->getCycleCheck();
+        $opts = array(
+            'enableJsonExprFinder' => $this->options->getEnableJsonExprFinder(),
+            'objectDecodeType'     => $this->options->getObjectDecodeType(),
+        );
 
         try  {
-            return ZendJson::encode($value, $opts['cycleCheck'], $opts);
+            return ZendJson::encode($value, $cycleCheck, $opts);
         } catch (\InvalidArgumentException $e) {
-            throw new InvalidArgumentException('Serialization failed: ' . $e->getMessage(), 0, $e);
+            throw new Exception\InvalidArgumentException('Serialization failed: ' . $e->getMessage(), 0, $e);
         } catch (\Exception $e) {
-            throw new RuntimeException('Serialization failed: ' . $e->getMessage(), 0, $e);
+            throw new Exception\RuntimeException('Serialization failed: ' . $e->getMessage(), 0, $e);
         }
     }
 
@@ -55,20 +89,18 @@ class Json extends AbstractAdapter
      * Deserialize JSON to PHP value
      *
      * @param  string $json
-     * @param  array $opts
      * @return mixed
-     * @throws InvalidArgumentException|RuntimeException
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
-    public function unserialize($json, array $opts = array())
+    public function unserialize($json)
     {
-        $opts = $opts + $this->_options;
-
         try {
-            $ret = ZendJson::decode($json, $opts['objectDecodeType']);
+            $ret = ZendJson::decode($json, $this->options->getObjectDecodeType());
         } catch (\InvalidArgumentException $e) {
-            throw new InvalidArgumentException('Unserialization failed: ' . $e->getMessage(), 0, $e);
+            throw new Exception\InvalidArgumentException('Unserialization failed: ' . $e->getMessage(), 0, $e);
         } catch (\Exception $e) {
-            throw new RuntimeException('Unserialization failed: ' . $e->getMessage(), 0, $e);
+            throw new Exception\RuntimeException('Unserialization failed: ' . $e->getMessage(), 0, $e);
         }
 
         return $ret;

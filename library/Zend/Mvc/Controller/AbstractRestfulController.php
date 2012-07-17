@@ -210,7 +210,7 @@ abstract class AbstractRestfulController implements
                     break;
                 case 'post':
                     $action = 'create';
-                    $return = $this->create($request->getPost()->toArray());
+                    $return = $this->create($this->processInputData($request));
                     break;
                 case 'put':
                     if (null === $id = $routeMatch->getParam('id')) {
@@ -218,10 +218,8 @@ abstract class AbstractRestfulController implements
                             throw new \DomainException('Missing identifier');
                         }
                     }
-                    $content = $request->getContent();
-                    parse_str($content, $parsedParams);
-                    $action = 'update';
-                    $return = $this->update($id, $parsedParams);
+					$action = 'update';
+                    $return = $this->update($id, $this->processInputData($request));
                     break;
                 case 'delete':
                     if (null === $id = $routeMatch->getParam('id')) {
@@ -244,6 +242,23 @@ abstract class AbstractRestfulController implements
         // If a listener returns a response object, return it immediately
         $e->setResult($return);
         return $return;
+    }
+
+	/**
+     * Process input data and return as array 
+     * 
+     * @param Request $request
+     * @return array 
+     */
+    public function processInputData(Request $request)
+    {     
+		if ($request->getMethod() == 'post') {
+			return $request->getPost()->toArray();
+		} else {
+			$content = $request->getContent();
+			parse_str($content, $parsedParams);
+			return $parsedParams;
+		}
     }
 
     /**

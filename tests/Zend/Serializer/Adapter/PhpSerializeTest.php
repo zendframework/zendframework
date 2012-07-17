@@ -21,24 +21,27 @@ use Zend\Serializer;
 class PhpSerializeTest extends \PHPUnit_Framework_TestCase
 {
 
-    private $_adapter;
+    /**
+     * @var Serializer\Adapter\PhpSerialize
+     */
+    private $adapter;
 
     public function setUp()
     {
-        $this->_adapter = new Serializer\Adapter\PhpSerialize();
+        $this->adapter = new Serializer\Adapter\PhpSerialize();
     }
 
     public function tearDown()
     {
-        $this->_adapter = null;
+        $this->adapter = null;
     }
 
     public function testSerializeString()
     {
-        $value      = 'test';
-        $expected   = 's:4:"test";';
+        $value    = 'test';
+        $expected = 's:4:"test";';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -47,7 +50,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
         $value    = false;
         $expected = 'b:0;';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -56,7 +59,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
         $value    = null;
         $expected = 'N;';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -65,7 +68,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
         $value    = 100;
         $expected = 'i:100;';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -74,7 +77,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
         $value    = new \stdClass();
         $expected = 'O:8:"stdClass":0:{}';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -83,7 +86,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
         $value    = 's:4:"test";';
         $expected = 'test';
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -92,7 +95,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
         $value    = 'b:0;';
         $expected = false;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -101,7 +104,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
         $value    = 'N;';
         $expected = null;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -110,7 +113,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
         $value    = 'i:100;';
         $expected = 100;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -119,20 +122,20 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
         $value    = 'O:8:"stdClass":0:{}';
         $expected = new \stdClass();
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
     public function testUnserializingNonserializedStringReturnsItVerbatim()
     {
         $value = 'not a serialized string';
-        $this->assertEquals($value, $this->_adapter->unserialize($value));
+        $this->assertEquals($value, $this->adapter->unserialize($value));
     }
 
     public function testUnserializingInvalidStringRaisesException()
     {
         $value = 'a:foobar';
         $this->setExpectedException('Zend\Serializer\Exception\RuntimeException');
-        $this->_adapter->unserialize($value);
+        $this->adapter->unserialize($value);
     }
 }

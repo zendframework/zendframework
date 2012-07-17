@@ -21,25 +21,27 @@ use Zend\Serializer\Exception;
  */
 class PhpCodeTest extends \PHPUnit_Framework_TestCase
 {
-
-    private $_adapter;
+    /**
+     * @var Serializer\Adapter\PhpCode
+     */
+    private $adapter;
 
     public function setUp()
     {
-        $this->_adapter = new Serializer\Adapter\PhpCode();
+        $this->adapter = new Serializer\Adapter\PhpCode();
     }
 
     public function tearDown()
     {
-        $this->_adapter = null;
+        $this->adapter = null;
     }
 
     public function testSerializeString()
     {
-        $value      = 'test';
-        $expected   = "'test'";
+        $value    = 'test';
+        $expected = "'test'";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -48,7 +50,7 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
         $value    = false;
         $expected = 'false';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -57,7 +59,7 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
         $value    = null;
         $expected = 'NULL';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -66,7 +68,7 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
         $value    = 100.12345;
         $expected = '100.12345';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -75,7 +77,7 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
         $value    = new \stdClass();
         $expected = "stdClass::__set_state(array(\n))";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -84,7 +86,7 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
         $value    = "'test'";
         $expected = 'test';
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -93,7 +95,7 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
         $value    = 'false';
         $expected = false;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -102,7 +104,7 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
         $value    = 'NULL';
         $expected = null;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -111,7 +113,7 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
         $value    = '100';
         $expected = 100;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -121,7 +123,7 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
         $value    = "stdClass::__set_state(array(\n))";
         $expected = new stdClass();
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 */
@@ -131,7 +133,7 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
         $value = 'not a serialized string';
 
         $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'eval failed: syntax error');
-        $this->_adapter->unserialize($value);
+        $this->adapter->unserialize($value);
     }
 
 }

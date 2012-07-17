@@ -218,7 +218,7 @@ abstract class AbstractRestfulController implements
                             throw new \DomainException('Missing identifier');
                         }
                     }
-					$action = 'update';
+                    $action = 'update';
                     $return = $this->update($id, $this->processInputData($request));
                     break;
                 case 'delete':
@@ -244,7 +244,7 @@ abstract class AbstractRestfulController implements
         return $return;
     }
 
-	/**
+    /**
      * Process input data and return as array 
      * 
      * @param Request $request
@@ -252,13 +252,13 @@ abstract class AbstractRestfulController implements
      */
     public function processInputData(Request $request)
     {     
-		if ($request->getMethod() == 'post') {
-			return $request->getPost()->toArray();
-		} else {
-			$content = $request->getContent();
-			parse_str($content, $parsedParams);
-			return $parsedParams;
-		}
+        if ($request->getMethod() == 'post') {
+            return $request->getPost()->toArray();
+        } else {
+            $content = $request->getContent();
+            parse_str($content, $parsedParams);
+            return $parsedParams;
+        }
     }
 
     /**

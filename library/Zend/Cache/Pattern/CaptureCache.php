@@ -53,14 +53,17 @@ class CaptureCache extends AbstractPattern
      */
     public function set($content, $pageId = null)
     {
+        $publicDir = $this->getOptions()->getPublicDir();
+        if ($publicDir === null) {
+            throw new Exception\LogicException("Option 'public_dir' no set");
+        }
+
         if ($pageId === null) {
             $pageId = $this->detectPageId();
         }
 
-        $options   = $this->getOptions();
-        $publicDir = $options->getPublicDir();
-        $path      = $this->pageId2Path($pageId);
-        $file      = $path . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+        $path = $this->pageId2Path($pageId);
+        $file = $path . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         $this->createDirectoryStructure($publicDir . \DIRECTORY_SEPARATOR . $path);
         $this->putFileContent($publicDir . \DIRECTORY_SEPARATOR . $file, $content);
@@ -75,13 +78,18 @@ class CaptureCache extends AbstractPattern
      */
     public function get($pageId = null)
     {
+        $publicDir = $this->getOptions()->getPublicDir();
+        if ($publicDir === null) {
+            throw new Exception\LogicException("Option 'public_dir' no set");
+        }
+
         if ($pageId === null) {
             $pageId = $this->detectPageId();
         }
 
-        $file = $this->getOptions()->getPublicDir()
-              . \DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
-              . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+        $file = $publicDir
+            . \DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
+            . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         if (file_exists($file)) {
             ErrorHandler::start();
@@ -104,13 +112,18 @@ class CaptureCache extends AbstractPattern
      */
     public function has($pageId = null)
     {
+        $publicDir = $this->getOptions()->getPublicDir();
+        if ($publicDir === null) {
+            throw new Exception\LogicException("Option 'public_dir' no set");
+        }
+
         if ($pageId === null) {
             $pageId = $this->detectPageId();
         }
 
-        $file = $this->getOptions()->getPublicDir()
-              . \DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
-              . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+        $file = $publicDir
+            . \DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
+            . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         return file_exists($file);
     }
@@ -124,13 +137,18 @@ class CaptureCache extends AbstractPattern
      */
     public function remove($pageId = null)
     {
+        $publicDir = $this->getOptions()->getPublicDir();
+        if ($publicDir === null) {
+            throw new Exception\LogicException("Option 'public_dir' no set");
+        }
+
         if ($pageId === null) {
             $pageId = $this->detectPageId();
         }
 
-        $file = $this->getOptions()->getPublicDir()
-              . \DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
-              . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+        $file = $publicDir
+            . \DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
+            . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         if (file_exists($file)) {
             ErrorHandler::start();
@@ -148,11 +166,26 @@ class CaptureCache extends AbstractPattern
     }
 
     /**
-     * Clear cache
+     * Clear cached pages matching glob pattern
+     *
+     * @param string $pattern
      */
-    public function clear(/*TODO*/)
+    public function clearByGlob($pattern = '**')
     {
-        // TODO
+        $publicDir = $this->getOptions()->getPublicDir();
+        if ($publicDir === null) {
+            throw new Exception\LogicException("Option 'public_dir' no set");
+        }
+
+        $it = new \GlobIterator(
+            $publicDir . '/' . $pattern,
+            \GlobIterator::CURRENT_AS_SELF | \GlobIterator::SKIP_DOTS | \GlobIterator::UNIX_PATHS
+        );
+        foreach ($it as $pathname => $entry) {
+            if ($entry->isFile()) {
+                unlink($pathname);
+            }
+        }
     }
 
     /**

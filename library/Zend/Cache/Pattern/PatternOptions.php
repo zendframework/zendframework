@@ -637,7 +637,23 @@ class PatternOptions extends AbstractOptions
      */
     public function setPublicDir($publicDir)
     {
-        $this->publicDir = (string) $publicDir;
+        $publicDir = (string) $publicDir;
+
+        if (!is_dir($publicDir)) {
+            throw new Exception\InvalidArgumentException(
+                "Public directory '{$publicDir}' not found or not a directoy"
+            );
+        } elseif (!is_writable($publicDir)) {
+            throw new Exception\InvalidArgumentException(
+                "Public directory '{$publicDir}' not writable"
+            );
+        } elseif (!is_readable($publicDir)) {
+            throw new Exception\InvalidArgumentException(
+                "Public directory '{$publicDir}' not readable"
+            );
+        }
+
+        $this->publicDir = rtrim(realpath($publicDir), \DIRECTORY_SEPARATOR);
         return $this;
     }
 

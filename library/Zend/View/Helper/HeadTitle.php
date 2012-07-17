@@ -109,9 +109,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone
 
         $items = array();
 
-        if ($this->isTranslatorEnabled()
-            && null !== ($translator = $this->getTranslator())
-        ) {
+        if (null !== ($translator = $this->getTranslator())) {
             foreach ($this as $item) {
                 $items[] = $translator->translate(
                     $item, $this->getTranslatorTextDomain()

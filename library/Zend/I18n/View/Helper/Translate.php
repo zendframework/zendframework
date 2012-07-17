@@ -35,7 +35,7 @@ class Translate extends AbstractHelper
     public function __invoke($message, $textDomain = 'default', $locale = null)
     {
         $translator = $this->getTranslator();
-        if (null !== $translator) {
+        if (null === $translator) {
             throw new Exception\RuntimeException('Translator has not been set');
         }
         return $translator->translate($message, $textDomain, $locale);

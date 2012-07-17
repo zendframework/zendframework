@@ -48,9 +48,10 @@ interface HelperInterface
      *                           type {@link \Zend\Translator\Adapter} or
      *                           {@link \Zend\Translator\Translator}, or null.
      *                           Default is null.
+     * @param  string $textDomain
      * @return HelperInterface  fluent interface, returns self
      */
-    public function setTranslator(Translator $translator = null);
+    public function setTranslator(Translator $translator = null, $textDomain = null);
 
     /**
      * Returns translator used in helper
@@ -58,6 +59,21 @@ interface HelperInterface
      * @return \Zend\Translator\Adapter|null  translator or null
      */
     public function getTranslator();
+
+    /**
+     * Set translation text domain
+     *
+     * @param  string $textDomain
+     * @return HelperInterface
+     */
+    public function setTranslatorTextDomain($textDomain);
+
+    /**
+     * Return the translation text domain
+     *
+     * @return string
+     */
+    public function getTranslatorTextDomain();
 
     /**
      * Sets ACL to use when iterating pages

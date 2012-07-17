@@ -111,9 +111,14 @@ abstract class AbstractHelper implements HelperInterface
      */
     public function getTranslator()
     {
+        if (! $this->isTranslatorEnabled()) {
+            return null;
+        }
+
         if (null === $this->translator) {
             $this->translator = self::getDefaultTranslator();
         }
+
         return $this->translator;
     }
 

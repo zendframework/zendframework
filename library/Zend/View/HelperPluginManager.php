@@ -78,7 +78,7 @@ class HelperPluginManager extends AbstractPluginManager
      * Constructor
      *
      * After invoking parent constructor, add an initializer to inject the
-     * attached renderer, if any, to the currently requested helper.
+     * attached renderer and translator, if any, to the currently requested helper.
      *
      * @param  null|ConfigurationInterface $configuration
      * @return void
@@ -86,7 +86,8 @@ class HelperPluginManager extends AbstractPluginManager
     public function __construct(ConfigurationInterface $configuration = null)
     {
         parent::__construct($configuration);
-        $this->addInitializer(array($this, 'injectRenderer'));
+        $this->addInitializer(array($this, 'injectRenderer'))
+             ->addInitializer(array($this, 'injectTranslator'));
     }
 
     /**
@@ -124,6 +125,20 @@ class HelperPluginManager extends AbstractPluginManager
             return;
         }
         $helper->setView($renderer);
+    }
+
+    /**
+     * Inject a helper instance with the registered translator
+     *
+     * @param  Helper\HelperInterface $helper
+     * @return void
+     */
+    public function injectTranslator($helper)
+    {
+        $locator = $this->getServiceLocator();
+        if ($locator && $locator->has('translator')) {
+            $helper->setTranslator($locator->get('translator'));
+        }
     }
 
     /**

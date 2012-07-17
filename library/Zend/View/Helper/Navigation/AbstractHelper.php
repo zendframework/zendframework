@@ -559,14 +559,13 @@ abstract class AbstractHelper
         $label = $page->getLabel();
         $title = $page->getTitle();
 
-        if ($this->isTranslatorEnabled()
-            && null !== ($translator = $this->getTranslator())
-        ) {
+        if (null !== ($translator = $this->getTranslator())) {
+            $textDomain = $this->getTranslatorTextDomain();
             if (is_string($label) && !empty($label)) {
-                $label = $translator->translate($label);
+                $label = $translator->translate($label, $textDomain);
             }
             if (is_string($title) && !empty($title)) {
-                $title = $translator->translate($title);
+                $title = $translator->translate($title, $textDomain);
             }
         }
 

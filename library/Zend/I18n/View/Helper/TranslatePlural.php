@@ -42,7 +42,7 @@ class TranslatePlural extends AbstractHelper
         $locale = null
     ) {
         $translator = $this->getTranslator();
-        if (null !== $translator) {
+        if (null === $translator) {
             throw new Exception\RuntimeException('Translator has not been set');
         }
         return $translator->translatePlural($singular, $plural, $number, $textDomain, $locale);

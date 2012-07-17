@@ -278,6 +278,7 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * @param $initializer
+     * @return ServiceManager
      * @throws Exception\InvalidArgumentException
      */
     public function addInitializer($initializer, $topOfStack = true)

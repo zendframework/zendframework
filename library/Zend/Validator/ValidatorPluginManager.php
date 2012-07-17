@@ -106,6 +106,35 @@ class ValidatorPluginManager extends AbstractPluginManager
     );
 
     /**
+     * Constructor
+     *
+     * After invoking parent constructor, add an initializer to inject the
+     * attached translator, if any, to the currently requested helper.
+     *
+     * @param  null|ConfigurationInterface $configuration
+     * @return void
+     */
+    public function __construct(ConfigurationInterface $configuration = null)
+    {
+        parent::__construct($configuration);
+        $this->addInitializer(array($this, 'injectTranslator'));
+    }
+
+    /**
+     * Inject a validator instance with the registered translator
+     *
+     * @param  ValidatorInterface $validator
+     * @return void
+     */
+    public function injectTranslator($validator)
+    {
+        $locator = $this->getServiceLocator();
+        if ($locator && $locator->has('translator')) {
+            $validator->setTranslator($locator->get('translator'));
+        }
+    }
+
+    /**
      * Validate the plugin
      *
      * Checks that the validator loaded is an instance of ValidatorInterface.

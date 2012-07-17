@@ -21,33 +21,49 @@ use Zend\Stdlib\ErrorHandler;
 class CaptureCache extends AbstractPattern
 {
     /**
-     * Page identifier
-     *
-     * @var null|string
-     */
-    protected $pageId = null;
-
-    /**
      * Start the cache
      *
      * @param  string $pageId  Page identifier
-     * @return boolean false
+     * @return void
      */
     public function start($pageId = null)
     {
-        if ($this->pageId !== null) {
-            throw new Exception\RuntimeException("Capturing already stated with page id '{$this->pageId}'");
-        }
-
-        if (($pageId = (string) $pageId) === '') {
+        if ($pageId === null) {
             $pageId = $this->detectPageId();
         }
 
-        ob_start(array($this, 'flush'));
-        ob_implicit_flush(false);
-        $this->pageId = $pageId;
+        $that = $this;
+        ob_start(function ($content) use ($that, $pageId) {
+            $that->set($content, $pageId);
 
-        return false;
+            // http://php.net/manual/function.ob-start.php
+            // -> If output_callback  returns FALSE original input is sent to the browser.
+            return false;
+        });
+
+        ob_implicit_flush(false);
+    }
+
+    /**
+     * Write content to page identity
+     *
+     * @param string      $content
+     * @param null|string $pageId
+     * @throws Exception\RuntimeException
+     */
+    public function set($content, $pageId = null)
+    {
+        if ($pageId === null) {
+            $pageId = $this->detectPageId();
+        }
+
+        $options   = $this->getOptions();
+        $publicDir = $options->getPublicDir();
+        $path      = $this->pageId2Path($pageId);
+        $file      = $path . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+
+        $this->createDirectoryStructure($publicDir . \DIRECTORY_SEPARATOR . $path);
+        $this->putFileContent($publicDir . \DIRECTORY_SEPARATOR . $file, $content);
     }
 
     /**
@@ -59,7 +75,7 @@ class CaptureCache extends AbstractPattern
      */
     public function get($pageId = null)
     {
-        if (($pageId = (string) $pageId) === '') {
+        if ($pageId === null) {
             $pageId = $this->detectPageId();
         }
 
@@ -78,19 +94,17 @@ class CaptureCache extends AbstractPattern
             }
             return $content;
         }
-
-        return false;
     }
 
     /**
      * Checks if a cache with given id exists
      *
      * @param  null|string $pageId
-     * @return bool
+     * @return boolean
      */
-    public function exists($pageId = null)
+    public function has($pageId = null)
     {
-        if (($pageId = (string) $pageId) === '') {
+        if ($pageId === null) {
             $pageId = $this->detectPageId();
         }
 
@@ -106,11 +120,11 @@ class CaptureCache extends AbstractPattern
      *
      * @param  null|string $pageId
      * @throws Exception\RuntimeException
-     * @return void
+     * @return boolean
      */
     public function remove($pageId = null)
     {
-        if (($pageId = (string)$pageId) === '') {
+        if ($pageId === null) {
             $pageId = $this->detectPageId();
         }
 
@@ -127,7 +141,10 @@ class CaptureCache extends AbstractPattern
                     "Failed to remove cached pageId '{$pageId}'", 0, $err
                 );
             }
+            return true;
         }
+
+        return false;
     }
 
     /**
@@ -181,38 +198,6 @@ class CaptureCache extends AbstractPattern
         }
 
         return $path;
-    }
-
-    /**
-     * callback for output buffering
-     *
-     * @param  string $output Buffered output
-     * @return boolean FALSE means original input is sent to the browser.
-     */
-    protected function flush($output)
-    {
-        $this->save($output);
-
-        // http://php.net/manual/function.ob-start.php
-        // -> If output_callback  returns FALSE original input is sent to the browser.
-        return false;
-    }
-
-    /**
-     * Save the cache
-     *
-     * @param  $output
-     * @throws Exception\RuntimeException
-     */
-    protected function save($output)
-    {
-        $options   = $this->getOptions();
-        $publicDir = $options->getPublicDir();
-        $path      = $this->pageId2Path($this->pageId);
-        $file      = $path . \DIRECTORY_SEPARATOR . $this->pageId2Filename($this->pageId);
-
-        $this->createDirectoryStructure($publicDir . \DIRECTORY_SEPARATOR . $path);
-        $this->putFileContent($publicDir . \DIRECTORY_SEPARATOR . $file, $output);
     }
 
     /**

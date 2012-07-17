@@ -40,6 +40,7 @@ class OutputCache extends AbstractPattern
         if (!$options->getStorage()) {
             throw new Exception\InvalidArgumentException("Missing option 'storage'");
         }
+
         return $this;
     }
 
@@ -47,19 +48,18 @@ class OutputCache extends AbstractPattern
      * if there is a cached item with the given key display it's data and return true
      * else start buffering output until end() is called or the script ends.
      *
-     * @param  string  $key            Key
-     * @param  array   $storageOptions Options passing to Zend\Cache\Storage\StorageInterface::getItem
+     * @param  string  $key Key
      * @return boolean
      * @throws Exception
      */
-    public function start($key, array $storageOptions = array())
+    public function start($key)
     {
         if (($key = (string) $key) === '') {
             throw new Exception\MissingKeyException('Missing key to read/write output from cache');
         }
 
         $success = null;
-        $data    = $this->getOptions()->getStorage()->getItem($key, $storageOptions, $success);
+        $data    = $this->getOptions()->getStorage()->getItem($key, $success);
         if ($success) {
             echo $data;
             return true;
@@ -75,11 +75,10 @@ class OutputCache extends AbstractPattern
      * Stops bufferung output, write buffered data to cache using the given key on start()
      * and displays the buffer.
      *
-     * @param  array   $storageOptions Options passed to Zend\Cache\Storage\StorageInterface::setItem
      * @return boolean TRUE on success, FALSE on failure writing to cache
      * @throws Exception
      */
-    public function end(array $storageOptions = array())
+    public function end()
     {
         $key = array_pop($this->keyStack);
         if ($key === null) {
@@ -91,6 +90,6 @@ class OutputCache extends AbstractPattern
             throw new Exception\RuntimeException('Output buffering not active');
         }
 
-        return $this->getOptions()->getStorage()->setItem($key, $output, $storageOptions);
+        return $this->getOptions()->getStorage()->setItem($key, $output);
     }
 }

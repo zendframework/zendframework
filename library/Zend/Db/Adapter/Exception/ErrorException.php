@@ -10,12 +10,13 @@
 
 namespace Zend\Db\Adapter\Exception;
 
+use Zend\Db\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
  */
-class ErrorException extends \Exception implements ExceptionInterface
+class ErrorException extends Exception\ErrorException implements ExceptionInterface
 {
-
 }

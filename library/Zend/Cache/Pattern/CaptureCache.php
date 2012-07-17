@@ -195,6 +195,10 @@ class CaptureCache extends AbstractPattern
      */
     protected function detectPageId()
     {
+        if (!isset($_SERVER['REQUEST_URI'])) {
+            throw new Exception\RuntimeException("Can't auto-detect current page identity");
+        }
+
         return $_SERVER['REQUEST_URI'];
     }
 
@@ -206,13 +210,11 @@ class CaptureCache extends AbstractPattern
      */
     protected function pageId2Filename($pageId)
     {
-        $filename = basename($pageId);
-
-        if ($filename === '') {
-            $filename = $this->getOptions()->getIndexFilename();
+        if (substr($pageId, -1) === '/') {
+            return $this->getOptions()->getIndexFilename();
         }
 
-        return $filename;
+        return basename($pageId);
     }
 
     /**
@@ -223,7 +225,11 @@ class CaptureCache extends AbstractPattern
      */
     protected function pageId2Path($pageId)
     {
-        $path = rtrim(dirname($pageId), '/');
+        if (substr($pageId, -1) == '/') {
+            $path = rtrim($pageId, '/');
+        } else {
+            $path = dirname($pageId);
+        }
 
         // convert requested "/" to the valid local directory separator
         if ('/' != \DIRECTORY_SEPARATOR) {

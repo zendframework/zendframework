@@ -115,9 +115,7 @@ class FormLabel extends AbstractHelper
                 ));
             }
 
-            if ($this->isTranslatorEnabled()
-                && null !== ($translator = $this->getTranslator())
-            ) {
+            if (null !== ($translator = $this->getTranslator())) {
                 $label = $translator->translate(
                     $label, $this->getTranslatorTextDomain()
                 );

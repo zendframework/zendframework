@@ -883,24 +883,10 @@ class Filesystem extends AbstractAdapter implements
         $filespec = $this->getFileSpec($normalizedKey);
         $this->prepareDirectoryStructure($filespec);
 
-        // write files
-        try {
-            // set umask for files
-            $oldUmask = umask($options->getFileUmask());
+        $this->putFileContent($filespec . '.dat', $value);
+        $this->unlink($filespec . '.tag');
 
-            $this->putFileContent($filespec . '.dat', $value);
-            $this->unlink($filespec . '.tag');
-
-            // reset file_umask
-            umask($oldUmask);
-
-            return true;
-
-        } catch (BaseException $e) {
-            // reset umask on exception
-            umask($oldUmask);
-            throw $e;
-        }
+        return true;
     }
 
     /**
@@ -929,33 +915,20 @@ class Filesystem extends AbstractAdapter implements
         }
 
         // write to disk
-        try {
-            // set umask for files
-            $oldUmask = umask($baseOptions->getFileUmask());
+        while ($contents) {
+            $nonBlocking = count($contents) > 1;
+            $wouldblock  = null;
 
-            while ($contents) {
-                $nonBlocking = count($contents) > 1;
-                $wouldblock  = null;
-
-                foreach ($contents as $file => & $content) {
-                    $this->putFileContent($file, $content, $nonBlocking, $wouldblock);
-                    if (!$nonBlocking || !$wouldblock) {
-                        unset($contents[$file]);
-                    }
+            foreach ($contents as $file => & $content) {
+                $this->putFileContent($file, $content, $nonBlocking, $wouldblock);
+                if (!$nonBlocking || !$wouldblock) {
+                    unset($contents[$file]);
                 }
             }
-
-            // reset umask
-            umask($oldUmask);
-
-            // return OK
-            return array();
-
-        } catch (BaseException $e) {
-            // reset umask on exception
-            umask($oldUmask);
-            throw $e;
         }
+
+        // return OK
+        return array();
     }
 
     /**
@@ -1403,21 +1376,100 @@ class Filesystem extends AbstractAdapter implements
     protected function prepareDirectoryStructure($file)
     {
         $options = $this->getOptions();
-        if ($options->getDirLevel() > 0) {
-            $path = dirname($file);
-            if (!file_exists($path)) {
-                $oldUmask = umask($options->getDirUmask());
-                ErrorHandler::start();
-                $mkdir = mkdir($path, 0777, true);
-                $error = ErrorHandler::stop();
-                umask($oldUmask);
-                if (!$mkdir) {
+        $level   = $options->getDirLevel();
+
+        // Directory structure is required only if directory level > 0
+        if (!$level) {
+            return;
+        }
+
+        // Directory structure already exists
+        $pathname = dirname($file);
+        if (file_exists($pathname)) {
+            return;
+        }
+
+        $perm     = $options->getDirPermission();
+        $umask    = $options->getUmask();
+        if ($umask !== false && $perm !== false) {
+            $perm = $perm & ~$umask;
+        }
+
+        ErrorHandler::start();
+
+        if ($perm === false || $level == 1) {
+            // build-in mkdir function is enough
+
+            $umask = ($umask !== false) ? umask($umask) : false;
+            $res   = mkdir($pathname, ($perm !== false) ? $perm : 0777, true);
+
+            if ($umask !== false) {
+                umask($umask);
+            }
+
+            if (!$res) {
+                $oct = ($perm === false) ? '777' : decoct($perm);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    "mkdir('{$pathname}', 0{$oct}, true) failed", 0, $err
+                );
+            }
+
+            if ($perm !== false && !chmod($pathname, $perm)) {
+                $oct = decoct($perm);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    "chmod('{$pathname}', 0{$oct}) failed", 0, $err
+                );
+            }
+
+        } else {
+            // build-in mkdir function sets permission together with current umask
+            // which doesn't work well on multo threaded webservers
+            // -> create directories one by one and set permissions
+
+            // find existing path and missing path parts
+            $parts = array();
+            $path  = $pathname;
+            while (!file_exists($path)) {
+                array_unshift($parts, basename($path));
+                $nextPath = dirname($path);
+                if ($nextPath === $path) {
+                    break;
+                }
+                $path = $nextPath;
+            }
+
+            // make all missing path parts
+            foreach ($parts as $part) {
+                $path.= \DIRECTORY_SEPARATOR . $part;
+
+                // create a single directory, set and reset umask immediatly
+                $umask = ($umask !== false) ? umask($umask) : false;
+                $res   = mkdir($path, ($perm === false) ? 0777 : $perm, false);
+                if ($umask !== false) {
+                    umask($umask);
+                }
+
+                if (!$res) {
+                    $oct = ($perm === false) ? '777' : decoct($perm);
+                    $err = ErrorHandler::stop();
                     throw new Exception\RuntimeException(
-                        "Error creating directory '{$path}'", 0, $error
+                        "mkdir('{$path}', 0{$oct}, false) failed"
+                    );
+                }
+
+                if ($perm !== false && !chmod($path, $perm)) {
+                    $oct = decoct($perm);
+                    $err = ErrorHandler::stop();
+                    throw new Exception\RuntimeException(
+                        "chmod('{$path}', 0{$oct}) failed"
                     );
                 }
             }
         }
+
+        ErrorHandler::stop();
     }
 
     /**
@@ -1432,20 +1484,42 @@ class Filesystem extends AbstractAdapter implements
      */
     protected function putFileContent($file, $data, $nonBlocking = false, & $wouldblock = null)
     {
-        $locking     = $this->getOptions()->getFileLocking();
+        $options     = $this->getOptions();
+        $locking     = $options->getFileLocking();
         $nonBlocking = $locking && $nonBlocking;
         $wouldblock  = null;
+
+        $umask = $options->getUmask();
+        $perm  = $options->getFilePermission();
+        if ($umask !== false && $perm !== false) {
+            $perm = $perm & ~$umask;
+        }
 
         ErrorHandler::start();
 
         // if locking and non blocking is enabled -> file_put_contents can't used
         if ($locking && $nonBlocking) {
+
+            $umask = ($umask !== false) ? umask($umask) : false;
+
             $fp = fopen($file, 'cb');
+
+            if ($umask) {
+                umask($umask);
+            }
+
             if (!$fp) {
                 $err = ErrorHandler::stop();
                 throw new Exception\RuntimeException(
                     "Error opening file '{$file}'", 0, $err
                 );
+            }
+
+            if ($perm !== false && !chmod($file, $perm)) {
+                fclose($fp);
+                $oct = decoct($perm);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException("chmod('{$file}', 0{$oct}) failed", 0, $err);
             }
 
             if(!flock($fp, \LOCK_EX | \LOCK_NB, $wouldblock)) {
@@ -1482,11 +1556,25 @@ class Filesystem extends AbstractAdapter implements
                 $flags = $flags | \LOCK_EX;
             }
 
-            if (file_put_contents($file, $data, $flags) === false) {
+            $umask = ($umask !== false) ? umask($umask) : false;
+
+            $rs = file_put_contents($file, $data, $flags);
+
+            if ($umask) {
+                umask($umask);
+            }
+
+            if ($rs === false) {
                 $err = ErrorHandler::stop();
                 throw new Exception\RuntimeException(
                     "Error writing file '{$file}'", 0, $err
                 );
+            }
+
+            if ($perm !== false && !chmod($file, $perm)) {
+                $oct = decoct($perm);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException("chmod('{$file}', 0{$oct}) failed", 0, $err);
             }
         }
 

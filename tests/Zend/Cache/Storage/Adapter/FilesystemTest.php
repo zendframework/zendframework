@@ -169,28 +169,22 @@ class FilesystemTest extends CommonAdapterTest
         }
     }
 
-    public function testSetFilePermUpdatesUmask()
-    {
-        $this->_options->setFilePerm(0606);
-        $this->assertEquals(~0606, $this->_options->getFileUmask());
-    }
-
-    public function testSetFilePermThrowsExceptionIfNotWritable()
+    public function testSetFilePermissionThrowsExceptionIfNotWritable()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_options->setFilePerm(0466);
+        $this->_options->setFilePermission(0466);
     }
 
-    public function testSetFilePermThrowsExceptionIfNotReadable()
+    public function testSetFilePermissionThrowsExceptionIfNotReadable()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_options->setFilePerm(0266);
+        $this->_options->setFilePermission(0266);
     }
 
-    public function testSetFilePermThrowsExceptionIfExecutable()
+    public function testSetFilePermissionThrowsExceptionIfExecutable()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_options->setFilePerm(0661);
+        $this->_options->setFilePermission(0661);
     }
 
     public function testSetNoAtimeChangesAtimeOfMetadataCapability()
@@ -215,34 +209,55 @@ class FilesystemTest extends CommonAdapterTest
         $this->assertNotContains('ctime', $capabilities->getSupportedMetadata());
     }
 
-    public function testSetDirPermUpdatesUmask()
-    {
-        $this->_options->setDirPerm(0706);
-        $this->assertEquals(~0706, $this->_options->getDirUmask());
-    }
-
-    public function testSetDirPermThrowsExceptionIfNotWritable()
+    public function testSetDirPermissionThrowsExceptionIfNotWritable()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_options->setDirPerm(0577);
+        $this->_options->setDirPermission(0577);
     }
 
-    public function testSetDirPermThrowsExceptionIfNotReadable()
+    public function testSetDirPermissionThrowsExceptionIfNotReadable()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_options->setDirPerm(0377);
+        $this->_options->setDirPermission(0377);
     }
 
-    public function testSetDirPermThrowsExceptionIfNotExecutable()
+    public function testSetDirPermissionThrowsExceptionIfNotExecutable()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_options->setDirPerm(0677);
+        $this->_options->setDirPermission(0677);
     }
 
     public function testSetDirLevelInvalidException()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
         $this->_options->setDirLevel(17); // must between 0-16
+    }
+
+    public function testSetUmask()
+    {
+        $this->_options->setUmask(023);
+        $this->assertSame(023, $this->_options->getUmask());
+
+        $this->_options->setUmask(false);
+        $this->assertFalse($this->_options->getUmask());
+    }
+
+    public function testSetUmaskThrowsExceptionIfNotWritable()
+    {
+        $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
+        $this->_options->setUmask(0300);
+    }
+
+    public function testSetUmaskThrowsExceptionIfNotReadable()
+    {
+        $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
+        $this->_options->setUmask(0200);
+    }
+
+    public function testSetUmaskThrowsExceptionIfNotExecutable()
+    {
+        $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
+        $this->_options->setUmask(0100);
     }
 
     public function testGetMetadataWithCtime()

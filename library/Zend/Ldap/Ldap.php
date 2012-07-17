@@ -737,6 +737,7 @@ class Ldap
                     ldap_set_option($resource, LDAP_OPT_NETWORK_TIMEOUT, $networkTimeout);
                 }
                 if ($useSsl || !$useStartTls || @ldap_start_tls($resource)) {
+                    ErrorHandler::stop();
                     return $this;
                 }
             }

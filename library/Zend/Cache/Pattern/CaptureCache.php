@@ -216,27 +216,13 @@ class CaptureCache extends AbstractPattern
      */
     protected function save($output)
     {
-        $options  = $this->getOptions();
-        $path     = $this->pageId2Path($this->pageId);
-        $fullPath = $options->getPublicDir() . DIRECTORY_SEPARATOR . $path;
-        if (!file_exists($fullPath)) {
-            $oldUmask = umask($options->getDirUmask());
-            if (!@mkdir($fullPath, 0777, true)) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException(
-                    "Can't create directory '{$fullPath}': {$lastErr['message']}"
-                );
-            }
-        }
+        $options   = $this->getOptions();
+        $publicDir = $options->getPublicDir();
+        $path      = $this->pageId2Path($this->pageId);
+        $file      = $path . \DIRECTORY_SEPARATOR . $this->pageId2Filename($this->pageId);
 
-        if ($oldUmask !== null) { // $oldUmask could be set on create directory
-            umask($options->getFileUmask());
-        } else {
-            $oldUmask = umask($options->getFileUmask());
-        }
-        $file     = $path . DIRECTORY_SEPARATOR . $this->pageId2Filename($this->pageId);
-        $fullFile = $options->getPublicDir() . DIRECTORY_SEPARATOR . $file;
-        $this->putFileContent($fullFile, $output);
+        $this->createDirectoryStructure($publicDir . \DIRECTORY_SEPARATOR . $path);
+        $this->putFileContent($publicDir . \DIRECTORY_SEPARATOR . $file, $output);
 
         $tagStorage = $options->getTagStorage();
         if ($tagStorage) {
@@ -261,26 +247,140 @@ class CaptureCache extends AbstractPattern
     /**
      * Write content to a file
      *
-     * @param  string $file  File complete path
-     * @param  string $data  Data to write
+     * @param  string  $file File complete path
+     * @param  string  $data Data to write
+     * @return void
      * @throws Exception\RuntimeException
      */
     protected function putFileContent($file, $data)
     {
-        $flags = FILE_BINARY; // since PHP 6 but defined as 0 in PHP 5.3
-        if ($this->getOptions()->getFileLocking()) {
-            $flags = $flags | LOCK_EX;
+        $options = $this->getOptions();
+        $locking = $options->getFileLocking();
+        $perm    = $options->getFilePermission();
+        $umask   = $options->getUmask();
+        if ($umask !== false && $perm !== false) {
+            $perm = $perm & ~$umask;
         }
 
-        ErrorHandler::start(E_WARNING);
-        $put = file_put_contents($file, $data, $flags);
-        ErrorHandler::stop();
-        if ( $put < strlen((binary)$data) ) {
-            $lastErr = error_get_last();
-            ErrorHandler::start(E_WARNING);
-            unlink($file); // remove old or incomplete written file
-            ErrorHandler::stop();
-            throw new Exception\RuntimeException($lastErr['message']);
+        ErrorHandler::start();
+
+        $umask = ($umask !== false) ? umask($umask) : false;
+        $rs    = file_put_contents($file, $data, $locking ? \LOCK_EX : 0);
+        if ($umask) {
+            umask($umask);
         }
+
+        if ($rs === false) {
+            $err = ErrorHandler::stop();
+            throw new Exception\RuntimeException(
+                "Error writing file '{$file}'", 0, $err
+            );
+        }
+
+        if ($perm !== false && !chmod($file, $perm)) {
+            $oct = decoct($perm);
+            $err = ErrorHandler::stop();
+            throw new Exception\RuntimeException("chmod('{$file}', 0{$oct}) failed", 0, $err);
+        }
+
+        ErrorHandler::stop();
+    }
+
+    /**
+     * Creates directory if not already done.
+     *
+     * @param string $pathname
+     * @return void
+     * @throws Exception\RuntimeException
+     */
+    protected function createDirectoryStructure($pathname)
+    {
+        // Directory structure already exists
+        if (file_exists($pathname)) {
+            return;
+        }
+
+        $options = $this->getOptions();
+        $perm    = $options->getDirPermission();
+        $umask   = $options->getUmask();
+        if ($umask !== false && $perm !== false) {
+            $perm = $perm & ~$umask;
+        }
+
+        ErrorHandler::start();
+
+        if ($perm === false) {
+            // build-in mkdir function is enough
+
+            $umask = ($umask !== false) ? umask($umask) : false;
+            $res   = mkdir($pathname, ($perm !== false) ? $perm : 0777, true);
+
+            if ($umask !== false) {
+                umask($umask);
+            }
+
+            if (!$res) {
+                $oct = ($perm === false) ? '777' : decoct($perm);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    "mkdir('{$pathname}', 0{$oct}, true) failed", 0, $err
+                );
+            }
+
+            if ($perm !== false && !chmod($pathname, $perm)) {
+                $oct = decoct($perm);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    "chmod('{$pathname}', 0{$oct}) failed", 0, $err
+                );
+            }
+
+        } else {
+            // build-in mkdir function sets permission together with current umask
+            // which doesn't work well on multo threaded webservers
+            // -> create directories one by one and set permissions
+
+            // find existing path and missing path parts
+            $parts = array();
+            $path  = $pathname;
+            while (!file_exists($path)) {
+                array_unshift($parts, basename($path));
+                $nextPath = dirname($path);
+                if ($nextPath === $path) {
+                    break;
+                }
+                $path = $nextPath;
+            }
+
+            // make all missing path parts
+            foreach ($parts as $part) {
+                $path.= \DIRECTORY_SEPARATOR . $part;
+
+                // create a single directory, set and reset umask immediatly
+                $umask = ($umask !== false) ? umask($umask) : false;
+                $res   = mkdir($path, ($perm === false) ? 0777 : $perm, false);
+                if ($umask !== false) {
+                    umask($umask);
+                }
+
+                if (!$res) {
+                    $oct = ($perm === false) ? '777' : decoct($perm);
+                    $err = ErrorHandler::stop();
+                    throw new Exception\RuntimeException(
+                        "mkdir('{$path}', 0{$oct}, false) failed"
+                    );
+                }
+
+                if ($perm !== false && !chmod($path, $perm)) {
+                    $oct = decoct($perm);
+                    $err = ErrorHandler::stop();
+                    throw new Exception\RuntimeException(
+                        "chmod('{$path}', 0{$oct}) failed"
+                    );
+                }
+            }
+        }
+
+        ErrorHandler::stop();
     }
 }

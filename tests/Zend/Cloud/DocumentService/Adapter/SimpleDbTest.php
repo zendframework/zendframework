@@ -83,7 +83,7 @@ class SimpleDbTest extends TestCase
         $this->_commonDocument->deleteCollection($name);
     }
 
-    static function getConfigArray()
+    public static function getConfigArray()
     {
         return array(
                 Factory::DOCUMENT_ADAPTER_KEY => 'Zend\Cloud\DocumentService\Adapter\SimpleDb',
@@ -110,36 +110,36 @@ class SimpleDbTest extends TestCase
     {
         return array(
             array(
-	        	parent::ID_FIELD => "0385333498",
-	        	"name" =>	"The Sirens of Titan",
-	        	"author" =>	"Kurt Vonnegut",
-	        	"year"	=> 1959,
-	        	"pages" =>	336,
-	        	"keyword" => array("Book", "Paperback")
-	        	),
+                parent::ID_FIELD => "0385333498",
+                "name" =>	"The Sirens of Titan",
+                "author" =>	"Kurt Vonnegut",
+                "year"	=> 1959,
+                "pages" =>	336,
+                "keyword" => array("Book", "Paperback")
+                ),
             array(
-	        	parent::ID_FIELD => "0802131786",
-	        	"name" =>	"Tropic of Cancer",
-	        	"author" =>	"Henry Miller",
-	        	"year"	=> 1934,
-	        	"pages" =>	318,
-	        	"keyword" => array("Book")
-	        	),
+                parent::ID_FIELD => "0802131786",
+                "name" =>	"Tropic of Cancer",
+                "author" =>	"Henry Miller",
+                "year"	=> 1934,
+                "pages" =>	318,
+                "keyword" => array("Book")
+                ),
             array(
-	        	parent::ID_FIELD => "B000T9886K",
-	        	"name" =>	"In Between",
-	        	"author" =>	"Paul Van Dyk",
-	        	"year"	=> 2007,
-	        	"keyword" => array("CD", "Music")
-	        	),
-	        array(
-	        	parent::ID_FIELD => "1579124585",
-	        	"name" =>	"The Right Stuff",
-	        	"author" =>	"Tom Wolfe",
-	        	"year"	=> 1979,
-	        	"pages" =>	304,
-	        	"keyword" => array("American", "Book", "Hardcover")
-	        	),
+                parent::ID_FIELD => "B000T9886K",
+                "name" =>	"In Between",
+                "author" =>	"Paul Van Dyk",
+                "year"	=> 2007,
+                "keyword" => array("CD", "Music")
+                ),
+            array(
+                parent::ID_FIELD => "1579124585",
+                "name" =>	"The Right Stuff",
+                "author" =>	"Tom Wolfe",
+                "year"	=> 1979,
+                "pages" =>	304,
+                "keyword" => array("American", "Book", "Hardcover")
+                ),
         );
     }
 

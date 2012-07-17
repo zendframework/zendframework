@@ -21,7 +21,7 @@ use Zend\Config\Config;
  */
 class WindowsAzureTest extends TestCase
 {
-	protected $_clientType = 'Zend\Service\WindowsAzure\Storage\Blob';
+    protected $_clientType = 'Zend\Service\WindowsAzure\Storage\Blob';
 
     protected function _getConfig()
     {

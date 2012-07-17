@@ -98,24 +98,25 @@ class FeedStrategy implements ListenerAggregateInterface
         }
 
         $headers = $request->getHeaders();
-        if ($headers->has('accept')) {
-            $accept  = $headers->get('accept');
-            foreach ($accept->getPrioritized() as $mediaType) {
-                if (0 === strpos($mediaType, 'application/rss+xml')) {
-                    // application/rss+xml Accept header found
-                    $this->renderer->setFeedType('rss');
-                    return $this->renderer;
-                }
-                if (0 === strpos($mediaType, 'application/atom+xml')) {
-                    // application/atom+xml Accept header found
-                    $this->renderer->setFeedType('atom');
-                    return $this->renderer;
-                }
-            }
+        if (!$headers->has('accept')) {
+            return;
         }
 
-        // Not matched!
-        return;
+        $accept  = $headers->get('accept');
+        if (($match = $accept->match('application/rss+xml, application/atom+xml')) == false) {
+            return;
+        }
+
+        if ($match->getTypeString() == 'application/rss+xml') {
+            $this->renderer->setFeedType('rss');
+            return $this->renderer;
+        }
+
+        if ($match->getTypeString() == 'application/atom+xml') {
+            $this->renderer->setFeedType('atom');
+            return $this->renderer;
+        }
+
     }
 
     /**

@@ -43,7 +43,7 @@ class Subquery extends AbstractQueryEntry
     public function processFuzzyProximityModifier($parameter = null)
     {
         throw new \Zend\Search\Lucene\Search\Exception\QueryParserException(
-        	'\'~\' sign must follow term or phrase'
+            '\'~\' sign must follow term or phrase'
         );
     }
 

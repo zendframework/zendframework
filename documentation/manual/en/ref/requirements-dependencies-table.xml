@@ -4670,21 +4670,6 @@
                 </entry>
             </row>
             <row>
-                <entry morerows="23" valign="middle">
-                    <emphasis>
-                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.test.html">
-                            <classname>Zend_Test</classname>
-                        </link>
-                    </emphasis>
-                </entry>
-                <entry morerows="5" valign="middle">&requirements.hard;</entry>
-                <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.controller.html">
-                        <classname>Zend_Controller</classname>
-                    </link>
-                </entry>
-            </row>
-            <row>
                 <entry>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.dom.html">
                         <classname>Zend_Dom</classname>

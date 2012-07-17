@@ -229,7 +229,7 @@ class Range extends AbstractQuery
     public function optimize(Lucene\SearchIndexInterface $index)
     {
         throw new UnsupportedMethodCallException(
-        	'Range query should not be directly used for search. Use $query->rewrite($index)'
+            'Range query should not be directly used for search. Use $query->rewrite($index)'
         );
     }
 
@@ -257,7 +257,7 @@ class Range extends AbstractQuery
     public function createWeight(Lucene\SearchIndexInterface $reader)
     {
         throw new UnsupportedMethodCallException(
-        	'Range query should not be directly used for search. Use $query->rewrite($index)'
+            'Range query should not be directly used for search. Use $query->rewrite($index)'
         );
     }
 
@@ -273,7 +273,7 @@ class Range extends AbstractQuery
     public function execute(Lucene\SearchIndexInterface $reader, $docsFilter = null)
     {
         throw new UnsupportedMethodCallException(
-        	'Range query should not be directly used for search. Use $query->rewrite($index)'
+            'Range query should not be directly used for search. Use $query->rewrite($index)'
         );
     }
 
@@ -288,7 +288,7 @@ class Range extends AbstractQuery
     public function matchedDocs()
     {
         throw new UnsupportedMethodCallException(
-        	'Range query should not be directly used for search. Use $query->rewrite($index)'
+            'Range query should not be directly used for search. Use $query->rewrite($index)'
         );
     }
 
@@ -303,7 +303,7 @@ class Range extends AbstractQuery
     public function score($docId, Lucene\SearchIndexInterface $reader)
     {
         throw new UnsupportedMethodCallException(
-        	'Range query should not be directly used for search. Use $query->rewrite($index)'
+            'Range query should not be directly used for search. Use $query->rewrite($index)'
         );
     }
 

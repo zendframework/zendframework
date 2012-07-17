@@ -372,10 +372,12 @@ class Reader
         } elseif($feed instanceof DOMDocument) {
             $dom = $feed;
         } elseif(is_string($feed) && !empty($feed)) {
-            @ini_set('track_errors', 1);
+            ErrorHandler::start(E_NOTICE|E_WARNING);
+            ini_set('track_errors', 1);
             $dom = new DOMDocument;
-            $status = @$dom->loadXML($feed);
-            @ini_restore('track_errors');
+            $status = $dom->loadXML($feed);
+            ini_restore('track_errors');
+            ErrorHandler::stop();
             if (!$status) {
                 if (!isset($php_errormsg)) {
                     if (function_exists('xdebug_is_enabled')) {

@@ -14,7 +14,8 @@
     "target-dir": "Zend/Mail",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-mime": "self.version"
+        "zendframework/zend-mime": "self.version",
+        "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
         "zendframework/zend-validator": "Zend\\Validator component",

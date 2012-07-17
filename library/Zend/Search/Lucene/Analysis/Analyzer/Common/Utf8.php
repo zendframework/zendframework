@@ -13,6 +13,7 @@ namespace Zend\Search\Lucene\Analysis\Analyzer\Common;
 use Zend\Search\Lucene;
 use Zend\Search\Lucene\Analysis;
 use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -42,7 +43,10 @@ class Utf8 extends AbstractCommon
      */
     public function __construct()
     {
-        if (@preg_match('/\pL/u', 'a') != 1) {
+        ErrorHandler::start(E_WARNING);
+        $result = preg_match('/\pL/u', 'a');
+        ErrorHandler::stop();
+        if ($result != 1) {
             // PCRE unicode support is turned off
             throw new RuntimeException('Utf8 analyzer needs PCRE unicode support to be enabled.');
         }

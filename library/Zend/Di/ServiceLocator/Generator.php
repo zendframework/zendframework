@@ -18,7 +18,11 @@ use Zend\Di\Di;
 use Zend\Di\Exception;
 
 /**
- * @todo refactor to use new Definition interface
+ * Generator that creates the body of a service locator that can emulate the logic of the given Zend\Di\Di instance
+ * without class definitions
+ *
+ * @category   Zend
+ * @package    Zend_Di
  */
 class Generator
 {
@@ -44,36 +48,38 @@ class Generator
     /**
      * Set the class name for the generated service locator container
      *
-     * @param  string $name
+     * @param  string    $name
      * @return Generator
      */
     public function setContainerClass($name)
     {
         $this->containerClass = $name;
+
         return $this;
     }
 
     /**
      * Set the namespace to use for the generated class file
      *
-     * @param  string $namespace
+     * @param  string    $namespace
      * @return Generator
      */
     public function setNamespace($namespace)
     {
         $this->namespace = $namespace;
+
         return $this;
     }
 
     /**
-     * Construct, configure, and return a PHP classfile code generation object
+     * Construct, configure, and return a PHP class file code generation object
      *
      * Creates a Zend\CodeGenerator\Php\PhpFile object that has
      * created the specified class and service locator methods.
      *
-     * @param  null|string $filename
+     * @param  null|string                         $filename
+     * @throws \Zend\Di\Exception\RuntimeException
      * @return FileGenerator
-     * @throws Exception\RuntimeException
      */
     public function getCodeGenerator($filename = null)
     {
@@ -300,14 +306,15 @@ class Generator
             }
             $reduced[$service][] = $alias;
         }
+
         return $reduced;
     }
 
     /**
      * Create a PhpMethod code generation object named after a given alias
      *
-     * @param  string $alias
-     * @param  string $class Class to which alias refers
+     * @param  string          $alias
+     * @param  string          $class Class to which alias refers
      * @return MethodGenerator
      */
     protected function getCodeGenMethodFromAlias($alias, $class)
@@ -316,6 +323,7 @@ class Generator
         $method = new MethodGenerator();
         $method->setName($alias);
         $method->setBody(sprintf('return $this->get(\'%s\');', $class));
+
         return $method;
     }
 
@@ -329,6 +337,7 @@ class Generator
     {
         $normalized = preg_replace('/[^a-zA-Z0-9]/', ' ', $alias);
         $normalized = 'get' . str_replace(' ', '', ucwords($normalized));
+
         return $normalized;
     }
 }

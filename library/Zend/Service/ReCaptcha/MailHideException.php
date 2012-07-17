@@ -17,5 +17,5 @@ namespace Zend\Service\ReCaptcha;
  * @package    Zend_Service
  * @subpackage ReCaptcha
  */
-class MailhideException extends Exception
+class MailHideException extends Exception
 {}

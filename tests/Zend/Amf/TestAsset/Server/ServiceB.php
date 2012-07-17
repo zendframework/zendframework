@@ -15,7 +15,7 @@
  */
 class ServiceB
 {
-    function __construct()
+    public function __construct()
     {
         //Construction...
     }

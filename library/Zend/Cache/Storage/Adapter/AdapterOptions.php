@@ -16,6 +16,7 @@ use Zend\Cache\Storage\Event;
 use Zend\Cache\Storage\StorageInterface;
 use Zend\EventManager\EventsCapableInterface;
 use Zend\Stdlib\AbstractOptions;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Unless otherwise marked, all options in this class affect all adapters.
@@ -70,25 +71,6 @@ class AdapterOptions extends AbstractOptions
     protected $writable = true;
 
     /**
-     * Cast to array
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        $array = array();
-        $transform = function($letters) {
-            $letter = array_shift($letters);
-            return '_' . strtolower($letter);
-        };
-        foreach ($this as $key => $value) {
-            $normalizedKey = preg_replace_callback('/([A-Z])/', $transform, $key);
-            $array[$normalizedKey] = $value;
-        }
-        return $array;
-    }
-
-    /**
      * Adapter using this instance
      *
      * @param  StorageInterface|null $adapter
@@ -112,7 +94,10 @@ class AdapterOptions extends AbstractOptions
         if ($this->keyPattern !== $keyPattern) {
             // validate pattern
             if ($keyPattern !== '') {
-                if (@preg_match($keyPattern, '') === false) {
+                ErrorHandler::start(E_WARNING);
+                $result = preg_match($keyPattern, '');
+                ErrorHandler::stop();
+                if ($result === false) {
                     $err = error_get_last();
                     throw new Exception\InvalidArgumentException("Invalid pattern '{$keyPattern}': {$err['message']}");
                 }

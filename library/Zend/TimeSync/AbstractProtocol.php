@@ -11,6 +11,7 @@
 namespace Zend\TimeSync;
 
 use DateTime;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Abstract class definition for all timeserver protocols
@@ -93,8 +94,10 @@ abstract class AbstractProtocol
      */
     protected function connect()
     {
-        $socket = @fsockopen($this->timeserver, $this->port, $errno, $errstr,
+        ErrorHandler::start(E_WARNING);
+        $socket = fsockopen($this->timeserver, $this->port, $errno, $errstr,
                              TimeSync::$options['timeout']);
+        ErrorHandler::stop();
         if ($socket === false) {
             throw new Exception\RuntimeException('could not connect to ' .
                 "'$this->timeserver' on port '$this->port', reason: '$errstr'");
@@ -110,7 +113,9 @@ abstract class AbstractProtocol
      */
     protected function disconnect()
     {
-        @fclose($this->socket);
+        ErrorHandler::start(E_WARNING);
+        fclose($this->socket);
+        ErrorHandler::stop();
         $this->socket = null;
     }
 

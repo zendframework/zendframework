@@ -62,7 +62,7 @@ abstract class TestCase extends PHPUnitTestCase
 
     public function testGetClient()
     {
-    	$this->assertTrue(is_a($this->_commonStorage->getClient(), $this->_clientType));
+        $this->assertTrue(is_a($this->_commonStorage->getClient(), $this->_clientType));
     }
 
 //    public function testNoParams()
@@ -318,7 +318,7 @@ abstract class TestCase extends PHPUnitTestCase
 //        }
 //    }
 
-	/**
+    /**
      * Test list items
      *
      * @return void

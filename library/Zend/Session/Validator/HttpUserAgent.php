@@ -18,10 +18,17 @@ namespace Zend\Session\Validator;
 class HttpUserAgent implements ValidatorInterface
 {
     /**
-     * Constructor - get the current user agent and store it in the session
-     * as 'valid data'
+     * Internal data
      *
-     * @return void
+     * @var string
+     */
+    protected $data;
+
+    /**
+     * Constructor
+     * get the current user agent and store it in the session as 'valid data'
+     *
+     * @param string|null $data
      */
     public function __construct($data = null)
     {
@@ -30,7 +37,7 @@ class HttpUserAgent implements ValidatorInterface
                   ? $_SERVER['HTTP_USER_AGENT']
                   : null;
         }
-        $this->_data = $data;
+        $this->data = $data;
     }
 
     /**
@@ -45,7 +52,7 @@ class HttpUserAgent implements ValidatorInterface
                    ? $_SERVER['HTTP_USER_AGENT']
                    : null;
 
-        return $userAgent === $this->getData();
+        return ($userAgent === $this->getData());
     }
 
     /**
@@ -55,7 +62,7 @@ class HttpUserAgent implements ValidatorInterface
      */
     public function getData()
     {
-        return $this->_data;
+        return $this->data;
     }
 
     /**

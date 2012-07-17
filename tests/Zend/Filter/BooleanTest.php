@@ -138,7 +138,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(127, $filter->getType());
     }
 
-    static public function defaultTestProvider()
+    public static function defaultTestProvider()
     {
         return array(
             array(false, false),
@@ -161,7 +161,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function noCastingTestProvider()
+    public static function noCastingTestProvider()
     {
         return array(
             array(false, false),
@@ -185,7 +185,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function typeTestProvider()
+    public static function typeTestProvider()
     {
         return array(
             array(
@@ -435,7 +435,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    static public function combinedTypeTestProvider()
+    public static function combinedTypeTestProvider()
     {
         return array(
             array(

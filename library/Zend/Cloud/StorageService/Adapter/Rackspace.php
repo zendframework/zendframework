@@ -49,7 +49,7 @@ class Rackspace implements AdapterInterface
      * @param  array|Traversable $options
      * @return void
      */
-    function __construct($options = array())
+    public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);

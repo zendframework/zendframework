@@ -67,7 +67,7 @@ class TokenArrayScanner implements ScannerInterface
      */
     public function getDocComment()
     {
-	    foreach ($this->tokens as $token) {
+        foreach ($this->tokens as $token) {
             $type    = $token[0];
             $value   = $token[1];
             $lineNum = $token[2];

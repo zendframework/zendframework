@@ -84,7 +84,7 @@ class RackspaceOfflineTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    static function getConfigArray()
+    public static function getConfigArray()
     {
          return array(
             CloudFactory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Rackspace',

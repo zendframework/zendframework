@@ -276,4 +276,16 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
             throw new \InvalidArgumentException('Not a valid column in this row: ' . $name);
         }
     }
+
+    /**
+     * __set
+     *
+     * @param  string $name
+     * @param  mixed $value
+     * @return void
+     */
+    public function __set($name, $value)
+    {
+        $this->offsetSet($name, $value);
+    }
 }

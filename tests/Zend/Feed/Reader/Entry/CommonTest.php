@@ -140,7 +140,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     /**
     * When passing a newly created DOMElement without any DOMDocument assigned
     */
-    public  function testFeedEntryCanSetAnyType()
+    public function testFeedEntryCanSetAnyType()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->_feedSamplePath.'/atom.xml')

@@ -64,7 +64,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         unlink($file);
     }
 
-    function testSetClass()
+    public function testSetClass()
     {
         $scriptUri = 'http://localhost/my_script.php';
 
@@ -147,7 +147,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertValidWSDL($dom);
     }
 
-    function testSetClassWithDifferentStyles()
+    public function testSetClassWithDifferentStyles()
     {
         $scriptUri = 'http://localhost/my_script.php';
 
@@ -301,7 +301,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-5072
      */
-    function testSetClassWithResponseReturnPartCompabilityMode()
+    public function testSetClassWithResponseReturnPartCompabilityMode()
     {
         $scriptUri = 'http://localhost/my_script.php';
 
@@ -318,7 +318,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         unlink(__DIR__.'/TestAsset/setclass.wsdl');
     }
 
-    function testAddFunctionSimple()
+    public function testAddFunctionSimple()
     {
         $scriptUri = 'http://localhost/my_script.php';
 
@@ -355,7 +355,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertValidWSDL($dom);
     }
 
-    function testAddFunctionSimpleWithDifferentStyle()
+    public function testAddFunctionSimpleWithDifferentStyle()
     {
         $scriptUri = 'http://localhost/my_script.php';
 
@@ -401,7 +401,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-5072
      */
-    function testAddFunctionSimpleInReturnNameCompabilityMode()
+    public function testAddFunctionSimpleInReturnNameCompabilityMode()
     {
         $scriptUri = 'http://localhost/my_script.php';
 
@@ -418,7 +418,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertValidWSDL($dom);
     }
 
-    function testAddFunctionMultiple()
+    public function testAddFunctionMultiple()
     {
         $scriptUri = 'http://localhost/my_script.php';
 

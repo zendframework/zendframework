@@ -10,6 +10,8 @@
 
 namespace Zend\Mail\Storage;
 
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -205,7 +207,9 @@ class Mbox extends AbstractStorage
     protected function _isMboxFile($file, $fileIsString = true)
     {
         if ($fileIsString) {
-            $file = @fopen($file, 'r');
+            ErrorHandler::start(E_WARNING);
+            $file = fopen($file, 'r');
+            ErrorHandler::stop();
             if (!$file) {
                 return false;
             }
@@ -221,7 +225,9 @@ class Mbox extends AbstractStorage
         }
 
         if ($fileIsString) {
-            @fclose($file);
+            ErrorHandler::start(E_WARNING);
+            fclose($file);
+            ErrorHandler::stop();
         }
 
         return $result;
@@ -248,7 +254,9 @@ class Mbox extends AbstractStorage
         $this->_filemtime = filemtime($this->_filename);
 
         if (!$this->_isMboxFile($this->_fh, false)) {
-            @fclose($this->_fh);
+            ErrorHandler::start(E_WARNING);
+            fclose($this->_fh);
+            ErrorHandler::stop();
             throw new Exception\InvalidArgumentException('file is not a valid mbox format');
         }
 
@@ -281,7 +289,9 @@ class Mbox extends AbstractStorage
      */
     public function close()
     {
-        @fclose($this->_fh);
+        ErrorHandler::start(E_WARNING);
+        fclose($this->_fh);
+        ErrorHandler::stop();
         $this->_positions = array();
     }
 

@@ -61,7 +61,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     public function testGetClient()
     {
-    	$this->assertTrue(is_a($this->_commonInfrastructure->getClient(), $this->_clientType));
+        $this->assertTrue(is_a($this->_commonInfrastructure->getClient(), $this->_clientType));
     }
 
     /**

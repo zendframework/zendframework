@@ -23,16 +23,22 @@ use Zend\Stdlib\AbstractOptions;
 class DbTableGatewayOptions extends AbstractOptions
 {
     /**
-     * Data Column
-     * @var string
-     */
-    protected $dataColumn = 'data';
-
-    /**
      * ID Column
      * @var string
      */
     protected $idColumn = 'id';
+
+    /**
+     * Name Column
+     * @var string
+     */
+    protected $nameColumn = 'name';
+
+    /**
+     * Data Column
+     * @var string
+     */
+    protected $dataColumn = 'data';
 
     /**
      * Lifetime Column
@@ -46,20 +52,59 @@ class DbTableGatewayOptions extends AbstractOptions
      */
     protected $modifiedColumn = 'modified';
 
-    /**
-     * Name Column
-     * @var string
-     */
-    protected $nameColumn = 'name';
 
     /**
-     * Get Data Column
+     * Set Id Column
+     *
+     * @param string $idColumn
+     * @return DbTableGatewayOptions
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setIdColumn($idColumn)
+    {
+        $idColumn = (string) $idColumn;
+        if (strlen($idColumn) === 0) {
+            throw new Exception\InvalidArgumentException('$idColumn must be a non-empty string');
+        }
+        $this->idColumn = $idColumn;
+        return $this;
+    }
+
+    /**
+     * Get Id Column
      *
      * @return string
      */
-    public function getDataColumn()
+    public function getIdColumn()
     {
-        return $this->dataColumn;
+        return $this->idColumn;
+    }
+
+    /**
+     * Set Name Column
+     *
+     * @param string $nameColumn
+     * @return DbTableGatewayOptions
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setNameColumn($nameColumn)
+    {
+        $nameColumn = (string) $nameColumn;
+        if (strlen($nameColumn) === 0) {
+            throw new Exception\InvalidArgumentException('$nameColumn must be a non-empty string');
+        }
+        $this->nameColumn = $nameColumn;
+        return $this;
+    }
+
+    /**
+     * Get Name Column
+     *
+     * @return string
+     */
+    public function getNameColumn()
+    {
+        return $this->nameColumn;
     }
 
     /**
@@ -80,40 +125,13 @@ class DbTableGatewayOptions extends AbstractOptions
     }
 
     /**
-     * Get Id Column
+     * Get Data Column
      *
      * @return string
      */
-    public function getIdColumn()
+    public function getDataColumn()
     {
-        return $this->idColumn;
-    }
-
-    /**
-     * Set Id Column
-     *
-     * @param string $idColumn
-     * @return DbTableGatewayOptions
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setIdColumn($idColumn)
-    {
-        $idColumn = (string) $idColumn;
-        if (strlen($idColumn) === 0) {
-            throw new Exception\InvalidArgumentException('$idColumn must be a non-empty string');
-        }
-        $this->idColumn = $idColumn;
-        return $this;
-    }
-
-    /**
-     * Get Lifetime Column
-     *
-     * @return string
-     */
-    public function getLifetimeColumn()
-    {
-        return $this->lifetimeColumn;
+        return $this->dataColumn;
     }
 
     /**
@@ -134,13 +152,13 @@ class DbTableGatewayOptions extends AbstractOptions
     }
 
     /**
-     * Get Modified Column
+     * Get Lifetime Column
      *
      * @return string
      */
-    public function getModifiedColumn()
+    public function getLifetimeColumn()
     {
-        return $this->modifiedColumn;
+        return $this->lifetimeColumn;
     }
 
     /**
@@ -161,29 +179,12 @@ class DbTableGatewayOptions extends AbstractOptions
     }
 
     /**
-     * Get Name Column
+     * Get Modified Column
      *
      * @return string
      */
-    public function getNameColumn()
+    public function getModifiedColumn()
     {
-        return $this->nameColumn;
-    }
-
-    /**
-     * Set Name Column
-     *
-     * @param string $nameColumn
-     * @return DbTableGatewayOptions
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setNameColumn($nameColumn)
-    {
-        $nameColumn = (string) $nameColumn;
-        if (strlen($nameColumn) === 0) {
-            throw new Exception\InvalidArgumentException('$nameColumn must be a non-empty string');
-        }
-        $this->nameColumn = $nameColumn;
-        return $this;
+        return $this->modifiedColumn;
     }
 }

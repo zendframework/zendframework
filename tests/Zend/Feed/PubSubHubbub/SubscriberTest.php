@@ -278,7 +278,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetStorageImplementation()
     {
-	$storage = new Subscription($this->_tableGateway);
+        $storage = new Subscription($this->_tableGateway);
         $this->_subscriber->setStorage($storage);
         $this->assertThat($this->_subscriber->getStorage(), $this->identicalTo($storage));
     }

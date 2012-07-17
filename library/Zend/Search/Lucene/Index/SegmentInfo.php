@@ -1532,7 +1532,7 @@ class SegmentInfo implements TermsStreamInterface
                 return;
             } else {
                 throw new RuntimeException(
-                	'Delete file processing workflow is corrupted for the segment \'' . $this->_name . '\'.'
+                    'Delete file processing workflow is corrupted for the segment \'' . $this->_name . '\'.'
                 );
             }
         }

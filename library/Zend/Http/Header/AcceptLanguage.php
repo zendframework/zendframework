@@ -9,6 +9,8 @@
  */
 
 namespace Zend\Http\Header;
+use Zend\Http\Header\Accept\FieldValuePart;
+
 
 /**
  * Accept Language Header
@@ -63,6 +65,50 @@ class AcceptLanguage extends AbstractAccept
     public function hasLanguage($type)
     {
         return $this->hasType($type);
+    }
+
+    /**
+     * Parse the keys contained in the header line
+     *
+     * @param string mediaType
+     * @return \Zend\Http\Header\Accept\FieldValuePart\LanguageFieldValuePart
+     * @see \Zend\Http\Header\AbstractAccept::parseFieldValuePart()
+     */
+    protected function parseFieldValuePart($fieldValuePart)
+    {
+        $raw = $fieldValuePart;
+        if ($pos = strpos($fieldValuePart, '-')) {
+            $type = trim(substr($fieldValuePart, 0, $pos));
+        } else {
+            $type = trim(substr($fieldValuePart, 0));
+        }
+
+        $params = $this->getParametersFromFieldValuePart($fieldValuePart);
+
+        if ($pos = strpos($fieldValuePart, ';')) {
+            $fieldValuePart = $type = trim(substr($fieldValuePart, 0, $pos));
+        }
+
+        if ($pos = strpos($fieldValuePart, '-')) {
+            $subtypeWhole = $format = $subtype = trim(substr($fieldValuePart, strpos($fieldValuePart, '-')+1));
+        } else {
+            $subtypeWhole = '';
+            $format = '*';
+            $subtype = '*';
+        }
+
+        $aggregated = array(
+                'typeString' => trim($fieldValuePart),
+                'type'       => $type,
+                'subtype'    => $subtype,
+                'subtypeRaw' => $subtypeWhole,
+                'format'     => $format,
+                'priority'   => isset($params['q']) ? $params['q'] : 1,
+                'params'     => $params,
+                'raw'        => trim($raw)
+        );
+
+        return new FieldValuePart\LanguageFieldValuePart((object) $aggregated);
     }
 
 }

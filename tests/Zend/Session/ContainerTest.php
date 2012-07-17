@@ -11,7 +11,7 @@
 namespace ZendTest\Session;
 
 use Zend\Session\Container;
-use Zend\Session\Configuration\StandardConfiguration;
+use Zend\Session\Config\StandardConfig;
 use Zend\Session\ManagerInterface as Manager;
 use Zend\Session;
 
@@ -29,7 +29,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $_SESSION = array();
         Container::setDefaultManager(null);
 
-        $config = new StandardConfiguration(array(
+        $config = new StandardConfig(array(
             'storage' => 'Zend\\Session\\Storage\\ArrayStorage',
         ));
 
@@ -167,14 +167,14 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $manager   = $container->getManager();
         $this->assertTrue($manager instanceof Manager);
         $config  = $manager->getConfig();
-        $this->assertTrue($config instanceof Session\Configuration\SessionConfiguration);
+        $this->assertTrue($config instanceof Session\Config\SessionConfig);
         $storage = $manager->getStorage();
         $this->assertTrue($storage instanceof Session\Storage\SessionStorage);
     }
 
     public function testContainerAllowsInjectingManagerViaConstructor()
     {
-        $config = new StandardConfiguration(array(
+        $config = new StandardConfig(array(
             'storage' => 'Zend\\Session\\Storage\\ArrayStorage',
         ));
         $manager = new TestAsset\TestManager($config);

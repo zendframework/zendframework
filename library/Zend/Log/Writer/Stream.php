@@ -12,6 +12,7 @@ namespace Zend\Log\Writer;
 
 use Zend\Log\Exception;
 use Zend\Log\Formatter\Simple as SimpleFormatter;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -87,7 +88,10 @@ class Stream extends AbstractWriter
     {
         $line = $this->formatter->format($event);
 
-        if (false === @fwrite($this->stream, $line)) {
+        ErrorHandler::start(E_WARNING);
+        $result = fwrite($this->stream, $line);
+        ErrorHandler::stop();
+        if (false === $result) {
             throw new Exception\RuntimeException("Unable to write to stream");
         }
     }

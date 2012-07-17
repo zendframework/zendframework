@@ -321,7 +321,7 @@ class Index implements SearchIndexInterface
                 }
 
                 throw new RuntimeException(
-                	'Separate norm files are not supported. Optimize index to use it with Zend\Search\Lucene.'
+                    'Separate norm files are not supported. Optimize index to use it with Zend\Search\Lucene.'
                 );
             }
 

@@ -91,9 +91,7 @@ class SessionManager extends AbstractManager
 
         // Since session is starting, we need to potentially repopulate our
         // session storage
-        if ($storage instanceof Storage\SessionStorage
-            && $_SESSION !== $storage
-        ) {
+        if ($storage instanceof Storage\SessionStorage && $_SESSION !== $storage) {
             if (!$preserveStorage) {
                 $storage->fromArray($_SESSION);
             }
@@ -132,7 +130,7 @@ class SessionManager extends AbstractManager
     /**
      * Write session to save handler and close
      *
-     * Once done, the Storage object will be marked as immutable.
+     * Once done, the Storage object will be marked as isImmutable.
      *
      * @return void
      */
@@ -148,31 +146,12 @@ class SessionManager extends AbstractManager
         // Additionally, while you _can_ write to $_SESSION following a
         // session_write_close() operation, no changes made to it will be
         // flushed to the session handler. As such, we now mark the storage
-        // object immutable.
+        // object isImmutable.
         $storage  = $this->getStorage();
         $_SESSION = (array) $storage;
         session_write_close();
         $storage->fromArray($_SESSION);
         $storage->markImmutable();
-    }
-
-    /**
-     * Get session name
-     *
-     * Proxies to {@link session_name()}.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        if (null === $this->name) {
-            // If we're grabbing via session_name(), we don't need our
-            // validation routine; additionally, calling setName() after
-            // session_start() can lead to issues, and often we just need the name
-            // in order to do things such as setting cookies.
-            $this->name = session_name();
-        }
-        return $this->name;
     }
 
     /**
@@ -205,15 +184,22 @@ class SessionManager extends AbstractManager
     }
 
     /**
-     * Get session ID
+     * Get session name
      *
-     * Proxies to {@link session_id()}
+     * Proxies to {@link session_name()}.
      *
      * @return string
      */
-    public function getId()
+    public function getName()
     {
-        return session_id();
+        if (null === $this->name) {
+            // If we're grabbing via session_name(), we don't need our
+            // validation routine; additionally, calling setName() after
+            // session_start() can lead to issues, and often we just need the name
+            // in order to do things such as setting cookies.
+            $this->name = session_name();
+        }
+        return $this->name;
     }
 
     /**
@@ -234,6 +220,18 @@ class SessionManager extends AbstractManager
         session_id($id);
         $this->start();
         return $this;
+    }
+
+    /**
+     * Get session ID
+     *
+     * Proxies to {@link session_id()}
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        return session_id();
     }
 
     /**
@@ -300,7 +298,7 @@ class SessionManager extends AbstractManager
      *
      * By default, uses an instance of {@link ValidatorChain}.
      *
-     * @return void
+     * @return EventManagerInterface
      */
     public function getValidatorChain()
     {

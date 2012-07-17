@@ -12,6 +12,7 @@ namespace Zend\GData;
 
 use Zend\Http;
 use Zend\Http\Header\Etag;
+use Zend\Stdlib\ErrorHandler;
 use Zend\Uri;
 
 /**
@@ -784,10 +785,12 @@ class App
         }
 
         // Load the feed as an XML DOMDocument object
-        @ini_set('track_errors', 1);
+        ErrorHandler::start(E_WARNING);
+        ini_set('track_errors', 1);
         $doc = new \DOMDocument();
-        $success = @$doc->loadXML($string);
-        @ini_restore('track_errors');
+        $success = $doc->loadXML($string);
+        ini_restore('track_errors');
+        ErrorHandler::stop();
 
         if (!$success) {
             throw new App\Exception(
@@ -815,9 +818,11 @@ class App
     public static function importFile($filename,
             $className='Zend\GData\App\Feed', $useIncludePath = false)
     {
-        @ini_set('track_errors', 1);
-        $feed = @file_get_contents($filename, $useIncludePath);
-        @ini_restore('track_errors');
+        ErrorHandler::start(E_WARNING);
+        ini_set('track_errors', 1);
+        $feed = file_get_contents($filename, $useIncludePath);
+        ini_restore('track_errors');
+        ErrorHandler::stop();
         if ($feed === false) {
             throw new App\Exception(
                 "File could not be loaded: $php_errormsg");

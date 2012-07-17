@@ -22,7 +22,7 @@ class MysqliResult
     /**
      * mapping taken from http://forums.mysql.com/read.php?52,255868,255895#msg-255895
      */
-    static public $mysqli_type = array(
+    public static $mysqli_type = array(
         0   => "MYSQLI_TYPE_DECIMAL",
         1   => "MYSQLI_TYPE_TINYINT",
         2   => "MYSQLI_TYPE_SMALLINT",
@@ -51,7 +51,7 @@ class MysqliResult
     );
 
     // Build an associative array for a type look up
-    static $mysqli_to_php = array(
+    public static $mysqli_to_php = array(
         "MYSQLI_TYPE_DECIMAL"     => 'float',
         "MYSQLI_TYPE_NEWDECIMAL"  => 'float',
         "MYSQLI_TYPE_BIT"         => 'integer',

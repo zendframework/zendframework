@@ -103,10 +103,10 @@ class KeyListIterator implements IteratorInterface, Countable
         return $this;
     }
 
-	/**
-	 * Get current key, value or metadata.
-	 *
-	 * @return mixed
+    /**
+     * Get current key, value or metadata.
+     *
+     * @return mixed
      */
     public function current()
     {
@@ -125,20 +125,20 @@ class KeyListIterator implements IteratorInterface, Countable
         return $key;
     }
 
-	/**
-	 * Get current key
-	 *
-	 * @return string
+    /**
+     * Get current key
+     *
+     * @return string
      */
     public function key()
     {
         return $this->keys[$this->position];
     }
 
-	/**
-	 * Checks if current position is valid
-	 *
-	 * @return boolean
+    /**
+     * Checks if current position is valid
+     *
+     * @return boolean
      */
     public function valid()
     {
@@ -155,10 +155,10 @@ class KeyListIterator implements IteratorInterface, Countable
         $this->position++;
     }
 
-	/**
-	 * Rewind the Iterator to the first element.
-	 *
-	 * @return void
+    /**
+     * Rewind the Iterator to the first element.
+     *
+     * @return void
      */
     public function rewind()
     {

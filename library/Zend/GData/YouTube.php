@@ -11,6 +11,7 @@
 namespace Zend\GData;
 
 use Zend\Http;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Service class for interacting with the YouTube Data API.
@@ -582,10 +583,12 @@ class YouTube extends Media
     public static function parseFormUploadTokenResponse($response)
     {
         // Load the feed as an XML DOMDocument object
-        @ini_set('track_errors', 1);
+        ErrorHandler::start(E_WARNING);
+        ini_set('track_errors', 1);
         $doc = new \DOMDocument();
-        $success = @$doc->loadXML($response);
-        @ini_restore('track_errors');
+        $success = $doc->loadXML($response);
+        ini_restore('track_errors');
+        ErrorHandler::stop();
 
         if (!$success) {
             throw new App\Exception(

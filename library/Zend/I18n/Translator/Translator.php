@@ -333,7 +333,7 @@ class Translator
                 );
             }
 
-            return ($number != 1 ? $singular : $plural);
+            return ($number == 1 ? $singular : $plural);
         }
 
         $index = $this->messages[$textDomain][$locale]

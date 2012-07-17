@@ -128,7 +128,7 @@ class CurlTest extends CommonHttpTests
         $this->client = new \Zend\Http\Client($this->client->getUri(true), $config);
 
         $this->setExpectedException(
-        	'Zend\Http\Client\Adapter\Exception\RuntimeException',
+            'Zend\Http\Client\Adapter\Exception\RuntimeException',
             'Unknown or erroreous cURL option'
             );
         $this->client->send();

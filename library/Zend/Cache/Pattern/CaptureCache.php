@@ -31,10 +31,9 @@ class CaptureCache extends AbstractPattern
      * Start the cache
      *
      * @param  string $pageId  Page identifier
-     * @param  array  $options Options
      * @return boolean false
      */
-    public function start($pageId = null, array $options = array())
+    public function start($pageId = null)
     {
         if ($this->pageId !== null) {
             throw new Exception\RuntimeException("Capturing already stated with page id '{$this->pageId}'");
@@ -55,11 +54,10 @@ class CaptureCache extends AbstractPattern
      * Get from cache
      *
      * @param  null|string $pageId
-     * @param  array $options
      * @return bool|string
      * @throws Exception\RuntimeException
      */
-    public function get($pageId = null, array $options = array())
+    public function get($pageId = null)
     {
         if (($pageId = (string) $pageId) === '') {
             $pageId = $this->detectPageId();
@@ -87,10 +85,9 @@ class CaptureCache extends AbstractPattern
      * Checks if a cache with given id exists
      *
      * @param  null|string $pageId
-     * @param  array $options
      * @return bool
      */
-    public function exists($pageId = null, array $options = array())
+    public function exists($pageId = null)
     {
         if (($pageId = (string) $pageId) === '') {
             $pageId = $this->detectPageId();
@@ -107,11 +104,10 @@ class CaptureCache extends AbstractPattern
      * Remove from cache
      *
      * @param  null|string $pageId
-     * @param  array $options
      * @throws Exception\RuntimeException
      * @return void
      */
-    public function remove($pageId = null, array $options = array())
+    public function remove($pageId = null)
     {
         if (($pageId = (string)$pageId) === '') {
             $pageId = $this->detectPageId();

@@ -84,6 +84,14 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($newAdapter === Serializer::getDefaultAdapter());
     }
 
+    public function testFactoryPassesAdapterOptions()
+    {
+        /** @var Adapter\PythonPickle $adapter  */
+        $adapter = Serializer::factory('pythonpickle', 0);
+        $this->assertTrue($adapter instanceof Adapter\PythonPickle);
+        $this->assertEquals(0, $adapter->getProtocol());
+    }
+
     public function testSerializeDefaultAdapter()
     {
         $value = 'test';
@@ -97,7 +105,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
         $value = 'test';
         $adapter = new Adapter\Json();
         $expected = $adapter->serialize($value);
-        $this->assertEquals($expected, Serializer::serialize($value, array('adapter' => $adapter)));
+        $this->assertEquals($expected, Serializer::serialize($value, $adapter));
     }
 
     public function testUnserializeDefaultAdapter()
@@ -114,7 +122,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
         $adapter = new Adapter\Json();
         $value = '"test"';
         $expected = $adapter->unserialize($value);
-        $this->assertEquals($expected, Serializer::unserialize($value, array('adapter' => $adapter)));
+        $this->assertEquals($expected, Serializer::unserialize($value, $adapter));
     }
 
 }

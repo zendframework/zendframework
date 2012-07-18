@@ -10,7 +10,7 @@
 
 namespace ZendTest\I18n\Validator;
 
-use Zend\I18n\Validator\Iban as IbanValidator;
+use Zend\Validator\Iban as IbanValidator;
 
 /**
  * @category   Zend
@@ -29,6 +29,7 @@ class IbanTest extends \PHPUnit_Framework_TestCase
             array('AD1200012030200354100100', false),
         );
     }
+
     /**
      * Ensures that the validator follows expected behavior
      *
@@ -41,33 +42,36 @@ class IbanTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $validator->isValid($iban));
     }
 
-    public function testSettingAndGettingLocale()
+    public function testSettingAndGettingCountryCode()
     {
         $validator = new IbanValidator();
 
-        $validator->setLocale('de_DE');
-        $this->assertEquals('de_DE', $validator->getLocale());
+        $validator->setCountryCode('DE');
+        $this->assertEquals('DE', $validator->getCountryCode());
 
-        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Locale must contain a region');
-        $validator->setLocale('foobar')->isValid('AD1200012030200354100100');
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'ISO 3166-1');
+        $validator->setCountryCode('foo');
     }
 
-    public function testInstanceWithLocale()
+    public function testInstanceWithCountryCode()
     {
-        $validator = new IbanValidator(array('locale' => 'de_AT'));
-        $this->assertTrue($validator->isValid('AT611904300234573201'));
+        $validator = new IbanValidator(array('country_code' => 'AT'));
+        $this->assertEquals('AT', $validator->getCountryCode());
+
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'ISO 3166-1');
+        $validator = new IbanValidator(array('country_code' => 'BAR'));
     }
 
-    public function testIbanNotSupported()
+    public function testIbanNotSupportedCountryCode()
     {
-        $validator = new IbanValidator(array('locale' => 'en_US'));
-        $this->assertFalse($validator->isValid('AT611904300234573201'));
+        $validator = new IbanValidator();
+        $this->assertFalse($validator->isValid('US611904300234573201'));
     }
 
     /**
      * @group ZF-10556
      */
-    public function testIbanDetectionWithoutLocale()
+    public function testIbanDetectionWithoutCountryCode()
     {
         $validator = new IbanValidator();
         $this->assertTrue($validator->isValid('AT611904300234573201'));
@@ -76,7 +80,10 @@ class IbanTest extends \PHPUnit_Framework_TestCase
     public function testEqualsMessageTemplates()
     {
         $validator = new IbanValidator();
-        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+        $this->assertAttributeEquals(
+            $validator->getOption('messageTemplates'),
+            'messageTemplates',
+            $validator
+        );
     }
 }

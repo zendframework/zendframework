@@ -8,9 +8,8 @@
  * @package   Zend_I18n
  */
 
-namespace Zend\I18n\Validator;
+namespace Zend\Validator;
 
-use Locale;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
@@ -40,14 +39,14 @@ class Iban extends AbstractValidator
     );
 
     /**
-     * Optional locale
+     * Optional country code by ISO 3166-1
      *
      * @var string|null
      */
-    protected $locale;
+    protected $countryCode;
 
     /**
-     * IBAN regexes by region
+     * IBAN regexes by country code
      *
      * @var array
      */
@@ -104,33 +103,43 @@ class Iban extends AbstractValidator
             $options = ArrayUtils::iteratorToArray($options);
         }
 
-        if (array_key_exists('locale', $options)) {
-            $this->setLocale($options['locale']);
+        if (array_key_exists('country_code', $options)) {
+            $this->setCountryCode($options['country_code']);
         }
 
         parent::__construct($options);
     }
 
     /**
-     * Returns the locale option
+     * Returns the optional country code by ISO 3166-1
      *
      * @return string|null
      */
-    public function getLocale()
+    public function getCountryCode()
     {
-        return $this->locale;
+        return $this->countryCode;
     }
 
     /**
-     * Sets the locale option
+     * Sets an optional country code by ISO 3166-1
      *
-     * @param  string|null $locale
+     * @param  string|null $countryCode
      * @return Iban provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
-    public function setLocale($locale = null)
+    public function setCountryCode($countryCode = null)
     {
-        $this->locale = $locale;
+        if ($countryCode !== null) {
+            $countryCode = (string) $countryCode;
+
+            if (!isset(self::$ibanRegex[$countryCode])) {
+                throw new Exception\InvalidArgumentException(
+                    "Country code '{$countryCode}' invalid by ISO 3166-1 or not supported"
+                );
+            }
+        }
+
+        $this->countryCode = $countryCode;
         return $this;
     }
 
@@ -150,22 +159,18 @@ class Iban extends AbstractValidator
         $value = strtoupper($value);
         $this->setValue($value);
 
-        if (empty($this->locale)) {
-            $region = substr($value, 0, 2);
-        } else {
-            $region = Locale::getRegion($this->locale);
-            if ('' === $region) {
-                throw new Exception\InvalidArgumentException("Locale must contain a region");
-            }
+        $countryCode = $this->getCountryCode();
+        if ($countryCode === null) {
+            $countryCode = substr($value, 0, 2);
         }
 
-        if (!array_key_exists($region, self::$ibanRegex)) {
-            $this->setValue($region);
+        if (!array_key_exists($countryCode, self::$ibanRegex)) {
+            $this->setValue($countryCode);
             $this->error(self::NOTSUPPORTED);
             return false;
         }
 
-        if (!preg_match(self::$ibanRegex[$region], $value)) {
+        if (!preg_match(self::$ibanRegex[$countryCode], $value)) {
             $this->error(self::FALSEFORMAT);
             return false;
         }
@@ -176,7 +181,8 @@ class Iban extends AbstractValidator
                   'N',  'O',  'P',  'Q',  'R',  'S',  'T',  'U',  'V',  'W',  'X',  'Y',  'Z'),
             array('10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
                   '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35'),
-            $format);
+            $format
+        );
 
         $temp = intval(substr($format, 0, 1));
         $len  = strlen($format);

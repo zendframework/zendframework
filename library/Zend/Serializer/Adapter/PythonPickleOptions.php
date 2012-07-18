@@ -55,16 +55,4 @@ class PythonPickleOptions extends AdapterOptions
     {
         return $this->protocol;
     }
-
-    /**
-     * @return bool
-     */
-    public function isBinary()
-    {
-        if ($this->isBinary  === null) {
-            $this->isBinary  = ($this->protocol > 0);
-        }
-
-        return $this->isBinary;
-    }
 }

@@ -118,8 +118,6 @@ class PythonPickle extends AbstractAdapter
 
     // process vars
     protected $protocol  = null;
-    protected $binary    = null;
-
     protected $memo      = array();
     protected $pickle    = '';
     protected $pickleLen = 0;
@@ -194,9 +192,7 @@ class PythonPickle extends AbstractAdapter
     public function serialize($value)
     {
         $this->clearProcessVars();
-
         $this->protocol = $this->options->getProtocol();
-        $this->binary   = $this->options->isBinary();
 
         // write
         if ($this->protocol >= 2) {
@@ -264,20 +260,18 @@ class PythonPickle extends AbstractAdapter
      */
     protected function writeGet($id)
     {
-        if ($this->binary) {
-            if ($id <= 0xFF) {
-                // BINGET + chr(i)
-                $this->pickle .= self::OP_BINGET . chr($id);
-            } else {
-                // LONG_BINGET + pack("<i", i)
-                $bin = pack('l', $id);
-                if (self::$isLittleEndian === false) {
-                    $bin = strrev($bin);
-                }
-                $this->pickle .= self::OP_LONG_BINGET . $bin;
-            }
-        } else {
+        if ($this->protocol == 0) {
             $this->pickle .= self::OP_GET . $id . "\r\n";
+        } elseif ($id <= 0xFF) {
+            // BINGET + chr(i)
+            $this->pickle .= self::OP_BINGET . chr($id);
+        } else {
+            // LONG_BINGET + pack("<i", i)
+            $bin = pack('l', $id);
+            if (self::$isLittleEndian === false) {
+                $bin = strrev($bin);
+            }
+            $this->pickle .= self::OP_LONG_BINGET . $bin;
         }
     }
 
@@ -288,20 +282,18 @@ class PythonPickle extends AbstractAdapter
      */
     protected function writePut($id)
     {
-        if ($this->binary) {
-            if ($id <= 0xff) {
-                // BINPUT + chr(i)
-                $this->pickle .= self::OP_BINPUT . chr($id);
-            } else {
-                // LONG_BINPUT + pack("<i", i)
-                $bin = pack('l', $id);
-                if (self::$isLittleEndian === false) {
-                    $bin = strrev($bin);
-                }
-                $this->pickle .= self::OP_LONG_BINPUT . $bin;
-            }
-        } else {
+        if ($this->protocol == 0) {
             $this->pickle .= self::OP_PUT . $id . "\r\n";
+        } elseif ($id <= 0xff) {
+            // BINPUT + chr(i)
+            $this->pickle .= self::OP_BINPUT . chr($id);
+        } else {
+            // LONG_BINPUT + pack("<i", i)
+            $bin = pack('l', $id);
+            if (self::$isLittleEndian === false) {
+                $bin = strrev($bin);
+            }
+            $this->pickle .= self::OP_LONG_BINPUT . $bin;
         }
     }
 
@@ -335,34 +327,35 @@ class PythonPickle extends AbstractAdapter
      */
     protected function writeInt($value)
     {
-        if ($this->binary) {
-            if ($value >= 0) {
-                if ($value <= 0xFF) {
-                    // self.write(BININT1 + chr(obj))
-                    $this->pickle .= self::OP_BININT1 . chr($value);
-                } elseif ($value <= 0xFFFF) {
-                    // self.write("%c%c%c" % (BININT2, obj&0xff, obj>>8))
-                    $this->pickle .= self::OP_BININT2 . pack('v', $value);
-                }
-                return;
-            }
-
-            // Next check for 4-byte signed ints:
-            $highBits = $value >> 31;  // note that Python shift sign-extends
-            if ($highBits == 0 || $highBits == -1) {
-                // All high bits are copies of bit 2**31, so the value
-                // fits in a 4-byte signed int.
-                // self.write(BININT + pack("<i", obj))
-                $bin = pack('l', $value);
-                if (self::$isLittleEndian === false) {
-                    $bin = strrev($bin);
-                }
-                $this->pickle .= self::OP_BININT . $bin;
-                return;
-            }
+        if ($this->protocol == 0) {
+            $this->pickle .= self::OP_INT . $value . "\r\n";
+            return;
         }
 
-        $this->pickle .= self::OP_INT . $value . "\r\n";
+        if ($value >= 0) {
+            if ($value <= 0xFF) {
+                // self.write(BININT1 + chr(obj))
+                $this->pickle .= self::OP_BININT1 . chr($value);
+            } elseif ($value <= 0xFFFF) {
+                // self.write("%c%c%c" % (BININT2, obj&0xff, obj>>8))
+                $this->pickle .= self::OP_BININT2 . pack('v', $value);
+            }
+            return;
+        }
+
+        // Next check for 4-byte signed ints:
+        $highBits = $value >> 31;  // note that Python shift sign-extends
+        if ($highBits == 0 || $highBits == -1) {
+            // All high bits are copies of bit 2**31, so the value
+            // fits in a 4-byte signed int.
+            // self.write(BININT + pack("<i", obj))
+            $bin = pack('l', $value);
+            if (self::$isLittleEndian === false) {
+                $bin = strrev($bin);
+            }
+            $this->pickle .= self::OP_BININT . $bin;
+            return;
+        }
     }
 
     /**
@@ -372,15 +365,15 @@ class PythonPickle extends AbstractAdapter
      */
     protected function writeFloat($value)
     {
-        if ($this->binary) {
+        if ($this->protocol == 0) {
+            $this->pickle .= self::OP_FLOAT . $value . "\r\n";
+        } else {
             // self.write(BINFLOAT + pack('>d', obj))
             $bin = pack('d', $value);
             if (self::$isLittleEndian === true) {
                 $bin = strrev($bin);
             }
             $this->pickle .= self::OP_BINFLOAT . $bin;
-        } else {
-            $this->pickle .= self::OP_FLOAT . $value . "\r\n";
         }
     }
 
@@ -396,7 +389,9 @@ class PythonPickle extends AbstractAdapter
             return;
         }
 
-        if ($this->binary) {
+        if ($this->protocol == 0) {
+            $this->pickle .= self::OP_STRING . $this->quoteString($value) . "\r\n";
+        } else {
             $n = strlen($value);
             if ($n <= 0xFF) {
                 // self.write(SHORT_BINSTRING + chr(n) + obj)
@@ -409,8 +404,6 @@ class PythonPickle extends AbstractAdapter
                 }
                 $this->pickle .= self::OP_BINSTRING . $binLen . $value;
             }
-        } else {
-            $this->pickle .= self::OP_STRING . $this->quoteString($value) . "\r\n";
         }
 
         $this->memorize($value);

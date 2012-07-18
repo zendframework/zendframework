@@ -12,6 +12,7 @@ namespace ZendTest\Form;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element;
+use Zend\Form\Form;
 use Zend\Form\Fieldset;
 
 /**
@@ -245,5 +246,20 @@ class FieldsetTest extends TestCase
             $test[] = $element->getName();
         }
         $this->assertEquals($expected, $test);
+    }
+
+    public function testSubFieldsetsBindObject()
+    {
+        $form = new Form();
+        $fieldset = new Fieldset('foobar');
+        $form->add($fieldset);
+        $value = new \ArrayObject(array(
+            'foobar' => 'abc',
+        ));
+        $value['foobar'] = new \ArrayObject(array(
+            'foo' => 'abc'
+        ));
+        $form->bind($value);
+        $this->assertSame($fieldset, $form->get('foobar'));
     }
 }

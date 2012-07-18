@@ -132,7 +132,7 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
     {
         $value = 'not a serialized string';
 
-        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'eval failed: syntax error');
+        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'syntax error');
         $this->adapter->unserialize($value);
     }
 }

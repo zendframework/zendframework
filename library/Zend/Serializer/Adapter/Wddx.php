@@ -11,6 +11,7 @@
 namespace Zend\Serializer\Adapter;
 
 use Zend\Serializer\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @link       http://www.infoloom.com/gcaconfs/WEB/chicago98/simeonov.HTM
@@ -82,16 +83,19 @@ class Wddx extends AbstractAdapter
     public function serialize($value)
     {
         $comment = $this->getOptions()->getComment();
+
+        ErrorHandler::start();
         if ($comment !== '') {
             $wddx = wddx_serialize_value($value, $comment);
         } else {
             $wddx = wddx_serialize_value($value);
         }
+        $error = ErrorHandler::stop();
 
         if ($wddx === false) {
-            $lastErr = error_get_last();
-            throw new Exception\RuntimeException('Serialization failed:' . $lastErr['message']);
+            throw new Exception\RuntimeException('Serialization failed', 0, $error);
         }
+
         return $wddx;
     }
 

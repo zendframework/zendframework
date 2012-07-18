@@ -11,6 +11,7 @@
 namespace Zend\Serializer\Adapter;
 
 use Zend\Serializer\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -53,11 +54,14 @@ class IgBinary extends AbstractAdapter
      */
     public function serialize($value)
     {
+        ErrorHandler::start();
         $ret = igbinary_serialize($value);
+        $err = ErrorHandler::stop();
+
         if ($ret === false) {
-            $lastErr = error_get_last();
-            throw new Exception\RuntimeException('Serialization failed: ' . $lastErr['message']);
+            throw new Exception\RuntimeException('Serialization failed', 0, $err);
         }
+
         return $ret;
     }
 
@@ -74,12 +78,12 @@ class IgBinary extends AbstractAdapter
             return null;
         }
 
+        ErrorHandler::start();
         $ret = igbinary_unserialize($serialized);
+        $err = ErrorHandler::stop();
 
         if ($ret === null) {
-            $lastErr = error_get_last();
-            $message = $lastErr ? $lastErr['message'] : 'syntax error';
-            throw new Exception\RuntimeException('Unserialization failed: ' . $message);
+            throw new Exception\RuntimeException('Unserialization failed', 0, $err);
         }
 
         return $ret;

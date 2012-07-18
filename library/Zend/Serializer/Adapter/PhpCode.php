@@ -11,6 +11,7 @@
 namespace Zend\Serializer\Adapter;
 
 use Zend\Serializer\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -41,12 +42,23 @@ class PhpCode extends AbstractAdapter
      */
     public function unserialize($code)
     {
+        ErrorHandler::start(E_ALL);
+
         $ret  = null;
         $eval = @eval('$ret=' . $code . ';');
+        $err  = ErrorHandler::stop();
 
-        if ($eval === false) {
-            $lastErr = error_get_last();
-            throw new Exception\RuntimeException('eval failed: ' . $lastErr['message']);
+        if ($eval === false || $err) {
+
+            $msg = 'eval failed';
+
+            // Syntax errors can't catch by error handler
+            if ($eval === false) {
+                $lastErr = error_get_last();
+                $msg.= ': ' . $lastErr['message'];
+            }
+
+            throw new Exception\RuntimeException($msg, 0, $err);
         }
 
         return $ret;

@@ -82,7 +82,7 @@ class Wddx extends AbstractAdapter
     public function serialize($value)
     {
         $comment = $this->getOptions()->getComment();
-        if ($comment) {
+        if ($comment !== '') {
             $wddx = wddx_serialize_value($value, $comment);
         } else {
             $wddx = wddx_serialize_value($value);

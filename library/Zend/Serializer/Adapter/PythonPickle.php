@@ -192,7 +192,7 @@ class PythonPickle extends AbstractAdapter
     public function serialize($value)
     {
         $this->clearProcessVars();
-        $this->protocol = $this->options->getProtocol();
+        $this->protocol = $this->getOptions()->getProtocol();
 
         // write
         if ($this->protocol >= 2) {
@@ -314,7 +314,7 @@ class PythonPickle extends AbstractAdapter
     protected function writeBool($value)
     {
         if ($this->protocol >= 2) {
-            $this->pickle .= ($value === true) ? self::OP_NEWTRUE : self::OP_NEWFALSE;;
+            $this->pickle .= ($value === true) ? self::OP_NEWTRUE : self::OP_NEWFALSE;
         } else {
             $this->pickle .= self::OP_INT . (($value === true) ? '01' : '00') . "\r\n";
         }
@@ -568,7 +568,7 @@ class PythonPickle extends AbstractAdapter
     }
 
     /**
-     *
+     * Clear temp variables needed for processing
      */
     protected function clearProcessVars()
     {
@@ -717,7 +717,7 @@ class PythonPickle extends AbstractAdapter
      */
     protected function loadPut()
     {
-        $id = (int)$this->readline();
+        $id = (int) $this->readline();
 
         $lastStack = count($this->stack) - 1;
         if (!isset($this->stack[$lastStack])) {
@@ -1020,7 +1020,7 @@ class PythonPickle extends AbstractAdapter
      */
     protected function _convertMatchingUnicodeSequence2Utf8(array $match)
     {
-        return $this->_hex2Utf8($match[1]);
+        return $this->hex2Utf8($match[1]);
     }
 
     /**
@@ -1030,7 +1030,7 @@ class PythonPickle extends AbstractAdapter
      * @return string
      * @throws Exception\RuntimeException on unmatched unicode sequence
      */
-    protected function _hex2Utf8($hex)
+    protected function hex2Utf8($hex)
     {
         $uniCode = hexdec($hex);
 
@@ -1341,8 +1341,10 @@ class PythonPickle extends AbstractAdapter
             if ($this->bigIntegerAdapter === null) {
                 $this->bigIntegerAdapter = BigInteger\BigInteger::getDefaultAdapter();
             }
-
-            $long = $this->bigIntegerAdapter->binToInt(strrev($data), true);
+            if (self::$isLittleEndian === true) {
+                $data = strrev($data);
+            }
+            $long = $this->bigIntegerAdapter->binToInt($data, true);
         } else {
             for ($i = 0; $i < $nbytes; $i++) {
                 $long += ord($data[$i]) * pow(256, $i);

@@ -43,7 +43,6 @@ class PhpCode extends AbstractAdapter
     public function unserialize($code)
     {
         ErrorHandler::start(E_ALL);
-
         $ret  = null;
         $eval = @eval('$ret=' . $code . ';');
         $err  = ErrorHandler::stop();
@@ -52,10 +51,10 @@ class PhpCode extends AbstractAdapter
 
             $msg = 'eval failed';
 
-            // Syntax errors can't catch by error handler
+            // Error handler doesn't catch syntax errors
             if ($eval === false) {
                 $lastErr = error_get_last();
-                $msg.= ': ' . $lastErr['message'];
+                $msg    .= ': ' . $lastErr['message'];
             }
 
             throw new Exception\RuntimeException($msg, 0, $err);

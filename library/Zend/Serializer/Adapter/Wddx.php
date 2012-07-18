@@ -19,22 +19,20 @@ use Zend\Serializer\Exception;
  * @package    Zend_Serializer
  * @subpackage Adapter
  */
-class Wddx implements AdapterInterface
+class Wddx extends AbstractAdapter
 {
     /**
-     * Comment
-     *
-     * @var string
+     * @var WddxOptions
      */
-    protected $comment = null;
+    protected $options = null;
 
     /**
      * Constructor
      *
-     * @param  string $comment
+     * @param  array|\Traversable|WddxOptions $options
      * @throws Exception\ExtensionNotLoadedException if wddx extension not found
      */
-    public function __construct($comment = null)
+    public function __construct($options = null)
     {
         if (!extension_loaded('wddx')) {
             throw new Exception\ExtensionNotLoadedException(
@@ -42,31 +40,36 @@ class Wddx implements AdapterInterface
             );
         }
 
-        if ($comment !== null) {
-            $this->comment = (string) $comment;
-        }
+        parent::__construct($options);
     }
 
     /**
-     * Set WDDX header comment
+     * Set options
      *
-     * @param  string $comment
+     * @param  array|\Traversable|WddxOptions $options
      * @return Wddx
      */
-    public function setComment($comment)
+    public function setOptions($options)
     {
-        $this->comment = (string) $comment;
+        if (!$options instanceof WddxOptions) {
+            $options = new WddxOptions($options);
+        }
+
+        $this->options = $options;
         return $this;
     }
 
     /**
-     * Get WDDX header comment
+     * Get options
      *
-     * @return null|string
+     * @return WddxOptions
      */
-    public function getComment()
+    public function getOptions()
     {
-        return $this->comment;
+        if ($this->options === null) {
+            $this->options = new WddxOptions();
+        }
+        return $this->options;
     }
 
     /**
@@ -78,8 +81,9 @@ class Wddx implements AdapterInterface
      */
     public function serialize($value)
     {
-        if ($this->comment) {
-            $wddx = wddx_serialize_value($value, $this->comment);
+        $comment = $this->getOptions()->getComment();
+        if ($comment) {
+            $wddx = wddx_serialize_value($value, $comment);
         } else {
             $wddx = wddx_serialize_value($value);
         }

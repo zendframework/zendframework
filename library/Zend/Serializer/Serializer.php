@@ -87,7 +87,7 @@ class Serializer
      * Change the default adapter.
      *
      * @param string|Adapter $adapter
-     * @param array|\Traversable $options
+     * @param array|\Traversable|null $options
      */
     public static function setDefaultAdapter($adapter, $adapterOptions = null)
     {
@@ -112,7 +112,8 @@ class Serializer
      *
      * @param  mixed $value
      * @param  string|Adapter $adapter
-     * @param  array|\Traversable|null $adapterOptions
+     * @param  array|\Traversable|null $adapterOptions Adapter constructor options
+     *                                                 only used to create adapter instance
      * @return string
      */
     public static function serialize($value, $adapter = null, $adapterOptions = null)
@@ -131,7 +132,8 @@ class Serializer
      *
      * @param  string $serialized
      * @param  string|Adapter $adapter
-     * @param  array|\Traversable|null $adapterOptions
+     * @param  array|\Traversable|null $adapterOptions Adapter constructor options
+     *                                                 only used to create adapter instance
      * @return mixed
      */
     public static function unserialize($serialized, $adapter = null, $adapterOptions = null)

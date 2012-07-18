@@ -12,7 +12,9 @@ namespace Zend\Serializer\Adapter;
 
 use stdClass;
 use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Serializer\Exception;
+use Zend\Math\BigInteger;
 
 /**
  * @link       http://www.python.org
@@ -23,7 +25,7 @@ use Zend\Serializer\Exception;
  * @package    Zend_Serializer
  * @subpackage Adapter
  */
-class PythonPickle implements AdapterInterface
+class PythonPickle extends AbstractAdapter
 {
     /**
      * Pickle opcodes. See pickletools.py for extensive docs.
@@ -114,13 +116,10 @@ class PythonPickle implements AdapterInterface
         "\xff" => '\\xff'
     );
 
-    /**
-     * @var int
-     */
-    protected $protocol = 0;
-
     // process vars
-    protected $binary    = false;
+    protected $protocol  = null;
+    protected $binary    = null;
+
     protected $memo      = array();
     protected $pickle    = '';
     protected $pickleLen = 0;
@@ -129,44 +128,59 @@ class PythonPickle implements AdapterInterface
     protected $marker    = null;
 
     /**
-     * Constructor
-     *
-     * @link Zend_Serializer_Adapter_AdapterAbstract::__construct()
+     * @var BigInteger\Adapter\AdapterInterface
      */
-    public function __construct($protocol = null)
-    {
-        if ($protocol !== null) {
-            $this->setProtocol($protocol);
-        }
+    protected $bigIntegerAdapter = null;
 
+    /**
+     * @var PythonPickleOptions
+     */
+    protected $options = null;
+
+    /**
+     * Constructor.
+     *
+     * @param  array|\Traversable|PythonPickleOptions $options Optional
+     */
+    public function __construct($options = null)
+    {
         // init
         if (self::$isLittleEndian === null) {
             self::$isLittleEndian = (pack('l', 1) === "\x01\x00\x00\x00");
         }
 
         $this->marker = new stdClass();
+
+        parent::__construct($options);
     }
 
-    public function setProtocol($protocol)
+    /**
+     * Set options
+     *
+     * @param  array|\Traversable|PythonPickleOptions $options
+     * @return PythonPickle
+     */
+    public function setOptions($options)
     {
-        $protocol = (int) $protocol;
-        if ($protocol < 0 || $protocol > 3) {
-            throw new Exception\InvalidArgumentException(
-                "Invalid or unknown protocol version '{$protocol}'"
-            );
+        if (!$options instanceof PythonPickleOptions) {
+            $options = new PythonPickleOptions($options);
         }
 
-        $this->protocol = $protocol;
-
+        $this->options = $options;
         return $this;
     }
 
     /**
-     * @return int
+     * Get options
+     *
+     * @return PythonPickleOptions
      */
-    public function getProtocol()
+    public function getOptions()
     {
-        return $this->protocol;
+        if ($this->options === null) {
+            $this->options = new PythonPickleOptions();
+        }
+        return $this->options;
     }
 
     /* serialize */
@@ -179,11 +193,10 @@ class PythonPickle implements AdapterInterface
      */
     public function serialize($value)
     {
-        $this->binary = $this->protocol != 0;
+        $this->clearProcessVars();
 
-        // clear process vars before serializing
-        $this->memo   = array();
-        $this->pickle = '';
+        $this->protocol = $this->options->getProtocol();
+        $this->binary   = $this->options->isBinary();
 
         // write
         if ($this->protocol >= 2) {
@@ -192,10 +205,8 @@ class PythonPickle implements AdapterInterface
         $this->write($value);
         $this->writeStop();
 
-        // clear process vars after serializing
-        $this->memo   = array();
-        $pickle       = $this->pickle;
-        $this->pickle = '';
+        $pickle = $this->pickle;
+        $this->clearProcessVars();
 
         return $pickle;
     }
@@ -220,10 +231,10 @@ class PythonPickle implements AdapterInterface
             // TODO: write unicode / binary
             $this->writeString($value);
         } elseif (is_array($value)) {
-            if ($this->isArrayAssoc($value)) {
-                $this->writeArrayDict($value);
-            } else {
+            if (ArrayUtils::isList($value)) {
                 $this->writeArrayList($value);
+            } else {
+                $this->writeArrayDict($value);
             }
         } elseif (is_object($value)) {
             $this->writeObject($value);
@@ -380,7 +391,7 @@ class PythonPickle implements AdapterInterface
      */
     protected function writeString($value)
     {
-        if ( ($id = $this->searchMemo($value)) !== false ) {
+        if (($id = $this->searchMemo($value)) !== false) {
             $this->writeGet($id);
             return;
         }
@@ -507,17 +518,6 @@ class PythonPickle implements AdapterInterface
     }
 
     /**
-     * Is an array associative?
-     *
-     * @param  array $value
-     * @return boolean
-     */
-    protected function isArrayAssoc(array $value)
-    {
-        return array_diff_key($value, array_keys(array_keys($value)));
-    }
-
-    /**
      * Quote/Escape a string
      *
      * @param  string $str
@@ -553,11 +553,9 @@ class PythonPickle implements AdapterInterface
     public function unserialize($pickle)
     {
         // init process vars
-        $this->pos       = 0;
+        $this->clearProcessVars();
         $this->pickle    = $pickle;
         $this->pickleLen = strlen($this->pickle);
-        $this->memo      = array();
-        $this->stack     = array();
 
         // read pickle string
         while (($op = $this->read(1)) !== self::OP_STOP) {
@@ -571,13 +569,21 @@ class PythonPickle implements AdapterInterface
         $ret = array_pop($this->stack);
 
         // clear process vars
+        $this->clearProcessVars();
+
+        return $ret;
+    }
+
+    /**
+     *
+     */
+    protected function clearProcessVars()
+    {
         $this->pos       = 0;
         $this->pickle    = '';
         $this->pickleLen = 0;
         $this->memo      = array();
         $this->stack     = array();
-
-        return $ret;
     }
 
     /**
@@ -629,7 +635,7 @@ class PythonPickle implements AdapterInterface
                 $this->loadBinInt2();
                 break;
             case self::OP_LONG:
-                $this->_loadLong();
+                $this->loadLong();
                 break;
             case self::OP_LONG1:
                 $this->loadLong1();
@@ -885,7 +891,7 @@ class PythonPickle implements AdapterInterface
     /**
      * Load a long (float) operator
      */
-    protected function _loadLong()
+    protected function loadLong()
     {
         $data = rtrim($this->readline(), 'L');
         if ($data === '') {
@@ -1338,19 +1344,12 @@ class PythonPickle implements AdapterInterface
         }
 
         $long = 0;
-
         if ($nbytes > 7) {
-            if (!extension_loaded('bcmath')) {
-                return INF;
+            if ($this->bigIntegerAdapter === null) {
+                $this->bigIntegerAdapter = BigInteger\BigInteger::getDefaultAdapter();
             }
 
-            for ($i = 0; $i < $nbytes; $i++) {
-                $long = bcadd($long, bcmul(ord($data[$i]), bcpow(256, $i, 0)));
-            }
-            if (0x80 <= ord($data[$nbytes - 1])) {
-                $long = bcsub($long, bcpow(2, $nbytes * 8));
-            }
-
+            $long = $this->bigIntegerAdapter->binToInt(strrev($data), true);
         } else {
             for ($i = 0; $i < $nbytes; $i++) {
                 $long += ord($data[$i]) * pow(256, $i);

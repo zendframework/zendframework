@@ -17,7 +17,7 @@ use Zend\Serializer\Exception;
  * @package    Zend_Serializer
  * @subpackage Adapter
  */
-class IgBinary implements AdapterInterface
+class IgBinary extends AbstractAdapter
 {
     /**
      * @var string Serialized null value
@@ -29,7 +29,7 @@ class IgBinary implements AdapterInterface
      *
      * @throws Exception\ExtensionNotLoadedException If igbinary extension is not present
      */
-    public function __construct()
+    public function __construct($options = null)
     {
         if (!extension_loaded('igbinary')) {
             throw new Exception\ExtensionNotLoadedException(
@@ -40,6 +40,8 @@ class IgBinary implements AdapterInterface
         if (self::$serializedNull === null) {
             self::$serializedNull = igbinary_serialize(null);
         }
+
+        parent::__construct($options);
     }
 
     /**

@@ -27,7 +27,10 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->adapter = new Serializer\Adapter\PythonPickle(1);
+        $options = new Serializer\Adapter\PythonPickleOptions(array(
+            'protocol' => 1
+        ));
+        $this->adapter = new Serializer\Adapter\PythonPickle($options);
     }
 
     public function tearDown()

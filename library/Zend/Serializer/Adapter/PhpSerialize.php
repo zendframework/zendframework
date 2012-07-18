@@ -18,7 +18,7 @@ use Zend\Stdlib\ErrorHandler;
  * @package    Zend_Serializer
  * @subpackage Adapter
  */
-class PhpSerialize implements AdapterInterface
+class PhpSerialize extends AbstractAdapter
 {
     /**
      * Serialized boolean false value
@@ -30,7 +30,7 @@ class PhpSerialize implements AdapterInterface
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($options = null)
     {
         // needed to check if a returned false is based on a serialize false
         // or based on failure (igbinary can overwrite [un]serialize functions)
@@ -52,7 +52,7 @@ class PhpSerialize implements AdapterInterface
         $ret = serialize($value);
         $error = ErrorHandler::stop();
         if ($error) {
-            throw new Exception\RuntimeException('Serialization failed: ' . $error->getMessage());
+            throw new Exception\RuntimeException('Serialization failed', 0, $error);
         }
 
         return $ret;
@@ -82,7 +82,7 @@ class PhpSerialize implements AdapterInterface
         $ret = unserialize($serialized);
         $error = ErrorHandler::stop();
         if ($ret === false) {
-            throw new Exception\RuntimeException('Unserialization failed: ' . $error->getMessage());
+            throw new Exception\RuntimeException('Unserialization failed', 0, $error);
         }
 
         return $ret;

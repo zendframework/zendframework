@@ -135,7 +135,7 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeLong4Positiv()
+    public function testUnserializeLong4Positive()
     {
         $value    = "\x80\x02\x8b\x07\x00\x00\x00"
                   . str_pad("\xff", 7, "\x7f")
@@ -146,7 +146,7 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeLong4Negativ()
+    public function testUnserializeLong4Negative()
     {
         $value    = "\x80\x02\x8b\x07\x00\x00\x00"
                   . str_pad("\x00", 7, "\x9f")
@@ -157,16 +157,12 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeLong4InfBcMath()
+    public function testUnserializeLong4BigInt()
     {
         $value    = "\x80\x02\x8b\x08\x00\x00\x00"
                   . str_pad("\x00", 8, "\x9f")
                   . ".";
-        if (extension_loaded('bcmath')) {
-            $expected = '-6944656592455360768';
-        } else {
-            $expected = INF;
-        }
+        $expected = '-6944656592455360768';
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);

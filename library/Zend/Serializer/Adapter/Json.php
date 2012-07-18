@@ -18,7 +18,7 @@ use Zend\Serializer\Exception;
  * @package    Zend_Serializer
  * @subpackage Adapter
  */
-class Json implements AdapterInterface
+class Json extends AbstractAdapter
 {
     /**
      * @var JsonOptions
@@ -26,26 +26,17 @@ class Json implements AdapterInterface
     protected $options = null;
 
     /**
-     * Constructor.
-     *
-     * @param  JsonOptions $options Optional
-     */
-    public function __construct(JsonOptions $options = null)
-    {
-        if ($options === null) {
-            $options = new JsonOptions();;
-        }
-        $this->options = $options;
-    }
-
-    /**
      * Set options
      *
-     * @param  JsonOptions $options
+     * @param  array|\Traversable|JsonOptions $options
      * @return Json
      */
-    public function setOptions(JsonOptions $options)
+    public function setOptions($options)
     {
+        if (!$options instanceof JsonOptions) {
+            $options = new JsonOptions($options);
+        }
+
         $this->options = $options;
         return $this;
     }
@@ -57,6 +48,9 @@ class Json implements AdapterInterface
      */
     public function getOptions()
     {
+        if ($this->options === null) {
+            $this->options = new JsonOptions();
+        }
         return $this->options;
     }
 
@@ -70,10 +64,11 @@ class Json implements AdapterInterface
      */
     public function serialize($value)
     {
-        $cycleCheck = $this->options->getCycleCheck();
+        $options    = $this->getOptions();
+        $cycleCheck = $options->getCycleCheck();
         $opts = array(
-            'enableJsonExprFinder' => $this->options->getEnableJsonExprFinder(),
-            'objectDecodeType'     => $this->options->getObjectDecodeType(),
+            'enableJsonExprFinder' => $options->getEnableJsonExprFinder(),
+            'objectDecodeType'     => $options->getObjectDecodeType(),
         );
 
         try  {
@@ -96,7 +91,7 @@ class Json implements AdapterInterface
     public function unserialize($json)
     {
         try {
-            $ret = ZendJson::decode($json, $this->options->getObjectDecodeType());
+            $ret = ZendJson::decode($json, $this->getOptions()->getObjectDecodeType());
         } catch (\InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException('Unserialization failed: ' . $e->getMessage(), 0, $e);
         } catch (\Exception $e) {

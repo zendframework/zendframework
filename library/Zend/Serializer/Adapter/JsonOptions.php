@@ -11,7 +11,6 @@
 namespace Zend\Serializer\Adapter;
 
 use Zend\Json\Json as ZendJson;
-use Zend\Stdlib\AbstractOptions;
 use Zend\Serializer\Exception;
 
 /**
@@ -19,7 +18,7 @@ use Zend\Serializer\Exception;
  * @package    Zend_Serializer
  * @subpackage Adapter
  */
-class JsonOptions extends AbstractOptions
+class JsonOptions extends AdapterOptions
 {
     /**
      * @var int

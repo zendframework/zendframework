@@ -17,7 +17,7 @@ use Zend\Serializer\Exception;
  * @package    Zend_Serializer
  * @subpackage Adapter
  */
-class PhpCode implements AdapterInterface
+class PhpCode extends AbstractAdapter
 {
     /**
      * Serialize PHP using var_export

@@ -38,7 +38,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     public function testAdapterAcceptsOptions()
     {
         $adapter = new Serializer\Adapter\Json();
-        $options = new \Zend\Serializer\Adapter\JsonOptions(array(
+        $options = new Serializer\Adapter\JsonOptions(array(
             'cycle_check'             => true,
             'enable_json_expr_finder' => true,
             'object_decode_type'      => 1,

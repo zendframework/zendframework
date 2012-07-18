@@ -35,7 +35,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
             } catch (ExtensionNotLoadedException $e) {}
             $this->markTestSkipped('Zend\\Serializer\\Adapter\\Wddx needs ext/wddx');
         }
-        $this->adapter = new \Zend\Serializer\Adapter\Wddx();
+        $this->adapter = new Serializer\Adapter\Wddx();
     }
 
     public function tearDown()
@@ -59,7 +59,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $expected = '<wddxPacket version=\'1.0\'><header><comment>a test comment</comment></header>'
                   . '<data><string>test</string></data></wddxPacket>';
 
-        $this->adapter->setComment('a test comment');
+        $this->adapter->getOptions()->setComment('a test comment');
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }

@@ -37,6 +37,8 @@ class PhpSerialize extends AbstractAdapter
         if (self::$serializedFalse === null) {
             self::$serializedFalse = serialize(false);
         }
+
+        parent::__construct($options);
     }
 
     /**

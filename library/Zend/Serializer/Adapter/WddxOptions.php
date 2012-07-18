@@ -22,9 +22,9 @@ class WddxOptions extends AdapterOptions
     /**
      * Wddx packet header comment
      *
-     * @var string|null
+     * @var string
      */
-    protected $comment = null;
+    protected $comment = '';
 
     /**
      * Set WDDX header comment
@@ -41,7 +41,7 @@ class WddxOptions extends AdapterOptions
     /**
      * Get WDDX header comment
      *
-     * @return null|string
+     * @return string
      */
     public function getComment()
     {

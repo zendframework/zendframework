@@ -20,16 +20,17 @@ use Zend\Serializer\Exception;
 class PythonPickleOptions extends AdapterOptions
 {
     /**
+     * Pickle protocol version to serialize data
+     *
      * @var int
      */
     protected $protocol = 0;
 
     /**
-     * @var bool
-     */
-    protected $isBinary = null;
-
-    /**
+     * Set pickle protocol version to serialize data
+     *
+     * Supported versions are 0, 1, 2 and 3
+     *
      * @param  int $protocol
      * @return PythonPickleOptions
      * @throws Exception\InvalidArgumentException
@@ -49,22 +50,12 @@ class PythonPickleOptions extends AdapterOptions
     }
 
     /**
+     * Get pickle protocol version to serialize data
+     *
      * @return int
      */
     public function getProtocol()
     {
         return $this->protocol;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isBinary()
-    {
-        if ($this->isBinary  === null) {
-            $this->isBinary  = ($this->protocol > 0);
-        }
-
-        return $this->isBinary;
     }
 }

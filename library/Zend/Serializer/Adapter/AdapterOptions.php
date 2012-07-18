@@ -19,19 +19,4 @@ use Zend\Stdlib\AbstractOptions;
  */
 class AdapterOptions extends AbstractOptions
 {
-    /**
-     * @see isBinary()
-     * @var bool
-     */
-    protected $isBinary = false;
-
-    /**
-     * Whether adapter input/output format is binary
-     *
-     * @return bool
-     */
-    public function isBinary()
-    {
-        return $this->isBinary;
-    }
 }

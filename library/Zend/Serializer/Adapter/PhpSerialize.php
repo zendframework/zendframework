@@ -37,6 +37,8 @@ class PhpSerialize extends AbstractAdapter
         if (self::$serializedFalse === null) {
             self::$serializedFalse = serialize(false);
         }
+
+        parent::__construct($options);
     }
 
     /**
@@ -50,9 +52,11 @@ class PhpSerialize extends AbstractAdapter
     {
         ErrorHandler::start();
         $ret = serialize($value);
-        $error = ErrorHandler::stop();
-        if ($error) {
-            throw new Exception\RuntimeException('Serialization failed', 0, $error);
+        $err = ErrorHandler::stop();
+        if ($err) {
+            throw new Exception\RuntimeException(
+                'Serialization failed', 0, $err
+            );
         }
 
         return $ret;
@@ -80,9 +84,9 @@ class PhpSerialize extends AbstractAdapter
 
         ErrorHandler::start(E_NOTICE);
         $ret = unserialize($serialized);
-        $error = ErrorHandler::stop();
+        $err = ErrorHandler::stop();
         if ($ret === false) {
-            throw new Exception\RuntimeException('Unserialization failed', 0, $error);
+            throw new Exception\RuntimeException('Unserialization failed', 0, $err);
         }
 
         return $ret;

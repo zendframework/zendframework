@@ -30,6 +30,8 @@ class FirePhp extends AbstractWriter
 
     /**
      * Initializes a new instance of this class.
+     * 
+     * @param FirePhpInstance $instance An (optional) instance of FirePhp that should be used for logging.
      */
     public function __construct(FirePhpInstance $instance = null)
     {
@@ -100,5 +102,4 @@ class FirePhp extends AbstractWriter
         $this->firephp = $instance;
         return $this;
     }
-
 }

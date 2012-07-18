@@ -22,17 +22,6 @@ use Zend\Math\BigInteger\Adapter\AdapterInterface;
  */
 class BigIntegerTest extends \PHPUnit_Framework_TestCase
 {
-    protected $adapters = array();
-
-    protected $availableAdapter = null;
-
-    public function setUp()
-    {
-        if (!extension_loaded('bcmath') && !extension_loaded('gmp')) {
-            $this->markTestSkipped('Missing bcmath or gmp extensions');
-        }
-    }
-
     public function testFactoryCreatesBcmathAdapter()
     {
         if (!extension_loaded('bcmath')) {
@@ -55,6 +44,9 @@ class BigIntegerTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryUsesDefaultAdapter()
     {
+        if (!extension_loaded('bcmath') && !extension_loaded('gmp')) {
+            $this->markTestSkipped('Missing bcmath or gmp extensions');
+        }
         $this->assertTrue(BigInt::factory() instanceof AdapterInterface);
     }
 

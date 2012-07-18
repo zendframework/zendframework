@@ -24,9 +24,9 @@ class FirePhp extends AbstractWriter
     /**
      * The instance of FirePhp that is used to log messages to.
      * 
-     * @var FB
+     * @var FirePhpInstance
      */
-    private $firephp;
+    protected $firephp;
 
     /**
      * Initializes a new instance of this class.

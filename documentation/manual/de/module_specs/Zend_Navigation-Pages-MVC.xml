@@ -211,21 +211,19 @@ $page->isActive(); // gibt false zurück
             <acronym>URL</acronym> für die Seite zu erstellen.
         </para>
 
-        <para>
-            <note>
-                <para>
-                    Beachte, das wenn die <code>route</code> Eigenschaft in einer Seite verwendet
-                    wird, man auch die Standard Parameter spezifizieren sollte die diese Route
-                    definieren (module, controller, action, usw.), andernfalls ist die
-                    <methodname>isActive()</methodname> Methode nicht dazu in der Lage zu erkennen
-                    ob die Seite aktiv ist oder nicht. Der Grund hierfür ist, das es aktuell keinen
-                    Weg gibt die Standardparameter von einem
-                    <classname>Zend_Controller_Router_Route_Interface</classname> Objekt zu
-                    erhalten, oder die aktuelle Route von einem
-                    <classname>Zend_Controller_Router_Interface</classname> Objekt.
-                </para>
-            </note>
-        </para>
+        <note>
+            <para>
+                Beachte, das wenn die <code>route</code> Eigenschaft in einer Seite verwendet
+                wird, man auch die Standard Parameter spezifizieren sollte die diese Route
+                definieren (module, controller, action, usw.), andernfalls ist die
+                <methodname>isActive()</methodname> Methode nicht dazu in der Lage zu erkennen
+                ob die Seite aktiv ist oder nicht. Der Grund hierfür ist, das es aktuell keinen
+                Weg gibt die Standardparameter von einem
+                <classname>Zend_Controller_Router_Route_Interface</classname> Objekt zu
+                erhalten, oder die aktuelle Route von einem
+                <classname>Zend_Controller_Router_Interface</classname> Objekt.
+            </para>
+        </note>
 
         <programlisting language="php"><![CDATA[
 // Die folgende Route wird den ZF Router hinzugefügt

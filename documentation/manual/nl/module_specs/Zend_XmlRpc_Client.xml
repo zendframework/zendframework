@@ -22,14 +22,13 @@ print_r( $server->system->listMethods() );
 ?>
                 ]]></programlisting>
             </example>
-            <para>
-                <note>
-                    <para>De <code>Zend_XmlRpc_Client</code> probeert het op afstand aanroepen van methodes
-                    zoveel mogelijk als PHP-eigen methodes te laten lijken. Als een remote methode namespaces bevat
-                    zoals <code>system.listMethods()</code> hierboven, word de aanroep via "object chaining" gemaakt
-                    in PHP: <code>$server-&gt;system-&gt;listMethods()</code>.</para>
-                </note>
-            </para>
+
+            <note>
+                <para>De <code>Zend_XmlRpc_Client</code> probeert het op afstand aanroepen van methodes
+                zoveel mogelijk als PHP-eigen methodes te laten lijken. Als een remote methode namespaces bevat
+                zoals <code>system.listMethods()</code> hierboven, word de aanroep via "object chaining" gemaakt
+                in PHP: <code>$server-&gt;system-&gt;listMethods()</code>.</para>
+            </note>
         </section>
         <section xml:id="zend.xmlrpc.client.parameters"><info><title>Parameters gebruiken</title></info>
             
@@ -195,11 +194,10 @@ $service->serviceProcedure($p1, $p2);
 
 ?>
                 ]]></programlisting>
-                <para>
-                    <note>
-                        <para>De waarde van de parameter word nog steeds als een PHP variabele gegeven maar zal worden omgezet naar het gespecifieerde type door de PHP conversietechnieken te gebruiken (b.v.: als een string als waarde aan het <code>Zend_XmlRpc_Value_Integer</code> object wordt gegeven zal het worden omgezet door <code>(int)$value</code>) toe te passen).</para>
-                    </note>
-                </para>
+
+                <note>
+                    <para>De waarde van de parameter word nog steeds als een PHP variabele gegeven maar zal worden omgezet naar het gespecifieerde type door de PHP conversietechnieken te gebruiken (b.v.: als een string als waarde aan het <code>Zend_XmlRpc_Value_Integer</code> object wordt gegeven zal het worden omgezet door <code>(int)$value</code>) toe te passen).</para>
+                </note>
             </section>
             <section xml:id="zend.xmlrpc.client.parameters.as_xml"><info><title>Een XML string in een XML-RPC parameter "parsen"</title></info>
                 

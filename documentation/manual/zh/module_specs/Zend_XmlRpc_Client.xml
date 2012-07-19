@@ -263,17 +263,15 @@ $result = $client->call('foo.bar', array(array()));
                 </tgroup>
             </table>
 
-            <para>
-                <note><info><title>自动转换</title></info>
-                    
-                    <para>
-                        当创建新的 <code>Zend_XmlRpc_Value</code> 对象时，它的值通过
-                        PHP 类型设置。PHP 类型将会通过 PHP 类型转换到指定的类型。例如，
-                        如果给 <code>Zend_XmlRpc_Value_Integer</code>
-                        对象提供一个字符串，它将由 <code>(int)$value</code> 转换。
-                    </para>
-                </note>
-            </para>
+            <note><info><title>自动转换</title></info>
+
+                <para>
+                    当创建新的 <code>Zend_XmlRpc_Value</code> 对象时，它的值通过
+                    PHP 类型设置。PHP 类型将会通过 PHP 类型转换到指定的类型。例如，
+                    如果给 <code>Zend_XmlRpc_Value_Integer</code>
+                    对象提供一个字符串，它将由 <code>(int)$value</code> 转换。
+                </para>
+            </note>
         </section>
     </section>
 

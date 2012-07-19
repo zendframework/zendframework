@@ -406,21 +406,19 @@ $result = $client->call('foo.bar', array(array()));
                 </tgroup>
             </table>
 
-            <para>
-                <note><info><title>Automatische Konvertierung</title></info>
-                    
+            <note><info><title>Automatische Konvertierung</title></info>
 
-                    <para>
-                        Bei der Erstellung eines neuen
-                        <classname>Zend_XmlRpc_Value</classname>-Objekts wird dessen Wert durch
-                        einen nativen <acronym>PHP</acronym> Typ gesetzt. Dieser
-                        <acronym>PHP</acronym> Typ wird durch <acronym>PHP</acronym> Casting in den
-                        gewünschten Typ umgewandelt. Beispielsweise wird ein String, der als Wert
-                        für ein <classname>Zend_XmlRpc_Value_Integer</classname>-Objekt genutzt
-                        wird, durch <command>(int)$value</command> in ein Integer konvertiert.
-                    </para>
-                </note>
-            </para>
+
+                <para>
+                    Bei der Erstellung eines neuen
+                    <classname>Zend_XmlRpc_Value</classname>-Objekts wird dessen Wert durch
+                    einen nativen <acronym>PHP</acronym> Typ gesetzt. Dieser
+                    <acronym>PHP</acronym> Typ wird durch <acronym>PHP</acronym> Casting in den
+                    gewünschten Typ umgewandelt. Beispielsweise wird ein String, der als Wert
+                    für ein <classname>Zend_XmlRpc_Value_Integer</classname>-Objekt genutzt
+                    wird, durch <command>(int)$value</command> in ein Integer konvertiert.
+                </para>
+            </note>
         </section>
     </section>
 

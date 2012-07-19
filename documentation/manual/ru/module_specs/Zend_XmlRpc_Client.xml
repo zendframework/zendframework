@@ -298,21 +298,19 @@ $result = $client->call('foo.bar', array(array()));
                 </tgroup>
             </table>
 
-            <para>
-                <note><info><title>Автоматическое преобразование</title></info>
-                    
-                    <para>
-                        Когда создается новый объект
-                        <classname>Zend_XmlRpc_Value</classname>, его значение
-                        устанавливается в "родном" для PHP типе. Тип в PHP будет
-                        преобразован к определенному типу средствами PHP.
-                        Например, если в качестве значения для объекта
-                        <classname>Zend_XmlRpc_Value_Integer</classname> была передана
-                        строка, то она будет преобразована через
-                        <code>(int)$value</code>.
-                    </para>
-                </note>
-            </para>
+            <note><info><title>Автоматическое преобразование</title></info>
+
+                <para>
+                    Когда создается новый объект
+                    <classname>Zend_XmlRpc_Value</classname>, его значение
+                    устанавливается в "родном" для PHP типе. Тип в PHP будет
+                    преобразован к определенному типу средствами PHP.
+                    Например, если в качестве значения для объекта
+                    <classname>Zend_XmlRpc_Value_Integer</classname> была передана
+                    строка, то она будет преобразована через
+                    <code>(int)$value</code>.
+                </para>
+            </note>
         </section>
     </section>
 

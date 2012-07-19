@@ -335,19 +335,17 @@ $result = $client->call('foo.bar', array(array()));
                 </tgroup>
             </table>
 
-            <para>
-                <note><info><title>自動変換</title></info>
-                    
-                    <para>
-                        新しい <classname>Zend_XmlRpc_Value</classname> オブジェクトを作成する際には、
-                        その値は <acronym>PHP</acronym> の型として設定されます。この <acronym>PHP</acronym> の型は、
-                        <acronym>PHP</acronym> のキャスト機能によって変換されます。
-                        たとえば、<classname>Zend_XmlRpc_Value_Integer</classname>
-                        に文字列を渡すと、<command>(int)$value</command>
-                        のように変換されます。
-                    </para>
-                </note>
-            </para>
+            <note><info><title>自動変換</title></info>
+
+                <para>
+                    新しい <classname>Zend_XmlRpc_Value</classname> オブジェクトを作成する際には、
+                    その値は <acronym>PHP</acronym> の型として設定されます。この <acronym>PHP</acronym> の型は、
+                    <acronym>PHP</acronym> のキャスト機能によって変換されます。
+                    たとえば、<classname>Zend_XmlRpc_Value_Integer</classname>
+                    に文字列を渡すと、<command>(int)$value</command>
+                    のように変換されます。
+                </para>
+            </note>
         </section>
     </section>
 

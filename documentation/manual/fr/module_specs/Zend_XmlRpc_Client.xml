@@ -330,20 +330,18 @@ $result = $client->call('foo.bar', array(array()));
                 </tgroup>
             </table>
 
-            <para>
-                <note><info><title>Conversion automatique</title></info>
-                    
+            <note><info><title>Conversion automatique</title></info>
 
-                    <para>
-                        Lorsque vous créez un objet <classname>Zend_XmlRpc_Value</classname>,
-                        sa valeur est déterminée par un type <acronym>PHP</acronym>. Celui-ci va être converti vers le
-                        type désiré en utilisant le cast <acronym>PHP</acronym>. Par exemple si une chaîne de
-                        caractères est donnée comme valeur à un objet
-                        <classname>Zend_XmlRpc_Value_Integer</classname>, elle sera alors convertie
-                        suivant la règle <code>(int)$value</code>.
-                    </para>
-                    </note>
+
+                <para>
+                    Lorsque vous créez un objet <classname>Zend_XmlRpc_Value</classname>,
+                    sa valeur est déterminée par un type <acronym>PHP</acronym>. Celui-ci va être converti vers le
+                    type désiré en utilisant le cast <acronym>PHP</acronym>. Par exemple si une chaîne de
+                    caractères est donnée comme valeur à un objet
+                    <classname>Zend_XmlRpc_Value_Integer</classname>, elle sera alors convertie
+                    suivant la règle <code>(int)$value</code>.
                 </para>
+            </note>
         </section>
     </section>
 

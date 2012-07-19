@@ -142,17 +142,15 @@ print $number;
 ]]></programlisting>
         </example>
 
-        <para>
-            <note><info><title>Unlimitierte Länge</title></info>
-                
+        <note><info><title>Unlimitierte Länge</title></info>
 
-                <para>
-                    <methodname>toNumber()</methodname> kann Nummern mit unendlicher Länge
-                    lokalisieren. Hierbei gibt es keine Abhängigkeiten mit Integer oder Float
-                    Limits.
-                </para>
-            </note>
-        </para>
+
+            <para>
+                <methodname>toNumber()</methodname> kann Nummern mit unendlicher Länge
+                lokalisieren. Hierbei gibt es keine Abhängigkeiten mit Integer oder Float
+                Limits.
+            </para>
+        </note>
 
         <para>
             Auf dem selben Web wie unter <methodname>getNumber()</methodname> verwendet

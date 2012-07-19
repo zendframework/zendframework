@@ -193,20 +193,18 @@ $page->isActive(); // retourne false
             de la page.
         </para>
 
-        <para>
-            <note>
-                <para>
-                    Notez que si vous utilisez le paramètre <code>route</code>, vous devrez
-                    préciser les paramètres par défaut de la route
-                    (module, controller, action, etc.), autremant <methodname>isActive()</methodname>
-                    ne pourra déterminer si la page est active ou pas. La raison est qu'il n'existe
-                    actuellement aucune méthode permettant de récupérer les paramètres par défaut
-                    d'une route un objet <classname>Zend_Controller_Router_Route_Interface</classname>,
-                    ni même de récupérer la route courante depuis un objet
-                    <classname>Zend_Controller_Router_Interface</classname>.
-                </para>
-            </note>
-        </para>
+        <note>
+            <para>
+                Notez que si vous utilisez le paramètre <code>route</code>, vous devrez
+                préciser les paramètres par défaut de la route
+                (module, controller, action, etc.), autremant <methodname>isActive()</methodname>
+                ne pourra déterminer si la page est active ou pas. La raison est qu'il n'existe
+                actuellement aucune méthode permettant de récupérer les paramètres par défaut
+                d'une route un objet <classname>Zend_Controller_Router_Route_Interface</classname>,
+                ni même de récupérer la route courante depuis un objet
+                <classname>Zend_Controller_Router_Interface</classname>.
+            </para>
+        </note>
 
         <programlisting language="php"><![CDATA[
 // La route suivante est ajoutée au routeur de ZF

@@ -293,21 +293,19 @@ $result = $client->call('foo.bar', array(array()));
                 </tgroup>
             </table>
 
-            <para>
-                <note><info><title>Automatyczna konwersja</title></info>
-                    
-                    <para>
-                        Kiedy tworzymy nowy obiekt
-                        <code>Zend_XmlRpc_Value</code>, jego wartość jest
-                        ustawiana jako typ PHP. Wartość będzie konwertowana do
-                        określonego typu używając rzytowania typów PHP. Na
-                        przykład, jeśli podany jest łańcuch znaków jako wartość
-                        do obiektu <code>Zend_XmlRpc_Value_Integer</code>,
-                        wartość ta będzie konwertowana za pomocą
-                        <code>(int)$value</code>.
-                    </para>
-                </note>
-            </para>
+            <note><info><title>Automatyczna konwersja</title></info>
+
+                <para>
+                    Kiedy tworzymy nowy obiekt
+                    <code>Zend_XmlRpc_Value</code>, jego wartość jest
+                    ustawiana jako typ PHP. Wartość będzie konwertowana do
+                    określonego typu używając rzytowania typów PHP. Na
+                    przykład, jeśli podany jest łańcuch znaków jako wartość
+                    do obiektu <code>Zend_XmlRpc_Value_Integer</code>,
+                    wartość ta będzie konwertowana za pomocą
+                    <code>(int)$value</code>.
+                </para>
+            </note>
         </section>
     </section>
 

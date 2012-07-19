@@ -17,7 +17,7 @@
             例として BBCode のこの要素で始めます:
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 [b]foo[i]bar[/i][/b]baz
 ]]></programlisting>
 
@@ -77,7 +77,7 @@
             有効な BBCode タグのいくつかの例は:
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 [b]
 [list=1]
 [code file=Zend/Markup.php]
@@ -211,7 +211,7 @@
                 "*"記号を用いた <!-- TODO : to be translated -->bullit リストです。両方のリストの例:
             </para>
 
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 # Item 1
 # Item 2
 

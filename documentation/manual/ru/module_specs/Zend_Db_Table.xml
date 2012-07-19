@@ -1228,7 +1228,7 @@ $rows = $table->fetchAll($select);
 
                 
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select()->setIntegrityCheck(false);

@@ -1006,7 +1006,7 @@ $rows = $table->fetchAll($select);
                 </title></info>
                 
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART)

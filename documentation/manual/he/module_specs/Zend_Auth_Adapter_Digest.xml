@@ -36,7 +36,7 @@
             האלמנטים למעלה מופרדים בנקודותיים, כמו בדוגמא הבאה ("<code>somePassword</code>"):
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 
 ]]></programlisting>

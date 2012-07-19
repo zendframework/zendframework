@@ -55,7 +55,7 @@
             <para>
                 In dit voorbeeld zoeken we naar PHP boeken op Amazon en doorlopen we de resultaten door ze uit te printen.
             </para>
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Amazon.php';
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY&');
 $response = $amazon->itemSearch(array('SearchIndex' => 'Books', 'Keywords' => 'php'));
@@ -70,7 +70,7 @@ foreach ($response as $r) {
                 Hier zoeken we ook naar PHP boeken op Amazon, maar we gebruiken de Query API, die lijkt
                 op het Fluent Interface ontwerp patroon.
             </para>
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Amazon/Query.php';
 $query = new Zend_Service_Amazon_Query('AMAZON_API_KEY');
 $query->category('Books')->Keywords('PHP');
@@ -90,7 +90,7 @@ foreach ($results as $result) {
         </para>
         <example><info><title>Een Amazon Web Service land kiezen</title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 // Verbind met Amazon in Frankrijk
 require_once 'Zend/Service/Amazon.php';
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'FR');
@@ -111,7 +111,7 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'FR');
         </para>
         <example><info><title>Een specifiek Amazon item ophalen per ASIN</title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Amazon.php';
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
 $item = $amazon->itemLookup('B0000A432X');
@@ -136,7 +136,7 @@ $item = $amazon->itemLookup('B0000A432X');
         </para>
         <example><info><title>Uitvoeren van Amazon Item Zoekopdrachten</title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Amazon.php';
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
 $response = $amazon->itemSearch(array('SearchIndex' => 'Books', 'Keywords' => 'php'));
@@ -178,7 +178,7 @@ foreach($response as $r) {
                 In dit voorbeeld wordt de alternatieve query API gebruikt als een Fluent Interface om opties en hun
                 respectievelijke waarden te specificeren:
             </para>
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Amazon/Query.php';
 $query = new Zend_Service_Amazon_Query('MY_API_KEY');
 $query->Category('Books')->Keywords('PHP');

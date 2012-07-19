@@ -79,7 +79,7 @@ foreach ($results as $result) {
         <example xml:id="zend.service.yahoo.videosearch.example-1"><info><title>Trouver des vidéos avec Yahoo!</title></info>
             
 
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->videoSearch('PHP');
 foreach ($results as $result) {
@@ -148,7 +148,7 @@ foreach ($results as $result) {
         <example xml:id="zend.service.yahoo.inlinkdatasearch.example-1"><info><title>Recherche avec Yahoo! Site Explorer Inbound Links</title></info>
             
 
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("ID_APPLICATION_YAHOO");
 $results = $yahoo->inlinkDataSearch('http://framework.zend.com/');
 foreach ($results as $result) {
@@ -171,7 +171,7 @@ foreach ($results as $result) {
         <example xml:id="zend.service.yahoo.pagedatasearch.example-1"><info><title>Recherche avec Yahoo! Site Explorer's PageData</title></info>
             
 
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("ID_APPLICATION_YAHOO");
 $results = $yahoo->pageDataSearch('http://framework.zend.com/');
 foreach ($results as $result) {

@@ -14,7 +14,7 @@
         لأنها تتصرف مثل الدوال المتوفرة فى لغة PHP:
 
         </para>
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
     <?php
 
     $alphaUsername = Zend_Filter::getAlpha('John123Doe');
@@ -30,7 +30,7 @@
         فى كل من الأمثة التالية , <literal>value$</literal> تمثل قيمة ذات بعد واحد .
         </para>
         <para>Whitelist Filtering:</para>
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
     <?php
 
     if (Zend_Filter::isEmail($value)) {
@@ -42,7 +42,7 @@
     ?>
         ]]></programlisting>
         <para>Blind Filtering:</para>
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
     <?php
 
     $alphaName = Zend_Filter::getAlpha($value);
@@ -50,7 +50,7 @@
     ?>
         ]]></programlisting>
         <para>Blacklist Filtering:</para>
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
     <?php
 
     $taglessComment = Zend_Filter::noTags($value);

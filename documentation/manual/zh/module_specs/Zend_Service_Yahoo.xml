@@ -23,7 +23,7 @@
         </para>
         <example><info><title>用Yahoo!来搜索网页</title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->webSearch('PHP');
@@ -45,7 +45,7 @@ foreach ($results as $result) {
         </para>
         <example><info><title>用Yahoo!来查找图片</title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->imageSearch('PHP');
@@ -65,7 +65,7 @@ foreach ($results as $result) {
         </para>
         <example><info><title>用Yahoo!查找本地商务和服务信息</title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->localSearch('Apple Computers', array('zip' => '95014'));
@@ -85,7 +85,7 @@ foreach ($results as $result) {
         </para>
         <example><info><title>搜索Yahoo! 新闻</title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->newsSearch('PHP');

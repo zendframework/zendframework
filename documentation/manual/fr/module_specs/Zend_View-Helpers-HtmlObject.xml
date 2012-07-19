@@ -108,7 +108,7 @@
         <para>Ceci affichera le code HTML suivant :</para>
 
         <para>
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 <object data="/path/to/file.ext" type="mime/type"
         attr1="aval1" attr2="aval2">
     <param name="param1" value="pval1" />

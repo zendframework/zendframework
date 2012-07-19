@@ -528,7 +528,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 -->
         </para>
 
-        <programlisting><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 
 abstract class Zend_Search_Lucene_Storage_Directory {
 /**
@@ -648,7 +648,7 @@ abstract function getFileObject($filename);
 -->
         </para>
 
-        <programlisting><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 
 class MyFile extends Zend_Search_Lucene_Storage_File {
     /**

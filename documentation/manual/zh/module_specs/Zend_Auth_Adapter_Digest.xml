@@ -33,7 +33,7 @@
             在下面的例子中，上面的元素用冒号隔开（密码是"<code>somePassword</code>"）：
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 
 ]]></programlisting>

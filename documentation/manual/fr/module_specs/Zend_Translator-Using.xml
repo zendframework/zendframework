@@ -149,7 +149,7 @@ print $translate->_(2)."\n";
             <listitem>
                 <para>Structure de source unique</para>
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 /application
 /languages
   lang.en
@@ -166,7 +166,7 @@ print $translate->_(2)."\n";
             <listitem>
                 <para>Source structurée par langue</para>
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 /application
 /languages
   /en
@@ -188,7 +188,7 @@ print $translate->_(2)."\n";
             <listitem>
                 <para>Source structurée par application</para>
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 /application
   /languages
     lang.en
@@ -211,7 +211,7 @@ print $translate->_(2)."\n";
             <listitem>
                 <para>Source structurée par Gettext</para>
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 /languages
   /de
     /LC_MESSAGES
@@ -237,7 +237,7 @@ print $translate->_(2)."\n";
             <listitem>
                 <para>Source structurée par fichier</para>
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 /application
   /models
     mymodel.php
@@ -453,7 +453,7 @@ $translate = new Zend_Translator('tmx',
 
         <example xml:id="zend.translator.using.source.csv.example"><info><title>Exemple avec un fichier CSV</title></info>
 
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 #Exemple de fichier csv
 message1;Nachricht1
 message2;Nachricht2
@@ -494,7 +494,7 @@ $translate->addTranslation('chemin/vers/autretraduction.csv',
 
         <example xml:id="zend.translator.using.source.csv.example2"><info><title>Exemple avec un fichier CSV (2)</title></info>
 
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 #Exemple de fichier csv
 # original 'message,1'
 "message,1",Nachricht1
@@ -526,7 +526,7 @@ $translate->addTranslation('chemin/vers/autretraduction.csv',
 
         <example xml:id="zend.translator.using.source.ini.example"><info><title>Exemple avec un fichier INI</title></info>
 
-            <programlisting><![CDATA[
+            <programlisting language="php"><![CDATA[
 [Test]
 ;Commentaires possibles
 Message_1="Nachricht 1 (de)"
@@ -1021,7 +1021,7 @@ $translate = new Zend_Translator('gettext',
                     only usable if you have only one file per directory.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 /languages
   en.mo
   de.mo
@@ -1037,7 +1037,7 @@ $translate = new Zend_Translator('gettext',
                     which file extension the file originally was.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 /languages
   view.en
   view.de
@@ -1054,7 +1054,7 @@ $translate = new Zend_Translator('gettext',
                     point '.', a underline '_', or a hyphen '-'.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 /languages
   view_en.mo  -> detects english
   view_de.mo  -> detects german
@@ -1066,7 +1066,7 @@ $translate = new Zend_Translator('gettext',
                     the following example for details.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 /languages
   view_en_de.mo  -> detects english
   view_en_es.mo  -> detects english and overwrites the first file
@@ -1081,7 +1081,7 @@ $translate = new Zend_Translator('gettext',
                     tokens will be used. See the following example for details.
                 </para>
 
-                <programlisting><![CDATA[
+                <programlisting language="php"><![CDATA[
 /languages
   view_en-it.mo  -> detects english because '_' will be used before '-'
   view-en_it.mo  -> detects italian because '_' will be used before '-'

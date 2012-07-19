@@ -24,7 +24,7 @@
         </para>
         <example><info><title>Het web doorzoeken met Yahoo!</title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->webSearch('PHP');
@@ -47,7 +47,7 @@ foreach ($results as $result) {
         </para>
         <example><info><title>Beelden vinden met Yahoo!</title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->imageSearch('PHP');
@@ -67,7 +67,7 @@ foreach ($results as $result) {
         </para>
         <example><info><title>Plaatselijke bedrijven en diensten vinden met Yahoo!</title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->localSearch('Apple Computers', array('zip' => '95014'));
@@ -87,7 +87,7 @@ foreach ($results as $result) {
         </para>
         <example><info><title>Yahoo! News zoeken</title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->newsSearch('PHP');

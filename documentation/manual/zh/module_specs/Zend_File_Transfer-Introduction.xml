@@ -29,7 +29,7 @@
             本例示范了一个基本的文件上传，它使用 <code>Zend_File_Transfer</code>  来完成。
             第一部分是文件表单。在例子中，有一个文件要上载。
         </para>
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 <form enctype="multipart/form-data" action="/file/upload" method="POST">
     <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
         Choose a file to upload: <input name="uploadedfile" type="file" />

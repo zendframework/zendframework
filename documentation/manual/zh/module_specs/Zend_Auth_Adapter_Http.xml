@@ -152,7 +152,7 @@
             
 
             <para>
-                文件resolver是一个非常简单的类。它有一个单个的属性指定一个文件名，它也可以被传递给构造器。它的<code>resolve()</code>方法遍历文本文件，用匹配用户名和领域来搜索一行。文本文件的格式和Apache htpasswd文件类似： <programlisting><![CDATA[
+                文件resolver是一个非常简单的类。它有一个单个的属性指定一个文件名，它也可以被传递给构造器。它的<code>resolve()</code>方法遍历文本文件，用匹配用户名和领域来搜索一行。文本文件的格式和Apache htpasswd文件类似： <programlisting language="php"><![CDATA[
 <username>:<realm>:<credentials>\n
 
 ]]></programlisting>每行包含三个字段 - 用户名，领域 和 证书 - 用冒号分隔。证书字段对文件resolver不透明；它被简单地不做修改地返回给调用者。所以，这同样的文件格式对基本和摘要认证都适合。对基本认证，证书字段应该是Base64编码的用户的密码。对摘要认证，它应该是上述的MD5 hash。

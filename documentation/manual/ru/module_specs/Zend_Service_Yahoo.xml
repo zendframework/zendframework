@@ -47,7 +47,7 @@
         </para>
         <example><info><title>Поиск веб-страниц через Yahoo!<!--Searching the Web with Yahoo!--></title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->webSearch('PHP');
@@ -78,7 +78,7 @@ foreach ($results as $result) {
         </para>
         <example><info><title>Поиск изображений через Yahoo!<!--Finding Images with Yahoo!--></title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->imageSearch('PHP');
@@ -103,7 +103,7 @@ foreach ($results as $result) {
         </para>
         <example><info><title>Поиск торговых и сервисных предприятий по местонахождению через Yahoo!<!--Finding Local Businesses and Services with Yahoo!--></title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->localSearch('Apple Computers', array('zip' => '95014'));
@@ -128,7 +128,7 @@ foreach ($results as $result) {
         </para>
         <example><info><title>Поиск через Yahoo! News<!--Searching Yahoo! News--></title></info>
             
-            <programlisting><![CDATA[<?php
+            <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->newsSearch('PHP');

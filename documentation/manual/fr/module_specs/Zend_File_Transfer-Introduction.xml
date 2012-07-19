@@ -54,7 +54,7 @@
             notre exemple, il n'y a qu'un seul fichier que nous souhaitons uploadé.
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 <form enctype="multipart/form-data" action="/file/upload" method="POST">
     <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
         Choose a file to upload:

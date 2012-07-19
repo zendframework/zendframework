@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.theory_of_operation"><info><title>操作理论</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.theory_of_operation"><title>操作理论</title>
     
     <para>
         配置数据在<code>Zend_Config</code>构造器通过关联数组(associative arrary)可访问，为了支持从通用到特殊组织数据，它可以是多维的。具体的适配器类函数为<code>Zend_Config</code>的构造器从存储到处理关联数组来适应配置数据。用户脚本可以直接提供这样的数组给<code>Zend_Config</code>构造器，不需要使用适配器类，因为它可以很好地工作在特定的情形下。

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-layout"><info><title>Utworzenie layoutu</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-layout"><title>Utworzenie layoutu</title>
     
 
     <para>
@@ -225,7 +225,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         stronie pojawi się automatycznie).
     </para>
 
-    <note><info><title>Punkt kontrolny</title></info>
+    <note><title>Punkt kontrolny</title>
         
 
         <para>

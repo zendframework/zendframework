@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.introduction"><info><title> 简介 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.introduction"><title> 简介 </title>
     
     <para>
         <code>Zend_Server</code> 类家族为各种各样的服务器类提供功能，包括 <code>Zend_XmlRpc_Server</code>、 <code>Zend_Rest_Server</code>、<code>Zend_Json_Server</code> 和 <code>Zend_Soap_Wsdl</code>。<code>Zend_Server_Interface</code> 提供了一个模仿 PHP 5 的 <code>SoapServer</code> 类的接口；为了提供标准的服务器 API，所有的服务器类应该实现这个接口。

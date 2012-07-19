@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.firebug"><info><title>Firebug への書き込み</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.firebug"><title>Firebug への書き込み</title>
     
     <para>
       <classname>Zend_Log_Writer_Firebug</classname> は、ログデータを
@@ -42,7 +42,7 @@
       </listitem>
     </itemizedlist>
 
-    <example xml:id="zend.log.writers.firebug.example.with_front_controller"><info><title>Zend_Controller_Front を使ったログ記録</title></info>
+    <example xml:id="zend.log.writers.firebug.example.with_front_controller"><title>Zend_Controller_Front を使ったログ記録</title>
       
 
       <programlisting language="php"><![CDATA[
@@ -55,7 +55,7 @@ $logger->log('This is a log message!', Zend_Log::INFO);
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.log.writers.firebug.example.without_front_controller"><info><title>Zend_Controller_Front を使わないログ記録</title></info>
+    <example xml:id="zend.log.writers.firebug.example.without_front_controller"><title>Zend_Controller_Front を使わないログ記録</title>
       
 
       <programlisting language="php"><![CDATA[
@@ -81,7 +81,7 @@ $response->sendHeaders();
 ]]></programlisting>
     </example>
 
-    <section xml:id="zend.log.writers.firebug.priority-styles"><info><title>優先度のスタイルの設定</title></info>
+    <section xml:id="zend.log.writers.firebug.priority-styles"><title>優先度のスタイルの設定</title>
 
       
 
@@ -103,7 +103,7 @@ $writer->setDefaultPriorityStyle('TRACE');
 ]]></programlisting>
       <para>
         サポートしているスタイルは次のとおりです。
-        <table xml:id="zend.log.writers.firebug.priority-styles.table"><info><title>Firebug Logging Styles</title></info>
+        <table xml:id="zend.log.writers.firebug.priority-styles.table"><title>Firebug Logging Styles</title>
             
             <tgroup cols="2">
                 <thead>
@@ -147,7 +147,7 @@ $writer->setDefaultPriorityStyle('TRACE');
       </para>
     </section>
 
-    <section xml:id="zend.log.writers.firebug.preparing-data"><info><title>ログ記録用のデータの準備</title></info>
+    <section xml:id="zend.log.writers.firebug.preparing-data"><title>ログ記録用のデータの準備</title>
 
       
 
@@ -161,7 +161,7 @@ $writer->setDefaultPriorityStyle('TRACE');
       </para>
     </section>
 
-    <section xml:id="zend.log.writers.firebug.preparing-data.exception"><info><title>例外のログ記録</title></info>
+    <section xml:id="zend.log.writers.firebug.preparing-data.exception"><title>例外のログ記録</title>
 
       
 
@@ -177,7 +177,7 @@ $logger->err($exception);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.log.writers.firebug.preparing-data.table"><info><title>表形式のログ</title></info>
+    <section xml:id="zend.log.writers.firebug.preparing-data.table"><title>表形式のログ</title>
 
       
 

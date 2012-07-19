@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><info><title>Filtres</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><title>Filtres</title>
     
 
     <para>Un objet <code>Filter</code> bloque les messages avant l'écriture dans le log.</para>
 
-    <section xml:id="zend.log.filters.all-writers"><info><title>Filtrer pour tous les rédacteurs (Writers)</title></info>
+    <section xml:id="zend.log.filters.all-writers"><title>Filtrer pour tous les rédacteurs (Writers)</title>
         
 
         <para>
@@ -30,7 +30,7 @@ $logger->emerg("Message d'urgence");
         </para>
     </section>
 
-    <section xml:id="zend.log.filters.single-writer"><info><title>Filtrer pour une seule instance de rédacteur</title></info>
+    <section xml:id="zend.log.filters.single-writer"><title>Filtrer pour une seule instance de rédacteur</title>
         
 
         <para>

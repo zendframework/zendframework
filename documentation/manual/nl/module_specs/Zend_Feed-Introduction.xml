@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>Inleiding</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><title>Inleiding</title>
     
     <para>
         <code>Zend_Feed</code> verstrekt functionaliteiten om RSS en Atom feeds uit te lezen. Het verstrekt
@@ -23,7 +23,7 @@
         uitprinten van de data, de data op te slaan in een database enz...
     </para>
 
-    <note><info><title>Be aware</title></info>
+    <note><title>Be aware</title>
         
       <para>
         Vele RSS feeds bieden verschillende eigenschappen van kanalen en items. De RSS specificatie verstrekt
@@ -31,7 +31,7 @@
       </para>
     </note>
 
-    <example><info><title>Zend_Feed laten werken met RSS Feed Data</title></info>
+    <example><title>Zend_Feed laten werken met RSS Feed Data</title>
         
         <programlisting role="php"><![CDATA[
 <?php

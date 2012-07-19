@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.callback"><info><title>Callback (fonction de rappel)</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.callback"><title>Callback (fonction de rappel)</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         utilisée pour valider la valeur.
     </para>
 
-    <section xml:id="zend.validate.set.callback.options"><info><title>Options supportées par Zend_Validate_Callback</title></info>
+    <section xml:id="zend.validate.set.callback.options"><title>Options supportées par Zend_Validate_Callback</title>
         
 
         <para>
@@ -32,7 +32,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.callback.basic"><info><title>Utilisation classique</title></info>
+    <section xml:id="zend.validate.set.callback.basic"><title>Utilisation classique</title>
         
 
         <para>
@@ -63,7 +63,7 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.callback.closure"><info><title>Utilisation avec les fonctions anonymes (closures)</title></info>
+    <section xml:id="zend.validate.set.callback.closure"><title>Utilisation avec les fonctions anonymes (closures)</title>
         
 
         <para>
@@ -88,7 +88,7 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.callback.class"><info><title>Utilisation avec les méthodes de rappel</title></info>
+    <section xml:id="zend.validate.set.callback.class"><title>Utilisation avec les méthodes de rappel</title>
         
 
         <para>
@@ -168,7 +168,7 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.callback.options2"><info><title>Ajouter des options</title></info>
+    <section xml:id="zend.validate.set.callback.options2"><title>Ajouter des options</title>
         
 
         <para>

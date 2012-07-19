@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><info><title>Zend_Uri</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><title>Zend_Uri</title>
   
 
-  <section xml:id="zend.uri.overview"><info><title>Обзор</title></info>
+  <section xml:id="zend.uri.overview"><title>Обзор</title>
     
 
     <para>
@@ -25,7 +25,7 @@
     </para>
   </section>
 
-  <section xml:id="zend.uri.creation"><info><title>Создание нового URI</title></info>
+  <section xml:id="zend.uri.creation"><title>Создание нового URI</title>
     
 
     <para>
@@ -33,7 +33,7 @@
       <code>Zend_Uri::factory()</code> была передана только схема.
     </para>
 
-    <example xml:id="zend.uri.creation.example-1"><info><title>Создание нового URI с Zend_Uri::factory()</title></info>
+    <example xml:id="zend.uri.creation.example-1"><title>Создание нового URI с Zend_Uri::factory()</title>
       
 
       <programlisting language="php"><![CDATA[
@@ -59,7 +59,7 @@ $uri = Zend_Uri::factory('http');
     </para>
   </section>
 
-  <section xml:id="zend.uri.manipulation"><info><title>Работа с существующим URI</title></info>
+  <section xml:id="zend.uri.manipulation"><title>Работа с существующим URI</title>
     
 
     <para>
@@ -67,7 +67,7 @@ $uri = Zend_Uri::factory('http');
       <code>Zend_Uri::factory()</code>.
     </para>
 
-    <example xml:id="zend.uri.manipulation.example-1"><info><title>Работа с существующим URI через Zend_Uri::factory()</title></info>
+    <example xml:id="zend.uri.manipulation.example-1"><title>Работа с существующим URI через Zend_Uri::factory()</title>
       
 
     <programlisting language="php"><![CDATA[
@@ -86,7 +86,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
     </para>
   </section>
 
-  <section xml:id="zend.uri.validation"><info><title>Проверка URI</title></info>
+  <section xml:id="zend.uri.validation"><title>Проверка URI</title>
     
 
     <para>
@@ -94,7 +94,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
       когда нужна только проверка существующего URI.
     </para>
 
-    <example xml:id="zend.uri.validation.example-1"><info><title>Проверка URI с помощью Zend_Uri::check()</title></info>
+    <example xml:id="zend.uri.validation.example-1"><title>Проверка URI с помощью Zend_Uri::check()</title>
       
 
     <programlisting language="php"><![CDATA[
@@ -111,7 +111,7 @@ $valid = Zend_Uri::check('http://uri.in.question');
       отлов исключения.
     </para>
 
-    <section xml:id="zend.uri.validation.allowunwise"><info><title>Разрешение использования "неумных" символов в URI</title></info>
+    <section xml:id="zend.uri.validation.allowunwise"><title>Разрешение использования "неумных" символов в URI</title>
         
 
         <para>
@@ -127,7 +127,7 @@ $valid = Zend_Uri::check('http://uri.in.question');
             <code>Zend_Uri::setConfig()</code>:
         </para>
 
-        <example xml:id="zend.uri.validation.allowunwise.example-1"><info><title>Разрешение использования спецсимволов в URI</title></info>
+        <example xml:id="zend.uri.validation.allowunwise.example-1"><title>Разрешение использования спецсимволов в URI</title>
             
             <programlisting language="php"><![CDATA[
 // Содержит символ '|'
@@ -156,7 +156,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
     </section>
   </section>
 
-  <section xml:id="zend.uri.instance-methods"><info><title>Общие методы экземпляров</title></info>
+  <section xml:id="zend.uri.instance-methods"><title>Общие методы экземпляров</title>
     
 
     <para>
@@ -165,7 +165,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
       полезных для работы с любыми видами URI.
     </para>
 
-    <section xml:id="zend.uri.instance-methods.getscheme"><info><title>Получение схемы URI</title></info>
+    <section xml:id="zend.uri.instance-methods.getscheme"><title>Получение схемы URI</title>
       
 
       <para>
@@ -173,7 +173,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
         <code>http://www.zend.com</code> является <code>http</code>.
       </para>
 
-      <example xml:id="zend.uri.instance-methods.getscheme.example-1"><info><title>Получение схемы из объекта Zend_Uri_*</title></info>
+      <example xml:id="zend.uri.instance-methods.getscheme.example-1"><title>Получение схемы из объекта Zend_Uri_*</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -189,10 +189,10 @@ $scheme = $uri->getScheme();  // "http"
 
     </section>
 
-    <section xml:id="zend.uri.instance-methods.geturi"><info><title>Получение всего URI</title></info>
+    <section xml:id="zend.uri.instance-methods.geturi"><title>Получение всего URI</title>
       
 
-      <example xml:id="zend.uri.instance-methods.geturi.example-1"><info><title>Получение всего URI из объекта Zend_Uri_*</title></info>
+      <example xml:id="zend.uri.instance-methods.geturi.example-1"><title>Получение всего URI из объекта Zend_Uri_*</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -208,7 +208,7 @@ echo $uri->getUri();  // "http://www.zend.com"
       </para>
     </section>
 
-    <section xml:id="zend.uri.instance-methods.valid"><info><title>Проверка URI на валидность</title></info>
+    <section xml:id="zend.uri.instance-methods.valid"><title>Проверка URI на валидность</title>
       
 
       <para>
@@ -220,7 +220,7 @@ echo $uri->getUri();  // "http://www.zend.com"
         в результате манипуляций с ним этот URI может стать невалидным.
       </para>
 
-      <example xml:id="zend.uri.instance-methods.valid.example-1"><info><title>Проверка объекта Zend_Uri_*</title></info>
+      <example xml:id="zend.uri.instance-methods.valid.example-1"><title>Проверка объекта Zend_Uri_*</title>
         
 
         <programlisting language="php"><![CDATA[

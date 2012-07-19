@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Pengenalan</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><title>Pengenalan</title>
     
 
     <para>
@@ -36,7 +36,7 @@
         bagaimana role diberikan hak untuk mengakses resource tertentu.
     </para>
 
-    <section xml:id="zend.acl.introduction.resources"><info><title>Tentang Resource</title></info>
+    <section xml:id="zend.acl.introduction.resources"><title>Tentang Resource</title>
         
         <para>
             Membuat sebuah resource di Zend_Acl sangat mudah. Zend_Acl menyediakan interface
@@ -69,7 +69,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.acl.introduction.roles"><info><title>Tentang Role</title></info>
+    <section xml:id="zend.acl.introduction.roles"><title>Tentang Role</title>
         
         <para>
             Sebagaimana resource, membuat sebuah role juga sangat mudah. Semua role mesti mengimplementasikan
@@ -91,7 +91,7 @@
             Contoh berikut memberi ilustrasi masalah pewarisan yang
             menimbulkan kondisi ambiguitas dan bagaimana Zend_Acl memecahkannya.
         </para>
-        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>Multiple Inheritance di antara Role</title></info>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>Multiple Inheritance di antara Role</title>
             
             <para>
                 Kode berikut mendefinisikan tiga role dasar - "<code>guest</code>", "<code>member</code>", dan
@@ -149,7 +149,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.creating"><info><title>Membuat Access Control List (ACL)</title></info>
+    <section xml:id="zend.acl.introduction.creating"><title>Membuat Access Control List (ACL)</title>
         
 
         <para>
@@ -172,7 +172,7 @@ $acl = new Zend_Acl();
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.role_registry"><info><title>Mendaftarkan Role</title></info>
+    <section xml:id="zend.acl.introduction.role_registry"><title>Mendaftarkan Role</title>
         
 
         <para>
@@ -188,7 +188,7 @@ $acl = new Zend_Acl();
             bagi group mereka sendiri. Perizinan ini dapat diekspresikan sebagai berikut:
         </para>
 
-        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Access Control untuk Contoh CMS</title></info>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><title>Access Control untuk Contoh CMS</title>
           
           <tgroup cols="3">
             <thead>
@@ -255,7 +255,7 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
 
     </section>
 
-    <section xml:id="zend.acl.introduction.defining"><info><title>Mendefinisikan Access Control</title></info>
+    <section xml:id="zend.acl.introduction.defining"><title>Mendefinisikan Access Control</title>
         
 
         <para>
@@ -315,7 +315,7 @@ $acl->allow('administrator');
 
     </section>
 
-    <section xml:id="zend.acl.introduction.querying"><info><title>Mengambil (Query) Aturan ACL</title></info>
+    <section xml:id="zend.acl.introduction.querying"><title>Mengambil (Query) Aturan ACL</title>
         
 
         <para>

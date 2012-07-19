@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><info><title>Internationaliser un formulaire Zend_Form</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><title>Internationaliser un formulaire Zend_Form</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         la création de son objet et de ses adaptateurs.
     </para>
 
-    <note><info><title>L'i18n peut être désactivée par objet</title></info>
+    <note><title>L'i18n peut être désactivée par objet</title>
         
 
         <para>
@@ -28,7 +28,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.form.i18n.initialization"><info><title>Initialiser l'i18n dans les formulaires</title></info>
+    <section xml:id="zend.form.i18n.initialization"><title>Initialiser l'i18n dans les formulaires</title>
         
 
         <para>
@@ -113,7 +113,7 @@ $element->setTranslator($translate);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.i18n.standard"><info><title>Cibles gérées par l'I18n</title></info>
+    <section xml:id="zend.form.i18n.standard"><title>Cibles gérées par l'I18n</title>
         
 
         <para>

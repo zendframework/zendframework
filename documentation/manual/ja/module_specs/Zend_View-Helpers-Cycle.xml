@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.cycle"><info><title>Cycle ヘルパー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.cycle"><title>Cycle ヘルパー</title>
 
     
 
@@ -7,7 +7,7 @@
         <classname>Cycle</classname>ヘルパーは 一組の値を交互に切り替えるために使われます。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.cycle.basicusage"><info><title>Cycle ヘルパーの基本的な使用法</title></info>
+    <example xml:id="zend.view.helpers.initial.cycle.basicusage"><title>Cycle ヘルパーの基本的な使用法</title>
 
         
 
@@ -46,7 +46,7 @@ $this->cycle()->prev();
 
     </example>
 
-    <example xml:id="zend.view.helpers.initial.cycle.advanceusage"><info><title>２つ以上の繰り返しを利用する</title></info>
+    <example xml:id="zend.view.helpers.initial.cycle.advanceusage"><title>２つ以上の繰り返しを利用する</title>
 
         
 

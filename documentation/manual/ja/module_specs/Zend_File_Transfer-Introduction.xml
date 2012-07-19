@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.file.transfer.introduction"><info><title>Zend_File_Transfer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.file.transfer.introduction"><title>Zend_File_Transfer</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         <acronym>HTTP</acronym> や FTP、WEBDAV などのさまざまな転送プロトコルを同じ <acronym>API</acronym> で使用できます。
     </para>
 
-    <note><info><title>制限</title></info>
+    <note><title>制限</title>
         
 
         <para>
@@ -26,7 +26,7 @@
         </para>
     </note>
 
-    <note><info><title>フォーム</title></info>
+    <note><title>フォーム</title>
         
 
         <para>
@@ -47,7 +47,7 @@
         次の例を参照ください。
     </para>
 
-    <example xml:id="zend.file.transfer.introduction.example"><info><title>シンプルなファイルアップロードフォーム</title></info>
+    <example xml:id="zend.file.transfer.introduction.example"><title>シンプルなファイルアップロードフォーム</title>
         
 
         <para>
@@ -99,7 +99,7 @@ if (!$adapter->receive()) {
 
     </example>
 
-    <note><info><title>注意</title></info>
+    <note><title>注意</title>
         
 
         <para>
@@ -111,7 +111,7 @@ if (!$adapter->receive()) {
         </para>
     </note>
 
-    <section xml:id="zend.file.transfer.introduction.adapters"><info><title>Zend_File_Transfer がサポートするアダプタ</title></info>
+    <section xml:id="zend.file.transfer.introduction.adapters"><title>Zend_File_Transfer がサポートするアダプタ</title>
         
 
         <para>
@@ -125,7 +125,7 @@ if (!$adapter->receive()) {
         </para>
     </section>
 
-    <section xml:id="zend.file.transfer.introduction.options"><info><title>Zend_File_Transfer のオプション</title></info>
+    <section xml:id="zend.file.transfer.introduction.options"><title>Zend_File_Transfer のオプション</title>
         
 
         <para>
@@ -148,7 +148,7 @@ if (!$adapter->receive()) {
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.file.transfer.introduction.checking"><info><title>ファイルのチェック</title></info>
+    <section xml:id="zend.file.transfer.introduction.checking"><title>ファイルのチェック</title>
         
 
         <para>
@@ -187,7 +187,7 @@ if (!$adapter->receive()) {
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.file.transfer.introduction.checking.example"><info><title>ファイルのチェック</title></info>
+        <example xml:id="zend.file.transfer.introduction.checking.example"><title>ファイルのチェック</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -216,7 +216,7 @@ $upload->receive();
         </example>
     </section>
 
-    <section xml:id="zend.file.transfer.introduction.informations"><info><title>さらなるファイル情報</title></info>
+    <section xml:id="zend.file.transfer.introduction.informations"><title>さらなるファイル情報</title>
         
 
         <para>
@@ -276,7 +276,7 @@ $upload->receive();
             にするとパスの部分を取り除いた結果を返します。
         </para>
 
-        <example xml:id="zend.file.transfer.introduction.informations.example1"><info><title>ファイル名の取得</title></info>
+        <example xml:id="zend.file.transfer.introduction.informations.example1"><title>ファイル名の取得</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -307,7 +307,7 @@ $names = $upload->getFileName('foo');
             <property>useByteString</property> を <constant>FALSE</constant> に設定してください。
         </para>
 
-        <example xml:id="zend.file.transfer.introduction.informations.example.getfilesize"><info><title>ファイルのサイズの取得</title></info>
+        <example xml:id="zend.file.transfer.introduction.informations.example.getfilesize"><title>ファイルのサイズの取得</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -324,7 +324,7 @@ $size = $upload->getFileSize();
 
         </example>
 
-        <note><info><title>Client given filesize</title></info>
+        <note><title>Client given filesize</title>
             
 
             <para>
@@ -342,7 +342,7 @@ $size = $upload->getFileSize();
             <emphasis>crc32</emphasis> をデフォルトのアルゴリズムとして使用します。
         </para>
 
-        <example xml:id="zend.file.transfer.introduction.informations.example2"><info><title>ファイルのハッシュの取得</title></info>
+        <example xml:id="zend.file.transfer.introduction.informations.example2"><title>ファイルのハッシュの取得</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -358,7 +358,7 @@ $names = $upload->getHash('crc32', 'foo');
 
         </example>
 
-        <note><info><title>返り値</title></info>
+        <note><title>返り値</title>
             
 
             <para>
@@ -371,7 +371,7 @@ $names = $upload->getHash('crc32', 'foo');
             複数のファイルがアップロードされた場合は配列、そうでない場合は文字列を返します。
         </para>
 
-        <example xml:id="zend.file.transfer.introduction.informations.getmimetype"><info><title>ファイルの mimetype の取得</title></info>
+        <example xml:id="zend.file.transfer.introduction.informations.getmimetype"><title>ファイルの mimetype の取得</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -386,7 +386,7 @@ $names = $upload->getMimeType('foo');
 
         </example>
 
-        <note><info><title>Client given mimetype</title></info>
+        <note><title>Client given mimetype</title>
             
 
              <para>
@@ -396,7 +396,7 @@ $names = $upload->getMimeType('foo');
             </para>
         </note>
 
-        <warning><info><title>ありえる例外</title></info>
+        <warning><title>ありえる例外</title>
             
 
             <para>
@@ -406,7 +406,7 @@ $names = $upload->getMimeType('foo');
             </para>
         </warning>
 
-        <warning><info><title>Original data within $_FILES</title></info>
+        <warning><title>Original data within $_FILES</title>
             
 
             <para>
@@ -424,7 +424,7 @@ $names = $upload->getMimeType('foo');
 
     </section>
 
-    <section xml:id="zend.file.transfer.introduction.uploadprogress"><info><title>ファイルアップロードの進捗</title></info>
+    <section xml:id="zend.file.transfer.introduction.uploadprogress"><title>ファイルアップロードの進捗</title>
         
 
         <para>
@@ -455,7 +455,7 @@ $names = $upload->getMimeType('foo');
             実際には、これを処理する公式な方法は 2 通りあります。
         </para>
 
-        <section xml:id="zend.file.transfer.introduction.uploadprogress.progressadapter"><info><title>progressbar アダプタを使用する</title></info>
+        <section xml:id="zend.file.transfer.introduction.uploadprogress.progressadapter"><title>progressbar アダプタを使用する</title>
 
             
 
@@ -472,7 +472,7 @@ $names = $upload->getMimeType('foo');
                 の章を参照ください。
             </para>
 
-            <example xml:id="zend.file.transfer.introduction.uploadprogress.progressadapter.example1"><info><title>progressbar アダプタを使用した実際の状態の取得</title></info>
+            <example xml:id="zend.file.transfer.introduction.uploadprogress.progressadapter.example1"><title>progressbar アダプタを使用した実際の状態の取得</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -493,7 +493,7 @@ while (!$upload['done']) {
 
         </section>
 
-        <section xml:id="zend.file.transfer.introduction.uploadprogress.manually"><info><title>getProgress() を手動で使用する</title></info>
+        <section xml:id="zend.file.transfer.introduction.uploadprogress.manually"><title>getProgress() を手動で使用する</title>
             
 
             <para>
@@ -585,7 +585,7 @@ while (!$upload['done']) {
                 次の例は、手動で使用する方法を示すものです。
             </para>
 
-            <example xml:id="zend.file.transfer.introduction.uploadprogress.manually.example1"><info><title>手動での進捗状況表示の使用法</title></info>
+            <example xml:id="zend.file.transfer.introduction.uploadprogress.manually.example1"><title>手動での進捗状況表示の使用法</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -600,7 +600,7 @@ while (!$upload['done']) {
 
             </example>
 
-            <note><info><title>Knowing the file to get the progress from</title></info>
+            <note><title>Knowing the file to get the progress from</title>
                 
 
                 <para>

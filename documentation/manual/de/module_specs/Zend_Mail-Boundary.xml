@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><info><title>Die MIME Abgrenzung kontrollieren</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><title>Die MIME Abgrenzung kontrollieren</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         dem folgenden Beispiel:
     </para>
 
-    <example xml:id="zend.mail.boundary.example-1"><info><title>Die MIME Abgrenzung ändern</title></info>
+    <example xml:id="zend.mail.boundary.example-1"><title>Die MIME Abgrenzung ändern</title>
         
 
         <programlisting language="php"><![CDATA[

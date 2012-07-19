@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><info><title>Controlling the MIME Boundary</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><title>Controlling the MIME Boundary</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         the <methodname>setMimeBoundary()</methodname> method, as in the following example:
     </para>
 
-    <example xml:id="zend.mail.boundary.example-1"><info><title>Changing the MIME Boundary</title></info>
+    <example xml:id="zend.mail.boundary.example-1"><title>Changing the MIME Boundary</title>
         
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();

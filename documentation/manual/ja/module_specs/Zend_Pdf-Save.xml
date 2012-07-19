@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>PDF ドキュメントへの変更内容の保存</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><title>PDF ドキュメントへの変更内容の保存</title>
     
     <para>
     <acronym>PDF</acronym> ドキュメントの変更内容を保存するには 2 種類の方法があります。
@@ -19,7 +19,7 @@
     新しい <acronym>PDF</acronym> ファイルセグメントのみが返されます。
     </para>
 
-    <example xml:id="zend.pdf.save.example-1"><info><title>PDF ドキュメントの保存</title></info>
+    <example xml:id="zend.pdf.save.example-1"><title>PDF ドキュメントの保存</title>
         
 
         <programlisting language="php"><![CDATA[

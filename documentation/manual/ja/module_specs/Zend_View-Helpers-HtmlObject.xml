@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.object"><info><title>HTML オブジェクトヘルパー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.object"><title>HTML オブジェクトヘルパー</title>
     
 
     <para>
@@ -45,7 +45,7 @@
         そのため、このドキュメントでは、そのうちの 2 つのヘルパーの例だけを紹介します。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.object.flash"><info><title>Flash ヘルパー</title></info>
+    <example xml:id="zend.view.helpers.initial.object.flash"><title>Flash ヘルパー</title>
 
         
 
@@ -78,7 +78,7 @@
         <methodname>htmlObject()</methodname> ヘルパーで紹介します。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.object.object"><info><title>追加属性を渡すことによるオブジェクトのカスタマイズ</title></info>
+    <example xml:id="zend.view.helpers.initial.object.object"><title>追加属性を渡すことによるオブジェクトのカスタマイズ</title>
         
 
         <para>

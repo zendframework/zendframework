@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.conclusion"><info><title>Conclusion</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.conclusion"><title>Conclusion</title>
     
 
     <para>
@@ -46,7 +46,7 @@
         étendre de manière soutenue le Zend Framework.
     </para>
 
-    <note><info><title>Remarque</title></info>
+    <note><title>Remarque</title>
         
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Введение</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><title>Введение</title>
     
 
     <para>
@@ -37,7 +37,7 @@
         приложение может контролировать предоставление ролям доступа к ресурсам.
     </para>
 
-    <section xml:id="zend.acl.introduction.resources"><info><title>Ресурсы</title></info>
+    <section xml:id="zend.acl.introduction.resources"><title>Ресурсы</title>
         
         <para>
             Создать ресурс в <classname>Zend_Acl</classname> очень просто. <classname>Zend_Acl</classname> предоставляет
@@ -74,7 +74,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.acl.introduction.roles"><info><title>Роли</title></info>
+    <section xml:id="zend.acl.introduction.roles"><title>Роли</title>
         
         <para>
             Как и в случае с ресурсами, создавать роль тоже очень просто.
@@ -101,7 +101,7 @@
             неопределенное условие и показывает, как <classname>Zend_Acl</classname> решает эту
             проблему.
         </para>
-        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>Множественное наследование ролей</title></info>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>Множественное наследование ролей</title>
             
             <para>
                 Следующий код определяет три базовые роли:
@@ -172,7 +172,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'разрешен' : 'зап�
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.creating"><info><title>Создание списка контроля доступа (ACL)</title></info>
+    <section xml:id="zend.acl.introduction.creating"><title>Создание списка контроля доступа (ACL)</title>
         
 
         <para>
@@ -198,7 +198,7 @@ $acl = new Zend_Acl();
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.role_registry"><info><title>Регистрация ролей</title></info>
+    <section xml:id="zend.acl.introduction.role_registry"><title>Регистрация ролей</title>
         
 
         <para>
@@ -220,7 +220,7 @@ $acl = new Zend_Acl();
             Права доступа могут быть изображены в следующем виде:
         </para>
 
-        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Контроль за доступом для демонстрационной CMS</title></info>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><title>Контроль за доступом для демонстрационной CMS</title>
           
           <tgroup cols="3">
             <thead>
@@ -288,7 +288,7 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
 
     </section>
 
-    <section xml:id="zend.acl.introduction.defining"><info><title>Определение контроля доступа</title></info>
+    <section xml:id="zend.acl.introduction.defining"><title>Определение контроля доступа</title>
         
 
         <para>
@@ -348,7 +348,7 @@ $acl->allow('administrator');]]></programlisting>
 
     </section>
 
-    <section xml:id="zend.acl.introduction.querying"><info><title>Запросы к ACL</title></info>
+    <section xml:id="zend.acl.introduction.querying"><title>Запросы к ACL</title>
         
 
         <para>

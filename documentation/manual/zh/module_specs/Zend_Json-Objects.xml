@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.objects"><info><title>JSON 对象</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.objects"><title>JSON 对象</title>
     
     <para>
         当编码PHP对象为JSON时, 它的所有的公有属性将被编码为JSON格式（到JSON对象中）.

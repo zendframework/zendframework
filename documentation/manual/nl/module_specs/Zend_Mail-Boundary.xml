@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><info><title>De MIME Boundary controleren</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><title>De MIME Boundary controleren</title>
     
     <para>
         In een multipart bericht wordt meestal een willekeurige MIME boundary aangemaakt om de verschillende
@@ -7,7 +7,7 @@
         boundary wil opgeven die gebruikt moet worden. Dat kan gedaan worden met de
         <code>setMimeBoundary()</code> methode, zoals in het volgende voorbeeld:
     </para>
-    <example><info><title>De MIME Boundary veranderen</title></info>
+    <example><title>De MIME Boundary veranderen</title>
         
         <programlisting role="php"><![CDATA[
 <?php

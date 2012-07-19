@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.alpha"><info><title>Alpha</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.alpha"><title>Alpha</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         erlaubt.
     </para>
 
-    <section xml:id="zend.filter.set.alpha.options"><info><title>Unterstützte Optionen für Zend_Filter_Alpha</title></info>
+    <section xml:id="zend.filter.set.alpha.options"><title>Unterstützte Optionen für Zend_Filter_Alpha</title>
         
 
         <para>
@@ -27,7 +27,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.filter.set.alpha.basic"><info><title>Einfache Verwendung</title></info>
+    <section xml:id="zend.filter.set.alpha.basic"><title>Einfache Verwendung</title>
         
 
         <para>
@@ -55,7 +55,7 @@ print $filter->filter('Das ist (mein) Inhalt: 123');
         </note>
     </section>
 
-     <section xml:id="zend.filter.set.alpha.whitespace"><info><title>Leerzeichen erlauben</title></info>
+     <section xml:id="zend.filter.set.alpha.whitespace"><title>Leerzeichen erlauben</title>
          
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title>Feeds importieren</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><title>Feeds importieren</title>
     
 
     <para>
@@ -35,7 +35,7 @@ $feedFromPHP = Zend_Feed::importString($feedString);
         Importiermethoden auch ein <classname>Zend_Feed_Exception</classname> Objekt.
     </para>
 
-    <section xml:id="zend.feed.importing.custom"><info><title>Eigene Feeds</title></info>
+    <section xml:id="zend.feed.importing.custom"><title>Eigene Feeds</title>
         
 
         <para>
@@ -48,7 +48,7 @@ $feedFromPHP = Zend_Feed::importString($feedString);
             <classname>Zend_Feed_Builder_Interface</classname> implementiert.
         </para>
 
-        <section xml:id="zend.feed.importing.custom.importarray"><info><title>Importieren eines eigenen Arrays</title></info>
+        <section xml:id="zend.feed.importing.custom.importarray"><title>Importieren eines eigenen Arrays</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -291,7 +291,7 @@ array(
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.feed.importing.custom.importbuilder"><info><title>Importieren einer eigenen Daten Quelle</title></info>
+        <section xml:id="zend.feed.importing.custom.importbuilder"><title>Importieren einer eigenen Daten Quelle</title>
             
 
             <para>
@@ -340,7 +340,7 @@ $rssFeedFromArray =
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.feed.importing.custom.dump"><info><title>Ausgeben des Inhalts eines Feeds</title></info>
+        <section xml:id="zend.feed.importing.custom.dump"><title>Ausgeben des Inhalts eines Feeds</title>
             
 
             <para>

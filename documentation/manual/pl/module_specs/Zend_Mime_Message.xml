@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><info><title>Zend_Mime_Message</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><title>Zend_Mime_Message</title>
     
 
-    <section xml:id="zend.mime.message.introduction"><info><title>Wprowadzenie</title></info>
+    <section xml:id="zend.mime.message.introduction"><title>Wprowadzenie</title>
       
 
       <para><code>Zend_Mime_Message</code> reprezetuje wiadomość zgodną z MIME,
@@ -18,14 +18,14 @@
       </para>
     </section>
 
-    <section xml:id="zend.mime.message.instantiation"><info><title>Tworzenie instancji</title></info>
+    <section xml:id="zend.mime.message.instantiation"><title>Tworzenie instancji</title>
         
         <para>
             <code>Zend_Mime_Message</code> nie posiada konstruktora.
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.addparts"><info><title>Dodawanie części MIME</title></info>
+    <section xml:id="zend.mime.message.addparts"><title>Dodawanie części MIME</title>
         
 
         <para>Obiekty <link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>
@@ -46,7 +46,7 @@
         wygeneruje ją jako wieloczęściową wiadomość MIME.</para>
     </section>
 
-    <section xml:id="zend.mime.message.bondary"><info><title>Obsługa pola rozgraniczającego (boundary)</title></info>
+    <section xml:id="zend.mime.message.bondary"><title>Obsługa pola rozgraniczającego (boundary)</title>
         
 
         <para><code>Zend_Mime_Message</code> zazwyczaj tworzy obiekt <code>Zend_Mime</code>
@@ -66,8 +66,8 @@
         <code>Zend_Mime_Message</code> do postaci łańcuchu znaków.</para>
     </section>
 
-    <section xml:id="zend.mime.message.parse"><info><title>Tworzenie obiektu Zend_Mime_Message z łańcucha znaków.
-        (eksperymentalne)</title></info>
+    <section xml:id="zend.mime.message.parse"><title>Tworzenie obiektu Zend_Mime_Message z łańcucha znaków.
+        (eksperymentalne)</title>
         
 
         <para>Wiadomość zgodna z MIME zapisana w postaci łańcucha znaków może

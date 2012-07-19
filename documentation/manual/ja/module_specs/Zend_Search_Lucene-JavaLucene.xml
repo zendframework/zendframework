@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>Java Lucene との相互運用</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><title>Java Lucene との相互運用</title>
     
 
-    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>ファイルフォーマット</title></info>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><title>ファイルフォーマット</title>
         
         <para>
           <classname>Zend_Search_Lucene</classname> のインデックスファイルのフォーマットは、
@@ -18,7 +18,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>インデックスディレクトリ</title></info>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><title>インデックスディレクトリ</title>
         
 
         <para>
@@ -47,7 +47,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>Java のソースコード</title></info>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><title>Java のソースコード</title>
         
         <para>
             以下の Java プログラムリストは、Java Lucene

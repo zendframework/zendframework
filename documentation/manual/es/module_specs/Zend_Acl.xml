@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Introducción</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><title>Introducción</title>
     
     <para>
         <classname>Zend_Acl</classname> provee la implementación de un sistema
@@ -30,7 +30,7 @@
         objetos solicitantes (roles) han obtenido acceso a objetos protegidos
         (recursos). </para>
 
-    <section xml:id="zend.acl.introduction.resources"><info><title>Acerca de los Recursos</title></info>
+    <section xml:id="zend.acl.introduction.resources"><title>Acerca de los Recursos</title>
         
         <para> En <classname>Zend_Acl</classname> , crear un recurso es muy
             sencillo. <classname>Zend_Acl</classname> proporciona el
@@ -68,7 +68,7 @@
             privilegios o a privilegios específicos sobre un recurso. </para>
     </section>
 
-    <section xml:id="zend.acl.introduction.roles"><info><title>Acerca de las Reglas</title></info>
+    <section xml:id="zend.acl.introduction.roles"><title>Acerca de las Reglas</title>
         
         <para> Al igual que los recursos, la creación de un rol también es muy
             simple. <classname>Zend_Acl</classname> proporciona
@@ -92,7 +92,7 @@
             útil, múltiples herencias también introduce cierto grado de
             complejidad. El siguiente ejemplo ilustra la condición de ambiguedad
             y como <classname>Zend_Acl</classname> soluciona esto. </para>
-        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>Herencia Múlltiple entre Roles</title></info>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>Herencia Múlltiple entre Roles</title>
             
             <para> El siguiente código define tres roles principales -
                 "invitado", "miembro", y "admin" - de los cuales otros roles
@@ -154,7 +154,7 @@ echo $acl->isAllowed('unUsuario', 'unRecurso') ? 'permitido' : 'denegado';
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.creating"><info><title> Creando las Listas de Control de Acceso (ACL) </title></info>
+    <section xml:id="zend.acl.introduction.creating"><title> Creando las Listas de Control de Acceso (ACL) </title>
         
 
         <para> Una <acronym>ACL</acronym> puede representar cualquier grupo de
@@ -179,7 +179,7 @@ $acl = new Zend_Acl();
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.role_registry"><info><title>Registrando Roles</title></info>
+    <section xml:id="zend.acl.introduction.role_registry"><title>Registrando Roles</title>
         
 
         <para> El Sistema de Administración de Contenido (
@@ -199,7 +199,7 @@ $acl = new Zend_Acl();
             'padre', al igual que proporcionando distintos privilegios solo para
             su grupo individual. Los permisos pueden ser expresados como: </para>
 
-        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Controles de Acceso para un CMS de ejemplo</title></info>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><title>Controles de Acceso para un CMS de ejemplo</title>
             
             <tgroup cols="3">
                 <thead>
@@ -268,7 +268,7 @@ $acl->addRole(new Zend_Acl_Role('administrador'));
 
     </section>
 
-    <section xml:id="zend.acl.introduction.defining"><info><title>Definiendo Controles de Acceso</title></info>
+    <section xml:id="zend.acl.introduction.defining"><title>Definiendo Controles de Acceso</title>
         
 
         <para> Ahora que la <acronym>ACL</acronym> contiene los roles
@@ -329,7 +329,7 @@ $acl->allow('administrador');
 
     </section>
 
-    <section xml:id="zend.acl.introduction.querying"><info><title>Consultando la ACL</title></info>
+    <section xml:id="zend.acl.introduction.querying"><title>Consultando la ACL</title>
         
 
         <para> Ahora tenemos una <acronym>ACL</acronym> flexible que puede ser

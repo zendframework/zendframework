@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><info><title>Karakterset.</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><title>Karakterset.</title>
     
 
-    <section xml:id="zend.search.lucene.charset.description"><info><title>Support voor UTF-8 en single-byte karaktersets.</title></info>
+    <section xml:id="zend.search.lucene.charset.description"><title>Support voor UTF-8 en single-byte karaktersets.</title>
         
 
         <para>

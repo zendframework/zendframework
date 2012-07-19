@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.adapters"><info><title>Adaptateurs CAPTCHA</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.adapters"><title>Adaptateurs CAPTCHA</title>
     
 
     <para>Les adaptateurs suivants sont fournis dans Zend Framework par défaut.</para>
 
-    <section xml:id="zend.captcha.adapters.word"><info><title>Zend_Captcha_Word</title></info>
+    <section xml:id="zend.captcha.adapters.word"><title>Zend_Captcha_Word</title>
         
 
         <para>
@@ -102,7 +102,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.captcha.adapters.dumb"><info><title>Zend_Captcha_Dumb</title></info>
+    <section xml:id="zend.captcha.adapters.dumb"><title>Zend_Captcha_Dumb</title>
         
 
         <para>
@@ -114,7 +114,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.captcha.adapters.figlet"><info><title>Zend_Captcha_Figlet</title></info>
+    <section xml:id="zend.captcha.adapters.figlet"><title>Zend_Captcha_Figlet</title>
         
 
         <para>
@@ -131,7 +131,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.captcha.adapters.image"><info><title>Zend_Captcha_Image</title></info>
+    <section xml:id="zend.captcha.adapters.image"><title>Zend_Captcha_Image</title>
         
 
         <para>
@@ -254,7 +254,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.captcha.adapters.recaptcha"><info><title>Zend_Captcha_ReCaptcha</title></info>
+    <section xml:id="zend.captcha.adapters.recaptcha"><title>Zend_Captcha_ReCaptcha</title>
         
 
         <para>

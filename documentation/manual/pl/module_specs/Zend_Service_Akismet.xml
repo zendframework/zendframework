@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.akismet"><info><title>Zend_Service_Akismet</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.akismet"><title>Zend_Service_Akismet</title>
     
 
-    <section xml:id="zend.service.akismet.introduction"><info><title>Wprowadzenie</title></info>
+    <section xml:id="zend.service.akismet.introduction"><title>Wprowadzenie</title>
         
 
         <para>
@@ -34,7 +34,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.verifykey"><info><title>Weryfikowanie klucza API</title></info>
+    <section xml:id="zend.service.akismet.verifykey"><title>Weryfikowanie klucza API</title>
         
 
         <para>
@@ -70,7 +70,7 @@ if ($akismet->verifyKey($apiKey) {
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.isspam"><info><title>Sprawdzanie czy dane są spamem</title></info>
+    <section xml:id="zend.service.akismet.isspam"><title>Sprawdzanie czy dane są spamem</title>
         
 
         <para>
@@ -173,7 +173,7 @@ if ($akismet->verifyKey($apiKey) {
             a w przypadku gdy klucz API jest nieprawidłowy, wyrzuci wyjątek.
         </para>
 
-        <example xml:id="zend.service.akismet.isspam.example-1"><info><title>Użycie metody isSpam()</title></info>
+        <example xml:id="zend.service.akismet.isspam.example-1"><title>Użycie metody isSpam()</title>
             
 
             <programlisting role="php"><![CDATA[
@@ -202,7 +202,7 @@ if ($akismet->isSpam($data)) {
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.submitspam"><info><title>Wysyłanie informacji o spamie</title></info>
+    <section xml:id="zend.service.akismet.submitspam"><title>Wysyłanie informacji o spamie</title>
         
 
         <para>
@@ -219,7 +219,7 @@ if ($akismet->isSpam($data)) {
             wyrzucony wyjątek.
         </para>
 
-        <example xml:id="zend.service.akismet.submitspam.example-1"><info><title>Użycie metody submitSpam()</title></info>
+        <example xml:id="zend.service.akismet.submitspam.example-1"><title>Użycie metody submitSpam()</title>
             
 
             <programlisting role="php"><![CDATA[
@@ -244,7 +244,7 @@ $akismet->submitSpam($data));
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.submitham"><info><title>Wysyłanie informacji o fałszywym spamie (ham)</title></info>
+    <section xml:id="zend.service.akismet.submitham"><title>Wysyłanie informacji o fałszywym spamie (ham)</title>
         
 
         <para>
@@ -263,7 +263,7 @@ $akismet->submitSpam($data));
             nieprawidłowy, zostanie wyrzucony wyjątek.
         </para>
 
-        <example xml:id="zend.service.akismet.submitham.example-1"><info><title>Użycie metody submitHam()</title></info>
+        <example xml:id="zend.service.akismet.submitham.example-1"><title>Użycie metody submitHam()</title>
             
 
             <programlisting role="php"><![CDATA[
@@ -288,7 +288,7 @@ $akismet->submitHam($data));
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.accessors"><info><title>Specyficzne metody dostępowe</title></info>
+    <section xml:id="zend.service.akismet.accessors"><title>Specyficzne metody dostępowe</title>
         
 
         <para>

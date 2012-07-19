@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers"><info><title>Writer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers"><title>Writer</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         Die Aufgabe eines Writer's ist es Log Daten in ein Speicher-Backend aufzunehmen.
     </para>
 
-    <section xml:id="zend.log.writers.stream"><info><title>In Streams schreiben</title></info>
+    <section xml:id="zend.log.writers.stream"><title>In Streams schreiben</title>
         
 
         <para>
@@ -72,7 +72,7 @@ $logger->info('Informative Nachricht');
         </para>
     </section>
 
-    <section xml:id="zend.log.writers.database"><info><title>In Datenbanken schreiben</title></info>
+    <section xml:id="zend.log.writers.database"><title>In Datenbanken schreiben</title>
         
 
         <para>
@@ -111,7 +111,7 @@ $logger->info('Informative Nachricht');
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Syslog.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-ZendMonitor.xml"/>
 
-    <section xml:id="zend.log.writers.null"><info><title>Einen Writer abstumpfen</title></info>
+    <section xml:id="zend.log.writers.null"><title>Einen Writer abstumpfen</title>
         
 
         <para>
@@ -129,7 +129,7 @@ $logger->info('Informative Nachricht');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.log.writers.mock"><info><title>Mit der Attrappe testen</title></info>
+    <section xml:id="zend.log.writers.mock"><title>Mit der Attrappe testen</title>
         
 
         <para>
@@ -161,7 +161,7 @@ var_dump($mock->events[0]);
         </para>
     </section>
 
-    <section xml:id="zend.log.writers.compositing"><info><title>Gemischte Writer</title></info>
+    <section xml:id="zend.log.writers.compositing"><title>Gemischte Writer</title>
         
 
         <para>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><info><title>Zend_Mime_Message</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><title>Zend_Mime_Message</title>
     
 
-    <section xml:id="zend.mime.message.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.mime.message.introduction"><title>導入</title>
         
 
         <para>
@@ -18,7 +18,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.instantiation"><info><title>インスタンスの作成</title></info>
+    <section xml:id="zend.mime.message.instantiation"><title>インスタンスの作成</title>
         
 
         <para>
@@ -27,7 +27,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.addparts"><info><title>MIME パートの追加</title></info>
+    <section xml:id="zend.mime.message.addparts"><title>MIME パートの追加</title>
         
 
         <para>
@@ -54,7 +54,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.bondary"><info><title>バウンダリの扱い</title></info>
+    <section xml:id="zend.mime.message.bondary"><title>バウンダリの扱い</title>
         
 
         <para>
@@ -82,8 +82,8 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.parse"><info><title>文字列をパースすることによる Zend_Mime_Message
-        オブジェクトの作成 (実験段階)</title></info>
+    <section xml:id="zend.mime.message.parse"><title>文字列をパースすることによる Zend_Mime_Message
+        オブジェクトの作成 (実験段階)</title>
         
 
         <para>

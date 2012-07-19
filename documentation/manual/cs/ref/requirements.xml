@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appendix xmlns="http://docbook.org/ns/docbook"
     xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="requirements">
-    <info><title>Systémové požadavky</title></info>
+    <title>Systémové požadavky</title>
 
     <para>
         Tato sekce dokumentuje požadavky pro Zend Framework.
     </para>
 
-    <section xml:id="requirements.version"><info><title>Požadovaná verze PHP</title></info>
+    <section xml:id="requirements.version"><title>Požadovaná verze PHP</title>
 
         
 
@@ -31,7 +31,7 @@
 
     </section>
 
-    <section xml:id="requirements.extensions"><info><title>PHP rozšíření (Extensions)</title></info>
+    <section xml:id="requirements.extensions"><title>PHP rozšíření (Extensions)</title>
 
         
 
@@ -49,7 +49,7 @@
             automaticky použije alternativní kód.
         </para>
 
-        <table frame="all" xml:id="requirements.extensions.table-1"><info><title>PHP rozšíření použitá v Zend Frameworku</title></info>
+        <table frame="all" xml:id="requirements.extensions.table-1"><title>PHP rozšíření použitá v Zend Frameworku</title>
             
             <tgroup cols="3">
                 <colspec colwidth="1in"/>
@@ -535,7 +535,7 @@
 
     </section>
 
-    <section xml:id="requirements.zendcomponents"><info><title>Zend Framework komponenty</title></info>
+    <section xml:id="requirements.zendcomponents"><title>Zend Framework komponenty</title>
 
         
 
@@ -546,7 +546,7 @@
             rozšíření použitá Zend Frameworkem jsou potřebná pro každou aplikaci.
         </para>
 
-        <table frame="all" xml:id="requirements.zendcomponents.table-1"><info><title>Zend Framework komponenty a PHP rozšíření která používají</title></info>
+        <table frame="all" xml:id="requirements.zendcomponents.table-1"><title>Zend Framework komponenty a PHP rozšíření která používají</title>
             
             <tgroup cols="3">
                 <colspec colwidth="2in"/>

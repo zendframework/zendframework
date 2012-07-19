@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.custom"><info><title>カスタム・ページ・タイプの作成</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.custom"><title>カスタム・ページ・タイプの作成</title>
     
 
     <para>
@@ -20,7 +20,7 @@
         <code>$internalId = $page-&gt;get('internal_id');</code>を通じてアクセスできます。
     </para>
 
-    <example xml:id="zend.navigation.custom.example.simple"><info><title>もっとも単純なカスタム・ページ</title></info>
+    <example xml:id="zend.navigation.custom.example.simple"><title>もっとも単純なカスタム・ページ</title>
         
 
         <para>
@@ -39,7 +39,7 @@ class My_Simple_Page extends Zend_Navigation_Page
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.navigation.custom.example.properties"><info><title>プロパティ付のカスタム・ページ</title></info>
+    <example xml:id="zend.navigation.custom.example.properties"><title>プロパティ付のカスタム・ページ</title>
         
 
         <para>

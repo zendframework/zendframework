@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><info><title>Internationalisierung (I18n) und Lokalisierung (L10n)</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><title>Internationalisierung (I18n) und Lokalisierung (L10n)</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         verkleinern.
     </para>
 
-    <section xml:id="performance.localization.translationadapter"><info><title>Welchen Übersetzungsadapter sollte ich verwenden?</title></info>
+    <section xml:id="performance.localization.translationadapter"><title>Welchen Übersetzungsadapter sollte ich verwenden?</title>
         
 
         <para>
@@ -22,7 +22,7 @@
             verwenden. Trotzdem, welcher Adapter ist der schnellste, wenn man die Wahl hat?
         </para>
 
-        <section xml:id="performance.localization.translationadapter.fastest"><info><title>Verwende nicht-XML Übersetzungsadapter für die größte Geschwindigkeit</title></info>
+        <section xml:id="performance.localization.translationadapter.fastest"><title>Verwende nicht-XML Übersetzungsadapter für die größte Geschwindigkeit</title>
             
 
             <para>
@@ -80,7 +80,7 @@
         </section>
     </section>
 
-    <section xml:id="performance.localization.cache"><info><title>Wie kann ich Übersetzungen und Lokalisierungen sogar noch schneller machen?</title></info>
+    <section xml:id="performance.localization.cache"><title>Wie kann ich Übersetzungen und Lokalisierungen sogar noch schneller machen?</title>
         
 
         <para>
@@ -90,7 +90,7 @@
             Operationen schneller machen. Wie kann man das tun?
         </para>
 
-        <section xml:id="performance.localization.cache.usage"><info><title>Verwenden von Übersetzungs und Lokalisierungs Caches</title></info>
+        <section xml:id="performance.localization.cache.usage"><title>Verwenden von Übersetzungs und Lokalisierungs Caches</title>
             
 
             <para>

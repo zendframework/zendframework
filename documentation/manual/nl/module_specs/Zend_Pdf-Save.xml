@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>Wijzigen van het PDF document opslaan</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><title>Wijzigen van het PDF document opslaan</title>
     
     <para>
     Er kunnen twee methodes worden aangewend om gewijzigde PDF documenten op te slaan. Deze zijn de
@@ -17,7 +17,7 @@
     Indien $newSegmentOnly TRUE is, wordt alleen het nieuwe PDF bestandssegment teruggestuurd.
     </para>
 
-    <example><info><title>Een PDF document opslaan</title></info>
+    <example><title>Een PDF document opslaan</title>
         
         <programlisting role="php"><![CDATA[<?php
 ...

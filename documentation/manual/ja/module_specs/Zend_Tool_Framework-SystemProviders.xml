@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.system-providers"><info><title>出荷されたシステムプロバイダー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.system-providers"><title>出荷されたシステムプロバイダー</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         開発者を援助することを目的とするものもあります。
     </para>
 
-    <section xml:id="zend.tool.framework.system-providers.version"><info><title>バージョンプロバイダー</title></info>
+    <section xml:id="zend.tool.framework.system-providers.version"><title>バージョンプロバイダー</title>
         
 
         <para>
@@ -29,7 +29,7 @@
 
     </section>
 
-    <section xml:id="zend.tool.framework.system-providers.manifest"><info><title>マニフェストプロバイダー</title></info>
+    <section xml:id="zend.tool.framework.system-providers.manifest"><title>マニフェストプロバイダー</title>
         
 
         <para>

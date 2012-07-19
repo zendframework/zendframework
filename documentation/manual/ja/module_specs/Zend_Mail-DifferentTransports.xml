@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><info><title>異なる転送手段の使用</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><title>異なる転送手段の使用</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         渡されたオブジェクトがデフォルトのトランスポートを上書きします。
     </para>
 
-    <example xml:id="zend.mail.different-transports.example-1"><info><title>異なる転送手段の使用</title></info>
+    <example xml:id="zend.mail.different-transports.example-1"><title>異なる転送手段の使用</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -24,7 +24,7 @@ $mail->send();  // もう一度デフォルトを使用します
 ]]></programlisting>
     </example>
 
-    <note><info><title>転送手段の追加</title></info>
+    <note><title>転送手段の追加</title>
         
 
         <para>

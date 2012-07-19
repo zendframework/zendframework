@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><info><title>HeadTitle ヘルパー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><title>HeadTitle ヘルパー</title>
     
 
     <para>
@@ -33,7 +33,7 @@
         pass a different attach order as the second parameter.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><info><title>HeadTitle ヘルパーの基本的な使用法</title></info>
+    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><title>HeadTitle ヘルパーの基本的な使用法</title>
         
 
         <para>

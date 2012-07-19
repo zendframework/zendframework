@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.placeholder"><info><title>L'aide de vue Placeholder</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.placeholder"><title>L'aide de vue Placeholder</title>
     
 
     <note>
@@ -17,7 +17,7 @@
         séparateurs de contenu).
     </para>
 
-    <example xml:id="zend.view.helpers.initial.placeholder.usage"><info><title>Utilisation basique des Placeholders</title></info>
+    <example xml:id="zend.view.helpers.initial.placeholder.usage"><title>Utilisation basique des Placeholders</title>
         
 
         <para>
@@ -37,7 +37,7 @@
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.placeholder.aggregation"><info><title>Utilisation des Placeholders pour agréger du contenu</title></info>
+    <example xml:id="zend.view.helpers.initial.placeholder.aggregation"><title>Utilisation des Placeholders pour agréger du contenu</title>
         
 
         <para>
@@ -129,7 +129,7 @@ echo $foo['bar'];
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.placeholder.capture"><info><title>Utilisation des Placeholders pour capturer le contenu</title></info>
+    <example xml:id="zend.view.helpers.initial.placeholder.capture"><title>Utilisation des Placeholders pour capturer le contenu</title>
         
 
         <para>
@@ -207,7 +207,7 @@ foreach ($this->data as $datum): ?>
 ]]></programlisting>
     </example>
 
-    <section xml:id="zend.view.helpers.initial.placeholder.implementations"><info><title>Implémentation concrète des Placeholder</title></info>
+    <section xml:id="zend.view.helpers.initial.placeholder.implementations"><title>Implémentation concrète des Placeholder</title>
         
 
         <para>

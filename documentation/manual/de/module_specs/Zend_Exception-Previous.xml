@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.previous"><info><title>Vorherige Exceptions</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.previous"><title>Vorherige Exceptions</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         Vorherige Exceptions werden als drittes Argument an den Contructor der Exceptions indiziert.
     </para>
 
-    <example xml:id="zend.exception.previous.example"><info><title>Vorherige Exceptions</title></info>
+    <example xml:id="zend.exception.previous.example"><title>Vorherige Exceptions</title>
         
 
         <programlisting language="php"><![CDATA[

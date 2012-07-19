@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.mail"><info><title>Écrire vers un courriel</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.mail"><title>Écrire vers un courriel</title>
     
 
     <para>
@@ -56,7 +56,7 @@ $log->error('unable to connect to database');
         évènements seront envoyés.
     </para>
 
-    <section xml:id="zend.log.writers.mail.layoutusage"><info><title>Utilisation avec Zend_Layout</title></info>
+    <section xml:id="zend.log.writers.mail.layoutusage"><title>Utilisation avec Zend_Layout</title>
         
 
         <para>
@@ -107,7 +107,7 @@ $log->error('unable to connect to database');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.log.writers.mail.dynamicsubjectline"><info><title>Ligne du sujet dynamique</title></info>
+    <section xml:id="zend.log.writers.mail.dynamicsubjectline"><title>Ligne du sujet dynamique</title>
         
 
         <para>
@@ -122,7 +122,7 @@ $log->error('unable to connect to database');
         </para>
     </section>
 
-    <section xml:id="zend.log.writers.mail.caveats"><info><title>Attention</title></info>
+    <section xml:id="zend.log.writers.mail.caveats"><title>Attention</title>
         
 
         <para>

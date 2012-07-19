@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.read"><info><title>Lettura di messaggi e-mail</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.read"><title>Lettura di messaggi e-mail</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         Per una panoramica delle funzionalità dei sistemi di raccolta consultare la tabella seguente.
     </para>
 
-    <table xml:id="zend.mail.read.table-1"><info><title>Panoramica delle caratteristiche dei sistemi di lettura di e-mail</title></info>
+    <table xml:id="zend.mail.read.table-1"><title>Panoramica delle caratteristiche dei sistemi di lettura di e-mail</title>
         
         <tgroup cols="5">
             <thead>
@@ -67,7 +67,7 @@
         </tgroup>
     </table>
 
-    <section xml:id="zend.mail.read-example"><info><title>Semplice esempio usando Pop3</title></info>
+    <section xml:id="zend.mail.read-example"><title>Semplice esempio usando Pop3</title>
         
 
         <programlisting role="php"><![CDATA[<?php
@@ -82,7 +82,7 @@ foreach ($mail as $message) {
         ]]></programlisting>
 
     </section>
-    <section xml:id="zend.mail.read-open-local"><info><title>Apertura di un sistema di salvataggio locale</title></info>
+    <section xml:id="zend.mail.read-open-local"><title>Apertura di un sistema di salvataggio locale</title>
         
 
         <para>
@@ -106,7 +106,7 @@ $mail = new Zend_Mail_Storage_Maildir(array('dirname' => '/home/test/mail/'));
 
     </section>
 
-    <section xml:id="zend.mail.read-open-remote"><info><title>Apertura di un sistema di salvataggio remoto</title></info>
+    <section xml:id="zend.mail.read-open-remote"><title>Apertura di un sistema di salvataggio remoto</title>
         
 
         <para>
@@ -161,7 +161,7 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com'
 
     </section>
 
-    <section xml:id="zend.mail.read-fetching"><info><title>Lettura dei messaggi e semplici metodi</title></info>
+    <section xml:id="zend.mail.read-fetching"><title>Lettura dei messaggi e semplici metodi</title>
         
 
         <para>
@@ -215,7 +215,7 @@ unset($mail[$messageNum]);
 
     </section>
 
-    <section xml:id="zend.mail.read-message"><info><title>Interazione con i messaggi</title></info>
+    <section xml:id="zend.mail.read-message"><title>Interazione con i messaggi</title>
         
 
         <para>
@@ -333,7 +333,7 @@ if (!$foundPart) {
         ]]></programlisting>
 
     </section>
-    <section xml:id="zend.mail.read-flags"><info><title>Controllo dei contrassegni</title></info>
+    <section xml:id="zend.mail.read-flags"><title>Controllo dei contrassegni</title>
         
 
         <para>
@@ -399,7 +399,7 @@ if (!$message->hasFlag('$SpamTested')) {
         ]]></programlisting>
 
     </section>
-    <section xml:id="zend.mail.read-folders"><info><title>Utilizzo delle cartelle</title></info>
+    <section xml:id="zend.mail.read-folders"><title>Utilizzo delle cartelle</title>
         
 
         <para>
@@ -445,7 +445,7 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com'
             Il nome globale è il nome assoluto a partire dalla cartella principale (inclusi i delimitatori), il nome locale è invece il nome specifico assunto nella cartella di livello superiore.
         </para>
 
-        <table xml:id="zend.mail.read-folders.table-1"><info><title>Nomi delle cartelle e-mail</title></info>
+        <table xml:id="zend.mail.read-folders.table-1"><title>Nomi delle cartelle e-mail</title>
             
             <tgroup cols="2">
                 <thead>
@@ -512,10 +512,10 @@ $mail->selectFolder($folder);
         ]]></programlisting>
 
     </section>
-    <section xml:id="zend.mail.read-advanced"><info><title>Utilizzo avanzato</title></info>
+    <section xml:id="zend.mail.read-advanced"><title>Utilizzo avanzato</title>
         
 
-        <section xml:id="zend.mail.read-advanced.noop"><info><title>Utilizzo di NOOP</title></info>
+        <section xml:id="zend.mail.read-advanced.noop"><title>Utilizzo di NOOP</title>
             
 
             <para>
@@ -536,7 +536,7 @@ foreach ($mail as $message) {
             ]]></programlisting>
 
         </section>
-        <section xml:id="zend.mail.read-advanced.caching"><info><title>Salvataggio in cache delle istanze</title></info>
+        <section xml:id="zend.mail.read-advanced.caching"><title>Salvataggio in cache delle istanze</title>
             
 
             <para>
@@ -565,7 +565,7 @@ $cache->set($cache_id, $mail);
             ]]></programlisting>
 
         </section>
-        <section xml:id="zend.mail.read-advanced.extending"><info><title>Estensione delle classi dei protocolli</title></info>
+        <section xml:id="zend.mail.read-advanced.extending"><title>Estensione delle classi dei protocolli</title>
             
 
             <para>

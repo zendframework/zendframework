@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.adapters"><info><title>アダプタ</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.adapters"><title>アダプタ</title>
     
 
     <para>
@@ -43,7 +43,7 @@
         </listitem>
     </itemizedlist>
 
-    <note xml:id="zend.queue.adapters.limitations"><info><title>限定事項</title></info>
+    <note xml:id="zend.queue.adapters.limitations"><title>限定事項</title>
         
 
         <para>
@@ -51,7 +51,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.queue.adapters.configuration"><info><title>固有のアダプタ - 設定の構成</title></info>
+    <section xml:id="zend.queue.adapters.configuration"><title>固有のアダプタ - 設定の構成</title>
         
 
         <para>
@@ -59,7 +59,7 @@
             デフォルトの設定が指定されない場合は、パラメータが必要です。
         </para>
 
-        <section xml:id="zend.queue.adapters.configuration.activemq"><info><title>Apache ActiveMQ - Zend_Queue_Adapter_Activemq</title></info>
+        <section xml:id="zend.queue.adapters.configuration.activemq"><title>Apache ActiveMQ - Zend_Queue_Adapter_Activemq</title>
             
 
             <para>
@@ -144,7 +144,7 @@
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.configuration.Db"><info><title>Db - Zend_Queue_Adapter_Db</title></info>
+        <section xml:id="zend.queue.adapters.configuration.Db"><title>Db - Zend_Queue_Adapter_Db</title>
             
 
             <para>
@@ -242,7 +242,7 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.configuration.memcacheq"><info><title>MemcacheQ - Zend_Queue_Adapter_Memcacheq</title></info>
+        <section xml:id="zend.queue.adapters.configuration.memcacheq"><title>MemcacheQ - Zend_Queue_Adapter_Memcacheq</title>
             
 
             <itemizedlist>
@@ -280,7 +280,7 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.configuration.platformjq"><info><title>Zend Platform ジョブキュー - Zend_Queue_Adapter_PlatformJobQueue</title></info>
+        <section xml:id="zend.queue.adapters.configuration.platformjq"><title>Zend Platform ジョブキュー - Zend_Queue_Adapter_PlatformJobQueue</title>
             
 
             <itemizedlist>
@@ -306,7 +306,7 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.configuration.array"><info><title>配列 - Zend_Queue_Adapter_Array</title></info>
+        <section xml:id="zend.queue.adapters.configuration.array"><title>配列 - Zend_Queue_Adapter_Array</title>
             
 
             <itemizedlist>
@@ -323,12 +323,12 @@ $queue = new Zend_Queue('Db', $options);
         </section>
     </section>
 
-    <section xml:id="zend.queue.adapters.notes"><info><title>アダプタ固有の注意</title></info>
+    <section xml:id="zend.queue.adapters.notes"><title>アダプタ固有の注意</title>
         
 
         <para>下記のアダプタには注意があります:</para>
 
-        <section xml:id="zend.queue.adapters.notes.activemq"><info><title>Apache ActiveMQ</title></info>
+        <section xml:id="zend.queue.adapters.notes.activemq"><title>Apache ActiveMQ</title>
             
 
             <para>
@@ -404,7 +404,7 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.notes.zend_db"><info><title>Zend_Db</title></info>
+        <section xml:id="zend.queue.adapters.notes.zend_db"><title>Zend_Db</title>
             
 
             <para>
@@ -413,7 +413,7 @@ $queue = new Zend_Queue('Db', $options);
             </para>
         </section>
 
-        <section xml:id="zend.queue.adapters.notes.memcacheQ"><info><title>MemcacheQ</title></info>
+        <section xml:id="zend.queue.adapters.notes.memcacheQ"><title>MemcacheQ</title>
             
 
             <para>
@@ -446,7 +446,7 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.notes.platformjq"><info><title>Zend Platform ジョブキュー</title></info>
+        <section xml:id="zend.queue.adapters.notes.platformjq"><title>Zend Platform ジョブキュー</title>
             
 
             <para>
@@ -649,7 +649,7 @@ $queue = new Zend_Queue('Db', $options);
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.queue.adapters.notes.array"><info><title>配列 (内部)</title></info>
+        <section xml:id="zend.queue.adapters.notes.array"><title>配列 (内部)</title>
             
 
             <para>

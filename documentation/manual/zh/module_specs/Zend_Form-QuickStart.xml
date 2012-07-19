@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><info><title>Zend_Form 快速起步 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><title>Zend_Form 快速起步 </title>
     
 
     <para>
         本快速起步指南覆盖使用 <code>Zend_Form</code> 创建、校验和解析表单的基础。
     </para>
 
-    <section xml:id="zend.form.quickstart.create"><info><title> 创建表单对象 </title></info>
+    <section xml:id="zend.form.quickstart.create"><title> 创建表单对象 </title>
         
 
         <para>
@@ -43,7 +43,7 @@ $form->setAttrib('id', 'login');
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.quickstart.elements"><info><title> 添加表单元素 </title></info>
+    <section xml:id="zend.form.quickstart.elements"><title> 添加表单元素 </title>
         
 
         <para>
@@ -203,7 +203,7 @@ $form->addElement('text', 'username', array(
         </para></note>
     </section>
 
-    <section xml:id="zend.form.quickstart.render"><info><title> 解析（Render）表单 </title></info>
+    <section xml:id="zend.form.quickstart.render"><title> 解析（Render）表单 </title>
         
 
         <para>
@@ -287,7 +287,7 @@ $form->addElement('text', 'username', array('order' => 10));
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.quickstart.validate"><info><title> 检查表单是否有效 </title></info>
+    <section xml:id="zend.form.quickstart.validate"><title> 检查表单是否有效 </title>
         
 
         <para>
@@ -339,7 +339,7 @@ $unfiltered = $form->getUnfilteredValues();
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.quickstart.errorstatus"><info><title> 获得错误状态 </title></info>
+    <section xml:id="zend.form.quickstart.errorstatus"><title> 获得错误状态 </title>
         
 
         <para>
@@ -361,7 +361,7 @@ if (!$form->isValid($_POST)) {
         </para>
     </section>
 
-    <section xml:id="zend.form.quickstart.puttingtogether"><info><title> 放到一起 </title></info>
+    <section xml:id="zend.form.quickstart.puttingtogether"><title> 放到一起 </title>
         
 
         <para>
@@ -461,7 +461,7 @@ class UserController extends Zend_Controller_Action
         </para>
     </section>
 
-    <section xml:id="zend.form.quickstart.config"><info><title> 使用 Zend_Config 对象 </title></info>
+    <section xml:id="zend.form.quickstart.config"><title> 使用 Zend_Config 对象 </title>
         
 
         <para>
@@ -509,7 +509,7 @@ $form   = new Zend_Form($config->user->login);
         </para>
     </section>
 
-    <section xml:id="zend.form.quickstart.conclusion"><info><title> 结论 </title></info>
+    <section xml:id="zend.form.quickstart.conclusion"><title> 结论 </title>
         
 
         <para>

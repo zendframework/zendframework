@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><info><title>ダイジェスト認証</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><title>ダイジェスト認証</title>
 
     
 
-    <section xml:id="zend.auth.adapter.digest.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.auth.adapter.digest.introduction"><title>導入</title>
 
         
 
@@ -51,7 +51,7 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 
     </section>
 
-    <section xml:id="zend.auth.adapter.digest.specifics"><info><title>使用</title></info>
+    <section xml:id="zend.auth.adapter.digest.specifics"><title>使用</title>
 
         
 
@@ -93,7 +93,7 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 
     </section>
 
-    <section xml:id="zend.auth.adapter.digest.identity"><info><title>ID</title></info>
+    <section xml:id="zend.auth.adapter.digest.identity"><title>ID</title>
 
         
 

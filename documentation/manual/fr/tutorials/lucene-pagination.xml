@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.pagination"><info><title>Pagination de résultat de recherche</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.pagination"><title>Pagination de résultat de recherche</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         du script.
     </para>
 
-    <example xml:id="learning.lucene.pagination.example"><info><title>Exemple de pagination de résultat de recherche</title></info>
+    <example xml:id="learning.lucene.pagination.example"><title>Exemple de pagination de résultat de recherche</title>
         
 
         <programlisting language="php"><![CDATA[

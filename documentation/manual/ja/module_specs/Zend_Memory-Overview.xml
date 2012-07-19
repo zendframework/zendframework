@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.overview"><info><title>概要</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.overview"><title>概要</title>
     
 
-    <section xml:id="zend.memory.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.memory.introduction"><title>導入</title>
         
 
         <para>
@@ -31,7 +31,7 @@
             を使用しています。
         </para>
 
-        <example xml:id="zend.memory.introduction.example-1"><info><title>Zend_Memory コンポーネントの使用法</title></info>
+        <example xml:id="zend.memory.introduction.example-1"><title>Zend_Memory コンポーネントの使用法</title>
             
 
             <para>
@@ -65,7 +65,7 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
         </example>
     </section>
 
-    <section xml:id="zend.memory.theory-of-operation"><info><title>動作原理</title></info>
+    <section xml:id="zend.memory.theory-of-operation"><title>動作原理</title>
 
         
 
@@ -91,7 +91,7 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
             </itemizedlist>
         </para>
 
-        <section xml:id="zend.memory.theory-of-operation.manager"><info><title>メモリマネージャ</title></info>
+        <section xml:id="zend.memory.theory-of-operation.manager"><title>メモリマネージャ</title>
 
             
 
@@ -103,7 +103,7 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
 
         </section>
 
-        <section xml:id="zend.memory.theory-of-operation.container"><info><title>メモリコンテナ</title></info>
+        <section xml:id="zend.memory.theory-of-operation.container"><title>メモリコンテナ</title>
 
             
 
@@ -142,7 +142,7 @@ $memObject->value = substr($memObject->value, $start, $length);
 
         </section>
 
-        <section xml:id="zend.memory.theory-of-operation.locked"><info><title>ロックされたメモリ</title></info>
+        <section xml:id="zend.memory.theory-of-operation.locked"><title>ロックされたメモリ</title>
 
             
 
@@ -154,7 +154,7 @@ $memObject->value = substr($memObject->value, $start, $length);
 
         </section>
 
-        <section xml:id="zend.memory.theory-of-operation.movable"><info><title>移動可能なメモリ</title></info>
+        <section xml:id="zend.memory.theory-of-operation.movable"><title>移動可能なメモリ</title>
 
             
 

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.tools"><info><title>ツール</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.tools"><title>ツール</title>
     
 
-    <section xml:id="zend.ldap.tools.dn"><info><title>DN 文字列の作成及び変更</title></info>
+    <section xml:id="zend.ldap.tools.dn"><title>DN 文字列の作成及び変更</title>
         
         <para/>
     </section>
 
-    <section xml:id="zend.ldap.tools.filter"><info><title>検索フィルタを作成するためにフィルタAPIを使う</title></info>
+    <section xml:id="zend.ldap.tools.filter"><title>検索フィルタを作成するためにフィルタAPIを使う</title>
         
 
-        <example><info><title>単純なLDAPフィルタの作成</title></info>
+        <example><title>単純なLDAPフィルタの作成</title>
             
             <programlisting language="php"><![CDATA[
 $f1  = Zend_Ldap_Filter::equals('name', 'value');         // (name=value)
@@ -26,7 +26,7 @@ $f10 = Zend_Ldap_Filter::any('name');                     // (name=*)
 ]]></programlisting>
         </example>
 
-        <example><info><title>より複雑なLDAPフィルタの作成</title></info>
+        <example><title>より複雑なLDAPフィルタの作成</title>
             
             <programlisting language="php"><![CDATA[
 $f1 = Zend_Ldap_Filter::ends('name', 'value')->negate(); // (!(name=*value))
@@ -45,7 +45,7 @@ $f6 = Zend_Ldap_Filter::orFilter($f2, $f3, $f4);
         </example>
     </section>
 
-    <section xml:id="zend.ldap.tools.attribute"><info><title>属性APIを使用するLDAP項目の変更</title></info>
+    <section xml:id="zend.ldap.tools.attribute"><title>属性APIを使用するLDAP項目の変更</title>
         
         <para/>
     </section>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers"><info><title>ライター</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers"><title>ライター</title>
   
   <para>
     ライターは、<classname>Zend_Log_Writer_Abstract</classname>
@@ -7,7 +7,7 @@
     ログのデータをバックエンドのストレージに記録することです。
   </para>
 
-  <section xml:id="zend.log.writers.stream"><info><title>ストリームへの書き出し</title></info>
+  <section xml:id="zend.log.writers.stream"><title>ストリームへの書き出し</title>
     
     <para>
       <classname>Zend_Log_Writer_Stream</classname> は、ログデータを
@@ -70,7 +70,7 @@ $logger->info('通知メッセージ');
     </para>
   </section>
 
-  <section xml:id="zend.log.writers.database"><info><title>データベースへの書き出し</title></info>
+  <section xml:id="zend.log.writers.database"><title>データベースへの書き出し</title>
     
 
     <para>
@@ -112,7 +112,7 @@ $logger->info('通知メッセージ');
       <xi:fallback><xi:include href="../../en/module_specs/Zend_Log-Writers-ZendMonitor.xml"/></xi:fallback>
   </xi:include>
 
-  <section xml:id="zend.log.writers.null"><info><title>ライターのスタブ</title></info>
+  <section xml:id="zend.log.writers.null"><title>ライターのスタブ</title>
     
 
     <para>
@@ -129,7 +129,7 @@ $logger->info('通知メッセージ');
 ]]></programlisting>
   </section>
 
-  <section xml:id="zend.log.writers.mock"><info><title>モックによるテスト</title></info>
+  <section xml:id="zend.log.writers.mock"><title>モックによるテスト</title>
     
 
     <para>
@@ -160,7 +160,7 @@ var_dump($mock->events[0]);
     </para>
   </section>
 
-  <section xml:id="zend.log.writers.compositing"><info><title>ライターを組み合わせる</title></info>
+  <section xml:id="zend.log.writers.compositing"><title>ライターを組み合わせる</title>
     
 
     <para>

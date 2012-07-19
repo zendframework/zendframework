@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>HTML E-Mail</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><title>HTML E-Mail</title>
     
     <para>
         Om e-mail in HTML formaat te sturen moet je de inhoud geven via de methode <code>setBodyHTML()</code> in
@@ -7,7 +7,7 @@
         worden gezet. Indien je zowel HTML als tekst inhoud gebruikt zal er automatisch een
         multipart/alternative MIME message worden gegenereerd:
     </para>
-    <example><info><title>HTML E-Mail zenden</title></info>
+    <example><title>HTML E-Mail zenden</title>
         
         <programlisting role="php"><![CDATA[
 <?php

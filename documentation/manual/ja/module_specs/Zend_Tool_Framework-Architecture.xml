@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.architecture"><info><title>アーキテクチャ</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.architecture"><title>アーキテクチャ</title>
     
 
-    <section xml:id="zend.tool.framework.architecture.registry"><info><title>レジストリ</title></info>
+    <section xml:id="zend.tool.framework.architecture.registry"><title>レジストリ</title>
         
 
         <para>
@@ -63,7 +63,7 @@ interface Zend_Tool_Framework_Registry_EnabledInterface
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.tool.framework.architecture.providers"><info><title>プロバイダ</title></info>
+    <section xml:id="zend.tool.framework.architecture.providers"><title>プロバイダ</title>
         
 
         <para>
@@ -107,7 +107,7 @@ abstract class Zend_Tool_Framework_Provider_Abstract
 
     </section>
 
-    <section xml:id="zend.tool.framework.architecture.loaders"><info><title>ローダ</title></info>
+    <section xml:id="zend.tool.framework.architecture.loaders"><title>ローダ</title>
         
 
         <para>
@@ -174,7 +174,7 @@ class Zend_Tool_Framework_Loader_IncludePathLoader
         </para>
     </section>
 
-    <section xml:id="zend.tool.framework.architecture.manifests"><info><title>マニフェスト</title></info>
+    <section xml:id="zend.tool.framework.architecture.manifests"><title>マニフェスト</title>
         
 
         <para>
@@ -337,7 +337,7 @@ class Zend_Tool_Framework_Manifest_Repository
         </para>
     </section>
 
-    <section xml:id="zend.tool.framework.architecture.clients"><info><title>クライアント</title></info>
+    <section xml:id="zend.tool.framework.architecture.clients"><title>クライアント</title>
         
 
         <para>

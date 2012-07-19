@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><info><title>Les backends Zend_Cache</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><title>Les backends Zend_Cache</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         backends étendus offrent des fonctionnalités supplémentaires.
     </para>
 
-    <section xml:id="zend.cache.backends.file"><info><title>Zend_Cache_Backend_File</title></info>
+    <section xml:id="zend.cache.backends.file"><title>Zend_Cache_Backend_File</title>
         
 
         <para>
@@ -17,7 +17,7 @@
 
         <para>Les options disponibles sont :</para>
 
-        <table xml:id="zend.cache.backends.file.table"><info><title>Options du backend File</title></info>
+        <table xml:id="zend.cache.backends.file.table"><title>Options du backend File</title>
             
 
             <tgroup cols="4">
@@ -122,7 +122,7 @@
         </table>
     </section>
 
-    <section xml:id="zend.cache.backends.sqlite"><info><title>Zend_Cache_Backend_Sqlite</title></info>
+    <section xml:id="zend.cache.backends.sqlite"><title>Zend_Cache_Backend_Sqlite</title>
         
 
         <para>
@@ -132,7 +132,7 @@
 
         <para>Les options disponibles sont :</para>
 
-        <table xml:id="zend.cache.backends.sqlite.table"><info><title>Options du backend Sqlite</title></info>
+        <table xml:id="zend.cache.backends.sqlite.table"><title>Options du backend Sqlite</title>
             
 
             <tgroup cols="4">
@@ -175,7 +175,7 @@
         </table>
     </section>
 
-    <section xml:id="zend.cache.backends.memcached"><info><title>Zend_Cache_Backend_Memcached</title></info>
+    <section xml:id="zend.cache.backends.memcached"><title>Zend_Cache_Backend_Memcached</title>
         
 
         <para>
@@ -194,7 +194,7 @@
 
         <para>Les options disponibles sont :</para>
 
-        <table xml:id="zend.cache.backends.memcached.table"><info><title>Options du backend Memcached</title></info>
+        <table xml:id="zend.cache.backends.memcached.table"><title>Options du backend Memcached</title>
             
 
             <tgroup cols="4">
@@ -253,7 +253,7 @@
         </table>
     </section>
 
-    <section xml:id="zend.cache.backends.apc"><info><title>Zend_Cache_Backend_Apc</title></info>
+    <section xml:id="zend.cache.backends.apc"><title>Zend_Cache_Backend_Apc</title>
         
 
         <para>
@@ -270,7 +270,7 @@
         <para>Il n'y a pas d'options pour ce backend.</para>
     </section>
 
-    <section xml:id="zend.cache.backends.xcache"><info><title>Zend_Cache_Backend_Xcache</title></info>
+    <section xml:id="zend.cache.backends.xcache"><title>Zend_Cache_Backend_Xcache</title>
         
 
         <para>
@@ -286,7 +286,7 @@
 
         <para>Les options disponibles sont :</para>
 
-        <table xml:id="zend.cache.backends.xcache.table"><info><title>Options du backend Xcache</title></info>
+        <table xml:id="zend.cache.backends.xcache.table"><title>Options du backend Xcache</title>
             
 
             <tgroup cols="4">
@@ -323,7 +323,7 @@
         </table>
     </section>
 
-    <section xml:id="zend.cache.backends.platform"><info><title>Zend_Cache_Backend_ZendPlatform</title></info>
+    <section xml:id="zend.cache.backends.platform"><title>Zend_Cache_Backend_ZendPlatform</title>
         
 
         <para>
@@ -350,7 +350,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         <para>Il n'y a pas d'options pour ce backend.</para>
     </section>
 
-    <section xml:id="zend.cache.backends.twolevels"><info><title>Zend_Cache_Backend_TwoLevels</title></info>
+    <section xml:id="zend.cache.backends.twolevels"><title>Zend_Cache_Backend_TwoLevels</title>
         
 
         <para>
@@ -377,7 +377,7 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
 
         <para>Les options disponibles sont :</para>
 
-        <table xml:id="zend.cache.backends.twolevels.table"><info><title>Options du backend TwoLevels</title></info>
+        <table xml:id="zend.cache.backends.twolevels.table"><title>Options du backend TwoLevels</title>
             
 
             <tgroup cols="4">
@@ -481,7 +481,7 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
         </table>
     </section>
 
-    <section xml:id="zend.cache.backends.zendserver"><info><title> Zend_Cache_Backend_ZendServer_Disk et Zend_Cache_Backend_ZendServer_ShMem </title></info>
+    <section xml:id="zend.cache.backends.zendserver"><title> Zend_Cache_Backend_ZendServer_Disk et Zend_Cache_Backend_ZendServer_ShMem </title>
         
 
         <para>
@@ -515,7 +515,7 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
         <para>Il n'y a pas d'options pour ce backend.</para>
     </section>
 
-    <section xml:id="zend.cache.backends.static"><info><title>Zend_Cache_Backend_Static</title></info>
+    <section xml:id="zend.cache.backends.static"><title>Zend_Cache_Backend_Static</title>
         
 
         <para>
@@ -632,7 +632,7 @@ RewriteRule ^.*$ index.php [NC,L]
             </para>
         </note>
 
-        <table xml:id="zend.cache.backends.static.table"><info><title>Static Backend Options</title></info>
+        <table xml:id="zend.cache.backends.static.table"><title>Static Backend Options</title>
             
 
             <tgroup cols="4">

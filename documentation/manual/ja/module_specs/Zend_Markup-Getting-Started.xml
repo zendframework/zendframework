@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.getting-started"><info><title>さあ始めましょう</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.getting-started"><title>さあ始めましょう</title>
     
  
     <para>
@@ -8,7 +8,7 @@
         他のパーサーやレンダラーに適用できる原則です。
     </para>
  
-    <example xml:id="zend.markup.getting-started.basic-usage"><info><title>基本的な Zend_Markup 使用法</title></info>
+    <example xml:id="zend.markup.getting-started.basic-usage"><title>基本的な Zend_Markup 使用法</title>
         
  
         <para>
@@ -33,7 +33,7 @@ echo $bbcode->render('[b]bold text[/b] and [i]cursive text[/i]');
 ]]></programlisting>
     </example>
  
-    <example xml:id="zend.markup.getting-started.complicated-example"><info><title>Zend_Markup のより複雑な例</title></info>
+    <example xml:id="zend.markup.getting-started.complicated-example"><title>Zend_Markup のより複雑な例</title>
         
  
         <para>
@@ -61,7 +61,7 @@ echo $bbcode->render($input);
 ]]></programlisting>
     </example>
  
-    <example xml:id="zend.markup.getting-started.incorrect-input"><info><title>不正確な入力でのプロセス</title></info>
+    <example xml:id="zend.markup.getting-started.incorrect-input"><title>不正確な入力でのプロセス</title>
         
  
         <para>

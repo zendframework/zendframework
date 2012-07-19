@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.best-practice"><info><title>ベストプラクティス</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.best-practice"><title>ベストプラクティス</title>
     
 
-    <section xml:id="zend.search.lucene.best-practice.field-names"><info><title>フィールド名</title></info>
+    <section xml:id="zend.search.lucene.best-practice.field-names"><title>フィールド名</title>
         
 
         <para>
@@ -54,7 +54,7 @@ foreach ($hits as $hit) {
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.best-practice.indexing-performance"><info><title>インデックス作成のパフォーマンス</title></info>
+    <section xml:id="zend.search.lucene.best-practice.indexing-performance"><title>インデックス作成のパフォーマンス</title>
         
 
         <para>
@@ -265,7 +265,7 @@ $index->optimize();
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.best-practice.shutting-down"><info><title>インデックスの終了時処理</title></info>
+    <section xml:id="zend.search.lucene.best-practice.shutting-down"><title>インデックスの終了時処理</title>
         
 
         <para>
@@ -331,7 +331,7 @@ $index->commit();
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.best-practice.unique-id"><info><title>一意な ID によるドキュメントの取得</title></info>
+    <section xml:id="zend.search.lucene.best-practice.unique-id"><title>一意な ID によるドキュメントの取得</title>
         
 
         <para>
@@ -382,7 +382,7 @@ foreach ($docIds as $id) {
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.best-practice.memory-usage"><info><title>メモリの使用法</title></info>
+    <section xml:id="zend.search.lucene.best-practice.memory-usage"><title>メモリの使用法</title>
         
 
         <para>
@@ -437,7 +437,7 @@ foreach ($docIds as $id) {
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.best-practice.encoding"><info><title>エンコーディング</title></info>
+    <section xml:id="zend.search.lucene.best-practice.encoding"><title>エンコーディング</title>
         
 
         <para>
@@ -528,7 +528,7 @@ $hits = $index->find($queryStr);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.best-practice.maintenance"><info><title>インデックスの保守</title></info>
+    <section xml:id="zend.search.lucene.best-practice.maintenance"><title>インデックスの保守</title>
         
 
         <para>

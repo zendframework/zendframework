@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.partial"><info><title>Partielle Helfer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.partial"><title>Partielle Helfer</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         durchlaufen werden können, und einen Abschnitt für jedes Teil auszugeben.
     </para>
 
-    <note><info><title>PartialLoop Zähler</title></info>
+    <note><title>PartialLoop Zähler</title>
         
 
         <para>
@@ -27,7 +27,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.partial.usage"><info><title>Grundsätzliche Verwendung von Partials</title></info>
+    <example xml:id="zend.view.helpers.initial.partial.usage"><title>Grundsätzliche Verwendung von Partials</title>
         
 
         <para>
@@ -65,7 +65,7 @@
 ]]></programlisting>
     </example>
 
-    <note><info><title>Was ist ein Modell?</title></info>
+    <note><title>Was ist ein Modell?</title>
         
 
         <para>
@@ -125,7 +125,7 @@ $view->partialLoop()->setObjectKey('model');
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.partial.partialloop"><info><title>Verwendung von PartialLoop um iterierbare Modelle darzustellen</title></info>
+    <example xml:id="zend.view.helpers.initial.partial.partialloop"><title>Verwendung von PartialLoop um iterierbare Modelle darzustellen</title>
         
 
         <para>
@@ -196,7 +196,7 @@ $model = array(
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.partial.modules"><info><title>Partials in anderen Modulen darstellen</title></info>
+    <example xml:id="zend.view.helpers.initial.partial.modules"><title>Partials in anderen Modulen darstellen</title>
         
 
         <para>

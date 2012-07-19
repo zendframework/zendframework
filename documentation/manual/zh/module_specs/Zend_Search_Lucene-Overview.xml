@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.overview"><info><title>概述</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.overview"><title>概述</title>
     
 
-    <section xml:id="zend.search.lucene.introduction"><info><title>简介</title></info>
+    <section xml:id="zend.search.lucene.introduction"><title>简介</title>
         
         <para>
             Zend_Search_Lucene 是一个完全由 PHP 5 编写的通用文本搜索引擎。由于其将索引保存在文件系统中而不需要数据库支持，因此它几乎可以为任何由 PHP 驱动的网站增加搜索能力。Zend_Search_Lucene 支持下列特性：
@@ -31,7 +31,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.documents-and-fields"><info><title>文档和字段对象</title></info>
+    <section xml:id="zend.search.lucene.index-creation.documents-and-fields"><title>文档和字段对象</title>
         
             <para>
                 Zend_Search_Lucene 把文档最为基本的索引主题。而文档(document)又分为若干被命名的字段(field)，字段中包含可供搜索的内容。
@@ -85,7 +85,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
             </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.understanding-field-types"><info><title>理解字段类型</title></info>
+    <section xml:id="zend.search.lucene.index-creation.understanding-field-types"><title>理解字段类型</title>
         
         <itemizedlist>
             <listitem>
@@ -113,7 +113,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                     <code>UnStored</code> 不保存字段是记号化和被索引的，但并不保存在索引中。大量的文本信息最好使用这种字段类型。保存的数据在硬盘上创建了大量的索引，如果你需要搜索而不需要在搜索结果中显示这些数据，就使用不保存字段。当结合使用 Zend_Search_Lucene 索引和关系数据库时最适合使用不保存字段。你通过不保存字段索引大量数据用于搜索，并通过作为标识的特定字段从你的关系数据库中获取它们。
                </para>
 
-                <table><info><title>Zend_Search_Lucene_Field 类型</title></info>
+                <table><title>Zend_Search_Lucene_Field 类型</title>
                     
                     <tgroup cols="5">
                         <thead>

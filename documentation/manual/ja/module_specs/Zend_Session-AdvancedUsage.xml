@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advanced_usage"><info><title>高度な使用法</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advanced_usage"><title>高度な使用法</title>
 
     
 
@@ -9,7 +9,7 @@
         <classname>Zend_Session</classname> コンポーネントのより行動な使用法を説明します。
     </para>
 
-    <section xml:id="zend.session.advanced_usage.starting_a_session"><info><title>セッションの開始</title></info>
+    <section xml:id="zend.session.advanced_usage.starting_a_session"><title>セッションの開始</title>
 
         
 
@@ -18,7 +18,7 @@
             起動ファイルでセッションを開始します。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.starting_a_session.example"><info><title>グローバルセッションの開始</title></info>
+        <example xml:id="zend.session.advanced_usage.starting_a_session.example"><title>グローバルセッションの開始</title>
 
             
 
@@ -135,7 +135,7 @@ php_value session.auto_start 0
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.locking"><info><title>セッション名前空間のロック</title></info>
+    <section xml:id="zend.session.advanced_usage.locking"><title>セッション名前空間のロック</title>
 
         
 
@@ -158,7 +158,7 @@ php_value session.auto_start 0
             のリファレンスについての説明</link>も参照ください)。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.locking.example.basic"><info><title>セッション名前空間のロック</title></info>
+        <example xml:id="zend.session.advanced_usage.locking.example.basic"><title>セッション名前空間のロック</title>
 
             
 
@@ -178,7 +178,7 @@ if ($userProfileNamespace->isLocked()) {
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.expiration"><info><title>名前空間の有効期限</title></info>
+    <section xml:id="zend.session.advanced_usage.expiration"><title>名前空間の有効期限</title>
 
         
 
@@ -191,7 +191,7 @@ if ($userProfileNamespace->isLocked()) {
             一連のリクエストの回数を表します。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.expiration.example"><info><title>有効期限切れの例</title></info>
+        <example xml:id="zend.session.advanced_usage.expiration.example"><title>有効期限切れの例</title>
 
             
 
@@ -225,7 +225,7 @@ $s->setExpirationSeconds(60);
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.controllers"><info><title>コントローラでのセッションのカプセル化</title></info>
+    <section xml:id="zend.session.advanced_usage.controllers"><title>コントローラでのセッションのカプセル化</title>
 
         
 
@@ -236,7 +236,7 @@ $s->setExpirationSeconds(60);
             そのセッション状態データを他のコントローラとは別に管理することになるでしょう。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.controllers.example"><info><title>コントローラでの名前空間つきセッションによる有効期限の管理</title></info>
+        <example xml:id="zend.session.advanced_usage.controllers.example"><title>コントローラでの名前空間つきセッションによる有効期限の管理</title>
 
             
 
@@ -277,7 +277,7 @@ else {
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.single_instance"><info><title>名前空間内あたりのインスタンス数をひとつに絞り込む</title></info>
+    <section xml:id="zend.session.advanced_usage.single_instance"><title>名前空間内あたりのインスタンス数をひとつに絞り込む</title>
 
         
 
@@ -294,7 +294,7 @@ else {
             を渡します。それ以降は、同一名前空間でインスタンスを作成しようとすると例外がスローされます。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.single_instance.example"><info><title>セッション名前空間へのアクセスを単一のインスタンスに制限する</title></info>
+        <example xml:id="zend.session.advanced_usage.single_instance.example"><title>セッション名前空間へのアクセスを単一のインスタンスに制限する</title>
 
             
 
@@ -340,7 +340,7 @@ try {
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.arrays"><info><title>配列の使用</title></info>
+    <section xml:id="zend.session.advanced_usage.arrays"><title>配列の使用</title>
 
         
 
@@ -350,7 +350,7 @@ try {
             もし <acronym>PHP</acronym> 5.2.1 以降を使っている場合は、<link linkend="zend.session.advanced_usage.objects">このセクションは読み飛ばしてください</link>。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.modifying"><info><title>セッション名前空間内での配列データの修正</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.modifying"><title>セッション名前空間内での配列データの修正</title>
 
             
 
@@ -369,7 +369,7 @@ echo $sessionNamespace->array['testKey'];
 
         </example>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.building_prior"><info><title>セッションに保存する前に配列を作成する</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.building_prior"><title>セッションに保存する前に配列を作成する</title>
 
             
 
@@ -390,7 +390,7 @@ $sessionNamespace->array = array('a', 'b', 'c');
             以下の回避策のうちのいずれかを使用します。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reassign"><info><title>回避策: 修正した配列を再度代入する</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reassign"><title>回避策: 修正した配列を再度代入する</title>
 
             
 
@@ -419,7 +419,7 @@ echo $sessionNamespace->array['fruit']; // prints "peach"
 
         </example>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reference"><info><title>回避策: 参照を含む配列を格納する</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reference"><title>回避策: 参照を含む配列を格納する</title>
 
             
 
@@ -440,7 +440,7 @@ echo $myNamespace->someArray['foo']; // "bar" と表示されます
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.objects"><info><title>セッションでのオブジェクトの使用</title></info>
+    <section xml:id="zend.session.advanced_usage.objects"><title>セッションでのオブジェクトの使用</title>
 
         
 
@@ -457,7 +457,7 @@ echo $myNamespace->someArray['foo']; // "bar" と表示されます
 
     </section>
 
-    <section xml:id="zend.session.advanced_usage.testing"><info><title>ユニットテストでのセッションの使用</title></info>
+    <section xml:id="zend.session.advanced_usage.testing"><title>ユニットテストでのセッションの使用</title>
 
         
 
@@ -490,7 +490,7 @@ echo $myNamespace->someArray['foo']; // "bar" と表示されます
             <methodname>exec()</methodname> を使用する前にセッションを閉じています。
         </para>
 
-        <example xml:id="zend.session.advanced_usage.testing.example"><info><title>PHPUnit で Zend_Session を使用したコードをテストする例</title></info>
+        <example xml:id="zend.session.advanced_usage.testing.example"><title>PHPUnit で Zend_Session を使用したコードをテストする例</title>
 
             
 

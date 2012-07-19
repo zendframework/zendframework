@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>Sistem Gereksinimleri</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><title>Sistem Gereksinimleri</title>
 
     
 
@@ -9,7 +9,7 @@
         Bu kısım Zend Framework'ün gereksinimlerini belgeliyor.
     </para>
 
-    <section xml:id="requirements.version"><info><title>Gerekli PHP versiyonu</title></info>
+    <section xml:id="requirements.version"><title>Gerekli PHP versiyonu</title>
 
         
 
@@ -31,7 +31,7 @@
 
     </section>
 
-    <section xml:id="requirements.extensions"><info><title>PHP Eklentileri</title></info>
+    <section xml:id="requirements.extensions"><title>PHP Eklentileri</title>
 
         
 
@@ -44,7 +44,7 @@
         ihtiyaç duyulmayacaktır.
         </para>
 
-        <table frame="all" xml:id="requirements.extensions.table-1"><info><title>Zend Framework'de kullanılan PHP eklentileri</title></info>
+        <table frame="all" xml:id="requirements.extensions.table-1"><title>Zend Framework'de kullanılan PHP eklentileri</title>
             
             <tgroup cols="3">
                 <colspec colwidth="1in"/>

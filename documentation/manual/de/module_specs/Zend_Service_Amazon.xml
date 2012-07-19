@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon"><info><title>Zend_Service_Amazon</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon"><title>Zend_Service_Amazon</title>
     
 
-    <section xml:id="zend.service.amazon.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.service.amazon.introduction"><title>Einführung</title>
         
 
         <para>
@@ -40,7 +40,7 @@
             verwenden wenn man einen zusätzlichen geheimen Schlüssel spezifiziert.
         </para>
 
-        <note><info><title>Achtung</title></info>
+        <note><title>Achtung</title>
             
 
             <para>
@@ -50,7 +50,7 @@
             </para>
         </note>
 
-        <example xml:id="zend.service.amazon.introduction.example.itemsearch"><info><title>Suchen in Amazon mit der traditionellen API</title></info>
+        <example xml:id="zend.service.amazon.introduction.example.itemsearch"><title>Suchen in Amazon mit der traditionellen API</title>
             
 
             <para>
@@ -68,7 +68,7 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.introduction.example.query_api"><info><title>Suchen in Amazon mit der Abfrage API</title></info>
+        <example xml:id="zend.service.amazon.introduction.example.query_api"><title>Suchen in Amazon mit der Abfrage API</title>
             
 
             <para>
@@ -90,7 +90,7 @@ foreach ($results as $result) {
         </example>
     </section>
 
-    <section xml:id="zend.service.amazon.countrycodes"><info><title>Ländercodes</title></info>
+    <section xml:id="zend.service.amazon.countrycodes"><title>Ländercodes</title>
         
 
         <para>
@@ -100,7 +100,7 @@ foreach ($results as $result) {
             den Konstruktor übergeben werden:
         </para>
 
-        <example xml:id="zend.service.amazon.countrycodes.example.country_code"><info><title>Auswahl eines Amazon Web Service Landes</title></info>
+        <example xml:id="zend.service.amazon.countrycodes.example.country_code"><title>Auswahl eines Amazon Web Service Landes</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -109,7 +109,7 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP', 'AMAZON_SECRET_KEY');
 ]]></programlisting>
         </example>
 
-        <note><info><title>Ländercodes</title></info>
+        <note><title>Ländercodes</title>
             
 
             <para>
@@ -119,7 +119,7 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP', 'AMAZON_SECRET_KEY');
         </note>
     </section>
 
-    <section xml:id="zend.service.amazon.itemlookup"><info><title>Betrachten eines speziellen Teils bei Amazon durch ASIN</title></info>
+    <section xml:id="zend.service.amazon.itemlookup"><title>Betrachten eines speziellen Teils bei Amazon durch ASIN</title>
         
 
         <para>
@@ -127,7 +127,7 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP', 'AMAZON_SECRET_KEY');
             Amazon zu erhalten wenn der <acronym>ASIN</acronym> bekannt ist.
         </para>
 
-        <example xml:id="zend.service.amazon.itemlookup.example.asin"><info><title>Betrachten eines speziellen Teils bei Amazon durch ASIN</title></info>
+        <example xml:id="zend.service.amazon.itemlookup.example.asin"><title>Betrachten eines speziellen Teils bei Amazon durch ASIN</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -143,7 +143,7 @@ $item = $amazon->itemLookup('B0000A432X');
                 Amazon Dokumentation</link>.
         </para>
 
-        <note><info><title>Bildinformationen</title></info>
+        <note><title>Bildinformationen</title>
             
 
             <para>
@@ -154,7 +154,7 @@ $item = $amazon->itemLookup('B0000A432X');
         </note>
     </section>
 
-    <section xml:id="zend.service.amazon.itemsearch"><info><title>Suchen nach Teilen bei Amazon</title></info>
+    <section xml:id="zend.service.amazon.itemsearch"><title>Suchen nach Teilen bei Amazon</title>
         
 
         <para>
@@ -163,7 +163,7 @@ $item = $amazon->itemLookup('B0000A432X');
             folgenden Beispiel:
         </para>
 
-        <example xml:id="zend.service.amazon.itemsearch.example.basic"><info><title>Suchen nach Teilen bei Amazon</title></info>
+        <example xml:id="zend.service.amazon.itemsearch.example.basic"><title>Suchen nach Teilen bei Amazon</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -176,7 +176,7 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.itemsearch.example.responsegroup"><info><title>Verwenden der ResponseGroup Option</title></info>
+        <example xml:id="zend.service.amazon.itemsearch.example.responsegroup"><title>Verwenden der ResponseGroup Option</title>
             
 
             <para>
@@ -213,10 +213,10 @@ foreach ($results as $result) {
         </tip>
     </section>
 
-    <section xml:id="zend.service.amazon.query"><info><title>Benutzen der alternativen Abfrage API</title></info>
+    <section xml:id="zend.service.amazon.query"><title>Benutzen der alternativen Abfrage API</title>
         
 
-        <section xml:id="zend.service.amazon.query.introduction"><info><title>Einführung</title></info>
+        <section xml:id="zend.service.amazon.query.introduction"><title>Einführung</title>
             
 
             <para>
@@ -235,7 +235,7 @@ foreach ($results as $result) {
                 beschriebenen Options Wert:
             </para>
 
-            <example xml:id="zend.service.amazon.query.introduction.example.basic"><info><title>Suchen in Amazon durch Benutzen der alternativen Abfrage API</title></info>
+            <example xml:id="zend.service.amazon.query.introduction.example.basic"><title>Suchen in Amazon durch Benutzen der alternativen Abfrage API</title>
                 
 
                 <para>
@@ -266,7 +266,7 @@ foreach ($results as $result) {
         </section>
     </section>
 
-    <section xml:id="zend.service.amazon.classes"><info><title>Zend_Service_Amazon Klassen</title></info>
+    <section xml:id="zend.service.amazon.classes"><title>Zend_Service_Amazon Klassen</title>
         
 
         <para>
@@ -336,7 +336,7 @@ foreach ($results as $result) {
             </itemizedlist>
         </para>
 
-        <section xml:id="zend.service.amazon.classes.item"><info><title>Zend_Service_Amazon_Item</title></info>
+        <section xml:id="zend.service.amazon.classes.item"><title>Zend_Service_Amazon_Item</title>
             
 
             <para>
@@ -345,7 +345,7 @@ foreach ($results as $result) {
                 Es enthält alle Attribute des Teils wie z.B. Titel, Beschreibung, Reviews, usw.
             </para>
 
-            <section xml:id="zend.service.amazon.classes.item.asxml"><info><title>Zend_Service_Amazon_Item::asXML()</title></info>
+            <section xml:id="zend.service.amazon.classes.item.asxml"><title>Zend_Service_Amazon_Item::asXML()</title>
                 
 
                 <para>
@@ -359,7 +359,7 @@ foreach ($results as $result) {
                 <para>Gibt das original <acronym>XML</acronym> für dieses Teil zurück</para>
             </section>
 
-            <section xml:id="zend.service.amazon.classes.item.properties"><info><title>Eigenschaften</title></info>
+            <section xml:id="zend.service.amazon.classes.item.properties"><title>Eigenschaften</title>
                 
 
                 <para>
@@ -368,7 +368,7 @@ foreach ($results as $result) {
                     Gegenstücken haben.
                 </para>
 
-                <table xml:id="zend.service.amazon.classes.item.properties.table-1"><info><title>Zend_Service_Amazon_Item Eigenschaften</title></info>
+                <table xml:id="zend.service.amazon.classes.item.properties.table-1"><title>Zend_Service_Amazon_Item Eigenschaften</title>
                     
 
                     <tgroup cols="3">
@@ -510,7 +510,7 @@ foreach ($results as $result) {
             </section>
         </section>
 
-        <section xml:id="zend.service.amazon.classes.image"><info><title>Zend_Service_Amazon_Image</title></info>
+        <section xml:id="zend.service.amazon.classes.image"><title>Zend_Service_Amazon_Image</title>
             
 
             <para>
@@ -518,10 +518,10 @@ foreach ($results as $result) {
                 für ein Produkt.
             </para>
 
-            <section xml:id="zend.service.amazon.classes.image.properties"><info><title>Eigenschaften</title></info>
+            <section xml:id="zend.service.amazon.classes.image.properties"><title>Eigenschaften</title>
                 
 
-                <table xml:id="zend.service.amazon.classes.image.properties.table-1"><info><title>Zend_Service_Amazon_Image Eigenschaften</title></info>
+                <table xml:id="zend.service.amazon.classes.image.properties.table-1"><title>Zend_Service_Amazon_Image Eigenschaften</title>
                     
 
                     <tgroup cols="3">
@@ -561,7 +561,7 @@ foreach ($results as $result) {
             </section>
         </section>
 
-        <section xml:id="zend.service.amazon.classes.resultset"><info><title>Zend_Service_Amazon_ResultSet</title></info>
+        <section xml:id="zend.service.amazon.classes.resultset"><title>Zend_Service_Amazon_ResultSet</title>
             
 
             <para>
@@ -570,7 +570,7 @@ foreach ($results as $result) {
                 und erlauben es, die vielfach zurück gelieferten Resultate, einfachst zu Handhaben.
             </para>
 
-            <note><info><title>SeekableIterator</title></info>
+            <note><title>SeekableIterator</title>
                 
 
                 <para>
@@ -580,7 +580,7 @@ foreach ($results as $result) {
                 </para>
             </note>
 
-            <section xml:id="zend.service.amazon.classes.resultset.totalresults"><info><title>Zend_Service_Amazon_ResultSet::totalResults()</title></info>
+            <section xml:id="zend.service.amazon.classes.resultset.totalresults"><title>Zend_Service_Amazon_ResultSet::totalResults()</title>
                 
 
                 <methodsynopsis>
@@ -599,7 +599,7 @@ foreach ($results as $result) {
             </section>
         </section>
 
-        <section xml:id="zend.service.amazon.classes.offerset"><info><title>Zend_Service_Amazon_OfferSet</title></info>
+        <section xml:id="zend.service.amazon.classes.offerset"><title>Zend_Service_Amazon_OfferSet</title>
             
 
             <para>
@@ -610,10 +610,10 @@ foreach ($results as $result) {
                 Objekt durch welches Preisinformationen für das Teil empfangen werden können.
             </para>
 
-            <section xml:id="zend.service.amazon.classes.offerset.parameters"><info><title>Eigenschaften</title></info>
+            <section xml:id="zend.service.amazon.classes.offerset.parameters"><title>Eigenschaften</title>
                 
 
-                <table xml:id="zend.service.amazon.classes.offerset.parameters.table-1"><info><title>Zend_Service_Amazon_OfferSet Properties</title></info>
+                <table xml:id="zend.service.amazon.classes.offerset.parameters.table-1"><title>Zend_Service_Amazon_OfferSet Properties</title>
                     
 
                     <tgroup cols="3">
@@ -711,7 +711,7 @@ foreach ($results as $result) {
             </section>
         </section>
 
-        <section xml:id="zend.service.amazon.classes.offer"><info><title>Zend_Service_Amazon_Offer</title></info>
+        <section xml:id="zend.service.amazon.classes.offer"><title>Zend_Service_Amazon_Offer</title>
             
 
             <para>
@@ -719,10 +719,10 @@ foreach ($results as $result) {
                 <classname>Zend_Service_Amazon_Offer</classname> Objekt zurück gegeben.
             </para>
 
-            <section xml:id="zend.service.amazon.classes.offer.properties"><info><title>Zend_Service_Amazon_Offer Eigenschaften</title></info>
+            <section xml:id="zend.service.amazon.classes.offer.properties"><title>Zend_Service_Amazon_Offer Eigenschaften</title>
                 
 
-                <table xml:id="zend.service.amazon.classes.offer.properties.table-1"><info><title>Eigenschaften</title></info>
+                <table xml:id="zend.service.amazon.classes.offer.properties.table-1"><title>Eigenschaften</title>
                     
 
                     <tgroup cols="3">
@@ -809,7 +809,7 @@ foreach ($results as $result) {
             </section>
         </section>
 
-        <section xml:id="zend.service.amazon.classes.similarproduct"><info><title>Zend_Service_Amazon_SimilarProduct</title></info>
+        <section xml:id="zend.service.amazon.classes.similarproduct"><title>Zend_Service_Amazon_SimilarProduct</title>
             
 
             <para>
@@ -823,10 +823,10 @@ foreach ($results as $result) {
                 um die kompletten Informationen zu diesem Teil zu bekommen.
             </para>
 
-            <section xml:id="zend.service.amazon.classes.similarproduct.properties"><info><title>Eigenschaften</title></info>
+            <section xml:id="zend.service.amazon.classes.similarproduct.properties"><title>Eigenschaften</title>
                 
 
-                <table xml:id="zend.service.amazon.classes.similarproduct.properties.table-1"><info><title>Zend_Service_Amazon_SimilarProduct Eigenschaften</title></info>
+                <table xml:id="zend.service.amazon.classes.similarproduct.properties.table-1"><title>Zend_Service_Amazon_SimilarProduct Eigenschaften</title>
                     
 
                     <tgroup cols="3">
@@ -860,7 +860,7 @@ foreach ($results as $result) {
             </section>
         </section>
 
-        <section xml:id="zend.service.amazon.classes.accessories"><info><title>Zend_Service_Amazon_Accessories</title></info>
+        <section xml:id="zend.service.amazon.classes.accessories"><title>Zend_Service_Amazon_Accessories</title>
             
 
             <para>
@@ -868,10 +868,10 @@ foreach ($results as $result) {
                 <classname>Zend_Service_Amazon_Accessories</classname> Objekte dargestellt.
             </para>
 
-            <section xml:id="zend.service.amazon.classes.accessories.properties"><info><title>Eigenschaften</title></info>
+            <section xml:id="zend.service.amazon.classes.accessories.properties"><title>Eigenschaften</title>
                 
 
-                <table xml:id="zend.service.amazon.classes.accessories.properties.table-1"><info><title>Zend_Service_Amazon_Accessories Eigenschaften</title></info>
+                <table xml:id="zend.service.amazon.classes.accessories.properties.table-1"><title>Zend_Service_Amazon_Accessories Eigenschaften</title>
                     
 
                     <tgroup cols="3">
@@ -905,7 +905,7 @@ foreach ($results as $result) {
             </section>
         </section>
 
-        <section xml:id="zend.service.amazon.classes.customerreview"><info><title>Zend_Service_Amazon_CustomerReview</title></info>
+        <section xml:id="zend.service.amazon.classes.customerreview"><title>Zend_Service_Amazon_CustomerReview</title>
             
 
             <para>
@@ -913,10 +913,10 @@ foreach ($results as $result) {
                 <classname>Zend_Service_Amazon_CustomerReview</classname> Objekt zurückgegeben.
             </para>
 
-            <section xml:id="zend.service.amazon.classes.customerreview.properties"><info><title>Eigenschaften</title></info>
+            <section xml:id="zend.service.amazon.classes.customerreview.properties"><title>Eigenschaften</title>
                 
 
-                <table xml:id="zend.service.amazon.classes.customerreview.properties.table-1"><info><title>Zend_Service_Amazon_CustomerReview Eigenschaften</title></info>
+                <table xml:id="zend.service.amazon.classes.customerreview.properties.table-1"><title>Zend_Service_Amazon_CustomerReview Eigenschaften</title>
                     
 
                     <tgroup cols="3">
@@ -980,7 +980,7 @@ foreach ($results as $result) {
             </section>
         </section>
 
-        <section xml:id="zend.service.amazon.classes.editorialreview"><info><title>Zend_Service_Amazon_EditorialReview</title></info>
+        <section xml:id="zend.service.amazon.classes.editorialreview"><title>Zend_Service_Amazon_EditorialReview</title>
             
 
             <para>
@@ -988,10 +988,10 @@ foreach ($results as $result) {
                 <classname>Zend_Service_Amazon_EditorialReview</classname> Objekt zurückgegeben.
             </para>
 
-            <section xml:id="zend.service.amazon.classes.editorialreview.properties"><info><title>Eigenschaften</title></info>
+            <section xml:id="zend.service.amazon.classes.editorialreview.properties"><title>Eigenschaften</title>
                 
 
-                <table xml:id="zend.service.amazon.classes.editorialreview.properties.table-1"><info><title>Zend_Service_Amazon_EditorialReview Eigenschaften</title></info>
+                <table xml:id="zend.service.amazon.classes.editorialreview.properties.table-1"><title>Zend_Service_Amazon_EditorialReview Eigenschaften</title>
                     
 
                     <tgroup cols="3">
@@ -1025,7 +1025,7 @@ foreach ($results as $result) {
             </section>
         </section>
 
-        <section xml:id="zend.service.amazon.classes.listmania"><info><title>Zend_Service_Amazon_Listmania</title></info>
+        <section xml:id="zend.service.amazon.classes.listmania"><title>Zend_Service_Amazon_Listmania</title>
             
 
             <para>
@@ -1033,10 +1033,10 @@ foreach ($results as $result) {
                 <classname>Zend_Service_Amazon_Listmania</classname> Objekt zurückgegeben.
             </para>
 
-            <section xml:id="zend.service.amazon.classes.listmania.properties"><info><title>Eigenschaften</title></info>
+            <section xml:id="zend.service.amazon.classes.listmania.properties"><title>Eigenschaften</title>
                 
 
-                <table xml:id="zend.service.amazon.classes.listmania.properties.table-1"><info><title>Zend_Service_Amazon_Listmania Eigenschaften</title></info>
+                <table xml:id="zend.service.amazon.classes.listmania.properties.table-1"><title>Zend_Service_Amazon_Listmania Eigenschaften</title>
                     
 
                     <tgroup cols="3">

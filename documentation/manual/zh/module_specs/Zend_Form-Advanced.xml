@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><info><title>Zend_Form 的高级用法 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><title>Zend_Form 的高级用法 </title>
     
 
     <para>
         <code>Zend_Form</code> 有丰富的函数，其中许多面向有经验的开发者。这一章打算用例子和用例来介绍这些函数。
     </para>
 
-    <section xml:id="zend.form.advanced.arrayNotation"><info><title> 数组符号（Notation）</title></info>
+    <section xml:id="zend.form.advanced.arrayNotation"><title> 数组符号（Notation）</title>
         
 
         <para>
@@ -165,7 +165,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.advanced.multiPage"><info><title> 多页表单 </title></info>
+    <section xml:id="zend.form.advanced.multiPage"><title> 多页表单 </title>
         
 
         <para>
@@ -176,7 +176,7 @@
             生成多页表单的关键是利用子表单，但每个页面只显示一个子表单。这让你一次提交一个单个的表单并校验它，直到所有表单都提交了才处理。
         </para>
 
-        <example xml:id="zend.form.advanced.multiPage.registration"><info><title> 注册表单示例 </title></info>
+        <example xml:id="zend.form.advanced.multiPage.registration"><title> 注册表单示例 </title>
             
 
             <para>

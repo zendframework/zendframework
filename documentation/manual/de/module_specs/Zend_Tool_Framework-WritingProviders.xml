@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.writing-providers"><info><title>Erstellen von Providern für die Verwendung mit Zend_Tool_Framework</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.writing-providers"><title>Erstellen von Providern für die Verwendung mit Zend_Tool_Framework</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         <acronym>MVC</acronym> Anwendung ist.
     </para>
 
-    <section xml:id="zend.tool.framework.writing-providers.loading"><info><title>Wie Zend_Tool eigene Provider findet</title></info>
+    <section xml:id="zend.tool.framework.writing-providers.loading"><title>Wie Zend_Tool eigene Provider findet</title>
         
 
         <para>
@@ -64,7 +64,7 @@
             </para>
         </note>
 
-        <example xml:id="zend.tool.framework.writing-providers.loading.example"><info><title>Eigene Provider mit einem Manifest bekanntmachen</title></info>
+        <example xml:id="zend.tool.framework.writing-providers.loading.example"><title>Eigene Provider mit einem Manifest bekanntmachen</title>
             
 
             <para>
@@ -92,7 +92,7 @@ class My_Component_Manifest
         </example>
     </section>
 
-    <section xml:id="zend.tool.framework.writing-providers.basic"><info><title>Grundsätzliche Anweisungen für die Erstellung von Providern</title></info>
+    <section xml:id="zend.tool.framework.writing-providers.basic"><title>Grundsätzliche Anweisungen für die Erstellung von Providern</title>
         
 
         <para>
@@ -129,7 +129,7 @@ Hello from my provider!
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.tool.framework.writing-providers.response"><info><title>Das Antwort Objekt</title></info>
+    <section xml:id="zend.tool.framework.writing-providers.response"><title>Das Antwort Objekt</title>
         
 
         <para>
@@ -161,10 +161,10 @@ class My_Component_HelloProvider
         </para>
     </section>
 
-    <section xml:id="zend.tool.framework.writing-providers.advanced"><info><title>Fortgeschrittene Informationen für die Entwicklung</title></info>
+    <section xml:id="zend.tool.framework.writing-providers.advanced"><title>Fortgeschrittene Informationen für die Entwicklung</title>
         
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.variables"><info><title>Variablen an einen Provider übergeben</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.variables"><title>Variablen an einen Provider übergeben</title>
             
 
             <para>
@@ -203,7 +203,7 @@ class My_Component_HelloProvider
             </para>
         </section>
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.prompt"><info><title>Den Benutzer nach einer Eingabe fragen</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.prompt"><title>Den Benutzer nach einer Eingabe fragen</title>
             
 
             <para>
@@ -235,7 +235,7 @@ class My_Component_HelloProvider
             </para>
         </section>
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.pretendable"><info><title>Voranstellen um eine Provider Aktion auszuführen</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.pretendable"><title>Voranstellen um eine Provider Aktion auszuführen</title>
             
 
             <para>
@@ -283,7 +283,7 @@ I würde zu Ralph hallo sagen.
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.verbosedebug"><info><title>Verbose und Debug Modi</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.verbosedebug"><title>Verbose und Debug Modi</title>
             
 
             <para>
@@ -310,7 +310,7 @@ class My_Component_HelloProvider
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.configstorage"><info><title>Zugriff auf Benutzer Konfiguration und Speicher</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.configstorage"><title>Zugriff auf Benutzer Konfiguration und Speicher</title>
             
 
             <para>

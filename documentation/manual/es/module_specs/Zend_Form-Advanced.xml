@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><info><title>Uso avanzado de Zend_Form</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><title>Uso avanzado de Zend_Form</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         ellas dirigidas a expertos desarroladores. Este capítulo esta dirigido a
         documentar algunas de las funcionalidades con ejemplos y casos de uso. </para>
 
-    <section xml:id="zend.form.advanced.arrayNotation"><info><title>Notación de array</title></info>
+    <section xml:id="zend.form.advanced.arrayNotation"><title>Notación de array</title>
         
 
         <para>A muchos desarroladores web experimentados les gusta agrupar
@@ -201,7 +201,7 @@
             usar el accesor <methodname>getBelongsTo()</methodname> . </para>
     </section>
 
-    <section xml:id="zend.form.advanced.multiPage"><info><title>Formularios Multi-Página</title></info>
+    <section xml:id="zend.form.advanced.multiPage"><title>Formularios Multi-Página</title>
         
 
         <para> Actualmente, los formularios multi-página no están oficialmente
@@ -215,7 +215,7 @@
             validarlo, pero no procesar el formulario hasta que todos los
             subformularios esten completos.</para>
 
-        <example xml:id="zend.form.advanced.multiPage.registration"><info><title>Ejemplo de formulario de registro</title></info>
+        <example xml:id="zend.form.advanced.multiPage.registration"><title>Ejemplo de formulario de registro</title>
             
             <para>Vamos a usar un formulario de registro como ejemplo. Para
                 nuestros propósitos, queremos capturar el nombre del usuario y

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><info><title>InlineScript Helfer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><title>InlineScript Helfer</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         verwendet werden.
     </para>
 
-    <note><info><title>InlineScript für HTML Body Skripte verwenden</title></info>
+    <note><title>InlineScript für HTML Body Skripte verwenden</title>
         
 
         <para>

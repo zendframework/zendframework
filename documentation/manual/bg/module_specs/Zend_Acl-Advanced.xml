@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>По - слжони неща</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><title>По - слжони неща</title>
 
     
 
-    <section xml:id="zend.acl.advanced.storing"><info><title>Съхраняване на ACL информация за заазване на състоянието</title></info>
+    <section xml:id="zend.acl.advanced.storing"><title>Съхраняване на ACL информация за заазване на състоянието</title>
 
         
 
@@ -26,7 +26,7 @@
 
     </section>
 
-    <section xml:id="zend.acl.advanced.assertions"><info><title>Writing Conditional ACL Rules with Assertions</title></info>
+    <section xml:id="zend.acl.advanced.assertions"><title>Writing Conditional ACL Rules with Assertions</title>
 
         
 

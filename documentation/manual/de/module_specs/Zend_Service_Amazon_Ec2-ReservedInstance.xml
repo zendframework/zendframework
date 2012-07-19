@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.reserved.instance"><info><title>Zend_Service_Amazon_Ec2: Reservierte Instanzen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.reserved.instance"><title>Zend_Service_Amazon_Ec2: Reservierte Instanzen</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         und sind nur für Linux oder UNIX Instanzen erhältlich.
     </para>
 
-    <section xml:id="zend.service.amazon.ec2.reserved.instance.howitworks"><info><title>Wie werden Reservierte Instanzen angehängt</title></info>
+    <section xml:id="zend.service.amazon.ec2.reserved.instance.howitworks"><title>Wie werden Reservierte Instanzen angehängt</title>
         
 
         <para>
@@ -64,10 +64,10 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.reserved.instance.operations"><info><title>Verwendung Reservierter Instanzen</title></info>
+    <section xml:id="zend.service.amazon.ec2.reserved.instance.operations"><title>Verwendung Reservierter Instanzen</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.reserved.instance.operations.describe"><info><title>Beschreibt Reservierte Instanzen die man gekauft hat</title></info>
+        <example xml:id="zend.service.amazon.ec2.reserved.instance.operations.describe"><title>Beschreibt Reservierte Instanzen die man gekauft hat</title>
             
 
             <para>
@@ -89,7 +89,7 @@ $return = $ec2_instance->describeInstances('instanceId');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.describe"><info><title>Beschreiben der aktuell vorhandenen Reservierten Instanz Angebote</title></info>
+        <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.describe"><title>Beschreiben der aktuell vorhandenen Reservierten Instanz Angebote</title>
             
 
             <para>
@@ -114,7 +114,7 @@ $return = $ec2_instance->describeOfferings();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.purchase"><info><title>Das CloudWatch Monitoring bei Instanzen ausschalten</title></info>
+        <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.purchase"><title>Das CloudWatch Monitoring bei Instanzen ausschalten</title>
             
 
             <para>

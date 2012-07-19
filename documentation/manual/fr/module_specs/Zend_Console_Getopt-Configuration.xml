@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.configuration"><info><title>Configurer Zend_Console_Getopt</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.configuration"><title>Configurer Zend_Console_Getopt</title>
     
 
-    <section xml:id="zend.console.getopt.configuration.addrules"><info><title>Ajouter des règles d'options</title></info>
+    <section xml:id="zend.console.getopt.configuration.addrules"><title>Ajouter des règles d'options</title>
         
 
         <para>
@@ -17,7 +17,7 @@
             détails sur la syntaxe de déclaration des options.
         </para>
 
-        <example xml:id="zend.console.getopt.configuration.addrules.example"><info><title>Utilisation d'addRules()</title></info>
+        <example xml:id="zend.console.getopt.configuration.addrules.example"><title>Utilisation d'addRules()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -38,7 +38,7 @@ $opts->addRules(
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.configuration.addhelp"><info><title>Ajouter des messages d'aide</title></info>
+    <section xml:id="zend.console.getopt.configuration.addhelp"><title>Ajouter des messages d'aide</title>
         
 
         <para>
@@ -50,7 +50,7 @@ $opts->addRules(
             d'aide correspondant.
         </para>
 
-        <example xml:id="zend.console.getopt.configuration.addhelp.example"><info><title>Utiliser setHelp()</title></info>
+        <example xml:id="zend.console.getopt.configuration.addhelp.example"><title>Utiliser setHelp()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -76,7 +76,7 @@ $opts->setHelp(
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.configuration.addaliases"><info><title>Ajouter des alias aux options</title></info>
+    <section xml:id="zend.console.getopt.configuration.addaliases"><title>Ajouter des alias aux options</title>
         
 
         <para>
@@ -92,7 +92,7 @@ $opts->setHelp(
             alias, une <classname>Zend_Console_Getopt_Exception</classname> est levée.
         </para>
 
-        <example xml:id="zend.console.getopt.configuration.addaliases.example"><info><title>Utiliser setAliases()</title></info>
+        <example xml:id="zend.console.getopt.configuration.addaliases.example"><title>Utiliser setAliases()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -120,7 +120,7 @@ $opts->setAliases(
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.configuration.addargs"><info><title>Ajouter des listes d'arguments</title></info>
+    <section xml:id="zend.console.getopt.configuration.addargs"><title>Ajouter des listes d'arguments</title>
         
 
         <para>
@@ -136,7 +136,7 @@ $opts->setAliases(
             courants, et la nouvelle méthode substitue le tableau aux arguments courants.
         </para>
 
-        <example xml:id="zend.console.getopt.configuration.addargs.example"><info><title>Utilisation de addArguments() et setArguments()</title></info>
+        <example xml:id="zend.console.getopt.configuration.addargs.example"><title>Utilisation de addArguments() et setArguments()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -152,7 +152,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
         </example>
     </section>
 
-    <section xml:id="zend.console.getopt.configuration.config"><info><title>Ajouter une configuration</title></info>
+    <section xml:id="zend.console.getopt.configuration.config"><title>Ajouter une configuration</title>
         
 
         <para>
@@ -163,7 +163,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             option individuelle en utilisant la méthode <methodname>setOption()</methodname>.
         </para>
 
-        <note><info><title>Clarifier le terme "option"</title></info>
+        <note><title>Clarifier le terme "option"</title>
             
             <para>
                 Le terme "option" est employé pour la configuration de la classe
@@ -229,7 +229,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             d'option de configuration et une valeur d'option.
         </para>
 
-        <example xml:id="zend.console.getopt.configuration.config.example.setoption"><info><title>Utilisation de setOption()</title></info>
+        <example xml:id="zend.console.getopt.configuration.config.example.setoption"><title>Utilisation de setOption()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -247,7 +247,7 @@ $opts->setOption('ignoreCase', true);
             options.
         </para>
 
-        <example xml:id="zend.console.getopt.configuration.config.example.setoptions"><info><title>Utilisation de setOptions()</title></info>
+        <example xml:id="zend.console.getopt.configuration.config.example.setoptions"><title>Utilisation de setOptions()</title>
             
 
             <programlisting language="php"><![CDATA[

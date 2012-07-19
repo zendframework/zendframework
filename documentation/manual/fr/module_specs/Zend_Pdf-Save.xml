@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>Sauvegarder les changement dans un document PDF</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><title>Sauvegarder les changement dans un document PDF</title>
     
 
     <para>
@@ -20,7 +20,7 @@
         <constant>TRUE</constant>, alors seulement les nouvelles sections du <acronym>PDF</acronym> sont retournées.
     </para>
 
-    <example xml:id="zend.pdf.save.example-1"><info><title>Sauvegarder un document PDF</title></info>
+    <example xml:id="zend.pdf.save.example-1"><title>Sauvegarder un document PDF</title>
         
 
         <programlisting language="php"><![CDATA[

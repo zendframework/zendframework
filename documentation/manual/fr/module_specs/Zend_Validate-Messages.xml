@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.messages"><info><title>Messages de validation</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.messages"><title>Messages de validation</title>
     
 
     <para>
@@ -50,7 +50,7 @@ $validator->setMessage('Entrez une valeur plus petite', Zend_Validate_GreaterTha
         alors le message précisé sera affecté comme message pour tous les cas d'échec possibles du validateur.
     </para>
 
-    <section xml:id="zend.validate.messages.pretranslated"><info><title>Utiliser les messages de validations pré-traduits</title></info>
+    <section xml:id="zend.validate.messages.pretranslated"><title>Utiliser les messages de validations pré-traduits</title>
         
 
         <para>
@@ -60,7 +60,7 @@ $validator->setMessage('Entrez une valeur plus petite', Zend_Validate_GreaterTha
             de votre installation de Zend Framework.
         </para>
 
-        <note><info><title>Chemin utilisé</title></info>
+        <note><title>Chemin utilisé</title>
             
 
             <para>
@@ -87,7 +87,7 @@ $translator = new Zend_Translator(
 Zend_Validate_Abstract::setDefaultTranslator($translator);
 ]]></programlisting>
 
-        <note><info><title>Adaptateur de traduction utilisé</title></info>
+        <note><title>Adaptateur de traduction utilisé</title>
             
 
             <para>
@@ -96,7 +96,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
             </para>
         </note>
 
-        <note><info><title>Langues supportées</title></info>
+        <note><title>Langues supportées</title>
             
 
             <para>
@@ -111,7 +111,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
         </note>
     </section>
 
-    <section xml:id="zend.validate.messages.limitation"><info><title>Limiter la taille d'un message de validation</title></info>
+    <section xml:id="zend.validate.messages.limitation"><title>Limiter la taille d'un message de validation</title>
         
 
         <para>
@@ -136,7 +136,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
 Zend_Validate::setMessageLength(100);
 ]]></programlisting>
 
-        <note><info><title>Où ce paramètre est-il utilisé ?</title></info>
+        <note><title>Où ce paramètre est-il utilisé ?</title>
             
 
             <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.edit"><info><title>Manipulation von Maßeinheiten</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.edit"><title>Manipulation von Maßeinheiten</title>
     
 
     <para>
@@ -47,7 +47,7 @@
         </listitem>
     </itemizedlist>
 
-    <section xml:id="zend.measure.edit.convert"><info><title>Konvertieren</title></info>
+    <section xml:id="zend.measure.edit.convert"><title>Konvertieren</title>
         
 
         <para>
@@ -65,7 +65,7 @@
             werden. Die Standardgenauigkeit ist '2'.
         </para>
 
-        <example xml:id="zend.measure.edit.convert.example-1"><info><title>Konvertieren</title></info>
+        <example xml:id="zend.measure.edit.convert.example-1"><title>Konvertieren</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -84,7 +84,7 @@ print "Tonne:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
         </example>
     </section>
 
-    <section xml:id="zend.measure.edit.add"><info><title>Addieren und Subtrahieren</title></info>
+    <section xml:id="zend.measure.edit.add"><title>Addieren und Subtrahieren</title>
         
 
         <para>
@@ -96,7 +96,7 @@ print "Tonne:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
         </para>
 
         <para>
-            <example xml:id="zend.measure.edit.add.example-1"><info><title>Werte addieren</title></info>
+            <example xml:id="zend.measure.edit.add.example-1"><title>Werte addieren</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -112,7 +112,7 @@ echo $sum; // Ausgabe "300 cm"
             </example>
         </para>
 
-        <note><info><title>Automatische Konvertierung</title></info>
+        <note><title>Automatische Konvertierung</title>
             
 
             <para>
@@ -123,7 +123,7 @@ echo $sum; // Ausgabe "300 cm"
         </note>
 
         <para>
-            <example xml:id="zend.measure.edit.add.example-2"><info><title>Subtrahieren</title></info>
+            <example xml:id="zend.measure.edit.add.example-2"><title>Subtrahieren</title>
                 
 
                 <para>
@@ -144,7 +144,7 @@ echo $sum;
         </para>
     </section>
 
-    <section xml:id="zend.measure.edit.equal"><info><title>Identität Vergleichen</title></info>
+    <section xml:id="zend.measure.edit.equal"><title>Identität Vergleichen</title>
         
 
         <para>
@@ -154,7 +154,7 @@ echo $sum;
         </para>
 
         <para>
-            <example xml:id="zend.measure.edit.equal.example-1"><info><title>Unterschiedliche Maßeinheiten</title></info>
+            <example xml:id="zend.measure.edit.equal.example-1"><title>Unterschiedliche Maßeinheiten</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -170,7 +170,7 @@ if ($unit->equals($unit2)) {
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.measure.edit.equal.example-2"><info><title>Identische Maßeinheiten</title></info>
+            <example xml:id="zend.measure.edit.equal.example-2"><title>Identische Maßeinheiten</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -190,7 +190,7 @@ if ($unit->equals($unit2)) {
         </para>
     </section>
 
-    <section xml:id="zend.measure.edit.compare"><info><title>Werte Vergleichen</title></info>
+    <section xml:id="zend.measure.edit.compare"><title>Werte Vergleichen</title>
         
 
         <para>
@@ -201,7 +201,7 @@ if ($unit->equals($unit2)) {
         </para>
 
         <para>
-            <example xml:id="zend.measure.edit.compare.example-1"><info><title>Differenz</title></info>
+            <example xml:id="zend.measure.edit.compare.example-1"><title>Differenz</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -217,7 +217,7 @@ print "Größer:".$unit3->compare($unit2);
         </para>
     </section>
 
-    <section xml:id="zend.measure.edit.changevalue"><info><title>Werte per Hand ändern</title></info>
+    <section xml:id="zend.measure.edit.changevalue"><title>Werte per Hand ändern</title>
         
 
         <para>
@@ -227,7 +227,7 @@ print "Größer:".$unit3->compare($unit2);
         </para>
 
         <para>
-            <example xml:id="zend.measure.edit.changevalue.example-1"><info><title>Verändern eines Wertes</title></info>
+            <example xml:id="zend.measure.edit.changevalue.example-1"><title>Verändern eines Wertes</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -247,7 +247,7 @@ echo $unit;
         </para>
     </section>
 
-    <section xml:id="zend.measure.edit.changetype"><info><title>Typ per Hand ändern</title></info>
+    <section xml:id="zend.measure.edit.changetype"><title>Typ per Hand ändern</title>
         
 
         <para>
@@ -255,7 +255,7 @@ echo $unit;
             <methodname>setType()</methodname> verwendet werden.
         </para>
 
-        <example xml:id="zend.measure.edit.changetype.example-1"><info><title>Verändern des Typs</title></info>
+        <example xml:id="zend.measure.edit.changetype.example-1"><title>Verändern des Typs</title>
             
 
             <programlisting language="php"><![CDATA[

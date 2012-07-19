@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>Bijlagen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><title>Bijlagen</title>
     
     <para>
         Je kan bestanden aan e-mail bijvoegen door de <code>addAttachment()</code> methode te gebruiken. Het
@@ -8,7 +8,7 @@
         bijlage moet worden behandeld. Deze veronderstellingen kunnen overschreven worden door meer parameters aan
         <code>addAttachment()</code> door te geven:
     </para>
-    <example><info><title>E-mails met bijlagen</title></info>
+    <example><title>E-mails met bijlagen</title>
         
         <programlisting role="php"><![CDATA[
 <?php

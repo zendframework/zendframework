@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.17"><info><title>Zend Framework 1.7</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.17"><title>Zend Framework 1.7</title>
 
 
     <para>
@@ -7,10 +7,10 @@
         man die folgenden Migrations Hinweise beachten.
     </para>
 
-    <section xml:id="migration.17.zend.controller"><info><title>Zend_Controller</title></info>
+    <section xml:id="migration.17.zend.controller"><title>Zend_Controller</title>
 
 
-        <section xml:id="migration.17.zend.controller.dispatcher"><info><title>Änderungen im Dispatcher Interface</title></info>
+        <section xml:id="migration.17.zend.controller.dispatcher"><title>Änderungen im Dispatcher Interface</title>
 
 
             <para>
@@ -35,10 +35,10 @@
         </section>
     </section>
 
-    <section xml:id="migration.17.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
+    <section xml:id="migration.17.zend.file.transfer"><title>Zend_File_Transfer</title>
 
 
-        <section xml:id="migration.17.zend.file.transfer.validators"><info><title>Änderungen bei der Verwendung von Filtern und Prüfungen</title></info>
+        <section xml:id="migration.17.zend.file.transfer.validators"><title>Änderungen bei der Verwendung von Filtern und Prüfungen</title>
 
 
             <para>
@@ -60,7 +60,7 @@
                 Parameter getan werden muß.
             </para>
 
-            <section xml:id="migration.17.zend.file.transfer.validators.rename"><info><title>Filter: Rename</title></info>
+            <section xml:id="migration.17.zend.file.transfer.validators.rename"><title>Filter: Rename</title>
 
 
                 <itemizedlist>
@@ -85,7 +85,7 @@
                     </listitem>
                 </itemizedlist>
 
-                <example xml:id="migration.17.zend.file.transfer.validators.rename.example"><info><title>Änderungen für den Rename Filter von 1.6 zu 1.7</title></info>
+                <example xml:id="migration.17.zend.file.transfer.validators.rename.example"><title>Änderungen für den Rename Filter von 1.6 zu 1.7</title>
 
 
                     <programlisting language="php"><![CDATA[
@@ -104,7 +104,7 @@ $upload->addFilter('Rename',
                 </example>
             </section>
 
-            <section xml:id="migration.17.zend.file.transfer.validators.count"><info><title>Prüfung: Count</title></info>
+            <section xml:id="migration.17.zend.file.transfer.validators.count"><title>Prüfung: Count</title>
 
 
                 <itemizedlist>
@@ -127,7 +127,7 @@ $upload->addFilter('Rename',
                     </listitem>
                 </itemizedlist>
 
-                <example xml:id="migration.17.zend.file.transfer.validators.count.example"><info><title>Änderungen für die Count Prüfung von 1.6 zu 1.7</title></info>
+                <example xml:id="migration.17.zend.file.transfer.validators.count.example"><title>Änderungen für die Count Prüfung von 1.6 zu 1.7</title>
 
 
                     <programlisting language="php"><![CDATA[
@@ -146,7 +146,7 @@ $upload->addValidator('Count',
                 </example>
             </section>
 
-            <section xml:id="migration.17.zend.file.transfer.validators.extension"><info><title>Prüfung: Extension</title></info>
+            <section xml:id="migration.17.zend.file.transfer.validators.extension"><title>Prüfung: Extension</title>
 
 
                 <itemizedlist>
@@ -169,7 +169,7 @@ $upload->addValidator('Count',
                     </listitem>
                 </itemizedlist>
 
-                <example xml:id="migration.17.zend.file.transfer.validators.extension.example"><info><title>Änderungen für die Extension Prüfung von 1.6 zu 1.7</title></info>
+                <example xml:id="migration.17.zend.file.transfer.validators.extension.example"><title>Änderungen für die Extension Prüfung von 1.6 zu 1.7</title>
 
 
                     <programlisting language="php"><![CDATA[
@@ -188,7 +188,7 @@ $upload->addValidator('Extension',
                 </example>
             </section>
 
-            <section xml:id="migration.17.zend.file.transfer.validators.filessize"><info><title>Prüfung: FilesSize</title></info>
+            <section xml:id="migration.17.zend.file.transfer.validators.filessize"><title>Prüfung: FilesSize</title>
 
 
                 <itemizedlist>
@@ -221,7 +221,7 @@ $upload->addValidator('Extension',
                     verwendet werden.
                 </para>
 
-                <example xml:id="migration.17.zend.file.transfer.validators.filessize.example"><info><title>Änderungen für die FilesSize Prüfung von 1.6 zu 1.7</title></info>
+                <example xml:id="migration.17.zend.file.transfer.validators.filessize.example"><title>Änderungen für die FilesSize Prüfung von 1.6 zu 1.7</title>
 
 
                     <programlisting language="php"><![CDATA[
@@ -247,7 +247,7 @@ $upload->setUseByteSting(true); // Flag setzen
                 </example>
             </section>
 
-            <section xml:id="migration.17.zend.file.transfer.validators.hash"><info><title>Prüfung: Hash</title></info>
+            <section xml:id="migration.17.zend.file.transfer.validators.hash"><title>Prüfung: Hash</title>
 
 
                 <itemizedlist>
@@ -271,7 +271,7 @@ $upload->setUseByteSting(true); // Flag setzen
                     </listitem>
                 </itemizedlist>
 
-                <example xml:id="migration.17.zend.file.transfer.validators.hash.example"><info><title>Änderungen für die Hash Prüfung von 1.6 zu 1.7</title></info>
+                <example xml:id="migration.17.zend.file.transfer.validators.hash.example"><title>Änderungen für die Hash Prüfung von 1.6 zu 1.7</title>
 
 
                     <programlisting language="php"><![CDATA[
@@ -290,7 +290,7 @@ $upload->addValidator('Hash',
                 </example>
             </section>
 
-            <section xml:id="migration.17.zend.file.transfer.validators.imagesize"><info><title>Prüfung: ImageSize</title></info>
+            <section xml:id="migration.17.zend.file.transfer.validators.imagesize"><title>Prüfung: ImageSize</title>
 
 
                 <itemizedlist>
@@ -317,7 +317,7 @@ $upload->addValidator('Hash',
                     </listitem>
                 </itemizedlist>
 
-                <example xml:id="migration.17.zend.file.transfer.validators.imagesize.example"><info><title>Änderungen für die ImageSize Prüfung von 1.6 zu 1.7</title></info>
+                <example xml:id="migration.17.zend.file.transfer.validators.imagesize.example"><title>Änderungen für die ImageSize Prüfung von 1.6 zu 1.7</title>
 
 
                     <programlisting language="php"><![CDATA[
@@ -338,7 +338,7 @@ $upload->addValidator('ImageSize',
                 </example>
             </section>
 
-            <section xml:id="migration.17.zend.file.transfer.validators.size"><info><title>Prüfung: Size</title></info>
+            <section xml:id="migration.17.zend.file.transfer.validators.size"><title>Prüfung: Size</title>
 
 
                 <itemizedlist>
@@ -363,7 +363,7 @@ $upload->addValidator('ImageSize',
                     </listitem>
                 </itemizedlist>
 
-                <example xml:id="migration.17.zend.file.transfer.validators.size.example"><info><title>Änderungen für die Size Prüfung von 1.6 zu 1.7</title></info>
+                <example xml:id="migration.17.zend.file.transfer.validators.size.example"><title>Änderungen für die Size Prüfung von 1.6 zu 1.7</title>
 
 
                     <programlisting language="php"><![CDATA[
@@ -385,10 +385,10 @@ $upload->addValidator('Size',
         </section>
     </section>
 
-    <section xml:id="migration.17.zend.locale"><info><title>Zend_Locale</title></info>
+    <section xml:id="migration.17.zend.locale"><title>Zend_Locale</title>
 
 
-        <section xml:id="migration.17.zend.locale.islocale"><info><title>Änderungen bei der Verwendung von isLocale()</title></info>
+        <section xml:id="migration.17.zend.locale.islocale"><title>Änderungen bei der Verwendung von isLocale()</title>
 
 
             <para>
@@ -408,7 +408,7 @@ $upload->addValidator('Size',
                 einfach wie anbei gezeigt verwendet werden.
             </para>
 
-            <example xml:id="migration.17.zend.locale.islocale.example"><info><title>Wie man isLocale() von 1.6 nach 1.7 ändern muß</title></info>
+            <example xml:id="migration.17.zend.locale.islocale.example"><title>Wie man isLocale() von 1.6 nach 1.7 ändern muß</title>
 
 
                 <programlisting language="php"><![CDATA[
@@ -455,7 +455,7 @@ if (Zend_Locale::isLocale($locale, false)) {
             </example>
         </section>
 
-        <section xml:id="migration.17.zend.locale.islocale.getdefault"><info><title>Änderungen bei der Verwendung von getDefault()</title></info>
+        <section xml:id="migration.17.zend.locale.islocale.getdefault"><title>Änderungen bei der Verwendung von getDefault()</title>
 
 
             <para>
@@ -471,7 +471,7 @@ if (Zend_Locale::isLocale($locale, false)) {
                 die Methode wie unten gezeigt verwendet werden.
             </para>
 
-            <example xml:id="migration.17.zend.locale.getdefault.example"><info><title>Wie man getDefault() von 1.6 auf 1.7 ändert</title></info>
+            <example xml:id="migration.17.zend.locale.getdefault.example"><title>Wie man getDefault() von 1.6 auf 1.7 ändert</title>
 
 
                 <programlisting language="php"><![CDATA[
@@ -505,10 +505,10 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
          </section>
     </section>
 
-    <section xml:id="migration.17.zend.translator"><info><title>Zend_Translator</title></info>
+    <section xml:id="migration.17.zend.translator"><title>Zend_Translator</title>
 
 
-        <section xml:id="migration.17.zend.translator.languages"><info><title>Setzen von Sprachen</title></info>
+        <section xml:id="migration.17.zend.translator.languages"><title>Setzen von Sprachen</title>
 
 
             <para>
@@ -539,7 +539,7 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
                 <constant>TRUE</constant> setzen. Der Standardwert ist <constant>FALSE</constant>.
             </para>
 
-            <example xml:id="migration.17.zend.translator.example"><info><title>Setzen von Sprachen ohne das man Notizen erhält</title></info>
+            <example xml:id="migration.17.zend.translator.example"><title>Setzen von Sprachen ohne das man Notizen erhält</title>
 
 
                 <para>
@@ -569,7 +569,7 @@ $language = new Zend_Translator('gettext',
         </section>
     </section>
 
-    <section xml:id="migration.17.zend.view"><info><title>Zend_View</title></info>
+    <section xml:id="migration.17.zend.view"><title>Zend_View</title>
 
 
         <note>
@@ -599,7 +599,7 @@ echo $view->render($_GET['foobar']); // LFI Einbruch
             View Skript angefragt wird.
         </para>
 
-        <section xml:id="migration.17.zend.view.disabling"><info><title>Ausschalten des LFI Schutzes für die render() Methode</title></info>
+        <section xml:id="migration.17.zend.view.disabling"><title>Ausschalten des LFI Schutzes für die render() Methode</title>
 
 
             <para>

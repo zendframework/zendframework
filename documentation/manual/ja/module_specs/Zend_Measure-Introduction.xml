@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.introduction"><title>導入</title>
 
     
 
@@ -14,7 +14,7 @@
         多くの計測単位をサポートしています。
     </para>
 
-    <example xml:id="zend.measure.introduction.example-1"><info><title>計測値の変換</title></info>
+    <example xml:id="zend.measure.introduction.example-1"><title>計測値の変換</title>
         
         <para>
             以下の簡単な例で、計測値の型の自動変換の様子を説明します。
@@ -44,7 +44,7 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
         を参照ください。
     </para>
 
-    <example xml:id="zend.measure.introduction.example-2"><info><title>メートルの計測</title></info>
+    <example xml:id="zend.measure.introduction.example-2"><title>メートルの計測</title>
         
         <para>
             <code>メートル</code> は長さの単位です。したがって、対応する定数は

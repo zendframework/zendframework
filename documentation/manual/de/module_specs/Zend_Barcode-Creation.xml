@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.creation"><info><title>Barcodes mit Hilfe der Zend_Barcode Klasse erstellen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.creation"><title>Barcodes mit Hilfe der Zend_Barcode Klasse erstellen</title>
     
 
-    <section xml:id="zend.barcode.creation.configuration"><info><title>Verwendung von Zend_Barcode::factory</title></info>
+    <section xml:id="zend.barcode.creation.configuration"><title>Verwendung von Zend_Barcode::factory</title>
         
 
         <para>
@@ -44,7 +44,7 @@
             </listitem>
         </orderedlist>
 
-        <example xml:id="zend.barcode.creation.configuration.example-1"><info><title>Einen Renderer mit Zend_Barcode::factory() erhalten</title></info>
+        <example xml:id="zend.barcode.creation.configuration.example-1"><title>Einen Renderer mit Zend_Barcode::factory() erhalten</title>
             
 
             <para>
@@ -66,7 +66,7 @@ $renderer = Zend_Barcode::factory(
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.barcode.creation.configuration.example-2"><info><title>Zend_Barcode::factory() mit Zend_Config Objekten verwenden</title></info>
+        <example xml:id="zend.barcode.creation.configuration.example-2"><title>Zend_Barcode::factory() mit Zend_Config Objekten verwenden</title>
             
 
             <para>
@@ -89,7 +89,7 @@ $renderer = Zend_Barcode::factory($config);
         </example>
     </section>
 
-    <section xml:id="zend.barcode.creation.drawing"><info><title>Einen Barcode zeichnen</title></info>
+    <section xml:id="zend.barcode.creation.drawing"><title>Einen Barcode zeichnen</title>
         
 
         <para>
@@ -99,7 +99,7 @@ $renderer = Zend_Barcode::factory($config);
             <classname>Zend_Barcode</classname> angebotene Proxy Methode verwenden.
         </para>
 
-        <example xml:id="zend.barcode.creation.drawing.example-1"><info><title>Einen Barcode mit dem Renderer Objekt zeichnen</title></info>
+        <example xml:id="zend.barcode.creation.drawing.example-1"><title>Einen Barcode mit dem Renderer Objekt zeichnen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -116,7 +116,7 @@ $imageResource = Zend_Barcode::factory(
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.barcode.creation.drawing.example-2"><info><title>Einen Barcode mit Zend_Barcode::draw() zeichnen</title></info>
+        <example xml:id="zend.barcode.creation.drawing.example-2"><title>Einen Barcode mit Zend_Barcode::draw() zeichnen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -134,7 +134,7 @@ $imageResource = Zend_Barcode::draw(
         </example>
     </section>
 
-    <section xml:id="zend.barcode.creation.renderering"><info><title>Einen Barcode darstellen</title></info>
+    <section xml:id="zend.barcode.creation.renderering"><title>Einen Barcode darstellen</title>
         
 
         <para>
@@ -144,7 +144,7 @@ $imageResource = Zend_Barcode::draw(
             die Proxy Methode verwenden die von <classname>Zend_Barcode</classname> angeboten wird.
         </para>
 
-        <example xml:id="zend.barcode.creation.renderering.example-1"><info><title>Einen Barcode mit dem Renderer Objekt darstellen</title></info>
+        <example xml:id="zend.barcode.creation.renderering.example-1"><title>Einen Barcode mit dem Renderer Objekt darstellen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -170,7 +170,7 @@ Zend_Barcode::factory(
             </para>
         </example>
 
-        <example xml:id="zend.barcode.creation.renderering.example-2"><info><title>Einen Barcode mit Zend_Barcode::render() darstellen</title></info>
+        <example xml:id="zend.barcode.creation.renderering.example-2"><title>Einen Barcode mit Zend_Barcode::render() darstellen</title>
             
 
             <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.rules"><info><title>Definieren von Getopt Regeln</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.rules"><title>Definieren von Getopt Regeln</title>
     
 
     <para>
@@ -22,7 +22,7 @@
         eine Referenz der möglichen Optionen.
     </para>
 
-    <section xml:id="zend.console.getopt.rules.short"><info><title>Optionen mit der kurzen Syntax definieren</title></info>
+    <section xml:id="zend.console.getopt.rules.short"><title>Optionen mit der kurzen Syntax definieren</title>
         
 
         <para>
@@ -34,7 +34,7 @@
             zeigt ein Flag das einen Parameter benötigt.
         </para>
 
-        <example xml:id="zend.console.getopt.rules.short.example"><info><title>Verwendung der kurzen Syntax</title></info>
+        <example xml:id="zend.console.getopt.rules.short.example"><title>Verwendung der kurzen Syntax</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -56,7 +56,7 @@ $opts = new Zend_Console_Getopt('abp:');
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.rules.long"><info><title>Optionen mit der langen Syntax definieren</title></info>
+    <section xml:id="zend.console.getopt.rules.long"><title>Optionen mit der langen Syntax definieren</title>
         
 
         <para>
@@ -110,7 +110,7 @@ $opts = new Zend_Console_Getopt('abp:');
             verwendet werden kann.
         </para>
 
-        <example xml:id="zend.console.getopt.rules.long.example"><info><title>Verwendung der langen Syntax</title></info>
+        <example xml:id="zend.console.getopt.rules.long.example"><title>Verwendung der langen Syntax</title>
             
 
             <programlisting language="php"><![CDATA[

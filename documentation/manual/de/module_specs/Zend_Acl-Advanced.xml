@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Fortgeschrittene Verwendung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><title>Fortgeschrittene Verwendung</title>
     
 
-    <section xml:id="zend.acl.advanced.storing"><info><title>Dauerhafte Speicherung von ACL-Daten</title></info>
+    <section xml:id="zend.acl.advanced.storing"><title>Dauerhafte Speicherung von ACL-Daten</title>
         
 
         <para>
@@ -26,7 +26,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.acl.advanced.assertions"><info><title>Schreiben von bedingten ACL-Regeln mit Zusicherungen</title></info>
+    <section xml:id="zend.acl.advanced.assertions"><title>Schreiben von bedingten ACL-Regeln mit Zusicherungen</title>
         
 
         <para>

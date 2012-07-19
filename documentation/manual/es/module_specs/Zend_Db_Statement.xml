@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.statement"><info><title>Zend_Db_Statement</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.statement"><title>Zend_Db_Statement</title>
 
     
 
@@ -15,7 +15,7 @@
         PDOStatement en la extensión <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo">PHP
             Data Objects</link> . </para>
 
-    <section xml:id="zend.db.statement.creating"><info><title>Creando una Declaración</title></info>
+    <section xml:id="zend.db.statement.creating"><title>Creando una Declaración</title>
 
         
 
@@ -27,7 +27,7 @@
             segundo parámetro (opcional) es un array de valores para vincular
             posiciones de parámetros en el string <acronym>SQL</acronym> . </para>
 
-        <example xml:id="zend.db.statement.creating.example1"><info><title>Crear un objeto de declaración SQL con query()</title></info>
+        <example xml:id="zend.db.statement.creating.example1"><title>Crear un objeto de declaración SQL con query()</title>
             
             <programlisting language="php"><![CDATA[
 $stmt = $db->query(
@@ -50,7 +50,7 @@ $stmt = $db->query(
             y un string conteniendo la declaración <acronym>SQL</acronym> como
             el segundo parámetro. La declaración es preparada pero no ejecutada. </para>
 
-        <example xml:id="zend.db.statement.creating.example2"><info><title>Usando un constructor de declaración SQL</title></info>
+        <example xml:id="zend.db.statement.creating.example2"><title>Usando un constructor de declaración SQL</title>
             
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
@@ -61,7 +61,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
     </section>
 
-    <section xml:id="zend.db.statement.executing"><info><title>Ejecutando la declaración</title></info>
+    <section xml:id="zend.db.statement.executing"><title>Ejecutando la declaración</title>
 
         
 
@@ -76,7 +76,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
                 <emphasis>?</emphasis> ), pase los valores de vinculación en un
             array plano. </para>
 
-        <example xml:id="zend.db.statement.executing.example1"><info><title>Ejecutar una declaración con parámetros posicionales</title></info>
+        <example xml:id="zend.db.statement.executing.example1"><title>Ejecutar una declaración con parámetros posicionales</title>
             
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
@@ -93,7 +93,7 @@ $stmt->execute(array('goofy', 'FIXED'));
             asociativo. Las claves de este array deben coincidir con el nombre
             de los parámetros. </para>
 
-        <example xml:id="zend.db.statement.executing.example2"><info><title>Ejecutando una declaración con parámetros nombrados</title></info>
+        <example xml:id="zend.db.statement.executing.example2"><title>Ejecutando una declaración con parámetros nombrados</title>
             
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE ' .
@@ -113,7 +113,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
     </section>
 
-    <section xml:id="zend.db.statement.fetching"><info><title> Extrayendo Resultados de una declaración SELECT </title></info>
+    <section xml:id="zend.db.statement.fetching"><title> Extrayendo Resultados de una declaración SELECT </title>
 
         
 
@@ -127,8 +127,8 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 <classname>Zend_Db_Statement</classname> , pero no puede llamar
             a los métodos que extraen filas de resultados desde éste. </para>
 
-        <section xml:id="zend.db.statement.fetching.fetch"><info><title>Extrayendo una Fila Simple desde un Conjunto de
-                Resultados</title></info>
+        <section xml:id="zend.db.statement.fetching.fetch"><title>Extrayendo una Fila Simple desde un Conjunto de
+                Resultados</title>
 
             
 
@@ -172,7 +172,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                     <constant>FALSE</constant> si todas las filas del conjunto
                 de resultados han sido extraídas. </para>
 
-            <example xml:id="zend.db.statement.fetching.fetch.example"><info><title>Usando fetch() en un bucle</title></info>
+            <example xml:id="zend.db.statement.fetching.fetch.example"><title>Usando fetch() en un bucle</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -187,7 +187,7 @@ while ($row = $stmt->fetch()) {
 
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetchall"><info><title>Extrayendo un Conjunto de Resultados completo</title></info>
+        <section xml:id="zend.db.statement.fetching.fetchall"><title>Extrayendo un Conjunto de Resultados completo</title>
 
             
 
@@ -200,7 +200,7 @@ while ($row = $stmt->fetch()) {
                 segundo indica el número de la columa que devolver, cuando el
                 estilo de extracción es Zend_Db::FETCH_COLUMN. </para>
 
-            <example xml:id="zend.db.statement.fetching.fetchall.example"><info><title>Usando fetchAll()</title></info>
+            <example xml:id="zend.db.statement.fetching.fetchall.example"><title>Usando fetchAll()</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -215,7 +215,7 @@ echo $rows[0]['bug_description'];
 
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetch-mode"><info><title>Cambiando el Modo de extracción</title></info>
+        <section xml:id="zend.db.statement.fetching.fetch-mode"><title>Cambiando el Modo de extracción</title>
 
             
 
@@ -234,7 +234,7 @@ echo $rows[0]['bug_description'];
                     <methodname>fetchAll()</methodname> usan el modo de
                 extracción especificado. </para>
 
-            <example xml:id="zend.db.statement.fetching.fetch-mode.example"><info><title>Configurando un modo de extracción</title></info>
+            <example xml:id="zend.db.statement.fetching.fetch-mode.example"><title>Configurando un modo de extracción</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -251,8 +251,8 @@ echo $rows[0][0];
 
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetchcolumn"><info><title>Extrayendo una Única Columna desde un Conjunto de
-                Resultados</title></info>
+        <section xml:id="zend.db.statement.fetching.fetchcolumn"><title>Extrayendo una Única Columna desde un Conjunto de
+                Resultados</title>
 
             
 
@@ -272,7 +272,7 @@ echo $rows[0][0];
                 un array de valores, tomados desde la primera columa de todas
                 las del conjunto de resultados. </para>
 
-            <example xml:id="zend.db.statement.fetching.fetchcolumn.example"><info><title>Usando fetchColumn()</title></info>
+            <example xml:id="zend.db.statement.fetching.fetchcolumn.example"><title>Usando fetchColumn()</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
@@ -285,7 +285,7 @@ $bug_status = $stmt->fetchColumn(2);
 
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetchobject"><info><title>Extrayendo una Fila como un Objeto</title></info>
+        <section xml:id="zend.db.statement.fetching.fetchobject"><title>Extrayendo una Fila como un Objeto</title>
 
             
 
@@ -297,7 +297,7 @@ $bug_status = $stmt->fetchColumn(2);
                 'stdClass'. El segundo parámetro es un array de valores que será
                 pasado al constructor de la clase. </para>
 
-            <example xml:id="zend.db.statement.fetching.fetchobject.example"><info><title>Usando fetchObject()</title></info>
+            <example xml:id="zend.db.statement.fetching.fetchobject.example"><title>Usando fetchObject()</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');

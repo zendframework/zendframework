@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.formatters"><info><title>Formateurs (mise en forme)</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.formatters"><title>Formateurs (mise en forme)</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         formateur.
     </para>
 
-    <section xml:id="zend.log.formatters.simple"><info><title>Formatage simple</title></info>
+    <section xml:id="zend.log.formatters.simple"><title>Formatage simple</title>
         
 
         <para>
@@ -52,7 +52,7 @@ $logger->info('Monde');
         </para>
     </section>
 
-    <section xml:id="zend.log.formatters.xml"><info><title>Formater vers le XML</title></info>
+    <section xml:id="zend.log.formatters.xml"><title>Formater vers le XML</title>
         
 
         <para>

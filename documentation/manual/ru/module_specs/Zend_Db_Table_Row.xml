@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.row"><info><title>Zend_Db_Table_Row</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.row"><title>Zend_Db_Table_Row</title>
 
     
 
-    <section xml:id="zend.db.table.row.introduction"><info><title>Введение</title></info>
+    <section xml:id="zend.db.table.row.introduction"><title>Введение</title>
 
         
 
@@ -22,7 +22,7 @@
 
     </section>
 
-    <section xml:id="zend.db.table.row.read"><info><title>Извлечение строки</title></info>
+    <section xml:id="zend.db.table.row.read"><title>Извлечение строки</title>
 
         
 
@@ -33,7 +33,7 @@
             объект типа Zend_Db_Table_Row.
         </para>
 
-        <example xml:id="zend.db.table.row.read.example"><info><title>Пример извлечения строки</title></info>
+        <example xml:id="zend.db.table.row.read.example"><title>Пример извлечения строки</title>
 
             
 
@@ -51,7 +51,7 @@ $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
             читайте <xref linkend="zend.db.table.rowset"/>.
         </para>
 
-        <example xml:id="zend.db.table.row.read.example-rowset"><info><title>Пример получения строки из набора строк</title></info>
+        <example xml:id="zend.db.table.row.read.example-rowset"><title>Пример получения строки из набора строк</title>
 
             
 
@@ -64,7 +64,7 @@ $row = $rowset->current();
 
         </example>
 
-        <section xml:id="zend.db.table.row.read.get"><info><title>Чтение значений столбцов из строки</title></info>
+        <section xml:id="zend.db.table.row.read.get"><title>Чтение значений столбцов из строки</title>
             
 
             <para>
@@ -73,7 +73,7 @@ $row = $rowset->current();
                 свойства объекта.
             </para>
 
-            <example xml:id="zend.db.table.row.read.get.example"><info><title>Пример чтения столбца из строки</title></info>
+            <example xml:id="zend.db.table.row.read.get.example"><title>Пример чтения столбца из строки</title>
 
                 
 
@@ -108,7 +108,7 @@ echo $row->bug_description;
 
         </section>
 
-        <section xml:id="zend.db.table.row.read.to-array"><info><title>Получение данных строки в виде массива</title></info>
+        <section xml:id="zend.db.table.row.read.to-array"><title>Получение данных строки в виде массива</title>
 
             
 
@@ -118,7 +118,7 @@ echo $row->bug_description;
                 ассоциативный массив имен столбцов и их значений.
             </para>
 
-            <example xml:id="zend.db.table.row.read.to-array.example"><info><title>Пример использования метода toArray()</title></info>
+            <example xml:id="zend.db.table.row.read.to-array.example"><title>Пример использования метода toArray()</title>
 
                 
 
@@ -149,7 +149,7 @@ foreach ($rowArray as $column => $value) {
 
         </section>
 
-        <section xml:id="zend.db.table.row.read.relationships"><info><title>Извлечение данных из связанных таблиц</title></info>
+        <section xml:id="zend.db.table.row.read.relationships"><title>Извлечение данных из связанных таблиц</title>
 
             
 
@@ -164,11 +164,11 @@ foreach ($rowArray as $column => $value) {
 
     </section>
 
-    <section xml:id="zend.db.table.row.write"><info><title>Редактирование строк в БД</title></info>
+    <section xml:id="zend.db.table.row.write"><title>Редактирование строк в БД</title>
 
         
 
-        <section xml:id="zend.db.table.row.write.set"><info><title>Изменение значений столбцов в строке</title></info>
+        <section xml:id="zend.db.table.row.write.set"><title>Изменение значений столбцов в строке</title>
 
             
 
@@ -185,7 +185,7 @@ foreach ($rowArray as $column => $value) {
                 фиксацию через метод <code>save()</code>.
             </para>
 
-            <example xml:id="zend.db.table.row.write.set.example"><info><title>Пример изменения значения столбца в строке</title></info>
+            <example xml:id="zend.db.table.row.write.set.example"><title>Пример изменения значения столбца в строке</title>
 
                 
 
@@ -205,7 +205,7 @@ $row->save();
 
         </section>
 
-        <section xml:id="zend.db.table.row.write.insert"><info><title>Вставка новой строки</title></info>
+        <section xml:id="zend.db.table.row.write.insert"><title>Вставка новой строки</title>
 
             
 
@@ -217,7 +217,7 @@ $row->save();
                 вызовете метод <code>save()</code>.
             </para>
 
-            <example xml:id="zend.db.table.row.write.insert.example"><info><title>Пример создания новой строки таблицы</title></info>
+            <example xml:id="zend.db.table.row.write.insert.example"><title>Пример создания новой строки таблицы</title>
 
                 
 
@@ -240,7 +240,7 @@ $newRow->save();
                 через который вы можете заполнить поля новой строки.
             </para>
 
-            <example xml:id="zend.db.table.row.write.insert.example2"><info><title>Пример заполнения новой строки для таблицы</title></info>
+            <example xml:id="zend.db.table.row.write.insert.example2"><title>Пример заполнения новой строки для таблицы</title>
 
                 
 
@@ -272,7 +272,7 @@ $newRow->save();
 
         </section>
 
-        <section xml:id="zend.db.table.row.write.set-from-array"><info><title>Изменение значений в нескольких столбцах</title></info>
+        <section xml:id="zend.db.table.row.write.set-from-array"><title>Изменение значений в нескольких столбцах</title>
 
             
 
@@ -285,8 +285,8 @@ $newRow->save();
                 и при обновлении существующих.
             </para>
 
-            <example xml:id="zend.db.table.row.write.set-from-array.example"><info><title>Пример использования метода setFromArray() для установки
-                значений в новой строке</title></info>
+            <example xml:id="zend.db.table.row.write.set-from-array.example"><title>Пример использования метода setFromArray() для установки
+                значений в новой строке</title>
 
                 
 
@@ -312,7 +312,7 @@ $newRow->save();
 
         </section>
 
-        <section xml:id="zend.db.table.row.write.delete"><info><title>Удаление строки</title></info>
+        <section xml:id="zend.db.table.row.write.delete"><title>Удаление строки</title>
 
             
 
@@ -322,7 +322,7 @@ $newRow->save();
                 первичному ключу в объекте строки.
             </para>
 
-            <example xml:id="zend.db.table.row.write.delete.example"><info><title>Пример удаления строки</title></info>
+            <example xml:id="zend.db.table.row.write.delete.example"><title>Пример удаления строки</title>
 
                 
 
@@ -346,7 +346,7 @@ $row->delete();
 
     </section>
 
-    <section xml:id="zend.db.table.row.serialize"><info><title>Сериализация и десериализация строк</title></info>
+    <section xml:id="zend.db.table.row.serialize"><title>Сериализация и десериализация строк</title>
 
         
 
@@ -358,7 +358,7 @@ $row->delete();
             Zend_Db_Table_Row_Abstract доступны для сериализации.
         </para>
 
-        <section xml:id="zend.db.table.row.serialize.serializing"><info><title>Сериализация объекта строки</title></info>
+        <section xml:id="zend.db.table.row.serialize.serializing"><title>Сериализация объекта строки</title>
 
             
 
@@ -368,7 +368,7 @@ $row->delete();
                 последовательности байт.
             </para>
 
-            <example xml:id="zend.db.table.row.serialize.serializing.example"><info><title>Пример сериализации объекта строки</title></info>
+            <example xml:id="zend.db.table.row.serialize.serializing.example"><title>Пример сериализации объекта строки</title>
 
                 
 
@@ -387,7 +387,7 @@ $serializedRow = serialize($row);
 
         </section>
 
-        <section xml:id="zend.db.table.row.serialize.unserializing"><info><title>Десериализация данных строки</title></info>
+        <section xml:id="zend.db.table.row.serialize.unserializing"><title>Десериализация данных строки</title>
 
             
 
@@ -405,7 +405,7 @@ $serializedRow = serialize($row);
                 запросы к связанным таблицам).
             </para>
 
-            <example xml:id="zend.db.table.row.serialize.unserializing.example"><info><title>Пример десериализации объекта строки</title></info>
+            <example xml:id="zend.db.table.row.serialize.unserializing.example"><title>Пример десериализации объекта строки</title>
 
                 
 
@@ -419,7 +419,7 @@ echo $rowClone->bug_description;
 
             </example>
 
-            <note><info><title>Почему объекты строки десериализуются без соединения?</title></info>
+            <note><title>Почему объекты строки десериализуются без соединения?</title>
 
                 
 
@@ -443,7 +443,7 @@ echo $rowClone->bug_description;
 
         </section>
 
-        <section xml:id="zend.db.table.row.serialize.set-table"><info><title>Восстановление соединения для объекта строки</title></info>
+        <section xml:id="zend.db.table.row.serialize.set-table"><title>Восстановление соединения для объекта строки</title>
 
             
 
@@ -457,7 +457,7 @@ echo $rowClone->bug_description;
                 сохранять изменения в БД.
             </para>
 
-            <example xml:id="zend.db.table.row.serialize.set-table.example"><info><title>Пример восстановления соединения для строки</title></info>
+            <example xml:id="zend.db.table.row.serialize.set-table.example"><title>Пример восстановления соединения для строки</title>
 
                 
 
@@ -481,7 +481,7 @@ $rowClone->save();
 
     </section>
 
-    <section xml:id="zend.db.table.row.extending"><info><title>Расширение класса строки</title></info>
+    <section xml:id="zend.db.table.row.extending"><title>Расширение класса строки</title>
 
         
 
@@ -496,7 +496,7 @@ $rowClone->save();
             конструктору объекта таблицы.
         </para>
 
-        <example xml:id="zend.db.table.row.extending.example"><info><title>Указание своего класса строки</title></info>
+        <example xml:id="zend.db.table.row.extending.example"><title>Указание своего класса строки</title>
 
             
 
@@ -522,7 +522,7 @@ $bugs = new Bugs(array('rowClass' => 'MyRow'));
 
         </example>
 
-        <section xml:id="zend.db.table.row.extending.overriding"><info><title>Инициализация строки</title></info>
+        <section xml:id="zend.db.table.row.extending.overriding"><title>Инициализация строки</title>
 
             
 
@@ -535,7 +535,7 @@ $bugs = new Bugs(array('rowClass' => 'MyRow'));
                 <code>__construct</code>, если только не требуется изменять
                 метаданные программным путем.
 
-                <example xml:id="zend.db.table.row.init.usage.example"><info><title>Пример использования метода init()</title></info>
+                <example xml:id="zend.db.table.row.init.usage.example"><title>Пример использования метода init()</title>
 
                     
 
@@ -558,7 +558,7 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.row.extending.insert-update"><info><title>Определение собственной логики для добавления, обновления и удаления в Zend_Db_Table_Row</title></info>
+        <section xml:id="zend.db.table.row.extending.insert-update"><title>Определение собственной логики для добавления, обновления и удаления в Zend_Db_Table_Row</title>
 
             
 
@@ -587,7 +587,7 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
                 таблицы:
             </para>
 
-            <example xml:id="zend.db.table.row.extending.overriding-example1"><info><title>Пример собственной логики в классе строки</title></info>
+            <example xml:id="zend.db.table.row.extending.overriding-example1"><title>Пример собственной логики в классе строки</title>
                 
 
                 <para>
@@ -630,7 +630,7 @@ if ($loggingEnabled) {
 
             </example>
 
-            <example xml:id="zend.db.table.row.extending.overriding-example2"><info><title>Пример класса строки, журналирующего добавляемые данные для нескольких таблиц</title></info>
+            <example xml:id="zend.db.table.row.extending.overriding-example2"><title>Пример класса строки, журналирующего добавляемые данные для нескольких таблиц</title>
 
                 
 
@@ -678,7 +678,7 @@ class Products extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.row.extending.inflection"><info><title>Определение инфлекции в Zend_Db_Table_Row</title></info>
+        <section xml:id="zend.db.table.row.extending.inflection"><title>Определение инфлекции в Zend_Db_Table_Row</title>
             
 
             <para>
@@ -702,7 +702,7 @@ class Products extends Zend_Db_Table_Abstract
                 класс таблицы.
             </para>
 
-            <example xml:id="zend.db.table.row.extending.inflection.example"><info><title>Пример определения инфлекционного преобразования</title></info>
+            <example xml:id="zend.db.table.row.extending.inflection.example"><title>Пример определения инфлекционного преобразования</title>
 
                 
 

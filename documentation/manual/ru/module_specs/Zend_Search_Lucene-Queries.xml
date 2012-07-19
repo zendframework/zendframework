@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-api"><info><title>API для построения запросов<!--Query Construction API--></title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-api"><title>API для построения запросов<!--Query Construction API--></title>
     
 
     <para>
@@ -21,7 +21,7 @@ $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);]]></program
     </para>
 
 
-    <section xml:id="zend.search.lucene.queries.exceptions"><info><title>Исключения, бросаемые парсером запросов<!--Query Parser Exceptions--></title></info>
+    <section xml:id="zend.search.lucene.queries.exceptions"><title>Исключения, бросаемые парсером запросов<!--Query Parser Exceptions--></title>
         
         <para>
         Парсер запросов может генерировать два типа исключений:
@@ -72,7 +72,7 @@ try {
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.term-query"><info><title>Простой запрос (запрос по одному ключевому слову)<!--Term Query--></title></info>
+    <section xml:id="zend.search.lucene.queries.term-query"><title>Простой запрос (запрос по одному ключевому слову)<!--Term Query--></title>
             
         <para>
         Простые запросы предназначены для поиска по одному элементу.
@@ -118,7 +118,7 @@ $hits  = $index->find($query);]]></programlisting>
 
     </section>
 
-    <section xml:id="zend.search.lucene.queries.multiterm-query"><info><title>Составной запрос (запрос по нескольким ключевым словам)<!--Multi-Term Query--></title></info>
+    <section xml:id="zend.search.lucene.queries.multiterm-query"><title>Составной запрос (запрос по нескольким ключевым словам)<!--Multi-Term Query--></title>
         
         <para>
             Составные запросы предназначены для поиска по набору элементов.
@@ -281,7 +281,7 @@ $hits  = $index->find($query);]]></programlisting>
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.phrase-query"><info><title>Фразовый запрос<!--Phrase Query--></title></info>
+    <section xml:id="zend.search.lucene.queries.phrase-query"><title>Фразовый запрос<!--Phrase Query--></title>
         
         <para>
             Фразовые запросы предназначены для поиска по фразам.

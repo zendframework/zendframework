@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><title>Zend_Config_Xml</title>
     
     <para>
         <code>Zend_Config_Xml</code> staat programmeurs toe om configuratiedate in een eenvoudig
@@ -12,7 +12,7 @@
         attribuut genaamd <code>extends</code>, en de waarde van dit attribuut komt overeen met de
         naam van de sectie waarvan de data moet worden overgeërfd door de uitbreidende sectie.
     </para>
-    <note><info><title>Teruggeef type</title></info>
+    <note><title>Teruggeef type</title>
         
         <para>
             Configuratiedata die door <code>Zend_Config_Xml</code> word ingelezen wordt altijd als
@@ -20,7 +20,7 @@
             programmeur overgelaten om aan hun specifieke behoeften te voldoen.
         </para>
     </note>
-    <example xml:id="zend.config.adapters.xml.example.using"><info><title>Zend_Config_Xml gebruiken</title></info>
+    <example xml:id="zend.config.adapters.xml.example.using"><title>Zend_Config_Xml gebruiken</title>
         
         <para>
             Dit voorbeeld illustreert een basisgebruik van <code>Zend_Config_Xml</code> voor het

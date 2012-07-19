@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.basename"><info><title>BaseName</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.basename"><title>BaseName</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         Pfad zu einer Daten enthält und gibt den Basisnamen dieser Datei zurück.
     </para>
 
-    <section xml:id="zend.filter.set.basename.options"><info><title>Unterstützte Optionen für Zend_Filter_BaseName</title></info>
+    <section xml:id="zend.filter.set.basename.options"><title>Unterstützte Optionen für Zend_Filter_BaseName</title>
         
 
         <para>
@@ -15,7 +15,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.basename.basic"><info><title>Einfache Verwendung</title></info>
+    <section xml:id="zend.filter.set.basename.basic"><title>Einfache Verwendung</title>
         
 
         <para>

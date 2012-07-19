@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.translator"><info><title>翻訳ヘルパー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.translator"><title>翻訳ヘルパー</title>
 
     
 
@@ -51,7 +51,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.translator.registered"><info><title>登録済みのインスタンス</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.registered"><title>登録済みのインスタンス</title>
 
         
 
@@ -85,7 +85,7 @@ echo $this->translate('simple');
         ビューの中でインスタンスを作成し、ヘルパーのインスタンスは後で作成することもできます。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.afterwards"><info><title>ビューの中で</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.afterwards"><title>ビューの中で</title>
 
         
 
@@ -116,7 +116,7 @@ $this->translate()->setTranslator($adapter)->translate('simple');
         ヘルパーを直接使用することもできます。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.directly"><info><title>直接使用する方法</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.directly"><title>直接使用する方法</title>
 
         
 
@@ -151,7 +151,7 @@ print $translate->translate('simple'); // これは 'einfach' を返します
         たとえば次のようになります。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.parameter"><info><title>単一のパラメータ</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.parameter"><title>単一のパラメータ</title>
 
         
 
@@ -175,7 +175,7 @@ $this->translate("Today is %1\$s", $date);
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.translator.parameterlist"><info><title>パラメータのリスト</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.parameterlist"><title>パラメータのリスト</title>
 
         
 
@@ -197,7 +197,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
 
     </example>
 
-    <example xml:id="zend.view.helpers.initial.translator.parameterarray"><info><title>パラメータの配列</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.parameterarray"><title>パラメータの配列</title>
 
         
 
@@ -222,7 +222,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         どひらの形式の場合も、ロケールは最後のパラメータとして指定します。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.dynamic"><info><title>ロケールの動的な変更</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.dynamic"><title>ロケールの動的な変更</title>
 
         
 
@@ -242,7 +242,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
         しかし、ロケールの設定をヘルパー内で行うこともできます。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.static"><info><title>ロケールの静的な変更</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.static"><title>ロケールの静的な変更</title>
 
         
 
@@ -265,7 +265,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         <methodname>getLocale()</methodname> もあります。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.getlocale"><info><title>現在設定されているロケールの取得</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.getlocale"><title>現在設定されているロケールの取得</title>
 
         
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><info><title>国際化(i18n)とローカライズ(l10n)</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><title>国際化(i18n)とローカライズ(l10n)</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         下記はあなたが国際化とローカライズのオーバーヘッドを減らすために利用できる戦略のいくつかです。
     </para>
 
-    <section xml:id="performance.localization.translationadapter"><info><title>どの翻訳アダプタを使うべきですか？</title></info>
+    <section xml:id="performance.localization.translationadapter"><title>どの翻訳アダプタを使うべきですか？</title>
         
 
         <para>
@@ -22,7 +22,7 @@
             しかしながら、もしあなたに好みがあるなら、どのアダプタがもっとも速いでしょうか？
         </para>
 
-        <section xml:id="performance.localization.translationadapter.fastest"><info><title>最速にするためにXML以外の翻訳アダプタを使う</title></info>
+        <section xml:id="performance.localization.translationadapter.fastest"><title>最速にするためにXML以外の翻訳アダプタを使う</title>
             
 
             <para>
@@ -68,7 +68,7 @@
         </section>
     </section>
 
-    <section xml:id="performance.localization.cache"><info><title>どのようにしたら翻訳やローカライズをもっと速くできますか？</title></info>
+    <section xml:id="performance.localization.cache"><title>どのようにしたら翻訳やローカライズをもっと速くできますか？</title>
         
 
         <para>
@@ -78,7 +78,7 @@
             それにはどうしたら良いでしょう？
         </para>
 
-        <section xml:id="performance.localization.cache.usage"><info><title>翻訳およびローカライズのキャッシュを使う</title></info>
+        <section xml:id="performance.localization.cache.usage"><title>翻訳およびローカライズのキャッシュを使う</title>
             
 
             <para>

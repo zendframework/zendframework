@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.mvc"><info><title>Zend_Navigation_Page_Mvc</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.mvc"><title>Zend_Navigation_Page_Mvc</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         internes à la page.
     </para>
 
-    <table xml:id="zend.navigation.pages.mvc.options"><info><title>Options des pages de type MV</title></info>
+    <table xml:id="zend.navigation.pages.mvc.options"><title>Options des pages de type MV</title>
         
         <tgroup cols="4">
             <thead>
@@ -89,7 +89,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.navigation.pages.mvc.example.getHref"><info><title>getHref() génères les URI de la page</title></info>
+    <example xml:id="zend.navigation.pages.mvc.example.getHref"><title>getHref() génères les URI de la page</title>
         
 
         <para>
@@ -122,7 +122,7 @@ $page = new Zend_Navigation_Page_Mvc(array(
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.navigation.pages.mvc.example.isActive"><info><title>isActive() détermine si la page est active</title></info>
+    <example xml:id="zend.navigation.pages.mvc.example.isActive"><title>isActive() détermine si la page est active</title>
         
 
         <para>
@@ -184,7 +184,7 @@ $page->isActive(); // retourne false
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.navigation.pages.mvc.example.routes"><info><title>Utiliser les routes</title></info>
+    <example xml:id="zend.navigation.pages.mvc.example.routes"><title>Utiliser les routes</title>
         
 
         <para>

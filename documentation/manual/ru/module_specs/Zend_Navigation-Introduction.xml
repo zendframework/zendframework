@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><info><title>Введение</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><title>Введение</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         качестве модели в других целях, связанных с навигацией.
     </para>
 
-    <section xml:id="zend.navigation.introduction.concepts"><info><title>Страницы и контейнеры</title></info>
+    <section xml:id="zend.navigation.introduction.concepts"><title>Страницы и контейнеры</title>
         
 
         <para>
@@ -20,7 +20,7 @@
             <classname>Zend_Navigation</classname>:
         </para>
 
-        <section xml:id="zend.navigation.introduction.pages"><info><title>Страницы</title></info>
+        <section xml:id="zend.navigation.introduction.pages"><title>Страницы</title>
             
             <para>
                 Страница (<classname>Zend_Navigation_Page</classname>)
@@ -39,7 +39,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.navigation.introduction.containers"><info><title>Контейнеры</title></info>
+        <section xml:id="zend.navigation.introduction.containers"><title>Контейнеры</title>
             
             <para>
                 Контейнер (<classname>Zend_Navigation_Container</classname>)
@@ -70,7 +70,7 @@
         </section>
     </section>
 
-    <section xml:id="zend.navigation.introduction.separation"><info><title>Разделение данных (модели) и отображения (вида)</title></info>
+    <section xml:id="zend.navigation.introduction.separation"><title>Разделение данных (модели) и отображения (вида)</title>
         
 
         <para>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>HTML e-mail</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><title>HTML e-mail</title>
     
     <para>
         Na poslanie e-mailu v HTML formáte je potrebné vytvoriť telo e-mailu pomocou metódy <code>setBodyHTML()</code>
         na miesto metódy <code>setBodyText()</code>. Obsah bude automaticky označený ako <code>text/html</code>.
         Ak sa vytvorí HTML a aj textová verzia e-mailu výsledný e-mail bude typu multipart/alternative:
     </para>
-    <example><info><title>Vytvorenie a poslanie HTML e-mailu</title></info>
+    <example><title>Vytvorenie a poslanie HTML e-mailu</title>
         
         <programlisting role="php"><![CDATA[
 <?php

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron"><info><title>Zend_Service_StrikeIron</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron"><title>Zend_Service_StrikeIron</title>
     
 
     <para>
@@ -19,7 +19,7 @@
         </itemizedlist>
     </para>
 
-    <section xml:id="zend.service.strikeiron.overview"><info><title>概要</title></info>
+    <section xml:id="zend.service.strikeiron.overview"><title>概要</title>
         
 
         <para>
@@ -96,7 +96,7 @@
 
     </section>
 
-    <section xml:id="zend.service.strikeiron.registering"><info><title>StrikeIron への登録</title></info>
+    <section xml:id="zend.service.strikeiron.registering"><title>StrikeIron への登録</title>
       
       <para>
         <classname>Zend_Service_StrikeIron</classname> を使用するには、まず
@@ -123,7 +123,7 @@
       </para>
     </section>
 
-    <section xml:id="zend.service.strikeiron.getting-started"><info><title>では、はじめましょう</title></info>
+    <section xml:id="zend.service.strikeiron.getting-started"><title>では、はじめましょう</title>
       
       <para>
         StrikeIron のアカウントを
@@ -185,7 +185,7 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
       </para>
     </section>
 
-    <section xml:id="zend.service.strikeiron.making-first-query"><info><title>はじめてのクエリ</title></info>
+    <section xml:id="zend.service.strikeiron.making-first-query"><title>はじめてのクエリ</title>
       
 
       <para>
@@ -233,7 +233,7 @@ echo $rateInfo->GST;
       </para>
     </section>
 
-    <section xml:id="zend.service.strikeiron.examining-results"><info><title>結果の吟味</title></info>
+    <section xml:id="zend.service.strikeiron.examining-results"><title>結果の吟味</title>
       
       <para>
         StrikeIron サービスについて学習したりデバッグしたりする際には、
@@ -308,7 +308,7 @@ Zend_Service_StrikeIron_Decorator Object
       </para>
     </section>
 
-    <section xml:id="zend.service.strikeiron.handling-errors"><info><title>エラー処理</title></info>
+    <section xml:id="zend.service.strikeiron.handling-errors"><title>エラー処理</title>
       
       <para>
         先ほどの例はあまりにも無邪気すぎるところがありました。
@@ -365,7 +365,7 @@ try {
       <para><!-- included for whitespace --></para>
     </section>
 
-    <section xml:id="zend.service.strikeiron.checking-subscription"><info><title>購入内容の確認</title></info>
+    <section xml:id="zend.service.strikeiron.checking-subscription"><title>購入内容の確認</title>
       
       <para>
         StrikeIron にはさまざまなサービスがあります。

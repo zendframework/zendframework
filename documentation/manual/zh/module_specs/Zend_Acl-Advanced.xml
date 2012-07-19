@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>高级用法</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><title>高级用法</title>
 
     
 
-    <section xml:id="zend.acl.advanced.storing"><info><title>保存 ACL 数据确保持久性</title></info>
+    <section xml:id="zend.acl.advanced.storing"><title>保存 ACL 数据确保持久性</title>
 
         
 
@@ -17,7 +17,7 @@
 
     </section>
 
-    <section xml:id="zend.acl.advanced.assertions"><info><title>使用声明(Assert)来编写条件性的 ACL 规则</title></info>
+    <section xml:id="zend.acl.advanced.assertions"><title>使用声明(Assert)来编写条件性的 ACL 规则</title>
 
         
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>Aides de vue</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><title>Aides de vue</title>
     
 
     <para>
@@ -19,7 +19,7 @@
         méthode, nommée comme l'aide avec la notationCamel : <methodname>fooBar()</methodname>.
     </para>
 
-    <note><info><title>Surveillez la casse</title></info>
+    <note><title>Surveillez la casse</title>
         
 
         <para>
@@ -38,7 +38,7 @@
         futurs à <code>$this-&gt;nomAide()</code>.
     </para>
 
-    <section xml:id="zend.view.helpers.initial"><info><title>Aides initiales</title></info>
+    <section xml:id="zend.view.helpers.initial"><title>Aides initiales</title>
         
 
         <para>
@@ -400,7 +400,7 @@ array('us' => 'Etats-Unis', 'fr' => 'France', 'de' => 'Allemagne').
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translator.xml"/>
     </section>
 
-    <section xml:id="zend.view.helpers.paths"><info><title>Chemin des aides</title></info>
+    <section xml:id="zend.view.helpers.paths"><title>Chemin des aides</title>
         
 
         <para>
@@ -450,7 +450,7 @@ $view->addHelperPath('/autre/chemin/vers/des/aides',
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.view.helpers.custom"><info><title>Écrire des aides personnalisées</title></info>
+    <section xml:id="zend.view.helpers.custom"><title>Écrire des aides personnalisées</title>
         
 
         <para>
@@ -589,7 +589,7 @@ class Ma_View_Helper_ScriptPath
         </para>
     </section>
 
-    <section xml:id="zend.view.helpers.registering-concrete"><info><title>Registering Concrete Helpers</title></info>
+    <section xml:id="zend.view.helpers.registering-concrete"><title>Registering Concrete Helpers</title>
         
 
         <para>
@@ -611,7 +611,7 @@ $view->registerHelper($helper, 'foo');
             this and inject itself into the helper on registration.
         </para>
 
-        <note><info><title>Helper name should match a method</title></info>
+        <note><title>Helper name should match a method</title>
             
 
             <para>

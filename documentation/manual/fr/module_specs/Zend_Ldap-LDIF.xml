@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.ldif"><info><title>Serialiser des données LDAP depuis/vers LDIF</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.ldif"><title>Serialiser des données LDAP depuis/vers LDIF</title>
     
 
-    <section xml:id="zend.ldap.ldif.encode"><info><title>Serialiser une entrée LDAP vers LDIF</title></info>
+    <section xml:id="zend.ldap.ldif.encode"><title>Serialiser une entrée LDAP vers LDIF</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -64,7 +64,7 @@ title;lang-en: Sales, Director
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.ldap.ldif.decode"><info><title>Desérialiser une chaine LDIF dans une entrée LDAP</title></info>
+    <section xml:id="zend.ldap.ldif.decode"><title>Desérialiser une chaine LDIF dans une entrée LDAP</title>
         
 
         <programlisting language="php"><![CDATA[

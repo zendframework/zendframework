@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>Работа с отдельным сообщением ленты Atom</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><title>Работа с отдельным сообщением ленты Atom</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         "анонимная" лента, содержащая данное сообщение.
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><info><title>Чтение отдельного сообщения ленты Atom</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><title>Чтение отдельного сообщения ленты Atom</title>
         
         <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
@@ -33,7 +33,7 @@ $entry = $feed->current();
         только элемент <code>&lt;entry&gt;</code>:
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><info><title>Непосредственное использование объекта сообщения Atom</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><title>Непосредственное использование объекта сообщения Atom</title>
         
         <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');

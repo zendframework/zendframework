@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.introduction"><title>導入</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         <acronym>LDAP</acronym> ディレクトリ内のエントリの検索や変更には対応していません。
     </para>
 
-    <section xml:id="zend.ldap.introduction.theory-of-operations"><info><title>動作原理</title></info>
+    <section xml:id="zend.ldap.introduction.theory-of-operations"><title>動作原理</title>
         
 
         <para>
@@ -96,7 +96,7 @@ echo "$acctname\n";
             これはただ単に、このクラスに現在存在するコードの例をできるだけ多く見せたいからです。
         </para>
 
-        <section xml:id="zend.ldap.introduction.theory-of-operations.automatic-username-canonicalization"><info><title>バインド時のユーザ名自動正規化</title></info>
+        <section xml:id="zend.ldap.introduction.theory-of-operations.automatic-username-canonicalization"><title>バインド時のユーザ名自動正規化</title>
             
 
             <para>
@@ -148,7 +148,7 @@ echo "$acctname\n";
             </para>
         </section>
 
-        <section xml:id="zend.ldap.introduction.theory-of-operations.account-name-canonicalization"><info><title>アカウント名の正規化</title></info>
+        <section xml:id="zend.ldap.introduction.theory-of-operations.account-name-canonicalization"><title>アカウント名の正規化</title>
             
 
             <para>
@@ -162,7 +162,7 @@ echo "$acctname\n";
                 このオプションの値は、次のいずれかとなります:
             </para>
 
-            <table xml:id="zend.ldap.using.theory-of-operation.account-name-canonicalization.table"><info><title>accountCanonicalFormのオプション</title></info>
+            <table xml:id="zend.ldap.using.theory-of-operation.account-name-canonicalization.table"><title>accountCanonicalFormのオプション</title>
                 
                 <tgroup cols="3">
                     <thead>
@@ -227,7 +227,7 @@ echo "$acctname\n";
             </para>
         </section>
 
-        <section xml:id="zend.ldap.introduction.theory-of-operations.multi-domain-failover"><info><title>複数ドメインの認証とフェイルオーバー</title></info>
+        <section xml:id="zend.ldap.introduction.theory-of-operations.multi-domain-failover"><title>複数ドメインの認証とフェイルオーバー</title>
             
 
             <para>

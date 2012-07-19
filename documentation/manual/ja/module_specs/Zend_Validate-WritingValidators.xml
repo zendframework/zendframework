@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><info><title>バリデータの書き方</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><title>バリデータの書き方</title>
 
     
 
@@ -49,7 +49,7 @@
         といった原因で入力値が正しいのかどうかが判断できない場合が考えられます。
     </para>
 
-    <example xml:id="zend.validate.writing_validators.example.simple"><info><title>単純なバリデーションクラスの作成</title></info>
+    <example xml:id="zend.validate.writing_validators.example.simple"><title>単純なバリデーションクラスの作成</title>
 
         
 
@@ -93,7 +93,7 @@ class MyValid_Float extends Zend_Validate_Abstract
 
     </example>
 
-    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><info><title>依存条件を伴うバリデーションクラスの作成</title></info>
+    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><title>依存条件を伴うバリデーションクラスの作成</title>
 
         
 
@@ -186,7 +186,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 
     </example>
 
-    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><info><title>個々に独立した条件による検証を行い、失敗時に複数の原因を返す</title></info>
+    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><title>個々に独立した条件による検証を行い、失敗時に複数の原因を返す</title>
 
         
 

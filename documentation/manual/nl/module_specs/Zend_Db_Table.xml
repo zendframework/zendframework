@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table"><info><title>Zend_Db_Table</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table"><title>Zend_Db_Table</title>
 
     
 
-    <section xml:id="zend.db.table.introduction"><info><title>Inleiding</title></info>
+    <section xml:id="zend.db.table.introduction"><title>Inleiding</title>
 
         
 
@@ -16,7 +16,7 @@
 
     </section>
 
-    <section xml:id="zend.db.table.getting-started"><info><title>Om te beginnen</title></info>
+    <section xml:id="zend.db.table.getting-started"><title>Om te beginnen</title>
 
         
 
@@ -63,7 +63,7 @@ $table = new RoundTable();
 
     </section>
 
-    <section xml:id="zend.db.table.name-and-key"><info><title>Tabelnaam en Primaire Key</title></info>
+    <section xml:id="zend.db.table.name-and-key"><title>Tabelnaam en Primaire Key</title>
 
         
 
@@ -128,7 +128,7 @@ class ClassName extends Zend_Db_Table
 
     </section>
 
-    <section xml:id="zend.db.table.insert"><info><title>Rijen invoegen</title></info>
+    <section xml:id="zend.db.table.insert"><title>Rijen invoegen</title>
 
         
 
@@ -164,7 +164,7 @@ $id = $table->insert($data);
 
     </section>
 
-    <section xml:id="zend.db.table.udpate"><info><title>Rijen updaten</title></info>
+    <section xml:id="zend.db.table.udpate"><title>Rijen updaten</title>
 
         
 
@@ -206,7 +206,7 @@ $rows_affected = $table->update($set, $where);
 
     </section>
 
-    <section xml:id="zend.db.table.delete"><info><title>Rijen verwijderen</title></info>
+    <section xml:id="zend.db.table.delete"><title>Rijen verwijderen</title>
 
         
 
@@ -242,7 +242,7 @@ $rows_affected = $table->delete($where);
 
     </section>
 
-    <section xml:id="zend.db.table.findbykey"><info><title>Rijen vinden per primaire key</title></info>
+    <section xml:id="zend.db.table.findbykey"><title>Rijen vinden per primaire key</title>
 
         
 
@@ -269,7 +269,7 @@ $rowset = $table->find(array(1, 2, 3));
 
     </section>
 
-    <section xml:id="zend.db.table.fetchonerow"><info><title>Eén enkele rij ophalen</title></info>
+    <section xml:id="zend.db.table.fetchonerow"><title>Eén enkele rij ophalen</title>
 
         
 
@@ -312,7 +312,7 @@ $row = $table->fetchRow($where, $order);
 
     </section>
 
-    <section xml:id="zend.db.table.fetchmultiple"><info><title>Meerdere rijen ophalen</title></info>
+    <section xml:id="zend.db.table.fetchmultiple"><title>Meerdere rijen ophalen</title>
 
         
 
@@ -353,7 +353,7 @@ $rowset = $table->fetchRow($where, $order, $count, $offset);
 
     </section>
 
-    <section xml:id="zend.db.table.domain-logic"><info><title>Domein Logica Invoegen</title></info>
+    <section xml:id="zend.db.table.domain-logic"><title>Domein Logica Invoegen</title>
 
         
 

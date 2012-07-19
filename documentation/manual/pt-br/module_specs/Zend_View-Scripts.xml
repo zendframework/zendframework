@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>Scripts de Visualização</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><title>Scripts de Visualização</title>
     
 
     <para>
@@ -48,7 +48,7 @@
 <?php endif;?>
 ]]></programlisting>
 
-    <section xml:id="zend.view.scripts.escaping"><info><title>Escapando a Saída</title></info>
+    <section xml:id="zend.view.scripts.escaping"><title>Escapando a Saída</title>
         
 
         <para>
@@ -104,7 +104,7 @@ echo $view->render(...);
         </para>
     </section>
 
-    <section xml:id="zend.view.scripts.templates"><info><title>Usando Sistemas de Template Alternativos</title></info>
+    <section xml:id="zend.view.scripts.templates"><title>Usando Sistemas de Template Alternativos</title>
         
 
         <para>
@@ -116,7 +116,7 @@ echo $view->render(...);
             <classname>Zend_View_Interface</classname>.
         </para>
 
-        <section xml:id="zend.view.scripts.templates.scripts"><info><title>Template Systems Using View Scripts</title></info>
+        <section xml:id="zend.view.scripts.templates.scripts"><title>Template Systems Using View Scripts</title>
             
 
             <para>
@@ -174,7 +174,7 @@ if ($this->books) {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.view.scripts.templates.interface"><info><title>Template Systems Using Zend_View_Interface</title></info>
+        <section xml:id="zend.view.scripts.templates.interface"><title>Template Systems Using Zend_View_Interface</title>
             
 
             <para>

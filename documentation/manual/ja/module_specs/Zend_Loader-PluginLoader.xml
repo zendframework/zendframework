@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.pluginloader"><info><title>プラグインのロード</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.pluginloader"><title>プラグインのロード</title>
     
 
     <para>
@@ -22,7 +22,7 @@
         そして、事前に登録されているプラグインを上書きできるようになります。
     </para>
 
-    <section xml:id="zend.loader.pluginloader.usage"><info><title>基本的な使用例</title></info>
+    <section xml:id="zend.loader.pluginloader.usage"><title>基本的な使用例</title>
         
 
         <para>
@@ -95,7 +95,7 @@ $formSubmitClass = $loader->load('FormSubmit'); // 'Bar_View_Helper_FormSubmit'
             </para>
         </note>
 
-        <note><info><title>インスタンス作成時のパスの定義</title></info>
+        <note><title>インスタンス作成時のパスの定義</title>
             
 
             <para>
@@ -133,7 +133,7 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         </para>
     </section>
 
-    <section xml:id="zend.loader.pluginloader.paths"><info><title>プラグインのパスの操作</title></info>
+    <section xml:id="zend.loader.pluginloader.paths"><title>プラグインのパスの操作</title>
         
 
         <para>
@@ -169,7 +169,7 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.loader.pluginloader.checks"><info><title>プラグインの確認とクラス名の取得</title></info>
+    <section xml:id="zend.loader.pluginloader.checks"><title>プラグインの確認とクラス名の取得</title>
         
 
         <para>
@@ -192,7 +192,7 @@ if ($loader->isLoaded('Adapter')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.pluginloader.performance"><info><title>プラグインのパフォーマンスの向上</title></info>
+    <section xml:id="zend.loader.pluginloader.performance"><title>プラグインのパフォーマンスの向上</title>
         
 
         <para>
@@ -216,7 +216,7 @@ if ($loader->isLoaded('Adapter')) {
             この方式を使用すると、実運用サーバ上でのパフォーマンスが劇的に向上します。
         </para>
 
-        <example xml:id="zend.loader.pluginloader.performance.example"><info><title>PluginLoader クラスのファイルインクルードキャッシュの使用法</title></info>
+        <example xml:id="zend.loader.pluginloader.performance.example"><title>PluginLoader クラスのファイルインクルードキャッシュの使用法</title>
             
 
             <para>

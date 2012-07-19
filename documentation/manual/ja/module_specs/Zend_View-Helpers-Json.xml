@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.json"><info><title>JSON ヘルパー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.json"><title>JSON ヘルパー</title>
     
 
     <para>
@@ -31,7 +31,7 @@ Content-Type: application/json
 <?php echo $this->json($this->data) ?>
 ]]></programlisting>
 
-    <note><info><title>レイアウトの維持、およびZend_Json_Expr によるエンコードの有効化</title></info>
+    <note><title>レイアウトの維持、およびZend_Json_Expr によるエンコードの有効化</title>
         
 
         <para>

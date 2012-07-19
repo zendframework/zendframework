@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-api"><info><title>クエリ作成用の API</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-api"><title>クエリ作成用の API</title>
     
 
     <para>
@@ -14,7 +14,7 @@ $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
 ]]></programlisting>
     </para>
 
-    <section xml:id="zend.search.lucene.queries.exceptions"><info><title>クエリパーサの例外</title></info>
+    <section xml:id="zend.search.lucene.queries.exceptions"><title>クエリパーサの例外</title>
         
 
         <para>
@@ -64,7 +64,7 @@ try {
 
     </section>
 
-    <section xml:id="zend.search.lucene.queries.term-query"><info><title>単一の単語のクエリ</title></info>
+    <section xml:id="zend.search.lucene.queries.term-query"><title>単一の単語のクエリ</title>
         
         <para>
             ひとつの単語を使用した検索を行うためのものです。
@@ -101,7 +101,7 @@ $hits  = $index->find($query);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.multiterm-query"><info><title>複数の単語のクエリ</title></info>
+    <section xml:id="zend.search.lucene.queries.multiterm-query"><title>複数の単語のクエリ</title>
         
         <para>
             複数の単語の組み合わせによる検索を行うためのものです。
@@ -225,7 +225,7 @@ $hits  = $index->find($query);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.boolean-query"><info><title>Boolean クエリ</title></info>
+    <section xml:id="zend.search.lucene.queries.boolean-query"><title>Boolean クエリ</title>
         
         <para>
             Boolean クエリを使用すると、他のクエリや boolean 演算子を用いたクエリを作成できます。
@@ -363,7 +363,7 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.wildcard"><info><title>ワイルドカードクエリ</title></info>
+    <section xml:id="zend.search.lucene.queries.wildcard"><title>ワイルドカードクエリ</title>
         
         <para>
             ワイルドカードクエリは、指定したパターンに一致する複数の単語を探すためのものです。
@@ -406,7 +406,7 @@ $hits  = $index->find($query);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.fuzzy"><info><title>あいまいクエリ</title></info>
+    <section xml:id="zend.search.lucene.queries.fuzzy"><title>あいまいクエリ</title>
         
         <para>
             あいまいクエリは、指定した単語に似た単語を含むドキュメントを探すためのものです。
@@ -465,7 +465,7 @@ $hits  = $index->find($query);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.phrase-query"><info><title>フレーズクエリ</title></info>
+    <section xml:id="zend.search.lucene.queries.phrase-query"><title>フレーズクエリ</title>
         
         <para>
             熟語による検索を行うためのものです。
@@ -665,7 +665,7 @@ $hits2 = $index->find($query);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.range"><info><title>範囲クエリ</title></info>
+    <section xml:id="zend.search.lucene.queries.range"><title>範囲クエリ</title>
         
         <para>
             <link linkend="zend.search.lucene.query-language.range">範囲クエリ</link>

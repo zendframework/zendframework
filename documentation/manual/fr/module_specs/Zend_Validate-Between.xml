@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.between"><info><title>Between</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.between"><title>Between</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         soit bien comprise entre deux bornes.
     </para>
 
-    <note><info><title>Zend_Validate_Between ne supporte que les nombres</title></info>
+    <note><title>Zend_Validate_Between ne supporte que les nombres</title>
         
 
         <para>
@@ -15,7 +15,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.validate.set.between.options"><info><title>Options gérées par Zend_Validate_Between</title></info>
+    <section xml:id="zend.validate.set.between.options"><title>Options gérées par Zend_Validate_Between</title>
         
 
         <para>
@@ -44,7 +44,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.between.basic"><info><title>Comportement par défaut de Zend_Validate_Between</title></info>
+    <section xml:id="zend.validate.set.between.basic"><title>Comportement par défaut de Zend_Validate_Between</title>
         
 
         <para>
@@ -66,7 +66,7 @@ $result = $valid->isValid($value);
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.between.inclusively"><info><title>Validation exclusive sur les bornes</title></info>
+    <section xml:id="zend.validate.set.between.inclusively"><title>Validation exclusive sur les bornes</title>
         
 
         <para>

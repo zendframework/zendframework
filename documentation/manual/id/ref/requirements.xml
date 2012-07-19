@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>Kebutuhan Zend Framework</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><title>Kebutuhan Zend Framework</title>
 
     
 
@@ -18,7 +18,7 @@
         fungsionalitas dari aplikasi.
     </para>
 
-    <section xml:id="requirements.version"><info><title>Versi PHP</title></info>
+    <section xml:id="requirements.version"><title>Versi PHP</title>
 
         
 
@@ -34,7 +34,7 @@
 
     </section>
 
-    <section xml:id="requirements.extensions"><info><title>PHP Extensions</title></info>
+    <section xml:id="requirements.extensions"><title>PHP Extensions</title>
 
         
 
@@ -56,7 +56,7 @@
             extension tersebut tidak tersedia (meski performansi tidak optimal).
         </para>
 
-        <table frame="all" xml:id="requirements.extensions.table-1"><info><title>Extension PHP yang Digunakan Komponen Zend Framework</title></info>
+        <table frame="all" xml:id="requirements.extensions.table-1"><title>Extension PHP yang Digunakan Komponen Zend Framework</title>
             
             <tgroup cols="3">
                 <!-- <colspec colwidth='1in'/>
@@ -613,7 +613,7 @@
 
     </section>
 
-    <section xml:id="requirements.zendcomponents"><info><title>Komponen Zend Framework</title></info>
+    <section xml:id="requirements.zendcomponents"><title>Komponen Zend Framework</title>
 
         
 
@@ -634,7 +634,7 @@
             kalaupun tidak.
         </para>
 
-        <table frame="all" xml:id="requirements.zendcomponents.table-1"><info><title>Komponen Zend Framework dan extension PHP yang digunakan</title></info>
+        <table frame="all" xml:id="requirements.zendcomponents.table-1"><title>Komponen Zend Framework dan extension PHP yang digunakan</title>
             
             <tgroup cols="4">
                 <!-- <colspec colwidth='3in'/>
@@ -1170,7 +1170,7 @@
 
     </section>
 
-    <section xml:id="requirements.dependencies"><info><title>Kebergantungan Zend Framework</title></info>
+    <section xml:id="requirements.dependencies"><title>Kebergantungan Zend Framework</title>
 
         
 
@@ -1197,7 +1197,7 @@
             </para>
         </note>
 
-        <table frame="all" xml:id="requirements.dependencies.table-1"><info><title>Komponen Zend Framework dan Kebergantungannya Dengan Komponen Lain</title></info>
+        <table frame="all" xml:id="requirements.dependencies.table-1"><title>Komponen Zend Framework dan Kebergantungannya Dengan Komponen Lain</title>
             
             <tgroup cols="3">
                 <colspec colwidth="2in"/>

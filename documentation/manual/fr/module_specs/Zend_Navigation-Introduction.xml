@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><title>Introduction</title>
     
 
     <para>
@@ -11,14 +11,14 @@
         concernant la navigation.
     </para>
 
-    <section xml:id="zend.navigation.introduction.concepts"><info><title>Pages et Conteneurs</title></info>
+    <section xml:id="zend.navigation.introduction.concepts"><title>Pages et Conteneurs</title>
         
 
         <para>
             Deux concepts existent dans <classname>Zend_Navigation</classname>:
         </para>
 
-        <section xml:id="zend.navigation.introduction.pages"><info><title>Pages</title></info>
+        <section xml:id="zend.navigation.introduction.pages"><title>Pages</title>
             
             <para>
                 Une page (<classname>Zend_Navigation_Page</classname>) dans
@@ -35,7 +35,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.navigation.introduction.containers"><info><title>Conteneurs</title></info>
+        <section xml:id="zend.navigation.introduction.containers"><title>Conteneurs</title>
             
             <para>
                 Un conteneur de navigation
@@ -64,7 +64,7 @@
         </section>
     </section>
 
-    <section xml:id="zend.navigation.introduction.separation"><info><title>Séparation des données (modèle) et du rendu (vue)</title></info>
+    <section xml:id="zend.navigation.introduction.separation"><title>Séparation des données (modèle) et du rendu (vue)</title>
         
 
         <para>

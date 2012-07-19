@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Introducción</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><title>Introducción</title>
 
     
 
@@ -8,7 +8,7 @@
         un sencillo mecanismo de encadenar varios filtros que se puedan aplicar
         a un solo dato en un orden definido por el usuario. </para>
 
-    <section xml:id="zend.filter.introduction.definition"><info><title>¿Qué es un filtro?</title></info>
+    <section xml:id="zend.filter.introduction.definition"><title>¿Qué es un filtro?</title>
         
         <para>En el mundo físico, un filtro se suele utilizar para eliminar
             partes no deseadas de lo ingresado, y la vez lo ingresado pasa a
@@ -60,7 +60,7 @@
         contexto de la utilización de <classname> Zend_Filter </classname> , los
         medios para realizar algunas transformaciones en los datos de entrada. </section>
 
-    <section xml:id="zend.filter.introduction.using"><info><title>Uso básico de los filtros</title></info>
+    <section xml:id="zend.filter.introduction.using"><title>Uso básico de los filtros</title>
 
         
 
@@ -81,7 +81,7 @@ echo $htmlEntities->filter('"'); // "
 
     </section>
 
-    <section xml:id="zend.filter.introduction.static"><info><title> Usando el método estático staticFilter()</title></info>
+    <section xml:id="zend.filter.introduction.static"><title> Usando el método estático staticFilter()</title>
 
         
 
@@ -116,7 +116,7 @@ echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
             you to instantiate and run multiple filter and validator classes on
             demand to process sets of input data. See <xref linkend="zend.filter.input"/> . </para>
 
-        <section xml:id="zend.filter.introduction.static.namespaces"><info><title>Namespaces</title></info>
+        <section xml:id="zend.filter.introduction.static.namespaces"><title>Namespaces</title>
 
             
 

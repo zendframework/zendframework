@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>Afficher des informations</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><title>Afficher des informations</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         outils spéciaux, ou environnement de mise au point.
     </para>
 
-    <example xml:id="zend.debug.dumping.example"><info><title>Exemple avec la méthode dump()</title></info>
+    <example xml:id="zend.debug.dumping.example"><title>Exemple avec la méthode dump()</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -43,7 +43,7 @@ Zend_Debug::dump($var, $label = null, $echo = true);
         et est enveloppé entre des balises (X)HTML <command>&lt;pre&gt; et &lt;/pre&gt;</command>.
     </para>
 
-    <tip><info><title>Déboguer avec Zend_Log</title></info>
+    <tip><title>Déboguer avec Zend_Log</title>
         
 
         <para>

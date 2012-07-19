@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>ビュースクリプト</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><title>ビュースクリプト</title>
 
     
 
@@ -50,7 +50,7 @@
 <?php endif;?>
 ]]></programlisting>
 
-    <section xml:id="zend.view.scripts.escaping"><info><title>出力のエスケープ</title></info>
+    <section xml:id="zend.view.scripts.escaping"><title>出力のエスケープ</title>
 
         
 
@@ -109,7 +109,7 @@ echo $view->render(...);
 
     </section>
 
-    <section xml:id="zend.view.scripts.templates"><info><title>別のテンプレートシステムの使用</title></info>
+    <section xml:id="zend.view.scripts.templates"><title>別のテンプレートシステムの使用</title>
         
 
         <para>
@@ -121,7 +121,7 @@ echo $view->render(...);
             <classname>Zend_View_Interface</classname> 実装することによるものです。
         </para>
 
-        <section xml:id="zend.view.scripts.templates.scripts"><info><title>ビュースクリプトを使用したテンプレートシステム</title></info>
+        <section xml:id="zend.view.scripts.templates.scripts"><title>ビュースクリプトを使用したテンプレートシステム</title>
             
 
             <para>
@@ -180,7 +180,7 @@ if ($this->books) {
 
         </section>
 
-        <section xml:id="zend.view.scripts.templates.interface"><info><title>Zend_View_Interface を使用したテンプレート</title></info>
+        <section xml:id="zend.view.scripts.templates.interface"><title>Zend_View_Interface を使用したテンプレート</title>
             
 
             <para>

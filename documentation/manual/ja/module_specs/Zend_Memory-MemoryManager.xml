@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-manager"><info><title>メモリマネージャ</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-manager"><title>メモリマネージャ</title>
     
 
-    <section xml:id="zend.memory.memory-manager.creation"><info><title>メモリマネージャの作成</title></info>
+    <section xml:id="zend.memory.memory-manager.creation"><title>メモリマネージャの作成</title>
 
         
 
@@ -58,7 +58,7 @@ $memoryManager = Zend_Memory::factory('None');
 
     </section>
 
-    <section xml:id="zend.memory.memory-manager.objects-management"><info><title>メモリオブジェクトの管理</title></info>
+    <section xml:id="zend.memory.memory-manager.objects-management"><title>メモリオブジェクトの管理</title>
 
         
 
@@ -67,7 +67,7 @@ $memoryManager = Zend_Memory::factory('None');
             そしてメモリマネージャの挙動を設定する方法を説明します。
         </para>
 
-        <section xml:id="zend.memory.memory-manager.objects-management.movable"><info><title>移動可能なオブジェクトの作成</title></info>
+        <section xml:id="zend.memory.memory-manager.objects-management.movable"><title>移動可能なオブジェクトの作成</title>
 
             
 
@@ -89,7 +89,7 @@ $memObject = $memoryManager->create($data);
 
         </section>
 
-        <section xml:id="zend.memory.memory-manager.objects-management.locked"><info><title>ロックされたオブジェクトの作成</title></info>
+        <section xml:id="zend.memory.memory-manager.objects-management.locked"><title>ロックされたオブジェクトの作成</title>
 
             
 
@@ -110,7 +110,7 @@ $memObject = $memoryManager->createLocked($data);
 
         </section>
 
-        <section xml:id="zend.memory.memory-manager.objects-management.destruction"><info><title>オブジェクトの破棄</title></info>
+        <section xml:id="zend.memory.memory-manager.objects-management.destruction"><title>オブジェクトの破棄</title>
 
             
 
@@ -154,11 +154,11 @@ function foo()
 
     </section>
 
-    <section xml:id="zend.memory.memory-manager.settings"><info><title>メモリオブジェクトの設定</title></info>
+    <section xml:id="zend.memory.memory-manager.settings"><title>メモリオブジェクトの設定</title>
 
         
 
-        <section xml:id="zend.memory.memory-manager.settings.memory-limit"><info><title>メモリの制限</title></info>
+        <section xml:id="zend.memory.memory-manager.settings.memory-limit"><title>メモリの制限</title>
 
             
 
@@ -196,7 +196,7 @@ $memoryManager->setMemoryLimit($newLimit);     // メモリの制限バイト数
 
         </section>
 
-        <section xml:id="zend.memory.memory-manager.settings.min-size"><info><title>MinSize</title></info>
+        <section xml:id="zend.memory.memory-manager.settings.min-size"><title>MinSize</title>
 
             
 

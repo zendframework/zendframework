@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.sending"><info><title>通过SMTP发送邮件</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.sending"><title>通过SMTP发送邮件</title>
     
     <para>
         以SMTP方式发送邮件，<code>Zend_Mail_Transport_Smtp</code>对象需要在send()方法被调用之前创建并注册到<code>Zend_Mail</code>中去。当前脚本程序中所有使用<code>Zend_Mail::send()</code>发送的邮件，都将以SMTP方式传送：
     </para>
-    <example xml:id="zend.mail.sending.example-1"><info><title>通过 SMTP 发送邮件</title></info>
+    <example xml:id="zend.mail.sending.example-1"><title>通过 SMTP 发送邮件</title>
         
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Mail/Transport/Smtp.php';

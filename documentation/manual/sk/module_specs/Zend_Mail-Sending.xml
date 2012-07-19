@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.sending"><info><title>Posielanie cez SMTP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.sending"><title>Posielanie cez SMTP</title>
     
     <para>
         Pre posielanie e-mailov cez SMTP je potrebné vytvoriť <code>Zend_Mail_Transport_Smtp</code>
@@ -7,7 +7,7 @@
         Všetky nasledujúce volania <code>Zend_Mail::send()</code> v skripte budú
         používať SMTP.
     </para>
-    <example><info><title>Posielanie cez SMTP</title></info>
+    <example><title>Posielanie cez SMTP</title>
         
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Mail/Transport/Smtp.php';

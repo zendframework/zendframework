@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>视图脚本</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><title>视图脚本</title>
 
     
 
@@ -40,7 +40,7 @@
 <?php endif; 
     ]]></programlisting>
 
-    <section xml:id="zend.view.scripts.escaping"><info><title>转义输出（Escaping Output）</title></info>
+    <section xml:id="zend.view.scripts.escaping"><title>转义输出（Escaping Output）</title>
 
         
 
@@ -91,14 +91,14 @@ echo $view->render(...);
 
     </section>
 
-    <section xml:id="zend.view.scripts.templates"><info><title>使用模板系统</title></info>
+    <section xml:id="zend.view.scripts.templates"><title>使用模板系统</title>
         
 
         <para>
             尽管许多开发者觉得PHP本身就是一个强大的模板系统，但对模板设计师来说，使用PHP标签过于复杂。Zend_View提供了两套机制来同时满足这两种要求，一种是直接通过通过视图脚本，另一种是实现Zend_View_Interface接口。
         </para>
 
-        <section xml:id="zend.view.scripts.templates.scripts"><info><title>使用View脚本的模板系统</title></info>
+        <section xml:id="zend.view.scripts.templates.scripts"><title>使用View脚本的模板系统</title>
             
 
             <para>
@@ -154,7 +154,7 @@ if ($this->books) {
 
         </section>
 
-        <section xml:id="zend.view.scripts.templates.interface"><info><title>通过Zend_View_Interface接口使用模板系统</title></info>
+        <section xml:id="zend.view.scripts.templates.interface"><title>通过Zend_View_Interface接口使用模板系统</title>
             
 
             <para>

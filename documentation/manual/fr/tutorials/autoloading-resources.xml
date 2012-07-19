@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.resources"><info><title>Auto-chargement de resources</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.resources"><title>Auto-chargement de resources</title>
     
 
     <para>
@@ -94,7 +94,7 @@ $form      = new Foo_Form_Guestbook();
 $guestbook = new Foo_Model_Guestbook();
 ]]></programlisting>
 
-    <note><info><title>Autoload de ressource Module</title></info>
+    <note><title>Autoload de ressource Module</title>
         
 
         <para>

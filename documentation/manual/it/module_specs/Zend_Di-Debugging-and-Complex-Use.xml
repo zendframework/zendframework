@@ -4,10 +4,10 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.di.debugging-and-complex-use-cases">
-    <info><title>Zend\Di Debugging &amp; Casi d'uso complessi</title></info>
+    <title>Zend\Di Debugging &amp; Casi d'uso complessi</title>
 
     <section xml:id="zend.di.zend.di.debugging-and-complex-use-cases.debugging">
-        <info><title>Debugging di un DiC</title></info>
+        <title>Debugging di un DiC</title>
 
         <para>
             E' possibile eseguire un dump delle informazioni contenute dentro
@@ -38,10 +38,10 @@
     </section>
 
     <section xml:id="zend.di.zend.di.debugging-and-complex-use-cases.complex-use-cases">
-        <info><title>Casi d'uso complessi</title></info>
+        <title>Casi d'uso complessi</title>
 
         <section xml:id="zend.di.zend.di.debugging-and-complex-use-cases.complex-use-cases.interface-injection">
-            <info><title>Interface Injection (Inziezione delle interfacce)</title></info>
+            <title>Interface Injection (Inziezione delle interfacce)</title>
 
             <programlisting language="php"><![CDATA[
 namespace Foo\Bar {
@@ -71,7 +71,7 @@ namespace {
 
 
         <section xml:id="zend.di.zend.di.debugging-and-complex-use-cases.complex-use-cases.setter-injection-with-class-definition">
-            <info><title>Iniezione di un Setter con il Class Definition</title></info>
+            <title>Iniezione di un Setter con il Class Definition</title>
 
             <programlisting language="php"><![CDATA[
 namespace Foo\Bar {
@@ -104,7 +104,7 @@ namespace {
 
 
         <section xml:id="zend.di.zend.di.debugging-and-complex-use-cases.complex-use-cases.multiple-injections">
-            <info><title>Multiple iniezioni su un singolo punto</title></info>
+            <title>Multiple iniezioni su un singolo punto</title>
 
 
             <programlisting language="php"><![CDATA[

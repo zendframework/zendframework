@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.drawing"><info><title>Dessiner</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.drawing"><title>Dessiner</title>
     
 
-    <section xml:id="zend.pdf.drawing.geometry"><info><title>Géométrie</title></info>
+    <section xml:id="zend.pdf.drawing.geometry"><title>Géométrie</title>
         
 
         <para>
@@ -19,7 +19,7 @@ $height = $pdfPage->getHeight();
 ]]></programlisting></para>
         </section>
 
-        <section xml:id="zend.pdf.drawing.color"><info><title>Couleurs</title></info>
+        <section xml:id="zend.pdf.drawing.color"><title>Couleurs</title>
             
 
         <para>
@@ -57,7 +57,7 @@ $color3 = new Zend_Pdf_Color_Html('forestgreen');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.shape-drawing"><info><title>Dessiner des formes</title></info>
+    <section xml:id="zend.pdf.drawing.shape-drawing"><title>Dessiner des formes</title>
         
 
         <para>
@@ -221,7 +221,7 @@ public function drawEllipse(
 ]]></programlisting></para>
         </section>
 
-        <section xml:id="zend.pdf.drawing.text-drawing"><info><title>Dessiner du texte</title></info>
+        <section xml:id="zend.pdf.drawing.text-drawing"><title>Dessiner du texte</title>
             
 
         <para>
@@ -247,7 +247,7 @@ public function drawEllipse(
 public function drawText($text, $x, $y, $charEncoding = '');
 ]]></programlisting></para>
 
-            <example xml:id="zend.pdf.drawing.text-drawing.example-1"><info><title>Dessiner une ligne dans la page</title></info>
+            <example xml:id="zend.pdf.drawing.text-drawing.example-1"><title>Dessiner une ligne dans la page</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -266,7 +266,7 @@ $pdfPage->drawText('Bonjour le monde!', 72, 720);
             supporté par la fonction <code><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/function.iconv.php">iconv()</link></code> de <acronym>PHP</acronym>:
         </para>
 
-        <example xml:id="zend.pdf.drawing.text-drawing.example-2"><info><title>Dessiner une chaîne UTF-8 sur une page</title></info>
+        <example xml:id="zend.pdf.drawing.text-drawing.example-2"><title>Dessiner une chaîne UTF-8 sur une page</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -281,7 +281,7 @@ $pdfPage->drawText($unicodeString, 72, 720, 'UTF-8');
         </example>
     </section>
 
-    <section xml:id="zend.pdf.drawing.using-fonts"><info><title>Utiliser des polices de caractères</title></info>
+    <section xml:id="zend.pdf.drawing.using-fonts"><title>Utiliser des polices de caractères</title>
         
 
         <para>
@@ -317,7 +317,7 @@ public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
             polices personnalisées.
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-1"><info><title>Créer une police standard</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-1"><title>Créer une police standard</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -405,7 +405,7 @@ $pdfPage->setFont($font, 36);
             ce n'est pas une police TrueType, la méthode lèvera une exception :
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-2"><info><title>Créer une police TrueType</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-2"><title>Créer une police TrueType</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -427,7 +427,7 @@ $pdfPage->setFont($goodDogCoolFont, 36);
             passant l'option 'ne pas inclure' à la méthode de création :
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-3"><info><title>Créer une police TrueType sans l'incorporer dans le document PDF</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-3"><title>Créer une police TrueType sans l'incorporer dans le document PDF</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -463,7 +463,7 @@ $pdfPage->setFont($goodDogCoolFont, 36);
             :
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-4"><info><title>Ne pas lever d'exception pour les polices ne pouvant être incorporées</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-4"><title>Ne pas lever d'exception pour les polices ne pouvant être incorporées</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -489,7 +489,7 @@ $font =
             pouvez le neutraliser avec une option :
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-5"><info><title>Ne pas compresser une police incorporée</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-5"><title>Ne pas compresser une police incorporée</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -506,7 +506,7 @@ $font =
             employant l'opérateur binaire OR :
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-6"><info><title>Combiner les options de polices incorporées</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-6"><title>Combiner les options de polices incorporées</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -520,7 +520,7 @@ $font = Zend_Pdf_Font::fontWithPath(
         </example>
     </section>
 
-    <section xml:id="zend.pdf.drawing.standard-fonts-limitations"><info><title>Limitations des polices standard PDF</title></info>
+    <section xml:id="zend.pdf.drawing.standard-fonts-limitations"><title>Limitations des polices standard PDF</title>
         
 
         <para>
@@ -542,7 +542,7 @@ $font = Zend_Pdf_Font::fontWithPath(
             tracés réellement.
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-7"><info><title>Combiner les options de polices embarqués</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-7"><title>Combiner les options de polices embarqués</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -556,7 +556,7 @@ $pdfPage->setFont($font, 36)
         </example>
     </section>
 
-    <section xml:id="zend.pdf.drawing.extracting-fonts"><info><title>Extraction des polices</title></info>
+    <section xml:id="zend.pdf.drawing.extracting-fonts"><title>Extraction des polices</title>
         
 
         <para>
@@ -576,7 +576,7 @@ $pdfPage->setFont($font, 36)
             l'intérieur d'un document ou d'une page :
         </para>
 
-        <example xml:id="zend.pdf.drawing.extracting-fonts.example-1"><info><title>Extraction de polices à partir d'un document chargé</title></info>
+        <example xml:id="zend.pdf.drawing.extracting-fonts.example-1"><title>Extraction de polices à partir d'un document chargé</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -605,8 +605,8 @@ $firstPageFonts = $firstPage->extractFonts();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.pdf.drawing.extracting-fonts.example-2"><info><title>Extraction d'une police à partir d'un document chargé en spécifiant le nom de
-            police</title></info>
+        <example xml:id="zend.pdf.drawing.extracting-fonts.example-2"><title>Extraction d'une police à partir d'un document chargé en spécifiant le nom de
+            police</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -681,7 +681,7 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
             </para>
     </section>
 
-    <section xml:id="zend.pdf.drawing.image-drawing"><info><title>Insertion d'images</title></info>
+    <section xml:id="zend.pdf.drawing.image-drawing"><title>Insertion d'images</title>
         
 
         <para>
@@ -710,7 +710,7 @@ public function drawImage(Zend_Pdf_Resource_Image $image, $x1, $y1, $x2, $y2);
             TIFF sont maintenant supportées) :
         </para>
 
-        <example xml:id="zend.pdf.drawing.image-drawing.example-1"><info><title>Insertion d'images</title></info>
+        <example xml:id="zend.pdf.drawing.image-drawing.example-1"><title>Insertion d'images</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -735,7 +735,7 @@ $pdfPage->drawImage($image, 100, 100, 400, 300);
         </para>
     </section>
 
-    <section xml:id="zend.pdf.drawing.line-drawing-style"><info><title>Style de lignes</title></info>
+    <section xml:id="zend.pdf.drawing.line-drawing-style"><title>Style de lignes</title>
         
 
         <para>
@@ -768,7 +768,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
 ]]></programlisting></para>
         </section>
 
-        <section xml:id="zend.pdf.drawing.fill-style"><info><title>Style de remplissage</title></info>
+        <section xml:id="zend.pdf.drawing.fill-style"><title>Style de remplissage</title>
             
 
         <para>
@@ -867,10 +867,10 @@ public function setLineDashingPattern($pattern, $phase = 0);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.pdf.drawing.linear-transformations"><info><title>Transformations linéaires</title></info>
+    <section xml:id="zend.pdf.drawing.linear-transformations"><title>Transformations linéaires</title>
         
 
-        <section xml:id="zend.pdf.drawing.linear-transformations.rotations"><info><title>Rotations</title></info>
+        <section xml:id="zend.pdf.drawing.linear-transformations.rotations"><title>Rotations</title>
             
 
             <para>
@@ -892,7 +892,7 @@ public function rotate($x, $y, $angle);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.pdf.drawing.linear-transformations.scale"><info><title>A partir de Zend Framework 1.8, mise à l'échelle</title></info>
+        <section xml:id="zend.pdf.drawing.linear-transformations.scale"><title>A partir de Zend Framework 1.8, mise à l'échelle</title>
             
 
             <para>
@@ -912,7 +912,7 @@ public function scale($xScale, $yScale);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.pdf.drawing.linear-transformations.translate"><info><title>A partir de Zend Framework 1.8, décalage</title></info>
+        <section xml:id="zend.pdf.drawing.linear-transformations.translate"><title>A partir de Zend Framework 1.8, décalage</title>
             
 
             <para>
@@ -932,7 +932,7 @@ public function translate($xShift, $yShift);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.pdf.drawing.linear-transformations.skew"><info><title>A partir de Zend Framework 1.8, mise en biais</title></info>
+        <section xml:id="zend.pdf.drawing.linear-transformations.skew"><title>A partir de Zend Framework 1.8, mise en biais</title>
             
 
             <para>
@@ -955,7 +955,7 @@ public function skew($x, $y, $xAngle, $yAngle);
         </section>
     </section>
 
-    <section xml:id="zend.pdf.drawing.save-restore"><info><title>Sauvegarder et restaurer l'état graphique</title></info>
+    <section xml:id="zend.pdf.drawing.save-restore"><title>Sauvegarder et restaurer l'état graphique</title>
         
 
         <para>
@@ -990,7 +990,7 @@ public function restoreGS();
 ]]></programlisting></para>
         </section>
 
-        <section xml:id="zend.pdf.drawing.clipping"><info><title>Zone de dessin</title></info>
+        <section xml:id="zend.pdf.drawing.clipping"><title>Zone de dessin</title>
             
 
         <para>
@@ -1072,7 +1072,7 @@ public function clipEllipse(
 ]]></programlisting></para>
         </section>
 
-        <section xml:id="zend.pdf.drawing.styles"><info><title>Styles</title></info>
+        <section xml:id="zend.pdf.drawing.styles"><title>Styles</title>
             
 
         <para>
@@ -1250,7 +1250,7 @@ public function getFontSize();
 ]]></programlisting></para>
         </section>
 
-        <section xml:id="zend.pdf.drawing.alpha"><info><title>Transparence</title></info>
+        <section xml:id="zend.pdf.drawing.alpha"><title>Transparence</title>
             
 
         <para>

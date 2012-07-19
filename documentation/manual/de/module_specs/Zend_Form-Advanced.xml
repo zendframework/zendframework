@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><info><title>Fortgeschrittene Verwendung von Zend_Form</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><title>Fortgeschrittene Verwendung von Zend_Form</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         Funktionalitäten mit Beispielen und Usecases.
     </para>
 
-    <section xml:id="zend.form.advanced.arrayNotation"><info><title>Array Schreibweise</title></info>
+    <section xml:id="zend.form.advanced.arrayNotation"><title>Array Schreibweise</title>
         
 
         <para>
@@ -206,7 +206,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.advanced.multiPage"><info><title>Mehrseitige Formulare</title></info>
+    <section xml:id="zend.form.advanced.multiPage"><title>Mehrseitige Formulare</title>
         
 
         <para>
@@ -222,7 +222,7 @@
             Formular nicht zu bearbeiten bis alle weiteren Unterformulare komplett sind.
         </para>
 
-        <example xml:id="zend.form.advanced.multiPage.registration"><info><title>Beispiel: Anmeldeformular</title></info>
+        <example xml:id="zend.form.advanced.multiPage.registration"><title>Beispiel: Anmeldeformular</title>
             
 
             <para>

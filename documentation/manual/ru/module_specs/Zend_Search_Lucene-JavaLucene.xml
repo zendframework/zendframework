@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>Взаимодействие с Java Lucene<!--Interoperating with Java Lucene--></title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><title>Взаимодействие с Java Lucene<!--Interoperating with Java Lucene--></title>
     
 
-    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>Форматы файлов<!--File Formats--></title></info>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><title>Форматы файлов<!--File Formats--></title>
         
         <para>
         Форматы файлов индекса Zend_Search_Lucene являются совместимыми с Lucene
@@ -22,7 +22,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>Директория для индекса<!--Index Directory--></title></info>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><title>Директория для индекса<!--Index Directory--></title>
         
 
         <para>
@@ -64,7 +64,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>Исходный код Java<!--Java Source Code--></title></info>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><title>Исходный код Java<!--Java Source Code--></title>
         
         <para>
             Приведенный ниже листинг программы на Java представляет собой пример

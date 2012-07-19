@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title>Importer des flux</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><title>Importer des flux</title>
     
 
     <para>
@@ -36,7 +36,7 @@ $fluxAPartirDePHP = Zend_Feed::importString($chaineFlux);
         illisible ou malformé.
     </para>
 
-    <section xml:id="zend.feed.importing.custom"><info><title>Flux personnalisés</title></info>
+    <section xml:id="zend.feed.importing.custom"><title>Flux personnalisés</title>
         
 
         <para>
@@ -49,7 +49,7 @@ $fluxAPartirDePHP = Zend_Feed::importString($chaineFlux);
             <classname>Zend_Feed_Builder_Interface</classname>.
         </para>
 
-        <section xml:id="zend.feed.importing.custom.importarray"><info><title>Importer un tableau personnalisé</title></info>
+        <section xml:id="zend.feed.importing.custom.importarray"><title>Importer un tableau personnalisé</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -293,7 +293,7 @@ array(
 
         </section>
 
-        <section xml:id="zend.feed.importing.custom.importbuilder"><info><title>Importer une source de données personnalisée</title></info>
+        <section xml:id="zend.feed.importing.custom.importbuilder"><title>Importer une source de données personnalisée</title>
             
 
             <para>
@@ -342,7 +342,7 @@ $rssFeedFromArray =
 
         </section>
 
-        <section xml:id="zend.feed.importing.custom.dump"><info><title>Décharger le contenu d'un flux</title></info>
+        <section xml:id="zend.feed.importing.custom.dump"><title>Décharger le contenu d'un flux</title>
             
 
             <para>

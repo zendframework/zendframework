@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><info><title>HeadTitle 助手 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><title>HeadTitle 助手 </title>
     
 
     <para>
@@ -10,7 +10,7 @@
         <code>HeadTitle</code> 助手是 <link linkend="zend.view.helpers.initial.placeholder"> 占位符助手 </link> 的一个具体实现。 它覆盖 <code>toString()</code> 方法来确保生成 <code>&lt;title&gt;</code> 元素，并添加一个 <code>headTitle()</code> 方法来快速并容易地设置和标题元素的聚合。那个方法的 signature 是 <code>headTitle($title, $setType = 'APPEND')</code>，缺省地是追加到堆栈（聚合标题元素）的值，但你也可以指定 'PREPEND' ( 放栈顶 ) 或 'SET' ( 重写堆栈 )。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><info><title>HeadTitle 助手基本用法 </title></info>
+    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><title>HeadTitle 助手基本用法 </title>
         
 
         <para>

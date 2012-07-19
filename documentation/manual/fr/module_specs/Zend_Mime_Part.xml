@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><info><title>Zend_Mime_Part</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><title>Zend_Mime_Part</title>
     
 
-    <section xml:id="zend.mime.part.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.mime.part.introduction"><title>Introduction</title>
         
 
         <para>
@@ -15,7 +15,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.part.instantiation"><info><title>Instanciation</title></info>
+    <section xml:id="zend.mime.part.instantiation"><title>Instanciation</title>
         
 
         <para>
@@ -40,7 +40,7 @@ public $language;
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mime.part.methods"><info><title>Méthodes pour retourner la partie du message en une chaîne de caractères</title></info>
+    <section xml:id="zend.mime.part.methods"><title>Méthodes pour retourner la partie du message en une chaîne de caractères</title>
         
 
         <para>

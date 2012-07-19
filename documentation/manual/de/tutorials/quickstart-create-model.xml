@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-model"><info><title>Ein Modell und eine Datenbank Tabelle erstellen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-model"><title>Ein Modell und eine Datenbank Tabelle erstellen</title>
     
 
     <para>
@@ -730,7 +730,7 @@ Guestbook Einträge: <br />
 </dl>
 ]]></programlisting>
 
-    <note><info><title>Checkpoint</title></info>
+    <note><title>Checkpoint</title>
         
 
         <para>
@@ -743,7 +743,7 @@ Guestbook Einträge: <br />
         </para>
     </note>
 
-    <note><info><title>Das Datenlade Skript verwenden</title></info>
+    <note><title>Das Datenlade Skript verwenden</title>
         
 
         <para>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.client"><info><title>Zend_XmlRpc_Client</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.client"><title>Zend_XmlRpc_Client</title>
     
 
-    <section xml:id="zend.xmlrpc.client.introduction"><info><title>Введение</title></info>
+    <section xml:id="zend.xmlrpc.client.introduction"><title>Введение</title>
         
 
         <para>
@@ -16,7 +16,7 @@
     </section>
 
 
-    <section xml:id="zend.xmlrpc.client.method-calls"><info><title>Вызов методов</title></info>
+    <section xml:id="zend.xmlrpc.client.method-calls"><title>Вызов методов</title>
         
 
         <para>
@@ -34,7 +34,7 @@
             компонент <classname>Zend_XmlRpc</classname>.
         </para>
 
-        <example xml:id="zend.xmlrpc.client.method-calls.example-1"><info><title>Вызов метода XML-RPC</title></info>
+        <example xml:id="zend.xmlrpc.client.method-calls.example-1"><title>Вызов метода XML-RPC</title>
             
             <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
@@ -60,7 +60,7 @@ echo $client->call('test.sayHello');
             массива значений для последующей передачи удаленному методу:
         </para>
 
-        <example xml:id="zend.xmlrpc.client.method-calls.example-2"><info><title>Вызов метода XML-RPC с параметрами</title></info>
+        <example xml:id="zend.xmlrpc.client.method-calls.example-2"><title>Вызов метода XML-RPC с параметрами</title>
             
             <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
@@ -91,7 +91,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.value.parameters"><info><title>Типы и их преобразование</title></info>
+    <section xml:id="zend.xmlrpc.value.parameters"><title>Типы и их преобразование</title>
         
         <para>
             Некоторые удаленные методы требуют передачи параметров при вызове.
@@ -104,7 +104,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             <classname>Zend_XmlRpc_Value</classname>).
         </para>
 
-        <section xml:id="zend.xmlrpc.value.parameters.php-native"><info><title>Параметры в "родном" для PHP типе</title></info>
+        <section xml:id="zend.xmlrpc.value.parameters.php-native"><title>Параметры в "родном" для PHP типе</title>
             
             <para>
                 Параметры могут передаваться методу <code>call()</code> как
@@ -116,7 +116,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 согласно следующей таблице:
             </para>
 
-            <table><info><title>Преобразование типов PHP и XML-RPC</title></info>
+            <table><title>Преобразование типов PHP и XML-RPC</title>
                 
                 <tgroup cols="2">
                     <thead>
@@ -158,7 +158,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 </tgroup>
             </table>
 
-            <note><info><title>Какому типу будет соответствовать пустой массив?</title></info>
+            <note><title>Какому типу будет соответствовать пустой массив?</title>
                 
 
                 <para>
@@ -197,7 +197,7 @@ $result = $client->call('foo.bar', array(array()));
 
         </section>
 
-        <section xml:id="zend.xmlrpc.value.parameters.xmlrpc-value"><info><title>Параметры в виде объектов Zend_XmlRpc_Value</title></info>
+        <section xml:id="zend.xmlrpc.value.parameters.xmlrpc-value"><title>Параметры в виде объектов Zend_XmlRpc_Value</title>
             
             <para>
                 Параметры могут также создаваться как экземпляры
@@ -243,7 +243,7 @@ $result = $client->call('foo.bar', array(array()));
                 <classname>Zend_XmlRpc_Value::getXmlRpcValue()</classname>.
             </para>
 
-            <table xml:id="zend.xmlrpc.value.parameters.xmlrpc-value.table-1"><info><title>Объекты Zend_XmlRpc_Value для типов XML-RPC</title></info>
+            <table xml:id="zend.xmlrpc.value.parameters.xmlrpc-value.table-1"><title>Объекты Zend_XmlRpc_Value для типов XML-RPC</title>
                 
                 <tgroup cols="3">
                     <thead>
@@ -298,7 +298,7 @@ $result = $client->call('foo.bar', array(array()));
                 </tgroup>
             </table>
 
-            <note><info><title>Автоматическое преобразование</title></info>
+            <note><title>Автоматическое преобразование</title>
 
                 <para>
                     Когда создается новый объект
@@ -314,7 +314,7 @@ $result = $client->call('foo.bar', array(array()));
         </section>
     </section>
 
-    <section xml:id="zend.xmlrpc.client.requests-and-responses"><info><title>Прокси-объект сервера</title></info>
+    <section xml:id="zend.xmlrpc.client.requests-and-responses"><title>Прокси-объект сервера</title>
         
         <para>
             Другим способом вызова удаленных методов через клиента XML-RPC
@@ -334,7 +334,7 @@ $result = $client->call('foo.bar', array(array()));
             передаваться так же, как и для любых других методов в PHP.
         </para>
 
-        <example xml:id="zend.xmlrpc.client.requests-and-responses.example-1"><info><title>Прокси-объект к пространству имен по умолчанию</title></info>
+        <example xml:id="zend.xmlrpc.client.requests-and-responses.example-1"><title>Прокси-объект к пространству имен по умолчанию</title>
             
             <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
@@ -355,7 +355,7 @@ $hello = $server->test->sayHello(1, 2);
             используется пространство имен <code>test</code>:
         </para>
 
-        <example xml:id="zend.xmlrpc.client.requests-and-responses.example-2"><info><title>Прокси-объект к произвольному пространству имен</title></info>
+        <example xml:id="zend.xmlrpc.client.requests-and-responses.example-2"><title>Прокси-объект к произвольному пространству имен</title>
             
             <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
@@ -378,7 +378,7 @@ $hello = $test->sayHello(1, 2);
     </section>
 
 
-    <section xml:id="zend.xmlrpc.client.error-handling"><info><title>Обработка ошибок</title></info>
+    <section xml:id="zend.xmlrpc.client.error-handling"><title>Обработка ошибок</title>
         
         <para>
             При вызове методов XML-RPC могут могут быть ошибки двух типов: HTTP и
@@ -386,7 +386,7 @@ $hello = $test->sayHello(1, 2);
             позволяя обнаруживать и отлавливать их независимо друг от друга.
         </para>
 
-        <section xml:id="zend.xmlrpc.client.error-handling.http"><info><title>Ошибки HTTP</title></info>
+        <section xml:id="zend.xmlrpc.client.error-handling.http"><title>Ошибки HTTP</title>
             
 
             <para>
@@ -395,7 +395,7 @@ $hello = $test->sayHello(1, 2);
                 исключение <classname>Zend_XmlRpc_Client_HttpException</classname>.
             </para>
 
-            <example xml:id="zend.xmlrpc.client.error-handling.http.example-1"><info><title>Обработка ошибок HTTP</title></info>
+            <example xml:id="zend.xmlrpc.client.error-handling.http.example-1"><title>Обработка ошибок HTTP</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -421,7 +421,7 @@ try {
             </para>
         </section>
 
-        <section xml:id="zend.xmlrpc.client.error-handling.faults"><info><title>Ошибки XML-RPC</title></info>
+        <section xml:id="zend.xmlrpc.client.error-handling.faults"><title>Ошибки XML-RPC</title>
             
 
             <para>
@@ -441,7 +441,7 @@ try {
                возвращенном ответе с сообщением об ошибке.
             </para>
 
-            <example xml:id="zend.xmlrpc.client.error-handling.faults.example-1"><info><title>Обработка ошибок XML-RPC</title></info>
+            <example xml:id="zend.xmlrpc.client.error-handling.faults.example-1"><title>Обработка ошибок XML-RPC</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -481,7 +481,7 @@ try {
 
     </section>
 
-    <section xml:id="zend.xmlrpc.client.introspection"><info><title>Интроспекция сервера</title></info>
+    <section xml:id="zend.xmlrpc.client.introspection"><title>Интроспекция сервера</title>
         
         <para>
             Некоторые XML-RPC сервера поддерживают интроспекцию методов
@@ -498,7 +498,7 @@ try {
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.client.request-to-response"><info><title>От запроса к ответу</title></info>
+    <section xml:id="zend.xmlrpc.client.request-to-response"><title>От запроса к ответу</title>
         
         <para>
             Метод <code>call()</code> экземпляра <classname>Zend_XmlRpc_Client</classname>
@@ -513,7 +513,7 @@ try {
             использования:
         </para>
 
-        <example xml:id="zend.xmlrpc.client.request-to-response.example-1"><info><title>Выполнение запроса</title></info>
+        <example xml:id="zend.xmlrpc.client.request-to-response.example-1"><title>Выполнение запроса</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -539,7 +539,7 @@ $client->doRequest($request);
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.client.http-client"><info><title>HTTP-клиент и тестирование</title></info>
+    <section xml:id="zend.xmlrpc.client.http-client"><title>HTTP-клиент и тестирование</title>
         
 
         <para>

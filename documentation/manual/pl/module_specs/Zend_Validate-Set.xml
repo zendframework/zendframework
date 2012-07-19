@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set"><info><title>Standardowe klasy weryfikatorów</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set"><title>Standardowe klasy weryfikatorów</title>
 
     
 
@@ -10,7 +10,7 @@
         weryfikatorów.
     </para>
 
-    <section xml:id="zend.validate.set.alnum"><info><title>Alnum</title></info>
+    <section xml:id="zend.validate.set.alnum"><title>Alnum</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code>
@@ -19,7 +19,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.alpha"><info><title>Alpha</title></info>
+    <section xml:id="zend.validate.set.alpha"><title>Alpha</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code>
@@ -28,7 +28,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.barcode"><info><title>Barcode</title></info>
+    <section xml:id="zend.validate.set.barcode"><title>Barcode</title>
         
         <para>
             Ten weryfikator jest pomocny przy sprawdzaniu poprawności wartości kodu kreskowego. Obecnie obsługuje standardy
@@ -39,7 +39,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.between"><info><title>Between</title></info>
+    <section xml:id="zend.validate.set.between"><title>Between</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code>
@@ -51,7 +51,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.ccnum"><info><title>Ccnum</title></info>
+    <section xml:id="zend.validate.set.ccnum"><title>Ccnum</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code>
@@ -59,7 +59,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.date"><info><title>Date</title></info>
+    <section xml:id="zend.validate.set.date"><title>Date</title>
         
         <para>
             Zwraca wartość <code>true</code> jeśli wartość <code>$value</code> jest poprawną datą
@@ -71,7 +71,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.digits"><info><title>Digits</title></info>
+    <section xml:id="zend.validate.set.digits"><title>Digits</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> zawiera tylko cyfry.
@@ -82,21 +82,21 @@
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-EmailAddress.xml"/></xi:fallback>
     </xi:include>
 
-    <section xml:id="zend.validate.set.float"><info><title>Float</title></info>
+    <section xml:id="zend.validate.set.float"><title>Float</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> jest wartością zmiennoprzecinkową.
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.greater_than"><info><title>GreaterThan</title></info>
+    <section xml:id="zend.validate.set.greater_than"><title>GreaterThan</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> jest większa od zadanej minimalnej granicznej wartości.
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.hex"><info><title>Hex</title></info>
+    <section xml:id="zend.validate.set.hex"><title>Hex</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> zawiera tylko znaki szesnastkowe.
@@ -107,7 +107,7 @@
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Hostname.xml"/></xi:fallback>
     </xi:include>
 
-    <section xml:id="zend.validate.set.in_array"><info><title>InArray</title></info>
+    <section xml:id="zend.validate.set.in_array"><title>InArray</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy gdy wartość <code>$value</code>
@@ -117,42 +117,42 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.int"><info><title>Int</title></info>
+    <section xml:id="zend.validate.set.int"><title>Int</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy, gdy wartość  <code>$value</code> jest poprawną wartością całkowitą.
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.ip"><info><title>Ip</title></info>
+    <section xml:id="zend.validate.set.ip"><title>Ip</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> jest poprawnym adresem IP.
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.less_than"><info><title>LessThan</title></info>
+    <section xml:id="zend.validate.set.less_than"><title>LessThan</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> jest mniejsza od zadanej maksymalnej granicznej wartości.
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.not_empty"><info><title>NotEmpty</title></info>
+    <section xml:id="zend.validate.set.not_empty"><title>NotEmpty</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> nie jest pustą wartością.
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.regex"><info><title>Regex</title></info>
+    <section xml:id="zend.validate.set.regex"><title>Regex</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> pasuje do zadanego wyrażenia regularnego.
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.string_length"><info><title>StringLength</title></info>
+    <section xml:id="zend.validate.set.string_length"><title>StringLength</title>
         
         <para>
             Zwraca wartość <code>true</code> tylko wtedy gdy długość łańcucha znaków

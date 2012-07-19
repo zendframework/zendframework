@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><title>導入</title>
     
 
     <para>
@@ -12,14 +12,14 @@
         他のナビゲーション関連の目的のひな型の役目を果たすことができます。
     </para>
 
-    <section xml:id="zend.navigation.introduction.concepts"><info><title>ページとコンテナ</title></info>
+    <section xml:id="zend.navigation.introduction.concepts"><title>ページとコンテナ</title>
         
 
         <para>
             <classname>Zend_Navigation</classname>には2つの主要な概念があります:
         </para>
 
-        <section xml:id="zend.navigation.introduction.pages"><info><title>ページ</title></info>
+        <section xml:id="zend.navigation.introduction.pages"><title>ページ</title>
             
 
             <para>
@@ -38,7 +38,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.navigation.introduction.containers"><info><title>コンテナ</title></info>
+        <section xml:id="zend.navigation.introduction.containers"><title>コンテナ</title>
             
 
             <para>
@@ -66,7 +66,7 @@
         </section>
     </section>
 
-    <section xml:id="zend.navigation.introduction.separation"><info><title>データ（モデル）とレンダリング（ビュー）の分離</title></info>
+    <section xml:id="zend.navigation.introduction.separation"><title>データ（モデル）とレンダリング（ビュー）の分離</title>
         
 
         <para>

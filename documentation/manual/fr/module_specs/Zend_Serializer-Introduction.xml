@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.serializer.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.serializer.introduction"><title>Introduction</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         afin de générer des représentations stockables de types php et inversement.
     </para>
 
-    <example xml:id="zend.serializer.introduction.example.dynamic"><info><title>Utiliser <classname>Zend_Serializer</classname></title></info>
+    <example xml:id="zend.serializer.introduction.example.dynamic"><title>Utiliser <classname>Zend_Serializer</classname></title>
         
 
         <para>
@@ -69,7 +69,7 @@ try {
         <methodname>serialize</methodname> ou <methodname>unserialize</methodname>.
     </para>
 
-    <example xml:id="zend.serializer.introduction.example.static.php"><info><title>Utiliser l'interface statique de Zend_Serializer</title></info>
+    <example xml:id="zend.serializer.introduction.example.static.php"><title>Utiliser l'interface statique de Zend_Serializer</title>
         
 
         <para>

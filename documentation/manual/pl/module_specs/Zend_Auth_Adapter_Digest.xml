@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><info><title>Uwierzytelnianie Digest</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><title>Uwierzytelnianie Digest</title>
 
     
 
-    <section xml:id="zend.auth.adapter.digest.introduction"><info><title>Wprowadzenie</title></info>
+    <section xml:id="zend.auth.adapter.digest.introduction"><title>Wprowadzenie</title>
 
         
 
@@ -51,7 +51,7 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 
     </section>
 
-    <section xml:id="zend.auth.adapter.digest.specifics"><info><title>Parametry</title></info>
+    <section xml:id="zend.auth.adapter.digest.specifics"><title>Parametry</title>
 
         
 
@@ -91,7 +91,7 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 
     </section>
 
-    <section xml:id="zend.auth.adapter.digest.identity"><info><title>Tożsamość</title></info>
+    <section xml:id="zend.auth.adapter.digest.identity"><title>Tożsamość</title>
 
         
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.elasticip"><info><title>Zend_Service_Amazon_Ec2: Elastische IP Adressen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.elasticip"><title>Zend_Service_Amazon_Ec2: Elastische IP Adressen</title>
     
 
     <para>
@@ -26,7 +26,7 @@
         eigenen Account verknüpft werden kann.
     </para>
 
-    <example xml:id="zend.service.amazon.ec2.elasticip.allocate"><info><title>Eine neue Elastische IP allokieren</title></info>
+    <example xml:id="zend.service.amazon.ec2.elasticip.allocate"><title>Eine neue Elastische IP allokieren</title>
         
 
         <para>
@@ -46,7 +46,7 @@ print $ip;
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.service.amazon.ec2.elasticip.describe"><info><title>Beschreiben von Verknüpften elastischen IP Adressen</title></info>
+    <example xml:id="zend.service.amazon.ec2.elasticip.describe"><title>Beschreiben von Verknüpften elastischen IP Adressen</title>
         
 
         <para>
@@ -74,7 +74,7 @@ $ip = $ec2_eip->describe('ip1');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.service.amazon.ec2.elasticip.release"><info><title>Freigeben einer elastischen IP</title></info>
+    <example xml:id="zend.service.amazon.ec2.elasticip.release"><title>Freigeben einer elastischen IP</title>
         
 
         <para>
@@ -91,7 +91,7 @@ $ec2_eip->release('ipaddress');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.service.amazon.ec2.elasticip.associate"><info><title>Verknüpft eine elastische IP zu einer Instanz</title></info>
+    <example xml:id="zend.service.amazon.ec2.elasticip.associate"><title>Verknüpft eine elastische IP zu einer Instanz</title>
         
 
         <para>
@@ -109,7 +109,7 @@ $ec2_eip->associate('instance_id', 'ipaddress');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.service.amazon.ec2.elasticip.disassociate"><info><title>Entfernt die Verknüpfung einer elastischen IP von einer Instanz</title></info>
+    <example xml:id="zend.service.amazon.ec2.elasticip.disassociate"><title>Entfernt die Verknüpfung einer elastischen IP von einer Instanz</title>
         
 
         <para>

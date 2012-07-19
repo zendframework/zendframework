@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.securitygroups"><info><title>Zend_Service_Amazon_Ec2: Sicherheitsgruppen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.securitygroups"><title>Zend_Service_Amazon_Ec2: Sicherheitsgruppen</title>
     
 
     <para>
@@ -13,15 +13,15 @@
         für alle laufenden Instanzen, und Instanzen die in Zukunft gestartet werden, erzwungen.
     </para>
 
-    <note><info><title>Maximale Sicherheitsgruppen</title></info>
+    <note><title>Maximale Sicherheitsgruppen</title>
         
         <para>Man kann bis zu 100 Sicherheitsgruppen erstellen.</para>
     </note>
 
-    <section xml:id="zend.service.amazon.ec2.securitygroups.maintenance"><info><title>Wartung von Sicherheitsgruppen</title></info>
+    <section xml:id="zend.service.amazon.ec2.securitygroups.maintenance"><title>Wartung von Sicherheitsgruppen</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.create"><info><title>Eine neue Sicherheitsgruppe erstellen</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.create"><title>Eine neue Sicherheitsgruppe erstellen</title>
             
 
             <para>
@@ -45,7 +45,7 @@ $return = $ec2_sg->create('mygroup', 'my group description');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.describe"><info><title>Eine Sicherheitsgruppe beschreiben</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.describe"><title>Eine Sicherheitsgruppe beschreiben</title>
             
 
             <para>
@@ -73,7 +73,7 @@ $return = $ec2_sg->describe('mygroup');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.delete"><info><title>Eine Sicherheitsgruppe löschen</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.delete"><title>Eine Sicherheitsgruppe löschen</title>
             
 
             <para>
@@ -99,10 +99,10 @@ $return = $ec2_sg->delete('mygroup');
         </example>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.securitygroups.authorize"><info><title>Zugriff authorisieren</title></info>
+    <section xml:id="zend.service.amazon.ec2.securitygroups.authorize"><title>Zugriff authorisieren</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.authorize.ip"><info><title>Authorisierung durch die IP</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.authorize.ip"><title>Authorisierung durch die IP</title>
             
 
             <para>
@@ -140,7 +140,7 @@ $return = $ec2_sg->authorizeIp('mygroup',
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.authorize.group"><info><title>Authorisierung durch die Gruppe</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.authorize.group"><title>Authorisierung durch die Gruppe</title>
             
 
             <para>
@@ -166,10 +166,10 @@ $return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
         </example>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.securitygroups.revoke"><info><title>Zugriff entziehen</title></info>
+    <section xml:id="zend.service.amazon.ec2.securitygroups.revoke"><title>Zugriff entziehen</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.revoke.ip"><info><title>Entziehen durch die IP</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.revoke.ip"><title>Entziehen durch die IP</title>
             
 
             <para>
@@ -209,7 +209,7 @@ $return = $ec2_sg->revokeIp('mygroup',
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.securitygroups.revoke.group"><info><title>Entziehen durch die Gruppe</title></info>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.revoke.group"><title>Entziehen durch die Gruppe</title>
             
 
             <para>

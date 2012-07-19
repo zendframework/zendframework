@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><info><title>Zend_Config_Ini</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><title>Zend_Config_Ini</title>
     
     <para>
         <code>Zend_Config_Ini</code> pozwala programistom przechowywać dane
@@ -13,7 +13,7 @@
         za nazwą sekcji znaku dwukropka (<code>:</code>)  oraz nazwy sekcji,
         z której dane mają być dziedziczone.
     </para>
-    <note><info><title>parse_ini_file</title></info>
+    <note><title>parse_ini_file</title>
         
         <para>
             <code>Zend_Config_Ini</code> wykorzystuje funkcję PHP <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/parse_ini_file"><code>parse_ini_file()</code></link>.
@@ -23,7 +23,7 @@
             <code>yes</code>, <code>no</code>, oraz <code>null</code>.
         </para>
     </note>
-    <note><info><title>Separator kluczy</title></info>
+    <note><title>Separator kluczy</title>
         
         <para>
             Domyślnie separatorem kluczy jest znak kropki (<code>.</code>). Może
@@ -39,7 +39,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
             ]]></programlisting>
         </para>
     </note>
-    <example xml:id="zend.config.adapters.ini.example.using"><info><title>Użycie Zend_Config_Ini</title></info>
+    <example xml:id="zend.config.adapters.ini.example.using"><title>Użycie Zend_Config_Ini</title>
         
         <para>
             Ten przykład pokazuje podstawowe użycie klasy <code>Zend_Config_Ini</code>
@@ -87,7 +87,7 @@ echo $config->database->params->dbname; // wyświetla "dbname"
         ]]></programlisting>
     </example>
     <note>
-    <table xml:id="zend.config.adapters.ini.table"><info><title>Parametry konstruktora Zend_Config_Ini</title></info>
+    <table xml:id="zend.config.adapters.ini.table"><title>Parametry konstruktora Zend_Config_Ini</title>
         
         <tgroup cols="2">
             <thead>

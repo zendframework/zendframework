@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><info><title>过滤器</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><title>过滤器</title>
     
 
     <para>
       一个Filter对象阻塞一个消息被写入到日志.
     </para>
 
-    <section xml:id="zend.log.filters.all-writers"><info><title>对所有Writer过滤</title></info>
+    <section xml:id="zend.log.filters.all-writers"><title>对所有Writer过滤</title>
       
 
       <para>
@@ -33,7 +33,7 @@ $logger->emerg('Emergency message');
       </para>
     </section>
 
-    <section xml:id="zend.log.filters.single-writer"><info><title>过滤一个Writer实例</title></info>
+    <section xml:id="zend.log.filters.single-writer"><title>过滤一个Writer实例</title>
       
 
       <para>

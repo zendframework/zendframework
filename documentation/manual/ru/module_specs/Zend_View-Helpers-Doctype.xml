@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><info><title>Помощник Doctype</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><title>Помощник Doctype</title>
     
 
     <para>
@@ -39,7 +39,7 @@
             Placeholder</link>.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><info><title>Использование помощника Doctype</title></info>
+    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><title>Использование помощника Doctype</title>
         
 
         <para>
@@ -64,7 +64,7 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 
     </example>
 
-    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><info><title>Извлечение DOCTYPE</title></info>
+    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><title>Извлечение DOCTYPE</title>
         
 
         <para>

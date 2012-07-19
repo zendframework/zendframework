@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.select"><info><title>Zend_Db_Select</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.select"><title>Zend_Db_Select</title>
 
     
 
-    <section xml:id="zend.db.select.introduction"><info><title>Обзор</title></info>
+    <section xml:id="zend.db.select.introduction"><title>Обзор</title>
 
         
 
@@ -60,7 +60,7 @@
 
     </section>
 
-    <section xml:id="zend.db.select.creating"><info><title>Создание объекта Select</title></info>
+    <section xml:id="zend.db.select.creating"><title>Создание объекта Select</title>
 
         
 
@@ -69,7 +69,7 @@
             метод <code>select()</code> объекта Zend_Db_Adapter_Abstract.
         </para>
 
-        <example xml:id="zend.db.select.creating.example-db"><info><title>Пример использования метода select() адаптера БД</title></info>
+        <example xml:id="zend.db.select.creating.example-db"><title>Пример использования метода select() адаптера БД</title>
 
             
 
@@ -86,7 +86,7 @@ $select = $db->select();
             конструктор, при этом в качестве аргумента указывается адаптер БД.
         </para>
 
-        <example xml:id="zend.db.select.creating.example-new"><info><title>Пример создания нового объекта Select</title></info>
+        <example xml:id="zend.db.select.creating.example-new"><title>Пример создания нового объекта Select</title>
 
             
 
@@ -100,7 +100,7 @@ $select = new Zend_Db_Select($db);
 
     </section>
 
-    <section xml:id="zend.db.select.building"><info><title>Построение запросов Select</title></info>
+    <section xml:id="zend.db.select.building"><title>Построение запросов Select</title>
 
         
 
@@ -111,7 +111,7 @@ $select = new Zend_Db_Select($db);
             WHERE. Для каждого предложения есть свой метод Zend_Db_Select.
         </para>
 
-        <example xml:id="zend.db.select.building.example"><info><title>Пример использования методов для добавления предложений</title></info>
+        <example xml:id="zend.db.select.building.example"><title>Пример использования методов для добавления предложений</title>
 
             
 
@@ -140,7 +140,7 @@ $select->order( ...определение критериев сортировк�
             другой метод непосредственно за ним.
         </para>
 
-        <example xml:id="zend.db.select.building.example-fluent"><info><title>Пример использования fluent interface</title></info>
+        <example xml:id="zend.db.select.building.example-fluent"><title>Пример использования fluent interface</title>
 
             
 
@@ -161,7 +161,7 @@ $select = $db->select()
             нужно выполнить некоторую логику до добавления предложения в запрос.
         </para>
 
-        <section xml:id="zend.db.select.building.from"><info><title>Добавление предложения FROM</title></info>
+        <section xml:id="zend.db.select.building.from"><title>Добавление предложения FROM</title>
 
             
 
@@ -173,7 +173,7 @@ $select = $db->select()
                 символы.
             </para>
 
-            <example xml:id="zend.db.select.building.from.example"><info><title>Пример использования метода from()</title></info>
+            <example xml:id="zend.db.select.building.from.example"><title>Пример использования метода from()</title>
 
                 
 
@@ -202,7 +202,7 @@ $select = $db->select()
                 имена.
             </para>
 
-            <example xml:id="zend.db.select.building.from.example-cname"><info><title>Пример задания корреляционного имени таблицы</title></info>
+            <example xml:id="zend.db.select.building.from.example-cname"><title>Пример задания корреляционного имени таблицы</title>
 
                 
 
@@ -225,7 +225,7 @@ $select = $db->select()
                 кавычки все части по отдельности.
             </para>
 
-            <example xml:id="zend.db.select.building.from.example-schema"><info><title>Пример задания имени схемы</title></info>
+            <example xml:id="zend.db.select.building.from.example-schema"><title>Пример задания имени схемы</title>
 
                 
 
@@ -248,7 +248,7 @@ $select = $db->select()
 
         </section>
 
-        <section xml:id="zend.db.select.building.columns"><info><title>Добавление колонок</title></info>
+        <section xml:id="zend.db.select.building.columns"><title>Добавление колонок</title>
 
             
 
@@ -283,7 +283,7 @@ $select = $db->select()
                 <code>from()</code>.
             </para>
 
-            <example xml:id="zend.db.select.building.columns.example"><info><title>Пример указания столбцов</title></info>
+            <example xml:id="zend.db.select.building.columns.example"><title>Пример указания столбцов</title>
 
                 
 
@@ -318,7 +318,7 @@ $select = $db->select()
 
         </section>
 
-        <section xml:id="zend.db.select.building.columns-expr"><info><title>Добавление столбцов выражений</title></info>
+        <section xml:id="zend.db.select.building.columns-expr"><title>Добавление столбцов выражений</title>
 
             
 
@@ -350,7 +350,7 @@ $select = $db->select()
                 </para>
             </note>
 
-            <example xml:id="zend.db.select.building.columns-expr.example"><info><title>Пример указания столбцов, содержащих выражения</title></info>
+            <example xml:id="zend.db.select.building.columns-expr.example"><title>Пример указания столбцов, содержащих выражения</title>
 
                 
 
@@ -417,7 +417,7 @@ $select = $db->select()
                 символы кавычек в самом идентификаторе.
             </para>
 
-            <example xml:id="zend.db.select.building.columns-quoteid.example"><info><title>Пример заключения в кавычки столбцов в выражении</title></info>
+            <example xml:id="zend.db.select.building.columns-quoteid.example"><title>Пример заключения в кавычки столбцов в выражении</title>
 
                 
 
@@ -439,7 +439,7 @@ $select = $db->select()
 
         </section>
 
-        <section xml:id="zend.db.select.building.columns-atomic"><info><title>Добавление столбцов в существующую таблицу FROM или JOIN</title></info>
+        <section xml:id="zend.db.select.building.columns-atomic"><title>Добавление столбцов в существующую таблицу FROM или JOIN</title>
 
             
 
@@ -455,7 +455,7 @@ $select = $db->select()
                 использоваться существующее корреляционное имя.
             </para>
 
-            <example xml:id="zend.db.select.building.columns-atomic.example"><info><title>Пример добавления столбцов через метод <code>columns()</code></title></info>
+            <example xml:id="zend.db.select.building.columns-atomic.example"><title>Пример добавления столбцов через метод <code>columns()</code></title>
 
                 
 
@@ -482,7 +482,7 @@ $select = $db->select()
 
         </section>
 
-        <section xml:id="zend.db.select.building.join"><info><title>Добавление в запрос другой таблицы c помощью JOIN</title></info>
+        <section xml:id="zend.db.select.building.join"><title>Добавление в запрос другой таблицы c помощью JOIN</title>
 
             
 
@@ -496,7 +496,7 @@ $select = $db->select()
                 объединения.
             </para>
 
-            <example xml:id="zend.db.select.building.join.example"><info><title>Пример использования метода join()</title></info>
+            <example xml:id="zend.db.select.building.join.example"><title>Пример использования метода join()</title>
 
                 
 
@@ -550,7 +550,7 @@ $select = $db->select()
                 получение столбцов из присоединяемой таблицы.
             </para>
 
-            <example xml:id="zend.db.select.building.join.example-no-columns"><info><title>Пример извлечения без столбцов</title></info>
+            <example xml:id="zend.db.select.building.join.example-no-columns"><title>Пример извлечения без столбцов</title>
 
                 
 
@@ -700,7 +700,7 @@ $select = $db->select()
                 допишет условие объединения за вас.
             </para>
 
-            <example xml:id="zend.db.select.building.joinusing.example"><info><title>Пример использования метода joinUsing()</title></info>
+            <example xml:id="zend.db.select.building.joinusing.example"><title>Пример использования метода joinUsing()</title>
 
                 
 
@@ -753,7 +753,7 @@ $select = $db->select()
 
         </section>
 
-        <section xml:id="zend.db.select.building.where"><info><title>Добавление предложения WHERE</title></info>
+        <section xml:id="zend.db.select.building.where"><title>Добавление предложения WHERE</title>
 
             
 
@@ -764,7 +764,7 @@ $select = $db->select()
                 предложении <code>WHERE</code> в данном запросе.
             </para>
 
-            <example xml:id="zend.db.select.building.where.example"><info><title>Пример использования метода where()</title></info>
+            <example xml:id="zend.db.select.building.where.example"><title>Пример использования метода where()</title>
 
                 
 
@@ -807,7 +807,7 @@ $select = $db->select()
                 самостоятельно.
             </para>
 
-            <example xml:id="zend.db.select.building.where.example-param"><info><title>Пример параметра в методе where()</title></info>
+            <example xml:id="zend.db.select.building.where.example-param"><title>Пример параметра в методе where()</title>
 
                 
 
@@ -835,7 +835,7 @@ $select = $db->select()
                 между ними.
             </para>
 
-            <example xml:id="zend.db.select.building.where.example-and"><info><title>Пример нескольких вызовов метода where()</title></info>
+            <example xml:id="zend.db.select.building.where.example-and"><title>Пример нескольких вызовов метода where()</title>
 
                 
 
@@ -868,7 +868,7 @@ $select = $db->select()
                 <code>AND</code>.
             </para>
 
-            <example xml:id="zend.db.select.building.where.example-or"><info><title>Пример использования метода orWhere()</title></info>
+            <example xml:id="zend.db.select.building.where.example-or"><title>Пример использования метода orWhere()</title>
 
                 
 
@@ -900,7 +900,7 @@ $select = $db->select()
                 вместо ожидаемого.
             </para>
 
-            <example xml:id="zend.db.select.building.where.example-parens"><info><title>Пример заключения булевых выражений в скобки</title></info>
+            <example xml:id="zend.db.select.building.where.example-parens"><title>Пример заключения булевых выражений в скобки</title>
 
                 
 
@@ -936,7 +936,7 @@ $select = $db->select()
 
         </section>
 
-        <section xml:id="zend.db.select.building.group"><info><title>Добавление предложения GROUP BY</title></info>
+        <section xml:id="zend.db.select.building.group"><title>Добавление предложения GROUP BY</title>
 
             
 
@@ -954,7 +954,7 @@ $select = $db->select()
                 подстановки в предложение <code>GROUP BY</code>.
             </para>
 
-            <example xml:id="zend.db.select.building.group.example"><info><title>Пример использования метода group()</title></info>
+            <example xml:id="zend.db.select.building.group.example"><title>Пример использования метода group()</title>
 
                 
 
@@ -987,7 +987,7 @@ $select = $db->select()
 
         </section>
 
-        <section xml:id="zend.db.select.building.having"><info><title>Добавление предложения HAVING</title></info>
+        <section xml:id="zend.db.select.building.having"><title>Добавление предложения HAVING</title>
 
             
 
@@ -1014,7 +1014,7 @@ $select = $db->select()
                 <code>orHaving()</code>.
             </para>
 
-            <example xml:id="zend.db.select.building.having.example"><info><title>Пример использования метода having()</title></info>
+            <example xml:id="zend.db.select.building.having.example"><title>Пример использования метода having()</title>
 
                 
 
@@ -1052,7 +1052,7 @@ $select = $db->select()
 
         </section>
 
-        <section xml:id="zend.db.select.building.order"><info><title>Добавление предложения ORDER BY</title></info>
+        <section xml:id="zend.db.select.building.order"><title>Добавление предложения ORDER BY</title>
 
             
 
@@ -1086,7 +1086,7 @@ $select = $db->select()
                 являются объектами Zend_Db_Expr.
             </para>
 
-            <example xml:id="zend.db.select.building.order.example"><info><title>Пример использования метода order()</title></info>
+            <example xml:id="zend.db.select.building.order.example"><title>Пример использования метода order()</title>
 
                 
 
@@ -1114,7 +1114,7 @@ $select = $db->select()
 
         </section>
 
-        <section xml:id="zend.db.select.building.limit"><info><title>Добавление предложения LIMIT</title></info>
+        <section xml:id="zend.db.select.building.limit"><title>Добавление предложения LIMIT</title>
 
             
 
@@ -1136,7 +1136,7 @@ $select = $db->select()
                 аргументом - количество пропускаемых строк
             </para>
 
-            <example xml:id="zend.db.select.building.limit.example"><info><title>Пример использования метода limit()</title></info>
+            <example xml:id="zend.db.select.building.limit.example"><title>Пример использования метода limit()</title>
 
                 
 
@@ -1180,7 +1180,7 @@ $select = $db->select()
                 умолчанию.
             </para>
 
-            <example xml:id="zend.db.select.building.limit.example2"><info><title>Пример использования метода limitPage()</title></info>
+            <example xml:id="zend.db.select.building.limit.example2"><title>Пример использования метода limitPage()</title>
 
                 
 
@@ -1201,7 +1201,7 @@ $select = $db->select()
 
         </section>
 
-        <section xml:id="zend.db.select.building.distinct"><info><title>Добавление модификатора DISTINCT</title></info>
+        <section xml:id="zend.db.select.building.distinct"><title>Добавление модификатора DISTINCT</title>
 
             
 
@@ -1210,7 +1210,7 @@ $select = $db->select()
                 ключевое слово <code>DISTINCT</code> в ваш запрос.
             </para>
 
-            <example xml:id="zend.db.select.building.distinct.example"><info><title>Пример использования метода distinct()</title></info>
+            <example xml:id="zend.db.select.building.distinct.example"><title>Пример использования метода distinct()</title>
 
                 
 
@@ -1229,7 +1229,7 @@ $select = $db->select()
 
         </section>
 
-        <section xml:id="zend.db.select.building.for-update"><info><title>Добавление модификатора FOR UPDATE</title></info>
+        <section xml:id="zend.db.select.building.for-update"><title>Добавление модификатора FOR UPDATE</title>
 
             
 
@@ -1238,7 +1238,7 @@ $select = $db->select()
                 модификатор <code>FOR UPDATE</code> в ваш запрос.
             </para>
 
-            <example xml:id="zend.db.select.building.for-update.example"><info><title>Пример использования метода forUpdate()</title></info>
+            <example xml:id="zend.db.select.building.for-update.example"><title>Пример использования метода forUpdate()</title>
 
                 
 
@@ -1259,7 +1259,7 @@ $select = $db->select()
 
     </section>
 
-    <section xml:id="zend.db.select.execute"><info><title>Произведение запросов на выборку</title></info>
+    <section xml:id="zend.db.select.execute"><title>Произведение запросов на выборку</title>
 
         
 
@@ -1268,7 +1268,7 @@ $select = $db->select()
             объектом Zend_Db_Select.
         </para>
 
-        <section xml:id="zend.db.select.execute.query-adapter"><info><title>Произведение запросов на выборку из адаптера БД</title></info>
+        <section xml:id="zend.db.select.execute.query-adapter"><title>Произведение запросов на выборку из адаптера БД</title>
 
             
 
@@ -1285,7 +1285,7 @@ $select = $db->select()
                 или PDOStatement, в зависимости от типа адаптера.
             </para>
 
-            <example xml:id="zend.db.select.execute.query-adapter.example"><info><title>Пример использования метода query() адаптера БД</title></info>
+            <example xml:id="zend.db.select.execute.query-adapter.example"><title>Пример использования метода query() адаптера БД</title>
 
                 
 
@@ -1302,7 +1302,7 @@ $result = $stmt->fetchAll();
 
         </section>
 
-        <section xml:id="zend.db.select.execute.query-select"><info><title>Произведение запросов на выборку через объект Select</title></info>
+        <section xml:id="zend.db.select.execute.query-select"><title>Произведение запросов на выборку через объект Select</title>
 
             
 
@@ -1313,7 +1313,7 @@ $result = $stmt->fetchAll();
                 PDOStatement, в зависимости от типа адаптера.
             </para>
 
-            <example xml:id="zend.db.select.execute.query-select.example"><info><title>Пример использования метода query() объекта Select</title></info>
+            <example xml:id="zend.db.select.execute.query-select.example"><title>Пример использования метода query() объекта Select</title>
 
                 
 
@@ -1330,7 +1330,7 @@ $result = $stmt->fetchAll();
 
         </section>
 
-        <section xml:id="zend.db.select.execute.tostring"><info><title>Преобразование объекта Select в SQL-строку</title></info>
+        <section xml:id="zend.db.select.execute.tostring"><title>Преобразование объекта Select в SQL-строку</title>
 
             
 
@@ -1340,7 +1340,7 @@ $result = $stmt->fetchAll();
                 используйте метод <code>__toString()</code>.
             </para>
 
-            <example xml:id="zend.db.select.execute.tostring.example"><info><title>Пример использования метода __toString()</title></info>
+            <example xml:id="zend.db.select.execute.tostring.example"><title>Пример использования метода __toString()</title>
 
                 
 
@@ -1362,7 +1362,7 @@ echo "$sql\n";
 
     </section>
 
-    <section xml:id="zend.db.select.other"><info><title>Другие методы</title></info>
+    <section xml:id="zend.db.select.other"><title>Другие методы</title>
 
         
 
@@ -1372,7 +1372,7 @@ echo "$sql\n";
             <code>reset()</code>.
         </para>
 
-        <section xml:id="zend.db.select.other.get-part"><info><title>Получение частей объекта Select</title></info>
+        <section xml:id="zend.db.select.other.get-part"><title>Получение частей объекта Select</title>
 
             
 
@@ -1406,7 +1406,7 @@ echo "$sql\n";
                 константы или литеральные строки.
             </para>
 
-            <table xml:id="zend.db.select.other.get-part.table"><info><title>Константы, используемые методами getPart() и reset()</title></info>
+            <table xml:id="zend.db.select.other.get-part.table"><title>Константы, используемые методами getPart() и reset()</title>
                 
                 <tgroup cols="2">
                     <thead>
@@ -1460,7 +1460,7 @@ echo "$sql\n";
                 </tgroup>
             </table>
 
-            <example xml:id="zend.db.select.other.get-part.example"><info><title>Пример использования метода getPart()</title></info>
+            <example xml:id="zend.db.select.other.get-part.example"><title>Пример использования метода getPart()</title>
 
                 
 
@@ -1485,7 +1485,7 @@ print_r( $orderData );
 
         </section>
 
-        <section xml:id="zend.db.select.other.reset"><info><title>Сброс частей запроса в объекте Select</title></info>
+        <section xml:id="zend.db.select.other.reset"><title>Сброс частей запроса в объекте Select</title>
 
             
 
@@ -1510,7 +1510,7 @@ print_r( $orderData );
                 же, как если бы вы его только что инстанцировали его.
             </para>
 
-            <example xml:id="zend.db.select.other.reset.example"><info><title>Пример использования метода reset()</title></info>
+            <example xml:id="zend.db.select.other.reset.example"><title>Пример использования метода reset()</title>
 
                 
 

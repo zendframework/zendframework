@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><info><title>Uitbreidbaarheid</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><title>Uitbreidbaarheid</title>
     
 
-    <section xml:id="zend.search.lucene.extending.analysis"><info><title>Tekst analysator</title></info>
+    <section xml:id="zend.search.lucene.extending.analysis"><title>Tekst analysator</title>
         
         <para>
             De <code>Zend_Search_Lucene_Analysis_Analyzer</code> klasse wordt gebruikt door de indexer
@@ -48,7 +48,7 @@ $index->addDocument($doc);
         <para>
             Hier is een voorbeeld van een zelfgemaakte analysator, welke woorden met cijfers als termen aanvaardt:
 
-            <example><info><title>Custom tekst Analysator</title></info>
+            <example><title>Custom tekst Analysator</title>
                 
                 <programlisting role="php"><![CDATA[<?php
 /** Dit is een zelfgemaakte tekst analysator, die woorden met cijfers als een enkele term beschouwt */
@@ -109,7 +109,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         </para>
         </section>
 
-    <section xml:id="zend.search.lucene.extending.scoring"><info><title>Score Algorithmes</title></info>
+    <section xml:id="zend.search.lucene.extending.scoring"><title>Score Algorithmes</title>
         
         <para>
             De score van een query <literal>q</literal> voor document <literal>d</literal>
@@ -215,7 +215,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.storage"><info><title>Opslag containers</title></info>
+    <section xml:id="zend.search.lucene.extending.storage"><title>Opslag containers</title>
         
         <para>
         Een abstracte klasse Zend_Search_Lucene_Storage_Directory definieert mapfunctionaliteit.

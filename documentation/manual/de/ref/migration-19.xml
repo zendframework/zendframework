@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.19"><info><title>Zend Framework 1.9</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.19"><title>Zend Framework 1.9</title>
     
 
     <para>
@@ -7,10 +7,10 @@
         hochrüstet sollte man die folgenden Migrations Hinweise beachten.
     </para>
 
-    <section xml:id="migration.19.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
+    <section xml:id="migration.19.zend.file.transfer"><title>Zend_File_Transfer</title>
         
 
-        <section xml:id="migration.19.zend.file.transfer.mimetype"><info><title>MimeType Prüfung</title></info>
+        <section xml:id="migration.19.zend.file.transfer.mimetype"><title>MimeType Prüfung</title>
             
 
             <para>
@@ -29,7 +29,7 @@
                 verwendet wird.
             </para>
 
-            <note><info><title>Sicherheits Hinweis</title></info>
+            <note><title>Sicherheits Hinweis</title>
                 
 
                 <para>
@@ -40,7 +40,7 @@
                 </para>
             </note>
 
-            <example xml:id="migration.19.zend.file.transfer.example"><info><title>Die Verwendung der HTTP Felder erlauben</title></info>
+            <example xml:id="migration.19.zend.file.transfer.example"><title>Die Verwendung der HTTP Felder erlauben</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -54,7 +54,7 @@ $valid->enableHeaderCheck();
         </section>
     </section>
 
-    <section xml:id="migration.19.zend.filter"><info><title>Zend_Filter</title></info>
+    <section xml:id="migration.19.zend.filter"><title>Zend_Filter</title>
         
 
         <para>
@@ -66,12 +66,12 @@ $valid->enableHeaderCheck();
         </para>
     </section>
 
-    <section xml:id="migration.19.zend.http.client"><info><title>Zend_Http_Client</title></info>
+    <section xml:id="migration.19.zend.http.client"><title>Zend_Http_Client</title>
         
 
-        <section xml:id="migration.19.zend.http.client.fileuploadsarray"><info><title>
+        <section xml:id="migration.19.zend.http.client.fileuploadsarray"><title>
                 Änderungen in der internen Speicherung der Information von hochgeladenen Dateien
-            </title></info>
+            </title>
             
 
             <para>
@@ -88,7 +88,7 @@ $valid->enableHeaderCheck();
                     Fehlerreport</link> gefunden werden.
             </para>
 
-            <example xml:id="migration.19.zend.http.client.fileuploadsarray.example"><info><title>Interne Speicherung der Informationen von hochgeladenen Dateien</title></info>
+            <example xml:id="migration.19.zend.http.client.fileuploadsarray.example"><title>Interne Speicherung der Informationen von hochgeladenen Dateien</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -136,9 +136,9 @@ $client->setFileUpload('file2.txt',
             </para>
         </section>
 
-        <section xml:id="migration.19.zend.http.client.getparamsrecursize"><info><title>
+        <section xml:id="migration.19.zend.http.client.getparamsrecursize"><title>
                 Zend_Http_Client::_getParametersRecursive() sollte nicht mehr eingesetzt werden
-            </title></info>
+            </title>
             
 
             <para>
@@ -163,10 +163,10 @@ $client->setFileUpload('file2.txt',
         </section>
     </section>
 
-    <section xml:id="migration.19.zend.locale"><info><title>Zend_Locale</title></info>
+    <section xml:id="migration.19.zend.locale"><title>Zend_Locale</title>
         
 
-        <section xml:id="migration.19.zend.locale.deprecated"><info><title>Abgelaufene Methoden</title></info>
+        <section xml:id="migration.19.zend.locale.deprecated"><title>Abgelaufene Methoden</title>
             
 
             <para>
@@ -177,7 +177,7 @@ $client->setFileUpload('file2.txt',
                 die alten und neuen Methodenaufrufe.
             </para>
 
-            <table xml:id="migration.19.zend.locale.deprecated.table-1"><info><title>List der Methodenaufrufe</title></info>
+            <table xml:id="migration.19.zend.locale.deprecated.table-1"><title>List der Methodenaufrufe</title>
                 
 
                 <tgroup cols="2">
@@ -275,7 +275,7 @@ $client->setFileUpload('file2.txt',
         </section>
     </section>
 
-    <section xml:id="migration.19.zend.view.helper.navigation"><info><title>Zend_View_Helper_Navigation</title></info>
+    <section xml:id="migration.19.zend.view.helper.navigation"><title>Zend_View_Helper_Navigation</title>
         
 
         <para>
@@ -364,7 +364,7 @@ $container = new Zend_Navigation(array(
 ]]></programlisting>
     </section>
 
-    <section xml:id="migration.19.security"><info><title>Sicherheitsfixes ab 1.9.7</title></info>
+    <section xml:id="migration.19.security"><title>Sicherheitsfixes ab 1.9.7</title>
         
 
         <para>
@@ -373,7 +373,7 @@ $container = new Zend_Navigation(array(
             Probleme mit Rückwärtskompatibilität haben können.
         </para>
 
-        <section xml:id="migration.19.security.zend.filter.html-entities"><info><title>Zend_Filter_HtmlEntities</title></info>
+        <section xml:id="migration.19.security.zend.filter.html-entities"><title>Zend_Filter_HtmlEntities</title>
             
 
             <para>
@@ -396,7 +396,7 @@ $container = new Zend_Navigation(array(
             </para>
         </section>
 
-        <section xml:id="migration.19.security.zend.filter.strip-tags"><info><title>Zend_Filter_StripTags</title></info>
+        <section xml:id="migration.19.security.zend.filter.strip-tags"><title>Zend_Filter_StripTags</title>
             
 
             <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.introduction"><info><title>Úvod</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.introduction"><title>Úvod</title>
 
     
 
@@ -11,7 +11,7 @@
         získať jednotku výsledku. Je podporované veľké množstvo jednotiek.
     </para>
 
-    <example><info><title>Zmena výsledku merania</title></info>
+    <example><title>Zmena výsledku merania</title>
         
         <para>
             Nasledujúci úvodný príklad ukazuje možnosť zmeny jednotky výsledku
@@ -40,7 +40,7 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
         Typy meraní</code></link>.
     </para>
 
-    <example><info><title>Použitie jednotky <code>meter</code></title></info>
+    <example><title>Použitie jednotky <code>meter</code></title>
         
         <para>
             Meranie pomocou jednotky <code>meter</code>je určené na meranie vzdialeností,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><info><title>مفهوم الـ caching </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><title>مفهوم الـ caching </title>
     
     <para>
         هناك ثلاث مفاهيم رئيسية فى Zend_Cache. الأول هو المعرف المميز و هو عيارة عن string
@@ -26,7 +26,7 @@
 و عندما يحدث cache hit تقم الـ backend تلقائياً بجلب البيانات من الـ cache .
 
     </para></note>
-    <section xml:id="zend.cache.factory"><info><title>الـ factory method فى <code>Zend_Cache</code></title></info>
+    <section xml:id="zend.cache.factory"><title>الـ factory method فى <code>Zend_Cache</code></title>
         
         <para>
             طريقة جيدة لإنشاء frontend instance قابل لإستخدام من <code>Zend_Cache</code> نستعرضها فى
@@ -64,7 +64,7 @@ $cache = Zend_Cache::factory($frontendName, $backendName, $frontendOptions, $bac
         </para></note>
     </section>
 
-    <section xml:id="zend.cache.tags"><info><title>إستخدام الـ tags</title></info>
+    <section xml:id="zend.cache.tags"><title>إستخدام الـ tags</title>
         
         <para>
             الـ tags طرق لتقسيم البيانات فى الـ cache الى اقسام معرفة, عندما تقم بحفظ cache بإستخدام
@@ -78,7 +78,7 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 
 ?>]]></programlisting>
     </section>
-    <section xml:id="zend.cache.clean"><info><title>تنظيف الـ cache</title></info>
+    <section xml:id="zend.cache.clean"><title>تنظيف الـ cache</title>
         
         <para>
             لحذف او تحديد معرف cache على انه غير قابل للإستخدام, يمكنك استخدام <code>()remove</code>

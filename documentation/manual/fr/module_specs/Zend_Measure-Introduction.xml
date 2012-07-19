@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.introduction"><title>Introduction</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         sont nombreuses.
     </para>
 
-    <example xml:id="zend.measure.introduction.example-1"><info><title>Convertir des mesures</title></info>
+    <example xml:id="zend.measure.introduction.example-1"><title>Convertir des mesures</title>
         
 
         <para>
@@ -44,7 +44,7 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
         mesures</code></link>.
     </para>
 
-    <example xml:id="zend.measure.introduction.example-2"><info><title>La mesure de la longueur</title></info>
+    <example xml:id="zend.measure.introduction.example-2"><title>La mesure de la longueur</title>
         
 
         <para>

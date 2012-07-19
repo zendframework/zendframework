@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><info><title>Używanie innych transportów</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><title>Używanie innych transportów</title>
     
     <para>
         W przypadku gdy chcesz wysłać różne e-maile poprzez różne połączenia, możesz
@@ -7,7 +7,7 @@
         bez wcześniejszego wywołania <code>setDefaultTransport()</code>. Przekazany
         obiekt nadpisze domyślny transport dla aktualnego wywołania <code>send()</code>:
     </para>
-    <example xml:id="zend.mail.different-transports.example-1"><info><title>Używanie innych transportów</title></info>
+    <example xml:id="zend.mail.different-transports.example-1"><title>Używanie innych transportów</title>
         
         <programlisting role="php"><![CDATA[
 $mail = new Zend_Mail();
@@ -20,7 +20,7 @@ $mail->send();  // znów używamy domyślnego transportu
 
         ]]></programlisting>
     </example>
-    <note><info><title>Dodatkowe transporty</title></info>
+    <note><title>Dodatkowe transporty</title>
         
         <para>
             Dodatkowe transporty mogą być napisane poprzez zaimplementowanie interfejsu

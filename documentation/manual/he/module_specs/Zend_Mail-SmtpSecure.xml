@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>אבטחת שליחת SMTP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><title>אבטחת שליחת SMTP</title>
   
 
   <para>
@@ -9,7 +9,7 @@
     ניתן גם להגדיר פורט שימוש, אחרת כברירת מחדל זה ישתמש ב 25 ל TLS או 465 ל SSL/
   </para>
 
-  <example xml:id="zend.mail.smtp-secure.example-1"><info><title>הפעלת חיבור מאובטח בעזרת  <code>Zend_Mail_Transport_Smtp</code></title></info>
+  <example xml:id="zend.mail.smtp-secure.example-1"><title>הפעלת חיבור מאובטח בעזרת  <code>Zend_Mail_Transport_Smtp</code></title>
     
 
     <programlisting role="php"><![CDATA[

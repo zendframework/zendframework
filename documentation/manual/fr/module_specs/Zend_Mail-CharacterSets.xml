@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>Jeux de caractères</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><title>Jeux de caractères</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         caractères différent peut-être définit pour chaque partie.
     </para>
 
-    <note><info><title>Seulement au format texte</title></info>
+    <note><title>Seulement au format texte</title>
         
 
         <para>
@@ -20,7 +20,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.mail.character-sets.cjk"><info><title>Usage in CJK languages</title></info>
+    <example xml:id="zend.mail.character-sets.cjk"><title>Usage in CJK languages</title>
         
 
         <para>

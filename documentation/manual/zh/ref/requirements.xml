@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>系统需求</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><title>系统需求</title>
 
     
 
@@ -9,7 +9,7 @@
         这部分描述了 Zend Framework 对系统的需求。
     </para>
 
-    <section xml:id="requirements.version"><info><title>PHP 版本需求</title></info>
+    <section xml:id="requirements.version"><title>PHP 版本需求</title>
 
         
 
@@ -30,7 +30,7 @@
 
     </section>
 
-    <section xml:id="requirements.extensions"><info><title>PHP 扩展</title></info>
+    <section xml:id="requirements.extensions"><title>PHP 扩展</title>
 
         
 
@@ -45,7 +45,7 @@
             使用方式“可选”表示当扩展不可用时，组件或者类自动使用代替方案。
         </para>
 
-        <table frame="all"><info><title>Zend Framework 使用的 PHP 扩展</title></info>
+        <table frame="all"><title>Zend Framework 使用的 PHP 扩展</title>
             
             <tgroup cols="3">
                 <colspec colwidth="1in"/>
@@ -530,7 +530,7 @@
         </table>
 
     </section>
-    <section xml:id="requirements.zendcomponents"><info><title>Zend Framework 组件</title></info>
+    <section xml:id="requirements.zendcomponents"><title>Zend Framework 组件</title>
 
         
 
@@ -538,7 +538,7 @@
             下面的表格列出了所有可用的 Zend Framework 组件，以及其所需的 PHP 扩展。这可以帮助了解哪些扩展对于应用来说是必须的。并不是每个应用都需要所有 Zend Framework 使用到的扩展。
         </para>
 
-        <table frame="all" xml:id="requirements.zendcomponents.table-1"><info><title>Zend Framework 组件以及其使用到的 PHP 扩展</title></info>
+        <table frame="all" xml:id="requirements.zendcomponents.table-1"><title>Zend Framework 组件以及其使用到的 PHP 扩展</title>
             
             <tgroup cols="2">
                 <colspec colwidth="2in"/>

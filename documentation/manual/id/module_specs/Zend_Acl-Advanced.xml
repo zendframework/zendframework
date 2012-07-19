@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Penggunaan Tingkat Lanjut</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><title>Penggunaan Tingkat Lanjut</title>
 
     
 
-    <section xml:id="zend.acl.advanced.storing"><info><title>Menyimpan data ACL</title></info>
+    <section xml:id="zend.acl.advanced.storing"><title>Menyimpan data ACL</title>
 
         
 
@@ -27,7 +27,7 @@
 
     </section>
 
-    <section xml:id="zend.acl.advanced.assertions"><info><title>Aturan Kondisional ACL dengan Assertion</title></info>
+    <section xml:id="zend.acl.advanced.assertions"><title>Aturan Kondisional ACL dengan Assertion</title>
 
         
 

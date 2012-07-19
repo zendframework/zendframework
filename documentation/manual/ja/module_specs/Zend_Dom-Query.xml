@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.query"><info><title>Zend_Dom_Query</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.query"><title>Zend_Dom_Query</title>
     
 
     <para>
@@ -21,7 +21,7 @@
             dojo.query</link> をヒントにしてこのコンポーネントを作成しました)。
     </para>
 
-    <section xml:id="zend.dom.query.operation"><info><title>動作原理</title></info>
+    <section xml:id="zend.dom.query.operation"><title>動作原理</title>
         
 
         <para>
@@ -166,14 +166,14 @@ foreach ($results as $result) {
         </para>
     </section>
 
-    <section xml:id="zend.dom.query.methods"><info><title>使用可能なメソッド</title></info>
+    <section xml:id="zend.dom.query.methods"><title>使用可能なメソッド</title>
         
 
         <para>
             <classname>Zend_Dom_Query</classname> 系のクラスでは、次のメソッドが使用できます。
         </para>
 
-        <section xml:id="zend.dom.query.methods.zenddomquery"><info><title>Zend_Dom_Query</title></info>
+        <section xml:id="zend.dom.query.methods.zenddomquery"><title>Zend_Dom_Query</title>
             
 
             <para>
@@ -227,7 +227,7 @@ foreach ($results as $result) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.dom.query.methods.zenddomqueryresult"><info><title>Zend_Dom_Query_Result</title></info>
+        <section xml:id="zend.dom.query.methods.zenddomqueryresult"><title>Zend_Dom_Query_Result</title>
             
 
             <para>

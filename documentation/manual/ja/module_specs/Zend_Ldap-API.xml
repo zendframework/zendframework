@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api"><info><title>API概要</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api"><title>API概要</title>
     
 
-    <section xml:id="zend.ldap.api.configuration"><info><title>設定／オプション</title></info>
+    <section xml:id="zend.ldap.api.configuration"><title>設定／オプション</title>
         
 
         <para>
@@ -13,7 +13,7 @@
             下記のオプションが利用できます:
         </para>
 
-        <table xml:id="zend.ldap.api.configuration.table"><info><title>Zend_Ldapオプション</title></info>
+        <table xml:id="zend.ldap.api.configuration.table"><title>Zend_Ldapオプション</title>
             
 
             <tgroup cols="2">
@@ -206,7 +206,7 @@
         </table>
     </section>
 
-    <section xml:id="zend.ldap.api.reference"><info><title>APIリファレンス</title></info>
+    <section xml:id="zend.ldap.api.reference"><title>APIリファレンス</title>
         
 
         <note>

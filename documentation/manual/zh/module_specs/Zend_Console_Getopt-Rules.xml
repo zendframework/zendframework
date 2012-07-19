@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.rules"><info><title> 声明 Getopt 规则 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.rules"><title> 声明 Getopt 规则 </title>
     
     <para>
         <code>Zend_Console_Getopt</code> 类的构造器带有一到三个参数。第一个参数声明哪个选项被应用程序支持。这个类支持交替（alternative）语法形式来声明选项。参见下面的章节关于这些语法形式的格式和用法。
@@ -11,12 +11,12 @@
         第三个参数包含一个配置选项来定制 <code>Zend_Console_Getopt</code> 的行为（behavior）。关于可用选项的引用（reference），参见 <link linkend="zend.console.getopt.configuration.config"> 添加配置 </link>
     </para>
 
-    <section xml:id="zend.console.getopt.rules.short"><info><title> 用短语法声明选项 </title></info>
+    <section xml:id="zend.console.getopt.rules.short"><title> 用短语法声明选项 </title>
         
         <para>
             <code>Zend_Console_Getopt</code> 支持紧凑的语法 （类似用于 GNU Getopt的语法，参见 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</link> ）。这个语法只支持单字符 flag 。在一个单个的字符串中，每个字母对应于被程序支持的 flag。字母后跟着冒号 ("<code>:</code>") 表示这个 flag 需要参数。
         </para>
-        <example xml:id="zend.console.getopt.rules.short.example"><info><title> 使用短语法 </title></info>
+        <example xml:id="zend.console.getopt.rules.short.example"><title> 使用短语法 </title>
             
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -31,7 +31,7 @@ $opts = new Zend_Console_Getopt('abp:');
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.rules.long"><info><title> 用长语法声明选项 </title></info>
+    <section xml:id="zend.console.getopt.rules.long"><title> 用长语法声明选项 </title>
         
         <para>
             带有更多功能的不同的语法也是可用的。这个语法允许为 flag 指定别名、选项参数的类型和用来描述用法的帮助字符串。在短语法中使用单字符串来声明选项，而在常语法中使用联合数组作为构造器的第一个参数。
@@ -62,7 +62,7 @@ $opts = new Zend_Console_Getopt('abp:');
         <para>
             在联合数组中的每个元素的值是帮助字符串，用来描述如何使用程序。
         </para>
-        <example xml:id="zend.console.getopt.rules.long.example"><info><title> 使用长语法 </title></info>
+        <example xml:id="zend.console.getopt.rules.long.example"><title> 使用长语法 </title>
             
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt(

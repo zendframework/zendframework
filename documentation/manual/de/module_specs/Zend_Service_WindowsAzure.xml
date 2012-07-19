@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.windowsazure"><info><title>Zend_Service_WindowsAzure</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.windowsazure"><title>Zend_Service_WindowsAzure</title>
     
 
-    <section xml:id="zend.service.windowsazure.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.service.windowsazure.introduction"><title>Einführung</title>
         
 
         <para>
@@ -16,7 +16,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.windowsazure.sdk"><info><title>Installieren der Windows Azure SDK</title></info>
+    <section xml:id="zend.service.windowsazure.sdk"><title>Installieren der Windows Azure SDK</title>
         
 
         <para>
@@ -54,7 +54,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.windowsazure.apiDocumentation"><info><title>API Dokumentation</title></info>
+    <section xml:id="zend.service.windowsazure.apiDocumentation"><title>API Dokumentation</title>
         
 
         <para>
@@ -67,7 +67,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.windowsazure.features"><info><title>Features</title></info>
+    <section xml:id="zend.service.windowsazure.features"><title>Features</title>
         
 
         <para>
@@ -97,7 +97,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.windowsazure.architecture"><info><title>Architektur</title></info>
+    <section xml:id="zend.service.windowsazure.architecture"><title>Architektur</title>
         
 
         <para>

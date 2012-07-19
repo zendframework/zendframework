@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.introduction"><info><title> Zend_Currency 简介 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.introduction"><title> Zend_Currency 简介 </title>
 
     
 
@@ -9,7 +9,7 @@
         <code>Zend_Currency</code> 是Zend_Framework I18n 核心的一部分。它处理所有关于货币、钱的表示和格式。它也提供另外的信息方法，包括货币的本地化信息、关于哪个货币在哪个地区使用等等。
     </para>
 
-    <section xml:id="zend.currency.introduction.list"><info><title> 为什么使用 <code>Zend_Currency</code> ？</title></info>
+    <section xml:id="zend.currency.introduction.list"><title> 为什么使用 <code>Zend_Currency</code> ？</title>
 
         
 

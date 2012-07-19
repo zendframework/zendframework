@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.http"><info><title>HTTP 认证适配器</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.http"><title>HTTP 认证适配器</title>
 
     
 
-    <section xml:id="zend.auth.adapter.http.introduction"><info><title>简介</title></info>
+    <section xml:id="zend.auth.adapter.http.introduction"><title>简介</title>
 
         
 
@@ -60,7 +60,7 @@
 
     </section>
 
-    <section xml:id="zend.auth.adapter.design_overview"><info><title>设计回顾</title></info>
+    <section xml:id="zend.auth.adapter.design_overview"><title>设计回顾</title>
 
         
 
@@ -70,13 +70,13 @@
 
     </section>
 
-    <section xml:id="zend.auth.adapter.configuration_options"><info><title>配置选项</title></info>
+    <section xml:id="zend.auth.adapter.configuration_options"><title>配置选项</title>
 
         
 
         <para>
             <code>Zend_Auth_Adapter_Http</code> 类需要一个配置数组传递给它的构造器。有若干个配置选项有效，其中一些是必需的：
-            <table xml:id="zend.auth.adapter.configuration_options.table"><info><title>配置选项</title></info>
+            <table xml:id="zend.auth.adapter.configuration_options.table"><title>配置选项</title>
                 
                 <tgroup cols="3">
                     <thead>
@@ -135,7 +135,7 @@
 
     </section>
 
-    <section xml:id="zend.auth.adapter.http.resolvers"><info><title>Resolvers</title></info>
+    <section xml:id="zend.auth.adapter.http.resolvers"><title>Resolvers</title>
 
         
 
@@ -147,7 +147,7 @@
             <code>Zend_Auth_Adapter_Http</code> 依靠对象实现 <code>Zend_Auth_Adapter_Http_Resolver_Interface</code>。适配器中包含一个文本文件resolver类，但任何其它种类的resolver可以通过实现resolver接口来创建。
         </para>
 
-        <section xml:id="zend.auth.adapter.http.resolvers.file"><info><title>文件 Resolver</title></info>
+        <section xml:id="zend.auth.adapter.http.resolvers.file"><title>文件 Resolver</title>
 
             
 
@@ -179,7 +179,7 @@ $resolver->setFile($path);
 
     </section>
 
-    <section xml:id="zend.auth.adapter.http.basic_usage"><info><title>基本用法</title></info>
+    <section xml:id="zend.auth.adapter.http.basic_usage"><title>基本用法</title>
 
         
 

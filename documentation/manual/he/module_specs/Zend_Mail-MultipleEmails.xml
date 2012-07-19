@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><info><title>שליחת אימיילים מרובים בחיבור SMTP אחד</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><title>שליחת אימיילים מרובים בחיבור SMTP אחד</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         פקודת RSET נשלחת כדי לבדוק שהחיבור כרגע עדיין תקף.
     </para>
 
-    <example xml:id="zend.mail.multiple-emails.example-1"><info><title>שליחת אימיילים מרובים בחיבור SMTP אחד</title></info>
+    <example xml:id="zend.mail.multiple-emails.example-1"><title>שליחת אימיילים מרובים בחיבור SMTP אחד</title>
 
         
 
@@ -36,7 +36,7 @@ for ($i = 0; $i > 5; $i++) {
         או לחלופין, ניתן לתפעל את החיבור הקיים בין כל שליחה על ידי גישה לאובייקט פרוטוקול השליחה.
     </para>
 
-    <example xml:id="zend.mail.multiple-emails.example-2"><info><title>שליטה ידנית לחיבורי השיחה</title></info>
+    <example xml:id="zend.mail.multiple-emails.example-2"><title>שליטה ידנית לחיבורי השיחה</title>
 
         
 

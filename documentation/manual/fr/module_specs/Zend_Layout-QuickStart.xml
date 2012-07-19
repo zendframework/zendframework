@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.quickstart"><info><title>Zend_Layout - Démarrage rapide</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.quickstart"><title>Zend_Layout - Démarrage rapide</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         Framework <acronym>MVC</acronym>, et sans.
     </para>
 
-    <section xml:id="zend.layout.quickstart.layouts"><info><title>Scripts de layout</title></info>
+    <section xml:id="zend.layout.quickstart.layouts"><title>Scripts de layout</title>
         
 
         <para>
@@ -77,7 +77,7 @@
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.layout.quickstart.mvc"><info><title>Utilisation de Zend_Layout avec le système MVC de Zend Framework</title></info>
+    <section xml:id="zend.layout.quickstart.mvc"><title>Utilisation de Zend_Layout avec le système MVC de Zend Framework</title>
         
 
         <para>
@@ -195,7 +195,7 @@ $layout = Zend_Layout::getMvcInstance();
         </para>
     </section>
 
-    <section xml:id="zend.layout.quickstart.standalone"><info><title>Utilisation de Zend_Layout en composant indépendant</title></info>
+    <section xml:id="zend.layout.quickstart.standalone"><title>Utilisation de Zend_Layout en composant indépendant</title>
         
 
         <para>
@@ -241,7 +241,7 @@ echo $layout->render();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.layout.quickstart.example"><info><title>Layout d'exemple</title></info>
+    <section xml:id="zend.layout.quickstart.example"><title>Layout d'exemple</title>
         
 
         <para>

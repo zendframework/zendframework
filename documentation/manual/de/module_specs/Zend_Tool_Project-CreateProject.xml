@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.create-a-project"><info><title>Ein Projekt erstellen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.create-a-project"><title>Ein Projekt erstellen</title>
     
 
     <note>
@@ -45,7 +45,7 @@
         die verwendet werden können um das Verhalten von Aktionen und Providern zu verändern.
     </para>
 
-    <table xml:id="zend.tool.project.project-provider-table"><info><title>Optionen des Project Providers</title></info>
+    <table xml:id="zend.tool.project.project-provider-table"><title>Optionen des Project Providers</title>
         
 
         <tgroup cols="4">

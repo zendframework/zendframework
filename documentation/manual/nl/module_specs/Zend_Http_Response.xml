@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><info><title>Zend_Http_Response</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><title>Zend_Http_Response</title>
     
 
-    <section xml:id="zend.http.response.introduction"><info><title>Inleiding</title></info>
+    <section xml:id="zend.http.response.introduction"><title>Inleiding</title>
         
         <para>
             <code>Zend_Http_Response</code> verstrekt eenvoudige toegang tot de antwoorden die
@@ -41,7 +41,7 @@
                 </listitem>
             </itemizedlist>
         </para>
-        <example><info><title>Met HTTP antwoorddata werken</title></info>
+        <example><title>Met HTTP antwoorddata werken</title>
             
             <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Http/Client.php';

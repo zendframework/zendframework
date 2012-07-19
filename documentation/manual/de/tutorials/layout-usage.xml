@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.layout.usage"><info><title>Zend_Layout verwenden</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.layout.usage"><title>Zend_Layout verwenden</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         einfach ein paar Konfigurations Optionen übergeben und ein Layout View Skript erstellen.
     </para>
 
-    <section xml:id="learning.layout.usage.configuration"><info><title>Layout Konfiguration</title></info>
+    <section xml:id="learning.layout.usage.configuration"><title>Layout Konfiguration</title>
         
 
         <para>
@@ -46,7 +46,7 @@ resources.layout.layout = "layout"
         </para>
     </section>
 
-    <section xml:id="learning.layout.usage.layout-script"><info><title>Ein Layout Skript erstellen</title></info>
+    <section xml:id="learning.layout.usage.layout-script"><title>Ein Layout Skript erstellen</title>
         
 
         <para>
@@ -86,7 +86,7 @@ resources.layout.layout = "layout"
         </para>
     </section>
 
-    <section xml:id="learning.layout.usage.access"><info><title>Auf das Layout Objekt zugreifen</title></info>
+    <section xml:id="learning.layout.usage.access"><title>Auf das Layout Objekt zugreifen</title>
         
 
         <para>
@@ -167,7 +167,7 @@ $layout = $bootstrap->getResource('Layout');
         </itemizedlist>
     </section>
 
-    <section xml:id="learning.layout.usage.other-operations"><info><title>Andere Operationen</title></info>
+    <section xml:id="learning.layout.usage.other-operations"><title>Andere Operationen</title>
         
 
         <para>

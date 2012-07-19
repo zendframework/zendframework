@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>介绍</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><title>介绍</title>
     
     <para>
         <code>Zend_Feed</code>提供了处理的 RSS 和 Atom Feed的功能。它提供了一套自然的方法用于
@@ -15,14 +15,14 @@
         在下面的例子中，我们示范了一个获得一个RSS feed并将其中的一般部分相关数据保存到一个PHP数组中的简单实例，这样这些数据就能方便的用于输出、保存到数据库等等。
     </para>
 
-    <note><info><title>Be aware</title></info>
+    <note><title>Be aware</title>
         
         <para>
         许多RSS中的channel和item属性是不同的。RSS的规范中提供了许多可选的属性，因此在编写RSS相关应用代码时要充分考虑这点。
         </para>
     </note>
 
-    <example><info><title>用Zend_Feed来处理RSS Feed数据</title></info>
+    <example><title>用Zend_Feed来处理RSS Feed数据</title>
         
         <programlisting role="php"><![CDATA[
 <?php

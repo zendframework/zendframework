@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.console"><info><title>Zend_ProgressBar_Adapter_Console</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.console"><title>Zend_ProgressBar_Adapter_Console</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         paska postępu.
     </para>
 
-    <note><info><title>Automatyczne rozpoznawanie szerokości konsoli</title></info>
+    <note><title>Automatyczne rozpoznawanie szerokości konsoli</title>
         
 
         <para>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><info><title>Zend_Http_Response</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><title>Zend_Http_Response</title>
     
 
-    <section xml:id="zend.http.response.introduction"><info><title>简介</title></info>
+    <section xml:id="zend.http.response.introduction"><title>简介</title>
         
         <para>
             对于由<xref linkend="zend.http.client"/>返回的应答(Response)信息，<code>Zend_Http_Response</code>
@@ -40,7 +40,7 @@
                 </listitem>
             </itemizedlist>
         </para>
-        <example><info><title>处理HTTP应答</title></info>
+        <example><title>处理HTTP应答</title>
             
             <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Http/Client.php';

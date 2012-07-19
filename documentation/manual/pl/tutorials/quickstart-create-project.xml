@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-project"><info><title>Utworzenie projektu</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-project"><title>Utworzenie projektu</title>
     
 
     <para>
         Aby utworzyć nowy projekt należy wcześniej pobrać i rozpakować Zend Framework.
     </para>
 
-    <section xml:id="learning.quickstart.create-project.install-zf"><info><title>Instalacja Zend Framework</title></info>
+    <section xml:id="learning.quickstart.create-project.install-zf"><title>Instalacja Zend Framework</title>
         
 
         <para>
@@ -43,10 +43,10 @@
         </para>
     </section>
 
-    <section xml:id="learning.quickstart.create-project.create-project"><info><title>Tworzenie projektu</title></info>
+    <section xml:id="learning.quickstart.create-project.create-project"><title>Tworzenie projektu</title>
         
 
-        <note><info><title>Narzędzie wiersza poleceń zf</title></info>
+        <note><title>Narzędzie wiersza poleceń zf</title>
             
 
             <para>
@@ -143,7 +143,7 @@ quickstart
         </para>
     </section>
 
-    <section xml:id="learning.quickstart.create-project.bootstrap"><info><title>Bootstrap</title></info>
+    <section xml:id="learning.quickstart.create-project.bootstrap"><title>Bootstrap</title>
         
 
         <para>
@@ -167,7 +167,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         </para>
     </section>
 
-    <section xml:id="learning.quickstart.create-project.configuration"><info><title>Konfiguracja</title></info>
+    <section xml:id="learning.quickstart.create-project.configuration"><title>Konfiguracja</title>
         
 
         <para>
@@ -216,7 +216,7 @@ phpSettings.display_errors = 1
         </para>
     </section>
 
-    <section xml:id="learning.quickstart.create-project.action-controllers"><info><title>Kontrolery akcji (action controllers)</title></info>
+    <section xml:id="learning.quickstart.create-project.action-controllers"><title>Kontrolery akcji (action controllers)</title>
         
 
         <para>
@@ -307,7 +307,7 @@ class ErrorController extends Zend_Controller_Action
         </para>
     </section>
 
-    <section xml:id="learning.quickstart.create-project.views"><info><title>Widoki (views)</title></info>
+    <section xml:id="learning.quickstart.create-project.views"><title>Widoki (views)</title>
         
 
         <para>
@@ -423,7 +423,7 @@ class ErrorController extends Zend_Controller_Action
 ]]></programlisting>
     </section>
 
-    <section xml:id="learning.quickstart.create-project.vhost"><info><title>Utworzenie wirtualnego hosta</title></info>
+    <section xml:id="learning.quickstart.create-project.vhost"><title>Utworzenie wirtualnego hosta</title>
         
 
         <para>
@@ -528,7 +528,7 @@ class ErrorController extends Zend_Controller_Action
         </para>
     </section>
 
-    <section xml:id="learning.quickstart.create-project.checkpoint"><info><title>Punkt kontrolny</title></info>
+    <section xml:id="learning.quickstart.create-project.checkpoint"><title>Punkt kontrolny</title>
         
 
         <para>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><info><title>Zend Framework PHP 標準コーディング規約</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><title>Zend Framework PHP 標準コーディング規約</title>
     
-    <section xml:id="coding-standard.overview"><info><title>概要</title></info>
+    <section xml:id="coding-standard.overview"><title>概要</title>
         
 
-        <section xml:id="coding-standard.overview.scope"><info><title>対象範囲</title></info>
+        <section xml:id="coding-standard.overview.scope"><title>対象範囲</title>
             
 
             <para>
@@ -49,7 +49,7 @@
             </itemizedlist>
         </section>
 
-        <section xml:id="coding-standard.overview.goals"><info><title>目標</title></info>
+        <section xml:id="coding-standard.overview.goals"><title>目標</title>
             
 
             <para>
@@ -61,10 +61,10 @@
         </section>
     </section>
 
-    <section xml:id="coding-standard.php-file-formatting"><info><title>PHP ファイルの書式</title></info>
+    <section xml:id="coding-standard.php-file-formatting"><title>PHP ファイルの書式</title>
         
 
-        <section xml:id="coding-standard.php-file-formatting.general"><info><title>全般</title></info>
+        <section xml:id="coding-standard.php-file-formatting.general"><title>全般</title>
             
 
             <para>
@@ -84,13 +84,13 @@
             </note>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.indentation"><info><title>字下げ</title></info>
+        <section xml:id="coding-standard.php-file-formatting.indentation"><title>字下げ</title>
             
 
             <para>字下げは空白 4 文字で行います。タブ文字を使ってはいけません。</para>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.max-line-length"><info><title>1 行の長さ</title></info>
+        <section xml:id="coding-standard.php-file-formatting.max-line-length"><title>1 行の長さ</title>
             
 
             <para>
@@ -101,7 +101,7 @@
             </para>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.line-termination"><info><title>行末</title></info>
+        <section xml:id="coding-standard.php-file-formatting.line-termination"><title>行末</title>
             
 
             <para>
@@ -118,10 +118,10 @@
         </section>
     </section>
 
-    <section xml:id="coding-standard.naming-conventions"><info><title>命名規約</title></info>
+    <section xml:id="coding-standard.naming-conventions"><title>命名規約</title>
         
 
-        <section xml:id="coding-standard.naming-conventions.classes"><info><title>クラス</title></info>
+        <section xml:id="coding-standard.naming-conventions.classes"><title>クラス</title>
             
 
             <para>
@@ -166,7 +166,7 @@
             </note>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.abstracts"><info><title>抽象クラス</title></info>
+        <section xml:id="coding-standard.naming-conventions.abstracts"><title>抽象クラス</title>
             
 
             <para>
@@ -231,7 +231,7 @@ abstract class RequestAbstract
             </note>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.interfaces"><info><title>インターフェイス</title></info>
+        <section xml:id="coding-standard.naming-conventions.interfaces"><title>インターフェイス</title>
             
 
             <para>
@@ -261,7 +261,7 @@ abstract class RequestAbstract
             </note>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.filenames"><info><title>ファイル名</title></info>
+        <section xml:id="coding-standard.naming-conventions.filenames"><title>ファイル名</title>
             
 
             <para>
@@ -289,7 +289,7 @@ Zend/View/Helper/FormRadio.php
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.functions-and-methods"><info><title>関数およびメソッド</title></info>
+        <section xml:id="coding-standard.naming-conventions.functions-and-methods"><title>関数およびメソッド</title>
             
 
             <para>
@@ -347,7 +347,7 @@ widgetFactory()
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.variables"><info><title>変数</title></info>
+        <section xml:id="coding-standard.naming-conventions.variables"><title>変数</title>
             
 
             <para>
@@ -378,7 +378,7 @@ widgetFactory()
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.constants"><info><title>定数</title></info>
+        <section xml:id="coding-standard.naming-conventions.constants"><title>定数</title>
             
 
             <para>
@@ -404,10 +404,10 @@ widgetFactory()
         </section>
     </section>
 
-    <section xml:id="coding-standard.coding-style"><info><title>コーディングスタイル</title></info>
+    <section xml:id="coding-standard.coding-style"><title>コーディングスタイル</title>
         
 
-        <section xml:id="coding-standard.coding-style.php-code-demarcation"><info><title>PHP コードの境界</title></info>
+        <section xml:id="coding-standard.coding-style.php-code-demarcation"><title>PHP コードの境界</title>
             
 
             <para>
@@ -429,10 +429,10 @@ widgetFactory()
             </para>
         </section>
 
-        <section xml:id="coding-standard.coding-style.strings"><info><title>文字列</title></info>
+        <section xml:id="coding-standard.coding-style.strings"><title>文字列</title>
             
 
-            <section xml:id="coding-standard.coding-style.strings.literals"><info><title>文字列リテラル</title></info>
+            <section xml:id="coding-standard.coding-style.strings.literals"><title>文字列リテラル</title>
                 
 
                 <para>
@@ -446,7 +446,7 @@ $a = '文字列の例';
 ]]></programlisting>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><info><title>アポストロフィを含む文字列リテラル</title></info>
+            <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><title>アポストロフィを含む文字列リテラル</title>
                 
 
                 <para>
@@ -465,7 +465,7 @@ $sql = "SELECT `id`, `name` from `people` "
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.variable-substitution"><info><title>変数の展開</title></info>
+            <section xml:id="coding-standard.coding-style.strings.variable-substitution"><title>変数の展開</title>
                 
 
                 <para>
@@ -487,7 +487,7 @@ $greeting = "こんにちは ${name} さん。ようこそ!";
 ]]></programlisting>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.string-concatenation"><info><title>文字列の連結</title></info>
+            <section xml:id="coding-standard.coding-style.strings.string-concatenation"><title>文字列の連結</title>
                 
 
                 <para>
@@ -514,10 +514,10 @@ $sql = "SELECT `id`, `name` FROM `people` "
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.arrays"><info><title>配列</title></info>
+        <section xml:id="coding-standard.coding-style.arrays"><title>配列</title>
             
 
-            <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><info><title>数値添字の配列</title></info>
+            <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><title>数値添字の配列</title>
                 
 
                 <para>添字として負の数を使用してはいけません。</para>
@@ -571,7 +571,7 @@ $sampleArray = array(
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.arrays.associative"><info><title>連想配列</title></info>
+            <section xml:id="coding-standard.coding-style.arrays.associative"><title>連想配列</title>
                 
 
                 <para>
@@ -609,10 +609,10 @@ $sampleArray = array(
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.classes"><info><title>クラス</title></info>
+        <section xml:id="coding-standard.coding-style.classes"><title>クラス</title>
             
 
-            <section xml:id="coding-standard.coding-style.classes.declaration"><info><title>クラス宣言</title></info>
+            <section xml:id="coding-standard.coding-style.classes.declaration"><title>クラス宣言</title>
                 
 
                 <para>
@@ -696,7 +696,7 @@ class SampleClass
 ]]></programlisting>
             </section>
 
-            <section xml:id="coding-standard.coding-style.classes.member-variables"><info><title>クラスのメンバ変数</title></info>
+            <section xml:id="coding-standard.coding-style.classes.member-variables"><title>クラスのメンバ変数</title>
                 
 
                 <para>
@@ -718,10 +718,10 @@ class SampleClass
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.functions-and-methods"><info><title>関数およびメソッド</title></info>
+        <section xml:id="coding-standard.coding-style.functions-and-methods"><title>関数およびメソッド</title>
             
 
-            <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><info><title>関数およびメソッドの宣言</title></info>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><title>関数およびメソッドの宣言</title>
                 
 
                 <para>
@@ -849,7 +849,7 @@ class Foo
 ]]></programlisting>
             </section>
 
-            <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><info><title>関数およびメソッドの使用法</title></info>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><title>関数およびメソッドの使用法</title>
                 
 
                 <para>
@@ -890,10 +890,10 @@ threeArguments(array(
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.control-statements"><info><title>制御構造</title></info>
+        <section xml:id="coding-standard.coding-style.control-statements"><title>制御構造</title>
             
 
-            <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><info><title>If/Else/Elseif</title></info>
+            <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><title>If/Else/Elseif</title>
                 
 
                 <para>
@@ -984,7 +984,7 @@ if (($a == $b)
                 </para>
             </section>
 
-            <section xml:id="coding-standards.coding-style.control-statements.switch"><info><title>Switch</title></info>
+            <section xml:id="coding-standards.coding-style.control-statements.switch"><title>Switch</title>
                 
 
                 <para>
@@ -1029,10 +1029,10 @@ switch ($numPeople) {
             </section>
         </section>
 
-        <section xml:id="coding-standards.inline-documentation"><info><title>インラインドキュメント</title></info>
+        <section xml:id="coding-standards.inline-documentation"><title>インラインドキュメント</title>
             
 
-            <section xml:id="coding-standards.inline-documentation.documentation-format"><info><title>ドキュメントの書式</title></info>
+            <section xml:id="coding-standards.inline-documentation.documentation-format"><title>ドキュメントの書式</title>
                 
 
                 <para>
@@ -1051,7 +1051,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.files"><info><title>ファイル</title></info>
+            <section xml:id="coding-standards.inline-documentation.files"><title>ファイル</title>
                 
 
                 <para>
@@ -1096,7 +1096,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.classes"><info><title>クラス</title></info>
+            <section xml:id="coding-standards.inline-documentation.classes"><title>クラス</title>
                 
 
                 <para>
@@ -1140,7 +1140,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.functions"><info><title>関数</title></info>
+            <section xml:id="coding-standards.inline-documentation.functions"><title>関数</title>
                 
 
                 <para>

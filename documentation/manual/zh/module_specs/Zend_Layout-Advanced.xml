@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.advanced"><info><title>Zend_Layout 高级用法</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.advanced"><title>Zend_Layout 高级用法</title>
     
 
     <para>
@@ -28,7 +28,7 @@
         </para></listitem>
     </itemizedlist>
 
-    <section xml:id="zend.layout.advanced.view"><info><title>定制视图对象</title></info>
+    <section xml:id="zend.layout.advanced.view"><title>定制视图对象</title>
         
 
         <para>
@@ -40,7 +40,7 @@ $view = new My_Custom_View();
 $layout->setView($view);
 ?>]]></programlisting>
 
-        <note><info><title>不是所有的 Zend_View 实现都等同</title></info>
+        <note><title>不是所有的 Zend_View 实现都等同</title>
             
 
             <para>
@@ -62,7 +62,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         </note>
     </section>
 
-    <section xml:id="zend.layout.advanced.plugin"><info><title>定制前端控制器插件</title></info>
+    <section xml:id="zend.layout.advanced.plugin"><title>定制前端控制器插件</title>
         
 
         <para>
@@ -78,7 +78,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         </para>
     </section>
 
-    <section xml:id="zend.layout.advanced.helper"><info><title>定制动作助手</title></info>
+    <section xml:id="zend.layout.advanced.helper"><title>定制动作助手</title>
         
 
         <para>
@@ -90,7 +90,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         </para>
     </section>
 
-    <section xml:id="zend.layout.advanced.inflector"><info><title>定制布局脚本路径解析（Resolution）：使用变形器（Inflector）</title></info>
+    <section xml:id="zend.layout.advanced.inflector"><title>定制布局脚本路径解析（Resolution）：使用变形器（Inflector）</title>
         
 
         <para>
@@ -111,7 +111,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             有三个选项来修改变形：通过<code>Zend_Layout</code>访问器修改变形目标和/或视图后缀，修改变形器规则和与<code>Zend_Layout</code>实例联合变形器目标，或者创建你自己的变形器实例并传递给<code>Zend_Layout::setInflector()</code>。
         </para>
 
-        <example xml:id="zend.layout.advanced.inflector.accessors"><info><title>使用Zend_Layout访问器来修改变形器(inflector)</title></info>
+        <example xml:id="zend.layout.advanced.inflector.accessors"><title>使用Zend_Layout访问器来修改变形器(inflector)</title>
             
 
             <para>
@@ -127,7 +127,7 @@ $layout->setViewSuffix('php');
 ?>]]></programlisting>
         </example>
 
-        <example xml:id="zend.layout.advanced.inflector.directmodification"><info><title>Zend_Layout 变形器的直接修改 </title></info>
+        <example xml:id="zend.layout.advanced.inflector.directmodification"><title>Zend_Layout 变形器的直接修改 </title>
             
 
             <para>
@@ -145,7 +145,7 @@ $layout->getInflector()->setTarget('layouts/:script.:suffix')
 ?>]]></programlisting>
         </example>
 
-        <example xml:id="zend.layout.advanced.inflector.custom"><info><title>定制变形器（inflectors）</title></info>
+        <example xml:id="zend.layout.advanced.inflector.custom"><title>定制变形器（inflectors）</title>
             
 
             <para>
@@ -162,7 +162,7 @@ $layout->setInflector($inflector);
 ?>]]></programlisting>
         </example>
 
-        <note><info><title>变形（Inflection）可以被禁止 </title></info>
+        <note><title>变形（Inflection）可以被禁止 </title>
             
 
             <para>

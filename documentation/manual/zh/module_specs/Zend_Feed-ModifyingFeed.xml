@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>修改Feed和条目结构</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><title>修改Feed和条目结构</title>
     
 
     <para>
         <code>Zend_Feed</code>自然的语法既能扩展用于构建和修改Feed以及条目又能非常容易的读取它们。你能容易的把你的新的或者修改过的对象转化成一个结构完整的XML格式保存到文件或者发送到服务器。
     </para>
 
-    <example><info><title>修改一个已存在的条目</title></info>
+    <example><title>修改一个已存在的条目</title>
         
         <programlisting role="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
@@ -30,7 +30,7 @@ echo $entry->saveXML();
         如果你想在你的条目中用一个与<code>atom:</code>, <code>rss:</code>, 或 <code>osrss:</code>不同的命名空间，你必须用<code>Zend_Feed</code>类的<code>Zend_Feed::registerNamespace()</code>方法注册你的命名空间。当你修改一个已存在的元素时，它将维持最初的命名空间。当添加一个新元素时，如果你不特别地指定别的命名空间则程序将使用默认的命名空间。
     </para>
 
-    <example><info><title>用自定义的命名空间创建一个Atom条目元素</title></info>
+    <example><title>用自定义的命名空间创建一个Atom条目元素</title>
         
         <programlisting role="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom();

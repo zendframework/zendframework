@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>控制器脚本</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><title>控制器脚本</title>
     
 
     <para>
         控制器是你实例化和配置Zend_View的地方。你可以分配变量给view，并让view使用某个特定的模板来输出。
     </para>
 
-    <section xml:id="zend.view.controllers.assign"><info><title>变量赋值</title></info>
+    <section xml:id="zend.view.controllers.assign"><title>变量赋值</title>
 
         
 
@@ -61,7 +61,7 @@ $view->assign('c', "Sea");
 
     </section>
 
-    <section xml:id="zend.view.controllers.render"><info><title>调用视图脚本并打印输出</title></info>
+    <section xml:id="zend.view.controllers.render"><title>调用视图脚本并打印输出</title>
 
         
 
@@ -80,7 +80,7 @@ echo $view->render('someView.php');
 
     </section>
 
-    <section xml:id="zend.view.controllers.script-paths"><info><title>视图脚本的路径</title></info>
+    <section xml:id="zend.view.controllers.script-paths"><title>视图脚本的路径</title>
 
         
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title> 简介 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><title> 简介 </title>
 
     
 
@@ -7,7 +7,7 @@
       Zend_Validate 组件提供一组通用的校验器。它也提供了一个简单的校验器链机制，即在用户定义的顺序下，多个校验器可以被用于单个的数据。
     </para>
 
-    <section xml:id="zend.validate.introduction.definition"><info><title> 什么是校验器（validator）? </title></info>
+    <section xml:id="zend.validate.introduction.definition"><title> 什么是校验器（validator）? </title>
 
         
 
@@ -21,7 +21,7 @@
 
     </section>
 
-    <section xml:id="zend.validate.introduction.using"><info><title>校验器的基本用法</title></info>
+    <section xml:id="zend.validate.introduction.using"><title>校验器的基本用法</title>
 
         
 
@@ -62,7 +62,7 @@ if ($validator->isValid($email)) {
 
     </section>
 
-    <section xml:id="zend.validate.introduction.messages"><info><title> 定制消息 </title></info>
+    <section xml:id="zend.validate.introduction.messages"><title> 定制消息 </title>
 
         
 
@@ -134,7 +134,7 @@ if (!validator->isValid('word')) {
 
     </section>
 
-    <section xml:id="zend.validate.introduction.static"><info><title> 使用静态 <code>is()</code> 方法 </title></info>
+    <section xml:id="zend.validate.introduction.static"><title> 使用静态 <code>is()</code> 方法 </title>
 
         
 

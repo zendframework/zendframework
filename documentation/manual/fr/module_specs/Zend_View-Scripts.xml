@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>Scripts de vue</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><title>Scripts de vue</title>
     
 
     <para>
@@ -49,7 +49,7 @@
 <?php endif; ?>
 ]]></programlisting>
 
-    <section xml:id="zend.view.scripts.escaping"><info><title>Échapper la sortie</title></info>
+    <section xml:id="zend.view.scripts.escaping"><title>Échapper la sortie</title>
         
 
         <para>
@@ -108,7 +108,7 @@ echo $view->render(...);
         </para>
     </section>
 
-    <section xml:id="zend.view.scripts.templates"><info><title>Utiliser des systèmes de gabarit (template) alternatifs</title></info>
+    <section xml:id="zend.view.scripts.templates"><title>Utiliser des systèmes de gabarit (template) alternatifs</title>
         
 
         <para>
@@ -119,7 +119,7 @@ echo $view->render(...);
             second en implémentant <classname>Zend_View_Interface</classname>.
         </para>
 
-        <section xml:id="zend.view.scripts.templates.scripts"><info><title>Système de gabarit utilisant les scripts de vues</title></info>
+        <section xml:id="zend.view.scripts.templates.scripts"><title>Système de gabarit utilisant les scripts de vues</title>
             
 
             <para>
@@ -174,7 +174,7 @@ if ($this->livres) {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.view.scripts.templates.interface"><info><title>Système de gabarit utilisant Zend_View_Interface</title></info>
+        <section xml:id="zend.view.scripts.templates.interface"><title>Système de gabarit utilisant Zend_View_Interface</title>
             
 
             <para>

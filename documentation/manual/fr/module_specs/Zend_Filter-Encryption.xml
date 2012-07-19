@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.encrypt"><info><title>Encrypt</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.encrypt"><title>Encrypt</title>
     
     <para>
         Ce filtre va crypter toute chaine avec les paramètres spécifiés. Des adaptateurs sont utilisés.
@@ -36,7 +36,7 @@ $filter->setAdapter('openssl');
         </para>
     </note>
 
-    <section xml:id="zend.filter.set.encrypt.mcrypt"><info><title>Cryptage avec Mcrypt</title></info>
+    <section xml:id="zend.filter.set.encrypt.mcrypt"><title>Cryptage avec Mcrypt</title>
         
         <para>
             Cet adaptateur nécessite la présence de l'extension PHP <code>Mcrypt</code>. Voici ses options:
@@ -143,7 +143,7 @@ print $encrypted;
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.filter.set.encrypt.openssl"><info><title>Cryptage avec OpenSSL</title></info>
+    <section xml:id="zend.filter.set.encrypt.openssl"><title>Cryptage avec OpenSSL</title>
         
         <para>
             Lorsque vous avez installé l'extension PHP <code>OpenSSL</code>, vous pouvez utiliser l'adaptateur

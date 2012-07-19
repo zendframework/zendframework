@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><info><title>Odbieranie kanałów informacyjnych ze stron internetowych</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><title>Odbieranie kanałów informacyjnych ze stron internetowych</title>
     
     <para>
         Strony internetowe często zawierają tagi <code>&lt;link&gt;</code>, które

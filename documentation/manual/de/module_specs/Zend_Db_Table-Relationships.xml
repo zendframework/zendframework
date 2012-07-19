@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.relationships"><info><title>Zend_Db_Table Relationships</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.relationships"><title>Zend_Db_Table Relationships</title>
     
 
-    <section xml:id="zend.db.table.relationships.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.db.table.relationships.introduction"><title>Einführung</title>
         
 
         <para>
@@ -18,7 +18,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.db.table.relationships.defining"><info><title>Verknüpfungen definieren</title></info>
+    <section xml:id="zend.db.table.relationships.defining"><title>Verknüpfungen definieren</title>
         
 
         <para>
@@ -215,7 +215,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.db.table.relationships.fetching.dependent"><info><title>Eine abhängige Zeile holen</title></info>
+    <section xml:id="zend.db.table.relationships.fetching.dependent"><title>Eine abhängige Zeile holen</title>
         
 
         <para>
@@ -241,7 +241,7 @@ $row->findDependentRowset($table, [$rule]);
             Verwendung eines Objekts dieser Tabellenklasse spezifizieren.
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.dependent.example"><info><title>Eine abhängige Zeile holen</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example"><title>Eine abhängige Zeile holen</title>
             
 
             <para>
@@ -273,7 +273,7 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
             <command>'Reporter'</command>.
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.dependent.example-by"><info><title>Eine anhängige Zeile durch eine spezifische Regel erhalten</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-by"><title>Eine anhängige Zeile durch eine spezifische Regel erhalten</title>
             
 
             <para>
@@ -298,9 +298,9 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
             das Select Objekt der Elternzeilen verwendet wird.
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.dependent.example-by-select"><info><title>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-by-select"><title>
                 Ein anhängiges Zeilenset erhalten indem Zend_Db_Table_Select verwendet wird
-            </title></info>
+            </title>
             
 
             <para>
@@ -364,7 +364,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
             </para>
         </note>
 
-        <example xml:id="zend.db.table.relationships.fetching.dependent.example-magic"><info><title>Holen von abhängigen Zeilen durch Verwendung der magischen Methode</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-magic"><title>Holen von abhängigen Zeilen durch Verwendung der magischen Methode</title>
             
 
             <para>
@@ -387,7 +387,7 @@ $bugsAssignedTo = $user1234->findBugsByEngineer();
         </example>
     </section>
 
-    <section xml:id="zend.db.table.relationships.fetching.parent"><info><title>Eine Elternzeile holen</title></info>
+    <section xml:id="zend.db.table.relationships.fetching.parent"><title>Eine Elternzeile holen</title>
         
 
         <para>
@@ -412,7 +412,7 @@ $row->findParentRow($table, [$rule]);
             eines Objektes dieser Tabellenklasse spezifizieren.
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.parent.example"><info><title>Eine Elternzeile holen</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example"><title>Eine Elternzeile holen</title>
             
 
             <para>
@@ -445,7 +445,7 @@ $reporter = $bug1->findParentRow('Accounts');
             <command>'Reporter'</command>.
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.parent.example-by"><info><title>Eine Elternzeile durch eine spezifizierte Regel holen</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example-by"><title>Eine Elternzeile durch eine spezifizierte Regel holen</title>
             
 
             <para>
@@ -504,7 +504,7 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
             </para>
         </note>
 
-        <example xml:id="zend.db.table.relationships.fetching.parent.example-magic"><info><title>Die Elternzeile durch verwenden der magischen Methode holen</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example-magic"><title>Die Elternzeile durch verwenden der magischen Methode holen</title>
             
 
             <para>
@@ -527,7 +527,7 @@ $engineer = $bug1->findParentAccountsByEngineer();
         </example>
     </section>
 
-    <section xml:id="zend.db.table.relationships.fetching.many-to-many"><info><title>Ein Zeilenset über eine Viele-zu-Viele Verknüpfung holen</title></info>
+    <section xml:id="zend.db.table.relationships.fetching.many-to-many"><title>Ein Zeilenset über eine Viele-zu-Viele Verknüpfung holen</title>
         
 
         <para>
@@ -569,7 +569,7 @@ $row->findManyToManyRowset($table,
             Verwendung eines Objektes dieser Tabellenklasse spezifiziert werden.
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example"><info><title>Ein Zeilenset mit einer Viele-Zu-Viele Methode holen</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example"><title>Ein Zeilenset mit einer Viele-Zu-Viele Methode holen</title>
             
 
             <para>
@@ -622,9 +622,9 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
             <command>'Product'</command>.
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-by"><info><title>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-by"><title>
                 Ein Zeilenset mit einer Viele-Zu-Viele Methode durch eine spezielle Regel holen
-            </title></info>
+            </title>
             
 
             <para>
@@ -694,7 +694,7 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
             </para>
         </note>
 
-        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-magic"><info><title>Zeilensets durch Verwendung der magischen Viele-Zu-Viele Methode holen</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-magic"><title>Zeilensets durch Verwendung der magischen Viele-Zu-Viele Methode holen</title>
             
 
             <para>
@@ -717,10 +717,10 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
         </example>
     </section>
 
-    <section xml:id="zend.db.table.relationships.cascading"><info><title>Schreiboperationen kaskadieren</title></info>
+    <section xml:id="zend.db.table.relationships.cascading"><title>Schreiboperationen kaskadieren</title>
         
 
-        <note><info><title>Deklarieren von DRI in der Datenbank:</title></info>
+        <note><title>Deklarieren von DRI in der Datenbank:</title>
             
 
             <para>
@@ -759,7 +759,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             <constant>DELETE</constant> an einer Zeile in einer Elterntabelle ausgeführt wird.
         </para>
 
-        <example xml:id="zend.db.table.relationships.cascading.example-delete"><info><title>Beispiel für ein kaskadierendes Löschen</title></info>
+        <example xml:id="zend.db.table.relationships.cascading.example-delete"><title>Beispiel für ein kaskadierendes Löschen</title>
             
 
             <para>
@@ -805,7 +805,7 @@ $product1234->delete();
             zuerst gelöscht oder aktualisiert.
         </para>
 
-        <example xml:id="zend.db.table.relationships.cascading.example-declaration"><info><title>Beispieldeklaration einer kaskadierenden Operation</title></info>
+        <example xml:id="zend.db.table.relationships.cascading.example-declaration"><title>Beispieldeklaration einer kaskadierenden Operation</title>
             
 
             <para>
@@ -842,7 +842,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 ]]></programlisting>
         </example>
 
-        <section xml:id="zend.db.table.relationships.cascading.notes"><info><title>Notizen betreffend kaskadierenden Operationen</title></info>
+        <section xml:id="zend.db.table.relationships.cascading.notes"><title>Notizen betreffend kaskadierenden Operationen</title>
             
 
             <para>

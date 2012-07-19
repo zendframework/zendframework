@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.position"><info><title>Où est le symbole monnétaire?</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.position"><title>Où est le symbole monnétaire?</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         <property>display</property> qui se configure au moyen de constantes:
     </para>
 
-    <table xml:id="zend.currency.position.table-1"><info><title>Positions disponibles pour la monnaie</title></info>
+    <table xml:id="zend.currency.position.table-1"><title>Positions disponibles pour la monnaie</title>
         
 
         <tgroup cols="2" align="left">
@@ -45,7 +45,7 @@
         </tgroup>
     </table>
 
-    <example xml:id="zend.currency.position.example-1"><info><title>Paramétrer la position du symbole monnétaire</title></info>
+    <example xml:id="zend.currency.position.example-1"><title>Paramétrer la position du symbole monnétaire</title>
         
 
         <para>

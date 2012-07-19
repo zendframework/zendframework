@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.migration"><info><title>עדכון מגרסאות קודמות</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.migration"><title>עדכון מגרסאות קודמות</title>
     
 
     <para>
         פרק זה נועד בעיקר למידע אודות עדכון המערכות שלכם שנכתבו על גבי גרסאות קודמות של Zend Framework ודורשות עדכונים מסויימים כדי לעבוד עם הגרסאות החדשות.
     </para>
 
-    <section xml:id="zend.view.migration.zf5748"><info><title>עדכון מגרסאות קודמות ל 1.7.5</title></info>
+    <section xml:id="zend.view.migration.zf5748"><title>עדכון מגרסאות קודמות ל 1.7.5</title>
         
 
         <para>
@@ -25,7 +25,7 @@ echo $view->render($_GET['foobar']); // LFI inclusion
             כעת <code>Zend_View</code> כברירת מחדל תזרוק שגיאה על ידי חריגים ברגע שיהיה ניסיון בטעינת קובץ בדרך זו.
         </para>
 
-        <section xml:id="zend.view.migration.zf5748.disabling"><info><title>ביטול הגנה מפני LFI במתודת ה render()</title></info>
+        <section xml:id="zend.view.migration.zf5748.disabling"><title>ביטול הגנה מפני LFI במתודת ה render()</title>
             
 
             <para>

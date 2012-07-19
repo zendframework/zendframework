@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><title>導入</title>
 
     
 
@@ -9,7 +9,7 @@
         ひとつのデータに対して複数のフィルタを指定した順に適用できます。
     </para>
 
-    <section xml:id="zend.filter.introduction.definition"><info><title>フィルタとは?</title></info>
+    <section xml:id="zend.filter.introduction.definition"><title>フィルタとは?</title>
 
         
 
@@ -43,7 +43,7 @@
 
     </section>
 
-    <section xml:id="zend.filter.introduction.using"><info><title>フィルタの基本的な使用法</title></info>
+    <section xml:id="zend.filter.introduction.using"><title>フィルタの基本的な使用法</title>
 
         
 
@@ -69,7 +69,7 @@ echo $htmlEntities->filter('"'); // "
 
     </section>
 
-    <section xml:id="zend.filter.introduction.static"><info><title>静的メソッド staticFilter() の使用法</title></info>
+    <section xml:id="zend.filter.introduction.static"><title>静的メソッド staticFilter() の使用法</title>
 
         
 
@@ -114,7 +114,7 @@ echo Zend_Filter::filterStatic('"',
             詳細は <xref linkend="zend.filter.input"/> を参照ください。
         </para>
 
-        <section xml:id="zend.filter.introduction.static.namespaces"><info><title>名前空間</title></info>
+        <section xml:id="zend.filter.introduction.static.namespaces"><title>名前空間</title>
 
             
 

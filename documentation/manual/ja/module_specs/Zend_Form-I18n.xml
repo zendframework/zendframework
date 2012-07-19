@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><info><title>Zend_Form の国際化</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><title>Zend_Form の国際化</title>
     
 
     <para>
@@ -20,7 +20,7 @@
         のドキュメント</link> を参照ください。
     </para>
 
-    <note><info><title>項目単位での翻訳の無効化</title></info>
+    <note><title>項目単位での翻訳の無効化</title>
         
 
         <para>
@@ -32,7 +32,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.form.i18n.initialization"><info><title>フォームでの I18n 機能の初期化</title></info>
+    <section xml:id="zend.form.i18n.initialization"><title>フォームでの I18n 機能の初期化</title>
         
 
         <para>
@@ -111,7 +111,7 @@ $element->setTranslator($translate);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.i18n.standard"><info><title>標準的な I18N の対象</title></info>
+    <section xml:id="zend.form.i18n.standard"><title>標準的な I18N の対象</title>
         
 
         <para>

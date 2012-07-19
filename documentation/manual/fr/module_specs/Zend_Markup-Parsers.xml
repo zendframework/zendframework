@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.parsers"><info><title>Analyseurs Zend_Markup (parsers)</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.parsers"><title>Analyseurs Zend_Markup (parsers)</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         Textile.
     </para>
 
-    <section xml:id="zend.markup.parsers.theory"><info><title>Theorie de l'analyse</title></info>
+    <section xml:id="zend.markup.parsers.theory"><title>Theorie de l'analyse</title>
         
 
         <para>
@@ -61,7 +61,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.markup.parsers.bbcode"><info><title>L'analyseur BBCode</title></info>
+    <section xml:id="zend.markup.parsers.bbcode"><title>L'analyseur BBCode</title>
         
 
         <para>
@@ -89,7 +89,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.markup.parsers.textile"><info><title>L'analyseur Textile</title></info>
+    <section xml:id="zend.markup.parsers.textile"><title>L'analyseur Textile</title>
         
 
         <para>
@@ -98,7 +98,7 @@
             exemple de tags:
         </para>
 
-        <table xml:id="zend.markup.parsers.textile.tags"><info><title>Liste de tags Textile basiques</title></info>
+        <table xml:id="zend.markup.parsers.textile.tags"><title>Liste de tags Textile basiques</title>
             
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">
@@ -197,7 +197,7 @@
             deux nouvelles lignes, et s'il y a des tags supplémentaires, un nouveau paragraphe sera ajouté.
         </para>
 
-        <section xml:id="zend.markup.parsers.textile.lists"><info><title>Listes</title></info>
+        <section xml:id="zend.markup.parsers.textile.lists"><title>Listes</title>
             
 
             <para>

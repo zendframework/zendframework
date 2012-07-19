@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table"><info><title>Zend_Db_Table</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table"><title>Zend_Db_Table</title>
 
     
 
-    <section xml:id="zend.db.table.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.db.table.introduction"><title>導入</title>
 
         
 
@@ -24,7 +24,7 @@
 
     </section>
 
-    <section xml:id="zend.db.table.concrete"><info><title>Zend_Db_Table を具象クラスとして使用する方法</title></info>
+    <section xml:id="zend.db.table.concrete"><title>Zend_Db_Table を具象クラスとして使用する方法</title>
         
 
         <para>
@@ -34,7 +34,7 @@
             以下に、もっとも単純な使用例を示します。
         </para>
 
-        <example xml:id="zend.db.table.defining.concrete-instantiation.example1"><info><title>文字列で名前を指定するだけのテーブルクラスの宣言</title></info>
+        <example xml:id="zend.db.table.defining.concrete-instantiation.example1"><title>文字列で名前を指定するだけのテーブルクラスの宣言</title>
 
             
 
@@ -54,7 +54,7 @@ $bugTable = new Zend_Db_Table('bug');
 
     </section>
 
-    <section xml:id="zend.db.table.defining"><info><title>テーブルクラスの定義</title></info>
+    <section xml:id="zend.db.table.defining"><title>テーブルクラスの定義</title>
 
         
 
@@ -63,7 +63,7 @@ $bugTable = new Zend_Db_Table('bug');
             <classname>Zend_Db_Table_Abstract</classname> を継承したクラスを定義します。
         </para>
 
-        <section xml:id="zend.db.table.defining.table-schema"><info><title>テーブル名およびスキーマの定義</title></info>
+        <section xml:id="zend.db.table.defining.table-schema"><title>テーブル名およびスキーマの定義</title>
 
             
 
@@ -73,7 +73,7 @@ $bugTable = new Zend_Db_Table('bug');
                 これは文字列で、データベースでのテーブル名を指定する必要があります。
             </para>
 
-            <example xml:id="zend.db.table.defining.table-schema.example1"><info><title>テーブル名を明示的に指定することによるテーブルクラスの宣言</title></info>
+            <example xml:id="zend.db.table.defining.table-schema.example1"><title>テーブル名を明示的に指定することによるテーブルクラスの宣言</title>
 
                 
 
@@ -91,7 +91,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 このデフォルトを使用する場合は、クラス名をデータベースでのテーブル名と一致させる必要があります。
             </para>
 
-            <example xml:id="zend.db.table.defining.table-schema.example"><info><title>テーブル名を暗黙的に指定することによるテーブルクラスの宣言</title></info>
+            <example xml:id="zend.db.table.defining.table-schema.example"><title>テーブル名を暗黙的に指定することによるテーブルクラスの宣言</title>
 
                 
 
@@ -115,7 +115,7 @@ class bugs extends Zend_Db_Table_Abstract
                 スキーマを、テーブル名の一部として宣言することもできます。
             </para>
 
-            <example xml:id="zend.db.table.defining.table-schema.example3"><info><title>テーブルクラスでのスキーマの宣言</title></info>
+            <example xml:id="zend.db.table.defining.table-schema.example3"><title>テーブルクラスでのスキーマの宣言</title>
 
                 
 
@@ -153,7 +153,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 <property>schema</property> オプションで指定したスキーマ名より優先されます。
             </para>
 
-            <example xml:id="zend.db.table.defining.table-schema.example.constructor"><info><title>インスタンス作成時のテーブル名とスキーマ名の指定</title></info>
+            <example xml:id="zend.db.table.defining.table-schema.example.constructor"><title>インスタンス作成時のテーブル名とスキーマ名の指定</title>
 
                 
 
@@ -186,7 +186,7 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
 
         </section>
 
-        <section xml:id="zend.db.table.defining.primary-key"><info><title>テーブルの主キーの定義</title></info>
+        <section xml:id="zend.db.table.defining.primary-key"><title>テーブルの主キーの定義</title>
 
             
 
@@ -198,7 +198,7 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
                 もし主キーが複合キーの場合はカラム名の配列となります。
             </para>
 
-            <example xml:id="zend.db.table.defining.primary-key.example"><info><title>主キーを指定する例</title></info>
+            <example xml:id="zend.db.table.defining.primary-key.example"><title>主キーを指定する例</title>
 
                 
 
@@ -232,7 +232,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.defining.setup"><info><title>テーブルの設定メソッドのオーバーライド</title></info>
+        <section xml:id="zend.db.table.defining.setup"><title>テーブルの設定メソッドのオーバーライド</title>
 
             
 
@@ -244,7 +244,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 その場合は、メソッドの最後で親クラスの同名のメソッドをコールすることを忘れないようにしましょう。
             </para>
 
-            <example xml:id="zend.db.table.defining.setup.example"><info><title>_setupTableName() メソッドのオーバーライドの例</title></info>
+            <example xml:id="zend.db.table.defining.setup.example"><title>_setupTableName() メソッドのオーバーライドの例</title>
 
                 
 
@@ -309,7 +309,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.initialization"><info><title>テーブルの初期化</title></info>
+        <section xml:id="zend.db.table.initialization"><title>テーブルの初期化</title>
 
             
 
@@ -321,7 +321,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 メソッドよりもこちらを使用することを推奨します。
             </para>
 
-            <example xml:id="zend.db.table.defining.init.usage.example"><info><title>init() メソッドの使用例</title></info>
+            <example xml:id="zend.db.table.defining.init.usage.example"><title>init() メソッドの使用例</title>
 
                 
 
@@ -343,7 +343,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
     </section>
 
-    <section xml:id="zend.db.table.constructing"><info><title>テーブルのインスタンスの作成</title></info>
+    <section xml:id="zend.db.table.constructing"><title>テーブルのインスタンスの作成</title>
 
         
 
@@ -357,7 +357,7 @@ class Bugs extends Zend_Db_Table_Abstract
             それぞれについて、以下で説明します。
         </para>
 
-        <section xml:id="zend.db.table.constructing.adapter"><info><title>データベースアダプタの指定</title></info>
+        <section xml:id="zend.db.table.constructing.adapter"><title>データベースアダプタの指定</title>
 
             
 
@@ -367,7 +367,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 配列のキーは '<property>db</property>' となります。
             </para>
 
-            <example xml:id="zend.db.table.constructing.adapter.example"><info><title>アダプタオブジェクトを使用した、テーブルの作成の例</title></info>
+            <example xml:id="zend.db.table.constructing.adapter.example"><title>アダプタオブジェクトを使用した、テーブルの作成の例</title>
 
                 
 
@@ -381,7 +381,7 @@ $table = new Bugs(array('db' => $db));
 
         </section>
 
-        <section xml:id="zend.db.table.constructing.default-adapter"><info><title>デフォルトのデータベースアダプタの設定</title></info>
+        <section xml:id="zend.db.table.constructing.default-adapter"><title>デフォルトのデータベースアダプタの設定</title>
 
             
 
@@ -396,7 +396,7 @@ $table = new Bugs(array('db' => $db));
                 型のオブジェクトとなります。
             </para>
 
-            <example xml:id="zend.db.table.constructing.default-adapter.example"><info><title>デフォルトアダプタを使用した、テーブルの作成の例</title></info>
+            <example xml:id="zend.db.table.constructing.default-adapter.example"><title>デフォルトアダプタを使用した、テーブルの作成の例</title>
 
                 
 
@@ -420,7 +420,7 @@ $table = new Bugs();
 
         </section>
 
-        <section xml:id="zend.db.table.constructing.registry"><info><title>データベースアダプタのレジストリへの保存</title></info>
+        <section xml:id="zend.db.table.constructing.registry"><title>データベースアダプタのレジストリへの保存</title>
 
             
 
@@ -432,7 +432,7 @@ $table = new Bugs();
                 このキーのエントリが <classname>Zend_Db_Adapter_Abstract</classname> 型のオブジェクトとなります。
             </para>
 
-            <example xml:id="zend.db.table.constructing.registry.example"><info><title>レジストリのキーを使用した、テーブルの作成の例</title></info>
+            <example xml:id="zend.db.table.constructing.registry.example"><title>レジストリのキーを使用した、テーブルの作成の例</title>
 
                 
 
@@ -461,7 +461,7 @@ $table = new Bugs(array('db' => 'my_db'));
 
     </section>
 
-    <section xml:id="zend.db.table.insert"><info><title>テーブルへの行の挿入</title></info>
+    <section xml:id="zend.db.table.insert"><title>テーブルへの行の挿入</title>
 
         
 
@@ -472,7 +472,7 @@ $table = new Bugs(array('db' => 'my_db'));
             カラム名と値の対応を指定します。
         </para>
 
-        <example xml:id="zend.db.table.insert.example"><info><title>テーブルへの挿入の例</title></info>
+        <example xml:id="zend.db.table.insert.example"><title>テーブルへの挿入の例</title>
 
             
 
@@ -497,7 +497,7 @@ $table->insert($data);
             <classname>Zend_Db_Expr</classname> 型のオブジェクトを使用します。
         </para>
 
-        <example xml:id="zend.db.table.insert.example-expr"><info><title>式をテーブルに挿入する例</title></info>
+        <example xml:id="zend.db.table.insert.example-expr"><title>式をテーブルに挿入する例</title>
 
             
 
@@ -520,7 +520,7 @@ $data = array(
             さまざまな形式の主キーを扱う方法を説明します。
         </para>
 
-        <section xml:id="zend.db.table.insert.key-auto"><info><title>自動インクリメントのキーを持つテーブルの使用</title></info>
+        <section xml:id="zend.db.table.insert.key-auto"><title>自動インクリメントのキーを持つテーブルの使用</title>
 
             
 
@@ -535,7 +535,7 @@ $data = array(
                 にすると、そのテーブルは自動インクリメントの主キーを持つものとみなされます。
             </para>
 
-            <example xml:id="zend.db.table.insert.key-auto.example"><info><title>自動インクリメントの主キーを持つテーブルを宣言する例</title></info>
+            <example xml:id="zend.db.table.insert.key-auto.example"><title>自動インクリメントの主キーを持つテーブルを宣言する例</title>
 
                 
 
@@ -569,7 +569,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.insert.key-sequence"><info><title>シーケンスを持つテーブルの使用</title></info>
+        <section xml:id="zend.db.table.insert.key-sequence"><title>シーケンスを持つテーブルの使用</title>
 
             
 
@@ -587,7 +587,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 <constant>INSERT</constant> 操作で使用します。
             </para>
 
-            <example xml:id="zend.db.table.insert.key-sequence.example"><info><title>シーケンスを用いたテーブルを宣言する例</title></info>
+            <example xml:id="zend.db.table.insert.key-sequence.example"><title>シーケンスを用いたテーブルを宣言する例</title>
 
                 
 
@@ -618,7 +618,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.insert.key-natural"><info><title>自然キーを持つテーブルの使用</title></info>
+        <section xml:id="zend.db.table.insert.key-natural"><title>自然キーを持つテーブルの使用</title>
 
             
 
@@ -637,7 +637,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 <classname>Zend_Db_Table_Exception</classname> をスローします。
             </para>
 
-            <example xml:id="zend.db.table.insert.key-natural.example"><info><title>自然キーを用いたテーブルを宣言する例</title></info>
+            <example xml:id="zend.db.table.insert.key-natural.example"><title>自然キーを用いたテーブルを宣言する例</title>
 
                 
 
@@ -667,7 +667,7 @@ class BugStatus extends Zend_Db_Table_Abstract
 
     </section>
 
-    <section xml:id="zend.db.table.update"><info><title>テーブルの行の更新</title></info>
+    <section xml:id="zend.db.table.update"><title>テーブルの行の更新</title>
 
         
 
@@ -680,7 +680,7 @@ class BugStatus extends Zend_Db_Table_Abstract
             <constant>WHERE</constant> 句で使用する <acronym>SQL</acronym> 式です。
         </para>
 
-        <example xml:id="zend.db.table.update.example"><info><title>テーブルの行の更新の例</title></info>
+        <example xml:id="zend.db.table.update.example"><title>テーブルの行の更新の例</title>
 
             
 
@@ -721,7 +721,7 @@ $table->update($data, $where);
 
     </section>
 
-    <section xml:id="zend.db.table.delete"><info><title>テーブルからの行の削除</title></info>
+    <section xml:id="zend.db.table.delete"><title>テーブルからの行の削除</title>
 
         
 
@@ -733,7 +733,7 @@ $table->update($data, $where);
             これにより、削除対象となる行を指定します。
         </para>
 
-        <example xml:id="zend.db.table.delete.example"><info><title>テーブルからの行の削除の例</title></info>
+        <example xml:id="zend.db.table.delete.example"><title>テーブルからの行の削除の例</title>
 
             
 
@@ -769,7 +769,7 @@ $table->delete($where);
 
     </section>
 
-    <section xml:id="zend.db.table.find"><info><title>主キーによる行の検索</title></info>
+    <section xml:id="zend.db.table.find"><title>主キーによる行の検索</title>
 
         
 
@@ -780,7 +780,7 @@ $table->delete($where);
             単一の値か、あるいは複数の値の配列となります。
         </para>
 
-        <example xml:id="zend.db.table.find.example"><info><title>主キーの値によって行を捜す例</title></info>
+        <example xml:id="zend.db.table.find.example"><title>主キーの値によって行を捜す例</title>
 
             
 
@@ -830,7 +830,7 @@ $rows = $table->find(array(1234, 5678));
             というようになります。
         </para>
 
-        <example xml:id="zend.db.table.find.example-compound"><info><title>複合主キーの値の指定による行の取得の例</title></info>
+        <example xml:id="zend.db.table.find.example-compound"><title>複合主キーの値の指定による行の取得の例</title>
 
             
 
@@ -862,11 +862,11 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
 
     </section>
 
-    <section xml:id="zend.db.table.fetch-all"><info><title>行セットの問い合わせ</title></info>
+    <section xml:id="zend.db.table.fetch-all"><title>行セットの問い合わせ</title>
 
         
 
-        <section xml:id="zend.db.table.fetch-all.select"><info><title>Select API</title></info>
+        <section xml:id="zend.db.table.fetch-all.select"><title>Select API</title>
 
             
 
@@ -989,7 +989,7 @@ $row = $table->fetchRow(
 
             <para>
 
-                <example xml:id="zend.db.table.qry.rows.set.simple.usage.example"><info><title>単純な使用法</title></info>
+                <example xml:id="zend.db.table.qry.rows.set.simple.usage.example"><title>単純な使用法</title>
 
                     
 
@@ -1013,7 +1013,7 @@ $rows = $table->fetchAll($select);
 
             <para>
 
-                <example xml:id="zend.db.table.qry.rows.set.fluent.interface.example"><info><title>流れるようなインターフェイスの例</title></info>
+                <example xml:id="zend.db.table.qry.rows.set.fluent.interface.example"><title>流れるようなインターフェイスの例</title>
 
                     
 
@@ -1030,7 +1030,7 @@ $rows =
 
         </section>
 
-        <section xml:id="zend.db.table.fetch-all.usage"><info><title>行セットの取得</title></info>
+        <section xml:id="zend.db.table.fetch-all.usage"><title>行セットの取得</title>
 
             
 
@@ -1041,7 +1041,7 @@ $rows =
                 型のオブジェクトを返します。
             </para>
 
-            <example xml:id="zend.db.table.qry.rows.set.finding.row.example"><info><title>式から行を取得する例</title></info>
+            <example xml:id="zend.db.table.qry.rows.set.finding.row.example"><title>式から行を取得する例</title>
 
                 
 
@@ -1063,7 +1063,7 @@ $rows = $table->fetchAll($select);
                 では、それと同等のロジックで用いられます。
             </para>
 
-            <example xml:id="zend.db.table.fetch-all.example2"><info><title>式を使用した行の検索の例</title></info>
+            <example xml:id="zend.db.table.fetch-all.example2"><title>式を使用した行の検索の例</title>
 
                 
 
@@ -1093,7 +1093,7 @@ $rows = $table->fetchAll($select);
 
         </section>
 
-        <section xml:id="zend.db.table.advanced.usage"><info><title>高度な使用法</title></info>
+        <section xml:id="zend.db.table.advanced.usage"><title>高度な使用法</title>
 
             
 
@@ -1108,7 +1108,7 @@ $rows = $table->fetchAll($select);
 
             <para>
 
-                <example xml:id="zend.db.table.qry.rows.set.retrieving.a.example"><info><title>指定したカラムの取得</title></info>
+                <example xml:id="zend.db.table.qry.rows.set.retrieving.a.example"><title>指定したカラムの取得</title>
 
                     
 
@@ -1149,7 +1149,7 @@ $rows = $table->fetchAll($select);
 
             <para>
 
-                <example xml:id="zend.db.table.qry.rows.set.retrieving.b.example"><info><title>式の結果をカラムとして取得する</title></info>
+                <example xml:id="zend.db.table.qry.rows.set.retrieving.b.example"><title>式の結果をカラムとして取得する</title>
 
                     
 
@@ -1175,7 +1175,7 @@ $rows = $table->fetchAll($select);
 
             <para>
 
-                <example xml:id="zend.db.table.qry.rows.set.refine.example"><info><title>ルックアップテーブルによる fetchAll() の結果の絞込み</title></info>
+                <example xml:id="zend.db.table.qry.rows.set.refine.example"><title>ルックアップテーブルによる fetchAll() の結果の絞込み</title>
 
                     
 
@@ -1208,7 +1208,7 @@ $rows = $table->fetchAll($select);
                 となります。
             </para>
 
-            <example xml:id="zend.db.table.qry.rows.set.integrity.example"><info><title>Zend_Db_Table_Select の整合性チェックを削除し、JOIN した行を許可する</title></info>
+            <example xml:id="zend.db.table.qry.rows.set.integrity.example"><title>Zend_Db_Table_Select の整合性チェックを削除し、JOIN した行を許可する</title>
 
                 
 
@@ -1232,7 +1232,7 @@ $rows = $table->fetchAll($select);
 
     </section>
 
-    <section xml:id="zend.db.table.fetch-row"><info><title>単一の行の問い合わせ</title></info>
+    <section xml:id="zend.db.table.fetch-row"><title>単一の行の問い合わせ</title>
 
         
 
@@ -1241,7 +1241,7 @@ $rows = $table->fetchAll($select);
             単一の行を問い合わせることができます。
         </para>
 
-        <example xml:id="zend.db.table.fetch-row.example1"><info><title>式から単一の行を取得する例</title></info>
+        <example xml:id="zend.db.table.fetch-row.example1"><title>式から単一の行を取得する例</title>
 
             
 
@@ -1264,7 +1264,7 @@ $row = $table->fetchRow($select);
 
     </section>
 
-    <section xml:id="zend.db.table.info"><info><title>テーブルのメタデータ情報の取得</title></info>
+    <section xml:id="zend.db.table.info"><title>テーブルのメタデータ情報の取得</title>
 
         
 
@@ -1274,7 +1274,7 @@ $row = $table->fetchRow($select);
             テーブルについての情報、カラムや主キー、その他のメタデータが含まれます。
         </para>
 
-        <example xml:id="zend.db.table.info.example"><info><title>テーブル名を取得する例</title></info>
+        <example xml:id="zend.db.table.info.example"><title>テーブル名を取得する例</title>
 
             
 
@@ -1368,7 +1368,7 @@ echo "テーブル名は " . $info['name'] . " です\n";
 
     </section>
 
-    <section xml:id="zend.db.table.metadata.caching"><info><title>テーブルのメタデータのキャッシュ</title></info>
+    <section xml:id="zend.db.table.metadata.caching"><title>テーブルのメタデータのキャッシュ</title>
 
         
 
@@ -1423,7 +1423,7 @@ echo "テーブル名は " . $info['name'] . " です\n";
             特定のテーブルオブジェクトについてのみ別のキャッシュを使用させることができます。
         </para>
 
-        <example xml:id="zend.db.table.metadata.caching-default"><info><title>すべてのテーブルオブジェクトでのデフォルトのメタデータキャッシュの使用</title></info>
+        <example xml:id="zend.db.table.metadata.caching-default"><title>すべてのテーブルオブジェクトでのデフォルトのメタデータキャッシュの使用</title>
 
             
 
@@ -1461,7 +1461,7 @@ $bugs = new Bugs();
 
         </example>
 
-        <example xml:id="zend.db.table.metadata.caching-instance"><info><title>特定のテーブルオブジェクトでのメタデータキャッシュの使用</title></info>
+        <example xml:id="zend.db.table.metadata.caching-instance"><title>特定のテーブルオブジェクトでのメタデータキャッシュの使用</title>
 
             
 
@@ -1496,7 +1496,7 @@ $bugs = new Bugs(array('metadataCache' => $cache));
 
         </example>
 
-        <note><info><title>キャッシュのフロントエンドにおける自動シリアライズ</title></info>
+        <note><title>キャッシュのフロントエンドにおける自動シリアライズ</title>
 
             
 
@@ -1514,7 +1514,7 @@ $bugs = new Bugs(array('metadataCache' => $cache));
             <link linkend="zend.cache">Zend_Cache</link> を参照ください。
         </para>
 
-        <section xml:id="zend.db.table.metadata.caching.hardcoding"><info><title>テーブルのメタデータのハードコーディング</title></info>
+        <section xml:id="zend.db.table.metadata.caching.hardcoding"><title>テーブルのメタデータのハードコーディング</title>
             
 
             <para>
@@ -1577,11 +1577,11 @@ $bugs->setMetadataCacheInClass(false);
         </section>
     </section>
 
-    <section xml:id="zend.db.table.extending"><info><title>テーブルクラスのカスタマイズおよび拡張</title></info>
+    <section xml:id="zend.db.table.extending"><title>テーブルクラスのカスタマイズおよび拡張</title>
 
         
 
-        <section xml:id="zend.db.table.extending.row-rowset"><info><title>独自の行クラスあるいは行セットクラスの使用</title></info>
+        <section xml:id="zend.db.table.extending.row-rowset"><title>独自の行クラスあるいは行セットクラスの使用</title>
 
             
 
@@ -1605,7 +1605,7 @@ $bugs->setMetadataCacheInClass(false);
                 ここには、クラスの名前を文字列で指定します。
             </para>
 
-            <example xml:id="zend.db.table.extending.row-rowset.example"><info><title>行クラスおよび行セットクラスの指定の例</title></info>
+            <example xml:id="zend.db.table.extending.row-rowset.example"><title>行クラスおよび行セットクラスの指定の例</title>
 
                 
 
@@ -1644,7 +1644,7 @@ $rows = $table->fetchAll($where);
                 何の影響も及ぼしません。
             </para>
 
-            <example xml:id="zend.db.table.extending.row-rowset.example2"><info><title>行クラスおよび行セットクラスの変更の例</title></info>
+            <example xml:id="zend.db.table.extending.row-rowset.example2"><title>行クラスおよび行セットクラスの変更の例</title>
 
                 
 
@@ -1677,7 +1677,7 @@ $rowsCustom = $table->fetchAll($where);
 
         </section>
 
-        <section xml:id="zend.db.table.extending.insert-update"><info><title>Insert、Update および Delete 時の独自ロジックの定義</title></info>
+        <section xml:id="zend.db.table.extending.insert-update"><title>Insert、Update および Delete 時の独自ロジックの定義</title>
 
             
 
@@ -1688,7 +1688,7 @@ $rowsCustom = $table->fetchAll($where);
                 最後に親クラスのメソッドをコールすることを忘れないようにしましょう。
             </para>
 
-            <example xml:id="zend.db.table.extending.insert-update.example"><info><title>タイムスタンプを処理する独自ロジック</title></info>
+            <example xml:id="zend.db.table.extending.insert-update.example"><title>タイムスタンプを処理する独自ロジック</title>
 
                 
 
@@ -1725,7 +1725,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.extending.finders"><info><title>Zend_Db_Table における独自の検索メソッドの定義</title></info>
+        <section xml:id="zend.db.table.extending.finders"><title>Zend_Db_Table における独自の検索メソッドの定義</title>
 
             
 
@@ -1740,7 +1740,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 よく使う問い合わせを定義しておいたほうが便利です。
             </para>
 
-            <example xml:id="zend.db.table.extending.finders.example"><info><title>状況を指定してバグを検索する独自メソッド</title></info>
+            <example xml:id="zend.db.table.extending.finders.example"><title>状況を指定してバグを検索する独自メソッド</title>
 
                 
 
@@ -1761,7 +1761,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.extending.inflection"><info><title>Zend_Db_Table における語尾変化の定義</title></info>
+        <section xml:id="zend.db.table.extending.inflection"><title>Zend_Db_Table における語尾変化の定義</title>
 
             
 
@@ -1807,7 +1807,7 @@ class Bugs extends Zend_Db_Table_Abstract
                 を継承した抽象クラスを作成し、さらにそれを継承したテーブルクラスを作成するという方法があります。
             </para>
 
-            <example xml:id="zend.db.table.extending.inflection.example"><info><title>語尾変化を実装した抽象テーブルクラスの例</title></info>
+            <example xml:id="zend.db.table.extending.inflection.example"><title>語尾変化を実装した抽象テーブルクラスの例</title>
 
                 
 

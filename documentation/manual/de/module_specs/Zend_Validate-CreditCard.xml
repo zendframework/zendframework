@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.creditcard"><info><title>CreditCard</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.creditcard"><title>CreditCard</title>
     
 
     <para>
@@ -48,7 +48,7 @@
         </listitem>
     </itemizedlist>
 
-    <note><info><title>Ungültige Institute</title></info>
+    <note><title>Ungültige Institute</title>
         
 
         <para>
@@ -62,7 +62,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.validate.set.creditcard.options"><info><title>Unterstützte Optionen für Zend_Validate_CreditCard</title></info>
+    <section xml:id="zend.validate.set.creditcard.options"><title>Unterstützte Optionen für Zend_Validate_CreditCard</title>
         
 
         <para>
@@ -87,7 +87,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.creditcard.basic"><info><title>Grundsätzliche Verwendung</title></info>
+    <section xml:id="zend.validate.set.creditcard.basic"><title>Grundsätzliche Verwendung</title>
         
 
         <para>
@@ -111,7 +111,7 @@ if ($valid->isValid($input)) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.creditcard.institute"><info><title>Definierte Kreditkarte akzeptieren</title></info>
+    <section xml:id="zend.validate.set.creditcard.institute"><title>Definierte Kreditkarte akzeptieren</title>
         
 
         <para>
@@ -160,7 +160,7 @@ $valid = new Zend_Validate_CreditCard(array(
 ));
 ]]></programlisting>
 
-        <table xml:id="zend.validate.set.creditcard.institute.table"><info><title>Konstanten für Kreditkarten Institute</title></info>
+        <table xml:id="zend.validate.set.creditcard.institute.table"><title>Konstanten für Kreditkarten Institute</title>
             
 
             <tgroup cols="2">
@@ -254,7 +254,7 @@ $valid->setType(array(
 ));
 ]]></programlisting>
 
-        <note><info><title>Standard Institute</title></info>
+        <note><title>Standard Institute</title>
             
 
             <para>
@@ -269,7 +269,7 @@ $valid->setType(array(
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.creditcard.servicecheck"><info><title>Prüfung durch Verwendung einer fremden API</title></info>
+    <section xml:id="zend.validate.set.creditcard.servicecheck"><title>Prüfung durch Verwendung einer fremden API</title>
         
 
         <para>

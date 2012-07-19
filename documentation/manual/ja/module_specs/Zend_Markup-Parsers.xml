@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.parsers"><info><title>Zend_Markup パーサー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.parsers"><title>Zend_Markup パーサー</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         という２つのパーサーが同梱されています。
     </para>
 
-    <section xml:id="zend.markup.parsers.theory"><info><title>パーサーの仕組み</title></info>
+    <section xml:id="zend.markup.parsers.theory"><title>パーサーの仕組み</title>
         
 
         <para>
@@ -61,7 +61,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.markup.parsers.bbcode"><info><title>BBCode パーサー</title></info>
+    <section xml:id="zend.markup.parsers.bbcode"><title>BBCode パーサー</title>
         
 
         <para>
@@ -89,7 +89,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.markup.parsers.textile"><info><title>Textile パーサー</title></info>
+    <section xml:id="zend.markup.parsers.textile"><title>Textile パーサー</title>
         
 
         <para>
@@ -98,7 +98,7 @@
             以下は見本例のタグのリストです:
         </para>
 
-        <table xml:id="zend.markup.parsers.textile.tags"><info><title>基本的な Textile タグのリスト</title></info>
+        <table xml:id="zend.markup.parsers.textile.tags"><title>基本的な Textile タグのリスト</title>
             
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">
@@ -203,7 +203,7 @@
             段落は2行の新しい行で終わり、よりタグがあった場合、新しい段落が加えられます。
         </para>
 
-        <section xml:id="zend.markup.parsers.textile.lists"><info><title>リスト</title></info>
+        <section xml:id="zend.markup.parsers.textile.lists"><title>リスト</title>
             
 
             <para>

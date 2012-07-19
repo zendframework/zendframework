@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>Classi personalizzate per feed ed elementi</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><title>Classi personalizzate per feed ed elementi</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         Si noti come la classe si occupa di eseguire anche la richiesta a <code>registerNamespace()</code> in modo che l'utente finale non debba preoccuparsi affatto dell'uso dei namespace.
     </para>
 
-    <example xml:id="zend.feed.custom-feed.example.extending"><info><title>Estensione della classe elemento Atom con namespace personalizzati</title></info>
+    <example xml:id="zend.feed.custom-feed.example.extending"><title>Estensione della classe elemento Atom con namespace personalizzati</title>
         
         <programlisting role="php"><![CDATA[<?php
 /**

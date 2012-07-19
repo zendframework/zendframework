@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.autodiscovery"><info><title>Auto découverte</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.autodiscovery"><title>Auto découverte</title>
     
 
-    <section xml:id="zend.soap.autodiscovery.introduction"><info><title>Introduction à l'auto découverte</title></info>
+    <section xml:id="zend.soap.autodiscovery.introduction"><title>Introduction à l'auto découverte</title>
         
 
         <para>
@@ -99,7 +99,7 @@ $autodiscover->handle();
             fournit.
         </para>
 
-        <note xml:id="zend.soap.autodiscovery.introduction.noserver"><info><title>Zend_Soap_Autodiscover n'est pas un serveur SOAP</title></info>
+        <note xml:id="zend.soap.autodiscovery.introduction.noserver"><title>Zend_Soap_Autodiscover n'est pas un serveur SOAP</title>
             
 
             <para>
@@ -133,7 +133,7 @@ if(isset($_GET['wsdl'])) {
             </note>
         </section>
 
-        <section xml:id="zend.soap.autodiscovery.class"><info><title>Auto découverte de classe</title></info>
+        <section xml:id="zend.soap.autodiscovery.class"><title>Auto découverte de classe</title>
             
 
         <para>
@@ -203,7 +203,7 @@ $autodiscover->handle();
                 </itemizedlist>
             </para>
 
-        <note><info><title>Important !</title></info>
+        <note><title>Important !</title>
             
 
             <para>
@@ -222,7 +222,7 @@ $autodiscover->handle();
         </note>
     </section>
 
-    <section xml:id="zend.soap.autodiscovery.functions"><info><title>Auto découverte des fonctions</title></info>
+    <section xml:id="zend.soap.autodiscovery.functions"><title>Auto découverte des fonctions</title>
         
 
         <para>
@@ -291,7 +291,7 @@ $autodiscover->handle();
                 </itemizedlist>
             </para>
 
-        <note><info><title>Important!</title></info>
+        <note><title>Important!</title>
             
 
             <para>
@@ -310,7 +310,7 @@ $autodiscover->handle();
         </note>
     </section>
 
-    <section xml:id="zend.soap.autodiscovery.datatypes"><info><title>Types de donnée auto découverts</title></info>
+    <section xml:id="zend.soap.autodiscovery.datatypes"><title>Types de donnée auto découverts</title>
         
 
         <para>
@@ -387,7 +387,7 @@ $autodiscover->handle();
         </para>
     </section>
 
-    <section xml:id="zend.soap.autodiscovery.wsdlstyles"><info><title>Styles de liaisons WSDL</title></info>
+    <section xml:id="zend.soap.autodiscovery.wsdlstyles"><title>Styles de liaisons WSDL</title>
         
 
         <para>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><info><title>Uwierzytelnianie w oparciu o tabelę bazy danych</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><title>Uwierzytelnianie w oparciu o tabelę bazy danych</title>
     
-    <section xml:id="zend.auth.adapter.dbtable.introduction"><info><title>Wprowadzenie</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.introduction"><title>Wprowadzenie</title>
         
         <para>
             <classname>Zend_Auth_Adapter_DbTable</classname> zapewnia możliwość
@@ -63,7 +63,7 @@
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><info><title>Podstawowe użycie</title></info>
+        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><title>Podstawowe użycie</title>
             
             <para>
                 Jak wyjaśniono we wprowadzeniu, konstruktor klasy
@@ -185,7 +185,7 @@ Array
 
         </example>
     </section>
-    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><info><title>Zaawansowane użycie: Stałe przechowywanie obiektu DbTable Result</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><title>Zaawansowane użycie: Stałe przechowywanie obiektu DbTable Result</title>
         
         <para>
             Domyślnie <classname>Zend_Auth_Adapter_DbTable</classname> po udanym
@@ -228,7 +228,7 @@ if ($result->isValid()) {
 }
 ]]></programlisting>
     </section>
-    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><info><title>Przykład zaawansowanego użycia</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><title>Przykład zaawansowanego użycia</title>
         
         <para>
             O ile głównym przeznaczeniem komponentu <classname>Zend_Auth</classname> 

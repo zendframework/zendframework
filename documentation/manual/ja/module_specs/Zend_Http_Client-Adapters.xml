@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client.adapters"><info><title>Zend_Http_Client - 接続アダプタ</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client.adapters"><title>Zend_Http_Client - 接続アダプタ</title>
     
 
-    <section xml:id="zend.http.client.adapters.overview"><info><title>概要</title></info>
+    <section xml:id="zend.http.client.adapters.overview"><title>概要</title>
         
 
         <para>
@@ -56,7 +56,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.http.client.adapters.socket"><info><title>ソケットアダプタ</title></info>
+    <section xml:id="zend.http.client.adapters.socket"><title>ソケットアダプタ</title>
         
 
         <para>
@@ -71,7 +71,7 @@
             <classname>Zend_Http_Client-&gt;setConfig()</classname> で指定するか、
             あるいはクライアントのコンストラクタに渡します。
 
-            <table xml:id="zend.http.client.adapter.socket.configuration.table"><info><title>Zend_Http_Client_Adapter_Socket の設定パラメータ</title></info>
+            <table xml:id="zend.http.client.adapter.socket.configuration.table"><title>Zend_Http_Client_Adapter_Socket の設定パラメータ</title>
                 
 
                 <tgroup cols="4">
@@ -141,7 +141,7 @@
                 </tgroup>
             </table>
 
-            <note><info><title>持続的な TCP 接続</title></info>
+            <note><title>持続的な TCP 接続</title>
                 
 
                 <para>
@@ -167,7 +167,7 @@
                 </para>
             </note>
 
-            <note><info><title>HTTPS SSL ストリームパラメータ</title></info>
+            <note><title>HTTPS SSL ストリームパラメータ</title>
                 
 
                 <para>
@@ -186,7 +186,7 @@
             </note>
         </para>
 
-        <example xml:id="zend.http.client.adapters.socket.example-1"><info><title>HTTPS トランスポート層の変更</title></info>
+        <example xml:id="zend.http.client.adapters.socket.example-1"><title>HTTPS トランスポート層の変更</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -213,7 +213,7 @@ $response = $client->request();
             <methodname>fsockopen('tls://www.example.com', 443)</methodname>
         </para>
 
-        <section xml:id="zend.http.client.adapters.socket.streamcontext"><info><title>ソケットアダプタのストリームコンテキストへのアクセスとカスタマイズ</title></info>
+        <section xml:id="zend.http.client.adapters.socket.streamcontext"><title>ソケットアダプタのストリームコンテキストへのアクセスとカスタマイズ</title>
             
 
             <para>
@@ -255,7 +255,7 @@ $response = $client->request();
                 </itemizedlist>
             </para>
 
-            <example xml:id="zend.http.client.adapters.socket.streamcontext.example-1"><info><title>ソケットアダプタのストリームコンテキストオプションの設定</title></info>
+            <example xml:id="zend.http.client.adapters.socket.streamcontext.example-1"><title>ソケットアダプタのストリームコンテキストオプションの設定</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -314,7 +314,7 @@ echo $opts['ssl']['peer_certificate'];
         </section>
     </section>
 
-    <section xml:id="zend.http.client.adapters.proxy"><info><title>プロキシアダプタ</title></info>
+    <section xml:id="zend.http.client.adapters.proxy"><title>プロキシアダプタ</title>
         
 
         <para>
@@ -330,7 +330,7 @@ echo $opts['ssl']['peer_certificate'];
             デフォルトの 'adapter' オプション以外に
             いくつか追加のパラメータを設定する必要があります。
 
-            <table xml:id="zend.http.client.adapters.proxy.table"><info><title>Zend_Http_Client の設定パラメータ</title></info>
+            <table xml:id="zend.http.client.adapters.proxy.table"><title>Zend_Http_Client の設定パラメータ</title>
                 
 
                 <tgroup cols="4">
@@ -405,7 +405,7 @@ echo $opts['ssl']['peer_certificate'];
             (Zend_Http_Client::AUTH_BASIC) のみをサポートしています。
         </para>
 
-        <example xml:id="zend.http.client.adapters.proxy.example-1"><info><title>プロキシサーバを使用した Zend_Http_Client の使用法</title></info>
+        <example xml:id="zend.http.client.adapters.proxy.example-1"><title>プロキシサーバを使用した Zend_Http_Client の使用法</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -442,7 +442,7 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
         </note>
     </section>
 
-    <section xml:id="zend.http.client.adapters.curl"><info><title>cURL アダプタ</title></info>
+    <section xml:id="zend.http.client.adapters.curl"><title>cURL アダプタ</title>
         
 
         <para>
@@ -455,7 +455,7 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
             大きなファイルをサーバ間で移動させるときなどにも使用できます。
         </para>
 
-        <example xml:id="zend.http.client.adapters.curl.example-1"><info><title>cURL オプションの設定</title></info>
+        <example xml:id="zend.http.client.adapters.curl.example-1"><title>cURL オプションの設定</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -479,7 +479,7 @@ $client = new Zend_Http_Client($uri, $config);
             <code>$adapter-&gt;getHandle();</code> をコールします。
         </para>
 
-        <example xml:id="zend.http.client.adapters.curl.example-2"><info><title>ハンドルによるファイル転送</title></info>
+        <example xml:id="zend.http.client.adapters.curl.example-2"><title>ハンドルによるファイル転送</title>
             
 
             <para>
@@ -504,7 +504,7 @@ $client->request("PUT");
         </example>
     </section>
 
-    <section xml:id="zend.http.client.adapters.test"><info><title>テストアダプタ</title></info>
+    <section xml:id="zend.http.client.adapters.test"><title>テストアダプタ</title>
         
 
         <para>
@@ -528,7 +528,7 @@ $client->request("PUT");
             実際の <acronym>HTTP</acronym> リクエストは行いません。
         </para>
 
-        <example xml:id="zend.http.client.adapters.test.example-1"><info><title>HTTP レスポンススタブを使用したテスト</title></info>
+        <example xml:id="zend.http.client.adapters.test.example-1"><title>HTTP レスポンススタブを使用したテスト</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -572,7 +572,7 @@ $response = $client->request('GET');
             結果が呼び出し元に返ってくるまで次のレスポンスを設定できないからです。
         </para>
 
-        <example xml:id="zend.http.client.adapters.test.example-2"><info><title>複数の HTTP レスポンススタブを使用したテスト</title></info>
+        <example xml:id="zend.http.client.adapters.test.example-2"><title>複数の HTTP レスポンススタブを使用したテスト</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -642,7 +642,7 @@ $adapter->addResponse(
             (外部サイトがダウンしていたときの) 挙動をテストする際に有用です。
         </para>
 
-        <example xml:id="zend.http.client.adapters.test.example-3"><info><title>アダプタを失敗させる</title></info>
+        <example xml:id="zend.http.client.adapters.test.example-3"><title>アダプタを失敗させる</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -668,7 +668,7 @@ try {
         </example>
     </section>
 
-    <section xml:id="zend.http.client.adapters.extending"><info><title>独自の接続アダプタの作成</title></info>
+    <section xml:id="zend.http.client.adapters.extending"><title>独自の接続アダプタの作成</title>
         
 
         <para>
@@ -686,7 +686,7 @@ try {
             アダプタで定義する必要があります。
         </para>
 
-        <example xml:id="zend.http.client.adapters.extending.example-1"><info><title>独自の接続アダプタの作成</title></info>
+        <example xml:id="zend.http.client.adapters.extending.example-1"><title>独自の接続アダプタの作成</title>
             
 
             <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.ip"><info><title>Ip</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.ip"><title>Ip</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         Adresse ist. Er unterstützt den IPv4 und auch den IPv6 Standard.
     </para>
 
-    <section xml:id="zend.validate.set.ip.options"><info><title>Unterstützte Optionen für Zend_Validate_Ip</title></info>
+    <section xml:id="zend.validate.set.ip.options"><title>Unterstützte Optionen für Zend_Validate_Ip</title>
         
 
         <para>
@@ -31,7 +31,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.ip.basic"><info><title>Grundsätzliche Verwendung</title></info>
+    <section xml:id="zend.validate.set.ip.basic"><title>Grundsätzliche Verwendung</title>
         
 
         <para>
@@ -47,7 +47,7 @@ if ($validator->isValid($ip)) {
 }
 ]]></programlisting>
 
-        <note><info><title>Ungültige IP Adressen</title></info>
+        <note><title>Ungültige IP Adressen</title>
             
 
             <para>
@@ -59,7 +59,7 @@ if ($validator->isValid($ip)) {
             </para>
         </note>
 
-        <note><info><title>IPv6 Prüfung</title></info>
+        <note><title>IPv6 Prüfung</title>
             
 
             <para>
@@ -71,7 +71,7 @@ if ($validator->isValid($ip)) {
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.ip.singletype"><info><title>IPv4 oder IPv6 alleine prüfen</title></info>
+    <section xml:id="zend.validate.set.ip.singletype"><title>IPv4 oder IPv6 alleine prüfen</title>
         
 
         <para>
@@ -97,7 +97,7 @@ if ($validator->isValid($ip)) {
 }
 ]]></programlisting>
 
-        <note><info><title>Standard Verhalten</title></info>
+        <note><title>Standard Verhalten</title>
             
 
             <para>

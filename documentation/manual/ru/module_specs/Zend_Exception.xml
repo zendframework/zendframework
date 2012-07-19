@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Использование исключений</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><title>Использование исключений</title>
 
     
 
@@ -8,7 +8,7 @@
         наследниками основного класса Zend_Exception.
     </para>
 
-    <example xml:id="zend.exception.using.example"><info><title>Пример отлова исключения</title></info>
+    <example xml:id="zend.exception.using.example"><title>Пример отлова исключения</title>
         
         <programlisting language="php"><![CDATA[
 try {

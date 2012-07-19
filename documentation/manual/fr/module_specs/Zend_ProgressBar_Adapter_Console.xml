@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.console"><info><title>Zend_ProgressBar_Adapter_Console</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.console"><title>Zend_ProgressBar_Adapter_Console</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         le style de la barre de progression elle-même.
     </para>
 
-    <note><info><title>Reconnaissance automatique de la largeur de la console</title></info>
+    <note><title>Reconnaissance automatique de la largeur de la console</title>
         
 
         <para>

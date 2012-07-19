@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><info><title>Zend_Config_Ini</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><title>Zend_Config_Ini</title>
     
     <para>
         <classname>Zend_Config_Ini</classname> permite a los desarrolladores
@@ -15,7 +15,7 @@
         otra sección indicando el nombre de la sección seguido de dos puntos ( "
             <emphasis>:</emphasis> " ) y el nombre de la sección desde la cual
         se quieren heredar los datos. </para>
-    <note><info><title>parse_ini_file</title></info>
+    <note><title>parse_ini_file</title>
         
         <para>
             <classname>Zend_Config_Ini</classname> utiliza la función <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/parse_ini_file">
@@ -27,7 +27,7 @@
             " <constant>FALSE</constant> " , "yes" , "no" , y
                 <constant>NULL</constant> son manejados. </para>
     </note>
-    <note><info><title>Separador de clave</title></info>
+    <note><title>Separador de clave</title>
         
         <para> Por defecto, el carácter separador de clave es el punto ( "
                 <emphasis>.</emphasis> " ). Puede ser reemplazado, no
@@ -43,7 +43,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
 ]]></programlisting>
 
     </note>
-    <example xml:id="zend.config.adapters.ini.example.using"><info><title>Utilizando Zend_Config_Ini</title></info>
+    <example xml:id="zend.config.adapters.ini.example.using"><title>Utilizando Zend_Config_Ini</title>
         
         <para> Este ejemplo muestra una forma de uso básica de
                 <classname>Zend_Config_Ini</classname> para cargar datos de
@@ -87,7 +87,7 @@ echo $config->database->params->dbname; // muestra "dbname"
 ]]></programlisting>
     </example>
     <note>
-        <table xml:id="zend.config.adapters.ini.table"><info><title>Parámetros del constructor Zend_Config_Ini</title></info>
+        <table xml:id="zend.config.adapters.ini.table"><title>Parámetros del constructor Zend_Config_Ini</title>
             
             <tgroup cols="2">
                 <thead>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Strony dokumentu.</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><title>Strony dokumentu.</title>
     
-    <section xml:id="zend.pdf.pages.creation"><info><title>Tworzenie strony.</title></info>
+    <section xml:id="zend.pdf.pages.creation"><title>Tworzenie strony.</title>
         
         <para>
             Strona dokumentu PDF jest reprezentowana przez klasę <code>Zend_Pdf_Page</code>.
@@ -54,7 +54,7 @@
             stron dokumentu, a także możemy nią manipulować jak zwykłą tablicą:
         </para>
 
-        <example xml:id="zend.pdf.pages.example-1"><info><title>Zarządzanie stronami dokumentu PDF.</title></info>
+        <example xml:id="zend.pdf.pages.example-1"><title>Zarządzanie stronami dokumentu PDF.</title>
             
             <programlisting role="php"><![CDATA[
 ...
@@ -75,14 +75,14 @@ unset($pdf->pages[$id]);
         </example>
     </section>
 
-    <section xml:id="zend.pdf.pages.cloning"><info><title>Klonowanie stron.</title></info>
+    <section xml:id="zend.pdf.pages.cloning"><title>Klonowanie stron.</title>
         
         <para>
             Istniejące strony PDF mogą być klonowane przez tworzenie nowego
             obiektu <code>Zend_Pdf_Page</code> z istniejącą stroną w parametrze.
         </para>
 
-        <example xml:id="zend.pdf.pages.example-2"><info><title>Klonowanie istniejącej strony.</title></info>
+        <example xml:id="zend.pdf.pages.example-2"><title>Klonowanie istniejącej strony.</title>
             
             <programlisting role="php"><![CDATA[
 ...

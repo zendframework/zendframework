@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.iban"><info><title>Iban</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.iban"><title>Iban</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         "International Bank Account Number".
     </para>
 
-    <section xml:id="zend.validate.set.iban.options"><info><title>Unterstützte Optionen für Zend_Validate_Iban</title></info>
+    <section xml:id="zend.validate.set.iban.options"><title>Unterstützte Optionen für Zend_Validate_Iban</title>
         
 
         <para>
@@ -26,7 +26,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.iban.basic"><info><title>IBAN Prüfung</title></info>
+    <section xml:id="zend.validate.set.iban.basic"><title>IBAN Prüfung</title>
         
 
         <para>
@@ -37,7 +37,7 @@
             <classname>Zend_Validate_Iban</classname> verwenden können.
         </para>
 
-        <section xml:id="zend.validate.set.iban.basic.application"><info><title>Anwendungsweites Gebietsschema</title></info>
+        <section xml:id="zend.validate.set.iban.basic.application"><title>Anwendungsweites Gebietsschema</title>
             
 
             <para>
@@ -61,7 +61,7 @@ if ($validator->isValid('AT611904300234573201')) {
 }
 ]]></programlisting>
 
-            <note><info><title>Anwendungsweites Gebietsschema</title></info>
+            <note><title>Anwendungsweites Gebietsschema</title>
                 
 
                 <para>
@@ -75,7 +75,7 @@ if ($validator->isValid('AT611904300234573201')) {
             </note>
         </section>
 
-        <section xml:id="zend.validate.set.iban.basic.false"><info><title>Unscharfe IBAN Prüfung</title></info>
+        <section xml:id="zend.validate.set.iban.basic.false"><title>Unscharfe IBAN Prüfung</title>
             
 
             <para>
@@ -103,7 +103,7 @@ if ($validator->isValid('AT611904300234573201')) {
             </para>
         </section>
 
-        <section xml:id="zend.validate.set.iban.basic.aware"><info><title>Gebietsschema verwendende IBAN Prüfung</title></info>
+        <section xml:id="zend.validate.set.iban.basic.aware"><title>Gebietsschema verwendende IBAN Prüfung</title>
             
 
             <para>
@@ -122,7 +122,7 @@ if ($validator->isValid('AT611904300234573201')) {
 }
 ]]></programlisting>
 
-            <note><info><title>Vollständig qualifizierte Gebietsschemas verwenden</title></info>
+            <note><title>Vollständig qualifizierte Gebietsschemas verwenden</title>
                 
 
                 <para>

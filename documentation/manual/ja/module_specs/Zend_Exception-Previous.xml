@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.previous"><info><title>Previous Exceptions (前の例外)</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.previous"><title>Previous Exceptions (前の例外)</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         Previous exceptions は例外のコンストラクタへの第 3 引数として示されます。
     </para>
 
-    <example xml:id="zend.exception.previous.example"><info><title>Previous exceptions (前の例外)</title></info>
+    <example xml:id="zend.exception.previous.example"><title>Previous exceptions (前の例外)</title>
         
 
         <programlisting language="php"><![CDATA[

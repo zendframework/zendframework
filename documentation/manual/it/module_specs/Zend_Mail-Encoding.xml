@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.encoding"><info><title>Codifica</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.encoding"><title>Codifica</title>
     
     <para>
         Per impostazione predefinita, i contenuti dei messaggi Testo e HTML sono codificati con il meccanismo "quoted-printable".

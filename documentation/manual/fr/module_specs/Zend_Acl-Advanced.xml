@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Utilisation avancée</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><title>Utilisation avancée</title>
     
 
-    <section xml:id="zend.acl.advanced.storing"><info><title>Rendre les données ACL persistantes</title></info>
+    <section xml:id="zend.acl.advanced.storing"><title>Rendre les données ACL persistantes</title>
         
 
         <para>
@@ -26,7 +26,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.acl.advanced.assertions"><info><title>Écrire des règles ACL conditionnelles avec des assertions</title></info>
+    <section xml:id="zend.acl.advanced.assertions"><title>Écrire des règles ACL conditionnelles avec des assertions</title>
         
 
         <para>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.definition"><info><title>Zend_Db_Table_Definition</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.definition"><title>Zend_Db_Table_Definition</title>
 
     
 
-    <section xml:id="zend.db.table.definition.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.db.table.definition.introduction"><title>導入</title>
 
         
 
@@ -16,7 +16,7 @@
 
     </section>
 
-    <section xml:id="zend.db.table.definition.usage"><info><title>基本的な利用法</title></info>
+    <section xml:id="zend.db.table.definition.usage"><title>基本的な利用法</title>
 
         
 
@@ -37,7 +37,7 @@
             （この例は、下記の例の 'genre' 節です。）
         </para>
 
-        <example xml:id="zend.db.table.definition.example1"><info><title>データベース・データモデルの定義を記述</title></info>
+        <example xml:id="zend.db.table.definition.example1"><title>データベース・データモデルの定義を記述</title>
 
             
 
@@ -92,7 +92,7 @@ $definition = new Zend_Db_Table_Definition(array(
             プライマリ・テーブル・インスタンス化の例です:
         </para>
 
-        <example xml:id="zend.db.table.definition.example2"><info><title>記述された定義との相互作用</title></info>
+        <example xml:id="zend.db.table.definition.example2"><title>記述された定義との相互作用</title>
 
             
 
@@ -124,7 +124,7 @@ foreach ($authors as $author) {
 
     </section>
 
-    <section xml:id="zend.db.table.definition.advanced-usage"><info><title>高度な利用法</title></info>
+    <section xml:id="zend.db.table.definition.advanced-usage"><title>高度な利用法</title>
 
         
 
@@ -144,7 +144,7 @@ foreach ($authors as $author) {
             この新しい定義とどのように相互作用するかも示します。
         </para>
 
-        <example xml:id="zend.db.table.definition.example3"><info><title>Zend_Db_Table定義の混合利用との相互作用</title></info>
+        <example xml:id="zend.db.table.definition.example3"><title>Zend_Db_Table定義の混合利用との相互作用</title>
 
             
 

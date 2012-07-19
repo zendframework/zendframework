@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><title>導入</title>
     
 
     <para>
@@ -40,7 +40,7 @@
         へのアクセスを認められているかどうかを制御します。
     </para>
 
-    <section xml:id="zend.acl.introduction.resources"><info><title>リソース</title></info>
+    <section xml:id="zend.acl.introduction.resources"><title>リソース</title>
         
         <para>
             <classname>Zend_Acl</classname> では、リソースを作成するのは簡単です。<classname>Zend_Acl</classname> の
@@ -78,7 +78,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.acl.introduction.roles"><info><title>ロール</title></info>
+    <section xml:id="zend.acl.introduction.roles"><title>ロール</title>
         
         <para>
             リソースと同様、ロールを作成するのも簡単です。Zend_Acl の
@@ -107,7 +107,7 @@
             次の例は、あいまいな条件になったときに <classname>Zend_Acl</classname>
             がそれをどう解決するかを示すものです。
         </para>
-        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>ロールの多重継承</title></info>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>ロールの多重継承</title>
             
             <para>
                 以下のコードでは、基本となる三つのロール "guest"、"member"
@@ -167,7 +167,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.creating"><info><title>アクセス制御リストの作成</title></info>
+    <section xml:id="zend.acl.introduction.creating"><title>アクセス制御リストの作成</title>
         
 
         <para>
@@ -191,7 +191,7 @@ $acl = new Zend_Acl();
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.role_registry"><info><title>ロールの登録</title></info>
+    <section xml:id="zend.acl.introduction.role_registry"><title>ロールの登録</title>
         
 
         <para>
@@ -209,7 +209,7 @@ $acl = new Zend_Acl();
             これらの権限を整理すると、次のようになります。
         </para>
 
-        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>サンプル CMS 用のアクセス制御</title></info>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><title>サンプル CMS 用のアクセス制御</title>
           
           <tgroup cols="3">
             <thead>
@@ -275,7 +275,7 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
 
     </section>
 
-    <section xml:id="zend.acl.introduction.defining"><info><title>アクセス制御の定義</title></info>
+    <section xml:id="zend.acl.introduction.defining"><title>アクセス制御の定義</title>
         
 
         <para>
@@ -335,7 +335,7 @@ $acl->allow('administrator');
 
     </section>
 
-    <section xml:id="zend.acl.introduction.querying"><info><title>ACL への問い合わせ</title></info>
+    <section xml:id="zend.acl.introduction.querying"><title>ACL への問い合わせ</title>
         
 
         <para>

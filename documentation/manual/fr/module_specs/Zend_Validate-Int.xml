@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.int"><info><title>Int</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.int"><title>Int</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         aussi gérés.
     </para>
 
-    <section xml:id="zend.validate.set.int.options"><info><title>Options supportées par Zend_Validate_Int</title></info>
+    <section xml:id="zend.validate.set.int.options"><title>Options supportées par Zend_Validate_Int</title>
         
 
         <para>
@@ -24,7 +24,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.int.basic"><info><title>Validation simple d'entiers</title></info>
+    <section xml:id="zend.validate.set.int.basic"><title>Validation simple d'entiers</title>
         
 
         <para>
@@ -46,7 +46,7 @@ $validator->isValid('1,234'); // retourne true
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.int.localized"><info><title>Validation d'entiers localisés</title></info>
+    <section xml:id="zend.validate.set.int.localized"><title>Validation d'entiers localisés</title>
         
 
         <para>

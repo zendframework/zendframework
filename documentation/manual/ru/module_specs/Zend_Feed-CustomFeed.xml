@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>Создание собственных классов лент и записей</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><title>Создание собственных классов лент и записей</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         нужно будет беспокоиться о пространствах имен.
     </para>
 
-    <example xml:id="zend.feed.custom-feed.example.extending"><info><title>Расширение класса сообщения Atom с добавлением специальных пространств имен</title></info>
+    <example xml:id="zend.feed.custom-feed.example.extending"><title>Расширение класса сообщения Atom с добавлением специальных пространств имен</title>
         
         <programlisting language="php"><![CDATA[
 /**

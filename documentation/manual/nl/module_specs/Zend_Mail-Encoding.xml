@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.encoding"><info><title>Encoding</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.encoding"><title>Encoding</title>
     
     <para>
         Tekst en HTML berichtinhoud word standaard met het quotedprintable mechanisme geëncodeerd. Alle

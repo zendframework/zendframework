@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><info><title>Zend_Mime</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><title>Zend_Mime</title>
     
 
-    <section xml:id="zend.mime.mime.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.mime.mime.introduction"><title>導入</title>
         
 
         <para>
@@ -16,7 +16,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.mime.static"><info><title>静的メソッドおよび定数</title></info>
+    <section xml:id="zend.mime.mime.static"><title>静的メソッドおよび定数</title>
         
 
         <para>
@@ -145,7 +145,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.mime.instatiation"><info><title>Zend_Mime インスタンスの作成</title></info>
+    <section xml:id="zend.mime.mime.instatiation"><title>Zend_Mime インスタンスの作成</title>
         
 
         <para>

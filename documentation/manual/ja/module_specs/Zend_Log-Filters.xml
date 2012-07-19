@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><info><title>フィルタ</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><title>フィルタ</title>
     
 
     <para>
         フィルタオブジェクトは、ログに書き出されるメッセージをブロックします。
     </para>
 
-    <section xml:id="zend.log.filters.all-writers"><info><title>すべてのライターに対するフィルタリング</title></info>
+    <section xml:id="zend.log.filters.all-writers"><title>すべてのライターに対するフィルタリング</title>
         
 
         <para>
@@ -36,7 +36,7 @@ $logger->emerg('緊急メッセージ');
         </para>
     </section>
 
-    <section xml:id="zend.log.filters.single-writer"><info><title>ライターのインスタンスに対するフィルタリング</title></info>
+    <section xml:id="zend.log.filters.single-writer"><title>ライターのインスタンスに対するフィルタリング</title>
         
 
         <para>

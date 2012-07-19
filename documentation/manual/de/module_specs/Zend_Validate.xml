@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>Einführung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><title>Einführung</title>
 
 
     <para>
@@ -9,7 +9,7 @@
         angewendet werden können.
     </para>
 
-    <section xml:id="zend.validate.introduction.definition"><info><title>Was ist eine Prüfung?</title></info>
+    <section xml:id="zend.validate.introduction.definition"><title>Was ist eine Prüfung?</title>
 
 
         <para>
@@ -30,7 +30,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.introduction.using"><info><title>Standardnutzung von Prüfungen</title></info>
+    <section xml:id="zend.validate.introduction.using"><title>Standardnutzung von Prüfungen</title>
 
 
         <para>
@@ -88,7 +88,7 @@ if ($validator->isValid($email)) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.introduction.messages"><info><title>Nachrichten anpassen</title></info>
+    <section xml:id="zend.validate.introduction.messages"><title>Nachrichten anpassen</title>
 
 
         <para>
@@ -175,7 +175,7 @@ if (!validator->isValid('word')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.introduction.static"><info><title>Verwenden der statischen is() Methode</title></info>
+    <section xml:id="zend.validate.introduction.static"><title>Verwenden der statischen is() Methode</title>
 
 
         <para>
@@ -228,7 +228,7 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
             bearbeiten. Siehe <link linkend="zend.filter.input">Zend_Filter_Input</link>.
         </para>
 
-        <section xml:id="zend.validate.introduction.static.namespaces"><info><title>Namespaces</title></info>
+        <section xml:id="zend.validate.introduction.static.namespaces"><title>Namespaces</title>
 
 
             <para>
@@ -307,7 +307,7 @@ if (Zend_Validate::is($value,
         </section>
     </section>
 
-    <section xml:id="zend.validate.introduction.translation"><info><title>Meldungen übersetzen</title></info>
+    <section xml:id="zend.validate.introduction.translation"><title>Meldungen übersetzen</title>
 
 
         <para>

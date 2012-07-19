@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.null"><info><title>Null</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.null"><title>Null</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         そして、ブールや他のあらゆるタイプの代わりに <constant>NULL</constant>値を持つことを望みます。
     </para>
 
-    <section xml:id="zend.filter.set.null.default"><info><title>Zend_Filter_Null の既定の振る舞い</title></info>
+    <section xml:id="zend.filter.set.null.default"><title>Zend_Filter_Null の既定の振る舞い</title>
         
 
         <para>
@@ -38,7 +38,7 @@ $result = $filter->filter($value);
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.null.types"><info><title>Zend_Filter_Null の振る舞いの変更</title></info>
+    <section xml:id="zend.filter.set.null.types"><title>Zend_Filter_Null の振る舞いの変更</title>
         
 
         <para>

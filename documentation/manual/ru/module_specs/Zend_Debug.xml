@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>Дамп переменных</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><title>Дамп переменных</title>
 
     
 
@@ -11,7 +11,7 @@
         специальных инструментов или отладочной среды.
     </para>
 
-    <example xml:id="zend.debug.dumping.example"><info><title>Пример использования метода dump()</title></info>
+    <example xml:id="zend.debug.dumping.example"><title>Пример использования метода dump()</title>
         
         <programlisting language="php"><![CDATA[
 Zend_Debug::dump($var, $label=null, $echo=true);
@@ -50,7 +50,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         и окружен (X)HTML тегами <code>&lt;pre&gt;</code>.
     </para>
 
-    <tip><info><title>Отладка с применением Zend_Log</title></info>
+    <tip><title>Отладка с применением Zend_Log</title>
         
         <para>
             <code>Zend_Debug::dump()</code> хорошо применять для отладки

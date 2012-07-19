@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><info><title>Inleiding</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><title>Inleiding</title>
     
     <para>
         <code>Zend_Mail</code> verstrekt globale functionaliteit om zowel tekst als MIME-compliant multipart
         e-mails te sturen. Mail kan gestuurd worden met <code>Zend_Mail</code> via de ingebouwde PHP functie
         <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><code>mail()</code></link> of via een directe SMTP verbinding.
     </para>
-    <example><info><title>Eenvoudige E-mail met Zend_Mail</title></info>
+    <example><title>Eenvoudige E-mail met Zend_Mail</title>
         
         <para>
             Een eenvoudige e-mail bestaat uit enkele geadresseerden, een onderwerp, een inhoud en een afzender. Om zo'n mail te sturen met de PHP <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><code>mail()</code></link> functie doe je het volgende:

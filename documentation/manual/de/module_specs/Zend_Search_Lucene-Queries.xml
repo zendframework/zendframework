@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-api"><info><title>Abfrage Erzeugungs API</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-api"><title>Abfrage Erzeugungs API</title>
     
 
     <para>
@@ -17,7 +17,7 @@
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
 ]]></programlisting>
 
-    <section xml:id="zend.search.lucene.queries.exceptions"><info><title>Abfrageparser Ausnahmen</title></info>
+    <section xml:id="zend.search.lucene.queries.exceptions"><title>Abfrageparser Ausnahmen</title>
         
 
         <para>
@@ -71,7 +71,7 @@ try {
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.term-query"><info><title>Begriffsabfrage</title></info>
+    <section xml:id="zend.search.lucene.queries.term-query"><title>Begriffsabfrage</title>
         
 
         <para>
@@ -111,7 +111,7 @@ $hits  = $index->find($query);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.multiterm-query"><info><title>Mehrfache Begriffsabfrage</title></info>
+    <section xml:id="zend.search.lucene.queries.multiterm-query"><title>Mehrfache Begriffsabfrage</title>
         
 
         <para>
@@ -238,7 +238,7 @@ $hits  = $index->find($query);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.boolean-query"><info><title>Boolsche Abfragen</title></info>
+    <section xml:id="zend.search.lucene.queries.boolean-query"><title>Boolsche Abfragen</title>
         
 
         <para>
@@ -404,7 +404,7 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.wildcard"><info><title>Wildcard Abfragen</title></info>
+    <section xml:id="zend.search.lucene.queries.wildcard"><title>Wildcard Abfragen</title>
         
 
         <para>
@@ -452,7 +452,7 @@ $hits  = $index->find($query);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.fuzzy"><info><title>Fuzzy Abfragen</title></info>
+    <section xml:id="zend.search.lucene.queries.fuzzy"><title>Fuzzy Abfragen</title>
         
 
         <para>
@@ -521,7 +521,7 @@ $hits  = $index->find($query);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.phrase-query"><info><title>Phrasenabfrage</title></info>
+    <section xml:id="zend.search.lucene.queries.phrase-query"><title>Phrasenabfrage</title>
         
 
         <para>
@@ -732,7 +732,7 @@ $hits2 = $index->find($query);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.queries.range"><info><title>Bereichsabfragen</title></info>
+    <section xml:id="zend.search.lucene.queries.range"><title>Bereichsabfragen</title>
         
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Użycie wyjątków</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><title>Użycie wyjątków</title>
 
     
 
@@ -8,7 +8,7 @@
         wyrzucać wyjątek, który rozszerza podstawową klasę Zend_Exception.
     </para>
 
-    <example xml:id="zend.exception.using.example"><info><title>Przykład łapania wyjątku</title></info>
+    <example xml:id="zend.exception.using.example"><title>Przykład łapania wyjątku</title>
         
         <programlisting role="php"><![CDATA[
 try {

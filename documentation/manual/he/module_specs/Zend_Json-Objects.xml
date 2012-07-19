@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.objects"><info><title>אובייקטי JSON</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.objects"><title>אובייקטי JSON</title>
     
     <para>
         כשמקודדים אובייקטים של PHP ב JSON, כל הערכים המוגדרים ל public לאותו אובייקט יקודדו באובייקט ה JSON.

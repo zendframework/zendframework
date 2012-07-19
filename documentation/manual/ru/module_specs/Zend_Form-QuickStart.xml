@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><info><title>Zend_Form - Быстрый старт</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><title>Zend_Form - Быстрый старт</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         <code>Zend_Form</code>.
     </para>
 
-    <section xml:id="zend.form.quickstart.create"><info><title>Создание объекта формы</title></info>
+    <section xml:id="zend.form.quickstart.create"><title>Создание объекта формы</title>
         
 
         <para>
@@ -60,7 +60,7 @@ $form->setAttrib('id', 'login');
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.quickstart.elements"><info><title>Добавление элементов в форму</title></info>
+    <section xml:id="zend.form.quickstart.elements"><title>Добавление элементов в форму</title>
         
 
         <para>
@@ -260,7 +260,7 @@ $form->addElement('text', 'username', array(
         </para></note>
     </section>
 
-    <section xml:id="zend.form.quickstart.render"><info><title>Визуализация формы</title></info>
+    <section xml:id="zend.form.quickstart.render"><title>Визуализация формы</title>
         
 
         <para>
@@ -368,7 +368,7 @@ $form->addElement('text', 'username', array('order' => 10));
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.quickstart.validate"><info><title>Проверка корректности данных формы</title></info>
+    <section xml:id="zend.form.quickstart.validate"><title>Проверка корректности данных формы</title>
         
 
         <para>
@@ -441,7 +441,7 @@ $unfiltered = $form->getUnfilteredValues();
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.quickstart.errorstatus"><info><title>Получение статуса ошибки</title></info>
+    <section xml:id="zend.form.quickstart.errorstatus"><title>Получение статуса ошибки</title>
         
 
         <para>
@@ -474,7 +474,7 @@ if (!$form->isValid($_POST)) {
         </para>
     </section>
 
-    <section xml:id="zend.form.quickstart.puttingtogether"><info><title>Объединяя изложенное</title></info>
+    <section xml:id="zend.form.quickstart.puttingtogether"><title>Объединяя изложенное</title>
         
 
         <para>
@@ -586,7 +586,7 @@ class UserController extends Zend_Controller_Action
         </para>
     </section>
 
-    <section xml:id="zend.form.quickstart.config"><info><title>Использование объекта Zend_Config</title></info>
+    <section xml:id="zend.form.quickstart.config"><title>Использование объекта Zend_Config</title>
         
 
         <para>
@@ -642,7 +642,7 @@ $form   = new Zend_Form($config->user->login);
         </para>
     </section>
 
-    <section xml:id="zend.form.quickstart.conclusion"><info><title>Заключение</title></info>
+    <section xml:id="zend.form.quickstart.conclusion"><title>Заключение</title>
         
 
         <para>

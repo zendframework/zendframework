@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.sitemap"><info><title>Validateurs de Sitemap</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.sitemap"><title>Validateurs de Sitemap</title>
     
 
     <para>
         Les validateurs suivant sont conformes au protocole <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.sitemaps.org/protocol.php"><acronym>XML</acronym> Sitemap</link>.
     </para>
 
-    <section xml:id="zend.validate.sitemap.changefreq"><info><title>Sitemap_Changefreq</title></info>
+    <section xml:id="zend.validate.sitemap.changefreq"><title>Sitemap_Changefreq</title>
         
 
         <para>
@@ -21,7 +21,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.sitemap.lastmod"><info><title>Sitemap_Lastmod</title></info>
+    <section xml:id="zend.validate.sitemap.lastmod"><title>Sitemap_Lastmod</title>
         
 
         <para>
@@ -36,7 +36,7 @@
             et qu'elle est valide suivant le protocole.
         </para>
 
-        <example xml:id="zend.validate.sitemap.lastmod.example"><info><title>Validateur de "lastmod" Sitemap</title></info>
+        <example xml:id="zend.validate.sitemap.lastmod.example"><title>Validateur de "lastmod" Sitemap</title>
             
             <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Sitemap_Lastmod();
@@ -53,7 +53,7 @@ $validator->isValid('yesterday'); // false
         </example>
     </section>
 
-    <section xml:id="zend.validate.sitemap.loc"><info><title>Sitemap_Loc</title></info>
+    <section xml:id="zend.validate.sitemap.loc"><title>Sitemap_Loc</title>
         
 
         <para>
@@ -64,7 +64,7 @@ $validator->isValid('yesterday'); // false
         </para>
     </section>
 
-    <section xml:id="zend.validate.sitemap.priority"><info><title>Sitemap_Priority</title></info>
+    <section xml:id="zend.validate.sitemap.priority"><title>Sitemap_Priority</title>
         
 
         <para>
@@ -73,7 +73,7 @@ $validator->isValid('yesterday'); // false
             0.0 et 1.0. Ce validateur accepte à la fois des valeurs numériques ou textuelles.
         </para>
 
-        <example xml:id="zend.validate.sitemap.priority.example"><info><title>Validateur de "priority" Sitemap</title></info>
+        <example xml:id="zend.validate.sitemap.priority.example"><title>Validateur de "priority" Sitemap</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -91,7 +91,7 @@ $validator->isValid('foo'); // false
         </example>
     </section>
 
-    <section xml:id="zend.validate.set.sitemap.options"><info><title>Options supportées par Zend_Validate_Sitemap_*</title></info>
+    <section xml:id="zend.validate.set.sitemap.options"><title>Options supportées par Zend_Validate_Sitemap_*</title>
         
 
         <para>

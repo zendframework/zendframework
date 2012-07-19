@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.sending"><info><title>Wysyłanie przez SMTP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.sending"><title>Wysyłanie przez SMTP</title>
     
     <para>
         Aby wysłać mail przez SMTP, obiekt <code>Zend_Mail_Transport_Smtp</code>
@@ -7,7 +7,7 @@
         zanim zostanie wywołana metoda <code>send()</code>. Dla kolejnych wywołań
         <code>Zend_Mail::send()</code> w tym skrypcie będzie także użyty transport SMTP:
     </para>
-    <example xml:id="zend.mail.sending.example-1"><info><title>Wysyłanie e-maila przez SMTP</title></info>
+    <example xml:id="zend.mail.sending.example-1"><title>Wysyłanie e-maila przez SMTP</title>
         
         <programlisting role="php"><![CDATA[
 $tr = new Zend_Mail_Transport_Smtp('mail.example.com');

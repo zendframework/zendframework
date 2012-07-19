@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><info><title>Zend_Db_Profiler</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><title>Zend_Db_Profiler</title>
 
     
 
-    <section xml:id="zend.db.profiler.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.db.profiler.introduction"><title>導入</title>
 
         
 
@@ -132,7 +132,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 
     </section>
 
-    <section xml:id="zend.db.profiler.using"><info><title>プロファイラの使用</title></info>
+    <section xml:id="zend.db.profiler.using"><title>プロファイラの使用</title>
 
         
 
@@ -269,7 +269,7 @@ echo "一番時間のかかっているクエリ: \n" . $longestQuery . "\n";
 
     </section>
 
-    <section xml:id="zend.db.profiler.advanced"><info><title>プロファイラの高度な使用法</title></info>
+    <section xml:id="zend.db.profiler.advanced"><title>プロファイラの高度な使用法</title>
 
         
 
@@ -279,7 +279,7 @@ echo "一番時間のかかっているクエリ: \n" . $longestQuery . "\n";
             <classname>Zend_Db_Profiler</classname> インスタンスのメソッドです。
         </para>
 
-        <section xml:id="zend.db.profiler.advanced.filtertime"><info><title>クエリの実行所要時間による絞り込み</title></info>
+        <section xml:id="zend.db.profiler.advanced.filtertime"><title>クエリの実行所要時間による絞り込み</title>
             
 
             <para>
@@ -297,7 +297,7 @@ $profiler->setFilterElapsedSecs(null);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.db.profiler.advanced.filtertype"><info><title>クエリの形式による絞り込み</title></info>
+        <section xml:id="zend.db.profiler.advanced.filtertype"><title>クエリの形式による絞り込み</title>
             
 
             <para>
@@ -384,7 +384,7 @@ $profiler->setFilterQueryType(null);
 
         </section>
 
-        <section xml:id="zend.db.profiler.advanced.getbytype"><info><title>クエリの型を指定することによる情報の取得</title></info>
+        <section xml:id="zend.db.profiler.advanced.getbytype"><title>クエリの型を指定することによる情報の取得</title>
             
 
             <para>
@@ -416,7 +416,7 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
 
     </section>
 
-    <section xml:id="zend.db.profiler.profilers"><info><title>特化型のプロファイラ</title></info>
+    <section xml:id="zend.db.profiler.profilers"><title>特化型のプロファイラ</title>
         
 
         <para>

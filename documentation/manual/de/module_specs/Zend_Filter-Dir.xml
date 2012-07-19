@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.dir"><info><title>Dir</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.dir"><title>Dir</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         den Namen des Verzeichnisses zurückgeben.
     </para>
 
-     <section xml:id="zend.filter.set.dir.options"><info><title>Unterstützte Optionen für Zend_Filter_Dir</title></info>
+     <section xml:id="zend.filter.set.dir.options"><title>Unterstützte Optionen für Zend_Filter_Dir</title>
         
 
         <para>
@@ -15,7 +15,7 @@
         </para>
     </section>
 
-     <section xml:id="zend.filter.set.dir.basic"><info><title>Einfache Verwendung</title></info>
+     <section xml:id="zend.filter.set.dir.basic"><title>Einfache Verwendung</title>
         
 
         <para>

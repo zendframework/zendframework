@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.row"><info><title>Zend_Db_Table_Row</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.row"><title>Zend_Db_Table_Row</title>
 
     
 
-    <section xml:id="zend.db.table.row.introduction"><info><title>简介</title></info>
+    <section xml:id="zend.db.table.row.introduction"><title>简介</title>
 
         
 
@@ -16,7 +16,7 @@
 
     </section>
 
-    <section xml:id="zend.db.table.row.fetch"><info><title>取回一条记录</title></info>
+    <section xml:id="zend.db.table.row.fetch"><title>取回一条记录</title>
 
         
 
@@ -72,7 +72,7 @@ $row = $table->fetchRow('first_name = "Robin"');
 
     </section>
 
-    <section xml:id="zend.db.table.row.modify"><info><title>修改数据</title></info>
+    <section xml:id="zend.db.table.row.modify"><title>修改数据</title>
 
         
 

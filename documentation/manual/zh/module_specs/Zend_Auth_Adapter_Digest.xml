@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><info><title>摘要式认证</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><title>摘要式认证</title>
 
     
 
-    <section xml:id="zend.auth.adapter.digest.introduction"><info><title>简介</title></info>
+    <section xml:id="zend.auth.adapter.digest.introduction"><title>简介</title>
 
         
 
@@ -40,7 +40,7 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 
     </section>
 
-    <section xml:id="zend.auth.adapter.digest.specifics"><info><title>规范（Specifics）</title></info>
+    <section xml:id="zend.auth.adapter.digest.specifics"><title>规范（Specifics）</title>
 
         
 
@@ -73,7 +73,7 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 
     </section>
 
-    <section xml:id="zend.auth.adapter.digest.identity"><info><title>身份（Identity）</title></info>
+    <section xml:id="zend.auth.adapter.digest.identity"><title>身份（Identity）</title>
 
         
 

@@ -578,7 +578,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function getStream()
     {
-        return $this->config["outputstream"];
+        return $this->config['outputstream'];
     }
 
     /**
@@ -934,7 +934,7 @@ class Client implements Stdlib\DispatchableInterface
             }
         }
 
-        $this->getRequest()->getFile()->set($filename, array(
+        $this->getRequest()->getFiles()->set($filename, array(
             'formname' => $formname,
             'filename' => basename($filename),
             'ctype' => $ctype,
@@ -952,9 +952,9 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function removeFileUpload($filename)
     {
-        $file = $this->getRequest()->getFile()->get($filename);
+        $file = $this->getRequest()->getFiles()->get($filename);
         if (!empty($file)) {
-            $this->getRequest()->getFile()->set($filename, null);
+            $this->getRequest()->getFiles()->set($filename, null);
             return true;
         }
         return false;
@@ -1096,7 +1096,7 @@ class Client implements Stdlib\DispatchableInterface
         $totalFiles = 0;
 
         if (!$this->getRequest()->getHeaders()->has('Content-Type')) {
-            $totalFiles = count($this->getRequest()->getFile()->toArray());
+            $totalFiles = count($this->getRequest()->getFiles()->toArray());
             // If we have files to upload, force encType to multipart/form-data
             if ($totalFiles > 0) {
                 $this->setEncType(self::ENC_FORMDATA);
@@ -1118,7 +1118,7 @@ class Client implements Stdlib\DispatchableInterface
                 }
 
                 // Encode files
-                foreach ($this->getRequest()->getFile()->toArray() as $key => $file) {
+                foreach ($this->getRequest()->getFiles()->toArray() as $key => $file) {
                     $fhead = array('Content-Type' => $file['ctype']);
                     $body .= $this->encodeFormData($boundary, $file['formname'], $file['data'], $file['filename'], $fhead);
                 }

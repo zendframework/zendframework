@@ -15,16 +15,13 @@ use Zend\Http\Response;
 use Zend\Stdlib\ErrorHandler;
 
 /**
- * Zend_Http_Response represents an HTTP 1.0 / 1.1 response message. It
- * includes easy access to all the response's different elemts, as well as some
- * convenience methods for parsing and validating HTTP responses.
+ * Represents an HTTP response message as PHP stream resource
  *
  * @package    Zend_Http
  * @subpackage Response
  */
 class Stream extends Response
 {
-
     /**
      * The Content-Length value, if set
      *
@@ -97,7 +94,7 @@ class Stream extends Response
     /**
      * Set the cleanup trigger
      *
-     * @param $cleanup Set cleanup trigger
+     * @param bool $cleanup
      */
     public function setCleanup($cleanup = true)
     {
@@ -126,35 +123,34 @@ class Stream extends Response
         return $this;
     }
 
-
     /**
      * Create a new Zend\Http\Response\Stream object from a stream
      *
      * @param  string $responseString
      * @param  resource $stream
      * @return Stream
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\OutOfRangeException
      */
     public static function fromStream($responseString, $stream)
     {
-
-        if (!is_resource($stream)) {
+        if (!is_resource($stream) || get_resource_type($stream) !== 'stream') {
             throw new Exception\InvalidArgumentException('A valid stream is required');
         }
 
         $headerComplete = false;
         $headersString  = '';
 
-        $responseArray = explode("\n",$responseString);
+        $responseArray = explode("\n", $responseString);
 
         while (count($responseArray)) {
-            $nextLine = array_shift($responseArray);
-            $headersString .= $nextLine."\n";
+            $nextLine        = array_shift($responseArray);
+            $headersString  .= $nextLine."\n";
             $nextLineTrimmed = trim($nextLine);
-            if ($nextLineTrimmed == "") {
+            if ($nextLineTrimmed == '') {
                 $headerComplete = true;
                 break;
             }
-
         }
 
         if (!$headerComplete) {
@@ -172,6 +168,7 @@ class Stream extends Response
             throw new Exception\OutOfRangeException('End of header not found');
         }
 
+        /** @var Stream $response  */
         $response = static::fromString($headersString);
 
         if (is_resource($stream)) {
@@ -187,9 +184,11 @@ class Stream extends Response
             if ($header instanceof \Zend\Http\Header\ContentLength) {
                 $response->contentLength = (int) $header->getFieldValue();
                 if (strlen($response->content) > $response->contentLength) {
-                    throw new Exception\OutOfRangeException(
-                        sprintf('Too much content was extracted from the stream (%d instead of %d bytes)',
-                                    strlen($this->content), $this->contentLength));
+                    throw new Exception\OutOfRangeException(sprintf(
+                        'Too much content was extracted from the stream (%d instead of %d bytes)',
+                        strlen($response->content),
+                        $response->contentLength
+                    ));
                 }
                 break;
             }
@@ -197,7 +196,6 @@ class Stream extends Response
 
         return $response;
     }
-
 
     /**
      * Get the response body as string
@@ -234,7 +232,6 @@ class Stream extends Response
         }
         return $this->content;
     }
-
 
     /**
      * Read stream content and return it as string
@@ -273,7 +270,7 @@ class Stream extends Response
         }
         if ($this->cleanup) {
             ErrorHandler::start(E_WARNING);
-            unlink($this->stream_name);
+            unlink($this->streamName);
             ErrorHandler::stop();
         }
     }

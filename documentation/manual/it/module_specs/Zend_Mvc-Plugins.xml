@@ -220,7 +220,7 @@ public function successAction()
     <itemizedlist>
       <listitem>
         <para>
-          <varnane>$name</varnane>, il nome del controller da invocare.
+          <varname>$name</varname>, il nome del controller da invocare.
           Questo dovrebbe essere un nome di classe completamente identificabile,
           oppure un alias definito e riconoscibile dall'istanza Locator attaccata
           al controller invocante.          

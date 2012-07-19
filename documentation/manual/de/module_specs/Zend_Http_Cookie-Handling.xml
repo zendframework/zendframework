@@ -41,9 +41,9 @@
                 <listitem>
                     <para>
                         Mithilfe des Konstruktors und der folgenden Syntax:
-                        <command>new <classname>Zend_Http_Cookie</classname>(string $name, string
+                        <code>new <classname>Zend_Http_Cookie</classname>(string $name, string
                             $value, string $domain, [int $expires, [string $path, [boolean
-                            $secure]]]);</command>
+                            $secure]]]);</code>
                     </para>
 
                     <itemizedlist>

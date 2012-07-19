@@ -268,7 +268,7 @@ $index->optimize();
         <para>
             <emphasis>NumberOfSegments</emphasis> &lt;= <emphasis>MaxBufferedDocs</emphasis> +
             <emphasis>MergeFactor</emphasis>*log
-            <subscript><emphasis>MergeFactor</emphasis></subscript>
+            <emphasis><subscript>MergeFactor</subscript></emphasis>
             (<emphasis>NumberOfDocuments</emphasis>/<emphasis>MaxBufferedDocs</emphasis>)
         </para>
 

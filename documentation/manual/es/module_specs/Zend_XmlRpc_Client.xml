@@ -227,28 +227,27 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                                 <entry>null</entry>
                                 <entry>nil</entry>
                             </row>
+
                             <row>
-                                <row>
-                                    <entry>array</entry>
-                                    <entry>array</entry>
-                                </row>
-                                <row>
-                                    <entry>array asociativo</entry>
-                                    <entry>struct</entry>
-                                </row>
-                                <row>
-                                    <entry>object</entry>
-                                    <entry>array</entry>
-                                </row>
-                                <row>
-                                    <entry>Zend_Date</entry>
-                                    <entry>dateTime.iso8601</entry>
-                                </row>
-                                <row>
-                                    <entry>DateTime</entry>
-                                    <entry>dateTime.iso8601</entry>
-                                </row>
-                              </row>
+                                <entry>array</entry>
+                                <entry>array</entry>
+                            </row>
+                            <row>
+                                <entry>array asociativo</entry>
+                                <entry>struct</entry>
+                            </row>
+                            <row>
+                                <entry>object</entry>
+                                <entry>array</entry>
+                            </row>
+                            <row>
+                                <entry>Zend_Date</entry>
+                                <entry>dateTime.iso8601</entry>
+                            </row>
+                            <row>
+                                <entry>DateTime</entry>
+                                <entry>dateTime.iso8601</entry>
+                            </row>
                     </tbody>
                 </tgroup>
             </table>

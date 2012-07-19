@@ -71,7 +71,7 @@
                 Man kann eigene Provider bei <classname>Zend_Tool</classname> bekannt machen indem
                 man ein Manifest mit einem speziellen Dateinamen anbietet der mit "Manifest.php"
                 endet. Ein Provider Manifest ist eine Implementation von
-                <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface> und
+                <interfacename>Zend_Tool_Framework_Manifest_ProviderManifestable</interfacename> und
                 benötigt die Methode <methodname>getProviders()</methodname> welche ein Array von
                 instanziierten Providern zurückgibt. Anders als unser erster eigener Provider
                 erstellt <classname>My_Component_HelloProvider</classname> das folgende Manifest:

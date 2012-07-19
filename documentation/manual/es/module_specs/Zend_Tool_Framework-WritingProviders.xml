@@ -59,7 +59,7 @@
             <para> You can expose your providers to Zend Tool by offering a
                 manifest with a special filename ending with "Manifest.php". A
                 Provider Manifest is an implementation of the
-                    <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface>
+                    <interfacename>Zend_Tool_Framework_Manifest_ProviderManifestable</interfacename>
                 and requires the <methodname>getProviders()</methodname> method
                 to return an array of instantiated providers. In anticipation of
                 our first own provider

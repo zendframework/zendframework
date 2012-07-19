@@ -61,7 +61,7 @@ class HtmlEntities extends AbstractFilter
         }
 
         if (!isset($options['quotestyle'])) {
-            $options['quotestyle'] = ENT_COMPAT;
+            $options['quotestyle'] = ENT_QUOTES;
         }
 
         if (!isset($options['encoding'])) {

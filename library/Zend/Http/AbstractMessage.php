@@ -24,8 +24,8 @@ abstract class AbstractMessage extends Message
     /**#@+
      * @const string Version constant numbers
      */
-    const VERSION_11 = '1.1';
     const VERSION_10 = '1.0';
+    const VERSION_11 = '1.1';
     /**#@-*/
 
     /**
@@ -34,20 +34,21 @@ abstract class AbstractMessage extends Message
     protected $version = self::VERSION_11;
 
     /**
-     * @var Headers|string
+     * @var Headers|null
      */
     protected $headers = null;
 
     /**
-     * Set the HTTP version for this object, one of 1.0 or 1.1 (Request::VERSION_10, Request::VERSION_11)
+     * Set the HTTP version for this object, one of 1.0 or 1.1
+     * (AbstractMessage::VERSION_10, AbstractMessage::VERSION_11)
      *
-     * @throws Exception\InvalidArgumentException
      * @param  string $version (Must be 1.0 or 1.1)
-     * @return Request
+     * @return AbstractMessage
+     * @throws Exception\InvalidArgumentException
      */
     public function setVersion($version)
     {
-        if ($version != self::VERSION_11 && $version != self::VERSION_10) {
+        if ($version != self::VERSION_10 && $version != self::VERSION_11) {
             throw new Exception\InvalidArgumentException(
                 'Not valid or not supported HTTP version: ' . $version
             );
@@ -68,11 +69,11 @@ abstract class AbstractMessage extends Message
 
     /**
      * Provide an alternate Parameter Container implementation for headers in this object,
-     * (this is NOT the primary API for value setting, for that see headers())
+     * (this is NOT the primary API for value setting, for that see getHeaders())
      *
-     * @see    headers()
+     * @see    getHeaders()
      * @param  Headers $headers
-     * @return Request|Response
+     * @return AbstractMessage
      */
     public function setHeaders(Headers $headers)
     {
@@ -94,7 +95,6 @@ abstract class AbstractMessage extends Message
 
         return $this->headers;
     }
-
 
     /**
      * Allow PHP casting of this object

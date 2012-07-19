@@ -12,7 +12,6 @@ namespace Zend\Http\PhpEnvironment;
 
 use Zend\Http\Header\MultipleHeaderInterface;
 use Zend\Http\Response as HttpResponse;
-use Zend\Stdlib\Parameters;
 
 /**
  * HTTP Response for current PHP environment
@@ -62,6 +61,7 @@ class Response extends HttpResponse
         $status  = $this->renderStatusLine();
         header($status);
 
+        /** @var \Zend\Http\Header\HeaderInterface $header */
         foreach ($this->getHeaders() as $header) {
             if ($header instanceof MultipleHeaderInterface) {
                 header($header->toString(), false);
@@ -102,4 +102,3 @@ class Response extends HttpResponse
         return $this;
     }
 }
-

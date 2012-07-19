@@ -243,9 +243,9 @@ class Request extends HttpRequest
 
         // set HTTP version
         if (isset($this->serverParams['SERVER_PROTOCOL'])
-            && strpos($this->serverParams['SERVER_PROTOCOL'], '1.0') !== false
+            && strpos($this->serverParams['SERVER_PROTOCOL'], self::VERSION_10) !== false
         ) {
-            $this->setVersion('1.0');
+            $this->setVersion(self::VERSION_10);
         }
 
         // set URI
@@ -262,14 +262,14 @@ class Request extends HttpRequest
         if (isset($this->serverParams['SERVER_NAME'])) {
             $host = $this->serverParams['SERVER_NAME'];
             if (isset($this->serverParams['SERVER_PORT'])) {
-                $port = $this->serverParams['SERVER_PORT'];
+                $port = (int) $this->serverParams['SERVER_PORT'];
             }
         } elseif ($this->getHeaders()->get('host')) {
             $host = $this->getHeaders()->get('host')->getFieldValue();
             // works for regname, IPv4 & IPv6
             if (preg_match('|\:(\d+)$|', $host, $matches)) {
-                $port = $matches[1];
-                $host = substr($host, 0, -1 * (strlen($port) + 1));
+                $host = substr($host, 0, -1 * (strlen($matches[1]) + 1));
+                $port = (int) $matches[1];
             }
         }
         $uri->setHost($host);
@@ -277,7 +277,11 @@ class Request extends HttpRequest
 
         // URI path
         $requestUri = $this->getRequestUri();
-        $uri->setPath(substr($requestUri, 0, strpos($requestUri, '?') ?: strlen($requestUri)));
+        if (($qpos = strpos($requestUri, '?')) !== false) {
+            $requestUri = substr($requestUri, 0, $qpos);
+        }
+
+        $uri->setPath($requestUri);
 
         // URI query
         if (isset($this->serverParams['QUERY_STRING'])) {

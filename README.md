@@ -22,6 +22,14 @@ PLEASE USE AT YOUR OWN RISK.
    - Select-style elements now have options populated as value => label
      pairs instead of label => value pairs. This is done to ensure that
      option values are unique.
+ - Http
+   - set/getServer() and set/getEnv() were removed from Http\Request
+     and now part of Http\PhpEnvironment\Request
+   - set/getFile() methods in Http\PhpEnvironment\Request
+     were renamed to set/getFiles(). Also above methods
+   - When submitted form has file inputs with brackets (name="file[]")
+     $fileParams parameters in Http\PhpEnvironment\Request will be
+     re-structured to have the same look as query/post/server/envParams
 
 Over *XXX* pull requests for a variety of features and bugfixes were handled
 since beta5!

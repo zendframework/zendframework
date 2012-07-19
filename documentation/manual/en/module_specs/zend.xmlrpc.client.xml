@@ -403,21 +403,19 @@ $result = $client->call('foo.bar', array(array()));
                 </tgroup>
             </table>
 
-            <para>
-                <note><title>Automatic Conversion</title>
-                    
+            <note><title>Automatic Conversion</title>
 
-                    <para>
-                        When building a new <classname>Zend\XmlRpc\Value</classname>
-                        object, its value is set by a <acronym>PHP</acronym> type. The
-                        <acronym>PHP</acronym> type will be converted to the specified type using
-                        <acronym>PHP</acronym> casting. For example, if a string is given as a
-                        value to the <classname>Zend\XmlRpc\Value\Integer</classname>
-                        object, it will be converted using
-                        <command>(int)$value</command>.
-                    </para>
-                </note>
-            </para>
+
+                <para>
+                    When building a new <classname>Zend\XmlRpc\Value</classname>
+                    object, its value is set by a <acronym>PHP</acronym> type. The
+                    <acronym>PHP</acronym> type will be converted to the specified type using
+                    <acronym>PHP</acronym> casting. For example, if a string is given as a
+                    value to the <classname>Zend\XmlRpc\Value\Integer</classname>
+                    object, it will be converted using
+                    <command>(int)$value</command>.
+                </para>
+            </note>
         </section>
     </section>
 

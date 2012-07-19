@@ -80,6 +80,11 @@ if (empty($rstFile)) {
     $rstFile .= '.rst';
 }
 
+if (is_dir($rstFile)) {
+    $rstFile = realpath($rstFile) . DIRECTORY_SEPARATOR;
+    $rstFile .= RstConvert::xmlFileNameToRst(basename($docbook));
+}
+
 // Load the docbook file (input)
 $xml = new \DOMDocument;
 $xml->load($docbook);
@@ -139,6 +144,39 @@ class RstConvert
     public static $links    = array();
     public static $footnote = array();
 
+    private static $indentation = 0;
+
+    public static function addIndent($indent)
+    {
+        self::$indentation += $indent;
+    }
+
+    public static function removeIndent($indent)
+    {
+        self::$indentation -= $indent;
+    }
+
+    /**
+     * Wrap the text to fit with paper width
+     *
+     * @param  string  $text
+     * @return string
+     */
+    public static function wrap($text)
+    {
+        $output = '';
+        foreach (explode("\n", $text) as $line) {
+            if (substr($line, 0, 1) != ' ') {
+                $output .= wordwrap($line, 115 - self::$indentation);
+            } else {
+                $output .= $line;
+            }
+            $output .= "\n";
+        }
+
+        return substr($output, 0, -1);
+    }
+
     /**
      * Indent the text 3 spaces by default
      *
@@ -156,7 +194,7 @@ class RstConvert
                 $output .= "   $row\n";
             }
         }
-        return $output;
+        return substr($output, 0, -1);
     }
 
     /**
@@ -176,7 +214,7 @@ class RstConvert
                 $output .= "  $row\n";
             }
         }
-        return $output;
+        return substr($output, 0, -1);
     }
 
     /**
@@ -196,7 +234,7 @@ class RstConvert
                 $output .= "       $row\n";
             }
         }
-        return $output;
+        return substr($output, 0, -1);
     }
 
     /**
@@ -232,7 +270,10 @@ class RstConvert
         $hasFollowing = !empty($following);
         $escaped = self::escapeChars(trim(preg_replace('/\s+/m', ' ', $text)));
 
-        if ($hasPreceding) {
+        if ($hasPreceding && !in_array($preceding[0]->localName,
+                                       array('variablelist', 'example', 'table', 'programlisting', 'note',
+                                             'itemizedlist', 'orderedlist'))
+        ) {
             if (!in_array($escaped[0],
                           array('-', '.', ',', ':', ';', '!', '?', '\\', '/', "'", '"', ')', ']', '}', '>', ' '))
             ) {

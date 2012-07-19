@@ -164,7 +164,17 @@ class RstConvert
      */
     public static function wrap($text)
     {
-        return wordwrap($text, 115 - self::$indentation);
+        $output = '';
+        foreach (explode("\n", $text) as $line) {
+            if (substr($line, 0, 1) != ' ') {
+                $output .= wordwrap($line, 115 - self::$indentation);
+            } else {
+                $output .= $line;
+            }
+            $output .= "\n";
+        }
+
+        return substr($output, 0, -1);
     }
 
     /**

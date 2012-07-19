@@ -191,7 +191,14 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- superscript -->
+    <!-- subscript -->
+    <xsl:template match="//doc:subscript" name="subcript">:sub:`<xsl:call-template name="formatText"/>` <xsl:text/>
+        <xsl:if test="name(following-sibling::node()[1]) != ''">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- citetitle -->
     <xsl:template match="//doc:citetitle" name="citetitle">:t:`<xsl:call-template name="formatText"/>` <xsl:text/>
         <xsl:if test="name(following-sibling::node()[1]) != ''">
             <xsl:text> </xsl:text>

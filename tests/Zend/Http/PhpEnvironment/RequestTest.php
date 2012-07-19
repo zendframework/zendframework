@@ -33,6 +33,7 @@ class RequestTest extends TestCase
             'cookie' => $_COOKIE,
             'server' => $_SERVER,
             'env'    => $_ENV,
+            'files'  => $_FILES,
         );
 
         $_POST   = array();
@@ -40,6 +41,7 @@ class RequestTest extends TestCase
         $_COOKIE = array();
         $_SERVER = array();
         $_ENV    = array();
+        $_FILES  = array();
     }
 
     /**
@@ -52,6 +54,7 @@ class RequestTest extends TestCase
         $_COOKIE = $this->originalEnvironment['cookie'];
         $_SERVER = $this->originalEnvironment['server'];
         $_ENV    = $this->originalEnvironment['env'];
+        $_FILES  = $this->originalEnvironment['files'];
     }
 
     /**

@@ -38,9 +38,17 @@ class PluginManager extends AbstractPluginManager
         'layout'          => 'Zend\Mvc\Controller\Plugin\Layout',
         'params'          => 'Zend\Mvc\Controller\Plugin\Params',
         'postredirectget' => 'Zend\Mvc\Controller\Plugin\PostRedirectGet',
-        'prg'             => 'Zend\Mvc\Controller\Plugin\PostRedirectGet',
         'redirect'        => 'Zend\Mvc\Controller\Plugin\Redirect',
         'url'             => 'Zend\Mvc\Controller\Plugin\Url',
+    );
+
+    /**
+     * Default set of plugin aliases
+     *
+     * @var array
+     */
+    protected $aliases = array(
+        'prg'             => 'postredirectget',
     );
 
     /**

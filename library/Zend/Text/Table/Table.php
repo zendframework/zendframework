@@ -464,7 +464,7 @@ class Table
             $result .= $renderedRow;
 
             // If this is the last row, draw the table bottom
-            if (($rowNum + 1) === $numRows) {
+            if (($rowNum + 1) === $numRows  && $this->_decorator->getHorizontal() !== '') {
                 $result .= $this->_decorator->getBottomLeft();
 
                 foreach ($columnWidths as $columnNum => $columnWidth) {

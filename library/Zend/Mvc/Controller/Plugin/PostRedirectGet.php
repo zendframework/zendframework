@@ -12,6 +12,7 @@
 namespace Zend\Mvc\Controller\Plugin;
 
 use Zend\Mvc\Exception\RuntimeException;
+use Zend\Session\Container;
 
 /**
  * Plugin to help facilitate Post/Redirect/Get (http://en.wikipedia.org/wiki/Post/Redirect/Get)
@@ -27,16 +28,11 @@ class PostRedirectGet extends AbstractPlugin
         $controller = $this->getController();
         $request = $controller->getRequest();
 
-        if (method_exists($controller, 'getPluginManager')) {
-            $flashMessenger = $controller->getPluginManager()->get('FlashMessenger');
-        } else {
-            $flashMessenger = new FlashMessenger();
-        }
-
-        $flashMessenger->setNamespace('prg-post');
+        $container = new Container('prg_post1');
 
         if ($request->isPost()) {
-            $flashMessenger->addMessage($request->getPost()->toArray());
+            $container->setExpirationHops(1, 'post');
+            $container->post = $request->getPost()->toArray();
 
             if (method_exists($controller, 'getPluginManager')) {
                 // get the redirect plugin from the plugin manager
@@ -60,9 +56,10 @@ class PostRedirectGet extends AbstractPlugin
 
             return $redirector->toUrl($redirect);
         } else {
-            $messages = $flashMessenger->getMessages();
-            if (count($messages)) {
-                return $messages[0];
+            if ($container->post !== null) {
+                $post = $container->post;
+                unset($container->post);
+                return $post;
             }
 
             return false;

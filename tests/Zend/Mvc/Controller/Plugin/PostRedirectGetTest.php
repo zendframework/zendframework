@@ -54,9 +54,18 @@ class PostRedirectGetTest extends TestCase
         $this->event->setRouter($router);
 
         $this->sessionManager = new SessionManager();
+        $this->sessionManager->destroy();
 
         $this->controller->setEvent($this->event);
         $this->controller->flashMessenger()->setSessionManager($this->sessionManager);
+    }
+
+    public function testReturnsFalseOnIntialGet()
+    {
+        $result    = $this->controller->dispatch($this->request, $this->response);
+        $prgResult = $this->controller->prg('home');
+
+        $this->assertFalse($prgResult);
     }
 
     public function testRedirectsToUrlOnPost()
@@ -78,7 +87,7 @@ class PostRedirectGetTest extends TestCase
     {
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters(array(
-            'postval1' => 'value'
+            'postval1' => 'value1'
         )));
 
         $result         = $this->controller->dispatch($this->request, $this->response);
@@ -87,14 +96,6 @@ class PostRedirectGetTest extends TestCase
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
         $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
         $this->assertEquals('/', $prgResultRoute->getHeaders()->get('Location')->getUri());
-    }
-
-    public function testReturnsFalseOnIntialGet()
-    {
-        $result    = $this->controller->dispatch($this->request, $this->response);
-        $prgResult = $this->controller->prg('home');
-
-        $this->assertFalse($prgResult);
     }
 
     /**

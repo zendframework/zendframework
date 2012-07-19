@@ -32,8 +32,8 @@ class Windows extends Virtual implements Adapter
             $this->runProbeCommand();
         }
 
-        if(preg_match('/^(\d+)\t/s',$this->probeResult,$matches)){
-            $width = $matches[1];
+        if(count($this->probeResult) && (int)$this->probeResult[0]){
+            $width = (int)$this->probeResult[0];
         }else{
             $width = parent::getWidth();
         }
@@ -59,8 +59,8 @@ class Windows extends Virtual implements Adapter
             $this->runProbeCommand();
         }
 
-        if(preg_match('/^\d+\t(\d+)/s',$this->probeResult,$matches)){
-            $height = $matches[1];
+        if(count($this->probeResult) && (int)$this->probeResult[1]){
+            $height = (int)$this->probeResult[1];
         }else{
             $height = parent::getheight();
         }
@@ -69,15 +69,20 @@ class Windows extends Virtual implements Adapter
     }
 
     protected function runProbeCommand(){
+        /**
+         * Run a Windows Powershell command that determines parameters of console window. The command is fed through
+         * standard input (with echo) to prevent Powershell from creating a sub-thread and hanging PHP when run through
+         * a debugger/IDE.
+         */
         exec(
-            'powershell -command "$size = $Host.ui.rawui.windowsize; write ""$($size.width)`t$($size.height)"""',
+            'echo $size = $Host.ui.rawui.windowsize; write $($size.width) $($size.height) | powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command -',
             $output,
             $return
         );
         if($return || empty($output)){
             $this->probeResult = '';
         }else{
-            $this->probeResult = trim(join("\n",$output));
+            $this->probeResult = $output;
         }
     }
 

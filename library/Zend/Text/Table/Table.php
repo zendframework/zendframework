@@ -363,7 +363,7 @@ class Table
             $numColumns   = count($columnWidths);
 
             // Check what we have to draw
-            if ($rowNum === 0) {
+            if ($rowNum === 0 && $this->_decorator->getHorizontal() !== '') {
                 // If this is the first row, draw the table top
                 $result .= $this->_decorator->getTopLeft();
 
@@ -399,62 +399,64 @@ class Table
                     $currentUpperWidth  = 0;
                     $currentLowerWidth  = 0;
 
-                    // Loop through all column widths
-                    foreach ($this->_columnWidths as $columnNum => $columnWidth) {
-                        // Add the horizontal line
-                        $result .= str_repeat($this->_decorator->getHorizontal(),
-                                              $columnWidth);
+                    // Add horizontal lines, but only if there is any horizontal character
+                    if($this->_decorator->getHorizontal() !== ''){
+                        // Loop through all column widths
+                        foreach ($this->_columnWidths as $columnNum => $columnWidth) {
+                            // Add the horizontal line
+                            $result .= str_repeat($this->_decorator->getHorizontal(),
+                                                  $columnWidth);
 
-                        // If this is the last line, break out
-                        if (($columnNum + 1) === $totalNumColumns) {
-                            break;
+                            // If this is the last line, break out
+                            if (($columnNum + 1) === $totalNumColumns) {
+                                break;
+                            }
+
+                            // Else check, which connector style has to be used
+                            $connector          = 0x0;
+                            $currentUpperWidth += $columnWidth;
+                            $currentLowerWidth += $columnWidth;
+
+                            if ($lastColumnWidths[$currentUpperColumn] === $currentUpperWidth) {
+                                $connector          |= 0x1;
+                                $currentUpperColumn += 1;
+                                $currentUpperWidth   = 0;
+                            } else {
+                                $currentUpperWidth += 1;
+                            }
+
+                            if ($columnWidths[$currentLowerColumn] === $currentLowerWidth) {
+                                $connector          |= 0x2;
+                                $currentLowerColumn += 1;
+                                $currentLowerWidth   = 0;
+                            } else {
+                                $currentLowerWidth += 1;
+                            }
+
+                            switch ($connector) {
+                                case 0x0:
+                                    $result .= $this->_decorator->getHorizontal();
+                                    break;
+
+                                case 0x1:
+                                    $result .= $this->_decorator->getHorizontalUp();
+                                    break;
+
+                                case 0x2:
+                                    $result .= $this->_decorator->getHorizontalDown();
+                                    break;
+
+                                case 0x3:
+                                    $result .= $this->_decorator->getCross();
+                                    break;
+
+                                default:
+                                    // This can never happen, but the CS tells I have to have it ...
+                                    break;
+                            }
                         }
-
-                        // Else check, which connector style has to be used
-                        $connector          = 0x0;
-                        $currentUpperWidth += $columnWidth;
-                        $currentLowerWidth += $columnWidth;
-
-                        if ($lastColumnWidths[$currentUpperColumn] === $currentUpperWidth) {
-                            $connector          |= 0x1;
-                            $currentUpperColumn += 1;
-                            $currentUpperWidth   = 0;
-                        } else {
-                            $currentUpperWidth += 1;
-                        }
-
-                        if ($columnWidths[$currentLowerColumn] === $currentLowerWidth) {
-                            $connector          |= 0x2;
-                            $currentLowerColumn += 1;
-                            $currentLowerWidth   = 0;
-                        } else {
-                            $currentLowerWidth += 1;
-                        }
-
-                        switch ($connector) {
-                            case 0x0:
-                                $result .= $this->_decorator->getHorizontal();
-                                break;
-
-                            case 0x1:
-                                $result .= $this->_decorator->getHorizontalUp();
-                                break;
-
-                            case 0x2:
-                                $result .= $this->_decorator->getHorizontalDown();
-                                break;
-
-                            case 0x3:
-                                $result .= $this->_decorator->getCross();
-                                break;
-
-                            default:
-                                // This can never happen, but the CS tells I have to have it ...
-                                break;
-                        }
+                        $result .= $this->_decorator->getVerticalLeft() . "\n";
                     }
-
-                    $result .= $this->_decorator->getVerticalLeft() . "\n";
                 }
             }
 

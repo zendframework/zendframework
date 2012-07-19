@@ -10,16 +10,21 @@
 
 namespace Zend\Http;
 
-use Zend\Stdlib\Message;
 use Zend\Stdlib\Parameters;
 use Zend\Stdlib\ParametersInterface;
 use Zend\Stdlib\RequestInterface;
-use Zend\Uri\Exception as ExceptionUri;
+use Zend\Uri\Exception as UriException;
 use Zend\Uri\Http as HttpUri;
 
-class Request extends Message implements RequestInterface
+/**
+ * HTTP Request
+ *
+ * @category  Zend
+ * @package   Zend_Http
+ * @link      http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5
+ */
+class Request extends AbstractMessage implements RequestInterface
 {
-
     /**#@+
      * @const string METHOD constant names
      */
@@ -34,13 +39,6 @@ class Request extends Message implements RequestInterface
     const METHOD_PATCH   = 'PATCH';
     /**#@-*/
 
-    /**#@+
-     * @const string Version constant numbers
-     */
-    const VERSION_11 = '1.1';
-    const VERSION_10 = '1.0';
-    /**#@-*/
-
     /**
      * @var string
      */
@@ -52,45 +50,26 @@ class Request extends Message implements RequestInterface
     protected $uri = null;
 
     /**
-     * @var string
-     */
-    protected $version = self::VERSION_11;
-
-    /**
-     * @var \Zend\Stdlib\ParametersInterface
+     * @var ParametersInterface
      */
     protected $queryParams = null;
 
     /**
-     * @var \Zend\Stdlib\ParametersInterface
+     * @var ParametersInterface
      */
     protected $postParams = null;
 
     /**
-     * @var \Zend\Stdlib\ParametersInterface
+     * @var ParametersInterface
      */
     protected $fileParams = null;
 
     /**
-     * @var \Zend\Stdlib\ParametersInterface
-     */
-    protected $serverParams = null;
-
-    /**
-     * @var \Zend\Stdlib\ParametersInterface
-     */
-    protected $envParams = null;
-
-    /**
-     * @var string|\Zend\Http\Headers
-     */
-    protected $headers = null;
-
-    /**
      * A factory that produces a Request object from a well-formed Http Request string
      *
-     * @param string $string
-     * @return \Zend\Http\Request
+     * @param  string $string
+     * @return Request
+     * @throws Exception\InvalidArgumentException
      */
     public static function fromString($string)
     {
@@ -131,9 +110,9 @@ class Request extends Message implements RequestInterface
                 continue;
             }
             if ($isHeader) {
-                $headers[] .= $nextLine;
+                $headers[] = $nextLine;
             } else {
-                $rawBody[] .= $nextLine;
+                $rawBody[] = $nextLine;
             }
         }
 
@@ -151,13 +130,14 @@ class Request extends Message implements RequestInterface
     /**
      * Set the method for this request
      *
-     * @param string $method
+     * @param  string $method
      * @return Request
+     * @throws Exception\InvalidArgumentException
      */
     public function setMethod($method)
     {
         $method = strtoupper($method);
-        if (!defined('static::METHOD_'.$method)) {
+        if (!defined('static::METHOD_' . $method)) {
             throw new Exception\InvalidArgumentException('Invalid HTTP method passed');
         }
         $this->method = $method;
@@ -186,7 +166,7 @@ class Request extends Message implements RequestInterface
         if (is_string($uri)) {
             try {
                 $uri = new HttpUri($uri);
-            } catch (ExceptionUri\InvalidUriPartException $e) {
+            } catch (UriException\InvalidUriPartException $e) {
                 throw new Exception\InvalidArgumentException(
                         sprintf('Invalid URI passed as string (%s)', (string) $uri),
                         $e->getCode(),
@@ -199,19 +179,6 @@ class Request extends Message implements RequestInterface
         $this->uri = $uri;
 
         return $this;
-    }
-
-    /**
-     * Return the URI for this request object as a string
-     *
-     * @return string
-     */
-    public function getUriString()
-    {
-        if ($this->uri instanceof HttpUri) {
-            return $this->uri->toString();
-        }
-        return $this->uri;
     }
 
     /**
@@ -228,34 +195,21 @@ class Request extends Message implements RequestInterface
     }
 
     /**
-     * Set the HTTP version for this object, one of 1.0 or 1.1 (Request::VERSION_10, Request::VERSION_11)
-     *
-     * @throws Exception\InvalidArgumentException
-     * @param string $version (Must be 1.0 or 1.1)
-     * @return Request
-     */
-    public function setVersion($version)
-    {
-        if (!in_array($version, array(self::VERSION_10, self::VERSION_11))) {
-            throw new Exception\InvalidArgumentException('Version provided is not a valid version for this HTTP request object');
-        }
-        $this->version = $version;
-        return $this;
-    }
-
-    /**
-     * Return the HTTP version for this request
+     * Return the URI for this request object as a string
      *
      * @return string
      */
-    public function getVersion()
+    public function getUriString()
     {
-        return $this->version;
+        if ($this->uri instanceof HttpUri) {
+            return $this->uri->toString();
+        }
+        return $this->uri;
     }
 
     /**
-     * Provide an alternate Parameter Container implementation for query parameters in this object, (this is NOT the
-     * primary API for value setting, for that see query())
+     * Provide an alternate Parameter Container implementation for query parameters in this object,
+     * (this is NOT the primary API for value setting, for that see getQuery())
      *
      * @param \Zend\Stdlib\ParametersInterface $query
      * @return Request
@@ -281,8 +235,8 @@ class Request extends Message implements RequestInterface
     }
 
     /**
-     * Provide an alternate Parameter Container implementation for post parameters in this object, (this is NOT the
-     * primary API for value setting, for that see post())
+     * Provide an alternate Parameter Container implementation for post parameters in this object,
+     * (this is NOT the primary API for value setting, for that see getPost())
      *
      * @param \Zend\Stdlib\ParametersInterface $post
      * @return Request
@@ -319,13 +273,13 @@ class Request extends Message implements RequestInterface
     }
 
     /**
-     * Provide an alternate Parameter Container implementation for file parameters in this object, (this is NOT the
-     * primary API for value setting, for that see file())
+     * Provide an alternate Parameter Container implementation for file parameters in this object,
+     * (this is NOT the primary API for value setting, for that see getFiles())
      *
-     * @param \Zend\Stdlib\ParametersInterface $files
+     * @param  ParametersInterface $files
      * @return Request
      */
-    public function setFile(ParametersInterface $files)
+    public function setFiles(ParametersInterface $files)
     {
         $this->fileParams = $files;
         return $this;
@@ -336,96 +290,13 @@ class Request extends Message implements RequestInterface
      *
      * @return ParametersInterface
      */
-    public function getFile()
+    public function getFiles()
     {
         if ($this->fileParams === null) {
             $this->fileParams = new Parameters();
         }
 
         return $this->fileParams;
-    }
-
-    /**
-     * Provide an alternate Parameter Container implementation for server parameters in this object, (this is NOT the
-     * primary API for value setting, for that see server())
-     *
-     * @param \Zend\Stdlib\ParametersInterface $server
-     * @return Request
-     */
-    public function setServer(ParametersInterface $server)
-    {
-        $this->serverParams = $server;
-        return $this;
-    }
-
-    /**
-     * Return the parameter container responsible for server parameters
-     *
-     * @see http://www.faqs.org/rfcs/rfc3875.html
-     * @return \Zend\Stdlib\ParametersInterface
-     */
-    public function getServer()
-    {
-        if ($this->serverParams === null) {
-            $this->serverParams = new Parameters();
-        }
-
-        return $this->serverParams;
-    }
-
-    /**
-     * Provide an alternate Parameter Container implementation for env parameters in this object, (this is NOT the
-     * primary API for value setting, for that see env())
-     *
-     * @param \Zend\Stdlib\ParametersInterface $env
-     * @return \Zend\Http\Request
-     */
-    public function setEnv(ParametersInterface $env)
-    {
-        $this->envParams = $env;
-        return $this;
-    }
-
-    /**
-     * Return the parameter container responsible for env parameters
-     *
-     * @return \Zend\Stdlib\ParametersInterface
-     */
-    public function getEnv()
-    {
-        if ($this->envParams === null) {
-            $this->envParams = new Parameters();
-        }
-
-        return $this->envParams;
-    }
-
-    /**
-     * Provide an alternate Parameter Container implementation for headers in this object, (this is NOT the
-     * primary API for value setting, for that see getHeaders())
-     *
-     * @param \Zend\Http\Headers $headers
-     * @return \Zend\Http\Request
-     */
-    public function setHeaders(Headers $headers)
-    {
-        $this->headers = $headers;
-        return $this;
-    }
-
-    /**
-     * Return the header container responsible for headers
-     *
-     * @return \Zend\Http\Headers
-     */
-    public function getHeaders()
-    {
-        if ($this->headers === null || is_string($this->headers)) {
-            // this is only here for fromString lazy loading
-            $this->headers = (is_string($this->headers)) ? Headers::fromString($this->headers) : new Headers();
-        }
-
-        return $this->headers;
     }
 
     /**
@@ -508,6 +379,16 @@ class Request extends Message implements RequestInterface
         return ($this->method === self::METHOD_CONNECT);
     }
 
+    /*
+     * Is this a PATCH method request?
+     *
+     * @return bool
+     */
+    public function isPatch()
+    {
+        return ($this->method === self::METHOD_PATCH);
+    }
+
     /**
      * Is the request a Javascript XMLHttpRequest?
      *
@@ -530,17 +411,6 @@ class Request extends Message implements RequestInterface
     {
         $header = $this->getHeaders()->get('USER_AGENT');
         return false !== $header && stristr($header->getFieldValue(), ' flash');
-
-    }
-
-    /*
-     * Is this a PATCH method request?
-     *
-     * @return bool
-     */
-    public function isPatch()
-    {
-        return ($this->method === self::METHOD_PATCH);
     }
 
     /**
@@ -566,15 +436,4 @@ class Request extends Message implements RequestInterface
         $str .= $this->getContent();
         return $str;
     }
-
-    /**
-     * Allow PHP casting of this object
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->toString();
-    }
-
 }

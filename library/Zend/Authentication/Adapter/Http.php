@@ -152,24 +152,21 @@ class Http implements AdapterInterface
      */
     public function __construct(array $config)
     {
-        if (!extension_loaded('hash')) {
-            throw new Exception\InvalidArgumentException(__CLASS__  . ' requires the \'hash\' extension to be availabe in PHP');
-        }
-
         $this->_request  = null;
         $this->_response = null;
         $this->_ieNoOpaque = false;
 
-
         if (empty($config['accept_schemes'])) {
-            throw new Exception\InvalidArgumentException('Config key \'accept_schemes\' is required');
+            throw new Exception\InvalidArgumentException('Config key "accept_schemes" is required');
         }
 
         $schemes = explode(' ', $config['accept_schemes']);
         $this->_acceptSchemes = array_intersect($schemes, $this->_supportedSchemes);
         if (empty($this->_acceptSchemes)) {
-            throw new Exception\InvalidArgumentException('No supported schemes given in \'accept_schemes\'. Valid values: '
-                                                . implode(', ', $this->_supportedSchemes));
+            throw new Exception\InvalidArgumentException(sprintf(
+                'No supported schemes given in "accept_schemes". Valid values: %s',
+                implode(', ', $this->_supportedSchemes)
+            ));
         }
 
         // Double-quotes are used to delimit the realm string in the HTTP header,
@@ -178,8 +175,10 @@ class Http implements AdapterInterface
             !ctype_print($config['realm']) ||
             strpos($config['realm'], ':') !== false ||
             strpos($config['realm'], '"') !== false) {
-            throw new Exception\InvalidArgumentException('Config key \'realm\' is required, and must contain only printable '
-                                                . 'characters, excluding quotation marks and colons');
+            throw new Exception\InvalidArgumentException(
+                'Config key \'realm\' is required, and must contain only printable characters,'
+                . 'excluding quotation marks and colons'
+            );
         } else {
             $this->_realm = $config['realm'];
         }
@@ -188,16 +187,19 @@ class Http implements AdapterInterface
             if (empty($config['digest_domains']) ||
                 !ctype_print($config['digest_domains']) ||
                 strpos($config['digest_domains'], '"') !== false) {
-                throw new Exception\InvalidArgumentException('Config key \'digest_domains\' is required, and must contain '
-                                                    . 'only printable characters, excluding quotation marks');
+                throw new Exception\InvalidArgumentException(
+                    'Config key \'digest_domains\' is required, and must contain '
+                    . 'only printable characters, excluding quotation marks'
+                );
             } else {
                 $this->_domains = $config['digest_domains'];
             }
 
             if (empty($config['nonce_timeout']) ||
                 !is_numeric($config['nonce_timeout'])) {
-                throw new Exception\InvalidArgumentException('Config key \'nonce_timeout\' is required, and must be an '
-                                                    . 'integer');
+                throw new Exception\InvalidArgumentException(
+                    'Config key \'nonce_timeout\' is required, and must be an integer'
+                );
             } else {
                 $this->_nonceTimeout = (int) $config['nonce_timeout'];
             }
@@ -606,7 +608,15 @@ class Http implements AdapterInterface
         // would be surprising if the user just logged in.
         $timeout = ceil(time() / $this->_nonceTimeout) * $this->_nonceTimeout;
 
-        $nonce = hash('md5', $timeout . ':' . $this->_request->getServer()->get('HTTP_USER_AGENT') . ':' . __CLASS__);
+        $userAgentHeader = $this->_request->getHeaders()->get('User-Agent');
+        if ($userAgentHeader) {
+            $userAgent = $userAgentHeader->getFieldValue();
+        } elseif (isset($_SERVER['HTTP_USER_AGENT'])) {
+            $userAgent = $_SERVER['HTTP_USER_AGENT'];
+        } else {
+            $userAgent = 'Zend_Authenticaion';
+        }
+        $nonce = hash('md5', $timeout . ':' . $userAgent . ':' . __CLASS__);
         return $nonce;
     }
 
@@ -631,8 +641,8 @@ class Http implements AdapterInterface
      * Parse Digest Authorization header
      *
      * @param  string $header Client's Authorization: HTTP header
-     * @return array|false Data elements from header, or false if any part of
-     *         the header is invalid
+     * @return array|bool Data elements from header, or false if any part of
+     *                    the header is invalid
      */
     protected function _parseDigestAuth($header)
     {

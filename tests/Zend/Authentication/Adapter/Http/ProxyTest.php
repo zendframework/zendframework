@@ -315,11 +315,11 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
         $headers  = new Headers();
         $headers->addHeaderLine('Proxy-Authorization', $clientHeader);
+        $headers->addHeaderLine('User-Agent', 'PHPUnit');
 
         $request  = new Request();
         $request->setUri('http://localhost/');
         $request->setMethod('GET');
-        $request->setServer(new Parameters(array('HTTP_USER_AGENT' => 'PHPUnit')));
         $request->setHeaders($headers);
 
         // Select an Authentication scheme

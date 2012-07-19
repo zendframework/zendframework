@@ -134,7 +134,7 @@ class ViewManager implements ListenerAggregateInterface
         $this->services = $services;
         $this->event    = $event;
 
-//        $routeNotFoundStrategy   = $this->getRouteNotFoundStrategy();
+        $routeNotFoundStrategy   = new RouteNotFoundStrategy();
 //        $exceptionStrategy       = $this->getExceptionStrategy();
         $mvcRenderingStrategy    = $this->getMvcRenderingStrategy();
         $createViewModelListener = new CreateViewModelListener();
@@ -145,7 +145,7 @@ class ViewManager implements ListenerAggregateInterface
         $this->registerMvcRenderingStrategies($events);
         $this->registerViewStrategies();
 
-//        $events->attach($routeNotFoundStrategy);
+        $events->attach($routeNotFoundStrategy);
 //        $events->attach($exceptionStrategy);
         $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
         $events->attach($mvcRenderingStrategy);
@@ -208,39 +208,6 @@ class ViewManager implements ListenerAggregateInterface
         $this->services->setAlias('Zend\Mvc\View\ExceptionStrategy', 'ExceptionStrategy');
 
         return $this->exceptionStrategy;
-    }
-
-    /**
-     * Instantiates and configures the "route not found", or 404, strategy
-     *
-     * @return RouteNotFoundStrategy
-     */
-    public function getRouteNotFoundStrategy()
-    {
-        if ($this->routeNotFoundStrategy) {
-            return $this->routeNotFoundStrategy;
-        }
-
-        $this->routeNotFoundStrategy = new RouteNotFoundStrategy();
-
-        $displayNotFoundReason = false;
-        $notFoundTemplate      = '404';
-
-        if (isset($this->config['display_not_found_reason'])) {
-            $displayNotFoundReason = $this->config['display_not_found_reason'];
-        }
-        if (isset($this->config['not_found_template'])) {
-            $notFoundTemplate = $this->config['not_found_template'];
-        }
-
-        $this->routeNotFoundStrategy->setDisplayNotFoundReason($displayNotFoundReason);
-        $this->routeNotFoundStrategy->setNotFoundTemplate($notFoundTemplate);
-
-        $this->services->setService('RouteNotFoundStrategy', $this->routeNotFoundStrategy);
-        $this->services->setAlias('Zend\Mvc\View\RouteNotFoundStrategy', 'RouteNotFoundStrategy');
-        $this->services->setAlias('404Strategy', 'RouteNotFoundStrategy');
-
-        return $this->routeNotFoundStrategy;
     }
 
     /**

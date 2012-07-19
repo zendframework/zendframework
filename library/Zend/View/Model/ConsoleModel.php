@@ -68,4 +68,24 @@ class ConsoleModel extends ViewModel
             return $this->options['errorLevel'];
         }
     }
+
+    /**
+     * Set result text.
+     *
+     * @param string  $text
+     * @return \Zend\View\Model\ConsoleModel
+     */
+    public function setResult($text){
+        $this->setVariable(self::RESULT, $text);
+        return $this;
+    }
+
+    /**
+     * Get result text.
+     *
+     * @return mixed
+     */
+    public function getResult(){
+        return $this->getVariable(self::RESULT);
+    }
 }

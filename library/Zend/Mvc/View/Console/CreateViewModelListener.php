@@ -28,8 +28,15 @@ use Zend\Mvc\View\Http\CreateViewModelListener as HttpCreateViewModelListener;
 use Zend\Stdlib\ArrayUtils;
 use Zend\View\Model\ConsoleModel;
 
-class CreateViewModelListener extends HttpCreateViewModelListener implements ListenerAggregateInterface
+class CreateViewModelListener implements ListenerAggregateInterface
 {
+    /**
+     * Listeners we've registered
+     *
+     * @var array
+     */
+    protected $listeners = array();
+
     /**
      * Attach listeners
      *
@@ -38,9 +45,26 @@ class CreateViewModelListener extends HttpCreateViewModelListener implements Lis
      */
     public function attach(Events $events)
     {
-        parent::attach($events);
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'createViewModelFromString'), -80);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'createViewModelFromArray'),  -80);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'createViewModelFromNull'),   -80);
     }
+
+    /**
+     * Detach listeners
+     *
+     * @param  Events $events
+     * @return void
+     */
+    public function detach(Events $events)
+    {
+        foreach ($this->listeners as $index => $listener) {
+            if ($events->detach($listener)) {
+                unset($this->listeners[$index]);
+            }
+        }
+    }
+
 
     /**
      * Inspect the result, and cast it to a ViewModel if a string is detected
@@ -60,6 +84,40 @@ class CreateViewModelListener extends HttpCreateViewModelListener implements Lis
 
         // store the result in a model variable
         $model->setVariable(ConsoleModel::RESULT, $result);
+        $e->setResult($model);
+    }
+
+    /**
+     * Inspect the result, and cast it to a ViewModel if an assoc array is detected
+     *
+     * @param  MvcEvent $e
+     * @return void
+     */
+    public function createViewModelFromArray(MvcEvent $e)
+    {
+        $result = $e->getResult();
+        if (!ArrayUtils::hasStringKeys($result, true)) {
+            return;
+        }
+
+        $model = new ConsoleModel($result);
+        $e->setResult($model);
+    }
+
+    /**
+     * Inspect the result, and cast it to a ViewModel if null is detected
+     *
+     * @param MvcEvent $e
+     * @return void
+    */
+    public function createViewModelFromNull(MvcEvent $e)
+    {
+        $result = $e->getResult();
+        if (null !== $result) {
+            return;
+        }
+
+        $model = new ConsoleModel;
         $e->setResult($model);
     }
 }

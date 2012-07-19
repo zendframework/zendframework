@@ -86,6 +86,14 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
         $response  = $e->getResponse();
         $viewModel = $e->getViewModel();
 
+        if(empty($result)){
+            /**
+             * There is absolutely no result, so there's nothing to display.
+             * We will return an empty response object
+             */
+            return $response;
+        }
+
         // collect results from child models
         $responseText = '';
         if($result->hasChildren()){

@@ -22,6 +22,9 @@ PLEASE USE AT YOUR OWN RISK.
    - Select-style elements now have options populated as value => label
      pairs instead of label => value pairs. This is done to ensure that
      option values are unique.
+ - Moved Zend\I18n\Validator\Iban to Zend\Validator\Iban
+   and replaced the option "locale" with "country_code"
+
 
 Over *XXX* pull requests for a variety of features and bugfixes were handled
 since beta5!

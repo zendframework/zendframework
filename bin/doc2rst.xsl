@@ -246,6 +246,11 @@
     <xsl:template match="//doc:varlistentry/doc:listitem" priority="1">
         <xsl:apply-templates mode="indent"/>
     </xsl:template>
+    <!-- varlistentry/listitem/methodsynopsys -->
+    <xsl:template match="//doc:varlistentry/doc:listitem/doc:methodsynopsis" priority="1">
+        <xsl:call-template name="methodsynopsis"/>
+        <xsl:text>&#xA;</xsl:text>
+    </xsl:template>
 
     <!--
     #################

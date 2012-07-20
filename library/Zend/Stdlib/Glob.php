@@ -27,7 +27,7 @@ abstract class Glob
     const GLOB_NOESCAPE = 0x08;
     const GLOB_BRACE    = 0x10;
     const GLOB_ONLYDIR  = 0x20;
-    const GLOB_ERR      = 0x30;
+    const GLOB_ERR      = 0x40;
     /**#@-*/
 
     /**

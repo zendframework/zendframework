@@ -26,4 +26,10 @@ class GlobTest extends TestCase
             Glob::glob(__DIR__ . '/_files/{alph,bet}a', Glob::GLOB_BRACE, true)
         );
     }
+
+    public function testNonMatchingGlobReturnsArray()
+    {
+        $result = Glob::glob('/some/path/{,*.}{this,orthis}.php', Glob::GLOB_BRACE);
+        $this->assertInternalType('array', $result);
+    }
 }

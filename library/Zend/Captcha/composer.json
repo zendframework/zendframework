@@ -14,5 +14,8 @@
     "target-dir": "Zend/Captcha",
     "require": {
         "php": ">=5.3.3"
+    },
+    "suggest": {
+        "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha component"
     }
 }

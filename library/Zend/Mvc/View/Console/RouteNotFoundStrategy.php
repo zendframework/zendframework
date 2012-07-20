@@ -345,16 +345,14 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         }
 
         /**
-         * Check if the sum of x-1 columns fit inside console window width - 10 chars
+         * Check if the sum of x-1 columns fit inside console window width - 10 chars. If columns do not fit inside
+         * console window, then we'll just concatenate them and output as is.
          */
         $width = 0;
         for($x=1;$x<$cols;$x++){
             $width += $maxW[$x];
         }
         if($width >= $consoleWidth - 10){
-            /**
-             * We cannot fit columns inside console window, so just concatenate and return the result.
-             */
             foreach($data as $row){
                 $result .= join("    ",$row)."\n";
             }
@@ -362,10 +360,11 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         }
 
         /**
-         * Use Zend\Text\Table to render the table
+         * Use Zend\Text\Table to render the table.
+         * The last column will use the remaining space in console window (minus 1 character to prevent double
+         * wrapping at the edge of the screen).
          */
-        // Make the last column use the remaining space in console window
-        $maxW[$cols] = $consoleWidth - $width;
+        $maxW[$cols] = $consoleWidth - $width -1;
         $table = new \Zend\Text\Table\Table();
         $table->setColumnWidths($maxW);
         $table->setDecorator(new \Zend\Text\Table\Decorator\Blank());

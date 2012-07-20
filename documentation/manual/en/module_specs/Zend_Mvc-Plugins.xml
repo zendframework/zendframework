@@ -34,12 +34,6 @@
 
     <listitem>
       <para>
-        <classname>Zend\Mvc\Controller\Plugin\PostRedirectGet</classname>
-      </para>
-    </listitem>
-
-    <listitem>
-      <para>
         <classname>Zend\Mvc\Controller\Plugin\Redirect</classname>
       </para>
     </listitem>
@@ -263,55 +257,6 @@ return array(
     'foo'     => $foo,
 );
 ]]></programlisting>
-  </section>
-
-  <section xml:id="zend.mvc.controller-plugins.postredirectget">
-    <title>The Post/Redirect/Get Plugin</title>
-
-    <para>
-      When a user POSTs data to a page, their browser will try to protect them
-      from sending the POST again, breaking the back button and causing browser
-      warning pop-ups. Instead, when receiving a POST, we should store the data
-      and redirect the user to a page using a GET request. For this, we will use
-      the FlashMessenger plugin to store data across requests.
-    </para>
-
-    <para>
-      This plugin can be invoked with two arguments:
-    </para>
-
-    <listitem>
-      <para>
-        <varname>$redirect</varname> is a string containing either the name of the
-        named route or the URL the user should be directed to.
-      </para>
-      <para>
-        <varname>$redirectToUrl</varname> is a boolean. Passing true will cause the
-        treat the first parameter as a URL instead of a route name. This argument
-        defaults to false.
-      </para>
-    </listitem>
-
-    <para>
-      Usage example:
-    </para>
-
-    <programlisting language="php">
-	// Pass in the route/url you want to redirect to after the POST
-	$prg = $this->prg('/user/register', true);
-
-	if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
-	    // returned a response to redirect us
-	    return $prg;
-	} elseif ($prg === false) {
-	    // this wasn't a POST request, but there were no params in the flash messenger
-	    // probably this is the first time the form was loaded
-	    return array('form' => $myForm);
-	}
-
-	// $prg is an array containing the POST params from the previous request
-	$form->setData($prg);
-    </programlisting>
   </section>
 
   <section xml:id="zend.mvc.controller-plugins.redirect">

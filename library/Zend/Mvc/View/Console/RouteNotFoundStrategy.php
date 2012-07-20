@@ -169,7 +169,6 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
             $scriptName = '';
         }
 
-
         // Get application banner
         $banner = $this->getConsoleBanner($console, $mm);
 
@@ -178,7 +177,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
 
         // Inject the text into view model
         $model->setResult(
-            $banner . "\n" . $usage
+            $banner . "\n\n" . $usage
         );
 
         // Inject the result into MvcEvent
@@ -248,7 +247,13 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                 }
 
                 /* @var $module ConsoleUsageProviderInterface */
-                $usageInfo[$name] = $module->getConsoleUsage($console);
+                $usage = $module->getConsoleUsage($console);
+
+                // Normalize what we got from the module or discard
+                if(is_array($usage))
+                    $usageInfo[$name] = $usage;
+                elseif(is_string($usage))
+                    $usageInfo[$name] = array($usage);
             }
         }
 
@@ -278,7 +283,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                          *    'ivocation method' => 'explanation'
                          */
                         if($tableCols !== 2 && $table !== false){
-                            // draw last table
+                            // render last table
                             $result .= $this->renderTable($table, $tableCols,$console->getWidth());
                             $table = false;
                         }
@@ -290,7 +295,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                          *  array( '--param', '--explanation' )
                          */
                         if(count($b) != $tableCols && $table !== false){
-                            // draw last table
+                            // render last table
                             $result .= $this->renderTable($table, $tableCols,$console->getWidth());
                             $table = false;
                         }
@@ -302,9 +307,12 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                          *    'A single line of text'
                          */
                         if($table !== false){
-                            // draw last table
+                            // render last table
                             $result .= $this->renderTable($table, $tableCols,$console->getWidth());
                             $table = false;
+
+                            // add extra newline for clarity
+                            $result .= "\n";
                         }
                         $result .= $b."\n";
                     }
@@ -323,6 +331,14 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         return $result;
     }
 
+    /**
+     * Render a text table containing the data provided, that will fit inside console window's width.
+     *
+     * @param $data
+     * @param $cols
+     * @param $consoleWidth
+     * @return string
+     */
     protected function renderTable($data, $cols, $consoleWidth){
         $result = '';
         $padding = 2;

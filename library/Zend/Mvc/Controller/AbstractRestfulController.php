@@ -270,7 +270,8 @@ abstract class AbstractRestfulController implements
         $events->setIdentifiers(array(
             'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
-            get_called_class()
+            get_called_class(),
+            substr(get_called_class(), 0, strpos(get_called_class(), '\\'))
         ));
         $this->events = $events;
         $this->attachDefaultListeners();

@@ -120,7 +120,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                 'haystack' => array('test', 0, 'A'),
+                 'haystack' => array('test', 0, 'A', 1),
             )
         );
 
@@ -129,6 +129,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid('a'));
         $this->assertTrue($validator->isValid('A'));
         $this->assertTrue($validator->isValid('0'));
+        $this->assertFalse($validator->isValid('1a'));
         $this->assertTrue($validator->isValid(0));
     }
 
@@ -136,7 +137,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                 'haystack' => array('test', 0, 'A'),
+                 'haystack' => array('test', 0, 'A', 1),
             )
         );
 
@@ -148,6 +149,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid('a'));
         $this->assertTrue($validator->isValid('A'));
         $this->assertFalse($validator->isValid('0'));
+        $this->assertFalse($validator->isValid('1a'));
         $this->assertTrue($validator->isValid(0));
     }
 
@@ -155,7 +157,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                 'haystack' => array('test', 0, 'A'),
+                 'haystack' => array('test', 0, 'A', 1),
             )
         );
 
@@ -167,6 +169,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid('a'));
         $this->assertTrue($validator->isValid('A'));
         $this->assertTrue($validator->isValid('0'));
+        $this->assertTrue($validator->isValid('1a'));
         $this->assertTrue($validator->isValid(0));
     }
 
@@ -188,6 +191,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid('a'));
         $this->assertTrue($validator->isValid('A'));
         $this->assertTrue($validator->isValid('0'));
+        $this->assertFalse($validator->isValid('1a'));
         $this->assertTrue($validator->isValid(0));
     }
 
@@ -211,6 +215,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid('a'));
         $this->assertTrue($validator->isValid('A'));
         $this->assertFalse($validator->isValid('0'));
+        $this->assertFalse($validator->isValid('1a'));
         $this->assertTrue($validator->isValid(0));
     }
 
@@ -234,6 +239,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid('a'));
         $this->assertTrue($validator->isValid('A'));
         $this->assertTrue($validator->isValid('0'));
+        $this->assertTrue($validator->isValid('1a'));
         $this->assertTrue($validator->isValid(0));
     }
 

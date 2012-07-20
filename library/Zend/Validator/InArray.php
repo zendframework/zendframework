@@ -166,7 +166,7 @@ class InArray extends AbstractValidator
      * Returns true if and only if $value is contained in the haystack option. If the strict
      * option is true, then the type of $value is also checked.
      *
-     * @param  mixed $value
+     * @param mixed $value
      * See {@link http://php.net/manual/function.in-array.php#104501}
      * @return boolean
      */
@@ -191,7 +191,7 @@ class InArray extends AbstractValidator
                     // add protection to prevent string to int vuln's
                     $el = $element;
                     if (self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY == $this->strict
-                        && is_string($value) && is_int($el)
+                        && is_string($value) && (is_int($el) || is_float($el))
                     ) {
                         $el = (string)$el;
                     }
@@ -216,7 +216,7 @@ class InArray extends AbstractValidator
                 && is_string($value)
             ) {
                 foreach ($haystack as &$h) {
-                    if (is_int($h)) {
+                    if (is_int($h) || is_float($h)) {
                         $h = (string)$h;
                     }
                 }

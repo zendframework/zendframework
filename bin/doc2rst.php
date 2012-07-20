@@ -27,6 +27,12 @@ use Zend\Text\Table;
  * --output|-o      Output file in reStructuredText format; By default,
  *                  assumes <docbook>.rst
  */
+define('INPUT_ENCODING', 'UTF-8');
+
+iconv_set_encoding("internal_encoding", "UTF-8");
+iconv_set_encoding("input_encoding", INPUT_ENCODING);
+iconv_set_encoding("output_encoding", "UTF-8");
+
 echo "DocBook to reStructuredText conversion for ZF documentation\n";
 echo "-----------------------------------------------------------\n";
 
@@ -75,7 +81,7 @@ $rstFile = $opts->getOption('o');
 if (empty($rstFile)) {
     $rstFile = $docbook;
     if ('.xml' === substr($rstFile, -4)) {
-        $rstFile = substr($rstFile, 0, strlen($docbook)-4);
+        $rstFile = substr($rstFile, 0, strlen($docbook) - 4);
     }
     $rstFile .= '.rst';
 }
@@ -188,7 +194,7 @@ class RstConvert
         $rows   = explode("\n", $text);
         $output = '';
         foreach ($rows as $row) {
-            if ($row === '' || preg_match('/^\s+$/', $row)) {
+            if ($row === '' || preg_match('/^\s+$/u', $row)) {
                 $output .= "\n";
             } else {
                 $output .= "   $row\n";
@@ -248,7 +254,7 @@ class RstConvert
     public static function title($text, $sign = '-', $top = false)
     {
         $text   = trim(self::formatText($text));
-        $line   = str_repeat($sign, strlen($text));
+        $line   = str_repeat($sign, mb_strlen($text, INPUT_ENCODING));
         $output = $text . "\n" . $line . "\n";
         if ($top) {
             $output = $line . "\n" . $output;
@@ -268,7 +274,7 @@ class RstConvert
     {
         $hasPreceding = !empty($preceding);
         $hasFollowing = !empty($following);
-        $escaped = self::escapeChars(trim(preg_replace('/\s+/m', ' ', $text)));
+        $escaped = self::escapeChars(trim(preg_replace('/\s+/mu', ' ', $text)));
 
         if ($hasPreceding && !in_array($preceding[0]->localName,
                                        array('variablelist', 'example', 'table', 'programlisting', 'note',
@@ -377,11 +383,8 @@ class RstConvert
     public static function table($node)
     {
         // check if thead exists
-        if (0 !== $node[0]->getElementsByTagName('thead')->length) {
-            $head = true;
-        } else {
-            $head = false;
-        }
+        $head = (0 !== $node[0]->getElementsByTagName('thead')->length);
+
         $rows   = $node[0]->getElementsByTagName('row');
         $table  = array();
         $totRow = $rows->length;
@@ -395,7 +398,7 @@ class RstConvert
             $i = 0;
             foreach ($cols as $col) {
                 $table[$j][$i] = self::formatText($col->nodeValue);
-                $length        = strlen($table[$j][$i]);
+                $length        = mb_strlen($table[$j][$i], INPUT_ENCODING);
                 if ($length > $widthCol[$i]) {
                     $widthCol[$i] = $length;
                 }

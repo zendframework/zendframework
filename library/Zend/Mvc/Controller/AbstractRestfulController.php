@@ -30,6 +30,7 @@ use Zend\Http\PhpEnvironment\Response as HttpResponse;
 use Zend\Mvc\Exception;
 use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\Http\RouteMatch;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\DispatchableInterface as Dispatchable;
@@ -210,16 +211,11 @@ abstract class AbstractRestfulController implements
                     break;
                 case 'post':
                     $action = 'create';
-                    $return = $this->create($this->processInputData($request));
+                    $return = $this->processPostData($request);
                     break;
                 case 'put':
-                    if (null === $id = $routeMatch->getParam('id')) {
-                        if (!($id = $request->getQuery()->get('id', false))) {
-                            throw new \DomainException('Missing identifier');
-                        }
-                    }
                     $action = 'update';
-                    $return = $this->update($id, $this->processInputData($request));
+                    $return = $this->processPutData($request, $routeMatch);
                     break;
                 case 'delete':
                     if (null === $id = $routeMatch->getParam('id')) {
@@ -245,20 +241,31 @@ abstract class AbstractRestfulController implements
     }
 
     /**
-     * Process input data and return as array 
+     * Process post data and call create
      * 
      * @param Request $request
-     * @return array 
      */
-    public function processInputData(Request $request)
+    public function processPostData(Request $request)
     {     
-        if (strtolower($request->getMethod()) == 'post') {
-            return $request->getPost()->toArray();
-        } else {
-            $content = $request->getContent();
-            parse_str($content, $parsedParams);
-            return $parsedParams;
+        return $this->create($request->getPost()->toArray());
+    }
+
+    /**
+     * Process put data and call update
+     * 
+     * @param Request $request
+     * @param RouteMatch $routeMatch
+     */
+    public function processPutData(Request $request, RouteMatch $routeMatch)
+    {
+        if (null === $id = $routeMatch->getParam('id')) {
+            if (!($id = $request->getQuery()->get('id', false))) {
+                throw new \DomainException('Missing identifier');
+            }
         }
+        $content = $request->getContent();
+        parse_str($content, $parsedParams);
+        return $this->update($id, $parsedParams);
     }
 
     /**

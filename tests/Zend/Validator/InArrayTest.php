@@ -104,12 +104,32 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
                  'haystack' => array('test', 0, 'A'),
             )
         );
-        $validator->setStrict(true);
+
+        // bog standard strict compare
+        $validator->setStrict(InArray::COMPARE_STRICT);
         $this->assertTrue($validator->getStrict());
         $this->assertFalse($validator->isValid('b'));
         $this->assertFalse($validator->isValid('a'));
         $this->assertTrue($validator->isValid('A'));
         $this->assertFalse($validator->isValid('0'));
+        $this->assertTrue($validator->isValid(0));
+
+        // test new vulnerability prevention
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY);
+        $this->assertFalse($validator->getStrict());
+        $this->assertFalse($validator->isValid('b'));
+        $this->assertFalse($validator->isValid('a'));
+        $this->assertTrue($validator->isValid('A'));
+        $this->assertTrue($validator->isValid('0'));
+        $this->assertTrue($validator->isValid(0));
+
+        // non-numeric strings converted to 0
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT);
+        $this->assertEquals(InArray::COMPARE_NOT_STRICT, $validator->getStrict());
+        $this->assertTrue($validator->isValid('b'));
+        $this->assertTrue($validator->isValid('a'));
+        $this->assertTrue($validator->isValid('A'));
+        $this->assertTrue($validator->isValid('0'));
         $this->assertTrue($validator->isValid(0));
     }
 

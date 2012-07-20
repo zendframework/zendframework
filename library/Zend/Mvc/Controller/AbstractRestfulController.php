@@ -30,7 +30,6 @@ use Zend\Http\PhpEnvironment\Response as HttpResponse;
 use Zend\Mvc\Exception;
 use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\Http\RouteMatch;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\DispatchableInterface as Dispatchable;
@@ -254,9 +253,9 @@ abstract class AbstractRestfulController implements
      * Process put data and call update
      * 
      * @param Request $request
-     * @param RouteMatch $routeMatch
+     * @param $routeMatch
      */
-    public function processPutData(Request $request, RouteMatch $routeMatch)
+    public function processPutData(Request $request, $routeMatch)
     {
         if (null === $id = $routeMatch->getParam('id')) {
             if (!($id = $request->getQuery()->get('id', false))) {

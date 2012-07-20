@@ -4,7 +4,7 @@
                 xmlns:php="http://php.net/xsl"
                 xmlns:xi="http://www.w3.org/2001/XInclude"
                 version="1.0">
-<xsl:output method="text" indent="no" />
+<xsl:output method="text" indent="no" encoding="UTF-8" />
 <xsl:strip-space elements="*"/>
 
     <xsl:variable name="default_indentation">3</xsl:variable>

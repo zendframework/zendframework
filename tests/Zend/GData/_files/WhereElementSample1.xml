@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<where xmlns="http://schemas.google.com/g/2005" rel="http://schemas.google.com/g/2005#event" valueString="Joe's Pub" label="1234 Anywhere Ln., New York, NY">
-  <entryLink href="http://local.example.com/10018/JoesPub">
-  </entryLink>
-</where>

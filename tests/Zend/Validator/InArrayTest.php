@@ -113,25 +113,6 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid(0));
     }
 
-    /**
-     * @group ZF2-337
-     */
-    public function testNotSetStrictModeWith0InTheHaystack()
-    {
-        $validator = new InArray(
-            array(
-                 'haystack' => array('test', 0, 'A'),
-            )
-        );
-        $this->assertFalse($validator->getStrict());
-
-        $this->setExpectedException(
-            'Zend\Validator\Exception\RuntimeException',
-            'Comparisons with 0 are only possible in strict mode'
-        );
-        $this->assertFalse($validator->isValid('b'));
-    }
-
     public function testSettingStrictViaInitiation()
     {
         $validator = new InArray(

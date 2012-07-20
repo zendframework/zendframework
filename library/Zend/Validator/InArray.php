@@ -106,7 +106,9 @@ class InArray extends AbstractValidator
     public function getStrict()
     {
         // To keep BC with new strict modes
-        if ($this->strict == self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY || $this->strict == self::COMPARE_STRICT){
+        if ($this->strict == self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY
+            || $this->strict == self::COMPARE_STRICT
+        ) {
             return (bool) $this->strict;
         }
         return $this->strict;
@@ -129,7 +131,7 @@ class InArray extends AbstractValidator
         );
 
         // validate strict value
-        if (in_array($strict, $checkTypes)){ // don't need to strict check as dev sets strict mode
+        if (in_array($strict, $checkTypes)) { // don't need to strict check as dev sets strict mode
             $this->strict = $strict;
         }
         else{
@@ -188,7 +190,9 @@ class InArray extends AbstractValidator
 
                     // add protection to prevent string to int vuln's
                     $el = $element;
-                    if (self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY == $this->strict && is_string($value) && is_int($element)){
+                    if (self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY == $this->strict
+                        && is_string($value) && is_int($el)
+                    ) {
                         $el = (string)$el;
                     }
 
@@ -208,9 +212,11 @@ class InArray extends AbstractValidator
              *
              * This occurs only if the input is a string and a haystack member is an int
              */
-            if (self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY == $this->strict && is_string($value)){
-                foreach ($haystack as &$h){
-                    if (is_int($h)){
+            if (self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY == $this->strict
+                && is_string($value)
+            ) {
+                foreach ($haystack as &$h) {
+                    if (is_int($h)) {
                         $h = (string)$h;
                     }
                 }

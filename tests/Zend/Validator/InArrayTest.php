@@ -116,7 +116,8 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(InArray::COMPARE_NOT_STRICT,$validator->getStrict());
     }
 
-    public function testNonStrictSafeComparisons(){
+    public function testNonStrictSafeComparisons()
+    {
         $validator = new InArray(
             array(
                  'haystack' => array('test', 0, 'A'),
@@ -131,7 +132,8 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid(0));
     }
 
-    public function testStrictComparisons(){
+    public function testStrictComparisons()
+    {
         $validator = new InArray(
             array(
                  'haystack' => array('test', 0, 'A'),
@@ -149,7 +151,8 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid(0));
     }
 
-    public function testNonStrictComparisons(){
+    public function testNonStrictComparisons()
+    {
         $validator = new InArray(
             array(
                  'haystack' => array('test', 0, 'A'),
@@ -167,7 +170,8 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid(0));
     }
 
-    public function testNonStrictSafeComparisonsRecurisve(){
+    public function testNonStrictSafeComparisonsRecurisve()
+    {
         $validator = new InArray(
             array(
                  'haystack' => array(
@@ -187,7 +191,8 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid(0));
     }
 
-    public function testStrictComparisonsRecursive(){
+    public function testStrictComparisonsRecursive()
+    {
         $validator = new InArray(
             array(
                  'haystack' => array(
@@ -209,7 +214,8 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid(0));
     }
 
-    public function testNonStrictComparisonsRecursive(){
+    public function testNonStrictComparisonsRecursive()
+    {
         $validator = new InArray(
             array(
                  'haystack' => array(

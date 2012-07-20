@@ -96,4 +96,36 @@ class ElementTest extends TestCase
         $element = new Element('foo');
         $this->assertEquals('foo', $element->getName());
     }
+    
+    public function testCanSetCustomOptionFromConstructor()
+    {
+        $element = new Element('foo', array(
+            'custom' => 'option'
+        ));
+        $options = $element->getOptions();
+        $this->assertArrayHasKey('custom', $options);
+        $this->assertEquals('option', $options['custom']);
+    }
+    
+    public function testCanSetCustomOptionFromMethod()
+    {
+        $element = new Element('foo');
+        $element->setOptions(array(
+            'custom' => 'option'
+        ));
+        
+        $options = $element->getOptions();
+        $this->assertArrayHasKey('custom', $options);
+        $this->assertEquals('option', $options['custom']);
+    }
+    
+    public function testCanRetrieveSpecificOption()
+    {
+        $element = new Element('foo');
+        $element->setOptions(array(
+            'custom' => 'option'
+        ));
+        $option = $element->getOption('custom');
+        $this->assertEquals('option', $option);
+    }
 }

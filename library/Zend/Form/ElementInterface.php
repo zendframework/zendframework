@@ -41,6 +41,21 @@ interface ElementInterface
      * @return ElementInterface
      */
     public function setOptions($options);
+    
+    /**
+     * get the defined options
+     * 
+     * @return array
+     */
+    public function getOptions();
+    
+    /**
+     * return the specified option
+     * 
+     * @param string $option
+     * @return NULL|multitype
+     */
+    public function getOption($option);
 
     /**
      * Set a single element attribute

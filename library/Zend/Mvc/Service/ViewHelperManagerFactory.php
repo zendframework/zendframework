@@ -12,7 +12,7 @@ namespace Zend\Mvc\Service;
 
 use Zend\Mvc\Exception;
 use Zend\Mvc\Router\RouteMatch;
-use Zend\ServiceManager\ConfigurationInterface;
+use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Helper as ViewHelper;
 
@@ -31,9 +31,9 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
      * @var array
      */
     protected $defaultHelperMapClasses = array(
-        'Zend\Form\View\HelperConfiguration',
-        'Zend\I18n\View\HelperConfiguration',
-        'Zend\Navigation\View\HelperConfiguration'
+        'Zend\Form\View\HelperConfig',
+        'Zend\I18n\View\HelperConfig',
+        'Zend\Navigation\View\HelperConfig'
     );
 
     /**
@@ -51,11 +51,11 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
                 $config = new $configClass;
             }
 
-            if (!$config instanceof ConfigurationInterface) {
+            if (!$config instanceof ConfigInterface) {
                 throw new Exception\RuntimeException(sprintf(
                     'Invalid service manager configuration class provided; received "%s", expected class implementing %s',
                     $configClass,
-                    'Zend\ServiceManager\ConfigurationInterface'
+                    'Zend\ServiceManager\ConfigInterface'
                 ));
             }
 
@@ -80,7 +80,7 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
         });
 
         $plugins->setFactory('basepath', function($sm) use($serviceLocator) {
-            $config = $serviceLocator->get('Configuration');
+            $config = $serviceLocator->get('Config');
             $config = $config['view_manager'];
             $basePathHelper = new ViewHelper\BasePath;
             if (isset($config['base_path'])) {
@@ -99,7 +99,7 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
          * based on. This is why it must be set early instead of later in the layout phtml.
          */
         $plugins->setFactory('doctype', function($sm) use($serviceLocator) {
-            $config = $serviceLocator->get('Configuration');
+            $config = $serviceLocator->get('Config');
             $config = $config['view_manager'];
             $doctypeHelper = new ViewHelper\Doctype;
             if (isset($config['doctype'])) {

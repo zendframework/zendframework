@@ -10,53 +10,53 @@
 
 namespace Zend\ServiceManager;
 
-class Configuration implements ConfigurationInterface
+class Config implements ConfigInterface
 {
-    protected $configuration = array();
+    protected $config = array();
 
-    public function __construct($configuration = array())
+    public function __construct($config = array())
     {
-        $this->configuration = $configuration;
+        $this->config = $config;
     }
 
     public function getAllowOverride()
     {
-        return (isset($this->configuration['allow_override'])) ? $this->configuration['allow_override'] : null;
+        return (isset($this->config['allow_override'])) ? $this->config['allow_override'] : null;
     }
 
     public function getFactories()
     {
-        return (isset($this->configuration['factories'])) ? $this->configuration['factories'] : array();
+        return (isset($this->config['factories'])) ? $this->config['factories'] : array();
     }
 
     public function getAbstractFactories()
     {
-        return (isset($this->configuration['abstract_factories'])) ? $this->configuration['abstract_factories'] : array();
+        return (isset($this->config['abstract_factories'])) ? $this->config['abstract_factories'] : array();
     }
 
     public function getInvokables()
     {
-        return (isset($this->configuration['invokables'])) ? $this->configuration['invokables'] : array();
+        return (isset($this->config['invokables'])) ? $this->config['invokables'] : array();
     }
 
     public function getServices()
     {
-        return (isset($this->configuration['services'])) ? $this->configuration['services'] : array();
+        return (isset($this->config['services'])) ? $this->config['services'] : array();
     }
 
     public function getAliases()
     {
-        return (isset($this->configuration['aliases'])) ? $this->configuration['aliases'] : array();
+        return (isset($this->config['aliases'])) ? $this->config['aliases'] : array();
     }
 
     public function getInitializers()
     {
-        return (isset($this->configuration['initializers'])) ? $this->configuration['initializers'] : array();
+        return (isset($this->config['initializers'])) ? $this->config['initializers'] : array();
     }
 
     public function getShared()
     {
-        return (isset($this->configuration['shared'])) ? $this->configuration['shared'] : array();
+        return (isset($this->config['shared'])) ? $this->config['shared'] : array();
     }
 
     public function configureServiceManager(ServiceManager $serviceManager)

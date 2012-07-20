@@ -10,7 +10,7 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Di\Configuration as DiConfiguration;
+use Zend\Di\Config as DiConfig;
 use Zend\Di\Di;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\FactoryInterface;
@@ -29,7 +29,7 @@ class DiFactory implements FactoryInterface
      *
      * Creates and returns an abstract factory seeded by the dependency
      * injector. If the "di" key of the configuration service is set, that
-     * sub-array is passed to a DiConfiguration object and used to configure
+     * sub-array is passed to a DiConfig object and used to configure
      * the DI instance. The DI instance is then used to seed the
      * DiAbstractServiceFactory, which is then registered with the service
      * manager.
@@ -41,9 +41,9 @@ class DiFactory implements FactoryInterface
     {
         $di     = new Di();
 
-        $config = $serviceLocator->get('Configuration');
+        $config = $serviceLocator->get('Config');
         if (isset($config['di'])) {
-            $di->configure(new DiConfiguration($config['di']));
+            $di->configure(new DiConfig($config['di']));
         }
 
         if ($serviceLocator instanceof ServiceManager) {

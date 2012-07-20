@@ -23,5 +23,5 @@ interface ControllerPluginProviderInterface
      *
      * @return array|\Zend\ServiceManager\Configuration
      */
-    public function getControllerPluginConfiguration();
+    public function getControllerPluginConfig();
 }

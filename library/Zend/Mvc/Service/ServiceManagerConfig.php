@@ -12,7 +12,7 @@ namespace Zend\Mvc\Service;
 
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
-use Zend\ServiceManager\ConfigurationInterface;
+use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 
@@ -21,7 +21,7 @@ use Zend\ServiceManager\ServiceManagerAwareInterface;
  * @package    Zend_Mvc
  * @subpackage Service
  */
-class ServiceManagerConfiguration implements ConfigurationInterface
+class ServiceManagerConfig implements ConfigInterface
 {
     /**
      * Services that can be instantiated without factories

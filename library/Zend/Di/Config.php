@@ -21,7 +21,7 @@ use Zend\Di\Definition\RuntimeDefinition;
  * @category   Zend
  * @package    Zend_Di
  */
-class Configuration
+class Config
 {
     /**
      * @var array
@@ -42,7 +42,7 @@ class Configuration
 
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException(
-                'Configuration data must be of type Traversable or an array'
+                'Config data must be of type Traversable or an array'
             );
         }
         $this->data = $options;

@@ -275,7 +275,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      * @param  string $aliasOrClass
      * @return bool
      */
-    public function hasConfiguration($aliasOrClass)
+    public function hasConfig($aliasOrClass)
     {
         $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
         if (!isset($this->configurations[$key])) {
@@ -295,7 +295,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      * @param array  $configuration
      * @param bool   $append
      */
-    public function setConfiguration($aliasOrClass, array $configuration, $append = false)
+    public function setConfig($aliasOrClass, array $configuration, $append = false)
     {
         $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
         if (!isset($this->configurations[$key]) || !$append) {
@@ -330,7 +330,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      * @param  string $aliasOrClass
      * @return array
      */
-    public function getConfiguration($aliasOrClass)
+    public function getConfig($aliasOrClass)
     {
         $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
         if (isset($this->configurations[$key])) {
@@ -342,7 +342,7 @@ class InstanceManager /* implements InstanceManagerInterface */
 
     /**
      * setParameters() is a convenience method for:
-     *    setConfiguration($type, array('parameters' => array(...)), true);
+     *    setConfig($type, array('parameters' => array(...)), true);
      *
      * @param  string $aliasOrClass Alias or Class
      * @param  array  $parameters   Multi-dim array of parameters and their values
@@ -350,12 +350,12 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function setParameters($aliasOrClass, array $parameters)
     {
-        $this->setConfiguration($aliasOrClass, array('parameters' => $parameters), true);
+        $this->setConfig($aliasOrClass, array('parameters' => $parameters), true);
     }
 
     /**
      * setInjections() is a convenience method for:
-     *    setConfiguration($type, array('injections' => array(...)), true);
+     *    setConfig($type, array('injections' => array(...)), true);
      *
      * @param  string $aliasOrClass Alias or Class
      * @param  array  $injections   Multi-dim array of methods and their parameters
@@ -363,7 +363,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function setInjections($aliasOrClass, array $injections)
     {
-        $this->setConfiguration($aliasOrClass, array('injections' => $injections), true);
+        $this->setConfig($aliasOrClass, array('injections' => $injections), true);
     }
 
     /**
@@ -375,7 +375,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function setShared($aliasOrClass, $isShared)
     {
-        $this->setConfiguration($aliasOrClass, array('shared' => (bool) $isShared), true);
+        $this->setConfig($aliasOrClass, array('shared' => (bool) $isShared), true);
     }
 
     /**

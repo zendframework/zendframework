@@ -79,10 +79,10 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
     {
         $result = $e->getResult();
         if ($result instanceof Response) {
-            return $result;
+            return $result; // the result is already rendered ...
         }
 
-        // martial arguments
+        // <artial arguments
         $response  = $e->getResponse();
         $viewModel = $e->getViewModel();
 
@@ -94,24 +94,25 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
             return $response;
         }
 
-        // collect results from child models
+        // Collect results from child models
         $responseText = '';
         if($result->hasChildren()){
+            /* @var $child ViewModel */
             foreach($result->getChildren() as $child){
-                /* @var $child ViewModel */
+                // Do not use ::getResult() method here as we cannot be sure if children are also console models.
                 $responseText .= $child->getVariable(ConsoleViewModel::RESULT);
             }
         }
 
-        // fetch result from primary model
-        $responseText .= $result->getVariable(ConsoleViewModel::RESULT);
+        // Fetch result from primary model
+        $responseText .= $result->getResult();
 
-        // append console response to response object
+        // Append console response to response object
         $response->setContent(
             $response->getContent() . $responseText
         );
 
-        // pass on console-specific options
+        // Pass on console-specific options
         if(
             $response  instanceof ConsoleResponse &&
             $result    instanceof ConsoleViewModel

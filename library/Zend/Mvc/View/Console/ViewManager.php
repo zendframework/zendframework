@@ -135,7 +135,7 @@ class ViewManager implements ListenerAggregateInterface
         $this->event    = $event;
 
         $routeNotFoundStrategy   = new RouteNotFoundStrategy();
-//        $exceptionStrategy       = $this->getExceptionStrategy();
+        $exceptionStrategy       = $this->getExceptionStrategy();
         $mvcRenderingStrategy    = $this->getMvcRenderingStrategy();
         $createViewModelListener = new CreateViewModelListener();
 //        $injectTemplateListener  = new InjectTemplateListener();
@@ -146,7 +146,7 @@ class ViewManager implements ListenerAggregateInterface
         $this->registerViewStrategies();
 
         $events->attach($routeNotFoundStrategy);
-//        $events->attach($exceptionStrategy);
+        $events->attach($exceptionStrategy);
         $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
         $events->attach($mvcRenderingStrategy);
         $events->attach($sendResponseListener);
@@ -191,18 +191,12 @@ class ViewManager implements ListenerAggregateInterface
 
         $this->exceptionStrategy = new ExceptionStrategy();
 
-        $displayExceptions = false;
-        $exceptionTemplate = 'error';
-
         if (isset($this->config['display_exceptions'])) {
-            $displayExceptions = $this->config['display_exceptions'];
+            $this->exceptionStrategy->setDisplayExceptions($this->config['display_exceptions']);
         }
-        if (isset($this->config['exception_template'])) {
-            $exceptionTemplate = $this->config['exception_template'];
+        if (isset($this->config['exception_message'])) {
+            $this->exceptionStrategy->setMessage($this->config['exception_message']);
         }
-
-        $this->exceptionStrategy->setDisplayExceptions($displayExceptions);
-        $this->exceptionStrategy->setExceptionTemplate($exceptionTemplate);
 
         $this->services->setService('ExceptionStrategy', $this->exceptionStrategy);
         $this->services->setAlias('Zend\Mvc\View\ExceptionStrategy', 'ExceptionStrategy');

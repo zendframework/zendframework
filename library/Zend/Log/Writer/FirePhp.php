@@ -10,7 +10,6 @@
 
 namespace Zend\Log\Writer;
 
-use FirePhp as FirePhpInstance;
 use Zend\Log\Formatter\FirePhp as FirePhpFormatter;
 use Zend\Log\Logger;
 
@@ -31,16 +30,12 @@ class FirePhp extends AbstractWriter
     /**
      * Initializes a new instance of this class.
      * 
-     * @param FirePhpInstance $instance An (optional) instance of FirePhp that should be used for logging.
+     * @param FirePhpInterface $instance An instance of FirePhpInterface
+     *        that should be used for logging
      */
-    public function __construct(FirePhpInstance $instance = null)
+    public function __construct(FirePhpInterface $instance)
     {
-        if ($instance === null) {
-            $this->firephp = FirePhpInstance::getInstance(true);
-        } else {
-            $this->firephp = $instance;
-        }
-        
+        $this->firephp   = $instance;
         $this->formatter = new FirePhpFormatter();
     }
 
@@ -94,10 +89,10 @@ class FirePhp extends AbstractWriter
     /**
      * Sets the FirePhp instance that is used for logging.
      * 
-     * @param FirePhpInstance $instance The FirePhp instance to set.
+     * @param  FirePhpInterface $instance The FirePhp instance to set.
      * @return FirePhp
      */
-    public function setFirePhp(FirePhpInstance $instance)
+    public function setFirePhp(FirePhpInterface $instance)
     {
         $this->firephp = $instance;
         return $this;

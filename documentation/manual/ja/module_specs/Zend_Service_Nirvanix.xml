@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.nirvanix"><info><title>Zend_Service_Nirvanix</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.nirvanix"><title>Zend_Service_Nirvanix</title>
     
 
-    <section xml:id="zend.service.nirvanix.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.service.nirvanix.introduction"><title>導入</title>
         
 
         <para>
@@ -21,7 +21,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.registering"><info><title>Nirvanix への登録</title></info>
+    <section xml:id="zend.service.nirvanix.registering"><title>Nirvanix への登録</title>
         
 
         <para>
@@ -39,7 +39,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.apiDocumentation"><info><title>API ドキュメント</title></info>
+    <section xml:id="zend.service.nirvanix.apiDocumentation"><title>API ドキュメント</title>
         
 
         <para>
@@ -64,7 +64,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.features"><info><title>機能</title></info>
+    <section xml:id="zend.service.nirvanix.features"><title>機能</title>
         
 
         <para>
@@ -113,7 +113,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.storing-your-first"><info><title>さぁはじめましょう</title></info>
+    <section xml:id="zend.service.nirvanix.storing-your-first"><title>さぁはじめましょう</title>
         
 
         <para>
@@ -168,7 +168,7 @@ $imfs->unlink('/foo.txt');
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.understanding-proxy"><info><title>プロキシについて</title></info>
+    <section xml:id="zend.service.nirvanix.understanding-proxy"><title>プロキシについて</title>
         
 
         <para>
@@ -242,7 +242,7 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.examining-results"><info><title>結果の吟味</title></info>
+    <section xml:id="zend.service.nirvanix.examining-results"><title>結果の吟味</title>
         
 
         <para>
@@ -300,7 +300,7 @@ Zend_Service_Nirvanix_Response Object
         </para>
     </section>
 
-    <section xml:id="zend.service.nirvanix.handling-errors"><info><title>エラー処理</title></info>
+    <section xml:id="zend.service.nirvanix.handling-errors"><title>エラー処理</title>
         
 
         <para>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.searching"><info><title>Recherche</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.searching"><title>Recherche</title>
     
 
     <para>
         La recherche s'effectue en utilisant la méthode <methodname>find()</methodname> :
     </para>
 
-    <example xml:id="learning.lucene.searching.search-example"><info><title>Recherche à travers l'index</title></info>
+    <example xml:id="learning.lucene.searching.search-example"><title>Recherche à travers l'index</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -28,7 +28,7 @@ foreach ($hits as $hit) {
         document de l'index :
     </para>
 
-    <example xml:id="learning.lucene.searching.delete-example"><info><title>Suppression d'un document indexé</title></info>
+    <example xml:id="learning.lucene.searching.delete-example"><title>Suppression d'un document indexé</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -40,7 +40,7 @@ $index->delete($id);
         Ou récupération d'un document à partir de l'index :
     </para>
 
-    <example xml:id="learning.lucene.searching.retrieve-example"><info><title>Récupération d'un document indexé</title></info>
+    <example xml:id="learning.lucene.searching.retrieve-example"><title>Récupération d'un document indexé</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -48,7 +48,7 @@ $doc = $index->getDocument($id);
 ]]></programlisting>
     </example>
 
-    <note xml:id="learning.lucene.searching.identifiers"><info><title>Identifiant interne de document</title></info>
+    <note xml:id="learning.lucene.searching.identifiers"><title>Identifiant interne de document</title>
         
 
         <para>
@@ -87,7 +87,7 @@ $doc = $index->getDocument($id);
         méthode : <methodname>getDocument()</methodname>
     </para>
 
-    <example xml:id="learning.lucene.searching.id-score-fields"><info><title>Accéder aux champs "id" et "score" original du documents</title></info>
+    <example xml:id="learning.lucene.searching.id-score-fields"><title>Accéder aux champs "id" et "score" original du documents</title>
         
 
         <programlisting language="php"><![CDATA[

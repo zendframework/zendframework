@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.types"><info><title>計測値の型</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.types"><title>計測値の型</title>
 
     
 
@@ -8,7 +8,7 @@
         それぞれについて、標準的な使用例も示します。
     </para>
 
-    <table xml:id="zend.measure.types.table-1"><info><title>計測値の型の一覧</title></info>
+    <table xml:id="zend.measure.types.table-1"><title>計測値の型の一覧</title>
         
         <tgroup cols="4">
             <thead>
@@ -257,7 +257,7 @@
         </tgroup>
     </table>
 
-    <section xml:id="zend.measure.types.binary"><info><title>Zend_Measure_Binary のヒント</title></info>
+    <section xml:id="zend.measure.types.binary"><title>Zend_Measure_Binary のヒント</title>
 
         
 
@@ -282,7 +282,7 @@
 
     </section>
 
-    <section xml:id="zend.measure.types.decimal"><info><title>Zend_Measure_Number のヒント</title></info>
+    <section xml:id="zend.measure.types.decimal"><title>Zend_Measure_Number のヒント</title>
 
         
 
@@ -295,7 +295,7 @@
 
     </section>
 
-    <section xml:id="zend.measure.types.roman"><info><title>ローマ数字</title></info>
+    <section xml:id="zend.measure.types.roman"><title>ローマ数字</title>
 
         
 

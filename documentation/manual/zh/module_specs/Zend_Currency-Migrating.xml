@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.migration"><info><title> 从前面的版本迁移 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.migration"><title> 从前面的版本迁移 </title>
 
     
 
@@ -7,7 +7,7 @@
         <code>Zend_Currency</code> 的 API 已经被修改来增加可用性。如果你从一个在本章提到的版本开始使用 <code>Zend_Currency</code>， 请遵循下面的指南来迁移你的脚本到新的 API。
     </para>
 
-    <section xml:id="zend.currency.usage.migration.fromonezerotwo"><info><title> 从 1.0.2 到 1.0.3 或更新的迁移 </title></info>
+    <section xml:id="zend.currency.usage.migration.fromonezerotwo"><title> 从 1.0.2 到 1.0.3 或更新的迁移 </title>
 
         
 

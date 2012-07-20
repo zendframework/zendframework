@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.introduction"><title>導入</title>
     
     <para>
         <classname>Zend_Console_Getopt</classname> クラスは、
@@ -103,7 +103,7 @@
         「ユーザが指定したフラグのアプリケーションへの通知」
         などがあります。
     </para>
-    <note><info><title>Getopt はアプリケーションフレームワークではありません</title></info>
+    <note><title>Getopt はアプリケーションフレームワークではありません</title>
         
         <para>
             <classname>Zend_Console_Getopt</classname> はdoes

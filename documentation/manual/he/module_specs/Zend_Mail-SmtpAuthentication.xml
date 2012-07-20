@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><info><title>אימות SMTP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><title>אימות SMTP</title>
   
 
   <para>
       <code>Zend_Mail</code> מאפשר שימוש באימות SMTP, אשר ניתן להפעילו על ידי הוספת הפרמטר 'auth' למערך ההגדרות במתודת ההתחלה של <code>Zend_Mail_Transport_Smtp</code>.
     המתודות המובנות הנתמכות הן PLAIN, LOGIN, CRAM-MD5 שכולם מקבלים פרמטרים של שם משתמש וסיסמא דרך מערך ההגדרות. </para>
 
-  <example xml:id="zend.mail.smtp-authentication.example-1"><info><title>הפעלת האימות במחלקה <code>Zend_Mail_Transport_Smtp</code></title></info>
+  <example xml:id="zend.mail.smtp-authentication.example-1"><title>הפעלת האימות במחלקה <code>Zend_Mail_Transport_Smtp</code></title>
     
 
     <programlisting role="php"><![CDATA[
@@ -26,7 +26,7 @@ $mail->send($transport);
     ]]></programlisting>
   </example>
 
-  <note><info><title>סוגי אימות</title></info>
+  <note><title>סוגי אימות</title>
     
 
     <para>

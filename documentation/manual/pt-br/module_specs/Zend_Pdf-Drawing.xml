@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.drawing"><info><title>Desenhando</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.drawing"><title>Desenhando</title>
     
 
-    <section xml:id="zend.pdf.drawing.geometry"><info><title>Geometria</title></info>
+    <section xml:id="zend.pdf.drawing.geometry"><title>Geometria</title>
         
 
         <para>
@@ -20,7 +20,7 @@ $height = $pdfPage->getHeight();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.color"><info><title>Cores</title></info>
+    <section xml:id="zend.pdf.drawing.color"><title>Cores</title>
         
 
         <para>
@@ -56,7 +56,7 @@ $color3 = new Zend_Pdf_Color_Html('forestgreen');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.shape-drawing"><info><title>Desenhando Formas</title></info>
+    <section xml:id="zend.pdf.drawing.shape-drawing"><title>Desenhando Formas</title>
         
 
         <para>
@@ -218,7 +218,7 @@ public function drawEllipse($x1,
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.text-drawing"><info><title>Desenhando Texto</title></info>
+    <section xml:id="zend.pdf.drawing.text-drawing"><title>Desenhando Texto</title>
         
 
         <para>
@@ -243,7 +243,7 @@ public function drawEllipse($x1,
 public function drawText($text, $x, $y, $charEncoding = '');
 ]]></programlisting>
 
-        <example xml:id="zend.pdf.drawing.text-drawing.example-1"><info><title>Desenhar uma string na página</title></info>
+        <example xml:id="zend.pdf.drawing.text-drawing.example-1"><title>Desenhar uma string na página</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -263,7 +263,7 @@ $pdfPage->drawText('Olá mundo!', 72, 720);
             <acronym>PHP</acronym>:
         </para>
 
-        <example xml:id="zend.pdf.drawing.text-drawing.example-2"><info><title>Desenhar uma string codificada em UTF-8 em uma página</title></info>
+        <example xml:id="zend.pdf.drawing.text-drawing.example-2"><title>Desenhar uma string codificada em UTF-8 em uma página</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -278,7 +278,7 @@ $pdfPage->drawText($unicodeString, 72, 720, 'UTF-8');
         </example>
     </section>
 
-    <section xml:id="zend.pdf.drawing.using-fonts"><info><title>Usando fontes</title></info>
+    <section xml:id="zend.pdf.drawing.using-fonts"><title>Usando fontes</title>
         
 
         <para>
@@ -315,7 +315,7 @@ public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
             personalizadas.
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-1"><info><title>Criar uma fonte padrão</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-1"><title>Criar uma fonte padrão</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -365,7 +365,7 @@ $pdfPage->setFont($font, 36);
             método fábrica irá lançar uma exceção:
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-2"><info><title>Criar uma fonte TrueType</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-2"><title>Criar uma fonte TrueType</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -387,7 +387,7 @@ $pdfPage->setFont($goodDogCoolFont, 36);
             seja incluída através de uma opção 'não embarque' do método fábrica:
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-3"><info><title>Criar uma fonte TrueType, mas não embarcá-la no documento PDF</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-3"><title>Criar uma fonte TrueType, mas não embarcá-la no documento PDF</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -421,7 +421,7 @@ $pdfPage->setFont($goodDogCoolFont, 36);
             descrito acima, ou então você pode simplesmente suprimir a exceção:
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-4"><info><title>Não lançar uma exceção para fontes que não podem ser embarcadas</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-4"><title>Não lançar uma exceção para fontes que não podem ser embarcadas</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -447,7 +447,7 @@ $font = Zend_Pdf_Font::fontWithPath(
             quer comprimir o programa da fonte, você pode desabilitar isso através de uma opção:
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-5"><info><title>Não comprimir uma fonte embarcada</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-5"><title>Não comprimir uma fonte embarcada</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -463,7 +463,7 @@ $font = Zend_Pdf_Font::fontWithPath('/path/to/someReallyBigFont.ttf',
             operador binário OR:
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-6"><info><title>Combinando opções de embarque de fonte</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-6"><title>Combinando opções de embarque de fonte</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -477,7 +477,7 @@ $font = Zend_Pdf_Font::fontWithPath(
         </example>
     </section>
 
-    <section xml:id="zend.pdf.drawing.standard-fonts-limitations"><info><title>Standard PDF fonts limitations</title></info>
+    <section xml:id="zend.pdf.drawing.standard-fonts-limitations"><title>Standard PDF fonts limitations</title>
         
 
         <para>
@@ -497,7 +497,7 @@ $font = Zend_Pdf_Font::fontWithPath(
             from a current locale. Only WinLatin1 characters will be actually drawn.
         </para>
 
-        <example xml:id="zend.pdf.drawing.using-fonts.example-7"><info><title>Combining font embedding options</title></info>
+        <example xml:id="zend.pdf.drawing.using-fonts.example-7"><title>Combining font embedding options</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -511,7 +511,7 @@ $pdfPage->setFont($font, 36)
         </example>
     </section>
 
-    <section xml:id="zend.pdf.drawing.extracting-fonts"><info><title>Extracting fonts</title></info>
+    <section xml:id="zend.pdf.drawing.extracting-fonts"><title>Extracting fonts</title>
         
 
         <para>
@@ -529,7 +529,7 @@ $pdfPage->setFont($font, 36)
             special methods to extract all fonts mentioned within a document or a page:
         </para>
 
-        <example xml:id="zend.pdf.drawing.extracting-fonts.example-1"><info><title>Extracting fonts from a loaded document</title></info>
+        <example xml:id="zend.pdf.drawing.extracting-fonts.example-1"><title>Extracting fonts from a loaded document</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -559,7 +559,7 @@ $firstPageFonts = $firstPage->extractFonts();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.pdf.drawing.extracting-fonts.example-2"><info><title>Extracting font from a loaded document by specifying font name</title></info>
+        <example xml:id="zend.pdf.drawing.extracting-fonts.example-2"><title>Extracting font from a loaded document by specifying font name</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -640,7 +640,7 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
         </para>
     </section>
 
-    <section xml:id="zend.pdf.drawing.image-drawing"><info><title>Desenhando Imagens</title></info>
+    <section xml:id="zend.pdf.drawing.image-drawing"><title>Desenhando Imagens</title>
         
 
         <para>
@@ -668,7 +668,7 @@ public function drawImage(Zend_Pdf_Resource_Image $image, $x1, $y1, $x2, $y2);
             TIFF são suportadas agora):
         </para>
 
-        <example xml:id="zend.pdf.drawing.image-drawing.example-1"><info><title>Desenhando imagens</title></info>
+        <example xml:id="zend.pdf.drawing.image-drawing.example-1"><title>Desenhando imagens</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -694,7 +694,7 @@ $pdfPage->drawImage($image, 100, 100, 400, 300);
         </para>
     </section>
 
-    <section xml:id="zend.pdf.drawing.line-drawing-style"><info><title>Estilo de desenho de linhas</title></info>
+    <section xml:id="zend.pdf.drawing.line-drawing-style"><title>Estilo de desenho de linhas</title>
         
 
         <para>
@@ -725,7 +725,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.fill-style"><info><title>Estilo de preenchimento</title></info>
+    <section xml:id="zend.pdf.drawing.fill-style"><title>Estilo de preenchimento</title>
         
 
         <para>
@@ -827,10 +827,10 @@ public function setLineDashingPattern($pattern, $phase = 0);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.pdf.drawing.linear-transformations"><info><title>Transformações Lineares</title></info>
+    <section xml:id="zend.pdf.drawing.linear-transformations"><title>Transformações Lineares</title>
         
 
-        <section xml:id="zend.pdf.drawing.linear-transformations.rotations"><info><title>Rotações</title></info>
+        <section xml:id="zend.pdf.drawing.linear-transformations.rotations"><title>Rotações</title>
             
 
             <para>
@@ -852,7 +852,7 @@ public function rotate($x, $y, $angle);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.pdf.drawing.linear-transformations.scale"><info><title>Starting from ZF 1.8, scaling</title></info>
+        <section xml:id="zend.pdf.drawing.linear-transformations.scale"><title>Starting from ZF 1.8, scaling</title>
             
 
             <para>
@@ -872,7 +872,7 @@ public function scale($xScale, $yScale);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.pdf.drawing.linear-transformations.translate"><info><title>Starting from ZF 1.8, translating</title></info>
+        <section xml:id="zend.pdf.drawing.linear-transformations.translate"><title>Starting from ZF 1.8, translating</title>
             
 
             <para>
@@ -892,7 +892,7 @@ public function translate($xShift, $yShift);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.pdf.drawing.linear-transformations.skew"><info><title>Starting from ZF 1.8, skewing</title></info>
+        <section xml:id="zend.pdf.drawing.linear-transformations.skew"><title>Starting from ZF 1.8, skewing</title>
             
 
             <para>
@@ -915,7 +915,7 @@ public function skew($x, $y, $xAngle, $yAngle);
         </section>
     </section>
 
-    <section xml:id="zend.pdf.drawing.save-restore"><info><title>Salvar/restaurar estados gráficos</title></info>
+    <section xml:id="zend.pdf.drawing.save-restore"><title>Salvar/restaurar estados gráficos</title>
         
 
         <para>
@@ -951,7 +951,7 @@ public function restoreGS();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.clipping"><info><title>Recorte de área de desenho</title></info>
+    <section xml:id="zend.pdf.drawing.clipping"><title>Recorte de área de desenho</title>
         
 
         <para>
@@ -1038,7 +1038,7 @@ public function clipEllipse($x1,
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.styles"><info><title>Estilos</title></info>
+    <section xml:id="zend.pdf.drawing.styles"><title>Estilos</title>
         
 
         <para>
@@ -1198,7 +1198,7 @@ public function getFontSize();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.alpha"><info><title>Transparency</title></info>
+    <section xml:id="zend.pdf.drawing.alpha"><title>Transparency</title>
         
 
         <para>

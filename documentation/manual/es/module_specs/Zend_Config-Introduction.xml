@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><info><title>Introducción</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><title>Introducción</title>
     
     <para>
         <classname>Zend_Config</classname>
@@ -24,7 +24,7 @@
         </link>
         .
     </para>
-    <example xml:id="zend.config.introduction.example.using"><info><title>Usando Zend_Config Per Se</title></info>
+    <example xml:id="zend.config.introduction.example.using"><title>Usando Zend_Config Per Se</title>
         
         <para>
             Normalmente, se espera que los usuarios usen una de las clases
@@ -94,7 +94,7 @@ $db = Zend_Db::factory($config->database);
     <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
-    <example xml:id="zend.config.introduction.example.file.php"><info><title>Usando Zend_Config con un Archivo de Configuración PHP</title></info>
+    <example xml:id="zend.config.introduction.example.file.php"><title>Usando Zend_Config con un Archivo de Configuración PHP</title>
         
         <para>
             A veces, es deseable usar un archivo de configuración puramente

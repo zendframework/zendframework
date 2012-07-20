@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.configuration"><info><title>Konfiguration</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.configuration"><title>Konfiguration</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         werden können:
     </para>
 
-    <table xml:id="zend.paginator.configuration.table"><info><title>Konfigurationsmethoden für Zend_Paginator</title></info>
+    <table xml:id="zend.paginator.configuration.table"><title>Konfigurationsmethoden für Zend_Paginator</title>
         
 
         <tgroup cols="2">

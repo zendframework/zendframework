@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.advanced"><info><title>Uso Avançado de Zend_Layout</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.advanced"><title>Uso Avançado de Zend_Layout</title>
     
 
     <para>
@@ -50,7 +50,7 @@
         </listitem>
     </itemizedlist>
 
-    <section xml:id="zend.layout.advanced.view"><info><title>Objetos View Customizados</title></info>
+    <section xml:id="zend.layout.advanced.view"><title>Objetos View Customizados</title>
         
 
         <para>
@@ -67,7 +67,7 @@ $view = new My_Custom_View();
 $layout->setView($view);
 ]]></programlisting>
 
-        <note><info><title>Nem todas as implementações de Zend_View são iguais</title></info>
+        <note><title>Nem todas as implementações de Zend_View são iguais</title>
             
 
             <para>
@@ -105,7 +105,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         </note>
     </section>
 
-    <section xml:id="zend.layout.advanced.plugin"><info><title>Plugins Front Controller Customizados</title></info>
+    <section xml:id="zend.layout.advanced.plugin"><title>Plugins Front Controller Customizados</title>
         
 
         <para>
@@ -131,7 +131,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         </para>
     </section>
 
-    <section xml:id="zend.layout.advanced.helper"><info><title>Action Helpers Customizados</title></info>
+    <section xml:id="zend.layout.advanced.helper"><title>Action Helpers Customizados</title>
         
 
         <para>
@@ -153,7 +153,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         </para>
     </section>
 
-    <section xml:id="zend.layout.advanced.inflector"><info><title>Resolução de Caminho de Script de Layout Customizada: Usando o Inflector</title></info>
+    <section xml:id="zend.layout.advanced.inflector"><title>Resolução de Caminho de Script de Layout Customizada: Usando o Inflector</title>
         
 
         <para>
@@ -182,7 +182,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             e passá-la para <methodname>Zend_Layout::setInflector()</methodname>.
         </para>
 
-        <example xml:id="zend.layout.advanced.inflector.accessors"><info><title>Usando acessores Zend_Layout para modificar o inflector</title></info>
+        <example xml:id="zend.layout.advanced.inflector.accessors"><title>Usando acessores Zend_Layout para modificar o inflector</title>
             
 
             <para>
@@ -199,7 +199,7 @@ $layout->setViewSuffix('php');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.layout.advanced.inflector.directmodification"><info><title>Modificação direta do inflector Zend_Layout</title></info>
+        <example xml:id="zend.layout.advanced.inflector.directmodification"><title>Modificação direta do inflector Zend_Layout</title>
             
 
             <para>
@@ -222,7 +222,7 @@ $layout->getInflector()->setTarget('layouts/:script.:suffix')
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.layout.advanced.inflector.custom"><info><title>Inflectores Customizados</title></info>
+        <example xml:id="zend.layout.advanced.inflector.custom"><title>Inflectores Customizados</title>
             
 
             <para>
@@ -242,7 +242,7 @@ $layout->setInflector($inflector);
 ]]></programlisting>
         </example>
 
-        <note><info><title>Inflexão pode ser desabilitada</title></info>
+        <note><title>Inflexão pode ser desabilitada</title>
             
 
             <para>

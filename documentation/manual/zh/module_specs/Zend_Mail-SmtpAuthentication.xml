@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><info><title>SMTP 身份验证</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><title>SMTP 身份验证</title>
     
 
     <para>
         <code>Zend_Mail</code> 支持使用 SMTP 身份验证，通过配置数组传递“auth”参数到 <code>Zend_Mail_Transport_Smtp</code> 的构造函数中。可用的内建身份验证方法为 PLAIN，LOGIN 和 CRAM-MD5，这些都需要在配置数组中设置“username”和“password”。
     </para>
-    <example xml:id="zend.mail.smtp-authentication.example-1"><info><title>在 Zend_Mail_Transport_Smtp 中使用身份验证</title></info>
+    <example xml:id="zend.mail.smtp-authentication.example-1"><title>在 Zend_Mail_Transport_Smtp 中使用身份验证</title>
         
 
         <programlisting role="php"><![CDATA[<?php
@@ -28,7 +28,7 @@
         ]]></programlisting>
     </example>
 
-    <note><info><title>身份验证类型</title></info>
+    <note><title>身份验证类型</title>
         
 
         <para>

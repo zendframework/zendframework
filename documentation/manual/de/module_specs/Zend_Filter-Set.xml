@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set"><info><title>Standard Filter Klassen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set"><title>Standard Filter Klassen</title>
     
 
     <para>
@@ -30,7 +30,7 @@
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StringToUpper.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StringTrim.xml"/>
 
-    <section xml:id="zend.filter.set.stripnewlines"><info><title>StripNewlines</title></info>
+    <section xml:id="zend.filter.set.stripnewlines"><title>StripNewlines</title>
         
 
         <para>
@@ -38,7 +38,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.striptags"><info><title>StripTags</title></info>
+    <section xml:id="zend.filter.set.striptags"><title>StripTags</title>
         
 
         <para>

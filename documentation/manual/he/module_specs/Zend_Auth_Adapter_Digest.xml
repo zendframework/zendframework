@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><info><title>אימות מתקדם</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><title>אימות מתקדם</title>
 
     
 
-    <section xml:id="zend.auth.adapter.digest.introduction"><info><title>הקדמה</title></info>
+    <section xml:id="zend.auth.adapter.digest.introduction"><title>הקדמה</title>
 
         
 
@@ -36,14 +36,14 @@
             האלמנטים למעלה מופרדים בנקודותיים, כמו בדוגמא הבאה ("<code>somePassword</code>"):
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="php"><![CDATA[
 someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 
 ]]></programlisting>
 
     </section>
 
-    <section xml:id="zend.auth.adapter.digest.specifics"><info><title>מאפיינים</title></info>
+    <section xml:id="zend.auth.adapter.digest.specifics"><title>מאפיינים</title>
 
         
 
@@ -78,7 +78,7 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 
     </section>
 
-    <section xml:id="zend.auth.adapter.digest.identity"><info><title>זהות</title></info>
+    <section xml:id="zend.auth.adapter.digest.identity"><title>זהות</title>
 
         
 

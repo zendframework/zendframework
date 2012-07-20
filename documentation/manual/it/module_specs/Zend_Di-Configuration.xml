@@ -4,7 +4,7 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.di.configuration">
-    <info><title>Configurazione Zend\Di</title></info>
+    <title>Configurazione Zend\Di</title>
 
     <para>
         La maggior parte della configurazione, sia per il 

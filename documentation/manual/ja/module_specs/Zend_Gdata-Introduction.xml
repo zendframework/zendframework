@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.introduction"><title>導入</title>
     
     <para>
         Google Data <acronym>API</acronym> は、Google のオンラインサービスに対するプログラマ向けのインターフェイスです。
@@ -88,7 +88,7 @@
         </itemizedlist>
     </para>
 
-    <note><info><title>サポートしていないサービス</title></info>
+    <note><title>サポートしていないサービス</title>
         
         <para>
             <classname>Zend_Gdata</classname> には、これら以外の Google のサービス
@@ -98,7 +98,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.gdata.introduction.structure"><info><title>Zend_Gdata の構造</title></info>
+    <section xml:id="zend.gdata.introduction.structure"><title>Zend_Gdata の構造</title>
         
         <para>
             <classname>Zend_Gata</classname> は、いくつかの型のクラスを組み合わせたものです。
@@ -180,7 +180,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.services"><info><title>Google サービスの使用法</title></info>
+    <section xml:id="zend.gdata.introduction.services"><title>Google サービスの使用法</title>
         
         <para>
             Google データサービスは、Atom Publishing Protocol (APP)
@@ -201,7 +201,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.magicfactory"><info><title>Zend_Gdata クラスのインスタンスの取得</title></info>
+    <section xml:id="zend.gdata.introduction.magicfactory"><title>Zend_Gdata クラスのインスタンスの取得</title>
         
         <para>
             Zend Framework の命名規約では、すべてのクラスは
@@ -248,7 +248,7 @@ $entry->cell = $cell;
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.authentication"><info><title>Google Data クライアント認証</title></info>
+    <section xml:id="zend.gdata.introduction.authentication"><title>Google Data クライアント認証</title>
         
         <para>
             ほとんどの Google Data サービスは、
@@ -268,7 +268,7 @@ $entry->cell = $cell;
 
     </section>
 
-    <section xml:id="zend.gdata.introduction.dependencies"><info><title>依存性</title></info>
+    <section xml:id="zend.gdata.introduction.dependencies"><title>依存性</title>
         
         <para>
             <classname>Zend_Gdata</classname> は
@@ -287,7 +287,7 @@ $entry->cell = $cell;
 
     </section>
 
-    <section xml:id="zend.gdata.introduction.creation"><info><title>新しい Gdata クライアントの作成</title></info>
+    <section xml:id="zend.gdata.introduction.creation"><title>新しい Gdata クライアントの作成</title>
         
 
         <para>
@@ -338,7 +338,7 @@ $gdata->setMinorProtocolVersion(null);
 
     </section>
 
-    <section xml:id="zend.gdata.introduction.parameters"><info><title>共通のクエリパラメータ</title></info>
+    <section xml:id="zend.gdata.introduction.parameters"><title>共通のクエリパラメータ</title>
         
 
         <para>
@@ -478,7 +478,7 @@ $gdata->resetParameters();      // すべてのパラメータを消去します
 
     </section>
 
-    <section xml:id="zend.gdata.introduction.getfeed"><info><title>フィードの取得</title></info>
+    <section xml:id="zend.gdata.introduction.getfeed"><title>フィードの取得</title>
         
 
         <para>
@@ -503,7 +503,7 @@ $feed = $gdata->getFeed($query);
 
     </section>
 
-    <section xml:id="zend.gdata.introduction.paging"><info><title>複数ページのフィードの扱い方</title></info>
+    <section xml:id="zend.gdata.introduction.paging"><title>複数ページのフィードの扱い方</title>
         
 
         <para>
@@ -551,7 +551,7 @@ $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
 
     </section>
 
-    <section xml:id="zend.gdata.introduction.usefeedentry"><info><title>フィードやエントリ内のデータの操作</title></info>
+    <section xml:id="zend.gdata.introduction.usefeedentry"><title>フィードやエントリ内のデータの操作</title>
         
 
         <para>
@@ -577,7 +577,7 @@ foreach ($feed as $entry) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.gdata.introduction.updateentry"><info><title>エントリの更新</title></info>
+    <section xml:id="zend.gdata.introduction.updateentry"><title>エントリの更新</title>
         
 
         <para>
@@ -603,7 +603,7 @@ foreach ($feed as $entry) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.gdata.introduction.post"><info><title>Google サーバへのエントリの送信</title></info>
+    <section xml:id="zend.gdata.introduction.post"><title>Google サーバへのエントリの送信</title>
         
 
         <para>
@@ -652,7 +652,7 @@ echo 'この結果のエントリの <id> は、' . $entryResult->id->text;
 
     </section>
 
-    <section xml:id="zend.gdata.introduction.delete"><info><title>Google サーバからのデータの削除</title></info>
+    <section xml:id="zend.gdata.introduction.delete"><title>Google サーバからのデータの削除</title>
         
 
         <para>

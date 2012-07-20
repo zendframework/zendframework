@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.encoding"><info><title>קידוד/הצפנה</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.encoding"><title>קידוד/הצפנה</title>
     
     <para>
         תוכן ה HTML והטקסט באימיילים מוצפנים ומקודדים בעזרת שימוש ב "quotedprintable" כברירת מחדל.

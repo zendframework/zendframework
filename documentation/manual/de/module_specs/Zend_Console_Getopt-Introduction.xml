@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.introduction"><info><title>Einführung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.introduction"><title>Einführung</title>
     
 
     <para>
@@ -106,7 +106,7 @@
         welche Flags der Benutzer definiert hat.
     </para>
 
-    <note><info><title>Getopt ist kein Framework für eine Anwendung</title></info>
+    <note><title>Getopt ist kein Framework für eine Anwendung</title>
         
 
         <para>

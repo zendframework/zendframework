@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client"><title>導入</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         (<xref linkend="zend.http.response"/> を参照ください)。
     </para>
 
-    <section xml:id="zend.http.client.usage"><info><title>Zend_Http_Client の使用法</title></info>
+    <section xml:id="zend.http.client.usage"><title>Zend_Http_Client の使用法</title>
         
 
         <para>
@@ -22,7 +22,7 @@
             どちらも省略することが可能で、その場合は後から
             setUri() メソッドや setConfig() メソッドで指定します。
 
-            <example xml:id="zend.http.client.introduction.example-1"><info><title>Zend_Http_Client のインスタンスの作成</title></info>
+            <example xml:id="zend.http.client.introduction.example-1"><title>Zend_Http_Client のインスタンスの作成</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -56,7 +56,7 @@ $client->setConfig($config);
         </para>
     </section>
 
-    <section xml:id="zend.http.client.configuration"><info><title>設定パラメータ</title></info>
+    <section xml:id="zend.http.client.configuration"><title>設定パラメータ</title>
         
 
         <para>
@@ -65,7 +65,7 @@ $client->setConfig($config);
             これらのパラメータは、設定してもしなくてもかまいません。
             すべてのパラメータにはデフォルト値があります。
 
-            <table xml:id="zend.http.client.configuration.table"><info><title>Zend_Http_Client の設定パラメータ</title></info>
+            <table xml:id="zend.http.client.configuration.table"><title>Zend_Http_Client の設定パラメータ</title>
                 
 
                 <tgroup cols="4">
@@ -173,14 +173,14 @@ $client->setConfig($config);
         </para>
     </section>
 
-    <section xml:id="zend.http.client.basic-requests"><info><title>基本的な HTTP リクエストの処理</title></info>
+    <section xml:id="zend.http.client.basic-requests"><title>基本的な HTTP リクエストの処理</title>
         
 
         <para>
             シンプルな <acronym>HTTP</acronym> リクエストを実行するのは非常に簡単で、単に
             request() メソッドを実行するだけです。たったの三行ですんでしまいます。
 
-            <example xml:id="zend.http.client.basic-requests.example-1"><info><title>シンプルな GET リクエストの処理</title></info>
+            <example xml:id="zend.http.client.basic-requests.example-1"><title>シンプルな GET リクエストの処理</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -209,7 +209,7 @@ $response = $client->request();
             setMethod() もコールされていない場合は、デフォルトのリクエストメソッドとして
             GET を使用します (上の例を参照ください)。
 
-            <example xml:id="zend.http.client.basic-requests.example-2"><info><title>GET 以外のリクエストメソッドの使用</title></info>
+            <example xml:id="zend.http.client.basic-requests.example-2"><title>GET 以外のリクエストメソッドの使用</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -224,7 +224,7 @@ $response = $client->request();
         </para>
     </section>
 
-    <section xml:id="zend.http.client.parameters"><info><title>GET や POST へのパラメータの追加</title></info>
+    <section xml:id="zend.http.client.parameters"><title>GET や POST へのパラメータの追加</title>
         
 
         <para>
@@ -236,7 +236,7 @@ $response = $client->request();
             メソッドでは name =&gt; value 形式の連想配列で GET 変数を指定することもできます。
             これは、複数の GET パラメータを指定する必要がある場合に便利です。
 
-            <example xml:id="zend.http.client.parameters.example-1"><info><title>GET パラメータの設定</title></info>
+            <example xml:id="zend.http.client.parameters.example-1"><title>GET パラメータの設定</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -264,7 +264,7 @@ $client->setParameterGet(array(
             使用するのは setParameterPost() メソッドで、このメソッドの使用法は
             setParameterGet() メソッドと同じです。
 
-            <example xml:id="zend.http.client.parameters.example-2"><info><title>POST パラメータの設定</title></info>
+            <example xml:id="zend.http.client.parameters.example-2"><title>POST パラメータの設定</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -288,7 +288,7 @@ $client->setParameterPost(array(
         </para>
     </section>
 
-    <section xml:id="zend.http.client.accessing_last"><info><title>直近のリクエストやレスポンスへのアクセス</title></info>
+    <section xml:id="zend.http.client.accessing_last"><title>直近のリクエストやレスポンスへのアクセス</title>
         
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Uso de Excepciones</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><title>Uso de Excepciones</title>
 
     
 
@@ -10,7 +10,7 @@
         Framework.
     </para>
 
-    <example xml:id="zend.exception.using.example"><info><title>Capturando una Excepcion</title></info>
+    <example xml:id="zend.exception.using.example"><title>Capturando una Excepcion</title>
         
         <para>
             El siguiente listado de c�digo muestra c�mo capturar una excepci�n

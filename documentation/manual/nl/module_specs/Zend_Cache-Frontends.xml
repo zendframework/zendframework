@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.frontends"><info><title>Zend_Cache frontends</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.frontends"><title>Zend_Cache frontends</title>
     
 
-    <section xml:id="zend.cache.core"><info><title>Zend_Cache_Core</title></info>
+    <section xml:id="zend.cache.core"><title>Zend_Cache_Core</title>
         
-        <section xml:id="zend.cache.core.introduction"><info><title>Introductie</title></info>
+        <section xml:id="zend.cache.core.introduction"><title>Introductie</title>
             
             <para>
                 <code>Zend_Cache_Core</code> is een speciale frontend omdat het de kern van de module is. Het is een generieke cache frontend en wordt uitgebreid door andere classes.
@@ -13,12 +13,12 @@
                 Alle frontends erven van <code>Zend_Cache_Core</code> zodat zijn methodes en opties (zoals hieronder beschreven) ook beschikbaar zijn in andere frontends, dus ze zullen hier niet worden gedocumenteerd.
             </para></note>
         </section>
-        <section xml:id="zend.cache.core.options"><info><title>Beschikbare opties</title></info>
+        <section xml:id="zend.cache.core.options"><title>Beschikbare opties</title>
             
             <para>
                 Deze opties worden doorgegeven aan de factory methode zoals hierboven gedemonstreerd.
             </para>
-            <table><info><title>Beschikbare opties</title></info>
+            <table><title>Beschikbare opties</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -83,7 +83,7 @@
               </table>
         </section>
 
-        <section xml:id="zend.cache.core.examples"><info><title>Voorbeelden</title></info>
+        <section xml:id="zend.cache.core.examples"><title>Voorbeelden</title>
             
             <para>
                 Een voorbeeld wordt gegeven aan het begin van de handleiding.
@@ -156,9 +156,9 @@ echo($data);
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontend.output"><info><title>Zend_Cache_Frontend_Output</title></info>
+    <section xml:id="zend.cache.frontend.output"><title>Zend_Cache_Frontend_Output</title>
         
-        <section xml:id="zend.cache.frontend.output.introduction"><info><title>Inleiding</title></info>
+        <section xml:id="zend.cache.frontend.output.introduction"><title>Inleiding</title>
             
             <para>
                 <code>Zend_Cache_Frontend_Output</code> is een output-vangend frontend. Het gebruikt
@@ -166,7 +166,7 @@ echo($data);
                 <code>end()</code> methodes te vangen.
             </para>
         </section>
-        <section xml:id="zend.cache.frontend.output.options"><info><title>Beschikbare opties</title></info>
+        <section xml:id="zend.cache.frontend.output.options"><title>Beschikbare opties</title>
             
             <para>
                 Dit frontend heeft geen specifieke opties andere dan deze van
@@ -174,7 +174,7 @@ echo($data);
             </para>
         </section>
 
-        <section xml:id="zend.cache.frontend.output.examples"><info><title>Voorbeelden</title></info>
+        <section xml:id="zend.cache.frontend.output.examples"><title>Voorbeelden</title>
             
             <para>
                 Een voorbeeld is in het begin van de handleiding gegeven. Hier is het met enkele kleine veranderingen:
@@ -201,9 +201,9 @@ echo 'Dit is nooit gecached ('.time().').';
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontend.function"><info><title>Zend_Cache_Frontend_Function</title></info>
+    <section xml:id="zend.cache.frontend.function"><title>Zend_Cache_Frontend_Function</title>
         
-        <section xml:id="zend.cache.frontend.function.introduction"><info><title>Inleiding</title></info>
+        <section xml:id="zend.cache.frontend.function.introduction"><title>Inleiding</title>
             
             <para>
                 <code>Zend_Cache_Frontend_Function</code> cached het resultaat van functie oproepen. Het heeft één
@@ -211,9 +211,9 @@ echo 'Dit is nooit gecached ('.time().').';
                 array aanvaard.
             </para>
         </section>
-        <section xml:id="zend.cache.frontend.function.options"><info><title>Beschikbare opties</title></info>
+        <section xml:id="zend.cache.frontend.function.options"><title>Beschikbare opties</title>
             
-            <table><info><title>Beschikbare opties</title></info>
+            <table><title>Beschikbare opties</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -254,7 +254,7 @@ echo 'Dit is nooit gecached ('.time().').';
               </table>
         </section>
 
-        <section xml:id="zend.cache.frontend.function.examples"><info><title>Voorbeelden</title></info>
+        <section xml:id="zend.cache.frontend.function.examples"><title>Voorbeelden</title>
             
             <para>
                 De <code>call()</code> functie gebruiken is hetzelfde als <code>call_user_func_array()</code> in PHP:
@@ -281,18 +281,18 @@ $cache->call('heelZwareFunctie', $params);
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontend.class"><info><title>Zend_Cache_Frontend_Class</title></info>
+    <section xml:id="zend.cache.frontend.class"><title>Zend_Cache_Frontend_Class</title>
         
-        <section xml:id="zend.cache.frontend.class.introduction"><info><title>Inleiding</title></info>
+        <section xml:id="zend.cache.frontend.class.introduction"><title>Inleiding</title>
             
             <para>
                 <code>Zend_Cache_Frontend_Class</code> verschilt van <code>Zend_Cache_Frontend_Function</code>
                 omdat het toelaat een object en statische methode oproepen te cachen.
             </para>
         </section>
-        <section xml:id="zend.cache.frontend.class.options"><info><title>Beschikbare opties</title></info>
+        <section xml:id="zend.cache.frontend.class.options"><title>Beschikbare opties</title>
             
-            <table><info><title>Beschikbare opties</title></info>
+            <table><title>Beschikbare opties</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -343,7 +343,7 @@ $cache->call('heelZwareFunctie', $params);
               </table>
         </section>
 
-        <section xml:id="zend.cache.frontend.class.examples"><info><title>Voorbeelden</title></info>
+        <section xml:id="zend.cache.frontend.class.examples"><title>Voorbeelden</title>
             
             <para>
                 Bijvoorbeeld, om statische oproepen te cachen :
@@ -400,9 +400,9 @@ $res = $cache->foobar2('1', '2');
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.file"><info><title>Zend_Cache_Frontend_File</title></info>
+    <section xml:id="zend.cache.frontends.file"><title>Zend_Cache_Frontend_File</title>
         
-        <section xml:id="zend.cache.frontends.file.introduction"><info><title>Inleiding</title></info>
+        <section xml:id="zend.cache.frontends.file.introduction"><title>Inleiding</title>
             
             <para>
                 <code>Zend_Cache_Frontend_File</code> is een frontend dat bestuurd word door de
@@ -418,9 +418,9 @@ $res = $cache->foobar2('1', '2');
                 wordt gewijzigd wordt de cache onmiddellijk invalide.
             </para>
         </section>
-        <section xml:id="zend.cache.frontends.file.options"><info><title>Beschikbare opties</title></info>
+        <section xml:id="zend.cache.frontends.file.options"><title>Beschikbare opties</title>
             
-            <table><info><title>Beschikbare opties</title></info>
+            <table><title>Beschikbare opties</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -444,7 +444,7 @@ $res = $cache->foobar2('1', '2');
                   </tgroup>
               </table>
         </section>
-        <section xml:id="zend.cache.frontends.file.examples"><info><title>Voorbeelden</title></info>
+        <section xml:id="zend.cache.frontends.file.examples"><title>Voorbeelden</title>
             
             <para>
                 Het gebruik van dit frontend is hetzelfde als dat van <code>Zend_Cache_Core</code>. Er is geen
@@ -454,9 +454,9 @@ $res = $cache->foobar2('1', '2');
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.page"><info><title>Zend_Cache_Frontend_Page</title></info>
+    <section xml:id="zend.cache.frontends.page"><title>Zend_Cache_Frontend_Page</title>
         
-        <section xml:id="zend.cache.frontends.page.introduction"><info><title>inleiding</title></info>
+        <section xml:id="zend.cache.frontends.page.introduction"><title>inleiding</title>
             
             <para>
                 <code>Zend_Cache_Frontend_Page</code> is net als <code>Zend_Cache_Frontend_Output</code>
@@ -479,9 +479,9 @@ $res = $cache->foobar2('1', '2');
                 Zend_Cache_Frontend_Page is echt "alpha stuff" en moet later verder worden verbeterd.
             </para></note>
         </section>
-        <section xml:id="zend.cache.frontends.page.options"><info><title>Beschikbare opties (voor deze frontend van de Zend_Cache factory)</title></info>
+        <section xml:id="zend.cache.frontends.page.options"><title>Beschikbare opties (voor deze frontend van de Zend_Cache factory)</title>
             
-            <table><info><title>Beschikbare opties</title></info>
+            <table><title>Beschikbare opties</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -529,7 +529,7 @@ $res = $cache->foobar2('1', '2');
                   </tgroup>
               </table>
         </section>
-        <section xml:id="zend.cache.frontends.page.examples"><info><title>Voorbeelden</title></info>
+        <section xml:id="zend.cache.frontends.page.examples"><title>Voorbeelden</title>
             
             <para>
                 Het gebruik van Zend_Cache_Frontend_Page is echt eenvoudig :

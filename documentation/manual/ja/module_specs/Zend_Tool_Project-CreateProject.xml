@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.create-a-project"><info><title>プロジェクトを作成</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.create-a-project"><title>プロジェクトを作成</title>
 
     
 
@@ -46,7 +46,7 @@
         アクションとプロバイダーのふるまいを変更するために使用できるいくつかの選択肢があります。
     </para>
 
-    <table xml:id="zend.tool.project.project-provider-table"><info><title>プロジェクトプロバイダーオプション</title></info>
+    <table xml:id="zend.tool.project.project-provider-table"><title>プロジェクトプロバイダーオプション</title>
         
 
         <tgroup cols="4">

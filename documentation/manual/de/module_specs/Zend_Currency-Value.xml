@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.value"><info><title>Wie viel Währung habe ich?</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.value"><title>Wie viel Währung habe ich?</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         Wechselkurs verwenden.
     </para>
 
-    <section xml:id="zend.currency.value.money"><info><title>Arbeiten mit Währungswerten</title></info>
+    <section xml:id="zend.currency.value.money"><title>Arbeiten mit Währungswerten</title>
         
 
         <para>
@@ -51,7 +51,7 @@ print $currency->setValue(2000); // Könnte '$ 2.000' zurückgeben
         </para>
     </section>
 
-    <section xml:id="zend.currency.value.precision"><info><title>Verwendung von Genauigkeit bei Währungen</title></info>
+    <section xml:id="zend.currency.value.precision"><title>Verwendung von Genauigkeit bei Währungen</title>
         
 
         <para>

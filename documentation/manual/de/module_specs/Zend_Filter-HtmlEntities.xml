@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.htmlentities"><info><title>HtmlEntities</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.htmlentities"><title>HtmlEntities</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         <acronym>HTML</acronym> Entity Äquivalente konvertiert werden wenn diese existieren.
     </para>
 
-    <section xml:id="zend.filter.set.htmlentities.options"><info><title>Unterstützte Optionen für Zend_Filter_HtmlEntities</title></info>
+    <section xml:id="zend.filter.set.htmlentities.options"><title>Unterstützte Optionen für Zend_Filter_HtmlEntities</title>
         
 
         <para>
@@ -66,7 +66,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.filter.set.htmlentities.basic"><info><title>Einfache Verwendung</title></info>
+    <section xml:id="zend.filter.set.htmlentities.basic"><title>Einfache Verwendung</title>
         
 
         <para>
@@ -80,7 +80,7 @@ print $filter->filter('<');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.filter.set.htmlentities.quotestyle"><info><title>Hochkomma Stil</title></info>
+    <section xml:id="zend.filter.set.htmlentities.quotestyle"><title>Hochkomma Stil</title>
         
 
         <para>
@@ -128,7 +128,7 @@ print $filter->filter($input);
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.htmlentities."><info><title>Helfer Methoden</title></info>
+    <section xml:id="zend.filter.set.htmlentities."><title>Helfer Methoden</title>
         
 
         <para>

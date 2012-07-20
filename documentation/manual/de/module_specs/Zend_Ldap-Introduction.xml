@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.introduction"><info><title>Einführung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.introduction"><title>Einführung</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         <acronym>LDAP</acronym> Verzeichnis, durchgeführt werden können.
     </para>
 
-    <section xml:id="zend.ldap.introduction.theory-of-operations"><info><title>Theorie der Verwendung</title></info>
+    <section xml:id="zend.ldap.introduction.theory-of-operations"><title>Theorie der Verwendung</title>
         
 
         <para>
@@ -93,7 +93,7 @@ echo "$acctname\n";
             in diesem kleinen Code zeigt der aktuell in dieser Klasse vorhanden ist.
         </para>
 
-        <section xml:id="zend.ldap.introduction.theory-of-operations.automatic-username-canonicalization"><info><title>Automatische Kanonisierung des Benutzernamens beim Binden</title></info>
+        <section xml:id="zend.ldap.introduction.theory-of-operations.automatic-username-canonicalization"><title>Automatische Kanonisierung des Benutzernamens beim Binden</title>
             
 
             <para>
@@ -145,7 +145,7 @@ echo "$acctname\n";
             </para>
         </section>
 
-        <section xml:id="zend.ldap.introduction.theory-of-operations.account-name-canonicalization"><info><title>Kanonisierung des Account Namens</title></info>
+        <section xml:id="zend.ldap.introduction.theory-of-operations.account-name-canonicalization"><title>Kanonisierung des Account Namens</title>
             
 
             <para>
@@ -157,7 +157,7 @@ echo "$acctname\n";
                 Option spezifiziert ist. Diese Option kann einen der folgenden Werte enthalten:
             </para>
 
-            <table xml:id="zend.ldap.using.theory-of-operation.account-name-canonicalization.table"><info><title>Optionen für accountCanonicalForm</title></info>
+            <table xml:id="zend.ldap.using.theory-of-operation.account-name-canonicalization.table"><title>Optionen für accountCanonicalForm</title>
                 
 
                 <tgroup cols="3">
@@ -217,7 +217,7 @@ echo "$acctname\n";
             </para>
         </section>
 
-        <section xml:id="zend.ldap.introduction.theory-of-operations.multi-domain-failover"><info><title>Multi-Domain Authentifizierung und Failover</title></info>
+        <section xml:id="zend.ldap.introduction.theory-of-operations.multi-domain-failover"><title>Multi-Domain Authentifizierung und Failover</title>
             
 
             <para>

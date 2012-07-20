@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><info><title>応用</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><title>応用</title>
     
 
-    <section xml:id="zend.search.lucene.advanced.format_migration"><info><title>1.6 以降でサポートするインデックスフォーマット変換</title></info>
+    <section xml:id="zend.search.lucene.advanced.format_migration"><title>1.6 以降でサポートするインデックスフォーマット変換</title>
         
 
         <para>
@@ -76,7 +76,7 @@
             下位バージョンへの変換はサポートしていません。
         </para>
 
-        <note><info><title>重要!</title></info>
+        <note><title>重要!</title>
             
             <para>
                 一度インデックスを上位バージョンに変換してしまうと、
@@ -88,7 +88,7 @@
 
     </section>
 
-    <section xml:id="zend.search.lucene.advanced.static"><info><title>静的プロパティとしてのインデックスの使用</title></info>
+    <section xml:id="zend.search.lucene.advanced.static"><title>静的プロパティとしてのインデックスの使用</title>
         
 
         <para>

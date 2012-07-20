@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.client"><info><title>Zend_Soap_Client</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.client"><title>Zend_Soap_Client</title>
     
 
     <para>
@@ -22,7 +22,7 @@
         このモードで明示的に<classname>Zend_Soap_Client</classname>クラス上に設定されなければなりません。
     </para>
 
-    <section xml:id="zend.soap.client.constructor"><info><title>Zend_Soap_Clientコンストラクタ</title></info>
+    <section xml:id="zend.soap.client.constructor"><title>Zend_Soap_Clientコンストラクタ</title>
         
         <para>
             <classname>Zend_Soap_Client</classname>コンストラクタには引数が２つあります:
@@ -44,7 +44,7 @@
             後から設定されるかもしれません。
         </para>
 
-        <note><info><title>重要</title></info>
+        <note><title>重要</title>
             
             <para>
                 もし非WSDLモードで<classname>Zend_Soap_Client</classname>コンポーネントを使う場合、
@@ -146,7 +146,7 @@ $client = new Zend_Soap_Client("some.wsdl",
         </para>
     </section>
 
-    <section xml:id="zend.soap.client.calls"><info><title>SOAPリクエストの実行</title></info>
+    <section xml:id="zend.soap.client.calls"><title>SOAPリクエストの実行</title>
         
 
         <para>

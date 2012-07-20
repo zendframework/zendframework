@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom"><info><title>Lettura di un feed Atom</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom"><title>Lettura di un feed Atom</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         L'Atom è un successore dell'RSS; è un formato più generalizzato e disegnato per gestire più facilmente i feed che forniscono l'intero contenuto all'interno del feed stesso, sdoppiando l'elemento <code>description</code> del formato RSS in due elementi: <code>summary</code> e <code>content</code>.
     </para>
 
-    <example xml:id="zend.feed.consuming-atom.example.usage"><info><title>Utilizzo base di un feed Atom</title></info>
+    <example xml:id="zend.feed.consuming-atom.example.usage"><title>Utilizzo base di un feed Atom</title>
         
         <para>
             Lettura di un feed Atom e stampa di <code>title</code> e <code>summary</code> per ogni elemento:

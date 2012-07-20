@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.email_address"><info><title>EmailAddress</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.email_address"><title>EmailAddress</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         domaine.
     </para>
 
-    <section xml:id="zend.validate.set.email_address.basic"><info><title>Utilisation de base</title></info>
+    <section xml:id="zend.validate.set.email_address.basic"><title>Utilisation de base</title>
         
 
         <para>Vous trouverez ci-dessous un exemple d'utilisation basique </para>
@@ -33,7 +33,7 @@ if ($validateur->isValid($email)) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.options"><info><title>Options for validating Email Addresses</title></info>
+    <section xml:id="zend.validate.set.email_address.options"><title>Options for validating Email Addresses</title>
         
 
         <para>
@@ -97,7 +97,7 @@ $validator->setOptions(array('domain' => false));
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.complexlocal"><info><title>Parties locales complexes</title></info>
+    <section xml:id="zend.validate.set.email_address.complexlocal"><title>Parties locales complexes</title>
         
 
         <para>
@@ -109,7 +109,7 @@ $validator->setOptions(array('domain' => false));
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.purelocal"><info><title>Validating only the local part</title></info>
+    <section xml:id="zend.validate.set.email_address.purelocal"><title>Validating only the local part</title>
         
 
         <para>
@@ -126,7 +126,7 @@ $validator->setOptions(array('domain' => FALSE));
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.hostnametype"><info><title>Validation de différents types de noms de domaine</title></info>
+    <section xml:id="zend.validate.set.email_address.hostnametype"><title>Validation de différents types de noms de domaine</title>
         
 
         <para>
@@ -159,7 +159,7 @@ if ($validator->isValid($email)) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.checkacceptance"><info><title>Vérification que le nom de domaine accepte réellement l'émail</title></info>
+    <section xml:id="zend.validate.set.email_address.checkacceptance"><title>Vérification que le nom de domaine accepte réellement l'émail</title>
         
 
         <para>
@@ -186,7 +186,7 @@ $validator = new Zend_Validate_EmailAddress(
 );
 ]]></programlisting>
 
-        <note><info><title>MX Check under Windows</title></info>
+        <note><title>MX Check under Windows</title>
             
 
             <para>
@@ -229,7 +229,7 @@ $validator = new Zend_Validate_EmailAddress(
 );
 ]]></programlisting>
 
-        <warning><info><title>Performance warning</title></info>
+        <warning><title>Performance warning</title>
             
 
             <para>
@@ -239,7 +239,7 @@ $validator = new Zend_Validate_EmailAddress(
             </para>
         </warning>
 
-        <note><info><title>Disallowed IP addresses</title></info>
+        <note><title>Disallowed IP addresses</title>
             
 
             <para>
@@ -250,7 +250,7 @@ $validator = new Zend_Validate_EmailAddress(
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.validateidn"><info><title>Valider les noms de domaines internationaux</title></info>
+    <section xml:id="zend.validate.set.email_address.validateidn"><title>Valider les noms de domaines internationaux</title>
         
 
         <para>
@@ -278,7 +278,7 @@ $validator->hostnameValidator->setValidateIdn(false);
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.validatetld"><info><title>Validation des "Top Level Domains"</title></info>
+    <section xml:id="zend.validate.set.email_address.validatetld"><title>Validation des "Top Level Domains"</title>
         
 
         <para>
@@ -304,7 +304,7 @@ $validator->hostnameValidator->setValidateTld(false);
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.email_address.setmessage"><info><title>Setting messages</title></info>
+    <section xml:id="zend.validate.set.email_address.setmessage"><title>Setting messages</title>
         
 
         <para>

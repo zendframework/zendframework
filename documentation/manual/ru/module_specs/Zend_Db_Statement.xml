@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.statement"><info><title>Zend_Db_Statement</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.statement"><title>Zend_Db_Statement</title>
 
     
 
@@ -17,7 +17,7 @@
         Zend_Db_Statement основан на объекте PDOStatement в расширении <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo">PDO</link>.
     </para>
 
-    <section xml:id="zend.db.statement.creating"><info><title>Создание оператора</title></info>
+    <section xml:id="zend.db.statement.creating"><title>Создание оператора</title>
 
         
 
@@ -29,7 +29,7 @@
             значений для подстановки вместо меток заполнения в строке SQL.
         </para>
 
-        <example xml:id="zend.db.statement.creating.example1"><info><title>Создание объекта оператора SQL с помощью query()</title></info>
+        <example xml:id="zend.db.statement.creating.example1"><title>Создание объекта оператора SQL с помощью query()</title>
             
             <programlisting language="php"><![CDATA[
 $stmt = $db->query(
@@ -58,7 +58,7 @@ $stmt = $db->query(
             выполнен.
         </para>
 
-        <example xml:id="zend.db.statement.creating.example2"><info><title>Using a SQL statement constructor</title></info>
+        <example xml:id="zend.db.statement.creating.example2"><title>Using a SQL statement constructor</title>
             
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
@@ -70,7 +70,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
     </section>
 
-    <section xml:id="zend.db.statement.executing"><info><title>Выполнение оператора</title></info>
+    <section xml:id="zend.db.statement.executing"><title>Выполнение оператора</title>
 
         
 
@@ -87,7 +87,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
             которые помечаются знаками вопроса (<code>?</code>), - то передавайте значения для связки в простом массиве.
         </para>
 
-        <example xml:id="zend.db.statement.executing.example1"><info><title>Выполнение оператора с позиционными параметрами</title></info>
+        <example xml:id="zend.db.statement.executing.example1"><title>Выполнение оператора с позиционными параметрами</title>
             
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
@@ -107,7 +107,7 @@ $stmt->execute(array('goofy', 'FIXED'));
             именам параметров.
         </para>
 
-        <example xml:id="zend.db.statement.executing.example2"><info><title>Выполнение оператора с именованными параметрами</title></info>
+        <example xml:id="zend.db.statement.executing.example2"><title>Выполнение оператора с именованными параметрами</title>
             
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE ' .
@@ -129,7 +129,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
     </section>
 
-    <section xml:id="zend.db.statement.fetching"><info><title>Извлечение результатов выполнения оператора <code>SELECT</code></title></info>
+    <section xml:id="zend.db.statement.fetching"><title>Извлечение результатов выполнения оператора <code>SELECT</code></title>
 
         
 
@@ -144,7 +144,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             выполнения.
         </para>
 
-        <section xml:id="zend.db.statement.fetching.fetch"><info><title>Извлечение одной строки из набора результатов</title></info>
+        <section xml:id="zend.db.statement.fetching.fetch"><title>Извлечение одной строки из набора результатов</title>
 
             
 
@@ -195,7 +195,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 строки из набора результатов были извлечены.
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetch.example"><info><title>Использование fetch() в цикле</title></info>
+            <example xml:id="zend.db.statement.fetching.fetch.example"><title>Использование fetch() в цикле</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -213,7 +213,7 @@ while ($row = $stmt->fetch()) {
 
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetchall"><info><title>Извлечение всего набора результатов</title></info>
+        <section xml:id="zend.db.statement.fetching.fetchall"><title>Извлечение всего набора результатов</title>
 
             
 
@@ -228,7 +228,7 @@ while ($row = $stmt->fetch()) {
                 Zend_Db::FETCH_COLUMN.
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetchall.example"><info><title>Использование fetchAll()</title></info>
+            <example xml:id="zend.db.statement.fetching.fetchall.example"><title>Использование fetchAll()</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -246,7 +246,7 @@ echo $rows[0]['bug_description'];
 
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetch-mode"><info><title>Изменение формата извлечения</title></info>
+        <section xml:id="zend.db.statement.fetching.fetch-mode"><title>Изменение формата извлечения</title>
 
             
 
@@ -266,7 +266,7 @@ echo $rows[0]['bug_description'];
                 заданный вами режим извлечения.
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetch-mode.example"><info><title>Установка формата извлечения</title></info>
+            <example xml:id="zend.db.statement.fetching.fetch-mode.example"><title>Установка формата извлечения</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -286,7 +286,7 @@ echo $rows[0][0];
 
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetchcolumn"><info><title>Извлечение одного столбца из набора результатов</title></info>
+        <section xml:id="zend.db.statement.fetching.fetchcolumn"><title>Извлечение одного столбца из набора результатов</title>
 
             
 
@@ -307,7 +307,7 @@ echo $rows[0][0];
                 набора результатов.
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetchcolumn.example"><info><title>Использование fetchColumn()</title></info>
+            <example xml:id="zend.db.statement.fetching.fetchcolumn.example"><title>Использование fetchColumn()</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
@@ -323,7 +323,7 @@ $bug_status = $stmt->fetchColumn(2);
 
         </section>
 
-        <section xml:id="zend.db.statement.fetching.fetchobject"><info><title>Извлечение строки в виде объекта</title></info>
+        <section xml:id="zend.db.statement.fetching.fetchobject"><title>Извлечение строки в виде объекта</title>
 
             
 
@@ -336,7 +336,7 @@ $bug_status = $stmt->fetchColumn(2);
                 будут переданы конструктору этого класса.
             </para>
 
-            <example xml:id="zend.db.statement.fetching.fetchobject.example"><info><title>Использование fetchObject()</title></info>
+            <example xml:id="zend.db.statement.fetching.fetchobject.example"><title>Использование fetchObject()</title>
                 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');

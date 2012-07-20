@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.server"><info><title>Zend_Json_Server - servidor JSON-RPC</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.server"><title>Zend_Json_Server - servidor JSON-RPC</title>
     
 
     <para>
@@ -55,7 +55,7 @@
         peticiones así como para entregar el servicio SMD, como se muestra en el
         siguiente ejemplo. </para>
 
-    <example xml:id="zend.json.server.usage"><info><title>Uso de Zend_Json_Server</title></info>
+    <example xml:id="zend.json.server.usage"><title>Uso de Zend_Json_Server</title>
         
 
         <para>Primero, definir una clase que queramos exponer vía servidor
@@ -188,14 +188,14 @@ $server->handle();
 ]]></programlisting>
     </example>
 
-    <section xml:id="zend.json.server.details"><info><title>Detalles Avanzados</title></info>
+    <section xml:id="zend.json.server.details"><title>Detalles Avanzados</title>
         
 
         <para> Aunque la mayor funcionalidad de
                 <classname>Zend_Json_Server</classname> se puntualiza en <xref linkend="zend.json.server.usage"/> , hay más funcionalidad
             avanzada disponible. </para>
 
-        <section xml:id="zend.json.server.details.zendjsonserver"><info><title>Zend_Json_Server</title></info>
+        <section xml:id="zend.json.server.details.zendjsonserver"><title>Zend_Json_Server</title>
             
 
             <para>
@@ -282,7 +282,7 @@ $server->handle();
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.json.server.details.zendjsonserverrequest"><info><title>Zend_Json_Server_Request</title></info>
+        <section xml:id="zend.json.server.details.zendjsonserverrequest"><title>Zend_Json_Server_Request</title>
             
 
             <para> El medio ambiente de una solicitud JSON-RPC está encapsulado
@@ -399,7 +399,7 @@ $server->handle();
                     <methodname>getRawJson()</methodname> . </para>
         </section>
 
-        <section xml:id="zend.json.server.details.zendjsonserverresponse"><info><title>Zend_Json_Server_Response</title></info>
+        <section xml:id="zend.json.server.details.zendjsonserverresponse"><title>Zend_Json_Server_Response</title>
             
 
             <para> La respuesta del conjunto de datos JSON-RPC es encapsulada en
@@ -490,7 +490,7 @@ $server->handle();
             </para>
         </section>
 
-        <section xml:id="zend.json.server.details.zendjsonservererror"><info><title>Zend_Json_Server_Error</title></info>
+        <section xml:id="zend.json.server.details.zendjsonservererror"><title>Zend_Json_Server_Error</title>
             
 
             <para>JSON-RPC tiene un formato especial para informar condiciones
@@ -555,7 +555,7 @@ $server->handle();
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.json.server.details.zendjsonserversmd"><info><title>Zend_Json_Server_Smd</title></info>
+        <section xml:id="zend.json.server.details.zendjsonserversmd"><title>Zend_Json_Server_Smd</title>
             
 
             <para> SMD quiere decir Service Mapping Description, un esquema JSON

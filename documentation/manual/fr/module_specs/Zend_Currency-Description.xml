@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.description"><info><title>Qu'est ce qui définit une monnaie?</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.description"><title>Qu'est ce qui définit une monnaie?</title>
     
 
     <para>
@@ -13,7 +13,7 @@
         la monnaie  en cours à l'affichage. Les constantes suivantes sont utilisées:
     </para>
 
-    <table xml:id="zend.currency.description.table-1"><info><title>Informations rendues pour une monnaie</title></info>
+    <table xml:id="zend.currency.description.table-1"><title>Informations rendues pour une monnaie</title>
         
 
         <tgroup cols="2" align="left">
@@ -59,7 +59,7 @@
         </tgroup>
     </table>
 
-    <example xml:id="zend.currency.description.example-1"><info><title>Sélectionner la description de la monnaie</title></info>
+    <example xml:id="zend.currency.description.example-1"><title>Sélectionner la description de la monnaie</title>
         
 
         <para>
@@ -98,7 +98,7 @@ print $currency; // Pourrait retourner 'USD 100'
         </para>
     </example>
 
-    <note><info><title>Toutes les monnaies n'ont pas de signe</title></info>
+    <note><title>Toutes les monnaies n'ont pas de signe</title>
         
 
         <para>
@@ -112,7 +112,7 @@ print $currency; // Pourrait retourner 'USD 100'
         Pour changer des options concernant les monnaies, voyez le paragraphe ci-après.
     </para>
 
-    <example xml:id="zend.currency.description.example-2"><info><title>Changer la description de la monnaie</title></info>
+    <example xml:id="zend.currency.description.example-2"><title>Changer la description de la monnaie</title>
         
 
         <para>
@@ -148,7 +148,7 @@ print $currency; // Retournerait '$$$ 100'
 ]]></programlisting>
     </example>
 
-    <note><info><title>Paramètres de rendu automatiques</title></info>
+    <note><title>Paramètres de rendu automatiques</title>
         
 
         <para>

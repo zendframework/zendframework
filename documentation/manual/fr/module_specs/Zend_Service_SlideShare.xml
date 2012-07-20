@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.slideshare"><info><title>Zend_Service_SlideShare</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.slideshare"><title>Zend_Service_SlideShare</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         depuis votre site Web.
     </para>
 
-    <section xml:id="zend.service.slideshare.basicusage"><info><title>Démarrage avec <classname>Zend_Service_SlideShare</classname></title></info>
+    <section xml:id="zend.service.slideshare.basicusage"><title>Démarrage avec <classname>Zend_Service_SlideShare</classname></title>
         
 
         <para>
@@ -34,7 +34,7 @@ $ss = new Zend_Service_SlideShare('APIKEY',
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.service.slideshare.slideshowobj"><info><title>L'objet SlideShow</title></info>
+    <section xml:id="zend.service.slideshare.slideshowobj"><title>L'objet SlideShow</title>
         
 
         <para>
@@ -198,7 +198,7 @@ class Zend_Service_SlideShare_SlideShow {
         </para>
     </section>
 
-    <section xml:id="zend.service.slideshare.getslideshow"><info><title>Récupérer un diaporama simplement</title></info>
+    <section xml:id="zend.service.slideshare.getslideshow"><title>Récupérer un diaporama simplement</title>
         
 
         <para>
@@ -224,7 +224,7 @@ print "Nombre de diapositives : {$slideshow->getNumViews()}<br/>\n";
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.service.slideshare.getslideshowlist"><info><title>Récupérer des groupes de diaporamas</title></info>
+    <section xml:id="zend.service.slideshare.getslideshowlist"><title>Récupérer des groupes de diaporamas</title>
         
 
         <para>
@@ -286,7 +286,7 @@ foreach($ss_user as $slideshow) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.service.slideshare.caching"><info><title>Politique de cache de <classname>Zend_Service_SlideShare</classname></title></info>
+    <section xml:id="zend.service.slideshare.caching"><title>Politique de cache de <classname>Zend_Service_SlideShare</classname></title>
         
 
         <para>
@@ -319,7 +319,7 @@ $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.service.slideshare.httpclient"><info><title>Changer le comportement du client HTTP</title></info>
+    <section xml:id="zend.service.slideshare.httpclient"><title>Changer le comportement du client HTTP</title>
         
 
         <para>

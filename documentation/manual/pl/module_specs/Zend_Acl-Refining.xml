@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><info><title>Analiza kontroli dostępu</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><title>Analiza kontroli dostępu</title>
 
     
 
-    <section xml:id="zend.acl.refining.precise"><info><title>Precyzyjna kontrola dostępu</title></info>
+    <section xml:id="zend.acl.refining.precise"><title>Precyzyjna kontrola dostępu</title>
 
         
 
@@ -129,7 +129,7 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
 
     </section>
 
-    <section xml:id="zend.acl.refining.removing"><info><title>Usuwanie kontroli dostępu</title></info>
+    <section xml:id="zend.acl.refining.removing"><title>Usuwanie kontroli dostępu</title>
 
         
 

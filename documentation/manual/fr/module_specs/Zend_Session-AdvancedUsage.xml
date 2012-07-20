@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advanced_usage"><info><title>Utilisation avancée</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advanced_usage"><title>Utilisation avancée</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         plus avancées du composant <classname>Zend_Session</classname>.
     </para>
 
-    <section xml:id="zend.session.advanced_usage.starting_a_session"><info><title>Démarrer une session</title></info>
+    <section xml:id="zend.session.advanced_usage.starting_a_session"><title>Démarrer une session</title>
         
 
         <para>
@@ -18,7 +18,7 @@
             d'amorçage :
         </para>
 
-        <example xml:id="zend.session.advanced_usage.starting_a_session.example"><info><title>Démarrer la session globale</title></info>
+        <example xml:id="zend.session.advanced_usage.starting_a_session.example"><title>Démarrer la session globale</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -138,7 +138,7 @@ php_value session.auto_start 0
         </orderedlist>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.locking"><info><title>Verrouiller les espaces de noms de session</title></info>
+    <section xml:id="zend.session.advanced_usage.locking"><title>Verrouiller les espaces de noms de session</title>
         
 
         <para>
@@ -155,7 +155,7 @@ php_value session.auto_start 0
             l'alias dans tableau de stockage <varname>$_SESSION</varname> (voir <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/references">PHP references</link>).
         </para>
 
-        <example xml:id="zend.session.advanced_usage.locking.example.basic"><info><title>Verrouillage des espaces de noms de session</title></info>
+        <example xml:id="zend.session.advanced_usage.locking.example.basic"><title>Verrouillage des espaces de noms de session</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -173,7 +173,7 @@ if ($userProfileNamespace->isLocked()) {
         </example>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.expiration"><info><title>Expiration d'un espace de noms</title></info>
+    <section xml:id="zend.session.advanced_usage.expiration"><title>Expiration d'un espace de noms</title>
         
 
         <para>
@@ -186,7 +186,7 @@ if ($userProfileNamespace->isLocked()) {
             "hops", où un "hop" apparaît à chaque requête successive.
         </para>
 
-        <example xml:id="zend.session.advanced_usage.expiration.example"><info><title>Exemple d'expiration</title></info>
+        <example xml:id="zend.session.advanced_usage.expiration.example"><title>Exemple d'expiration</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -219,7 +219,7 @@ $s->setExpirationSeconds(60);
         </para>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.controllers"><info><title>Encapsulation de session et Contrôleurs</title></info>
+    <section xml:id="zend.session.advanced_usage.controllers"><title>Encapsulation de session et Contrôleurs</title>
         
 
         <para>
@@ -229,7 +229,7 @@ $s->setExpirationSeconds(60);
             séparées de tous les autres contrôleurs pour des raisons de sécurité.
         </para>
 
-        <example xml:id="zend.session.advanced_usage.controllers.example"><info><title>Sessions nommées par contrôleur avec expiration automatique</title></info>
+        <example xml:id="zend.session.advanced_usage.controllers.example"><title>Sessions nommées par contrôleur avec expiration automatique</title>
             
 
             <para>
@@ -265,7 +265,7 @@ else {
         </example>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.single_instance"><info><title>Limiter les instances multiples par espace de noms</title></info>
+    <section xml:id="zend.session.advanced_usage.single_instance"><title>Limiter les instances multiples par espace de noms</title>
         
 
         <para>
@@ -283,7 +283,7 @@ else {
             du même espace de noms entraînera la levée d'une exception.
         </para>
 
-        <example xml:id="zend.session.advanced_usage.single_instance.example"><info><title>Limiter l'accès à un espace de noms à une instance unique</title></info>
+        <example xml:id="zend.session.advanced_usage.single_instance.example"><title>Limiter l'accès à un espace de noms à une instance unique</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -324,7 +324,7 @@ try {
         </para>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.arrays"><info><title>Travailler avec les tableaux</title></info>
+    <section xml:id="zend.session.advanced_usage.arrays"><title>Travailler avec les tableaux</title>
         
 
         <para>
@@ -334,7 +334,7 @@ try {
             versions de <acronym>PHP</acronym> 5.2.1 ou supérieur., alors vous pouvez passer la <link linkend="zend.session.advanced_usage.objects">section suivante</link>.
         </para>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.modifying"><info><title>Modifier un tableau de données avec un espace de noms de session</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.modifying"><title>Modifier un tableau de données avec un espace de noms de session</title>
             
 
             <para>Le code suivant illustre le problème qui peut être reproduit :</para>
@@ -348,7 +348,7 @@ echo $sessionNamespace->array['testKey'];
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.building_prior"><info><title>Construire les tableaux avant le stockage en session</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.building_prior"><title>Construire les tableaux avant le stockage en session</title>
             
 
             <para>
@@ -369,7 +369,7 @@ $sessionNamespace->array = array('a', 'b', 'c');
             solutions suivantes :
         </para>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reassign"><info><title>Solution : réassigner un tableau modifié</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reassign"><title>Solution : réassigner un tableau modifié</title>
             
 
             <para>
@@ -397,7 +397,7 @@ echo $sessionNamespace->array['fruit']; // affiche "poire"
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reference"><info><title>Solution : stocker un tableau contenant une référence</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reference"><title>Solution : stocker un tableau contenant une référence</title>
             
 
             <para>
@@ -415,7 +415,7 @@ echo $myNamespace->someArray['foo']; // affiche "bar"
         </example>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.objects"><info><title>Utiliser les sessions avec des objets</title></info>
+    <section xml:id="zend.session.advanced_usage.objects"><title>Utiliser les sessions avec des objets</title>
         
 
         <para>
@@ -429,7 +429,7 @@ echo $myNamespace->someArray['foo']; // affiche "bar"
         </para>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.testing"><info><title>Utiliser les sessions avec les tests unitaires</title></info>
+    <section xml:id="zend.session.advanced_usage.testing"><title>Utiliser les sessions avec les tests unitaires</title>
         
 
         <para>
@@ -461,7 +461,7 @@ echo $myNamespace->someArray['foo']; // affiche "bar"
             fermé la session avant d'utiliser <methodname>exec()</methodname>.
         </para>
 
-        <example xml:id="zend.session.advanced_usage.testing.example"><info><title>Utilisation de PHPUnit pour tester le code écrit avec Zend_Session*</title></info>
+        <example xml:id="zend.session.advanced_usage.testing.example"><title>Utilisation de PHPUnit pour tester le code écrit avec Zend_Session*</title>
             
 
             <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.forms"><info><title> 使用 Zend_Form 生成表单 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.forms"><title> 使用 Zend_Form 生成表单 </title>
     
 
     <para>
@@ -57,7 +57,7 @@ $form = new Zend_Form($config);
         <code>Zend_Form</code> 的魔法在于它能够为元素和显示组提供工厂服务（serve as a factory），并且通过装饰器来解析（render）自己。
     </para>
 
-    <section xml:id="zend.form.forms.plugins"><info><title> 插件加载器 </title></info>
+    <section xml:id="zend.form.forms.plugins"><title> 插件加载器 </title>
         
         <para>
             <code>Zend_Form</code> 利用 <code>Zend_Loader_PluginLoader</code> 使开发者指定替代元素和装饰器的位置。每个表单有和它一起伴随的插件加载器，总访问器用来读取和修改每个表单。
@@ -108,7 +108,7 @@ $form = new Zend_Form($config);
         </para>
     </section>
 
-    <section xml:id="zend.form.forms.elements"><info><title> 元素（Elements）</title></info>
+    <section xml:id="zend.form.forms.elements"><title> 元素（Elements）</title>
         
         <para>
             <code>Zend_Form</code> 提供了若干访问器用来从表单中添加和删除元素。这些可以获得元素对象实例或以工厂模式来为实例化元素对象自己服务。
@@ -137,7 +137,7 @@ $form->addElement('text', 'foo');
 $form->addElement('text', 'foo', array('label' => 'Foo:'));
 ?>]]></programlisting>
 
-        <note><info><title>addElement() 实现 Fluent Interface</title></info>
+        <note><title>addElement() 实现 Fluent Interface</title>
             
 
             <para>
@@ -174,7 +174,7 @@ $foo = $form->foo;
 $username = $form->createElement('text', 'username');
 ?>]]></programlisting>
 
-        <section xml:id="zend.form.forms.elements.values"><info><title> 组装和读取数值 </title></info>
+        <section xml:id="zend.form.forms.elements.values"><title> 组装和读取数值 </title>
             
 
             <para>
@@ -207,14 +207,14 @@ $form->reset();
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.form.forms.elements.global"><info><title> 全局操作 </title></info>
+        <section xml:id="zend.form.forms.elements.global"><title> 全局操作 </title>
             
 
             <para>
                 偶尔，你想用对所有元素进行特定的操作，一般的情形包括需要为所有元素设置插件前缀路径、装饰器和过滤器，如下例：
             </para>
 
-            <example xml:id="zend.form.forms.elements.global.allpaths"><info><title> 为所有元素设置前缀路径 </title></info>
+            <example xml:id="zend.form.forms.elements.global.allpaths"><title> 为所有元素设置前缀路径 </title>
                 
 
                 <para>
@@ -238,7 +238,7 @@ $form->addElementPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator', 'decorator')
 ?>]]></programlisting>
             </example>
 
-            <example xml:id="zend.form.forms.elements.global.decorators"><info><title> 为所有元素设置装饰器（Decorators）</title></info>
+            <example xml:id="zend.form.forms.elements.global.decorators"><title> 为所有元素设置装饰器（Decorators）</title>
                 
 
                 <para>
@@ -253,7 +253,7 @@ $form->setElementDecorators(array(
 ?>]]></programlisting>
             </example>
 
-            <example xml:id="zend.form.forms.elements.global.decoratorsFilter"><info><title> 为某些元素设置装饰器 </title></info>
+            <example xml:id="zend.form.forms.elements.global.decoratorsFilter"><title> 为某些元素设置装饰器 </title>
                 
 
                 <para>
@@ -301,7 +301,7 @@ $form->setElementDecorators(
 ]]></programlisting>
             </example>
 
-                <note><info><title> 有些装饰器不适合某些元素 </title></info>
+                <note><title> 有些装饰器不适合某些元素 </title>
                     
 
                     <para>
@@ -317,7 +317,7 @@ $form->setElementDecorators(
                     </para>
                 </note>
 
-            <example xml:id="zend.form.forms.elements.global.filters"><info><title> 为所有元素设置过滤器 </title></info>
+            <example xml:id="zend.form.forms.elements.global.filters"><title> 为所有元素设置过滤器 </title>
                 
 
                 <para>
@@ -330,7 +330,7 @@ $form->setElementFilters(array('StringTrim'));
             </example>
         </section>
 
-        <section xml:id="zend.form.forms.elements.methods"><info><title> 和元素交互使用的方法 </title></info>
+        <section xml:id="zend.form.forms.elements.methods"><title> 和元素交互使用的方法 </title>
             
 
             <para>
@@ -413,7 +413,7 @@ $form->setElementFilters(array('StringTrim'));
         </section>
     </section>
 
-    <section xml:id="zend.form.forms.displaygroups"><info><title> 显示组（Display Groups）</title></info>
+    <section xml:id="zend.form.forms.displaygroups"><title> 显示组（Display Groups）</title>
         
 
         <para>
@@ -444,7 +444,7 @@ $login = $form->getDisplayGroup('login');
 $login = $form->login;
 ?>]]></programlisting>
 
-        <note><info><title> 不需要加载缺省的装饰器 </title></info>
+        <note><title> 不需要加载缺省的装饰器 </title>
             
 
             <para>
@@ -464,14 +464,14 @@ $form->addDisplayGroup(
             </para>
         </note>
 
-        <section xml:id="zend.form.forms.displaygroups.global"><info><title> 全局操作 </title></info>
+        <section xml:id="zend.form.forms.displaygroups.global"><title> 全局操作 </title>
             
 
             <para>
                 就像对元素一样，一些操作可能影响所有的显示组，包括设置装饰器和寻找装饰器的插件路径。
             </para>
 
-            <example xml:id="zend.form.forms.displaygroups.global.paths"><info><title> 为所有的显示组设置装饰器前缀路径 </title></info>
+            <example xml:id="zend.form.forms.displaygroups.global.paths"><title> 为所有的显示组设置装饰器前缀路径 </title>
                 
 
                 <para>
@@ -483,7 +483,7 @@ $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
 ?>]]></programlisting>
             </example>
 
-            <example xml:id="zend.form.forms.displaygroups.global.decorators"><info><title> 为所有显示组设置装饰器 </title></info>
+            <example xml:id="zend.form.forms.displaygroups.global.decorators"><title> 为所有显示组设置装饰器 </title>
                 
 
                 <para>
@@ -499,7 +499,7 @@ $form->setDisplayGroupDecorators(array(
             </example>
         </section>
 
-        <section xml:id="zend.form.forms.displaygroups.customClasses"><info><title> 使用定制的显示组类 </title></info>
+        <section xml:id="zend.form.forms.displaygroups.customClasses"><title> 使用定制的显示组类 </title>
             
 
             <para>
@@ -533,7 +533,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             </para>
         </section>
 
-        <section xml:id="zend.form.forms.displaygroups.interactionmethods"><info><title> 和显示组交互使用的方法 </title></info>
+        <section xml:id="zend.form.forms.displaygroups.interactionmethods"><title> 和显示组交互使用的方法 </title>
             
 
             <para>
@@ -587,7 +587,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.form.forms.displaygroups.methods"><info><title>Zend_Form_DisplayGroup 方法 </title></info>
+        <section xml:id="zend.form.forms.displaygroups.methods"><title>Zend_Form_DisplayGroup 方法 </title>
             
 
             <para>
@@ -712,7 +712,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
         </section>
     </section>
 
-    <section xml:id="zend.form.forms.subforms"><info><title> 子表单 </title></info>
+    <section xml:id="zend.form.forms.subforms"><title> 子表单 </title>
         
 
         <para>
@@ -757,7 +757,7 @@ $subForm = $form->subform;
             虽然子表单包含的元素不包含在表单迭代中，但子表单包含在其中。
         </para>
 
-        <section xml:id="zend.form.forms.subforms.global"><info><title> 全局操作 </title></info>
+        <section xml:id="zend.form.forms.subforms.global"><title> 全局操作 </title>
             
 
             <para>
@@ -772,7 +772,7 @@ $form->setSubFormDecorators(array(
 ?>]]></programlisting>
         </section>
 
-        <section xml:id="zend.form.forms.subforms.methods"><info><title> 和子表单交互使用的方法 </title></info>
+        <section xml:id="zend.form.forms.subforms.methods"><title> 和子表单交互使用的方法 </title>
             
 
             <para>
@@ -815,7 +815,7 @@ $form->setSubFormDecorators(array(
         </section>
     </section>
 
-    <section xml:id="zend.form.forms.metadata"><info><title> 元数据（Metadata）和属性（Attributes）</title></info>
+    <section xml:id="zend.form.forms.metadata"><title> 元数据（Metadata）和属性（Attributes）</title>
         
 
         <para>
@@ -899,7 +899,7 @@ $form->clearAttribs();
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.forms.decorators"><info><title> 装饰器 </title></info>
+    <section xml:id="zend.form.forms.decorators"><title> 装饰器 </title>
         
 
         <para>
@@ -938,7 +938,7 @@ $form->setDecorators(array(
             在表单对象中的任何属性设置将用做 <code>&lt;form&gt;</code> 标签的 HTML 属性。
         </para>
 
-        <note><info><title> 不需要加载缺省的装饰器 </title></info>
+        <note><title> 不需要加载缺省的装饰器 </title>
             
 
             <para>
@@ -954,7 +954,7 @@ $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
             </para>
         </note>
 
-        <note><info><title> 使用同类型的多个装饰器 </title></info>
+        <note><title> 使用同类型的多个装饰器 </title>
             
 
             <para>
@@ -1033,7 +1033,7 @@ $fooBar  = $form->getDecorator('FooBar');
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.forms.validation"><info><title> 校验 </title></info>
+    <section xml:id="zend.form.forms.validation"><title> 校验 </title>
         
 
         <para>
@@ -1110,7 +1110,7 @@ $messages = $form->getMessages('username');
             </para>
         </note>
 
-        <section xml:id="zend.form.forms.validation.errors"><info><title> 定制错误消息 </title></info>
+        <section xml:id="zend.form.forms.validation.errors"><title> 定制错误消息 </title>
             
 
             <para>
@@ -1164,7 +1164,7 @@ $messages = $form->getMessages('username');
         </section>
     </section>
 
-    <section xml:id="zend.form.forms.methods"><info><title> 方法 </title></info>
+    <section xml:id="zend.form.forms.methods"><title> 方法 </title>
         
 
         <para>
@@ -1358,7 +1358,7 @@ $messages = $form->getMessages('username');
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.forms.config"><info><title> 配置 </title></info>
+    <section xml:id="zend.form.forms.config"><title> 配置 </title>
         
 
         <para>
@@ -1456,7 +1456,7 @@ decorators.form.decorator = "Form"
         </para>
     </section>
 
-    <section xml:id="zend.form.forms.custom"><info><title> 定制表单 </title></info>
+    <section xml:id="zend.form.forms.custom"><title> 定制表单 </title>
         
 
         <para>

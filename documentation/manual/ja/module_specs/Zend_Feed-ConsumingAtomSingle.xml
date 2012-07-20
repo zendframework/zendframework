@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>単一の Atom エントリの処理</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><title>単一の Atom エントリの処理</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         フィードが自動的に作成され、エントリがその中に含まれる形式になります。
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><info><title>Atom フィードからの単一のエントリの読み込み</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><title>Atom フィードからの単一のエントリの読み込み</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -31,7 +31,7 @@ $entry = $feed->current();
         エントリオブジェクトを直接作成することもできます。
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><info><title>単一エントリの Atom フィードに対する、エントリオブジェクトを直接使用したアクセス</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><title>単一エントリの Atom フィードに対する、エントリオブジェクトを直接使用したアクセス</title>
         
 
         <programlisting language="php"><![CDATA[

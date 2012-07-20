@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardElements"><info><title>Zend Framework 带有的标准表单元素 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardElements"><title>Zend Framework 带有的标准表单元素 </title>
 
 
     <para>
         Zend Framework 带有的具体元素类涵盖了大部分的 HTML 表单元素。其中大部分当装饰元素时，指定了特定的视图助手来用，但有一些还提供了另外的功能。下面是这些类的列表，还有它们提供的功能的描述。
     </para>
 
-    <section xml:id="zend.form.standardElements.button"><info><title>Zend_Form_Element_Button</title></info>
+    <section xml:id="zend.form.standardElements.button"><title>Zend_Form_Element_Button</title>
 
 
         <para>
@@ -26,7 +26,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.checkbox"><info><title>Zend_Form_Element_Checkbox</title></info>
+    <section xml:id="zend.form.standardElements.checkbox"><title>Zend_Form_Element_Checkbox</title>
 
 
         <para>
@@ -46,7 +46,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.hidden"><info><title>Zend_Form_Element_Hidden</title></info>
+    <section xml:id="zend.form.standardElements.hidden"><title>Zend_Form_Element_Hidden</title>
 
 
         <para>
@@ -54,7 +54,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.hash"><info><title>Zend_Form_Element_Hash</title></info>
+    <section xml:id="zend.form.standardElements.hash"><title>Zend_Form_Element_Hash</title>
 
 
         <para>
@@ -82,7 +82,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.Image"><info><title>Zend_Form_Element_Image</title></info>
+    <section xml:id="zend.form.standardElements.Image"><title>Zend_Form_Element_Image</title>
 
 
         <para>
@@ -98,7 +98,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.multiCheckbox"><info><title>Zend_Form_Element_MultiCheckbox</title></info>
+    <section xml:id="zend.form.standardElements.multiCheckbox"><title>Zend_Form_Element_MultiCheckbox</title>
 
 
         <para>
@@ -152,7 +152,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.multiselect"><info><title>Zend_Form_Element_Multiselect</title></info>
+    <section xml:id="zend.form.standardElements.multiselect"><title>Zend_Form_Element_Multiselect</title>
 
 
         <para>
@@ -181,7 +181,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.password"><info><title>Zend_Form_Element_Password</title></info>
+    <section xml:id="zend.form.standardElements.password"><title>Zend_Form_Element_Password</title>
 
 
         <para>
@@ -193,7 +193,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.radio"><info><title>Zend_Form_Element_Radio</title></info>
+    <section xml:id="zend.form.standardElements.radio"><title>Zend_Form_Element_Radio</title>
 
 
         <para>
@@ -222,7 +222,7 @@ $element->setValue(array('bar', 'bat'));
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.standardElements.reset"><info><title>Zend_Form_Element_Reset</title></info>
+    <section xml:id="zend.form.standardElements.reset"><title>Zend_Form_Element_Reset</title>
 
 
         <para>
@@ -234,7 +234,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.select"><info><title>Zend_Form_Element_Select</title></info>
+    <section xml:id="zend.form.standardElements.select"><title>Zend_Form_Element_Select</title>
 
 
         <para>
@@ -267,7 +267,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.submit"><info><title>Zend_Form_Element_Submit</title></info>
+    <section xml:id="zend.form.standardElements.submit"><title>Zend_Form_Element_Submit</title>
 
 
         <para>
@@ -283,7 +283,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.text"><info><title>Zend_Form_Element_Text</title></info>
+    <section xml:id="zend.form.standardElements.text"><title>Zend_Form_Element_Text</title>
 
 
         <para>
@@ -291,7 +291,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
 
-    <section xml:id="zend.form.standardElements.textarea"><info><title>Zend_Form_Element_Textarea</title></info>
+    <section xml:id="zend.form.standardElements.textarea"><title>Zend_Form_Element_Textarea</title>
 
 
         <para>

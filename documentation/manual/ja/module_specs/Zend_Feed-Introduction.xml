@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><title>導入</title>
     
 
     <para>
@@ -24,7 +24,7 @@
         データベースへの保存などの簡単な使用例を示します。
     </para>
 
-    <note><info><title>注意</title></info>
+    <note><title>注意</title>
         
 
         <para>
@@ -34,7 +34,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.feed.introduction.example.rss"><info><title>Zend_Feed による RSS フィードデータの使用</title></info>
+    <example xml:id="zend.feed.introduction.example.rss"><title>Zend_Feed による RSS フィードデータの使用</title>
         
 
         <programlisting language="php"><![CDATA[

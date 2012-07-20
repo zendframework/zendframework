@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.fetching"><info><title>Holen von Optionen und Argumenten</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.fetching"><title>Holen von Optionen und Argumenten</title>
     
 
     <para>
@@ -20,7 +20,7 @@
         Konfigurationsoptionen bevor das Analysieren durchgeführt wird.
     </para>
 
-    <section xml:id="zend.console.getopt.fetching.exceptions"><info><title>Handhaben von Getopt Ausnahmen</title></info>
+    <section xml:id="zend.console.getopt.fetching.exceptions"><title>Handhaben von Getopt Ausnahmen</title>
         
 
         <para>
@@ -37,7 +37,7 @@
             Verwendung aller definierten Optionen zurückgibt.
         </para>
 
-        <example xml:id="zend.console.getopt.fetching.exceptions.example"><info><title>Getopt Ausnahmen auffangen</title></info>
+        <example xml:id="zend.console.getopt.fetching.exceptions.example"><title>Getopt Ausnahmen auffangen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -78,7 +78,7 @@ try {
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.console.getopt.fetching.byname"><info><title>Optionen durch Ihren Namen finden</title></info>
+    <section xml:id="zend.console.getopt.fetching.byname"><title>Optionen durch Ihren Namen finden</title>
         
 
         <para>
@@ -90,7 +90,7 @@ try {
             Andernfalls gibt die Methode <constant>NULL</constant> zurück.
         </para>
 
-        <example xml:id="zend.console.getopt.fetching.byname.example.setoption"><info><title>Verwenden von getOption()</title></info>
+        <example xml:id="zend.console.getopt.fetching.byname.example.setoption"><title>Verwenden von getOption()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -107,7 +107,7 @@ $p_parameter = $opts->getOption('p');
             ist auch implementiert.
         </para>
 
-        <example xml:id="zend.console.getopt.fetching.byname.example.magic"><info><title>Verwenden der magischen __get() und __isset() Methoden</title></info>
+        <example xml:id="zend.console.getopt.fetching.byname.example.magic"><title>Verwenden der magischen __get() und __isset() Methoden</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -125,7 +125,7 @@ $p_parameter = $opts->p; // Null wenn nicht gesetzt
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.fetching.reporting"><info><title>Optionen berichten</title></info>
+    <section xml:id="zend.console.getopt.fetching.reporting"><title>Optionen berichten</title>
         
 
         <para>
@@ -177,7 +177,7 @@ $p_parameter = $opts->p; // Null wenn nicht gesetzt
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.fetching.remainingargs"><info><title>Nicht-Options Argumente erhalten</title></info>
+    <section xml:id="zend.console.getopt.fetching.remainingargs"><title>Nicht-Options Argumente erhalten</title>
         
 
         <para>
@@ -188,7 +188,7 @@ $p_parameter = $opts->p; // Null wenn nicht gesetzt
             waren.
         </para>
 
-        <example xml:id="zend.console.getopt.fetching.remainingargs.example"><info><title>Verwenden von getRemainingArgs()</title></info>
+        <example xml:id="zend.console.getopt.fetching.remainingargs.example"><title>Verwenden von getRemainingArgs()</title>
             
 
             <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><info><title>Převod XML do JSON</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><title>Převod XML do JSON</title>
     
     <para>
         <code>Zend_Json</code> poskytuje metodu pro převod dat formátovaných

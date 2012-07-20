@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><info><title>Zend_Db_Profiler</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><title>Zend_Db_Profiler</title>
 
     
 
-    <section xml:id="zend.db.profiler.introduction"><info><title>Inleiding</title></info>
+    <section xml:id="zend.db.profiler.introduction"><title>Inleiding</title>
 
         
 
@@ -42,7 +42,7 @@ $db->getProfiler()->setEnabled(true);
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.profiler.using"><info><title>De Profiler Gebruiken</title></info>
+    <section xml:id="zend.db.profiler.using"><title>De Profiler Gebruiken</title>
 
         
 
@@ -154,7 +154,7 @@ echo "Langste query: \n" . $longestQuery . "\n";
 
     </section>
 
-    <section xml:id="zend.db.profiler.advanced"><info><title>Geavanceerd Profiler Gebruik</title></info>
+    <section xml:id="zend.db.profiler.advanced"><title>Geavanceerd Profiler Gebruik</title>
 
         
 
@@ -164,7 +164,7 @@ echo "Langste query: \n" . $longestQuery . "\n";
             <code>Zend_Db_Profiler</code> instantie worden uitgevoerd:
         </para>
 
-        <section xml:id="zend.db.profiler.advanced.filtertime"><info><title>Filteren op afgelopen tijd</title></info>
+        <section xml:id="zend.db.profiler.advanced.filtertime"><title>Filteren op afgelopen tijd</title>
             
 
             <para>
@@ -182,7 +182,7 @@ $profiler->setFilterElapsedSecs(null);
 ?>]]></programlisting>
         </section>
 
-        <section xml:id="zend.db.profiler.advanced.filtertype"><info><title>Filteren per type query</title></info>
+        <section xml:id="zend.db.profiler.advanced.filtertype"><title>Filteren per type query</title>
             
 
             <para>
@@ -259,7 +259,7 @@ $profiler->setFilterQueryType(null);
 
         </section>
 
-        <section xml:id="zend.db.profiler.advanced.getbytype"><info><title>Profielen per type query verkrijgen</title></info>
+        <section xml:id="zend.db.profiler.advanced.getbytype"><title>Profielen per type query verkrijgen</title>
             
 
             <para>

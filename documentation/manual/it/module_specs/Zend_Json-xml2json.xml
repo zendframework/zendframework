@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><info><title>Conversione da XML a JSON</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><title>Conversione da XML a JSON</title>
     
     <para>
         <code>Zend_Json</code> fornisce un metodo di supporto per la trasformazione di dati XML nel formato JSON.

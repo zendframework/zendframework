@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="doc-standard"><info><title>Zend Framework ドキュメント標準</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="doc-standard"><title>Zend Framework ドキュメント標準</title>
     
 
-    <section xml:id="doc-standard.overview"><info><title>概要</title></info>
+    <section xml:id="doc-standard.overview"><title>概要</title>
         
 
-        <section xml:id="doc-standard.overview.scope"><info><title>スコープ</title></info>
+        <section xml:id="doc-standard.overview.scope"><title>スコープ</title>
             
 
             <para>
@@ -33,10 +33,10 @@
         </section>
     </section>
 
-    <section xml:id="doc-standard.file-formatting"><info><title>ドキュメントファイル形式</title></info>
+    <section xml:id="doc-standard.file-formatting"><title>ドキュメントファイル形式</title>
         
 
-        <section xml:id="doc-standard.file-formatting.xml-tags"><info><title>XML タグ</title></info>
+        <section xml:id="doc-standard.file-formatting.xml-tags"><title>XML タグ</title>
             
 
             <para>
@@ -62,7 +62,7 @@
 ]]></programlisting>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.max-line-length"><info><title>行の最大長</title></info>
+        <section xml:id="doc-standard.file-formatting.max-line-length"><title>行の最大長</title>
             
 
             <para>
@@ -72,7 +72,7 @@
             </para>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.indentation"><info><title>インデント</title></info>
+        <section xml:id="doc-standard.file-formatting.indentation"><title>インデント</title>
             
 
             <para>Indentation should consist of 4 spaces. Tabs are not allowed.</para>
@@ -116,7 +116,7 @@
 ]]></programlisting>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.line-termination"><info><title>行の終端</title></info>
+        <section xml:id="doc-standard.file-formatting.line-termination"><title>行の終端</title>
             
 
             <para>
@@ -132,7 +132,7 @@
             </para>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.empty-tags"><info><title>空のタグ</title></info>
+        <section xml:id="doc-standard.file-formatting.empty-tags"><title>空のタグ</title>
             
 
             <para>
@@ -150,10 +150,10 @@
 ]]></programlisting>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.whitespace"><info><title>ドキュメント内での空白の利用</title></info>
+        <section xml:id="doc-standard.file-formatting.whitespace"><title>ドキュメント内での空白の利用</title>
             
 
-            <section xml:id="doc-standard.file-formatting.whitespace.trailing"><info><title>タグ内での空白</title></info>
+            <section xml:id="doc-standard.file-formatting.whitespace.trailing"><title>タグ内での空白</title>
                 
 
                 <para>
@@ -208,7 +208,7 @@ This is the class <classname>Zend_Class</classname>
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.whitespace.multiple-line-breaks"><info><title>複数行の切断</title></info>
+            <section xml:id="doc-standard.file-formatting.whitespace.multiple-line-breaks"><title>複数行の切断</title>
                 
 
                 <para>
@@ -240,7 +240,7 @@ This is the class <classname>Zend_Class</classname>
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.whitespace.tag-separation"><info><title>タグの間の分離</title></info>
+            <section xml:id="doc-standard.file-formatting.whitespace.tag-separation"><title>タグの間の分離</title>
                 
 
                 <para>
@@ -303,7 +303,7 @@ This is the class <classname>Zend_Class</classname>
             </section>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.program-listing"><info><title>プログラム・リスティング</title></info>
+        <section xml:id="doc-standard.file-formatting.program-listing"><title>プログラム・リスティング</title>
             
 
             <para>
@@ -415,7 +415,7 @@ $render = "xxx";
                 autoloader. Use them only when they are essential to the example.
             </para>
 
-            <note><info><title>ショートタグを決して使わないで下さい</title></info>
+            <note><title>ショートタグを決して使わないで下さい</title>
                 
 
                 <para>
@@ -425,10 +425,10 @@ $render = "xxx";
             </note>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.inline-tags"><info><title>特殊なインラインタグの注意</title></info>
+        <section xml:id="doc-standard.file-formatting.inline-tags"><title>特殊なインラインタグの注意</title>
             
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.classname"><info><title>classname</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.classname"><title>classname</title>
                 
 
                 <para>
@@ -445,7 +445,7 @@ $render = "xxx";
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.varname"><info><title>varname</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.varname"><title>varname</title>
                 
 
                 <para>
@@ -462,7 +462,7 @@ $render = "xxx";
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.methodname"><info><title>methodname</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.methodname"><title>methodname</title>
                 
 
                 <para>
@@ -481,7 +481,7 @@ $render = "xxx";
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.constant"><info><title>constant</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.constant"><title>constant</title>
                 
 
                 <para>
@@ -499,7 +499,7 @@ $render = "xxx";
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.filename"><info><title>filename</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.filename"><title>filename</title>
                 
 
                 <para>
@@ -515,7 +515,7 @@ $render = "xxx";
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.command"><info><title>command</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.command"><title>command</title>
                 
 
                 <para>
@@ -531,7 +531,7 @@ $render = "xxx";
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.code"><info><title>code</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.code"><title>code</title>
                 
 
                 <para>
@@ -541,10 +541,10 @@ $render = "xxx";
             </section>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.block-tags"><info><title>特殊なブロックタグの注意</title></info>
+        <section xml:id="doc-standard.file-formatting.block-tags"><title>特殊なブロックタグの注意</title>
             
 
-            <section xml:id="doc-standard.file-formatting.block-tags.title"><info><title>title</title></info>
+            <section xml:id="doc-standard.file-formatting.block-tags.title"><title>title</title>
                 
 
                 <para>
@@ -562,10 +562,10 @@ $render = "xxx";
         </section>
     </section>
 
-    <section xml:id="doc-standard.recommendations"><info><title>推奨事項</title></info>
+    <section xml:id="doc-standard.recommendations"><title>推奨事項</title>
         
 
-        <section xml:id="doc-standard.recommendations.editors"><info><title>自動でフォーマットしないエディタを使ってください</title></info>
+        <section xml:id="doc-standard.recommendations.editors"><title>自動でフォーマットしないエディタを使ってください</title>
             
 
             <para>
@@ -586,7 +586,7 @@ $render = "xxx";
             </para>
         </section>
 
-        <section xml:id="doc-standard.recommendations.images"><info><title>イメージを使ってください</title></info>
+        <section xml:id="doc-standard.recommendations.images"><title>イメージを使ってください</title>
             
 
             <para>
@@ -597,7 +597,7 @@ $render = "xxx";
             </para>
         </section>
 
-        <section xml:id="doc-standard.recommendations.examples"><info><title>ケースの例を使ってください</title></info>
+        <section xml:id="doc-standard.recommendations.examples"><title>ケースの例を使ってください</title>
             
 
             <para>
@@ -612,7 +612,7 @@ $render = "xxx";
             </para>
         </section>
 
-        <section xml:id="doc-standard.recommendations.phpdoc"><info><title>phpdocの内容を繰り返すことを避けてください</title></info>
+        <section xml:id="doc-standard.recommendations.phpdoc"><title>phpdocの内容を繰り返すことを避けてください</title>
             
 
             <para>
@@ -624,7 +624,7 @@ $render = "xxx";
             </para>
         </section>
 
-        <section xml:id="doc-standard.recommendations.links"><info><title>リンクを使ってください</title></info>
+        <section xml:id="doc-standard.recommendations.links"><title>リンクを使ってください</title>
             
 
             <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.greaterthan"><info><title>GreaterThan</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.greaterthan"><title>GreaterThan</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         Wert größer ist als ein minimaler Grenzwert.
     </para>
 
-    <note><info><title>Zend_Validate_GreaterThan unterstützt nur die Überprüfung von Nummern</title></info>
+    <note><title>Zend_Validate_GreaterThan unterstützt nur die Überprüfung von Nummern</title>
         
 
         <para>
@@ -17,7 +17,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.validate.set.greaterthan.options"><info><title>Unterstützte Optionen für Zend_Validate_GreaterThan</title></info>
+    <section xml:id="zend.validate.set.greaterthan.options"><title>Unterstützte Optionen für Zend_Validate_GreaterThan</title>
         
 
         <para>
@@ -35,7 +35,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.greaterthan.basic"><info><title>Normale Verwendung</title></info>
+    <section xml:id="zend.validate.set.greaterthan.basic"><title>Normale Verwendung</title>
         
 
         <para>

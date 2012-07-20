@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>고급 사용법</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><title>고급 사용법</title>
 
     
 
-    <section xml:id="zend.acl.advanced.storing"><info><title>ACL 데이터의 보존에 의한 영속성의 확보</title></info>
+    <section xml:id="zend.acl.advanced.storing"><title>ACL 데이터의 보존에 의한 영속성의 확보</title>
 
         
 
@@ -17,7 +17,7 @@
 
     </section>
 
-    <section xml:id="zend.acl.advanced.assertions"><info><title>검증을 통한 조건부 ACL 규칙의 작성</title></info>
+    <section xml:id="zend.acl.advanced.assertions"><title>검증을 통한 조건부 ACL 규칙의 작성</title>
 
         
 

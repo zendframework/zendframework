@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><info><title>Authentification SMTP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><title>Authentification SMTP</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         des valeurs "username" et "password" dans le tableau de configuration.
     </para>
 
-    <example xml:id="zend.mail.smtp-authentication.example-1"><info><title>Activer l'authentification dans Zend_Mail_Transport_Smtp</title></info>
+    <example xml:id="zend.mail.smtp-authentication.example-1"><title>Activer l'authentification dans Zend_Mail_Transport_Smtp</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -29,7 +29,7 @@ $mail->send($transport);
 ]]></programlisting>
     </example>
 
-    <note><info><title>Type d'authentification</title></info>
+    <note><title>Type d'authentification</title>
         
 
         <para>

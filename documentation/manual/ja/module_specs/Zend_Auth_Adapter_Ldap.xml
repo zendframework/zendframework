@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.ldap"><info><title>LDAP 認証</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.ldap"><title>LDAP 認証</title>
 
     
 
-    <section xml:id="zend.auth.adapter.ldap.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.auth.adapter.ldap.introduction"><title>導入</title>
 
         
 
@@ -29,7 +29,7 @@
 
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.usage"><info><title>使用法</title></info>
+    <section xml:id="zend.auth.adapter.ldap.usage"><title>使用法</title>
 
         
 
@@ -140,7 +140,7 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
 
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.api"><info><title>API</title></info>
+    <section xml:id="zend.auth.adapter.ldap.api"><title>API</title>
 
         
 
@@ -202,7 +202,7 @@ Array
             省略できるということです。
         </para>
 
-        <note><info><title>Distinguished Name とは?</title></info>
+        <note><title>Distinguished Name とは?</title>
             
             <para>
                 DN ("distinguished name") とは、
@@ -233,7 +233,7 @@ Array
             フェイルオーバー機能も提供できます。
         </para>
 
-        <note><info><title>認証メソッドの中では実際に何が行われているのか?</title></info>
+        <note><title>認証メソッドの中では実際に何が行われているのか?</title>
             
             <para>
                 <methodname>authenticate()</methodname> メソッドがコールされると、
@@ -270,7 +270,7 @@ Array
 
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.server-options"><info><title>サーバのオプション</title></info>
+    <section xml:id="zend.auth.adapter.ldap.server-options"><title>サーバのオプション</title>
 
         
 
@@ -280,7 +280,7 @@ Array
             <methodname>Zend_Ldap::setOptions()</methodname> に渡されます。
         </para>
 
-        <table xml:id="zend.auth.adapter.ldap.server-options.table"><info><title>サーバのオプション</title></info>
+        <table xml:id="zend.auth.adapter.ldap.server-options.table"><title>サーバのオプション</title>
             
             <tgroup cols="2">
                 <thead>
@@ -503,7 +503,7 @@ Array
 
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.debugging"><info><title>デバッグメッセージの収集</title></info>
+    <section xml:id="zend.auth.adapter.ldap.debugging"><title>デバッグメッセージの収集</title>
 
         
 
@@ -515,7 +515,7 @@ Array
             が返す配列は次のような形式になります。
         </para>
 
-        <table xml:id="zend.auth.adapter.ldap.debugging.table"><info><title>デバッグメッセージ</title></info>
+        <table xml:id="zend.auth.adapter.ldap.debugging.table"><title>デバッグメッセージ</title>
             
             <tgroup cols="2">
                 <thead>
@@ -559,11 +559,11 @@ Array
 
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.options-common-server-specific"><info><title>サーバ固有の共通オプション</title></info>
+    <section xml:id="zend.auth.adapter.ldap.options-common-server-specific"><title>サーバ固有の共通オプション</title>
 
         
 
-        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory"><info><title>Active Directory 用のオプション</title></info>
+        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory"><title>Active Directory 用のオプション</title>
 
             
 
@@ -571,7 +571,7 @@ Array
                 <acronym>ADS</acronym> 用のオプションとして注目すべきものは次のとおりです。
             </para>
 
-            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table"><info><title>Active Directory 用のオプション</title></info>
+            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table"><title>Active Directory 用のオプション</title>
                 
                 <tgroup cols="2">
                     <thead>
@@ -659,7 +659,7 @@ Array
 
         </section>
 
-        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap"><info><title>OpenLDAP 用のオプション</title></info>
+        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap"><title>OpenLDAP 用のオプション</title>
 
             
 
@@ -668,7 +668,7 @@ Array
                 <acronym>LDAP</acronym> サーバ用のオプションとして注目すべきものは次のとおりです。
             </para>
 
-            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table"><info><title>OpenLDAP 用のオプション</title></info>
+            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table"><title>OpenLDAP 用のオプション</title>
                 
                 <tgroup cols="2">
                     <thead>

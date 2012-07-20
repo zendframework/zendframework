@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headscript"><info><title>HeadScript ヘルパー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headscript"><title>HeadScript ヘルパー</title>
     
 
     <para>
@@ -41,7 +41,7 @@
         はその要素に使用したいクライアント側のスクリプトとなります。
     </para>
 
-    <note><info><title>条件コメントの設定</title></info>
+    <note><title>条件コメントの設定</title>
         
 
         <para>
@@ -51,7 +51,7 @@
             <varname>$attrs</varname> パラメータで渡します。
         </para>
 
-        <example xml:id="zend.view.helpers.initial.headscript.conditional"><info><title>Headscript で条件コメントを使う例</title></info>
+        <example xml:id="zend.view.helpers.initial.headscript.conditional"><title>Headscript で条件コメントを使う例</title>
             
             <programlisting language="php"><![CDATA[
 // スクリプトを追加します
@@ -99,7 +99,7 @@ $this->headScript()->appendFile(
         ヘルパー</link> の具象実装です。
     </para>
 
-    <note><info><title>HTML Body スクリプトでの InlineScript の使用</title></info>
+    <note><title>HTML Body スクリプトでの InlineScript の使用</title>
         
 
         <para>
@@ -112,7 +112,7 @@ $this->headScript()->appendFile(
         </para>
     </note>
 
-    <note><info><title>すべての属性はデフォルトで無効</title></info>
+    <note><title>すべての属性はデフォルトで無効</title>
         
 
         <para>
@@ -132,7 +132,7 @@ $this->headScript()->setAllowArbitraryAttributes(true);
 ]]></programlisting>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.headscript.basicusage"><info><title>HeadScript ヘルパーの基本的な使用法</title></info>
+    <example xml:id="zend.view.helpers.initial.headscript.basicusage"><title>HeadScript ヘルパーの基本的な使用法</title>
         
 
         <para>
@@ -177,7 +177,7 @@ $this->headScript()->prependFile('/js/prototype.js');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.headscript.capture"><info><title>HeadScript ヘルパーによるスクリプトのキャプチャ</title></info>
+    <example xml:id="zend.view.helpers.initial.headscript.capture"><title>HeadScript ヘルパーによるスクリプトのキャプチャ</title>
         
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.text.figlet"><info><title>Zend_Text_Figlet</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.text.figlet"><title>Zend_Text_Figlet</title>
     
 
     <para>
@@ -13,7 +13,7 @@
         からその他のフォントをダウンロードできます。
     </para>
 
-    <note><info><title>圧縮されたフォント</title></info>
+    <note><title>圧縮されたフォント</title>
         
 
         <para>
@@ -26,7 +26,7 @@
         </para>
     </note>
 
-    <note><info><title>エンコーディング</title></info>
+    <note><title>エンコーディング</title>
         
 
         <para>
@@ -114,7 +114,7 @@
         </itemizedlist>
     </para>
 
-    <example xml:id="zend.text.figlet.example.using"><info><title>Zend_Text_Figlet の使用法</title></info>
+    <example xml:id="zend.text.figlet.example.using"><title>Zend_Text_Figlet の使用法</title>
         
 
         <para>

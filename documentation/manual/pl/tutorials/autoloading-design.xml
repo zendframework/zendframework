@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.design"><info><title>Cele i budowa</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.design"><title>Cele i budowa</title>
     
 
-    <section xml:id="learning.autoloading.design.naming"><info><title>Konwencja nazewnictwa klas</title></info>
+    <section xml:id="learning.autoloading.design.naming"><title>Konwencja nazewnictwa klas</title>
         
 
         <para>
@@ -43,7 +43,7 @@
         </para>
     </section>
 
-    <section xml:id="learning.autoloading.design.autoloader"><info><title>Konwencja nazewnictwa i budowa autoloadera</title></info>
+    <section xml:id="learning.autoloading.design.autoloader"><title>Konwencja nazewnictwa i budowa autoloadera</title>
         
 
         <para>

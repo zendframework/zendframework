@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><info><title>Индексация<!--Building Indexes--></title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><title>Индексация<!--Building Indexes--></title>
     
 
-    <section xml:id="zend.search.lucene.index-creation.creating"><info><title>Создание нового индекса<!--Creating a New Index--></title></info>
+    <section xml:id="zend.search.lucene.index-creation.creating"><title>Создание нового индекса<!--Creating a New Index--></title>
         
 
         <para>
@@ -50,7 +50,7 @@ $index->addDocument($doc);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.updating"><info><title>Обновление индекса<!--Updating Index--></title></info>
+    <section xml:id="zend.search.lucene.index-creation.updating"><title>Обновление индекса<!--Updating Index--></title>
         
 
         <para>
@@ -78,7 +78,7 @@ $index->addDocument($doc);
 ?>   ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.document-updating"><info><title>Обновление документов<!--Updating Documents--></title></info>
+    <section xml:id="zend.search.lucene.index-creation.document-updating"><title>Обновление документов<!--Updating Documents--></title>
         
 
         <para>
@@ -108,7 +108,7 @@ foreach ($hits as $hit) {
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.counting"><info><title>Получение размера индекса<!--Retrieving Index size--></title></info>
+    <section xml:id="zend.search.lucene.index-creation.counting"><title>Получение размера индекса<!--Retrieving Index size--></title>
         
 
         <para>
@@ -170,7 +170,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.optimization"><info><title>Оптимизация индекса<!--Index optimization--></title></info>
+    <section xml:id="zend.search.lucene.index-creation.optimization"><title>Оптимизация индекса<!--Index optimization--></title>
         
 
         <para>
@@ -250,7 +250,7 @@ $index->optimize();
 -->
         </para>
 
-        <section xml:id="zend.search.lucene.index-creation.optimization.maxbuffereddocs"><info><title>Опция автоматической оптимизации <emphasis>MaxBufferedDocs</emphasis><!--<emphasis>MaxBufferedDocs</emphasis> auto-optimization option--></title></info>
+        <section xml:id="zend.search.lucene.index-creation.optimization.maxbuffereddocs"><title>Опция автоматической оптимизации <emphasis>MaxBufferedDocs</emphasis><!--<emphasis>MaxBufferedDocs</emphasis> auto-optimization option--></title>
             
             <para>
                 <emphasis>MaxBufferedDocs</emphasis> является наименьшим
@@ -281,7 +281,7 @@ $index->optimize();
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.index-creation.optimization.maxmergedocs"><info><title>Опция автоматической оптимизации <emphasis>MaxMergeDocs</emphasis><!--<emphasis>MaxMergeDocs</emphasis> auto-optimization option--></title></info>
+        <section xml:id="zend.search.lucene.index-creation.optimization.maxmergedocs"><title>Опция автоматической оптимизации <emphasis>MaxMergeDocs</emphasis><!--<emphasis>MaxMergeDocs</emphasis> auto-optimization option--></title>
             
             <para>
                 <emphasis>MaxMergeDocs</emphasis> является наибольшим количеством
@@ -321,7 +321,7 @@ $index->optimize();
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.index-creation.optimization.mergefactor"><info><title>Опция автоматической оптимизации <emphasis>MergeFactor</emphasis><!--<emphasis>MergeFactor</emphasis> auto-optimization option--></title></info>
+        <section xml:id="zend.search.lucene.index-creation.optimization.mergefactor"><title>Опция автоматической оптимизации <emphasis>MergeFactor</emphasis><!--<emphasis>MergeFactor</emphasis> auto-optimization option--></title>
             
             <para>
                 <emphasis>MergeFactor</emphasis> определяет, как часто
@@ -395,7 +395,7 @@ $index->optimize();
         </section>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.limitations"><info><title>Ограничения<!--Limitationas--></title></info>
+    <section xml:id="zend.search.lucene.index-creation.limitations"><title>Ограничения<!--Limitationas--></title>
         
 
         <para>

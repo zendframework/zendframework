@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><info><title>Indexes Bouwen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><title>Indexes Bouwen</title>
     
 
-    <section xml:id="zend.search.lucene.index-creation.creating"><info><title>Een Nieuwe Index Maken</title></info>
+    <section xml:id="zend.search.lucene.index-creation.creating"><title>Een Nieuwe Index Maken</title>
         
 
         <para>
@@ -73,7 +73,7 @@ $index->commit();
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.updating"><info><title>Index Updaten</title></info>
+    <section xml:id="zend.search.lucene.index-creation.updating"><title>Index Updaten</title>
         
 
         <para>
@@ -113,7 +113,7 @@ $index->commit();
             kunnen worden geraadpleegd om indexes te optimaliseren met deze versie van Zend_Search_Lucene.
         </para>
     </section>
-    <section xml:id="zend.search.lucene.index-creation.document-updating"><info><title>Documenten updaten</title></info>
+    <section xml:id="zend.search.lucene.index-creation.document-updating"><title>Documenten updaten</title>
         
 
         <para>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><info><title>Wprowadzenie</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><title>Wprowadzenie</title>
 
     
 
-    <section xml:id="zend.mail.introduction.getting-started"><info><title>Getting started</title></info>
+    <section xml:id="zend.mail.introduction.getting-started"><title>Getting started</title>
 
         
 
@@ -15,7 +15,7 @@
             za pomocą <code>Zend_Mail_Transport_Smtp</code>.
         </para>
 
-        <example xml:id="zend.mail.introduction.example-1"><info><title>Wysyłanie prostego e-maila za pomocą Zend_Mail</title></info>
+        <example xml:id="zend.mail.introduction.example-1"><title>Wysyłanie prostego e-maila za pomocą Zend_Mail</title>
             
             <para>
                 Prosty e-mail składa się z odbiorców, z tematu, treści i z nadawcy.
@@ -34,7 +34,7 @@ $mail->send();
 
         </example>
 
-        <note><info><title>Minimalne definicje</title></info>
+        <note><title>Minimalne definicje</title>
             
             <para>
                 Aby wysłać e-mail za pomocą <code>Zend_Mail</code> musisz określić chociaż
@@ -70,7 +70,7 @@ $mail->setBodyText('This is the text of the mail.')
 
     </section>
 
-    <section xml:id="zend.mail.introduction.sendmail"><info><title>Configuring the default sendmail transport</title></info>
+    <section xml:id="zend.mail.introduction.sendmail"><title>Configuring the default sendmail transport</title>
 
         
 
@@ -83,7 +83,7 @@ $mail->setBodyText('This is the text of the mail.')
             method of <code>Zend_Mail</code>.
         </para>
 
-        <example xml:id="zend.mail.introduction.sendmail.example-1"><info><title>Passing additional parameters to the Zend_Mail_Transport_Sendmail transport</title></info>
+        <example xml:id="zend.mail.introduction.sendmail.example-1"><title>Passing additional parameters to the Zend_Mail_Transport_Sendmail transport</title>
 
             
 
@@ -107,7 +107,7 @@ $mail->send();
 
         </example>
 
-        <note><info><title>Safe mode restrictions</title></info>
+        <note><title>Safe mode restrictions</title>
             
             <para>
                 The optional additional parameters will be cause the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><code>mail()</code></link> function to fail

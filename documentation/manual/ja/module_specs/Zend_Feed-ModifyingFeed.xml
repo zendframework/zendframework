@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>フィードおよびエントリの構造の変更</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><title>フィードおよびエントリの構造の変更</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         妥当な形式の <acronym>XML</acronym> でファイルに保存したりサーバに送信したりといったことが簡単にできます。
     </para>
 
-    <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>既存のフィードエントリの変更</title></info>
+    <example xml:id="zend.feed.modifying-feed.example.modifying"><title>既存のフィードエントリの変更</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -45,7 +45,7 @@ echo $entry->saveXML();
         明示的に名前空間を指定しない限りデフォルトの名前空間に配置されます。
     </para>
 
-    <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>独自の名前空間の要素としての Atom エントリの作成</title></info>
+    <example xml:id="zend.feed.modifying-feed.example.creating"><title>独自の名前空間の要素としての Atom エントリの作成</title>
         
 
         <programlisting language="php"><![CDATA[

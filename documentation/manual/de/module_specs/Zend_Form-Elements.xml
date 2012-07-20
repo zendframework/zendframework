@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.elements"><info><title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.elements"><title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title>
 
 
     <para>
@@ -48,7 +48,7 @@
         nachgelesen werden.
     </para>
 
-    <section xml:id="zend.form.elements.loaders"><info><title>Plugin Loader</title></info>
+    <section xml:id="zend.form.elements.loaders"><title>Plugin Loader</title>
 
 
         <para>
@@ -114,7 +114,7 @@
             zwischen Forms zu teilen und eigene Funktionalitäten zu kapseln.
         </para>
 
-        <example xml:id="zend.form.elements.loaders.customLabel"><info><title>Eigenes Label</title></info>
+        <example xml:id="zend.form.elements.loaders.customLabel"><title>Eigenes Label</title>
 
 
             <para>
@@ -199,7 +199,7 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
         </example>
     </section>
 
-    <section xml:id="zend.form.elements.filters"><info><title>Filter</title></info>
+    <section xml:id="zend.form.elements.filters"><title>Filter</title>
 
 
         <para>
@@ -253,7 +253,7 @@ $element->addFilter('alnum');
             großgeschrieben werden.
         </para>
 
-        <note><info><title>Eigene Filterklassen verwenden</title></info>
+        <note><title>Eigene Filterklassen verwenden</title>
 
 
             <para>
@@ -332,7 +332,7 @@ $unfiltered = $element->getUnfilteredValue();
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.elements.validators"><info><title>Prüfungen</title></info>
+    <section xml:id="zend.form.elements.validators"><title>Prüfungen</title>
 
 
         <para>
@@ -375,7 +375,7 @@ $element->addValidator('alnum');
             großgeschrieben werden.
         </para>
 
-        <note><info><title>Eigene Prüfklassen verwenden</title></info>
+        <note><title>Eigene Prüfklassen verwenden</title>
 
 
             <para>
@@ -428,7 +428,7 @@ $element->addValidator('StringLength', false, array(6, 20));
 $validator = new Zend_Validate_StringLength(6, 20);
 ]]></programlisting>
 
-        <note><info><title>Eigene Fehlermeldungen für Prüfungen anbieten</title></info>
+        <note><title>Eigene Fehlermeldungen für Prüfungen anbieten</title>
 
 
             <para>
@@ -514,7 +514,7 @@ if ($element->isValid($value)) {
 }
 ]]></programlisting>
 
-        <note><info><title>Die Prüfung findet an gefilterten Werte statt</title></info>
+        <note><title>Die Prüfung findet an gefilterten Werte statt</title>
 
 
             <para>
@@ -525,7 +525,7 @@ if ($element->isValid($value)) {
             </para>
         </note>
 
-        <note><info><title>Prüfungskontext</title></info>
+        <note><title>Prüfungskontext</title>
 
 
             <para>
@@ -650,7 +650,7 @@ $messages = $element->getMessages();
             gesehen werden.
         </para>
 
-        <note><info><title>Verwenden von Zend_Form_Elements als generell-eingesetzte Prüfung</title></info>
+        <note><title>Verwenden von Zend_Form_Elements als generell-eingesetzte Prüfung</title>
 
 
             <para>
@@ -660,7 +660,7 @@ $messages = $element->getMessages();
             </para>
         </note>
 
-        <note><info><title>Wann wird ein Element als leer erkannt?</title></info>
+        <note><title>Wann wird ein Element als leer erkannt?</title>
 
 
             <para>
@@ -754,7 +754,7 @@ $messages = $element->getMessages();
             </listitem>
         </itemizedlist>
 
-        <section xml:id="zend.form.elements.validators.errors"><info><title>Eigene Fehlermeldungen</title></info>
+        <section xml:id="zend.form.elements.validators.errors"><title>Eigene Fehlermeldungen</title>
 
 
             <para>
@@ -851,7 +851,7 @@ $messages = $element->getMessages();
         </section>
     </section>
 
-    <section xml:id="zend.form.elements.decorators"><info><title>Dekoratoren</title></info>
+    <section xml:id="zend.form.elements.decorators"><title>Dekoratoren</title>
 
 
         <para>
@@ -919,7 +919,7 @@ $messages = $element->getMessages();
             </listitem>
         </itemizedlist>
 
-        <note><info><title>Standard Dekoratoren müssen nicht geladen werden</title></info>
+        <note><title>Standard Dekoratoren müssen nicht geladen werden</title>
 
 
             <para>
@@ -991,7 +991,7 @@ $this->addDecorators(array(
             <link linkend="zend.form.decorators">Kapitel über Zend_Form_Decorator</link>.
         </para>
 
-        <note><info><title>Mehrere Dekoratoren des gleichen Typs verwenden</title></info>
+        <note><title>Mehrere Dekoratoren des gleichen Typs verwenden</title>
 
 
             <para>
@@ -1113,7 +1113,7 @@ echo $element->renderHtmlTag("Das ist der Inhalt des HTML Tags");
         </para>
     </section>
 
-    <section xml:id="zend.form.elements.metadata"><info><title>Metadaten und Attribute</title></info>
+    <section xml:id="zend.form.elements.metadata"><title>Metadaten und Attribute</title>
 
 
         <para>
@@ -1250,7 +1250,7 @@ $element->class = 'text;
         </para>
     </section>
 
-    <section xml:id="zend.form.elements.standard"><info><title>Standard Elemente</title></info>
+    <section xml:id="zend.form.elements.standard"><title>Standard Elemente</title>
 
 
         <para>
@@ -1261,7 +1261,7 @@ $element->class = 'text;
         </para>
     </section>
 
-    <section xml:id="zend.form.elements.methods"><info><title>Zend_Form_Element Methoden</title></info>
+    <section xml:id="zend.form.elements.methods"><title>Zend_Form_Element Methoden</title>
 
 
         <para>
@@ -1492,7 +1492,7 @@ $element->class = 'text;
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.elements.config"><info><title>Konfiguration</title></info>
+    <section xml:id="zend.form.elements.config"><title>Konfiguration</title>
 
 
         <para>
@@ -1585,7 +1585,7 @@ decorators.label.decorator = "Label"
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.elements.custom"><info><title>Eigene Elemente</title></info>
+    <section xml:id="zend.form.elements.custom"><title>Eigene Elemente</title>
 
 
         <para>

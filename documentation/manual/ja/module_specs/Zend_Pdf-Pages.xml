@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>ページの操作</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><title>ページの操作</title>
     
-    <section xml:id="zend.pdf.pages.creation"><info><title>ページの作成</title></info>
+    <section xml:id="zend.pdf.pages.creation"><title>ページの作成</title>
         
         <para>
             <acronym>PDF</acronym> ドキュメントのページは、<classname>Zend_Pdf</classname> の
@@ -60,7 +60,7 @@
             一般的な配列と同じように操作できます。
         </para>
 
-        <example xml:id="zend.pdf.pages.example-1"><info><title>PDF ドキュメントのページの操作</title></info>
+        <example xml:id="zend.pdf.pages.example-1"><title>PDF ドキュメントのページの操作</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -80,14 +80,14 @@ unset($pdf->pages[$id]);
         </example>
     </section>
 
-    <section xml:id="zend.pdf.pages.cloning"><info><title>ページの複製</title></info>
+    <section xml:id="zend.pdf.pages.cloning"><title>ページの複製</title>
         
         <para>
             既存の <acronym>PDF</acronym> ページを複製するには、新しい <classname>Zend_Pdf_Page</classname>
             オブジェクトを作成する際に既存のページをパラメータとして指定します。
         </para>
 
-        <example xml:id="zend.pdf.pages.example-2"><info><title>既存のページの複製</title></info>
+        <example xml:id="zend.pdf.pages.example-2"><title>既存のページの複製</title>
             
             <programlisting language="php"><![CDATA[
 ...

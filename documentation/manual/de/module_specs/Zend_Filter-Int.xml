@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.int"><info><title>Int</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.int"><title>Int</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         zu konvertieren.
     </para>
 
-    <section xml:id="zend.filter.set.int.options"><info><title>Unterstützte Optionen für Zend_Filter_Int</title></info>
+    <section xml:id="zend.filter.set.int.options"><title>Unterstützte Optionen für Zend_Filter_Int</title>
         
 
         <para>
@@ -15,7 +15,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.int.basic"><info><title>Einfache Verwendung</title></info>
+    <section xml:id="zend.filter.set.int.basic"><title>Einfache Verwendung</title>
         
 
         <para>

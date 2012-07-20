@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>דרישות Zend Framework</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><title>דרישות Zend Framework</title>
 
     
 
-    <section xml:id="requirements.introduction"><info><title>הקדמה</title></info>
+    <section xml:id="requirements.introduction"><title>הקדמה</title>
 
         
 
@@ -18,7 +18,7 @@
             קישורים ידידותיים יכולים לעזור בקידום האתר וקיצור הקישורים בעצם, אבל הם אינם משפיעים ישירות על התפעול של המערכת.
         </para>
 
-        <section xml:id="requirements.version"><info><title>גרסאת PHP</title></info>
+        <section xml:id="requirements.version"><title>גרסאת PHP</title>
 
             
 
@@ -32,7 +32,7 @@
 
         </section>
 
-        <section xml:id="requirements.extensions"><info><title>תוספי PHP</title></info>
+        <section xml:id="requirements.extensions"><title>תוספי PHP</title>
 
             
 
@@ -48,7 +48,7 @@
                 מרבית הרכיבים השתמשו אוטומטית בתוספים מסויימים אשר מותקנים בשרת במידה והם קיימים כדי לשפר את ביצועי המערכת, אך עדיין יתפקדו כראוי גם אם התוספים הללו לא מותקנים.
             </para>
 
-            <table frame="all" xml:id="requirements.extensions.table-1"><info><title>תוספי PHP אשר Zend Framework נעזר בהם</title></info>
+            <table frame="all" xml:id="requirements.extensions.table-1"><title>תוספי PHP אשר Zend Framework נעזר בהם</title>
                 
                 <tgroup cols="3">
                     <thead>
@@ -628,7 +628,7 @@
 
         </section>
 
-        <section xml:id="requirements.zendcomponents"><info><title>רכיבי Zend Framework</title></info>
+        <section xml:id="requirements.zendcomponents"><title>רכיבי Zend Framework</title>
 
             
 
@@ -643,7 +643,7 @@
                 מרבית הרכיבים השתמשו אוטומטית בתוספים מסויימים אשר מותקנים בשרת במידה והם קיימים כדי לשפר את ביצועי המערכת, אך עדיין יתפקדו כראוי גם אם התוספים הללו לא מותקנים.
             </para>
 
-            <table frame="all" xml:id="requirements.zendcomponents.table-1"><info><title>רכיבי Zend Framework והתוספים בהם הם משתמשים</title></info>
+            <table frame="all" xml:id="requirements.zendcomponents.table-1"><title>רכיבי Zend Framework והתוספים בהם הם משתמשים</title>
                 
                 <tgroup cols="4">
                     <thead>
@@ -1167,7 +1167,7 @@
 
         </section>
 
-        <section xml:id="requirements.dependencies"><info><title>תלות של רכיבים ב Zend Framework ברכיבים אחרים</title></info>
+        <section xml:id="requirements.dependencies"><title>תלות של רכיבים ב Zend Framework ברכיבים אחרים</title>
 
             
 
@@ -1188,7 +1188,7 @@
                 </para>
             </note>
 
-            <table frame="all" xml:id="requirements.dependencies.table-1"><info><title>תלות של רכיבים ב Zend Framework ברכיבים אחרים</title></info>
+            <table frame="all" xml:id="requirements.dependencies.table-1"><title>תלות של רכיבים ב Zend Framework ברכיבים אחרים</title>
                 
                 <tgroup cols="3">
                     <colspec colwidth="2in"/>

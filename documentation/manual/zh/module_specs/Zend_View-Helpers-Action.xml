@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><info><title>动作视图助手</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><title>动作视图助手</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         <code>Action</code>视图助手的API和大部分MVC组件调用控制器动作的方式一样：<code>action($action,$controller, $module = null, array $params = array())</code>。<code>$action</code> 和 <code>$controller</code> 是必须的；如果没有指定模块，缺省模块将被使用。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.action.usage"><info><title>动作视图助手的基本用法</title></info>
+    <example xml:id="zend.view.helpers.initial.action.usage"><title>动作视图助手的基本用法</title>
         
 
         <para>

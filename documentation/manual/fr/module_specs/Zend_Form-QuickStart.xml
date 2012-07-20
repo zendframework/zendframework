@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><info><title>Zend_Form démarrage rapide</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><title>Zend_Form démarrage rapide</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         formulaires <classname>Zend_Form</classname>.
     </para>
 
-    <section xml:id="zend.form.quickstart.create"><info><title>Créer un objet de formulaire</title></info>
+    <section xml:id="zend.form.quickstart.create"><title>Créer un objet de formulaire</title>
         
 
         <para>Instanciez simplement un objet <classname>Zend_Form</classname> :</para>
@@ -49,7 +49,7 @@ $form->setAttrib('id', 'login');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.quickstart.elements"><info><title>Ajouter des éléments au formulaire</title></info>
+    <section xml:id="zend.form.quickstart.elements"><title>Ajouter des éléments au formulaire</title>
         
 
         <para>
@@ -231,7 +231,7 @@ $form->addElement('text', 'username', array(
         </note>
     </section>
 
-    <section xml:id="zend.form.quickstart.render"><info><title>Rendre (visuellement) un formulaire</title></info>
+    <section xml:id="zend.form.quickstart.render"><title>Rendre (visuellement) un formulaire</title>
         
 
         <para>
@@ -331,7 +331,7 @@ $form->addElement('text', 'username', array('order' => 10));
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.quickstart.validate"><info><title>Vérifier qu'un formulaire est valide</title></info>
+    <section xml:id="zend.form.quickstart.validate"><title>Vérifier qu'un formulaire est valide</title>
         
 
         <para>
@@ -401,7 +401,7 @@ $values = $form->getValidValues($_POST);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.quickstart.errorstatus"><info><title>Les statuts d'erreur</title></info>
+    <section xml:id="zend.form.quickstart.errorstatus"><title>Les statuts d'erreur</title>
         
 
         <para>
@@ -429,7 +429,7 @@ if (!$form->isValid($_POST)) {
         </para>
     </section>
 
-    <section xml:id="zend.form.quickstart.puttingtogether"><info><title>Assembler le tout ensemble</title></info>
+    <section xml:id="zend.form.quickstart.puttingtogether"><title>Assembler le tout ensemble</title>
         
 
         <para>
@@ -537,7 +537,7 @@ class UserController extends Zend_Controller_Action
         </para>
     </section>
 
-    <section xml:id="zend.form.quickstart.config"><info><title>Utiliser un objet <classname>Zend_Config</classname></title></info>
+    <section xml:id="zend.form.quickstart.config"><title>Utiliser un objet <classname>Zend_Config</classname></title>
         
 
         <para>
@@ -589,7 +589,7 @@ $form   = new Zend_Form($config->user->login);
         <para>et tout le formulaire sera défini.</para>
     </section>
 
-    <section xml:id="zend.form.quickstart.conclusion"><info><title>Conclusion</title></info>
+    <section xml:id="zend.form.quickstart.conclusion"><title>Conclusion</title>
         
 
         <para>

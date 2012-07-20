@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.design"><info><title>Ziele und Design</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.design"><title>Ziele und Design</title>
     
 
-    <section xml:id="learning.autoloading.design.naming"><info><title>Konventionen für Klassennamen</title></info>
+    <section xml:id="learning.autoloading.design.naming"><title>Konventionen für Klassennamen</title>
         
 
         <para>
@@ -42,7 +42,7 @@
         </para>
     </section>
 
-    <section xml:id="learning.autoloading.design.autoloader"><info><title>Autoloader Konventionen und Design</title></info>
+    <section xml:id="learning.autoloading.design.autoloader"><title>Autoloader Konventionen und Design</title>
         
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><info><title>Wprowadzenie</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><title>Wprowadzenie</title>
 
     
 
@@ -33,7 +33,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.auth.introduction.adapters"><info><title>Adaptery</title></info>
+    <section xml:id="zend.auth.introduction.adapters"><title>Adaptery</title>
 
         
 
@@ -107,7 +107,7 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
 
     </section>
 
-    <section xml:id="zend.auth.introduction.results"><info><title>Resultat</title></info>
+    <section xml:id="zend.auth.introduction.results"><title>Resultat</title>
 
         
 
@@ -213,7 +213,7 @@ switch ($result->getCode()) {
 
     </section>
 
-    <section xml:id="zend.auth.introduction.persistence"><info><title>Trwałość uwierzytelnionej tożsamości</title></info>
+    <section xml:id="zend.auth.introduction.persistence"><title>Trwałość uwierzytelnionej tożsamości</title>
 
         
 
@@ -231,7 +231,7 @@ switch ($result->getCode()) {
             aplikacjach serwerowych.
         </para>
 
-        <section xml:id="zend.auth.introduction.persistence.default"><info><title>Domyślne przechowywanie w sesji PHP</title></info>
+        <section xml:id="zend.auth.introduction.persistence.default"><title>Domyślne przechowywanie w sesji PHP</title>
 
             
 
@@ -261,7 +261,7 @@ switch ($result->getCode()) {
                 </para>
             </note>
 
-            <example xml:id="zend.auth.introduction.persistence.default.example"><info><title>Modyfikowanie przestrzeni nazw sesji</title></info>
+            <example xml:id="zend.auth.introduction.persistence.default.example"><title>Modyfikowanie przestrzeni nazw sesji</title>
 
                 
 
@@ -297,7 +297,7 @@ $result = $auth->authenticate($authAdapter);
 
         </section>
 
-        <section xml:id="zend.auth.introduction.persistence.custom"><info><title>Implementacja własnego pojemnika</title></info>
+        <section xml:id="zend.auth.introduction.persistence.custom"><title>Implementacja własnego pojemnika</title>
 
             
 
@@ -310,7 +310,7 @@ $result = $auth->authenticate($authAdapter);
                 klasy do metody <methodname>Zend_Auth::setStorage()</methodname>.
             </para>
 
-            <example xml:id="zend.auth.introduction.persistence.custom.example"><info><title>Użycie własnej klasy do przechowywania tożsamości</title></info>
+            <example xml:id="zend.auth.introduction.persistence.custom.example"><title>Użycie własnej klasy do przechowywania tożsamości</title>
 
                 
 
@@ -410,7 +410,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 
     </section>
 
-    <section xml:id="zend.auth.introduction.using"><info><title>Użycie</title></info>
+    <section xml:id="zend.auth.introduction.using"><title>Użycie</title>
 
         
 

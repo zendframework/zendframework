@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.frontends"><info><title>Zend_Cache前端</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.frontends"><title>Zend_Cache前端</title>
     
 
-    <section xml:id="zend.cache.frontends.core"><info><title>Zend_Cache_Core</title></info>
+    <section xml:id="zend.cache.frontends.core"><title>Zend_Cache_Core</title>
         
-        <section xml:id="zend.cache.frontends.core.introduction"><info><title>简介</title></info>
+        <section xml:id="zend.cache.frontends.core.introduction"><title>简介</title>
             
             <para>
                 <code>Zend_Cache_Core</code>是一个特别的前端,因为他是模块的核心. 它是一个一般化(generic)的缓存前端,并且由其他类扩展.
@@ -13,12 +13,12 @@
                所有的前端继承自<code>Zend_Cache_Core</code>因此它的方法和选项(描述如下)应该在其他的前端中可用,所以这里没有进行文档化.
             </para></note>
         </section>
-        <section xml:id="zend.cache.frontends.core.options"><info><title>可用选项</title></info>
+        <section xml:id="zend.cache.frontends.core.options"><title>可用选项</title>
             
             <para>
                 这些选项被传递给如前面例子中演示的工厂方法.
             </para>
-            <table xml:id="zend.cache.frontends.core.options.table"><info><title>核心前端选项</title></info>
+            <table xml:id="zend.cache.frontends.core.options.table"><title>核心前端选项</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -100,7 +100,7 @@
               </table>
         </section>
 
-        <section xml:id="zend.cache.core.examples"><info><title>例子</title></info>
+        <section xml:id="zend.cache.core.examples"><title>例子</title>
             
             <para>
                 An example is given in the manual at the very beginning.
@@ -211,23 +211,23 @@ if (!($cache->test($id))) {
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.output"><info><title>Zend_Cache_Frontend_Output</title></info>
+    <section xml:id="zend.cache.frontends.output"><title>Zend_Cache_Frontend_Output</title>
         
-        <section xml:id="zend.cache.frontends.output.introduction"><info><title>简介</title></info>
+        <section xml:id="zend.cache.frontends.output.introduction"><title>简介</title>
             
             <para>
                 <code>Zend_Cache_Frontend_Output</code> 是一个输出捕捉前端.它在PHP中使用输出缓冲捕获<code>start()</code> 和
                 <code>end()</code> 方法间的一切输出.
             </para>
         </section>
-        <section xml:id="zend.cache.frontends.output.options"><info><title>可用的选项</title></info>
+        <section xml:id="zend.cache.frontends.output.options"><title>可用的选项</title>
             
             <para>
                 该前端除了<code>Zend_Cache_Core</code>那些选项外没有任何特定的选项.
             </para>
         </section>
 
-        <section xml:id="zend.cache.frontends.output.examples"><info><title>例子</title></info>
+        <section xml:id="zend.cache.frontends.output.examples"><title>例子</title>
             
             <para>
                 An example is given in the manual at the very beginning. Here it is with minor changes:
@@ -254,9 +254,9 @@ echo 'This is never cached ('.time().').';
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.function"><info><title>Zend_Cache_Frontend_Function</title></info>
+    <section xml:id="zend.cache.frontends.function"><title>Zend_Cache_Frontend_Function</title>
         
-        <section xml:id="zend.cache.frontends.function.introduction"><info><title>Introduction</title></info>
+        <section xml:id="zend.cache.frontends.function.introduction"><title>Introduction</title>
             
             <para>
                 <code>Zend_Cache_Frontend_Function</code> caches the results of function calls. It has
@@ -264,9 +264,9 @@ echo 'This is never cached ('.time().').';
                 for the call in an array.
             </para>
         </section>
-        <section xml:id="zend.cache.frontends.function.options"><info><title>A可用的选项</title></info>
+        <section xml:id="zend.cache.frontends.function.options"><title>A可用的选项</title>
             
-            <table xml:id="zend.cache.frontends.function.options.table"><info><title>函数前端选项</title></info>
+            <table xml:id="zend.cache.frontends.function.options.table"><title>函数前端选项</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -307,7 +307,7 @@ echo 'This is never cached ('.time().').';
               </table>
         </section>
 
-        <section xml:id="zend.cache.frontends.function.examples"><info><title>例子</title></info>
+        <section xml:id="zend.cache.frontends.function.examples"><title>例子</title>
             
             <para>
                 在PHP中使用 <code>call()</code> 函数于使用 <code>call_user_func_array()</code>相同:
@@ -334,18 +334,18 @@ $cache->call('veryExpensiveFunc', $params);
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.class"><info><title>Zend_Cache_Frontend_Class</title></info>
+    <section xml:id="zend.cache.frontends.class"><title>Zend_Cache_Frontend_Class</title>
         
-        <section xml:id="zend.cache.frontends.class.introduction"><info><title>Introduction</title></info>
+        <section xml:id="zend.cache.frontends.class.introduction"><title>Introduction</title>
             
             <para>
                 <code>Zend_Cache_Frontend_Class</code> is different from <code>Zend_Cache_Frontend_Function</code>
                 because it allows caching of object and static method calls.
             </para>
         </section>
-        <section xml:id="zend.cache.frontends.class.options"><info><title>Available options</title></info>
+        <section xml:id="zend.cache.frontends.class.options"><title>Available options</title>
             
-            <table xml:id="zend.cache.frontends.class.options.table"><info><title>Class frontend options</title></info>
+            <table xml:id="zend.cache.frontends.class.options.table"><title>Class frontend options</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -395,7 +395,7 @@ $cache->call('veryExpensiveFunc', $params);
               </table>
         </section>
 
-        <section xml:id="zend.cache.frontends.class.examples"><info><title>Examples</title></info>
+        <section xml:id="zend.cache.frontends.class.examples"><title>Examples</title>
             
             <para>
                 For example, to cache static calls :
@@ -450,9 +450,9 @@ $result = $cache->foobar2('1', '2');
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.file"><info><title>Zend_Cache_Frontend_File</title></info>
+    <section xml:id="zend.cache.frontends.file"><title>Zend_Cache_Frontend_File</title>
         
-        <section xml:id="zend.cache.frontends.file.introduction"><info><title>Introduction</title></info>
+        <section xml:id="zend.cache.frontends.file.introduction"><title>Introduction</title>
             
             <para>
                 <code>Zend_Cache_Frontend_File</code> is a frontend driven by the
@@ -468,9 +468,9 @@ $result = $cache->foobar2('1', '2');
                 is modified, the cache is immediately invalidated.
             </para>
         </section>
-        <section xml:id="zend.cache.frontends.file.options"><info><title>Available options</title></info>
+        <section xml:id="zend.cache.frontends.file.options"><title>Available options</title>
             
-            <table xml:id="zend.cache.frontends.file.options.table"><info><title>File frontend options</title></info>
+            <table xml:id="zend.cache.frontends.file.options.table"><title>File frontend options</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -494,7 +494,7 @@ $result = $cache->foobar2('1', '2');
                   </tgroup>
               </table>
         </section>
-        <section xml:id="zend.cache.frontends.file.examples"><info><title>Examples</title></info>
+        <section xml:id="zend.cache.frontends.file.examples"><title>Examples</title>
             
             <para>
                 Use of this frontend is the same than of <code>Zend_Cache_Core</code>. There
@@ -504,9 +504,9 @@ $result = $cache->foobar2('1', '2');
         </section>
     </section>
 
-    <section xml:id="zend.cache.frontends.page"><info><title>Zend_Cache_Frontend_Page</title></info>
+    <section xml:id="zend.cache.frontends.page"><title>Zend_Cache_Frontend_Page</title>
         
-        <section xml:id="zend.cache.frontends.page.introduction"><info><title>Introduction</title></info>
+        <section xml:id="zend.cache.frontends.page.introduction"><title>Introduction</title>
             
             <para>
                 <code>Zend_Cache_Frontend_Page</code> is like <code>Zend_Cache_Frontend_Output</code>
@@ -526,9 +526,9 @@ $result = $cache->foobar2('1', '2');
                 and if the browser has already the good version).
             </para>
         </section>
-        <section xml:id="zend.cache.frontends.page.options"><info><title>Available options (for this frontend in Zend_Cache factory)</title></info>
+        <section xml:id="zend.cache.frontends.page.options"><title>Available options (for this frontend in Zend_Cache factory)</title>
             
-            <table xml:id="zend.cache.frontends.page.options.table"><info><title>Page frontend options</title></info>
+            <table xml:id="zend.cache.frontends.page.options.table"><title>Page frontend options</title>
                 
                 <tgroup cols="4">
                      <thead>
@@ -665,7 +665,7 @@ $result = $cache->foobar2('1', '2');
                   </tgroup>
               </table>
         </section>
-        <section xml:id="zend.cache.frontends.page.examples"><info><title>Examples</title></info>
+        <section xml:id="zend.cache.frontends.page.examples"><title>Examples</title>
             
             <para>
                 Use of Zend_Cache_Frontend_Page is really trivial :
@@ -735,7 +735,7 @@ $cache->start();
 
             ]]></programlisting>
         </section>
-        <section xml:id="zend.cache.frontends.page.cancel"><info><title> 特殊的取消方法 </title></info>
+        <section xml:id="zend.cache.frontends.page.cancel"><title> 特殊的取消方法 </title>
             
             <para>
                 因为设计问题，在有些情况下（例如使用非 HTTP/200 返回代码时），你可能需要取消当前缓存处理，所以

@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.controller-plugins">
-  <info><title>Controller Plugins</title></info>
+  <title>Controller Plugins</title>
 
   <para>
     Quando usi l'<classname>AbstractActionController</classname> o
@@ -68,7 +68,7 @@ $plugin = $this->url();
 ]]></programlisting>
 
   <section xml:id="zend.mvc.controller-plugins.flashmessenger">
-    <info><title>Il FlashMessenger</title></info>
+    <title>Il FlashMessenger</title>
 
     <para>
       Il <classname>FlashMessenger</classname> è un plugin disegnato
@@ -172,7 +172,7 @@ $plugin = $this->url();
     </para>
 
     <section xml:id="zend.mvc.controller-plugins.examples">
-      <info><title>Esempi</title></info>
+      <title>Esempi</title>
 
       <programlisting language="php"><![CDATA[
 public function processAction()
@@ -196,7 +196,7 @@ public function successAction()
   </section>
 
   <section xml:id="zend.mvc.controller-plugins.forward">
-    <info><title>Il Forward Plugin</title></info>
+    <title>Il Forward Plugin</title>
 
     <para>
       Occasionalmente, vuoi eseguire controller addizionali a partire da
@@ -220,7 +220,7 @@ public function successAction()
     <itemizedlist>
       <listitem>
         <para>
-          <varnane>$name</varnane>, il nome del controller da invocare.
+          <varname>$name</varname>, il nome del controller da invocare.
           Questo dovrebbe essere un nome di classe completamente identificabile,
           oppure un alias definito e riconoscibile dall'istanza Locator attaccata
           al controller invocante.          
@@ -256,7 +256,7 @@ return array(
   </section>
 
   <section xml:id="zend.mvc.controller-plugins.redirect">
-    <info><title>Il Redirect Plugin</title></info>
+    <title>Il Redirect Plugin</title>
 
     <para>
       Ridirezionamenti sono un'operazione tipica in una applicazione. Se
@@ -331,7 +331,7 @@ return $this->redirect()->toRoute('login-success');
   </section>
 
   <section xml:id="zend.mvc.controller-plugins.url">
-    <info><title>L'Url Plugin</title></info>
+    <title>L'Url Plugin</title>
 
     <para>
       Spesso vuoi generare gli URL da una strada definita insieme ai tuoi

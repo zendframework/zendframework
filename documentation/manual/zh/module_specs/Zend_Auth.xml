@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><info><title>简介</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><title>简介</title>
 
     
 
@@ -17,7 +17,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.auth.introduction.adapters"><info><title>适配器</title></info>
+    <section xml:id="zend.auth.introduction.adapters"><title>适配器</title>
 
         
 
@@ -64,7 +64,7 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
 
     </section>
 
-    <section xml:id="zend.auth.introduction.results"><info><title>结果</title></info>
+    <section xml:id="zend.auth.introduction.results"><title>结果</title>
 
         
 
@@ -139,7 +139,7 @@ switch ($result->getCode()) {
 
     </section>
 
-    <section xml:id="zend.auth.introduction.persistence"><info><title>身份的持久（Persistence）</title></info>
+    <section xml:id="zend.auth.introduction.persistence"><title>身份的持久（Persistence）</title>
 
         
 
@@ -151,7 +151,7 @@ switch ($result->getCode()) {
             HTTP是一个无连接的协议，然而，象cookie和session这样的技术已经被开发出来使在服务器端的web应用维护多请求状态变得容易。
         </para>
 
-        <section xml:id="zend.auth.introduction.persistence.default"><info><title>在PHP Session 中的缺省持久（Persistence）</title></info>
+        <section xml:id="zend.auth.introduction.persistence.default"><title>在PHP Session 中的缺省持久（Persistence）</title>
 
             
 
@@ -165,7 +165,7 @@ switch ($result->getCode()) {
                 </para>
             </note>
 
-            <example xml:id="zend.auth.introduction.persistence.default.example"><info><title>修改 Session 名字空间</title></info>
+            <example xml:id="zend.auth.introduction.persistence.default.example"><title>修改 Session 名字空间</title>
 
                 
 
@@ -195,7 +195,7 @@ $result = $auth->authenticate($authAdapter);
 
         </section>
 
-        <section xml:id="zend.auth.introduction.persistence.custom"><info><title>实现订制存储</title></info>
+        <section xml:id="zend.auth.introduction.persistence.custom"><title>实现订制存储</title>
 
             
 
@@ -203,7 +203,7 @@ $result = $auth->authenticate($authAdapter);
                有时候开发者需要使用不同的身份持久行为，而不是<code>Zend_Auth_Storage_Session</code>提供的。对于这样的案例开发者可以简单地实现<code>Zend_Auth_Storage_Interface</code>并给<code>Zend_Auth::setStorage()</code>提供一个类的实例。
             </para>
 
-            <example xml:id="zend.auth.introduction.persistence.custom.example"><info><title>使用定制存储类</title></info>
+            <example xml:id="zend.auth.introduction.persistence.custom.example"><title>使用定制存储类</title>
 
                 
 
@@ -302,7 +302,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 
     </section>
 
-    <section xml:id="zend.auth.introduction.using"><info><title>使用Zend_Auth</title></info>
+    <section xml:id="zend.auth.introduction.using"><title>使用Zend_Auth</title>
 
         
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>View Scripte</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><title>View Scripte</title>
     
 
     <para>
@@ -49,7 +49,7 @@
 <?php endif; ?>
 ]]></programlisting>
 
-    <section xml:id="zend.view.scripts.escaping"><info><title>Ausgaben maskieren</title></info>
+    <section xml:id="zend.view.scripts.escaping"><title>Ausgaben maskieren</title>
         
 
         <para>
@@ -107,7 +107,7 @@ echo $view->render(...);
         </para>
     </section>
 
-    <section xml:id="zend.view.scripts.templates"><info><title>Verwendung alternativer Templatesysteme</title></info>
+    <section xml:id="zend.view.scripts.templates"><title>Verwendung alternativer Templatesysteme</title>
         
 
         <para>
@@ -118,7 +118,7 @@ echo $view->render(...);
             die zweite durch Implementierung von <classname>Zend_View_Interface</classname>.
         </para>
 
-        <section xml:id="zend.view.scripts.templates.scripts"><info><title>Template Systeme die View Scripte verwenden</title></info>
+        <section xml:id="zend.view.scripts.templates.scripts"><title>Template Systeme die View Scripte verwenden</title>
             
 
             <para>
@@ -175,7 +175,7 @@ if ($this->books) {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.view.scripts.templates.interface"><info><title>Ein Templatesystem mit Hilfe von Zend_View_Interface verwenden</title></info>
+        <section xml:id="zend.view.scripts.templates.interface"><title>Ein Templatesystem mit Hilfe von Zend_View_Interface verwenden</title>
             
 
             <para>

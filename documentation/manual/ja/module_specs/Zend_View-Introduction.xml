@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><title>導入</title>
 
     
 
@@ -29,7 +29,7 @@
         そこでビューの出力が作成されます。
     </para>
 
-    <section xml:id="zend.view.introduction.controller"><info><title>コントローラスクリプト</title></info>
+    <section xml:id="zend.view.introduction.controller"><title>コントローラスクリプト</title>
 
         
 
@@ -67,7 +67,7 @@ echo $view->render('booklist.php');
 
     </section>
 
-    <section xml:id="zend.view.introduction.view"><info><title>ビュースクリプト</title></info>
+    <section xml:id="zend.view.introduction.view"><title>ビュースクリプト</title>
 
         
 
@@ -115,7 +115,7 @@ echo $view->render('booklist.php');
 
     </section>
 
-    <section xml:id="zend.view.introduction.options"><info><title>オプション</title></info>
+    <section xml:id="zend.view.introduction.options"><title>オプション</title>
         
 
         <para>
@@ -184,7 +184,7 @@ base/path/
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.view.introduction.shortTags"><info><title>ビュースクリプトでの短いタグ</title></info>
+    <section xml:id="zend.view.introduction.shortTags"><title>ビュースクリプトでの短いタグ</title>
         
 
         <para>
@@ -249,7 +249,7 @@ $view->setUseStreamWrapper(true);
             </listitem>
         </itemizedlist>
 
-        <warning><info><title>ビューストリームラッパーによるパフォーマンスの低下</title></info>
+        <warning><title>ビューストリームラッパーによるパフォーマンスの低下</title>
             
 
             <para>
@@ -264,7 +264,7 @@ $view->setUseStreamWrapper(true);
         </warning>
     </section>
 
-    <section xml:id="zend.view.introduction.accessors"><info><title>ユーティリティメソッド</title></info>
+    <section xml:id="zend.view.introduction.accessors"><title>ユーティリティメソッド</title>
         
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.edit"><info><title>計測値の操作</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.edit"><title>計測値の操作</title>
 
     
 
@@ -50,7 +50,7 @@
         </listitem>
     </itemizedlist>
 
-    <section xml:id="zend.measure.edit.convert"><info><title>変換</title></info>
+    <section xml:id="zend.measure.edit.convert"><title>変換</title>
 
         
 
@@ -71,7 +71,7 @@
             '<code>2</code>' です。
         </para>
 
-        <example xml:id="zend.measure.edit.convert.example-1"><info><title>変換</title></info>
+        <example xml:id="zend.measure.edit.convert.example-1"><title>変換</title>
             
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
@@ -90,7 +90,7 @@ print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
 
     </section>
 
-    <section xml:id="zend.measure.edit.add"><info><title>加減算</title></info>
+    <section xml:id="zend.measure.edit.add"><title>加減算</title>
 
         
 
@@ -105,7 +105,7 @@ print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
         </para>
 
         <para>
-            <example xml:id="zend.measure.edit.add.example-1"><info><title>単位の加算</title></info>
+            <example xml:id="zend.measure.edit.add.example-1"><title>単位の加算</title>
                 
                 <programlisting language="php"><![CDATA[
 // オブジェクトを定義します
@@ -120,7 +120,7 @@ echo $sum; // "300 cm" と出力します
             </example>
         </para>
 
-        <note><info><title>自動的な変換</title></info>
+        <note><title>自動的な変換</title>
             
             <para>
                 あるオブジェクトを別のオブジェクトに足す際には、
@@ -131,7 +131,7 @@ echo $sum; // "300 cm" と出力します
         </note>
 
         <para>
-            <example xml:id="zend.measure.edit.add.example-2"><info><title>減算</title></info>
+            <example xml:id="zend.measure.edit.add.example-2"><title>減算</title>
                 
                 <para>
                     減算も、加算と同じように動作します。
@@ -151,7 +151,7 @@ echo $sum;
 
     </section>
 
-    <section xml:id="zend.measure.edit.equal"><info><title>比較</title></info>
+    <section xml:id="zend.measure.edit.equal"><title>比較</title>
 
         
 
@@ -162,7 +162,7 @@ echo $sum;
         </para>
 
         <para>
-            <example xml:id="zend.measure.edit.equal.example-1"><info><title>異なる計測値</title></info>
+            <example xml:id="zend.measure.edit.equal.example-1"><title>異なる計測値</title>
                 
                 <programlisting language="php"><![CDATA[
 // 値を定義します
@@ -176,7 +176,7 @@ if ($unit->equals($unit2)) {
 }
 ]]></programlisting>
             </example>
-            <example xml:id="zend.measure.edit.equal.example-2"><info><title>同一の計測値</title></info>
+            <example xml:id="zend.measure.edit.equal.example-2"><title>同一の計測値</title>
                 
                 <programlisting language="php"><![CDATA[
 // 値を定義します
@@ -196,7 +196,7 @@ if ($unit->equals($unit2)) {
 
     </section>
 
-    <section xml:id="zend.measure.edit.compare"><info><title>比較</title></info>
+    <section xml:id="zend.measure.edit.compare"><title>比較</title>
 
         
 
@@ -209,7 +209,7 @@ if ($unit->equals($unit2)) {
         </para>
 
         <para>
-            <example xml:id="zend.measure.edit.compare.example-1"><info><title>差</title></info>
+            <example xml:id="zend.measure.edit.compare.example-1"><title>差</title>
                 
                 <programlisting language="php"><![CDATA[
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
@@ -225,7 +225,7 @@ print "Greater:".$unit3->compare($unit2);
 
     </section>
 
-    <section xml:id="zend.measure.edit.changevalue"><info><title>値の変更</title></info>
+    <section xml:id="zend.measure.edit.changevalue"><title>値の変更</title>
 
         
 
@@ -235,7 +235,7 @@ print "Greater:".$unit3->compare($unit2);
         </para>
 
         <para>
-            <example xml:id="zend.measure.edit.changevalue.example-1"><info><title>値の変更</title></info>
+            <example xml:id="zend.measure.edit.changevalue.example-1"><title>値の変更</title>
                 
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
@@ -255,7 +255,7 @@ echo $unit;
 
     </section>
 
-    <section xml:id="zend.measure.edit.changetype"><info><title>型の変更</title></info>
+    <section xml:id="zend.measure.edit.changetype"><title>型の変更</title>
 
         
 
@@ -264,7 +264,7 @@ echo $unit;
             を使用します。
         </para>
 
-        <example xml:id="zend.measure.edit.changetype.example-1"><info><title>型の変更</title></info>
+        <example xml:id="zend.measure.edit.changetype.example-1"><title>型の変更</title>
             
             <programlisting language="php"><![CDATA[
 $unit = new Zend_Measure_Length(1,Zend_Measure_Length::METER);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>Een enkele Atom entry lezen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><title>Een enkele Atom entry lezen</title>
     
 
     <para>
@@ -13,7 +13,7 @@
         het zal automatisch een "anonieme" feed aanmaken om de entry in te kapselen.
     </para>
 
-    <example><info><title>Een alleenstaande entry van een Atom Feed lezen</title></info>
+    <example><title>Een alleenstaande entry van een Atom Feed lezen</title>
         
         <programlisting role="php"><![CDATA[
 <?php
@@ -31,7 +31,7 @@ $entry = $feed->current();
         een document opent dat alleen <code>&lt;entry&gt;</code> elementen bevat:
     </para>
 
-    <example><info><title>Het Entry Object Direct gebruiken voor een Single-Entry Atom Feed</title></info>
+    <example><title>Het Entry Object Direct gebruiken voor een Single-Entry Atom Feed</title>
         
         <programlisting role="php"><![CDATA[
 <?php

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><info><title>Avançado</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><title>Avançado</title>
     
 
-    <section xml:id="zend.search.lucene.advanced.format_migration"><info><title>A partir da versão 1.6, manipulando as transformações no formato de índice</title></info>
+    <section xml:id="zend.search.lucene.advanced.format_migration"><title>A partir da versão 1.6, manipulando as transformações no formato de índice</title>
         
 
         <para>
@@ -79,7 +79,7 @@
             Conversões para versões anteriores de formatos não são suportadas.
         </para>
 
-        <note><info><title>Importante!</title></info>
+        <note><title>Importante!</title>
             
 
             <para>
@@ -91,7 +91,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.search.lucene.advanced.static"><info><title>Usando o índice como propriedade estática</title></info>
+    <section xml:id="zend.search.lucene.advanced.static"><title>Usando o índice como propriedade estática</title>
         
 
         <para>

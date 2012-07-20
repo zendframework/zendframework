@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><info><title>Zend_Mime</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><title>Zend_Mime</title>
     
 
-    <section xml:id="zend.mime.mime.introduction"><info><title>Wprowadzenie</title></info>
+    <section xml:id="zend.mime.mime.introduction"><title>Wprowadzenie</title>
         
         <para>
             <code>Zend_Mime</code> jest klasą wspierającą obsługę wielczęściowych
@@ -15,7 +15,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.mime.static"><info><title>Metody statyczne i stałe</title></info>
+    <section xml:id="zend.mime.mime.static"><title>Metody statyczne i stałe</title>
     
     <para>
         <code>Zend_Mime</code> zapewnia zbiór prostych statycznych metod do pracy z MIME:
@@ -92,7 +92,7 @@
     </para>
     </section>
 
-    <section xml:id="zend.mime.mime.instantiation"><info><title>Tworzenie instancji Zend_Mime</title></info>
+    <section xml:id="zend.mime.mime.instantiation"><title>Tworzenie instancji Zend_Mime</title>
     
     <para>
         Kiedy tworzony jest obiekt <code>Zend_Mime</code>, zapisywane jest pole

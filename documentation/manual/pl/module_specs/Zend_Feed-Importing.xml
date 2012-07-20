@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title>Importowanie kanałów informacyjnych</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><title>Importowanie kanałów informacyjnych</title>
 
     
 
@@ -39,7 +39,7 @@ $feedFromPHP = Zend_Feed::importString($feedString);
         gdy nie jest możliwe odczytanie kanału lub gdy dane są błędne.
     </para>
 
-    <section xml:id="zend.feed.importing.custom"><info><title>Własne kanały</title></info>
+    <section xml:id="zend.feed.importing.custom"><title>Własne kanały</title>
 
         
 
@@ -53,7 +53,7 @@ $feedFromPHP = Zend_Feed::importString($feedString);
             implementujące interfejs <code>Zend_Feed_Builder_Interface</code>.
         </para>
 
-        <section xml:id="zend.feed.importing.custom.importarray"><info><title>Importowanie własnej tablicy</title></info>
+        <section xml:id="zend.feed.importing.custom.importarray"><title>Importowanie własnej tablicy</title>
 
             
 
@@ -210,7 +210,7 @@ array(
 
         </section>
 
-        <section xml:id="zend.feed.importing.custom.importbuilder"><info><title>Importowanie własnego źródła danych</title></info>
+        <section xml:id="zend.feed.importing.custom.importbuilder"><title>Importowanie własnego źródła danych</title>
 
             
 
@@ -262,7 +262,7 @@ $rssFeedFromArray =
 
         </section>
 
-        <section xml:id="zend.feed.importing.custom.dump"><info><title>Zrzucanie zawartości kanału</title></info>
+        <section xml:id="zend.feed.importing.custom.dump"><title>Zrzucanie zawartości kanału</title>
 
             
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><info><title>Uwierzytelnianie SMTP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><title>Uwierzytelnianie SMTP</title>
   
 
   <para>Klasa <code>Zend_Mail</code> obsługuje uwierzytelnianie SMTP, które
@@ -9,7 +9,7 @@
   CRAM-MD5. Wszystkie wymagają wartości 'username' oraz 'password' w tablicy
   konfiguracyjnej.</para>
 
-  <example xml:id="zend.mail.smtp-authentication.example-1"><info><title>Aktywowanie uwierzytelniania w klasie Zend_Mail_Transport_Smtp</title></info>
+  <example xml:id="zend.mail.smtp-authentication.example-1"><title>Aktywowanie uwierzytelniania w klasie Zend_Mail_Transport_Smtp</title>
     
 
     <programlisting role="php"><![CDATA[
@@ -29,7 +29,7 @@ $mail->send($transport);
     ]]></programlisting>
   </example>
 
-  <note><info><title>Typy uwierzytelniania</title></info>
+  <note><title>Typy uwierzytelniania</title>
     
 
     <para>

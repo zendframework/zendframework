@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>Controller Scripts</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><title>Controller Scripts</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         output weer te geven door middel van een bepaald script.
     </para>
 
-    <section xml:id="zend.view.controllers.assign"><info><title>Variabelen toewijzen</title></info>
+    <section xml:id="zend.view.controllers.assign"><title>Variabelen toewijzen</title>
 
         
 
@@ -76,7 +76,7 @@ $view->assign('c', "Zee");
 
     </section>
 
-    <section xml:id="zend.view.controllers.render"><info><title>Een View Script weergeven</title></info>
+    <section xml:id="zend.view.controllers.render"><title>Een View Script weergeven</title>
 
         
 
@@ -99,7 +99,7 @@ echo $view->render('eenView.php');
 
     </section>
 
-    <section xml:id="zend.view.controllers.script-paths"><info><title>View Script Paden</title></info>
+    <section xml:id="zend.view.controllers.script-paths"><title>View Script Paden</title>
 
         
 

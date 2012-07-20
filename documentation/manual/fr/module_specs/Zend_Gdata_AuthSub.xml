@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.authsub"><info><title>Authentification par procédé AuthSub</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.authsub"><title>Authentification par procédé AuthSub</title>
     
 
     <para>
@@ -28,7 +28,7 @@
         l'application, et non par l'application elle-même.
     </para>
 
-    <note><info><title>Jetons sécurisés et certificats</title></info>
+    <note><title>Jetons sécurisés et certificats</title>
         
 
         <para>
@@ -38,7 +38,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.gdata.authsub.login"><info><title>Création d'un client HTTP authentifié avec AuthSub</title></info>
+    <section xml:id="zend.gdata.authsub.login"><title>Création d'un client HTTP authentifié avec AuthSub</title>
         
 
         <para>
@@ -103,7 +103,7 @@ $cal = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.gdata.authsub.logout"><info><title>Destruction de l'authentification AuthSub</title></info>
+    <section xml:id="zend.gdata.authsub.logout"><title>Destruction de l'authentification AuthSub</title>
         
 
         <para>
@@ -127,7 +127,7 @@ if (isset($_GET['logout'])) {
 }
 ]]></programlisting>
 
-        <note><info><title>Notes de sécurité</title></info>
+        <note><title>Notes de sécurité</title>
             
 
             <para>

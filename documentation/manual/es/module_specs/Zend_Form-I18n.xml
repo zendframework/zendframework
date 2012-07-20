@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><info><title>Internacionalización de Zend_Form</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><title>Internacionalización de Zend_Form</title>
     
 
     <para>
@@ -31,7 +31,7 @@
         crear el objeto traducción y los archivos de traducción
     </para>
 
-    <note><info><title>La Traducción Puede Ser Deshabilitado Por Item</title></info>
+    <note><title>La Traducción Puede Ser Deshabilitado Por Item</title>
         
 
         <para>
@@ -47,7 +47,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.form.i18n.initialization"><info><title>Inicializando I18n en formularios</title></info>
+    <section xml:id="zend.form.i18n.initialization"><title>Inicializando I18n en formularios</title>
         
 
         <para>
@@ -142,7 +142,7 @@ $element->setTranslator($translate);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.i18n.standard"><info><title>Objetivos estándar I18n</title></info>
+    <section xml:id="zend.form.i18n.standard"><title>Objetivos estándar I18n</title>
         
 
         <para>Ahora que ya se tiene adjuntado un objeto de traducción, ¿qué se puede traducir

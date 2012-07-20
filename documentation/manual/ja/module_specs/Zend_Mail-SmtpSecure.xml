@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>セキュアな SMTP トランスポート</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><title>セキュアな SMTP トランスポート</title>
         
 
     <para>
@@ -11,7 +11,7 @@
         TLS の場合は 25、<acronym>SSL</acronym> の場合は 465 となります。
     </para>
 
-    <example xml:id="zend.mail.smtp-secure.example-1"><info><title>Zend_Mail_Transport_Smtp によるセキュアな接続の有効化</title></info>
+    <example xml:id="zend.mail.smtp-secure.example-1"><title>Zend_Mail_Transport_Smtp によるセキュアな接続の有効化</title>
         
 
         <programlisting language="php"><![CDATA[

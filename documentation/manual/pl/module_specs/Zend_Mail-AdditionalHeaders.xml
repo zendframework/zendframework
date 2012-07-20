@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><info><title>Dodatkowe nagłówki</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><title>Dodatkowe nagłówki</title>
     
     <para>
         Dodatkowe nagłówki wiadomości mogą być ustawione za pomocą metody
@@ -7,7 +7,7 @@
         jej wartości. Trzeci opcjonalny parametr decyduje o tym, czy nagłówek
         powinien mieć jedną czy wiele wartości:
     </para>
-    <example xml:id="zend.mail.additional-headers.example-1"><info><title>Dodawanie nagłówków do wiadomości e-mail</title></info>
+    <example xml:id="zend.mail.additional-headers.example-1"><title>Dodawanie nagłówków do wiadomości e-mail</title>
         
         <programlisting role="php"><![CDATA[
 require_once 'Zend/Mail.php';

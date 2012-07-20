@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.compress"><info><title>Compression et décompression</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.compress"><title>Compression et décompression</title>
     
     <para>
         Ces deux filtres sont capables de compresser et décompresser des chaines, des fichiers ou des
@@ -50,7 +50,7 @@
         de compressions qu'ils offrent (algorithmes, fichiers, chaines et dossiers)
     </para>
 
-    <section xml:id="zend.filter.set.compress.generic"><info><title>Les bases</title></info>
+    <section xml:id="zend.filter.set.compress.generic"><title>Les bases</title>
         
 
         <para>
@@ -95,7 +95,7 @@ $filter = new Zend_Filter_Compress(array(
 ));
 ]]></programlisting>
 
-        <note><info><title>Adaptateur de compression par défaut</title></info>
+        <note><title>Adaptateur de compression par défaut</title>
             
 
             <para>
@@ -133,7 +133,7 @@ $compressed = $filter->filter('Compressed string');
 // Retourne la chaine décompressée
 ]]></programlisting>
 
-        <note><info><title>Note sur la compression de chaines</title></info>
+        <note><title>Note sur la compression de chaines</title>
             
 
             <para>
@@ -144,7 +144,7 @@ $compressed = $filter->filter('Compressed string');
         </note>
     </section>
 
-    <section xml:id="zend.filter.set.compress.archive"><info><title>Créer une archive</title></info>
+    <section xml:id="zend.filter.set.compress.archive"><title>Créer une archive</title>
         
 
         <para>
@@ -168,7 +168,7 @@ $compressed = $filter->filter('Uncompressed string');
             Dans l'exemple ci-dessus, la chaine est compressée puis retournée dans une archive.
         </para>
 
-        <note><info><title>Les archives existantes seront écrasées</title></info>
+        <note><title>Les archives existantes seront écrasées</title>
             
 
             <para>
@@ -207,7 +207,7 @@ $compressed = $filter->filter('C:\temp\somedir');
 // Retourne true en cas de succès et crée le fichier d'archive
 ]]></programlisting>
 
-        <note><info><title>Ne compressez pas un dossier trop gros ou trop profond</title></info>
+        <note><title>Ne compressez pas un dossier trop gros ou trop profond</title>
             
 
             <para>
@@ -218,7 +218,7 @@ $compressed = $filter->filter('C:\temp\somedir');
         </note>
     </section>
 
-    <section xml:id="zend.filter.set.compress.decompress"><info><title>Décompresser une archive</title></info>
+    <section xml:id="zend.filter.set.compress.decompress"><title>Décompresser une archive</title>
         
 
         <para>
@@ -249,7 +249,7 @@ $compressed = $filter->filter('filename.zip');
 // dans le dossier spécifié
 ]]></programlisting>
 
-        <note><info><title>Les dossiers de cible doivent exister</title></info>
+        <note><title>Les dossiers de cible doivent exister</title>
             
 
             <para>
@@ -259,7 +259,7 @@ $compressed = $filter->filter('filename.zip');
         </note>
     </section>
 
-    <section xml:id="zend.filter.set.compress.bz2"><info><title>Adaptateur Bz2</title></info>
+    <section xml:id="zend.filter.set.compress.bz2"><title>Adaptateur Bz2</title>
         
 
         <para>
@@ -311,7 +311,7 @@ $compressed = $filter->filter('filename.zip');
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.compress.gz"><info><title>Adaptateur Gz</title></info>
+    <section xml:id="zend.filter.set.compress.gz"><title>Adaptateur Gz</title>
         
 
         <para>
@@ -370,7 +370,7 @@ $compressed = $filter->filter('filename.zip');
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.compress.lzf"><info><title>Adaptateur Lzf</title></info>
+    <section xml:id="zend.filter.set.compress.lzf"><title>Adaptateur Lzf</title>
         
 
         <para>
@@ -383,7 +383,7 @@ $compressed = $filter->filter('filename.zip');
             </listitem>
         </itemizedlist>
 
-        <note><info><title>Lzf ne supporte que les chaines de caractères</title></info>
+        <note><title>Lzf ne supporte que les chaines de caractères</title>
             
 
             <para>
@@ -400,7 +400,7 @@ $compressed = $filter->filter('filename.zip');
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.compress.rar"><info><title>Adaptateur Rar</title></info>
+    <section xml:id="zend.filter.set.compress.rar"><title>Adaptateur Rar</title>
         
 
         <para>
@@ -417,7 +417,7 @@ $compressed = $filter->filter('filename.zip');
             </listitem>
         </itemizedlist>
 
-        <note><info><title>Rar ne supporte pas les chaines de caractères</title></info>
+        <note><title>Rar ne supporte pas les chaines de caractères</title>
             
 
             <para>
@@ -429,7 +429,7 @@ $compressed = $filter->filter('filename.zip');
             Cet adaptateur utilise l'extension <acronym>PHP</acronym> Rar.
         </para>
 
-        <note><info><title>Compression Rar non supportée</title></info>
+        <note><title>Compression Rar non supportée</title>
             
 
             <para>
@@ -480,7 +480,7 @@ $compressed = $filter->filter('filename.zip');
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.compress.tar"><info><title>Tar Adapter</title></info>
+    <section xml:id="zend.filter.set.compress.tar"><title>Tar Adapter</title>
         
 
         <para>
@@ -497,7 +497,7 @@ $compressed = $filter->filter('filename.zip');
             </listitem>
         </itemizedlist>
 
-        <note><info><title>Tar ne supporte pas les chaines de caractères</title></info>
+        <note><title>Tar ne supporte pas les chaines de caractères</title>
             
 
             <para>
@@ -545,7 +545,7 @@ $compressed = $filter->filter('filename.zip');
             <methodname>setOptions()</methodname> est aussi disponible et accepte un tableau.
         </para>
 
-        <note><info><title>Utilisation avec des dossiers</title></info>
+        <note><title>Utilisation avec des dossiers</title>
             
 
             <para>
@@ -554,7 +554,7 @@ $compressed = $filter->filter('filename.zip');
         </note>
     </section>
 
-    <section xml:id="zend.filter.set.compress.zip"><info><title>Adaptateur Zip</title></info>
+    <section xml:id="zend.filter.set.compress.zip"><title>Adaptateur Zip</title>
         
 
         <para>
@@ -575,7 +575,7 @@ $compressed = $filter->filter('filename.zip');
             </listitem>
         </itemizedlist>
 
-        <note><info><title>Zip ne supporte pas la décompression vers des chaines</title></info>
+        <note><title>Zip ne supporte pas la décompression vers des chaines</title>
             
 
             <para>

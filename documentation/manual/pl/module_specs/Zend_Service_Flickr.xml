@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.flickr"><info><title>Zend_Service_Flickr</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.flickr"><title>Zend_Service_Flickr</title>
     
-    <section xml:id="zend.service.flickr.introduction"><info><title>Wprowadzenie do przeszukiwania Flickr</title></info>
+    <section xml:id="zend.service.flickr.introduction"><title>Wprowadzenie do przeszukiwania Flickr</title>
         
         <para>
             <code>Zend_Service_Flickr</code> jest prostym API do użycia z serwisem
@@ -14,7 +14,7 @@
             W poniższym przykladzie, używamy metody <code>tagSearch()</code> do
             wyszukiwania zdjęć zawierających etykietę "php".
         </para>
-        <example xml:id="zend.service.flickr.introduction.example-1"><info><title>Proste wyszukiwanie zdjęć Flickr</title></info>
+        <example xml:id="zend.service.flickr.introduction.example-1"><title>Proste wyszukiwanie zdjęć Flickr</title>
             
             <programlisting role="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
@@ -27,7 +27,7 @@ foreach ($results as $result) {
 
             ]]></programlisting>
         </example>
-        <note><info><title>Opcjonalny parametr</title></info>
+        <note><title>Opcjonalny parametr</title>
             
             <para>
                 Metoda <code>tagSearch()</code> akceptuje tablicę opcji jako
@@ -35,7 +35,7 @@ foreach ($results as $result) {
             </para>
         </note>
     </section>
-    <section xml:id="zend.service.flickr.finding-users"><info><title>Wyszukiwanie zdjęć użytkowników Flickr i informacji o nich</title></info>
+    <section xml:id="zend.service.flickr.finding-users"><title>Wyszukiwanie zdjęć użytkowników Flickr i informacji o nich</title>
         
         <para>
             Klasa <code>Zend_Service_Flickr</code> zapewnia kilka możliwości
@@ -64,7 +64,7 @@ foreach ($results as $result) {
                 </para>
             </listitem>
         </itemizedlist>
-        <example xml:id="zend.service.flickr.finding-users.example-1"><info><title>Wyszukiwanie publicznych zdjęć użytkownika serwisu Flickr na podstawie adresu e-mail</title></info>
+        <example xml:id="zend.service.flickr.finding-users.example-1"><title>Wyszukiwanie publicznych zdjęć użytkownika serwisu Flickr na podstawie adresu e-mail</title>
             
             <para>
                 W tym przykładzie, posiadamy adres e-mail użytkownika serwisu
@@ -83,14 +83,14 @@ foreach ($results as $result) {
             ]]></programlisting>
         </example>
     </section>
-    <section xml:id="zend.service.flickr.grouppoolgetphotos"><info><title>Wyszukiwanie zdjęć w Group Pool</title></info>
+    <section xml:id="zend.service.flickr.grouppoolgetphotos"><title>Wyszukiwanie zdjęć w Group Pool</title>
         
         <para>
             Klasa <code>Zend_Service_Flickr</code> pozwala na pobieranie
             zdjęć grupy w oparciu o jej ID. Użyj metody
             <code>groupPoolGetPhotos()</code>:
         </para>
-        <example xml:id="zend.service.flickr.grouppoolgetphotos.example-1"><info><title>Pobieranie zdjęć z Group Pool na podstawie ID grupy:</title></info>
+        <example xml:id="zend.service.flickr.grouppoolgetphotos.example-1"><title>Pobieranie zdjęć z Group Pool na podstawie ID grupy:</title>
             
             <programlisting role="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
@@ -103,7 +103,7 @@ foreach ($results as $result) {
 
             ]]></programlisting>
         </example>
-        <note><info><title>Opcjonalny parametr</title></info>
+        <note><title>Opcjonalny parametr</title>
             
             <para>
                 Metoda <code>groupPoolGetPhotos()</code> akceptuje opcjonalny
@@ -111,14 +111,14 @@ foreach ($results as $result) {
             </para>
         </note>
     </section>
-    <section xml:id="zend.service.flickr.getimagedetails"><info><title>Pobieranie szczegółów zdjęcia Flickr</title></info>
+    <section xml:id="zend.service.flickr.getimagedetails"><title>Pobieranie szczegółów zdjęcia Flickr</title>
         
         <para>
             <code>Zend_Service_Flickr</code> ułatwia pobieranie informacji o
             zdjęciu na podstawie podanego ID zdjęcia. Po prostu użyj metody
             <code>getImageDetails()</code>, tak jak w poniższym przykładzie:
         </para>
-        <example xml:id="zend.service.flickr.getimagedetails.example-1"><info><title>Pobieranie szczegółów zdjęcia Flickr</title></info>
+        <example xml:id="zend.service.flickr.getimagedetails.example-1"><title>Pobieranie szczegółów zdjęcia Flickr</title>
             
             <para>
                 Jeśli posiadasz ID zdjęcia Flickr, pobranie informacji o zdjęciu
@@ -135,7 +135,7 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
             ]]></programlisting>
         </example>
     </section>
-    <section xml:id="zend.service.flickr.classes"><info><title>Klasy wyników Zend_Service_Flickr</title></info>
+    <section xml:id="zend.service.flickr.classes"><title>Klasy wyników Zend_Service_Flickr</title>
         
         <para>
             Poniższe klasy są zwracane przez metody <code>tagSearch()</code> oraz <code>userSearch()</code>:
@@ -145,7 +145,7 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                 <listitem><para><link linkend="zend.service.flickr.classes.image"><code>Zend_Service_Flickr_Image</code></link></para></listitem>
             </itemizedlist>
         </para>
-        <section xml:id="zend.service.flickr.classes.resultset"><info><title>Zend_Service_Flickr_ResultSet</title></info>
+        <section xml:id="zend.service.flickr.classes.resultset"><title>Zend_Service_Flickr_ResultSet</title>
             
             <para>Reprezentuje zestaw wyników wysuzkiwania Flickr.</para>
             <note>
@@ -156,9 +156,9 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                     wyniku używając metody <code>seek()</code>.
                 </para>
             </note>
-            <section xml:id="zend.service.flickr.classes.resultset.properties"><info><title>Właściwości</title></info>
+            <section xml:id="zend.service.flickr.classes.resultset.properties"><title>Właściwości</title>
                 
-                <table xml:id="zend.service.flickr.classes.resultset.properties.table-1"><info><title>Właściwości Zend_Service_Flickr_ResultSet</title></info>
+                <table xml:id="zend.service.flickr.classes.resultset.properties.table-1"><title>Właściwości Zend_Service_Flickr_ResultSet</title>
                     
                     <tgroup cols="3">
                         <thead>
@@ -188,7 +188,7 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                     </tgroup>
                 </table>
             </section>
-            <section xml:id="zend.service.flickr.classes.resultset.totalResults"><info><title>Zend_Service_Flickr_ResultSet::totalResults()</title></info>
+            <section xml:id="zend.service.flickr.classes.resultset.totalResults"><title>Zend_Service_Flickr_ResultSet::totalResults()</title>
                 
                 <para>
                     <methodsynopsis>
@@ -205,14 +205,14 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                 </para>
             </section>
         </section>
-        <section xml:id="zend.service.flickr.classes.result"><info><title>Zend_Service_Flickr_Result</title></info>
+        <section xml:id="zend.service.flickr.classes.result"><title>Zend_Service_Flickr_Result</title>
             
             <para>
                 Pojedynczy wynik wyszukiwania zdjęcia w serwisie Flickr
             </para>
-            <section xml:id="zend.service.flickr.classes.result.properties"><info><title>Właściwości</title></info>
+            <section xml:id="zend.service.flickr.classes.result.properties"><title>Właściwości</title>
                 
-                <table xml:id="zend.service.flickr.classes.result.properties.table-1"><info><title>Właściwości Zend_Service_Flickr_Result</title></info>
+                <table xml:id="zend.service.flickr.classes.result.properties.table-1"><title>Właściwości Zend_Service_Flickr_Result</title>
                     
                     <tgroup cols="3">
                         <thead>
@@ -326,12 +326,12 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                 </para>
             </section>
         </section>
-        <section xml:id="zend.service.flickr.classes.image"><info><title>Zend_Service_Flickr_Image</title></info>
+        <section xml:id="zend.service.flickr.classes.image"><title>Zend_Service_Flickr_Image</title>
             
             <para>Reprezentuje zdjęcie zwrócone przez wyszukiwanie Flickr.</para>
-            <section xml:id="zend.service.flickr.classes.image.properties"><info><title>Właściwości</title></info>
+            <section xml:id="zend.service.flickr.classes.image.properties"><title>Właściwości</title>
                 
-                <table xml:id="zend.service.flickr.classes.image.properties.table-1"><info><title>Właściwości Zend_Service_Flickr_Image</title></info>
+                <table xml:id="zend.service.flickr.classes.image.properties.table-1"><title>Właściwości Zend_Service_Flickr_Image</title>
                     
                     <tgroup cols="3">
                         <thead>

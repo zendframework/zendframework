@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headlink"><info><title>Helper HeadLink</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headlink"><title>Helper HeadLink</title>
     
 
     <para>
@@ -63,7 +63,7 @@
             Placeholder</link>.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.headlink.basicusage"><info><title>Proste użycie helpera HeadLink</title></info>
+    <example xml:id="zend.view.helpers.initial.headlink.basicusage"><title>Proste użycie helpera HeadLink</title>
         
 
         <para>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>Requisitos de Zend Framework</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><title>Requisitos de Zend Framework</title>
     
     <para> Zend Framework requiere un intérprete <acronym>PHP</acronym> 5 con un
         servidor web configurado para manejar scripts <acronym>PHP</acronym>
@@ -20,7 +20,7 @@
         optimisation de los motores de búsqueda( <acronym>SEO</acronym> ), pero
         no afectan directamente a la funcionalidad de la aplicación. </para>
 
-    <section xml:id="requirements.version"><info><title>Versión de PHP</title></info>
+    <section xml:id="requirements.version"><title>Versión de PHP</title>
 
         
 
@@ -33,7 +33,7 @@
 
     </section>
 
-    <section xml:id="requirements.extensions"><info><title>Extensiones de PHP</title></info>
+    <section xml:id="requirements.extensions"><title>Extensiones de PHP</title>
 
         
 
@@ -58,7 +58,7 @@
 
     </section>
 
-    <section xml:id="requirements.zendcomponents"><info><title>Componentes de Zend Framework</title></info>
+    <section xml:id="requirements.zendcomponents"><title>Componentes de Zend Framework</title>
 
         
 
@@ -82,7 +82,7 @@
 
         </section>
 
-    <section xml:id="requirements.dependencies"><info><title>Dependencias de Zend Framework</title></info>
+    <section xml:id="requirements.dependencies"><title>Dependencias de Zend Framework</title>
 
         
 

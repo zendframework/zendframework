@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.select"><info><title>Zend_Db_Select</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.select"><title>Zend_Db_Select</title>
 
     
 
-    <section xml:id="zend.db.select.introduction"><info><title>Inleiding</title></info>
+    <section xml:id="zend.db.select.introduction"><title>Inleiding</title>
 
         
 
@@ -107,7 +107,7 @@ $result = $db->fetchAll($select, $params);
 
     </section>
 
-    <section xml:id="zend.db.select.fromcols"><info><title>Kolommen FROM een tabel</title></info>
+    <section xml:id="zend.db.select.fromcols"><title>Kolommen FROM een tabel</title>
 
         
 
@@ -138,7 +138,7 @@ $select->from('bar', 'bar.col AS col2');
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.select.joincols"><info><title>Kolommen van geJOINde tabellen</title></info>
+    <section xml:id="zend.db.select.joincols"><title>Kolommen van geJOINde tabellen</title>
 
         
 
@@ -173,7 +173,7 @@ $select->join('bar', 'foo.id = bar.id', '*');
 
     </section>
 
-    <section xml:id="zend.db.select.where"><info><title>WHERE voorwaarden</title></info>
+    <section xml:id="zend.db.select.where"><title>WHERE voorwaarden</title>
 
         
 
@@ -219,7 +219,7 @@ $select->orWhere('id IN(?)', array(1, 2, 3);
 
     </section>
 
-    <section xml:id="zend.db.select.group"><info><title>GROUP BY clausule</title></info>
+    <section xml:id="zend.db.select.group"><title>GROUP BY clausule</title>
 
         
 
@@ -252,7 +252,7 @@ $select->group(array('bar', 'baz'));
 
     </section>
 
-    <section xml:id="zend.db.select.having"><info><title>HAVING voorwaarden</title></info>
+    <section xml:id="zend.db.select.having"><title>HAVING voorwaarden</title>
 
         
 
@@ -284,7 +284,7 @@ $select->having('count_id > ?', 1);
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.select.order"><info><title>ORDER BY clausule</title></info>
+    <section xml:id="zend.db.select.order"><title>ORDER BY clausule</title>
 
         
 
@@ -316,7 +316,7 @@ $select->order(array('noble_title DESC', 'first_name'));
 
     </section>
 
-    <section xml:id="zend.db.select.limit"><info><title>LIMIT per Count en Offset</title></info>
+    <section xml:id="zend.db.select.limit"><title>LIMIT per Count en Offset</title>
 
         
 
@@ -393,7 +393,7 @@ $select->limit(10, 20);
 
     </section>
 
-    <section xml:id="zend.db.select.paging"><info><title>LIMIT per Pagina en Count</title></info>
+    <section xml:id="zend.db.select.paging"><title>LIMIT per Pagina en Count</title>
 
         
 

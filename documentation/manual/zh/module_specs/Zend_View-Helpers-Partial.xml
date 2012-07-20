@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.partial"><info><title>区域助手（Partial Helper） </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.partial"><title>区域助手（Partial Helper） </title>
     
 
     <para>
@@ -10,7 +10,7 @@
         <code>Partial</code> 的兄弟 <code>PartialLoop</code> 视图助手允许传递可迭代数据并为每个条目解析一部分。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.partial.usage"><info><title> Partials 的基本用法 </title></info>
+    <example xml:id="zend.view.helpers.initial.partial.usage"><title> Partials 的基本用法 </title>
         
 
         <para>
@@ -47,7 +47,7 @@
 ]]></programlisting>
 
     </example>
-        <note><info><title> 什么是模型（model）? </title></info>
+        <note><title> 什么是模型（model）? </title>
             
 
             <para>
@@ -89,7 +89,7 @@ $view->partialLoop()->setObjectKey('model');
         </note>
 
 
-    <example xml:id="zend.view.helpers.initial.partial.partialloop"><info><title> 使用 PartialLoop 来解析可迭代的（Iterable）的模型 </title></info>
+    <example xml:id="zend.view.helpers.initial.partial.partialloop"><title> 使用 PartialLoop 来解析可迭代的（Iterable）的模型 </title>
         
 
         <para>
@@ -152,7 +152,7 @@ $model = array(
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.partial.modules"><info><title> 在其它模块中解析 Partials </title></info>
+    <example xml:id="zend.view.helpers.initial.partial.modules"><title> 在其它模块中解析 Partials </title>
         
 
         <para>

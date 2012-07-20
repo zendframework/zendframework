@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>视图助手（View Helper）</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><title>视图助手（View Helper）</title>
 
     
 
@@ -11,13 +11,13 @@
         助手就是简单的类。假设你想要一个名为'fooBar'的助手，缺省地，类的前缀是<code>'Zend_View_Helper_'</code> （当设定助手路径时，你可以指定定制的前缀），类名的最后一部分就是助手名称；这一部分应该是TitleCapped（即像英文文章的标题一样，例如fooBar就要写成FooBar，by Jason Qi）;所以，类的全名就是<code>Zend_View_Helper_FooBar</code> 。这个类应当至少有一个在助手之后命名的方法，并且是驼峰格式（即首字母小写，之后的每个单词首字母大写，例如thisIsAnExample。详见http://c2.com/cgi/wiki?CamelCase　-- Haohappy注）：<code>fooBar()</code> 。
     </para>
 
-    <note><info><title> 注意大小写 </title></info>
+    <note><title> 注意大小写 </title>
         
         <para>
             助手名称总是遵循驼峰格式，例如，它们从不以大写字母开头。类名是混合大小写字格式，但方法在执行时是驼峰格式。
         </para>
     </note>
-    <note><info><title> 缺省助手路径 </title></info>
+    <note><title> 缺省助手路径 </title>
         
 
         <para>
@@ -32,7 +32,7 @@
     </para>
 
 
-    <section xml:id="zend.view.helpers.initial"><info><title>基本的助手</title></info>
+    <section xml:id="zend.view.helpers.initial"><title>基本的助手</title>
         
 
         <para>
@@ -267,7 +267,7 @@ echo $this->formCheckbox('foo', null, array('checked' => false), array('bar', 'b
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translator.xml"/>
     </section>
 
-    <section xml:id="zend.view.helpers.paths"><info><title>助手的路径</title></info>
+    <section xml:id="zend.view.helpers.paths"><title>助手的路径</title>
 
         
 
@@ -302,7 +302,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 
     </section>
 
-    <section xml:id="zend.view.helpers.custom"><info><title>编写自定义的助手类</title></info>
+    <section xml:id="zend.view.helpers.custom"><title>编写自定义的助手类</title>
 
         
 

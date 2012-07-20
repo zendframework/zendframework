@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.output"><info><title>Ausgabe von Maßeinheiten</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.output"><title>Ausgabe von Maßeinheiten</title>
     
 
     <para>
@@ -22,14 +22,14 @@
         <link linkend="zend.measure.output.unit">Ausgabe als lokalisierte Zeichenkette</link>
     </para>
 
-    <section xml:id="zend.measure.output.auto"><info><title>Automatische Ausgabe</title></info>
+    <section xml:id="zend.measure.output.auto"><title>Automatische Ausgabe</title>
         
 
         <para>
             <classname>Zend_Measure</classname> unterstützt die automatische Ausgabe von
             Zeichenketten.
 
-            <example xml:id="zend.measure.output.auto.example-1"><info><title>Automatische Ausgabe</title></info>
+            <example xml:id="zend.measure.output.auto.example-1"><title>Automatische Ausgabe</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -44,7 +44,7 @@ echo $unit;
             </example>
         </para>
 
-        <note><info><title>Ausgabe der Maßeinheit</title></info>
+        <note><title>Ausgabe der Maßeinheit</title>
             
 
             <para>
@@ -55,14 +55,14 @@ echo $unit;
         </note>
     </section>
 
-    <section xml:id="zend.measure.output.value"><info><title>Ausgabe als Wert</title></info>
+    <section xml:id="zend.measure.output.value"><title>Ausgabe als Wert</title>
         
 
         <para>
             Der Wert einer Maßeinheit kann mit <methodname>getValue()</methodname> ausgegeben
             werden.
 
-            <example xml:id="zend.measure.output.value.example-1"><info><title>Ausgabe eines Wertes</title></info>
+            <example xml:id="zend.measure.output.value.example-1"><title>Ausgabe eines Wertes</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -84,13 +84,13 @@ echo $unit->getValue();
         </para>
     </section>
 
-    <section xml:id="zend.measure.output.unit"><info><title>Ausgabe mit einer Maßeinheit</title></info>
+    <section xml:id="zend.measure.output.unit"><title>Ausgabe mit einer Maßeinheit</title>
         
 
         <para>
             Die Funktion <methodname>getType()</methodname> gibt die aktuelle Maßeinheit zurück.
 
-            <example xml:id="zend.measure.output.unit.example-1"><info><title>Outputting units</title></info>
+            <example xml:id="zend.measure.output.unit.example-1"><title>Outputting units</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -106,7 +106,7 @@ echo $unit->getType();
         </para>
     </section>
 
-    <section xml:id="zend.measure.output.localized"><info><title>Ausgabe als lokalisierte Zeichenkette</title></info>
+    <section xml:id="zend.measure.output.localized"><title>Ausgabe als lokalisierte Zeichenkette</title>
         
 
         <para>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>Interoperando com Java Lucene</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><title>Interoperando com Java Lucene</title>
     
 
-    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>Formatos de Arquivo</title></info>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><title>Formatos de Arquivo</title>
         
 
         <para>
@@ -22,7 +22,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>Diretório Índice</title></info>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><title>Diretório Índice</title>
         
 
         <para>
@@ -52,7 +52,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>Código Fonte Java</title></info>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><title>Código Fonte Java</title>
         
 
         <para>

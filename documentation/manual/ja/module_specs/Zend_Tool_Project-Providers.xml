@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.providers"><info><title>Zend_Tool プロジェクトプロバイダー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.providers"><title>Zend_Tool プロジェクトプロバイダー</title>
     
 
     <para>
         下記は <classname>Zend_Tool_Project</classname> とともに出荷されたプロバイダーすべての一覧です。
     </para>
 
-    <table xml:id="zend.tool.project.project-provider"><info><title>プロジェクトプロバイダーオプション</title></info>
+    <table xml:id="zend.tool.project.project-provider"><title>プロジェクトプロバイダーオプション</title>
         
 
         <tgroup cols="4">

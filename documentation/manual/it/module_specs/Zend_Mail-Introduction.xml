@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><info><title>Introduzione</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><title>Introduzione</title>
     
 
-    <section xml:id="zend.mail.introduction.getting-started"><info><title>Come iniziare</title></info>
+    <section xml:id="zend.mail.introduction.getting-started"><title>Come iniziare</title>
         
 
         <para>
@@ -10,7 +10,7 @@
             <code>Zend_Mail</code> può inviare e-mail utilizzando il transpoter predefinito <code>Zend_Mail_Transport_Sendmail</code> oppure via <code>Zend_Mail_Transport_Smtp</code>.
         </para>
 
-        <example xml:id="zend.mail.introduction.example-1"><info><title>Semplice e-mail con Zend_Mail</title></info>
+        <example xml:id="zend.mail.introduction.example-1"><title>Semplice e-mail con Zend_Mail</title>
             
 
             <para>
@@ -29,7 +29,7 @@ $mail->send();
 
         </example>
 
-        <note><info><title>Specifiche minime</title></info>
+        <note><title>Specifiche minime</title>
             
             <para>
                 Per poter inviare un'e-mail con <code>Zend_Mail</code> è necessario specificare almeno un destinatario, un mittente (con <code>setFrom()</code>) ed un messaggio (testo e/o HTML).
@@ -63,7 +63,7 @@ $mail->setBodyText('Questo è il testo.')
 
     </section>
 
-    <section xml:id="zend.mail.introduction.sendmail"><info><title>Configurazione del transport sendmail predefinito</title></info>
+    <section xml:id="zend.mail.introduction.sendmail"><title>Configurazione del transport sendmail predefinito</title>
         
 
         <para>
@@ -73,7 +73,7 @@ $mail->setBodyText('Questo è il testo.')
             La nuova istanza può sia agire come transport predefinito per <code>Zend_Mail</code> sia essere passata al metodo <code>send()</code> di <code>Zend_Mail</code>.
         </para>
 
-        <example xml:id="zend.mail.introduction.sendmail.example-1"><info><title>Passaggio di parametri aggiuntivi al transport Zend_Mail_Transport_Sendmail</title></info>
+        <example xml:id="zend.mail.introduction.sendmail.example-1"><title>Passaggio di parametri aggiuntivi al transport Zend_Mail_Transport_Sendmail</title>
             
             <para>
                 Questo esempio mostra come cambiare l'intestazione Return-Path della funzione <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><code>mail()</code></link>.
@@ -96,7 +96,7 @@ $mail->send();
 
         </example>
 
-        <note><info><title>Restrizioni in Safe mode</title></info>
+        <note><title>Restrizioni in Safe mode</title>
             
             <para>
                 In caso PHP sia configurato con safe mode attivo, i parametri opzionali aggiuntivi possono impedire il corretto funzionamento di <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><code>mail()</code></link> e l'invio dell'e-mail.

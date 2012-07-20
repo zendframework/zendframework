@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>E-mail w postaci HTML</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><title>E-mail w postaci HTML</title>
     
     <para>
         Aby wysłać e-mail w formacie HTML, ustaw treść za pomocą metody <code>setBodyHTML()</code>
@@ -7,7 +7,7 @@
         <code>text/html</code>. Jeśli używasz zarówno treści HTML jak i tekstowej to
         automatycznie zostanie wygenerowana wiadomość o typie MIME <code>multipart/alternative</code>:
     </para>
-    <example xml:id="zend.mail.html-mails.example-1"><info><title>Wysyłanie e-maila w postaci HTML</title></info>
+    <example xml:id="zend.mail.html-mails.example-1"><title>Wysyłanie e-maila w postaci HTML</title>
         
         <programlisting role="php"><![CDATA[
 $mail = new Zend_Mail();

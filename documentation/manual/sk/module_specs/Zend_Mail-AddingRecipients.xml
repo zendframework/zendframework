@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>Pridávanie príjemcov</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><title>Pridávanie príjemcov</title>
     
     <para>
         Príjemcovia môžu byť pridaný jedným zo spôsobov:
@@ -17,7 +17,7 @@
         </listitem>
         </itemizedlist>
     </para>
-    <note><info><title>Ďalší parameter</title></info>
+    <note><title>Ďalší parameter</title>
         
         <para>
             Metódy <code>addTo()</code> a <code>addCc()</code> majú druhý nepovinný parameter, ktorý

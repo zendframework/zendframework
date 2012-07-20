@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.read"><info><title>Lesen von Mail Nachrichten</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.read"><title>Lesen von Mail Nachrichten</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         implementierten Speicher kann in die folgende Tabelle gesehen werden.
     </para>
 
-    <table xml:id="zend.mail.read.table-1"><info><title>Übersicht der Lesefeatures für Mails</title></info>
+    <table xml:id="zend.mail.read.table-1"><title>Übersicht der Lesefeatures für Mails</title>
         
 
         <tgroup cols="5">
@@ -84,7 +84,7 @@
         </tgroup>
     </table>
 
-    <section xml:id="zend.mail.read-example"><info><title>Einfaches Beispiel für POP3</title></info>
+    <section xml:id="zend.mail.read-example"><title>Einfaches Beispiel für POP3</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -99,7 +99,7 @@ foreach ($mail as $message) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mail.read-open-local"><info><title>Öffnen eines lokalen Speichers</title></info>
+    <section xml:id="zend.mail.read-open-local"><title>Öffnen eines lokalen Speichers</title>
         
 
         <para>
@@ -130,7 +130,7 @@ $mail = new Zend_Mail_Storage_Maildir(array('dirname' =>
         </para>
     </section>
 
-    <section xml:id="zend.mail.read-open-remote"><info><title>Öffnen eines entfernten Speichers</title></info>
+    <section xml:id="zend.mail.read-open-remote"><title>Öffnen eines entfernten Speichers</title>
         
 
         <para>
@@ -189,7 +189,7 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
         </para>
     </section>
 
-    <section xml:id="zend.mail.read-fetching"><info><title>Nachrichten holen und einfache Methoden</title></info>
+    <section xml:id="zend.mail.read-fetching"><title>Nachrichten holen und einfache Methoden</title>
         
 
         <para>
@@ -249,7 +249,7 @@ unset($mail[$messageNum]);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mail.read-message"><info><title>Arbeiten mit Nachrichten</title></info>
+    <section xml:id="zend.mail.read-message"><title>Arbeiten mit Nachrichten</title>
         
 
         <para>
@@ -392,7 +392,7 @@ if (!$foundPart) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mail.read-flags"><info><title>Auf Flags prüfen</title></info>
+    <section xml:id="zend.mail.read-flags"><title>Auf Flags prüfen</title>
         
 
         <para>
@@ -462,7 +462,7 @@ if (!$message->hasFlag('$SpamTested')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mail.read-folders"><info><title>Verwenden von Ordnern</title></info>
+    <section xml:id="zend.mail.read-folders"><title>Verwenden von Ordnern</title>
         
 
         <para>
@@ -528,7 +528,7 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
             Begrenzer), der lokale Name ist der Name im Elternordner.
         </para>
 
-        <table xml:id="zend.mail.read-folders.table-1"><info><title>Namen für Nachrichtenordner</title></info>
+        <table xml:id="zend.mail.read-folders.table-1"><title>Namen für Nachrichtenordner</title>
             
 
             <tgroup cols="2">
@@ -609,10 +609,10 @@ $mail->selectFolder($folder);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mail.read-advanced"><info><title>Fortgeschrittene Verwendung</title></info>
+    <section xml:id="zend.mail.read-advanced"><title>Fortgeschrittene Verwendung</title>
         
 
-        <section xml:id="zend.mail.read-advanced.noop"><info><title>NOOP verwenden</title></info>
+        <section xml:id="zend.mail.read-advanced.noop"><title>NOOP verwenden</title>
             
 
             <para>
@@ -634,7 +634,7 @@ foreach ($mail as $message) {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.mail.read-advanced.caching"><info><title>Instanzen cachen</title></info>
+        <section xml:id="zend.mail.read-advanced.caching"><title>Instanzen cachen</title>
             
 
             <para>
@@ -675,7 +675,7 @@ $cache->set($cache_id, $mail);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.mail.read-advanced.extending"><info><title>Prokoll Klassen erweitern</title></info>
+        <section xml:id="zend.mail.read-advanced.extending"><title>Prokoll Klassen erweitern</title>
             
 
             <para>
@@ -771,7 +771,7 @@ $mail = new Example_Mail_Pop3_Knock(array('host'        => 'localhost',
             </para>
         </section>
 
-        <section xml:id="zend.mail.read-advanced.quota"><info><title>Quote verwenden (seit 1.5)</title></info>
+        <section xml:id="zend.mail.read-advanced.quota"><title>Quote verwenden (seit 1.5)</title>
             
 
             <para>

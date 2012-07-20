@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.database"><info><title>Zend_Dbパフォーマンス</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.database"><title>Zend_Dbパフォーマンス</title>
     
 
     <para>
@@ -11,8 +11,8 @@
         しばしばパフォーマンスのオーバーヘッドをもたらします。
     </para>
 
-    <section xml:id="performance.database.tableMetadata"><info><title>テーブルのメタデータを取得する際にZend_Db_Tableによってもたらされる
-        オーバーヘッドをどのようにしたら減らせますか？</title></info>
+    <section xml:id="performance.database.tableMetadata"><title>テーブルのメタデータを取得する際にZend_Db_Tableによってもたらされる
+        オーバーヘッドをどのようにしたら減らせますか？</title>
         
 
         <para>
@@ -28,7 +28,7 @@
             幸運なことにその状況を改善する技術があります。
         </para>
 
-        <section xml:id="performance.database.tableMetadata.cache"><info><title>メタデータキャッシュの利用</title></info>
+        <section xml:id="performance.database.tableMetadata.cache"><title>メタデータキャッシュの利用</title>
             
 
             <para>
@@ -44,7 +44,7 @@
             </para>
         </section>
 
-        <section xml:id="performance.database.tableMetadata.hardcoding"><info><title>テーブル定義でメタデータをハードコーディングする</title></info>
+        <section xml:id="performance.database.tableMetadata.hardcoding"><title>テーブル定義でメタデータをハードコーディングする</title>
             
 
             <para>
@@ -56,10 +56,10 @@
         </section>
     </section>
 
-    <section xml:id="performance.database.select"><info><title>
+    <section xml:id="performance.database.select"><title>
             Zend_Db_Selectで生成されたSQLがインデックスにヒットしません。
             どのようにしたらより良く出来ますか？
-        </title></info>
+        </title>
         
 
         <para>
@@ -68,7 +68,7 @@
             しばしばかなりの素人になりえます。
         </para>
 
-        <section xml:id="performance.database.select.writeyourown"><info><title>自分で最適化したSQLを書く</title></info>
+        <section xml:id="performance.database.select.writeyourown"><title>自分で最適化したSQLを書く</title>
             
 
             <para>

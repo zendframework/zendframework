@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>הקדמה</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><title>הקדמה</title>
     
     <para>
         <code>Zend_Feed</code> מספק פונקציונליות לצריכת סנדקציה של RSS ו Atom. היא מספקת תחביר טבעי לגישה לאלמנטים בתוך הסנדקציה, ערכי סנדקציה, וערכי ערכים מסויימים.
@@ -15,14 +15,14 @@
         בדוגמא למטה, אנחנו מדגימים שימוש פשוט בקבלת סנדקצית RSS ושמירה של חלק ממנה אל מערך ב PHP, שלאחר מכן יהיה ניתן להדפיסו, שמירה במסד הנתונים וכדומה.
     </para>
 
-    <note><info><title>תהיו מודעים</title></info>
+    <note><title>תהיו מודעים</title>
         
         <para>
             סנדצקיות רבות מכילות ערוצים שונים וערכים שונים. המפרט של RSS מספק הרבה ערכים אופציונלים, אז יש להיות מודעים על כך ברגע שכותבים קוד אשר יעבוד עם תוכן RSS.
         </para>
     </note>
 
-    <example xml:id="zend.feed.introduction.example.rss"><info><title>שימוש ב <code>Zend_Feed</code> על מידע מ RSS</title></info>
+    <example xml:id="zend.feed.introduction.example.rss"><title>שימוש ב <code>Zend_Feed</code> על מידע מ RSS</title>
         
         <programlisting role="php"><![CDATA[
 // Fetch the latest Slashdot headlines

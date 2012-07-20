@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-language"><info><title>クエリ言語</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-language"><title>クエリ言語</title>
     
 
     <para>
@@ -17,7 +17,7 @@
         にあります。
     </para>
 
-    <section xml:id="zend.search.lucene.query-language.terms"><info><title>用語</title></info>
+    <section xml:id="zend.search.lucene.query-language.terms"><title>用語</title>
         
 
         <para>
@@ -40,7 +40,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.fields"><info><title>フィールド</title></info>
+    <section xml:id="zend.search.lucene.query-language.fields"><title>フィールド</title>
         
 
         <para>
@@ -104,7 +104,7 @@ title:Do it right
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.wildcard"><info><title>ワイルドカード</title></info>
+    <section xml:id="zend.search.lucene.query-language.wildcard"><title>ワイルドカード</title>
         
         <para>
             Lucene は、単一の文字あるいは複数の文字を表すワイルドカードをサポートしています
@@ -162,7 +162,7 @@ test*
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.modifiers"><info><title>単語の修正子</title></info>
+    <section xml:id="zend.search.lucene.query-language.modifiers"><title>単語の修正子</title>
         
 
         <para>
@@ -174,7 +174,7 @@ test*
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.range"><info><title>範囲検索</title></info>
+    <section xml:id="zend.search.lucene.query-language.range"><title>範囲検索</title>
         
 
         <para>
@@ -207,7 +207,7 @@ title:{Aida TO Carmen}
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.fuzzy"><info><title>あいまい検索</title></info>
+    <section xml:id="zend.search.lucene.query-language.fuzzy"><title>あいまい検索</title>
         
         <para>
             <classname>Zend_Search_Lucene</classname> は、Java Lucene と同様にあいまい検索をサポートします。
@@ -235,7 +235,7 @@ roam~0.8
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.matched-terms-limitations"><info><title>マッチする単語の制限</title></info>
+    <section xml:id="zend.search.lucene.query-language.matched-terms-limitations"><title>マッチする単語の制限</title>
         
 
         <para>
@@ -254,7 +254,7 @@ roam~0.8
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.proximity-search"><info><title>近接検索</title></info>
+    <section xml:id="zend.search.lucene.query-language.proximity-search"><title>近接検索</title>
         
 
         <para>
@@ -268,7 +268,7 @@ roam~0.8
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.boosting"><info><title>単語の強調</title></info>
+    <section xml:id="zend.search.lucene.query-language.boosting"><title>単語の強調</title>
         
 
         <para>
@@ -299,7 +299,7 @@ PHP^4 framework
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.boolean"><info><title>論理演算子</title></info>
+    <section xml:id="zend.search.lucene.query-language.boolean"><title>論理演算子</title>
         
 
         <para>
@@ -320,7 +320,7 @@ PHP^4 framework
             より高くなります。これは Java Lucene の挙動とは異なります。
         </para>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.and"><info><title>AND</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.and"><title>AND</title>
             
             <para>
                 AND 演算子の意味は、"AND グループ"
@@ -335,7 +335,7 @@ PHP^4 framework
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.or"><info><title>OR</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.or"><title>OR</title>
             
             <para>
                 OR 演算子は、クエリをいくつかのオプションに分割します。
@@ -349,7 +349,7 @@ PHP^4 framework
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.not"><info><title>NOT</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.not"><title>NOT</title>
             
             <para>
                 NOT 演算子は、NOT の後に続く単語を含むドキュメントを除外します。
@@ -365,14 +365,14 @@ PHP^4 framework
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.other-form"><info><title>&amp;&amp;、|| および ! 演算子</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.other-form"><title>&amp;&amp;、|| および ! 演算子</title>
             
             <para>
                 &amp;&amp;、|| および ! は、それぞれ AND、OR および NOT 演算子の代わりに使用します。
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.plus"><info><title>+</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.plus"><title>+</title>
             
             <para>
                 "+" 演算子 (必須演算子) は、
@@ -387,7 +387,7 @@ PHP^4 framework
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.minus"><info><title>-</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.minus"><title>-</title>
             
             <para>
                 "-" 演算子 (禁止演算子) は、
@@ -402,7 +402,7 @@ PHP^4 framework
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.no-operator"><info><title>演算子なし</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.no-operator"><title>演算子なし</title>
             
             <para>
                 演算子を使用しなかった場合は、
@@ -437,7 +437,7 @@ PHP^4 framework
         </section>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.grouping"><info><title>グループ化</title></info>
+    <section xml:id="zend.search.lucene.query-language.grouping"><title>グループ化</title>
         
 
         <para>
@@ -451,7 +451,7 @@ PHP^4 framework
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.field-grouping"><info><title>フィールドのグループ化</title></info>
+    <section xml:id="zend.search.lucene.query-language.field-grouping"><title>フィールドのグループ化</title>
         
 
         <para>
@@ -466,7 +466,7 @@ title:(+return +"pink panther")
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.escaping"><info><title>特殊文字のエスケープ</title></info>
+    <section xml:id="zend.search.lucene.query-language.escaping"><title>特殊文字のエスケープ</title>
         
 
         <para>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><info><title>סינון</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><title>סינון</title>
     
 
     <para>
         סינון רשומות אשר נשמרות בלוג.
     </para>
 
-    <section xml:id="zend.log.filters.all-writers"><info><title>סינון כל הרשומות</title></info>
+    <section xml:id="zend.log.filters.all-writers"><title>סינון כל הרשומות</title>
       
 
       <para>
@@ -33,7 +33,7 @@ $logger->emerg('Emergency message');
       </para>
     </section>
 
-    <section xml:id="zend.log.filters.single-writer"><info><title>סינון לאובייקט של כתיבה</title></info>
+    <section xml:id="zend.log.filters.single-writer"><title>סינון לאובייקט של כתיבה</title>
       
 
       <para>

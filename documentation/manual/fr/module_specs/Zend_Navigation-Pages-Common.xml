@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.common"><info><title>Caractéristiques communes aux pages</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.common"><title>Caractéristiques communes aux pages</title>
     
 
     <para>
@@ -21,7 +21,7 @@
         <link linkend="zend.navigation.pages.custom">la documentation appropriée</link>.
     </para>
 
-    <table xml:id="zend.navigation.pages.common.options"><info><title>Options communes aux pages</title></info>
+    <table xml:id="zend.navigation.pages.common.options"><title>Options communes aux pages</title>
         
         <tgroup cols="4">
             <thead>
@@ -170,7 +170,7 @@
         </tgroup>
     </table>
 
-    <note><info><title>Propriétés personnalisées</title></info>
+    <note><title>Propriétés personnalisées</title>
         
         <para>
             Toutes les pages supportent la gestion de propriétés personnalisées, ceci via les méthodes
@@ -187,7 +187,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.navigation.pages.common.example.customprops"><info><title>Propriétés de pages personnalisées</title></info>
+    <example xml:id="zend.navigation.pages.common.example.customprops"><title>Propriétés de pages personnalisées</title>
         
 
         <para>

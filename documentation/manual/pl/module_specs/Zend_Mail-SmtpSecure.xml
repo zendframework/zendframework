@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>Bezpieczne połączenie SMTP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><title>Bezpieczne połączenie SMTP</title>
   
 
   <para>Klasa <code>Zend_Mail</code> obsługuje także użycie bezpiecznego
@@ -9,8 +9,8 @@
   Doodatkowo podany może być numer portu, w przeciwnym wypadku użyta będzie
   domyślna wartość -- 25 dla TLS oraz 465 dla SSL.</para>
 
-  <example xml:id="zend.mail.smtp-secure.example-1"><info><title>Aktywowanie bezpiecznego połączenia w klasie
-    Zend_Mail_Transport_Smtp</title></info>
+  <example xml:id="zend.mail.smtp-secure.example-1"><title>Aktywowanie bezpiecznego połączenia w klasie
+    Zend_Mail_Transport_Smtp</title>
     
 
     <programlisting role="php"><![CDATA[

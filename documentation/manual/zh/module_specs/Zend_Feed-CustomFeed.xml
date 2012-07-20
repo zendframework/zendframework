@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>自定义Feed和条目类</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><title>自定义Feed和条目类</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         下面是一个用自定义Atom条目类处理<code>myns:</code>命名空间的例子。注意构造函数中已经为你调用了<code>registerNamespace()</code>，所以最终用户就可以完全不必当心命名空间了。
     </para>
 
-    <example xml:id="zend.feed.custom-feed.example.extending"><info><title>用自定义的命名空间继承Atom条目类</title></info>
+    <example xml:id="zend.feed.custom-feed.example.extending"><title>用自定义的命名空间继承Atom条目类</title>
         
         <programlisting role="php"><![CDATA[<?php
 /**

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.globalsessionmanagement"><info><title>Общее управление сессиями<!--Global Session Management--></title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.globalsessionmanagement"><title>Общее управление сессиями<!--Global Session Management--></title>
 
     
 
@@ -19,7 +19,7 @@
 -->
     </para>
 
-    <section xml:id="zend.session.setoptions"><info><title>Zend_Session::setOptions()</title></info>
+    <section xml:id="zend.session.setoptions"><title>Zend_Session::setOptions()</title>
 
         
 
@@ -66,7 +66,7 @@
 <!--
             To "automatically" configure this component using an ".ini" file with Zend_Config_Ini:
 -->
-            <example><info><title>Использование Zend_Config для конфирурирования Zend_Session<!--Using Zend_Config to Configure Zend_Session--></title></info>
+            <example><title>Использование Zend_Config для конфирурирования Zend_Session<!--Using Zend_Config to Configure Zend_Session--></title>
                 
 <programlisting language="php"><![CDATA[<?php
 $config = new Zend_Config_Ini('myapp.ini', 'sandbox');
@@ -78,7 +78,7 @@ Zend_Session::setOptions($config->toArray());
 <!--
             The corresponding "myapp.ini" file:
 -->
-            <example><info><title>myapp.ini</title></info>
+            <example><title>myapp.ini</title>
                 
 <programlisting language="php"><![CDATA[
 
@@ -129,7 +129,7 @@ remember_me_seconds = 864000
 
     </section>
 
-    <section xml:id="zend.session.options"><info><title>Опции<!--Options--></title></info>
+    <section xml:id="zend.session.options"><title>Опции<!--Options--></title>
 
         
 
@@ -182,7 +182,7 @@ remember_me_seconds = 864000
                         </code> will throw an exception when started (i.e. when <code>start()</code> is called).
 -->
                     </para>
-                    <note><info><title>Угроза безопасности<!--Security Risk--></title></info>
+                    <note><title>Угроза безопасности<!--Security Risk--></title>
                         
                         <para>
                             Если путь доступен для чтения другими приложениями,
@@ -259,7 +259,7 @@ remember_me_seconds = 864000
                         application.
 -->
                     </para>
-                    <note><info><title>Угроза безопасности<!--Security Risk--></title></info>
+                    <note><title>Угроза безопасности<!--Security Risk--></title>
                         
                         <para>
                             Если настройки в <code>php.ini</code> для
@@ -292,7 +292,7 @@ remember_me_seconds = 864000
                         boolean <code>use_only_cookies</code> - In order to avoid introducing additional security risks,
                         do not alter the default value of this option.
 -->
-                        <note><info><title>Угроза безопасности<!--Security Risk--></title></info>
+                        <note><title>Угроза безопасности<!--Security Risk--></title>
                             
                             <para>
                                 Если эта опция не включена, то аттакующий может
@@ -324,11 +324,11 @@ remember_me_seconds = 864000
 
     </section>
 
-    <section xml:id="zend.session.regenerateid"><info><title>regenerateId()</title></info>
+    <section xml:id="zend.session.regenerateid"><title>regenerateId()</title>
 
         
 
-        <section xml:id="zend.session.regenerateid.intro"><info><title>Введение: идентификаторы сессий<!--Introduction: Session Identifiers--></title></info>
+        <section xml:id="zend.session.regenerateid.intro"><title>Введение: идентификаторы сессий<!--Introduction: Session Identifiers--></title>
 
             
 
@@ -434,7 +434,7 @@ remember_me_seconds = 864000
 
         </section>
 
-        <section xml:id="zend.session.regenerateid.details"><info><title>Угон и фиксация сессии<!--Session Hijacking and Fixation--></title></info>
+        <section xml:id="zend.session.regenerateid.details"><title>Угон и фиксация сессии<!--Session Hijacking and Fixation--></title>
 
             
 
@@ -566,7 +566,7 @@ remember_me_seconds = 864000
 -->
             </para>
 
-            <example><info><title>Анонимная сессия и фиксация сессии<!--Anonymous Sessions and Session Fixation--></title></info>
+            <example><title>Анонимная сессия и фиксация сессии<!--Anonymous Sessions and Session Fixation--></title>
                 
 <programlisting language="php"><![CDATA[<?php
 require_once 'Zend/Session.php';
@@ -584,7 +584,7 @@ if (!isset($defaultNamespace->initialized))
 
     </section>
 
-    <section xml:id="zend.session.rememberme"><info><title>rememberMe(integer $seconds)</title></info>
+    <section xml:id="zend.session.rememberme"><title>rememberMe(integer $seconds)</title>
 
         
 
@@ -616,7 +616,7 @@ if (!isset($defaultNamespace->initialized))
 
     </section>
 
-    <section xml:id="zend.session.forgetme"><info><title>forgetMe()</title></info>
+    <section xml:id="zend.session.forgetme"><title>forgetMe()</title>
 
         
 
@@ -634,7 +634,7 @@ if (!isset($defaultNamespace->initialized))
 
     </section>
 
-    <section xml:id="zend.session.sessionexists"><info><title>sessionExists()</title></info>
+    <section xml:id="zend.session.sessionexists"><title>sessionExists()</title>
 
         
 
@@ -651,7 +651,7 @@ if (!isset($defaultNamespace->initialized))
 
     </section>
 
-    <section xml:id="zend.session.destroy"><info><title>destroy(bool $remove_cookie = true, bool $readonly = true)</title></info>
+    <section xml:id="zend.session.destroy"><title>destroy(bool $remove_cookie = true, bool $readonly = true)</title>
 
         
 
@@ -677,7 +677,7 @@ if (!isset($defaultNamespace->initialized))
 -->
         </para>
 
-        <note><info><title>Исключения<!--Throws--></title></info>
+        <note><title>Исключения<!--Throws--></title>
             
             <para>
                 По умолчанию <varname>$readonly</varname> установлен в
@@ -692,7 +692,7 @@ if (!isset($defaultNamespace->initialized))
 
     </section>
 
-    <section xml:id="zend.session.stop"><info><title>stop()</title></info>
+    <section xml:id="zend.session.stop"><title>stop()</title>
 
         
 
@@ -719,7 +719,7 @@ if (!isset($defaultNamespace->initialized))
 
     </section>
 
-    <section xml:id="zend.session.writeClose"><info><title>writeClose($readonly = true)</title></info>
+    <section xml:id="zend.session.writeClose"><title>writeClose($readonly = true)</title>
 
         
 
@@ -737,7 +737,7 @@ if (!isset($defaultNamespace->initialized))
 -->
         </para>
 
-        <note><info><title>Исключения<!--Throws--></title></info>
+        <note><title>Исключения<!--Throws--></title>
             
             <para>
                 По умолчанию <varname>$readonly</varname> включен и дальнейшие
@@ -754,7 +754,7 @@ if (!isset($defaultNamespace->initialized))
 
     </section>
 
-    <section xml:id="zend.session.expiresessioncookie"><info><title>expireSessionCookie()</title></info>
+    <section xml:id="zend.session.expiresessioncookie"><title>expireSessionCookie()</title>
 
         
 
@@ -770,7 +770,7 @@ if (!isset($defaultNamespace->initialized))
 
     </section>
 
-    <section xml:id="zend.session.savehandler"><info><title>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</title></info>
+    <section xml:id="zend.session.savehandler"><title>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</title>
 
         
 
@@ -790,7 +790,7 @@ if (!isset($defaultNamespace->initialized))
 
     </section>
 
-    <section xml:id="zend.session.namespaceisset"><info><title>namespaceIsset($namespace)</title></info>
+    <section xml:id="zend.session.namespaceisset"><title>namespaceIsset($namespace)</title>
 
         
 
@@ -804,7 +804,7 @@ if (!isset($defaultNamespace->initialized))
 -->
         </para>
 
-        <note><info><title>Исключения<!--Throws--></title></info>
+        <note><title>Исключения<!--Throws--></title>
             
             <para>
                 Если Zend_Session не был помечен как доступный для чтения
@@ -819,7 +819,7 @@ if (!isset($defaultNamespace->initialized))
 
     </section>
 
-    <section xml:id="zend.session.namespaceunset"><info><title>namespaceUnset($namespace)</title></info>
+    <section xml:id="zend.session.namespaceunset"><title>namespaceUnset($namespace)</title>
 
         
 
@@ -850,7 +850,7 @@ if (!isset($defaultNamespace->initialized))
 -->
         </para>
 
-        <note><info><title>Исключения<!--Throws--></title></info>
+        <note><title>Исключения<!--Throws--></title>
             
             <para>
                 Если пространство имен недоступно для записи (например, после
@@ -863,7 +863,7 @@ if (!isset($defaultNamespace->initialized))
 
     </section>
 
-    <section xml:id="zend.session.namespaceget"><info><title>namespaceGet($namespace)</title></info>
+    <section xml:id="zend.session.namespaceget"><title>namespaceGet($namespace)</title>
 
         
 
@@ -885,7 +885,7 @@ if (!isset($defaultNamespace->initialized))
 -->
         </para>
 
-        <note><info><title>Исключения<!--Throws--></title></info>
+        <note><title>Исключения<!--Throws--></title>
             
             <para>
                 Если Zend_Session не был помечен как доступный для чтения
@@ -900,7 +900,7 @@ if (!isset($defaultNamespace->initialized))
 
     </section>
 
-    <section xml:id="zend.session.getiterator"><info><title>getIterator()</title></info>
+    <section xml:id="zend.session.getiterator"><title>getIterator()</title>
 
         
 
@@ -913,7 +913,7 @@ if (!isset($defaultNamespace->initialized))
 -->
         </para>
 
-        <example><info><title>Уничтожение всех пространств имен<!--Unsetting All Namespaces--></title></info>
+        <example><title>Уничтожение всех пространств имен<!--Unsetting All Namespaces--></title>
             
 <programlisting language="php"><![CDATA[<?php
 foreach(Zend_Session::getIterator() as $space) {
@@ -927,7 +927,7 @@ foreach(Zend_Session::getIterator() as $space) {
 ?>]]></programlisting>
         </example>
 
-        <note><info><title>Исключения<!--Throws--></title></info>
+        <note><title>Исключения<!--Throws--></title>
             
             <para>
                 Если Zend_Session не был помечен как доступный для чтения

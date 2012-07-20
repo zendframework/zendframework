@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>Wymagania Zend Framework</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><title>Wymagania Zend Framework</title>
 
     
 
@@ -22,7 +22,7 @@
         funkcjonalność aplikacji.
     </para>
 
-    <section xml:id="requirements.version"><info><title>Wersja PHP</title></info>
+    <section xml:id="requirements.version"><title>Wersja PHP</title>
 
         
 
@@ -39,7 +39,7 @@
 
     </section>
 
-    <section xml:id="requirements.extensions"><info><title>Rozszerzenia PHP</title></info>
+    <section xml:id="requirements.extensions"><title>Rozszerzenia PHP</title>
 
         
 
@@ -61,7 +61,7 @@
             funkcjonalności jeśli brak będzie potrzebnego rozszerzenia.
         </para>
 
-        <table frame="all" xml:id="requirements.extensions.table-1"><info><title>Rozszerzenia PHP używane przez komponenty Zend Framework</title></info>
+        <table frame="all" xml:id="requirements.extensions.table-1"><title>Rozszerzenia PHP używane przez komponenty Zend Framework</title>
             
             <tgroup cols="3">
                 <!-- <colspec colwidth='1in'/>
@@ -618,7 +618,7 @@
 
     </section>
 
-    <section xml:id="requirements.zendcomponents"><info><title>Komponenty Zend Framework</title></info>
+    <section xml:id="requirements.zendcomponents"><title>Komponenty Zend Framework</title>
 
         
 
@@ -640,7 +640,7 @@
             funkcjonalności jeśli brak będzie potrzebnego rozszerzenia.
         </para>
 
-        <table frame="all" xml:id="requirements.zendcomponents.table-1"><info><title>Komponenty Zend Framework i rozszerzenia PHP których używają</title></info>
+        <table frame="all" xml:id="requirements.zendcomponents.table-1"><title>Komponenty Zend Framework i rozszerzenia PHP których używają</title>
             
             <tgroup cols="4">
                 <!-- <colspec colwidth='3in'/>
@@ -1176,7 +1176,7 @@
 
     </section>
 
-    <section xml:id="requirements.dependencies"><info><title>Zależności Zend Framework</title></info>
+    <section xml:id="requirements.dependencies"><title>Zależności Zend Framework</title>
 
         
 
@@ -1203,7 +1203,7 @@
             </para>
         </note>
 
-        <table frame="all" xml:id="requirements.dependencies.table-1"><info><title>Komponenty Zend Framework i ich zależności od innych komponentów Zend Framework</title></info>
+        <table frame="all" xml:id="requirements.dependencies.table-1"><title>Komponenty Zend Framework i ich zależności od innych komponentów Zend Framework</title>
             
             <tgroup cols="3">
                 <colspec colwidth="2in"/>

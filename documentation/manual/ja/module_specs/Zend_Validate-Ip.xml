@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.ip"><info><title>Ip</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.ip"><title>Ip</title>
 
     
 
@@ -9,7 +9,7 @@
         これは IPv4 及び IPv6 標準をサポートします。
     </para>
 
-    <section xml:id="zend.validate.set.ip.options"><info><title>Supported options for Zend_Validate_Ip</title></info>
+    <section xml:id="zend.validate.set.ip.options"><title>Supported options for Zend_Validate_Ip</title>
         
 
         <para>
@@ -33,7 +33,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.ip.basic"><info><title>基本的な使用法</title></info>
+    <section xml:id="zend.validate.set.ip.basic"><title>基本的な使用法</title>
         
 
         <para>
@@ -49,7 +49,7 @@ if ($validator->isValid($ip)) {
 }
 ]]></programlisting>
 
-        <note><info><title>IP アドレスの検証</title></info>
+        <note><title>IP アドレスの検証</title>
             
 
             <para>
@@ -59,7 +59,7 @@ if ($validator->isValid($ip)) {
             </para>
         </note>
 
-        <note><info><title>IPv6 の検証</title></info>
+        <note><title>IPv6 の検証</title>
             
 
             <para>
@@ -70,7 +70,7 @@ if ($validator->isValid($ip)) {
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.ip.singletype"><info><title>IPv4 または IPV6 だけを検証</title></info>
+    <section xml:id="zend.validate.set.ip.singletype"><title>IPv4 または IPV6 だけを検証</title>
         
 
         <para>
@@ -96,7 +96,7 @@ if ($validator->isValid($ip)) {
 }
 ]]></programlisting>
 
-        <note><info><title>既定の動作</title></info>
+        <note><title>既定の動作</title>
             
 
             <para>

@@ -119,7 +119,7 @@ public function setServiceManager(ServiceManager $serviceManager);
     </section>
 
     <section xml:id="zend.mvc.controllers.interfaces.event-manager-aware">
-        <info><title>EventManagerAware</title></info>
+        <title>EventManagerAware</title>
 
         <para>
             Typically, it's nice to be able to tie into a controller's workflow

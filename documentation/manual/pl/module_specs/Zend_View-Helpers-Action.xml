@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><info><title>Helper Action</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><title>Helper Action</title>
     
 
     <para>
@@ -23,7 +23,7 @@
         jeśli moduł nie zostanie określony, przyjęty zostanie moduł domyślny.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.action.usage"><info><title>Proste użycia helpera Action</title></info>
+    <example xml:id="zend.view.helpers.initial.action.usage"><title>Proste użycia helpera Action</title>
         
 
         <para>

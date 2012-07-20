@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headlink"><info><title>L'aide de vue HeadLink</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headlink"><title>L'aide de vue HeadLink</title>
     
 
     <para>
@@ -88,7 +88,7 @@
         L'aide <code>HeadLink</code> est une implémentation concrète de l'aide <link linkend="zend.view.helpers.initial.placeholder">Placeholder</link>.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.headlink.basicusage"><info><title>Utilisation basique de l'aide HeadLink</title></info>
+    <example xml:id="zend.view.helpers.initial.headlink.basicusage"><title>Utilisation basique de l'aide HeadLink</title>
         
 
         <para>

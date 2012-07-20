@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.rowset"><info><title>Zend_Db_Table_Rowset</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.rowset"><title>Zend_Db_Table_Rowset</title>
 
     
 
-    <section xml:id="zend.db.table.rowset.introduction"><info><title>Inleiding</title></info>
+    <section xml:id="zend.db.table.rowset.introduction"><title>Inleiding</title>
 
         
 
@@ -18,7 +18,7 @@
 
     </section>
 
-    <section xml:id="zend.db.table.rowset.fetch"><info><title>Een Rowset verkrijgen</title></info>
+    <section xml:id="zend.db.table.rowset.fetch"><title>Een Rowset verkrijgen</title>
 
         
 
@@ -70,7 +70,7 @@ $rowset = $table->fetchAll();
 
     </section>
 
-    <section xml:id="zend.db.table.rowset.iterate"><info><title>Door de Rowset lopen</title></info>
+    <section xml:id="zend.db.table.rowset.iterate"><title>Door de Rowset lopen</title>
 
         
 

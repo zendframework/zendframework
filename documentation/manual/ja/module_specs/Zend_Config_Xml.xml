@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><title>Zend_Config_Xml</title>
     
     <para>
         <classname>Zend_Config_Xml</classname> を使用すると、シンプルな <acronym>XML</acronym>
@@ -14,7 +14,7 @@
         でサポートされます。この属性の値が、
         データを継承しているセクション名を表します。
     </para>
-    <note><info><title>返り値の型</title></info>
+    <note><title>返り値の型</title>
         
         <para>
             <classname>Zend_Config_Xml</classname> で読み込んだ設定データは、
@@ -22,7 +22,7 @@
             文字列から適切な型に変換してください。
         </para>
     </note>
-    <example xml:id="zend.config.adapters.xml.example.using"><info><title>Zend_Config_Xml の使用法</title></info>
+    <example xml:id="zend.config.adapters.xml.example.using"><title>Zend_Config_Xml の使用法</title>
         
         <para>
             この例は、<classname>Zend_Config_Xml</classname> を使用して
@@ -72,7 +72,7 @@ echo $config->database->params->host;   // "dev.example.com" と出力します
 echo $config->database->params->dbname; // "dbname" と出力します
 ]]></programlisting>
     </example>
-    <example xml:id="zend.config.adapters.xml.example.attributes"><info><title>Zend_Config_Xml におけるタグの属性の使用</title></info>
+    <example xml:id="zend.config.adapters.xml.example.attributes"><title>Zend_Config_Xml におけるタグの属性の使用</title>
         
         <para>
             <classname>Zend_Config_Xml</classname> では、設定内でノードを定義する際にさらに 2 通りの方法を用意しています。
@@ -131,7 +131,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
 </configdata>
 ]]></programlisting>
     </example>
-<note><info><title>XML 文字列</title></info>
+<note><title>XML 文字列</title>
         
         <para>
             <classname>Zend_Config_Xml</classname> は、データベースなどから取得した
@@ -164,7 +164,7 @@ EOT;
 $config = new Zend_Config_Xml($string, 'staging');
 ]]></programlisting>
     </note>
-<note><info><title>Zend_Config XML 名前空間</title></info>
+<note><title>Zend_Config XML 名前空間</title>
         
         <para>
             <classname>Zend_Config</classname> は独自の <acronym>XML</acronym>

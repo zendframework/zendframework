@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set"><info><title>Standard Prüfklassen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set"><title>Standard Prüfklassen</title>
     
 
     <para>
@@ -16,7 +16,7 @@
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Callback.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-CreditCard.xml"/>
 
-    <section xml:id="zend.validate.set.ccnum"><info><title>Ccnum</title></info>
+    <section xml:id="zend.validate.set.ccnum"><title>Ccnum</title>
         
 
         <note>

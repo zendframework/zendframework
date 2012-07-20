@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.reference"><info><title>Zend_CodeGenerator Réference</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.reference"><title>Zend_CodeGenerator Réference</title>
     
 
-    <section xml:id="zend.codegenerator.reference.abstracts"><info><title>Classes abstraites et interfaces</title></info>
+    <section xml:id="zend.codegenerator.reference.abstracts"><title>Classes abstraites et interfaces</title>
         
 
-        <section xml:id="zend.codegenerator.reference.abstracts.abstract"><info><title>Zend_CodeGenerator_Abstract</title></info>
+        <section xml:id="zend.codegenerator.reference.abstracts.abstract"><title>Zend_CodeGenerator_Abstract</title>
             
 
             <para>
@@ -54,7 +54,7 @@ abstract class Zend_CodeGenerator_Abstract
             </para>
         </section>
 
-        <section xml:id="zend.codegenerator.reference.abstracts.php-abstract"><info><title>Zend_CodeGenerator_Php_Abstract</title></info>
+        <section xml:id="zend.codegenerator.reference.abstracts.php-abstract"><title>Zend_CodeGenerator_Php_Abstract</title>
             
 
             <para>
@@ -76,7 +76,7 @@ abstract class Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.codegenerator.reference.abstracts.php-member-abstract"><info><title>Zend_CodeGenerator_Php_Member_Abstract</title></info>
+        <section xml:id="zend.codegenerator.reference.abstracts.php-member-abstract"><title>Zend_CodeGenerator_Php_Member_Abstract</title>
             
 
             <para>
@@ -103,10 +103,10 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
         </section>
     </section>
 
-    <section xml:id="zend.codegenerator.reference.concrete"><info><title>Classes CodeGenerator concrêtes</title></info>
+    <section xml:id="zend.codegenerator.reference.concrete"><title>Classes CodeGenerator concrêtes</title>
         
 
-        <section xml:id="zend.codegenerator.reference.concrete.php-body"><info><title>Zend_CodeGenerator_Php_Body</title></info>
+        <section xml:id="zend.codegenerator.reference.concrete.php-body"><title>Zend_CodeGenerator_Php_Body</title>
             
 
             <para>
@@ -128,7 +128,7 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.codegenerator.reference.concrete.php-class"><info><title>Zend_CodeGenerator_Php_Class</title></info>
+        <section xml:id="zend.codegenerator.reference.concrete.php-class"><title>Zend_CodeGenerator_Php_Class</title>
             
 
             <para>
@@ -188,7 +188,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
             </para>
         </section>
 
-        <section xml:id="zend.codegenerator.reference.concrete.php-docblock"><info><title>Zend_CodeGenerator_Php_Docblock</title></info>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock"><title>Zend_CodeGenerator_Php_Docblock</title>
             
 
             <para>
@@ -224,7 +224,7 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag"><info><title>Zend_CodeGenerator_Php_Docblock_Tag</title></info>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag"><title>Zend_CodeGenerator_Php_Docblock_Tag</title>
             
 
             <para>
@@ -252,7 +252,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag-param"><info><title>Zend_CodeGenerator_Php_DocBlock_Tag_Param</title></info>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag-param"><title>Zend_CodeGenerator_Php_DocBlock_Tag_Param</title>
             
 
             <para>
@@ -281,7 +281,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag-return"><info><title>Zend_CodeGenerator_Php_DocBlock_Tag_Return</title></info>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag-return"><title>Zend_CodeGenerator_Php_DocBlock_Tag_Return</title>
             
 
             <para>
@@ -306,7 +306,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.codegenerator.reference.concrete.php-file"><info><title>Zend_CodeGenerator_Php_File</title></info>
+        <section xml:id="zend.codegenerator.reference.concrete.php-file"><title>Zend_CodeGenerator_Php_File</title>
             
 
             <para>
@@ -350,7 +350,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.codegenerator.reference.concrete.php-member-container"><info><title>Zend_CodeGenerator_Php_Member_Container</title></info>
+        <section xml:id="zend.codegenerator.reference.concrete.php-member-container"><title>Zend_CodeGenerator_Php_Member_Container</title>
             
 
             <para>
@@ -369,7 +369,7 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.codegenerator.reference.concrete.php-method"><info><title>Zend_CodeGenerator_Php_Method</title></info>
+        <section xml:id="zend.codegenerator.reference.concrete.php-method"><title>Zend_CodeGenerator_Php_Method</title>
             
 
             <para>
@@ -411,7 +411,7 @@ class Zend_CodeGenerator_Php_Method
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.codegenerator.reference.concrete.php-parameter"><info><title>Zend_CodeGenerator_Php_Parameter</title></info>
+        <section xml:id="zend.codegenerator.reference.concrete.php-parameter"><title>Zend_CodeGenerator_Php_Parameter</title>
             
 
             <para>
@@ -467,7 +467,7 @@ $parameter->setDefaultValue(
             </para>
         </section>
 
-        <section xml:id="zend.codegenerator.reference.concrete.php-property"><info><title>Zend_CodeGenerator_Php_Property</title></info>
+        <section xml:id="zend.codegenerator.reference.concrete.php-property"><title>Zend_CodeGenerator_Php_Property</title>
             
 
             <para>

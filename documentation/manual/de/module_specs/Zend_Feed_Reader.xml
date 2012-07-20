@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.reader"><info><title>Zend_Feed_Reader</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.reader"><title>Zend_Feed_Reader</title>
     
 
-    <section xml:id="zend.feed.reader.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.feed.reader.introduction"><title>Einführung</title>
         
 
         <para>
@@ -62,7 +62,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.feed.reader.import"><info><title>Feeds importieren</title></info>
+    <section xml:id="zend.feed.reader.import"><title>Feeds importieren</title>
         
 
         <para>
@@ -147,7 +147,7 @@ $feed  = Zend_Feed_Reader::importFeed($zfeed);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.feed.reader.sources"><info><title>Empfangen darunterliegender Quellen von Feeds und Einträgen</title></info>
+    <section xml:id="zend.feed.reader.sources"><title>Empfangen darunterliegender Quellen von Feeds und Einträgen</title>
         
 
         <para>
@@ -236,10 +236,10 @@ $reportErrorsTo = $xpath->evaluate('string('
         </warning>
     </section>
 
-    <section xml:id="zend.feed.reader.cache-request"><info><title>Unterstützung für Caches und intelligente Anfragen</title></info>
+    <section xml:id="zend.feed.reader.cache-request"><title>Unterstützung für Caches und intelligente Anfragen</title>
         
 
-        <section xml:id="zend.feed.reader.cache-request.cache"><info><title>Unterstützung für Caches in Zend_Feed_Reader hinzufügen</title></info>
+        <section xml:id="zend.feed.reader.cache-request.cache"><title>Unterstützung für Caches in Zend_Feed_Reader hinzufügen</title>
             
 
             <para>
@@ -276,7 +276,7 @@ Zend_Feed_Reader::setCache($cache);
             </note>
         </section>
 
-        <section xml:id="zend.feed.reader.cache-request.http-conditional-get"><info><title>Unterstützung für HTTP Conditional GET</title></info>
+        <section xml:id="zend.feed.reader.cache-request.http-conditional-get"><title>Unterstützung für HTTP Conditional GET</title>
             
 
             <para>
@@ -348,7 +348,7 @@ $feed = Zend_Feed_Reader::import(
         </section>
     </section>
 
-    <section xml:id="zend.feed.reader.locate"><info><title>Feed URIs von Webseiten erkennen</title></info>
+    <section xml:id="zend.feed.reader.locate"><title>Feed URIs von Webseiten erkennen</title>
         
 
         <para>
@@ -416,7 +416,7 @@ foreach ($links as $link) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.feed.reader.attribute-collections"><info><title>Attribut Sammlungen</title></info>
+    <section xml:id="zend.feed.reader.attribute-collections"><title>Attribut Sammlungen</title>
         
 
         <para>
@@ -499,7 +499,7 @@ $labels = $categories->getValues();
         </para>
     </section>
 
-    <section xml:id="zend.feed.reader.retrieve-info"><info><title>Empfangen von Feed Informationen</title></info>
+    <section xml:id="zend.feed.reader.retrieve-info"><title>Empfangen von Feed Informationen</title>
         
 
         <para>
@@ -557,7 +557,7 @@ $labels = $categories->getValues();
             notwendig ist.
         </para>
 
-        <table><info><title>API Methoden auf dem Level des Feeds</title></info>
+        <table><title>API Methoden auf dem Level des Feeds</title>
             
 
             <tgroup cols="2">
@@ -766,7 +766,7 @@ $labels = $categories->getValues();
             wird anbei zusammengefasst.
         </para>
 
-        <table><info><title>Erweiterte API Methoden auf Level des Feeds</title></info>
+        <table><title>Erweiterte API Methoden auf Level des Feeds</title>
             
 
             <tgroup cols="2">
@@ -911,7 +911,7 @@ $labels = $categories->getValues();
         </table>
     </section>
 
-    <section xml:id="zend.feed.reader.entry"><info><title>Empfangen von Informationen aus Einträgen/Elementen</title></info>
+    <section xml:id="zend.feed.reader.entry"><title>Empfangen von Informationen aus Einträgen/Elementen</title>
         
 
         <para>
@@ -923,7 +923,7 @@ $labels = $categories->getValues();
             Aufruf der betreffenden Methoden auf Ihnen.
         </para>
 
-        <table><info><title>API Methoden auf Level des Eintrags</title></info>
+        <table><title>API Methoden auf Level des Eintrags</title>
             
 
             <tgroup cols="2">
@@ -1131,7 +1131,7 @@ $labels = $categories->getValues();
             </para>
         </warning>
 
-        <table><info><title>Erweiterte API Methoden auf Level des Eintrags</title></info>
+        <table><title>Erweiterte API Methoden auf Level des Eintrags</title>
             
 
             <tgroup cols="2">
@@ -1224,7 +1224,7 @@ $labels = $categories->getValues();
         </table>
     </section>
 
-    <section xml:id="zend.feed.reader.extending"><info><title>Erweitern der APIs für Feeds und Einträge</title></info>
+    <section xml:id="zend.feed.reader.extending"><title>Erweitern der APIs für Feeds und Einträge</title>
         
 
         <para>
@@ -1260,7 +1260,7 @@ $labels = $categories->getValues();
             Die gebündelten Erweiterungen sind:
         </para>
 
-        <table><info><title>Core Extensions (pre-registered)</title></info>
+        <table><title>Core Extensions (pre-registered)</title>
             
 
             <tgroup cols="2">
@@ -1331,7 +1331,7 @@ $labels = $categories->getValues();
             gesehen die viel von Atom verwenden statt den üblicheren Erweiterungen wie Dublin Core.
         </para>
 
-        <table><info><title>Nicht-Core Erweiterungen (müssen per Hand registriert werden)</title></info>
+        <table><title>Nicht-Core Erweiterungen (müssen per Hand registriert werden)</title>
             
 
             <tgroup cols="2">
@@ -1405,7 +1405,7 @@ $syndication = $feed->getExtension('Syndication');
 $updatePeriod = $syndication->getUpdatePeriod();
 ]]></programlisting>
 
-        <section xml:id="zend.feed.reader.extending.feed"><info><title>Erweiterungen für Zend_Feed_Reader schreiben</title></info>
+        <section xml:id="zend.feed.reader.extending.feed"><title>Erweiterungen für Zend_Feed_Reader schreiben</title>
             
 
             <para>

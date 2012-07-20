@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><info><title>Perfeccionamiento de los controles de acceso</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><title>Perfeccionamiento de los controles de acceso</title>
 
     
 
-    <section xml:id="zend.acl.refining.precise"><info><title>Definir mejor los controles de acceso</title></info>
+    <section xml:id="zend.acl.refining.precise"><title>Definir mejor los controles de acceso</title>
 
         
 
@@ -143,7 +143,7 @@ $acl->addResource(new Zend_Acl_Resource('announcement'), 'news');
 
     </section>
 
-    <section xml:id="zend.acl.refining.removing"><info><title>Eliminar los controles de acceso</title></info>
+    <section xml:id="zend.acl.refining.removing"><title>Eliminar los controles de acceso</title>
 
         
 

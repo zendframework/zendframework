@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><info><title>Введение</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><title>Введение</title>
 
     
 
-    <section xml:id="zend.mail.introduction.getting-started"><info><title>Начало работы</title></info>
+    <section xml:id="zend.mail.introduction.getting-started"><title>Начало работы</title>
 
         
 
@@ -17,7 +17,7 @@
             <classname>Zend_Mail_Transport_Smtp</classname>.
         </para>
     
-        <example xml:id="zend.mail.introduction.example-1"><info><title>Простое сообщение электронной почты</title></info>
+        <example xml:id="zend.mail.introduction.example-1"><title>Простое сообщение электронной почты</title>
     
             
     
@@ -40,7 +40,7 @@ $mail->send();
 
         </example>
     
-        <note><info><title>Минимально необходимые определения</title></info>
+        <note><title>Минимально необходимые определения</title>
             
             <para>
                 Для того, чтобы отправить сообщение через
@@ -71,7 +71,7 @@ $mail->send();
 
     </section>
         
-    <section xml:id="zend.mail.introduction.sendmail"><info><title>Конфигурирование транспорта, используемого по умолчанию</title></info>
+    <section xml:id="zend.mail.introduction.sendmail"><title>Конфигурирование транспорта, используемого по умолчанию</title>
 
         
 
@@ -91,7 +91,7 @@ $mail->send();
             <classname>Zend_Mail</classname>.
         </para>
 
-        <example xml:id="zend.mail.introduction.sendmail.example-1"><info><title>Передача дополнительных параметров транспорту Zend_Mail_Transport_Sendmail</title></info>
+        <example xml:id="zend.mail.introduction.sendmail.example-1"><title>Передача дополнительных параметров транспорту Zend_Mail_Transport_Sendmail</title>
 
             
 
@@ -114,7 +114,7 @@ $mail->send();
 
         </example>
 
-        <note><info><title>Ограничения безопасного режима</title></info>
+        <note><title>Ограничения безопасного режима</title>
             
             <para>
                 Применение дополнительных параметров приведет к отказу в

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><title>Zend_Config_Xml</title>
     
     <para>
         <classname>Zend_Config_Xml</classname> дает разработчикам возможность
@@ -15,7 +15,7 @@
         значение атрибута соответствует разделу, данные которого наследуются в
         раздел с этим атрибутом.
     </para>
-    <note><info><title>Тип возвращаемых данных</title></info>
+    <note><title>Тип возвращаемых данных</title>
         
         <para>
             Конфигурационные данные, прочитанные в <classname>Zend_Config_Xml</classname>,
@@ -23,7 +23,7 @@
             типам предоставляется разработчикам.
         </para>
     </note>
-    <example xml:id="zend.config.adapters.xml.example.using"><info><title>Использование Zend_Config_Xml</title></info>
+    <example xml:id="zend.config.adapters.xml.example.using"><title>Использование Zend_Config_Xml</title>
         
         <para>
             Данный пример демонстрирует основы использования <classname>Zend_Config_Xml</classname>
@@ -75,7 +75,7 @@ echo $config->database->params->host;   // выведет "dev.example.com"
 echo $config->database->params->dbname; // выведет "dbname"
 ]]></programlisting>
     </example>
-    <example xml:id="zend.config.adapters.xml.example.attributes"><info><title>Использование тегов в <classname>Zend_Config_Xml</classname></title></info>
+    <example xml:id="zend.config.adapters.xml.example.attributes"><title>Использование тегов в <classname>Zend_Config_Xml</classname></title>
         
         <para>
             <classname>Zend_Config_Xml</classname> также поддерживает два дополнительных способа
@@ -138,7 +138,7 @@ echo $config->database->params->dbname; // выведет "dbname"
 </configdata>
 ]]></programlisting>
     </example>
-    <note><info><title>Передача строки с XML</title></info>
+    <note><title>Передача строки с XML</title>
         
         <para>
             <classname>Zend_Config_Xml</classname> также может загружать

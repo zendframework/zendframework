@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.writing-providers"><info><title>Zend_Tool_Frameworkを利用してプロバイダを作成する</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.writing-providers"><title>Zend_Tool_Frameworkを利用してプロバイダを作成する</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         <acronym>MVC</acronym>アプリケーションの中での「コントローラ」と似ています。
     </para>
 
-    <section xml:id="zend.tool.framework.writing-providers.loading"><info><title>Zend_Tool はどのようにプロバイダを見つけるか</title></info>
+    <section xml:id="zend.tool.framework.writing-providers.loading"><title>Zend_Tool はどのようにプロバイダを見つけるか</title>
         
 
         <para>
@@ -66,14 +66,14 @@
             </para>
         </note>
 
-        <example xml:id="zend.tool.framework.writing-providers.loading.example"><info><title>Exposing Your Providers with a Manifest</title></info>
+        <example xml:id="zend.tool.framework.writing-providers.loading.example"><title>Exposing Your Providers with a Manifest</title>
             
 
             <para>
                 You can expose your providers to <classname>Zend_Tool</classname> by offering a manifest
                 with a special filename ending with "Manifest.php".
                 A Provider Manifest is an implementation of the
-                <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface>
+                <interfacename>Zend_Tool_Framework_Manifest_ProviderManifestable</interfacename>
                 and requires the <methodname>getProviders()</methodname> method to return
                 an array of instantiated providers. In anticipation of our first
                 own provider <classname>My_Component_HelloProvider</classname>
@@ -96,7 +96,7 @@ class My_Component_Manifest
         </example>
     </section>
 
-    <section xml:id="zend.tool.framework.writing-providers.basic"><info><title>プロバイダを作成するための基本命令</title></info>
+    <section xml:id="zend.tool.framework.writing-providers.basic"><title>プロバイダを作成するための基本命令</title>
         
 
         <para>
@@ -133,7 +133,7 @@ Hello from my provider!
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.tool.framework.writing-providers.response"><info><title>レスポンスオブジェクト</title></info>
+    <section xml:id="zend.tool.framework.writing-providers.response"><title>レスポンスオブジェクト</title>
         
 
         <para>
@@ -163,10 +163,10 @@ class My_Component_HelloProvider
         </para>
     </section>
 
-    <section xml:id="zend.tool.framework.writing-providers.advanced"><info><title>先進の開発情報</title></info>
+    <section xml:id="zend.tool.framework.writing-providers.advanced"><title>先進の開発情報</title>
         
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.variables"><info><title>プロバイダに変数を渡す</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.variables"><title>プロバイダに変数を渡す</title>
             
 
             <para>
@@ -210,7 +210,7 @@ class My_Component_HelloProvider
 
         </section>
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.prompt"><info><title>Prompt the User for Input</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.prompt"><title>Prompt the User for Input</title>
             
 
             <para>
@@ -242,7 +242,7 @@ class My_Component_HelloProvider
             </para>
         </section>
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.pretendable"><info><title>プロバイダ・アクションを実行するための擬態</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.pretendable"><title>プロバイダ・アクションを実行するための擬態</title>
             
 
             <para>
@@ -291,7 +291,7 @@ I would say hello Ralph.
 
         </section>
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.verbosedebug"><info><title>冗長及びデバッグモード</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.verbosedebug"><title>冗長及びデバッグモード</title>
             
 
             <para>
@@ -318,7 +318,7 @@ class My_Component_HelloProvider
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.configstorage"><info><title>ユーザーの構成及びストレージにアクセス</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.configstorage"><title>ユーザーの構成及びストレージにアクセス</title>
             
 
             <para>

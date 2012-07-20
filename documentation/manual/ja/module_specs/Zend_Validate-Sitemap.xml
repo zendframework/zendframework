@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.sitemap"><info><title>サイトマップ・バリデータ</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.sitemap"><title>サイトマップ・バリデータ</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         に従います。
     </para>
 
-    <section xml:id="zend.validate.sitemap.changefreq"><info><title>Sitemap_Changefreq</title></info>
+    <section xml:id="zend.validate.sitemap.changefreq"><title>Sitemap_Changefreq</title>
         
 
         <para>
@@ -23,7 +23,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.sitemap.lastmod"><info><title>Sitemap_Lastmod</title></info>
+    <section xml:id="zend.validate.sitemap.lastmod"><title>Sitemap_Lastmod</title>
         
 
         <para>
@@ -38,7 +38,7 @@
             <constant>TRUE</constant>を返します。
         </para>
 
-        <example xml:id="zend.validate.sitemap.lastmod.example"><info><title>サイトマップ Lastmod バリデータ</title></info>
+        <example xml:id="zend.validate.sitemap.lastmod.example"><title>サイトマップ Lastmod バリデータ</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -58,7 +58,7 @@ $validator->isValid('yesterday'); // false
         </example>
     </section>
 
-    <section xml:id="zend.validate.sitemap.loc"><info><title>Sitemap_Loc</title></info>
+    <section xml:id="zend.validate.sitemap.loc"><title>Sitemap_Loc</title>
         
 
         <para>
@@ -69,7 +69,7 @@ $validator->isValid('yesterday'); // false
         </para>
     </section>
 
-    <section xml:id="zend.validate.sitemap.priority"><info><title>Sitemap_Priority</title></info>
+    <section xml:id="zend.validate.sitemap.priority"><title>Sitemap_Priority</title>
         
 
         <para>
@@ -79,7 +79,7 @@ $validator->isValid('yesterday'); // false
             このバリデータは、数値と文字列値の両方を受け入れます。
         </para>
 
-        <example xml:id="zend.validate.sitemap.priority.example"><info><title>サイトマップ 優先度 バリデータ</title></info>
+        <example xml:id="zend.validate.sitemap.priority.example"><title>サイトマップ 優先度 バリデータ</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -99,7 +99,7 @@ $validator->isValid('foo'); // false
         </example>
     </section>
 
-    <section xml:id="zend.validate.set.sitemap.options"><info><title>Zend_Validate_Sitemap_* でサポートされるオプション</title></info>
+    <section xml:id="zend.validate.set.sitemap.options"><title>Zend_Validate_Sitemap_* でサポートされるオプション</title>
         
 
         <para>

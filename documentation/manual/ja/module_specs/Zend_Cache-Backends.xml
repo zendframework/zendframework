@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><info><title><classname>Zend_Cache</classname> のバックエンド</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><title><classname>Zend_Cache</classname> のバックエンド</title>
     
     <para>
         バックエンドには、標準と拡張の 2 種類があります。
         もちろん、拡張バックエンドのほうがより高機能となります。
     </para>
-    <section xml:id="zend.cache.backends.file"><info><title>Zend_Cache_Backend_File</title></info>
+    <section xml:id="zend.cache.backends.file"><title>Zend_Cache_Backend_File</title>
         
         <para>
             この (拡張) バックエンドは、キャッシュレコードを
@@ -14,7 +14,7 @@
         <para>
             使用可能なオプションは次のとおりです。
         </para>
-        <table xml:id="zend.cache.backends.file.table"><info><title>File バックエンドのオプション</title></info>
+        <table xml:id="zend.cache.backends.file.table"><title>File バックエンドのオプション</title>
             
             <tgroup cols="4">
                  <thead>
@@ -122,7 +122,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.sqlite"><info><title>Zend_Cache_Backend_Sqlite</title></info>
+    <section xml:id="zend.cache.backends.sqlite"><title>Zend_Cache_Backend_Sqlite</title>
         
         <para>
             この (拡張) バックエンドは、キャッシュレコードを
@@ -131,7 +131,7 @@
         <para>
             使用可能なオプションは次のとおりです。
         </para>
-        <table xml:id="zend.cache.backends.sqlite.table"><info><title>Sqlite バックエンドのオプション</title></info>
+        <table xml:id="zend.cache.backends.sqlite.table"><title>Sqlite バックエンドのオプション</title>
             
             <tgroup cols="4">
                  <thead>
@@ -172,7 +172,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.memcached"><info><title>Zend_Cache_Backend_Memcached</title></info>
+    <section xml:id="zend.cache.backends.memcached"><title>Zend_Cache_Backend_Memcached</title>
         
         <para>
             この (拡張) バックエンドは、キャッシュレコードを memcached サーバに保存します。
@@ -189,7 +189,7 @@
         <para>
             使用可能なオプションは次のとおりです。
         </para>
-        <table xml:id="zend.cache.backends.memcached.table"><info><title>Memcached バックエンドのオプション</title></info>
+        <table xml:id="zend.cache.backends.memcached.table"><title>Memcached バックエンドのオプション</title>
             
             <tgroup cols="4">
                  <thead>
@@ -244,7 +244,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.apc"><info><title>Zend_Cache_Backend_Apc</title></info>
+    <section xml:id="zend.cache.backends.apc"><title>Zend_Cache_Backend_Apc</title>
         
         <para>
             この (拡張) バックエンドは、キャッシュレコードを共有メモリに保存する際に
@@ -260,7 +260,7 @@
             このバックエンドではオプションを使用しません。
         </para>
     </section>
-    <section xml:id="zend.cache.backends.xcache"><info><title>Zend_Cache_Backend_Xcache</title></info>
+    <section xml:id="zend.cache.backends.xcache"><title>Zend_Cache_Backend_Xcache</title>
         
         <para>
             このバックエンドは、キャッシュレコードを共有メモリに保存する際に
@@ -275,7 +275,7 @@
         <para>
             使用可能なオプションは次のとおりです。
         </para>
-        <table xml:id="zend.cache.backends.xcache.table"><info><title>Xcache バックエンドのオプション</title></info>
+        <table xml:id="zend.cache.backends.xcache.table"><title>Xcache バックエンドのオプション</title>
             
             <tgroup cols="4">
                  <thead>
@@ -309,7 +309,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.platform"><info><title>Zend_Cache_Backend_ZendPlatform</title></info>
+    <section xml:id="zend.cache.backends.platform"><title>Zend_Cache_Backend_ZendPlatform</title>
         
         <para>
             このバックエンドは、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.co.jp/product/zendplatform.html">Zend Platform</link>
@@ -332,7 +332,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
             このバックエンドではオプションを使用しません。
         </para>
     </section>
-    <section xml:id="zend.cache.backends.twolevels"><info><title>Zend_Cache_Backend_TwoLevels</title></info>
+    <section xml:id="zend.cache.backends.twolevels"><title>Zend_Cache_Backend_TwoLevels</title>
         
         <para>
             この (拡張) バックエンドは複合型です。
@@ -355,7 +355,7 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
         <para>
             使用可能なオプションは次のとおりです。
         </para>
-        <table xml:id="zend.cache.backends.twolevels.table"><info><title>TwoLevels バックエンドのオプション</title></info>
+        <table xml:id="zend.cache.backends.twolevels.table"><title>TwoLevels バックエンドのオプション</title>
             
             <tgroup cols="4">
                  <thead>
@@ -461,7 +461,7 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.zendserver"><info><title>Zend_Cache_Backend_ZendServer_Disk および Zend_Cache_Backend_ZendServer_ShMem</title></info>
+    <section xml:id="zend.cache.backends.zendserver"><title>Zend_Cache_Backend_ZendServer_Disk および Zend_Cache_Backend_ZendServer_ShMem</title>
         
         <para>
             これらのバックエンドは、キャッシュレコードの保存に
@@ -491,7 +491,7 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
         </para>
     </section>
 
-    <section xml:id="zend.cache.backends.static"><info><title>Zend_Cache_Backend_Static</title></info>
+    <section xml:id="zend.cache.backends.static"><title>Zend_Cache_Backend_Static</title>
         
         <para>
             This backend works in concert with <classname>
@@ -601,7 +601,7 @@ RewriteRule ^.*$ index.php [NC,L]
                 setInnerCache()</methodname> method.
             </para>
         </note>
-        <table xml:id="zend.cache.backends.static.table"><info><title>Static Backend Options</title></info>
+        <table xml:id="zend.cache.backends.static.table"><title>Static Backend Options</title>
             
             <tgroup cols="4">
                  <thead>

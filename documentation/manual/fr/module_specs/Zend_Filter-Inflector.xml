@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.inflector"><info><title>Zend_Filter_Inflector</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.inflector"><title>Zend_Filter_Inflector</title>
     
 
     <para>
@@ -20,9 +20,9 @@
         <methodname>filter()</methodname> sur votre instance.
     </para>
 
-    <example xml:id="zend.filter.inflector.camel_case_example"><info><title>
+    <example xml:id="zend.filter.inflector.camel_case_example"><title>
             Transformer du texteEncasseMelangée ou du texteCamelCase vers un autre format
-        </title></info>
+        </title>
         
 
         <programlisting language="php"><![CDATA[
@@ -42,7 +42,7 @@ $filtered = $inflector->filter(array('page' => $string));
 ]]></programlisting>
     </example>
 
-    <section xml:id="zend.filter.inflector.operation"><info><title>Opération</title></info>
+    <section xml:id="zend.filter.inflector.operation"><title>Opération</title>
         
 
         <para>
@@ -74,7 +74,7 @@ $filtered = $inflector->filter(array('page' => $string));
         </para>
     </section>
 
-    <section xml:id="zend.filter.inflector.paths"><info><title>Créer des chemins vers des filtres alternatifs</title></info>
+    <section xml:id="zend.filter.inflector.paths"><title>Créer des chemins vers des filtres alternatifs</title>
         
 
         <para>
@@ -116,7 +116,7 @@ $loader->addPrefixPath('Mes_Filtres', 'Mes/Filtres/');
         </para>
     </section>
 
-    <section xml:id="zend.filter.inflector.targets"><info><title>Paramétrer la cible de l'inflecteur</title></info>
+    <section xml:id="zend.filter.inflector.targets"><title>Paramétrer la cible de l'inflecteur</title>
         
 
         <para>
@@ -191,7 +191,7 @@ class Foo
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.filter.inflector.rules"><info><title>Règles d'inflexion</title></info>
+    <section xml:id="zend.filter.inflector.rules"><title>Règles d'inflexion</title>
         
 
         <para>
@@ -209,7 +209,7 @@ class Foo
             </para>
         </note>
 
-        <section xml:id="zend.filter.inflector.rules.static"><info><title>Règles statiques</title></info>
+        <section xml:id="zend.filter.inflector.rules.static"><title>Règles statiques</title>
             
 
             <para>
@@ -270,7 +270,7 @@ class Foo
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.filter.inflector.rules.filters"><info><title>Règles non statiques : basées sur des filtres</title></info>
+        <section xml:id="zend.filter.inflector.rules.filters"><title>Règles non statiques : basées sur des filtres</title>
             
 
             <para>
@@ -329,7 +329,7 @@ $inflector->setFilterRule('script', array(
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.filter.inflector.rules.multiple"><info><title>Paramétrer plusieurs règles en une seule fois</title></info>
+        <section xml:id="zend.filter.inflector.rules.multiple"><title>Paramétrer plusieurs règles en une seule fois</title>
             
 
             <para>
@@ -356,7 +356,7 @@ $inflector->setFilterRule('script', array(
                 </listitem>
             </itemizedlist>
 
-            <example xml:id="zend.filter.inflector.rules.multiple.example"><info><title>Paramétrer plusieurs règles en une seule fois</title></info>
+            <example xml:id="zend.filter.inflector.rules.multiple.example"><title>Paramétrer plusieurs règles en une seule fois</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -374,7 +374,7 @@ $inflector->addRules(array(
         </section>
     </section>
 
-    <section xml:id="zend.filter.inflector.utility"><info><title>Autres méthodes utilitaires</title></info>
+    <section xml:id="zend.filter.inflector.utility"><title>Autres méthodes utilitaires</title>
         
 
         <para>
@@ -424,7 +424,7 @@ $inflector->addRules(array(
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.filter.inflector.config"><info><title>Zend_Config avec Zend_Filter_Inflector</title></info>
+    <section xml:id="zend.filter.inflector.config"><title>Zend_Config avec Zend_Filter_Inflector</title>
         
 
         <para>
@@ -469,7 +469,7 @@ $inflector->addRules(array(
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.filter.inflector.config.example"><info><title>Utiliser Zend_Config avec Zend_Filter_Inflector</title></info>
+        <example xml:id="zend.filter.inflector.config.example"><title>Utiliser Zend_Config avec Zend_Filter_Inflector</title>
             
 
             <programlisting language="php"><![CDATA[

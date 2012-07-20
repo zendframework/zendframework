@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><title>Introduction</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         filtres peuvent être appliqués à une donnée dans un ordre défini.
     </para>
 
-    <section xml:id="zend.filter.introduction.definition"><info><title>Qu'est-ce qu'un filtre ?</title></info>
+    <section xml:id="zend.filter.introduction.definition"><title>Qu'est-ce qu'un filtre ?</title>
         
 
         <para>
@@ -39,7 +39,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.introduction.using"><info><title>Utilisation basique des filtres</title></info>
+    <section xml:id="zend.filter.introduction.using"><title>Utilisation basique des filtres</title>
         
 
         <para>
@@ -59,7 +59,7 @@ echo $htmlEntities->filter('"'); // "
 ]]></programlisting></para>
         </section>
 
-        <section xml:id="zend.filter.introduction.static"><info><title>Utilisation de la méthode statique staticFilter()</title></info>
+        <section xml:id="zend.filter.introduction.static"><title>Utilisation de la méthode statique staticFilter()</title>
             
 
         <para>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><info><title>Кодировки<!--Character set.--></title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><title>Кодировки<!--Character set.--></title>
     
 
-    <section xml:id="zend.search.lucene.charset.description"><info><title>Поддержка UTF-8 и однобайтных наборов символов<!--UTF-8 and single-byte character sets support.--></title></info>
+    <section xml:id="zend.search.lucene.charset.description"><title>Поддержка UTF-8 и однобайтных наборов символов<!--UTF-8 and single-byte character sets support.--></title>
         
 
         <para>
@@ -59,7 +59,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.charset.default_analyzer"><info><title>Используемый по умолчанию анализатор текста<!--Default text analyzer--></title></info>
+    <section xml:id="zend.search.lucene.charset.default_analyzer"><title>Используемый по умолчанию анализатор текста<!--Default text analyzer--></title>
         
 
         <para>
@@ -94,7 +94,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.charset.utf_analyzer"><info><title>Совместимый с UTF-8 анализатор текста<!--UTF-8 compatible text analyzer.--></title></info>
+    <section xml:id="zend.search.lucene.charset.utf_analyzer"><title>Совместимый с UTF-8 анализатор текста<!--UTF-8 compatible text analyzer.--></title>
         
 
         <para>

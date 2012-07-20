@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><info><title>RSS フィードの使用</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><title>RSS フィードの使用</title>
     
     <para>
         <acronym>RSS</acronym> フィードの読み込みは、フィードの <acronym>URL</acronym> を指定して

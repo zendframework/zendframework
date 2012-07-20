@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><info><title>Zend_Config_Ini</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><title>Zend_Config_Ini</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         o nome da seção a partir do qual os dados devem ser herdados.
     </para>
 
-    <note><info><title>Analisando o Arquivo INI</title></info>
+    <note><title>Analisando o Arquivo INI</title>
         
 
         <para>
@@ -27,7 +27,7 @@
         </para>
     </note>
 
-    <note><info><title>Separador de Chave</title></info>
+    <note><title>Separador de Chave</title>
         
 
         <para>
@@ -45,7 +45,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
 ]]></programlisting>
     </note>
 
-    <example xml:id="zend.config.adapters.ini.example.using"><info><title>Usando o Zend_Config_Ini</title></info>
+    <example xml:id="zend.config.adapters.ini.example.using"><title>Usando o Zend_Config_Ini</title>
         
 
         <para>
@@ -93,7 +93,7 @@ echo $config->database->params->dbname; // imprime "dbname"
     </example>
 
     <note>
-        <table xml:id="zend.config.adapters.ini.table"><info><title>Parâmetros do Construtor Zend_Config_Ini</title></info>
+        <table xml:id="zend.config.adapters.ini.table"><title>Parâmetros do Construtor Zend_Config_Ini</title>
             
 
             <tgroup cols="2">

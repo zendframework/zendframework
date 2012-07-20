@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.intro"><info><title>Einführung in Zend_Search_Lucene</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.intro"><title>Einführung in Zend_Search_Lucene</title>
     
 
     <para>
@@ -47,7 +47,7 @@
         ein eigener Analysator erstellt werden.
     </para>
 
-    <note><info><title>Verwendung von Analysatoren wärend der Indizierung und Suche</title></info>
+    <note><title>Verwendung von Analysatoren wärend der Indizierung und Suche</title>
         
 
         <para>

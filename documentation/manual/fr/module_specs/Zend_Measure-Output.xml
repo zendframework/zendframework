@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.output"><info><title>Récupérer des mesures</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.output"><title>Récupérer des mesures</title>
     
 
     <para>Les mesures peuvent être récupérer de différentes manières.</para>
@@ -24,12 +24,12 @@
         régionale</code> </link>
     </para>
 
-    <section xml:id="zend.measure.output.auto"><info><title>Récupération automatique</title></info>
+    <section xml:id="zend.measure.output.auto"><title>Récupération automatique</title>
         
 
         <para>
             <classname>Zend_Measure</classname> supporte la récupération sous formes de
-            chaînes de caractères automatiquement. <example xml:id="zend.measure.output.auto.example-1"><info><title>Récupération automatique</title></info>
+            chaînes de caractères automatiquement. <example xml:id="zend.measure.output.auto.example-1"><title>Récupération automatique</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -44,7 +44,7 @@ echo $unite; // affiche "1234567.89 m"
                 </example>
             </para>
 
-        <note><info><title>Affichage de la mesure</title></info>
+        <note><title>Affichage de la mesure</title>
             
 
             <para>
@@ -53,12 +53,12 @@ echo $unite; // affiche "1234567.89 m"
         </note>
     </section>
 
-    <section xml:id="zend.measure.output.value"><info><title>Récupération des valeurs</title></info>
+    <section xml:id="zend.measure.output.value"><title>Récupération des valeurs</title>
         
 
         <para>
             La valeur d'une mesure peut être récupérée en utilisant <methodname>getValue()</methodname>.
-            <example xml:id="zend.measure.output.value.example-1"><info><title>Récupération d'une valeur</title></info>
+            <example xml:id="zend.measure.output.value.example-1"><title>Récupération d'une valeur</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -80,11 +80,11 @@ echo $unite->getValue(); // affiche "1234567.89"
         </para>
     </section>
 
-    <section xml:id="zend.measure.output.unit"><info><title>Récupération de l'unité de mesure</title></info>
+    <section xml:id="zend.measure.output.unit"><title>Récupération de l'unité de mesure</title>
         
 
         <para>
-            La fonction <methodname>getType()</methodname> retourne l'unité de mesure courante. <example xml:id="zend.measure.output.unit.example-1"><info><title>Récupérer l'unité de mesure</title></info>
+            La fonction <methodname>getType()</methodname> retourne l'unité de mesure courante. <example xml:id="zend.measure.output.unit.example-1"><title>Récupérer l'unité de mesure</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -100,7 +100,7 @@ echo $unit->getType(); // affiche "POUND"
             </para>
     </section>
 
-    <section xml:id="zend.measure.output.localized"><info><title>Récupération en tant que chaîne régionale</title></info>
+    <section xml:id="zend.measure.output.localized"><title>Récupération en tant que chaîne régionale</title>
         
 
         <para>

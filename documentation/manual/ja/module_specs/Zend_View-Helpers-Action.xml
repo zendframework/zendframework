@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><info><title>Action ビューヘルパー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><title>Action ビューヘルパー</title>
     
 
     <para>
@@ -24,7 +24,7 @@
         は必須です。モジュールを省略した場合はデフォルトのモジュールを使用します。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.action.usage"><info><title>Action ビューヘルパーの基本的な使用法</title></info>
+    <example xml:id="zend.view.helpers.initial.action.usage"><title>Action ビューヘルパーの基本的な使用法</title>
         
 
         <para>

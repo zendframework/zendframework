@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>Inleiding</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><title>Inleiding</title>
 
     
 
@@ -29,7 +29,7 @@
         output genereert.
     </para>
 
-    <section xml:id="zend.view.introduction.controller"><info><title>Controller Script</title></info>
+    <section xml:id="zend.view.introduction.controller"><title>Controller Script</title>
 
         
 
@@ -68,7 +68,7 @@ echo $view->render('boeklijst.php');
 
     </section>
 
-    <section xml:id="zend.view.introduction.view"><info><title>View Script</title></info>
+    <section xml:id="zend.view.introduction.view"><title>View Script</title>
 
         
 

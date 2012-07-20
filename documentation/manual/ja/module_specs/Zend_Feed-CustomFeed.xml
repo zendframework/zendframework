@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>独自のフィードクラスおよびエントリクラス</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><title>独自のフィードクラスおよびエントリクラス</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         このクラスの使用者は、名前空間について心配する必要がなくなります。
     </para>
 
-    <example xml:id="zend.feed.custom-feed.example.extending"><info><title>独自の名前空間を使用しての Atom エントリクラスの拡張</title></info>
+    <example xml:id="zend.feed.custom-feed.example.extending"><title>独自の名前空間を使用しての Atom エントリクラスの拡張</title>
         
 
         <programlisting language="php"><![CDATA[

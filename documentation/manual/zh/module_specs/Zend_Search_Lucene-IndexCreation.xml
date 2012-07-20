@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><info><title>建立索引</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><title>建立索引</title>
     
 
-    <section xml:id="zend.search.lucene.index-creation.creating"><info><title>创建新索引</title></info>
+    <section xml:id="zend.search.lucene.index-creation.creating"><title>创建新索引</title>
         
 
         <para>
@@ -47,7 +47,7 @@ $index->commit();
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.updating"><info><title>更新索引</title></info>
+    <section xml:id="zend.search.lucene.index-creation.updating"><title>更新索引</title>
         
 
         <para>

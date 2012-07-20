@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>Изменение структуры лент и их сообщений</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><title>Изменение структуры лент и их сообщений</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         синтаксически корректный XML для сохранения в файл или отправки серверу.
     </para>
 
-    <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>Изменение существующего сообщения в ленте</title></info>
+    <example xml:id="zend.feed.modifying-feed.example.modifying"><title>Изменение существующего сообщения в ленте</title>
         
         <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
@@ -49,7 +49,7 @@ echo $entry->saveXML();
         другое пространство имен.
     </para>
 
-    <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>Создание сообщения Atom с элементами в специальном пространстве имен</title></info>
+    <example xml:id="zend.feed.modifying-feed.example.creating"><title>Создание сообщения Atom с элементами в специальном пространстве имен</title>
         
         <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom();

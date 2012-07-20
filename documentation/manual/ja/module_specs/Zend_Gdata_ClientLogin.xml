@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.clientlogin"><info><title>ClientLogin による認証</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.clientlogin"><title>ClientLogin による認証</title>
     
 
     <para>
@@ -29,7 +29,7 @@
         しかし、それは <acronym>PHP</acronym> アプリケーションを使用するユーザ自身のものである必要はありません。
     </para>
 
-    <section xml:id="zend.gdata.clientlogin.login"><info><title>ClientLogin 認証済みの Http クライアントの作成</title></info>
+    <section xml:id="zend.gdata.clientlogin.login"><title>ClientLogin 認証済みの Http クライアントの作成</title>
         
 
         <para>
@@ -100,7 +100,7 @@ $cal = new Zend_Gdata_Calendar($client);
 
     </section>
 
-    <section xml:id="zend.gdata.clientlogin.terminating"><info><title>Http クライアントの ClientLogin 認証の解除</title></info>
+    <section xml:id="zend.gdata.clientlogin.terminating"><title>Http クライアントの ClientLogin 認証の解除</title>
         
 
         <para>

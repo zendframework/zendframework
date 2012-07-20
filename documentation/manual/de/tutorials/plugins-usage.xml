@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.usage"><info><title>Verwenden von Plugins</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.usage"><title>Verwenden von Plugins</title>
     
 
     <para>
@@ -18,7 +18,7 @@
         Einige Beispiele werden das alles etwas aufklären.
     </para>
 
-    <example xml:id="learning.plugins.usage.basic"><info><title>Grundsätzliches Plugin Beispiel: Hinzufügen eines einzelnen Präfix Pfades</title></info>
+    <example xml:id="learning.plugins.usage.basic"><title>Grundsätzliches Plugin Beispiel: Hinzufügen eines einzelnen Präfix Pfades</title>
         
 
         <para>
@@ -73,7 +73,7 @@ $element->addValidator('NotEmpty')
         </para>
     </example>
 
-    <note><info><title>Was passiert wenn ein Plugin nicht gefunden wird?</title></info>
+    <note><title>Was passiert wenn ein Plugin nicht gefunden wird?</title>
         
 
         <para>
@@ -94,7 +94,7 @@ $element->addValidator('NotEmpty')
         </para>
     </note>
 
-    <example xml:id="learning.plugins.usage.override"><info><title>Fortgeschrittene Plugin Verwendung: Überladen existierender Plugins</title></info>
+    <example xml:id="learning.plugins.usage.override"><title>Fortgeschrittene Plugin Verwendung: Überladen existierender Plugins</title>
         
 
         <para>

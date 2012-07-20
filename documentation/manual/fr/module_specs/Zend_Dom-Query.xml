@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.query"><info><title>Zend_Dom_Query</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.query"><title>Zend_Dom_Query</title>
     
 
     <para>
@@ -20,7 +20,7 @@
         dojo.query</link>ont tous les deux inspirer ce composant).
     </para>
 
-    <section xml:id="zend.dom.query.operation"><info><title>Aspect théorique</title></info>
+    <section xml:id="zend.dom.query.operation"><title>Aspect théorique</title>
         
 
         <para>
@@ -173,7 +173,7 @@ foreach ($results as $result) {
 
     </section>
 
-    <section xml:id="zend.dom.query.methods"><info><title>Méthodes disponibles</title></info>
+    <section xml:id="zend.dom.query.methods"><title>Méthodes disponibles</title>
         
 
         <para>
@@ -181,7 +181,7 @@ foreach ($results as $result) {
             méthodes suivantes.
         </para>
 
-        <section xml:id="zend.dom.query.methods.zenddomquery"><info><title>Zend_Dom_Query</title></info>
+        <section xml:id="zend.dom.query.methods.zenddomquery"><title>Zend_Dom_Query</title>
             
 
             <para>
@@ -249,7 +249,7 @@ foreach ($results as $result) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.dom.query.methods.zenddomqueryresult"><info><title>Zend_Dom_Query_Result</title></info>
+        <section xml:id="zend.dom.query.methods.zenddomqueryresult"><title>Zend_Dom_Query_Result</title>
             
 
             <para>

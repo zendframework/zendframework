@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.composite"><info><title>Créer et rendre des éléments composites</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.composite"><title>Créer et rendre des éléments composites</title>
     
 
     <para>
@@ -27,7 +27,7 @@
         Comment écrire un décorateur qui s'assure de son rendu ?
     </para>
 
-    <section xml:id="learning.form.decorators.composite.element"><info><title>L'élément</title></info>
+    <section xml:id="learning.form.decorators.composite.element"><title>L'élément</title>
         
 
         <para>
@@ -190,7 +190,7 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
         </para>
     </section>
 
-    <section xml:id="learning.form.decorators.composite.decorator"><info><title>Le décorateur</title></info>
+    <section xml:id="learning.form.decorators.composite.decorator"><title>Le décorateur</title>
         
 
         <para>
@@ -358,7 +358,7 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
 ]]></programlisting>
     </section>
 
-    <section xml:id="learning.form.decorators.composite.conclusion"><info><title>Conclusion</title></info>
+    <section xml:id="learning.form.decorators.composite.conclusion"><title>Conclusion</title>
         
 
         <para>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Расширенное использование</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><title>Расширенное использование</title>
 
     
 
-    <section xml:id="zend.acl.advanced.storing"><info><title>Постоянное хранение данных ACL</title></info>
+    <section xml:id="zend.acl.advanced.storing"><title>Постоянное хранение данных ACL</title>
 
         
 
@@ -30,7 +30,7 @@
 
     </section>
 
-    <section xml:id="zend.acl.advanced.assertions"><info><title>Написание условных правил ACL с утверждениями</title></info>
+    <section xml:id="zend.acl.advanced.assertions"><title>Написание условных правил ACL с утверждениями</title>
 
         
 

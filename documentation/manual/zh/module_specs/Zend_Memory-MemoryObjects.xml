@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-objects"><info><title>内存对象</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-objects"><title>内存对象</title>
 
     
 
-    <section xml:id="zend.memory.memory-objects.movable"><info><title>可移动的</title></info>
+    <section xml:id="zend.memory.memory-objects.movable"><title>可移动的</title>
 
         
 
@@ -21,7 +21,7 @@ $memObject = $memoryManager->create($data);
 
     </section>
 
-    <section xml:id="zend.memory.memory-objects.locked"><info><title>锁定的</title></info>
+    <section xml:id="zend.memory.memory-objects.locked"><title>锁定的</title>
 
         
 
@@ -60,7 +60,7 @@ $memObject = $memoryManager->createLocked($data);
 
     </section>
 
-    <section xml:id="zend.memory.memory-objects.value"><info><title>内存容器 '值' 属性.</title></info>
+    <section xml:id="zend.memory.memory-objects.value"><title>内存容器 '值' 属性.</title>
 
         
 
@@ -88,7 +88,7 @@ $memObject->value = substr($memObject->value, $start, $length);
         </para>
     </section>
 
-    <section xml:id="zend.memory.memory-objects.api"><info><title>内存容器接口</title></info>
+    <section xml:id="zend.memory.memory-objects.api"><title>内存容器接口</title>
 
         
 
@@ -96,7 +96,7 @@ $memObject->value = substr($memObject->value, $start, $length);
             内存容器提供下面的方法:
         </para>
 
-        <section xml:id="zend.memory.memory-objects.api.getRef"><info><title>getRef() 方法</title></info>
+        <section xml:id="zend.memory.memory-objects.api.getRef"><title>getRef() 方法</title>
 
             
 
@@ -137,7 +137,7 @@ for ($count = 0; $count < strlen($value); $count++) {
 
         </section>
 
-        <section xml:id="zend.memory.memory-objects.api.touch"><info><title>touch() 方法</title></info>
+        <section xml:id="zend.memory.memory-objects.api.touch"><title>touch() 方法</title>
 
             
 
@@ -169,7 +169,7 @@ $memObject->touch();
 
         </section>
 
-        <section xml:id="zend.memory.memory-objects.api.lock"><info><title>lock() 方法</title></info>
+        <section xml:id="zend.memory.memory-objects.api.lock"><title>lock() 方法</title>
 
             
 
@@ -209,7 +209,7 @@ $memObject2->unlock();
 
         </section>
 
-        <section xml:id="zend.memory.memory-objects.api.unlock"><info><title>unlock() 方法</title></info>
+        <section xml:id="zend.memory.memory-objects.api.unlock"><title>unlock() 方法</title>
 
             
 
@@ -224,7 +224,7 @@ public function unlock();
 
         </section>
 
-        <section xml:id="zend.memory.memory-objects.api.isLocked"><info><title>isLocked() 方法</title></info>
+        <section xml:id="zend.memory.memory-objects.api.isLocked"><title>isLocked() 方法</title>
 
             
 

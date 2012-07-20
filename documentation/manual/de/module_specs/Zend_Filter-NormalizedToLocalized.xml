@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.normalizedtolocalized"><info><title>NormalizedToLocalized</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.normalizedtolocalized"><title>NormalizedToLocalized</title>
     
 
     <para>
@@ -61,7 +61,7 @@
         Jede andere Eingabe wird so wie Sie ist zurückgegeben, ohne das Sie geändert wird.
     </para>
 
-    <section xml:id="zend.filter.set.normalizedtolocalized.numbers"><info><title>Lokalisierung von Zahlen</title></info>
+    <section xml:id="zend.filter.set.normalizedtolocalized.numbers"><title>Lokalisierung von Zahlen</title>
         
 
         <para>
@@ -123,7 +123,7 @@ $filter->filter(123456.78901);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.filter.set.normalizedtolocalized.dates"><info><title>Lokalisierung für Datum und Zeit</title></info>
+    <section xml:id="zend.filter.set.normalizedtolocalized.dates"><title>Lokalisierung für Datum und Zeit</title>
         
 
         <para>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><info><title>Zend_Mime_Part</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><title>Zend_Mime_Part</title>
     
 
-    <section xml:id="zend.mime.part.introduction"><info><title> 简介 </title></info>
+    <section xml:id="zend.mime.part.introduction"><title> 简介 </title>
       
       <para>
           <code>Zend_Mime_Part</code>表示 MIME 消息的一个段。它包含了MIME消息段的实际内容以及编码、内容类型和原始的文件名等一些附加信息。它也提供了一个方法，用来从存储的数据产生字符串。<code>Zend_Mime_Part</code>对象可以被添加到<link linkend="zend.mime.message"><code>Zend_Mime_Message</code></link>中去，来聚合产生一个完整的多段的MIME消息。
       </para>
     </section>
 
-  <section xml:id="zend.mime.part.instantiation"><info><title> 实例化 </title></info>
+  <section xml:id="zend.mime.part.instantiation"><title> 实例化 </title>
     
 
     <para>
@@ -27,7 +27,7 @@ public $charset;
     ]]></programlisting>
     </section>
 
-  <section xml:id="zend.mime.part.methods"><info><title> 解析（rendering）消息段为字符串的方法 </title></info>
+  <section xml:id="zend.mime.part.methods"><title> 解析（rendering）消息段为字符串的方法 </title>
     
 
     <para>

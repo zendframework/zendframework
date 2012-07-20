@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>Allegati</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><title>Allegati</title>
     
     <para>
         Si possono allegare file ad un'e-mail utilizzando il metodo <code>createAttachment()</code>.
         Per impostazione predefinita, <code>Zend_Mail</code> assume che l'allegato corrisponda ad un oggetto binario (application/octet-stream), adotta una codifica base64 per il trasferimento e gestisce l'oggetto come allegato.
         Queste convenzioni possono essere sovrascritte passando uno o più parametri al metodo <code>createAttachment()</code>:
     </para>
-    <example xml:id="zend.mail.attachments.example-1"><info><title>Messaggi e-mail con allegati</title></info>
+    <example xml:id="zend.mail.attachments.example-1"><title>Messaggi e-mail con allegati</title>
         
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Mail.php';

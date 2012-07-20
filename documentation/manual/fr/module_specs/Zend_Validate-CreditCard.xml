@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.creditcard"><info><title>CreditCard</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.creditcard"><title>CreditCard</title>
     
 
     <para>
@@ -83,7 +83,7 @@
         </listitem>
     </itemizedlist>
 
-    <note><info><title>Institutions non valides</title></info>
+    <note><title>Institutions non valides</title>
         
 
         <para>
@@ -97,7 +97,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.validate.set.creditcard.options"><info><title>Options supportées par  Zend_Validate_CreditCard</title></info>
+    <section xml:id="zend.validate.set.creditcard.options"><title>Options supportées par  Zend_Validate_CreditCard</title>
         
 
         <para>
@@ -123,7 +123,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.creditcard.basic"><info><title>Utilisation classique</title></info>
+    <section xml:id="zend.validate.set.creditcard.basic"><title>Utilisation classique</title>
         
 
         <para>
@@ -146,7 +146,7 @@ if ($valid->isValid($input)) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.creditcard.institute"><info><title>Accepter seulement certains types de cartes</title></info>
+    <section xml:id="zend.validate.set.creditcard.institute"><title>Accepter seulement certains types de cartes</title>
         
 
         <para>
@@ -193,7 +193,7 @@ $valid = new Zend_Validate_CreditCard(array(
 ));
 ]]></programlisting>
 
-        <table xml:id="zend.validate.set.creditcard.institute.table"><info><title>Constante représentant les institutions</title></info>
+        <table xml:id="zend.validate.set.creditcard.institute.table"><title>Constante représentant les institutions</title>
             
             <tgroup cols="5">
                 <thead>
@@ -287,7 +287,7 @@ $valid->setType(array(
 ));
 ]]></programlisting>
 
-        <note><info><title>Institution par défaut</title></info>
+        <note><title>Institution par défaut</title>
             
 
             <para>
@@ -301,7 +301,7 @@ $valid->setType(array(
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.creditcard.servicecheck"><info><title>Validation par fonction de rappel</title></info>
+    <section xml:id="zend.validate.set.creditcard.servicecheck"><title>Validation par fonction de rappel</title>
         
 
         <para>

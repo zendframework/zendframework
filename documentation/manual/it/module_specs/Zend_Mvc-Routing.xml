@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.routing">
-  <info><title>Routing</title></info>
+  <title>Routing</title>
 
   <para>Il Routing è l'atto di far corrispondere ad una richiesta un preciso controller.</para>
 
@@ -129,7 +129,7 @@ $router->addRoutes(array(
 ]]></programlisting>
 
   <section xml:id="zend.mvc.routing.router-types">
-    <info><title>Tipi di Router</title></info>
+    <title>Tipi di Router</title>
 
     <para>Sono forniti due "router", il<classname>SimpleRouteStack</classname>
      e <classname>TreeRouteStack</classname>. Ognuno lavoro con la precedente
@@ -137,7 +137,7 @@ $router->addRoutes(array(
     </para>
 
     <section xml:id="zend.mvc.routing.router-types.simple-route-stack">
-      <info><title>SimpleRouteStack</title></info>
+      <title>SimpleRouteStack</title>
 
       <para>
         Questo router semplicemente raccoglie le "route" individuali e 
@@ -156,7 +156,7 @@ $router->addRoutes(array(
     </section>
 
     <section xml:id="zend.mvc.routing.router-types.tree-route-stack">
-      <info><title>TreeRouteStack</title></info>
+      <title>TreeRouteStack</title>
 
       <para>
         <classname>Zend\Mvc\Router\Http\TreeRouteStack</classname> fornisce 
@@ -226,14 +226,14 @@ $router->addRoutes(array(
   </section>
 
   <section xml:id="zend.mvc.routing.route-types">
-    <info><title>Tipi di Route</title></info>
+    <title>Tipi di Route</title>
 
     <para>
       Zend Framework 2.0 è fornito con i seguenti tipi di "route".
     </para>
 
     <section xml:id="zend.mvc.routing.route-types.hostname">
-      <info><title>Zend\Mvc\Router\Http\Hostname</title></info>
+      <title>Zend\Mvc\Router\Http\Hostname</title>
 
       <para>
         La <classname>Hostname</classname> route cerca di far corrispondere
@@ -304,7 +304,7 @@ $route = Hostname::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.literal">
-      <info><title>Zend\Mvc\Router\Http\Literal</title></info>
+      <title>Zend\Mvc\Router\Http\Literal</title>
 
       <para>
         La <classname>Literal</classname> è stata fatta per confrontare
@@ -330,7 +330,7 @@ $route = Literal::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.part">
-      <info><title>Zend\Mvc\Router\Http\Part</title></info>
+      <title>Zend\Mvc\Router\Http\Part</title>
 
       <para>
         Una "route" <classname>Part</classname> permette di 
@@ -448,7 +448,7 @@ $route = Part::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.regex">
-      <info><title>Zend\Mvc\Router\Http\Regex</title></info>
+      <title>Zend\Mvc\Router\Http\Regex</title>
 
       <para>
         Una "route" <classname>Regex</classname> utilizza una espressione
@@ -496,7 +496,7 @@ $route = Regex::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.scheme">
-      <info><title>Zend\Mvc\Router\Http\Scheme</title></info>
+      <title>Zend\Mvc\Router\Http\Scheme</title>
 
       <para>
         La "route" <classname>Scheme</classname> confronta solo lo
@@ -524,7 +524,7 @@ $route = Scheme::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.segment">
-      <info><title>Zend\Mvc\Router\Http\Segment</title></info>
+      <title>Zend\Mvc\Router\Http\Segment</title>
 
       <para>
         Una "route" <classname>Segment</classname> permette di confrontare

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.usage"><info><title>Ejemplo de Uso del módulo Zend_Pdf</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.usage"><title>Ejemplo de Uso del módulo Zend_Pdf</title>
     
     <para>Esta sección proporciona un ejemplo de uso del módulo.</para>
 
@@ -15,7 +15,7 @@
         usado con esta demo con fines de prueba.
     </para>
 
-    <example xml:id="zend.pdf.usage.example-1"><info><title>Demo de uso del módulo Zend_Pdf</title></info>
+    <example xml:id="zend.pdf.usage.example-1"><title>Demo de uso del módulo Zend_Pdf</title>
         
         <programlisting language="php"><![CDATA[
 /**

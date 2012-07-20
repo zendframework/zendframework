@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>Введение</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><title>Введение</title>
 
     
 
@@ -29,7 +29,7 @@
         вида, который генерирует выходные данные вида.
     </para>
 
-    <section xml:id="zend.view.introduction.controller"><info><title>Скрипт контроллера</title></info>
+    <section xml:id="zend.view.introduction.controller"><title>Скрипт контроллера</title>
 
         
 
@@ -67,7 +67,7 @@ echo $view->render('booklist.php');
 
     </section>
 
-    <section xml:id="zend.view.introduction.view"><info><title>Скрипт вида</title></info>
+    <section xml:id="zend.view.introduction.view"><title>Скрипт вида</title>
 
         
 
@@ -115,7 +115,7 @@ echo $view->render('booklist.php');
 
     </section>
 
-    <section xml:id="zend.view.introduction.options"><info><title>Опции</title></info>
+    <section xml:id="zend.view.introduction.options"><title>Опции</title>
         
 
         <para>
@@ -180,7 +180,7 @@ base/path/
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.view.introduction.shortTags"><info><title>Короткие теги в скриптах вида</title></info>
+    <section xml:id="zend.view.introduction.shortTags"><title>Короткие теги в скриптах вида</title>
         
 
         <para>
@@ -253,7 +253,7 @@ $view->setUseStreamWrapper(true);
             </listitem>
         </itemizedlist>
 
-        <note><info><title>Обертка потока для скриптов вида снижает производительность</title></info>
+        <note><title>Обертка потока для скриптов вида снижает производительность</title>
             
 
             <para>
@@ -268,7 +268,7 @@ $view->setUseStreamWrapper(true);
         </note>
     </section>
 
-    <section xml:id="zend.view.introduction.accessors"><info><title>Вспомогательные аксессоры</title></info>
+    <section xml:id="zend.view.introduction.accessors"><title>Вспомогательные аксессоры</title>
         
 
         <para>

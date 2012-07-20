@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title> 使用 Zend_Form_Decorator 生成定制的表单标识（Markup）</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><title> 使用 Zend_Form_Decorator 生成定制的表单标识（Markup）</title>
 
 
     <para>
@@ -18,7 +18,7 @@
         在每个装饰器的 <code>render()</code> 方法被调用之前，当前条目用 <code>setElement()</code> 设置到装饰器，让装饰器知道条目要被解析。这让你生成只解析条目的特定部分的装饰器 －－ 例如标签（label）、值（value）、错误消息等。通过把若干个解析特定元素部分的装饰器放到一起，你可以构建复杂的表示整个条目的标识（markup）。
     </para>
 
-    <section xml:id="zend.form.decorators.operation"><info><title> 操作 </title></info>
+    <section xml:id="zend.form.decorators.operation"><title> 操作 </title>
 
 
         <para>
@@ -74,7 +74,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.decorators.standard"><info><title> 标准装饰器 </title></info>
+    <section xml:id="zend.form.decorators.standard"><title> 标准装饰器 </title>
 
 
         <para>
@@ -82,7 +82,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.decorators.custom"><info><title> 定制装饰器 </title></info>
+    <section xml:id="zend.form.decorators.custom"><title> 定制装饰器 </title>
 
 
         <para>

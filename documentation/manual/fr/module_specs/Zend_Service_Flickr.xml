@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.flickr"><info><title>Zend_Service_Flickr</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.flickr"><title>Zend_Service_Flickr</title>
     
 
-    <section xml:id="zend.service.flickr.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.service.flickr.introduction"><title>Introduction</title>
         
 
         <para>
@@ -17,7 +17,7 @@
             pour rechercher des photos ayant "php" dans les tags.
         </para>
 
-        <example xml:id="zend.service.flickr.introduction.example-1"><info><title>Simple recherche de photos sur Flickr</title></info>
+        <example xml:id="zend.service.flickr.introduction.example-1"><title>Simple recherche de photos sur Flickr</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -31,7 +31,7 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
 
-        <note><info><title>Paramètres optionnels</title></info>
+        <note><title>Paramètres optionnels</title>
             
 
             <para>
@@ -41,7 +41,7 @@ foreach ($results as $result) {
         </note>
     </section>
 
-    <section xml:id="zend.service.flickr.finding-users"><info><title>Trouver les photos et les informations des utilisateurs Flickr</title></info>
+    <section xml:id="zend.service.flickr.finding-users"><title>Trouver les photos et les informations des utilisateurs Flickr</title>
         
 
         <para>
@@ -74,8 +74,8 @@ foreach ($results as $result) {
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.service.flickr.finding-users.example-1"><info><title>Trouver les photos publiques d'un utilisateur Flickr par son adresse
-            émail</title></info>
+        <example xml:id="zend.service.flickr.finding-users.example-1"><title>Trouver les photos publiques d'un utilisateur Flickr par son adresse
+            émail</title>
             
 
             <para>
@@ -96,7 +96,7 @@ foreach ($results as $result) {
         </example>
     </section>
 
-    <section xml:id="zend.service.flickr.grouppoolgetphotos"><info><title>Trouver des photos dans le pool d'un groupe</title></info>
+    <section xml:id="zend.service.flickr.grouppoolgetphotos"><title>Trouver des photos dans le pool d'un groupe</title>
         
 
         <para>
@@ -105,7 +105,7 @@ foreach ($results as $result) {
             <methodname>groupPoolGetPhotos()</methodname> :
         </para>
 
-        <example xml:id="zend.service.flickr.grouppoolgetphotos.example-1"><info><title>Récupération les photos du pool d'un groupe grâce à son ID</title></info>
+        <example xml:id="zend.service.flickr.grouppoolgetphotos.example-1"><title>Récupération les photos du pool d'un groupe grâce à son ID</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -119,7 +119,7 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
 
-        <note><info><title>Paramètre optionnel</title></info>
+        <note><title>Paramètre optionnel</title>
             
 
             <para>
@@ -129,7 +129,7 @@ foreach ($results as $result) {
         </note>
     </section>
 
-    <section xml:id="zend.service.flickr.getimagedetails"><info><title>Récupérer les détails d'une image</title></info>
+    <section xml:id="zend.service.flickr.getimagedetails"><title>Récupérer les détails d'une image</title>
         
 
         <para>
@@ -138,7 +138,7 @@ foreach ($results as $result) {
             <methodname>getImageDetails()</methodname>, comme dans l'exemple suivant :
         </para>
 
-        <example xml:id="zend.service.flickr.getimagedetails.example-1"><info><title>Récupérer les détails d'une image</title></info>
+        <example xml:id="zend.service.flickr.getimagedetails.example-1"><title>Récupérer les détails d'une image</title>
             
 
             <para>
@@ -158,7 +158,7 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
         </example>
     </section>
 
-    <section xml:id="zend.service.flickr.classes"><info><title>Classes de résultats Zend_Service_Flickr</title></info>
+    <section xml:id="zend.service.flickr.classes"><title>Classes de résultats Zend_Service_Flickr</title>
         
 
         <para>
@@ -184,7 +184,7 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
                 </itemizedlist>
             </para>
 
-        <section xml:id="zend.service.flickr.classes.resultset"><info><title>Zend_Service_Flickr_ResultSet</title></info>
+        <section xml:id="zend.service.flickr.classes.resultset"><title>Zend_Service_Flickr_ResultSet</title>
             
 
             <para>Représente le jeu de résultats d'une recherche sur Flickr.</para>
@@ -197,10 +197,10 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
                 </para>
             </note>
 
-            <section xml:id="zend.service.flickr.classes.resultset.properties"><info><title>Propriétés</title></info>
+            <section xml:id="zend.service.flickr.classes.resultset.properties"><title>Propriétés</title>
                 
 
-                <table xml:id="zend.service.flickr.classes.resultset.properties.table-1"><info><title>Propriétés Zend_Service_Flickr_ResultSet</title></info>
+                <table xml:id="zend.service.flickr.classes.resultset.properties.table-1"><title>Propriétés Zend_Service_Flickr_ResultSet</title>
                     
 
                     <tgroup cols="3">
@@ -236,7 +236,7 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
                 </table>
             </section>
 
-            <section xml:id="zend.service.flickr.classes.resultset.totalResults"><info><title>Zend_Service_Flickr_ResultSet::totalResults()</title></info>
+            <section xml:id="zend.service.flickr.classes.resultset.totalResults"><title>Zend_Service_Flickr_ResultSet::totalResults()</title>
                 
 
                 <para>
@@ -258,15 +258,15 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
             </section>
         </section>
 
-        <section xml:id="zend.service.flickr.classes.result"><info><title>Zend_Service_Flickr_Result</title></info>
+        <section xml:id="zend.service.flickr.classes.result"><title>Zend_Service_Flickr_Result</title>
             
 
             <para>Un seule image résultant d'une requête sur Flickr.</para>
 
-            <section xml:id="zend.service.flickr.classes.result.properties"><info><title>Propriétés</title></info>
+            <section xml:id="zend.service.flickr.classes.result.properties"><title>Propriétés</title>
                 
 
-                <table xml:id="zend.service.flickr.classes.result.properties.table-1"><info><title>Propriétés Zend_Service_Flickr_Result</title></info>
+                <table xml:id="zend.service.flickr.classes.result.properties.table-1"><title>Propriétés Zend_Service_Flickr_Result</title>
                     
 
                     <tgroup cols="3">
@@ -408,15 +408,15 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
             </section>
         </section>
 
-        <section xml:id="zend.service.flickr.classes.image"><info><title>Zend_Service_Flickr_Image</title></info>
+        <section xml:id="zend.service.flickr.classes.image"><title>Zend_Service_Flickr_Image</title>
             
 
             <para>Représente une image retournée pour une recherche Flickr.</para>
 
-            <section xml:id="zend.service.flickr.classes.image.properties"><info><title>Propriétés</title></info>
+            <section xml:id="zend.service.flickr.classes.image.properties"><title>Propriétés</title>
                 
 
-                <table xml:id="zend.service.flickr.classes.image.properties.table-1"><info><title>Propriétés Zend_Service_Flickr_Image</title></info>
+                <table xml:id="zend.service.flickr.classes.image.properties.table-1"><title>Propriétés Zend_Service_Flickr_Image</title>
                     
 
                     <tgroup cols="3">

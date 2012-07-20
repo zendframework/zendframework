@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.jspush"><info><title>Zend_ProgressBar_Adapter_JsPush</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.jspush"><title>Zend_ProgressBar_Adapter_JsPush</title>
     
     <para>
         <classname>Zend_ProgressBar_Adapter_JsPush</classname> は、
@@ -73,7 +73,7 @@
             </para>
         </listitem>
     </itemizedlist>
-    <example xml:id="zend.progressbar-adapter.jspush.example"><info><title>クライアント側の基本例</title></info>
+    <example xml:id="zend.progressbar-adapter.jspush.example"><title>クライアント側の基本例</title>
         
         <para>
             この例では、JsPush アダプタ用の <acronym>HTML</acronym> および <acronym>CSS</acronym>、JavaScript
@@ -145,7 +145,7 @@ function Zend_ProgressBar_Update(data)
             </listitem>
         </itemizedlist>
     </example>
-    <note><info><title>更新間隔</title></info>
+    <note><title>更新間隔</title>
         
         <para>
             あまり頻繁に更新しすぎないようにしましょう。

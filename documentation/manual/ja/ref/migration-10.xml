@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.10"><info><title>Zend Framework 1.0</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.10"><title>Zend Framework 1.0</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         下記の移行上の注意点に注意すべきです。
     </para>
 
-    <section xml:id="migration.10.zend.controller"><info><title>Zend_Controller</title></info>
+    <section xml:id="migration.10.zend.controller"><title>Zend_Controller</title>
         
 
         <para>
@@ -186,7 +186,7 @@ $viewRenderer->setView($view);]]></programlisting>
         </para>
     </section>
 
-    <section xml:id="migration.10.zend.currency"><info><title>Zend_Currency</title></info>
+    <section xml:id="migration.10.zend.currency"><title>Zend_Currency</title>
         
 
         <para>

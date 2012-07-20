@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.mail"><info><title>Email への書き込み</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.mail"><title>Email への書き込み</title>
     
 
     <para>
@@ -60,7 +60,7 @@ $log->error('unable to connect to database');
         メールには 7 つのログエントリが含まれることになります。
     </para>
 
-    <section xml:id="zend.log.writers.mail.layoutusage"><info><title>Zend_Layout の使用法</title></info>
+    <section xml:id="zend.log.writers.mail.layoutusage"><title>Zend_Layout の使用法</title>
         
 
         <para>
@@ -114,7 +114,7 @@ $log->error('unable to connect to database');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.log.writers.mail.dynamicsubjectline"><info><title>件名でのエラーの概要</title></info>
+    <section xml:id="zend.log.writers.mail.dynamicsubjectline"><title>件名でのエラーの概要</title>
         
 
         <para>
@@ -130,7 +130,7 @@ $log->error('unable to connect to database');
         </para>
     </section>
 
-    <section xml:id="zend.log.writers.mail.caveats"><info><title>警告</title></info>
+    <section xml:id="zend.log.writers.mail.caveats"><title>警告</title>
         
 
         <para>

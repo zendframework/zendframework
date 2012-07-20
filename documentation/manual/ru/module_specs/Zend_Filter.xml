@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Введение</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><title>Введение</title>
 
     
 
@@ -11,7 +11,7 @@
         пользователем.
     </para>
 
-    <section xml:id="zend.filter.introduction.definition"><info><title>Что есть фильтр?</title></info>
+    <section xml:id="zend.filter.introduction.definition"><title>Что есть фильтр?</title>
 
         
 
@@ -44,7 +44,7 @@
 
     </section>
 
-    <section xml:id="zend.filter.introduction.using"><info><title>Основы использования фильтров</title></info>
+    <section xml:id="zend.filter.introduction.using"><title>Основы использования фильтров</title>
 
         
 
@@ -71,7 +71,7 @@ echo $htmlEntities->filter('"'); // "
 
     </section>
     
-    <section xml:id="zend.filter.introduction.static"><info><title>Использование статического метода get()</title></info>
+    <section xml:id="zend.filter.introduction.static"><title>Использование статического метода get()</title>
 
         
 

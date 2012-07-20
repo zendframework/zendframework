@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>例外の使用法</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><title>例外の使用法</title>
 
     
 
@@ -8,7 +8,7 @@
         Zend Framework のクラスがスローするすべての例外の基底クラスとなります。
     </para>
 
-    <example xml:id="zend.exception.using.example"><info><title>例外のキャッチ</title></info>
+    <example xml:id="zend.exception.using.example"><title>例外のキャッチ</title>
         
         <para>
             次のコードは、Zend Framework のクラスからスローされた例外をキャッチする方法を示すものです。

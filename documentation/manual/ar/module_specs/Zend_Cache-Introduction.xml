@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><info><title>مقدمة</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><title>مقدمة</title>
     
     <para>
         <code>Zend_Cache</code> يوفر إمكانية عمل cache للبيانات.
@@ -20,7 +20,7 @@
 
 
     </para>
-    <example><info><title>إنشاء frontend بواسطة <code>()Zend_Cache::factory</code></title></info>
+    <example><title>إنشاء frontend بواسطة <code>()Zend_Cache::factory</code></title>
         
 
         <para>
@@ -78,7 +78,7 @@ print_r($result);
 ?>]]></programlisting>
        </para>
     </example>
-    <example><info><title>عمل cache للخرج بإستخدام الـ Output frontend الخاصة بـ <code>Zend_Cache</code></title></info>
+    <example><title>عمل cache للخرج بإستخدام الـ Output frontend الخاصة بـ <code>Zend_Cache</code></title>
         
         <para>
            سنقوم بتحديد الأماكن التى نريد عمل cache لخرجها و ذلك بإستخدامنا لبعض الأكواد الشرطية,

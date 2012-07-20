@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.server"><info><title>Zend_XmlRpc_Server</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.server"><title>Zend_XmlRpc_Server</title>
     
 
-    <section xml:id="zend.xmlrpc.server.introduction"><info><title>Wprowadzenie</title></info>
+    <section xml:id="zend.xmlrpc.server.introduction"><title>Wprowadzenie</title>
         
 
         <para>Klasa Zend_XmlRpc_Server jest przeznaczona do użycia jako
@@ -14,7 +14,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.usage"><info><title>Podstawowe użycie</title></info>
+    <section xml:id="zend.xmlrpc.server.usage"><title>Podstawowe użycie</title>
         
 
         <para>
@@ -29,7 +29,7 @@ echo $server->handle();
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.structure"><info><title>Struktura serwera</title></info>
+    <section xml:id="zend.xmlrpc.server.structure"><title>Struktura serwera</title>
         
 
         <para>
@@ -63,7 +63,7 @@ echo $server->handle();
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.conventions"><info><title>Konwencje</title></info>
+    <section xml:id="zend.xmlrpc.server.conventions"><title>Konwencje</title>
         
         <para>
             Zend_XmlRpc_Server pozwala programiście dołączać funkcje oraz metody
@@ -146,7 +146,7 @@ function myFunc($val1, $val2, $val3)
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.namespaces"><info><title>Używanie przestrzeni nazw</title></info>
+    <section xml:id="zend.xmlrpc.server.namespaces"><title>Używanie przestrzeni nazw</title>
         
 
         <para>
@@ -185,7 +185,7 @@ $server->addFunction('somefunc', 'funcs');
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.request"><info><title>Własny obiekt żądania</title></info>
+    <section xml:id="zend.xmlrpc.server.request"><title>Własny obiekt żądania</title>
         
 
         <para>
@@ -202,7 +202,7 @@ $server->addFunction('somefunc', 'funcs');
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.response"><info><title>Własne odpowiedzi</title></info>
+    <section xml:id="zend.xmlrpc.server.response"><title>Własne odpowiedzi</title>
         
 
         <para>
@@ -220,7 +220,7 @@ $server->addFunction('somefunc', 'funcs');
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.fault"><info><title>Obsługa wyjątków poprzez odpowiedzi błędów</title></info>
+    <section xml:id="zend.xmlrpc.server.fault"><title>Obsługa wyjątków poprzez odpowiedzi błędów</title>
         
 
         <para>
@@ -261,7 +261,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.caching"><info><title>Buforowanie definicji serwera pomiędzy żądaniami</title></info>
+    <section xml:id="zend.xmlrpc.server.caching"><title>Buforowanie definicji serwera pomiędzy żądaniami</title>
         
         <para>
             Dołączanie wielu klas do instancji serwera XML-RPC może zajmować
@@ -312,14 +312,14 @@ echo $server->handle();
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.use"><info><title>Przykład użycia</title></info>
+    <section xml:id="zend.xmlrpc.server.use"><title>Przykład użycia</title>
         
         <para>
             Poniżej znajduje się kilka przykładów użycia, pokazując pełne
             spektrum opcji dostępnych dla programistów. Każdy z przykładów
             użycia jest oparty na poprzednich przykładach.
         </para>
-        <section xml:id="zend.xmlrpc.server.use.case1"><info><title>Podstawowe użycie</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case1"><title>Podstawowe użycie</title>
             
 
             <para>
@@ -346,7 +346,7 @@ echo $server->handle();
             ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case2"><info><title>Dołączanie klasy</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case2"><title>Dołączanie klasy</title>
             
 
             <para>
@@ -362,7 +362,7 @@ echo $server->handle();
             ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case3"><info><title>Dołączanie wielu klas używając przestrzeni nazw</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case3"><title>Dołączanie wielu klas używając przestrzeni nazw</title>
             
 
             <para>
@@ -380,7 +380,7 @@ echo $server->handle();
             ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case4"><info><title>Określenie wyjątków dla odpowiedzi błędów</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case4"><title>Określenie wyjątków dla odpowiedzi błędów</title>
             
 
             <para>
@@ -402,7 +402,7 @@ echo $server->handle();
             ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case5"><info><title>Użycie własnego obiektu żądania</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case5"><title>Użycie własnego obiektu żądania</title>
             
 
             <para>
@@ -427,7 +427,7 @@ echo $server->handle($request);
             ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case6"><info><title>Użycie własnego obiektu odpowiedzi</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case6"><title>Użycie własnego obiektu odpowiedzi</title>
             
 
             <para>
@@ -455,7 +455,7 @@ echo $server->handle($request);
             ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case7"><info><title>Buforowanie definicji serwera pomiędzy żądaniami</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case7"><title>Buforowanie definicji serwera pomiędzy żądaniami</title>
             
 
             <para>

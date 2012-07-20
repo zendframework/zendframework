@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><info><title>キャッシュの仕組み</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><title>キャッシュの仕組み</title>
     
 
     <para>
@@ -39,7 +39,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.cache.factory"><info><title>Zend_Cache ファクトリメソッド</title></info>
+    <section xml:id="zend.cache.factory"><title>Zend_Cache ファクトリメソッド</title>
         
 
         <para>
@@ -83,7 +83,7 @@ $cache = Zend_Cache::factory($frontendName,
         </note>
     </section>
 
-    <section xml:id="zend.cache.tags"><info><title>レコードのタグ付け</title></info>
+    <section xml:id="zend.cache.tags"><title>レコードのタグ付け</title>
         
 
         <para>
@@ -106,7 +106,7 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
         </note>
     </section>
 
-    <section xml:id="zend.cache.clean"><info><title>キャッシュの削除</title></info>
+    <section xml:id="zend.cache.clean"><title>キャッシュの削除</title>
         
 
         <para>

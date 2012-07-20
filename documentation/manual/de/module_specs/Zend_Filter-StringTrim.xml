@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtrim"><info><title>StringTrim</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtrim"><title>StringTrim</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         vom Ende entfernt werden.
     </para>
 
-     <section xml:id="zend.filter.set.stringtrim.options"><info><title>Unterstützte Optionen für Zend_Filter_StringTrim</title></info>
+     <section xml:id="zend.filter.set.stringtrim.options"><title>Unterstützte Optionen für Zend_Filter_StringTrim</title>
         
 
         <para>
@@ -27,7 +27,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.filter.set.stringtrim.basic"><info><title>Einfache Verwendung</title></info>
+    <section xml:id="zend.filter.set.stringtrim.basic"><title>Einfache Verwendung</title>
         
 
         <para>
@@ -46,7 +46,7 @@ print $filter->filter(' Das ist (mein) Inhalt: ');
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.stringtrim.types"><info><title>Standardverhalten für Zend_Filter_StringTrim</title></info>
+    <section xml:id="zend.filter.set.stringtrim.types"><title>Standardverhalten für Zend_Filter_StringTrim</title>
         
 
         <programlisting language="php"><![CDATA[

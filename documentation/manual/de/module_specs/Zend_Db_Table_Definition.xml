@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.definition"><info><title>Zend_Db_Table_Definition</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.definition"><title>Zend_Db_Table_Definition</title>
     
 
-    <section xml:id="zend.db.table.definition.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.db.table.definition.introduction"><title>Einführung</title>
         
 
         <para>
@@ -13,7 +13,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.db.table.definition.usage"><info><title>Grundsätzliche Verwendung</title></info>
+    <section xml:id="zend.db.table.definition.usage"><title>Grundsätzliche Verwendung</title>
         
 
         <para>
@@ -31,7 +31,7 @@
             Sektion im Beispiel anbei.)
         </para>
 
-        <example xml:id="zend.db.table.definition.example1"><info><title>Die Definition eines Datenbank Data Modells beschreiben</title></info>
+        <example xml:id="zend.db.table.definition.example1"><title>Die Definition eines Datenbank Data Modells beschreiben</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -84,7 +84,7 @@ $definition = new Zend_Db_Table_Definition(array(
             Datenmodell korrespondieren:
         </para>
 
-        <example xml:id="zend.db.table.definition.example2"><info><title>Mit der beschriebenen Definition interagieren</title></info>
+        <example xml:id="zend.db.table.definition.example2"><title>Mit der beschriebenen Definition interagieren</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -113,7 +113,7 @@ foreach ($authors as $author) {
         </example>
     </section>
 
-    <section xml:id="zend.db.table.definition.advanced-usage"><info><title>Fortgeschrittene Verwendung</title></info>
+    <section xml:id="zend.db.table.definition.advanced-usage"><title>Fortgeschrittene Verwendung</title>
         
 
         <para>
@@ -131,7 +131,7 @@ foreach ($authors as $author) {
             Definition interagieren kann.
         </para>
 
-        <example xml:id="zend.db.table.definition.example3"><info><title>Mit einer gemischten Zend_Db_Table Definition interagieren</title></info>
+        <example xml:id="zend.db.table.definition.example3"><title>Mit einer gemischten Zend_Db_Table Definition interagieren</title>
             
 
             <programlisting language="php"><![CDATA[

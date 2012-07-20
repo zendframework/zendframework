@@ -3,13 +3,13 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.examples">
-  <info><title>Esempi</title></info>
+  <title>Esempi</title>
 
   <section xml:id="zend.mvc.examples.controllers">
-    <info><title>I Controller</title></info>
+    <title>I Controller</title>
 
     <section xml:id="zend.mvc.examples.controllers.accessing-the-request-and-response">
-      <info><title>Accedere alle Request e Response (richieste e risposte)</title></info>
+      <title>Accedere alle Request e Response (richieste e risposte)</title>
 
       <para>
         Quando utilizzi <classname>AbstractActionController</classname> oppure
@@ -50,7 +50,7 @@ $response = $event->getResponse();
     </section>
 
     <section xml:id="zend.mvc.examples.controllers.accessing-routing-parameters">
-      <info><title>Accedere ai parametri di instradamento</title></info>
+      <title>Accedere ai parametri di instradamento</title>
 
       <para>
         I parametri di ritorno quando un intradamento è completo sono
@@ -86,7 +86,7 @@ $matches = $event->getRouteMatch();
     </section>
 
     <section xml:id="zend.mvc.examples.controllers.returning-early">
-      <info><title>Returning early</title></info>
+      <title>Returning early</title>
 
       <para>
         Puoi effettivamente cortocircuitare l'esecuzione dell'applicazione
@@ -108,10 +108,10 @@ $matches = $event->getRouteMatch();
   </section>
 
   <section xml:id="zend.mvc.examples.bootstrapping">
-    <info><title>Bootstrapping</title></info>
+    <title>Bootstrapping</title>
 
     <section xml:id="registering-module-specific-listeners">
-      <info><title>Registrare listener specifici per un modulo</title></info>
+      <title>Registrare listener specifici per un modulo</title>
 
       <para>
         Spesso si vogliono dei listener specifici per un modulo. Un esempio

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><info><title>Erweitert</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><title>Erweitert</title>
     
 
-    <section xml:id="zend.search.lucene.advanced.format_migration"><info><title>Beginnend mit 1.6, Behandlung von Index Format Veränderungen</title></info>
+    <section xml:id="zend.search.lucene.advanced.format_migration"><title>Beginnend mit 1.6, Behandlung von Index Format Veränderungen</title>
         
 
         <para>
@@ -80,7 +80,7 @@
             Rückwärts Konvertierungen werden nicht unterstützt.
         </para>
 
-        <note><info><title>Wichtig!</title></info>
+        <note><title>Wichtig!</title>
             
 
             <para>
@@ -93,7 +93,7 @@
 
     </section>
 
-    <section xml:id="zend.search.lucene.advanced.static"><info><title>Den Index als statische Eigenschaft verwenden</title></info>
+    <section xml:id="zend.search.lucene.advanced.static"><title>Den Index als statische Eigenschaft verwenden</title>
         
 
         <para>

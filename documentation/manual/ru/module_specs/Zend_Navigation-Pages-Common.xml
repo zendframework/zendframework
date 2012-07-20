@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.common"><info><title>Общие функциональные возможности страниц</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.common"><title>Общие функциональные возможности страниц</title>
     
 
     <para>
@@ -25,7 +25,7 @@
         о создании своих типов страниц</link>.
     </para>
 
-    <table xml:id="zend.navigation.pages.common.options"><info><title>Общие опции страниц</title></info>
+    <table xml:id="zend.navigation.pages.common.options"><title>Общие опции страниц</title>
         
         <tgroup cols="4">
             <thead>
@@ -208,7 +208,7 @@
         </tgroup>
     </table>
 
-    <note><info><title>Пользовательские свойства</title></info>
+    <note><title>Пользовательские свойства</title>
         
         <para>
             Все страницы поддерживают установку и получение пользовательских
@@ -233,7 +233,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.navigation.pages.common.example.customprops"><info><title>Пользовательские свойства страницы</title></info>
+    <example xml:id="zend.navigation.pages.common.example.customprops"><title>Пользовательские свойства страницы</title>
         
 
         <para>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><info><title>Nastavenie hranice MIME</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><title>Nastavenie hranice MIME</title>
     
     <para>
         Ak má e-mail viac častí oddeľujú sa pomocou hranice ktorá sa generuje náhodne. Pomocou metódy
         <code>setMimeBoundary()</code> je možné nastaviť vlastnú MIME hranicu, napríklad:
     </para>
-    <example><info><title>Nastavenie hranice MIME</title></info>
+    <example><title>Nastavenie hranice MIME</title>
         
         <programlisting role="php"><![CDATA[
 <?php

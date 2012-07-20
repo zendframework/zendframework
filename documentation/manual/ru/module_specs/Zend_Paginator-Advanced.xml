@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.advanced"><info><title>Расширенное использование</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.advanced"><title>Расширенное использование</title>
     
 
-    <section xml:id="zend.paginator.advanced.adapters"><info><title>Создание собственных адаптеров к источникам данных</title></info>
+    <section xml:id="zend.paginator.advanced.adapters"><title>Создание собственных адаптеров к источникам данных</title>
         
 
         <para>
@@ -65,7 +65,7 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
         </para>
     </section>
 
-    <section xml:id="zend.paginator.advanced.scrolling-styles"><info><title>Создание своих стилей прокрутки</title></info>
+    <section xml:id="zend.paginator.advanced.scrolling-styles"><title>Создание своих стилей прокрутки</title>
         
 
         <para>
@@ -116,7 +116,7 @@ Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.paginator.advanced.caching"><info><title>Возможности кэширования</title></info>
+    <section xml:id="zend.paginator.advanced.caching"><title>Возможности кэширования</title>
         
 
         <para>
@@ -226,7 +226,7 @@ var_dump($paginator->getPageItemCache());
         </para>
     </section>
 
-    <section xml:id="zend.paginator.advanced.aggregator"><info><title>Интерфейс Zend_Paginator_AdapterAggregate</title></info>
+    <section xml:id="zend.paginator.advanced.aggregator"><title>Интерфейс Zend_Paginator_AdapterAggregate</title>
         
 
         <para>

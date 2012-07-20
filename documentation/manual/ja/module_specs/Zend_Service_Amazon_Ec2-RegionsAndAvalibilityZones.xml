@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.zones"><info><title>Zend_Service_Amazon_Ec2:リージョンおよび利用可能ゾーン</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.zones"><title>Zend_Service_Amazon_Ec2:リージョンおよび利用可能ゾーン</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         アプリケーションを単一の利用可能ゾーンの失敗から保護できます。
     </para>
 
-    <section xml:id="zend.service.amazon.ec2.zones.regions"><info><title>アマゾンEC2リージョン</title></info>
+    <section xml:id="zend.service.amazon.ec2.zones.regions"><title>アマゾンEC2リージョン</title>
         
 
         <para>
@@ -29,7 +29,7 @@
             そして、それはEC2リソース毎の場所感覚を明白にもたらします。
         </para>
 
-        <example xml:id="zend.service.amazon.ec2.zones.regions.example"><info><title>利用可能リージョンを表示</title></info>
+        <example xml:id="zend.service.amazon.ec2.zones.regions.example"><title>利用可能リージョンを表示</title>
             
 
             <para>
@@ -52,7 +52,7 @@ foreach($regions as $region) {
         </example>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.zones.availability"><info><title>アマゾンEC2利用可能ゾーン</title></info>
+    <section xml:id="zend.service.amazon.ec2.zones.availability"><title>アマゾンEC2利用可能ゾーン</title>
         
 
         <para>
@@ -66,7 +66,7 @@ foreach($regions as $region) {
             利用可能なゾーンを指定することを考慮しないかもしれません。
         </para>
 
-        <example xml:id="zend.service.amazon.ec2.zones.availability.example"><info><title>利用可能ゾーンを表示</title></info>
+        <example xml:id="zend.service.amazon.ec2.zones.availability.example"><title>利用可能ゾーンを表示</title>
             
 
             <para>

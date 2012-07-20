@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><info><title>Zend_Uri</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><title>Zend_Uri</title>
   
 
-  <section xml:id="zend.uri.overview"><info><title>概述</title></info>
+  <section xml:id="zend.uri.overview"><title>概述</title>
     
 
     <para>
@@ -17,14 +17,14 @@
     </para>
   </section>
 
-  <section xml:id="zend.uri.creation"><info><title>新建一个URI</title></info>
+  <section xml:id="zend.uri.creation"><title>新建一个URI</title>
     
 
     <para>
       如果仅有一个模式被传递给<code>Zend_Uri::factory()</code>,<code>Zend_Uri</code>将从头构造一个新的URI.
     </para>
 
-    <example><info><title>使用<code>Zend_Uri::factory()</code>创建一个新的URI</title></info>
+    <example><title>使用<code>Zend_Uri::factory()</code>创建一个新的URI</title>
       
 
       <programlisting role="php"><![CDATA[
@@ -51,14 +51,14 @@ $uri = Zend_Uri::factory('http');
     </para>
   </section>
 
-  <section xml:id="zend.uri.manipulation"><info><title>操作现有的URI</title></info>
+  <section xml:id="zend.uri.manipulation"><title>操作现有的URI</title>
     
 
     <para>
       要操作一个现有的URL,把整个URI传递给<code>Zend_Uri::factory()</code>.
     </para>
 
-    <example><info><title>使用<code>Zend_Uri::factory()</code>操作一个现有的URI</title></info>
+    <example><title>使用<code>Zend_Uri::factory()</code>操作一个现有的URI</title>
       
 
     <programlisting role="php"><![CDATA[
@@ -80,14 +80,14 @@ $uri = Zend_Uri::factory('http://www.zend.com');
     </para>
   </section>
 
-  <section xml:id="zend.uri.validation"><info><title>URI 验证</title></info>
+  <section xml:id="zend.uri.validation"><title>URI 验证</title>
     
 
     <para>
       <code>Zend_Uri::check()</code> 函数仅在需要验证一个现有的URI时使用.
     </para>
 
-    <example><info><title>使用<code>Zend_Uri::check()</code>进行URI 验证</title></info>
+    <example><title>使用<code>Zend_Uri::check()</code>进行URI 验证</title>
       
 
     <programlisting role="php"><![CDATA[
@@ -108,21 +108,21 @@ $valid = Zend_Uri::check('http://uri.in.question');
     </para>
   </section>
 
-  <section xml:id="zend.uri.instance-methods"><info><title>公共实例方法</title></info>
+  <section xml:id="zend.uri.instance-methods"><title>公共实例方法</title>
     
 
     <para>
       每个<code>Zend_Uri</code>子类的实例(如:<code>Zend_Uri_Http</code>)有多个 有用的 处理任何类型的 URI的实例方法.
     </para>
 
-    <section xml:id="zend.uri.instance-methods.getscheme"><info><title>取得URI的Schema</title></info>
+    <section xml:id="zend.uri.instance-methods.getscheme"><title>取得URI的Schema</title>
       
 
       <para>
       URI模式是冒号之前的部分.例如<code>http://www.zend.com</code>的模式是<code>http</code>.
       </para>
 
-      <example><info><title>从<code>Zend_Uri_*</code> 对象取得模式</title></info>
+      <example><title>从<code>Zend_Uri_*</code> 对象取得模式</title>
         
 
         <programlisting role="php"><![CDATA[
@@ -143,10 +143,10 @@ $scheme = $uri->getScheme();  // "http"
 
     </section>
 
-    <section xml:id="zend.uri.instance-methods.geturi"><info><title>取得整个URI</title></info>
+    <section xml:id="zend.uri.instance-methods.geturi"><title>取得整个URI</title>
       
 
-      <example><info><title>从一个<code>Zend_Uri_*</code> 对象取得整个URI</title></info>
+      <example><title>从一个<code>Zend_Uri_*</code> 对象取得整个URI</title>
         
 
         <programlisting role="php"><![CDATA[
@@ -166,7 +166,7 @@ echo $uri->getUri();  // "http://www.zend.com"
       </para>
     </section>
 
-    <section xml:id="zend.uri.instance-methods.valid"><info><title>验证URI</title></info>
+    <section xml:id="zend.uri.instance-methods.valid"><title>验证URI</title>
       
 
       <para>
@@ -174,7 +174,7 @@ echo $uri->getUri();  // "http://www.zend.com"
         <code>Zend_Uri</code>子类为 一个新URI 或者 一个现有的有效的URL 被实例化后,在操作后 该URI可能会变得无效.
       </para>
 
-      <example><info><title>验证一个 <code>Zend_Uri_*</code> 对象</title></info>
+      <example><title>验证一个 <code>Zend_Uri_*</code> 对象</title>
         
 
         <programlisting role="php"><![CDATA[

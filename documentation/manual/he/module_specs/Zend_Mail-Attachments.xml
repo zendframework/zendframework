@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>צירופים</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><title>צירופים</title>
     
     <para>
         ניתן לצרף קבצים לאימייל בעזרת מתודת ה <code>createAttachment()</code>. פעולת ברירת המחדל של <code>Zend_Mail</code> היא לחשוב שהצירוף הוא קובץ בינארי
         (application/octet-stream), ולכן ידרוש העברה בעזרת קידוד base64, ומטופל כצירוף.
         השערות אלו ניתנות לדריסה על ידי העברת פרמטרים נוספים למתודה <code>createAttachment()</code>:
     </para>
-    <example xml:id="zend.mail.attachments.example-1"><info><title>שליחת אימיילים עם צירוף קבצים</title></info>
+    <example xml:id="zend.mail.attachments.example-1"><title>שליחת אימיילים עם צירוף קבצים</title>
         
         <programlisting role="php"><![CDATA[
 $mail = new Zend_Mail();

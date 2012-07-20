@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>Zapisywanie zmian w dokumencie PDF.</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><title>Zapisywanie zmian w dokumencie PDF.</title>
     
     <para>
     Dostępne są dwie metody, które zapewniają zapisywanie zmian w dokumencie PDF.
@@ -19,7 +19,7 @@
     zwracany jest nowy segment pliku PDF.
     </para>
 
-    <example xml:id="zend.pdf.save.example-1"><info><title>Zapisywanie dokumentu PDF.</title></info>
+    <example xml:id="zend.pdf.save.example-1"><title>Zapisywanie dokumentu PDF.</title>
         
         <programlisting role="php"><![CDATA[
 ...

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.amf.server"><info><title>Zend_Amf_Server</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.amf.server"><title>Zend_Amf_Server</title>
     
 
     <para>
@@ -10,7 +10,7 @@
             <acronym>API</acronym> de SoapServer, proporcionando una interfaz
         para crear servidores fácil de recordar. </para>
 
-    <example xml:id="zend.amf.server.basic"><info><title>Servidor AMF básico</title></info>
+    <example xml:id="zend.amf.server.basic"><title>Servidor AMF básico</title>
         
 
         <para> Asumamos que ha creado la clase <classname>Foo</classname> con
@@ -83,8 +83,8 @@ $servidor->addDirectory(dirname(__FILE__) .'/../package/');
                 <acronym>AMF</acronym> . </para>
     </example>
 
-    <note><info><title>Todos los métodos y las funciones agregadas requieren bloques de
-            documentación (docblocks)</title></info>
+    <note><title>Todos los métodos y las funciones agregadas requieren bloques de
+            documentación (docblocks)</title>
         
 
         <para> Como todos los demás componentes del servidor en Zend Framework,
@@ -127,7 +127,7 @@ class Mundo
         <para>Pueden usarse otras anotaciones, pero serán ignoradas.</para>
     </note>
 
-    <section xml:id="zend.amf.server.flex"><info><title>Conectándose al Servidor desde Flex</title></info>
+    <section xml:id="zend.amf.server.flex"><title>Conectándose al Servidor desde Flex</title>
         
 
         <para> Conectarse a <classname>Zend_Amf_Server</classname> desde su
@@ -255,7 +255,7 @@ myservice.world.hello("Wade");
             visite el sitio de ayuda de Adobe Flex 3 en: <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://livedocs.adobe.com/flex/3/html/help.html?content=data_access_4.html">http://livedocs.adobe.com/flex/3/html/help.html?content=data_access_4.html</uri> . </para>
     </section>
 
-    <section xml:id="zend.amf.server.errors"><info><title>Manejo de errores</title></info>
+    <section xml:id="zend.amf.server.errors"><title>Manejo de errores</title>
         
 
         <para> Por defecto, todas las excepciones producidas en sus clases o
@@ -284,7 +284,7 @@ $server->setProduction(false);
 $server->setProduction(true);
 ]]></programlisting>
 
-        <note><info><title>¡Deshabilite el modo de producción racionalmente!</title></info>
+        <note><title>¡Deshabilite el modo de producción racionalmente!</title>
             
 
             <para> Sugerimos deshabilitar el modo de producción solo cuando se
@@ -308,7 +308,7 @@ $server->setProduction(true);
             producción. </para>
     </section>
 
-    <section xml:id="zend.amf.server.response"><info><title>Respuestas de AMF</title></info>
+    <section xml:id="zend.amf.server.response"><title>Respuestas de AMF</title>
         
 
         <para> En ocasiones es posible que quiera manipular ligeramente el
@@ -317,7 +317,7 @@ $server->setProduction(true);
             del servidor <methodname>handle()</methodname> que devuelve el
             objeto respuesta. </para>
 
-        <example xml:id="zend.amf.server.response.messageHeaderExample"><info><title>Agregar cabeceras de mensaje a la respuesta de AMF</title></info>
+        <example xml:id="zend.amf.server.response.messageHeaderExample"><title>Agregar cabeceras de mensaje a la respuesta de AMF</title>
             
 
             <para>En este ejemplo, añadiremos la cabecera de mensaje
@@ -332,7 +332,7 @@ echo $respuesta;
         </example>
     </section>
 
-    <section xml:id="zend.amf.server.typedobjects"><info><title>Objetos tipados</title></info>
+    <section xml:id="zend.amf.server.typedobjects"><title>Objetos tipados</title>
         
 
         <para> Similarmente a <acronym>SOAP</acronym> , <acronym>AMF</acronym>
@@ -442,7 +442,7 @@ private function getContactHandler(event:ResultEvent):void {
                 <emphasis>ContactVO</emphasis> . </para>
     </section>
 
-    <section xml:id="zend.amf.server.resources"><info><title>Recursos</title></info>
+    <section xml:id="zend.amf.server.resources"><title>Recursos</title>
         
 
         <para>
@@ -502,7 +502,7 @@ class Zend_Amf_Parse_Resource_MysqlResult
 
     </section>
 
-    <section xml:id="zend.amf.server.flash"><info><title>Conectándose al Servidor desde Flash</title></info>
+    <section xml:id="zend.amf.server.flash"><title>Conectándose al Servidor desde Flash</title>
         
 
         <para> La conexión a <classname>Zend_Amf_Server</classname> desde su
@@ -632,7 +632,7 @@ private function onFault(fault:Object):void {
 
     </section>
 
-    <section xml:id="zend.amf.server.auth"><info><title>Authentication</title></info>
+    <section xml:id="zend.amf.server.auth"><title>Authentication</title>
         
 
         <para>

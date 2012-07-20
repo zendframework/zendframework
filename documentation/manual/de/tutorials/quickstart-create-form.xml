@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-form"><info><title>Erstellen eines Formulars</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-form"><title>Erstellen eines Formulars</title>
     
 
     <para>
@@ -158,7 +158,7 @@ $this->form->setAction($this->url());
 echo $this->form;
 ]]></programlisting>
 
-    <note><info><title>Besser aussehende Formulare</title></info>
+    <note><title>Besser aussehende Formulare</title>
         
 
         <para>
@@ -174,7 +174,7 @@ echo $this->form;
         </para>
     </note>
 
-    <note><info><title>Checkpoint</title></info>
+    <note><title>Checkpoint</title>
         
 
         <para>

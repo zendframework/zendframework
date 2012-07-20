@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.intro"><info><title>Fabrique une application Multi-Utilisateurs avec Zend Framework</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.intro"><title>Fabrique une application Multi-Utilisateurs avec Zend Framework</title>
     
 
-    <section xml:id="learning.multiuser.intro.zf"><info><title>Zend Framework</title></info>
+    <section xml:id="learning.multiuser.intro.zf"><title>Zend Framework</title>
         
 
         <para>
@@ -45,7 +45,7 @@
             </listitem>
         </itemizedlist>
 
-        <note><info><title>Client contre Utilisateur</title></info>
+        <note><title>Client contre Utilisateur</title>
             
 
             <para>

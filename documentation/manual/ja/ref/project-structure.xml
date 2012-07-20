@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="project-structure"><info><title>Zend Framework MVC アプリケーションのために推奨されるプロジェクト構造</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="project-structure"><title>Zend Framework MVC アプリケーションのために推奨されるプロジェクト構造</title>
     
 
-    <section xml:id="project-structure.overview"><info><title>概要</title></info>
+    <section xml:id="project-structure.overview"><title>概要</title>
         
 
         <para>
@@ -39,7 +39,7 @@
         </para>
     </section>
 
-    <section xml:id="project-structure.project"><info><title>推奨されるプロジェクト・ディレクトリ構造</title></info>
+    <section xml:id="project-structure.project"><title>推奨されるプロジェクト・ディレクトリ構造</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -262,7 +262,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="project-structure.filesystem"><info><title>モジュール構造</title></info>
+    <section xml:id="project-structure.filesystem"><title>モジュール構造</title>
         
 
         <para>
@@ -295,7 +295,7 @@
         </para>
     </section>
 
-    <section xml:id="project-structure.rewrite"><info><title>リライト設定ガイド</title></info>
+    <section xml:id="project-structure.rewrite"><title>リライト設定ガイド</title>
         
 
         <para>
@@ -305,7 +305,7 @@
             多少の共通するアプローチです。
         </para>
 
-        <section xml:id="project-structure.rewrite.apache"><info><title>Apache HTTPサーバ</title></info>
+        <section xml:id="project-structure.rewrite.apache"><title>Apache HTTPサーバ</title>
             
 
             <para>
@@ -316,7 +316,7 @@
                 詳しくは、あなたのバージョンの <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/">Apache ドキュメント</link>を参照してください。
             </para>
 
-            <section xml:id="project-structure.rewrite.apache.vhost"><info><title>バーチャルホスト内でのリライト</title></info>
+            <section xml:id="project-structure.rewrite.apache.vhost"><title>バーチャルホスト内でのリライト</title>
                 
 
                 <para>
@@ -349,7 +349,7 @@
                 </para>
             </section>
 
-            <section xml:id="project-structure.rewrite.apache.htaccess"><info><title>.htaccessファイル内でのリライト</title></info>
+            <section xml:id="project-structure.rewrite.apache.htaccess"><title>.htaccessファイル内でのリライト</title>
                 
 
                 <para>
@@ -378,7 +378,7 @@ RewriteRule ^.*$ index.php [NC,L]
 
         </section>
 
-        <section xml:id="project-structure.rewrite.iis"><info><title>Microsoft Internet Information サーバ</title></info>
+        <section xml:id="project-structure.rewrite.iis"><title>Microsoft Internet Information サーバ</title>
             
 
             <para>

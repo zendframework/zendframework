@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.client"><info><title>Zend_Rest_Client</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.client"><title>Zend_Rest_Client</title>
     
 
-    <section xml:id="zend.rest.client.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.rest.client.introduction"><title>Introduction</title>
         
 
         <para>
@@ -13,7 +13,7 @@
             service dans le constructeur de <classname>Zend_Rest_Client</classname>.
         </para>
 
-        <example xml:id="zend.rest.client.introduction.example-1"><info><title>Une requête REST basique</title></info>
+        <example xml:id="zend.rest.client.introduction.example-1"><title>Une requête REST basique</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -29,7 +29,7 @@ echo $client->sayHello('Davey', 'Day')->get();
 ]]></programlisting>
         </example>
 
-        <note><info><title>Différences dans les appels</title></info>
+        <note><title>Différences dans les appels</title>
             
 
             <para>
@@ -48,7 +48,7 @@ echo $client->get();
         </note>
     </section>
 
-    <section xml:id="zend.rest.client.return"><info><title>Réponses</title></info>
+    <section xml:id="zend.rest.client.return"><title>Réponses</title>
         
 
         <para>
@@ -63,7 +63,7 @@ echo $client->get();
             statut de réponse (succès ou échec) et le type de retour.
         </para>
 
-        <example xml:id="zend.rest.client.return.example-1"><info><title>État de la réponse</title></info>
+        <example xml:id="zend.rest.client.return.example-1"><title>État de la réponse</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -94,7 +94,7 @@ if ($result->isSuccess()) {
             méthode, vous recevrez la valeur de <acronym>PHP</acronym> pour l'objet, ou un tableau de résultats.
         </para>
 
-        <example xml:id="zend.rest.client.return.example-2"><info><title>Utiliser le service REST Technorati</title></info>
+        <example xml:id="zend.rest.client.return.example-2"><title>Utiliser le service REST Technorati</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -106,7 +106,7 @@ echo $result->firstname() .' '. $result->lastname();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.rest.client.return.example-3"><info><title>Exemple de réponse Technorati</title></info>
+        <example xml:id="zend.rest.client.return.example-3"><title>Exemple de réponse Technorati</title>
             
 
             <programlisting language="xml"><![CDATA[
@@ -147,7 +147,7 @@ echo $result->firstname() .' '. $result->lastname();
             automatiquement retournées quand on accède par le nom.
         </para>
 
-        <note><info><title>Éléments multiples</title></info>
+        <note><title>Éléments multiples</title>
             
 
             <para>
@@ -158,7 +158,7 @@ echo $result->firstname() .' '. $result->lastname();
         </note>
     </section>
 
-    <section xml:id="zend.rest.client.args"><info><title>Arguments de requêtes</title></info>
+    <section xml:id="zend.rest.client.args"><title>Arguments de requêtes</title>
         
 
         <para>
@@ -172,7 +172,7 @@ echo $result->firstname() .' '. $result->lastname();
             <classname>Zend_Rest_Server</classname>.
         </para>
 
-        <example xml:id="zend.rest.client.args.example-1"><info><title>Affecter des arguments de requêtes</title></info>
+        <example xml:id="zend.rest.client.args.example-1"><title>Affecter des arguments de requêtes</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -201,7 +201,7 @@ $client->arg('value1')->arg2('value2')->get();
             correctement, plutôt que d'exiger la connaissance préalable du service.
         </para>
 
-        <warning><info><title>Sévérité de Zend_Rest_Client</title></info>
+        <warning><title>Sévérité de Zend_Rest_Client</title>
             
 
             <para>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><info><title>Zend Framework PHP Kodlama Standardı</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><title>Zend Framework PHP Kodlama Standardı</title>
   
-    <section xml:id="coding-standard.overview"><info><title>Genel Açıklama</title></info>
+    <section xml:id="coding-standard.overview"><title>Genel Açıklama</title>
         
 
-        <section xml:id="coding-standard.overview.scope"><info><title>Kapsam</title></info>
+        <section xml:id="coding-standard.overview.scope"><title>Kapsam</title>
             
 
             <para>
@@ -32,7 +32,7 @@
             </para>
         </section>
 
-        <section xml:id="coding-standard.overview.goals"><info><title>Amaçlar</title></info>
+        <section xml:id="coding-standard.overview.goals"><title>Amaçlar</title>
             
 
             <para>
@@ -43,10 +43,10 @@
         </section>
     </section>
 
-    <section xml:id="coding-standard.php-file-formatting"><info><title>PHP Dosya Biçimlemesi</title></info>
+    <section xml:id="coding-standard.php-file-formatting"><title>PHP Dosya Biçimlemesi</title>
         
 
-        <section xml:id="coding-standard.php-file-formatting.general"><info><title>Genel</title></info>
+        <section xml:id="coding-standard.php-file-formatting.general"><title>Genel</title>
             
 
             <para>
@@ -62,13 +62,13 @@
             </para>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.indentation"><info><title>Girintili Yazma</title></info>
+        <section xml:id="coding-standard.php-file-formatting.indentation"><title>Girintili Yazma</title>
             
 
             <para>Satırbaşı boşluğu olarak tab olmadan 4 boşluk kullanın.</para>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.max-line-length"><info><title>Maksimum Satır Uzunluğu</title></info>
+        <section xml:id="coding-standard.php-file-formatting.max-line-length"><title>Maksimum Satır Uzunluğu</title>
             
 
             <para>
@@ -78,7 +78,7 @@
             </para>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.line-termination"><info><title>Satır Sonlandırma</title></info>
+        <section xml:id="coding-standard.php-file-formatting.line-termination"><title>Satır Sonlandırma</title>
             
 
             <para>
@@ -95,10 +95,10 @@
         </section>
     </section>
 
-    <section xml:id="coding-standard.naming-conventions"><info><title>İsimlendirme Kuralları</title></info>
+    <section xml:id="coding-standard.naming-conventions"><title>İsimlendirme Kuralları</title>
         
 
-        <section xml:id="coding-standard.naming-conventions.classes"><info><title>Sınıflar</title></info>
+        <section xml:id="coding-standard.naming-conventions.classes"><title>Sınıflar</title>
             
 
             <para>
@@ -143,7 +143,7 @@ Zend_View_Helper
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.interfaces"><info><title>Arayüzler</title></info>
+        <section xml:id="coding-standard.naming-conventions.interfaces"><title>Arayüzler</title>
             
 
             <para>
@@ -157,7 +157,7 @@ Zend_Controller_Dispatcher_Interface
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.filenames"><info><title>Dosya Adları</title></info>
+        <section xml:id="coding-standard.naming-conventions.filenames"><title>Dosya Adları</title>
             
 
             <para>
@@ -182,7 +182,7 @@ Zend/View/Helper/FormRadio.php
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.functions-and-methods"><info><title>Fonksiyonlar ve Metodlar</title></info>
+        <section xml:id="coding-standard.naming-conventions.functions-and-methods"><title>Fonksiyonlar ve Metodlar</title>
             
 
             <para>
@@ -224,7 +224,7 @@ widgetFactory()
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.variables"><info><title>Değişkenler</title></info>
+        <section xml:id="coding-standard.naming-conventions.variables"><title>Değişkenler</title>
             
 
             <para>
@@ -251,7 +251,7 @@ widgetFactory()
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.constants"><info><title>Sabitler</title></info>
+        <section xml:id="coding-standard.naming-conventions.constants"><title>Sabitler</title>
             
 
             <para>
@@ -275,10 +275,10 @@ widgetFactory()
         </section>
     </section>
 
-    <section xml:id="coding-standard.coding-style"><info><title>Kodlama Stili</title></info>
+    <section xml:id="coding-standard.coding-style"><title>Kodlama Stili</title>
         
 
-        <section xml:id="coding-standard.coding-style.php-code-demarcation"><info><title>PHP Kodu Sınırlaması</title></info>
+        <section xml:id="coding-standard.coding-style.php-code-demarcation"><title>PHP Kodu Sınırlaması</title>
             
 
             <para>
@@ -295,10 +295,10 @@ widgetFactory()
             </para>
         </section>
 
-        <section xml:id="coding-standard.coding-style.strings"><info><title>Stringler</title></info>
+        <section xml:id="coding-standard.coding-style.strings"><title>Stringler</title>
             
 
-            <section xml:id="coding-standard.coding-style.strings.literals"><info><title>Yalın Stringler</title></info>
+            <section xml:id="coding-standard.coding-style.strings.literals"><title>Yalın Stringler</title>
                 
 
                 <para>
@@ -311,7 +311,7 @@ $a = 'Örnek String';
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><info><title>Kesme işareti içeren Yalın Stringler</title></info>
+            <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><title>Kesme işareti içeren Yalın Stringler</title>
                 
 
                 <para>
@@ -327,7 +327,7 @@ $sql = "SELECT `id`, `name` from `people` WHERE `name`='Fred' OR `name`='Susan'"
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.variable-substitution"><info><title>Değişken Yerine koyma</title></info>
+            <section xml:id="coding-standard.coding-style.strings.variable-substitution"><title>Değişken Yerine koyma</title>
                 
 
                 <para>
@@ -351,7 +351,7 @@ $greeting = "Merhaba ${isim}, tekrar hoşgeldin!";
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.string-concatenation"><info><title>String Birleştirme</title></info>
+            <section xml:id="coding-standard.coding-style.strings.string-concatenation"><title>String Birleştirme</title>
                 
 
                 <para>
@@ -378,10 +378,10 @@ $sql = "SELECT `id`, `name` FROM `people` "
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.arrays"><info><title>Diziler</title></info>
+        <section xml:id="coding-standard.coding-style.arrays"><title>Diziler</title>
             
 
-            <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><info><title>Sayısal İndeksli Diziler</title></info>
+            <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><title>Sayısal İndeksli Diziler</title>
                 
 
                 <para>Negatif sayılar indis olamaz.</para>
@@ -414,7 +414,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.arrays.associative"><info><title>Birleşmeli Diziler</title></info>
+            <section xml:id="coding-standard.coding-style.arrays.associative"><title>Birleşmeli Diziler</title>
                 
 
                 <para>
@@ -431,10 +431,10 @@ $sampleArray = array('ilkAnahtar'  => 'ilkDeger',
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.classes"><info><title>Sınıflar</title></info>
+        <section xml:id="coding-standard.coding-style.classes"><title>Sınıflar</title>
             
 
-            <section xml:id="coding-standard.coding-style.classes.declaration"><info><title>Sınıf Tanımlama</title></info>
+            <section xml:id="coding-standard.coding-style.classes.declaration"><title>Sınıf Tanımlama</title>
                 
 
                 <para>
@@ -465,7 +465,7 @@ class SampleClass
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.classes.member-variables"><info><title>Sınıf Üyesi Değişkenler</title></info>
+            <section xml:id="coding-standard.coding-style.classes.member-variables"><title>Sınıf Üyesi Değişkenler</title>
                 
 
                 <para>
@@ -482,10 +482,10 @@ class SampleClass
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.functions-and-methods"><info><title>Fonksiyonlar ve Metodlar</title></info>
+        <section xml:id="coding-standard.coding-style.functions-and-methods"><title>Fonksiyonlar ve Metodlar</title>
             
 
-            <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><info><title>Fonksion ve Metod Tanımlaması</title></info>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><title>Fonksion ve Metod Tanımlaması</title>
                 
 
                 <para>
@@ -579,7 +579,7 @@ class Foo
 
             </section>
 
-            <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><info><title>Fonksiyon ve Metod Kullanımı</title></info>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><title>Fonksiyon ve Metod Kullanımı</title>
                 
 
                 <para>
@@ -613,10 +613,10 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.control-statements"><info><title>Kontrol İfadeleri</title></info>
+        <section xml:id="coding-standard.coding-style.control-statements"><title>Kontrol İfadeleri</title>
             
 
-            <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><info><title>If / Else / Elseif</title></info>
+            <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><title>If / Else / Elseif</title>
                 
 
                 <para>
@@ -671,7 +671,7 @@ if ($a != 2) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.coding-style.control-statements.switch"><info><title>Switch</title></info>
+            <section xml:id="coding-standards.coding-style.control-statements.switch"><title>Switch</title>
                 
 
                 <para>
@@ -712,10 +712,10 @@ switch ($numPeople) {
             </section>
         </section>
 
-        <section xml:id="coding-standards.inline-documentation"><info><title>Satıriçi Belgelendirme</title></info>
+        <section xml:id="coding-standards.inline-documentation"><title>Satıriçi Belgelendirme</title>
             
 
-            <section xml:id="coding-standards.inline-documentation.documentation-format"><info><title>Belgelendirme Biçimi</title></info>
+            <section xml:id="coding-standards.inline-documentation.documentation-format"><title>Belgelendirme Biçimi</title>
                 
 
                 <para>
@@ -732,7 +732,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.files"><info><title>Dosyalar</title></info>
+            <section xml:id="coding-standards.inline-documentation.files"><title>Dosyalar</title>
                 
 
                 <para>
@@ -756,7 +756,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.classes"><info><title>Sınıflar</title></info>
+            <section xml:id="coding-standards.inline-documentation.classes"><title>Sınıflar</title>
                 
 
                 <para>
@@ -780,7 +780,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.functions"><info><title>Fonksiyonlar</title></info>
+            <section xml:id="coding-standards.inline-documentation.functions"><title>Fonksiyonlar</title>
                 
 
                 <para>

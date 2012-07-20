@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.adapter"><info><title>Zend_Db_Adapter</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.adapter"><title>Zend_Db_Adapter</title>
 
     
 
-    <section xml:id="zend.db.adapter.introduction"><info><title>简介 </title></info>
+    <section xml:id="zend.db.adapter.introduction"><title>简介 </title>
 
         
 
@@ -51,7 +51,7 @@ $db = Zend_Db::factory('PDO_SQLITE', $params);
         </para>
     </section>
 
-    <section xml:id="zend.db.adapter.quoting"><info><title>添加引号防止数据库攻击</title></info>
+    <section xml:id="zend.db.adapter.quoting"><title>添加引号防止数据库攻击</title>
 
         
 
@@ -102,7 +102,7 @@ $where = $db->quoteInto('id IN(?)', array(1, 2, 3));
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.adapter.查询"><info><title>直接查询</title></info>
+    <section xml:id="zend.db.adapter.查询"><title>直接查询</title>
 
         
 
@@ -169,7 +169,7 @@ $rows = $stmt->fetchAll();
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.adapter.事务处理"><info><title>事务处理</title></info>
+    <section xml:id="zend.db.adapter.事务处理"><title>事务处理</title>
 
         
 
@@ -200,7 +200,7 @@ try {
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.adapter.insert"><info><title>插入数据行</title></info>
+    <section xml:id="zend.db.adapter.insert"><title>插入数据行</title>
 
         
 
@@ -241,7 +241,7 @@ $last_insert_id = $db->lastInsertId();
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.adapter.update"><info><title>更新数据行</title></info>
+    <section xml:id="zend.db.adapter.update"><title>更新数据行</title>
 
         
 
@@ -281,7 +281,7 @@ $rows_affected = $db->update($table, $set, $where);
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.adapter.delete"><info><title>删除数据行</title></info>
+    <section xml:id="zend.db.adapter.delete"><title>删除数据行</title>
 
         
 
@@ -311,7 +311,7 @@ $rows_affected = $db->delete($table, $where);
 ?>]]></programlisting>
     </section>
 
-    <section xml:id="zend.db.adapter.fetch"><info><title>取回查询结果</title></info>
+    <section xml:id="zend.db.adapter.fetch"><title>取回查询结果</title>
 
         
 

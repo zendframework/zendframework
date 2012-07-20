@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.best-practice"><info><title>Bonnes pratiques</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.best-practice"><title>Bonnes pratiques</title>
     
 
-    <section xml:id="zend.search.lucene.best-practice.field-names"><info><title>Nommage des champs</title></info>
+    <section xml:id="zend.search.lucene.best-practice.field-names"><title>Nommage des champs</title>
         
 
         <para>
@@ -49,7 +49,7 @@ foreach ($hits as $hit) {
 ]]></programlisting></para>
         </section>
 
-        <section xml:id="zend.search.lucene.best-practice.indexing-performance"><info><title>Performance de l'indexation</title></info>
+        <section xml:id="zend.search.lucene.best-practice.indexing-performance"><title>Performance de l'indexation</title>
             
 
         <para>
@@ -256,7 +256,7 @@ $index->optimize();
         <para>
             <emphasis>Nombre de segments</emphasis> &lt;= <emphasis>MaxBufferedDocs</emphasis>
             + <emphasis>MergeFactor</emphasis>*log
-            <subscript><emphasis>MergeFactor</emphasis></subscript> (<emphasis>Nombre de
+            <emphasis><subscript>MergeFactor</subscript></emphasis> (<emphasis>Nombre de
             documents</emphasis>/<emphasis>MaxBufferedDocs</emphasis>)
         </para>
 
@@ -276,7 +276,7 @@ $index->optimize();
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.best-practice.shutting-down"><info><title>Indexation à l'arrêt du programme</title></info>
+    <section xml:id="zend.search.lucene.best-practice.shutting-down"><title>Indexation à l'arrêt du programme</title>
         
 
         <para>
@@ -335,7 +335,7 @@ $index->commit();
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.best-practice.unique-id"><info><title>Récupération de documents par leur id unique</title></info>
+    <section xml:id="zend.search.lucene.best-practice.unique-id"><title>Récupération de documents par leur id unique</title>
         
 
         <para>
@@ -388,7 +388,7 @@ foreach ($docIds as $id) {
 ]]></programlisting></para>
         </section>
 
-        <section xml:id="zend.search.lucene.best-practice.memory-usage"><info><title>Utilisation de la mémoire</title></info>
+        <section xml:id="zend.search.lucene.best-practice.memory-usage"><title>Utilisation de la mémoire</title>
             
 
         <para>
@@ -443,7 +443,7 @@ foreach ($docIds as $id) {
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.best-practice.encoding"><info><title>Encodage</title></info>
+    <section xml:id="zend.search.lucene.best-practice.encoding"><title>Encodage</title>
         
 
         <para>
@@ -531,7 +531,7 @@ $hits = $index->find($queryStr);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.best-practice.maintenance"><info><title>Maintenance de l'index</title></info>
+    <section xml:id="zend.search.lucene.best-practice.maintenance"><title>Maintenance de l'index</title>
         
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.position"><info><title>Wo ist die Währung?</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.position"><title>Wo ist die Währung?</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         Konstanten angegeben wird:
     </para>
 
-    <table xml:id="zend.currency.position.table-1"><info><title>Vorhadene Positionen für die Währung</title></info>
+    <table xml:id="zend.currency.position.table-1"><title>Vorhadene Positionen für die Währung</title>
         
 
         <tgroup cols="2" align="left">
@@ -45,7 +45,7 @@
         </tgroup>
     </table>
 
-    <example xml:id="zend.currency.position.example-1"><info><title>Setzen der Währungsposition</title></info>
+    <example xml:id="zend.currency.position.example-1"><title>Setzen der Währungsposition</title>
         
 
         <para>

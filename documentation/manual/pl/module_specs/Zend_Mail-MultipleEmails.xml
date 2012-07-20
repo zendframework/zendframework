@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><info><title>Wysyłanie wielu maili podczas jednego połączenia SMTP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><title>Wysyłanie wielu maili podczas jednego połączenia SMTP</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         dostarczeniem widomości wysyłana jest komenda RSET.
     </para>
 
-    <example xml:id="zend.mail.multiple-emails.example-1"><info><title>Wysyłanie wielu maili podczas jednego połączenia SMTP</title></info>
+    <example xml:id="zend.mail.multiple-emails.example-1"><title>Wysyłanie wielu maili podczas jednego połączenia SMTP</title>
 
         
 
@@ -40,7 +40,7 @@ for ($i = 0; $i > 5; $i++) {
         między każdym wysyłaniem, poprzez dostęp do obiektu protokołu transportu.
     </para>
 
-    <example xml:id="zend.mail.multiple-emails.example-2"><info><title>Ręczna obsługa połączenia</title></info>
+    <example xml:id="zend.mail.multiple-emails.example-2"><title>Ręczna obsługa połączenia</title>
 
         
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.http"><info><title>HTTP 認証アダプタ</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.http"><title>HTTP 認証アダプタ</title>
 
     
 
-    <section xml:id="zend.auth.adapter.http.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.auth.adapter.http.introduction"><title>導入</title>
 
         
 
@@ -71,7 +71,7 @@
 
     </section>
 
-    <section xml:id="zend.auth.adapter.design_overview"><info><title>設計の概要</title></info>
+    <section xml:id="zend.auth.adapter.design_overview"><title>設計の概要</title>
 
         
 
@@ -86,7 +86,7 @@
 
     </section>
 
-    <section xml:id="zend.auth.adapter.configuration_options"><info><title>設定オプション</title></info>
+    <section xml:id="zend.auth.adapter.configuration_options"><title>設定オプション</title>
 
         
 
@@ -96,7 +96,7 @@
             その中には必須のものもあります。
         </para>
 
-        <table xml:id="zend.auth.adapter.configuration_options.table"><info><title>設定オプション</title></info>
+        <table xml:id="zend.auth.adapter.configuration_options.table"><title>設定オプション</title>
             
             <tgroup cols="3">
                 <thead>
@@ -168,7 +168,7 @@
 
     </section>
 
-    <section xml:id="zend.auth.adapter.http.resolvers"><info><title>リゾルバ</title></info>
+    <section xml:id="zend.auth.adapter.http.resolvers"><title>リゾルバ</title>
 
         
 
@@ -189,7 +189,7 @@
             その他のリゾルバも簡単に作成できます。
         </para>
 
-        <section xml:id="zend.auth.adapter.http.resolvers.file"><info><title>File リゾルバ</title></info>
+        <section xml:id="zend.auth.adapter.http.resolvers.file"><title>File リゾルバ</title>
 
             
 
@@ -244,7 +244,7 @@ $resolver->setFile($path);
 
     </section>
 
-    <section xml:id="zend.auth.adapter.http.basic_usage"><info><title>基本的な使用法</title></info>
+    <section xml:id="zend.auth.adapter.http.basic_usage"><title>基本的な使用法</title>
 
         
 

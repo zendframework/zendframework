@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.tablerowset"><info><title>Zend_Db_Table_Rowset</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.tablerowset"><title>Zend_Db_Table_Rowset</title>
 
     
 
-    <section xml:id="zend.db.table.rowset.introduction"><info><title>简介</title></info>
+    <section xml:id="zend.db.table.rowset.introduction"><title>简介</title>
 
         
 
@@ -15,7 +15,7 @@
 
     </section>
 
-    <section xml:id="zend.db.table.rowset.fetch"><info><title>取回结果集</title></info>
+    <section xml:id="zend.db.table.rowset.fetch"><title>取回结果集</title>
 
         
 
@@ -62,7 +62,7 @@ $rowset = $table->fetchAll();
 
     </section>
 
-    <section xml:id="zend.db.table.rowset.iterate"><info><title>遍历结果集</title></info>
+    <section xml:id="zend.db.table.rowset.iterate"><title>遍历结果集</title>
 
         
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><info><title>缓存原理</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><title>缓存原理</title>
     
     <para>
         在Zend_Cache中有三个关键概念.一是用于标识缓存纪录的唯一标识符(一个字符串).二是<code>'lifeTime'</code>指令,正如例子中所见,
@@ -14,7 +14,7 @@
     '缓存命中'是一个术语,它表示当一个缓存纪录发现可用,是有效的并且是'fresh'的(换言之,就是还没有过期).'Cache miss' 表示当在缓存中找不到需要的数据时,发生缓存不命中.
         当一个Cache miss发生是,你必须生成你的数据,并使它被缓存.而对于缓存命中,后端自动透明地从Cache中取回缓存纪录.
     </para></note>
-    <section xml:id="zend.cache.factory"><info><title><code>Zend_Cache</code> 工厂方法 </title></info>
+    <section xml:id="zend.cache.factory"><title><code>Zend_Cache</code> 工厂方法 </title>
         
         <para>
             下面的示例给出了一个构造<code>Zend_Cache</code>前端实例的好方法:
@@ -45,7 +45,7 @@ $cache = Zend_Cache::factory($frontendName, $backendName, $frontendOptions, $bac
         </para></note>
     </section>
 
-    <section xml:id="zend.cache.tags"><info><title>标记纪录</title></info>
+    <section xml:id="zend.cache.tags"><title>标记纪录</title>
         
         <para>
            标记是给缓存纪录分类的一种方法.当你使用<code>save()</code>方法保存一个缓存时,你可以给该缓存纪录设置一个或多个标记,多个标记以数组形式组织在一起
@@ -60,7 +60,7 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
             (if != false, it sets a specific lifetime for this particular cache record)
         </para></note>
     </section>
-    <section xml:id="zend.cache.clean"><info><title>缓存清理</title></info>
+    <section xml:id="zend.cache.clean"><title>缓存清理</title>
         
         <para>
             删除特定id的Cache纪录,使用<code>remove()</code>方法:

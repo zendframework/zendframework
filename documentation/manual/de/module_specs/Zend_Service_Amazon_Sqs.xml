@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.sqs"><info><title>Zend_Service_Amazon_Sqs</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.sqs"><title>Zend_Service_Amazon_Sqs</title>
     
 
-    <section xml:id="zend.service.amazon.sqs.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.service.amazon.sqs.introduction"><title>Einführung</title>
         
 
         <para>
@@ -27,7 +27,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.sqs.registering"><info><title>Bei Amazon SQS registrieren</title></info>
+    <section xml:id="zend.service.amazon.sqs.registering"><title>Bei Amazon SQS registrieren</title>
         
 
         <para>
@@ -42,7 +42,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.sqs.apiDocumentation"><info><title>API Dokumentation</title></info>
+    <section xml:id="zend.service.amazon.sqs.apiDocumentation"><title>API Dokumentation</title>
         
 
         <para>
@@ -54,7 +54,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.sqs.features"><info><title>Features</title></info>
+    <section xml:id="zend.service.amazon.sqs.features"><title>Features</title>
         
 
         <para>
@@ -95,7 +95,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.amazon.sqs.storing-your-first"><info><title>Beginnen</title></info>
+    <section xml:id="zend.service.amazon.sqs.storing-your-first"><title>Beginnen</title>
         
 
         <para>
@@ -109,7 +109,7 @@
             empfangen von Nachrichten.
         </para>
 
-        <example xml:id="zend.service.amazon.sqs.storing-your-first.example"><info><title>Beispiel der Verwendung von Zend_Service_Amazon_Sqs</title></info>
+        <example xml:id="zend.service.amazon.sqs.storing-your-first.example"><title>Beispiel der Verwendung von Zend_Service_Amazon_Sqs</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -139,7 +139,7 @@ $sqs = new Zend_Service_Amazon_Sqs();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.service.amazon.sqs.queues"><info><title>Operationen der Queue</title></info>
+    <section xml:id="zend.service.amazon.sqs.queues"><title>Operationen der Queue</title>
         
 
         <para>
@@ -167,9 +167,9 @@ $sqs = new Zend_Service_Amazon_Sqs();
                     <methodname>delete()</methodname> entfernt alle Nachrichten in der Queue.
                 </para>
 
-                <example xml:id="zend.service.amazon.sqs.queues.removalExample"><info><title>
+                <example xml:id="zend.service.amazon.sqs.queues.removalExample"><title>
                         Beispiel für das Entfernen von Queues aus Zend_Service_Amazon_Sqs
-                    </title></info>
+                    </title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -186,7 +186,7 @@ $sqs->delete($queue_url);
                     der Queue zurück.
                 </para>
 
-                <example xml:id="zend.service.amazon.sqs.queues.countExample"><info><title>Beispiel für das Zählen von Queues in Zend_Service_Amazon_Sqs</title></info>
+                <example xml:id="zend.service.amazon.sqs.queues.countExample"><title>Beispiel für das Zählen von Queues in Zend_Service_Amazon_Sqs</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -204,7 +204,7 @@ $count = $sqs->count($queue_url); // Gibt '1' zurück
                     zurück die dem Benutzer gehören.
                 </para>
 
-                <example xml:id="zend.service.amazon.sqs.queues.listExample"><info><title>Beispiel für das Auflisten von Queues in Zend_Service_Amazon_Sqs</title></info>
+                <example xml:id="zend.service.amazon.sqs.queues.listExample"><title>Beispiel für das Auflisten von Queues in Zend_Service_Amazon_Sqs</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -219,7 +219,7 @@ foreach($list as $queue) {
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.amazon.sqs.messages"><info><title>Operationen für Nachrichten</title></info>
+    <section xml:id="zend.service.amazon.sqs.messages"><title>Operationen für Nachrichten</title>
         
 
         <para>
@@ -239,9 +239,9 @@ foreach($list as $queue) {
                     <code>$queue_url</code> der SQS Queue.
                 </para>
 
-                <example xml:id="zend.service.amazon.sqs.messages.sendExample"><info><title>
+                <example xml:id="zend.service.amazon.sqs.messages.sendExample"><title>
                         Beispiel für das Senden von Nachrichten an Zend_Service_Amazon_Sqs
-                    </title></info>
+                    </title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -258,9 +258,9 @@ $sqs->send($queue_url, 'Das ist eine Test Nachricht');
                     Queue.
                 </para>
 
-                <example xml:id="zend.service.amazon.sqs.messages.receiveExample"><info><title>
+                <example xml:id="zend.service.amazon.sqs.messages.receiveExample"><title>
                         Beispiel für das Empfangen von Nachrichten von Zend_Service_Amazon_Sqs
-                    </title></info>
+                    </title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -282,9 +282,9 @@ foreach ($sqs->receive($queue_url) as $message) {
                     werden kann.
                 </para>
 
-                <example xml:id="zend.service.amazon.sqs.messages.deleteExample"><info><title>
+                <example xml:id="zend.service.amazon.sqs.messages.deleteExample"><title>
                         Beispiel für das Löschen von Nachrichten aus Zend_Service_Amazon_Sqs
-                    </title></info>
+                    </title>
                     
 
                     <programlisting language="php"><![CDATA[

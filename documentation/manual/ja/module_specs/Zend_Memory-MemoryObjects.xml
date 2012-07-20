@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-objects"><info><title>メモリオブジェクト</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-objects"><title>メモリオブジェクト</title>
 
     
 
-    <section xml:id="zend.memory.memory-objects.movable"><info><title>移動可能なオブジェクト</title></info>
+    <section xml:id="zend.memory.memory-objects.movable"><title>移動可能なオブジェクト</title>
 
         
 
@@ -24,7 +24,7 @@ $memObject = $memoryManager->create($data);
 
     </section>
 
-    <section xml:id="zend.memory.memory-objects.locked"><info><title>ロックされたオブジェクト</title></info>
+    <section xml:id="zend.memory.memory-objects.locked"><title>ロックされたオブジェクト</title>
 
         
 
@@ -66,7 +66,7 @@ $memObject = $memoryManager->createLocked($data);
 
     </section>
 
-    <section xml:id="zend.memory.memory-objects.value"><info><title>メモリコンテナの 'value' プロパティ</title></info>
+    <section xml:id="zend.memory.memory-objects.value"><title>メモリコンテナの 'value' プロパティ</title>
 
         
 
@@ -97,7 +97,7 @@ $memObject->value = substr($memObject->value, $start, $length);
         </para>
     </section>
 
-    <section xml:id="zend.memory.memory-objects.api"><info><title>メモリコンテナのインターフェイス</title></info>
+    <section xml:id="zend.memory.memory-objects.api"><title>メモリコンテナのインターフェイス</title>
 
         
 
@@ -105,7 +105,7 @@ $memObject->value = substr($memObject->value, $start, $length);
             メモリコンテナは、以下のメソッドを提供します。
         </para>
 
-        <section xml:id="zend.memory.memory-objects.api.getRef"><info><title>getRef() メソッド</title></info>
+        <section xml:id="zend.memory.memory-objects.api.getRef"><title>getRef() メソッド</title>
 
             
 
@@ -151,7 +151,7 @@ for ($count = 0; $count < strlen($value); $count++) {
 
         </section>
 
-        <section xml:id="zend.memory.memory-objects.api.touch"><info><title>touch() メソッド</title></info>
+        <section xml:id="zend.memory.memory-objects.api.touch"><title>touch() メソッド</title>
 
             
 
@@ -183,7 +183,7 @@ $memObject->touch();
 
         </section>
 
-        <section xml:id="zend.memory.memory-objects.api.lock"><info><title>lock() メソッド</title></info>
+        <section xml:id="zend.memory.memory-objects.api.lock"><title>lock() メソッド</title>
 
             
 
@@ -226,7 +226,7 @@ $memObject2->unlock();
 
         </section>
 
-        <section xml:id="zend.memory.memory-objects.api.unlock"><info><title>unlock() メソッド</title></info>
+        <section xml:id="zend.memory.memory-objects.api.unlock"><title>unlock() メソッド</title>
 
             
 
@@ -242,7 +242,7 @@ public function unlock();
 
         </section>
 
-        <section xml:id="zend.memory.memory-objects.api.isLocked"><info><title>isLocked() メソッド</title></info>
+        <section xml:id="zend.memory.memory-objects.api.isLocked"><title>isLocked() メソッド</title>
 
             
 

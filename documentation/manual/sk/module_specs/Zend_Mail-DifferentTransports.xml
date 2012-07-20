@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><info><title>Použitie rôznych spôsobov prenosu</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><title>Použitie rôznych spôsobov prenosu</title>
     
     <para>
         V prípade, že je potrebné poslať e-mail cez iné pripojenie je možné
@@ -7,7 +7,7 @@
         <code>setDefaultTransport()</code>. Predaný spôsob prenosu sa použije
         na miesto prednastaveného pre aktuálne volanie <code>send()</code>:
     </para>
-    <example><info><title>Použitie rôznych spôsobov prenosu</title></info>
+    <example><title>Použitie rôznych spôsobov prenosu</title>
         
         <programlisting role="php"><![CDATA[
 <?php
@@ -22,7 +22,7 @@ $mail->send($tr2);
 $mail->send();  // použije sa prednastavený
 ?>   ]]></programlisting>
     </example>
-    <note><info><title>Iné spôsoby prenosu</title></info>
+    <note><title>Iné spôsoby prenosu</title>
         
         <para>
             Ostatné spôsoby prenosu môžu byt vytvorené implementáciou <code>Zend_Mail_Transport_Interface</code>.

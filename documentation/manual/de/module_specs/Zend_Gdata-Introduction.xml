@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.introduction"><info><title>Einführung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.introduction"><title>Einführung</title>
     
 
     <para>
@@ -94,7 +94,7 @@
         </itemizedlist>
     </para>
 
-    <note><info><title>Nicht unterstützte Services</title></info>
+    <note><title>Nicht unterstützte Services</title>
         
 
         <para>
@@ -104,7 +104,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.gdata.introduction.structure"><info><title>Struktur von Zend_Gdata</title></info>
+    <section xml:id="zend.gdata.introduction.structure"><title>Struktur von Zend_Gdata</title>
         
 
         <para>
@@ -200,7 +200,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.services"><info><title>Mit Google Services interagieren</title></info>
+    <section xml:id="zend.gdata.introduction.services"><title>Mit Google Services interagieren</title>
         
 
         <para>
@@ -221,7 +221,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.magicfactory"><info><title>Instanzen von Zend_Gdata Klassen erhalten</title></info>
+    <section xml:id="zend.gdata.introduction.magicfactory"><title>Instanzen von Zend_Gdata Klassen erhalten</title>
         
 
         <para>
@@ -270,7 +270,7 @@ $entry->cell = $cell;
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.authentication"><info><title>Google Data Client Authentifizierung</title></info>
+    <section xml:id="zend.gdata.introduction.authentication"><title>Google Data Client Authentifizierung</title>
         
 
         <para>
@@ -287,7 +287,7 @@ $entry->cell = $cell;
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.dependencies"><info><title>Abhängigkeiten</title></info>
+    <section xml:id="zend.gdata.introduction.dependencies"><title>Abhängigkeiten</title>
         
 
         <para>
@@ -305,7 +305,7 @@ $entry->cell = $cell;
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.creation"><info><title>Erstellen eines neuen Gdata Klienten</title></info>
+    <section xml:id="zend.gdata.introduction.creation"><title>Erstellen eines neuen Gdata Klienten</title>
         
 
         <para>
@@ -357,7 +357,7 @@ $gdata->setMinorProtocolVersion(null);
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.parameters"><info><title>Übliche Abfrage Parameter</title></info>
+    <section xml:id="zend.gdata.introduction.parameters"><title>Übliche Abfrage Parameter</title>
         
 
         <para>
@@ -492,7 +492,7 @@ $query->resetParameters();      // löscht alle Parameter
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.gdata.introduction.getfeed"><info><title>Einen Feed empfangen</title></info>
+    <section xml:id="zend.gdata.introduction.getfeed"><title>Einen Feed empfangen</title>
         
 
         <para>
@@ -517,7 +517,7 @@ $feed = $gdata->getFeed($query);
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.paging"><info><title>Mit Mehrfach-Seiten Feeds arbeiten</title></info>
+    <section xml:id="zend.gdata.introduction.paging"><title>Mit Mehrfach-Seiten Feeds arbeiten</title>
         
 
         <para>
@@ -562,7 +562,7 @@ $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.usefeedentry"><info><title>Arbeiten mit Daten in Feeds und Einträgen</title></info>
+    <section xml:id="zend.gdata.introduction.usefeedentry"><title>Arbeiten mit Daten in Feeds und Einträgen</title>
         
 
         <para>
@@ -588,7 +588,7 @@ foreach ($feed as $entry) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.gdata.introduction.updateentry"><info><title>Einträge aktualisieren</title></info>
+    <section xml:id="zend.gdata.introduction.updateentry"><title>Einträge aktualisieren</title>
         
 
         <para>
@@ -615,7 +615,7 @@ foreach ($feed as $entry) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.gdata.introduction.post"><info><title>Einträge an Google Server schicken</title></info>
+    <section xml:id="zend.gdata.introduction.post"><title>Einträge an Google Server schicken</title>
         
 
         <para>
@@ -662,7 +662,7 @@ echo 'Die <id> des resultierenden Eintrages ist: ' . $entryResult->id->text;
         </para>
     </section>
 
-    <section xml:id="zend.gdata.introduction.delete"><info><title>Einträge auf einem Google Server löschen</title></info>
+    <section xml:id="zend.gdata.introduction.delete"><title>Einträge auf einem Google Server löschen</title>
         
 
         <para>

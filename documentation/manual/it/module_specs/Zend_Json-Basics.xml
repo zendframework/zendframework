@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.basics"><info><title>Utilizzo base</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.basics"><title>Utilizzo base</title>
     
     <para>
         L'utilizzo di <code>Zend_Json</code> implica l'uso dei due metodi pubblici e statici disponibili: <code>Zend_Json::encode()</code> e <code>Zend_Json::decode()</code>.

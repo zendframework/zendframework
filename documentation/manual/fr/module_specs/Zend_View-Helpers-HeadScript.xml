@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headscript"><info><title>L'aide de vue HeadScript</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headscript"><title>L'aide de vue HeadScript</title>
     
 
     <para>
@@ -77,7 +77,7 @@
         dans l'élément.
     </para>
 
-    <note><info><title>Paramétrez des commentaires conditionnels</title></info>
+    <note><title>Paramétrez des commentaires conditionnels</title>
         
 
         <para>
@@ -88,7 +88,7 @@
             l'appel de la méthode.
         </para>
 
-        <example xml:id="zend.view.helpers.initial.headscript.conditional"><info><title>Headscript avec des commentaires conditionnels</title></info>
+        <example xml:id="zend.view.helpers.initial.headscript.conditional"><title>Headscript avec des commentaires conditionnels</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -129,7 +129,7 @@ $this->headScript()->appendFile('/js/prototype.js',
         L'aide <code>HeadScript</code> est une implémentation concrète de l'<link linkend="zend.view.helpers.initial.placeholder">aide Conteneur</link>.
     </para>
 
-    <note><info><title>Utilisez InlineScript pour les scripts dans le corps ("body") du HTML</title></info>
+    <note><title>Utilisez InlineScript pour les scripts dans le corps ("body") du HTML</title>
         
 
         <para>
@@ -141,7 +141,7 @@ $this->headScript()->appendFile('/js/prototype.js',
         </para>
     </note>
 
-    <note><info><title>Les attributs arbitraires sont désactivées par défaut</title></info>
+    <note><title>Les attributs arbitraires sont désactivées par défaut</title>
         
 
         <para>
@@ -158,7 +158,7 @@ $this->headScript()->setAllowArbitraryAttributes(true);
 ]]></programlisting>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.headscript.basicusage"><info><title>Utilisation basique de l'aide HeadScript</title></info>
+    <example xml:id="zend.view.helpers.initial.headscript.basicusage"><title>Utilisation basique de l'aide HeadScript</title>
         
 
         <para>
@@ -207,7 +207,7 @@ $this->headScript()->prependFile('/js/prototype.js');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.headscript.capture"><info><title>Capturer les scripts en utilisant l'aide HeadScript</title></info>
+    <example xml:id="zend.view.helpers.initial.headscript.capture"><title>Capturer les scripts en utilisant l'aide HeadScript</title>
         
 
         <para>

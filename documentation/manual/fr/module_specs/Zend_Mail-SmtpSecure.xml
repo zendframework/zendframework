@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>Sécuriser les transports SMTP</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><title>Sécuriser les transports SMTP</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         <acronym>SSL</acronym>.
     </para>
 
-    <example xml:id="zend.mail.smtp-secure.example-1"><info><title>Activer une connexion sécurisée dans Zend_Mail_Transport_Smtp</title></info>
+    <example xml:id="zend.mail.smtp-secure.example-1"><title>Activer une connexion sécurisée dans Zend_Mail_Transport_Smtp</title>
         
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.overview"><info><title>Übersicht</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.overview"><title>Übersicht</title>
     
 
     <para>
@@ -45,7 +45,7 @@
         </itemizedlist>
     </para>
 
-    <section xml:id="zend.log.overview.creating-a-logger"><info><title>Erstellen eines Logs</title></info>
+    <section xml:id="zend.log.overview.creating-a-logger"><title>Erstellen eines Logs</title>
         
 
         <para>
@@ -81,7 +81,7 @@ $logger = new Zend_Log($writer);
         </para>
     </section>
 
-    <section xml:id="zend.log.overview.logging-messages"><info><title>Nachrichten protokollieren</title></info>
+    <section xml:id="zend.log.overview.logging-messages"><title>Nachrichten protokollieren</title>
         
 
         <para>
@@ -115,7 +115,7 @@ $logger->emerg('Notfall Nachricht');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.log.overview.destroying-a-logger"><info><title>Ein Log entfernen</title></info>
+    <section xml:id="zend.log.overview.destroying-a-logger"><title>Ein Log entfernen</title>
         
 
         <para>
@@ -135,7 +135,7 @@ $logger = null;
         </para>
     </section>
 
-    <section xml:id="zend.log.overview.builtin-priorities"><info><title>Verwenden von eingebauten Prioritäten</title></info>
+    <section xml:id="zend.log.overview.builtin-priorities"><title>Verwenden von eingebauten Prioritäten</title>
         
 
         <para>
@@ -176,7 +176,7 @@ DEBUG   = 7;  // Debug: Debug Nachrichten
         </para>
     </section>
 
-    <section xml:id="zend.log.overview.user-defined-priorities"><info><title>Hinzufügen von selbstdefinierten Prioritäten</title></info>
+    <section xml:id="zend.log.overview.user-defined-priorities"><title>Hinzufügen von selbstdefinierten Prioritäten</title>
         
 
         <para>
@@ -203,7 +203,7 @@ $logger->foo('Foo Nachricht');
         </para>
     </section>
 
-    <section xml:id="zend.log.overview.understanding-fields"><info><title>Log Events verstehen</title></info>
+    <section xml:id="zend.log.overview.understanding-fields"><title>Log Events verstehen</title>
         
 
         <para>
@@ -249,7 +249,7 @@ $logger->setEventItem('pid', getmypid());
         </para>
     </section>
 
-    <section xml:id="zend.log.overview.as-errorHandler"><info><title>PHP Fehler loggen</title></info>
+    <section xml:id="zend.log.overview.as-errorHandler"><title>PHP Fehler loggen</title>
         
 
         <para>
@@ -259,10 +259,10 @@ $logger->setEventItem('pid', getmypid());
             Fehler genauso weiter.
         </para>
 
-        <table xml:id="zend.log.overview.as-errorHandler.properties.table-1"><info><title>Zend_Log Events für PHP Fehler haben ein zusätzliches Feld welches
+        <table xml:id="zend.log.overview.as-errorHandler.properties.table-1"><title>Zend_Log Events für PHP Fehler haben ein zusätzliches Feld welches
             <methodname>handler (int $errno ,string $errstr [,string $errfile [,int $errline [,array
                 $errcontext]]])</methodname> von <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://us3.php.net/manual/en/function.set-error-handler.php">set_error_handler</link>
-            entspricht</title></info>
+            entspricht</title>
             
 
             <tgroup cols="3">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>Aangepaste Feed en Entry klassen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><title>Aangepaste Feed en Entry klassen</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         afhandelt, zodanig dat de eindgebruiker zich helemaal niet met namespaces hoeft bezig te houden.
     </para>
 
-    <example><info><title>De Atom Entry Class uitbreiden met aangepaste Namespaces</title></info>
+    <example><title>De Atom Entry Class uitbreiden met aangepaste Namespaces</title>
         
         <programlisting role="php"><![CDATA[
 <?php

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><info><title>Een RSS Feed lezen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><title>Een RSS Feed lezen</title>
     
     <para>
         Een RSS feed lezen is zo eenvoudig als het instantiëren van een <code>Zend_Feed_Rss</code> object

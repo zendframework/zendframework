@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><title>Zend_Config_Xml</title>
     
     <para>
        يوفر <code>Zend_Config_Xml</code> للمبرمج امكانية حفظ البيانات الخاصة بإعدادات البرنامج ,
@@ -16,7 +16,7 @@
         و يجب أن يتم تعريف قيمة هذا الـ attribute فى قسم البيانات الذى يقوم بالوراثة من قسم بيانات أخر ,
         حيث ستكون قيمة هذا الـ attribute هى أسم قسم البيانات الذى سيتم الوراثة منه.
     </para>
-    <note><info><title>Return type</title></info>
+    <note><title>Return type</title>
         
         <para>
             البيانات المقرؤة من خلال <code>Zend_Config_Xml</code> يتم اعتبارها دائما على انها من
@@ -24,7 +24,7 @@
             من سد أحتياجاتهم الخاصة .
         </para>
     </note>
-    <example><info><title>إستخدام Zend_Config_Xml</title></info>
+    <example><title>إستخدام Zend_Config_Xml</title>
         
         <para>
             هذا المثال يوضح إستخدام بسيط لـ <code>Zend_Config_Xml</code> لتحميل بيانات الأعدادات

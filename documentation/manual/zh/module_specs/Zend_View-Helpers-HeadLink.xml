@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headlink"><info><title>HeadLink 助手</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headlink"><title>HeadLink 助手</title>
     
 
     <para>
@@ -48,7 +48,7 @@
         <code>HeadLink</code> 助手是 <link linkend="zend.view.helpers.initial.placeholder"> 占位符助手 </link>的一个具体实现。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.headlink.basicusage"><info><title>HeadLink 助手的基本用法</title></info>
+    <example xml:id="zend.view.helpers.initial.headlink.basicusage"><title>HeadLink 助手的基本用法</title>
         
 
         <para>

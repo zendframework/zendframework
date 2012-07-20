@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.description"><info><title>Was macht eine Währung aus?</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.description"><title>Was macht eine Währung aus?</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         verwendet werden:
     </para>
 
-    <table xml:id="zend.currency.description.table-1"><info><title>Dargestellte Informationen für eine Währung</title></info>
+    <table xml:id="zend.currency.description.table-1"><title>Dargestellte Informationen für eine Währung</title>
         
 
         <tgroup cols="2" align="left">
@@ -60,7 +60,7 @@
         </tgroup>
     </table>
 
-    <example xml:id="zend.currency.description.example-1"><info><title>Auswahl der Währungsbeschreibung</title></info>
+    <example xml:id="zend.currency.description.example-1"><title>Auswahl der Währungsbeschreibung</title>
         
 
         <para>
@@ -101,7 +101,7 @@ print $currency; // Könnte 'USD 100' zurückgeben
         </para>
     </example>
 
-    <note><info><title>Nicht alle Währungen haben Symbole</title></info>
+    <note><title>Nicht alle Währungen haben Symbole</title>
         
 
         <para>
@@ -117,7 +117,7 @@ print $currency; // Könnte 'USD 100' zurückgeben
         das folgende Beispiel.
     </para>
 
-    <example xml:id="zend.currency.description.example-2"><info><title>Verändern der Beschreibung einer Währung</title></info>
+    <example xml:id="zend.currency.description.example-2"><title>Verändern der Beschreibung einer Währung</title>
         
 
         <para>
@@ -154,7 +154,7 @@ print $currency; // Könnte '$$$ 100' zurückgeben
 ]]></programlisting>
     </example>
 
-    <note><info><title>Einstellungen für die automatische Anzeige</title></info>
+    <note><title>Einstellungen für die automatische Anzeige</title>
         
 
         <para>

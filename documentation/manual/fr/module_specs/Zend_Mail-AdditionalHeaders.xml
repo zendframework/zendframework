@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><info><title>En-têtes additionnels</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><title>En-têtes additionnels</title>
     
 
      <para>
@@ -27,7 +27,7 @@
             </listitem>
         </itemizedlist>
      </para>
-    <note><info><title>Return-Path</title></info>
+    <note><title>Return-Path</title>
         
         <para>
             If you set Return-Path on your mail, see <link linkend="zend.mail.introduction.sendmail">Configuring sendmail transport</link>.
@@ -43,7 +43,7 @@
         plusieurs valeurs :
     </para>
 
-    <example xml:id="zend.mail.additional-headers.example-1"><info><title>Ajouter des en-têtes à l'émail</title></info>
+    <example xml:id="zend.mail.additional-headers.example-1"><title>Ajouter des en-têtes à l'émail</title>
         
 
         <programlisting language="php"><![CDATA[

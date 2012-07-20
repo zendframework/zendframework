@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.usage"><info><title> 如何使用货币 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.usage"><title> 如何使用货币 </title>
 
     
 
@@ -7,7 +7,7 @@
         在自己的程序中使用 <code>Zend_Currency</code>，就是创建一个它的实例，不需要任何参数。它将创建一个带有实际地方、并定义了在这个地方使用的货币的 <code>Zend_Currency</code> 的一个实例。
     </para>
 
-    <example xml:id="zend.currency.usage.example1"><info><title> 从实际地方创建 Zend_Currency 的实例 </title></info>
+    <example xml:id="zend.currency.usage.example1"><title> 从实际地方创建 Zend_Currency 的实例 </title>
 
         
 
@@ -72,7 +72,7 @@ $currency = new Zend_Currency();
         </listitem>
     </itemizedlist>
 
-    <example xml:id="zend.currency.usage.example2"><info><title> 创建 Zend_Currency 实例的其它例子 </title></info>
+    <example xml:id="zend.currency.usage.example2"><title> 创建 Zend_Currency 实例的其它例子 </title>
 
         
 
@@ -105,7 +105,7 @@ $currency = new Zend_Currency('en_US', 'EUR');
         </para>
     </note>
 
-    <section xml:id="zend.currency.usage.tocurrency"><info><title> 从货币创建输出 </title></info>
+    <section xml:id="zend.currency.usage.tocurrency"><title> 从货币创建输出 </title>
 
         
 
@@ -121,7 +121,7 @@ $currency = new Zend_Currency('en_US', 'EUR');
             <code>toCurrency(array $options)</code> 接受带有选项的数组，这个选项可用来临时设置成另外的格式或货币表示，关于选项的细节参见 <link linkend="zend.currency.usage.setformat">Changing the format of a currency</link>。
         </para>
 
-        <example xml:id="zend.currency.usage.tocurrency.example"><info><title> 为货币创建输出 </title></info>
+        <example xml:id="zend.currency.usage.tocurrency.example"><title> 为货币创建输出 </title>
 
             
 
@@ -144,7 +144,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
         </example>
     </section>
 
-    <section xml:id="zend.currency.usage.setformat"><info><title> 修改货币格式 </title></info>
+    <section xml:id="zend.currency.usage.setformat"><title> 修改货币格式 </title>
 
         
 
@@ -238,7 +238,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
         </itemizedlist>
 
-        <table xml:id="zend.currency.usage.setformat.constantsdescription"><info><title> 选择货币描述的常量 </title></info>
+        <table xml:id="zend.currency.usage.setformat.constantsdescription"><title> 选择货币描述的常量 </title>
 
             
 
@@ -271,7 +271,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
 
         </table>
 
-        <table xml:id="zend.currency.usage.setformat.constantsposition"><info><title> 选择货币位置的常量 </title></info>
+        <table xml:id="zend.currency.usage.setformat.constantsposition"><title> 选择货币位置的常量 </title>
 
             
 
@@ -300,7 +300,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
 
         </table>
 
-        <example xml:id="zend.currency.usage.setformat.example"><info><title> 修改货币的显示格式 </title></info>
+        <example xml:id="zend.currency.usage.setformat.example"><title> 修改货币的显示格式 </title>
 
             
 
@@ -326,7 +326,7 @@ echo $currency->toCurrency(1000);
         </example>
     </section>
 
-    <section xml:id="zend.currency.usage.informational"><info><title> Zend_Currency 的信息方法 </title></info>
+    <section xml:id="zend.currency.usage.informational"><title> Zend_Currency 的信息方法 </title>
 
         
 
@@ -381,7 +381,7 @@ echo $currency->toCurrency(1000);
             函数 <code>getSymbol()</code>、 <code>getShortName()</code> 和 <code>getName()</code> 带两个可选的参数。如果没有给出参数，期望的数据将从当前设置货币返回。第一个参数是货币的短名，短名总是三个字母，例如 EUR 是欧元，USD 是美元。第二个参数定义从哪个地方（ locale ）读数据。如果没有给出地方，就使用当前使用的地方设置。
         </para>
 
-        <example xml:id="zend.currency.usage.informational.example"><info><title> 从货币中获取信息 </title></info>
+        <example xml:id="zend.currency.usage.informational.example"><title> 从货币中获取信息 </title>
 
             
 
@@ -412,7 +412,7 @@ print_r($currency->getCurrencyList('de_AT');
 
     </section>
 
-    <section xml:id="zend.currency.usage.setlocale"><info><title> 设置新缺省值 </title></info>
+    <section xml:id="zend.currency.usage.setlocale"><title> 设置新缺省值 </title>
 
         
 
@@ -420,7 +420,7 @@ print_r($currency->getCurrencyList('de_AT');
             <code>setLocale</code> 方法允许设置新的地方给 <code>Zend_Currency</code> 。当调用这个函数所有的货币的缺省值就被重写，包括货币名、缩写和符号。
         </para>
 
-        <example xml:id="zend.currency.usage.setlocale.example"><info><title> 设置新地方 </title></info>
+        <example xml:id="zend.currency.usage.setlocale.example"><title> 设置新地方 </title>
 
             
 
@@ -438,7 +438,7 @@ print $currency->toCurrency(1000);
 
     </section>
 
-    <section xml:id="zend.currency.usage.cache"><info><title> 加速 Zend_Currency </title></info>
+    <section xml:id="zend.currency.usage.cache"><title> 加速 Zend_Currency </title>
 
         
 
@@ -447,7 +447,7 @@ print $currency->toCurrency(1000);
             也有个静态方法 <code>Zend_Currency::getCache()</code> 方便你的使用。
          </para>
 
-        <example xml:id="zend.currency.usage.cache.example"><info><title> 缓存货币 </title></info>
+        <example xml:id="zend.currency.usage.cache.example"><title> 缓存货币 </title>
 
             
 

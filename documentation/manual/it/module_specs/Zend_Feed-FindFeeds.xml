@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><info><title>Individuazione e recupero di feed da pagine web</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><title>Individuazione e recupero di feed da pagine web</title>
     
     <para>
         Le pagine web spesso contengono un tag <code>&lt;link&gt;</code> con riferimento ai feed con contenuti rilevanti per quella particolare pagina.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><info><title>תוסף עזרה של פעולה</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><title>תוסף עזרה של פעולה</title>
     
 
     <para>
@@ -17,7 +17,7 @@
         <code>$action</code> ו <code>$controller</code> חובה שיהיו מוגדרים; אם לא הוגדר מודל, מודל ברירת המחדל יוגדר במקום.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.action.usage"><info><title>שימוש בסיסי בתוסף עזרה של פונקציות</title></info>
+    <example xml:id="zend.view.helpers.initial.action.usage"><title>שימוש בסיסי בתוסף עזרה של פונקציות</title>
         
 
         <para>

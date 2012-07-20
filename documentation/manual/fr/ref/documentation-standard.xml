@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="doc-standard"><info><title>Recommandation sur la documentation de Zend Framework</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="doc-standard"><title>Recommandation sur la documentation de Zend Framework</title>
     
 
-    <section xml:id="doc-standard.overview"><info><title>Présentation</title></info>
+    <section xml:id="doc-standard.overview"><title>Présentation</title>
         
 
-        <section xml:id="doc-standard.overview.scope"><info><title>Cadre</title></info>
+        <section xml:id="doc-standard.overview.scope"><title>Cadre</title>
             
 
             <para>
@@ -30,10 +30,10 @@
         </section>
     </section>
 
-    <section xml:id="doc-standard.file-formatting"><info><title>Format des fichiers de documentation</title></info>
+    <section xml:id="doc-standard.file-formatting"><title>Format des fichiers de documentation</title>
         
 
-        <section xml:id="doc-standard.file-formatting.xml-tags"><info><title>Balises XML</title></info>
+        <section xml:id="doc-standard.file-formatting.xml-tags"><title>Balises XML</title>
             
 
             <para>
@@ -59,7 +59,7 @@
 ]]></programlisting>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.max-line-length"><info><title>Longueur maximum d'une ligne</title></info>
+        <section xml:id="doc-standard.file-formatting.max-line-length"><title>Longueur maximum d'une ligne</title>
             
 
             <para>
@@ -70,7 +70,7 @@
             </para>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.indentation"><info><title>Indentation</title></info>
+        <section xml:id="doc-standard.file-formatting.indentation"><title>Indentation</title>
             
 
             <para>
@@ -114,7 +114,7 @@
 ]]></programlisting>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.line-termination"><info><title>Fin de ligne</title></info>
+        <section xml:id="doc-standard.file-formatting.line-termination"><title>Fin de ligne</title>
             
 
             <para>
@@ -131,7 +131,7 @@
             </para>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.empty-tags"><info><title>Éléments vides</title></info>
+        <section xml:id="doc-standard.file-formatting.empty-tags"><title>Éléments vides</title>
             
 
             <para>
@@ -149,10 +149,10 @@
 ]]></programlisting>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.whitespace"><info><title>Utilisation des espaces dans les documents</title></info>
+        <section xml:id="doc-standard.file-formatting.whitespace"><title>Utilisation des espaces dans les documents</title>
             
 
-            <section xml:id="doc-standard.file-formatting.whitespace.trailing"><info><title>Espace entre les balises</title></info>
+            <section xml:id="doc-standard.file-formatting.whitespace.trailing"><title>Espace entre les balises</title>
                 
 
                 <para>
@@ -205,7 +205,7 @@ C'est la classe  <classname>Zend_Class</classname>
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.whitespace.multiple-line-breaks"><info><title>Sauts de ligne multiples</title></info>
+            <section xml:id="doc-standard.file-formatting.whitespace.multiple-line-breaks"><title>Sauts de ligne multiples</title>
                 
 
                 <para>
@@ -236,7 +236,7 @@ C'est la classe  <classname>Zend_Class</classname>
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.whitespace.tag-separation"><info><title>Séparation entre les balises</title></info>
+            <section xml:id="doc-standard.file-formatting.whitespace.tag-separation"><title>Séparation entre les balises</title>
                 
 
                 <para>
@@ -297,7 +297,7 @@ C'est la classe  <classname>Zend_Class</classname>
             </section>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.program-listing"><info><title>Exemple de code</title></info>
+        <section xml:id="doc-standard.file-formatting.program-listing"><title>Exemple de code</title>
             
 
             <para>
@@ -403,7 +403,7 @@ $render = "xxx";
                 la compréhension d'un exemple.
             </para>
 
-            <note><info><title>N'utilisez jamais les short tags</title></info>
+            <note><title>N'utilisez jamais les short tags</title>
                 
 
                 <para>
@@ -414,10 +414,10 @@ $render = "xxx";
             </note>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.inline-tags"><info><title>Notes spécifiques sur les éléments en-ligne</title></info>
+        <section xml:id="doc-standard.file-formatting.inline-tags"><title>Notes spécifiques sur les éléments en-ligne</title>
             
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.classname"><info><title>classname</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.classname"><title>classname</title>
                 
 
                 <para>
@@ -434,7 +434,7 @@ $render = "xxx";
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.varname"><info><title>varname</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.varname"><title>varname</title>
                 
 
                 <para>
@@ -453,7 +453,7 @@ $render = "xxx";
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.methodname"><info><title>methodname</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.methodname"><title>methodname</title>
                 
 
                 <para>
@@ -473,7 +473,7 @@ $render = "xxx";
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.constant"><info><title>constant</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.constant"><title>constant</title>
                 
 
                 <para>
@@ -491,7 +491,7 @@ $render = "xxx";
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.filename"><info><title>filename</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.filename"><title>filename</title>
                 
 
                 <para>
@@ -507,7 +507,7 @@ $render = "xxx";
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.command"><info><title>command</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.command"><title>command</title>
                 
 
                 <para>
@@ -523,7 +523,7 @@ $render = "xxx";
 ]]></programlisting>
             </section>
 
-            <section xml:id="doc-standard.file-formatting.inline-tags.code"><info><title>code</title></info>
+            <section xml:id="doc-standard.file-formatting.inline-tags.code"><title>code</title>
                 
 
                 <para>
@@ -533,10 +533,10 @@ $render = "xxx";
             </section>
         </section>
 
-        <section xml:id="doc-standard.file-formatting.block-tags"><info><title>Notes spécifiques sur les éléments bloc</title></info>
+        <section xml:id="doc-standard.file-formatting.block-tags"><title>Notes spécifiques sur les éléments bloc</title>
             
 
-            <section xml:id="doc-standard.file-formatting.block-tags.title"><info><title>title</title></info>
+            <section xml:id="doc-standard.file-formatting.block-tags.title"><title>title</title>
                 
 
                 <para>
@@ -553,10 +553,10 @@ $render = "xxx";
         </section>
     </section>
 
-    <section xml:id="doc-standard.recommendations"><info><title>Recommendations</title></info>
+    <section xml:id="doc-standard.recommendations"><title>Recommendations</title>
         
 
-        <section xml:id="doc-standard.recommendations.editors"><info><title>Utilisez un éditeur sans formatage automatique</title></info>
+        <section xml:id="doc-standard.recommendations.editors"><title>Utilisez un éditeur sans formatage automatique</title>
             
 
             <para>
@@ -575,7 +575,7 @@ $render = "xxx";
             </para>
         </section>
 
-        <section xml:id="doc-standard.recommendations.images"><info><title>Utilisez des images</title></info>
+        <section xml:id="doc-standard.recommendations.images"><title>Utilisez des images</title>
             
 
             <para>
@@ -586,7 +586,7 @@ $render = "xxx";
             </para>
         </section>
 
-        <section xml:id="doc-standard.recommendations.examples"><info><title>Utilisez des cas d'utilisations</title></info>
+        <section xml:id="doc-standard.recommendations.examples"><title>Utilisez des cas d'utilisations</title>
             
 
             <para>
@@ -601,7 +601,7 @@ $render = "xxx";
             </para>
         </section>
 
-        <section xml:id="doc-standard.recommendations.phpdoc"><info><title>Évitez de répéter le contenu des phpdoc</title></info>
+        <section xml:id="doc-standard.recommendations.phpdoc"><title>Évitez de répéter le contenu des phpdoc</title>
             
 
             <para>
@@ -614,7 +614,7 @@ $render = "xxx";
             </para>
         </section>
 
-        <section xml:id="doc-standard.recommendations.links"><info><title>Utilisez des liens</title></info>
+        <section xml:id="doc-standard.recommendations.links"><title>Utilisez des liens</title>
             
 
             <para>

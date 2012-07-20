@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.barcode"><info><title>Barcode</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.barcode"><title>Barcode</title>
     
 
     <para>
@@ -356,7 +356,7 @@
         </listitem>
     </itemizedlist>
 
-    <section xml:id="zend.validate.set.barcode.options"><info><title>Unterstützte Optionen für Zend_Validate_Barcode</title></info>
+    <section xml:id="zend.validate.set.barcode.options"><title>Unterstützte Optionen für Zend_Validate_Barcode</title>
         
 
         <para>
@@ -392,7 +392,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.barcode.basic"><info><title>Grundsätzliche Verwendung</title></info>
+    <section xml:id="zend.validate.set.barcode.basic"><title>Grundsätzliche Verwendung</title>
         
 
         <para>
@@ -410,7 +410,7 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.barcode.checksum"><info><title>Optionale Checksumme</title></info>
+    <section xml:id="zend.validate.set.barcode.checksum"><title>Optionale Checksumme</title>
         
 
         <para>
@@ -433,7 +433,7 @@ if ($valid->isValid($input)) {
 }
 ]]></programlisting>
 
-        <note><info><title>Reduzierte Sicherheit durch ausgeschaltete Prüfung der Checksumme</title></info>
+        <note><title>Reduzierte Sicherheit durch ausgeschaltete Prüfung der Checksumme</title>
             
 
             <para>
@@ -446,7 +446,7 @@ if ($valid->isValid($input)) {
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.barcode.custom"><info><title>Schreiben eigener Adapter</title></info>
+    <section xml:id="zend.validate.set.barcode.custom"><title>Schreiben eigener Adapter</title>
         
 
         <para>

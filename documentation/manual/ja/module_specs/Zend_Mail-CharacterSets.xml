@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>文字セット</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><title>文字セット</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         個々のパートについて異なる文字セットを指定できます。
     </para>
 
-    <note><info><title>テキスト形式限定</title></info>
+    <note><title>テキスト形式限定</title>
         
 
         <para>
@@ -19,7 +19,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.mail.character-sets.cjk"><info><title>CJK 言語での利用</title></info>
+    <example xml:id="zend.mail.character-sets.cjk"><title>CJK 言語での利用</title>
         
 
         <para>

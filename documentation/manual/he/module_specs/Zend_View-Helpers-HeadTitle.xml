@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><info><title>תוסף העזרה HeadTitle</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><title>תוסף העזרה HeadTitle</title>
     
 
     <para>
@@ -13,7 +13,7 @@
         השימוש במתודה זו היא <code>headTitle($title, $setType = 'APPEND')</code>; כברירת מחדל, הערך שנוסף מצורף לקבוצת האלמנטים שכבר קיימים, אבל ניתן להגדיר או 'PREPEND' כדי להוסיף בראש הרשימה או 'SET' לשכתב את כל הרשימה בערך זה.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><info><title>שימוש בסיסי בתוסף</title></info>
+    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><title>שימוש בסיסי בתוסף</title>
         
 
         <para>

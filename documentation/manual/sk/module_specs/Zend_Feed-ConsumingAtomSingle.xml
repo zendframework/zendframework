@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>Získanie jednej položky z Atom</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><title>Získanie jednej položky z Atom</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         túto položku.
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><info><title>Získanie jednej položky z Atom</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><title>Získanie jednej položky z Atom</title>
         
         <programlisting role="php"><![CDATA[<?php
 
@@ -32,7 +32,7 @@ $entry = $feed->current();
         že sa pristupuje k jednopoložkovému dokumentu:
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><info><title>Použitie objektu položky pre získanie položky z Atom zdroja</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><title>Použitie objektu položky pre získanie položky z Atom zdroja</title>
         
         <programlisting role="php"><![CDATA[<?phpi
 $entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');

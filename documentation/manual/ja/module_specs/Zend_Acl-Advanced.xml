@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>高度な使用法</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><title>高度な使用法</title>
 
     
 
-    <section xml:id="zend.acl.advanced.storing"><info><title>ACL データの保存による永続性の確保</title></info>
+    <section xml:id="zend.acl.advanced.storing"><title>ACL データの保存による永続性の確保</title>
 
         
 
@@ -28,7 +28,7 @@
 
     </section>
 
-    <section xml:id="zend.acl.advanced.assertions"><info><title>アサーションを使用した条件付き ACL 規則の作成</title></info>
+    <section xml:id="zend.acl.advanced.assertions"><title>アサーションを使用した条件付き ACL 規則の作成</title>
 
         
 

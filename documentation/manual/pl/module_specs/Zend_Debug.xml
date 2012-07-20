@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>Wyświetlanie informacji o zmiennych</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><title>Wyświetlanie informacji o zmiennych</title>
 
     
 
@@ -10,7 +10,7 @@
         specjalnych narzędzi czy środowiska testowego.
     </para>
 
-    <example xml:id="zend.debug.dumping.example"><info><title>Przykład użycia metody dump()</title></info>
+    <example xml:id="zend.debug.dumping.example"><title>Przykład użycia metody dump()</title>
         
         <programlisting role="php"><![CDATA[
 Zend_Debug::dump($var, $label=null, $echo=true);
@@ -48,7 +48,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         a cały wynik zostaje objęty znacznikami (X)HTML <code>&lt;pre&gt;</code>.
     </para>
 
-    <tip><info><title>Usuwanie błędów za pomocą Zend_Log</title></info>
+    <tip><title>Usuwanie błędów za pomocą Zend_Log</title>
         
         <para>
             Użycie metody <code>Zend_Debug::dump()</code> jest najlepsze do

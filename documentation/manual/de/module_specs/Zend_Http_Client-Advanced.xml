@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client.advanced"><info><title>Zend_Http_Client - Fortgeschrittende Nutzung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client.advanced"><title>Zend_Http_Client - Fortgeschrittende Nutzung</title>
     
 
-    <section xml:id="zend.http.client.redirections"><info><title>HTTP Umleitungen</title></info>
+    <section xml:id="zend.http.client.redirections"><title>HTTP Umleitungen</title>
         
 
         <para>
@@ -23,7 +23,7 @@
             kann durch Setzen des 'strictredirects' Konfigurationsparameters auf das boolesche
             <constant>TRUE</constant> geändert werden.
 
-            <example xml:id="zend.http.client.redirections.example-1"><info><title>Strikte Umleitung von 301 und 302 Antworten nach RFC 2616 erzwingen</title></info>
+            <example xml:id="zend.http.client.redirections.example-1"><title>Strikte Umleitung von 301 und 302 Antworten nach RFC 2616 erzwingen</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -42,7 +42,7 @@ $client->setConfig(array('strictredirects' => false);
         </para>
     </section>
 
-    <section xml:id="zend.http.client.cookies"><info><title>Hinzufügen von Cookies und Verwendung von persistenten Cookies</title></info>
+    <section xml:id="zend.http.client.cookies"><title>Hinzufügen von Cookies und Verwendung von persistenten Cookies</title>
         
 
         <para>
@@ -51,7 +51,7 @@ $client->setConfig(array('strictredirects' => false);
             Änderungen notwendig sind. Dies wird durch Verwendung der setCookie() Methode erledigt.
             Diese Methode kann auf mehrere Arten verwendet werden:
 
-            <example xml:id="zend.http.client.cookies.example-1"><info><title>Cookies setzen durch Verwendung von setCookie()</title></info>
+            <example xml:id="zend.http.client.cookies.example-1"><title>Cookies setzen durch Verwendung von setCookie()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -80,7 +80,7 @@ $client->setCookie($cookie);
             Authentifizierungs- oder Session-Cookie erhält, bevor man weitere Anfragen versenden
             kann.
 
-            <example xml:id="zend.http.client.cookies.example-2"><info><title>Cookie Stickiness aktivieren</title></info>
+            <example xml:id="zend.http.client.cookies.example-2"><title>Cookie Stickiness aktivieren</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -108,7 +108,7 @@ $client->request('GET');
         </para>
     </section>
 
-    <section xml:id="zend.http.client.custom_headers"><info><title>Setzen von individuellen Anfrageheadern</title></info>
+    <section xml:id="zend.http.client.custom_headers"><title>Setzen von individuellen Anfrageheadern</title>
         
 
         <para>
@@ -116,7 +116,7 @@ $client->request('GET');
             erledigt werden. Diese Methode ist sehr facettenreich und kann auf verschiedene Arten
             verwendet werden, wie das folgende Beispiel zeigt:
 
-            <example xml:id="zend.http.client.custom_headers.example-1"><info><title>Setzen eines einzelnen individuellen Anfrageheaders</title></info>
+            <example xml:id="zend.http.client.custom_headers.example-1"><title>Setzen eines einzelnen individuellen Anfrageheaders</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -140,7 +140,7 @@ $client->setHeaders('Cookie', array(
             setHeader() kann genauso einfach für das Setzen mehrerer Header in einem Aufruf durch
             Übergabe eines Array mit Headern als einzigen Parameter verwendet werden:
 
-            <example xml:id="zend.http.client.custom_headers.example-2"><info><title>Setzen eines mehreren individuellen Anfrageheaders</title></info>
+            <example xml:id="zend.http.client.custom_headers.example-2"><title>Setzen eines mehreren individuellen Anfrageheaders</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -160,7 +160,7 @@ $client->setHeaders(array(
         </para>
     </section>
 
-    <section xml:id="zend.http.client.file_uploads"><info><title>Dateiuploads</title></info>
+    <section xml:id="zend.http.client.file_uploads"><title>Dateiuploads</title>
         
 
         <para>
@@ -180,7 +180,7 @@ $client->setHeaders(array(
             mime_content_type Funktion, um den Content-type der Datei zu erraten, wenn er verfügbar
             ist. Auf jeden Fall ist der Standard MIME Typ 'application/octet-stream'.
 
-            <example xml:id="zend.http.client.file_uploads.example-1"><info><title>Verwendung von setFileUpload um Dateien hochzuladen</title></info>
+            <example xml:id="zend.http.client.file_uploads.example-1"><title>Verwendung von setFileUpload um Dateien hochzuladen</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -203,7 +203,7 @@ $client->request('POST');
             Content-type auf 'application/octet-stream' gesetzt.
         </para>
 
-        <note><info><title>Dateien hochladen</title></info>
+        <note><title>Dateien hochladen</title>
             
 
             <para>
@@ -215,7 +215,7 @@ $client->request('POST');
         </note>
     </section>
 
-    <section xml:id="zend.http.client.raw_post_data"><info><title>Unverarbeitete POST Daten versenden</title></info>
+    <section xml:id="zend.http.client.raw_post_data"><title>Unverarbeitete POST Daten versenden</title>
         
 
         <para>
@@ -226,7 +226,7 @@ $client->request('POST');
             ist, sollte man ihn normalerweise vor dem Absenden der Anfrage setzen - entweder durch
             Verwendung von setRawData() oder durch eine andere Methode: setEncType().
 
-            <example xml:id="zend.http.client.raw_post_data.example-1"><info><title>Unverarbeitete POST Daten versenden</title></info>
+            <example xml:id="zend.http.client.raw_post_data.example-1"><title>Unverarbeitete POST Daten versenden</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -247,7 +247,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
             $HTTP_RAW_POST_DATA oder über den php://input stream verfügbar sein.
         </para>
 
-        <note><info><title>Unverarbeitete POST Daten verwenden</title></info>
+        <note><title>Unverarbeitete POST Daten verwenden</title>
             
 
             <para>
@@ -259,7 +259,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
         </note>
     </section>
 
-    <section xml:id="zend.http.client.http_authentication"><info><title>HTTP Authentifizierung</title></info>
+    <section xml:id="zend.http.client.http_authentication"><title>HTTP Authentifizierung</title>
         
 
         <para>
@@ -272,7 +272,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
             Authentifizierung unterstützt (Unterstützung für eine Digest Authentifizierung ist
             geplant).
 
-            <example xml:id="zend.http.client.http_authentication.example-1"><info><title>Setzen von Benutzer und Password für eine HTTP Authentifizierung</title></info>
+            <example xml:id="zend.http.client.http_authentication.example-1"><title>Setzen von Benutzer und Password für eine HTTP Authentifizierung</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -289,7 +289,7 @@ $client->setUri('http://christer:secret@example.com');
         </para>
     </section>
 
-    <section xml:id="zend.http.client.multiple_requests"><info><title>Versenden mehrerer Anfragen mit dem selben Client</title></info>
+    <section xml:id="zend.http.client.multiple_requests"><title>Versenden mehrerer Anfragen mit dem selben Client</title>
         
 
         <para>
@@ -317,7 +317,7 @@ $client->setUri('http://christer:secret@example.com');
             nicht bei der nächsten Anfrage wiederverwendet werden.
         </para>
 
-        <note><info><title>Parameter zurück setzen</title></info>
+        <note><title>Parameter zurück setzen</title>
             
 
             <para>
@@ -351,7 +351,7 @@ $client->setUri('http://christer:secret@example.com');
             werden.
         </para>
 
-        <example xml:id="zend.http.client.multiple_requests.example-1"><info><title>Durchführen von aufeinander folgenden Anfrage mit einem Client</title></info>
+        <example xml:id="zend.http.client.multiple_requests.example-1"><title>Durchführen von aufeinander folgenden Anfrage mit einem Client</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -390,7 +390,7 @@ $_SESSION['cookiejar'] = $client->getCookieJar();
         </example>
     </section>
 
-    <section xml:id="zend.http.client.streaming"><info><title>Daten Streaming</title></info>
+    <section xml:id="zend.http.client.streaming"><title>Daten Streaming</title>
         
 
         <para>
@@ -408,7 +408,7 @@ $_SESSION['cookiejar'] = $client->getCookieJar();
             wobei das Daten Argument eine Stream Ressource ist (z.B. das Ergebnis von
             <methodname>fopen()</methodname>).
 
-            <example xml:id="zend.http.client.streaming.example-1"><info><title>Senden von Dateien zum HTTP Server durch Streamen</title></info>
+            <example xml:id="zend.http.client.streaming.example-1"><title>Senden von Dateien zum HTTP Server durch Streamen</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -446,7 +446,7 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
             Datei hierfür verwenden und Sie woanders hinsenden, oder Sie durch Verwendung von
             regulären Streaming Funktionen an eine andere Datei Senden.
 
-            <example xml:id="zend.http.client.streaming.example-2"><info><title>Empfangen von Dateien vom HTTP Server durch Streamen</title></info>
+            <example xml:id="zend.http.client.streaming.example-2"><title>Empfangen von Dateien vom HTTP Server durch Streamen</title>
                 
 
                 <programlisting language="php"><![CDATA[

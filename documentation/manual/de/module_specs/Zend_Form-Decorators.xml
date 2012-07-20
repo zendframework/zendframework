@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title>
 
 
     <para>
@@ -37,7 +37,7 @@
         das komplette Element repräsentiert.
     </para>
 
-    <section xml:id="zend.form.decorators.operation"><info><title>Operationen</title></info>
+    <section xml:id="zend.form.decorators.operation"><title>Operationen</title>
 
 
         <para>
@@ -131,7 +131,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.decorators.standard"><info><title>Standard Dekoratoren</title></info>
+    <section xml:id="zend.form.decorators.standard"><title>Standard Dekoratoren</title>
 
 
         <para>
@@ -141,7 +141,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.decorators.custom"><info><title>Eigene Dekoratoren</title></info>
+    <section xml:id="zend.form.decorators.custom"><title>Eigene Dekoratoren</title>
 
 
         <para>
@@ -344,7 +344,7 @@ class My_Decorator_Errors
         </para>
     </section>
 
-    <section xml:id="zend.form.decorators.individual"><info><title>Darstellung individueller Dekoratoren</title></info>
+    <section xml:id="zend.form.decorators.individual"><title>Darstellung individueller Dekoratoren</title>
 
 
         <para>

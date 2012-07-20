@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.introduction"><info><title>简介</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.introduction"><title>简介</title>
     
     <para>
         <code>Zend_Service</code> 是一个抽象类，Zend用它来作为实现web service（如：XML-RPC）的基础。

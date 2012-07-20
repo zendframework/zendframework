@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.autodiscovery"><info><title>自動検出</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.autodiscovery"><title>自動検出</title>
     
 
-    <section xml:id="zend.soap.autodiscovery.introduction"><info><title>自動検出導入</title></info>
+    <section xml:id="zend.soap.autodiscovery.introduction"><title>自動検出導入</title>
         
         <para>
             Zend Frameworkの中で実装される<acronym>SOAP</acronym>機能は、
@@ -95,7 +95,7 @@ $autodiscover->handle();
             AutoDiscoverクラスが提供する<methodname>dump($filename)</methodname>または<methodname>toXml()</methodname>関数を使えます。
         </para>
 
-        <note xml:id="zend.soap.autodiscovery.introduction.noserver"><info><title>Zend_Soap_AutodiscoverはSOAPサーバーではありません</title></info>
+        <note xml:id="zend.soap.autodiscovery.introduction.noserver"><title>Zend_Soap_AutodiscoverはSOAPサーバーではありません</title>
             
 
             <para>
@@ -131,7 +131,7 @@ if(isset($_GET['wsdl'])) {
         </note>
     </section>
 
-    <section xml:id="zend.soap.autodiscovery.class"><info><title>クラスの自動検出</title></info>
+    <section xml:id="zend.soap.autodiscovery.class"><title>クラスの自動検出</title>
         
 
         <para>
@@ -184,7 +184,7 @@ $autodiscover->handle();
             </itemizedlist>
         </para>
 
-        <note><info><title>重要!</title></info>
+        <note><title>重要!</title>
             
             <para>
                 WSDL自動検出では、パラメータを決定して型を返すために、
@@ -199,7 +199,7 @@ $autodiscover->handle();
         </note>
     </section>
 
-    <section xml:id="zend.soap.autodiscovery.functions"><info><title>関数の自動検出</title></info>
+    <section xml:id="zend.soap.autodiscovery.functions"><title>関数の自動検出</title>
         
 
         <para>
@@ -254,7 +254,7 @@ $autodiscover->handle();
             </itemizedlist>
         </para>
 
-        <note><info><title>重要!</title></info>
+        <note><title>重要!</title>
             
             <para>
                 WSDL自動検出では、パラメータを決定して、型を返すために、
@@ -269,7 +269,7 @@ $autodiscover->handle();
         </note>
     </section>
 
-    <section xml:id="zend.soap.autodiscovery.datatypes"><info><title>データ型の自動検出</title></info>
+    <section xml:id="zend.soap.autodiscovery.datatypes"><title>データ型の自動検出</title>
         
 
         <para>
@@ -329,7 +329,7 @@ $autodiscover->handle();
         </para>
     </section>
 
-    <section xml:id="zend.soap.autodiscovery.wsdlstyles"><info><title>WSDLバインディングスタイル</title></info>
+    <section xml:id="zend.soap.autodiscovery.wsdlstyles"><title>WSDLバインディングスタイル</title>
         
 
         <para>

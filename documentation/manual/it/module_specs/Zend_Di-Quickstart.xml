@@ -4,7 +4,7 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.di.quickstart">
-    <info><title>Zend\Di Quickstart</title></info>
+    <title>Zend\Di Quickstart</title>
 
     <para>
         Questa "QuickStart" ha come obiettivo quello di introdurre gli sviluppatori

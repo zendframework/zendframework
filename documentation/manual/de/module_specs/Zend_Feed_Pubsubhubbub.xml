@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.pubsubhubbub.introduction"><info><title>Zend_Feed_Pubsubhubbub</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.pubsubhubbub.introduction"><title>Zend_Feed_Pubsubhubbub</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         Anwendungen.
     </para>
 
-    <section xml:id="zend.feed.pubsubhubbub.what.is.pubsubhubbub"><info><title>Was ist Pubsubhubbub?</title></info>
+    <section xml:id="zend.feed.pubsubhubbub.what.is.pubsubhubbub"><title>Was ist Pubsubhubbub?</title>
         
 
         <para>
@@ -53,7 +53,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.feed.pubsubhubbub.architecture"><info><title>Architektur</title></info>
+    <section xml:id="zend.feed.pubsubhubbub.architecture"><title>Architektur</title>
         
 
         <para>
@@ -101,7 +101,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.publisher"><info><title>Zend_Feed_Pubsubhubbub_Publisher</title></info>
+    <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.publisher"><title>Zend_Feed_Pubsubhubbub_Publisher</title>
         
 
         <para>
@@ -199,7 +199,7 @@ if (!$publisher->isSuccess()) {
         </para>
     </section>
 
-    <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber"><info><title>Zend_Feed_Pubsubhubbub_Subscriber</title></info>
+    <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber"><title>Zend_Feed_Pubsubhubbub_Subscriber</title>
         
 
         <para>
@@ -250,7 +250,7 @@ if (!$publisher->isSuccess()) {
             </para>
         </important>
 
-        <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing"><info><title>Abonnieren und Abos löschen</title></info>
+        <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing"><title>Abonnieren und Abos löschen</title>
             
 
             <para>
@@ -341,7 +341,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                 folgenden Parameter enthält (basierend auf dem vorhergehenden Beispiel):
             </para>
 
-            <table xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing.table"><info><title>Anfrageparameter beim Abonnieren</title></info>
+            <table xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing.table"><title>Anfrageparameter beim Abonnieren</title>
                 
 
                 <tgroup cols="3">
@@ -534,7 +534,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
             </para>
         </section>
 
-        <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.handling.hub.callbacks"><info><title>Callbacks von Abonnenten behandeln</title></info>
+        <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.handling.hub.callbacks"><title>Callbacks von Abonnenten behandeln</title>
             
 
             <para>
@@ -612,7 +612,7 @@ if ($callback->hasFeedUpdate()) {
             </important>
         </section>
 
-        <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.setting.up.and.using.a.callback.url.route"><info><title>Eine Callback URL Route einstellen und verwenden</title></info>
+        <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.setting.up.and.using.a.callback.url.route"><title>Eine Callback URL Route einstellen und verwenden</title>
             
 
             <para>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.rowset"><info><title>Zend_Db_Table_Rowset</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.rowset"><title>Zend_Db_Table_Rowset</title>
 
     
 
-    <section xml:id="zend.db.table.rowset.introduction"><info><title>Введение</title></info>
+    <section xml:id="zend.db.table.rowset.introduction"><title>Введение</title>
 
         
 
@@ -20,7 +20,7 @@
 
     </section>
 
-    <section xml:id="zend.db.table.rowset.fetch"><info><title>Получение набора строк</title></info>
+    <section xml:id="zend.db.table.rowset.fetch"><title>Получение набора строк</title>
 
         
 
@@ -30,7 +30,7 @@
             объект типа <code>Zend_Db_Table_Rowset_Abstract</code>.
         </para>
 
-        <example xml:id="zend.db.table.rowset.fetch.example"><info><title>Пример извлечения набора строк</title></info>
+        <example xml:id="zend.db.table.rowset.fetch.example"><title>Пример извлечения набора строк</title>
 
             
 
@@ -44,7 +44,7 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
 
     </section>
 
-    <section xml:id="zend.db.table.rowset.rows"><info><title>Получение строк из набора</title></info>
+    <section xml:id="zend.db.table.rowset.rows"><title>Получение строк из набора</title>
 
         
 
@@ -64,7 +64,7 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
             строк.
         </para>
 
-        <example xml:id="zend.db.table.rowset.rows.example.counting"><info><title>Подсчет количества строк в наборе строк</title></info>
+        <example xml:id="zend.db.table.rowset.rows.example.counting"><title>Подсчет количества строк в наборе строк</title>
 
             
 
@@ -83,7 +83,7 @@ if ($rowCount > 0) {
 
         </example>
 
-        <example xml:id="zend.db.table.rowset.rows.example.current"><info><title>Чтение одной строки из набора строк</title></info>
+        <example xml:id="zend.db.table.rowset.rows.example.current"><title>Чтение одной строки из набора строк</title>
 
             
 
@@ -108,7 +108,7 @@ $row    = $rowset->current();
             <code>current()</code> вернет значение <constant>NULL</constant>.
         </para>
 
-        <example xml:id="zend.db.table.rowset.iterate.example"><info><title>&gt;Итерация по набору строк</title></info>
+        <example xml:id="zend.db.table.rowset.iterate.example"><title>&gt;Итерация по набору строк</title>
 
             
 
@@ -185,7 +185,7 @@ $row9->save();
 
     </section>
 
-    <section xml:id="zend.db.table.rowset.to-array"><info><title>Получение набора строк в виде массива</title></info>
+    <section xml:id="zend.db.table.rowset.to-array"><title>Получение набора строк в виде массива</title>
 
         
 
@@ -197,7 +197,7 @@ $row9->save();
             соответствуют именам столбцов, а элементы - значениям этих столбцов.
         </para>
 
-        <example xml:id="zend.db.table.rowset.to-array.example"><info><title>Использование toArray()</title></info>
+        <example xml:id="zend.db.table.rowset.to-array.example"><title>Использование toArray()</title>
 
             
 
@@ -229,7 +229,7 @@ foreach ($rowsetArray as $rowArray) {
 
     </section>
 
-    <section xml:id="zend.db.table.rowset.serialize"><info><title>Сериализация и десериализация наборов строк</title></info>
+    <section xml:id="zend.db.table.rowset.serialize"><title>Сериализация и десериализация наборов строк</title>
 
         
 
@@ -240,7 +240,7 @@ foreach ($rowsetArray as $rowArray) {
             восстановить его позднее.
         </para>
 
-        <example xml:id="zend.db.table.rowset.serialize.example.serialize"><info><title>Сериализация набора строк</title></info>
+        <example xml:id="zend.db.table.rowset.serialize.example.serialize"><title>Сериализация набора строк</title>
 
             
 
@@ -263,7 +263,7 @@ $serializedRowset = serialize($rowset);
 
         </example>
 
-        <example xml:id="zend.db.table.rowset.serialize.example.unserialize"><info><title>Десериализация набора строк</title></info>
+        <example xml:id="zend.db.table.rowset.serialize.example.unserialize"><title>Десериализация набора строк</title>
 
             
 
@@ -294,7 +294,7 @@ echo $row->bug_description;
 
         </example>
 
-        <note><info><title>Почему объекты наборов строк десериализируются без соединения с БД?</title></info>
+        <note><title>Почему объекты наборов строк десериализируются без соединения с БД?</title>
             
             <para>
                 Сериализованный объект является строкой, которая доступна
@@ -324,7 +324,7 @@ echo $row->bug_description;
             в БД.
         </para>
 
-        <example xml:id="zend.db.table.rowset.serialize.example.set-table"><info><title>Пример восстановления соединения для набора строк</title></info>
+        <example xml:id="zend.db.table.rowset.serialize.example.set-table"><title>Пример восстановления соединения для набора строк</title>
 
             
 
@@ -355,7 +355,7 @@ $row->save();
 
     </section>
 
-    <section xml:id="zend.db.table.rowset.extending"><info><title>Расширение класса набора строк</title></info>
+    <section xml:id="zend.db.table.rowset.extending"><title>Расширение класса набора строк</title>
 
         
 
@@ -367,7 +367,7 @@ $row->save();
             передаваемом в качестве аргумента конструктору объекта таблицы.
         </para>
 
-        <example xml:id="zend.db.table.rowset.extending.example"><info><title>Указание своего класса набора строк</title></info>
+        <example xml:id="zend.db.table.rowset.extending.example"><title>Указание своего класса набора строк</title>
 
             
 
@@ -400,7 +400,7 @@ class Products extends Zend_Db_Table_Abstract
             всех строк в наборе.
         </para>
 
-        <example xml:id="zend.db.table.rowset.extending.example-aggregate"><info><title>Пример класса набора строк с новым методом</title></info>
+        <example xml:id="zend.db.table.rowset.extending.example-aggregate"><title>Пример класса набора строк с новым методом</title>
 
             
 

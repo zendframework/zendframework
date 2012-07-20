@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.simpy"><info><title>Zend_Service_Simpy</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.simpy"><title>Zend_Service_Simpy</title>
     
 
-    <section xml:id="zend.service.simpy.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.service.simpy.introduction"><title>導入</title>
         
 
         <para>
@@ -53,7 +53,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.simpy.links"><info><title>リンク</title></info>
+    <section xml:id="zend.service.simpy.links"><title>リンク</title>
         
 
         <para>
@@ -68,7 +68,7 @@
             といった節を参照ください。
         </para>
 
-        <example xml:id="zend.service.simpy.links.querying"><info><title>リンクの問い合わせ</title></info>
+        <example xml:id="zend.service.simpy.links.querying"><title>リンクの問い合わせ</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -125,7 +125,7 @@ $linkQuery->setAfterDate('2006-12-09');
             既存のリンクが新しいデータで上書きされるということです。
         </para>
 
-        <example xml:id="zend.service.simpy.links.modifying"><info><title>リンクの変更</title></info>
+        <example xml:id="zend.service.simpy.links.modifying"><title>リンクの変更</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -163,7 +163,7 @@ foreach ($linkSet as $link) {
         </example>
     </section>
 
-    <section xml:id="zend.service.simpy.tags"><info><title>タグ</title></info>
+    <section xml:id="zend.service.simpy.tags"><title>タグ</title>
         
 
         <para>
@@ -171,7 +171,7 @@ foreach ($linkSet as $link) {
             (多いものが先) でタグが並べ替えられます。
         </para>
 
-        <example xml:id="zend.service.simpy.tags.working"><info><title>タグの処理</title></info>
+        <example xml:id="zend.service.simpy.tags.working"><title>タグの処理</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -215,7 +215,7 @@ $simpy->mergeTags('framework', 'development', 'frameworks');
         </example>
     </section>
 
-    <section xml:id="zend.service.simpy.notes"><info><title>メモ</title></info>
+    <section xml:id="zend.service.simpy.notes"><title>メモ</title>
         
 
         <para>
@@ -223,7 +223,7 @@ $simpy->mergeTags('framework', 'development', 'frameworks');
             メモは、数値 ID によって識別されます。
         </para>
 
-        <example xml:id="zend.service.simpy.notes.working"><info><title>メモの扱い</title></info>
+        <example xml:id="zend.service.simpy.notes.working"><title>メモの扱い</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -271,7 +271,7 @@ $simpy->deleteNote($note->getId());
         </example>
     </section>
 
-    <section xml:id="zend.service.simpy.watchlists"><info><title>ウォッチリスト</title></info>
+    <section xml:id="zend.service.simpy.watchlists"><title>ウォッチリスト</title>
         
 
         <para>
@@ -280,7 +280,7 @@ $simpy->deleteNote($note->getId());
             Simpy のウェブサイトでウォッチリストを作成しておく必要があります。
         </para>
 
-        <example xml:id="zend.service.simpy.watchlists.retrieving"><info><title>ウォッチリストの取得</title></info>
+        <example xml:id="zend.service.simpy.watchlists.retrieving"><title>ウォッチリストの取得</title>
             
 
             <programlisting language="php"><![CDATA[

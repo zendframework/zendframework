@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.text.table.introduction"><info><title>Zend_Text_Table</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.text.table.introduction"><title>Zend_Text_Table</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         テキストの配置の指定に対応しています。
     </para>
 
-    <note><info><title>エンコーディング</title></info>
+    <note><title>エンコーディング</title>
         
 
         <para>
@@ -145,7 +145,7 @@
         などとしてマジックメソッド <code>__toString</code> を使用することもできます。
     </para>
 
-    <example xml:id="zend.text.table.example.using"><info><title>Zend_Text_Table の使用例</title></info>
+    <example xml:id="zend.text.table.example.using"><title>Zend_Text_Table の使用例</title>
         
 
         <para>

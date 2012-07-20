@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><info><title>Zend_Mime</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><title>Zend_Mime</title>
     
 
-    <section xml:id="zend.mime.mime.introduction"><info><title>Введение</title></info>
+    <section xml:id="zend.mime.mime.introduction"><title>Введение</title>
         
         <para>
             <classname>Zend_Mime</classname> является вспомогательным классом
@@ -17,7 +17,7 @@
         </para>
     </section>
     
-    <section xml:id="zend.mime.mime.static"><info><title>Статические методы и константы</title></info>
+    <section xml:id="zend.mime.mime.static"><title>Статические методы и константы</title>
     
         <para>
             <classname>Zend_Mime</classname> предоставляет простой набор
@@ -97,7 +97,7 @@
         </para>
     </section>
     
-    <section xml:id="zend.mime.mime.instantiation"><info><title>Инстанциирование Zend_Mime</title></info>
+    <section xml:id="zend.mime.mime.instantiation"><title>Инстанциирование Zend_Mime</title>
         
         <para>
             При создании объекта <classname>Zend_Mime</classname>

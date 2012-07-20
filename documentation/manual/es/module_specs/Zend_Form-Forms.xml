@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.forms"><info><title>Creando formularios usando Zend_Form</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.forms"><title>Creando formularios usando Zend_Form</title>
     
 
     <para> La clase <classname>Zend_Form</classname> es usada para agregar
@@ -66,7 +66,7 @@ $form = new Zend_Form($config);
         para servir como fábrica para elementos y grupos, así como también la
         habilidad de generarse a sí mismo a través de decoradores. </para>
 
-    <section xml:id="zend.form.forms.plugins"><info><title>Cargadores de Plugin</title></info>
+    <section xml:id="zend.form.forms.plugins"><title>Cargadores de Plugin</title>
         
         <para>
             <classname>Zend_Form</classname> hace uso de
@@ -162,7 +162,7 @@ $form = new Zend_Form($config);
             como reemplazos para clases estándar. </para>
     </section>
 
-    <section xml:id="zend.form.forms.elements"><info><title>Elementos</title></info>
+    <section xml:id="zend.form.forms.elements"><title>Elementos</title>
         
         <para>
             <classname>Zend_Form</classname> proporciona varios métodos de
@@ -194,7 +194,7 @@ $form->addElement('text', 'foo');
 $form->addElement('text', 'foo', array('label' => 'Foo:'));
 ]]></programlisting>
 
-        <note><info><title>addElement() Implementa una Interfaz Fluida</title></info>
+        <note><title>addElement() Implementa una Interfaz Fluida</title>
             
 
             <para>
@@ -241,7 +241,7 @@ $foo = $form->foo;
 $username = $form->createElement('text', 'username');
 ]]></programlisting>
 
-        <section xml:id="zend.form.forms.elements.values"><info><title>Llenar y recuperar valores</title></info>
+        <section xml:id="zend.form.forms.elements.values"><title>Llenar y recuperar valores</title>
             
 
             <para> Después de validar el formulario, originalmente se necesitará
@@ -280,7 +280,7 @@ $form->reset();
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.form.forms.elements.global"><info><title>Operaciones Globales</title></info>
+        <section xml:id="zend.form.forms.elements.global"><title>Operaciones Globales</title>
             
 
             <para>Ocasionalemnte se necesitarán ciertas operaciones que afecten
@@ -290,8 +290,8 @@ $form->reset();
                 y determinando filtros para todos los elementos. Como
                 ejemplos:</para>
 
-            <example xml:id="zend.form.forms.elements.global.allpaths"><info><title>Determinando rutas de acceso de prefijos para todos los
-                    elementos</title></info>
+            <example xml:id="zend.form.forms.elements.global.allpaths"><title>Determinando rutas de acceso de prefijos para todos los
+                    elementos</title>
                 
 
                 <para>Se puede determinar rutas de acceso para prefijos para
@@ -321,7 +321,7 @@ $form->addElementPrefixPath('My_Foo_Decorator',
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.form.forms.elements.global.decorators"><info><title>Determinando Decoradores para todos los elementos</title></info>
+            <example xml:id="zend.form.forms.elements.global.decorators"><title>Determinando Decoradores para todos los elementos</title>
                 
 
                 <para> Se pueden determinar decoradores para todos los
@@ -340,7 +340,7 @@ $form->setElementDecorators(array(
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.form.forms.elements.global.decoratorsFilter"><info><title>Determinando decoradores para algunos elementos</title></info>
+            <example xml:id="zend.form.forms.elements.global.decoratorsFilter"><title>Determinando decoradores para algunos elementos</title>
                 
 
                 <para> Pueden determinarse también decoradores para un
@@ -395,8 +395,8 @@ $form->setElementDecorators(
 ]]></programlisting>
             </example>
 
-            <note><info><title>Algunos Decoradores son Inapropiados para algunos
-                    Elementos</title></info>
+            <note><title>Algunos Decoradores son Inapropiados para algunos
+                    Elementos</title>
                 
 
                 <para> Mientras <methodname>setElementDecorators()</methodname>
@@ -419,7 +419,7 @@ $form->setElementDecorators(
                 </para>
             </note>
 
-            <example xml:id="zend.form.forms.elements.global.filters"><info><title>Determinando Filtros para todos los Elementos</title></info>
+            <example xml:id="zend.form.forms.elements.global.filters"><title>Determinando Filtros para todos los Elementos</title>
                 
 
                 <para> En muchos casos, puede quererse aplicar el mismo filtro a
@@ -432,7 +432,7 @@ $form->setElementFilters(array('StringTrim'));
             </example>
         </section>
 
-        <section xml:id="zend.form.forms.elements.methods"><info><title>Métodos para Interactuar con los Elementos</title></info>
+        <section xml:id="zend.form.forms.elements.methods"><title>Métodos para Interactuar con los Elementos</title>
             
 
             <para>Los siguientes métodos pueden ser usados para interactuar con
@@ -556,7 +556,7 @@ $form->setElementFilters(array('StringTrim'));
         </section>
     </section>
 
-    <section xml:id="zend.form.forms.displaygroups"><info><title>Grupos de visualización (display groups)</title></info>
+    <section xml:id="zend.form.forms.displaygroups"><title>Grupos de visualización (display groups)</title>
         
 
         <para>Los grupos de visualización (display groups) son una manera de
@@ -597,7 +597,7 @@ $login = $form->getDisplayGroup('login');
 $login = $form->login;
 ]]></programlisting>
 
-        <note><info><title>Decoradores por defecto que no necesitan ser cargados</title></info>
+        <note><title>Decoradores por defecto que no necesitan ser cargados</title>
             
 
             <para>Por defecto, los grupos de visualización son cargados durante
@@ -619,7 +619,7 @@ $form->addDisplayGroup(
             </para>
         </note>
 
-        <section xml:id="zend.form.forms.displaygroups.global"><info><title>Operaciones Globales</title></info>
+        <section xml:id="zend.form.forms.displaygroups.global"><title>Operaciones Globales</title>
             
 
             <para>Al igual que los elementos, existen algunas operaciones que
@@ -627,8 +627,8 @@ $form->addDisplayGroup(
                 incluyen determinar decoradores y fijar la ruta de acceso donde
                 buscar los decoradores.</para>
 
-            <example xml:id="zend.form.forms.displaygroups.global.paths"><info><title>Fijando el Prefijo de Ruta del Decorador para todos los
-                    Grupos de Visualización</title></info>
+            <example xml:id="zend.form.forms.displaygroups.global.paths"><title>Fijando el Prefijo de Ruta del Decorador para todos los
+                    Grupos de Visualización</title>
                 
 
                 <para> Por defecto, los grupos de visualización heredan
@@ -643,8 +643,8 @@ $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.form.forms.displaygroups.global.decorators"><info><title>Fijando Decoradores para Todos los Grupos de
-                    Visualización</title></info>
+            <example xml:id="zend.form.forms.displaygroups.global.decorators"><title>Fijando Decoradores para Todos los Grupos de
+                    Visualización</title>
                 
 
                 <para> Pueden determinarse decoradores para todos los grupos de
@@ -666,8 +666,8 @@ $form->setDisplayGroupDecorators(array(
             </example>
         </section>
 
-        <section xml:id="zend.form.forms.displaygroups.customClasses"><info><title>Usando Clases de Grupos de Visualización
-                Personalizadas</title></info>
+        <section xml:id="zend.form.forms.displaygroups.customClasses"><title>Usando Clases de Grupos de Visualización
+                Personalizadas</title>
             
 
             <para> Por defecto, <classname>Zend_Form</classname> utiliza la
@@ -708,7 +708,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                 clase.</para>
         </section>
 
-        <section xml:id="zend.form.forms.displaygroups.interactionmethods"><info><title>Métodos para Interactuar con Grupos de Visualización</title></info>
+        <section xml:id="zend.form.forms.displaygroups.interactionmethods"><title>Métodos para Interactuar con Grupos de Visualización</title>
             
 
             <para>Los siguientes métodos pueden ser usados para interactuar con
@@ -786,7 +786,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.form.forms.displaygroups.methods"><info><title>Métodos Zend_Form_DisplayGroup</title></info>
+        <section xml:id="zend.form.forms.displaygroups.methods"><title>Métodos Zend_Form_DisplayGroup</title>
             
 
             <para>
@@ -1107,7 +1107,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
         </section>
     </section>
 
-    <section xml:id="zend.form.forms.subforms"><info><title>Subformularios</title></info>
+    <section xml:id="zend.form.forms.subforms"><title>Subformularios</title>
         
 
         <para>Los Sub formularios sirven para diferentes propósitos:</para>
@@ -1167,7 +1167,7 @@ $subForm = $form->subform;
         <para>Los Subformularios son incluidos en la interacción del formulario,
             sin embargo los elementos que lo contienen no lo son</para>
 
-        <section xml:id="zend.form.forms.subforms.global"><info><title>Operaciones Globales</title></info>
+        <section xml:id="zend.form.forms.subforms.global"><title>Operaciones Globales</title>
             
 
             <para> Como los elementos y los grupos de visualización, existen
@@ -1191,7 +1191,7 @@ $form->setSubFormDecorators(array(
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.form.forms.subforms.methods"><info><title>Métodos para interactuar con Sub Formularios</title></info>
+        <section xml:id="zend.form.forms.subforms.methods"><title>Métodos para interactuar con Sub Formularios</title>
             
 
             <para>Los siguientes métodos pueden ser usados para interactuar con
@@ -1251,7 +1251,7 @@ $form->setSubFormDecorators(array(
         </section>
     </section>
 
-    <section xml:id="zend.form.forms.metadata"><info><title>Metadatos y Atributos</title></info>
+    <section xml:id="zend.form.forms.metadata"><title>Metadatos y Atributos</title>
         
 
         <para> Mientras la utilidad de un formulario primariamente deriva de los
@@ -1339,7 +1339,7 @@ $form->clearAttribs();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.forms.decorators"><info><title>Decoradores</title></info>
+    <section xml:id="zend.form.forms.decorators"><title>Decoradores</title>
         
 
         <para> Crear el marcado para un formulario es a menudo una tarea que
@@ -1383,7 +1383,7 @@ $form->setDecorators(array(
             que será usado como atributos <acronym>HTML</acronym> de la etiqueta
                 <methodname>&lt;form&gt;</methodname> . </para>
 
-        <note><info><title>Decoradores por defecto que no necesitan ser cargados</title></info>
+        <note><title>Decoradores por defecto que no necesitan ser cargados</title>
             
 
             <para>Por defecto, el decorador por defecto son cargados durante la
@@ -1400,7 +1400,7 @@ $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
             </para>
         </note>
 
-        <note><info><title>Usando multiples decoradores del mismo tipo</title></info>
+        <note><title>Usando multiples decoradores del mismo tipo</title>
             
 
             <para> Internamente, <classname>Zend_Form</classname> usa una clase
@@ -1519,7 +1519,7 @@ echo $form->renderFieldset("<p>This is fieldset content</p>");
         <para>Si el decorador no existe, una excepción se creará.</para>
     </section>
 
-    <section xml:id="zend.form.forms.validation"><info><title>Validación</title></info>
+    <section xml:id="zend.form.forms.validation"><title>Validación</title>
         
 
         <para> Un caso de uso primario para formularios es validar datos
@@ -1613,7 +1613,7 @@ $messages = $form->getMessages('username');
                 parte de su validación. </para>
         </note>
 
-        <section xml:id="zend.form.forms.validation.errors"><info><title>Mensajes de error personalizados</title></info>
+        <section xml:id="zend.form.forms.validation.errors"><title>Mensajes de error personalizados</title>
             
 
             <para>A veces, puede querer especificar uno o más mensajes de error
@@ -1702,7 +1702,7 @@ $messages = $form->getMessages('username');
                 traducidos.</para>
         </section>
 
-        <section xml:id="zend.form.forms.validation.values"><info><title>Retrieving Valid Values Only</title></info>
+        <section xml:id="zend.form.forms.validation.values"><title>Retrieving Valid Values Only</title>
             
 
             <para> There are scenarios when you want to allow your user to work
@@ -1720,7 +1720,7 @@ $validValues = $form->getValidValues($_POST);
         </section>
     </section>
 
-    <section xml:id="zend.form.forms.methods"><info><title>Métodos</title></info>
+    <section xml:id="zend.form.forms.methods"><title>Métodos</title>
         
 
         <para> La siguiente lista es la lista completa de métodos disponibles
@@ -2245,7 +2245,7 @@ $validValues = $form->getValidValues($_POST);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.forms.config"><info><title>Configuración</title></info>
+    <section xml:id="zend.form.forms.config"><title>Configuración</title>
         
 
         <para>
@@ -2388,7 +2388,7 @@ decorators.form.decorator = "Form"
             arrays <acronym>PHP</acronym> . </para>
     </section>
 
-    <section xml:id="zend.form.forms.custom"><info><title>Formularios personalizados</title></info>
+    <section xml:id="zend.form.forms.custom"><title>Formularios personalizados</title>
         
 
         <para> Una alternativa a usar los formularios basados en configuraciones

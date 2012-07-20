@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.input"><info><title>Zend_Filter_Input</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.input"><title>Zend_Filter_Input</title>
     
 
     <para>
@@ -73,7 +73,7 @@
         下面一节描述使用这个类的步骤。
     </para>
 
-    <section xml:id="zend.filter.input.declaring"><info><title> 声明过滤器和校验器规则 </title></info>
+    <section xml:id="zend.filter.input.declaring"><title> 声明过滤器和校验器规则 </title>
 
         
 
@@ -173,7 +173,7 @@ $filters = array(
 
     </section>
 
-    <section xml:id="zend.filter.input.running"><info><title> 生成过滤器和校验器的处理器 </title></info>
+    <section xml:id="zend.filter.input.running"><title> 生成过滤器和校验器的处理器 </title>
 
         
 
@@ -215,7 +215,7 @@ $input->setData($newData);
 
     </section>
 
-    <section xml:id="zend.filter.input.results"><info><title> 获取校验过的字段和其它报告 </title></info>
+    <section xml:id="zend.filter.input.results"><title> 获取校验过的字段和其它报告 </title>
 
         
 
@@ -224,7 +224,7 @@ $input->setData($newData);
             你也可以在应用过滤器之后获得字段的值。
         </para>
 
-        <section xml:id="zend.filter.input.results.isvalid"><info><title> 输入值有效的查询 </title></info>
+        <section xml:id="zend.filter.input.results.isvalid"><title> 输入值有效的查询 </title>
 
             
 
@@ -252,7 +252,7 @@ if ($input->isValid('month')) {
 
         </section>
 
-        <section xml:id="zend.filter.input.results.reports"><info><title> 获得无效、丢失或未知的字段 </title></info>
+        <section xml:id="zend.filter.input.results.reports"><title> 获得无效、丢失或未知的字段 </title>
 
             
 
@@ -336,7 +336,7 @@ $input->setOptions($options);
 
         </section>
 
-        <section xml:id="zend.filter.input.results.escaping"><info><title> 获得有效字段 </title></info>
+        <section xml:id="zend.filter.input.results.escaping"><title> 获得有效字段 </title>
 
             
 
@@ -403,7 +403,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
 
     </section>
 
-    <section xml:id="zend.filter.input.metacommands"><info><title> 使用 Metacommands 来控制过滤器或校验器规则 </title></info>
+    <section xml:id="zend.filter.input.metacommands"><title> 使用 Metacommands 来控制过滤器或校验器规则 </title>
 
         
 
@@ -412,7 +412,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
             Metacommands 在给定的过滤器或校验器数组值里以字符串索引条目的形式出现。
         </para>
 
-        <section xml:id="zend.filter.input.metacommands.fields"><info><title>The <code>FIELDS</code> metacommand</title></info>
+        <section xml:id="zend.filter.input.metacommands.fields"><title>The <code>FIELDS</code> metacommand</title>
 
             
 
@@ -466,7 +466,7 @@ $validators = array(
 
         </section>
 
-        <section xml:id="zend.filter.input.metacommands.presence"><info><title>The <code>PRESENCE</code> metacommand</title></info>
+        <section xml:id="zend.filter.input.metacommands.presence"><title>The <code>PRESENCE</code> metacommand</title>
 
             
 
@@ -495,7 +495,7 @@ $validators = array(
 
         </section>
 
-        <section xml:id="zend.filter.input.metacommands.default"><info><title>The <code>DEFAULT_VALUE</code> metacommand</title></info>
+        <section xml:id="zend.filter.input.metacommands.default"><title>The <code>DEFAULT_VALUE</code> metacommand</title>
 
             
 
@@ -542,7 +542,7 @@ echo $input->month; // echoes 1
 
         </section>
 
-        <section xml:id="zend.filter.input.metacommands.allow-empty"><info><title>The <code>ALLOW_EMPTY</code> metacommand</title></info>
+        <section xml:id="zend.filter.input.metacommands.allow-empty"><title>The <code>ALLOW_EMPTY</code> metacommand</title>
 
             
 
@@ -594,7 +594,7 @@ $input->setOptions($options);
 
         </section>
 
-        <section xml:id="zend.filter.input.metacommands.break-chain"><info><title>The <code>BREAK_CHAIN</code> metacommand</title></info>
+        <section xml:id="zend.filter.input.metacommands.break-chain"><title>The <code>BREAK_CHAIN</code> metacommand</title>
 
             
 
@@ -651,7 +651,7 @@ $input = new Zend_Filter_Input(null, $validators);
 
         </section>
 
-        <section xml:id="zend.filter.input.metacommands.messages"><info><title>The <code>MESSAGES</code> metacommand</title></info>
+        <section xml:id="zend.filter.input.metacommands.messages"><title>The <code>MESSAGES</code> metacommand</title>
 
             
 
@@ -730,7 +730,7 @@ $validators = array(
 
         </section>
 
-        <section xml:id="zend.filter.input.metacommands.global"><info><title> 对所有的规则使用选项来设置 metacommands </title></info>
+        <section xml:id="zend.filter.input.metacommands.global"><title> 对所有的规则使用选项来设置 metacommands </title>
 
             
 
@@ -764,7 +764,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 
     </section>
 
-    <section xml:id="zend.filter.input.namespaces"><info><title> 添加过滤器类命名空间 </title></info>
+    <section xml:id="zend.filter.input.namespaces"><title> 添加过滤器类命名空间 </title>
 
         
 

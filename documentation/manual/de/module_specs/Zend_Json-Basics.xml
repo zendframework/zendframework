@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.basics"><info><title>Grundlegende Verwendung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.basics"><title>Grundlegende Verwendung</title>
     
 
     <para>
@@ -16,7 +16,7 @@ $phpNative = Zend_Json::decode($encodedValue);
 $json = Zend_Json::encode($phpNative);
 ]]></programlisting>
 
-    <section xml:id="zend.json.basics.prettyprint"><info><title>Schön-drucken von JSON</title></info>
+    <section xml:id="zend.json.basics.prettyprint"><title>Schön-drucken von JSON</title>
         
 
         <para>

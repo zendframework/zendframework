@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.usage"><info><title>Пример использования модуля Zend_Pdf <!-- Zend_Pdf module usage example.--></title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.usage"><title>Пример использования модуля Zend_Pdf <!-- Zend_Pdf module usage example.--></title>
     
     <para>
     Этот раздел дает пример использования модуля.
@@ -23,7 +23,7 @@
 -->
     </para>
 
-    <example><info><title>Демонстрация использования модуля Zend_Pdf<!-- Zend_Pdf module usage demo.--></title></info>
+    <example><title>Демонстрация использования модуля Zend_Pdf<!-- Zend_Pdf module usage demo.--></title>
         
         <programlisting language="php"><![CDATA[<?php
 /**

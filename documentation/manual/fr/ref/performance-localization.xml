@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><info><title>Internationalisation (i18n) and Localisation (l10n)</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><title>Internationalisation (i18n) and Localisation (l10n)</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         L10N.
     </para>
 
-    <section xml:id="performance.localization.translationadapter"><info><title>Quel adaptateur de traduction dois-je utiliser ?</title></info>
+    <section xml:id="performance.localization.translationadapter"><title>Quel adaptateur de traduction dois-je utiliser ?</title>
         
 
         <para>
@@ -23,7 +23,7 @@
             plus rapides ?
         </para>
 
-        <section xml:id="performance.localization.translationadapter.fastest"><info><title>Utiliser les adaptateurs de traduction non-XML pour plus de rapidité</title></info>
+        <section xml:id="performance.localization.translationadapter.fastest"><title>Utiliser les adaptateurs de traduction non-XML pour plus de rapidité</title>
             
 
             <para>
@@ -77,9 +77,9 @@
         </section>
     </section>
 
-    <section xml:id="performance.localization.cache"><info><title>
+    <section xml:id="performance.localization.cache"><title>
             Comment peut-on améliorer les performances de la traduction et de la localisation ?
-        </title></info>
+        </title>
         
 
         <para>
@@ -89,7 +89,7 @@
             faire ceci ?
         </para>
 
-        <section xml:id="performance.localization.cache.usage"><info><title>Utiliser les caches de traductions et de localisation</title></info>
+        <section xml:id="performance.localization.cache.usage"><title>Utiliser les caches de traductions et de localisation</title>
             
 
             <para>

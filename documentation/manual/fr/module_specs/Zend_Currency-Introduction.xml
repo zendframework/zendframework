@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.introduction"><info><title>Introduction à Zend_Currency</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.introduction"><title>Introduction à Zend_Currency</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         services d'échange et les calculs.
     </para>
 
-    <section xml:id="zend.currency.introduction.list"><info><title>Pourquoi devriez-vous utiliser Zend_Currency ?</title></info>
+    <section xml:id="zend.currency.introduction.list"><title>Pourquoi devriez-vous utiliser Zend_Currency ?</title>
         
 
         <para>

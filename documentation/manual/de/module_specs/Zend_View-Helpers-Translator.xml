@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.translator"><info><title>Übersetzungs Helfer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.translator"><title>Übersetzungs Helfer</title>
     
 
     <para>
@@ -52,7 +52,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.translator.registered"><info><title>Registrierte Instanz</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.registered"><title>Registrierte Instanz</title>
         
 
         <para>
@@ -84,7 +84,7 @@ echo $this->translate('simple');
         erstellt werden und der Helfer im Nachhinein initiiert werden.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.afterwards"><info><title>In der View</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.afterwards"><title>In der View</title>
         
 
         <para>
@@ -113,7 +113,7 @@ $this->translate()->setTranslator($adapter)->translate('simple');
         direkt angesprochen werden.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.directly"><info><title>Direkte Verwendung</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.directly"><title>Direkte Verwendung</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -145,7 +145,7 @@ print $translate->translate('simple'); // das gibt 'einfach' zurück
         Parametern, oder als Array von Parametern. Als Beispiel:
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.parameter"><info><title>Einzelne Parameter</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.parameter"><title>Einzelne Parameter</title>
         
 
         <para>
@@ -168,7 +168,7 @@ $this->translate("Today is %1\$s", $date);
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.translator.parameterlist"><info><title>Liste von Parametern</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.parameterlist"><title>Liste von Parametern</title>
         
 
         <para>
@@ -188,7 +188,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.translator.parameterarray"><info><title>Array von Parametern</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.parameterarray"><title>Array von Parametern</title>
         
 
         <para>
@@ -211,7 +211,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         werden.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.dynamic"><info><title>Das Gebietsschema dynamisch wechseln</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.dynamic"><title>Das Gebietsschema dynamisch wechseln</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -229,7 +229,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
         gesetzt werden:
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.static"><info><title>Das Gebietsschema statisch wechseln</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.static"><title>Das Gebietsschema statisch wechseln</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -250,7 +250,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         gesetzte Gebietsschema zu erhalten.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.getlocale"><info><title>Das aktuell gesetzte Gebietsschema erhalten</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.getlocale"><title>Das aktuell gesetzte Gebietsschema erhalten</title>
         
 
         <programlisting language="php"><![CDATA[

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><info><title>Zend_Mime</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><title>Zend_Mime</title>
     
 
-    <section xml:id="zend.mime.mime.introduction"><info><title>简介</title></info>
+    <section xml:id="zend.mime.mime.introduction"><title>简介</title>
         
         <para>
             <code>Zend_Mime</code>是一个用来处理多段MIME消息的辅助类，
@@ -13,7 +13,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.mime.static"><info><title>静态方法和常量</title></info>
+    <section xml:id="zend.mime.mime.static"><title>静态方法和常量</title>
     
     <para>
         <code>Zend_Mime</code>提供了一系列静态辅助方法来处理MIME：
@@ -87,7 +87,7 @@
     </para>
     </section>
 
-    <section xml:id="zend.mime.mime.instantiation"><info><title>实例化Zend_Mime</title></info>
+    <section xml:id="zend.mime.mime.instantiation"><title>实例化Zend_Mime</title>
     
     <para>
         在实例化<code>Zend_Mime</code> 对象时，指定了MIME分界线(MIME boundary)，

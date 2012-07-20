@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.design"><info><title>Architecture et buts</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.design"><title>Architecture et buts</title>
     
 
-    <section xml:id="learning.autoloading.design.naming"><info><title>Convention de noms des classes</title></info>
+    <section xml:id="learning.autoloading.design.naming"><title>Convention de noms des classes</title>
         
 
         <para>
@@ -41,7 +41,7 @@
         </para>
     </section>
 
-    <section xml:id="learning.autoloading.design.autoloader"><info><title>Conventions et architecture d'Autoload</title></info>
+    <section xml:id="learning.autoloading.design.autoloader"><title>Conventions et architecture d'Autoload</title>
         
 
         <para>

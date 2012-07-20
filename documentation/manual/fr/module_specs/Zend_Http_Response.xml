@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><info><title>Zend_Http_Response</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><title>Zend_Http_Response</title>
     
 
-    <section xml:id="zend.http.response.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.http.response.introduction"><title>Introduction</title>
         
 
         <para>
@@ -16,8 +16,8 @@
             Dans la plupart des cas, un objet <classname>Zend_Http_Response</classname> sera
             instancié en utilisant la méthode <methodname>fromString()</methodname>, qui lit une chaîne contenant
             une réponse HTTP, et retourne un nouvel objet <classname>Zend_Http_Response</classname>
-            : <example xml:id="zend.http.response.introduction.example-1"><info><title>Instancier un objet Zend_Http_Response en utilisant la méthode
-                    factory</title></info>
+            : <example xml:id="zend.http.response.introduction.example-1"><title>Instancier un objet Zend_Http_Response en utilisant la méthode
+                    factory</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -86,7 +86,7 @@ $response = Zend_Http_Response::fromString($str);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.http.response.testers"><info><title>Méthodes de tests booléennes</title></info>
+    <section xml:id="zend.http.response.testers"><title>Méthodes de tests booléennes</title>
         
 
         <para>
@@ -115,7 +115,7 @@ $response = Zend_Http_Response::fromString($str);
                         Retourne <code>true </code> pour les codes de réponses <acronym>HTTP</acronym> 3xx.
                     </para>
                 </listitem>
-            </itemizedlist> <example xml:id="zend.http.response.testers.example-1"><info><title>Utiliser la méthode isError() pour valider une réponse</title></info>
+            </itemizedlist> <example xml:id="zend.http.response.testers.example-1"><title>Utiliser la méthode isError() pour valider une réponse</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -132,7 +132,7 @@ if ($response->isError()) {
             </para>
     </section>
 
-    <section xml:id="zend.http.response.acessors"><info><title>Méthodes accesseurs</title></info>
+    <section xml:id="zend.http.response.acessors"><title>Méthodes accesseurs</title>
         
 
         <para>
@@ -203,7 +203,7 @@ if ($response->isError()) {
                         <methodname>asString()</methodname>.
                     </para>
                 </listitem>
-            </itemizedlist> <example xml:id="zend.http.response.acessors.example-1"><info><title>Utiliser les méthodes accesseurs de Zend_Http_Response</title></info>
+            </itemizedlist> <example xml:id="zend.http.response.acessors.example-1"><title>Utiliser les méthodes accesseurs de Zend_Http_Response</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -215,7 +215,7 @@ if ($response->getStatus() == 200) {
   echo $response->getStatus() . ": " . $response->getMessage();
 }
 ]]></programlisting>
-            </example> <note><info><title>Vérifier toujours la valeur retournée</title></info>
+            </example> <note><title>Vérifier toujours la valeur retournée</title>
                 
 
                 <para>
@@ -225,7 +225,7 @@ if ($response->getStatus() == 200) {
                     pour chaque en-tête. Vous devez donc toujours vérifier si la valeur retournée
                     est une chaîne ou un tableau.
                 </para>
-            </note> <example xml:id="zend.http.response.acessors.example-2"><info><title>Accéder aux en-têtes de réponse</title></info>
+            </note> <example xml:id="zend.http.response.acessors.example-2"><title>Accéder aux en-têtes de réponse</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -243,7 +243,7 @@ echo $body;
             </para>
     </section>
 
-    <section xml:id="zend.http.response.static_parsers"><info><title>Analyseurs statiques de réponse HTTP</title></info>
+    <section xml:id="zend.http.response.static_parsers"><title>Analyseurs statiques de réponse HTTP</title>
         
 
         <para>

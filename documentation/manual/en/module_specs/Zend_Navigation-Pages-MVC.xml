@@ -189,21 +189,19 @@ $page->isActive(); // returns false
             <acronym>URL</acronym> for the page.
         </para>
 
-        <para>
-            <note>
-                <para>
-                    Note that when using the <code>route</code> property in a
-                    page, you should also specify the default params that the
-                    route defines (module, controller, action, etc.), otherwise
-                    the <methodname>isActive()</methodname> method will not be able to
-                    determine if the page is active. The reason for this is that
-                    there is currently no way to get the default params from a
-                    <classname>Zend_Controller_Router_Route_Interface</classname> object,
-                    nor to retrieve the current route from a
-                    <classname>Zend_Controller_Router_Interface</classname> object.
-                </para>
-            </note>
-        </para>
+        <note>
+            <para>
+                Note that when using the <code>route</code> property in a
+                page, you should also specify the default params that the
+                route defines (module, controller, action, etc.), otherwise
+                the <methodname>isActive()</methodname> method will not be able to
+                determine if the page is active. The reason for this is that
+                there is currently no way to get the default params from a
+                <classname>Zend_Controller_Router_Route_Interface</classname> object,
+                nor to retrieve the current route from a
+                <classname>Zend_Controller_Router_Interface</classname> object.
+            </para>
+        </note>
 
         <programlisting language="php"><![CDATA[
 // the following route is added to the ZF router

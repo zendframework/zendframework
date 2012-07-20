@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><info><title>Поиск по индексу<!--Searching an Index--></title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><title>Поиск по индексу<!--Searching an Index--></title>
     
 
-    <section xml:id="zend.search.lucene.searching.query_building"><info><title>Построение запросов<!--Building Queries--></title></info>
+    <section xml:id="zend.search.lucene.searching.query_building"><title>Построение запросов<!--Building Queries--></title>
         
 
         <para>
@@ -151,7 +151,7 @@ $index->find($query);   ]]></programlisting>
 -->
         </para>
 
-        <section xml:id="zend.search.lucene.searching.query_building.parsing"><info><title>Парсинг запроса<!--Query parsing--></title></info>
+        <section xml:id="zend.search.lucene.searching.query_building.parsing"><title>Парсинг запроса<!--Query parsing--></title>
             
             <para>
                 Метод <code>Zend_Search_Lucene_Search_QueryParser::parse()</code>
@@ -238,7 +238,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);]]></progra
         </section>
     </section>
 
-    <section xml:id="zend.search.lucene.searching.results"><info><title>Результаты поиска<!--Search Results--></title></info>
+    <section xml:id="zend.search.lucene.searching.results"><title>Результаты поиска<!--Search Results--></title>
         
         <para>
             Результат поиска является массивом объектов
@@ -351,7 +351,7 @@ foreach ($hits as $hit) {
     </section>
 
 
-    <section xml:id="zend.search.lucene.searching.results-scoring"><info><title>Ранжирование результата<!--Results Scoring--></title></info>
+    <section xml:id="zend.search.lucene.searching.results-scoring"><title>Ранжирование результата<!--Results Scoring--></title>
         
         <para>
             Zend_Search_Lucene использует тот же самый алгоритм ранжирования,
@@ -403,7 +403,7 @@ foreach ($hits as $hit) {
 
     </section>
 
-    <section xml:id="zend.search.lucene.searching.sorting"><info><title>Сортировка результатов поиска<!--Search Result Sorting--></title></info>
+    <section xml:id="zend.search.lucene.searching.sorting"><title>Сортировка результатов поиска<!--Search Result Sorting--></title>
         
         <para>
             По умолчанию результаты поиска сортируются по рангу. Вы можете
@@ -481,7 +481,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);]
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.searching.highlighting"><info><title>Подсветка результатов поиска<!--Search Results Highlighting--></title></info>
+    <section xml:id="zend.search.lucene.searching.highlighting"><title>Подсветка результатов поиска<!--Search Results Highlighting--></title>
         
         <para>
             Метод

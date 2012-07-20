@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>Introducción</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><title>Introducción</title>
 
 
 
@@ -9,7 +9,7 @@
         validaciones por el cual múltiples validadores pueden aplicarse a un
         dato en un orden definido por el usuario. </para>
 
-    <section xml:id="zend.validate.introduction.definition"><info><title>¿Qué es un validador?</title></info>
+    <section xml:id="zend.validate.introduction.definition"><title>¿Qué es un validador?</title>
 
 
 
@@ -28,7 +28,7 @@
 
     </section>
 
-    <section xml:id="zend.validate.introduction.using"><info><title>Uso básico de validadores</title></info>
+    <section xml:id="zend.validate.introduction.using"><title>Uso básico de validadores</title>
 
 
 
@@ -82,7 +82,7 @@ if ($validator->isValid($email)) {
 
     </section>
 
-    <section xml:id="zend.validate.introduction.messages"><info><title>Personalizar los mensajes</title></info>
+    <section xml:id="zend.validate.introduction.messages"><title>Personalizar los mensajes</title>
 
 
 
@@ -170,7 +170,7 @@ if (!validator->isValid('word')) {
 
     </section>
 
-    <section xml:id="zend.validate.introduction.static"><info><title> Utilizando el método estático is() </title></info>
+    <section xml:id="zend.validate.introduction.static"><title> Utilizando el método estático is() </title>
 
 
 
@@ -214,7 +214,7 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
             permite crear ejemplos y ejecutar múltiples filtros y clases de
             validadores por demanda, para procesar juegos de datos de entrada.
             Ver <xref linkend="zend.filter.input"/> . </para>
-        <section xml:id="zend.validate.introduction.static.namespaces"><info><title>Namespaces</title></info>
+        <section xml:id="zend.validate.introduction.static.namespaces"><title>Namespaces</title>
 
 
 
@@ -290,7 +290,7 @@ if (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) 
         </section>
 
     </section>
-    <section xml:id="zend.validate.introduction.translation"><info><title>Translating messages</title></info>
+    <section xml:id="zend.validate.introduction.translation"><title>Translating messages</title>
 
 
 

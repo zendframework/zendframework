@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><title>Introduction</title>
     
 
     <para>
@@ -39,7 +39,7 @@
         non) à des objets protégés (ressources).
     </para>
 
-    <section xml:id="zend.acl.introduction.resources"><info><title>A propos des ressources</title></info>
+    <section xml:id="zend.acl.introduction.resources"><title>A propos des ressources</title>
         
 
         <para>
@@ -78,7 +78,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.acl.introduction.roles"><info><title>A propos des rôles</title></info>
+    <section xml:id="zend.acl.introduction.roles"><title>A propos des rôles</title>
         
 
         <para>
@@ -104,7 +104,7 @@
             l'ambiguïté et la manière dont <classname>Zend_Acl</classname> la résout.
         </para>
 
-        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>Héritages multiples entre rôles</title></info>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>Héritages multiples entre rôles</title>
             
 
             <para>
@@ -170,7 +170,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'autorisé' : 'refusé';
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.creating"><info><title>Créer la Liste de Contrôle d'Accès</title></info>
+    <section xml:id="zend.acl.introduction.creating"><title>Créer la Liste de Contrôle d'Accès</title>
         
 
         <para>
@@ -195,7 +195,7 @@ $acl = new Zend_Acl();
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.role_registry"><info><title>Registre des rôles</title></info>
+    <section xml:id="zend.acl.introduction.role_registry"><title>Registre des rôles</title>
         
 
         <para>
@@ -213,7 +213,7 @@ $acl = new Zend_Acl();
             suivante :
         </para>
 
-        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Contrôles d'Accès pour un exemple de CMS</title></info>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><title>Contrôles d'Accès pour un exemple de CMS</title>
             
 
             <tgroup cols="3">
@@ -278,7 +278,7 @@ $acl->addRole(new Zend_Acl_Role('administrateur'));
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.acl.introduction.defining"><info><title>Définir les Contrôles d'Accès</title></info>
+    <section xml:id="zend.acl.introduction.defining"><title>Définir les Contrôles d'Accès</title>
         
 
         <para>
@@ -339,7 +339,7 @@ $acl->allow('administrateur');
         </para>
     </section>
 
-    <section xml:id="zend.acl.introduction.querying"><info><title>Interroger les ACL</title></info>
+    <section xml:id="zend.acl.introduction.querying"><title>Interroger les ACL</title>
         
 
         <para>

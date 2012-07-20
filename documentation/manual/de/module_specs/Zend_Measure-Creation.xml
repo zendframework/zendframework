@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.creation"><info><title>Erstellung einer Maßeinheit</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.creation"><title>Erstellung einer Maßeinheit</title>
     
 
     <para>
@@ -13,7 +13,7 @@
         Parameter definiert werden.
     </para>
 
-    <section xml:id="zend.measure.creation.number"><info><title>Eine Maßeinheit von einer Integer oder Floatzahl erstellen</title></info>
+    <section xml:id="zend.measure.creation.number"><title>Eine Maßeinheit von einer Integer oder Floatzahl erstellen</title>
         
 
         <para>
@@ -24,7 +24,7 @@
             zwei Floatzahlen nicht auf Gleichheit geprüft werden.
         </para>
 
-        <example xml:id="zend.measure.creation.number.example-1"><info><title>Erstellung einer Maßeinheit durch Integer oder Floatwerte</title></info>
+        <example xml:id="zend.measure.creation.number.example-1"><title>Erstellung einer Maßeinheit durch Integer oder Floatwerte</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -41,7 +41,7 @@ echo $unit;
         </example>
     </section>
 
-    <section xml:id="zend.measure.creation.string"><info><title>Erstellen einer Maßeinheit aus Zeichenketten</title></info>
+    <section xml:id="zend.measure.creation.string"><title>Erstellen einer Maßeinheit aus Zeichenketten</title>
         
 
         <para>
@@ -58,7 +58,7 @@ echo $unit;
             Beschränkungen von vielen <acronym>PHP</acronym> Funktionen wie <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/bin2dec"><methodname>bin2dec()</methodname></link> zu umgehen.
         </para>
 
-        <example xml:id="zend.measure.creation.string.example-1"><info><title>Erstellung einer Maßeinheit durch Strings</title></info>
+        <example xml:id="zend.measure.creation.string.example-1"><title>Erstellung einer Maßeinheit durch Strings</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -70,7 +70,7 @@ echo $unit;
         </example>
     </section>
 
-    <section xml:id="zend.measure.creation.localized"><info><title>Maßeinheiten von lokalisierten Zeichenketten</title></info>
+    <section xml:id="zend.measure.creation.localized"><title>Maßeinheiten von lokalisierten Zeichenketten</title>
         
 
         <para>
@@ -84,7 +84,7 @@ echo $unit;
             Eingabe richtig zu interpretieren.
         </para>
 
-        <example xml:id="zend.measure.creation.localized.example-1"><info><title>Lokalisierte Zeichenketten</title></info>
+        <example xml:id="zend.measure.creation.localized.example-1"><title>Lokalisierte Zeichenketten</title>
             
 
             <programlisting language="php"><![CDATA[

@@ -4,7 +4,7 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.mvc.quick-start">
-  <info><title>Quick Start</title></info>
+  <title>Quick Start</title>
 
   <para>
     Ora che conosci le basi di come le applicazioni ed i moduli
@@ -12,7 +12,7 @@
   </para>
 
   <section xml:id="zend.mvc.quick-start.install">
-    <info><title>Installare la  Zend Skeleton Application</title></info>
+    <title>Installare la  Zend Skeleton Application</title>
 
     <para>
       Il modo più semplice per cominciare consiste nello scaricare l'applicazione
@@ -21,7 +21,7 @@
     </para>
 
     <section xml:id="zend.mvc.quick-start.install.using-git">
-      <info><title>Utilizzare Git</title></info>
+      <title>Utilizzare Git</title>
 
       <para>
         Semplicemente cloniamo il repository 
@@ -36,7 +36,7 @@ prompt> git clone --recursive git://github.com/zendframework/ZendSkeletonApplica
     </section>
 
     <section xml:id="zend.mvc.quick-start.install.manual-installation">
-      <info><title>Manuale di installazione</title></info>
+      <title>Manuale di installazione</title>
 
       <itemizedlist>
         <listitem>
@@ -80,7 +80,7 @@ prompt> git clone --recursive git://github.com/zendframework/ZendSkeletonApplica
   </section>
 
   <section xml:id="zend.mvc.quick-start.create-a-new-module">
-    <info><title>Crea un nuovo modulo</title></info>
+    <title>Crea un nuovo modulo</title>
 
     <para>
       Di default, un modulo è incluso nella <classname>ZendSketonApplication</classname>,
@@ -137,7 +137,7 @@ prompt> git clone --recursive git://github.com/zendframework/ZendSkeletonApplica
   </section>
 
   <section xml:id="zend.mvc.quick-start.update-the-module-class">
-    <info><title>Aggiorare la classe Module</title></info>
+    <title>Aggiorare la classe Module</title>
 
     <para>
       Semplicemente aggiornare la classe Module. Faremo attenzione
@@ -222,7 +222,7 @@ class Module implements AutoloaderProvider
   </section>
 
   <section xml:id="zend.mvc.quick-start.create-a-controller">
-    <info><title>Create un Controller</title></info>
+    <title>Create un Controller</title>
 
     <para>
       I controller sono semplici oggetti che implementano 
@@ -368,7 +368,7 @@ class HelloController extends ActionController
   </section>
 
   <section xml:id="zend.mvc.quick-start.create-a-view-script">
-    <info><title>Creare una vista</title></info>
+    <title>Creare una vista</title>
 
     <para>
       Crea la cartella <filename>view/&lt;module-name&gt;hello</filename>.
@@ -399,7 +399,7 @@ class HelloController extends ActionController
   </section>
 
   <section xml:id="zend.mvc.quick-start.create-a-route">
-    <info><title>Creare una "route"</title></info>
+    <title>Creare una "route"</title>
 
     <para>
       Ora abbiamo un controller ed una vista, dobbiamo creare una "route"
@@ -465,7 +465,7 @@ return array(
   </section>
 
   <section xml:id="zend.mvc.quick-start.tell-the-application-about-our-module">
-    <info><title>Informare l'applicazione del tuo modulo</title></info>
+    <title>Informare l'applicazione del tuo modulo</title>
 
     <para>
       Fin'ora non abbiamo mai spiegato alla nostra applicazione che è stato
@@ -507,7 +507,7 @@ return array(
   </section>
 
   <section xml:id="zend.mvc.quick-start.test-it-out">
-    <info><title>Provalo!</title></info>
+    <title>Provalo!</title>
 
     <para>
       Siamo pronti per provare il tutto! Crea un nuovo "vhost" puntando

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.slideshare"><info><title>Zend_Service_SlideShare</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.slideshare"><title>Zend_Service_SlideShare</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         新しいスライドショーを自分のアカウントにアップロードしたりできます。
     </para>
 
-    <section xml:id="zend.service.slideshare.basicusage"><info><title>Zend_Service_SlideShare の使い方</title></info>
+    <section xml:id="zend.service.slideshare.basicusage"><title>Zend_Service_SlideShare の使い方</title>
 
         
 
@@ -40,7 +40,7 @@ $ss = new Zend_Service_SlideShare('APIKEY',
 
     </section>
 
-    <section xml:id="zend.service.slideshare.slideshowobj"><info><title>SlideShow オブジェクト</title></info>
+    <section xml:id="zend.service.slideshare.slideshowobj"><title>SlideShow オブジェクト</title>
 
         
 
@@ -205,7 +205,7 @@ class Zend_Service_SlideShare_SlideShow {
 
     </section>
 
-    <section xml:id="zend.service.slideshare.getslideshow"><info><title>単一のスライドショーの取得</title></info>
+    <section xml:id="zend.service.slideshare.getslideshow"><title>単一のスライドショーの取得</title>
 
         
 
@@ -233,7 +233,7 @@ print "閲覧回数: {$slideshow->getNumViews()}<br/>\n";
 
     </section>
 
-    <section xml:id="zend.service.slideshare.getslideshowlist"><info><title>スライドショーのグループの取得</title></info>
+    <section xml:id="zend.service.slideshare.getslideshowlist"><title>スライドショーのグループの取得</title>
 
         
 
@@ -308,7 +308,7 @@ foreach($ss_user as $slideshow) {
 
     </section>
 
-    <section xml:id="zend.service.slideshare.caching"><info><title>Zend_Service_SlideShare のキャッシュ処理のポリシー</title></info>
+    <section xml:id="zend.service.slideshare.caching"><title>Zend_Service_SlideShare のキャッシュ処理のポリシー</title>
 
         
 
@@ -344,7 +344,7 @@ $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 
     </section>
 
-    <section xml:id="zend.service.slideshare.httpclient"><info><title>HTTP クライアントの振る舞いの変更</title></info>
+    <section xml:id="zend.service.slideshare.httpclient"><title>HTTP クライアントの振る舞いの変更</title>
 
         
 

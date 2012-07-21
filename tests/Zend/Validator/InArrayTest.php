@@ -101,7 +101,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                 'haystack' => array('test', 0, 'A'),
+                 'haystack' => array('test', 0, 'A', 0.0),
             )
         );
 
@@ -120,7 +120,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                 'haystack' => array('test', 0, 'A', 1),
+                 'haystack' => array('test', 0, 'A', 1, 0.0),
             )
         );
 
@@ -137,7 +137,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                 'haystack' => array('test', 0, 'A', 1),
+                 'haystack' => array('test', 0, 'A', 1, 0.0),
             )
         );
 
@@ -157,7 +157,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                 'haystack' => array('test', 0, 'A', 1),
+                 'haystack' => array('test', 0, 'A', 1, 0.0),
             )
         );
 
@@ -178,8 +178,8 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $validator = new InArray(
             array(
                  'haystack' => array(
-                     array('test', 0, 'A'),
-                     array('foo', 1, 'a'),
+                     array('test', 0, 'A', 0.0),
+                     array('foo', 1, 'a', 'c'),
                  )
             )
         );
@@ -200,8 +200,8 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $validator = new InArray(
             array(
                  'haystack' => array(
-                     array('test', 0, 'A'),
-                     array('foo', 1, 'a'),
+                     array('test', 0, 'A', 0.0),
+                     array('foo', 1, 'a', 'c'),
                  )
             )
         );
@@ -224,8 +224,8 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $validator = new InArray(
             array(
                  'haystack' => array(
-                     array('test', 0, 'A'),
-                     array('foo', 1, 'a'),
+                     array('test', 0, 'A', 0.0),
+                     array('foo', 1, 'a', 'c'),
                  )
             )
         );

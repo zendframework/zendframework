@@ -359,7 +359,7 @@ class Collection extends Fieldset
     public function extract()
     {
         // In this specific situation, object holds the data, that is too say an array
-        if (!is_array($this->object)) {
+        if (!is_array($this->object) && !($this->object instanceof Traversable)) {
             return array();
         }
 

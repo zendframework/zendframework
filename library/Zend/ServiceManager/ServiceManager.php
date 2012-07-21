@@ -307,7 +307,6 @@ class ServiceManager implements ServiceLocatorInterface
     public function setService($name, $service, $shared = true)
     {
         $cName = $this->canonicalizeName($name);
-        $rName = $name;
 
         if ($this->allowOverride === false && $this->has($cName, false)) {
             throw new Exception\InvalidServiceNameException(sprintf(

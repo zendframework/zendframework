@@ -307,7 +307,6 @@ class ServiceManager implements ServiceLocatorInterface
     public function setService($name, $service, $shared = true)
     {
         $cName = $this->canonicalizeName($name);
-        $rName = $name;
 
         if ($this->allowOverride === false && $this->has($cName, false)) {
             throw new Exception\InvalidServiceNameException(sprintf(
@@ -375,8 +374,11 @@ class ServiceManager implements ServiceLocatorInterface
 
         $instance = null;
 
-        if (isset($this->instances[$cName])) {
-            $instance = $this->instances[$cName];
+        if ($this->shareByDefault()
+            && isset($this->instances[$cName])
+            && (!isset($this->shared[$cName]) || $this->shared[$cName] === true)
+        ) {
+            return $this->instances[$cName];
         }
 
         $selfException = null;
@@ -408,7 +410,6 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if ($this->shareByDefault()
-            && !isset($this->instances[$cName])
             && (!isset($this->shared[$cName]) || $this->shared[$cName] === true)
         ) {
             $this->instances[$cName] = $instance;

@@ -200,6 +200,7 @@ class ViewManager implements ListenerAggregateInterface
 
         $this->services->setService('ExceptionStrategy', $this->exceptionStrategy);
         $this->services->setAlias('Zend\Mvc\View\ExceptionStrategy', 'ExceptionStrategy');
+        $this->services->setAlias('Zend\Mvc\View\Console\ExceptionStrategy', 'ExceptionStrategy');
 
         return $this->exceptionStrategy;
     }
@@ -207,7 +208,7 @@ class ViewManager implements ListenerAggregateInterface
     /**
      * Configures the MvcEvent view model to ensure it has the template injected
      *
-     * @return \Zend\Mvc\View\Model\ModelInterface
+     * @return \Zend\View\Model\ModelInterface
      */
     public function getViewModel()
     {

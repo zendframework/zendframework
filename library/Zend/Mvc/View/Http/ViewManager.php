@@ -308,6 +308,7 @@ class ViewManager implements ListenerAggregateInterface
         $this->mvcRenderingStrategy->setLayoutTemplate($this->getLayoutTemplate());
 
         $this->services->setService('DefaultRenderingStrategy', $this->mvcRenderingStrategy);
+        $this->services->setAlias('Zend\Mvc\View\DefaultRenderingStrategy', 'DefaultRenderingStrategy');
         $this->services->setAlias('Zend\Mvc\View\Http\DefaultRenderingStrategy', 'DefaultRenderingStrategy');
 
         return $this->mvcRenderingStrategy;
@@ -340,6 +341,7 @@ class ViewManager implements ListenerAggregateInterface
         $this->exceptionStrategy->setExceptionTemplate($exceptionTemplate);
 
         $this->services->setService('ExceptionStrategy', $this->exceptionStrategy);
+        $this->services->setAlias('Zend\Mvc\View\ExceptionStrategy', 'ExceptionStrategy');
         $this->services->setAlias('Zend\Mvc\View\Http\ExceptionStrategy', 'ExceptionStrategy');
 
         return $this->exceptionStrategy;
@@ -372,6 +374,7 @@ class ViewManager implements ListenerAggregateInterface
         $this->routeNotFoundStrategy->setNotFoundTemplate($notFoundTemplate);
 
         $this->services->setService('RouteNotFoundStrategy', $this->routeNotFoundStrategy);
+        $this->services->setAlias('Zend\Mvc\View\RouteNotFoundStrategy', 'RouteNotFoundStrategy');
         $this->services->setAlias('Zend\Mvc\View\Http\RouteNotFoundStrategy', 'RouteNotFoundStrategy');
         $this->services->setAlias('404Strategy', 'RouteNotFoundStrategy');
 
@@ -381,7 +384,7 @@ class ViewManager implements ListenerAggregateInterface
     /**
      * Configures the MvcEvent view model to ensure it has the template injected
      *
-     * @return \Zend\Mvc\View\Http\Model\ModelInterface
+     * @return \Zend\View\Model\ModelInterface
      */
     public function getViewModel()
     {

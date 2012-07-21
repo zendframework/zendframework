@@ -188,9 +188,23 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('<title>Message 1 (en)</title>', $this->helper->toString());
     }
 
-   /**
-    * @group ZF-8036
-    */
+    public function testTranslatorMethods()
+    {
+        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
+        $this->helper->setTranslator($translatorMock, 'foo');
+
+        $this->assertEquals($translatorMock, $this->helper->getTranslator());
+        $this->assertEquals('foo', $this->helper->getTranslatorTextDomain());
+        $this->assertTrue($this->helper->hasTranslator());
+        $this->assertTrue($this->helper->isTranslatorEnabled());
+
+        $this->helper->setTranslatorEnabled(false);
+        $this->assertFalse($this->helper->isTranslatorEnabled());
+    }
+
+    /**
+     * @group ZF-8036
+     */
     public function testHeadTitleZero()
     {
         $this->helper->__invoke('0');

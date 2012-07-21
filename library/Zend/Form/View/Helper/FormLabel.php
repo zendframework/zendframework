@@ -10,6 +10,8 @@
 
 namespace Zend\Form\View\Helper;
 
+use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 
@@ -18,7 +20,7 @@ use Zend\Form\Exception;
  * @package    Zend_Form
  * @subpackage View
  */
-class FormLabel extends AbstractHelper
+class FormLabel extends AbstractHelper implements TranslatorAwareInterface
 {
     const APPEND  = 'append';
     const PREPEND = 'prepend';
@@ -32,6 +34,28 @@ class FormLabel extends AbstractHelper
         'for'  => true,
         'form' => true,
     );
+
+    /**
+     * Translator (optional)
+     *
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
+     * Translator text domain (optional)
+     *
+     * @var string
+     */
+    protected $translatorTextDomain = 'default';
+
+    /**
+     * Whether translator should be used
+     *
+     * @var bool
+     */
+    protected $translatorEnabled = true;
+
 
     /**
      * Generate an opening label tag
@@ -110,7 +134,8 @@ class FormLabel extends AbstractHelper
             $label = $element->getLabel();
             if (empty($label)) {
                 throw new Exception\DomainException(sprintf(
-                    '%s expects either label content as the second argument, or that the element provided has a label attribute; neither found',
+                    '%s expects either label content as the second argument, ' .
+                    'or that the element provided has a label attribute; neither found',
                     __METHOD__
                 ));
             }
@@ -139,5 +164,94 @@ class FormLabel extends AbstractHelper
         }
 
         return $openTag . $labelContent . $this->closeTag();
+    }
+
+    // Translator methods - Good candidate to refactor as a trait with PHP 5.4
+
+    /**
+     * Sets translator to use in helper
+     *
+     * @param  Translator $translator  [optional] translator.
+     *                                 Default is null, which sets no translator.
+     * @param  string     $textDomain  [optional] text domain
+     *                                 Default is null, which skips setTranslatorTextDomain
+     * @return AbstractTranslatorHelper
+     */
+    public function setTranslator(Translator $translator = null, $textDomain = null)
+    {
+        $this->translator = $translator;
+        if (null !== $textDomain) {
+            $this->setTranslatorTextDomain($textDomain);
+        }
+        return $this;
+    }
+
+    /**
+     * Returns translator used in helper
+     *
+     * @return Translator|null
+     */
+    public function getTranslator()
+    {
+        if (! $this->isTranslatorEnabled()) {
+            return null;
+        }
+
+        return $this->translator;
+    }
+
+    /**
+     * Checks if the helper has a translator
+     *
+     * @return bool
+     */
+    public function hasTranslator()
+    {
+        return (bool) $this->getTranslator();
+    }
+
+    /**
+     * Sets whether translator is enabled and should be used
+     *
+     * @param  bool $enabled [optional] whether translator should be used.
+     *                       Default is true.
+     * @return AbstractTranslatorHelper
+     */
+    public function setTranslatorEnabled($enabled = true)
+    {
+        $this->translatorEnabled = (bool) $enabled;
+        return $this;
+    }
+
+    /**
+     * Returns whether translator is enabled and should be used
+     *
+     * @return bool
+     */
+    public function isTranslatorEnabled()
+    {
+        return $this->translatorEnabled;
+    }
+
+    /**
+     * Set translation text domain
+     *
+     * @param  string $textDomain
+     * @return AbstractTranslatorHelper
+     */
+    public function setTranslatorTextDomain($textDomain = 'default')
+    {
+        $this->translatorTextDomain = $textDomain;
+        return $this;
+    }
+
+    /**
+     * Return the translation text domain
+     *
+     * @return string
+     */
+    public function getTranslatorTextDomain()
+    {
+        return $this->translatorTextDomain;
     }
 }

@@ -12,6 +12,7 @@ namespace Zend\Validator;
 
 use Traversable;
 use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\Exception\InvalidArgumentException;
 
@@ -19,7 +20,8 @@ use Zend\Validator\Exception\InvalidArgumentException;
  * @category   Zend
  * @package    Zend_Validate
  */
-abstract class AbstractValidator implements ValidatorInterface
+abstract class AbstractValidator
+    implements ValidatorInterface, TranslatorAwareInterface
 {
     /**
      * The value to be validated
@@ -48,13 +50,14 @@ abstract class AbstractValidator implements ValidatorInterface
     protected static $messageLength = -1;
 
     protected $abstractOptions = array(
-        'messages'             => array(),   // Array of validation failure messages
-        'messageTemplates'     => array(),   // Array of validation failure message templates
-        'messageVariables'     => array(),   // Array of additional variables available for validation failure messages
-        'translator'           => null,      // Translation object to used -> Zend\I18n\Translator\Translator
-        'translatorTextDomain' => null,      // Translation text domain
-        'translatorEnabled'    => true,      // Is translation enabled?
-        'valueObscured'        => false,     // Flag indicating whether or not value should be obfuscated in error messages
+        'messages'             => array(), // Array of validation failure messages
+        'messageTemplates'     => array(), // Array of validation failure message templates
+        'messageVariables'     => array(), // Array of additional variables available for validation failure messages
+        'translator'           => null,    // Translation object to used -> Zend\I18n\Translator\Translator
+        'translatorTextDomain' => null,    // Translation text domain
+        'translatorEnabled'    => true,    // Is translation enabled?
+        'valueObscured'        => false,   // Flag indicating whether or not value should be obfuscated
+                                           // in error messages
     );
 
     /**
@@ -206,7 +209,7 @@ abstract class AbstractValidator implements ValidatorInterface
     {
         if ($messageKey === null) {
             $keys = array_keys($this->abstractOptions['messageTemplates']);
-            foreach($keys as $key) {
+            foreach ($keys as $key) {
                 $this->setMessage($messageString, $key);
             }
             return $this;
@@ -301,7 +304,7 @@ abstract class AbstractValidator implements ValidatorInterface
         } elseif (is_array($value)) {
             $value = '[' . implode(', ', $value) . ']';
         } else {
-            $value = (string)$value;
+            $value = (string) $value;
         }
 
         if ($this->isValueObscured()) {
@@ -318,7 +321,7 @@ abstract class AbstractValidator implements ValidatorInterface
             } else {
                 $value = $this->$property;
             }
-            $message = str_replace("%$ident%", (string)$value, $message);
+            $message = str_replace("%$ident%", (string) $value, $message);
         }
 
         $length = self::getMessageLength();
@@ -474,7 +477,8 @@ abstract class AbstractValidator implements ValidatorInterface
      */
     public static function setDefaultTranslator(
         Translator $translator = null, $textDomain = null
-    ) {
+    )
+    {
         self::$defaultTranslator = $translator;
         if (null !== $textDomain) {
             self::setDefaultTranslatorTextDomain($textDomain);
@@ -528,7 +532,7 @@ abstract class AbstractValidator implements ValidatorInterface
      * @param  bool $flag
      * @return AbstractValidator
      */
-    public function setTranslatorEnabled($flag)
+    public function setTranslatorEnabled($flag = true)
     {
         $this->abstractOptions['translatorEnabled'] = (bool) $flag;
         return $this;

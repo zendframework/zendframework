@@ -11,8 +11,6 @@
 namespace Zend\I18n\View\Helper;
 
 use Zend\I18n\Exception;
-use Zend\I18n\Translator\Translator;
-use Zend\View\Helper\AbstractHelper;
 
 /**
  * View helper for translating plural messages.
@@ -21,7 +19,7 @@ use Zend\View\Helper\AbstractHelper;
  * @package    Zend_I18n
  * @subpackage View
  */
-class TranslatePlural extends AbstractHelper
+class TranslatePlural extends AbstractTranslatorHelper
 {
     /**
      * Translate a plural message.
@@ -40,7 +38,8 @@ class TranslatePlural extends AbstractHelper
         $number,
         $textDomain = 'default',
         $locale = null
-    ) {
+    )
+    {
         $translator = $this->getTranslator();
         if (null === $translator) {
             throw new Exception\RuntimeException('Translator has not been set');

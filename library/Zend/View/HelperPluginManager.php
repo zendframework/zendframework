@@ -10,6 +10,7 @@
 
 namespace Zend\View;
 
+use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigurationInterface;
 
@@ -135,9 +136,11 @@ class HelperPluginManager extends AbstractPluginManager
      */
     public function injectTranslator($helper)
     {
-        $locator = $this->getServiceLocator();
-        if ($locator && $locator->has('translator')) {
-            $helper->setTranslator($locator->get('translator'));
+        if ($helper instanceof TranslatorAwareInterface) {
+            $locator = $this->getServiceLocator();
+            if ($locator && $locator->has('translator')) {
+                $helper->setTranslator($locator->get('translator'));
+            }
         }
     }
 

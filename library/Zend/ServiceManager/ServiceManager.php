@@ -374,11 +374,8 @@ class ServiceManager implements ServiceLocatorInterface
 
         $instance = null;
 
-        if ($this->shareByDefault()
-            && isset($this->instances[$cName])
-            && (!isset($this->shared[$cName]) || $this->shared[$cName] === true)
-        ) {
-            return $this->instances[$cName];
+        if (isset($this->instances[$cName])) {
+            $instance = $this->instances[$cName];
         }
 
         $selfException = null;
@@ -410,6 +407,7 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if ($this->shareByDefault()
+            && !isset($this->instances[$cName])
             && (!isset($this->shared[$cName]) || $this->shared[$cName] === true)
         ) {
             $this->instances[$cName] = $instance;

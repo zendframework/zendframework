@@ -28,6 +28,13 @@ class PaginationControl extends AbstractHelper
     protected static $_defaultViewPartial = null;
 
     /**
+     * Default Scrolling Style
+     *
+     * @var string
+     */
+    protected static $_defaultScrollingStyle = 'sliding';
+
+    /**
      * Sets the default view partial.
      *
      * @param string|array $partial View partial
@@ -45,6 +52,26 @@ class PaginationControl extends AbstractHelper
     public static function getDefaultViewPartial()
     {
         return self::$_defaultViewPartial;
+    }
+    
+     /**
+     * Gets the default scrolling style
+     *
+     * @return string
+     */
+    public static function getDefaultScrollingStyle()
+    {
+        return self::$_defaultScrollingStyle;
+    }
+
+    /**
+     * Sets the default Scrolling Style
+     *
+     * @param type $style string 'all' | 'elastic' | 'sliding' | 'jumping'
+     */
+    public static function setDefaultScrollingStyle($style)
+    {
+        self::$_defaultScrollingStyle = $style;
     }
 
     /**
@@ -76,6 +103,10 @@ class PaginationControl extends AbstractHelper
             }
 
             $partial = self::$_defaultViewPartial;
+        }
+	
+        if ($scrollingStyle === null) {
+            $scrollingStyle = self::$_defaultScrollingStyle;
         }
 
         $pages = get_object_vars($paginator->getPages($scrollingStyle));

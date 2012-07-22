@@ -8,7 +8,6 @@ interface Prompt {
     /**
      * Show the prompt to user and return the answer.
      *
-     * @abstract
      * @return mixed
      */
     public function show();
@@ -16,7 +15,6 @@ interface Prompt {
     /**
      * Return last answer to this prompt.
      *
-     * @abstract
      * @return mixed
      */
     public function getLastResponse();
@@ -24,7 +22,6 @@ interface Prompt {
     /**
      * Return console adapter to use when showing prompt.
      *
-     * @abstract
      * @return \Zend\Console\Adapter
      */
     public function getConsole();
@@ -32,7 +29,6 @@ interface Prompt {
     /**
      * Set console adapter to use when showing prompt.
      *
-     * @abstract
      * @param \Zend\Console\Adapter    $adapter
      */
     public function setConsole(ConsoleAdapter $adapter);

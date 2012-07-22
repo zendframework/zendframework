@@ -1,7 +1,7 @@
 <?php
 namespace Zend\Console;
 
-interface Adapter
+interface AdapterInterface
 {
     const LINE_NONE = 1;
     const LINE_SINGLE = 2;

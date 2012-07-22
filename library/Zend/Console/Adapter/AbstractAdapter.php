@@ -1,17 +1,17 @@
 <?php
 namespace Zend\Console\Adapter;
 
-use Zend\Console\Adapter;
-use Zend\Console\Color;
-use Zend\Console\Charset;
+use Zend\Console\AdapterInterface;
+use Zend\Console\ColorInterface;
+use Zend\Console\CharsetInterface;
 use Zend\Console;
 
-abstract class AbstractAdapter implements Adapter
+abstract class AbstractAdapter implements AdapterInterface
 {
     protected static $hasMBString;
 
     /**
-     * @var \Zend\Console\Charset
+     * @var \Zend\Console\CharsetInterface
      */
     protected $charset;
 
@@ -471,9 +471,9 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Set Console charset to use.
      *
-     * @param \Zend\Console\Charset $charset
+     * @param \Zend\Console\CharsetInterface $charset
      */
-    public function setCharset(Charset $charset)
+    public function setCharset(CharsetInterface $charset)
     {
         $this->charset = $charset;
     }
@@ -481,7 +481,7 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Get charset currently in use by this adapter.
      *
-     * @return \Zend\Console\Charset $charset
+     * @return \Zend\Console\CharsetInterface $charset
      */
     public function getCharset()
     {
@@ -493,7 +493,7 @@ abstract class AbstractAdapter implements Adapter
     }
 
     /**
-     * @return \Zend\Console\Charset
+     * @return \Zend\Console\Charset\Utf8
      */
     public function getDefaultCharset()
     {

@@ -1,12 +1,12 @@
 <?php
 namespace Zend\Console\Adapter;
 
-use Zend\Console\Adapter;
-use Zend\Console\Color;
-use Zend\Console\Charset;
+use Zend\Console\AdapterInterface;
+use Zend\Console\ColorInterface;
+use Zend\Console\CharsetInterface;
 use Zend\Console;
 
-class Windows extends Virtual implements Adapter
+class Windows extends Virtual implements AdapterInterface
 {
     protected static $hasMBString;
 
@@ -133,16 +133,16 @@ class Windows extends Virtual implements Adapter
     /**
      * Set Console charset to use.
      *
-     * @param \Zend\Console\Charset $charset
+     * @param \Zend\Console\CharsetInterface $charset
      */
-    public function setCharset(Charset $charset){
+    public function setCharset(CharsetInterface $charset){
         $this->charset = $charset;
     }
 
     /**
      * Get charset currently in use by this adapter.
      *
-     * @return \Zend\Console\Charset $charset
+     * @return \Zend\Console\CharsetInterface $charset
      */
     public function getCharset(){
         if($this->charset === null){
@@ -153,7 +153,7 @@ class Windows extends Virtual implements Adapter
     }
 
     /**
-     * @return \Zend\Console\Charset
+     * @return \Zend\Console\Charset\AsciiExtended
      */
     public function getDefaultCharset(){
         return new Charset\AsciiExtended;

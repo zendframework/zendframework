@@ -1,9 +1,9 @@
 <?php
 namespace Zend\Console\Adapter;
 
-use Zend\Console\Adapter;
-use Zend\Console\Color;
-use Zend\Console\Charset;
+use Zend\Console\AdapterInterface;
+use Zend\Console\ColorInterface;
+use Zend\Console\CharsetInterface;
 use Zend\Console;
 
 /**
@@ -20,7 +20,7 @@ use Zend\Console;
  * It's best to use non-unicode code page 437, 850, 851, 852 or similar. Run "help mode" for more
  * information on how to change Windows console code page.
  */
-class WindowsAnsicon extends Posix implements Adapter
+class WindowsAnsicon extends Posix implements AdapterInterface
 {
     protected static $hasMBString;
 
@@ -137,9 +137,9 @@ class WindowsAnsicon extends Posix implements Adapter
     /**
      * Set Console charset to use.
      *
-     * @param \Zend\Console\Charset $charset
+     * @param \Zend\Console\CharsetInterface $charset
      */
-    public function setCharset(Charset $charset){
+    public function setCharset(CharsetInterface $charset){
         $this->charset = $charset;
     }
 
@@ -147,7 +147,7 @@ class WindowsAnsicon extends Posix implements Adapter
      * Get charset currently in use by this adapter.
      *
 
-     * @return \Zend\Console\Charset $charset
+     * @return \Zend\Console\CharsetInterface $charset
      */
     public function getCharset(){
         if($this->charset === null){
@@ -158,7 +158,7 @@ class WindowsAnsicon extends Posix implements Adapter
     }
 
     /**
-     * @return \Zend\Console\Charset
+     * @return \Zend\Console\Charset\AsciiExtended
      */
     public function getDefaultCharset(){
         return new Charset\AsciiExtended();

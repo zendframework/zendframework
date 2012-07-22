@@ -3,7 +3,7 @@ namespace Zend\Console;
 
 use Zend\Console\Adapter as ConsoleAdapter;
 
-interface Prompt {
+interface PromptInterface {
 
     /**
      * Show the prompt to user and return the answer.

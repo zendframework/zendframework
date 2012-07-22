@@ -1,9 +1,9 @@
 <?php
 namespace Zend\Console\Prompt;
 
-use Zend\Console\Prompt;
+use Zend\Console\PromptInterface;
 
-class Char extends AbstractPrompt implements Prompt
+class Char extends AbstractPrompt implements PromptInterface
 {
     /**
      * @var string

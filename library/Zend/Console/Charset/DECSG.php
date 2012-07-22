@@ -1,14 +1,14 @@
 <?php
 namespace Zend\Console\Charset;
 
-use Zend\Console\Charset;
+use Zend\Console\CharsetInterface;
 
 /**
  * DEC Special Graphics (VT100 line drawing) character set
  *
  * @link http://vt100.net/docs/vt220-rm/table2-4.html
  */
-class DECSG implements Charset{
+class DECSG implements CharsetInterface{
 
     const ACTIVATE          = "\x1b(0";
     const DEACTIVATE        = "\x1b(B";

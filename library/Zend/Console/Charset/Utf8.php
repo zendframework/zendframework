@@ -1,14 +1,14 @@
 <?php
 namespace Zend\Console\Charset;
 
-use Zend\Console\Charset;
+use Zend\Console\CharsetInterface;
 
 /**
  * UTF-8 box drawing
  *
  * @link http://en.wikipedia.org/wiki/Box-drawing_characters
  */
-class Utf8 implements Charset{
+class Utf8 implements CharsetInterface{
     const ACTIVATE          = "";
     const DEACTIVATE        = "";
 

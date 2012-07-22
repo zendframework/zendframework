@@ -1,9 +1,9 @@
 <?php
 namespace Zend\Console\Prompt;
 
-use Zend\Console\Prompt;
+use Zend\Console\PromptInterface;
 
-class Confirm extends Char implements Prompt
+class Confirm extends Char implements PromptInterface
 {
     /**
      * @var string

@@ -1,14 +1,14 @@
 <?php
 namespace Zend\Console\Charset;
 
-use Zend\Console\Charset;
+use Zend\Console\CharsetInterface;
 
 /**
  * Extended ASCII character set (positions 127+, MS DOS & Windows compatible)
  *
  * @link http://en.wikipedia.org/wiki/Box-drawing_characters
  */
-class AsciiExtended implements Charset{
+class AsciiExtended implements CharsetInterface{
 
     const ACTIVATE          = "";
     const DEACTIVATE        = "";

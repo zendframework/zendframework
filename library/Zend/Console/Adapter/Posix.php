@@ -1,20 +1,20 @@
 <?php
 namespace Zend\Console\Adapter;
 
-use Zend\Console\Adapter;
-use Zend\Console\Color;
-use Zend\Console\Charset;
+use Zend\Console\AdapterInterface;
+use Zend\Console\ColorInterface as Color;
+use Zend\Console\CharsetInterface;
 use Zend\Console;
 
 /**
  * @link http://en.wikipedia.org/wiki/ANSI_escape_code
  */
-class Posix extends AbstractAdapter implements Adapter
+class Posix extends AbstractAdapter implements AdapterInterface
 {
     protected static $hasMBString;
 
     /**
-     * @var \Zend\Console\Charset
+     * @var \Zend\Console\CharsetInterface
      */
     protected $charset;
 
@@ -275,7 +275,7 @@ class Posix extends AbstractAdapter implements Adapter
      */
     public function resetColor()
     {
-        echo "\x1b[0;49m"; // reset bg color
+        echo "\x1b[0;49m";  // reset bg color
         echo "\x1b[22;39m"; // reset fg bold, bright and faint
         echo "\x1b[25;39m"; // reset fg blink
         echo "\x1b[24;39m"; // reset fg underline
@@ -294,16 +294,16 @@ class Posix extends AbstractAdapter implements Adapter
      * Set Console charset to use.
      *
 
-     * @param \Zend\Console\Charset $charset
+     * @param \Zend\Console\CharsetInterface $charset
      */
-    public function setCharset(Charset $charset){
+    public function setCharset(CharsetInterface $charset){
         $this->charset = $charset;
     }
 
     /**
      * Get charset currently in use by this adapter.
      *
-     * @return \Zend\Console\Charset $charset
+     * @return \Zend\Console\CharsetInterface $charset
      */
     public function getCharset(){
         if($this->charset === null){

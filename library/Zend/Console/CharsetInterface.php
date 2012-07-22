@@ -2,5 +2,5 @@
 namespace Zend\Console;
 
 
-interface Charset {
+interface CharsetInterface {
 }

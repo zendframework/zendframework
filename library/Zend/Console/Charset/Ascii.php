@@ -1,12 +1,12 @@
 <?php
 namespace Zend\Console\Charset;
 
-use Zend\Console\Charset;
+use Zend\Console\CharsetInterface;
 
 /**
  * Basic (low) ASCII line drawing characters.
  */
-class Ascii implements Charset{
+class Ascii implements CharsetInterface{
 
     const ACTIVATE          = "";
     const DEACTIVATE        = "";

@@ -1,14 +1,14 @@
 <?php
 namespace Zend\Console\Prompt;
 
-use Zend\Console\Prompt;
+use Zend\Console\PromptInterface;
 use Zend\Console\Console;
-use Zend\Console\Adapter as ConsoleAdapter;
+use Zend\Console\AdapterInterface as ConsoleAdapter;
 
-abstract class AbstractPrompt implements Prompt
+abstract class AbstractPrompt implements PromptInterface
 {
     /**
-     * @var \Zend\Console\Adapter
+     * @var Zend\Console\AdapterInterface
      */
     protected $console;
 
@@ -31,7 +31,7 @@ abstract class AbstractPrompt implements Prompt
     /**
      * Return console adapter to use when showing prompt.
      *
-     * @return \Zend\Console\Adapter
+     * @return \Zend\Console\AdapterInterface
      */
     public function getConsole(){
         if(!$this->console){
@@ -44,7 +44,7 @@ abstract class AbstractPrompt implements Prompt
     /**
      * Set console adapter to use when showing prompt.
      *
-     * @param \Zend\Console\Adapter    $adapter
+     * @param \Zend\Console\AdapterInterface $adapter
      */
     public function setConsole(ConsoleAdapter $adapter){
         $this->console = $adapter;

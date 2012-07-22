@@ -3,7 +3,7 @@
 namespace Zend\Console;
 
 
-interface Color {
+interface ColorInterface {
     const NORMAL = 0;
     const RESET = 0;
 

@@ -214,9 +214,9 @@ interface AdapterInterface
     /**
      * Set Console charset to use.
      *
-     * @param \Zend\Console\Charset $charset
+     * @param \Zend\Console\CharsetInterface $charset
      */
-    public function setCharset(Charset $charset);
+    public function setCharset(CharsetInterface $charset);
 
     /**
      * Get charset currently in use by this adapter.

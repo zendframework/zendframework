@@ -162,7 +162,7 @@ class CallbackHandler
             return null;
         }
 
-        // Minor performance tweak, if the callback gets called more the once
+        // Minor performance tweak, if the callback gets called more than once
         if (!isset($this->isPhp54)) {
             $this->isPhp54 = version_compare(PHP_VERSION, '5.4.0rc1', '>=');
         }
@@ -175,7 +175,7 @@ class CallbackHandler
             if ($result !== true && $argCount <= 3) {
                 $callback       = $result;
                 // Minor performance tweak, if the callback gets called more
-                // then once
+                // than once
                 $this->callback = $result;
             }
         }

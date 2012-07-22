@@ -10,7 +10,7 @@
 
 namespace Zend\ModuleManager\Feature;
 
-use Zend\Console\Adapter;
+use Zend\Console\AdapterInterface;
 
 /**
  * @category   Zend
@@ -24,11 +24,11 @@ interface ConsoleBannerProviderInterface
      * The banner is shown in the console window, when the user supplies invalid command-line parameters or invokes
      * the application with no parameters.
      *
-     * The method is called with active Zend\Console\Adapter that can be used to directly access Console and send
+     * The method is called with active Zend\Console\AdapterInterface that can be used to directly access Console and send
      * output.
      *
-     * @param \Zend\Console\Adapter $console
+     * @param \Zend\Console\AdapterInterface $console
      * @return string|null
      */
-    public function getConsoleBanner(Adapter $console);
+    public function getConsoleBanner(AdapterInterface $console);
 }

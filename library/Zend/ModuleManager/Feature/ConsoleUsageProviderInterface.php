@@ -10,7 +10,7 @@
 
 namespace Zend\ModuleManager\Feature;
 
-use Zend\Console\Adapter;
+use Zend\Console\AdapterInterface;
 
 /**
  * @category   Zend
@@ -21,7 +21,7 @@ interface ConsoleUsageProviderInterface
 {
     /**
      * Returns an array or a string containing usage information for this module's Console commands.
-     * The method is called with active Zend\Console\Adapter that can be used to directly access
+     * The method is called with active Zend\Console\AdapterInterface that can be used to directly access
      * Console and send output.
      *
      * If the result is a string it will be shown directly in the console window.
@@ -37,8 +37,8 @@ interface ConsoleUsageProviderInterface
      *                ...
      *            )
      *
-     * @param \Zend\Console\Adapter $console
+     * @param \Zend\Console\AdapterInterface $console
      * @return array|string|null
      */
-    public function getConsoleUsage(Adapter $console);
+    public function getConsoleUsage(AdapterInterface $console);
 }

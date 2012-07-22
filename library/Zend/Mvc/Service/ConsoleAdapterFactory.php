@@ -13,7 +13,7 @@ namespace Zend\Mvc\Service;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Console\Console;
-use Zend\Console\Adapter;
+use Zend\Console\AdapterInterface;
 
 /**
  * @category   Zend
@@ -40,7 +40,7 @@ class ConsoleAdapterFactory implements FactoryInterface
      *          )
      *      )
      *
-     * @param  ServiceLocatorInterface $serviceLocator 
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return \Zend\Console\Adapter|\stdClass
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
@@ -67,7 +67,7 @@ class ConsoleAdapterFactory implements FactoryInterface
         }
 
         // check if we have a valid console adapter
-        if(!$adapter instanceof Adapter){
+        if(!$adapter instanceof AdapterInterface){
             // SM factory cannot currently return null, so we convert it to dummy object
             return new \stdClass();
         }

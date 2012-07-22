@@ -1,7 +1,7 @@
 <?php
 namespace Zend\Console;
 
-use Zend\Console\Adapter as ConsoleAdapter;
+use Zend\Console\AdapterInterface as ConsoleAdapter;
 
 interface PromptInterface {
 
@@ -22,14 +22,14 @@ interface PromptInterface {
     /**
      * Return console adapter to use when showing prompt.
      *
-     * @return \Zend\Console\Adapter
+     * @return \Zend\Console\AdapterInterface
      */
     public function getConsole();
 
     /**
      * Set console adapter to use when showing prompt.
      *
-     * @param \Zend\Console\Adapter    $adapter
+     * @param \Zend\Console\AdapterInterface    $adapter
      */
     public function setConsole(ConsoleAdapter $adapter);
 

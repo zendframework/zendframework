@@ -160,6 +160,19 @@ class FormTest extends TestCase
         $this->form->isValid();
     }
 
+    public function testHasValidatedFlag()
+    {
+        $form = new TestAsset\NewProductForm();
+
+        $this->assertFalse($form->hasValidated());
+
+        $form->setData(array());
+        $form->isValid();
+
+
+        $this->assertTrue($form->hasValidated());
+    }
+
     public function testValidatesEntireDataSetByDefault()
     {
         $this->populateForm();

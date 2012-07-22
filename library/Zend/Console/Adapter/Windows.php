@@ -4,7 +4,7 @@ namespace Zend\Console\Adapter;
 use Zend\Console\AdapterInterface;
 use Zend\Console\ColorInterface;
 use Zend\Console\CharsetInterface;
-use Zend\Console\Exception\BadMethodCallException;
+use Zend\Console\Exception\RuntimeException;
 use Zend\Console;
 
 class Windows extends Virtual implements AdapterInterface

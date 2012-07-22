@@ -130,6 +130,23 @@ class CallbackHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('staticHandler', $result);
     }
 
+    public function testStringStaticCallbackForPhp54WithMoreThan4Args()
+    {
+        if (version_compare(PHP_VERSION, '5.4.0rc1', '<=')) {
+            $this->markTestSkipped('Requires PHP 5.4');
+        }
+
+        $handler = new CallbackHandler('ZendTest\\Stdlib\\SignalHandlers\\InstanceMethod::staticHandler');
+        $error   = false;
+        set_error_handler(function ($errno, $errstr) use (&$error) {
+            $error = true;
+        }, E_STRICT);
+        $result = $handler->call(array(1, 2, 3, 4));
+        restore_error_handler();
+        $this->assertFalse($error);
+        $this->assertSame('staticHandler', $result);
+    }
+
     public function testCallbackToClassImplementingOverloadingButNotInvocableShouldRaiseException()
     {
         $this->setExpectedException('Zend\Stdlib\Exception\InvalidCallbackException');

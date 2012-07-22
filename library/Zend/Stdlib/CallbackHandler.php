@@ -167,17 +167,19 @@ class CallbackHandler
             $this->isPhp54 = version_compare(PHP_VERSION, '5.4.0rc1', '>=');
         }
 
+        $argCount = count($args);
+
         if ($this->isPhp54 && is_string($callback)) {
             $result = $this->validateStringCallbackFor54($callback);
 
-            if ($result !== true) {
+            if ($result !== true && $argCount <= 3) {
                 $callback = $result;
             }
         }
 
         // Minor performance tweak; use call_user_func() until > 3 arguments
         // reached
-        switch (count($args)) {
+        switch ($argCount) {
             case 0:
                 if ($this->isPhp54) {
                     return $callback();

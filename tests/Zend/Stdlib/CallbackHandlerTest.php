@@ -130,7 +130,7 @@ class CallbackHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('staticHandler', $result);
     }
 
-    public function testStringStaticCallbackForPhp54WithMoreThan4Args()
+    public function testStringStaticCallbackForPhp54WithMoreThan3Args()
     {
         if (version_compare(PHP_VERSION, '5.4.0rc1', '<=')) {
             $this->markTestSkipped('Requires PHP 5.4');

@@ -173,7 +173,10 @@ class CallbackHandler
             $result = $this->validateStringCallbackFor54($callback);
 
             if ($result !== true && $argCount <= 3) {
-                $callback = $result;
+                $callback       = $result;
+                // Minor performance tweak, if the callback gets called more
+                // then once
+                $this->callback = $result;
             }
         }
 

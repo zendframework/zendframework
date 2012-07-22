@@ -24,15 +24,14 @@
  */
 namespace Zend\Mvc\Router\Console;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Mvc\Router\Exception,
-    Zend\Console\Request as ConsoleRequest,
-    Zend\Filter\FilterChain,
-    Zend\Validator\ValidatorChain,
-    Zend\Mvc\Exception\InvalidArgumentException
-    ;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Mvc\Router\Exception;
+use Zend\Console\Request as ConsoleRequest;
+use Zend\Filter\FilterChain;
+use Zend\Validator\ValidatorChain;
+use Zend\Mvc\Exception\InvalidArgumentException;
 
 /**
  * Segment route.

@@ -1,11 +1,10 @@
 <?php
 namespace Zend\Console\Adapter;
 
-use Zend\Console\Adapter,
-    Zend\Console\Color,
-    Zend\Console\Charset,
-    Zend\Console
-;
+use Zend\Console\Adapter;
+use Zend\Console\Color;
+use Zend\Console\Charset;
+use Zend\Console;
 
 /**
  * @link http://en.wikipedia.org/wiki/ANSI_escape_code

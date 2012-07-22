@@ -1,12 +1,12 @@
 <?php
 namespace ZendTest\Mvc\Router\Console;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Http\Request,
-    Zend\Stdlib\Request as BaseRequest,
-    Zend\Console\Request as ConsoleRequest,
-    Zend\Mvc\Router\Console\Simple,
-    ZendTest\Mvc\Router\FactoryTester;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Request;
+use Zend\Stdlib\Request as BaseRequest;
+use Zend\Console\Request as ConsoleRequest;
+use Zend\Mvc\Router\Console\Simple;
+use ZendTest\Mvc\Router\FactoryTester;
 
 class SimpleTestTest extends TestCase
 {

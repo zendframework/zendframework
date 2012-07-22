@@ -21,8 +21,8 @@
 
 namespace Zend\View\Model;
 
-use Traversable,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend

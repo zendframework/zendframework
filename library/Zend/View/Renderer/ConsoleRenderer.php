@@ -23,15 +23,15 @@
  */
 namespace Zend\View\Renderer;
 
-use ArrayAccess,
-    Zend\Filter\FilterChain,
-    Zend\Loader\Pluggable,
-    Zend\View\Exception,
-    Zend\View\HelperBroker,
-    Zend\View\Model,
-    Zend\View\Renderer,
-    Zend\View\Resolver,
-    Zend\View\Variables;
+use ArrayAccess;
+use Zend\Filter\FilterChain;
+use Zend\Loader\Pluggable;
+use Zend\View\Exception;
+use Zend\View\HelperBroker;
+use Zend\View\Model;
+use Zend\View\Renderer;
+use Zend\View\Resolver;
+use Zend\View\Variables;
 
 /**
  * Abstract class for Zend_View to help enforce private constructs.

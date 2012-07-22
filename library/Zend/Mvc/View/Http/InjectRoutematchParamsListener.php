@@ -21,13 +21,13 @@
 
 namespace Zend\Mvc\View\Http;
 
-use Zend\EventManager\EventCollection,
-    Zend\EventManager\ListenerAggregate,
-    Zend\Http\Request as HttpRequest,
-    Zend\Console\Request as ConsoleRequest,
-    Zend\Mvc\Application,
-    Zend\Mvc\MvcEvent,
-    Zend\View\Model as ViewModel;
+use Zend\EventManager\EventCollection;
+use Zend\EventManager\ListenerAggregate;
+use Zend\Http\Request as HttpRequest;
+use Zend\Console\Request as ConsoleRequest;
+use Zend\Mvc\Application;
+use Zend\Mvc\MvcEvent;
+use Zend\View\Model as ViewModel;
 
 /**
  * @category   Zend

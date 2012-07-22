@@ -1,10 +1,9 @@
 <?php
 namespace Zend\Console\Prompt;
 
-use Zend\Console\Prompt,
-Zend\Console\Console,
-Zend\Console\Adapter as ConsoleAdapter
-;
+use Zend\Console\Prompt;
+use Zend\Console\Console;
+use Zend\Console\Adapter as ConsoleAdapter;
 
 abstract class AbstractPrompt implements Prompt
 {

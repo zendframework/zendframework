@@ -221,12 +221,12 @@ interface AdapterInterface
     /**
      * Get charset currently in use by this adapter.
      *
-     * @return \Zend\Console\Charset $charset
+     * @return \Zend\Console\CharsetInterface $charset
      */
     public function getCharset();
 
     /**
-     * @return \Zend\Console\Charset
+     * @return \Zend\Console\CharsetInterface
      */
     public function getDefaultCharset();
 

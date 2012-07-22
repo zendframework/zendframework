@@ -38,7 +38,7 @@ class Posix extends AbstractAdapter implements AdapterInterface
             Color::MAGENTA  => '0;35',
             Color::CYAN     => '0;36',
             Color::WHITE    => '0;37',
-            
+
             Color::GRAY           => '1;30',
             Color::LIGHT_RED      => '1;31',
             Color::LIGHT_GREEN    => '1;32',
@@ -202,7 +202,7 @@ class Posix extends AbstractAdapter implements AdapterInterface
         if($color !== null){
             if(!isset(static::$ansiColorMap['fg'][$color])){
                 throw new BadMethodCallException(
-                    'Unknown color "'.$color.'". Please use one of Zend\Console\Color constants.'
+                    'Unknown color "'.$color.'". Please use one of Zend\Console\ColorInterface constants.'
                 );
             }else{
                 $color = static::$ansiColorMap['fg'][$color];
@@ -211,7 +211,7 @@ class Posix extends AbstractAdapter implements AdapterInterface
         if($bgColor !== null){
             if(!isset(static::$ansiColorMap['bg'][$bgColor])){
                 throw new BadMethodCallException(
-                    'Unknown color "'.$bgColor.'". Please use one of Zend\Console\Color constants.'
+                    'Unknown color "'.$bgColor.'". Please use one of Zend\Console\ColorInterface constants.'
                 );
             }else{
                 $bgColor = static::$ansiColorMap['bg'][$bgColor];
@@ -239,7 +239,7 @@ class Posix extends AbstractAdapter implements AdapterInterface
         if($color !== null){
             if(!isset(static::$ansiColorMap['fg'][$color])){
                 throw new BadMethodCallException(
-                    'Unknown color "'.$color.'". Please use one of Zend\Console\Color constants.'
+                    'Unknown color "'.$color.'". Please use one of Zend\Console\ColorInterface constants.'
                 );
             }else{
                 $color = static::$ansiColorMap['fg'][$color];
@@ -262,7 +262,7 @@ class Posix extends AbstractAdapter implements AdapterInterface
         if($bgColor !== null){
             if(!isset(static::$ansiColorMap['bg'][$bgColor])){
                 throw new BadMethodCallException(
-                    'Unknown color "'.$bgColor.'". Please use one of Zend\Console\Color constants.'
+                    'Unknown color "'.$bgColor.'". Please use one of Zend\Console\ColorInterface constants.'
                 );
             }else{
                 $bgColor = static::$ansiColorMap['bg'][$bgColor];

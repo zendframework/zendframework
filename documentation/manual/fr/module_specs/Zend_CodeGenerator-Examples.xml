@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.examples"><info><title>Exemples Zend_CodeGenerator</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.examples"><title>Exemples Zend_CodeGenerator</title>
     
 
-    <example xml:id="zend.codegenerator.examples.class"><info><title>Génération de classes PHP</title></info>
+    <example xml:id="zend.codegenerator.examples.class"><title>Génération de classes PHP</title>
         
 
         <para>
@@ -49,7 +49,7 @@ class Foo
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.codegenerator.examples.class-properties"><info><title>Générer des classes PHP avec des attributs de classe</title></info>
+    <example xml:id="zend.codegenerator.examples.class-properties"><title>Générer des classes PHP avec des attributs de classe</title>
         
 
         <para>
@@ -120,7 +120,7 @@ class Foo
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.codegenerator.examples.class-methods"><info><title>Générer des classes PHP avec des méthodes</title></info>
+    <example xml:id="zend.codegenerator.examples.class-methods"><title>Générer des classes PHP avec des méthodes</title>
         
 
         <para>
@@ -249,7 +249,7 @@ class Foo
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.codegenerator.examples.file"><info><title>Générer des fichiers PHP</title></info>
+    <example xml:id="zend.codegenerator.examples.file"><title>Générer des fichiers PHP</title>
         
 
         <para>
@@ -346,7 +346,7 @@ define('APPLICATION_ENV', 'testing');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.codegenerator.examples.reflection-file"><info><title>Ajouter du code à un fichier PHP existant en utilisant la réflexion</title></info>
+    <example xml:id="zend.codegenerator.examples.reflection-file"><title>Ajouter du code à un fichier PHP existant en utilisant la réflexion</title>
         
 
         <para>
@@ -364,7 +364,7 @@ file_put_contents($path, $generator->generate());
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.codegenerator.examples.reflection-class"><info><title>Ajouter du code à une classe PHP existante en utilisant la réflexion</title></info>
+    <example xml:id="zend.codegenerator.examples.reflection-class"><title>Ajouter du code à une classe PHP existante en utilisant la réflexion</title>
         
 
         <para>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><info><title>Zend_Http_Response</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><title>Zend_Http_Response</title>
     
 
-    <section xml:id="zend.http.response.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.http.response.introduction"><title>Einführung</title>
         
 
         <para>
@@ -19,7 +19,7 @@
             <acronym>HTTP</acronym> Rückantwort enthält und ein
             <classname>Zend_Http_Response</classname> Objekt zurückgibt.
 
-            <example xml:id="zend.http.response.introduction.example-1"><info><title>Ein Zend_Http_Response Object über die factory Methode instanzieren</title></info>
+            <example xml:id="zend.http.response.introduction.example-1"><title>Ein Zend_Http_Response Object über die factory Methode instanzieren</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -87,7 +87,7 @@ $response = Zend_Http_Response::fromString($str);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.http.response.testers"><info><title>Boolesche Testmethoden</title></info>
+    <section xml:id="zend.http.response.testers"><title>Boolesche Testmethoden</title>
         
 
         <para>
@@ -123,7 +123,7 @@ $response = Zend_Http_Response::fromString($str);
                 </listitem>
             </itemizedlist>
 
-            <example xml:id="zend.http.response.testers.example-1"><info><title>Die isError() Method verwenden, um eine Antwort zu validieren</title></info>
+            <example xml:id="zend.http.response.testers.example-1"><title>Die isError() Method verwenden, um eine Antwort zu validieren</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -138,7 +138,7 @@ if ($response->isError()) {
         </para>
     </section>
 
-    <section xml:id="zend.http.response.acessors"><info><title>Zugriffsmethoden</title></info>
+    <section xml:id="zend.http.response.acessors"><title>Zugriffsmethoden</title>
         
 
         <para>
@@ -215,7 +215,7 @@ if ($response->isError()) {
                 </listitem>
             </itemizedlist>
 
-            <example xml:id="zend.http.response.acessors.example-1"><info><title>Zend_Http_Response Zugriffsmethoden verwenden</title></info>
+            <example xml:id="zend.http.response.acessors.example-1"><title>Zend_Http_Response Zugriffsmethoden verwenden</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -229,7 +229,7 @@ if ($response->getStatus() == 200) {
 ]]></programlisting>
             </example>
 
-            <note><info><title>Immer die Rückgabewerte prüfen</title></info>
+            <note><title>Immer die Rückgabewerte prüfen</title>
                 
 
                 <para>
@@ -240,7 +240,7 @@ if ($response->getStatus() == 200) {
                 </para>
             </note>
 
-            <example xml:id="zend.http.response.acessors.example-2"><info><title>Auf Antwort Header zugreifen</title></info>
+            <example xml:id="zend.http.response.acessors.example-2"><title>Auf Antwort Header zugreifen</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -258,7 +258,7 @@ echo $body;
         </para>
     </section>
 
-    <section xml:id="zend.http.response.static_parsers"><info><title>Statische HTTP Antwortanalysierer</title></info>
+    <section xml:id="zend.http.response.static_parsers"><title>Statische HTTP Antwortanalysierer</title>
         
 
         <para>

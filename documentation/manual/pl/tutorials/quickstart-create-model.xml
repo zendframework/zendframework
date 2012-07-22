@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-model"><info><title>Utworzenie modelu oraz tabeli w bazie danych</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-model"><title>Utworzenie modelu oraz tabeli w bazie danych</title>
     
 
     <para>
@@ -719,7 +719,7 @@ Guestbook Entries: <br />
 </dl>
 ]]></programlisting>
 
-    <note><info><title>Punkt kontrolny</title></info>
+    <note><title>Punkt kontrolny</title>
         
 
         <para>
@@ -732,7 +732,7 @@ Guestbook Entries: <br />
         </para>
     </note>
 
-    <note><info><title>Użycie skryptu ładującego dane</title></info>
+    <note><title>Użycie skryptu ładującego dane</title>
         
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.cloud"><info><title>Zend_Tag_Cloud</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.cloud"><title>Zend_Tag_Cloud</title>
     
 
     <para>
@@ -86,7 +86,7 @@
         </listitem>
     </itemizedlist>
 
-    <example xml:id="zend.tag.cloud.example.using"><info><title>Verwenden von Zend_Tag_Cloud</title></info>
+    <example xml:id="zend.tag.cloud.example.using"><title>Verwenden von Zend_Tag_Cloud</title>
         
 
         <para>
@@ -117,7 +117,7 @@ echo $cloud;
         </para>
     </example>
 
-    <section xml:id="zend.tag.cloud.decorators"><info><title>Dekoratore</title></info>
+    <section xml:id="zend.tag.cloud.decorators"><title>Dekoratore</title>
         
 
         <para>
@@ -130,7 +130,7 @@ echo $cloud;
             Schriftgrößen, abhängig vom Gewicht der Werte Ihrer zugeordneten Tags, versehen.
         </para>
 
-        <section xml:id="zend.tag.cloud.decorators.htmltag"><info><title>Der HTML Tag Dekorator</title></info>
+        <section xml:id="zend.tag.cloud.decorators.htmltag"><title>Der HTML Tag Dekorator</title>
             
 
             <para>
@@ -139,7 +139,7 @@ echo $cloud;
                 kann nicht geändert werden; die umgebenden Elemente können hingegen geändert werden.
             </para>
 
-            <note><info><title>URL Parameter</title></info>
+            <note><title>URL Parameter</title>
                 
 
                 <para>
@@ -198,7 +198,7 @@ echo $cloud;
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.tag.cloud.decorators.htmlcloud"><info><title>HTML Cloud Dekorator</title></info>
+        <section xml:id="zend.tag.cloud.decorators.htmlcloud"><title>HTML Cloud Dekorator</title>
             
 
             <para>

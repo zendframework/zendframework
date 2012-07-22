@@ -32,8 +32,7 @@ class ValidatorChain extends EventManager
      *
      * Retrieves validators from session storage and attaches them.
      *
-     * @param  Storage $storage
-     * @return void
+     * @param Storage $storage
      */
     public function __construct(Storage $storage)
     {
@@ -57,6 +56,7 @@ class ValidatorChain extends EventManager
      */
     public function attach($event, $callback = null, $priority = 1)
     {
+        /** @var Validator $context  */
         $context = null;
         if ($callback instanceof Validator) {
             $context = $callback;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><info><title>Verwendung von unterschiedlichen Versandwegen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><title>Verwendung von unterschiedlichen Versandwegen</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         Anfrage von <methodname>send()</methodname> überschreiben.
     </para>
 
-    <example xml:id="zend.mail.different-transports.example-1"><info><title>Verwendung von unterschiedlichen Transportwegen</title></info>
+    <example xml:id="zend.mail.different-transports.example-1"><title>Verwendung von unterschiedlichen Transportwegen</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -24,7 +24,7 @@ $mail->send();  // wieder Standardmethode verwenden
 ]]></programlisting>
     </example>
 
-    <note><info><title>Zusätzliche Versandwege</title></info>
+    <note><title>Zusätzliche Versandwege</title>
         
 
         <para>

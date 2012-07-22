@@ -4,7 +4,7 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.mvc.intro">
-  <info><title>Introduzione al layer MVC</title></info>
+  <title>Introduzione al layer MVC</title>
 
   <para>
     <classname>Zend\Mvc</classname> è un completamente nuova implentazione
@@ -88,7 +88,7 @@
   </para>
 
   <section xml:id="zend.mvc.intro.basic-application-structure">
-    <info><title>Struttura base di una applicazione</title></info>
+    <title>Struttura base di una applicazione</title>
 
     <para>
         La struttura base di una applicazione è la seguente:
@@ -146,7 +146,7 @@ application_root/
   </section>
 
   <section xml:id="zend.mvc.intro.basic-module-structure">
-    <info><title>Struttura base dei moduli</title></info>
+    <title>Struttura base dei moduli</title>
 
     <para>
         Un module puà contenere possibilmente qualunque cosa: codice PHP,
@@ -306,7 +306,7 @@ class Module
   </section>
 
   <section xml:id="zend.mvc.intro.bootstrapping-an-application">
-    <info><title>Bootstrap di una Application</title></info>
+    <title>Bootstrap di una Application</title>
 
     <para>
         Una <classname>Application</classname> è composta da molti oggetti, 
@@ -410,7 +410,7 @@ $response->send();
   </section>
 
   <section xml:id="zend.mvc.intro.bootstrapping-a-modular-application">
-    <info><title>Bootstrap di una applicazione modulare</title></info>
+    <title>Bootstrap di una applicazione modulare</title>
 
     <para>
         Mentre l'approccio visto funzione bene, da dove viene la 
@@ -430,7 +430,7 @@ $response->send();
     </para>
 
     <section xml:id="zend.mvc.intro.bootstrapping-a-modular-application.configuring-the-module-manager">
-      <info><title>Configurare il Module Manager</title></info>
+      <title>Configurare il Module Manager</title>
 
       <para>
         Il primo passo è configurare il module manager. Il modo più
@@ -516,7 +516,7 @@ class Module
   </section>
 
   <section xml:id="zend.mvc.intro.conclusion">
-    <info><title>Conclusioni</title></info>
+    <title>Conclusioni</title>
 
     <para>
         Il layer ZF2 è incredibilmente flessibile, offrendo un punto 

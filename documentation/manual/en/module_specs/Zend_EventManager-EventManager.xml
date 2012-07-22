@@ -190,7 +190,7 @@ $foo->bar('baz', 'bat');
 ]]></programlisting>
 
         <note>
-            <info><title>StaticEventManager</title></info>
+            <title>StaticEventManager</title>
 
             <para>
                 As of 2.0.0beta3, you can use the <classname>StaticEventManager</classname>

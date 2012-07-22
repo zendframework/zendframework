@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.encrypt"><info><title>Encrypt</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.encrypt"><title>Encrypt</title>
     
 
     <para>
@@ -43,7 +43,7 @@ $filter->setAdapter('openssl');
         </para>
     </note>
 
-    <section xml:id="zend.filter.set.encrypt.mcrypt"><info><title>Mcrypt での暗号化</title></info>
+    <section xml:id="zend.filter.set.encrypt.mcrypt"><title>Mcrypt での暗号化</title>
         
 
         <para>
@@ -176,7 +176,7 @@ print $encrypted;
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.filter.set.encrypt.openssl"><info><title>OpenSSL での暗号化</title></info>
+    <section xml:id="zend.filter.set.encrypt.openssl"><title>OpenSSL での暗号化</title>
         
 
         <para>
@@ -305,7 +305,7 @@ print $encrypted;
 ]]></programlisting>
 
         <!-- TODO : to be translated -->
-        <section xml:id="zend.filter.set.encrypt.openssl.simplified"><info><title>Simplified usage with Openssl</title></info>
+        <section xml:id="zend.filter.set.encrypt.openssl.simplified"><title>Simplified usage with Openssl</title>
             
 
             <para>
@@ -341,7 +341,7 @@ print $encrypted;
             </para>
         </section>
 
-        <section xml:id="zend.filter.set.encrypt.openssl.compressed"><info><title>Compressing the content</title></info>
+        <section xml:id="zend.filter.set.encrypt.openssl.compressed"><title>Compressing the content</title>
             
 
             <para>
@@ -376,7 +376,7 @@ $filter2 = new Zend_Filter_Encrypt(array(
 ));
 ]]></programlisting>
 
-            <note><info><title>Decryption with same settings</title></info>
+            <note><title>Decryption with same settings</title>
                 
 
                 <para>

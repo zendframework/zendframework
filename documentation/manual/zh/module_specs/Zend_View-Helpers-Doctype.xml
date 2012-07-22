@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><info><title>文档类型助手（Doctype Helper）</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><title>文档类型助手（Doctype Helper）</title>
     
 
     <para>
@@ -29,7 +29,7 @@
         <code>Doctype</code>助手是 <link linkend="zend.view.helpers.initial.placeholder"> 占位符助手 </link> 的一个具体的实现。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><info><title>Doctype 助手的基本用法 </title></info>
+    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><title>Doctype 助手的基本用法 </title>
         
 
         <para>
@@ -51,7 +51,7 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 
     </example>
 
-    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><info><title>获取 Doctype</title></info>
+    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><title>获取 Doctype</title>
         
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>جزء الـ View</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><title>جزء الـ View</title>
 
     
 
@@ -46,7 +46,7 @@
 <?php endif; ?>
     ]]></programlisting>
 
-    <section xml:id="zend.view.scripts.escaping"><info><title>تجاهل "escaping" المخرجات</title></info>
+    <section xml:id="zend.view.scripts.escaping"><title>تجاهل "escaping" المخرجات</title>
 
         
 
@@ -105,7 +105,7 @@ echo $view->render(...);
 
     </section>
 
-    <section xml:id="zend.view.scripts.templates"><info><title>أنظمة القوالب</title></info>
+    <section xml:id="zend.view.scripts.templates"><title>أنظمة القوالب</title>
 
         
 

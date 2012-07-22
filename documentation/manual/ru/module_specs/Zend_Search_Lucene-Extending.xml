@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><info><title>Расширяемость<!--Extensibility--></title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><title>Расширяемость<!--Extensibility--></title>
     
 
-    <section xml:id="zend.search.lucene.extending.analysis"><info><title>Анализ текста<!--Text Analysis--></title></info>
+    <section xml:id="zend.search.lucene.extending.analysis"><title>Анализ текста<!--Text Analysis--></title>
         
         <para>
             Класс <code>Zend_Search_Lucene_Analysis_Analyzer</code> используется
@@ -89,7 +89,7 @@ $index->addDocument($doc);]]></programlisting>
             Here is an example of a custom Analyzer, which takes words with digits as terms:
 -->
 
-            <example><info><title>Собственный анализатор текста<!--Custom text Analyzer.--></title></info>
+            <example><title>Собственный анализатор текста<!--Custom text Analyzer.--></title>
                 
                 <programlisting language="php"><![CDATA[<?php
 /** Это созданный пользователем текстовый анализатор, который интерпретирует слова с цифрами как один элемент. */
@@ -165,7 +165,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.filters"><info><title>Фильтрация лексем<!--Tokens Filtering--></title></info>
+    <section xml:id="zend.search.lucene.extending.filters"><title>Фильтрация лексем<!--Tokens Filtering--></title>
         
         <para>
             Анализатор <code>Zend_Search_Lucene_Analysis_Analyzer_Common</code>
@@ -308,7 +308,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);]]></programlisting>
 
     </section>
 
-    <section xml:id="zend.search.lucene.extending.scoring"><info><title>Алгоритмы ранжирования<!--Scoring Algorithms--></title></info>
+    <section xml:id="zend.search.lucene.extending.scoring"><title>Алгоритмы ранжирования<!--Scoring Algorithms--></title>
         
         <para>
             Ранг <literal>q</literal> документа
@@ -469,7 +469,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 ?>  ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.storage"><info><title>Контейнеры хранения<!--Storage Containers--></title></info>
+    <section xml:id="zend.search.lucene.extending.storage"><title>Контейнеры хранения<!--Storage Containers--></title>
         
         <para>
         Абстрактный класс <code>Zend_Search_Lucene_Storage_Directory</code>
@@ -528,7 +528,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 -->
         </para>
 
-        <programlisting><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 
 abstract class Zend_Search_Lucene_Storage_Directory {
 /**
@@ -648,7 +648,7 @@ abstract function getFileObject($filename);
 -->
         </para>
 
-        <programlisting><![CDATA[<?php
+        <programlisting language="php"><![CDATA[<?php
 
 class MyFile extends Zend_Search_Lucene_Storage_File {
     /**

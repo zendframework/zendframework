@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-api"><info><title>API de construction de requêtes</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-api"><title>API de construction de requêtes</title>
     
     <para>
         En plus du parsage automatique d'une requête en chaîne de caractères, il est également possible de construire
@@ -12,7 +12,7 @@
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
 ]]></programlisting>
     </para>
-    <section xml:id="zend.search.lucene.queries.exceptions"><info><title>Les Exceptions du parseur de requêtes</title></info>
+    <section xml:id="zend.search.lucene.queries.exceptions"><title>Les Exceptions du parseur de requêtes</title>
         
         <para>
         Le parseur de requêtes peut générer deux types d'exceptions :
@@ -52,7 +52,7 @@ try {
             sont également destinées à gérer le comportement de gestion des exceptions.
         </para>
     </section>
-    <section xml:id="zend.search.lucene.queries.term-query"><info><title>Requête sur un terme</title></info>
+    <section xml:id="zend.search.lucene.queries.term-query"><title>Requête sur un terme</title>
         
         <para>
             Les requêtes de termes peuvent être utilisées pour une recherche
@@ -84,7 +84,7 @@ $hits  = $index->find($query);
 ]]></programlisting>
         </para>
     </section>
-    <section xml:id="zend.search.lucene.queries.multiterm-query"><info><title>Requête multi-termes</title></info>
+    <section xml:id="zend.search.lucene.queries.multiterm-query"><title>Requête multi-termes</title>
         
         <para>
             Les requêtes multi-termes peuvent être utilisées pour chercher sur une
@@ -192,7 +192,7 @@ $hits  = $index->find($query);
             </itemizedlist>
         </para>
     </section>
-    <section xml:id="zend.search.lucene.queries.boolean-query"><info><title>Requête booléene</title></info>
+    <section xml:id="zend.search.lucene.queries.boolean-query"><title>Requête booléene</title>
         
         <para>
             Les requêtes booléenes permettent de construire une requête qui utilise d'autres requêtes
@@ -319,7 +319,7 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
 ]]></programlisting>
         </para>
     </section>
-    <section xml:id="zend.search.lucene.queries.wildcard"><info><title>Requête Joker (wildcard)</title></info>
+    <section xml:id="zend.search.lucene.queries.wildcard"><title>Requête Joker (wildcard)</title>
         
         <para>
             Les requêtes Joker peuvent être utilisées pour chercher des documents contenant
@@ -356,7 +356,7 @@ $hits  = $index->find($query);
 ]]></programlisting>
         </para>
     </section>
-    <section xml:id="zend.search.lucene.queries.fuzzy"><info><title>Requête floue (fuzzy query)</title></info>
+    <section xml:id="zend.search.lucene.queries.fuzzy"><title>Requête floue (fuzzy query)</title>
         
         <para>
             Les requêtes floues peuvent être utilisées pour chercher des documents contenant
@@ -406,7 +406,7 @@ $hits  = $index->find($query);
 ]]></programlisting>
         </para>
     </section>
-    <section xml:id="zend.search.lucene.queries.phrase-query"><info><title>Requête de phrase</title></info>
+    <section xml:id="zend.search.lucene.queries.phrase-query"><title>Requête de phrase</title>
         
         <para>
             Les requêtes de phrase peuvent être utilisées pour chercher une phrase dans des documents.
@@ -569,7 +569,7 @@ $query->setSlop(2);
 $hits2 = $index->find($query);
 ]]></programlisting>
     </section>
-    <section xml:id="zend.search.lucene.queries.range"><info><title>Requête d'intervalle</title></info>
+    <section xml:id="zend.search.lucene.queries.range"><title>Requête d'intervalle</title>
         
         <para>
             Les <link linkend="zend.search.lucene.query-language.range">requêtes d'intervalle</link> sont dédiées à la recherche de termes dans un intervalle spécifié.

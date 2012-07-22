@@ -30,14 +30,14 @@ class ModuleManagerFactory implements FactoryInterface
      *
      * @var array
      */
-    protected $defaultServiceConfiguration = array(
+    protected $defaultServiceConfig = array(
         'invokables' => array(
             'DispatchListener' => 'Zend\Mvc\DispatchListener',
             'RouteListener'    => 'Zend\Mvc\RouteListener',
         ),
         'factories' => array(
             'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
-            'Configuration'           => 'Zend\Mvc\Service\ConfigurationFactory',
+            'Config'                  => 'Zend\Mvc\Service\ConfigFactory',
             'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
             'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
             'DependencyInjector'      => 'Zend\Mvc\Service\DiFactory',
@@ -54,7 +54,7 @@ class ModuleManagerFactory implements FactoryInterface
         ),
         'aliases' => array(
             'Console'                           => 'ConsoleAdapter',
-            'Config'                            => 'Configuration',
+            'Configuration'                     => 'Config',
             'ControllerPluginBroker'            => 'ControllerPluginManager',
             'Di'                                => 'DependencyInjector',
             'Zend\Di\LocatorInterface'          => 'DependencyInjector',
@@ -67,7 +67,7 @@ class ModuleManagerFactory implements FactoryInterface
      * Creates and returns the module manager
      *
      * Instantiates the default module listeners, providing them configuration
-     * from the "module_listener_options" key of the ApplicationConfiguration
+     * from the "module_listener_options" key of the ApplicationConfig
      * service. Also sets the default config glob path.
      *
      * Module manager is instantiated and provided with an EventManager, to which
@@ -79,15 +79,15 @@ class ModuleManagerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $configuration    = $serviceLocator->get('ApplicationConfiguration');
+        $configuration    = $serviceLocator->get('ApplicationConfig');
         $listenerOptions  = new ListenerOptions($configuration['module_listener_options']);
         $defaultListeners = new DefaultListenerAggregate($listenerOptions);
-        $serviceListener  = new ServiceListener($serviceLocator, $this->defaultServiceConfiguration);
+        $serviceListener  = new ServiceListener($serviceLocator, $this->defaultServiceConfig);
 
-        $serviceListener->addServiceManager($serviceLocator, 'service_manager', 'Zend\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfiguration');
-        $serviceListener->addServiceManager('ControllerLoader', 'controllers', 'Zend\ModuleManager\Feature\ControllerProviderInterface', 'getControllerConfiguration');
-        $serviceListener->addServiceManager('ControllerPluginManager', 'controller_plugins', 'Zend\ModuleManager\Feature\ControllerPluginProviderInterface', 'getControllerPluginConfiguration');
-        $serviceListener->addServiceManager('ViewHelperManager', 'view_helpers', 'Zend\ModuleManager\Feature\ViewHelperProviderInterface', 'getViewHelperConfiguration');
+        $serviceListener->addServiceManager($serviceLocator, 'service_manager', 'Zend\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfig');
+        $serviceListener->addServiceManager('ControllerLoader', 'controllers', 'Zend\ModuleManager\Feature\ControllerProviderInterface', 'getControllerConfig');
+        $serviceListener->addServiceManager('ControllerPluginManager', 'controller_plugins', 'Zend\ModuleManager\Feature\ControllerPluginProviderInterface', 'getControllerPluginConfig');
+        $serviceListener->addServiceManager('ViewHelperManager', 'view_helpers', 'Zend\ModuleManager\Feature\ViewHelperProviderInterface', 'getViewHelperConfig');
 
         $events        = $serviceLocator->get('EventManager');
         $events->attach($defaultListeners);

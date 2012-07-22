@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><info><title>Zend_Mime_Part</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><title>Zend_Mime_Part</title>
     
 
-    <section xml:id="zend.mime.part.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.mime.part.introduction"><title>Einführung</title>
         
 
         <para>
@@ -17,7 +17,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.part.instantiation"><info><title>Instanziierung</title></info>
+    <section xml:id="zend.mime.part.instantiation"><title>Instanziierung</title>
         
 
         <para>
@@ -42,7 +42,7 @@ public $language;
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mime.part.methods"><info><title>Methoden für das übertragen der des Teils der Nachricht zu einem String</title></info>
+    <section xml:id="zend.mime.part.methods"><title>Methoden für das übertragen der des Teils der Nachricht zu einem String</title>
         
 
         <para>

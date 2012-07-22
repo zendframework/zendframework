@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><info><title>Zend Framework Coding Standard für PHP</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><title>Zend Framework Coding Standard für PHP</title>
     
 
-    <section xml:id="coding-standard.overview"><info><title>Übersicht</title></info>
+    <section xml:id="coding-standard.overview"><title>Übersicht</title>
         
 
-        <section xml:id="coding-standard.overview.scope"><info><title>Geltungsbereich</title></info>
+        <section xml:id="coding-standard.overview.scope"><title>Geltungsbereich</title>
             
 
             <para>
@@ -40,7 +40,7 @@
             </itemizedlist>
         </section>
 
-        <section xml:id="coding-standard.overview.goals"><info><title>Ziele</title></info>
+        <section xml:id="coding-standard.overview.goals"><title>Ziele</title>
             
 
             <para>
@@ -52,10 +52,10 @@
         </section>
     </section>
 
-    <section xml:id="coding-standard.php-file-formatting"><info><title>PHP Dateiformatierung</title></info>
+    <section xml:id="coding-standard.php-file-formatting"><title>PHP Dateiformatierung</title>
         
 
-        <section xml:id="coding-standard.php-file-formatting.general"><info><title>Allgemein</title></info>
+        <section xml:id="coding-standard.php-file-formatting.general"><title>Allgemein</title>
             
 
             <para>
@@ -75,7 +75,7 @@
             </note>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.indentation"><info><title>Einrücken</title></info>
+        <section xml:id="coding-standard.php-file-formatting.indentation"><title>Einrücken</title>
             
 
             <para>
@@ -83,7 +83,7 @@
             </para>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.max-line-length"><info><title>Maximale Zeilenlänge</title></info>
+        <section xml:id="coding-standard.php-file-formatting.max-line-length"><title>Maximale Zeilenlänge</title>
             
 
             <para>
@@ -94,7 +94,7 @@
             </para>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.line-termination"><info><title>Zeilenbegrenzung</title></info>
+        <section xml:id="coding-standard.php-file-formatting.line-termination"><title>Zeilenbegrenzung</title>
             
 
             <para>
@@ -111,10 +111,10 @@
         </section>
     </section>
 
-    <section xml:id="coding-standard.naming-conventions"><info><title>Namens Konventionen</title></info>
+    <section xml:id="coding-standard.naming-conventions"><title>Namens Konventionen</title>
         
 
-        <section xml:id="coding-standard.naming-conventions.classes"><info><title>Klassen</title></info>
+        <section xml:id="coding-standard.naming-conventions.classes"><title>Klassen</title>
             
 
             <para>
@@ -163,7 +163,7 @@
             </note>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.abstracts"><info><title>Abstrakte Klassen</title></info>
+        <section xml:id="coding-standard.naming-conventions.abstracts"><title>Abstrakte Klassen</title>
             
 
             <para>
@@ -230,7 +230,7 @@ abstract class RequestAbstract
             </note>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.interfaces"><info><title>Interfaces</title></info>
+        <section xml:id="coding-standard.naming-conventions.interfaces"><title>Interfaces</title>
             
 
             <para>
@@ -259,7 +259,7 @@ abstract class RequestAbstract
             </note>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.filenames"><info><title>Dateinamen</title></info>
+        <section xml:id="coding-standard.naming-conventions.filenames"><title>Dateinamen</title>
             
 
             <para>
@@ -286,7 +286,7 @@ Zend/View/Helper/FormRadio.php
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.functions-and-methods"><info><title>Funktionen und Methoden</title></info>
+        <section xml:id="coding-standard.naming-conventions.functions-and-methods"><title>Funktionen und Methoden</title>
             
 
             <para>
@@ -341,7 +341,7 @@ widgetFactory()
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.variables"><info><title>Variablen</title></info>
+        <section xml:id="coding-standard.naming-conventions.variables"><title>Variablen</title>
             
 
             <para>
@@ -373,7 +373,7 @@ widgetFactory()
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.constants"><info><title>Konstanten</title></info>
+        <section xml:id="coding-standard.naming-conventions.constants"><title>Konstanten</title>
             
 
             <para>
@@ -399,10 +399,10 @@ widgetFactory()
         </section>
     </section>
 
-    <section xml:id="coding-standard.coding-style"><info><title>Code Stil</title></info>
+    <section xml:id="coding-standard.coding-style"><title>Code Stil</title>
         
 
-        <section xml:id="coding-standard.coding-style.php-code-demarcation"><info><title>PHP Code Abgrenzung</title></info>
+        <section xml:id="coding-standard.coding-style.php-code-demarcation"><title>PHP Code Abgrenzung</title>
             
 
             <para>
@@ -423,10 +423,10 @@ widgetFactory()
             </para>
         </section>
 
-        <section xml:id="coding-standard.coding-style.strings"><info><title>Strings</title></info>
+        <section xml:id="coding-standard.coding-style.strings"><title>Strings</title>
             
 
-            <section xml:id="coding-standard.coding-style.strings.literals"><info><title>String Literale</title></info>
+            <section xml:id="coding-standard.coding-style.strings.literals"><title>String Literale</title>
                 
 
                 <para>
@@ -440,7 +440,7 @@ $a = 'Beispiel String';
 ]]></programlisting>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><info><title>String Literale die Apostrophe enthalten</title></info>
+            <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><title>String Literale die Apostrophe enthalten</title>
                 
 
                 <para>
@@ -460,7 +460,7 @@ $sql = "SELECT `id`, `name` from `people` "
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.variable-substitution"><info><title>Variabler Austausch</title></info>
+            <section xml:id="coding-standard.coding-style.strings.variable-substitution"><title>Variabler Austausch</title>
                 
 
                 <para>
@@ -482,7 +482,7 @@ $greeting = "Hallo ${name}, willkommen zurück!";
 ]]></programlisting>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.string-concatenation"><info><title>Verbinden von Strings</title></info>
+            <section xml:id="coding-standard.coding-style.strings.string-concatenation"><title>Verbinden von Strings</title>
                 
 
                 <para>
@@ -510,10 +510,10 @@ $sql = "SELECT `id`, `name` FROM `people` "
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.arrays"><info><title>Arrays</title></info>
+        <section xml:id="coding-standard.coding-style.arrays"><title>Arrays</title>
             
 
-            <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><info><title>Nummerisch indizierte Arrays</title></info>
+            <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><title>Nummerisch indizierte Arrays</title>
                 
 
                 <para>Negative Nummern sind in Indezes nicht gestattet.</para>
@@ -570,7 +570,7 @@ $sampleArray = array(
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.arrays.associative"><info><title>Assoziative Arrays</title></info>
+            <section xml:id="coding-standard.coding-style.arrays.associative"><title>Assoziative Arrays</title>
                 
 
                 <para>
@@ -611,10 +611,10 @@ $sampleArray = array(
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.classes"><info><title>Klassen</title></info>
+        <section xml:id="coding-standard.coding-style.classes"><title>Klassen</title>
             
 
-            <section xml:id="coding-standard.coding-style.classes.declaration"><info><title>Klassen Deklarationen</title></info>
+            <section xml:id="coding-standard.coding-style.classes.declaration"><title>Klassen Deklarationen</title>
                 
 
                 <para>
@@ -702,7 +702,7 @@ class SampleClass
 ]]></programlisting>
             </section>
 
-            <section xml:id="coding-standard.coding-style.classes.member-variables"><info><title>Klassenvariablen</title></info>
+            <section xml:id="coding-standard.coding-style.classes.member-variables"><title>Klassenvariablen</title>
                 
 
                 <para>
@@ -727,10 +727,10 @@ class SampleClass
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.functions-and-methods"><info><title>Funktionen und Methoden</title></info>
+        <section xml:id="coding-standard.coding-style.functions-and-methods"><title>Funktionen und Methoden</title>
             
 
-            <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><info><title>Deklaration von Funktionen und Methoden</title></info>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><title>Deklaration von Funktionen und Methoden</title>
                 
 
                 <para>
@@ -863,7 +863,7 @@ class Foo
 ]]></programlisting>
             </section>
 
-            <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><info><title>Verwendung von Funktionen und Methoden</title></info>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><title>Verwendung von Funktionen und Methoden</title>
                 
 
                 <para>
@@ -905,10 +905,10 @@ threeArguments(array(
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.control-statements"><info><title>Kontrollanweisungen</title></info>
+        <section xml:id="coding-standard.coding-style.control-statements"><title>Kontrollanweisungen</title>
             
 
-            <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><info><title>If/Else/Elseif</title></info>
+            <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><title>If/Else/Elseif</title>
                 
 
                 <para>
@@ -1007,7 +1007,7 @@ if (($a == $b)
                 </para>
             </section>
 
-            <section xml:id="coding-standards.coding-style.control-statements.switch"><info><title>Switch</title></info>
+            <section xml:id="coding-standards.coding-style.control-statements.switch"><title>Switch</title>
                 
 
                 <para>
@@ -1055,10 +1055,10 @@ switch ($numPeople) {
             </section>
         </section>
 
-        <section xml:id="coding-standards.inline-documentation"><info><title>Inline Dokumentation</title></info>
+        <section xml:id="coding-standards.inline-documentation"><title>Inline Dokumentation</title>
             
 
-            <section xml:id="coding-standards.inline-documentation.documentation-format"><info><title>Dokumentations Format</title></info>
+            <section xml:id="coding-standards.inline-documentation.documentation-format"><title>Dokumentations Format</title>
                 
 
                 <para>
@@ -1075,7 +1075,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.files"><info><title>Dateien</title></info>
+            <section xml:id="coding-standards.inline-documentation.files"><title>Dateien</title>
                 
 
                 <para>
@@ -1122,7 +1122,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.classes"><info><title>Klassen</title></info>
+            <section xml:id="coding-standards.inline-documentation.classes"><title>Klassen</title>
                 
 
                 <para>
@@ -1167,7 +1167,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.functions"><info><title>Funktionen</title></info>
+            <section xml:id="coding-standards.inline-documentation.functions"><title>Funktionen</title>
                 
 
                 <para>

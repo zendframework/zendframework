@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.usage"><info><title>Podstawowe użycie autoloadera</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.usage"><title>Podstawowe użycie autoloadera</title>
     
 
     <para>
@@ -49,7 +49,7 @@ $loader->registerNamespace(array('Foo_', 'Bar_'));
 $loader->setFallbackAutoloader(true);
 ]]></programlisting>
 
-    <warning><info><title>Nie należy używać autoloadera awaryjnego</title></info>
+    <warning><title>Nie należy używać autoloadera awaryjnego</title>
         
 
         <para>
@@ -92,7 +92,7 @@ $loader->setFallbackAutoloader(true);
         </para>
     </warning>
 
-    <note><info><title>Prefiksy przestrzeni nazw a przestrzenie nazw PHP</title></info>
+    <note><title>Prefiksy przestrzeni nazw a przestrzenie nazw PHP</title>
         
 
         <para>

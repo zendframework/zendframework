@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap"><info><title>Zend_Ldap</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap"><title>Zend_Ldap</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         Baum zu arbeiten.
     </para>
 
-    <table xml:id="zend.ldap.api.reference.zend-ldap.table"><info><title>Zend_Ldap API</title></info>
+    <table xml:id="zend.ldap.api.reference.zend-ldap.table"><title>Zend_Ldap API</title>
         
 
         <tgroup cols="2">
@@ -575,7 +575,7 @@
         </tgroup>
     </table>
 
-    <section xml:id="zend.ldap.api.reference.zend-ldap.zend-ldap-collection"><info><title>Zend_Ldap_Collection</title></info>
+    <section xml:id="zend.ldap.api.reference.zend-ldap.zend-ldap-collection"><title>Zend_Ldap_Collection</title>
         
 
         <para>
@@ -587,7 +587,7 @@
             Erweiterung für Entwickler welche die Notwendigkeit für eigene Ergebnisobjekte haben.
         </para>
 
-        <table xml:id="zend.ldap.api.reference.zend-ldap.zend-ldap-collection.table"><info><title>API für Zend_Ldap_Collection</title></info>
+        <table xml:id="zend.ldap.api.reference.zend-ldap.zend-ldap-collection.table"><title>API für Zend_Ldap_Collection</title>
             
 
             <tgroup cols="2">

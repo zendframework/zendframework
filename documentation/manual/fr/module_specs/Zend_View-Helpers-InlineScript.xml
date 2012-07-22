@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><info><title>L'aide de vue InlineScript</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><title>L'aide de vue InlineScript</title>
     
 
     <para>
@@ -13,7 +13,7 @@
         <methodname>inlineScript()</methodname> au lieu de <methodname>headScript()</methodname>.
     </para>
 
-    <note><info><title>Utiliser InlineScript pour des scripts dans le corps ("body") HTML</title></info>
+    <note><title>Utiliser InlineScript pour des scripts dans le corps ("body") HTML</title>
         
 
         <para>

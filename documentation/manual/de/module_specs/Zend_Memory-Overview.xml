@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.overview"><info><title>Übersicht</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.overview"><title>Übersicht</title>
     
 
-    <section xml:id="zend.memory.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.memory.introduction"><title>Einführung</title>
         
 
         <para>
@@ -31,7 +31,7 @@
             als Speicheranbieter.
         </para>
 
-        <example xml:id="zend.memory.introduction.example-1"><info><title>Verwenden der Zend_Memory Komponente</title></info>
+        <example xml:id="zend.memory.introduction.example-1"><title>Verwenden der Zend_Memory Komponente</title>
             
 
             <para>
@@ -66,7 +66,7 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
         </example>
     </section>
 
-    <section xml:id="zend.memory.theory-of-operation"><info><title>Theorie der Verwendung</title></info>
+    <section xml:id="zend.memory.theory-of-operation"><title>Theorie der Verwendung</title>
         
 
         <para>
@@ -80,7 +80,7 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
             </itemizedlist>
         </para>
 
-        <section xml:id="zend.memory.theory-of-operation.manager"><info><title>Memory Manager</title></info>
+        <section xml:id="zend.memory.theory-of-operation.manager"><title>Memory Manager</title>
             
 
             <para>
@@ -90,7 +90,7 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
             </para>
         </section>
 
-        <section xml:id="zend.memory.theory-of-operation.container"><info><title>Memory Container</title></info>
+        <section xml:id="zend.memory.theory-of-operation.container"><title>Memory Container</title>
             
 
             <para>
@@ -128,7 +128,7 @@ $memObject->value = substr($memObject->value, $start, $length);
             </note>
         </section>
 
-        <section xml:id="zend.memory.theory-of-operation.locked"><info><title>Verschlüsselter Memory</title></info>
+        <section xml:id="zend.memory.theory-of-operation.locked"><title>Verschlüsselter Memory</title>
             
 
             <para>
@@ -138,7 +138,7 @@ $memObject->value = substr($memObject->value, $start, $length);
             </para>
         </section>
 
-        <section xml:id="zend.memory.theory-of-operation.movable"><info><title>Verschiebbarer Memory</title></info>
+        <section xml:id="zend.memory.theory-of-operation.movable"><title>Verschiebbarer Memory</title>
             
 
             <para>

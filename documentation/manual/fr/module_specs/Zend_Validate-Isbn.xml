@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.isbn"><info><title>Isbn</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.isbn"><title>Isbn</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         <acronym>ISBN-10</acronym> ou <acronym>ISBN-13</acronym>.
     </para>
 
-    <section xml:id="zend.validate.set.isbn.options"><info><title>Options supportées par Zend_Validate_Isbn</title></info>
+    <section xml:id="zend.validate.set.isbn.options"><title>Options supportées par Zend_Validate_Isbn</title>
         
 
         <para>
@@ -36,7 +36,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.isbn.basic"><info><title>Utilisation classique</title></info>
+    <section xml:id="zend.validate.set.isbn.basic"><title>Utilisation classique</title>
         
 
         <para>
@@ -58,7 +58,7 @@ if ($validator->isValid($isbn)) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.isbn.type-explicit"><info><title>Configurer un type de validation ISBN explicite</title></info>
+    <section xml:id="zend.validate.set.isbn.type-explicit"><title>Configurer un type de validation ISBN explicite</title>
         
 
         <para>
@@ -103,7 +103,7 @@ if ($validator->isValid($isbn)) {
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.isbn.separator"><info><title>Spécifier une restriction de séparateur</title></info>
+    <section xml:id="zend.validate.set.isbn.separator"><title>Spécifier une restriction de séparateur</title>
         
 
         <para>
@@ -125,7 +125,7 @@ if ($validator->isValid($isbn)) {
 }
 ]]></programlisting>
 
-        <note><info><title>Valeurs sans séparateur</title></info>
+        <note><title>Valeurs sans séparateur</title>
             
 
             <para>

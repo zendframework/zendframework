@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><info><title>Szybki start z Zend_Form</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><title>Szybki start z Zend_Form</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         renderowania formularzy za pomocą komponentu <classname>Zend_Form</classname>.
     </para>
 
-    <section xml:id="zend.form.quickstart.create"><info><title>Tworzenie obiektu formularza</title></info>
+    <section xml:id="zend.form.quickstart.create"><title>Tworzenie obiektu formularza</title>
         
 
         <para>
@@ -58,7 +58,7 @@ $form->setAttrib('id', 'login');
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.quickstart.elements"><info><title>Dodawanie elementów do formularza</title></info>
+    <section xml:id="zend.form.quickstart.elements"><title>Dodawanie elementów do formularza</title>
         
 
         <para>
@@ -259,7 +259,7 @@ $form->addElement('text', 'username', array(
         </note>
     </section>
 
-    <section xml:id="zend.form.quickstart.render"><info><title>Renderowanie formularza</title></info>
+    <section xml:id="zend.form.quickstart.render"><title>Renderowanie formularza</title>
         
 
         <para>
@@ -370,7 +370,7 @@ $form->addElement('text', 'username', array('order' => 10));
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.quickstart.validate"><info><title>Sprawdzanie poprawności formularza</title></info>
+    <section xml:id="zend.form.quickstart.validate"><title>Sprawdzanie poprawności formularza</title>
         
 
         <para>
@@ -439,7 +439,7 @@ $unfiltered = $form->getUnfilteredValues();
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.quickstart.errorstatus"><info><title>Pobieranie informacji o błędach</title></info>
+    <section xml:id="zend.form.quickstart.errorstatus"><title>Pobieranie informacji o błędach</title>
         
 
         <para>
@@ -471,7 +471,7 @@ if (!$form->isValid($_POST)) {
         </para>
     </section>
 
-    <section xml:id="zend.form.quickstart.puttingtogether"><info><title>Złożenie w całość</title></info>
+    <section xml:id="zend.form.quickstart.puttingtogether"><title>Złożenie w całość</title>
         
 
         <para>
@@ -578,7 +578,7 @@ class UserController extends Zend_Controller_Action
         </para>
     </section>
 
-    <section xml:id="zend.form.quickstart.config"><info><title>Użycie obiektu Zend_Config</title></info>
+    <section xml:id="zend.form.quickstart.config"><title>Użycie obiektu Zend_Config</title>
         
 
         <para>
@@ -635,7 +635,7 @@ $form   = new Zend_Form($config->user->login);
         </para>
     </section>
 
-    <section xml:id="zend.form.quickstart.conclusion"><info><title>Podsumowanie</title></info>
+    <section xml:id="zend.form.quickstart.conclusion"><title>Podsumowanie</title>
         
 
         <para>

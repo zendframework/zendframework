@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><info><title>Zeichensätze</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><title>Zeichensätze</title>
     
 
-    <section xml:id="zend.search.lucene.charset.description"><info><title>Unterstützung für UTF-8 und Einzel-Byte Zeichensätze</title></info>
+    <section xml:id="zend.search.lucene.charset.description"><title>Unterstützung für UTF-8 und Einzel-Byte Zeichensätze</title>
         
 
         <para>
@@ -35,7 +35,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.charset.default_analyzer"><info><title>Standard Textanalysator</title></info>
+    <section xml:id="zend.search.lucene.charset.default_analyzer"><title>Standard Textanalysator</title>
         
 
         <para>
@@ -56,7 +56,7 @@
             </footnote>
         </para>
 
-        <note><info><title/></info>
+        <note>
             
 
             <para>
@@ -67,7 +67,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.search.lucene.charset.utf_analyzer"><info><title>UTF-8 kompatibler Textanalysator</title></info>
+    <section xml:id="zend.search.lucene.charset.utf_analyzer"><title>UTF-8 kompatibler Textanalysator</title>
         
 
         <para>
@@ -87,7 +87,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
 ]]></programlisting>
 
-        <warning><info><title/></info>
+        <warning>
             
 
             <para>

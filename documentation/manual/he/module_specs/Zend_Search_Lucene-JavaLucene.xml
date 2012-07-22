@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>שימוש ב Java Lucene</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><title>שימוש ב Java Lucene</title>
     
 
-    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>סוגי קבצים</title></info>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><title>סוגי קבצים</title>
         
         <para>
             אינדקס סוגי הקבצים של <code>Zend_Search_Lucene</code> תומכים בסוג בינארי עם Java Lucene גרסא 1.4 ומעלה.
@@ -15,7 +15,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>תיקית אינדקס</title></info>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><title>תיקית אינדקס</title>
         
 
         <para>
@@ -42,7 +42,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>קוד המקור</title></info>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><title>קוד המקור</title>
         
         <para>
             תוכנת ה Java המוצגת למעלה מדגימה כיצד לאנדקס קובץ בעזרת Java Lucene:

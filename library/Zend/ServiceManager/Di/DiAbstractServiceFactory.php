@@ -53,7 +53,7 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
     {
         return $this->instanceManager->hasSharedInstance($requestedName)
             || $this->instanceManager->hasAlias($requestedName)
-            || $this->instanceManager->hasConfiguration($requestedName)
+            || $this->instanceManager->hasConfig($requestedName)
             || $this->instanceManager->hasTypePreferences($requestedName)
             || $this->definitions->hasClass($requestedName);
     }

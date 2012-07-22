@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.server"><info><title>Zend_Rest_Server</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.server"><title>Zend_Rest_Server</title>
     
 
-    <section xml:id="zend.rest.server.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.rest.server.introduction"><title>Einführung</title>
         
 
         <para>
@@ -10,10 +10,10 @@
         </para>
     </section>
 
-    <section xml:id="zend.rest.server.usage"><info><title>Verwenden des REST Servers</title></info>
+    <section xml:id="zend.rest.server.usage"><title>Verwenden des REST Servers</title>
         
 
-        <example xml:id="zend.rest.server.usage.example-1"><info><title>Grundsätzliche Verwendung von Zend_Rest_Server: Klassen</title></info>
+        <example xml:id="zend.rest.server.usage.example-1"><title>Grundsätzliche Verwendung von Zend_Rest_Server: Klassen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -23,7 +23,7 @@ $server->handle();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.rest.server.usage.example-2"><info><title>Grundsätzliche Verwendung von Zend_Rest_Server: Funktionen</title></info>
+        <example xml:id="zend.rest.server.usage.example-2"><title>Grundsätzliche Verwendung von Zend_Rest_Server: Funktionen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -46,7 +46,7 @@ $server->handle();
         </example>
     </section>
 
-    <section xml:id="zend.rest.server.args"><info><title>Aufruf eines Zend_Rest_Server Services</title></info>
+    <section xml:id="zend.rest.server.args"><title>Aufruf eines Zend_Rest_Server Services</title>
         
 
         <para>
@@ -58,7 +58,7 @@ $server->handle();
             nummerischen Position des Arguments (z.B. "arg1").
         </para>
 
-        <note><info><title>Nummerischer Index</title></info>
+        <note><title>Nummerischer Index</title>
             
 
             <para>
@@ -83,7 +83,7 @@ $server->handle();
         </para>
     </section>
 
-    <section xml:id="zend.rest.server.customstatus"><info><title>Senden eines eigenen Status</title></info>
+    <section xml:id="zend.rest.server.customstatus"><title>Senden eines eigenen Status</title>
         
 
         <para>
@@ -91,7 +91,7 @@ $server->handle();
             Array mit einem <code>status</code> Schlüssel zurückgeben.
         </para>
 
-        <example xml:id="zend.rest.server.customstatus.example-1"><info><title>Einen eigenen Status zurückgeben</title></info>
+        <example xml:id="zend.rest.server.customstatus.example-1"><title>Einen eigenen Status zurückgeben</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -114,7 +114,7 @@ $server->handle();
         </example>
     </section>
 
-    <section xml:id="zend.rest.server.customxml"><info><title>Eigene XML Antworten zurückgeben</title></info>
+    <section xml:id="zend.rest.server.customxml"><title>Eigene XML Antworten zurückgeben</title>
         
 
         <para>
@@ -123,7 +123,7 @@ $server->handle();
             Objekt zurückgegeben werden.
         </para>
 
-        <example xml:id="zend.rest.server.customxml.example-1"><info><title>Eigenes XML zurückgeben</title></info>
+        <example xml:id="zend.rest.server.customxml.example-1"><title>Eigenes XML zurückgeben</title>
             
 
             <programlisting language="php"><![CDATA[

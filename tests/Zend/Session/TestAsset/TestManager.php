@@ -12,7 +12,7 @@ namespace ZendTest\Session\TestAsset;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\Session\AbstractManager;
-use Zend\Session\Configuration\ConfigurationInterface as SessionConfiguration;
+use Zend\Session\Configuration\ConfigurationInterface as SessionConfig;
 use Zend\Session\SaveHandler\SaveHandlerInterface as SessionSaveHandler;
 use Zend\Session\Storage\StorageInterface as SessionStorage;
 
@@ -20,7 +20,7 @@ class TestManager extends AbstractManager
 {
     public $started = false;
 
-    protected $configDefaultClass = 'Zend\\Session\\Configuration\\StandardConfiguration';
+    protected $configDefaultClass = 'Zend\\Session\\Configuration\\StandardConfig';
     protected $storageDefaultClass = 'Zend\\Session\\Storage\\ArrayStorage';
 
     public function start()

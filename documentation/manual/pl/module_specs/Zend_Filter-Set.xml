@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set"><info><title>Standardowe klasy filtrów</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set"><title>Standardowe klasy filtrów</title>
 
     
 
@@ -9,7 +9,7 @@
         Zend Framework posiada standardowy zestaw gotowych do użycia filtrów..
     </para>
 
-    <section xml:id="zend.filter.set.alnum"><info><title>Alnum</title></info>
+    <section xml:id="zend.filter.set.alnum"><title>Alnum</title>
         
         <para>
             Zwraca łańcuch znaków <code>$value</code>, usuwając wszystkie znaki
@@ -18,7 +18,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.alpha"><info><title>Alpha</title></info>
+    <section xml:id="zend.filter.set.alpha"><title>Alpha</title>
         
         <para>
             Zwraca łańcuch znaków <code>$value</code>, usuwając wszystkie znaki
@@ -27,7 +27,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.basename"><info><title>BaseName</title></info>
+    <section xml:id="zend.filter.set.basename"><title>BaseName</title>
         
         <para>
             Gdy podamy łańcuch znaków zawierający ścieżkę do pliku, to filtr
@@ -35,7 +35,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.digits"><info><title>Digits</title></info>
+    <section xml:id="zend.filter.set.digits"><title>Digits</title>
         
         <para>
             Zwraca łańcuch znaków <code>$value</code>, usuwając wszystkie znaki
@@ -43,14 +43,14 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.dir"><info><title>Dir</title></info>
+    <section xml:id="zend.filter.set.dir"><title>Dir</title>
         
         <para>
             Zwraca nazwę katalogu gdy podamy ścieżkę do pliku lub katalogu.
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.htmlentities"><info><title>HtmlEntities</title></info>
+    <section xml:id="zend.filter.set.htmlentities"><title>HtmlEntities</title>
         
         <para>
             Zwraca łańcuch znaków <code>$value</code>, zamieniając znaki na ich odpowiadające
@@ -58,21 +58,21 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.int"><info><title>Int</title></info>
+    <section xml:id="zend.filter.set.int"><title>Int</title>
         
         <para>
             Zwraca wartość całkowitą (int) <code>$value</code>
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.stripnewlines"><info><title>StripNewlines</title></info>
+    <section xml:id="zend.filter.set.stripnewlines"><title>StripNewlines</title>
         
         <para>
             Zwraca łańcuch znaków <code>$value</code> bez znaków nowej linii.
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.realpath"><info><title>RealPath</title></info>
+    <section xml:id="zend.filter.set.realpath"><title>RealPath</title>
         
         <para>
             Rozwiązauje wszystkie dowiązania symboliczne oraz odniesienia do
@@ -89,21 +89,21 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.stringtolower"><info><title>StringToLower</title></info>
+    <section xml:id="zend.filter.set.stringtolower"><title>StringToLower</title>
         
         <para>
             Zwraca łańcuch znaków <code>$value</code>, zamieniając wszystkie litery na małe.
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.stringtoupper"><info><title>StringToUpper</title></info>
+    <section xml:id="zend.filter.set.stringtoupper"><title>StringToUpper</title>
         
         <para>
             Zwraca łańcuch znaków <code>$value</code>, zamieniając wszystkie litery na wielkie.
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.stringtrim"><info><title>StringTrim</title></info>
+    <section xml:id="zend.filter.set.stringtrim"><title>StringTrim</title>
         
         <para>
             Zwraca łańcuch znaków <code>$value</code> usuwając znaki na początku
@@ -111,7 +111,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.striptags"><info><title>StripTags</title></info>
+    <section xml:id="zend.filter.set.striptags"><title>StripTags</title>
         
         <para>
             Filtr zwraca łańcuch znaków z usuniętymi wszystkimi znacznikami

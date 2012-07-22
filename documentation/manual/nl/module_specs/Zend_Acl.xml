@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Introductie</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><title>Introductie</title>
     
 
     <para>
@@ -37,7 +37,7 @@
         te gebruiken.
     </para>
 
-    <section xml:id="zend.acl.introduction.resources"><info><title>Over Bronnen</title></info>
+    <section xml:id="zend.acl.introduction.resources"><title>Over Bronnen</title>
         
         <para>
             In Zend_Acl is het maken van een bron heel simpel. Zend_Acl heeft een
@@ -66,7 +66,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.acl.introduction.roles"><info><title>Over Rollen</title></info>
+    <section xml:id="zend.acl.introduction.roles"><title>Over Rollen</title>
         
         <para>
             Net als bij Bronnen, is het aanmaken van een Rol ook heel simpel. Zend_Acl levert
@@ -88,7 +88,7 @@
             overervingen een zekere mate van complexiteit met zich mee. Het volgende voorbeeld illustreert
             een tegenstrijdige bepaling en hoe Zend_Acl dit oplost.
         </para>
-        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>Meerdere overervingen tussen rollen</title></info>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>Meerdere overervingen tussen rollen</title>
             
             <para>
                 De volgende code defineerd 3 basis Rollen - "<code>gast</code>", "<code>lid</code>", en
@@ -148,7 +148,7 @@ echo $acl->isAllowed('eenGebruiker', 'eenBron') ? 'toegestaan' : 'weigeren';
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.creating"><info><title>Maken van de toegangscontrolelijst (ACL)</title></info>
+    <section xml:id="zend.acl.introduction.creating"><title>Maken van de toegangscontrolelijst (ACL)</title>
         
 
         <para>
@@ -171,7 +171,7 @@ $acl = new Zend_Acl();
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.role_registry"><info><title>Registeren van Rollen</title></info>
+    <section xml:id="zend.acl.introduction.role_registry"><title>Registeren van Rollen</title>
         
 
         <para>
@@ -187,7 +187,7 @@ $acl = new Zend_Acl();
             De rechten kunnen als volgt worden weergegeven:
         </para>
 
-        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Toegang controle voor een voorbeeld CMS</title></info>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><title>Toegang controle voor een voorbeeld CMS</title>
           
           <tgroup cols="3">
             <thead>
@@ -256,7 +256,7 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
 
     </section>
 
-    <section xml:id="zend.acl.introduction.defining"><info><title>Defineren van de toegangscontrole</title></info>
+    <section xml:id="zend.acl.introduction.defining"><title>Defineren van de toegangscontrole</title>
         
 
         <para>
@@ -313,7 +313,7 @@ $acl->allow('administrator');
 
     </section>
 
-    <section xml:id="zend.acl.introduction.querying"><info><title>Raadplegen van de ACL</title></info>
+    <section xml:id="zend.acl.introduction.querying"><title>Raadplegen van de ACL</title>
         
 
         <para>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.flickr"><info><title>Zend_Service_Flickr</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.flickr"><title>Zend_Service_Flickr</title>
     
-    <section xml:id="zend.service.flickr.introduction"><info><title>对Flickr搜索的介绍</title></info>
+    <section xml:id="zend.service.flickr.introduction"><title>对Flickr搜索的介绍</title>
         
         <para>
             <code>Zend_Service_Flickr</code> i是一组用来使用Flickr REST Web Service 的简单API.
@@ -12,7 +12,7 @@
             在下面的例子中, 我们使用 <code>tagSearch()</code>  方法来搜索tag中有 "php"的照片
             .
         </para>
-        <example><info><title>简单的 Flickr 照片搜索</title></info>
+        <example><title>简单的 Flickr 照片搜索</title>
             
             <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Service/Flickr.php';
@@ -30,7 +30,7 @@ foreach ($results as $result) {
             <code>tagSearch()</code> 可以接受第二个(可选的)参数提供更多选项.
         </para></note>
     </section>
-    <section xml:id="zend.service.flickr.finding-users"><info><title>查找 Flickr 用户</title></info>
+    <section xml:id="zend.service.flickr.finding-users"><title>查找 Flickr 用户</title>
         
         <para>
             <code>Zend_Service_Flickr</code>  提供三种不同的方法来得到 Flickr的用户信息:
@@ -54,7 +54,7 @@ foreach ($results as $result) {
                 </para>
             </listitem>
         </itemizedlist>
-        <example><info><title>用email地址来查找Flickr用户</title></info>
+        <example><title>用email地址来查找Flickr用户</title>
             
             <para>
                 在这个例子中, 我们有一个Flickr用户的e-mail 地址, 并用
@@ -73,11 +73,11 @@ foreach ($results as $result) {
 ?>       ]]></programlisting>
         </example>
     </section>
-    <section xml:id="zend.service.flickr.getimagedetails"><info><title>获得 Flickr 图像详细资料</title></info>
+    <section xml:id="zend.service.flickr.getimagedetails"><title>获得 Flickr 图像详细资料</title>
         
         <para><code>Zend_Service_Flickr</code>使我们可以使用给定的图像id来非常方便快捷的得到图像的详细信息,使用<code>getImageDetails()</code>
         方法, 如下面的例子:</para>
-        <example><info><title>获得 Flickr 图像详细资料</title></info>
+        <example><title>获得 Flickr 图像详细资料</title>
             
             <para>
                 一旦你有一个Flickr 图像的ID,获得它的详细信息将是小事一桩:
@@ -94,7 +94,7 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
 ?>       ]]></programlisting>
         </example>
     </section>
-<section xml:id="zend.service.flickr.classes"><info><title>Zend_Service_Flickr 类</title></info>
+<section xml:id="zend.service.flickr.classes"><title>Zend_Service_Flickr 类</title>
     
     <para>
         下面列出的是将由<code>tagSearch()</code> 和 <code>userSearch()</code>返回的一些类:
@@ -104,7 +104,7 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
             <listitem><para><link linkend="zend.service.flickr.classes.image"><code>Zend_Service_Flickr_Image</code></link></para></listitem>
         </itemizedlist>
     </para>
-    <section xml:id="zend.service.flickr.classes.resultset"><info><title>Zend_Service_Flickr_ResultSet</title></info>
+    <section xml:id="zend.service.flickr.classes.resultset"><title>Zend_Service_Flickr_ResultSet</title>
         
         <para>代表一个Flickr search的结果集.</para>
         <note>
@@ -116,9 +116,9 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                 .
             </para>
         </note>
-        <section xml:id="zend.service.flickr.classes.resultset.properties"><info><title>属性</title></info>
+        <section xml:id="zend.service.flickr.classes.resultset.properties"><title>属性</title>
             
-            <table><info><title>Zend_Service_Flickr_ResultSet 属性</title></info>
+            <table><title>Zend_Service_Flickr_ResultSet 属性</title>
                 
                 <tgroup cols="3">
                     <thead>
@@ -148,7 +148,7 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                 </tgroup>
             </table>
         </section>
-        <section xml:id="zend.service.flickr.classes.resultset.totalResults"><info><title>Zend_Service_Flickr_ResultSet::totalResults()</title></info>
+        <section xml:id="zend.service.flickr.classes.resultset.totalResults"><title>Zend_Service_Flickr_ResultSet::totalResults()</title>
             
             <para>
                 <methodsynopsis>
@@ -165,14 +165,14 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
             </para>
         </section>
     </section>
-    <section xml:id="zend.service.flickr.classes.result"><info><title>Zend_Service_Flickr_Result</title></info>
+    <section xml:id="zend.service.flickr.classes.result"><title>Zend_Service_Flickr_Result</title>
         
         <para>
             Flickr query中的一个单一图片结果
         </para>
-        <section xml:id="zend.service.flickr.classes.result.properties"><info><title>属性</title></info>
+        <section xml:id="zend.service.flickr.classes.result.properties"><title>属性</title>
             
-            <table><info><title>Zend_Service_Flickr_Result  属性</title></info>
+            <table><title>Zend_Service_Flickr_Result  属性</title>
                 
                 <tgroup cols="3">
                     <thead>
@@ -286,12 +286,12 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
             </para>
         </section>
     </section>
-    <section xml:id="zend.service.flickr.classes.image"><info><title>Zend_Service_Flickr_Image</title></info>
+    <section xml:id="zend.service.flickr.classes.image"><title>Zend_Service_Flickr_Image</title>
         
         <para>代表由Flickr搜索返回的图片</para>
-        <section xml:id="zend.service.flickr.classes.image.properties"><info><title>属性</title></info>
+        <section xml:id="zend.service.flickr.classes.image.properties"><title>属性</title>
             
-            <table><info><title>Zend_Service_Flickr_Image 属性</title></info>
+            <table><title>Zend_Service_Flickr_Image 属性</title>
                 
                 <tgroup cols="3">
                     <thead>

@@ -322,6 +322,16 @@ class Form extends Fieldset implements FormInterface
     }
 
     /**
+     * Check if the form has been validated
+     *
+     * @return bool
+     */
+    public function hasValidated()
+    {
+        return $this->hasValidated;
+    }
+
+    /**
      * Validate the form
      *
      * Typically, will proxy to the composed input filter.

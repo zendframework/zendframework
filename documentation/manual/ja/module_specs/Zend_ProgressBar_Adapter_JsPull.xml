@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.jspull"><info><title>Zend_ProgressBar_Adapter_JsPull</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.jspull"><title>Zend_ProgressBar_Adapter_JsPull</title>
     
     <para>
         <classname>Zend_ProgressBar_Adapter_JsPull</classname> は jsPush

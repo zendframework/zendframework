@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.creation"><info><title>計測値の作成</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.creation"><title>計測値の作成</title>
 
     
 
@@ -20,7 +20,7 @@
         言語は、任意で三番目のパラメータとして指定します。
     </para>
 
-    <section xml:id="zend.measure.creation.number"><info><title>整数および浮動小数点数からの計測値の作成</title></info>
+    <section xml:id="zend.measure.creation.number"><title>整数および浮動小数点数からの計測値の作成</title>
 
         
 
@@ -32,7 +32,7 @@
             また、ふたつの "浮動小数点数" が等しいかどうかを調べないようにしましょう。
         </para>
 
-        <example xml:id="zend.measure.creation.number.example-1"><info><title>整数および浮動小数点数を使用しての作成</title></info>
+        <example xml:id="zend.measure.creation.number.example-1"><title>整数および浮動小数点数を使用しての作成</title>
             
             <programlisting language="php"><![CDATA[
 $measurement = 1234.7;
@@ -49,7 +49,7 @@ echo $unit;
 
     </section>
 
-    <section xml:id="zend.measure.creation.string"><info><title>文字列からの計測値の作成</title></info>
+    <section xml:id="zend.measure.creation.string"><title>文字列からの計測値の作成</title>
 
         
 
@@ -69,7 +69,7 @@ echo $unit;
             のような多くの <acronym>PHP</acronym> 関数の制限を避けるようになっています。
         </para>
 
-        <example xml:id="zend.measure.creation.string.example-1"><info><title>文字列を使用しての作成</title></info>
+        <example xml:id="zend.measure.creation.string.example-1"><title>文字列を使用しての作成</title>
             
             <programlisting language="php"><![CDATA[
 $mystring = "10010100111010111010100001011011101010001";
@@ -81,7 +81,7 @@ echo $unit;
 
     </section>
 
-    <section xml:id="zend.measure.creation.localized"><info><title>ローカライズされた文字列をもとにした計測値</title></info>
+    <section xml:id="zend.measure.creation.localized"><title>ローカライズされた文字列をもとにした計測値</title>
 
         
 
@@ -97,7 +97,7 @@ echo $unit;
             意図した値として適切に解釈されるようにします。
         </para>
 
-        <example xml:id="zend.measure.creation.localized.example-1"><info><title>ローカライズされた文字列</title></info>
+        <example xml:id="zend.measure.creation.localized.example-1"><title>ローカライズされた文字列</title>
             
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');

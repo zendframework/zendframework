@@ -71,25 +71,6 @@ class AdapterOptions extends AbstractOptions
     protected $writable = true;
 
     /**
-     * Cast to array
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        $array = array();
-        $transform = function($letters) {
-            $letter = array_shift($letters);
-            return '_' . strtolower($letter);
-        };
-        foreach ($this as $key => $value) {
-            $normalizedKey = preg_replace_callback('/([A-Z])/', $transform, $key);
-            $array[$normalizedKey] = $value;
-        }
-        return $array;
-    }
-
-    /**
      * Adapter using this instance
      *
      * @param  StorageInterface|null $adapter

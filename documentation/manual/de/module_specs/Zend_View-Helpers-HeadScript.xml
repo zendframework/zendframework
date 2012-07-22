@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headscript"><info><title>HeadScript Helfer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headscript"><title>HeadScript Helfer</title>
     
 
     <para>
@@ -76,7 +76,7 @@
         Element verwendet werden sollen.
     </para>
 
-    <note><info><title>Abhängige Kommentare setzen</title></info>
+    <note><title>Abhängige Kommentare setzen</title>
         
 
         <para>
@@ -86,7 +86,7 @@
             Methodenaufruf übergeben werden.
         </para>
 
-        <example xml:id="zend.view.helpers.initial.headscript.conditional"><info><title>Headscript mit abhängigen Kommentaren</title></info>
+        <example xml:id="zend.view.helpers.initial.headscript.conditional"><title>Headscript mit abhängigen Kommentaren</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -130,7 +130,7 @@ $this->headScript()->appendFile(
         <link linkend="zend.view.helpers.initial.placeholder">Platzhalter Helfers</link>.
     </para>
 
-    <note><info><title>InlineScript für HTML Body Skripte verwenden</title></info>
+    <note><title>InlineScript für HTML Body Skripte verwenden</title>
         
 
         <para>
@@ -143,7 +143,7 @@ $this->headScript()->appendFile(
         </para>
     </note>
 
-    <note><info><title>Andere Attribute werden stanadrdmäßig ausgeschaltet</title></info>
+    <note><title>Andere Attribute werden stanadrdmäßig ausgeschaltet</title>
         
 
         <para>
@@ -160,7 +160,7 @@ $this->headScript()->setAllowArbitraryAttributes(true);
 ]]></programlisting>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.headscript.basicusage"><info><title>Grundsätzliche Verwendung des HeadScript Helfers</title></info>
+    <example xml:id="zend.view.helpers.initial.headscript.basicusage"><title>Grundsätzliche Verwendung des HeadScript Helfers</title>
         
 
         <para>
@@ -205,7 +205,7 @@ $this->headScript()->prependFile('/js/prototype.js');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.headscript.capture"><info><title>Skripte einfachen mit Hilfe des HeadScript Helfers</title></info>
+    <example xml:id="zend.view.helpers.initial.headscript.capture"><title>Skripte einfachen mit Hilfe des HeadScript Helfers</title>
         
 
         <para>

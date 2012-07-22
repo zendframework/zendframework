@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><info><title>Extensibilité</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><title>Extensibilité</title>
     
 
-    <section xml:id="zend.search.lucene.extending.analysis"><info><title>Analyse de texte</title></info>
+    <section xml:id="zend.search.lucene.extending.analysis"><title>Analyse de texte</title>
         
 
         <para>
@@ -55,7 +55,7 @@ $index->addDocument($doc);
         <para>
             Voici l'exemple d'analyseur personnalisé, qui accepte des mots contenant des chiffres
             comme terme :
-            <example xml:id="zend.search.lucene.extending.analysis.example-1"><info><title>Analyseur de texte personnalisé</title></info>
+            <example xml:id="zend.search.lucene.extending.analysis.example-1"><title>Analyseur de texte personnalisé</title>
                 
                 <programlisting language="php"><![CDATA[
 /**
@@ -123,7 +123,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.filters"><info><title>Filtrage des segments</title></info>
+    <section xml:id="zend.search.lucene.extending.filters"><title>Filtrage des segments</title>
         
 
         <para>
@@ -214,7 +214,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.scoring"><info><title>Algorithme de score</title></info>
+    <section xml:id="zend.search.lucene.extending.scoring"><title>Algorithme de score</title>
         
 
         <para>
@@ -321,7 +321,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.storage"><info><title>Conteneur de stockage</title></info>
+    <section xml:id="zend.search.lucene.extending.storage"><title>Conteneur de stockage</title>
         
 
         <para>

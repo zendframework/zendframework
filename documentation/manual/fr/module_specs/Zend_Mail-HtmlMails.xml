@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>Émail HTML</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><title>Émail HTML</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         généré :
     </para>
 
-    <example xml:id="zend.mail.html-mails.example-1"><info><title>Envoyer des émail HTML</title></info>
+    <example xml:id="zend.mail.html-mails.example-1"><title>Envoyer des émail HTML</title>
         
 
         <programlisting language="php"><![CDATA[

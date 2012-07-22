@@ -12,6 +12,7 @@ namespace ZendTest\Stdlib;
 
 use ArrayObject;
 use ZendTest\Stdlib\TestAsset\TestOptions;
+use ZendTest\Stdlib\TestAsset\TestOptionsNoStrict;
 use ZendTest\Stdlib\TestAsset\TestTraversable;
 use Zend\Stdlib\Exception\InvalidArgumentException;
 
@@ -32,6 +33,22 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $options->test_field);
     }
 
+    public function testInvalidFieldThrowsException()
+    {
+        $this->setExpectedException('BadMethodCallException');
+        $options = new TestOptions(array('foo' => 'bar'));
+    }
+
+    public function testNonStrictOptionsDoesNotThrowException()
+    {
+        try {
+            $options = new TestOptionsNoStrict(array('foo' => 'bar'));
+        } catch (\Exception $e) {
+            $this->fail('Nonstrict options should not throw an exception');
+        }
+    }
+
+
     public function testConstructionWithNull()
     {
         try {
@@ -48,6 +65,5 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, isset($options->test_field));
         unset($options->testField);
         $this->assertEquals(false, isset($options->test_field));
-
     }
 }

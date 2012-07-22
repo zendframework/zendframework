@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title> 文档页面 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><title> 文档页面 </title>
     
-    <section xml:id="zend.pdf.pages.creation"><info><title> 页面生成 </title></info>
+    <section xml:id="zend.pdf.pages.creation"><title> 页面生成 </title>
         
         <para>
             PDF 文档页面摘要由 <code>Zend_Pdf_Page</code> 类来描绘。
@@ -43,7 +43,7 @@
             文档存储在 <code>Zend_Pdf</code> 类的 public 成员 <code>$pages</code> 里，它是 <code>Zend_Pdf_Page</code> 对象的一个数组。它完整地定义了设置和文档页面的顺序并可以以普通的数组来处理：
         </para>
 
-        <example xml:id="zend.pdf.pages.example-1"><info><title>PDF 文档页面管理 </title></info>
+        <example xml:id="zend.pdf.pages.example-1"><title>PDF 文档页面管理 </title>
             
             <programlisting role="php"><![CDATA[<?php
     ...
@@ -63,13 +63,13 @@
         </example>
     </section>
 
-    <section xml:id="zend.pdf.pages.cloning"><info><title> 页面克隆 </title></info>
+    <section xml:id="zend.pdf.pages.cloning"><title> 页面克隆 </title>
         
         <para>
             通过用页面为参数创建 <code>Zend_Pdf_Page</code> 对象 PDF 页面可以被克隆：
         </para>
 
-        <example xml:id="zend.pdf.pages.example-2"><info><title>Cloning existing page.</title></info>
+        <example xml:id="zend.pdf.pages.example-2"><title>Cloning existing page.</title>
             
             <programlisting role="php"><![CDATA[<?php
     ...

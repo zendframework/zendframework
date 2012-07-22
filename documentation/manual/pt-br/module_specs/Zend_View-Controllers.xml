@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>Scripts Controladores</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><title>Scripts Controladores</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         particular.
     </para>
 
-    <section xml:id="zend.view.controllers.assign"><info><title>Atribuindo Variáveis</title></info>
+    <section xml:id="zend.view.controllers.assign"><title>Atribuindo Variáveis</title>
         
 
         <para>
@@ -70,7 +70,7 @@ $view->assign('c', "Sea");
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.view.controllers.render"><info><title>Renderizando um Script de Visualização</title></info>
+    <section xml:id="zend.view.controllers.render"><title>Renderizando um Script de Visualização</title>
         
 
         <para>
@@ -90,7 +90,7 @@ echo $view->render('someView.php');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.view.controllers.script-paths"><info><title>Caminhos do Script de Visualização</title></info>
+    <section xml:id="zend.view.controllers.script-paths"><title>Caminhos do Script de Visualização</title>
         
 
         <para>
@@ -136,7 +136,7 @@ $view->addScriptPath('/path/to/custom/');
 // diretório corrente, por "booklist.php".
 ]]></programlisting>
 
-        <note><info><title>Nunca utilize uma entrada do usuário para definir caminhos de script</title></info>
+        <note><title>Nunca utilize uma entrada do usuário para definir caminhos de script</title>
             
 
             <para>

@@ -69,19 +69,19 @@ class InstanceManagerTest extends TestCase
     /**
      * @group AliasAlias
      */
-    public function testInstanceManagerResolvesRecursiveAliasesForConfiguration()
+    public function testInstanceManagerResolvesRecursiveAliasesForConfig()
     {
         $config = array('parameters' => array('username' => 'my-username'));
 
         $im = new InstanceManager;
         $im->addAlias('bar-alias', 'Some\Class');
         $im->addAlias('foo-alias', 'bar-alias');
-        $im->setConfiguration('bar-alias', $config);
+        $im->setConfig('bar-alias', $config);
 
         $config['injections'] = array();
         $config['shared'] = true;
 
-        $this->assertEquals($config, $im->getConfiguration('foo-alias'));
+        $this->assertEquals($config, $im->getConfig('foo-alias'));
     }
 
 }

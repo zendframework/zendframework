@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.introduction"><title>Introduction</title>
     
     <para>
         <classname>Zend_Barcode</classname> fournit une manière générique de générer des

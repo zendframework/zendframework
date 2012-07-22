@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><info><title>תוסף עזרה לסקריפטים</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><title>תוסף עזרה לסקריפטים</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         וכל מתודה מתוסף עזרה זה היא זמינה; למרות זאת, השתמש ב <code>inlineScript()</code> במקום <code>headScript()</code>.
     </para>
 
-    <note><info><title>השתמש בתוסף העזרה InlineScript בתוכן ה HTML</title></info>
+    <note><title>השתמש בתוסף העזרה InlineScript בתוכן ה HTML</title>
         
 
         <para>

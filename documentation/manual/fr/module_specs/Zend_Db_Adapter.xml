@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.adapter"><info><title>Zend_Db_Adapter</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.adapter"><title>Zend_Db_Adapter</title>
     
 
     <para>
@@ -99,7 +99,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.db.adapter.connecting"><info><title>Se connecter à un SGBD en utilisant un adaptateur</title></info>
+    <section xml:id="zend.db.adapter.connecting"><title>Se connecter à un SGBD en utilisant un adaptateur</title>
         
 
         <para>
@@ -107,7 +107,7 @@
             <classname>Zend_Db</classname> de base de données.
         </para>
 
-        <section xml:id="zend.db.adapter.connecting.constructor"><info><title>Utilisation du constructeur du Zend_Db Adapter</title></info>
+        <section xml:id="zend.db.adapter.connecting.constructor"><title>Utilisation du constructeur du Zend_Db Adapter</title>
             
 
             <para>
@@ -115,7 +115,7 @@
                 Celui-ci accepte un paramètre représentant un tableau d'options.
             </para>
 
-            <example xml:id="zend.db.adapter.connecting.constructor.example"><info><title>Utiliser le constructeur de l'adaptateur</title></info>
+            <example xml:id="zend.db.adapter.connecting.constructor.example"><title>Utiliser le constructeur de l'adaptateur</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -129,7 +129,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
             </example>
         </section>
 
-        <section xml:id="zend.db.adapter.connecting.factory"><info><title>Utiliser la fabrique (Factory) de Zend_Db</title></info>
+        <section xml:id="zend.db.adapter.connecting.factory"><title>Utiliser la fabrique (Factory) de Zend_Db</title>
             
 
             <para>
@@ -146,7 +146,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
                 classe directement.
             </para>
 
-            <example xml:id="zend.db.adapter.connecting.factory.example"><info><title>Utilisation de la méthode statique de fabrique de Zend_Db</title></info>
+            <example xml:id="zend.db.adapter.connecting.factory.example"><title>Utilisation de la méthode statique de fabrique de Zend_Db</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -174,7 +174,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                 méthode <methodname>factory()</methodname> afin de charger votre adaptateur.
             </para>
 
-            <example xml:id="zend.db.adapter.connecting.factory.example2"><info><title>Utilisation de la fabrique avec une classe personnalisée</title></info>
+            <example xml:id="zend.db.adapter.connecting.factory.example2"><title>Utilisation de la fabrique avec une classe personnalisée</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -191,7 +191,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             </example>
         </section>
 
-        <section xml:id="zend.db.adapter.connecting.factory-config"><info><title>Utiliser Zend_Config avec la fabrique Zend_Db</title></info>
+        <section xml:id="zend.db.adapter.connecting.factory-config"><title>Utiliser Zend_Config avec la fabrique Zend_Db</title>
             
 
             <para>
@@ -207,7 +207,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                 de l'adaptateur.
             </para>
 
-            <example xml:id="zend.db.adapter.connecting.factory.example1"><info><title>Utilisation de la fabrique avec un objet de type Zend_Config</title></info>
+            <example xml:id="zend.db.adapter.connecting.factory.example1"><title>Utilisation de la fabrique avec un objet de type Zend_Config</title>
                 
 
                 <para>
@@ -244,7 +244,7 @@ $db = Zend_Db::factory($config->database);
             </para>
         </section>
 
-        <section xml:id="zend.db.adapter.connecting.parameters"><info><title>Paramètres de l'adaptateur (Adapter)</title></info>
+        <section xml:id="zend.db.adapter.connecting.parameters"><title>Paramètres de l'adaptateur (Adapter)</title>
             
 
             <para>
@@ -323,7 +323,7 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
             </itemizedlist>
 
-            <example xml:id="zend.db.adapter.connecting.parameters.example1"><info><title>Passer l'option de gestion de la casse à la fabrique</title></info>
+            <example xml:id="zend.db.adapter.connecting.parameters.example1"><title>Passer l'option de gestion de la casse à la fabrique</title>
                 
 
                 <para>
@@ -353,7 +353,7 @@ $db = Zend_Db::factory('Db2', $params);
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.db.adapter.connecting.parameters.example2"><info><title>Passer l'option d'auto-échappement à la fabrique</title></info>
+            <example xml:id="zend.db.adapter.connecting.parameters.example2"><title>Passer l'option d'auto-échappement à la fabrique</title>
                 
 
                 <para>
@@ -384,7 +384,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.db.adapter.connecting.parameters.example3"><info><title>Passer des options de driver PDO à la fabrique</title></info>
+            <example xml:id="zend.db.adapter.connecting.parameters.example3"><title>Passer des options de driver PDO à la fabrique</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -407,7 +407,7 @@ echo $db->getConnection()
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.db.adapter.connecting.parameters.example4"><info><title>Passer des options de sérialisation à la fabrique</title></info>
+            <example xml:id="zend.db.adapter.connecting.parameters.example4"><title>Passer des options de sérialisation à la fabrique</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -428,7 +428,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
             </example>
         </section>
 
-        <section xml:id="zend.db.adapter.connecting.getconnection"><info><title>Gestion des connexions dites paresseuses</title></info>
+        <section xml:id="zend.db.adapter.connecting.getconnection"><title>Gestion des connexions dites paresseuses</title>
             
 
             <para>
@@ -470,7 +470,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 <classname>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE=true</classname>.
             </para>
 
-            <example xml:id="zend.db.adapter.connecting.getconnection.example"><info><title>Gérer les exceptions de connexion</title></info>
+            <example xml:id="zend.db.adapter.connecting.getconnection.example"><title>Gérer les exceptions de connexion</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -489,7 +489,7 @@ try {
         </section>
     </section>
 
-    <section xml:id="zend.db.adapter.example-database"><info><title>La base de données d'exemple</title></info>
+    <section xml:id="zend.db.adapter.example-database"><title>La base de données d'exemple</title>
         
 
         <para>
@@ -577,7 +577,7 @@ CREATE TABLE bugs_products (
         </para>
     </section>
 
-    <section xml:id="zend.db.adapter.select"><info><title>Lecture de résultats de requête</title></info>
+    <section xml:id="zend.db.adapter.select"><title>Lecture de résultats de requête</title>
         
 
         <para>
@@ -585,7 +585,7 @@ CREATE TABLE bugs_products (
             de résultats suivants une requête SELECT.
         </para>
 
-        <section xml:id="zend.db.adapter.select.fetchall"><info><title>Récupérer tous les résultats</title></info>
+        <section xml:id="zend.db.adapter.select.fetchall"><title>Récupérer tous les résultats</title>
             
 
             <para>
@@ -605,7 +605,7 @@ CREATE TABLE bugs_products (
                 substitutions des éventuels jokers présents dans la syntaxe <acronym>SQL</acronym>.
             </para>
 
-            <example xml:id="zend.db.adapter.select.fetchall.example"><info><title>Utiliser fetchAll()</title></info>
+            <example xml:id="zend.db.adapter.select.fetchall.example"><title>Utiliser fetchAll()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -616,7 +616,7 @@ $result = $db->fetchAll($sql, 2);
             </example>
         </section>
 
-        <section xml:id="zend.db.adapter.select.fetch-mode"><info><title>Changer le mode de récupération (Fetch Mode)</title></info>
+        <section xml:id="zend.db.adapter.select.fetch-mode"><title>Changer le mode de récupération (Fetch Mode)</title>
             
 
             <para>
@@ -693,7 +693,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
             </itemizedlist>
 
-            <example xml:id="zend.db.adapter.select.fetch-mode.example"><info><title>Utiliser setFetchMode()</title></info>
+            <example xml:id="zend.db.adapter.select.fetch-mode.example"><title>Utiliser setFetchMode()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -707,7 +707,7 @@ echo $result[0]->bug_description;
             </example>
         </section>
 
-        <section xml:id="zend.db.adapter.select.fetchassoc"><info><title>Récupérer un enregistrement comme tableau associatif</title></info>
+        <section xml:id="zend.db.adapter.select.fetchassoc"><title>Récupérer un enregistrement comme tableau associatif</title>
             
 
             <para>
@@ -716,7 +716,7 @@ echo $result[0]->bug_description;
                 en utilisant la première colonne comme index.
             </para>
 
-            <example xml:id="zend.db.adapter.select.fetchassoc.example"><info><title>Utiliser f<methodname>etchAssoc()</methodname></title></info>
+            <example xml:id="zend.db.adapter.select.fetchassoc.example"><title>Utiliser f<methodname>etchAssoc()</methodname></title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -731,7 +731,7 @@ echo $result[1]['bug_description']; // Description du bug #1
             </example>
         </section>
 
-        <section xml:id="zend.db.adapter.select.fetchcol"><info><title>Récupérer une seule colonne d'un enregistrement</title></info>
+        <section xml:id="zend.db.adapter.select.fetchcol"><title>Récupérer une seule colonne d'un enregistrement</title>
             
 
             <para>
@@ -742,7 +742,7 @@ echo $result[1]['bug_description']; // Description du bug #1
                 de la valeur de "fetch mode".
             </para>
 
-            <example xml:id="zend.db.adapter.select.fetchcol.example"><info><title>Utiliser fetchCol()</title></info>
+            <example xml:id="zend.db.adapter.select.fetchcol.example"><title>Utiliser fetchCol()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -757,7 +757,7 @@ echo $result[0];
             </example>
         </section>
 
-        <section xml:id="zend.db.adapter.select.fetchpairs"><info><title>Récupérer des paires Clé-Valeur d'enregistrements</title></info>
+        <section xml:id="zend.db.adapter.select.fetchpairs"><title>Récupérer des paires Clé-Valeur d'enregistrements</title>
             
 
             <para>
@@ -776,7 +776,7 @@ echo $result[0];
                 éventuellement précédemment défini.
             </para>
 
-            <example xml:id="zend.db.adapter.select.fetchpairs.example"><info><title>Utilisation de fetchPairs()</title></info>
+            <example xml:id="zend.db.adapter.select.fetchpairs.example"><title>Utilisation de fetchPairs()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -789,7 +789,7 @@ echo $result[2]; // le bug_status correspondant au bug_id numéro 2
             </example>
         </section>
 
-        <section xml:id="zend.db.adapter.select.fetchrow"><info><title>Récupérer un seul enregistrement complet</title></info>
+        <section xml:id="zend.db.adapter.select.fetchrow"><title>Récupérer un seul enregistrement complet</title>
             
 
             <para>
@@ -800,7 +800,7 @@ echo $result[2]; // le bug_status correspondant au bug_id numéro 2
                 pour que votre SELECT possède une clause WHERE sur une clé primaire.
             </para>
 
-            <example xml:id="zend.db.adapter.select.fetchrow.example"><info><title>Utiliser fetchRow()</title></info>
+            <example xml:id="zend.db.adapter.select.fetchrow.example"><title>Utiliser fetchRow()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -814,7 +814,7 @@ echo $result->bug_description;
             </example>
         </section>
 
-        <section xml:id="zend.db.adapter.select.fetchone"><info><title>Récupérer une colonne d'un enregistrement</title></info>
+        <section xml:id="zend.db.adapter.select.fetchone"><title>Récupérer une colonne d'un enregistrement</title>
             
 
             <para>
@@ -825,7 +825,7 @@ echo $result->bug_description;
                 plusieurs résultats est donc inutile avec cette méthode.
             </para>
 
-            <example xml:id="zend.db.adapter.select.fetchone.example"><info><title>Utiliser fetchOne()</title></info>
+            <example xml:id="zend.db.adapter.select.fetchone.example"><title>Utiliser fetchOne()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -838,7 +838,7 @@ echo $result;
         </section>
     </section>
 
-    <section xml:id="zend.db.adapter.write"><info><title>Effectuer des changements dans la base de données</title></info>
+    <section xml:id="zend.db.adapter.write"><title>Effectuer des changements dans la base de données</title>
         
 
         <para>
@@ -846,7 +846,7 @@ echo $result;
             changements dans vos données. Cette section décrit les manières de procéder.
         </para>
 
-        <section xml:id="zend.db.adapter.write.insert"><info><title>Insérer des données</title></info>
+        <section xml:id="zend.db.adapter.write.insert"><title>Insérer des données</title>
             
 
             <para>
@@ -856,7 +856,7 @@ echo $result;
                 noms des colonnes de la table, aux valeurs souhaitées.
             </para>
 
-            <example xml:id="zend.db.adapter.write.insert.example"><info><title>Insertion dans une table</title></info>
+            <example xml:id="zend.db.adapter.write.insert.example"><title>Insertion dans une table</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -891,7 +891,7 @@ $db->insert('bugs', $data);
                 chaînes de caractères banales.
             </para>
 
-            <example xml:id="zend.db.adapter.write.insert.example2"><info><title>Insérer des expressions dans une table</title></info>
+            <example xml:id="zend.db.adapter.write.insert.example2"><title>Insérer des expressions dans une table</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -906,7 +906,7 @@ $db->insert('bugs', $data);
             </example>
         </section>
 
-        <section xml:id="zend.db.adapter.write.lastinsertid"><info><title>Récupérer une valeur générée</title></info>
+        <section xml:id="zend.db.adapter.write.lastinsertid"><title>Récupérer une valeur générée</title>
             
 
             <para>
@@ -925,7 +925,7 @@ $db->insert('bugs', $data);
                 connexion au SGBD.
             </para>
 
-            <example xml:id="zend.db.adapter.write.lastinsertid.example-1"><info><title>Utiliser lastInsertId() pour les clés auto-incrémentées</title></info>
+            <example xml:id="zend.db.adapter.write.lastinsertid.example-1"><title>Utiliser lastInsertId() pour les clés auto-incrémentées</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -948,7 +948,7 @@ $id = $db->lastInsertId();
                 "bugs_bug_id_seq".
             </para>
 
-            <example xml:id="zend.db.adapter.write.lastinsertid.example-2"><info><title>Utiliser lastInsertId() avec une séquence</title></info>
+            <example xml:id="zend.db.adapter.write.lastinsertid.example-2"><title>Utiliser lastInsertId() avec une séquence</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -968,7 +968,7 @@ $id = $db->lastInsertId('bugs');
                 nomme la séquence explicitement.
             </para>
 
-            <example xml:id="zend.db.adapter.write.lastinsertid.example-3"><info><title>Utilisation de lastSequenceId()</title></info>
+            <example xml:id="zend.db.adapter.write.lastinsertid.example-3"><title>Utilisation de lastSequenceId()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -988,7 +988,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 <constant>NULL</constant>.
             </para>
 
-            <note><info><title>Pourquoi ne pas utiliser "SELECT MAX(id) FROM table"?</title></info>
+            <note><title>Pourquoi ne pas utiliser "SELECT MAX(id) FROM table"?</title>
                 
 
                 <para>
@@ -1022,7 +1022,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
             </note>
         </section>
 
-        <section xml:id="zend.db.adapter.write.update"><info><title>Mettre à jour des données</title></info>
+        <section xml:id="zend.db.adapter.write.update"><title>Mettre à jour des données</title>
             
 
             <para>
@@ -1049,7 +1049,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 par l'opération de mise à jour (UPDATE).
             </para>
 
-            <example xml:id="zend.db.adapter.write.update.example"><info><title>Mettre à jour des enregistrements</title></info>
+            <example xml:id="zend.db.adapter.write.update.example"><title>Mettre à jour des enregistrements</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -1078,7 +1078,7 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
                 jointes ensemble, séparées par des opérateurs <constant>AND</constant>.
             </para>
 
-            <example xml:id="zend.db.adapter.write.update.example-array"><info><title>Mettre à jour des enregistrements avec un tableau de données</title></info>
+            <example xml:id="zend.db.adapter.write.update.example-array"><title>Mettre à jour des enregistrements avec un tableau de données</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -1098,7 +1098,7 @@ $n = $db->update('bugs', $data, $where);
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.db.adapter.write.update.example-arrayofarrays"><info><title>UMettre à jour des enregistrements avec un tableau de tableaux</title></info>
+            <example xml:id="zend.db.adapter.write.update.example-arrayofarrays"><title>UMettre à jour des enregistrements avec un tableau de tableaux</title>
                 
                 <programlisting language="php"><![CDATA[
 $data = array(
@@ -1118,7 +1118,7 @@ $n = $db->update('bugs', $data, $where);
             </example>
         </section>
 
-        <section xml:id="zend.db.adapter.write.delete"><info><title>Supprimer des enregistrements</title></info>
+        <section xml:id="zend.db.adapter.write.delete"><title>Supprimer des enregistrements</title>
             
 
             <para>
@@ -1140,7 +1140,7 @@ $n = $db->update('bugs', $data, $where);
                 d'enregistrements affectés (effacés).
             </para>
 
-            <example xml:id="zend.db.adapter.write.delete.example"><info><title>Supprimer des enregistrements</title></info>
+            <example xml:id="zend.db.adapter.write.delete.example"><title>Supprimer des enregistrements</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -1167,7 +1167,7 @@ $n = $db->delete('bugs', 'bug_id = 3');
         </section>
     </section>
 
-    <section xml:id="zend.db.adapter.quoting"><info><title>Échapper des valeurs ou des identifiants</title></info>
+    <section xml:id="zend.db.adapter.quoting"><title>Échapper des valeurs ou des identifiants</title>
         
 
         <para>
@@ -1202,7 +1202,7 @@ echo $sql;
             caractères spéciaux dans les variables <acronym>PHP</acronym> faisant partie d'une requête <acronym>SQL</acronym>.
         </para>
 
-        <section xml:id="zend.db.adapter.quoting.quote"><info><title>Utilisation de quote()</title></info>
+        <section xml:id="zend.db.adapter.quoting.quote"><title>Utilisation de quote()</title>
             
 
             <para>
@@ -1213,7 +1213,7 @@ echo $sql;
                 délimitations des chaînes en <acronym>SQL</acronym>.
             </para>
 
-            <example xml:id="zend.db.adapter.quoting.quote.example"><info><title>Utiliser quote()</title></info>
+            <example xml:id="zend.db.adapter.quoting.quote.example"><title>Utiliser quote()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -1248,7 +1248,7 @@ SELECT * FROM atable WHERE intColumn = '123'
                 type <acronym>SQL</acronym>.
             </para>
 
-            <example xml:id="zend.db.adapter.quoting.quote.example-2"><info><title>Utiliser quote() avec un type SQL</title></info>
+            <example xml:id="zend.db.adapter.quoting.quote.example-2"><title>Utiliser quote() avec un type SQL</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -1273,7 +1273,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             </para>
         </section>
 
-        <section xml:id="zend.db.adapter.quoting.quote-into"><info><title>Utilisation de quoteInto()</title></info>
+        <section xml:id="zend.db.adapter.quoting.quote-into"><title>Utilisation de quoteInto()</title>
             
 
             <para>
@@ -1293,7 +1293,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
                 paramètres.
             </para>
 
-            <example xml:id="zend.db.adapter.quoting.quote-into.example"><info><title>Utiliser quoteInto()</title></info>
+            <example xml:id="zend.db.adapter.quoting.quote-into.example"><title>Utiliser quoteInto()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -1311,7 +1311,7 @@ echo $sql;
                 pas délimités.
             </para>
 
-            <example xml:id="zend.db.adapter.quoting.quote-into.example-2"><info><title>Utiliser quoteInto() avec un type SQL</title></info>
+            <example xml:id="zend.db.adapter.quoting.quote-into.example-2"><title>Utiliser quoteInto() avec un type SQL</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -1325,7 +1325,7 @@ echo $sql;
             </example>
         </section>
 
-        <section xml:id="zend.db.adapter.quoting.quote-identifier"><info><title>Utilisation de quoteIdentifier()</title></info>
+        <section xml:id="zend.db.adapter.quoting.quote-identifier"><title>Utilisation de quoteIdentifier()</title>
             
 
             <para>
@@ -1359,7 +1359,7 @@ echo $sql;
                 spéciaux sont aussi échappés.
             </para>
 
-            <example xml:id="zend.db.adapter.quoting.quote-identifier.example"><info><title>Utiliser quoteIdentifier()</title></info>
+            <example xml:id="zend.db.adapter.quoting.quote-identifier.example"><title>Utiliser quoteIdentifier()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -1390,7 +1390,7 @@ echo $sql
         </section>
     </section>
 
-    <section xml:id="zend.db.adapter.transactions"><info><title>Gérer les transactions dans une base de données</title></info>
+    <section xml:id="zend.db.adapter.transactions"><title>Gérer les transactions dans une base de données</title>
         
 
         <para>
@@ -1431,7 +1431,7 @@ echo $sql
             <methodname>beginTransaction()</methodname>.
         </para>
 
-        <example xml:id="zend.db.adapter.transactions.example"><info><title>Manipuler les transactions pour assurer l'intégrité de la logique</title></info>
+        <example xml:id="zend.db.adapter.transactions.example"><title>Manipuler les transactions pour assurer l'intégrité de la logique</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1459,7 +1459,7 @@ try {
         </example>
     </section>
 
-    <section xml:id="zend.db.adapter.list-describe"><info><title>Lister et décrire les tables</title></info>
+    <section xml:id="zend.db.adapter.list-describe"><title>Lister et décrire les tables</title>
         
 
         <para>
@@ -1479,7 +1479,7 @@ try {
             tableau avec les clés suivantes :
         </para>
 
-        <table cellpadding="5" frame="all" xml:id="zend.db.adapter.list-describe.metadata"><info><title>Champs de métadonnées retournés par describeTable()</title></info>
+        <table cellpadding="5" frame="all" xml:id="zend.db.adapter.list-describe.metadata"><title>Champs de métadonnées retournés par describeTable()</title>
             
 
             <tgroup align="left" cols="3" colsep="1" rowsep="1">
@@ -1584,8 +1584,8 @@ try {
             </tgroup>
         </table>
 
-        <note><info><title>A quoi correspond le champs de métadonnées "IDENTITY" en fonction du SGBD
-            ?</title></info>
+        <note><title>A quoi correspond le champs de métadonnées "IDENTITY" en fonction du SGBD
+            ?</title>
             
 
             <para>
@@ -1619,7 +1619,7 @@ try {
         </para>
     </section>
 
-    <section xml:id="zend.db.adapter.closing"><info><title>Fermer une connexion</title></info>
+    <section xml:id="zend.db.adapter.closing"><title>Fermer une connexion</title>
         
 
         <para>
@@ -1646,7 +1646,7 @@ try {
             autres.
         </para>
 
-        <example xml:id="zend.db.adapter.closing.example"><info><title>Fermer une connexion à un SGBD</title></info>
+        <example xml:id="zend.db.adapter.closing.example"><title>Fermer une connexion à un SGBD</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1654,7 +1654,7 @@ $db->closeConnection();
 ]]></programlisting>
         </example>
 
-        <note><info><title>Zend_Db supporte-t-il les connexions persistantes ?</title></info>
+        <note><title>Zend_Db supporte-t-il les connexions persistantes ?</title>
             
 
             <para>
@@ -1663,7 +1663,7 @@ $db->closeConnection();
                 (pas celle du driver) d'un adaptateur de <classname>Zend_Db</classname>.
             </para>
 
-            <example xml:id="zend.db.adapter.connecting.persistence.example"><info><title>Utiliser l'option de persistance avec l'adaptateur Oracle</title></info>
+            <example xml:id="zend.db.adapter.connecting.persistence.example"><title>Utiliser l'option de persistance avec l'adaptateur Oracle</title>
                 
                 <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('Oracle', array(
@@ -1699,7 +1699,7 @@ $db = Zend_Db::factory('Oracle', array(
         </note>
     </section>
 
-    <section xml:id="zend.db.adapter.other-statements"><info><title>Exécuter des requêtes sur le driver directement</title></info>
+    <section xml:id="zend.db.adapter.other-statements"><title>Exécuter des requêtes sur le driver directement</title>
         
 
         <para>
@@ -1723,7 +1723,7 @@ $db = Zend_Db::factory('Oracle', array(
             "bas niveau" grâce à la méthode de l'adaptateur <methodname>getConnection()</methodname>.
         </para>
 
-        <example xml:id="zend.db.adapter.other-statements.example"><info><title>Envoyer une requête directe dans un adaptateur PDO</title></info>
+        <example xml:id="zend.db.adapter.other-statements.example"><title>Envoyer une requête directe dans un adaptateur PDO</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1745,7 +1745,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         </para>
     </section>
 
-    <section xml:id="zend.db.adapter.server-version"><info><title>Récupérer la version du serveur SGBD</title></info>
+    <section xml:id="zend.db.adapter.server-version"><title>Récupérer la version du serveur SGBD</title>
         
 
         <para>
@@ -1754,7 +1754,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
             information n'est pas disponible, vous recevrez un <constant>NULL</constant>.
         </para>
 
-        <example xml:id="zend.db.adapter.server-version.example"><info><title>Vérifier la version du serveur avant de lancer une requête</title></info>
+        <example xml:id="zend.db.adapter.server-version.example"><title>Vérifier la version du serveur avant de lancer une requête</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1772,7 +1772,7 @@ if (!is_null($version)) {
         </example>
     </section>
 
-    <section xml:id="zend.db.adapter.adapter-notes"><info><title>Notes sur des adaptateur spécifiques</title></info>
+    <section xml:id="zend.db.adapter.adapter-notes"><title>Notes sur des adaptateur spécifiques</title>
         
 
         <para>
@@ -1780,7 +1780,7 @@ if (!is_null($version)) {
             considérer.
         </para>
 
-        <section xml:id="zend.db.adapter.adapter-notes.ibm-db2"><info><title>IBM DB2</title></info>
+        <section xml:id="zend.db.adapter.adapter-notes.ibm-db2"><title>IBM DB2</title>
             
 
             <itemizedlist>
@@ -1805,7 +1805,7 @@ if (!is_null($version)) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.db.adapter.adapter-notes.mysqli"><info><title>MySQLi</title></info>
+        <section xml:id="zend.db.adapter.adapter-notes.mysqli"><title>MySQLi</title>
             
 
             <itemizedlist>
@@ -1831,7 +1831,7 @@ if (!is_null($version)) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.db.adapter.adapter-notes.oracle"><info><title>Oracle</title></info>
+        <section xml:id="zend.db.adapter.adapter-notes.oracle"><title>Oracle</title>
             
 
             <itemizedlist>
@@ -1882,7 +1882,7 @@ if (!is_null($version)) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.db.adapter.adapter-notes.sqlsrv"><info><title>Microsoft SQL Server</title></info>
+        <section xml:id="zend.db.adapter.adapter-notes.sqlsrv"><title>Microsoft SQL Server</title>
             
             <itemizedlist>
                 <listitem>
@@ -1949,7 +1949,7 @@ if (!is_null($version)) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.db.adapter.adapter-notes.pdo-ibm"><info><title>PDO pour IBM DB2 et Informix Dynamic Server (IDS)</title></info>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-ibm"><title>PDO pour IBM DB2 et Informix Dynamic Server (IDS)</title>
             
 
             <itemizedlist>
@@ -1973,7 +1973,7 @@ if (!is_null($version)) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.db.adapter.adapter-notes.pdo-mssql"><info><title>PDO Microsoft SQL Server</title></info>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-mssql"><title>PDO Microsoft SQL Server</title>
             
 
             <itemizedlist>
@@ -2029,7 +2029,7 @@ if (!is_null($version)) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.db.adapter.adapter-notes.pdo-mysql"><info><title>PDO MySQL</title></info>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-mysql"><title>PDO MySQL</title>
             
 
             <itemizedlist>
@@ -2055,7 +2055,7 @@ if (!is_null($version)) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.db.adapter.adapter-notes.pdo-oci"><info><title>PDO Oracle</title></info>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-oci"><title>PDO Oracle</title>
             
 
             <itemizedlist>
@@ -2080,7 +2080,7 @@ if (!is_null($version)) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.db.adapter.adapter-notes.pdo-pgsql"><info><title>PDO PostgreSQL</title></info>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-pgsql"><title>PDO PostgreSQL</title>
             
 
             <itemizedlist>
@@ -2108,7 +2108,7 @@ if (!is_null($version)) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.db.adapter.adapter-notes.pdo-sqlite"><info><title>PDO SQLite</title></info>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-sqlite"><title>PDO SQLite</title>
             
 
             <itemizedlist>
@@ -2163,7 +2163,7 @@ if (!is_null($version)) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.db.adapter.adapter-notes.firebird"><info><title>Firebird (Interbase)</title></info>
+        <section xml:id="zend.db.adapter.adapter-notes.firebird"><title>Firebird (Interbase)</title>
             
 
             <itemizedlist>

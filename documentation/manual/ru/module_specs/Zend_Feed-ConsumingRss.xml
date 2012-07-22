@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><info><title>Работа с лентой RSS</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><title>Работа с лентой RSS</title>
     
     <para>
         Чтение ленты такое же простое, как создание объекта <code>Zend_Feed_Rss</code>

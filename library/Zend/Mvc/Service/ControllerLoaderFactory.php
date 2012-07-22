@@ -47,7 +47,7 @@ class ControllerLoaderFactory implements FactoryInterface
 
         $controllerLoader = $serviceLocator->createScopedServiceManager();
 
-        $configuration    = $serviceLocator->get('Configuration');
+        $configuration    = $serviceLocator->get('Config');
         if (isset($configuration['di']) && $serviceLocator->has('Di')) {
             $di = $serviceLocator->get('Di');
             $controllerLoader->addAbstractFactory(

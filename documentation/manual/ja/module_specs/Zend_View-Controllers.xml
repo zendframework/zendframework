@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>コントローラスクリプト</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><title>コントローラスクリプト</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         適切なスクリプトを使用して出力をレンダリングするように指示します。
     </para>
 
-    <section xml:id="zend.view.controllers.assign"><info><title>変数の代入</title></info>
+    <section xml:id="zend.view.controllers.assign"><title>変数の代入</title>
 
         
 
@@ -71,7 +71,7 @@ $view->assign('c', "Sea");
 
     </section>
 
-    <section xml:id="zend.view.controllers.render"><info><title>ビュースクリプトのレンダリング</title></info>
+    <section xml:id="zend.view.controllers.render"><title>ビュースクリプトのレンダリング</title>
 
         
 
@@ -95,7 +95,7 @@ echo $view->render('someView.php');
 
     </section>
 
-    <section xml:id="zend.view.controllers.script-paths"><info><title>ビュースクリプトのパス</title></info>
+    <section xml:id="zend.view.controllers.script-paths"><title>ビュースクリプトのパス</title>
 
         
 
@@ -144,7 +144,7 @@ $view->addScriptPath('/path/to/custom/');
 // カレントディレクトリから "booklist.php" を探します。
 ]]></programlisting>
 
-        <note><info><title>ユーザの入力内容をスクリプトパスに設定してはいけません</title></info>
+        <note><title>ユーザの入力内容をスクリプトパスに設定してはいけません</title>
             
 
             <para>

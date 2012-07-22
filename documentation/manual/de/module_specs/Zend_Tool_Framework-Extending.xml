@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.extending"><info><title>Extending and Configuring Zend_Tool_Framework</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.extending"><title>Extending and Configuring Zend_Tool_Framework</title>
     
 
-    <section xml:id="zend.tool.framework.console-client"><info><title>Anpassen des Zend_Tool Konsolen Clients</title></info>
+    <section xml:id="zend.tool.framework.console-client"><title>Anpassen des Zend_Tool Konsolen Clients</title>
         
 
         <para>
@@ -31,7 +31,7 @@
             diese Konfigurationsdatei finden können.
         </para>
 
-        <section xml:id="zend.tool.framework.console-client.home-directory"><info><title>Das Home Verzeichnis</title></info>
+        <section xml:id="zend.tool.framework.console-client.home-directory"><title>Das Home Verzeichnis</title>
             
 
             <para>
@@ -65,7 +65,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.tool.framework.console-client.local-storage"><info><title>Lokaler Speicher</title></info>
+        <section xml:id="zend.tool.framework.console-client.local-storage"><title>Lokaler Speicher</title>
             
 
             <para>
@@ -97,7 +97,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.tool.framework.console-client.configuration-file"><info><title>Benutzer Konfiguration</title></info>
+        <section xml:id="zend.tool.framework.console-client.configuration-file"><title>Benutzer Konfiguration</title>
             
 
             <para>
@@ -144,7 +144,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.tool.framework.console-client.configuration-content"><info><title>Inhalt der Benutzer Konfigurationsdatei</title></info>
+        <section xml:id="zend.tool.framework.console-client.configuration-content"><title>Inhalt der Benutzer Konfigurationsdatei</title>
             
 
             <para>

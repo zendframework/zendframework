@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><title>Zend_Config_Xml</title>
     
     <para>
         <classname>Zend_Config_Xml</classname>
@@ -33,7 +33,7 @@
         este atributo se corresponde con la sección de la cual los datos son
         heredados por la sección extendida..
     </para>
-    <note><info><title>Tipo devuelto</title></info>
+    <note><title>Tipo devuelto</title>
         
         <para>
             Los datos de configuración que se leen en
@@ -43,7 +43,7 @@
             desarrolladores para que se ajuste a sus necesidades particulares.
         </para>
     </note>
-    <example xml:id="zend.config.adapters.xml.example.using"><info><title>Usando Zend_Config_Xml</title></info>
+    <example xml:id="zend.config.adapters.xml.example.using"><title>Usando Zend_Config_Xml</title>
         
         <para>
             Este ejemplo ilustra un uso básico de
@@ -107,7 +107,7 @@ echo $config->database->params->host;   // muestra "dev.example.com"
 echo $config->database->params->dbname; // muestra "dbname"
 ]]></programlisting>
     </example>
-    <example xml:id="zend.config.adapters.xml.example.attributes"><info><title>Usando atributos de etiqueta en Zend_Config_Xml</title></info>
+    <example xml:id="zend.config.adapters.xml.example.attributes"><title>Usando atributos de etiqueta en Zend_Config_Xml</title>
         
         <para>
             Zend_Config_Xml también soporta dos formas adicionales de definir
@@ -175,7 +175,7 @@ echo $config->database->params->dbname; // muestra "dbname"
 </configdata>
 ]]></programlisting>
     </example>
-    <note><info><title>XML strings</title></info>
+    <note><title>XML strings</title>
         
         <para>
             <classname>Zend_Config_Xml</classname>
@@ -215,7 +215,7 @@ $config = new Zend_Config_Xml($string, 'staging');
 ]]></programlisting>
     </note>
 
-    <note><info><title>Zend_Config XML namespace</title></info>
+    <note><title>Zend_Config XML namespace</title>
         
         <para>
             <classname>Zend_Config</classname>

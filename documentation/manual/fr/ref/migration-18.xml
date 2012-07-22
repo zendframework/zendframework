@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.18"><info><title>Zend Framework 1.8</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.18"><title>Zend Framework 1.8</title>
     
 
     <para>
@@ -7,10 +7,10 @@
         vous devriez prendre note de ce qui suit.
     </para>
 
-    <section xml:id="migration.18.zend.controller"><info><title>Zend_Controller</title></info>
+    <section xml:id="migration.18.zend.controller"><title>Zend_Controller</title>
         
 
-        <section xml:id="migration.18.zend.controller.router"><info><title>Changement de la route standard</title></info>
+        <section xml:id="migration.18.zend.controller.router"><title>Changement de la route standard</title>
             
 
             <para>
@@ -23,10 +23,10 @@
         </section>
     </section>
 
-    <section xml:id="migration.18.zend.locale"><info><title>Zend_Locale</title></info>
+    <section xml:id="migration.18.zend.locale"><title>Zend_Locale</title>
         
 
-        <section xml:id="migration.18.zend.locale.defaultcaching"><info><title>Default caching</title></info>
+        <section xml:id="migration.18.zend.locale.defaultcaching"><title>Default caching</title>
             
 
             <para>
@@ -42,7 +42,7 @@
                 <methodname>disableCache()</methodname> method.
             </para>
 
-            <example xml:id="migration.18.zend.locale.defaultcaching.example"><info><title>Disabling default caching</title></info>
+            <example xml:id="migration.18.zend.locale.defaultcaching.example"><title>Disabling default caching</title>
                 
 
                 <programlisting language="php"><![CDATA[

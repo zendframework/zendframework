@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.introduction"><title>Introduction</title>
     
 
     <para>
@@ -100,7 +100,7 @@
         par l'utilisateur.
     </para>
 
-    <note><info><title>Getopt n'est pas une application framework</title></info>
+    <note><title>Getopt n'est pas une application framework</title>
         
 
         <para>

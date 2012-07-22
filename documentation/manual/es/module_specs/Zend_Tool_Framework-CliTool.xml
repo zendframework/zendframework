@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.clitool"><info><title>Usando la herramienta CLI</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.clitool"><title>Usando la herramienta CLI</title>
     
     <para>
         The
@@ -19,7 +19,7 @@
         , console2 and also with the Cygwin project.
     </para>
 
-    <section xml:id="zend.tool.framework.clitool.setup-general"><info><title>Setting up the CLI tool</title></info>
+    <section xml:id="zend.tool.framework.clitool.setup-general"><title>Setting up the CLI tool</title>
         
 
         <para>
@@ -116,7 +116,7 @@
 
     </section>
 
-    <section xml:id="zend.tool.framework.clitool.setup-starnix"><info><title>Setting up the CLI tool on Unix-like Systems</title></info>
+    <section xml:id="zend.tool.framework.clitool.setup-starnix"><title>Setting up the CLI tool on Unix-like Systems</title>
         
 
         <para>
@@ -251,7 +251,7 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
 
     </section>
 
-    <section xml:id="zend.tool.framework.clitool.setup-windows"><info><title>Setting up the CLI tool on Windows</title></info>
+    <section xml:id="zend.tool.framework.clitool.setup-windows"><title>Setting up the CLI tool on Windows</title>
         
 
         <para>
@@ -367,7 +367,7 @@ C:\WAMP\PHP\bin
 
     </section>
 
-    <section xml:id="zend.tool.framework.clitool.setup-othernotes"><info><title>Other Setup Considerations</title></info>
+    <section xml:id="zend.tool.framework.clitool.setup-othernotes"><title>Other Setup Considerations</title>
         
 
         <para>
@@ -408,7 +408,7 @@ C:\WAMP\PHP\bin
         </para>
     </section>
 
-    <section xml:id="zend.tool.framework.clitool.continuing"><info><title>Where To Go Next?</title></info>
+    <section xml:id="zend.tool.framework.clitool.continuing"><title>Where To Go Next?</title>
         
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.boolean"><info><title>Boolean</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.boolean"><title>Boolean</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         utile en travaillant avec des bases de données ou des formulaires.
     </para>
 
-    <section xml:id="zend.filter.set.boolean.default"><info><title>Comportement par défaut de Zend_Filter_Boolean</title></info>
+    <section xml:id="zend.filter.set.boolean.default"><title>Comportement par défaut de Zend_Filter_Boolean</title>
         
 
         <para>
@@ -31,7 +31,7 @@ $result = $filter->filter($value);
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.boolean.types"><info><title>Changer le comportement de Zend_Filter_Boolean</title></info>
+    <section xml:id="zend.filter.set.boolean.types"><title>Changer le comportement de Zend_Filter_Boolean</title>
         
 
         <para>
@@ -164,7 +164,7 @@ $filter = new Zend_Filter_Boolean(array(
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.boolean.localized"><info><title>Booléens localisés</title></info>
+    <section xml:id="zend.filter.set.boolean.localized"><title>Booléens localisés</title>
         
 
         <para>
@@ -196,7 +196,7 @@ $filter->filter('yes');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.filter.set.boolean.casting"><info><title>Désactiver le cast (transtypage)</title></info>
+    <section xml:id="zend.filter.set.boolean.casting"><title>Désactiver le cast (transtypage)</title>
         
 
         <para>
@@ -214,7 +214,7 @@ $filter->filter('yes');
             <property>casting</property> vaut <constant>FALSE</constant>.
         </para>
 
-        <table xml:id="zend.filter.set.boolean.casting.table"><info><title>Utilisation sans transtypage</title></info>
+        <table xml:id="zend.filter.set.boolean.casting.table"><title>Utilisation sans transtypage</title>
             
             <tgroup cols="3">
                 <thead>

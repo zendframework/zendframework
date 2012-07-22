@@ -32,6 +32,7 @@ class HeaderLoader extends PluginClassLoader
         'content-type' => 'Zend\Mail\Header\ContentType',
         'date'         => 'Zend\Mail\Header\Date',
         'from'         => 'Zend\Mail\Header\From',
+        'message-id'   => 'Zend\Mail\Header\MessageId',
         'mimeversion'  => 'Zend\Mail\Header\MimeVersion',
         'mime_version' => 'Zend\Mail\Header\MimeVersion',
         'mime-version' => 'Zend\Mail\Header\MimeVersion',

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.stringlength"><info><title>StringLength</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.stringlength"><title>StringLength</title>
     
 
     <para>
         Ce validateur vérifie la longueur d'une chaine de caractères.
     </para>
 
-    <note><info><title>Zend_Validate_StringLength ne supporte que les chaines</title></info>
+    <note><title>Zend_Validate_StringLength ne supporte que les chaines</title>
         
 
         <para>
@@ -15,7 +15,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.validate.set.stringlength.options"><info><title>Options gérées par Zend_Validate_StringLength</title></info>
+    <section xml:id="zend.validate.set.stringlength.options"><title>Options gérées par Zend_Validate_StringLength</title>
         
 
         <para>
@@ -47,7 +47,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.basic"><info><title>Comportement par défaut de Zend_Validate_StringLength</title></info>
+    <section xml:id="zend.validate.set.stringlength.basic"><title>Comportement par défaut de Zend_Validate_StringLength</title>
         
 
         <para>
@@ -62,7 +62,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.maximum"><info><title>Limiter sur la borne supérieure</title></info>
+    <section xml:id="zend.validate.set.stringlength.maximum"><title>Limiter sur la borne supérieure</title>
         
 
         <para>
@@ -91,7 +91,7 @@ $validator->isValid("Testing"); // retourne false
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.minimum"><info><title>Limiter sur la borne inférieure</title></info>
+    <section xml:id="zend.validate.set.stringlength.minimum"><title>Limiter sur la borne inférieure</title>
         
 
         <para>
@@ -120,7 +120,7 @@ $validator->isValid("Testing"); // retourne true
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.both"><info><title>Limiter via les deux bornes</title></info>
+    <section xml:id="zend.validate.set.stringlength.both"><title>Limiter via les deux bornes</title>
         
 
         <para>
@@ -138,7 +138,7 @@ $validator->isValid("Test"); // retourne true
 $validator->isValid("Testing"); // retourne true
 ]]></programlisting>
 
-        <note><info><title>Comportement illogique, borne inférieure supérieure à la borne supérieure</title></info>
+        <note><title>Comportement illogique, borne inférieure supérieure à la borne supérieure</title>
             
 
             <para>
@@ -148,7 +148,7 @@ $validator->isValid("Testing"); // retourne true
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.stringlength.encoding"><info><title>Encodage des valeurs</title></info>
+    <section xml:id="zend.validate.set.stringlength.encoding"><title>Encodage des valeurs</title>
         
 
         <para>

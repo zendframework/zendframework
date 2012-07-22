@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.simpy"><info><title>Zend_Service_Simpy</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.simpy"><title>Zend_Service_Simpy</title>
     
 
-    <section xml:id="zend.service.simpy.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.service.simpy.introduction"><title>Einführung</title>
         
 
         <para>
@@ -45,7 +45,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.simpy.links"><info><title>Links</title></info>
+    <section xml:id="zend.service.simpy.links"><title>Links</title>
         
 
         <para>
@@ -59,7 +59,7 @@
             der Simipy FAQ für weitere Informationen.
         </para>
 
-        <example xml:id="zend.service.simpy.links.querying"><info><title>Abfragen von Links</title></info>
+        <example xml:id="zend.service.simpy.links.querying"><title>Abfragen von Links</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -117,7 +117,7 @@ $linkQuery->setAfterDate('2006-12-09');
             alten Links mit den neuen Daten überschrieben.
         </para>
 
-        <example xml:id="zend.service.simpy.links.modifying"><info><title>Modifizieren von Links</title></info>
+        <example xml:id="zend.service.simpy.links.modifying"><title>Modifizieren von Links</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -160,7 +160,7 @@ foreach ($linkSet as $link) {
         </example>
     </section>
 
-    <section xml:id="zend.service.simpy.tags"><info><title>Tags</title></info>
+    <section xml:id="zend.service.simpy.tags"><title>Tags</title>
         
 
         <para>
@@ -169,7 +169,7 @@ foreach ($linkSet as $link) {
             Benutzung durch die Links sortiert.
         </para>
 
-        <example xml:id="zend.service.simpy.tags.working"><info><title>Arbeiten mit Tags</title></info>
+        <example xml:id="zend.service.simpy.tags.working"><title>Arbeiten mit Tags</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -214,7 +214,7 @@ $simpy->mergeTags('framework', 'development', 'frameworks');
         </example>
     </section>
 
-    <section xml:id="zend.service.simpy.notes"><info><title>Notizen</title></info>
+    <section xml:id="zend.service.simpy.notes"><title>Notizen</title>
         
 
         <para>
@@ -222,7 +222,7 @@ $simpy->mergeTags('framework', 'development', 'frameworks');
             eindeutig durch eine numerische ID definiert.
         </para>
 
-        <example xml:id="zend.service.simpy.notes.working"><info><title>Arbeiten mit Notizen</title></info>
+        <example xml:id="zend.service.simpy.notes.working"><title>Arbeiten mit Notizen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -270,7 +270,7 @@ $simpy->deleteNote($note->getId());
         </example>
     </section>
 
-    <section xml:id="zend.service.simpy.watchlists"><info><title>Watchlists</title></info>
+    <section xml:id="zend.service.simpy.watchlists"><title>Watchlists</title>
         
 
         <para>
@@ -280,7 +280,7 @@ $simpy->deleteNote($note->getId());
             über das <acronym>API</acronym> nutzt.
         </para>
 
-        <example xml:id="zend.service.simpy.watchlists.retrieving"><info><title>Zurückgeben von Watchlisten</title></info>
+        <example xml:id="zend.service.simpy.watchlists.retrieving"><title>Zurückgeben von Watchlisten</title>
             
 
             <programlisting language="php"><![CDATA[

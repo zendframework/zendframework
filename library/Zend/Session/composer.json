@@ -17,7 +17,6 @@
     },
     "suggest": {
         "zendframework/zend-validator": "Zend\\Validator component",
-        "zendframework/zend-filter": "Zend\\Filter component",
         "zendframework/zend-eventmanager": "Zend\\EventManager component"
     }
 }

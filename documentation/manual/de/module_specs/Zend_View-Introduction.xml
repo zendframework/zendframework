@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>Einführung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><title>Einführung</title>
     
 
     <para>
@@ -23,7 +23,7 @@
         wird die Kontrolle an das View Skript übergeben, welches die Ausgabe erstellt.
     </para>
 
-    <section xml:id="zend.view.introduction.controller"><info><title>Controller Skript</title></info>
+    <section xml:id="zend.view.introduction.controller"><title>Controller Skript</title>
         
 
         <para>
@@ -59,7 +59,7 @@ echo $view->render('booklist.php');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.view.introduction.view"><info><title>View Skript</title></info>
+    <section xml:id="zend.view.introduction.view"><title>View Skript</title>
         
 
         <para>
@@ -103,7 +103,7 @@ echo $view->render('booklist.php');
         </para>
     </section>
 
-    <section xml:id="zend.view.introduction.options"><info><title>Optionen</title></info>
+    <section xml:id="zend.view.introduction.options"><title>Optionen</title>
         
 
         <para>
@@ -173,7 +173,7 @@ base/path/
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.view.introduction.shortTags"><info><title>View Skripte mit Short Tags</title></info>
+    <section xml:id="zend.view.introduction.shortTags"><title>View Skripte mit Short Tags</title>
         
 
         <para>
@@ -238,7 +238,7 @@ $view->setUseStreamWrapper(true);
             </listitem>
         </itemizedlist>
 
-        <warning><info><title>View Stream Wrapper verringert die Geschwindigkeit</title></info>
+        <warning><title>View Stream Wrapper verringert die Geschwindigkeit</title>
             
 
             <para>
@@ -251,7 +251,7 @@ $view->setUseStreamWrapper(true);
         </warning>
     </section>
 
-    <section xml:id="zend.view.introduction.accessors"><info><title>Zugriff auf Dienstprogramme</title></info>
+    <section xml:id="zend.view.introduction.accessors"><title>Zugriff auf Dienstprogramme</title>
         
 
         <para>

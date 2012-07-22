@@ -17,7 +17,7 @@
             piece of BBCode for example:
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="text"><![CDATA[
 [b]foo[i]bar[/i][/b]baz
 ]]></programlisting>
 
@@ -78,7 +78,7 @@
             Some examples of valid BBCode tags are:
         </para>
 
-        <programlisting><![CDATA[
+        <programlisting language="text"><![CDATA[
 [b]
 [list=1]
 [code file=Zend/Markup.php]
@@ -201,7 +201,7 @@
                 character and bullit-lists using the "*" character. An example of both lists:
             </para>
 
-            <programlisting><![CDATA[
+            <programlisting language="text"><![CDATA[
 # Item 1
 # Item 2
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.version.reading"><info><title>Odczytywanie wersji Zend Framework</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.version.reading"><title>Odczytywanie wersji Zend Framework</title>
 
     
 
@@ -19,7 +19,7 @@
         wersja Zend Framework.
     </para>
 
-    <example xml:id="zend.version.reading.example"><info><title>Przykład użycia metody compareVersion()</title></info>
+    <example xml:id="zend.version.reading.example"><title>Przykład użycia metody compareVersion()</title>
         
         <programlisting role="php"><![CDATA[
 // zwraca -1, 0 lub 1

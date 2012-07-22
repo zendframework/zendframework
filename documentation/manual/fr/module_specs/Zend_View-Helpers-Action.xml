@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><info><title>L'aide de vue Action</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><title>L'aide de vue Action</title>
     
 
     <para>
@@ -22,7 +22,7 @@
         est implicite.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.action.usage"><info><title>Utilisation de base de l'aide de vue Action</title></info>
+    <example xml:id="zend.view.helpers.initial.action.usage"><title>Utilisation de base de l'aide de vue Action</title>
         
 
         <para>

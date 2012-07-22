@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.savehandler.dbtable"><info><title>Zend_Session_SaveHandler_DbTable</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.savehandler.dbtable"><title>Zend_Session_SaveHandler_DbTable</title>
     
     <para>
         ההתקנה הבסיסית של Zend_Session_SaveHandler_DbTable חייבת לכלול לפחות 4 עמודות,
@@ -9,7 +9,7 @@
         lifetime, אשר משמש בתור תקופת החיים של ה session (modified + lifetime &gt; time() );
         data, אשר משמש בתור המידע אשר נשמר בטבלה.
     </para>
-    <example xml:id="zend.session.savehandler.dbtable.basic"><info><title>שימוש בסיסי</title></info>
+    <example xml:id="zend.session.savehandler.dbtable.basic"><title>שימוש בסיסי</title>
             
             <programlisting role="SQL"><![CDATA[
 CREATE TABLE `session` (
@@ -55,7 +55,7 @@ Zend_Session::start();
     <para>
         ניתן גם להשתמש בכמה מפתחות ראשיים לכמה עמודות ב Zend_Session_SaveHandler_DbTable.
     </para>
-    <example xml:id="zend.session.savehandler.dbtable.multi-column-key"><info><title>שימוש במפתח ראשי לכמה עמודות</title></info>
+    <example xml:id="zend.session.savehandler.dbtable.multi-column-key"><title>שימוש במפתח ראשי לכמה עמודות</title>
         
         <programlisting role="SQL"><![CDATA[
 CREATE TABLE `session` (

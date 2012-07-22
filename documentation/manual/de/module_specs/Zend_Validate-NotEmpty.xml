@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.notempty"><info><title>NotEmpty</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.notempty"><title>NotEmpty</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         sicherstellen will das den benötigten Elementen Werte zugeordnet wurden.
     </para>
 
-    <section xml:id="zend.validate.set.notempty.options"><info><title>Unterstützte Optionen für Zend_Validate_NotEmpty</title></info>
+    <section xml:id="zend.validate.set.notempty.options"><title>Unterstützte Optionen für Zend_Validate_NotEmpty</title>
         
 
         <para>
@@ -27,7 +27,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.notempty.default"><info><title>Standardverhalten für Zend_Validate_NotEmpty</title></info>
+    <section xml:id="zend.validate.set.notempty.default"><title>Standardverhalten für Zend_Validate_NotEmpty</title>
         
 
         <para>
@@ -44,7 +44,7 @@ $result = $valid->isValid($value);
 // gibt false zurück
 ]]></programlisting>
 
-        <note><info><title>Unterschiedliches Standardverhalten zu PHP</title></info>
+        <note><title>Unterschiedliches Standardverhalten zu PHP</title>
             
 
             <para>
@@ -55,7 +55,7 @@ $result = $valid->isValid($value);
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.notempty.types"><info><title>Ändern des Verhaltens für Zend_Validate_NotEmpty</title></info>
+    <section xml:id="zend.validate.set.notempty.types"><title>Ändern des Verhaltens für Zend_Validate_NotEmpty</title>
         
 
         <para>

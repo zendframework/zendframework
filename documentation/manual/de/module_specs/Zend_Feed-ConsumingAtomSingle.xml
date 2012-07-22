@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>Einen einzelnen Atom Eintrag konsumieren</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><title>Einen einzelnen Atom Eintrag konsumieren</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         "anonymer" Feed erstellt, welcher den Eintrag enthält.
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><info><title>Lesen eines Atom Feeds mit einem Eintrag</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><title>Lesen eines Atom Feeds mit einem Eintrag</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -32,9 +32,9 @@ $entry = $feed->current();
         dass du ein Dokument mit nur einem <command>&lt;entry&gt;</command> Eintrag abrufst:
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><info><title>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><title>
             Direkte Verwendung des Eintragsobjekts für einen Atom Feed mit nur einem Eintrag
-        </title></info>
+        </title>
         
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><title>Introduction</title>
     
 
     <para>
@@ -31,7 +31,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.auth.introduction.adapters"><info><title>Adaptateurs</title></info>
+    <section xml:id="zend.auth.introduction.adapters"><title>Adaptateurs</title>
         
 
         <para>
@@ -100,7 +100,7 @@ class MonAdaptateurAuth implements Zend_Auth_Adapter_Interface
         </para>
     </section>
 
-    <section xml:id="zend.auth.introduction.results"><info><title>Résultats</title></info>
+    <section xml:id="zend.auth.introduction.results"><title>Résultats</title>
         
 
         <para>
@@ -192,7 +192,7 @@ switch ($resultat->getCode()) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.auth.introduction.persistence"><info><title>Persistance d'identité</title></info>
+    <section xml:id="zend.auth.introduction.persistence"><title>Persistance d'identité</title>
         
 
         <para>
@@ -208,7 +208,7 @@ switch ($resultat->getCode()) {
             contexte lors de multiples requêtes dans les applications Web.
         </para>
 
-        <section xml:id="zend.auth.introduction.persistence.default"><info><title>Persistance par défaut dans une session PHP</title></info>
+        <section xml:id="zend.auth.introduction.persistence.default"><title>Persistance par défaut dans une session PHP</title>
             
 
             <para>
@@ -234,7 +234,7 @@ switch ($resultat->getCode()) {
                 </para>
             </note>
 
-            <example xml:id="zend.auth.introduction.persistence.default.example"><info><title>Changer l'espace de nommage de la session</title></info>
+            <example xml:id="zend.auth.introduction.persistence.default.example"><title>Changer l'espace de nommage de la session</title>
                 
 
                 <para>
@@ -267,7 +267,7 @@ $resultat = $auth->authenticate($authAdaptateur);
             </example>
         </section>
 
-        <section xml:id="zend.auth.introduction.persistence.custom"><info><title>Installer un stockage personnalisé</title></info>
+        <section xml:id="zend.auth.introduction.persistence.custom"><title>Installer un stockage personnalisé</title>
             
 
             <para>
@@ -279,7 +279,7 @@ $resultat = $auth->authenticate($authAdaptateur);
                 <methodname>Zend_Auth::setStorage()</methodname>.
             </para>
 
-            <example xml:id="zend.auth.introduction.persistence.custom.example"><info><title>Utiliser une classe de stockage personnalisée</title></info>
+            <example xml:id="zend.auth.introduction.persistence.custom.example"><title>Utiliser une classe de stockage personnalisée</title>
                 
 
                 <para>
@@ -375,7 +375,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdaptateur);
         </section>
     </section>
 
-    <section xml:id="zend.auth.introduction.using"><info><title>Utilisation de Zend_Auth</title></info>
+    <section xml:id="zend.auth.introduction.using"><title>Utilisation de Zend_Auth</title>
         
 
         <para>

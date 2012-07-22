@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headstyle"><info><title>Assistente HeadStyle</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headstyle"><title>Assistente HeadStyle</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         <emphasis>&lt;head&gt;</emphasis>.
     </para>
 
-    <note><info><title>Use o HeadLink para "linkar" arquivos CSS</title></info>
+    <note><title>Use o HeadLink para "linkar" arquivos CSS</title>
         
 
         <para>
@@ -57,7 +57,7 @@
         todos admissíveis.
     </para>
 
-    <note><info><title>Setting Conditional Comments</title></info>
+    <note><title>Setting Conditional Comments</title>
         
 
         <para>
@@ -67,7 +67,7 @@
             in the method calls.
         </para>
 
-        <example xml:id="zend.view.helpers.initial.headstyle.conditional"><info><title>Headstyle With Conditional Comments</title></info>
+        <example xml:id="zend.view.helpers.initial.headstyle.conditional"><title>Headstyle With Conditional Comments</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -104,7 +104,7 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
         O assistente <classname>HeadStyle</classname> é uma implementação concreta do <link linkend="zend.view.helpers.initial.placeholder">assistente Placeholder</link>.
     </para>
 
-    <note><info><title>UTF-8 encoding used by default</title></info>
+    <note><title>UTF-8 encoding used by default</title>
         
 
         <para>
@@ -126,7 +126,7 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.headstyle.basicusage"><info><title>Uso Básico do Assistente HeadStyle</title></info>
+    <example xml:id="zend.view.helpers.initial.headstyle.basicusage"><title>Uso Básico do Assistente HeadStyle</title>
         
 
         <para>
@@ -167,7 +167,7 @@ $this->headStyle()->prependStyle($firstStyles);
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.headstyle.capture"><info><title>Capturing Style Declarations Using the HeadStyle Helper</title></info>
+    <example xml:id="zend.view.helpers.initial.headstyle.capture"><title>Capturing Style Declarations Using the HeadStyle Helper</title>
         
 
         <para>

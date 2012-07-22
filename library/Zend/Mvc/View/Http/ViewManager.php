@@ -19,7 +19,7 @@ use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\View\SendResponseListener;
-use Zend\ServiceManager\ConfigurationInterface;
+use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
 use Zend\View\Helper as ViewHelper;
@@ -123,7 +123,7 @@ class ViewManager implements ListenerAggregateInterface
     {
         $application  = $event->getApplication();
         $services     = $application->getServiceManager();
-        $config       = $services->get('Configuration');
+        $config       = $services->get('Config');
         $events       = $application->getEventManager();
         $sharedEvents = $events->getSharedManager();
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.basics"><info><title>Podstawowe użycie</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.basics"><title>Podstawowe użycie</title>
     
     <para>
         Użycie <code>Zend_Json</code> sprowadza się do dwóch dostępnych

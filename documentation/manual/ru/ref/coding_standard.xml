@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><info><title>Стандарт кодирования на PHP в Zend Framework'е</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><title>Стандарт кодирования на PHP в Zend Framework'е</title>
   
-    <section xml:id="coding-standard.overview"><info><title>Обзор</title></info>
+    <section xml:id="coding-standard.overview"><title>Обзор</title>
         
 
-        <section xml:id="coding-standard.overview.scope"><info><title>Область применения</title></info>
+        <section xml:id="coding-standard.overview.scope"><title>Область применения</title>
             
 
             <para>
@@ -31,7 +31,7 @@
             </para>
         </section>
 
-        <section xml:id="coding-standard.overview.goals"><info><title>Цели</title></info>
+        <section xml:id="coding-standard.overview.goals"><title>Цели</title>
             
 
             <para>
@@ -43,10 +43,10 @@
         </section>
     </section>
 
-    <section xml:id="coding-standard.php-file-formatting"><info><title>Форматирование PHP-файлов</title></info>
+    <section xml:id="coding-standard.php-file-formatting"><title>Форматирование PHP-файлов</title>
         
 
-        <section xml:id="coding-standard.php-file-formatting.general"><info><title>Общее</title></info>
+        <section xml:id="coding-standard.php-file-formatting.general"><title>Общее</title>
             
 
             <para>
@@ -63,13 +63,13 @@
             </para>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.indentation"><info><title>Отступы</title></info>
+        <section xml:id="coding-standard.php-file-formatting.indentation"><title>Отступы</title>
             
 
             <para>Для отступа используйте 4 пробела. Не используйте символ табуляции.</para>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.max-line-length"><info><title>Максимальная длина строки</title></info>
+        <section xml:id="coding-standard.php-file-formatting.max-line-length"><title>Максимальная длина строки</title>
             
 
             <para>
@@ -81,7 +81,7 @@
             </para>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.line-termination"><info><title>Переводы строк</title></info>
+        <section xml:id="coding-standard.php-file-formatting.line-termination"><title>Переводы строк</title>
             
 
             <para>
@@ -99,10 +99,10 @@
         </section>
     </section>
 
-    <section xml:id="coding-standard.naming-conventions"><info><title>Соглашения по именованию</title></info>
+    <section xml:id="coding-standard.naming-conventions"><title>Соглашения по именованию</title>
         
 
-        <section xml:id="coding-standard.naming-conventions.classes"><info><title>Классы</title></info>
+        <section xml:id="coding-standard.naming-conventions.classes"><title>Классы</title>
             
 
             <para>
@@ -153,7 +153,7 @@ Zend_View_Helper
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.interfaces"><info><title>Интерфейсы</title></info>
+        <section xml:id="coding-standard.naming-conventions.interfaces"><title>Интерфейсы</title>
             
 
             <para>
@@ -167,7 +167,7 @@ Zend_Controller_Dispatcher_Interface]]></programlisting>
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.filenames"><info><title>Имена файлов</title></info>
+        <section xml:id="coding-standard.naming-conventions.filenames"><title>Имена файлов</title>
             
 
             <para>
@@ -191,7 +191,7 @@ Zend/View/Helper/FormRadio.php]]></programlisting>
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.functions-and-methods"><info><title>Функции и методы</title></info>
+        <section xml:id="coding-standard.naming-conventions.functions-and-methods"><title>Функции и методы</title>
             
 
             <para>
@@ -239,7 +239,7 @@ widgetFactory()]]></programlisting>
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.variables"><info><title>Переменные</title></info>
+        <section xml:id="coding-standard.naming-conventions.variables"><title>Переменные</title>
             
 
             <para>
@@ -274,7 +274,7 @@ widgetFactory()]]></programlisting>
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.constants"><info><title>Константы</title></info>
+        <section xml:id="coding-standard.naming-conventions.constants"><title>Константы</title>
             
 
             <para>
@@ -295,10 +295,10 @@ widgetFactory()]]></programlisting>
         </section>
     </section>
 
-    <section xml:id="coding-standard.coding-style"><info><title>Стиль кодирования</title></info>
+    <section xml:id="coding-standard.coding-style"><title>Стиль кодирования</title>
         
 
-        <section xml:id="coding-standard.coding-style.php-code-demarcation"><info><title>Обрамление PHP-кода</title></info>
+        <section xml:id="coding-standard.coding-style.php-code-demarcation"><title>Обрамление PHP-кода</title>
             
 
             <para>
@@ -315,10 +315,10 @@ widgetFactory()]]></programlisting>
             </para>
         </section>
 
-        <section xml:id="coding-standard.coding-style.strings"><info><title>Строки</title></info>
+        <section xml:id="coding-standard.coding-style.strings"><title>Строки</title>
             
 
-            <section xml:id="coding-standard.coding-style.strings.literals"><info><title>Строковые литералы</title></info>
+            <section xml:id="coding-standard.coding-style.strings.literals"><title>Строковые литералы</title>
                 
 
                 <para>
@@ -331,7 +331,7 @@ $a = 'Example String';]]></programlisting>
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><info><title>Строковые литералы, содержащие апострофы</title></info>
+            <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><title>Строковые литералы, содержащие апострофы</title>
                 
 
                 <para>
@@ -347,7 +347,7 @@ $sql = "SELECT `id`, `name` from `people` WHERE `name`='Fred' OR `name`='Susan'"
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.variable-substitution"><info><title>Подстановка переменных</title></info>
+            <section xml:id="coding-standard.coding-style.strings.variable-substitution"><title>Подстановка переменных</title>
                 
 
                 <para>
@@ -368,7 +368,7 @@ $greeting = "Hello ${name}, welcome back!";]]></programlisting>
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.string-concatenation"><info><title>Конкатенация строк</title></info>
+            <section xml:id="coding-standard.coding-style.strings.string-concatenation"><title>Конкатенация строк</title>
                 
 
                 <para>
@@ -395,10 +395,10 @@ $sql = "SELECT `id`, `name` FROM `people` "
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.arrays"><info><title>Массивы</title></info>
+        <section xml:id="coding-standard.coding-style.arrays"><title>Массивы</title>
             
 
-            <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><info><title>Массивы с числовыми индексами</title></info>
+            <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><title>Массивы с числовыми индексами</title>
                 
 
                 <para>Отрицательные числа в качестве индексов запрещены.</para>
@@ -433,7 +433,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.arrays.associative"><info><title>Ассоциативные массивы</title></info>
+            <section xml:id="coding-standard.coding-style.arrays.associative"><title>Ассоциативные массивы</title>
                 
 
                 <para>
@@ -450,10 +450,10 @@ $sampleArray = array('firstKey'  => 'firstValue',
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.classes"><info><title>Классы</title></info>
+        <section xml:id="coding-standard.coding-style.classes"><title>Классы</title>
             
 
-            <section xml:id="coding-standard.coding-style.classes.declaration"><info><title>Определение класса</title></info>
+            <section xml:id="coding-standard.coding-style.classes.declaration"><title>Определение класса</title>
                 
 
                 <para>
@@ -487,7 +487,7 @@ class SampleClass
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.classes.member-variables"><info><title>Переменные-члены классов</title></info>
+            <section xml:id="coding-standard.coding-style.classes.member-variables"><title>Переменные-члены классов</title>
                 
 
                 <para>
@@ -507,10 +507,10 @@ class SampleClass
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.functions-and-methods"><info><title>Функции и методы</title></info>
+        <section xml:id="coding-standard.coding-style.functions-and-methods"><title>Функции и методы</title>
             
 
-            <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><info><title>Определение функций и методов</title></info>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><title>Определение функций и методов</title>
                 
 
                 <para>
@@ -598,7 +598,7 @@ class Foo
 
             </section>
 
-            <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><info><title>Использование функций и методов</title></info>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><title>Использование функций и методов</title>
                 
 
                 <para>
@@ -630,10 +630,10 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.control-statements"><info><title>Управляющие структуры</title></info>
+        <section xml:id="coding-standard.coding-style.control-statements"><title>Управляющие структуры</title>
             
 
-            <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><info><title>If / Else / Elseif</title></info>
+            <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><title>If / Else / Elseif</title>
                 
 
                 <para>
@@ -693,7 +693,7 @@ if ($a != 2) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.coding-style.control-statements.switch"><info><title>Switch</title></info>
+            <section xml:id="coding-standards.coding-style.control-statements.switch"><title>Switch</title>
                 
 
                 <para>
@@ -739,10 +739,10 @@ switch ($numPeople) {
             </section>
         </section>
 
-        <section xml:id="coding-standards.inline-documentation"><info><title>Встроенная документация</title></info>
+        <section xml:id="coding-standards.inline-documentation"><title>Встроенная документация</title>
             
 
-            <section xml:id="coding-standards.inline-documentation.documentation-format"><info><title>Формат документации</title></info>
+            <section xml:id="coding-standards.inline-documentation.documentation-format"><title>Формат документации</title>
                 
 
                 <para>
@@ -761,7 +761,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.files"><info><title>Файлы</title></info>
+            <section xml:id="coding-standards.inline-documentation.files"><title>Файлы</title>
                 
 
                 <para>
@@ -785,7 +785,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.classes"><info><title>Классы</title></info>
+            <section xml:id="coding-standards.inline-documentation.classes"><title>Классы</title>
                 
 
                 <para>
@@ -808,7 +808,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.functions"><info><title>Функции</title></info>
+            <section xml:id="coding-standards.inline-documentation.functions"><title>Функции</title>
                 
 
                 <para>

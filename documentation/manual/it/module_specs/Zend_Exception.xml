@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Utilizzo delle eccezioni</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><title>Utilizzo delle eccezioni</title>
 
     
 
@@ -7,7 +7,7 @@
         Tutte le eccezioni lanciate dalle classi del Framework Zend dovrebbero estendere la classe base Zend_Exception.
     </para>
 
-    <example xml:id="zend.exception.using.example"><info><title>Gestione di un'eccezione</title></info>
+    <example xml:id="zend.exception.using.example"><title>Gestione di un'eccezione</title>
         
         <para>
             Il codice seguente dimostra come gestire un'eccezione lanciata all'interno di una classe del Framework Zend:

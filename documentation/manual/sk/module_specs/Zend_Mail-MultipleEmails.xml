@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><info><title>Posielanie viacerých e-mailov cez jedno SMTP spojenie</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><title>Posielanie viacerých e-mailov cez jedno SMTP spojenie</title>
     
     <para>
         Pre každý posielaný e-mail je vždy vytvorené nové SMTP spojenie. Pre posielanie viacerých e-mailov cez jedno
@@ -7,7 +7,7 @@
         vytvorené SMTP spojenie pred zavolaním metódy <code>send()</code>, toto spojenie bude použité
         a nebude po odoslaní e-mailu uzatvorené:
     </para>
-    <example><info><title>Posielanie viacerých e-mailov cez jedno SMTP spojenie</title></info>
+    <example><title>Posielanie viacerých e-mailov cez jedno SMTP spojenie</title>
         
         <programlisting role="php"><![CDATA[
 <?php

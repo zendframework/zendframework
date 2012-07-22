@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.provider"><info><title>Zend_OpenId_Provider</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.provider"><title>Zend_OpenId_Provider</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         notwendig sein mit komplexeren Problemen umzugehen.
     </para>
 
-    <section xml:id="zend.openid.provider.start"><info><title>Schellstart</title></info>
+    <section xml:id="zend.openid.provider.start"><title>Schellstart</title>
         
 
         <para>
@@ -26,7 +26,7 @@
             erstellt. Man benötigt solch einen Code nicht wenn echte Identitäten verwendet werden.
         </para>
 
-        <example xml:id="zend.openid.provider.example-1"><info><title>Die Identität</title></info>
+        <example xml:id="zend.openid.provider.example-1"><title>Die Identität</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -67,7 +67,7 @@ if (!$server->hasUser(TEST_ID)) {
             konforme Anfrage sendet.
         </para>
 
-        <example xml:id="zend.openid.provider.example-2"><info><title>Einfacher Identitäts Provider</title></info>
+        <example xml:id="zend.openid.provider.example-2"><title>Einfacher Identitäts Provider</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -121,7 +121,7 @@ if (is_string($ret)) {
             </para>
         </note>
 
-        <example xml:id="zend.openid.provider.example-3"><info><title>Einfacher Login Schirm</title></info>
+        <example xml:id="zend.openid.provider.example-3"><title>Einfacher Login Schirm</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -187,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
             automatisch gehandhabt ohne einer Interaktion des Benutzers.
         </para>
 
-        <example xml:id="zend.openid.provider.example-4"><info><title>Einfacher Vertrauens Schirm</title></info>
+        <example xml:id="zend.openid.provider.example-4"><title>Einfacher Vertrauens Schirm</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -245,7 +245,7 @@ ihre Identitäts URL ist.
         </para>
     </section>
 
-    <section xml:id="zend.openid.provider.all"><info><title>Kombinierte Skripte</title></info>
+    <section xml:id="zend.openid.provider.all"><title>Kombinierte Skripte</title>
         
 
         <para>
@@ -264,7 +264,7 @@ ihre Identitäts URL ist.
             </para>
         </note>
 
-        <example xml:id="zend.openid.provider.example-5"><info><title>Alles zusammen</title></info>
+        <example xml:id="zend.openid.provider.example-5"><title>Alles zusammen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -305,7 +305,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
         </para>
     </section>
 
-    <section xml:id="zend.openid.provider.sreg"><info><title>Einfache Registrierungs Erweiterung (SREG)</title></info>
+    <section xml:id="zend.openid.provider.sreg"><title>Einfache Registrierungs Erweiterung (SREG)</title>
         
 
         <para>
@@ -316,7 +316,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
             eintragen. Die Implementierung dieses GUI würde den Rahmen dieses Handbuches sprengen.
         </para>
 
-        <example xml:id="zend.openid.provider.example-6"><info><title>Identität mit Profil</title></info>
+        <example xml:id="zend.openid.provider.example-6"><title>Identität mit Profil</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -372,7 +372,7 @@ if (!$server->hasUser(TEST_ID)) {
             Argument der <methodname>Zend_OpenId_Provider::handle()</methodname> Methode.
         </para>
 
-        <example xml:id="zend.openid.provider.example-7"><info><title>Provider mit SREG</title></info>
+        <example xml:id="zend.openid.provider.example-7"><title>Provider mit SREG</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -405,7 +405,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
         </example>
     </section>
 
-    <section xml:id="zend.openid.provider.else"><info><title>Sonst noch was?</title></info>
+    <section xml:id="zend.openid.provider.else"><title>Sonst noch was?</title>
         
 
         <para>

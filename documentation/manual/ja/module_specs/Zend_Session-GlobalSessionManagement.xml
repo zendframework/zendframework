@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.global_session_management"><info><title>グローバルセッションの管理</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.global_session_management"><title>グローバルセッションの管理</title>
 
     
 
@@ -15,7 +15,7 @@
         <methodname>Zend_Session::setOptions()</methodname> はセキュリティの問題を引き起こします。
     </para>
 
-    <section xml:id="zend.session.global_session_management.configuration_options"><info><title>設定オプション</title></info>
+    <section xml:id="zend.session.global_session_management.configuration_options"><title>設定オプション</title>
 
         
 
@@ -40,7 +40,7 @@
             で教えてください。
         </para>
 
-        <example xml:id="zend.session.global_session_management.setoptions.example"><info><title>Zend_Config による Zend_Session の設定</title></info>
+        <example xml:id="zend.session.global_session_management.setoptions.example"><title>Zend_Config による Zend_Session の設定</title>
 
             
 
@@ -134,7 +134,7 @@ Zend_Session::setOptions($config->toArray());
                         <classname>Zend_Session</classname> の開始時 (<methodname>start()</methodname> がコールされた場合)
                         に例外をスローします。
                     </para>
-                    <note><info><title>セキュリティリスク</title></info>
+                    <note><title>セキュリティリスク</title>
                         
                         <para>
                             そのパスが他のアプリケーションから読み取り可能になっていると、
@@ -177,7 +177,7 @@ Zend_Session::setOptions($config->toArray());
                         アプリケーション間で <emphasis>一意</emphasis>
                         な値を開発者側で指定する必要があります。
                     </para>
-                    <note><info><title>セキュリティリスク</title></info>
+                    <note><title>セキュリティリスク</title>
                         
                         <para>
                             <code>php.ini</code> での <code>session.name</code> の設定が同じ
@@ -193,7 +193,7 @@ Zend_Session::setOptions($config->toArray());
                         boolean <code>use_only_cookies</code> -
                         以下で説明するセキュリティリスクを回避するため、
                         このオプションはデフォルトのままにしておいてください。
-                        <note><info><title>セキュリティリスク</title></info>
+                        <note><title>セキュリティリスク</title>
                             
                             <para>
                                 もしこの設定を無効にすると、攻撃者は簡単に犠牲者のセッション
@@ -213,7 +213,7 @@ Zend_Session::setOptions($config->toArray());
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.headers_sent"><info><title>Error: Headers Already Sent</title></info>
+    <section xml:id="zend.session.global_session_management.headers_sent"><title>Error: Headers Already Sent</title>
 
         
 
@@ -277,7 +277,7 @@ Zend_Session::setOptions($config->toArray());
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.session_identifiers"><info><title>セッション識別子</title></info>
+    <section xml:id="zend.session.global_session_management.session_identifiers"><title>セッション識別子</title>
 
         
 
@@ -345,7 +345,7 @@ Zend_Session::setOptions($config->toArray());
             を使うようにしましょう。
         </para>
 
-        <section xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation"><info><title>セッションハイジャックおよびセッション固定化</title></info>
+        <section xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation"><title>セッションハイジャックおよびセッション固定化</title>
 
             
 
@@ -433,7 +433,7 @@ Zend_Session::setOptions($config->toArray());
                 ただし、上で説明した最初のふたつのステップを実行していない場合に限ります。
             </para>
 
-            <example xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example"><info><title>セッション固定化</title></info>
+            <example xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example"><title>セッション固定化</title>
 
                 
 
@@ -452,7 +452,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.rememberme"><info><title>rememberMe(integer $seconds)</title></info>
+    <section xml:id="zend.session.global_session_management.rememberme"><title>rememberMe(integer $seconds)</title>
 
         
 
@@ -473,7 +473,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.forgetme"><info><title>forgetMe()</title></info>
+    <section xml:id="zend.session.global_session_management.forgetme"><title>forgetMe()</title>
 
         
 
@@ -485,7 +485,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.sessionexists"><info><title>sessionExists()</title></info>
+    <section xml:id="zend.session.global_session_management.sessionexists"><title>sessionExists()</title>
 
         
 
@@ -499,7 +499,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.destroy"><info><title>destroy(bool $remove_cookie = true, bool $readonly = true)</title></info>
+    <section xml:id="zend.session.global_session_management.destroy"><title>destroy(bool $remove_cookie = true, bool $readonly = true)</title>
 
         
 
@@ -530,7 +530,7 @@ if (!isset($defaultNamespace->initialized)) {
             これにより、<methodname>destroy()</methodname> のコール前に出力が送信されてしまうことを防ぎます。
         </para>
 
-        <note><info><title>例外/エラー</title></info>
+        <note><title>例外/エラー</title>
             
             <para>
                 デフォルトでは <code>$readonly</code> が有効になっています。
@@ -541,7 +541,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.stop"><info><title>stop()</title></info>
+    <section xml:id="zend.session.global_session_management.stop"><title>stop()</title>
 
         
 
@@ -560,7 +560,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.writeclose"><info><title>writeClose($readonly = true)</title></info>
+    <section xml:id="zend.session.global_session_management.writeclose"><title>writeClose($readonly = true)</title>
 
         
 
@@ -573,7 +573,7 @@ if (!isset($defaultNamespace->initialized)) {
             のメソッドから書き込みを試みると、例外をスローします)。
         </para>
 
-        <note><info><title>例外/エラー</title></info>
+        <note><title>例外/エラー</title>
             
             <para>
                 デフォルトでは <code>$readonly</code> が有効になっています。
@@ -589,7 +589,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.expiresessioncookie"><info><title><code>expireSessionCookie()</code></title></info>
+    <section xml:id="zend.session.global_session_management.expiresessioncookie"><title><code>expireSessionCookie()</code></title>
 
         
 
@@ -601,7 +601,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.savehandler"><info><title>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</title></info>
+    <section xml:id="zend.session.global_session_management.savehandler"><title>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</title>
 
         
 
@@ -615,7 +615,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.namespaceisset"><info><title>namespaceIsset($namespace)</title></info>
+    <section xml:id="zend.session.global_session_management.namespaceisset"><title>namespaceIsset($namespace)</title>
 
         
 
@@ -624,7 +624,7 @@ if (!isset($defaultNamespace->initialized)) {
             あるいは、特定の名前空間に特定のインデックスが存在するかどうかを調べます。
         </para>
 
-        <note><info><title>例外/エラー</title></info>
+        <note><title>例外/エラー</title>
             
             <para>
                 <classname>Zend_Session</classname> が読み取り可能に設定されていない場合
@@ -635,7 +635,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.namespaceunset"><info><title>namespaceUnset($namespace)</title></info>
+    <section xml:id="zend.session.global_session_management.namespaceunset"><title>namespaceUnset($namespace)</title>
 
         
 
@@ -654,7 +654,7 @@ if (!isset($defaultNamespace->initialized)) {
             を参照ください。
         </para>
 
-        <note><info><title>例外/エラー</title></info>
+        <note><title>例外/エラー</title>
             
             <para>
                 名前空間が読み取り可能に設定されていない場合
@@ -665,7 +665,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.namespaceget"><info><title>namespaceGet($namespace)</title></info>
+    <section xml:id="zend.session.global_session_management.namespaceget"><title>namespaceGet($namespace)</title>
 
         
 
@@ -679,7 +679,7 @@ if (!isset($defaultNamespace->initialized)) {
             ……っていうか、どんなネタでもいいのでメーリングリストに参加してください (^o^)
         </para>
 
-        <note><info><title>例外/エラー</title></info>
+        <note><title>例外/エラー</title>
             
             <para>
                 <classname>Zend_Session</classname> が読み取り可能に設定されていない場合
@@ -690,7 +690,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.getiterator"><info><title>getIterator()</title></info>
+    <section xml:id="zend.session.global_session_management.getiterator"><title>getIterator()</title>
 
         
 
@@ -698,7 +698,7 @@ if (!isset($defaultNamespace->initialized)) {
             <methodname>getIterator()</methodname> を使用して、全名前空間の名前を含む配列を取得します。
         </para>
 
-        <note><info><title>例外/エラー</title></info>
+        <note><title>例外/エラー</title>
             
             <para>
                 <classname>Zend_Session</classname> が読み取り可能に設定されていない場合

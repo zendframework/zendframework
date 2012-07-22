@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.twitter"><info><title>Zend_Service_Twitter</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.twitter"><title>Zend_Service_Twitter</title>
     
 
-    <section xml:id="zend.service.twitter.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.service.twitter.introduction"><title>Einführung</title>
         
 
         <para>
@@ -81,7 +81,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.twitter.authentication"><info><title>Authentifizierung</title></info>
+    <section xml:id="zend.service.twitter.authentication"><title>Authentifizierung</title>
         
 
         <para>
@@ -93,7 +93,7 @@
             verwendet wird ist <classname>Zend_OAuth</classname>.
         </para>
 
-        <example xml:id="zend.service.twitter.authentication.example"><info><title>Erstellung der Twitter Klasse</title></info>
+        <example xml:id="zend.service.twitter.authentication.example"><title>Erstellung der Twitter Klasse</title>
             
 
             <para>
@@ -178,7 +178,7 @@ $response = $twitter->account->verifyCredentials();
         </note>
     </section>
 
-    <section xml:id="zend.service.twitter.account"><info><title>Account Methoden</title></info>
+    <section xml:id="zend.service.twitter.account"><title>Account Methoden</title>
         
 
         <itemizedlist>
@@ -188,7 +188,7 @@ $response = $twitter->account->verifyCredentials();
                     angegebenen Benutzerdaten gültig sind, und das mit einem minimalen Overhead.
                 </para>
 
-                <example xml:id="zend.service.twitter.account.verifycredentails"><info><title>Die Angaben prüfen</title></info>
+                <example xml:id="zend.service.twitter.account.verifycredentails"><title>Die Angaben prüfen</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -207,7 +207,7 @@ $response = $twitter->account->verifyCredentials();
                     Clientanwendung ab.
                 </para>
 
-                <example xml:id="zend.service.twitter.account.endsession"><info><title>Beenden von Sessions</title></info>
+                <example xml:id="zend.service.twitter.account.endsession"><title>Beenden von Sessions</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -228,7 +228,7 @@ $response = $twitter->account->endSession();
                     ist.
                 </para>
 
-                <example xml:id="zend.service.twitter.account.ratelimitstatus"><info><title>Status des Rating Limits</title></info>
+                <example xml:id="zend.service.twitter.account.ratelimitstatus"><title>Status des Rating Limits</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -243,7 +243,7 @@ $response = $twitter->account->rateLimitStatus();
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.twitter.status"><info><title>Status Methoden</title></info>
+    <section xml:id="zend.service.twitter.status"><title>Status Methoden</title>
         
 
         <itemizedlist>
@@ -254,7 +254,7 @@ $response = $twitter->account->rateLimitStatus();
                     öffentliche Zeitlinie wird von Twitter alle 60 Sekunden gecacht.
                 </para>
 
-                <example xml:id="zend.service.twitter.status.publictimeline"><info><title>Empfangen der öffentlichen Zeitlinie</title></info>
+                <example xml:id="zend.service.twitter.status.publictimeline"><title>Empfangen der öffentlichen Zeitlinie</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -273,7 +273,7 @@ $response = $twitter->status->publicTimeline();
                     zurück die von authentifizierten Benutzer und deren Freunde gesendet wurden.
                 </para>
 
-                <example xml:id="zend.service.twitter.status.friendstimeline"><info><title>Empfangen der Zeitlinie von Freunden</title></info>
+                <example xml:id="zend.service.twitter.status.friendstimeline"><title>Empfangen der Zeitlinie von Freunden</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -313,7 +313,7 @@ $response = $twitter->status->friendsTimeline();
                     zurück die von authentifizierten Benutzern geschrieben wurden.
                 </para>
 
-                <example xml:id="zend.service.twitter.status.usertimeline"><info><title>Empfangen der Zeitlinie von Benutzern</title></info>
+                <example xml:id="zend.service.twitter.status.usertimeline"><title>Empfangen der Zeitlinie von Benutzern</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -368,7 +368,7 @@ $response = $twitter->status->userTimeline();
                     zurückgegeben.
                 </para>
 
-                <example xml:id="zend.service.twitter.status.show"><info><title>Den Status eines Benutzers sehen</title></info>
+                <example xml:id="zend.service.twitter.status.show"><title>Den Status eines Benutzers sehen</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -388,7 +388,7 @@ $response = $twitter->status->show(1234);
                     den man an Twitter übermitteln will.
                 </para>
 
-                <example xml:id="zend.service.twitter.status.update"><info><title>Aktualisieren des Benutzerstatus</title></info>
+                <example xml:id="zend.service.twitter.status.update"><title>Aktualisieren des Benutzerstatus</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -422,7 +422,7 @@ $response = $twitter->status->update('Mein größter Tweet');
                     Benutzer zurück.
                 </para>
 
-                <example xml:id="zend.service.twitter.status.replies"><info><title>Zeigt Benutzerantworten</title></info>
+                <example xml:id="zend.service.twitter.status.replies"><title>Zeigt Benutzerantworten</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -469,7 +469,7 @@ $response = $twitter->status->replies();
                     <code>id</code> Parameter spezifiziert ist.
                 </para>
 
-                <example xml:id="zend.service.twitter.status.destroy"><info><title>Löschen eines Benutzerstatus</title></info>
+                <example xml:id="zend.service.twitter.status.destroy"><title>Löschen eines Benutzerstatus</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -484,7 +484,7 @@ $response = $twitter->status->destroy(12345);
         </itemizedlist>
     </section>
 
-     <section xml:id="zend.service.twitter.user"><info><title>Benutzermethoden</title></info>
+     <section xml:id="zend.service.twitter.user"><title>Benutzermethoden</title>
         
 
         <itemizedlist>
@@ -495,7 +495,7 @@ $response = $twitter->status->destroy(12345);
                     aktuellen Status.
                 </para>
 
-                <example xml:id="zend.service.twitter.user.friends"><info><title>Empfangen von Benutzerfreunden</title></info>
+                <example xml:id="zend.service.twitter.user.friends"><title>Empfangen von Benutzerfreunden</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -542,7 +542,7 @@ $response = $twitter->user->friends();
                     Benutzers zurück, und jeden von Ihnen mit seinem aktuellen Status.
                 </para>
 
-                <example xml:id="zend.service.twitter.user.followers"><info><title>Empfangen der Verfolger eines Benutzers</title></info>
+                <example xml:id="zend.service.twitter.user.followers"><title>Empfangen der Verfolger eines Benutzers</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -582,7 +582,7 @@ $response = $twitter->user->followers();
                     spezifiziert wird wie durch den anbei benötigten <code>id</code> Parameter.
                 </para>
 
-                <example xml:id="zend.service.twitter.user.show"><info><title>Zeigt Benutzerinformationen</title></info>
+                <example xml:id="zend.service.twitter.user.show"><title>Zeigt Benutzerinformationen</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -597,7 +597,7 @@ $response = $twitter->user->show('myfriend');
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.twitter.directmessage"><info><title>Methoden zur direkten Benachrichtigung</title></info>
+    <section xml:id="zend.service.twitter.directmessage"><title>Methoden zur direkten Benachrichtigung</title>
         
 
         <itemizedlist>
@@ -607,7 +607,7 @@ $response = $twitter->user->show('myfriend');
                     Nachrichten für den authentifizierten Benutzer zurück.
                 </para>
 
-                <example xml:id="zend.service.twitter.directmessage.messages"><info><title>Empfangen der letzten empfangenen direkten Nachrichten</title></info>
+                <example xml:id="zend.service.twitter.directmessage.messages"><title>Empfangen der letzten empfangenen direkten Nachrichten</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -654,7 +654,7 @@ $response = $twitter->directMessage->messages();
                     Nachrichten zurück die vom authentifizierten Benutzer gesendet wurden.
                 </para>
 
-                <example xml:id="zend.service.twitter.directmessage.sent"><info><title>Empfangen der letzten gesendeten direkten Nachrichten</title></info>
+                <example xml:id="zend.service.twitter.directmessage.sent"><title>Empfangen der letzten gesendeten direkten Nachrichten</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -702,7 +702,7 @@ $response = $twitter->directMessage->sent();
                     Benutzer also auch den Text Parameter wie unten gezeigt.
                 </para>
 
-                <example xml:id="zend.service.twitter.directmessage.new"><info><title>Senden einer direkten Nachricht</title></info>
+                <example xml:id="zend.service.twitter.directmessage.new"><title>Senden einer direkten Nachricht</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -722,7 +722,7 @@ $response = $twitter->directMessage->new('myfriend', 'mymessage');
                     Benutzer muß der Empfänger der spezifizierten direkten Nachricht sein.
                 </para>
 
-                <example xml:id="zend.service.twitter.directmessage.destroy"><info><title>Löschen einer direkten Nachricht</title></info>
+                <example xml:id="zend.service.twitter.directmessage.destroy"><title>Löschen einer direkten Nachricht</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -737,7 +737,7 @@ $response = $twitter->directMessage->destroy(123548);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.twitter.friendship"><info><title>Methoden für die Freundschaft</title></info>
+    <section xml:id="zend.service.twitter.friendship"><title>Methoden für die Freundschaft</title>
         
 
         <itemizedlist>
@@ -747,7 +747,7 @@ $response = $twitter->directMessage->destroy(123548);
                     spezifizierten Benutzer mit dem authentifizierten Benutzer.
                 </para>
 
-                <example xml:id="zend.service.twitter.friendship.create"><info><title>Erstellung eines Freundes</title></info>
+                <example xml:id="zend.service.twitter.friendship.create"><title>Erstellung eines Freundes</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -767,7 +767,7 @@ $response = $twitter->friendship->create('mynewfriend');
                     Benutzer.
                 </para>
 
-                <example xml:id="zend.service.twitter.friendship.destroy"><info><title>Löschen eines Freundes</title></info>
+                <example xml:id="zend.service.twitter.friendship.destroy"><title>Löschen eines Freundes</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -787,7 +787,7 @@ $response = $twitter->friendship->destroy('myoldfriend');
                     Benutzer existiert.
                 </para>
 
-                <example xml:id="zend.service.twitter.friendship.exists"><info><title>Prüfen ob eine Freundschaft existiert</title></info>
+                <example xml:id="zend.service.twitter.friendship.exists"><title>Prüfen ob eine Freundschaft existiert</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -802,7 +802,7 @@ $response = $twitter->friendship->exists('myfriend');
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.twitter.favorite"><info><title>Methoden für Favoriten</title></info>
+    <section xml:id="zend.service.twitter.favorite"><title>Methoden für Favoriten</title>
         
 
         <itemizedlist>
@@ -813,7 +813,7 @@ $response = $twitter->friendship->exists('myfriend');
                     Benutzer zurück.
                 </para>
 
-                <example xml:id="zend.service.twitter.favorite.favorites"><info><title>Favoriten empfangen</title></info>
+                <example xml:id="zend.service.twitter.favorite.favorites"><title>Favoriten empfangen</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -853,7 +853,7 @@ $response = $twitter->favorite->favorites();
                     Parameter spezifizierten Status für den authentifizierten Benutzer
                 </para>
 
-                <example xml:id="zend.service.twitter.favorite.create"><info><title>Favoriten erstellen</title></info>
+                <example xml:id="zend.service.twitter.favorite.create"><title>Favoriten erstellen</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -873,7 +873,7 @@ $response = $twitter->favorite->create(12351);
                     Benutzer.
                 </para>
 
-                <example xml:id="zend.service.twitter.favorite.destroy"><info><title>Entfernt Favoriten</title></info>
+                <example xml:id="zend.service.twitter.favorite.destroy"><title>Entfernt Favoriten</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -888,7 +888,7 @@ $response = $twitter->favorite->destroy(12351);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.twitter.block"><info><title>Blockierende Methoden</title></info>
+    <section xml:id="zend.service.twitter.block"><title>Blockierende Methoden</title>
         
 
         <itemizedlist>
@@ -899,7 +899,7 @@ $response = $twitter->favorite->destroy(12351);
                     Benutzers zurückgeben wenn ein Block existiert.
                 </para>
 
-                <example xml:id="zend.service.twitter.block.exists"><info><title>Prüfen ob ein Block existiert</title></info>
+                <example xml:id="zend.service.twitter.block.exists"><title>Prüfen ob ein Block existiert</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -940,7 +940,7 @@ $response2 = $twitter->block->exists('blockeduser', true);
                     Benutzer im angeforderten Format zurück wenn es erfolgreich war
                 </para>
 
-                <example xml:id="zend.service.twitter.block.create"><info><title>Einen Benutzer blockieren</title></info>
+                <example xml:id="zend.service.twitter.block.create"><title>Einen Benutzer blockieren</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -961,7 +961,7 @@ $response = $twitter->block->create('usertoblock);
                     diese erfolgreich war.
                 </para>
 
-                <example xml:id="zend.service.twitter.block.destroy"><info><title>Entfernung einer Blockierung</title></info>
+                <example xml:id="zend.service.twitter.block.destroy"><title>Entfernung einer Blockierung</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -980,7 +980,7 @@ $response = $twitter->block->destroy('blockeduser');
                     die der authentifizierte Benutzer blockiert.
                 </para>
 
-                <example xml:id="zend.service.twitter.block.blocking"><info><title>Wen blockiert man</title></info>
+                <example xml:id="zend.service.twitter.block.blocking"><title>Wen blockiert man</title>
                     
 
                     <programlisting language="php"><![CDATA[

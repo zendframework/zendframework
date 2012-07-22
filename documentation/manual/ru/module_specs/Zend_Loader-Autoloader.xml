@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader"><info><title>Автозагрузчик</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader"><title>Автозагрузчик</title>
     
 
     <para>
@@ -37,7 +37,7 @@
         в любой момент выполнения, когда это необходимо.
     </para>
 
-    <section xml:id="zend.loader.autoloader.usage"><info><title>Использование автозагрузчика</title></info>
+    <section xml:id="zend.loader.autoloader.usage"><title>Использование автозагрузчика</title>
         
 
         <para>
@@ -64,7 +64,7 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->registerNamespace('My_');
 ]]></programlisting>
 
-        <note><info><title>Префиксы пространств имен</title></info>
+        <note><title>Префиксы пространств имен</title>
             
 
             <para>
@@ -140,7 +140,7 @@ $autoloader->setFallbackAutoloader(true);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.autoloader.interface"><info><title>Итерфейс автозагрузчика</title></info>
+    <section xml:id="zend.loader.autoloader.interface"><title>Итерфейс автозагрузчика</title>
         
 
         <para>
@@ -171,7 +171,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.autoloader.reference"><info><title>Справка по автозагрузчику</title></info>
+    <section xml:id="zend.loader.autoloader.reference"><title>Справка по автозагрузчику</title>
         
 
         <para>
@@ -179,7 +179,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
             <classname>Zend_Loader_Autoloader</classname>.
         </para>
 
-        <table xml:id="zend.loader.autoloader.reference.api"><info><title>Методы Zend_Loader_Autoloader-а</title></info>
+        <table xml:id="zend.loader.autoloader.reference.api"><title>Методы Zend_Loader_Autoloader-а</title>
             
             <tgroup cols="4">
                 <thead>

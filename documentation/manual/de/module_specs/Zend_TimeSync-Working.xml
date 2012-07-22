@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.working"><info><title>Arbeiten mit Zend_TimeSync</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.working"><title>Arbeiten mit Zend_TimeSync</title>
     
 
     <para>
@@ -19,7 +19,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.timesync.working.generic"><info><title>Generelle Anfragen von Zeitserver</title></info>
+    <section xml:id="zend.timesync.working.generic"><title>Generelle Anfragen von Zeitserver</title>
         
 
         <para>
@@ -50,7 +50,7 @@ print $server->getDate()->getIso();
         </para>
     </section>
 
-    <section xml:id="zend.timesync.working.multiple"><info><title>Mehrere Zeitserver</title></info>
+    <section xml:id="zend.timesync.working.multiple"><title>Mehrere Zeitserver</title>
         
 
         <para>
@@ -105,7 +105,7 @@ print $server->getDate()->getIso();
         </para>
     </section>
 
-    <section xml:id="zend.timesync.working.protocol"><info><title>Protokolle von Zeitservern</title></info>
+    <section xml:id="zend.timesync.working.protocol"><title>Protokolle von Zeitservern</title>
         
 
         <para>
@@ -139,7 +139,7 @@ print $server->getDate()->getIso();
         </para>
     </section>
 
-    <section xml:id="zend.timesync.working.ports"><info><title>Ports für Zeitserver verwenden</title></info>
+    <section xml:id="zend.timesync.working.ports"><title>Ports für Zeitserver verwenden</title>
         
 
         <para>
@@ -164,7 +164,7 @@ print $server->getDate()->getIso();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.timesync.working.options"><info><title>Optionen für Zeitserver</title></info>
+    <section xml:id="zend.timesync.working.options"><title>Optionen für Zeitserver</title>
         
 
         <para>
@@ -208,7 +208,7 @@ print "Timeout = " . Zend_TimeSync::getOptions('timeout');
         </para>
     </section>
 
-    <section xml:id="zend.timesync.working.different"><info><title>Verschiedene Zeitserver verwenden</title></info>
+    <section xml:id="zend.timesync.working.different"><title>Verschiedene Zeitserver verwenden</title>
         
 
         <para>
@@ -232,7 +232,7 @@ $server = $server->setServer('additional');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.timesync.working.informations"><info><title>Informationen von Zeitservern</title></info>
+    <section xml:id="zend.timesync.working.informations"><title>Informationen von Zeitservern</title>
         
 
         <para>
@@ -254,7 +254,7 @@ print_r ($server->getInfo());
         </para>
     </section>
 
-    <section xml:id="zend.timesync.working.exceptions"><info><title>Behandeln von Ausnahmen</title></info>
+    <section xml:id="zend.timesync.working.exceptions"><title>Behandeln von Ausnahmen</title>
         
 
         <para>

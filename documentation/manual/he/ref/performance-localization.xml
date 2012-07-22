@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><info><title>גלובאליזציה (i18n) ותמיכה בשפות שונות (l10n)</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><title>גלובאליזציה (i18n) ותמיכה בשפות שונות (l10n)</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         למרות זאת, זה בדרך כלל מגיע עם בעיות משמעותיות בביצועי המערכת. להלן כמה דרכים שניתן למנוע את בעיות הביצועים שנגרמים עקב שימוש בגלובאליזציה ותמיכה בשפות שונות בעת פיתוח המערכת.
     </para>
 
-    <section xml:id="performance.localization.translationadapter"><info><title>באיזו מתאם תרגום כדי לי להשתמש?</title></info>
+    <section xml:id="performance.localization.translationadapter"><title>באיזו מתאם תרגום כדי לי להשתמש?</title>
         
 
         <para>
@@ -17,7 +17,7 @@
             בנוסף, יתכן ומסיבות פיתוח שלכם תדרשו להשתמש במתאם תרגום מסויים. למרות שאם יש לכם את אפשרות הבחירה, איזה מתאם הוא המהיר ביותר?
         </para>
 
-        <section xml:id="performance.localization.translationadapter.fastest"><info><title>השתמשו במתאם תרגום ללא שימוש ב XML למיטב הביצועים והמהירות</title></info>
+        <section xml:id="performance.localization.translationadapter.fastest"><title>השתמשו במתאם תרגום ללא שימוש ב XML למיטב הביצועים והמהירות</title>
             
 
             <para>
@@ -54,7 +54,7 @@
         </section>
     </section>
 
-    <section xml:id="performance.localization.cache"><info><title>כיצד ניתן להאיץ את התרגום והמתאמים אף יותר?</title></info>
+    <section xml:id="performance.localization.cache"><title>כיצד ניתן להאיץ את התרגום והמתאמים אף יותר?</title>
         
 
         <para>
@@ -62,7 +62,7 @@
             או שאולי תרצו להאיץ את הדברים אף יותר. איך תוכלו לעשות זאת?
         </para>
 
-        <section xml:id="performance.localization.cache.usage"><info><title>שימוש במטמון</title></info>
+        <section xml:id="performance.localization.cache.usage"><title>שימוש במטמון</title>
             
 
             <para>

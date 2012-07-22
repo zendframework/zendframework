@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.indexing"><info><title>Indexation</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.indexing"><title>Indexation</title>
     
 
     <para>
@@ -16,7 +16,7 @@ $index->addDocument($doc);
         manuellement.
     </para>
 
-    <example xml:id="learning.lucene.indexing.doc-creation"><info><title>Construction manuel de document</title></info>
+    <example xml:id="learning.lucene.indexing.doc-creation"><title>Construction manuel de document</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -33,7 +33,7 @@ $doc->addField(Zend_Search_Lucene_Field::binary('avatar', $avatarData));
         Microsoft Office 2007 :
     </para>
 
-    <example xml:id="learning.lucene.indexing.doc-loading"><info><title>Chargement de document</title></info>
+    <example xml:id="learning.lucene.indexing.doc-loading"><title>Chargement de document</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -49,7 +49,7 @@ $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($path);
         étendu manuellement avec des champs définis par l'utilisateur.
     </para>
 
-    <section xml:id="learning.lucene.indexing.policy"><info><title>Politique d'indexation</title></info>
+    <section xml:id="learning.lucene.indexing.policy"><title>Politique d'indexation</title>
         
 
         <para>
@@ -83,7 +83,7 @@ $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($path);
             Les optimisations complètes d'index doivent être appliquées après l'indexation.
         </para>
 
-        <example xml:id="learning.lucene.indexing.optimization"><info><title>Optimisation d'index</title></info>
+        <example xml:id="learning.lucene.indexing.optimization"><title>Optimisation d'index</title>
             
 
             <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>简介</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><title>简介</title>
     
 
     <para>
@@ -29,7 +29,7 @@
          通过规范和访问控制列表（ACL）的使用，应用软件可以控制角色（roles）如何来访问资源（resources）。
     </para>
 
-    <section xml:id="zend.acl.introduction.resources"><info><title>关于资源(Resource)</title></info>
+    <section xml:id="zend.acl.introduction.resources"><title>关于资源(Resource)</title>
         
         <para>
             在 Zend_Acl 中，创建一个 resource 非常简单。Zend_Acl 提供了 resource
@@ -49,7 +49,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.acl.introduction.roles"><info><title>关于角色(Role)</title></info>
+    <section xml:id="zend.acl.introduction.roles"><title>关于角色(Role)</title>
         
         <para>
             象 Resources 一样，创建一个 role 也非常简单。 Zend_Acl 提供了 <code>Zend_Acl_Role_Interface</code> 使开发者创建 roles 非常容易。
@@ -64,7 +64,7 @@
         <para>
            虽然从多重角色继承的能力非常有用，但是多重继承也带来了一定程度的复杂性。下面的例子来示例含糊情形和Zend_Acl如何解决它。
         </para>
-        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>角色之间的多重继承</title></info>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>角色之间的多重继承</title>
             
             <para>
                下面的代码定义了三个基本角色 - "<code>guest</code>", "<code>member</code>", 和 "<code>admin</code>" -
@@ -115,7 +115,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.creating"><info><title>创建访问控制列表(ACL)</title></info>
+    <section xml:id="zend.acl.introduction.creating"><title>创建访问控制列表(ACL)</title>
         
 
         <para>
@@ -135,7 +135,7 @@ $acl = new Zend_Acl();
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.role_registry"><info><title>注册角色(Role)</title></info>
+    <section xml:id="zend.acl.introduction.role_registry"><title>注册角色(Role)</title>
         
 
         <para>
@@ -145,7 +145,7 @@ $acl = new Zend_Acl();
             这组许可可以被表示为一个 role 注册表，允许每个组从“”组继承权限，也可以为单一的组提供独特的权限。这些许可可以表示如下：
          </para>
 
-        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>一个CMS范例的访问控制</title></info>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><title>一个CMS范例的访问控制</title>
           
           <tgroup cols="3">
             <thead>
@@ -210,7 +210,7 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
 
     </section>
 
-    <section xml:id="zend.acl.introduction.defining"><info><title>定义访问控制</title></info>
+    <section xml:id="zend.acl.introduction.defining"><title>定义访问控制</title>
         
 
         <para>
@@ -264,7 +264,7 @@ $acl->allow('administrator');
 
     </section>
 
-    <section xml:id="zend.acl.introduction.querying"><info><title>查询 ACL</title></info>
+    <section xml:id="zend.acl.introduction.querying"><title>查询 ACL</title>
         
 
         <para>

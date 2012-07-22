@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.savehandler.dbtable"><info><title>Zend_Session_SaveHandler_DbTable</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.savehandler.dbtable"><title>Zend_Session_SaveHandler_DbTable</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         そして data が、セッションに保存されているデータをシリアライズしたものです。
     </para>
 
-    <example xml:id="zend.session.savehandler.dbtable.basic"><info><title>基本的な設定</title></info>
+    <example xml:id="zend.session.savehandler.dbtable.basic"><title>基本的な設定</title>
             
 
             <programlisting language="SQL"><![CDATA[
@@ -61,7 +61,7 @@ Zend_Session::start();
         複数カラムの主キーを使用することもできます。
     </para>
 
-    <example xml:id="zend.session.savehandler.dbtable.multi-column-key"><info><title>複数カラムの主キーの使用</title></info>
+    <example xml:id="zend.session.savehandler.dbtable.multi-column-key"><title>複数カラムの主キーの使用</title>
         
 
         <programlisting language="SQL"><![CDATA[

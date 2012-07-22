@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.basic_usage"><info><title>基本的な使用法</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.basic_usage"><title>基本的な使用法</title>
 
     
 
@@ -34,7 +34,7 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
         のインスタンスに関連しないキーに限るようにしましょう。
     </para>
 
-    <section xml:id="zend.session.basic_usage.basic_examples"><info><title>チュートリアル</title></info>
+    <section xml:id="zend.session.basic_usage.basic_examples"><title>チュートリアル</title>
 
         
 
@@ -48,7 +48,7 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
             セッション内でのクライアントからのリクエストの回数を数えるものです。
         </para>
 
-        <example xml:id="zend.session.basic_usage.basic_examples.example.counting_page_views"><info><title>ページビューの数え方</title></info>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.counting_page_views"><title>ページビューの数え方</title>
 
             
 
@@ -85,7 +85,7 @@ echo "このセッションでページがリクエストされた回数: ",
             Zend Framework に同梱されるコアコンポーネントだけです。
         </para>
 
-        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.new"><info><title>新しい方法: 名前空間の衝突を避ける</title></info>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.new"><title>新しい方法: 名前空間の衝突を避ける</title>
 
             
 
@@ -106,7 +106,7 @@ $webServiceNamespace->user = "mywebusername";
             ただ、上の例ではセッションデータがそれぞれの名前空間でカプセル化されています。
         </para>
 
-        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.old"><info><title>古い方法: PHP のセッションへのアクセス</title></info>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.old"><title>古い方法: PHP のセッションへのアクセス</title>
 
             
 
@@ -119,7 +119,7 @@ $_SESSION['Some_Web_Service']['user'] = "mywebusername";
 
     </section>
 
-    <section xml:id="zend.session.basic_usage.iteration"><info><title>セッション名前空間の順次処理</title></info>
+    <section xml:id="zend.session.basic_usage.iteration"><title>セッション名前空間の順次処理</title>
 
         
 
@@ -129,7 +129,7 @@ $_SESSION['Some_Web_Service']['user'] = "mywebusername";
             を完全に実装しており、<code>foreach</code> 文をサポートしています。
         </para>
 
-        <example xml:id="zend.session.basic_usage.iteration.example"><info><title>セッションの順次処理</title></info>
+        <example xml:id="zend.session.basic_usage.iteration.example"><title>セッションの順次処理</title>
 
             
 
@@ -146,7 +146,7 @@ foreach ($aNamespace as $index => $value) {
 
     </section>
 
-    <section xml:id="zend.session.basic_usage.accessors"><info><title>セッション名前空間へのアクセス方法</title></info>
+    <section xml:id="zend.session.basic_usage.accessors"><title>セッション名前空間へのアクセス方法</title>
 
         
 
@@ -158,7 +158,7 @@ foreach ($aNamespace as $index => $value) {
             次の例に示すように、通常の演算の際に自動的にコールされることになります。
         </para>
 
-        <example xml:id="zend.session.basic_usage.accessors.example"><info><title>セッションデータへのアクセス</title></info>
+        <example xml:id="zend.session.basic_usage.accessors.example"><title>セッションデータへのアクセス</title>
 
             
 

@@ -16,7 +16,7 @@ use stdClass;
 use Zend\ModuleManager\Listener\ConfigListener;
 use Zend\ModuleManager\Listener\ServiceListener;
 use Zend\ModuleManager\ModuleEvent;
-use Zend\ServiceManager\Configuration as ServiceConfiguration;
+use Zend\ServiceManager\Config as ServiceConfig;
 use Zend\ServiceManager\ServiceManager;
 
 class ServiceListenerTest extends TestCase
@@ -36,7 +36,7 @@ class ServiceListenerTest extends TestCase
     {
         $this->services = new ServiceManager();
         $this->listener = new ServiceListener($this->services);
-        $this->listener->addServiceManager($this->services, 'service_manager', 'Zend\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfiguration');
+        $this->listener->addServiceManager($this->services, 'service_manager', 'Zend\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfig');
         $this->event    = new ModuleEvent();
         $this->configListener = new ConfigListener();
         $this->event->setConfigListener($this->configListener);
@@ -64,7 +64,7 @@ class ServiceListenerTest extends TestCase
         }
     }
 
-    public function getServiceConfiguration()
+    public function getServiceConfig()
     {
         return array(
             'invokables' => array(__CLASS__ => __CLASS__),
@@ -87,7 +87,7 @@ class ServiceListenerTest extends TestCase
     public function assertServiceManagerIsConfigured()
     {
         $this->listener->onLoadModulesPost($this->event);
-        foreach ($this->getServiceConfiguration() as $prop => $expected) {
+        foreach ($this->getServiceConfig() as $prop => $expected) {
             if ($prop == 'invokables') {
                 $prop = 'invokableClasses';
                 foreach ($expected as $key => $value) {
@@ -106,7 +106,7 @@ class ServiceListenerTest extends TestCase
 
     public function testModuleReturningArrayConfiguresServiceManager()
     {
-        $config = $this->getServiceConfiguration();
+        $config = $this->getServiceConfig();
         $module = new TestAsset\ServiceProviderModule($config);
         $this->event->setModule($module);
         $this->listener->onLoadModule($this->event);
@@ -115,7 +115,7 @@ class ServiceListenerTest extends TestCase
 
     public function testModuleReturningTraversableConfiguresServiceManager()
     {
-        $config = $this->getServiceConfiguration();
+        $config = $this->getServiceConfig();
         $config = new ArrayObject($config);
         $module = new TestAsset\ServiceProviderModule($config);
         $this->event->setModule($module);
@@ -123,19 +123,19 @@ class ServiceListenerTest extends TestCase
         $this->assertServiceManagerIsConfigured();
     }
 
-    public function testModuleReturningServiceConfigurationConfiguresServiceManager()
+    public function testModuleReturningServiceConfigConfiguresServiceManager()
     {
-        $config = $this->getServiceConfiguration();
-        $config = new ServiceConfiguration($config);
+        $config = $this->getServiceConfig();
+        $config = new ServiceConfig($config);
         $module = new TestAsset\ServiceProviderModule($config);
         $this->event->setModule($module);
         $this->listener->onLoadModule($this->event);
         $this->assertServiceManagerIsConfigured();
     }
 
-    public function testMergedConfigurationContainingServiceManagerKeyWillConfigureServiceManagerPostLoadModules()
+    public function testMergedConfigContainingServiceManagerKeyWillConfigureServiceManagerPostLoadModules()
     {
-        $config = array('service_manager' => $this->getServiceConfiguration());
+        $config = array('service_manager' => $this->getServiceConfig());
         $configListener = new ConfigListener();
         $configListener->setMergedConfig($config);
         $this->event->setConfigListener($configListener);

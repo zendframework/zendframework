@@ -19,6 +19,14 @@ use Traversable;
 abstract class AbstractOptions implements ParameterObjectInterface
 {
     /**
+     * We use the __ prefix to avoid collisions with properties in
+     * user-implmentations.
+     *
+     * @var bool
+     */
+    protected $__strictMode__ = true;
+
+    /**
      * @param  array|Traversable|null $options
      * @return AbstractOptions
      * @throws Exception\InvalidArgumentException
@@ -49,43 +57,23 @@ abstract class AbstractOptions implements ParameterObjectInterface
     }
 
     /**
-     * @param string $key name of option with underscore
-     * @return string name of setter method
-     * @throws Exception\BadMethodCallException if setter method is undefined
+     * Cast to array
+     *
+     * @return array
      */
-    protected function assembleSetterNameFromKey($key)
+    public function toArray()
     {
-        $parts = explode('_', $key);
-        $parts = array_map('ucfirst', $parts);
-        $setter = 'set' . implode('', $parts);
-        if (!method_exists($this, $setter)) {
-            throw new Exception\BadMethodCallException(
-                'The option "' . $key . '" does not '
-                . 'have a matching ' . $setter . ' setter method '
-                . 'which must be defined'
-            );
+        $array = array();
+        $transform = function($letters) {
+            $letter = array_shift($letters);
+            return '_' . strtolower($letter);
+        };
+        foreach ($this as $key => $value) {
+            if ($key === '__strictMode__') continue;
+            $normalizedKey = preg_replace_callback('/([A-Z])/', $transform, $key);
+            $array[$normalizedKey] = $value;
         }
-        return $setter;
-    }
-
-    /**
-     * @param string $key name of option with underscore
-     * @return string name of getter method
-     * @throws Exception\BadMethodCallException if getter method is undefined
-     */
-    protected function assembleGetterNameFromKey($key)
-    {
-        $parts = explode('_', $key);
-        $parts = array_map('ucfirst', $parts);
-        $getter = 'get' . implode('', $parts);
-        if (!method_exists($this, $getter)) {
-            throw new Exception\BadMethodCallException(
-                'The option "' . $key . '" does not '
-                . 'have a matching ' . $getter . ' getter method '
-                . 'which must be defined'
-            );
-        }
-        return $getter;
+        return $array;
     }
 
     /**
@@ -96,7 +84,16 @@ abstract class AbstractOptions implements ParameterObjectInterface
      */
     public function __set($key, $value)
     {
-        $setter = $this->assembleSetterNameFromKey($key);
+        $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+        if ($this->__strictMode__ && !method_exists($this, $setter)) {
+            throw new Exception\BadMethodCallException(
+                'The option "' . $key . '" does not '
+                . 'have a matching ' . $setter . ' setter method '
+                . 'which must be defined'
+            );
+        } elseif (!$this->__strictMode__ && !method_exists($this, $setter)) {
+            return;
+        }
         $this->{$setter}($value);
     }
 
@@ -107,7 +104,14 @@ abstract class AbstractOptions implements ParameterObjectInterface
      */
     public function __get($key)
     {
-        $getter = $this->assembleGetterNameFromKey($key);
+        $getter = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+        if (!method_exists($this, $getter)) {
+            throw new Exception\BadMethodCallException(
+                'The option "' . $key . '" does not '
+                . 'have a matching ' . $getter . ' getter method '
+                . 'which must be defined'
+            );
+        }
         return $this->{$getter}();
     }
 

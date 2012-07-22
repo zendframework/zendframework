@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.recaptcha"><info><title>Zend_Service_ReCaptcha</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.recaptcha"><title>Zend_Service_ReCaptcha</title>
     
 
-    <section xml:id="zend.service.recaptcha.introduction"><info><title>Wprowadzenie</title></info>
+    <section xml:id="zend.service.recaptcha.introduction"><title>Wprowadzenie</title>
         
 
         <para>
@@ -26,7 +26,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.recaptcha.simplestuse"><info><title>Najprostsze użycie</title></info>
+    <section xml:id="zend.service.recaptcha.simplestuse"><title>Najprostsze użycie</title>
         
 
         <para>

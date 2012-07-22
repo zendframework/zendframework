@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.recaptcha"><info><title>Zend_Service_ReCaptcha</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.recaptcha"><title>Zend_Service_ReCaptcha</title>
     
 
-    <section xml:id="zend.service.recaptcha.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.service.recaptcha.introduction"><title>導入</title>
         
 
         <para>
@@ -28,7 +28,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.recaptcha.simplestuse"><info><title>単純な使用法</title></info>
+    <section xml:id="zend.service.recaptcha.simplestuse"><title>単純な使用法</title>
         
 
         <para>
@@ -37,7 +37,7 @@
         </para>
 
 
-        <example xml:id="zend.service.recaptcha.example-1"><info><title>reCAPTCHA サービスのインスタンスの作成</title></info>
+        <example xml:id="zend.service.recaptcha.example-1"><title>reCAPTCHA サービスのインスタンスの作成</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -50,7 +50,7 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
             <methodname>getHTML()</methodname> メソッドをコールするだけです。
         </para>
 
-        <example xml:id="zend.service.recaptcha.example-2"><info><title>reCAPTCHA の表示</title></info>
+        <example xml:id="zend.service.recaptcha.example-2"><title>reCAPTCHA の表示</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -66,7 +66,7 @@ echo $recaptcha->getHTML();
             メソッドに渡します。
         </para>
 
-        <example xml:id="zend.service.recaptcha.example-3"><info><title>フォームフィールドの検証</title></info>
+        <example xml:id="zend.service.recaptcha.example-3"><title>フォームフィールドの検証</title>
             
             <programlisting language="php"><![CDATA[
 $result = $recaptcha->verify(
@@ -82,7 +82,7 @@ $result = $recaptcha->verify(
             このオブジェクトは <methodname>isValid()</methodname> メソッドを提供しています。
         </para>
 
-        <example xml:id="zend.service.recaptcha.example-4"><info><title>reCAPTCHA の検証</title></info>
+        <example xml:id="zend.service.recaptcha.example-4"><title>reCAPTCHA の検証</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -102,7 +102,7 @@ if (!$result->isValid()) {
         </para>
     </section>
 
-    <section xml:id="zend.service.recaptcha.mailhide"><info><title>メールアドレスの隠蔽</title></info>
+    <section xml:id="zend.service.recaptcha.mailhide"><title>メールアドレスの隠蔽</title>
         
 
         <para>
@@ -119,7 +119,7 @@ if (!$result->isValid()) {
             が必要です。
         </para>
 
-        <example xml:id="zend.service.recaptcha.mailhide.example-1"><info><title>mail hide コンポーネントの使用法</title></info>
+        <example xml:id="zend.service.recaptcha.mailhide.example-1"><title>mail hide コンポーネントの使用法</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -148,7 +148,7 @@ print($mailHide);
             4 番目の引数も存在し、ここでコンポーネントのオプションを設定できます。
             使用できるオプションは次の表のとおりです。
 
-            <table xml:id="zend.service.recaptcha.mailhide.options.table"><info><title>Zend_Service_ReCaptcha_MailHide のオプション</title></info>
+            <table xml:id="zend.service.recaptcha.mailhide.options.table"><title>Zend_Service_ReCaptcha_MailHide のオプション</title>
                 
 
                 <tgroup cols="4">
@@ -201,7 +201,7 @@ print($mailHide);
             のインスタンスを渡します。
         </para>
 
-        <example xml:id="zend.service.recaptcha.mailhide.example-2"><info><title>多数の隠しメールアドレスの作成</title></info>
+        <example xml:id="zend.service.recaptcha.mailhide.example-2"><title>多数の隠しメールアドレスの作成</title>
             
 
             <programlisting language="php"><![CDATA[

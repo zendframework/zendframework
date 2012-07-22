@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><info><title>Отправка нескольких сообщений за одно SMTP-соединение</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><title>Отправка нескольких сообщений за одно SMTP-соединение</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         До каждой отправки передается команда RSET для получения подтверждения
         связи.
     </para>
-    <example xml:id="zend.mail.multiple-emails.example-1"><info><title>Отправка нескольких сообщений за одно SMTP-соединение</title></info>
+    <example xml:id="zend.mail.multiple-emails.example-1"><title>Отправка нескольких сообщений за одно SMTP-соединение</title>
 
         
 
@@ -40,7 +40,7 @@ for ($i = 0; $i > 5; $i++) {
         объект протокола транспорта.
     </para>
 
-    <example xml:id="zend.mail.multiple-emails.example-2"><info><title>Управление транспортным соединением вручную</title></info>
+    <example xml:id="zend.mail.multiple-emails.example-2"><title>Управление транспортным соединением вручную</title>
 
         
 

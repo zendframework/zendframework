@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.global_session_management"><info><title>全局会话管理</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.global_session_management"><title>全局会话管理</title>
 
     
 
@@ -7,7 +7,7 @@
         会话的默认行为可以由 <code>Zend_Session</code>的一些静态方法来改变。使用Zend_Session来处理和操作所有的全局会话管理，包括使用<code>Zend_Session_Core::setOptions()</code> 方法对<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/session#session.configuration">PHP内置的会话模块提供的常用配置选项</link>的配置。例如，不能确保使用安全的<code>save_path</code>和PHP会话模块使用的唯一的cookie名，那么使用<code>Zend_Session::setOptions()</code> 会引发安全问题。
     </para>
 
-    <section xml:id="zend.session.global_session_management.configuration_options"><info><title>配置选项</title></info>
+    <section xml:id="zend.session.global_session_management.configuration_options"><title>配置选项</title>
 
         
 
@@ -19,7 +19,7 @@
             设置会话配置选项，包括基本名（在"<code>session.</code>"之后的名字部分）作为传递给<code>Zend_Session::setOptions()</code>的数组的键。数组里相应的值用来设置会话选项值。如果开发者没有设置选项，Zend_Session将首先使用推荐的缺省选项，接着就是缺省的php.ini设置。关于这些选项的最好实践的社区反馈应该发送到<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</link>。
         </para>
 
-        <example xml:id="zend.session.global_session_management.setoptions.example"><info><title>使用Zend_Config配置Zend_Session</title></info>
+        <example xml:id="zend.session.global_session_management.setoptions.example"><title>使用Zend_Config配置Zend_Session</title>
 
             
 
@@ -98,7 +98,7 @@ Zend_Session::setOptions($config->toArray());
                     <para>
                         string <code>save_path</code> - 该值跟系统相关，开发者需提供一个PHP程序有读写权限的目录的<emphasis role="strong">绝对路径</emphasis>。如果可写的路径没有被提供，那么当启动时，<code>Zend_Session</code> 将抛出一个异常。（例如，当<code>start()</code>被调用）
                     </para>
-                    <note><info><title>安全风险</title></info>
+                    <note><title>安全风险</title>
                         
                         <para>
                             如果其他应用程序有读这个目录路径的权限，那么就有发生会话劫持的可能性。如果其他应用程序有写这个目录路径的权限，那么就有发生<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Session_poisoning">会话污染</link>的可能性。如果这个目录路径是与其他用户或PHP应用程序共享的，那么会引起大量的安全问题，包括会话数据盗窃，会话劫持，垃圾回收冲突（举例来说，另一个用户的PHP应用程序可能会删除你的应用程序的会话文件）。
@@ -112,7 +112,7 @@ Zend_Session::setOptions($config->toArray());
                     <para>
                         string <code>name</code> - 该值跟系统相关，开发者需为基于应用程序提供一个<emphasis role="strong">唯一</emphasis>的值。
                     </para>
-                    <note><info><title>安全风险</title></info>
+                    <note><title>安全风险</title>
                         
                         <para>
                             如果<code>php.ini</code>中<code>session.name</code>的值是相同的（例如，默认为“PHPSESSID”），且在同个域名下面有两个及以上的PHP应用程序，那么当访问者访问这些站点时它们共享了会话数据。此外，很可能引起会话数据的破坏。
@@ -122,7 +122,7 @@ Zend_Session::setOptions($config->toArray());
                 <listitem>
                     <para>
                         boolean <code>use_only_cookies</code> - 为了不引入更多的安全风险，不要修改该选项的默认值。
-                        <note><info><title>安全风险</title></info>
+                        <note><title>安全风险</title>
                             
                             <para>
                                 如果该选项没有被激活，攻击者使用攻击者站点上的链接，可以轻松的固定受害人的会话标识符，比如：<code>http://www.example.com/index.php?PHPSESSID=fixed_session_id</code>。假使受害者还没有一个example.com站点会话标识符的cookie，那么会话固定就成功了。一旦受害者使用了攻击者指定的会话标识符，那么攻击者就能劫持受害者的会话，并模仿受害者的用户代理，试图假装成受害者。
@@ -135,7 +135,7 @@ Zend_Session::setOptions($config->toArray());
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.headers_sent"><info><title>错误：Headers Already Sent</title></info>
+    <section xml:id="zend.session.global_session_management.headers_sent"><title>错误：Headers Already Sent</title>
 
         
 
@@ -173,7 +173,7 @@ Zend_Session::setOptions($config->toArray());
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.session_identifiers"><info><title>会话标识符</title></info>
+    <section xml:id="zend.session.global_session_management.session_identifiers"><title>会话标识符</title>
 
         
 
@@ -189,7 +189,7 @@ Zend_Session::setOptions($config->toArray());
             何时使用<code>regenerateId()</code>：在你的Zend框架程序引导文件中添加<code>Zend_Session::regenerateId ()</code>，以最安全的方式重新生成用户Web浏览器cookie中的会话标识符。如果不需要有条件的判定何时重新生成会话标识符，那么这样的方式就没什么缺陷。虽然在每个请求中重新生成会话标识预防了几种攻击的途径，但是不是每个请求需要这么做。因此，应用程序通常设法动态的确定在有较大风险的情况下，重新生成会话标识符。当站点的访问者权限上升时（比如，访问者在编辑你的个人信息前，要重新验证用户）或者敏感的会话参数发生改变时，可以考虑使用<code>regenerateId()</code>创建新的会话标识符。如果你调用了<code>rememberMe()</code>之后，就不需要调用<code>regeneraterId()</code>，因为前者已经调用了后者。如果用户成功登录了站点，调用<code>rememberMe()</code>方法来取代调用<code>regenerateId()</code>方法。
         </para>
 
-        <section xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation"><info><title>会话劫持和会话固定</title></info>
+        <section xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation"><title>会话劫持和会话固定</title>
 
             
 
@@ -223,7 +223,7 @@ Zend_Session::setOptions($config->toArray());
                 下面的代码使得攻击者很难获得受害者当前的会话标识符，除非攻击者已经完成上面的第一二两步。
             </para>
 
-            <example xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example"><info><title>会话固定</title></info>
+            <example xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example"><title>会话固定</title>
 
                 
 
@@ -243,7 +243,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.rememberme"><info><title><code>rememberMe(integer $seconds)</code></title></info>
+    <section xml:id="zend.session.global_session_management.rememberme"><title><code>rememberMe(integer $seconds)</code></title>
 
         
 
@@ -253,7 +253,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.forgetme"><info><title><code>forgetMe()</code></title></info>
+    <section xml:id="zend.session.global_session_management.forgetme"><title><code>forgetMe()</code></title>
 
         
 
@@ -263,7 +263,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.sessionexists"><info><title><code>sessionExists()</code></title></info>
+    <section xml:id="zend.session.global_session_management.sessionexists"><title><code>sessionExists()</code></title>
 
         
 
@@ -273,7 +273,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.destroy"><info><title><code>destroy(bool $remove_cookie = true, bool $readonly = true)</code></title></info>
+    <section xml:id="zend.session.global_session_management.destroy"><title><code>destroy(bool $remove_cookie = true, bool $readonly = true)</code></title>
 
         
 
@@ -285,7 +285,7 @@ if (!isset($defaultNamespace->initialized)) {
             如果你看到错误信息"Cannot modify header information - headers already sent" ， 那么要么避免使用<code>true</code> 作为第一个参数（会话cookie的请求删除），要么参考<xref linkend="zend.session.global_session_management.headers_sent"/> 。这样，<code>Zend_Session::destroy(true)</code> 一定要么在PHP发送HTTP头之前被调用，要么输出缓冲被允许。并且，为防止触发在调用<code>destroy()</code>之前发送输出，输出发送的总数不能超过缓冲的大小。
          </para>
 
-        <note><info><title>Throws</title></info>
+        <note><title>Throws</title>
             
             <para>
                 缺省地，<code>$readonly</code>是被激活的，之后写会话数据的动作，将会抛出一个异常。
@@ -294,7 +294,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.stop"><info><title><code>stop()</code></title></info>
+    <section xml:id="zend.session.global_session_management.stop"><title><code>stop()</code></title>
 
         
 
@@ -304,7 +304,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.writeclose"><info><title><code>writeClose($readonly = true)</code></title></info>
+    <section xml:id="zend.session.global_session_management.writeclose"><title><code>writeClose($readonly = true)</code></title>
 
         
 
@@ -312,7 +312,7 @@ if (!isset($defaultNamespace->initialized)) {
             关闭会话，把<code>$_SESSION</code>数组中的数据写到后台的存储器中（文件、数据库），完成内部数据的转换。可选的<code>$readonly</code>布尔参数可以通过抛出基于企图通过<code>Zend_Session</code>或者<code>Zend_Session_Namespace</code>写入会话的一个异常来删除写的能力。
         </para>
 
-        <note><info><title>Throws</title></info>
+        <note><title>Throws</title>
             
             <para>
                 缺省地，<code>$readonly</code>是被激活的，之后向会话数据存储器写数据的动作讲抛出异常。然而，一些遗留的应用程序期望<code>$_SESSION</code>在会话通过<code>session_write_close()</code>关闭后仍然可以写。虽然不是最佳的实践，但<code>$readonly</code>选项对有需要的人还是有用的。
@@ -321,7 +321,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.expiresessioncookie"><info><title><code>expireSessionCookie()</code></title></info>
+    <section xml:id="zend.session.global_session_management.expiresessioncookie"><title><code>expireSessionCookie()</code></title>
 
         
 
@@ -331,7 +331,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.savehandler"><info><title><code>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</code></title></info>
+    <section xml:id="zend.session.global_session_management.savehandler"><title><code>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</code></title>
 
         
 
@@ -341,7 +341,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.namespaceisset"><info><title><code>namespaceIsset($namespace)</code></title></info>
+    <section xml:id="zend.session.global_session_management.namespaceisset"><title><code>namespaceIsset($namespace)</code></title>
 
         
 
@@ -349,7 +349,7 @@ if (!isset($defaultNamespace->initialized)) {
             这个方法用来检查某会话命名空间是否存在，或者某会话命名空间下的某个索引是否存在。
         </para>
 
-        <note><info><title>Throws</title></info>
+        <note><title>Throws</title>
             
             <para>
                 如果<code>Zend_Session</code>没有被标记为可读（比如在<code>Zend_Session</code>开启之前），将会抛出一个异常。
@@ -358,7 +358,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.namespaceunset"><info><title><code>namespaceUnset($namespace)</code></title></info>
+    <section xml:id="zend.session.global_session_management.namespaceunset"><title><code>namespaceUnset($namespace)</code></title>
 
         
 
@@ -366,7 +366,7 @@ if (!isset($defaultNamespace->initialized)) {
             使用<code>namespaceUnset($namespace)</code>注销某个命名空间及其内容，而不用为某个命名空间创建Zend_Session实例，然后迭代它删除每个条目。如果被注销的变量为数组，且该数组包含了其他对象，而这些对象又被其他变量引用，这些对象仍然是可访问的。不要期望<code>namespaceUnset</code>方法会“深”注销/删除命名空间下条目的内容。更详细的解释，请参考PHP手册中的<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/references">References Explained</link>
         </para>
 
-        <note><info><title>Throws</title></info>
+        <note><title>Throws</title>
             
             <para>
                 如果命名空间不可读（比如执行了<code>destroy()</code>之后），将会抛出一个异常。
@@ -375,7 +375,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.namespaceget"><info><title><code>namespaceGet($namespace)</code></title></info>
+    <section xml:id="zend.session.global_session_management.namespaceget"><title><code>namespaceGet($namespace)</code></title>
 
         
 
@@ -383,7 +383,7 @@ if (!isset($defaultNamespace->initialized)) {
             不赞成的：在<code>Zend_Session_Namespace</code>中用<code>getIterator()</code>。 这个方法返回<code>$namespace</code>命名空间的内容数组<code>$name</code>。如果你有合理的理由认为该方法是公有的，请反馈到我们的邮件列表：<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</link>。实际上，所有参与相关话题讨论的，我们都是欢迎的。
         </para>
 
-        <note><info><title>Throws</title></info>
+        <note><title>Throws</title>
             
             <para>
                 如果<code>Zend_Session</code>没有被标记为可读（比如在<code>Zend_Session</code>开启之前），将会抛出一个异常。
@@ -392,7 +392,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     </section>
 
-    <section xml:id="zend.session.global_session_management.getiterator"><info><title><code>getIterator()</code></title></info>
+    <section xml:id="zend.session.global_session_management.getiterator"><title><code>getIterator()</code></title>
 
         
 
@@ -400,7 +400,7 @@ if (!isset($defaultNamespace->initialized)) {
             使用<code>getIterator()</code>方法，可获得一个包含所有命名空间名字的数组。
         </para>
 
-        <note><info><title>Throws</title></info>
+        <note><title>Throws</title>
             
             <para>
                 如果<code>Zend_Session</code>没有被标记为可读（比如在<code>Zend_Session</code>开启之前），将会抛出一个异常。

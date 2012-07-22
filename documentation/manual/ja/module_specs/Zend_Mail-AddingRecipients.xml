@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>受信者の追加</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><title>受信者の追加</title>
     
 
     <para>
@@ -33,7 +33,7 @@
         <methodname>clearRecipients()</methodname> によりあて先一覧を消去します。
     </para>
 
-    <note><info><title>追加のパラメータ</title></info>
+    <note><title>追加のパラメータ</title>
         
 
         <para>
@@ -43,7 +43,7 @@
         </para>
     </note>
 
-    <note><info><title>選択できる使用法</title></info>
+    <note><title>選択できる使用法</title>
         
 
         <para>

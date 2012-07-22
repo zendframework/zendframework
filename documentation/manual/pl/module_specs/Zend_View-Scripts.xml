@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>Skrypty widoków</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><title>Skrypty widoków</title>
 
     
 
@@ -50,7 +50,7 @@ if ($this->books): ?>
 
     ]]></programlisting>
 
-    <section xml:id="zend.view.scripts.escaping"><info><title>Filtrowanie danych wyjściowych</title></info>
+    <section xml:id="zend.view.scripts.escaping"><title>Filtrowanie danych wyjściowych</title>
 
         
 
@@ -112,7 +112,7 @@ echo $view->render(...);
 
     </section>
 
-    <section xml:id="zend.view.scripts.templates"><info><title>Użycie alternatywnych systemów szablonów</title></info>
+    <section xml:id="zend.view.scripts.templates"><title>Użycie alternatywnych systemów szablonów</title>
 
         
 
@@ -125,7 +125,7 @@ echo $view->render(...);
             Zend_View_Interface.
         </para>
 
-        <section xml:id="zend.view.scripts.templates.scripts"><info><title>Systemy szablonów używające skryptów widoku</title></info>
+        <section xml:id="zend.view.scripts.templates.scripts"><title>Systemy szablonów używające skryptów widoku</title>
             
 
             <para>
@@ -186,7 +186,7 @@ if ($this->books) {
 
         </section>
 
-        <section xml:id="zend.view.scripts.templates.interface"><info><title>Systemy szablonów używające interfejsu Zend_View_Interface</title></info>
+        <section xml:id="zend.view.scripts.templates.interface"><title>Systemy szablonów używające interfejsu Zend_View_Interface</title>
             
 
             <para>

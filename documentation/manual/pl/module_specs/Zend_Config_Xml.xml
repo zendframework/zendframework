@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><title>Zend_Config_Xml</title>
     
     <para>
         <code>Zend_Config_Xml</code> pozwala programistom przechowywać dane
@@ -14,7 +14,7 @@
         a wartość tego atrybutu odpowiada nazwie sekcji, której dane mają być
         odziedziczone przez rozszerzającą sekcję.
     </para>
-    <note><info><title>Zwracany typ</title></info>
+    <note><title>Zwracany typ</title>
         
         <para>
             Dane konfiguracyjne odczytywane przez <code>Zend_Config_Xml</code> są
@@ -23,7 +23,7 @@
             do własnych potrzeb.
         </para>
     </note>
-    <example xml:id="zend.config.adapters.xml.example.using"><info><title>Użycie Zend_Config_Xml</title></info>
+    <example xml:id="zend.config.adapters.xml.example.using"><title>Użycie Zend_Config_Xml</title>
         
         <para>
             Ten przykład pokazuje podstawowe użycie klasy <code>Zend_Config_Xml</code>
@@ -79,7 +79,7 @@ echo $config->database->params->dbname; // wyświetla "dbname"
 
         ]]></programlisting>
     </example>
-    <example xml:id="zend.config.adapters.xml.example.attributes"><info><title>Używanie atrybutów znaczników w Zend_Config_Xml</title></info>
+    <example xml:id="zend.config.adapters.xml.example.attributes"><title>Używanie atrybutów znaczników w Zend_Config_Xml</title>
         
         <para>
             Komponent Zend_Config_Xml obsługuje także dwa inne sposoby

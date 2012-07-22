@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="copyrights"><info><title>Informations de copyright</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="copyrights"><title>Informations de copyright</title>
     
 
     <para>Les droits ci-dessous sont applicables aux éléments de Zend Framework.</para>

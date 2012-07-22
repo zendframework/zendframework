@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.options"><info><title>Zend_Layout options de configuration</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.options"><title>Zend_Layout options de configuration</title>
     
 
     <para>
@@ -89,7 +89,7 @@
         </listitem>
     </itemizedlist>
 
-    <note><info><title>Vous devez passer les helperClass et pluginClass à startMvc()</title></info>
+    <note><title>Vous devez passer les helperClass et pluginClass à startMvc()</title>
         
 
         <para>
@@ -99,7 +99,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.layout.options.examples"><info><title>Exemples</title></info>
+    <section xml:id="zend.layout.options.examples"><title>Exemples</title>
         
 
         <para>
@@ -126,7 +126,7 @@ contentKey = "CONTENT"
 $config = new Zend_Config_Ini('/chemin/vers/layout.ini', 'layout');
 ]]></programlisting>
 
-        <example xml:id="zend.layout.options.examples.constructor"><info><title>Passer des options au constructeur ou à startMvc()</title></info>
+        <example xml:id="zend.layout.options.examples.constructor"><title>Passer des options au constructeur ou à startMvc()</title>
             
 
             <para>
@@ -162,7 +162,7 @@ $layout = Zend_Layout::startMvc($config);
             </para>
         </example>
 
-        <example xml:id="zend.layout.options.examples.setoptionsconfig"><info><title>Utilisation de setOptions() et setConfig()</title></info>
+        <example xml:id="zend.layout.options.examples.setoptionsconfig"><title>Utilisation de setOptions() et setConfig()</title>
             
 
             <para>
@@ -186,7 +186,7 @@ $layout->setConfig($options);
             </para>
         </example>
 
-        <example xml:id="zend.layout.options.examples.accessors"><info><title>Utilisation des accesseurs</title></info>
+        <example xml:id="zend.layout.options.examples.accessors"><title>Utilisation des accesseurs</title>
             
 
             <para>

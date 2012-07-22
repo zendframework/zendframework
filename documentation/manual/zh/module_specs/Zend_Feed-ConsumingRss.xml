@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><info><title>RSS Feed的使用</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><title>RSS Feed的使用</title>
     
     <para>
         用一个<code>Zend_Feed_Rss</code>对象实例和一个Feed的URL来读取一个RSS Feed再简单不过了:

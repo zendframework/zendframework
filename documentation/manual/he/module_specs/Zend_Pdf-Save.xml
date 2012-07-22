@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>שמירת שינויים בטפסי PDF</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><title>שמירת שינויים בטפסי PDF</title>
     
     <para>
         ישנם שני מתודות אשר שומרות שינויים לטפסי PDF: <code>Zend_Pdf::save()</code> ו <code>Zend_Pdf::render()</code>.
@@ -15,7 +15,7 @@
         אם $newSegmentOnly מוגדר ל true, אז רק השינויים החדשים מוחזרים.
     </para>
 
-    <example xml:id="zend.pdf.save.example-1"><info><title>שמירת קבצי PDF</title></info>
+    <example xml:id="zend.pdf.save.example-1"><title>שמירת קבצי PDF</title>
         
         <programlisting role="php"><![CDATA[
 ...

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.docs"><info><title>Verwenden der Google Dokumente Listen Daten API</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.docs"><title>Verwenden der Google Dokumente Listen Daten API</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         für weitere Informationen über die Google Dokumente Listen <acronym>API</acronym>.
     </para>
 
-    <section xml:id="zend.gdata.docs.listdocuments"><info><title>Eine Liste von Dokumenten erhalten</title></info>
+    <section xml:id="zend.gdata.docs.listdocuments"><title>Eine Liste von Dokumenten erhalten</title>
         
 
         <para>
@@ -41,7 +41,7 @@ $feed = $docs->getDocumentListFeed();
         </para>
     </section>
 
-    <section xml:id="zend.gdata.docs.creating"><info><title>Ein Dokument hochladen</title></info>
+    <section xml:id="zend.gdata.docs.creating"><title>Ein Dokument hochladen</title>
         
 
         <para>
@@ -107,7 +107,7 @@ function uploadDocument($docs, $html, $originalFileName,
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.gdata.docs.queries"><info><title>Den Dokumenten Feed durchsuchen</title></info>
+    <section xml:id="zend.gdata.docs.queries"><title>Den Dokumenten Feed durchsuchen</title>
         
 
         <para>
@@ -121,7 +121,7 @@ function uploadDocument($docs, $html, $originalFileName,
                 Listen Daten <acronym>API</acronym> Referenz Anleitung</link> gefunden werden.
         </para>
 
-        <section xml:id="zend.gdata.docs.listwpdocuments"><info><title>Eine Liste von Wortverarbeitungs Dokumenten erhalten</title></info>
+        <section xml:id="zend.gdata.docs.listwpdocuments"><title>Eine Liste von Wortverarbeitungs Dokumenten erhalten</title>
             
 
             <para>
@@ -136,7 +136,7 @@ $feed = $docs->getDocumentListFeed(
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.docs.listspreadsheets"><info><title>Eine Liste von Tabellenkalkulationen erhalten</title></info>
+        <section xml:id="zend.gdata.docs.listspreadsheets"><title>Eine Liste von Tabellenkalkulationen erhalten</title>
             
 
             <para>
@@ -150,7 +150,7 @@ $feed = $docs->getDocumentListFeed(
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.docs.textquery"><info><title>Eine Textabfrage durchführen</title></info>
+        <section xml:id="zend.gdata.docs.textquery"><title>Eine Textabfrage durchführen</title>
             
 
             <para>

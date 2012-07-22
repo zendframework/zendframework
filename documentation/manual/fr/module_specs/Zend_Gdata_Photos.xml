@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.photos"><info><title>Utilisation des albums Web Picasa</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.photos"><title>Utilisation des albums Web Picasa</title>
     
 
     <para>
@@ -20,7 +20,7 @@
         Albums</link>.
     </para>
 
-    <note><info><title>Authentification</title></info>
+    <note><title>Authentification</title>
         
 
         <para>
@@ -30,7 +30,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.gdata.photos.connecting"><info><title>Se connecter au service</title></info>
+    <section xml:id="zend.gdata.photos.connecting"><title>Se connecter au service</title>
         
 
         <para>
@@ -45,7 +45,7 @@
             celui-ci.
         </para>
 
-        <section xml:id="zend.gdata.photos.connecting.authentication"><info><title>Authentification</title></info>
+        <section xml:id="zend.gdata.photos.connecting.authentication"><title>Authentification</title>
             
 
             <para>
@@ -84,7 +84,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.gdata.photos.connecting.service"><info><title>Créer une instance du service</title></info>
+        <section xml:id="zend.gdata.photos.connecting.service"><title>Créer une instance du service</title>
             
 
             <para>
@@ -226,7 +226,7 @@ $service = new Zend_Gdata_Photos();
         </section>
     </section>
 
-    <section xml:id="zend.gdata.photos.queries"><info><title>Comprendre et construire des requêtes</title></info>
+    <section xml:id="zend.gdata.photos.queries"><title>Comprendre et construire des requêtes</title>
         
 
         <para>
@@ -360,7 +360,7 @@ $query->setUser("sample.user");
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.gdata.photos.retrieval"><info><title>Récupérer des flux et des éléments</title></info>
+    <section xml:id="zend.gdata.photos.retrieval"><title>Récupérer des flux et des éléments</title>
         
 
         <para>
@@ -368,7 +368,7 @@ $query->setUser("sample.user");
             concernant les utilisateurs, albums, ou photos.
         </para>
 
-        <section xml:id="zend.gdata.photos.user_retrieval"><info><title>Récupérer un utilisateur</title></info>
+        <section xml:id="zend.gdata.photos.user_retrieval"><title>Récupérer un utilisateur</title>
             
 
             <para>
@@ -434,7 +434,7 @@ try {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.album_retrieval"><info><title>Récupérer un album</title></info>
+        <section xml:id="zend.gdata.photos.album_retrieval"><title>Récupérer un album</title>
             
 
             <para>Le service donne accès aux flux d'albums et à leurs contenus.</para>
@@ -486,7 +486,7 @@ try {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.photo_retrieval"><info><title>Récupérer une Photo</title></info>
+        <section xml:id="zend.gdata.photos.photo_retrieval"><title>Récupérer une Photo</title>
             
 
             <para>
@@ -537,7 +537,7 @@ try {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.comment_retrieval"><info><title>Récupérer des commentaires</title></info>
+        <section xml:id="zend.gdata.photos.comment_retrieval"><title>Récupérer des commentaires</title>
             
 
             <para>
@@ -576,7 +576,7 @@ try {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.tag_retrieval"><info><title>Récupérer des mots-clés</title></info>
+        <section xml:id="zend.gdata.photos.tag_retrieval"><title>Récupérer des mots-clés</title>
             
 
             <para>
@@ -616,7 +616,7 @@ try {
         </section>
     </section>
 
-    <section xml:id="zend.gdata.photos.creation"><info><title>Créer des ressources</title></info>
+    <section xml:id="zend.gdata.photos.creation"><title>Créer des ressources</title>
         
 
         <para>
@@ -624,7 +624,7 @@ try {
             commentaires, ou mots-clés.
         </para>
 
-        <section xml:id="zend.gdata.photos.album_creation"><info><title>Créer un album</title></info>
+        <section xml:id="zend.gdata.photos.album_creation"><title>Créer un album</title>
             
 
             <para>Il est possible de créer un album, pour les clients authentifiés :</para>
@@ -641,7 +641,7 @@ $service->insertAlbumEntry($entry);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.photo_creation"><info><title>Créer une photo</title></info>
+        <section xml:id="zend.gdata.photos.photo_creation"><title>Créer une photo</title>
             
 
             <para>
@@ -673,7 +673,7 @@ $service->insertPhotoEntry($entry, $albumEntry);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.comment_creation"><info><title>Créer un commentaire pour une photo</title></info>
+        <section xml:id="zend.gdata.photos.comment_creation"><title>Créer un commentaire pour une photo</title>
             
 
             <para>
@@ -702,7 +702,7 @@ $service->insertCommentEntry($entry, $photoEntry);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.tag_creation"><info><title>Créer un mot-clé pour une photo</title></info>
+        <section xml:id="zend.gdata.photos.tag_creation"><title>Créer un mot-clé pour une photo</title>
             
 
             <para>Il est possible de créer un mot-clé pour une photo, voici un exemple :</para>
@@ -728,12 +728,12 @@ $service->insertTagEntry($entry, $photoEntry);
         </section>
     </section>
 
-    <section xml:id="zend.gdata.photos.deletion"><info><title>Supprimer des éléments</title></info>
+    <section xml:id="zend.gdata.photos.deletion"><title>Supprimer des éléments</title>
         
 
         <para>Il est possible de supprimer albums, photos, commentaires, et mots-clés.</para>
 
-        <section xml:id="zend.gdata.photos.album_deletion"><info><title>Supprimer un album</title></info>
+        <section xml:id="zend.gdata.photos.album_deletion"><title>Supprimer un album</title>
             
 
             <para>Supprimer un album est possible si le client est authentifié :</para>
@@ -754,7 +754,7 @@ $service->deleteAlbumEntry($entry, true);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.photo_deletion"><info><title>Supprimer une photo</title></info>
+        <section xml:id="zend.gdata.photos.photo_deletion"><title>Supprimer une photo</title>
             
 
             <para>Supprimer une photo est possible si le client est authentifié :</para>
@@ -776,7 +776,7 @@ $service->deletePhotoEntry($entry, true);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.comment_deletion"><info><title>Supprimer un commentaire</title></info>
+        <section xml:id="zend.gdata.photos.comment_deletion"><title>Supprimer un commentaire</title>
             
 
             <para>Supprimer un commentaire est possible si le client est authentifié :</para>
@@ -800,7 +800,7 @@ $service->deleteCommentEntry($entry, true);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.tag_deletion"><info><title>Supprimer un mot-clé</title></info>
+        <section xml:id="zend.gdata.photos.tag_deletion"><title>Supprimer un mot-clé</title>
             
 
             <para>Supprimer un mot-clé est possible, si le client est authentifié :</para>
@@ -831,7 +831,7 @@ $service->deleteTagEntry($tagEntry, true);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.gdata.photos.optimistic_concurrenty"><info><title>Gestion des accès concurrents</title></info>
+        <section xml:id="zend.gdata.photos.optimistic_concurrenty"><title>Gestion des accès concurrents</title>
             
 
             <para>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Arbeiten mit Seiten</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><title>Arbeiten mit Seiten</title>
     
 
-    <section xml:id="zend.pdf.pages.creation"><info><title>Erstellen von Seiten</title></info>
+    <section xml:id="zend.pdf.pages.creation"><title>Erstellen von Seiten</title>
         
 
         <para>
@@ -59,7 +59,7 @@
             Array verändert werden:
         </para>
 
-        <example xml:id="zend.pdf.pages.example-1"><info><title>Verwaltung von PDF Dokumentseiten</title></info>
+        <example xml:id="zend.pdf.pages.example-1"><title>Verwaltung von PDF Dokumentseiten</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -80,7 +80,7 @@ unset($pdf->pages[$id]);
         </example>
     </section>
 
-    <section xml:id="zend.pdf.pages.cloning"><info><title>Klonen von Seiten</title></info>
+    <section xml:id="zend.pdf.pages.cloning"><title>Klonen von Seiten</title>
         
 
         <para>
@@ -89,7 +89,7 @@ unset($pdf->pages[$id]);
             Seite als Parameter angegeben wird:
         </para>
 
-        <example xml:id="zend.pdf.pages.example-2"><info><title>Klonen bestehender Seiten</title></info>
+        <example xml:id="zend.pdf.pages.example-2"><title>Klonen bestehender Seiten</title>
             
 
             <programlisting language="php"><![CDATA[

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><info><title>Zend Framework PHP Coding Standard</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><title>Zend Framework PHP Coding Standard</title>
   
-    <section xml:id="coding-standard.overview"><info><title>Overview</title></info>
+    <section xml:id="coding-standard.overview"><title>Overview</title>
         
 
-        <section xml:id="coding-standard.overview.scope"><info><title>Scope</title></info>
+        <section xml:id="coding-standard.overview.scope"><title>Scope</title>
             
 
             <para>
@@ -29,7 +29,7 @@
             </para>
         </section>
 
-        <section xml:id="coding-standard.overview.goals"><info><title>목표</title></info>
+        <section xml:id="coding-standard.overview.goals"><title>목표</title>
             
 
             <para>
@@ -38,10 +38,10 @@
         </section>
     </section>
 
-    <section xml:id="coding-standard.php-file-formatting"><info><title>PHP 파일의 포멧</title></info>
+    <section xml:id="coding-standard.php-file-formatting"><title>PHP 파일의 포멧</title>
         
 
-        <section xml:id="coding-standard.php-file-formatting.general"><info><title>일반 사항</title></info>
+        <section xml:id="coding-standard.php-file-formatting.general"><title>일반 사항</title>
             
 
             <para>
@@ -53,13 +53,13 @@
             </para>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.indentation"><info><title>인덴트</title></info>
+        <section xml:id="coding-standard.php-file-formatting.indentation"><title>인덴트</title>
             
 
             <para>탭(Tab)이 아닌 4개의 공백문자(space)를 이용해 주십시오.</para>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.max-line-length"><info><title>최대 허용 라인 줄수</title></info>
+        <section xml:id="coding-standard.php-file-formatting.max-line-length"><title>최대 허용 라인 줄수</title>
             
 
             <para>
@@ -67,7 +67,7 @@
             </para>
         </section>
 
-        <section xml:id="coding-standard.php-file-formatting.line-termination"><info><title>라인 터미네이션(줄바꾸기)</title></info>
+        <section xml:id="coding-standard.php-file-formatting.line-termination"><title>라인 터미네이션(줄바꾸기)</title>
             
 
             <para>
@@ -84,10 +84,10 @@
         </section>
     </section>
 
-    <section xml:id="coding-standard.naming-conventions"><info><title>이름 규칙</title></info>
+    <section xml:id="coding-standard.naming-conventions"><title>이름 규칙</title>
         
 
-        <section xml:id="coding-standard.naming-conventions.classes"><info><title>클라스</title></info>
+        <section xml:id="coding-standard.naming-conventions.classes"><title>클라스</title>
             
 
             <para>
@@ -122,7 +122,7 @@ Zend_View_Helper
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.interfaces"><info><title>인터페이스</title></info>
+        <section xml:id="coding-standard.naming-conventions.interfaces"><title>인터페이스</title>
             
 
             <para>
@@ -135,7 +135,7 @@ Zend_Controller_Dispatcher_Interface
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.filenames"><info><title>파일이름</title></info>
+        <section xml:id="coding-standard.naming-conventions.filenames"><title>파일이름</title>
             
 
             <para>
@@ -157,7 +157,7 @@ Zend/View/Helper/FormRadio.php
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.functions-and-methods"><info><title>함수(Function)와 메소드들</title></info>
+        <section xml:id="coding-standard.naming-conventions.functions-and-methods"><title>함수(Function)와 메소드들</title>
             
 
             <para>
@@ -194,7 +194,7 @@ widgetFactory()
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.variables"><info><title>변수</title></info>
+        <section xml:id="coding-standard.naming-conventions.variables"><title>변수</title>
             
 
             <para>
@@ -214,7 +214,7 @@ widgetFactory()
             </para>
         </section>
 
-        <section xml:id="coding-standard.naming-conventions.constants"><info><title>상수</title></info>
+        <section xml:id="coding-standard.naming-conventions.constants"><title>상수</title>
             
 
             <para>
@@ -235,10 +235,10 @@ widgetFactory()
         </section>
     </section>
 
-    <section xml:id="coding-standard.coding-style"><info><title>코딩 스타일</title></info>
+    <section xml:id="coding-standard.coding-style"><title>코딩 스타일</title>
         
 
-        <section xml:id="coding-standard.coding-style.php-code-demarcation"><info><title>PHP 코드의 구분</title></info>
+        <section xml:id="coding-standard.coding-style.php-code-demarcation"><title>PHP 코드의 구분</title>
             
 
             <para>
@@ -254,10 +254,10 @@ widgetFactory()
             </para>
         </section>
 
-        <section xml:id="coding-standard.coding-style.strings"><info><title>문자열</title></info>
+        <section xml:id="coding-standard.coding-style.strings"><title>문자열</title>
             
 
-            <section xml:id="coding-standard.coding-style.strings.literals"><info><title>단순 문자열</title></info>
+            <section xml:id="coding-standard.coding-style.strings.literals"><title>단순 문자열</title>
                 
 
                 <para>
@@ -269,7 +269,7 @@ $a = 'Example String';
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><info><title>단따옴표를 포함한 문자열</title></info>
+            <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><title>단따옴표를 포함한 문자열</title>
                 
 
                 <para>
@@ -283,7 +283,7 @@ $sql = "SELECT `id`, `name` from `people` WHERE `name`='Fred' OR `name`='Susan'"
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.variable-substitution"><info><title>변수의 치환</title></info>
+            <section xml:id="coding-standard.coding-style.strings.variable-substitution"><title>변수의 치환</title>
                 
 
                 <para>
@@ -305,7 +305,7 @@ $greeting = "Hello ${name}, welcome back!";
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.strings.string-concatenation"><info><title>변수의 연결</title></info>
+            <section xml:id="coding-standard.coding-style.strings.string-concatenation"><title>변수의 연결</title>
                 
 
                 <para>
@@ -332,10 +332,10 @@ $sql = "SELECT `id`, `name` FROM `people` "
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.arrays"><info><title>어레이</title></info>
+        <section xml:id="coding-standard.coding-style.arrays"><title>어레이</title>
             
 
-            <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><info><title>산술 인덱스 어레이</title></info>
+            <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><title>산술 인덱스 어레이</title>
                 
 
                 <para>음수는 인텍스로서 허용되지 않습니다.</para>
@@ -367,7 +367,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.arrays.associative"><info><title>Associative Arrays</title></info>
+            <section xml:id="coding-standard.coding-style.arrays.associative"><title>Associative Arrays</title>
                 
 
                 <para>
@@ -383,10 +383,10 @@ $sampleArray = array('firstKey'  => 'firstValue',
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.classes"><info><title>Classes</title></info>
+        <section xml:id="coding-standard.coding-style.classes"><title>Classes</title>
             
 
-            <section xml:id="coding-standard.coding-style.classes.declaration"><info><title>Class Declaration</title></info>
+            <section xml:id="coding-standard.coding-style.classes.declaration"><title>Class Declaration</title>
                 
 
                 <para>
@@ -417,7 +417,7 @@ class SampleClass
                 </para>
             </section>
 
-            <section xml:id="coding-standard.coding-style.classes.member-variables"><info><title>클라스 뱀버 변수</title></info>
+            <section xml:id="coding-standard.coding-style.classes.member-variables"><title>클라스 뱀버 변수</title>
                 
 
                 <para>
@@ -435,10 +435,10 @@ class SampleClass
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.functions-and-methods"><info><title>Functions and Methods</title></info>
+        <section xml:id="coding-standard.coding-style.functions-and-methods"><title>Functions and Methods</title>
             
 
-            <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><info><title>Function and Method Declaration</title></info>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><title>Function and Method Declaration</title>
                 
 
                 <para>
@@ -529,7 +529,7 @@ class Foo
 
             </section>
 
-            <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><info><title>Function과 Method의 사용</title></info>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><title>Function과 Method의 사용</title>
                 
 
                 <para>
@@ -559,10 +559,10 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
             </section>
         </section>
 
-        <section xml:id="coding-standard.coding-style.control-statements"><info><title>Control Statements</title></info>
+        <section xml:id="coding-standard.coding-style.control-statements"><title>Control Statements</title>
             
 
-            <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><info><title>If / Else / Elseif</title></info>
+            <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><title>If / Else / Elseif</title>
                 
 
                 <para>
@@ -620,7 +620,7 @@ if ($a != 2) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.coding-style.control-statements.switch"><info><title>Switch</title></info>
+            <section xml:id="coding-standards.coding-style.control-statements.switch"><title>Switch</title>
                 
 
                 <para>
@@ -660,10 +660,10 @@ switch ($numPeople) {
             </section>
         </section>
 
-        <section xml:id="coding-standards.inline-documentation"><info><title>Inline Documentation</title></info>
+        <section xml:id="coding-standards.inline-documentation"><title>Inline Documentation</title>
             
 
-            <section xml:id="coding-standards.inline-documentation.documentation-format"><info><title>Documentation Format</title></info>
+            <section xml:id="coding-standards.inline-documentation.documentation-format"><title>Documentation Format</title>
                 
 
                 <para>
@@ -679,7 +679,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.files"><info><title>Files</title></info>
+            <section xml:id="coding-standards.inline-documentation.files"><title>Files</title>
                 
 
                 <para>
@@ -703,7 +703,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.classes"><info><title>Classes</title></info>
+            <section xml:id="coding-standards.inline-documentation.classes"><title>Classes</title>
                 
 
                 <para>
@@ -726,7 +726,7 @@ switch ($numPeople) {
                 </para>
             </section>
 
-            <section xml:id="coding-standards.inline-documentation.functions"><info><title>Functions</title></info>
+            <section xml:id="coding-standards.inline-documentation.functions"><title>Functions</title>
                 
 
                 <para>

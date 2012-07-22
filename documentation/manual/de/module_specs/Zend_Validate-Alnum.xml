@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.alnum"><info><title>Alnum</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.alnum"><title>Alnum</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         Eingabe welche geprüft werden soll.
     </para>
 
-    <section xml:id="zend.validate.set.alnum.options"><info><title>Unterstützte Optionen für Zend_Validate_Alnum</title></info>
+    <section xml:id="zend.validate.set.alnum.options"><title>Unterstützte Optionen für Zend_Validate_Alnum</title>
         
 
         <para>
@@ -26,7 +26,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.alnum.basic"><info><title>Standardverhalten</title></info>
+    <section xml:id="zend.validate.set.alnum.basic"><title>Standardverhalten</title>
         
 
         <para>
@@ -43,7 +43,7 @@ if ($validator->isValid('Abcd12')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.alnum.whitespace"><info><title>Verwendung von Leerzeichen</title></info>
+    <section xml:id="zend.validate.set.alnum.whitespace"><title>Verwendung von Leerzeichen</title>
         
 
         <para>
@@ -70,7 +70,7 @@ if ($validator->isValid('Abcd und 12')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.alnum.languages"><info><title>Andere Sprachen verwenden</title></info>
+    <section xml:id="zend.validate.set.alnum.languages"><title>Andere Sprachen verwenden</title>
         
 
         <para>

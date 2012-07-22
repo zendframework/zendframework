@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>SMTP Übertragungen sichern</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><title>SMTP Übertragungen sichern</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         standardmäßig 25 für TLS oder 465 für <acronym>SSL</acronym>.
     </para>
 
-    <example xml:id="zend.mail.smtp-secure.example-1"><info><title>Aktivieren einer sicheren Verbindung innerhalb von Zend_Mail_Transport_Smtp</title></info>
+    <example xml:id="zend.mail.smtp-secure.example-1"><title>Aktivieren einer sicheren Verbindung innerhalb von Zend_Mail_Transport_Smtp</title>
         
 
         <programlisting language="php"><![CDATA[

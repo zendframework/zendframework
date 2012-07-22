@@ -97,12 +97,12 @@ class ServiceManager implements ServiceLocatorInterface
     protected $throwExceptionInCreate = true;
 
     /**
-     * @param ConfigurationInterface $configuration
+     * @param ConfigInterface $config
      */
-    public function __construct(ConfigurationInterface $configuration = null)
+    public function __construct(ConfigInterface $config = null)
     {
-        if ($configuration) {
-            $configuration->configureServiceManager($this);
+        if ($config) {
+            $config->configureServiceManager($this);
         }
     }
 
@@ -307,7 +307,6 @@ class ServiceManager implements ServiceLocatorInterface
     public function setService($name, $service, $shared = true)
     {
         $cName = $this->canonicalizeName($name);
-        $rName = $name;
 
         if ($this->allowOverride === false && $this->has($cName, false)) {
             throw new Exception\InvalidServiceNameException(sprintf(

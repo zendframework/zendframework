@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>Wprowadzenie</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><title>Wprowadzenie</title>
 
     
 
@@ -26,7 +26,7 @@
         widoku, skutkiem tego jest wygenerowanie wyjściowego widoku.
     </para>
 
-    <section xml:id="zend.view.introduction.controller"><info><title>Skrypt kontrolera</title></info>
+    <section xml:id="zend.view.introduction.controller"><title>Skrypt kontrolera</title>
 
         
 
@@ -65,7 +65,7 @@ echo $view->render('booklist.php');
 
     </section>
 
-    <section xml:id="zend.view.introduction.view"><info><title>Skrypt widoku</title></info>
+    <section xml:id="zend.view.introduction.view"><title>Skrypt widoku</title>
 
         
 
@@ -113,7 +113,7 @@ if ($this->books): ?>
 
     </section>
 
-    <section xml:id="zend.view.introduction.options"><info><title>Opcje</title></info>
+    <section xml:id="zend.view.introduction.options"><title>Opcje</title>
         
 
         <para>
@@ -180,7 +180,7 @@ base/path/
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.view.introduction.shortTags"><info><title>Krótkie znaczniki wewnątrz skryptów widoków</title></info>
+    <section xml:id="zend.view.introduction.shortTags"><title>Krótkie znaczniki wewnątrz skryptów widoków</title>
         
 
         <para>
@@ -251,7 +251,7 @@ $view->setUseStreamWrapper(true);
             </listitem>
         </itemizedlist>
 
-        <note><info><title>Alternatywna obsługa strumienia danych zmniejsza wydajność</title></info>
+        <note><title>Alternatywna obsługa strumienia danych zmniejsza wydajność</title>
             
 
             <para>
@@ -265,7 +265,7 @@ $view->setUseStreamWrapper(true);
         </note>
     </section>
 
-    <section xml:id="zend.view.introduction.accessors"><info><title>Narzędziowe metody dostępowe</title></info>
+    <section xml:id="zend.view.introduction.accessors"><title>Narzędziowe metody dostępowe</title>
         
 
         <para>

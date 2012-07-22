@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>HTML E-Mail</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><title>HTML E-Mail</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         multipart/alternative <acronym>MIME</acronym> E-Mail erstellt:
     </para>
 
-    <example xml:id="zend.mail.html-mails.example-1"><info><title>Versand von HTML E-Mail</title></info>
+    <example xml:id="zend.mail.html-mails.example-1"><title>Versand von HTML E-Mail</title>
         
 
         <programlisting language="php"><![CDATA[

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.usage"><info><title>Utiliser Zend_Currency</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.usage"><title>Utiliser Zend_Currency</title>
     
 
-    <section xml:id="zend.currency.usage.generic"><info><title>Utilisation de base</title></info>
+    <section xml:id="zend.currency.usage.generic"><title>Utilisation de base</title>
         
 
         <para>
@@ -11,7 +11,7 @@
             utilisée.
         </para>
 
-        <example xml:id="zend.currency.usage.generic.example-1"><info><title>Créer une monnaie avec les paramètres du client</title></info>
+        <example xml:id="zend.currency.usage.generic.example-1"><title>Créer une monnaie avec les paramètres du client</title>
             
 
             <para>
@@ -33,7 +33,7 @@ $currency = new Zend_Currency();
             </para>
         </example>
 
-        <note><info><title>La détection automatique par locale ne fonctionne pas toujours</title></info>
+        <note><title>La détection automatique par locale ne fonctionne pas toujours</title>
             
 
             <para>
@@ -51,7 +51,7 @@ $currency = new Zend_Currency();
         </note>
     </section>
 
-    <section xml:id="zend.currency.usage.locale"><info><title>Créer une monnaie basée sur une locale</title></info>
+    <section xml:id="zend.currency.usage.locale"><title>Créer une monnaie basée sur une locale</title>
         
 
         <para>
@@ -89,7 +89,7 @@ $currency = new Zend_Currency();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.currency.usage.territory"><info><title>Création de monnaie basée sur un pays</title></info>
+    <section xml:id="zend.currency.usage.territory"><title>Création de monnaie basée sur un pays</title>
         
 
         <para>
@@ -104,7 +104,7 @@ $currency = new Zend_Currency('US');
 // var_dump($currency);
 ]]></programlisting>
 
-        <note><info><title>Mettre en majuscule les pays</title></info>
+        <note><title>Mettre en majuscule les pays</title>
             
 
             <para>

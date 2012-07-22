@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.database"><info><title>Performance de Zend_Db</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.database"><title>Performance de Zend_Db</title>
     
 
     <para>
@@ -11,10 +11,10 @@
         composants peuvent introduire des pertes de performances.
     </para>
 
-    <section xml:id="performance.database.tableMetadata"><info><title>
+    <section xml:id="performance.database.tableMetadata"><title>
             Comment réduire la surcharge introduite par Zend_Db_Table lors de la récupération
             des métadonnées de table ?
-        </title></info>
+        </title>
         
 
         <para>
@@ -30,7 +30,7 @@
             Toutefois, ils existent des techniques permettant d'améliorer ceci.
         </para>
 
-        <section xml:id="performance.database.tableMetadata.cache"><info><title>Utiliser le cache des métadonnées</title></info>
+        <section xml:id="performance.database.tableMetadata.cache"><title>Utiliser le cache des métadonnées</title>
             
 
             <para>
@@ -46,7 +46,7 @@
             </para>
         </section>
 
-        <section xml:id="performance.database.tableMetadata.hardcoding"><info><title>Mettre en dur les métadonnées dans votre définition de table</title></info>
+        <section xml:id="performance.database.tableMetadata.hardcoding"><title>Mettre en dur les métadonnées dans votre définition de table</title>
             
 
             <para>
@@ -60,10 +60,10 @@
         </section>
     </section>
 
-    <section xml:id="performance.database.select"><info><title>
+    <section xml:id="performance.database.select"><title>
             Le SQL généré avec Zend_Db_Select n'utilise pas mes index ; comment améliorer
             ceci ?
-        </title></info>
+        </title>
         
 
         <para>
@@ -72,7 +72,7 @@
             il est souvent assez naïf.
         </para>
 
-        <section xml:id="performance.database.select.writeyourown"><info><title>Ecrire votre SQL amélioré</title></info>
+        <section xml:id="performance.database.select.writeyourown"><title>Ecrire votre SQL amélioré</title>
             
             <para>
                 La seule véritable réponse est d'écrire vous même votre propre

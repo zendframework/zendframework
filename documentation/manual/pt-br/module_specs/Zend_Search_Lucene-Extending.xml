@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><info><title>Extensibilidade</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><title>Extensibilidade</title>
     
 
-    <section xml:id="zend.search.lucene.extending.analysis"><info><title>Análise de Texto</title></info>
+    <section xml:id="zend.search.lucene.extending.analysis"><title>Análise de Texto</title>
         
 
         <para>
@@ -56,7 +56,7 @@ $index->addDocument($doc);
             Aqui está um exemplo de um analisador customizado, que aceita palavras contendo dígitos
             como termos:
 
-            <example xml:id="zend.search.lucene.extending.analysis.example-1"><info><title>Analisador de Texto Customizado</title></info>
+            <example xml:id="zend.search.lucene.extending.analysis.example-1"><title>Analisador de Texto Customizado</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -135,7 +135,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.filters"><info><title>Filtragem de Tokens</title></info>
+    <section xml:id="zend.search.lucene.extending.filters"><title>Filtragem de Tokens</title>
         
 
         <para>
@@ -241,7 +241,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.scoring"><info><title>Algoritmos de Pontuação</title></info>
+    <section xml:id="zend.search.lucene.extending.scoring"><title>Algoritmos de Pontuação</title>
         
 
         <para>
@@ -350,7 +350,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.extending.storage"><info><title>Recipientes de Armazenagem</title></info>
+    <section xml:id="zend.search.lucene.extending.storage"><title>Recipientes de Armazenagem</title>
         
 
         <para>

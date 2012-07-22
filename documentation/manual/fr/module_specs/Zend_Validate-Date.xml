@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.date"><info><title>Date</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.date"><title>Date</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         Le validateur gère la localisation.
     </para>
 
-    <section xml:id="zend.validate.set.date.options"><info><title>Options supportées par Zend_Validate_Date</title></info>
+    <section xml:id="zend.validate.set.date.options"><title>Options supportées par Zend_Validate_Date</title>
         
 
         <para>
@@ -31,7 +31,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.date.basic"><info><title>Validation de dates par défaut</title></info>
+    <section xml:id="zend.validate.set.date.basic"><title>Validation de dates par défaut</title>
         
 
         <para>
@@ -52,7 +52,7 @@ $validator->isValid('10.10.2000'); // retourne false
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.date.localized"><info><title>Validation de dates localisées</title></info>
+    <section xml:id="zend.validate.set.date.localized"><title>Validation de dates localisées</title>
         
 
         <para>
@@ -74,7 +74,7 @@ $validator->isValid('10.May.2010'); // retourne false
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.date.formats"><info><title>Formats de dates personnalisés</title></info>
+    <section xml:id="zend.validate.set.date.formats"><title>Formats de dates personnalisés</title>
         
 
         <para>

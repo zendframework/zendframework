@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.filter_chains"><info><title>Chaînes de filtrage</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.filter_chains"><title>Chaînes de filtrage</title>
     
 
     <para>
@@ -29,7 +29,7 @@ $identifiant = $filtreChaine->filter($_POST['identifiant']);
         comme chaîne de filtrage.
     </para>
 
-    <section xml:id="zend.filter.filter_chains.order"><info><title>Changing filter chain order</title></info>
+    <section xml:id="zend.filter.filter_chains.order"><title>Changing filter chain order</title>
         
 
         <para>

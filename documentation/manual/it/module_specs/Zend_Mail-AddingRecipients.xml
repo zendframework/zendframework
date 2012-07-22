@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>Inserimento dei destinatari</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><title>Inserimento dei destinatari</title>
     
     <para>
         E' possibile aggiungere i destinatari in tre modi:
@@ -17,7 +17,7 @@
             </listitem>
         </itemizedlist>
     </para>
-    <note><info><title>Parametri aggiuntivi</title></info>
+    <note><title>Parametri aggiuntivi</title>
         
         <para>
             I metodi <code>addTo()</code> e <code>addCc()</code> accettano un secondo parametro opzionale utile per indicare il nome del destinatario in formato leggibile.

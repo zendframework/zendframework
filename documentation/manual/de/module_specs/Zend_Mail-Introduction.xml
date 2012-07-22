@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><info><title>Einführung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><title>Einführung</title>
     
 
-    <section xml:id="zend.mail.introduction.getting-started"><info><title>Beginnen</title></info>
+    <section xml:id="zend.mail.introduction.getting-started"><title>Beginnen</title>
         
 
         <para>
@@ -13,7 +13,7 @@
             <classname>Zend_Mail_Transport_Smtp</classname> versendet werden.
         </para>
 
-        <example xml:id="zend.mail.introduction.example-1"><info><title>Einfache E-Mail mit Zend_Mail</title></info>
+        <example xml:id="zend.mail.introduction.example-1"><title>Einfache E-Mail mit Zend_Mail</title>
             
 
             <para>
@@ -34,7 +34,7 @@ $mail->send();
 
         </example>
 
-        <note><info><title>Minimale Definitionen</title></info>
+        <note><title>Minimale Definitionen</title>
             
 
             <para>
@@ -75,7 +75,7 @@ $mail->setBodyText('Das ist der Text der Nachricht.')
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mail.introduction.sendmail"><info><title>Den standardmäßigen Sendmail Transport konfigurieren</title></info>
+    <section xml:id="zend.mail.introduction.sendmail"><title>Den standardmäßigen Sendmail Transport konfigurieren</title>
         
 
         <para>
@@ -90,9 +90,9 @@ $mail->setBodyText('Das ist der Text der Nachricht.')
             übergeben werden.
         </para>
 
-        <example xml:id="zend.mail.introduction.sendmail.example-1"><info><title>
+        <example xml:id="zend.mail.introduction.sendmail.example-1"><title>
                 Zusätzliche Parameter einem Zend_Mail_Transport_Sendmail Transport übergeben
-            </title></info>
+            </title>
             
 
             <para>
@@ -113,7 +113,7 @@ $mail->send();
 ]]></programlisting>
         </example>
 
-        <note><info><title>Safe Mode Einschränkungen</title></info>
+        <note><title>Safe Mode Einschränkungen</title>
             
 
             <para>
@@ -122,7 +122,7 @@ $mail->send();
             </para>
         </note>
 
-        <warning><info><title>Sendmail Transport und Windows</title></info>
+        <warning><title>Sendmail Transport und Windows</title>
             
 
             <para>

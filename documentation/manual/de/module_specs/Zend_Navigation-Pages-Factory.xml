@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.factory"><info><title>Erstellen von Seiten durch Verwendung der Page Factory</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.factory"><title>Erstellen von Seiten durch Verwendung der Page Factory</title>
     
 
     <para>
@@ -20,7 +20,7 @@
         ist wird eine MVC/URI Seite erstellt.
     </para>
 
-    <example xml:id="zend.navigation.pages.factory.example.mvc"><info><title>Erstellen einer MVC Seite durch Verwenden der Page Factory</title></info>
+    <example xml:id="zend.navigation.pages.factory.example.mvc"><title>Erstellen einer MVC Seite durch Verwenden der Page Factory</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -51,7 +51,7 @@ $page = Zend_Navigation_Page::factory(array(
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.navigation.pages.factory.example.uri"><info><title>Erstellen einer URI Seite durch Verwendung der Page Factory</title></info>
+    <example xml:id="zend.navigation.pages.factory.example.uri"><title>Erstellen einer URI Seite durch Verwendung der Page Factory</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -78,7 +78,7 @@ $page = Zend_Navigation_Page::factory(array(
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.navigation.pages.factory.example.custom"><info><title>Erstellung eines eigenen Seiten Typs durch Verwendung der Page Factory</title></info>
+    <example xml:id="zend.navigation.pages.factory.example.custom"><title>Erstellung eines eigenen Seiten Typs durch Verwendung der Page Factory</title>
         
 
         <para>

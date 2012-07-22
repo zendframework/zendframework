@@ -4,7 +4,7 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.di.instancemanager">
-    <info><title>Zend\Di InstanceManager</title></info>
+    <title>Zend\Di InstanceManager</title>
 
     <para>
         L'InstanceManager è responsabile per ogni informazione associata con
@@ -14,7 +14,7 @@
     </para>
 
     <section xml:id="zend.di.instancemanager.parameters">
-        <info><title>Parametri</title></info>
+        <title>Parametri</title>
 
         <para>
             I parametri sono semplicemente dei punti di accesso per tutte le
@@ -121,7 +121,7 @@ $movieLister = $di->get('MyMovieApp\MovieLister', array(
 
 
     <section xml:id="zend.di.instancemanager.preferences">
-        <info><title>Preferenze</title></info>
+        <title>Preferenze</title>
 
         <para>
             In qualche caso potresti essere utilizzare delle interfacce
@@ -182,7 +182,7 @@ $di->get('MyMovieApp\MovieLister');
     </section>
 
     <section xml:id="zend.di.instancemanager.aliases">
-        <info><title>Alias</title></info>
+        <title>Alias</title>
 
         <para>
             In certe situazioni potresti aver bisogno di un alias per una istanza.

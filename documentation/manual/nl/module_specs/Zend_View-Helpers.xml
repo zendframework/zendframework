@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>View Helpers</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><title>View Helpers</title>
 
     
 
@@ -23,7 +23,7 @@
         verdere oproepen aan $this-&gt;helperName().
     </para>
 
-    <section xml:id="zend.view.helpers.initial"><info><title>Initiële Helpers</title></info>
+    <section xml:id="zend.view.helpers.initial"><title>Initiële Helpers</title>
 
         
 
@@ -154,7 +154,7 @@
 
     </section>
 
-    <section xml:id="zend.view.helpers.paths"><info><title>Helper Paden</title></info>
+    <section xml:id="zend.view.helpers.paths"><title>Helper Paden</title>
 
         
 
@@ -195,7 +195,7 @@ $view->addHelperPath('/ander/pad/naar/helpers');
 
     </section>
 
-    <section xml:id="zend.view.helpers.custom"><info><title>Je eigen Helpers schrijven</title></info>
+    <section xml:id="zend.view.helpers.custom"><title>Je eigen Helpers schrijven</title>
 
         
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.translator"><info><title>L'aide de vue Translate</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.translator"><title>L'aide de vue Translate</title>
     
 
     <para>
@@ -46,7 +46,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.translator.registered"><info><title>Instance enregistrée</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.registered"><title>Instance enregistrée</title>
         
 
         <para>
@@ -78,7 +78,7 @@ echo $this->translate('simple');
         instance à l'intérieur de votre vue et initialiser l'aide ensuite.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.afterwards"><info><title>A l'intérieur de la vue</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.afterwards"><title>A l'intérieur de la vue</title>
         
 
         <para>
@@ -107,7 +107,7 @@ $this->translate()->setTranslator($adapter)->translate('simple');
         aussi l'utiliser directement.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.directly"><info><title>Utilisation directe</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.directly"><title>Utilisation directe</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -141,7 +141,7 @@ print $translate->translate('simple');
         paramètres, soit comme un tableau de paramètres. Par exemple :
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.parameter"><info><title>Paramètres unique</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.parameter"><title>Paramètres unique</title>
         
 
         <para>Pour utiliser un paramètre unique, ajoutez le en fin de méthode :</para>
@@ -161,7 +161,7 @@ $this->translate("Today is %1\$s", $date);
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.translator.parameterlist"><info><title>Liste de paramètres</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.parameterlist"><title>Liste de paramètres</title>
         
 
         <para>Ou utiliser une liste de paramètres et ajoutez les en fin de méthode :</para>
@@ -179,7 +179,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.translator.parameterarray"><info><title>Tableau de paramètres</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.parameterarray"><title>Tableau de paramètres</title>
         
 
         <para>Ou utiliser un tableau de paramètres et ajoutez le en fin de méthode :</para>
@@ -200,7 +200,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         final.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.dynamic"><info><title>Changement dynamique de la locale</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.dynamic"><title>Changement dynamique de la locale</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -218,7 +218,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
         :
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.static"><info><title>Changement statique de la locale</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.static"><title>Changement statique de la locale</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -239,7 +239,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         courant de la locale.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translator.getlocale"><info><title>Récupération de la locale courante</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.getlocale"><title>Récupération de la locale courante</title>
         
 
         <programlisting language="php"><![CDATA[

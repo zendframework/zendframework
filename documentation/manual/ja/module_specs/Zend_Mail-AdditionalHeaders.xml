@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><info><title>追加のヘッダ</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><title>追加のヘッダ</title>
     
 
     <para>
@@ -32,7 +32,7 @@
         </itemizedlist>
     </para>
 
-    <note><info><title>Return-Path</title></info>
+    <note><title>Return-Path</title>
         
 
         <para>
@@ -48,7 +48,7 @@
         3 番目のパラメータはオプションで、ヘッダが複数の値をとるかどうかを指定します。
     </para>
 
-    <example xml:id="zend.mail.additional-headers.example-1"><info><title>メールヘッダの追加</title></info>
+    <example xml:id="zend.mail.additional-headers.example-1"><title>メールヘッダの追加</title>
         
 
         <programlisting language="php"><![CDATA[

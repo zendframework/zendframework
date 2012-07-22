@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.introduction"><info><title>Zend_ProgressBar</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.introduction"><title>Zend_ProgressBar</title>
     
 
-    <section xml:id="zend.progressbar.whatisit"><info><title>Wprowadzenie</title></info>
+    <section xml:id="zend.progressbar.whatisit"><title>Wprowadzenie</title>
         
 
         <para>
@@ -16,7 +16,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.progressbar.basic"><info><title>Podstawowe użycie Zend_Progressbar</title></info>
+    <section xml:id="zend.progressbar.basic"><title>Podstawowe użycie Zend_Progressbar</title>
         
 
         <para>
@@ -56,7 +56,7 @@ $progressBar->finish();
         </para>
     </section>
 
-    <section xml:id="zend.progressbar.persistent"><info><title>Postęp utrwalony (persistent progress)</title></info>
+    <section xml:id="zend.progressbar.persistent"><title>Postęp utrwalony (persistent progress)</title>
         
 
         <para>
@@ -72,7 +72,7 @@ $progressBar->finish();
         </para>
     </section>
 
-    <section xml:id="zend.progressbar.adapters"><info><title>Standardowe adaptery</title></info>
+    <section xml:id="zend.progressbar.adapters"><title>Standardowe adaptery</title>
         
 
         <para>

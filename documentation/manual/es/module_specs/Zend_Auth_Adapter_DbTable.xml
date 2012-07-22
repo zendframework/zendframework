@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><info><title>Tabla de base de datos de autenticación</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><title>Tabla de base de datos de autenticación</title>
     
-    <section xml:id="zend.auth.adapter.dbtable.introduction"><info><title>Introducción</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.introduction"><title>Introducción</title>
         
         <para>
             <classname>Zend_Auth_Adapter_DbTable</classname>
@@ -97,7 +97,7 @@
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><info><title>Uso Básico</title></info>
+        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><title>Uso Básico</title>
             
             <para>
                 Como se explicó en la introducción, el constructor
@@ -228,8 +228,8 @@ Array
                 deseados.</para>
         </example>
     </section>
-    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><info><title>Advanced Usage: Manteniendo el resultado del Objeto
-            DbTable</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><title>Advanced Usage: Manteniendo el resultado del Objeto
+            DbTable</title>
         
         <para>
             Por defecto,
@@ -279,7 +279,7 @@ if ($result->isValid()) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><info><title>Ejemplo de Uso Avanzado</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><title>Ejemplo de Uso Avanzado</title>
         
         <para>
             Si bien el objetivo primordial de

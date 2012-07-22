@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><info><title>Het doorzoeken van een index</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><title>Het doorzoeken van een index</title>
     
 
-    <section xml:id="zend.search.lucene.searching.query-parser"><info><title>Opbouwen van Queries</title></info>
+    <section xml:id="zend.search.lucene.searching.query-parser"><title>Opbouwen van Queries</title>
         
 
         <para>
@@ -55,7 +55,7 @@ $index->find($query);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.searching.results"><info><title>Zoek resultaten</title></info>
+    <section xml:id="zend.search.lucene.searching.results"><title>Zoek resultaten</title>
         
         <para>
             Het zoek resultaat is een array van Zend_Search_Lucene_Search_QueryHit objecten.  Ieder van deze objecten heeft twee eigenschappen: <code>$hit-&gt;document</code> is een documentnummer binnen de index en <code>$hit-&gt;score</code> is een score van het resultaat binnen het volledige zoekresultaat. Resultaat wordt geordend op score (hoogste score komt eerst).
@@ -121,7 +121,7 @@ foreach ($hits as $hit) {
     </section>
 
 
-    <section xml:id="zend.search.lucene.searching.results-scoring"><info><title>Resultaten Scoring</title></info>
+    <section xml:id="zend.search.lucene.searching.results-scoring"><title>Resultaten Scoring</title>
         
         <para>
             Zend_Search_Lucene gebruikt hetzelfde score algoritme als Java Lucene.

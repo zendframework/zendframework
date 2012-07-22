@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advancedusage"><info><title>Расширенное использование<!--Advanced Usage--></title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advancedusage"><title>Расширенное использование<!--Advanced Usage--></title>
 
     
 
@@ -21,7 +21,7 @@
 -->
     </para>
 
-    <section xml:id="zend.session.startingasession"><info><title>Старт сессии<!--Starting a Session--></title></info>
+    <section xml:id="zend.session.startingasession"><title>Старт сессии<!--Starting a Session--></title>
 
         
 
@@ -34,7 +34,7 @@
 -->
         </para>
 
-        <example><info><title>Старт общей сессии<!--Starting the Global Session--></title></info>
+        <example><title>Старт общей сессии<!--Starting the Global Session--></title>
             
 <programlisting language="php"><![CDATA[
 <?php
@@ -238,7 +238,7 @@ Zend_Session::start();
 
     </section>
 
-    <section xml:id="zend.session.locking"><info><title>Блокировка пространств имен<!--Locking Session Namespaces--></title></info>
+    <section xml:id="zend.session.locking"><title>Блокировка пространств имен<!--Locking Session Namespaces--></title>
 
         
 
@@ -272,7 +272,7 @@ Zend_Session::start();
 -->
         </para>
 
-        <example><info><title>Блокировка пространств имен<!--Locking Session Namespaces--></title></info>
+        <example><title>Блокировка пространств имен<!--Locking Session Namespaces--></title>
             
 <programlisting language="php"><![CDATA[
 <?php
@@ -306,7 +306,7 @@ Zend_Session::start();
 -->
         </para>
 
-        <example><info><title>Блокировка сессий в видах<!--Locking Sessions in Views--></title></info>
+        <example><title>Блокировка сессий в видах<!--Locking Sessions in Views--></title>
             
 <programlisting language="php"><![CDATA[
 <?php
@@ -334,7 +334,7 @@ class FooModule_View extends Zend_View
 
     </section>
 
-    <section xml:id="zend.session.expiration"><info><title>Время жизни пространства имен<!--Namespace Expiration--></title></info>
+    <section xml:id="zend.session.expiration"><title>Время жизни пространства имен<!--Namespace Expiration--></title>
 
         
 
@@ -364,7 +364,7 @@ class FooModule_View extends Zend_View
 -->
         </para>
 
-        <example><info><title>Примеры установки времени жизни<!--Expiration Examples--></title></info>
+        <example><title>Примеры установки времени жизни<!--Expiration Examples--></title>
             
 <programlisting language="php"><![CDATA[
 <?php
@@ -406,7 +406,7 @@ $s->setExpirationSeconds(60);
 
     </section>
 
-    <section xml:id="zend.session.controllers"><info><title>Инкапсуляция сессий и контроллеры<!--Session Encapsulation and Controllers--></title></info>
+    <section xml:id="zend.session.controllers"><title>Инкапсуляция сессий и контроллеры<!--Session Encapsulation and Controllers--></title>
 
         
 
@@ -422,7 +422,7 @@ $s->setExpirationSeconds(60);
 -->
         </para>
 
-        <example><info><title>Сессии с пространствами имен для контроллеров с автоматическим истечением времени<!--Namespaced Sessions for Controllers with Automatic Expiration--></title></info>
+        <example><title>Сессии с пространствами имен для контроллеров с автоматическим истечением времени<!--Namespaced Sessions for Controllers with Automatic Expiration--></title>
             
 <programlisting language="php"><![CDATA[
 <?php
@@ -449,7 +449,7 @@ else {
 
     </section>
 
-    <section xml:id="zend.session.limitinginstances"><info><title>Ограничение количества экземпляров Zend_Session_Namespace до одного на каждое пространство имен<!--Limiting Instances of Zend_Session to One Per Namespace--></title></info>
+    <section xml:id="zend.session.limitinginstances"><title>Ограничение количества экземпляров Zend_Session_Namespace до одного на каждое пространство имен<!--Limiting Instances of Zend_Session to One Per Namespace--></title>
 
         
 
@@ -498,7 +498,7 @@ else {
 -->
         </para>
 
-        <example><info><title>Ограничение до единичных экземпляров<!--Limiting to Single Instances--></title></info>
+        <example><title>Ограничение до единичных экземпляров<!--Limiting to Single Instances--></title>
             
 <programlisting language="php"><![CDATA[
 <?php
@@ -542,7 +542,7 @@ else {
 
     </section>
 
-    <section xml:id="zend.session.modifyingarray"><info><title>Работа с массивами в пространствах имен<!--Working with Arrays in Namespaces--></title></info>
+    <section xml:id="zend.session.modifyingarray"><title>Работа с массивами в пространствах имен<!--Working with Arrays in Namespaces--></title>
 
         
 
@@ -561,7 +561,7 @@ else {
 -->
         </para>
 
-        <example><info><title>Известные проблемы с массивами<!--Known problem with arrays--></title></info>
+        <example><title>Известные проблемы с массивами<!--Known problem with arrays--></title>
             
 <programlisting language="php"><![CDATA[
 <?php
@@ -581,7 +581,7 @@ else {
 -->
         </para>
 
-        <example><info><title>Обходной путь: извлечение, изменение и сохранение<!--Workaround: fetch, modify, save--></title></info>
+        <example><title>Обходной путь: извлечение, изменение и сохранение<!--Workaround: fetch, modify, save--></title>
             
 <programlisting language="php"><![CDATA[
 <?php
@@ -601,7 +601,7 @@ else {
 -->
         </para>
 
-        <example><info><title>Обходной путь: сохранение массива, содержащего ссылку<!--Workaround: store array containing reference--></title></info>
+        <example><title>Обходной путь: сохранение массива, содержащего ссылку<!--Workaround: store array containing reference--></title>
             
 <programlisting language="php"><![CDATA[
 <?php
@@ -616,7 +616,7 @@ else {
 
     </section>
 
-    <section xml:id="zend.session.auth"><info><title>Использование сессий вместе с аутентификацией<!--Using Sessions with Authentication--></title></info>
+    <section xml:id="zend.session.auth"><title>Использование сессий вместе с аутентификацией<!--Using Sessions with Authentication--></title>
 
         
 
@@ -661,7 +661,7 @@ else {
 -->
         </para>
 
-        <example><info><title>Пример: Простой доступ к ID авторизации<!--Example: Simplified access of authorization ids--></title></info>
+        <example><title>Пример: Простой доступ к ID авторизации<!--Example: Simplified access of authorization ids--></title>
             
 <programlisting language="php"><![CDATA[
 <?php
@@ -737,7 +737,7 @@ else {
 
     </section>
 
-    <section xml:id="zend.session.testing"><info><title>Использование сессий с юнит-тестами<!--Using Sessions with Unit Tests--></title></info>
+    <section xml:id="zend.session.testing"><title>Использование сессий с юнит-тестами<!--Using Sessions with Unit Tests--></title>
 
         
 
@@ -796,7 +796,7 @@ else {
 -->
         </para>
 
-        <example><info><title>Использование PHPUnit для тестирования кода, написанного с использованием Zend_Session*<!--Using PHPUnit to test code written using Zend_Session*--></title></info>
+        <example><title>Использование PHPUnit для тестирования кода, написанного с использованием Zend_Session*<!--Using PHPUnit to test code written using Zend_Session*--></title>
             
 <programlisting language="php"><![CDATA[
 <?php

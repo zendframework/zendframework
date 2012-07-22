@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><info><title>Helper HeadTitle</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><title>Helper HeadTitle</title>
     
 
     <para>
@@ -21,7 +21,7 @@
         (umieszczenie na początku stosu) lub 'SET' (zastąpienie stosu).
     </para>
 
-    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><info><title>Podstawowe użycie helpera HeadTitle</title></info>
+    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><title>Podstawowe użycie helpera HeadTitle</title>
         
 
         <para>

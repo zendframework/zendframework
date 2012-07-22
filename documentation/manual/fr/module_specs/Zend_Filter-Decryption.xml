@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.decrypt"><info><title>Decrypt</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.decrypt"><title>Decrypt</title>
     
     <para>
         Ce filtre va décrypter toute chaine grâce aux paramètres utilisés. Des adaptateurs sont utilisés.
@@ -13,7 +13,7 @@
         les méthodes utilisées pour le décryptage.
     </para>
 
-    <section xml:id="zend.filter.set.decrypt.mcrypt"><info><title>Décryptage avec Mcrypt</title></info>
+    <section xml:id="zend.filter.set.decrypt.mcrypt"><title>Décryptage avec Mcrypt</title>
         
         <para>
             Pour décrypter une données cryptées avec <code>Mcrypt</code>, vous avez besoin des paramètres
@@ -55,7 +55,7 @@ print $decrypted;
         </note>
     </section>
 
-    <section xml:id="zend.filter.set.decrypt.openssl"><info><title>Decryptage avec OpenSSL</title></info>
+    <section xml:id="zend.filter.set.decrypt.openssl"><title>Decryptage avec OpenSSL</title>
         
         <para>
             Le décryptage avec <code>OpenSSL</code> est aussi simple que l'encryptage. Mais vous aurez besoin de toutes

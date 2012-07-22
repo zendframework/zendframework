@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title> 导入Feeds </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><title> 导入Feeds </title>
 
     
 
@@ -27,7 +27,7 @@ $feedFromPHP = Zend_Feed::importString($feedString);
         在上面的例子中，根据feed类型的不同，一个从<code>Zend_Feed_Abstract</code>继承而来的类对象被返回。如果导入方法获得的是一个RSS feed，那么一个<code>Zend_Feed_Rss</code>对象将被返回(Seateng译注:以Factory模式实现)。另一方面，如果一个Atom feed被导入，那么将返回一个<code>Zend_Feed_Atom</code>对象。如果feed不可读或者不符合规范，导致导入失败那么Zend_Feed将抛出一个<code>Zend_Feed_Exception</code>异常。
     </para>
 
-    <section xml:id="zend.feed.importing.custom"><info><title> 定制 feeds </title></info>
+    <section xml:id="zend.feed.importing.custom"><title> 定制 feeds </title>
 
         
 
@@ -35,7 +35,7 @@ $feedFromPHP = Zend_Feed::importString($feedString);
             <code>Zend_Feed</code> 能让开发者轻松创建定制 feeds，只需要创建一个数组用 Zend_Feed 导入它。这个数组可以用 <code>Zend_Feed::importArray()</code> 或 <code>Zend_Feed::importBuilder()</code> 导入。最后数组用定制的实现了 <code>Zend_Feed_Builder_Interface</code> 数据源来处理。
         </para>
 
-        <section xml:id="zend.feed.importing.custom.importarray"><info><title> 导入定制的数组 </title></info>
+        <section xml:id="zend.feed.importing.custom.importarray"><title> 导入定制的数组 </title>
 
             
 
@@ -184,7 +184,7 @@ array(
 
         </section>
 
-        <section xml:id="zend.feed.importing.custom.importbuilder"><info><title> 导入定制的数据源 </title></info>
+        <section xml:id="zend.feed.importing.custom.importbuilder"><title> 导入定制的数据源 </title>
 
             
 
@@ -215,7 +215,7 @@ $rssFeedFromArray = Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss')
 
         </section>
 
-        <section xml:id="zend.feed.importing.custom.dump"><info><title> Dumping feed 内容 </title></info>
+        <section xml:id="zend.feed.importing.custom.dump"><title> Dumping feed 内容 </title>
 
             
 

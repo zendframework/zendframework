@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><info><title>תוסף עזרה ה Doctype</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><title>תוסף עזרה ה Doctype</title>
     
 
     <para>
@@ -32,7 +32,7 @@
         תוסף העזרה <code>Doctype</code> הוא יישום בסיסי של <link linkend="zend.view.helpers.initial.placeholder">Placeholder</link>.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><info><title>שימוש בסיסי</title></info>
+    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><title>שימוש בסיסי</title>
         
 
         <para>
@@ -56,7 +56,7 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 
     </example>
 
-    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><info><title>קבלת הערך</title></info>
+    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><title>קבלת הערך</title>
         
 
         <para>

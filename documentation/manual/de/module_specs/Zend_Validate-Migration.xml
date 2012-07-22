@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.migration"><info><title>Migration von vorhergehenden Versionen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.migration"><title>Migration von vorhergehenden Versionen</title>
 
     
 
@@ -10,9 +10,9 @@
         Richtlinien folgen um eigene Skripte zur neuen <acronym>API</acronym> zu migrieren.
     </para>
 
-    <section xml:id="zend.validate.migration.fromoneninetooneten"><info><title>Migration von 1.9 zu 1.10 oder neuer</title></info>
+    <section xml:id="zend.validate.migration.fromoneninetooneten"><title>Migration von 1.9 zu 1.10 oder neuer</title>
         
-        <section xml:id="zend.validate.migration.fromoneninetooneten.selfwritten"><info><title>Selbst geschriebene Adapter</title></info>
+        <section xml:id="zend.validate.migration.fromoneninetooneten.selfwritten"><title>Selbst geschriebene Adapter</title>
             
 
             <para>
@@ -60,7 +60,7 @@ My_Validator extends Zend_Validate_Abstract
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.validate.migration.fromoneninetooneten.datevalidator"><info><title>Vereinfachungen im Date Prüfer</title></info>
+        <section xml:id="zend.validate.migration.fromoneninetooneten.datevalidator"><title>Vereinfachungen im Date Prüfer</title>
             
 
             <para>
@@ -72,7 +72,7 @@ My_Validator extends Zend_Validate_Abstract
             </para>
         </section>
 
-        <section xml:id="zend.validate.migration.fromoneninetooneten.barcodevalidator"><info><title>Fehlerbehebungen im Alpha, Alum und Barcode Prüfer</title></info>
+        <section xml:id="zend.validate.migration.fromoneninetooneten.barcodevalidator"><title>Fehlerbehebungen im Alpha, Alum und Barcode Prüfer</title>
             
 
             <para>
@@ -89,7 +89,7 @@ My_Validator extends Zend_Validate_Abstract
                 geänderten Werte:
             </para>
 
-            <table xml:id="zend.validate.migration.fromoneninetooneten.barcodevalidator.table"><info><title>Vorhandenen Meldungen der Prüfer</title></info>
+            <table xml:id="zend.validate.migration.fromoneninetooneten.barcodevalidator.table"><title>Vorhandenen Meldungen der Prüfer</title>
                 
                 <tgroup cols="3">
                     <thead>

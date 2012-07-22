@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.rowset"><info><title>Zend_Db_Table_Rowset</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.rowset"><title>Zend_Db_Table_Rowset</title>
     
 
-    <section xml:id="zend.db.table.rowset.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.db.table.rowset.introduction"><title>Einführung</title>
         
 
         <para>
@@ -16,7 +16,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.db.table.rowset.fetch"><info><title>Einen Zeilensatz lesen</title></info>
+    <section xml:id="zend.db.table.rowset.fetch"><title>Einen Zeilensatz lesen</title>
         
 
         <para>
@@ -25,7 +25,7 @@
             Objekt vom Typ <classname>Zend_Db_Table_Rowset_Abstract</classname> zurückgeben.
         </para>
 
-        <example xml:id="zend.db.table.rowset.fetch.example"><info><title>Einen Zeilensatz lesen</title></info>
+        <example xml:id="zend.db.table.rowset.fetch.example"><title>Einen Zeilensatz lesen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -35,7 +35,7 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
         </example>
     </section>
 
-    <section xml:id="zend.db.table.rowset.rows"><info><title>Zeilen aus einem Zeilensatz auslesen</title></info>
+    <section xml:id="zend.db.table.rowset.rows"><title>Zeilen aus einem Zeilensatz auslesen</title>
         
 
         <para>
@@ -53,7 +53,7 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
             Zeilensatz zu erhalten.
         </para>
 
-        <example xml:id="zend.db.table.rowset.rows.counting.example"><info><title>Zeilen in einem Zeilensatz zählen</title></info>
+        <example xml:id="zend.db.table.rowset.rows.counting.example"><title>Zeilen in einem Zeilensatz zählen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -69,7 +69,7 @@ if ($rowCount > 0) {
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.db.table.rowset.rows.current.example"><info><title>Eine einzelne Zeile aus einem Zeilensatz auslesen</title></info>
+        <example xml:id="zend.db.table.rowset.rows.current.example"><title>Eine einzelne Zeile aus einem Zeilensatz auslesen</title>
             
 
             <para>
@@ -90,7 +90,7 @@ $row    = $rowset->current();
             <acronym>PHP</acronym> Wert <constant>NULL</constant> zurück.
         </para>
 
-        <example xml:id="zend.db.table.rowset.rows.iterate.example"><info><title>Einen Zeilensatz durchlaufen</title></info>
+        <example xml:id="zend.db.table.rowset.rows.iterate.example"><title>Einen Zeilensatz durchlaufen</title>
             
 
             <para>
@@ -126,7 +126,7 @@ foreach ($rowset as $row) {
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.db.table.rowset.rows.seek.example"><info><title>Eine bekannte Position in einem Rowset suchen</title></info>
+        <example xml:id="zend.db.table.rowset.rows.seek.example"><title>Eine bekannte Position in einem Rowset suchen</title>
             
 
             <para>
@@ -190,7 +190,7 @@ $row9->save();
         </para>
     </section>
 
-    <section xml:id="zend.db.table.rowset.to-array"><info><title>Einen Zeilensatz als Array lesen</title></info>
+    <section xml:id="zend.db.table.rowset.to-array"><title>Einen Zeilensatz als Array lesen</title>
         
 
         <para>
@@ -201,7 +201,7 @@ $row9->save();
             Werten.
         </para>
 
-        <example xml:id="zend.db.table.rowset.to-array.example"><info><title>Benutzung von toArray()</title></info>
+        <example xml:id="zend.db.table.rowset.to-array.example"><title>Benutzung von toArray()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -229,7 +229,7 @@ foreach ($rowsetArray as $rowArray) {
         </para>
     </section>
 
-    <section xml:id="zend.db.table.rowset.serialize"><info><title>Einen Zeilensatz serialisieren / deserialisieren</title></info>
+    <section xml:id="zend.db.table.rowset.serialize"><title>Einen Zeilensatz serialisieren / deserialisieren</title>
         
 
         <para>
@@ -238,7 +238,7 @@ foreach ($rowsetArray as $rowArray) {
             deserialisierbar sind.
         </para>
 
-        <example xml:id="zend.db.table.rowset.serialize.example.serialize"><info><title>Einen Zeilensatz serialisieren</title></info>
+        <example xml:id="zend.db.table.rowset.serialize.example.serialize"><title>Einen Zeilensatz serialisieren</title>
             
 
             <para>
@@ -258,7 +258,7 @@ $serializedRowset = serialize($rowset);
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.db.table.rowset.serialize.example.unserialize"><info><title>Einen Zeilensatz deserialisieren</title></info>
+        <example xml:id="zend.db.table.rowset.serialize.example.unserialize"><title>Einen Zeilensatz deserialisieren</title>
             
 
             <para>
@@ -285,7 +285,7 @@ echo $row->bug_description;
 ]]></programlisting>
         </example>
 
-        <note><info><title>Warum werden Zeilensatz-Objekte unverbunden deserialisiert?</title></info>
+        <note><title>Warum werden Zeilensatz-Objekte unverbunden deserialisiert?</title>
             
 
             <para>
@@ -311,7 +311,7 @@ echo $row->bug_description;
             Datenbank gespeichert werden.
         </para>
 
-        <example xml:id="zend.db.table.rowset.serialize.example.set-table"><info><title>Einen Zeilensatz als Live-Daten reaktivieren</title></info>
+        <example xml:id="zend.db.table.rowset.serialize.example.set-table"><title>Einen Zeilensatz als Live-Daten reaktivieren</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -337,7 +337,7 @@ $row->save();
         </para>
     </section>
 
-    <section xml:id="zend.db.table.rowset.extending"><info><title>Die Zeilensatz-Klasse erweitern</title></info>
+    <section xml:id="zend.db.table.rowset.extending"><title>Die Zeilensatz-Klasse erweitern</title>
         
 
         <para>
@@ -348,7 +348,7 @@ $row->save();
             eines Tabellenobjekts übergeben.
         </para>
 
-        <example xml:id="zend.db.table.rowset.extending.example"><info><title>Eine eigene Zeilensatz-Klasse angeben</title></info>
+        <example xml:id="zend.db.table.rowset.extending.example"><title>Eine eigene Zeilensatz-Klasse angeben</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -378,7 +378,7 @@ $bugs = new Bugs(array('rowsetClass' => 'MyRowset'));
             eine neue Methode einen Durchschnitt aller Zeilen im Zeilensatz errechnen.
         </para>
 
-        <example xml:id="zend.db.table.rowset.extending.example-aggregate"><info><title>Eine Zeilensatz-Klasse mit einer neuen Methode</title></info>
+        <example xml:id="zend.db.table.rowset.extending.example-aggregate"><title>Eine Zeilensatz-Klasse mit einer neuen Methode</title>
             
 
             <programlisting language="php"><![CDATA[

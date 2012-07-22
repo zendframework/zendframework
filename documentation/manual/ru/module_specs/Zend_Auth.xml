@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><info><title>Введение</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><title>Введение</title>
     
 
     <para>
@@ -28,7 +28,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.auth.introduction.adapters"><info><title>Адаптеры</title></info>
+    <section xml:id="zend.auth.introduction.adapters"><title>Адаптеры</title>
         
 
         <para>
@@ -90,7 +90,7 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
         </para>
     </section>
 
-    <section xml:id="zend.auth.introduction.results"><info><title>Результат аутентификации</title></info>
+    <section xml:id="zend.auth.introduction.results"><title>Результат аутентификации</title>
         
 
         <para>
@@ -184,7 +184,7 @@ switch ($result->getCode()) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.auth.introduction.persistence"><info><title>Постоянное хранение идентификатора пользователя</title></info>
+    <section xml:id="zend.auth.introduction.persistence"><title>Постоянное хранение идентификатора пользователя</title>
         
 
         <para>
@@ -199,7 +199,7 @@ switch ($result->getCode()) {
             несколькими запросами к веб приложению.
         </para>
 
-        <section xml:id="zend.auth.introduction.persistence.default"><info><title>Сохранение идентификатора в сессии PHP, по умолчанию</title></info>
+        <section xml:id="zend.auth.introduction.persistence.default"><title>Сохранение идентификатора в сессии PHP, по умолчанию</title>
             
 
             <para>
@@ -226,7 +226,7 @@ switch ($result->getCode()) {
                 </para>
             </note>
 
-            <example xml:id="zend.auth.introduction.persistence.default.example"><info><title>Изменение пространства имен в сессии</title></info>
+            <example xml:id="zend.auth.introduction.persistence.default.example"><title>Изменение пространства имен в сессии</title>
                 
 
                 <para>
@@ -258,7 +258,7 @@ $result = $auth->authenticate($authAdapter);
             </example>
         </section>
 
-        <section xml:id="zend.auth.introduction.persistence.custom"><info><title>Реализация пользовательского хранилища</title></info>
+        <section xml:id="zend.auth.introduction.persistence.custom"><title>Реализация пользовательского хранилища</title>
             
 
             <para>
@@ -269,7 +269,7 @@ $result = $auth->authenticate($authAdapter);
                 методу <methodname>Zend_Auth::setStorage()</methodname>.
             </para>
 
-            <example xml:id="zend.auth.introduction.persistence.custom.example"><info><title>Использование пользовательского хранилища</title></info>
+            <example xml:id="zend.auth.introduction.persistence.custom.example"><title>Использование пользовательского хранилища</title>
                 
 
                 <para>
@@ -364,7 +364,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
         </section>
     </section>
 
-    <section xml:id="zend.auth.introduction.using"><info><title>Использование</title></info>
+    <section xml:id="zend.auth.introduction.using"><title>Использование</title>
         
 
         <para>

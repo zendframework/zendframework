@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom"><info><title>Een Atom Feed lezen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom"><title>Een Atom Feed lezen</title>
 
 
     <para>
@@ -11,7 +11,7 @@
         eigenschap in twee elementen: <code>summary</code> en <code>content</code>.
     </para>
 
-    <example><info><title>Basisgebruik van een Atom Feed</title></info>
+    <example><title>Basisgebruik van een Atom Feed</title>
         
         <para>
             Lees een Atom feed en beeld de <code>title</code> en <code>summary</code> van elke entry af:

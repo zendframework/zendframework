@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.introduction"><info><title>Einführung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.introduction"><title>Einführung</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         automatische extrahiert werden. Eine Vielzahl an Maßeinheiten wird unterstützt.
     </para>
 
-    <example xml:id="zend.measure.introduction.example-1"><info><title>Konvertieren von Maßeinheiten</title></info>
+    <example xml:id="zend.measure.introduction.example-1"><title>Konvertieren von Maßeinheiten</title>
         
 
         <para>
@@ -41,7 +41,7 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
             Maßeinheiten</link> gefunden werden.
     </para>
 
-    <example xml:id="zend.measure.introduction.example-2"><info><title>Die Maßeinheit meter</title></info>
+    <example xml:id="zend.measure.introduction.example-2"><title>Die Maßeinheit meter</title>
         
 
         <para>

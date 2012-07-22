@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><info><title>Kontrol Akses Yang Lebih Detail</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><title>Kontrol Akses Yang Lebih Detail</title>
 
     
 
-    <section xml:id="zend.acl.refining.precise"><info><title>Kontrol Akses Yang Presisi</title></info>
+    <section xml:id="zend.acl.refining.precise"><title>Kontrol Akses Yang Presisi</title>
 
         
 
@@ -122,7 +122,7 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
 
     </section>
 
-    <section xml:id="zend.acl.refining.removing"><info><title>Menghapus Aturan dari Kontrol Akses</title></info>
+    <section xml:id="zend.acl.refining.removing"><title>Menghapus Aturan dari Kontrol Akses</title>
 
         
 

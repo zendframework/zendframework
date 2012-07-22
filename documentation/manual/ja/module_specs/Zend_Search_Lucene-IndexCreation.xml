@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><info><title>インデックスの構築</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><title>インデックスの構築</title>
     
 
-    <section xml:id="zend.search.lucene.index-creation.creating"><info><title>新しいインデックスの作成</title></info>
+    <section xml:id="zend.search.lucene.index-creation.creating"><title>新しいインデックスの作成</title>
         
 
         <para>
@@ -39,7 +39,7 @@ $index->addDocument($doc);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.updating"><info><title>インデックスの更新</title></info>
+    <section xml:id="zend.search.lucene.index-creation.updating"><title>インデックスの更新</title>
         
 
         <para>
@@ -63,7 +63,7 @@ $index->addDocument($doc);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.document-updating"><info><title>ドキュメントの更新</title></info>
+    <section xml:id="zend.search.lucene.index-creation.document-updating"><title>ドキュメントの更新</title>
         
 
         <para>
@@ -86,7 +86,7 @@ foreach ($hits as $hit) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.counting"><info><title>インデックスの大きさの取得</title></info>
+    <section xml:id="zend.search.lucene.index-creation.counting"><title>インデックスの大きさの取得</title>
         
 
         <para>
@@ -130,7 +130,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.optimization"><info><title>インデックスの最適化</title></info>
+    <section xml:id="zend.search.lucene.index-creation.optimization"><title>インデックスの最適化</title>
         
 
         <para>
@@ -177,7 +177,7 @@ $index->optimize();
             さらにそれがもう少し大きな別のセグメントに統合され、... といった具合です。
         </para>
 
-        <section xml:id="zend.search.lucene.index-creation.optimization.maxbuffereddocs"><info><title>自動最適化オプション MaxBufferedDocs</title></info>
+        <section xml:id="zend.search.lucene.index-creation.optimization.maxbuffereddocs"><title>自動最適化オプション MaxBufferedDocs</title>
             
             <para>
                 <emphasis>MaxBufferedDocs</emphasis> は、メモリ内に溜め込まれたドキュメントを
@@ -192,7 +192,7 @@ $index->optimize();
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.index-creation.optimization.maxmergedocs"><info><title>自動最適化オプション MaxMergeDocs</title></info>
+        <section xml:id="zend.search.lucene.index-creation.optimization.maxmergedocs"><title>自動最適化オプション MaxMergeDocs</title>
             
             <para>
                 <emphasis>MaxMergeDocs</emphasis> は、addDocument()
@@ -210,7 +210,7 @@ $index->optimize();
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.index-creation.optimization.mergefactor"><info><title>自動最適化オプション MergeFactor</title></info>
+        <section xml:id="zend.search.lucene.index-creation.optimization.mergefactor"><title>自動最適化オプション MergeFactor</title>
             
             <para>
                 <emphasis>MergeFactor</emphasis> は、addDocument() でセグメントをまとめる頻度を指定します。
@@ -256,7 +256,7 @@ $index->optimize();
         </section>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.permissions"><info><title>パーミッション</title></info>
+    <section xml:id="zend.search.lucene.index-creation.permissions"><title>パーミッション</title>
         
 
         <para>
@@ -279,10 +279,10 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.limitations"><info><title>制限事項</title></info>
+    <section xml:id="zend.search.lucene.index-creation.limitations"><title>制限事項</title>
         
 
-        <section xml:id="zend.search.lucene.index-creation.limitations.index-size"><info><title>インデックスの大きさ</title></info>
+        <section xml:id="zend.search.lucene.index-creation.limitations.index-size"><title>インデックスの大きさ</title>
             
             <para>
                 インデックスの大きさは、
@@ -295,7 +295,7 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.index-creation.limitations.filesystems"><info><title>サポートするファイルシステム</title></info>
+        <section xml:id="zend.search.lucene.index-creation.limitations.filesystems"><title>サポートするファイルシステム</title>
             
             <para>
                 <classname>Zend_Search_Lucene</classname> は、

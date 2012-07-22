@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.server"><info><title>Zend_XmlRpc_Server</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.server"><title>Zend_XmlRpc_Server</title>
     
 
-    <section xml:id="zend.xmlrpc.server.introduction"><info><title>Введение</title></info>
+    <section xml:id="zend.xmlrpc.server.introduction"><title>Введение</title>
         
 
         <para>
@@ -14,7 +14,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.usage"><info><title>Основы использования</title></info>
+    <section xml:id="zend.xmlrpc.server.usage"><title>Основы использования</title>
         
 
         <para>
@@ -28,7 +28,7 @@ echo $server->handle();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.structure"><info><title>Структура сервера</title></info>
+    <section xml:id="zend.xmlrpc.server.structure"><title>Структура сервера</title>
         
 
         <para>
@@ -62,7 +62,7 @@ echo $server->handle();
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.conventions"><info><title>Соглашения</title></info>
+    <section xml:id="zend.xmlrpc.server.conventions"><title>Соглашения</title>
         
         <para>
             <classname>Zend_XmlRpc_Server</classname> позволяет прикреплять функции и
@@ -148,7 +148,7 @@ function myFunc($val1, $val2, $val3)
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.namespaces"><info><title>Использование пространств имен</title></info>
+    <section xml:id="zend.xmlrpc.server.namespaces"><title>Использование пространств имен</title>
         
 
         <para>
@@ -187,7 +187,7 @@ $server->addFunction('somefunc', 'funcs');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.request"><info><title>Использование своих объектов запросов</title></info>
+    <section xml:id="zend.xmlrpc.server.request"><title>Использование своих объектов запросов</title>
         
 
         <para>
@@ -205,7 +205,7 @@ $server->addFunction('somefunc', 'funcs');
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.response"><info><title>Использование своих объектов ответов</title></info>
+    <section xml:id="zend.xmlrpc.server.response"><title>Использование своих объектов ответов</title>
         
 
         <para>
@@ -224,7 +224,7 @@ $server->addFunction('somefunc', 'funcs');
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.fault"><info><title>Обработка исключений через сообщения об ошибке</title></info>
+    <section xml:id="zend.xmlrpc.server.fault"><title>Обработка исключений через сообщения об ошибке</title>
         
 
         <para>
@@ -265,7 +265,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.caching"><info><title>Кэширование определений сервера между запросами</title></info>
+    <section xml:id="zend.xmlrpc.server.caching"><title>Кэширование определений сервера между запросами</title>
         
         <para>
             Прикрепление большого количества классов к экземпляру XML-RPC
@@ -315,14 +315,14 @@ echo $server->handle();
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.use"><info><title>Примеры использования</title></info>
+    <section xml:id="zend.xmlrpc.server.use"><title>Примеры использования</title>
         
         <para>
             Здесь приведены несколько примеров использования, демонстрирующих полный
             набор возможностей, доступных разработчикам. Примеры
             построены на основе предоставленных ранее примеров.
         </para>
-        <section xml:id="zend.xmlrpc.server.use.case1"><info><title>Основы использования</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case1"><title>Основы использования</title>
             
 
             <para>
@@ -349,7 +349,7 @@ echo $server->handle();
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case2"><info><title>Прикрепление класса</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case2"><title>Прикрепление класса</title>
             
 
             <para>
@@ -366,7 +366,7 @@ echo $server->handle();
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case3"><info><title>Прикрепление нескольких классов с использованием пространств имен</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case3"><title>Прикрепление нескольких классов с использованием пространств имен</title>
             
 
             <para>
@@ -387,7 +387,7 @@ echo $server->handle();
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case4"><info><title>Указание исключений в качестве используемых для ответов с сообщением об ошибке</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case4"><title>Указание исключений в качестве используемых для ответов с сообщением об ошибке</title>
             
 
             <para>
@@ -414,7 +414,7 @@ echo $server->handle();
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case5"><info><title>Использование своих объектов запроса</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case5"><title>Использование своих объектов запроса</title>
             
 
             <para>
@@ -444,7 +444,7 @@ echo $server->handle($request);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case6"><info><title>Использование своих объектов ответа</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case6"><title>Использование своих объектов ответа</title>
             
 
             <para>
@@ -478,7 +478,7 @@ echo $server->handle($request);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case7"><info><title>Кэширование определений сервера между запросами</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case7"><title>Кэширование определений сервера между запросами</title>
             
 
             <para>

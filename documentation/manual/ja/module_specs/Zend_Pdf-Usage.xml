@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.usage"><info><title>Zend_Pdf モジュールの使用例</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.usage"><title>Zend_Pdf モジュールの使用例</title>
     
     <para>
     この節では、モジュールの使用例を示します。
@@ -13,7 +13,7 @@
     このデモのテスト用に使用します。
     </para>
 
-    <example xml:id="zend.pdf.usage.example-1"><info><title>Zend_Pdf モジュールの使用例</title></info>
+    <example xml:id="zend.pdf.usage.example-1"><title>Zend_Pdf モジュールの使用例</title>
         
         <programlisting language="php"><![CDATA[
 /**

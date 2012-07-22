@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.objects.details"><info><title>Beschreibung der ausgelieferten Barcodes</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.objects.details"><title>Beschreibung der ausgelieferten Barcodes</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         mit Zend Framework ausgeliefert werden.
     </para>
 
-    <section xml:id="zend.barcode.objects.details.error"><info><title>Zend_Barcode_Object_Error</title></info>
+    <section xml:id="zend.barcode.objects.details.error"><title>Zend_Barcode_Object_Error</title>
         
 
         <para>
@@ -23,7 +23,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.code25"><info><title>Zend_Barcode_Object_Code25</title></info>
+    <section xml:id="zend.barcode.objects.details.code25"><title>Zend_Barcode_Object_Code25</title>
         
 
         <para>
@@ -55,7 +55,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.code25interleaved"><info><title>Zend_Barcode_Object_Code25interleaved</title></info>
+    <section xml:id="zend.barcode.objects.details.code25interleaved"><title>Zend_Barcode_Object_Code25interleaved</title>
         
 
         <para>
@@ -91,7 +91,7 @@
             Vorhandene Optionen:
         </para>
 
-        <table xml:id="zend.barcode.objects.details.code25interleaved.table"><info><title>Optionen für Zend_Barcode_Object_Code25interleaved</title></info>
+        <table xml:id="zend.barcode.objects.details.code25interleaved.table"><title>Optionen für Zend_Barcode_Object_Code25interleaved</title>
             
 
             <tgroup cols="4">
@@ -124,7 +124,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.ean2"><info><title>Zend_Barcode_Object_Ean2</title></info>
+    <section xml:id="zend.barcode.objects.details.ean2"><title>Zend_Barcode_Object_Ean2</title>
         
 
         <para>
@@ -170,7 +170,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.ean5"><info><title>Zend_Barcode_Object_Ean5</title></info>
+    <section xml:id="zend.barcode.objects.details.ean5"><title>Zend_Barcode_Object_Ean5</title>
         
 
         <para>
@@ -216,7 +216,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.ean8"><info><title>Zend_Barcode_Object_Ean8</title></info>
+    <section xml:id="zend.barcode.objects.details.ean8"><title>Zend_Barcode_Object_Ean8</title>
         
 
         <para>
@@ -260,7 +260,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.ean13"><info><title>Zend_Barcode_Object_Ean13</title></info>
+    <section xml:id="zend.barcode.objects.details.ean13"><title>Zend_Barcode_Object_Ean13</title>
         
 
         <para>
@@ -302,7 +302,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.code39"><info><title>Zend_Barcode_Object_Code39</title></info>
+    <section xml:id="zend.barcode.objects.details.code39"><title>Zend_Barcode_Object_Code39</title>
         
 
         <para>
@@ -342,7 +342,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.identcode"><info><title>Zend_Barcode_Object_Identcode</title></info>
+    <section xml:id="zend.barcode.objects.details.identcode"><title>Zend_Barcode_Object_Identcode</title>
         
 
         <para>
@@ -389,7 +389,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.itf14"><info><title>Zend_Barcode_Object_Itf14</title></info>
+    <section xml:id="zend.barcode.objects.details.itf14"><title>Zend_Barcode_Object_Itf14</title>
         
 
         <para>
@@ -433,7 +433,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.leitcode"><info><title>Zend_Barcode_Object_Leitcode</title></info>
+    <section xml:id="zend.barcode.objects.details.leitcode"><title>Zend_Barcode_Object_Leitcode</title>
         
 
         <para>
@@ -479,7 +479,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.planet"><info><title>Zend_Barcode_Object_Planet</title></info>
+    <section xml:id="zend.barcode.objects.details.planet"><title>Zend_Barcode_Object_Planet</title>
         
 
         <para>
@@ -511,7 +511,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.postnet"><info><title>Zend_Barcode_Object_Postnet</title></info>
+    <section xml:id="zend.barcode.objects.details.postnet"><title>Zend_Barcode_Object_Postnet</title>
         
 
         <para>
@@ -543,7 +543,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.royalmail"><info><title>Zend_Barcode_Object_Royalmail</title></info>
+    <section xml:id="zend.barcode.objects.details.royalmail"><title>Zend_Barcode_Object_Royalmail</title>
         
 
         <para>
@@ -578,7 +578,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.upca"><info><title>Zend_Barcode_Object_Upca</title></info>
+    <section xml:id="zend.barcode.objects.details.upca"><title>Zend_Barcode_Object_Upca</title>
         
 
         <para>
@@ -628,7 +628,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.barcode.objects.details.upce"><info><title>Zend_Barcode_Object_Upce</title></info>
+    <section xml:id="zend.barcode.objects.details.upce"><title>Zend_Barcode_Object_Upce</title>
         
 
         <para>

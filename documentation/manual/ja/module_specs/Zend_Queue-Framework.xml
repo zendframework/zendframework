@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.framework"><info><title>フレームワーク</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.framework"><title>フレームワーク</title>
     
 
     <para>
@@ -61,7 +61,7 @@ foreach ($messages as $i => $message) {
         投げられるどんな例外も、クラス<classname>Zend_Queue_Exception</classname>です。
     </para>
 
-    <section xml:id="zend.queue.framework.basics"><info><title>導入</title></info>
+    <section xml:id="zend.queue.framework.basics"><title>導入</title>
         
 
         <para>
@@ -82,7 +82,7 @@ foreach ($messages as $i => $message) {
         </para>
     </section>
 
-    <section xml:id="zend.queue.framework.support"><info><title>アダプタの間の互換性</title></info>
+    <section xml:id="zend.queue.framework.support"><title>アダプタの間の互換性</title>
         
 
         <para>

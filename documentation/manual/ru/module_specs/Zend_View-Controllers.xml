@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>Скрипты контроллеров</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><title>Скрипты контроллеров</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         указанный скрипт вида.
     </para>
 
-    <section xml:id="zend.view.controllers.assign"><info><title>Установка переменных</title></info>
+    <section xml:id="zend.view.controllers.assign"><title>Установка переменных</title>
 
         
 
@@ -76,7 +76,7 @@ $view->assign('c', "Sea");
 
     </section>
 
-    <section xml:id="zend.view.controllers.render"><info><title>Выполнение скрипта вида</title></info>
+    <section xml:id="zend.view.controllers.render"><title>Выполнение скрипта вида</title>
 
         
 
@@ -101,7 +101,7 @@ echo $view->render('someView.php');
 
     </section>
 
-    <section xml:id="zend.view.controllers.script-paths"><info><title>Пути к скриптам вида</title></info>
+    <section xml:id="zend.view.controllers.script-paths"><title>Пути к скриптам вида</title>
 
         
 
@@ -152,8 +152,8 @@ $view->addScriptPath('/path/to/custom/');
 // и, наконец, "booklist.php" в текущем каталоге.
 ]]></programlisting>
 
-        <note><info><title>Никогда не используйте пользовательский ввод при установке
-            путей к скриптам вида</title></info>
+        <note><title>Никогда не используйте пользовательский ввод при установке
+            путей к скриптам вида</title>
             
 
             <para>

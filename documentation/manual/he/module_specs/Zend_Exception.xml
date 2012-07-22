@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>שימוש בחריגים</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><title>שימוש בחריגים</title>
 
     
 
@@ -7,7 +7,7 @@
         <code>Zend_Exception</code> היא פשוט מחלקת הבסיס לשימוש בחריגים שנזרקים במערכת ה Zend Framework
     </para>
 
-    <example xml:id="zend.exception.using.example"><info><title>תפיסת חריג שנזרק</title></info>
+    <example xml:id="zend.exception.using.example"><title>תפיסת חריג שנזרק</title>
         
         <para>
             הקוד הבא מציג כיצד נתן לתפוס חריג שנזרק במערכת ה Zend Framework

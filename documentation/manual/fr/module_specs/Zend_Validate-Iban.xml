@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.iban"><info><title>Iban</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.iban"><title>Iban</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         "International Bank Account Number".
     </para>
 
-    <section xml:id="zend.validate.set.iban.options"><info><title>Options supportées par Zend_Validate_Iban</title></info>
+    <section xml:id="zend.validate.set.iban.options"><title>Options supportées par Zend_Validate_Iban</title>
         
 
         <para>
@@ -25,7 +25,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.iban.basic"><info><title>Validation IBAN</title></info>
+    <section xml:id="zend.validate.set.iban.basic"><title>Validation IBAN</title>
         
 
         <para>
@@ -35,7 +35,7 @@
             savons déja utiliser <classname>Zend_Validate_Iban</classname>.
         </para>
 
-        <section xml:id="zend.validate.set.iban.basic.application"><info><title>Locale globale à l'application</title></info>
+        <section xml:id="zend.validate.set.iban.basic.application"><title>Locale globale à l'application</title>
             
 
             <para>
@@ -58,7 +58,7 @@ if ($validator->isValid('AT611904300234573201')) {
 }
 ]]></programlisting>
 
-            <note><info><title>Locale globale à l'application</title></info>
+            <note><title>Locale globale à l'application</title>
                 
 
                 <para>
@@ -70,7 +70,7 @@ if ($validator->isValid('AT611904300234573201')) {
             </note>
         </section>
 
-        <section xml:id="zend.validate.set.iban.basic.false"><info><title>Validation IBAN simplifiée</title></info>
+        <section xml:id="zend.validate.set.iban.basic.false"><title>Validation IBAN simplifiée</title>
             
 
             <para>
@@ -97,7 +97,7 @@ if ($validator->isValid('AT611904300234573201')) {
             </para>
         </section>
 
-        <section xml:id="zend.validate.set.iban.basic.aware"><info><title>Validation IBAN en fonction d'un pays</title></info>
+        <section xml:id="zend.validate.set.iban.basic.aware"><title>Validation IBAN en fonction d'un pays</title>
             
 
             <para>
@@ -116,7 +116,7 @@ if ($validator->isValid('AT611904300234573201')) {
 }
 ]]></programlisting>
 
-            <note><info><title>Utilisez des locales pleinement qualifiées</title></info>
+            <note><title>Utilisez des locales pleinement qualifiées</title>
                 
 
                 <para>

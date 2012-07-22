@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.file.transfer.validators"><info><title>Validateurs pour Zend_File_Transfer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.file.transfer.validators"><title>Validateurs pour Zend_File_Transfer</title>
     
 
     <para>
@@ -157,7 +157,7 @@
         </listitem>
     </itemizedlist>
 
-    <section xml:id="zend.file.transfer.validators.usage"><info><title>Utiliser les validateurs avec Zend_File_Transfer</title></info>
+    <section xml:id="zend.file.transfer.validators.usage"><title>Utiliser les validateurs avec Zend_File_Transfer</title>
         
 
         <para>
@@ -236,7 +236,7 @@
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.file.transfer.validators.usage.example"><info><title>Ajouter des validateurs au(x) fichier(s) transféré(s)</title></info>
+        <example xml:id="zend.file.transfer.validators.usage.example"><title>Ajouter des validateurs au(x) fichier(s) transféré(s)</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -258,7 +258,7 @@ $upload->setValidators(array(
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.file.transfer.validators.usage.exampletwo"><info><title>Limiter les validateurs à des fichiers uniques</title></info>
+        <example xml:id="zend.file.transfer.validators.usage.exampletwo"><title>Limiter les validateurs à des fichiers uniques</title>
             
 
             <para>
@@ -282,7 +282,7 @@ $upload->addValidator('Size', false, 20000, 'file2');
             <methodname>addValidators()</methodname>, qui peut être appelée plusieurs fois.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.usage.examplemultiple"><info><title>Ajouter des validateurs multiples</title></info>
+        <example xml:id="zend.file.transfer.validators.usage.examplemultiple"><title>Ajouter des validateurs multiples</title>
             
 
             <para>
@@ -316,7 +316,7 @@ $upload->addValidator('Size', false, 20000)
             <methodname>isValid()</methodname>.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.usage.exampleisvalid"><info><title>Valider les fichiers</title></info>
+        <example xml:id="zend.file.transfer.validators.usage.exampleisvalid"><title>Valider les fichiers</title>
             
 
             <para>
@@ -356,7 +356,7 @@ if (!$upload->isValid()) {
         </para>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.count"><info><title>Validateur Count</title></info>
+    <section xml:id="zend.file.transfer.validators.count"><title>Validateur Count</title>
         
 
         <para>
@@ -406,7 +406,7 @@ if (!$upload->isValid()) {
             <methodname>getMin()</methodname> et <methodname>getMax()</methodname> pour les récupérer.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.count.example"><info><title>Utiliser le validateur Count</title></info>
+        <example xml:id="zend.file.transfer.validators.count.example"><title>Utiliser le validateur Count</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -429,7 +429,7 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
         </note>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.crc32"><info><title>Validateur Crc32</title></info>
+    <section xml:id="zend.file.transfer.validators.crc32"><title>Validateur Crc32</title>
         
 
         <para>
@@ -454,7 +454,7 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.file.transfer.validators.crc32.example"><info><title>Utiliser le validateur Crc32</title></info>
+        <example xml:id="zend.file.transfer.validators.crc32.example"><title>Utiliser le validateur Crc32</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -469,7 +469,7 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
         </example>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.excludeextension"><info><title>Validateur ExcludeExtension</title></info>
+    <section xml:id="zend.file.transfer.validators.excludeextension"><title>Validateur ExcludeExtension</title>
         
 
         <para>
@@ -509,7 +509,7 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
             <constant>TRUE</constant>, validera l'extension en vérifiant aussi la casse.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.excludeextension.example"><info><title>Utiliser le validateur ExcludeExtension</title></info>
+        <example xml:id="zend.file.transfer.validators.excludeextension.example"><title>Utiliser le validateur ExcludeExtension</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -535,7 +535,7 @@ $upload->addValidator('ExcludeExtension', false, array('php', 'exe', 'case' => t
         </note>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.excludemimetype"><info><title>Validateur ExcludeMimeType</title></info>
+    <section xml:id="zend.file.transfer.validators.excludemimetype"><title>Validateur ExcludeMimeType</title>
         
 
         <para>
@@ -575,7 +575,7 @@ $upload->addValidator('ExcludeExtension', false, array('php', 'exe', 'case' => t
             les types <acronym>MIME</acronym>.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.excludemimetype.example"><info><title>Utiliser le validateur ExcludeMimeType</title></info>
+        <example xml:id="zend.file.transfer.validators.excludemimetype.example"><title>Utiliser le validateur ExcludeMimeType</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -610,7 +610,7 @@ $upload->addValidator('ExcludeMimeType', false, 'image');
         </note>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.exists"><info><title>Validateur Exists</title></info>
+    <section xml:id="zend.file.transfer.validators.exists"><title>Validateur Exists</title>
         
 
         <para>
@@ -636,7 +636,7 @@ $upload->addValidator('ExcludeMimeType', false, 'image');
             les extensions.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.exists.example"><info><title>Utiliser le validateur Exists</title></info>
+        <example xml:id="zend.file.transfer.validators.exists.example"><title>Utiliser le validateur Exists</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -661,7 +661,7 @@ $upload->addValidator('Exists',
         </note>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.extension"><info><title>Validateur Extension</title></info>
+    <section xml:id="zend.file.transfer.validators.extension"><title>Validateur Extension</title>
         
 
         <para>
@@ -700,7 +700,7 @@ $upload->addValidator('Exists',
             <constant>TRUE</constant>, validera l'extension en vérifiant aussi la casse.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.extension.example"><info><title>Utiliser le validateur Extension</title></info>
+        <example xml:id="zend.file.transfer.validators.extension.example"><title>Utiliser le validateur Extension</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -729,7 +729,7 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
         </note>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.filessize"><info><title>Validateur FilesSize</title></info>
+    <section xml:id="zend.file.transfer.validators.filessize"><title>Validateur FilesSize</title>
         
 
         <para>
@@ -788,7 +788,7 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
             Comme mentionné précédemment vous devez noter que 1kB équivaut à 1024 octets.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.filessize.example"><info><title>Utiliser le validateur FilesSize</title></info>
+        <example xml:id="zend.file.transfer.validators.filessize.example"><title>Utiliser le validateur FilesSize</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -816,7 +816,7 @@ $upload->addValidator('FilesSize', false, array('min' => '10kB',
         </note>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.imagesize"><info><title>Validateur ImageSize</title></info>
+    <section xml:id="zend.file.transfer.validators.imagesize"><title>Validateur ImageSize</title>
         
 
         <para>
@@ -860,7 +860,7 @@ $upload->addValidator('FilesSize', false, array('min' => '10kB',
             correspondante.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.imagesize.example"><info><title>Utiliser le validateur ImageSize</title></info>
+        <example xml:id="zend.file.transfer.validators.imagesize.example"><title>Utiliser le validateur ImageSize</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -881,7 +881,7 @@ $upload->setImageWidth(array('minwidth' => 20, 'maxwidth' => 200));
         </example>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.iscompressed"><info><title>Validateur IsCompressed</title></info>
+    <section xml:id="zend.file.transfer.validators.iscompressed"><title>Validateur IsCompressed</title>
         
 
         <para>
@@ -892,7 +892,7 @@ $upload->setImageWidth(array('minwidth' => 20, 'maxwidth' => 200));
             ci-dessous.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.iscompressed.example"><info><title>Utiliser le validateur IsCompressed</title></info>
+        <example xml:id="zend.file.transfer.validators.iscompressed.example"><title>Utiliser le validateur IsCompressed</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -918,7 +918,7 @@ $upload->addValidator('IsCompressed', false, 'zip');
         </note>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.isimage"><info><title>Validateur IsImage</title></info>
+    <section xml:id="zend.file.transfer.validators.isimage"><title>Validateur IsImage</title>
         
 
         <para>
@@ -928,7 +928,7 @@ $upload->addValidator('IsCompressed', false, 'zip');
             d'image particuliers avec les méthodes décrites ci-dessous.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.isimage.example"><info><title>Utiliser le validateur IsImage</title></info>
+        <example xml:id="zend.file.transfer.validators.isimage.example"><title>Utiliser le validateur IsImage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -954,7 +954,7 @@ $upload->addValidator('IsImage', false, 'jpeg');
         </note>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.hash"><info><title>Validateur Hash</title></info>
+    <section xml:id="zend.file.transfer.validators.hash"><title>Validateur Hash</title>
         
 
         <para>
@@ -993,7 +993,7 @@ $upload->addValidator('IsImage', false, 'jpeg');
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.file.transfer.validators.hash.example"><info><title>Utiliser le validateur Hash</title></info>
+        <example xml:id="zend.file.transfer.validators.hash.example"><title>Utiliser le validateur Hash</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1020,7 +1020,7 @@ $upload->addValidator('Hash', false, array('315b3cd8273d44912a7', 'algorithm' =>
         </note>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.md5"><info><title>Validateur Md5</title></info>
+    <section xml:id="zend.file.transfer.validators.md5"><title>Validateur Md5</title>
         
 
         <para>
@@ -1045,7 +1045,7 @@ $upload->addValidator('Hash', false, array('315b3cd8273d44912a7', 'algorithm' =>
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.file.transfer.validators.md5.example"><info><title>Utiliser le validateur Md5</title></info>
+        <example xml:id="zend.file.transfer.validators.md5.example"><title>Utiliser le validateur Md5</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1060,7 +1060,7 @@ $upload->addValidator('Md5', false, array('3b3652f336522365223', 'eb3365f3365ddc
         </example>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.mimetype"><info><title>Validateur MimeType</title></info>
+    <section xml:id="zend.file.transfer.validators.mimetype"><title>Validateur MimeType</title>
         
 
         <para>
@@ -1118,7 +1118,7 @@ $upload->addValidator('Md5', false, array('3b3652f336522365223', 'eb3365f3365ddc
             disponibles à partir de la version Zend Framework 1.7.1.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.mimetype.example"><info><title>Utiliser le validateur MimeType</title></info>
+        <example xml:id="zend.file.transfer.validators.mimetype.example"><title>Utiliser le validateur MimeType</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1173,7 +1173,7 @@ $upload->addValidator('MimeType', false, array('image', 'magicfile' => '/path/to
         </note>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.notexists"><info><title>Validateur NotExists</title></info>
+    <section xml:id="zend.file.transfer.validators.notexists"><title>Validateur NotExists</title>
         
 
         <para>
@@ -1199,7 +1199,7 @@ $upload->addValidator('MimeType', false, array('image', 'magicfile' => '/path/to
             les extensions.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.notexists.example"><info><title>Utiliser le validateur NotExists</title></info>
+        <example xml:id="zend.file.transfer.validators.notexists.example"><title>Utiliser le validateur NotExists</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1224,7 +1224,7 @@ $upload->addValidator('NotExists',
         </note>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.sha1"><info><title>Validateur Sha1</title></info>
+    <section xml:id="zend.file.transfer.validators.sha1"><title>Validateur Sha1</title>
         
 
         <para>
@@ -1249,7 +1249,7 @@ $upload->addValidator('NotExists',
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.file.transfer.validators.sha1.example"><info><title>Utiliser le validateur Sha1</title></info>
+        <example xml:id="zend.file.transfer.validators.sha1.example"><title>Utiliser le validateur Sha1</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1264,7 +1264,7 @@ $upload->addValidator('Sha1', false, array('3b3652f336522365223', 'eb3365f3365dd
         </example>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.size"><info><title>Validateur Size</title></info>
+    <section xml:id="zend.file.transfer.validators.size"><title>Validateur Size</title>
         
 
         <para>
@@ -1319,7 +1319,7 @@ $upload->addValidator('Sha1', false, array('3b3652f336522365223', 'eb3365f3365dd
             devez noter que 1kB équivaut à 1024 octets.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.size.example"><info><title>Utiliser le validateur Size</title></info>
+        <example xml:id="zend.file.transfer.validators.size.example"><title>Utiliser le validateur Size</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1337,7 +1337,7 @@ $upload->addValidator('Size', false, array('min' => '10kB',
         </example>
     </section>
 
-    <section xml:id="zend.file.transfer.validators.wordcount"><info><title>Validateur WordCount</title></info>
+    <section xml:id="zend.file.transfer.validators.wordcount"><title>Validateur WordCount</title>
         
 
         <para>
@@ -1368,7 +1368,7 @@ $upload->addValidator('Size', false, array('min' => '10kB',
             <methodname>getMin()</methodname> et <methodname>getMax()</methodname> pour les récupérer.
         </para>
 
-        <example xml:id="zend.file.transfer.validators.wordcount.example"><info><title>Utiliser le validateur WordCount</title></info>
+        <example xml:id="zend.file.transfer.validators.wordcount.example"><title>Utiliser le validateur WordCount</title>
             
 
             <programlisting language="php"><![CDATA[

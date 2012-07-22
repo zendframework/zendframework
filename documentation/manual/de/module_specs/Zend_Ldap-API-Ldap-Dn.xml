@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-dn"><info><title>Zend_Ldap_Dn</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-dn"><title>Zend_Ldap_Dn</title>
     
 
     <para>
@@ -49,7 +49,7 @@
         ist.
     </para>
 
-    <table xml:id="zend.ldap.api.reference.zend-ldap-dn.table"><info><title>Zend_Ldap_Dn API</title></info>
+    <table xml:id="zend.ldap.api.reference.zend-ldap-dn.table"><title>Zend_Ldap_Dn API</title>
         
 
         <tgroup cols="2">

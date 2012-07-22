@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advanced_usage"><info><title>Fortgeschrittene Benutzung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advanced_usage"><title>Fortgeschrittene Benutzung</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         Benutzung der <classname>Zend_Session</classname> Komponente.
     </para>
 
-    <section xml:id="zend.session.advanced_usage.starting_a_session"><info><title>Starten einer Session</title></info>
+    <section xml:id="zend.session.advanced_usage.starting_a_session"><title>Starten einer Session</title>
         
 
         <para>
@@ -17,7 +17,7 @@
             bearbeitet haben will, muß die Session in der Bootstrap Datei gestartet werden:
         </para>
 
-        <example xml:id="zend.session.advanced_usage.starting_a_session.example"><info><title>Starten einer globalen Session</title></info>
+        <example xml:id="zend.session.advanced_usage.starting_a_session.example"><title>Starten einer globalen Session</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -138,7 +138,7 @@ php_value session.auto_start 0
         </orderedlist>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.locking"><info><title>Gesperrte Session Namensräume</title></info>
+    <section xml:id="zend.session.advanced_usage.locking"><title>Gesperrte Session Namensräume</title>
         
 
         <para>
@@ -155,7 +155,7 @@ php_value session.auto_start 0
             symbolischen Tabellen-Aliasen auf die gleichen Daten (siehe <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/references">PHP references</link>).
         </para>
 
-        <example xml:id="zend.session.advanced_usage.locking.example.basic"><info><title>Sperren von Session Namensräumen</title></info>
+        <example xml:id="zend.session.advanced_usage.locking.example.basic"><title>Sperren von Session Namensräumen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -172,7 +172,7 @@ if ($userProfileNamespace->isLocked()) {
         </example>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.expiration"><info><title>Verfall von Namensräumen</title></info>
+    <section xml:id="zend.session.advanced_usage.expiration"><title>Verfall von Namensräumen</title>
         
 
         <para>
@@ -185,7 +185,7 @@ if ($userProfileNamespace->isLocked()) {
             basieren, wobei ein Sprung für jede folgende Anfrage stattfindet.
         </para>
 
-        <example xml:id="zend.session.advanced_usage.expiration.example"><info><title>Beispiel für den Verfall</title></info>
+        <example xml:id="zend.session.advanced_usage.expiration.example"><title>Beispiel für den Verfall</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -216,7 +216,7 @@ $s->setExpirationSeconds(60);
         </para>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.controllers"><info><title>Kapseln von Sessions und Controller</title></info>
+    <section xml:id="zend.session.advanced_usage.controllers"><title>Kapseln von Sessions und Controller</title>
         
 
         <para>
@@ -226,7 +226,7 @@ $s->setExpirationSeconds(60);
             halten um notwendigen Sicherheiten zu entsprechen.
         </para>
 
-        <example xml:id="zend.session.advanced_usage.controllers.example"><info><title>Session Namensräume für Controller mit automatischem Verfall</title></info>
+        <example xml:id="zend.session.advanced_usage.controllers.example"><title>Session Namensräume für Controller mit automatischem Verfall</title>
             
 
             <para>
@@ -267,7 +267,7 @@ $testSpace->accept_answer = true;
         </example>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.single_instance"><info><title>Mehrfache Instanzen pro Namensraum verhindern</title></info>
+    <section xml:id="zend.session.advanced_usage.single_instance"><title>Mehrfache Instanzen pro Namensraum verhindern</title>
         
 
         <para>
@@ -285,7 +285,7 @@ $testSpace->accept_answer = true;
             selben Namensraum zu instanzieren wird in einer geworfenen Ausnahme resultieren.
         </para>
 
-        <example xml:id="zend.session.advanced_usage.single_instance.example"><info><title>Zugriff auf Session Namensräume auf eine einzelne Instanz limitieren</title></info>
+        <example xml:id="zend.session.advanced_usage.single_instance.example"><title>Zugriff auf Session Namensräume auf eine einzelne Instanz limitieren</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -329,7 +329,7 @@ try {
         </para>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.arrays"><info><title>Arbeiten mit Arrays</title></info>
+    <section xml:id="zend.session.advanced_usage.arrays"><title>Arbeiten mit Arrays</title>
         
 
         <para>
@@ -340,7 +340,7 @@ try {
             werden.
         </para>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.modifying"><info><title>Array Daten innerhalb eines Session Namensraumes verändern</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.modifying"><title>Array Daten innerhalb eines Session Namensraumes verändern</title>
             
 
             <para>
@@ -356,7 +356,7 @@ echo $sessionNamespace->array['testKey'];
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.building_prior"><info><title>Arrays erstellen bevor es Session Speicher gab</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.building_prior"><title>Arrays erstellen bevor es Session Speicher gab</title>
             
 
             <para>
@@ -376,7 +376,7 @@ $sessionNamespace->array = array('a', 'b', 'c');
             verbunden wurde, kann einer oder beide der folgenden Workarounds verwendet werden.
         </para>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reassign"><info><title>Workaround: Ein geändertes Array neu Verbinden</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reassign"><title>Workaround: Ein geändertes Array neu Verbinden</title>
             
 
             <para>
@@ -404,7 +404,7 @@ echo $sessionNamespace->array['fruit']; // gibt "peach" aus
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reference"><info><title>Workaround: Array das Referenz enthält speichern</title></info>
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reference"><title>Workaround: Array das Referenz enthält speichern</title>
             
 
             <para>
@@ -422,7 +422,7 @@ echo $myNamespace->someArray['foo']; // gibt "bar" aus
         </example>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.objects"><info><title>Sessions mit Objekten verwenden</title></info>
+    <section xml:id="zend.session.advanced_usage.objects"><title>Sessions mit Objekten verwenden</title>
         
 
         <para>
@@ -437,7 +437,7 @@ echo $myNamespace->someArray['foo']; // gibt "bar" aus
         </para>
     </section>
 
-    <section xml:id="zend.session.advanced_usage.testing"><info><title>Verwenden von Sessions mit Unit Tests</title></info>
+    <section xml:id="zend.session.advanced_usage.testing"><title>Verwenden von Sessions mit Unit Tests</title>
         
 
         <para>
@@ -470,7 +470,7 @@ echo $myNamespace->someArray['foo']; // gibt "bar" aus
             beendet hat, bevor <methodname>exec()</methodname> verwendet wird.
         </para>
 
-        <example xml:id="zend.session.advanced_usage.testing.example"><info><title>PHPUnit Test Code der auf Zend_Session beruht</title></info>
+        <example xml:id="zend.session.advanced_usage.testing.example"><title>PHPUnit Test Code der auf Zend_Session beruht</title>
             
 
             <programlisting language="php"><![CDATA[

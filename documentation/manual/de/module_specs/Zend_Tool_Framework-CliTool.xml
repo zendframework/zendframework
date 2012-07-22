@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.clitool"><info><title>Verwenden des CLI Tools</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.clitool"><title>Verwenden des CLI Tools</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         Windows, mit <filename>cmd.exe</filename>, Console2 und auch dem Cygwin Projekt.
     </para>
 
-    <section xml:id="zend.tool.framework.clitool.setup-general"><info><title>Vorbereiten des CLI Tools</title></info>
+    <section xml:id="zend.tool.framework.clitool.setup-general"><title>Vorbereiten des CLI Tools</title>
         
 
         <para>
@@ -67,7 +67,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.tool.framework.clitool.setup-starnix"><info><title>Das CLI Tool in Unix-artigen Systemen vorbereiten</title></info>
+    <section xml:id="zend.tool.framework.clitool.setup-starnix"><title>Das CLI Tool in Unix-artigen Systemen vorbereiten</title>
         
 
         <para>
@@ -153,7 +153,7 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
         </para>
     </section>
 
-    <section xml:id="zend.tool.framework.clitool.setup-windows"><info><title>Das CLI Tool in Windows vorbereiten</title></info>
+    <section xml:id="zend.tool.framework.clitool.setup-windows"><title>Das CLI Tool in Windows vorbereiten</title>
         
 
         <para>
@@ -222,7 +222,7 @@ C:\WAMP\PHP\bin
         </para>
     </section>
 
-    <section xml:id="zend.tool.framework.clitool.setup-othernotes"><info><title>Andere Überlegungen für ein Setup</title></info>
+    <section xml:id="zend.tool.framework.clitool.setup-othernotes"><title>Andere Überlegungen für ein Setup</title>
         
 
         <para>
@@ -246,7 +246,7 @@ C:\WAMP\PHP\bin
         </para>
     </section>
 
-    <section xml:id="zend.tool.framework.clitool.continuing"><info><title>Wohin als nächstes?</title></info>
+    <section xml:id="zend.tool.framework.clitool.continuing"><title>Wohin als nächstes?</title>
         
 
         <para>

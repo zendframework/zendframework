@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.global_session_management"><info><title>Gestion générale de la session</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.global_session_management"><title>Gestion générale de la session</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         par ext/session.
     </para>
 
-    <section xml:id="zend.session.global_session_management.configuration_options"><info><title>Options de configuration</title></info>
+    <section xml:id="zend.session.global_session_management.configuration_options"><title>Options de configuration</title>
         
 
         <para>
@@ -34,7 +34,7 @@
             <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</link>.
         </para>
 
-        <example xml:id="zend.session.global_session_management.setoptions.example"><info><title>Utiliser Zend_Config pour configurer Zend_Session</title></info>
+        <example xml:id="zend.session.global_session_management.setoptions.example"><title>Utiliser Zend_Config pour configurer Zend_Session</title>
             
 
             <para>
@@ -125,7 +125,7 @@ Zend_Session::setOptions($config->toArray());
                         appelée.
                     </para>
 
-                    <note><info><title>Attention aux failles de sécurité</title></info>
+                    <note><title>Attention aux failles de sécurité</title>
                         
 
                         <para>
@@ -165,7 +165,7 @@ Zend_Session::setOptions($config->toArray());
                         <emphasis>unique</emphasis> pour chaque application.
                     </para>
 
-                    <note><info><title>Risque de sécurité</title></info>
+                    <note><title>Risque de sécurité</title>
                         
 
                         <para>
@@ -181,7 +181,7 @@ Zend_Session::setOptions($config->toArray());
                 <listitem>
                     <para>
                         bool <code>use_only_cookies</code> - Afin d'éviter d'autres failles de
-                        sécurité (concernant le trans-sid), ne changez pas cette option. <note><info><title>Risque de sécurité</title></info>
+                        sécurité (concernant le trans-sid), ne changez pas cette option. <note><title>Risque de sécurité</title>
                                 
 
                             <para>
@@ -201,7 +201,7 @@ Zend_Session::setOptions($config->toArray());
             </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.headers_sent"><info><title>L'erreur: "Headers Already Sent"</title></info>
+    <section xml:id="zend.session.global_session_management.headers_sent"><title>L'erreur: "Headers Already Sent"</title>
         
 
         <para>
@@ -254,7 +254,7 @@ Zend_Session::setOptions($config->toArray());
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.session.global_session_management.session_identifiers"><info><title>Identifiants de session</title></info>
+    <section xml:id="zend.session.global_session_management.session_identifiers"><title>Identifiants de session</title>
         
 
         <para>
@@ -296,7 +296,7 @@ Zend_Session::setOptions($config->toArray());
             car elle sera appelée de manière automatique.
         </para>
 
-        <section xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation"><info><title>Vol de session et fixation</title></info>
+        <section xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation"><title>Vol de session et fixation</title>
             
 
             <para>
@@ -364,7 +364,7 @@ Zend_Session::setOptions($config->toArray());
                 l'identifiant de session de la victime (sauf s'il arrive à le fixer):
             </para>
 
-            <example xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example"><info><title>Vol et fixation, protections</title></info>
+            <example xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example"><title>Vol et fixation, protections</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -379,7 +379,7 @@ if (!isset($defaultNamespace->initialized)) {
         </section>
     </section>
 
-    <section xml:id="zend.session.global_session_management.rememberme"><info><title><methodname>rememberMe(integer $seconds)</methodname></title></info>
+    <section xml:id="zend.session.global_session_management.rememberme"><title><methodname>rememberMe(integer $seconds)</methodname></title>
         
 
         <para>
@@ -394,7 +394,7 @@ if (!isset($defaultNamespace->initialized)) {
         </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.forgetme"><info><title><methodname>forgetMe()</methodname></title></info>
+    <section xml:id="zend.session.global_session_management.forgetme"><title><methodname>forgetMe()</methodname></title>
         
 
         <para>
@@ -404,7 +404,7 @@ if (!isset($defaultNamespace->initialized)) {
         </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.sessionexists"><info><title><methodname>sessionExists()</methodname></title></info>
+    <section xml:id="zend.session.global_session_management.sessionexists"><title><methodname>sessionExists()</methodname></title>
         
 
         <para>
@@ -413,7 +413,7 @@ if (!isset($defaultNamespace->initialized)) {
         </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.destroy"><info><title><methodname>destroy(bool $remove_cookie = true, bool $readonly = true)</methodname></title></info>
+    <section xml:id="zend.session.global_session_management.destroy"><title><methodname>destroy(bool $remove_cookie = true, bool $readonly = true)</methodname></title>
         
 
         <para>
@@ -436,7 +436,7 @@ if (!isset($defaultNamespace->initialized)) {
             celui-ci ne déborde).
         </para>
 
-        <note><info><title>Exception</title></info>
+        <note><title>Exception</title>
             
 
             <para>
@@ -446,7 +446,7 @@ if (!isset($defaultNamespace->initialized)) {
         </note>
     </section>
 
-    <section xml:id="zend.session.global_session_management.stop"><info><title><methodname>stop()</methodname></title></info>
+    <section xml:id="zend.session.global_session_management.stop"><title><methodname>stop()</methodname></title>
         
 
         <para>
@@ -457,7 +457,7 @@ if (!isset($defaultNamespace->initialized)) {
         </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.writeclose"><info><title><methodname>writeClose($readonly = true)</methodname></title></info>
+    <section xml:id="zend.session.global_session_management.writeclose"><title><methodname>writeClose($readonly = true)</methodname></title>
         
 
         <para>
@@ -468,7 +468,7 @@ if (!isset($defaultNamespace->initialized)) {
             Ces écritures lèveront une exception.
         </para>
 
-        <note><info><title>Exception</title></info>
+        <note><title>Exception</title>
             
 
             <para>
@@ -483,7 +483,7 @@ if (!isset($defaultNamespace->initialized)) {
         </note>
     </section>
 
-    <section xml:id="zend.session.global_session_management.expiresessioncookie"><info><title><methodname>expireSessionCookie()</methodname></title></info>
+    <section xml:id="zend.session.global_session_management.expiresessioncookie"><title><methodname>expireSessionCookie()</methodname></title>
         
 
         <para>
@@ -492,8 +492,8 @@ if (!isset($defaultNamespace->initialized)) {
         </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.savehandler"><info><title><code>setSaveHandler(Zend_Session_SaveHandler_Interface
-        $interface)</code></title></info>
+    <section xml:id="zend.session.global_session_management.savehandler"><title><code>setSaveHandler(Zend_Session_SaveHandler_Interface
+        $interface)</code></title>
         
 
         <para>
@@ -501,12 +501,12 @@ if (!isset($defaultNamespace->initialized)) {
         </para>
     </section>
 
-    <section xml:id="zend.session.global_session_management.namespaceisset"><info><title><methodname>namespaceIsset($namespace)</methodname></title></info>
+    <section xml:id="zend.session.global_session_management.namespaceisset"><title><methodname>namespaceIsset($namespace)</methodname></title>
         
 
         <para>Cette méthode permet de déterminer si un namespace existe dans la session.</para>
 
-        <note><info><title>Exception</title></info>
+        <note><title>Exception</title>
             
 
             <para>
@@ -516,7 +516,7 @@ if (!isset($defaultNamespace->initialized)) {
         </note>
     </section>
 
-    <section xml:id="zend.session.global_session_management.namespaceunset"><info><title><methodname>namespaceUnset($namespace)</methodname></title></info>
+    <section xml:id="zend.session.global_session_management.namespaceunset"><title><methodname>namespaceUnset($namespace)</methodname></title>
         
 
         <para>
@@ -529,7 +529,7 @@ if (!isset($defaultNamespace->initialized)) {
             <acronym>PHP</acronym></link> pour plus d'infos.
         </para>
 
-        <note><info><title>Exception</title></info>
+        <note><title>Exception</title>
             
 
             <para>
@@ -539,7 +539,7 @@ if (!isset($defaultNamespace->initialized)) {
         </note>
     </section>
 
-    <section xml:id="zend.session.global_session_management.namespaceget"><info><title><methodname>namespaceGet($namespace)</methodname></title></info>
+    <section xml:id="zend.session.global_session_management.namespaceget"><title><methodname>namespaceGet($namespace)</methodname></title>
         
 
         <para>
@@ -549,7 +549,7 @@ if (!isset($defaultNamespace->initialized)) {
             faites nous part de vos remarques à <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</link>.
         </para>
 
-        <note><info><title>Exception</title></info>
+        <note><title>Exception</title>
             
 
             <para>
@@ -559,7 +559,7 @@ if (!isset($defaultNamespace->initialized)) {
         </note>
     </section>
 
-    <section xml:id="zend.session.global_session_management.getiterator"><info><title><methodname>getIterator()</methodname></title></info>
+    <section xml:id="zend.session.global_session_management.getiterator"><title><methodname>getIterator()</methodname></title>
         
 
         <para>
@@ -567,7 +567,7 @@ if (!isset($defaultNamespace->initialized)) {
             noms des namespaces de session.
         </para>
 
-        <note><info><title>Exception</title></info>
+        <note><title>Exception</title>
             
 
             <para>

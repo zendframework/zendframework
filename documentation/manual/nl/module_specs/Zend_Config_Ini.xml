@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><info><title>Zend_Config_Ini</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><title>Zend_Config_Ini</title>
     
     <para>
         <code>Zend_Config_Ini</code> staat programmeurs toe configuratiedata op te slaan in een
@@ -11,7 +11,7 @@
         uitbreiden of overerven door een dubbelpunt te schrijven achter de sectienaam
         (<code>:</code>) en de naam van de sectie waarvan de data wordt geërfd.
     </para>
-     <note><info><title>parse_ini_file</title></info>
+     <note><title>parse_ini_file</title>
         
         <para>
             <code>Zend_Config_Ini</code> gebruikt de
@@ -22,7 +22,7 @@
             <code>no</code>, en <code>null</code> worden behandeld.
       </para>
     </note>
-    <note><info><title>Key scheider</title></info>
+    <note><title>Key scheider</title>
         
         <para>
             Standaard, is de punt (<code>.</code>) het teken om keys te scheiden. Dit kan worden gewijzigd, door
@@ -35,7 +35,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini', 'staging', $config);
             ]]></programlisting>
         </para>
     </note>
-    <example xml:id="zend.config.adapters.ini.example.using"><info><title>Zend_Config_Ini gebruiken</title></info>
+    <example xml:id="zend.config.adapters.ini.example.using"><title>Zend_Config_Ini gebruiken</title>
         
         <para>
             Dit voorbeeld illustreert een basisgebruik van <code>Zend_Config_Ini</code> voor het
@@ -77,7 +77,7 @@ echo $config->database->host; // geeft "dev.example.com"
 echo $config->database->name; // geeft "dbname"]]></programlisting>
     </example>
     <note>
-    <table xml:id="zend.config.adapters.ini.table"><info><title>Zend_Config_Ini Constructor parameters</title></info>
+    <table xml:id="zend.config.adapters.ini.table"><title>Zend_Config_Ini Constructor parameters</title>
         
         <tgroup cols="2">
             <thead>

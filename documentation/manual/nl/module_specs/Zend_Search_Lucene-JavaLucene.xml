@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>Interoperatie met Java Lucene</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><title>Interoperatie met Java Lucene</title>
     
 
-    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>Bestandsformaten</title></info>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><title>Bestandsformaten</title>
         
         <para>
           Het bestandsformaat van het Zend_Search_Lucene index bestand is binary compatible met Lucene
@@ -15,7 +15,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>Index Map</title></info>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><title>Index Map</title>
         
 
         <para>
@@ -43,7 +43,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>Java Broncode</title></info>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><title>Java Broncode</title>
         
         <para>
             Het volgende Java programmavoorbeeld geeft een voorbeeld van hoe je een bestand
@@ -81,7 +81,7 @@ indexWriter.addDocument(doc);
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.java-lucene.jar"><info><title>LuceneIndexCreation.jar gebruiken</title></info>
+    <section xml:id="zend.search.lucene.java-lucene.jar"><title>LuceneIndexCreation.jar gebruiken</title>
         
 
         <para>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.introduction"><title>Introduction</title>
     
 
     <para>
@@ -19,7 +19,7 @@
         gestion du temps, grâce aux protocoles NTP ou SNTP.
     </para>
 
-    <note><info><title>En tâche de fond</title></info>
+    <note><title>En tâche de fond</title>
         
 
         <para>
@@ -29,7 +29,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.timesync.introduction.why"><info><title>Pourquoi <classname>Zend_TimeSync</classname> ?</title></info>
+    <section xml:id="zend.timesync.introduction.why"><title>Pourquoi <classname>Zend_TimeSync</classname> ?</title>
         
 
         <para>Pourquoi donc utiliser <classname>Zend_TimeSync</classname> ?</para>
@@ -99,7 +99,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.timesync.introduction.ntp"><info><title>Qu'est ce que NTP ?</title></info>
+    <section xml:id="zend.timesync.introduction.ntp"><title>Qu'est ce que NTP ?</title>
         
 
         <para>
@@ -110,7 +110,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.timesync.introduction.sntp"><info><title>Qu'est ce que SNTP?</title></info>
+    <section xml:id="zend.timesync.introduction.sntp"><title>Qu'est ce que SNTP?</title>
         
 
         <para>
@@ -121,7 +121,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.timesync.introduction.problematic"><info><title>Problèmes courants d'utilisation</title></info>
+    <section xml:id="zend.timesync.introduction.problematic"><title>Problèmes courants d'utilisation</title>
         
 
         <para>
@@ -133,7 +133,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.timesync.introduction.decision"><info><title>Décider quel serveur de temps utiliser</title></info>
+    <section xml:id="zend.timesync.introduction.decision"><title>Décider quel serveur de temps utiliser</title>
         
 
         <para>

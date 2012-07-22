@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.introduction"><info><title>הקדמה</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.introduction"><title>הקדמה</title>
 
     
 
@@ -9,7 +9,7 @@
         הם יכולים להתווסף, להחסיר ולהשוואת אחד מול השני. מערך שהתקבל ממשתמש בשפה המקומית שלו, ניתן לקבל את יחידת המדידה המדוייקת. עשרות יחידות מדידה נתמכות.
     </para>
 
-    <example xml:id="zend.measure.introduction.example-1"><info><title>המרת מדידות</title></info>
+    <example xml:id="zend.measure.introduction.example-1"><title>המרת מדידות</title>
         
         <para>
             הדוגמאות המקדימות הבאות מציגות כיצד ניתן להמיר יחידות מדידה אוטומטית. כדי להמיר מדידה, הערך שלו והסוג חייבים להיות ידועים מראש. הערך יכול להיות מסוג מספר שלם, עשרוני ואפילו סטרינג עם המספר המייצג אותו.
@@ -31,7 +31,7 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
         לכל יחידת מדידה יש גורם המרה ויחידת תצוגה. רשימה מלאה אודות יחידות התצוגה וההמרה ניתן לקרוא ב  <link linkend="zend.measure.types"><code>סוגי מדידה</code></link>.
     </para>
 
-    <example xml:id="zend.measure.introduction.example-2"><info><title>יחידת המדידה <code>meter</code></title></info>
+    <example xml:id="zend.measure.introduction.example-2"><title>יחידת המדידה <code>meter</code></title>
         
         <para>
             יחידת המדידה <code>meter</code> נועדה למדידת מרחק, לכן הערך הקבוע שלה נתן למציאה במחלקת <code>Length</code>.

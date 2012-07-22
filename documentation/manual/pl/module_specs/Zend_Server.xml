@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.introduction"><info><title>Wprowadzenie</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.introduction"><title>Wprowadzenie</title>
     
     <para>
         Rodzina klas <code>Zend_Server</code> zapewnia funkcjonalność dla różnych

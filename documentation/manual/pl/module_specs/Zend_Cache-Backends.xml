@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><info><title>Backendy Zend_Cache</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><title>Backendy Zend_Cache</title>
     
 
-    <section xml:id="zend.cache.backends.file"><info><title>Zend_Cache_Backend_File</title></info>
+    <section xml:id="zend.cache.backends.file"><title>Zend_Cache_Backend_File</title>
         
         <para>
             Ten backend przechowuje rekordy bufora w plikach (w wybranym katalogu).
@@ -10,7 +10,7 @@
         <para>
             Dostępne opcje to:
         </para>
-        <table xml:id="zend.cache.backends.file.table"><info><title>Opcje backendu File</title></info>
+        <table xml:id="zend.cache.backends.file.table"><title>Opcje backendu File</title>
             
             <tgroup cols="4">
                  <thead>
@@ -115,7 +115,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.sqlite"><info><title>Zend_Cache_Backend_Sqlite</title></info>
+    <section xml:id="zend.cache.backends.sqlite"><title>Zend_Cache_Backend_Sqlite</title>
         
         <para>
             Ten backend przechowuje rekordy bufora w bazie SQLite.
@@ -123,7 +123,7 @@
         <para>
             Dostępne opcje to:
         </para>
-        <table xml:id="zend.cache.backends.sqlite.table"><info><title>Opcje backendu Sqlite</title></info>
+        <table xml:id="zend.cache.backends.sqlite.table"><title>Opcje backendu Sqlite</title>
             
             <tgroup cols="4">
                  <thead>
@@ -160,7 +160,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.memcached"><info><title>Zend_Cache_Backend_Memcached</title></info>
+    <section xml:id="zend.cache.backends.memcached"><title>Zend_Cache_Backend_Memcached</title>
         
         <para>
             Ten backend przechowuje rekordy bufora w serwerze memcached. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.danga.com/memcached/">memcached</link>
@@ -174,7 +174,7 @@
         <para>
             Dostępne opcje to:
         </para>
-        <table xml:id="zend.cache.backends.memcached.table"><info><title>Opcje backendu Memcached</title></info>
+        <table xml:id="zend.cache.backends.memcached.table"><title>Opcje backendu Memcached</title>
             
             <tgroup cols="4">
                  <thead>
@@ -228,7 +228,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.apc"><info><title>Zend_Cache_Backend_Apc</title></info>
+    <section xml:id="zend.cache.backends.apc"><title>Zend_Cache_Backend_Apc</title>
         
         <para>
             Ten backend przechowuje rekordy bufora we współdzielonej pamięci za
@@ -244,7 +244,7 @@
             Ten backend nie ma żadnych opcji.
         </para>
     </section>
-    <section xml:id="zend.cache.backends.xcache"><info><title>Zend_Cache_Backend_Xcache</title></info>
+    <section xml:id="zend.cache.backends.xcache"><title>Zend_Cache_Backend_Xcache</title>
         
         <para>
             Ten backend przechowuje rekordy buforu we współdzielonej pamięci
@@ -258,7 +258,7 @@
         <para>
             Dostępne opcje to:
         </para>
-        <table xml:id="zend.cache.backends.xcache.table"><info><title>Opcje backendu Xcache</title></info>
+        <table xml:id="zend.cache.backends.xcache.table"><title>Opcje backendu Xcache</title>
             
             <tgroup cols="4">
                  <thead>
@@ -290,7 +290,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.platform"><info><title>Zend_Cache_Backend_ZendPlatform</title></info>
+    <section xml:id="zend.cache.backends.platform"><title>Zend_Cache_Backend_ZendPlatform</title>
         
         <para>
             Ten backend używa API produktu <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com/products/platform">Zend Platform</link> do buforowania zawartości. Oczywiście aby użyć tego backendu, musisz mieć zainstalowaną aplikację Zend Platform.
@@ -311,7 +311,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
             Ten backend nie ma żadnych opcji.
         </para>
     </section>
-    <section xml:id="zend.cache.backends.twolevels"><info><title>Zend_Cache_Backend_TwoLevels</title></info>
+    <section xml:id="zend.cache.backends.twolevels"><title>Zend_Cache_Backend_TwoLevels</title>
         
         <para>
             Ten backend jest backendem hybrydowym. PRzechowuje on rekordu buforu 
@@ -327,7 +327,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         <para>
             Dostępne opcje to :
         </para>
-        <table xml:id="zend.cache.backends.twolevels.table"><info><title>Opcje backendu TwoLevels</title></info>
+        <table xml:id="zend.cache.backends.twolevels.table"><title>Opcje backendu TwoLevels</title>
             
             <tgroup cols="4">
                  <thead>
@@ -438,7 +438,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.zendserver"><info><title>Zend_Cache_Backend_ZendServer_Disk oraz Zend_Cache_Backend_ZendServer_ShMem</title></info>
+    <section xml:id="zend.cache.backends.zendserver"><title>Zend_Cache_Backend_ZendServer_Disk oraz Zend_Cache_Backend_ZendServer_ShMem</title>
         
         <para>
             Te backendy przechowują rekordu bufora używając metod buforowania serwera <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com/en/products/server/downloads-all?zfs=zf_download">Zend

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.view.placeholders.standard"><info><title>Standard Platzhalter</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.view.placeholders.standard"><title>Standard Platzhalter</title>
     
 
     <para>
@@ -27,7 +27,7 @@
         ausgeliefert, und verschiedenen mehr.
     </para>
 
-    <section xml:id="learning.view.placeholders.standard.doctype"><info><title>Setzen vom DocType</title></info>
+    <section xml:id="learning.view.placeholders.standard.doctype"><title>Setzen vom DocType</title>
         
 
         <para>
@@ -149,7 +149,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         </para>
     </section>
 
-    <section xml:id="learning.view.placeholders.standard.head-title"><info><title>Den Titel der Seite spezifizieren</title></info>
+    <section xml:id="learning.view.placeholders.standard.head-title"><title>Den Titel der Seite spezifizieren</title>
         
 
         <para>
@@ -233,7 +233,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
     </section>
 
-    <section xml:id="learning.view.placeholders.standard.head-link"><info><title>Stylesheets mit HeadLink spezifizieren</title></info>
+    <section xml:id="learning.view.placeholders.standard.head-link"><title>Stylesheets mit HeadLink spezifizieren</title>
         
 
         <para>
@@ -320,7 +320,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
     </section>
 
-    <section xml:id="learning.view.placeholders.standard.head-script"><info><title>Sammeln von Skripten durch Verwendung von HeadScript</title></info>
+    <section xml:id="learning.view.placeholders.standard.head-script"><title>Sammeln von Skripten durch Verwendung von HeadScript</title>
         
 
         <para>
@@ -428,7 +428,7 @@ site = {
 </script>
 ]]></programlisting>
 
-        <note><info><title>InlineScript Variante</title></info>
+        <note><title>InlineScript Variante</title>
             
 
             <para>

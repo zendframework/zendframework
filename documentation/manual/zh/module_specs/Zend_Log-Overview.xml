@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.overview"><info><title>概述</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.overview"><title>概述</title>
     
 
     <para>
@@ -30,7 +30,7 @@
       </itemizedlist>
     </para>
 
-    <section xml:id="zend.log.overview.creating-a-logger"><info><title>创建Log</title></info>
+    <section xml:id="zend.log.overview.creating-a-logger"><title>创建Log</title>
       
       <para>
         如要启动日志纪录,实例化一个Writer并把它传递给Log实例:
@@ -58,7 +58,7 @@ $logger = new Zend_Log($writer);
       </para>
     </section>
 
-    <section xml:id="zend.log.overview.logging-messages"><info><title>日志消息</title></info>
+    <section xml:id="zend.log.overview.logging-messages"><title>日志消息</title>
       
 
       <para>
@@ -87,7 +87,7 @@ $logger->emerg('Emergency message');
     </para>
   </section>
 
-  <section xml:id="zend.log.overview.destroying-a-logger"><info><title>销毁Log</title></info>
+  <section xml:id="zend.log.overview.destroying-a-logger"><title>销毁Log</title>
     
     <para>
 
@@ -103,7 +103,7 @@ $logger = null;
     </para>
   </section>
 
-  <section xml:id="zend.log.overview.builtin-priorities"><info><title>使用内建的消息等级</title></info>
+  <section xml:id="zend.log.overview.builtin-priorities"><title>使用内建的消息等级</title>
     
     <para>
       <code>Zend_Log</code> 类定义了下面的消息等级:
@@ -138,7 +138,7 @@ DEBUG   = 7;  // Debug: 小时消息
     </para>
   </section>
 
-  <section xml:id="zend.log.overview.user-defined-priorities"><info><title>添加用户定义的日志等级</title></info>
+  <section xml:id="zend.log.overview.user-defined-priorities"><title>添加用户定义的日志等级</title>
     
 
     <para>
@@ -162,7 +162,7 @@ $logger->foo('Foo Message');
     </para>
   </section>
 
-  <section xml:id="zend.log.overview.understanding-fields"><info><title>理解日志事件</title></info>
+  <section xml:id="zend.log.overview.understanding-fields"><title>理解日志事件</title>
     
 
     <para>

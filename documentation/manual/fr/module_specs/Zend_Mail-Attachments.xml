@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>Fichiers joints</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><title>Fichiers joints</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         paramètres à <methodname>createAttachment()</methodname> :
     </para>
 
-    <example xml:id="zend.mail.attachments.example-1"><info><title>Émail avec fichiers joints</title></info>
+    <example xml:id="zend.mail.attachments.example-1"><title>Émail avec fichiers joints</title>
         
 
         <programlisting language="php"><![CDATA[

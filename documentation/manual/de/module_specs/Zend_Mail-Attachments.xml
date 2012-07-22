@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>Anhänge</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><title>Anhänge</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         überschrieben werden:
     </para>
 
-    <example xml:id="zend.mail.attachments.example-1"><info><title>E-Mail Nachrichten mit Anhängen</title></info>
+    <example xml:id="zend.mail.attachments.example-1"><title>E-Mail Nachrichten mit Anhängen</title>
         
 
         <programlisting language="php"><![CDATA[

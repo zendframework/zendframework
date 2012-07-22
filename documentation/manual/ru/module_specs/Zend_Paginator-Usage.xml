@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.usage"><info><title>Использование</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.usage"><title>Использование</title>
     
 
-    <section xml:id="zend.paginator.usage.paginating"><info><title>Разбиение наборов данных на страницы </title></info>
+    <section xml:id="zend.paginator.usage.paginating"><title>Разбиение наборов данных на страницы </title>
         
 
         <para>
@@ -13,7 +13,7 @@
             по умолчанию входят несколько адаптеров:
         </para>
 
-        <table xml:id="zend.paginator.usage.paginating.adapters"><info><title>Адаптеры для Zend_Paginator</title></info>
+        <table xml:id="zend.paginator.usage.paginating.adapters"><title>Адаптеры для Zend_Paginator</title>
             
 
             <tgroup cols="2">
@@ -170,7 +170,7 @@ $this->view->paginator = $paginator;
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.paginator.usage.dbselect"><info><title>Адаптеры DbSelect и DbTableSelect</title></info>
+    <section xml:id="zend.paginator.usage.dbselect"><title>Адаптеры DbSelect и DbTableSelect</title>
         
         <para>
             Хотя большинство адаптеров довольно просто в использовании, адаптеры
@@ -237,7 +237,7 @@ $paginator = new Zend_Paginator($adapter);
         </para>
     </section>
 
-    <section xml:id="zend.paginator.rendering"><info><title>Рендеринг страниц через скрипты видов</title></info>
+    <section xml:id="zend.paginator.rendering"><title>Рендеринг страниц через скрипты видов</title>
         
 
         <para>
@@ -307,7 +307,7 @@ $paginator = new Zend_Paginator($adapter);
             Zend Framework предоставляет четыре стиля прокрутки:
         </para>
 
-        <table xml:id="zend.paginator.usage.rendering.scrolling-styles"><info><title>Стили прокрутки для Zend_Paginator</title></info>
+        <table xml:id="zend.paginator.usage.rendering.scrolling-styles"><title>Стили прокрутки для Zend_Paginator</title>
             
 
             <tgroup cols="2">
@@ -413,7 +413,7 @@ $smarty->assign('pages', $paginator->getPages());
 ]]></programlisting>
         </note>
 
-        <section xml:id="zend.paginator.usage.rendering.example-controls"><info><title>Примеры постраничной навигации</title></info>
+        <section xml:id="zend.paginator.usage.rendering.example-controls"><title>Примеры постраничной навигации</title>
             
 
             <para>
@@ -546,7 +546,7 @@ $('paginationControl').observe('change', function() {
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.paginator.usage.rendering.properties"><info><title>Список свойств</title></info>
+        <section xml:id="zend.paginator.usage.rendering.properties"><title>Список свойств</title>
             
 
             <para>
@@ -554,7 +554,7 @@ $('paginationControl').observe('change', function() {
                 навигации:
             </para>
 
-            <table xml:id="zend.paginator.usage.rendering.properties.table"><info><title>Свойства, доступные в скрипте вида</title></info>
+            <table xml:id="zend.paginator.usage.rendering.properties.table"><title>Свойства, доступные в скрипте вида</title>
                 
 
                 <tgroup cols="3">

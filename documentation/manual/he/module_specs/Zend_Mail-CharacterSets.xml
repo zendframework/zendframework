@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>קידודים שונים</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><title>קידודים שונים</title>
     
     <para>
         <code>Zend_Mail</code> לא בודק אוטומטית את הקידוד הנכון לאיימיל.
@@ -9,7 +9,7 @@
           <code>iso-8859-1</code>. המערכת שהינה כותב חייבת לבדוק שכל החלקים שנוספים לאובייקט של המחלקה מקודדים בקידוד המתאים.
           ברגע שיוצרים חלק נוסף לצירוף לאובייקט האימייל ניתן לשנות את הקידוד שלו, ועל ידי כך ניתן לקבוע קידוד שונה לכל חלק באימייל.
     </para>
-    <note><info><title>רק בפורמט טקסט</title></info>
+    <note><title>רק בפורמט טקסט</title>
         
         <para>
             קידודים ניתן להגדיר רק לחלקים באימייל אשר נשלחים בפורמט טקסט.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><info><title>Дополнительные заголовки</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><title>Дополнительные заголовки</title>
     
     <para>
         Любые заголовки сообщений электронной почты могут быть установлены с
@@ -8,7 +8,7 @@
         Третий необязательный параметр определяет, должен ли заголовок
         иметь одно или несколько значений:
     </para>
-    <example xml:id="zend.mail.additional-headers.example-1"><info><title>Добавление заголовков сообщений</title></info>
+    <example xml:id="zend.mail.additional-headers.example-1"><title>Добавление заголовков сообщений</title>
         
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();

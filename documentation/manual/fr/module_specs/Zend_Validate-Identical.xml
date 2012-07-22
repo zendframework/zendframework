@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.identical"><info><title>Identical</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.identical"><title>Identical</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         est identique à une valeur préalablement fournie.
     </para>
 
-    <section xml:id="zend.validate.set.identical.options"><info><title>Options supportées par Zend_Validate_Identical</title></info>
+    <section xml:id="zend.validate.set.identical.options"><title>Options supportées par Zend_Validate_Identical</title>
         
 
         <para>
@@ -25,7 +25,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.identical.basic"><info><title>Utilisation de base</title></info>
+    <section xml:id="zend.validate.set.identical.basic"><title>Utilisation de base</title>
         
 
         <para>
@@ -53,7 +53,7 @@ if ($valid->isValid($value) {
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.identical.types"><info><title>Objets identiques</title></info>
+    <section xml:id="zend.validate.set.identical.types"><title>Objets identiques</title>
         
 
         <para>
@@ -72,7 +72,7 @@ if ($valid->isValid($input)) {
 }
 ]]></programlisting>
 
-        <note><info><title>Comparaison de type</title></info>
+        <note><title>Comparaison de type</title>
             
 
             <para>
@@ -91,7 +91,7 @@ if ($valid->isValid($input)) {
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.identical.configuration"><info><title>Configuration</title></info>
+    <section xml:id="zend.validate.set.identical.configuration"><title>Configuration</title>
         
 
         <para>

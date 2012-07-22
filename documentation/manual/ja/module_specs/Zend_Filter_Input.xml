@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.input"><info><title>Zend_Filter_Input</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.input"><title>Zend_Filter_Input</title>
     
 
     <para>
@@ -94,7 +94,7 @@
         以下のセクションでは、このクラスの使用法について順を追って説明していきます。
     </para>
 
-    <section xml:id="zend.filter.input.declaring"><info><title>フィルタルールおよび検証ルールの宣言</title></info>
+    <section xml:id="zend.filter.input.declaring"><title>フィルタルールおよび検証ルールの宣言</title>
 
         
 
@@ -206,7 +206,7 @@ $filters = array(
 
     </section>
 
-    <section xml:id="zend.filter.input.running"><info><title>フィルタおよびバリデータの処理装置の作成</title></info>
+    <section xml:id="zend.filter.input.running"><title>フィルタおよびバリデータの処理装置の作成</title>
 
         
 
@@ -257,7 +257,7 @@ $input->setData($newData);
 
     </section>
 
-    <section xml:id="zend.filter.input.results"><info><title>検証済みのフィールドやその他の結果情報の取得</title></info>
+    <section xml:id="zend.filter.input.results"><title>検証済みのフィールドやその他の結果情報の取得</title>
 
         
 
@@ -268,7 +268,7 @@ $input->setData($newData);
             フィルタを適用した後の値を含むフィールドの内容も取得できます。
         </para>
 
-        <section xml:id="zend.filter.input.results.isvalid"><info><title>入力が妥当かどうかの問い合わせ</title></info>
+        <section xml:id="zend.filter.input.results.isvalid"><title>入力が妥当かどうかの問い合わせ</title>
 
             
 
@@ -301,7 +301,7 @@ if ($input->isValid('month')) {
 
         </section>
 
-        <section xml:id="zend.filter.input.results.reports"><info><title>無効なフィールド、存在しないフィールド、未知のフィールドの取得</title></info>
+        <section xml:id="zend.filter.input.results.reports"><title>無効なフィールド、存在しないフィールド、未知のフィールドの取得</title>
 
             
 
@@ -428,7 +428,7 @@ $input->setTranslator($translate);
 
         </section>
 
-        <section xml:id="zend.filter.input.results.escaping"><info><title>有効なフィールドの取得</title></info>
+        <section xml:id="zend.filter.input.results.escaping"><title>有効なフィールドの取得</title>
 
             
 
@@ -466,7 +466,7 @@ $m = $input->getUnescaped('month'); // エスケープ前
                 </para>
             </note>
 
-            <warning><info><title>検証していないフィールドのエスケープ</title></info>
+            <warning><title>検証していないフィールドのエスケープ</title>
                 
 
                 <para>
@@ -545,7 +545,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
 
     </section>
 
-    <section xml:id="zend.filter.input.metacommands"><info><title>メタコマンドによるフィルタルールやバリデータルールの制御</title></info>
+    <section xml:id="zend.filter.input.metacommands"><title>メタコマンドによるフィルタルールやバリデータルールの制御</title>
 
         
 
@@ -557,7 +557,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
             文字列インデックスのエントリとなります。
         </para>
 
-        <section xml:id="zend.filter.input.metacommands.fields"><info><title>FIELDS メタコマンド</title></info>
+        <section xml:id="zend.filter.input.metacommands.fields"><title>FIELDS メタコマンド</title>
 
             
 
@@ -627,7 +627,7 @@ $validators = array(
 
         </section>
 
-        <section xml:id="zend.filter.input.metacommands.presence"><info><title>PRESENCE メタコマンド</title></info>
+        <section xml:id="zend.filter.input.metacommands.presence"><title>PRESENCE メタコマンド</title>
 
             
 
@@ -659,7 +659,7 @@ $validators = array(
 
         </section>
 
-        <section xml:id="zend.filter.input.metacommands.default"><info><title>DEFAULT_VALUE メタコマンド</title></info>
+        <section xml:id="zend.filter.input.metacommands.default"><title>DEFAULT_VALUE メタコマンド</title>
 
             
 
@@ -712,7 +712,7 @@ echo $input->month; // 1 を出力します
 
         </section>
 
-        <section xml:id="zend.filter.input.metacommands.allow-empty"><info><title>ALLOW_EMPTY メタコマンド</title></info>
+        <section xml:id="zend.filter.input.metacommands.allow-empty"><title>ALLOW_EMPTY メタコマンド</title>
 
             
 
@@ -777,7 +777,7 @@ $input->setOptions($options);
 
         </section>
 
-        <section xml:id="zend.filter.input.metacommands.break-chain"><info><title>BREAK_CHAIN メタコマンド</title></info>
+        <section xml:id="zend.filter.input.metacommands.break-chain"><title>BREAK_CHAIN メタコマンド</title>
 
             
 
@@ -846,7 +846,7 @@ $input = new Zend_Filter_Input(null, $validators);
 
         </section>
 
-        <section xml:id="zend.filter.input.metacommands.messages"><info><title>MESSAGES メタコマンド</title></info>
+        <section xml:id="zend.filter.input.metacommands.messages"><title>MESSAGES メタコマンド</title>
 
             
 
@@ -962,7 +962,7 @@ $validators = array(
 
         </section>
 
-        <section xml:id="zend.filter.input.metacommands.global"><info><title>オプションの使用による、全ルールへのメタコマンドの設定</title></info>
+        <section xml:id="zend.filter.input.metacommands.global"><title>オプションの使用による、全ルールへのメタコマンドの設定</title>
 
             
 
@@ -1000,7 +1000,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 
     </section>
 
-    <section xml:id="zend.filter.input.namespaces"><info><title>フィルタクラスへの名前空間の追加</title></info>
+    <section xml:id="zend.filter.input.namespaces"><title>フィルタクラスへの名前空間の追加</title>
 
         
 

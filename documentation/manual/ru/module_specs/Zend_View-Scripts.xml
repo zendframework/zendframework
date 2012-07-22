@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>Скрипты видов</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><title>Скрипты видов</title>
 
     
 
@@ -51,7 +51,7 @@
 <?php endif;?>
 ]]></programlisting>
 
-    <section xml:id="zend.view.scripts.escaping"><info><title>Экранирование вывода</title></info>
+    <section xml:id="zend.view.scripts.escaping"><title>Экранирование вывода</title>
 
         
 
@@ -114,7 +114,7 @@ echo $view->render(...);
 
     </section>
 
-    <section xml:id="zend.view.scripts.templates"><info><title>Использование других шаблонизаторов</title></info>
+    <section xml:id="zend.view.scripts.templates"><title>Использование других шаблонизаторов</title>
 
         
 
@@ -127,7 +127,7 @@ echo $view->render(...);
             интерфейса <classname>Zend_View_Interface</classname>.
         </para>
 
-        <section xml:id="zend.view.scripts.templates.scripts"><info><title>Шаблонизаторы c использованием скриптов видов</title></info>
+        <section xml:id="zend.view.scripts.templates.scripts"><title>Шаблонизаторы c использованием скриптов видов</title>
             
 
             <para>
@@ -185,7 +185,7 @@ if ($this->books) {
 
         </section>
 
-        <section xml:id="zend.view.scripts.templates.interface"><info><title>Шаблонизаторы с использованием Zend_View_Interface</title></info>
+        <section xml:id="zend.view.scripts.templates.interface"><title>Шаблонизаторы с использованием Zend_View_Interface</title>
             
 
             <para>

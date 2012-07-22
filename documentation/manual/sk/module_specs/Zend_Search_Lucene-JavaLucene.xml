@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>Spolupráca s Java Lucene</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><title>Spolupráca s Java Lucene</title>
     
 
-    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>Formáty súborov</title></info>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><title>Formáty súborov</title>
         
         <para>
             Indexový súbor Zend_Search_Lucene je binárne kompatibilný s verziou
@@ -16,7 +16,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>Adresár indexu</title></info>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><title>Adresár indexu</title>
         
 
         <para>
@@ -44,7 +44,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>Zdrojový kód v Java</title></info>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><title>Zdrojový kód v Java</title>
         
         <para>
             Nasledujúci Java kód poskytuje príklad ako indexovať súbor s použitím

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.introduction"><info><title> Getopt 简介 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.introduction"><title> Getopt 简介 </title>
     
     <para>
         <code>Zend_Console_Getopt</code> 类帮助命令行程序解析它们的选项和参数。
@@ -48,7 +48,7 @@
     <para>
         <code>Zend_Console_Getopt</code> 提供了接口来声明哪个 flags 对你的程序有效，如果使用了无效的flag，则输出错误和用法信息，并报告给你的程序代码。
     </para>
-    <note><info><title>Getopt 不是应用程序框架 </title></info>
+    <note><title>Getopt 不是应用程序框架 </title>
         
         <para>
             <code>Zend_Console_Getopt</code> <emphasis> 不 </emphasis> 不翻译 flags 和 parameters 的意思，这个类也不实现程序流程或调用程序代码。你必需在你自己的程序代码中实现这些动作。你可以使用 <code>Zend_Console_Getopt</code> 来解析命令行和提供面向对象的方法来查询由用户给定的 options ，但使用这些信息去调用程序的部分应当在其它 PHP 类里。

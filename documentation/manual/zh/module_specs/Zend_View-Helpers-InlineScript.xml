@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><info><title>InlineScript 助手 </title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><title>InlineScript 助手 </title>
     
 
     <para>
         HTML <code>&lt;script&gt;</code> 标签用来提供内嵌的客户端脚本，或者链接到远程包含客户端脚本代码的资源。<code>InlineScript</code> 助手允许你管理这两者。它由<link linkend="zend.view.helpers.initial.headscript">HeadScript</link>派生，并且HeadScript助手的任何方法都可用，唯一不同的是需要用 <code>inlineScript()</code> 方法代替 <code>headScript()</code>。
     </para>
 
-    <note><info><title> 在 HTML Body 里脚本使用 InlineScript </title></info>
+    <note><title> 在 HTML Body 里脚本使用 InlineScript </title>
         
 
         <para>

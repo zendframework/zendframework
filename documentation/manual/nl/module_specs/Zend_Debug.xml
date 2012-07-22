@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>Variabelen dumpen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><title>Variabelen dumpen</title>
 
     
 
@@ -11,7 +11,7 @@
         programma's of debug omgevingen nodig heeft.
     </para>
 
-    <example xml:id="zend.debug.dumping.example"><info><title>Voorbeeld van de dump() methode</title></info>
+    <example xml:id="zend.debug.dumping.example"><title>Voorbeeld van de dump() methode</title>
         
         <programlisting role="php"><![CDATA[<?php
 
@@ -47,7 +47,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);]]></programlisting>
         en door de (x)HTML <code>&lt;pre&gt;</code> tags omhulst.
     </para>
 
-    <tip><info><title>Debuggen met Zend_Log</title></info>
+    <tip><title>Debuggen met Zend_Log</title>
         
         <para>
             Het gebruiken van <code>Zend_Debug::dump()</code> is goed voor ad hoc debuggen

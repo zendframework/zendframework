@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.recaptcha"><info><title>Zend_Service_ReCaptcha</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.recaptcha"><title>Zend_Service_ReCaptcha</title>
     
 
-    <section xml:id="zend.service.recaptcha.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.service.recaptcha.introduction"><title>Introduction</title>
         
 
         <para>
@@ -20,7 +20,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.recaptcha.simplestuse"><info><title>Utilisation la plus simple</title></info>
+    <section xml:id="zend.service.recaptcha.simplestuse"><title>Utilisation la plus simple</title>
         
 
         <para>
@@ -28,7 +28,7 @@
             vos clés publique et privée :
         </para>
 
-        <example xml:id="zend.service.recaptcha.example-1"><info><title>Créer une instance de service ReCaptcha</title></info>
+        <example xml:id="zend.service.recaptcha.example-1"><title>Créer une instance de service ReCaptcha</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -41,7 +41,7 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
             :
         </para>
 
-        <example xml:id="zend.service.recaptcha.example-2"><info><title>Afficher le ReCaptcha</title></info>
+        <example xml:id="zend.service.recaptcha.example-2"><title>Afficher le ReCaptcha</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -68,7 +68,7 @@ $result = $recaptcha->verify(
             <methodname>isValid()</methodname>.
         </para>
 
-        <example xml:id="zend.service.recaptcha.example-3"><info><title>Vérifier les champs de formulaire</title></info>
+        <example xml:id="zend.service.recaptcha.example-3"><title>Vérifier les champs de formulaire</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -85,7 +85,7 @@ if (!$result->isValid()) {
         </para>
     </section>
 
-    <section xml:id="zend.service.recaptcha.mailhide"><info><title>Hiding email addresses</title></info>
+    <section xml:id="zend.service.recaptcha.mailhide"><title>Hiding email addresses</title>
         
 
         <para>
@@ -99,7 +99,7 @@ if (!$result->isValid()) {
             <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://recaptcha.net/whyrecaptcha.html">an account</link>, and generate
             public and private keys for the mailhide API.
         </para>
-        <example xml:id="zend.service.recaptcha.mailhide.example-1"><info><title>Using the mail hide component</title></info>
+        <example xml:id="zend.service.recaptcha.mailhide.example-1"><title>Using the mail hide component</title>
             
             <programlisting language="php"><![CDATA[
 // The mail address we want to hide
@@ -124,7 +124,7 @@ print($mailHide);
             The public key, private key and the email address can also be specified in the
             constructor of the class. A fourth argument also exists that enables you to set some
             options for the component. The available options are listed in the following table:
-            <table xml:id="zend.service.recaptcha.mailhide.options.table"><info><title>Zend_Service_ReCaptcha_MailHide options</title></info>
+            <table xml:id="zend.service.recaptcha.mailhide.options.table"><title>Zend_Service_ReCaptcha_MailHide options</title>
                 
                 <tgroup cols="4">
                     <thead>
@@ -169,7 +169,7 @@ print($mailHide);
             constructor or by calling the <methodname>setOptions($options)</methodname> which takes
             an associative array or an instance of <link linkend="zend.config">Zend_Config</link>.
         </para>
-        <example xml:id="zend.service.recaptcha.mailhide.example-2"><info><title>Generating many hidden email addresses</title></info>
+        <example xml:id="zend.service.recaptcha.mailhide.example-2"><title>Generating many hidden email addresses</title>
             
             <programlisting language="php"><![CDATA[
 // Create an instance of the mailhide component, passing it your public and private keys as well as

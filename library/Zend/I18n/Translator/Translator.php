@@ -205,7 +205,7 @@ class Translator
      */
     public function setFallbackLocale($locale)
     {
-        $this->fallbackLocale= $locale;
+        $this->fallbackLocale = $locale;
         return $this;
     }
 
@@ -216,10 +216,6 @@ class Translator
      */
     public function getFallbackLocale()
     {
-        if ($this->fallbackLocale === null) {
-            $this->fallbackLocale = Locale::getDefault();
-        }
-
         return $this->fallbackLocale;
     }
 
@@ -333,7 +329,7 @@ class Translator
                 );
             }
 
-            return ($number != 1 ? $singular : $plural);
+            return ($number == 1 ? $singular : $plural);
         }
 
         $index = $this->messages[$textDomain][$locale]

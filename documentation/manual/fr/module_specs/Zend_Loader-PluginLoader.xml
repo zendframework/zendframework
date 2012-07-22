@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.pluginloader"><info><title>Chargeur de Plugins</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.pluginloader"><title>Chargeur de Plugins</title>
     
 
     <para>
@@ -18,7 +18,7 @@
         enregistrés plus tôt.
     </para>
 
-    <section xml:id="zend.loader.pluginloader.usage"><info><title>Utilisation basique</title></info>
+    <section xml:id="zend.loader.pluginloader.usage"><title>Utilisation basique</title>
         
 
         <para>
@@ -85,7 +85,7 @@ $formSubmitClass = $loader->load('FormSubmit');
 
         <para>Une fois chargée, la classe devient instanciable.</para>
 
-        <note><info><title>Plusieurs dossiers peuvent être assignés à un même préfixe</title></info>
+        <note><title>Plusieurs dossiers peuvent être assignés à un même préfixe</title>
             
 
             <para>
@@ -96,7 +96,7 @@ $formSubmitClass = $loader->load('FormSubmit');
             </para>
         </note>
 
-        <note><info><title>Paramétrage des chemins dans le constructeur</title></info>
+        <note><title>Paramétrage des chemins dans le constructeur</title>
             
 
             <para>
@@ -130,7 +130,7 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         </para>
     </section>
 
-    <section xml:id="zend.loader.pluginloader.paths"><info><title>Manipulation des chemins des Plugins</title></info>
+    <section xml:id="zend.loader.pluginloader.paths"><title>Manipulation des chemins des Plugins</title>
         
 
         <para>
@@ -165,7 +165,7 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.loader.pluginloader.checks"><info><title>Test des Plugins et récupération des noms de classe</title></info>
+    <section xml:id="zend.loader.pluginloader.checks"><title>Test des Plugins et récupération des noms de classe</title>
         
 
         <para>
@@ -188,7 +188,7 @@ if ($loader->isLoaded('Adapter')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.pluginloader.performance"><info><title>Obtenir de meilleures performances avec les Plugins</title></info>
+    <section xml:id="zend.loader.pluginloader.performance"><title>Obtenir de meilleures performances avec les Plugins</title>
         
 
         <para>
@@ -209,8 +209,8 @@ if ($loader->isLoaded('Adapter')) {
             considérablement accroître les performances de vos serveurs de production.
         </para>
 
-        <example xml:id="zend.loader.pluginloader.performance.example"><info><title>Utilisation du fichier de cache des inclusions de classe de
-            PluginLoader</title></info>
+        <example xml:id="zend.loader.pluginloader.performance.example"><title>Utilisation du fichier de cache des inclusions de classe de
+            PluginLoader</title>
             
 
             <para>

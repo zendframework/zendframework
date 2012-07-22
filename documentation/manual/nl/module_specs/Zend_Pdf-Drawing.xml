@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.drawing"><info><title>Tekenen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.drawing"><title>Tekenen</title>
     
 
-    <section xml:id="zend.pdf.drawing.geometry"><info><title>Geometrie</title></info>
+    <section xml:id="zend.pdf.drawing.geometry"><title>Geometrie</title>
         
         <para>
         PDF gebruikt dezelfde geometrie als PostScript. Het begint van de beneden-linkse
@@ -17,7 +17,7 @@ $height = $pdfPage->getHeight();
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.color"><info><title>Kleur</title></info>
+    <section xml:id="zend.pdf.drawing.color"><title>Kleur</title>
         
         <para>
         PDF heeft geweldig goede kleurweergavemogelijkheden. Zend_Pdf ondersteunt grijsschalen, RGB en CMYK
@@ -38,7 +38,7 @@ $color3 = new Zend_Pdf_Color_CMYK($c, $m, $y, $k);
     </section>
 
 
-    <section xml:id="zend.pdf.drawing.shape-drawing"><info><title>Vormen tekenen</title></info>
+    <section xml:id="zend.pdf.drawing.shape-drawing"><title>Vormen tekenen</title>
         
         <para>
         Alle tekenoperaties kunnen worden uitgevoerd in de context van een PDF pagina.
@@ -144,7 +144,7 @@ public function drawEllipse($x1, $y1, $x2, $y2, $param5 = null, $param6 = null, 
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.text-drawing"><info><title>Tekst schrijven</title></info>
+    <section xml:id="zend.pdf.drawing.text-drawing"><title>Tekst schrijven</title>
         
         <para>
         Ook tekst wordt geschreven in de paginacontext:
@@ -166,7 +166,7 @@ public function drawText($text, $x, $y );
         </para>
     </section>
 
-    <section xml:id="zend.pdf.drawing.using-fonts"><info><title>Lettertypes gebruiken</title></info>
+    <section xml:id="zend.pdf.drawing.using-fonts"><title>Lettertypes gebruiken</title>
         
         <para>
         De <code>Zend_Pdf_Page::drawText()</code> methode gebruikt het actieve lettertype die kan gezet worden door
@@ -187,7 +187,7 @@ public function setFont(Zend_Pdf_Font $font, $fontSize);
         verkregen worden door de <code>Zend_Pdf_Font_Standard</code> klasse te gebruiken. Een bepaalde lettertype
         moet worden gebruikt als argument:
         </para>
-        <example><info><title>Een standaard lettertype maken</title></info>
+        <example><title>Een standaard lettertype maken</title>
             
             <programlisting role="php"><![CDATA[<?php
 ...
@@ -249,7 +249,7 @@ $pdfPage->setFont($font, 36);
         </para>
     </section>
 
-    <section xml:id="zend.pdf.drawing.image-drawing"><info><title>Beelden tekenen</title></info>
+    <section xml:id="zend.pdf.drawing.image-drawing"><title>Beelden tekenen</title>
         
         <para>
         De <code>Zend_Pdf_Page</code> klasse voorziet de <code>drawImage()</code> methode om beelden te tekenen:
@@ -272,7 +272,7 @@ public function drawImage(Zend_Pdf_Image $image, $x1, $y1, $x2, $y2);
         <para>
         Alleen JPG beelden zijn momenteel ondersteund:
         </para>
-        <example><info><title>Beelden tekenen</title></info>
+        <example><title>Beelden tekenen</title>
             
             <programlisting role="php"><![CDATA[<?php
 ...
@@ -292,7 +292,7 @@ $pdfPage->drawImage($image, 100, 100, 400, 300);;
         </para>
     </section>
 
-    <section xml:id="zend.pdf.drawing.line-drawing-style"><info><title>Lijnstijl tekenen</title></info>
+    <section xml:id="zend.pdf.drawing.line-drawing-style"><title>Lijnstijl tekenen</title>
         
         <para>
         De lijnstijl wordt gedefinieerd door lijndikte, lijnkleur en lijnstippenpatroon. Al deze parameters kunnen door de <code>Zend_Pdf_Page</code> klasse methodes worden aangegeven:
@@ -317,7 +317,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.fill-style"><info><title>Vulstijl</title></info>
+    <section xml:id="zend.pdf.drawing.fill-style"><title>Vulstijl</title>
         
         <para>
         De <code>Zend_Pdf_Page::drawRectangle()</code>, <code>Zend_Pdf_Page::drawPoligon()</code>,
@@ -403,7 +403,7 @@ regardless of the directions in which the circles are drawn.
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.pdf.drawing.rotations"><info><title>Rotaties</title></info>
+    <section xml:id="zend.pdf.drawing.rotations"><title>Rotaties</title>
         
         <para>
         Een PDF pagina kan geroteerd worden zo lang er nog niets op werd geschreven of getekend.
@@ -419,7 +419,7 @@ public function rotate($x, $y, $angle);
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.save-restore"><info><title>Opslaan/herstellen van een grafische staat</title></info>
+    <section xml:id="zend.pdf.drawing.save-restore"><title>Opslaan/herstellen van een grafische staat</title>
         
         <para>
         Op eender welk moment kan een grafische staat van een pagina (huidig lettertype, lettertype
@@ -445,7 +445,7 @@ public function restoreGS();
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.clipping"><info><title>Clipping draw area</title></info>
+    <section xml:id="zend.pdf.drawing.clipping"><title>Clipping draw area</title>
         
         <para>
         PDF en de Zend_Pdf module ondersteunen clippen van een teken area.
@@ -509,7 +509,7 @@ public function clipEllipse($x1, $y1, $x2, $y2, $startAngle = null, $endAngle = 
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.pdf.drawing.styles"><info><title>Stijlen</title></info>
+    <section xml:id="zend.pdf.drawing.styles"><title>Stijlen</title>
         
         <para>
         De <code>Zend_Pdf_Style</code> klasse voorziet in stijlen

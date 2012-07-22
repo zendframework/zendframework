@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.server"><info><title>LDAPサーバから情報を取得</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.server"><title>LDAPサーバから情報を取得</title>
     
-    <section xml:id="zend.ldap.server.rootdse"><info><title>ルートDSE</title></info>
+    <section xml:id="zend.ldap.server.rootdse"><title>ルートDSE</title>
         
 
         <para>
@@ -30,7 +30,7 @@
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.ldap.server.rootdse.getting"><info><title>ルートDSEを手に入れる</title></info>
+        <example xml:id="zend.ldap.server.rootdse.getting"><title>ルートDSEを手に入れる</title>
             
             <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
@@ -41,10 +41,10 @@ $serverType = $rootdse->getServerType();
         </example>
     </section>
 
-    <section xml:id="zend.ldap.server.schema"><info><title>参照するスキーマ</title></info>
+    <section xml:id="zend.ldap.server.schema"><title>参照するスキーマ</title>
         
 
-        <example xml:id="zend.ldap.server.schema.getting"><info><title>サーバ・スキーマを手に入れる</title></info>
+        <example xml:id="zend.ldap.server.schema.getting"><title>サーバ・スキーマを手に入れる</title>
             
             <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
@@ -54,14 +54,14 @@ $classes = $schema->getObjectClasses();
 ]]></programlisting>
         </example>
 
-        <section xml:id="zend.ldap.server.schema.openldap"><info><title>OpenLDAP</title></info>
+        <section xml:id="zend.ldap.server.schema.openldap"><title>OpenLDAP</title>
             
             <para/>
         </section>
 
-        <section xml:id="zend.ldap.server.schema.activedirectory"><info><title>ActiveDirectory</title></info>
+        <section xml:id="zend.ldap.server.schema.activedirectory"><title>ActiveDirectory</title>
             
-            <note><info><title>ActiveDirectoryサーバで参照するスキーマ</title></info>
+            <note><title>ActiveDirectoryサーバで参照するスキーマ</title>
                 
                 <para>
                     包括的探索ルーチンによって返される項目の数に関する

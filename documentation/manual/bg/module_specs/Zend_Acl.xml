@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Въведение</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><title>Въведение</title>
     
 
     <para>
@@ -35,7 +35,7 @@
         Чрез употребата на access control list (ACL), една програма може да контролира как на обекти правещ заявката (Resource), е предостаавен достъп до защитен обект (Resource).
     </para>
 
-    <section xml:id="zend.acl.introduction.resources"><info><title>Относно Resource</title></info>
+    <section xml:id="zend.acl.introduction.resources"><title>Относно Resource</title>
         
         <para>
             В Zend_Acl, създаването на Resource е много лесно. Zend_Acl предоставя
@@ -60,7 +60,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.acl.introduction.roles"><info><title>Относно Roles</title></info>
+    <section xml:id="zend.acl.introduction.roles"><title>Относно Roles</title>
         
         <para>
             Както и Ресурса така и създаването Рole е много лесно.
@@ -81,7 +81,7 @@
             Въпреки че способността да се онаследява от множество Roles е полезно, това довежда до някаква степен на усложняване от своя страна.
             Следния пример илюстрира как Zend_Acl улеснява в подобни ситуации.
         </para>
-        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>Многократно онаследяване между Roles</title></info>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>Многократно онаследяване между Roles</title>
             
             <para>
 
@@ -141,7 +141,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.creating"><info><title>Създаван на Access Control List (ACL)</title></info>
+    <section xml:id="zend.acl.introduction.creating"><title>Създаван на Access Control List (ACL)</title>
         
 
         <para>
@@ -165,7 +165,7 @@ $acl = new Zend_Acl();
         </note>
     </section>
 
-    <section xml:id="zend.acl.introduction.role_registry"><info><title>Регистриране на Роли</title></info>
+    <section xml:id="zend.acl.introduction.role_registry"><title>Регистриране на Роли</title>
         
 
         <para>
@@ -180,7 +180,7 @@ $acl = new Zend_Acl();
             Различните нива на достъп могат да се представят така:
         </para>
 
-        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Access Controls за Example CMS</title></info>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><title>Access Controls за Example CMS</title>
           
           <tgroup cols="3">
             <thead>
@@ -249,7 +249,7 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
 
     </section>
 
-    <section xml:id="zend.acl.introduction.defining"><info><title>Дефиниране на Access Controls</title></info>
+    <section xml:id="zend.acl.introduction.defining"><title>Дефиниране на Access Controls</title>
         
 
         <para>
@@ -303,7 +303,7 @@ $acl->allow('administrator');
 
     </section>
 
-    <section xml:id="zend.acl.introduction.querying"><info><title>Допит до ACL</title></info>
+    <section xml:id="zend.acl.introduction.querying"><title>Допит до ACL</title>
         
 
         <para>

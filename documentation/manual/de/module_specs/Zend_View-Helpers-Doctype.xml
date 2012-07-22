@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><info><title>Doctype Helfer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><title>Doctype Helfer</title>
     
 
     <para>
@@ -36,7 +36,7 @@
         <link linkend="zend.view.helpers.initial.placeholder">Platzhalter Helfers</link>.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><info><title>Grundsätzliche Verwendung des Doctype Helfers</title></info>
+    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><title>Grundsätzliche Verwendung des Doctype Helfers</title>
         
 
         <para>
@@ -59,7 +59,7 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><info><title>Empfangen des Doctypes</title></info>
+    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><title>Empfangen des Doctypes</title>
         
 
         <para>

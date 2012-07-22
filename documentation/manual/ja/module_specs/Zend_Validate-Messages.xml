@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.messages"><info><title>検証メッセージ</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.messages"><title>検証メッセージ</title>
 
     
 
@@ -55,7 +55,7 @@ $validator->setMessage(
         parameter, then the given message will be set for all possible failures of this validator.
     </para>
 
-    <section xml:id="zend.validate.messages.pretranslated"><info><title>Using pre-translated validation messages</title></info>
+    <section xml:id="zend.validate.messages.pretranslated"><title>Using pre-translated validation messages</title>
         
 
         <para>
@@ -66,7 +66,7 @@ $validator->setMessage(
             Zend Framework installation.
         </para>
 
-        <note><info><title>Used path</title></info>
+        <note><title>Used path</title>
             
 
             <para>
@@ -92,7 +92,7 @@ $translator = new Zend_Translator(
 Zend_Validate_Abstract::setDefaultTranslator($translator);
 ]]></programlisting>
 
-        <note><info><title>Used translation adapter</title></info>
+        <note><title>Used translation adapter</title>
             
 
             <para>
@@ -101,7 +101,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
             </para>
         </note>
 
-        <note><info><title>Supported languages</title></info>
+        <note><title>Supported languages</title>
             
 
             <para>
@@ -117,7 +117,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
         </note>
     </section>
 
-    <section xml:id="zend.validate.messages.limitation"><info><title>検証メッセージのサイズの制限</title></info>
+    <section xml:id="zend.validate.messages.limitation"><title>検証メッセージのサイズの制限</title>
         
 
         <para>
@@ -147,7 +147,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
 Zend_Validate::setMessageLength(100);
 ]]></programlisting>
 
-        <note><info><title>このパラメータはどこで使われますか？</title></info>
+        <note><title>このパラメータはどこで使われますか？</title>
             
 
             <para>

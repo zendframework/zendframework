@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.theory_of_operation"><info><title>Aspectos Teóricos</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.theory_of_operation"><title>Aspectos Teóricos</title>
     
     <para> Los datos de configuración se hacen accesibles al constructor
             <classname>Zend_Config</classname> a través de un array asociativo,

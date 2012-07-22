@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><info><title>データベースのテーブルでの認証</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><title>データベースのテーブルでの認証</title>
     
-    <section xml:id="zend.auth.adapter.dbtable.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.introduction"><title>導入</title>
         
         <para>
             <classname>Zend_Auth_Adapter_DbTable</classname> は、
@@ -57,7 +57,7 @@
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><info><title>基本的な使用法</title></info>
+        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><title>基本的な使用法</title>
             
             <para>
                 導入部で説明したとおり、<classname>Zend_Auth_Adapter_DbTable</classname>
@@ -165,7 +165,7 @@ Array
             </para>
         </example>
     </section>
-    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><info><title>応用例: 持続的な DbTable 結果オブジェクト</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><title>応用例: 持続的な DbTable 結果オブジェクト</title>
         
         <para>
             デフォルトでは <classname>Zend_Auth_Adapter_DbTable</classname> は、
@@ -202,7 +202,7 @@ if ($result->isValid()) {
 
 }]]></programlisting>
     </section>
-    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><info><title>高度な使用例</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><title>高度な使用例</title>
         
         <para>
             <classname>Zend_Auth</classname> (そして <classname>Zend_Auth_Adapter_DbTable</classname>) の主な目的は

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.110"><info><title>Zend Framework 1.10</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.110"><title>Zend Framework 1.10</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         下記の移行上の注意点に注意すべきです。
     </para>
 
-    <section xml:id="migration.110.zend.controller.front"><info><title>Zend_Controller_Front</title></info>
+    <section xml:id="migration.110.zend.controller.front"><title>Zend_Controller_Front</title>
         
 
         <para>
@@ -49,7 +49,7 @@
 ]]></programlisting>
     </section>
 
-    <section xml:id="migration.110.zend.feed.reader"><info><title>Zend_Feed_Reader</title></info>
+    <section xml:id="migration.110.zend.feed.reader"><title>Zend_Feed_Reader</title>
         
 
         <para>
@@ -108,10 +108,10 @@ $authors = $feed->getAuthors()->getValues();
 ]]></programlisting>
     </section>
 
-    <section xml:id="migration.110.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
+    <section xml:id="migration.110.zend.file.transfer"><title>Zend_File_Transfer</title>
         
 
-        <section xml:id="migration.110.zend.file.transfer.files"><info><title>Security change</title></info>
+        <section xml:id="migration.110.zend.file.transfer.files"><title>Security change</title>
             
 
             <para>
@@ -134,7 +134,7 @@ $authors = $feed->getAuthors()->getValues();
             </para>
         </section>
 
-        <section xml:id="migration.110.zend.file.transfer.count"><info><title>Count 検証</title></info>
+        <section xml:id="migration.110.zend.file.transfer.count"><title>Count 検証</title>
             
 
             <para>
@@ -142,7 +142,7 @@ $authors = $feed->getAuthors()->getValues();
                 一貫性のために、下記の定数が変更されました。
             </para>
 
-            <table xml:id="migration.110.zend.file.transfer.count.table"><info><title>変更された検証メッセージ</title></info>
+            <table xml:id="migration.110.zend.file.transfer.count.table"><title>変更された検証メッセージ</title>
                 
 
                 <tgroup cols="4">
@@ -183,7 +183,7 @@ $authors = $feed->getAuthors()->getValues();
         </section>
     </section>
 
-    <section xml:id="migration.110.zend.filter.html-entities"><info><title>Zend_Filter_HtmlEntities</title></info>
+    <section xml:id="migration.110.zend.filter.html-entities"><title>Zend_Filter_HtmlEntities</title>
         
 
         <para>
@@ -204,7 +204,7 @@ $authors = $feed->getAuthors()->getValues();
         </para>
     </section>
 
-    <section xml:id="migration.110.zend.filter.strip-tags"><info><title>Zend_Filter_StripTags</title></info>
+    <section xml:id="migration.110.zend.filter.strip-tags"><title>Zend_Filter_StripTags</title>
         
 
         <para>
@@ -222,10 +222,10 @@ $authors = $feed->getAuthors()->getValues();
         </para>
     </section>
 
-    <section xml:id="migration.110.zend.translator"><info><title>Zend_Translator</title></info>
+    <section xml:id="migration.110.zend.translator"><title>Zend_Translator</title>
         
 
-        <section xml:id="migration.110.zend.translator.xliff"><info><title>Xliff アダプタ</title></info>
+        <section xml:id="migration.110.zend.translator.xliff"><title>Xliff アダプタ</title>
             
 
             <para>
@@ -249,10 +249,10 @@ $trans = new Zend_Translator(
         </section>
     </section>
 
-    <section xml:id="migration.110.zend.validate"><info><title>Zend_Validate</title></info>
+    <section xml:id="migration.110.zend.validate"><title>Zend_Validate</title>
         
 
-        <section xml:id="migration.110.zend.validate.selfwritten"><info><title>書かれたバリデータ自身</title></info>
+        <section xml:id="migration.110.zend.validate.selfwritten"><title>書かれたバリデータ自身</title>
             
 
             <para>
@@ -298,7 +298,7 @@ My_Validator extends Zend_Validate_Abstract
 ]]></programlisting>
         </section>
 
-        <section xml:id="migration.110.zend.validate.datevalidator"><info><title>日付バリデータの簡略化</title></info>
+        <section xml:id="migration.110.zend.validate.datevalidator"><title>日付バリデータの簡略化</title>
             
 
             <para>
@@ -311,7 +311,7 @@ My_Validator extends Zend_Validate_Abstract
             </para>
         </section>
 
-        <section xml:id="migration.110.zend.validate.barcodevalidator"><info><title>Alpha、Alnum及びBarcodeバリデータの修正</title></info>
+        <section xml:id="migration.110.zend.validate.barcodevalidator"><title>Alpha、Alnum及びBarcodeバリデータの修正</title>
             
 
             <para>
@@ -329,7 +329,7 @@ My_Validator extends Zend_Validate_Abstract
                 下記の表では変更された値を示します。
             </para>
 
-            <table xml:id="migration.110.zend.validate.barcodevalidator.table"><info><title>利用可能なバリデータのメッセージ</title></info>
+            <table xml:id="migration.110.zend.validate.barcodevalidator.table"><title>利用可能なバリデータのメッセージ</title>
                 
 
                 <tgroup cols="3">

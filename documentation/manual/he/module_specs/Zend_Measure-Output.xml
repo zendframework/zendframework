@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.output"><info><title>הדפסת מדידות</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.output"><title>הדפסת מדידות</title>
 
     
 
@@ -27,13 +27,13 @@
         </link>
     </para>
 
-    <section xml:id="zend.measure.output.auto"><info><title>הדפסה אוטומטית</title></info>
+    <section xml:id="zend.measure.output.auto"><title>הדפסה אוטומטית</title>
 
         
 
         <para>
             <code>Zend_Measure</code> תומך בהדפסת הנתונים אוטומטית.
-            <example xml:id="zend.measure.output.auto.example-1"><info><title>הדפסה אוטומטית</title></info>
+            <example xml:id="zend.measure.output.auto.example-1"><title>הדפסה אוטומטית</title>
                 
                 <programlisting role="php"><![CDATA[
 $locale = new Zend_Locale('de');
@@ -48,7 +48,7 @@ echo $unit;
             </example>
         </para>
 
-        <note><info><title>הדפסת מדידה</title></info>
+        <note><title>הדפסת מדידה</title>
             
             <para>
                 ניתן להציג את ערך המדידה בעזרת שימוש פשוט בפונקציות
@@ -63,7 +63,7 @@ echo $unit;
 
     </section>
 
-    <section xml:id="zend.measure.output.value"><info><title>הדפסת ערכים</title></info>
+    <section xml:id="zend.measure.output.value"><title>הדפסת ערכים</title>
 
         
 
@@ -71,7 +71,7 @@ echo $unit;
 
 
            ערך המדידה ניתן להדפסה על ידי קריאה ל  <code>getValue()</code>.
-            <example xml:id="zend.measure.output.value.example-1"><info><title>הדפסת ערך</title></info>
+            <example xml:id="zend.measure.output.value.example-1"><title>הדפסת ערך</title>
                 
                 <programlisting role="php"><![CDATA[
 $locale = new Zend_Locale('de');
@@ -92,13 +92,13 @@ echo $unit->getValue();
         </para>
     </section>
 
-    <section xml:id="zend.measure.output.unit"><info><title>הדפסה עם יחידת המדידה</title></info>
+    <section xml:id="zend.measure.output.unit"><title>הדפסה עם יחידת המדידה</title>
 
         
 
         <para>
             הפונקציה <code>getType()</code> מחזירה את יחידת המדידה הנוכחית.
-            <example xml:id="zend.measure.output.unit.example-1"><info><title>הדפסה עם יחידת המדידה</title></info>
+            <example xml:id="zend.measure.output.unit.example-1"><title>הדפסה עם יחידת המדידה</title>
                 
                 <programlisting role="php"><![CDATA[
 $locale = new Zend_Locale('de');
@@ -115,7 +115,7 @@ echo $unit->getType();
 
     </section>
 
-    <section xml:id="zend.measure.output.localized"><info><title>הדפסה בתור סטרינג מקומי</title></info>
+    <section xml:id="zend.measure.output.localized"><title>הדפסה בתור סטרינג מקומי</title>
 
         
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.introduction"><info><title>Einführung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.introduction"><title>Einführung</title>
     
 
     <para>
@@ -18,7 +18,7 @@
         über NTP oder SNTP empfangenen und der internen Zeit des Servers.
     </para>
 
-    <note><info><title>Hintergrund</title></info>
+    <note><title>Hintergrund</title>
         
 
         <para>
@@ -28,7 +28,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.timesync.introduction.why"><info><title>Warum Zend_TimeSync ?</title></info>
+    <section xml:id="zend.timesync.introduction.why"><title>Warum Zend_TimeSync ?</title>
         
 
         <para>
@@ -98,7 +98,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.timesync.introduction.ntp"><info><title>Was ist NTP ?</title></info>
+    <section xml:id="zend.timesync.introduction.ntp"><title>Was ist NTP ?</title>
         
 
         <para>
@@ -110,7 +110,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.timesync.introduction.sntp"><info><title>Was ist SNTP?</title></info>
+    <section xml:id="zend.timesync.introduction.sntp"><title>Was ist SNTP?</title>
         
 
         <para>
@@ -122,7 +122,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.timesync.introduction.problematic"><info><title>Problematische Verwendung</title></info>
+    <section xml:id="zend.timesync.introduction.problematic"><title>Problematische Verwendung</title>
         
 
         <para>
@@ -134,7 +134,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.timesync.introduction.decision"><info><title>Auswählen welcher Server verwendet werden soll</title></info>
+    <section xml:id="zend.timesync.introduction.decision"><title>Auswählen welcher Server verwendet werden soll</title>
         
 
         <para>

@@ -12,7 +12,7 @@ namespace ZendTest\Navigation;
 
 use Zend\Config;
 use Zend\Mvc\Router\RouteMatch;
-use Zend\Mvc\Service\ServiceManagerConfiguration;
+use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\Navigation;
 use Zend\Navigation\Page\Mvc as MvcPage;
 use Zend\Navigation\Service\ConstructedNavigationFactory;
@@ -48,7 +48,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
                 'extra_config'         => array(
                     'service_manager' => array(
                         'factories' => array(
-                            'Configuration' => function() {
+                            'Config' => function() {
                                 return array(
                                     'navigation' => array(
                                         'file'    => __DIR__ . '/_files/navigation.xml',
@@ -81,8 +81,8 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfiguration);
-        $sm->setService('ApplicationConfiguration', $config);
+        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfig);
+        $sm->setService('ApplicationConfig', $config);
         $sm->get('ModuleManager')->loadModules();
         $sm->get('Application')->bootstrap();
 

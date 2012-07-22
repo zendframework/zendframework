@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><info><title>Úvod</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><title>Úvod</title>
     
     <para>
         <code>Zend_Config</code> je navrhnutý pre zjednodušenie prístupu a použitia
@@ -11,7 +11,7 @@
         <link linkend="zend.config.adapters.ini"><code>Zend_Config_Ini</code></link> a
         <link linkend="zend.config.adapters.xml"><code>Zend_Config_Xml</code></link>.
     </para>
-    <example xml:id="zend.config.introduction.example.using"><info><title>Použitie Zend_Config</title></info>
+    <example xml:id="zend.config.introduction.example.using"><title>Použitie Zend_Config</title>
         
         <para>
             Očakáva sa, že sa použije jeden z adaptérov ako napríklad

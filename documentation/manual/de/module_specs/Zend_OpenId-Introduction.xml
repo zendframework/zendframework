@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.introduction"><info><title>Einführung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.introduction"><title>Einführung</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         Providern bietet.
     </para>
 
-    <section xml:id="zend.openid.introduction.what"><info><title>Was ist OpenID?</title></info>
+    <section xml:id="zend.openid.introduction.what"><title>Was ist OpenID?</title>
         
 
         <para>
@@ -37,7 +37,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.openid.introduction.how"><info><title>Wie funktioniert das ?</title></info>
+    <section xml:id="zend.openid.introduction.how"><title>Wie funktioniert das ?</title>
         
 
         <para>
@@ -127,7 +127,7 @@
         </orderedlist>
     </section>
 
-    <section xml:id="zend.openid.introduction.structure"><info><title>Zend_OpenId Struktur</title></info>
+    <section xml:id="zend.openid.introduction.structure"><title>Zend_OpenId Struktur</title>
         
 
         <para>
@@ -156,7 +156,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.openid.introduction.standards"><info><title>Unterstützte OpenId Standards</title></info>
+    <section xml:id="zend.openid.introduction.standards"><title>Unterstützte OpenId Standards</title>
         
 
         <para>

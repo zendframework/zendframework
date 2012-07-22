@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.localizedtonormalized"><info><title>LocalizedToNormalized</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.localizedtonormalized"><title>LocalizedToNormalized</title>
 
     
 
@@ -68,7 +68,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.filter.set.localizedtonormalized.numbers"><info><title>Normaliser des nombres</title></info>
+    <section xml:id="zend.filter.set.localizedtonormalized.numbers"><title>Normaliser des nombres</title>
 
         
 
@@ -139,7 +139,7 @@ $filter->filter('123.456,78901');
 
     </section>
 
-    <section xml:id="zend.filter.set.localizedtonormalized.dates"><info><title>Normaliser des dates et des temps</title></info>
+    <section xml:id="zend.filter.set.localizedtonormalized.dates"><title>Normaliser des dates et des temps</title>
 
         
 

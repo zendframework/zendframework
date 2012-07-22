@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.objects"><info><title>Obiekty JSON</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.objects"><title>Obiekty JSON</title>
     
     <para>
         Kiedy kodujemy obiekt PHP jako JSON, wszystkie publiczne właściwości

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.configuration"><info><title>Zend_Console_Getopt の設定</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.configuration"><title>Zend_Console_Getopt の設定</title>
     
 
-    <section xml:id="zend.console.getopt.configuration.addrules"><info><title>オプションの規則の追加</title></info>
+    <section xml:id="zend.console.getopt.configuration.addrules"><title>オプションの規則の追加</title>
         
         <para>
             <classname>Zend_Console_Getopt</classname> のコンストラクタで指定するもの以外にも、
@@ -15,7 +15,7 @@
             <link linkend="zend.console.getopt.rules">Getopt
             の規則の宣言</link>を参照ください。
         </para>
-        <example xml:id="zend.console.getopt.configuration.addrules.example"><info><title>addRules() の使用法</title></info>
+        <example xml:id="zend.console.getopt.configuration.addrules.example"><title>addRules() の使用法</title>
             
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -35,7 +35,7 @@ $opts->addRules(
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.configuration.addhelp"><info><title>ヘルプメッセージの追加</title></info>
+    <section xml:id="zend.console.getopt.configuration.addhelp"><title>ヘルプメッセージの追加</title>
         
         <para>
             長い形式のオプション規則を宣言する際に指定するヘルプ文字列に加え、
@@ -43,7 +43,7 @@ $opts->addRules(
             <methodname>setHelp()</methodname> メソッドの引数は連想配列で、
             キーがフラグ名、値が対応するヘルプ文字列となります。
         </para>
-        <example xml:id="zend.console.getopt.configuration.addhelp.example"><info><title>setHelp() の使用法</title></info>
+        <example xml:id="zend.console.getopt.configuration.addhelp.example"><title>setHelp() の使用法</title>
             
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -66,7 +66,7 @@ $opts->setHelp(
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.configuration.addaliases"><info><title>オプションのエイリアスの追加</title></info>
+    <section xml:id="zend.console.getopt.configuration.addaliases"><title>オプションのエイリアスの追加</title>
         
         <para>
             オプションのエイリアスを宣言するには <methodname>setAliases</methodname>
@@ -79,7 +79,7 @@ $opts->setHelp(
             エイリアスは一度しか宣言できません。既存のエイリアスを再定義しようとすると
             <classname>Zend_Console_Getopt_Exception</classname> がスローされます。
         </para>
-        <example xml:id="zend.console.getopt.configuration.addaliases.example"><info><title>setAliases() の使用法</title></info>
+        <example xml:id="zend.console.getopt.configuration.addaliases.example"><title>setAliases() の使用法</title>
             
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -105,7 +105,7 @@ $opts->setAliases(
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.configuration.addargs"><info><title>引数リストの追加</title></info>
+    <section xml:id="zend.console.getopt.configuration.addargs"><title>引数リストの追加</title>
         
         <para>
             デフォルトでは、<classname>Zend_Console_Getopt</classname> は
@@ -120,7 +120,7 @@ $opts->setAliases(
             <methodname>addArguments()</methodname> は現在の引数にその配列を追加し、
             <methodname>setArguments()</methodname> は現在の引数をその配列で置き換えます。
         </para>
-        <example xml:id="zend.console.getopt.configuration.addargs.example"><info><title>addArguments() および setArguments() の使用法</title></info>
+        <example xml:id="zend.console.getopt.configuration.addargs.example"><title>addArguments() および setArguments() の使用法</title>
             
             <programlisting language="php"><![CDATA[
 // デフォルトでは、コンストラクタは $_SERVER['argv'] を使用します
@@ -135,7 +135,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
         </example>
     </section>
 
-    <section xml:id="zend.console.getopt.configuration.config"><info><title>設定の追加</title></info>
+    <section xml:id="zend.console.getopt.configuration.config"><title>設定の追加</title>
         
         <para>
             <classname>Zend_Console_Getopt</classname> コンストラクタの
@@ -146,7 +146,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             オプションを個別に設定するには
             <methodname>setOption()</methodname> メソッドを使用します。
         </para>
-        <note><info><title>"オプション" という用語について</title></info>
+        <note><title>"オプション" という用語について</title>
             
             <para>
                 ここでいう "オプション" は、
@@ -207,7 +207,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             <methodname>setOption()</methodname>
             メソッドに渡す引数は、設定オプション名とその値のふたつです。
         </para>
-        <example xml:id="zend.console.getopt.configuration.config.example.setoption"><info><title>setOption() の使用法</title></info>
+        <example xml:id="zend.console.getopt.configuration.config.example.setoption"><title>setOption() の使用法</title>
             
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -221,7 +221,7 @@ $opts->setOption('ignoreCase', true);
             指定した設定項目が既存の設定にマージされるので、
             すべてのオプションを指定する必要はありません。
         </para>
-        <example xml:id="zend.console.getopt.configuration.config.example.setoptions"><info><title>setOptions() の使用法</title></info>
+        <example xml:id="zend.console.getopt.configuration.config.example.setoptions"><title>setOptions() の使用法</title>
             
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');

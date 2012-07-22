@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><info><title>HeadTitle Helfer</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><title>HeadTitle Helfer</title>
     
 
     <para>
@@ -30,7 +30,7 @@
         solange man nicht eine andere Reihenfolge explizit als zweiten Parameter übergibt.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><info><title>Grundsätzliche Verwendung des HeadTitle Helfers</title></info>
+    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><title>Grundsätzliche Verwendung des HeadTitle Helfers</title>
         
 
         <para>

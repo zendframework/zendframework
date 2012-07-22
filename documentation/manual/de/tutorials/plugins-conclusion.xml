@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.conclusion"><info><title>Fazit</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.conclusion"><title>Fazit</title>
     
 
     <para>
@@ -47,7 +47,7 @@
         Erweiterungspunkt im Zend Framework entsprechend umsetzen.
     </para>
 
-    <note><info><title>Nachteile</title></info>
+    <note><title>Nachteile</title>
         
 
         <para>

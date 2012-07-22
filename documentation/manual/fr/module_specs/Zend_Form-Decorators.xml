@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title>Créer un visuel personnalisé en utilisant Zend_Form_Decorator</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><title>Créer un visuel personnalisé en utilisant Zend_Form_Decorator</title>
 
 
     <para>
@@ -36,7 +36,7 @@
         forme complexe représentant l'objet (élément) dans son intégralité.
     </para>
 
-    <section xml:id="zend.form.decorators.operation"><info><title>Configuration</title></info>
+    <section xml:id="zend.form.decorators.operation"><title>Configuration</title>
 
 
         <para>
@@ -116,7 +116,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.decorators.standard"><info><title>Décorateurs standards</title></info>
+    <section xml:id="zend.form.decorators.standard"><title>Décorateurs standards</title>
 
 
         <para>
@@ -126,7 +126,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.decorators.custom"><info><title>Décorateurs personnalisés</title></info>
+    <section xml:id="zend.form.decorators.custom"><title>Décorateurs personnalisés</title>
 
 
         <para>
@@ -328,7 +328,7 @@ class My_Decorator_Errors
         </para>
     </section>
 
-    <section xml:id="zend.form.decorators.individual"><info><title>Rendre des décorateurs individuellement</title></info>
+    <section xml:id="zend.form.decorators.individual"><title>Rendre des décorateurs individuellement</title>
 
 
         <para>

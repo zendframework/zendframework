@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.intro"><info><title>Introducción a MVC &amp; ZF</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.intro"><title>Introducción a MVC &amp; ZF</title>
     
 
-    <section xml:id="learning.quickstart.intro.zf"><info><title>Zend Framework</title></info>
+    <section xml:id="learning.quickstart.intro.zf"><title>Zend Framework</title>
         
 
         <para>
@@ -47,7 +47,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="learning.quickstart.intro.mvc"><info><title>Modelo-Vista-Controlador</title></info>
+    <section xml:id="learning.quickstart.intro.mvc"><title>Modelo-Vista-Controlador</title>
         
 
         <para>
@@ -63,7 +63,7 @@
             trabajando en la misma aplicación.
         </para>
 
-        <note><info><title>Más información</title></info>
+        <note><title>Más información</title>
             
 
             <para>

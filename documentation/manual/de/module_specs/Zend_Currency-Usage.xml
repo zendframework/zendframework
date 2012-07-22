@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.usage"><info><title>Zend_Currency verwenden</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.usage"><title>Zend_Currency verwenden</title>
     
 
-    <section xml:id="zend.currency.usage.generic"><info><title>Generelle Verwendung</title></info>
+    <section xml:id="zend.currency.usage.generic"><title>Generelle Verwendung</title>
         
 
         <para>
@@ -12,7 +12,7 @@
             Währung zu setzen.
         </para>
 
-        <example xml:id="zend.currency.usage.generic.example-1"><info><title>Erstellung einer Währung mit Client Einstellungen</title></info>
+        <example xml:id="zend.currency.usage.generic.example-1"><title>Erstellung einer Währung mit Client Einstellungen</title>
             
 
             <para>
@@ -35,7 +35,7 @@ $currency = new Zend_Currency();
             </para>
         </example>
 
-        <note><info><title>Die automatische Erkennung des Gebietsschemas funktioniert nicht immer</title></info>
+        <note><title>Die automatische Erkennung des Gebietsschemas funktioniert nicht immer</title>
             
 
             <para>
@@ -56,7 +56,7 @@ $currency = new Zend_Currency();
         </note>
     </section>
 
-    <section xml:id="zend.currency.usage.locale"><info><title>Erstellung einer Währung basierend auf einem Gebietsschema</title></info>
+    <section xml:id="zend.currency.usage.locale"><title>Erstellung einer Währung basierend auf einem Gebietsschema</title>
         
 
         <para>
@@ -97,7 +97,7 @@ $currency = new Zend_Currency();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.currency.usage.territory"><info><title>Erstellung einer Währung basierend auf einem Land</title></info>
+    <section xml:id="zend.currency.usage.territory"><title>Erstellung einer Währung basierend auf einem Land</title>
         
 
         <para>
@@ -113,7 +113,7 @@ $currency = new Zend_Currency('US');
 // var_dump($currency);
 ]]></programlisting>
 
-        <note><info><title>Uppercase territories</title></info>
+        <note><title>Uppercase territories</title>
             
 
             <para>

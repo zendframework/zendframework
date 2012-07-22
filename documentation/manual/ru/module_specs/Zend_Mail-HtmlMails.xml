@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>Сообщение в формате HTML</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><title>Сообщение в формате HTML</title>
     
     <para>
         Для отправки сообщения электронной почты в формате HTML устанавливайте
@@ -10,7 +10,7 @@
         HTML-формат, то будет автоматически сгенерировано MIME-сообщение типа
         <code>multipart/alternative</code>:
     </para>
-    <example xml:id="zend.mail.html-mails.example-1"><info><title>Отправка сообщения в формате HTML</title></info>
+    <example xml:id="zend.mail.html-mails.example-1"><title>Отправка сообщения в формате HTML</title>
         
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();

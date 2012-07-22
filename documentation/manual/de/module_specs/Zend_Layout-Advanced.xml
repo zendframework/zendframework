@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.advanced"><info><title>Erweiterte Verwendung von Zend_Layout</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.advanced"><title>Erweiterte Verwendung von Zend_Layout</title>
     
 
     <para>
@@ -48,7 +48,7 @@
         </listitem>
     </itemizedlist>
 
-    <section xml:id="zend.layout.advanced.view"><info><title>Eigene View Objekte</title></info>
+    <section xml:id="zend.layout.advanced.view"><title>Eigene View Objekte</title>
         
 
         <para>
@@ -65,7 +65,7 @@ $view = new My_Custom_View();
 $layout->setView($view);
 ]]></programlisting>
 
-        <note><info><title>Nicht alle Zend_View Implementationen sind gleich</title></info>
+        <note><title>Nicht alle Zend_View Implementationen sind gleich</title>
             
 
             <para>
@@ -101,7 +101,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         </note>
     </section>
 
-    <section xml:id="zend.layout.advanced.plugin"><info><title>Eigene Front Controller Plugins</title></info>
+    <section xml:id="zend.layout.advanced.plugin"><title>Eigene Front Controller Plugins</title>
         
 
         <para>
@@ -127,7 +127,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         </para>
     </section>
 
-    <section xml:id="zend.layout.advanced.helper"><info><title>Eigene Action Helfer</title></info>
+    <section xml:id="zend.layout.advanced.helper"><title>Eigene Action Helfer</title>
         
 
         <para>
@@ -148,7 +148,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         </para>
     </section>
 
-    <section xml:id="zend.layout.advanced.inflector"><info><title>Auflösung eigener Layout Skript Pfade: Verwenden der Beugung</title></info>
+    <section xml:id="zend.layout.advanced.inflector"><title>Auflösung eigener Layout Skript Pfade: Verwenden der Beugung</title>
         
 
         <para>
@@ -172,7 +172,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             an <methodname>Zend_Layout::setInflector()</methodname>.
          </para>
 
-        <example xml:id="zend.layout.advanced.inflector.accessors"><info><title>Verwenden von Zend_Layout Zugriffsmethoden zur Änderung der Beugung</title></info>
+        <example xml:id="zend.layout.advanced.inflector.accessors"><title>Verwenden von Zend_Layout Zugriffsmethoden zur Änderung der Beugung</title>
             
 
             <para>
@@ -190,7 +190,7 @@ $layout->setViewSuffix('php');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.layout.advanced.inflector.directmodification"><info><title>Direkte Änderung der Zend_Layout Beugung</title></info>
+        <example xml:id="zend.layout.advanced.inflector.directmodification"><title>Direkte Änderung der Zend_Layout Beugung</title>
             
 
             <para>
@@ -214,7 +214,7 @@ $layout->getInflector()->setTarget('layouts/:script.:suffix')
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.layout.advanced.inflector.custom"><info><title>Eigene Beugung</title></info>
+        <example xml:id="zend.layout.advanced.inflector.custom"><title>Eigene Beugung</title>
             
 
             <para>
@@ -234,7 +234,7 @@ $layout->setInflector($inflector);
 ]]></programlisting>
         </example>
 
-        <note><info><title>Beugung kann ausgeschaltet werden</title></info>
+        <note><title>Beugung kann ausgeschaltet werden</title>
             
 
             <para>

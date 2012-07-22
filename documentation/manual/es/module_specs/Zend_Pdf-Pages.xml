@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Trabajando con Páginas</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><title>Trabajando con Páginas</title>
     
-    <section xml:id="zend.pdf.pages.creation"><info><title>Creación de Páginas</title></info>
+    <section xml:id="zend.pdf.pages.creation"><title>Creación de Páginas</title>
         
         <para>
             Las páginas en un documento
@@ -95,7 +95,7 @@
             :
         </para>
 
-        <example xml:id="zend.pdf.pages.example-1"><info><title>Administración de Páginas de un Documento PDF</title></info>
+        <example xml:id="zend.pdf.pages.example-1"><title>Administración de Páginas de un Documento PDF</title>
             
             <programlisting language="php"><![CDATA[
 ...
@@ -115,7 +115,7 @@ unset($pdf->pages[$id]);
         </example>
     </section>
 
-    <section xml:id="zend.pdf.pages.cloning"><info><title>Clonado de Páginas</title></info>
+    <section xml:id="zend.pdf.pages.cloning"><title>Clonado de Páginas</title>
         
         <para>
             La página
@@ -126,7 +126,7 @@ unset($pdf->pages[$id]);
             como parámetro:
         </para>
 
-        <example xml:id="zend.pdf.pages.example-2"><info><title>Clonando una Página Existente</title></info>
+        <example xml:id="zend.pdf.pages.example-2"><title>Clonando una Página Existente</title>
             
             <programlisting language="php"><![CDATA[
 ...

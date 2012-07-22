@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><info><title>Créer et charger des documents PDF</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><title>Créer et charger des documents PDF</title>
     
 
     <para>
@@ -19,7 +19,7 @@
         <classname>Zend_Pdf</classname> ou lève une exception en cas d'erreur.
     </para>
 
-    <example xml:id="zend.pdf.create.example-1"><info><title>Créer un nouveau document PDF ou en charger un existant</title></info>
+    <example xml:id="zend.pdf.create.example-1"><title>Créer un nouveau document PDF ou en charger un existant</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -54,7 +54,7 @@ $pdf3 = Zend_Pdf::parse($pdfString);
             </footnote>
         </para>
 
-    <example xml:id="zend.pdf.create.example-2"><info><title>Demander une version particulière d'un document PDF</title></info>
+    <example xml:id="zend.pdf.create.example-2"><title>Demander une version particulière d'un document PDF</title>
         
 
         <programlisting language="php"><![CDATA[

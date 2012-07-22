@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>Feed en Entry structuren wijzigen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><title>Feed en Entry structuren wijzigen</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         goedgevormde XML terugsturen om het in een bestand op te slaan of naar een server te sturen.
     </para>
 
-    <example><info><title>Wijzigen van een bestaande Feed Entry</title></info>
+    <example><title>Wijzigen van een bestaande Feed Entry</title>
         
         <programlisting role="php"><![CDATA[
 <?php
@@ -41,7 +41,7 @@ echo $entry->saveXML();
         namespace gaan als je niet uitdrukkelijk een andere namespace toewijst.
     </para>
 
-    <example><info><title>Een Atom Entry met elementen van een aangepaste namespace</title></info>
+    <example><title>Een Atom Entry met elementen van een aangepaste namespace</title>
         
         <programlisting role="php"><![CDATA[
 <?php

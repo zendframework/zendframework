@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.partial"><info><title>L'aide de vue Partial</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.partial"><title>L'aide de vue Partial</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         élément.
     </para>
 
-    <note><info><title>Compteur de PartialLoop</title></info>
+    <note><title>Compteur de PartialLoop</title>
         
 
         <para>
@@ -27,7 +27,7 @@
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.partial.usage"><info><title>Utilisation de base des Partials</title></info>
+    <example xml:id="zend.view.helpers.initial.partial.usage"><title>Utilisation de base des Partials</title>
         
 
         <para>
@@ -65,7 +65,7 @@
 ]]></programlisting>
     </example>
 
-    <note><info><title>Qu'est qu'un modèle ?</title></info>
+    <note><title>Qu'est qu'un modèle ?</title>
         
 
         <para>
@@ -123,7 +123,7 @@ $view->partialLoop()->setObjectKey('model');
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.partial.partialloop"><info><title>Utiliser PartialLoop pour effectuer le rendu d'éléments itératifs</title></info>
+    <example xml:id="zend.view.helpers.initial.partial.partialloop"><title>Utiliser PartialLoop pour effectuer le rendu d'éléments itératifs</title>
         
 
         <para>
@@ -190,7 +190,7 @@ $model = array(
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.view.helpers.initial.partial.modules"><info><title>Effectuer le rendu partiel dans des modules différents</title></info>
+    <example xml:id="zend.view.helpers.initial.partial.modules"><title>Effectuer le rendu partiel dans des modules différents</title>
         
 
         <para>

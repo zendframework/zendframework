@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.introduction"><title>導入</title>
     
     <para>
         <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.xmlrpc.com/">ホームページ</link> によると、

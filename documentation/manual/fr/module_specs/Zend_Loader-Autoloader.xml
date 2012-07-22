@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader"><info><title>L'autoloader</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader"><title>L'autoloader</title>
     
 
     <para>
@@ -39,7 +39,7 @@
         votre code.
     </para>
 
-    <section xml:id="zend.loader.autoloader.usage"><info><title>Utiliser le chargeur automatique (autoloader)</title></info>
+    <section xml:id="zend.loader.autoloader.usage"><title>Utiliser le chargeur automatique (autoloader)</title>
         
 
         <para>
@@ -64,7 +64,7 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->registerNamespace('My_');
 ]]></programlisting>
 
-        <note><info><title>Préfixes des espaces de noms</title></info>
+        <note><title>Préfixes des espaces de noms</title>
             
 
             <para>
@@ -126,7 +126,7 @@ $autoloader->suppressNotFoundWarnings(true);
         <programlisting language="php"><![CDATA[
 $autoloader->setFallbackAutoloader(true);
 ]]></programlisting>
-        <note><info><title>Loading Classes from PHP Namespaces</title></info>
+        <note><title>Loading Classes from PHP Namespaces</title>
             
 
             <para>
@@ -193,7 +193,7 @@ $autoloader->setFallbackAutoloader(true);
         </note>
     </section>
 
-    <section xml:id="zend.loader.autoloader.zf-version"><info><title>Selecting a Zend Framework version</title></info>
+    <section xml:id="zend.loader.autoloader.zf-version"><title>Selecting a Zend Framework version</title>
         
 
         <para>
@@ -345,7 +345,7 @@ autoloaderZfVersion = "latest"
             configure the autoloader appropriately.
         </para>
 
-        <warning><info><title>Performance implications</title></info>
+        <warning><title>Performance implications</title>
             
 
             <para>
@@ -358,7 +358,7 @@ autoloaderZfVersion = "latest"
         </warning>
     </section>
 
-    <section xml:id="zend.loader.autoloader.interface"><info><title>L'interface de l'autoloader</title></info>
+    <section xml:id="zend.loader.autoloader.interface"><title>L'interface de l'autoloader</title>
         
 
         <para>
@@ -388,7 +388,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.autoloader.reference"><info><title>Référence de l'autoloader</title></info>
+    <section xml:id="zend.loader.autoloader.reference"><title>Référence de l'autoloader</title>
         
 
         <para>
@@ -396,7 +396,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
             <classname>Zend_Loader_Autoloader</classname>.
         </para>
 
-        <table xml:id="zend.loader.autoloader.reference.api"><info><title>Méthodes de Zend_Loader_Autoloader</title></info>
+        <table xml:id="zend.loader.autoloader.reference.api"><title>Méthodes de Zend_Loader_Autoloader</title>
             
 
             <tgroup cols="4">

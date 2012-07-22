@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><info><title>Zend_Cache后端</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><title>Zend_Cache后端</title>
     
 
-    <section xml:id="zend.cache.backends.file"><info><title>Zend_Cache_Backend_File</title></info>
+    <section xml:id="zend.cache.backends.file"><title>Zend_Cache_Backend_File</title>
         
         <para>
             此后端把缓存纪录存储到文件中去(在一个选定的目录中).
@@ -10,7 +10,7 @@
         <para>
             可用的选项有 :
         </para>
-        <table xml:id="zend.cache.backends.file.table"><info><title>文件后端选项</title></info>
+        <table xml:id="zend.cache.backends.file.table"><title>文件后端选项</title>
             
             <tgroup cols="4">
                  <thead>
@@ -105,7 +105,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.sqlite"><info><title>Zend_Cache_Backend_Sqlite</title></info>
+    <section xml:id="zend.cache.backends.sqlite"><title>Zend_Cache_Backend_Sqlite</title>
         
         <para>
             此后端把缓存纪录存储到SQLite数据库中.
@@ -113,7 +113,7 @@
         <para>
             可用的选项有:
         </para>
-        <table xml:id="zend.cache.backends.sqlite.table"><info><title>Sqlite 后端选项</title></info>
+        <table xml:id="zend.cache.backends.sqlite.table"><title>Sqlite 后端选项</title>
             
             <tgroup cols="4">
                  <thead>
@@ -149,7 +149,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.memcached"><info><title>Zend_Cache_Backend_Memcached</title></info>
+    <section xml:id="zend.cache.backends.memcached"><title>Zend_Cache_Backend_Memcached</title>
         
         <para>
             本后端把缓存纪录存储到memcached服务器. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.danga.com/memcached/">memcached</link>
@@ -162,7 +162,7 @@
         <para>
             可用的选项有:
         </para>
-        <table xml:id="zend.cache.backends.memcached.table"><info><title>Memcached 后端选项</title></info>
+        <table xml:id="zend.cache.backends.memcached.table"><title>Memcached 后端选项</title>
             
             <tgroup cols="4">
                  <thead>
@@ -197,7 +197,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.apc"><info><title>Zend_Cache_Backend_Apc</title></info>
+    <section xml:id="zend.cache.backends.apc"><title>Zend_Cache_Backend_Apc</title>
         
         <para>
             此后端通过
@@ -211,7 +211,7 @@
             此后端没有选项.
         </para>
     </section>
-        <section xml:id="zend.cache.backends.xcache"><info><title>Zend_Cache_Backend_Xcache</title></info>
+        <section xml:id="zend.cache.backends.xcache"><title>Zend_Cache_Backend_Xcache</title>
         
         <para>
             整个后端通过 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://xcache.lighttpd.net/">XCache</link> 扩展（它当然需要使用这个后端）
@@ -223,7 +223,7 @@
         <para>
             可用的选项如下：
         </para>
-        <table xml:id="zend.cache.backends.xcache.table"><info><title>Xcache backend 选项</title></info>
+        <table xml:id="zend.cache.backends.xcache.table"><title>Xcache backend 选项</title>
             
             <tgroup cols="4">
                  <thead>
@@ -255,7 +255,7 @@
               </tgroup>
           </table>
     </section>
-    <section xml:id="zend.cache.backends.platform"><info><title>Zend_Cache_Backend_ZendPlatform</title></info>
+    <section xml:id="zend.cache.backends.platform"><title>Zend_Cache_Backend_ZendPlatform</title>
         
         <para>
             本后端使用 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com/products/platform">Zend Platform</link>产品的内容缓存API. 要使用此后端必须安装Zend Platform.

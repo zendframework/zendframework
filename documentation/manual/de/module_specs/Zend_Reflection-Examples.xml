@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.reflection.examples"><info><title>Zend_Reflection Beispiele</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.reflection.examples"><title>Zend_Reflection Beispiele</title>
     
 
-    <example xml:id="zend.reflection.examples.file"><info><title>Durchführen von Reflection an einer Datei</title></info>
+    <example xml:id="zend.reflection.examples.file"><title>Durchführen von Reflection an einer Datei</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -28,7 +28,7 @@ foreach ($functions as $function) {
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.reflection.examples.class"><info><title>Durchführen von Reflection an einer Klasse</title></info>
+    <example xml:id="zend.reflection.examples.class"><title>Durchführen von Reflection an einer Klasse</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -46,7 +46,7 @@ $file = $r->getDeclaringFile();
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.reflection.examples.method"><info><title>Durchführen von Reflection an einer Methode</title></info>
+    <example xml:id="zend.reflection.examples.method"><title>Durchführen von Reflection an einer Methode</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -68,7 +68,7 @@ foreach ($r->getParameters() as $key => $param) {
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.reflection.examples.docblock"><info><title>Durchführen von Reflection an einem Docblock</title></info>
+    <example xml:id="zend.reflection.examples.docblock"><title>Durchführen von Reflection an einem Docblock</title>
         
 
         <programlisting language="php"><![CDATA[

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.server"><info><title>Zend_Rest_Server</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.server"><title>Zend_Rest_Server</title>
     
 
-    <section xml:id="zend.rest.server.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.rest.server.introduction"><title>導入</title>
         
 
         <para>
@@ -10,10 +10,10 @@
         </para>
     </section>
 
-    <section xml:id="zend.rest.server.usage"><info><title>REST サーバの使用法</title></info>
+    <section xml:id="zend.rest.server.usage"><title>REST サーバの使用法</title>
         
 
-        <example xml:id="zend.rest.server.usage.example-1"><info><title>基本的な Zend_Rest_Server の使用法 - クラス</title></info>
+        <example xml:id="zend.rest.server.usage.example-1"><title>基本的な Zend_Rest_Server の使用法 - クラス</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -23,7 +23,7 @@ $server->handle();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.rest.server.usage.example-2"><info><title>基本的な Zend_Rest_Server の使用法 - 関数</title></info>
+        <example xml:id="zend.rest.server.usage.example-2"><title>基本的な Zend_Rest_Server の使用法 - 関数</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -46,7 +46,7 @@ $server->handle();
         </example>
     </section>
 
-    <section xml:id="zend.rest.server.args"><info><title>Zend_Rest_Server サービスのコール</title></info>
+    <section xml:id="zend.rest.server.args"><title>Zend_Rest_Server サービスのコール</title>
         
 
         <para>
@@ -57,7 +57,7 @@ $server->handle();
             (たとえば "arg1") を指定します。
         </para>
 
-        <note><info><title>数値インデックス</title></info>
+        <note><title>数値インデックス</title>
             
 
             <para>
@@ -82,7 +82,7 @@ $server->handle();
         </para>
     </section>
 
-    <section xml:id="zend.rest.server.customstatus"><info><title>独自のステータスの送信</title></info>
+    <section xml:id="zend.rest.server.customstatus"><title>独自のステータスの送信</title>
         
 
         <para>
@@ -90,7 +90,7 @@ $server->handle();
             キー <code>status</code> を含む配列を返します。
         </para>
 
-        <example xml:id="zend.rest.server.customstatus.example-1"><info><title>独自のステータスを返す</title></info>
+        <example xml:id="zend.rest.server.customstatus.example-1"><title>独自のステータスを返す</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -113,7 +113,7 @@ $server->handle();
         </example>
     </section>
 
-    <section xml:id="zend.rest.server.customxml"><info><title>独自の XML レスポンスを返す</title></info>
+    <section xml:id="zend.rest.server.customxml"><title>独自の XML レスポンスを返す</title>
         
 
         <para>
@@ -122,7 +122,7 @@ $server->handle();
             <code>SimpleXMLElement</code> オブジェクトを返します。
         </para>
 
-        <example xml:id="zend.rest.server.customxml.example-1"><info><title>独自の XML を返す</title></info>
+        <example xml:id="zend.rest.server.customxml.example-1"><title>独自の XML を返す</title>
             
 
             <programlisting language="php"><![CDATA[

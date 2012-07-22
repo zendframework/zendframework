@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.openid"><info><title>Open ID Authentifikation</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.openid"><title>Open ID Authentifikation</title>
     
 
-    <section xml:id="zend.auth.adapter.openid.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.auth.adapter.openid.introduction"><title>Einführung</title>
         
 
         <para>
@@ -39,7 +39,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.auth.adapter.openid.specifics"><info><title>Spezielles</title></info>
+    <section xml:id="zend.auth.adapter.openid.specifics"><title>Spezielles</title>
         
 
         <para>

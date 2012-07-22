@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.row"><info><title>Zend_Db_Table_Row</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.row"><title>Zend_Db_Table_Row</title>
 
     
 
-    <section xml:id="zend.db.table.row.introduction"><info><title>導入</title></info>
+    <section xml:id="zend.db.table.row.introduction"><title>導入</title>
 
         
 
@@ -23,7 +23,7 @@
 
     </section>
 
-    <section xml:id="zend.db.table.row.read"><info><title>行の取得</title></info>
+    <section xml:id="zend.db.table.row.read"><title>行の取得</title>
 
         
 
@@ -35,7 +35,7 @@
             <classname>Zend_Db_Table_Row</classname> 型のオブジェクトを返します。
         </para>
 
-        <example xml:id="zend.db.table.row.read.example"><info><title>行の取得の例</title></info>
+        <example xml:id="zend.db.table.row.read.example"><title>行の取得の例</title>
 
             
 
@@ -52,7 +52,7 @@ $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
             詳細については <link linkend="zend.db.table.rowset">table rowset</link> についての章を参照ください。
         </para>
 
-        <example xml:id="zend.db.table.row.read.example-rowset"><info><title>行セット内の行を読み込む例</title></info>
+        <example xml:id="zend.db.table.row.read.example-rowset"><title>行セット内の行を読み込む例</title>
 
             
 
@@ -64,7 +64,7 @@ $row = $rowset->current();
 
         </example>
 
-        <section xml:id="zend.db.table.row.read.get"><info><title>行からのカラムの値の読み込み</title></info>
+        <section xml:id="zend.db.table.row.read.get"><title>行からのカラムの値の読み込み</title>
 
             
 
@@ -73,7 +73,7 @@ $row = $rowset->current();
                 行のカラムをオブジェクトのプロパティとして参照できます。
             </para>
 
-            <example xml:id="zend.db.table.row.read.get.example"><info><title>行からカラムを読み込む例</title></info>
+            <example xml:id="zend.db.table.row.read.get.example"><title>行からカラムを読み込む例</title>
 
                 
 
@@ -105,7 +105,7 @@ echo $row->bug_description;
 
         </section>
 
-        <section xml:id="zend.db.table.row.read.to-array"><info><title>行データの配列としての取得</title></info>
+        <section xml:id="zend.db.table.row.read.to-array"><title>行データの配列としての取得</title>
 
             
 
@@ -115,7 +115,7 @@ echo $row->bug_description;
                 これは、カラム名とその値を関連付けた連想配列を返します。
             </para>
 
-            <example xml:id="zend.db.table.row.read.to-array.example"><info><title>toArray() メソッドの使用例</title></info>
+            <example xml:id="zend.db.table.row.read.to-array.example"><title>toArray() メソッドの使用例</title>
 
                 
 
@@ -143,7 +143,7 @@ foreach ($rowArray as $column => $value) {
 
         </section>
 
-        <section xml:id="zend.db.table.row.read.relationships"><info><title>関連するテーブルからのデータの取得</title></info>
+        <section xml:id="zend.db.table.row.read.relationships"><title>関連するテーブルからのデータの取得</title>
 
             
 
@@ -159,11 +159,11 @@ foreach ($rowArray as $column => $value) {
 
     </section>
 
-    <section xml:id="zend.db.table.row.write"><info><title>データベースへの行の書き込み</title></info>
+    <section xml:id="zend.db.table.row.write"><title>データベースへの行の書き込み</title>
 
         
 
-        <section xml:id="zend.db.table.row.write.set"><info><title>行のカラムの値の変更</title></info>
+        <section xml:id="zend.db.table.row.write.set"><title>行のカラムの値の変更</title>
 
             
 
@@ -178,7 +178,7 @@ foreach ($rowArray as $column => $value) {
                 <methodname>save()</methodname> メソッドを使用します。
             </para>
 
-            <example xml:id="zend.db.table.row.write.set.example"><info><title>行のカラムの内容を変更する例</title></info>
+            <example xml:id="zend.db.table.row.write.set.example"><title>行のカラムの内容を変更する例</title>
 
                 
 
@@ -197,7 +197,7 @@ $row->save();
 
         </section>
 
-        <section xml:id="zend.db.table.row.write.insert"><info><title>新しい行の挿入</title></info>
+        <section xml:id="zend.db.table.row.write.insert"><title>新しい行の挿入</title>
 
             
 
@@ -209,7 +209,7 @@ $row->save();
                 実際にデータベースの内容が変更されることはありません。
             </para>
 
-            <example xml:id="zend.db.table.row.write.insert.example"><info><title>テーブルに新しい行を作成する例</title></info>
+            <example xml:id="zend.db.table.row.write.insert.example"><title>テーブルに新しい行を作成する例</title>
 
                 
 
@@ -232,7 +232,7 @@ $newRow->save();
                 この連想配列では、新しい行のフィールドに代入する値を指定します。
             </para>
 
-            <example xml:id="zend.db.table.row.write.insert.example2"><info><title>テーブルに新しい行を作成し、値を代入する例</title></info>
+            <example xml:id="zend.db.table.row.write.insert.example2"><title>テーブルに新しい行を作成し、値を代入する例</title>
 
                 
 
@@ -264,7 +264,7 @@ $newRow->save();
 
         </section>
 
-        <section xml:id="zend.db.table.row.write.set-from-array"><info><title>複数のカラムの値の変更</title></info>
+        <section xml:id="zend.db.table.row.write.set-from-array"><title>複数のカラムの値の変更</title>
 
             
 
@@ -277,7 +277,7 @@ $newRow->save();
                 既存の行を更新する場合のどちらでも有用でしょう。
             </para>
 
-            <example xml:id="zend.db.table.row.write.set-from-array.example"><info><title>setFromArray() で新しい行の値を設定する例</title></info>
+            <example xml:id="zend.db.table.row.write.set-from-array.example"><title>setFromArray() で新しい行の値を設定する例</title>
 
                 
 
@@ -302,7 +302,7 @@ $newRow->save();
 
         </section>
 
-        <section xml:id="zend.db.table.row.write.delete"><info><title>行の削除</title></info>
+        <section xml:id="zend.db.table.row.write.delete"><title>行の削除</title>
 
             
 
@@ -311,7 +311,7 @@ $newRow->save();
                 これは、その行オブジェクトの主キーに対応するデータベースの行を削除します。
             </para>
 
-            <example xml:id="zend.db.table.row.write.delete.example"><info><title>行の削除の例</title></info>
+            <example xml:id="zend.db.table.row.write.delete.example"><title>行の削除の例</title>
 
                 
 
@@ -334,7 +334,7 @@ $row->delete();
 
     </section>
 
-    <section xml:id="zend.db.table.row.serialize"><info><title>行のシリアライズと復元</title></info>
+    <section xml:id="zend.db.table.row.serialize"><title>行のシリアライズと復元</title>
 
         
 
@@ -347,7 +347,7 @@ $row->delete();
             シリアライズできます。
         </para>
 
-        <section xml:id="zend.db.table.row.serialize.serializing"><info><title>行のシリアライズ</title></info>
+        <section xml:id="zend.db.table.row.serialize.serializing"><title>行のシリアライズ</title>
 
             
 
@@ -356,7 +356,7 @@ $row->delete();
                 行オブジェクトのバイトストリームを含む文字列を作成します。
             </para>
 
-            <example xml:id="zend.db.table.row.serialize.serializing.example"><info><title>行のシリアライズの例</title></info>
+            <example xml:id="zend.db.table.row.serialize.serializing.example"><title>行のシリアライズの例</title>
 
                 
 
@@ -374,7 +374,7 @@ $serializedRow = serialize($row);
 
         </section>
 
-        <section xml:id="zend.db.table.row.serialize.unserializing"><info><title>シリアライズした行データの復元</title></info>
+        <section xml:id="zend.db.table.row.serialize.unserializing"><title>シリアライズした行データの復元</title>
 
             
 
@@ -392,7 +392,7 @@ $serializedRow = serialize($row);
                 (たとえば従属テーブルに対するクエリなど) も実行できません。
             </para>
 
-            <example xml:id="zend.db.table.row.serialize.unserializing.example"><info><title>シリアライズした行の復元の例</title></info>
+            <example xml:id="zend.db.table.row.serialize.unserializing.example"><title>シリアライズした行の復元の例</title>
 
                 
 
@@ -405,7 +405,7 @@ echo $rowClone->bug_description;
 
             </example>
 
-            <note><info><title>復元した行は、なぜ切断された状態なのですか?</title></info>
+            <note><title>復元した行は、なぜ切断された状態なのですか?</title>
 
                 
 
@@ -424,7 +424,7 @@ echo $rowClone->bug_description;
 
         </section>
 
-        <section xml:id="zend.db.table.row.serialize.set-table"><info><title>生きたデータとしての行の復活</title></info>
+        <section xml:id="zend.db.table.row.serialize.set-table"><title>生きたデータとしての行の復活</title>
 
             
 
@@ -437,7 +437,7 @@ echo $rowClone->bug_description;
                 それ以降は、行オブジェクトの値を変更してデータベースに保存できるようになります。
             </para>
 
-            <example xml:id="zend.db.table.row.serialize.set-table.example"><info><title>行の復活の例</title></info>
+            <example xml:id="zend.db.table.row.serialize.set-table.example"><title>行の復活の例</title>
 
                 
 
@@ -461,7 +461,7 @@ $rowClone->save();
 
     </section>
 
-    <section xml:id="zend.db.table.row.extending"><info><title>行クラスの拡張</title></info>
+    <section xml:id="zend.db.table.row.extending"><title>行クラスの拡張</title>
 
         
 
@@ -475,7 +475,7 @@ $rowClone->save();
             テーブルオブジェクトのコンストラクタの引数の配列で指定します。
         </para>
 
-        <example xml:id="zend.db.table.row.extending.example"><info><title>独自の行クラスの指定</title></info>
+        <example xml:id="zend.db.table.row.extending.example"><title>独自の行クラスの指定</title>
 
             
 
@@ -500,7 +500,7 @@ $bugs = new Bugs(array('rowClass' => 'MyRow'));
 
         </example>
 
-        <section xml:id="zend.db.table.row.extending.overriding"><info><title>行の初期化</title></info>
+        <section xml:id="zend.db.table.row.extending.overriding"><title>行の初期化</title>
             
 
             <para>
@@ -511,7 +511,7 @@ $bugs = new Bugs(array('rowClass' => 'MyRow'));
                 <methodname>__construct()</methodname> メソッドを使うよりもこちらのほうを推奨します。
             </para>
 
-            <example xml:id="zend.db.table.row.init.usage.example"><info><title>init() メソッドの使用例</title></info>
+            <example xml:id="zend.db.table.row.init.usage.example"><title>init() メソッドの使用例</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -528,7 +528,7 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
             </example>
         </section>
 
-        <section xml:id="zend.db.table.row.extending.insert-update"><info><title>Zend_Db_Table_Row における Insert、Update および Delete の独自ロジックの定義</title></info>
+        <section xml:id="zend.db.table.row.extending.insert-update"><title>Zend_Db_Table_Row における Insert、Update および Delete の独自ロジックの定義</title>
 
             
 
@@ -555,7 +555,7 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
                 以下にいくつか示します。
             </para>
 
-            <example xml:id="zend.db.table.row.extending.overriding-example1"><info><title>行クラスでの独自ロジックの例</title></info>
+            <example xml:id="zend.db.table.row.extending.overriding-example1"><title>行クラスでの独自ロジックの例</title>
 
                 
 
@@ -597,7 +597,7 @@ if ($loggingEnabled) {
 
             </example>
 
-            <example xml:id="zend.db.table.row.extending.overriding-example2"><info><title>挿入するデータの記録を複数のテーブルで行う行クラスの例</title></info>
+            <example xml:id="zend.db.table.row.extending.overriding-example2"><title>挿入するデータの記録を複数のテーブルで行う行クラスの例</title>
 
                 
 
@@ -642,7 +642,7 @@ class Products extends Zend_Db_Table_Abstract
 
         </section>
 
-        <section xml:id="zend.db.table.row.extending.inflection"><info><title>Zend_Db_Table_Row における変形の定義</title></info>
+        <section xml:id="zend.db.table.row.extending.inflection"><title>Zend_Db_Table_Row における変形の定義</title>
 
             
 
@@ -664,7 +664,7 @@ class Products extends Zend_Db_Table_Abstract
                 テーブルクラスでクエリを実行する際にその独自行クラスを使用します。
             </para>
 
-            <example xml:id="zend.db.table.row.extending.inflection.example"><info><title>変換処理の定義例</title></info>
+            <example xml:id="zend.db.table.row.extending.inflection.example"><title>変換処理の定義例</title>
 
                 
 

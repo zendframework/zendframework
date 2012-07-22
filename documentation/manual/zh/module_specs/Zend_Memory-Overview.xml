@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.overview"><info><title>概述</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.overview"><title>概述</title>
     
 
-    <section xml:id="zend.memory.introduction"><info><title> 简介 </title></info>
+    <section xml:id="zend.memory.introduction"><title> 简介 </title>
         
         <para>
             Zend_Memory组件用于在一个受限制的内存环境下管理数据.
@@ -21,7 +21,7 @@
             内存管理器使用<link linkend="zend.cache.backends">Zend_Cache backends</link>作为存储提供者
         </para>
 
-        <example xml:id="zend.memory.introduction.example-1"><info><title>使用 Zend_Memory 组件</title></info>
+        <example xml:id="zend.memory.introduction.example-1"><title>使用 Zend_Memory 组件</title>
             
             <para>
                 <code>Zend_Memory::factory()</code> 用指定的后端选项实例化内存管理器对象.
@@ -55,7 +55,7 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
         </example>
     </section>
 
-    <section xml:id="zend.memory.theory-of-operation"><info><title>操作原理</title></info>
+    <section xml:id="zend.memory.theory-of-operation"><title>操作原理</title>
 
         
 
@@ -77,7 +77,7 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
             </itemizedlist>
         </para>
 
-        <section xml:id="zend.memory.theory-of-operation.manager"><info><title>内存管理器</title></info>
+        <section xml:id="zend.memory.theory-of-operation.manager"><title>内存管理器</title>
 
             
 
@@ -87,7 +87,7 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
 
         </section>
 
-        <section xml:id="zend.memory.theory-of-operation.container"><info><title>内存容器</title></info>
+        <section xml:id="zend.memory.theory-of-operation.container"><title>内存容器</title>
 
             
 
@@ -124,7 +124,7 @@ $memObject->value = substr($memObject->value, $start, $length);
 
         </section>
 
-        <section xml:id="zend.memory.theory-of-operation.locked"><info><title>锁定的内存</title></info>
+        <section xml:id="zend.memory.theory-of-operation.locked"><title>锁定的内存</title>
 
             
 
@@ -134,7 +134,7 @@ $memObject->value = substr($memObject->value, $start, $length);
 
         </section>
 
-        <section xml:id="zend.memory.theory-of-operation.movable"><info><title>可移动内存</title></info>
+        <section xml:id="zend.memory.theory-of-operation.movable"><title>可移动内存</title>
 
             
 

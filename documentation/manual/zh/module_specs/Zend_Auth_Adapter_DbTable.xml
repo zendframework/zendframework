@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><info><title>数据库表认证</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><title>数据库表认证</title>
     
-    <section xml:id="zend.auth.adapter.dbtable.introduction"><info><title>简介</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.introduction"><title>简介</title>
         
         <para>
             <code>Zend_Auth_Adapter_DbTable</code>提供依靠存储在数据库表中的证书来认证的能力。因为<code>Zend_Auth_Adapter_DbTable</code>需要<code>Zend_Db_Adapter_Abstract</code>的实例来传递给它的构造器，所以每个实例要和特定的数据库连接绑定。其它配置选项可以通过构造器和实例方法设置，每个选项有一个配置。
@@ -31,7 +31,7 @@
                 </listitem>
             </itemizedlist>
         </para>
-        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><info><title>基本用法</title></info>
+        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><title>基本用法</title>
             
             <para>
                 正如在简介中所解释的，<code>Zend_Auth_Adapter_DbTable</code>构造器需要一个<code>Zend_Db_Adapter_Abstract</code>的实例，这个实例用做数据库连结，并且认证适配器实例绑定到这个数据库连接。首先，应该创建数据库连接。
@@ -126,7 +126,7 @@ Array
             </para>
         </example>
     </section>
-    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><info><title>高级使用：持久一个 DbTable 结果对象</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><title>高级使用：持久一个 DbTable 结果对象</title>
         
         <para>
             缺省地，基于成功的认证<code>Zend_Auth_Adapter_DbTable</code> 返回提供给auth对象的身份。对于其他用例情景，如开发者想给<code>Zend_Auth</code> 的持久存储机制存储一个包括其他有用信息的身份对象，已经通过使用<code>getResultRowObject()</code> 方法返回一个<code>stdClass</code>对象解决了。下面的代码片段举例说明它的用法：
@@ -161,7 +161,7 @@ if ($result->isValid()) {
 
         ]]></programlisting>
     </section>
-    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><info><title>高级用法范例</title></info>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><title>高级用法范例</title>
         
         <para>
             虽然 Zend_Auth （和它的继承者 Zend_Auth_Adapter_DbTable ）主要用来 <emphasis role="strong">认证</emphasis> 而不是 <emphasis role="strong">授权</emphasis> ，但是基于它们用在哪个域名下，还是有一些实例和问题。根据如何解释你的问题，有时候通过在认证适配器里检查授权问题也许能解决问题。

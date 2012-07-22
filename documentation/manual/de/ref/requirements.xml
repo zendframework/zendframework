@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>Zend Framework Voraussetzungen</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><title>Zend Framework Voraussetzungen</title>
     
 
-    <section xml:id="requirements.introduction"><info><title>Einführung</title></info>
+    <section xml:id="requirements.introduction"><title>Einführung</title>
         
 
         <para>
@@ -25,7 +25,7 @@
             der Anwendung nicht direkt.
         </para>
 
-        <section xml:id="requirements.version"><info><title>PHP Version</title></info>
+        <section xml:id="requirements.version"><title>PHP Version</title>
             
 
             <para>
@@ -40,7 +40,7 @@
             </para>
         </section>
 
-        <section xml:id="requirements.extensions"><info><title>PHP Erweiterungen</title></info>
+        <section xml:id="requirements.extensions"><title>PHP Erweiterungen</title>
             
 
             <para>
@@ -65,7 +65,7 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../en/ref/requirements-php-extensions-table.xml"/>
         </section>
 
-        <section xml:id="requirements.zendcomponents"><info><title>Zend Framework Komponenten</title></info>
+        <section xml:id="requirements.zendcomponents"><title>Zend Framework Komponenten</title>
             
 
             <para>
@@ -89,7 +89,7 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../en/ref/requirements-zendcomponents-table.xml"/>
         </section>
 
-        <section xml:id="requirements.dependencies"><info><title>Zend Framework Abhängigkeiten</title></info>
+        <section xml:id="requirements.dependencies"><title>Zend Framework Abhängigkeiten</title>
             
 
             <para>

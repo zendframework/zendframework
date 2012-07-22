@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.stomp"><info><title>Stomp</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.stomp"><title>Stomp</title>
     
 
     <para>
@@ -22,7 +22,7 @@
         unterstützt.
     </para>
 
-    <section xml:id="zend.queue.adapters-configuration.stomp"><info><title>Stomp - Unterstützende Klassen</title></info>
+    <section xml:id="zend.queue.adapters-configuration.stomp"><title>Stomp - Unterstützende Klassen</title>
         
 
         <itemizedlist>

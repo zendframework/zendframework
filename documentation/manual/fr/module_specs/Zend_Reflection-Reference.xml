@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.reflection.reference"><info><title>Réference de Zend_Reflection</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.reflection.reference"><title>Réference de Zend_Reflection</title>
     
 
     <para>
@@ -37,7 +37,7 @@
         objets.
     </para>
 
-    <section xml:id="zend.reflection.reference.docblock"><info><title>Zend_Reflection_Docblock</title></info>
+    <section xml:id="zend.reflection.reference.docblock"><title>Zend_Reflection_Docblock</title>
         
 
         <para>
@@ -103,7 +103,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.reflection.reference.docblock-tag"><info><title>Zend_Reflection_Docblock_Tag</title></info>
+    <section xml:id="zend.reflection.reference.docblock-tag"><title>Zend_Reflection_Docblock_Tag</title>
         
 
         <para>
@@ -133,7 +133,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.reflection.reference.docblock-tag-param"><info><title>Zend_Reflection_Docblock_Tag_Param</title></info>
+    <section xml:id="zend.reflection.reference.docblock-tag-param"><title>Zend_Reflection_Docblock_Tag_Param</title>
         
 
         <para>
@@ -160,7 +160,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.reflection.reference.docblock-tag-return"><info><title>Zend_Reflection_Docblock_Tag_Return</title></info>
+    <section xml:id="zend.reflection.reference.docblock-tag-return"><title>Zend_Reflection_Docblock_Tag_Return</title>
         
 
         <para>
@@ -178,7 +178,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.reflection.reference.file"><info><title>Zend_Reflection_File</title></info>
+    <section xml:id="zend.reflection.reference.file"><title>Zend_Reflection_File</title>
         
 
         <para>
@@ -250,7 +250,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.reflection.reference.class"><info><title>Zend_Reflection_Class</title></info>
+    <section xml:id="zend.reflection.reference.class"><title>Zend_Reflection_Class</title>
         
 
         <para>
@@ -317,7 +317,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.reflection.reference.extension"><info><title>Zend_Reflection_Extension</title></info>
+    <section xml:id="zend.reflection.reference.extension"><title>Zend_Reflection_Extension</title>
         
 
         <para>
@@ -345,7 +345,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.reflection.reference.function"><info><title>Zend_Reflection_Function</title></info>
+    <section xml:id="zend.reflection.reference.function"><title>Zend_Reflection_Function</title>
         
 
         <para>
@@ -379,7 +379,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.reflection.reference.method"><info><title>Zend_Reflection_Method</title></info>
+    <section xml:id="zend.reflection.reference.method"><title>Zend_Reflection_Method</title>
         
 
         <para>
@@ -397,7 +397,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.reflection.reference.parameter"><info><title>Zend_Reflection_Parameter</title></info>
+    <section xml:id="zend.reflection.reference.parameter"><title>Zend_Reflection_Parameter</title>
         
 
         <para>
@@ -437,7 +437,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.reflection.reference.property"><info><title>Zend_Reflection_Property</title></info>
+    <section xml:id="zend.reflection.reference.property"><title>Zend_Reflection_Property</title>
         
 
         <para>

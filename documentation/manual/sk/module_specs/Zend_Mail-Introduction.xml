@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><info><title>Úvod</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><title>Úvod</title>
     
     <para>
         <code>Zend_Mail</code> poskytuje obecnú funkcionalitu pre posielanie a vytvaranie
@@ -7,7 +7,7 @@
         funkcie <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><code>mail()</code></link> alebo
         cez SMTP spojenie.
     </para>
-    <example><info><title>Jednoduchý E-Mail pomocou Zend_Mail</title></info>
+    <example><title>Jednoduchý E-Mail pomocou Zend_Mail</title>
         
         <para>
             Jednoduchý e-mail pozostáva z niekoľkých prijímateľov, predmetu, tela
@@ -24,7 +24,7 @@ $mail->setSubject('TestSubject');
 $mail->send();
 ?>   ]]></programlisting>
     </example>
-    <note><info><title>Minimálne požiadavky</title></info>
+    <note><title>Minimálne požiadavky</title>
         
         <para>
             Na poslanie e-mailu pomocou <code>Zend_Mail</code> je potrebné zadať

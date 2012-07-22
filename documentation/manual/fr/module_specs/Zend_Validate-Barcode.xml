@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.barcode"><info><title>Barcode</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.barcode"><title>Barcode</title>
     
 
     <para>
@@ -344,7 +344,7 @@
         </listitem>
     </itemizedlist>
 
-    <section xml:id="zend.validate.set.barcode.options"><info><title>Options supportées par Zend_Validate_Barcode</title></info>
+    <section xml:id="zend.validate.set.barcode.options"><title>Options supportées par Zend_Validate_Barcode</title>
         
 
         <para>
@@ -377,7 +377,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.barcode.basic"><info><title>Utilisation classique</title></info>
+    <section xml:id="zend.validate.set.barcode.basic"><title>Utilisation classique</title>
         
 
         <para>
@@ -395,7 +395,7 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.barcode.checksum"><info><title>Somme de contrôle optionnelle</title></info>
+    <section xml:id="zend.validate.set.barcode.checksum"><title>Somme de contrôle optionnelle</title>
         
 
         <para>
@@ -417,7 +417,7 @@ if ($valid->isValid($input)) {
 }
 ]]></programlisting>
 
-        <note><info><title>Sécurité moindre en désactivant la validation de la somme de contrôle</title></info>
+        <note><title>Sécurité moindre en désactivant la validation de la somme de contrôle</title>
             
 
             <para>
@@ -429,7 +429,7 @@ if ($valid->isValid($input)) {
         </note>
     </section>
 
-    <section xml:id="zend.validate.set.barcode.custom"><info><title>Ecrire des validateurs personnalisés</title></info>
+    <section xml:id="zend.validate.set.barcode.custom"><title>Ecrire des validateurs personnalisés</title>
         
 
         <para>

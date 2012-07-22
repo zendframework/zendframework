@@ -946,14 +946,6 @@
             </xi:include>
         </chapter>
 
-        <chapter xml:id="zend.infocard"><title>Zend_InfoCard</title>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_InfoCard-Basics.xml" parse="xml">
-                <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_InfoCard-Basics.xml" parse="xml"/>
-                </xi:fallback>
-            </xi:include>
-        </chapter>
-
         <chapter xml:id="zend.input-filter">
             <title>Zend\InputFilter</title>
 
@@ -1970,14 +1962,6 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.view.helpers.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/zend.view.helpers.xml" parse="xml"/>
-                </xi:fallback>
-            </xi:include>
-        </chapter>
-
-        <chapter xml:id="zend.wildfire"><title>Zend_Wildfire</title>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Wildfire.xml" parse="xml">
-                <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Wildfire.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
         </chapter>

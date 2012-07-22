@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.pluginloader"><info><title>Caricamento di plugin</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.pluginloader"><title>Caricamento di plugin</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         La ricerca di tipo LIFO ed i prefissi di classe consentono di aggiungere namespace ai propri plugin e sovrascrivere plugin da percorsi registrati precedentemente.
     </para>
 
-    <section xml:id="zend.loader.pluginloader.usage"><info><title>Esempio di utilizzo base</title></info>
+    <section xml:id="zend.loader.pluginloader.usage"><title>Esempio di utilizzo base</title>
         
 
         <para>
@@ -72,7 +72,7 @@ $formSubmitClass = $loader->load('FormSubmit'); // 'Bar_View_Helper_FormSubmit'
             Una volta che la classe è caricata, è possibile crearne una nuova istanza.
         </para>
 
-        <note><info><title>Registrazione di più percorsi per un prefisso</title></info>
+        <note><title>Registrazione di più percorsi per un prefisso</title>
             
 
             <para>
@@ -83,7 +83,7 @@ $formSubmitClass = $loader->load('FormSubmit'); // 'Bar_View_Helper_FormSubmit'
             </para>
         </note>
 
-        <note><info><title>E' possibile definire i percorsi in fase di creazione di un'istanza</title></info>
+        <note><title>E' possibile definire i percorsi in fase di creazione di un'istanza</title>
             
 
             <para>
@@ -115,7 +115,7 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         </para>
     </section>
 
-    <section xml:id="zend.loader.pluginloader.paths"><info><title>Manipolazione dei percorsi dei plugin</title></info>
+    <section xml:id="zend.loader.pluginloader.paths"><title>Manipolazione dei percorsi dei plugin</title>
         
 
         <para>
@@ -139,7 +139,7 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.loader.pluginloader.checks"><info><title>Verifica di plugin ed estrazione dei nomi delle classi</title></info>
+    <section xml:id="zend.loader.pluginloader.checks"><title>Verifica di plugin ed estrazione dei nomi delle classi</title>
         
 
         <para>

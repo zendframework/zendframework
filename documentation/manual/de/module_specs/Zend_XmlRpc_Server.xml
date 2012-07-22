@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.server"><info><title>Zend_XmlRpc_Server</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.server"><title>Zend_XmlRpc_Server</title>
     
 
-    <section xml:id="zend.xmlrpc.server.introduction"><info><title>Einführung</title></info>
+    <section xml:id="zend.xmlrpc.server.introduction"><title>Einführung</title>
         
 
         <para>
@@ -13,7 +13,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.usage"><info><title>Grundlegende Benutzung</title></info>
+    <section xml:id="zend.xmlrpc.server.usage"><title>Grundlegende Benutzung</title>
         
 
         <para>
@@ -27,7 +27,7 @@ echo $server->handle();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.structure"><info><title>Server-Struktur</title></info>
+    <section xml:id="zend.xmlrpc.server.structure"><title>Server-Struktur</title>
         
 
         <para>
@@ -62,10 +62,10 @@ echo $server->handle();
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.anatomy"><info><title>Anatomie eines Webservices</title></info>
+    <section xml:id="zend.xmlrpc.server.anatomy"><title>Anatomie eines Webservices</title>
         
 
-        <section xml:id="zend.xmlrpc.server.anatomy.general"><info><title>Generelle Annahmen</title></info>
+        <section xml:id="zend.xmlrpc.server.anatomy.general"><title>Generelle Annahmen</title>
             
 
             <para>
@@ -88,7 +88,7 @@ echo $server->handle();
             </para>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.anatomy.expose"><info><title>Was kann man freigeben?</title></info>
+        <section xml:id="zend.xmlrpc.server.anatomy.expose"><title>Was kann man freigeben?</title>
             
 
             <para>
@@ -106,7 +106,7 @@ echo $server->handle();
         </section>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.conventions"><info><title>Konventionen</title></info>
+    <section xml:id="zend.xmlrpc.server.conventions"><title>Konventionen</title>
         
 
         <para>
@@ -200,7 +200,7 @@ function myFunc($val1, $val2, $val3)
         </note>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.namespaces"><info><title>Nutzen von Namensräumen</title></info>
+    <section xml:id="zend.xmlrpc.server.namespaces"><title>Nutzen von Namensräumen</title>
         
 
         <para>
@@ -237,7 +237,7 @@ $server->addFunction('somefunc', 'funcs');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.request"><info><title>Eigene Request-Objekte</title></info>
+    <section xml:id="zend.xmlrpc.server.request"><title>Eigene Request-Objekte</title>
         
 
         <para>
@@ -256,7 +256,7 @@ $server->addFunction('somefunc', 'funcs');
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.response"><info><title>Eigene Antwort-Objekte</title></info>
+    <section xml:id="zend.xmlrpc.server.response"><title>Eigene Antwort-Objekte</title>
         
 
         <para>
@@ -275,7 +275,7 @@ $server->addFunction('somefunc', 'funcs');
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.fault"><info><title>Verarbeiten von Exceptions durch Fehler</title></info>
+    <section xml:id="zend.xmlrpc.server.fault"><title>Verarbeiten von Exceptions durch Fehler</title>
         
 
         <para>
@@ -314,7 +314,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.caching"><info><title>Zwischenspeichern von Serverdefinitionen zwischen den Anfragen</title></info>
+    <section xml:id="zend.xmlrpc.server.caching"><title>Zwischenspeichern von Serverdefinitionen zwischen den Anfragen</title>
         
 
         <para>
@@ -370,7 +370,7 @@ echo $server->handle();
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.use"><info><title>Nutzungsbeispiele</title></info>
+    <section xml:id="zend.xmlrpc.server.use"><title>Nutzungsbeispiele</title>
         
 
         <para>
@@ -379,7 +379,7 @@ echo $server->handle();
             These Beispiele bauen immer auf den vorangegangenen Beispielen auf.
         </para>
 
-        <example xml:id="zend.xmlrpc.server.use.attach-function"><info><title>Grundlegende Benutzung</title></info>
+        <example xml:id="zend.xmlrpc.server.use.attach-function"><title>Grundlegende Benutzung</title>
             
 
             <para>
@@ -405,7 +405,7 @@ echo $server->handle();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.xmlrpc.server.use.attach-class"><info><title>Hinzufügen einer Klasse</title></info>
+        <example xml:id="zend.xmlrpc.server.use.attach-class"><title>Hinzufügen einer Klasse</title>
             
 
             <para>
@@ -420,7 +420,7 @@ echo $server->handle();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.xmlrpc.server.use.attach-class-with-arguments"><info><title>Hinzufügen einer Klasse mit Argumenten</title></info>
+        <example xml:id="zend.xmlrpc.server.use.attach-class-with-arguments"><title>Hinzufügen einer Klasse mit Argumenten</title>
             
 
             <para>
@@ -462,7 +462,7 @@ $server->setClass('Services_PricingService',
             </para>
         </example>
 
-        <example xml:id="zend.xmlrpc.server.use.attach-class-with-arguments-constructor"><info><title>Argumente nur dem Constructor übergeben</title></info>
+        <example xml:id="zend.xmlrpc.server.use.attach-class-with-arguments-constructor"><title>Argumente nur dem Constructor übergeben</title>
             
 
             <para>
@@ -512,7 +512,7 @@ $server->setClass('Services_PricingService2',
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.xmlrpc.server.use.attach-instance"><info><title>Die Instanz einer Klasse anhängen</title></info>
+        <example xml:id="zend.xmlrpc.server.use.attach-instance"><title>Die Instanz einer Klasse anhängen</title>
             
 
             <para>
@@ -523,7 +523,7 @@ $server->setClass('Services_PricingService2',
             </para>
         </example>
 
-        <example xml:id="zend.xmlrpc.server.use.attach-several-classes-namespaces"><info><title>Mehrere Klassen unter der Nutzung von Namensräumen hinzufügen</title></info>
+        <example xml:id="zend.xmlrpc.server.use.attach-several-classes-namespaces"><title>Mehrere Klassen unter der Nutzung von Namensräumen hinzufügen</title>
             
 
             <para>
@@ -550,7 +550,7 @@ echo $server->handle();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.xmlrpc.server.use.exception-faults"><info><title>Bestimmen von Exceptions als gültige Fehler-Antwort</title></info>
+        <example xml:id="zend.xmlrpc.server.use.exception-faults"><title>Bestimmen von Exceptions als gültige Fehler-Antwort</title>
             
 
             <para>
@@ -582,7 +582,7 @@ echo $server->handle();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.xmlrpc.server.use.custom-request-object"><info><title>Anpassen eigener Anfrage und Antwort Objekte</title></info>
+        <example xml:id="zend.xmlrpc.server.use.custom-request-object"><title>Anpassen eigener Anfrage und Antwort Objekte</title>
             
 
             <para>
@@ -628,7 +628,7 @@ echo $server->handle($request);
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.xmlrpc.server.use.custom-response-object"><info><title>Eine eigene Antwort Klasse spezifizieren</title></info>
+        <example xml:id="zend.xmlrpc.server.use.custom-response-object"><title>Eine eigene Antwort Klasse spezifizieren</title>
             
 
             <para>
@@ -669,10 +669,10 @@ echo $server->handle($request);
         </example>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.performance"><info><title>Performance Optimierung</title></info>
+    <section xml:id="zend.xmlrpc.server.performance"><title>Performance Optimierung</title>
         
 
-        <example xml:id="zend.xmlrpc.server.performance.caching"><info><title>Zwischenspeichern von Serverdefinition zwischen den Anfragen</title></info>
+        <example xml:id="zend.xmlrpc.server.performance.caching"><title>Zwischenspeichern von Serverdefinition zwischen den Anfragen</title>
             
 
             <para>
@@ -722,7 +722,7 @@ echo $server->handle($request);
             </para>
         </note>
 
-        <example xml:id="zend.xmlrpc.server.performance.xmlgen"><info><title>Optimizing XML generation</title></info>
+        <example xml:id="zend.xmlrpc.server.performance.xmlgen"><title>Optimizing XML generation</title>
             
 
             <para>
@@ -752,7 +752,7 @@ $server = new Zend_XmlRpc_Server();
 ]]></programlisting>
         </example>
 
-        <note><info><title>Die eigene Anwendung benchmarken</title></info>
+        <note><title>Die eigene Anwendung benchmarken</title>
             
 
             <para>
@@ -765,7 +765,7 @@ $server = new Zend_XmlRpc_Server();
             </para>
         </note>
 
-        <note><info><title>Den eigenen Client benchmarken</title></info>
+        <note><title>Den eigenen Client benchmarken</title>
             
 
             <para>

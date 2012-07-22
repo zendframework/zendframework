@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>Pobieranie pojedynczego wpisu kanału Atom</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><title>Pobieranie pojedynczego wpisu kanału Atom</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         ale automatycznie tworzy on "anonimowy" kanał zawierający ten wpis.
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><info><title>Odczytywanie pojedynczego wpisu kanału Atom</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><title>Odczytywanie pojedynczego wpisu kanału Atom</title>
         
         <programlisting role="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
@@ -31,7 +31,7 @@ $entry = $feed->current();
         wiesz, że odczytujesz dokument pojedynczego wpisu <code>&lt;entry&gt;</code>:
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><info><title>Bezpośrednie użycie obiektu wpisu dla pojedynczego wpisu kanału Atom</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><title>Bezpośrednie użycie obiektu wpisu dla pojedynczego wpisu kanału Atom</title>
         
         <programlisting role="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');

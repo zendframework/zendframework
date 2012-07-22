@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><info><title>Verschillende Transporten gebruiken</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><title>Verschillende Transporten gebruiken</title>
     
     <para>
         In het geval je verschillende e-mails via verschillende verbindingen wil sturen kan je ook het
@@ -7,7 +7,7 @@
         <code>setDefaultTransport()</code> te doen. Het zo doorgegeven object zal het standaard
         transport vervangen voor het huidige <code>send()</code> verzoek:
     </para>
-    <example><info><title>Verschillende Transporten gebruiken</title></info>
+    <example><title>Verschillende Transporten gebruiken</title>
         
         <programlisting role="php"><![CDATA[
 <?php

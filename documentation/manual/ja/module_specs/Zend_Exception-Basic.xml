@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.basic"><info><title>基本的な使用法</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.basic"><title>基本的な使用法</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         このクラスは、 <acronym>PHP</acronym> の基本的な <classname>Exception</classname> クラスを拡張します。
     </para>
 
-    <example xml:id="zend.exception.catchall.example"><info><title>Zend Framework の例外全てを捕捉する</title></info>
+    <example xml:id="zend.exception.catchall.example"><title>Zend Framework の例外全てを捕捉する</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -19,7 +19,7 @@ try {
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.exception.catchcomponent.example"><info><title>Zend Framework の特定のコンポーネントでスローされた例外を捕捉する</title></info>
+    <example xml:id="zend.exception.catchcomponent.example"><title>Zend Framework の特定のコンポーネントでスローされた例外を捕捉する</title>
         
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>צריכת ערך סנדקציה בודד</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><title>צריכת ערך סנדקציה בודד</title>
     
 
     <para>
@@ -11,7 +11,7 @@
         אם הנכם קוראים ערך בודד, עדיין יווצר אובייקט <code>Zend_Feed_Atom</code> חדש, אבל הוא יצור אוטומטית פיד אנונימי כדי להכיל את הערך שנלקח.
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><info><title>קריאת ערך סנדקציה בודד</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><title>קריאת ערך סנדקציה בודד</title>
         
         <programlisting role="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
@@ -26,7 +26,7 @@ $entry = $feed->current();
         לחלופין, תוכלו להכווין את האובייקט ישירות לערך הבודד על ידי הזנת קישור ישיר לאותו ערך:
     </para>
 
-    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><info><title>שימוש באובייקט סנדקציה ישירות לערך סנדקציה בודד</title></info>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><title>שימוש באובייקט סנדקציה ישירות לערך סנדקציה בודד</title>
         
         <programlisting role="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.view"><info><title>ビューのレンダリング</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.view"><title>ビューのレンダリング</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         性能面でのコストもあります。
     </para>
 
-    <section xml:id="performance.view.pluginloader"><info><title>どのようにしたらビューヘルパの解決を速くできますか？</title></info>
+    <section xml:id="performance.view.pluginloader"><title>どのようにしたらビューヘルパの解決を速くできますか？</title>
         
 
         <para>
@@ -49,7 +49,7 @@
             それでは質問です: どのようにしたらヘルパの解決を速くできますか？
         </para>
 
-        <section xml:id="performance.view.pluginloader.cache"><info><title>ファイルキャッシュを含むプラグインローダーを使う</title></info>
+        <section xml:id="performance.view.pluginloader.cache"><title>ファイルキャッシュを含むプラグインローダーを使う</title>
             
 
             <para>
@@ -63,7 +63,7 @@
             </para>
         </section>
 
-        <section xml:id="performance.view.pluginloader.extend"><info><title>よく使われるヘルパメソッドを提供するようにZend_Viewを拡張する</title></info>
+        <section xml:id="performance.view.pluginloader.extend"><title>よく使われるヘルパメソッドを提供するようにZend_Viewを拡張する</title>
             
 
             <para>
@@ -125,7 +125,7 @@ class My_View extends Zend_View
         </section>
     </section>
 
-    <section xml:id="performance.view.partial"><info><title>どのようにしたらビューを部分的に高速化できますか？</title></info>
+    <section xml:id="performance.view.partial"><title>どのようにしたらビューを部分的に高速化できますか？</title>
         
 
         <para>
@@ -135,7 +135,7 @@ class My_View extends Zend_View
             これを速度向上させられるでしょうか？
         </para>
 
-        <section xml:id="performance.view.partial.render"><info><title>本当に必要な時だけpartial()を使う</title></info>
+        <section xml:id="performance.view.partial.render"><title>本当に必要な時だけpartial()を使う</title>
             
 
             <para>
@@ -184,7 +184,7 @@ class My_View extends Zend_View
         </section>
     </section>
 
-    <section xml:id="performance.view.action"><info><title>どのようにしたらアクションメソッドのビューヘルパの呼び出しを速くできますか？</title></info>
+    <section xml:id="performance.view.action"><title>どのようにしたらアクションメソッドのビューヘルパの呼び出しを速くできますか？</title>
         
 
         <para>
@@ -202,7 +202,7 @@ class My_View extends Zend_View
             どうしたら速くできるでしょう？
         </para>
 
-        <section xml:id="performance.view.action.actionstack"><info><title>可能な場合はアクションスタックを使う</title></info>
+        <section xml:id="performance.view.action.actionstack"><title>可能な場合はアクションスタックを使う</title>
             
 
             <para>
@@ -272,7 +272,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
             </para>
         </section>
 
-        <section xml:id="performance.view.action.model"><info><title>action()を通じてモデルに問い合わせるお好みヘルパ</title></info>
+        <section xml:id="performance.view.action.model"><title>action()を通じてモデルに問い合わせるお好みヘルパ</title>
             
 
             <para>

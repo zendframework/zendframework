@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><info><title>アクセス制御の洗練</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><title>アクセス制御の洗練</title>
 
     
 
-    <section xml:id="zend.acl.refining.precise"><info><title>的確なアクセス制御</title></info>
+    <section xml:id="zend.acl.refining.precise"><title>的確なアクセス制御</title>
 
         
 
@@ -119,7 +119,7 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
 
     </section>
 
-    <section xml:id="zend.acl.refining.removing"><info><title>アクセス制御の削除</title></info>
+    <section xml:id="zend.acl.refining.removing"><title>アクセス制御の削除</title>
 
         
 

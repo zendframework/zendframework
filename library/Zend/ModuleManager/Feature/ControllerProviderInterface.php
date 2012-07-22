@@ -23,5 +23,5 @@ interface ControllerProviderInterface
      *
      * @return array|\Zend\ServiceManager\Configuration
      */
-    public function getControllerConfiguration();
+    public function getControllerConfig();
 }

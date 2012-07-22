@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>Character Sets</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><title>Character Sets</title>
     
     <para>
         <code>Zend_Mail</code> controleert niet of de berichtdelen de juiste karakterset hebben. Wanneer

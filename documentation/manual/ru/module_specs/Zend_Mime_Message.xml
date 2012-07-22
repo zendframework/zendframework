@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><info><title>Zend_Mime_Message</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><title>Zend_Mime_Message</title>
     
 
-    <section xml:id="zend.mime.message.introduction"><info><title>Введение</title></info>
+    <section xml:id="zend.mime.message.introduction"><title>Введение</title>
         
         <para>
             <classname>Zend_Mime_Message</classname> представляет сообщения,
@@ -23,14 +23,14 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.instantiation"><info><title>Инстанцирование</title></info>
+    <section xml:id="zend.mime.message.instantiation"><title>Инстанцирование</title>
         
         <para>
             Нет явного конструктора для <classname>Zend_Mime_Message</classname>.
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.addparts"><info><title>Добавление частей MIME</title></info>
+    <section xml:id="zend.mime.message.addparts"><title>Добавление частей MIME</title>
         
 
         <para>
@@ -61,7 +61,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.bondary"><info><title>Управление разделителями</title></info>
+    <section xml:id="zend.mime.message.bondary"><title>Управление разделителями</title>
         
 
         <para>
@@ -88,7 +88,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.parse"><info><title>Создание объекта Zend_Mime_Message из строки (экспериментальная возможность)</title></info>
+    <section xml:id="zend.mime.message.parse"><title>Создание объекта Zend_Mime_Message из строки (экспериментальная возможность)</title>
         
 
         <para>

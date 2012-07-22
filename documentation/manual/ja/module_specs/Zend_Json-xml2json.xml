@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><info><title>XML から JSON への変換</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><title>XML から JSON への変換</title>
     
     <para>
         <classname>Zend_Json</classname> には、<acronym>XML</acronym> 形式のデータを

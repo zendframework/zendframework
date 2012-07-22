@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><info><title>Erstellen und Laden von PDF Dokumenten</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><title>Erstellen und Laden von PDF Dokumenten</title>
     
 
     <para>
@@ -20,7 +20,7 @@
         werfen eine Ausnahme, wenn ein Fehler auftritt.
     </para>
 
-    <example xml:id="zend.pdf.create.example-1"><info><title>Erstellen und Laden von PDF Dokumenten</title></info>
+    <example xml:id="zend.pdf.create.example-1"><title>Erstellen und Laden von PDF Dokumenten</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -59,7 +59,7 @@ $pdf3 = Zend_Pdf::parse($pdfString);
         Aufruf angefordert werden.
     </para>
 
-    <example xml:id="zend.pdf.create.example-2"><info><title>Rückgabe einer vorgegebenen Revision eines PDF Dokuments</title></info>
+    <example xml:id="zend.pdf.create.example-2"><title>Rückgabe einer vorgegebenen Revision eines PDF Dokuments</title>
         
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardDecorators"><info><title>Décorateurs standards fournis avec Zend Framework</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardDecorators"><title>Décorateurs standards fournis avec Zend Framework</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         plus d'informations sur l'utilisation des décorateurs en général, voyez <link linkend="zend.form.decorators">la section sur les décorateurs</link>.
     </para>
 
-    <section xml:id="zend.form.standardDecorators.callback"><info><title><classname>Zend_Form_Decorator_Callback</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.callback"><title><classname>Zend_Form_Decorator_Callback</classname></title>
         
 
         <para>
@@ -43,7 +43,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.captcha"><info><title><classname>Zend_Form_Decorator_Captcha</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.captcha"><title><classname>Zend_Form_Decorator_Captcha</classname></title>
         
 
         <para>
@@ -60,7 +60,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.description"><info><title><classname>Zend_Form_Decorator_Description</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.description"><title><classname>Zend_Form_Decorator_Description</classname></title>
         
 
         <para>
@@ -86,7 +86,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.dtDdWrapper"><info><title><classname>Zend_Form_Decorator_DtDdWrapper</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.dtDdWrapper"><title><classname>Zend_Form_Decorator_DtDdWrapper</classname></title>
         
 
         <para>
@@ -113,7 +113,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.errors"><info><title><classname>Zend_Form_Decorator_Errors</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.errors"><title><classname>Zend_Form_Decorator_Errors</classname></title>
         
 
         <para>
@@ -125,7 +125,7 @@ class Util
         <para>Le décorateur 'Errors' peut faire suivre ou précéder son contenu.</para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.fieldset"><info><title><classname>Zend_Form_Decorator_Fieldset</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.fieldset"><title><classname>Zend_Form_Decorator_Fieldset</classname></title>
         
 
         <para>
@@ -138,7 +138,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.file"><info><title><classname>Zend_Form_Decorator_File</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.file"><title><classname>Zend_Form_Decorator_File</classname></title>
         
 
         <para>
@@ -150,7 +150,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.form"><info><title><classname>Zend_Form_Decorator_Form</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.form"><title><classname>Zend_Form_Decorator_Form</classname></title>
         
 
         <para>
@@ -162,7 +162,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.formElements"><info><title><classname>Zend_Form_Decorator_FormElements</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.formElements"><title><classname>Zend_Form_Decorator_FormElements</classname></title>
         
 
         <para>
@@ -173,7 +173,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.formErrors"><info><title><classname>Zend_Form_Decorator_FormErrors</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.formErrors"><title><classname>Zend_Form_Decorator_FormErrors</classname></title>
         
 
         <para>
@@ -260,7 +260,7 @@ class Util
         <para>Le décorateur FormErrors peut faire suivre ou précéder son contenu.</para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.htmlTag"><info><title><classname>Zend_Form_Decorator_HtmlTag</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.htmlTag"><title><classname>Zend_Form_Decorator_HtmlTag</classname></title>
         
 
         <para>
@@ -272,7 +272,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.image"><info><title><classname>Zend_Form_Decorator_Image</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.image"><title><classname>Zend_Form_Decorator_Image</classname></title>
         
 
         <para>
@@ -295,7 +295,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.label"><info><title><classname>Zend_Form_Decorator_Label</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.label"><title><classname>Zend_Form_Decorator_Label</classname></title>
         
 
         <para>
@@ -361,7 +361,7 @@ class Util
         </para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.prepareElements"><info><title><classname>Zend_Form_Decorator_PrepareElements</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.prepareElements"><title><classname>Zend_Form_Decorator_PrepareElements</classname></title>
         
 
         <para>
@@ -381,7 +381,7 @@ $form->setDecorators(array(
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.viewHelper"><info><title><classname>Zend_Form_Decorator_ViewHelper</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.viewHelper"><title><classname>Zend_Form_Decorator_ViewHelper</classname></title>
         
 
         <para>
@@ -402,7 +402,7 @@ $form->setDecorators(array(
         <para>Par défaut, ce décorateur fait suivre son contenu au contenu qu'on lui passe.</para>
     </section>
 
-    <section xml:id="zend.form.standardDecorators.viewScript"><info><title><classname>Zend_Form_Decorator_ViewScript</classname></title></info>
+    <section xml:id="zend.form.standardDecorators.viewScript"><title><classname>Zend_Form_Decorator_ViewScript</classname></title>
         
 
         <para>
@@ -473,7 +473,7 @@ $element->setDecorators(array(array('ViewScript',
 </div>
 ]]></programlisting>
 
-        <note><info><title>Remplacer le contenu avec un script de vue</title></info>
+        <note><title>Remplacer le contenu avec un script de vue</title>
             
 
             <para>

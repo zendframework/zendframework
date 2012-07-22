@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-manager"><info><title>Memory Manager</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-manager"><title>Memory Manager</title>
     
 
-    <section xml:id="zend.memory.memory-manager.creation"><info><title>Erstellen eines Memory Manager</title></info>
+    <section xml:id="zend.memory.memory-manager.creation"><title>Erstellen eines Memory Manager</title>
         
 
         <para>
@@ -58,7 +58,7 @@ $memoryManager = Zend_Memory::factory('None');
         </para>
     </section>
 
-    <section xml:id="zend.memory.memory-manager.objects-management"><info><title>Memory Objekte verwalten</title></info>
+    <section xml:id="zend.memory.memory-manager.objects-management"><title>Memory Objekte verwalten</title>
         
 
         <para>
@@ -67,7 +67,7 @@ $memoryManager = Zend_Memory::factory('None');
             Managers zu kontrollieren.
         </para>
 
-        <section xml:id="zend.memory.memory-manager.objects-management.movable"><info><title>Erstellung verschiebbarer Objekte</title></info>
+        <section xml:id="zend.memory.memory-manager.objects-management.movable"><title>Erstellung verschiebbarer Objekte</title>
             
 
             <para>
@@ -87,7 +87,7 @@ $memObject = $memoryManager->create($data);
             </para>
         </section>
 
-        <section xml:id="zend.memory.memory-manager.objects-management.locked"><info><title>Erstellen verschlüsselter Objekte</title></info>
+        <section xml:id="zend.memory.memory-manager.objects-management.locked"><title>Erstellen verschlüsselter Objekte</title>
             
 
             <para>
@@ -107,7 +107,7 @@ $memObject = $memoryManager->createLocked($data);
             </para>
         </section>
 
-        <section xml:id="zend.memory.memory-manager.objects-management.destruction"><info><title>Objekte vernichten</title></info>
+        <section xml:id="zend.memory.memory-manager.objects-management.destruction"><title>Objekte vernichten</title>
             
 
             <para>
@@ -147,10 +147,10 @@ function foo()
         </section>
     </section>
 
-    <section xml:id="zend.memory.memory-manager.settings"><info><title>Memory Manager Einstellungen</title></info>
+    <section xml:id="zend.memory.memory-manager.settings"><title>Memory Manager Einstellungen</title>
         
 
-        <section xml:id="zend.memory.memory-manager.settings.memory-limit"><info><title>Memory Limit</title></info>
+        <section xml:id="zend.memory.memory-manager.settings.memory-limit"><title>Memory Limit</title>
             
 
             <para>
@@ -186,7 +186,7 @@ $memoryManager->setMemoryLimit($newLimit);    // Memorylimit in Bytes setzen
             </para>
         </section>
 
-        <section xml:id="zend.memory.memory-manager.settings.min-size"><info><title>MinSize</title></info>
+        <section xml:id="zend.memory.memory-manager.settings.min-size"><title>MinSize</title>
             
 
             <para>

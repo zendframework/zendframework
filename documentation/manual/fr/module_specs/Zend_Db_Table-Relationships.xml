@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.relationships"><info><title>Relations Zend_Db_Table</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.relationships"><title>Relations Zend_Db_Table</title>
     
 
-    <section xml:id="zend.db.table.relationships.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.db.table.relationships.introduction"><title>Introduction</title>
         
 
         <para>
@@ -17,7 +17,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.db.table.relationships.defining"><info><title>Définir ses relations</title></info>
+    <section xml:id="zend.db.table.relationships.defining"><title>Définir ses relations</title>
         
 
         <para>
@@ -196,7 +196,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.db.table.relationships.fetching.dependent"><info><title>Récupérer des enregistrements dépendants (enfants)</title></info>
+    <section xml:id="zend.db.table.relationships.fetching.dependent"><title>Récupérer des enregistrements dépendants (enfants)</title>
         
 
         <para>
@@ -221,7 +221,7 @@ $row->findDependentRowset($table, [$rule]);
             être une chaîne de caractères aussi bien qu'un objet de la classe de cette table.
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.dependent.example"><info><title>Récupérer des enregistrements dépendants</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example"><title>Récupérer des enregistrements dépendants</title>
             
 
             <para>
@@ -252,7 +252,7 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
             donc pris en considération, et il s'agit de <code>"Reporter"</code>.
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.dependent.example-by"><info><title>Récupérer des enregistrements dépendants avec un rôle spécifique</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-by"><title>Récupérer des enregistrements dépendants avec un rôle spécifique</title>
             
 
             <para>
@@ -278,10 +278,10 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
         </para>
 
         <para>
-            <example xml:id="zend.db.table.relationships.fetching.dependent.example-by-select"><info><title>
+            <example xml:id="zend.db.table.relationships.fetching.dependent.example-by-select"><title>
                         Récupérer des enregistrements dépendants en utilisant un objet
                         Zend_Db_Table_Select
-                    </title></info>
+                    </title>
                     
 
                 <para>
@@ -337,9 +337,9 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
             </para>
         </note>
 
-        <example xml:id="zend.db.table.relationships.fetching.dependent.example-magic"><info><title>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-magic"><title>
                 Récupérer des enregistrements dépendants en utilisant les méthodes magiques
-            </title></info>
+            </title>
             
 
             <para>
@@ -361,7 +361,7 @@ $bugsAssignedTo   = $user1234->findBugsByEngineer();
         </example>
     </section>
 
-    <section xml:id="zend.db.table.relationships.fetching.parent"><info><title>Récupérer l'enregistrement parent</title></info>
+    <section xml:id="zend.db.table.relationships.fetching.parent"><title>Récupérer l'enregistrement parent</title>
         
 
         <para>
@@ -385,7 +385,7 @@ $row->findParentRow($table, [$rule]);
             une chaîne de caractères, ou un objet instance de la classe de la table parente.
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.parent.example"><info><title>Récupérer l'enregistrement parent</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example"><title>Récupérer l'enregistrement parent</title>
             
 
             <para>
@@ -416,7 +416,7 @@ $reporter    = $bug1->findParentRow('Accounts');
             donc pris en considération, et il s'agit de <code>"Reporter"</code>.
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.parent.example-by"><info><title>Récupérer un enregistrement parent avec un rôle spécifique</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example-by"><title>Récupérer un enregistrement parent avec un rôle spécifique</title>
             
 
             <para>
@@ -470,7 +470,7 @@ $engineer    = $bug1->findParentRow('Accounts', 'Engineer');
             </para>
         </note>
 
-        <example xml:id="zend.db.table.relationships.fetching.parent.example-magic"><info><title>Récupérer un enregistrement parent en utilisant les méthodes magiques</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example-magic"><title>Récupérer un enregistrement parent en utilisant les méthodes magiques</title>
             
 
             <para>
@@ -492,10 +492,10 @@ $engineer    = $bug1->findParentAccountsByEngineer();
         </example>
     </section>
 
-    <section xml:id="zend.db.table.relationships.fetching.many-to-many"><info><title>
+    <section xml:id="zend.db.table.relationships.fetching.many-to-many"><title>
             Récupérer des enregistrements dans une relation N-N (plusieurs-à-plusieurs ou
             "many-to-many")
-        </title></info>
+        </title>
         
 
         <para>
@@ -534,7 +534,7 @@ $row->findManyToManyRowset($table,
             plusieurs.
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example"><info><title>Récupérer des enregistrements dans une relation plusieurs-à-plusieurs</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example"><title>Récupérer des enregistrements dans une relation plusieurs-à-plusieurs</title>
             
 
             <para>
@@ -584,8 +584,8 @@ $productsRowset   = $bug1234->findManyToManyRowset('Products',
             la valeur <code>"Product"</code>.
         </para>
 
-        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-by"><info><title>Récupérer des enregistrements dans une relation plusieurs-à-plusieurs avec un
-            rôle spécifique</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-by"><title>Récupérer des enregistrements dans une relation plusieurs-à-plusieurs avec un
+            rôle spécifique</title>
             
 
             <para>
@@ -653,8 +653,8 @@ $productsRowset   = $bug1234->findManyToManyRowset('Products',
             </para>
         </note>
 
-        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-magic"><info><title>Récupérer des enregistrements dans une relation plusieurs-à-plusieurs avec
-            les méthodes magiques</title></info>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-magic"><title>Récupérer des enregistrements dans une relation plusieurs-à-plusieurs avec
+            les méthodes magiques</title>
             
 
             <para>
@@ -677,10 +677,10 @@ $products    = $bug1234->findProductsViaBugsProductsByBug();
         </example>
     </section>
 
-    <section xml:id="zend.db.table.relationships.cascading"><info><title>Opérations d'écritures en cascade</title></info>
+    <section xml:id="zend.db.table.relationships.cascading"><title>Opérations d'écritures en cascade</title>
         
 
-        <note><info><title>Déclarer l'intégrité référentielle</title></info>
+        <note><title>Déclarer l'intégrité référentielle</title>
             
 
             <para>
@@ -719,7 +719,7 @@ $products    = $bug1234->findProductsViaBugsProductsByBug();
             cours.
         </para>
 
-        <example xml:id="zend.db.table.relationships.cascading.example-delete"><info><title>Exemple de DELETE cascade</title></info>
+        <example xml:id="zend.db.table.relationships.cascading.example-delete"><title>Exemple de DELETE cascade</title>
             
 
             <para>
@@ -761,7 +761,7 @@ $product1234->delete();
             dans les tables dépendantes seront modifiés / supprimés.
         </para>
 
-        <example xml:id="zend.db.table.relationships.cascading.example-declaration"><info><title>Exemple de déclaration des opérations de cascade</title></info>
+        <example xml:id="zend.db.table.relationships.cascading.example-declaration"><title>Exemple de déclaration des opérations de cascade</title>
             
 
             <para>
@@ -796,7 +796,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 ]]></programlisting>
         </example>
 
-        <section xml:id="zend.db.table.relationships.cascading.notes"><info><title>Notes concernant les opérations de cascade</title></info>
+        <section xml:id="zend.db.table.relationships.cascading.notes"><title>Notes concernant les opérations de cascade</title>
             
 
             <para>

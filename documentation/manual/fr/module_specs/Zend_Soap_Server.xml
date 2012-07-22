@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.server"><info><title>Zend_Soap_Server</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.server"><title>Zend_Soap_Server</title>
     
 
     <para>
@@ -29,7 +29,7 @@
         configurées.
     </para>
 
-    <section xml:id="zend.soap.server.constructor"><info><title>Constructeur de <classname>Zend_Soap_Server</classname></title></info>
+    <section xml:id="zend.soap.server.constructor"><title>Constructeur de <classname>Zend_Soap_Server</classname></title>
         
 
         <para>
@@ -37,7 +37,7 @@
             selon que l'on fonctionne en mode WSDL ou non.
         </para>
 
-        <section xml:id="zend.soap.server.constructor.wsdl_mode"><info><title>Constructeur de <classname>Zend_Soap_Server</classname> en mode WSDL</title></info>
+        <section xml:id="zend.soap.server.constructor.wsdl_mode"><title>Constructeur de <classname>Zend_Soap_Server</classname> en mode WSDL</title>
             
 
             <para>
@@ -111,8 +111,8 @@
                 </para>
         </section>
 
-        <section xml:id="zend.soap.server.wsdl_mode"><info><title>Constructeur de <classname>Zend_Soap_Server</classname> en mode
-            non-WSDL</title></info>
+        <section xml:id="zend.soap.server.wsdl_mode"><title>Constructeur de <classname>Zend_Soap_Server</classname> en mode
+            non-WSDL</title>
             
 
             <para>
@@ -176,7 +176,7 @@
         </section>
     </section>
 
-    <section xml:id="zend.soap.server.api_define_methods"><info><title>Méthodes de définitions de l'API du service</title></info>
+    <section xml:id="zend.soap.server.api_define_methods"><title>Méthodes de définitions de l'API du service</title>
         
 
         <para>Il existe 2 manières de déclarer l'API de votre serveur <acronym>SOAP</acronym>.</para>
@@ -218,7 +218,7 @@ $server->setClass('MyClass');
 $server->setObject(new MyClass());
 ...
 $server->handle();
-]]></programlisting> <note><info><title>Important!</title></info>
+]]></programlisting> <note><title>Important!</title>
                     
 
                 <para>
@@ -263,10 +263,10 @@ $server->handle();
 ]]></programlisting></para>
         </section>
 
-        <section xml:id="zend.soap.server.request_response"><info><title>Gestion des objets de requête et de réponse</title></info>
+        <section xml:id="zend.soap.server.request_response"><title>Gestion des objets de requête et de réponse</title>
             
 
-            <note><info><title>Avancée</title></info>
+            <note><title>Avancée</title>
                 
 
             <para>
@@ -281,7 +281,7 @@ $server->handle();
             post processus.
         </para>
 
-        <section xml:id="zend.soap.server.request_response.request"><info><title>Requête</title></info>
+        <section xml:id="zend.soap.server.request_response.request"><title>Requête</title>
             
 
             <para>
@@ -342,7 +342,7 @@ $request = $server->getLastRequest();
 ]]></programlisting></para>
             </section>
 
-            <section xml:id="zend.soap.server.request_response.response"><info><title>Réponse</title></info>
+            <section xml:id="zend.soap.server.request_response.response"><title>Réponse</title>
                 
 
             <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><info><title>PDF ドキュメントの作成および読み込み</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><title>PDF ドキュメントの作成および読み込み</title>
     
     <para>
     <classname>Zend_Pdf</classname> クラスは <acronym>PDF</acronym> ドキュメントを表すもので、
@@ -19,7 +19,7 @@
     エラーが発生した場合には例外がスローされます。
     </para>
 
-    <example xml:id="zend.pdf.create.example-1"><info><title>新しい PDF ドキュメントの作成あるいは既存の PDF ドキュメントの読み込み</title></info>
+    <example xml:id="zend.pdf.create.example-1"><title>新しい PDF ドキュメントの作成あるいは既存の PDF ドキュメントの読み込み</title>
         
         <programlisting language="php"><![CDATA[
 ...
@@ -54,7 +54,7 @@ $pdf3 = Zend_Pdf::parse($pdfString);
     call.
     </para>
 
-    <example xml:id="zend.pdf.create.example-2"><info><title>指定した版の PDF ドキュメントの取得</title></info>
+    <example xml:id="zend.pdf.create.example-2"><title>指定した版の PDF ドキュメントの取得</title>
         
         <programlisting language="php"><![CDATA[
 ...

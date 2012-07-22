@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.basics"><info><title>שימוש בסיסי</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.basics"><title>שימוש בסיסי</title>
     
     <para>
         שימוש ב <code>Zend_Json</code> נעשה על ידי קריאה לשני מתודות סטטיות שהם:

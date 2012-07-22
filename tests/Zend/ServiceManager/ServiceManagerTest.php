@@ -15,7 +15,7 @@ use Zend\Mvc\Service\DiFactory;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\Exception;
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\Configuration;
+use Zend\ServiceManager\Config;
 
 class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,9 +33,9 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\ServiceManager\ServiceManager::__construct
      */
-    public function testConstructorConfiguration()
+    public function testConstructorConfig()
     {
-        $config = new Configuration(array('services' => array('foo' => 'bar')));
+        $config = new Config(array('services' => array('foo' => 'bar')));
         $serviceManager = new ServiceManager($config);
         $this->assertEquals('bar', $serviceManager->get('foo'));
     }
@@ -407,7 +407,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testConfigureWithInvokableClass()
     {
-        $config = new Configuration(array(
+        $config = new Config(array(
             'invokables' => array(
                 'foo' => 'ZendTest\ServiceManager\TestAsset\Foo',
             ),
@@ -432,7 +432,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     {
         $di = $this->getMock('Zend\Di\Di');
         $factory = new DiAbstractServiceFactory($di);
-        $factory->instanceManager()->setConfiguration('ZendTest\ServiceManager\TestAsset\Bar', array('parameters' => array('foo' => array('a'))));
+        $factory->instanceManager()->setConfig('ZendTest\ServiceManager\TestAsset\Bar', array('parameters' => array('foo' => array('a'))));
         $this->serviceManager->addAbstractFactory($factory);
 
         $this->assertTrue($this->serviceManager->has('ZendTest\ServiceManager\TestAsset\Bar', true));
@@ -457,7 +457,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testCannotUseUnknownServiceNameForAbstractFactory()
     {
-        $config = new Configuration(array(
+        $config = new Config(array(
             'abstract_factories' => array(
                 'ZendTest\ServiceManager\TestAsset\FooAbstractFactory',
             ),

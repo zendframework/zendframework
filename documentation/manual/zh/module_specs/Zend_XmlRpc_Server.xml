@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.server"><info><title>Zend_XmlRpc_Server</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.server"><title>Zend_XmlRpc_Server</title>
     
 
-    <section xml:id="zend.xmlrpc.server.introduction"><info><title>介绍</title></info>
+    <section xml:id="zend.xmlrpc.server.introduction"><title>介绍</title>
         
 
         <para>
@@ -12,7 +12,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.usage"><info><title>基本使用</title></info>
+    <section xml:id="zend.xmlrpc.server.usage"><title>基本使用</title>
         
 
         <para>
@@ -29,7 +29,7 @@ echo $server->handle();
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.structure"><info><title>服务器结构</title></info>
+    <section xml:id="zend.xmlrpc.server.structure"><title>服务器结构</title>
         
 
         <para>
@@ -57,7 +57,7 @@ echo $server->handle();
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.conventions"><info><title>转换</title></info>
+    <section xml:id="zend.xmlrpc.server.conventions"><title>转换</title>
         
         <para>
             Zend_XmlRpc_Server 允许开发人员附加函数和类方法作为 XML-RPC 方法来调度。通过
@@ -127,7 +127,7 @@ function myFunc($val1, $val2, $val3)
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.namespaces"><info><title>使用命名空间</title></info>
+    <section xml:id="zend.xmlrpc.server.namespaces"><title>使用命名空间</title>
         
 
         <para>
@@ -159,7 +159,7 @@ $server->addFunction('somefunc', 'funcs');
         ]]></programlisting>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.request"><info><title>自定义请求对象</title></info>
+    <section xml:id="zend.xmlrpc.server.request"><title>自定义请求对象</title>
         
 
         <para>
@@ -171,7 +171,7 @@ $server->addFunction('somefunc', 'funcs');
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.response"><info><title>自定义响应对象</title></info>
+    <section xml:id="zend.xmlrpc.server.response"><title>自定义响应对象</title>
         
 
         <para>
@@ -187,7 +187,7 @@ $server->addFunction('somefunc', 'funcs');
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.fault"><info><title>处理错误产生的异常</title></info>
+    <section xml:id="zend.xmlrpc.server.fault"><title>处理错误产生的异常</title>
         
 
         <para>
@@ -215,7 +215,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.caching"><info><title>在请求之间缓存服务器定义</title></info>
+    <section xml:id="zend.xmlrpc.server.caching"><title>在请求之间缓存服务器定义</title>
         
         <para>
             附加多个类到 XML-RPC 服务器实例可能消耗大量的资源；每一个类必须使用反射
@@ -261,13 +261,13 @@ echo $server->handle();
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.server.use"><info><title>使用实例</title></info>
+    <section xml:id="zend.xmlrpc.server.use"><title>使用实例</title>
         
         <para>
             下面有一些有用的例子，向开发人员展示了可能用到的各种情况。
             每一个实例都是建立在前一个实例基础上的扩充。
         </para>
-        <section xml:id="zend.xmlrpc.server.use.case1"><info><title>基本使用</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case1"><title>基本使用</title>
             
 
             <para>
@@ -294,7 +294,7 @@ echo $server->handle();
             ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case2"><info><title>附加一个类</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case2"><title>附加一个类</title>
             
 
             <para>
@@ -311,7 +311,7 @@ echo $server->handle();
             ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case3"><info><title>利用命名空间附加多个类</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case3"><title>利用命名空间附加多个类</title>
             
 
             <para>
@@ -332,7 +332,7 @@ echo $server->handle();
             ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case4"><info><title>指定异常作为合法的失败响应</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case4"><title>指定异常作为合法的失败响应</title>
             
 
             <para>
@@ -358,7 +358,7 @@ echo $server->handle();
             ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case5"><info><title>设置自定义请求对象</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case5"><title>设置自定义请求对象</title>
             
 
             <para>
@@ -389,7 +389,7 @@ echo $server->handle($request);
             ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case6"><info><title>设置自定义响应对象</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case6"><title>设置自定义响应对象</title>
             
 
             <para>
@@ -424,7 +424,7 @@ echo $server->handle($request);
             ]]></programlisting>
         </section>
 
-        <section xml:id="zend.xmlrpc.server.use.case7"><info><title>在请求之间缓存服务器定义</title></info>
+        <section xml:id="zend.xmlrpc.server.use.case7"><title>在请求之间缓存服务器定义</title>
             
 
             <para>

@@ -86,7 +86,7 @@ class DiAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
 
         // will check instance configurations
         $this->assertFalse($instance->canCreateServiceWithName($locator, __NAMESPACE__ . '\Non\Existing', __NAMESPACE__ . '\Non\Existing'));
-        $im->setConfiguration(__NAMESPACE__ . '\Non\Existing', array('parameters' => array('a' => 'b')));
+        $im->setConfig(__NAMESPACE__ . '\Non\Existing', array('parameters' => array('a' => 'b')));
         $this->assertTrue($instance->canCreateServiceWithName($locator, __NAMESPACE__ . '\Non\Existing', __NAMESPACE__ . '\Non\Existing'));
 
         // will check preferences for abstract types

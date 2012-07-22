@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader-resource"><info><title>Ressource Autoloader</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader-resource"><title>Ressource Autoloader</title>
     
 
     <para>
@@ -17,7 +17,7 @@
         Verzeichnissen zu namespacen, und trotzdem die Vorteile des Autoloadings zu nutzen.
     </para>
 
-    <section xml:id="zend.loader.autoloader-resource.usage"><info><title>Verwendung von Ressource Autoloadern</title></info>
+    <section xml:id="zend.loader.autoloader-resource.usage"><title>Verwendung von Ressource Autoloadern</title>
         
 
         <para>
@@ -56,7 +56,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
 ));
 ]]></programlisting>
 
-        <note><info><title>Basis Namespace</title></info>
+        <note><title>Basis Namespace</title>
             
 
             <para>
@@ -133,7 +133,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.autoloader-resource.module"><info><title>Der Modul Ressource Autoloader</title></info>
+    <section xml:id="zend.loader.autoloader-resource.module"><title>Der Modul Ressource Autoloader</title>
         
 
         <para>
@@ -170,13 +170,13 @@ views/
         </para>
     </section>
 
-    <section xml:id="zend.loader.autoloader-resource.factory"><info><title>Verwendung von Ressource Autoloadern als Objekt Factories</title></info>
+    <section xml:id="zend.loader.autoloader-resource.factory"><title>Verwendung von Ressource Autoloadern als Objekt Factories</title>
         
         <para/>
         <!-- @todo -->
     </section>
 
-    <section xml:id="zend.loader.autoloader-resource.reference"><info><title>Referenz zu den Ressource Autoloadern</title></info>
+    <section xml:id="zend.loader.autoloader-resource.reference"><title>Referenz zu den Ressource Autoloadern</title>
         
         <para/>
         <!-- @todo -->

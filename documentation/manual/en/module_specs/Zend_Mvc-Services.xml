@@ -13,7 +13,7 @@
   </para>
 
   <section xml:id="zend.mvc.services.service-manager-configuration">
-      <info><title>ServiceManagerConfiguration</title></info>
+      <title>ServiceManagerConfiguration</title>
 
       <para>
           This is the one service class referenced directly in the bootstrapping. It provides the
@@ -333,7 +333,7 @@
   </section>
 
   <section xml:id="zend.mvc.services.view-manager">
-      <info><title>ViewManager</title></info>
+      <title>ViewManager</title>
 
       <para>
           The View layer within <classname>Zend\Mvc</classname> consists of a large number of
@@ -510,7 +510,7 @@
   </section>
 
   <section xml:id="zend.mvc.services.app-config">
-      <info><title>Application Configuration Options</title></info>
+      <title>Application Configuration Options</title>
 
       <para>
           The following options may be used to provide initial configuration for the
@@ -563,7 +563,7 @@ return array(
   </section>
 
   <section xml:id="zend.mvc.services.config">
-      <info><title>Default Configuration Options</title></info>
+      <title>Default Configuration Options</title>
 
       <para>
           The following options are available when using the default services configured by the

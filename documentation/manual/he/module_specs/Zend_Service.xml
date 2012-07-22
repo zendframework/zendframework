@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.introduction"><info><title>הקדמה</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.introduction"><title>הקדמה</title>
     
     <para>
         <code>Zend_Service</code> היא מחלקה לא מחושית אשר משמשת בתור יסוד לישום מחלקות שרת אשר נעזרות ב SOAP או REST לדוגמא.

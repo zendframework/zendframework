@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.creation"><info><title>Criação de código de barras usando a classe Zend_Barcode</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.creation"><title>Criação de código de barras usando a classe Zend_Barcode</title>
     
 
-    <section xml:id="zend.barcode.creation.configuration"><info><title>Usando o Zend_Barcode::factory</title></info>
+    <section xml:id="zend.barcode.creation.configuration"><title>Usando o Zend_Barcode::factory</title>
         
 
         <para>
@@ -46,7 +46,7 @@
             </listitem>
         </orderedlist>
 
-        <example xml:id="zend.barcode.creation.configuration.example-1"><info><title>Recuperando um Renderizador com Zend_Barcode::factory()</title></info>
+        <example xml:id="zend.barcode.creation.configuration.example-1"><title>Recuperando um Renderizador com Zend_Barcode::factory()</title>
             
 
             <para>
@@ -68,7 +68,7 @@ $renderer = Zend_Barcode::factory(
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.barcode.creation.configuration.example-2"><info><title>Usando o Zend_Barcode::factory() com objetos Zend_Config</title></info>
+        <example xml:id="zend.barcode.creation.configuration.example-2"><title>Usando o Zend_Barcode::factory() com objetos Zend_Config</title>
             
 
             <para>
@@ -91,7 +91,7 @@ $renderer = Zend_Barcode::factory($config);
         </example>
     </section>
 
-    <section xml:id="zend.barcode.creation.drawing"><info><title>Desenhando um código de barras</title></info>
+    <section xml:id="zend.barcode.creation.drawing"><title>Desenhando um código de barras</title>
         
 
         <para>
@@ -101,7 +101,7 @@ $renderer = Zend_Barcode::factory($config);
             de proxy fornecido pelo <classname>Zend_Barcode</classname>.
         </para>
 
-        <example xml:id="zend.barcode.creation.drawing.example-1"><info><title>Desenhando um código de barras com o objeto renderizador</title></info>
+        <example xml:id="zend.barcode.creation.drawing.example-1"><title>Desenhando um código de barras com o objeto renderizador</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -118,7 +118,7 @@ $imageResource = Zend_Barcode::factory(
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.barcode.creation.drawing.example-2"><info><title>Desenhando um código de barras com Zend_Barcode::draw()</title></info>
+        <example xml:id="zend.barcode.creation.drawing.example-2"><title>Desenhando um código de barras com Zend_Barcode::draw()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -136,7 +136,7 @@ $imageResource = Zend_Barcode::draw(
         </example>
     </section>
 
-    <section xml:id="zend.barcode.creation.renderering"><info><title>Renderizando um código de barras</title></info>
+    <section xml:id="zend.barcode.creation.renderering"><title>Renderizando um código de barras</title>
         
 
         <para>
@@ -147,7 +147,7 @@ $imageResource = Zend_Barcode::draw(
             <classname>Zend_Barcode</classname>.
         </para>
 
-        <example xml:id="zend.barcode.creation.renderering.example-1"><info><title>Renderizando um código de barras com o objeto renderizador</title></info>
+        <example xml:id="zend.barcode.creation.renderering.example-1"><title>Renderizando um código de barras com o objeto renderizador</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -173,7 +173,7 @@ Zend_Barcode::factory(
             </para>
         </example>
 
-        <example xml:id="zend.barcode.creation.renderering.example-2"><info><title>Renderizando um código de barras com Zend_Barcode::render()</title></info>
+        <example xml:id="zend.barcode.creation.renderering.example-2"><title>Renderizando um código de barras com Zend_Barcode::render()</title>
             
 
             <programlisting language="php"><![CDATA[

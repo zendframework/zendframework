@@ -1,6 +1,8 @@
 <?php
 namespace Zend\Console;
 
+use Zend\Console\Exception\InvalidArgumentException;
+
 /**
  * An static, utility class for interacting with Console enviromen.
  * Declared abstract to prevent from instantiating.
@@ -39,7 +41,7 @@ abstract class Console
                 }
 
                 if(!class_exists($className)){
-                    throw new \InvalidArgumentException('Cannot find Console adapter class '.$className);
+                    throw new InvalidArgumentException('Cannot find Console adapter class '.$className);
                 }
             }else{
                 /**
@@ -66,7 +68,7 @@ abstract class Console
                 }
 
                 if(!class_exists($className)){
-                    throw new \InvalidArgumentException('Cannot find Charset class '.$className);
+                    throw new InvalidArgumentException('Cannot find Charset class '.$className);
                 }
 
                 /**

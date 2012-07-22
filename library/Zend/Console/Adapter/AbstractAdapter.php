@@ -4,6 +4,7 @@ namespace Zend\Console\Adapter;
 use Zend\Console\AdapterInterface;
 use Zend\Console\ColorInterface;
 use Zend\Console\CharsetInterface;
+use Zend\Console\Exception\BadMethodCallException;
 use Zend\Console;
 
 abstract class AbstractAdapter implements AdapterInterface
@@ -155,7 +156,7 @@ abstract class AbstractAdapter implements AdapterInterface
             $x2 < $x1 ||
             $y2 < $y1
         ) {
-            throw new \BadMethodCallException('Supplied X,Y coordinates are invalid.');
+            throw new BadMethodCallException('Supplied X,Y coordinates are invalid.');
         }
 
         /**

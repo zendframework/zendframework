@@ -4,6 +4,7 @@ namespace Zend\Console\Adapter;
 use Zend\Console\AdapterInterface;
 use Zend\Console\ColorInterface;
 use Zend\Console\CharsetInterface;
+use Zend\Console\Exception\BadMethodCallException;
 use Zend\Console;
 
 /**
@@ -180,7 +181,7 @@ class WindowsAnsicon extends Posix implements AdapterInterface
             if($useChoice){
                 system('choice /n /cs /c '.$mask,$return);
                 if($return == 255 || $return < 1 || $return > strlen($mask)){
-                    throw new \RuntimeException('"choice" command failed to run. Are you using Windows XP or newer?');
+                    throw new RuntimeException('"choice" command failed to run. Are you using Windows XP or newer?');
                 }else{
                     /**
                      * Fetch the char from mask

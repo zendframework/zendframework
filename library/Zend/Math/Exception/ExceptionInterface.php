@@ -15,5 +15,4 @@ namespace Zend\Math\Exception;
  * @package    Zend_Math
  */
 interface ExceptionInterface
-{
-}
+{}

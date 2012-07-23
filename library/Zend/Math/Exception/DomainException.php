@@ -11,12 +11,11 @@
 namespace Zend\Math\Exception;
 
 /**
- * Runtime argument exception
+ * Invalid argument exception
  *
  * @category   Zend
  * @package    Zend_Math
  * @subpackage Exception
  */
-class RuntimeException extends \RuntimeException implements
-    ExceptionInterface
+class DomainException extends \DomainException implements ExceptionInterface
 {}

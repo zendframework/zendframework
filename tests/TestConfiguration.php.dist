@@ -433,11 +433,6 @@ defined('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS') || define('TESTS_ZEND_QUEUE_PLATFORM
 defined('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') || define('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI', false);
 
 /**
- * Zend\TimeSync tests
- */
-defined('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED') || define('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED', false);
-
-/**
  * Zend\Uri tests
  *
  * Setting CRASH_TEST_ENABLED to true will enable some tests that may

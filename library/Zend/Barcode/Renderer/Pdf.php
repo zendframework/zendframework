@@ -10,10 +10,10 @@
 
 namespace Zend\Barcode\Renderer;
 
-use Zend\Pdf\Color;
-use Zend\Pdf\Font;
-use Zend\Pdf\Page;
-use Zend\Pdf\PdfDocument;
+use ZendPdf\Color;
+use ZendPdf\Font;
+use ZendPdf\Page;
+use ZendPdf\PdfDocument;
 
 /**
  * Class for rendering the barcode in PDF resource

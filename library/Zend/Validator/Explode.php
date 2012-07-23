@@ -114,25 +114,34 @@ class Explode extends AbstractValidator
     /**
      * Defined by Zend_Validate_Interface
      *
-     * Returns true if and only if $value is a valid list of email addresses
-     * (separated by comma) according to RFC2822
+     * Returns true if all values validate true
      *
-     * @link   http://www.ietf.org/rfc/rfc2822.txt RFC2822
-     * @link   http://www.columbia.edu/kermit/ascii.html US-ASCII characters
-     * @param  string $value
+     * @param  string|array $value
      * @return boolean
      * @throws Exception\RuntimeException
      */
     public function isValid($value)
     {
-        if (!is_string($value)) {
+        if (!is_string($value) && !is_array($value)) {
             $this->error(self::INVALID);
             return false;
         }
 
         $this->setValue($value);
 
-        $values    = explode($this->valueDelimiter, $value);
+        if (!is_array($value)) {
+            $delimiter = $this->getValueDelimiter();
+            // Skip explode if delimiter is null,
+            // used when value is expected to be either an
+            // array when multiple values and a string for
+            // single values (ie. MultiCheckbox form behavior)
+            $values = (null !== $delimiter)
+                      ? explode($this->valueDelimiter, $value)
+                      : array($value);
+        } else {
+            $values = $value;
+        }
+
         $retval    = true;
         $messages  = array();
         $validator = $this->getValidator();

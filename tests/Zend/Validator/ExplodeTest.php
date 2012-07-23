@@ -41,7 +41,10 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
             array('foo',              ',', false, 1, true,  array(),                   true),
             array('foo',              ',', false, 1, false, array('X'),                false),
             array('foo',              ',', true,  1, false, array('X'),                false),
-            array(array(),            ',', false, 0, true,  array(Explode::INVALID => 'Invalid'), false),
+            array(array('a', 'b'),   null, false, 2, true,  array(),                   true),
+            array(array('a', 'b'),   null, false, 2, false, array('X', 'X'),           false),
+            array('foo',             null, false, 1, true,  array(),                   true),
+            array(1,                  ',', false, 0, true,  array(Explode::INVALID => 'Invalid'), false),
         );
     }
 

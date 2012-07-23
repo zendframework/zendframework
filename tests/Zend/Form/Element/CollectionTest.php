@@ -122,4 +122,62 @@ class CollectionTest extends TestCase
 
         $this->assertEquals(true, $this->form->isValid());
     }
+
+    public function testThrowExceptionIfThereAreLessElementsAndAllowRemoveNotAllowed()
+    {
+        $this->setExpectedException('Zend\Form\Exception\DomainException');
+
+        $collection = $this->form->get('colors');
+        $collection->setAllowRemove(false);
+
+        $this->form->setData(array(
+            'colors' => array(
+                '#ffffff'
+            ),
+            'fieldsets' => array(
+                array(
+                    'field' => 'oneValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                ),
+                array(
+                    'field' => 'twoValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                )
+            )
+        ));
+
+        $this->form->isValid();
+    }
+
+    public function testCanValidateLessThanSpecifiedCount()
+    {
+        $collection = $this->form->get('colors');
+        $collection->setAllowRemove(true);
+
+        $this->form->setData(array(
+            'colors' => array(
+                '#ffffff'
+            ),
+            'fieldsets' => array(
+                array(
+                    'field' => 'oneValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                ),
+                array(
+                    'field' => 'twoValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                )
+            )
+        ));
+
+        $this->assertEquals(true, $this->form->isValid());
+    }
 }

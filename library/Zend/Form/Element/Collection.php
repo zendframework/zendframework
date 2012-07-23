@@ -129,6 +129,9 @@ class Collection extends Fieldset
      * Populate values
      *
      * @param array|\Traversable $data
+     * @throws \Zend\Form\Exception\InvalidArgumentException
+     * @throws \Zend\Form\Exception\DomainException
+     * @return void
      */
     public function populateValues($data)
     {
@@ -142,8 +145,28 @@ class Collection extends Fieldset
 
         // Can't do anything with empty data
         if (empty($data)) {
-
             return;
+        }
+
+        if (count($data) < $this->getCount()) {
+            if (!$this->allowRemove) {
+                throw new Exception\DomainException(sprintf(
+                    'There are less elements than specified in collection %s. Either set allow_remove option ' .
+                    'to true, or re-submit the form.',
+                    get_class($this)
+                    )
+                );
+            }
+
+            // If there are less data and that allowRemove is true, we remove elements that are not presents
+            $this->setCount(count($data));
+            foreach ($this->byName as $name => $elementOrFieldset) {
+                if (isset($data[$name])) {
+                    continue;
+                }
+
+                $this->remove($name);
+            }
         }
 
         if ($this->targetElement instanceof FieldsetInterface) {

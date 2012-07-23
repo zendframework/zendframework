@@ -161,6 +161,12 @@ class FormSelect extends AbstractHelper
                 $selected = true;
             }
 
+            if (null !== ($translator = $this->getTranslator())) {
+                $label = $translator->translate(
+                    $label, $this->getTranslatorTextDomain()
+                );
+            }
+
             $attributes = compact('value', 'selected', 'disabled');
             $this->validTagAttributes = $this->validOptionAttributes;
             $optionStrings[] = sprintf(

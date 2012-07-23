@@ -36,70 +36,70 @@ class Table
      *
      * @var Decorator
      */
-    protected $_decorator = null;
+    protected $decorator = null;
 
     /**
      * List of all column widths
      *
      * @var array
      */
-    protected $_columnWidths = null;
+    protected $columnWidths = null;
 
     /**
      * Rows of the table
      *
      * @var array
      */
-    protected $_rows = array();
+    protected $rows = array();
 
     /**
      * Auto separation mode
      *
      * @var integer
      */
-    protected $_autoSeparate = self::AUTO_SEPARATE_ALL;
+    protected $autoSeparate = self::AUTO_SEPARATE_ALL;
 
     /**
      * Padding for columns
      *
      * @var integer
      */
-    protected $_padding = 0;
+    protected $padding = 0;
 
     /**
      * Default column aligns for rows created by appendRow(array $data)
      *
      * @var array
      */
-    protected $_defaultColumnAligns = array();
+    protected $defaultColumnAligns = array();
 
     /**
      * Plugin loader for decorators
      *
      * @var Zend\Loader\ShortNameLocator
      */
-    protected $_pluginLoader = null;
+    protected $pluginLoader = null;
 
     /**
      * Charset which is used for input by default
      *
      * @var string
      */
-    protected static $_inputCharset = 'utf-8';
+    protected static $inputCharset = 'utf-8';
 
     /**
      * Charset which is used internally
      *
      * @var string
      */
-    protected static $_outputCharset = 'utf-8';
+    protected static $outputCharset = 'utf-8';
 
     /**
      * Option keys to skip when calling setOptions()
      *
      * @var array
      */
-    protected $_skipOptions = array(
+    protected $skipOptions = array(
         'options',
         'config',
         'defaultColumnAlign',
@@ -123,7 +123,7 @@ class Table
         }
 
         // If no decorator was given, use default unicode decorator
-        if ($this->_decorator === null) {
+        if ($this->decorator === null) {
             if (self::getOutputCharset() === 'utf-8') {
                 $this->setDecorator('unicode');
             } else {
@@ -141,7 +141,7 @@ class Table
     public function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
-            if (in_array(strtolower($key), $this->_skipOptions)) {
+            if (in_array(strtolower($key), $this->skipOptions)) {
                 continue;
             }
 
@@ -175,7 +175,7 @@ class Table
             }
         }
 
-        $this->_columnWidths = $columnWidths;
+        $this->columnWidths = $columnWidths;
 
         return $this;
     }
@@ -188,7 +188,7 @@ class Table
      */
     public function setAutoSeparate($autoSeparate)
     {
-        $this->_autoSeparate = (int) $autoSeparate;
+        $this->autoSeparate = (int) $autoSeparate;
         return $this;
     }
 
@@ -201,10 +201,10 @@ class Table
     public function setDecorator($decorator)
     {
         if ($decorator instanceof Decorator) {
-            $this->_decorator = $decorator;
+            $this->decorator = $decorator;
         } else {
             $classname        = $this->getPluginLoader()->load($decorator);
-            $this->_decorator = new $classname;
+            $this->decorator = new $classname;
         }
 
         return $this;
@@ -218,7 +218,7 @@ class Table
      */
     public function setPadding($padding)
     {
-        $this->_padding = max(0, (int) $padding);
+        $this->padding = max(0, (int) $padding);
         return $this;
     }
 
@@ -229,13 +229,13 @@ class Table
      */
     public function getPluginLoader()
     {
-        if ($this->_pluginLoader === null) {
+        if ($this->pluginLoader === null) {
             $prefix     = 'Zend\Text\Table\Decorator\\';
             $pathPrefix = 'Zend/Text/Table/Decorator/';
-            $this->_pluginLoader = new PrefixPathLoader(array($prefix => $pathPrefix));
+            $this->pluginLoader = new PrefixPathLoader(array($prefix => $pathPrefix));
         }
 
-        return $this->_pluginLoader;
+        return $this->pluginLoader;
     }
 
     /**
@@ -247,7 +247,7 @@ class Table
      */
     public function setDefaultColumnAlign($columnNum, $align)
     {
-        $this->_defaultColumnAligns[$columnNum] = $align;
+        $this->defaultColumnAligns[$columnNum] = $align;
 
         return $this;
     }
@@ -259,7 +259,7 @@ class Table
      */
     public static function setInputCharset($charset)
     {
-        self::$_inputCharset = strtolower($charset);
+        self::$inputCharset = strtolower($charset);
     }
 
     /**
@@ -269,7 +269,7 @@ class Table
      */
     public static function getInputCharset()
     {
-        return self::$_inputCharset;
+        return self::$inputCharset;
     }
 
     /**
@@ -279,7 +279,7 @@ class Table
      */
     public static function setOutputCharset($charset)
     {
-        self::$_outputCharset = strtolower($charset);
+        self::$outputCharset = strtolower($charset);
     }
 
     /**
@@ -289,7 +289,7 @@ class Table
      */
     public static function getOutputCharset()
     {
-        return self::$_outputCharset;
+        return self::$outputCharset;
     }
 
     /**
@@ -307,7 +307,7 @@ class Table
         }
 
         if (is_array($row)) {
-            if (count($row) > count($this->_columnWidths)) {
+            if (count($row) > count($this->columnWidths)) {
                 throw new Exception\OverflowException('Row contains too many columns');
             }
 
@@ -315,8 +315,8 @@ class Table
             $row    = new Row();
             $colNum = 0;
             foreach ($data as $columnData) {
-                if (isset($this->_defaultColumnAligns[$colNum])) {
-                    $align = $this->_defaultColumnAligns[$colNum];
+                if (isset($this->defaultColumnAligns[$colNum])) {
+                    $align = $this->defaultColumnAligns[$colNum];
                 } else {
                     $align = null;
                 }
@@ -326,7 +326,7 @@ class Table
             }
         }
 
-        $this->_rows[] = $row;
+        $this->rows[] = $row;
 
         return $this;
     }
@@ -340,7 +340,7 @@ class Table
     public function render()
     {
         // There should be at least one row
-        if (count($this->_rows) === 0) {
+        if (count($this->rows) === 0) {
             throw new Exception\UnexpectedValueException('No rows were added to the table yet');
         }
 
@@ -348,51 +348,51 @@ class Table
         $result = '';
 
         // Count total columns
-        $totalNumColumns = count($this->_columnWidths);
+        $totalNumColumns = count($this->columnWidths);
 
         // Now render all rows, starting from the first one
-        $numRows = count($this->_rows);
-        foreach ($this->_rows as $rowNum => $row) {
+        $numRows = count($this->rows);
+        foreach ($this->rows as $rowNum => $row) {
             // Get all column widths
             if (isset($columnWidths) === true) {
                 $lastColumnWidths = $columnWidths;
             }
 
-            $renderedRow  = $row->render($this->_columnWidths, $this->_decorator, $this->_padding);
+            $renderedRow  = $row->render($this->columnWidths, $this->decorator, $this->padding);
             $columnWidths = $row->getColumnWidths();
             $numColumns   = count($columnWidths);
 
             // Check what we have to draw
             if ($rowNum === 0) {
                 // If this is the first row, draw the table top
-                $result .= $this->_decorator->getTopLeft();
+                $result .= $this->decorator->getTopLeft();
 
                 foreach ($columnWidths as $columnNum => $columnWidth) {
-                    $result .= str_repeat($this->_decorator->getHorizontal(),
+                    $result .= str_repeat($this->decorator->getHorizontal(),
                                           $columnWidth);
 
                     if (($columnNum + 1) === $numColumns) {
-                        $result .= $this->_decorator->getTopRight();
+                        $result .= $this->decorator->getTopRight();
                     } else {
-                        $result .= $this->_decorator->getHorizontalDown();
+                        $result .= $this->decorator->getHorizontalDown();
                     }
                 }
 
                 $result .= "\n";
             } else {
                 // Else check if we have to draw the row separator
-                if ($this->_autoSeparate & self::AUTO_SEPARATE_ALL) {
+                if ($this->autoSeparate & self::AUTO_SEPARATE_ALL) {
                     $drawSeparator = true;
-                } elseif ($rowNum === 1 && $this->_autoSeparate & self::AUTO_SEPARATE_HEADER) {
+                } elseif ($rowNum === 1 && $this->autoSeparate & self::AUTO_SEPARATE_HEADER) {
                     $drawSeparator = true;
-                } elseif ($rowNum === ($numRows - 1) && $this->_autoSeparate & self::AUTO_SEPARATE_FOOTER) {
+                } elseif ($rowNum === ($numRows - 1) && $this->autoSeparate & self::AUTO_SEPARATE_FOOTER) {
                     $drawSeparator = true;
                 } else {
                     $drawSeparator = false;
                 }
 
                 if ($drawSeparator) {
-                    $result .= $this->_decorator->getVerticalRight();
+                    $result .= $this->decorator->getVerticalRight();
 
                     $currentUpperColumn = 0;
                     $currentLowerColumn = 0;
@@ -400,9 +400,9 @@ class Table
                     $currentLowerWidth  = 0;
 
                     // Loop through all column widths
-                    foreach ($this->_columnWidths as $columnNum => $columnWidth) {
+                    foreach ($this->columnWidths as $columnNum => $columnWidth) {
                         // Add the horizontal line
-                        $result .= str_repeat($this->_decorator->getHorizontal(),
+                        $result .= str_repeat($this->decorator->getHorizontal(),
                                               $columnWidth);
 
                         // If this is the last line, break out
@@ -433,19 +433,19 @@ class Table
 
                         switch ($connector) {
                             case 0x0:
-                                $result .= $this->_decorator->getHorizontal();
+                                $result .= $this->decorator->getHorizontal();
                                 break;
 
                             case 0x1:
-                                $result .= $this->_decorator->getHorizontalUp();
+                                $result .= $this->decorator->getHorizontalUp();
                                 break;
 
                             case 0x2:
-                                $result .= $this->_decorator->getHorizontalDown();
+                                $result .= $this->decorator->getHorizontalDown();
                                 break;
 
                             case 0x3:
-                                $result .= $this->_decorator->getCross();
+                                $result .= $this->decorator->getCross();
                                 break;
 
                             default:
@@ -454,7 +454,7 @@ class Table
                         }
                     }
 
-                    $result .= $this->_decorator->getVerticalLeft() . "\n";
+                    $result .= $this->decorator->getVerticalLeft() . "\n";
                 }
             }
 
@@ -463,16 +463,16 @@ class Table
 
             // If this is the last row, draw the table bottom
             if (($rowNum + 1) === $numRows) {
-                $result .= $this->_decorator->getBottomLeft();
+                $result .= $this->decorator->getBottomLeft();
 
                 foreach ($columnWidths as $columnNum => $columnWidth) {
-                    $result .= str_repeat($this->_decorator->getHorizontal(),
+                    $result .= str_repeat($this->decorator->getHorizontal(),
                                           $columnWidth);
 
                     if (($columnNum + 1) === $numColumns) {
-                        $result .= $this->_decorator->getBottomRight();
+                        $result .= $this->decorator->getBottomRight();
                     } else {
-                        $result .= $this->_decorator->getHorizontalUp();
+                        $result .= $this->decorator->getHorizontalUp();
                     }
                 }
 

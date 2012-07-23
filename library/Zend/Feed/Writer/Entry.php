@@ -701,11 +701,11 @@ class Entry
      */
     protected function _loadExtensions()
     {
-        $all = Writer::getExtensions();
-        $exts = $all['entry'];
+        $all     = Writer::getExtensions();
+        $manager = Writer::getExtensionManager();
+        $exts    = $all['entry'];
         foreach ($exts as $ext) {
-            $className = Writer::getPluginLoader()->getClassName($ext);
-            $this->_extensions[$ext] = new $className();
+            $this->_extensions[$ext] = $manager->get($ext);
             $this->_extensions[$ext]->setEncoding($this->getEncoding());
         }
     }

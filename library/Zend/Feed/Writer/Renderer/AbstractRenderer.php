@@ -220,6 +220,7 @@ class AbstractRenderer
     protected function _loadExtensions()
     {
         Writer\Writer::registerCoreExtensions();
+        $manager = Writer\Writer::getExtensionManager();
         $all = Writer\Writer::getExtensions();
         if (stripos(get_called_class(), 'entry')) {
             $exts = $all['entryRenderer'];
@@ -227,11 +228,10 @@ class AbstractRenderer
             $exts = $all['feedRenderer'];
         }
         foreach ($exts as $extension) {
-            $className = Writer\Writer::getPluginLoader()->getClassName($extension);
-            $this->_extensions[$extension] = new $className(
-                $this->getDataContainer()
-            );
-            $this->_extensions[$extension]->setEncoding($this->getEncoding());
+            $plugin = $manager->get($extension);
+            $plugin->setDataContainer($this->getDataContainer());
+            $plugin->setEncoding($this->getEncoding());
+            $this->_extensions[$extension] = $plugin;
         }
     }
 }

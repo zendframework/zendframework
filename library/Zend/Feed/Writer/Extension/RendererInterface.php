@@ -15,17 +15,24 @@ use DOMElement;
 
 /**
 * @category Zend
-* @package Zend_Feed_Writer
+* @package  Zend_Feed_Writer
 */
-interface Renderer
+interface RendererInterface
 {
     /**
-     * Constructor
+     * Set the data container
      *
      * @param  mixed $container
      * @return void
      */
-    public function __construct($container);
+    public function setDataContainer($container);
+
+    /**
+     * Retrieve container
+     *
+     * @return mixed
+     */
+    public function getDataContainer();
 
     /**
      * Set DOMDocument and DOMElement on which to operate
@@ -42,11 +49,4 @@ interface Renderer
      * @return void
      */
     public function render();
-
-    /**
-     * Retrieve container
-     *
-     * @return mixed
-     */
-    public function getDataContainer();
 }

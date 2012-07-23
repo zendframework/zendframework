@@ -38,7 +38,7 @@ class ReCaptcha extends AbstractAdapter
     /**
      * Recaptcha service object
      *
-     * @var Zend_Service_Recaptcha
+     * @var ReCaptchaService
      */
     protected $service;
 

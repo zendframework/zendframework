@@ -29,6 +29,10 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_CAPTCHA_RECAPTCHA_SUPPORT')) {
+            $this->markTestSkipped('Enable TESTS_ZEND_CAPTCHA_RECAPTCHA_SUPPORT to test PDF render');
+        }
+
         if (isset($this->word)) {
             unset($this->word);
         }

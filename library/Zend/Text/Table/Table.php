@@ -11,7 +11,6 @@
 namespace Zend\Text\Table;
 
 use Traversable;
-use Zend\Loader\PrefixPathLoader;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
 
@@ -76,9 +75,9 @@ class Table
     /**
      * Plugin loader for decorators
      *
-     * @var Zend\Loader\ShortNameLocator
+     * @var DecoratorManager
      */
-    protected $pluginLoader = null;
+    protected $decoratorManager = null;
 
     /**
      * Charset which is used for input by default
@@ -200,12 +199,11 @@ class Table
      */
     public function setDecorator($decorator)
     {
-        if ($decorator instanceof Decorator) {
-            $this->decorator = $decorator;
-        } else {
-            $classname        = $this->getPluginLoader()->load($decorator);
-            $this->decorator = new $classname;
+        if (!$decorator instanceof Decorator) {
+            $decorator = $this->getDecoratorManager()->get($decorator);
         }
+
+        $this->decorator = $decorator;
 
         return $this;
     }
@@ -223,19 +221,30 @@ class Table
     }
 
     /**
-     * Get the plugin loader for decorators
+     * Get the plugin manager for decorators
      *
-     * @return \Zend\Loader\ShortNameLocator
+     * @return DecoratorManager
      */
-    public function getPluginLoader()
+    public function getDecoratorManager()
     {
-        if ($this->pluginLoader === null) {
-            $prefix     = 'Zend\Text\Table\Decorator\\';
-            $pathPrefix = 'Zend/Text/Table/Decorator/';
-            $this->pluginLoader = new PrefixPathLoader(array($prefix => $pathPrefix));
+        if ($this->decoratorManager instanceof DecoratorManager) {
+            return $this->decoratorManager;
         }
 
-        return $this->pluginLoader;
+        $this->setDecoratorManager(new DecoratorManager());
+        return $this->decoratorManager;
+    }
+
+    /**
+     * Set the plugin manager instance for decorators
+     * 
+     * @param  DecoratorManager $decoratorManager 
+     * @return Table
+     */
+    public function setDecoratorManager(DecoratorManager $decoratorManager)
+    {
+        $this->decoratorManager = $decoratorManager;
+        return $this;
     }
 
     /**

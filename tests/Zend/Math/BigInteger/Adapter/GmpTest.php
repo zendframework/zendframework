@@ -30,11 +30,6 @@ class GmpTest extends AbstractTestCase
         $this->adapter = new Gmp();
     }
 
-    public function tearDown()
-    {
-        $this->adapter = null;
-    }
-
     /**
      * Gmp adapter test uses common test methods and data providers
      * inherited from abstract @see AbstractTestCase

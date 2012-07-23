@@ -152,6 +152,11 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
         $this->adapter->div('12345', '0');
     }
 
+    /**
+     * Data provider for init() tests
+     *
+     * @return array
+     */
     public function validInitProvider()
     {
         return array(
@@ -173,6 +178,12 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Data provider for init() tests
+     * Expects iit() to return false on these values
+     *
+     * @return array
+     */
     public function invalidInitProvider()
     {
         return array(
@@ -184,6 +195,12 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Basic calculation data provider
+     * add, sub, mul, div, pow, mod
+     *
+     * @return array
+     */
     public function basicCalcProvider()
     {
         return array(
@@ -225,6 +242,11 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Square root tests data provider
+     *
+     * @return array
+     */
     public function sqrtProvider()
     {
         return array(
@@ -234,6 +256,11 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Power modulus data provider
+     *
+     * @return array
+     */
     public function powmodProvider()
     {
         return array(
@@ -241,6 +268,11 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * abs() tests data provider
+     *
+     * @return array
+     */
     public function absProvider()
     {
         return array(
@@ -250,6 +282,11 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Comparison function data provider
+     *
+     * @return array
+     */
     public function comparisonProvider()
     {
         return array(
@@ -262,6 +299,11 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Base conversion data provider
+     *
+     * @return array
+     */
     public function baseConversionProvider()
     {
         return array(
@@ -280,6 +322,11 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * binToInt() intToBin() tests provider
+     *
+     * @return array
+     */
     public function binaryConversionProvider()
     {
         return array(

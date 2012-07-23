@@ -30,14 +30,8 @@ class BcmathTest extends AbstractTestCase
         $this->adapter = new Bcmath();
     }
 
-    public function tearDown()
-    {
-        $this->adapter = null;
-    }
-
     /**
      * Bcmath adapter test uses common test methods and data providers
      * inherited from abstract @see AbstractTestCase
      */
-
 }

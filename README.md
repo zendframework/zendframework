@@ -24,7 +24,14 @@ PLEASE USE AT YOUR OWN RISK.
      option values are unique.
  - Moved Zend\I18n\Validator\Iban to Zend\Validator\Iban
    and replaced the option "locale" with "country_code"
-
+ - Http
+   - set/getServer() and set/getEnv() were removed from Http\Request
+     and now part of Http\PhpEnvironment\Request
+   - set/getFile() methods in Http\PhpEnvironment\Request
+     were renamed to set/getFiles(). Also above methods
+   - When submitted form has file inputs with brackets (name="file[]")
+     $fileParams parameters in Http\PhpEnvironment\Request will be
+     re-structured to have the same look as query/post/server/envParams
 
 Over *XXX* pull requests for a variety of features and bugfixes were handled
 since beta5!

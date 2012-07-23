@@ -33,6 +33,7 @@ class RequestTest extends TestCase
             'cookie' => $_COOKIE,
             'server' => $_SERVER,
             'env'    => $_ENV,
+            'files'  => $_FILES,
         );
 
         $_POST   = array();
@@ -40,6 +41,7 @@ class RequestTest extends TestCase
         $_COOKIE = array();
         $_SERVER = array();
         $_ENV    = array();
+        $_FILES  = array();
     }
 
     /**
@@ -52,6 +54,7 @@ class RequestTest extends TestCase
         $_COOKIE = $this->originalEnvironment['cookie'];
         $_SERVER = $this->originalEnvironment['server'];
         $_ENV    = $this->originalEnvironment['env'];
+        $_FILES  = $this->originalEnvironment['files'];
     }
 
     /**
@@ -344,5 +347,238 @@ class RequestTest extends TestCase
 
         $requestUri = $request->getRequestUri();
         $this->assertEquals($expectedRequestUri, $requestUri);
+    }
+
+    /**
+     * Data provider for testing mapping $_FILES
+     *
+     * @return array
+     */
+    public static function filesProvider()
+    {
+        return array(
+            // single file
+            array(
+                array(
+                    'file' => array (
+                        'name' => 'test1.txt',
+                        'type' => 'text/plain',
+                        'tmp_name' => '/tmp/phpXXX',
+                        'error' => 0,
+                        'size' => 1,
+                    ),
+                ),
+                array(
+                    'file' => array (
+                        'name' => 'test1.txt',
+                        'type' => 'text/plain',
+                        'tmp_name' => '/tmp/phpXXX',
+                        'error' => 0,
+                        'size' => 1,
+                    ),
+                ),
+            ),
+
+            // file name with brackets and int keys
+            // file[], file[]
+            array(
+                array(
+                    'file' => array (
+                        'name' => array (
+                            0 => 'test1.txt',
+                            1 => 'test2.txt',
+                        ),
+                        'type' => array (
+                            0 => 'text/plain',
+                            1 => 'text/plain',
+                        ),
+                        'tmp_name' => array (
+                            0 => '/tmp/phpXXX',
+                            1 => '/tmp/phpXXX',
+                        ),
+                        'error' => array (
+                            0 => 0,
+                            1 => 0,
+                        ),
+                        'size' => array (
+                            0 => 1,
+                            1 => 1,
+                        ),
+                    ),
+                ),
+                array(
+                    'file' => array (
+                        0 => array(
+                            'name' => 'test1.txt',
+                            'type' => 'text/plain',
+                            'tmp_name' => '/tmp/phpXXX',
+                            'error' => 0,
+                            'size' => 1,
+                        ),
+                        1 => array(
+                            'name' => 'test2.txt',
+                            'type' => 'text/plain',
+                            'tmp_name' => '/tmp/phpXXX',
+                            'error' => 0,
+                            'size' => 1,
+                        ),
+                    ),
+                ),
+            ),
+
+            // file name with brackets and string keys
+            // file[one], file[two]
+            array(
+                array(
+                    'file' => array (
+                        'name' => array (
+                            'one' => 'test1.txt',
+                            'two' => 'test2.txt',
+                        ),
+                        'type' => array (
+                            'one' => 'text/plain',
+                            'two' => 'text/plain',
+                        ),
+                        'tmp_name' => array (
+                            'one' => '/tmp/phpXXX',
+                            'two' => '/tmp/phpXXX',
+                        ),
+                        'error' => array (
+                            'one' => 0,
+                            'two' => 0,
+                        ),
+                        'size' => array (
+                            'one' => 1,
+                            'two' => 1,
+                        ),
+                      ),
+                ),
+                array(
+                    'file' => array (
+                        'one' => array(
+                            'name' => 'test1.txt',
+                            'type' => 'text/plain',
+                            'tmp_name' => '/tmp/phpXXX',
+                            'error' => 0,
+                            'size' => 1,
+                        ),
+                        'two' => array(
+                            'name' => 'test2.txt',
+                            'type' => 'text/plain',
+                            'tmp_name' => '/tmp/phpXXX',
+                            'error' => 0,
+                            'size' => 1,
+                        ),
+                    ),
+                ),
+            ),
+
+            // multilevel file name
+            // file[], file[][], file[][][]
+            array(
+                array (
+                    'file' => array (
+                        'name' => array (
+                            0 => 'test_0.txt',
+                            1 => array (
+                                0 => 'test_10.txt',
+                            ),
+                            2 => array (
+                                0 => array(
+                                    0 => 'test_200.txt',
+                                ),
+                            ),
+                        ),
+                        'type' => array(
+                            0 => 'text/plain',
+                            1 => array(
+                                0 => 'text/plain',
+                            ),
+                            2 => array(
+                                0 => array(
+                                    0 => 'text/plain',
+                                ),
+                            ),
+                        ),
+                        'tmp_name' => array (
+                            0 => '/tmp/phpXXX',
+                            1 => array(
+                                0 => '/tmp/phpXXX',
+                            ),
+                            2 => array (
+                                0 => array(
+                                    0 => '/tmp/phpXXX',
+                                ),
+                            ),
+                        ),
+                        'error' => array(
+                            0 => 0,
+                            1 => array(
+                                0 => 0,
+                            ),
+                            2 => array (
+                                0 => array(
+                                    0 => 0,
+                                ),
+                            ),
+                        ),
+                        'size' => array(
+                            0 => 1,
+                            1 => array(
+                                0 => 1,
+                            ),
+                            2 => array(
+                                0 => array(
+                                    0 => 1,
+                                ),
+                            ),
+                        ),
+                    )
+                ),
+                array(
+                    'file' => array(
+                        0 => array(
+                            'name' => 'test_0.txt',
+                            'type' => 'text/plain',
+                            'tmp_name' => '/tmp/phpXXX',
+                            'error' => 0,
+                            'size' => 1,
+                        ),
+                        1 => array(
+                            0 => array(
+                                'name' => 'test_10.txt',
+                                'type' => 'text/plain',
+                                'tmp_name' => '/tmp/phpXXX',
+                                'error' => 0,
+                                'size' => 1,
+                            ),
+                        ),
+                        2 => array(
+                            0 => array(
+                                0 => array(
+                                    'name' => 'test_200.txt',
+                                    'type' => 'text/plain',
+                                    'tmp_name' => '/tmp/phpXXX',
+                                    'error' => 0,
+                                    'size' => 1,
+                                ),
+                            ),
+                        ),
+                    )
+                ),
+            ),
+        );
+    }
+
+    /**
+     * @param array $files
+     * @param array $expectedFiles
+     * @dataProvider filesProvider
+     */
+    public function testRequestMapsPhpFies(array $files, array $expectedFiles)
+    {
+        $_FILES = $files;
+        $request = new Request();
+        $this->assertEquals($expectedFiles, $request->getFiles()->toArray());
     }
 }

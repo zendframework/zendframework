@@ -55,7 +55,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
     /**
      * File resolver setup against with HTTP Basic auth file
      *
-     * @var Zend_Auth_Adapter_Http_Resolver_File
+     * @var Http\FileResolver
      */
     protected $_basicResolver;
 
@@ -129,6 +129,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         // should result in a 401 reply with at least one Www-Authenticate
         // header, and a false result.
 
+        $result = $status = $headers = null;
         $data = $this->_doAuth('', 'both');
         extract($data); // $result, $status, $headers
 
@@ -327,9 +328,10 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         // Set stub method return values
         $request->setUri('http://localhost/');
         $request->setMethod('GET');
-        $request->setServer(new Parameters(array('HTTP_USER_AGENT' => 'PHPUnit')));
+
         $headers = $request->getHeaders();
         $headers->addHeaderLine('Authorization', $clientHeader);
+        $headers->addHeaderLine('User-Agent', 'PHPUnit');
 
         // Select an Authentication scheme
         switch ($scheme) {
@@ -414,6 +416,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
      */
     protected function _checkUnauthorized($data, $expected)
     {
+        $result = $status = $headers = null;
         extract($data); // $result, $status, $headers
 
         // Make sure the result is false
@@ -448,6 +451,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
      */
     protected function _checkOK($data)
     {
+        $result = $status = $headers = null;
         extract($data); // $result, $status, $headers
 
         // Make sure the result is true
@@ -466,6 +470,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
      */
     protected function _checkBadRequest($data)
     {
+        $result = $status = $headers = null;
         extract($data); // $result, $status, $headers
 
         // Make sure the result is false

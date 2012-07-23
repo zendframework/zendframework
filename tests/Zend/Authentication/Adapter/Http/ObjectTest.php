@@ -56,14 +56,14 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * File resolver setup against with HTTP Basic auth file
      *
-     * @var Zend_Auth_Adapter_Http_Resolver_File
+     * @var Http\FileResolver
      */
     protected $_basicResolver;
 
     /**
      * File resolver setup against with HTTP Digest auth file
      *
-     * @var Zend_Auth_Adapter_Http_Resolver_File
+     * @var Http\FileResolver
      */
     protected $_digestResolver;
 
@@ -214,12 +214,13 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         $request->setHeaders($headers);
 
         // Test a Digest auth process while the request is containing a Basic auth header
-        $a = new Adapter\Http($this->_digestConfig);
-        $a->setDigestResolver($this->_digestResolver)
-          ->setRequest($request)
-          ->setResponse($response);
-        $result = $a->authenticate();
-        $this->assertEquals($result->getCode(),Authentication\Result::FAILURE_CREDENTIAL_INVALID);
+        $adapter = new Adapter\Http($this->_digestConfig);
+        $adapter->setDigestResolver($this->_digestResolver)
+                ->setRequest($request)
+                ->setResponse($response);
+        $result = $adapter->authenticate();
+
+        $this->assertEquals($result->getCode(), Authentication\Result::FAILURE_CREDENTIAL_INVALID);
     }
 
     public function testUnsupportedScheme()
@@ -227,6 +228,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         $response = new Response();
         $headers  = new Headers();
         $request  = new Request();
+
         $headers->addHeaderLine('Authorization', 'NotSupportedScheme <followed by a space character');
         $request->setHeaders($headers);
 

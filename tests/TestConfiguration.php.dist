@@ -50,6 +50,16 @@ defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE') || define('TESTS_
  */
 defined('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED', false);
 
+
+/**
+ * Zend\Barcode\Renderer\Pdf
+ *
+ * Enable this if you have installed ZendPdf on the include_path or via
+ * Composer.
+ */
+defined('TESTS_ZEND_BARCODE_PDF_SUPPORT') || define('TESTS_ZEND_BARCODE_PDF_SUPPORT', false);
+
+
 /**
  * Zend\Cache\Storage\Adapter
  */
@@ -65,11 +75,21 @@ defined('TESTS_ZEND_CACHE_MEMCACHED_ENABLED') || define('TESTS_ZEND_CACHE_MEMCAC
 defined('TESTS_ZEND_CACHE_MEMCACHED_HOST') || define('TESTS_ZEND_CACHE_MEMCACHED_HOST', '127.0.0.1');
 defined('TESTS_ZEND_CACHE_MEMCACHED_PORT') || define('TESTS_ZEND_CACHE_MEMCACHED_PORT', 11211);
 
+
+/**
+ * Zend\Captcha
+ *
+ * Enable this if you have installed ZendService\ReCaptcha on the include_path or via
+ * Composer.
+ */
+defined('TESTS_ZEND_CAPTCHA_RECAPTCHA_SUPPORT') || define('TESTS_ZEND_CAPTCHA_RECAPTCHA_SUPPORT', false);
+
+
 /**
  * Zend\Code\Annotation
  *
  * Enable this if you have installed Doctrine\Common on the include_path or via
- * composer.
+ * Composer.
  */
 defined('TESTS_ZEND_CODE_ANNOTATION_DOCTRINE_SUPPORT') || define('TESTS_ZEND_CODE_ANNOTATION_DOCTRINE_SUPPORT', false);
 
@@ -196,6 +216,15 @@ defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED') || define('TESTS_ZEND_FEED_READ
  * composer.
  */
 defined('TESTS_ZEND_FORM_ANNOTATION_SUPPORT') || define('TESTS_ZEND_FORM_ANNOTATION_SUPPORT', false);
+
+/*
+ * Enable this if you have installed ZendService\ReCaptcha on the include_path or via
+ * Composer.
+ */
+defined('TESTS_ZEND_FORM_RECAPTCHA_SUPPORT') || define('TESTS_ZEND_FORM_RECAPTCHA_SUPPORT', false);
+defined('TESTS_ZEND_FORM_RECAPTCHA_PUBLIC_KEY') || define('TESTS_ZEND_FORM_RECAPTCHA_PUBLIC_KEY', 'public key');
+defined('TESTS_ZEND_FORM_RECAPTCHA_PRIVATE_KEY') || define('TESTS_ZEND_FORM_RECAPTCHA_PRIVATE_KEY', 'private key');
+
 
 /**
  * Zend\Http\Client tests

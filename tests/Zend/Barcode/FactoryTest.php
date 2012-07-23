@@ -14,7 +14,7 @@ use Zend\Barcode;
 use Zend\Barcode\Renderer;
 use Zend\Barcode\Object;
 use Zend\Config\Config;
-use Zend\Pdf;
+use ZendPdf as Pdf;
 
 /**
  * @category   Zend
@@ -345,6 +345,10 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testProxyBarcodeRendererDrawAsPdf()
     {
+        if (!constant('TESTS_ZEND_BARCODE_PDF_SUPPORT')) {
+            $this->markTestSkipped('Enable TESTS_ZEND_BARCODE_PDF_SUPPORT to test PDF render');
+        }
+
         Barcode\Barcode::setBarcodeFont(__DIR__ . '/Object/_fonts/Vera.ttf');
         $resource = Barcode\Barcode::draw('code25', 'pdf', array('text' => '012345'));
         $this->assertTrue($resource instanceof Pdf\PdfDocument);
@@ -353,6 +357,10 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testProxyBarcodeRendererDrawAsPdfAutomaticallyRenderPdfIfException()
     {
+        if (!constant('TESTS_ZEND_BARCODE_PDF_SUPPORT')) {
+            $this->markTestSkipped('Enable TESTS_ZEND_BARCODE_PDF_SUPPORT to test PDF render');
+        }
+
         Barcode\Barcode::setBarcodeFont(__DIR__ . '/Object/_fonts/Vera.ttf');
         $resource = Barcode\Barcode::draw('code25', 'pdf');
         $this->assertTrue($resource instanceof Pdf\PdfDocument);

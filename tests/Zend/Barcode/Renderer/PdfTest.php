@@ -10,7 +10,7 @@
 
 namespace ZendTest\Barcode\Renderer;
 
-use Zend\Pdf;
+use ZendPdf as Pdf;
 use Zend\Barcode;
 use Zend\Barcode\Object;
 
@@ -22,6 +22,13 @@ use Zend\Barcode\Object;
  */
 class PdfTest extends TestCommon
 {
+    public function setUp()
+    {
+        if (!constant('TESTS_ZEND_BARCODE_PDF_SUPPORT')) {
+            $this->markTestSkipped('Enable TESTS_ZEND_BARCODE_PDF_SUPPORT to test PDF render');
+        }
+    }
+
     protected function getRendererObject($options = null)
     {
         return new \Zend\Barcode\Renderer\Pdf($options);

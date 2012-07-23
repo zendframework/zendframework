@@ -14,5 +14,11 @@
     "target-dir": "Zend/Form",
     "require": {
         "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "zendframework/zendservice-recaptcha": "*"
+    },
+    "suggest": {
+        "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha component"
     }
 }

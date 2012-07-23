@@ -23,11 +23,15 @@ use ZendTest\Form\View\Helper\CommonTestCase;
  */
 class ReCaptchaTest extends CommonTestCase
 {
-    protected $publicKey  = TESTS_ZEND_SERVICE_RECAPTCHA_PUBLIC_KEY;
-    protected $privateKey = TESTS_ZEND_SERVICE_RECAPTCHA_PRIVATE_KEY;
+    protected $publicKey  = TESTS_ZEND_FORM_RECAPTCHA_PUBLIC_KEY;
+    protected $privateKey = TESTS_ZEND_FORM_RECAPTCHA_PRIVATE_KEY;
 
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_FORM_RECAPTCHA_SUPPORT')) {
+            $this->markTestSkipped('Enable TESTS_ZEND_FORM_RECAPTCHA_SUPPORT to test PDF render');
+        }
+
         $this->helper  = new ReCaptchaHelper();
         $this->captcha = new ReCaptcha(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',

@@ -23,8 +23,8 @@ use Zend\View\Renderer\PhpRenderer;
  */
 class FormCaptchaTest extends CommonTestCase
 {
-    protected $publicKey  = TESTS_ZEND_SERVICE_RECAPTCHA_PUBLIC_KEY;
-    protected $privateKey = TESTS_ZEND_SERVICE_RECAPTCHA_PRIVATE_KEY;
+    protected $publicKey  = TESTS_ZEND_FORM_RECAPTCHA_PUBLIC_KEY;
+    protected $privateKey = TESTS_ZEND_FORM_RECAPTCHA_PRIVATE_KEY;
     protected $testDir    = null;
     protected $tmpDir     = null;
 
@@ -122,7 +122,7 @@ class FormCaptchaTest extends CommonTestCase
         $captcha = new Captcha\Image(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
             'imgDir'       => $this->testDir,
-            'font'         => __DIR__. '/../../../Pdf/_fonts/Vera.ttf',
+            'font'         => __DIR__. '/Captcha/_files/Vera.ttf',
         ));
         $element = $this->getElement();
         $element->setCaptcha($captcha);
@@ -134,6 +134,10 @@ class FormCaptchaTest extends CommonTestCase
 
     public function testPassingElementWithReCaptchaRendersCorrectly()
     {
+        if (!constant('TESTS_ZEND_FORM_RECAPTCHA_SUPPORT')) {
+            $this->markTestSkipped('Enable TESTS_ZEND_FORM_RECAPTCHA_SUPPORT to test PDF render');
+        }
+
         $captcha = new Captcha\ReCaptcha(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));

@@ -269,14 +269,14 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
          * Transform arrays in usage info into columns, otherwise join everything together
          */
         $result = '';
+        $table = false;
+        $tableCols = 0;
         foreach($usageInfo as $moduleName => $usage){
             if(is_string($usage)){
                 // It's a plain string - output as is
                 $result .= $usage."\n";
             }elseif(is_array($usage)){
                 // It's an array, analyze it
-                $table = false;
-                $tableCols = 0;
                 foreach($usage as $a => $b){
                     if(is_string($a) && is_string($b)){
                         /**
@@ -317,15 +317,15 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                         $result .= $b."\n";
                     }
                 }
-
-                if($table !== false){
-                    $result .= $this->renderTable($table, $tableCols,$console->getWidth());
-                    $table = false;
-                }
             }else{
                 throw new RuntimeException('Cannot understand usage info for module '.$moduleName);
             }
+        }
 
+        // Finish last table
+        if($table !== false){
+            $result .= $this->renderTable($table, $tableCols,$console->getWidth());
+            $table = false;
         }
 
         return $result;

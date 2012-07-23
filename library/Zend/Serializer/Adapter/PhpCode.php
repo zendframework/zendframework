@@ -10,7 +10,8 @@
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\RuntimeException;
+use Zend\Serializer\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -23,10 +24,9 @@ class PhpCode extends AbstractAdapter
      * Serialize PHP using var_export
      *
      * @param  mixed $value
-     * @param  array $opts
      * @return string
      */
-    public function serialize($value, array $opts = array())
+    public function serialize($value)
     {
         return var_export($value, true);
     }
@@ -37,17 +37,29 @@ class PhpCode extends AbstractAdapter
      * Warning: this uses eval(), and should likely be avoided.
      *
      * @param  string $code
-     * @param  array $opts
      * @return mixed
-     * @throws RuntimeException on eval error
+     * @throws Exception\RuntimeException on eval error
      */
-    public function unserialize($code, array $opts = array())
+    public function unserialize($code)
     {
+        ErrorHandler::start(E_ALL);
+        $ret  = null;
         $eval = @eval('$ret=' . $code . ';');
-        if ($eval === false) {
-            $lastErr = error_get_last();
-            throw new RuntimeException('eval failed: ' . $lastErr['message']);
+        $err  = ErrorHandler::stop();
+
+        if ($eval === false || $err) {
+
+            $msg = 'eval failed';
+
+            // Error handler doesn't catch syntax errors
+            if ($eval === false) {
+                $lastErr = error_get_last();
+                $msg    .= ': ' . $lastErr['message'];
+            }
+
+            throw new Exception\RuntimeException($msg, 0, $err);
         }
+
         return $ret;
     }
 }

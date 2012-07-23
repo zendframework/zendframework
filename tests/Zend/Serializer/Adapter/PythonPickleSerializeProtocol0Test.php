@@ -20,17 +20,22 @@ use Zend\Serializer;
  */
 class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
 {
-
-    private $_adapter;
+    /**
+     * @var Serializer\Adapter\PythonPickle
+     */
+    private $adapter;
 
     public function setUp()
     {
-        $this->_adapter = new Serializer\Adapter\PythonPickle(array('protocol' => 0));
+        $options = new Serializer\Adapter\PythonPickleOptions(array(
+            'protocol' => 0
+        ));
+        $this->adapter = new Serializer\Adapter\PythonPickle($options);
     }
 
     public function tearDown()
     {
-        $this->_adapter = null;
+        $this->adapter = null;
     }
 
     public function testSerializeNull()
@@ -38,7 +43,7 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
         $value      = null;
         $expected   = 'N.';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -47,7 +52,7 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
         $value      = true;
         $expected   = "I01\r\n.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -56,7 +61,7 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
         $value      = false;
         $expected   = "I00\r\n.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -65,7 +70,7 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
         $value      = -12345;
         $expected   = "I-12345\r\n.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -74,7 +79,7 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
         $value      = -12345.6789;
         $expected   = "F-12345.6789\r\n.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -83,7 +88,7 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
         $value      = 'test';
         $expected   = "S'test'\r\np0\r\n.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -97,7 +102,7 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
                     . "\\xff\\\\\"\\''\r\n"
                     . "p0\r\n.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -113,7 +118,7 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
                     . "p3\r\n"
                     . "a.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -133,7 +138,7 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
                     . "p3\r\n"
                     . "a.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -153,7 +158,7 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
                   . "p4\r\n"
                   . "s.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -171,7 +176,7 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
                   . "I2\r\n"
                   . "s.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 

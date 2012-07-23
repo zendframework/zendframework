@@ -229,10 +229,10 @@ class PluginOptions extends AbstractOptions
      * Used by:
      * - Serializer
      *
-     * @param  array $serializerOptions
+     * @param  mixed $serializerOptions
      * @return PluginOptions
      */
-    public function setSerializerOptions(array $serializerOptions)
+    public function setSerializerOptions($serializerOptions)
     {
         $this->serializerOptions = $serializerOptions;
         return $this;

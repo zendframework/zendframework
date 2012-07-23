@@ -8,11 +8,14 @@
  * @package   Zend_Serializer
  */
 
-namespace Zend\Serializer\Exception;
+namespace Zend\Serializer\Adapter;
+
+use Zend\Stdlib\AbstractOptions;
 
 /**
- * @category  Zend
- * @package   Zend_Serializer
+ * @category   Zend
+ * @package    Zend_Serializer
+ * @subpackage Adapter
  */
-interface ExceptionInterface
+class AdapterOptions extends AbstractOptions
 {}

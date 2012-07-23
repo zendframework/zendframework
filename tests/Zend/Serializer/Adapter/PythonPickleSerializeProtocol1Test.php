@@ -20,17 +20,22 @@ use Zend\Serializer;
  */
 class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
 {
-
-    private $_adapter;
+    /**
+     * @var Serializer\Adapter\PythonPickle
+     */
+    private $adapter;
 
     public function setUp()
     {
-        $this->_adapter = new Serializer\Adapter\PythonPickle(array('protocol' => 1));
+        $options = new Serializer\Adapter\PythonPickleOptions(array(
+            'protocol' => 1
+        ));
+        $this->adapter = new Serializer\Adapter\PythonPickle($options);
     }
 
     public function tearDown()
     {
-        $this->_adapter = null;
+        $this->adapter = null;
     }
 
     public function testSerializeNull()
@@ -38,7 +43,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
         $value    = null;
         $expected = 'N.';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -47,7 +52,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
         $value    = true;
         $expected = "I01\r\n.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -56,7 +61,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
         $value    = false;
         $expected = "I00\r\n.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -65,7 +70,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
         $value    = 255;
         $expected = "K\xff.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -74,7 +79,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
         $value    = 256;
         $expected = "M\x00\x01.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -83,7 +88,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
         $value    = -2;
         $expected = "J\xfe\xff\xff\xff.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -92,7 +97,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
         $value    = -12345.6789;
         $expected = "G\xc0\xc8\x1c\xd6\xe6\x31\xf8\xa1.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -102,7 +107,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
         $expected = "U\x04test"
                   . "q\x00.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -117,7 +122,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
                   . "01234567890123456789012345678901234567890123456789012345"
                   . "q\x00.";
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 

@@ -10,8 +10,8 @@
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\ExtensionNotLoadedException;
-use Zend\Serializer\Exception\RuntimeException;
+use Zend\Serializer\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @link       http://www.infoloom.com/gcaconfs/WEB/chicago98/simeonov.HTM
@@ -23,50 +23,79 @@ use Zend\Serializer\Exception\RuntimeException;
 class Wddx extends AbstractAdapter
 {
     /**
-     * @var array Default options
+     * @var WddxOptions
      */
-    protected $_options = array(
-        'comment' => null,
-    );
+    protected $options = null;
 
     /**
      * Constructor
      *
-     * @param  array $options
-     * @return void
-     * @throws ExtensionNotLoadedException if wddx extension not found
+     * @param  array|\Traversable|WddxOptions $options
+     * @throws Exception\ExtensionNotLoadedException if wddx extension not found
      */
-    public function __construct($options = array())
+    public function __construct($options = null)
     {
         if (!extension_loaded('wddx')) {
-            throw new ExtensionNotLoadedException('PHP extension "wddx" is required for this adapter');
+            throw new Exception\ExtensionNotLoadedException(
+                'PHP extension "wddx" is required for this adapter'
+            );
         }
 
         parent::__construct($options);
     }
 
     /**
+     * Set options
+     *
+     * @param  array|\Traversable|WddxOptions $options
+     * @return Wddx
+     */
+    public function setOptions($options)
+    {
+        if (!$options instanceof WddxOptions) {
+            $options = new WddxOptions($options);
+        }
+
+        $this->options = $options;
+        return $this;
+    }
+
+    /**
+     * Get options
+     *
+     * @return WddxOptions
+     */
+    public function getOptions()
+    {
+        if ($this->options === null) {
+            $this->options = new WddxOptions();
+        }
+        return $this->options;
+    }
+
+    /**
      * Serialize PHP to WDDX
      *
      * @param  mixed $value
-     * @param  array $opts
      * @return string
-     * @throws RuntimeException on wddx error
+     * @throws Exception\RuntimeException on wddx error
      */
-    public function serialize($value, array $opts = array())
+    public function serialize($value)
     {
-        $opts = $opts + $this->_options;
+        $comment = $this->getOptions()->getComment();
 
-        if (isset($opts['comment']) && $opts['comment']) {
-            $wddx = wddx_serialize_value($value, (string)$opts['comment']);
+        ErrorHandler::start();
+        if ($comment !== '') {
+            $wddx = wddx_serialize_value($value, $comment);
         } else {
             $wddx = wddx_serialize_value($value);
         }
+        $error = ErrorHandler::stop();
 
         if ($wddx === false) {
-            $lastErr = error_get_last();
-            throw new RuntimeException($lastErr['message']);
+            throw new Exception\RuntimeException('Serialization failed', 0, $error);
         }
+
         return $wddx;
     }
 
@@ -74,11 +103,10 @@ class Wddx extends AbstractAdapter
      * Unserialize from WDDX to PHP
      *
      * @param  string $wddx
-     * @param  array $opts
      * @return mixed
-     * @throws RuntimeException on wddx error
+     * @throws Exception\RuntimeException on wddx error
      */
-    public function unserialize($wddx, array $opts = array())
+    public function unserialize($wddx)
     {
         $ret = wddx_deserialize($wddx);
 
@@ -90,9 +118,9 @@ class Wddx extends AbstractAdapter
                 if (isset($simpleXml->data[0]->null[0])) {
                     return null; // valid null
                 }
-                throw new RuntimeException('Invalid wddx');
+                throw new Exception\RuntimeException('Unserialization failed: Invalid wddx packet');
             } catch (\Exception $e) {
-                throw new RuntimeException($e->getMessage(), 0, $e);
+                throw new Exception\RuntimeException('Unserialization failed: ' . $e->getMessage(), 0, $e);
             }
         }
 

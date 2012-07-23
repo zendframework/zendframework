@@ -30,8 +30,6 @@ class AdapterPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = array(
-        'amf0'         => 'Zend\Serializer\Adapter\Amf0',
-        'amf3'         => 'Zend\Serializer\Adapter\Amf3',
         'igbinary'     => 'Zend\Serializer\Adapter\IgBinary',
         'json'         => 'Zend\Serializer\Adapter\Json',
         'phpcode'      => 'Zend\Serializer\Adapter\PhpCode',

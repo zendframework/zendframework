@@ -20,17 +20,34 @@ use Zend\Serializer;
  */
 class JsonTest extends \PHPUnit_Framework_TestCase
 {
-
-    private $_adapter;
+    /**
+     * @var Serializer\Adapter\Json
+     */
+    private $adapter;
 
     public function setUp()
     {
-        $this->_adapter = new Serializer\Adapter\Json();
+        $this->adapter = new Serializer\Adapter\Json();
     }
 
     public function tearDown()
     {
-        $this->_adapter = null;
+        $this->adapter = null;
+    }
+
+    public function testAdapterAcceptsOptions()
+    {
+        $adapter = new Serializer\Adapter\Json();
+        $options = new Serializer\Adapter\JsonOptions(array(
+            'cycle_check'             => true,
+            'enable_json_expr_finder' => true,
+            'object_decode_type'      => 1,
+        ));
+        $adapter->setOptions($options);
+
+        $this->assertEquals(true, $adapter->getOptions()->getCycleCheck());
+        $this->assertEquals(true, $adapter->getOptions()->getEnableJsonExprFinder());
+        $this->assertEquals(1, $adapter->getOptions()->getObjectDecodeType());
     }
 
     public function testSerializeString()
@@ -38,7 +55,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $value    = 'test';
         $expected = '"test"';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -47,7 +64,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $value    = false;
         $expected = 'false';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -56,7 +73,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $value    = null;
         $expected = 'null';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -65,7 +82,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $value    = 100;
         $expected = '100';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -75,7 +92,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $value->test = "test";
         $expected    = '{"test":"test"}';
 
-        $data = $this->_adapter->serialize($value);
+        $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -84,7 +101,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $value    = '"test"';
         $expected = 'test';
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -93,7 +110,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $value    = 'false';
         $expected = false;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -102,7 +119,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $value    = 'null';
         $expected = null;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -111,7 +128,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $value    = '100';
         $expected = 100;
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -120,7 +137,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $value    = '{"test":"test"}';
         $expected = array('test' => 'test');
 
-        $data = $this->_adapter->unserialize($value);
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
@@ -130,15 +147,19 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $expected   = new \stdClass();
         $expected->test = 'test';
 
-        $data = $this->_adapter->unserialize($value, array('objectDecodeType' => \Zend\Json\Json::TYPE_OBJECT));
+        $this->adapter->getOptions()->setObjectDecodeType(\Zend\Json\Json::TYPE_OBJECT);
+
+        $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
     }
 
     public function testUnserialzeInvalid()
     {
         $value = 'not a serialized string';
-        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'Unserialization failed: Decoding failed: Syntax error');
-        $this->_adapter->unserialize($value);
+        $this->setExpectedException(
+            'Zend\Serializer\Exception\RuntimeException',
+            'Unserialization failed: Decoding failed: Syntax error'
+        );
+        $this->adapter->unserialize($value);
     }
-
 }

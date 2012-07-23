@@ -10,6 +10,7 @@
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
+use Zend\Db\Adapter\Driver\Sqlsrv\Exception\ErrorException;
 use Zend\Db\Adapter\Driver\ConnectionInterface;
 use Zend\Db\Adapter\Exception;
 

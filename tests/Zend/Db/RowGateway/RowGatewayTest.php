@@ -24,6 +24,7 @@ class RowGatewayTest extends \PHPUnit_Framework_TestCase
     {
         // mock the adapter, driver, and parts
         $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $mockResult->expects($this->any())->method('current')->will($this->returnValue(array('id' => 'example')));
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
         $mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
@@ -101,5 +102,17 @@ class RowGatewayTest extends \PHPUnit_Framework_TestCase
         unset($row['foo']);
         $this->assertEmpty($row->foo);
         $this->assertEmpty($row['foo']);
+    }
+
+    public function testSave()
+    {
+        // If we insert a new row, we should be able to read the ID after saving it.
+        // For the purposes of this test, the mocks are set up to always generate an
+        // id of "example" (see setup method above).
+        $row = new RowGateway('id', 'fake', $this->mockAdapter);
+        $row->foo = 'bar';
+        $row->save();
+        $this->assertEquals('example', $row->id);
+        $this->assertEquals('example', $row['id']);
     }
 }

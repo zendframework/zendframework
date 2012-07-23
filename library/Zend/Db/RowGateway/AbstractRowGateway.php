@@ -176,7 +176,8 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
         $rowData = $result->current();
         unset($statement, $result); // cleanup
 
-        $this->populateOriginalData($rowData);
+        // make sure data and original data are in sync after save
+        $this->populate($rowData, true);
 
         // return rows affected
         return $rowsAffected;

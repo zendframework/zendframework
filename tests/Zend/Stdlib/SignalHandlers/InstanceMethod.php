@@ -16,4 +16,9 @@ class InstanceMethod
     {
         return __FUNCTION__;
     }
+
+    static public function staticHandler()
+    {
+        return __FUNCTION__;
+    }
 }

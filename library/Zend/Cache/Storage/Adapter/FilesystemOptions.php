@@ -45,11 +45,11 @@ class FilesystemOptions extends AdapterOptions
     protected $dirLevel = 1;
 
     /**
-     * Used umask on creating a cache directory
+     * Permission creating new directories
      *
-     * @var int
+     * @var false|int
      */
-    protected $dirUmask = 0007;
+    protected $dirPermission = 0700;
 
     /**
      * Lock files on writing
@@ -59,11 +59,11 @@ class FilesystemOptions extends AdapterOptions
     protected $fileLocking = true;
 
     /**
-     * Used umask on creating a cache file
+     * Permission creating new files
      *
-     * @var int
+     * @var false|int
      */
-    protected $fileUmask = 0117;
+    protected $filePermission = 0600;
 
     /**
      * Overwrite default key pattern
@@ -94,6 +94,31 @@ class FilesystemOptions extends AdapterOptions
      * @var boolean
      */
     protected $noCtime = true;
+
+    /**
+     * Umask to create files and directories
+     *
+     * @var false|int
+     */
+    protected $umask = false;
+
+    /**
+     * Constructor
+     *
+     * @param  array|Traversable|null $options
+     * @return AbstractOptions
+     * @throws Exception\InvalidArgumentException
+     */
+    public function __construct($options = null)
+    {
+        // disable file/directory permissions by default on windows systems
+        if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
+            $this->filePermission = false;
+            $this->dirPermission = false;
+        }
+
+        parent::__construct($options);
+    }
 
     /**
      * Set cache dir
@@ -198,60 +223,46 @@ class FilesystemOptions extends AdapterOptions
     }
 
     /**
-     * Set dir perm
+     * Set permission to create directories on unix systems
      *
-     * @param  string|int $dirPerm
-     * @return FilesystemOptions
+     * @var false|string|int $dirPermission FALSE to disable explicit permission or an octal number
+     * @see setUmask
+     * @see setFilePermission
+     * @link http://php.net/manual/function.chmod.php
      */
-    public function setDirPerm($dirPerm)
+    public function setDirPermission($dirPermission)
     {
-        $dirPerm = $this->normalizeUmask($dirPerm);
+        if ($dirPermission !== false) {
+            if (is_string($dirPermission)) {
+                $dirPermission = octdec($dirPermission);
+            } else {
+                $dirPermission = (int) $dirPermission;
+            }
 
-        // use umask
-        return $this->setDirUmask(~$dirPerm);
-    }
-
-    /**
-     * Get dir perm
-     *
-     * @return int
-     */
-    public function getDirPerm()
-    {
-        return ~$this->getDirUmask();
-    }
-
-    /**
-     * Set dir umask
-     *
-     * @param  string|int $dirUmask
-     * @return FilesystemOptions
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setDirUmask($dirUmask)
-    {
-        $dirUmask = $this->normalizeUmask($dirUmask, function($dirUmask) {
-            if ((~$dirUmask & 0700) != 0700 ) {
+            // validate
+            if (($dirPermission & 0700) != 0700) {
                 throw new Exception\InvalidArgumentException(
-                    'Invalid directory umask or directory permissions: '
-                    . 'need permissions to execute, read and write directories by owner'
+                    'Invalid directory permission: need permission to execute, read and write by owner'
                 );
             }
-        });
+        }
 
-        $this->triggerOptionEvent('dir_umask', $dirUmask);
-        $this->dirUmask = $dirUmask;
+        if ($this->dirPermission !== $dirPermission) {
+            $this->triggerOptionEvent('dir_permission', $dirPermission);
+            $this->dirPermission = $dirPermission;
+        }
+
         return $this;
     }
 
     /**
-     * Get dir umask
+     * Get permission to create directories on unix systems
      *
-     * @return int
+     * @return false|int
      */
-    public function getDirUmask()
+    public function getDirPermission()
     {
-        return $this->dirUmask;
+        return $this->dirPermission;
     }
 
     /**
@@ -279,65 +290,50 @@ class FilesystemOptions extends AdapterOptions
     }
 
     /**
-     * Set file perm
+     * Set permission to create files on unix systems
      *
-     * @param  int $filePerm
-     * @return FilesystemOptions
+     * @var false|string|int $filePermission FALSE to disable explicit permission or an octal number
+     * @see setUmask
+     * @see setDirPermission
+     * @link http://php.net/manual/function.chmod.php
      */
-    public function setFilePerm($filePerm)
+    public function setFilePermission($filePermission)
     {
-        $filePerm = $this->normalizeUmask($filePerm);
+        if ($filePermission !== false) {
+            if (is_string($filePermission)) {
+                $filePermission = octdec($filePermission);
+            } else {
+                $filePermission = (int) $filePermission;
+            }
 
-        // use umask
-        return $this->setFileUmask(~$filePerm);
-    }
-
-    /**
-     * Get file perm
-     *
-     * @return int
-     */
-    public function getFilePerm()
-    {
-        return ~$this->getFileUmask();
-    }
-
-    /**
-     * Set file umask
-     *
-     * @param  int $fileUmask
-     * @return FilesystemOptions
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setFileUmask($fileUmask)
-    {
-        $fileUmask = $this->normalizeUmask($fileUmask, function($fileUmask) {
-            if ((~$fileUmask & 0600) != 0600 ) {
+            // validate
+            if (($filePermission & 0600) != 0600) {
                 throw new Exception\InvalidArgumentException(
-                    'Invalid file umask or file permission: '
-                    . 'need permissions to read and write files by owner'
+                    'Invalid file permission: need permission to read and write by owner'
                 );
-            } elseif ((~$fileUmask & 0111) > 0) {
+            } elseif ($filePermission & 0111) {
                 throw new Exception\InvalidArgumentException(
-                    'Invalid file umask or file permission: '
-                    . 'executable cache files are not allowed'
+                    "Invalid file permission: Cache files shoudn't be executable"
                 );
             }
-        });
+        }
 
-        $this->triggerOptionEvent('file_umask', $fileUmask);
-        $this->fileUmask = $fileUmask;
+        if ($this->filePermission !== $filePermission) {
+            $this->triggerOptionEvent('file_permission', $filePermission);
+            $this->filePermission = $filePermission;
+        }
+
         return $this;
     }
 
     /**
-     * Get file umask
+     * Get permission to create files on unix systems
      *
-     * @return int
+     * @return false|int
      */
-    public function getFileUmask()
+    public function getFilePermission()
     {
-        return $this->fileUmask;
+        return $this->filePermission;
     }
 
     /**
@@ -413,24 +409,51 @@ class FilesystemOptions extends AdapterOptions
     }
 
     /**
-     * Normalize a umask and optionally apply a callback to it
+     * Set the umask to create files and directories on unix systems
      *
-     * @param  int|string $umask
-     * @param  callable $callback
-     * @return int
+     * Note: On multithreaded webservers it's better to explicit set file and dir permission.
+     *
+     * @var false|string|int FALSE to disable umask or an octal number
+     * @see setFilePermission
+     * @see setDirPermission
+     * @link http://php.net/manual/function.umask.php
+     * @link http://en.wikipedia.org/wiki/Umask
      */
-    protected function normalizeUmask($umask, $callback = null)
+    public function setUmask($umask)
     {
-        if (is_string($umask)) {
-            $umask = octdec($umask);
-        } else {
-            $umask = (int) $umask;
+        if ($umask !== false) {
+            if (is_string($umask)) {
+                $umask = octdec($umask);
+            } else {
+                $umask = (int) $umask;
+            }
+
+            // validate
+            if ($umask & 0700) {
+                throw new Exception\InvalidArgumentException(
+                    'Invalid umask: need permission to execute, read and write by owner'
+                );
+            }
+
+            // normalize
+            $umask = $umask & 0777;
         }
 
-        if (is_callable($callback)) {
-            $callback($umask);
+        if ($this->umask !== $umask) {
+            $this->triggerOptionEvent('umask', $umask);
+            $this->umask = $umask;
         }
 
-        return $umask;
+        return $this;
+    }
+
+    /**
+     * Get the umask to create files and directories on unix systems
+     *
+     * @return false|int
+     */
+    public function getUmask()
+    {
+        return $this->umask;
     }
 }

@@ -41,7 +41,7 @@ class CallbackHandler
      * PHP version is greater as 5.4rc1?
      * @var boolean
      */
-    protected $isPhp54;
+    protected static $isPhp54;
 
     /**
      * Constructor
@@ -163,13 +163,13 @@ class CallbackHandler
         }
 
         // Minor performance tweak, if the callback gets called more than once
-        if (!isset($this->isPhp54)) {
-            $this->isPhp54 = version_compare(PHP_VERSION, '5.4.0rc1', '>=');
+        if (!isset(self::$isPhp54)) {
+            self::$isPhp54 = version_compare(PHP_VERSION, '5.4.0rc1', '>=');
         }
 
         $argCount = count($args);
 
-        if ($this->isPhp54 && is_string($callback)) {
+        if (self::$isPhp54 && is_string($callback)) {
             $result = $this->validateStringCallbackFor54($callback);
 
             if ($result !== true && $argCount <= 3) {
@@ -184,19 +184,19 @@ class CallbackHandler
         // reached
         switch ($argCount) {
             case 0:
-                if ($this->isPhp54) {
+                if (self::$isPhp54) {
                     return $callback();
                 }
                 return call_user_func($callback);
             case 1:
-                if ($this->isPhp54) {
+                if (self::$isPhp54) {
                     return $callback(array_shift($args));
                 }
                 return call_user_func($callback, array_shift($args));
             case 2:
                 $arg1 = array_shift($args);
                 $arg2 = array_shift($args);
-                if ($this->isPhp54) {
+                if (self::$isPhp54) {
                     return $callback($arg1, $arg2);
                 }
                 return call_user_func($callback, $arg1, $arg2);
@@ -204,7 +204,7 @@ class CallbackHandler
                 $arg1 = array_shift($args);
                 $arg2 = array_shift($args);
                 $arg3 = array_shift($args);
-                if ($this->isPhp54) {
+                if (self::$isPhp54) {
                     return $callback($arg1, $arg2, $arg3);
                 }
                 return call_user_func($callback, $arg1, $arg2, $arg3);

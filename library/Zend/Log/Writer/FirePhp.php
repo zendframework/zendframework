@@ -23,7 +23,7 @@ class FirePhp extends AbstractWriter
     /**
      * The instance of FirePhp that is used to log messages to.
      * 
-     * @var FirePhpInstance
+     * @var FirePhp\FirePhpInterface
      */
     protected $firephp;
 
@@ -79,7 +79,7 @@ class FirePhp extends AbstractWriter
     /**
      * Gets the FirePhp instance that is used for logging.
      * 
-     * @return FirePhpInstance
+     * @return FirePhp\FirePhpInterface
      */
     public function getFirePhp()
     {

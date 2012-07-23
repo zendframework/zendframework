@@ -109,4 +109,17 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('DELETE FROM "foo" WHERE x = y', $this->delete->getSqlString());
 
     }
+
+    /**
+     * @group pull-request-1813
+     * @covers Zend\Db\Sql\Delete::where
+     */
+    public function testDeleteWhereCombination()
+    {
+        $this->delete->where(array(
+            'one' => 1,
+            'two' => 2
+        ));
+        $this->assertCount(2, $this->delete->getRawState('where'));
+    }
 }

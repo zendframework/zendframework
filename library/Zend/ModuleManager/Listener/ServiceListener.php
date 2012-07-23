@@ -79,6 +79,7 @@ class ServiceListener implements ListenerAggregateInterface
                 (string) $serviceManager
             ));
         }
+
         $this->serviceManagers[$smKey] = array(
             'service_manager'        => $serviceManager,
             'config_key'             => $key,
@@ -86,6 +87,11 @@ class ServiceListener implements ListenerAggregateInterface
             'module_class_method'    => $method,
             'configuration'          => array(),
         );
+
+        if ($key === 'service_manager' && $this->defaultServiceConfig) {
+            $this->serviceManagers[$smKey]['configuration']['default_config'] = $this->defaultServiceConfig;
+        }
+
         return $this;
     }
 
@@ -174,19 +180,7 @@ class ServiceListener implements ListenerAggregateInterface
         $configListener = $e->getConfigListener();
         $config         = $configListener->getMergedConfig(false);
 
-        if ($this->defaultServiceConfig) {
-            $defaultConfig = array('service_manager' => $this->defaultServiceConfig);
-        }
-
         foreach ($this->serviceManagers as $key => $sm) {
-
-            if (isset($defaultConfig[$sm['config_key']])
-                && is_array($defaultConfig[$sm['config_key']])
-                && !empty($defaultConfig[$sm['config_key']])
-            ) {
-                $this->serviceManagers[$key]['configuration']['default_config'] = $defaultConfig[$sm['config_key']];
-            }
-
             if (isset($config[$sm['config_key']])
                 && is_array($config[$sm['config_key']])
                 && !empty($config[$sm['config_key']])

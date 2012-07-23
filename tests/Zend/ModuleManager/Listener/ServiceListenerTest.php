@@ -123,6 +123,18 @@ class ServiceListenerTest extends TestCase
         $this->assertServiceManagerIsConfigured();
     }
 
+    public function testModuleServiceConfigOverridesGlobalConfig()
+    {
+        $this->listener = new ServiceListener($this->services, array('aliases' => array('foo' => 'bar')));
+        $this->listener->addServiceManager($this->services, 'service_manager', 'Zend\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfig');
+        $config = array('aliases' => array('foo' => 'baz'));
+        $module = new TestAsset\ServiceProviderModule($config);
+        $this->event->setModule($module);
+        $this->listener->onLoadModule($this->event);
+        $this->listener->onLoadModulesPost($this->event);
+        $this->assertAttributeEquals($config['aliases'], 'aliases', $this->services, "aliases assertion failed - module config did not override main config");
+    }
+
     public function testModuleReturningServiceConfigConfiguresServiceManager()
     {
         $config = $this->getServiceConfig();

@@ -15,6 +15,7 @@ use Zend\File\Transfer\Exception;
 use Zend\Filter;
 use Zend\Filter\Exception as FilterException;
 use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Loader;
 use Zend\Validator;
 
@@ -31,7 +32,7 @@ use Zend\Validator;
  * @category  Zend
  * @package   Zend_File_Transfer
  */
-abstract class AbstractAdapter
+abstract class AbstractAdapter implements TranslatorAwareInterface
 {
     /**@+
      * Plugin loader Constants
@@ -74,11 +75,18 @@ abstract class AbstractAdapter
     protected $translator;
 
     /**
-     * Is translation disabled?
+     * Is translation enabled?
      *
      * @var bool
      */
-    protected $translatorDisabled = false;
+    protected $translatorEnabled = true;
+
+    /**
+     * Translator text domain (optional)
+     *
+     * @var string
+     */
+    protected $translatorTextDomain = 'default';
 
     /**
      * Internal list of validators
@@ -222,7 +230,9 @@ abstract class AbstractAdapter
                 $this->loaders[$type] = $loader;
                 return $this;
             default:
-                throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
+                throw new Exception\InvalidArgumentException(
+                    sprintf('Invalid type "%s" provided to setPluginLoader()', $type)
+                );
         }
     }
 
@@ -263,7 +273,9 @@ abstract class AbstractAdapter
 
                 return $this->loaders[$type];
             default:
-                throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+                throw new Exception\InvalidArgumentException(
+                    sprintf('Invalid type "%s" provided to getPluginLoader()', $type)
+                );
         }
     }
 
@@ -310,7 +322,9 @@ abstract class AbstractAdapter
 
                 return $this;
             default:
-                throw new Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+                throw new Exception\InvalidArgumentException(
+                    sprintf('Invalid type "%s" provided to getPluginLoader()', $type)
+                );
         }
     }
 
@@ -384,7 +398,10 @@ abstract class AbstractAdapter
                 unset($options['messages']);
             }
         } else {
-            throw new Exception\InvalidArgumentException('Invalid validator provided to addValidator; must be string or Zend\Validator\ValidatorInterface');
+            throw new Exception\InvalidArgumentException(
+                'Invalid validator provided to addValidator; ' .
+                'must be string or Zend\Validator\ValidatorInterface'
+            );
         }
 
         $this->validators[$name] = $validator;
@@ -661,7 +678,7 @@ abstract class AbstractAdapter
         $translator      = $this->getTranslator();
         $this->messages = array();
         $break           = false;
-        foreach($check as $key => $content) {
+        foreach ($check as $key => $content) {
             if (array_key_exists('validators', $content) &&
                 in_array('Zend\Validator\File\Count', $content['validators'])) {
                 $validator = $this->validators['Zend\Validator\File\Count'];
@@ -972,7 +989,7 @@ abstract class AbstractAdapter
         $files     = $this->getFiles($file, true, true);
         $result    = array();
         $directory = "";
-        foreach($files as $file) {
+        foreach ($files as $file) {
             if (empty($this->files[$file]['name'])) {
                 continue;
             }
@@ -1056,7 +1073,9 @@ abstract class AbstractAdapter
             if (isset($this->files[$orig]['destination'])) {
                 $destinations[$orig] = $this->files[$orig]['destination'];
             } else {
-                throw new Exception\InvalidArgumentException(sprintf('The file transfer adapter can not find "%s"', $orig));
+                throw new Exception\InvalidArgumentException(
+                    sprintf('The file transfer adapter can not find "%s"', $orig)
+                );
             }
         }
 
@@ -1080,14 +1099,20 @@ abstract class AbstractAdapter
     }
 
     /**
-     * Set translator object for localization
+     * Sets translator to use in helper
      *
-     * @param  Translator|null $translator
+     * @param  Translator $translator  [optional] translator.
+     *                                 Default is null, which sets no translator.
+     * @param  string     $textDomain  [optional] text domain
+     *                                 Default is null, which skips setTranslatorTextDomain
      * @return AbstractAdapter
      */
-    public function setTranslator(Translator $translator = null)
+    public function setTranslator(Translator $translator = null, $textDomain = null)
     {
         $this->translator = $translator;
+        if (null !== $textDomain) {
+            $this->setTranslatorTextDomain($textDomain);
+        }
         return $this;
     }
 
@@ -1098,7 +1123,7 @@ abstract class AbstractAdapter
      */
     public function getTranslator()
     {
-        if ($this->translatorIsDisabled()) {
+        if ($this->isTranslatorEnabled()) {
             return null;
         }
 
@@ -1106,25 +1131,57 @@ abstract class AbstractAdapter
     }
 
     /**
-     * Indicate whether or not translation should be disabled
+     * Checks if the helper has a translator
+     *
+     * @return bool
+     */
+    public function hasTranslator()
+    {
+        return (bool) $this->getTranslator();
+    }
+
+    /**
+     * Indicate whether or not translation should be enabled
      *
      * @param  bool $flag
      * @return AbstractAdapter
      */
-    public function setDisableTranslator($flag)
+    public function setTranslatorEnabled($flag = true)
     {
-        $this->translatorDisabled = (bool) $flag;
+        $this->translatorEnabled = (bool) $flag;
         return $this;
     }
 
     /**
-     * Is translation disabled?
+     * Is translation enabled?
      *
      * @return bool
      */
-    public function translatorIsDisabled()
+    public function isTranslatorEnabled()
     {
-        return $this->translatorDisabled;
+        return $this->translatorEnabled;
+    }
+
+    /**
+     * Set translation text domain
+     *
+     * @param  string $textDomain
+     * @return AbstractAdapter
+     */
+    public function setTranslatorTextDomain($textDomain = 'default')
+    {
+        $this->translatorTextDomain = $textDomain;
+        return $this;
+    }
+
+    /**
+     * Return the translation text domain
+     *
+     * @return string
+     */
+    public function getTranslatorTextDomain()
+    {
+        return $this->translatorTextDomain;
     }
 
     /**
@@ -1143,7 +1200,7 @@ abstract class AbstractAdapter
 
         $files  = $this->getFiles($files);
         $result = array();
-        foreach($files as $key => $value) {
+        foreach ($files as $key => $value) {
             if (file_exists($value['name'])) {
                 $result[$key] = hash_file($hash, $value['name']);
             } elseif (file_exists($value['tmp_name'])) {
@@ -1171,7 +1228,7 @@ abstract class AbstractAdapter
     {
         $files  = $this->getFiles($files);
         $result = array();
-        foreach($files as $key => $value) {
+        foreach ($files as $key => $value) {
             if (file_exists($value['name']) || file_exists($value['tmp_name'])) {
                 if ($value['options']['useByteString']) {
                     $result[$key] = self::toByteString($value['size']);
@@ -1223,7 +1280,7 @@ abstract class AbstractAdapter
     {
         $files  = $this->getFiles($files);
         $result = array();
-        foreach($files as $key => $value) {
+        foreach ($files as $key => $value) {
             if (file_exists($value['name']) || file_exists($value['tmp_name'])) {
                 $result[$key] = $value['type'];
             } elseif (empty($value['options']['ignoreNoFile'])) {
@@ -1364,7 +1421,7 @@ abstract class AbstractAdapter
                 $tmpdir[] = realpath($upload);
             }
 
-            foreach($tmpdir as $directory) {
+            foreach ($tmpdir as $directory) {
                 if ($this->isPathWriteable($directory)) {
                     $this->tmpDir = $directory;
                 }
@@ -1372,7 +1429,7 @@ abstract class AbstractAdapter
 
             if (empty($this->tmpDir)) {
                 // Attemp to detect by creating a temporary file
-                $tempFile = tempnam(md5(uniqid(rand(), TRUE)), '');
+                $tempFile = tempnam(md5(uniqid(rand(), true)), '');
                 if ($tempFile) {
                     $this->tmpDir = realpath(dirname($tempFile));
                     unlink($tempFile);

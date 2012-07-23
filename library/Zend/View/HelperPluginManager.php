@@ -10,8 +10,9 @@
 
 namespace Zend\View;
 
+use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
+use Zend\ServiceManager\ConfigInterface;
 
 /**
  * Plugin manager implementation for view helpers
@@ -78,15 +79,16 @@ class HelperPluginManager extends AbstractPluginManager
      * Constructor
      *
      * After invoking parent constructor, add an initializer to inject the
-     * attached renderer, if any, to the currently requested helper.
+     * attached renderer and translator, if any, to the currently requested helper.
      *
-     * @param  null|ConfigurationInterface $configuration
+     * @param  null|ConfigInterface $configuration
      * @return void
      */
-    public function __construct(ConfigurationInterface $configuration = null)
+    public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
-        $this->addInitializer(array($this, 'injectRenderer'));
+        $this->addInitializer(array($this, 'injectRenderer'))
+             ->addInitializer(array($this, 'injectTranslator'));
     }
 
     /**
@@ -124,6 +126,22 @@ class HelperPluginManager extends AbstractPluginManager
             return;
         }
         $helper->setView($renderer);
+    }
+
+    /**
+     * Inject a helper instance with the registered translator
+     *
+     * @param  Helper\HelperInterface $helper
+     * @return void
+     */
+    public function injectTranslator($helper)
+    {
+        if ($helper instanceof TranslatorAwareInterface) {
+            $locator = $this->getServiceLocator();
+            if ($locator && $locator->has('translator')) {
+                $helper->setTranslator($locator->get('translator'));
+            }
+        }
     }
 
     /**

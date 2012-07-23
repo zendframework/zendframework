@@ -5,13 +5,17 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
+ * @package   Zend_Validator
  */
 
-namespace ZendTest\View\TestAsset;
+namespace ZendTest\View\Helper\TestAsset;
 
-use Zend\View\Renderer\RendererInterface as Renderer;
-use Zend\View\Helper\AbstractHelper as Helper;
+use Zend\View\Helper\AbstractHelper;
 
-class Uninvokable extends Helper
-{ }
+class ConcreteHelper extends AbstractHelper
+{
+    public function __invoke($output)
+    {
+        return $output;
+    }
+}

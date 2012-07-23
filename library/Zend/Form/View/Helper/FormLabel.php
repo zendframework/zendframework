@@ -10,6 +10,8 @@
 
 namespace Zend\Form\View\Helper;
 
+use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 
@@ -18,7 +20,7 @@ use Zend\Form\Exception;
  * @package    Zend_Form
  * @subpackage View
  */
-class FormLabel extends AbstractHelper
+class FormLabel extends AbstractHelper implements TranslatorAwareInterface
 {
     const APPEND  = 'append';
     const PREPEND = 'prepend';
@@ -32,6 +34,28 @@ class FormLabel extends AbstractHelper
         'for'  => true,
         'form' => true,
     );
+
+    /**
+     * Translator (optional)
+     *
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
+     * Translator text domain (optional)
+     *
+     * @var string
+     */
+    protected $translatorTextDomain = 'default';
+
+    /**
+     * Whether translator should be used
+     *
+     * @var bool
+     */
+    protected $translatorEnabled = true;
+
 
     /**
      * Generate an opening label tag
@@ -110,9 +134,16 @@ class FormLabel extends AbstractHelper
             $label = $element->getLabel();
             if (empty($label)) {
                 throw new Exception\DomainException(sprintf(
-                    '%s expects either label content as the second argument, or that the element provided has a label attribute; neither found',
+                    '%s expects either label content as the second argument, ' .
+                    'or that the element provided has a label attribute; neither found',
                     __METHOD__
                 ));
+            }
+
+            if (null !== ($translator = $this->getTranslator())) {
+                $label = $translator->translate(
+                    $label, $this->getTranslatorTextDomain()
+                );
             }
         }
 

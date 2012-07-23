@@ -229,4 +229,41 @@ class FormMultiCheckboxTest extends CommonTestCase
         $this->assertNotContains('type="hidden"', $markup);
         // Lack of error also indicates this test passes
     }
+
+    public function testCanTranslateContent()
+    {
+        $element = new Element('foo');
+        $element->setAttribute('options', array(
+            array(
+                'label' => 'label1',
+                'value' => 'value1',
+            ),
+        ));
+        $markup = $this->helper->render($element);
+
+        $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
+        $mockTranslator->expects($this->exactly(1))
+        ->method('translate')
+        ->will($this->returnValue('translated content'));
+
+        $this->helper->setTranslator($mockTranslator);
+        $this->assertTrue($this->helper->hasTranslator());
+
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('>translated content<', $markup);
+    }
+
+    public function testTranslatorMethods()
+    {
+        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
+        $this->helper->setTranslator($translatorMock, 'foo');
+
+        $this->assertEquals($translatorMock, $this->helper->getTranslator());
+        $this->assertEquals('foo', $this->helper->getTranslatorTextDomain());
+        $this->assertTrue($this->helper->hasTranslator());
+        $this->assertTrue($this->helper->isTranslatorEnabled());
+
+        $this->helper->setTranslatorEnabled(false);
+        $this->assertFalse($this->helper->isTranslatorEnabled());
+    }
 }

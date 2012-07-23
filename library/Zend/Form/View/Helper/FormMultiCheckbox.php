@@ -313,6 +313,12 @@ class FormMultiCheckbox extends FormInput
                 $closingBracket
             );
 
+            if (null !== ($translator = $this->getTranslator())) {
+                $label = $translator->translate(
+                    $label, $this->getTranslatorTextDomain()
+                );
+            }
+
             $label     = $escapeHtmlHelper($label);
             $labelOpen = $labelHelper->openTag($labelAttributes);
             $template  = $labelOpen . '%s%s' . $labelClose;

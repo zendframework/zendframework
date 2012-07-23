@@ -178,6 +178,20 @@ class NavigationTest extends AbstractTest
         $this->assertEquals($expected, $actual);
     }
 
+    public function testTranslatorMethods()
+    {
+        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
+        $this->_helper->setTranslator($translatorMock, 'foo');
+
+        $this->assertEquals($translatorMock, $this->_helper->getTranslator());
+        $this->assertEquals('foo', $this->_helper->getTranslatorTextDomain());
+        $this->assertTrue($this->_helper->hasTranslator());
+        $this->assertTrue($this->_helper->isTranslatorEnabled());
+
+        $this->_helper->setTranslatorEnabled(false);
+        $this->assertFalse($this->_helper->isTranslatorEnabled());
+    }
+
     public function testSpecifyingDefaultProxy()
     {
         $expected = array(

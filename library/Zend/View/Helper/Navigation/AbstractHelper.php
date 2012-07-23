@@ -13,6 +13,7 @@ namespace Zend\View\Helper\Navigation;
 use RecursiveIteratorIterator;
 use Zend\Acl;
 use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Navigation;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
@@ -30,7 +31,8 @@ use Zend\View\Exception;
 abstract class AbstractHelper
     extends View\Helper\AbstractHtmlElement
     implements HelperInterface,
-               ServiceLocatorAwareInterface
+               ServiceLocatorAwareInterface,
+               TranslatorAwareInterface
 {
     /**
      * @var ServiceLocatorInterface
@@ -66,13 +68,6 @@ abstract class AbstractHelper
     protected $indent = '';
 
     /**
-     * Translator
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
      * ACL to use when iterating pages
      *
      * @var Acl\Acl
@@ -94,18 +89,32 @@ abstract class AbstractHelper
     protected $role;
 
     /**
-     * Whether translator should be used for page labels and titles
-     *
-     * @var bool
-     */
-    protected $useTranslator = true;
-
-    /**
      * Whether ACL should be used for filtering out pages
      *
      * @var bool
      */
     protected $useAcl = true;
+
+    /**
+     * Translator (optional)
+     *
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
+     * Translator text domain (optional)
+     *
+     * @var string
+     */
+    protected $translatorTextDomain = 'default';
+
+    /**
+     * Whether translator should be used
+     *
+     * @var bool
+     */
+    protected $translatorEnabled = true;
 
     /**
      * Default ACL to use when iterating pages if not explicitly set in the
@@ -150,7 +159,8 @@ abstract class AbstractHelper
      *
      * Implements {@link HelperInterface::setContainer()}.
      *
-     * @param  string|Navigation\AbstractContainer $container [optional] container to operate on.  Default is null, meaning container will be reset.
+     * @param  string|Navigation\AbstractContainer $container [optional] container to operate on.
+     *                                                        Default is null, meaning container will be reset.
      * @return AbstractHelper  fluent interface, returns self
      */
     public function setContainer($container = null)
@@ -292,35 +302,6 @@ abstract class AbstractHelper
     }
 
     /**
-     * Sets translator to use in helper
-     *
-     * Implements {@link HelperInterface::setTranslator()}.
-     *
-     * @param  mixed $translator [optional] translator.  Expects an object of
-     *                           type {@link Translator\Adapter\AbstractAdapter}
-     *                           or {@link Translator\Translator}, or null.
-     *                           Default is null, which sets no translator.
-     * @return AbstractHelper  fluent interface, returns self
-     */
-    public function setTranslator(Translator $translator = null)
-    {
-        $this->translator = $translator;
-        return $this;
-    }
-
-    /**
-     * Returns translator used in helper
-     *
-     * Implements {@link HelperInterface::getTranslator()}.
-     *
-     * @return Translator|null  translator or null
-     */
-    public function getTranslator()
-    {
-        return $this->translator;
-    }
-
-    /**
      * Sets ACL to use when iterating pages
      *
      * Implements {@link HelperInterface::setAcl()}.
@@ -442,33 +423,6 @@ abstract class AbstractHelper
     {
         $this->renderInvisible = (bool) $renderInvisible;
         return $this;
-    }
-
-    /**
-     * Sets whether translator should be used
-     *
-     * Implements {@link HelperInterface::setUseTranslator()}.
-     *
-     * @param  bool $useTranslator [optional] whether translator should be used.
-     *                             Default is true.
-     * @return AbstractHelper  fluent interface, returns self
-     */
-    public function setUseTranslator($useTranslator = true)
-    {
-        $this->useTranslator = (bool) $useTranslator;
-        return $this;
-    }
-
-    /**
-     * Returns whether translator should be used
-     *
-     * Implements {@link HelperInterface::getUseTranslator()}.
-     *
-     * @return bool  whether translator should be used
-     */
-    public function getUseTranslator()
-    {
-        return $this->useTranslator;
     }
 
     // Magic overloads:
@@ -619,18 +573,6 @@ abstract class AbstractHelper
     }
 
     /**
-     * Checks if the helper has a translator
-     *
-     * Implements {@link HelperInterface::hasTranslator()}.
-     *
-     * @return bool  whether the helper has a translator or not
-     */
-    public function hasTranslator()
-    {
-        return null !== $this->translator;
-    }
-
-    /**
      * Returns an HTML string containing an 'a' element for the given page
      *
      * @param  AbstractPage $page  page to generate HTML for
@@ -642,12 +584,13 @@ abstract class AbstractHelper
         $label = $page->getLabel();
         $title = $page->getTitle();
 
-        if ($this->getUseTranslator() && $t = $this->getTranslator()) {
+        if (null !== ($translator = $this->getTranslator())) {
+            $textDomain = $this->getTranslatorTextDomain();
             if (is_string($label) && !empty($label)) {
-                $label = $t->translate($label);
+                $label = $translator->translate($label, $textDomain);
             }
             if (is_string($title) && !empty($title)) {
-                $title = $t->translate($title);
+                $title = $translator->translate($title, $textDomain);
             }
         }
 
@@ -665,6 +608,95 @@ abstract class AbstractHelper
         return '<a' . $this->_htmlAttribs($attribs) . '>'
              . $escaper($label)
              . '</a>';
+    }
+
+    // Translator methods - Good candidate to refactor as a trait with PHP 5.4
+
+    /**
+     * Sets translator to use in helper
+     *
+     * @param  Translator $translator  [optional] translator.
+     *                                 Default is null, which sets no translator.
+     * @param  string     $textDomain  [optional] text domain
+     *                                 Default is null, which skips setTranslatorTextDomain
+     * @return AbstractHelper
+     */
+    public function setTranslator(Translator $translator = null, $textDomain = null)
+    {
+        $this->translator = $translator;
+        if (null !== $textDomain) {
+            $this->setTranslatorTextDomain($textDomain);
+        }
+        return $this;
+    }
+
+    /**
+     * Returns translator used in helper
+     *
+     * @return Translator|null
+     */
+    public function getTranslator()
+    {
+        if (! $this->isTranslatorEnabled()) {
+            return null;
+        }
+
+        return $this->translator;
+    }
+
+    /**
+     * Checks if the helper has a translator
+     *
+     * @return bool
+     */
+    public function hasTranslator()
+    {
+        return (bool) $this->getTranslator();
+    }
+
+    /**
+     * Sets whether translator is enabled and should be used
+     *
+     * @param  bool $enabled [optional] whether translator should be used.
+     *                       Default is true.
+     * @return AbstractHelper
+     */
+    public function setTranslatorEnabled($enabled = true)
+    {
+        $this->translatorEnabled = (bool) $enabled;
+        return $this;
+    }
+
+    /**
+     * Returns whether translator is enabled and should be used
+     *
+     * @return bool
+     */
+    public function isTranslatorEnabled()
+    {
+        return $this->translatorEnabled;
+    }
+
+    /**
+     * Set translation text domain
+     *
+     * @param  string $textDomain
+     * @return AbstractHelper
+     */
+    public function setTranslatorTextDomain($textDomain = 'default')
+    {
+        $this->translatorTextDomain = $textDomain;
+        return $this;
+    }
+
+    /**
+     * Return the translation text domain
+     *
+     * @return string
+     */
+    public function getTranslatorTextDomain()
+    {
+        return $this->translatorTextDomain;
     }
 
     // Iterator filter methods:

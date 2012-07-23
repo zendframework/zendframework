@@ -11,7 +11,7 @@
 namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
-use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
+use Zend\I18n\View\Helper\AbstractTranslatorHelper as BaseAbstractHelper;
 use Zend\View\Helper\Doctype;
 use Zend\View\Helper\EscapeHtml;
 use Zend\View\Helper\EscapeHtmlAttr;

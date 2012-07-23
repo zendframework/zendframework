@@ -13,6 +13,7 @@ namespace Zend\View\Helper\Navigation;
 use Zend\Acl;
 use Zend\I18n\Translator\Translator;
 use Zend\Navigation;
+use Zend\View\Helper\HelperInterface as BaseHelperInterface;
 
 /**
  * Interface for navigational helpers
@@ -21,7 +22,7 @@ use Zend\Navigation;
  * @package    Zend_View
  * @subpackage Helper
  */
-interface HelperInterface
+interface HelperInterface extends BaseHelperInterface
 {
     /**
      * Sets navigation container the helper should operate on by default
@@ -40,24 +41,6 @@ interface HelperInterface
      * @return Navigation\AbstractContainer  navigation container
      */
     public function getContainer();
-
-    /**
-     * Sets translator to use in helper
-     *
-     * @param  mixed $translator [optional] translator.  Expects an object of
-     *                           type {@link \Zend\Translator\Adapter} or
-     *                           {@link \Zend\Translator\Translator}, or null.
-     *                           Default is null.
-     * @return HelperInterface  fluent interface, returns self
-     */
-    public function setTranslator(Translator $translator = null);
-
-    /**
-     * Returns translator used in helper
-     *
-     * @return \Zend\Translator\Adapter|null  translator or null
-     */
-    public function getTranslator();
 
     /**
      * Sets ACL to use when iterating pages
@@ -125,22 +108,6 @@ interface HelperInterface
     public function setRenderInvisible($renderInvisible = true);
 
     /**
-     * Sets whether translator should be used
-     *
-     * @param  bool $useTranslator [optional] whether translator should be used.
-     *                             Default is true.
-     * @return HelperInterface  fluent interface, returns self
-     */
-    public function setUseTranslator($useTranslator = true);
-
-    /**
-     * Returns whether translator should be used
-     *
-     * @return bool  whether translator should be used
-     */
-    public function getUseTranslator();
-
-    /**
      * Checks if the helper has a container
      *
      * @return bool  whether the helper has a container or not
@@ -160,13 +127,6 @@ interface HelperInterface
      * @return bool  whether the helper has a an ACL role or not
      */
     public function hasRole();
-
-    /**
-     * Checks if the helper has a translator
-     *
-     * @return bool  whether the helper has a translator or not
-     */
-    public function hasTranslator();
 
     /**
      * Magic overload: Should proxy to {@link render()}.

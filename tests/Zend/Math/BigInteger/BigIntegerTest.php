@@ -22,43 +22,35 @@ use Zend\Math\BigInteger\Adapter\AdapterInterface;
  */
 class BigIntegerTest extends \PHPUnit_Framework_TestCase
 {
-    protected $adapters = array();
-
-    protected $availableAdapter = null;
-
-    public function setUp()
+    public function testFactoryCreatesBcmathAdapter()
     {
-        if (extension_loaded('bcmath')) {
-            $this->adapters['bcmath'] = true;
-            $this->availableAdapter = 'Bcmath';
-        }
-        if (extension_loaded('gmp')) {
-            $this->adapters['gmp'] = true;
-            $this->availableAdapter = 'Gmp';
+        if (!extension_loaded('bcmath')) {
+            $this->markTestSkipped('Missing bcmath extensions');
         }
 
-        if (null == $this->availableAdapter) {
+        $bigInt = BigInt::factory('Bcmath');
+        $this->assertTrue($bigInt instanceof Adapter\Bcmath);
+    }
+
+    public function testFactoryCreatesGmpAdapter()
+    {
+        if (!extension_loaded('gmp')) {
+            $this->markTestSkipped('Missing gmp extensions');
+        }
+
+        $bigInt = BigInt::factory('Gmp');
+        $this->assertTrue($bigInt instanceof Adapter\Gmp);
+    }
+
+    public function testFactoryUsesDefaultAdapter()
+    {
+        if (!extension_loaded('bcmath') && !extension_loaded('gmp')) {
             $this->markTestSkipped('Missing bcmath or gmp extensions');
         }
-    }
-
-    public function testFactoryValidAdapter()
-    {
-        if ($this->availableAdapter === 'Gmp') {
-            $bigInt = BigInt::factory('Gmp');
-            $this->assertTrue($bigInt instanceof Adapter\Gmp);
-        } elseif ($this->availableAdapter === 'Bcmath') {
-            $bigInt = BigInt::factory('Bcmath');
-            $this->assertTrue($bigInt instanceof Adapter\Bcmath);
-        }
-    }
-
-    public function testFactoryNoAdapter()
-    {
         $this->assertTrue(BigInt::factory() instanceof AdapterInterface);
     }
 
-    public function testFactoryUnknownAdapter()
+    public function testFactoryUnknownAdapterRaisesServiceManagerException()
     {
         $this->setExpectedException('Zend\ServiceManager\Exception\ExceptionInterface');
         BigInt::factory('unknown');

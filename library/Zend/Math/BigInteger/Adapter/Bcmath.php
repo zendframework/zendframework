@@ -165,10 +165,7 @@ class Bcmath implements AdapterInterface
      */
     public function abs($operand)
     {
-        if ('-' == $operand[0]) {
-            return substr($operand, 1);
-        }
-        return $operand;
+        return ltrim($operand, '-');
     }
 
     /**
@@ -182,7 +179,6 @@ class Bcmath implements AdapterInterface
     {
         return bcmod($leftOperand, $rightOperand);
     }
-
 
     /**
      * Raise a big integer to another, reduced by a specified modulus

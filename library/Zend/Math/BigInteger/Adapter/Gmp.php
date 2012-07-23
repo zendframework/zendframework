@@ -50,7 +50,12 @@ class Gmp implements AdapterInterface
             }
         }
 
-        return gmp_strval(gmp_init($sign . $operand, $base));
+        $res = gmp_init($sign . $operand, $base);
+        if ($res === false) {
+            return false;
+        }
+
+        return gmp_strval($res);
     }
 
     /**

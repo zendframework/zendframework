@@ -8,12 +8,15 @@
  * @package   Zend_Db
  */
 
-namespace Zend\Db\ResultSet;
+namespace Zend\Db\Adapter\Exception;
+
+use Zend\Db\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Db
- * @subpackage ResultSet
+ * @subpackage Adapter
  */
-interface Exception
-{}
+class UnexpectedValueException extends Exception\UnexpectedValueException implements ExceptionInterface
+{
+}

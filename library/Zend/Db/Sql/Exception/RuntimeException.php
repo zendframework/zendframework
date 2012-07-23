@@ -10,6 +10,8 @@
 
 namespace Zend\Db\Sql\Exception;
 
-class RuntimeException extends \RuntimeException
+use Zend\Db\Exception;
+
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
 {
 }

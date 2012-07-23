@@ -10,11 +10,13 @@
 
 namespace Zend\Db\Adapter\Exception;
 
+use Zend\Db\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
  */
-class RuntimeException extends \RuntimeException implements ExceptionInterface
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
 {
 }

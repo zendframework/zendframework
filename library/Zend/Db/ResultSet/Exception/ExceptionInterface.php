@@ -8,10 +8,15 @@
  * @package   Zend_Db
  */
 
-namespace Zend\Db\TableGateway\Exception;
+namespace Zend\Db\ResultSet\Exception;
 
 use Zend\Db\Exception;
 
-class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
+/**
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage ResultSet
+ */
+interface ExceptionInterface extends Exception\ExceptionInterface
 {
 }

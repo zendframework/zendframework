@@ -82,7 +82,7 @@ class FirePhp extends AbstractWriter
      * @return FirePhpInstance
      */
     public function getFirePhp()
-    {;
+    {
         return $this->firephp;
     }
 

@@ -12,6 +12,7 @@ namespace Zend\Validator;
 
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\ServiceManager\AbstractPluginManager;
+use Zend\ServiceManager\ConfigInterface;
 
 /**
  * @category   Zend
@@ -112,10 +113,10 @@ class ValidatorPluginManager extends AbstractPluginManager
      * After invoking parent constructor, add an initializer to inject the
      * attached translator, if any, to the currently requested helper.
      *
-     * @param  null|ConfigurationInterface $configuration
+     * @param  null|ConfigInterface $configuration
      * @return void
      */
-    public function __construct(ConfigurationInterface $configuration = null)
+    public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
         $this->addInitializer(array($this, 'injectTranslator'));

@@ -4,16 +4,12 @@
             <directory>./Zend</directory>
             <exclude>./Zend/_files/</exclude>
             <exclude>./Zend/AllTests/</exclude>
-            <exclude>./Zend/Amf/</exclude>
-            <exclude>./Zend/Queue/</exclude>
         </testsuite>
     </testsuites>
 
     <groups>
         <exclude>
             <group>disable</group>
-            <group>Zend_Amf</group>
-            <group>Zend_Queue</group>
         </exclude>
     </groups>
 </phpunit>

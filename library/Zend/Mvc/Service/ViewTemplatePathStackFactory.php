@@ -33,11 +33,14 @@ class ViewTemplatePathStackFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('Config');
-        $config = $config['view_manager'];
         $stack = array();
-        if (isset($config['template_path_stack'])) {
-            $stack = $config['template_path_stack'];
+        if (is_array($config) && isset($config['view_manager'])) {
+            $config = $config['view_manager'];
+            if (is_array($config) && isset($config['template_path_stack'])) {
+                $stack = $config['template_path_stack'];
+            }
         }
+
         $templatePathStack = new ViewResolver\TemplatePathStack();
         $templatePathStack->addPaths($stack);
         return $templatePathStack;

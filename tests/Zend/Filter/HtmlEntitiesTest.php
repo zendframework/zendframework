@@ -49,7 +49,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
             'string' => 'string',
             '<'      => '&lt;',
             '>'      => '&gt;',
-            '\''     => '\'',
+            '\''     => '&#039;',
             '"'      => '&quot;',
             '&'      => '&amp;'
             );
@@ -66,7 +66,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetQuoteStyle()
     {
-        $this->assertEquals(ENT_COMPAT, $this->_filter->getQuoteStyle());
+        $this->assertEquals(ENT_QUOTES, $this->_filter->getQuoteStyle());
     }
 
     /**

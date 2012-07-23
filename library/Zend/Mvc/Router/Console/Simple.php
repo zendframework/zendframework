@@ -724,41 +724,14 @@ class Simple implements RouteInterface
 
         }
 
+        /**
+         * Check if we have consumed all positional parameters
+         */
+        if($argPos < count($params)){
+            return; // there are extraneous params that were not consumed
+        }
 
 
-//        /**
-//         * Go through all positional parts
-//         */
-//        $pos = 0;
-//        for($x = 0;$x<count($positional);$x++){
-//            $part = $positional[$x];
-//
-//            if($params->offsetExists($pos)){
-//                // found value at exact position
-//                $val = $params->get($pos);
-//
-//                /**
-//                 * Check constraints
-//                 */
-//                if (
-//                    isset($this->constraints[$part['name']]) &&
-//                    !preg_match($this->constraints[$part['name']],$val)
-//                ) {
-//                    return null;
-//                }
-//
-//                /**
-//                 * Save matched value
-//                 */
-//
-//            }else{
-//                /**
-//                 * We reached end of available positional params
-//                 */
-//
-//            }
-//
-//        }
 
         return new RouteMatch(array_merge($this->defaults, $matches));
     }

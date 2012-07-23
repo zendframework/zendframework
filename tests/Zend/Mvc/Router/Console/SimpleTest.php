@@ -131,13 +131,10 @@ class SimpleTestTest extends TestCase
                     'baz' => null,
                 )
             ),
-            'optional-long-flag-partial-match' => array(
+            'optional-long-flag-partial-mismatch' => array(
                 '--foo [--bar]',
                 array('--foo', '--baz'),
-                array(
-                    'foo' => true,
-                    'bar' => null,
-                )
+                null
             ),
             'optional-long-flag-match' => array(
                 '--foo [--bar]',
@@ -285,11 +282,6 @@ class SimpleTestTest extends TestCase
                 array('foo','bazinga'),
                 null
             ),
-            'mandatory-literal-alternative-mismatch' => array(
-                'foo ( bar | baz )',
-                array('foo'),
-                null
-            ),
             'mandatory-literal-namedAlternative-match-1' => array(
                 'foo ( bar | baz ):altGroup',
                 array('foo','bar'),
@@ -400,6 +392,48 @@ class SimpleTestTest extends TestCase
                     'f'   => true,
                     'baz' => null,
                 )
+            ),
+
+            // -- overflows
+            'too-many-arguments1' => array(
+                'foo bar',
+                array('foo','bar','baz'),
+                null
+            ),
+            'too-many-arguments2' => array(
+                'foo bar [baz]',
+                array('foo','bar','baz','woo'),
+                null,
+            ),
+            'too-many-arguments3' => array(
+                'foo bar [--baz]',
+                array('foo','bar','--baz','woo'),
+                null,
+            ),
+            'too-many-arguments4' => array(
+                'foo bar [--baz] woo',
+                array('foo','bar','woo'),
+                array(
+                    'foo' => true,
+                    'bar' => true,
+                    'baz' => false,
+                    'woo' => true
+                )
+            ),
+            'too-many-arguments5' => array(
+                '--foo --bar [--baz] woo',
+                array('--bar','--foo','woo'),
+                array(
+                    'foo' => true,
+                    'bar' => true,
+                    'baz' => false,
+                    'woo' => true
+                )
+            ),
+            'too-many-arguments6' => array(
+                '--foo --bar [--baz]',
+                array('--bar','--foo','woo'),
+                null
             ),
 
 

@@ -94,7 +94,7 @@ class ModuleRouteListener implements ListenerAggregateInterface
 
         // Prepend the controllername with the module, and replace it in the
         // matches
-        $controller = $module . '\\' . $controller;
+        $controller = $module . '\\' . str_replace(' ', '', ucwords(str_replace('-', ' ', $controller)));
         $matches->setParam('controller', $controller);
     }
 }

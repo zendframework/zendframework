@@ -175,6 +175,13 @@ class InArray extends AbstractValidator
         // we create a copy of the haystack in case we need to modify it
         $haystack = $this->getHaystack();
 
+        // if the input is a string or float, and vulnerability protection is on
+        // we type cast the input to a string
+        if (self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY == $this->strict
+            && (is_int($value) || is_float($value))) {
+            $value =(string) $value;
+        }
+
         $this->setValue($value);
 
         if ($this->getRecursive()) {

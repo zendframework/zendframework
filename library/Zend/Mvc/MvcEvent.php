@@ -95,7 +95,7 @@ class MvcEvent extends Event
      */
     public function getRouter()
     {
-        return $this->getParam('router');
+        return $this->router;
     }
 
     /**
@@ -118,7 +118,7 @@ class MvcEvent extends Event
      */
     public function getRouteMatch()
     {
-        return $this->getParam('route-match');
+        return $this->routeMatch;
     }
 
     /**
@@ -141,7 +141,7 @@ class MvcEvent extends Event
      */
     public function getRequest()
     {
-        return $this->getParam('request');
+        return $this->request;
     }
 
     /**
@@ -164,7 +164,7 @@ class MvcEvent extends Event
      */
     public function getResponse()
     {
-        return $this->getParam('response');
+        return $this->response;
     }
 
     /**
@@ -212,7 +212,7 @@ class MvcEvent extends Event
      */
     public function getResult()
     {
-        return $this->getParam('__RESULT__');
+        return $this->result;
     }
 
     /**

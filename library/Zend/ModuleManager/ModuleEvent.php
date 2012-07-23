@@ -30,13 +30,28 @@ class ModuleEvent extends Event
     CONST EVENT_LOAD_MODULES_POST   = 'loadModules.post';
 
     /**
+     * @var mixed
+     */
+    protected $module;
+
+    /**
+     * @var string
+     */
+    protected $moduleName;
+
+    /**
+     * @var Listener\ConfigMergerInterface
+     */
+    protected $configListener;
+
+    /**
      * Get the name of a given module
      *
      * @return string
      */
     public function getModuleName()
     {
-        return $this->getParam('moduleName');
+        return $this->moduleName;
     }
 
     /**
@@ -53,7 +68,9 @@ class ModuleEvent extends Event
                 ,__METHOD__, gettype($moduleName)
             ));
         }
-        $this->setParam('moduleName', $moduleName);
+        // Performance tweak, dont add it as param.
+        $this->moduleName = $moduleName;
+
         return $this;
     }
 
@@ -64,7 +81,7 @@ class ModuleEvent extends Event
      */
     public function getModule()
     {
-        return $this->getParam('module');
+        return $this->module;
     }
 
     /**
@@ -81,7 +98,9 @@ class ModuleEvent extends Event
                 ,__METHOD__, gettype($module)
             ));
         }
-        $this->setParam('module', $module);
+        // Performance tweak, dont add it as param.
+        $this->module = $module;
+
         return $this;
     }
 
@@ -92,7 +111,7 @@ class ModuleEvent extends Event
      */
     public function getConfigListener()
     {
-        return $this->getParam('configListener');
+        return $this->configListener;
     }
 
     /**
@@ -104,6 +123,8 @@ class ModuleEvent extends Event
     public function setConfigListener(Listener\ConfigMergerInterface $configListener)
     {
         $this->setParam('configListener', $configListener);
+        $this->configListener = $configListener;
+
         return $this;
     }
 }

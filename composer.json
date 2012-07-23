@@ -15,7 +15,8 @@
         "doctrine/common": ">=2.1"
     },
     "suggest": {
-        "doctrine/common": "Doctrine\\Common >=2.1 for annotation features"
+        "doctrine/common": "Doctrine\\Common >=2.1 for annotation features",
+        "ext-intl": "ext/intl for i18n features"
     },
     "autoload": {
         "psr-0": {

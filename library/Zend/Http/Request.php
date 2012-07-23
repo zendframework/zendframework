@@ -266,13 +266,13 @@ class Request extends Message implements RequestInterface
         return $this;
     }
 
-	/**
-	 * Return the parameter container responsible for query parameters or a single query parameter
-	 *
-	 * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
-	 * @param mixed|null            $default         Default value to use when the parameter is missing.
-	 * @return \Zend\Stdlib\ParametersInterface|mixed
-	 */
+    /**
+     * Return the parameter container responsible for query parameters or a single query parameter
+     *
+     * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
+     * @param mixed|null            $default         Default value to use when the parameter is missing.
+     * @return \Zend\Stdlib\ParametersInterface|mixed
+     */
     public function getQuery($name = null, $default = null)
     {
         if ($this->queryParams === null) {
@@ -280,10 +280,10 @@ class Request extends Message implements RequestInterface
         }
 
         if($name === null){
-			return $this->queryParams;
-		}else{
-			return $this->queryParams->get($name, $default);
-		}
+            return $this->queryParams;
+        }else{
+            return $this->queryParams->get($name, $default);
+        }
     }
 
     /**
@@ -302,9 +302,9 @@ class Request extends Message implements RequestInterface
     /**
      * Return the parameter container responsible for post parameters or a single post parameter.
      *
-	 * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
-	 * @param mixed|null            $default         Default value to use when the parameter is missing.
-	 * @return \Zend\Stdlib\ParametersInterface|mixed
+     * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
+     * @param mixed|null            $default         Default value to use when the parameter is missing.
+     * @return \Zend\Stdlib\ParametersInterface|mixed
      */
     public function getPost($name = null, $default = null)
     {
@@ -313,10 +313,10 @@ class Request extends Message implements RequestInterface
         }
 
         if($name === null){
-			return $this->postParams;
-		}else{
-			return $this->postParams->get($name, $default);
-		}
+            return $this->postParams;
+        }else{
+            return $this->postParams->get($name, $default);
+        }
     }
 
     /**
@@ -345,9 +345,9 @@ class Request extends Message implements RequestInterface
 
     /**
      * Return the parameter container responsible for file parameters or a single file.
-	 *
-	 * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
-	 * @param mixed|null            $default         Default value to use when the parameter is missing.
+     *
+     * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
+     * @param mixed|null            $default         Default value to use when the parameter is missing.
      * @return ParametersInterface|mixed
      */
     public function getFile($name = null, $default = null)
@@ -357,10 +357,10 @@ class Request extends Message implements RequestInterface
         }
 
         if($name === null){
-			return $this->fileParams;
-		}else{
-			return $this->fileParams->get($name, $default);
-		}
+            return $this->fileParams;
+        }else{
+            return $this->fileParams->get($name, $default);
+        }
     }
 
     /**
@@ -379,8 +379,8 @@ class Request extends Message implements RequestInterface
     /**
      * Return the parameter container responsible for server parameters or a single parameter value.
      *
-	 * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
-	 * @param mixed|null            $default         Default value to use when the parameter is missing.
+     * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
+     * @param mixed|null            $default         Default value to use when the parameter is missing.
      * @see http://www.faqs.org/rfcs/rfc3875.html
      * @return \Zend\Stdlib\ParametersInterface|mixed
      */
@@ -391,10 +391,10 @@ class Request extends Message implements RequestInterface
         }
 
         if($name === null){
-			return $this->serverParams;
-		}else{
-			return $this->serverParams->get($name, $default);
-		}
+            return $this->serverParams;
+        }else{
+            return $this->serverParams->get($name, $default);
+        }
     }
 
     /**
@@ -412,10 +412,10 @@ class Request extends Message implements RequestInterface
 
     /**
      * Return the parameter container responsible for env parameters or a single parameter value.
-	 *
-	 * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
-	 * @param mixed|null            $default         Default value to use when the parameter is missing.     * @return \Zend\Stdlib\ParametersInterface
-	 * @return \Zend\Stdlib\ParametersInterface|mixed
+     *
+     * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
+     * @param mixed|null            $default         Default value to use when the parameter is missing.     * @return \Zend\Stdlib\ParametersInterface
+     * @return \Zend\Stdlib\ParametersInterface|mixed
      */
     public function getEnv($name = null, $default = null)
     {
@@ -424,10 +424,10 @@ class Request extends Message implements RequestInterface
         }
 
         if($name === null){
-			return $this->envParams;
-		}else{
-			return $this->envParams->get($name, $default);
-		}
+            return $this->envParams;
+        }else{
+            return $this->envParams->get($name, $default);
+        }
     }
 
     /**
@@ -445,12 +445,12 @@ class Request extends Message implements RequestInterface
 
     /**
      * Return the header container responsible for headers or all headers of a certain name/type
-	 *
-	 * @see \Zend\Http\Headers::get()
-	 * @param string|null           $name            Header name to retrieve, or null to get the whole container.
-	 * @param mixed|null            $default         Default value to use when the requested header is missing.
-	 * @return \Zend\Http\Headers|bool|\Zend\Http\Header\HeaderInterface|\ArrayIterator
-	 */
+     *
+     * @see \Zend\Http\Headers::get()
+     * @param string|null           $name            Header name to retrieve, or null to get the whole container.
+     * @param mixed|null            $default         Default value to use when the requested header is missing.
+     * @return \Zend\Http\Headers|bool|\Zend\Http\Header\HeaderInterface|\ArrayIterator
+     */
     public function getHeaders($name = null, $default = false)
     {
         if ($this->headers === null || is_string($this->headers)) {
@@ -459,21 +459,21 @@ class Request extends Message implements RequestInterface
         }
 
         if($name === null){
-			return $this->headers;
-		}elseif($this->headers->has($name)){
-			return $this->headers->get($name);
-		}else{
-			return $default;
-		}
+            return $this->headers;
+        }elseif($this->headers->has($name)){
+            return $this->headers->get($name);
+        }else{
+            return $default;
+        }
     }
 
     /**
      * Get all headers of a certain name/type.
-	 *
-	 * @see Request::getHeaders()
-	 * @param string|null           $name            Header name to retrieve, or null to get the whole container.
-	 * @param mixed|null            $default         Default value to use when the requested header is missing.
-	 * @return \Zend\Http\Headers|bool|\Zend\Http\Header\HeaderInterface|\ArrayIterator
+     *
+     * @see Request::getHeaders()
+     * @param string|null           $name            Header name to retrieve, or null to get the whole container.
+     * @param mixed|null            $default         Default value to use when the requested header is missing.
+     * @return \Zend\Http\Headers|bool|\Zend\Http\Header\HeaderInterface|\ArrayIterator
      */
     public function getHeader($name, $default = false)
     {

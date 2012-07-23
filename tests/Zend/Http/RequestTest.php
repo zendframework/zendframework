@@ -63,7 +63,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $request = new Request();
         $p = new \Zend\Stdlib\Parameters(array(
-        	'foo' => 'bar'
+            'foo' => 'bar'
         ));
         $request->setQuery($p);
         $request->setPost($p);
@@ -77,7 +77,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('bar', $request->getServer('foo'));
         $this->assertSame('bar', $request->getEnv('foo'));
 
-		$headers = new Headers();
+        $headers = new Headers();
         $h = new GenericHeader('foo','bar');
         $headers->addHeader($h);
 
@@ -91,15 +91,15 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $request = new Request();
         $p = new \Zend\Stdlib\Parameters(array(
-        	'foo' => 'bar'
+            'foo' => 'bar'
         ));
         $request->setQuery($p);
         $request->setPost($p);
         $request->setFile($p);
         $request->setServer($p);
         $request->setEnv($p);
-		
-		$default = 15;
+        
+        $default = 15;
         $this->assertSame($default, $request->getQuery('baz', $default));
         $this->assertSame($default, $request->getPost('baz', $default));
         $this->assertSame($default, $request->getFile('baz', $default));

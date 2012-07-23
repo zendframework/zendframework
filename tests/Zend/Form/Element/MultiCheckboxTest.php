@@ -39,9 +39,9 @@ class MultiCheckboxTest extends TestCase
     {
         $element = new MultiCheckboxElement();
         $options = array(
-            'Option 1' => '1',
-            'Option 2' => '2',
-            'Option 3' => '3',
+            '1' => 'Option 1',
+            '2' => 'Option 2',
+            '3' => 'Option 3',
         );
         $element->setAttributes(array(
             'options' => $options,

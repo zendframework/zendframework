@@ -23,7 +23,7 @@ namespace ZendTest\Log\Writer;
 
 use ZendTest\Log\TestAsset\MockFirePhp;
 use Zend\Log\Writer\FirePhp;
-use Zend\Log\Writer\FirePhpInterface;
+use Zend\Log\Writer\FirePhp\FirePhpInterface;
 use Zend\Log\Logger;
 
 /**

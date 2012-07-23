@@ -20,8 +20,9 @@ use Zend\Validator\Exception\InvalidArgumentException;
  * @category   Zend
  * @package    Zend_Validate
  */
-abstract class AbstractValidator
-    implements ValidatorInterface, TranslatorAwareInterface
+abstract class AbstractValidator implements 
+    TranslatorAwareInterface,
+    ValidatorInterface
 {
     /**
      * The value to be validated

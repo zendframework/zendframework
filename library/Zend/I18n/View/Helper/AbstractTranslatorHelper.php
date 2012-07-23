@@ -19,9 +19,8 @@ use Zend\View\Helper\AbstractHelper;
  * @package    Zend_View
  * @subpackage Helper
  */
-abstract class AbstractTranslatorHelper
-    extends AbstractHelper
-    implements TranslatorAwareInterface
+abstract class AbstractTranslatorHelper extends AbstractHelper implements 
+    TranslatorAwareInterface
 {
     /**
      * Translator (optional)

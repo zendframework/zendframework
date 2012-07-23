@@ -28,11 +28,10 @@ use Zend\View\Exception;
  * @package    Zend_View
  * @subpackage Helper
  */
-abstract class AbstractHelper
-    extends View\Helper\AbstractHtmlElement
-    implements HelperInterface,
-               ServiceLocatorAwareInterface,
-               TranslatorAwareInterface
+abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements 
+    HelperInterface,
+    ServiceLocatorAwareInterface,
+    TranslatorAwareInterface
 {
     /**
      * @var ServiceLocatorInterface

@@ -20,9 +20,8 @@ use Zend\View\Exception;
  * @package    Zend_View
  * @subpackage Helper
  */
-class HeadTitle
-    extends Placeholder\Container\AbstractStandalone
-    implements TranslatorAwareInterface
+class HeadTitle extends Placeholder\Container\AbstractStandalone implements 
+    TranslatorAwareInterface
 {
     /**
      * Registry key for placeholder

@@ -68,10 +68,10 @@ class Request extends HttpRequest
         $this->setEnv(new Parameters($_ENV));
 
         if ($_GET) {
-            $this->setPost(new Parameters($_POST));
+            $this->setQuery(new Parameters($_GET));
         }
         if ($_POST) {
-            $this->setQuery(new Parameters($_GET));
+            $this->setPost(new Parameters($_POST));
         }
         if ($_COOKIE) {
             $this->setCookies(new Parameters($_COOKIE));

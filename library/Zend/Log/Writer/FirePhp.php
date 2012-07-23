@@ -30,10 +30,10 @@ class FirePhp extends AbstractWriter
     /**
      * Initializes a new instance of this class.
      * 
-     * @param FirePhpInterface $instance An instance of FirePhpInterface
+     * @param null|FirePhp\FirePhpInterface $instance An instance of FirePhpInterface
      *        that should be used for logging
      */
-    public function __construct(FirePhpInterface $instance)
+    public function __construct(FirePhp\FirePhpInterface $instance = null)
     {
         $this->firephp   = $instance;
         $this->formatter = new FirePhpFormatter();
@@ -82,17 +82,17 @@ class FirePhp extends AbstractWriter
      * @return FirePhpInstance
      */
     public function getFirePhp()
-    {
+    {;
         return $this->firephp;
     }
 
     /**
      * Sets the FirePhp instance that is used for logging.
      * 
-     * @param  FirePhpInterface $instance The FirePhp instance to set.
+     * @param  FirePhp\FirePhpInterface $instance The FirePhp instance to set.
      * @return FirePhp
      */
-    public function setFirePhp(FirePhpInterface $instance)
+    public function setFirePhp(FirePhp\FirePhpInterface $instance)
     {
         $this->firephp = $instance;
         return $this;

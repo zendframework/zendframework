@@ -7,14 +7,14 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Log
  */
-namespace Zend\Log\Writer;
+
+namespace Zend\Log\Writer\FirePhp;
 
 /**
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
  */
-
 interface FirePhpInterface
 {
     public function getEnabled();

@@ -18,5 +18,4 @@ use Zend\Stdlib\AbstractOptions;
  * @subpackage Adapter
  */
 class AdapterOptions extends AbstractOptions
-{
-}
+{}

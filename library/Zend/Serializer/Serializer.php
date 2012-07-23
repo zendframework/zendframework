@@ -109,6 +109,7 @@ class Serializer
 
     /**
      * Generates a storable representation of a value using the default adapter.
+     * Optionally different adapter could be provided as second argument
      *
      * @param  mixed $value
      * @param  string|Adapter $adapter
@@ -129,6 +130,7 @@ class Serializer
 
     /**
      * Creates a PHP value from a stored representation using the default adapter.
+     * Optionally different adapter could be provided as second argument
      *
      * @param  string $serialized
      * @param  string|Adapter $adapter

@@ -64,7 +64,7 @@ class DiffieHellman
     private $privateKey = null;
 
     /**
-     * BigInteger support object courtesy of Zend\Math\Math
+     * BigInteger support object courtesy of Zend\Math
      *
      * @var \Zend\Math\BigInteger\Adapter\AdapterInterface
      */
@@ -438,7 +438,6 @@ class DiffieHellman
      */
     protected function generatePrivateKey()
     {
-        $rand = Math\Math::randBytes(strlen($this->getPrime()), true);
-        return $rand;
+        return Math\Rand::getBytes(strlen($this->getPrime()), true);
     }
 }

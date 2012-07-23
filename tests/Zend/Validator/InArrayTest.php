@@ -243,7 +243,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid(0));
     }
 
-    public function testNumericInputAndStringInHaystack(){
+    public function testIntegerInputAndStringInHaystack(){
         $validator = new InArray(
             array(
                  'haystack' => array('test', 1, 2),
@@ -258,6 +258,23 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
 
         $validator->setStrict(InArray::COMPARE_STRICT);
         $this->assertFalse($validator->isValid(0));
+    }
+
+        public function testFloatInputAndStringInHaystack(){
+        $validator = new InArray(
+            array(
+                 'haystack' => array('test', 1, 2),
+            )
+        );
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY);
+        $this->assertFalse($validator->isValid(0.0));
+
+        $validator->setStrict(InArray::COMPARE_NOT_STRICT);
+        $this->assertTrue($validator->isValid(0.0));
+
+        $validator->setStrict(InArray::COMPARE_STRICT);
+        $this->assertFalse($validator->isValid(0.0));
 
     }
 

@@ -12,11 +12,15 @@
         "php": ">=5.3.3"
     },
     "require-dev": {
-        "doctrine/common": ">=2.1"
+        "doctrine/common": ">=2.1",
+        "zendframework/zendpdf": "*",
+        "zendframework/zendservice-recaptcha": "*"
     },
     "suggest": {
         "doctrine/common": "Doctrine\\Common >=2.1 for annotation features",
-        "ext-intl": "ext/intl for i18n features"
+        "ext-intl": "ext/intl for i18n features",
+        "zendframework/zendpdf": "Zend\\Pdf for creating PDF representations of barcodes",
+        "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"
     },
     "autoload": {
         "psr-0": {

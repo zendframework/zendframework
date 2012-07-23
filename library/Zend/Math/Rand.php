@@ -63,18 +63,30 @@ abstract class Rand
     }
 
     /**
+     * Generate random boolean
+     *
+     * @param  boolean $strong true if you need a strong random generator (cryptography)
+     * @return bool
+     */
+    public static function getBoolean($strong = false)
+    {
+        $byte = static::getBytes(1, $strong);
+        return (boolean) ((ord($byte) + 1) % 2);
+    }
+
+    /**
      * Generate a random integer between $min and $max
      *
      * @param  integer $min
      * @param  integer $max
      * @param  boolean $strong true if you need a strong random generator (cryptography)
      * @return integer
-     * @throws Exception\InvalidArgumentException
+     * @throws Exception\DomainException
      */
     public static function getInteger($min, $max, $strong = false)
     {
         if ($min > $max) {
-            throw new Exception\InvalidArgumentException(
+            throw new Exception\DomainException(
                 'The min parameter must be lower than max parameter'
             );
         }
@@ -82,7 +94,7 @@ abstract class Rand
         if ($range == 0) {
             return $max;
         } elseif ($range > PHP_INT_MAX || is_float($range)) {
-            throw new Exception\InvalidArgumentException(
+            throw new Exception\DomainException(
                 'The supplied range is too great to generate'
             );
         }
@@ -140,14 +152,17 @@ abstract class Rand
             throw new Exception\DomainException('Length should be >= 1');
         }
 
+        // charlist is empty or not provided
+        if (empty($charlist)) {
+            $numBytes = ceil($length * 0.75);
+            $bytes    = static::getBytes($numBytes);
+            return substr(rtrim(base64_encode($bytes), '='), 0, $length);
+        }
+
         $listLen = strlen($charlist);
 
         if ($listLen == 1) {
             return str_repeat($charlist, $length);
-        } else if (empty($charlist)) {
-            $numBytes = ceil($length * 0.75);
-            $bytes    = static::getBytes($numBytes);
-            return substr(rtrim(base64_encode($bytes), '='), 0, $length);
         }
 
         $bytes  = static::getBytes($length, $strong);

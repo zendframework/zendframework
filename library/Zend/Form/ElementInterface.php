@@ -48,12 +48,12 @@ interface ElementInterface
      * @return array
      */
     public function getOptions();
-    
+
     /**
      * return the specified option
-     * 
+     *
      * @param string $option
-     * @return NULL|multitype
+     * @return null|mixed
      */
     public function getOption($option);
 

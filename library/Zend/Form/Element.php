@@ -116,9 +116,9 @@ class Element implements ElementInterface
     }
 
     /**
-     * get defined options
+     * Get defined options
      *
-     * @return array()
+     * @return array
      */
     public function getOptions()
     {
@@ -126,10 +126,10 @@ class Element implements ElementInterface
     }
 
     /**
-     * return the specified option
+     * Return the specified option
      * 
      * @param string $option
-     * @return NULL|multitype:
+     * @return NULL|mixed
      */
     public function getOption($option)
     {

@@ -18,7 +18,7 @@ use Zend\Form\Fieldset;
 use Zend\Form\FieldsetInterface;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Stdlib\PriorityQueue;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -54,6 +54,13 @@ class Collection extends Fieldset
     protected $allowAdd = true;
 
     /**
+     * Are existing elements allowed to be removed dynamically ?
+     *
+     * @var bool
+     */
+    protected $allowRemove = true;
+
+    /**
      * Is the template generated ?
      *
      * @var bool
@@ -80,6 +87,7 @@ class Collection extends Fieldset
      * - target_element: an array or element used in the collection
      * - count: number of times the element is added initially
      * - allow_add: if set to true, elements can be added to the form dynamically (using JavaScript)
+     * - allow_remove: if set to true, elements can be removed to the form
      * - should_create_template: if set to true, a template is generated (inside a <span>)
      * - template_placeholder: placeholder used in the data template
      *
@@ -100,6 +108,10 @@ class Collection extends Fieldset
 
         if (isset($options['allow_add'])) {
             $this->setAllowAdd($options['allow_add']);
+        }
+
+        if (isset($options['allow_remove'])) {
+            $this->setAllowRemove($options['allow_remove']);
         }
 
         if (isset($options['should_create_template'])) {
@@ -270,6 +282,24 @@ class Collection extends Fieldset
     }
 
     /**
+     * @param bool $allowRemove
+     * @return Collection
+     */
+    public function setAllowRemove($allowRemove)
+    {
+        $this->allowRemove = (bool)$allowRemove;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAllowRemove()
+    {
+        return $this->allowRemove;
+    }
+
+    /**
      * If set to true, a template prototype is automatically added to the form to ease the creation of dynamic elements through JavaScript
      *
      * @param bool $shouldCreateTemplate
@@ -358,14 +388,19 @@ class Collection extends Fieldset
      */
     public function extract()
     {
-        // In this specific situation, object holds the data, that is too say an array
+        if ($this->object instanceof Traversable) {
+            $this->object = ArrayUtils::iteratorToArray($this->object);
+        }
+
         if (!is_array($this->object)) {
             return array();
         }
 
         $values = array();
         foreach ($this->object as $key => $value) {
-            if ($value instanceof $this->targetElement->object) {
+            if ($this->hydrator) {
+                $values[$key] = $this->hydrator->extract($value);
+            } elseif ($value instanceof $this->targetElement->object) {
                 $this->targetElement->object = $value;
                 $values[$key] = $this->targetElement->extract();
             }

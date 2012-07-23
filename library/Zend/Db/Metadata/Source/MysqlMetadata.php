@@ -145,6 +145,11 @@ class MysqlMetadata extends AbstractSource
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
         $columns = array();
         foreach ($results->toArray() as $row) {
+            $erratas = array();
+            $matches = array();
+            if (preg_match('/^(enum|set)\(\'(.+)\'\)$/', $row['COLUMN_TYPE'], $matches)) {
+                $erratas = explode("','", $matches[2]);
+            }
             $columns[$row['COLUMN_NAME']] = array(
                 'ordinal_position'          => $row['ORDINAL_POSITION'],
                 'column_default'            => $row['COLUMN_DEFAULT'],
@@ -155,7 +160,7 @@ class MysqlMetadata extends AbstractSource
                 'numeric_precision'         => $row['NUMERIC_PRECISION'],
                 'numeric_scale'             => $row['NUMERIC_SCALE'],
                 'numeric_unsigned'          => (false !== strpos($row['COLUMN_TYPE'], 'unsigned')),
-                'erratas'                   => array(),
+                'erratas'                   => $erratas,
             );
         }
 

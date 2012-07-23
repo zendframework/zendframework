@@ -398,7 +398,7 @@ class Message
             $mime   = $this->body->getMime();
             $header = $this->getHeaderByName('content-type', __NAMESPACE__ . '\Header\ContentType');
             $header->setType('multipart/mixed');
-            $header->addParameter('boundary', $mime->boundary());var_dump($this->getHeaders());
+            $header->addParameter('boundary', $mime->boundary());
             return $this;
         }
 
